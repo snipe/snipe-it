@@ -356,7 +356,7 @@
         <h2 class="box-title">{{ trans('admin/settings/general.system') }}</h2>
       </div>
       <div class="box-body">
-        <div class="row" style="margin-right:4px;">
+        <div class="col-md-12" style="margin-right:4px;">
         <div class="row row-new-striped" style="line-height: 23px;">
 
           <!-- row -->

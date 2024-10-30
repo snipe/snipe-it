@@ -6,6 +6,7 @@ use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Channels\SlackWebhookChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
@@ -59,15 +60,7 @@ class CheckinLicenseSeatNotification extends Notification
         }
 
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
-            $notifyBy[] = 'slack';
-        }
-
-        /**
-         * Only send checkin notifications to users if the category
-         * has the corresponding checkbox checked.
-         */
-        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '') {
-            $notifyBy[] = 'mail';
+            $notifyBy[] = SlackWebhookChannel::class;
         }
 
         return $notifyBy;
@@ -161,24 +154,5 @@ class CheckinLicenseSeatNotification extends Notification
                     )
             );
 
-    }
-
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail()
-    {
-        return (new MailMessage)->markdown('notifications.markdown.checkin-license',
-            [
-                'item'          => $this->item,
-                'admin'         => $this->admin,
-                'note'          => $this->note,
-                'target'        => $this->target,
-            ])
-            ->subject(trans('mail.License_Checkin_Notification'));
     }
 }

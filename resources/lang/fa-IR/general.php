@@ -247,8 +247,7 @@ return [
     'purchase_date'         => 'تاریخ خرید',
     'qty'		            => 'QTY',
     'quantity'		        => 'مقدار',
-    'quantity_minimum'      => 'شما باید : موارد را زیر یا تقریباً کمتر از سطح حداقل مقدار بشمارید
-',
+    'quantity_minimum'      => 'You have one item below or almost below minimum quantity levels|You have :count items below or almost below minimum quantity levels',
     'quickscan_checkin'  	=> 'اسکن سریع اعلام حضور
 ',
     'quickscan_checkin_status'  	=> 'وضعیت  ورود
@@ -517,6 +516,7 @@ return [
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
     'placeholder_kit'       => 'Select a kit',
     'file_not_found'        => 'فایل پیدا نشد',
+    'log_record_not_found'  => 'No record for that log entry was found.',
     'preview_not_available' => '(no preview)',
     'setup'                 => 'Setup',
     'pre_flight'            => 'Pre-Flight',

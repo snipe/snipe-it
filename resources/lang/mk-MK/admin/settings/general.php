@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Предупредување дека е враме за раздолжување',
     'due_checkin_days_help' => 'Колку дена пред очекуваното раздолжување на средството треба да биде наведено на страницата „Време е за раздолжување“?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

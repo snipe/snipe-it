@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Imovina nije izrađena, pokušajte ponovo. :(',
         'success' 		=> 'Imovina je uspješno izrađena. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Taj je korisnik nevažeći. Molim te pokušaj ponovno.',
         'not_available' => 'Taj materijal nije dostupan za naplatu!',
         'no_assets_selected' => 'Morate odabrati barem jednu imovinu s popisa',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

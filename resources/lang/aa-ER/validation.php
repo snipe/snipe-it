@@ -173,6 +173,7 @@ return [
     'ulid' => 'crwdns12552:0crwdne12552:0',
     'uuid' => 'crwdns12554:0crwdne12554:0',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -194,7 +195,7 @@ return [
         'custom_field_not_found_on_model' => 'crwdns12652:0crwdne12652:0',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
         'purchase_date.date_format'     => 'crwdns11247:0crwdne11247:0',
         'last_audit_date.date_format'   =>  'crwdns11249:0crwdne11249:0',
@@ -206,6 +207,13 @@ return [
         'checkboxes'           => 'crwdns12556:0crwdne12556:0',
         'radio_buttons'        => 'crwdns12558:0crwdne12558:0',
         'invalid_value_in_field' => 'crwdns12560:0crwdne12560:0',
+
+        'ldap_username_field' => [
+            'not_in' =>         'crwdns12762:0crwdne12762:0'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => 'crwdns12764:0crwdne12764:0'],
+        'ldap_filter' => ['regex' => 'crwdns12766:0crwdne12766:0'],
+
         ],
     /*
     |--------------------------------------------------------------------------

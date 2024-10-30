@@ -14,6 +14,8 @@ return [
         'error'   		=> 'لم يتم إنشاء الأصل، يرجى إعادة المحاولة. :(',
         'success' 		=> 'تم إنشاء الأصل بنجاح. :)',
         'success_linked' => 'تم إنشاء الأصل مع العلامة :tag بنجاح. <strong><a href=":link" style="color: white;">انقر هنا لعرض</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'هذا المستخدم غير صالح. حاول مرة اخرى.',
         'not_available' => 'هذا الأصل غير متاح للخروج!',
         'no_assets_selected' => 'يجب عليك تحديد أصل واحد على الأقل من القائمة',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Asset was not created, please try again. :(',
         'success' 		=> 'Það tókst að skrá þessa eign :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Notandinn er ónothæfur. Vinsamlegast reyndu aftur.',
         'not_available' => 'Þessi eign er ekki laus til ráðstöfunar!',
         'no_assets_selected' => 'Þú verður að velja að lágmarki eina eign úr listanum',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

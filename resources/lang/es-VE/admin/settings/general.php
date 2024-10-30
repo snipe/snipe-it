@@ -66,7 +66,7 @@ return [
     'eula_markdown'				=> 'Estos acuerdos de uso permiten <a href="https://help.github.com/articles/github-flavored-markdown/">markdown estilo Github</a>.',
     'favicon'                   => 'Favicon',
     'favicon_format'            => 'Los tipos de archivo aceptados son ico, png y gif. Es posible que otros formatos de imagen no funcionen en todos los navegadores.',
-    'favicon_size'          => 'Favicons deben ser imágenes cuadradas, 16x16 píxeles.',
+    'favicon_size'          => 'Los Favicons deben ser imágenes cuadradas, de 16x16 píxeles.',
     'footer_text'               => 'Texto adicional en el pie de página ',
     'footer_text_help'          => 'Este texto aparecerá en el lado derecho del pie de página. Los enlaces son permitidos usando <a href="https://help.github.com/articles/github-flavored-markdown/">markdown estilo Github</a>. Los saltos de línea, encabezados, imágenes, etc. pueden dar lugar a resultados impredecibles.',
     'general_settings'			=> 'Configuración general',
@@ -326,7 +326,7 @@ return [
     'localization_keywords' => 'localización, moneda, local, ubicación, zona horaria, internacional, internacionalización, idioma, traducción',
     'localization_help' => 'Idioma, visualización de la fecha',
     'notifications' => 'Notificaciones',
-    'notifications_help' => 'Configuración de alertas por email y auditoría',
+    'notifications_help' => 'Configuración de alertas por correo electrónico y de auditoría',
     'asset_tags_help' => 'Incrementos y prefijos',
     'labels' => 'Etiquetas',
     'labels_title' => 'Actualizar configuración de etiquetas',
@@ -361,7 +361,7 @@ return [
     'label2_2d_type_help'     => 'Formato para códigos de barras 2D',
     'label2_2d_target'        => 'Apuntamiento del código de barras 2D',
     'label2_2d_target_help'   => 'La URL a la que apunta el código de barras 2D cuando se escanea',
-    'label2_fields'           => 'Definiciones de campo',
+    'label2_fields'           => 'Definiciones del campo',
     'label2_fields_help'      => 'Los campos se pueden añadir, eliminar y reordenar en la columna izquierda. Para cada campo, se pueden agregar, eliminar y reordenar múltiples opciones para etiquetas y para orígenes de datos en la columna derecha.',
     'help_asterisk_bold'    => 'Texto introducido como <code>**texto**</code> se mostrará como negrita',
     'help_blank_to_use'     => 'Deje en blanco para usar el valor de <code>:setting_name</code>',
@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Advertencia para próximos ingresos',
     'due_checkin_days_help' => '¿Cuántos días antes de la fecha prevista de ingreso de un activo debe figurar en la página «Próximos a ingresar»?',
+    'no_groups' => 'Todavía no se han creado grupos. Para agregar uno, visite<code>Configuración de administración > Grupos de permisos</code>.',
 
 ];

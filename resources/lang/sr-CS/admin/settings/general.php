@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Upozorenje da je vreme za razduženje',
     'due_checkin_days_help' => 'Koliko dana ranije pre očekivanog razduženja imovine bi trebalo biti navedena u stranici "Vreme je za razduživanje"?',
+    'no_groups' => 'Još uvak nisu kreirane nikakve grupe. Poseti <code>Administrativna podešavanja > Grupe dozvola</code> da bi dodao neku.',
 
 ];

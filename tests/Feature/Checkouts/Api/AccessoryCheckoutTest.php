@@ -2,10 +2,12 @@
 
 namespace Tests\Feature\Checkouts\Api;
 
+use App\Mail\CheckoutAccessoryMail;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\User;
 use App\Notifications\CheckoutAccessoryNotification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
@@ -146,7 +148,7 @@ class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirem
 
     public function testUserSentNotificationUponCheckout()
     {
-        Notification::fake();
+        Mail::fake();
 
         $accessory = Accessory::factory()->requiringAcceptance()->create();
         $user = User::factory()->create();
@@ -157,7 +159,9 @@ class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirem
                 'checkout_to_type' => 'user',
             ]);
 
-        Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
+        Mail::assertSent(CheckoutAccessoryMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
     }
 
     public function testActionLogCreatedUponCheckout()
