@@ -230,4 +230,9 @@ class ReportTemplate extends Model
         // and return the default value if not.
         return $this->options[$fieldName] ?? '';
     }
+
+    public function getDisplayNameAttribute()
+    {
+        return $this->name;
+    }
 }

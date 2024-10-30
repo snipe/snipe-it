@@ -38,11 +38,6 @@ class ReportTemplateActivityLoggingTest extends TestCase
         ]);
     }
 
-    public function testLogEntryForCreatingReportTemplateCanBeDisplayed()
-    {
-        $this->markTestIncomplete('Updates to ActionlogsTransformer needed');
-    }
-
     public function testUpdatingReportTemplateIsLogged()
     {
         $reportTemplate = ReportTemplate::factory()->create([
@@ -137,11 +132,6 @@ class ReportTemplateActivityLoggingTest extends TestCase
         ]);
     }
 
-    public function testLogEntryForUpdatingReportTemplateCanBeDisplayedCorrectly()
-    {
-        $this->markTestIncomplete();
-    }
-
     public function testDeletingReportTemplateIsLogged()
     {
         $user = User::factory()->create();
@@ -168,15 +158,5 @@ class ReportTemplateActivityLoggingTest extends TestCase
             'item_type' => ReportTemplate::class,
             'item_id' => $reportTemplateB->id,
         ]);
-    }
-
-    public function testLogEntryForDeletingReportTemplateCanBeDisplayedCorrectly()
-    {
-        $this->markTestIncomplete();
-    }
-
-    public function testLogsScopedProperly()
-    {
-        $this->markTestIncomplete();
     }
 }
