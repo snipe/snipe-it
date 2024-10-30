@@ -72,6 +72,16 @@ class ReportTemplate extends Model
             $logAction->log_meta = json_encode($changed);
             $logAction->logaction('update');
         });
+
+        static::deleted(function (ReportTemplate $reportTemplate) {
+            $logAction = new Actionlog([
+                'item_type' => ReportTemplate::class,
+                'item_id' => $reportTemplate->id,
+                'created_by' => auth()->id(),
+            ]);
+
+            $logAction->logaction('delete');
+        });
     }
 
     /**

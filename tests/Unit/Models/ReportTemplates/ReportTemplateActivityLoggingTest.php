@@ -144,7 +144,30 @@ class ReportTemplateActivityLoggingTest extends TestCase
 
     public function testDeletingReportTemplateIsLogged()
     {
-        $this->markTestIncomplete();
+        $user = User::factory()->create();
+        [$reportTemplateA, $reportTemplateB] = ReportTemplate::factory()->count(2)->create();
+
+        $reportTemplateA->delete();
+        $this->actingAs($user);
+        $reportTemplateB->delete();
+
+        $this->assertDatabaseHas('action_logs', [
+            'created_by' => null,
+            'action_type' => 'delete',
+            'target_id' => null,
+            'target_type' => null,
+            'item_type' => ReportTemplate::class,
+            'item_id' => $reportTemplateA->id,
+        ]);
+
+        $this->assertDatabaseHas('action_logs', [
+            'created_by' => $user->id,
+            'action_type' => 'delete',
+            'target_id' => null,
+            'target_type' => null,
+            'item_type' => ReportTemplate::class,
+            'item_id' => $reportTemplateB->id,
+        ]);
     }
 
     public function testLogEntryForDeletingReportTemplateCanBeDisplayedCorrectly()
