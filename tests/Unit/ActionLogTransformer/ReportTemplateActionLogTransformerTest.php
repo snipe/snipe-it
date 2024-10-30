@@ -5,8 +5,10 @@ namespace Tests\Unit\ActionLogTransformer;
 use App\Http\Transformers\ActionlogsTransformer;
 use App\Models\Actionlog;
 use App\Models\ReportTemplate;
+use PHPUnit\Framework\Attributes\Group;
 use Tests\TestCase;
 
+#[Group('activity-logging')]
 class ReportTemplateActionLogTransformerTest extends TestCase
 {
     public function testLogEntryForCreatingReportTemplateCanBeTransformed()
