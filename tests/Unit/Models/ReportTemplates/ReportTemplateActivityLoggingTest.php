@@ -38,6 +38,11 @@ class ReportTemplateActivityLoggingTest extends TestCase
         ]);
     }
 
+    public function testLogEntryForCreatingReportTemplateCanBeDisplayed()
+    {
+        $this->markTestIncomplete('Updates to ActionlogsTransformer needed');
+    }
+
     public function testUpdatingReportTemplateIsLogged()
     {
         $reportTemplate = ReportTemplate::factory()->create([
@@ -132,7 +137,17 @@ class ReportTemplateActivityLoggingTest extends TestCase
         ]);
     }
 
+    public function testLogEntryForUpdatingReportTemplateCanBeDisplayedCorrectly()
+    {
+        $this->markTestIncomplete();
+    }
+
     public function testDeletingReportTemplateIsLogged()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function testLogEntryForDeletingReportTemplateCanBeDisplayedCorrectly()
     {
         $this->markTestIncomplete();
     }
