@@ -27,16 +27,9 @@ class ReportTemplatesController extends Controller
         return redirect()->route('report-templates.show', $report->id);
     }
 
-    public function show($reportId)
+    public function show(ReportTemplate $reportTemplate)
     {
         $this->authorize('reports.view');
-
-        $reportTemplate = ReportTemplate::find($reportId);
-
-        if (!$reportTemplate) {
-            return redirect()->route('reports/custom')
-                ->with('error', trans('admin/reports/message.no_report_permission'));
-        }
 
         $customfields = CustomField::get();
         $report_templates = ReportTemplate::orderBy('name')->get();
@@ -48,16 +41,9 @@ class ReportTemplatesController extends Controller
         ]);
     }
 
-    public function edit($reportId)
+    public function edit(ReportTemplate $reportTemplate)
     {
         $this->authorize('reports.view');
-
-        $reportTemplate = ReportTemplate::find($reportId);
-
-        if (!$reportTemplate) {
-            return redirect()->route('reports/custom')
-                ->with('error', trans('admin/reports/message.no_report_permission'));
-        }
 
         return view('reports/custom', [
             'customfields' => CustomField::get(),
@@ -65,16 +51,9 @@ class ReportTemplatesController extends Controller
         ]);
     }
 
-    public function update(Request $request, $reportId): RedirectResponse
+    public function update(Request $request, ReportTemplate $reportTemplate): RedirectResponse
     {
         $this->authorize('reports.view');
-
-        $reportTemplate = ReportTemplate::find($reportId);
-
-        if (!$reportTemplate) {
-            return redirect()->route('reports/custom')
-                ->with('error', trans('admin/reports/message.no_report_permission'));
-        }
 
         $reportTemplate->options = $request->except(['_token', 'name']);
         $reportTemplate->save();
@@ -84,16 +63,9 @@ class ReportTemplatesController extends Controller
         return redirect()->route('report-templates.show', $reportTemplate->id);
     }
 
-    public function destroy($reportId): RedirectResponse
+    public function destroy(ReportTemplate $reportTemplate): RedirectResponse
     {
         $this->authorize('reports.view');
-
-        $reportTemplate = ReportTemplate::find($reportId);
-
-        if (!$reportTemplate) {
-            return redirect()->route('reports/custom')
-                ->with('error', trans('admin/reports/message.delete.no_delete_permission'));
-        }
 
         $reportTemplate->delete();
 

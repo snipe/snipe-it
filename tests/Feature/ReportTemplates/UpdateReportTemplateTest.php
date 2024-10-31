@@ -15,15 +15,14 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
     {
         $this->actingAs(User::factory()->create())
             ->post($this->getRoute(ReportTemplate::factory()->create()))
-            ->assertForbidden();
+            ->assertNotFound();
     }
 
     public function testCannotUpdateAnotherUsersReportTemplate()
     {
         $this->actingAs(User::factory()->canViewReports()->create())
             ->post($this->getRoute(ReportTemplate::factory()->create()))
-            ->assertSessionHas('error')
-            ->assertRedirect(route('reports/custom'));
+            ->assertNotFound();
     }
 
     public function testCanUpdateAReportTemplate()

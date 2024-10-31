@@ -383,10 +383,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::prefix('reports/templates')->name('report-templates')->group(function () {
         Route::post('/', [ReportTemplatesController::class, 'store'])->name('.store');
-        Route::get('/{reportId}', [ReportTemplatesController::class, 'show'])->name('.show');
-        Route::get('/{reportId}/edit', [ReportTemplatesController::class, 'edit'])->name('.edit');
-        Route::post('/{reportId}', [ReportTemplatesController::class, 'update'])->name('.update');
-        Route::delete('/{reportId}', [ReportTemplatesController::class, 'destroy'])->name('.destroy');
+        Route::get('/{reportTemplate}', [ReportTemplatesController::class, 'show'])->name('.show');
+        Route::get('/{reportTemplate}/edit', [ReportTemplatesController::class, 'edit'])->name('.edit');
+        Route::post('/{reportTemplate}', [ReportTemplatesController::class, 'update'])->name('.update');
+        Route::delete('/{reportTemplate}', [ReportTemplatesController::class, 'destroy'])->name('.destroy');
     });
 
     Route::get(

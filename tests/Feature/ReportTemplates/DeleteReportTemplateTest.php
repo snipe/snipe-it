@@ -17,7 +17,7 @@ class DeleteReportTemplateTest extends TestCase implements TestsPermissionsRequi
 
         $this->actingAs(User::factory()->create())
             ->post($this->getRoute($reportTemplate))
-            ->assertForbidden();
+            ->assertNotFound();
 
         $this->assertModelExists($reportTemplate);
     }
@@ -28,8 +28,7 @@ class DeleteReportTemplateTest extends TestCase implements TestsPermissionsRequi
 
         $this->actingAs(User::factory()->canViewReports()->create())
             ->delete($this->getRoute($reportTemplate))
-            ->assertSessionHas('error')
-            ->assertRedirect(route('reports/custom'));
+            ->assertNotFound();
 
         $this->assertModelExists($reportTemplate);
     }
