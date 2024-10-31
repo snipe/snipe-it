@@ -28,16 +28,41 @@ class ReportTemplateActionLogTransformerTest extends TestCase
 
     public function testLogEntryForUpdatingReportTemplateCanBeDisplayedTransformed()
     {
-        $this->markTestIncomplete();
+        $reportTemplate = ReportTemplate::factory()->create();
+
+        $reportTemplate->update([
+            'options' => ['new' => 'value']
+        ]);
+
+        $actionLogs = Actionlog::query()
+            ->whereMorphedTo('item', ReportTemplate::class)
+            ->where('action_type', 'update')
+            ->get();
+
+        $this->assertCount(1, $actionLogs);
+
+        $results = (new ActionlogsTransformer())->transformActionlogs($actionLogs, 10);
+
+        $this->assertArrayHasKey('rows', $results);
+        $this->assertCount(1, $results['rows']);
     }
 
     public function testLogEntryForDeletingReportTemplateCanBeDisplayedTransformed()
     {
-        $this->markTestIncomplete();
-    }
+        $reportTemplate = ReportTemplate::factory()->create();
 
-    public function testLogsScopedProperly()
-    {
-        $this->markTestIncomplete();
+        $reportTemplate->delete();
+
+        $actionLogs = Actionlog::query()
+            ->whereMorphedTo('item', ReportTemplate::class)
+            ->where('action_type', 'delete')
+            ->get();
+
+        $this->assertCount(1, $actionLogs);
+
+        $results = (new ActionlogsTransformer())->transformActionlogs($actionLogs, 10);
+
+        $this->assertArrayHasKey('rows', $results);
+        $this->assertCount(1, $results['rows']);
     }
 }
