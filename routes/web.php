@@ -553,33 +553,3 @@ Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
 )->name('home');
-Route::get('/test-email', function() {
-    $item = \App\Models\LicenseSeat::find(1); // Load some test data
-    $admin = User::find(2);
-    $target = User::find(1);
-    $acceptance = null; // Simulate acceptance data
-    $note = 'Test note';
-    $settings = Setting::getSettings();
-    $adminCcEmailsArray = [];
-
-    if($settings->admin_cc_email !== '') {
-        $adminCcEmail = $settings->admin_cc_email;
-        $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
-    }
-    $ccEmails = array_filter($adminCcEmailsArray);
-    if (!empty($target->email)) {
-        Mail::to($target)->cc($ccEmails)->send( new \App\Mail\CheckoutLicenseMail(
-            $item,
-            $admin,
-            $target,
-            $acceptance,
-            $note));
-    } else {
-        Mail::cc($ccEmails)->send(new \App\Mail\CheckoutLicenseMail(
-            $item,
-            $admin,
-            $target,
-            $acceptance,
-            $note));
-    }
-});
