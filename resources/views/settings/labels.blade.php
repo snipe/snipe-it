@@ -139,20 +139,20 @@
                                 </div>
                             </div>
                         @endif
-                @if($setting->label2_enable == 0)
-                    @if ($is_gd_installed)
-                    <!-- barcode -->
-                    <div class="form-group">
+                        @if($setting->label2_enable == 0)
+                            @if ($is_gd_installed)
+                            <!-- barcode -->
+                            <div class="form-group">
 
-                        <div class="col-md-9 col-md-offset-3">
-                            <label class="form-control">
-                                {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array( 'aria-label'=>'alt_barcode_enabled')) }}
-                                {{ trans('admin/settings/general.display_alt_barcode') }}
-                            </label>
-                        </div>
-                    </div>
-                    @endif
-                @endif
+                                <div class="col-md-9 col-md-offset-3">
+                                    <label class="form-control">
+                                        {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array( 'aria-label'=>'alt_barcode_enabled')) }}
+                                        {{ trans('admin/settings/general.display_alt_barcode') }}
+                                    </label>
+                                </div>
+                            </div>
+                            @endif
+                        @endif
                                 <!-- 1D Barcode Type -->
                                 <div class="form-group{{ $errors->has('label2_1d_type') ? ' has-error' : '' }}">
                                     <div class="col-md-3 text-right">
