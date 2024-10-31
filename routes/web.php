@@ -24,10 +24,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Livewire\Importer;
-use App\Models\Asset;
-use App\Models\Setting;
-use App\Models\User;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
