@@ -46,7 +46,7 @@ class StoreAssetAction
         $assigned_location = null,
         $custom_fields = null,
         $request = null, //temp for handleImages - i'd like to see that moved to a helper or something - or maybe just invoked at the extended request level so that it doesn't need to be done in the action?
-        $next_audit_date = null,
+        $last_audit_date = null,
     )
     {
         $settings = Setting::getSettings();
@@ -72,6 +72,8 @@ class StoreAssetAction
         $asset->requestable = $requestable;
         $asset->rtd_location_id = $rtd_location_id;
         $asset->byod = $byod;
+        $asset->last_audit_date = $last_audit_date;
+        $asset->location_id = $location_id;
 
         // set up next audit date
         if (!empty($settings->audit_interval)) {
@@ -172,10 +174,6 @@ class StoreAssetAction
             if ($asset->image) {
                 $asset->image = $asset->getImageUrl();
             }
-
-        }
-
-        if ($asset->save()) {
             return $asset;
         } else {
             return $asset->getErrors();

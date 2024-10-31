@@ -114,31 +114,32 @@ class AssetsController extends Controller
             //DB::transaction(function () use ($request, $asset_tags, $serials, $custom_fields) {
             foreach ($asset_tags as $key => $asset_tag) {
                 $asset = StoreAssetAction::run(
-                    $request->validated('model_id'),
-                    $request->validated('status_id'),
-                    $request->validated('name'),
-                    $serials[$key],
-                    $request->validated('company_id'),
-                    $asset_tag,
-                    $request->validated('order_number'),
-                    $request->validated('notes'),
-                    $request->validated('user_id'),
-                    $request->validated('warranty_months'),
-                    $request->validated('purchase_cost'),
-                    $request->validated('asset_eol_date'),
-                    $request->validated('purchase_date'),
-                    $request->validated('assigned_to'),
-                    $request->validated('supplier_id'),
-                    $request->validated('requestable'),
-                    $request->validated('rtd_location_id'),
-                    $request->validated('location_id'),
-                    $request->validated('files'),
-                    $request->validated('byod'),
-                    $request->validated('assigned_user'),
-                    $request->validated('assigned_asset'),
-                    $request->validated('assigned_location'),
-                    $custom_fields,
-                    $request, //this is just for the handleImages method...
+                    model_id: $request->validated('model_id'),
+                    status_id: $request->validated('status_id'),
+                    name: $request->validated('name'),
+                    serial: $serials[$key],
+                    company_id: $request->validated('company_id'),
+                    asset_tag: $asset_tag,
+                    order_number: $request->validated('order_number'),
+                    notes: $request->validated('notes'),
+                    user_id: $request->validated('user_id'),
+                    warranty_months: $request->validated('warranty_months'),
+                    purchase_cost: $request->validated('purchase_cost'),
+                    asset_eol_date: $request->validated('asset_eol_date'),
+                    purchase_date: $request->validated('purchase_date'),
+                    assigned_to: $request->validated('assigned_to'),
+                    supplier_id: $request->validated('supplier_id'),
+                    requestable: $request->validated('requestable'),
+                    rtd_location_id: $request->validated('rtd_location_id'),
+                    location_id: $request->validated('location_id'),
+                    files: $request->validated('files'),
+                    byod: $request->validated('byod'),
+                    assigned_user: $request->validated('assigned_user'),
+                    assigned_asset: $request->validated('assigned_asset'),
+                    assigned_location: $request->validated('assigned_location'),
+                    custom_fields: $custom_fields,
+                    request: $request, //this is just for the handleImages method...
+                    last_audit_date: $request->validated('last_audit_date'),
                 );
             }
             //});
@@ -150,8 +151,6 @@ class AssetsController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', trans('admin/hardware/message.create.error'));
         }
-        // (obviously then this would move up to the request)
-        $this->validate($request, ['asset_tags' => ['required', 'array']]);
     }
 
 
