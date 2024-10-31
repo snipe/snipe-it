@@ -23,7 +23,7 @@ class Statuslabel extends SnipeModel
     protected $rules = [
         'name'  => 'required|string|unique_undeleted',
         'notes'   => 'string|nullable',
-        'status_type' => 'required|in:deployable,pending,archived',
+        'status_type' => 'required|in:deployable,pending,archived,undeployable1',
     ];
 
     protected $fillable = [
