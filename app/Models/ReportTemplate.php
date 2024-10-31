@@ -52,7 +52,7 @@ class ReportTemplate extends Model
                 'created_by' => auth()->id(),
             ]);
 
-            $logAction->logaction('created');
+            $logAction->logaction('create');
         });
 
         static::updated(function (ReportTemplate $reportTemplate) {

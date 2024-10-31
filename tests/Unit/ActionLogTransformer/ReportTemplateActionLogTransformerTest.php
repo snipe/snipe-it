@@ -15,7 +15,10 @@ class ReportTemplateActionLogTransformerTest extends TestCase
     {
         ReportTemplate::factory()->create();
 
-        $actionLogs = Actionlog::whereMorphedTo('item', ReportTemplate::class)->get();
+        $actionLogs = Actionlog::query()
+            ->whereMorphedTo('item', ReportTemplate::class)
+            ->where('action_type', 'create')
+            ->get();
 
         // should be created when ActionLog is created
         $this->assertCount(1, $actionLogs);

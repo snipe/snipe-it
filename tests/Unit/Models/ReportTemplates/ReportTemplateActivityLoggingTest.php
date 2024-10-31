@@ -20,7 +20,7 @@ class ReportTemplateActivityLoggingTest extends TestCase
 
         $this->assertDatabaseHas('action_logs', [
             'created_by' => $user->id,
-            'action_type' => 'created',
+            'action_type' => 'create',
             'target_id' => null,
             'target_type' => null,
             'item_type' => ReportTemplate::class,
