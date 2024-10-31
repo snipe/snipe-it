@@ -25,7 +25,9 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Livewire\Importer;
 use App\Models\Asset;
+use App\Models\Setting;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -552,21 +554,32 @@ Route::middleware(['auth'])->get(
     [DashboardController::class, 'index']
 )->name('home');
 Route::get('/test-email', function() {
-    $item = Asset::find(1); // Load some test data
-    $admin = User::find(1);
-    $target = User::find(2);
+    $item = \App\Models\LicenseSeat::find(1); // Load some test data
+    $admin = User::find(2);
+    $target = User::find(1);
     $acceptance = null; // Simulate acceptance data
     $note = 'Test note';
+    $settings = Setting::getSettings();
+    $adminCcEmailsArray = [];
 
-    $fields = [];
-    if (($item->model) && ($item->model->fieldset)) {
-        $fields = $item->model->fieldset->fields;
+    if($settings->admin_cc_email !== '') {
+        $adminCcEmail = $settings->admin_cc_email;
+        $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
     }
-
-    return new \App\Mail\CheckoutAssetMail(
-        $item,
-        $admin,
-        $target,
-        $acceptance,
-        $note);
+    $ccEmails = array_filter($adminCcEmailsArray);
+    if (!empty($target->email)) {
+        Mail::to($target)->cc($ccEmails)->send( new \App\Mail\CheckoutLicenseMail(
+            $item,
+            $admin,
+            $target,
+            $acceptance,
+            $note));
+    } else {
+        Mail::cc($ccEmails)->send(new \App\Mail\CheckoutLicenseMail(
+            $item,
+            $admin,
+            $target,
+            $acceptance,
+            $note));
+    }
 });
