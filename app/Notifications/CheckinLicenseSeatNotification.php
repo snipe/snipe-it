@@ -10,6 +10,7 @@ use Illuminate\Notifications\Channels\SlackWebhookChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 use NotificationChannels\GoogleChat\Card;
 use NotificationChannels\GoogleChat\GoogleChatChannel;
 use NotificationChannels\GoogleChat\GoogleChatMessage;
@@ -102,18 +103,30 @@ class CheckinLicenseSeatNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+        if(!Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {
+            return MicrosoftTeamsMessage::create()
+                ->to($this->settings->webhook_endpoint)
+                ->type('success')
+                ->addStartGroupToSection('activityTitle')
+                ->title(trans('mail.License_Checkin_Notification'))
+                ->addStartGroupToSection('activityText')
+                ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
+                ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'CLI tool')
+                ->fact(trans('mail.checkedin_from'), $target->present()->fullName())
+                ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
+                ->fact(trans('mail.notes'), $note ?: '');
+        }
 
-        return MicrosoftTeamsMessage::create()
-            ->to($this->settings->webhook_endpoint)
-            ->type('success')
-            ->addStartGroupToSection('activityTitle')
-            ->title(trans('mail.License_Checkin_Notification'))
-            ->addStartGroupToSection('activityText')
-            ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
-            ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'CLI tool')
-            ->fact(trans('mail.checkedin_from'), $target->present()->fullName())
-            ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
-            ->fact(trans('mail.notes'), $note ?: '');
+        $message = trans('mail.License_Checkin_Notification');
+        $details = [
+            trans('mail.checkedin_from')=> $target->present()->fullName(),
+            trans('mail.license_for') => htmlspecialchars_decode($item->present()->name),
+            trans('mail.License_Checkin_Notification')." by " => $admin->present()->fullName() ?: 'CLI tool',
+            trans('admin/consumables/general.remaining') => $item->availCount()->count(),
+            trans('mail.notes') => $note ?: '',
+        ];
+
+        return  array($message, $details);
     }
     public function toGoogleChat()
     {
