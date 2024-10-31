@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5341bc5be02b3c33e28e46e06dd99f29",
+    "content-hash": "0750e3a427347b2a56a05a8b9b533d48",
     "packages": [
         {
             "name": "alek13/slack",
@@ -5571,6 +5571,71 @@
                 }
             ],
             "time": "2024-05-30T15:14:26+00:00"
+        },
+        {
+            "name": "osa-eg/laravel-teams-notification",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/osa-eg/laravel-teams-notification.git",
+                "reference": "76173689930aca92b5174a3b102e705279192c0f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/osa-eg/laravel-teams-notification/zipball/76173689930aca92b5174a3b102e705279192c0f",
+                "reference": "76173689930aca92b5174a3b102e705279192c0f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": ">=6.5",
+                "illuminate/support": "^5.5 || ^6.0 || ^7.0 || ^8.0 || ^9.0 || ^10.0 || ^11.0",
+                "monolog/monolog": ">=1.0",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Osama\\LaravelTeamsNotification\\LaravelTeamsNotificationServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Osama\\LaravelTeamsNotification\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Osama Saad",
+                    "email": "osaad96eg@gmail.com"
+                }
+            ],
+            "description": "A Laravel package to send notifications to Microsoft Teams",
+            "keywords": [
+                "Teams",
+                "adaptive-card",
+                "laravel",
+                "logging",
+                "microsoft-teams-workflow",
+                "notification",
+                "teams-connector",
+                "teams-webhock",
+                "teams-workflow",
+                "teams_logging"
+            ],
+            "support": {
+                "issues": "https://github.com/osa-eg/laravel-teams-notification/issues",
+                "source": "https://github.com/osa-eg/laravel-teams-notification/tree/v2.1.2"
+            },
+            "time": "2024-09-23T05:24:48+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
