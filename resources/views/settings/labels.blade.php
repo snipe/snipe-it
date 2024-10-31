@@ -227,51 +227,51 @@
                                     </div>
                                 </div>
 
-                @if($setting->label2_enable == 0)
-                            <!-- QR Text -->
-                            <div class="form-group{{ $errors->has('qr_text') ? ' has-error' : '' }}">
-                                <div class="col-md-3 text-right">
-                                    {{ Form::label('qr_text', trans('admin/settings/general.qr_text'), ['class'=>'control-label']) }}
+                    @if($setting->label2_enable == 0)
+                                <!-- QR Text -->
+                                <div class="form-group{{ $errors->has('qr_text') ? ' has-error' : '' }}">
+                                    <div class="col-md-3 text-right">
+                                        {{ Form::label('qr_text', trans('admin/settings/general.qr_text'), ['class'=>'control-label']) }}
+                                    </div>
+                                    <div class="col-md-7">
+                                        @if ($setting->qr_code == 1)
+                                            {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array(
+                                                'class' => 'form-control',
+                                                'placeholder' => 'Property of Your Company',
+                                                'rel' => 'txtTooltip',
+                                                'title' =>'Extra text that you would like to display on your labels.',
+                                                'data-toggle' =>'tooltip',
+                                                'data-placement'=>'top'
+                                            )) }}
+                                        @else
+                                            {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array(
+                                                'class' => 'form-control',
+                                                'disabled' => 'disabled',
+                                                'placeholder' => 'Property of Your Company'
+                                            )) }}
+                                            <p class="help-block">{{ trans('admin/settings/general.qr_help') }}</p>
+                                        @endif
+                                        {!! $errors->first('qr_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                    </div>
                                 </div>
-                                <div class="col-md-7">
-                                    @if ($setting->qr_code == 1)
-                                        {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array(
-                                            'class' => 'form-control',
-                                            'placeholder' => 'Property of Your Company',
-                                            'rel' => 'txtTooltip',
-                                            'title' =>'Extra text that you would like to display on your labels.',
-                                            'data-toggle' =>'tooltip',
-                                            'data-placement'=>'top'
-                                        )) }}
-                                    @else
-                                        {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array(
-                                            'class' => 'form-control',
-                                            'disabled' => 'disabled',
-                                            'placeholder' => 'Property of Your Company'
-                                        )) }}
-                                        <p class="help-block">{{ trans('admin/settings/general.qr_help') }}</p>
-                                    @endif
-                                    {!! $errors->first('qr_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                                </div>
-                            </div>
 
-                            <!-- Nuke barcode cache -->
-                            <div class="form-group">
-                                <div class="col-md-3 text-right">
-                                    {{ Form::label('purge_barcodes', 'Purge Barcodes', ['class'=>'control-label']) }}
+                                <!-- Nuke barcode cache -->
+                                <div class="form-group">
+                                    <div class="col-md-3 text-right">
+                                        {{ Form::label('purge_barcodes', 'Purge Barcodes', ['class'=>'control-label']) }}
+                                    </div>
+                                    <div class="col-md-7">
+                                        <a class="btn btn-default btn-sm pull-left" id="purgebarcodes" style="margin-right: 10px;">
+                                            {{ trans('admin/settings/general.barcode_delete_cache') }}
+                                        </a>
+                                        <span id="purgebarcodesicon"></span>
+                                        <span id="purgebarcodesresult"></span>
+                                        <span id="purgebarcodesstatus"></span>
+                                        {!! $errors->first('purgebarcodes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                        <p class="help-block">{{ trans('admin/settings/general.barcodes_help') }}</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-7">
-                                    <a class="btn btn-default btn-sm pull-left" id="purgebarcodes" style="margin-right: 10px;">
-                                        {{ trans('admin/settings/general.barcode_delete_cache') }}
-                                    </a>
-                                    <span id="purgebarcodesicon"></span>
-                                    <span id="purgebarcodesresult"></span>
-                                    <span id="purgebarcodesstatus"></span>
-                                    {!! $errors->first('purgebarcodes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                                    <p class="help-block">{{ trans('admin/settings/general.barcodes_help') }}</p>
-                                </div>
-                            </div>
-                   @endif
+                       @endif
                         @if ($setting->label2_enable)
                             <!-- 2D Barcode Target -->
                             <div class="form-group{{ $errors->has('label2_2d_target') ? ' has-error' : '' }}">
