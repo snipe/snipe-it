@@ -73,7 +73,7 @@ class CheckoutableListener
              * 2. The item has a EULA
              * 3. The item should send an email at check-in/check-out
              */
-            if ($notifiable instanceof User) {
+
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
                     if (!empty($notifiable->email)) {
@@ -83,7 +83,7 @@ class CheckoutableListener
                     }
                 Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
             }
-        }
+
 //                 Send Webhook notification
                 if ($this->shouldSendWebhookNotification()) {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
@@ -145,13 +145,16 @@ class CheckoutableListener
              * 3. The item should send an email at check-in/check-out
              */
 
-            if ($notifiable instanceof User && $notifiable->email != '') {
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
-                    Mail::to($notifiable)->cc($ccEmails)->send($mailable);
+                    if (!empty($notifiable->email)) {
+                        Mail::to($notifiable)->cc($ccEmails)->send($mailable);
+                    } else {
+                        Mail::cc($ccEmails)->send($mailable);
+                    }
                     Log::info('Sending email, Locale: ' . $event->checkedOutTo->locale);
                 }
-            }
+
             // Send Webhook notification
             if ($this->shouldSendWebhookNotification()) {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
