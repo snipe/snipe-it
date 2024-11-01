@@ -53,8 +53,7 @@ class ReportsController extends Controller
     {
         $this->authorize('reports.view');
         $data = Asset::select('assets.*')
-            ->with('assetstatus', 'company', 'assignedTo', 
-                'model.category', 'model.manufacturer', 'model.fieldset')
+            ->with('assetstatus', 'company', 'assignedTo', 'model.category')
             ->selectRaw('COUNT(*) as total')
             ->groupBy('model_id')
             ->get();
@@ -63,9 +62,8 @@ class ReportsController extends Controller
     }
 
     public function getCountByStatusType($type, $column, $value){
-        $assets = Asset::select('assets.*')
-            ->with('location', 'assetstatus', 'company', 'defaultLoc','assignedTo', 'adminuser','model.depreciation',
-                'model.category', 'model.manufacturer', 'model.fieldset','supplier')
+        $assets = Asset::select('assets.*')            
+            ->with('assetstatus', 'company', 'assignedTo','model.category')
             ->where($column, $value);
         $count=0;
         switch ($type) { 
@@ -99,17 +97,7 @@ class ReportsController extends Controller
                         ->where('status_alias.pending', '=', 0)
                         ->where('status_alias.archived', '=', 1);
                 });
-                break;
-            case 'Requestable':
-                $count = $assets->where('assets.requestable', '=', 1)
-                    ->join('status_labels AS status_alias', function ($join) {
-                        $join->on('status_alias.id', '=', 'assets.status_id')
-                            ->where('status_alias.deployable', '=', 1)
-                            ->where('status_alias.pending', '=', 0)
-                            ->where('status_alias.archived', '=', 0);
-                    });
-
-                break;
+                break;            
             case 'Deployed':
                 // more sad, horrible workarounds for laravel bugs when doing full text searches
                 $count = $assets->whereNotNull('assets.assigned_to')->count();
