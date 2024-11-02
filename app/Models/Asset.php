@@ -1146,7 +1146,7 @@ class Asset extends Depreciable
     public function scopePending($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
-            $query->where('status_label', '=', 'deployable');
+            $query->where('status_type', '=', 'deployable');
         });
     }
 
@@ -1223,7 +1223,7 @@ class Asset extends Depreciable
     public function scopeNotArchived($query)
     {
         return $query->whereHas('assetstatus', function ($query) {
-            $query->where('status_label', '!=', 'archived');
+            $query->where('status_type', '!=', 'archived');
         });
     }
 
