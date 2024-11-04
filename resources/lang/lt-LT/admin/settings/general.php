@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Įspėjimas, kad reikia paimti',
     'due_checkin_days_help' => 'Likus kiek dienų iki numatomo turto paėmimo, jis turėtų būti rodomas puslapyje „Laukia paėmimo“?',
+    'no_groups' => 'Grupės dar nesukurtos. Apsilankykite <code>Administratoriaus nustatymai > Paskyros teisių grupės</code>, kad jų pridėtumėte.',
 
 ];

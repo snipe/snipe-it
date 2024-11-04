@@ -58,4 +58,8 @@ jobs:
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
           DB_CONNECTION: sqlite_testing
-        run: php artisan test --parallel
+        run: php artisan test
+
+      - name: Test failure
+        if: ${{ failure() }}
+        run: docker exec "$PROJECT_NAME-php-fpm" cat storage/logs/laravel.log

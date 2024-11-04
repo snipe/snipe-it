@@ -74,4 +74,8 @@ jobs:
           DB_PORT: ${{ job.services.postgresql.ports[5432] }}
           DB_USERNAME: snipeit
           DB_PASSWORD: password
-        run: php artisan test --parallel
+        run: php artisan test
+
+      - name: Test failure
+        if: ${{ failure() }}
+        run: docker exec "$PROJECT_NAME-php-fpm" cat storage/logs/laravel.log

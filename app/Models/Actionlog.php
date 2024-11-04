@@ -55,6 +55,8 @@ class Actionlog extends SnipeModel
         'created_by',
         'remote_ip',
         'user_agent',
+        'item_type',
+        'target_type',
         'action_source'
     ];
 
@@ -64,10 +66,10 @@ class Actionlog extends SnipeModel
      * @var array
      */
     protected $searchableRelations = [
-        'company' => ['name'],
-        'adminuser' => ['first_name','last_name','username', 'email'],
-        'user'  => ['first_name','last_name','username', 'email'],
-        'assets'  => ['asset_tag','name'],
+        'company'     => ['name'],
+        'adminuser'   => ['first_name','last_name','username', 'email'],
+        'user'        => ['first_name','last_name','username', 'email'],
+        'assets'      => ['asset_tag','name'],
     ];
 
     /**

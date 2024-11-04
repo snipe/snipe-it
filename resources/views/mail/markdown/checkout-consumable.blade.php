@@ -11,8 +11,14 @@
 | **{{ trans('mail.checkout_date') }}** | {{ $checkout_date }} |
 @endif
 | **{{ trans('general.consumable') }}** | {{ $item->name }} |
+@if (isset($qty))
+| **{{ trans('general.qty') }}** | {{ $qty }} |
+@endif
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
+@endif
+@if (isset($qty))
+| **{{ trans('general.qty') }}** | {{ $qty }} |
 @endif
 @if (isset($item->model_no))
 | **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
