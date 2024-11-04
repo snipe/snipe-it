@@ -49,29 +49,29 @@
                         {{ trans('general.customize_report') }}
                     @endif
                 </h2>
-            @if (request()->routeIs('report-templates.show'))
-                <div class="box-tools pull-right">
-                    <a
-                        href="{{ route('report-templates.edit', $template) }}"
-                        class="btn btn-sm btn-warning"
-                        data-tooltip="true"
-                        title="{{ trans('admin/reports/general.update_template') }}"
-                    >
-                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                        <span class="sr-only">{{ trans('general.update') }}</span>
-                    </a>
-                    <button
-                        class="btn btn-sm btn-danger delete-asset"
-                        data-toggle="modal"
-                        data-title="{{ trans('general.delete') }}"
-                        data-content="{{ trans('general.delete_confirm', ['item' => $template->name]) }}"
-                        data-target="#dataConfirmModal"
-                        type="button"
-                    >
-                        <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
-                    </button>
-                </div>
-            @endif
+                @if (request()->routeIs('report-templates.show'))
+                    <div class="box-tools pull-right">
+                        <a
+                            href="{{ route('report-templates.edit', $template) }}"
+                            class="btn btn-sm btn-warning"
+                            data-tooltip="true"
+                            title="{{ trans('admin/reports/general.update_template') }}"
+                        >
+                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                            <span class="sr-only">{{ trans('general.update') }}</span>
+                        </a>
+                        <button
+                            class="btn btn-sm btn-danger delete-asset"
+                            data-toggle="modal"
+                            data-title="{{ trans('general.delete') }}"
+                            data-content="{{ trans('general.delete_confirm', ['item' => $template->name]) }}"
+                            data-target="#dataConfirmModal"
+                            type="button"
+                        >
+                            <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
+                        </button>
+                    </div>
+                @endif
         </div><!-- /.box-header -->
 
         <div class="box-body">
