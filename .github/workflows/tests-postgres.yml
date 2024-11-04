@@ -75,7 +75,3 @@ jobs:
           DB_USERNAME: snipeit
           DB_PASSWORD: password
         run: php artisan test
-
-      - name: Test failure
-        if: ${{ failure() }}
-        run: docker exec "$PROJECT_NAME-php-fpm" cat storage/logs/laravel.log
