@@ -176,7 +176,7 @@ class StoreAssetAction
             }
             return $asset;
         } else {
-            return $asset->getErrors();
+            dd($asset->getErrors()); //need to figure out how to return errors from watson validating...
         }
     }
 }

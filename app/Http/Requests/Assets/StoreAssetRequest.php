@@ -37,8 +37,10 @@ class StoreAssetRequest extends ImageUploadRequest
 
         $this->parseLastAuditDate();
 
+        $asset_tag = $this->parseAssetTag();
+
         $this->merge([
-            'asset_tag' => $this->asset_tag ?? Asset::autoincrement_asset(),
+            'asset_tag' => $asset_tag,
             'company_id' => $idForCurrentUser,
             'assigned_to' => $assigned_to ?? null,
         ]);
@@ -61,7 +63,6 @@ class StoreAssetRequest extends ImageUploadRequest
             // converted to a float via setPurchaseCostAttribute).
             $modelRules = $this->removeNumericRulesFromPurchaseCost($modelRules);
         }
-
         return array_merge(
             $modelRules,
             ['status_id' => [new AssetCannotBeCheckedOutToNondeployableStatus()]],
@@ -100,5 +101,15 @@ class StoreAssetRequest extends ImageUploadRequest
         });
 
         return $rules;
+    }
+
+    private function parseAssetTag(): mixed
+    {
+        // this is for a gui request to make the request pass validation
+        // this just checks the first asset tag from the gui, watson should pick up if any of the rest of them fail
+        if ($this->has('asset_tags') && !$this->expectsJson()) {
+            return $this->input('asset_tags')[1];
+        }
+        return $this->asset_tag ?? Asset::autoincrement_asset();
     }
 }

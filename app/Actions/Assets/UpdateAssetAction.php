@@ -8,5 +8,4 @@ class UpdateAssetAction
     {
         //    stuff
     }
-
 }

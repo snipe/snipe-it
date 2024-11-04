@@ -117,7 +117,7 @@ class AssetsController extends Controller
                     model_id: $request->validated('model_id'),
                     status_id: $request->validated('status_id'),
                     name: $request->validated('name'),
-                    serial: $serials[$key],
+                    serial: $request->has('serials') ? $serials[$key] : null,
                     company_id: $request->validated('company_id'),
                     asset_tag: $asset_tag,
                     order_number: $request->validated('order_number'),
@@ -138,7 +138,7 @@ class AssetsController extends Controller
                     assigned_asset: $request->validated('assigned_asset'),
                     assigned_location: $request->validated('assigned_location'),
                     custom_fields: $custom_fields,
-                    request: $request, //this is just for the handleImages method...
+                    request: $request, //this is just for the handleImages method... would love to figure out a different way of doing this
                     last_audit_date: $request->validated('last_audit_date'),
                 );
             }
@@ -149,7 +149,9 @@ class AssetsController extends Controller
         } catch (CheckoutNotAllowed $e) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.error'));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', trans('admin/hardware/message.create.error'));
+            report($e);
+            dd($e);
+            return redirect()->back()->with('error', 'something bad');
         }
     }
 
