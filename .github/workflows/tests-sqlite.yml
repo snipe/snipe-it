@@ -59,7 +59,3 @@ jobs:
         env:
           DB_CONNECTION: sqlite_testing
         run: php artisan test
-
-      - name: Test failure
-        if: ${{ failure() }}
-        run: docker exec "$PROJECT_NAME-php-fpm" cat storage/logs/laravel.log
