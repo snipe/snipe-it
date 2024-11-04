@@ -597,7 +597,7 @@
                 >
                     <option></option>
                     @foreach($report_templates as $savedTemplate)
-                        <option value="{{ $savedTemplate->id }}" @if (request()->route()->parameter('reportId') == $savedTemplate->id) selected @endif>
+                        <option value="{{ $savedTemplate->id }}" @selected($savedTemplate->is(request()->route()->parameter('reportTemplate')))>
                             {{ $savedTemplate->name }}
                         </option>
                     @endforeach
