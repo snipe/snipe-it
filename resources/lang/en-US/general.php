@@ -24,6 +24,7 @@ return [
     'asset_model'			=> 'Model',
     'asset'					=> 'Asset',
     'asset_report'          => 'Asset Report',
+    'assets_report'          => 'Assets Report',
     'asset_tag'				=> 'Asset Tag',
     'asset_tags'            => 'Asset Tags',
     'assets_available'		=> 'Assets available',

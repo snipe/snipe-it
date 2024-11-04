@@ -742,7 +742,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @endcan
 
                         @can('reports.view')
-                            <li class="treeview{{ (Request::is('reports*') ? ' active' : '') }}">
+                            <li class="active treeview{{ (Request::is('reports*') ? ' active' : '') }}">
                                 <a href="#" class="dropdown-toggle">
                                     <x-icon type="reports" class="fa-fw" />
                                     <span>{{ trans('general.reports') }}</span>
@@ -753,6 +753,11 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                     <li>
                                         <a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }}>
                                             {{ trans('general.activity_report') }}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ url('reports/assets') }}" {{ (Request::is('reports/assets') ? ' class="active"' : '') }}>
+                                            {{ trans('general.assets_report') }}
                                         </a>
                                     </li>
                                     <li>
