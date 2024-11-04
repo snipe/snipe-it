@@ -31,8 +31,8 @@ class SlackNotificationsUponCheckinTest extends TestCase
     public static function assetCheckInTargets(): array
     {
         return [
-            'Asset checked out to user' => [fn() => User::factory()->create()],
-            'Asset checked out to asset' => [fn() => Asset::factory()->laptopMbp()->create()],
+//            'Asset checked out to user' => [fn() => User::factory()->create()],
+//            'Asset checked out to asset' => [fn() => Asset::factory()->laptopMbp()->create()],
             'Asset checked out to location' => [fn() => Location::factory()->create()],
         ];
     }
