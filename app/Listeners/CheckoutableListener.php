@@ -61,24 +61,12 @@ class CheckoutableListener
             $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
         }
         $ccEmails = array_filter($adminCcEmailsArray);
-
         $mailable = $this->getCheckoutMailType($event, $acceptance);
-
-        if($event->checkedOutTo instanceof Asset){
-            $event->checkedOutTo->load('assignedTo');
-            $notifiable = $event->checkedOutTo->assignedto?->email ?? '';
-        }
-        else if($event->checkedOutTo instanceof Location) {
-            $notifiable = $event->checkedOutTo->manager?->email ?? '';
-        }
-        else{
-            $notifiable = $event->checkedOutTo->email;
-        }
+        $notifiable = $this->getNotifiables($event);
 
         if  (!$event->checkedOutTo->locale){
             $mailable->locale($event->checkedOutTo->locale);
         }
-
         // Send email notifications
         try {
             /**
@@ -156,18 +144,8 @@ class CheckoutableListener
         }
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable =  $this->getCheckinMailType($event);
+        $notifiable = $this->getNotifiables($event);
 
-
-        if($event->checkedOutTo instanceof Asset){
-            $event->checkedOutTo->load('assignedTo');
-            $notifiable = $event->checkedOutTo->assignedto?->email ?? '';
-        }
-        else if($event->checkedOutTo instanceof Location) {
-            $notifiable = $event->checkedOutTo->manager?->email ?? '';
-        }
-        else{
-            $notifiable = $event->checkedOutTo->email;
-        }
         if  (!$event->checkedOutTo->locale){
             $mailable->locale($event->checkedOutTo->locale);
         }
@@ -310,6 +288,19 @@ class CheckoutableListener
 
         return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);
 
+    }
+    private function getNotifiables($event){
+
+        if($event->checkedOutTo instanceof Asset){
+            $event->checkedOutTo->load('assignedTo');
+            return $event->checkedOutTo->assignedto?->email ?? '';
+        }
+        else if($event->checkedOutTo instanceof Location) {
+            return $event->checkedOutTo->manager?->email ?? '';
+        }
+        else{
+            return $event->checkedOutTo->email;
+        }
     }
 
     /**
