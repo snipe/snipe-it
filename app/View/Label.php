@@ -127,6 +127,9 @@ class Label implements View
                             case 'ht_tag': 
                                 $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); 
                                 break;
+                            case 'plain_asset_id': 
+                                $barcode2DTarget = (string) $asset->id; 
+                                break;
                             case 'plain_asset_tag': 
                                 $barcode2DTarget = $asset->asset_tag; 
                                 break;

@@ -207,6 +207,7 @@
                                     {{ Form::select('label2_2d_target', [
                                         'hardware_id'           =>  trans('general.url') .': /hardware/{id} ('.trans('admin/settings/general.default').')', 
                                         'ht_tag'                =>  trans('general.url') .': /ht/{asset_tag}', 
+                                        'plain_asset_id'        =>  trans('admin/settings/general.data') .': '. trans('admin/settings/general.asset_id') .' {id}',
                                         'plain_asset_tag'       =>  trans('admin/settings/general.data') .': '. trans('general.asset_tag') .' {asset_tag}',
                                         'plain_serial_number'   =>  trans('admin/settings/general.data') .': '. trans('general.serial_number') .' {serial}',
                                        ], old('label2_2d_target', $setting->label2_2d_target), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_target' ]) }}
