@@ -47,7 +47,6 @@
                 <!-- drag handle -->
                 <span class="handle">
                 <i class="fas fa-ellipsis-v"></i>
-                <i class="fas fa-ellipsis-v"></i>
                 </span>
               </td>
               @endcan

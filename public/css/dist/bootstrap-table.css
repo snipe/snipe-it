@@ -2,6 +2,8 @@
 
 .fix-sticky{position:fixed !important;overflow:hidden;z-index:100}.fix-sticky table thead{background:#fff}.fix-sticky table thead.thead-light{background:#e9ecef}.fix-sticky table thead.thead-dark{background:#212529}
 
+.reorder-rows-on-drag-class td{background-color:#eee;box-shadow:6px 4px 5px 1px #555,0 1px 0 #ccc inset,0 -1px 0 #ccc inset;-box-shadow:6px 4px 5px 1px #555,0 1px 0 #ccc inset,0 -1px 0 #ccc inset}.reorder-rows-on-drag-class td:last-child{box-shadow:0 9px 4px -4px #555,0 1px 0 #ccc inset,0 -1px 0 #ccc inset,-1px 0 0 #ccc inset;-box-shadow:0 9px 4px -4px #555,0 1px 0 #ccc inset,0 -1px 0 #ccc inset,-1px 0 0 #ccc inset}
+
 /*
  * dragtable
  *
