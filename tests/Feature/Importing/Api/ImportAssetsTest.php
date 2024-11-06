@@ -142,6 +142,32 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     }
 
     #[Test]
+    public function importInternationalAsset(): void
+    {
+        $evil_string = 'blähÅÄÖ'; //'це; //first one is cyrllic? so is second.
+        $evil_string = 'це'; //cyrliccic - windows-1251 (ONE)
+        //copypasta the thing? well, the important bits?
+        $importFileBuilder = ImportFileBuilder::new(['itemName' => $evil_string]); //not 'name'
+        $row = $importFileBuilder->firstRow();
+        $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory(null, 'WINDOWS-1251')]);
+
+        $this->actingAsForApi(User::factory()->superuser()->create());
+        $this->importFileResponse(['import' => $import->id])
+            ->assertOk()
+            ->assertExactJson([
+                'payload'  => null,
+                'status'   => 'success',
+                'messages' => ['redirect_url' => route('hardware.index')]
+            ]);
+
+        $newAsset = Asset::query()
+            ->with(['location', 'supplier', 'company', 'assignedAssets', 'defaultLoc', 'assetStatus', 'model.category', 'model.manufacturer'])
+            ->where('serial', $row['serialNumber'])
+            ->sole();
+
+        $this->assertEquals($evil_string, $newAsset->name);
+    }
+    #[Test]
     public function willIgnoreUnknownColumnsWhenFileContainsUnknownColumns(): void
     {
         $row = ImportFileBuilder::new()->definition();
