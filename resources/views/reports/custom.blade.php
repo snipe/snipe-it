@@ -2,7 +2,13 @@
 
 {{-- Page Title --}}
 @section('title')
-{{ trans('general.custom_report') }}
+    @if (request()->routeIs('report-templates.edit'))
+        {{ trans('general.update') }} {{ $template->name }}
+    @elseif(request()->routeIs('report-templates.show'))
+        {{ trans('general.custom_report') }}: {{ $template->name }}
+    @else
+        {{ trans('general.custom_report') }}
+    @endif
 @parent
 @stop
 
@@ -11,7 +17,7 @@
         <a href="{{ route('report-templates.show', $template) }}" class="btn btn-primary pull-right">
             {{ trans('general.back') }}
         </a>
-    @elseif(request()->routeIs('report-templates.show'))
+    @elseif (request()->routeIs('report-templates.show'))
         <a href="{{ route('reports/custom') }}" class="btn btn-primary pull-right">
             {{ trans('general.back') }}
         </a>
