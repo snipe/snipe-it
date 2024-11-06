@@ -9,15 +9,15 @@
 @if (isset($checkout_date))
 | **{{ trans('mail.checkout_date') }}** | {{ $checkout_date }} |
 @endif
-| **{{ trans('general.license') }}** | {{ $item->name }} |
-@if (isset($item->manufacturer))
-| **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
+| **{{ trans('general.license') }}** | {{ $license->name}} |
+@if (isset($license->manufacturer))
+| **{{ trans('general.manufacturer') }}** | {{ $license->manufacturer->name }} |
 @endif
-@if (isset($item->category))
-| **{{ trans('general.category') }}** | {{ $item->category->name }} |
+@if (isset($license->category))
+| **{{ trans('general.category') }}** | {{ $license->category->name }} |
 @endif
-@if ($target->can('view', $item))
-| **Key** | {{ $item->serial }} |
+@if (($target instanceof \App\Models\User && $target->can('view', $license)) || ($target instanceof \App\Models\Asset && $license_seat->user->can('view', $license)))
+| **Key** | {{ $license->serial }} |
 @endif
 @if ($note)
 | **{{ trans('mail.additional_notes') }}** | {{ $note }} |
