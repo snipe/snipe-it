@@ -47,14 +47,29 @@
         <div class="box box-default">
             <div class="box-header with-border">
                 <h2 class="box-title">
-                    @if (request()->routeIs('report-templates.edit'))
-                        {{ trans('general.updating_item', ['item' => $template->name]) }}
-                    @elseif(request()->routeIs('report-templates.show'))
+                    @if (request()->routeIs('report-templates.show'))
                         {{ $template->name }}
-                    @else
+                    @elseif (request()->routeIs('reports/custom'))
                         {{ trans('general.customize_report') }}
                     @endif
                 </h2>
+                @if (request()->routeIs('report-templates.edit'))
+                    <div class="pull-right">
+                        <div class="form-inline {{ $errors->has('name') ? ' has-error' : '' }}">
+                            <label for="name">{{ trans('admin/reports/general.template_name') }}</label>
+                            <input
+                                class="form-control"
+                                placeholder=""
+                                name="name"
+                                type="text"
+                                id="name"
+                                value="{{ $template->name }}"
+                                required
+                            >
+                            {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                        </div>
+                    </div>
+                @endif
                 @if (request()->routeIs('report-templates.show'))
                     <div class="box-tools pull-right">
                         <a

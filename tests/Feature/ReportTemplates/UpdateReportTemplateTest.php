@@ -30,6 +30,7 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
         $user = User::factory()->canViewReports()->create();
 
         $reportTemplate = ReportTemplate::factory()->for($user, 'creator')->create([
+            'name' => 'Original Name',
             'options' => [
                 'id' => 1,
                 'category' => 1,
@@ -41,12 +42,14 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
 
         $this->actingAs($user)
             ->post($this->getRoute($reportTemplate), [
+                'name' => 'Updated Name',
                 'id' => 1,
                 'company' => 1,
                 'by_company_id' => [3],
             ]);
 
         $reportTemplate->refresh();
+        $this->assertEquals('Updated Name', $reportTemplate->name);
         $this->assertEquals(1, $reportTemplate->checkmarkValue('id'));
         $this->assertEquals(0, $reportTemplate->checkmarkValue('category'));
         $this->assertEquals([], $reportTemplate->selectValues('by_category_id'));

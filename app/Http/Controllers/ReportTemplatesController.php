@@ -55,6 +55,9 @@ class ReportTemplatesController extends Controller
     {
         $this->authorize('reports.view');
 
+        // @todo: validation
+
+        $reportTemplate->name = $request->input('name');
         $reportTemplate->options = $request->except(['_token', 'name']);
         $reportTemplate->save();
 
