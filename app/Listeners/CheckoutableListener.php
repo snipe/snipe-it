@@ -16,6 +16,7 @@ use App\Models\CheckoutAcceptance;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
+use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
@@ -60,14 +61,14 @@ class CheckoutableListener
             $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
         }
         $ccEmails = array_filter($adminCcEmailsArray);
-        $notifiable = $event->checkedOutTo;
         $mailable = $this->getCheckoutMailType($event, $acceptance);
+        $notifiable = $this->getNotifiables($event);
+
+        if  (!$event->checkedOutTo->locale){
+            $mailable->locale($event->checkedOutTo->locale);
+        }
         // Send email notifications
         try {
-                if  (!$event->checkedOutTo->locale){
-                    $mailable->locale($event->checkedOutTo->locale);
-                }
-
             /**
              * Send an email if any of the following conditions are met:
              * 1. The asset requires acceptance
@@ -77,15 +78,20 @@ class CheckoutableListener
 
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
-                    if (!empty($notifiable->email)) {
+                    if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
-                    } else {
+                    } elseif (!empty($ccEmails)) {
                         Mail::cc($ccEmails)->send($mailable);
                     }
-                Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
-            }
-
+                    Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
+                }
+        } catch (ClientException $e) {
+            Log::debug("Exception caught during checkout email: " . $e->getMessage());
+        } catch (Exception $e) {
+            Log::debug("Exception caught during checkout email: " . $e->getMessage());
+        }
 //                 Send Webhook notification
+        try{
                 if ($this->shouldSendWebhookNotification()) {
                     if (Setting::getSettings()->webhook_selected === 'microsoft') {
                         $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
@@ -137,38 +143,43 @@ class CheckoutableListener
             $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
         }
         $ccEmails = array_filter($adminCcEmailsArray);
-        $notifiable = $event->checkedOutTo;
         $mailable =  $this->getCheckinMailType($event);
+        $notifiable = $this->getNotifiables($event);
 
+        if  (!$event->checkedOutTo->locale){
+            $mailable->locale($event->checkedOutTo->locale);
+        }
         // Send email notifications
         try {
-            if  (!$event->checkedOutTo->locale){
-                $mailable->locale($event->checkedOutTo->locale);
-            }
             /**
              * Send an email if any of the following conditions are met:
              * 1. The asset requires acceptance
              * 2. The item has a EULA
              * 3. The item should send an email at check-in/check-out
              */
-
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
-                    if (!empty($notifiable->email)) {
+                    if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
-                    } else {
+                    } elseif (!empty($ccEmails)){
                         Mail::cc($ccEmails)->send($mailable);
                     }
                     Log::info('Sending email, Locale: ' . $event->checkedOutTo->locale);
                 }
+        } catch (ClientException $e) {
+            Log::debug("Exception caught during checkin email: " . $e->getMessage());
+        } catch (Exception $e) {
+            Log::debug("Exception caught during checkin email: " . $e->getMessage());
+        }
 
-            // Send Webhook notification
+        // Send Webhook notification
+        try {
             if ($this->shouldSendWebhookNotification()) {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckinNotification($event));
                 }
         } catch (ClientException $e) {
-            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
+            Log::warning("Exception caught during checkin notification: " . $e->getMessage());
         } catch (Exception $e) {
             Log::warning("Exception caught during checkin notification: " . $e->getMessage());
         }
@@ -277,6 +288,19 @@ class CheckoutableListener
 
         return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);
 
+    }
+    private function getNotifiables($event){
+
+        if($event->checkedOutTo instanceof Asset){
+            $event->checkedOutTo->load('assignedTo');
+            return $event->checkedOutTo->assignedto?->email ?? '';
+        }
+        else if($event->checkedOutTo instanceof Location) {
+            return $event->checkedOutTo->manager?->email ?? '';
+        }
+        else{
+            return $event->checkedOutTo->email;
+        }
     }
 
     /**

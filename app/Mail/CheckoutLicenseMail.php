@@ -22,7 +22,7 @@ class CheckoutLicenseMail extends Mailable
      */
     public function __construct(LicenseSeat $licenseSeat, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
-        $this->item = $licenseSeat->license;
+        $this->item = $licenseSeat;
         $this->admin = $checkedOutBy;
         $this->note = $note;
         $this->target = $checkedOutTo;
@@ -53,11 +53,11 @@ class CheckoutLicenseMail extends Mailable
         $req_accept = method_exists($this->item, 'requireAcceptance') ? $this->item->requireAcceptance() : 0;
 
         $accept_url = is_null($this->acceptance) ? null : route('account.accept.item', $this->acceptance);
-
         return new Content(
             markdown: 'mail.markdown.checkout-license',
             with:   [
-                'item'          => $this->item,
+                'license_seat'  => $this->item,
+                'license'       => $this->item->license,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
                 'target'        => $this->target,
