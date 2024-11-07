@@ -25,6 +25,21 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
             ->assertNotFound();
     }
 
+    public function testUpdatingReportTemplateRequiresValidFields()
+    {
+        $user = User::factory()->canViewReports()->create();
+
+        $reportTemplate = ReportTemplate::factory()->for($user, 'creator')->create();
+
+        $this->actingAs($user)
+            ->post($this->getRoute($reportTemplate), [
+                //
+            ])
+            ->assertSessionHasErrors([
+                'name' => 'The name field is required.',
+            ]);
+    }
+
     public function testCanUpdateAReportTemplate()
     {
         $user = User::factory()->canViewReports()->create();
