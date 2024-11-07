@@ -58,9 +58,10 @@ class ReportTemplatesController extends Controller
         // Ignore "options" rules since data does not come in under that key...
         $validated = $request->validate(Arr::except((new ReportTemplate)->getRules(), 'options'));
 
-        $reportTemplate->name = $validated['name'];
-        $reportTemplate->options = $request->except(['_token', 'name']);
-        $reportTemplate->save();
+        $reportTemplate->update([
+            'name' => $validated['name'],
+            'options' => $request->except(['_token', 'name']),
+        ]);
 
         session()->flash('success', trans('admin/reports/message.update.success'));
 
