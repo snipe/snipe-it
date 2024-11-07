@@ -9,7 +9,7 @@
     "repository": "https://github.com/snipe/snipe-it",
     "logo": "https://pbs.twimg.com/profile_images/976748875733020672/K-HnZCCK_400x400.jpg",
     "success_url": "/setup",
-    "": {
+    "env": {
       "APP_ENV": {
         "description": "Laravel environment mode. Unless developing the application, this should be production.",
         "value": "production"
