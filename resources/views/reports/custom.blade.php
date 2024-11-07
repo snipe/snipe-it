@@ -46,13 +46,11 @@
     <!-- Horizontal Form -->
         <div class="box box-default">
             <div class="box-header with-border">
-                <h2 class="box-title">
-                    @if (request()->routeIs('report-templates.show'))
-                        {{ $template->name }}
-                    @elseif (request()->routeIs('reports/custom'))
+                @if (request()->routeIs('reports/custom') || request()->routeIs('report-templates.show'))
+                    <h2 class="box-title">
                         {{ trans('general.customize_report') }}
-                    @endif
-                </h2>
+                    </h2>
+                @endif
                 @if (request()->routeIs('report-templates.edit'))
                     <div class="pull-right">
                         <div class="form-inline {{ $errors->has('name') ? ' has-error' : '' }}">
