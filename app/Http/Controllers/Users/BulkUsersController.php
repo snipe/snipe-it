@@ -335,19 +335,31 @@ class BulkUsersController extends Controller
     protected function logItemCheckinAndDelete($items, $itemType)
     {
         foreach ($items as $item) {
-            $item_id = $item->id;
-            $logAction = new Actionlog();
+            \Log::error("ITEM DUMP: ".print_r($item, true));
+            if (gettype($item) == 'object' && get_class($item) != 'stdClass') {
+                $real_item = $item;
+            } else {
+                $item_id = $item->id;
 
-            if ($itemType == License::class){
-                $item_id = $item->license_id; //FIXME - funkery happening here
+                if ($itemType == License::class) {
+                    $item_id = $item->license_id; //FIXME - funkery happening here
+                    $real_item = License::find($item->license_id);
+                } else {
+                    $real_item = (new $itemType())::find($item_id);
+                }
+            }
+            if (property_exists($item, 'assigned_type')) {
+                $assigned_to = (new ($item->assigned_type))::find($item->assigned_to);
+            } else {
+                $assigned_to = User::find($item->assigned_to);
             }
 
-            $item->setTarget($item->assignedTo); // will this work?!!?!?!?
+            $real_item->setTarget($assigned_to); // will this work?!!?!?!?
             //$logAction->target_id = $item->assigned_to;
             //$logAction->target_type = User::class;
-            $item->setNote('Bulk checkin items');
-            $item->setLogMessage();
-            $item->logWithoutSave(ActionType::CheckinFrom);
+            $real_item->setNote('Bulk checkin items');
+            $real_item->setLogMessage(ActionType::CheckinFrom);
+            $real_item->logWithoutSave(ActionType::CheckinFrom);
         }
     }
 
@@ -355,7 +367,7 @@ class BulkUsersController extends Controller
     {
         foreach ($accessoryUserRows as $accessoryUserRow) {
             $accessory = Accessory::find($accessoryUserRow->accessory_id);
-            $accessory->setTarget(User::find($accessoryUserRow->assignedTo));
+            $accessory->setTarget(User::find($accessoryUserRow->assigned_to)); //FIXME - what if accessory was checked out to location?
             $accessory->setNote('Bulk checkin items');
             $accessory->logWithoutSave(ActionType::CheckinFrom);
         }

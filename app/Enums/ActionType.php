@@ -10,4 +10,7 @@ enum ActionType: string {
     case Requested = 'requested';
     case DeleteSeats = 'delete seats';
     case AddSeats = 'add seats';
+    case Update = 'update';
+    case Create = 'create';
+    case Delete = 'delete';
 }

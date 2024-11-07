@@ -42,7 +42,7 @@ class Asset extends Depreciable
     public static function boot()
     {
         // handle incrementing of asset tags
-        self::created(function (Asset $asset) {
+        self::created(function ($asset) {
             if ($settings = Setting::getSettings()) {
                 $tag = $asset->asset_tag;
                 $prefix = $settings->auto_increment_prefix;
@@ -72,9 +72,10 @@ class Asset extends Depreciable
         });
 
         //calculate and update EOL as necessary
-        self::saving(function (Asset $asset) {
+        self::saving(function ($asset) {
             // determine if calculated eol and then calculate it - this should only happen on a new asset
-            if (is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && ($asset->model->eol > 0)) {
+            //\Log::error("Asset RAW array: ".print_r($asset->toArray(), true));
+            if (is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && ($asset->model?->eol > 0)) { //FIXME - I shouldn't have to do this.
                 $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');
                 $asset->eol_explicit = false;
             }

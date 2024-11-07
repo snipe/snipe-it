@@ -151,6 +151,7 @@ class BulkDeleteAssetsTest extends TestCase
                 'bulk_actions' => 'restore',
             ]);
 
+        \Log::error(print_r(Actionlog::all()->toArray(), true));
         $this->assertDatabaseHas('action_logs',
             [
                 'action_type' => 'restore',

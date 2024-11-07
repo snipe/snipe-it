@@ -82,6 +82,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
             ->where('item_id', $newAsset->id)
             ->get();
 
+        \Log::error("Activty logs DUMP: ".print_r($activityLogs->toArray(), true));
         $this->assertCount(2, $activityLogs);
 
         $this->assertEquals('checkout', $activityLogs[0]->action_type);

@@ -746,7 +746,7 @@ class UsersController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('error', trans('general.not_deleted', ['item_type' => trans('general.user')])), 200);
             }
 
-            $user->setLogMessage('restore');
+            $user->setLogMessage(ActionType::Restore);
             if ($user->restore()) {
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/users/message.success.restored')), 200);

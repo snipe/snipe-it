@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Auth\Authenticatable;
@@ -33,12 +34,15 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use Notifiable;
     use Presentable;
     use Searchable;
+    use Loggable;
+
+    // that 'use Loggable' thing is NEW!
 
     protected $hidden = ['password', 'remember_token', 'permissions', 'reset_password_code', 'persist_code'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
 
-    public static array $hide_changes = ['password', 'remember_token', 'two_factor_secret', 'reset_password_code'];
+    public static array $hide_changes = ['password', 'remember_token', 'two_factor_secret', 'reset_password_code', 'persist_code'];
 
     protected $fillable = [
         'activated',

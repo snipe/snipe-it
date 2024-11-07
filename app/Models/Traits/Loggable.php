@@ -16,63 +16,99 @@ trait Loggable
 {
     // an attribute for setting whether or not the item was imported
     public ?bool $imported = false;
-    private ?string $log_message = null;
+    private ?string $log_message = null; //FIXME - meant to be 'private'!!!!!
     private ?Model $item = null;
     private array $log_meta = [];
     private ?Model $target = null;
     private ?string $note = null;
 
-    private ?Location $location = null;
+    private ?Location $location_override = null;
 
-    static array $hide_changes = [];
+    //public static array $hide_changes = [];
 
     public static function bootLoggable()
     {
-        \Log::error("LOGGABLE IS BOOTING!!!!!!!!!!!");
-
         //these tiny methods just set up what the log message is going to be
+        // it looks like 'restoring' fires *BEFORE* 'updating' - so we need to handle that
+        static::restoring(function ($model) {
+            \Log::error("Restor*ing* callback firing...");
+            $model->setLogMessage(ActionType::Restore);
+        });
+
         static::updating(function ($model) {
-            $model->logMessage('update');
+            \Log::error("Updating is fired, current log message is: ".$model->log_message);
+            // if we're doing a restore, this 'updating' hook fires *after* the restoring hook
+            // so we make sure not to overwrite the log_message
+            if (!$model->log_message) {
+                $model->setLogMessage(ActionType::Update);
+            }
         });
 
         static::creating(function ($model) {
-            $model->logMessage('create');
+            $model->setLogMessage(ActionType::Create);
         });
 
-        static::deleting(function ($model) {
-            $model->logMessage("delete");
+        static::deleting(function ($model) { //TODO - is this only for 'hard' delete? Or soft?
+            \Log::error("DELETING TRIGGER HAS FIRED!!!!!!!!!!!!!!!");
+            $model->setLogMessage(ActionType::Delete);
         });
 
-        static::restoring(function ($model) {
-            $model->logMessage("restore");
-        });
+        //static::trashing(function ($model) { //TODO - is *this* the right one?
+        //    $model->setLogMessage(ActionType::Delete); // No, no it is very much not. there is 'trashed' but not 'trashING'
+        //});
 
         // THIS sets up the transaction, and gets the 'diff' between the original for the model,
         // and the way it's about to get saved to.
+        // note that this may run *BEFORE* the more specific events, above? I don't know why that is though.
+        // OPEN QUESTION - does this run on soft-delete? I don't know.
         static::saving(function ($model) {
             //possibly consider a "$this->saveWithoutTransaction" thing you can invoke?
             // use "BEGIN" here?! TODO FIXME
+            $changed = [];
 
             foreach ($model->getRawOriginal() as $key => $value) {
                 if ($model->getRawOriginal()[$key] != $model->getAttributes()[$key]) {
                     $changed[$key]['old'] = $model->getRawOriginal()[$key];
                     $changed[$key]['new'] = $model->getAttributes()[$key];
-                }
-                if (in_array($key, self::$hide_changes)) {
-                    $changed[$key]['old'] = '*************';
-                    $changed[$key]['new'] = '*************';
+
+                    if (property_exists(self::class, 'hide_changes') && in_array($key, self::$hide_changes)) {
+                        $changed[$key]['old'] = '*************';
+                        $changed[$key]['new'] = '*************';
+                    }
                 }
             }
 
-            $this->setLogMeta($changed);
+            $model->setLogMeta($changed);
         });
 
         // THIS is the whole enchilada, the MAIN thing that you've got to do to make things work.
         //if we've set everything up correctly, this should pretty much do everything we want, all in one place
         static::saved(function ($model) {
+            if (!$model->log_message && !$model->log_meta) {
+                //nothing was changed, nothing was saved, nothing happened. So there should be no log message.
+                //FIXME if we do the transaction thing!!!!
+                \Log::error("LOG MESSAGE IS BLANK, ****AND**** log_meta is blank! Not sure what that means though...");
+                return;
+            }
+            if (!$model->log_message) {
+                throw new \Exception("Log Message was unset, but log_meta *does* exist - it's: ".print_r($model->log_meta, true));
+            }
             $model->logWithoutSave();
             // DO COMMIT HERE? TODO FIXME
         });
+        static::deleted(function ($model) {
+            \Log::error("Deleted callback has fired!!!!!!!!!!! I guess that means do stuff here?");
+            $model->logWithoutSave(); //TODO - if we do commits up there, we should do them here too?
+        });
+        static::restored(function ($model) {
+            \Log::error("RestorED callback firing.");
+            $model->logWithoutSave(); //TODO - this is getting duplicative.
+        });
+
+        // CRAP.
+        //static::trashed(function ($model) {
+        //    $model->logWithoutSave(ActionType::Delete);
+        //});
 
     }
 
@@ -99,7 +135,7 @@ trait Loggable
         if ($this->note) {
             $logAction->note = $this->note;
         }
-        if ($this->location) {
+        if ($this->location_override) {
             $logAction->location_id = $this->location->id;
         }
         $logAction->logaction($this->log_message);
