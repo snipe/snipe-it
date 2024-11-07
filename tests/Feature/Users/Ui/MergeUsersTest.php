@@ -204,6 +204,9 @@ class MergeUsersTest extends TestCase
 
         // This needs to be 2 more than the otherwise expected because the merge action itself is logged for the two merging users
         $this->assertEquals(11, $user_to_merge_into->refresh()->userlog->count());
+        $this->assertTrue($user1->refresh()->trashed(), "User 1 should be trashed and isn't!");
+        $this->assertTrue($user2->refresh()->trashed(), "User 2 should be trashed and isn't!");
+        dump($user1->refresh()->userlog);
         $this->assertEquals(2, $user1->refresh()->userlog->count());
         $this->assertEquals(2, $user2->refresh()->userlog->count());
 

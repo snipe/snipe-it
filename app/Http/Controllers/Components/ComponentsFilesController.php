@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Components;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
@@ -45,8 +46,11 @@ class ComponentsFilesController extends Controller
                 foreach ($request->file('file') as $file) {
                     $file_name = $request->handleFile('private_uploads/components/','component-'.$component->id, $file);
 
+                    $component->setLogFilename($file_name);
+                    $component->setLogNote(e($request->input('notes')));
+                    $component->logAndSaveIfNeeded(ActionType::Uploaded);
                     //Log the upload to the log
-                    $component->logUpload($file_name, e($request->input('notes')));
+                    //$component->logUpload($file_name, e($request->input('notes')));
                 }
 
 

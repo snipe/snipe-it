@@ -47,7 +47,7 @@ class ConsumableCheckoutTest extends TestCase
             ->postJson(route('api.consumables.checkout', $consumable), [
                 'assigned_to' => $user->id,
             ]);
-
+        dump($user->consumables);
         $this->assertTrue($user->consumables->contains($consumable));
     }
 

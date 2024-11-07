@@ -374,7 +374,7 @@ abstract class Importer
         $user->activated = 1;
         $user->password = $this->tempPassword;
 
-        Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
+        Log::error('Creating a user with the following attributes: '.print_r($user_array, true)); //FIXME - put back to debug
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');

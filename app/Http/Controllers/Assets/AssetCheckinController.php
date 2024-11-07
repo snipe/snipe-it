@@ -10,6 +10,7 @@ use App\Http\Traits\MigratesLegacyAssetLocations;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use \Illuminate\Contracts\View\View;
@@ -90,11 +91,11 @@ class AssetCheckinController extends Controller
         }
 
         // Add any custom fields that should be included in the checkout
-        $asset->customFieldsForCheckinCheckout('display_checkin');
+        $asset->customFieldsForCheckinCheckout('display_checkin'); //FIXME ?
 
-        $this->migrateLegacyLocations($asset);
+        $this->migrateLegacyLocations($asset); //FIXME ?
 
-        $asset->location_id = $asset->rtd_location_id;
+        $asset->location_id = $asset->rtd_location_id; //FIXME more asset logic
 
         if ($request->filled('location_id')) {
             Log::debug('NEW Location ID: '.$request->get('location_id'));
@@ -105,36 +106,21 @@ class AssetCheckinController extends Controller
             }
         }
 
-        $originalValues = $asset->getRawOriginal();
-
-        $checkin_at = date('Y-m-d H:i:s');
         if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
-            $originalValues['action_date'] = $checkin_at;
-            $checkin_at = $request->get('checkin_at');
+            $asset->setLogDate(new Carbon($request->get('checkin_at')));
         }
 
-        $asset->licenseseats->each(function (LicenseSeat $seat) {
-            $seat->update(['assigned_to' => null]);
-        });
+        if ($request->filled('note')) {
+            $asset->setLogNote($request->get('note'));
+        }
 
-        // Get all pending Acceptances for this asset and delete them
-        $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
-            [Asset::class],
-            function (Builder $query) use ($asset) {
-                $query->where('id', $asset->id);
-            })->get();
-        $acceptances->map(function($acceptance) {
-            $acceptance->delete();
-        });
 
         session()->put('redirect_option', $request->get('redirect_option'));
 
         // Add any custom fields that should be included in the checkout
         $asset->customFieldsForCheckinCheckout('display_checkin');
 
-        if ($asset->save()) {
-
-            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
+        if ($asset->checkInAndSave()) {
             return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.checkin.success'));
         }
         // Redirect to the asset management page with error

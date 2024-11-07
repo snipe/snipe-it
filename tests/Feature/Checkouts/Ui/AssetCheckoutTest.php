@@ -141,7 +141,8 @@ class AssetCheckoutTest extends TestCase
                     'expected_location' => $userLocation,
                 ];
             }],
-            'Asset without location set' => [function () {
+            'Asset without location set' => [
+                function () { //HERE!
                 $rtdLocation = Location::factory()->create();
                 $asset = Asset::factory()->for($rtdLocation, 'defaultLoc')->create(['location_id' => null]);
 
@@ -203,7 +204,11 @@ class AssetCheckoutTest extends TestCase
 
         $asset->refresh();
         $this->assertTrue($asset->assignedTo()->is($target));
-        $this->assertTrue($asset->location->is($expectedLocation));
+        if ($expectedLocation) {
+            $this->assertTrue($asset->location?->is($expectedLocation));
+        } else {
+            $this->assertNull($asset->location);
+        }
         $this->assertEquals('Changed Name', $asset->name);
         $this->assertTrue($asset->assetstatus->is($newStatus));
         $this->assertEquals('2024-03-18 00:00:00', $asset->last_checkout);

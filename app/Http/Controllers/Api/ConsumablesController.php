@@ -258,7 +258,7 @@ class ConsumablesController extends Controller
 
         $this->authorize('checkout', $consumable);
 
-        $consumable->checkout_qty = $request->input('checkout_qty', 1);
+        $consumable->setLogQuantity($request->input('checkout_qty', 1));
 
         // Make sure there is at least one available to checkout
         if ($consumable->numRemaining() <= 0) {
@@ -273,7 +273,7 @@ class ConsumablesController extends Controller
         // Make sure there is at least one available to checkout
         if ($consumable->numRemaining() <= 0 || $consumable->checkout_qty > $consumable->numRemaining()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.checkout.unavailable', ['requested' => $consumable->checkout_qty, 'remaining' => $consumable->numRemaining() ])));
-        }
+        } //FIXME - this is consumables logic, not here
 
 
 
@@ -283,22 +283,11 @@ class ConsumablesController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, 'No user found'));
         }
 
-        // Update the consumable data
-        $consumable->assigned_to = $request->input('assigned_to');
-
-        for ($i = 0; $i < $consumable->checkout_qty; $i++) {
-            $consumable->users()->attach($consumable->id,
-                [
-                    'consumable_id' => $consumable->id,
-                    'created_by' => $user->id,
-                    'assigned_to' => $request->input('assigned_to'),
-                    'note' => $request->input('note'),
-                ]
-            );
+        if ($request->has('note')) {
+            $consumable->setLogNote($request->input('note'));
         }
-
-
-        event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
+        $consumable->setLogTarget($user);
+        $consumable->checkoutAndSave();
 
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/consumables/message.checkout.success')));
 

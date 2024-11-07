@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
@@ -34,17 +35,10 @@ class UserFilesController extends Controller
             $file_name = $request->handleFile('private_uploads/users/', 'user-'.$user->id, $file);
 
             //Log the uploaded file to the log
-            $logAction = new Actionlog();
-            $logAction->item_id = $user->id;
-            $logAction->item_type = User::class;
-            $logAction->created_by = auth()->id();
-            $logAction->note = $request->input('notes');
-            $logAction->target_id = null;
-            $logAction->created_at = date("Y-m-d H:i:s");
-            $logAction->filename = $file_name;
-            $logAction->action_type = 'uploaded';
+            $user->setLogFilename($file_name);
+            $user->setLogNote($request->input('notes'));
 
-            if (! $logAction->save()) {
+            if (!$user->logAndSaveIfNeeded(ActionType::Uploaded)) {
                 return JsonResponse::create(['error' => 'Failed validation: '.print_r($logAction->getErrors(), true)], 500);
             }
 

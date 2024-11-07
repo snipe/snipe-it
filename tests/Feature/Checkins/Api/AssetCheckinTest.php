@@ -155,6 +155,7 @@ class AssetCheckinTest extends TestCase
             ]);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) {
+            dump($event);
             return Carbon::parse('2023-01-02')->isSameDay(Carbon::parse($event->action_date))
                 && $event->note === 'hi there';
         }, 1);

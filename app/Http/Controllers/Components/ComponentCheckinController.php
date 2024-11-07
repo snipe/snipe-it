@@ -78,25 +78,10 @@ class ComponentCheckinController extends Controller
                     ->withErrors($validator)
                     ->withInput();
             }
-
-            // Validation passed, so let's figure out what we have to do here.
-            $qty_remaining_in_checkout = ($component_assets->assigned_qty - (int) $request->input('checkin_qty'));
-
-            // We have to modify the record to reflect the new qty that's
-            // actually checked out.
-            $component_assets->assigned_qty = $qty_remaining_in_checkout;
-            DB::table('components_assets')->where('id',
-                $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);
-
-            // If the checked-in qty is exactly the same as the assigned_qty,
-            // we can simply delete the associated components_assets record
-            if ($qty_remaining_in_checkout == 0) {
-                DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
-            }
-
-            $asset = Asset::find($component_assets->asset_id);
-
-            event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
+            $component->setLogQuantity($request->input('checkin_qty', 1));
+            $component->setLogNote($request->input('note'));
+            $component->setLogTarget(Asset::find($component_assets->asset_id));
+            $component->checkInAndSave();
 
             session()->put(['redirect_option' => $request->get('redirect_option')]);
 

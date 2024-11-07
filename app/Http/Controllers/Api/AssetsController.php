@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
@@ -686,7 +687,7 @@ class AssetsController extends Controller
             } elseif ($request->get('assigned_location')) {
                 $target = Location::find(request('assigned_location'));
             }
-            if (isset($target)) {
+            if (isset($target)) { //FIXME - another usage of checkOut; it's going to fail!
                 $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
             }
 
@@ -897,39 +898,46 @@ class AssetsController extends Controller
             'asset_tag' => $asset->asset_tag,
         ];
 
+        $error_payload['target_type'] = request('checkout_to_type');
         // This item is checked out to a location
         if (request('checkout_to_type') == 'location') {
-            $target = Location::find(request('assigned_location'));
-            $asset->location_id = ($target) ? $target->id : '';
+            $asset->setLogTarget(Location::find(request('assigned_location')));
+            //$asset->location_id = ($target) ? $target->id : '';
             $error_payload['target_id'] = $request->input('assigned_location');
-            $error_payload['target_type'] = 'location';
         } elseif (request('checkout_to_type') == 'asset') {
-            $target = Asset::where('id', '!=', $asset_id)->find(request('assigned_asset'));
+            $asset->setLogTarget(Asset::where('id', '!=', $asset_id)->find(request('assigned_asset')));
             // Override with the asset's location_id if it has one
-            $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
+            //$asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_asset');
-            $error_payload['target_type'] = 'asset';
         } elseif (request('checkout_to_type') == 'user') {
             // Fetch the target and set the asset's new location_id
-            $target = User::find(request('assigned_user'));
-            $asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
+            $asset->setLogTarget(User::find(request('assigned_user')));
+            //$asset->location_id = (($target) && (isset($target->location_id))) ? $target->location_id : '';
             $error_payload['target_id'] = $request->input('assigned_user');
-            $error_payload['target_type'] = 'user';
+        } else {
+            //FIXME - return error - bad checkout_to_type ?
+            \Log::error("FAILED in terms of checkout_to_type!!! it's: ".request('checkout_to_type'));
         }
 
         if ($request->filled('status_id')) {
             $asset->status_id = $request->get('status_id');
         }
 
-        if (! isset($target)) {
+        if (!$asset->getLogTarget()) {
+            \Log::error("no target set for checkout so we're aborting it now with a json error");
             return response()->json(Helper::formatStandardApiResponse('error', $error_payload, 'Checkout target for asset ' . e($asset->asset_tag) . ' is invalid - ' . $error_payload['target_type'] . ' does not exist.'));
         }
 
-        $checkout_at = request('checkout_at', date('Y-m-d H:i:s'));
-        $expected_checkin = request('expected_checkin', null);
-        $note = request('note', null);
+        if ($request->has('checkout_at')) {
+            $asset->setLogDate(new Carbon($request->get('checkout_at')));
+        }
+        //$checkout_at = request('checkout_at', date('Y-m-d H:i:s')); // WHERE TO PUT THIS!
+        $asset->expected_checkin = $request->get('expected_checkin', null);
+        $asset->setLogNote($request->get('note', null));
         // Using `->has` preserves the asset name if the name parameter was not included in request.
-        $asset_name = request()->has('name') ? request('name') : $asset->name;
+        if ($request->has('name')) {
+            $asset->name = $request->get('name');
+        }
 
         // Set the location ID to the RTD location id if there is one
         // Wait, why are we doing this? This overrides the stuff we set further up, which makes no sense.
@@ -940,7 +948,7 @@ class AssetsController extends Controller
         //            $asset->location_id = $target->rtd_location_id;
         //        }
 
-        if ($asset->checkOut($target, auth()->user(), $checkout_at, $expected_checkin, $note, $asset_name, $asset->location_id)) {
+        if ($asset->checkOutAndSave()) {
             return response()->json(Helper::formatStandardApiResponse('success', ['asset' => e($asset->asset_tag)], trans('admin/hardware/message.checkout.success')));
         }
 
@@ -979,9 +987,9 @@ class AssetsController extends Controller
             $asset->name = $request->input('name');
         }
 
-        $this->migrateLegacyLocations($asset);
+        $this->migrateLegacyLocations($asset); //FIXME - hrm.
 
-        $asset->location_id = $asset->rtd_location_id;
+        $asset->location_id = $asset->rtd_location_id; //FIXME this seems like it should be in Asset?
 
         if ($request->filled('location_id')) {
             $asset->location_id = $request->input('location_id');
@@ -994,34 +1002,18 @@ class AssetsController extends Controller
         if ($request->filled('status_id')) {
             $asset->status_id = $request->input('status_id');
         }
-
-        $checkin_at = $request->filled('checkin_at') ? $request->input('checkin_at') . ' ' . date('H:i:s') : date('Y-m-d H:i:s');
-        $originalValues = $asset->getRawOriginal();
-
+        
         if (($request->filled('checkin_at')) && ($request->get('checkin_at') != date('Y-m-d'))) {
-            $originalValues['action_date'] = $checkin_at;
+            \Log::error("Setting checkin time of ".$request->get('checkin_at')." because that's not today which is: ".date('Y-m-d'));
+            $asset->setLogDate(new Carbon($request->get('checkin_at')));
         }
 
-        $asset->licenseseats->each(function (LicenseSeat $seat) {
-            $seat->update(['assigned_to' => null]);
-        });
+        if ($request->filled('note')) {
+            $asset->setLogNote($request->input('note'));
+        }
 
-        // Get all pending Acceptances for this asset and delete them
-        CheckoutAcceptance::pending()
-            ->whereHasMorph(
-                'checkoutable',
-                [Asset::class],
-                function (Builder $query) use ($asset) {
-                    $query->where('id', $asset->id);
-                }
-            )
-            ->get()
-            ->map(function ($acceptance) {
-                $acceptance->delete();
-            });
-
-        if ($asset->save()) {
-            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
+        if ($asset->checkInAndSave()) {
+            //event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
 
             return response()->json(Helper::formatStandardApiResponse('success', [
                 'asset_tag' => e($asset->asset_tag),
@@ -1086,22 +1078,6 @@ class AssetsController extends Controller
 
         if ($asset) {
 
-            /**
-             * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
-             * which would trigger the Asset Observer and would log an asset *update* log entry (because the
-             * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
-             * the audit log entry we're creating through this controller.
-             *
-             * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
-             * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
-             * will bypass normal model-level validation that's usually handled at the observer )
-             *
-             * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
-             * which manually invokes Watson Validating to make sure the asset's model is valid.
-             *
-             * @see \App\Observers\AssetObserver::updating()
-             */
-            $asset->unsetEventDispatcher();
             $asset->next_audit_date = $dt;
 
             if ($request->filled('next_audit_date')) {
@@ -1116,12 +1092,10 @@ class AssetsController extends Controller
 
             $asset->last_audit_date = date('Y-m-d H:i:s');
 
-            /**
-             * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
-             * We have to invoke this manually because of the unsetEventDispatcher() above.)
-             */
-            if ($asset->isValid() && $asset->save()) {
-                $asset->logAudit(request('note'), request('location_id'));
+            $asset->setLogNote($request->input('note'));
+
+            if ($asset->AuditAndSave()) {
+                //$asset->logAudit(request('note'), request('location_id'));
 
                 return response()->json(Helper::formatStandardApiResponse('success', [
                     'asset_tag' => e($asset->asset_tag),

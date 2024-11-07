@@ -74,13 +74,13 @@ class ConsumableCheckoutController extends Controller
         if (!isset($quantity) || !ctype_digit((string)$quantity) || $quantity <= 0) {
             $quantity = 1;
         }
+        $consumable->setLogQuantity($quantity);
 
         // Make sure there is at least one available to checkout
         if ($consumable->numRemaining() <= 0 || $quantity > $consumable->numRemaining()) {
             return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable', ['requested' => $quantity, 'remaining' => $consumable->numRemaining() ]));
         }
 
-        $admin_user = auth()->user();
         $assigned_to = e($request->input('assigned_to'));
 
         // Check if the user exists
@@ -90,20 +90,10 @@ class ConsumableCheckoutController extends Controller
         }
 
         // Update the consumable data
-        $consumable->assigned_to = e($request->input('assigned_to'));
-
-        for ($i = 0; $i < $quantity; $i++){
-        $consumable->users()->attach($consumable->id, [
-            'consumable_id' => $consumable->id,
-            'created_by' => $admin_user->id,
-            'assigned_to' => e($request->input('assigned_to')),
-            'note' => $request->input('note'),
-        ]);
-        }
-
-        $consumable->checkout_qty = $quantity;
-        event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
-
+        $consumable->setLogTarget($user);
+        $consumable->setLogNote($request->input('note'));
+        //$consumable->assigned_to = e($request->input('assigned_to'));
+        $consumable->checkoutAndSave();
         $request->request->add(['checkout_to_type' => 'user']);
         $request->request->add(['assigned_user' => $user->id]);
 

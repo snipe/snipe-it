@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use App\Enums\ActionType;
+use App\Events\CheckoutableCheckedIn;
+use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -295,6 +300,47 @@ class Accessory extends SnipeModel
     public function manufacturer()
     {
         return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
+    }
+
+    public function checkin(): bool //FIXME - is this checkIn or checkin?
+    {
+        //FIXME - emit checkoutablecheckedin?
+        //TODO - begin?
+        \Log::error("in accessory checkin method");
+        $accessory_checkout = AccessoryCheckout::find($this->getLogTarget()->id);
+        //dump($accessory_checkout);
+        //now, we twiddle logTarget to be the user (or location) of the AccessoryCheckout
+        $this->setLogTarget($accessory_checkout->assignedTo);
+        //dump($accessory_checkout->assignedTo); //this is what you expect
+        $accessory_checkout->delete();
+        event(new CheckoutableCheckedIn($this, $accessory_checkout->assignedTo, auth()->user(), $this->getLogNote(), $this->getLogDate()));
+        return $this->logAndSaveIfNeeded(ActionType::CheckinFrom);
+        //TODO - COMMIT?
+    }
+
+    public function checkout(): bool
+    {
+        //FIXME - what if there are _more_ checkotus than there are availabliieties?
+        for ($i = 0; $i < $this->getLogQuantity() ?? 1; $i++) {
+            \Log::error("DOING A CHECKOUTS!!! - $i");
+            $accessory_checkout = new AccessoryCheckout([
+                'accessory_id'  => $this->id,
+                'created_at'    => Carbon::now(),
+                'assigned_to'   => $this->getLogTarget()->id,
+                'assigned_type' => $this->getLogTarget()::class,
+                'note'          => $this->getLogNote(),
+            ]);
+
+            $accessory_checkout->created_by = auth()->id();
+            $accessory_checkout->save();
+        }
+        \Log::error("Done doing checkouts now");
+        if ($this->logAndSaveIfNeeded(ActionType::Checkout)) {
+            event(new CheckoutableCheckedOut($this, $this->getLogTarget(), auth()->user(), $this->getLogNote()));
+            return true;
+        }
+        return false;
+
     }
 
     /**

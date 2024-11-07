@@ -2,24 +2,25 @@
 
 namespace App\Models;
 
+use App\Enums\ActionType;
+use App\Events\CheckoutableCheckedIn;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
-use App\Presenters\Presentable;
 use App\Presenters\AssetPresenter;
-use Illuminate\Support\Facades\Auth;
+use App\Presenters\Presentable;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Model for Assets.
@@ -40,6 +41,66 @@ class Asset extends Depreciable
     public const USER = 'user';
 
     use Acceptable;
+
+    public static function boot()
+    {
+        // handle incrementing of asset tags
+        self::created(function ($asset) {
+            if ($settings = Setting::getSettings()) {
+                $tag = $asset->asset_tag;
+                $prefix = $settings->auto_increment_prefix;
+                $number = substr($tag, strlen($prefix));
+                // IF - auto_increment_assets is on, AND (there is no prefix OR the prefix matches the start of the tag)
+                //      AND the rest of the string after the prefix is all digits, THEN...
+                if ($settings->auto_increment_assets && ($prefix == '' || strpos($tag, $prefix) === 0) && preg_match('/\d+/', $number) === 1) {
+                    // new way of auto-trueing-up auto_increment ID's
+                    $next_asset_tag = intval($number, 10) + 1;
+                    // we had to use 'intval' because the $number could be '01234' and
+                    // might get interpreted in Octal instead of decimal
+
+                    // only modify the 'next' one if it's *bigger* than the stored base
+                    //
+                    if ($next_asset_tag > $settings->next_auto_tag_base && $next_asset_tag < PHP_INT_MAX) {
+                        $settings->next_auto_tag_base = $next_asset_tag;
+                        $settings->save();
+                    }
+
+                } else {
+                    // legacy method
+                    $settings->increment('next_auto_tag_base');
+                    $settings->save();
+                }
+            }
+
+        });
+
+        //calculate and update EOL as necessary
+        self::saving(function ($asset) {
+            // determine if calculated eol and then calculate it - this should only happen on a new asset
+            //\Log::error("Asset RAW array: ".print_r($asset->toArray(), true));
+            if (is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && ($asset->model?->eol > 0)) { //FIXME - I shouldn't have to do this.
+                $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');
+                $asset->eol_explicit = false;
+            }
+
+            // determine if explicit and set eol_explicit to true
+            if (!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) {
+                if ($asset->model->eol > 0) {
+                    $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
+                    if ($months != $asset->model->eol) {
+                        $asset->eol_explicit = true;
+                    }
+                }
+            } elseif (!is_null($asset->asset_eol_date) && is_null($asset->purchase_date)) {
+                $asset->eol_explicit = true;
+            }
+            if ((!is_null($asset->asset_eol_date)) && (!is_null($asset->purchase_date)) && (is_null($asset->model->eol) || ($asset->model->eol == 0))) {
+                $asset->eol_explicit = true;
+            }
+
+        });
+        parent::boot();
+    }
 
     /**
      * Run after the checkout acceptance was declined by the user
@@ -313,6 +374,7 @@ class Asset extends Depreciable
     }
 
 
+    //FIXME - delete this once it's no longer used.
     /**
      * Checks the asset out to the target
      *
@@ -345,9 +407,9 @@ class Asset extends Depreciable
         $this->last_checkout = $checkout_at;
         $this->name = $name;
 
-        $this->assignedTo()->associate($target);
+        $this->assignedTo()->associate($target); //THIS is causing the save?
 
-        if ($location != null) {
+        if ($location != null) { //STET - this is Asset logic.
             $this->location_id = $location;
         } else {
             if (isset($target->location)) {
@@ -360,12 +422,13 @@ class Asset extends Depreciable
 
         $originalValues = $this->getRawOriginal();
 
+        //checkout_at is action_date.
         // attempt to detect change in value if different from today's date
         if ($checkout_at && strpos($checkout_at, date('Y-m-d')) === false) {
             $originalValues['action_date'] = date('Y-m-d H:i:s');
         }
 
-        if ($this->save()) {
+        if ($this->saveQuietly()) { //THIS is the save that fires that's making the update FIXME - on checkout, this causes an update.
             if (is_int($admin)) {
                 $checkedOutBy = User::findOrFail($admin);
             } elseif ($admin && get_class($admin) === \App\Models\User::class) {
@@ -373,9 +436,10 @@ class Asset extends Depreciable
             } else {
                 $checkedOutBy = auth()->user();
             }
-            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues));
-
-            $this->increment('checkout_counter', 1);
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note)); //THIS is probably causing the checkout?
+            // this is just doing this: (along with notifications, which we'll probably keep as-is
+            //         $event->checkoutable->logCheckout($event->note, $event->checkedOutTo, $event->checkoutable->last_checkout, $event->originalValues);
+            $this->increment('checkout_counter', 1); //huh. FIXME? second thihng, goig to fall out of transaction?
 
             return true;
         }
@@ -383,6 +447,117 @@ class Asset extends Depreciable
         return false;
     }
 
+    /**
+     * Checks out asset to previously-set target
+     * @return bool
+     * @throws CheckoutNotAllowed
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
+    public function checkOutAndSave(): bool
+    {
+        \Log::error("checkout and save has fired!!!!!!");
+        if (!$this->getLogTarget()) {
+            \Log::error("NO TARGET SET FOR CHECKOUT!");
+            return false;
+        }
+        if ($this->is($this->getLogTarget())) {
+            throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
+        }
+
+        $this->last_checkout = $this->getLogDate();
+
+        $this->assignedTo()->associate($this->getLogTarget());
+
+
+        \Log::error("managed to at least associate the target (maybe?)");
+        //if ($location != null) { //STET - this is Asset logic.
+        //    $this->location_id = $location;
+        //} else {
+        //if (isset($this->getLogTarget()->location)) { // FIXME okay, I think this is failing when the logTarget() has a location, but it's null?
+        //    $this->location_id = $this->getLogTarget()->location->id;
+        //}
+        if ($this->getLogTarget() instanceof Location) {
+            $this->location_id = $this->getLogTarget()->id;
+        } else {
+            //FIXME or validate this - this is *WEIRD*
+            $this->location_id = $this->getLogTarget()->location?->id;
+            if (!$this->location_id && $this->assigned_type == Asset::class) {
+                //TODO - this is SUPER weird. We only do this for _assets_ assigned to _assets_ without a location set?
+                // But not for other cases? I don't know that I get it.
+                //handle assets checked out to assets that have no location, but an rtd_location_id
+                //FIXME - jankinated
+                // I _think_ this is failing on 'checkout to assets without a location set'
+                //I'm going to guess it's an asset checkout to an asset?
+                $this->location_id = $this->getLogTarget()->rtd_location_id; //FIXME - this is *WEIRD*
+                //FIXME - I'm commenting that line out for a minute, I'm not sure it's right?
+            }
+        }
+        //}
+
+        //checkout_at is action_date.
+        // attempt to detect change in value if different from today's date
+        //if ($checkout_at && strpos($checkout_at, date('Y-m-d')) === false) {
+        //    $originalValues['action_date'] = date('Y-m-d H:i:s'); //FIXME - not being respected
+        //}
+
+        //FIXME - this isn't going to be transactionally safe I don't think. Even if we do a 'fresh()' or 'refresh()' or whatever
+        //TODO - idea - we save the things we want to increment in a table, and _Then_ execute those within the transaction?
+        //That oughtta work - esp. if we can say `SET checkout_counter = checkout_counter + 1`
+        // which would, totally, do the trick
+        $this->checkout_counter = $this->checkout_counter ? $this->checkout_counter + 1 : 1;
+
+        if ($this->logAndSaveIfNeeded(ActionType::Checkout)) { //in all likelihood, this is going to translate to a 'save()', but just in case...
+            //TODO - what to do with this 'admin' thing?
+            //if (is_int($admin)) {
+            //    $checkedOutBy = User::findOrFail($admin);
+            //} elseif ($admin && get_class($admin) === \App\Models\User::class) {
+            //    $checkedOutBy = $admin;
+            //} else {
+            //    $checkedOutBy = auth()->user();
+            //}
+            // FIXME - what to do here - should I make a 'new' event? Should I let this one fire?
+            // FIXME - I'm not sure of the 'general solution' for if there's no autheenticated user (CLI?)
+            event(new CheckoutableCheckedOut($this, $this->getLogTarget(), auth()->user(), $this->getLogNote())); //THIS is probably causing the checkout?
+            // this is just doing this: (along with notifications, which we'll probably keep as-is
+            //         $event->checkoutable->logCheckout($event->note, $event->checkedOutTo, $event->checkoutable->last_checkout, $event->originalValues);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function checkInAndSave(): bool
+    {
+        //FIXME - how does this fit into a transaction?
+        $this->licenseseats->each(function (LicenseSeat $seat) {
+            $seat->update(['assigned_to' => null]);
+        });
+
+        $asset_id = $this->id;
+        // Get all pending Acceptances for this asset and delete them
+        $acceptances = CheckoutAcceptance::pending()->whereHasMorph('checkoutable',
+            [Asset::class],
+            function (Builder $query) use ($asset_id) {
+                $query->where('id', $asset_id);
+            })->get();
+        $acceptances->map(function ($acceptance) {
+            $acceptance->delete();
+        });
+
+        if ($this->logAndSaveIfNeeded(ActionType::CheckinFrom)) {
+            \Log::error("EMITTING EVENT NOW!!!!!!!!!");
+            $results = event(new CheckoutableCheckedIn($this, $this->getLogTarget(), Auth::user(), $this->getLogNote(), $this->getLogDate()));
+            //dump($results);
+            //if (!$results) {
+            //    \Log::error("BIG WARN TIME - no results");
+            //}
+            return true;
+        } else {
+            \Log::error("FAILED TO EMIT EVENT!!!!");
+            return false;
+        }
+    }
     /**
      * Sets the detailedNameAttribute
      *

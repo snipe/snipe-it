@@ -2,11 +2,18 @@
 
 namespace App\Models;
 
+use App\Enums\ActionType;
+use App\Events\CheckoutableCheckedIn;
+use App\Events\CheckoutableCheckedOut;
+use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Watson\Validating\ValidatingTrait;
 
 /**
@@ -103,6 +110,98 @@ class Component extends SnipeModel
         'supplier'     => ['name'],
         'manufacturer' => ['name'],
     ];
+
+    public function checkout()
+    {
+        //FIXME - can we emit some kind of error *here* if you don't have enough? A validation error, maybe?
+        // I think it wants to be *here* and not in the controller; the controller shouldn't need to know
+        // the explicit business logic behind which checkouts will, and will not, fail. No?
+        //$this->assigned_to = $this->getLogTarget()->id; //huh? FIXME or TODO or SOMETHING? Why are we assigning a single component's assigned_to, when we have the 'attach' method?
+        $this->assets()->attach($this->id,
+            [ // TODO - this feels a little duplicative... we say this->id multiple times
+              'component_id' => $this->id,
+              'created_at'   => Carbon::now(),
+              'assigned_qty' => $this->getLogQuantity(),
+              'created_by'   => auth()->id(),
+              'asset_id'     => $this->getLogTarget()->id,
+              'note'         => $this->getLogNote(),
+            ]
+        );
+        //huh. something about location_id here? I don't think we're doing that.
+
+        if ($this->logAndSaveIfNeeded(ActionType::Checkout)) {
+            // TODO/FIXME - emit checkoutableCheckedOut here?
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function checkinAndSave()
+    {
+        //TODO - throw validation error if quantity is wrong?
+        //TODO/FIXME - transaction?
+        // Update the component data
+        // Validation passed, so let's figure out what we have to do here.
+        /* dupe - same logic ?
+                    // Validation passed, so let's figure out what we have to do here.
+            $qty_remaining_in_checkout = ($component_assets->assigned_qty - (int)$request->input('checkin_qty', 1));
+
+            // We have to modify the record to reflect the new qty that's
+            // actually checked out.
+            $component_assets->assigned_qty = $qty_remaining_in_checkout; //whoa, whoa, whoa - we definitely don't want to do this here. And I'm not sure we do the opposite in 'checkout'
+
+            Log::debug($component_asset_id.' - '.$qty_remaining_in_checkout.' remaining in record '.$component_assets->id);
+
+            DB::table('components_assets')->where('id', $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);
+
+            // If the checked-in qty is exactly the same as the assigned_qty,
+            // we can simply delete the associated components_assets record
+            if ($qty_remaining_in_checkout === 0) {
+                DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
+            }
+
+            $asset = Asset::find($component_assets->asset_id);
+
+            event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
+        */
+        $component_asset_id = $this->getLogTarget()->id; //EWWWWWW GROSSSSSS!!!! FIXME
+        \Log::error("ASSIGNED QUANTITY IS: ".$this->getLogTarget()->assigned_qty." and log quantity is: ".$this->getLogQuantity());
+
+        $qty_remaining_in_checkout = ($this->getLogTarget()->assigned_qty - (int) $this->getLogQuantity());
+
+        // We have to modify the record to reflect the new qty that's
+        // actually checked out.
+        //$component_asset->assigned_qty = $qty_remaining_in_checkout; //why is this needed? Is it? FIXME TODO
+
+        // If the checked-in qty is exactly the same as the assigned_qty,
+        // we can simply delete the associated components_assets record
+        if ($qty_remaining_in_checkout == 0) {
+            \Log::error("ZERO QUANTITY REMAINING _ DELETING RECORD! (for id: $component_asset_id)");
+            DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
+        } else {
+            \Log::error("Non-Zero quantity remaining  ($qty_remaining_in_checkout) - updating record in-place");
+            DB::table('components_assets')->where('id',
+                $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);
+        }
+        $this->setLogTarget(Asset::find($this->getLogTarget()->asset_id)); //TODO - this 'thunk' from one class to another is weird, but we do do it elsewhere too.
+        //$this->asset_id = $this->getLogTarget()->asset_id; //WEIRD . yeah. and fails.
+        //$this->assets()->attach($this->id, [
+        //    'component_id' => $this->id,
+        //    'created_by'   => auth()->user()->id,
+        //    'created_at'   => $this->getLogDate(), //TODO - this is a cahnge, is it OK?
+        //    'assigned_qty' => $this->getLogQuantity(),
+        //    'asset_id'     => $this->getLogTarget()->id,
+        //    'note'         => $this->getLogNote(),
+        //]); WTAF was this doing here?! DELETE ME.
+        if ($this->logAndSaveIfNeeded(ActionType::CheckinFrom)) {
+            event(new CheckoutableCheckedIn($this, $this->getLogTarget(), auth()->user(), $this->getLogNote()));
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
 
     public function isDeletable()

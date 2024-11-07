@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
@@ -54,8 +55,11 @@ class AssetModelFilesController extends Controller
             // Loop over the attached files and add them to the asset
             foreach ($request->file('file') as $file) {
                 $file_name = $request->handleFile('private_uploads/assetmodels/','model-'.$assetModel->id, $file);
-                
-                $assetModel->logUpload($file_name, e($request->get('notes')));
+
+                $assetModel->setLogFilename($file_name);
+                $assetModel->setLogNote(e($request->input('notes')));
+                $assetModel->logAndSaveIfNeeded(ActionType::Uploaded);
+                //$assetModel->logUpload($file_name, e($request->get('notes')));
             }
 
             // All done - report success

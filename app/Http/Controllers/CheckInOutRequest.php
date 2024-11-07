@@ -23,7 +23,7 @@ trait CheckInOutRequest
             default:
                 return User::findOrFail(request('assigned_user'));
         }
-
+        \Log::error("NO SUCH TARGET!!!!!");
         return null;
     }
 

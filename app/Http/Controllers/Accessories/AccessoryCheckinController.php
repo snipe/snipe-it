@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Accessory;
 use App\Models\AccessoryCheckout;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Contracts\View\View;
@@ -56,12 +57,12 @@ class AccessoryCheckinController extends Controller
         $checkin_hours = date('H:i:s');
         $checkin_at = date('Y-m-d H:i:s');
         if ($request->filled('checkin_at')) {
-            $checkin_at = $request->input('checkin_at').' '.$checkin_hours;
+            $accessory->setLogDate(new Carbon($request->input('checkin_at').' '.$checkin_hours));
         }
+        $accessory->setLogTarget($accessory_checkout);
 
         // Was the accessory updated?
-        if ($accessory_checkout->delete()) {
-            event(new CheckoutableCheckedIn($accessory, $accessory_checkout->assignedTo, auth()->user(), $request->input('note'), $checkin_at));
+        if ($accessory->checkIn()) {
 
             session()->put(['redirect_option' => $request->get('redirect_option')]);
 

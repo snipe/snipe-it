@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\ActionType;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
@@ -18,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Laravel\Passport\HasApiTokens;
 use Watson\Validating\ValidatingTrait;
 
@@ -33,10 +37,15 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use Notifiable;
     use Presentable;
     use Searchable;
+    use Loggable;
+
+    // that 'use Loggable' thing is NEW!
 
     protected $hidden = ['password', 'remember_token', 'permissions', 'reset_password_code', 'persist_code'];
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
+
+    public static array $hide_changes = ['password', 'remember_token', 'two_factor_secret', 'reset_password_code', 'persist_code'];
 
     protected $fillable = [
         'activated',
@@ -885,6 +894,95 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
 
 
+
+    }
+
+    public function merge(self $bad_user)
+    {
+        //okay, we have _some_ logic in "MergeUsersByUsername" - the console command.
+        // and _some_ logic is in the LogListener thing.
+        // from the console command, we have this:
+
+        // Walk the list of assets
+        foreach ($bad_user->assets as $asset) {
+            Log::info('Updating asset '.$asset->asset_tag.' '.$asset->id.' to user '.$this->id);
+            $asset->assigned_to = $this->id;
+            if (!$asset->save()) {
+                $this->error('Could not update assigned_to field on asset '.$asset->asset_tag.' '.$asset->id.' to user '.$this->id);
+                $this->error('Error saving: '.$asset->getErrors());
+            }
+        }
+
+        // Walk the list of licenses
+        foreach ($bad_user->licenses as $license) {
+            Log::info('Updating license '.$license->name.' '.$license->id.' to user '.$this->id);
+            $bad_user->licenses()->updateExistingPivot($license->id, ['assigned_to' => $this->id]);
+        }
+
+        // Walk the list of consumables
+        foreach ($bad_user->consumables as $consumable) {
+            Log::info('Updating consumable '.$consumable->id.' to user '.$this->id);
+            $bad_user->consumables()->updateExistingPivot($consumable->id, ['assigned_to' => $this->id]);
+        }
+
+        // Walk the list of accessories
+        foreach ($bad_user->accessories as $accessory) {
+            Log::info('Updating accessory '.$accessory->id.' to user '.$this->id);
+            $bad_user->accessories()->updateExistingPivot($accessory->id, ['assigned_to' => $this->id]);
+        }
+
+        // Walk the list of logs
+        foreach ($bad_user->userlog as $log) {
+            Log::info('Updating action log record '.$log->id.' to user '.$this->id);
+            $log->target_id = $this->id;
+            $log->save();
+        }
+
+        // Update any manager IDs
+        Log::info('Updating managed user records to user '.$this->id);
+        User::where('manager_id', '=', $bad_user->id)->update(['manager_id' => $this->id]);
+
+        // Update location manager IDs
+        foreach ($bad_user->managedLocations as $managedLocation) {
+            Log::info('Updating managed location record '.$managedLocation->name.' to manager '.$this->id);
+            $managedLocation->manager_id = $this->id;
+            $managedLocation->save();
+        }
+
+        foreach ($bad_user->uploads as $upload) {
+            Log::info('Updating upload log record '.$upload->id.' to user '.$this->id);
+            $upload->item_id = $this->id;
+            $upload->save();
+        }
+
+        foreach ($bad_user->acceptances as $acceptance) {
+            Log::info('Updating acceptance log record '.$acceptance->id.' to user '.$this->id);
+            $acceptance->item_id = $this->id;
+            $acceptance->save();
+        }
+
+        // Mark the user as deleted
+        Log::info('Marking the user as deleted');
+        $bad_user->deleted_at = Carbon::now()->timestamp;
+        $bad_user->save();
+
+        //This used to be in LogListener -
+        $to_from_array = [
+            'to_id'         => $this->id,
+            'to_username'   => $this->username,
+            'from_id'       => $bad_user->id,
+            'from_username' => $bad_user->username,
+        ];
+
+        // Add a record to the users being merged FROM
+        Log::debug('Users merged: '.$bad_user->id.' ('.$bad_user->username.') merged into '.$this->id.' ('.$this->username.')');
+        $bad_user->setLogNote(trans('general.merged_log_this_user_from', $to_from_array));
+        $bad_user->setLogTarget($this);
+        $bad_user->logAndSaveIfNeeded(ActionType::Merged);
+
+        $this->setLogTarget($bad_user);
+        $this->setLogNote(trans('general.merged_log_this_user_into', $to_from_array));
+        $this->logAndSaveIfNeeded(ActionType::Merged);
 
     }
 }

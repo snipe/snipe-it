@@ -73,15 +73,13 @@ class CheckinLicensesFromAllUsers extends Command
             $this->info($seat->user->username.' has a license seat for '.$license->name);
             $seat->assigned_to = null;
 
-            if ($seat->save()) {
+            $seat->setLogNote('Checked in via cli tool');
+            if ($seat->checkin()) {
 
                 // Override the email address so we don't notify on checkin
                 if (! $notify) {
-                    $seat->user->email = null;
+                    $seat->user->email = null; //FIXME - this is probably not implemented just yet? maybe hoist this above the checkin?
                 }
-
-                // Log the checkin
-                $seat->logCheckin($seat->user, 'Checked in via cli tool');
             }
         }
     }

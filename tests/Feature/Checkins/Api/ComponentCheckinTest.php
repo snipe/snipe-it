@@ -109,6 +109,7 @@ class ComponentCheckinTest extends TestCase implements TestsFullMultipleCompanie
             ->assertOk()
             ->assertStatusMessageIs('success');
 
+        dump($component->fresh()->assets);
         $this->assertEmpty($component->fresh()->assets);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) use ($user, $component) {

@@ -6,6 +6,7 @@ use App\Models\Asset;
 use App\Models\Statuslabel;
 use App\Models\User;
 use App\Events\CheckoutableCheckedIn;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 
 class AssetImporter extends ItemImporter
@@ -155,11 +156,11 @@ class AssetImporter extends ItemImporter
             $item['asset_eol_date'] = $this->parseOrNullDate('asset_eol_date');
         }
 
-
+        //dump($item);
         if ($editingAsset) {
-            $asset->update($item);
+            $asset->update($item); // FIXME - I don't know why this is happening like that?
         } else {
-            $asset->fill($item);
+            $asset->fill($item); // FIXME - this is wrong, and always has been wrong. ->except(['assigned_to','assigned_type' /* or something? */])
         }
 
         // If we're updating, we don't want to overwrite old fields.
@@ -181,12 +182,21 @@ class AssetImporter extends ItemImporter
             //-- the class that needs to use it (command importer or GUI importer inside the project).
             if (isset($target) && ($target !== false)) {
                 if (!is_null($asset->assigned_to)){
-                    if ($asset->assigned_to != $target->id) {
-                        event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), auth()->user(), 'Checkin from CSV Importer', $checkin_date));
+                    //asset was already checked out to a different target (or different target _class_ )
+                    //TODO - can we add a test around this? Checking out from location_id 7 to user_id 7 would've not caused a checkin before.
+                    if ($asset->assigned_to != $target->id || $asset->assigned_Type != $target::class) {
+                        //$asset->setLogTarget($target); //FIXME: não preciso - é mau
+                        $asset->setLogNote('Checkin from CSV Importer');
+                        $asset->setLogDate(new Carbon($checkin_date));
+                        $asset->saveAndCheckin();
                     }
                 }
-
-                $asset->fresh()->checkOut($target, $this->created_by, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
+                $asset->refresh();
+                $asset->setLogTarget($target);
+                $asset->setLogNote('Checkout from CSV Importer');
+                $asset->setLogDate(new Carbon($checkout_date));
+                $asset->checkOutAndSave();
+                //$asset->fresh()->checkOut($target, $this->created_by, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
             }
 
             return;

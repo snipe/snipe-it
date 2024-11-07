@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
@@ -41,7 +42,10 @@ class AssetModelsFilesController extends Controller
 
                 $file_name = $request->handleFile('private_uploads/assetmodels/','model-'.$model->id,$file);
 
-                $model->logUpload($file_name, $request->get('notes'));
+                $model->setLogFilename($file_name);
+                $model->setLogNote($request->input('notes'));
+                $model->logAndSaveIfNeeded(ActionType::Uploaded);
+                //$model->logUpload($file_name, $request->get('notes'));
             }
 
             return redirect()->back()->withFragment('files')->with('success', trans('general.file_upload_success'));

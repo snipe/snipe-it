@@ -12,6 +12,9 @@ use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder as RealBuilder;
+
+//FIXME what the F is this?
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
@@ -285,18 +288,12 @@ class ComponentsController extends Controller
         if ($component->numRemaining() >= $request->get('assigned_qty')) {
 
             $asset = Asset::find($request->input('assigned_to'));
-            $component->assigned_to = $request->input('assigned_to');
+            $component->setLogTarget($asset);
 
-            $component->assets()->attach($component->id, [
-                'component_id' => $component->id,
-                'created_at' => Carbon::now(),
-                'assigned_qty' => $request->get('assigned_qty', 1),
-                'created_by' => auth()->id(),
-                'asset_id' => $request->get('assigned_to'),
-                'note' => $request->get('note'),
-            ]);
+            $component->setLogQuantity($request->input('assigned_qty'));
+            $component->setLogNote($request->input('note'));
+            $component->checkout();
 
-            $component->logCheckout($request->input('note'), $asset);
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkout.success')));
         }
@@ -314,6 +311,13 @@ class ComponentsController extends Controller
      */
     public function checkin(Request $request, $component_asset_id) : JsonResponse
     {
+        //$component_asset = Component::whereHas('assets', function (RealBuilder $query) use ($component_asset_id) {
+        //    $query->where('components_assets.id', $component_asset_id);
+        //})->get();
+        //\Log::error(Component::whereHas('assets', function (RealBuilder $query) use ($component_asset_id) {
+        //    $query->where('components_assets.id', $component_asset_id);
+        //})->toSql());
+        //dump($component_asset);
         if ($component_assets = DB::table('components_assets')->find($component_asset_id)) {
             if (is_null($component = Component::find($component_assets->component_id))) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.not_found')));
@@ -331,26 +335,11 @@ class ComponentsController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('error', null, 'Checkin quantity must be between 1 and ' . $max_to_checkin));
             }
 
-            // Validation passed, so let's figure out what we have to do here.
-            $qty_remaining_in_checkout = ($component_assets->assigned_qty - (int)$request->input('checkin_qty', 1));
-
-            // We have to modify the record to reflect the new qty that's
-            // actually checked out.
-            $component_assets->assigned_qty = $qty_remaining_in_checkout;
-
-            Log::debug($component_asset_id.' - '.$qty_remaining_in_checkout.' remaining in record '.$component_assets->id);
-
-            DB::table('components_assets')->where('id', $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);
-
-            // If the checked-in qty is exactly the same as the assigned_qty,
-            // we can simply delete the associated components_assets record
-            if ($qty_remaining_in_checkout === 0) {
-                DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
-            }
-
-            $asset = Asset::find($component_assets->asset_id);
-
-            event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
+            $component->setLogTarget($component_assets); //FIXME TODO - hrm. This is 'weird'. okay, now it's _very_ weird.
+            //$component->log_target =
+            $component->setLogQuantity($request->input('checkin_qty', 1));
+            $component->setLogNote($request->input('note'));
+            $component->checkInAndSave();
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkin.success')));
         }

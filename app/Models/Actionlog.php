@@ -263,27 +263,6 @@ class Actionlog extends SnipeModel
     }
 
     /**
-     * Saves the log record with the action type
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v3.0]
-     * @return bool
-     */
-    public function logaction($actiontype)
-    {
-        $this->action_type = $actiontype;
-        $this->remote_ip =  request()->ip();
-        $this->user_agent = request()->header('User-Agent');
-        $this->action_source = $this->determineActionSource();
-
-        if ($this->save()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Calculate the number of days until the next audit
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -344,42 +323,6 @@ class Actionlog extends SnipeModel
                  ->orderBy('item_id', 'asc')
                  ->orderBy('created_at', 'asc')
                  ->get();
-    }
-
-    /**
-     * Determines what the type of request is so we can log it to the action_log
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since v6.3.0
-     * @return string
-     */
-    public function determineActionSource(): string
-    {
-        // This is a manually set source
-        if($this->source) {
-            return $this->source;
-        }
-
-        // This is an API call
-        if (((request()->header('content-type') && (request()->header('accept'))=='application/json'))
-            && (starts_with(request()->header('authorization'), 'Bearer '))) {
-            return 'api';
-        }
-
-       // This is probably NOT an API call
-        if (request()->filled('_token')) {
-            return 'gui';
-        }
-
-        // We're not sure, probably cli
-        return 'cli/unknown';
-
-    }
-
-    // Manually sets $this->source for determineActionSource()
-    public function setActionSource($source = null): void
-    {
-        $this->source = $source;
     }
 
     public function scopeOrderByCreatedBy($query, $order)

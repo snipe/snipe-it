@@ -2,7 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\ActionType;
+use App\Events\CheckoutableCheckedIn;
+use App\Events\CheckoutableCheckedOut;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Loggable;
 use App\Notifications\CheckinLicenseNotification;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Presenters\Presentable;
@@ -93,6 +97,27 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     public function asset()
     {
         return $this->belongsTo(\App\Models\Asset::class, 'asset_id')->withTrashed();
+    }
+
+    public function checkin()
+    {
+        // Update the asset data
+        $this->assigned_to = null;
+        $this->asset_id = null;
+        if ($this->logAndSaveIfNeeded(ActionType::CheckinFrom)) {
+            event(new CheckoutableCheckedIn($this, $this->getLogTarget(), auth()->user(), $this->getLogNote()));
+            return true;
+        }
+        return false;
+    }
+
+    public function checkout()
+    {
+        if ($this->logAndSaveIfNeeded(ActionType::Checkout)) {
+            event(new CheckoutableCheckedOut($this, $this->getLogTarget(), auth()->user(), $this->getLogNote()));
+            return true;
+        }
+        return false;
     }
 
     /**

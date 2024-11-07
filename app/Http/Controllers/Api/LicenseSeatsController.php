@@ -132,19 +132,18 @@ class LicenseSeatsController extends Controller
         if (is_null($target)){
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Target not found'));
         }
+        $licenseSeat->setLogTarget($target);
+        $licenseSeat->setLogNote($request->input('note'));
 
-        if ($licenseSeat->save()) {
-
-            if ($is_checkin) {
-                $licenseSeat->logCheckin($target, $request->input('note'));
-
+        //since we are, effectively, going seat-by-seat here, should this really live on the licenseSeat itself?
+        if ($is_checkin) {
+            if ($licenseSeat->checkin()) {
                 return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
             }
-
-            // in this case, relevant fields are touched but it's not a checkin operation. so it must be a checkout operation.
-            $licenseSeat->logCheckout($request->input('note'), $target);
-
-            return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
+        } else {
+            if ($licenseSeat->checkout()) {
+                return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
+            }
         }
 
         return Helper::formatStandardApiResponse('error', null, $licenseSeat->getErrors());

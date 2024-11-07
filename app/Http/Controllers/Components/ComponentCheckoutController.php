@@ -102,18 +102,10 @@ class ComponentCheckoutController extends Controller
             return redirect()->route('components.checkout.show', $componentId)->with('error', trans('general.error_user_company'));
         }
 
-        // Update the component data
-        $component->asset_id = $request->input('asset_id');
-        $component->assets()->attach($component->id, [
-            'component_id' => $component->id,
-            'created_by' => auth()->user()->id,
-            'created_at' => date('Y-m-d H:i:s'),
-            'assigned_qty' => $request->input('assigned_qty'),
-            'asset_id' => $request->input('asset_id'),
-            'note' => $request->input('note'),
-        ]);
-
-        event(new CheckoutableCheckedOut($component, $asset, auth()->user(), $request->input('note')));
+        $component->setLogQuantity($request->input('assigned_qty', 1));
+        $component->setLogTarget($asset);
+        $component->setLogNote($request->input('note'));
+        $component->checkInAndSave();
 
         $request->request->add(['checkout_to_type' => 'asset']);
         $request->request->add(['assigned_asset' => $asset->id]);

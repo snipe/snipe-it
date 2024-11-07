@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -918,7 +919,7 @@ class AssetsController extends Controller
          *
          * @see \App\Observers\AssetObserver::updating()
          */
-        $asset->unsetEventDispatcher();
+        //$asset->unsetEventDispatcher(); //FIXME - make sure this owrks!
 
         $asset->next_audit_date = $request->input('next_audit_date');
         $asset->last_audit_date = date('Y-m-d H:i:s');
@@ -934,15 +935,14 @@ class AssetsController extends Controller
          * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
          * We have to invoke this manually because of the unsetEventDispatcher() above.)
          */
-        if ($asset->isValid() && $asset->save()) {
+        $asset->setLogNote($request->input('note'));
+        // Create the image (if one was chosen.)
+        if ($request->hasFile('image')) {
+            $asset->setLogFilename($request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('image')));
+        }
+        if ($asset->AuditAndSave()) {
 
-            $file_name = null;
-            // Create the image (if one was chosen.)
-            if ($request->hasFile('image')) {
-                $file_name = $request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('image'));
-            }
-
-            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
+            //$asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
             return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
 

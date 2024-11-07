@@ -274,27 +274,14 @@ class AccessoriesController extends Controller
      */
     public function checkout(AccessoryCheckoutRequest $request, Accessory $accessory)
     {
+        //\Log::error("Am I even in the right place?!");
         $this->authorize('checkout', $accessory);
-        $target = $this->determineCheckoutTarget();
-        $accessory->checkout_qty = $request->input('checkout_qty', 1);
-
-        for ($i = 0; $i < $accessory->checkout_qty; $i++) {
-
-            $accessory_checkout = new AccessoryCheckout([
-                'accessory_id' => $accessory->id,
-                'created_at' => Carbon::now(),
-                'assigned_to' => $target->id,
-                'assigned_type' => $target::class,
-                'note' => $request->input('note'),
-            ]);
-
-            $accessory_checkout->created_by = auth()->id();
-            $accessory_checkout->save();
-        }
-
-        // Set this value to be able to pass the qty through to the event
-        event(new CheckoutableCheckedOut($accessory, $target, auth()->user(), $request->input('note')));
-
+        $accessory->setLogTarget($this->determineCheckoutTarget());
+        $accessory->setLogQuantity($request->input('checkout_qty', 1));
+        $accessory->setLogNote($request->input('note'));
+        //$accessory->checkout_qty = ;
+        //dump($accessory->getLogTarget());
+        $accessory->checkout();
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
 
     }
@@ -319,13 +306,11 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessory_checkout->accessory_id);
         $this->authorize('checkin', $accessory);
 
-        $accessory->logCheckin(User::find($accessory_checkout->assigned_to), $request->input('note'));
+        $accessory->setLogNote($request->input('note'));
+        $accessory->setLogTarget($accessory_checkout); //need to do some 'magic' to convert this to a user (or location), elsewhere.
 
         // Was the accessory updated?
-        if ($accessory_checkout->delete()) {
-            if (! is_null($accessory_checkout->assigned_to)) {
-                $user = User::find($accessory_checkout->assigned_to);
-            }
+        if ($accessory->checkIn()) {
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
         }

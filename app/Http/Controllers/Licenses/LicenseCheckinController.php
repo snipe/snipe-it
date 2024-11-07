@@ -64,46 +64,27 @@ class LicenseCheckinController extends Controller
 
         $this->authorize('checkout', $license);
 
-        if (! $license->reassignable) {
+        if (!$license->reassignable) { // FIXME/TODO - should _this_ go into the checkin method? YES! No?
             // Not allowed to checkin
             Session::flash('error', trans('admin/licenses/message.checkin.not_reassignable') . '.');
 
             return redirect()->back()->withInput();
         }
 
-        // Declare the rules for the form validation
-        $rules = [
-            'notes'   => 'string|nullable',
-        ];
-
-        // Create a new validator instance from our validation rules
-        $validator = Validator::make($request->all(), $rules);
-
-        // If validation fails, we'll exit the operation now.
-        if ($validator->fails()) {
-            // Ooops.. something went wrong
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
-
         if($licenseSeat->assigned_to != null){
-            $return_to = User::find($licenseSeat->assigned_to);
+            $licenseSeat->setLogTarget(User::find($licenseSeat->assigned_to));
         } else {
-            $return_to = Asset::find($licenseSeat->asset_id);
+            $licenseSeat->setLogTarget(Asset::find($licenseSeat->asset_id));
         }
 
-        // Update the asset data
-        $licenseSeat->assigned_to = null;
-        $licenseSeat->asset_id = null;
-        $licenseSeat->notes = $request->input('notes');
+        $licenseSeat->notes = $request->input('notes'); //huh. Weird.
+        $licenseSeat->setLogNote($request->input('notes')); //yeah, weird.
 
         session()->put(['redirect_option' => $request->get('redirect_option')]);
 
 
         // Was the asset updated?
-        if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedIn($licenseSeat, $return_to, auth()->user(), $request->input('notes')));
-
-
+        if ($licenseSeat->checkin()) { //here is the thing - this becomes ->logAndSaveIfNeeded()
             return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkin.success'));
         }
 
@@ -139,11 +120,11 @@ class LicenseCheckinController extends Controller
             ->get();
 
         foreach ($licenseSeatsByUser as $user_seat) {
-            $user_seat->assigned_to = null;
+            $user_seat->assigned_to = null; //FIXME/TODO - is this already handled in the checkin method?
 
-            if ($user_seat->save()) {
+            $user_seat->setLogNote(trans('admin/licenses/general.bulk.checkin_all.log_msg'));
+            if ($user_seat->checkin()) {
                 Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
-                $user_seat->logCheckin($user_seat->user, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
             }
         }
 
@@ -154,11 +135,11 @@ class LicenseCheckinController extends Controller
 
         $count = 0;
         foreach ($licenseSeatsByAsset as $asset_seat) {
-            $asset_seat->asset_id = null;
+            $asset_seat->asset_id = null; //FIXME/TODO - don't we have this already?
 
-            if ($asset_seat->save()) {
+            $asset_seat->setLogNote(trans('admin/licenses/general.bulk.checkin_all.log_msg'));
+            if ($asset_seat->checkin()) {
                 Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
-                $asset_seat->logCheckin($asset_seat->asset, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
                 $count++;
             }
         }

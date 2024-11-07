@@ -11,6 +11,7 @@ use App\Models\Asset;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -69,32 +70,42 @@ class LicenseCheckoutController extends Controller
 
         $licenseSeat = $this->findLicenseSeatToCheckout($license, $seatId);
         $licenseSeat->created_by = auth()->id();
-        $licenseSeat->notes = $request->input('notes');
-        
-
-        $checkoutMethod = 'checkoutTo'.ucwords(request('checkout_to_type'));
+        $licenseSeat->notes = $request->input('notes'); //weird how this dupes. TODO - should this be part of the checkout method?
+        $licenseSeat->setLogNote($request->input('notes'));
 
         if ($request->filled('asset_id')) {
+            if (is_null($target = Asset::find(request('asset_id')))) {
+                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
+            }
+            $licenseSeat->asset_id = request('asset_id');
 
-            $checkoutTarget = $this->checkoutToAsset($licenseSeat);
-            $request->request->add(['assigned_asset' => $checkoutTarget->id]);
+            // Override asset's assigned user if available
+            if ($target->checkedOutToUser()) {
+                $licenseSeat->assigned_to = $target->assigned_to;
+            }
+
+            $request->request->add(['assigned_asset' => $target->id]);
             session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'asset']);
 
         } elseif ($request->filled('assigned_to')) {
-            $checkoutTarget = $this->checkoutToUser($licenseSeat);
-            $request->request->add(['assigned_user' => $checkoutTarget->id]);
+            // Fetch the target and set the license user
+            if (is_null($target = User::find(request('assigned_to')))) {
+                return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
+            }
+            $licenseSeat->assigned_to = request('assigned_to');
+
+            $request->request->add(['assigned_user' => $target->id]);
             session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'user']);
+        } else {
+            throw new \Exception("No valid checkout target for license");
         }
 
-
-
-        if ($checkoutTarget) {
+        $licenseSeat->setLogTarget($target);
+        if ($licenseSeat->checkout()) {
             return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkout.success'));
         }
 
-
-
-        return redirect()->route('licenses.index')->with('error', trans('Something went wrong handling this checkout.'));
+        return redirect()->route('licenses.index')->with('error', trans('Something went wrong handling this checkout.')); //TODO - translate?
     }
 
     protected function findLicenseSeatToCheckout($license, $seatId)
@@ -103,54 +114,18 @@ class LicenseCheckoutController extends Controller
 
         if (! $licenseSeat) {
             if ($seatId) {
-                throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.unavailable')));
+                throw new HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.unavailable')));
             }
-            
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.not_enough_seats')));
+
+            throw new HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.not_enough_seats')));
         }
 
         if (! $licenseSeat->license->is($license)) {
-            throw new \Illuminate\Http\Exceptions\HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.mismatch')));
+            throw new HttpResponseException(redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkout.mismatch')));
         }
 
         return $licenseSeat;
     }
-
-    protected function checkoutToAsset($licenseSeat)
-    {
-        if (is_null($target = Asset::find(request('asset_id')))) {
-            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.asset_does_not_exist'));
-        }
-        $licenseSeat->asset_id = request('asset_id');
-
-        // Override asset's assigned user if available
-        if ($target->checkedOutToUser()) {
-            $licenseSeat->assigned_to = $target->assigned_to;
-        }
-        if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
-            return $target;
-        }
-
-        return false;
-    }
-
-    protected function checkoutToUser($licenseSeat)
-    {
-        // Fetch the target and set the license user
-        if (is_null($target = User::find(request('assigned_to')))) {
-            return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.user_does_not_exist'));
-        }
-        $licenseSeat->assigned_to = request('assigned_to');
-
-        if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedOut($licenseSeat, $target, auth()->user(), request('notes')));
-            return $target;
-        }
-
-        return false;
-    }
-
     /**
      * Bulk checkin all license seats
      *

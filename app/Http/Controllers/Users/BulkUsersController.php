@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
-use App\Events\UserMerged;
+use App\Enums\ActionType;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
@@ -334,49 +334,50 @@ class BulkUsersController extends Controller
     protected function logItemCheckinAndDelete($items, $itemType)
     {
         foreach ($items as $item) {
-            $item_id = $item->id;
-            $logAction = new Actionlog();
+            if (gettype($item) == 'object' && get_class($item) != 'stdClass') {
+                $real_item = $item;
+            } else {
+                $item_id = $item->id;
 
-            if ($itemType == License::class){
-                $item_id = $item->license_id;
+                if ($itemType == License::class) {
+                    $item_id = $item->license_id; //FIXME - funkery happening here
+                    $real_item = License::find($item->license_id);
+                } else {
+                    $real_item = (new $itemType())::find($item_id);
+                }
+            }
+            if (property_exists($item, 'assigned_type')) {
+                $assigned_to = (new ($item->assigned_type))::find($item->assigned_to);
+            } else {
+                $assigned_to = User::find($item->assigned_to);
             }
 
-            $logAction->item_id = $item_id;
-            // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
-            $logAction->item_type = $itemType;
-            $logAction->target_id = $item->assigned_to;
-            $logAction->target_type = User::class;
-            $logAction->created_by = auth()->id();
-            $logAction->note = 'Bulk checkin items';
-            $logAction->logaction('checkin from');
+            $real_item->setLogTarget($assigned_to); // will this work?!!?!?!?
+            //$logAction->target_id = $item->assigned_to;
+            //$logAction->target_type = User::class;
+            $real_item->setLogNote('Bulk checkin items');
+            $real_item->setLogAction(ActionType::CheckinFrom);
+            $real_item->logAndSaveIfNeeded(ActionType::CheckinFrom);
         }
     }
 
     private function logAccessoriesCheckin(Collection $accessoryUserRows): void
     {
         foreach ($accessoryUserRows as $accessoryUserRow) {
-            $logAction = new Actionlog();
-            $logAction->item_id = $accessoryUserRow->accessory_id;
-            $logAction->item_type = Accessory::class;
-            $logAction->target_id = $accessoryUserRow->assigned_to;
-            $logAction->target_type = User::class;
-            $logAction->created_by = auth()->id();
-            $logAction->note = 'Bulk checkin items';
-            $logAction->logaction('checkin from');
+            $accessory = Accessory::find($accessoryUserRow->accessory_id);
+            $accessory->setLogTarget(User::find($accessoryUserRow->assigned_to)); //FIXME - what if accessory was checked out to location?
+            $accessory->setLogNote('Bulk checkin items');
+            $accessory->logAndSaveIfNeeded(ActionType::CheckinFrom);
         }
     }
 
     private function logConsumablesCheckin(Collection $consumableUserRows): void
     {
         foreach ($consumableUserRows as $consumableUserRow) {
-            $logAction = new Actionlog();
-            $logAction->item_id = $consumableUserRow->consumable_id;
-            $logAction->item_type = Consumable::class;
-            $logAction->target_id = $consumableUserRow->assigned_to;
-            $logAction->target_type = User::class;
-            $logAction->created_by = auth()->id();
-            $logAction->note = 'Bulk checkin items';
-            $logAction->logaction('checkin from');
+            $consumable = Consumable::find($consumableUserRow->consumable_id);
+            $consumable->setLogTarget(User::find($consumableUserRow->assigned_to));
+            $consumable->setLogNote('Bulk checkin items');
+            $consumable->logAndSaveIfNeeded(ActionType::CheckinFrom);
         }
     }
 
@@ -407,56 +408,11 @@ class BulkUsersController extends Controller
         // Get the users
         $merge_into_user = User::find($request->input('merge_into_id'));
         $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')->get();
-        $admin = User::find(auth()->id());
 
         // Walk users
         foreach ($users_to_merge as $user_to_merge) {
 
-            foreach ($user_to_merge->assets as $asset) {
-                Log::debug('Updating asset: '.$asset->asset_tag . ' to '.$merge_into_user->id);
-                $asset->assigned_to = $request->input('merge_into_id');
-                $asset->save();
-            }
-
-            foreach ($user_to_merge->licenses as $license) {
-                Log::debug('Updating license pivot: '.$license->id . ' to '.$merge_into_user->id);
-                $user_to_merge->licenses()->updateExistingPivot($license->id, ['assigned_to' => $merge_into_user->id]);
-            }
-
-            foreach ($user_to_merge->consumables as $consumable) {
-                Log::debug('Updating consumable pivot: '.$consumable->id . ' to '.$merge_into_user->id);
-                $user_to_merge->consumables()->updateExistingPivot($consumable->id, ['assigned_to' => $merge_into_user->id]);
-            }
-
-            foreach ($user_to_merge->accessories as $accessory) {
-                $user_to_merge->accessories()->updateExistingPivot($accessory->id, ['assigned_to' => $merge_into_user->id]);
-            }
-
-            foreach ($user_to_merge->userlog as $log) {
-                $log->target_id = $merge_into_user->id;
-                $log->save();
-            }
-
-            foreach ($user_to_merge->uploads as $upload) {
-                $upload->item_id = $merge_into_user->id;
-                $upload->save();
-            }
-
-            foreach ($user_to_merge->acceptances as $acceptance) {
-                $acceptance->item_id = $merge_into_user->id;
-                $acceptance->save();
-            }
-
-            User::where('manager_id', '=', $user_to_merge->id)->update(['manager_id' => $merge_into_user->id]);
-
-            foreach ($user_to_merge->managedLocations as $managedLocation) {
-                $managedLocation->manager_id = $merge_into_user->id;
-                $managedLocation->save();
-            }
-
-            $user_to_merge->delete();
-
-            event(new UserMerged($user_to_merge, $merge_into_user, $admin));
+            $merge_into_user->merge($user_to_merge);
 
         }
 

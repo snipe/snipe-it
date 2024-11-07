@@ -59,6 +59,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
 
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
+        dump($row);
         $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->actingAsForApi(User::factory()->superuser()->create());
@@ -74,8 +75,10 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
             ->with(['location', 'supplier', 'company', 'assignedAssets', 'defaultLoc', 'assetStatus', 'model.category', 'model.manufacturer'])
             ->where('serial', $row['serialNumber'])
             ->sole();
+        dump($newAsset);
 
         $assignee = User::query()->find($newAsset->assigned_to, ['id', 'first_name', 'last_name', 'email', 'username']);
+        dump($assignee);
 
         $activityLogs = ActionLog::query()
             ->where('item_type', Asset::class)
@@ -109,6 +112,14 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         $this->assertEquals($row['purchaseDate'], $newAsset->purchase_date->toDateString());
         $this->assertNull($newAsset->asset_eol_date);
         $this->assertEquals(0, $newAsset->eol_explicit);
+        /*
+         * FIXME FIXME FIXME please - I don't know what the right thing to do here is.
+        //Hrm. I'm not sure about this. So it's saying that the asset's location should be the same as the asset's rtd_location_id - but that doesn't make sense to me.
+        If an asset is assigned to a *user* who has no location, the *asset* should get no location. The user definitely has no location - I've dumped them, I've looked
+        at the factories. So the asset's location should be changed from its rtd_location_id to the User's location_id - which is definitively null. So I think this test
+        might be wrong? But, at the same time, if that's something we've been doing for years, we might have to keep doing that for years. Which is weird. Very, very weird.
+        Not sure what to do on this one.
+        */
         $this->assertEquals($newAsset->location_id, $newAsset->rtd_location_id);
         $this->assertEquals($row['purchaseCost'], $newAsset->purchase_cost);
         $this->assertNull($newAsset->order_number);
@@ -135,7 +146,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         $this->assertEquals(1, $newAsset->checkout_counter);
         $this->assertEquals(0, $newAsset->requests_counter);
         $this->assertEquals(0, $newAsset->byod);
-
+        die("By NOW");
         //Notes is never read.
         // $this->assertEquals($row['notes'], $newAsset->notes);
 
@@ -415,7 +426,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         $this->assertEquals($row['status'], $updatedAsset->assetStatus->name);
         $this->assertEquals($row['warrantyInMonths'], $updatedAsset->warranty_months);
         $this->assertEquals($row['supplierName'], $updatedAsset->supplier->name);
-        $this->assertEquals($row['location'], $updatedAsset->defaultLoc->name);
+        $this->assertEquals($row['location'], $updatedAsset->defaultLoc->name); //FIXME here, this is failing. For the same reason as above? Very weird.
         $this->assertEquals($row['companyName'], $updatedAsset->company->name);
         $this->assertEquals($row['location'], $updatedAsset->location->name);
         $this->assertEquals(1, $updatedAsset->checkout_counter);
@@ -464,15 +475,15 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
             'import' => $import->id,
             'column-mappings' => [
                 'Asset Tag'     => 'email',
-                'Category'      => 'location',
+                'Category'     => 'location', //okay, this is where the confusion is.
                 'Company'       => 'purchase_cost',
                 'Email'         => 'manufacturer',
                 'Full Name'     => 'supplier',
                 'Item Name'     => 'model_number',
-                'Location'      => 'username',
+                'Location'     => 'username', //wait, wat?
                 'Manufacturer'  => 'status',
                 'Model name'    => 'item_name',
-                'Model Number'  => 'category',
+                'Model Number' => 'category', //another wat. wat?
                 'Notes'         => 'asset_notes',
                 'Purchase Cost' => 'asset_model',
                 'Purchase Date' => 'company',
@@ -508,7 +519,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         $this->assertEquals($row['assigneeFullName'], $asset->supplier->name);
         $this->assertEquals($row['category'], $asset->defaultLoc->name);
         $this->assertEquals($row['purchaseDate'], $asset->company->name);
-        $this->assertEquals($row['category'], $asset->location->name);
+        $this->assertEquals($row['category'], $asset->location->name); // fIXME: this one is weird too. UGH. But weird for the same reason - importer treats location different than checkout.
         $this->assertEquals($row['notes'], $asset->notes);
         $this->assertNull($asset->asset_eol_date);
         $this->assertEquals(0, $asset->eol_explicit);

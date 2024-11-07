@@ -170,7 +170,7 @@ class AssetCheckinTest extends TestCase
             ]);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) {
-            return $event->action_date === '2023-01-02' && $event->note === 'hello';
+            return $event->action_date->isSameDay(new Carbon('2023-01-02')) && $event->note === 'hello';
         }, 1);
     }
 

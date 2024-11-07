@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Listeners\CheckoutableListener;
-use App\Listeners\LogListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -29,7 +28,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $subscribe = [
-        LogListener::class,
         CheckoutableListener::class,
     ];
 }
