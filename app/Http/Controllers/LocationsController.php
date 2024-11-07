@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Enums\ActionType;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
@@ -300,12 +301,6 @@ class LocationsController extends Controller
             }
 
             if ($location->restore()) {
-                $logaction = new Actionlog();
-                $logaction->item_type = Location::class;
-                $logaction->item_id = $location->id;
-                $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->created_by = auth()->id();
-                $logaction->logaction('restore');
 
                 return redirect()->route('locations.index')->with('success', trans('admin/locations/message.restore.success'));
             }
