@@ -52,19 +52,28 @@
                     </h2>
                 @endif
                 @if (request()->routeIs('report-templates.edit'))
-                    <div class="pull-right">
-                        <div class="form-inline {{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name">{{ trans('admin/reports/general.template_name') }}</label>
-                            <input
-                                class="form-control"
-                                placeholder=""
-                                name="name"
-                                type="text"
-                                id="name"
-                                value="{{ $template->name }}"
-                                required
-                            >
-                            {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                    <div class="row">
+                        <div class="col-md-7 col-md-offset-5">
+                            <div class="{{ $errors->has('name') ? ' has-error' : '' }}">
+                                <label
+                                    for="name"
+                                    class="col-md-4 control-label"
+                                >
+                                    {{ trans('admin/reports/general.template_name') }}
+                                </label>
+                                <div class="col-md-8">
+                                    <input
+                                        class="form-control"
+                                        placeholder=""
+                                        name="name"
+                                        type="text"
+                                        id="name"
+                                        value="{{ $template->name }}"
+                                        required
+                                    >
+                                </div>
+                                {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                            </div>
                         </div>
                     </div>
                 @endif
