@@ -1,16 +1,114 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Traits;
 
+use App\Models\Actionlog;
+use App\Models\Asset;
+use App\Models\License;
+use App\Models\LicenseSeat;
+use App\Models\Location;
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 trait Loggable
 {
     // an attribute for setting whether or not the item was imported
     public ?bool $imported = false;
+
+    public static function bootLoggable()
+    {
+        \Log::error("LOGGABLE IS BOOTING!!!!!!!!!!!");
+        
+        /**
+         * Listen to the Asset updating event. This fires automatically every time an existing asset is saved.
+         *
+         * @param  Asset  $asset
+         * @return void
+         */
+        static::saving(function ($model) {
+            $attributes = $model->getAttributes();
+            $attributesOriginal = $model->getRawOriginal();
+            $same_checkout_counter = false;
+            $same_checkin_counter = false;
+            $restoring_or_deleting = false;
+
+
+            // This is a gross hack to prevent the double logging when restoring an asset
+            if (array_key_exists('deleted_at', $attributes) && array_key_exists('deleted_at', $attributesOriginal)) {
+                $restoring_or_deleting = (($attributes['deleted_at'] != $attributesOriginal['deleted_at']));
+            }
+
+            if (array_key_exists('checkout_counter', $attributes) && array_key_exists('checkout_counter', $attributesOriginal)) {
+                $same_checkout_counter = (($attributes['checkout_counter'] == $attributesOriginal['checkout_counter']));
+            }
+
+            if (array_key_exists('checkin_counter', $attributes) && array_key_exists('checkin_counter', $attributesOriginal)) {
+                $same_checkin_counter = (($attributes['checkin_counter'] == $attributesOriginal['checkin_counter']));
+            }
+
+            // If the asset isn't being checked out or audited, log the update.
+            // (Those other actions already create log entries.)
+            if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
+                && ($same_checkout_counter) && ($same_checkin_counter)
+                && ((isset($attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date'] : null))
+                && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']) && (!$restoring_or_deleting)) {
+                $changed = [];
+
+                foreach ($model->getRawOriginal() as $key => $value) {
+                    if ($model->getRawOriginal()[$key] != $model->getAttributes()[$key]) {
+                        $changed[$key]['old'] = $model->getRawOriginal()[$key];
+                        $changed[$key]['new'] = $model->getAttributes()[$key];
+                    }
+                }
+
+                if (empty($changed)) {
+                    return;
+                }
+
+                $logAction = new Actionlog();
+                $logAction->item_type = self::class;
+                $logAction->item_id = $model->id;
+                $logAction->created_at = date('Y-m-d H:i:s');
+                $logAction->created_by = auth()->id();
+                $logAction->log_meta = json_encode($changed);
+                $logAction->logaction('update');
+            }
+        });
+        static::updating(function ($model) {
+
+        });
+
+        /**
+         * Listen to the Asset deleting event.
+         *
+         * @param  Asset  $asset
+         * @return void
+         */
+        static::deleting(function ($model) {
+            $logAction = new Actionlog();
+            $logAction->item_type = self::class;
+            $logAction->item_id = $model->id;
+            $logAction->created_at = date('Y-m-d H:i:s');
+            $logAction->created_by = auth()->id();
+            $logAction->logaction('delete');
+        });
+
+        /**
+         * Listen to the Asset deleting event.
+         *
+         * @param  Asset  $asset
+         * @return void
+         */
+        static::restoring(function ($model) {
+            $logAction = new Actionlog();
+            $logAction->item_type = self::class;
+            $logAction->item_id = $model->id;
+            $logAction->created_at = date('Y-m-d H:i:s');
+            $logAction->created_by = auth()->id();
+            $logAction->logaction('restore');
+
+        });
+    }
 
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
