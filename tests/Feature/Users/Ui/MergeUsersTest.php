@@ -192,7 +192,7 @@ class MergeUsersTest extends TestCase
         $this->assertEquals(3, $user_to_merge_into->refresh()->userlog->count());
 
         $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
-            ->post(route('users.merge.save', $user1->id),
+            ->post(route('users.merge.save'/*, $user1->id*/),
                 [
                     'ids_to_merge' => [$user1->id, $user2->id],
                     'merge_into_id' => $user_to_merge_into->id
@@ -203,9 +203,12 @@ class MergeUsersTest extends TestCase
         $this->followRedirects($response)->assertSee('Success');
 
         // This needs to be 2 more than the otherwise expected because the merge action itself is logged for the two merging users
-        $this->assertEquals(11, $user_to_merge_into->refresh()->userlog->count());
-        $this->assertEquals(2, $user1->refresh()->userlog->count());
-        $this->assertEquals(2, $user2->refresh()->userlog->count());
+        $this->assertEquals(11, $user_to_merge_into->refresh()->userlog->count()); // this one worked?
+        \Log::error("The userlog is: ".print_r($user1->refresh()->userlog->toArray(), true));
+        $this->assertTrue($user1->refresh()->trashed(), "User 1 should be trashed and isn't!");
+        $this->assertTrue($user2->refresh()->trashed(), "User 2 should be trashed and isn't!");
+        $this->assertEquals(2, $user1->refresh()->userlog->count()); //this one did not - only one.
+        $this->assertEquals(2, $user2->refresh()->userlog->count()); //also did not (and not sure why)
 
     }
 

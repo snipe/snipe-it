@@ -457,9 +457,12 @@ class BulkUsersController extends Controller
                 $managedLocation->save();
             }
 
-            $user_to_merge->delete();
+            $user_to_merge->setNote('Deleting user cuz he was MERGED');
+            $user_to_merge->delete(); //BELETED!
+            \Log::error("User has been DELETED!!!!!!!!!!!");
+            \Log::error("User's action log is: ".print_r($user_to_merge->userlog()->get()->toArray(), true));
 
-            event(new UserMerged($user_to_merge, $merge_into_user, $admin));
+            event(new UserMerged($user_to_merge, $merge_into_user, $admin)); //HATE
 
         }
 

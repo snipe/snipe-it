@@ -148,9 +148,9 @@ class BulkDeleteUsersTest extends TestCase
 
         // These assertions check against a bug where the wrong value from
         // consumables_users was being populated in action_logs.item_id.
-        $this->assertActionLogCheckInEntryFor($userA, $consumableA);
-        $this->assertActionLogCheckInEntryFor($userA, $consumableB);
-        $this->assertActionLogCheckInEntryFor($userC, $consumableA);
+        $this->assertActionLogCheckInEntryFor($userA, $consumableA, 'consumable A, user A');
+        $this->assertActionLogCheckInEntryFor($userA, $consumableB, 'consumable B, userA');
+        $this->assertActionLogCheckInEntryFor($userC, $consumableA, 'consumable A, user C');
     }
 
     public function test_license_seats_can_be_bulk_checked_in()
@@ -246,8 +246,9 @@ class BulkDeleteUsersTest extends TestCase
         }
     }
 
-    private function assertActionLogCheckInEntryFor(User $user, Model $model): void
+    private function assertActionLogCheckInEntryFor(User $user, Model $model, $message = null): void
     {
+        \Log::error("IF this fails the message is $message");
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'checkin from',
             'target_id' => $user->id,

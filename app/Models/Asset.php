@@ -403,7 +403,7 @@ class Asset extends Depreciable
         $this->last_checkout = $checkout_at;
         $this->name = $name;
 
-        $this->assignedTo()->associate($target);
+        $this->assignedTo()->associate($target); //THIS is causing the save?
 
         if ($location != null) {
             $this->location_id = $location;
@@ -423,7 +423,7 @@ class Asset extends Depreciable
             $originalValues['action_date'] = date('Y-m-d H:i:s');
         }
 
-        if ($this->save()) {
+        if ($this->saveQuietly()) { //THIS is the save that fires that's making the update FIXME - on checkout, this causes an update.
             if (is_int($admin)) {
                 $checkedOutBy = User::findOrFail($admin);
             } elseif ($admin && get_class($admin) === \App\Models\User::class) {
@@ -431,7 +431,7 @@ class Asset extends Depreciable
             } else {
                 $checkedOutBy = auth()->user();
             }
-            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues));
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues)); //THIS is probably causing the checkout?
 
             $this->increment('checkout_counter', 1);
 

@@ -49,7 +49,10 @@ trait Loggable
         });
 
         static::deleting(function ($model) { //TODO - is this only for 'hard' delete? Or soft?
-            \Log::error("DELETING TRIGGER HAS FIRED!!!!!!!!!!!!!!!");
+            \Log::error("DELETING TRIGGER HAS FIRED!!!!!!!!!!!!!!! for id: ".$model->id." old log_message was: ".$model->log_message);
+            if (self::class == \App\Models\User::class) { //FIXME - Janky AF!
+                $model->setTarget($model); //FIXME - this makes *NO* sense!!!!
+            }
             $model->setLogMessage(ActionType::Delete);
         });
 
@@ -97,8 +100,9 @@ trait Loggable
             // DO COMMIT HERE? TODO FIXME
         });
         static::deleted(function ($model) {
-            \Log::error("Deleted callback has fired!!!!!!!!!!! I guess that means do stuff here?");
-            $model->logWithoutSave(); //TODO - if we do commits up there, we should do them here too?
+            \Log::error("Deleted callback has fired!!!!!!!!!!! I guess that means do stuff here? For id: ".$model->id);
+            $results = $model->logWithoutSave(); //TODO - if we do commits up there, we should do them here too?
+            \Log::error("result of logging without save? ".($results ? 'true' : 'false'));
         });
         static::restored(function ($model) {
             \Log::error("RestorED callback firing.");
@@ -114,10 +118,10 @@ trait Loggable
 
     // and THIS is the main, primary logging system
     // it *can* be called on its own, but in *general* you should let it trigger from the 'save'
-    public function logWithoutSave(ActionType $logaction = null)
+    public function logWithoutSave(ActionType $log_action = null): bool
     {
-        if ($logaction) {
-            $this->setLogMessage($logaction);
+        if ($log_action) {
+            $this->setLogMessage($log_action);
         }
         $logAction = new Actionlog();
         $logAction->item_type = self::class;
@@ -138,7 +142,9 @@ trait Loggable
         if ($this->location_override) {
             $logAction->location_id = $this->location->id;
         }
-        $logAction->logaction($this->log_message);
+
+        \Log::error("Here is the logaction BEFORE we save it ($this->log_message)...".print_r($logAction->toArray(), true));
+        return $logAction->logaction($this->log_message);
     }
 
     public function setLogMessage(ActionType $message)
