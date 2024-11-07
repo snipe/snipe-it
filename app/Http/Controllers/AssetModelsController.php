@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActionType;
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\StoreAssetModelRequest;
@@ -224,14 +225,8 @@ class AssetModelsController extends Controller
                 return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.asset_model')]));
             }
 
+            $model->setLogMessage(ActionType::Restore);
             if ($model->restore()) {
-                $logaction = new Actionlog();
-                $logaction->item_type = AssetModel::class;
-                $logaction->item_id = $model->id;
-                $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->created_by = auth()->id();
-                $logaction->logaction('restore');
-
 
                 // Redirect them to the deleted page if there are more, otherwise the section index
                 $deleted_models = AssetModel::onlyTrashed()->count();

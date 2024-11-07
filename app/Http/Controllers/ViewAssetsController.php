@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActionType;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -93,17 +94,18 @@ class ViewAssetsController extends Controller
 
         $user = auth()->user();
 
-        $logaction = new Actionlog();
-        $logaction->item_id = $data['asset_id'] = $item->id;
-        $logaction->item_type = $fullItemType;
-        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
-
+        //$logaction = new Actionlog();
+        //$logaction->item_id = $data['asset_id'] = $item->id;
+        //$logaction->item_type = $fullItemType;
+        //$logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
+        $data['requested_date'] = date('Y-m-d H:i:s');
         if ($user->location_id) {
-            $logaction->location_id = $user->location_id;
+            $item->setLocation($user->location);
         }
 
-        $logaction->target_id = $data['user_id'] = auth()->id();
-        $logaction->target_type = User::class;
+        $item->setTarget($user);
+        //$logaction->target_id = $data['user_id'] = auth()->id();
+        //$logaction->target_type = User::class;
 
         $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
@@ -122,7 +124,7 @@ class ViewAssetsController extends Controller
         if (($item_request = $item->isRequestedBy($user)) || $cancel_by_admin) {
             $item->cancelRequest($requestingUser);
             $data['item_quantity'] = ($item_request) ? $item_request->qty : 1;
-            $logaction->logaction('request_canceled');
+            $item->logWithoutSave(ActionType::RequestCanceled);
 
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
                 $settings->notify(new RequestAssetCancelation($data));
@@ -130,9 +132,9 @@ class ViewAssetsController extends Controller
 
             return redirect()->back()->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
         } else {
-            $item->request();
+            $item->request(); //!!!!!!!!!!!!!
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
-                $logaction->logaction('requested');
+                $item->logWithoutSave(ActionType::Requested);
                 $settings->notify(new RequestAssetNotification($data));
             }
 
@@ -163,25 +165,23 @@ class ViewAssetsController extends Controller
         $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
-        $logaction = new Actionlog();
-        $logaction->item_id = $data['asset_id'] = $asset->id;
-        $logaction->item_type = $data['item_type'] = Asset::class;
-        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
+        //$logaction = new Actionlog();
+        $data['asset_id'] = $asset->id;
+        $data['item_type'] = Asset::class;
+        $data['requested_date'] = date('Y-m-d H:i:s');
 
-        if ($user->location_id) {
-            $logaction->location_id = $user->location_id;
-        }
-        $logaction->target_id = $data['user_id'] = auth()->id();
-        $logaction->target_type = User::class;
+        $asset->setLocation = $user->location;
+        $asset->setTarget($user);
+        $data['user_id'] = auth()->id();
 
         // If it's already requested, cancel the request.
         if ($asset->isRequestedBy(auth()->user())) {
-            $asset->cancelRequest();
-            $asset->decrement('requests_counter', 1);
+            $asset->cancelRequest(); //wait, what?
+            $asset->decrement('requests_counter', 1); //this too
 
-            $logaction->logaction('request canceled');
+            $asset->logWithoutSave(ActionType::RequestCanceled);
             try {
-                $settings->notify(new RequestAssetCancelation($data));
+                $settings->notify(new RequestAssetCancelation($data)); //and probably this
             } catch (\Exception $e) {
                 Log::warning($e);
             }
@@ -189,11 +189,11 @@ class ViewAssetsController extends Controller
                 ->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
         }
 
-        $logaction->logaction('requested');
-        $asset->request();
-        $asset->increment('requests_counter', 1);
+        $asset->logWithoutSave(ActionType::Requested); //ARGH
+        $asset->request(); //HERE <-
+        $asset->increment('requests_counter', 1); //ARGH
         try {
-            $settings->notify(new RequestAssetNotification($data));
+            $settings->notify(new RequestAssetNotification($data)); // ANd this.
         } catch (\Exception $e) {
             Log::warning($e);
         }

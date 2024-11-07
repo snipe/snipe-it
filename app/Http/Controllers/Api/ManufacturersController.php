@@ -217,15 +217,9 @@ class ManufacturersController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('error', trans('general.not_deleted', ['item_type' => trans('general.manufacturer')])), 200);
             }
 
+            $manufacturer->setLogMessage('restore');
             if ($manufacturer->restore()) {
-
-                $logaction = new Actionlog();
-                $logaction->item_type = Manufacturer::class;
-                $logaction->item_id = $manufacturer->id;
-                $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->created_by = auth()->id();
-                $logaction->logaction('restore');
-
+                
                 return response()->json(Helper::formatStandardApiResponse('success', trans('admin/manufacturers/message.restore.success')), 200);
             }
 
