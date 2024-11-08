@@ -18,6 +18,7 @@ class CreateReportTemplatesTable extends Migration
             $table->integer('created_by')->nullable();
             $table->string('name');
             $table->json('options');
+            $table->softDeletes();
             $table->timestamps();
             $table->index('created_by');
         });
