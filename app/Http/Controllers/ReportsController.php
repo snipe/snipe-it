@@ -398,11 +398,12 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
         $customfields = CustomField::get();
         $report_templates = ReportTemplate::orderBy('name')->get();
-        // view needs template to render correctly, even if it is empty...
+
+        // The view needs a template to render correctly, even if it is empty...
         $template = new ReportTemplate;
 
-        // Set the report's input values if we were redirected back with
-        // validation errors so the report is populated as expected.
+        // Set the report's input values in the cases we were redirected back
+        // with validation errors so the report is populated as expected.
         if ($request->old()) {
             $template->name = $request->old('name');
             $template->options = $request->old();
