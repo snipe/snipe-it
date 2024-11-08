@@ -375,9 +375,10 @@ class BulkUsersController extends Controller
 
     private function logConsumablesCheckin(Collection $consumableUserRows): void
     {
+        \Log::error("Logging Consumables Checkin!");
         foreach ($consumableUserRows as $consumableUserRow) {
             $consumable = Consumable::find($consumableUserRow->consumable_id);
-            $consumable->setTarget(auth()->user());
+            $consumable->setTarget(User::find($consumableUserRow->assigned_to));
             $consumable->setNote('Bulk checkin items');
             $consumable->logWithoutSave(ActionType::CheckinFrom);
         }
