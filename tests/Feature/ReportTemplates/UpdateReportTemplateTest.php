@@ -14,14 +14,14 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
     public function testRequiresPermission()
     {
         $this->actingAs(User::factory()->create())
-            ->post($this->getRoute(ReportTemplate::factory()->create()))
+            ->post(route('report-templates.update', ReportTemplate::factory()->create()))
             ->assertNotFound();
     }
 
     public function testCannotUpdateAnotherUsersReportTemplate()
     {
         $this->actingAs(User::factory()->canViewReports()->create())
-            ->post($this->getRoute(ReportTemplate::factory()->create()))
+            ->post(route('report-templates.update', ReportTemplate::factory()->create()))
             ->assertNotFound();
     }
 
@@ -32,7 +32,7 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
         $reportTemplate = ReportTemplate::factory()->for($user, 'creator')->create();
 
         $this->actingAs($user)
-            ->post($this->getRoute($reportTemplate), [
+            ->post(route('report-templates.update', $reportTemplate), [
                 //
             ])
             ->assertSessionHasErrors([
@@ -56,7 +56,7 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
         ]);
 
         $this->actingAs($user)
-            ->post($this->getRoute($reportTemplate), [
+            ->post(route('report-templates.update', $reportTemplate), [
                 'name' => 'Updated Name',
                 'id' => 1,
                 'company' => 1,
@@ -70,10 +70,5 @@ class UpdateReportTemplateTest extends TestCase implements TestsPermissionsRequi
         $this->assertEquals([], $reportTemplate->selectValues('by_category_id'));
         $this->assertEquals(1, $reportTemplate->checkmarkValue('company'));
         $this->assertEquals([3], $reportTemplate->selectValues('by_company_id'));
-    }
-
-    private function getRoute(ReportTemplate $reportTemplate): string
-    {
-        return route('report-templates.update', $reportTemplate);
     }
 }

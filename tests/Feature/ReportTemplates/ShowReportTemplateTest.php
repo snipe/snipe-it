@@ -14,7 +14,7 @@ class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequire
     public function testRequiresPermission()
     {
         $this->actingAs(User::factory()->create())
-            ->get($this->getRoute(ReportTemplate::factory()->create()))
+            ->get(route('report-templates.show', ReportTemplate::factory()->create()))
             ->assertNotFound();
     }
 
@@ -25,7 +25,7 @@ class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequire
         $user->reportTemplates()->save($reportTemplate);
 
         $this->actingAs($user)
-            ->get($this->getRoute($reportTemplate))
+            ->get(route('report-templates.show', $reportTemplate))
             ->assertOk()
             ->assertViewHas(['template' => function (ReportTemplate $templatePassedToView) use ($reportTemplate) {
                 return $templatePassedToView->is($reportTemplate);
@@ -37,12 +37,7 @@ class ShowReportTemplateTest extends TestCase implements TestsPermissionsRequire
         $reportTemplate = ReportTemplate::factory()->create();
 
         $this->actingAs(User::factory()->canViewReports()->create())
-            ->get($this->getRoute($reportTemplate))
+            ->get(route('report-templates.show', $reportTemplate))
             ->assertNotFound();
-    }
-
-    private function getRoute(ReportTemplate $reportTemplate): string
-    {
-        return route('report-templates.show', $reportTemplate);
     }
 }

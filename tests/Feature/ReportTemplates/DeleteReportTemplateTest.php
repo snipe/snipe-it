@@ -16,7 +16,7 @@ class DeleteReportTemplateTest extends TestCase implements TestsPermissionsRequi
         $reportTemplate = ReportTemplate::factory()->create();
 
         $this->actingAs(User::factory()->create())
-            ->post($this->getRoute($reportTemplate))
+            ->post(route('report-templates.destroy', $reportTemplate->id))
             ->assertNotFound();
 
         $this->assertModelExists($reportTemplate);
@@ -27,7 +27,7 @@ class DeleteReportTemplateTest extends TestCase implements TestsPermissionsRequi
         $reportTemplate = ReportTemplate::factory()->create();
 
         $this->actingAs(User::factory()->canViewReports()->create())
-            ->delete($this->getRoute($reportTemplate))
+            ->delete(route('report-templates.destroy', $reportTemplate->id))
             ->assertNotFound();
 
         $this->assertModelExists($reportTemplate);
@@ -39,14 +39,9 @@ class DeleteReportTemplateTest extends TestCase implements TestsPermissionsRequi
         $reportTemplate = ReportTemplate::factory()->for($user, 'creator')->create();
 
         $this->actingAs($user)
-            ->delete($this->getRoute($reportTemplate))
+            ->delete(route('report-templates.destroy', $reportTemplate->id))
             ->assertRedirect(route('reports/custom'));
 
         $this->assertSoftDeleted($reportTemplate);
-    }
-
-    private function getRoute(ReportTemplate $reportTemplate): string
-    {
-        return route('report-templates.destroy', $reportTemplate->id);
     }
 }
