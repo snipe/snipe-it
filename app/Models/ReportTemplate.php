@@ -28,6 +28,7 @@ class ReportTemplate extends Model
     protected $rules = [
         'name' => [
             'required',
+            'string',
         ],
         'options' => [
             'required',
