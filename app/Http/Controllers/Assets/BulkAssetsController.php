@@ -321,7 +321,11 @@ class BulkAssetsController extends Controller
 
                 if ($request->input('null_asset_eol_date')=='1') {
                     $this->update_array['asset_eol_date'] = null;
-                    $this->update_array['eol_explicit'] = 1;
+
+                    // If they are nulling the EOL date to allow it to calculate, set eol explicit to 0
+                    if ($request->input('calc_eol')=='1') {
+                        $this->update_array['eol_explicit'] = 0;
+                    }
                 }
 
 
