@@ -91,7 +91,7 @@
               </div>
           </div>
 
-          <!-- Purchase Date -->
+          <!-- EOL Date -->
           <div class="form-group {{ $errors->has('asset_eol_date') ? ' has-error' : '' }}">
             <label for="eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
             <div class="col-md-4">
@@ -105,6 +105,15 @@
               <label class="form-control">
                 {{ Form::checkbox('null_asset_eol_date', '1', false) }}
                 {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-9 col-md-offset-3">
+              <label class="form-control">
+                {{ Form::checkbox('calc_eol', '1', false) }}
+                {{ trans('admin/hardware/form.calc_eol') }}
               </label>
             </div>
           </div>
