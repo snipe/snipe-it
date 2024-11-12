@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Är du säker på att du vill återställa din databas från :filnamn?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Ett fel har uppstått vid spolning.',

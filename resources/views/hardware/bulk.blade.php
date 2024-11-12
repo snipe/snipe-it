@@ -48,7 +48,7 @@
             <div class="col-md-5">
               <label class="form-control">
                 {{ Form::checkbox('null_name', '1', false) }}
-                {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
             </div>
           </div>
@@ -60,25 +60,25 @@
             <div class="col-md-4">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}">
-                <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                <span class="input-group-addon"><x-icon type="calendar" /></span>
               </div>
               {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
             <div class="col-md-5">
               <label class="form-control">
                 {{ Form::checkbox('null_purchase_date', '1', false) }}
-                {{ trans_choice('general.set_to_null', count($assets),['asset_count' => count($assets)]) }}
+                {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
               </label>
             </div>
-
           </div>
+
           <!-- Expected Checkin Date -->
           <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
              <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
              <div class="col-md-4">
                   <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                       <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
-                      <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                      <span class="input-group-addon"><x-icon type="calendar" /></span>
                  </div>
 
                  {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -86,9 +86,36 @@
               <div class="col-md-5">
                 <label class="form-control">
                   {{ Form::checkbox('null_expected_checkin_date', '1', false) }}
-                  {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                  {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
                 </label>
               </div>
+          </div>
+
+          <!-- EOL Date -->
+          <div class="form-group {{ $errors->has('asset_eol_date') ? ' has-error' : '' }}">
+            <label for="eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
+            <div class="col-md-4">
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="asset_eol_date" id="asset_eol_date" value="{{ old('asset_eol_date') }}">
+                <span class="input-group-addon"><x-icon type="calendar" /></span>
+              </div>
+              {!! $errors->first('asset_eol_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+            </div>
+            <div class="col-md-5">
+              <label class="form-control">
+                {{ Form::checkbox('null_asset_eol_date', '1', false) }}
+                {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-9 col-md-offset-3">
+              <label class="form-control">
+                {{ Form::checkbox('calc_eol', '1', false) }}
+                {{ trans('admin/hardware/form.calc_eol') }}
+              </label>
+            </div>
           </div>
 
 
@@ -178,7 +205,7 @@
             <div class="col-md-4">
               <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date') }}">
-                <span class="input-group-addon"><i class="fas fa-calendar" aria-hidden="true"></i></span>
+                <span class="input-group-addon"><x-icon type="calendar" /></span>
               </div>
 
               {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true">
@@ -189,7 +216,7 @@
             <div class="col-md-5">
               <label class="form-control">
                 {{ Form::checkbox('null_next_audit_date', '1', false) }}
-                {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}
+                {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
             </div>
             <div class="col-md-8 col-md-offset-3">
@@ -226,7 +253,7 @@
         </div> <!--/.box-body-->
 
         <div class="text-right box-footer">
-          <button type="submit" class="btn btn-success"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+          <button type="submit" class="btn btn-success"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
         </div>
       </div> <!--/.box.box-default-->
     </form>

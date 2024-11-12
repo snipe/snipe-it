@@ -6,6 +6,6 @@ return array(
     'action' 		        => 'Акција',
     'by'      		        => 'Од',
     'item' 			        => 'Ставка',
-    'no_matching_records'   => 'No matching records found',
+    'no_matching_records'   => 'Не се пронајдени записи што одговараат',
 
 );

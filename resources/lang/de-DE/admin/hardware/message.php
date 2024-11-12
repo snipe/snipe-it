@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Asset wurde nicht erstellt. Bitte versuchen Sie es erneut. :(',
         'success' 		=> 'Asset wurde erfolgreich erstellt. :)',
         'success_linked' => 'Asset mit Tag :tag wurde erfolgreich erstellt. <strong><a href=":link" style="color: white;">Klicken Sie hier, um</a></strong> anzuzeigen.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -58,6 +60,7 @@ return [
         'file_delete_success'   => 'Die Datei wurde erfolgreich gelöscht',
         'file_delete_error'      => 'Die Datei konnte nicht gelöscht werden',
         'file_missing' => 'Die ausgewählte Datei fehlt',
+        'file_already_deleted' => 'Die ausgewählte Datei wurde bereits gelöscht',
         'header_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der Kopfzeile enthalten fehlerhafte UTF-8 Zeichen',
         'content_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der ersten Zeile des Inhalts enthalten fehlerhafte UTF-8-Zeichen',
     ],
@@ -76,6 +79,11 @@ return [
         'user_does_not_exist' => 'Dieser Benutzer existiert nicht. Bitte versuchen Sie es erneut.',
         'not_available' => 'Dieses Asset kann nicht herausgegeben werden!',
         'no_assets_selected' => 'Sie müssen mindestens ein Asset aus der Liste auswählen',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Eiendelen ble ikke opprettet, prøv igjen :(',
         'success' 		=> 'Eiendelen ble opprettet :)',
         'success_linked' => 'Eiendelen med taggen :tag ble opprettet. <strong><a href=":link" style="color: white;">Klikk her for å vise</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -58,6 +60,7 @@ return [
         'file_delete_success'   => 'Filen har blitt slettet',
         'file_delete_error'      => 'Filen kunne ikke bli slettet',
         'file_missing' => 'Valgt fil mangler (fant ikke filen)',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'En eller flere attributter i overskriftsraden inneholder feilformede UTF-8 tegn',
         'content_row_has_malformed_characters' => 'En eller flere attributter i første rad i inneholdet inneholder feilformet UTF-8 tegn',
     ],
@@ -76,6 +79,11 @@ return [
         'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.',
         'not_available' => 'Den eiendelen er ikke tilgjengelig til å sjekkes ut!',
         'no_assets_selected' => 'Du må velge minst én enhet fra listen',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

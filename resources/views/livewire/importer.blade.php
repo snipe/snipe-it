@@ -119,9 +119,9 @@
                                         </th>
                                     </tr>
 
-                                    @foreach($files as $currentFile)
+                                    @foreach($this->files as $currentFile)
 
-                                    		<tr style="{{ ($activeFile && ($currentFile->id == $activeFile->id)) ? 'font-weight: bold' : '' }}" class="{{ ($activeFile && ($currentFile->id == $activeFile->id)) ? 'warning' : '' }}">
+                                    		<tr style="{{ ($this->activeFile && ($currentFile->id == $this->activeFile->id)) ? 'font-weight: bold' : '' }}" class="{{ ($this->activeFile && ($currentFile->id == $this->activeFile->id)) ? 'warning' : '' }}">
                                     			<td class="col-md-6">{{ $currentFile->file_path }}</td>
                                     			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
                                     			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
@@ -130,25 +130,25 @@
                                                         <i class="fa-solid fa-list-check" aria-hidden="true"></i>
                                                         <span class="sr-only">{{ trans('general.import') }}</span>
                                                     </button>
-                                                    <a href="#" wire:click.prevent="$set('activeFile',null)">
+                                                    <a href="#" wire:click.prevent="$set('activeFileId',null)">
                                                     <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
                                                         <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
                                                     </a>
                                     			</td>
                                     		</tr>
 
-                                            @if( $currentFile && $activeFile && ($currentFile->id == $activeFile->id))
+                                            @if( $currentFile && $this->activeFile && ($currentFile->id == $this->activeFile->id))
                                                 <tr class="warning">
                                                     <td colspan="4">
 
                                                         <div class="form-group">
 
-                                                                <label for="activeFile.import_type" class="col-md-3 col-xs-12">
+                                                                <label for="typeOfImport" class="col-md-3 col-xs-12">
                                                                     {{ trans('general.import_type') }}
                                                                 </label>
 
                                                             <div class="col-md-9 col-xs-12" wire:ignore>
-                                                                    {{ Form::select('activeFile.import_type', $importTypes, $activeFile->import_type, [
+                                                                    {{ Form::select('typeOfImport', $importTypes, $typeOfImport, [
                                                                         'id' => 'import_type',
                                                                         'class' => 'livewire-select2',
                                                                         'style' => 'min-width: 350px',
@@ -157,7 +157,7 @@
                                                                         'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
                                                                         'data-livewire-component' => $this->getId()
                                                                     ]) }}
-                                                                    @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 0)
+                                                                    @if ($typeOfImport === 'asset' && $snipeSettings->auto_increment_assets == 0)
                                                                         <p class="help-block">
                                                                             {{ trans('general.auto_incrementing_asset_tags_disabled_so_tags_required') }}
                                                                         </p>
@@ -171,7 +171,7 @@
                                                                     {{ trans('general.update_existing_values') }}
                                                                 </label>
 
-                                                                @if ($activeFile->import_type === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
+                                                                @if ($typeOfImport === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
                                                                     <p class="help-block">
                                                                         {{ trans('general.auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created') }}
                                                                     </p>
@@ -199,13 +199,13 @@
                                                             @endif
 
 
-                                                            @if ($activeFile->import_type)
+                                                            @if ($typeOfImport)
                                                                 <div class="form-group col-md-12">
                                                                     <hr style="border-top: 1px solid lightgray">
                                                                     <h3>
-                                                                        <i class="{{ Helper::iconTypeByItem($activeFile->import_type) }}">
+                                                                        <i class="{{ Helper::iconTypeByItem($typeOfImport) }}">
                                                                         </i>
-                                                                        {{ trans('general.map_fields', ['item_type' => ucwords($activeFile->import_type)]) }}
+                                                                        {{ trans('general.map_fields', ['item_type' => ucwords($typeOfImport)]) }}
                                                                        </h3>
                                                                     <hr style="border-top: 1px solid lightgray">
                                                                 </div>
@@ -221,16 +221,16 @@
                                                                     </div>
                                                                 </div><!-- /div row -->
 
-                                                                @if($activeFile->header_row)
+                                                                @if(! empty($headerRow))
 
-                                                                    @foreach($activeFile->header_row as $index => $header)
+                                                                    @foreach($headerRow as $index => $header)
 
                                                                         <div class="form-group col-md-12" wire:key="header-row-{{ $index }}">
 
                                                                             <label for="field_map.{{ $index }}" class="col-md-3 control-label text-right">{{ $header }}</label>
                                                                             <div class="col-md-4" wire:ignore>
 
-                                                                                {{ Form::select('field_map.'.$index, $columnOptions[$activeFile->import_type], @$field_map[$index],
+                                                                                {{ Form::select('field_map.'.$index, $columnOptions[$typeOfImport], @$field_map[$index],
                                                                                     [
                                                                                         'class' => 'mappings livewire-select2',
                                                                                         'placeholder' => trans('general.importer.do_not_import'),
@@ -241,9 +241,9 @@
                                                                                     ])
                                                                                 }}
                                                                             </div>
-									                                    @if (($activeFile->first_row) && (array_key_exists($index, $activeFile->first_row)))
+									                                    @if (($this->activeFile->first_row) && (array_key_exists($index, $this->activeFile->first_row)))
                                                                             <div class="col-md-5">
-                                                                                <p class="form-control-static">{{ str_limit($activeFile->first_row[$index], 50, '...') }}</p>
+                                                                                <p class="form-control-static">{{ str_limit($this->activeFile->first_row[$index], 50, '...') }}</p>
                                                                             </div>
                                                                         @else
                                                                             @php
@@ -259,7 +259,7 @@
 
                                                                 <div class="form-group col-md-12">
                                                                     <div class="col-md-3 text-left">
-                                                                        <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
+                                                                        <a href="#" wire:click.prevent="$set('activeFileId',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                     <div class="col-md-9">
                                                                         <button type="submit" class="btn btn-primary col-md-5" id="import">{{ trans('admin/hardware/message.import.import_button') }}</button>
@@ -275,10 +275,10 @@
                                                             @else
                                                                 <div class="form-group col-md-10">
                                                                     <div class="col-md-3 text-left">
-                                                                        <a href="#" wire:click.prevent="$set('activeFile',null)">{{ trans('general.cancel') }}</a>
+                                                                        <a href="#" wire:click.prevent="$set('activeFileId',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                 </div>
-                                                            @endif {{-- end of if ... activeFile->import_type --}}
+                                                            @endif {{-- end of if ... $typeOfImport --}}
 
                                                         </div><!-- /div v-show -->                                                    </td>
                                                 </tr>
@@ -336,7 +336,7 @@
             // we have to hook up to the `<tr id='importer-file'>` at the root of this display,
             // because the #import button isn't visible until you click an import_type
             $('#upload-table').on('click', '#import', function () {
-                if (!$wire.$get('activeFile.import_type')) {
+                if (!$wire.$get('typeOfImport')) {
                     $wire.$set('statusType', 'error');
                     $wire.$set('statusText', "An import type is required... "); //TODO: translate?
                     return;
@@ -348,15 +348,15 @@
                     // console.warn("Here is the mappings:")
                     // console.dir(mappings)
                     // console.warn("Uh, active file id is, I guess: "+$wire.$get('activeFile.id'))
-                    var this_file = $wire.$get('file_id'); // okay, I actually don't know what I'm doing here.
+                    var file_id = $wire.$get('activeFileId');
                     $.post({
                         {{-- I want to do something like: route('api.imports.importFile', $activeFile->id) }} --}}
-                        url: "api/v1/imports/process/"+this_file, // maybe? Good a guess as any..FIXME. HARDCODED DUMB FILE
+                        url: "api/v1/imports/process/"+file_id, // maybe? Good a guess as any..FIXME. HARDCODED DUMB FILE
                         contentType: 'application/json',
                         data: JSON.stringify({
                             'import-update': !!$wire.$get('update'),
                             'send-welcome': !!$wire.$get('send_welcome'),
-                            'import-type': $wire.$get('activeFile.import_type'),
+                            'import-type': $wire.$get('typeOfImport'),
                             'run-backup': !!$wire.$get('run_backup'),
                             'column-mappings': mappings
                         }),
@@ -396,7 +396,7 @@
                             }
 
                         }
-                        $wire.$set('activeFile', null); //$wire.$set('hideDetails')
+                        $wire.$set('activeFileId', null); //$wire.$set('hideDetails')
                     });
                 })
                 return false;

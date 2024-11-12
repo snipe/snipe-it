@@ -25,7 +25,6 @@ return [
     'image'		    => 'Imagine dispozitiv',
     'days_without_acceptance' => 'Zile fără acceptare',
     'monthly_depreciation' => 'Depreciere lunară',
-    'assigned_to'    => 'Desemnat către',
     'requesting_user' => 'Utilizatorul solicitant',
     'requested_date' => 'Data solicitării',
     'changed'       => 'Modificat',

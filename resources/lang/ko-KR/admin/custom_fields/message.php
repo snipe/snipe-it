@@ -5,7 +5,7 @@ return array(
     'field' => array(
         'invalid'   => '그 항목은 없습니다.',
         'already_added'   => '이미 추가한 항목입니다.',
-        'none_selected'   => 'No field selected',
+        'none_selected'   => '항목이 선택되지 않았습니다.',
 
         'create' => array(
             'error'   => '항목을 생성하지 못했습니다. 재시도해 주십시오.',

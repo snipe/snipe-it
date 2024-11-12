@@ -495,24 +495,17 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         )->name('api.assets.show.byserial')
         ->where('any', '.*');
 
-        // LEGACY URL - Get assets that are due or overdue for audit
-        Route::get('audit/{status}',
-        [
-            Api\AssetsController::class, 
-            'index'
-        ]
-        )->name('api.asset.to-audit');
 
 
 
-        // This gets the "due or overdue" API endpoints for audits and checkins
+        // This gets the "due or overdue" API endpoints for audit/audits and checkins
         Route::get('{action}/{upcoming_status}',
               [
                   Api\AssetsController::class,
                   'index'
               ]
         )->name('api.assets.list-upcoming')
-        ->where(['action' => 'audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
+        ->where(['action' => 'audit|audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
 
 
 
@@ -798,6 +791,33 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.models.restore');
 
+            Route::post('{model_id}/files',
+            [
+                Api\AssetModelFilesController::class,
+                'store'
+            ]
+            )->name('api.models.files.store');
+
+            Route::get('{model_id}/files',
+            [
+                Api\AssetModelFilesController::class,
+                'list'
+            ]
+            )->name('api.models.files.index');
+
+            Route::get('{model_id}/file/{file_id}',
+            [
+                Api\AssetModelFilesController::class,
+                'show'
+            ]
+            )->name('api.models.files.show');
+
+            Route::delete('{model_id}/file/{file_id}',
+            [
+                Api\AssetModelFilesController::class,
+                'destroy'
+            ]
+            )->name('api.models.files.destroy');
         }); 
     
         Route::resource('models', 
@@ -1070,18 +1090,18 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.users.restore');
 
-        }); 
-    
+        });
+
         Route::resource('users', 
         Api\UsersController::class,
         ['names' => [
                 'index' => 'api.users.index',
                 'show' => 'api.users.show',
-                'update' => 'api.users.update',
                 'store' => 'api.users.store',
+                'update' => 'api.users.update',
                 'destroy' => 'api.users.destroy',
             ],
-        'except' => ['create', 'edit'],
+         'except' => ['create', 'edit'],
         'parameters' => ['user' => 'user_id'],
         ]
         ); // end users API routes

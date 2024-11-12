@@ -60,6 +60,7 @@ final class CompaniesController extends Controller
         $company->phone = $request->input('phone');
         $company->fax = $request->input('fax');
         $company->email = $request->input('email');
+        $company->created_by = auth()->id();
 
         $company = $request->handleImages($company);
 

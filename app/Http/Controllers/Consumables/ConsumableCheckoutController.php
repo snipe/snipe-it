@@ -70,7 +70,7 @@ class ConsumableCheckoutController extends Controller
         $this->authorize('checkout', $consumable);
 
         // If the quantity is not present in the request or is not a positive integer, set it to 1
-        $quantity = $request->input('qty');
+        $quantity = $request->input('checkout_qty');
         if (!isset($quantity) || !ctype_digit((string)$quantity) || $quantity <= 0) {
             $quantity = 1;
         }
@@ -92,14 +92,16 @@ class ConsumableCheckoutController extends Controller
         // Update the consumable data
         $consumable->assigned_to = e($request->input('assigned_to'));
 
-        for($i = 0; $i < $quantity; $i++){
+        for ($i = 0; $i < $quantity; $i++){
         $consumable->users()->attach($consumable->id, [
             'consumable_id' => $consumable->id,
-            'user_id' => $admin_user->id,
+            'created_by' => $admin_user->id,
             'assigned_to' => e($request->input('assigned_to')),
             'note' => $request->input('note'),
         ]);
         }
+
+        $consumable->checkout_qty = $quantity;
         event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
 
         $request->request->add(['checkout_to_type' => 'user']);

@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Asset wurde nicht erstellt. Bitte versuche es erneut. :(',
         'success' 		=> 'Asset wurde erfolgreich erstellt. :)',
         'success_linked' => 'Asset mit Tag :tag wurde erfolgreich erstellt. <strong><a href=":link" style="color: white;">Klicke hier, um</a></strong> anzuzeigen.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -46,7 +48,7 @@ return [
     'upload' => [
         'error'   => 'Datei(en) wurde(n) nicht hochgeladen. Bitte versuche es erneut.',
         'success' => 'Datei(en) wurden erfolgreich hochgeladen.',
-        'nofiles' => 'Du hast keine Datei zum Hochladen ausgewählt, oder die Datei, die Du hochladen möchtest, ist zu groß',
+        'nofiles' => 'Du hast keine Datei zum Hochladen ausgewählt, oder die Datei, die du hochladen möchtest, ist zu groß',
         'invalidfiles' => 'Eine oder mehrere Deiner Dateien sind zu groß, oder deren Dateityp ist nicht zugelassen. Zugelassene Dateitypen sind png, gif, jpg, doc, docx, pdf, und txt.',
     ],
 
@@ -58,13 +60,14 @@ return [
         'file_delete_success'   => 'Deine Datei wurde erfolgreich gelöscht',
         'file_delete_error'      => 'Die Datei konnte nicht gelöscht werden',
         'file_missing' => 'Die ausgewählte Datei fehlt',
+        'file_already_deleted' => 'Die ausgewählte Datei wurde bereits gelöscht',
         'header_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der Kopfzeile enthalten fehlerhafte UTF-8 Zeichen',
         'content_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der ersten Zeile des Inhalts enthalten fehlerhafte UTF-8-Zeichen',
     ],
 
 
     'delete' => [
-        'confirm'   	=> 'Bist Du sicher, dass Du dieses Asset entfernen möchtest?',
+        'confirm'   	=> 'Bist du sicher, dass du dieses Asset entfernen möchtest?',
         'error'   		=> 'Beim Entfernen dieses Assets ist ein Fehler aufgetreten. Bitte versuche es erneut.',
         'nothing_updated'   => 'Es wurden keine Assets ausgewählt, somit wurde auch nichts gelöscht.',
         'success' 		=> 'Dass Asset wurde erfolgreich entfernt.',
@@ -76,6 +79,11 @@ return [
         'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuche es erneut.',
         'not_available' => 'Dieses Asset kann nicht herausgegeben werden!',
         'no_assets_selected' => 'Du musst mindestens ein Asset aus der Liste auswählen',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

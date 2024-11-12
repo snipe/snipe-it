@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Выберите язык',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Английский, США',
         'en-GB'=> 'Английский, Великобритания',
@@ -41,7 +41,7 @@ return [
         'mi-NZ'=> 'Маори',
         'mn-MN'=> 'Монгольский',
         //'no-NO'=> 'Norwegian',
-        'nb-NO'=> 'Norwegian Bokmål',
+        'nb-NO'=> 'Норвежский Букмол',
         //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Персидский',
         'pl-PL'=> 'Польский',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Зулу',
     ],
 
-    'select_country' => 'Выберите страну',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Остров Вознесения',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Эстония',
         'EG'=>'Египет',
+        'GB-ENG'=>'Англия',
         'ER'=>'Эритрея',
         'ES'=>'Испания',
         'ET'=>'Ethiopia',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Нидерланды',
+        'GB-NIR' => 'Северная Ирландия',
         'NO'=>'Норвегия',
         'NP'=>'Непал',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Российская Федерация',
         'RW'=>'Руанда',
         'SA'=>'Саудовская Аравия',
-        'UK'=>'Шотландия',
+        'GB-SCT'=>'Шотландия',
         'SB'=>'Соломоновы острова',
         'SC'=>'Сейшелы',
         'SS'=>'Южный Судан',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Виргинские острова (США)',
         'VN'=>'Viet Nam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Уэльс',
         'WF'=>'Уоллис и Футуна',
         'WS'=>'Samoa',
         'YE'=>'Йемен',

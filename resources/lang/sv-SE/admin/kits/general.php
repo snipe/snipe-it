@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => 'Kit har tagits bort',
     'kit_model_updated'                 => 'Modellen har uppdaterats',
     'kit_model_detached'                => 'Modellen har tagits bort',
+    'model_already_attached'            => 'Modellen är redan kopplad till kit',
 ];

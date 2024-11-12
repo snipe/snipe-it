@@ -47,4 +47,5 @@ return [
     'kit_deleted'                       => '製品セットは正常に削除されました。',
     'kit_model_updated'                 => 'モデルが正常に更新されました。',
     'kit_model_detached'                => 'モデルは正常に切り離されました。',
+    'model_already_attached'            => 'Model already attached to kit',
 ];

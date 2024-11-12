@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Kua paopao angitu koe ki tenei taonga.',
     'bulk_manager_warn'	        => 'Kua angitu te whakahoutia o nga kaiwhakamahi, heoi kihai i tohua to tautuhinga kaiwhakahaere no te mea ko te kaiwhakahaere i tohua e koe i roto i te rarangi kaiwhakamahi kia whakatikaia, kaore ano hoki nga kaiwhakamahi i to ratou ake kaiwhakahaere. Tēnā koa tīpako anō i ō kaiwhakamahi, kaore i te kaiwhakahaere.',
     'user_exists'               => 'Kua noho kē te Kaiwhakamahi!',
-    'user_not_found'            => 'Kāore te Kaiwhakamahi i te tīariari.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Kei te hiahiatia te mara takiuru',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => 'Kei te hiahiatia te kupuhipa.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Kāore i taea te rapu i te tūmau LDAP. Titiro koa ki te whirihoranga o tō tūmau LDAP i te kōnae whirihora LDAP. <br>Error mai i te Tūmau LDAP:',
         'ldap_could_not_get_entries' => 'Kāore i taea te tiki tuhinga mai i te tūmau LDAP. Titiro koa ki te whirihoranga o tō tūmau LDAP i te kōnae whirihora LDAP. <br>Error mai i te Tūmau LDAP:',
         'password_ldap' => 'Ko te kupuhipa mo tenei kaute kei te whakahaeretia e LDAP / Active Directory. Tēnā whakapā atu ki tō tari IT hei huri i tō kupuhipa.',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

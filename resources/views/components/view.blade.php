@@ -61,7 +61,7 @@
         <li class="active">
           <a href="#checkedout" data-toggle="tab">
             <span class="hidden-lg hidden-md">
-            <i class="fas fa-info-circle fa-2x" aria-hidden="true"></i>
+            <x-icon type="info-circle" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
           </a>
@@ -83,7 +83,7 @@
         @can('components.files', $component)
           <li class="pull-right">
             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-              <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
+              <x-icon type="paperclip" /> {{ trans('button.upload') }}
             </a>
           </li>
         @endcan
@@ -140,96 +140,14 @@
 
         @can('components.files', $component)
           <div class="tab-pane" id="files">
-
-            <div class="table-responsive">
-              <table
-                      data-cookie-id-table="componentUploadsTable"
-                      data-id-table="componentUploadsTable"
-                      id="componentUploadsTable"
-                      data-search="true"
-                      data-pagination="true"
-                      data-side-pagination="client"
-                      data-show-columns="true"
-                      data-show-export="true"
-                      data-show-footer="true"
-                      data-toolbar="#upload-toolbar"
-                      data-show-refresh="true"
-                      data-sort-order="asc"
-                      data-sort-name="name"
-                      class="table table-striped snipe-table"
-                      data-export-options='{
-                    "fileName": "export-components-uploads-{{ str_slug($component->name) }}-{{ date('Y-m-d') }}",
-                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
-                    }'>
-                <thead>
-                <tr>
-                  <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
-                  <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                  <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
-                  <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
-                  <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
-                  <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                  <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
-                  <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                @if ($component->uploads->count() > 0)
-                  @foreach ($component->uploads as $file)
-                    <tr>
-                      <td>
-                        <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
-                        <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
-
-                      </td>
-                      <td>
-                        @if ($file->filename)
-                          @if ( Helper::checkUploadIsImage($file->get_src('components')))
-                            <a href="{{ route('show.componentfile', ['componentId' => $component->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.componentfile', ['componentId' => $component->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                          @endif
-                        @endif
-                      </td>
-                      <td>
-                        {{ $file->filename }}
-                      </td>
-                      <td data-value="{{ (Storage::exists('private_uploads/components/'.$file->filename) ? Storage::size('private_uploads/components/'.$file->filename) : '') }}">
-                        {{ @Helper::formatFilesizeUnits(Storage::exists('private_uploads/components/'.$file->filename) ? Storage::size('private_uploads/components/'.$file->filename) : '') }}
-                      </td>
-
-                      <td>
-                        @if ($file->note)
-                          {{ $file->note }}
-                        @endif
-                      </td>
-                      <td>
-                        @if ($file->filename)
-                          <a href="{{ route('show.componentfile', [$component->id, $file->id]) }}" class="btn btn-sm btn-default">
-                            <i class="fas fa-download" aria-hidden="true"></i>
-                            <span class="sr-only">{{ trans('general.download') }}</span>
-                          </a>
-
-                          <a href="{{ route('show.componentfile', [$component->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                            <i class="fa fa-external-link" aria-hidden="true"></i>
-                          </a>
-
-                        @endif
-                      </td>
-                      <td>{{ $file->created_at }}</td>
-                      <td>
-                        <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/componentfile', [$component->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">
-                          <i class="fas fa-trash icon-white" aria-hidden="true"></i>
-                          <span class="sr-only">{{ trans('general.delete') }}</span>
-                        </a>
-                      </td>
-                    </tr>
-                  @endforeach
-                @else
-                  <tr>
-                    <td colspan="8">{{ trans('general.no_results') }}</td>
-                  </tr>
-                @endif
-                </tbody>
-              </table>
+            <div class="row">
+              <div class="col-md-12">
+                <x-filestable
+                        filepath="private_uploads/components/"
+                        showfile_routename="show.componentfile"
+                        deletefile_routename="delete/componentfile"
+                        :object="$component" />
+              </div>
             </div>
           </div> <!-- /.tab-pane -->
         @endcan
@@ -243,7 +161,7 @@
   <div class="col-md-3">
     @if ($component->image!='')
       <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-        <a href="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" data-toggle="lightbox">
+        <a href="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" data-toggle="lightbox" data-type="image">
           <img src="{{ Storage::disk('public')->url('components/'.e($component->image)) }}" class="img-responsive img-thumbnail" alt="{{ $component->name }}"></a>
       </div>
 
@@ -284,7 +202,26 @@
     </div>
     @endif
 
-  </div>
+  @can('update', $component)
+    <div class="col-md-12 hidden-print" style="padding-top: 5px;">
+      <a href="{{ route('components.edit', $component->id) }}" class="btn btn-sm btn-warning btn-social btn-block hidden-print">
+        <x-icon type="edit" />
+        {{ trans('admin/components/general.edit') }}
+      </a>
+    </div>
+  @endcan
+
+  @can('checkout', Component::class)
+    <div class="col-md-12 hidden-print" style="padding-top: 5px;">
+            <a href="{{ route('components.checkout.show', $component->id)  }}" class="btn btn-sm bg-maroon btn-social btn-block hidden-print">
+                 <x-icon type="checkout" />
+              {{ trans('admin/components/general.checkout') }}
+            </a>
+    </div>
+  @endcan
+
+
+</div>
 </div> <!-- .row-->
 
 @can('components.files', Component::class)

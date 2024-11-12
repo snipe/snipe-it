@@ -156,10 +156,10 @@ a.accordion-header {
   height: 150px;
 }
 
-
 .select2-container {
   width: 100%;
 }
+
 .error input {
   color: #a94442;
   border: 2px solid #a94442 !important;
@@ -341,8 +341,11 @@ a.logo.no-hover a:hover {
 }
 
 
-.required {
-  border-right: 6px solid orange;
+input:required, select:required {
+  border-right: 5px solid orange;
+}
+select:required + .select2-container .select2-selection, select:required + .select2-container .select2-selection .select2-selection--multiple  {
+  border-right: 5px solid orange !important;
 }
 
 body {
@@ -356,6 +359,10 @@ body {
 .sidebar-menu {
   font-size: 14px;
   white-space: normal;
+}
+
+.modal-warning .modal-help {
+  color: #fff8af;
 }
 
 .bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading {
@@ -496,13 +503,27 @@ body {
 
 .select2-selection--multiple {
     border-color: #d2d6de !important;
-    height: 34px;
+    overflow-y: auto;
 }
 
 .select2-selection__choice {
   border-radius: 0px !important;
 }
 
+.select2-search select2-search--inline {
+  height: 35px !important;
+  float: left;
+  margin: 0;
+}
+
+
+
+.select2-results__option {
+  padding: 5px;
+  user-select: none;
+  -webkit-user-select: none;
+  margin: 0px;
+}
 
 img.navbar-brand-img, .navbar-brand>img {
   float: left;
@@ -510,8 +531,8 @@ img.navbar-brand-img, .navbar-brand>img {
   max-height: 50px;
 }
 
-.input-daterange {
-  border-radius: 0px;
+.input-daterange, .input-daterange input:first-child, .input-daterange input:last-child {
+  border-radius: 0px !important;
 }
 
 .btn.bg-maroon, .btn.bg-purple{
@@ -600,31 +621,30 @@ h4 {
   //border-left: 1px solid #dddddd;
   //border-right: 1px solid #dddddd;
   display: table;
-
 }
 
 .row-striped .row:nth-of-type(odd) div {
   background-color: #f9f9f9;
   border-top: 1px solid #dddddd;
   display: table-cell;
-
+  word-wrap: break-word;
 }
 
 .row-striped .row:nth-of-type(even) div {
   background: #FFFFFF;
   border-top: 1px solid #dddddd;
   display: table-cell;
+  word-wrap: break-word;
 }
 
 
 .row-new-striped {
   vertical-align: top;
-  line-height: 2.6;
-  padding: 0px;
-  margin-left: 20px;
+  padding: 3px;
   display: table;
   width: 100%;
-  padding-right: 20px;
+  word-wrap: break-word;
+  table-layout:fixed;
 }
 
 /**
@@ -635,25 +655,28 @@ h4 {
 .row-new-striped  > .row:nth-of-type(even) {
   background: #FFFFFF;
   border-top: 1px solid #dddddd;
+  line-height: 1.9;
   display: table-row;
-
 }
 
 .row-new-striped > .row:nth-of-type(odd)  {
   background-color: #F8F8F8;
   border-top: 1px solid #dddddd;
   display: table-row;
-
+  line-height: 1.9;
+  padding: 2px;
 }
 
 .row-new-striped div {
   display: table-cell;
   border-top: 1px solid #dddddd;
+  padding: 6px;
 }
 
 .row-new-striped div {
   display: table-cell;
   border-top: 1px solid #dddddd;
+  padding: 6px;
 }
 
 
@@ -718,6 +741,7 @@ th.css-consumable > .th-inner,
 th.css-envelope > .th-inner,
 th.css-users > .th-inner,
 th.css-location > .th-inner,
+th.css-component > .th-inner,
 th.css-accessory > .th-inner
 {
   font-size: 0px;
@@ -736,6 +760,7 @@ th.css-consumable > .th-inner::before,
 th.css-envelope > .th-inner::before,
 th.css-users > .th-inner::before,
 th.css-location > .th-inner::before,
+th.css-component > .th-inner::before,
 th.css-accessory > .th-inner::before
 
 {
@@ -791,6 +816,11 @@ th.css-location > .th-inner::before {
   content: "\f3c5"; font-family: "Font Awesome 5 Free"; font-size: 19px; margin-bottom: 0px;
 }
 
+th.css-component > .th-inner::before
+{
+  content: "\f0a0"; font-family: "Font Awesome 5 Free"; font-weight: 500;
+}
+
 
 .small-box .inner {
   padding-left: 15px;
@@ -842,6 +872,24 @@ th.css-location > .th-inner::before {
 @media screen and (max-width: 1268px) and (min-width: 912px){
   .sidebar-menu {
     margin-top:50px
+  }
+}
+@media screen and (max-width: 992px){
+  .info-stack-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .col-md-3.col-xs-12.col-sm-push-9.info-stack{
+    left:auto;
+    order:1;
+  }
+  .col-md-9.col-xs-12.col-sm-pull-3.info-stack{
+    right:auto;
+    order:2;
+  }
+  .info-stack-container > .col-md-9.col-xs-12.col-sm-pull-3.info-stack > .row-new-striped > .row > .col-sm-2{
+    width:auto;
+    float:none;
   }
 }
 @media screen and (max-width: 1318px) and (min-width: 1200px){

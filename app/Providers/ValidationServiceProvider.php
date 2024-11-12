@@ -31,6 +31,7 @@ class ValidationServiceProvider extends ServiceProvider
         Validator::extend('email_array', function ($attribute, $value, $parameters, $validator) {
             $value = str_replace(' ', '', $value);
             $array = explode(',', $value);
+            $email_to_validate = [];
 
             foreach ($array as $email) { //loop over values
                 $email_to_validate['alert_email'][] = $email;
@@ -38,7 +39,7 @@ class ValidationServiceProvider extends ServiceProvider
 
             $rules = ['alert_email.*'=>'email'];
             $messages = [
-                'alert_email.*'=>trans('validation.email_array'),
+                'alert_email.*' => trans('validation.custom.email_array'),
             ];
 
             $validator = Validator::make($email_to_validate, $rules, $messages);

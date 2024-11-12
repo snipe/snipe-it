@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Архивиране',
     'backups_help'              => 'Създаване, сваляне и възстановяване на архиви ',
     'backups_restoring'         => 'Възстановяване от архив',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Качване на архив',
     'backups_path'              => 'Архивите на сървъра са записани в <code>:path</code>',
     'backups_restore_warning'   => 'Използвайте бутона за възстановяване <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> ,за да възстановите архивно копие. (Това не работи с S3 файлова система или Docker.)<br><br>Вашата <strong>цяла :app_name датабаза и всички качени файлове ще бъдат заменени</strong> от съдържанието на архива.  ',
@@ -381,5 +383,8 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

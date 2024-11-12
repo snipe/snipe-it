@@ -7,6 +7,11 @@ use App\Helpers\StorageHelper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SettingsSamlRequest;
 use App\Http\Requests\SetupUserRequest;
+use App\Http\Requests\StoreLdapSettings;
+use App\Http\Requests\StoreLocalizationSettings;
+use App\Http\Requests\StoreNotificationSettings;
+use App\Http\Requests\StoreLabelSettings;
+use App\Http\Requests\StoreSecuritySettings;
 use App\Models\CustomField;
 use App\Models\Group;
 use App\Models\Setting;
@@ -181,7 +186,7 @@ class SettingsController extends Controller
         $settings->brand = 1;
         $settings->locale = $request->input('locale', 'en-US');
         $settings->default_currency = $request->input('default_currency', 'USD');
-        $settings->user_id = 1;
+        $settings->created_by = 1;
         $settings->email_domain = $request->input('email_domain');
         $settings->email_format = $request->input('email_format');
         $settings->next_auto_tag_base = 1;
@@ -273,20 +278,6 @@ class SettingsController extends Controller
         return view('settings/index', compact('settings'));
     }
 
-    /**
-     * Return the admin settings page.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v1.0]
-     */
-    public function getEdit() : View
-
-    {
-        $setting = Setting::getSettings();
-
-        return view('settings/general', compact('setting'));
-    }
 
     /**
      * Return a form to allow a super admin to update settings.
@@ -486,7 +477,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      */
-    public function postSecurity(Request $request) : RedirectResponse
+    public function postSecurity(StoreSecuritySettings $request) : RedirectResponse
     {
         $this->validate($request, [
             'pwd_secure_complexity' => 'array',
@@ -556,7 +547,7 @@ class SettingsController extends Controller
      *
      * @since [v1.0]
      */
-    public function postLocalization(Request $request) : RedirectResponse
+    public function postLocalization(StoreLocalizationSettings $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -599,7 +590,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      */
-    public function postAlerts(Request $request) : RedirectResponse
+    public function postAlerts(StoreNotificationSettings $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -780,7 +771,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      */
-    public function postLabels(Request $request) : RedirectResponse
+    public function postLabels(StoreLabelSettings $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -859,26 +850,7 @@ class SettingsController extends Controller
     {
         $setting = Setting::getSettings();
         $groups = Group::pluck('name', 'id');
-
-
-        /**
-         * This validator is only temporary (famous last words.) - @snipe
-         */
-        $messages = [
-            'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
-            'ldap_auth_filter_query.not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> ',
-            'ldap_filter.regex' => 'This value should probably not be wrapped in parentheses.',
-        ];
-
-        $validator = Validator::make($setting->toArray(), [
-            'ldap_username_field' => 'not_in:sAMAccountName',
-            'ldap_auth_filter_query' => 'not_in:uid=samaccountname|required_if:ldap_enabled,1',
-            'ldap_filter' => 'nullable|regex:"^[^(]"|required_if:ldap_enabled,1',
-        ],  $messages);
-
-
-
-        return view('settings.ldap', compact('setting', 'groups'))->withErrors($validator);
+        return view('settings.ldap', compact('setting', 'groups'));
     }
 
     /**
@@ -887,7 +859,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      */
-    public function postLdapSettings(Request $request) : RedirectResponse
+    public function postLdapSettings(StoreLdapSettings $request) : RedirectResponse
     {
         if (is_null($setting = Setting::getSettings())) {
             return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
@@ -1204,7 +1176,7 @@ class SettingsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v6.0]
      */
-    public function postRestore($filename = null) : RedirectResponse
+    public function postRestore(Request $request, $filename = null): RedirectResponse
     {
 
         if (! config('app.lock_passwords')) {
@@ -1224,13 +1196,29 @@ class SettingsController extends Controller
 
                 Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
 
-                // run the restore command
-                Artisan::call('snipeit:restore',
-                [
+                $restore_params = [
                     '--force' => true,
                     '--no-progress' => true,
-                    'filename' => storage_path($path).'/'.$filename
-                ]);
+                    'filename' => storage_path($path) . '/' . $filename
+                ];
+
+                if ($request->input('clean')) {
+                    Log::debug("Attempting 'clean' - first, guessing prefix...");
+                    Artisan::call('snipeit:restore', [
+                        '--sanitize-guess-prefix' => true,
+                        'filename' => storage_path($path) . '/' . $filename
+                    ]);
+                    $guess_prefix_output = Artisan::output();
+                    Log::debug("Sanitize output is: $guess_prefix_output");
+                    list($prefix, $_output) = explode("\n", $guess_prefix_output);
+                    Log::debug("prefix is: '$prefix'");
+                    $restore_params['--sanitize-with-prefix'] = $prefix;
+                }
+
+                // run the restore command
+                Artisan::call('snipeit:restore',
+                    $restore_params
+                );
 
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();

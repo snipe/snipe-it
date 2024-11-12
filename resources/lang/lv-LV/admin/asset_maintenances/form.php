@@ -3,7 +3,7 @@
     return [
         'asset_maintenance_type' => 'Asset Maintenance Type',
         'title'                  => 'Nosaukums',
-        'start_date'             => 'Start Date',
+        'start_date'             => 'Sākuma datums',
         'completion_date'        => 'Completion Date',
         'cost'                   => 'Izmaksas',
         'is_warranty'            => 'Garantijas uzlabošana',

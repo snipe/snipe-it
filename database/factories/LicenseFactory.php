@@ -25,7 +25,7 @@ class LicenseFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::factory()->superuser(),
+            'created_by' => User::factory()->superuser(),
             'name' => $this->faker->name(),
             'license_email' => $this->faker->safeEmail(),
             'serial' => $this->faker->uuid(),

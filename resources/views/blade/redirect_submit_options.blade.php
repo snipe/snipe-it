@@ -27,7 +27,7 @@
                 @endif
 
                 <button type="submit" class="btn btn-primary pull-right{{ ($disabled_select ? ' disabled' : '') }}" style="margin-left:5px; border-radius: 3px;"{!! ($disabled_select ? ' data-tooltip="true" title="'.trans('admin/hardware/general.edit').'" disabled' : '') !!}>
-                    <i class="fas fa-check icon-white" aria-hidden="true"></i>
+                    <x-icon type="checkmark" />
                     {{ $button_label }}
                 </button>
 

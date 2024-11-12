@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Vahendit ei loodud, palun proovi uuesti. :(',
         'success' 		=> 'Vahendi loomine õnnestus. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -58,6 +60,7 @@ return [
         'file_delete_success'   => 'Teie fail on edukalt kustutatud',
         'file_delete_error'      => 'Faili ei saanud kustutada',
         'file_missing' => 'The file selected is missing',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
@@ -76,6 +79,11 @@ return [
         'user_does_not_exist' => 'See kasutaja on kehtetu. Palun proovi uuesti.',
         'not_available' => 'See vara pole kontrollimiseks saadaval!',
         'no_assets_selected' => 'Sa pead valima vähemalt ühe kirje nimekirjast',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

@@ -38,6 +38,7 @@ class ComponentsController extends Controller
                 'name',
                 'min_amt',
                 'order_number',
+                'model_number',
                 'serial',
                 'purchase_date',
                 'purchase_cost',
@@ -47,7 +48,7 @@ class ComponentsController extends Controller
             ];
 
         $components = Component::select('components.*')
-            ->with('company', 'location', 'category', 'assets', 'supplier');
+            ->with('company', 'location', 'category', 'assets', 'supplier', 'adminuser', 'manufacturer');
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -67,6 +68,14 @@ class ComponentsController extends Controller
 
         if ($request->filled('supplier_id')) {
             $components->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('manufacturer_id')) {
+            $components->where('manufacturer_id', '=', $request->input('manufacturer_id'));
+        }
+
+        if ($request->filled('model_number')) {
+            $components->where('model_number', '=', $request->input('model_number'));
         }
 
         if ($request->filled('location_id')) {
@@ -97,6 +106,12 @@ class ComponentsController extends Controller
                 break;
             case 'supplier':
                 $components = $components->OrderSupplier($order);
+                break;
+            case 'manufacturer':
+                $components = $components->OrderManufacturer($order);
+                break;
+            case 'created_by':
+                $components = $components->OrderByCreatedBy($order);
                 break;
             default:
                 $components = $components->orderBy($column_sort, $order);
@@ -270,7 +285,7 @@ class ComponentsController extends Controller
                 'component_id' => $component->id,
                 'created_at' => Carbon::now(),
                 'assigned_qty' => $request->get('assigned_qty', 1),
-                'user_id' => auth()->id(),
+                'created_by' => auth()->id(),
                 'asset_id' => $request->get('assigned_to'),
                 'note' => $request->get('note'),
             ]);

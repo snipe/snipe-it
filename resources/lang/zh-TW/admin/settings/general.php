@@ -31,6 +31,8 @@ return [
     'backups'					=> '備份',
     'backups_help'              => '建立, 下載和還原備份 ',
     'backups_restoring'         => '從備份還原',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => '上傳備份',
     'backups_path'              => '伺服器上的備份儲存在 <code>:path</code>',
     'backups_restore_warning'   => '使用還原按鈕 <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> 從之前的備份還原。 (這目前不適用於 S3 檔案儲存或 Docker。)<br><br>您的 <strong>整個 :app_name 資料庫和所有上傳的檔案將被完全取代</strong> 為備份檔案中的內容。',
@@ -382,5 +384,8 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

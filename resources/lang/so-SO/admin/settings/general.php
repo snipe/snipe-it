@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Kaabta',
     'backups_help'              => 'Abuur, soo deji, oo soo celi kaydinta ',
     'backups_restoring'         => 'Ka soo celinta kaabta',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Soo rar kaabta',
     'backups_path'              => 'Kaydka serfarka waxa lagu kaydiyaa <code>:path</code>',
     'backups_restore_warning'   => 'Isticmaal badhanka soo celinta <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span> </small>si looga soo celiyo kayd hore.(Tani hadda kuma shaqaynayso kaydinta faylka S3 ama Docker.)<br><br>Macluumaadkaaga <strong>dhan :app_name iyo wixii faylal ah ee la shubo waxaa gabi ahaanba lagu bedeli doonaa</strong>waxa ku jira faylka kaydinta.  ',
@@ -381,5 +383,8 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

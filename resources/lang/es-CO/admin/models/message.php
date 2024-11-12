@@ -5,9 +5,9 @@ return array(
     'deleted' => 'Se eliminó el modelo del activo',
     'does_not_exist' => 'Modelo inexistente.',
     'no_association' => '¡ADVERTENCIA! ¡El modelo de activo para este artículo no es válido o no existe!',
-    'no_association_fix' => 'Esto romperá cosas de formas extrañas y horribles. Edite este activo ahora para asignarle un modelo.',
+    'no_association_fix' => 'Esto causará problemas raros y horribles. Edite este activo ahora para asignarle un modelo.',
     'assoc_users'	 => 'Este modelo está asociado a uno o más activos y no puede ser eliminado. Por favor, elimine los activos y vuelva a intentarlo. ',
-    'invalid_category_type' => 'Esta categoría debe ser una categoría de activos.',
+    'invalid_category_type' => 'El tipo de esta categoría debe ser categoría de activos.',
 
     'create' => array(
         'error'   => 'El modelo no fue creado, por favor inténtelo de nuevo.',
@@ -32,7 +32,7 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'Ningún campo ha cambiado, no hay nada que actualizar.',
+        'error'   		=> 'Ningún cambio fue cambiado, así que nada se actualizó.',
         'success' 		=> 'Modelo actualizado correctamente. |:model_count modelos actualizados correctamente.',
         'warn'          => 'Está a punto de actualizar las propiedades del siguiente modelo:|Está a punto de editar las propiedades de los siguientes :model_count modelos:',
 

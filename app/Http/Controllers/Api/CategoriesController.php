@@ -43,6 +43,7 @@ class CategoriesController extends Controller
 
         $categories = Category::select([
             'id',
+            'created_by',
             'created_at',
             'updated_at',
             'name', 'category_type',
@@ -50,8 +51,10 @@ class CategoriesController extends Controller
             'eula_text',
             'require_acceptance',
             'checkin_email',
-            'image'
-            ])->withCount('accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
+            'image',
+            ])
+            ->with('adminuser')
+            ->withCount('accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count');
 
 
         /*
@@ -91,13 +94,33 @@ class CategoriesController extends Controller
             $categories->where('checkin_email', '=', $request->input('checkin_email'));
         }
 
+        if ($request->filled('created_by')) {
+            $categories->where('created_by', '=', $request->input('created_by'));
+        }
+
+        if ($request->filled('created_at')) {
+            $categories->where('created_at', '=', $request->input('created_at'));
+        }
+
+        if ($request->filled('updated_at')) {
+            $categories->where('updated_at', '=', $request->input('updated_at'));
+        }
+
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $categories->count()) ? $categories->count() : app('api_offset_value');
         $limit = app('api_limit_value');
-
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'assets_count';
-        $categories->orderBy($sort, $order);
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'assets_count';
+
+        switch ($sort_override) {
+            case 'created_by':
+                $categories = $categories->OrderByCreatedBy($order);
+                break;
+            default:
+                $categories = $categories->orderBy($column_sort, $order);
+                break;
+        }
 
         $total = $categories->count();
         $categories = $categories->skip($offset)->take($limit)->get();

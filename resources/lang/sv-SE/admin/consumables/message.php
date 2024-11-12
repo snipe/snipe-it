@@ -2,7 +2,7 @@
 
 return array(
 
-    'invalid_category_type' => 'The category must be a consumable category.',
+    'invalid_category_type' => 'Kategorin måste vara en konsumtionskategori.',
     'does_not_exist' => 'Förbrukningsartiklar existerar inte.',
 
     'create' => array(

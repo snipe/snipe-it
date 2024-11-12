@@ -9,7 +9,7 @@ return array(
     'license_key'       => 'Chiave licenza',
     'maintained'        => 'Mantenuto',
     'name'              => 'Nome Software',
-    'no_depreciation'   => 'Non svaluta',
+    'no_depreciation'   => 'Non soggetto a deprezzamento',
     'purchase_order'    => 'Acquisto numero d\'ordine',
     'reassignable'      => 'Reassegnabile',
     'remaining_seats'   => 'Licenze disponibili',

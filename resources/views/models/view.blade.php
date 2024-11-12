@@ -41,9 +41,9 @@
                         <span class="hidden-lg hidden-md">
                           <i class="fas fa-barcode fa-2x"></i>
                         </span>
-                                    <span class="hidden-xs hidden-sm">
-                                        {{ trans('general.assets') }}
-                                        {!! ($model->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($model->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+                        <span class="hidden-xs hidden-sm">
+                            {{ trans('general.assets') }}
+                            {!! ($model->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($model->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
                         </span>
                     </a>
                 </li>
@@ -62,7 +62,7 @@
                 </li>
                 <li class="pull-right">
                     <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                        <i class="fas fa-paperclip" aria-hidden="true"></i>
+                        <x-icon type="paperclip" />
                         {{ trans('button.upload') }}
                     </a>
                 </li>
@@ -107,99 +107,11 @@
                     <div class="row">
                         <div class="col-md-12">
 
-                            @if ($model->uploads->count() > 0)
-                                <table
-                                        class="table table-striped snipe-table"
-                                        id="modelFileHistory"
-                                        data-pagination="true"
-                                        data-id-table="modelFileHistory"
-                                        data-search="true"
-                                        data-side-pagination="client"
-                                        data-sortable="true"
-                                        data-show-columns="true"
-                                        data-show-fullscreen="true"
-                                        data-show-refresh="true"
-                                        data-sort-order="desc"
-                                        data-sort-name="created_at"
-                                        data-show-export="true"
-                                        data-export-options='{
-                         "fileName": "export-asset-{{ $model->id }}-files",
-                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                       }'
-                                        data-cookie-id-table="assetFileHistory">
-                                    <thead>
-                                    <tr>
-                                        <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    @foreach ($model->uploads as $file)
-                                        <tr>
-                                            <td><i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i></td>
-                                            <td>
-                                                @if ((Storage::exists('private_uploads/assetmodels/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('assetmodels'))))
-                                                    <a href="{{ route('show/modelfile', ['modelID' => $model->id, 'fileId' => $file->id]) }}" data-toggle="lightbox" data-type="image" data-title="{{ $file->filename }}">
-                                                        <img src="{{ route('show/modelfile', ['modelID' => $model->id, 'fileId' =>$file->id]) }}" style="max-width: 50px;">
-                                                    </a>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if (Storage::exists('private_uploads/assetmodels/'.$file->filename))
-                                                    {{ $file->filename }}
-                                                @else
-                                                    <del>{{ $file->filename }}</del>
-                                                @endif
-                                            </td>
-                                            <td data-value="{{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Storage::size('private_uploads/assetmodels/'.$file->filename) : '' }}">
-                                                {{ (Storage::exists('private_uploads/assetmodels/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/assetmodels/'.$file->filename)) : '' }}
-                                            </td>
-                                            <td>
-                                                @if ($file->note)
-                                                    {{ $file->note }}
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if (($file->filename) && (Storage::exists('private_uploads/assetmodels/'.$file->filename)))
-                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id]) }}" class="btn btn-sm btn-default">
-                                                        <i class="fas fa-download" aria-hidden="true"></i>
-                                                    </a>
-
-                                                    <a href="{{ route('show/modelfile', [$model->id, $file->id, 'inline'=>'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                                        <i class="fa fa-external-link" aria-hidden="true"></i>
-                                                    </a>
-
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($file->created_at)
-                                                    {{ Helper::getFormattedDateObject($file->created_at, 'datetime', false) }}
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @can('update', \App\Models\AssetModel::class)
-                                                    <a class="btn delete-asset btn-sm btn-danger btn-sm" href="{{ route('delete/assetfile', [$model->id, $file->id]) }}" data-tooltip="true" data-title="Delete" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}"><i class="fas fa-trash icon-white" aria-hidden="true"></i></a>
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-
-                            @else
-
-                                <div class="alert alert-info alert-block">
-                                    <i class="fas fa-info-circle"></i>
-                                    {{ trans('general.no_results') }}
-                                </div>
-                            @endif
+                            <x-filestable
+                                    filepath="private_uploads/assetmodels/"
+                                    showfile_routename="show/modelfile"
+                                    deletefile_routename="delete/modelfile"
+                                    :object="$model" />
 
                         </div> <!-- /.col-md-12 -->
                     </div> <!-- /.row -->
@@ -268,7 +180,7 @@
 
                         @if ($model->manufacturer->support_url)
                             <li>
-                                <i class="far fa-life-ring"></i> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
+                                <x-icon type="more-info" /> <a href="{{ $model->manufacturer->support_url }}">{{ $model->manufacturer->support_url }}</a>
                             </li>
                         @endif
 
@@ -332,39 +244,47 @@
         </div>
             @can('update', \App\Models\AssetModel::class)
             <div class="col-md-12" style="padding-bottom: 5px;">
-                <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/models/table.edit') }}</a>
+                <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                    <x-icon type="edit" />
+                    {{ trans('admin/models/table.edit') }}
+                </a>
             </div>
             @endcan
 
             @can('create', \App\Models\AssetModel::class)
             <div class="col-md-12" style="padding-bottom: 5px;">
-                <a href="{{ route('models.clone.create', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">{{ trans('admin/models/table.clone') }}</a>
+                <a href="{{ route('models.clone.create', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-info btn-social hidden-print">
+                    <x-icon type="clone" />
+                    {{ trans('admin/models/table.clone') }}
+                </a>
             </div>
             @endcan
 
             @can('delete', \App\Models\AssetModel::class)
-                @if ($model->assets_count > 0)
-                    <div class="col-md-12" style="padding-bottom: 5px;">
-                        <button class="btn btn-block btn-sm btn-primary hidden-print disabled" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.cannot_be_deleted') }}">{{ trans('general.delete') }}</button>
-                    </div>
-                @else
+                <div class="col-md-12" style="padding-top: 10px;">
 
+                    @if ($model->deleted_at!='')
+                        <form method="POST" action="{{ route('models.restore.store', $model->id) }}">
+                            @csrf
+                            <button style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                                <x-icon type="restore" />
+                                {{ trans('button.restore') }}
+                            </button>
+                        </form>
+                    @elseif ($model->assets()->count() > 0)
+                        <button class="btn btn-block btn-sm btn-danger btn-social hidden-print disabled" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.cannot_be_deleted') }}">
+                            <x-icon type="delete" />
+                            {{ trans('general.delete') }}
+                        </button>
+                    @else
+                        <button class="btn btn-block btn-sm btn-danger btn-social delete-asset" data-toggle="modal" title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $model->name]) }}" data-target="#dataConfirmModal" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}">
+                            <x-icon type="delete" />
+                            {{ trans('general.delete') }}
+                        </button>
+                </div>
                 @endif
-
-
-               <div class="text-center col-md-12" style="padding-top: 30px; padding-bottom: 30px;">
-                @if  ($model->deleted_at!='')
-                    <form method="POST" action="{{ route('models.restore.store', $model->id) }}">
-                        @csrf
-                        <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</button>
-                    </form>
-                @else
-                    <button class="btn btn-block btn-sm btn-danger delete-asset" data-toggle="modal" title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $model->name]) }}" data-target="#dataConfirmModal" data-tooltip="true"  data-placement="top" data-title="{{ trans('general.delete_what', ['item'=> trans('general.asset_model')]) }}">{{ trans('general.delete') }} </button>
-                    <span class="sr-only">{{ trans('general.delete') }}</span>
-                @endif
-               </div>
-
            @endcan
+
         </div>
 </div> <!-- /.row -->
 

@@ -18,7 +18,7 @@
 
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" autocomplete="off" class="form-horizontal" role="form" id="create-form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -29,7 +29,7 @@
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
-                        <i class="fas fa-wrench" aria-hidden="true"></i>
+                        <x-icon type="general-settings"/>
                         {{ trans('admin/settings/general.general_settings') }}
                     </h2>
                 </div>
@@ -395,7 +395,7 @@
                     <a class="btn btn-link text-left" href="{{ route('settings.index') }}">{{ trans('button.cancel') }}</a>
                 </div>
                 <div class="text-right col-md-6">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>
+                    <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
                 </div>
 
             </div>

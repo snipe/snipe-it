@@ -38,7 +38,7 @@
             <li>
               <a href="#checkedout" data-toggle="tab">
                 <span class="hidden-lg hidden-md">
-                <i class="fas fa-users fa-2x" aria-hidden="true"></i>
+                <x-icon type="users" class="fa-2x" />
                 </span>
                     <span class="hidden-xs hidden-sm">{{ trans('general.assigned') }}
                       {!! ($consumable->users_consumables > 0 ) ? '<badge class="badge badge-secondary">'.number_format($consumable->users_consumables).'</badge>' : '' !!}
@@ -74,7 +74,7 @@
             @can('update', $consumable)
               <li class="pull-right">
                 <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                  <i class="fas fa-paperclip" aria-hidden="true"></i> {{ trans('button.upload') }}
+                  <x-icon type="paperclip" /> {{ trans('button.upload') }}
                 </a>
               </li>
             @endcan
@@ -83,13 +83,13 @@
         <div class="tab-content">
           <div class="tab-pane active" id="details">
             <div class="row">
-
+              <div class="info-stack-container">
               <!-- Start button column -->
-              <div class="col-md-3 col-xs-12 col-sm-push-9">
+              <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
 
                 @if ($consumable->image!='')
                   <div class="col-md-12 text-center" style="padding-bottom: 20px;">
-                    <a href="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" data-toggle="lightbox">
+                    <a href="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" data-toggle="lightbox" data-type="image">
                       <img src="{{ Storage::disk('public')->url('consumables/'.e($consumable->image)) }}" class="img-responsive img-thumbnail" alt="{{ $consumable->name }}"></a>
                   </div>
                 @endif
@@ -97,39 +97,51 @@
                 
                 @can('update', $consumable)
                   <div class="col-md-12">
-                    <a href="{{ route('consumables.edit', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-primary hidden-print">{{ trans('button.edit') }}</a>
+                    <a href="{{ route('consumables.edit', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-social btn-warning hidden-print">
+                      <x-icon type="edit" />
+                      {{ trans('button.edit') }}
+                    </a>
                   </div>
                 @endcan
 
-                  @can('create', Consumable::class)
+                  @can('checkout', $consumable)
+                    @if ($consumable->numRemaining() > 0)
+                      <div class="col-md-12">
+                        <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="margin-bottom:5px;" class="btn btn-sm btn-block bg-maroon btn-social hidden-print">
+                          <x-icon type="checkout" />
+                          {{ trans('general.checkout') }}
+                        </a>
+                      </div>
+                    @else
+                      <div class="col-md-12">
+                        <button style="margin-bottom:10px;" class="btn btn-block bg-maroon btn-sm btn-social hidden-print disabled">
+                          <x-icon type="checkout" />
+                          {{ trans('general.checkout') }}
+                        </button>
+                      </div>
+                    @endif
+                  @endif
+
+
+                @can('create', Consumable::class)
 
                     <div class="col-md-12">
-                      <a href="{{ route('consumables.clone.create', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-primary hidden-print">{{ trans('button.var.clone', ['item_type' => trans('general.consumable')]) }}</a>
+                      <a href="{{ route('consumables.clone.create', $consumable->id) }}" style="margin-bottom:5px;"  class="btn btn-sm btn-block btn-info btn-social hidden-print">
+                        <x-icon type="clone" />
+                        {{ trans('button.var.clone', ['item_type' => trans('general.consumable')]) }}
+                      </a>
                     </div>
 
                   @endcan
 
-                  @can('checkout', $consumable)
-                    @if ($consumable->numRemaining() > 0)
-                        <div class="col-md-12">
-                            <a href="{{ route('consumables.checkout.show', $consumable->id) }}" style="margin-bottom:5px;" class="btn btn-sm btn-block btn-primary hidden-print">
-                              {{ trans('general.checkout') }}
-                            </a>
-                        </div>
-                    @else
-                        <div class="col-md-12">
-                          <button style="margin-bottom:10px;" class="btn btn-block btn-primary btn-sm disabled">
-                            {{ trans('general.checkout') }}
-                          </button>
-                        </div>
-                    @endif
-                @endif
 
 
                   @can('delete', $consumable)
                     <div class="col-md-12" style="padding-top: 10px; padding-bottom: 20px">
                       @if ($consumable->deleted_at=='')
-                        <button class="btn btn-sm btn-block btn-danger delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $consumable->name]) }}" data-target="#dataConfirmModal">{{ trans('general.delete') }}
+                        <button class="btn btn-sm btn-block btn-danger btn-social hidden-print delete-asset" data-toggle="modal" data-title="{{ trans('general.delete') }}" data-content="{{ trans('general.sure_to_delete_var', ['item' => $consumable->name]) }}" data-target="#dataConfirmModal">
+                          <x-icon type="delete" />
+                          {{ trans('general.delete') }}
                         </button>
                         <span class="sr-only">{{ trans('general.delete') }}</span>
                       @endif
@@ -139,7 +151,7 @@
 
               <!-- End button column -->
 
-              <div class="col-md-9 col-xs-12 col-sm-pull-3">
+              <div class="col-md-9 col-xs-12 col-sm-pull-3 info-stack">
 
                 <div class="row-new-striped" style="margin: 0px;">
 
@@ -374,6 +386,7 @@
                   @endif
                 </div> <!--/end striped container-->
               </div> <!-- end col-md-9 -->
+              </div><!-- end info-stack-container -->
             </div> <!--/.row-->
           </div><!-- /.tab-pane -->
 
@@ -415,102 +428,18 @@
 
 
           <div class="tab-pane" id="files">
+
             <div class="row">
+              <div class="col-md-12">
+                <x-filestable
+                        filepath="private_uploads/consumables/"
+                        showfile_routename="show.consumablefile"
+                        deletefile_routename="delete/consumablefile"
+                        :object="$consumable" />
 
-              <div class="col-md-12 col-sm-12">
-                <div class="table-responsive">
-
-                    <table
-                            data-cookie-id-table="consumableUploadsTable"
-                            data-id-table="consumableUploadsTable"
-                            id="consumableUploadsTable"
-                            data-search="true"
-                            data-pagination="true"
-                            data-side-pagination="client"
-                            data-show-columns="true"
-                            data-show-export="true"
-                            data-show-footer="true"
-                            data-toolbar="#upload-toolbar"
-                            data-show-refresh="true"
-                            data-sort-order="asc"
-                            data-sort-name="name"
-                            class="table table-striped snipe-table"
-                            data-export-options='{
-                    "fileName": "export-consumables-uploads-{{ str_slug($consumable->name) }}-{{ date('Y-m-d') }}",
-                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
-                    }'>
-                      <thead>
-                      <tr>
-                        <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      @if ($consumable->uploads->count() > 0)
-                        @foreach ($consumable->uploads as $file)
-                          <tr>
-                            <td>
-                              <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
-                              <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
-
-                            </td>
-                            <td>
-                              @if ($file->filename)
-                                @if ( Helper::checkUploadIsImage($file->get_src('consumables')))
-                                  <a href="{{ route('show.consumablefile', ['consumableId' => $consumable->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.consumablefile', ['consumableId' => $consumable->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                                @endif
-                              @endif
-                            </td>
-                            <td>
-                              {{ $file->filename }}
-                            </td>
-                            <td data-value="{{ (Storage::exists('private_uploads/consumables/'.$file->filename) ? Storage::size('private_uploads/consumables/'.$file->filename) : '') }}">
-                              {{ @Helper::formatFilesizeUnits(Storage::exists('private_uploads/consumables/'.$file->filename) ? Storage::size('private_uploads/consumables/'.$file->filename) : '') }}
-                            </td>
-
-                            <td>
-                              @if ($file->note)
-                                {!! nl2br(Helper::parseEscapedMarkedownInline($file->note)) !!}
-                              @endif
-                            </td>
-                            <td>
-                              @if ($file->filename)
-                                <a href="{{ route('show.consumablefile', [$consumable->id, $file->id]) }}" class="btn btn-sm btn-default">
-                                  <i class="fas fa-download" aria-hidden="true"></i>
-                                  <span class="sr-only">{{ trans('general.download') }}</span>
-                                </a>
-
-                                <a href="{{ route('show.consumablefile', [$consumable->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                  <i class="fa fa-external-link" aria-hidden="true"></i>
-                                </a>
-                              @endif
-                            </td>
-                            <td>{{ $file->created_at }}</td>
-                            <td>
-                              <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/consumablefile', [$consumable->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">
-                                <i class="fas fa-trash icon-white" aria-hidden="true"></i>
-                                <span class="sr-only">{{ trans('general.delete') }}</span>
-                              </a>
-
-                            </td>
-                          </tr>
-                        @endforeach
-                      @else
-                        <tr>
-                          <td colspan="8">{{ trans('general.no_results') }}</td>
-                        </tr>
-                      @endif
-                      </tbody>
-                    </table>
-                </div>
               </div>
-            </div> <!--/ROW-->
+            </div>
+
           </div><!--/FILES-->
 
           <div class="tab-pane" id="history">

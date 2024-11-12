@@ -55,6 +55,7 @@ return [
     'asset_location_update_default' => 'Atnaujinti tik numatytąją vietą',
     'asset_location_update_actual' => 'Atnaujinti tik faktinę vietą',
     'asset_not_deployable' => 'Turto būsena netinkama išdavimui, todėl šis turtas negali būti išduotas.',
+    'asset_not_deployable_checkin' => 'Turto su šia būsenos žyma išduoti negalima. Nustačius šią būsenos žymą, turtas bus paimtas.',
     'asset_deployable' => 'Turto būsena tinkama išdavimui, todėl šis turtas gali būti išduotas.',
     'processing_spinner' => 'Apdorojama... (Dideliems failams gali šiek tiek užtrukti)',
     'optional_infos'  => 'Papildoma informacija',

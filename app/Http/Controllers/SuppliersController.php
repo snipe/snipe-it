@@ -62,7 +62,7 @@ class SuppliersController extends Controller
         $supplier->email = request('email');
         $supplier->notes = request('notes');
         $supplier->url = $supplier->addhttp(request('url'));
-        $supplier->user_id = Auth::id();
+        $supplier->created_by = auth()->id();
         $supplier = $request->handleImages($supplier);
 
         if ($supplier->save()) {

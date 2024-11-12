@@ -15,7 +15,14 @@
 <div><!-- livewire div - do not remove -->
     <form class="form-horizontal" role="form" wire:submit="submit">
         {{csrf_field()}}
-
+        @if (session()->has('warning'))
+            <div class="alert alert-warning">
+                {!! session('warning') !!}
+                @php
+                    session()->forget('warning'); // Clear the session flash immediately
+                @endphp
+            </div>
+        @endif
         <div class="row">
 
             <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -153,7 +160,7 @@
 
 
                         <button type="submit" {{$isDisabled}} class="btn btn-primary"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
-                        <i class="fas fa-check icon-white" aria-hidden="true"></i> {{ $save_button }}</button>
+                        <x-icon type="checkmark" /> {{ $save_button }}</button>
 
                     </div> <!-- /.col-md-12 -->
                 </div><!--box-footer-->

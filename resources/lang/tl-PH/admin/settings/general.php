@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Backups',
     'backups_help'              => 'Create, download, and restore backups ',
     'backups_restoring'         => 'Restoring from Backup',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Upload Backup',
     'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
     'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
@@ -381,5 +383,8 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

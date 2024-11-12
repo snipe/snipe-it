@@ -2,18 +2,20 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Waarschuwing: </strong> Dit bestand is gemarkeerd als niet-uitgeefbaar. Als deze status is veranderd, update dan de asset status.',
     'does_not_exist' 	=> 'Dit asset bestaat niet.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_var'=> 'Asset met tag :asset_tag niet gevonden.',
+    'no_tag' 	        => 'Geen asset tag opgegeven.',
     'does_not_exist_or_not_requestable' => 'Die asset bestaat niet of is niet aanvraagbaar.',
     'assoc_users'	 	=> 'Dit asset is momenteel toegewezen aan een gebruiker en kan niet worden verwijderd. Controleer het asset eerst en probeer het opnieuw. ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'warning_audit_date_mismatch' 	=> 'De volgende auditdatum van dit asset (:next_audit_date) ligt vóór de laatste auditdatum (:last_audit_date). Gelieve de volgende auditdatum bij te werken.',
 
     'create' => [
         'error'   		=> 'Asset is niet aangemaakt, probeer het opnieuw :(',
         'success' 		=> 'Asset is succesvol aangemaakt. :)',
         'success_linked' => 'Asset met tag :tag is succesvol gemaakt. <strong><a href=":link" style="color: white;">Klik hier om te bekijken</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -33,7 +35,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Asset audit mislukt: :error ',
         'success' 		=> 'Asset audit succesvol geregistreerd.',
     ],
 
@@ -51,13 +53,14 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Import verwerken',
         'error'                 => 'Sommige items zijn niet goed geïmporteerd.',
         'errorDetail'           => 'De volgende items zijn niet geïmporteerd vanwege fouten.',
         'success'               => 'Je bestand is geïmporteerd',
         'file_delete_success'   => 'Je bestand is succesvol verwijderd',
         'file_delete_error'      => 'Het bestand kon niet worden verwijderd',
         'file_missing' => 'Het geselecteerde bestand ontbreekt',
+        'file_already_deleted' => 'Het geselecteerde bestand is al verwijderd',
         'header_row_has_malformed_characters' => 'Een of meer attributen in de kopregel bevatten ongeldige UTF-8-tekens',
         'content_row_has_malformed_characters' => 'Een of meer attributen in de eerste rij inhoud bevat ongeldige UTF-8 tekens',
     ],
@@ -76,6 +79,11 @@ return [
         'user_does_not_exist' => 'De gebruiker is ongeldig. Probeer het opnieuw.',
         'not_available' => 'Dat asset is niet beschikbaar voor check-out!',
         'no_assets_selected' => 'U moet minstens één asset selecteren uit de lijst',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

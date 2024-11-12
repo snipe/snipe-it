@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Veritabanınızı :filename\'den geri yüklemek istediğinizden emin misiniz?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Temizleme sırasında bir hata oluştu. ',

@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Ma hubtaa inaad rabto inaad ka soo celiso xogtaada: filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'Khalad ayaa dhacay markii la nadiifinayo ',

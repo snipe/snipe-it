@@ -8,15 +8,15 @@ return array(
 
     'success' => array(
         'create' => 'Grupo creado.',
-        'update' => 'Grupo actualizado.',
-        'delete' => 'Grupo eliminado.',
+        'update' => 'El grupo fue actualizado exitosamente.',
+        'delete' => 'El grupo fue eliminado exitosamente.',
     ),
 
     'delete' => array(
         'confirm'   => '¿Está seguro de que desea eliminar este grupo?',
-        'create' => 'Hubo un problema creando el grupo. Por favor intente nuevamente.',
+        'create' => 'Hubo un problema creando el grupo. Por favor, intente nuevamente.',
         'update' => 'Hubo un problema actualizando el grupo. Por favor, intente nuevamente.',
-        'delete' => 'Ha habido un problema eliminando el grupo. Vuelve a intentarlo.',
+        'delete' => 'Hubo un problema eliminando el grupo. Por favor, intente nuevamente.',
     ),
 
 );

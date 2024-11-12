@@ -51,7 +51,7 @@
 
                     <div class="box-footer text-right">
                         <a class="btn btn-link pull-left" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                        <button type="submit" class="btn btn-success" id="submit-button"><i class="fas fa-check icon-white" aria-hidden="true"></i> {{ trans('general.delete') }}</button>
+                        <button type="submit" class="btn btn-success" id="submit-button"><x-icon type="checkmark" /> {{ trans('general.delete') }}</button>
                     </div><!-- /.box-footer -->
                 </div><!-- /.box -->
             </form>

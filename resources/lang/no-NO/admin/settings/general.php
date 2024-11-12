@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Sikkerhetskopier',
     'backups_help'              => 'Opprette, laste ned og gjenopprette sikkerhetskopier ',
     'backups_restoring'         => 'Gjenoppretting fra sikkerhetskopi',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Last opp sikkerhetskopi',
     'backups_path'              => 'Sikkerhetskopier på tjeneren lagres i <code>:path</code>',
     'backups_restore_warning'   => 'Bruk gjenopprettingsknappen <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> for å gjenopprette fra en tidligere sikkerhetskopi. (Dette fungerer ikke med S3-fillagring eller Docker.)<br><br>Din <strong>hele :app_name databasen og eventuelle opplastede filer vil bli fullstendig erstattet</strong> av det som er i sikkerhetskopifilen.  ',
@@ -382,5 +384,8 @@ Linjeskift, topptekst, bilder, osv. kan føre til uventede resultater.',
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

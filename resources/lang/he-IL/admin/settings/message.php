@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'האם ברצונך לשחזר את המסד נתונים מ: קובץ?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please login again.'
+        'success'               => 'Your system backup has been restored. Please log in again.'
     ],
     'purge' => [
         'error'     => 'אירעה שגיאה בעת הטיהור.',

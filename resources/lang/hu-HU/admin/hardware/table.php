@@ -25,7 +25,6 @@ return [
     'image'		    => 'Készülék kép',
     'days_without_acceptance' => 'Nem elfogadás óta eltelt napok száma',
     'monthly_depreciation' => 'Havi értékcsökkenés',
-    'assigned_to'    => 'Felelős',
     'requesting_user' => 'Igénylő felhasználó',
     'requested_date' => 'Kért időpont',
     'changed'       => 'Módosítva',

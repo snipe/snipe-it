@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Varmuuskopiot',
     'backups_help'              => 'Luo, lataa ja palauta varmuuskopiota ',
     'backups_restoring'         => 'Palauta varmuuskopiosta',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Lataa varmuuskopio',
     'backups_path'              => 'Varmuuskopiot ovat tallennettuna palvelimelle polulla <code>:path</code>',
     'backups_restore_warning'   => 'Käytä palautuspainiketta <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> palauttaaksesi aiemman varmuuskopion. (Tämä ei tällä hetkellä toimi S3 tallennustilan tai Dockerin kanssa.)<br><br><strong>Koko :app_name tietokantasi ja kaikki ladatut tiedostot korvataan kokonaan</strong> sillä, mitä on varmuuskopiotiedostossa.  ',
@@ -381,5 +383,8 @@ return [
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

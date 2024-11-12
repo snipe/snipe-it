@@ -47,10 +47,10 @@ class OauthClients extends Component
     {
         // test for safety
         // ->delete must be of type Client - thus the model binding
-        if ($clientId->user_id == auth()->id()) {
+        if ($clientId->created_by == auth()->id()) {
             app(ClientRepository::class)->delete($clientId);
         } else {
-            Log::warning('User ' . auth()->id() . ' attempted to delete client ' . $clientId->id . ' which belongs to user ' . $clientId->user_id);
+            Log::warning('User ' . auth()->id() . ' attempted to delete client ' . $clientId->id . ' which belongs to user ' . $clientId->created_by);
             $this->authorizationError = 'You are not authorized to delete this client.';
         }
     }
@@ -58,10 +58,10 @@ class OauthClients extends Component
     public function deleteToken($tokenId): void
     {
         $token = app(TokenRepository::class)->find($tokenId);
-        if ($token->user_id == auth()->id()) {
+        if ($token->created_by == auth()->id()) {
             app(TokenRepository::class)->revokeAccessToken($tokenId);
         } else {
-            Log::warning('User ' . auth()->id() . ' attempted to delete token ' . $tokenId . ' which belongs to user ' . $token->user_id);
+            Log::warning('User ' . auth()->id() . ' attempted to delete token ' . $tokenId . ' which belongs to user ' . $token->created_by);
             $this->authorizationError = 'You are not authorized to delete this token.';
         }
     }
@@ -84,12 +84,12 @@ class OauthClients extends Component
         ]);
 
         $client = app(ClientRepository::class)->find($editClientId->id);
-        if ($client->user_id == auth()->id()) {
+        if ($client->created_by == auth()->id()) {
             $client->name = $this->editName;
             $client->redirect = $this->editRedirect;
             $client->save();
         } else {
-            Log::warning('User ' . auth()->id() . ' attempted to edit client ' . $editClientId->id . ' which belongs to user ' . $client->user_id);
+            Log::warning('User ' . auth()->id() . ' attempted to edit client ' . $editClientId->id . ' which belongs to user ' . $client->created_by);
             $this->authorizationError = 'You are not authorized to edit this client.';
         }
 

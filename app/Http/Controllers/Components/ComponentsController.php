@@ -73,6 +73,8 @@ class ComponentsController extends Controller
         $component->name                   = $request->input('name');
         $component->category_id            = $request->input('category_id');
         $component->supplier_id            = $request->input('supplier_id');
+        $component->manufacturer_id        = $request->input('manufacturer_id');
+        $component->model_number           = $request->input('model_number');
         $component->location_id            = $request->input('location_id');
         $component->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
         $component->order_number           = $request->input('order_number', null);
@@ -81,7 +83,7 @@ class ComponentsController extends Controller
         $component->purchase_date          = $request->input('purchase_date', null);
         $component->purchase_cost          = $request->input('purchase_cost', null);
         $component->qty                    = $request->input('qty');
-        $component->user_id                = Auth::id();
+        $component->created_by                = auth()->id();
         $component->notes                  = $request->input('notes');
 
         $component = $request->handleImages($component);
@@ -150,6 +152,8 @@ class ComponentsController extends Controller
         $component->name                   = $request->input('name');
         $component->category_id            = $request->input('category_id');
         $component->supplier_id            = $request->input('supplier_id');
+        $component->manufacturer_id        = $request->input('manufacturer_id');
+        $component->model_number           = $request->input('model_number');
         $component->location_id            = $request->input('location_id');
         $component->company_id             = Company::getIdForCurrentUser($request->input('company_id'));
         $component->order_number           = $request->input('order_number');

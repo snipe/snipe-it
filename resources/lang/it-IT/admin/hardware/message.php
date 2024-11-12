@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>Attenzione: </strong> Questo Bene è stato marcato come non distribuibile. Se lo stato del Bene è cambiato si prega di aggiornarlo.',
     'does_not_exist' 	=> 'Questo Asset non esiste.',
     'does_not_exist_var'=> 'Bene con tag :asset_tag non trovato.',
     'no_tag' 	        => 'Nessun tag del Bene è stato fornito.',
@@ -14,6 +14,8 @@ return [
         'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
         'success' 		=> 'L\'asset è stato creato con successo. :)',
         'success_linked' => 'Bene creato con tag :tag . <strong><a href=":link" style="color: white;">Clicca per vedere</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -51,13 +53,14 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Importa Processo',
         'error'                 => 'Alcuni elementi non sono stati importati correttamente.',
         'errorDetail'           => 'Gli articoli seguenti non sono stati importati correttamente a causa di errori.',
         'success'               => 'Il file è stato importato con successo',
         'file_delete_success'   => 'Il file è stato cancellato con successo',
         'file_delete_error'      => 'Impossibile eliminare il file',
         'file_missing' => 'File selezionato mancante',
+        'file_already_deleted' => 'Il file selezionato è già stato eliminato',
         'header_row_has_malformed_characters' => 'Uno o più attributi nella riga d\'intestazione contengono caratteri UTF-8 malformati',
         'content_row_has_malformed_characters' => 'Uno o più attributi nella prima riga del contenuto contengono caratteri UTF-8 malformati',
     ],
@@ -76,6 +79,11 @@ return [
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
         'not_available' => 'Questo prodotto non è disponibile per il checkout!',
         'no_assets_selected' => 'È necessario selezionare almeno una risorsa dall\'elenco',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

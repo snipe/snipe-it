@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Yedekler',
     'backups_help'              => 'Yedekler oluşturun, indirin ve geri yükleyin ',
     'backups_restoring'         => 'Yedekten geri dön',
+    'backups_clean' => 'Clean the backed-up database before restore',
+    'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Yedeği yükle',
     'backups_path'              => 'Yedeklerin sunucuda saklanacağı yer <code>:path</code>',
     'backups_restore_warning'   => 'Geri yükleme düğmesini kullanın<small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small>Önceki bir yedeklemeden geri yüklemek için. (Bu şu anda S3 dosya depolama veya Docker ile çalışmamaktadır.)<br><br>Senin<strong>:app_name veritabanının tamamı ve yüklenen dosyalar tamamen değiştirilecek</strong>Yedekleme dosyasında ne olduğuna göre.  ',
@@ -382,5 +384,8 @@ return [
     'default_avatar_help' => 'Kullanıcı profil fotoğrafı yüklememişse bu görsel profil fotoğrafı olacak.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Due For Checkin Warning',
+    'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

@@ -31,6 +31,8 @@ return [
     'backups'					=> 'Rezervne kopije',
     'backups_help'              => 'Kreirajte, preuzmite i vratite rezervne kopije ',
     'backups_restoring'         => 'Vraćanje rezervne kopije',
+    'backups_clean' => 'Očisti rezervnu kopiju baze podataka pre povraćanja',
+    'backups_clean_helptext' => "Ovo može biti korisno ako menjate verzije baza popdataka",
     'backups_upload'            => 'Učitavanje rezervne kopije',
     'backups_path'              => 'Rezervne kopije se čuvaju na <code>:path</code>',
     'backups_restore_warning'   => 'Koristite dugme za vraćanje <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> da bi ste vratili na raniju rezervnu kopiju. (Ovo trenutno ne radi sa S3 skladištem datoteka ili Docker-om.)<br><br>Vaša <strong>kompletna :app_name baza podataka i sve zakačene datoteke će biti potpuno zamenjene</strong> sa onim što je u rezervnoj kopiji.  ',
@@ -381,5 +383,8 @@ return [
     'default_avatar_help' => 'Ova slika će se prikazivati kao profilna ako korisnik nema svoju sliku profila.',
     'restore_default_avatar' => 'Vrati <a href=":default_avatar" data-toggle="lightbox" data-type="image">originalnu podrazumevanu sličicu</a>',
     'restore_default_avatar_help' => '',
+    'due_checkin_days' => 'Upozorenje da je vreme za razduženje',
+    'due_checkin_days_help' => 'Koliko dana ranije pre očekivanog razduženja imovine bi trebalo biti navedena u stranici "Vreme je za razduživanje"?',
+    'no_groups' => 'Još uvak nisu kreirane nikakve grupe. Poseti <code>Administrativna podešavanja > Grupe dozvola</code> da bi dodao neku.',
 
 ];

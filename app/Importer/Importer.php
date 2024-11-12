@@ -21,8 +21,7 @@ abstract class Importer
      * Id of User performing import
      * @var
      */
-    
-    protected $user_id;
+    protected $created_by;
     /**
      * Are we updating items in the import
      * @var bool
@@ -149,21 +148,28 @@ abstract class Importer
     {
         $headerRow = $this->csv->fetchOne();
         $this->csv->setHeaderOffset(0); //explicitly sets the CSV document header record
-        $results = $this->normalizeInputArray($this->csv->getRecords($headerRow));
 
         $this->populateCustomFields($headerRow);
 
-        DB::transaction(function () use (&$results) {
+        DB::transaction(function () use ($headerRow) {
+            $importedItemsCount = 0;
             Model::unguard();
-            $resultsCount = count($results);
-            foreach ($results as $row) {
+
+            foreach ($this->csv->getRecords($headerRow) as $row) {
+                //Lowercase header values to ensure we're comparing values properly.
+                $row = array_change_key_case($row, CASE_LOWER);
+
                 $this->handle($row);
+
+                $importedItemsCount++;
+
                 if ($this->progressCallback) {
-                    call_user_func($this->progressCallback, $resultsCount);
+                    call_user_func($this->progressCallback, $importedItemsCount);
                 }
 
                 $this->log('------------- Action Summary ----------------');
             }
+            Model::reguard();
         });
     }
 
@@ -234,22 +240,6 @@ abstract class Importer
         }
         // Otherwise no custom key, return original.
         return $key;
-    }
-
-    /**
-     * Used to lowercase header values to ensure we're comparing values properly.
-     *
-     * @param $results
-     * @return array
-     */
-    public function normalizeInputArray($results)
-    {
-        $newArray = [];
-        foreach ($results as $index => $arrayToNormalize) {
-            $newArray[$index] = array_change_key_case($arrayToNormalize);
-        }
-
-        return $newArray;
     }
 
     /**
@@ -395,7 +385,7 @@ abstract class Importer
     }
 
     /**
-     * Matches a user by user_id if user_name provided is a number
+     * Matches a user by created_by if user_name provided is a number
      * @param  string $user_name users full name from csv
      * @return User           User Matching ID
      */
@@ -412,13 +402,13 @@ abstract class Importer
     /**
      * Sets the Id of User performing import.
      *
-     * @param mixed $user_id the user id
+     * @param mixed $created_by the user id
      *
      * @return self
      */
-    public function setUserId($user_id)
+    public function setUserId($created_by)
     {
-        $this->user_id = $user_id;
+        $this->created_by = $created_by;
 
         return $this;
     }

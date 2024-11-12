@@ -17,7 +17,7 @@ return array(
     ),
 
     'delete' => array(
-        'confirm'   => 'Bist Du sicher, dass Du diesen Lieferanten löschen möchtest?',
+        'confirm'   => 'Bist du sicher, dass du diesen Lieferanten löschen möchtest?',
         'error'   => 'Beim Löschen des Lieferanten ist ein Fehler aufgetreten. Bitte versuche es erneut.',
         'success' => 'Lieferant wurde erfolgreich gelöscht.',
         'assoc_assets'	 => 'Dieser Lieferant ist derzeit :asset_count Asset(s) zugeordnet und kann nicht gelöscht werden. Bitte aktualisiere Deine Assets, so dass sie nicht mehr auf diesen Lieferant verweisen und versuche es erneut. ',

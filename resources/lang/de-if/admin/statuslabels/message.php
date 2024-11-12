@@ -17,7 +17,7 @@ return [
     ],
 
     'delete' => [
-        'confirm'   => 'Bist Du sicher, dass Du diese Statusbezeichnung löschen willst?',
+        'confirm'   => 'Bist du sicher, dass du diese Statusbezeichnung löschen willst?',
         'error'   => 'Es trat ein Fehler beim Löschen der Statusbezeichnung auf. Bitte versuche es erneut.',
         'success' => 'Die Statusbezeichnung wurde erfolgreich gelöscht.',
     ],

@@ -79,12 +79,12 @@ USER root
 
 VOLUME ["/var/lib/snipeit"]
 
-# Entrypoints
-COPY docker/entrypoint_alpine.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Startup script
+COPY docker/startup_alpine.sh /startup.sh
+RUN chmod +x /startup.sh
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
-CMD ["/entrypoint.sh"]
+CMD ["/startup.sh"]
 
 EXPOSE 80

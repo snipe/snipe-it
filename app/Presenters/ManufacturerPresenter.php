@@ -94,38 +94,52 @@ class ManufacturerPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => ' <span class="hidden-md hidden-lg">Assets</span>'
-                    .'<span class="hidden-xs"><i class="fas fa-barcode fa-lg"></i></span>',
+                'title' => trans('general.assets'),
                 'visible' => true,
+                'class' => 'css-barcode',
             ],
             [
                 'field' => 'licenses_count',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => ' <span class="hidden-md hidden-lg">Licenses</span>'
-                    .'<span class="hidden-xs"><i class="far fa-save fa-lg"></i></span>',
+                'title' => trans('general.licenses'),
                 'visible' => true,
+                'class' => 'css-license',
             ],
             [
                 'field' => 'consumables_count',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => ' <span class="hidden-md hidden-lg">Consumables</span>'
-                    .'<span class="hidden-xs"><i class="fas fa-tint fa-lg"></i></span>',
+                'title' => trans('general.consumables'),
                 'visible' => true,
+                'class' => 'css-consumable',
             ],
             [
                 'field' => 'accessories_count',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' => ' <span class="hidden-md hidden-lg">Accessories</span>'
-                    .'<span class="hidden-xs"><i class="far fa-keyboard fa-lg"></i></span>',
+                'title' => trans('general.accessories'),
                 'visible' => true,
-            ],
-            [
+                'class' => 'css-accessory',
+            ], [
+                'field' => 'components_count',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.components'),
+                'visible' => true,
+                'class' => 'css-component',
+            ], [
+                'field' => 'created_by',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.created_by'),
+                'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
+            ], [
                 'field' => 'created_at',
                 'searchable' => true,
                 'sortable' => true,
@@ -133,9 +147,15 @@ class ManufacturerPresenter extends Presenter
                 'title' => trans('general.created_at'),
                 'visible' => false,
                 'formatter' => 'dateDisplayFormatter',
-            ],
-
-            [
+            ], [
+                'field' => 'updated_at',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.updated_at'),
+                'visible' => false,
+                'formatter' => 'dateDisplayFormatter',
+            ], [
                 'field' => 'actions',
                 'searchable' => false,
                 'sortable' => false,

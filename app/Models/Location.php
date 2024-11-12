@@ -33,7 +33,7 @@ class Location extends SnipeModel
         'country'       => 'min:2|max:191|nullable',
         'zip'           => 'max:10|nullable',
         'manager_id'    => 'exists:users,id|nullable',
-        'parent_id'     => 'non_circular:locations,id',
+        'parent_id'     => 'nullable|exists:locations,id|non_circular:locations,id',
     ];
 
     protected $casts = [
@@ -42,7 +42,7 @@ class Location extends SnipeModel
     ];
 
     /**
-     * Whether the model should inject it's identifier to the unique
+     * Whether the model should inject its identifier to the unique
      * validation rules before attempting validation. If this property
      * is not set in the model it will default to true.
      *

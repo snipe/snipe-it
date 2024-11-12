@@ -3,30 +3,25 @@
 namespace App\Livewire;
 
 use App\Models\CustomField;
-use Livewire\Component;
-
 use App\Models\Import;
 use Illuminate\Support\Facades\Storage;
-
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
+use Livewire\Attributes\Computed;
+use Livewire\Component;
 
 class Importer extends Component
 {
-    use AuthorizesRequests;
-
-    public $files;
-
-    public $progress; //upload progress - '-1' means don't show
+    public $progress = -1; //upload progress - '-1' means don't show
     public $progress_message;
-    public $progress_bar_class;
+    public $progress_bar_class = 'progress-bar-warning';
 
     public $message; //status/error message?
     public $message_type; //success/error?
 
     //originally from ImporterFile
     public $import_errors; //
-    public ?Import $activeFile = null;
+    public $activeFileId;
+    public $headerRow = [];
+    public $typeOfImport;
     public $importTypes;
     public $columnOptions;
     public $statusType;
@@ -35,7 +30,6 @@ class Importer extends Component
     public $send_welcome;
     public $run_backup;
     public $field_map; // we need a separate variable for the field-mapping, because the keys in the normal array are too complicated for Livewire to understand
-    public $file_id; // TODO: I can't figure out *why* we need this, but it really seems like we do. I can't seem to pull the id from the activeFile for some reason?
 
     // Make these variables public - we set the properties in the constructor so we can localize them (versus the old static arrays)
     public $accessories_fields;
@@ -51,10 +45,8 @@ class Importer extends Component
         'files.*.file_path' => 'required|string',
         'files.*.created_at' => 'required|string',
         'files.*.filesize' => 'required|integer',
-        'activeFile' => 'Import',
-        'activeFile.import_type' => 'string',
-        'activeFile.field_map' => 'array',
-        'activeFile.header_row' => 'array',
+        'headerRow' => 'array',
+        'typeOfImport' => 'string',
         'field_map' => 'array'
     ];
 
@@ -68,14 +60,12 @@ class Importer extends Component
     {
         $tmp = array();
         if ($this->activeFile) {
-            $tmp = array_combine($this->activeFile->header_row, $this->field_map);
+            $tmp = array_combine($this->headerRow, $this->field_map);
             $tmp = array_filter($tmp);
         }
         return json_encode($tmp);
 
     }
-
-
 
     private function getColumns($type)
     {
@@ -120,17 +110,15 @@ class Importer extends Component
         return $results;
     }
 
-    public function updating($name, $new_import_type)
+    public function updatingTypeOfImport($type)
     {
-        if ($name == "activeFile.import_type") {
-
             // go through each header, find a matching field to try and map it to.
-            foreach ($this->activeFile->header_row as $i => $header) {
+        foreach ($this->headerRow as $i => $header) {
                 // do we have something mapped already?
                 if (array_key_exists($i, $this->field_map)) {
                     // yes, we do. Is it valid for this type of import?
                     // (e.g. the import type might have been changed...?)
-                    if (array_key_exists($this->field_map[$i], $this->columnOptions[$new_import_type])) {
+                if (array_key_exists($this->field_map[$i], $this->columnOptions[$type])) {
                         //yes, this key *is* valid. Continue on to the next field.
                         continue;
                     } else {
@@ -140,9 +128,9 @@ class Importer extends Component
                     } // TODO - strictly speaking, this isn't necessary here I don't think.
                 }
                 // first, check for exact matches
-                foreach ($this->columnOptions[$new_import_type] as $value => $text) {
+            foreach ($this->columnOptions[$type] as $v => $text) {
                     if (strcasecmp($text, $header) === 0) { // case-INSENSITIVe on purpose!
-                        $this->field_map[$i] = $value;
+                    $this->field_map[$i] = $v;
                         continue 2; //don't bother with the alias check, go to the next header
                     }
                 }
@@ -154,7 +142,7 @@ class Importer extends Component
                             // Make *absolutely* sure that this key actually _exists_ in this import type -
                             // you can trigger this by importing accessories with a 'Warranty' column (which don't exist
                             // in "Accessories"!)
-                            if (array_key_exists($key, $this->columnOptions[$new_import_type])) {
+                        if (array_key_exists($key, $this->columnOptions[$type])) {
                                 $this->field_map[$i] = $key;
                                 continue 3; // bust out of both of these loops; as well as the surrounding one - e.g. move on to the next header
                             }
@@ -163,20 +151,12 @@ class Importer extends Component
                 }
                 // and if you got here, we got nothing. Let's recommend 'null'
                 $this->field_map[$i] = null; // Booooo :(
-            }
         }
     }
-
-    public function boot() { // FIXME - delete or undelete.
-        ///////$this->activeFile = null; // I do *not* understand why I have to do this, but, well, whatever.
-    }
-
 
     public function mount()
     {
         $this->authorize('import');
-        $this->progress = -1; // '-1' means 'don't show the progressbar'
-        $this->progress_bar_class = 'progress-bar-warning';
         $this->importTypes = [
             'asset'         =>      trans('general.assets'),
             'accessory'     =>  trans('general.accessories'),
@@ -191,7 +171,7 @@ class Importer extends Component
         /**
          * These are the item-type specific columns
          */
-        $this->accessories_fields  = [
+        $this->accessories_fields = [
             'company' => trans('general.company'),
             'location' => trans('general.location'),
             'quantity' => trans('general.qty'),
@@ -223,7 +203,6 @@ class Importer extends Component
             'supplier' => trans('general.supplier'),
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
-            'purchase_order' => trans('admin/licenses/form.purchase_order'),
             'asset_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/general.asset')]),
             'model_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'manufacturer' => trans('general.manufacturer'),
@@ -314,7 +293,7 @@ class Importer extends Component
             'manufacturer' => trans('general.manufacturer'),
         ];
 
-        $this->users_fields  = [
+        $this->users_fields = [
             'id' => trans('general.id'),
             'company' => trans('general.company'),
             'location' => trans('general.location'),
@@ -339,12 +318,12 @@ class Importer extends Component
             'website' => trans('general.website'),
             'avatar' => trans('general.image'),
             'gravatar' => trans('general.importer.gravatar'),
-            'start_date'    => trans('general.start_date'),
-            'end_date'   => trans('general.end_date'),
-            'employee_num'   => trans('general.employee_number'),
+            'start_date' => trans('general.start_date'),
+            'end_date' => trans('general.end_date'),
+            'employee_num' => trans('general.employee_number'),
         ];
 
-        $this->locations_fields  = [
+        $this->locations_fields = [
             'name' => trans('general.item_name_var', ['item' => trans('general.location')]),
             'address' => trans('general.address'),
             'address2' => trans('general.importer.address2'),
@@ -529,7 +508,7 @@ class Importer extends Component
         ];
 
         $this->columnOptions[''] = $this->getColumns(''); //blank mode? I don't know what this is supposed to mean
-        foreach($this->importTypes AS $type => $name) {
+        foreach ($this->importTypes as $type => $name) {
             $this->columnOptions[$type] = $this->getColumns($type);
         }
         if ($this->activeFile) {
@@ -541,7 +520,7 @@ class Importer extends Component
     {
         $this->clearMessage();
 
-        $this->activeFile = Import::find($id);
+        $this->activeFileId = $id;
 
         if (!$this->activeFile) {
             $this->message = trans('admin/hardware/message.import.file_missing');
@@ -549,10 +528,13 @@ class Importer extends Component
             return;
         }
 
-        $this->field_map = null;
-        foreach($this->activeFile->header_row as $element) {
+        $this->headerRow = $this->activeFile->header_row;
+        $this->typeOfImport = $this->activeFile->import_type;
 
-            if(isset($this->activeFile->field_map[$element])) {
+        $this->field_map = null;
+        foreach ($this->headerRow as $element) {
+
+            if (isset($this->activeFile->field_map[$element])) {
                 $this->field_map[] = $this->activeFile->field_map[$element];
             } else {
                 $this->field_map[] = null; // re-inject the 'nulls' if a file was imported with some 'Do Not Import' settings
@@ -567,16 +549,31 @@ class Importer extends Component
 
     public function destroy($id)
     {
-        // TODO: why don't we just do File::find($id)? This seems dumb.
-        foreach($this->files as $file) {
-            if ($id == $file->id) {
-                if (Storage::delete('private_uploads/imports/'.$file->file_path)) {
-                    $file->delete();
+        $this->authorize('import');
 
+        $import = Import::find($id);
+
+        // Check that the import wasn't deleted after while page was already loaded...
+        // @todo: next up...handle the file being missing for other interactions...
+        // for example having an import open in two tabs, deleting it, and then changing
+        // the import type in the other tab. The error message below wouldn't display in that case.
+        if (!$import) {
+            $this->message = trans('admin/hardware/message.import.file_already_deleted');
+            $this->message_type = 'danger';
+
+            return;
+        }
+
+        if (Storage::delete('private_uploads/imports/' . $import->file_path)) {
+            $import->delete();
                     $this->message = trans('admin/hardware/message.import.file_delete_success');
                     $this->message_type = 'success';
+
+            unset($this->files);
+
                     return;
-                } else {
+        }
+
                     $this->message = trans('admin/hardware/message.import.file_delete_error');
                     $this->message_type = 'danger';
                 }
@@ -590,9 +587,20 @@ class Importer extends Component
         $this->message_type = null;
     }
 
+    #[Computed]
+    public function files()
+    {
+        return Import::orderBy('id', 'desc')->get();
+    }
+
+    #[Computed]
+    public function activeFile()
+    {
+        return Import::find($this->activeFileId);
+    }
+
     public function render()
     {
-        $this->files = Import::orderBy('id','desc')->get(); //HACK - slows down renders.
         return view('livewire.importer')
                 ->extends('layouts.default')
                 ->section('content');

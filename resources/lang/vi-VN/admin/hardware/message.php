@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Tài sản chưa được tạo, xin vui lòng thử lại. :(',
         'success' 		=> 'Tài sản được tạo thành công. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -58,6 +60,7 @@ return [
         'file_delete_success'   => 'Tập tin của bạn đã được xóa thành công',
         'file_delete_error'      => 'Không thể xóa tệp',
         'file_missing' => 'Tệp đã chọn bị thiếu',
+        'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Một hoặc nhiều thuộc tính trong hàng tiêu đề chứa các ký tự không đúng định dạng UTF-8',
         'content_row_has_malformed_characters' => 'Một hoặc nhiều thuộc tính ở hàng đầu tiên của nội dung chứa ký tự không đúng định dạng UTF-8',
     ],
@@ -76,6 +79,11 @@ return [
         'user_does_not_exist' => 'Người dùng này không tồn tại. Bạn hãy thử lại.',
         'not_available' => 'Tài sản đó không có sẵn để thanh toán!',
         'no_assets_selected' => 'Bạn phải chọn ít nhất một mục trong danh sách',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

@@ -27,16 +27,16 @@ class ActionlogSeeder extends Seeder
         Actionlog::factory()
             ->count(300)
             ->assetCheckoutToUser()
-            ->create(['user_id' => $admin->id]);
+            ->create(['created_by' => $admin->id]);
 
         Actionlog::factory()
             ->count(100)
             ->assetCheckoutToLocation()
-            ->create(['user_id' => $admin->id]);
+            ->create(['created_by' => $admin->id]);
 
         Actionlog::factory()
             ->count(20)
             ->licenseCheckoutToUser()
-            ->create(['user_id' => $admin->id]);
+            ->create(['created_by' => $admin->id]);
     }
 }

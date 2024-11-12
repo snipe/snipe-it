@@ -25,7 +25,6 @@ return [
     'image'		    => 'Gambar Perangkat',
     'days_without_acceptance' => 'Tanda Terima',
     'monthly_depreciation' => 'Penyusutan Bulanan',
-    'assigned_to'    => 'Ditugaskan untuk',
     'requesting_user' => 'Meminta Pengguna',
     'requested_date' => 'Tanggal yang diminta',
     'changed'       => 'Diubah',

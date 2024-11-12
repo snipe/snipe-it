@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Turto sukurti nepavyko, bandykite dar kartą.',
         'success' 		=> 'Turtas sukurtas sėkmingai.',
         'success_linked' => 'Turtas su žyma :tag sukurtas sėkmingai. <strong><a href=":link" style="color: white;">Spustelėkite čia, kad peržiūrėtumėte</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -58,6 +60,7 @@ return [
         'file_delete_success'   => 'Jūsų failas buvo sėkmingai ištrintas',
         'file_delete_error'      => 'Šio failo ištrinti nepavyko',
         'file_missing' => 'Pažymėtas failas nerastas',
+        'file_already_deleted' => 'Pasirinktas failas jau buvo panaikintas',
         'header_row_has_malformed_characters' => 'Vienas ar keli antraštinės eilutės atributai turi netinkamai suformuotų UTF-8 simbolių',
         'content_row_has_malformed_characters' => 'Vienas ar keli pirmosios eilutės atributai turi netinkamai suformuotų UTF-8 simbolių',
     ],
@@ -76,6 +79,11 @@ return [
         'user_does_not_exist' => 'Neteisingas naudotojas. Bandykite dar kartą.',
         'not_available' => 'Šis turtas negali būti išduodamas!',
         'no_assets_selected' => 'Turite pasirinkti bent vieną turto vienetą iš sąrašo',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Turtas nebuvo išduotas, bandykite dar kartą|Turtas nebuvo išduotas, bandykite dar kartą',
+        'success' => 'Turtas išduotas sėkmingai.|Turtas išduotas sėkmingai.',
     ],
 
     'checkin' => [

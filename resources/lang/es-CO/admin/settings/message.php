@@ -9,16 +9,16 @@ return [
     'backup' => [
         'delete_confirm'        => '¿Está seguro de que desea eliminar este archivo de respaldo? Esta acción no puede se puede deshacer. ',
         'file_deleted'          => 'El archivo de copia de seguridad se ha eliminado correctamente. ',
-        'generated'             => 'Se ha creado un nuevo archivo de copia de seguridad.',
+        'generated'             => 'Se ha creado correctamente un nuevo archivo de copia de seguridad.',
         'file_not_found'        => 'Ese archivo de copia de seguridad no se pudo encontrar en el servidor.',
         'restore_warning'       => 'Sí, restaurarlo. Reconozco que esto sobrescribirá cualquier dato existente actualmente en la base de datos. Esto también cerrará la sesión de todos sus usuarios existentes (incluido usted).',
         'restore_confirm'       => '¿Está seguro que desea restaurar su base de datos desde :filename?'
     ],
     'restore' => [
-        'success'               => 'Su copia de respaldo del sistema ha sido restaurada. Por favor, inicie sesión nuevamente.'
+        'success'               => 'Se ha restaurado la copia de seguridad de su sistema. Por favor, vuelva a iniciar sesión.'
     ],
     'purge' => [
-        'error'     => 'Se ha producido un error al purgar. ',
+        'error'     => 'Ha ocurrido un error mientras se realizaba el purgado. ',
         'validation_failed'     => 'Su confirmación de purga es incorrecta. Por favor, escriba la palabra "DELETE" en el cuadro de confirmación.',
         'success'               => 'Los registros eliminados se han purgado correctamente.',
     ],
@@ -29,7 +29,7 @@ return [
         'additional' => 'No se proporciona ningún mensaje de error adicional. Compruebe la configuración de su correo y el registro de errores de la aplicación.'
     ],
     'ldap' => [
-        'testing' => 'Probando conexión LDAP, Binding & Query ...',
+        'testing' => 'Probando conexión al LDAP, Binding & Query ...',
         '500' => 'Error 500 del servidor. Por favor, compruebe los registros de error de su servidor para más información.',
         'error' => 'Algo salió mal :(',
         'sync_success' => 'Una muestra de 10 usuarios devueltos desde el servidor LDAP basado en su configuración:',
@@ -38,7 +38,7 @@ return [
     ],
     'webhook' => [
         'sending' => 'Enviando mensaje de prueba :app...',
-        'success' => '¡Su Integración :webhook_name funciona!',
+        'success' => '¡Su integración :webhook_name funciona!',
         'success_pt1' => '¡Éxito! Compruebe el ',
         'success_pt2' => ' para su mensaje de prueba, y asegúrese de hacer clic en GUARDAR abajo para guardar su configuración.',
         '500' => 'Error 500 del servidor.',
