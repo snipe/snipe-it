@@ -79,7 +79,7 @@ class ConsumableCheckoutController extends Controller
         // attaching large amounts of checkouts can exhaust memory.
         if($quantity > 10000){
             return redirect()->back()
-                ->with('error', trans('admin/consumables/message.checkout.large_quantity_error', ['requested' => $quantity, 'remaining' => $consumable->numRemaining() ]));
+                ->with('error', trans('admin/consumables/message.checkout.large_quantity_error', ['max_amount' => 10000]));
         }
 
         // Make sure there is at least one available to checkout

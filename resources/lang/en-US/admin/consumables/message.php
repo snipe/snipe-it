@@ -28,7 +28,7 @@ return array(
         'user_does_not_exist' => 'That user is invalid. Please try again.',
          'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
          'checkout_error' => 'Something went wrong with your Checkout',
-         'large_quantity_error' => '10,000 is the max quantity per checkout.',
+         'large_quantity_error' => ':max_amount is the max quantity per checkout.',
     ),
 
     'checkin' => array(
