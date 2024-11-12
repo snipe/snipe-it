@@ -113,6 +113,10 @@ class SlackSettingsForm extends Component
         if($this->webhook_selected == 'microsoft' || $this->webhook_selected == 'google'){
             $this->webhook_channel = '#NA';
         }
+
+    }
+    public function updatedwebhookEndpoint() {
+        $this->teams_webhook_deprecated = !Str::contains($this->webhook_endpoint, 'workflows');
     }
 
     private function isButtonDisabled() {
