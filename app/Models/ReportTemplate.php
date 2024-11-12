@@ -109,8 +109,11 @@ class ReportTemplate extends Model
             return $fallbackValue;
         }
 
-        // Return the field's value if it exists and return 0
-        // if not so that checkboxes are unchecked by default.
+        // If the model does exist then return the value of the field
+        // or return 0 so the checkbox is unchecked.
+        // Falling back to 0 here is because checkboxes are not sent
+        // in the request when unchecked so they are not
+        // actually saved in the model's options.
         return $this->options[$fieldName] ?? '0';
     }
 
