@@ -15,22 +15,23 @@ class ReportTemplateParsingValuesTest extends TestCase
     {
         $unsavedTemplate = new ReportTemplate;
 
-        // checkmarkValue()
+        // checkmarkValue() should be "checked" (1) by default
         $this->assertEquals('1', $unsavedTemplate->checkmarkValue('is_a_checkbox_field'));
 
-        // radioValue()
+        // radioValue() defaults to false but can be overridden
         $this->assertFalse($unsavedTemplate->radioValue('value_on_unsaved_template', 'can_be_anything'));
         $this->assertTrue($unsavedTemplate->radioValue('value_on_unsaved_template', 'can_be_anything', true));
 
-        // selectValue()
+        // selectValue() should be null by default
         $this->assertNull($unsavedTemplate->selectValue('value_on_unsaved_template'));
         $this->assertNull($unsavedTemplate->selectValue('value_on_unsaved_template'), Location::class);
 
-        // selectValues()
+        // selectValues() should be an empty array by default
+        $this->assertIsArray($unsavedTemplate->selectValues('value_on_unsaved_template'));
         $this->assertEmpty($unsavedTemplate->selectValues('value_on_unsaved_template'));
         $this->assertEmpty($unsavedTemplate->selectValues('value_on_unsaved_template'), Location::class);
 
-        // textValue()
+        // textValue() should be an empty string by default
         $this->assertEquals('', $unsavedTemplate->selectValue('value_on_unsaved_template'));
     }
 
@@ -48,7 +49,7 @@ class ReportTemplateParsingValuesTest extends TestCase
         $this->assertEquals('1', $template->checkmarkValue('is_a_checkbox_field'));
         $this->assertEquals('0', $template->checkmarkValue('non_existent_key'));
         $this->assertEquals('0', $template->checkmarkValue('is_checkbox_field_with_zero'));
-        $this->assertEquals('0', (new ReportTemplate)->checkmarkValue('non_existent_key', '0'));
+        $this->assertEquals('0', (new ReportTemplate)->checkmarkValue('non_existent_key_that_is_overwritten_to_default_to_zero', '0'));
     }
 
     public function testParsingTextValue()
@@ -77,7 +78,7 @@ class ReportTemplateParsingValuesTest extends TestCase
         // check non-existent key returns false
         $this->assertFalse($template->radioValue('non_existent_property', 'doesnt_matter'));
 
-        // check default returns true
+        // check can return fallback value
         $this->assertTrue($template->radioValue('non_existent_property', 'doesnt_matter', true));
     }
 
