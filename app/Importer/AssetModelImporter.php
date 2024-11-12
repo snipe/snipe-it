@@ -59,18 +59,22 @@ class AssetModelImporter extends ItemImporter
         $this->item['manufacturer'] = trim($this->findCsvMatch($row, 'manufacturer'));
         $this->item['min_amt'] = trim($this->findCsvMatch($row, 'min_amt'));
         $this->item['model_number'] = trim($this->findCsvMatch($row, 'model_number'));
+        $this->item['eol'] = trim($this->findCsvMatch($row, 'eol'));
         $this->item['notes'] = trim($this->findCsvMatch($row, 'notes'));
-        $this->item['user_id'] = auth()->id();
+        $this->item['created_by'] = auth()->id();
+
+        $this->item['requestable'] = trim(($this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'))) == 1) ? '1' : 0;
+        $assetmodel->requestable = $this->item['requestable'];
 
 
         if (!empty($this->item['category'])) {
-            if ($category = $this->createOrFetchCategory($row, 'category')) {
-                $this->item['category_id'] = $category->id;
+            if ($category = $this->createOrFetchCategory($this->item['category'])) {
+                $this->item['category_id'] = $category;
             }
         }
         if (!empty($this->item['manufacturer'])) {
-            if ($manufacturer = $this->createOrFetchManufacturer($row, 'manufacturer')) {
-                $this->item['manufacturer_id'] = $manufacturer->id;
+            if ($manufacturer = $this->createOrFetchManufacturer($this->item['manufacturer'])) {
+                $this->item['manufacturer_id'] = $manufacturer;
             }
         }
 

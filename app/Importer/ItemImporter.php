@@ -287,6 +287,7 @@ class ItemImporter extends Importer
         $classname = class_basename(get_class($this));
         $item_type = strtolower(substr($classname, 0, strpos($classname, 'Importer')));
 
+        // If we're importing asset models only (without attached assets), override the category type to asset
         if ($item_type == 'assetmodel') {
             $item_type = 'asset';
         }
@@ -302,7 +303,7 @@ class ItemImporter extends Importer
 
 
         if ($category) {
-            $this->log('A matching category: '.$asset_category.' already exists');
+            $this->log('A matching category: '.$category->name.' already exists');
             return $category->id;
         }
 

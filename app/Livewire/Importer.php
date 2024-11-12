@@ -346,7 +346,7 @@ class Importer extends Component
             'notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'min_amt' => trans('mail.min_QTY'),
             'fieldset' => trans('admin/models/general.fieldset'),
-            'category_type' => 'category type',
+            'eol' => 'eol',
 
         ];
 
@@ -570,15 +570,13 @@ class Importer extends Component
                     $this->message_type = 'success';
 
             unset($this->files);
-
                     return;
         }
 
-                    $this->message = trans('admin/hardware/message.import.file_delete_error');
-                    $this->message_type = 'danger';
-                }
-            }
-        }
+        $this->message = trans('admin/hardware/message.import.file_delete_error');
+        $this->message_type = 'danger';
+
+
     }
 
     public function clearMessage()
