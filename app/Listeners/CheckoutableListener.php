@@ -3,13 +3,20 @@
 namespace App\Listeners;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Mail\CheckinAccessoryMail;
+use App\Mail\CheckinLicenseMail;
+use App\Mail\CheckoutAccessoryMail;
+use App\Mail\CheckoutAssetMail;
+use App\Mail\CheckinAssetMail;
+use App\Mail\CheckoutConsumableMail;
+use App\Mail\CheckoutLicenseMail;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
-use App\Models\Recipients\AdminRecipient;
+use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CheckinAccessoryNotification;
@@ -20,9 +27,11 @@ use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Osama\LaravelTeamsNotification\TeamsNotification;
 
 class CheckoutableListener
 {
@@ -43,33 +52,56 @@ class CheckoutableListener
         /**
          * Make a checkout acceptance and attach it in the notification
          */
+        $settings = Setting::getSettings();
         $acceptance = $this->getCheckoutAcceptance($event);
-        $notifiables = $this->getNotifiables($event);
+        $adminCcEmailsArray = [];
 
+        if($settings->admin_cc_email !== '') {
+            $adminCcEmail = $settings->admin_cc_email;
+            $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+        }
+        $ccEmails = array_filter($adminCcEmailsArray);
+        $mailable = $this->getCheckoutMailType($event, $acceptance);
+        $notifiable = $this->getNotifiables($event);
+
+        if  (!$event->checkedOutTo->locale){
+            $mailable->locale($event->checkedOutTo->locale);
+        }
         // Send email notifications
         try {
-            foreach ($notifiables as $notifiable) {
-                if ($notifiable instanceof User && $notifiable->email != '') {
-                    if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                    else {
-                        Notification::send($notifiable, $this->getCheckoutNotification($event, $acceptance));
-                    }
-                }
-            }
+            /**
+             * Send an email if any of the following conditions are met:
+             * 1. The asset requires acceptance
+             * 2. The item has a EULA
+             * 3. The item should send an email at check-in/check-out
+             */
 
-            // Send Webhook notification
-            if ($this->shouldSendWebhookNotification()) {
-                // Slack doesn't include the URL in its messaging format, so this is needed to hit the endpoint
-                if (Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general') {
-                    Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckoutNotification($event, $acceptance));
-                } else {
-                    Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckoutNotification($event, $acceptance));
+                if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
+                    (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+                    if (!empty($notifiable)) {
+                        Mail::to($notifiable)->cc($ccEmails)->send($mailable);
+                    } elseif (!empty($ccEmails)) {
+                        Mail::cc($ccEmails)->send($mailable);
+                    }
+                    Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                 }
-            }
+        } catch (ClientException $e) {
+            Log::debug("Exception caught during checkout email: " . $e->getMessage());
+        } catch (Exception $e) {
+            Log::debug("Exception caught during checkout email: " . $e->getMessage());
+        }
+//                 Send Webhook notification
+        try{
+                if ($this->shouldSendWebhookNotification()) {
+                    if (Setting::getSettings()->webhook_selected === 'microsoft') {
+                        $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
+                        $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                        $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
+                    } else {
+                        Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
+                            ->notify($this->getCheckoutNotification($event, $acceptance));
+                    }
+                }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout notification: " . $e->getMessage());
         } catch (Exception $e) {
@@ -103,34 +135,51 @@ class CheckoutableListener
                 }
             }
         }
+        $settings = Setting::getSettings();
+        $adminCcEmailsArray = [];
 
-        $notifiables = $this->getNotifiables($event);
+        if($settings->admin_cc_email !== '') {
+            $adminCcEmail = $settings->admin_cc_email;
+            $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+        }
+        $ccEmails = array_filter($adminCcEmailsArray);
+        $mailable =  $this->getCheckinMailType($event);
+        $notifiable = $this->getNotifiables($event);
+
+        if  (!$event->checkedOutTo->locale){
+            $mailable->locale($event->checkedOutTo->locale);
+        }
         // Send email notifications
         try {
-            foreach ($notifiables as $notifiable) {
-                if ($notifiable instanceof User && $notifiable->email != '') {
-                    if (! $event->checkedOutTo->locale){
-                        Notification::locale(Setting::getSettings()->locale)->send($notifiable, $this->getCheckoutNotification($event, $acceptance));
+            /**
+             * Send an email if any of the following conditions are met:
+             * 1. The asset requires acceptance
+             * 2. The item has a EULA
+             * 3. The item should send an email at check-in/check-out
+             */
+                if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
+                    (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+                    if (!empty($notifiable)) {
+                        Mail::to($notifiable)->cc($ccEmails)->send($mailable);
+                    } elseif (!empty($ccEmails)){
+                        Mail::cc($ccEmails)->send($mailable);
                     }
-                    else {
-                        Notification::send($notifiable, $this->getCheckinNotification($event));
-                    }
+                    Log::info('Sending email, Locale: ' . $event->checkedOutTo->locale);
                 }
-            }
-            // Send Webhook notification
+        } catch (ClientException $e) {
+            Log::debug("Exception caught during checkin email: " . $e->getMessage());
+        } catch (Exception $e) {
+            Log::debug("Exception caught during checkin email: " . $e->getMessage());
+        }
+
+        // Send Webhook notification
+        try {
             if ($this->shouldSendWebhookNotification()) {
-                // Slack doesn't include the URL in its messaging format, so this is needed to hit the endpoint
-                if (Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general') {
-                    Notification::route('slack', Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckinNotification($event));
-                } else {
                     Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckinNotification($event));
                 }
-            }
-
         } catch (ClientException $e) {
-            Log::warning("Exception caught during checkout notification: " . $e->getMessage());
+            Log::warning("Exception caught during checkin notification: " . $e->getMessage());
         } catch (Exception $e) {
             Log::warning("Exception caught during checkin notification: " . $e->getMessage());
         }
@@ -157,33 +206,6 @@ class CheckoutableListener
         $acceptance->save();
 
         return $acceptance;      
-    }
-
-    /**
-     * Gets the entities to be notified of the passed event
-     * 
-     * @param  Event $event
-     * @return Collection
-     */
-    private function getNotifiables($event)
-    {
-        $notifiables = collect();
-
-        /**
-         * Notify who checked out the item as long as the model can route notifications
-         */
-        if (method_exists($event->checkedOutTo, 'routeNotificationFor')) {
-            $notifiables->push($event->checkedOutTo);
-        }
-
-        /**
-         * Notify Admin users if the settings is activated
-         */
-        if ((Setting::getSettings()) && (Setting::getSettings()->admin_cc_email != '')) {
-            $notifiables->push(new AdminRecipient());
-        }
-
-        return $notifiables;       
     }
 
     /**
@@ -234,7 +256,7 @@ class CheckoutableListener
                 break;
             case Consumable::class:
                 $notificationClass = CheckoutConsumableNotification::class;
-                break;    
+                break;
             case LicenseSeat::class:
                 $notificationClass = CheckoutLicenseSeatNotification::class;
                 break;
@@ -242,6 +264,43 @@ class CheckoutableListener
 
 
         return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
+    }
+    private function getCheckoutMailType($event, $acceptance){
+        $lookup = [
+            Accessory::class => CheckoutAccessoryMail::class,
+            Asset::class => CheckoutAssetMail::class,
+            LicenseSeat::class => CheckoutLicenseMail::class,
+            Consumable::class => CheckoutConsumableMail::class,
+        ];
+        $mailable= $lookup[get_class($event->checkoutable)];
+
+        return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $event->note, $acceptance);
+
+    }
+    private function getCheckinMailType($event){
+        $lookup = [
+            Accessory::class => CheckinAccessoryMail::class,
+            Asset::class => CheckinAssetMail::class,
+            LicenseSeat::class => CheckinLicenseMail::class,
+        ];
+
+        $mailable= $lookup[get_class($event->checkoutable)];
+
+        return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);
+
+    }
+    private function getNotifiables($event){
+
+        if($event->checkedOutTo instanceof Asset){
+            $event->checkedOutTo->load('assignedTo');
+            return $event->checkedOutTo->assignedto?->email ?? '';
+        }
+        else if($event->checkedOutTo instanceof Location) {
+            return $event->checkedOutTo->manager?->email ?? '';
+        }
+        else{
+            return $event->checkedOutTo->email;
+        }
     }
 
     /**

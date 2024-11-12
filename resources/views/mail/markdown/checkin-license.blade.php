@@ -6,15 +6,15 @@
 @component('mail::table')
 |        |          |
 | ------------- | ------------- |
-| **{{ trans('mail.asset_name') }}** | {{ $item->name }} |
-@if (isset($item->manufacturer))
-| **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
+| **{{ trans('mail.asset_name') }}** | {{ $license->name }} |
+@if (isset($license->manufacturer))
+| **{{ trans('general.manufacturer') }}** | {{ $license->manufacturer->name }} |
 @endif
-@if ($target->can('update', $item))
-| **Key** | {{ $item->serial }} |
+@if (($target instanceof \App\Models\User && $target->can('view', $license)) ||($target instanceof \App\Models\Asset && $license_seat->user->can('view', $license)))
+| **Key** | {{ $license->serial }} |
 @endif
 @if (isset($item->category))
-| **{{ trans('general.category') }}** | {{ $item->category->name }} |
+| **{{ trans('general.category') }}** | {{ $license->category->name }} |
 @endif
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |
