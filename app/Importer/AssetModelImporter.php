@@ -108,8 +108,9 @@ class AssetModelImporter extends ItemImporter
             return $assetmodel;
 
         } else {
-            Log::debug($assetmodel->getErrors());
-            return $assetmodel->errors;
+            $this->log($assetmodel->getErrors()->first());
+            $this->addErrorToBag($assetmodel, '', $assetmodel->getErrors()->first());
+            return $assetmodel->getErrors();
         }
 
     }

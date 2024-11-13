@@ -92,7 +92,7 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function whenRequiredColumnsAreMissingInImportFile(): void
     {
-        $importFileBuilder = ImportFileBuilder::new()->forget(['category']);
+        $importFileBuilder = ImportFileBuilder::new(['name' => '']);
         $import = Import::factory()->assetmodel()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->actingAsForApi(User::factory()->superuser()->create());
@@ -104,7 +104,10 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
                 'payload'  => null,
                 'messages' => [
                     '' => [
-                            'name' => ['The name field is required.'],
+                        '' => [
+                            '' =>
+                                ['The name field is required.'],
+                        ],
                     ]
                 ]
             ]);
