@@ -104,8 +104,8 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
                 'payload'  => null,
                 'messages' => [
                     '' => [
-                        '' => [
-                            '' =>
+                        'name' => [
+                            'name' =>
                                 ['The name field is required.'],
                         ],
                     ]
