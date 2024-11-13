@@ -69,31 +69,30 @@ class Importer extends Component
 
     private function getColumns($type)
     {
-        \Log::error($type);
         switch ($type) {
             case 'asset':
                 $results = $this->assets_fields;
                 break;
+            case 'assetmodel':
+                $results = $this->assetmodels_fields;
+                break;
             case 'accessory':
                 $results = $this->accessories_fields;
-                break;
-            case 'consumable':
-                $results = $this->consumables_fields;
                 break;
             case 'component':
                 $results = $this->components_fields;
                 break;
+            case 'consumable':
+                $results = $this->consumables_fields;
+                break;
             case 'license':
                 $results = $this->licenses_fields;
-                break;
-            case 'user':
-                $results = $this->users_fields;
                 break;
             case 'location':
                 $results = $this->locations_fields;
                 break;
-            case 'assetmodel':
-                $results = $this->assetmodels_fields;
+            case 'user':
+                $results = $this->users_fields;
                 break;
             default:
                 $results = [];
@@ -136,7 +135,6 @@ class Importer extends Component
                 }
                 // if you got here, we didn't find a match. Try the $aliases_fields
                 foreach ($this->aliases_fields as $key => $alias_values) {
-                    \Log::error('No matches');
                     foreach ($alias_values as $alias_value) {
                         if (strcasecmp($alias_value, $header) === 0) { // aLsO CaSe-INSENSitiVE!
                             // Make *absolutely* sure that this key actually _exists_ in this import type -
@@ -158,14 +156,14 @@ class Importer extends Component
     {
         $this->authorize('import');
         $this->importTypes = [
-            'asset'         =>      trans('general.assets'),
             'accessory'     =>  trans('general.accessories'),
-            'consumable'    => trans('general.consumables'),
-            'component'     =>  trans('general.components'),
-            'license'       =>    trans('general.licenses'),
-            'user'          =>       trans('general.users'),
-            'location'      =>   trans('general.locations'),
+            'asset'         =>      trans('general.assets'),
             'assetmodel'    =>      trans('general.asset_models'),
+            'component'     =>  trans('general.components'),
+            'consumable'    => trans('general.consumables'),
+            'license'       =>    trans('general.licenses'),
+            'location'      =>   trans('general.locations'),
+            'user'          =>       trans('general.users'),
         ];
 
         /**
