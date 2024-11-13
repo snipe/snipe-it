@@ -232,16 +232,10 @@ class AssetsController extends Controller
      */
     public function update(UpdateAssetRequest $request, Asset $asset): RedirectResponse
     {
-
-        // Check if the asset exists
-        //if (! $asset = Asset::find($assetId)) {
-        //    // Redirect to the asset management page with error
-        //    return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        //}
-        //$this->authorize($asset);
         try {
             $asset = UpdateAssetAction::run(
-                $asset,
+                asset: $asset,
+                request: $request,
                 status_id: $request->validated('status_id'),
                 warranty_months: $request->validated('warranty_months'),
                 purchase_cost: $request->validated('purchase_cost'),
@@ -252,7 +246,15 @@ class AssetsController extends Controller
                 expected_checkin: $request->validated('expected_checkin'),
                 requestable: $request->validated('requestable'),
                 rtd_location_id: $request->validated('rtd_location_id'),
-                byod: $request->validated('byod')
+                byod: $request->validated('byod'),
+                image_delete: $request->validated('image_delete'),
+                serials: null, // this needs to be set up in request somehow
+                name: $request->validated('name'),
+                company_id: $request->validated('company_id'),
+                model_id: $request->validated('model_id'),
+                order_number: $request->validated('order_number'),
+                asset_tags: null, // same as serials
+                notes: $request->validated('notes'),
             );
             return redirect()->back()->with('success', trans('admin/hardware/message.update.success'));
         } catch (\Exception $e) {
@@ -260,66 +262,7 @@ class AssetsController extends Controller
             return redirect()->back()->with('error', trans('admin/hardware/message.update.error'));
         }
 
-        //$asset->status_id = $request->input('status_id', null);
-        //$asset->warranty_months = $request->input('warranty_months', null);
-        //$asset->purchase_cost = $request->input('purchase_cost', null);
-        //$asset->purchase_date = $request->input('purchase_date', null);
-        //$asset->next_audit_date = $request->input('next_audit_date', null);
-        //if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && ($asset->model->eol > 0)) {
-        //    $asset->purchase_date = $request->input('purchase_date', null);
-        //    $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
-        //    $asset->eol_explicit = false;
-        //} elseif ($request->filled('asset_eol_date')) {
-        //   $asset->asset_eol_date = $request->input('asset_eol_date', null);
-        //   $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
-        //   if($asset->model->eol) {
-        //       if($months != $asset->model->eol > 0) {
-        //           $asset->eol_explicit = true;
-        //       } else {
-        //           $asset->eol_explicit = false;
-        //       }
-        //   } else {
-        //       $asset->eol_explicit = true;
-        //   }
-        //} elseif (!$request->filled('asset_eol_date') && (($asset->model->eol) == 0)) {
-        //   $asset->asset_eol_date = null;
-        //   $asset->eol_explicit = false;
-        //}
-        //$asset->supplier_id = $request->input('supplier_id', null);
-        //$asset->expected_checkin = $request->input('expected_checkin', null);
-        //$asset->requestable = $request->input('requestable', 0);
-        //$asset->rtd_location_id = $request->input('rtd_location_id', null);
-        //$asset->byod = $request->input('byod', 0);
-
-        $status = Statuslabel::find($request->input('status_id'));
-
-        // This is a non-deployable status label - we should check the asset back in.
-        if (($status && $status->getStatuslabelType() != 'deployable') && ($target = $asset->assignedTo)) {
-
-            $originalValues = $asset->getRawOriginal();
-            $asset->assigned_to = null;
-            $asset->assigned_type = null;
-            $asset->accepted = null;
-
-            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update', date('Y-m-d H:i:s'), $originalValues));
-        }
-
-        if ($asset->assigned_to == '') {
-            $asset->location_id = $request->input('rtd_location_id', null);
-        }
-
-
-        if ($request->filled('image_delete')) {
-            try {
-                unlink(public_path().'/uploads/assets/'.$asset->image);
-                $asset->image = '';
-            } catch (\Exception $e) {
-                Log::info($e);
-            }
-        }
-
-        // Update the asset data
-
+        // serials????
         $serial = $request->input('serials');
         $asset->serial = $request->input('serials');
 
@@ -344,9 +287,6 @@ class AssetsController extends Controller
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
-        // Validation for these fields is handlded through the AssetRequest form request
-        // FIXME: No idea why this is returning a Builder error on db_column_name.
-        // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {

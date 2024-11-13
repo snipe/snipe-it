@@ -4,6 +4,8 @@ namespace App\Actions\Assets;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
+use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\Request;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -17,6 +19,7 @@ class UpdateAssetAction
 {
     public static function run(
         Asset $asset,
+        ImageUploadRequest $request,
         $status_id = null,
         $warranty_months = null,
         $purchase_cost = null,
@@ -25,29 +28,31 @@ class UpdateAssetAction
         $asset_eol_date = null,
         $supplier_id = null,
         $expected_checkin = null,
-        $requestable = null,
+        $requestable = false,
         $rtd_location_id = null,
-        $byod = null
+        $byod = false,
+        $image_delete = false,
+        $serials = null,
+        $name = null,
+        $company_id = null,
+        $model_id = null,
+        $order_number = null,
+        $asset_tags = null,
+        $notes = null,
     )
     {
-        // Check if the asset exists
-        //if (!$asset = Asset::find($assetId)) {
-        //    // Redirect to the asset management page with error
-        //    return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        //}
-        //$this->authorize($asset);
 
         $asset->status_id = $status_id;
         $asset->warranty_months = $warranty_months;
         $asset->purchase_cost = $purchase_cost;
         $asset->purchase_date = $purchase_date;
         $asset->next_audit_date = $next_audit_date;
-        if ($request->filled('purchase_date') && !$request->filled('asset_eol_date') && ($asset->model->eol > 0)) {
-            $asset->purchase_date = $request->input('purchase_date', null);
-            $asset->asset_eol_date = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
+        if ($purchase_date && !$asset_eol_date && ($asset->model->eol > 0)) {
+            $asset->purchase_date = $purchase_date;
+            $asset->asset_eol_date = Carbon::parse($purchase_date)->addMonths($asset->model->eol)->format('Y-m-d');
             $asset->eol_explicit = false;
-        } elseif ($request->filled('asset_eol_date')) {
-            $asset->asset_eol_date = $request->input('asset_eol_date', null);
+        } elseif ($asset_eol_date) {
+            $asset->asset_eol_date = $asset_eol_date ?? null;
             $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
             if ($asset->model->eol) {
                 if ($months != $asset->model->eol > 0) {
@@ -58,15 +63,15 @@ class UpdateAssetAction
             } else {
                 $asset->eol_explicit = true;
             }
-        } elseif (!$request->filled('asset_eol_date') && (($asset->model->eol) == 0)) {
+        } elseif (!$asset_eol_date && (($asset->model->eol) == 0)) {
             $asset->asset_eol_date = null;
             $asset->eol_explicit = false;
         }
-        $asset->supplier_id = $request->input('supplier_id', null);
-        $asset->expected_checkin = $request->input('expected_checkin', null);
-        $asset->requestable = $request->input('requestable', 0);
-        $asset->rtd_location_id = $request->input('rtd_location_id', null);
-        $asset->byod = $request->input('byod', 0);
+        $asset->supplier_id = $supplier_id;
+        $asset->expected_checkin = $expected_checkin;
+        $asset->requestable = $requestable;
+        $asset->rtd_location_id = $rtd_location_id;
+        $asset->byod = $byod;
 
         $status = Statuslabel::find($status_id);
 
@@ -82,11 +87,11 @@ class UpdateAssetAction
         }
 
         if ($asset->assigned_to == '') {
-            $asset->location_id = $request->input('rtd_location_id', null);
+            $asset->location_id = $rtd_location_id;
         }
 
 
-        if ($request->filled('image_delete')) {
+        if ($image_delete) {
             try {
                 unlink(public_path().'/uploads/assets/'.$asset->image);
                 $asset->image = '';
@@ -95,29 +100,32 @@ class UpdateAssetAction
             }
         }
 
-        // Update the asset data
+        // this is gonna be a whole issue with validation - i'm assuming it's because we're using the same blade
+        // to do both create (which allows multiple creates) and update. should be fixable.
+        // and why is the offset 1 and not 0? very confusing.
+        $serial = $serials;
+        $asset->serial = $serials;
 
-        $serial = $request->input('serials');
-        $asset->serial = $request->input('serials');
-
-        if (is_array($request->input('serials'))) {
+        if (is_array($serials)) {
             $asset->serial = $serial[1];
         }
 
-        $asset->name = $request->input('name');
-        $asset->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-        $asset->model_id = $request->input('model_id');
-        $asset->order_number = $request->input('order_number');
+        $asset->name = $name;
+        $asset->company_id = Company::getIdForCurrentUser($company_id);
+        $asset->model_id = $model_id;
+        $asset->order_number = $order_number;
 
-        $asset_tags = $request->input('asset_tags');
-        $asset->asset_tag = $request->input('asset_tags');
+        // same thing as serials above
+        $asset_tags = $asset_tags;
+        $asset->asset_tag = $asset_tags;
 
-        if (is_array($request->input('asset_tags'))) {
+        if (is_array($asset_tags)) {
             $asset->asset_tag = $asset_tags[1];
         }
 
-        $asset->notes = $request->input('notes');
+        $asset->notes = $notes;
 
+        // andddddddd the handleImages issue reappears - i guess we'll be passing the request through here as well
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.

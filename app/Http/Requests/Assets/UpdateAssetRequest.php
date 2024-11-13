@@ -34,6 +34,7 @@ class UpdateAssetRequest extends ImageUploadRequest
             (new Asset)->getRules(),
             // this is to overwrite rulesets that include required, and rewrite unique_undeleted
             [
+                'image_delete' => ['bool'],
                 'model_id'  => ['integer', 'exists:models,id,deleted_at,NULL', 'not_array'],
                 'status_id' => ['integer', 'exists:status_labels,id'],
                 'asset_tag' => [

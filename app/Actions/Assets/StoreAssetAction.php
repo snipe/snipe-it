@@ -3,6 +3,7 @@
 namespace App\Actions\Assets;
 
 use App\Exceptions\CheckoutNotAllowed;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -23,6 +24,7 @@ class StoreAssetAction
     public static function run(
         $model_id,//gonna make these two optional for now... we can either make them required here or use the spread operator when calling...
         $status_id,//
+        ImageUploadRequest $request, //temp for handleImages - i'd like to see that moved to a helper or something - or maybe just invoked at the extended request level so that it doesn't need to be done in the action?
         $name = null,
         $serial = null,
         $company_id = null,
@@ -45,7 +47,7 @@ class StoreAssetAction
         $assigned_asset = null,
         $assigned_location = null,
         $custom_fields = null,
-        $request = null, //temp for handleImages - i'd like to see that moved to a helper or something - or maybe just invoked at the extended request level so that it doesn't need to be done in the action?
+
         $last_audit_date = null,
     )
     {
