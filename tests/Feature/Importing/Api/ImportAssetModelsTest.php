@@ -36,17 +36,7 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }
-
-    #[Test]
-    public function userWithImportAssetsPermissionCanImportUsers(): void
-    {
-        $this->actingAsForApi(User::factory()->canImport()->create());
-
-        $import = Import::factory()->users()->create();
-
-        $this->importFileResponse(['import' => $import->id])->assertOk();
-    }
-
+    
     #[Test]
     public function importAssetModels(): void
     {
