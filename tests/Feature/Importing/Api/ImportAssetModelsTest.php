@@ -92,7 +92,7 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
     #[Test]
     public function whenRequiredColumnsAreMissingInImportFile(): void
     {
-        $importFileBuilder = ImportFileBuilder::new(['name' => ''])->forget(['category']);
+        $importFileBuilder = ImportFileBuilder::new()->forget(['category']);
         $import = Import::factory()->assetmodel()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
         $this->actingAsForApi(User::factory()->superuser()->create());
@@ -121,9 +121,8 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
     public function updateAssetModelFromImport(): void
     {
         $assetmodel = AssetModel::factory()->create()->refresh();
-        $new_model_number = Str::random();
-        $importFileBuilder = ImportFileBuilder::new(['name' => $assetmodel->name, 'model_number' => Str::random(), 'category_id' => $assetmodel->category_id]);
-
+        $category = Category::find($assetmodel->category->name);
+        $importFileBuilder = ImportFileBuilder::new(['name' => $assetmodel->name, 'model_number' => Str::random(), 'category' => $category]);
 
         $row = $importFileBuilder->firstRow();
         $import = Import::factory()->assetmodel()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
