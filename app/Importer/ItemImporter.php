@@ -292,8 +292,6 @@ class ItemImporter extends Importer
             $item_type = 'asset';
         }
 
-        \Log::error('Item Type: '.$item_type);
-
         if (empty($asset_category)) {
             $asset_category = 'Unnamed Category';
         }
