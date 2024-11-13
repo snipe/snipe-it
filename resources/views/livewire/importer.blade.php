@@ -179,7 +179,7 @@
 
 
 
-                                                                @if (($typeOfImport != 'location' && $typeOfImport!= 'assetmodel') && ($typeOfImport!=''))
+                                                                @if (($typeOfImport != 'location' && $typeOfImport!= 'assetModel') && ($typeOfImport!=''))
                                                                 <label class="form-control">
                                                                     <input type="checkbox" name="send_welcome" data-livewire-component="{{ $this->getId() }}" wire:model.live="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
@@ -193,7 +193,6 @@
 
                                                             </div>
 
-                                                        Type: {{ $typeOfImport }}
 
                                                             @if($statusText)
                                                                 <div class="alert col-md-8 col-md-offset-3{{ $statusType == 'success' ? ' alert-success' : ($statusType == 'error' ? ' alert-danger' : ' alert-info') }}" style="padding-top: 20px;">

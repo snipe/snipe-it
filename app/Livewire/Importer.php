@@ -73,7 +73,7 @@ class Importer extends Component
             case 'asset':
                 $results = $this->assets_fields;
                 break;
-            case 'assetmodel':
+            case 'assetModel':
                 $results = $this->assetmodels_fields;
                 break;
             case 'accessory':
@@ -165,7 +165,7 @@ class Importer extends Component
         $this->importTypes = [
             'accessory'     =>  trans('general.accessories'),
             'asset'         =>      trans('general.assets'),
-            'assetmodel'    =>      trans('general.asset_models'),
+            'assetModel'    =>      trans('general.asset_models'),
             'component'     =>  trans('general.components'),
             'consumable'    => trans('general.consumables'),
             'license'       =>    trans('general.licenses'),

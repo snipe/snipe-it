@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Support\Importing;
 
-use App\Models\Category;
 use Illuminate\Support\Str;
 
 /**

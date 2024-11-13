@@ -4,7 +4,6 @@ namespace Tests\Feature\Importing\Api;
 
 use App\Models\Category;
 use App\Models\AssetModel;
-use App\Importer\AssetmodelImporter;
 use App\Models\User;
 use App\Models\Import;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -24,7 +23,7 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
     protected function importFileResponse(array $parameters = []): TestResponse
     {
         if (!array_key_exists('import-type', $parameters)) {
-            $parameters['import-type'] = 'assetmodel';
+            $parameters['import-type'] = 'assetModel';
         }
 
         return parent::importFileResponse($parameters);

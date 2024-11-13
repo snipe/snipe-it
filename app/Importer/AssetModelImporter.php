@@ -40,9 +40,9 @@ class AssetModelImporter extends ItemImporter
     {
 
         $editingAssetModel = false;
-        $assetmodel = AssetModel::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
+        $assetModel = AssetModel::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
 
-        if ($assetmodel) {
+        if ($assetModel) {
             if (! $this->updating) {
                 $this->log('A matching Model '.$this->item['name'].' already exists');
                 return;
@@ -52,7 +52,7 @@ class AssetModelImporter extends ItemImporter
             $editingAssetModel = true;
         } else {
             $this->log('No Matching Model, Create a new one');
-            $assetmodel = new AssetModel();
+            $assetModel = new AssetModel();
         }
 
         // Pull the records from the CSV to determine their values
@@ -97,20 +97,20 @@ class AssetModelImporter extends ItemImporter
 
         if ($editingAssetModel) {
             Log::debug('Updating existing model');
-            $assetmodel->update($this->sanitizeItemForUpdating($assetmodel));
+            $assetModel->update($this->sanitizeItemForUpdating($assetModel));
         } else {
             Log::debug('Creating model');
-            $assetmodel->fill($this->sanitizeItemForStoring($assetmodel));
+            $assetModel->fill($this->sanitizeItemForStoring($assetModel));
         }
 
-        if ($assetmodel->save()) {
-            $this->log('AssetModel '.$assetmodel->name.' created or updated from CSV import');
-            return $assetmodel;
+        if ($assetModel->save()) {
+            $this->log('AssetModel '.$assetModel->name.' created or updated from CSV import');
+            return $assetModel;
 
         } else {
-            $this->log($assetmodel->getErrors()->first());
-            $this->addErrorToBag($assetmodel,  $assetmodel->getErrors()->keys()[0], $assetmodel->getErrors()->first());
-            return $assetmodel->getErrors();
+            $this->log($assetModel->getErrors()->first());
+            $this->addErrorToBag($assetModel,  $assetModel->getErrors()->keys()[0], $assetModel->getErrors()->first());
+            return $assetModel->getErrors();
         }
 
     }
