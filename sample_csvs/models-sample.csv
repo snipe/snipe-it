@@ -1,8 +1,6 @@
 ﻿Name,Category,Manufacturer,Notes,Model Number,Fieldset,Requestable,EOL,Min Qty
-Changed Test Model,Laptops,Blargh,"Sphinx of black quartz, judge my vow",1786VM80X07,Laptops and Desktops,Y,36,100
 Test Model 2,Laptops,"Botsford, Boyle and Herzog",ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam,9351IS25A51,Laptops and Desktops,Y,36,50
 Test Model 3,Laptops,Pollich LLC,,9929FR08W85,Laptops and Desktops,Y,36,30
-,Laptops,Walker-Towne,neque vestibulum eget vulputate ut ultrices vel augue vestibulum ante ipsum primis in faucibus orci luctus,9139KQ78G81,Laptops and Desktops,Y,36,
 Test Model 5,Laptops,Berge Inc,turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede,0910VB28Q61,Laptops and Desktops,Y,36,0
 Test Model 6,Laptops,"Heaney, Altenwerth and Emmerich",,7375EM02N97,Laptops and Desktops,Y,36,100
 Test Model 7,Desktops,"Romaguera, Goldner and Crooks",Test Updated Text,,Laptops and Desktops,Y,36,100
@@ -20,8 +18,4 @@ Test Model 18,Laptops,Mosciski Inc,,5505YF23M46,Laptops and Desktops,N,36,100
 Test Model 19,Laptops,Walker-Towne,,8673QP30R80,Laptops and Desktops,Y,36,100
 Test Model 20,Mobile Phones,"Heaney, Altenwerth and Emmerich",nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium,9088XV67Q94,Mobile Devices,Y,12,100
 Test One,Mobile Phones,Okuneva Group,quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis,,Mobile Devices,Y,12,100
-Test Missing Category,,,orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur,,,Y,30,100
-One more category,Mobile Phones News,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Import,Y,30,100
-Aaaand one more yes,Mobile Phones,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Import,Y,30,100
-One more no,Mobile Phones,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Import,N,30,100
-Aaaand one more yes yes,Mobile Phones,Walker-Towne,sdfgsdgsdfg,dsfgsdfgsdfgsdg,New Fieldset from Import,Y,30,100
+Final Test,Mobile Phones,Walker-Towne,"Sphinx of black quartz, judge my vow",,Mobile Devices,Y,36,15
