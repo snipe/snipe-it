@@ -28,8 +28,7 @@ class ImportController extends Controller
     public function index() : JsonResponse | array
     {
         $this->authorize('import');
-        $imports = Import::latest()->get();
-
+        $imports = Import::with('adminuser')->latest()->get();
         return (new ImportsTransformer)->transformImports($imports);
     }
 
@@ -133,7 +132,7 @@ class ImportController extends Controller
                 }
 
                 $import->filesize = filesize($path.'/'.$file_name);
-                
+                $import->created_by = auth()->id();
                 $import->save();
                 $results[] = $import;
             }
@@ -177,7 +176,7 @@ class ImportController extends Controller
             case 'asset':
                 $redirectTo = 'hardware.index';
                 break;
-            case 'assetmodel':
+            case 'assetModel':
                 $redirectTo = 'models.index';
                 break;
             case 'accessory':

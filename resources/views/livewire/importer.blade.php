@@ -105,13 +105,17 @@
                                         class="col-md-12 table table-striped snipe-table">
 
                                     <tr>
-                                        <th class="col-md-6">
+                                        <th>
                                             {{ trans('general.file_name') }}
                                         </th>
-                                        <th class="col-md-3">
+                                        <th>
                                             {{ trans('general.created_at') }}
                                         </th>
-                                        <th class="col-md-1">
+                                        <th>
+                                            {{ trans('general.created_by') }}
+                                        </th>
+
+                                        <th>
                                             {{ trans('general.filesize') }}
                                         </th>
                                         <th class="col-md-1 text-right">
@@ -122,9 +126,10 @@
                                     @foreach($this->files as $currentFile)
 
                                     		<tr style="{{ ($this->activeFile && ($currentFile->id == $this->activeFile->id)) ? 'font-weight: bold' : '' }}" class="{{ ($this->activeFile && ($currentFile->id == $this->activeFile->id)) ? 'warning' : '' }}">
-                                    			<td class="col-md-6">{{ $currentFile->file_path }}</td>
-                                    			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
-                                    			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
+                                    			<td>{{ $currentFile->file_path }}</td>
+                                    			<td>{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
+                                                <td>{{ ($currentFile->adminuser) ? $currentFile->adminuser->present()->fullName : '--'}}</td>
+                                    			<td>{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
                                                 <td class="col-md-1 text-right" style="white-space: nowrap;">
                                                     <button class="btn btn-sm btn-info" wire:click="selectFile({{ $currentFile->id }})" data-tooltip="true" title="{{ trans('general.import_this_file') }}">
                                                         <i class="fa-solid fa-list-check" aria-hidden="true"></i>
