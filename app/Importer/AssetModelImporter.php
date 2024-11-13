@@ -3,6 +3,8 @@
 namespace App\Importer;
 
 use App\Models\AssetModel;
+use App\Models\Depreciation;
+use App\Models\CustomFieldset;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -61,11 +63,10 @@ class AssetModelImporter extends ItemImporter
         $this->item['model_number'] = trim($this->findCsvMatch($row, 'model_number'));
         $this->item['eol'] = trim($this->findCsvMatch($row, 'eol'));
         $this->item['notes'] = trim($this->findCsvMatch($row, 'notes'));
+        $this->item['fieldset'] = trim($this->findCsvMatch($row, 'fieldset'));
+        $this->item['depreciation'] = trim($this->findCsvMatch($row, 'depreciation'));
         $this->item['created_by'] = auth()->id();
-
-        $this->item['requestable'] = trim(($this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'))) == 1) ? '1' : 0;
-        $assetmodel->requestable = $this->item['requestable'];
-
+        $this->item['requestable'] = trim(($this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'))) == 1) ? 1 : 0;
 
         if (!empty($this->item['category'])) {
             if ($category = $this->createOrFetchCategory($this->item['category'])) {
@@ -75,6 +76,18 @@ class AssetModelImporter extends ItemImporter
         if (!empty($this->item['manufacturer'])) {
             if ($manufacturer = $this->createOrFetchManufacturer($this->item['manufacturer'])) {
                 $this->item['manufacturer_id'] = $manufacturer;
+            }
+        }
+
+        if (!empty($this->item['depreciation'])) {
+            if ($depreciation = $this->fetchDepreciation($this->item['depreciation'])) {
+                $this->item['depreciation_id'] = $depreciation;
+            }
+        }
+
+        if (!empty($this->item['fieldset'])) {
+            if ($fieldset = $this->createOrFetchCustomFieldset($this->item['fieldset'])) {
+                $this->item['fieldset_id'] = $fieldset;
             }
         }
 
@@ -99,6 +112,62 @@ class AssetModelImporter extends ItemImporter
             return $assetmodel->errors;
         }
 
+    }
 
+
+    /**
+     * Fetch an existing depreciation, or create new if it doesn't exist.
+     *
+     * We only do a fetch vs create here since Depreciations have additional fields required
+     * and cannot be created without them (months, for example.))
+     *
+     * @author A. Gianotto
+     * @since 7.1.3
+     * @param $depreciation_name string
+     * @return int id of depreciation created/found
+     */
+    public function fetchDepreciation($depreciation_name) : ?int
+    {
+        if ($depreciation_name != '') {
+
+            if ($depreciation = Depreciation::where('name', '=', $depreciation_name)->first()) {
+                $this->log('A matching Depreciation '.$depreciation_name.' already exists');
+                return $depreciation->id;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Fetch an existing fieldset, or create new if it doesn't exist
+     *
+     * @author A. Gianotto
+     * @since 7.1.3
+     * @param $fieldset_name string
+     * @return int id of fieldset created/found
+     */
+    public function createOrFetchCustomFieldset($fieldset_name) : ?int
+    {
+        if ($fieldset_name != '') {
+            $fieldset = CustomFieldset::where('name', '=', $fieldset_name)->first();
+
+            if ($fieldset) {
+                $this->log('A matching fieldset '.$fieldset_name.' already exists');
+                return $fieldset->id;
+            }
+
+            $fieldset = new CustomFieldset();
+            $fieldset->name = $fieldset_name;
+
+            if ($fieldset->save()) {
+                $this->log('Fieldset '.$fieldset_name.' was created');
+
+                return $fieldset->id;
+            }
+            $this->logError($fieldset, 'Fieldset');
+        }
+
+        return null;
     }
 }
