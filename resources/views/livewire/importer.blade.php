@@ -177,7 +177,7 @@
                                                                     </p>
                                                                 @endif
 
-                                                                @if ($this->activeFile->import_type != 'location' && $this->activeFile->import_type == 'assetmodel' && $update)
+                                                                @if ($this->activeFile->import_type != 'location' && $this->activeFile->import_type != 'assetmodel' && $update)
                                                                 <label class="form-control">
                                                                     <input type="checkbox" name="send_welcome" data-livewire-component="{{ $this->getId() }}" wire:model.live="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
