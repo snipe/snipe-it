@@ -346,7 +346,8 @@ class Importer extends Component
             'notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'min_amt' => trans('mail.min_QTY'),
             'fieldset' => trans('admin/models/general.fieldset'),
-            'eol' => 'eol',
+            'eol' => trans('general.eol'),
+            'requestable' => trans('admin/models/general.requestable'),
 
         ];
 
@@ -378,6 +379,23 @@ class Importer extends Component
                     'eol date',
                     'asset eol date',
                 ],
+            'eol' =>
+                [
+                    'eol',
+                    'EOL',
+                    'eol months',
+                ],
+            'depreciation' =>
+                [
+                    'Depreciation',
+                    'depreciation',
+                ],
+            'requestable' =>
+                [
+                    'requestable',
+                    'Requestable',
+                ],
+
             'gravatar' =>
                 [
                     'gravatar',
