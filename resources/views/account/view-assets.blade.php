@@ -431,6 +431,9 @@
                       <th class="col-md-2" data-switchable="true" data-visible="false">
                         {{ trans('admin/hardware/form.default_location') }}
                       </th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                        {{ trans('general.location') }}
+                      </th>
 
                       @can('self.view_purchase_cost')
                         <th class="col-md-6" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">
@@ -488,6 +491,9 @@
                         </td>
                         <td>
                           {{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}
+                        </td>
+                        <td>
+                          {{ ($asset->location) ? $asset->location->name : '' }}
                         </td>
                         @can('self.view_purchase_cost')
                         <td>

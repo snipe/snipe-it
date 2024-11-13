@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Osama\LaravelTeamsNotification\TeamsNotification;
 
 class CheckoutableListener
@@ -77,13 +78,14 @@ class CheckoutableListener
              */
 
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                    (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+                    $this->checkoutableShouldSendEmail($event)) {
+                    Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                     if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
                     } elseif (!empty($ccEmails)) {
                         Mail::cc($ccEmails)->send($mailable);
                     }
-                    Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
+                    Log::info('Checkout Mail sent.');
                 }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout email: " . $e->getMessage());
@@ -93,7 +95,7 @@ class CheckoutableListener
 //                 Send Webhook notification
         try{
                 if ($this->shouldSendWebhookNotification()) {
-                    if (Setting::getSettings()->webhook_selected === 'microsoft') {
+                    if ($this->newMicrosoftTeamsWebhookEnabled()) {
                         $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
                         $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
                         $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
@@ -145,7 +147,6 @@ class CheckoutableListener
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable =  $this->getCheckinMailType($event);
         $notifiable = $this->getNotifiables($event);
-
         if  (!$event->checkedOutTo->locale){
             $mailable->locale($event->checkedOutTo->locale);
         }
@@ -158,13 +159,14 @@ class CheckoutableListener
              * 3. The item should send an email at check-in/check-out
              */
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                    (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+                    $this->checkoutableShouldSendEmail($event)) {
+                    Log::info('Sending checkin email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                     if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
                     } elseif (!empty($ccEmails)){
                         Mail::cc($ccEmails)->send($mailable);
                     }
-                    Log::info('Sending email, Locale: ' . $event->checkedOutTo->locale);
+                    Log::info('Checkin Mail sent.');
                 }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkin email: " . $e->getMessage());
@@ -175,8 +177,14 @@ class CheckoutableListener
         // Send Webhook notification
         try {
             if ($this->shouldSendWebhookNotification()) {
-                    Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckinNotification($event));
+                if ($this->newMicrosoftTeamsWebhookEnabled()) {
+                        $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
+                        $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                        $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
+                    } else {
+                        Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
+                            ->notify($this->getCheckinNotification($event));
+                    }
                 }
         } catch (ClientException $e) {
             Log::warning("Exception caught during checkin notification: " . $e->getMessage());
@@ -329,5 +337,18 @@ class CheckoutableListener
     private function shouldSendWebhookNotification(): bool
     {
         return Setting::getSettings() && Setting::getSettings()->webhook_endpoint;
+    }
+
+    private function checkoutableShouldSendEmail($event): bool
+    {
+        if($event->checkoutable instanceof LicenseSeat){
+            return $event->checkoutable->license->checkin_email();
+        }
+        return (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email());
+    }
+
+    private function newMicrosoftTeamsWebhookEnabled(): bool
+    {
+        return Setting::getSettings()->webhook_selected === 'microsoft' && Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows');
     }
 }
