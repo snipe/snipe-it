@@ -78,12 +78,13 @@ class CheckoutableListener
 
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+                    Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                     if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
                     } elseif (!empty($ccEmails)) {
                         Mail::cc($ccEmails)->send($mailable);
                     }
-                    Log::info('Sending email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
+                    Log::info('Checkout Mail sent.');
                 }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout email: " . $e->getMessage());
@@ -159,12 +160,13 @@ class CheckoutableListener
              */
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+                    Log::info('Sending checkin email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                     if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
                     } elseif (!empty($ccEmails)){
                         Mail::cc($ccEmails)->send($mailable);
                     }
-                    Log::info('Sending email, Locale: ' . $event->checkedOutTo->locale);
+                    Log::info('Checkin Mail sent.');
                 }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkin email: " . $e->getMessage());
