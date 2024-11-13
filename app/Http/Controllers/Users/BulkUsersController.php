@@ -335,7 +335,6 @@ class BulkUsersController extends Controller
     protected function logItemCheckinAndDelete($items, $itemType)
     {
         foreach ($items as $item) {
-            \Log::error("ITEM DUMP: ".print_r($item, true));
             if (gettype($item) == 'object' && get_class($item) != 'stdClass') {
                 $real_item = $item;
             } else {
@@ -354,10 +353,10 @@ class BulkUsersController extends Controller
                 $assigned_to = User::find($item->assigned_to);
             }
 
-            $real_item->setTarget($assigned_to); // will this work?!!?!?!?
+            $real_item->setLogTarget($assigned_to); // will this work?!!?!?!?
             //$logAction->target_id = $item->assigned_to;
             //$logAction->target_type = User::class;
-            $real_item->setNote('Bulk checkin items');
+            $real_item->setLogNote('Bulk checkin items');
             $real_item->setLogMessage(ActionType::CheckinFrom);
             $real_item->logWithoutSave(ActionType::CheckinFrom);
         }
@@ -367,19 +366,18 @@ class BulkUsersController extends Controller
     {
         foreach ($accessoryUserRows as $accessoryUserRow) {
             $accessory = Accessory::find($accessoryUserRow->accessory_id);
-            $accessory->setTarget(User::find($accessoryUserRow->assigned_to)); //FIXME - what if accessory was checked out to location?
-            $accessory->setNote('Bulk checkin items');
+            $accessory->setLogTarget(User::find($accessoryUserRow->assigned_to)); //FIXME - what if accessory was checked out to location?
+            $accessory->setLogNote('Bulk checkin items');
             $accessory->logWithoutSave(ActionType::CheckinFrom);
         }
     }
 
     private function logConsumablesCheckin(Collection $consumableUserRows): void
     {
-        \Log::error("Logging Consumables Checkin!");
         foreach ($consumableUserRows as $consumableUserRow) {
             $consumable = Consumable::find($consumableUserRow->consumable_id);
-            $consumable->setTarget(User::find($consumableUserRow->assigned_to));
-            $consumable->setNote('Bulk checkin items');
+            $consumable->setLogTarget(User::find($consumableUserRow->assigned_to));
+            $consumable->setLogNote('Bulk checkin items');
             $consumable->logWithoutSave(ActionType::CheckinFrom);
         }
     }
@@ -458,12 +456,9 @@ class BulkUsersController extends Controller
                 $managedLocation->save();
             }
 
-            $user_to_merge->setNote('Deleting user cuz he was MERGED');
-            $user_to_merge->delete(); //BELETED!
-            \Log::error("User has been DELETED!!!!!!!!!!!");
-            \Log::error("User's action log is: ".print_r($user_to_merge->userlog()->get()->toArray(), true));
+            $user_to_merge->delete();
 
-            event(new UserMerged($user_to_merge, $merge_into_user, $admin)); //HATE
+            event(new UserMerged($user_to_merge, $merge_into_user, $admin));
 
         }
 

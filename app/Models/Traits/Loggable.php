@@ -16,7 +16,7 @@ trait Loggable
 {
     // an attribute for setting whether or not the item was imported
     public ?bool $imported = false;
-    private ?string $log_message = null; //FIXME - meant to be 'private'!!!!!
+    private ?string $log_message = null;
     private ?Model $item = null;
     private array $log_meta = [];
     private ?Model $target = null;
@@ -51,7 +51,7 @@ trait Loggable
         static::deleting(function ($model) { //TODO - is this only for 'hard' delete? Or soft?
             \Log::error("DELETING TRIGGER HAS FIRED!!!!!!!!!!!!!!! for id: ".$model->id." old log_message was: ".$model->log_message);
             if (self::class == \App\Models\User::class) { //FIXME - Janky AF!
-                $model->setTarget($model); //FIXME - this makes *NO* sense!!!!
+                $model->setLogTarget($model); //FIXME - this makes *NO* sense!!!!
             }
             $model->setLogMessage(ActionType::Delete);
         });
@@ -157,12 +157,12 @@ trait Loggable
         $this->log_meta = $changed;
     }
 
-    public function setTarget(Model $target)
+    public function setLogTarget(Model $target)
     {
         $this->target = $target;
     }
 
-    public function setNote(string $note)
+    public function setLogNote(string $note)
     {
         $this->note = $note;
     }

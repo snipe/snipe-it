@@ -181,7 +181,7 @@ class License extends Depreciable
                 $seatsAvailableForDelete->pop()->delete();
             }
             // Log Deletion of seats.
-            $license->setNote("deleted {$change} seats");
+            $license->setLogNote("deleted {$change} seats");
             $license->logWithoutSave(ActionType::DeleteSeats);
 
             return true;
@@ -208,7 +208,7 @@ class License extends Depreciable
         // On initial create, we shouldn't log the addition of seats.
         if ($license->id) {
             //Log the addition of license to the log.
-            $license->setNote("added {$change} seats");
+            $license->setLogNote("added {$change} seats");
             $license->logWithoutSave(ActionType::AddSeats);
         }
 

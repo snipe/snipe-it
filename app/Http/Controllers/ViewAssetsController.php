@@ -103,7 +103,7 @@ class ViewAssetsController extends Controller
             $item->setLocation($user->location);
         }
 
-        $item->setTarget($user);
+        $item->setLogTarget($user);
         //$logaction->target_id = $data['user_id'] = auth()->id();
         //$logaction->target_type = User::class;
 
@@ -171,7 +171,7 @@ class ViewAssetsController extends Controller
         $data['requested_date'] = date('Y-m-d H:i:s');
 
         $asset->setLocation = $user->location;
-        $asset->setTarget($user);
+        $asset->setLogTarget($user);
         $data['user_id'] = auth()->id();
 
         // If it's already requested, cancel the request.
