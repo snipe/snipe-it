@@ -180,8 +180,8 @@ class CheckoutableListener
                         $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
                         $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
                     } else {
-                    Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckinNotification($event));
+                        Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
+                            ->notify($this->getCheckinNotification($event));
                     }
                 }
         } catch (ClientException $e) {
