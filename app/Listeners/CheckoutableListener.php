@@ -77,7 +77,7 @@ class CheckoutableListener
              */
 
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                    (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+                    $this->checkoutableShouldSendEmail($event)) {
                     Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                     if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
@@ -146,7 +146,6 @@ class CheckoutableListener
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable =  $this->getCheckinMailType($event);
         $notifiable = $this->getNotifiables($event);
-
         if  (!$event->checkedOutTo->locale){
             $mailable->locale($event->checkedOutTo->locale);
         }
@@ -159,7 +158,7 @@ class CheckoutableListener
              * 3. The item should send an email at check-in/check-out
              */
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                    (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email())) {
+                    $this->checkoutableShouldSendEmail($event)) {
                     Log::info('Sending checkin email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                     if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
@@ -337,5 +336,13 @@ class CheckoutableListener
     private function shouldSendWebhookNotification(): bool
     {
         return Setting::getSettings() && Setting::getSettings()->webhook_endpoint;
+    }
+
+    private function checkoutableShouldSendEmail($event): bool
+    {
+        if($event->checkoutable instanceof LicenseSeat){
+            return $event->checkoutable->license->checkin_email();
+        }
+        return (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email());
     }
 }
