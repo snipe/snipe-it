@@ -42,6 +42,7 @@ class ItemImportRequest extends FormRequest
         $classString = "App\\Importer\\{$class}Importer";
         $importer = new $classString($filename);
         $import->field_map = request('column-mappings');
+        $import->created_by = auth()->id();
         $import->save();
         $fieldMappings = [];
 
@@ -60,7 +61,7 @@ class ItemImportRequest extends FormRequest
             $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);
         }
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
-                 ->setUserId(auth()->id())
+                 ->setCreatedBy(auth()->id())
                  ->setUpdating($this->get('import-update'))
                  ->setShouldNotify($this->get('send-welcome'))
                  ->setUsernameFormat('firstname.lastname')
