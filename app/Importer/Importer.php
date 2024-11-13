@@ -363,6 +363,7 @@ abstract class Importer
 
         // No luck finding a user on username or first name, let's create one.
         $user = new User;
+
         $user->first_name = $user_array['first_name'];
         $user->last_name = $user_array['last_name'];
         $user->username = $user_array['username'];
@@ -406,7 +407,7 @@ abstract class Importer
      *
      * @return self
      */
-    public function setUserId($created_by)
+    public function setCreatedBy($created_by)
     {
         $this->created_by = $created_by;
 
