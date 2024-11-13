@@ -42,9 +42,9 @@
                 <td>{{ $asset->id }}</td>
                 <td>{{ $asset->present()->name() }}</td>
                 <td>
-                  @if ($asset->location || $asset->location_id)
+                  @if ($asset->location)
                   {{ $asset->location->present()->name() }}
-                  @elseif($asset->rtd_location || $asset->rtd_location_id)
+                  @elseif($asset->rtd_location)
                   {{ $asset->defaultLoc->present()->name() }}
                   @endif
                 </td>
