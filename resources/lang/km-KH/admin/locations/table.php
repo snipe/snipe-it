@@ -31,7 +31,7 @@ return [
     'asset_model'               => 'គំរូ',
     'asset_serial'              => 'Serial',
     'asset_location'            => 'ទីតាំង',
-    'asset_checked_out'         => 'Checked Out',
+    'asset_checked_out'         => 'បានប្រគល់',
     'asset_expected_checkin'    => 'រំពឹងទុក Checkin',
     'date'                      => 'កាលបរិច្ឆេទ:',
     'phone'                     => 'ទូរស័ព្ទទីតាំង',

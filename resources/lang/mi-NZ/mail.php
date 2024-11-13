@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Ko te nama i tonoa',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Pūrongo Inventory Low',
     'a_user_canceled' => 'Kua whakakorea e tetahi kaiwhakamahi tetahi tonoemi i runga i te paetukutuku',
     'a_user_requested' => 'Kua tono tetahi kaiwhakamahi i tetahi mea i runga i te paetukutuku',

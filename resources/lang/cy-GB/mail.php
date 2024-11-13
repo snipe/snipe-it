@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Wedi gwneud cais am eitem',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Adroddiad Inventory Isel',
     'a_user_canceled' => 'Mae defnyddiwr wedi canslo cais am eitem ar y wefan',
     'a_user_requested' => 'Mae defnyddiwr wedi gwneud cais am eitem ar y wefan',

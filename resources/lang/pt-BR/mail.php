@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Item requisitado',
     'License_Checkin_Notification' => 'Licença verificada em',
     'License_Checkout_Notification' => 'Licença registrada',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Relatório de baixas de inventario',
     'a_user_canceled' => 'Um usuário cancelou uma requisição no website',
     'a_user_requested' => 'Um usuário requisitou um item no website',

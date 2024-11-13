@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'Identificación',
     'require_acceptance'      	=> 'Aceptación',
     'title'      				=> 'Nombre del accesorio',
-
-
 );

@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Pieprasīts vienums',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Zema inventarizācijas atskaite',
     'a_user_canceled' => 'Lietotājs vietnē ir atcēlis objekta pieprasījumu',
     'a_user_requested' => 'Lietotājs ir pieprasījis vienumu vietnē',

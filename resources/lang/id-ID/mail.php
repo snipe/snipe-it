@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Barang yang diminta',
     'License_Checkin_Notification' => 'Lisensi Kembali',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Laporan Inventaris Rendah',
     'a_user_canceled' => 'Pengguna telah membatalkan permintaan item di situs web',
     'a_user_requested' => 'Pengguna telah meminta item di situs web',

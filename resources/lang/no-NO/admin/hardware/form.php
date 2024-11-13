@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Den statusen gjør det mulig å sjekke ut denne eiendelen.',
     'processing_spinner' => 'Behandler... (Dette kan ta litt tid for store filer)',
     'optional_infos'  => 'Valgfri informasjon',
-    'order_details'   => 'Ordrerelatert informasjon'
+    'order_details'   => 'Ordrerelatert informasjon',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

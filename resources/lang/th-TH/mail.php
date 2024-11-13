@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'รายการที่ขอ',
     'License_Checkin_Notification' => 'เช็คอินใบอนุญาตแล้ว',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'รายงานพื้นที่โฆษณาต่ำ',
     'a_user_canceled' => 'ผู้ใช้ยกเลิกคำร้องขอสินค้าในเว็บไซต์แล้ว',
     'a_user_requested' => 'ผู้ใช้ร้องขอรายการบนเว็บไซต์',

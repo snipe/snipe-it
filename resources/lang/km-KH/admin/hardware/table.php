@@ -26,7 +26,7 @@ return [
     'days_without_acceptance' => 'Days Without Acceptance',
     'monthly_depreciation' => 'Monthly Depreciation',
     'requesting_user' => 'Requesting User',
-    'requested_date' => 'Requested Date',
+    'requested_date' => 'កាលបរិច្ឆេទដែលបានស្នើសុំ',
     'changed'       => 'Changed',
     'icon' => 'Icon',
 ];

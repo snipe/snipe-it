@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Požadavek na položku',
     'License_Checkin_Notification' => 'Licence přidána v',
     'License_Checkout_Notification' => 'Licence byla zkontrolována',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Hlášení o nízkých zásobách',
     'a_user_canceled' => 'Uživatel zrušil žádost o položku na webu',
     'a_user_requested' => 'Uživatel požádal o položku na webu',

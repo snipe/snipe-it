@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Артикул заявен',
     'License_Checkin_Notification' => 'Лиценза е вписан',
     'License_Checkout_Notification' => 'Изписани лицензи',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Доклад за нисък запас',
     'a_user_canceled' => 'Потребител е отменил заявка за елемент в уебсайта',
     'a_user_requested' => 'Потребител е направил заявка за елемент в уебсайта',

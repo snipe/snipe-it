@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'アイテムをリクエストしました',
     'License_Checkin_Notification' => 'ライセンスをチェックインしました',
     'License_Checkout_Notification' => 'ライセンスがチェックアウトされました',
+    'license_for'   => 'ライセンス先',
     'Low_Inventory_Report' => '在庫減レポート',
     'a_user_canceled' => 'ユーザーがアイテムリクエストをキャンセルしました。',
     'a_user_requested' => 'ユーザーがアイテムをリクエストしています',

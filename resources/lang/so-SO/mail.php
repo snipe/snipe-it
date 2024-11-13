@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Shayga la codsaday',
     'License_Checkin_Notification' => 'Shatiga waa la hubiyay',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Warbixinta Alaabada Hoose',
     'a_user_canceled' => 'Isticmaaluhu waxa uu joojiyay shay codsi ah oo ku jiray mareegaha',
     'a_user_requested' => 'Isticmaaluhu wuxuu ka codsaday shay shabakada',

@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Item gevra',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Lae voorraadverslag',
     'a_user_canceled' => '\'N Gebruiker het \'n itemversoek op die webwerf gekanselleer',
     'a_user_requested' => '\'N Gebruiker het \'n item op die webwerf versoek',

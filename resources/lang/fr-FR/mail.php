@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Article demandé',
     'License_Checkin_Notification' => 'Licence enregistrée',
     'License_Checkout_Notification' => 'Licence verrouillée',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Rapport d’inventaire bas',
     'a_user_canceled' => 'Un·e utilisateur·trice a annulé une demande d’article sur le site Web',
     'a_user_requested' => 'Un·e utilisateur·trice a demandé un article sur le site Web',

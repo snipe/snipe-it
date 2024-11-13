@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Item Requested',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'Hugbúnaðarleyfi skráð út',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Skýrsla um lága birgðastöðu',
     'a_user_canceled' => 'A user has canceled an item request on the website',
     'a_user_requested' => 'A user has requested an item on the website',

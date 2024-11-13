@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Into ifunwe',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Umbiko Wokungenisa Okuphansi',
     'a_user_canceled' => 'Umsebenzisi ukhanse isicelo sezinto kuwebhusayithi',
     'a_user_requested' => 'Umsebenzisi ucele into ku-website',

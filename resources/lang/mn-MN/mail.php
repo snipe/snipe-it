@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Барааны хүсэлт',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Бага нөөцийн тайлан',
     'a_user_canceled' => 'Хэрэглэгч вэбсайт дээрх зүйл хүсэлтийг цуцалсан байна',
     'a_user_requested' => 'Хэрэглэгч вэбсайт дээрх зүйлийг хүссэн байна',

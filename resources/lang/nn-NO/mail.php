@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Forespurt enhet',
     'License_Checkin_Notification' => 'Lisens sjekket inn',
     'License_Checkout_Notification' => 'Lisens sjekket ut',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Rapport lav lagerbeholdning',
     'a_user_canceled' => 'Brukeren har avbrutt en element-forespørsel på webområdet',
     'a_user_requested' => 'En bruker har bedt om et element på webområdet',

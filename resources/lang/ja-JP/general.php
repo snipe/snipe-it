@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Something went wrong with your request.',
     'close' => 'Close',
     'expires' => '保証失効日',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Remaining',
     'label' => 'ラベル',
     'import_asset_tag_exists' => 'アセットタグ :asset_tag のアセットは既に存在し、アップデートは要求されませんでした。変更はありません。',

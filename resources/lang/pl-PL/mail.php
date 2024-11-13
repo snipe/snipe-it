@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Pozycja Zamówiona',
     'License_Checkin_Notification' => 'Akcesorium zwrócono',
     'License_Checkout_Notification' => 'Licencja wyczyszczona',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Raport niskiego stanu zasobów',
     'a_user_canceled' => 'Użytkownik anulował zapotrzebowanie na sprzęt na stronie www',
     'a_user_requested' => 'Użytkownik zamówił pozycję na stronie internetowej',

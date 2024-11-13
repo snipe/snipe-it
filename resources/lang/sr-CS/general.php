@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Nešto je pošlo po zlu sa vašim zahtevom.',
     'close' => 'Zatvori',
     'expires' => 'Ističe',
-    'map_fields'=> 'Mapiraj polje :item_type',
+    'map_fields'=> 'Mapiraj :item_type polja',
     'remaining_var' => ':count preostalo',
     'label' => 'Oznaka',
     'import_asset_tag_exists' => 'Imovina sa oznakom imovine :asset_tag već postoji i izmena nije zatražena. Nijedna izmena nije izvršena.',

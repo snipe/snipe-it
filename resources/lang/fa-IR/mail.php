@@ -31,6 +31,7 @@ return [
     'License_Checkin_Notification' => 'مجوز بررسی شد
 ',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'گزارش موجودی کم',
     'a_user_canceled' => 'یک کاربر یک درخواست اقساط در وب سایت را لغو کرده است',
     'a_user_requested' => 'یک کاربر یک مورد را در وبسایت درخواست کرده است',

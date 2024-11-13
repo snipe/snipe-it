@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Er ging iets mis met uw verzoek.',
     'close' => 'Sluiten',
     'expires' => 'Verloopt',
-    'map_fields'=> 'Map :item_type veld',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count resterend',
     'label' => 'Label',
     'import_asset_tag_exists' => 'Een asset met de asset tag :asset_tag bestaat al en een update is niet aangevraagd. Er is geen wijziging aangebracht.',

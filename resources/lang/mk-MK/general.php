@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Нешто тргна наопаку со вашето барање.',
     'close' => 'Затвори',
     'expires' => 'Истекува',
-    'map_fields'=> 'Мапирај :item_type Поле',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count преостануваат',
     'label' => 'Етикета',
     'import_asset_tag_exists' => 'Средство со ознаката :asset_tag веќе постои и не беше побарано ажурирање.Не е направена никаква промена.',

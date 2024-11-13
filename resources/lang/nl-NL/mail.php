@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Item aangevraagd',
     'License_Checkin_Notification' => 'Licentie ingecheckt',
     'License_Checkout_Notification' => 'Licentie gecontroleerd',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Lage inventarisrapport',
     'a_user_canceled' => 'Een gebruiker heeft een verzoek om een item op de website geannuleerd',
     'a_user_requested' => 'Een gebruiker heeft een item op de website aangevraagd',

@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Taotletud üksus',
     'License_Checkin_Notification' => 'Litsents sisse võetud',
     'License_Checkout_Notification' => 'Litsents väljastatud',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Madal inventuuriaruanne',
     'a_user_canceled' => 'Kasutaja on tühistanud üksuse taotluse veebis',
     'a_user_requested' => 'Kasutaja on taotlenud üksuse veebis',

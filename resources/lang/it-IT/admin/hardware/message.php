@@ -14,8 +14,8 @@ return [
         'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
         'success' 		=> 'L\'asset è stato creato con successo. :)',
         'success_linked' => 'Bene creato con tag :tag . <strong><a href=":link" style="color: white;">Clicca per vedere</a></strong>.',
-        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
-        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
+        'multi_success_linked' => 'Il bene con tag :links è stato creato con successo.|:count beni sono stati creati con successo. :links.',
+        'partial_failure' => 'Non è stato possibile creare un bene. Motivo: :failures|Non è stato possibile creare :count beni. Motivi: :failures',
     ],
 
     'update' => [
@@ -82,8 +82,8 @@ return [
     ],
 
     'multi-checkout' => [
-        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
-        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
+        'error'   => 'Il check-out non è andato a buon fine, riprova|Il check-out non è andato a buon fine, riprova',
+        'success' => 'Check-out del bene effettuato.|Check-out dei beni effettuato.',
     ],
 
     'checkin' => [

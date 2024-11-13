@@ -559,7 +559,7 @@ return [
     'something_went_wrong' => 'crwdns12306:0crwdne12306:0',
     'close' => 'crwdns12308:0crwdne12308:0',
     'expires' => 'crwdns12310:0crwdne12310:0',
-    'map_fields'=> 'crwdns12572:0crwdne12572:0',
+    'map_fields'=> 'crwdns12784:0crwdne12784:0',
     'remaining_var' => 'crwdns12612:0crwdne12612:0',
     'label' => 'crwdns12690:0crwdne12690:0',
     'import_asset_tag_exists' => 'crwdns12692:0crwdne12692:0',

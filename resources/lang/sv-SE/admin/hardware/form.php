@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Denna status är distribuerbar. Denna tillgång kan checkas ut.',
     'processing_spinner' => 'Bearbetar... (Detta kan ta lite tid på stora filer)',
     'optional_infos'  => 'Valfri information',
-    'order_details'   => 'Beställningsrelaterad information'
+    'order_details'   => 'Beställningsrelaterad information',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

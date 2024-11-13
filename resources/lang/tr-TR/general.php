@@ -563,7 +563,7 @@ Context | Request Context
     'something_went_wrong' => 'Something went wrong with your request.',
     'close' => 'Close',
     'expires' => 'Bitiş',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Remaining',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',

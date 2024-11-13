@@ -78,7 +78,7 @@ return [
         'success' 		=> 'Equipo asignado correctamente.',
         'user_does_not_exist' => 'Este usuario no es correcto. Por favor, inténtelo de nuevo.',
         'not_available' => '¡Ese equipo no está disponible para ser asignado!',
-        'no_assets_selected' => 'Debe seleccionar al menos un elemento de la lista',
+        'no_assets_selected' => 'Debe seleccionar al menos un activo de la lista',
     ],
 
     'multi-checkout' => [
