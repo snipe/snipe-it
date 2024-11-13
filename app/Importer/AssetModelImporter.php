@@ -109,7 +109,7 @@ class AssetModelImporter extends ItemImporter
 
         } else {
             $this->log($assetmodel->getErrors()->first());
-            $this->addErrorToBag($assetmodel, '', $assetmodel->getErrors()->first());
+            $this->addErrorToBag($assetmodel,  $assetmodel->getErrors()->keys()[0], $assetmodel->getErrors()->first());
             return $assetmodel->getErrors();
         }
 
