@@ -92,6 +92,10 @@ class CustomFieldset extends Model
                     $rule[] = 'unique_undeleted';
             }
 
+            if ($field->hasFormat() && $field->isEncrypted()) {
+                $rule[] = $rule.'-encrypted';
+            }
+
             array_push($rule, $field->attributes['format']);
             $rules[$field->db_column_name()] = $rule;
 
