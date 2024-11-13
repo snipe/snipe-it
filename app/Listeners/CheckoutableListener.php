@@ -175,8 +175,14 @@ class CheckoutableListener
         // Send Webhook notification
         try {
             if ($this->shouldSendWebhookNotification()) {
-                    Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
-                        ->notify($this->getCheckinNotification($event));
+                    if (Setting::getSettings()->webhook_selected === 'microsoft') {
+                        $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
+                        $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                        $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
+                    } else {
+                        Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
+                            ->notify($this->getCheckinNotification($event));
+                    }
                 }
         } catch (ClientException $e) {
             Log::warning("Exception caught during checkin notification: " . $e->getMessage());
