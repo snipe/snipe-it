@@ -21694,7 +21694,7 @@ img.navbar-brand-img,
   padding: 10px;
   background: #f4f4f4;
   margin-bottom: 3px;
-  border-left: 2px solid #e6e7e8;
+  border-inline: 2px solid #e6e7e8;
   color: #444;
   cursor: move;
 }
@@ -23175,7 +23175,7 @@ input[type="radio"]:checked::before {
   padding: 10px;
   background: #f4f4f4;
   margin-bottom: 3px;
-  border-left: 2px solid #e6e7e8;
+  border-inline: 2px solid #e6e7e8;
   color: #444;
   cursor: move;
 }
