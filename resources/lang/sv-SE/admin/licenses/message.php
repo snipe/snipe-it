@@ -44,8 +44,8 @@ return array(
         'error'   => 'Det gick inte att kontrollera licensen. Var god försök igen.',
         'success' => 'Licensen utcheckades framgångsrikt',
         'not_enough_seats' => 'Inte tillräckligt med licensplatser tillgängliga för utcheckning',
-        'mismatch' => 'The license seat provided does not match the license',
-        'unavailable' => 'This seat is not available for checkout.',
+        'mismatch' => 'Licensplatsen som anges matchar inte licensen',
+        'unavailable' => 'Denna plats är inte tillgänglig för utcheckning.',
     ),
 
     'checkin' => array(

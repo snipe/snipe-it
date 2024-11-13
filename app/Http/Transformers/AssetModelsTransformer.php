@@ -65,6 +65,10 @@ class AssetModelsTransformer
             'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol.' months' : 'None',
             'requestable' => ($assetmodel->requestable == '1') ? true : false,
             'notes' => Helper::parseEscapedMarkedownInline($assetmodel->notes),
+            'created_by' => ($assetmodel->adminuser) ? [
+                'id' => (int) $assetmodel->adminuser->id,
+                'name'=> e($assetmodel->adminuser->present()->fullName()),
+            ] : null,
             'created_at' => Helper::getFormattedDateObject($assetmodel->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmodel->updated_at, 'datetime'),
             'deleted_at' => Helper::getFormattedDateObject($assetmodel->deleted_at, 'datetime'),

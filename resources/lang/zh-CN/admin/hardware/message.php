@@ -14,6 +14,8 @@ return [
         'error'   		=> '资产创建失败，请重试。:(',
         'success' 		=> '资产创建成功。 :)',
         'success_linked' => '带有 :tag 标签的资产已成功创建。<strong><a href=":link" style="color: white;">点击此处查看</a></strong>。',
+        'multi_success_linked' => '带有标签 :links 的资产已成功创建。| :count 个资产已成功创建。 :links。',
+        'partial_failure' => '无法创建资产。原因：:failures|:count 个资产无法创建。原因：:failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => '无效用户，请重试。',
         'not_available' => '此资产无法借出',
         'no_assets_selected' => '您必须在这个列表中选择至少一项资产',
+    ],
+
+    'multi-checkout' => [
+        'error'   => '资产未借出，请重试 |资产未借出，请重试',
+        'success' => '资产借出成功。 |资产借出成功。',
     ],
 
     'checkin' => [

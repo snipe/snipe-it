@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Asset is niet aangemaakt, probeer het opnieuw :(',
         'success' 		=> 'Asset is succesvol aangemaakt. :)',
         'success_linked' => 'Asset met tag :tag is succesvol gemaakt. <strong><a href=":link" style="color: white;">Klik hier om te bekijken</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'De gebruiker is ongeldig. Probeer het opnieuw.',
         'not_available' => 'Dat asset is niet beschikbaar voor check-out!',
         'no_assets_selected' => 'U moet minstens één asset selecteren uit de lijst',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

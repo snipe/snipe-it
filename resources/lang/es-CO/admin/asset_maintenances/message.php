@@ -13,9 +13,9 @@
         ],
         'edit'                       => [
             'error'   => 'El mantenimiento del activo no fue editado. Por favor, inténtelo de nuevo.',
-            'success' => 'Mantenimiento de activo editado con éxito.',
+            'success' => 'Mantenimiento del activo editado con éxito.',
         ],
-        'asset_maintenance_incomplete' => 'Sin Completar',
+        'asset_maintenance_incomplete' => 'Aún no se ha completado',
         'warranty'                     => 'Garantía',
-        'not_warranty'                 => 'Sin Garantía',
+        'not_warranty'                 => 'Sin garantía',
     ];

@@ -53,7 +53,6 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Locations
      */
-
     Route::group(['prefix' => 'locations', 'middleware' => ['auth']], function () {
 
         Route::post(

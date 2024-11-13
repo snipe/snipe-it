@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Az eszköz nem jött létre, próbálkozzon újra. :(',
         'success' 		=> 'Az eszköz sikeresen létrehozva. :)',
         'success_linked' => 'Eszköz a :tag azonosítóval sikeresen létrehozva. <strong><a href=":link" style="color: white;">Kattintson ide a megtekintéshez</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Ez a felhasználó érvénytelen. Kérlek próbáld újra.',
         'not_available' => 'Ez az eszköz nem áll rendelkezésre pénztárnál!',
         'no_assets_selected' => 'Ki kell választania legalább egy elemet a listából',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

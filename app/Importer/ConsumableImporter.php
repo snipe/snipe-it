@@ -41,6 +41,7 @@ class ConsumableImporter extends ItemImporter
         }
         $this->log('No matching consumable, creating one');
         $consumable = new Consumable();
+        $consumable->created_by = auth()->id();
         $this->item['model_number'] = trim($this->findCsvMatch($row, 'model_number'));
         $this->item['item_no'] = trim($this->findCsvMatch($row, 'item_number'));
         $this->item['min_amt'] = trim($this->findCsvMatch($row, "min_amt"));

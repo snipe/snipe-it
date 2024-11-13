@@ -9,7 +9,7 @@ return [
     'city'                      => 'Ciudad',
     'state'                     => 'Provincia',
     'country'                   => 'País',
-    'create'                    => 'Crear Ubicación',
+    'create'                    => 'Crear ubicación',
     'update'                    => 'Actualizar ubicación',
     'print_assigned'            => 'Imprimir los asignados',
     'print_all_assigned'        => 'Imprimir todos los asignados',

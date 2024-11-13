@@ -32,7 +32,7 @@ return array(
     ),
 
     'bulkedit' => array(
-        'error'   		=> 'Ningún campo ha cambiado, no hay nada que actualizar.',
+        'error'   		=> 'Ningún cambio fue cambiado, así que nada se actualizó.',
         'success' 		=> 'Modelo actualizado correctamente. |:model_count modelos actualizados correctamente.',
         'warn'          => 'Está a punto de actualizar las propiedades del siguiente modelo:|Está a punto de editar las propiedades de los siguientes :model_count modelos:',
 

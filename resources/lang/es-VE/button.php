@@ -2,7 +2,7 @@
 
 return [
     'actions' 	                => 'Acciones',
-    'add'    	                => 'Añadir Nuevo',
+    'add'    	                => 'Añadir nuevo',
     'cancel'                    => 'Cancelar',
     'checkin_and_delete'  	    => 'Ingresar todo / Eliminar usuario',
     'delete'  	                => 'Borrar',
@@ -15,10 +15,10 @@ return [
     'upload'                    => 'Cargar',
     'select_file'				=> 'Seleccionar un archivo...',
     'select_files'				=> 'Seleccionar archivos...',
-    'generate_labels'           => '{1} Generar Etiqueta|[2,*] Generar Etiquetas',
-    'send_password_link'        => 'Enviar enlace de restablecimiento de contraseña',
+    'generate_labels'           => '{1} Generar etiqueta|[2,*] Generar etiquetas',
+    'send_password_link'        => 'Enviar enlace para restablecer la contraseña',
     'go'                        => 'Ir',
-    'bulk_actions'              => 'Acciones en masa',
+    'bulk_actions'              => 'Acciones masivas',
     'add_maintenance'           => 'Añadir mantenimiento',
     'append'                    => 'Añadir',
     'new'                       => 'Nuevo',

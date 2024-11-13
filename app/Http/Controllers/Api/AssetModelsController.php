@@ -59,6 +59,7 @@ class AssetModelsController extends Controller
             'model_number',
             'min_amt',
             'eol',
+            'created_by',
             'requestable',
             'models.notes',
             'models.created_at',
@@ -69,7 +70,7 @@ class AssetModelsController extends Controller
             'models.deleted_at',
             'models.updated_at',
          ])
-            ->with('category', 'depreciation', 'manufacturer', 'fieldset.fields.defaultValues','adminuser')
+            ->with('category', 'depreciation', 'manufacturer', 'fieldset.fields.defaultValues', 'adminuser')
             ->withCount('assets as assets_count');
 
         if ($request->input('status')=='deleted') {
@@ -95,7 +96,7 @@ class AssetModelsController extends Controller
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'models.created_at';
 
-        switch ($sort) {
+        switch ($request->input('sort')) {
             case 'manufacturer':
                 $assetmodels->OrderManufacturer($order);
                 break;
@@ -104,6 +105,9 @@ class AssetModelsController extends Controller
                 break;
             case 'fieldset':
                 $assetmodels->OrderFieldset($order);
+                break;
+            case 'created_by':
+                $assetmodels->OrderByCreatedByName($order);
                 break;
             default:
                 $assetmodels->orderBy($sort, $order);

@@ -3,21 +3,25 @@
 
 {{ trans('mail.new_item_checked') }}
 
+
 @component('mail::table')
 |        |          |
 | ------------- | ------------- |
 @if (isset($checkout_date))
 | **{{ trans('mail.checkout_date') }}** | {{ $checkout_date }} |
 @endif
-| **{{ trans('general.license') }}** | {{ $item->name }} |
+| **{{ trans('general.consumable') }}** | {{ $item->name }} |
+@if (isset($qty))
+| **{{ trans('general.qty') }}** | {{ $qty }} |
+@endif
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
 @endif
-@if (isset($item->category))
-| **{{ trans('general.category') }}** | {{ $item->category->name }} |
+@if (isset($qty))
+| **{{ trans('general.qty') }}** | {{ $qty }} |
 @endif
-@if ($target->can('view', $item))
-| **Key** | {{ $item->serial }} |
+@if (isset($item->model_no))
+| **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
 @endif
 @if ($note)
 | **{{ trans('mail.additional_notes') }}** | {{ $note }} |
@@ -26,7 +30,6 @@
 | **{{ trans('general.administrator') }}** | {{ $admin->present()->fullName() }} |
 @endif
 @endcomponent
-
 
 @if (($req_accept == 1) && ($eula!=''))
 {{ trans('mail.read_the_terms_and_click') }}
