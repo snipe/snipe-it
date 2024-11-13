@@ -492,6 +492,16 @@ abstract class Importer
 
     public function fetchHumanBoolean($value)
     {
+        $true = [
+            'yes',
+            'y',
+            'true',
+        ];
+
+        if (in_array(strtolower($value), $true)) {
+            return 1;
+        }
+
         return (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
@@ -527,6 +537,7 @@ abstract class Importer
 
         return null;
     }
+
 
     /**
      * Fetch an existing manager
