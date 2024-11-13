@@ -121,7 +121,9 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
     public function updateAssetModelFromImport(): void
     {
         $assetmodel = AssetModel::factory()->create()->refresh();
-        $importFileBuilder = ImportFileBuilder::new(['name' => Str::random(), 'model_number' => Str::random()]);
+        $new_model_number = Str::random();
+        $importFileBuilder = ImportFileBuilder::new(['name' => $assetmodel->name, 'model_number' => Str::random(), 'category_id' => $assetmodel->category_id]);
+
 
         $row = $importFileBuilder->firstRow();
         $import = Import::factory()->assetmodel()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);

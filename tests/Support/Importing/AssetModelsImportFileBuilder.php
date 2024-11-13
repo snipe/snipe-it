@@ -52,7 +52,7 @@ class AssetModelsImportFileBuilder extends FileBuilder
             'name'            => $faker->catchPhrase,
             'category'        => Str::random(),
             'model_number'    => $faker->creditCardNumber(),
-            'notes'           => $faker->sentence(5),
+            'notes'           => 'Created by demo seeder',
         ];
     }
 }
