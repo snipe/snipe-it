@@ -1,4 +1,4 @@
-﻿Name,Category,Manufacturer,Notes,Model Number,Fieldset,Requestable,EOL,Min Qty
+﻿Name,Category,Manufacturer,Model Notes,Model Number,Fieldset,Requestable,EOL,Min Qty
 Test Model 2,Laptops,"Botsford, Boyle and Herzog",ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam,9351IS25A51,Laptops and Desktops,Y,36,50
 Test Model 3,Laptops,Pollich LLC,,9929FR08W85,Laptops and Desktops,Y,36,30
 Test Model 5,Laptops,Berge Inc,turpis adipiscing lorem vitae mattis nibh ligula nec sem duis aliquam convallis nunc proin at turpis a pede,0910VB28Q61,Laptops and Desktops,Y,36,0

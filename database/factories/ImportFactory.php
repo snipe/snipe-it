@@ -157,7 +157,7 @@ class ImportFactory extends Factory
             $fileBuilder = Importing\AssetModelsImportFileBuilder::new();
 
             $attributes['name'] = "{$attributes['name']} Asset Model";
-            $attributes['import_type'] = 'assetmodel';
+            $attributes['import_type'] = 'assetModel';
             $attributes['header_row'] = $fileBuilder->toCsv()[0];
             $attributes['first_row'] = $fileBuilder->firstRow();
 

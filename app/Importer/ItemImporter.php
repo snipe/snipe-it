@@ -286,7 +286,7 @@ class ItemImporter extends Importer
         $item_type = strtolower(substr($classname, 0, strpos($classname, 'Importer')));
 
         // If we're importing asset models only (without attached assets), override the category type to asset
-        if ($item_type == 'assetModel') {
+        if ($item_type == 'assetmodel') {
             $item_type = 'asset';
         }
 
