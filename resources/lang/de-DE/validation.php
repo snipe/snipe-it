@@ -211,7 +211,7 @@ return [
         'ldap_username_field' => [
             'not_in' =>         '<code>sAMAccountName</code> (Groß- und Kleinschreibung) funktioniert wahrscheinlich nicht. Sie sollten stattdessen <code>samaccountname</code> (Kleinschreibung) verwenden.'
         ],
-        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> ist wahrscheinlich kein gültiger Authentifizierungsfilter. Sie möchten wahrscheinlich <code>uid=</code> '],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> ist wahrscheinlich kein gültiger Authentifizierungsfilter. Wahrscheinlich möchten Sie <code>uid=</code> '],
         'ldap_filter' => ['regex' => 'Dieser Wert sollte wahrscheinlich nicht in Klammern gesetzt werden.'],
 
         ],

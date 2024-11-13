@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Gegenstand angefordert',
     'License_Checkin_Notification' => 'Lizenz zurückgenommen',
     'License_Checkout_Notification' => 'Lizenz herausgegeben',
+    'license_for'   => 'Lizenz für',
     'Low_Inventory_Report' => 'Bericht über niedrige Lagerbestände',
     'a_user_canceled' => 'Eine Geräte-Anfrage auf der Webseite wurde vom Benutzer abgebrochen',
     'a_user_requested' => 'Ein Benutzer hat ein Gerät auf der Webseite angefordert',

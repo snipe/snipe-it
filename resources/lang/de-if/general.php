@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Etwas ist bei Ihrer Anfrage schiefgegangen.',
     'close' => 'Schließen',
     'expires' => 'Ablaufdatum',
-    'map_fields'=> 'Feld :item_type zuordnen',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count verbleibend',
     'label' => 'Label',
     'import_asset_tag_exists' => 'Ein Asset mit dem Asset-Tag :asset_tag ist bereits vorhanden und es wurde keine Aktualisierung angefordert. Es wurden keine Änderungen vorgenommen.',

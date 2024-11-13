@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Yêu cầu',
     'License_Checkin_Notification' => 'Giấy phép đã cấp phát thành công',
     'License_Checkout_Notification' => 'Giấy phép đã cấp phát thành công',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Báo cáo tồn kho thấp',
     'a_user_canceled' => 'Người dùng đã hủy bỏ một khoản mục yêu cầu trên trang web',
     'a_user_requested' => 'Người dùng đã yêu cầu một mục trên trang web',

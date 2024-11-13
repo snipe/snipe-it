@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'العنصر المطلوب',
     'License_Checkin_Notification' => 'تم تسجيل الرخصة',
     'License_Checkout_Notification' => 'تم إخراج الترخيص',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'تقرير المخزون المنخفض',
     'a_user_canceled' => 'ألغى المستخدم طلب عنصر على الموقع',
     'a_user_requested' => 'طلب مستخدم عنصر على الموقع',

@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Pyydetty nimike',
     'License_Checkin_Notification' => 'Lisenssi palautettu',
     'License_Checkout_Notification' => 'Lisenssi tarkistettu',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Alhainen määrä raportti',
     'a_user_canceled' => 'Käyttäjä on peruuttanut nimikkeen pyynnön sivustolla',
     'a_user_requested' => 'Käyttäjä on pyytänyt nimikettä sivustolla',

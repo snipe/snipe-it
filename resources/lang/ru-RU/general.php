@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Что-то пошло не так с вашим запросом.',
     'close' => 'Закрыть',
     'expires' => 'Истекает',
-    'map_fields'=> 'Сопоставьте поле :item_type',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Осталось',
     'label' => 'Метка',
     'import_asset_tag_exists' => 'Актив с тегом актива :asset_tag уже существует и обновление не было запрошено. Изменения не были произведены.',

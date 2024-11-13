@@ -2,19 +2,19 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		=> '<strong>警告: </strong> このアセットは現在デプロイ不可能としてマークされています。このステータスが変更された場合は、アセットのステータスを更新してください。',
     'does_not_exist' 	=> '資産が存在しません。',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'does_not_exist_var'=> 'タグ:asset_tag を持つアセットが見つかりません。',
+    'no_tag' 	        => 'アセットタグが提供されていません。',
     'does_not_exist_or_not_requestable' => 'その資産は存在しないか要求可能ではありません。',
     'assoc_users'	 	=> 'この資産はユーザーに貸し出されているため削除できません。資産を返却後、もう一度、やり直して下さい。 ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'warning_audit_date_mismatch' 	=> 'この資産の次の監査日 (:next_audit_date) は最終監査日 (:last_audit_date) より前です。次の監査日を更新してください。',
 
     'create' => [
         'error'   		=> '資産は作成されませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産は作成されました。',
         'success_linked' => ':tag を持つアセットは正常に作成されました。 <strong><a href=":link" style="color: white;"></a></strong> を表示するにはここをクリックしてください。',
-        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'multi_success_linked' => 'タグ:links のアセットが正常に作成されました。|:count アセットが正常に作成されました。',
         'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 

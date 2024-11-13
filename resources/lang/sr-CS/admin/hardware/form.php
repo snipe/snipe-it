@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Status imovine je zaduživo. Ova imovina se može zadužiti.',
     'processing_spinner' => 'Obrađivanje... (Ovo bi moglo da potraje u slučaju velikih datoteka)',
     'optional_infos'  => 'Opcione informacije',
-    'order_details'   => 'Informacije o nabavci'
+    'order_details'   => 'Informacije o nabavci',
+    'calc_eol'    => 'Ako nulirate datum isteka, koristite automatsko izračunavanje isteka na osnovu datuma kupovine i stope isticanja.',
 ];

@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'crwdns1740:0crwdne1740:0',
     'License_Checkin_Notification' => 'crwdns6008:0crwdne6008:0',
     'License_Checkout_Notification' => 'crwdns12064:0crwdne12064:0',
+    'license_for'   => 'crwdns12780:0crwdne12780:0',
     'Low_Inventory_Report' => 'crwdns1745:0crwdne1745:0',
     'a_user_canceled' => 'crwdns1704:0crwdne1704:0',
     'a_user_requested' => 'crwdns1705:0crwdne1705:0',

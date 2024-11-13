@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Zahtevana postavka',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Poročilo o nizki zalogi',
     'a_user_canceled' => 'Uporabnik je preklical zahtevo za sredstev na spletnem mestu',
     'a_user_requested' => 'Uporabnik je zahteval sredstev na spletnem mestu',

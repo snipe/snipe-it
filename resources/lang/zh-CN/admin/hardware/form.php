@@ -59,5 +59,6 @@ return [
     'asset_deployable' => '该状态为可部署。可以借出此资产。',
     'processing_spinner' => '处理中...（对于大型文件可能需要一些时间）',
     'optional_infos'  => '可选信息',
-    'order_details'   => '订单相关信息'
+    'order_details'   => '订单相关信息',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

@@ -7,7 +7,7 @@ return array(
     'create'				=> 'Crear fabricante',
     'id'   					=> 'ID',
     'name'      			=> 'Nombre',
-    'support_email'   		=> 'Email de soporte',
+    'support_email'   		=> 'Correo electrónico de soporte',
     'support_phone'   		=> 'Teléfono de soporte',
     'support_url'   		=> 'URL de soporte',
     'warranty_lookup_url'   => 'URL de búsqueda de garantía',

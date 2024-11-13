@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Предмет запрошен',
     'License_Checkin_Notification' => 'Лицензия выдана',
     'License_Checkout_Notification' => 'Лицензия заблокирована',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Отчет о заканчивающихся предметах',
     'a_user_canceled' => 'Пользователь отменил запрос элемента на веб-сайте',
     'a_user_requested' => 'Пользователь запросил элемент на веб-сайте',

@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Något gick fel med din begäran.',
     'close' => 'Stäng',
     'expires' => 'Utgår',
-    'map_fields'=> 'Koppla :item_type Fält',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Återstående',
     'label' => 'Etikett',
     'import_asset_tag_exists' => 'En tillgång med tillgångstaggen :asset_tag finns redan och en uppdatering begärdes inte. Ingen ändring gjordes.',

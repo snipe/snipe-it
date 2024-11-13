@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Στοιχείο που ζητήθηκε',
     'License_Checkin_Notification' => 'Η άδεια επανήλθε',
     'License_Checkout_Notification' => 'Η άδεια έχει ελεγχθεί',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Αναφορά χαμηλού αποθέματος',
     'a_user_canceled' => 'Ένας χρήστης έχει ακυρώσει μια αίτηση στοιχείο στην ιστοσελίδα',
     'a_user_requested' => 'Ο χρήστης έχει ζητήσει ένα στοιχείο στην ιστοσελίδα',

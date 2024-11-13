@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Un problème est survenu lors du traitement de votre requête.',
     'close' => 'Fermer',
     'expires' => 'Expire le',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count restant',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',

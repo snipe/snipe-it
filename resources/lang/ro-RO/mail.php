@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Elementul solicitat',
     'License_Checkin_Notification' => 'Licență verificată în',
     'License_Checkout_Notification' => 'Licența a fost verificată',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Raport privind inventarul redus',
     'a_user_canceled' => 'Un utilizator a anulat o solicitare de element pe site',
     'a_user_requested' => 'Un utilizator a solicitat un element de pe site',

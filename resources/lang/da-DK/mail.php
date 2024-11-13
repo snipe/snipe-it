@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Vareanmodning',
     'License_Checkin_Notification' => 'Licens tjekket ind',
     'License_Checkout_Notification' => 'Licens tjekket ud',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Lav lagerrapport',
     'a_user_canceled' => 'En bruger har annulleret en vareforespørgsel på hjemmesiden',
     'a_user_requested' => 'En bruger har anmodet om et emne på hjemmesiden',

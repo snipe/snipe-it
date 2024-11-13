@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Mír Iarraidh',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Tuarascáil Fardal Íseal',
     'a_user_canceled' => 'Tá úsáideoir tar éis iarratas ar mhír a chealú ar an láithreán gréasáin',
     'a_user_requested' => 'D\'iarr úsáideoir mír ar an láithreán gréasáin',

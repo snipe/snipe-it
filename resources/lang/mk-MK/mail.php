@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Побарана ставка',
     'License_Checkin_Notification' => 'Лиценца задолжена',
     'License_Checkout_Notification' => 'Лиценца раздолжена',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Извештај за низок инвентар',
     'a_user_canceled' => 'Корисникот го откажал барањето за средство на веб-страницата',
     'a_user_requested' => 'Корисникот побарал средство на веб-страницата',

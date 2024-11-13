@@ -12,7 +12,7 @@ return array(
     'create' => array(
         'error'   => 'El modelo no fue creado, por favor inténtelo de nuevo.',
         'success' => 'El modelo fue creado exitosamente.',
-        'duplicate_set' => 'Ya existe un modelo de equipo con el mismo nombre, fabricante y número de modelo.',
+        'duplicate_set' => 'Ya existe un modelo de activo con el mismo nombre, fabricante y número de modelo.',
     ),
 
     'update' => array(
@@ -41,7 +41,7 @@ return array(
     'bulkdelete' => array(
         'error'   		    => 'Ningún modelo fue seleccionado, así que nada fue eliminado.',
         'success' 		    => 'Modelo eliminado!|:success_count modelos eliminados!',
-        'success_partial' 	=> ':success_count modelo(s) se han eliminado, sin embargo, :fail_count no se pudieron eliminar debido a que aún tienen activos asociados a ellos.'
+        'success_partial' 	=> ':success_count modelo(s) fueron eliminados, sin embargo, :fail_count no pudieron ser eliminados debido a que aún tienen activos asociados a ellos.'
     ),
 
 );

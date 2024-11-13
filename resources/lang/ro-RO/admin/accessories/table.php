@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'ID-ul',
     'require_acceptance'      	=> 'Acceptare',
     'title'      				=> 'Nume de accesoriu',
-
-
 );
