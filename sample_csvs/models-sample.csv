@@ -21,7 +21,7 @@ Test Model 19,Laptops,Walker-Towne,,8673QP30R80,Laptops and Desktops,Y,36,100
 Test Model 20,Mobile Phones,"Heaney, Altenwerth and Emmerich",nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam justo etiam pretium,9088XV67Q94,Mobile Devices,Y,12,100
 Test One,Mobile Phones,Okuneva Group,quis libero nullam sit amet turpis elementum ligula vehicula consequat morbi a ipsum integer a nibh in quis,,Mobile Devices,Y,12,100
 Test Missing Category,,,orci luctus et ultrices posuere cubilia curae duis faucibus accumsan odio curabitur,,,Y,30,100
-One more category,Mobile Phones News,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Improt,Y,30,100
-Aaaand one more yes,Mobile Phones,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Improt,Y,30,100
-One more no,Mobile Phones,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Improt,N,30,100
-Aaaand one more yes yes,Mobile Phones,Walker-Towne,sdfgsdgsdfg,dsfgsdfgsdfgsdg,New Fieldset from Improt,Y,30,100
+One more category,Mobile Phones News,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Import,Y,30,100
+Aaaand one more yes,Mobile Phones,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Import,Y,30,100
+One more no,Mobile Phones,Walker-Towne,"Sphinx of black quartz, judge my vow",,New Fieldset from Import,N,30,100
+Aaaand one more yes yes,Mobile Phones,Walker-Towne,sdfgsdgsdfg,dsfgsdfgsdfgsdg,New Fieldset from Import,Y,30,100
