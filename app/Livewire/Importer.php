@@ -79,6 +79,9 @@ class Importer extends Component
             case 'accessory':
                 $results = $this->accessories_fields;
                 break;
+            case 'consumable':
+                $results = $this->consumables_fields;
+                break;
             case 'component':
                 $results = $this->components_fields;
                 break;
@@ -87,6 +90,9 @@ class Importer extends Component
                 break;
             case 'license':
                 $results = $this->licenses_fields;
+                break;
+            case 'user':
+                $results = $this->users_fields;
                 break;
             case 'location':
                 $results = $this->locations_fields;
@@ -527,9 +533,6 @@ class Importer extends Component
         foreach ($this->importTypes as $type => $name) {
             $this->columnOptions[$type] = $this->getColumns($type);
         }
-        if ($this->activeFile) {
-            $this->field_map = $this->activeFile->field_map ? array_values($this->activeFile->field_map) : [];
-        }
     }
 
     public function selectFile($id)
@@ -586,6 +589,7 @@ class Importer extends Component
                     $this->message_type = 'success';
 
             unset($this->files);
+
                     return;
         }
 

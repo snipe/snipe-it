@@ -114,6 +114,9 @@ class SlackSettingsForm extends Component
             $this->webhook_channel = '#NA';
         }
     }
+    public function updatedwebhookEndpoint() {
+        $this->teams_webhook_deprecated = !Str::contains($this->webhook_endpoint, 'workflows');
+    }
 
     private function isButtonDisabled() {
             if (empty($this->webhook_endpoint)) {
