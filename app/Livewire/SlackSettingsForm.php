@@ -114,10 +114,9 @@ class SlackSettingsForm extends Component
             $this->webhook_channel = '#NA';
         }
     }
-    public function updatedwebhookEndpoint() {
-        $this->teams_webhook_deprecated = !Str::contains($this->webhook_endpoint, 'workflows');
-    }
-    public function updatedwebhookEndpoint() {
+
+    public function updatedwebhookEndpoint()
+    {
         $this->teams_webhook_deprecated = !Str::contains($this->webhook_endpoint, 'workflows');
     }
 

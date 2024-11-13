@@ -111,7 +111,8 @@ class CheckoutAssetNotification extends Notification
                     ->content($note);
             });
     }
-    public function toMicrosoftTeams() : array
+
+    public function toMicrosoftTeams()
     {
         $target = $this->target;
         $admin = $this->admin;
