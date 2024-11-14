@@ -70,7 +70,6 @@ final class Company extends SnipeModel
         'created_by'
     ];
 
-    // TODO - _Maybe_ this is deletable?
     private static function isFullMultipleCompanySupportEnabled()
     {
         $settings = Setting::getSettings();

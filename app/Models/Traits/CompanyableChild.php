@@ -5,7 +5,6 @@ namespace App\Models\Traits;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
-use App\Models\Company;
 use Illuminate\Database\Eloquent\Builder;
 
 trait CompanyableChild
@@ -20,7 +19,6 @@ trait CompanyableChild
         static::addGlobalScope('companyable_child', function (Builder $builder) {
             $model = $builder->getModel();
 
-            //return Company::scopeCompanyableChildren($model->getCompanyableParents(), $builder);
             $companyable_names = $model->getCompanyableParents();
             if (count($companyable_names) == 0) {
                 throw new \Exception('No Companyable Children to scope');
@@ -57,53 +55,3 @@ trait CompanyableChild
         });
     }
 }
-
-/**************************
- *private static function scopeCompanyablesDirectly($query, $column = 'company_id', $table_name = null)
- * {
- *      if (Auth::hasUser()) {
- *          $company_id = auth()->user()->company_id;
- *      } else {
- *          $company_id = null;
- *      }
- *
- *
- *      // If the column exists in the table, use it to scope the query
- *      if ((($query) && ($query->getModel()) && (Schema::hasColumn($query->getModel()->getTable(), $column)))) {
- *
- *      // Dynamically get the table name if it's not passed in, based on the model we're querying against
- *      $table = ($table_name) ? $table_name."." : $query->getModel()->getTable().".";
- *
- *      return $query->where($table.$column, '=', $company_id);
- * }
- */
-
-/*************************************************************************************************
- *
- * public static function scopeCompanyableChildren(array $companyable_names, $query)
- * {
- *
- *      if (count($companyable_names) == 0) {
- *          throw new Exception('No Companyable Children to scope');
- *      } elseif (! static::isFullMultipleCompanySupportEnabled() || (Auth::hasUser() && auth()->user()->isSuperUser())) {
- *          return $query;
- *      } else {
- *          $f = function ($q) {
- *              Log::debug('scopeCompanyablesDirectly firing ');
- *              static::scopeCompanyablesDirectly($q);
- *          };
- *
- *          $q = $query->where(function ($q) use ($companyable_names, $f) {
- *              $q2 = $q->whereHas($companyable_names[0], $f);
- *
- *              for ($i = 1; $i < count($companyable_names); $i++) {
- *                  $q2 = $q2->orWhereHas($companyable_names[$i], $f);
- *              }
- *          });
- *
- *          return $q;
- *      }
- * }
- *
- *
- */
