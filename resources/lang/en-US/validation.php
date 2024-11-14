@@ -187,6 +187,8 @@ return [
 
     'custom' => [
         'alpha_space' => 'The :attribute field contains a character that is not allowed.',
+        'alpha_encrypted'   => 'The :attribute field should be alphabetic characters.',
+        'numeric_encrypted' => 'The :attribute field should be numeric characters.',
         'email_array'      => 'One or more email addresses is invalid.',
         'hashed_pass'      => 'Your current password is incorrect',
         'dumbpwd'          => 'That password is too common.',

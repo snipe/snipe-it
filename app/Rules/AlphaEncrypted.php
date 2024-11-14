@@ -16,9 +16,10 @@ class AlphaEncrypted implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         try {
+            $attributeName = trim(preg_replace('/_+|snipeit|\d+/', ' ', $attribute));
             $decrypted = Crypt::decrypt($value);
             if (!ctype_alpha($decrypted) && !is_null($decrypted)) {
-                $fail($attribute.' is not alphabetic.');
+                $fail(trans('validation.custom.alpha_encrypted', ['attribute' => $attributeName]));
             }
         } catch (\Exception $e) {
             report($e);
