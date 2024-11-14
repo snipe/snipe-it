@@ -33,22 +33,20 @@ trait CompanyableChild
                 }
 
                 $q = $builder->where(function ($q) use ($companyable_names, $company_id) {
-                    //first, handle the *first* of the companyable_names...
-                    $q2 = $q->whereHas($companyable_names[0], function ($subquery) use ($company_id) {
+                    // helper function to look for company_id *if* you have one
+                    $company_if_needed = function ($subquery) use ($company_id) {
                         $table = $subquery->getModel()->getTable();
                         if (Schema::hasColumn($table, 'company_id')) {
                             $subquery->where($table.'.company_id', $company_id);
                         }
-                    });
+                    };
+
+                    //first, handle the *first* of the companyable_names...
+                    $q2 = $q->whereHas($companyable_names[0], $company_if_needed);
 
                     //then, go through the list of the remaining, appending them on to the query with 'orWhereHas()'
                     for ($i = 1; $i < count($companyable_names); $i++) {
-                        $q2 = $q2->orWhereHas($companyable_names[$i], function ($subquery) use ($company_id) {
-                            $table = $subquery->getModel()->getTable();
-                            if (Schema::hasColumn($table, 'company_id')) {
-                                $subquery->where($table.'.company_id', $company_id);
-                            }
-                        });
+                        $q2 = $q2->orWhereHas($companyable_names[$i], $company_if_needed);
                     }
                 });
 
