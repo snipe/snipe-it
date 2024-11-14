@@ -17,12 +17,12 @@ class AlphaEncrypted implements ValidationRule
     {
         try {
             $decrypted = Crypt::decrypt($value);
-            dump($decrypted);
-            if (!ctype_alpha($decrypted)) {
+            if (!ctype_alpha($decrypted) && !is_null($decrypted)) {
                 $fail($attribute.' is not alphabetic.');
             }
         } catch (\Exception $e) {
-            $fail($e->getMessage());
+            report($e);
+            $fail('something went wrong.');
         }
     }
 }

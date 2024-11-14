@@ -16,13 +16,15 @@ class NumericEncrypted implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
+
         try {
-            $value = Crypt::decrypt($value);
-            if (!is_numeric($value)) {
+            $decrypted = Crypt::decrypt($value);
+            if (!is_numeric($decrypted) && !is_null($decrypted)) {
                 $fail($attribute.' is not numeric.');
             }
         } catch (\Exception $e) {
-            $fail($e->getMessage());
+            report($e->getMessage());
+            $fail('something went wrong');
         }
     }
 }
