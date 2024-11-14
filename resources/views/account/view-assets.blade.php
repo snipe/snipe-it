@@ -380,13 +380,8 @@
             <div class="table table-responsive">
               @if ($user->id)
                 <div class="box-header with-border">
-                  <div class="box-heading">
-                    <h2 class="box-title"> {{ trans('admin/users/general.assets_user', array('name' => $user->first_name)) }}</h2>
-                  </div>
                 </div><!-- /.box-header -->
               @endif
-
-              <div class="box-body">
                 <!-- checked out assets table -->
                 <div class="table-responsive">
 
@@ -421,9 +416,14 @@
                       <th class="col-md-2" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.asset_tag') }}
                       </th>
-                      <th class="col-md-2" data-switchable="true" data-visible="false">{{ trans('general.name') }}</th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                        {{ trans('general.name') }}
+                      </th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.asset_model') }}
+                      </th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                        {{ trans('general.model_no') }}
                       </th>
                       <th class="col-md-3" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.serial') }}
@@ -482,9 +482,10 @@
                           {{ $asset->name }}
                         </td>
                         <td>
-                          @if ($asset->physical=='1')
                             {{ $asset->model->name }}
-                          @endif
+                        </td>
+                        <td>
+                          {{ $asset->model->model_number }}
                         </td>
                         <td>
                           {{ $asset->serial }}
@@ -528,7 +529,6 @@
                   </table>
                 </div>
                 </div> <!-- .table-responsive-->
-            </div>
           </div><!-- /asset -->
           <div class="tab-pane" id="licenses">
 
