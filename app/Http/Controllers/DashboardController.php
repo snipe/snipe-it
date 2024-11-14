@@ -2,12 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Accessory;
-use App\Models\Asset;
-use App\Models\Component;
-use App\Models\Consumable;
-use App\Models\License;
-use App\Models\User;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\RedirectResponse;
 use \Illuminate\Contracts\View\View;
@@ -36,12 +30,12 @@ class DashboardController extends Controller
         if (auth()->user()->hasAccess('admin')) {
             $asset_stats = null;
 
-            $counts['asset'] = Asset::count();
-            $counts['accessory'] = Accessory::count();
-            $counts['license'] = License::assetcount();
-            $counts['consumable'] = Consumable::count();
-            $counts['component'] = Component::count();
-            $counts['user'] = User::count(); //\App\Models\Company::scopeCompanyables(auth()->user())->count();
+            $counts['asset'] = \App\Models\Asset::count();
+            $counts['accessory'] = \App\Models\Accessory::count();
+            $counts['license'] = \App\Models\License::assetcount();
+            $counts['consumable'] = \App\Models\Consumable::count();
+            $counts['component'] = \App\Models\Component::count();
+            $counts['user'] = \App\Models\User::count(); //\App\Models\Company::scopeCompanyables(auth()->user())->count();
             $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
 
             if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {
