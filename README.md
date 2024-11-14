@@ -18,15 +18,15 @@ Snipe-IT is actively developed and we [release quite frequently](https://github.
 
 ### Table of Contents
 * [Installation](#installation)
-* [User's Manual](#user-s-manual)
-* [Bug Reports & Feature Requests](#bug-reports---feature-requests)
+* [User's Manual](#users-manual)
+* [Bug Reports & Feature Requests](#bug-reports--feature-requests)
 * [Security](#security)
 * [Upgrading](#upgrading)
-* [Announcement List](#announcement-list)
 * [Translations!](#translations-)
-* [Libraries, Modules & Related Projects](#libraries--modules---related-projects)
-* [Join the Community!](#join-the-community-)
+* [Libraries, Modules & Related Projects](#libraries-modules--related-projects)
+* [Join the Community!](#join-the-community)
 * [Contributing](#contributing)
+* [Announcement List](#announcement-list)
 
 
 -----
@@ -63,12 +63,6 @@ Feel free to check out the [GitHub Issues for this project](https://github.com/s
 Please see the [upgrading documentation](https://snipe-it.readme.io/docs/upgrading) for instructions on upgrading Snipe-IT.
 
 ------
-### Announcement List
-
-To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
-
-------
-
 ### Translations!
 
 Please see the [translations documentation](https://snipe-it.readme.io/docs/translations) for information about available languages and how to add translations to Snipe-IT.
@@ -125,3 +119,10 @@ This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md
 The ERD is available [online here](https://drawsql.app/templates/snipe-it).
 
 Be sure to check out all of the [amazing people](CONTRIBUTORS.md) that have contributed to Snipe-IT over the years!
+
+------
+### Announcement List
+
+To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
+
+
