@@ -1379,7 +1379,7 @@
                                 <x-filestable
                                         filepath="private_uploads/assetmodels/"
                                         showfile_routename="show/modelfile"
-                                        deletefile_routename="modelfile.destroy"
+                                        deletefile_routename="delete/modelfile"
                                         :object="$asset->model" />
 
                             </div> <!-- /.col-md-12 -->
