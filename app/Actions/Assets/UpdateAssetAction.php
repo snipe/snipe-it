@@ -3,9 +3,7 @@
 namespace App\Actions\Assets;
 
 use App\Events\CheckoutableCheckedIn;
-use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
-use App\Http\Requests\Request;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
@@ -32,16 +30,16 @@ class UpdateAssetAction
         $rtd_location_id = null,
         $byod = false,
         $image_delete = false,
-        $serials = null,
+        $serial = null,
         $name = null,
         $company_id = null,
         $model_id = null,
         $order_number = null,
-        $asset_tags = null,
+        $asset_tag = null,
         $notes = null,
-    )
-    {
+    ): \App\Models\SnipeModel {
 
+        dump($purchase_date);
         $asset->status_id = $status_id;
         $asset->warranty_months = $warranty_months;
         $asset->purchase_cost = $purchase_cost;
@@ -100,28 +98,14 @@ class UpdateAssetAction
             }
         }
 
-        // this is gonna be a whole issue with validation - i'm assuming it's because we're using the same blade
-        // to do both create (which allows multiple creates) and update. should be fixable.
-        // and why is the offset 1 and not 0? very confusing.
-        $serial = $serials;
-        $asset->serial = $serials;
-
-        if (is_array($serials)) {
-            $asset->serial = $serial[1];
-        }
+        $asset->serial = $serial;
 
         $asset->name = $name;
         $asset->company_id = Company::getIdForCurrentUser($company_id);
         $asset->model_id = $model_id;
         $asset->order_number = $order_number;
 
-        // same thing as serials above
-        $asset_tags = $asset_tags;
-        $asset->asset_tag = $asset_tags;
-
-        if (is_array($asset_tags)) {
-            $asset->asset_tag = $asset_tags[1];
-        }
+        $asset->asset_tag = $asset_tag;
 
         $asset->notes = $notes;
 
@@ -156,11 +140,8 @@ class UpdateAssetAction
 
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
-        if ($asset->save()) {
-            return redirect()->to(Helper::getRedirectOption($request, $assetId, 'Assets'))
-                ->with('success', trans('admin/hardware/message.update.success'));
-        }
+        $asset->save();
 
-        return redirect()->back()->withInput()->withErrors($asset->getErrors());
+        return $asset;
     }
 }

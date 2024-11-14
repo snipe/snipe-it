@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Actions\Assets\DestroyAssetAction;
 use App\Actions\Assets\StoreAssetAction;
+use App\Actions\Assets\UpdateAssetAction;
 use App\Events\CheckoutableCheckedIn;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Requests\Assets\StoreAssetRequest;
@@ -650,6 +651,12 @@ class AssetsController extends Controller
      */
     public function update(UpdateAssetRequest $request, Asset $asset): JsonResponse
     {
+        try {
+            UpdateAssetAction::run($asset, $request, ...$request->validated());
+        } catch (CheckoutNotAllowed $e) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()), 200);
+        }
+
         $asset->fill($request->validated());
 
         if ($request->has('model_id')) {
@@ -675,8 +682,8 @@ class AssetsController extends Controller
 
         $asset = $request->handleImages($asset);
         $model = $asset->model;
-            
-            // Update custom fields
+
+        // Update custom fields
             $problems_updating_encrypted_custom_fields = false;
             if (($model) && (isset($model->fieldset))) {
                 foreach ($model->fieldset->fields as $field) {

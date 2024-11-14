@@ -233,6 +233,15 @@ class AssetsController extends Controller
     public function update(UpdateAssetRequest $request, Asset $asset): RedirectResponse
     {
         try {
+            $serials = $request->input('serials');
+            $asset_tags = $request->input('asset_tags');
+            if (is_array($request->input('serials'))) {
+                $serial = $serials[1];
+            }
+            if (is_array($request->input('asset_tags'))) {
+                $asset_tag = $asset_tags[1];
+            }
+
             $asset = UpdateAssetAction::run(
                 asset: $asset,
                 request: $request,
@@ -248,75 +257,67 @@ class AssetsController extends Controller
                 rtd_location_id: $request->validated('rtd_location_id'),
                 byod: $request->validated('byod'),
                 image_delete: $request->validated('image_delete'),
-                serials: null, // this needs to be set up in request somehow
+                serial: $serial, // this needs to be set up in request somehow
                 name: $request->validated('name'),
                 company_id: $request->validated('company_id'),
                 model_id: $request->validated('model_id'),
                 order_number: $request->validated('order_number'),
-                asset_tags: null, // same as serials
+                asset_tag: $asset_tag, // same as serials
                 notes: $request->validated('notes'),
             );
-            return redirect()->back()->with('success', trans('admin/hardware/message.update.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                ->with('success', trans('admin/hardware/message.update.success'));
+        } catch (\Watson\Validating\ValidationException $e) {
+            $errors = $e->getErrors();
+            return redirect()->back()->withInput()->withErrors($errors);
         } catch (\Exception $e) {
             report($e);
-            return redirect()->back()->with('error', trans('admin/hardware/message.update.error'));
+            return redirect()->back()->with('error', trans('admin/hardware/message.update.error'), $asset);
         }
 
         // serials????
-        $serial = $request->input('serials');
-        $asset->serial = $request->input('serials');
-
-        if (is_array($request->input('serials'))) {
-            $asset->serial = $serial[1];
-        }
-
-        $asset->name = $request->input('name');
-        $asset->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-        $asset->model_id = $request->input('model_id');
-        $asset->order_number = $request->input('order_number');
-
-        $asset_tags = $request->input('asset_tags');
-        $asset->asset_tag = $request->input('asset_tags');
-
-        if (is_array($request->input('asset_tags'))) {
-            $asset->asset_tag = $asset_tags[1];
-        }
-
-        $asset->notes = $request->input('notes');
-
-        $asset = $request->handleImages($asset);
-
-        // Update custom fields in the database.
-        $model = AssetModel::find($request->get('model_id'));
-        if (($model) && ($model->fieldset)) {
-            foreach ($model->fieldset->fields as $field) {
-
-                if ($field->field_encrypted == '1') {
-                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                        } else {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-                        }
-                    }
-                } else {
-                    if (is_array($request->input($field->db_column))) {
-                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                    } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
-                    }
-                }
-            }
-        }
-
-        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
-
-        if ($asset->save()) {
-            return redirect()->to(Helper::getRedirectOption($request, $assetId, 'Assets'))
-                ->with('success', trans('admin/hardware/message.update.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($asset->getErrors());
+        //$asset->name = $request->input('name');
+        //$asset->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+        //$asset->model_id = $request->input('model_id');
+        //$asset->order_number = $request->input('order_number');
+        //
+        //
+        //
+        //$asset->notes = $request->input('notes');
+        //
+        //$asset = $request->handleImages($asset);
+        //
+        //// Update custom fields in the database.
+        //$model = AssetModel::find($request->get('model_id'));
+        //if (($model) && ($model->fieldset)) {
+        //    foreach ($model->fieldset->fields as $field) {
+        //
+        //        if ($field->field_encrypted == '1') {
+        //            if (Gate::allows('assets.view.encrypted_custom_fields')) {
+        //                if (is_array($request->input($field->db_column))) {
+        //                    $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+        //                } else {
+        //                    $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+        //                }
+        //            }
+        //        } else {
+        //            if (is_array($request->input($field->db_column))) {
+        //                $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+        //            } else {
+        //                $asset->{$field->db_column} = $request->input($field->db_column);
+        //            }
+        //        }
+        //    }
+        //}
+        //
+        //session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+        //
+        //if ($asset->save()) {
+        //    return redirect()->to(Helper::getRedirectOption($request, $assetId, 'Assets'))
+        //        ->with('success', trans('admin/hardware/message.update.success'));
+        //}
+        //
+        //return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
     /**
