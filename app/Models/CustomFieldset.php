@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Rules\AlphaEncrypted;
+use App\Rules\NumericEncrypted;
 use Gate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -92,12 +94,19 @@ class CustomFieldset extends Model
                     $rule[] = 'unique_undeleted';
             }
 
-            if ($field->hasFormat() && $field->isEncrypted()) {
-                $rule[] = $rule.'-encrypted';
-            }
-
             array_push($rule, $field->attributes['format']);
             $rules[$field->db_column_name()] = $rule;
+
+
+            if ($field->format === 'NUMERIC' && $field->field_encrypted) {
+                $numericKey = array_search('numeric', $rules[$field->db_column_name()]);
+                $rules[$field->db_column_name()][$numericKey] = new NumericEncrypted;
+            }
+
+            if ($field->format === 'ALPHA' && $field->field_encrypted) {
+                $alphaKey = array_search('alpha', $rules[$field->db_column_name()]);
+                $rules[$field->db_column_name()][$alphaKey] = new AlphaEncrypted;
+            }
 
             // add not_array to rules for all fields but checkboxes
             if ($field->element != 'checkbox') {
@@ -112,6 +121,8 @@ class CustomFieldset extends Model
                 $rules[$field->db_column_name()][] = 'radio_buttons';
             }
         }
+
+        dump($rules);
 
         return $rules;
     }

@@ -12,11 +12,13 @@ use App\Presenters\Presentable;
 use App\Presenters\AssetPresenter;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
@@ -213,14 +215,15 @@ class Asset extends Depreciable
         $this->attributes['expected_checkin'] = $value;
     }
 
-    public function withValidator($validator)
-    {
-        foreach ($this->customFields as $field) {
-            if ($field->isEncrypted()) {
-                Crypt::decrypt($this->value);
-            }
-        }
-    }
+    // i don't think this will work the way we'd need it to
+    //public function withValidator(Validator $validator)
+    //{
+    //    foreach ($this->customFields as $field) {
+    //        if ($field->field_encrypted) {
+    //            return Crypt::decrypt($this->value);
+    //        }
+    //    }
+    //}
 
     /**
      * This handles the custom field validation for assets
