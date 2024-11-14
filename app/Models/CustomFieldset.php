@@ -98,6 +98,8 @@ class CustomFieldset extends Model
             $rules[$field->db_column_name()] = $rule;
 
 
+            // these are to replace the standard 'numeric' and 'alpha' rules if the custom field is also encrypted.
+            // the values need to be decrypted first, because encrypted strings are alphanumeric
             if ($field->format === 'NUMERIC' && $field->field_encrypted) {
                 $numericKey = array_search('numeric', $rules[$field->db_column_name()]);
                 $rules[$field->db_column_name()][$numericKey] = new NumericEncrypted;
@@ -121,8 +123,6 @@ class CustomFieldset extends Model
                 $rules[$field->db_column_name()][] = 'radio_buttons';
             }
         }
-
-        dump($rules);
 
         return $rules;
     }

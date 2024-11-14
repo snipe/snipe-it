@@ -215,16 +215,6 @@ class Asset extends Depreciable
         $this->attributes['expected_checkin'] = $value;
     }
 
-    // i don't think this will work the way we'd need it to
-    //public function withValidator(Validator $validator)
-    //{
-    //    foreach ($this->customFields as $field) {
-    //        if ($field->field_encrypted) {
-    //            return Crypt::decrypt($this->value);
-    //        }
-    //    }
-    //}
-
     /**
      * This handles the custom field validation for assets
      *
