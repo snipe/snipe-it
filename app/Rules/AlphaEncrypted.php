@@ -23,7 +23,7 @@ class AlphaEncrypted implements ValidationRule
             }
         } catch (\Exception $e) {
             report($e);
-            $fail('something went wrong.');
+            $fail(trans('general.something_went_wrong'));
         }
     }
 }

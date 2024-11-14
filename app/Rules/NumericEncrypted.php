@@ -25,7 +25,7 @@ class NumericEncrypted implements ValidationRule
             }
         } catch (\Exception $e) {
             report($e->getMessage());
-            $fail('something went wrong');
+            $fail(trans('general.something_went_wrong'));
         }
     }
 }
