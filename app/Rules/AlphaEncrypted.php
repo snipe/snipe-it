@@ -19,7 +19,7 @@ class AlphaEncrypted implements ValidationRule
             $decrypted = Crypt::decrypt($value);
             dump($decrypted);
             if (!ctype_alpha($decrypted)) {
-                $fail($attribute.' is not numeric.');
+                $fail($attribute.' is not alphabetic.');
             }
         } catch (\Exception $e) {
             $fail($e->getMessage());
