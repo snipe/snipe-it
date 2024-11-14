@@ -2,7 +2,7 @@
 
 namespace App\Models\Traits;
 
-use App\Models\Company;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,7 +23,7 @@ trait Companyable
         static::addGlobalScope('companyable', function (Builder $builder) {
             $model = $builder->getModel();
             // If not logged in and hitting this, assume we are on the command line and don't scope?'
-            if (!Company::isFullMultipleCompanySupportEnabled() || (Auth::hasUser() && auth()->user()->isSuperUser()) || (!Auth::hasUser())) {
+            if (!Setting::getSettings()?->full_multiple_companies_support || (Auth::hasUser() && auth()->user()->isSuperUser()) || (!Auth::hasUser())) {
                 return $builder;
             } else {
                 //return static::scopeCompanyablesDirectly($builder, 'company_id');

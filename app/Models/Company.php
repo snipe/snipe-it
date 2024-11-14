@@ -71,7 +71,7 @@ final class Company extends SnipeModel
     ];
 
     // TODO - _Maybe_ this is deletable?
-    public static function isFullMultipleCompanySupportEnabled()
+    private static function isFullMultipleCompanySupportEnabled()
     {
         $settings = Setting::getSettings();
 
@@ -242,7 +242,7 @@ final class Company extends SnipeModel
     {
         return $this->hasMany(Component::class, 'company_id');
     }
-    
+
     public function adminuser()
     {
         return $this->belongsTo(\App\Models\User::class, 'created_by');

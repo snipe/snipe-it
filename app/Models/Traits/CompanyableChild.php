@@ -2,6 +2,7 @@
 
 namespace App\Models\Traits;
 
+use App\Models\Setting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 use App\Models\Company;
@@ -23,7 +24,7 @@ trait CompanyableChild
             $companyable_names = $model->getCompanyableParents();
             if (count($companyable_names) == 0) {
                 throw new \Exception('No Companyable Children to scope');
-            } elseif (!Company::isFullMultipleCompanySupportEnabled() || (Auth::hasUser() && auth()->user()->isSuperUser())) {
+            } elseif (!Setting::getSettings()?->full_multiple_companies_support || (Auth::hasUser() && auth()->user()->isSuperUser())) {
                 return $builder;
             } else {
                 if (Auth::hasUser()) {
