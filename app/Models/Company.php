@@ -70,7 +70,8 @@ final class Company extends SnipeModel
         'created_by'
     ];
 
-    private static function isFullMultipleCompanySupportEnabled()
+    // TODO - _Maybe_ this is deletable?
+    public static function isFullMultipleCompanySupportEnabled()
     {
         $settings = Setting::getSettings();
 
@@ -246,30 +247,7 @@ final class Company extends SnipeModel
      * START COMPANY SCOPING FOR FMCS
      */
 
-    /**
-     * Scoping table queries, determining if a logged in user is part of a company, and only allows the user to access items associated with that company if FMCS is enabled.
-     *
-     * This method is the one that the CompanyableTrait uses to contrain queries automatically, however that trait CANNOT be
-     * applied to the user's model, since it causes an infinite loop against the authenticated user.
-     *
-     * @todo - refactor that trait to handle the user's model as well.
-     *
-     * @author [A. Gianotto] <snipe@snipe.net>
-     * @param $query
-     * @param $column
-     * @param $table_name
-     * @return mixed
-     */
-    public static function scopeCompanyables($query, $column = 'company_id', $table_name = null)
-    {
-        // If not logged in and hitting this, assume we are on the command line and don't scope?'
-        if (! static::isFullMultipleCompanySupportEnabled() || (Auth::hasUser() && auth()->user()->isSuperUser()) || (! Auth::hasUser())) {
-            return $query;
-        } else {
-            return static::scopeCompanyablesDirectly($query, $column, $table_name);
-        }
-    }
-
+    // FIXME - can we delete this?
     /**
      * Scoping table queries, determining if a logged-in user is part of a company, and only allows
      * that user to see items associated with that company
