@@ -44,6 +44,22 @@ class ReportsController extends Controller
             });
         }
 
+        if ($request->filled('action_type')) {
+            $actionlogs = $actionlogs->where('action_type', '=', $request->input('action_type'))->orderBy('created_at', 'desc');
+        }
+
+        if ($request->filled('created_by')) {
+            $actionlogs = $actionlogs->where('created_by', '=', $request->input('created_by'));
+        }
+
+        if ($request->filled('action_source')) {
+            $actionlogs = $actionlogs->where('action_source', '=', $request->input('action_source'))->orderBy('created_at', 'desc');
+        }
+        
+        if ($request->filled('remote_ip')) {
+            $actionlogs = $actionlogs->where('remote_ip', '=', $request->input('remote_ip'))->orderBy('created_at', 'desc');
+        }
+
 
         if ($request->filled('uploads')) {
             $actionlogs = $actionlogs->whereNotNull('filename')->orderBy('created_at', 'desc');
