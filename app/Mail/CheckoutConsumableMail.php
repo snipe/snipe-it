@@ -38,7 +38,7 @@ class CheckoutConsumableMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = new Address(config('mail.from.address','service@snipe-it.io'));
+        $from = new Address(config('mail.from.address'),config('MAIL_ENV_FROM_ADDR'));
 
         return new Envelope(
             from: $from,
