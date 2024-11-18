@@ -373,6 +373,10 @@ $(function () {
                 $('#assigned_location').hide();
                 $('.notification-callout').fadeOut();
 
+                $('#assigned_asset_select').attr('required', true);
+                $('#assigned_user_select').attr('required', false);
+                $('#assigned_location_select').attr('required', false);
+
                 $('[name="assigned_location"]').val('').trigger('change.select2');
                 $('[name="assigned_user"]').val('').trigger('change.select2');
 
@@ -382,6 +386,10 @@ $(function () {
                 $('#assigned_user').hide();
                 $('#assigned_location').show();
                 $('.notification-callout').fadeOut();
+
+                $('#assigned_asset_select').attr('required', false);
+                $('#assigned_user_select').attr('required', false);
+                $('#assigned_location_select').attr('required', true);
 
                 $('[name="assigned_asset"]').val('').trigger('change.select2');
                 $('[name="assigned_user"]').val('').trigger('change.select2');
@@ -394,6 +402,10 @@ $(function () {
                     $('#current_assets_box').fadeIn();
                 }
                 $('.notification-callout').fadeIn();
+
+                $('#assigned_asset_select').attr('required', false);
+                $('#assigned_user_select').attr('required', true);
+                $('#assigned_location_select').attr('required', false);
 
                 $('[name="assigned_asset"]').val('').trigger('change.select2');
                 $('[name="assigned_location"]').val('').trigger('change.select2');
