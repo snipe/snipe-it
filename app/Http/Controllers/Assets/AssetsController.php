@@ -233,13 +233,13 @@ class AssetsController extends Controller
     public function update(UpdateAssetRequest $request, Asset $asset): RedirectResponse
     {
         try {
-            $serials = $request->input('serials');
-            $asset_tags = $request->input('asset_tags');
+            $serial = $request->input('serials');
+            $asset_tag = $request->input('asset_tags');
             if (is_array($request->input('serials'))) {
-                $serial = $serials[1];
+                $serial = $request->input('serials')[1];
             }
             if (is_array($request->input('asset_tags'))) {
-                $asset_tag = $asset_tags[1];
+                $asset_tag = $request->input('asset_tags')[1];
             }
 
             $asset = UpdateAssetAction::run(
