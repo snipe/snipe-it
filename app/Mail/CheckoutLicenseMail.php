@@ -36,7 +36,7 @@ class CheckoutLicenseMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = new Address(env('MAIL_FROM_ADDR','service@snipe-it.io'));
+        $from = new Address(config('mail.from.address','service@snipe-it.io'));
 
         return new Envelope(
             from: $from,
