@@ -42,7 +42,7 @@ return new class extends Migration
         }
 
         foreach ($this->existing_table_list() as $table) {
-            if (Schema::hasColumn($table, 'user_id')) {
+            if (Schema::hasColumn($table, 'created_by')) {
                 Schema::table($table, function (Blueprint $table) {
                     $table->renameColumn('created_by', 'user_id');
                 });
