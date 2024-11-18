@@ -57,7 +57,7 @@ class ForgotPasswordController extends Controller
          * payloads through.
          */
         $request->validate([
-            'username' => ['required', 'max:255'],
+            'username' => ['required', 'max:255', 'string'],
         ]);
 
         /**
