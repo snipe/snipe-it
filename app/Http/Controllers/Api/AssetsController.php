@@ -30,13 +30,11 @@ use App\Models\License;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Http\Requests\ImageUploadRequest;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Watson\Validating\ValidationException;
 
 
 /**
@@ -655,6 +653,10 @@ class AssetsController extends Controller
             UpdateAssetAction::run($asset, $request, ...$request->validated());
         } catch (CheckoutNotAllowed $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()), 200);
+        } catch (ValidationException $e) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, $e->getErrors()), 200);
+        } catch (\Exception $e) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.something_went_wrong')));
         }
 
         $asset->fill($request->validated());
@@ -708,20 +710,20 @@ class AssetsController extends Controller
                 }
             }
             if ($asset->save()) {
-                if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
-                        $location = $target->location_id;
-                } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                    $location = $target->location_id;
-
-                    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
-                        ->update(['location_id' => $target->location_id]);
-                } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
-                    $location = $target->id;
-                }
-
-                if (isset($target)) {
-                    $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
-                }
+                //if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
+                //        $location = $target->location_id;
+                //} elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
+                //    $location = $target->location_id;
+                //
+                //    Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
+                //        ->update(['location_id' => $target->location_id]);
+                //} elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
+                //    $location = $target->id;
+                //}
+                //
+                //if (isset($target)) {
+                //    $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+                //}
 
                 if ($asset->image) {
                     $asset->image = $asset->getImageUrl();

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Actions\Assets\UpdateAssetAction;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Statuslabel;
@@ -21,6 +23,7 @@ use App\Models\CustomField;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Watson\Validating\ValidationException;
 
 class BulkAssetsController extends Controller
 {
@@ -199,25 +202,65 @@ class BulkAssetsController extends Controller
      * @internal param array $assets
      * @since [v2.0]
      */
-    public function update(Request $request) : RedirectResponse
+    public function update(ImageUploadRequest $request): RedirectResponse
     {
+        // this should be in request, but request weird, need to think it through a little
         $this->authorize('update', Asset::class);
+        // Get the back url from the session and then destroy the session
+        $bulk_back_url = route('hardware.index');
+        // is this necessary?
+        if (!$request->filled('ids') || count($request->input('ids')) == 0) {
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
+        }
+        if ($request->session()->has('bulk_back_url')) {
+            $bulk_back_url = $request->session()->pull('bulk_back_url');
+        }
+        // find and update assets
+        $assets = Asset::whereIn('id', $request->input('ids'))->get();
+        $errors = [];
+        foreach ($assets as $key => $asset) {
+            try {
+                $updatedAsset = UpdateAssetAction::run(
+                    asset: $asset,
+                    request: $request,
+                    status_id: $request->input('status_id'),
+                    warranty_months: $request->input('warranty_months'),
+                    purchase_cost: $request->input('purchase_cost'),
+                    purchase_date: $request->filled('null_purchase_date') ? null : $request->input('purchase_date'),
+                    next_audit_date: $request->filled('null_next_audit_date') ? null : $request->input('next_audit_date'),
+                    supplier_id: $request->input('supplier_id'),
+                    expected_checkin: $request->filled('null_expected_checkin_date') ? null : $request->input('expected_checkin'),
+                    requestable: $request->input('requestable'),
+                    rtd_location_id: $request->input('rtd_location_id'),
+                    name: $request->filled('null_name') ? null : $request->input('name'),
+                    company_id: $request->input('company_id'),
+                    model_id: $request->input('model_id'),
+                    order_number: $request->input('order_number'),
+                    isBulk: true,
+                );
+                // catch exceptions
+            } catch (ValidationException $e) {
+                $errors[$key] = $e->getMessage();
+            } catch (\Exception $e) {
+                report($e);
+                $errors[$key] = trans('general.something_went_wrong');
+            }
+        }
+        if (!empty($errors)) {
+            return redirect($bulk_back_url)->with('bulk_asset_errors', $errors);
+        }
+        return redirect()->to('index')->with('success', trans('admin/hardware/message.update.assets_do_not_exist'));
+
+
         $has_errors = 0;
         $error_array = array();
 
         // Get the back url from the session and then destroy the session
-        $bulk_back_url = route('hardware.index');
-
-        if ($request->session()->has('bulk_back_url')) {
-            $bulk_back_url = $request->session()->pull('bulk_back_url');
-        }
 
        $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
 
      
-        if (! $request->filled('ids') || count($request->input('ids')) == 0) {
-            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
-        }
+
 
 
         $assets = Asset::whereIn('id', $request->input('ids'))->get();
@@ -232,24 +275,8 @@ class BulkAssetsController extends Controller
          * its checkout status.
          */
 
-        if (($request->filled('name'))
-            || ($request->filled('purchase_date'))
-            || ($request->filled('expected_checkin'))
-            || ($request->filled('purchase_cost'))
-            || ($request->filled('supplier_id'))
-            || ($request->filled('order_number'))
-            || ($request->filled('warranty_months'))
-            || ($request->filled('rtd_location_id'))
-            || ($request->filled('requestable'))
-            || ($request->filled('company_id'))
-            || ($request->filled('status_id'))
-            || ($request->filled('model_id'))
-            || ($request->filled('next_audit_date'))
-            || ($request->filled('null_name'))
-            || ($request->filled('null_purchase_date'))
-            || ($request->filled('null_expected_checkin_date'))
-            || ($request->filled('null_next_audit_date'))
-            || ($request->anyFilled($custom_field_columns))
+        if (
+            ($request->anyFilled($custom_field_columns))
 
         ) {
             // Let's loop through those assets and build an update array
@@ -264,14 +291,14 @@ class BulkAssetsController extends Controller
                  * It's tempting to make these match the request check above, but some of these values require
                  * extra work to make sure the data makes sense.
                  */
-                $this->conditionallyAddItem('name')
-                    ->conditionallyAddItem('purchase_date')
-                    ->conditionallyAddItem('expected_checkin')
-                    ->conditionallyAddItem('order_number')
-                    ->conditionallyAddItem('requestable')
-                    ->conditionallyAddItem('supplier_id')
-                    ->conditionallyAddItem('warranty_months')
-                    ->conditionallyAddItem('next_audit_date');
+                //$this->conditionallyAddItem('name')
+                //    ->conditionallyAddItem('purchase_date')
+                //    ->conditionallyAddItem('expected_checkin')
+                //    ->conditionallyAddItem('order_number')
+                //    ->conditionallyAddItem('requestable')
+                //    ->conditionallyAddItem('supplier_id')
+                //    ->conditionallyAddItem('warranty_months')
+                //    ->conditionallyAddItem('next_audit_date');
                     foreach ($custom_field_columns as $key => $custom_field_column) {
                         $this->conditionallyAddItem($custom_field_column); 
                    }
@@ -296,10 +323,6 @@ class BulkAssetsController extends Controller
                 /**
                  * Blank out fields that were requested to be blanked out via checkbox
                  */
-                if ($request->input('null_name')=='1') {
-
-                    $this->update_array['name'] = null;
-                }
 
                 if ($request->input('null_purchase_date')=='1') {
                     $this->update_array['purchase_date'] = null;
@@ -308,16 +331,8 @@ class BulkAssetsController extends Controller
 					}
                 }
 
-                if ($request->input('null_expected_checkin_date')=='1') {
-                    $this->update_array['expected_checkin'] = null;
-                }
-
                 if ($request->input('null_next_audit_date')=='1') {
                     $this->update_array['next_audit_date'] = null;
-                }
-
-                if ($request->filled('purchase_cost')) {
-                    $this->update_array['purchase_cost'] =  $request->input('purchase_cost');
                 }
 
                 if ($request->filled('company_id')) {
@@ -393,6 +408,7 @@ class BulkAssetsController extends Controller
                  * WILL NOT BE logged in the edit log_meta data
                  *  ------------------------------------------------------------------------------
                  */
+                // it looks like this doesn't do anything anymore 🤔
                 $changed = [];
 
                 foreach ($this->update_array as $key => $value) {

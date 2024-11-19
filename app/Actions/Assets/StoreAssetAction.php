@@ -22,7 +22,7 @@ class StoreAssetAction
      * @throws CheckoutNotAllowed
      */
     public static function run(
-        $model_id,//gonna make these two optional for now... we can either make them required here or use the spread operator when calling...
+        $model_id,
         $status_id,//
         ImageUploadRequest $request, //temp for handleImages - i'd like to see that moved to a helper or something - or maybe just invoked at the extended request level so that it doesn't need to be done in the action?
         $name = null,

@@ -38,6 +38,7 @@ use Illuminate\Http\Response;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Watson\Validating\ValidationException;
 
 /**
  * This class controls all actions related to assets for
@@ -267,57 +268,12 @@ class AssetsController extends Controller
             );
             return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                 ->with('success', trans('admin/hardware/message.update.success'));
-        } catch (\Watson\Validating\ValidationException $e) {
-            $errors = $e->getErrors();
-            return redirect()->back()->withInput()->withErrors($errors);
+        } catch (ValidationException $e) {
+            return redirect()->back()->withInput()->withErrors($e->getErrors());
         } catch (\Exception $e) {
             report($e);
             return redirect()->back()->with('error', trans('admin/hardware/message.update.error'), $asset);
         }
-
-        // serials????
-        //$asset->name = $request->input('name');
-        //$asset->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-        //$asset->model_id = $request->input('model_id');
-        //$asset->order_number = $request->input('order_number');
-        //
-        //
-        //
-        //$asset->notes = $request->input('notes');
-        //
-        //$asset = $request->handleImages($asset);
-        //
-        //// Update custom fields in the database.
-        //$model = AssetModel::find($request->get('model_id'));
-        //if (($model) && ($model->fieldset)) {
-        //    foreach ($model->fieldset->fields as $field) {
-        //
-        //        if ($field->field_encrypted == '1') {
-        //            if (Gate::allows('assets.view.encrypted_custom_fields')) {
-        //                if (is_array($request->input($field->db_column))) {
-        //                    $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-        //                } else {
-        //                    $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-        //                }
-        //            }
-        //        } else {
-        //            if (is_array($request->input($field->db_column))) {
-        //                $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-        //            } else {
-        //                $asset->{$field->db_column} = $request->input($field->db_column);
-        //            }
-        //        }
-        //    }
-        //}
-        //
-        //session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
-        //
-        //if ($asset->save()) {
-        //    return redirect()->to(Helper::getRedirectOption($request, $assetId, 'Assets'))
-        //        ->with('success', trans('admin/hardware/message.update.success'));
-        //}
-        //
-        //return redirect()->back()->withInput()->withErrors($asset->getErrors());
     }
 
     /**
