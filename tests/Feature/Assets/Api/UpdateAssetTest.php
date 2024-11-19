@@ -80,6 +80,7 @@ class UpdateAssetTest extends TestCase
             ->assertStatusMessageIs('success')
             ->json();
 
+        dd($response);
         $updatedAsset = Asset::find($response['payload']['id']);
 
         $this->assertEquals('2024-06-02', $updatedAsset->asset_eol_date);

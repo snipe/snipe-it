@@ -652,7 +652,7 @@ class AssetsController extends Controller
     {
         try {
             $updatedAsset = UpdateAssetAction::run($asset, $request, ...$request->validated());
-            return response()->json(Helper::formatStandardApiResponse('success', trans('admin/hardware/message.update.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
         } catch (CheckoutNotAllowed $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()), 200);
         } catch (ValidationException $e) {
@@ -680,7 +680,7 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.delete.success')));
         } catch (\Exception $e) {
             report($e);
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'something went wrong: '));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.something_went_wrong')));
         }
     }
 

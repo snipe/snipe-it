@@ -14,9 +14,13 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Watson\Validating\ValidationException;
 
 class UpdateAssetAction
 {
+    /**
+     * @throws ValidationException
+     */
     public static function run(
         Asset $asset,
         ImageUploadRequest $request, //very much would like this to go away
@@ -111,7 +115,11 @@ class UpdateAssetAction
 
         $asset->serial = $serial;
 
-        $asset->name = $name;
+        if ($request->filled('null_name')) {
+            $asset->name = null;
+        } else {
+            $asset->name = $name ?? $asset->name;
+        }
         $asset->company_id = Company::getIdForCurrentUser($company_id);
         $asset->model_id = $model_id ?? $asset->model_id;
         $asset->order_number = $order_number ?? $asset->order_number;
@@ -127,9 +135,11 @@ class UpdateAssetAction
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
 
-        $model = AssetModel::find($request->get('model_id'));
+        $model = $asset->model;
         if (($model) && ($model->fieldset)) {
+            dump($model->fieldset->fields);
             foreach ($model->fieldset->fields as $field) {
+
 
                 if ($field->field_encrypted == '1') {
                     if (Gate::allows('assets.view.encrypted_custom_fields')) {

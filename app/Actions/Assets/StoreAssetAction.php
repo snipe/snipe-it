@@ -46,8 +46,6 @@ class StoreAssetAction
         $assigned_user = null,
         $assigned_asset = null,
         $assigned_location = null,
-        $custom_fields = null,
-
         $last_audit_date = null,
     )
     {

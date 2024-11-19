@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Actions\Assets\StoreAssetAction;
 use App\Actions\Assets\UpdateAssetAction;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;

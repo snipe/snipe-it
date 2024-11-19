@@ -119,6 +119,7 @@ class AssetsController extends Controller
                 $asset = StoreAssetAction::run(
                     model_id: $request->validated('model_id'),
                     status_id: $request->validated('status_id'),
+                    request: $request,
                     name: $request->validated('name'),
                     serial: $request->has('serials') ? $serials[$key] : null,
                     company_id: $request->validated('company_id'),
@@ -140,8 +141,6 @@ class AssetsController extends Controller
                     assigned_user: $request->validated('assigned_user'),
                     assigned_asset: $request->validated('assigned_asset'),
                     assigned_location: $request->validated('assigned_location'),
-                    custom_fields: $custom_fields,
-                    request: $request, //this is just for the handleImages method... would love to figure out a different way of doing this
                     last_audit_date: $request->validated('last_audit_date'),
                 );
             }
@@ -153,7 +152,6 @@ class AssetsController extends Controller
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.error'));
         } catch (\Exception $e) {
             report($e);
-            dd($e);
             return redirect()->back()->with('error', 'something bad');
         }
     }
@@ -283,7 +281,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function destroy(Asset $asset): RedirectResponse
+    public function destroy(Asset $asset, $request): RedirectResponse
     {
         $this->authorize('delete', $asset);
         try {
