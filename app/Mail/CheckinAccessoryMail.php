@@ -34,7 +34,7 @@ class CheckinAccessoryMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = new Address(config('mail.from.address'),config('MAIL_ENV_FROM_ADDR'));
+        $from = new Address(config('mail.from.address'));
 
         return new Envelope(
             from: $from,

@@ -237,7 +237,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDR', null),
+        'address' => env('MAIL_FROM_ADDR', env('MAIL_ENV_FROM_ADDR')),
         'name' => env('MAIL_FROM_NAME', null),
     ],
 
