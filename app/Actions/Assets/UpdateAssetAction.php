@@ -193,7 +193,7 @@ class UpdateAssetAction
 
         if ($asset->save()) {
             // check out stuff
-            //$location = Location::find($asset->location_id);
+            $location = Location::find($asset->location_id);
             if (!is_null($assigned_user) && ($target = User::find($assigned_user))) {
                 $location = $target->location_id;
             } elseif (!is_null($assigned_asset) && ($target = Asset::find($assigned_asset))) {
