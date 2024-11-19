@@ -67,7 +67,7 @@ return [
     'name' => 'Name',
     'new_item_checked' => 'A new item has been checked out under your name, details are below.',
     'notes' => 'Notes',
-    'password' => 'Password',
+    'password' => 'Password:',
     'password_reset' => 'Password Reset',
     'read_the_terms' => 'Please read the terms of use below.',
     'read_the_terms_and_click' => 'Please read the terms of use below, and click on the link at the bottom to confirm that you read and agree to the terms of use, and have received the asset.',
