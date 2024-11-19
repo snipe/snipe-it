@@ -592,36 +592,35 @@ function assetSearch(element, string, assetStatusType){
         var filteredResponse = response.results.filter(function (item) {
             return currentlySelected.indexOf(+item.id) < 0;
         });
-        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.results[0];
-        if (first && first.id) {
-            // Fails if checking in, but not assigned_to
-            if ($("#checkinout-form").hasClass("checkout-form") && first.user_can_checkout != true) {
-                var req = {};
-                req.payload = first;
-                req.messages = "Asset not available for checkout";
-                handlecheckinoutFail (req);
-            // Fails if checking out, but not assignabled
-            } else if ($("#checkinout-form").hasClass("checkin-form") && ! Number.isInteger(first.assigned_to)) {
-                var req = {};
-                req.payload = first;
-                req.messages = "Asset not available for checkin";
-                handlecheckinoutFail (req);
-            } else {
-                first.selected = true;
-                if ($("option[value='" + first.id + "']", element).length < 1) {
-                    var option = new Option(first.text, first.id, false, true);
-                    element.append(option);
+        // Process each result
+        for (var j = 0; j < filteredResponse.length; j++) {
+            var item = filteredResponse[j];
+            if (item && item.id) {
+                // Fails if checking in, but not assigned_to
+                if ($("#checkinout-form").hasClass("checkout-form") && item.user_can_checkout != true) {
+                    error = "Asset not available for checkout";
+                    handlecheckinoutFail({ "payload": item, "messages": error });
+                // Fails if checking out, but not assignabled
+                } else if ($("#checkinout-form").hasClass("checkin-form") && ! Number.isInteger(item.assigned_to)) {
+                    error = "Asset not available for checkin";
+                    handlecheckinoutFail({ "payload": item, "messages": error });
                 } else {
-                    var isMultiple = element.attr("multiple") == "multiple";
-                    element.val(isMultiple ? element.val().concat(first.id) : element.val(first.id));
-                }
-                element.trigger('change');
-                element.trigger({
-                    type: 'select2:select',
-                    params: {
-                        data: first
+                    item.selected = true;
+                    if ($("option[value='" + item.id + "']", element).length < 1) {
+                        var option = new Option(item.text, item.id, false, true);
+                        element.append(option);
+                    } else {
+                        var isMultiple = element.attr("multiple") == "multiple";
+                        element.val(isMultiple ? element.val().concat(item.id) : element.val(item.id));
                     }
-                });
+                    element.trigger('change');
+                    element.trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: item
+                        }
+                    });
+                }
             }
         }
     });
@@ -632,11 +631,12 @@ window.load_bulkassets = function (select_assets_id, assets_tags){
         // Show processing assets
         $('#checkinout-loader').show();
         // Add options to the select2 box
-        for(let k = 0; k < assets_tags.length; k++){
-            var search_string = assets_tags[k];
-            var element = $("#" + select_assets_id);
-            assetSearch(element, search_string, null);
+        var element = $("#" + select_assets_id);
+        var search_string = assets_tags[0];
+        for(let k = 1; k < assets_tags.length; k++){
+            search_string += " OR " + assets_tags[k];
         }
+        assetSearch(element, search_string, null);
         // Hide processing assets
         $('#checkinout-loader').hide();
         return true;
