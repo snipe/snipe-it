@@ -21,7 +21,7 @@ class NumericEncrypted implements ValidationRule
             $attributeName = trim(preg_replace('/_+|snipeit|\d+/', ' ', $attribute));
             $decrypted = Crypt::decrypt($value);
             if (!is_numeric($decrypted) && !is_null($decrypted)) {
-                $fail(trans('validation.custom.numeric_encrypted', ['attribute' => $attributeName]));
+                $fail(trans('validation.numeric', ['attribute' => $attributeName]));
             }
         } catch (\Exception $e) {
             report($e->getMessage());

@@ -19,7 +19,7 @@ class AlphaEncrypted implements ValidationRule
             $attributeName = trim(preg_replace('/_+|snipeit|\d+/', ' ', $attribute));
             $decrypted = Crypt::decrypt($value);
             if (!ctype_alpha($decrypted) && !is_null($decrypted)) {
-                $fail(trans('validation.custom.alpha_encrypted', ['attribute' => $attributeName]));
+                $fail(trans('validation.alpha', ['attribute' => $attributeName]));
             }
         } catch (\Exception $e) {
             report($e);
