@@ -199,7 +199,7 @@
                             </div>
 
                             <!-- 2D Barcode Target -->
-                            <div class="form-group{{ $errors->has('label2_2d_target') ? ' has-error' : '' }}">
+
                                 <div class="col-md-3 text-right">
                                     {{ Form::label('label2_2d_target', trans('admin/settings/general.label2_2d_target'), ['class'=>'control-label']) }}
                                 </div>
@@ -209,9 +209,30 @@
                                     <p class="help-block">{{ trans('admin/settings/general.label2_2d_target_help') }}</p>
                                 </div>
                             </div>
+
+                            <!--Field Cell Margin Top-->
+                            <div class="col-md-3 text-right">
+                                {{ Form::label('label_cell_margin_top', trans('admin/settings/general.field_margin_top')) }}
+                            </div>
+                            <div class="col-md-2">
+                                <div class="input-group" style="margin-bottom: 15px;">
+                                    {{ Form::number('label_cell_margin_top', old('label_cell_margin_top', $setting->label_cell_margin_top),[
+                                        'class' => 'form-control',
+                                        'aria-label' => 'label_cell_margin_top',
+                                        'step' => '0.01', // Increment/Decrement step
+                                        'min' => '0', // Optional: Minimum value
+                                        'max' => '5', // Optional: Maximum value
+
+                                    ]) }}
+                                    <div class="input-group-addon">{{ trans('admin/settings/general.top') }}</div>
+                                </div>
+                            </div>
+
                             <div class="col-md-9 col-md-offset-3" style="margin-bottom: 10px;">
                                 @include('partials.label2-preview')
                             </div>
+
+
                             <!-- Fields -->
                             <div class="form-group {{ $errors->has('label2_fields') ? 'error' : '' }}">
                                 <div class="col-md-3 text-right">

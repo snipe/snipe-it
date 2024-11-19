@@ -38,6 +38,7 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
+        $cellMarginTop = $settings->label_cell_margin_top? : 0;
         $template = LabelModel::find($settings->label2_template);
 
         // If disabled, pass to legacy view
@@ -62,7 +63,7 @@ class Label implements View
         $pdf->SetPrintFooter(false);
         $pdf->SetAutoPageBreak(false);
         $pdf->SetMargins(0, 0, null, true);
-        $pdf->SetCellMargins(0, 0, 0, 0);
+        $pdf->SetCellMargins(0, $cellMarginTop, 0, 0);
         $pdf->SetCellPaddings(0, 0, 0, 0);
         $pdf->setCreator('Snipe-IT');
         $pdf->SetSubject('Asset Labels');

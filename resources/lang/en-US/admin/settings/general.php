@@ -67,6 +67,7 @@ return [
     'favicon'                   => 'Favicon',
     'favicon_format'            => 'Accepted filetypes are ico, png, and gif. Other image formats may not work in all browsers.',
     'favicon_size'          => 'Favicons should be square images, 16x16 pixels.',
+    'field_margin_top'          => 'Field Margin Top',
     'footer_text'               => 'Additional Footer Text ',
     'footer_text_help'          => 'This text will appear in the right-side footer. Links are allowed using <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>. Line breaks, headers, images, etc may result in unpredictable results.',
     'general_settings'			=> 'General Settings',
