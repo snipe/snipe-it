@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Assets;
 
 use App\Actions\Assets\StoreAssetAction;
 use App\Actions\Assets\UpdateAssetAction;
+use App\Exceptions\CustomFieldPermissionException;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
@@ -209,6 +210,7 @@ class BulkAssetsController extends Controller
         $this->authorize('update', Asset::class);
         // Get the back url from the session and then destroy the session
         $bulk_back_url = route('hardware.index');
+        $custom_field_problem = false;
         // is this necessary?
         if (!$request->filled('ids') || count($request->input('ids')) == 0) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
@@ -242,6 +244,9 @@ class BulkAssetsController extends Controller
                 // catch exceptions
             } catch (ValidationException $e) {
                 $errors[$key] = $e->getMessage();
+
+            } catch (CustomFieldPermissionException $e) {
+                $custom_field_problem = true;
             } catch (\Exception $e) {
                 report($e);
                 $errors[$key] = trans('general.something_went_wrong');
@@ -249,6 +254,9 @@ class BulkAssetsController extends Controller
         }
         if (!empty($errors)) {
             return redirect($bulk_back_url)->with('bulk_asset_errors', $errors);
+        }
+        if ($custom_field_problem) {
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.encrypted_warning'));
         }
         return redirect($bulk_back_url)->with('success', trans('bulk.update.success'));
     }

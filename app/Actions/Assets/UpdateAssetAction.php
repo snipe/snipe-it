@@ -3,6 +3,7 @@
 namespace App\Actions\Assets;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Exceptions\CustomFieldPermissionException;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -20,6 +21,7 @@ class UpdateAssetAction
 {
     /**
      * @throws ValidationException
+     * @throws CustomFieldPermissionException
      */
     public static function run(
         Asset $asset,
@@ -135,26 +137,50 @@ class UpdateAssetAction
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
 
+        //if (($model) && ($model->fieldset)) {
+        //    dump($model->fieldset->fields);
+        //    foreach ($model->fieldset->fields as $field) {
+        //
+        //
+        //        if ($field->field_encrypted == '1') {
+        //            if (Gate::allows('assets.view.encrypted_custom_fields')) {
+        //                if (is_array($request->input($field->db_column))) {
+        //                    $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+        //                } else {
+        //                    $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+        //                }
+        //                throw new CustomFieldPermissionException();
+        //                continue;
+        //            }
+        //        } else {
+        //            if (is_array($request->input($field->db_column))) {
+        //                $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+        //            } else {
+        //                $asset->{$field->db_column} = $request->input($field->db_column);
+        //            }
+        //        }
+        //    }
+        //}
         $model = $asset->model;
-        if (($model) && ($model->fieldset)) {
-            dump($model->fieldset->fields);
+        if (($model) && (isset($model->fieldset))) {
             foreach ($model->fieldset->fields as $field) {
+                $field_val = $request->input($field->db_column, null);
 
-
-                if ($field->field_encrypted == '1') {
-                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                        } else {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                if ($request->has($field->db_column)) {
+                    if ($field->element == 'checkbox') {
+                        if (is_array($field_val)) {
+                            $field_val = implode(',', $field_val);
                         }
                     }
-                } else {
-                    if (is_array($request->input($field->db_column))) {
-                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                    } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                            $field_val = Crypt::encrypt($field_val);
+                        } else {
+                            throw new CustomFieldPermissionException();
+                            continue;
+                        }
                     }
+                    $asset->{$field->db_column} = $field_val;
                 }
             }
         }

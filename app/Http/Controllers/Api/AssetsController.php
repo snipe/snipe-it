@@ -7,6 +7,7 @@ use App\Actions\Assets\StoreAssetAction;
 use App\Actions\Assets\UpdateAssetAction;
 use App\Events\CheckoutableCheckedIn;
 use App\Exceptions\CheckoutNotAllowed;
+use App\Exceptions\CustomFieldPermissionException;
 use App\Http\Requests\Assets\StoreAssetRequest;
 use App\Http\Requests\Assets\UpdateAssetRequest;
 use App\Http\Traits\MigratesLegacyAssetLocations;
@@ -626,7 +627,6 @@ class AssetsController extends Controller
                 assigned_user: $request->validated('assigned_user'),
                 assigned_asset: $request->validated('assigned_asset'),
                 assigned_location: $request->validated('assigned_location'),
-                custom_fields: $custom_fields,
                 request: $request, //this is just for the handleImages method...
                 last_audit_date: $request->validated('last_audit_date'),
             );
@@ -657,6 +657,8 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()), 200);
         } catch (ValidationException $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $e->getErrors()), 200);
+        } catch (CustomFieldPermissionException $e) {
+            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
         } catch (\Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.something_went_wrong')));
         }

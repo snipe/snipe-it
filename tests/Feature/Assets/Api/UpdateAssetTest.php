@@ -80,14 +80,13 @@ class UpdateAssetTest extends TestCase
             ->assertStatusMessageIs('success')
             ->json();
 
-        dd($response);
         $updatedAsset = Asset::find($response['payload']['id']);
 
         $this->assertEquals('2024-06-02', $updatedAsset->asset_eol_date);
         $this->assertEquals('random_string', $updatedAsset->asset_tag);
         $this->assertEquals($userAssigned->id, $updatedAsset->assigned_to);
         $this->assertTrue($updatedAsset->company->is($company));
-        $this->assertTrue($updatedAsset->location->is($location));
+        $this->assertTrue($updatedAsset->location->is($location)); //fix all location setting
         $this->assertTrue($updatedAsset->model->is($model));
         $this->assertEquals('A New Asset', $updatedAsset->name);
         $this->assertEquals('Some notes', $updatedAsset->notes);
