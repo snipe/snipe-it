@@ -1230,7 +1230,7 @@ class AssetsController extends Controller
              // Validate that asset tags were provided in the request
             if (!$request->filled('asset_tags')) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, 
-                    'No assets selected.'), 400);
+                    trans('admin/hardware/message.no_assets_selected')), 400);
             }
 
              // Convert asset tags from request into collection and fetch matching assets
@@ -1240,7 +1240,7 @@ class AssetsController extends Controller
              // Return error if no assets were found for the provided tags
             if ($assets->isEmpty()) {
                 return response()->json(Helper::formatStandardApiResponse('error', null,
-                    'Asset does not exist.'), 404);
+                    trans('admin/hardware/message.does_not_exist')), 404);
             }
 
             try {
@@ -1287,14 +1287,14 @@ class AssetsController extends Controller
 
                 return response()->json(Helper::formatStandardApiResponse('success', [
                     'pdf' => $encoded_content
-                ], 'Labels were successfully generated.'));
+                ], trans('admin/hardware/message.labels_generated')));
 
             } catch (\Exception $e) {
                 return response()->json(Helper::formatStandardApiResponse('error', [
                     'error_message' => $e->getMessage(),
                     'error_line' => $e->getLine(),
                     'error_file' => $e->getFile()
-                ], 'Error while generating labels.'), 500);
+                ], trans('admin/hardware/message.error_generating_labels')), 500);
             }
         } catch (\Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('error', [
