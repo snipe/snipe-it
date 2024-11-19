@@ -575,8 +575,13 @@ document.addEventListener('livewire:init', () => {
 function assetSearch(element, string, assetStatusType){
     var endpoint = element.data("endpoint");
     $.ajax({
-        url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search=' + string + '&page=1' + (assetStatusType ? '&assetStatusType=' + assetStatusType : ''),
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
         dataType: 'json',
+        data: {
+            search: string,
+            page: 1,
+            assetStatusType: assetStatusType
+        },
         headers: {
             "X-Requested-With": 'XMLHttpRequest',
             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -596,12 +601,12 @@ function assetSearch(element, string, assetStatusType){
         for (var j = 0; j < filteredResponse.length; j++) {
             var item = filteredResponse[j];
             if (item && item.id) {
-                // Fails if checking in, but not assigned_to
-                if ($("#checkinout-form").hasClass("checkout-form") && item.user_can_checkout != true) {
+                // Hardware: Fails if checking in, but not assigned_to
+                if ( endpoint == "hardware" && $("#checkinout-form").hasClass("checkout-form") && item.user_can_checkout != true) {
                     error = "Asset not available for checkout";
                     handlecheckinoutFail({ "payload": item, "messages": error });
-                // Fails if checking out, but not assignabled
-                } else if ($("#checkinout-form").hasClass("checkin-form") && ! Number.isInteger(item.assigned_to)) {
+                // Hardware: Fails if checking out, but not assignabled
+                } else if ( endpoint == "hardware" && $("#checkinout-form").hasClass("checkin-form") && ! Number.isInteger(item.assigned_to)) {
                     error = "Asset not available for checkin";
                     handlecheckinoutFail({ "payload": item, "messages": error });
                 } else {
