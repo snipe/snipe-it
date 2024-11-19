@@ -34,6 +34,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use PHPUnit\TextUI\Help;
 use Watson\Validating\ValidationException;
 
 
@@ -650,7 +651,8 @@ class AssetsController extends Controller
     public function update(UpdateAssetRequest $request, Asset $asset): JsonResponse
     {
         try {
-            UpdateAssetAction::run($asset, $request, ...$request->validated());
+            $updatedAsset = UpdateAssetAction::run($asset, $request, ...$request->validated());
+            return response()->json(Helper::formatStandardApiResponse('success', trans('admin/hardware/message.update.success')));
         } catch (CheckoutNotAllowed $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()), 200);
         } catch (ValidationException $e) {
