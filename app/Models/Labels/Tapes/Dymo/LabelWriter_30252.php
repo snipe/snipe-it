@@ -75,7 +75,7 @@ class LabelWriter_30252 extends LabelWriter
 
             static::writeText(
                 $pdf, $field['value'],
-                $currentX, $currentY,
+                $currentX, $currentY+ $cell_margin_top,
                 'freemono', 'B', self::FIELD_SIZE, 'L',
                 $usableWidth, self::FIELD_SIZE, true, 0, 0.3
             );
