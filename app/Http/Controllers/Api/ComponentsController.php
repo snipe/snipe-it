@@ -340,7 +340,7 @@ class ComponentsController extends Controller
 
             // If the checked-in qty is exactly the same as the assigned_qty,
             // we can simply delete the associated components_assets record
-            if ($qty_remaining_in_checkout == 0) {
+            if ($qty_remaining_in_checkout === 0) {
                 DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
             }
 
