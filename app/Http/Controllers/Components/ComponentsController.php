@@ -193,7 +193,7 @@ class ComponentsController extends Controller
         $this->authorize('delete', $component);
 
         // Remove the image if one exists
-        if (Storage::disk('public')->exists('components/'.$component->image)) {
+        if ($component->image && Storage::disk('public')->exists('components/' . $component->image)) {
             try {
                 Storage::disk('public')->delete('components/'.$component->image);
             } catch (\Exception $e) {
