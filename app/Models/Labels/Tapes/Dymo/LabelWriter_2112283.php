@@ -40,7 +40,7 @@ class LabelWriter_2112283 extends LabelWriter
         if ($record->has('barcode2d')) {
             static::writeText(
                 $pdf, $record->get('tag'),
-                $pa->x1, $pa->y2 - self::TAG_SIZE - $cell_margin_top,
+                $pa->x1, $pa->y2 - self::TAG_SIZE,
                 'freesans', 'b', self::TAG_SIZE, 'C',
                 $barcodeSize, self::TAG_SIZE, true, 0
             );
@@ -57,14 +57,13 @@ class LabelWriter_2112283 extends LabelWriter
         if ($record->has('title')) {
             static::writeText(
                 $pdf, $record->get('title'),
-                $currentX, $titleY,
+                $currentX, $currentY,
                 'freesans', 'b', self::TITLE_SIZE, 'L',
                 $usableWidth, self::TITLE_SIZE, true, 0
             );
             $currentY += $titleY + self::TITLE_SIZE + self::TITLE_MARGIN;
-            \Log::debug("After Title Render - Current Y: $currentY");
         }
-//            $currentY += $settings->label_cell_margin_top;
+
         foreach ($record->get('fields') as $field) {
             static::writeText(
                 $pdf, (($field['label']) ? $field['label'].' ' : '') . $field['value'],

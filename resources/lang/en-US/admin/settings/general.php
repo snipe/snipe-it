@@ -79,6 +79,7 @@ return [
     'info'                      => 'These settings let you customize certain aspects of your installation.',
     'label_logo'                => 'Label Logo',
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
+    'label_cell_margin_top_help'=> 'Vertically align the label fields below if needed. Max value 5.',
     'laravel'                   => 'Laravel Version',
     'ldap'                      => 'LDAP',
     'ldap_default_group'        => 'Default Permissions Group',
