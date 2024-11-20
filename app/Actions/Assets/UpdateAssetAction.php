@@ -6,6 +6,7 @@ use App\Events\CheckoutableCheckedIn;
 use App\Exceptions\CustomFieldPermissionException;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
+use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Statuslabel;
@@ -101,7 +102,19 @@ class UpdateAssetAction
 
         $asset->location_id = $location_id;
 
-            !$isBulk ?? $asset->rtd_location_id = $rtd_location_id;
+        $asset->rtd_location_id = $rtd_location_id ?? $asset->rtd_location_id;
+        if ($request->has('model_id')) {
+            $asset->model()->associate(AssetModel::find($request->validated()['model_id']));
+        }
+        if ($request->has('company_id')) {
+            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']);
+        }
+        if ($request->has('rtd_location_id') && !$request->has('location_id')) {
+            $asset->location_id = $request->validated()['rtd_location_id'];
+        }
+        if ($request->input('last_audit_date')) {
+            $asset->last_audit_date = Carbon::parse($request->input('last_audit_date'))->startOfDay()->format('Y-m-d H:i:s');
+        }
         $asset->byod = $byod;
 
         $status = Statuslabel::find($status_id);
@@ -117,7 +130,9 @@ class UpdateAssetAction
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update', date('Y-m-d H:i:s'), $originalValues));
         }
 
-        if ($asset->assigned_to == '') {
+        //this is causing an issue while setting location_id - this came from the gui but doesn't seem to work as expected in the api -
+        //throwing on !expectsJson for now until we can work out how to handle this better
+        if ($asset->assigned_to == '' && !$request->expectsJson()) {
             $asset->location_id = $rtd_location_id;
         }
 
@@ -237,8 +252,17 @@ class UpdateAssetAction
 
     private static function bulkUpdate($asset, $request): void
     {
+        /**
+         * We're changing the location ID - figure out which location we should apply
+         * this change to:
+         *
+         * 0 - RTD location only
+         * 1 - location ID and RTD location ID
+         * 2 - location ID only
+         *
+         * Note: this is kinda dumb and we should just use human-readable values IMHO. - snipe
+         */
         if ($request->filled('rtd_location_id')) {
-
             if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '0')) {
                 $asset->rtd_location_id = $request->input('rtd_location_id');
             }
@@ -251,7 +275,6 @@ class UpdateAssetAction
             if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '2')) {
                 $asset->location_id = $request->input('rtd_location_id');
             }
-
         }
 
     }
