@@ -1282,4 +1282,14 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ], 404);
         }); // end fallback routes
 
+        /**
+         * Generate label routes
+         */
+        Route::post('hardware/labels', [
+            Api\AssetsController::class,
+            'getLabels'
+        ])->name('api.assets.labels');
+        // end generate label routes
+
+
 }); // end API routes
