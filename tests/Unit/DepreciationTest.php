@@ -38,7 +38,8 @@ class DepreciationTest extends TestCase
             ->laptopMbp()
             ->create(
                 [
-                    'category_id' => Category::factory()->assetLaptopCategory()->create(),
+                    //not sure how this ever worked... do these need a category??
+                    //'category_id' => Category::factory()->assetLaptopCategory()->create(),
                     'purchase_date' => now()->subDecade()->format("Y-m-d"),
                     'purchase_cost' => 4000,
                 ]);
@@ -62,7 +63,8 @@ class DepreciationTest extends TestCase
             ->laptopMbp()
             ->create(
                 [
-                    'category_id' => Category::factory()->assetLaptopCategory()->create(),
+                    //not sure how this ever worked...
+                    //'category_id' => Category::factory()->assetLaptopCategory()->create(),
                     'purchase_date' => now()->subDecade()->format("Y-m-d"),
                     'purchase_cost' => 4000,
                 ]);

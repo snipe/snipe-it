@@ -55,8 +55,21 @@ class UpdateAssetAction
         $asset->status_id = $status_id ?? $asset->status_id;
         $asset->warranty_months = $warranty_months ?? $asset->warranty_months;
         $asset->purchase_cost = $purchase_cost ?? $asset->purchase_cost;
-        $asset->purchase_date = $purchase_date ?? $asset->purchase_date?->format('Y-m-d');
-        $asset->next_audit_date = $next_audit_date ?? $asset->next_audit_date;
+        if ($request->input('null_purchase_date') === '1') {
+            dump('filled');
+            $asset->purchase_date = null;
+            if (!($asset->eol_explicit)) {
+                $asset->asset_eol_date = null;
+            }
+        } else {
+            $asset->purchase_date = $purchase_date ?? $asset->purchase_date?->format('Y-m-d');
+        }
+        if ($request->input('null_next_audit_date') == '1') {
+            $asset->next_audit_date = null;
+        } else {
+            $asset->next_audit_date = $next_audit_date ?? $asset->next_audit_date;
+        }
+
         $asset->last_audit_date = $last_audit_date ?? $asset->last_audit_date;
         if ($purchase_date && !$asset_eol_date && ($asset->model->eol > 0)) {
             $asset->purchase_date = $purchase_date ?? $asset->purchase_date?->format('Y-m-d');
@@ -79,7 +92,11 @@ class UpdateAssetAction
             $asset->eol_explicit = false;
         }
         $asset->supplier_id = $supplier_id;
-        $asset->expected_checkin = $expected_checkin;
+        if ($request->input('null_expected_checkin_date') == '1') {
+            $asset->expected_checkin = null;
+        } else {
+            $asset->expected_checkin = $expected_checkin ?? $asset->expected_checkin;
+        }
         $asset->requestable = $requestable;
 
         $asset->location_id = $location_id;
