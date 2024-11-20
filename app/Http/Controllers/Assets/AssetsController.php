@@ -241,7 +241,7 @@ class AssetsController extends Controller
                 $asset_tag = $request->input('asset_tags')[1];
             }
 
-            $asset = UpdateAssetAction::run(
+            $updatedAsset = UpdateAssetAction::run(
                 asset: $asset,
                 request: $request,
                 status_id: $request->validated('status_id'),
@@ -264,13 +264,14 @@ class AssetsController extends Controller
                 asset_tag: $asset_tag, // same as serials
                 notes: $request->validated('notes'),
             );
-            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+            dump('returned'.$asset->assigned_to);
+            return redirect()->to(Helper::getRedirectOption($request, $updatedAsset->id, 'Assets'))
                 ->with('success', trans('admin/hardware/message.update.success'));
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->withErrors($e->getErrors());
         } catch (\Exception $e) {
             report($e);
-            return redirect()->back()->with('error', trans('admin/hardware/message.update.error'), $asset);
+            return redirect()->back()->with('error', trans('admin/hardware/message.update.error'));
         }
     }
 

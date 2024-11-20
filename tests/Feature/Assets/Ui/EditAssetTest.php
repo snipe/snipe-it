@@ -74,7 +74,7 @@ class EditAssetTest extends TestCase
 
         $user = User::factory()->create();
         $deployable_status = Statuslabel::factory()->rtd()->create();
-        $achived_status = Statuslabel::factory()->archived()->create();
+        $archived_status = Statuslabel::factory()->archived()->create();
         $asset = Asset::factory()->assignedToUser($user)->create(['status_id' => $deployable_status->id]);
         $this->assertTrue($asset->assignedTo->is($user));
 
@@ -83,7 +83,7 @@ class EditAssetTest extends TestCase
         $this->actingAs(User::factory()->viewAssets()->editAssets()->create())
             ->from(route('hardware.edit', $asset->id))
             ->put(route('hardware.update', $asset->id), [
-                    'status_id' => $achived_status->id,
+                'status_id' => $archived_status->id,
                     'model_id' => $asset->model_id,
                     'asset_tags' => $asset->asset_tag,
                 ],
@@ -95,7 +95,7 @@ class EditAssetTest extends TestCase
         $asset = Asset::find($asset->id);
         $this->assertNull($asset->assigned_to);
         $this->assertNull($asset->assigned_type);
-        $this->assertEquals($achived_status->id, $asset->status_id);
+        $this->assertEquals($archived_status->id, $asset->status_id);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) use ($currentTimestamp) {
             return Carbon::parse($event->action_date)->diffInSeconds($currentTimestamp) < 2;

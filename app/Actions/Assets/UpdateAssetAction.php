@@ -104,13 +104,13 @@ class UpdateAssetAction
 
         $asset->rtd_location_id = $rtd_location_id ?? $asset->rtd_location_id;
         if ($request->has('model_id')) {
-            $asset->model()->associate(AssetModel::find($request->validated()['model_id']));
+            $asset->model()->associate(AssetModel::find($request->validated('model_id')));
         }
         if ($request->has('company_id')) {
-            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']);
+            $asset->company_id = Company::getIdForCurrentUser($request->validated('company_id'));
         }
         if ($request->has('rtd_location_id') && !$request->has('location_id')) {
-            $asset->location_id = $request->validated()['rtd_location_id'];
+            $asset->location_id = $request->validated('rtd_location_id');
         }
         if ($request->input('last_audit_date')) {
             $asset->last_audit_date = Carbon::parse($request->input('last_audit_date'))->startOfDay()->format('Y-m-d H:i:s');
@@ -121,13 +121,17 @@ class UpdateAssetAction
 
         // This is a non-deployable status label - we should check the asset back in.
         if (($status && $status->getStatuslabelType() != 'deployable') && ($target = $asset->assignedTo)) {
+            dump('status logic');
 
             $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;
             $asset->assigned_type = null;
             $asset->accepted = null;
+            dump($asset->assigned_to);
 
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update', date('Y-m-d H:i:s'), $originalValues));
+            // reset this to null so checkout logic doesn't happen below
+            $target = null;
         }
 
         //this is causing an issue while setting location_id - this came from the gui but doesn't seem to work as expected in the api -
@@ -239,6 +243,7 @@ class UpdateAssetAction
             }
 
             if (isset($target)) {
+                dump($target);
                 $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
             }
 
