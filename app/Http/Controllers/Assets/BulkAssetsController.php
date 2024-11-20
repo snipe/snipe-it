@@ -243,7 +243,7 @@ class BulkAssetsController extends Controller
                 );
                 // catch exceptions
             } catch (ValidationException $e) {
-                $errors[$key] = $e->getMessage();
+                $errors = $e->validator->errors()->toArray();
             } catch (CustomFieldPermissionException $e) {
                 //$errors[$key] = $e->getMessage();
                 $custom_field_problem = true;
@@ -253,6 +253,7 @@ class BulkAssetsController extends Controller
             }
         }
         if (!empty($errors)) {
+            //dump($errors);
             return redirect($bulk_back_url)->with('bulk_asset_errors', $errors);
         }
         if ($custom_field_problem) {
