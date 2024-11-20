@@ -6,7 +6,6 @@ use App\Events\CheckoutableCheckedIn;
 use App\Exceptions\CustomFieldPermissionException;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
-use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Statuslabel;
@@ -137,6 +136,7 @@ class UpdateAssetAction
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
 
+        // the gui method
         //if (($model) && ($model->fieldset)) {
         //    dump($model->fieldset->fields);
         //    foreach ($model->fieldset->fields as $field) {
@@ -161,6 +161,7 @@ class UpdateAssetAction
         //        }
         //    }
         //}
+        // the api method
         $model = $asset->model;
         if (($model) && (isset($model->fieldset))) {
             foreach ($model->fieldset->fields as $field) {
@@ -173,11 +174,12 @@ class UpdateAssetAction
                         }
                     }
                     if ($field->field_encrypted == '1') {
+                        dump(Gate::allows('assets.view.encrypted_custom_fields'));
+                        dump(auth()->user()->can('assets.view.encrypted_custom_fields'));
                         if (Gate::allows('assets.view.encrypted_custom_fields')) {
                             $field_val = Crypt::encrypt($field_val);
                         } else {
                             throw new CustomFieldPermissionException();
-                            continue;
                         }
                     }
                     $asset->{$field->db_column} = $field_val;
