@@ -307,7 +307,7 @@ class CheckoutableListener
             return $event->checkedOutTo->manager?->email ?? '';
         }
         else{
-            return $event->checkedOutTo->email;
+            return $event->checkedOutTo?->email ?? '';
         }
     }
 
