@@ -1245,17 +1245,11 @@ class AssetsController extends Controller
 
             try {
                 $settings = Setting::getSettings();
-                
-                if (!$settings) {
-                    throw new \Exception('Settings could not be loaded');
-                }
 
                 // Check if logo file exists in storage and disable logo if not found
                 // This prevents errors when trying to include a non-existent logo in the PDF
-                $original_logo = $settings->label_logo;
-                if ($original_logo && !Storage::disk('public')->exists('/' . $original_logo)) {
-                    $settings->label_logo = null;
-                }
+                $settings->label_logo = ($original_logo = $settings->label_logo) && !Storage::disk('public')->exists('/' . $original_logo) ? null : $settings->label_logo;
+
 
                 $label = new Label();
                 
