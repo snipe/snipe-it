@@ -317,14 +317,12 @@ class ComponentsController extends Controller
 
             $max_to_checkin = $component_assets->assigned_qty;
 
-            if ($max_to_checkin > 1) {
-                $validator = Validator::make($request->all(), [
-                    "checkin_qty" => "required|numeric|between:1,$max_to_checkin"
-                ]);
-    
-                if ($validator->fails()) {
-                    return response()->json(Helper::formatStandardApiResponse('error', null, 'Checkin quantity must be between 1 and '.$max_to_checkin));
-                }
+            $validator = Validator::make($request->all(), [
+                "checkin_qty" => "required|numeric|between:1,$max_to_checkin"
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'Checkin quantity must be between 1 and ' . $max_to_checkin));
             }
 
             // Validation passed, so let's figure out what we have to do here.

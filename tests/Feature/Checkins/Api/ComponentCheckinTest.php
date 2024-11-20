@@ -52,7 +52,7 @@ class ComponentCheckinTest extends TestCase implements TestsFullMultipleCompanie
         $component = Component::factory()->checkedOutToAsset()->create();
 
         $pivot = $component->assets->first()->pivot;
-        $pivot->update(['assigned_qty' => 2]);
+        $pivot->update(['assigned_qty' => 1]);
 
         $this->actingAsForApi(User::factory()->checkinComponents()->create())
             ->postJson(route('api.components.checkin', $component->assets->first()->pivot->id), [
