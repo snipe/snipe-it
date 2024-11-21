@@ -53,6 +53,7 @@ tests/coverage/*
 /storage/oauth-public.key
 logs/*
 *.cache
+*.swp
 
 .vagrant
 *.log
