@@ -654,6 +654,17 @@ class Helper
     }
 
     /**
+     * Get all of the different types of custom fields there are
+     * TODO - how to make this more general? Or more useful? or more dynamic?
+     * idea - key of classname, *value* of trans? (thus having to make this a method, which is fine)
+     */
+    static $itemtypes_having_custom_fields = [
+        0 => \App\Models\Asset::class,
+        1 => \App\Models\User::class,
+        // 2 => \App\Models\Accessory::class
+    ];
+
+    /**
      * Get the list of custom field formats in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

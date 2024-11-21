@@ -369,12 +369,13 @@ class UpdateAssetTest extends TestCase
         $asset = Asset::factory()->hasEncryptedCustomField($field)->create();
         $superuser = User::factory()->superuser()->create();
 
-        $this->actingAsForApi($superuser)
+        $results = $this->actingAsForApi($superuser)
             ->patchJson(route('api.assets.update', $asset->id), [
                 $field->db_column_name() => 'This is encrypted field'
             ])
             ->assertStatusMessageIs('success')
             ->assertOk();
+        \Log::error(print_r($results, true));
 
         $asset->refresh();
         $this->assertEquals('This is encrypted field', Crypt::decrypt($asset->{$field->db_column_name()}));

@@ -1,5 +1,28 @@
-@if (($model) && ($model->fieldset))
-  @foreach($model->fieldset->fields AS $field)
+{{--
+
+Okay, now how am I going to work *this* out. I think it's less bad than I think.
+
+I think we can pass the $asset or the $user to this partial.
+
+This partial can be aware of the HasCustomFields trait, and call getFieldset() to get the appropriate fieldset; that's good.
+
+But we also need the 'discriminator' so that we can use defaultValuesForCustomFields, right?
+
+Well, that should be easy enough, right? Just call getFieldsetKey(), right? Or maybe we don't even have to do that -
+
+We can call $item->getDefaultValue($field), right?
+
+So the old way - already on this page - is:
+
+$item->defaultValue($field))
+
+And we just do a simple 'replace' to make it be:
+
+$item->defaultValue($field)
+--}}
+
+@if ($item->getFieldset())
+    @foreach($item->getFieldset()->fields AS $field)
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>
       <div class="col-md-7 col-sm-12{{ ($field->pivot->required=='1') ? ' required' : '' }}">
@@ -12,14 +35,16 @@
                   old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))), ['class'=>'format select2 form-control']) }}
 
               @elseif ($field->element=='textarea')
-                  <textarea class="col-md-6 form-control" id="{{ $field->db_column_name() }}" name="{{ $field->db_column_name() }}">{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}</textarea>
+                  <textarea class="col-md-6 form-control" id="{{ $field->db_column_name() }}"
+                            name="{{ $field->db_column_name() }}">{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $item->defaultValue($field))) }}</textarea>
 
               @elseif ($field->element=='checkbox')
                     <!-- Checkboxes -->
                   @foreach ($field->formatFieldValuesAsArray() as $key => $value)
                       <div>
                           <label class="form-control">
-                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
+                              <input type="checkbox" value="{{ $value }}"
+                                     name="{{ $field->db_column_name() }}[]" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $item->defaultValue($field)))) ? ' checked="checked"' : '')) }}>
                               {{ $value }}
                           </label>
                       </div>
@@ -30,7 +55,8 @@
 
               <div>
                   <label class="form-control">
-                      <input type="radio" value="{{ $value }}" name="{{ $field->db_column_name() }}" {{ isset($item) ? ($item->{$field->db_column_name()} == $value ? ' checked="checked"' : '') : (old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($value, explode(', ', $field->defaultValue($model->id))) ? ' checked="checked"' : '')) }}>
+                      <input type="radio" value="{{ $value }}"
+                             name="{{ $field->db_column_name() }}" {{ isset($item) ? ($item->{$field->db_column_name()} == $value ? ' checked="checked"' : '') : (old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($value, explode(', ', $item->defaultValue($field))) ? ' checked="checked"' : '')) }}>
                       {{ $value }}
                   </label>
               </div>
@@ -47,14 +73,19 @@
                         <div class="input-group col-md-5" style="padding-left: 0px;">
                             <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-autoclose="true" data-date-clear-btn="true">
                                 <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="{{ $field->db_column_name() }}" id="{{ $field->db_column_name() }}" readonly value="{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}"  style="background-color:inherit">
-                                <span class="input-group-addon"><x-icon type="calendar" /></span>
+                                <span class="input-group-addon"><i class="fas fa-calendar"
+                                                                   aria-hidden="true"></i></span>
                             </div>
                         </div>
 
 
                 @else
                     @if (($field->field_encrypted=='0') || (Gate::allows('assets.view.encrypted_custom_fields')))
-                    <input type="text" value="{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
+                      <input type="text"
+                             value="{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $item->defaultValue($field))) }}"
+                             id="{{ $field->db_column_name() }}" class="form-control"
+                             name="{{ $field->db_column_name() }}"
+                             placeholder="Enter {{ strtolower($field->format) }} text">
                         @else
                             <input type="text" value="{{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}" class="form-control disabled" disabled>
                     @endif

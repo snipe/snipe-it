@@ -156,24 +156,13 @@ class AssetModel extends SnipeModel
      */
     public function fieldset()
     {
+        // this is actually OK - we don't *need* to do this, but it's okay to make references from Model to fieldset
         return $this->belongsTo(\App\Models\CustomFieldset::class, 'fieldset_id');
     }
    
     public function customFields()
     {
        return $this->fieldset()->first()->fields(); 
-    }
-
-    /**
-     * Establishes the model -> custom field default values relationship
-     *
-     * @author hannah tinkler
-     * @since [v4.3]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function defaultValues()
-    {
-        return $this->belongsToMany(\App\Models\CustomField::class, 'models_custom_fields')->withPivot('default_value');
     }
 
     /**

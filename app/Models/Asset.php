@@ -7,6 +7,8 @@ use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Customizable;
+use App\Models\Traits\HasCustomFields;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use App\Presenters\AssetPresenter;
@@ -16,6 +18,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -39,8 +42,21 @@ class Asset extends Depreciable
     public const ASSET = 'asset';
     public const USER = 'user';
 
-    use Acceptable;
+    use Acceptable, HasCustomFields;
 
+    public function getFieldsetKey(): object|int|null
+    {
+        return $this->model;
+    }
+
+    public static function getFieldsetUsers(int $fieldset_id): array
+    {
+        $models = [];
+        foreach (AssetModel::where("fieldset_id", $fieldset_id)->get() as $model) {
+            $models[route('models.show', $model->id)] = $model->name . (($model->model_number) ? ' (' . $model->model_number . ')' : '');
+        }
+        return $models;
+    }
     /**
      * Run after the checkout acceptance was declined by the user
      *
@@ -212,40 +228,6 @@ class Asset extends Depreciable
         }
         $this->attributes['expected_checkin'] = $value;
     }
-
-    /**
-     * This handles the custom field validation for assets
-     *
-     * @var array
-     */
-    public function save(array $params = [])
-    {
-        if ($this->model_id != '') {
-            $model = AssetModel::find($this->model_id);
-
-            if (($model) && ($model->fieldset)) {
-
-                foreach ($model->fieldset->fields as $field){
-                    if($field->format == 'BOOLEAN'){
-                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
-                    }
-                }
-
-                $this->rules += $model->fieldset->validation_rules();
-
-                if ($this->model->fieldset){
-                    foreach ($this->model->fieldset->fields as $field){
-                        if($field->format == 'BOOLEAN'){
-                            $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
-                        }
-                    }
-                }
-            }
-        }
-
-        return parent::save($params);
-    }
-
 
     public function getDisplayNameAttribute()
     {

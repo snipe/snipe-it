@@ -272,6 +272,15 @@
 
                   @include ('partials.forms.edit.image-upload', ['fieldname' => 'avatar', 'image_path' => app('users_upload_path')])
 
+                  {{-- FIXME - copypasta from hardware/edit.blade.php <start> --}}
+                  <div id='custom_fields_content'>
+                      <!-- Custom Fields -->
+                      @if ($user->getFieldset())
+                          @include("models/custom_fields_form",["item" => $user])
+                      @endif
+                  </div>
+                  {{-- FIXME - copypasts from hardware/edit.blade.php <end> --}}
+
 
                   <!-- begin optional disclosure arrow stuff -->
                   <div class="form-group">

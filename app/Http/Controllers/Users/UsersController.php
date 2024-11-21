@@ -134,6 +134,8 @@ class UsersController extends Controller
         app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
         session()->put(['redirect_option' => $request->get('redirect_option')]);
+        \Log::info("About to call customFill, in the 'store' controller!!!");
+        $user->customFill($request, Auth::user());
 
         if ($user->save()) {
             if ($request->filled('groups')) {
@@ -301,6 +303,14 @@ class UsersController extends Controller
             $permissions_array['superuser'] = $orig_superuser;
         }
 
+        $permissions_array = $request->input('permission');
+
+        // Strip out the superuser permission if the user isn't a superadmin
+        if (!Auth::user()->isSuperUser()) {
+            unset($permissions_array['superuser']);
+            $permissions_array['superuser'] = $orig_superuser;
+        }
+
         $user->permissions = json_encode($permissions_array);
 
         // Handle uploaded avatar
@@ -312,6 +322,18 @@ class UsersController extends Controller
             return redirect()->to(Helper::getRedirectOption($request, $user->id, 'Users'))
                 ->with('success', trans('admin/users/message.success.update'));
         }
+
+        \Log::debug("calling custom fill from the UPDATE method!");
+        $user->customFill($request, Auth::user());
+        //\Log::debug(print_r($user, true));
+
+        // Was the user updated?
+        if ($user->save()) {
+            // Redirect to the user page
+            return redirect()->route('users.index')
+                ->with('success', trans('admin/users/message.success.update'));
+        }
+
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 

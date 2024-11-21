@@ -4,6 +4,8 @@ namespace App\Livewire;
 
 use App\Models\CustomField;
 use Livewire\Attributes\Computed;
+use App\Models\Asset;
+use App\Models\DefaultValuesForCustomFields;
 use Livewire\Component;
 
 use App\Models\CustomFieldset;
@@ -26,6 +28,13 @@ class CustomFieldSetDefaultValuesForModel extends Component
 
         $this->initializeSelectedValuesArray();
         $this->populatedSelectedValuesArray();
+        $this->fields = null;
+
+        if ($fieldset = CustomFieldset::find($this->fieldset_id)) {
+            $this->fields = CustomFieldset::find($this->fieldset_id)->fields;
+        }
+
+        $this->add_default_values = (DefaultValuesForCustomFields::forPivot($this->model, Asset::class)->count() > 0);
     }
 
     #[Computed]
