@@ -223,7 +223,7 @@
                                                 'aria-label' => 'label_cell_margin_top',
                                                 'step' => '0.01', // Increment/Decrement step
                                                 'min' => '0', // Optional: Minimum value
-                                                'max' => '5', // Optional: Maximum value
+                                                'max' => '10', // Optional: Maximum value
 
                                             ]) }}
                                             <div class="input-group-addon">{{ trans('admin/settings/general.top') }}</div>
