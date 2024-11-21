@@ -74,14 +74,6 @@ class Handler extends ExceptionHandler
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid JSON'), 422);
         }
 
-        //if ($e instanceof ModelNotFoundException) {
-        //    $class = get_class($e);
-        //    match($class) {
-        //
-        //    };
-        //    return redirect()->route()->with('error', trans('general.model_not_found', ['model' => $e]));
-        //}
-
         // Handle SCIM exceptions
         if ($e instanceof SCIMException) {
             try {
