@@ -1,7 +1,7 @@
 ![snipe-it-by-grok](https://github.com/snipe/snipe-it/assets/197404/b515673b-c7c8-4d9a-80f5-9fa58829a602)
 
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://app.codacy.com/gh/snipe/snipe-it/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) [![Tests](https://github.com/snipe/snipe-it/actions/workflows/tests.yml/badge.svg)](https://github.com/snipe/snipe-it/actions/workflows/tests.yml)
-[![All Contributors](https://img.shields.io/badge/all_contributors-331-orange.svg?style=flat-square)](#contributing) [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/yZFtShAcKk) [![Gurubase](https://img.shields.io/badge/Gurubase-Ask%20Snipe-IT%20Guru-006BFF)](https://gurubase.io/g/snipe-it)
+[![All Contributors](https://img.shields.io/badge/all_contributors-331-orange.svg?style=flat-square)](#contributing) [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/yZFtShAcKk) [![Gurubase](https://img.shields.io/badge/Gurubase-Ask%20Snipe--IT%20Guru-006BFF)](https://gurubase.io/g/snipe-it)
 
 ## Snipe-IT - Open Source Asset Management System
 
