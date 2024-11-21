@@ -647,6 +647,7 @@ class AssetsController extends Controller
     public function update(UpdateAssetRequest $request, Asset $asset): JsonResponse
     {
         $asset->fill($request->validated());
+        \Log::error("Filled vaildated. Location ID for asset is: ".$asset->location_id);
 
         if ($request->has('model_id')) {
             $asset->model()->associate(AssetModel::find($request->validated()['model_id']));
@@ -655,6 +656,7 @@ class AssetsController extends Controller
             $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']);
         }
         if ($request->has('rtd_location_id') && !$request->has('location_id')) {
+            \Log::error("we *DO* have an rtd_location_id, but we do *NOT* have a loaction_id");
             $asset->location_id = $request->validated()['rtd_location_id'];
         }
         if ($request->input('last_audit_date')) {
@@ -669,8 +671,9 @@ class AssetsController extends Controller
             $request->offsetSet('image', $request->offsetGet('image_source'));
         }
 
-        ($request->filled('rtd_location_id')) ?
-            $asset->location_id = $request->get('rtd_location_id') : null;
+        //if ($request->filled('rtd_location_id')) { //*WHY* is this here?
+        //    $asset->location_id = $request->get('rtd_location_id');
+        //}
 
         /**
          * this is here just legacy reasons. Api\AssetController

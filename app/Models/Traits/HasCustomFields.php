@@ -31,7 +31,7 @@ trait HasCustomFields
 //            \Log::error("WHATS MY NAME? " . HasCustomFields::class);
 //            dump(class_uses_recursive($model));
             if (in_array(HasCustomFields::class, class_uses_recursive($model))) {
-                \Log::error("!!!!!!!!!!!!! YOU ARE USING THE TRAIT!");
+                //\Log::error("!!!!!!!!!!!!! YOU ARE USING THE TRAIT!");
                 self::augmentValidationRulesForCustomFields($model);
             } else {
                 \Log::error("You aren't useing the trait so go away");

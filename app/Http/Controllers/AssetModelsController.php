@@ -153,8 +153,6 @@ class AssetModelsController extends Controller
         $model->notes = $request->input('notes');
         $model->requestable = $request->input('requestable', '0');
 
-        DefaultValuesForCustomFields::forPivot($model, Asset::class)->delete();
-
         $model->fieldset_id = $request->input('fieldset_id');
 
         if ($model->save()) {
@@ -498,6 +496,16 @@ class AssetModelsController extends Controller
             DefaultValuesForCustomFields::updateOrCreate(['custom_field_id' => $customFieldId, 'item_pivot_id' => $model->id], ['default_value' => $defaultValue]);
         }
         return true;
+    }
+
+    /**
+     * Removes all default values
+     *
+     */
+    private function removeCustomFieldsDefaultValues(AssetModel|SnipeModel $model): void
+    {
+        DefaultValuesForCustomFields::forPivot($model, Asset::class)->delete();
+        //$model->defaultValues()->detach();
     }
 
 }

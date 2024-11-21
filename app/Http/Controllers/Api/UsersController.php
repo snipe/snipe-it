@@ -16,7 +16,6 @@ use App\Models\Asset;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\Consumable;
-use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\License;
 use App\Models\User;

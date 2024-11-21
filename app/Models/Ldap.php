@@ -170,7 +170,7 @@ class Ldap extends Model
         $ldap_username = Setting::getSettings()->ldap_uname;
 
 		if ( $ldap_username ) {
-			// Lets return some nicer messages for users who donked their app key, and disable LDAP
+            // Let's return some nicer messages for users who donked their app key, and disable LDAP
 			try {
 				$ldap_pass = Crypt::decrypt(Setting::getSettings()->ldap_pword);
 			} catch (Exception $e) {

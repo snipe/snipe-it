@@ -453,8 +453,8 @@ class AssetModelFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'name' => 'Complicated fieldset'
+                'name' => 'Complicated Fieldset Model'
             ];
-        })->for(CustomFieldSet::factory()->complicated(), 'fieldset');
+        })->for(CustomFieldSet::factory()->complicated()->create(), 'fieldset');
     }
 }

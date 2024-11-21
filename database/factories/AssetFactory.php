@@ -404,7 +404,7 @@ class AssetFactory extends Factory
         return $this->state(function () {
             return [
                 'model_id' => function () {
-                    return AssetModel::where('name', 'complicated')->first() ?? AssetModel::factory()->complicated();
+                    return AssetModel::where('name', 'Complicated Fieldset Model')->first() ?? AssetModel::factory()->complicated()->create();
                 }
             ];
         });
