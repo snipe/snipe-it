@@ -249,7 +249,7 @@ class BulkAssetsController extends Controller
                 $custom_field_problem = true;
             } catch (\Exception $e) {
                 report($e);
-                $errors[$key] = trans('general.something_went_wrong');
+                $errors[$key] = [trans('general.something_went_wrong')];
             }
         }
         if (!empty($errors)) {
