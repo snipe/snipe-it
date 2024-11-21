@@ -6,10 +6,13 @@ use App\Helpers\Helper;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Tests\Support\InitializesSettings;
 use Tests\TestCase;
 
 class HelperTest extends TestCase
 {
+    use InitializesSettings;
+
     public function testDefaultChartColorsMethodHandlesHighValues()
     {
         $this->assertIsString(Helper::defaultChartColors(1000));
@@ -22,7 +25,9 @@ class HelperTest extends TestCase
 
     public function testParseCurrencyMethod()
     {
-        $this->settings->set(['default_currency' => 'USD']);
+        \Log::error("ABOUT TO SET DEFAULT CURRENCY!!!!!!!!!!!");
+        $this->settings->set(['default_currency' => 'USD']); // hrm. I think *this* might not be doing the thing? Or, uh, *not* doing the thing?
+        \Log::error(print_r($this->settings, true));
         $this->assertSame(12.34, Helper::ParseCurrency('USD 12.34'));
 
         $this->settings->set(['digit_separator' => '1.234,56']);

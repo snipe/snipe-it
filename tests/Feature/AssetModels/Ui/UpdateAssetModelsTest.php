@@ -2,10 +2,12 @@
 
 namespace Tests\Feature\AssetModels\Ui;
 
+use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
+use App\Models\DefaultValuesForCustomFields;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -76,8 +78,20 @@ class UpdateAssetModelsTest extends TestCase
 
         $assetModel->fieldset()->associate($customFieldset);
 
-        $assetModel->defaultValues()->attach($customFieldOne, ['default_value' => 'first default value']);
-        $assetModel->defaultValues()->attach($customFieldTwo, ['default_value' => 'second default value']);
+        DefaultValuesForCustomFields::create([
+            'item_pivot_id'   => $assetModel->id,
+            'default_value'   => 'first default value',
+            'type'            => Asset::class,
+            'custom_field_id' => $customFieldOne->id,
+        ]);
+        //$assetModel->defaultValues()->attach($customFieldOne, ['default_value' => 'first default value']);
+        DefaultValuesForCustomFields::create([
+            'item_pivot_id'   => $assetModel->id,
+            'default_value'   => 'second default value',
+            'type'            => Asset::class,
+            'custom_field_id' => $customFieldTwo->id,
+        ]);
+        //$assetModel->defaultValues()->attach($customFieldTwo, ['default_value' => 'second default value']);
 
         $this->actingAs(User::factory()->superuser()->create())
             ->put(route('models.update', ['model' => $assetModel]), [
@@ -90,7 +104,7 @@ class UpdateAssetModelsTest extends TestCase
                 ],
             ]);
 
-        $potentiallyChangedDefaultValues = $assetModel->defaultValues->pluck('pivot.default_value');
+        $potentiallyChangedDefaultValues = DefaultValuesForCustomFields::forPivot($assetModel, Asset::class)->pluck('default_value');
         $this->assertCount(2, $potentiallyChangedDefaultValues);
         $this->assertContains('first default value', $potentiallyChangedDefaultValues);
         $this->assertContains('second default value', $potentiallyChangedDefaultValues);
@@ -109,8 +123,22 @@ class UpdateAssetModelsTest extends TestCase
 
         $assetModel->fieldset()->associate($customFieldset);
 
-        $assetModel->defaultValues()->attach($customFieldOne, ['default_value' => 'first default value']);
-        $assetModel->defaultValues()->attach($customFieldTwo, ['default_value' => 'second default value']);
+        DefaultValuesForCustomFields::create([
+            'item_pivot_id'   => $assetModel->id,
+            'default_value'   => 'first default value',
+            'type'            => Asset::class,
+            'custom_field_id' => $customFieldOne->id,
+        ]);
+        //$assetModel->defaultValues()->attach($customFieldOne, ['default_value' => 'first default value']);
+        DefaultValuesForCustomFields::create([
+            'item_pivot_id'   => $assetModel->id,
+            'default_value'   => 'second default value',
+            'type'            => Asset::class,
+            'custom_field_id' => $customFieldTwo->id,
+        ]);
+        //$assetModel->defaultValues()->attach($customFieldTwo, ['default_value' => 'second default value']);
+
+        \Log::error("BEFORE the default vaules were: ".print_r(DefaultValuesForCustomFields::forPivot($assetModel, Asset::class)->get()->toArray(), true));
 
         $this->actingAs(User::factory()->superuser()->create())
             ->put(route('models.update', ['model' => $assetModel]), [
@@ -125,9 +153,11 @@ class UpdateAssetModelsTest extends TestCase
                 ],
             ]);
 
-        $potentiallyChangedDefaultValues = $assetModel->defaultValues->pluck('pivot.default_value');
-        $this->assertCount(2, $potentiallyChangedDefaultValues);
-        $this->assertContains('first changed value', $potentiallyChangedDefaultValues);
+        //$potentiallyChangedDefaultValues = $assetModel->defaultValues->pluck('pivot.default_value');
+        $potentiallyChangedDefaultValues = DefaultValuesForCustomFields::forPivot($assetModel, Asset::class)->pluck('default_value');
+        \Log::error("Potentially changed default vaules ARE: ".print_r($potentiallyChangedDefaultValues, true));
+        $this->assertCount(2, $potentiallyChangedDefaultValues); //poop; this fails :(
+        $this->assertContains('first changed value', $potentiallyChangedDefaultValues); //this test seems wrong?
         $this->assertContains('second changed value', $potentiallyChangedDefaultValues);
     }
 }

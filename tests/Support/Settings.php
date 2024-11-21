@@ -137,7 +137,8 @@ class Settings
     private function update(array $attributes): Settings
     {
         Setting::unguarded(fn() => $this->setting->update($attributes));
-        Setting::$_cache = null;
+        Setting::$_cache = null; //okay, cool, we've blanked the cache...
+        Setting::$_cache = $this->setting; // FIXME - experiment?!!?
 
         return $this;
     }

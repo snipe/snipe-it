@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\CustomFieldsets\Api;
 
+use App\Models\Asset;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\User;
@@ -43,7 +44,10 @@ class DeleteCustomFieldsetsTest extends TestCase implements TestsPermissionsRequ
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
-        $customFieldset = CustomFieldset::factory()->hasModels()->create();
+        $asset = Asset::factory()->withComplicatedCustomFields()->create();
+        //$customFieldset = CustomFieldset::factory()->hasModels()->create(); //FIXME - never going to work; that factory doesn't exist. Não bem.
+        //$customFieldset = CustomFieldset::customizables()->first(); //($asset->model_id, Asset::class);
+        $customFieldset = $asset->model->fieldset;
 
         $this->actingAsForApi(User::factory()->deleteCustomFieldsets()->create())
             ->deleteJson(route('api.fieldsets.destroy', $customFieldset))

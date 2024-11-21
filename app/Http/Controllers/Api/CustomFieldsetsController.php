@@ -119,7 +119,7 @@ class CustomFieldsetsController extends Controller
         $this->authorize('delete', CustomField::class);
         $fieldset = CustomFieldset::findOrFail($id);
 
-        $modelsCount = $fieldset->customizables()->count();
+        $modelsCount = count($fieldset->customizables()); //FIXME - should I make customizables() return a collection instead?
         $fieldsCount = $fieldset->fields->count();
 
         if (($modelsCount > 0) || ($fieldsCount > 0)) {

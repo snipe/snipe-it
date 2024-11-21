@@ -222,8 +222,8 @@ class ShowSetUpPageTest extends TestCase
         $this->assertSeeDotEnvFileExposedErrorMessage();
 
         Event::assertDispatched(function (MessageLogged $event) {
-            $this->assertEquals('debug', $event->level);
             $this->assertEquals('Some curl error message.', $event->message);
+            $this->assertEquals('debug', $event->level);
 
             return true;
         });

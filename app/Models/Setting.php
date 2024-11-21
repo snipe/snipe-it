@@ -87,6 +87,7 @@ class Setting extends Model
         if (!self::$_cache) {
             // Need for setup as no tables exist
             try {
+                //\Log::error("WARNING - re-freshing _cache from DATABASE!!!!@"); //FIXME - useful for troubleshooting, but not in general
                 self::$_cache = self::first();
             } catch (\Throwable $th) {
                 return null;

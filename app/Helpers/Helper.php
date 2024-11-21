@@ -533,6 +533,8 @@ class Helper
      * @return Float
      */
     public static function ParseCurrency($currencyString) {
+        \Log::error("Digit separator is: ".Setting::getSettings()->digit_separator);
+        \Log::error("Default Currency is: ".Setting::getSettings()->default_currency);
         $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
         if(Setting::getSettings()->digit_separator=='1.234,56') {
             //EU format

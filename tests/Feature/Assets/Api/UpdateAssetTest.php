@@ -89,7 +89,7 @@ class UpdateAssetTest extends TestCase
         \Log::error("\$location id is: ".$location->id." But asset's location is: ".$updatedAsset->location_id);
         \Log::error("And interestingly enough, the _user's_ location is: ".$userAssigned->location_id);
         \Log::error("But, finally, the RTD Location ID is: ".$rtdLocation->id);
-        $this->assertTrue($updatedAsset->location->is($location)); // FIXME - we can't just comment out assertions we don't like
+        $this->assertTrue($updatedAsset->location->is($location));
         $this->assertTrue($updatedAsset->model->is($model));
         $this->assertEquals('A New Asset', $updatedAsset->name);
         $this->assertEquals('Some notes', $updatedAsset->notes);
@@ -361,7 +361,7 @@ class UpdateAssetTest extends TestCase
         $asset->refresh();
 
         $this->assertTrue($asset->defaultLoc->is($rtdLocation));
-        $this->assertTrue($asset->location->is($location)); //FIXME - another location-based assertion that's no longer passing...
+        $this->assertTrue($asset->location->is($location));
     }
 
     public function testEncryptedCustomFieldCanBeUpdated()

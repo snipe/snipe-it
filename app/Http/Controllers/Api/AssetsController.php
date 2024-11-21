@@ -80,8 +80,10 @@ class AssetsController extends Controller
             $this->authorize('reports.view');
         } else {
             $transformer = 'App\Http\Transformers\AssetsTransformer';
+            \Log::error("AUTHORIZING for INDEX ASSET VIEW!!!!!");
             $this->authorize('index', Asset::class);          
         }
+        \Log::error("Authorization must've succeeded I guess?!");
         
        
         $settings = Setting::getSettings();

@@ -78,9 +78,10 @@ trait CustomTestMacros
         TestResponse::macro(
             'assertStatusMessageIs',
             function (string $message) {
+                //Assert::assertTrue(property_exists($this, 'status'), "Response did not contain status property");
                 Assert::assertEquals(
                     $message,
-                    $this['status'],
+                    @$this['status'],
                     "Response status message was not {$message}"
                 );
 

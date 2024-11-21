@@ -24,7 +24,8 @@ class CustomFieldSetDefaultValuesForModel extends Component
     {
         $this->model_id = $model_id;
         $this->fieldset_id = $this->model?->fieldset_id;
-        $this->add_default_values = ($this->model?->defaultValues->count() > 0);
+        //$this->add_default_values = ($this->model?->defaultValues->count() > 0);
+        //$this->add_default_values = DefaultValuesForCustomFields::forPivot(AssetModel::find($this->model_id))->count() > 0 //FIXME - already had this :/
 
         $this->initializeSelectedValuesArray();
         $this->populatedSelectedValuesArray();

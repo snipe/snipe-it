@@ -15,6 +15,13 @@ class DefaultValuesForCustomFields extends Model
         'type' => 'required'
     ];
 
+    protected $fillable = [ //FIXME - do we want this?!
+                            'item_pivot_id',
+                            'type',
+                            'custom_field_id',
+                            'default_value'
+    ];
+
     public $timestamps = false;
 
     public function field() {
