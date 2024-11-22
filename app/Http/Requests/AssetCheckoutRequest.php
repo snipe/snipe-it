@@ -40,7 +40,7 @@ class AssetCheckoutRequest extends Request
             ];
 
             if($settings->require_checkinout_notes) {
-                $rules['notes'] = 'required|string|nullable';
+                $rules['note'] = 'required|string';
             }
 
         return $rules;

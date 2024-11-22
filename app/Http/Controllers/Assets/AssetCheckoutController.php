@@ -102,10 +102,6 @@ class AssetCheckoutController extends Controller
 
             $settings = \App\Models\Setting::getSettings();
 
-            if($settings->require_checkinout_notes && (is_null($request->note))) {
-                   return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.update.no_note'));
-            }
-
             // We have to check whether $target->company_id is null here since locations don't have a company yet
             if (($settings->full_multiple_companies_support) && ((!is_null($target->company_id)) &&  (!is_null($asset->company_id)))) {
                 if ($target->company_id != $asset->company_id){

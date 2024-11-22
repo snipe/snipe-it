@@ -118,13 +118,11 @@
                             <label for="note" class="col-md-3 control-label">
                                 {{ trans('general.notes') }}
                             </label>
-                            @if($snipeSettings->require_checkinout_notes=="1")
                             <div class="col-md-8">
-                                <textarea class="col-md-6 form-control" id="note" required="true"
+                                <textarea class="col-md-6 form-control" id="note" @required($snipeSettings->require_checkinout_notes)
                                         name="note">{{ old('note', $asset->note) }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
-                                @endif
                         </div>
                     </div> <!--/.box-body-->
                 </div> <!--/.box-body-->
