@@ -253,7 +253,6 @@ class BulkAssetsController extends Controller
             }
         }
         if (!empty($errors)) {
-            //dump($errors);
             return redirect($bulk_back_url)->with('bulk_asset_errors', $errors);
         }
         if ($custom_field_problem) {

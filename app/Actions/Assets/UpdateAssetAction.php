@@ -57,7 +57,6 @@ class UpdateAssetAction
         $asset->warranty_months = $warranty_months ?? $asset->warranty_months;
         $asset->purchase_cost = $purchase_cost ?? $asset->purchase_cost;
         if ($request->input('null_purchase_date') === '1') {
-            dump('filled');
             $asset->purchase_date = null;
             if (!($asset->eol_explicit)) {
                 $asset->asset_eol_date = null;
@@ -121,13 +120,10 @@ class UpdateAssetAction
 
         // This is a non-deployable status label - we should check the asset back in.
         if (($status && $status->getStatuslabelType() != 'deployable') && ($target = $asset->assignedTo)) {
-            dump('status logic');
-
             $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;
             $asset->assigned_type = null;
             $asset->accepted = null;
-            dump($asset->assigned_to);
 
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update', date('Y-m-d H:i:s'), $originalValues));
             // reset this to null so checkout logic doesn't happen below
@@ -174,7 +170,6 @@ class UpdateAssetAction
 
         // the gui method
         //if (($model) && ($model->fieldset)) {
-        //    dump($model->fieldset->fields);
         //    foreach ($model->fieldset->fields as $field) {
         //
         //
@@ -210,8 +205,6 @@ class UpdateAssetAction
                         }
                     }
                     if ($field->field_encrypted == '1') {
-                        dump(Gate::allows('assets.view.encrypted_custom_fields'));
-                        dump(auth()->user()->can('assets.view.encrypted_custom_fields'));
                         if (Gate::allows('assets.view.encrypted_custom_fields')) {
                             $field_val = Crypt::encrypt($field_val);
                         } else {
@@ -243,7 +236,6 @@ class UpdateAssetAction
             }
 
             if (isset($target)) {
-                dump($target);
                 $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
             }
 

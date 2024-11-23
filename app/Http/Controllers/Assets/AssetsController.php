@@ -264,7 +264,6 @@ class AssetsController extends Controller
                 asset_tag: $asset_tag, // same as serials
                 notes: $request->validated('notes'),
             );
-            dump('returned'.$asset->assigned_to);
             return redirect()->to(Helper::getRedirectOption($request, $updatedAsset->id, 'Assets'))
                 ->with('success', trans('admin/hardware/message.update.success'));
         } catch (ValidationException $e) {
