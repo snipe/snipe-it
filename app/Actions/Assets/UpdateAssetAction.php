@@ -169,30 +169,6 @@ class UpdateAssetAction
         // Need to investigate and fix. Using static method for now.
 
         // the gui method
-        //if (($model) && ($model->fieldset)) {
-        //    foreach ($model->fieldset->fields as $field) {
-        //
-        //
-        //        if ($field->field_encrypted == '1') {
-        //            if (Gate::allows('assets.view.encrypted_custom_fields')) {
-        //                if (is_array($request->input($field->db_column))) {
-        //                    $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-        //                } else {
-        //                    $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
-        //                }
-        //                throw new CustomFieldPermissionException();
-        //                continue;
-        //            }
-        //        } else {
-        //            if (is_array($request->input($field->db_column))) {
-        //                $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-        //            } else {
-        //                $asset->{$field->db_column} = $request->input($field->db_column);
-        //            }
-        //        }
-        //    }
-        //}
-        // the api method
         $model = $asset->model;
         if (($model) && (isset($model->fieldset))) {
             foreach ($model->fieldset->fields as $field) {
