@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Mae yna :count trwydded yn dod i ben yn ystod y :threshold diwrnod nesaf | Mae :count trwyddedau yn dod i ben yn y :threshold diwrnod nesaf.',
     'link_to_update_password' => 'Cliciwch ar y ddolen ganlynol i gadarnhau eich cyfrinair :gwe:',
-    'login' => 'Mewngofnodi:',
+    'login' => 'Mewngofnodi',
     'login_first_admin' => 'Mewngofnodi i\'ch gosodiad Snipe-IT newydd gan ddefnyddio\'r manylion isod:',
     'low_inventory_alert' => 'Mae yna :count eitem sy\'n is na\'r isafswm neu a fydd yn isel cyn bo hir. | Mae yna :count eitemau sy\'n is na\'r isafswm neu a fydd yn isel cyn bo hir.',
     'min_QTY' => 'Nifer Lleiaf',

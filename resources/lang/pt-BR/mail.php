@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'Este é um lembrete que você tem atualmente :count itens check-out para você que você não aceitou ou recusou. Por favor, clique no link abaixo para confirmar sua decisão.',
     'license_expiring_alert' => 'Há uma :count licença expirando nos próximos :threshold dias. | Existem :count licenças expirand nos próximos :threshold dias.',
     'link_to_update_password' => 'Por favor clique no link abaixo para atualizar a sua senha do :web:',
-    'login' => 'Login:',
+    'login' => 'Entrar',
     'login_first_admin' => 'Faça login na sua instalação do Snipe-IT usando os dados abaixo:',
     'low_inventory_alert' => 'Há um :count que está abaixo do estoque mínimo ou em breve estará abaixo. | Existem :count items que estão abaixo do estoque mínimo ou em breve estarão baixos.',
     'min_QTY' => 'Qtde. Min',

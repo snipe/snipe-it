@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'crwdns12322:0crwdne12322:0',
     'license_expiring_alert' => 'crwdns2048:0crwdne2048:0',
     'link_to_update_password' => 'crwdns1742:0crwdne1742:0',
-    'login' => 'crwdns1744:0crwdne1744:0',
+    'login' => 'crwdns12792:0crwdne12792:0',
     'login_first_admin' => 'crwdns1743:0crwdne1743:0',
     'low_inventory_alert' => 'crwdns2046:0crwdne2046:0',
     'min_QTY' => 'crwdns1746:0crwdne1746:0',

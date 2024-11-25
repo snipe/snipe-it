@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Algo falló en su solicitud.',
     'close' => 'Cerrar',
     'expires' => 'Vence',
-    'map_fields'=> 'Map :item_type Fields',
+    'map_fields'=> 'Asociar los campos para :item_type',
     'remaining_var' => ':count restantes',
     'label' => 'Etiqueta',
     'import_asset_tag_exists' => 'Ya existe un activo con la placa :asset_tag y no se ha solicitado una actualización. No se ha realizado ningún cambio.',

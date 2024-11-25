@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'There is :count license expiring in the next :threshold days.|There are :count licenses expiring in the next :threshold days.',
     'link_to_update_password' => 'לחץ על הקישור הבא כדי לעדכן את: סיסמת האינטרנט:',
-    'login' => 'התחברות:',
+    'login' => 'התחברות',
     'login_first_admin' => 'היכנס למערכת ההתקנה החדשה של Snipe-IT באמצעות פרטי הכניסה הבאים:',
     'low_inventory_alert' => 'There is :count item that is below minimum inventory or will soon be low.|There are :count items that are below minimum inventory or will soon be low.',
     'min_QTY' => 'מינימום QTY',

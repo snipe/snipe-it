@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => '您的请求出了点问题。',
     'close' => '关闭',
     'expires' => '过期',
-    'map_fields'=> 'Map :item_type Fields',
+    'map_fields'=> '映射 :item_type 字段',
     'remaining_var' => '剩余:count个',
     'label' => '标签',
     'import_asset_tag_exists' => '资产标签为:asset_tag的资产已经存在，且未请求更新。没有做任何更改。',

@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'Dit is een herinnering dat je op dit moment :count items uitgecheckt hebt die je niet hebt geaccepteerd of geweigerd. Klik op de onderstaande link om uw besluit te bevestigen.',
     'license_expiring_alert' => 'Er is :count licentie die afloopt in de volgende :threshold dagen.|Er zijn :count licenties die vervallen in de volgende :threshold dagen.',
     'link_to_update_password' => 'Klik op de volgende link om je :web wachtwoord te vernieuwen:',
-    'login' => 'Login:',
+    'login' => 'Inloggen',
     'login_first_admin' => 'Meld u aan op uw nieuwe Snipe-IT installatie met onderstaande inloggegevens:',
     'low_inventory_alert' => 'Er is :count item dat onder de minimumvoorraad ligt of binnenkort laag zal zijn.|Er zijn :count items die onder de minimumvoorraad zijn of binnenkort laag zullen zijn.',
     'min_QTY' => 'Minimale hoeveelheid',

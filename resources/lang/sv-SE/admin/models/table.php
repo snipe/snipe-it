@@ -3,15 +3,15 @@
 return array(
 
     'create'				=> 'Skapa Modell',
-    'created_at' 			=> 'Skapad den',
+    'created_at' 			=> 'Skapad',
     'eol'	 				=> 'EOL',
-    'modelnumber'   		=> 'modell nr.',
-    'name'      			=> 'Anläggningsmodell Namn',
+    'modelnumber'   		=> 'Modellnr.',
+    'name'      			=> 'Tillgångens modellnamn',
     'numassets' 			=> 'Tillgångar',
     'title'					=> 'Modeller',
-    'update'				=> 'Uppdatera modell',
+    'update'				=> 'Uppdatera tillgångsmodell',
     'view'					=> 'Visa tillgångsmodell',
-    'update'				=> 'Uppdatera modell',
-    'clone'				=> 'Kopiera Modell',
-    'edit'				=> 'Ändra Modell',
+    'update'				=> 'Uppdatera tillgångsmodell',
+    'clone'				=> 'Kopiera modell',
+    'edit'				=> 'Ändra modell',
 );

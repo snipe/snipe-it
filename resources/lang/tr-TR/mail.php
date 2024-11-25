@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Şu var: bir sonraki günlerde süren lisans sayımı: eşik günleri. | Şunlar var: bir sonraki günlerde süren sayım lisansları: eşik günleri.',
     'link_to_update_password' => 'Şifrenizi güncellemek için aşağıdaki linke tıklayınız :web password:',
-    'login' => 'Giriş:',
+    'login' => 'Giriş',
     'login_first_admin' => 'Yeni Snipe-IT Kurulumu oturum açma kimlik bilgilerini aşağıdaki gibidir. ',
     'low_inventory_alert' => 'Şu var: Minimum envanterin altında olan veya yakında düşük olacak olan sayı maddesi. | Şunlar var: Minimum envanterin altında olan veya yakında olacak olan sayım maddeleri.',
     'min_QTY' => 'Min. Miktar',

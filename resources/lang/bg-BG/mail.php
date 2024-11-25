@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Има :count лиценз, който изтича в следващите :threshold дни.|Има :count лиценза, които изтичат в следващите :threshold дни.',
     'link_to_update_password' => 'Моля щракенете върху следния линк за да обновите своята :web password:',
-    'login' => 'Вход:',
+    'login' => 'Логин',
     'login_first_admin' => 'Влезте в своята Snipe-IT инсталация използвайки данните по-долу:',
     'low_inventory_alert' => 'Има :count артикул, който е под минималния праг за наличност или скоро ще се изчерпа.| Има :count артикула, които са под минималния праг за наличност или скоро ще се изчерпат.',
     'min_QTY' => 'Минимално количество',

@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Upozorenje: </strong> Ova imovina je trenutno označena kao nezaduživa. Ukoliko je status drugačiji, molim vas ažurirajte status imovine.',
-    'does_not_exist' 	=> 'Imovina ne postoji.',
-    'does_not_exist_var'=> 'Nije pronađena imovina za oznakom :asset_tag.',
-    'no_tag' 	        => 'Nije navedena oznaka imovine.',
+    'undeployable' 		 => '<strong>Upozorenje: </strong> Ova imovina je trenutno označena kao nezaduživa. Ukoliko je status drugačiji, molim vas ažurirajte status imovine.',
+    'does_not_exist' 	 => 'Imovina ne postoji.',
+    'does_not_exist_var' => 'Nije pronađena imovina za oznakom :asset_tag.',
+    'no_tag' 	         => 'Nije navedena oznaka imovine.',
     'does_not_exist_or_not_requestable' => 'Imovina ne postoji ili se ne može zatražiti.',
-    'assoc_users'	 	=> 'Ovaj je resurs trenutno poveren korisniku i ne može se izbrisati. Najprije proverite resurs, a zatim ponovo pokušajte brisanje. ',
+    'assoc_users'	 	 => 'Ovaj je resurs trenutno poveren korisniku i ne može se izbrisati. Najprije proverite resurs, a zatim ponovo pokušajte brisanje. ',
     'warning_audit_date_mismatch' 	=> 'Naredni datum popisa ove imovine (:next_audit_date) je pre poslednjeg datuma popisa (:last_audit_date). Molim vas izmenite datum narednog popisa.',
+    'labels_generated'   => 'Oznake su uspešno generisane.',
+    'error_generating_labels' => 'Greška prilikom generisanja oznaka.',
+    'no_assets_selected' => 'Nijedna imovina nije izabrana.',
 
     'create' => [
         'error'   		=> 'Imovina, resurs nije kreiran, pokušajte ponovo. :(',

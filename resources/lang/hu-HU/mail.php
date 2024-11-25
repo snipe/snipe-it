@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'Ez egy emlékeztető arról, hogy jelenleg :count számú jóváhagyásra váró eszköze van. Kérem, az alábbi linken döntsön ezek elfogadásáról, vagy elutasításáról.',
     'license_expiring_alert' => ':count licensz lejár :thershold nap múlva.|:count licensz lejár :thershold nap múlva.',
     'link_to_update_password' => 'Kérjük, kattintson a következő linkre a frissítéshez: webes jelszó:',
-    'login' => 'Belépés:',
+    'login' => 'Belépés',
     'login_first_admin' => 'Jelentkezzen be az új Snipe-IT telepítésébe az alábbi hitelesítő adatok alapján:',
     'low_inventory_alert' => ':count darab tétel érhető el, ami kevesebb mint a minimum készlet vagy hamarosan kevesebb lesz.',
     'min_QTY' => 'Min QTY',

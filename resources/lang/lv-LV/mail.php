@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Pēc :threshold dienām beigsies termiņš :count licencei.| Pēc :threshold dienām beigsies termiņš :threshold :count licencēm.',
     'link_to_update_password' => 'Lūdzu, noklikšķiniet uz šīs saites, lai atjauninātu savu: web paroli:',
-    'login' => 'Pieslēgties:',
+    'login' => 'Pieslēgties',
     'login_first_admin' => 'Piesakieties savā jaunajā Snipe-IT instalācijā, izmantojot tālāk minētos akreditācijas datus.',
     'low_inventory_alert' => ':count vienības skaits ir zemāks par krājuma minimumu vai drīz būs zems.|:count vienību skaits ir zemāks par krājuma minimumu vai drīz būs zems.',
     'min_QTY' => 'Min QTY',

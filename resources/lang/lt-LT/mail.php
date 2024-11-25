@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'Tai priminimas, kad šiuo metu jums yra išduoti :count daiktai, kurių nepriėmėte arba neatmetėte. Spustelėkite toliau pateiktą nuorodą, kad patvirtintumėte savo sprendimą.',
     'license_expiring_alert' => 'Yra :count licencija, kuri baigiasi per kitas :threshold dienas.|Yra :count licencijos (-ų), kurios baigiasi per kitas :threshold dienas (-ų).',
     'link_to_update_password' => 'Spustelėkite šią nuorodą, kad atnaujintumėte savo :web slaptažodį:',
-    'login' => 'Prisijungti:',
+    'login' => 'Prisijungti',
     'login_first_admin' => 'Prisijunkite prie savo naujojo „Snipe-IT“ diegimo naudodami žemiau pateiktus prisijungimo duomenis:',
     'low_inventory_alert' => 'Yra :count daiktas, kurio atsargos yra mažesnės (arba greitais bus mažesnės) nei numatytos minimalios atsargos.|Yra :count daiktai (-ų), kurių atsargos yra mažesnės (arba greitais bus mažesnės) nei numatytos minimalios atsargos.',
     'min_QTY' => 'Mažiausias kiekis',

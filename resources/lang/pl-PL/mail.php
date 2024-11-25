@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Istnieje: liczba licencja wygasająca w ciągu następnych: dni progowe. | Istnieje: liczba licencji wygasających w ciągu następnych: dni progowe.',
     'link_to_update_password' => 'Proszę kliknąć na poniższy link, aby zaktualizować swoje hasło na :web:',
-    'login' => 'Login:',
+    'login' => 'Login',
     'login_first_admin' => 'Zaloguj się do aplikacji Snipe-IT przy użyciu poniższych poświadczeń:',
     'low_inventory_alert' => 'Istnieje: liczba przedmiot, który jest poniżej minimalnej ilości zapasów lub wkrótce ta wartość będzie niska. | Istnieją: policz przedmioty, które są poniżej minimalnej ilości zapasów lub wkrótce te wartości będą niskie.',
     'min_QTY' => 'Min. ilość',
@@ -93,5 +93,5 @@ return [
     'welcome_to' => 'Witamy na :web!',
     'your_assets' => 'Zobacz swój sprzęt',
     'your_credentials' => 'Twoje poświadczenia :web',
-    'mail_sent' => 'Mail sent successfully!',
+    'mail_sent' => 'Wiadomość wysłana pomyślnie!',
 ];

@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<b>Warnung:</b> Dieses Asset wurde als nicht zur Herausgabe bereit markiert. Falls sich dieser Status geändert hat, aktualisieren Sie bitte den Asset Status.',
-    'does_not_exist' 	=> 'Asset existiert nicht.',
-    'does_not_exist_var'=> 'Asset mit Tag :asset_tag nicht gefunden.',
-    'no_tag' 	        => 'Kein Asset Tag angegeben.',
+    'undeployable' 		 => '<b>Warnung:</b> Dieses Asset wurde als nicht zur Herausgabe bereit markiert. Falls sich dieser Status geändert hat, aktualisieren Sie bitte den Asset Status.',
+    'does_not_exist' 	 => 'Asset existiert nicht.',
+    'does_not_exist_var' => 'Asset mit Tag :asset_tag nicht gefunden.',
+    'no_tag' 	         => 'Kein Asset Tag angegeben.',
     'does_not_exist_or_not_requestable' => 'Dieses Asset existiert nicht oder kann nicht angefordert werden.',
-    'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
+    'assoc_users'	 	 => 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buchen sie das Asset wieder ein und versuchen Sie dann erneut es zu entfernen. ',
     'warning_audit_date_mismatch' 	=> 'Das nächste Prüfdatum dieses Assets (:next_audit_date) liegt vor dem letzten Prüfungsdatum (:last_audit_date). Bitte aktualisieren Sie daher das nächste Prüfungsdatum.',
+    'labels_generated'   => 'Labels wurden erfolgreich generiert.',
+    'error_generating_labels' => 'Fehler beim Generieren der Labels.',
+    'no_assets_selected' => 'Keine Assets ausgewählt.',
 
     'create' => [
         'error'   		=> 'Asset wurde nicht erstellt. Bitte versuchen Sie es erneut. :(',

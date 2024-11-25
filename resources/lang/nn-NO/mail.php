@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':count lisens utløper de neste :threshold dagene.|:count lisenser utløper de neste :threshold dagene.',
     'link_to_update_password' => 'Klikk på følgende link for å bekrefte din :web passord:',
-    'login' => 'Logg inn:',
+    'login' => 'Logg inn',
     'login_first_admin' => 'Logg inn på din nye Snipe-IT-installasjon ved å bruke kontoen nedenfor:',
     'low_inventory_alert' => ':count enhet er under minimumnivå for beholdning, eller vil snart nå dette nivået.|:count enheter er under minimumnivå for beholdning, eller vil snart nå dette nivået.',
     'min_QTY' => 'Min. antall',
