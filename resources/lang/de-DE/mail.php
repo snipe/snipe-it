@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'Dies ist eine Erinnerung daran, dass Sie derzeit :count Artikel ausgeliehen haben, die Sie weder angenommen noch abgelehnt haben. Klicken Sie bitte auf den untenstehenden Link, um diese entweder anzunehmen oder abzulehnen.',
     'license_expiring_alert' => 'Es gibt :count auslaufende Lizenz in den nächsten :threshold Tagen.|Es gibt :count auslaufende Lizenzen in den nächsten :threshold Tagen.',
     'link_to_update_password' => 'Klicken Sie bitte auf den folgenden Link zum Aktualisieren Ihres :web Passworts:',
-    'login' => 'Benutzername:',
+    'login' => 'Login',
     'login_first_admin' => 'Melden Sie sich zu Ihrer neuen Snipe-IT-Installation mithilfe der unten stehenden Anmeldeinformationen an:',
     'low_inventory_alert' => 'Es gibt :count Artikel, der unter dem Minimum ist oder kurz davor ist.|Es gibt :count Artikel, die unter dem Minimum sind oder kurz davor sind.',
     'min_QTY' => 'Mindestmenge',

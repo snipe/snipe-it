@@ -60,5 +60,5 @@ return [
     'processing_spinner' => '处理中...（对于大型文件可能需要一些时间）',
     'optional_infos'  => '可选信息',
     'order_details'   => '订单相关信息',
-    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
+    'calc_eol'    => '如果将 EOL 日期设为零，则根据购买日期和EOL率自动计算EOL。',
 ];

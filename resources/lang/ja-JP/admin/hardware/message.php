@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>警告: </strong> このアセットは現在デプロイ不可能としてマークされています。このステータスが変更された場合は、アセットのステータスを更新してください。',
-    'does_not_exist' 	=> '資産が存在しません。',
-    'does_not_exist_var'=> 'タグ:asset_tag を持つアセットが見つかりません。',
-    'no_tag' 	        => 'アセットタグが提供されていません。',
+    'undeployable' 		 => '<strong>警告: </strong> このアセットは現在デプロイ不可能としてマークされています。このステータスが変更された場合は、アセットのステータスを更新してください。',
+    'does_not_exist' 	 => '資産が存在しません。',
+    'does_not_exist_var' => 'タグ:asset_tag を持つアセットが見つかりません。',
+    'no_tag' 	         => 'アセットタグが提供されていません。',
     'does_not_exist_or_not_requestable' => 'その資産は存在しないか要求可能ではありません。',
-    'assoc_users'	 	=> 'この資産はユーザーに貸し出されているため削除できません。資産を返却後、もう一度、やり直して下さい。 ',
+    'assoc_users'	 	 => 'この資産はユーザーに貸し出されているため削除できません。資産を返却後、もう一度、やり直して下さい。 ',
     'warning_audit_date_mismatch' 	=> 'この資産の次の監査日 (:next_audit_date) は最終監査日 (:last_audit_date) より前です。次の監査日を更新してください。',
+    'labels_generated'   => 'ラベルの生成に成功しました。',
+    'error_generating_labels' => 'ラベルを生成中にエラーが発生しました。',
+    'no_assets_selected' => '資産が選択されていません。',
 
     'create' => [
         'error'   		=> '資産は作成されませんでした。もう一度、やり直して下さい。',

@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Qualcosa è andato storto con la tua richiesta.',
     'close' => 'Chiudi',
     'expires' => 'Scade',
-    'map_fields'=> 'Map :item_type Fields',
+    'map_fields'=> 'Mappa i Campi :item_type',
     'remaining_var' => ':count Rimanenti',
     'label' => 'Etichetta',
     'import_asset_tag_exists' => 'Esiste già un Bene con tag :asset_tag e non è stato richiesto un aggiornamento. Nessuna modifica effettuata.',

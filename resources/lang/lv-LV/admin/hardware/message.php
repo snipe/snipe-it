@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Aktīvs neeksistē.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'Aktīvs neeksistē.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'Šobrīd šis īpašums tiek pārbaudīts lietotājam un to nevar izdzēst. Vispirms pārbaudiet aktīvu, un pēc tam mēģiniet vēlreiz izdzēst.',
+    'assoc_users'	 	 => 'Šobrīd šis īpašums tiek pārbaudīts lietotājam un to nevar izdzēst. Vispirms pārbaudiet aktīvu, un pēc tam mēģiniet vēlreiz izdzēst.',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Iezīmes tika sekmīgi izveidotas.',
+    'error_generating_labels' => 'Kļūda iezīmju veidošanas laikā.',
+    'no_assets_selected' => 'Nav atlasīts neviens līdzeklis.',
 
     'create' => [
         'error'   		=> 'Īpašums netika izveidots, lūdzu, mēģiniet vēlreiz. :(',

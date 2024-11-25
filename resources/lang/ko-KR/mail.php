@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => '다음 :threshold 일 내에 만료되는 라이선스가 :count 개 있습니다.|다음 :threshold 일 내에 만료되는 라이선스가 :count 개 있습니다.',
     'link_to_update_password' => ':web 비밀번호를 수정하려면 다음 링크를 클릭하세요:',
-    'login' => '로그인:',
+    'login' => '로그인',
     'login_first_admin' => '아래의 자격 증명을 사용하여 새 Snipe-IT 설치본에 로그인 하세요:',
     'low_inventory_alert' => '최소 보유량보다 낮거나 소진될 수 있는 품목이 :count 개 있습니다.|최소 보유량보다 낮거나 소진될 수 있는 품목이 :count 개 있습니다.',
     'min_QTY' => '최소 수량',

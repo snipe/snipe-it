@@ -14,8 +14,8 @@ return array(
         'success'               => 'Din inloggning lyckades.',
         'code_required'         => 'Tvåfaktorskod krävs.',
         'invalid_code'          => 'Tvåfaktorskoden är ogiltig.',
-        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
-        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+        'enter_two_factor_code' => 'Ange din tvåfaktorsautentiseringskod.',
+        'please_enroll'         => 'Vänligen registrera en enhet med tvåfaktorsautentisering.',
     ),
 
     'signin' => array(

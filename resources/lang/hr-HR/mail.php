@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Postoji :count licenca koja istječe u naredna :threshold dana.|Postoje :count licence koje istječu u naredna :threshold dana.',
     'link_to_update_password' => 'Kliknite sljedeću vezu da biste ažurirali svoju: web lozinku:',
-    'login' => 'Prijaviti se:',
+    'login' => 'Prijaviti se',
     'login_first_admin' => 'Prijavite se na svoju novu Snipe-IT instalaciju pomoću vjerodajnica u nastavku:',
     'low_inventory_alert' => 'Postoji :count stavka koja je ispod minimalnog iznosa zaliha ili će uskoro biti.|Postoje :count stavke koje su ispod minimalnog iznosa zaliha ili će uskoro biti.',
     'min_QTY' => 'Min QTY',

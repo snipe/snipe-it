@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':threshold 日後に:count ライセンスが失効します。',
     'link_to_update_password' => '次のリンクをクリックして、パスワードを更新してください。 :web password:',
-    'login' => 'ログイン:',
+    'login' => 'ログイン',
     'login_first_admin' => '以下の新しいログイン情報を使用して、Snipe-ITにログインします。',
     'low_inventory_alert' => '最小在庫を下回っているか、すぐに少なくなる :count のアイテムがあります。',
     'min_QTY' => '分数',

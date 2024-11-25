@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':count lisenssiä vanhenee :threshold päivän sisällä.|:count lisenssiä vanhenee :threshold päivän sisällä.',
     'link_to_update_password' => 'Napsauta seuraavaa linkkiä päivittääksesi :web salasanasi:',
-    'login' => 'Kirjaudu sisään:',
+    'login' => 'Kirjaudu',
     'login_first_admin' => 'Kirjaudu sisään uuteen Snipe-IT asennukseen käyttäen alla olevia tunnistetietoja:',
     'low_inventory_alert' => ':count nimikkeen saldomäärä on alle minimirajan tai kohta alhainen.|:count nimikkeen saldomäärä on alle minimirajan tai kohta alhainen.',
     'min_QTY' => 'Minimi määrä',

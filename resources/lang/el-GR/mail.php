@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Υπάρχει :count άδεια που λήγει στις επόμενες :threshold ημέρες."Υπάρχουν :count άδειες που λήγουν στις επόμενες :threshold ημέρες.',
     'link_to_update_password' => 'Κάντε κλικ στον παρακάτω σύνδεσμο για να ενημερώσετε τον κωδικό: web:',
-    'login' => 'Σύνδεση:',
+    'login' => 'Είσοδος',
     'login_first_admin' => 'Συνδεθείτε στη νέα σας εγκατάσταση Snipe-IT χρησιμοποιώντας τα παρακάτω διαπιστευτήρια:',
     'low_inventory_alert' => 'Υπάρχει :count στοιχείο που είναι κάτω από το ελάχιστο απόθεμα ή σύντομα θα είναι χαμηλό. Υπάρχουν :count στοιχεία που είναι κάτω από το ελάχιστο απόθεμα ή σύντομα θα είναι χαμηλή.',
     'min_QTY' => 'Ελάχιστη ποσότητα',

@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'هنالك :count رخص سوف تنتهي في الأيام :threshold القادمة.',
     'link_to_update_password' => 'يرجى النقر على الرابط التالي لتحديث كلمة المرور الخاصة بك على :web :',
-    'login' => 'تسجيل الدخول:',
+    'login' => 'الدخول',
     'login_first_admin' => 'قم بتسجيل الدخول إلى التثبيت الجديد من Snipe-IT باستخدام البيانات أدناه:',
     'low_inventory_alert' => 'هنالك :count عناصر أقل من الحد الأدنى للمخزون أول سوف تصبح أقل منه قريباً.',
     'min_QTY' => 'دقيقة الكمية',

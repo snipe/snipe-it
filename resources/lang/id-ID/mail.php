@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'Ada :count lisensi yang masa berlakunya akan habis dalam :threshold hari.|Ada :count lisensi yang masa berlakunya akan habis dalam :threshold hari.',
     'link_to_update_password' => 'Silahkan klik pada link berikut untuk mengupdate: password web anda:',
-    'login' => 'Login:',
+    'login' => 'Masuk',
     'login_first_admin' => 'Login ke instalasi Snipe-IT baru Anda dengan menggunakan kredensial di bawah ini:',
     'low_inventory_alert' => 'Ada :count item yang di bawah minimum persediaan atau akan segera habis.|Ada :count item yang di bawah minimum persediaan atau akan segera habis.',
     'min_QTY' => 'Min QTY',

@@ -60,7 +60,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => ':count litsents aegub järgmise :threshold päeva jooksul.|:count litsentsi aegub järgmise :threshold päeva jooksul.',
     'link_to_update_password' => 'Klienditeenuse uuendamiseks klõpsake järgmisel lingil:',
-    'login' => 'Logi sisse:',
+    'login' => 'Logi sisse',
     'login_first_admin' => 'Logige oma uude Snipe-IT-seadmesse sisse, kasutades allpool toodud mandaate.',
     'low_inventory_alert' => ':count üksus on laos alla miinimummäära või saab varsti otsa.|:count üksust on laos alla miinimummäära või saab varsti otsa.',
     'min_QTY' => 'Min QTY',

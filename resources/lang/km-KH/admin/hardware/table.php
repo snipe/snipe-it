@@ -27,6 +27,6 @@ return [
     'monthly_depreciation' => 'Monthly Depreciation',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'កាលបរិច្ឆេទដែលបានស្នើសុំ',
-    'changed'       => 'Changed',
+    'changed'       => 'បានផ្លាស់ប្តូរ',
     'icon' => 'Icon',
 ];
