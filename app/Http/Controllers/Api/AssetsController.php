@@ -673,8 +673,6 @@ class AssetsController extends Controller
      */
     public function destroy(Asset $asset): JsonResponse
     {
-        //this is probably wrong
-        //$this->authorize('delete', Asset::class);
         $this->authorize('delete', $asset);
         try {
             DestroyAssetAction::run($asset);
