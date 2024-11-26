@@ -40,7 +40,7 @@ class UpdateAssetAction
         $requestable = false,
         $location_id = null,
         $rtd_location_id = null,
-        $assigned_location = null, // derp, make these work
+        $assigned_location = null,
         $assigned_asset = null,
         $assigned_user = null,
         $byod = false,
@@ -165,12 +165,6 @@ class UpdateAssetAction
 
         $asset = $request->handleImages($asset);
 
-        // Update custom fields in the database.
-        // Validation for these fields is handlded through the AssetRequest form request
-        // FIXME: No idea why this is returning a Builder error on db_column_name.
-        // Need to investigate and fix. Using static method for now.
-
-        // the gui method
         $model = $asset->model;
         if (($model) && (isset($model->fieldset))) {
             foreach ($model->fieldset->fields as $field) {
@@ -197,7 +191,7 @@ class UpdateAssetAction
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
         if ($isBulk) {
-            self::bulkUpdate($asset, $request);
+            self::bulkLocationUpdate($asset, $request);
         }
 
         if ($asset->save()) {
@@ -225,7 +219,7 @@ class UpdateAssetAction
         return $asset;
     }
 
-    private static function bulkUpdate($asset, $request): void
+    private static function bulkLocationUpdate($asset, $request): void
     {
         /**
          * We're changing the location ID - figure out which location we should apply
