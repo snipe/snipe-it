@@ -131,4 +131,19 @@ class StoreAssetTest extends TestCase
         $this->assertDatabaseHas('assets', array_merge($commonData, ['asset_tag' => 'TEST-ASSET-2', 'serial' => 'TEST-SERIAL-2', 'image' => $storedAsset2->image]));
     }
 
+    public function test_user_without_permission_denied()
+    {
+        $user = User::factory()->create();
+        $model = AssetModel::factory()->create();
+        $status = Statuslabel::factory()->readyToDeploy()->create();
+
+        $this->actingAs($user)->post(route('hardware.store'), [
+            'redirect_option' => 'index',
+            'name'            => 'Test Assets',
+            'model_id'        => $model->id,
+            'status_id'       => $status->id,
+            'asset_tags'      => ['', 'TEST-ASSET-1'],
+            'serials'         => ['', 'TEST-SERIAL-1'],
+        ])->assertForbidden();
+    }
 }

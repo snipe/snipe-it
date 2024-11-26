@@ -68,6 +68,19 @@ class EditAssetTest extends TestCase
         $this->assertDatabaseHas('assets', ['asset_tag' => 'New Asset Tag']);
     }
 
+    public function test_user_without_permission_is_denied()
+    {
+        $user = User::factory()->create();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs($user)->put(route('hardware.update', $asset), [
+            'name'       => 'New name',
+            'asset_tags' => 'New Asset Tag',
+            'status_id'  => StatusLabel::factory()->create()->id,
+            'model_id'   => AssetModel::factory()->create()->id,
+        ])->assertForbidden();
+    }
+
     public function testNewCheckinIsLoggedIfStatusChangedToUndeployable()
     {
         Event::fake([CheckoutableCheckedIn::class]);

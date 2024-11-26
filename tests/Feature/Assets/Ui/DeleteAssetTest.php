@@ -16,6 +16,8 @@ class DeleteAssetTest extends TestCase
         $this->actingAs($user)
             ->delete(route('hardware.destroy', $asset))
             ->assertRedirect(route('hardware.index'));
+
+        $this->assertSoftDeleted($asset);
     }
 
     public function test_asset_cannot_be_deleted_without_permissions()
@@ -26,6 +28,8 @@ class DeleteAssetTest extends TestCase
         $this->actingAs($user)
             ->delete(route('hardware.destroy', $asset))
             ->assertForbidden();
+
+        $this->assertModelExists($asset);
     }
 
 }
