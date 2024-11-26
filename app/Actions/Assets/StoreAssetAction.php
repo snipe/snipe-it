@@ -47,7 +47,7 @@ class StoreAssetAction
         $assigned_asset = null,
         $assigned_location = null,
         $last_audit_date = null,
-    )
+    ): Asset|bool
     {
         $settings = Setting::getSettings();
 
@@ -96,7 +96,6 @@ class StoreAssetAction
 
         $model = AssetModel::find($model_id);
 
-        // added instanceof, was only in api before
         if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted == '1') {
@@ -116,42 +115,6 @@ class StoreAssetAction
                 }
             }
         }
-
-        // this is the api's custom fieldset logic, is there a real difference???????
-        //if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
-        //    foreach ($model->fieldset->fields as $field) {
-        //
-        //        // Set the field value based on what was sent in the request
-        //        $field_val = $request->input($field->db_column, null);
-        //
-        //        // If input value is null, use custom field's default value
-        //        if ($field_val == null) {
-        //            Log::debug('Field value for '.$field->db_column.' is null');
-        //            $field_val = $field->defaultValue($request->get('model_id'));
-        //            Log::debug('Use the default fieldset value of '.$field->defaultValue($request->get('model_id')));
-        //        }
-        //
-        //        // if the field is set to encrypted, make sure we encrypt the value
-        //        if ($field->field_encrypted == '1') {
-        //            Log::debug('This model field is encrypted in this fieldset.');
-        //
-        //            if (Gate::allows('assets.view.encrypted_custom_fields')) {
-        //
-        //                // If input value is null, use custom field's default value
-        //                if (($field_val == null) && ($request->has('model_id') != '')) {
-        //                    $field_val = Crypt::encrypt($field->defaultValue($request->get('model_id')));
-        //                } else {
-        //                    $field_val = Crypt::encrypt($request->input($field->db_column));
-        //                }
-        //            }
-        //        }
-        //        if ($field->element == 'checkbox') {
-        //            if (is_array($field_val)) {
-        //                $field_val = implode(',', $field_val);
-        //            }
-        //        }
-        //    }
-
 
         if ($asset->isValid() && $asset->save()) {
             if (request('assigned_user')) {
@@ -175,8 +138,7 @@ class StoreAssetAction
                 $asset->image = $asset->getImageUrl();
             }
             return $asset;
-        } else {
-            dd($asset->getErrors()); //need to figure out how to return errors from watson validating...
         }
+        return false;
     }
 }

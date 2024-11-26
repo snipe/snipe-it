@@ -15,6 +15,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\Assets\StoreAssetRequest;
 use App\Models\Actionlog;
 use App\Http\Requests\UploadFileRequest;
+use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Log;
 use App\Models\Asset;
@@ -150,7 +151,7 @@ class AssetsController extends Controller
                 ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
         } catch (CheckoutNotAllowed $e) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.error'));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
             return redirect()->back()->with('error', 'something bad');
         }
@@ -268,7 +269,7 @@ class AssetsController extends Controller
                 ->with('success', trans('admin/hardware/message.update.success'));
         } catch (ValidationException $e) {
             return redirect()->back()->withInput()->withErrors($e->getErrors());
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
             return redirect()->back()->with('error', trans('admin/hardware/message.update.error'));
         }
@@ -287,7 +288,7 @@ class AssetsController extends Controller
         try {
             DestroyAssetAction::run($asset);
             return redirect()->route('hardware.index')->with('success', trans('admin/hardware/message.delete.success'));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
             return redirect()->back()->withInput()->withErrors($e->getMessage());
         }
@@ -404,7 +405,7 @@ class AssetsController extends Controller
                         file_put_contents($barcode_file, $barcode_obj->getPngData());
 
                         return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
-                    } catch (\Exception $e) {
+                    } catch (Exception $e) {
                         Log::debug('The barcode format is invalid.');
 
                         return response(file_get_contents(public_path('uploads/barcodes/invalid_barcode.gif')))->header('Content-type', 'image/gif');
@@ -506,7 +507,7 @@ class AssetsController extends Controller
         $isCheckinHeaderExplicit = in_array('checkin date', (array_map('strtolower', $header)));
         try {
             $results = $csv->getRecords();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return back()->with('error', trans('general.error_in_import_file', ['error' => $e->getMessage()]));
         } 
         $item = [];

@@ -6,13 +6,14 @@ use App\Actions\Assets\DestroyAssetAction;
 use App\Actions\Assets\StoreAssetAction;
 use App\Actions\Assets\UpdateAssetAction;
 use App\Events\CheckoutableCheckedIn;
-use App\Exceptions\CheckoutNotAllowed;
 use App\Exceptions\CustomFieldPermissionException;
+use App\Exceptions\CheckoutNotAllowed;
 use App\Http\Requests\Assets\StoreAssetRequest;
 use App\Http\Requests\Assets\UpdateAssetRequest;
 use App\Http\Traits\MigratesLegacyAssetLocations;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Crypt;
@@ -600,12 +601,10 @@ class AssetsController extends Controller
     {
 
         try {
-            $custom_fields = $request->collect()->filter(function ($value, $key) {
-                return starts_with($key, '_snipeit_');
-            });
             $asset = StoreAssetAction::run(
                 model_id: $request->validated('model_id'),
                 status_id: $request->validated('status_id'),
+                request: $request, // this is for handleImages and custom fields
                 name: $request->validated('name'),
                 serial: $request->validated('serial'),
                 company_id: $request->validated('company_id'),
@@ -627,16 +626,15 @@ class AssetsController extends Controller
                 assigned_user: $request->validated('assigned_user'),
                 assigned_asset: $request->validated('assigned_asset'),
                 assigned_location: $request->validated('assigned_location'),
-                request: $request, //this is just for the handleImages method...
                 last_audit_date: $request->validated('last_audit_date'),
             );
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
 
-            // not sure why we're not using this yet, but i know there's a reason and a reason we want to
+            // not sure why we're not using this yet, but i know there's a reason
             return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.create.success')));
         } catch (CheckoutNotAllowed $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()), 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()));
         }
     }
@@ -659,7 +657,8 @@ class AssetsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, $e->getErrors()), 200);
         } catch (CustomFieldPermissionException $e) {
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
+            report($e);
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.something_went_wrong')));
         }
     }
@@ -680,7 +679,7 @@ class AssetsController extends Controller
         try {
             DestroyAssetAction::run($asset);
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.delete.success')));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.something_went_wrong')));
         }
