@@ -202,7 +202,18 @@
                   </label>
               </div>
 
-
+             <!-- Show on audit screens  -->
+             <div class="col-md-9 col-md-offset-3" id="show_custom_field_on_audit">
+                 <label class="form-control">
+                     <input
+                             type="checkbox"
+                             name="show_custom_field_on_audit"
+                             aria-label="show_custom_field_on_audit"
+                             value="1"
+                             @checked(old('show_custom_field_on_audit') || $field->show_custom_field_on_audit) >
+                     {{ trans('admin/custom_fields/general.show_custom_field_on_audit') }}
+                 </label>
+             </div>
 
           </div>
 
