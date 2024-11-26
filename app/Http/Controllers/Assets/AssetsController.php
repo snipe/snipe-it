@@ -19,6 +19,7 @@ use App\Models\Statuslabel;
 use App\Models\User;
 use App\View\Label;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -510,12 +511,14 @@ class AssetsController extends Controller
 
         // Search for an exact and unique asset tag match
         $assets = Asset::where('asset_tag', '=', $tag);
+        $user = auth()->user();
 
         // If not a unique result, redirect to the index view
         if ($assets->count() != 1) {
             return redirect()->route('hardware.index')
                 ->with('search', $tag)
-                ->with('search_warning', trans('admin/hardware/message.does_not_exist_var', [ 'asset_tag' => $tag ]));
+                ->with('search_warning', trans('admin/hardware/message.does_not_exist_var', [ 'asset_tag' => $tag ]))
+                ->with('hide_lookup_alert', $user->hide_lookup_alert);
         }
         $asset = $assets->first();
         $this->authorize('view', $asset);

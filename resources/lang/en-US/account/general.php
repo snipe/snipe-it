@@ -14,4 +14,5 @@ return array(
     'no_tokens' => 'You have not created any personal access tokens.',
     'enable_sounds' => 'Enable sound effects',
     'enable_confetti' => 'Enable confetti effects',
+    'hide_lookup_alert' => 'Hide alert message if lookup search fails',
 );

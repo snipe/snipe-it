@@ -173,8 +173,9 @@
 
 
 @if ($message = session()->get('search_warning'))
+@if (!session()->get('hide_lookup_alert'))
 <div class="col-md-12">
-    <div class="alert alert-warning search-warning fade in hidden">
+    <div class="alert alert-warning search-warning fade in">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>{{ trans('general.notification_warning') }}: </strong>
@@ -183,14 +184,13 @@
             <button class="btn btn-default dropdown-toggle close" data-toggle="dropdown" aria-expanded="false">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
             </button>
-            <ul class="dropdown-menu alert-warning pull-right">
-                <li class="text-center">
-                    <div class="btn btn-xs search-warning-dismiss">
-                        {{ trans('general.notification_search_warning') }}
-                    </div>
-                </li>
+            <ul class="dropdown-menu alert-warning pull-right search-warning-dismiss">
+                <a class="btn btn-xs" href="/account/profile">
+                    {{ trans('general.notification_hide_search_warning') }}
+                </a>
             </ul>
         </div>
     </div>
 </div>
+@endif
 @endif
