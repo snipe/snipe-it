@@ -26,7 +26,7 @@ class AssetCheckinRequest extends Request
         $rules = [];
 
             if($settings->require_checkinout_notes) {
-            $rules['note'] = 'string|nullable';
+            $rules['note'] = 'string|required';
         }
         return $rules;
     }
