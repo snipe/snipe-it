@@ -3,6 +3,7 @@
 namespace App\Actions\Assets;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Exceptions\CheckoutNotAllowed;
 use App\Exceptions\CustomFieldPermissionException;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
@@ -22,6 +23,7 @@ class UpdateAssetAction
     /**
      * @throws ValidationException
      * @throws CustomFieldPermissionException
+     * @throws CheckoutNotAllowed
      */
     public static function run(
         Asset $asset,
