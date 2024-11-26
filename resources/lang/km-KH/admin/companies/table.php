@@ -2,9 +2,9 @@
 return array(
     'companies' => 'ក្រុមហ៊ុន',
     'create'    => 'បង្កើតក្រុមហ៊ុន',
-    'email'     => 'Company Email',
+    'email'     => 'អ៊ីមែលក្រុមហ៊ុន',
     'title'     => 'ក្រុមហ៊ុន',
-    'phone'     => 'Company Phone',
+    'phone'     => 'ទូរស័ព្ទរបស់ក្រុមហ៊ុន',
     'update'    => 'ធ្វើបច្ចុប្បន្នភាពក្រុមហ៊ុន',
     'name'      => 'ឈ្មោះ​ក្រុម​ហ៊ុន',
     'id'        => 'ID',

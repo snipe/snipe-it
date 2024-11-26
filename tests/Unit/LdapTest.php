@@ -96,7 +96,7 @@ class LdapTest extends TestCase
                 "count" => 1,
                 0 => [
                     'sn' => 'Surname',
-                    'firstName' => 'FirstName'
+                    'firstname' => 'FirstName'
                 ]
             ]
         );

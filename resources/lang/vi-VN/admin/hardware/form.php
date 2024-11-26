@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Trạng thái tài sản là được phép cấp phát. Tài sản này có thể bàn giao.',
     'processing_spinner' => 'Đang xử lý... (Quá trình này có thể mất một chút thời gian đối với các tệp lớn)',
     'optional_infos'  => 'Thông tin bổ sung',
-    'order_details'   => 'Thông tin đơn hàng'
+    'order_details'   => 'Thông tin đơn hàng',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

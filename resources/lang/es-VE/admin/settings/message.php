@@ -9,7 +9,7 @@ return [
     'backup' => [
         'delete_confirm'        => '¿Está seguro de que desea eliminar este archivo de respaldo? Esta acción no puede se puede deshacer. ',
         'file_deleted'          => 'El archivo de respaldo fue eliminado satisfactoriamente. ',
-        'generated'             => 'Se ha creado un nuevo archivo de copia de seguridad satisfactoriamente.',
+        'generated'             => 'Se ha creado correctamente un nuevo archivo de copia de seguridad.',
         'file_not_found'        => 'Ese archivo de copia de seguridad no se pudo encontrar en el servidor.',
         'restore_warning'       => 'Sí, restaurarlo. Reconozco que esto sobrescribirá cualquier dato existente actualmente en la base de datos. Esto también cerrará la sesión de todos sus usuarios existentes (incluido usted).',
         'restore_confirm'       => '¿Está seguro que desea restaurar su base de datos desde :filename?'

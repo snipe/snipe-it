@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> Ова средство е обележано како моментално нераспоредливо. Ако овој статус е променет, ажурирајте го статусот на средството.',
-    'does_not_exist' 	=> 'Основното средство не постои.',
-    'does_not_exist_var'=> 'Средство со ознака :asset_tag не е пронајдено.',
-    'no_tag' 	        => 'Не е обезбедена ознака за средството.',
+    'undeployable' 		 => '<strong>Warning: </strong> Ова средство е обележано како моментално нераспоредливо. Ако овој статус е променет, ажурирајте го статусот на средството.',
+    'does_not_exist' 	 => 'Основното средство не постои.',
+    'does_not_exist_var' => 'Средство со ознака :asset_tag не е пронајдено.',
+    'no_tag' 	         => 'Не е обезбедена ознака за средството.',
     'does_not_exist_or_not_requestable' => 'Тоа средство не постои или не е побараливо.',
-    'assoc_users'	 	=> 'Ова средство е задолжено на корисник и не може да се избрише. Проверете го, а потоа пробајте повторно да го избришете. ',
+    'assoc_users'	 	 => 'Ова средство е задолжено на корисник и не може да се избрише. Проверете го, а потоа пробајте повторно да го избришете. ',
     'warning_audit_date_mismatch' 	=> 'Следниот датум на ревизија на ова средство (:next_audit_date) е пред последниот датум на ревизија (:last_audit_date). Ажурирајте го следниот датум на ревизија.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Основното средство не е креирано, обидете се повторно. :(',
         'success' 		=> 'Основното средство е успешно креирано. :)',
         'success_linked' => 'Средство со ознака :tag беше создадено успешно. <strong><a href=":link" style="color: white;">Кликнете овде за да видите</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +82,11 @@ return [
         'user_does_not_exist' => 'Корисникот е неважечки. Обидете се повторно.',
         'not_available' => 'Основното средство не е достапно за задолжување!',
         'no_assets_selected' => 'Мора да одберете најмалку едно основно средство',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

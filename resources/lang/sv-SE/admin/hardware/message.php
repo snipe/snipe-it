@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Tillgång existerar inte.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Varning: </strong> Den här tillgången har för närvarande markerats som ej distribuerbar. Om denna status har ändrats vad god och uppdatera tillgångstatusen.',
+    'does_not_exist' 	 => 'Tillgång existerar inte.',
+    'does_not_exist_var' => 'Tillgång med taggen :asset_tag hittades inte.',
+    'no_tag' 	         => 'Ingen tillgångstagg angiven.',
     'does_not_exist_or_not_requestable' => 'Den tillgången finns inte eller är inte önskvärd.',
-    'assoc_users'	 	=> 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'assoc_users'	 	 => 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
+    'warning_audit_date_mismatch' 	=> 'Denna tillgångs nästa inventeringsdatum (:next_audit_date) är före det senaste inventeringsdatumet (:last_audit_date). Vänligen uppdatera nästa inventeringsdatum.',
+    'labels_generated'   => 'Etiketter har genererats.',
+    'error_generating_labels' => 'Ett fel uppstod vid generering av etiketter.',
+    'no_assets_selected' => 'Inga tillgångar valda.',
 
     'create' => [
         'error'   		=> 'Tillgången skapades inte, försök igen. :(',
         'success' 		=> 'Asset skapades framgångsrikt. :)',
         'success_linked' => 'Tillgången med taggen :tag har skapats. <strong><a href=":link" style="color: white;">Klicka här för att se</a></strong>.',
+        'multi_success_linked' => 'Tillgång med taggen :links skapades framgångsrikt.|:count tillgångar skapades framgångsrikt. :links.',
+        'partial_failure' => 'En tillgång kunde inte skapas. Anledning: :failures|:count tillgångar kunde inte skapas. Anledningar: :failures',
     ],
 
     'update' => [
@@ -33,7 +38,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Tillgångsinventeringen misslyckades: :error ',
         'success' 		=> 'Inventeringen av tillgången har loggats.',
     ],
 
@@ -51,14 +56,14 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Bearbeta import',
         'error'                 => 'Vissa objekt importerades inte korrekt.',
         'errorDetail'           => 'Följande objekt importerades inte på grund av fel.',
         'success'               => 'Din fil har importerats',
         'file_delete_success'   => 'Din fil har tagits bort',
         'file_delete_error'      => 'Filen kunde inte raderas',
         'file_missing' => 'Den valda filen saknas',
-        'file_already_deleted' => 'The file selected was already deleted',
+        'file_already_deleted' => 'Den valda filen har redan tagits bort',
         'header_row_has_malformed_characters' => 'Ett eller flera attribut i rubrikraden innehåller felaktigt formatterade UTF-8-tecken',
         'content_row_has_malformed_characters' => 'Ett eller flera attribut i den första raden av innehållet innehåller felaktigt formatterade UTF-8-tecken',
     ],
@@ -77,6 +82,11 @@ return [
         'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.',
         'not_available' => 'Den tillgången är inte tillgänglig för kassan!',
         'no_assets_selected' => 'Du måste välja minst en tillgång från listan',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Tillgången har inte checkats ut, försök igen|Tillgångarna har inte checkats ut, försök igen',
+        'success' => 'Utcheckningen av tillgången lyckades.|Utcheckningen av tillgångarna lyckades.',
     ],
 
     'checkin' => [

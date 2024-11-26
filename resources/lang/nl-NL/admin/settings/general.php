@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Waarschuwing voor aankomende Checkin',
     'due_checkin_days_help' => 'Hoeveel dagen vóór de verwachte check-in van een product moet het worden weergegeven op de pagina "Waarschuwing voor aankomende Check-in"?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];
