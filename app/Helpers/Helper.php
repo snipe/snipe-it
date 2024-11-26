@@ -877,15 +877,14 @@ class Helper
                 })
                 ->get();
 
-            $assets = Asset::with('assignedTo', 'company', 'model')
-                ->whereHasMorph(
+            $assets = Asset::whereHasMorph(
                     'assignedTo',
                     [Asset::class, User::class],
                     function (Builder $query, $type) {
                         if ($type === Asset::class) {
                             // If checked out to Asset, we are making an alias for the assigned_asset.
                             // we use the assigned_to to join on the assigned_asset ID
-                            $query->select('assets.*')
+                            $query->select(['assets.assigned_to', 'assets.id'])
                                   ->join('assets as assigned_asset', function ($join)  {
                                      $join->on('assets.assigned_to', '=', 'assigned_asset.id');
                                  })
