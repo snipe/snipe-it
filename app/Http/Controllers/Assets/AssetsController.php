@@ -279,7 +279,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function destroy(Asset $asset, $request): RedirectResponse
+    public function destroy(Asset $asset): RedirectResponse
     {
         $this->authorize('delete', $asset);
         try {
