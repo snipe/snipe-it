@@ -480,10 +480,11 @@ class UsersController extends Controller
                 $user->permissions = $permissions_array;
             }
 
-            // Update the location of any assets checked out to this user
-            Asset::where('assigned_type', User::class)
-                ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
-
+            if($request->has('location_id')) {
+                // Update the location of any assets checked out to this user
+                Asset::where('assigned_type', User::class)
+                    ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
+            }
             app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
             if ($user->save()) {
