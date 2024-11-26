@@ -47,6 +47,7 @@ class StoreAssetAction
         $assigned_asset = null,
         $assigned_location = null,
         $last_audit_date = null,
+        $next_audit_date = null,
     ): Asset|bool
     {
         $settings = Setting::getSettings();
@@ -73,10 +74,11 @@ class StoreAssetAction
         $asset->rtd_location_id = $rtd_location_id;
         $asset->byod = $byod;
         $asset->last_audit_date = $last_audit_date;
+        $asset->next_audit_date = $next_audit_date;
         $asset->location_id = $location_id;
 
         // set up next audit date
-        if (!empty($settings->audit_interval)) {
+        if (!empty($settings->audit_interval) && is_null($next_audit_date)) {
             $asset->next_audit_date = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
         }
 

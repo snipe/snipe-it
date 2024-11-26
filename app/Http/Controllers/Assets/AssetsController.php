@@ -111,10 +111,6 @@ class AssetsController extends Controller
         try {
             $asset_tags = $request->input('asset_tags');
             $serials = $request->input('serials');
-            $custom_fields = $request->collect()->filter(function ($value, $key) {
-                return starts_with($key, '_snipeit_');
-            });
-
             //DB::transaction(function () use ($request, $asset_tags, $serials, $custom_fields) {
             foreach ($asset_tags as $key => $asset_tag) {
                 $asset = StoreAssetAction::run(
@@ -143,6 +139,7 @@ class AssetsController extends Controller
                     assigned_asset: $request->validated('assigned_asset'),
                     assigned_location: $request->validated('assigned_location'),
                     last_audit_date: $request->validated('last_audit_date'),
+                    next_audit_date: $request->validated('next_audit_date'),
                 );
             }
             //});
@@ -153,7 +150,7 @@ class AssetsController extends Controller
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.error'));
         } catch (Exception $e) {
             report($e);
-            return redirect()->back()->with('error', 'something bad');
+            return redirect()->back()->with('error', trans('general.something_went_wrong'));
         }
     }
 
