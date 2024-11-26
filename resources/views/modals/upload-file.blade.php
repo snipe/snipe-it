@@ -31,7 +31,7 @@
                     </div>
 
                     <div class="col-md-12">
-                        {{ Form::textarea('notes', old('notes', old('notes')), ['class' => 'form-control','placeholder' => 'Notes (Optional)', 'rows'=>3, 'aria-label' => 'file']) }}
+                        <x-input.textarea name="notes" :value="old('notes')" placeholder="Notes (Optional)" rows="3" aria-label="file"/>
                     </div>
                 </div>
 
