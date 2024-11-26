@@ -14,6 +14,8 @@ return [
         'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
         'success' 		=> 'L\'asset è stato creato con successo. :)',
         'success_linked' => 'Bene creato con tag :tag . <strong><a href=":link" style="color: white;">Clicca per vedere</a></strong>.',
+        'multi_success_linked' => 'Il bene con tag :links è stato creato con successo.|:count beni sono stati creati con successo. :links.',
+        'partial_failure' => 'Non è stato possibile creare un bene. Motivo: :failures|Non è stato possibile creare :count beni. Motivi: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
         'not_available' => 'Questo prodotto non è disponibile per il checkout!',
         'no_assets_selected' => 'È necessario selezionare almeno una risorsa dall\'elenco',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Il check-out non è andato a buon fine, riprova|Il check-out non è andato a buon fine, riprova',
+        'success' => 'Check-out del bene effettuato.|Check-out dei beni effettuato.',
     ],
 
     'checkin' => [

@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Artikel som begärs',
     'License_Checkin_Notification' => 'Licensen har checkats in',
     'License_Checkout_Notification' => 'Licens utcheckad',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Meddelande om lågt lagersaldo',
     'a_user_canceled' => 'En användare har avbrutit en artikelförfrågan på webbplatsen',
     'a_user_requested' => 'En användare har efterfrågat en artikel webbplatsen',

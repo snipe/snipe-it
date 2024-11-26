@@ -3217,6 +3217,24 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "DarrenRainey",
+      "name": "Darren Rainey",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6136439?v=4",
+      "profile": "https://darrenraineys.co.uk",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "maciej-poleszczyk",
+      "name": "maciej-poleszczyk",
+      "avatar_url": "https://avatars.githubusercontent.com/u/133033121?v=4",
+      "profile": "https://github.com/maciej-poleszczyk",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'פריט מבוקש',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'דו"ח מלאי נמוך',
     'a_user_canceled' => 'משתמש ביטל בקשת פריט באתר',
     'a_user_requested' => 'משתמש ביקש פריט באתר',

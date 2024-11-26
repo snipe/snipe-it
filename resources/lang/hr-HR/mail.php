@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Potrebna stavka',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Izvješće o niskom oglasnom prostoru',
     'a_user_canceled' => 'Korisnik je otkazao zahtjev za stavkom na web mjestu',
     'a_user_requested' => 'Korisnik je zatražio stavku na web mjestu',

@@ -23,6 +23,7 @@ return [
     'Item_Requested' => '已申领物品',
     'License_Checkin_Notification' => '许可证已签入',
     'License_Checkout_Notification' => '许可证已借出',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => '低库存报告',
     'a_user_canceled' => '用户已取消物品申请',
     'a_user_requested' => '用户已申请物品',

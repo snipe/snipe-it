@@ -25,7 +25,7 @@ return [
     'image'		    => 'Imagen de dispositivo',
     'days_without_acceptance' => 'Días sin aceptación',
     'monthly_depreciation' => 'Depreciación mensual',
-    'requesting_user' => 'Usuario Solicitante',
+    'requesting_user' => 'Usuario solicitante',
     'requested_date' => 'Fecha solicitada',
     'changed'       => 'Cambios',
     'icon' => 'Ícono',

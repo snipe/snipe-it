@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Viðbótarupplýsingar',
-    'order_details'   => 'Innkaupaupplýsingar'
+    'order_details'   => 'Innkaupaupplýsingar',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

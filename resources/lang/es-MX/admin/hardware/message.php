@@ -14,6 +14,8 @@ return [
         'error'   		=> 'El activo no fue creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Activo creado con éxito. :)',
         'success_linked' => 'Activo con placa :tag creado con éxito. <strong><a href=":link" style="color: white;">Haga clic aquí para ver</a></strong>.',
+        'multi_success_linked' => 'Activo con etiqueta :links fue creado exitosamente.|:count activos fueron creados correctamente. :links.',
+        'partial_failure' => 'No se ha podido crear un activo: Motivo: :failures|No se pudieron crear :count activos. Motivos: :failures',
     ],
 
     'update' => [
@@ -68,7 +70,7 @@ return [
         'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Hubo un problema al eliminar el activo. Por favor, inténtelo de nuevo.',
         'nothing_updated'   => 'No se seleccionaron los activos, por lo que no se eliminó nada.',
-        'success' 		=> 'Equipo eliminado.',
+        'success' 		=> 'El activo se ha eliminado correctamente.',
     ],
 
     'checkout' => [
@@ -76,7 +78,12 @@ return [
         'success' 		=> 'Equipo asignado correctamente.',
         'user_does_not_exist' => 'Este usuario no es correcto. Por favor, inténtelo de nuevo.',
         'not_available' => '¡Ese equipo no está disponible para ser asignado!',
-        'no_assets_selected' => 'Debes seleccionar al menos un elemento de la lista',
+        'no_assets_selected' => 'Debe seleccionar al menos un activo de la lista',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'El activo no fue asignado, por favor, intente nuevamente|Los activos no fueron asignados, por favor, intente nuevamente',
+        'success' => 'El activo fue asignado correctamente|Los activos fueron asignados correctamente.',
     ],
 
     'checkin' => [

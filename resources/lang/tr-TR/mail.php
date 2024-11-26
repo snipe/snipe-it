@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Varlık Talep Edildi',
     'License_Checkin_Notification' => 'Lisans Zimmet Kabul',
     'License_Checkout_Notification' => 'Lisans teslim alındı',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Düşük Stok Raporu',
     'a_user_canceled' => 'Bir kullanıcı web sitede öğe talebinden vazgeçti',
     'a_user_requested' => 'Bir kullanıcı websitede bir öğe talebinde bulundu',

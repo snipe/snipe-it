@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Ang Nirekwest na Aytem',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Ang Mababang Report ng Imbentaryo',
     'a_user_canceled' => 'Ang gumagamit o user ay nag-kansela ng rekwest na aytem sa website',
     'a_user_requested' => 'Ang gumagamit ay nag-rekwest ng aytem sa website',

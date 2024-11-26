@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'Kért elem',
     'License_Checkin_Notification' => 'Licensz kiadva',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'Alacsony készletjelentés',
     'a_user_canceled' => 'A felhasználó törölte az elemkérést a webhelyen',
     'a_user_requested' => 'A felhasználó egy elemet kért a webhelyen',

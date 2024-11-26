@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => '到期归还警告',
     'due_checkin_days_help' => '资产应在预计归还多少天前列入“到期归还”页面中？',
+    'no_groups' => '尚未创建任何群组。请访问<code>Admin Settings > Permission Groups</code>添加权限群组。',
 
 ];

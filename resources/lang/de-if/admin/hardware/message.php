@@ -14,6 +14,8 @@ return [
         'error'   		=> 'Asset wurde nicht erstellt. Bitte versuche es erneut. :(',
         'success' 		=> 'Asset wurde erfolgreich erstellt. :)',
         'success_linked' => 'Asset mit Tag :tag wurde erfolgreich erstellt. <strong><a href=":link" style="color: white;">Klicke hier, um</a></strong> anzuzeigen.',
+        'multi_success_linked' => 'Asset mit Tag :links wurde erfolgreich erstellt.|:count Assets wurden erfolgreich erstellt. :links.',
+        'partial_failure' => 'Ein Asset konnte nicht erstellt werden. Grund: :failures|:count Assets konnten nicht erstellt werden. Gründe: :failures',
     ],
 
     'update' => [
@@ -77,6 +79,11 @@ return [
         'user_does_not_exist' => 'Dieser Benutzer ist ungültig. Bitte versuche es erneut.',
         'not_available' => 'Dieses Asset kann nicht herausgegeben werden!',
         'no_assets_selected' => 'Du musst mindestens ein Asset aus der Liste auswählen',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset wurde nicht ausgebucht, bitte versuchen Sie es erneut|Assets wurden nicht ausgebucht, bitte versuchen Sie es erneut',
+        'success' => 'Asset erfolgreich ausgbucht.|Assets erfolgreich ausgebucht.',
     ],
 
     'checkin' => [

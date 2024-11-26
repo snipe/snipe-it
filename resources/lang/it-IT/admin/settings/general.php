@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Avviso di prevista Restituzione',
     'due_checkin_days_help' => 'Quanti giorni prima della restituzione prevista di un Bene dovrebbe essere elencato nella pagina della "Restituzioni Previste"?',
+    'no_groups' => 'Ancora non è stato creato alcun gruppo. Per aggiungerne uno vai a <code>Impostazioni Admin > Gruppi</code>.',
 
 ];

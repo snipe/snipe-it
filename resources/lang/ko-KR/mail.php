@@ -23,6 +23,7 @@ return [
     'Item_Requested' => '품목 요청',
     'License_Checkin_Notification' => '라이센스 확인 됨.',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => '재고 부족 보고서',
     'a_user_canceled' => '사용자가 웹사이트에서 품목 요청을 취소했습니다',
     'a_user_requested' => '사용자가 웹사이트에서 품목을 요청했습니다',

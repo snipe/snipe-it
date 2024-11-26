@@ -23,6 +23,7 @@ return [
     'Item_Requested' => 'பொருள் கோரியது',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'குறைவான சரக்கு அறிக்கை',
     'a_user_canceled' => 'வலைத்தளத்தில் பயனர் ஒரு உருப்படி கோரிக்கையை ரத்து செய்துள்ளார்',
     'a_user_requested' => 'வலைத்தளத்தில் பயனர் ஒரு உருப்படியைக் கோரியுள்ளார்',

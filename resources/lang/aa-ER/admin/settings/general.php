@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => 'crwdns12594:0crwdne12594:0',
     'due_checkin_days' => 'crwdns12680:0crwdne12680:0',
     'due_checkin_days_help' => 'crwdns12682:0crwdne12682:0',
+    'no_groups' => 'crwdns12760:0crwdne12760:0',
 
 ];
