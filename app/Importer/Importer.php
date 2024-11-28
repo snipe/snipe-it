@@ -146,7 +146,7 @@ abstract class Importer
      */
     public function import()
     {
-        $headerRow = $this->csv->fetchOne();
+        $headerRow = $this->csv->nth(0);
         $this->csv->setHeaderOffset(0); //explicitly sets the CSV document header record
 
         $this->populateCustomFields($headerRow);
