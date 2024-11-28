@@ -16,6 +16,9 @@
 @if (($item->name!=$item->asset_tag))
 | **{{ trans('mail.asset_tag') }}** | {{ $item->asset_tag }} |
 @endif
+@if (isset($item->model->category))
+| **{{ trans('general.category') }}** | {{ $item->model->category->name }} |
+@endif
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
 @endif

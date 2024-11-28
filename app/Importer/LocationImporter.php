@@ -51,6 +51,7 @@ class LocationImporter extends ItemImporter
         } else {
             $this->log('No Matching Location, Create a new one');
             $location = new Location;
+            $location->created_by = auth()->id();
         }
 
         // Pull the records from the CSV to determine their values
@@ -65,7 +66,6 @@ class LocationImporter extends ItemImporter
         $this->item['ldap_ou'] = trim($this->findCsvMatch($row, 'ldap_ou'));
         $this->item['manager'] = trim($this->findCsvMatch($row, 'manager'));
         $this->item['manager_username'] = trim($this->findCsvMatch($row, 'manager_username'));
-        $this->item['created_by'] = auth()->id();
 
         if ($this->findCsvMatch($row, 'parent_location')) {
             $this->item['parent_id'] = $this->createOrFetchLocation(trim($this->findCsvMatch($row, 'parent_location')));

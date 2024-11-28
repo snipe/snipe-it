@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\Accessory;
+use App\Models\AssetModel;
 use App\Models\Component;
 use App\Models\Consumable;
 use Illuminate\Testing\PendingCommand;
@@ -17,6 +18,7 @@ use Tests\Support\Importing\AssetsImportFileBuilder;
 use Tests\Support\Importing\LicensesImportFileBuilder;
 use Tests\Support\Importing\ComponentsImportFileBuilder;
 use Tests\Support\Importing\AccessoriesImportFileBuilder;
+use Tests\Support\Importing\AssetModelsImportFileBuilder;
 use Tests\Support\Importing\ConsumablesImportFileBuilder;
 
 class ImportItemsCommandTest extends TestCase
@@ -45,6 +47,7 @@ class ImportItemsCommandTest extends TestCase
         $consumablesFile = ConsumablesImportFileBuilder::new();
         $licensesFile = LicensesImportFileBuilder::new();
         $usersFile = UsersImportFileBuilder::new();
+        $assetModelFile = AssetModelsImportFileBuilder::new();
 
         $this->runCommand(['filename' => $this->getPath($assetsFile->saveToImportsDirectory())])->assertOk();
         $this->runCommand(['filename' => $this->getPath($accessoriesFile->saveToImportsDirectory()), '--item-type' => 'Accessory'])->assertOk();
@@ -52,6 +55,7 @@ class ImportItemsCommandTest extends TestCase
         $this->runCommand(['filename' => $this->getPath($consumablesFile->saveToImportsDirectory()), '--item-type' => 'Consumable'])->assertOk();
         $this->runCommand(['filename' => $this->getPath($licensesFile->saveToImportsDirectory()), '--item-type' => 'License'])->assertOk();
         $this->runCommand(['filename' => $this->getPath($usersFile->saveToImportsDirectory()), '--item-type' => 'user'])->assertOk();
+        $this->runCommand(['filename' => $this->getPath($assetModelFile->saveToImportsDirectory()), '--item-type' => 'assetModel'])->assertOk();
 
         $this->assertTrue(Accessory::query()->where('name', $accessoriesFile->firstRow()['itemName'])->exists());
         $this->assertTrue(Asset::query()->where('serial', $assetsFile->firstRow()['serialNumber'])->exists());
@@ -59,6 +63,7 @@ class ImportItemsCommandTest extends TestCase
         $this->assertTrue(Consumable::query()->where('name', $consumablesFile->firstRow()['itemName'])->exists());
         $this->assertTrue(License::query()->where('serial', $licensesFile->firstRow()['serialNumber'])->exists());
         $this->assertTrue(User::query()->where('username', $usersFile->firstRow()['username'])->exists());
+        $this->assertTrue(AssetModel::query()->where('name', $assetModelFile->firstRow()['name'])->exists());
     }
 
     protected function runCommand(array $parameters = []): PendingCommand

@@ -28,7 +28,7 @@ return array(
         'unavailable'   => '付属品はチェックアウト中のため利用できません。',
         'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => '現在、このタイプのアクセサリーは1つしかありません。:checkout_qty をチェックアウトしようとしています。 このアクセサリの数量または総在庫数を調整して再度お試しください。 :number_currently_remaining の利用可能なアクセサリーがあり、:checkout_qty をチェックアウトしようとしています。 このアクセサリの数量または総在庫数を調整して再度お試しください。',
             ),
            
     ),

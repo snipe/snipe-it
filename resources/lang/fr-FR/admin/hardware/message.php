@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Attention : </strong> Cet actif est marqué comme indéployable. Si ce statut a changé, merci de mettre à jour le statut d\'actif.',
-    'does_not_exist' 	=> 'Ce bien n\'existe pas.',
-    'does_not_exist_var'=> 'Actif avec le tag :asset_tag introuvable.',
-    'no_tag' 	        => 'Aucune étiquette d\'actif fournie.',
+    'undeployable' 		 => '<strong>Attention : </strong> Cet actif est marqué comme indéployable. Si ce statut a changé, merci de mettre à jour le statut d\'actif.',
+    'does_not_exist' 	 => 'Ce bien n\'existe pas.',
+    'does_not_exist_var' => 'Actif avec le tag :asset_tag introuvable.',
+    'no_tag' 	         => 'Aucune étiquette d\'actif fournie.',
     'does_not_exist_or_not_requestable' => 'Cet actif n\'existe pas ou ne peut pas être demandé.',
-    'assoc_users'	 	=> 'Ce bien est marqué sorti par un utilisateur et ne peut être supprimé. Veuillez d\'abord cliquer sur Retour de Biens, et réessayer.',
+    'assoc_users'	 	 => 'Ce bien est marqué sorti par un utilisateur et ne peut être supprimé. Veuillez d\'abord cliquer sur Retour de Biens, et réessayer.',
     'warning_audit_date_mismatch' 	=> 'La prochaine date d\'audit de cet actif (:next_audit_date) est antérieure à la dernière date d\'audit (:last_audit_date). Veuillez mettre à jour la prochaine date d\'audit.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Ce bien n\'a pas été créé, veuillez réessayer. :(',

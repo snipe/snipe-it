@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> 'crwdns12562:0crwdne12562:0',
-    'does_not_exist' 	=> 'crwdns740:0crwdne740:0',
-    'does_not_exist_var'=> 'crwdns12188:0crwdne12188:0',
-    'no_tag' 	        => 'crwdns12190:0crwdne12190:0',
+    'undeployable' 		 => 'crwdns12562:0crwdne12562:0',
+    'does_not_exist' 	 => 'crwdns740:0crwdne740:0',
+    'does_not_exist_var' => 'crwdns12188:0crwdne12188:0',
+    'no_tag' 	         => 'crwdns12190:0crwdne12190:0',
     'does_not_exist_or_not_requestable' => 'crwdns6581:0crwdne6581:0',
-    'assoc_users'	 	=> 'crwdns741:0crwdne741:0',
+    'assoc_users'	 	 => 'crwdns741:0crwdne741:0',
     'warning_audit_date_mismatch' 	=> 'crwdns12192:0crwdne12192:0',
+    'labels_generated'   => 'crwdns12786:0crwdne12786:0',
+    'error_generating_labels' => 'crwdns12788:0crwdne12788:0',
+    'no_assets_selected' => 'crwdns12790:0crwdne12790:0',
 
     'create' => [
         'error'   		=> 'crwdns742:0crwdne742:0',

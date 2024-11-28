@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>警告： </strong> 此资产已被标记为当前不可借出。如果此状态已经改变，请更新资产状态。',
-    'does_not_exist' 	=> '资产不存在',
-    'does_not_exist_var'=> '找不到标签为 :asset_tag 的资产',
-    'no_tag' 	        => '未提供资产标签。',
+    'undeployable' 		 => '<strong>警告： </strong> 此资产已被标记为当前不可借出。如果此状态已经改变，请更新资产状态。',
+    'does_not_exist' 	 => '资产不存在',
+    'does_not_exist_var' => '找不到标签为 :asset_tag 的资产',
+    'no_tag' 	         => '未提供资产标签。',
     'does_not_exist_or_not_requestable' => '该资产不存在或不可申领。',
-    'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
+    'assoc_users'	 	 => '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
     'warning_audit_date_mismatch' 	=> '此资产的下一个盘点日期 (:next_audit_date) 早于上一个盘点日期 (:last_audit_date)。请更新下一个盘点日期。',
+    'labels_generated'   => '标签已成功生成。',
+    'error_generating_labels' => '生成标签时出错。',
+    'no_assets_selected' => '没有选择资产。',
 
     'create' => [
         'error'   		=> '资产创建失败，请重试。:(',

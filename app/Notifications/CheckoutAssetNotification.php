@@ -70,7 +70,7 @@ class CheckoutAssetNotification extends Notification
 
         if (Setting::getSettings()->webhook_selected === 'microsoft' && Setting::getSettings()->webhook_endpoint) {
 
-            $notifyBy[] = TeamsNotification::class;
+            $notifyBy[] = MicrosoftTeamsChannel::class;
         }
 
 
@@ -111,7 +111,8 @@ class CheckoutAssetNotification extends Notification
                     ->content($note);
             });
     }
-    public function toMicrosoftTeams() : array
+
+    public function toMicrosoftTeams()
     {
         $target = $this->target;
         $admin = $this->admin;

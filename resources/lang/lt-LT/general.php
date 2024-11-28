@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'Kažkas negerai su jūsų užklausa.',
     'close' => 'Uždaryti',
     'expires' => 'Baigiasi',
-    'map_fields'=> 'Susieti :item_type lauką',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count liko',
     'label' => 'Etiketė',
     'import_asset_tag_exists' => 'Turtas su inventoriniu numeriu :asset_tag jau yra ir atnaujinimo užklausa nebuvo pateikta. Jokie pakeitimai nebuvo atlikti.',

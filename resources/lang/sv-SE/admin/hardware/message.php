@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Varning: </strong> Den här tillgången har för närvarande markerats som ej distribuerbar. Om denna status har ändrats vad god och uppdatera tillgångstatusen.',
-    'does_not_exist' 	=> 'Tillgång existerar inte.',
-    'does_not_exist_var'=> 'Tillgång med taggen :asset_tag hittades inte.',
-    'no_tag' 	        => 'Ingen tillgångstagg angiven.',
+    'undeployable' 		 => '<strong>Varning: </strong> Den här tillgången har för närvarande markerats som ej distribuerbar. Om denna status har ändrats vad god och uppdatera tillgångstatusen.',
+    'does_not_exist' 	 => 'Tillgång existerar inte.',
+    'does_not_exist_var' => 'Tillgång med taggen :asset_tag hittades inte.',
+    'no_tag' 	         => 'Ingen tillgångstagg angiven.',
     'does_not_exist_or_not_requestable' => 'Den tillgången finns inte eller är inte önskvärd.',
-    'assoc_users'	 	=> 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
+    'assoc_users'	 	 => 'Denna tillgång kontrolleras för närvarande till en användare och kan inte raderas. Kontrollera tillgången först och försök sedan radera igen.',
     'warning_audit_date_mismatch' 	=> 'Denna tillgångs nästa inventeringsdatum (:next_audit_date) är före det senaste inventeringsdatumet (:last_audit_date). Vänligen uppdatera nästa inventeringsdatum.',
+    'labels_generated'   => 'Etiketter har genererats.',
+    'error_generating_labels' => 'Ett fel uppstod vid generering av etiketter.',
+    'no_assets_selected' => 'Inga tillgångar valda.',
 
     'create' => [
         'error'   		=> 'Tillgången skapades inte, försök igen. :(',

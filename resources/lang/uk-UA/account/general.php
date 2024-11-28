@@ -11,7 +11,7 @@ return array(
     'api_base_url_endpoint' => '/&lt;ресурс&gt;',
     'api_token_expiration_time' => 'API токени закінчуються:',
     'api_reference' => 'Please check the <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> to find specific API endpoints and additional API documentation.',
-    'profile_updated' => 'Account successfully updated',
+    'profile_updated' => 'Обліковий запис успішно оновлено.',
     'no_tokens' => 'Ви не створили жодних особистих токенів доступу.',
     'enable_sounds' => 'Увімкнути звукові ефекти',
     'enable_confetti' => 'Enable confetti effects',

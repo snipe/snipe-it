@@ -2,20 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warnung: </strong> Dieses Asset wurde als derzeit nicht einsetzbar markiert. Wenn sich dieser Status geändert hat, aktualisieren Sie bitte den Asset-Status.',
-    'does_not_exist' 	=> 'Asset existiert nicht.',
-    'does_not_exist_var'=> 'Asset mit Asset-Tag :asset_tag nicht gefunden.',
-    'no_tag' 	        => 'Kein Asset-Tag angegeben.',
+    'undeployable' 		 => '<strong>Warnung: </strong> Dieses Asset wurde als derzeit nicht einsetzbar markiert. Wenn sich dieser Status geändert hat, aktualisieren Sie bitte den Asset-Status.',
+    'does_not_exist' 	 => 'Asset existiert nicht.',
+    'does_not_exist_var' => 'Asset mit Asset-Tag :asset_tag nicht gefunden.',
+    'no_tag' 	         => 'Kein Asset-Tag angegeben.',
     'does_not_exist_or_not_requestable' => 'Dieses Asset existiert nicht oder kann nicht angefordert werden.',
-    'assoc_users'	 	=> 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buche das Asset wieder ein und versuche dann erneut, es zu entfernen. ',
+    'assoc_users'	 	 => 'Dieses Asset ist im Moment an einen Benutzer herausgegeben und kann nicht entfernt werden. Bitte buche das Asset wieder ein und versuche dann erneut, es zu entfernen. ',
     'warning_audit_date_mismatch' 	=> 'Das nächste Prüfdatum dieses Assets (:next_audit_date) liegt vor dem letzten Prüfdatum (:last_audit_date). Bitte aktualisieren Sie das nächste Prüfdatum.',
+    'labels_generated'   => 'Labels wurden erfolgreich generiert.',
+    'error_generating_labels' => 'Fehler beim Generieren der Labels.',
+    'no_assets_selected' => 'Keine Assets ausgewählt.',
 
     'create' => [
         'error'   		=> 'Asset wurde nicht erstellt. Bitte versuche es erneut. :(',
         'success' 		=> 'Asset wurde erfolgreich erstellt. :)',
         'success_linked' => 'Asset mit Tag :tag wurde erfolgreich erstellt. <strong><a href=":link" style="color: white;">Klicke hier, um</a></strong> anzuzeigen.',
-        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
-        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
+        'multi_success_linked' => 'Asset mit Tag :links wurde erfolgreich erstellt.|:count Assets wurden erfolgreich erstellt. :links.',
+        'partial_failure' => 'Ein Asset konnte nicht erstellt werden. Grund: :failures|:count Assets konnten nicht erstellt werden. Gründe: :failures',
     ],
 
     'update' => [
@@ -82,8 +85,8 @@ return [
     ],
 
     'multi-checkout' => [
-        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
-        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
+        'error'   => 'Asset wurde nicht ausgecheckt, bitte versuche es erneut.|Assets wurden nicht ausgecheckt, bitte versuche es erneut',
+        'success' => 'Asset erfolgreich ausgecheckt.|Assets erfolgreich ausgecheckt.',
     ],
 
     'checkin' => [

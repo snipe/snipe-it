@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Opozorilo: </strong> To sredstvo je bilo označeno kot trenutno nerazdeljeno. Če se je ta status spremenil, posodobite status sredstva.',
-    'does_not_exist' 	=> 'Sredstvo ne obstaja.',
-    'does_not_exist_var'=> 'Sredstvo z oznako :oznaka_sredstva ni bilo najdeno.',
-    'no_tag' 	        => 'Oznaka sredstva ni podana.',
+    'undeployable' 		 => '<strong>Opozorilo: </strong> To sredstvo je bilo označeno kot trenutno nerazdeljeno. Če se je ta status spremenil, posodobite status sredstva.',
+    'does_not_exist' 	 => 'Sredstvo ne obstaja.',
+    'does_not_exist_var' => 'Sredstvo z oznako :oznaka_sredstva ni bilo najdeno.',
+    'no_tag' 	         => 'Oznaka sredstva ni podana.',
     'does_not_exist_or_not_requestable' => 'To sredstvo ne obstaja ali ga ni mogoče zahtevati.',
-    'assoc_users'	 	=> 'To sredstvo je trenutno izdano uporabniku in ga ni mogoče izbrisati. Najprej preverite sredstvo in poskusite znova izbrisati. ',
+    'assoc_users'	 	 => 'To sredstvo je trenutno izdano uporabniku in ga ni mogoče izbrisati. Najprej preverite sredstvo in poskusite znova izbrisati. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Sredstvo ni bilo ustvarjeno, poskusite znova. :(',

@@ -68,7 +68,7 @@ class ObjectImportCommand extends Command
         $filename = $this->argument('filename');
         $importer = Factory::make($filename, $this->option('item-type'));
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
-            ->setUserId((int)$this->option('user_id'))
+            ->setCreatedBy((int)$this->option('user_id'))
             ->setUpdating($this->option('update'))
             ->setShouldNotify($this->option('send-welcome'))
             ->setUsernameFormat($this->option('username_format'));

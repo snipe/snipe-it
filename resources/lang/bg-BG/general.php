@@ -560,7 +560,7 @@ return [
     'something_went_wrong' => 'При обработката нещо се обърка.',
     'close' => 'Затвори',
     'expires' => 'Изтича',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => 'остават :count',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',

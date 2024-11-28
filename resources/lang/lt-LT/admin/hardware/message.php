@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Įspėjimas:</strong> Šis turtas pažymėtas kaip negalimas išduoti. Jei šio turto būsena pasikeitė, atnaujinkite būsenos žymą.',
-    'does_not_exist' 	=> 'Tokio turto nėra.',
-    'does_not_exist_var'=> 'Turtas su numeriu :asset_tag nerastas.',
-    'no_tag' 	        => 'Nenurodytas inventorinis numeris.',
+    'undeployable' 		 => '<strong>Įspėjimas:</strong> Šis turtas pažymėtas kaip negalimas išduoti. Jei šio turto būsena pasikeitė, atnaujinkite būsenos žymą.',
+    'does_not_exist' 	 => 'Tokio turto nėra.',
+    'does_not_exist_var' => 'Turtas su numeriu :asset_tag nerastas.',
+    'no_tag' 	         => 'Nenurodytas inventorinis numeris.',
     'does_not_exist_or_not_requestable' => 'Tokio turto nėra arba jo negalima užsakyti.',
-    'assoc_users'	 	=> 'Šis turtas šiuo metu yra išduotas naudotojui ir negali būti panaikintas. Pirmiausia paimkite turtą ir tuomet vėl bandykite jį panaikinti. ',
+    'assoc_users'	 	 => 'Šis turtas šiuo metu yra išduotas naudotojui ir negali būti panaikintas. Pirmiausia paimkite turtą ir tuomet vėl bandykite jį panaikinti. ',
     'warning_audit_date_mismatch' 	=> 'Šio turto kito audito data (:next_audit_date) yra ankstesnė už paskutinio audito datą (:last_audit_date). Atnaujinkite kito audito datą.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Turto sukurti nepavyko, bandykite dar kartą.',

@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Активът не съществува.',
-    'does_not_exist_var'=> 'Активът с етике :asset_tag не е намерен.',
-    'no_tag' 	        => 'Не е предоставен етикет на актив.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'Активът не съществува.',
+    'does_not_exist_var' => 'Активът с етике :asset_tag не е намерен.',
+    'no_tag' 	         => 'Не е предоставен етикет на актив.',
     'does_not_exist_or_not_requestable' => 'Актива не съществува или не може да бъде предоставян.',
-    'assoc_users'	 	=> 'Активът е изписан на потребител и не може да бъде изтрит. Моля впишете го обратно и след това опитайте да го изтриете отново.',
+    'assoc_users'	 	 => 'Активът е изписан на потребител и не може да бъде изтрит. Моля впишете го обратно и след това опитайте да го изтриете отново.',
     'warning_audit_date_mismatch' 	=> 'Следващата дата на одит на този актив (:next_audit_date) е преди последната дата на одит (:last_audit_date). Моля, актуализирайте следващата дата на одита.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Активът не беше създаден. Моля опитайте отново.',

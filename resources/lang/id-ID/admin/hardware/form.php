@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Status aset dapat ditetapkan. Aset ini dapat digunakan.',
     'processing_spinner' => 'Memproses... (Mungkin memerlukan sedikit waktu untuk file besar)',
     'optional_infos'  => 'Informasi Tambahan',
-    'order_details'   => 'Informasi Pesanan'
+    'order_details'   => 'Informasi Pesanan',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

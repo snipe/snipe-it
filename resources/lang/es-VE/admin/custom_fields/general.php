@@ -48,7 +48,7 @@ return [
     'db_convert_warning' => 'ADVERTENCIA. Este campo está en la tabla de campos personalizados como <code>:db_column</code> pero debe ser <code>:expected</code>.',
     'is_unique' => 'Este valor debe ser único para todos los activos',
     'unique' => 'Único',
-    'display_in_user_view' => 'Permitir al usuario ver estos valores en la página "Ver elementos asignados"',
+    'display_in_user_view' => 'Permitir al usuario ver estos valores en la página "Ver activos asignados"',
     'display_in_user_view_table' => 'Visible para el usuario',
     'auto_add_to_fieldsets' => 'Añadir automáticamente a cada nuevo grupo de campos',
     'add_to_preexisting_fieldsets' => 'Añadir a cualquier grupo de campos existente',
