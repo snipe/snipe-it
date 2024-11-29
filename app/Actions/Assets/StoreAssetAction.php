@@ -134,7 +134,6 @@ class StoreAssetAction
             if (isset($target)) {
                 $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
             }
-
             //this was in api and not gui
             if ($asset->image) {
                 $asset->image = $asset->getImageUrl();

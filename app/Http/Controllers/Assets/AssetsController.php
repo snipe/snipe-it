@@ -108,6 +108,8 @@ class AssetsController extends Controller
      */
     public function store(StoreAssetRequest $request): RedirectResponse
     {
+        $successes = [];
+        $errors = [];
         try {
             $asset_tags = $request->input('asset_tags');
             $serials = $request->input('serials');
@@ -141,6 +143,10 @@ class AssetsController extends Controller
                     last_audit_date: $request->validated('last_audit_date'),
                     next_audit_date: $request->validated('next_audit_date'),
                 );
+                $successes[] = "<a href='".route('hardware.show', ['hardware' => $asset->id])."' style='color: white;'>".e($asset->asset_tag)."</a>";
+                if (!$asset) {
+                    $failures[] = join(",", $asset->getErrors()->all());
+                }
             }
             //});
             session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);

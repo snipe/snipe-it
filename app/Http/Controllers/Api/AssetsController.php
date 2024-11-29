@@ -599,7 +599,6 @@ class AssetsController extends Controller
      */
     public function store(StoreAssetRequest $request): JsonResponse
     {
-
         try {
             $asset = StoreAssetAction::run(
                 model_id: $request->validated('model_id'),
