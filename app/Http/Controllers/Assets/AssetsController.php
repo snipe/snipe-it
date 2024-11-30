@@ -523,7 +523,6 @@ class AssetsController extends Controller
         return redirect()->route('hardware.show', $asset->id)->with('topsearch', $topsearch);
     }
 
-
     /**
      * Return a QR code for the asset
      *
