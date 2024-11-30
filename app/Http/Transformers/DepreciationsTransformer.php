@@ -7,7 +7,6 @@ use App\Models\Depreciable;
 use App\Models\Depreciation;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Log;
 
 class DepreciationsTransformer
 {
@@ -26,8 +25,9 @@ class DepreciationsTransformer
         $array = [
             'id' => (int) $depreciation->id,
             'name' => e($depreciation->name),
-            'months' => $depreciation->months.' '.trans('general.months'),
-            'depreciation_min' => $depreciation->depreciation_type === 'percent' ? $depreciation->depreciation_min.'%' : $depreciation->depreciation_min,
+            'term_length' => $depreciation->term_length,
+            'term_type'=> $depreciation->term_type,
+            'depreciation_min' =>$depreciation->depreciation_type === 'percent' ? $depreciation->depreciation_min.'%' : $depreciation->depreciation_min,
             'assets_count' => $depreciation->assets_count,
             'models_count' => $depreciation->models_count,
             'licenses_count' => $depreciation->licenses_count,
