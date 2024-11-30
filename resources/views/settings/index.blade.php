@@ -191,21 +191,6 @@
           <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
-                <a href="{{ route('settings.barcodes.index') }}" class="settings_button">
-                  <x-icon type="assets" class="fa-4x"/>
-                  <br><br>
-                  <span class="name">{{ trans('admin/settings/general.barcodes') }}</span>
-                </a>
-              </h5>
-              <p class="help-block">{!! trans('admin/settings/general.barcodes_help_overview') !!}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="admin box box-default">
-            <div class="box-body text-center">
-              <h5>
                 <a href="{{ route('settings.labels.index') }}" class="settings_button">
                   <x-icon type="labels" class="fa-4x"/>
                   <br><br>
