@@ -100,7 +100,7 @@ class CheckoutableListener
                         $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
                         $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
                     } else {
-                        Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
+                        Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
                             ->notify($this->getCheckoutNotification($event, $acceptance));
                     }
                 }
@@ -182,7 +182,7 @@ class CheckoutableListener
                         $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
                         $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
                     } else {
-                        Notification::route(Setting::getSettings()->webhook_selected, Setting::getSettings()->webhook_endpoint)
+                        Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
                             ->notify($this->getCheckinNotification($event));
                     }
                 }
@@ -309,6 +309,13 @@ class CheckoutableListener
         else{
             return $event->checkedOutTo?->email ?? '';
         }
+    }
+    private function webhookSelected(){
+        if(Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general'){
+            return 'slack';
+        }
+
+        return Setting::getSettings()->webhook_selected;
     }
 
     /**
