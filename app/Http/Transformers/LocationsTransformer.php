@@ -3,6 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use App\Models\Accessory;
 use App\Models\Location;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
@@ -45,6 +46,8 @@ class LocationsTransformer
                 'zip' => ($location->zip) ? e($location->zip) : null,
                 'phone' => ($location->phone!='') ? e($location->phone): null,
                 'fax' => ($location->fax!='') ? e($location->fax): null,
+                'accessories_count' => (int) $location->accessories_count,
+                'assigned_accessories_count' => (int) $location->assigned_accessories_count,
                 'assigned_assets_count' => (int) $location->assigned_assets_count,
                 'assets_count'    => (int) $location->assets_count,
                 'rtd_assets_count'    => (int) $location->rtd_assets_count,
@@ -72,6 +75,66 @@ class LocationsTransformer
             ];
 
             $array += $permissions_array;
+
+            return $array;
+        }
+    }
+
+    public function transformCheckedoutAccessories($accessory_checkouts, $total)
+    {
+
+        $array = [];
+        foreach ($accessory_checkouts as $checkout) {
+            $array = [
+                'id' => $checkout->id,
+                'accessory' => [
+                    'id' => $checkout->accessory->id,
+                    'name' => $checkout->accessory->name,
+                ],
+                'image' => ($checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($checkout->accessory->image)) : null,
+                'note' => $checkout->note ? e($checkout->note) : null,
+                'created_by' => $checkout->adminuser ? [
+                    'id' => (int) $checkout->adminuser->id,
+                    'name'=> e($checkout->adminuser->present()->fullName),
+                ]: null,
+                'created_at' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
+            ];
+
+            $permissions_array['available_actions'] = [
+                'checkout' => Gate::allows('checkout', Accessory::class),
+                'checkin' => Gate::allows('checkin', Accessory::class),
+            ];
+
+            $array += $permissions_array;
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    /**
+     * This gives a compact view of the location data without any additional relational queries,
+     * allowing us to 1) deliver a smaller payload and 2) avoid additional queries on relations that
+     * have not been easy/lazy loaded already
+     *
+     * @param Location $location
+     * @return array
+     * @throws \Exception
+     */
+    public function transformLocationCompact(Location $location = null)
+    {
+        if ($location) {
+
+            $array = [
+                'id' => (int) $location->id,
+                'image' =>   ($location->image) ? Storage::disk('public')->url('locations/'.e($location->image)) : null,
+                'type' => "location",
+                'name' => e($location->name),
+                'created_by' => $location->adminuser ? [
+                    'id' => (int) $location->adminuser->id,
+                    'name'=> e($location->adminuser->present()->fullName),
+                ]: null,
+                'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
+            ];
 
             return $array;
         }

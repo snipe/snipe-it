@@ -129,6 +129,7 @@ class AssetsController extends Controller
 
         $assets = Asset::select('assets.*')
             ->with(
+                'model',
                 'location',
                 'assetstatus',
                 'company',
@@ -140,7 +141,7 @@ class AssetsController extends Controller
                 'model.manufacturer',
                 'model.fieldset',
                 'supplier'
-            ); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
+            ); // it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
 
         if ($filter_non_deprecable_assets) {

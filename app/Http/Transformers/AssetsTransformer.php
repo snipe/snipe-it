@@ -225,7 +225,7 @@ class AssetsTransformer
     public function transformRequestedAsset(Asset $asset)
     {
         $array = [
-            'id' => (int) $asset->id,
+            'id' => (int)$asset->id,
             'name' => e($asset->name),
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
@@ -234,7 +234,7 @@ class AssetsTransformer
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'location' => ($asset->location) ? e($asset->location->name) : null,
-            'status'=> ($asset->assetstatus) ? $asset->present()->statusMeta : null,
+            'status' => ($asset->assetstatus) ? $asset->present()->statusMeta : null,
             'assigned_to_self' => ($asset->assigned_to == auth()->id()),
         ];
 
@@ -244,7 +244,7 @@ class AssetsTransformer
             foreach ($asset->model->fieldset->fields as $field) {
 
                 // Only display this if it's allowed via the custom field setting
-                if (($field->field_encrypted=='0') && ($field->show_in_requestable_list=='1')) {
+                if (($field->field_encrypted == '0') && ($field->show_in_requestable_list == '1')) {
 
                     $value = $asset->{$field->db_column};
                     if (($field->format == 'DATE') && (!is_null($value)) && ($value != '')) {
@@ -268,7 +268,21 @@ class AssetsTransformer
 
         $array += $permissions_array;
         return $array;
+    }
 
+    public function transformAssetCompact(Asset $asset)
+    {
+        $array = [
+            'id' => (int) $asset->id,
+            'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
+            'type' => 'asset',
+            'name' => e($asset->present()->fullName()),
+            'model' => ($asset->model) ? e($asset->model->name) : null,
+            'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
+        ];
 
+        return $array;
     }
 }
