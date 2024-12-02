@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
-use App\Http\Requests\ImageUploadRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImageUploadRequest;
+use App\Http\Transformers\AccessoriesTransformer;
 use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
+use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\Location;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use Illuminate\Http\JsonResponse;
 
 class LocationsController extends Controller
 {
@@ -28,26 +31,28 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Location::class);
         $allowed_columns = [
-            'id',
-            'name',
+            'accessories_count',
             'address',
             'address2',
+            'assets_count',
+            'assets_count',
+            'assigned_accessories_count',
+            'assigned_assets_count',
+            'assigned_assets_count',
             'city',
-            'state',
             'country',
-            'zip',
             'created_at',
-            'updated_at',
-            'manager_id',
-            'image',
-            'assigned_assets_count',
-            'users_count',
-            'assets_count',
-            'assigned_assets_count',
-            'assets_count',
-            'rtd_assets_count',
             'currency',
+            'id',
+            'image',
             'ldap_ou',
+            'manager_id',
+            'name',
+            'rtd_assets_count',
+            'state',
+            'updated_at',
+            'users_count',
+            'zip',
             ];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
@@ -68,8 +73,11 @@ class LocationsController extends Controller
             'locations.image',
             'locations.ldap_ou',
             'locations.currency',
-        ])->withCount('assignedAssets as assigned_assets_count')
+        ])
+            ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
+            ->withCount('assignedAccessories as assigned_accessories_count')
+            ->withCount('accessories as accessories_count')
             ->withCount('rtd_assets as rtd_assets_count')
             ->withCount('children as children_count')
             ->withCount('users as users_count');
@@ -231,6 +239,20 @@ class LocationsController extends Controller
         $assets = Asset::where('assigned_to', '=', $location->id)->where('assigned_type', '=', Location::class)->with('model', 'model.category', 'assetstatus', 'location', 'company', 'defaultLoc');
         $assets = $assets->get();
         return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+    }
+
+    public function assignedAccessories(Request $request, Location $location) : JsonResponse | array
+    {
+        $this->authorize('view', Accessory::class);
+        $this->authorize('view', $location);
+        $accessory_checkouts = AccessoryCheckout::LocationAssigned()->with('admin')->with('accessories')->where('assigned_to', '=', $location->id);
+
+        $offset = ($request->input('offset') > $accessory_checkouts->count()) ? $accessory_checkouts->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
+
+        $total = $accessory_checkouts->count();
+        $accessory_checkouts = $accessory_checkouts->skip($offset)->take($limit)->get();
+        return (new LocationsTransformer)->transformCheckedoutAccessories($accessory_checkouts, $total);
     }
 
     /**

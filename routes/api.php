@@ -1289,5 +1289,11 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         ])->name('api.assets.labels');
         // end generate label routes
 
+    Route::get('{location}/accessories/assigned',
+        [
+            Api\LocationsController::class,
+            'assignedAccessories'
+        ]
+    )->name('api.locations.assigned_accessories');
 
 }); // end API routes
