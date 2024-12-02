@@ -144,7 +144,7 @@
 
                                             @if( $currentFile && $this->activeFile && ($currentFile->id == $this->activeFile->id))
                                                 <tr class="warning">
-                                                    <td colspan="4">
+                                                    <td colspan="5">
 
                                                         <div class="form-group">
 
