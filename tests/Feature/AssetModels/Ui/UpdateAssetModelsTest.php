@@ -145,7 +145,7 @@ class UpdateAssetModelsTest extends TestCase
                 // should trigger validation error without name, etc, and NOT remove or change default values
                 'name' => 'Test Model Edited',
                 'category_id' => $assetModel->category_id,
-                'add_default_values' => '1',
+                'add_default_values' => '1', //?
                 'fieldset_id' => $customFieldset->id,
                 'default_values' => [
                     $customFieldOne->id => 'first changed value',

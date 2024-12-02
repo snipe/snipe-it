@@ -155,14 +155,17 @@ class AssetModelsController extends Controller
 
         $model->fieldset_id = $request->input('fieldset_id');
 
-        if ($model->save()) {
+        if ($model->save()) { //Like, *THIS* should've failed. All those values you're putting in are all gonna be blank
+            \Log::error("SAVE was succesful - and maybe that's not what we wanted to have happen. We should've deleted the custom field vaules now");
             $this->removeCustomFieldsDefaultValues($model);
 
             if ($this->shouldAddDefaultValues($request->input())) {
+                \Log::error("We *SHOULD* have re-added the default vaules back on, now");
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))) {
                     return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
                 }
             }
+            \Log::error("now on to EOL stuff");
 
             if ($model->wasChanged('eol')) {
                     if ($model->eol > 0) {
@@ -450,6 +453,8 @@ class AssetModelsController extends Controller
      */
     private function shouldAddDefaultValues(array $input) : bool
     {
+        \Log::error("About to figure out if we should add default values. First off, *should* we? ".(!empty($input['add_default_values']) ? 'YES' : 'no'));
+        \Log::error("do we have some?".(!empty($input['default_values']) ? 'YES' : 'no')." and finally, fieldset id? ".(!empty($input['fieldset_id']) ? 'YES' : 'no'));
         return ! empty($input['add_default_values'])
             && ! empty($input['default_values'])
             && ! empty($input['fieldset_id']);
@@ -486,6 +491,7 @@ class AssetModelsController extends Controller
         $validator = Validator::make($data, $rules);
 
         if($validator->fails()){
+            \Log::error("Faildator FAILS");
             return false;
         }
 
@@ -493,7 +499,9 @@ class AssetModelsController extends Controller
             if (is_array($defaultValue)) {
                 $defaultValue = implode(', ', $defaultValue);
             }
-            DefaultValuesForCustomFields::updateOrCreate(['custom_field_id' => $customFieldId, 'item_pivot_id' => $model->id], ['default_value' => $defaultValue]);
+            \Log::error("We should be adding one! For field ID ".$customFieldId." to value: ".$defaultValue." and the model's ID is/was: ".$model->id);
+            $results = DefaultValuesForCustomFields::updateOrCreate(['custom_field_id' => $customFieldId, 'item_pivot_id' => $model->id, 'type' => Asset::class], ['default_value' => $defaultValue]);
+            \Log::error("Results for that add were: ".print_r($results, true));
         }
         return true;
     }
