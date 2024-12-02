@@ -1064,7 +1064,7 @@
 
           <div class="tab-pane" id="managed-users">
 
-              @include('partials.locations-bulk-actions')
+              @include('partials.users-bulk-actions')
 
 
               <table
@@ -1074,7 +1074,7 @@
                       data-pagination="true"
                       data-id-table="managedUsersTable"
                       data-toolbar="#usersBulkEditToolbar"
-                      data-bulk-button-id="#bulkUsersEditButton"
+                      data-bulk-button-id="#bulkUserEditButton"
                       data-bulk-form-id="#usersBulkForm"
                       data-search="true"
                       data-show-footer="true"
