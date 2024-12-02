@@ -283,6 +283,7 @@ class UsersController extends Controller
                         'autoassign_licenses',
                         'website',
                         'locale',
+                        'notes',
                     ];
 
                 $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
