@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Цей статус розміщено на ньому. Цей медіафайл може бути перевірений.',
     'processing_spinner' => 'Обробка... (Це може зайняти деякий час для великих файлів)',
     'optional_infos'  => 'Додаткова інформація',
-    'order_details'   => 'Пов\'язані відомості про замовлення'
+    'order_details'   => 'Пов\'язані відомості про замовлення',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

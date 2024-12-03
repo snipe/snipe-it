@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'Định danh',
     'require_acceptance'      	=> 'Chấp nhận',
     'title'      				=> 'Tên phụ kiện',
-
-
 );

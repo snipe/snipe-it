@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Ta status se lahko uporabi. To sredstvo je mogoče odjaviti.',
     'processing_spinner' => 'Obdelava (pri velikih datotekah lahko traja nekaj časa)',
     'optional_infos'  => 'Neobvezne informacije',
-    'order_details'   => 'Informacije povezane z naročilom'
+    'order_details'   => 'Informacije povezane z naročilom',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

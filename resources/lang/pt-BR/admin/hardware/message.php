@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Aviso:</strong> Este ativo foi marcado como atualmente não implementável. Se esta situação mudou, por favor, atualize a situação do ativo.',
-    'does_not_exist' 	=> 'O ativo não existe.',
-    'does_not_exist_var'=> 'Ativo com a etiqueta :asset_tag não encontrado.',
-    'no_tag' 	        => 'Nenhuma etiqueta de ativo fornecida.',
+    'undeployable' 		 => '<strong>Aviso:</strong> Este ativo foi marcado como atualmente não implementável. Se esta situação mudou, por favor, atualize a situação do ativo.',
+    'does_not_exist' 	 => 'O ativo não existe.',
+    'does_not_exist_var' => 'Ativo com a etiqueta :asset_tag não encontrado.',
+    'no_tag' 	         => 'Nenhuma etiqueta de ativo fornecida.',
     'does_not_exist_or_not_requestable' => 'Esse ativo não existe ou não pode ser solicitado.',
-    'assoc_users'	 	=> 'Este ativo está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu ativo para que não referencie mais este usuário e tente novamente. ',
+    'assoc_users'	 	 => 'Este ativo está no momento associado com pelo menos um usuário e não pode ser deletado. Por favor, atualize seu ativo para que não referencie mais este usuário e tente novamente. ',
     'warning_audit_date_mismatch' 	=> 'A próxima data de auditoria deste ativo (:next_audit_date) é anterior à última data de auditoria (:last_audit_date). Por favor, atualize a próxima data de auditoria.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'O ativo não foi criado, tente novamente. :(',
         'success' 		=> 'Ativo criado com sucesso. :)',
         'success_linked' => 'O ativo com a tag :tag foi criado com sucesso. <strong><a href=":link" style="color: white;">clique aqui para ver</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +82,11 @@ return [
         'user_does_not_exist' => 'Este usuário é inválido. Tente novamente.',
         'not_available' => 'Esse recurso não está disponível para checkout!',
         'no_assets_selected' => 'Você deve selecionar pelo menos um recurso da lista',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

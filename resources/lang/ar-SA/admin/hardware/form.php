@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'حالة تلك الأصول قابلة للنشر. هذا الأصل يمكن إخراجه.',
     'processing_spinner' => 'معالجة... (قد يستغرق هذا بعض الوقت على ملفات كبيرة)',
     'optional_infos'  => 'معلومات اختيارية',
-    'order_details'   => 'معلومات ذات صلة'
+    'order_details'   => 'معلومات ذات صلة',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

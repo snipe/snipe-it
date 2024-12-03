@@ -14,6 +14,7 @@ use App\Http\Transformers\UsersTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Accessory;
+use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\User;
@@ -282,6 +283,7 @@ class UsersController extends Controller
                         'autoassign_licenses',
                         'website',
                         'locale',
+                        'notes',
                     ];
 
                 $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
@@ -371,6 +373,7 @@ class UsersController extends Controller
 
         $user = new User;
         $user->fill($request->all());
+        $user->company_id = Company::getIdForCurrentUser($request->input('company_id'));
         $user->created_by = auth()->id();
 
         if ($request->has('permissions')) {
@@ -452,6 +455,10 @@ class UsersController extends Controller
 
             $user->fill($request->all());
 
+            if ($request->filled('company_id')) {
+                $user->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+            }
+
             if ($user->id == $request->input('manager_id')) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot be your own manager'));
             }
@@ -474,10 +481,11 @@ class UsersController extends Controller
                 $user->permissions = $permissions_array;
             }
 
-            // Update the location of any assets checked out to this user
-            Asset::where('assigned_type', User::class)
-                ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
-
+            if($request->has('location_id')) {
+                // Update the location of any assets checked out to this user
+                Asset::where('assigned_type', User::class)
+                    ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
+            }
             app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
             if ($user->save()) {

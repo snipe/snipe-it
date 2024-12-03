@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Ten status oznacza możliwość wdrożenia. Ten zasób może zostać przypisany.',
     'processing_spinner' => 'Przetwarzanie... (To może zająć trochę czasu dla dużych plików)',
     'optional_infos'  => 'Informacje opcjonalne',
-    'order_details'   => 'Informacje związane z zamówieniem'
+    'order_details'   => 'Informacje związane z zamówieniem',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];
