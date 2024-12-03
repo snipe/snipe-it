@@ -156,7 +156,14 @@
                                              'none'    => trans('admin/settings/general.none'),
                                         ];
                                     @endphp
-                                    {{ Form::select('label2_1d_type', $select1DValues, old('label2_1d_type', $setting->label2_1d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_1d_type' ]) }}
+                                    <x-input.select
+                                        class="col-md-4"
+                                        name="label2_1d_type"
+                                        id="label2_1d_type"
+                                        :items="$select1DValues"
+                                        :selected="old('label2_1d_type', $setting->label2_1d_type)"
+                                        aria-label="label2_1d_type"
+                                    />
                                     {!! $errors->first('label2_1d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.label2_1d_type_help') }}.
@@ -184,7 +191,14 @@
                                             'none'       => trans('admin/settings/general.none'),
                                         ];
                                     @endphp
-                                    {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
+                                    <x-input.select
+                                        class="col-md-4"
+                                        name="label2_2d_type"
+                                        id="label2_2d_type"
+                                        :items="$select2DValues"
+                                        :selected="old('label2_2d_type', $setting->label2_2d_type)"
+                                        aria-label="label2_2d_type"
+                                    />
                                     {!! $errors->first('label2_2d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.label2_2d_type_help', ['current' => $setting->barcode_type]) }}.
@@ -204,7 +218,14 @@
                                     {{ Form::label('label2_2d_target', trans('admin/settings/general.label2_2d_target'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {{ Form::select('label2_2d_target', ['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')', 'ht_tag'=>'/ht/{asset_tag}'], old('label2_2d_target', $setting->label2_2d_target), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_target' ]) }}
+                                    <x-input.select
+                                        class="col-md-4"
+                                        name="label2_2d_target"
+                                        id="label2_2d_target"
+                                        :items="['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')', 'ht_tag'=>'/ht/{asset_tag}']"
+                                        :selected="old('label2_2d_target', $setting->label2_2d_target)"
+                                        aria-label="label2_2d_target"
+                                    />
                                     {!! $errors->first('label2_2d_target', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                     <p class="help-block">{{ trans('admin/settings/general.label2_2d_target_help') }}</p>
                                 </div>
