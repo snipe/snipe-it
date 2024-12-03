@@ -424,8 +424,12 @@ class LdapSync extends Command
                 $item['note'] = $item['createorupdate'];
                 $item['status'] = 'success';
                 if ($item['createorupdate'] === 'created' && $ldap_default_group) {
-                    $user->groups()->attach($ldap_default_group);
+                 // Check if the relationship already exists
+                if (!$user->groups()->where('group_id', $ldap_default_group)->exists()) {
+                $user->groups()->attach($ldap_default_group);
+                    }
                 }
+                
                 //updates assets location based on user's location
                 Asset::where('assigned_to', '=', $user->id)->update(['location_id' => $user->location_id]);
 
