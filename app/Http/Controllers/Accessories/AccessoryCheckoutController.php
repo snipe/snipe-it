@@ -87,6 +87,7 @@ class AccessoryCheckoutController extends Controller
             $accessory_checkout->created_by = auth()->id();
             $accessory_checkout->save();
         }
+
         event(new CheckoutableCheckedOut($accessory,  $target, auth()->user(), $request->input('note')));
 
         // Set this as user since we only allow checkout to user for this item type
