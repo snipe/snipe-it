@@ -333,7 +333,7 @@
                               data-click-to-select="true"
                               id="accessoriesAssignedListingTable"
                               class="table table-striped snipe-table"
-                              data-url="{{route('api.locations.assigned_accessories', ['location' => $location, 'assigned_to' => $location->id]) }}"
+                              data-url="{{ route('api.locations.assigned_accessories', ['location' => $location]) }}"
                               data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-accessories-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
