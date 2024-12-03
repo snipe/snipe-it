@@ -309,10 +309,10 @@
                   <div class="row">
                     <!-- name -->
     
-                      <div class="col-md-3 col-sm-2">
+                      <div class="col-md-3">
                         {{ trans('admin/users/table.name') }}
                       </div>
-                      <div class="col-md-9 col-sm-2">
+                      <div class="col-md-9">
                         {{ $user->present()->fullName() }}
                       </div>
 
@@ -751,7 +751,7 @@
                            {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
 
                            <a id="optional_info" class="text-primary">
-                               <x-icon type="caret-right" id="optional_info_icon" /></i>
+                               <x-icon type="caret-right" id="optional_info_icon" />
                                <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
                            </a>
                        </div>
@@ -896,7 +896,8 @@
                     }'>
               <thead>
                 <tr>
-                    <th class="col-md-5">{{ trans('general.name') }}</th>
+                    <th class="col-md-1">{{ trans('general.id') }}</th>
+                    <th class="col-md-4">{{ trans('general.name') }}</th>
                     <th class-="col-md-5" data-fieldname="note">{{ trans('general.notes') }}</th>
                     <th class="col-md-1" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                     <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
@@ -905,7 +906,8 @@
               <tbody>
                   @foreach ($user->accessories as $accessory)
                   <tr>
-                    <td>{!!$accessory->present()->nameUrl()!!}</td>
+                      <td>{{ $accessory->pivot->id }}</td>
+                      <td>{!!$accessory->present()->nameUrl()!!}</td>
                       <td>{!! $accessory->pivot->note !!}</td>
                       <td>
                       {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
@@ -1062,7 +1064,7 @@
 
           <div class="tab-pane" id="managed-users">
 
-              @include('partials.locations-bulk-actions')
+              @include('partials.users-bulk-actions')
 
 
               <table
@@ -1072,7 +1074,7 @@
                       data-pagination="true"
                       data-id-table="managedUsersTable"
                       data-toolbar="#usersBulkEditToolbar"
-                      data-bulk-button-id="#bulkUsersEditButton"
+                      data-bulk-button-id="#bulkUserEditButton"
                       data-bulk-form-id="#usersBulkForm"
                       data-search="true"
                       data-show-footer="true"

@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Asset eksisterer ikke.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'Asset eksisterer ikke.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Dette aktiv findes ikke eller er ikke påkrævet.',
-    'assoc_users'	 	=> 'Dette aktiv er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller aktivet først, og prøv derefter at slette igen.',
+    'assoc_users'	 	 => 'Dette aktiv er i øjeblikket tjekket ud til en bruger og kan ikke slettes. Kontroller aktivet først, og prøv derefter at slette igen.',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Akten blev ikke oprettet, prøv igen. :(',
         'success' 		=> 'Aktivet blev oprettet med succes. :)',
         'success_linked' => 'Aktiv med tag :tag blev oprettet. <strong><a href=":link" style="color: white;">Klik her for at se</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +82,11 @@ return [
         'user_does_not_exist' => 'Denne bruger er ugyldig. Prøv igen.',
         'not_available' => 'Det aktiv er ikke tilgængeligt for kassen!',
         'no_assets_selected' => 'Du skal vælge mindst ét aktiv fra listen',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

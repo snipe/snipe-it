@@ -123,7 +123,7 @@
                     {{ $file->created_at }}
                 </td>
                 <td>
-                    {{ $file->created_by }}
+                    {{ ($file->adminuser) ? $file->adminuser->present()->getFullNameAttribute() : '' }}
                 </td>
                 <td>
                     <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route($deletefile_routename, [$object->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">

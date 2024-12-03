@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Zum Einchecken fällig Warnung',
     'due_checkin_days_help' => 'Wie viele Tage vor dem voraussichtlichen Check-in eines Vermögenswerts soll dieser auf der Seite „Zur Eincheckzeit fällig“ aufgeführt werden?',
+    'no_groups' => 'Es wurden noch keine Gruppen erstellt. Navigiere zu <code>Admin-Einstellungen > Berechtigungsgruppen</code>, um eine hinzuzufügen.',
 
 ];

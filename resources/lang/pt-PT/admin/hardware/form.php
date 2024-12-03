@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Este estado é implementável. Este ativo pode ser entregue.',
     'processing_spinner' => 'A processar... (Isto pode levar algum tempo em ficheiros grandes)',
     'optional_infos'  => 'Informação opcional',
-    'order_details'   => 'Informação de estado da encomenda'
+    'order_details'   => 'Informação de estado da encomenda',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

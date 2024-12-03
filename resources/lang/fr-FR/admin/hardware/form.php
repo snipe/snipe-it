@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'L\'actif est déployable. L\'actif peut être affecté.',
     'processing_spinner' => 'Traitement... (Cela peut prendre un peu de temps sur les fichiers volumineux)',
     'optional_infos'  => 'Information facultative',
-    'order_details'   => 'Information liée à l\'achat'
+    'order_details'   => 'Information liée à l\'achat',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

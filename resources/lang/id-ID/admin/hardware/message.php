@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Aset tidak ada.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'Aset tidak ada.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Aset tersebut tidak ada atau tidak dapat di minta.',
-    'assoc_users'	 	=> 'Aset ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek aset terlebih dahulu kemudian coba hapus kembali. ',
+    'assoc_users'	 	 => 'Aset ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek aset terlebih dahulu kemudian coba hapus kembali. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Aset gagal di buat, silahkan coba kembali',
         'success' 		=> 'Sukses membuat aset',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -77,6 +82,11 @@ return [
         'user_does_not_exist' => 'Pengguna tersebut tidak terdaftar. Silahkan coba kembali.',
         'not_available' => 'Aset tersebut tidak tersedia untuk checkout!',
         'no_assets_selected' => 'Anda harus memilih setidaknya satu aset dari daftar',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

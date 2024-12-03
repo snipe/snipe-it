@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Laite on käyttöönotettavissa. Laite voidaan luovuttaa.',
     'processing_spinner' => 'Käsitellään... (Tämä saattaa kestää jonkin aikaa suurien tiedostojen kanssa)',
     'optional_infos'  => 'Valinnaiset tiedot',
-    'order_details'   => 'Tilaukseen liityvät tiedot'
+    'order_details'   => 'Tilaukseen liityvät tiedot',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

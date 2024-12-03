@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'El estado indica que es utilizable. Este activo puede ser asignado.',
     'processing_spinner' => 'Procesando... (Esto puede tomar un poco de tiempo en archivos grandes)',
     'optional_infos'  => 'Información opcional',
-    'order_details'   => 'Información relacionada con el pedido'
+    'order_details'   => 'Información relacionada con el pedido',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

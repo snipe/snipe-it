@@ -105,13 +105,17 @@
                                         class="col-md-12 table table-striped snipe-table">
 
                                     <tr>
-                                        <th class="col-md-6">
+                                        <th>
                                             {{ trans('general.file_name') }}
                                         </th>
-                                        <th class="col-md-3">
+                                        <th>
                                             {{ trans('general.created_at') }}
                                         </th>
-                                        <th class="col-md-1">
+                                        <th>
+                                            {{ trans('general.created_by') }}
+                                        </th>
+
+                                        <th>
                                             {{ trans('general.filesize') }}
                                         </th>
                                         <th class="col-md-1 text-right">
@@ -122,9 +126,10 @@
                                     @foreach($this->files as $currentFile)
 
                                     		<tr style="{{ ($this->activeFile && ($currentFile->id == $this->activeFile->id)) ? 'font-weight: bold' : '' }}" class="{{ ($this->activeFile && ($currentFile->id == $this->activeFile->id)) ? 'warning' : '' }}">
-                                    			<td class="col-md-6">{{ $currentFile->file_path }}</td>
-                                    			<td class="col-md-3">{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
-                                    			<td class="col-md-1">{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
+                                    			<td>{{ $currentFile->file_path }}</td>
+                                    			<td>{{ Helper::getFormattedDateObject($currentFile->created_at, 'datetime', false) }}</td>
+                                                <td>{{ ($currentFile->adminuser) ? $currentFile->adminuser->present()->fullName : '--'}}</td>
+                                    			<td>{{ Helper::formatFilesizeUnits($currentFile->filesize) }}</td>
                                                 <td class="col-md-1 text-right" style="white-space: nowrap;">
                                                     <button class="btn btn-sm btn-info" wire:click="selectFile({{ $currentFile->id }})" data-tooltip="true" title="{{ trans('general.import_this_file') }}">
                                                         <i class="fa-solid fa-list-check" aria-hidden="true"></i>
@@ -132,14 +137,16 @@
                                                     </button>
                                                     <a href="#" wire:click.prevent="$set('activeFileId',null)">
                                                     <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
-                                                        <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
+                                                        <i class="fas fa-trash icon-white" aria-hidden="true"></i>
+                                                        <span class="sr-only">{{ trans('general.delete') }}</span>
+                                                    </button>
                                                     </a>
                                     			</td>
                                     		</tr>
 
                                             @if( $currentFile && $this->activeFile && ($currentFile->id == $this->activeFile->id))
                                                 <tr class="warning">
-                                                    <td colspan="4">
+                                                    <td colspan="5">
 
                                                         <div class="form-group">
 
@@ -147,7 +154,7 @@
                                                                     {{ trans('general.import_type') }}
                                                                 </label>
 
-                                                            <div class="col-md-9 col-xs-12" wire:ignore>
+                                                            <div class="col-md-9 col-xs-12">
                                                                     {{ Form::select('typeOfImport', $importTypes, $typeOfImport, [
                                                                         'id' => 'import_type',
                                                                         'class' => 'livewire-select2',
@@ -170,20 +177,25 @@
                                                                     <input type="checkbox" name="update" data-livewire-component="{{ $this->getId() }}" wire:model.live="update">
                                                                     {{ trans('general.update_existing_values') }}
                                                                 </label>
+
                                                                 @if ($typeOfImport === 'asset' && $snipeSettings->auto_increment_assets == 1 && $update)
                                                                     <p class="help-block">
                                                                         {{ trans('general.auto_incrementing_asset_tags_enabled_so_now_assets_will_be_created') }}
                                                                     </p>
                                                                 @endif
 
+
+
+                                                                @if (($typeOfImport != 'location' && $typeOfImport!= 'assetModel') && ($typeOfImport!=''))
                                                                 <label class="form-control">
                                                                     <input type="checkbox" name="send_welcome" data-livewire-component="{{ $this->getId() }}" wire:model.live="send_welcome">
                                                                     {{ trans('general.send_welcome_email_to_users') }}
                                                                 </label>
+                                                                @endif
 
                                                                 <label class="form-control">
                                                                     <input type="checkbox" name="run_backup" data-livewire-component="{{ $this->getId() }}" wire:model.live="run_backup">
-                                                                    {{ trans('general.back_before_importing') }}
+                                                                   {{ trans('general.back_before_importing') }}
                                                                 </label>
 
                                                             </div>
@@ -225,7 +237,7 @@
                                                                         <div class="form-group col-md-12" wire:key="header-row-{{ $index }}">
 
                                                                             <label for="field_map.{{ $index }}" class="col-md-3 control-label text-right">{{ $header }}</label>
-                                                                            <div class="col-md-4" wire:ignore>
+                                                                            <div class="col-md-4">
 
                                                                                 {{ Form::select('field_map.'.$index, $columnOptions[$typeOfImport], @$field_map[$index],
                                                                                     [

@@ -25,7 +25,7 @@ return [
     'send_email_help'   => 'Devi fornire un indirizzo email all\'utente per inviare loro le credenziali. L\'inoltro delle credenziali via email avviene solo durante la creazione dell\'utente. La password è memorizzata in un hash unidirezionale e non può essere recuperata, una volta salvata.',
     'view_user'         => 'Visualizza Utente :name',
     'usercsv'           => 'CSV file',
-    'two_factor_admin_optin_help' => 'Le impostazioni correnti di amministratore consentono l\'esecuzione selettiva dell\'autenticazione a due fattori.',
+    'two_factor_admin_optin_help' => 'Le impostazioni correnti consentono l\'attivazione selettiva dell\'autenticazione a due fattori.  ',
     'two_factor_enrolled' => 'Dispositivo 2FA Iscritto ',
     'two_factor_active'   => '2FA attivo ',
     'user_deactivated'  => 'L\'utente non può loggarsi',

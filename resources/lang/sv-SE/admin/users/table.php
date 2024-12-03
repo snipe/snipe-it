@@ -36,6 +36,6 @@ return array(
     'username' 				=> 'Användarnamn',
 	'user_deleted_text' 	=> 'Den här användaren har markerats som borttagen.',
     'username_note' 		=> '(Detta används endast för Active Directory-bindning, inte för inloggning.)',
-    'cloneuser'             => 'Klonanvändare',
+    'cloneuser'             => 'Kopiera användare',
     'viewusers' 			=> 'Visa användare',
 );

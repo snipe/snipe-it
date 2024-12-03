@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'הנכס זמין. ניתן לשייך למיקום.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Optional Information',
-    'order_details'   => 'Order Related Information'
+    'order_details'   => 'Order Related Information',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];
