@@ -23,7 +23,6 @@ class AccessoryCheckout extends Model
     use Searchable;
 
     protected $fillable = [
-        'user_id',
         'accessory_id',
         'assigned_to',
         'assigned_type',
@@ -58,7 +57,7 @@ class AccessoryCheckout extends Model
      */
     public function adminuser()
     {
-        return $this->hasOne(\App\Models\User::class, 'user_id');
+        return $this->hasOne(\App\Models\User::class, 'created_by');
     }
 
     /**
