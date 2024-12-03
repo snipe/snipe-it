@@ -161,11 +161,10 @@ class AssetsController extends Controller
                         ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]));
                 }
             }
-            }
+        }
         // this shouldn't happen, but php complains if there's no final return
         return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
             ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
-
     }
 
     /**
