@@ -245,7 +245,7 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $this->authorize('view', $location);
-        $accessory_checkouts = AccessoryCheckout::LocationAssigned()->with('admin')->with('accessories')->where('assigned_to', '=', $location->id);
+        $accessory_checkouts = AccessoryCheckout::LocationAssigned()->with('adminuser')->with('accessories')->where('assigned_to', '=', $location->id);
 
         $offset = ($request->input('offset') > $accessory_checkouts->count()) ? $accessory_checkouts->count() : app('api_offset_value');
         $limit = app('api_limit_value');
