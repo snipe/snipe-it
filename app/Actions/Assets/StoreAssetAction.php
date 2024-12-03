@@ -118,28 +118,26 @@ class StoreAssetAction
             }
         }
 
-        if ($asset->isValid() && $asset->save()) {
-            if (request('assigned_user')) {
-                $target = User::find(request('assigned_user'));
-                // the api doesn't have these location-y bits - good reason?
-                $location = $target->location_id;
-            } elseif (request('assigned_asset')) {
-                $target = Asset::find(request('assigned_asset'));
-                $location = $target->location_id;
-            } elseif (request('assigned_location')) {
-                $target = Location::find(request('assigned_location'));
-                $location = $target->id;
-            }
-
-            if (isset($target)) {
-                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
-            }
-            //this was in api and not gui
-            if ($asset->image) {
-                $asset->image = $asset->getImageUrl();
-            }
-            return $asset;
+        $asset->save();
+        if (request('assigned_user')) {
+            $target = User::find(request('assigned_user'));
+            // the api doesn't have these location-y bits - good reason?
+            $location = $target->location_id;
+        } elseif (request('assigned_asset')) {
+            $target = Asset::find(request('assigned_asset'));
+            $location = $target->location_id;
+        } elseif (request('assigned_location')) {
+            $target = Location::find(request('assigned_location'));
+            $location = $target->id;
         }
-        return false;
+
+        if (isset($target)) {
+            $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
+        }
+        //this was in api and not gui
+        if ($asset->image) {
+            $asset->image = $asset->getImageUrl();
+        }
+        return $asset;
     }
 }

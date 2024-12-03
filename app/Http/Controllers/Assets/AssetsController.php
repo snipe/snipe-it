@@ -109,12 +109,12 @@ class AssetsController extends Controller
     public function store(StoreAssetRequest $request): RedirectResponse
     {
         $successes = [];
+        $failures = [];
         $errors = [];
-        try {
-            $asset_tags = $request->input('asset_tags');
-            $serials = $request->input('serials');
-            //DB::transaction(function () use ($request, $asset_tags, $serials, $custom_fields) {
-            foreach ($asset_tags as $key => $asset_tag) {
+        $asset_tags = $request->input('asset_tags');
+        $serials = $request->input('serials');
+        foreach ($asset_tags as $key => $asset_tag) {
+            try {
                 $asset = StoreAssetAction::run(
                     model_id: $request->validated('model_id'),
                     status_id: $request->validated('status_id'),
@@ -144,22 +144,38 @@ class AssetsController extends Controller
                     next_audit_date: $request->validated('next_audit_date'),
                 );
                 $successes[] = "<a href='".route('hardware.show', ['hardware' => $asset->id])."' style='color: white;'>".e($asset->asset_tag)."</a>";
-                if (!$asset) {
-                    $failures[] = join(",", $asset->getErrors()->all());
+            } catch (ValidationException|CheckoutNotAllowed $e) {
+                $errors[] = $e->getMessage();
+            } catch (Exception $e) {
+                report($e);
+            }
+        }
+        $failures[] = join(",", $errors);
+        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+
+        if ($successes) {
+            if ($failures) {
+                //some succeeded, some failed
+                return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets')) //FIXME - not tested
+                ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]))
+                    ->with('warning', trans_choice('admin/hardware/message.create.partial_failure', $failures, ['failures' => join("; ", $failures)]));
+            } else {
+                if (count($successes) == 1) {
+                    //the most common case, keeping it so we don't have to make every use of that translation string be trans_choice'ed
+                    //and re-translated
+                    return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                        ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
+                } else {
+                    //multi-success
+                    return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                        ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]));
                 }
             }
-            //});
-            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
-            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
-                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
-        } catch (CheckoutNotAllowed $e) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.create.error'));
-        } catch (Exception $e) {
-            report($e);
-            return redirect()->back()->with('error', trans('general.something_went_wrong'));
         }
+        // this shouldn't happen, but php complains if there's no final return
+        return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+            ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
     }
-
 
     /**
      * Returns a view that presents a form to edit an existing asset.

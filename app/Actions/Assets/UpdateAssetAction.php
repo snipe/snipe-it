@@ -194,26 +194,25 @@ class UpdateAssetAction
             self::bulkLocationUpdate($asset, $request);
         }
 
-        if ($asset->save()) {
+        $asset->save();
             // check out stuff
-            $location = Location::find($asset->location_id);
-            if (!is_null($assigned_user) && ($target = User::find($assigned_user))) {
-                $location = $target->location_id;
-            } elseif (!is_null($assigned_asset) && ($target = Asset::find($assigned_asset))) {
-                $location = $target->location_id;
-                Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
-                    ->update(['location_id' => $target->location_id]);
-            } elseif (!is_null($assigned_location) && ($target = Location::find($assigned_location))) {
-                $location = $target->id;
-            }
+        $location = Location::find($asset->location_id);
+        if (!is_null($assigned_user) && ($target = User::find($assigned_user))) {
+            $location = $target->location_id;
+        } elseif (!is_null($assigned_asset) && ($target = Asset::find($assigned_asset))) {
+            $location = $target->location_id;
+            Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
+                ->update(['location_id' => $target->location_id]);
+        } elseif (!is_null($assigned_location) && ($target = Location::find($assigned_location))) {
+            $location = $target->id;
+        }
 
-            if (isset($target)) {
-                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
-            }
+        if (isset($target)) {
+            $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+        }
 
-            if ($asset->image) {
-                $asset->image = $asset->getImageUrl();
-            }
+        if ($asset->image) {
+            $asset->image = $asset->getImageUrl();
         }
 
         return $asset;
