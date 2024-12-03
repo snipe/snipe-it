@@ -102,6 +102,7 @@ class LocationPresenter extends Presenter
                 'titleTooltip' =>  trans('general.people'),
                 'visible' => true,
                 'class' => 'css-house-user',
+                // 'data-tooltip' => true, - not working, but I want to try to use regular tooltips here
             ], [
                 'field' => 'currency',
                 'searchable' => true,
@@ -109,6 +110,7 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' =>  trans('general.currency'),
                 'visible' => true,
+                'class' => 'css-currency',
             ], [
                 'field' => 'address',
                 'searchable' => true,
