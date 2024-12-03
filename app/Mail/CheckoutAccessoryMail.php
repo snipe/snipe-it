@@ -37,7 +37,7 @@ class CheckoutAccessoryMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = new Address(config('mail.from.address'));
+        $from = new Address(config('mail.from.address'), config('mail.from.name'));
 
         return new Envelope(
             from: $from,
