@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\CheckoutRequests\CancelCheckoutRequest;
-use App\Actions\CheckoutRequests\CreateCheckoutRequest;
+use App\Actions\CheckoutRequests\CancelCheckoutRequestAction;
+use App\Actions\CheckoutRequests\CreateCheckoutRequestAction;
 use App\Exceptions\AssetNotRequestable;
 use App\Models\Actionlog;
 use App\Models\Asset;
@@ -16,7 +16,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use \Illuminate\Contracts\View\View;
-use Illuminate\Support\Facades\Log;
+use Exception;
 
 /**
  * This controller handles all actions related to the ability for users
@@ -150,26 +150,26 @@ class ViewAssetsController extends Controller
     public function store(Asset $asset): RedirectResponse
     {
         try {
-            CreateCheckoutRequest::run($asset, auth()->user());
+            CreateCheckoutRequestAction::run($asset, auth()->user());
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
         } catch (AssetNotRequestable $e) {
             return redirect()->back()->with('error', 'Asset is not requestable');
         } catch (AuthorizationException $e) {
             return redirect()->back()->with('error', trans('admin/hardware/message.requests.error'));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
-            return redirect()->back()->with('error', 'Something terrible has gone wrong and we\'re not sure if we can help - may god have mercy on your soul. Contact your admin :)');
+            return redirect()->back()->with('error', trans('general.something_went_wrong'));
         }
     }
 
     public function destroy(Asset $asset): RedirectResponse
     {
         try {
-            CancelCheckoutRequest::run($asset, auth()->user());
+            CancelCheckoutRequestAction::run($asset, auth()->user());
             return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
-            return redirect()->back()->with('error', 'something bad happened');
+            return redirect()->back()->with('error', trans('general.something_went_wrong'));
         }
     }
 

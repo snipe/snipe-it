@@ -2,32 +2,25 @@
 
 namespace App\Actions\CheckoutRequests;
 
-use App\Exceptions\AssetNotRequestable;
-use App\Exceptions\ThereIsNoUser;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\RequestAssetCancelation;
-use App\Notifications\RequestAssetNotification;
 use Illuminate\Auth\Access\AuthorizationException;
-use Log;
 
-class CreateCheckoutRequest
+class CancelCheckoutRequestAction
 {
-    /**
-     * @throws AssetNotRequestable
-     * @throws AuthorizationException
-     */
-    public static function run(Asset $asset, User $user): string
+    public static function run(Asset $asset, User $user)
     {
-        if (is_null(Asset::RequestableAssets()->find($asset->id))) {
-            throw new AssetNotRequestable($asset);
-        }
         if (!Company::isCurrentUserHasAccess($asset)) {
             throw new AuthorizationException();
         }
+
+        $asset->cancelRequest();
+
+        $asset->decrement('requests_counter', 1);
 
         $data['item'] = $asset;
         $data['target'] = $user;
@@ -41,16 +34,15 @@ class CreateCheckoutRequest
         $logaction->target_id = $data['user_id'] = auth()->id();
         $logaction->target_type = User::class;
         $logaction->location_id = $user->location_id ?? null;
-        $logaction->logaction('requested');
+        $logaction->logaction('request canceled');
 
-        $asset->request();
-        $asset->increment('requests_counter', 1);
         try {
-            $settings->notify(new RequestAssetNotification($data));
+            $settings->notify(new RequestAssetCancelation($data));
         } catch (\Exception $e) {
-            Log::warning($e);
+            \Log::warning($e);
         }
 
         return true;
     }
+
 }

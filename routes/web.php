@@ -1,6 +1,5 @@
 <?php
 
-use App\Actions\CheckoutRequests\CreateCheckoutRequest;
 use App\Http\Controllers\Account;
 use App\Http\Controllers\ActionlogController;
 use App\Http\Controllers\CategoriesController;
