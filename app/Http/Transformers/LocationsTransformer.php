@@ -4,6 +4,7 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\Location;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
@@ -80,36 +81,47 @@ class LocationsTransformer
         }
     }
 
+
     public function transformCheckedoutAccessories($accessory_checkouts, $total)
     {
 
         $array = [];
         foreach ($accessory_checkouts as $checkout) {
-            $array = [
-                'id' => $checkout->id,
-                'accessory' => [
-                    'id' => $checkout->accessory->id,
-                    'name' => $checkout->accessory->name,
-                ],
-                'image' => ($checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($checkout->accessory->image)) : null,
-                'note' => $checkout->note ? e($checkout->note) : null,
-                'created_by' => $checkout->adminuser ? [
-                    'id' => (int) $checkout->adminuser->id,
-                    'name'=> e($checkout->adminuser->present()->fullName),
-                ]: null,
-                'created_at' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
-            ];
-
-            $permissions_array['available_actions'] = [
-                'checkout' => Gate::allows('checkout', Accessory::class),
-                'checkin' => Gate::allows('checkin', Accessory::class),
-            ];
-
-            $array += $permissions_array;
+            $array[] = self::transformCheckedoutAccessory($checkout);
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
+
+
+    public function transformCheckedoutAccessory(AccessoryCheckout $accessory_checkout)
+    {
+
+            $array = [
+                'id' => $accessory_checkout->id,
+                'accessory' => [
+                    'id' => $accessory_checkout->accessory->id,
+                    'name' => $accessory_checkout->accessory->name,
+                ],
+                'image' => ($accessory_checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory_checkout->accessory->image)) : null,
+                'note' => $accessory_checkout->note ? e($accessory_checkout->note) : null,
+                'created_by' => $accessory_checkout->adminuser ? [
+                    'id' => (int) $accessory_checkout->adminuser->id,
+                    'name'=> e($accessory_checkout->adminuser->present()->fullName),
+                ]: null,
+                'created_at' => Helper::getFormattedDateObject($accessory_checkout->created_at, 'datetime'),
+            ];
+
+            $permissions_array['available_actions'] = [
+                'checkout' => false,
+                'checkin' => Gate::allows('checkin', Accessory::class),
+            ];
+
+            $array += $permissions_array;
+        return $array;
+    }
+
+
 
     /**
      * This gives a compact view of the location data without any additional relational queries,
