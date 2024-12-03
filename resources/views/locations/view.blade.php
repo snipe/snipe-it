@@ -135,22 +135,20 @@
                               <a href="#components" data-toggle="tab" data-tooltip="true" title="{{ trans('general.components') }}">
                                   <i class="fas fa-hdd" style="font-size: 17px" aria-hidden="true"></i>
                                   <span class="badge">
-                              {{ number_format($location->components->count()) }}
-                          </span>
+                                    {{ number_format($location->components->count()) }}
+                                  </span>
                                   <span class="sr-only">
-                              {{ trans('general.components') }}
-                          </span>
+                                    {{ trans('general.components') }}
+                                  </span>
                               </a>
                           </li>
                       @endif
                   @endcan
               
               <li>
-                  <a href="#history" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <x-icon type="history" class="fa-2x "/>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  <a href="#history" data-toggle="tab" data-toggle="tab" data-tooltip="true" title="{{ trans('general.history') }}">
+                      <i class="fa-solid fa-clock-rotate-left" style="font-size: 17px" aria-hidden="true"></i>
+                      <span class="sr-only">
                           {{ trans('general.history') }}
                     </span>
                   </a>
