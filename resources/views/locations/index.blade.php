@@ -32,7 +32,6 @@
                   data-bulk-button-id="#bulkLocationsEditButton"
                   data-bulk-form-id="#locationsBulkForm"
                   data-search="true"
-                  data-show-footer="true"
                   data-side-pagination="server"
                   data-show-columns="true"
                   data-show-fullscreen="true"
