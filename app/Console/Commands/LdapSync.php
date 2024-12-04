@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Asset;
+use App\Models\Company;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Console\Command;
@@ -65,6 +65,7 @@ class LdapSync extends Command
             "phone" => Setting::getSettings()->ldap_phone_field,
             "jobtitle" => Setting::getSettings()->ldap_jobtitle,
             "country" => Setting::getSettings()->ldap_country,
+            "company" => Setting::getSettings()->ldap_company,
             "location" => Setting::getSettings()->ldap_location,
             "dept" => Setting::getSettings()->ldap_dept,
             "manager" => Setting::getSettings()->ldap_manager,
@@ -245,12 +246,18 @@ class LdapSync extends Command
             $item['department'] = $results[$i][$ldap_map["dept"]][0] ?? '';
             $item['manager'] = $results[$i][$ldap_map["manager"]][0] ?? '';
             $item['location'] = $results[$i][$ldap_map["location"]][0] ?? '';
+            $item['company'] = $results[$i][$ldap_map["company"]][0] ?? '';
             $location = $default_location; //initially, set '$location' to the default_location (which may just be `null`)
 
             // ONLY if you are using the "ldap_location" option *AND* you have an actual result
             if ($ldap_map["location"] && $item['location']) {
                 $location = Location::firstOrCreate([
                     'name' => $item['location'],
+                ]);
+            }
+            if ($ldap_map["company"] && $item['company']) {
+                $company = Company::firstOrCreate([
+                    'name' => $item['company'],
                 ]);
             }
             $department = Department::firstOrCreate([
@@ -301,6 +308,9 @@ class LdapSync extends Command
             if($ldap_map["location"] != null){
                 $user->location_id = $location?->id;
             }
+            if($ldap_map["company"] != null){
+                $user->company_id = $company ? $company->id : null;
+            }
 
             if($ldap_map["manager"] != null){
                 if($item['manager'] != null) {
@@ -323,7 +333,7 @@ class LdapSync extends Command
                                 ]
                             ];
                         }
-                        
+
                         $add_manager_to_cache = true;
                         if ($ldap_manager["count"] > 0) {
                             try {

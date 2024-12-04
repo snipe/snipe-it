@@ -268,14 +268,14 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('admin')
                                 @if ($snipeSettings->show_alerts_in_menu=='1')
                                     <!-- Tasks: style can be found in dropdown.less -->
-                                    <?php $alert_items = Helper::checkLowInventory(); $deprecations = Helper::deprecationCheck()?>
+                                    <?php $alert_items = Helper::checkLowInventory(); $deprecations = Helper::deprecationCheck(); $company_items = Helper::checkUserCompanyAssets();?>
 
                                     <li class="dropdown tasks-menu">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <x-icon type="alerts" />
                                             <span class="sr-only">{{ trans('general.alerts') }}</span>
-                                            @if (count($alert_items) || count($deprecations))
-                                                <span class="label label-danger">{{ count($alert_items) + count($deprecations) }}</span>
+                                            @if (count($alert_items) || count($deprecations) || count($company_items) )
+                                                <span class="label label-danger">{{ count($alert_items) + count($deprecations) + count($company_items) }}</span>
                                             @endif
                                         </a>
                                         <ul class="dropdown-menu">
@@ -285,6 +285,12 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                                         <li class="header alert-warning">{!! $deprecation['message'] !!}</li>
                                                     @endif
                                                 @endforeach
+                                            @endif
+                                            @if(!empty($alert_items))
+                                                    <li class="header">{{ trans('general.quantity_minimum', array('count' => count($alert_items))) }}</li>
+                                                @endif
+                                                @if(empty($alert_items) && empty($company_items))
+                                                    <li class="header">{{ trans('general.notifications_clear') }}</li>
                                             @endif
                                             <li class="header">{{ trans_choice('general.quantity_minimum', count($alert_items)) }}</li>
                                             <li>
@@ -318,6 +324,32 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                             {{-- <li class="footer">
                                               <a href="#">{{ trans('general.tasks_view_all') }}</a>
                                             </li> --}}
+                                            @if(!empty($company_items))
+                                            <li class="header">{{ trans('general.company_check', array('count' => count($company_items))) }}</li>
+                                            @endif
+                                            <li>
+                                                <!-- inner menu: contains the actual data -->
+                                                <ul class="menu">
+
+                                                    @for($i = 0; count($company_items) > $i; $i++)
+
+                                                        <li><!-- Task item -->
+                                                            <a href="{{route($company_items[$i]['type'].'.show', $company_items[$i]['id'])}}">
+                                                               <div style="white-space: nowrap; overflow: hidden;"> <h2 class="task_menu">{{$company_items[$i]['company'].": ".$company_items[$i]['name']}}
+                                                                    <div style="clear:both;">
+                                                                    <small>{{trans('general.assigned_to', array('name' => $company_items[$i]['user'])) }}</small>
+                                                                    </div>
+                                                                    <div style="clear:both;">
+                                                                        <small  class="pull-left">({{$company_items[$i]['user_company']}}) </small>
+                                                                    </div>
+                                                                </h2>
+                                                               </div>
+                                                            </a>
+                                                        </li>
+                                                        <!-- end task item -->
+                                                    @endfor
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endcan
@@ -872,7 +904,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 <div class="1hidden-xs pull-left">
                     <div class="pull-left" >
                         <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <x-icon type="heart" style="color: #a94442; font-size: 10px" />
-                            <span class="sr-only">love</span> by <a href="https://bsky.app/profile/snipeitapp.com" rel="noopener">@snipeitapp</a>.
+                            <span class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
                     </div>
                     <div class="pull-right">
                     @if ($snipeSettings->version_footer!='off')
