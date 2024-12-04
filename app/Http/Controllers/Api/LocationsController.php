@@ -232,7 +232,17 @@ class LocationsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, $location->getErrors()));
     }
 
+
     public function assets(Request $request, Location $location) : JsonResponse | array
+    {
+        $this->authorize('view', Asset::class);
+        $this->authorize('view', $location);
+        $assets = Asset::where('location_id', '=', $location->id)->with('model', 'model.category', 'assetstatus', 'location', 'company', 'defaultLoc');
+        $assets = $assets->get();
+        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+    }
+
+    public function assignedAssets(Request $request, Location $location) : JsonResponse | array
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', $location);
