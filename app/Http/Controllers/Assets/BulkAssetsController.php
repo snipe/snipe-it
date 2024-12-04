@@ -52,10 +52,6 @@ class BulkAssetsController extends Controller
         }
 
         $asset_ids = $request->input('ids');
-        if ($request->input('bulk_actions') === 'checkout') {
-            $request->session()->flashInput(['selected_assets' => $asset_ids]);
-            return redirect()->route('hardware.bulkcheckout.show');
-        }
 
         // Figure out where we need to send the user after the update is complete, and store that in the session
         $bulk_back_url = request()->headers->get('referer');
@@ -151,6 +147,20 @@ class BulkAssetsController extends Controller
                         ->with('statuslabel_list', Helper::statusLabelList())
                         ->with('models', $models->pluck(['model']))
                         ->with('modelNames', $modelNames);
+
+                case 'checkin':
+                    $this->authorize('checkin', Asset::class);
+
+                    return view('hardware/quickscan-checkin')
+                        ->with('assets', $assets)
+                        ->with('statusLabel_list', Helper::statusLabelList());
+
+                case 'checkout':
+                    $this->authorize('checkout', Asset::class);
+
+                    return view('hardware/bulk-checkout')
+                        ->with('assets', $assets)
+                        ->with('statusLabel_list', Helper::deployableStatusLabelList());
             }
         }
 
@@ -172,6 +182,7 @@ class BulkAssetsController extends Controller
                 break;
             case 'location':
                 $assets->OrderLocation($order);
+                break;
             case 'rtd_location':
                 $assets->OrderRtdLocation($order);
                 break;
@@ -618,7 +629,7 @@ class BulkAssetsController extends Controller
             // Redirect to the asset management page with error
             return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans_choice('admin/hardware/message.multi-checkout.error', $asset_ids))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
-            return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
+            return redirect()->route('hardware.bulkcheckout.show')->with('error', trans('admin/hardware/message.update.assets_do_not_exist_or_are_invalid'));
         }
         
     }
