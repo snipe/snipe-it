@@ -9,7 +9,9 @@ use App\Http\Transformers\AssetsTransformer;
 use App\Http\Transformers\LocationsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Asset;
+use App\Models\Company;
 use App\Models\Location;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
@@ -48,6 +50,7 @@ class LocationsController extends Controller
             'rtd_assets_count',
             'currency',
             'ldap_ou',
+            'company_id',
             ];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
@@ -68,11 +71,17 @@ class LocationsController extends Controller
             'locations.image',
             'locations.ldap_ou',
             'locations.currency',
+            'locations.company_id',
         ])->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
             ->withCount('rtd_assets as rtd_assets_count')
             ->withCount('children as children_count')
             ->withCount('users as users_count');
+
+        // Only scope locations if the setting is enabled
+        if (Setting::getSettings()->scope_locations_fmcs) {
+            $locations = Company::scopeCompanyables($locations);
+        }
 
         if ($request->filled('search')) {
             $locations = $locations->TextSearch($request->input('search'));
@@ -106,6 +115,10 @@ class LocationsController extends Controller
             $locations->where('locations.manager_id', '=', $request->input('manager_id'));
         }
 
+        if ($request->filled('company_id')) {
+            $locations->where('locations.company_id', '=', $request->input('company_id'));
+        }
+
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $locations->count()) ? $locations->count() : app('api_offset_value');
         $limit = app('api_limit_value');
@@ -121,6 +134,9 @@ class LocationsController extends Controller
                 break;
             case 'manager':
                 $locations->OrderManager($order);
+                break;
+            case 'company':
+                $locations->OrderCompany($order);
                 break;
             default:
                 $locations->orderBy($sort, $order);
@@ -149,6 +165,11 @@ class LocationsController extends Controller
         $location->fill($request->all());
         $location = $request->handleImages($location);
 
+        // Only scope location if the setting is enabled
+        if (Setting::getSettings()->scope_locations_fmcs) {
+            $location->company_id = Company::getIdForCurrentUser($request->get('company_id'));
+        }
+
         if ($location->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', (new LocationsTransformer)->transformLocation($location), trans('admin/locations/message.create.success')));
         }
@@ -166,7 +187,7 @@ class LocationsController extends Controller
     public function show($id) : JsonResponse | array
     {
         $this->authorize('view', Location::class);
-        $location = Location::with('parent', 'manager', 'children')
+        $location = Location::with('parent', 'manager', 'children', 'company')
             ->select([
                 'locations.id',
                 'locations.name',
@@ -208,6 +229,15 @@ class LocationsController extends Controller
 
         $location->fill($request->all());
         $location = $request->handleImages($location);
+
+        if ($request->filled('company_id')) {
+            // Only scope location if the setting is enabled
+            if (Setting::getSettings()->scope_locations_fmcs) {
+                $location->company_id = Company::getIdForCurrentUser($request->get('company_id'));
+            } else {
+                $location->company_id = $request->get('company_id');
+            }
+        }
 
         if ($location->isValid()) {
 
@@ -304,6 +334,11 @@ class LocationsController extends Controller
             'locations.parent_id',
             'locations.image',
         ]);
+
+        // Only scope locations if the setting is enabled
+        if (Setting::getSettings()->scope_locations_fmcs) {
+            $locations = Company::scopeCompanyables($locations);
+        }
 
         $page = 1;
         if ($request->filled('page')) {
