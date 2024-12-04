@@ -244,7 +244,7 @@
                               data-click-to-select="true"
                               id="assetsListingTable"
                               class="table table-striped snipe-table"
-                              data-url="{{route('api.assets.index', ['assigned_to' => $location->id, 'assigned_type' => \App\Models\Location::class]) }}"
+                              data-url="{{route('api.locations.assigned_assets', ['location' => $location]) }}"
                               data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
