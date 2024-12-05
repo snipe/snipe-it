@@ -115,7 +115,6 @@ class AssetsController extends Controller
                     asset_tag: $asset_tag,
                     order_number: $request->validated('order_number'),
                     notes: $request->validated('notes'),
-                    user_id: $request->validated('user_id'),
                     warranty_months: $request->validated('warranty_months'),
                     purchase_cost: $request->validated('purchase_cost'),
                     asset_eol_date: $request->validated('asset_eol_date'),
@@ -125,7 +124,6 @@ class AssetsController extends Controller
                     requestable: $request->validated('requestable'),
                     rtd_location_id: $request->validated('rtd_location_id'),
                     location_id: $request->validated('location_id'),
-                    files: $request->validated('files'),
                     byod: $request->validated('byod'),
                     assigned_user: $request->validated('assigned_user'),
                     assigned_asset: $request->validated('assigned_asset'),
@@ -274,6 +272,7 @@ class AssetsController extends Controller
                 asset_tag: $asset_tag, // same as serials
                 notes: $request->validated('notes'),
             );
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
             return redirect()->to(Helper::getRedirectOption($request, $updatedAsset->id, 'Assets'))
                 ->with('success', trans('admin/hardware/message.update.success'));
         } catch (ValidationException $e) {

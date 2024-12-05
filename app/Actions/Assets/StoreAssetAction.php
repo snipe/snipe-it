@@ -9,12 +9,11 @@ use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Location;
 use App\Models\Setting;
+use App\Models\SnipeModel;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\MessageBag;
 
 class StoreAssetAction
 {
@@ -31,7 +30,6 @@ class StoreAssetAction
         $asset_tag = null,
         $order_number = null,
         $notes = null,
-        $user_id = null,
         $warranty_months = null,
         $purchase_cost = null,
         $asset_eol_date = null,
@@ -40,8 +38,7 @@ class StoreAssetAction
         $supplier_id = null,
         $requestable = null,
         $rtd_location_id = null,
-        $location_id = null, //do something with this
-        $files = null,
+        $location_id = null,
         $byod = 0,
         $assigned_user = null,
         $assigned_asset = null,
@@ -87,17 +84,43 @@ class StoreAssetAction
             $asset->location_id = $rtd_location_id;
         }
 
-        //api only
-        if ($request->has('image_source')) {
-            $request->offsetSet('image', $request->offsetGet('image_source'));
-        }
-
-        if ($request->has('image')) {
-            $asset = $request->handleImages($asset);
-        }
+        $asset = self::handleImages($request, $asset);
 
         $model = AssetModel::find($model_id);
 
+        self::handleCustomFields($model, $request, $asset);
+
+        $asset->save();
+        if (request('assigned_user')) {
+            $target = User::find(request('assigned_user'));
+            // the api doesn't have these location-y bits - good reason?
+            $location = $target->location_id;
+        } elseif (request('assigned_asset')) {
+            $target = Asset::find(request('assigned_asset'));
+            $location = $target->location_id;
+        } elseif (request('assigned_location')) {
+            $target = Location::find(request('assigned_location'));
+            $location = $target->id;
+        }
+
+        if (isset($target)) {
+            self::handleCheckout($target, $asset, $request, $location);
+        }
+        //this was in api and not gui
+        if ($asset->image) {
+            $asset->image = $asset->getImageUrl();
+        }
+        return $asset;
+    }
+
+    /**
+     * @param  $model
+     * @param  ImageUploadRequest  $request
+     * @param  Asset|\App\Models\SnipeModel  $asset
+     * @return void
+     */
+    private static function handleCustomFields($model, ImageUploadRequest $request, $asset): void
+    {
         if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
                 if ($field->field_encrypted == '1') {
@@ -117,27 +140,23 @@ class StoreAssetAction
                 }
             }
         }
+    }
 
-        $asset->save();
-        if (request('assigned_user')) {
-            $target = User::find(request('assigned_user'));
-            // the api doesn't have these location-y bits - good reason?
-            $location = $target->location_id;
-        } elseif (request('assigned_asset')) {
-            $target = Asset::find(request('assigned_asset'));
-            $location = $target->location_id;
-        } elseif (request('assigned_location')) {
-            $target = Location::find(request('assigned_location'));
-            $location = $target->id;
+    private static function handleImages($request, $asset)
+    {
+        //api
+        if ($request->has('image_source')) {
+            $request->offsetSet('image', $request->offsetGet('image_source'));
         }
 
-        if (isset($target)) {
-            $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
-        }
-        //this was in api and not gui
-        if ($asset->image) {
-            $asset->image = $asset->getImageUrl();
+        if ($request->has('image')) {
+            $asset = $request->handleImages($asset);
         }
         return $asset;
+    }
+
+    private static function handleCheckout($target, $asset, $request, $location): void
+    {
+            $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Assets;
 
-use App\Actions\Assets\StoreAssetAction;
 use App\Actions\Assets\UpdateAssetAction;
 use App\Exceptions\CustomFieldPermissionException;
 use App\Helpers\Helper;
@@ -241,11 +240,9 @@ class BulkAssetsController extends Controller
                     order_number: $request->input('order_number'),
                     isBulk: true,
                 );
-                // catch exceptions
             } catch (ValidationException $e) {
                 $errors = $e->validator->errors()->toArray();
             } catch (CustomFieldPermissionException $e) {
-                //$errors[$key] = $e->getMessage();
                 $custom_field_problem = true;
             } catch (\Exception $e) {
                 report($e);

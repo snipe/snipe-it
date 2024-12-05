@@ -86,7 +86,7 @@ class UpdateAssetTest extends TestCase
         $this->assertEquals('random_string', $updatedAsset->asset_tag);
         $this->assertEquals($userAssigned->id, $updatedAsset->assigned_to);
         $this->assertTrue($updatedAsset->company->is($company));
-        $this->assertTrue($updatedAsset->location->is($location)); //fix all location setting
+        $this->assertTrue($updatedAsset->location->is($location));
         $this->assertTrue($updatedAsset->model->is($model));
         $this->assertEquals('A New Asset', $updatedAsset->name);
         $this->assertEquals('Some notes', $updatedAsset->notes);

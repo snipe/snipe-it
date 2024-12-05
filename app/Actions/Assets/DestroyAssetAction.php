@@ -7,6 +7,8 @@ use App\Models\Asset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Exception;
+
 
 class DestroyAssetAction
 {
@@ -27,7 +29,7 @@ class DestroyAssetAction
         if ($asset->image) {
             try {
                 Storage::disk('public')->delete('assets'.'/'.$asset->image);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 Log::debug($e);
             }
         }

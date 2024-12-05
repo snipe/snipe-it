@@ -30,7 +30,6 @@ class UpdateAssetRequest extends ImageUploadRequest
     public function rules()
     {
         $modelRules = (new Asset)->getRules();
-        // TODO: make sure this actually works
         if ((Setting::getSettings()->digit_separator === '1.234,56' || '1,234.56') && is_string($this->input('purchase_cost'))) {
             // If purchase_cost was submitted as a string with a comma separator
             // then we need to ignore the normal numeric rules.

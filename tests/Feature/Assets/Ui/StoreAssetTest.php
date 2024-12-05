@@ -12,7 +12,6 @@ use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
-use function Amp\Promise\wait;
 
 class StoreAssetTest extends TestCase
 {

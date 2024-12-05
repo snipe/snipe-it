@@ -10,6 +10,7 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Location;
+use App\Models\SnipeModel;
 use App\Models\Statuslabel;
 use App\Models\User;
 use Carbon\Carbon;
@@ -53,7 +54,8 @@ class UpdateAssetAction
         $asset_tag = null,
         $notes = null,
         $isBulk = false,
-    ): \App\Models\SnipeModel {
+    ): SnipeModel
+    {
 
         $asset->status_id = $status_id ?? $asset->status_id;
         $asset->warranty_months = $warranty_months ?? $asset->warranty_months;
@@ -165,30 +167,7 @@ class UpdateAssetAction
 
         $asset = $request->handleImages($asset);
 
-        $model = $asset->model;
-        if (($model) && (isset($model->fieldset))) {
-            foreach ($model->fieldset->fields as $field) {
-                $field_val = $request->input($field->db_column, null);
-
-                if ($request->has($field->db_column)) {
-                    if ($field->element == 'checkbox') {
-                        if (is_array($field_val)) {
-                            $field_val = implode(',', $field_val);
-                        }
-                    }
-                    if ($field->field_encrypted == '1') {
-                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
-                            $field_val = Crypt::encrypt($field_val);
-                        } else {
-                            throw new CustomFieldPermissionException();
-                        }
-                    }
-                    $asset->{$field->db_column} = $field_val;
-                }
-            }
-        }
-
-        session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+        self::handleCustomFields($request, $asset);
 
         if ($isBulk) {
             self::bulkLocationUpdate($asset, $request);
@@ -208,7 +187,7 @@ class UpdateAssetAction
         }
 
         if (isset($target)) {
-            $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+            self::handleCheckout($asset, $target, $request, $location);
         }
 
         if ($asset->image) {
@@ -245,5 +224,36 @@ class UpdateAssetAction
             }
         }
 
+    }
+
+    private static function handleCustomFields($request, $asset): void
+    {
+        $model = $asset->model;
+        if (($model) && (isset($model->fieldset))) {
+            foreach ($model->fieldset->fields as $field) {
+                $field_val = $request->input($field->db_column, null);
+
+                if ($request->has($field->db_column)) {
+                    if ($field->element == 'checkbox') {
+                        if (is_array($field_val)) {
+                            $field_val = implode(',', $field_val);
+                        }
+                    }
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                            $field_val = Crypt::encrypt($field_val);
+                        } else {
+                            throw new CustomFieldPermissionException();
+                        }
+                    }
+                    $asset->{$field->db_column} = $field_val;
+                }
+            }
+        }
+    }
+
+    private static function handleCheckout($asset, $target, $request, $location): void
+    {
+        $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
     }
 }
