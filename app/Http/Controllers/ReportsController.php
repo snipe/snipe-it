@@ -1162,7 +1162,7 @@ class ReportsController extends Controller
                 Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $logItem->note, $acceptance)));
             }
 
-        if ($assetItem->assignedTo?->email == ''){
+        if ($email == ''){
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.no_email'));
         }
 
