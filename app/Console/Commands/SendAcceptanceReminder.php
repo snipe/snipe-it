@@ -65,14 +65,15 @@ class SendAcceptanceReminder extends Command
                 return $item['acceptance']->assignedTo ? $item['acceptance']->assignedTo->id : '';
             });
 
-        $no_mail_address = [];
-
         foreach($unacceptedAssetGroups as $unacceptedAssetGroup) {
             // The [0] is weird, but it allows for the item_count to work and grabs the appropriate info for each user.
             // Collapsing and flattening the collection doesn't work above.
             $acceptance = $unacceptedAssetGroup[0]['acceptance'];
             $locale = $acceptance->assignedTo?->locale;
             $email = $acceptance->assignedTo?->email;
+            if(!$email){
+                $this->info($acceptance->assignedTo->present()->fullName().' has no email address.');
+            }
             $item_count = $unacceptedAssetGroup->count();
 
             if ($locale && $email) {
@@ -84,12 +85,9 @@ class SendAcceptanceReminder extends Command
             $count++;
         }
 
-        if (!empty($no_mail_address)) {
-            foreach($no_mail_address as $user) {
-                return $user.' has no email.';
-            }
-        }
-
         $this->info($count.' users notified.');
+
+        return 0;
     }
+
 }
