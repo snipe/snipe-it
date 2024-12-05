@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\UnacceptedAssetReminderMail;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Setting;
@@ -78,12 +79,12 @@ class SendAcceptanceReminder extends Command
                     if (!$unacceptedAsset['acceptance']->assignedTo->locale) {
                         Notification::locale(Setting::getSettings()->locale)->send(
                             $unacceptedAsset['acceptance']->assignedTo,
-                            new UnacceptedAssetReminderNotification($unacceptedAsset['assetItem'], $count)
+                            new UnacceptedAssetReminderMail($unacceptedAsset['assetItem'], $count)
                         );
                     } else {
                         Notification::send(
                             $unacceptedAsset['acceptance']->assignedTo,
-                            new UnacceptedAssetReminderNotification($unacceptedAsset, $item_count)
+                            new UnacceptedAssetReminderMail($unacceptedAsset, $item_count)
                         );
                     }
                     $count++;
