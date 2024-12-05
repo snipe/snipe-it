@@ -68,16 +68,17 @@ class SendAcceptanceReminder extends Command
         $no_mail_address = [];
 
         foreach($unacceptedAssetGroups as $unacceptedAssetGroup) {
-
-            $locale = $unacceptedAssetGroup[0]['acceptance']->assignedTo?->locale;
-            $email = $unacceptedAssetGroup[0]['acceptance']->assignedTo?->email;
+            //the [0] is weird, but it allows for the item_count to work and grabs the appropriate info for each user. collapsing and flattening the query doesn't work above.
+            $acceptance = $unacceptedAssetGroup[0]['acceptance'];
+            $locale = $acceptance->assignedTo?->locale;
+            $email = $acceptance->assignedTo?->email;
             $item_count = $unacceptedAssetGroup->count();
 
             if ($locale && $email) {
-                Mail::to($email)->send((new UnacceptedAssetReminderMail($unacceptedAssetGroup[0]['acceptance'], $item_count))->locale($locale));
+                Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count))->locale($locale));
 
             } elseif ($email) {
-                Mail::to($email)->send((new UnacceptedAssetReminderMail($unacceptedAssetGroup[0]['acceptance'], $item_count)));
+                Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count)));
             }
             $count++;
         }
