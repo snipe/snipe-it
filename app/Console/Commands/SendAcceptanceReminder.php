@@ -68,7 +68,8 @@ class SendAcceptanceReminder extends Command
         $no_mail_address = [];
 
         foreach($unacceptedAssetGroups as $unacceptedAssetGroup) {
-            //the [0] is weird, but it allows for the item_count to work and grabs the appropriate info for each user. collapsing and flattening the query doesn't work above.
+            // The [0] is weird, but it allows for the item_count to work and grabs the appropriate info for each user.
+            // Collapsing and flattening the collection doesn't work above.
             $acceptance = $unacceptedAssetGroup[0]['acceptance'];
             $locale = $acceptance->assignedTo?->locale;
             $email = $acceptance->assignedTo?->email;
