@@ -20,7 +20,7 @@ class UnacceptedAssetReminderMail extends Mailable
     public function __construct($checkout_info, $count)
     {
         $this->count = $count;
-        $this->target = $checkout_info['acceptance']->assignedTo;
+        $this->target = $checkout_info['acceptance']?->assignedTo;
         $this->acceptance = $checkout_info['acceptance'];
     }
 
@@ -48,7 +48,7 @@ class UnacceptedAssetReminderMail extends Mailable
             markdown: 'notifications.markdown.asset-reminder',
             with: [
                 'count'        => $this->count,
-                'assigned_to'  => $this->target->present()->fullName,
+                'assigned_to'  => $this->target?->present()->fullName,
                 'link'         => route('account.accept'),
                 'accept_url'   => $accept_url,
             ]
