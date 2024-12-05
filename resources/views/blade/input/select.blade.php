@@ -2,10 +2,12 @@
     'items',
     'selected' => null,
     'includeEmpty' => false,
+    'forLivewire' => false,
 ])
 
 <select
-    {{ $attributes->merge(['class' => 'select2']) }}
+    {{ $attributes->class(['select2', 'livewire-select2' => $forLivewire]) }}
+    @if ($forLivewire) data-livewire-component="{{ $this->getId() }}" @endif
 >
     @if($includeEmpty)
         <option value="" selected="selected"></option>

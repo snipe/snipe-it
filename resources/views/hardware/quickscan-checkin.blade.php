@@ -16,7 +16,7 @@
         }
     </style>
 
-    
+
 
     <div class="row">
     {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'checkin-form' ]) }}
@@ -47,7 +47,13 @@
                             {{ trans('admin/hardware/form.status') }}
                         </label>
                         <div class="col-md-7">
-                            {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','', 'aria-label'=>'status_id')) }}
+                            <x-input.select
+                                name="status_id"
+                                id="status_id"
+                                :items="$statusLabel_list"
+                                aria-label="status_id"
+                                style="width:100%"
+                            />
                             {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                         </div>
                     </div>
@@ -63,8 +69,8 @@
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
-    
-    
+
+
 
                 </div> <!--/.box-body-->
                 <div class="box-footer">
@@ -87,7 +93,7 @@
                     <h2 class="box-title"> {{ trans('general.quickscan_checkin_status') }} (<span id="checkin-counter">0</span> {{ trans('general.assets_checked_in_count') }}) </h2>
                 </div>
                 <div class="box-body">
-    
+
                     <table id="checkedin" class="table table-striped snipe-table">
                         <thead>
                         <tr>
