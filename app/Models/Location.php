@@ -253,6 +253,16 @@ class Location extends SnipeModel
         return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
+    public function assignedAccessories()
+    {
+        return $this->morphToMany(
+            Accessory::class,
+            'assigned', //ok, closer?
+            'accessories_checkout', //correct!
+            'assigned_to',
+        )->withTrashed(); // TODO - do we need pivot values here? If so, consider: "->withPivot('id', 'created_at', 'note')"
+    }
+
     public function setLdapOuAttribute($ldap_ou)
     {
         return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
