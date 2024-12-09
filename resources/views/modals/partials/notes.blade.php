@@ -1,7 +1,7 @@
 <!-- partials/modals/partials/notes.blade.php -->
 <div class="dynamic-form-row">
     <div class="col-md-4 col-xs-12">
-        <label for="modal-notes">{{ trans('admin/hardware/form.notes') }}:</label>
+        <label for="modal-notes">{{ trans('admin/hardware/form.notes') }}</label>
     </div>
     <div class="col-md-8 col-xs-12">
         <textarea

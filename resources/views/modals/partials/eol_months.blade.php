@@ -1,7 +1,7 @@
 <!-- partials/modals/partials/eol_months.blade.php -->
 <div class="dynamic-form-row">
     <div class="col-md-4 col-xs-12">
-        <label for="eol">{{ trans('general.eol') }}:</label>
+        <label for="eol">{{ trans('general.eol') }}</label>
     </div>
     <div class="col-md-5 col-xs-12">
         <div class="input-group" style="width: 100%;">

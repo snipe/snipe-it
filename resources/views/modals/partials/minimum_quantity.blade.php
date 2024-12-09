@@ -1,7 +1,7 @@
 <!-- partials/modals/partials/minimum-quantity.blade.php -->
 <div class="dynamic-form-row">
     <div class="col-md-4 col-xs-12">
-        <label for="modal-min_amt">{{ trans('general.min_amt') }}:</label>
+        <label for="modal-min_amt">{{ trans('general.min_amt') }}</label>
     </div>
     <div class="col-md-3 col-xs-12">
         <div class="dynamic-input-group" style="display: flex; align-items: center;">
