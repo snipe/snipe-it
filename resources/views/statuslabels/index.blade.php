@@ -22,8 +22,6 @@
   <div class="col-md-9">
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
-
             <table
                     data-columns="{{ \App\Presenters\StatusLabelPresenter::dataTableLayout() }}"
                     data-cookie-id-table="statuslabelsTable"
@@ -46,7 +44,6 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
           </table>
-        </div>
       </div>
     </div>
   </div>
