@@ -14,6 +14,7 @@ use App\Models\CheckoutAcceptance;
 use App\Models\CustomField;
 use App\Models\Depreciation;
 use App\Models\License;
+use App\Models\ReportTemplate;
 use App\Models\Setting;
 use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
@@ -394,12 +395,27 @@ class ReportsController extends Controller
     * @see ReportsController::postCustomReport() method that generates the CSV
     * @since [v1.0]
     */
-    public function getCustomReport() : View
+    public function getCustomReport(Request $request) : View
     {
         $this->authorize('reports.view');
         $customfields = CustomField::get();
+        $report_templates = ReportTemplate::orderBy('name')->get();
 
-        return view('reports/custom')->with('customfields', $customfields);
+        // The view needs a template to render correctly, even if it is empty...
+        $template = new ReportTemplate;
+
+        // Set the report's input values in the cases we were redirected back
+        // with validation errors so the report is populated as expected.
+        if ($request->old()) {
+            $template->name = $request->old('name');
+            $template->options = $request->old();
+        }
+
+        return view('reports/custom', [
+            'customfields' => $customfields,
+            'report_templates' => $report_templates,
+            'template' => $template,
+        ]);
     }
 
     /**
