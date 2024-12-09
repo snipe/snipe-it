@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class SnipeModel extends Model
 {
@@ -159,5 +160,14 @@ class SnipeModel extends Model
     public function getDisplayNameAttribute()
     {
         return $this->name;
+    }
+
+    public function getPurchaseCostAttribute($value)
+    {
+        if (Auth::check() && !Auth::user()->can('self.view_purchase_cost')) {
+            return null;
+        }
+
+        return $value;
     }
 }
