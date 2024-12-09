@@ -162,6 +162,13 @@ class SnipeModel extends Model
         return $this->name;
     }
 
+    /**
+     * Check if the user is allowed to view the purchase cost of the specific item.
+     * If the user doesn't have permissions, set the value to null so it will be hidden.
+     *
+     * @param $value
+     * @return null|float The purchase cost
+     */
     public function getPurchaseCostAttribute($value)
     {
         if (Auth::check() && !Auth::user()->can('self.view_purchase_cost')) {
