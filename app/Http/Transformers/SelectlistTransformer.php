@@ -24,9 +24,16 @@ class SelectlistTransformer
         foreach ($select_items as $select_item) {
             $items_array[] = [
                 'id' => (int) $select_item->id,
+                'name' => ($select_item->name) ? $select_item->name : null,
                 'text' => ($select_item->use_text) ? $select_item->use_text : $select_item->name,
                 'image' => ($select_item->use_image) ? $select_item->use_image : null,
-
+                // checkability of the asset
+                'user_can_checkout' => ($select_item->user_can_checkout) ? $select_item->user_can_checkout : null,
+                'assigned_to' => ($select_item->assigned_to) ? $select_item->assigned_to : null,
+                // other useful attributes
+                'asset_tag' => ($select_item->asset_tag) ? $select_item->asset_tag : null,
+                'model' => ($select_item->model && $select_item->model->name) ? $select_item->model->name : null,
+                'model_number' => ($select_item->model && $select_item->model->model_number) ? $select_item->model->model_number : null
             ];
         }
 

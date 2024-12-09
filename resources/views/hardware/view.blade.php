@@ -1210,57 +1210,40 @@
                     </div> <!-- /.tab-pane components -->
 
 
-                    <div class="tab-pane fade" id="assets">
-                        <div class="row{{($asset->assignedAssets->count() > 0 ) ? '' : ' hidden-print'}}">
-                            <div class="col-md-12">
+                                <div class="tab-pane fade" id="assets">
+                                    @if ($asset->assignedAssets->count() > 0)
+                                      <!-- checked out assets table -->
 
-                                @if ($asset->assignedAssets->count() > 0)
+                                        @include('partials.asset-bulk-actions')
 
-
-                                    {{ Form::open([
-                                              'method' => 'POST',
-                                              'route' => ['hardware/bulkedit'],
-                                              'class' => 'form-inline',
-                                               'id' => 'bulkForm']) }}
-                                    <div id="toolbar">
-                                        <label for="bulk_actions"><span class="sr-only">{{ trans('general.bulk_actions')}}</span></label>
-                                        <select name="bulk_actions" class="form-control select2" style="width: 150px;" aria-label="bulk_actions">
-                                            <option value="edit">{{ trans('button.edit') }}</option>
-                                            <option value="delete">{{ trans('button.delete')}}</option>
-                                            <option value="labels">{{ trans_choice('button.generate_labels', 2) }}</option>
-                                        </select>
-                                        <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.go') }}</button>
-                                    </div>
-
-                                    <!-- checked out assets table -->
-                                    <div class="table-responsive">
-
-                                        <table
-                                                data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
-                                                data-cookie-id-table="assetsTable"
-                                                data-pagination="true"
-                                                data-id-table="assetsTable"
-                                                data-search="true"
-                                                data-side-pagination="server"
-                                                data-show-columns="true"
-                                                data-show-fullscreen="true"
-                                                data-show-export="true"
-                                                data-show-refresh="true"
-                                                data-sort-order="asc"
-                                                data-bulk-button-id="#bulkAssetEditButton"
-                                                id="assetsListingTable"
-                                                class="table table-striped snipe-table"
-                                                data-url="{{route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset']) }}"
-                                                data-export-options='{
-                              "fileName": "export-assets-{{ str_slug($asset->name) }}-assets-{{ date('Y-m-d') }}",
-                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                              }'>
-
-                                        </table>
-
-
-                                        {{ Form::close() }}
-                                    </div>
+                                        <div class="table table-responsive">
+                                            <table
+                                                    data-click-to-select="true"
+                                                    data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                                                    data-cookie-id-table="assetsTable"
+                                                    data-pagination="true"
+                                                    data-id-table="assetsTable"
+                                                    data-search="true"
+                                                    data-side-pagination="server"
+                                                    data-show-columns="true"
+                                                    data-show-fullscreen="true"
+                                                    data-show-export="true"
+                                                    data-show-footer="true"
+                                                    data-show-refresh="true"
+                                                    data-sort-order="asc"
+                                                    data-sort-name="name"
+                                                    data-toolbar="#assetsBulkEditToolbar"
+                                                    data-bulk-button-id="#bulkAssetEditButton"
+                                                    data-bulk-form-id="#assetsBulkForm"
+                                                    id="assetsListingTable"
+                                                    class="table table-striped snipe-table"
+                                                    data-url="{{ route('api.assets.index',['assigned_to' => e($asset->id), 'assigned_type' => 'App\Models\Asset']) }}"
+                                                    data-export-options='{
+                                                "fileName": "export-{{ str_slug($asset->name) }}-assets-{{ date('Y-m-d') }}",
+                                                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                                                }'>
+                                            </table>
+                                        </div>
 
                                 @else
 
