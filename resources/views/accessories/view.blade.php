@@ -76,6 +76,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                 <table
+                                    data-columns="{{ \App\Presenters\AccessoryPresenter::assignedDataTableLayout() }}"
                                     data-cookie-id-table="checkoutsTable"
                                     data-pagination="true"
                                     data-id-table="checkoutsTable"
@@ -93,14 +94,6 @@
                                     "fileName": "export-accessories-{{ str_slug($accessory->name) }}-checkouts-{{ date('Y-m-d') }}",
                                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                                     }'>
-                                <thead>
-                                    <tr>
-                                    <th data-searchable="false" data-formatter="polymorphicItemFormatter" data-sortable="false" data-field="assigned_to">{{ trans('general.checked_out_to') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="checkout_notes">{{ trans('general.notes') }}</th>
-                                    <th data-searchable="false" data-formatter="dateDisplayFormatter" data-sortable="false" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
-                                    </tr>
-                                </thead>
                                 </table>
                             </div><!--col-md-9-->
                           </div> <!-- close tab-pane div -->
