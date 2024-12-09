@@ -13,7 +13,11 @@
                 @include('modals.partials.categories-select', ['required' => 'true'])
                 @include('modals.partials.manufacturer-select')
                 @include('modals.partials.model-number')
+                @include ('partials.forms.edit.depreciation')
+                @include ('partials.forms.edit.minimum_quantity')
                 @include('modals.partials.fieldset-select')
+                @include ('partials.forms.edit.notes')
+                @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/models/general.requestable')])
             </form>
         </div>
        @include('modals.partials.footer')
