@@ -56,6 +56,7 @@ class AssetModelsController extends Controller
         $this->authorize('create', AssetModel::class);
 
         return view('models/edit')->with('category_type', 'asset')
+            ->with('depreciation_list', Helper::depreciationList())
             ->with('item', new AssetModel);
     }
 
