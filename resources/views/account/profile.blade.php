@@ -107,6 +107,15 @@
           </div>
         </div>
 
+        <div class="form-group">
+          <div class="col-md-9 col-md-offset-3">
+            <label class="form-control">
+              <input type="checkbox" name="hide_lookup_alert" value="1" {{ old('hide_lookup_alert', $user->hide_lookup_alert) ? 'checked' : '' }}>
+              {{ trans('account/general.hide_lookup_alert') }}
+            </label>
+          </div>
+        </div>
+
         <!-- Gravatar Email -->
         <div class="form-group {{ $errors->has('gravatar') ? ' has-error' : '' }}">
           <label for="gravatar" class="col-md-3 control-label">{{ trans('general.gravatar_email') }}
