@@ -80,7 +80,15 @@ class StoreUserTest extends TestCase {
             ])
             ->assertOk()
             ->assertStatus(200)
-            ->assertStatusMessageIs('error');
+            ->assertStatusMessageIs('error')
+            ->assertJson(
+                [
+                    'messages' =>  [
+                        'groups' =>
+                            [0 => trans('The selected groups is invalid.')]
+                        ]
+                ])
+            ->json();
 
     }
 
