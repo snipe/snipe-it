@@ -7,7 +7,6 @@ use App\Models\Department;
 use App\Models\Group;
 use App\Models\Location;
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class StoreUserTest extends TestCase {
@@ -65,12 +64,8 @@ class StoreUserTest extends TestCase {
     public function testDoesNotAcceptBogusGroupData()
     {
         $admin = User::factory()->superuser()->create();
-        $manager = User::factory()->create();
-        $company = Company::factory()->create();
-        $department = Department::factory()->create();
-        $location = Location::factory()->create();
 
-        $response = $this->actingAsForApi($admin)
+        $this->actingAsForApi($admin)
             ->postJson(route('api.users.store'), [
                 'first_name' => 'Mabel',
                 'username' => 'mabel',
