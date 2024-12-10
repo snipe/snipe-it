@@ -12,7 +12,11 @@
     @if($includeEmpty)
         <option value=""></option>
     @endif
-    @foreach($items as $key => $value)
-        <option value="{{ $key }}" @selected($selected === $key)>{{ $value }}</option>
-    @endforeach
+    @if($slot->isEmpty())
+        @foreach($items as $key => $value)
+            <option value="{{ $key }}" @selected($selected === $key)>{{ $value }}</option>
+        @endforeach
+    @else
+        {{ $slot }}
+    @endif
 </select>
