@@ -177,16 +177,23 @@ class AssetCheckoutTest extends TestCase
         $asset = Asset::factory()->create();
         $admin = User::factory()->checkoutAssets()->create();
 
+        $defaultFieldsAlwaysIncludedInUIFormSubmission = [
+            'assigned_user' => null,
+            'assigned_asset' => null,
+            'assigned_location' => null,
+        ];
+
         $this->actingAs($admin)
-            ->post(route('hardware.checkout.store', $asset), [
+            ->post(route('hardware.checkout.store', $asset), array_merge($defaultFieldsAlwaysIncludedInUIFormSubmission, [
                 'checkout_to_type' => $type,
-                'assigned_' . $type => $target->id,
+                // overwrite the value from the default fields set above
+                'assigned_' . $type => (string) $target->id,
                 'name' => 'Changed Name',
-                'status_id' => $newStatus->id,
+                'status_id' => (string) $newStatus->id,
                 'checkout_at' => '2024-03-18',
                 'expected_checkin' => '2024-03-28',
                 'note' => 'An awesome note',
-            ]);
+            ]));
 
         $asset->refresh();
         $this->assertTrue($asset->assignedTo()->is($target));
