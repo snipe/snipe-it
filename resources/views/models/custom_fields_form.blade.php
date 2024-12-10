@@ -8,8 +8,12 @@
           @if ($field->element!='text')
               <!-- Listbox -->
               @if ($field->element=='listbox')
-                   {{ Form::select($field->db_column_name(), $field->formatFieldValuesAsArray(),
-                  old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))), ['class'=>'format select2 form-control']) }}
+                  <x-input.select
+                      :name="$field->db_column_name()"
+                      class="format form-control"
+                      :items="$field->formatFieldValuesAsArray()"
+                      :selected="old($field->db_column_name(), (isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id)))"
+                  />
 
               @elseif ($field->element=='textarea')
                   <textarea class="col-md-6 form-control" id="{{ $field->db_column_name() }}" name="{{ $field->db_column_name() }}">{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}</textarea>
