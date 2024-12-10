@@ -2,18 +2,14 @@
 
 namespace Tests\Feature\Importing\Api;
 
-use App\Mail\CheckoutAssetMail;
 use App\Models\Actionlog as ActionLog;
 use App\Models\Asset;
 use App\Models\CustomField;
 use App\Models\Import;
 use App\Models\User;
-use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Testing\TestResponse;
 use PHPUnit\Framework\Attributes\Test;
@@ -56,7 +52,6 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     #[Test]
     public function importAsset(): void
     {
-
         $importFileBuilder = ImportFileBuilder::new();
         $row = $importFileBuilder->firstRow();
         $import = Import::factory()->asset()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
