@@ -10,7 +10,7 @@
     @if ($forLivewire) data-livewire-component="{{ $this->getId() }}" @endif
 >
     @if($includeEmpty)
-        <option value="" selected="selected"></option>
+        <option value=""></option>
     @endif
     @foreach($items as $key => $value)
         <option value="{{ $key }}" @selected($selected === $key)>{{ $value }}</option>
