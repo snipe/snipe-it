@@ -10,10 +10,12 @@ however there are times when library dependencies and/or PHP/MySQL dependencies
 make it impossible to backport security fixes on older versions. 
 
 | Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
+|---------| ------------------ |
+| 7.x     | :white_check_mark: |
+| 6.x     | :x:                |
+| 5.1.x   | :x:                |
 | 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
+| 4.0.x   | :x:                |
 | < 4.0   | :x:                |
 
 ## Reporting a Vulnerability
