@@ -242,17 +242,23 @@
 
                                                                             <label for="field_map.{{ $index }}" class="col-md-3 control-label text-right">{{ $header }}</label>
                                                                             <div class="col-md-4">
-
-                                                                                {{ Form::select('field_map.'.$index, $columnOptions[$typeOfImport], @$field_map[$index],
-                                                                                    [
-                                                                                        'class' => 'mappings livewire-select2',
-                                                                                        'placeholder' => trans('general.importer.do_not_import'),
-                                                                                        'style' => 'min-width: 100%',
-                                                                                        'data-livewire-component' => $this->getId()
-                                                                                    ],[
-                                                                                        '-' => ['disabled' => true] // this makes the "-----" line unclickable
-                                                                                    ])
-                                                                                }}
+                                                                                <x-input.select
+                                                                                    :name="'field_map.'.$index"
+                                                                                    class="mappings"
+                                                                                    :for-livewire="true"
+                                                                                    :placeholder="trans('general.importer.do_not_import')"
+                                                                                    style="min-width: 100%;"
+                                                                                    :data-livewire-component="$this->getId()"
+                                                                                >
+                                                                                    <option selected="selected" value="">Do Not Import</option>
+                                                                                    @foreach($columnOptions[$typeOfImport] as $key => $value)
+                                                                                        <option
+                                                                                            value="{{ $key }}"
+                                                                                            @selected(@$field_map[$index] === $key)
+                                                                                            @disabled($key === '-')
+                                                                                        >{{ $value }}</option>
+                                                                                    @endforeach
+                                                                                </x-input.select>
                                                                             </div>
 									                                    @if (($this->activeFile->first_row) && (array_key_exists($index, $this->activeFile->first_row)))
                                                                             <div class="col-md-5">
