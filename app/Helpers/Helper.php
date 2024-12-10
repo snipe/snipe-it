@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Component;
@@ -9,11 +10,14 @@ use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
+use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\Statuslabel;
+use App\Models\User;
 use App\Models\License;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Database\Eloquent\Builder;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -852,6 +856,99 @@ class Helper
         }
 
         return $items_array;
+    }
+    /**
+     * Looks for any items that have a different company_id than the users they are assigned to for the
+     * alert dropdown
+     *
+     * @author [G. Martinez]
+     * @since [v6.4]
+     * @return array
+     */
+    public static function checkUserCompanyAssets(): array
+    { if(Setting::getSettings()->full_multiple_companies_support == 1) {
+
+            $accessories = AccessoryCheckout::with('accessory', 'user')
+                ->join('users', 'accessories_checkout.assigned_to', '=', 'users.id')
+                ->whereHas('accessory', function ($query) {
+                    $query->where(function ($query) {
+                        $query->WhereColumn('accessories.company_id', '!=', 'users.company_id');
+                    });
+                })
+                ->get();
+
+            $assets = Asset::whereHasMorph(
+                    'assignedTo',
+                    [Asset::class, User::class],
+                    function (Builder $query, $type) {
+                        if ($type === Asset::class) {
+                            // If checked out to Asset, we are making an alias for the assigned_asset.
+                            // we use the assigned_to to join on the assigned_asset ID
+                            $query->select(['assets.assigned_to', 'assets.id'])
+                                  ->join('assets as assigned_asset', function ($join)  {
+                                     $join->on('assets.assigned_to', '=', 'assigned_asset.id');
+                                 })
+                            // continue with company_id check for an Asset.
+                                ->whereColumn('assets.company_id', '!=', 'assigned_asset.company_id')
+                                ->whereColumn('assets.id', '!=', 'assigned_asset.id');
+                        } else {
+                            // For users, we do not need an alias
+                            $query->whereColumn('assets.company_id', '!=',   'users.company_id');
+                        }
+                    }
+                )->get();
+            $licenses = LicenseSeat::with('license', 'user')
+                ->join('users', 'license_seats.assigned_to', '=', 'users.id')
+                ->whereHas('license', function ($query) {
+                    $query->where(function ($query) {
+                        $query->WhereColumn('licenses.company_id', '!=', 'users.company_id');
+                    });
+                })
+                ->get();
+
+            $items_array = [];
+            $all_count = 0;
+
+            foreach ($accessories as $accessory) {
+
+                $items_array[$all_count]['id'] = $accessory->accessory->id;
+                $items_array[$all_count]['name'] = $accessory->accessory->name;
+                $items_array[$all_count]['company'] = $accessory->accessory->company->name;
+                $items_array[$all_count]['user'] = $accessory->assignedto->present()->fullName;
+                $items_array[$all_count]['user_company'] = $accessory->assignedto->company->name;
+                $items_array[$all_count]['type'] = 'accessories';
+
+                $all_count++;
+
+            }
+            foreach ($assets as $asset) {
+
+                $items_array[$all_count]['id'] = $asset->id;
+                $items_array[$all_count]['name'] = $asset->model->name;
+                $items_array[$all_count]['company'] = $asset->company->name;
+                $items_array[$all_count]['user'] = $asset->assignedto->present()->fullName;
+                $items_array[$all_count]['user_company'] = $asset->assignedto->company->name;
+                $items_array[$all_count]['type'] = 'hardware';
+    //            dd($asset->company->id, $asset->assignedto->company->id);
+                $all_count++;
+
+            }
+
+            foreach ($licenses as $license) {
+                $items_array[$all_count]['id'] = $license->license->id;
+                $items_array[$all_count]['name'] = $license->license->name;
+                $items_array[$all_count]['company'] = $license->license->company->name;
+                $items_array[$all_count]['user'] = $license->user->present()->fullName;
+                $items_array[$all_count]['user_company'] = $license->user->company->name;
+                $items_array[$all_count]['type'] = 'licenses';
+
+                $all_count++;
+
+            }
+
+            return $items_array;
+        }
+        return array();
     }
 
     /**
