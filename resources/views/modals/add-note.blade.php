@@ -13,7 +13,7 @@
                 <div class="alert alert-danger" id="modal_error_msg" style="display:none"></div>
 
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-12">
                         <textarea class="form-control" id="note" name="note">{{ old('note') }}</textarea>
                         {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                     </div>
