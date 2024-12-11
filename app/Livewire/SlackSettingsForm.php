@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -158,8 +159,11 @@ class SlackSettingsForm extends Component
 
             ]);
 
+        $headers = ['content-type' => 'application/json'];
+        $request = new Request('POST', $this->webhook_endpoint, $headers, $payload);
+
         try {
-            $test = $webhook->post($this->webhook_endpoint, ['body' => $payload]);
+            $test = $webhook->send($request);
 
             if(($test->getStatusCode() == 302)||($test->getStatusCode() == 301)){
                 return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
