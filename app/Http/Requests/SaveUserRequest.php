@@ -18,7 +18,7 @@ class SaveUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Gate::allows('users.create');
+        return (Gate::allows('users.create') || Gate::allows('users.edit'));
     }
 
     public function response(array $errors)
