@@ -281,6 +281,8 @@ return [
     'two_factor_enrollment_text'	=> "Cihazınız henüz kayıtlı değil ancak iki aşamalı kimlik doğrulama gereklidir. Google kimlik doğrulayıcısı app açmak ve tarama QR kodu cihazınızı kayıt için aşağıdaki. Aygıtınız kayıtlı sonra aşağıdaki kodu girin",
     'require_accept_signature'      => 'İmza Gerekli',
     'require_accept_signature_help_text'      => 'Bu özelliği etkinleştirmek kullanıcıların fiziksel olarak bir varlık kabul evrağı imzalaması gerekir.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'sol',
     'right'        => 'sağ',
     'top'        => 'üst',

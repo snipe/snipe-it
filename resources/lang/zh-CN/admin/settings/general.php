@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "本系统强制两步验证，但您尚未登记您的移动设备。请启动您的 Google Authenticator 应用并扫描下方二维码以设置两步验证。在您完成后，请在下方输入生成的认证代码。",
     'require_accept_signature'      => '需要签名',
     'require_accept_signature_help_text'      => '启用此功能将需要用户亲自签署来接受一项资产。',
+    'require_checkinout_notes'  => '归还/借出时需要备注',
+    'require_checkinout_notes_help_text'    => '启用此功能后需要在归还或借出资产时填写备注字段。',
     'left'        => '左',
     'right'        => '右',
     'top'        => '顶部',

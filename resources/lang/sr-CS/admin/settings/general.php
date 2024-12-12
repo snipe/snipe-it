@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Potrebna je dvofaktorska autentifikacija, ali vaš uređaj još nije registrovan. Otvorite aplikaciju Google Authenticator i skenirajte QR kod u nastavku da biste registrovali svoj uređaj. Kada registrujete svoj uređaj, unesite kod ispod",
     'require_accept_signature'      => 'Zahtevan potpis',
     'require_accept_signature_help_text'      => 'Omogućavanje ove funkcije će zahtevati od korisnika da se fizički odjave za prihvatanje sredstva.',
+    'require_checkinout_notes'  => 'Zahteva se beleška pri razduživanju/zaduživanju',
+    'require_checkinout_notes_help_text'    => 'Uključivanjem ove opcije zahtevaće se da polje za belešku bude popunjeno prilikom razduživanja ili razduživanja imovine.',
     'left'        => 'levo',
     'right'        => 'desno',
     'top'        => 'gore',

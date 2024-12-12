@@ -11,7 +11,7 @@ return array(
     'purchase_date'   	=> 'Taariikhda Iibka',
     'purchased'   		=> 'Iibsaday',
     'seats'   			=> 'Kuraasta',
-    'hardware'   		=> 'Hardware',
+    'hardware'   		=> 'Qalab',
     'serial'   			=> 'Taxane',
     'title'      		=> 'Shatiga',
 

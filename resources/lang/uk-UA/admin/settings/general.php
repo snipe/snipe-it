@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Для двофакторної автентифікації необхідно, однак ваш пристрій ще не було встановлено. Відкрийте додаток Google Authenticator і відскануйте QR-код нижче, щоб закріпити ваш пристрій. Після того, як ви увійдете на своєму пристрої, введіть код нижче",
     'require_accept_signature'      => 'Вимагати підпис',
     'require_accept_signature_help_text'      => 'Увімкнення цієї функції для фізичного підписання активів потребує від користувачів.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'ліворуч',
     'right'        => 'правий',
     'top'        => 'згори',

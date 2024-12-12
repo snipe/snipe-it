@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Ang Two factor authentication ay kinakailangan, gayunpaman ang iyong device ay hindi ma na-enroll. Buksan mo ang itong Google Authenticator app at i-scan ang QR code sa ibaba para ma-enroll ang iyong device. Kapag na-enroll na ang device. i-enter ang code sa ibaba",
     'require_accept_signature'      => 'Nangangailangan ng Pag-lagda',
     'require_accept_signature_help_text'      => 'Sa pagpapagana ng katangian nito ay nangangailangan sa mga gumagamit na pisikal na mag-sign off sa pagtanggap ng isang asset.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'kaliwa',
     'right'        => 'kanan',
     'top'        => 'itaas',

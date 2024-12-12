@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Se requiere autenticación de dos factores, sin embargo su dispositivo aún no ha sido inscrito. Abra la aplicación Google Authenticator y escanee el código QR que aparece a continuación para registrar su dispositivo. Una vez que haya registrado su dispositivo, introduzca el código en la parte inferior",
     'require_accept_signature'      => 'Solicitar firma',
     'require_accept_signature_help_text'      => 'Al activar esta función, los usuarios tendrán que firmar físicamente la aceptación de un activo.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'izquierda',
     'right'        => 'derecha',
     'top'        => 'arriba',

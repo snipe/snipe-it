@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Απαιτείται έλεγχος ταυτότητας δύο παραγόντων, ωστόσο η συσκευή σας δεν έχει εγγραφεί ακόμα. Ανοίξτε την εφαρμογή Google Authenticator και σαρώστε τον παρακάτω κωδικό QR για να εγγραφείτε στη συσκευή σας. Μόλις εγγραφείτε στη συσκευή σας, πληκτρολογήστε τον παρακάτω κώδικα",
     'require_accept_signature'      => 'Απαιτείται υπογραφή',
     'require_accept_signature_help_text'      => 'Η ενεργοποίηση αυτής της λειτουργίας θα απαιτεί από τους χρήστες να αποδεχθούν φυσικά την αποδοχή ενός στοιχείου.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'αριστερά',
     'right'        => 'δεξιά',
     'top'        => 'κορυφή',

@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Būtina dviejų veiksnių autentifikacija, tačiau jūsų dar nesate užregistravę įrenginio. Norėdami užregistruoti įrenginį, jame atidarykite „Google Authenticator“ programą ir nuskaitykite čia pateiktą QR kodą. Užregistravę įrenginį, įveskite jo ekrane rodomą kodą į žemiau esantį lauką",
     'require_accept_signature'      => 'Reikalauti parašo',
     'require_accept_signature_help_text'      => 'Jei įjungsite šią funkciją, naudotojai turės fiziškai pasirašyti už jiems išduodamą turtą.',
+    'require_checkinout_notes'  => 'Reikalauti pastabų paimant/išduodant',
+    'require_checkinout_notes_help_text'    => 'Įjungus šią funkciją, bus būtina užpildyti pastabų laukus paimant ar išduodant turtą.',
     'left'        => 'kairėje',
     'right'        => 'dešinėje',
     'top'        => 'viršuje',
