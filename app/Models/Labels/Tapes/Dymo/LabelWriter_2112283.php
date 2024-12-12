@@ -3,6 +3,8 @@
 namespace App\Models\Labels\Tapes\Dymo;
 
 
+use App\Models\Setting;
+
 class LabelWriter_2112283 extends LabelWriter
 {
     private const BARCODE_MARGIN =   1.80;
@@ -32,7 +34,7 @@ class LabelWriter_2112283 extends LabelWriter
         $currentX = $pa->x1;
         $currentY = $pa->y1;
         $usableWidth = $pa->w;
-
+        $cell_margin_top = Setting::getSettings()->label_cell_margin_top;
         $barcodeSize = $pa->h - self::TAG_SIZE;
 
         if ($record->has('barcode2d')) {
@@ -51,6 +53,7 @@ class LabelWriter_2112283 extends LabelWriter
             $usableWidth -= $barcodeSize + self::BARCODE_MARGIN;
         }
 
+        $titleY = $pa->y1;
         if ($record->has('title')) {
             static::writeText(
                 $pdf, $record->get('title'),
@@ -58,13 +61,13 @@ class LabelWriter_2112283 extends LabelWriter
                 'freesans', 'b', self::TITLE_SIZE, 'L',
                 $usableWidth, self::TITLE_SIZE, true, 0
             );
-            $currentY += self::TITLE_SIZE + self::TITLE_MARGIN;
+            $currentY += $titleY + self::TITLE_SIZE + self::TITLE_MARGIN;
         }
 
         foreach ($record->get('fields') as $field) {
             static::writeText(
                 $pdf, (($field['label']) ? $field['label'].' ' : '') . $field['value'],
-                $currentX, $currentY,
+                $currentX, $currentY + $cell_margin_top,
                 'freesans', '', self::FIELD_SIZE, 'L',
                 $usableWidth, self::FIELD_SIZE, true, 0, 0.3
             );
