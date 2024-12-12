@@ -2,9 +2,6 @@
 
 namespace App\Mail;
 
-use App\Models\Accessory;
-use App\Models\Setting;
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,20 +10,18 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CheckinAccessoryMail extends Mailable
+class UnacceptedAssetReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedInby, $note)
+    public function __construct($checkout_info, $count)
     {
-        $this->item = $accessory;
-        $this->target = $checkedOutTo;
-        $this->admin = $checkedInby;
-        $this->note = $note;
-        $this->settings = Setting::getSettings();
+        $this->count = $count;
+        $this->target = $checkout_info['acceptance']?->assignedTo;
+        $this->acceptance = $checkout_info['acceptance'];
     }
 
     /**
@@ -38,7 +33,7 @@ class CheckinAccessoryMail extends Mailable
 
         return new Envelope(
             from: $from,
-            subject: trans('mail.Accessory_Checkin_Notification'),
+            subject: trans('mail.unaccepted_asset_reminder'),
         );
     }
 
@@ -47,13 +42,15 @@ class CheckinAccessoryMail extends Mailable
      */
     public function content(): Content
     {
+        $accept_url = route('account.accept');
+
         return new Content(
-            markdown: 'mail.markdown.checkin-accessory',
-            with:   [
-                'item'          => $this->item,
-                'admin'         => $this->admin,
-                'note'          => $this->note,
-                'target'        => $this->target,
+            markdown: 'notifications.markdown.asset-reminder',
+            with: [
+                'count'        => $this->count,
+                'assigned_to'  => $this->target?->present()->fullName,
+                'link'         => route('account.accept'),
+                'accept_url'   => $accept_url,
             ]
         );
     }
