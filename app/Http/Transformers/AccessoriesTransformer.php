@@ -78,9 +78,9 @@ class AccessoriesTransformer
                 'id' => $checkout->id,
                 'assigned_to' => $this->transformAssignedTo($checkout),
                 'note' => $checkout->note ? e($checkout->note) : null,
-                'created_by' => $checkout->admin ? [
-                    'id' => (int) $checkout->admin->id,
-                    'name'=> e($checkout->admin->present()->fullName),
+                'created_by' => $checkout->adminuser ? [
+                    'id' => (int) $checkout->adminuser->id,
+                    'name'=> e($checkout->adminuser->present()->fullName),
                 ]: null,
                 'created_at' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
                 'available_actions' => Gate::allows('checkout', Accessory::class) ? ['checkin' => true] : ['checkin' => false],
