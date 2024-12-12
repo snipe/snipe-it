@@ -64,7 +64,7 @@ return [
     'checkout'  			=> 'Видати',
     'checkouts_count'       => 'Розрахунок',
     'checkins_count'        => 'Перевірки',
-    'checkin_and_delete'  	=> 'Checkin and Delete',
+    'checkin_and_delete'  	=> 'Прийняти та видалити',
     'user_requests_count'   => 'Запити',
     'city'  				=> 'Місто',
     'click_here'			=> 'Натисніть тут',

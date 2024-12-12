@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "จำเป็นต้องมีการตรวจสอบสิทธิ์สองปัจจัย แต่อุปกรณ์ของคุณยังไม่ได้ลงทะเบียน เปิดแอป Google Authenticator และสแกนโค้ด QR ด้านล่างเพื่อลงทะเบียนอุปกรณ์ของคุณ เมื่อคุณลงทะเบียนอุปกรณ์แล้วให้ป้อนรหัสด้านล่าง",
     'require_accept_signature'      => 'ต้องการลายเซ็น',
     'require_accept_signature_help_text'      => 'การเปิดใช้งานคุณลักษณะนี้จะกำหนดให้ผู้ใช้ลงชื่อเข้าใช้เพื่อยอมรับเนื้อหา',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'ซ้าย',
     'right'        => 'ขวา',
     'top'        => 'ด้านบน',
