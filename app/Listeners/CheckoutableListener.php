@@ -282,7 +282,7 @@ class CheckoutableListener
         ];
         $mailable= $lookup[get_class($event->checkoutable)];
 
-        return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $event->note, $acceptance);
+        return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
 
     }
     private function getCheckinMailType($event){
