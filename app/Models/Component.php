@@ -30,14 +30,15 @@ class Component extends SnipeModel
      * Category validation rules
      */
     public $rules = [
-        'name'           => 'required|min:3|max:255',
+        'name'           => 'required|min:3|max:191',
         'qty'            => 'required|integer|min:1',
         'category_id'    => 'required|integer|exists:categories,id',
         'supplier_id'    => 'nullable|integer|exists:suppliers,id',
         'company_id'     => 'integer|nullable|exists:companies,id',
         'min_amt'        => 'integer|min:0|nullable',
         'purchase_date'   => 'date_format:Y-m-d|nullable',
-        'purchase_cost'  => 'numeric|nullable|gte:0',
+        'purchase_cost'  => 'numeric|nullable|gte:0|max:9999999999999',
+        'manufacturer_id'   => 'integer|exists:manufacturers,id|nullable',
     ];
 
     /**
@@ -60,6 +61,8 @@ class Component extends SnipeModel
         'company_id',
         'supplier_id',
         'location_id',
+        'manufacturer_id',
+        'model_number',
         'name',
         'purchase_cost',
         'purchase_date',
@@ -77,7 +80,15 @@ class Component extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date', 'notes'];
+    protected $searchableAttributes = [
+        'name',
+        'order_number',
+        'serial',
+        'purchase_cost',
+        'purchase_date',
+        'notes',
+        'model_number',
+    ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -89,6 +100,7 @@ class Component extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
         'supplier'     => ['name'],
+        'manufacturer' => ['name'],
     ];
 
 
@@ -181,6 +193,19 @@ class Component extends SnipeModel
     public function supplier()
     {
         return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
+    }
+
+
+    /**
+     * Establishes the item -> manufacturer relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function manufacturer()
+    {
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
 
     /**
@@ -309,6 +334,19 @@ class Component extends SnipeModel
     public function scopeOrderSupplier($query, $order)
     {
         return $query->leftJoin('suppliers', 'components.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'components.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
 
     public function scopeOrderByCreatedBy($query, $order)

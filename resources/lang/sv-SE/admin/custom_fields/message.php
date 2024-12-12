@@ -5,7 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Det fältet existerar inte.',
         'already_added'   => 'Fält som redan lagts till',
-        'none_selected'   => 'No field selected',
+        'none_selected'   => 'Inget fält valt',
 
         'create' => array(
             'error'   => 'Fältet skapades inte, var vänlig försök igen.',

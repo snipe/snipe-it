@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Предупреждение о возврате',
     'due_checkin_days_help' => 'Сколько дней до ожидаемого возврата актива должно быть указано на странице «Подлежит возврату»?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

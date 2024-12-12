@@ -67,6 +67,7 @@ return [
     'checkout'  			=> 'پرداخت',
     'checkouts_count'       => 'پرداخت',
     'checkins_count'        => 'پذیرش',
+    'checkin_and_delete'  	=> 'Checkin and Delete',
     'user_requests_count'   => 'درخواست ها',
     'city'  				=> 'شهر',
     'click_here'			=> 'اینجا کلیک کنید',
@@ -246,8 +247,7 @@ return [
     'purchase_date'         => 'تاریخ خرید',
     'qty'		            => 'QTY',
     'quantity'		        => 'مقدار',
-    'quantity_minimum'      => 'شما باید : موارد را زیر یا تقریباً کمتر از سطح حداقل مقدار بشمارید
-',
+    'quantity_minimum'      => 'You have one item below or almost below minimum quantity levels|You have :count items below or almost below minimum quantity levels',
     'quickscan_checkin'  	=> 'اسکن سریع اعلام حضور
 ',
     'quickscan_checkin_status'  	=> 'وضعیت  ورود
@@ -308,6 +308,7 @@ return [
     'status'    			=> 'وضعیت',
     'accept_eula'           => 'توافق نامه پذیرش
 ',
+    'show_or_hide_eulas' => 'Show/Hide EULAs',
     'supplier'              => 'تامین کننده',
     'suppliers'  			=> 'تامین کننده',
     'sure_to_delete'        => 'مطمئنید که میخواهید حذف شود',
@@ -515,6 +516,7 @@ return [
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
     'placeholder_kit'       => 'Select a kit',
     'file_not_found'        => 'فایل پیدا نشد',
+    'log_record_not_found'  => 'No record for that log entry was found.',
     'preview_not_available' => '(no preview)',
     'setup'                 => 'Setup',
     'pre_flight'            => 'Pre-Flight',
@@ -643,7 +645,7 @@ return [
     'something_went_wrong' => 'Something went wrong with your request.',
     'close' => 'Close',
     'expires' => 'منقضی می شود',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Remaining',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',

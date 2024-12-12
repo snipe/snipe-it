@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Dieses Asset ist verfügbar und kann herausgegeben werden.',
     'processing_spinner' => 'Verarbeitung... (Dies kann bei großen Dateien etwas Zeit in Anspruch nehmen)',
     'optional_infos'  => 'Optionale Informationen',
-    'order_details'   => 'Bestellinformationen'
+    'order_details'   => 'Bestellinformationen',
+    'calc_eol'    => 'Wenn du das EOL-Datum auf Null setzt, dann verwende die automatische EOL-Berechnung basierend auf dem Kaufdatum und der EOL-Rate.',
 ];

@@ -385,5 +385,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Aviso de Devolução Pendente',
     'due_checkin_days_help' => 'Quantos dias antes da data esperada de devolução de um ativo ele deve ser listado na página "Pendente para devolução"?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

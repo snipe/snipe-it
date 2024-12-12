@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    @if (count($users) === 1)
+    @if ((isset($users) && count($users) === 1))
         <title>{{ trans('general.assigned_to', ['name' => $users[0]->present()->fullName()]) }} - {{ date('Y-m-d H:i', time()) }}</title>
     @else
         <title>{{ trans('admin/users/general.print_assigned') }} - {{ date('Y-m-d H:i', time()) }}</title>
@@ -36,11 +36,7 @@
         @page {
             size: A4;
         }
-
-        #start_of_user_section {
-            break-before: page;
-        }
-
+        
         .print-logo {
             max-height: 40px;
         }
@@ -51,13 +47,6 @@
         }
     </style>
 
-    <script nonce="{{ csrf_token() }}">
-        window.snipeit = {
-            settings: {
-                "per_page": 50
-            }
-        };
-    </script>
 
 </head>
 <body>
@@ -139,7 +128,7 @@
             <tbody>
             @foreach ($show_user->assets as $asset)
                 @php
-                    if ($asset->model->category->getEula()) $eulas[] = $asset->model->category->getEula()
+                    if (($asset->model->category) && ($asset->model->category->getEula())) $eulas[] = $asset->model->category->getEula()
                 @endphp
                 <tr>
                     <td>{{ $counter }}</td>
@@ -236,7 +225,7 @@
 
             @foreach ($show_user->licenses as $license)
                 @php
-                    if ($license->category->getEula()) $eulas[] = $license->category->getEula()
+                    if (($license->category) && ($license->category->getEula())) $eulas[] = $license->category->getEula()
                 @endphp
                 <tr>
                     <td>{{ $lcounter }}</td>
@@ -294,7 +283,7 @@
             @foreach ($show_user->accessories as $accessory)
                 @if ($accessory)
                     @php
-                        if ($accessory->category->getEula()) $eulas[] = $accessory->category->getEula()
+                        if (($accessory->category) && ($accessory->category->getEula())) $eulas[] = $accessory->category->getEula()
                     @endphp
                     <tr>
                         <td>{{ $acounter }}</td>
@@ -357,7 +346,7 @@
             @foreach ($show_user->consumables as $consumable)
                 @if ($consumable)
                     @php
-                        if ($consumable->category->getEula()) $eulas[] = $consumable->category->getEula()
+                        if (($consumable->category) && ($consumable->category->getEula())) $eulas[] = $consumable->category->getEula()
                     @endphp
                     <tr>
                         <td>{{ $ccounter }}</td>
@@ -384,8 +373,11 @@
         </table>
     @endif
 
+    @php
+        if (!empty($eulas)) $eulas = array_unique($eulas);
+    @endphp
     {{-- This may have been render at the top of the page if we're rendering more than one user... --}}
-    @if (count($users) === 1)
+    @if (count($users) === 1 && !empty($eulas))
         <p></p>
         <div class="pull-right">
             <button class="btn btn-default hidden-print" type="button" data-toggle="collapse" data-target=".eula-row" aria-expanded="false" aria-controls="eula-row" title="EULAs">
@@ -395,19 +387,16 @@
     @endif
 
     <table style="margin-top: 80px;">
+        @if (!empty($eulas))
         <tr class="collapse eula-row">
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">EULA</td>
             <td style="padding-right: 10px; vertical-align: top; padding-bottom: 80px;" colspan="3">
-                @php
-                    if (!empty($eulas)) $eulas = array_unique($eulas);
-                @endphp
-                @if (!empty($eulas))
-                    @foreach ($eulas as $key => $eula)
-                        {!! $eula !!}
-                    @endforeach
-                @endif
+                @foreach ($eulas as $key => $eula)
+                    {!! $eula !!}
+                @endforeach
             </td>
         </tr>
+        @endif
         <tr>
             <td style="padding-right: 10px; vertical-align: top; font-weight: bold;">{{ trans('general.signed_off_by') }}:</td>
             <td style="padding-right: 10px; vertical-align: top;">______________________________________</td>

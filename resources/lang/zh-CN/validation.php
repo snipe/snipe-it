@@ -173,6 +173,7 @@ return [
     'ulid' => ':attribute 字段必须是个有效的 ULID。',
     'uuid' => ':attribute 字段必须是一个有效的 UUID。',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -194,7 +195,7 @@ return [
         'custom_field_not_found_on_model' => '此字段似乎存在，但在此资产型号的字段集上不可用。',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
         'purchase_date.date_format'     => ':attribute 必须是 YYYY-MM-DD 格式的有效日期',
         'last_audit_date.date_format'   =>  ':attribute 必须是 YYYY-MM-DD hh:mm:ss 格式的有效日期',
@@ -206,6 +207,13 @@ return [
         'checkboxes'           => ':attribute 包含无效的选项。',
         'radio_buttons'        => ':attribute 无效。',
         'invalid_value_in_field' => '此字段中包含的值无效',
+
+        'ldap_username_field' => [
+            'not_in' =>         '<code>sAMAccountName</code>(混合大小写) 可能不起作用。您应该改用<code>samaccountname</code>(小写)。'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code>可能不是有效的身份验证过滤器。您可能需要<code>uid=</code> '],
+        'ldap_filter' => ['regex' => '这个值可能不应该用括号括起来。'],
+
         ],
     /*
     |--------------------------------------------------------------------------

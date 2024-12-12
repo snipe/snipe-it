@@ -5,7 +5,7 @@
         'delete'                       => [
             'confirm' => '¿Está seguro de que desea eliminar el mantenimiento de este activo?',
             'error'   => 'Hubo un problema al eliminar el mantenimiento del activo. Por favor inténtelo nuevamente.',
-            'success' => 'El mantenimiento de equipo fue eliminado de manera exitosa.',
+            'success' => 'El mantenimiento del activo fue eliminado de manera exitosa.',
         ],
         'create'                       => [
             'error'   => 'El Mantenimiento de Equipo no fue creado, por favor intente nuevamente.',
@@ -13,9 +13,9 @@
         ],
         'edit'                       => [
             'error'   => 'El mantenimiento del activo no fue editado. Por favor, inténtelo de nuevo.',
-            'success' => 'Mantenimiento de activo editado con éxito.',
+            'success' => 'Mantenimiento del activo editado con éxito.',
         ],
-        'asset_maintenance_incomplete' => 'Sin Completar',
+        'asset_maintenance_incomplete' => 'Aún no se ha completado',
         'warranty'                     => 'Garantía',
-        'not_warranty'                 => 'Sin Garantía',
+        'not_warranty'                 => 'Sin garantía',
     ];

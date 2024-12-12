@@ -18,7 +18,7 @@
 
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" autocomplete="off" class="form-horizontal" role="form" id="create-form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -214,6 +214,23 @@
                            <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!}</p>
                        </div>
                    </div>
+
+                   <!-- Require Notes on checkin/checkout checkbox -->
+                   <div class="form-group">
+                       <div class="col-md-3">
+                           <label>
+                               {{ trans('admin/settings/general.require_checkinout_notes') }}
+                           </label>
+                       </div>
+                       <div class="col-md-8">
+                           <label class="form-control">
+                               <input type="checkbox" value="1" name="require_checkinout_notes" {{ (old('require_checkinout_notes', $setting->require_checkinout_notes)) == '1' ? ' checked="checked"' : '' }} aria-label="require_checkinout_notes">
+                               {{ trans('general.yes') }}
+                           </label>
+                               <p class="help-block">{{ trans('admin/settings/general.require_checkinout_notes_help_text') }}</p>
+                       </div>
+                   </div>
+                   <!-- /.form-group -->
 
 
                     <!-- login text -->

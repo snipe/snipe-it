@@ -53,7 +53,6 @@ Route::group(['middleware' => 'auth'], function () {
     /*
      * Locations
      */
-
     Route::group(['prefix' => 'locations', 'middleware' => ['auth']], function () {
 
         Route::post(
@@ -533,12 +532,15 @@ Route::group(['middleware' => 'web'], function () {
     )->name('logout.post');
 });
 
-//Auth::routes();
 
-Route::get(
-    '/health', 
+/**
+ * Health check route - skip middleware
+ */
+Route::withoutMiddleware(['web'])->get(
+    '/health',
     [HealthController::class, 'get']
 )->name('health');
+
 
 Route::middleware(['auth'])->get(
     '/',

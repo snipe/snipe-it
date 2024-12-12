@@ -16,9 +16,10 @@
 
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" autocomplete="off" class="form-horizontal" role="form" id="create-form">
+
     <!-- CSRF Token -->
-    {{csrf_field()}}
+    {{ csrf_field() }}
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">

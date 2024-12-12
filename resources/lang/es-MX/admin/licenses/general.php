@@ -6,20 +6,20 @@ return array(
     'checkin'  					=> 'Ingresar licencia',
     'checkout_history'  		=> 'Historial de asignaciones',
     'checkout'  				=> 'Asignar licencia',
-    'edit'  					=> 'Editar Usuario',
-    'filetype_info'				=> 'Tipos de archivos permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, y rar.',
-    'clone'  					=> 'Clonar Usuario',
+    'edit'  					=> 'Editar licencia',
+    'filetype_info'				=> 'Los tipos de archivo permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, y rar.',
+    'clone'  					=> 'Clonar licencia',
     'history_for'  				=> 'Historial para ',
     'in_out'  					=> 'Quita/Asigna',
-    'info'  					=> 'Info Licencia',
+    'info'  					=> 'Información de licencia',
     'license_seats'  			=> 'Total de licencias',
     'seat'  					=> 'Licencia',
     'seat_count'  				=> 'Licencia :count',
     'seats'  					=> 'Total de licencias',
-    'software_licenses'  		=> 'Licencias Software',
+    'software_licenses'  		=> 'Licencias de software',
     'user'  					=> 'Usuario',
-    'view'  					=> 'Ver Licencias',
-    'delete_disabled'           => 'Esta licencia no se puede eliminar aún está asignada a algunos usuarios.',
+    'view'  					=> 'Ver licencia',
+    'delete_disabled'           => 'Esta licencia no se puede eliminar porque todavía está asignada.',
     'bulk'                      =>
         [
             'checkin_all'           => [
@@ -47,6 +47,6 @@ return array(
             ],
     ],
 
-    'below_threshold' => 'Solo quedan :remaining_count licencias y su cantidad mínima es de :min_amt. Puede considerar la compra de más licencias.',
+    'below_threshold' => 'Solo quedan :remaining_count licencias y su cantidad mínima es de :min_amt. Puede que desee considerar la compra de más licencias.',
     'below_threshold_short' => 'Este artículo está por debajo de la cantidad mínima requerida.',
 );

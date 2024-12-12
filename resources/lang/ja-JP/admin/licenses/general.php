@@ -14,7 +14,7 @@ return array(
     'info'  					=> 'ライセンス情報',
     'license_seats'  			=> 'ライセンスシート',
     'seat'  					=> 'シート',
-    'seat_count'  				=> 'Seat :count',
+    'seat_count'  				=> 'シート :count',
     'seats'  					=> 'シート数',
     'software_licenses'  		=> 'ソフトウェア・ライセンス',
     'user'  					=> '利用者',

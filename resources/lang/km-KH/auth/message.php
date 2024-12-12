@@ -14,8 +14,8 @@ return array(
         'success'               => 'អ្នកបានចូលដោយជោគជ័យ។',
         'code_required'         => 'កូដកត្តាពីរត្រូវបានទាមទារ។',
         'invalid_code'          => 'កូដកត្តាពីរគឺមិនត្រឹមត្រូវទេ។',
-        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
-        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+        'enter_two_factor_code' => 'សូមបញ្ចូលលេខកូដផ្ទៀងផ្ទាត់ពីរកត្តារបស់អ្នក។',
+        'please_enroll'         => 'សូមចុះឈ្មោះឧបករណ៍មួយនៅក្នុងការផ្ទៀងផ្ទាត់ពីរកត្តា។',
     ),
 
     'signin' => array(

@@ -17,7 +17,6 @@ use App\Models\Location;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\View\Label;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -112,8 +111,10 @@ class AssetsController extends Controller
 
         $settings = Setting::getSettings();
 
-        $success = false;
+        $successes = [];
+        $failures = [];
         $serials = $request->input('serials');
+        $asset = null;
 
         for ($a = 1; $a <= count($asset_tags); $a++) {
             $asset = new Asset();
@@ -200,20 +201,35 @@ class AssetsController extends Controller
                     $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
                 }
 
-                $success = true;
-                
+                $successes[] = "<a href='" . route('hardware.show', ['hardware' => $asset->id]) . "' style='color: white;'>" . e($asset->asset_tag) . "</a>";
+
+            } else {
+                $failures[] = join(",", $asset->getErrors()->all());
             }
         }
 
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
 
-        if ($success) {
+        if ($successes) {
+            if ($failures) {
+                //some succeeded, some failed
+                return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets')) //FIXME - not tested
+                ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]))
+                    ->with('warning', trans_choice('admin/hardware/message.create.partial_failure', $failures, ['failures' => join("; ", $failures)]));
+            } else {
+                if (count($successes) == 1) {
+                    //the most common case, keeping it so we don't have to make every use of that translation string be trans_choice'ed
+                    //and re-translated
+                    return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                        ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
+                } else {
+                    //multi-success
+                    return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                        ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]));
+                }
+            }
 
-            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
-                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
-               
-      
         }
 
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
@@ -428,7 +444,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function destroy($assetId) : RedirectResponse
+    public function destroy(Request $request, $assetId) : RedirectResponse
     {
         // Check if the asset exists
         if (is_null($asset = Asset::find($assetId))) {
@@ -438,9 +454,17 @@ class AssetsController extends Controller
 
         $this->authorize('delete', $asset);
 
-        DB::table('assets')
-            ->where('id', $asset->id)
-            ->update(['assigned_to' => null]);
+        if ($asset->assignedTo) {
+
+            $target = $asset->assignedTo;
+            $checkin_at = date('Y-m-d H:i:s');
+            $originalValues = $asset->getRawOriginal();
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on delete', $checkin_at, $originalValues));
+            DB::table('assets')
+                ->where('id', $asset->id)
+                ->update(['assigned_to' => null]);
+        }
+
 
         if ($asset->image) {
             try {
