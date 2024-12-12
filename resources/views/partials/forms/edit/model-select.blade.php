@@ -3,12 +3,7 @@
 
     {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
 
-    <div
-        @class([
-            'col-md-7',
-            'required' => isset($field_req) || (isset($required) && ($required =='true'))
-        ])
-    >
+    <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="models" data-placeholder="{{ trans('general.select_model') }}" name="{{ $fieldname }}" style="width: 100%" id="model_select_id" aria-label="{{ $fieldname }}"{{  ((isset($field_req)) || ((isset($required) && ($required =='true')))) ?  ' required' : '' }}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
             @if ($model_id = old($fieldname, ($item->{$fieldname} ?? request($fieldname) ?? '')))
                 <option value="{{ $model_id }}" selected="selected">
