@@ -63,6 +63,7 @@ class LicenseCheckinController extends Controller
         $license = License::find($licenseSeat->license_id);
 
         // LicenseSeat is not assigned, it can't be checked in
+        // @todo:
         if (is_null($licenseSeat->assigned_to) && is_null($licenseSeat->asset_id)) {
             return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.checkin.error'));
         }
@@ -71,7 +72,7 @@ class LicenseCheckinController extends Controller
 
         if (! $license->reassignable) {
             // Not allowed to checkin
-            Session::flash('error', 'License not reassignable.');
+            Session::flash('error', trans('admin/licenses/message.checkin.not_reassignable') . '.');
 
             return redirect()->back()->withInput();
         }
@@ -90,12 +91,14 @@ class LicenseCheckinController extends Controller
             return redirect()->back()->withInput()->withErrors($validator);
         }
 
+        // @todo:
         if($licenseSeat->assigned_to != null){
             $return_to = User::find($licenseSeat->assigned_to);
         } else {
             $return_to = Asset::find($licenseSeat->asset_id);
         }
 
+        // @todo:
         // Update the asset data
         $licenseSeat->assigned_to = null;
         $licenseSeat->asset_id = null;
@@ -106,6 +109,7 @@ class LicenseCheckinController extends Controller
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
+            // @todo:
             event(new CheckoutableCheckedIn($licenseSeat, $return_to, auth()->user(), $request->input('notes')));
 
 
