@@ -50,7 +50,7 @@ class ConsumablesController extends Controller
     {
         $this->authorize('create', Consumable::class);
 
-        return view('consumables/edit')->with('category_type', 'consumable')
+        return view('consumables.edit')->with('category_type', 'consumable')
             ->with('item', new Consumable);
     }
 
