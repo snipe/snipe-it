@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
+use App\Models\Traits\CompanyableChild;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
 {
     use HasFactory;
     use SoftDeletes;
-    use CompanyableChildTrait;
+    use CompanyableChild;
     use ValidatingTrait;
 
 
