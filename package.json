@@ -25,7 +25,7 @@
         "postcss": "^8.4.5"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^6.6.0",
+        "@fortawesome/fontawesome-free": "^6.7.1",
         "acorn": "^8.12.0",
         "acorn-import-assertions": "^1.9.0",
         "admin-lte": "^2.4.18",
