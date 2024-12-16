@@ -37,14 +37,14 @@ class LicenseSeatFactory extends Factory
 
     public function reassignable()
     {
-        return $this->afterCreating(function (LicenseSeat $seat) {
+        return $this->afterMaking(function (LicenseSeat $seat) {
             $seat->license->update(['reassignable' => true]);
         });
     }
 
     public function notReassignable()
     {
-        return $this->afterCreating(function (LicenseSeat $seat) {
+        return $this->afterMaking(function (LicenseSeat $seat) {
             $seat->license->update(['reassignable' => false]);
         });
     }
