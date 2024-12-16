@@ -24,7 +24,7 @@ class AccessoryCheckout extends Model
 
     protected $fillable = ['created_by', 'accessory_id', 'assigned_to', 'assigned_type', 'note'];
     protected $table = 'accessories_checkout';
-    
+
     /**
      * Establishes the accessory checkout -> accessory relationship
      *
@@ -34,7 +34,7 @@ class AccessoryCheckout extends Model
      */
     public function accessory()
     {
-        return $this->hasOne(\App\Models\Accessory::class, 'accessory_id');
+        return $this->hasOne(\App\Models\Accessory::class, 'id', 'accessory_id');
     }
 
     /**
@@ -46,7 +46,7 @@ class AccessoryCheckout extends Model
      */
     public function user()
     {
-        return $this->hasOne(\App\Models\User::class, 'user_id');
+        return $this->hasOne(\App\Models\User::class, 'id','user_id');
     }
 
     /**
