@@ -138,66 +138,141 @@
 
                                 </div>
                             </div>
+                        @endif
+                        @if($setting->label2_enable == 0)
+                            @if ($is_gd_installed)
+                            <!-- barcode -->
+                            <div class="form-group">
 
-                            <!-- 1D Barcode Type -->
-                            <div class="form-group{{ $errors->has('label2_1d_type') ? ' has-error' : '' }}">
-                                <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_1d_type', trans('admin/settings/general.label2_1d_type'), ['class'=>'control-label']) }}
-                                </div>
-                                <div class="col-md-7">
-                                    @php
-                                        $select1DValues = [
-                                            'C128'    => 'C128',
-                                            'C39'     => 'C39',
-                                            'EAN5'    => 'EAN5',
-                                            'EAN13'   => 'EAN13',
-                                            'UPCA'    => 'UPCA',
-                                            'UPCE'    => 'UPCE',
-                                             'none'    => trans('admin/settings/general.none'),
-                                        ];
-                                    @endphp
-                                    {{ Form::select('label2_1d_type', $select1DValues, old('label2_1d_type', $setting->label2_1d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_1d_type' ]) }}
-                                    {!! $errors->first('label2_1d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                                    <p class="help-block">
-                                        {{ trans('admin/settings/general.label2_1d_type_help') }}.
-                                        {!!
-                                            trans('admin/settings/general.help_default_will_use', [
-                                                'default' => trans('admin/settings/general.default'),
-                                                'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.alt_barcode_type'),
-                                            ])
-                                        !!}
-                                    </p>
+                                <div class="col-md-9 col-md-offset-3">
+                                    <label class="form-control">
+                                        {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array( 'aria-label'=>'alt_barcode_enabled')) }}
+                                        {{ trans('admin/settings/general.display_alt_barcode') }}
+                                    </label>
                                 </div>
                             </div>
+                            @endif
+                        @endif
+                                <!-- 1D Barcode Type -->
+                                <div class="form-group{{ $errors->has('label2_1d_type') ? ' has-error' : '' }}">
+                                    <div class="col-md-3 text-right">
+                                        {{ Form::label('label2_1d_type', trans('admin/settings/general.label2_1d_type'), ['class'=>'control-label']) }}
+                                    </div>
+                                    <div class="col-md-7">
+                                        @php
+                                            $select1DValues = [
+                                                'C128'    => 'C128',
+                                                'C39'     => 'C39',
+                                                'EAN5'    => 'EAN5',
+                                                'EAN13'   => 'EAN13',
+                                                'UPCA'    => 'UPCA',
+                                                'UPCE'    => 'UPCE',
+                                                 'none'    => trans('admin/settings/general.none'),
+                                            ];
+                                        @endphp
+                                        {{ Form::select('label2_1d_type', $select1DValues, old('label2_1d_type', $setting->label2_1d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_1d_type' ]) }}
+                                        {!! $errors->first('label2_1d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                        <p class="help-block">
+                                            {{ trans('admin/settings/general.label2_1d_type_help') }}.
+                                            {!!
+                                                trans('admin/settings/general.help_default_will_use', [
+                                                    'default' => trans('admin/settings/general.default'),
+                                                    'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.alt_barcode_type'),
+                                                ])
+                                            !!}
+                                        </p>
+                                    </div>
+                                </div>
+                @if($setting->label2_enable == 0)
 
-                            <!-- 2D Barcode Type -->
-                            <div class="form-group{{ $errors->has('label2_2d_type') ? ' has-error' : '' }}">
-                                <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_2d_type', trans('admin/settings/general.label2_2d_type'), ['class'=>'control-label']) }}
-                                </div>
-                                <div class="col-md-7">
-                                    @php
-                                        $select2DValues = [
-                                            'QRCODE'     => 'QRCODE',
-                                            'DATAMATRIX' => 'DATAMATRIX',
-                                            'PDF417'     => 'PDF417',
-                                            'none'       => trans('admin/settings/general.none'),
-                                        ];
-                                    @endphp
-                                    {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
-                                    {!! $errors->first('label2_2d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                                    <p class="help-block">
-                                        {{ trans('admin/settings/general.label2_2d_type_help', ['current' => $setting->barcode_type]) }}.
-                                        {!!
-                                            trans('admin/settings/general.help_default_will_use', [
-                                                'default' => trans('admin/settings/general.default'),
-                                                'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.barcode_type'),
-                                            ])
-                                        !!}
-                                    </p>
-                                </div>
+                        <!-- qr code -->
+                        <div class="form-group">
+                            <div class="col-md-9 col-md-offset-3">
+                                <label class="form-control">
+                                    {{ Form::checkbox('qr_code', '1', old('qr_code', $setting->qr_code),array('aria-label'=>'qr_code')) }}
+                                    {{ trans('admin/settings/general.display_qr') }}
+                                </label>
                             </div>
+                        </div>
+                    @endif
+                                <!-- 2D Barcode Type -->
+                                <div class="form-group{{ $errors->has('label2_2d_type') ? ' has-error' : '' }}">
+                                    <div class="col-md-3 text-right">
+                                        {{ Form::label('label2_2d_type', trans('admin/settings/general.label2_2d_type'), ['class'=>'control-label']) }}
+                                    </div>
+                                    <div class="col-md-7">
+                                        @php
+                                            $select2DValues = [
+                                                'QRCODE'     => 'QRCODE',
+                                            ];
+                                            if ($setting->label2_enable == 1) {
+                                                $select2DValues['PDF417'] = 'PDF417';
+                                            }
+                                             $select2DValues = array_merge($select2DValues, [
+                                                'DATAMATRIX' => 'DATAMATRIX',
+                                                'none'       => trans('admin/settings/general.none'),
+                                            ]);
+                                        @endphp
+                                        {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
+                                        {!! $errors->first('label2_2d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                        <p class="help-block">
+                                            {{ trans('admin/settings/general.label2_2d_type_help', ['current' => $setting->barcode_type]) }}.
+                                            {!!
+                                                trans('admin/settings/general.help_default_will_use', [
+                                                    'default' => trans('admin/settings/general.default'),
+                                                    'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.barcode_type'),
+                                                ])
+                                            !!}
+                                        </p>
+                                    </div>
+                                </div>
 
+                    @if($setting->label2_enable == 0)
+                                <!-- QR Text -->
+                                <div class="form-group{{ $errors->has('qr_text') ? ' has-error' : '' }}">
+                                    <div class="col-md-3 text-right">
+                                        {{ Form::label('qr_text', trans('admin/settings/general.qr_text'), ['class'=>'control-label']) }}
+                                    </div>
+                                    <div class="col-md-7">
+                                        @if ($setting->qr_code == 1)
+                                            {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array(
+                                                'class' => 'form-control',
+                                                'placeholder' => 'Property of Your Company',
+                                                'rel' => 'txtTooltip',
+                                                'title' =>'Extra text that you would like to display on your labels.',
+                                                'data-toggle' =>'tooltip',
+                                                'data-placement'=>'top'
+                                            )) }}
+                                        @else
+                                            {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array(
+                                                'class' => 'form-control',
+                                                'disabled' => 'disabled',
+                                                'placeholder' => 'Property of Your Company'
+                                            )) }}
+                                            <p class="help-block">{{ trans('admin/settings/general.qr_help') }}</p>
+                                        @endif
+                                        {!! $errors->first('qr_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                    </div>
+                                </div>
+
+                                <!-- Nuke barcode cache -->
+                                <div class="form-group">
+                                    <div class="col-md-3 text-right">
+                                        {{ Form::label('purge_barcodes', 'Purge Barcodes', ['class'=>'control-label']) }}
+                                    </div>
+                                    <div class="col-md-7">
+                                        <a class="btn btn-default btn-sm pull-left" id="purgebarcodes" style="margin-right: 10px;">
+                                            {{ trans('admin/settings/general.barcode_delete_cache') }}
+                                        </a>
+                                        <span id="purgebarcodesicon"></span>
+                                        <span id="purgebarcodesresult"></span>
+                                        <span id="purgebarcodesstatus"></span>
+                                        {!! $errors->first('purgebarcodes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                        <p class="help-block">{{ trans('admin/settings/general.barcodes_help') }}</p>
+                                    </div>
+                                </div>
+                       @endif
+                        @if ($setting->label2_enable)
                             <!-- 2D Barcode Target -->
                             <div class="form-group{{ $errors->has('label2_2d_target') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
@@ -227,13 +302,11 @@
                             @include('partials.bootstrap-table')
 
                         @else
+
                             <!-- Hidden version of new settings -->
                             {{ Form::hidden('label2_template', old('label2_template', $setting->label2_template)) }}
                             {{ Form::hidden('label2_title', old('label2_title', $setting->label2_title)) }}
                             {{ Form::hidden('label2_asset_logo', old('label2_asset_logo', $setting->label2_asset_logo)) }}
-                            {{ Form::hidden('label2_1d_type', old('label2_1d_type', $setting->label2_1d_type)) }}
-                            {{ Form::hidden('label2_2d_type', old('label2_2d_type', $setting->label2_2d_type)) }}
-                            {{ Form::hidden('label2_2d_target', old('label2_2d_target', $setting->label2_2d_target)) }}
                             {{ Form::hidden('label2_fields', old('label2_fields', $setting->label2_fields)) }}
                         @endif
 
@@ -258,6 +331,17 @@
                             {{ Form::hidden('labels_display_company_name', old('labels_display_company_name', $setting->labels_display_company_name)) }}
                         @else
                             <!-- Legacy settings -->
+                    <style>
+                        .checkbox label {
+                            padding-right: 40px;
+                        }
+                    </style>
+
+
+                    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+                    <!-- CSRF Token -->
+                    {{csrf_field()}}
+
                             <div class="form-group{{ $errors->has('labels_per_page') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
                                     {{ Form::label('labels_per_page', trans('admin/settings/general.labels_per_page'), ['class'=>'control-label']) }}
@@ -430,6 +514,59 @@
 @stop
 
 @push('js')
+    <script nonce="{{ csrf_token() }}">
+        // Delete barcodes
+        $("#purgebarcodes").click(function(){
+            $("#purgebarcodesrow").removeClass('text-success');
+            $("#purgebarcodesrow").removeClass('text-danger');
+            $("#purgebarcodesicon").html('');
+            $("#purgebarcodesstatus").html('');
+            $('#purgebarcodesstatus-error').html('');
+            $("#purgebarcodesicon").html('<i class="fas fa-spinner spin"></i> {{ trans('admin/settings/general.barcodes_spinner') }}');
+            $.ajax({
+                url: '{{ route('api.settings.purgebarcodes') }}',
+                type: 'POST',
+                headers: {
+                    "X-Requested-With": 'XMLHttpRequest',
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {},
+                dataType: 'json',
+
+                success: function (data) {
+                    console.dir(data);
+                    $("#purgebarcodesicon").html('');
+                    $("#purgebarcodesstatus").html('');
+                    $('#purgebarcodesstatus-error').html('');
+                    $("#purgebarcodesstatus").removeClass('text-danger');
+                    $("#purgebarcodesstatus").addClass('text-success');
+                    if (data.message) {
+                        $("#purgebarcodesstatus").html('<i class="fas fa-check text-success"></i> ' + data.message);
+                    }
+                },
+
+                error: function (data) {
+
+                    $("#purgebarcodesicon").html('');
+                    $("#purgebarcodesstatus").html('');
+                    $('#purgebarcodesstatus-error').html('');
+                    $("#purgebarcodesstatus").removeClass('text-success');
+                    $("#purgebarcodesstatus").addClass('text-danger');
+                    $("#purgebarcodesicon").html('<i class="fas fa-exclamation-triangle text-danger"></i>');
+                    $('#purgebarcodesstatus').html('Files could not be deleted.');
+                    if (data.responseJSON) {
+                        $('#purgebarcodesstatus-error').html('Error: ' + data.responseJSON.messages);
+                    } else {
+                        console.dir(data);
+                    }
+
+                }
+
+
+            });
+        });
+
+    </script>
     {{-- Can't use @script here because we're not in a livewire component so let's manually load --}}
     @livewireScripts
 @endpush
