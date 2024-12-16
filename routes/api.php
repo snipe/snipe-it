@@ -473,6 +473,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.assets.checkout.bytag');
 
+        Route::post('checkoutbytag',
+            [
+                Api\AssetsController::class, 
+                'checkoutbytag'
+            ]
+        )->name('api.asset.checkoutbytag');
+
         Route::post('bytag/{any}/checkin',
             [
                 Api\AssetsController::class,
@@ -529,6 +536,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             'checkout'
         ]
         )->name('api.asset.checkout');
+
+        Route::post('checkout',
+        [
+            Api\AssetsController::class, 
+            'checkout'
+        ]
+        )->name('api.asset.checkoutbyid');
+
+        Route::post('checkin',
+        [
+            Api\AssetsController::class, 
+            'checkin'
+        ]
+        )->name('api.asset.checkinbyid');
 
       Route::post('{asset_id}/restore',
           [
