@@ -174,7 +174,7 @@
                                             class="col-md-4"
                                             name="label2_1d_type"
                                             id="label2_1d_type"
-                                            :items="$select1DValues"
+                                            :options="$select1DValues"
                                             :selected="old('label2_1d_type', $setting->label2_1d_type)"
                                             aria-label="label2_1d_type"
                                         />
@@ -224,7 +224,7 @@
                                             class="col-md-4"
                                             name="label2_2d_type"
                                             id="label2_2d_type"
-                                            :items="$select2DValues"
+                                            :options="$select2DValues"
                                             :selected="old('label2_2d_type', $setting->label2_2d_type)"
                                             aria-label="label2_2d_type"
                                         />
@@ -297,7 +297,7 @@
                                         class="col-md-4"
                                         name="label2_2d_target"
                                         id="label2_2d_target"
-                                        :items="['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')', 'ht_tag'=>'/ht/{asset_tag}']"
+                                        :options="['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')', 'ht_tag'=>'/ht/{asset_tag}']"
                                         :selected="old('label2_2d_target', $setting->label2_2d_target)"
                                         aria-label="label2_2d_target"
                                     />

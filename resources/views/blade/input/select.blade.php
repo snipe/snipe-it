@@ -1,7 +1,7 @@
 @props([
-    // items can either be provided as key => value pairs
+    // options can either be provided as key => value pairs
     // or passed in via the default $slot
-    'items',
+    'options',
     'selected' => null,
     'includeEmpty' => false,
     'forLivewire' => false,
@@ -16,7 +16,7 @@
     @endif
     {{-- map the simple key => value pairs when nothing is passed in via the slot --}}
     @if($slot->isEmpty())
-        @foreach($items as $key => $value)
+        @foreach($options as $key => $value)
             <option value="{{ $key }}" @selected($selected === $key)>{{ $value }}</option>
         @endforeach
     @else

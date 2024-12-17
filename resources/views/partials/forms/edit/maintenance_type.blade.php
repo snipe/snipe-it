@@ -5,7 +5,7 @@
               <div class="col-md-7">
                   <x-input.select
                       name="asset_maintenance_type"
-                      :items="$assetMaintenanceType"
+                      :options="$assetMaintenanceType"
                       :selected="old('asset_maintenance_type', $item->asset_maintenance_type)"
                       aria-label="asset_maintenance_type"
                       style="width:100%;"

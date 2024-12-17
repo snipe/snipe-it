@@ -6,7 +6,7 @@
             name="status_id"
             id="status_select_id"
             class="status_id"
-            :items="$statuslabel_list"
+            :options="$statuslabel_list"
             :selected="old('status_id', $item->status_id)"
             aria-label="status_id"
             :required="$required"

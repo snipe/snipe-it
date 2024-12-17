@@ -127,7 +127,7 @@
             <div class="col-md-7">
               <x-input.select
                 name="status_id"
-                :items="$statuslabel_list"
+                :options="$statuslabel_list"
                 :selected="old('status_id')"
                 style="width: 100%"
                 aria-label="status_id"

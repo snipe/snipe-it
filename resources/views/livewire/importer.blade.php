@@ -158,7 +158,7 @@
                                                                     <x-input.select
                                                                         name="typeOfImport"
                                                                         id="import_type"
-                                                                        :items="$importTypes"
+                                                                        :options="$importTypes"
                                                                         :selected="$typeOfImport"
                                                                         :for-livewire="true"
                                                                         :include-empty="true"

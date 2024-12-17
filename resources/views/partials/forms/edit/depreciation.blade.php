@@ -5,7 +5,7 @@
         <x-input.select
             name="depreciation_id"
             id="depreciation_id"
-            :items="$depreciation_list"
+            :options="$depreciation_list"
             :selected="old('depreciation_id', $item->depreciation_id)"
             aria-label="depreciation_id"
             style="width:350px;"

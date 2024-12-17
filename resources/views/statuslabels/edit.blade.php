@@ -29,7 +29,7 @@
     <div class="col-md-7 required">
         <x-input.select
             name="statuslabel_types"
-            :items="$statuslabel_types"
+            :options="$statuslabel_types"
             :selected="$item->getStatuslabelType()"
             style="width: 100%; min-width:400px"
             aria-label="statuslabel_types"

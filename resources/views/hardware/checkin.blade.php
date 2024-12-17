@@ -86,7 +86,7 @@
                                             <div class="col-md-8 required">
                                                 <x-input.select
                                                     name="status_id"
-                                                    :items="$statusLabel_list"
+                                                    :options="$statusLabel_list"
                                                     id="modal-statuslabel_types"
                                                     style="width: 100%"
                                                     aria-label="status_id"

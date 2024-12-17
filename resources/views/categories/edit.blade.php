@@ -17,7 +17,7 @@
     <div class="col-md-7 required">
         <x-input.select
             name="category_type"
-            :items="$category_types"
+            :options="$category_types"
             :selected="old('category_type', $item->category_type)"
             style="min-width:350px"
             aria-label="category_type"

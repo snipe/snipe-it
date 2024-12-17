@@ -8,7 +8,7 @@
                 name="fieldset_id"
                 id="fieldset_id"
                 class="js-fieldset-field"
-                :items="Helper::customFieldsetList()"
+                :options="Helper::customFieldsetList()"
                 :selected="old('fieldset_id', $fieldset_id)"
                 aria-label="custom_fieldset"
                 style="width:100%; min-width:350px;"

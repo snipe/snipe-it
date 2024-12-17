@@ -361,7 +361,7 @@
                            <div class="col-md-9">
                                <x-input.select
                                    name="dash_chart_type"
-                                   :items="['name' => 'Status Label Name', 'type' => 'Status Label Type']"
+                                   :options="['name' => 'Status Label Name', 'type' => 'Status Label Type']"
                                    :selected="old('dash_chart_type', $setting->dash_chart_type)"
                                    style="width: 80%"
                                />
@@ -378,7 +378,7 @@
                                <x-input.select
                                    name="depreciation_method"
                                    id="depreciation_method"
-                                   :items="['default' => 'Linear (default)', 'half_1' => 'Half-year convention, always applied', 'half_2' => 'Half-year convention, applied with condition']"
+                                   :options="['default' => 'Linear (default)', 'half_1' => 'Half-year convention, always applied', 'half_2' => 'Half-year convention, applied with condition']"
                                    :selected="old('depreciation_method', $setting->depreciation_method)"
                                    style="width: 80%"
                                />

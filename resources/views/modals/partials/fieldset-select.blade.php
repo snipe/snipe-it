@@ -5,7 +5,7 @@
         <x-input.select
             name="fieldset_id"
             id="modal-fieldset_id"
-            :items="Helper::customFieldsetList()"
+            :options="Helper::customFieldsetList()"
             :selected="old('fieldset_id')"
             style="width:100%;"
         />

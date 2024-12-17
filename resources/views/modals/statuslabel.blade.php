@@ -20,7 +20,7 @@
                         <x-input.select
                             name="type"
                             id="modal-type"
-                            :items="$statuslabel_types"
+                            :options="$statuslabel_types"
                             required
                             style="width:100%;"
                         />

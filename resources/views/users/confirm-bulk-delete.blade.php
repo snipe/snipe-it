@@ -112,7 +112,7 @@
                       <x-input.select
                           name="status_id"
                           id="status_id"
-                          :items="$statuslabel_list"
+                          :options="$statuslabel_list"
                           :selected="old('status_id')"
                           required
                           style="width:250px"

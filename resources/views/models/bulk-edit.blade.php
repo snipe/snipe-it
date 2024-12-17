@@ -65,7 +65,7 @@
                                     <x-input.select
                                         name="fieldset_id"
                                         class="js-fieldset-field"
-                                        :items="$fieldset_list"
+                                        :options="$fieldset_list"
                                         :selected="old('fieldset_id', 'NC')"
                                         style="width:350px"
                                     />
@@ -82,7 +82,7 @@
                                 <div class="col-md-7">
                                     <x-input.select
                                         name="depreciation_id"
-                                        :items="$depreciation_list"
+                                        :options="$depreciation_list"
                                         :selected="old('depreciation_id', 'NC')"
                                         style="width:350px"
                                     />

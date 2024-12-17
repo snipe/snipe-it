@@ -50,7 +50,7 @@
                             <x-input.select
                                 name="status_id"
                                 id="status_id"
-                                :items="$statusLabel_list"
+                                :options="$statusLabel_list"
                                 aria-label="status_id"
                                 style="width:100%"
                             />

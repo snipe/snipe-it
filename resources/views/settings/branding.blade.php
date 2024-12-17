@@ -71,7 +71,7 @@
                                     class="form-control"
                                     name="brand"
                                     id="brand"
-                                    :items="['1'=>'Text','2'=>'Logo','3'=>'Logo + Text']"
+                                    :options="['1'=>'Text','2'=>'Logo','3'=>'Logo + Text']"
                                     :selected="old('brand', $setting->brand)"
                                     style="width: 150px"
                                 />
@@ -262,7 +262,7 @@
                                     <x-input.select
                                         name="support_footer"
                                         id="support_footer"
-                                        :items="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
+                                        :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
                                         :selected="old('support_footer', $setting->support_footer)"
                                         class="form-control disabled"
                                         style="width: 150px"
@@ -273,7 +273,7 @@
                                     <x-input.select
                                         name="support_footer"
                                         id="support_footer"
-                                        :items="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
+                                        :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
                                         :selected="old('support_footer', $setting->support_footer)"
                                         class="form-control"
                                         style="width: 150px"
@@ -296,7 +296,7 @@
                                     <x-input.select
                                         name="version_footer"
                                         id="version_footer"
-                                        :items="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
+                                        :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
                                         :selected="old('version_footer', $setting->version_footer)"
                                         class="form-control disabled"
                                         style="width: 150px"
@@ -307,7 +307,7 @@
                                     <x-input.select
                                         name="version_footer"
                                         id="version_footer"
-                                        :items="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
+                                        :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
                                         :selected="old('version_footer', $setting->version_footer)"
                                         class="form-control"
                                         style="width: 150px"

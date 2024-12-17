@@ -91,7 +91,7 @@
               <x-input.select
                 class="format form-control"
                 name="format"
-                :items="Helper::predefined_formats()"
+                :options="Helper::predefined_formats()"
                 :selected="($field_format == '') ? $field->format : $field_format"
                 style="width:100%"
                 aria-label="format"

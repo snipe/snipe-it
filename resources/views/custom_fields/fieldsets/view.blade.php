@@ -100,7 +100,7 @@
                   </label>
                   <x-input.select
                     name="field_id"
-                    :items="$custom_fields_list"
+                    :options="$custom_fields_list"
                     style="min-width:400px"
                     aria-label="field_id"
                   />
