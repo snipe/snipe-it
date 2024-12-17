@@ -23,6 +23,13 @@ class AccessoryCheckinTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('accessories.checkin.show', Accessory::factory()->checkedOutToUser()->create()->id))
+            ->assertOk();
+    }
+
     public function testAccessoryCanBeCheckedIn()
     {
         Event::fake([CheckoutableCheckedIn::class]);

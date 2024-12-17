@@ -22,6 +22,12 @@ class ConsumableCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('consumables.checkout.show', Consumable::factory()->create()->id))
+            ->assertOk();
+    }
     public function testValidationWhenCheckingOutConsumable()
     {
         $this->actingAs(User::factory()->checkoutConsumables()->create())

@@ -22,6 +22,13 @@ class ComponentCheckinTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('components.checkin.show', Component::factory()->checkedOutToAsset()->create()->id))
+            ->assertOk();
+    }
+
     public function testComponentCheckinPagePostIsRedirectedIfRedirectSelectionIsIndex()
     {
         $component = Component::factory()->checkedOutToAsset()->create();
