@@ -89,8 +89,8 @@
               @endphp
             <div class="col-md-8 required">
               <x-input.select
-                class="format form-control"
                 name="format"
+                class="format form-control"
                 :options="Helper::predefined_formats()"
                 :selected="($field_format == '') ? $field->format : $field_format"
                 style="width:100%"

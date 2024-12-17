@@ -171,8 +171,8 @@
                                             ];
                                         @endphp
                                         <x-input.select
-                                            class="col-md-4"
                                             name="label2_1d_type"
+                                            class="col-md-4"
                                             id="label2_1d_type"
                                             :options="$select1DValues"
                                             :selected="old('label2_1d_type', $setting->label2_1d_type)"
@@ -221,8 +221,8 @@
                                             ]);
                                         @endphp
                                         <x-input.select
-                                            class="col-md-4"
                                             name="label2_2d_type"
+                                            class="col-md-4"
                                             id="label2_2d_type"
                                             :options="$select2DValues"
                                             :selected="old('label2_2d_type', $setting->label2_2d_type)"
@@ -294,8 +294,8 @@
                                 </div>
                                 <div class="col-md-9">
                                     <x-input.select
-                                        class="col-md-4"
                                         name="label2_2d_target"
+                                        class="col-md-4"
                                         id="label2_2d_target"
                                         :options="['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')', 'ht_tag'=>'/ht/{asset_tag}']"
                                         :selected="old('label2_2d_target', $setting->label2_2d_target)"

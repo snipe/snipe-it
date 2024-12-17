@@ -68,8 +68,8 @@
                             </div>
                             <div class="col-md-9">
                                 <x-input.select
-                                    class="form-control"
                                     name="brand"
+                                    class="form-control"
                                     id="brand"
                                     :options="['1'=>'Text','2'=>'Logo','3'=>'Logo + Text']"
                                     :selected="old('brand', $setting->brand)"
