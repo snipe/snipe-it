@@ -1,5 +1,5 @@
 @props([
-    // options can either be provided as key => value pairs
+    // <options> can either be provided as key => value pairs
     // or passed in via the default $slot
     'options',
     'selected' => null,
