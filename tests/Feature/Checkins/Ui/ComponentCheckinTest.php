@@ -24,8 +24,12 @@ class ComponentCheckinTest extends TestCase
 
     public function testPageRenders()
     {
+        $component = Component::factory()->checkedOutToAsset()->create();
+
+        $componentAsset = DB::table('components_assets')->where('component_id', $component->id)->first();
+
         $this->actingAs(User::factory()->superuser()->create())
-            ->get(route('components.checkin.show', Component::factory()->checkedOutToAsset()->create()->id))
+            ->get(route('components.checkin.show', $componentAsset->id))
             ->assertOk();
     }
 

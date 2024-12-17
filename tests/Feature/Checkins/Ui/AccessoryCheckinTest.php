@@ -25,8 +25,10 @@ class AccessoryCheckinTest extends TestCase
 
     public function testPageRenders()
     {
+        $accessory = Accessory::factory()->checkedOutToUser()->create();
+
         $this->actingAs(User::factory()->superuser()->create())
-            ->get(route('accessories.checkin.show', Accessory::factory()->checkedOutToUser()->create()->id))
+            ->get(route('accessories.checkin.show', $accessory->checkouts->first()->id))
             ->assertOk();
     }
 
