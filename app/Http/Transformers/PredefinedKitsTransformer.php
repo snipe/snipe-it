@@ -4,7 +4,6 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Asset;
-use App\Models\AssetModel;
 use App\Models\PredefinedKit;
 use App\Models\SnipeModel;
 use Illuminate\Support\Facades\Gate;
