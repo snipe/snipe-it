@@ -20,6 +20,7 @@ use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
