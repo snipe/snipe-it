@@ -240,11 +240,22 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    <x-input.textarea name="custom_css" :value="old('custom_css', $setting->custom_css)" placeholder="Add your custom CSS" aria-label="custom_css" disabled/>
+                                    <x-input.textarea
+                                        name="custom_css"
+                                        :value="old('custom_css', $setting->custom_css)"
+                                        placeholder="Add your custom CSS"
+                                        aria-label="custom_css"
+                                        disabled
+                                    />
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    <x-input.textarea name="custom_css" :value="old('custom_css', $setting->custom_css)" placeholder="Add your custom CSS" aria-label="custom_css"/>
+                                    <x-input.textarea
+                                        name="custom_css"
+                                        :value="old('custom_css', $setting->custom_css)"
+                                        placeholder="Add your custom CSS"
+                                        aria-label="custom_css"
+                                    />
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
@@ -326,10 +337,21 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    <x-input.textarea name="footer_text" :value="old('footer_text', $setting->footer_text)" rows="4" placeholder="Optional footer text" disabled/>
+                                    <x-input.textarea
+                                        name="footer_text"
+                                        :value="old('footer_text', $setting->footer_text)"
+                                        rows="4"
+                                        placeholder="Optional footer text"
+                                        disabled
+                                    />
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    <x-input.textarea name="footer_text" :value="old('footer_text', $setting->footer_text)" rows="4" placeholder="Optional footer text"/>
+                                    <x-input.textarea
+                                        name="footer_text"
+                                        :value="old('footer_text', $setting->footer_text)"
+                                        rows="4"
+                                        placeholder="Optional footer text"
+                                    />
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
                                 {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}

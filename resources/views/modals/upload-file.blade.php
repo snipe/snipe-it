@@ -31,7 +31,13 @@
                     </div>
 
                     <div class="col-md-12">
-                        <x-input.textarea name="notes" :value="old('notes')" placeholder="Notes (Optional)" rows="3" aria-label="file"/>
+                        <x-input.textarea
+                            name="notes"
+                            :value="old('notes')"
+                            placeholder="Notes (Optional)"
+                            rows="3"
+                            aria-label="file"
+                        />
                     </div>
                 </div>
 

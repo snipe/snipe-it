@@ -208,7 +208,11 @@
                            {{ Form::label('default_eula_text', trans('admin/settings/general.default_eula_text')) }}
                        </div>
                        <div class="col-md-9">
-                           <x-input.textarea name="default_eula_text" :value="old('default_eula_text', $setting->default_eula_text)" placeholder="Add your default EULA text"/>
+                           <x-input.textarea
+                               name="default_eula_text"
+                               :value="old('default_eula_text', $setting->default_eula_text)"
+                               placeholder="Add your default EULA text"
+                           />
                            {!! $errors->first('default_eula_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                            <p class="help-block">{{ trans('admin/settings/general.default_eula_help_text') }}</p>
                            <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!}</p>

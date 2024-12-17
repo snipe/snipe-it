@@ -83,7 +83,12 @@
                                     <!-- SAML SP Certificate -->
                                     @if (!empty($setting->saml_sp_x509cert))
                                         {{ Form::label('saml_sp_x509cert', trans('admin/settings/general.saml_sp_x509cert')) }}
-                                        <x-input.textarea name="saml_sp_x509cert" :value="$setting->saml_sp_x509cert" wrap="off" readonly/>
+                                        <x-input.textarea
+                                            name="saml_sp_x509cert"
+                                            :value="$setting->saml_sp_x509cert"
+                                            wrap="off"
+                                            readonly
+                                        />
                                         <br>
                                     @endif
                                     <!-- SAML SP Metadata URL -->
@@ -106,7 +111,12 @@
                             {{ Form::label('saml_idp_metadata', trans('admin/settings/general.saml_idp_metadata')) }}
                         </div>
                         <div class="col-md-9">
-                            <x-input.textarea name="saml_idp_metadata" :value="old('saml_idp_metadata', $setting->saml_idp_metadata)" placeholder="https://example.com/idp/metadata" wrap="off"/>
+                            <x-input.textarea
+                                name="saml_idp_metadata"
+                                :value="old('saml_idp_metadata', $setting->saml_idp_metadata)"
+                                placeholder="https://example.com/idp/metadata"
+                                wrap="off"
+                            />
                             {!! $errors->first('saml_idp_metadata', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}<br>
                             <button type="button" class="btn btn-default" id="saml_idp_metadata_upload_btn" {{ $setting->demoMode }}>{{ trans('button.select_file') }}</button>
                             <input type="file" class="js-uploadFile" id="saml_idp_metadata_upload"
@@ -166,7 +176,12 @@
                             {{ Form::label('saml_custom_settings', trans('admin/settings/general.saml_custom_settings')) }}
                         </div>
                         <div class="col-md-9">
-                            <x-input.textarea name="saml_custom_settings" :value="old('saml_custom_settings', $setting->saml_custom_settings)" placeholder="example.option=false&#13;&#10;sp_x509cert=file:///...&#13;&#10;sp_private_key=file:///" wrap="off"/>
+                            <x-input.textarea
+                                name="saml_custom_settings"
+                                :value="old('saml_custom_settings', $setting->saml_custom_settings)"
+                                placeholder="example.option=false&#13;&#10;sp_x509cert=file:///...&#13;&#10;sp_private_key=file:///"
+                                wrap="off"
+                            />
                             <p class="help-block">{{ trans('admin/settings/general.saml_custom_settings_help') }}</p>
                             {!! $errors->first('saml_custom_settings', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
