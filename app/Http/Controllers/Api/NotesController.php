@@ -31,4 +31,13 @@ class NotesController extends Controller
 
         return response()->json(Helper::formatStandardApiResponse('success'));
     }
+
+    public function update(Request $request)
+    {
+
+    }
+    public function destroy(Request $request)
+    {
+
+    }
 }
