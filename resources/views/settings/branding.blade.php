@@ -69,10 +69,10 @@
                             <div class="col-md-9">
                                 <x-input.select
                                     name="brand"
-                                    class="form-control"
                                     id="brand"
                                     :options="['1'=>'Text','2'=>'Logo','3'=>'Logo + Text']"
                                     :selected="old('brand', $setting->brand)"
+                                    class="form-control"
                                     style="width: 150px"
                                 />
                                 {!! $errors->first('brand', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -264,9 +264,9 @@
                                         id="support_footer"
                                         :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
                                         :selected="old('support_footer', $setting->support_footer)"
+                                        disabled
                                         class="form-control disabled"
                                         style="width: 150px"
-                                        disabled
                                     />
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
@@ -298,9 +298,9 @@
                                         id="version_footer"
                                         :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
                                         :selected="old('version_footer', $setting->version_footer)"
+                                        disabled
                                         class="form-control disabled"
                                         style="width: 150px"
-                                        disabled
                                     />
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else

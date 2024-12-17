@@ -90,9 +90,9 @@
             <div class="col-md-8 required">
               <x-input.select
                 name="format"
-                class="format form-control"
                 :options="Helper::predefined_formats()"
                 :selected="($field_format == '') ? $field->format : $field_format"
+                class="format form-control"
                 style="width:100%"
                 aria-label="format"
               />

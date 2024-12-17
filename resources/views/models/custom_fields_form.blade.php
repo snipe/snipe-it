@@ -11,10 +11,10 @@
                   <!-- Listbox -->
                   <x-input.select
                       :name="$field->db_column_name()"
-                      class="format form-control"
                       :options="$field->formatFieldValuesAsArray()"
                       :selected="old($field->db_column_name(), (isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id)))"
                       :required="$field->pivot->required == '1'"
+                      class="format form-control"
                   />
 
               @elseif ($field->element=='textarea')

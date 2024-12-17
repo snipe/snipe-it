@@ -64,9 +64,9 @@
                                 <div class="col-md-7">
                                     <x-input.select
                                         name="fieldset_id"
-                                        class="js-fieldset-field"
                                         :options="$fieldset_list"
                                         :selected="old('fieldset_id', 'NC')"
+                                        class="js-fieldset-field"
                                         style="width:350px"
                                     />
                                     {!! $errors->first('fieldset_id', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}

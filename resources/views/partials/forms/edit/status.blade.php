@@ -5,12 +5,12 @@
         <x-input.select
             name="status_id"
             id="status_select_id"
-            class="status_id"
             :options="$statuslabel_list"
             :selected="old('status_id', $item->status_id)"
-            aria-label="status_id"
             :required="$required"
+            class="status_id"
             style="width:100%;"
+            aria-label="status_id"
         />
         {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>

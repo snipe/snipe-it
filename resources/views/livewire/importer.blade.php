@@ -161,14 +161,14 @@
                                                                         :options="$importTypes"
                                                                         :selected="$typeOfImport"
                                                                         :for-livewire="true"
+                                                                        :data-livewire-component="$this->getId()"
                                                                         :include-empty="true"
-                                                                        style="min-width: 350px;"
                                                                         :data-placeholder="trans('general.select_var', ['thing' => trans('general.import_type')])"
                                                                         {{--placeholder needed so that the form-helper will put an empty option first--}}
                                                                         placeholder=""
                                                                         {{--Remove this if the list gets long enough that we need to search--}}
                                                                         data-minimum-results-for-search="-1"
-                                                                        :data-livewire-component="$this->getId()"
+                                                                        style="min-width: 350px;"
                                                                     />
                                                                     @if ($typeOfImport === 'asset' && $snipeSettings->auto_increment_assets == 0)
                                                                         <p class="help-block">
@@ -246,11 +246,11 @@
                                                                             <div class="col-md-4">
                                                                                 <x-input.select
                                                                                     :name="'field_map.'.$index"
-                                                                                    class="mappings"
                                                                                     :for-livewire="true"
-                                                                                    :placeholder="trans('general.importer.do_not_import')"
-                                                                                    style="min-width: 100%;"
                                                                                     :data-livewire-component="$this->getId()"
+                                                                                    :placeholder="trans('general.importer.do_not_import')"
+                                                                                    class="mappings"
+                                                                                    style="min-width: 100%;"
                                                                                 >
                                                                                     <option selected="selected" value="">Do Not Import</option>
                                                                                     @foreach($columnOptions[$typeOfImport] as $key => $value)

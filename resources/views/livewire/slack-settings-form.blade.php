@@ -69,13 +69,13 @@
                                 <x-input.select
                                     name="webhook_selected"
                                     id="select2"
-                                    class="form-control"
                                     :options="['slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'),'google' => trans('admin/settings/general.google_workspaces'), 'microsoft' => trans('admin/settings/general.ms_teams')]"
                                     :selected="old('webhook_selected', $webhook_selected)"
-                                    aria-label="webhook_selected"
-                                    data-minimum-results-for-search="-1"
-                                    style="width:100%"
                                     :disabled="Helper::isDemoMode()"
+                                    data-minimum-results-for-search="-1"
+                                    class="form-control"
+                                    style="width:100%"
+                                    aria-label="webhook_selected"
                                 />
                             </div>
                         </div>

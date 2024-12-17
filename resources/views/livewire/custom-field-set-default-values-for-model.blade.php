@@ -7,12 +7,12 @@
             <x-input.select
                 name="fieldset_id"
                 id="fieldset_id"
-                class="js-fieldset-field"
                 :options="Helper::customFieldsetList()"
                 :selected="old('fieldset_id', $fieldset_id)"
-                aria-label="custom_fieldset"
-                style="width:100%; min-width:350px;"
                 :for-livewire="true"
+                class="js-fieldset-field"
+                style="width:100%; min-width:350px;"
+                aria-label="custom_fieldset"
             />
             {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
         </div>

@@ -7,8 +7,8 @@
             id="depreciation_id"
             :options="$depreciation_list"
             :selected="old('depreciation_id', $item->depreciation_id)"
-            aria-label="depreciation_id"
             style="width:350px;"
+            aria-label="depreciation_id"
         />
         {!! $errors->first('depreciation_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
