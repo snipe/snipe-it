@@ -441,14 +441,10 @@
     }
 
     function genericCheckinCheckoutFormatter(destination) {
-        console.log(destination)
         return function (value,row) {
-            console.log(value)
-            console.log(row.user_can_checkout)
             // some extra logic for kits needs to go here
 
             // The user is allowed to check items out, AND the item is deployable
-            row.available_actions.checkout = true //this is for testing -- TODO: REMOVE!!!!
             if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
 
                     return '<a href="{{ config('app.url') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-tooltip="true" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
