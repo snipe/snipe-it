@@ -13,6 +13,7 @@
                       class="format form-control"
                       :items="$field->formatFieldValuesAsArray()"
                       :selected="old($field->db_column_name(), (isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id)))"
+                      :required="$field->pivot->required == '1'"
                   />
 
               @elseif ($field->element=='textarea')
