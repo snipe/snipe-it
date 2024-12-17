@@ -161,7 +161,6 @@
                                                                         :options="$importTypes"
                                                                         :selected="$typeOfImport"
                                                                         :for-livewire="true"
-                                                                        :data-livewire-component="$this->getId()"
                                                                         :include-empty="true"
                                                                         :data-placeholder="trans('general.select_var', ['thing' => trans('general.import_type')])"
                                                                         {{--placeholder needed so that the form-helper will put an empty option first--}}
@@ -247,7 +246,6 @@
                                                                                 <x-input.select
                                                                                     :name="'field_map.'.$index"
                                                                                     :for-livewire="true"
-                                                                                    :data-livewire-component="$this->getId()"
                                                                                     :placeholder="trans('general.importer.do_not_import')"
                                                                                     class="mappings"
                                                                                     style="min-width: 100%;"
