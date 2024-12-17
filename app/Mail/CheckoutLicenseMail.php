@@ -27,7 +27,6 @@ class CheckoutLicenseMail extends Mailable
         $this->note = $note;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
-
         $this->settings = Setting::getSettings();
     }
 
@@ -36,7 +35,7 @@ class CheckoutLicenseMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = new Address(config('mail.from.address'));
+        $from = new Address(config('mail.from.address'), config('mail.from.name'));
 
         return new Envelope(
             from: $from,

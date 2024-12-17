@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Yêu cầu xác thực hai yếu tố, tuy nhiên thiết bị của bạn chưa được đăng ký. Mở ứng dụng Google Authenticator của bạn và quét mã QR dưới đây để đăng ký thiết bị của bạn. Khi bạn đã đăng ký thiết bị của mình, hãy nhập mã dưới đây",
     'require_accept_signature'      => 'Yêu cầu Chữ ký',
     'require_accept_signature_help_text'      => 'Bật tính năng này sẽ yêu cầu người dùng đăng ký về việc chấp nhận nội dung.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'trái',
     'right'        => 'đúng',
     'top'        => 'hàng đầu',

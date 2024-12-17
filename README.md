@@ -102,7 +102,7 @@ Since the release of the JSON REST API, several third-party developers have been
 - **Follow us on Bluesky** at [@snipeitapp.com](https://bsky.app/profile/snipeitapp.com)
 - **Follow us on Mastodon** at [hachyderm.io/@grokability](https://hachyderm.io/@grokability)
 - **Follow our blog** at [Grokstar.Dev](https://grokstar.dev)
-- **Subscribe here** on Github for notifications about new releases. (We recommend selecting "Releases" only for mosrt users - this repo can get noisy.)
+- **Subscribe here** on Github for notifications about new releases. (We recommend selecting "Releases" only for most users - this repo can get noisy.)
 
 -----
 

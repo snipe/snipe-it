@@ -1,5 +1,4 @@
 <span>
-
     <div class="form-group{{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
         <label for="custom_fieldset" class="col-md-3 control-label">
             {{ trans('admin/models/general.fieldset') }}
@@ -20,6 +19,7 @@
         <div class="col-md-3">
             @if ($fieldset_id)
                 <label class="form-control">
+
                     {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values', 'disabled' => $this->fields->isEmpty()]) }}
                     {{ trans('admin/models/general.add_default_values') }}
                 </label>
@@ -28,12 +28,13 @@
     </div>
 
     @if ($add_default_values)
-            @if ($this->fields)
+
+        @if ($this->fields)
 
                 @foreach ($this->fields as $field)
                     <div class="form-group" wire:key="field-{{ $field->id }}">
 
-                        <label class="col-md-3 control-label{{ $errors->has($field->name) ? ' has-error' : '' }}">{{ $field->name }}</label>
+                        <label class="col-md-3 control-label{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">{{ $field->name }}</label>
 
                         <div class="col-md-7">
 
@@ -132,10 +133,16 @@
                                         Unknown field element: {{ $field->element }}
                                     </span>
                                 @endif
+                                        <?php
+                                        $errormessage = $errors->first($field->db_column_name());
+                                        if ($errormessage) {
+                                            print('<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> '.$errormessage.'</span>');
+                                        }
+                                        ?>
                         </div>
                     </div>
 
-                @endforeach
+            @endforeach
 
             @endif
 

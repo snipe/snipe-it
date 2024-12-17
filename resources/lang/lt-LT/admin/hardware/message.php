@@ -9,16 +9,16 @@ return [
     'does_not_exist_or_not_requestable' => 'Tokio turto nėra arba jo negalima užsakyti.',
     'assoc_users'	 	 => 'Šis turtas šiuo metu yra išduotas naudotojui ir negali būti panaikintas. Pirmiausia paimkite turtą ir tuomet vėl bandykite jį panaikinti. ',
     'warning_audit_date_mismatch' 	=> 'Šio turto kito audito data (:next_audit_date) yra ankstesnė už paskutinio audito datą (:last_audit_date). Atnaujinkite kito audito datą.',
-    'labels_generated'   => 'Labels were successfully generated.',
-    'error_generating_labels' => 'Error while generating labels.',
-    'no_assets_selected' => 'No assets selected.',
+    'labels_generated'   => 'Etiketės sugeneruotos sėkmingai.',
+    'error_generating_labels' => 'Generuojant etiketes įvyko klaida.',
+    'no_assets_selected' => 'Nepasirinktas joks turtas.',
 
     'create' => [
         'error'   		=> 'Turto sukurti nepavyko, bandykite dar kartą.',
         'success' 		=> 'Turtas sukurtas sėkmingai.',
         'success_linked' => 'Turtas su žyma :tag sukurtas sėkmingai. <strong><a href=":link" style="color: white;">Spustelėkite čia, kad peržiūrėtumėte</a></strong>.',
-        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
-        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
+        'multi_success_linked' => 'Turtas su inventoriniu numeriu :links sukurtas sėkmingai.|:count turto vienetai(-ų) sukurti sėkmingai. :links.',
+        'partial_failure' => 'Nepavyko sukurti turto. Priežastis: :failures|:count turto vienetų nepavyko sukurti. Priežastys: :failures',
     ],
 
     'update' => [

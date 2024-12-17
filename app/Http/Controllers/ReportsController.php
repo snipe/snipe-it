@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Mail\CheckoutAssetMail;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
@@ -18,6 +19,7 @@ use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use \Illuminate\Contracts\View\View;
 use League\Csv\Reader;
@@ -1150,24 +1152,17 @@ class ReportsController extends Controller
             }
             $logItem = $logItem_res[0];
         }
-
+        $email = $assetItem->assignedTo?->email;
+        $locale = $assetItem->assignedTo?->locale;
         // Only send notification if assigned
-        if ($assetItem->assignedTo) {
+        if ($locale && $email) {
+                Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $logItem->note, $acceptance))->locale($locale));
 
-            if (!$assetItem->assignedTo->locale) {
-                Notification::locale(Setting::getSettings()->locale)->send(
-                    $assetItem->assignedTo,
-                    new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
-                );
-            } else {
-                Notification::send(
-                    $assetItem->assignedTo,
-                    new CheckoutAssetNotification($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)
-                );
+            } elseif ($email) {
+                Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $logItem->note, $acceptance)));
             }
-        }
 
-        if ($assetItem->assignedTo->email == ''){
+        if ($email == ''){
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.no_email'));
         }
 

@@ -137,14 +137,16 @@
                                                     </button>
                                                     <a href="#" wire:click.prevent="$set('activeFileId',null)">
                                                     <button class="btn btn-sm btn-danger" wire:click="destroy({{ $currentFile->id }})">
-                                                        <i class="fas fa-trash icon-white" aria-hidden="true"></i><span class="sr-only"></span></button>
+                                                        <i class="fas fa-trash icon-white" aria-hidden="true"></i>
+                                                        <span class="sr-only">{{ trans('general.delete') }}</span>
+                                                    </button>
                                                     </a>
                                     			</td>
                                     		</tr>
 
                                             @if( $currentFile && $this->activeFile && ($currentFile->id == $this->activeFile->id))
                                                 <tr class="warning">
-                                                    <td colspan="4">
+                                                    <td colspan="5">
 
                                                         <div class="form-group">
 

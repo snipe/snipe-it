@@ -24,7 +24,15 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->fieldset_id = $this->model?->fieldset_id;
         $this->add_default_values = ($this->model?->defaultValues->count() > 0);
 
+
         $this->initializeSelectedValuesArray();
+        if (session()->has('errors')) {
+            $errors = session('errors')->keys();
+            $selectedValuesKeys = array_keys($this->selectedValues);
+            if (count(array_intersect($selectedValuesKeys, $errors)) > 0) {
+                $this->add_default_values = true;
+            };
+        }
         $this->populatedSelectedValuesArray();
     }
 

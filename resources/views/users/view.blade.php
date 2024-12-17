@@ -309,10 +309,10 @@
                   <div class="row">
                     <!-- name -->
     
-                      <div class="col-md-3 col-sm-2">
+                      <div class="col-md-3">
                         {{ trans('admin/users/table.name') }}
                       </div>
-                      <div class="col-md-9 col-sm-2">
+                      <div class="col-md-9">
                         {{ $user->present()->fullName() }}
                       </div>
 
@@ -751,7 +751,7 @@
                            {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
 
                            <a id="optional_info" class="text-primary">
-                               <x-icon type="caret-right" id="optional_info_icon" /></i>
+                               <x-icon type="caret-right" id="optional_info_icon" />
                                <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
                            </a>
                        </div>
@@ -1064,7 +1064,7 @@
 
           <div class="tab-pane" id="managed-users">
 
-              @include('partials.locations-bulk-actions')
+              @include('partials.users-bulk-actions')
 
 
               <table
@@ -1074,7 +1074,7 @@
                       data-pagination="true"
                       data-id-table="managedUsersTable"
                       data-toolbar="#usersBulkEditToolbar"
-                      data-bulk-button-id="#bulkUsersEditButton"
+                      data-bulk-button-id="#bulkUserEditButton"
                       data-bulk-form-id="#usersBulkForm"
                       data-search="true"
                       data-show-footer="true"
