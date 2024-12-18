@@ -50,14 +50,14 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
-
         /**
          * Let's set a max character count here to prevent potential
          * buffer overflow issues with attackers sending very large
-         * payloads through.
+         * payloads through. The addition of the string rule prevents attackers
+         * sending arrays through and causing 500s
          */
         $request->validate([
-            'username' => ['required', 'max:255'],
+            'username' => ['required', 'max:255', 'string'],
         ]);
 
         /**
