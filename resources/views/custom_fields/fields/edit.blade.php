@@ -70,7 +70,13 @@
               {{ trans('admin/custom_fields/general.field_values') }}
             </label>
             <div class="col-md-8 required">
-              {!! Form::textarea('field_values', old('name', $field->field_values), ['style' => 'width: 100%', 'rows' => 4, 'class' => 'form-control', 'aria-label'=>'field_values']) !!}
+                <x-input.textarea
+                    name="field_values"
+                    :value="old('field_values', $field->field_values)"
+                    style="width: 100%"
+                    rows="4"
+                    aria-label="field_values"
+                />
               {!! $errors->first('field_values', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               <p class="help-block">{{ trans('admin/custom_fields/general.field_values_help') }}</p>
             </div>
@@ -88,7 +94,14 @@
               }
               @endphp
             <div class="col-md-8 required">
-              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format', 'style' => 'width:100%;')) }}
+              <x-input.select
+                name="format"
+                :options="Helper::predefined_formats()"
+                :selected="($field_format == '') ? $field->format : $field_format"
+                class="format form-control"
+                style="width:100%"
+                aria-label="format"
+              />
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>

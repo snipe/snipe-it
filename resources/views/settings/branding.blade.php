@@ -67,7 +67,14 @@
                                  {{ Form::label('brand', trans('admin/settings/general.web_brand')) }}
                             </div>
                             <div class="col-md-9">
-                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                <x-input.select
+                                    name="brand"
+                                    id="brand"
+                                    :options="['1'=>'Text','2'=>'Logo','3'=>'Logo + Text']"
+                                    :selected="old('brand', $setting->brand)"
+                                    class="form-control"
+                                    style="width: 150px"
+                                />
                                 {!! $errors->first('brand', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -233,11 +240,22 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('custom_css', old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS','disabled'=>'disabled', 'aria-label'=>'custom_css')) }}
+                                    <x-input.textarea
+                                        name="custom_css"
+                                        :value="old('custom_css', $setting->custom_css)"
+                                        placeholder="Add your custom CSS"
+                                        aria-label="custom_css"
+                                        disabled
+                                    />
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::textarea('custom_css', old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS', 'aria-label'=>'custom_css')) }}
+                                    <x-input.textarea
+                                        name="custom_css"
+                                        :value="old('custom_css', $setting->custom_css)"
+                                        placeholder="Add your custom CSS"
+                                        aria-label="custom_css"
+                                    />
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
@@ -252,10 +270,25 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), old('support_footer', $setting->support_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    <x-input.select
+                                        name="support_footer"
+                                        id="support_footer"
+                                        :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
+                                        :selected="old('support_footer', $setting->support_footer)"
+                                        disabled
+                                        class="form-control disabled"
+                                        style="width: 150px"
+                                    />
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), old('support_footer', $setting->support_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                    <x-input.select
+                                        name="support_footer"
+                                        id="support_footer"
+                                        :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
+                                        :selected="old('support_footer', $setting->support_footer)"
+                                        class="form-control"
+                                        style="width: 150px"
+                                    />
                                 @endif
 
 
@@ -271,10 +304,25 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), old('version_footer', $setting->version_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    <x-input.select
+                                        name="version_footer"
+                                        id="version_footer"
+                                        :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
+                                        :selected="old('version_footer', $setting->version_footer)"
+                                        disabled
+                                        class="form-control disabled"
+                                        style="width: 150px"
+                                    />
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), old('version_footer', $setting->version_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                    <x-input.select
+                                        name="version_footer"
+                                        id="version_footer"
+                                        :options="['on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only']"
+                                        :selected="old('version_footer', $setting->version_footer)"
+                                        class="form-control"
+                                        style="width: 150px"
+                                    />
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.version_footer_help') }}</p>
@@ -289,10 +337,21 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('footer_text', old('footer_text', $setting->footer_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Optional footer text','disabled'=>'disabled')) }}
+                                    <x-input.textarea
+                                        name="footer_text"
+                                        :value="old('footer_text', $setting->footer_text)"
+                                        rows="4"
+                                        placeholder="Optional footer text"
+                                        disabled
+                                    />
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::textarea('footer_text', old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
+                                    <x-input.textarea
+                                        name="footer_text"
+                                        :value="old('footer_text', $setting->footer_text)"
+                                        rows="4"
+                                        placeholder="Optional footer text"
+                                    />
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
                                 {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
