@@ -50,7 +50,6 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
-        dump($request);
         /**
          * Let's set a max character count here to prevent potential
          * buffer overflow issues with attackers sending very large
