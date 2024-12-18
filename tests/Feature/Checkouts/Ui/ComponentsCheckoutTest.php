@@ -21,6 +21,13 @@ class ComponentsCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('components.checkout.show', Component::factory()->create()->id))
+            ->assertOk();
+    }
+
     public function test_cannot_checkout_across_companies_when_full_company_support_enabled()
     {
         Event::fake([CheckoutableCheckedOut::class]);

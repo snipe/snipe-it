@@ -17,5 +17,10 @@ class LicenseCheckinTest extends TestCase
             ->assertForbidden();
     }
 
-
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('licenses.checkin', LicenseSeat::factory()->assignedToUser()->create()->id))
+            ->assertOk();
+    }
 }

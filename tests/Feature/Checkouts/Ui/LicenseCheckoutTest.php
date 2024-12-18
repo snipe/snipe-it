@@ -10,6 +10,13 @@ use Tests\TestCase;
 
 class LicenseCheckoutTest extends TestCase
 {
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('licenses.checkout', License::factory()->create()->id))
+            ->assertOk();
+    }
+
     public function testNotesAreStoredInActionLogOnCheckoutToAsset()
     {
         $admin = User::factory()->superuser()->create();

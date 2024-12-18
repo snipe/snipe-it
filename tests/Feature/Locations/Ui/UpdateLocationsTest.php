@@ -18,6 +18,12 @@ class UpdateLocationsTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('locations.update', Location::factory()->create()->id))
+            ->assertOk();
+    }
 
     public function testUserCanEditLocations()
     {

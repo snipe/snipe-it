@@ -13,4 +13,11 @@ class AccessoriesIndexTest extends TestCase
             ->get(route('accessories.index'))
             ->assertForbidden();
     }
+
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('accessories.index'))
+            ->assertOk();
+    }
 }

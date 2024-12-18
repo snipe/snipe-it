@@ -21,6 +21,13 @@ class UpdateAssetModelsTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('models.edit', AssetModel::factory()->create()->id))
+            ->assertOk();
+    }
+
     public function testUserCanEditAssetModels()
     {
         $category = Category::factory()->forAssets()->create();
