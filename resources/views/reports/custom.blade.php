@@ -18,8 +18,7 @@
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
 
-    {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
-    {{csrf_field()}}
+    <x-form :route="route('reports/custom')" class="form-horizontal">
 
     <!-- Horizontal Form -->
       <div class="box box-default">
@@ -513,7 +512,7 @@
           </button>
         </div>
       </div> <!--/.box.box-default-->
-    {{ Form::close() }}
+    </x-form>
   </div>
 </div>
 

@@ -7,13 +7,13 @@
 @stop
 
 @section('header_right')
-    {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
-    {{csrf_field()}}
+    <x-form :route="route('reports.activity')" class="form-horizontal">
+
     <button type="submit" class="btn btn-default">
         <x-icon type="download" />
         {{ trans('general.download_all') }}
     </button>
-    {{ Form::close() }}
+    </x-form>
 @stop
 
 {{-- Page content --}}
