@@ -125,7 +125,6 @@
       </div><!-- /.box-header -->
       <div class="box-body">
 
-        <div class="table-responsive">
         <table
                 data-cookie-id-table="customFieldsTable"
                 data-id-table="customFieldsTable"
@@ -222,7 +221,6 @@
             @endforeach
           </tbody>
         </table>
-        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div> <!-- /.col-md-9-->
