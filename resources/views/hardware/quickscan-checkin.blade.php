@@ -19,7 +19,12 @@
     
 
     <div class="row">
-    {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'checkin-form' ]) }}
+    <x-form
+        :route="route('hardware/quickscancheckin')"
+        class="form-horizontal"
+        role="form"
+        id="checkin-form"
+    >
         <!-- left column -->
         <div class="col-md-6">
             <div class="box box-default">
@@ -78,7 +83,7 @@
 
 
 
-            {{Form::close()}}
+            </x-form>
         </div> <!--/.col-md-6-->
 
         <div class="col-md-6">

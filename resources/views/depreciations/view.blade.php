@@ -129,13 +129,11 @@
                     <div class="tab-pane" id="models">
 
                         <div class="row">
-                            {{ Form::open(
-                                      [
-                                     'method' => 'POST',
-                                     'route' => ['models.bulkedit.index'],
-                                     'class' => 'form-inline',
-                                     'id' => 'bulkForm']
-                                      ) }}
+                            <x-form
+                                :route="route('models.bulkedit.index')"
+                                class="form-inline"
+                                id="bulkForm"
+                            >
                             <div class="col-md-12">
                                 <div id="toolbar">
                                     <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
@@ -176,7 +174,7 @@
                                 </div>
 
                             </div>
-                            {{ Form::close() }}
+                            </x-form>
 
                         </div> <!--/.row-->
                     </div> <!-- /.tab-pane -->

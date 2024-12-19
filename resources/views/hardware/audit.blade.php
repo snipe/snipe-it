@@ -21,11 +21,11 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="box box-default">
 
-                {{ Form::open([
-                  'method' => 'POST',
-                  'route' => ['asset.audit.store', $asset->id],
-                  'files' => true,
-                  'class' => 'form-horizontal' ]) }}
+                <x-form
+                    :route="route('asset.audit.store', $asset->id)"
+                    files
+                    class="form-horizontal"
+                >
 
                     <div class="box-header with-border">
                         <h2 class="box-title"> {{ trans('admin/hardware/form.tag') }} {{ $asset->asset_tag }}</h2>
@@ -140,7 +140,7 @@
                             {{ trans('general.audit') }}
                         </button>
                     </div>
-                </form>
+                </x-form>
             </div>
         </div> <!--/.col-md-7-->
     </div>

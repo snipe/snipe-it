@@ -87,13 +87,17 @@
                 @endcan
 
                 @can('delete', $fieldset)
-                {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
+                <x-form
+                    :route="route('fieldsets.destroy', $fieldset->id)"
+                    method="delete"
+                    style="display:inline-block"
+                >
                   @if($fieldset->models->count() > 0)
                   <button type="submit" class="btn btn-danger btn-sm disabled" data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}" disabled><i class="fas fa-trash"></i></button>
                   @else
                   <button type="submit" class="btn btn-danger btn-sm" data-tooltip="true" title="{{ trans('general.delete') }}"><i class="fas fa-trash"></i></button>
                   @endif
-                {{ Form::close() }}
+                </x-form>
                 @endcan
                   </nobr>
               </td>

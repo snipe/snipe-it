@@ -88,10 +88,11 @@
           <tfoot>
             <tr>
               <td colspan="8">
-                {{ Form::open(['route' =>
-                ["fieldsets.associate",$custom_fieldset->id],
-                'class'=>'form-inline',
-                'id' => 'ordering']) }}
+                <x-form
+                  :route="route('fieldsets.associate', $custom_fieldset->id)"
+                  class="form-inline"
+                  id="ordering"
+                >
 
 
                 <div class="form-group">
@@ -118,7 +119,7 @@
                   <button type="submit" class="btn btn-primary"> {{ trans('general.save') }}</button>
                 </span>
 
-                {{ Form::close() }}
+                </x-form>
 
               </td>
             </tr>

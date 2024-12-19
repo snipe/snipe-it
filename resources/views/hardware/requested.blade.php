@@ -100,18 +100,11 @@
                             </td>
                             <td>{{ App\Helpers\Helper::getFormattedDateObject($request->created_at, 'datetime', false) }}</td>
                             <td>
-                                {{ Form::open([
-                                    'method' => 'POST',
-                                    'route' => [
-                                        'account/request-item',
-                                        $request->itemType(),
-                                        $request->requestable->id,
-                                        true,
-                                        $request->requestingUser()->id
-                                    ],
-                                    ]) }}
+                                <x-form
+                                    :route="route('account/request-item', [$request->itemType(), $request->requestable->id, true, $request->requestingUser()->id])"
+                                >
                                     <button class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.cancel_request') }}">{{ trans('button.cancel') }}</button>
-                                {{ Form::close() }}
+                                </x-form>
                             </td>
                             <td>
                                 @if ($request->itemType() == "asset")
