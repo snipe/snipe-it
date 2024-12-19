@@ -239,18 +239,18 @@
                                 @endcan
 
                                 <div class="col-md-12 hidden-print" style="padding-top: 5px;">
-                                    {{ Form::open([
-                                                     'method' => 'POST',
-                                                     'route' => ['hardware/bulkedit'],
-                                                     'class' => 'form-inline',
-                                                      'target'=>'_blank',
-                                                      'id' => 'bulkForm']) }}
+                                    <x-form
+                                        :route="route('hardware/bulkedit')"
+                                        class="form-inline"
+                                        target="_blank"
+                                        id="bulkForm"
+                                    >
                                     <input type="hidden" name="bulk_actions" value="labels" />
                                     <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
                                     <button class="btn btn-block btn-social btn-sm btn-default" id="bulkEdit"{{ (!$asset->model ? ' disabled' : '') }}{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid').'"' : '') !!}>
                                         <x-icon type="assets" />
                                         {{ trans_choice('button.generate_labels', 1) }}</button>
-                                        {{ Form::close() }}
+                                        </x-form>
                                 </div>
 
                                 @can('delete', $asset)
@@ -1217,11 +1217,11 @@
                                 @if ($asset->assignedAssets->count() > 0)
 
 
-                                    {{ Form::open([
-                                              'method' => 'POST',
-                                              'route' => ['hardware/bulkedit'],
-                                              'class' => 'form-inline',
-                                               'id' => 'bulkForm']) }}
+                                    <x-form
+                                        :route="route('hardware/bulkedit')"
+                                        class="form-inline"
+                                        id="bulkForm"
+                                    >
                                     <div id="toolbar">
                                         <label for="bulk_actions"><span class="sr-only">{{ trans('general.bulk_actions')}}</span></label>
                                         <select name="bulk_actions" class="form-control select2" style="width: 150px;" aria-label="bulk_actions">
@@ -1259,7 +1259,7 @@
                                         </table>
 
 
-                                        {{ Form::close() }}
+                                        </x-form>
                                     </div>
 
                                 @else
