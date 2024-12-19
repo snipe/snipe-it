@@ -10,7 +10,12 @@
 
 <div class="row">
   <div class="col-md-9">
-  {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off']) }}
+  <x-form
+      :route="route('profile')"
+      class="form-horizontal"
+      autocomplete="off"
+      files
+  >
   <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <div class="box box-default">
@@ -177,7 +182,7 @@
         <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
       </div>
     </div> <!-- .box-default -->
-    {{ Form::close() }}
+    </x-form>
   </div> <!-- .col-md-9 -->
 </div> <!-- .row-->
 
