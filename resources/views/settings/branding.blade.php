@@ -21,9 +21,15 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'create-form' ]) }}
-    <!-- CSRF Token -->
-    {{csrf_field()}}
+
+    <x-form
+        :route="route('settings.branding.save')"
+        files
+        autocomplete="off"
+        class="form-horizontal"
+        role="form"
+        id="create-form"
+    >
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -319,7 +325,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </x-form>
 
 @stop
 

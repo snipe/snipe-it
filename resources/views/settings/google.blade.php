@@ -16,9 +16,12 @@
 
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
-    <!-- CSRF Token -->
-    {{csrf_field()}}
+    <x-form
+        :route="route('settings.google.save')"
+        autocomplete="off"
+        class="form-horizontal"
+        role="form"
+    >
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -113,6 +116,6 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </x-form>
 
 @stop
