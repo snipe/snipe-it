@@ -48,11 +48,10 @@
                 <div class="box-footer text-right">
                     <button type="submit" class="btn btn-danger" {{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>{{ trans('admin/settings/general.purge') }}</button>
                 </div> <!--/box-footer-->
-                {{ Form::close() }}
+            </x-form>
             </div> <!--/.box-solid-->
         </div><!-- /.col-md-8-->
     </div><!--/.row-->
 
-    </x-form>
 
 @stop

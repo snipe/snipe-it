@@ -65,7 +65,6 @@
           </div>
         </div>
         </div>
-        {{ Form::close() }}
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>
