@@ -197,7 +197,11 @@
               </td>
               <td>
                 <nobr>
-                  {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
+                  <x-form
+                    :route="route('fields.destroy', $field->id)"
+                    method="delete"
+                    style="display:inline-block"
+                  >
                   @can('update', $field)
                     <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
                       <i class="fas fa-pencil-alt" aria-hidden="true"></i>
@@ -219,7 +223,7 @@
                   @endif
 
                 @endcan
-                  {{ Form::close() }}
+                  </x-form>
                 </nobr>
               </td>
             </tr>
