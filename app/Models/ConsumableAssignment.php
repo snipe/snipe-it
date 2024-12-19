@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Companyable;
 use Illuminate\Database\Eloquent\Model;
 use Watson\Validating\ValidatingTrait;
 
 class ConsumableAssignment extends Model
 {
-    use CompanyableTrait;
+    use Companyable;
     use ValidatingTrait;
 
     protected $table = 'consumables_users';
