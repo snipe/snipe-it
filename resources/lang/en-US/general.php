@@ -399,6 +399,7 @@ return [
     'notification_bulk_error_hint' => 'The following fields had validation errors and were not edited:',
     'notification_success'  => 'Success',
     'notification_warning'   => 'Warning',
+    'notification_hide_search_warning' => 'Hide permanently',
     'notification_info'      => 'Info',
     'asset_information'     => 'Asset Information',
     'model_name'            => 'Model Name',

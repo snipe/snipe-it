@@ -51,6 +51,7 @@ class ProfileController extends Controller
         $user->phone = $request->input('phone');
         $user->enable_sounds = $request->input('enable_sounds', false);
         $user->enable_confetti = $request->input('enable_confetti', false);
+        $user->hide_lookup_alert = $request->input('hide_lookup_alert', false);
 
         if (! config('app.lock_passwords')) {
             $user->locale = $request->input('locale', 'en-US');

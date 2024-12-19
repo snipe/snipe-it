@@ -533,7 +533,6 @@ $(function () {
 
 
     });
-
 });
 
 function htmlEntities(str) {
