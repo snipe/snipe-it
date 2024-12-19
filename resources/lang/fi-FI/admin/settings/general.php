@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Kaksivaiheinen tunnistautuminen vaaditaan, mutta et ole rekisteröinyt itsellesi laitetta. Avaa Google Authenticator -sovellus ja skannaa alla oleva QR-koodi rekisteröidäksesi laitteesi. Kun olet rekisteröinyt laitteesi, kirjoita koodi",
     'require_accept_signature'      => 'Vaadi allekirjoitus',
     'require_accept_signature_help_text'      => 'Tämän ominaisuuden ottaminen käyttöön edellyttää käyttäjiltä allekirjoitusta hyväksymisen yhteydessä.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'vasen',
     'right'        => 'oikea',
     'top'        => 'ylä',

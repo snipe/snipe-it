@@ -39,4 +39,12 @@ class ShowAccessoryTest extends TestCase
             ->assertViewIs('accessories.view')
             ->assertViewHas(['accessory' => $accessory]);
     }
+  
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('accessories.show', Accessory::factory()->create()->id))
+            ->assertOk();
+
+    }
 }

@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Macluumaad dheeraad ah',
 
-    'audit_help' => 'Saxeexinta sanduuqan waxay wax ka beddeli doontaa diiwaanka hantida si ay u muujiso goobtan cusub. Ka tagista iyada oo aan la hubin waxay si fudud u ogaan doontaa meesha ku jirta diiwaanka hanti dhawrka.<br><',
+    'audit_help' => 'Wuxuu keeni doonaa in la xadido sanduuqan isbedel ku yimaada ra\'samaalka taasoo laga dareemi doono booska cusub. inaan la xadidinna waxay keeneysaa in laga mulaaxadeeyo liiska hubinta. <br><br>ogow haddii laga baxo ra\'samaalka waxba iskama bedeli doono booska qofka ama hantida ama booska laga baxay.',
 
     'assets' => 'Hantidu waa shay lagu raadraaco lambar taxane ah ama sumad hanti ah. Waxay u muuqdaan inay yihiin shay qiimo sare leh marka la aqoonsanayo shay gaar ah.',
 

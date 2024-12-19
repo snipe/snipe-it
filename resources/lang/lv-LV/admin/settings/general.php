@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Nepieciešama divu faktoru autentifikācija, tomēr jūsu ierīce vēl nav reģistrēta. Atveriet savu lietotni Google autentifikators un skenējiet zemāk redzamo QR kodu, lai reģistrētu savu ierīci. Kad esat reģistrējies savā ierīcē, ievadiet zemāk redzamo kodu",
     'require_accept_signature'      => 'Pieprasīt parakstu',
     'require_accept_signature_help_text'      => 'Iespējojot šo funkciju, lietotājiem būs jāpiesaista aktīva pieņemšana.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'pa kreisi',
     'right'        => 'pa labi',
     'top'        => 'tops',

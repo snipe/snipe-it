@@ -9,7 +9,7 @@ return array(
     'edit'  					=> 'Wax ka beddel shatiga',
     'filetype_info'				=> 'Noocyada faylalka la oggol yahay waa png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, iyo rar.',
     'clone'  					=> 'Shatiga Clone',
-    'history_for'  				=> 'Taariikhda',
+    'history_for'  				=> 'Taariikhda ',
     'in_out'  					=> 'Gudaha/kabaxsan',
     'info'  					=> 'Macluumaadka shatiga',
     'license_seats'  			=> 'Kuraasta shatiga',
@@ -47,6 +47,6 @@ return array(
             ],
     ],
 
-    'below_threshold' => 'There are only :remaining_count seats left for this license with a minimum quantity of :min_amt. You may want to consider purchasing more seats.',
-    'below_threshold_short' => 'This item is below the minimum required quantity.',
+    'below_threshold' => 'Kama banaana kuraastan waxaan ka ahayn :remaining_count waxaa dhici karta inaad ku fakareyso iibashada boosas kale.',
+    'below_threshold_short' => 'Cunsurkan wuu ka yaryahay xadkii ugu hooseysay ee la rabay.',
 );

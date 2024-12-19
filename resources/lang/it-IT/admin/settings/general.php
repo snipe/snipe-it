@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "È necessaria l'autenticazione di due fattori, tuttavia il tuo dispositivo non è ancora stato iscritto. Apri l'applicazione Google Authenticator e analizza il codice QR qui sotto per iscriverti al tuo dispositivo. Una volta che hai iscritto il tuo dispositivo, inserisci il codice qui sotto",
     'require_accept_signature'      => 'Richiedi la firma',
     'require_accept_signature_help_text'      => 'L\'attivazione di questa funzionalità richiede che gli utenti si connettano fisicamente all\'accettazione di un\'attività.',
+    'require_checkinout_notes'  => 'Richiedi note per Assegnazione/Restituzione',
+    'require_checkinout_notes_help_text'    => 'Abilitando questa funzione, sarà obbligo compilare i campi note durante l\'Assegnazione o la Restituzione di un Bene.',
     'left'        => 'sinistra',
     'right'        => 'destra',
     'top'        => 'superiore',

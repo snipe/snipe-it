@@ -15,11 +15,19 @@ class AccessoriesIndexTest extends TestCase implements TestsPermissionsRequireme
             ->assertForbidden();
     }
 
+
     public function testRendersAccessoriesIndexPage()
     {
         $this->actingAs(User::factory()->viewAccessories()->create())
             ->get(route('accessories.index'))
             ->assertOk()
             ->assertViewIs('accessories.index');
+    }
+  
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('accessories.index'))
+            ->assertOk();
     }
 }
