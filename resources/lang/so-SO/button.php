@@ -16,7 +16,7 @@ return [
     'select_file'				=> 'Dooro File...',
     'select_files'				=> 'Dooro faylal...',
     'generate_labels'           => '{1} Samee Summada|[2,*] Samee Calaamadaha',
-    'send_password_link'        => 'Soo dir Linkiga Dib-u-dejinta Furaha',
+    'send_password_link'        => 'Soo dir Linkiga Dib-usoo-celinta Furaha',
     'go'                        => 'Tag',
     'bulk_actions'              => 'Ficilada waaweyn',
     'add_maintenance'           => 'Ku dar Dayactirka',

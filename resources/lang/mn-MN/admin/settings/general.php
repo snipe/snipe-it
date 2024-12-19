@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Хоёр хүчин зүйлийг баталгаажуулах шаардлагатай боловч таны төхөөрөмж одоогоор бүртгэгдээгүй байна. Google Authenticator аппликейшнийг нээж, төхөөрөмжөө бүртгүүлэхийн тулд доорх QR кодыг хайна уу. Та төхөөрөмжөө бүртгүүлснийхээ дараа доорх кодыг оруулна уу",
     'require_accept_signature'      => 'Гарын үсэг зурах шаардлагатай',
     'require_accept_signature_help_text'      => 'Энэ функцийг идэвхжүүлэх нь хэрэглэгчид активыг хүлээн авахдаа биечлэн гарын үсэг зурах шаардлагатай болно.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'үлдсэн',
     'right'        => 'баруун',
     'top'        => 'дээд',

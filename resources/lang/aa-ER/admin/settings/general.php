@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "crwdns1791:0crwdne1791:0",
     'require_accept_signature'      => 'crwdns1819:0crwdne1819:0',
     'require_accept_signature_help_text'      => 'crwdns1820:0crwdne1820:0',
+    'require_checkinout_notes'  => 'crwdns12794:0crwdne12794:0',
+    'require_checkinout_notes_help_text'    => 'crwdns12796:0crwdne12796:0',
     'left'        => 'crwdns1597:0crwdne1597:0',
     'right'        => 'crwdns1598:0crwdne1598:0',
     'top'        => 'crwdns1599:0crwdne1599:0',

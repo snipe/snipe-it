@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Vaja on kahte tegurit, kuid teie seadet ei ole veel registreeritud. Avage oma Google Authenticatori rakendus ja skannige oma seadme registreerimiseks allolevat QR-koodi. Kui olete oma seadme sisestanud, sisestage allolev kood",
     'require_accept_signature'      => 'Nõuda allkirja',
     'require_accept_signature_help_text'      => 'Selle funktsiooni lubamine nõuab, et kasutajad võtaksid vara füüsiliselt alla.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'lahkus',
     'right'        => 'õige',
     'top'        => 'üleval',
