@@ -22,6 +22,13 @@ class AccessoryCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('accessories.checkout.show', Accessory::factory()->create()->id))
+            ->assertOk();
+    }
+
     public function testValidationWhenCheckingOutAccessory()
     {
         $accessory = Accessory::factory()->create();

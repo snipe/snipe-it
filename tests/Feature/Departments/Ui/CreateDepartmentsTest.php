@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Departments\Ui;
 
+use App\Models\Component;
 use App\Models\Department;
 use App\Models\Company;
 use App\Models\User;
@@ -9,6 +10,13 @@ use Tests\TestCase;
 
 class CreateDepartmentsTest extends TestCase
 {
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('departments.create'))
+            ->assertOk();
+    }
+
     public function testPermissionRequiredToCreateDepartment()
     {
         $this->actingAs(User::factory()->create())

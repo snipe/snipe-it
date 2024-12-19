@@ -42,6 +42,13 @@ class AssetCheckinTest extends TestCase
             ->assertRedirect(route('hardware.index'));
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('hardware.checkin.create', Asset::factory()->assignedToUser()->create()))
+            ->assertOk();
+    }
+
     public function testAssetCanBeCheckedIn()
     {
         Event::fake([CheckoutableCheckedIn::class]);
