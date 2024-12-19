@@ -16,6 +16,13 @@ class LicenseViewTest extends TestCase
             ->get(route('licenses.show', $license))
             ->assertForbidden();
     }
+
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('licenses.show', License::factory()->create()->id))
+            ->assertOk();
+    }
     
     public function testLicenseWithPurchaseDateDepreciatesCorrectly()
     {
