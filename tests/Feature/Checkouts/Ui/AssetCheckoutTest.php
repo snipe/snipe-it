@@ -118,6 +118,12 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('hardware.checkout.create', Asset::factory()->create()))
+            ->assertOk();
+    }
     /**
      * This data provider contains checkout targets along with the
      * asset's expected location after the checkout process.

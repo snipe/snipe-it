@@ -4,8 +4,8 @@
         'not_found'                    => 'Dayactirka hantida aad raadinaysay lama helin!',
         'delete'                       => [
             'confirm' => 'Ma hubtaa inaad rabto inaad tirtirto dayactirka hantida?',
-            'error'   => 'Waxaa jirtay arrin lagu tirtirayo dayactirka hantida. Fadlan isku day mar kale',
-            'success' => 'Dayactirka hantida ayaa si guul leh loo tirtiray',
+            'error'   => 'Waxaa jirtay arrin tir-tireysay dayactirka hantida. Fadlan isku day mar kale.',
+            'success' => 'Dayactirka hantida waa lagu guuleystay in la tir-tiro.',
         ],
         'create'                       => [
             'error'   => 'Dayactirka hantida lama abuurin, fadlan isku day mar kale.',
@@ -13,7 +13,7 @@
         ],
         'edit'                       => [
             'error'   => 'Dayactirka hantida lama tafatirin, fadlan isku day mar kale.',
-            'success' => 'Dayactirka hantida ayaa si guul leh loo tafatiray',
+            'success' => 'Dayactirka hantida waa lagu guuleystay in la tifaftiro.',
         ],
         'asset_maintenance_incomplete' => 'Wali lama dhamaystirin',
         'warranty'                     => 'Dammaanad',

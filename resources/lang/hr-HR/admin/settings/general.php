@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Potrebna je autentikacija dva faktora, međutim vaš uređaj još nije upisan. Otvorite aplikaciju Google autentifikator i skenirajte QR kôd u nastavku da biste registrirali svoj uređaj. Nakon što upišete uređaj, unesite kôd u nastavku",
     'require_accept_signature'      => 'Potražite potpis',
     'require_accept_signature_help_text'      => 'Ako omogućite tu značajku, korisnici će se morati fizički odjaviti pri prihvaćanju imovine.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'lijevo',
     'right'        => 'pravo',
     'top'        => 'vrh',

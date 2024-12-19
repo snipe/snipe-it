@@ -279,8 +279,8 @@
             element_name = '';
         }
 
-        return function (value,row) {
 
+        return function (value,row) {
             var actions = '<nobr>';
 
             // Add some overrides for any funny urls we have
@@ -441,7 +441,7 @@
     }
 
     function genericCheckinCheckoutFormatter(destination) {
-        return function (value,row) {
+        return function (value, row) {
 
             // The user is allowed to check items out, AND the item is deployable
             if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {

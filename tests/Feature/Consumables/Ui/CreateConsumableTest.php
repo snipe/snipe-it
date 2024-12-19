@@ -56,4 +56,12 @@ class CreateConsumableTest extends TestCase implements TestsPermissionsRequireme
 
         $this->assertDatabaseHas('consumables', $data);
     }
+
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('consumables.create'))
+            ->assertOk();
+
+    }
 }

@@ -49,7 +49,7 @@
                   @endif
                 </td>
                 <td>
-                  @if ($asset->assigned_to)
+                  @if ($asset->assigned)
                     {{ $asset->assigned->present()->name() }}
                   @endif
                 </td>

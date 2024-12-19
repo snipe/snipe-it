@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Zwei-Faktor-Authentifizierung ist erforderlich, Dein Gerät wurde jedoch noch nicht hinzugefügt. Öffne die Google Authenticator App und scanne den QR-Code unten, um Dein Gerät hinzuzufügen. Gebe anschließend den Code ein",
     'require_accept_signature'      => 'Unterschrift erforderlich',
     'require_accept_signature_help_text'      => 'Wenn aktiviert, wird eine physische Unterschrift durch den Benutzer bei der Annahme des Assets notwendig.',
+    'require_checkinout_notes'  => 'Notizen beim Ein-/Auschecken erforderlich',
+    'require_checkinout_notes_help_text'    => 'Wenn Du diese Funktion aktivierst, müssen die Notizfelder beim Einchecken oder Auschecken eines Assets ausgefüllt werden.',
     'left'        => 'links',
     'right'        => 'rechts',
     'top'        => 'oben',
