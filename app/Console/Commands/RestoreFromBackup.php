@@ -372,7 +372,7 @@ class RestoreFromBackup extends Command
         if ($this->option('sanitize-guess-prefix')) {
             $prefix = SQLStreamer::guess_prefix($sql_contents);
             $this->line($prefix);
-            return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitze your SQL.");
+            return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitize your SQL.");
         }
 
         // If we're doing --sql-stdout-only, handle that now so we don't have to open pipes to mysql and all of that silliness
