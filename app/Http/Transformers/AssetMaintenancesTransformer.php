@@ -26,12 +26,12 @@ class AssetMaintenancesTransformer
             'id'            => (int) $assetmaintenance->id,
             'asset' => ($assetmaintenance->asset) ? [
                 'id' => (int) $assetmaintenance->asset->id,
-                'name'=> (($assetmaintenance->asset) && ($assetmaintenance->asset->name)) ? e($assetmaintenance->asset->name) : null,
+                'name'=> ($assetmaintenance->asset->name) ? e($assetmaintenance->asset->name) : null,
                 'asset_tag'=> e($assetmaintenance->asset->asset_tag),
                 'serial'=> e($assetmaintenance->asset->serial),
-                'deleted_at'=> ($assetmaintenance->asset) ?  Helper::getFormattedDateObject($assetmaintenance->asset->deleted_at, 'datetime') : null,
-                'created_at' => ($assetmaintenance->asset) ?  Helper::getFormattedDateObject($assetmaintenance->asset->created_at, 'datetime') : null,
-                'updated_at' => ($assetmaintenance->asset) ?  Helper::getFormattedDateObject($assetmaintenance->asset->updated_at, 'datetime') : null,
+                'deleted_at'=> Helper::getFormattedDateObject($assetmaintenance->asset->deleted_at, 'datetime'),
+                'created_at' => Helper::getFormattedDateObject($assetmaintenance->asset->created_at, 'datetime'),
+                'updated_at' => Helper::getFormattedDateObject($assetmaintenance->asset->updated_at, 'datetime'),
             ] : null,
             'model' => (($assetmaintenance->asset) && ($assetmaintenance->asset->model)) ? [
                 'id' => (int) $assetmaintenance->asset->model->id,
