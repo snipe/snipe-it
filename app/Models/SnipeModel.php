@@ -171,7 +171,7 @@ class SnipeModel extends Model
      */
     public function getPurchaseCostAttribute($value)
     {
-        if (Auth::check() && !Auth::user()->can('self.view_purchase_cost')) {
+        if (Auth::check() && !Auth::user()->can('viewPurchaseCost', $this)) {
             return null;
         }
 
