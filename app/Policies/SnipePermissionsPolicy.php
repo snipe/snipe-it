@@ -167,7 +167,7 @@ abstract class SnipePermissionsPolicy
      * @param \App\Models\User  $user
      * @return mixed
      */
-    public function viewPurchaseCost(User $user, $item = null)
+    public function viewPurchaseCost(User $user)
     {
         return $user->hasAccess($this->columnName().'.view.purchase_cost');
     }
