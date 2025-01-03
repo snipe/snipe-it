@@ -174,7 +174,12 @@
                                 {{ Form::label('ldap_client_tls_key', trans('admin/settings/general.ldap_client_tls_key')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::textarea('ldap_client_tls_key', old('ldap_client_tls_key', $setting->ldap_client_tls_key), ['class' => 'form-control','placeholder' =>  trans('general.example') .'-----BEGIN RSA PRIVATE KEY-----'."\r\n1234567890\r\n-----END RSA PRIVATE KEY-----"]) }}
+                                <x-input.textarea
+                                    name="ldap_client_tls_key"
+                                    value="{{ old('ldap_client_tls_key', $setting->ldap_client_tls_key) }}"
+                                    :placeholder="sprintf('%s-----BEGIN RSA PRIVATE KEY-----%s1234567890%s-----END RSA PRIVATE KEY-----', trans('general.example'), PHP_EOL, PHP_EOL)"
+                                />
+
                                 @error('ldap_client_tls_key')
                                     <span class="alert-msg">
                                          <x-icon type="x" />
@@ -197,7 +202,11 @@
                                 {{ Form::label('ldap_client_tls_cert', trans('admin/settings/general.ldap_client_tls_cert')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::textarea('ldap_client_tls_cert', old('ldap_client_tls_cert', $setting->ldap_client_tls_cert), ['class' => 'form-control','placeholder' =>  trans('general.example') .'-----BEGIN CERTIFICATE-----'."\r\n1234567890\r\n-----END CERTIFICATE-----"]) }}
+                                <x-input.textarea
+                                    name="ldap_client_tls_cert"
+                                    value="{{ old('ldap_client_tls_cert', $setting->ldap_client_tls_cert) }}"
+                                    :placeholder="sprintf('%s-----BEGIN CERTIFICATE-----%s1234567890%s-----END CERTIFICATE-----', trans('general.example'), PHP_EOL, PHP_EOL)"
+                                />
                                 <p class="help-block">{{ trans('admin/settings/general.ldap_client_tls_cert_help') }}</p>
                                 @error('ldap_client_tls_cert')
                                     <span class="alert-msg">

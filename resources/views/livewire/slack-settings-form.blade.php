@@ -66,13 +66,17 @@
 								</label>
                             </div>
                             <div class="col-md-9 required" wire:ignore>
-
-                            @if (Helper::isDemoMode())
-								{{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'),'google' => trans('admin/settings/general.google_workspaces'), 'microsoft' => trans('admin/settings/general.ms_teams')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'style'=>'width:100%', 'disabled')) }}
-                            @else
-                                {{ Form::select('webhook_selected', array('slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'),'google' => trans('admin/settings/general.google_workspaces'), 'microsoft' => trans('admin/settings/general.ms_teams')), old('webhook_selected', $webhook_selected), array('class'=>'select2 form-control', 'aria-label' => 'webhook_selected', 'id' => 'select2', 'data-minimum-results-for-search' => '-1', 'style'=>'width:100%')) }}
-                            @endif
-
+                                <x-input.select
+                                    name="webhook_selected"
+                                    id="select2"
+                                    :options="['slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'),'google' => trans('admin/settings/general.google_workspaces'), 'microsoft' => trans('admin/settings/general.ms_teams')]"
+                                    :selected="old('webhook_selected', $webhook_selected)"
+                                    :disabled="Helper::isDemoMode()"
+                                    data-minimum-results-for-search="-1"
+                                    class="form-control"
+                                    style="width:100%"
+                                    aria-label="webhook_selected"
+                                />
                             </div>
                         </div>
 
