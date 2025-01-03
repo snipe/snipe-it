@@ -21,7 +21,7 @@ class CheckoutAccessoryMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy,$note, $acceptance)
+    public function __construct(Accessory $accessory, $checkedOutTo, User $checkedOutBy, $acceptance, $note)
     {
         $this->item = $accessory;
         $this->admin = $checkedOutBy;

@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Tá dhá fhíordheimhniú fachtóir ag teastáil, áfach, nach bhfuil do ghléas cláraithe fós. Oscail d'iarratas Google Authenticator agus scrúdaigh an cód QR thíos chun do ghléas a chlárú. Nuair atá tú ag clárú do gléas, cuir isteach an cód thíos",
     'require_accept_signature'      => 'A cheangal Síniú',
     'require_accept_signature_help_text'      => 'Éileoidh an chumas seo a chumasú d\'úsáideoirí comhartha a dhéanamh go fisiciúil ar ghlacadh sócmhainne.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'ar chlé',
     'right'        => 'ceart',
     'top'        => 'barr',

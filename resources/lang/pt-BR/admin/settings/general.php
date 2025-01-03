@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "A autenticação de dois passos é obrigatória, mas se o teu dispositivo ainda não foi registrado, abra o Google Authenticator e escaneie o QR Code para registrar o teu dispositivo. Uma vez registrado, digite o código abaixo",
     'require_accept_signature'      => 'Requer assinatura',
     'require_accept_signature_help_text'      => 'Habilitar este recurso vai exigir que os usuários assinem pessoalmente o aceite do ativo.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'esquerda',
     'right'        => 'direita',
     'top'        => 'topo',

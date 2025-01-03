@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Двуфакторово удостоверяване се изисква, но вашето устройство не е било регистрирано още. Отворете Google Authenticator и сканирайте QR кода по-долу за да регистрирате вашето устройство. След като сте записани вашето устройство, въведете кода по-долу",
     'require_accept_signature'      => 'Изисква подпис',
     'require_accept_signature_help_text'      => 'Разрешаването на тази функция ще изисква от потребителите да се подпишат физически за приемане на даден актив.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'ляво',
     'right'        => 'дясно',
     'top'        => 'Горе',

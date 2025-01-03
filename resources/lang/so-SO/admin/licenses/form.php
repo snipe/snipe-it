@@ -4,7 +4,7 @@ return array(
 
     'asset'             => 'Hantida',
     'checkin'           => 'Is xaadiri',
-    'create'            => 'Samee shatiga',
+    'create'            => 'Abuur shatiga',
     'expiration'        => 'Taariikhda uu dhacayo',
     'license_key'       => 'Furaha Alaabta',
     'maintained'        => 'La ilaaliyo',
