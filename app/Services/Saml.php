@@ -313,7 +313,7 @@ class Saml
         $this->saveDataToSession($data);
         $this->loadDataFromSession();
         $username = $this->getUsername();
-        return User::where('username', '=', $username)->whereNull('deleted_at')->where('activated', '=', '1')->first();
+        return User::where('email', '=', $username)->whereNull('deleted_at')->where('activated', '=', '1')->first();
     }
 
     /**
