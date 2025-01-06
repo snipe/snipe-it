@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Zahtevano je dvo-stopenjsko preverjanje pristnosti, vendar vaša naprava še ni bila včlanjena. Odprite aplikacijo Google Authenticator in si oglejte spodnjo kodo QR, če želite vnesti svojo napravo. Ko vnesete napravo, vnesite spodnjo kodo",
     'require_accept_signature'      => 'Zahtevaj podpis',
     'require_accept_signature_help_text'      => 'Če omogočite to funkcijo, se bodo uporabniki morali fizično odjaviti ob sprejemu sredstva.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'levo',
     'right'        => 'desno',
     'top'        => 'na vrh',

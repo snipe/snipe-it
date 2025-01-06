@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Twee faktor verifikasie is nodig, maar jou toestel is nog nie ingeskryf nie. Maak jou Google Authenticator-program oop en scan die QR-kode hieronder om jou toestel in te skryf. Sodra jy jou toestel ingeskryf het, voer die kode hieronder in",
     'require_accept_signature'      => 'Vereis Handtekening',
     'require_accept_signature_help_text'      => 'As u hierdie kenmerk aanskakel, sal gebruikers fisies moet afmeld wanneer hulle \'n bate aanvaar.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'links',
     'right'        => 'reg',
     'top'        => 'Top',

@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Két tényező hitelesítésre van szükség, de a készülék még nem került bejegyzésre. Nyissa meg a Google Hitelesítő alkalmazást, és szkennelje be az alábbi QR-kódot a készülék regisztrálásához. Miután beírta a készüléket, adja meg az alábbi kódot",
     'require_accept_signature'      => 'Aláírásra van szükség',
     'require_accept_signature_help_text'      => 'Ha engedélyezni szeretné ezt a funkciót, akkor a felhasználóknak fizikailag ki kell jelentkezniük egy eszköz elfogadásáról.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'balra',
     'right'        => 'jobb',
     'top'        => 'felső',

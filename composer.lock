@@ -11045,20 +11045,21 @@
         },
         {
             "name": "tecnickcom/tcpdf",
-            "version": "6.7.7",
+            "version": "6.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "cfbc0028cc23f057f2baf9e73bdc238153c22086"
+                "reference": "14ffa0e308f5634aa2489568b4b90b24073b6731"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/cfbc0028cc23f057f2baf9e73bdc238153c22086",
-                "reference": "cfbc0028cc23f057f2baf9e73bdc238153c22086",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/14ffa0e308f5634aa2489568b4b90b24073b6731",
+                "reference": "14ffa0e308f5634aa2489568b4b90b24073b6731",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "ext-curl": "*",
+                "php": ">=7.1.0"
             },
             "type": "library",
             "autoload": {
@@ -11105,7 +11106,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tecnickcom/TCPDF/issues",
-                "source": "https://github.com/tecnickcom/TCPDF/tree/6.7.7"
+                "source": "https://github.com/tecnickcom/TCPDF/tree/6.8.0"
             },
             "funding": [
                 {
@@ -11113,7 +11114,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-10-26T12:15:02+00:00"
+            "time": "2024-12-23T13:34:57+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",

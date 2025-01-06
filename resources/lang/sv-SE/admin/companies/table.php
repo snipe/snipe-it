@@ -4,7 +4,7 @@ return array(
     'create'    => 'Skapa företag',
     'email'     => 'Företagets e-postadress',
     'title'     => 'Företag',
-    'phone'     => 'Företagstelefon',
+    'phone'     => 'Företagets telefonnummer',
     'update'    => 'Uppdatera företag',
     'name'      => 'Företagsnamn',
     'id'        => 'ID',

@@ -43,7 +43,7 @@ return [
     'redirect_to_type'   => 'Eiti į :type',
     'redirect_to_checked_out_to'   => 'Eiti į išduotus',
     'select_statustype'	=> 'Pasirinkite būsenos tipą',
-    'serial'			=> 'Serijos numeris',
+    'serial'			=> 'Serijinis numeris',
     'status'			=> 'Būsena',
     'tag'				=> 'Inventorinis numeris',
     'update'			=> 'Turto atnaujinimas',

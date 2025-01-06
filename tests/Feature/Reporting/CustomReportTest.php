@@ -4,13 +4,18 @@ namespace Tests\Feature\Reporting;
 
 use App\Models\Asset;
 use App\Models\Company;
+use App\Models\ReportTemplate;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Testing\TestResponse;
 use League\Csv\Reader;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\Group;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class CustomReportTest extends TestCase
+#[Group('custom-reporting')]
+class CustomReportTest extends TestCase implements TestsPermissionsRequirement
 {
     protected function setUp(): void
     {
@@ -42,6 +47,47 @@ class CustomReportTest extends TestCase
             }
         );
     }
+
+    public function testRequiresPermission()
+    {
+        $this->actingAs(User::factory()->create())
+            ->get(route('reports/custom'))
+            ->assertForbidden();
+    }
+
+    public function testCanLoadCustomReportPage()
+    {
+        $this->actingAs(User::factory()->canViewReports()->create())
+            ->get(route('reports/custom'))
+            ->assertOk()
+            ->assertViewHas([
+                'template' => function (ReportTemplate $template) {
+                    // the view should have an empty report by default
+                    return $template->exists() === false;
+                }
+            ]);
+    }
+
+    public function testSavedTemplatesOnPageAreScopedToTheUser()
+    {
+        // Given there is a saved template for one user
+        ReportTemplate::factory()->create(['name' => 'Report A']);
+
+        // When loading reports/custom while acting as another user that also has a saved template
+        $user = User::factory()->canViewReports()
+            ->has(ReportTemplate::factory(['name' => 'Report B']))
+            ->create();
+
+        // The user should not see the other user's template (in view as 'report_templates')
+        $this->actingAs($user)
+            ->get(route('reports/custom'))
+            ->assertViewHas([
+                'report_templates' => function (Collection $reports) {
+                    return $reports->pluck('name')->doesntContain('Report A');
+                }
+            ]);
+    }
+
 
     public function testCustomAssetReport()
     {

@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Ukuqinisekiswa okubili kokubili kuyadingeka, noma ngabe idivayisi yakho ayibhalisile okwamanje. Vula uhlelo lwakho lokusebenza lwe-Google Authenticator bese uskena ikhodi ye-QR ngezansi ukuze ubhalise idivayisi yakho. Uma usubhalisile idivayisi yakho, faka ikhodi ngezansi",
     'require_accept_signature'      => 'Kudinga isignesha',
     'require_accept_signature_help_text'      => 'Ukunika amandla lesi sici kuzodinga ukuthi abasebenzisi bakwazi ukusayina ngokomzimba ngokwamukela ifa.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'kwesokunxele',
     'right'        => 'kwesokudla',
     'top'        => 'phezulu',
