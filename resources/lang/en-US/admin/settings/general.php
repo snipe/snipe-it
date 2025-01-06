@@ -362,7 +362,7 @@ return [
     'label2_2d_type'          => '2D Barcode Type',
     'label2_2d_type_help'     => 'Format for 2D barcodes',
     'label2_2d_target'        => '2D Barcode Target',
-    'label2_2d_target_help'   => 'The URL the 2D barcode points to when scanned',
+    'label2_2d_target_help'   => 'What the 2D barcode points to when scanned',
     'label2_fields'           => 'Field Definitions',
     'label2_fields_help'      => 'Fields can be added, removed, and reordered in the left column. For each field, multiple options for Label and DataSource can be added, removed, and reordered in the right column.',
     'help_asterisk_bold'    => 'Text entered as <code>**text**</code> will be displayed as bold',
