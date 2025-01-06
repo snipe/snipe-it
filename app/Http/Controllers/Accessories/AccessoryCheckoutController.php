@@ -87,7 +87,7 @@ class AccessoryCheckoutController extends Controller
         event(new CheckoutableCheckedOut($accessory,  $target, auth()->user(), $request->input('note')));
 
         // Set this as user since we only allow checkout to user for this item type
-        $request->request->add(['checkout_to_type' => request('checkout_to_type')]);
+        $request->request->add(['checkout_to_type' => 'user']);
         $request->request->add(['assigned_user' => $target->id]);
 
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
