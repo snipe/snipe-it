@@ -9,7 +9,7 @@
         'maintenance'        => 'Underhåll',
         'upgrade'            => 'Uppgradera',
         'calibration'        => 'Kalibrering',
-        'software_support'   => 'Programvarusupport',
+        'software_support'   => 'Mjukvarusupport',
         'hardware_support'   => 'Hårdvarusupport',
         'configuration_change'   => 'Konfigurationsändring',
         'pat_test'           => 'PAT-test',

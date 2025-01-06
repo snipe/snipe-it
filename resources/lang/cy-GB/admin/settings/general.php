@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Mae angen dilysu dau ffactor, ond nid yw'ch dyfais wedi'i chofrestru eto. Agorwch eich app Google Authenticator a sganiwch y cod QR isod i gofrestru'ch dyfais. Ar ôl i chi gofrestru'ch dyfais, nodwch y cod isod",
     'require_accept_signature'      => 'Angen Llofnod',
     'require_accept_signature_help_text'      => 'Bydd galluogi\'r nodwedd hon yn ei gwneud yn ofynnol i ddefnyddwyr lofnodi\'n gorfforol wrth dderbyn ased.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'chwith',
     'right'        => 'dde',
     'top'        => 'top',

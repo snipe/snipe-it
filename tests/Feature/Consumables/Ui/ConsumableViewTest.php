@@ -16,7 +16,7 @@ class ConsumableViewTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testUserCanListConsumables()
+    public function testUserCanViewAConsumable()
     {
         $consumable = Consumable::factory()->create();
         $this->actingAs(User::factory()->superuser()->create())

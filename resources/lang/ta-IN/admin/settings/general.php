@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "இரண்டு காரணி அங்கீகாரம் தேவைப்படுகிறது, ஆனால் உங்கள் சாதனம் இதுவரை பதிவுசெய்யப்படவில்லை. உங்கள் Google Authenticator பயன்பாட்டைத் திறந்து உங்கள் சாதனத்தை சேர்ப்பதற்கு கீழே உள்ள QR குறியீட்டை ஸ்கேன் செய்யவும். உங்கள் சாதனத்தை நீங்கள் சேர்ந்தவுடன், கீழே உள்ள குறியீட்டை உள்ளிடுக",
     'require_accept_signature'      => 'கையொப்பம் தேவை',
     'require_accept_signature_help_text'      => 'இந்த அம்சத்தை இயக்குவதால், சொத்துக்களை ஏற்கும் வகையில் பயனர்கள் உடனே உள்நுழைய வேண்டும்.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'விட்டு',
     'right'        => 'வலது',
     'top'        => 'மேல்',

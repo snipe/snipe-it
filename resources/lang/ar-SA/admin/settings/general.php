@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "التوثيق ذو العاملين 2FA اجباري، ولكن لم يتم تسجيل جهازك بعد. افتح تطبيق غوغل للتوثيق Google Authenticator وافحص رمز الاستجابة السريعة QR أدناه لتسجيل جهازك. بعد تسجيل جهازك، أدخل الرمز أدناه",
     'require_accept_signature'      => 'يتطلب التوقيع',
     'require_accept_signature_help_text'      => 'سيتطلب تمكين هذه الميزة من المستخدمين تسجيل الدخول فعليا عند قبول مادة العرض.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'اليسار',
     'right'        => 'حق',
     'top'        => 'أعلى',

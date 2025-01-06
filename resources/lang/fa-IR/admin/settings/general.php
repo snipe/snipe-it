@@ -381,6 +381,8 @@ return [
     'two_factor_enrollment_text'	=> "احراز هویت دو عامل لازم است، اما دستگاه شما هنوز ثبت نشده است. برنامه Google Authenticator خود را باز کنید و کد QR زیر را برای ثبت نام دستگاه خود اسکن کنید. هنگامی که دستگاه خود را ثبت نام کردید، کد زیر را وارد کنید",
     'require_accept_signature'      => 'امضا لازم است',
     'require_accept_signature_help_text'      => 'فعال کردن این ویژگی، کاربران را مجبور به فیزیکی در پذیرش یک دارایی می کند.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'چپ',
     'right'        => 'راست',
     'top'        => 'بالا',
