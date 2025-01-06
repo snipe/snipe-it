@@ -9,6 +9,7 @@ use App\Models\Setting;
 use App\Notifications\ExpiringAssetsNotification;
 use App\Notifications\ExpiringLicenseNotification;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Notification;
 
 class SendExpirationAlerts extends Command
 {
@@ -45,7 +46,7 @@ class SendExpirationAlerts extends Command
         $threshold = $settings->alert_interval;
 
         if (($settings->alert_email != '') && ($settings->alerts_enabled == 1)) {
-
+            $this->info('alerts');
             // Send a rollup to the admin, if settings dictate
             $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
                 return new AlertRecipient($item);
@@ -54,15 +55,17 @@ class SendExpirationAlerts extends Command
             // Expiring Assets
             $assets = Asset::getExpiringWarrantee($threshold);
             if ($assets->count() > 0) {
+                $this->info('expiring warrantees');
                 $this->info(trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count' => $assets->count(), 'threshold' => $threshold]));
-                \Notification::send($recipients, new ExpiringAssetsNotification($assets, $threshold));
+                Notification::send($recipients, new ExpiringAssetsNotification($assets, $threshold));
             }
 
             // Expiring licenses
             $licenses = License::getExpiringLicenses($threshold);
             if ($licenses->count() > 0) {
+                $this->info('expiring licenses');
                 $this->info(trans_choice('mail.license_expiring_alert', $licenses->count(), ['count' => $licenses->count(), 'threshold' => $threshold]));
-                \Notification::send($recipients, new ExpiringLicenseNotification($licenses, $threshold));
+                Notification::send($recipients, new ExpiringLicenseNotification($licenses, $threshold));
             }
         } else {
             if ($settings->alert_email == '') {
@@ -71,5 +74,6 @@ class SendExpirationAlerts extends Command
                 $this->info('Alerts are disabled in the settings. No mail will be sent');
             }
         }
+        $this->info('nothing here.');
     }
 }

@@ -1093,29 +1093,42 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
         $showDeleted = $deleted == 'deleted';
 
-        /**
-         * Get all assets with pending checkout acceptances
-         */
-        if($showDeleted) {
-            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->withTrashed()->with(['assignedTo' , 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        $assetsForReport = collect();
+
+        $query = CheckoutAcceptance::pending()
+            ->where('checkoutable_type', 'App\Models\Asset')
+            ->with(['checkoutable.assignedTo', 'checkoutable.model']); // Eager load common relationships
+
+        if ($showDeleted) {
+            $query->withTrashed()->with(['assignedTo']);
         } else {
-            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->with(['assignedTo' => function ($query) {
+            $query->with(['assignedTo' => function ($query) {
                 $query->withTrashed();
-            }, 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+            }]);
         }
 
-        $assetsForReport = $acceptances
-            ->filter(function ($acceptance) {
+// Process records in chunks
+        $query->chunk(100, function ($chunk) use (&$assetsForReport) {
+
+            $filtered = $chunk->filter(function ($acceptance) {
                 $acceptance_checkoutable_flag = false;
-                if ($acceptance->checkoutable){
-                    $acceptance_checkoutable_flag = $acceptance->checkoutable->checkedOutToUser();
+
+                if($acceptance->checkoutable) {
+                    $acceptance_checkoutable_flag = $acceptance->assignedTo;
                 }
-                
-                return $acceptance->checkoutable_type == 'App\Models\Asset' && $acceptance_checkoutable_flag;
-            })
-            ->map(function($acceptance) {
-                return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
+                // Return true if criteria match
+                return $acceptance->checkoutable_type === 'App\Models\Asset' && $acceptance_checkoutable_flag;
+            })->map(function ($acceptance) {
+
+                return [
+                    'assetItem' => $acceptance->checkoutable,
+                    'acceptance' => $acceptance,
+                ];
             });
+
+            // Merge results into the main collection
+            $assetsForReport = $assetsForReport->merge($filtered);
+        });
 
         return view('reports/unaccepted_assets', compact('assetsForReport','showDeleted' ));
     }
