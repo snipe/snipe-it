@@ -175,10 +175,7 @@
                                         <p class="help-block">
                                             {{ trans('admin/settings/general.label2_1d_type_help') }}.
                                             {!!
-                                                trans('admin/settings/general.help_default_will_use', [
-                                                    'default' => trans('admin/settings/general.default'),
-                                                    'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.alt_barcode_type'),
-                                                ])
+                                                trans('admin/settings/general.help_default_will_use')
                                             !!}
                                         </p>
                                     </div>
@@ -218,10 +215,7 @@
                                         <p class="help-block">
                                             {{ trans('admin/settings/general.label2_2d_type_help', ['current' => $setting->barcode_type]) }}.
                                             {!!
-                                                trans('admin/settings/general.help_default_will_use', [
-                                                    'default' => trans('admin/settings/general.default'),
-                                                    'setting_name' => trans('admin/settings/general.barcodes').' &gt; '.trans('admin/settings/general.barcode_type'),
-                                                ])
+                                                trans('admin/settings/general.help_default_will_use')
                                             !!}
                                         </p>
                                     </div>

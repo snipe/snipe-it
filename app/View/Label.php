@@ -105,7 +105,7 @@ class Label implements View
                     }
                 }
 
-                if ($settings->alt_barcode_enabled) {
+
                     if ($template->getSupport1DBarcode()) {
                         $barcode1DType = $settings->label2_1d_type;
                         if ($barcode1DType != 'none') {
@@ -115,25 +115,25 @@ class Label implements View
                             ]);
                         }
                     }
-                }
 
-                if ($template->getSupport2DBarcode()) {
-                    $barcode2DType = $settings->label2_2d_type;
-                    $barcode2DType = ($barcode2DType == 'default') ? 
-                        $settings->barcode_type :
-                        $barcode2DType;
-                    if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
-                        switch ($settings->label2_2d_target) {
-                            case 'ht_tag': $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); break;
-                            case 'hardware_id':
-                            default: $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); break;
+                    if ($template->getSupport2DBarcode()) {
+                        $barcode2DType = $settings->label2_2d_type;
+                        if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
+                            switch ($settings->label2_2d_target) {
+                                case 'ht_tag':
+                                    $barcode2DTarget = route('ht/assetTag', $asset->asset_tag);
+                                    break;
+                                case 'hardware_id':
+                                default:
+                                    $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]);
+                                    break;
+                            }
+                            $assetData->put('barcode2d', (object)[
+                                'type' => $barcode2DType,
+                                'content' => $barcode2DTarget,
+                            ]);
                         }
-                        $assetData->put('barcode2d', (object)[
-                            'type' => $barcode2DType,
-                            'content' => $barcode2DTarget,
-                        ]);
                     }
-                }
 
                 $fields = $fieldDefinitions
                     ->map(fn($field) => $field->toArray($asset))
