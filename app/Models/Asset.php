@@ -5,7 +5,6 @@ namespace App\Models;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
-use App\Http\Traits\CheckoutableTrait;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
@@ -34,7 +33,6 @@ class Asset extends Depreciable
     protected $with = ['model', 'adminuser'];
 
     use CompanyableTrait;
-    use CheckoutableTrait;
     use HasFactory, Loggable, Requestable, Presentable, SoftDeletes, ValidatingTrait, UniqueUndeletedTrait;
 
     public const LOCATION = 'location';
