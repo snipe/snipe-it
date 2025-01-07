@@ -1111,16 +1111,6 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
         $showDeleted = $deleted == 'deleted';
 
-//        $acceptances = CheckoutAcceptance::pending()
-//            ->where('checkoutable_type', 'App\Models\Asset')
-//            ->withTrashed()
-//            ->with([
-//                'assignedTo',
-//                'checkoutable.assignedTo',
-//                'checkoutable.model'
-//            ])->get();
-        $assetsForReport = collect();
-
         $query = CheckoutAcceptance::pending()
             ->where('checkoutable_type', 'App\Models\Asset')
             ->with([
