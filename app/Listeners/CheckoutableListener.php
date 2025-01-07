@@ -65,7 +65,7 @@ class CheckoutableListener
         $mailable = $this->getCheckoutMailType($event, $acceptance);
         $notifiable = $this->getNotifiables($event);
 
-        if  (!$event->checkedOutTo->locale){
+        if  ($event->checkedOutTo->locale){
             $mailable->locale($event->checkedOutTo->locale);
         }
         // Send email notifications
@@ -147,7 +147,7 @@ class CheckoutableListener
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable =  $this->getCheckinMailType($event);
         $notifiable = $this->getNotifiables($event);
-        if  (!$event->checkedOutTo->locale){
+        if  ($event->checkedOutTo->locale){
             $mailable->locale($event->checkedOutTo->locale);
         }
         // Send email notifications
