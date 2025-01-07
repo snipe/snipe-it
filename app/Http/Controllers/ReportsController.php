@@ -1117,7 +1117,8 @@ class ReportsController extends Controller
 
         if ($showDeleted) {
             $query->withTrashed()->with(['assignedTo']);
-        } else {
+        }
+        else {
             $query->with(['assignedTo' => function ($query) {
                 $query->withTrashed();
             }]);
@@ -1129,10 +1130,10 @@ class ReportsController extends Controller
             $filtered = $chunk->filter(function ($acceptance) {
                 $acceptance_checkoutable_flag = false;
 
-                if($acceptance->checkoutable) {
-                    $acceptance_checkoutable_flag = $acceptance->assignedTo;
+                if ($acceptance->checkoutable){
+                    $acceptance_checkoutable_flag = $acceptance->checkoutable->assignedTo();
                 }
-                // Return true if criteria match
+                // Return true if user
                 return $acceptance->checkoutable_type === 'App\Models\Asset' && $acceptance_checkoutable_flag;
             })->map(function ($acceptance) {
 
