@@ -1137,8 +1137,6 @@ class ReportsController extends Controller
                         'acceptance' => $acceptance,
                     ];
             });
-            // Merge results into the main collection
-
 
         return view('reports/unaccepted_assets', compact('assetsForReport','showDeleted' ));
     }
