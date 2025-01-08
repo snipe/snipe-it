@@ -7,6 +7,7 @@ use App\Models\Labels\Label as LabelModel;
 use App\Models\Labels\Sheet;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Traits\Macroable;
 use TCPDF;
@@ -39,6 +40,7 @@ class Label implements View
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
 
+
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable)) {
             return view('hardware/labels')
@@ -51,21 +53,22 @@ class Label implements View
         try {
             $template = LabelModel::find($settings->label2_template);
 
-            if ($template === null) {
-                throw new \UnexpectedValueException('Template is null.');
-            }
-
-            $template->validate();
-        } catch (\UnexpectedValueException $e) {
-
-            \Log::error('Validation failed: ' . $e->getMessage());
-
-        } catch (\Throwable $e) {
-
-            \Log::error('An unexpected error occurred: ' . $e->getMessage());
-
+        if ($template === null) {
+            return redirect()->route('settings.labels.index')->with('error', trans('admin/settings/message.labels.null_template'));
         }
 
+        $template->validate();
+    } catch (\UnexpectedValueException $e) {
+
+        \Log::error('Validation failed: ' . $e->getMessage());
+
+    } catch (\Throwable $e) {
+
+        \Log::error('An unexpected error occurred: ' . $e->getMessage());
+
+    }
+
+        $template->validate();
 
         $pdf = new TCPDF(
             $template->getOrientation(),
