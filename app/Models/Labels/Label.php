@@ -488,7 +488,7 @@ abstract class Label
         }
     }
 
-    private function validateSupport() : void{
+    private function validateSupport() : void {
         $support1D = $this->getSupport1DBarcode();
         if (!is_bool($support1D)) {
             throw new \UnexpectedValueException(trans('admin/labels/message.invalid_return_type', [
