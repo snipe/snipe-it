@@ -38,7 +38,6 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
-        $template = LabelModel::find($settings->label2_template);
 
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable)) {
@@ -49,11 +48,24 @@ class Label implements View
                 ->with('count', $this->data->get('count'));
         }
 
-        if ($template === null) {
-            throw new \UnexpectedValueException('Template is null.');
+        try {
+            $template = LabelModel::find($settings->label2_template);
+
+            if ($template === null) {
+                throw new \UnexpectedValueException('Template is null.');
+            }
+
+            $template->validate();
+        } catch (\UnexpectedValueException $e) {
+
+            \Log::error('Validation failed: ' . $e->getMessage());
+
+        } catch (\Throwable $e) {
+
+            \Log::error('An unexpected error occurred: ' . $e->getMessage());
+
         }
 
-        $template->validate();
 
         $pdf = new TCPDF(
             $template->getOrientation(),
