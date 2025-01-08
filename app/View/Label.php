@@ -49,6 +49,10 @@ class Label implements View
                 ->with('count', $this->data->get('count'));
         }
 
+        if ($template === null) {
+            throw new \UnexpectedValueException('Template is null.');
+        }
+
         $template->validate();
 
         $pdf = new TCPDF(
