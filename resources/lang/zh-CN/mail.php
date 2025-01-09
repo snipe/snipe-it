@@ -7,7 +7,7 @@ return [
     'Asset_Checkin_Notification' => '资产已签入',
     'Asset_Checkout_Notification' => '资产已借出',
     'Confirm_Accessory_Checkin' => '配件签入确认',
-    'Confirm_Asset_Checkin' => '确认资产收回',
+    'Confirm_Asset_Checkin' => '资产收回确认',
     'Confirm_accessory_delivery' => '配件交付确认',
     'Confirm_asset_delivery' => '资产交付确认',
     'Confirm_consumable_delivery' => '耗材交付确认',
