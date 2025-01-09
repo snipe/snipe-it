@@ -106,7 +106,7 @@ class CheckoutableListener
                 }
             }
         } catch (ClientException $e) {
-            Log::warning("ClientException caught during checkin notification: " . $e->getMessage());
+            Log::error("ClientException caught during checkin notification: " . $e->getMessage());
             return redirect()->back()->with('error', ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed: Check to make sure your URL is still valid.');
         } catch (Exception $e) {
             Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
@@ -196,7 +196,7 @@ class CheckoutableListener
                 }
             }
         } catch (ClientException $e) {
-            Log::warning("ClientException caught during checkin notification: " . $e->getMessage());
+            Log::error("ClientException caught during checkin notification: " . $e->getMessage());
             return redirect()->back()->with('error', ucfirst(Setting::getSettings()->webhook_selected) .' webhook notification failed: Check to make sure the URL is still valid.');
         } catch (Exception $e) {
             Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
