@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Username Format',
     'username'              => 'ឈ្មោះ​អ្នកប្រើប្រាស់',
     'update'                => 'ធ្វើបច្ចុប្បន្នភាព',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'ប្រភេទឯកសារដែលបានអនុញ្ញាតគឺ png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf និង rar ។ ទំហំផ្ទុកឡើងអតិបរមាដែលអនុញ្ញាតគឺ៖ ទំហំ។',
     'uploaded'              => 'បានបង្ហោះ',
     'user'					=> 'អ្នក​ប្រើ',
@@ -565,5 +566,6 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

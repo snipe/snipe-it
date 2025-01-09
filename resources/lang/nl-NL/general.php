@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Gebruikersnaam indeling',
     'username'              => 'Gebruikersnaam',
     'update'                => 'Bijwerken',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Toegestane bestandstypen zijn png, gif, jpg, jpeg, doc, docx, pdf, xlsx, txt, lic, xml, zip, rtf en rar. Maximale toegestane uploadgrootte is :size.',
     'uploaded'              => 'Geupload',
     'user'					=> 'Gebruiker',
@@ -565,5 +566,6 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'Een asset met de asset tag :asset_tag bestaat al en een update is niet aangevraagd. Er is geen wijziging aangebracht.',
     'countries_manually_entered_help' => 'De waarden met een asterisk (*) zijn handmatig ingevoerd en komen niet overeen met de bestaande ISO 3166 dropdown waarden',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

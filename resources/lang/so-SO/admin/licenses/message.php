@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Cillad ayaa dhacday intii la hubinayay shatiga. Fadlan kuceli markale.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Shatiga si guul leh ayaa loo hubiyay'
     ),
 

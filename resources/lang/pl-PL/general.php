@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Format nazwy użytkownika',
     'username'              => 'Nazwa użytkownika',
     'update'                => 'Zaktualizuj',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Dozwolone typy plików to png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip i rar. Maksymalny dozwolony rozmiar przesyłania to :rozmiar.',
     'uploaded'              => 'Przesłano',
     'user'					=> 'Użytkownik',
@@ -565,5 +566,6 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'Zasób z tagiem aktywów :asset_tag już istnieje i nie zażądano aktualizacji. Nie dokonano żadnych zmian.',
     'countries_manually_entered_help' => 'Wartości z gwiazdką (*) zostały wprowadzone ręcznie i nie odpowiadają istniejącym wartościom rozwijanym ISO 3166',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

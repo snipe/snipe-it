@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Формат імені користувача',
     'username'              => 'Ім\'я кристувача',
     'update'                => 'Оновлення',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Дозволені типи файлів - png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, xml, zip, rtf і rar. Максимальний розмір завантаження - :size.',
     'uploaded'              => 'Завантажено',
     'user'					=> 'Користувач',
@@ -565,5 +566,6 @@ return [
     'label' => 'Мітка',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

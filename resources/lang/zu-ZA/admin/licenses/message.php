@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Kube nenkinga ekuhloleni ilayisense. Ngicela uzame futhi.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Ilayisensi ihlolwe ngempumelelo'
     ),
 

@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Er was een probleem met het inchecken van deze licentie. Probeer het opnieuw.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'De licentie is met succes ingecheckt'
     ),
 

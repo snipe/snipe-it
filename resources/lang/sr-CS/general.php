@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Format korisničkog imena',
     'username'              => 'Korisničko ime',
     'update'                => 'Ažuriraj',
+    'updating_item' => 'Izmena :item',
     'upload_filetypes_help'      => 'Dozvoljeni tipovi datoteka su png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf i rar. Maksimalna veličina datoteke je :size.',
     'uploaded'              => 'Uploaded',
     'user'					=> 'Korisnik',
@@ -565,5 +566,6 @@ return [
     'label' => 'Oznaka',
     'import_asset_tag_exists' => 'Imovina sa oznakom imovine :asset_tag već postoji i izmena nije zatražena. Nijedna izmena nije izvršena.',
     'countries_manually_entered_help' => 'Vrednosti sa zvezdicom (*) su ručno upisane i ne poklapaju se sa postojećim ISO 3166 vrednostima iz padajućeg menija',
+    'accessories_assigned' => 'Dodeljen dodatni pribor',
 
 ];
