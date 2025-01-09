@@ -107,14 +107,14 @@ class CheckoutableListener
             }
         } catch (ClientException $e) {
             Log::error("ClientException caught during checkin notification: " . $e->getMessage());
-            return redirect()->back()->with('error', ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed: Check to make sure your URL is still valid.');
+            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed: Check to make sure your URL is still valid.');
         } catch (Exception $e) {
             Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
                 'error' => $e->getMessage(),
                 'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
                 'event' => $event,
             ]);
-            return redirect()->back()->with('error', ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed: Check to make sure your URL is still valid.');
+            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed: Check to make sure your URL is still valid.');
         }
     }
 
@@ -197,14 +197,14 @@ class CheckoutableListener
             }
         } catch (ClientException $e) {
             Log::error("ClientException caught during checkin notification: " . $e->getMessage());
-            return redirect()->back()->with('error', ucfirst(Setting::getSettings()->webhook_selected) .' webhook notification failed: Check to make sure the URL is still valid.');
+            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .' webhook notification failed: Check to make sure the URL is still valid.');
         } catch (Exception $e) {
             Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
                 'error' => $e->getMessage(),
                 'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
                 'event' => $event,
             ]);
-            return redirect()->back()->with('error', ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed: Check to make sure the URL is still valid.');
+            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed: Check to make sure the URL is still valid.');
         }
     }      
 
