@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Формат на корисничко име',
     'username'              => 'Корисничко име',
     'update'                => 'Ажурирање',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Дозволени типови на датотеки се png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Максимална дозволена големина е :size.',
     'uploaded'              => 'Прикачено',
     'user'					=> 'Корисник',
@@ -565,5 +566,6 @@ return [
     'label' => 'Етикета',
     'import_asset_tag_exists' => 'Средство со ознаката :asset_tag веќе постои и не беше побарано ажурирање.Не е направена никаква промена.',
     'countries_manually_entered_help' => 'Вредности со звездичка (*) биле рачно внесени и не се совпаѓаат со постојните ISO 3166 вредности во менито',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

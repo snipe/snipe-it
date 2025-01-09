@@ -15,7 +15,7 @@ return array(
     'license_seats'  			=> 'License Seats',
     'seat'  					=> 'Seat',
     'seat_count'  				=> 'Seat :count',
-    'seats'  					=> 'Seats',
+    'seats'  					=> 'Sídla',
     'software_licenses'  		=> 'Software Licenses',
     'user'  					=> 'User',
     'view'  					=> 'View License',

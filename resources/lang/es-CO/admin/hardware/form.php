@@ -60,5 +60,5 @@ return [
     'processing_spinner' => 'Procesando... (Esto puede tomar un poco de tiempo en archivos grandes)',
     'optional_infos'  => 'Información opcional',
     'order_details'   => 'Información relacionada con el pedido',
-    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
+    'calc_eol'    => 'Si deja nula la fecha EOL, utilice el cálculo automático basado en la fecha de compra y la frecuencia de EOL.',
 ];

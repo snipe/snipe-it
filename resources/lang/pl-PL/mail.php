@@ -65,7 +65,7 @@ return [
     'low_inventory_alert' => 'Istnieje: liczba przedmiot, który jest poniżej minimalnej ilości zapasów lub wkrótce ta wartość będzie niska. | Istnieją: policz przedmioty, które są poniżej minimalnej ilości zapasów lub wkrótce te wartości będą niskie.',
     'min_QTY' => 'Min. ilość',
     'name' => 'Nazwa',
-    'new_item_checked' => 'Nowy przedmiot przypisany do Ciebie został zwrócony, szczegóły poniżej.',
+    'new_item_checked' => 'Nowy przedmiot został przypisany do Ciebie, szczegóły poniżej.',
     'notes' => 'Uwagi',
     'password' => 'Hasło',
     'password_reset' => 'Resetowanie hasła',

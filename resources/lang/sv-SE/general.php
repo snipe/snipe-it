@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Användarnamnsformat',
     'username'              => 'Användarnamn',
     'update'                => 'Uppdatera',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Tillåtna filtyper är png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip och rar. Max tillåten uppladdningsstorlek är: storlek.',
     'uploaded'              => 'Uppladdad',
     'user'					=> 'Användare',
@@ -565,5 +566,6 @@ return [
     'label' => 'Etikett',
     'import_asset_tag_exists' => 'En tillgång med tillgångstaggen :asset_tag finns redan och en uppdatering begärdes inte. Ingen ändring gjordes.',
     'countries_manually_entered_help' => 'Värden med en asterisk (*) matades in manuellt och matchar inte befintliga ISO 3166 rullgardinsvärden',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

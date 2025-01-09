@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Un problème a eu lieu pendant la dissociation de la licence. Veuillez essayer à nouveau.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'La licence a été dissociée avec succès'
     ),
 

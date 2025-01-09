@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Naudotojo vardo formatas',
     'username'              => 'Naudotojo vardas',
     'update'                => 'Atnaujinti',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Leidžiami failų tipai yra: png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf ir rar. Didžiausias leidžiamas įkeliamų failų dydis yra :size.',
     'uploaded'              => 'Įkelta',
     'user'					=> 'Naudotojas',
@@ -565,5 +566,6 @@ return [
     'label' => 'Etiketė',
     'import_asset_tag_exists' => 'Turtas su inventoriniu numeriu :asset_tag jau yra ir atnaujinimo užklausa nebuvo pateikta. Jokie pakeitimai nebuvo atlikti.',
     'countries_manually_entered_help' => 'Žvaigždute (*) pažymėtos reikšmės buvo įvestos rankiniu būdu ir neatitinka esamų ISO 3166 išskleidžiamojo sąrašo reikšmių',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];
