@@ -8,9 +8,9 @@ class TZe_24mm_D extends TZe_24mm
     private const TAG_SIZE       =   2.80;
     private const TITLE_SIZE     =   2.80;
     private const TITLE_MARGIN   =   0.50;
-    private const LABEL_SIZE     =   2.00;
+    private const LABEL_SIZE     =   2.50;
     private const LABEL_MARGIN   = - 0.35;
-    private const FIELD_SIZE     =   2.00;
+    private const FIELD_SIZE     =   2.50;
     private const FIELD_MARGIN   =   0.35;
     private const BARCODE1D_SIZE =   3.00;  // Size for the C128 barcode at bottom
 
@@ -19,7 +19,7 @@ class TZe_24mm_D extends TZe_24mm
     public function getSupportAssetTag()  { return true; }
     public function getSupport1DBarcode() { return true; }
     public function getSupport2DBarcode() { return true; }
-    public function getSupportFields()    { return 4; }
+    public function getSupportFields()    { return 3; }
     public function getSupportLogo()      { return false; }
     public function getSupportTitle()     { return true; }
 
