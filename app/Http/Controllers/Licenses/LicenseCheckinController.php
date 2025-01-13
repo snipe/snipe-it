@@ -69,12 +69,7 @@ class LicenseCheckinController extends Controller
 
         $this->authorize('checkout', $license);
 
-        if (! $license->reassignable) {
-            // Not allowed to checkin
-            Session::flash('error', trans('admin/licenses/message.checkin.not_reassignable') . '.');
 
-            return redirect()->back()->withInput();
-        }
 
         // Declare the rules for the form validation
         $rules = [
@@ -100,13 +95,16 @@ class LicenseCheckinController extends Controller
         $licenseSeat->assigned_to = null;
         $licenseSeat->asset_id = null;
         $licenseSeat->notes = $request->input('notes');
+        if (! $license->reassignable) {
+            $licenseSeat->notes .= "\n" . trans('admin/licenses/message.checkin.not_reassignable') . '.';
+        }
 
         session()->put(['redirect_option' => $request->get('redirect_option')]);
 
 
         // Was the asset updated?
         if ($licenseSeat->save()) {
-            event(new CheckoutableCheckedIn($licenseSeat, $return_to, auth()->user(), $request->input('notes')));
+            event(new CheckoutableCheckedIn($licenseSeat, $return_to, auth()->user(), $licenseSeat->notes));
 
 
             return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkin.success'));

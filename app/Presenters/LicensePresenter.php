@@ -285,6 +285,15 @@ class LicensePresenter extends Presenter
                 'formatter' => 'notesFormatter'
             ],
             [
+                'field' => 'reassignable',
+                'searchable' => false,
+                'sortable' => false,
+                'visible' => true,
+                'title' => trans('admin/licenses/form.reassignable'),
+                'formatter' => 'trueFalseFormatter',
+                'class' => 'text-center',
+            ],
+            [
                 'field' => 'checkincheckout',
                 'searchable' => false,
                 'sortable' => false,
