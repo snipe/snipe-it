@@ -17,7 +17,7 @@
     {{-- map the simple key => value pairs when nothing is passed in via the slot --}}
     @if($slot->isEmpty())
         @foreach($options as $key => $value)
-            <option value="{{ $key }}" @selected($selected === $key)>{{ $value }}</option>
+            <option value="{{ $key }}" @selected($selected == $key)>{{ $value }}</option>
         @endforeach
     @else
         {{ $slot }}
