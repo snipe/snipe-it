@@ -125,7 +125,13 @@
               {{ trans('admin/hardware/form.status') }}
             </label>
             <div class="col-md-7">
-              {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'status_id')) }}
+              <x-input.select
+                  name="status_id"
+                  :options="$statuslabel_list"
+                  :selected="old('status_id')"
+                  style="width: 100%"
+                  aria-label="status_id"
+              />
               <p class="help-block">{{ trans('general.status_compatibility') }}</p>
               {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
