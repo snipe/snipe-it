@@ -10,8 +10,8 @@ class TZe_24mm_D extends TZe_24mm
     private const TITLE_MARGIN   =   0.50;
     private const LABEL_SIZE     =   2.00;
     private const LABEL_MARGIN   = - 0.35;
-    private const FIELD_SIZE     =   3.20;
-    private const FIELD_MARGIN   =   0.15;
+    private const FIELD_SIZE     =   2.00;
+    private const FIELD_MARGIN   =   0.35;
     private const BARCODE1D_SIZE =   3.00;  // Size for the C128 barcode at bottom
 
     public function getUnit()  { return 'mm'; }
@@ -19,7 +19,7 @@ class TZe_24mm_D extends TZe_24mm
     public function getSupportAssetTag()  { return true; }
     public function getSupport1DBarcode() { return true; }
     public function getSupport2DBarcode() { return true; }
-    public function getSupportFields()    { return 3; }
+    public function getSupportFields()    { return 4; }
     public function getSupportLogo()      { return false; }
     public function getSupportTitle()     { return true; }
 
@@ -70,21 +70,29 @@ class TZe_24mm_D extends TZe_24mm
         }
 
         foreach ($record->get('fields') as $field) {
+            // Write label and value on the same line
+            // Calculate label width with proportional character spacing
+            $labelWidth = $pdf->GetStringWidth($field['label'], 'freemono', '', self::LABEL_SIZE);
+            $charCount = strlen($field['label']);
+            $spacingPerChar = 0.5;
+            $totalSpacing = $charCount * $spacingPerChar;
+            $adjustedWidth = $labelWidth + $totalSpacing;
+
             static::writeText(
                 $pdf, $field['label'],
                 $currentX, $currentY,
-                'freesans', '', self::LABEL_SIZE, 'L',
-                $usableWidth, self::LABEL_SIZE, true, 0, 0
+                'freemono', 'B', self::LABEL_SIZE, 'L',
+                $adjustedWidth, self::LABEL_SIZE, true, 0, $spacingPerChar
             );
-            $currentY += self::LABEL_SIZE + self::LABEL_MARGIN;
 
             static::writeText(
                 $pdf, $field['value'],
-                $currentX, $currentY,
+                $currentX + $adjustedWidth + 2, $currentY,
                 'freemono', 'B', self::FIELD_SIZE, 'L',
-                $usableWidth, self::FIELD_SIZE, true, 0, 0.3
+                $usableWidth - $adjustedWidth - 2, self::FIELD_SIZE, true, 0, 0.3
             );
-            $currentY += self::FIELD_SIZE + self::FIELD_MARGIN;
+
+            $currentY += max(self::LABEL_SIZE, self::FIELD_SIZE) + self::FIELD_MARGIN;
         }
 
         // Add C128 barcode at the bottom
