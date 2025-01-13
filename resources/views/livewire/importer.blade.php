@@ -155,15 +155,20 @@
                                                                 </label>
 
                                                             <div class="col-md-9 col-xs-12">
-                                                                    {{ Form::select('typeOfImport', $importTypes, $typeOfImport, [
-                                                                        'id' => 'import_type',
-                                                                        'class' => 'livewire-select2',
-                                                                        'style' => 'min-width: 350px',
-                                                                        'data-placeholder' => trans('general.select_var', ['thing' => trans('general.import_type')]),
-                                                                        'placeholder' => '', //needed so that the form-helper will put an empty option first
-                                                                        'data-minimum-results-for-search' => '-1', // Remove this if the list gets long enough that we need to search
-                                                                        'data-livewire-component' => $this->getId()
-                                                                    ]) }}
+                                                                <x-input.select
+                                                                    name="typeOfImport"
+                                                                    id="import_type"
+                                                                    :options="$importTypes"
+                                                                    :selected="$typeOfImport"
+                                                                    :for-livewire="true"
+                                                                    :include-empty="true"
+                                                                    :data-placeholder="trans('general.select_var', ['thing' => trans('general.import_type')])"
+                                                                    {{--placeholder needed so that the form-helper will put an empty option first--}}
+                                                                    placeholder=""
+                                                                    {{--Remove this if the list gets long enough that we need to search--}}
+                                                                    data-minimum-results-for-search="-1"
+                                                                    style="min-width: 350px;"
+                                                                />
                                                                     @if ($typeOfImport === 'asset' && $snipeSettings->auto_increment_assets == 0)
                                                                         <p class="help-block">
                                                                             {{ trans('general.auto_incrementing_asset_tags_disabled_so_tags_required') }}
@@ -238,17 +243,22 @@
 
                                                                             <label for="field_map.{{ $index }}" class="col-md-3 control-label text-right">{{ $header }}</label>
                                                                             <div class="col-md-4">
-
-                                                                                {{ Form::select('field_map.'.$index, $columnOptions[$typeOfImport], @$field_map[$index],
-                                                                                    [
-                                                                                        'class' => 'mappings livewire-select2',
-                                                                                        'placeholder' => trans('general.importer.do_not_import'),
-                                                                                        'style' => 'min-width: 100%',
-                                                                                        'data-livewire-component' => $this->getId()
-                                                                                    ],[
-                                                                                        '-' => ['disabled' => true] // this makes the "-----" line unclickable
-                                                                                    ])
-                                                                                }}
+                                                                                <x-input.select
+                                                                                    :name="'field_map.'.$index"
+                                                                                    :for-livewire="true"
+                                                                                    :placeholder="trans('general.importer.do_not_import')"
+                                                                                    class="mappings"
+                                                                                    style="min-width: 100%;"
+                                                                                >
+                                                                                    <option selected="selected" value="">Do Not Import</option>
+                                                                                    @foreach($columnOptions[$typeOfImport] as $key => $value)
+                                                                                        <option
+                                                                                            value="{{ $key }}"
+                                                                                            @selected(@$field_map[$index] === $key)
+                                                                                            @disabled($key === '-')
+                                                                                        >{{ $value }}</option>
+                                                                                    @endforeach
+                                                                                </x-input.select>
                                                                             </div>
 									                                    @if (($this->activeFile->first_row) && (array_key_exists($index, $this->activeFile->first_row)))
                                                                             <div class="col-md-5">
