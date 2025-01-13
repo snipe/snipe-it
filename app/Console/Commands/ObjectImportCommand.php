@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\Console\Helper\ProgressIndicator;
 
 ini_set('max_execution_time', env('IMPORT_TIME_LIMIT', 600)); //600 seconds = 10 minutes
 ini_set('memory_limit', env('IMPORT_MEMORY_LIMIT', '500M'));
@@ -30,6 +31,11 @@ class ObjectImportCommand extends Command
     protected $description = 'Import Items from CSV';
 
     /**
+     * The progress indicator instance.
+     */
+    protected ProgressIndicator $progressIndicator;
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -39,8 +45,6 @@ class ObjectImportCommand extends Command
         parent::__construct();
     }
 
-    private $bar;
-
     /**
      * Execute the console command.
      *
@@ -48,12 +52,14 @@ class ObjectImportCommand extends Command
      */
     public function handle()
     {
+        $this->progressIndicator = new ProgressIndicator($this->output);
+
         $filename = $this->argument('filename');
         $class = title_case($this->option('item-type'));
         $classString = "App\\Importer\\{$class}Importer";
         $importer = new $classString($filename);
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
-                 ->setUserId($this->option('user_id'))
+                 ->setCreatedBy($this->option('user_id'))
                  ->setUpdating($this->option('update'))
                  ->setShouldNotify($this->option('send-welcome'))
                  ->setUsernameFormat($this->option('username_format'));
@@ -61,45 +67,24 @@ class ObjectImportCommand extends Command
         // This $logFile/useFiles() bit is currently broken, so commenting it out for now
         // $logFile = $this->option('logfile');
         // Log::useFiles($logFile);
-        $this->comment('======= Importing Items from '.$filename.' =========');
+        $this->progressIndicator->start('======= Importing Items from '.$filename.' =========');
+
         $importer->import();
 
-        $this->bar = null;
-
-        if (! empty($this->errors)) {
-            $this->comment('The following Errors were encountered.');
-            foreach ($this->errors as $asset => $error) {
-                $this->comment('Error: Item: '.$asset.' failed validation: '.json_encode($error));
-            }
-        } else {
-            $this->comment('All Items imported successfully!');
-        }
-        $this->comment('');
+        $this->progressIndicator->finish('Import finished.');
     }
 
-    public function errorCallback($item, $field, $errorString)
+    public function errorCallback($item, $field, $error)
     {
-        $this->errors[$item->name][$field] = $errorString;
+        $this->output->write("\x0D\x1B[2K");
+
+        $this->warn('Error: Item: '.$item->name.' failed validation: '.json_encode($error));
     }
 
-    public function progress($count)
+    public function progress($importedItemsCount)
     {
-        if (! $this->bar) {
-            $this->bar = $this->output->createProgressBar($count);
-        }
-        static $index = 0;
-        $index++;
-        if ($index < $count) {
-            $this->bar->advance();
-        } else {
-            $this->bar->finish();
-        }
+        $this->progressIndicator->advance();
     }
-
-    // Tracks the current item for error messages
-    private $updating;
-    // An array of errors encountered while parsing
-    private $errors;
 
     /**
      * Log a message to file, configurable by the --log-file parameter.

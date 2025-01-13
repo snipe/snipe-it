@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'crwdns828:0crwdne828:0',
     'display_checkout_date'     => 'crwdns829:0crwdne829:0',
     'display_eol'               => 'crwdns1118:0crwdne1118:0',
-    'display_qr'                => 'crwdns1626:0crwdne1626:0',
+    'display_qr'                => 'crwdns12798:0crwdne12798:0',
     'display_alt_barcode'		=> 'crwdns1664:0crwdne1664:0',
     'email_logo'                => 'crwdns5854:0crwdne5854:0',
     'barcode_type'				=> 'crwdns1665:0crwdne1665:0',
@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "crwdns1791:0crwdne1791:0",
     'require_accept_signature'      => 'crwdns1819:0crwdne1819:0',
     'require_accept_signature_help_text'      => 'crwdns1820:0crwdne1820:0',
+    'require_checkinout_notes'  => 'crwdns12794:0crwdne12794:0',
+    'require_checkinout_notes_help_text'    => 'crwdns12796:0crwdne12796:0',
     'left'        => 'crwdns1597:0crwdne1597:0',
     'right'        => 'crwdns1598:0crwdne1598:0',
     'top'        => 'crwdns1599:0crwdne1599:0',
@@ -365,7 +367,7 @@ return [
     'label2_fields_help'      => 'crwdns11755:0crwdne11755:0',
     'help_asterisk_bold'    => 'crwdns11757:0crwdne11757:0',
     'help_blank_to_use'     => 'crwdns11759:0crwdne11759:0',
-    'help_default_will_use' => 'crwdns11789:0crwdne11789:0',
+    'help_default_will_use' => 'crwdns12828:0crwdne12828:0',
     'default'               => 'crwdns11763:0crwdne11763:0',
     'none'                  => 'crwdns11765:0crwdne11765:0',
     'google_callback_help' => 'crwdns11615:0crwdne11615:0',
@@ -385,5 +387,6 @@ return [
     'restore_default_avatar_help' => 'crwdns12594:0crwdne12594:0',
     'due_checkin_days' => 'crwdns12680:0crwdne12680:0',
     'due_checkin_days_help' => 'crwdns12682:0crwdne12682:0',
+    'no_groups' => 'crwdns12760:0crwdne12760:0',
 
 ];

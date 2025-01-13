@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Отображаемое имя актива',
     'display_checkout_date'     => 'Отображать дату выдачи',
     'display_eol'               => 'Отображать дату истечения срока гарантии в таблице',
-    'display_qr'                => 'Отображать QR коды',
+    'display_qr'                => 'Display 2D barcode',
     'display_alt_barcode'		=> 'Показывать штрих-коды',
     'email_logo'                => 'Логотип E-Mail',
     'barcode_type'				=> 'Тип 2D штрихкода',
@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Требуется двухфакторная аутентификация, однако ваше устройство еще не зарегистрировано. Откройте приложение Google Authenticator и отсканируйте QR-код ниже, чтобы зарегистрировать свое устройство. После того, как вы зарегистрируете свое устройство, введите приведенный ниже код",
     'require_accept_signature'      => 'Требуется подпись',
     'require_accept_signature_help_text'      => 'Включение этой функции потребует от пользователей физического выхода из системы при принятии актива.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'слева',
     'right'        => 'справа',
     'top'        => 'сверху',
@@ -365,7 +367,7 @@ return [
     'label2_fields_help'      => 'Поля могут быть добавлены, удалены и переупорядочены в левой колонке. Для каждого поля можно добавлять, удалять и переупорядочивать несколько параметров меток и DataSource.',
     'help_asterisk_bold'    => 'Текст, введенный как <code>**текст**</code> будет отображаться как жирный',
     'help_blank_to_use'     => 'Оставьте пустым, чтобы использовать значение из <code>:setting_name</code>',
-    'help_default_will_use' => '<code>:default</code> будет использовать значение из <code>:setting_name</code>. <br>Обратите внимание, что для успешной генерации значение штрих-кодов должно соответствовать соответствующей спецификации штрих-кода. Подробнее см. <a href="https://snipe-it.readme.io/docs/barcodes">в документации <i class="fa fa-external-link"></i></a>. ',
+    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
     'default'               => 'По умолчанию',
     'none'                  => 'None',
     'google_callback_help' => 'Это должно быть введено как URL обратного вызова в настройках приложения Google OAuth в вашей организации&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">консоль разработчика Google <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
@@ -385,5 +387,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Предупреждение о возврате',
     'due_checkin_days_help' => 'Сколько дней до ожидаемого возврата актива должно быть указано на странице «Подлежит возврату»?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

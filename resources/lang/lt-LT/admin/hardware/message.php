@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Įspėjimas:</strong> Šis turtas pažymėtas kaip negalimas išduoti. Jei šio turto būsena pasikeitė, atnaujinkite būsenos žymą.',
-    'does_not_exist' 	=> 'Tokio turto nėra.',
-    'does_not_exist_var'=> 'Turtas su numeriu :asset_tag nerastas.',
-    'no_tag' 	        => 'Nenurodytas inventorinis numeris.',
+    'undeployable' 		 => '<strong>Įspėjimas:</strong> Šis turtas pažymėtas kaip negalimas išduoti. Jei šio turto būsena pasikeitė, atnaujinkite būsenos žymą.',
+    'does_not_exist' 	 => 'Tokio turto nėra.',
+    'does_not_exist_var' => 'Turtas su numeriu :asset_tag nerastas.',
+    'no_tag' 	         => 'Nenurodytas inventorinis numeris.',
     'does_not_exist_or_not_requestable' => 'Tokio turto nėra arba jo negalima užsakyti.',
-    'assoc_users'	 	=> 'Šis turtas šiuo metu yra išduotas naudotojui ir negali būti panaikintas. Pirmiausia paimkite turtą ir tuomet vėl bandykite jį panaikinti. ',
+    'assoc_users'	 	 => 'Šis turtas šiuo metu yra išduotas naudotojui ir negali būti panaikintas. Pirmiausia paimkite turtą ir tuomet vėl bandykite jį panaikinti. ',
     'warning_audit_date_mismatch' 	=> 'Šio turto kito audito data (:next_audit_date) yra ankstesnė už paskutinio audito datą (:last_audit_date). Atnaujinkite kito audito datą.',
+    'labels_generated'   => 'Etiketės sugeneruotos sėkmingai.',
+    'error_generating_labels' => 'Generuojant etiketes įvyko klaida.',
+    'no_assets_selected' => 'Nepasirinktas joks turtas.',
 
     'create' => [
         'error'   		=> 'Turto sukurti nepavyko, bandykite dar kartą.',
         'success' 		=> 'Turtas sukurtas sėkmingai.',
         'success_linked' => 'Turtas su žyma :tag sukurtas sėkmingai. <strong><a href=":link" style="color: white;">Spustelėkite čia, kad peržiūrėtumėte</a></strong>.',
+        'multi_success_linked' => 'Turtas su inventoriniu numeriu :links sukurtas sėkmingai.|:count turto vienetai(-ų) sukurti sėkmingai. :links.',
+        'partial_failure' => 'Nepavyko sukurti turto. Priežastis: :failures|:count turto vienetų nepavyko sukurti. Priežastys: :failures',
     ],
 
     'update' => [
@@ -77,6 +82,11 @@ return [
         'user_does_not_exist' => 'Neteisingas naudotojas. Bandykite dar kartą.',
         'not_available' => 'Šis turtas negali būti išduodamas!',
         'no_assets_selected' => 'Turite pasirinkti bent vieną turto vienetą iš sąrašo',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Turtas nebuvo išduotas, bandykite dar kartą|Turtas nebuvo išduotas, bandykite dar kartą',
+        'success' => 'Turtas išduotas sėkmingai.|Turtas išduotas sėkmingai.',
     ],
 
     'checkin' => [

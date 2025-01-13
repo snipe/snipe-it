@@ -28,7 +28,7 @@ return array(
         'unavailable'   => 'Аксесуар недоступний для оформлення замовлення. Перевірте кількість доступних',
         'user_does_not_exist' => 'Невірний користувач. Спробуйте ще раз.',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => 'Ви намагаєтеся видати :checkout_qty аксесуарів, проте на даний час доступний лише один аксесуар даного типу. Будь ласка, змініть кількість для видачі або доступний залишок для видачі і спробуйте ще раз. Ви намагаєтеся видати :checkout_qty аксесуарів, проте в наявності check out :checkout_qty. Будь ласка, змініть кількість для видачі або доступний залишок для видачі і спробуйте ще раз.',
             ),
            
     ),

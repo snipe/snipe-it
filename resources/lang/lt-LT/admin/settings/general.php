@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Rodyti turto pavadinimą',
     'display_checkout_date'     => 'Rodyti išdavimo datą',
     'display_eol'               => 'Rodyti nurašymo datas lentelės rodinyje',
-    'display_qr'                => 'Rodyti kvadratinius kodus',
+    'display_qr'                => 'Display 2D barcode',
     'display_alt_barcode'		=> 'Rodyti 1D brūkšninius kodus',
     'email_logo'                => 'El. pašto logotipas',
     'barcode_type'				=> '2D brūkšninio kodo tipas',
@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Būtina dviejų veiksnių autentifikacija, tačiau jūsų dar nesate užregistravę įrenginio. Norėdami užregistruoti įrenginį, jame atidarykite „Google Authenticator“ programą ir nuskaitykite čia pateiktą QR kodą. Užregistravę įrenginį, įveskite jo ekrane rodomą kodą į žemiau esantį lauką",
     'require_accept_signature'      => 'Reikalauti parašo',
     'require_accept_signature_help_text'      => 'Jei įjungsite šią funkciją, naudotojai turės fiziškai pasirašyti už jiems išduodamą turtą.',
+    'require_checkinout_notes'  => 'Reikalauti pastabų paimant/išduodant',
+    'require_checkinout_notes_help_text'    => 'Įjungus šią funkciją, bus būtina užpildyti pastabų laukus paimant ar išduodant turtą.',
     'left'        => 'kairėje',
     'right'        => 'dešinėje',
     'top'        => 'viršuje',
@@ -365,7 +367,7 @@ return [
     'label2_fields_help'      => 'Laukus galima pridėti, pašalinti ir pertvarkyti kairiajame stulpelyje. Kiekvienam laukui, dešiniajame stulpelyje galima pridėti kelias etiketės ir „DataSource“ parinktis, taip pat, jas pašalinti ir pertvarkyti.',
     'help_asterisk_bold'    => 'Tekstas, įvestas kaip <code>**tekstas**</code>, bus rodomas paryškintu šriftu',
     'help_blank_to_use'     => 'Palikite tuščią, kad būtų nauudojama <code>:setting_name</code> reikšmė',
-    'help_default_will_use' => '<code>:default</code> naudos reikšmę iš <code>:setting_name</code>. <br>Atkreipkite dėmesį, kad brūkšninio kodo reikšmė turi atitikti atitinkamą brūkšninio kodo specifikaciją tam, kad būtų sėkmingai sugeneruota. Jei reikia daugiau informacijos, peržiūrėkite <a href="https://snipe-it.readme.io/docs/barcodes">dokumentaciją<i class="fa fa-external-link"></i></a>. ',
+    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
     'default'               => 'Numatytasis',
     'none'                  => 'Joks',
     'google_callback_help' => 'Čia turėtų būti nurodytas tas pats autorizacijos tikrinimo adresas (URL), kurį nurodėte savo organizacijos „Google OAuth“ programos nustatymuose adresu <strong><a href="https://console.cloud.google.com/" target="_blank">„Google Developer Console“ <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
@@ -385,5 +387,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Įspėjimas, kad reikia paimti',
     'due_checkin_days_help' => 'Likus kiek dienų iki numatomo turto paėmimo, jis turėtų būti rodomas puslapyje „Laukia paėmimo“?',
+    'no_groups' => 'Grupės dar nesukurtos. Apsilankykite <code>Administratoriaus nustatymai > Paskyros teisių grupės</code>, kad jų pridėtumėte.',
 
 ];

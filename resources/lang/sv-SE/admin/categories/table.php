@@ -5,6 +5,6 @@ return array(
     'id'      					=> 'ID',
     'parent'   					=> 'Överordnad',
     'require_acceptance'      	=> 'Godkännande',
-    'title'      				=> 'Namn på kategori',
+    'title'      				=> 'Tillgångskategori',
 
 );

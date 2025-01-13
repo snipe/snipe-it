@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Ocorreu um problema ao devolver esta licença. Por favor, tente novamente.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'A licença foi devolvida com sucesso'
     ),
 

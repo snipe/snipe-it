@@ -24,7 +24,15 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->fieldset_id = $this->model?->fieldset_id;
         $this->add_default_values = ($this->model?->defaultValues->count() > 0);
 
+
         $this->initializeSelectedValuesArray();
+        if (session()->has('errors')) {
+            $errors = session('errors')->keys();
+            $selectedValuesKeys = array_keys($this->selectedValues);
+            if (count(array_intersect($selectedValuesKeys, $errors)) > 0) {
+                $this->add_default_values = true;
+            };
+        }
         $this->populatedSelectedValuesArray();
     }
 
@@ -81,6 +89,12 @@ class CustomFieldSetDefaultValuesForModel extends Component
     {
         $this->fields->each(function ($field) {
             $this->selectedValues[$field->db_column] = $this->getSelectedValueForField($field);
+
+            // if the element is a checkbox and the value was just sent to null, make it
+            // an array since Livewire can't bind to non-array values for checkboxes.
+            if ($field->element === 'checkbox' && is_null($this->selectedValues[$field->db_column])) {
+                $this->selectedValues[$field->db_column] = [];
+            }
         });
     }
 

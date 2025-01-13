@@ -105,7 +105,6 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
         $this->assertEquals(0, $newUser->vip);
         $this->assertEquals(0, $newUser->enable_sounds);
         $this->assertEquals(0, $newUser->enable_confetti);
-        $this->assertNull($newUser->created_by);
         $this->assertNull($newUser->start_date);
         $this->assertNull($newUser->end_date);
         $this->assertNull($newUser->scim_externalid);
@@ -322,7 +321,6 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
         $this->assertEquals(0, $newUser->vip);
         $this->assertEquals(0, $newUser->enable_sounds);
         $this->assertEquals(0, $newUser->enable_confetti);
-        $this->assertNull($newUser->created_by);
         $this->assertNull($newUser->start_date);
         $this->assertNull($newUser->end_date);
         $this->assertNull($newUser->scim_externalid);

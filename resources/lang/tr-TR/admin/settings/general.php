@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Demirbaş Adı Göster',
     'display_checkout_date'     => 'Çıkış Tarihi Göster',
     'display_eol'               => 'Tablo görüntüsünde Sözleşmeyi görüntüle',
-    'display_qr'                => 'QR Kodu Göster',
+    'display_qr'                => 'Display 2D barcode',
     'display_alt_barcode'		=> '1D Barkodu Göster',
     'email_logo'                => 'E-posta logosu',
     'barcode_type'				=> '2D Barkod Türü',
@@ -281,6 +281,8 @@ return [
     'two_factor_enrollment_text'	=> "Cihazınız henüz kayıtlı değil ancak iki aşamalı kimlik doğrulama gereklidir. Google kimlik doğrulayıcısı app açmak ve tarama QR kodu cihazınızı kayıt için aşağıdaki. Aygıtınız kayıtlı sonra aşağıdaki kodu girin",
     'require_accept_signature'      => 'İmza Gerekli',
     'require_accept_signature_help_text'      => 'Bu özelliği etkinleştirmek kullanıcıların fiziksel olarak bir varlık kabul evrağı imzalaması gerekir.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'sol',
     'right'        => 'sağ',
     'top'        => 'üst',
@@ -366,7 +368,7 @@ return [
     'label2_fields_help'      => 'Alanlar sol sütuna eklenebilir, kaldırılabilir ve yeniden sıralanabilir. Her alan için sağ sütunda Etiket ve Veri Kaynağı için birden fazla seçenek eklenebilir, kaldırılabilir ve yeniden sıralanabilir.',
     'help_asterisk_bold'    => 'Text entered as <code>**text**</code> will be displayed as bold',
     'help_blank_to_use'     => '<code>:setting_name</code> değerini kullanmak için boş bırakın',
-    'help_default_will_use' => '<code>:default</code>, <code>:setting_name</code>\'deki değeri kullanacaktır. <br>Başarılı bir şekilde oluşturulabilmesi için barkodların değerinin ilgili barkod spesifikasyonuna uygun olması gerektiğini unutmayın. Daha fazla ayrıntı için lütfen <a href="https://snipe-it.readme.io/docs/barcodes">belgelere <i class="fa fa-external-link"></i></a> bakın. ',
+    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
     'default'               => 'Varsayılan',
     'none'                  => 'Hiçbiri',
     'google_callback_help' => 'Bu, kuruluşunuzun <strong><a href="https://console.cloud.google.com/" target="_blank">Google geliştirici konsolundaki < Google OAuth uygulama ayarlarınıza geri arama URL\'si olarak girilmelidir. i class = "fa fa-external-link" aria-hidden = "true"></i></a></strong>.',
@@ -386,5 +388,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Due For Checkin Warning',
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

@@ -116,7 +116,7 @@ final class Company extends SnipeModel
                 if ($current_user->company_id != null) {
                     return $current_user->company_id;
                 } else {
-                    return static::getIdFromInput($unescaped_input);
+                    return null;
                 }
             }
         }

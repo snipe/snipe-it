@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Прикажи име на основно средство',
     'display_checkout_date'     => 'Прикажи датум на задолжување',
     'display_eol'               => 'Прикажи EOL во табеларниот преглед',
-    'display_qr'                => 'Прикажи квадратни кодови',
+    'display_qr'                => 'Display 2D barcode',
     'display_alt_barcode'		=> 'Прикажи 1D баркод',
     'email_logo'                => 'Лого на е-пошта',
     'barcode_type'				=> 'Тип на 2D бар код',
@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Потребна е автентикација на два фактор, но вашиот уред сè уште не е запишан. Отворете Google Authenticator апликација и скенирајте го QR кодот подолу за да го запишете вашиот уред. Откако ќе го запишате вашиот уред, внесете го кодот подолу",
     'require_accept_signature'      => 'Потребен потпис',
     'require_accept_signature_help_text'      => 'Овозможувањето на оваа функција ќе бара од корисниците физички да се пријават за прифаќање на средства.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'лево',
     'right'        => 'десно',
     'top'        => 'врв',
@@ -365,7 +367,7 @@ return [
     'label2_fields_help'      => 'Полињата можат да се додадат, отстранат и да се преуредат во левата колона. За секое поле, повеќе опции за Назив и Извор на податоци можат да се додадат, отстранат и преуредат во десната колона.',
     'help_asterisk_bold'    => 'Текстот внесен како <code>**text**</code> ќе биде прикажан како здебелен',
     'help_blank_to_use'     => 'Оставете празно за да ја користите вредноста од <code>:setting_name</code>',
-    'help_default_will_use' => '<code>:default</code> ќе ја користи вредноста од <code>:setting_name</code>. <br>Забележете дека вредноста на бар-кодовите мора да биде во согласност со соодветните спецификации за баркод за да може успешно да се генерира. Видете во <a href="https://snipe-it.readme.io/docs/barcodes">документацијата <i class="fa fa-external-link"></i></a> за повеќе детали. ',
+    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
     'default'               => 'Стандардно',
     'none'                  => 'Ништо',
     'google_callback_help' => 'Ова треба да се внесе како callback URL адреса во поставките на Google OAuth апликацијата за вашата организација&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer конзола <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
@@ -385,5 +387,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Предупредување дека е враме за раздолжување',
     'due_checkin_days_help' => 'Колку дена пред очекуваното раздолжување на средството треба да биде наведено на страницата „Време е за раздолжување“?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

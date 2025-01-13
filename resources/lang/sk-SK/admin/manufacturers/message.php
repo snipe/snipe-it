@@ -2,29 +2,29 @@
 
 return array(
 
-    'support_url_help' => 'Variables <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> may be used in your URL to have those values auto-populate when viewing assets - for example https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
-    'does_not_exist' => 'Manufacturer does not exist.',
-    'assoc_users'	 => 'This manufacturer is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this manufacturer and try again. ',
+    'support_url_help' => 'Premenné <code>{LOCALE}</code>, <code>{SERIAL}</code>, <code>{MODEL_NUMBER}</code>, and <code>{MODEL_NAME}</code> môžu byť použité v URL pre automatické vyplnenie týchto hodnôt pri prehliadaní aktív - napríklad https://checkcoverage.apple.com/{LOCALE}/{SERIAL}.',
+    'does_not_exist' => 'Výrobca neexistuje.',
+    'assoc_users'	 => 'Tento výrobca je uvedený minimálne pri jednom modely a preto nemôže byť zmazaný. Prosím upravte vaše modely, aby už nevyužívali referenciu na tohto výrobcu a skúste znovu. ',
 
     'create' => array(
-        'error'   => 'Manufacturer was not created, please try again.',
-        'success' => 'Manufacturer created successfully.'
+        'error'   => 'Výrobca nebol pridaný, skúste znovu.',
+        'success' => 'Výrobca bol úspešne pridaný.'
     ),
 
     'update' => array(
-        'error'   => 'Manufacturer was not updated, please try again',
-        'success' => 'Manufacturer updated successfully.'
+        'error'   => 'Výrobca nebol aktualizovaný, skúste znovu',
+        'success' => 'Výrobca bol úspešne aktualizovaný.'
     ),
 
     'restore' => array(
-        'error'   => 'Manufacturer was not restored, please try again',
-        'success' => 'Manufacturer restored successfully.'
+        'error'   => 'Výrobca nebol obnovený, skúste znovu',
+        'success' => 'Výrobca bol úspešne obnovený.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this manufacturer?',
-        'error'   => 'There was an issue deleting the manufacturer. Please try again.',
-        'success' => 'The Manufacturer was deleted successfully.'
+        'confirm'   => 'Ste si istí, že chete zmazať tohto výrobcu?',
+        'error'   => 'Pri mazaní výrobcu nastala chyba. Skúste znovu.',
+        'success' => 'Výrobca bol úspešne zmazaný.'
     )
 
 );

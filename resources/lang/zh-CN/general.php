@@ -230,7 +230,7 @@ return [
     'purchase_date'         => '购买日期',
     'qty'		            => '数量',
     'quantity'		        => '数量',
-    'quantity_minimum'      => '您有 :count 件物品低于或即将低于最低数量',
+    'quantity_minimum'      => '您有一件物品低于或几乎低于最低数量水平|您有 :count件物品低于或几乎低于最低数量水平',
     'quickscan_checkin'  	=> '快速扫描归还',
     'quickscan_checkin_status'  	=> '归还状态',
     'ready_to_deploy'		=> '待分配',
@@ -302,6 +302,7 @@ return [
     'username_format'		=> '用户名格式',
     'username'              => '用户名',
     'update'                => '更新',
+    'updating_item' => '正在更新 :item',
     'upload_filetypes_help'      => '允许的文件类型是 png, gif, jpg, jpeg, doc, doc, pdf, xls, xlsx, txt, lic, xml, zip, rtf 和 rar. 允许的最大上传大小是 :size.',
     'uploaded'              => '已上传',
     'user'					=> '用户',
@@ -434,6 +435,7 @@ return [
     'alt_uploaded_image_thumbnail' => '已上传缩略图',
     'placeholder_kit'       => '选择一个套件',
     'file_not_found'        => '未找到文件',
+    'log_record_not_found'  => '没有找到该日志条目的记录。',
     'preview_not_available' => '(没有预览)',
     'setup'                 => '设置',
     'pre_flight'            => '预检',
@@ -564,5 +566,6 @@ return [
     'label' => '标签',
     'import_asset_tag_exists' => '资产标签为:asset_tag的资产已经存在，且未请求更新。没有做任何更改。',
     'countries_manually_entered_help' => '带星号(*) 的值是手动输入的，与现有的 ISO 3166 下拉值不匹配',
+    'accessories_assigned' => '已分配的配件',
 
 ];

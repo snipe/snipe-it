@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Ipakita ang Pangalan ng Asset',
     'display_checkout_date'     => 'Ang Petsa ng Pag-checkout ay Ipakita',
     'display_eol'               => 'Ipakita sa table view ang EOL',
-    'display_qr'                => 'Ang mga Square Codes ay Ipakita',
+    'display_qr'                => 'Display 2D barcode',
     'display_alt_barcode'		=> 'Ipakita ang 1D barcode',
     'email_logo'                => 'Email Logo',
     'barcode_type'				=> 'Ang Uri ng 2D Barcode',
@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Ang Two factor authentication ay kinakailangan, gayunpaman ang iyong device ay hindi ma na-enroll. Buksan mo ang itong Google Authenticator app at i-scan ang QR code sa ibaba para ma-enroll ang iyong device. Kapag na-enroll na ang device. i-enter ang code sa ibaba",
     'require_accept_signature'      => 'Nangangailangan ng Pag-lagda',
     'require_accept_signature_help_text'      => 'Sa pagpapagana ng katangian nito ay nangangailangan sa mga gumagamit na pisikal na mag-sign off sa pagtanggap ng isang asset.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'kaliwa',
     'right'        => 'kanan',
     'top'        => 'itaas',
@@ -365,7 +367,7 @@ return [
     'label2_fields_help'      => 'Fields can be added, removed, and reordered in the left column. For each field, multiple options for Label and DataSource can be added, removed, and reordered in the right column.',
     'help_asterisk_bold'    => 'Text entered as <code>**text**</code> will be displayed as bold',
     'help_blank_to_use'     => 'Leave blank to use the value from <code>:setting_name</code>',
-    'help_default_will_use' => '<code>:default</code> will use the value from <code>:setting_name</code>. <br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
+    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
     'default'               => 'Default',
     'none'                  => 'None',
     'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
@@ -385,5 +387,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Due For Checkin Warning',
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

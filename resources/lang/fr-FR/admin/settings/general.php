@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Afficher le nom des actifs',
     'display_checkout_date'     => 'Afficher la date d\'association',
     'display_eol'               => 'Afficher la fin de vie dans les tables',
-    'display_qr'                => 'Affiche les QR codes',
+    'display_qr'                => 'Display 2D barcode',
     'display_alt_barcode'		=> 'Affiche le code-barres 1D',
     'email_logo'                => 'Logo de l\'e-mail',
     'barcode_type'				=> 'Type du code-barres 2D',
@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "L’authentification à deux facteurs est nécessaire, mais votre appareil n’a pas encore été inscrit. Ouvrez votre application Google Authenticator et scanner le code QR ci-dessous pour inscrire votre appareil. Une fois que vous avez inscrit votre appareil, saisissez le code ci-dessous",
     'require_accept_signature'      => 'Exiger la signature',
     'require_accept_signature_help_text'      => 'L\'activation de cette fonctionnalité nécessite que les utilisateurs signent physiquement l\'acceptation de cet actif.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'gauche',
     'right'        => 'droite',
     'top'        => 'haut',
@@ -365,7 +367,7 @@ return [
     'label2_fields_help'      => 'Les champs peuvent être ajoutés, supprimés et réordonnés dans la colonne de gauche. Pour chaque champ, plusieurs options pour Étiquette et Source de données peuvent être ajoutées, supprimées et réordonnées dans la colonne de droite.',
     'help_asterisk_bold'    => 'Le texte entré sous la forme <code>**texte**</code> sera affiché en gras',
     'help_blank_to_use'     => 'Laisser vide pour utiliser la valeur de <code>:setting_name</code>',
-    'help_default_will_use' => '<code>:default</code> utilisera la valeur de <code>:setting_name</code>. <br>Notez que la valeur des codes-barres doit être conforme à la spécification pour être générée avec succès. Veuillez consulter <a href="https://snipe-it.readme.io/docs/barcodes">la documentation <i class="fa fa-external-link"></i></a> pour plus de détails. ',
+    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
     'default'               => 'Par défaut',
     'none'                  => 'Aucun·e',
     'google_callback_help' => 'Ceci doit être entré comme URL de rappel dans les paramètres de votre application Google OAuth dans la <strong><a href="https://console.cloud.google.com/" target="_blank">console de développement Google <i class="fa fa-external-link" aria-hidden="true"></i></a></strong> de votre organisation.',
@@ -385,5 +387,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Due For Checkin Warning',
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

@@ -334,6 +334,8 @@ class SettingsController extends Controller
         $setting->depreciation_method = $request->input('depreciation_method');
         $setting->dash_chart_type = $request->input('dash_chart_type');
         $setting->profile_edit = $request->input('profile_edit', 0);
+        $setting->require_checkinout_notes = $request->input('require_checkinout_notes', 0);
+
 
         if ($request->input('per_page') != '') {
             $setting->per_page = $request->input('per_page');
@@ -698,48 +700,6 @@ class SettingsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @since [v1.0]
-     */
-    public function getBarcodes() : View
-    {
-        $setting = Setting::getSettings();
-        $is_gd_installed = extension_loaded('gd');
-
-        return view('settings.barcodes', compact('setting'))->with('is_gd_installed', $is_gd_installed);
-    }
-
-    /**
-     * Saves settings from form.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @since [v1.0]
-     */
-    public function postBarcodes(Request $request) : RedirectResponse
-    {
-        if (is_null($setting = Setting::getSettings())) {
-            return redirect()->to('admin')->with('error', trans('admin/settings/message.update.error'));
-        }
-
-        $setting->qr_code = $request->input('qr_code', '0');
-        $setting->alt_barcode = $request->input('alt_barcode');
-        $setting->alt_barcode_enabled = $request->input('alt_barcode_enabled', '0');
-        $setting->barcode_type = $request->input('barcode_type');
-        $setting->qr_text = $request->input('qr_text');
-
-        if ($setting->save()) {
-            return redirect()->route('settings.index')
-                ->with('success', trans('admin/settings/message.update.success'));
-        }
-
-        return redirect()->back()->withInput()->withErrors($setting->getErrors());
-    }
-
-    /**
-     * Return a form to allow a super admin to update settings.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
      * @since [v4.0]
      */
     public function getPhpInfo() : View | RedirectResponse
@@ -760,8 +720,11 @@ class SettingsController extends Controller
      */
     public function getLabels() : View
     {
+        $is_gd_installed = extension_loaded('gd');
+
         return view('settings.labels')
             ->with('setting', Setting::getSettings())
+            ->with('is_gd_installed', $is_gd_installed)
             ->with('customFields', CustomField::where('field_encrypted', '=', 0)->get());
     }
 
@@ -797,9 +760,13 @@ class SettingsController extends Controller
         $setting->labels_pagewidth = $request->input('labels_pagewidth');
         $setting->labels_pageheight = $request->input('labels_pageheight');
         $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
-        $setting->labels_display_company_name = $request->input('labels_display_company_name', '0');
 
-
+        //Barcodes
+        $setting->qr_code = $request->input('qr_code', '0');
+        //1D-Barcode
+        $setting->alt_barcode_enabled = $request->input('alt_barcode_enabled', '0');
+        //QR-Code
+        $setting->qr_text = $request->input('qr_text');
 
         if ($request->filled('labels_display_name')) {
             $setting->labels_display_name = 1;

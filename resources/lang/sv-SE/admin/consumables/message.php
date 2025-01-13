@@ -2,36 +2,36 @@
 
 return array(
 
-    'invalid_category_type' => 'The category must be a consumable category.',
-    'does_not_exist' => 'Förbrukningsartiklar existerar inte.',
+    'invalid_category_type' => 'Kategorin måste vara en förbrukningsvarukategori.',
+    'does_not_exist' => 'Förbrukningvaran existerar inte.',
 
     'create' => array(
-        'error'   => 'Förbrukningsbarhet skapades inte, försök igen.',
-        'success' => 'Förbrukningsbar skapad framgångsrik.'
+        'error'   => 'Förbrukningsvaran kunde inte skapas. Vänligen försök igen.',
+        'success' => 'Förbrukningsvara skapad.'
     ),
 
     'update' => array(
-        'error'   => 'Förbrukningsvaror uppdaterades inte, var god försök igen',
-        'success' => 'Förbrukningsvaror uppdateras framgångsrikt.'
+        'error'   => 'Förbrukningsvaran kunde inte uppdateras.Vänligen försök igen.',
+        'success' => 'Förbruksningsvara uppdaterad.'
     ),
 
     'delete' => array(
         'confirm'   => 'Är du säker på att du vill radera denna förbrukningsartiklar?',
-        'error'   => 'Det gick inte att ta bort förbrukningen. Var god försök igen.',
-        'success' => 'Konsumtionen har tagits bort.'
+        'error'   => 'Kunde inte ta bort förbrukningsvaran. Vänligen försök igen.',
+        'success' => 'Förbrukningsvaran raderad.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Förbrukningsartiklarna är inte utcheckade, försök igen',
-        'success' 		=> 'Förbrukningsbar utcheckad framgångsrik.',
-        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.',
-         'unavailable'      => 'Det finns inte tillräckligt med förbrukningsvaror för denna checkout. Vänligen kontrollera antalet kvar. ',
+        'error'   		=> 'Förbrukningsvaran kunde inte checkas ut. Vänligen försök igen.',
+        'success' 		=> 'Förbrukningsvaran utcheckad.',
+        'user_does_not_exist' => 'Användaren är ogiltig. Vänligen försök igen.',
+         'unavailable'      => 'Det finns inte tillräckligt med förbrukningsvaror för denna utcheckning. Vänligen kontrollera antalet kvar i lager. ',
     ),
 
     'checkin' => array(
-        'error'   		=> 'Förbrukningsartiklarna kontrollerades inte, försök igen',
-        'success' 		=> 'Konsumtionskontrollen kontrolleras framgångsrikt.',
-        'user_does_not_exist' => 'Den användaren är ogiltig. Var god försök igen.'
+        'error'   		=> 'Förbrukningsvaran kunde inte checkas in. Vänligen försök igen.',
+        'success' 		=> 'Förbrukningsvara incheckad.',
+        'user_does_not_exist' => 'Användaren är ogiltig. Vänligen försök igen.'
     )
 
 

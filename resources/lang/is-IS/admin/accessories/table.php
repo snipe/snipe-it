@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'Auðkenni',
     'require_acceptance'      	=> 'Samþykki',
     'title'      				=> 'Nafn aukabúnaðar',
-
-
 );

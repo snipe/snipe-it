@@ -14,30 +14,30 @@ return array(
 
     'create' => array(
         'error'   => 'La licencia no fue creada, por favor inténtelo de nuevo.',
-        'success' => 'Licencia creada con éxito.'
+        'success' => 'Categoría creada correctamente.'
     ),
 
     'deletefile' => array(
-        'error'   => 'El archivo no fue borrado. Por favor, inténtalo de nuevo.',
-        'success' => 'Archivo borrado con éxito.',
+        'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
+        'success' => 'Archivo eliminado correctamente.',
     ),
 
     'upload' => array(
-        'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo nuevamente.',
-        'success' => 'Archivo(s) cargado(s) con éxito.',
+        'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo de nuevo.',
+        'success' => 'Archivo(s) cargado correctamente.',
         'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
         'invalidfiles' => 'Uno o más de sus archivos es demasiado grande o es un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
     ),
 
     'update' => array(
         'error'   => 'La licencia no fue actualizada, por favor inténtelo de nuevo',
-        'success' => 'Licencia actualizada con éxito.'
+        'success' => 'Categoría actualizada correctamente.'
     ),
 
     'delete' => array(
         'confirm'   => '¿Está seguro de que desea eliminar esta licencia?',
         'error'   => 'Hubo un problema al eliminar la licencia. Por favor, inténtelo de nuevo.',
-        'success' => 'La licencia fue eliminada con éxito.'
+        'success' => 'La licencia se ha eliminado correctamente.'
     ),
 
     'checkout' => array(
@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Hubo un problema ingresando la licencia. Por favor, inténtelo de nuevo.',
+        'not_reassignable' => 'La licencia no se puede volver a asignar',
         'success' => 'La licencia fue ingresada correctamente'
     ),
 

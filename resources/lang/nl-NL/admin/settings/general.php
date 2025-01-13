@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Geef Asset naam weer',
     'display_checkout_date'     => 'Toon Checkout datum',
     'display_eol'               => 'Toon EOL in tabel weergave',
-    'display_qr'                => 'QR codes weergeven',
+    'display_qr'                => 'Streepjescode weergeven',
     'display_alt_barcode'		=> 'Streepjescode weergeven',
     'email_logo'                => 'E-mail logo',
     'barcode_type'				=> 'QR-code soort',
@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "Twee factor authenticatie is vereist, echter is je apparaat nog niet geactiveerd. Open je Google Authenticator app en scan de onderstaande QR code om je apparaat te activeren. Vul wanneer je het apparaat succesvol hebt geactiveerd hieronder de code in",
     'require_accept_signature'      => 'Handtekening vereisen',
     'require_accept_signature_help_text'      => 'Het inschakelen van deze functie vereist dat gebruikers fysiek ondertekenen bij het accepteren van een asset.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'links',
     'right'        => 'rechts',
     'top'        => 'bovenkant',
@@ -365,7 +367,7 @@ return [
     'label2_fields_help'      => 'Velden kunnen worden toegevoegd, verwijderd en opnieuw geordend in de linker kolom. Voor elk veld kunnen meerdere opties voor label en gegevensbron worden toegevoegd, verwijderd en opnieuw geordend in de juiste kolom.',
     'help_asterisk_bold'    => 'Tekst ingevoerd als <code>**tekst**</code> wordt weergegeven als dikgedrukt',
     'help_blank_to_use'     => 'Laat leeg om de waarde van <code>:setting_name</code> te gebruiken',
-    'help_default_will_use' => '<code>:Standaard</code> gebruikt de waarde van <code>:setting_name</code>. <br>Houd er rekening mee dat de waarde van de streepjescodes moet voldoen aan de respectievelijke streepjescodespecificaties om succesvol te kunnen worden gegenereerd. Raadpleeg <a href="https://snipe-it.readme.io/docs/barcodes">de documentatie <i class="fa fa-external-link"></i></a> voor meer details. ',
+    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
     'default'               => 'Standaard',
     'none'                  => 'Geen',
     'google_callback_help' => 'Dit moet worden ingevoerd als de callback URL in je Google OAuth app instellingen in je organisatie&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
@@ -385,5 +387,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Waarschuwing voor aankomende Checkin',
     'due_checkin_days_help' => 'Hoeveel dagen vóór de verwachte check-in van een product moet het worden weergegeven op de pagina "Waarschuwing voor aankomende Check-in"?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];

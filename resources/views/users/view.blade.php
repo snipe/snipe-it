@@ -309,10 +309,10 @@
                   <div class="row">
                     <!-- name -->
     
-                      <div class="col-md-3 col-sm-2">
+                      <div class="col-md-3">
                         {{ trans('admin/users/table.name') }}
                       </div>
-                      <div class="col-md-9 col-sm-2">
+                      <div class="col-md-9">
                         {{ $user->present()->fullName() }}
                       </div>
 
@@ -751,7 +751,7 @@
                            {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
 
                            <a id="optional_info" class="text-primary">
-                               <x-icon type="caret-right" id="optional_info_icon" /></i>
+                               <x-icon type="caret-right" id="optional_info_icon" />
                                <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
                            </a>
                        </div>
@@ -896,7 +896,8 @@
                     }'>
               <thead>
                 <tr>
-                    <th class="col-md-5">{{ trans('general.name') }}</th>
+                    <th class="col-md-1">{{ trans('general.id') }}</th>
+                    <th class="col-md-4">{{ trans('general.name') }}</th>
                     <th class-="col-md-5" data-fieldname="note">{{ trans('general.notes') }}</th>
                     <th class="col-md-1" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                     <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
@@ -905,7 +906,8 @@
               <tbody>
                   @foreach ($user->accessories as $accessory)
                   <tr>
-                    <td>{!!$accessory->present()->nameUrl()!!}</td>
+                      <td>{{ $accessory->pivot->id }}</td>
+                      <td>{!!$accessory->present()->nameUrl()!!}</td>
                       <td>{!! $accessory->pivot->note !!}</td>
                       <td>
                       {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
@@ -971,102 +973,11 @@
           <div class="row">
 
             <div class="col-md-12 col-sm-12">
-              <div class="table-responsive">
-                  <table
-                          data-cookie-id-table="userUploadsTable"
-                          data-id-table="userUploadsTable"
-                          id="userUploadsTable"
-                          data-search="true"
-                          data-pagination="true"
-                          data-side-pagination="client"
-                          data-show-columns="true"
-                          data-show-fullscreen="true"
-                          data-show-export="true"
-                          data-show-footer="true"
-                          data-toolbar="#upload-toolbar"
-                          data-show-refresh="true"
-                          data-sort-order="asc"
-                          data-sort-name="name"
-                          class="table table-striped snipe-table"
-                          data-export-options='{
-                    "fileName": "export-license-uploads-{{ str_slug($user->name) }}-{{ date('Y-m-d') }}",
-                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
-                    }'>
-
-                  <thead>
-                    <tr>
-                        <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($user->uploads as $file)
-                        <tr>
-                            <td>
-                                <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
-                                <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
-
-                            </td>
-                            <td>
-                                @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
-                                   @if (Helper::checkUploadIsImage($file->get_src('users')))
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                                    @else
-                                        {{ trans('general.preview_not_available') }}
-                                    @endif
-                                @else
-                                    <x-icon type="x" class="text-danger" />
-                                        {{ trans('general.file_not_found') }}
-                                @endif
-                            </td>
-                            <td>
-                                {{ $file->filename }}
-                            </td>
-                            <td data-value="{{ (Storage::exists('private_uploads/users/'.$file->filename)) ? Storage::size('private_uploads/users/'.$file->filename) : '' }}">
-                                {{ (Storage::exists('private_uploads/users/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/users/'.$file->filename)) : '' }}
-                            </td>
-
-                            <td>
-                                @if ($file->note)
-                                    {{ $file->note }}
-                                @endif
-                            </td>
-                            <td>
-                                @if ($file->filename)
-                                    @if (Storage::exists('private_uploads/users/'.$file->filename))
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-sm btn-default">
-                                            <x-icon type="download" />
-                                            <span class="sr-only">{{ trans('general.download') }}</span>
-                                        </a>
-
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                            <x-icon type="external-link" />
-                                        </a>
-                                    @endif
-                                @endif
-                            </td>
-                            <td>{{ $file->created_at }}</td>
-
-                            <td>
-                                <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">
-                                    <x-icon type="delete" />
-                                    <span class="sr-only">{{ trans('general.delete') }}</span>
-                                </a>
-                            </td>
-
-
-                        </tr>
-                    @endforeach
-
-                  </tbody>
-                </table>
-              </div>
+                <x-filestable
+                        filepath="private_uploads/users/"
+                        showfile_routename="show/userfile"
+                        deletefile_routename="userfile.destroy"
+                        :object="$user" />
             </div>
           </div> <!--/ROW-->
         </div><!--/FILES-->
@@ -1153,7 +1064,7 @@
 
           <div class="tab-pane" id="managed-users">
 
-              @include('partials.locations-bulk-actions')
+              @include('partials.users-bulk-actions')
 
 
               <table
@@ -1163,7 +1074,7 @@
                       data-pagination="true"
                       data-id-table="managedUsersTable"
                       data-toolbar="#usersBulkEditToolbar"
-                      data-bulk-button-id="#bulkUsersEditButton"
+                      data-bulk-button-id="#bulkUserEditButton"
                       data-bulk-form-id="#usersBulkForm"
                       data-search="true"
                       data-show-footer="true"

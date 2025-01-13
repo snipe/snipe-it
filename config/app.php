@@ -280,7 +280,6 @@ return [
         Illuminate\Redis\RedisServiceProvider::class,
         Illuminate\Auth\Passwords\PasswordResetServiceProvider::class,
         Illuminate\Session\SessionServiceProvider::class,
-//        Illuminate\Translation\TranslationServiceProvider::class, //replaced on next line
         App\Providers\SnipeTranslationServiceProvider::class, //we REPLACE the default Laravel translator with our own
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
@@ -373,7 +372,7 @@ return [
         'Image'     => Intervention\Image\ImageServiceProvider::class,
         'Carbon' => Carbon\Carbon::class,
         'Helper' => App\Helpers\Helper::class,
-        // makes it much easier to use 'Helper::blah' in blades (which is where we usually use this)
+        'StorageHelper' => App\Helpers\StorageHelper::class,
         'Icon' => App\Helpers\IconHelper::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 

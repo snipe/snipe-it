@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Lo stato del bene è "Assegnabile". Puoi fare l\'Assegnazione di questo Bene.',
     'processing_spinner' => 'Elaborazione... (Può volerci un po\' su file di grandi dimensioni)',
     'optional_infos'  => 'Informazioni Opzionali',
-    'order_details'   => 'Informazioni relative all\'ordine'
+    'order_details'   => 'Informazioni relative all\'ordine',
+    'calc_eol'    => 'Se viene annullata la data di EOL, usa il calcolo automatico in base alla data d\'acquisto e al tasso di EOL.',
 ];

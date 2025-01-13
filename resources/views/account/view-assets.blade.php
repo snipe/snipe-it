@@ -380,13 +380,8 @@
             <div class="table table-responsive">
               @if ($user->id)
                 <div class="box-header with-border">
-                  <div class="box-heading">
-                    <h2 class="box-title"> {{ trans('admin/users/general.assets_user', array('name' => $user->first_name)) }}</h2>
-                  </div>
                 </div><!-- /.box-header -->
               @endif
-
-              <div class="box-body">
                 <!-- checked out assets table -->
                 <div class="table-responsive">
 
@@ -421,15 +416,23 @@
                       <th class="col-md-2" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.asset_tag') }}
                       </th>
-                      <th class="col-md-2" data-switchable="true" data-visible="false">{{ trans('general.name') }}</th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                        {{ trans('general.name') }}
+                      </th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.asset_model') }}
+                      </th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                        {{ trans('general.model_no') }}
                       </th>
                       <th class="col-md-3" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.serial') }}
                       </th>
                       <th class="col-md-2" data-switchable="true" data-visible="false">
                         {{ trans('admin/hardware/form.default_location') }}
+                      </th>
+                      <th class="col-md-2" data-switchable="true" data-visible="false">
+                        {{ trans('general.location') }}
                       </th>
 
                       @can('self.view_purchase_cost')
@@ -479,15 +482,19 @@
                           {{ $asset->name }}
                         </td>
                         <td>
-                          @if ($asset->physical=='1')
                             {{ $asset->model->name }}
-                          @endif
+                        </td>
+                        <td>
+                          {{ $asset->model->model_number }}
                         </td>
                         <td>
                           {{ $asset->serial }}
                         </td>
                         <td>
                           {{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}
+                        </td>
+                        <td>
+                          {{ ($asset->location) ? $asset->location->name : '' }}
                         </td>
                         @can('self.view_purchase_cost')
                         <td>
@@ -522,7 +529,6 @@
                   </table>
                 </div>
                 </div> <!-- .table-responsive-->
-            </div>
           </div><!-- /asset -->
           <div class="tab-pane" id="licenses">
 

@@ -13,5 +13,10 @@ return [
         'user_state' => 'Stadt des Benutzers',
         'user_country' => 'Land des Benutzers',
         'user_zip' => 'Postleitzahl des Benutzers'
-    ]
+    ],
+    'open_saved_template' => 'Open Saved Template',
+    'save_template' =>  'Save Template',
+    'select_a_template' => 'Select a Template',
+    'template_name' => 'Template Name',
+    'update_template' => 'Update Template',
 ];

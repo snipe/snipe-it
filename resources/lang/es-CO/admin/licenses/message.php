@@ -14,16 +14,16 @@ return array(
 
     'create' => array(
         'error'   => 'La licencia no fue creada, por favor inténtelo de nuevo.',
-        'success' => 'Licencia creada con éxito.'
+        'success' => 'Categoría creada correctamente.'
     ),
 
     'deletefile' => array(
-        'error'   => 'Archivo no eliminado. Vuelve a intentarlo.',
+        'error'   => 'Archivo no eliminado. Por favor, vuelva a intentarlo.',
         'success' => 'Archivo eliminado correctamente.',
     ),
 
     'upload' => array(
-        'error'   => 'Archivo(s) no cargados. Por favor, inténtelo de nuevo.',
+        'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo de nuevo.',
         'success' => 'Archivo(s) cargados correctamente.',
         'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
         'invalidfiles' => 'Uno o más de sus archivos es demasiado grande o es un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Hubo un problema ingresando la licencia. Por favor, inténtelo de nuevo.',
+        'not_reassignable' => 'La licencia no se puede volver a asignar',
         'success' => 'La licencia fue ingresada correctamente'
     ),
 

@@ -46,9 +46,9 @@ return [
     'vip_help' => 'Esto puede ser útil como indicador de personas importantes en su organización si desea tratarlas de forma especial.',
     'create_user' => 'Crear un usuario',
     'create_user_page_explanation' => 'Esta es la información de la cuenta que usará para acceder al sitio por primera vez.',
-    'email_credentials' => 'Credenciales de email',
-    'email_credentials_text' => 'Enviar mis credenciales a la dirección de correo de arriba',
+    'email_credentials' => 'Credenciales de correo electrónico',
+    'email_credentials_text' => 'Enviar mis credenciales a la dirección de correo electrónico de arriba',
     'next_save_user' => 'Siguiente: Guardar usuario',
     'all_assigned_list_generation' => 'Generado el:',
-    'email_user_creds_on_create' => '¿Enviar a este usuario sus credenciales?',
+    'email_user_creds_on_create' => '¿Enviar las credenciales por correo electrónico a este usuario?',
 ];

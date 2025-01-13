@@ -4,8 +4,8 @@ return array(
 
     'id'                        => 'ID',
     'name'                      => 'Avdelningsnamn',
-    'manager'                   => 'Chef',
+    'manager'                   => 'Ansvarig',
     'location'                  => 'Plats',
     'create'                    => 'Skapa avdelning',
-    'update'                    => 'Uppdateringsavdelning',
+    'update'                    => 'Uppdatera avdelning',
     );

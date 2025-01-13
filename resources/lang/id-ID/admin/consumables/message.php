@@ -2,7 +2,7 @@
 
 return array(
 
-    'invalid_category_type' => 'The category must be a consumable category.',
+    'invalid_category_type' => 'Kategori harus merupakan kategori barang habis pakai.',
     'does_not_exist' => 'Barang Habis Pakai tidak terdaftar.',
 
     'create' => array(
@@ -25,7 +25,7 @@ return array(
         'error'   		=> 'Barang Habis Pakai belum tertanda keluar, silahkan mencoba lagi',
         'success' 		=> 'Barang Habis Pakai telah sukses tertanda keluar.',
         'user_does_not_exist' => 'Pengguna tidak terdaftar. Silahkan coba kembali.',
-         'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'unavailable'      => 'Tidak cukup barang habis pakai untuk checkout ini. Harap periksa jumlah yang tersisa. ',
     ),
 
     'checkin' => array(

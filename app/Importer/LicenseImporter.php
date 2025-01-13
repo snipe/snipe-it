@@ -84,6 +84,7 @@ class LicenseImporter extends ItemImporter
             $license->update($this->sanitizeItemForUpdating($license));
         } else {
             $license->fill($this->sanitizeItemForStoring($license));
+            $license->created_by = auth()->id();
         }
 
         // This sets an attribute on the Loggable trait for the action log

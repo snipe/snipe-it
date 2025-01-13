@@ -104,7 +104,7 @@ class CustomFieldsController extends Controller
             "auto_add_to_fieldsets" => $request->get("auto_add_to_fieldsets", 0),
             "show_in_listview" => $request->get("show_in_listview", 0),
             "show_in_requestable_list" => $request->get("show_in_requestable_list", 0),
-            "user_id" => auth()->id()
+            "created_by" => auth()->id()
         ]);
 
 

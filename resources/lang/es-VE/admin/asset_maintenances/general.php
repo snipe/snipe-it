@@ -2,9 +2,9 @@
 
     return [
         'asset_maintenances' => 'Mantenimiento de activos',
-        'edit'               => 'Editar Mantenimiento de Activos',
-        'delete'             => 'Borrar Mantenimiento de Activos',
-        'view'               => 'Ver Detalles de Mantenimiento de Activo',
+        'edit'               => 'Editar mantenimiento del activo',
+        'delete'             => 'Eliminar mantenimiento del activo',
+        'view'               => 'Ver detalles del mantenimiento del activo',
         'repair'             => 'Reparar',
         'maintenance'        => 'Mantenimiento',
         'upgrade'            => 'Mejorar',

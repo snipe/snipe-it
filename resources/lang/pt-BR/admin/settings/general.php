@@ -55,7 +55,7 @@ return [
     'display_asset_name'        => 'Exibir Nome do Ativo',
     'display_checkout_date'     => 'Mostrar Data de Saída',
     'display_eol'               => 'Exibir EOL na visualização de tabela',
-    'display_qr'                => 'Exibir Códigos QR',
+    'display_qr'                => 'Exibir códigos de barra em 2D',
     'display_alt_barcode'		=> 'Exibir códigos de barra em 1D',
     'email_logo'                => 'Logotipo do e-mail',
     'barcode_type'				=> 'Código de barras do tipo 2D',
@@ -280,6 +280,8 @@ return [
     'two_factor_enrollment_text'	=> "A autenticação de dois passos é obrigatória, mas se o teu dispositivo ainda não foi registrado, abra o Google Authenticator e escaneie o QR Code para registrar o teu dispositivo. Uma vez registrado, digite o código abaixo",
     'require_accept_signature'      => 'Requer assinatura',
     'require_accept_signature_help_text'      => 'Habilitar este recurso vai exigir que os usuários assinem pessoalmente o aceite do ativo.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'esquerda',
     'right'        => 'direita',
     'top'        => 'topo',
@@ -365,7 +367,7 @@ return [
     'label2_fields_help'      => 'Campos podem ser adicionados, removidos e reordenados na coluna esquerda. Para cada campo, várias opções de Rótulo e Fonte de Dados podem ser adicionadas, removidas e reordenadas na coluna direita.',
     'help_asterisk_bold'    => 'Texto digitado como <code>**texto**</code> será exibido como negrito',
     'help_blank_to_use'     => 'Deixe em branco para usar o valor de <code>:setting_name</code>',
-    'help_default_will_use' => '<code>:default</code> usará o valor de <code>:setting_name</code>. <br>Note que o valor dos códigos de barras deve estar em conformidade com a respectiva especificação do código de barras para ser gerado com sucesso. Por favor, consulte <a href="https://snipe-it.readme.io/docs/barcodes">a documentação <i class="fa fa-external-link"></i></a> para mais detalhes. ',
+    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
     'default'               => 'Padrão',
     'none'                  => 'Nenhum',
     'google_callback_help' => 'Isto deve ser inserido como a URL de callback em suas configurações de aplicativo Google OAuth na sua organização&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">console de desenvolvedor do Google <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
@@ -385,5 +387,6 @@ return [
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Aviso de Devolução Pendente',
     'due_checkin_days_help' => 'Quantos dias antes da data esperada de devolução de um ativo ele deve ser listado na página "Pendente para devolução"?',
+    'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
 
 ];
