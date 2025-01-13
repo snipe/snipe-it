@@ -32,7 +32,7 @@
               <x-icon type="seats" class="fa-2x" />
               </span>
               <span class="hidden-xs hidden-sm">{{ trans('admin/licenses/form.seats') }}</span>
-              <span class="badge badge-secondary">{{ number_format($license->availCount()->count()) }} / {{ number_format($license->seats) }}</span>
+              <span class="badge badge-secondary">{{ number_format($license->availCount()->count() - number_format($unreassignable_seats_count) ) }} / {{ number_format($license->seats)}}</span>
 
             </a>
         </li>

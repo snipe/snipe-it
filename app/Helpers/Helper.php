@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 use App\Models\Accessory;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Component;
@@ -9,6 +10,7 @@ use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
+use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\License;
@@ -1528,5 +1530,15 @@ class Helper
             }
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
+    }
+    public static function unReassignableCount($license)
+    {
+
+        if (!$license->reassignable) {
+            $count = Actionlog::where('action_type', '=', 'checkin from')
+                ->where('item_id', '=', $license->id)
+                ->count();
+            return $count;
+        }
     }
 }

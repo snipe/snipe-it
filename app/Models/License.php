@@ -594,7 +594,8 @@ class License extends Depreciable
     {
         $total = $this->licenseSeatsCount;
         $taken = $this->assigned_seats_count;
-        $diff = ($total - $taken);
+        $unreassignable = Helper::unReassignableCount($this);
+        $diff = ($total - $taken - $unreassignable);
 
         return (int) $diff;
     }

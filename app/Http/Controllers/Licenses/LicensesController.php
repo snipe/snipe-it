@@ -248,16 +248,23 @@ class LicensesController extends Controller
         }
 
         $users_count = User::where('autoassign_licenses', '1')->count();
-        $total_seats_count = $license->totalSeatsByLicenseID();
+        $total_seats_count = (int) $license->totalSeatsByLicenseID();
         $available_seats_count = $license->availCount()->count();
-        $checkedout_seats_count = ($total_seats_count - $available_seats_count);
+        $unreassignable_seats_count = Helper::unReassignableCount($license);
+        if(!$license->reassignable){
+            $checkedout_seats_count = ($total_seats_count - $available_seats_count - $unreassignable_seats_count );
+        }
+        else {
+            $checkedout_seats_count = ($total_seats_count - $available_seats_count);
+        }
 
         $this->authorize('view', $license);
         return view('licenses.view', compact('license'))
             ->with('users_count', $users_count)
             ->with('total_seats_count', $total_seats_count)
             ->with('available_seats_count', $available_seats_count)
-            ->with('checkedout_seats_count', $checkedout_seats_count);
+            ->with('checkedout_seats_count', $checkedout_seats_count)
+            ->with('unreassignable_seats_count', $unreassignable_seats_count);
 
     }
 
