@@ -390,7 +390,7 @@ return [
         'brand'             => 'footer, logo, print, theme, skin, header, colors, color, css',
         'general_settings'  => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
         'groups'            => 'permissions, permission groups, authorization',
-        'labels'            => 'labels, barcodes, barcode, sheets, print',
+        'labels'            => 'labels, barcodes, barcode, sheets, print, upc, qr, 1d, 2d',
         'localization'      => 'localization, currency, local, locale, time zone, timezone, international, internatinalization, language, languages, translation',
         'php_overview'      => 'phpinfo, system, info',
         'purge'             => 'permanently delete',
