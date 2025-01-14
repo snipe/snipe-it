@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Terjadi masalah saat menghapus lisensi. Silahkan coba lagi.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Lisensi berhasil diperiksa'
     ),
 

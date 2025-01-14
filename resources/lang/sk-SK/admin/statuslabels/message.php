@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Stav neexistuje.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Odstránený stav',
     'assoc_assets'	 => 'Tento stav je priradený minimálne jednému mejtku, preto nemôže byť odstránený. Prosím odstráňte referenciu na tento stav z príslušného majetku a skúste znovu. ',
 
     'create' => [

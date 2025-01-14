@@ -1,16 +1,16 @@
 <?php
 
 return array(
-    'component_name'                  => 'Component Name',
-    'checkin'                             => 'Checkin Component',
-    'checkout'                             => 'Checkout Component',
+    'component_name'                  => 'Názov komponentu',
+    'checkin'                             => 'Prevziať komponent',
+    'checkout'                             => 'Odovzdať komponent',
     'cost'				=> 'Kúpna cena',
-    'create'                             => 'Create Component',
-    'edit'                             => 'Edit Component',
+    'create'                             => 'Pridať komponent',
+    'edit'                             => 'Upraviť komponent',
     'date'					=> 'Dátum nákupu',
     'order'					=> 'Číslo objednávky',
-    'remaining' 			             => 'Remaining',
+    'remaining' 			             => 'Zostáva',
     'total' 			                 => 'Celkom',
-    'update'                            => 'Update Component',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'update'                            => 'O komponentoch',
+    'checkin_limit'            => 'Prijaté množstvo musí byť rovné alebo menšie ako :assigned_qty'
 );

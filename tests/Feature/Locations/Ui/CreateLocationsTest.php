@@ -19,6 +19,13 @@ class CreateLocationsTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('locations.create'))
+            ->assertOk();
+    }
+
     public function testUserCanCreateLocations()
     {
         $this->assertFalse(Location::where('name', 'Test Location')->exists());

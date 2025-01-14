@@ -13,5 +13,10 @@ return [
         'user_state' => '用户州',
         'user_country' => '用户国家',
         'user_zip' => '用户邮编'
-    ]
+    ],
+    'open_saved_template' => '打开保存的模板',
+    'save_template' =>  '保存模板',
+    'select_a_template' => '选择模板',
+    'template_name' => '模板名称',
+    'update_template' => '更新模板',
 ];

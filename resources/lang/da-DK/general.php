@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Brugernavn Format',
     'username'              => 'Brugernavn',
     'update'                => 'Opdatering',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Tilladte filtyper er png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, og rar. Maksimalt tilladte uploadstørrelse er :size.',
     'uploaded'              => 'uploaded',
     'user'					=> 'Bruger',
@@ -565,5 +566,6 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

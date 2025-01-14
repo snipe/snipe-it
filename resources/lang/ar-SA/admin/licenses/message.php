@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'حدثت مشكلة في التحقق من الترخيص. يرجى إعادة المحاولة.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'تم ادخال الترخيص بنجاح'
     ),
 

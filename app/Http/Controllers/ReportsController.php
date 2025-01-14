@@ -11,12 +11,15 @@ use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\AssetMaintenance;
 use App\Models\CheckoutAcceptance;
+use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Depreciation;
 use App\Models\License;
+use App\Models\ReportTemplate;
 use App\Models\Setting;
 use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
@@ -394,12 +397,27 @@ class ReportsController extends Controller
     * @see ReportsController::postCustomReport() method that generates the CSV
     * @since [v1.0]
     */
-    public function getCustomReport() : View
+    public function getCustomReport(Request $request) : View
     {
         $this->authorize('reports.view');
         $customfields = CustomField::get();
+        $report_templates = ReportTemplate::orderBy('name')->get();
 
-        return view('reports/custom')->with('customfields', $customfields);
+        // The view needs a template to render correctly, even if it is empty...
+        $template = new ReportTemplate;
+
+        // Set the report's input values in the cases we were redirected back
+        // with validation errors so the report is populated as expected.
+        if ($request->old()) {
+            $template->name = $request->old('name');
+            $template->options = $request->old();
+        }
+
+        return view('reports/custom', [
+            'customfields' => $customfields,
+            'report_templates' => $report_templates,
+            'template' => $template,
+        ]);
     }
 
     /**
@@ -1093,28 +1111,31 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
         $showDeleted = $deleted == 'deleted';
 
-        /**
-         * Get all assets with pending checkout acceptances
-         */
-        if($showDeleted) {
-            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->withTrashed()->with(['assignedTo' , 'checkoutable.assignedTo', 'checkoutable.model'])->get();
-        } else {
-            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->with(['assignedTo' => function ($query) {
-                $query->withTrashed();
-            }, 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        $query = CheckoutAcceptance::pending()
+            ->where('checkoutable_type', 'App\Models\Asset')
+            ->with([
+                'checkoutable' => function (MorphTo $query) {
+                    $query->morphWith([
+                        AssetModel::class => ['model'],
+                        Company::class => ['company'],
+                        Asset::class => ['assignedTo'],
+                    ])->with('model.category');
+                },
+                'assignedTo' => function($query){
+                         $query->withTrashed();
+                    }
+            ]);
+
+        if ($showDeleted) {
+            $query->withTrashed();
         }
 
-        $assetsForReport = $acceptances
-            ->filter(function ($acceptance) {
-                $acceptance_checkoutable_flag = false;
-                if ($acceptance->checkoutable){
-                    $acceptance_checkoutable_flag = $acceptance->checkoutable->checkedOutToUser();
-                }
-                
-                return $acceptance->checkoutable_type == 'App\Models\Asset' && $acceptance_checkoutable_flag;
-            })
-            ->map(function($acceptance) {
-                return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
+        $assetsForReport = $query->get()
+                ->map(function ($acceptance) {
+                    return [
+                        'assetItem' => $acceptance->checkoutable,
+                        'acceptance' => $acceptance,
+                    ];
             });
 
         return view('reports/unaccepted_assets', compact('assetsForReport','showDeleted' ));
@@ -1156,10 +1177,10 @@ class ReportsController extends Controller
         $locale = $assetItem->assignedTo?->locale;
         // Only send notification if assigned
         if ($locale && $email) {
-                Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $logItem->note, $acceptance))->locale($locale));
+            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note))->locale($locale));
 
             } elseif ($email) {
-                Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $logItem->note, $acceptance)));
+            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)));
             }
 
         if ($email == ''){

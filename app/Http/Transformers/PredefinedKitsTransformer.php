@@ -3,6 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use App\Models\Asset;
 use App\Models\PredefinedKit;
 use App\Models\SnipeModel;
 use Illuminate\Support\Facades\Gate;
@@ -42,7 +43,7 @@ class PredefinedKitsTransformer
         $permissions_array['available_actions'] = [
             'update' => Gate::allows('update', PredefinedKit::class),
             'delete' => Gate::allows('delete', PredefinedKit::class),
-            'checkout' => Gate::allows('checkout', PredefinedKit::class),
+            'checkout' => Gate::allows('checkout', Asset::class),
             // 'clone' => Gate::allows('create', PredefinedKit::class),
             // 'restore' => Gate::allows('create', PredefinedKit::class),
         ];

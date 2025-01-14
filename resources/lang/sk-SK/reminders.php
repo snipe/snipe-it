@@ -13,9 +13,9 @@ return array(
     |
     */
 
-    "password" => "Passwords must be six characters and match the confirmation.",
-    "user"     => "Username or email address is incorrect",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "password" => "Heslo musí obsahovať 6 znakov a zhodovať sa s potvrdzujúcim heslom.",
+    "user"     => "Nesprávne používateľské heslo alebo emailová adresa",
+    "token"    => 'Kód na reset hesla je neplatný, vypršal alebo exspiroval alebo sa nezhoduje so zadaným používateľským menom.',
+    'sent'	   => 'Ak uvedená emailová adresa existuje v našom systému, bude na ňu odoslaný email s inštrukciami pre obnovu hesla.',
 
 );

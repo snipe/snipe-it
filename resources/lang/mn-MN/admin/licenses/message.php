@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Лиценз дээр асуудал гарлаа. Дахин оролдоно уу.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Лицензийг амжилттай шалгасан байна'
     ),
 

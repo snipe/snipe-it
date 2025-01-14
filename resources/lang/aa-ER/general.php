@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'crwdns1649:0crwdne1649:0',
     'username'              => 'crwdns10464:0crwdne10464:0',
     'update'                => 'crwdns1341:0crwdne1341:0',
+    'updating_item' => 'crwdns12804:0crwdne12804:0',
     'upload_filetypes_help'      => 'crwdns5980:0crwdne5980:0',
     'uploaded'              => 'crwdns1289:0crwdne1289:0',
     'user'					=> 'crwdns1095:0crwdne1095:0',
@@ -564,5 +565,6 @@ return [
     'label' => 'crwdns12690:0crwdne12690:0',
     'import_asset_tag_exists' => 'crwdns12692:0crwdne12692:0',
     'countries_manually_entered_help' => 'crwdns12702:0crwdne12702:0',
+    'accessories_assigned' => 'crwdns12800:0crwdne12800:0',
 
 ];

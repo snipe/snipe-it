@@ -15,7 +15,7 @@ return array(
 
     "password" => "Lösenord måste vara sex tecken och matcha lösenordsbekräftelsen.",
     "user"     => "Användarnamnet eller e-postadressen är felaktigt",
-    "token"    => 'Denna återställningstoken för lösenord är ogiltig eller har löpt ut, eller matchar inte det angivna användarnamnet.',
-    'sent'	   => 'Om en matchande användare med en giltig e-postadress finns i vårt system, har ett e-postmeddelande om lösenordsåterställning skickats.',
+    "token"    => 'Detta återställningstoken för lösenord är ogiltigt, har löpt ut eller matchar inte det angivna användarnamnet.',
+    'sent'	   => 'Om en matchande användare med en giltig e-postadress finns i systemet har ett e-postmeddelande om lösenordsåterställning skickats.',
 
 );

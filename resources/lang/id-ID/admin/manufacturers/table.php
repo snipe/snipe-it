@@ -10,7 +10,7 @@ return array(
     'support_email'   		=> 'Dukungan Email',
     'support_phone'   		=> 'Dukungan Telp',
     'support_url'   		=> 'URL Dukungan',
-    'warranty_lookup_url'   => 'Warranty Lookup URL',
+    'warranty_lookup_url'   => 'URL Pencarian Garansi',
     'update'				=> 'Perbarui Merek',
 
 );
