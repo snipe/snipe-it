@@ -798,11 +798,7 @@ class SettingsController extends Controller
             $setting->labels_display_model = 0;
         }
 
-
         if ($setting->save()) {
-            if ($setting->label2_template === null) {
-                return redirect()->route('settings.labels.index')->with('error', trans('admin/settings/message.labels.null_template'));
-            }
 
             return redirect()->route('settings.labels.index')
                 ->with('success', trans('admin/settings/message.update.success'));

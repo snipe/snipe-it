@@ -50,23 +50,11 @@ class Label implements View
                 ->with('count', $this->data->get('count'));
         }
 
-        try {
             $template = LabelModel::find($settings->label2_template);
 
         if ($template === null) {
             return redirect()->route('settings.labels.index')->with('error', trans('admin/settings/message.labels.null_template'));
         }
-
-        $template->validate();
-    } catch (\UnexpectedValueException $e) {
-
-        \Log::error('Validation failed: ' . $e->getMessage());
-
-    } catch (\Throwable $e) {
-
-        \Log::error('An unexpected error occurred: ' . $e->getMessage());
-
-    }
 
         $template->validate();
 
