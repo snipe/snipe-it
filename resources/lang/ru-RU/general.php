@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Формат имени пользователя',
     'username'              => 'Пользователь',
     'update'                => 'Обновить',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Допустимые типы файлов: png, gif, jpg, jpeg, doc, docx, pdf, xlsx, txt, lic, xml, zip, rtf и rar. Максимальный размер - :size.',
     'uploaded'              => 'Загружено',
     'user'					=> 'Пользователь',
@@ -565,5 +566,6 @@ return [
     'label' => 'Метка',
     'import_asset_tag_exists' => 'Актив с тегом актива :asset_tag уже существует и обновление не было запрошено. Изменения не были произведены.',
     'countries_manually_entered_help' => 'Значения со звездочкой (*) были введены вручную и не соответствуют существующим значениям выпадающего списка ISO 3166',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Formato nome utente',
     'username'              => 'Nome utente',
     'update'                => 'Aggiorna',
+    'updating_item' => 'Aggiornamento :item',
     'upload_filetypes_help'      => 'I tipi di file permessi sono png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf e rar. La dimensione massima di upload è di :size.',
     'uploaded'              => 'Caricato',
     'user'					=> 'Utente',
@@ -565,5 +566,6 @@ return [
     'label' => 'Etichetta',
     'import_asset_tag_exists' => 'Esiste già un Bene con tag :asset_tag e non è stato richiesto un aggiornamento. Nessuna modifica effettuata.',
     'countries_manually_entered_help' => 'I valori con un asterisco (*) sono stati inseriti manualmente e non corrispondono a valori esistenti ISO 3166 nell\'elenco a discesa',
+    'accessories_assigned' => 'Accessori Assegnati',
 
 ];

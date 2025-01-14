@@ -367,7 +367,7 @@ return [
     'label2_fields_help'      => '字段可以在左列中添加、删除和重新排序。对于每个字段，可以在右列中添加、删除和重新排序包括标签、数据源等多个选项。',
     'help_asterisk_bold'    => '输入为 <code>**text**</code> 的文本将显示为粗体。',
     'help_blank_to_use'     => '留空以使用 <code>:setting_name</code> 的值',
-    'help_default_will_use' => '<code>:default</code> 将使用 <code>:setting_name</code>的值。 <br>请注意，条码的值必须符合相应的条码规范才能成功生成。请参阅 <a href="https://snipe-it.readme.io/docs/barcodes">文档 <i class="fa fa-external-link"></i></a> 了解更多详细信息。 ',
+    'help_default_will_use' => '<br>请注意，条形码的值必须符合各自的条形码规范才能成功生成。 欲了解更多详情，请参阅<a href="https://snipe-it.readme.io/docs/barcodes">文档 <i class="fa fa-external-link"></i></a> ',
     'default'               => '默认',
     'none'                  => '无',
     'google_callback_help' => '这应该作为回调URL输入在您的组织内的 Google OAuth 应用程序设置。&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google 开发者控制台 <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>',

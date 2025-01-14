@@ -16,8 +16,6 @@
 
 
           @if (($depreciations) && ($depreciations->count() > 0))
-          <div class="table-responsive">
-
                   <table
                         data-cookie-id-table="depreciationReport"
                         data-pagination="true"
@@ -40,9 +38,7 @@
                           "fileName": "depreciation-report-{{ date('Y-m-d') }}",
                           "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                           }'>
-
           </table>
-        </div> <!-- /.table-responsive-->
               @else
               <div class="col-md-12">
                   <div class="alert alert-warning fade in">

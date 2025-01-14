@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Format du nom d\'utilisateur',
     'username'              => 'Nom d\'utilisateur',
     'update'                => 'Actualiser',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Les types de fichiers autorisés sont png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf et rar. La taille maximale autorisée est :size.',
     'uploaded'              => 'Téléversement réussi',
     'user'					=> 'Utilisateur',
@@ -565,5 +566,6 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

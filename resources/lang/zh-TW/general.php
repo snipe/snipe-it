@@ -302,6 +302,7 @@ return [
     'username_format'		=> '使用者名稱格式',
     'username'              => '使用者名稱',
     'update'                => '更新',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => '允許的檔案類別為 png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf 與 rar. 最大允許上傳的大小是 :size.',
     'uploaded'              => '已上傳',
     'user'					=> '使用者',
@@ -565,5 +566,6 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

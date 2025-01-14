@@ -20,6 +20,13 @@ class UpdateCategoriesTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('categories.edit', Category::factory()->create()->id))
+            ->assertOk();
+    }
+
     public function testUserCanCreateCategories()
     {
         $this->actingAs(User::factory()->superuser()->create())

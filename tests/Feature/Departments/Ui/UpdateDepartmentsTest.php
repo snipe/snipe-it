@@ -19,6 +19,12 @@ class UpdateDepartmentsTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('departments.edit', Department::factory()->create()->id))
+            ->assertOk();
+    }
 
     public function testUserCanEditDepartments()
     {

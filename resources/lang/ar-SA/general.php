@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'تنسيق اسم المستخدم',
     'username'              => 'اسم المستخدم',
     'update'                => 'تحديث',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'أنواع الملفات المسموح بها هي png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. الحد الأقصى المسموح به هو :size.',
     'uploaded'              => 'تم تحميلها',
     'user'					=> 'المستخدم',
@@ -565,5 +566,6 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

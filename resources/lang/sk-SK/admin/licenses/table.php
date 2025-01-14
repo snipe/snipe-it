@@ -2,17 +2,17 @@
 
 return array(
 
-    'assigned_to'   	=> 'Assigned To',
+    'assigned_to'   	=> 'Priradené',
     'checkout'   		=> 'Vsetup/Výstup',
-    'deleted_at'        => 'Deleted at',
+    'deleted_at'        => 'Zmazané',
     'id'      			=> 'ID',
-    'license_email'   	=> 'License Email',
-    'license_name'   	=> 'Licensed To',
+    'license_email'   	=> 'Licenčný mail',
+    'license_name'   	=> 'Registrované na',
     'purchase_date'   	=> 'Dátum nákupu',
     'purchased'   		=> 'Zakúpené',
-    'seats'   			=> 'Seats',
-    'hardware'   		=> 'Hardware',
+    'seats'   			=> 'Počet',
+    'hardware'   		=> 'Hardvér',
     'serial'   			=> 'Sériové číslo',
-    'title'      		=> 'License',
+    'title'      		=> 'Licencia',
 
 );

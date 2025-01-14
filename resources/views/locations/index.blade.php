@@ -18,8 +18,6 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
-
           @include('partials.locations-bulk-actions')
 
           <table
@@ -46,7 +44,6 @@
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
           </table>
-        </div>
       </div>
     </div>
   </div>

@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Formato de Nome de Usuário',
     'username'              => 'Usuário',
     'update'                => 'Atualizar',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Os tipos de arquivos permitidos são png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf e rar. O tamanho máximo de carregamento permitido é :size.',
     'uploaded'              => 'Carregado',
     'user'					=> 'Usuário',
@@ -566,5 +567,6 @@ Resultados da Sincronização',
     'label' => 'Rótulo',
     'import_asset_tag_exists' => 'Um ativo com a etiqueta de ativo :asset_tag já existe e uma atualização não foi solicitada. Nenhuma alteração foi feita.',
     'countries_manually_entered_help' => 'Os valores com um asterisco (*) foram inseridos manualmente e não correspondem aos valores existentes na lista suspensa do ISO 3166',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

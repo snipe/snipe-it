@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Nid oedd yn bosib nodi\'r trwydded i mewn. Ceisiwch eto o. g. y. dd.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Trwydded wedi nodi i fewn yn llwyddiannus'
     ),
 

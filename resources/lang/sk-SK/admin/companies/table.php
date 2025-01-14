@@ -1,11 +1,11 @@
 <?php
 return array(
-    'companies' => 'Companies',
-    'create'    => 'Create Company',
-    'email'     => 'Company Email',
-    'title'     => 'Company',
-    'phone'     => 'Company Phone',
-    'update'    => 'Update Company',
-    'name'      => 'Company Name',
+    'companies' => 'Spoločnosti',
+    'create'    => 'Pridať spoločnosť',
+    'email'     => 'Emailová adresa spoločnosti',
+    'title'     => 'Spoločnosť',
+    'phone'     => 'Telefónne čislo spoločnosti',
+    'update'    => 'Upraviť spoločnosť',
+    'name'      => 'Názov spoločnosti',
     'id'        => 'ID',
 );

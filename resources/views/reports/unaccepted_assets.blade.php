@@ -33,8 +33,6 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
-
             <table
                 data-cookie-id-table="unacceptedAssetsReport"
                 data-pagination="true"
@@ -104,7 +102,6 @@
               </tr>
             </tfoot>
           </table>
-        </div>
       </div>
     </div>
   </div>

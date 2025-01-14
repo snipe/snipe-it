@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Kasutajanime formaat',
     'username'              => 'Kasutajanimi',
     'update'                => 'Uuenda',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Lubatud failileiendid on png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip ja rar. Suurim lubatud üleslaadimise maht on :size.',
     'uploaded'              => 'Üles laetud',
     'user'					=> 'Kasutaja',
@@ -565,5 +566,6 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];
