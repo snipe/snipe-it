@@ -359,9 +359,12 @@
                                               trans('general.pie_chart_type')) }}
                            </div>
                            <div class="col-md-9">
-                               {{ Form::select('dash_chart_type', array(
-                                   'name' => 'Status Label Name',
-                                   'type' => 'Status Label Type'), old('dash_chart_type', $setting->dash_chart_type), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                               <x-input.select
+                                   name="dash_chart_type"
+                                   :options="['name' => 'Status Label Name', 'type' => 'Status Label Type']"
+                                   :selected="old('dash_chart_type', $setting->dash_chart_type)"
+                                   style="width: 80%"
+                               />
                            </div>
                        </div>
 
@@ -372,11 +375,13 @@
                                 {{ Form::label('depreciation_method', trans('Depreciation method')) }}
                            </div>
                            <div class="col-md-9">
-                               {{ Form::select('depreciation_method', array(
-                                    'default' => 'Linear (default)', 
-                                    'half_1' => 'Half-year convention, always applied', 
-                                    'half_2' => 'Half-year convention, applied with condition', 
-                                ), old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                               <x-input.select
+                                   name="depreciation_method"
+                                   id="depreciation_method"
+                                   :options="['default' => 'Linear (default)', 'half_1' => 'Half-year convention, always applied', 'half_2' => 'Half-year convention, applied with condition']"
+                                   :selected="old('depreciation_method', $setting->depreciation_method)"
+                                   style="width: 80%"
+                               />
                            </div>
                        </div>
                        <!-- /.form-group -->
