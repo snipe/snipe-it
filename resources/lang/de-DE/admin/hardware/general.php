@@ -40,4 +40,5 @@ return [
     'custom_export' => 'Benutzerdefinierter Export',
     'mfg_warranty_lookup' => ':manufacturer Garantiestatus Abfrage',
     'user_department' => 'Abteilung des Benutzers',
+    'print_label' => 'Drucken Asset-Label',
 ];

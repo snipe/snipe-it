@@ -294,6 +294,11 @@ class AssetsController extends Controller
                 'url' => route('qr_code/hardware', $asset->id),
             ];
 
+            if (isset($_GET['receipt-confirmation'])) {
+                return view('hardware/receipt-confirmation', compact('asset', 'qr_code', 'settings'))
+                    ->with('use_currency', $use_currency)->with('audit_log', $audit_log);
+            }
+
             return view('hardware/view', compact('asset', 'qr_code', 'settings'))
                 ->with('use_currency', $use_currency)->with('audit_log', $audit_log);
         }
