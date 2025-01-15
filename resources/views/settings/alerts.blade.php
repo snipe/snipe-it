@@ -120,7 +120,7 @@
                             <div class="col-md-3">
                                 {{ Form::label('audit_interval', trans('admin/settings/general.audit_interval')) }}
                             </div>
-                            <div class="input-group col-md-2">
+                            <div class="input-group col-md-3">
                                 <input class="form-control" placeholder="12" maxlength="3" name="audit_interval" type="text" id="audit_interval" value="{{ old('audit_interval', $setting->audit_interval) }}">
                                 <span class="input-group-addon">{{ trans('general.months') }}</span>
                             </div>
@@ -135,7 +135,7 @@
                             <div class="col-md-3">
                                 {{ Form::label('audit_warning_days', trans('admin/settings/general.audit_warning_days')) }}
                             </div>
-                            <div class="input-group col-md-2">
+                            <div class="input-group col-md-3">
                                 <input class="form-control" placeholder="14" maxlength="3" name="audit_warning_days" type="text" id="audit_warning_days" value="{{ old('audit_warning_days', $setting->audit_warning_days) }}">
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
                             </div>
@@ -150,7 +150,7 @@
                             <div class="col-md-3">
                                 {{ Form::label('due_checkin_days', trans('admin/settings/general.due_checkin_days')) }}
                             </div>
-                            <div class="input-group col-md-2">
+                            <div class="input-group col-md-3">
                                 <input class="form-control" placeholder="14" maxlength="3" name="due_checkin_days" type="text" id="due_checkin_days" value="{{ old('due_checkin_days', $setting->due_checkin_days) }}">
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
                             </div>
