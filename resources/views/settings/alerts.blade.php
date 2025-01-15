@@ -135,7 +135,7 @@
                             <div class="col-md-3">
                                 {{ Form::label('audit_warning_days', trans('admin/settings/general.audit_warning_days')) }}
                             </div>
-                            <div class="input-group col-md-2">
+                            <div class="input-group col-md-3">
                                 {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3')) }}
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
                             </div>
