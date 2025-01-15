@@ -120,7 +120,7 @@
                             <div class="col-md-3">
                                 {{ Form::label('audit_interval', trans('admin/settings/general.audit_interval')) }}
                             </div>
-                            <div class="input-group col-md-2">
+                            <div class="input-group col-md-3">
                                 {{ Form::text('audit_interval', old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3')) }}
                                 <span class="input-group-addon">{{ trans('general.months') }}</span>
                             </div>
