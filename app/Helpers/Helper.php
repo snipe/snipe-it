@@ -1535,8 +1535,8 @@ class Helper
     {
 
         if (!$license->reassignable) {
-            $count = Actionlog::where('action_type', '=', 'checkin from')
-                ->where('item_id', '=', $license->id)
+            $count = LicenseSeat::where('unavailable', '=', true)
+                ->where('license_id', '=', $license->id)
                 ->count();
             return $count;
         }

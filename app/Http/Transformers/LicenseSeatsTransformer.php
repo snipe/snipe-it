@@ -49,7 +49,7 @@ class LicenseSeatsTransformer
             'reassignable' => (bool) $seat->license->reassignable,
             'notes' => e($seat->notes),
             'user_can_checkout' => (($seat->assigned_to == '') && ($seat->asset_id == '')),
-            'disabled' => $this->unReassignable($seat),
+            'disabled' => $seat->unavailable,
         ];
 
         if ($seat_count != 0) {
@@ -68,17 +68,17 @@ class LicenseSeatsTransformer
 
         return $array;
     }
-    private function unReassignable($seat)
-    {
-        if (!$seat->license->reassignable) {
-           $exists = Actionlog::where('action_type', '=', 'checkin from')
-                ->where('item_id', '=', $seat->license->id)
-                ->where('updated_at', '=', $seat->updated_at)
-                ->exists();
-           if($exists) {
-               return true;
-           }
-            return false;
-        }
-    }
+//    private function unReassignable($seat)
+//    {
+//        if (!$seat->license->reassignable) {
+//           $exists = Actionlog::where('action_type', '=', 'checkin from')
+//                ->where('item_id', '=', $seat->license->id)
+//                ->where('updated_at', '=', $seat->updated_at)
+//                ->exists();
+//           if($exists) {
+//               return true;
+//           }
+//            return false;
+//        }
+//    }
 }
