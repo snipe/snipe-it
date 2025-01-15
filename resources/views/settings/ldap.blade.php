@@ -150,7 +150,7 @@
                                 {{ Form::label('ad_domain', trans('admin/settings/general.ad_domain')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ad_domain', old('ad_domain', $setting->ad_domain), ['class' => 'form-control','placeholder' => trans('general.example') .'example.com']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'example.com' }}" name="ad_domain" type="text" id="ad_domain" value="{{ old('ad_domain', $setting->ad_domain) }}">
                                 <p class="help-block">{{ trans('admin/settings/general.ad_domain_help') }}</p>
                                 @error('ad_domain')
                                     <span class="alert-msg">
@@ -221,7 +221,7 @@
                                 {{ Form::label('ldap_server', trans('admin/settings/general.ldap_server')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_server', old('ldap_server', $setting->ldap_server), ['class' => 'form-control','placeholder' =>  trans('general.example') .'ldap://ldap.example.com']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'ldap://ldap.example.com' }}" name="ldap_server" type="text" id="ldap_server" value="{{ old('ldap_server', $setting->ldap_server) }}">
                                 @error('ldap_server')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
@@ -301,7 +301,7 @@
                                 {{ Form::label('ldap_uname', trans('admin/settings/general.ldap_uname')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_uname', old('ldap_uname', $setting->ldap_uname), ['class' => 'form-control','autocomplete' => 'off', 'placeholder' => trans('general.example') .'binduser@example.com']) }}
+                                <input class="form-control" autocomplete="off" placeholder="{{ trans('general.example') .'binduser@example.com' }}" name="ldap_uname" type="text" id="ldap_uname" value="{{ old('ldap_uname', $setting->ldap_uname) }}">
                                 @error('ldap_uname')
                                     <span class="alert-msg">
                                          <x-icon type="x" />
@@ -347,7 +347,7 @@
                                 {{ Form::label('ldap_basedn', trans('admin/settings/general.ldap_basedn')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_basedn', old('ldap_basedn', $setting->ldap_basedn), ['class' => 'form-control', 'placeholder' => trans('general.example') .'cn=users/authorized,dc=example,dc=com']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'cn=users/authorized,dc=example,dc=com' }}" name="ldap_basedn" type="text" id="ldap_basedn" value="{{ old('ldap_basedn', $setting->ldap_basedn) }}">
                                 @error('ldap_basedn')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
@@ -552,7 +552,7 @@
                                 {{ Form::label('ldap_emp_num', trans('admin/settings/general.ldap_emp_num')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_emp_num', old('ldap_emp_num', $setting->ldap_emp_num), ['class' => 'form-control','placeholder' => trans('general.example') .'employeenumber/employeeid']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'employeenumber/employeeid' }}" name="ldap_emp_num" type="text" id="ldap_emp_num" value="{{ old('ldap_emp_num', $setting->ldap_emp_num) }}">
                                 @error('ldap_emp_num')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
@@ -574,7 +574,7 @@
                                 {{ Form::label('ldap_dept', trans('admin/settings/general.ldap_dept')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_dept', old('ldap_dept', $setting->ldap_dept), ['class' => 'form-control','placeholder' => trans('general.example') .'department']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'department' }}" name="ldap_dept" type="text" id="ldap_dept" value="{{ old('ldap_dept', $setting->ldap_dept) }}">
 
                                 @error('ldap_dept')
                                     <span class="alert-msg">
@@ -597,7 +597,7 @@
                                 {{ Form::label('ldap_dept', trans('admin/settings/general.ldap_manager')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_manager', old('ldap_manager', $setting->ldap_manager), ['class' => 'form-control','placeholder' => trans('general.example') .'manager']) }}
+                                <input class="form-control" placeholder=" {{ trans('general.example') .'manager' }}" name="ldap_manager" type="text" value="{{ old('ldap_manager', $setting->ldap_manager) }}">
                                 @error('ldap_manager')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
@@ -620,7 +620,7 @@
                                 {{ Form::label('ldap_email', trans('admin/settings/general.ldap_email')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_email', old('ldap_email', $setting->ldap_email), ['class' => 'form-control','placeholder' => trans('general.example') .'mail']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'mail' }}" name="ldap_email" type="text" id="ldap_email" value="{{ old('ldap_email', $setting->ldap_email) }}">
                                 @error('ldap_email')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
@@ -643,7 +643,7 @@
                                 {{ Form::label('ldap_phone', trans('admin/settings/general.ldap_phone')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_phone', old('ldap_phone', $setting->ldap_phone_field), ['class' => 'form-control','placeholder' => trans('general.example') .'telephonenumber']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'telephonenumber' }}" name="ldap_phone" type="text" id="ldap_phone" value="{{ old('ldap_phone', $setting->ldap_phone_field) }}">
                                 @error('ldap_phone')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
@@ -666,7 +666,7 @@
                                 {{ Form::label('ldap_jobtitle', trans('admin/settings/general.ldap_jobtitle')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_jobtitle', old('ldap_jobtitle', $setting->ldap_jobtitle), ['class' => 'form-control','placeholder' => trans('general.example') .'title']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'title' }}" name="ldap_jobtitle" type="text" id="ldap_jobtitle" value="{{ old('ldap_jobtitle', $setting->ldap_jobtitle) }}">
                                 @error('ldap_jobtitle')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
@@ -689,7 +689,7 @@
                                 {{ Form::label('ldap_country', trans('admin/settings/general.ldap_country')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_country', old('ldap_country', $setting->ldap_country), ['class' => 'form-control','placeholder' => trans('general.example') .'c']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'c' }}" name="ldap_country" type="text" id="ldap_country" value="{{ old('ldap_country', $setting->ldap_country) }}">
                                 @error('ldap_country')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
@@ -711,7 +711,7 @@
                                 {{ Form::label('ldap_location', trans('admin/settings/general.ldap_location')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('ldap_location', old('ldap_location', $setting->ldap_location), ['class' => 'form-control','placeholder' => trans('general.example') .'physicaldeliveryofficename']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'physicaldeliveryofficename' }}" name="ldap_location" type="text" id="ldap_location" value="{{ old('ldap_location', $setting->ldap_location) }}">
                                 <p class="help-block">{!! trans('admin/settings/general.ldap_location_help') !!}</p>
                                 @error('ldap_location')
                                     <span class="alert-msg">
@@ -794,7 +794,7 @@
                                 {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('custom_forgot_pass_url', old('custom_forgot_pass_url', $setting->custom_forgot_pass_url), ['class' => 'form-control','placeholder' => trans('general.example') .'https://my.ldapserver-forgotpass.com']) }}
+                                <input class="form-control" placeholder="{{ trans('general.example') .'https://my.ldapserver-forgotpass.com' }}" name="custom_forgot_pass_url" type="text" id="custom_forgot_pass_url" value="{{ old('custom_forgot_pass_url', $setting->custom_forgot_pass_url) }}">
                                 <p class="help-block">{{ trans('admin/settings/general.custom_forgot_pass_url_help') }}</p>
                                 @error('custom_forgot_pass_url')
                                     <span class="alert-msg">
