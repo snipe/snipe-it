@@ -69,6 +69,7 @@
                             </div>
                             <div class="col-md-8">
                                 {{ Form::text('google_client_id', old('google_client_id', $setting->google_client_id), ['class' => 'form-control','placeholder' => trans('general.example') .'000000000000-XXXXXXXXXXX.apps.googleusercontent.com', (config('app.lock_passwords')===true) ? 'disabled': '']) }}
+                                <input class="form-control" placeholder="Example: 000000000000-XXXXXXXXXXX.apps.googleusercontent.com" name="google_client_id" type="text" id="google_client_id">
                                 {!! $errors->first('google_client_id', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
