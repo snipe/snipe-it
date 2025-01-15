@@ -16,7 +16,7 @@
 <div class="form-group {{ $errors->has('contact') ? ' has-error' : '' }}">
     {{ Form::label('contact', trans('admin/suppliers/table.contact'), array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
-        {{Form::text('contact', old('contact', $item->contact), array('class' => 'form-control')) }}
+        <input class="form-control" name="contact" type="text" id="contact" value="{{ old('contact', $item->contact) }}">
         {!! $errors->first('contact', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
@@ -28,7 +28,7 @@
 <div class="form-group {{ $errors->has('url') ? ' has-error' : '' }}">
     {{ Form::label('url', trans('general.url'), array('class' => 'col-md-3 control-label')) }}
     <div class="col-md-7">
-        {{Form::text('url', old('url', $item->url), array('class' => 'form-control')) }}
+        <input class="form-control" name="url" type="text" id="url" value="{{ old('url', $item->url) }}">
         {!! $errors->first('url', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
