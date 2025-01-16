@@ -192,7 +192,7 @@ class SettingsController extends Controller
         $settings->next_auto_tag_base = 1;
         $settings->auto_increment_assets = $request->input('auto_increment_assets', 0);
         $settings->auto_increment_prefix = $request->input('auto_increment_prefix');
-        $settings->zerofill_count = $request->input('zerofill_count', 5);
+        $settings->zerofill_count = $request->input('zerofill_count') ?: 0;
 
         if ((! $user->isValid()) || (! $settings->isValid())) {
             return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
