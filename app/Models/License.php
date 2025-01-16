@@ -653,7 +653,7 @@ class License extends Depreciable
     {
         return  $this->licenseseats()
             ->whereNull('deleted_at')
-            ->where('unassignable', '=', false)
+            ->where('reassignable_seat', '=', false)
             ->where(function ($query) {
                 $query->whereNull('assigned_to')
                     ->whereNull('asset_id');
