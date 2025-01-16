@@ -119,7 +119,7 @@ class LicenseSeatsController extends Controller
             // nothing to update
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
         }
-        if( $touched && $licenseSeat->dead) {
+        if( $touched && $licenseSeat->unassignable) {
             return response()->json(Helper::formatStandardApiResponse('error', $licenseSeat, trans('admin/licenses/message.checkout.unavailable')));
         }
         // the logging functions expect only one "target". if both asset and user are present in the request,
@@ -140,7 +140,7 @@ class LicenseSeatsController extends Controller
             if ($is_checkin) {
                 $licenseSeat->logCheckin($target, $request->input('note'));
                 if(!$licenseSeat->license->reassignable){
-                    $licenseSeat->dead = 1;
+                    $licenseSeat->unassignable = true;
                     $licenseSeat->save();
                 }
 

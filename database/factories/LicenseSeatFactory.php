@@ -14,7 +14,7 @@ class LicenseSeatFactory extends Factory
     {
         return [
             'license_id' => License::factory(),
-            'dead' => 0,
+            'dead' => false,
         ];
     }
 
