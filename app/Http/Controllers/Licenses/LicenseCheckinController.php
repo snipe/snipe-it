@@ -95,9 +95,10 @@ class LicenseCheckinController extends Controller
         $licenseSeat->assigned_to = null;
         $licenseSeat->asset_id = null;
         $licenseSeat->notes = $request->input('notes');
-        if (! $license->reassignable) {
+        if (! $licenseSeat->license->reassignable) {
             $licenseSeat->unavailable = 1;
             $licenseSeat->notes .= "\n" . trans('admin/licenses/message.checkin.not_reassignable') . '.';
+
         }
 
         session()->put(['redirect_option' => $request->get('redirect_option')]);
