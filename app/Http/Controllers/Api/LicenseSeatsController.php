@@ -139,7 +139,7 @@ class LicenseSeatsController extends Controller
 
             if ($is_checkin) {
                 $licenseSeat->logCheckin($target, $request->input('note'));
-                if(!$licenseSeat->license->ressignable){
+                if(!$licenseSeat->license->reassignable){
                     $licenseSeat->dead = 1;
                     $licenseSeat->save();
                 }
