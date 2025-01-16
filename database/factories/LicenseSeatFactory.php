@@ -14,7 +14,7 @@ class LicenseSeatFactory extends Factory
     {
         return [
             'license_id' => License::factory(),
-            'reassignable_seat' => false,
+            'unreassignable_seat' => false,
         ];
     }
 

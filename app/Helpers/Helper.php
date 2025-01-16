@@ -1535,7 +1535,7 @@ class Helper
     {
 
         if (!$license->reassignable) {
-            $count = LicenseSeat::where('reassignable_seat', '=', true)
+            $count = LicenseSeat::where('unreassignable_seat', '=', true)
                 ->where('license_id', '=', $license->id)
                 ->count();
             return $count;

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('license_seats', function (Blueprint $table) {
-           $table->addColumn('boolean', 'reassignable_seat')->default(false)->after('assigned_to');
+           $table->addColumn('boolean', 'unreassignable_seat')->default(false)->after('assigned_to');
         });
     }
     /**
@@ -23,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('license_seats', function (Blueprint $table) {
-            $table->dropColumn('reassignable_seat');
+            $table->dropColumn('unreassignable_seat');
         });
     }
 };
