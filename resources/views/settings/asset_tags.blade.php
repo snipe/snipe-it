@@ -58,7 +58,7 @@
                                 {{ Form::label('next_auto_tag_base', trans('admin/settings/general.next_auto_tag_base')) }}
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('next_auto_tag_base', old('next_auto_tag_base', $setting->next_auto_tag_base), array('class' => 'form-control', 'style'=>'width: 150px;', 'aria-label'=>'next_auto_tag_base')) }}
+                                <input class="form-control" style="width: 150px;" aria-label="next_auto_tag_base" name="next_auto_tag_base" type="text" value="{{ old('next_auto_tag_base', $setting->next_auto_tag_base) }}" id="next_auto_tag_base">
                                 {!! $errors->first('next_auto_tag_base', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -71,10 +71,10 @@
                             </div>
                             <div class="col-md-7">
                                 @if ($setting->auto_increment_assets == 1)
-                                    {{ Form::text('auto_increment_prefix', old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'style'=>'width: 150px;', 'aria-label'=>'auto_increment_prefix')) }}
+                                    <input class="form-control" style="width: 150px;" aria-label="auto_increment_prefix" name="auto_increment_prefix" type="text" id="auto_increment_prefix" value="{{ old('auto_increment_prefix', $setting->auto_increment_prefix) }}">
                                     {!! $errors->first('auto_increment_prefix', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @else
-                                    {{ Form::text('auto_increment_prefix', old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'disabled'=>'disabled', 'style'=>'width: 150px;', 'aria-label'=>'auto_increment_prefix')) }}
+                                    <input class="form-control" disabled="disabled" style="width: 150px;" aria-label="auto_increment_prefix" name="auto_increment_prefix" type="text" id="auto_increment_prefix" value="{{ old('auto_increment_prefix', $setting->auto_increment_prefix) }}">
                                 @endif
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                 {{ Form::label('zerofill_count', trans('admin/settings/general.zerofill_count')) }}
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('zerofill_count', old('zerofill_count', $setting->zerofill_count), array('class' => 'form-control', 'style'=>'width: 150px;', 'aria-label'=>'zerofill_count')) }}
+                                <input class="form-control" style="width: 150px;" aria-label="zerofill_count" name="zerofill_count" type="text" value="{{ old('zerofill_count', $setting->zerofill_count) }}" id="zerofill_count">
                                 {!! $errors->first('zerofill_count', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>

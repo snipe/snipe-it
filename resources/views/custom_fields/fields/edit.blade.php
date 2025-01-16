@@ -46,7 +46,7 @@
               {{ trans('admin/custom_fields/general.field_name') }}
             </label>
             <div class="col-md-8 required">
-                {{ Form::text('name', old('name', $field->name), array('class' => 'form-control', 'aria-label'=>'name')) }}
+                <input class="form-control" aria-label="name" name="name" type="text" value="{{ old('name', $field->name) }}">
                 {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -98,7 +98,7 @@
               {{ trans('admin/custom_fields/general.field_custom_format') }}
             </label>
             <div class="col-md-8 required">
-                {{ Form::text('custom_format', old('custom_format', (($field->format!='') && (stripos($field->format,'regex')===0)) ? $field->format : ''), array('class' => 'form-control', 'id' => 'custom_format','aria-label'=>'custom_format', 'placeholder'=>'regex:/^[0-9]{15}$/')) }}
+                <input class="form-control" id="custom_format" aria-label="custom_format" placeholder="regex:/^[0-9]{15}$/" name="custom_format" type="text" value="{{ old('custom_format', (($field->format!='') && (stripos($field->format,'regex')===0)) ? $field->format : '') }}">
                 <p class="help-block">{!! trans('admin/custom_fields/general.field_custom_format_help') !!}</p>
 
               {!! $errors->first('custom_format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -112,7 +112,7 @@
                   {{ trans('admin/custom_fields/general.help_text') }}
               </label>
               <div class="col-md-8">
-                  {{ Form::text('help_text', old('help_text', $field->help_text), array('class' => 'form-control', 'aria-label'=>'help_text')) }}
+                  <input class="form-control" aria-label="help_text" name="help_text" type="text" value=" {{ old('help_text', $field->help_text) }}">
                   <p class="help-block">{{ trans('admin/custom_fields/general.help_text_description') }}</p>
                   {!! $errors->first('help_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
