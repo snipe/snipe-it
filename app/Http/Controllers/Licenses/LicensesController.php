@@ -251,7 +251,7 @@ class LicensesController extends Controller
         $total_seats_count = (int) $license->totalSeatsByLicenseID();
         $available_seats_count = $license->availCount()->count();
         $unreassignable_seats_count = Helper::unReassignableCount($license);
-        if(!$license->unreassignable_seat){
+        if(!$license->reassignable){
             $checkedout_seats_count = ($total_seats_count - $available_seats_count - $unreassignable_seats_count );
         }
         else {
