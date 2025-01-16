@@ -26,6 +26,7 @@
 
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-10">
+
             <div class="panel box box-default">
                 <div class="box-header with-border">
                     <h2 class="box-title">
@@ -34,6 +35,7 @@
                     </h2>
                 </div>
                 <div class="box-body">
+
                     <div class="col-md-12">
 
                         <!-- New Label Engine -->
