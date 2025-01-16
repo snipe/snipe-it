@@ -32,7 +32,7 @@ class LicenseCheckinTest extends TestCase
 
         $licenseSeat->refresh();
 
-        $this->assertEquals(1, $licenseSeat->unavailable);
+        $this->assertEquals(1, $licenseSeat->dead);
     }
 
     public function testCannotCheckinLicenseThatIsNotAssigned()
