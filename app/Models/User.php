@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Companyable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Auth\Authenticatable;
@@ -24,7 +25,7 @@ use Watson\Validating\ValidatingTrait;
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
     use HasFactory;
-    use CompanyableTrait;
+    use Companyable;
 
     protected $presenter = \App\Presenters\UserPresenter::class;
     use SoftDeletes, ValidatingTrait;

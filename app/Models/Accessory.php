@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\Helper;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Companyable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -21,7 +22,7 @@ class Accessory extends SnipeModel
     use HasFactory;
 
     protected $presenter = \App\Presenters\AccessoryPresenter::class;
-    use CompanyableTrait;
+    use Companyable;
     use Loggable, Presentable;
     use SoftDeletes;
 
