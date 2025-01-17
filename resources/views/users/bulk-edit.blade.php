@@ -144,7 +144,7 @@
                         <!-- ldap_sync -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
-                                {{ trans('general.ldap_sync') }}
+                                {{ trans('general.user_managed_passwords') }}
                             </div>
                             <div class="col-sm-9">
                                     <label for="no_change" class="form-control">
@@ -153,7 +153,11 @@
                                     </label>
                                     <label for="ldap_import" class="form-control">
                                         {{ Form::radio('ldap_import', '0', old('ldap_import'), ['id' => 'ldap_import', 'aria-label'=>'ldap_import']) }}
-                                        {{ trans('general.ldap_import') }}
+                                        {{ trans('general.user_managed_passwords_allow') }}
+                                    </label>
+                                    <label for="ldap_import" class="form-control">
+                                        {{ Form::radio('ldap_import', '1', old('ldap_import'), ['id' => 'ldap_import', 'aria-label'=>'ldap_import']) }}
+                                        {{ trans('general.user_managed_passwords_disallow') }}
                                     </label>
                             </div>
                         </div> <!--/form-group-->
