@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Nid yw\'r ased yn bodoli.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'Nid yw\'r ased yn bodoli.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'Ar hyn o bryd mae\'r ased yma allan gan ddefnyddiwr ac ni ellir ei ddileu. Cofnodwch yr ased yn ol i fewn yn gyntaf, ac yna ceisiwch ei ddileu eto. ',
+    'assoc_users'	 	 => 'Ar hyn o bryd mae\'r ased yma allan gan ddefnyddiwr ac ni ellir ei ddileu. Cofnodwch yr ased yn ol i fewn yn gyntaf, ac yna ceisiwch ei ddileu eto. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Ni crewyd yr ased, ceisiwch eto o. g. y. dd. :(',

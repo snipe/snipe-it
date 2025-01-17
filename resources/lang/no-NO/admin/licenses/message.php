@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Det oppstod et problem under innsjekk av lisens. Vennligst prøv igjen.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Vellykket innsjekk av lisens'
     ),
 

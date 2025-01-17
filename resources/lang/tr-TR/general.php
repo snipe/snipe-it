@@ -305,6 +305,7 @@ Context | Request Context
     'username_format'		=> 'Kullanıcı Adı Biçimi',
     'username'              => 'Kullanıcı Adı',
     'update'                => 'Güncelle',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'İzin verilen dosya türleri png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf ve rar\'dır. İzin verilen maksimum yükleme boyutu :size.',
     'uploaded'              => 'Yüklendi',
     'user'					=> 'Kullanıcı',
@@ -563,10 +564,11 @@ Context | Request Context
     'something_went_wrong' => 'Something went wrong with your request.',
     'close' => 'Close',
     'expires' => 'Bitiş',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Remaining',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

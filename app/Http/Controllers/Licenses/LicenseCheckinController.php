@@ -71,7 +71,7 @@ class LicenseCheckinController extends Controller
 
         if (! $license->reassignable) {
             // Not allowed to checkin
-            Session::flash('error', 'License not reassignable.');
+            Session::flash('error', trans('admin/licenses/message.checkin.not_reassignable') . '.');
 
             return redirect()->back()->withInput();
         }

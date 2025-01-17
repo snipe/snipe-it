@@ -43,7 +43,7 @@ return [
     'redirect_to_type'   => 'Eiti į :type',
     'redirect_to_checked_out_to'   => 'Eiti į išduotus',
     'select_statustype'	=> 'Pasirinkite būsenos tipą',
-    'serial'			=> 'Serijos numeris',
+    'serial'			=> 'Serijinis numeris',
     'status'			=> 'Būsena',
     'tag'				=> 'Inventorinis numeris',
     'update'			=> 'Turto atnaujinimas',
@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Turto būsena tinkama išdavimui, todėl šis turtas gali būti išduotas.',
     'processing_spinner' => 'Apdorojama... (Dideliems failams gali šiek tiek užtrukti)',
     'optional_infos'  => 'Papildoma informacija',
-    'order_details'   => 'Su užsakymu susijusi informacija'
+    'order_details'   => 'Su užsakymu susijusi informacija',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

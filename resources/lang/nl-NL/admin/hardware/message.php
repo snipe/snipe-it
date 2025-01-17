@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Waarschuwing: </strong> Dit bestand is gemarkeerd als niet-uitgeefbaar. Als deze status is veranderd, update dan de asset status.',
-    'does_not_exist' 	=> 'Dit asset bestaat niet.',
-    'does_not_exist_var'=> 'Asset met tag :asset_tag niet gevonden.',
-    'no_tag' 	        => 'Geen asset tag opgegeven.',
+    'undeployable' 		 => '<strong>Waarschuwing: </strong> Dit bestand is gemarkeerd als niet-uitgeefbaar. Als deze status is veranderd, update dan de asset status.',
+    'does_not_exist' 	 => 'Dit asset bestaat niet.',
+    'does_not_exist_var' => 'Asset met tag :asset_tag niet gevonden.',
+    'no_tag' 	         => 'Geen asset tag opgegeven.',
     'does_not_exist_or_not_requestable' => 'Die asset bestaat niet of is niet aanvraagbaar.',
-    'assoc_users'	 	=> 'Dit asset is momenteel toegewezen aan een gebruiker en kan niet worden verwijderd. Controleer het asset eerst en probeer het opnieuw. ',
+    'assoc_users'	 	 => 'Dit asset is momenteel toegewezen aan een gebruiker en kan niet worden verwijderd. Controleer het asset eerst en probeer het opnieuw. ',
     'warning_audit_date_mismatch' 	=> 'De volgende auditdatum van dit asset (:next_audit_date) ligt vóór de laatste auditdatum (:last_audit_date). Gelieve de volgende auditdatum bij te werken.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Asset is niet aangemaakt, probeer het opnieuw :(',

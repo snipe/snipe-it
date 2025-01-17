@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Heerkaas waa la geyn karaa Hantidan waa la hubin karaa.',
     'processing_spinner' => 'Hagaajinta... (Tani waxa laga yaabaa inay wakhti yar ku qaadato faylalka waaweyn)',
     'optional_infos'  => 'Macluumaadka Ikhtiyaarka ah',
-    'order_details'   => 'Dalbo Macluumaadka La Xiriira'
+    'order_details'   => 'Dalbo Macluumaadka La Xiriira',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

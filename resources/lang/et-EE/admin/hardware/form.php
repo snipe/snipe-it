@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Selle vahendi olek lubab seda väljastada.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Valikuline teave',
-    'order_details'   => 'Tellimusega seonduv teave'
+    'order_details'   => 'Tellimusega seonduv teave',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

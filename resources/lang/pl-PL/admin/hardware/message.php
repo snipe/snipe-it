@@ -2,13 +2,16 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Uwaga:</strong> Ten nabytek został oznaczony jako obecnie nie przypisany. Jeśli jego status uległ zmianie proszę zaktualizować status nabytku.',
-    'does_not_exist' 	=> 'Nabytek/zasób nie istnieje.',
-    'does_not_exist_var'=> 'Nie znaleziono zasobu o tagu :asset_tag.',
-    'no_tag' 	        => 'Nie podano tagu zasobu.',
+    'undeployable' 		 => '<strong>Uwaga:</strong> Ten nabytek został oznaczony jako obecnie nie przypisany. Jeśli jego status uległ zmianie proszę zaktualizować status nabytku.',
+    'does_not_exist' 	 => 'Nabytek/zasób nie istnieje.',
+    'does_not_exist_var' => 'Nie znaleziono zasobu o tagu :asset_tag.',
+    'no_tag' 	         => 'Nie podano tagu zasobu.',
     'does_not_exist_or_not_requestable' => 'Aktywo nie istnieje albo nie można go zażądać.',
-    'assoc_users'	 	=> 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',
+    'assoc_users'	 	 => 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',
     'warning_audit_date_mismatch' 	=> 'Data następnego audytu (:next_audit_date) jest przed datą poprzedniego audytu (:last_audit_date). Zaktualizuj datę następnego audytu.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Nabytek nie został utworzony, proszę spróbować ponownie. :(',
@@ -60,7 +63,7 @@ return [
         'file_delete_success'   => 'Twój plik został poprawnie usunięty',
         'file_delete_error'      => 'Plik nie może zostać usunięty',
         'file_missing' => 'Brakuje wybranego pliku',
-        'file_already_deleted' => 'The file selected was already deleted',
+        'file_already_deleted' => 'Wybrany plik został już usunięty',
         'header_row_has_malformed_characters' => 'Jeden lub więcej atrybutów w wierszu nagłówka zawiera nieprawidłowe znaki UTF-8',
         'content_row_has_malformed_characters' => 'Jeden lub więcej atrybutów w pierwszym rzędzie zawartości zawiera nieprawidłowe znaki UTF-8',
     ],

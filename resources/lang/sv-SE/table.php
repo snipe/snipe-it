@@ -2,10 +2,10 @@
 
 return array(
 
-    'actions'	 	        => 'Handlingar',
-    'action' 		        => 'Handling',
+    'actions'	 	        => 'Åtgärder',
+    'action' 		        => 'Åtgärd',
     'by'      		        => 'Av',
-    'item' 			        => 'Artikel',
-    'no_matching_records'   => 'No matching records found',
+    'item' 			        => 'Objekt',
+    'no_matching_records'   => 'Inga matchande resultat',
 
 );

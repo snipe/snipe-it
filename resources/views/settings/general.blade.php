@@ -232,6 +232,23 @@
                        </div>
                    </div>
 
+                   <!-- Require Notes on checkin/checkout checkbox -->
+                   <div class="form-group">
+                       <div class="col-md-3">
+                           <label>
+                               {{ trans('admin/settings/general.require_checkinout_notes') }}
+                           </label>
+                       </div>
+                       <div class="col-md-8">
+                           <label class="form-control">
+                               <input type="checkbox" value="1" name="require_checkinout_notes" {{ (old('require_checkinout_notes', $setting->require_checkinout_notes)) == '1' ? ' checked="checked"' : '' }} aria-label="require_checkinout_notes">
+                               {{ trans('general.yes') }}
+                           </label>
+                               <p class="help-block">{{ trans('admin/settings/general.require_checkinout_notes_help_text') }}</p>
+                       </div>
+                   </div>
+                   <!-- /.form-group -->
+
 
                     <!-- login text -->
                     <div class="form-group {{ $errors->has('login_note') ? 'error' : '' }}">

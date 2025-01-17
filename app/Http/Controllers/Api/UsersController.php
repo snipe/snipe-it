@@ -20,6 +20,7 @@ use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -80,7 +81,16 @@ class UsersController extends Controller
             'users.website',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy', 'managesUsers', 'managedLocations')
-            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
+            ->withCount([
+                'assets as assets_count' => function(Builder $query) {
+                    $query->withoutTrashed();
+                },
+                'licenses as licenses_count',
+                'accessories as accessories_count',
+                'consumables as consumables_count',
+                'managesUsers as manages_users_count',
+                'managedLocations as manages_locations_count'
+            ]);
 
 
         if ($request->filled('search') != '') {
@@ -283,6 +293,7 @@ class UsersController extends Controller
                         'autoassign_licenses',
                         'website',
                         'locale',
+                        'notes',
                     ];
 
                 $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
@@ -480,10 +491,11 @@ class UsersController extends Controller
                 $user->permissions = $permissions_array;
             }
 
-            // Update the location of any assets checked out to this user
-            Asset::where('assigned_type', User::class)
-                ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
-
+            if($request->has('location_id')) {
+                // Update the location of any assets checked out to this user
+                Asset::where('assigned_type', User::class)
+                    ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
+            }
             app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
             if ($user->save()) {

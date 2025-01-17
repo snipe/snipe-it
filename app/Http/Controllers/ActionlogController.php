@@ -37,10 +37,16 @@ class ActionlogController extends Controller
         }
     }
 
-    public function getStoredEula($filename) : Response | BinaryFileResponse
+    public function getStoredEula($filename) : Response | BinaryFileResponse | RedirectResponse
     {
         $this->authorize('view', \App\Models\Asset::class);
         $file = config('app.private_uploads').'/eula-pdfs/'.$filename;
-        return response()->download($file);
+
+        if (Storage::exists('private_uploads/eula-pdfs/'.$filename)) {
+            return response()->download($file);
+        }
+
+        return redirect()->back()->with('error',  trans('general.file_does_not_exist'));
+
     }
 }

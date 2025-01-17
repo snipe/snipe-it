@@ -872,7 +872,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 <div class="1hidden-xs pull-left">
                     <div class="pull-left" >
                         <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <x-icon type="heart" style="color: #a94442; font-size: 10px" />
-                            <span class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+                            <span class="sr-only">love</span> by <a href="https://bsky.app/profile/snipeitapp.com" rel="noopener">@snipeitapp</a>.
                     </div>
                     <div class="pull-right">
                     @if ($snipeSettings->version_footer!='off')
@@ -996,8 +996,8 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
                     $(element).hasClass('select2') || $(element).hasClass('js-data-ajax')
-                        // If the element is a select2 then place the error above the input
-                        ? element.parents('.required').append(error)
+                        // If the element is a select2 then append the error to the parent div
+                        ? element.parent('div').append(error)
                         // Otherwise place it after
                         : error.insertAfter(element);
                 },

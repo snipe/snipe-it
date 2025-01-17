@@ -302,6 +302,7 @@ return [
     'username_format'		=> '用户名格式',
     'username'              => '用户名',
     'update'                => '更新',
+    'updating_item' => '正在更新 :item',
     'upload_filetypes_help'      => '允许的文件类型是 png, gif, jpg, jpeg, doc, doc, pdf, xls, xlsx, txt, lic, xml, zip, rtf 和 rar. 允许的最大上传大小是 :size.',
     'uploaded'              => '已上传',
     'user'					=> '用户',
@@ -565,5 +566,6 @@ return [
     'label' => '标签',
     'import_asset_tag_exists' => '资产标签为:asset_tag的资产已经存在，且未请求更新。没有做任何更改。',
     'countries_manually_entered_help' => '带星号(*) 的值是手动输入的，与现有的 ISO 3166 下拉值不匹配',
+    'accessories_assigned' => '已分配的配件',
 
 ];

@@ -73,7 +73,7 @@ RUN mkdir -p /var/www/.composer && chown apache /var/www/.composer
 
 # Install dependencies
 USER apache
-RUN COMPOSER_CACHE_DIR=/dev/null composer install --no-dev --working-dir=/var/www/html
+RUN COMPOSER_CACHE_DIR=/dev/null composer install --working-dir=/var/www/html
 
 USER root
 

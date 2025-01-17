@@ -3,7 +3,7 @@
 return [
 
     'does_not_exist' => 'Label status tidak ada.',
-    'deleted_label' => 'Deleted Status Label',
+    'deleted_label' => 'Label Status yang dihapus',
     'assoc_assets'	 => 'Saat ini label status tersebut terhubung dengan 1 aset dan tidak dapat di hapus. Silahkan perbarui aset anda sehingga tidak terhubung dan kemudian coba kembali. ',
 
     'create' => [

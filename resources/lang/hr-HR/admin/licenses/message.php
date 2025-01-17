@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'U licenci se provjeravala problem. Molim te pokušaj ponovno.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Licenca je uspješno provjerena'
     ),
 

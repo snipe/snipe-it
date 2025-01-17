@@ -23,7 +23,7 @@ class CheckinLicenseMail extends Mailable
     public function __construct(LicenseSeat $licenseSeat, $checkedOutTo, User $checkedInBy, $note)
     {
         $this->target = $checkedOutTo;
-        $this->item = $licenseSeat->license;
+        $this->item = $licenseSeat;
         $this->admin = $checkedInBy;
         $this->note = $note;
         $this->settings = Setting::getSettings();
@@ -34,7 +34,7 @@ class CheckinLicenseMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = new Address(env('MAIL_FROM_ADDR','service@snipe-it.io'));
+        $from = new Address(config('mail.from.address'), config('mail.from.name'));
 
         return new Envelope(
             from: $from,
@@ -50,7 +50,8 @@ class CheckinLicenseMail extends Mailable
         return new Content(
             markdown: 'mail.markdown.checkin-license',
             with:   [
-                'item'          => $this->item,
+                'license_seat'  => $this->item,
+                'license'       => $this->item->license,
                 'admin'         => $this->admin,
                 'note'          => $this->note,
                 'target'        => $this->target,

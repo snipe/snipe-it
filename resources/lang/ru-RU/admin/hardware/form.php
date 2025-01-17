@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Этот статус доступен для развертывания. Этот актив может быть привязан.',
     'processing_spinner' => 'Обработка... (Это может занять некоторое время на больших файлах)',
     'optional_infos'  => 'Дополнительная информация',
-    'order_details'   => 'Информация, связанная с заказом'
+    'order_details'   => 'Информация, связанная с заказом',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

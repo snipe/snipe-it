@@ -302,6 +302,7 @@ return [
     'username_format'		=> 'Format der Benutzernamen',
     'username'              => 'Benutzername',
     'update'                => 'Aktualisieren',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Erlaubte Dateitypen sind png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf und rar. Maximale Uploadgröße beträgt :size.',
     'uploaded'              => 'Hochgeladen',
     'user'					=> 'Benutzer',
@@ -560,10 +561,11 @@ return [
     'something_went_wrong' => 'Etwas ist bei Ihrer Anfrage schiefgegangen.',
     'close' => 'Schließen',
     'expires' => 'Ablaufdatum',
-    'map_fields'=> 'Feld :item_type zuordnen',
+    'map_fields'=> ':item_type Feld zuordnen',
     'remaining_var' => ':count verbleibend',
     'label' => 'Label',
     'import_asset_tag_exists' => 'Ein Asset mit dem Asset-Tag :asset_tag ist bereits vorhanden und es wurde keine Aktualisierung angefordert. Es wurden keine Änderungen vorgenommen.',
     'countries_manually_entered_help' => 'Werte mit einem Sternchen (*) wurden manuell eingegeben und stimmen nicht mit vorhandenen Dropdown-Werten nach ISO 3166 überein',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

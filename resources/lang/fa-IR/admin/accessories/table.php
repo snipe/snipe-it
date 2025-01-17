@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'شناسه',
     'require_acceptance'      	=> 'پذیرش',
     'title'      				=> 'نام وسیله',
-
-
 );

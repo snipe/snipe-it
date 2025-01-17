@@ -43,14 +43,14 @@
                 <td>{{ $asset->present()->name() }}</td>
                 <td>
                   @if ($asset->location)
-                  {{ $asset->location->name }}
+                  {{ $asset->location->present()->name() }}
+                  @elseif($asset->rtd_location)
+                  {{ $asset->defaultLoc->present()->name() }}
                   @endif
                 </td>
                 <td>
-
-                  {{ $asset->assigned_to }}
-                  @if ($asset->assignedTo)
-                  {{ $asset->assignedTo->present()->name()}}
+                  @if ($asset->assigned)
+                    {{ $asset->assigned->present()->name() }}
                   @endif
                 </td>
               </tr>

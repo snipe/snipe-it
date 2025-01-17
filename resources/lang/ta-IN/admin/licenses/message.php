@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'உரிமத்தில் சோதனை ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'உரிமம் வெற்றிகரமாக சரிபார்க்கப்பட்டது'
     ),
 

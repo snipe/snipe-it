@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => '繳回授權時發生問題，請重試。',
+        'not_reassignable' => 'License not reassignable',
         'success' => '繳回授權成功。'
     ),
 

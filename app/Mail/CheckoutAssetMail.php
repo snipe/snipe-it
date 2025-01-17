@@ -23,7 +23,7 @@ class CheckoutAssetMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $note, $acceptance)
+    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy,  $acceptance, $note)
     {
         $this->item = $asset;
         $this->admin = $checkedOutBy;
@@ -52,7 +52,7 @@ class CheckoutAssetMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        $from = new Address(env('MAIL_FROM_ADDR', 'service@snipe-it.io'));
+        $from = new Address(config('mail.from.address'), config('mail.from.name'));
 
         return new Envelope(
             from: $from,

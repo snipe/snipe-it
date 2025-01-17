@@ -21,10 +21,12 @@ class AssetCheckoutRequest extends Request
      */
     public function rules()
     {
+        $settings = \App\Models\Setting::getSettings();
+
         $rules = [
-            'assigned_user'         => 'required_without_all:assigned_asset,assigned_location',
-            'assigned_asset'        => 'required_without_all:assigned_user,assigned_location',
-            'assigned_location'     => 'required_without_all:assigned_user,assigned_asset',
+            'assigned_user' => 'numeric|nullable|required_without_all:assigned_asset,assigned_location',
+            'assigned_asset' => 'numeric|nullable|required_without_all:assigned_user,assigned_location',
+            'assigned_location' => 'numeric|nullable|required_without_all:assigned_user,assigned_asset',
             'status_id'             => 'exists:status_labels,id,deployable,1',
             'checkout_to_type'      => 'required|in:asset,location,user',
             'checkout_at' => [
@@ -35,7 +37,11 @@ class AssetCheckoutRequest extends Request
                 'nullable',
                 'date'
             ],
-        ];
+            ];
+
+            if($settings->require_checkinout_notes) {
+                $rules['note'] = 'required|string';
+            }
 
         return $rules;
     }

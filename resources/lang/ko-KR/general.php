@@ -302,6 +302,7 @@ return [
     'username_format'		=> '사용자명 형식',
     'username'              => '사용자명',
     'update'                => '갱신',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => '허용된 파일 형식은 png, gif, jpg, jpeg, doc, docx, pdf, xls, txt, lic, zip, rar 입니다. 최대 업로드 크기는 :size 입니다.',
     'uploaded'              => '업로드됨',
     'user'					=> '사용자',
@@ -560,10 +561,11 @@ return [
     'something_went_wrong' => 'Something went wrong with your request.',
     'close' => '닫기',
     'expires' => '만료',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Remaining',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];
