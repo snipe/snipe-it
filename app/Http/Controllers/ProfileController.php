@@ -99,9 +99,13 @@ class ProfileController extends Controller
      * User change email page.
      *
      */
-    public function password() : View
+    public function password() : View | RedirectResponse
     {
+
         $user = auth()->user();
+        if ($user->ldap_import=='1') {
+            return redirect()->route('account')->with('error', trans('admin/users/message.error.password_ldap'));
+        }
         return view('account/change-password', compact('user'));
     }
 
@@ -116,7 +120,7 @@ class ProfileController extends Controller
 
         $user = auth()->user();
         if ($user->ldap_import == '1') {
-            return redirect()->route('account.password.index')->with('error', trans('admin/users/message.error.password_ldap'));
+            return redirect()->route('account')->with('error', trans('admin/users/message.error.password_ldap'));
         }
 
         $rules = [

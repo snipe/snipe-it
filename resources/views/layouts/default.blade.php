@@ -373,12 +373,14 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                         </li>
                                         @endcan
 
+                                        @if (Auth::user()->ldap_import!='1')
                                         <li>
                                             <a href="{{ route('account.password.index') }}">
                                                 <x-icon type="password" class="fa-fw" />
                                                 {{ trans('general.changepassword') }}
                                             </a>
                                         </li>
+                                        @endif
 
 
                                         @can('self.api')
