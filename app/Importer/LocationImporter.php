@@ -38,7 +38,14 @@ class LocationImporter extends ItemImporter
     {
 
         $editingLocation = false;
-        $location = Location::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
+
+        if ($this->findCsvMatch($row, 'id')) {
+            $location = Location::find($this->findCsvMatch($row, 'id'));
+        } else {
+            $location = Location::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
+        }
+
+
 
         if ($location) {
             if (! $this->updating) {
