@@ -398,4 +398,15 @@ class AssetFactory extends Factory
             $asset->setValidating(true);
         });
     }
+
+    public function withComplicatedCustomFields()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => function () {
+                    return AssetModel::where('name', 'complicated')->first() ?? AssetModel::factory()->complicated();
+                }
+            ];
+        });
+    }
 }

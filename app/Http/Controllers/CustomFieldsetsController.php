@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\AssetModel;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
@@ -91,6 +92,8 @@ class CustomFieldsetsController extends Controller
         $fieldset = new CustomFieldset([
                 'name' => $request->get('name'),
                 'created_by' => auth()->id(),
+                'type' => Helper::$itemtypes_having_custom_fields[$request->get('tab')]
+                //                'sub' =>
         ]);
 
         $validator = Validator::make($request->all(), $fieldset->rules);
