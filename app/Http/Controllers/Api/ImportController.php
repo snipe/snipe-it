@@ -9,12 +9,14 @@ use App\Http\Transformers\ImportsTransformer;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Import;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Database\Eloquent\JsonEncodingException;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use League\Csv\Reader;
+use Onnov\DetectEncoding\EncodingDetector;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\JsonResponse;
@@ -45,6 +47,9 @@ class ImportController extends Controller
             $path = config('app.private_uploads').'/imports';
             $results = [];
             $import = new Import;
+            $detector = new EncodingDetector();
+
+            \Log::error("Okay, do we have files? ".count($files));
             foreach ($files as $file) {
                 if (! in_array($file->getMimeType(), [
                     'application/vnd.ms-excel',
@@ -55,7 +60,7 @@ class ImportController extends Controller
                     'text/comma-separated-values',
                     'text/tsv', ])) {
                     $results['error'] = 'File type must be CSV. Uploaded file is '.$file->getMimeType();
-
+                    \Log::error("Bad mime type");
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 422);
                 }
 
@@ -63,11 +68,34 @@ class ImportController extends Controller
                 if (! ini_get('auto_detect_line_endings')) {
                     ini_set('auto_detect_line_endings', '1');
                 }
+                $file_contents = $file->getContent(); //TODO - this *does* load the whole file in RAM, but we need that to be able to 'iconv' it?
+                $encoding = $detector->getEncoding($file_contents);
+                $reader = null;
+                if (strcasecmp($encoding, 'UTF-8') != 0) {
+                    \Log::error("Weird encoding detected: $encoding");
+                    $transliterated = iconv($encoding, 'UTF-8', $file_contents);
+                    if ($transliterated !== false) {
+                        \Log::error("Transliteration was successful.");
+                        $tmpname = tempnam(sys_get_temp_dir(), '');
+                        $tmpresults = file_put_contents($tmpname, $transliterated);
+                        if ($tmpresults !== false) {
+                            \Log::error("Temporary file written to $tmpname");
+                            $transliterated = null; //save on memory?
+                            $newfile = new UploadedFile($tmpname, $file->getClientOriginalName(), null, null, true); //WARNING: this is enabling 'test mode' - which is gross, but otherwise the file won't be treated as 'uploaded'
+                            if ($newfile->isValid()) {
+                                \Log::error("new UploadedFile was created");
+                                $file = $newfile;
+                            }
+                        }
+                    }
+                }
                 $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
+                $file_contents = null; //try to save on memory, I guess?
 
                 try {
                     $import->header_row = $reader->fetchOne(0);
                 } catch (JsonEncodingException $e) {
+                    \Log::error("cant load header row?");
                     return response()->json(
                         Helper::formatStandardApiResponse(
                             'error',
@@ -94,6 +122,7 @@ class ImportController extends Controller
                     }
                 }
                 if (count($duplicate_headers) > 0) {
+                    \Log::error("Duplicate headers?");
                     return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)),422);
                 }
 
@@ -101,6 +130,7 @@ class ImportController extends Controller
                     // Grab the first row to display via ajax as the user picks fields
                     $import->first_row = $reader->fetchOne(1);
                 } catch (JsonEncodingException $e) {
+                    \Log::error("JSON eocding reception?");
                     return response()->json(
                         Helper::formatStandardApiResponse(
                             'error',

@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use League\Csv\Reader;
 use Illuminate\Support\Facades\Log;
-use Onnov\DetectEncoding\EncodingDetector;
 
 abstract class Importer
 {
@@ -125,28 +124,11 @@ abstract class Importer
         if (! ini_get('auto_detect_line_endings')) {
             ini_set('auto_detect_line_endings', '1');
         }
-        $detector = new EncodingDetector();
-
         // By default the importer passes a url to the file.
         // However, for testing we also support passing a string directly
         if (is_file($file)) {
-            $file_contents = file_get_contents($file); // TODO - this loads up the file in memory! Which could be 'big' and thus, this could be 'bad'
-        } else {
-            $file_contents = $file;
-        }
-        $encoding = $detector->getEncoding($file_contents);
-        \Log::debug("DETECTED ENCODING IS: $encoding");
-        $file_contents = null; //try to save some memory?
-        if (is_file($file)) {
-            if ($encoding && strcasecmp($encoding, 'UTF-8') != 0) {
-                $file = "php://filter/convert.iconv.$encoding.utf-8/resource=".$file;
-            }
             $this->csv = Reader::createFromPath($file);
         } else {
-            //we already have the string, so do the conversion directly here?
-            if ($encoding && strcasecmp($encoding, 'UTF-8') != 0) {
-                $file = iconv($encoding, 'UTF-8', $file);
-            }
             $this->csv = Reader::createFromString($file);
         }
         $this->tempPassword = substr(str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 40);
