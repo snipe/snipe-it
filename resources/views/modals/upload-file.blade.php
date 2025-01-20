@@ -6,12 +6,11 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="uploadFileModalLabel">{{ trans('general.file_upload') }}</h4>
             </div>
-            {{ Form::open([
-            'method' => 'POST',
-            'route' => ['upload/'.$item_type, $item_id],
-            'files' => true,
-            'class' => 'form-horizontal' ]) }}
-            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+            <x-form
+                :route="route('upload/' . $item_type, $item_id)"
+                files
+                class="form-horizontal"
+            >
             <div class="modal-body">
 
                 <div class="row">
@@ -40,7 +39,7 @@
                 <a href="#" class="pull-left" data-dismiss="modal">{{ trans('button.cancel') }}</a>
                 <button type="submit" class="btn btn-primary">{{ trans('button.upload') }}</button>
             </div>
-            {{ Form::close() }}
+            </x-form>
         </div>
     </div>
 </div>

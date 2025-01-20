@@ -19,10 +19,9 @@
             @endif
         </div>
         <div class="btn-group mr-2" role="group">
-            {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
-            {{csrf_field()}}
+            <x-form :route="route('reports/unaccepted_assets')" class="form-horizontal">
             <button type="submit" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i> {{ trans('general.download_all') }}</button>
-            {{ Form::close() }}
+            </x-form>
         </div>
     </div>
 @stop

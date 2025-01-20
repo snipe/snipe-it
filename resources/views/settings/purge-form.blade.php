@@ -22,9 +22,12 @@
                         <x-icon type="warning"/>
                         {{ trans('admin/settings/general.purge') }}</h2>
                 </div>
-            {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
-            <!-- CSRF Token -->
-                {{csrf_field()}}
+            <x-form
+                :route="route('settings.purge.save')"
+                autocomplete="off"
+                class="form-horizontal"
+                role="form"
+            >
                 <div class="box-body">
                     <p>{{ trans('admin/settings/general.confirm_purge_help') }}</p>
                     <div class="col-md-3{{ $errors->has('confirm_purge') ? 'error' : '' }}">
@@ -45,11 +48,10 @@
                 <div class="box-footer text-right">
                     <button type="submit" class="btn btn-danger" {{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>{{ trans('admin/settings/general.purge') }}</button>
                 </div> <!--/box-footer-->
-                {{ Form::close() }}
+            </x-form>
             </div> <!--/.box-solid-->
         </div><!-- /.col-md-8-->
     </div><!--/.row-->
 
-    {{Form::close()}}
 
 @stop

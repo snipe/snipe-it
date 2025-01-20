@@ -19,7 +19,12 @@
     
 
     <div class="row">
-    {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'audit-form' ]) }}
+    <x-form
+        :route="route('assets.bulkaudit')"
+        class="form-horizontal"
+        role="form"
+        id="audit-form"
+    >
         <!-- left column -->
         <div class="col-md-6">
             <div class="box box-default">
@@ -92,7 +97,7 @@
 
 
 
-            {{Form::close()}}
+            </x-form>
         </div> <!--/.col-md-6-->
 
         <div class="col-md-6">

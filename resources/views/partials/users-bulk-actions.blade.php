@@ -3,11 +3,11 @@
 
         @if (request('status')!='deleted')
 
-            {{ Form::open([
-              'method' => 'POST',
-              'route' => ['users/bulkedit'],
-              'class' => 'form-inline',
-              'id' => 'usersBulkForm']) }}
+            <x-form
+                :route="route('users/bulkedit')"
+                class="form-inline"
+                id="usersBulkForm"
+            >
 
 
             <div id="users-toolbar" style="width:100% !important;">
@@ -28,7 +28,7 @@
                 </select>
                 <button class="btn btn-primary" id="bulkUserEditButton" disabled>{{ trans('button.go') }}</button>
             </div>
-            {{ Form::close() }}
+            </x-form>
         @endif
 
     </div>

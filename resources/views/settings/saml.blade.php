@@ -21,9 +21,13 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'false', 'class' => 'form-horizontal', 'role' => 'form']) }}
-    <!-- CSRF Token -->
-    {{csrf_field()}}
+
+    <x-form
+        :route="route('settings.saml.save')"
+        autocomplete="off"
+        class="form-horizontal"
+        role="form"
+    >
 
     <!-- this is a hack to prevent Chrome from trying to autocomplete fields -->
     <input type="text" name="prevent_autofill" id="prevent_autofill" value="" style="display:none;" />
@@ -187,7 +191,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </x-form>
 
 
 @stop

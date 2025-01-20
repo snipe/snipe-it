@@ -22,14 +22,11 @@
 @section('content')
 
     <!-- Horizontal Form -->
-    @if ($field->id)
-        {{ Form::open(['route' => ['fields.update', $field->id], 'class'=>'form-horizontal']) }}
-        {{ method_field('PUT') }}
-    @else
-        {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
-    @endif
-
-    @csrf
+    <x-form
+        :route="$field->id ? route('fields.update', $field->id) : route('fields.store')"
+        :method="$field->id ? 'PUT' : 'POST'"
+        class="form-horizontal"
+    >
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
@@ -263,7 +260,7 @@
 
 
 </div>
-{{ Form::close() }}
+</x-form>
 @stop
 
 @section('moar_scripts')

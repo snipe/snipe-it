@@ -1,9 +1,9 @@
 <div id="modelsBulkEditToolbar">
-    {{ Form::open([
-              'method' => 'POST',
-              'route' => ['models.bulkedit.index'],
-              'class' => 'form-inline',
-              'id' => 'modelsBulkForm']) }}
+    <x-form
+        :route="route('models.bulkedit.index')"
+        class="form-inline"
+        id="modelsBulkForm"
+    >
 
     @if (request('status')!='deleted')
         @can('delete', \App\Models\AssetModel::class)
@@ -17,7 +17,7 @@
             </div>
         @endcan
     @endif
-    {{ Form::close() }}
+    </x-form>
 </div>
 
 

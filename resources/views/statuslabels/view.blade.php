@@ -40,7 +40,6 @@
                                 </table>
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-                    {{ Form::close() }}
                 </div><!-- ./box-body -->
             </div><!-- /.box -->
         </div>

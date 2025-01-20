@@ -11,7 +11,12 @@
 
 <div class="row">
     <div class="col-md-9">
-    {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off']) }}
+    <x-form
+        :route="route('account.password.index')"
+        autocomplete="off"
+        class="form-horizontal"
+        files
+    >
     <!-- CSRF Token -->
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <div class="box box-default">
@@ -63,7 +68,7 @@
             </div>
 
         </div> <!-- .box-default -->
-        {{ Form::close() }}
+        </x-form>
     </div> <!-- .col-md-9 -->
 </div> <!-- .row-->
 @stop
