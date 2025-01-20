@@ -53,7 +53,11 @@
     @if ($parent)
         {{ $parent->present()->fullName() }}
     @endif
-
+<br>
+@if ($company)
+    <b>{{ trans('admin/companies/table.name') }}:</b> {{ $company->present()->Name() }}</b>
+<br>
+@endif
 @if ($manager)
     <b>{{ trans('general.manager') }}</b> {{ $manager->present()->fullName() }}<br>
 @endif
