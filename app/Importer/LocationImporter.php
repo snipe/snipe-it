@@ -103,6 +103,7 @@ class LocationImporter extends ItemImporter
         } else {
             Log::debug($location->getErrors());
             return $location->errors;
+            $this->logError($location, 'Location "'.$this->item['name'].'"');
         }
 
 
