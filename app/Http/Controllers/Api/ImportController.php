@@ -49,7 +49,6 @@ class ImportController extends Controller
             $import = new Import;
             $detector = new EncodingDetector();
 
-            \Log::error("Okay, do we have files? ".count($files));
             foreach ($files as $file) {
                 if (! in_array($file->getMimeType(), [
                     'application/vnd.ms-excel',
@@ -60,7 +59,6 @@ class ImportController extends Controller
                     'text/comma-separated-values',
                     'text/tsv', ])) {
                     $results['error'] = 'File type must be CSV. Uploaded file is '.$file->getMimeType();
-                    \Log::error("Bad mime type");
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 422);
                 }
 
@@ -72,18 +70,14 @@ class ImportController extends Controller
                 $encoding = $detector->getEncoding($file_contents);
                 $reader = null;
                 if (strcasecmp($encoding, 'UTF-8') != 0) {
-                    \Log::error("Weird encoding detected: $encoding");
                     $transliterated = iconv($encoding, 'UTF-8', $file_contents);
                     if ($transliterated !== false) {
-                        \Log::error("Transliteration was successful.");
                         $tmpname = tempnam(sys_get_temp_dir(), '');
                         $tmpresults = file_put_contents($tmpname, $transliterated);
                         if ($tmpresults !== false) {
-                            \Log::error("Temporary file written to $tmpname");
                             $transliterated = null; //save on memory?
                             $newfile = new UploadedFile($tmpname, $file->getClientOriginalName(), null, null, true); //WARNING: this is enabling 'test mode' - which is gross, but otherwise the file won't be treated as 'uploaded'
                             if ($newfile->isValid()) {
-                                \Log::error("new UploadedFile was created");
                                 $file = $newfile;
                             }
                         }
@@ -95,7 +89,6 @@ class ImportController extends Controller
                 try {
                     $import->header_row = $reader->fetchOne(0);
                 } catch (JsonEncodingException $e) {
-                    \Log::error("cant load header row?");
                     return response()->json(
                         Helper::formatStandardApiResponse(
                             'error',
@@ -122,7 +115,6 @@ class ImportController extends Controller
                     }
                 }
                 if (count($duplicate_headers) > 0) {
-                    \Log::error("Duplicate headers?");
                     return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)),422);
                 }
 
@@ -130,7 +122,6 @@ class ImportController extends Controller
                     // Grab the first row to display via ajax as the user picks fields
                     $import->first_row = $reader->fetchOne(1);
                 } catch (JsonEncodingException $e) {
-                    \Log::error("JSON eocding reception?");
                     return response()->json(
                         Helper::formatStandardApiResponse(
                             'error',
