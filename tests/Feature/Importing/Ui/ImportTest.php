@@ -43,7 +43,6 @@ class ImportTest extends TestCase
                     ]
                 ]
             ]);
-        \Log::error(print_r($results, true));
         $this->assertEquals($evil_string, $results->json()['files'][0]['first_row'][0]);
     }
 }
