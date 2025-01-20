@@ -594,7 +594,8 @@ class License extends Depreciable
     {
         $total = $this->licenseSeatsCount;
         $taken = $this->assigned_seats_count;
-        $diff = ($total - $taken);
+        $unreassignable = Helper::unReassignableCount($this);
+        $diff = ($total - $taken - $unreassignable);
 
         return (int) $diff;
     }
@@ -652,6 +653,7 @@ class License extends Depreciable
     {
         return  $this->licenseseats()
             ->whereNull('deleted_at')
+            ->where('unreassignable_seat', '=', false)
             ->where(function ($query) {
                 $query->whereNull('assigned_to')
                     ->whereNull('asset_id');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers;
 
+use App\Models\Actionlog;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use Illuminate\Support\Facades\Gate;
@@ -48,6 +49,7 @@ class LicenseSeatsTransformer
             'reassignable' => (bool) $seat->license->reassignable,
             'notes' => e($seat->notes),
             'user_can_checkout' => (($seat->assigned_to == '') && ($seat->asset_id == '')),
+            'disabled' => $seat->unreassignable_seat,
         ];
 
         if ($seat_count != 0) {
@@ -66,4 +68,17 @@ class LicenseSeatsTransformer
 
         return $array;
     }
+//    private function unReassignable($seat)
+//    {
+//        if (!$seat->license->reassignable) {
+//           $exists = Actionlog::where('action_type', '=', 'checkin from')
+//                ->where('item_id', '=', $seat->license->id)
+//                ->where('updated_at', '=', $seat->updated_at)
+//                ->exists();
+//           if($exists) {
+//               return true;
+//           }
+//            return false;
+//        }
+//    }
 }

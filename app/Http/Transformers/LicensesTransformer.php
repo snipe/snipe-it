@@ -7,7 +7,7 @@ use App\Models\License;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 
-class LicensesTransformer
+class  LicensesTransformer
 {
     public function transformLicenses(Collection $licenses, $total)
     {
@@ -37,7 +37,7 @@ class LicensesTransformer
             'notes' => Helper::parseEscapedMarkedownInline($license->notes),
             'expiration_date' => Helper::getFormattedDateObject($license->expiration_date, 'date'),
             'seats' => (int) $license->seats,
-            'free_seats_count' => (int) $license->free_seats_count,
+            'free_seats_count' => (int) $license->free_seats_count - Helper::unReassignableCount($license),
             'min_amt' => ($license->min_amt) ? (int) ($license->min_amt) : null,
             'license_name' =>  ($license->license_name) ? e($license->license_name) : null,
             'license_email' => ($license->license_email) ? e($license->license_email) : null,
