@@ -70,7 +70,13 @@
               {{ trans('admin/custom_fields/general.field_values') }}
             </label>
             <div class="col-md-8 required">
-              {!! Form::textarea('field_values', old('name', $field->field_values), ['style' => 'width: 100%', 'rows' => 4, 'class' => 'form-control', 'aria-label'=>'field_values']) !!}
+                <x-input.textarea
+                    name="field_values"
+                    :value="old('field_values', $field->field_values)"
+                    style="width: 100%"
+                    rows="4"
+                    aria-label="field_values"
+                />
               {!! $errors->first('field_values', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
               <p class="help-block">{{ trans('admin/custom_fields/general.field_values_help') }}</p>
             </div>
