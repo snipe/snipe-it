@@ -7,9 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,7 +43,7 @@ class UserFilesController extends Controller
                 $logAction = new Actionlog();
                 $logAction->item_id = $user->id;
                 $logAction->item_type = User::class;
-                $logAction->user_id = Auth::id();
+                $logAction->created_by = auth()->id();
                 $logAction->note = $request->input('notes');
                 $logAction->target_id = null;
                 $logAction->created_at = date("Y-m-d H:i:s");
@@ -116,31 +113,30 @@ class UserFilesController extends Controller
     public function show($userId = null, $fileId = null)
     {
 
+
         if (empty($fileId)) {
             return redirect()->route('users.show')->with('error', 'Invalid file request');
         }
 
-        $user = User::find($userId);
-
-        // the license is valid
-        if (isset($user->id)) {
+        if ($user = User::find($userId)) {
 
             $this->authorize('view', $user);
 
             if ($log = Actionlog::whereNotNull('filename')->where('item_id', $user->id)->find($fileId)) {
+                $file = 'private_uploads/users/'.$log->filename;
 
-                // Display the file inline
-                if (request('inline') == 'true') {
-                    $headers = [
-                        'Content-Disposition' => 'inline',
-                    ];
-                    return Storage::download('private_uploads/users/'.$log->filename, $log->filename, $headers);
+                try {
+                    return StorageHelper::showOrDownloadFile($file, $log->filename);
+                } catch (\Exception $e) {
+                    return redirect()->route('users.show', ['user' => $user])->with('error',  trans('general.file_not_found'));
                 }
-
-                return Storage::download('private_uploads/users/'.$log->filename);
             }
 
-            return redirect()->route('users.index')->with('error',  trans('admin/users/message.log_record_not_found'));
+            // The log record doesn't exist somehow
+            return redirect()->route('users.show', ['user' => $user])->with('error',  trans('general.log_record_not_found'));
+
+
+            return redirect()->back()->with('error',  trans('general.file_not_found'));
         }
 
         // Redirect to the user management page if the user doesn't exist

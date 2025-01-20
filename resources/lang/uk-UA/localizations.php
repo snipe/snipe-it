@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Оберіть мову',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Англійська, США',
         'en-GB'=> 'Англійська, Великобританія',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Виберіть країну',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Острів Вознесіння',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Естонія',
         'EG'=>'Египет',
+        'GB-ENG'=>'England',
         'ER'=>'Еритрея',
         'ES'=>'Іспанія',
         'ET'=>'Ethiopia',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Нідерланди',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Норвегія',
         'NP'=>'Непал',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Російська Федерація',
         'RW'=>'Rwanda',
         'SA'=>'Саудівська Аравія',
-        'UK'=>'Шотландія',
+        'GB-SCT'=>'Шотландія',
         'SB'=>'Соломонові острови',
         'SC'=>'Seychelles',
         'SS'=>'Південний Судан',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Віргінські острови (США)',
         'VN'=>'Viet Nam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Уолліс і Футуна',
         'WS'=>'Samoa',
         'YE'=>'Ємен',

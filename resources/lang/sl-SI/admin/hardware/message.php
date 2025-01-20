@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Sredstvo ne obstaja.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'To sredstvo je trenutno izdano uporabniku in ga ni mogoče izbrisati. Najprej preverite sredstvo in poskusite znova izbrisati. ',
+    'undeployable' 		 => '<strong>Opozorilo: </strong> To sredstvo je bilo označeno kot trenutno nerazdeljeno. Če se je ta status spremenil, posodobite status sredstva.',
+    'does_not_exist' 	 => 'Sredstvo ne obstaja.',
+    'does_not_exist_var' => 'Sredstvo z oznako :oznaka_sredstva ni bilo najdeno.',
+    'no_tag' 	         => 'Oznaka sredstva ni podana.',
+    'does_not_exist_or_not_requestable' => 'To sredstvo ne obstaja ali ga ni mogoče zahtevati.',
+    'assoc_users'	 	 => 'To sredstvo je trenutno izdano uporabniku in ga ni mogoče izbrisati. Najprej preverite sredstvo in poskusite znova izbrisati. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Sredstvo ni bilo ustvarjeno, poskusite znova. :(',
         'success' 		=> 'Sredstvo je uspešno ustvarjeno. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -21,15 +26,15 @@ return [
         'success' 			=> 'Sredstvo je uspešno posodobljeno.',
         'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
         'nothing_updated'	=>  'Nobeno polje ni bilo izbrana, zato nebo nič posodobljeno.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
-        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
+        'no_assets_selected'  =>  'Nobena sredstva niso bila izbrana, zato ni bilo nič izbrisanih.',
+        'assets_do_not_exist_or_are_invalid' => 'Izbrana sredstva ni mogoče posodobiti.',
     ],
 
     'restore' => [
         'error'   		=> 'Sredstvo ni bilo obnovljeno, poskusite znova',
         'success' 		=> 'Sredstvo je bilo uspešno obnovljeno.',
         'bulk_success' 		=> 'Sredstvo je bilo uspešno obnovljeno.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'nothing_updated'   => 'Nobeno sredstvo ni bilo izbran, zato nebo nič obnovljeno.', 
     ],
 
     'audit' => [
@@ -57,7 +62,7 @@ return [
         'success'               => 'Vaša datoteka je bila uvožena',
         'file_delete_success'   => 'Vaša datoteka je bila uspešno izbrisana',
         'file_delete_error'      => 'Datoteke ni bilo mogoče izbrisati',
-        'file_missing' => 'The file selected is missing',
+        'file_missing' => 'Izbrana datoteka manjka',
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
@@ -77,6 +82,11 @@ return [
         'user_does_not_exist' => 'Ta uporabnik ni veljaven. Prosim poskusite ponovno.',
         'not_available' => 'To sredstvo ni na voljo za izdajo!',
         'no_assets_selected' => 'Na seznamu morate izbrati vsaj eno sredstev',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

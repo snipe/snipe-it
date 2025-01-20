@@ -534,7 +534,7 @@ class UpdateAssetTest extends TestCase
             'company_id' => $companyB->id,
         ]);
         $asset = Asset::factory()->create([
-            'user_id'    => $userA->id,
+            'created_by'    => $userA->id,
             'company_id' => $companyA->id,
         ]);
 

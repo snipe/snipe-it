@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Asset;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Console\Command;
@@ -53,18 +54,22 @@ class LdapSync extends Command
 
         ini_set('max_execution_time', env('LDAP_TIME_LIM', 600)); //600 seconds = 10 minutes
         ini_set('memory_limit', env('LDAP_MEM_LIM', '500M'));
-        $ldap_result_username = Setting::getSettings()->ldap_username_field;
-        $ldap_result_last_name = Setting::getSettings()->ldap_lname_field;
-        $ldap_result_first_name = Setting::getSettings()->ldap_fname_field;
-        $ldap_result_active_flag = Setting::getSettings()->ldap_active_flag;
-        $ldap_result_emp_num = Setting::getSettings()->ldap_emp_num;
-        $ldap_result_email = Setting::getSettings()->ldap_email;
-        $ldap_result_phone = Setting::getSettings()->ldap_phone_field;
-        $ldap_result_jobtitle = Setting::getSettings()->ldap_jobtitle;
-        $ldap_result_country = Setting::getSettings()->ldap_country;
-        $ldap_result_location = Setting::getSettings()->ldap_location;
-        $ldap_result_dept = Setting::getSettings()->ldap_dept;
-        $ldap_result_manager = Setting::getSettings()->ldap_manager;
+
+        $ldap_map = [
+            "username" => Setting::getSettings()->ldap_username_field,
+            "last_name" => Setting::getSettings()->ldap_lname_field,
+            "first_name" => Setting::getSettings()->ldap_fname_field,
+            "active_flag" => Setting::getSettings()->ldap_active_flag,
+            "emp_num" => Setting::getSettings()->ldap_emp_num,
+            "email" => Setting::getSettings()->ldap_email,
+            "phone" => Setting::getSettings()->ldap_phone_field,
+            "jobtitle" => Setting::getSettings()->ldap_jobtitle,
+            "country" => Setting::getSettings()->ldap_country,
+            "location" => Setting::getSettings()->ldap_location,
+            "dept" => Setting::getSettings()->ldap_dept,
+            "manager" => Setting::getSettings()->ldap_manager,
+        ];
+
         $ldap_default_group = Setting::getSettings()->ldap_default_group;
         $search_base = Setting::getSettings()->ldap_base_dn;
 
@@ -107,14 +112,21 @@ class LdapSync extends Command
             }
 
             /**
-             * If a filter has been specified, use that
+             * If a filter has been specified, use that, otherwise default to null
              */
             if ($this->option('filter') != '') {
-                $results = Ldap::findLdapUsers($search_base, -1, $this->option('filter'));
+                $filter = $this->option('filter');
             } else {
-                $results = Ldap::findLdapUsers($search_base);
+                $filter = null;
             }
-            
+
+            /**
+             * We only need to request the LDAP attributes that we process
+             */
+            $attributes = array_values(array_filter($ldap_map));
+
+            $results = Ldap::findLdapUsers($search_base, -1, $filter, $attributes);
+
         } catch (\Exception $e) {
             if ($this->option('json_summary')) {
                 $json_summary = ['error' => true, 'error_message' => $e->getMessage(), 'summary' => []];
@@ -126,23 +138,24 @@ class LdapSync extends Command
         }
 
         /* Determine which location to assign users to by default. */
-        $location = null; // TODO - this would be better called "$default_location", which is more explicit about its purpose
+        $default_location = null;
         if ($this->option('location') != '') {
-            if ($location = Location::where('name', '=', $this->option('location'))->first()) {
+            if ($default_location = Location::where('name', '=', $this->option('location'))->first()) {
                 Log::debug('Location name ' . $this->option('location') . ' passed');
-                Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
+                Log::debug('Importing to '.$default_location->name.' ('.$default_location->id.')');
             }
 
         } elseif ($this->option('location_id')) {
+            //TODO - figure out how or why this is an array?
             foreach($this->option('location_id') as $location_id) {
-                if ($location = Location::where('id', '=', $location_id)->first()) {
+                if ($default_location = Location::where('id', '=', $location_id)->first()) {
                     Log::debug('Location ID ' . $location_id . ' passed');
-                    Log::debug('Importing to ' . $location->name . ' (' . $location->id . ')');
+                    Log::debug('Importing to '.$default_location->name.' ('.$default_location->id.')');
                 }
 
             }
         }
-        if (! isset($location)) {
+        if (!isset($default_location)) {
             Log::debug('That location is invalid or a location was not provided, so no location will be assigned by default.');
         }
 
@@ -183,17 +196,17 @@ class LdapSync extends Command
                 }
                 $usernames = [];
                 for ($i = 0; $i < $location_users['count']; $i++) {
-                    if (array_key_exists($ldap_result_username, $location_users[$i])) {
+                    if (array_key_exists($ldap_map["username"], $location_users[$i])) {
                         $location_users[$i]['ldap_location_override'] = true;
                         $location_users[$i]['location_id'] = $ldap_loc['id'];
-                        $usernames[] = $location_users[$i][$ldap_result_username][0];
+                        $usernames[] = $location_users[$i][$ldap_map["username"]][0];
                     }
                 }
 
                 // Delete located users from the general group.
                 foreach ($results as $key => $generic_entry) {
-                    if ((is_array($generic_entry)) && (array_key_exists($ldap_result_username, $generic_entry))) {
-                        if (in_array($generic_entry[$ldap_result_username][0], $usernames)) {
+                    if ((is_array($generic_entry)) && (array_key_exists($ldap_map["username"], $generic_entry))) {
+                        if (in_array($generic_entry[$ldap_map["username"]][0], $usernames)) {
                             unset($results[$key]);
                         }
                     }
@@ -218,77 +231,78 @@ class LdapSync extends Command
 
 
         for ($i = 0; $i < $results['count']; $i++) {
-                $item = [];
-                $item['username'] = $results[$i][$ldap_result_username][0] ?? '';
-                $item['employee_number'] = $results[$i][$ldap_result_emp_num][0] ?? '';
-                $item['lastname'] = $results[$i][$ldap_result_last_name][0] ?? '';
-                $item['firstname'] = $results[$i][$ldap_result_first_name][0] ?? '';
-                $item['email'] = $results[$i][$ldap_result_email][0] ?? '';
-                $item['ldap_location_override'] = $results[$i]['ldap_location_override'] ?? '';
-                $item['location_id'] = $results[$i]['location_id'] ?? '';
-                $item['telephone'] = $results[$i][$ldap_result_phone][0] ?? '';
-                $item['jobtitle'] = $results[$i][$ldap_result_jobtitle][0] ?? '';
-                $item['country'] = $results[$i][$ldap_result_country][0] ?? '';
-                $item['department'] = $results[$i][$ldap_result_dept][0] ?? '';
-                $item['manager'] = $results[$i][$ldap_result_manager][0] ?? '';
-                $item['location'] = $results[$i][$ldap_result_location][0] ?? '';
+            $item = [];
+            $item['username'] = $results[$i][$ldap_map["username"]][0] ?? '';
+            $item['employee_number'] = $results[$i][$ldap_map["emp_num"]][0] ?? '';
+            $item['lastname'] = $results[$i][$ldap_map["last_name"]][0] ?? '';
+            $item['firstname'] = $results[$i][$ldap_map["first_name"]][0] ?? '';
+            $item['email'] = $results[$i][$ldap_map["email"]][0] ?? '';
+            $item['ldap_location_override'] = $results[$i]['ldap_location_override'] ?? '';
+            $item['location_id'] = $results[$i]['location_id'] ?? '';
+            $item['telephone'] = $results[$i][$ldap_map["phone"]][0] ?? '';
+            $item['jobtitle'] = $results[$i][$ldap_map["jobtitle"]][0] ?? '';
+            $item['country'] = $results[$i][$ldap_map["country"]][0] ?? '';
+            $item['department'] = $results[$i][$ldap_map["dept"]][0] ?? '';
+            $item['manager'] = $results[$i][$ldap_map["manager"]][0] ?? '';
+            $item['location'] = $results[$i][$ldap_map["location"]][0] ?? '';
+            $location = $default_location; //initially, set '$location' to the default_location (which may just be `null`)
 
-                // ONLY if you are using the "ldap_location" option *AND* you have an actual result
-                if ($ldap_result_location && $item['location']) {
-                        $location = Location::firstOrCreate([
-                                'name' => $item['location'],
-                        ]);
-                }
-                $department = Department::firstOrCreate([
-                    'name' => $item['department'],
+            // ONLY if you are using the "ldap_location" option *AND* you have an actual result
+            if ($ldap_map["location"] && $item['location']) {
+                $location = Location::firstOrCreate([
+                    'name' => $item['location'],
                 ]);
+            }
+            $department = Department::firstOrCreate([
+                'name' => $item['department'],
+            ]);
 
-                $user = User::where('username', $item['username'])->first();
-                if ($user) {
-                    // Updating an existing user.
-                    $item['createorupdate'] = 'updated';
-                } else {
-                    // Creating a new user.
-                    $user = new User;
-                    $user->password = $user->noPassword();
-                    $user->locale = app()->getLocale();
-                    $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
-                    $item['createorupdate'] = 'created';
-                }
+            $user = User::where('username', $item['username'])->first();
+            if ($user) {
+                // Updating an existing user.
+                $item['createorupdate'] = 'updated';
+            } else {
+                // Creating a new user.
+                $user = new User;
+                $user->password = $user->noPassword();
+                $user->locale = app()->getLocale();
+                $user->activated = 1; // newly created users can log in by default, unless AD's UAC is in use, or an active flag is set (below)
+                $item['createorupdate'] = 'created';
+            }
 
             //If a sync option is not filled in on the LDAP settings don't populate the user field
-            if($ldap_result_username  != null){
+            if($ldap_map["username"]  != null){
                 $user->username = $item['username'];
             }
-            if($ldap_result_last_name != null){
+            if($ldap_map["last_name"] != null){
                 $user->last_name = $item['lastname'];
             }
-            if($ldap_result_first_name != null){
+            if($ldap_map["first_name"] != null){
                 $user->first_name = $item['firstname'];
             }
-            if($ldap_result_emp_num  != null){
+            if($ldap_map["emp_num"]  != null){
                 $user->employee_num = e($item['employee_number']);
             }
-            if($ldap_result_email != null){
+            if($ldap_map["email"] != null){
                 $user->email = $item['email'];
             }
-            if($ldap_result_phone != null){
+            if($ldap_map["phone"] != null){
                 $user->phone = $item['telephone'];
             }
-            if($ldap_result_jobtitle != null){
+            if($ldap_map["jobtitle"] != null){
                 $user->jobtitle = $item['jobtitle'];
             }
-            if($ldap_result_country != null){
+            if($ldap_map["country"] != null){
                 $user->country = $item['country'];
             }
-            if($ldap_result_dept  != null){
+            if($ldap_map["dept"]  != null){
                 $user->department_id = $department->id;
             }
-            if($ldap_result_location != null){
-                $user->location_id = $location ? $location->id : null;
+            if($ldap_map["location"] != null){
+                $user->location_id = $location?->id;
             }
 
-            if($ldap_result_manager != null){
+            if($ldap_map["manager"] != null){
                 if($item['manager'] != null) {
                     // Check Cache first
                     if (isset($manager_cache[$item['manager']])) {
@@ -305,63 +319,70 @@ class LdapSync extends Command
                             $ldap_manager = [
                                 "count" => 1,
                                 0 => [
-                                    $ldap_result_username => [$item['manager']]
+                                    $ldap_map["username"] => [$item['manager']]
                                 ]
                             ];
                         }
-
+                        
+                        $add_manager_to_cache = true;
                         if ($ldap_manager["count"] > 0) {
+                            try {
+                                // Get the Manager's username
+                                // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
+                                $ldapManagerUsername = $ldap_manager[0][$ldap_map["username"]][0];
 
-                            // Get the Manager's username
-                            // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
-                            $ldapManagerUsername = $ldap_manager[0][$ldap_result_username][0];
+                                // Get User from Manager username.
+                                $ldap_manager = User::where('username', $ldapManagerUsername)->first();
 
-                            // Get User from Manager username.
-                            $ldap_manager = User::where('username', $ldapManagerUsername)->first();
-
-                            if ($ldap_manager && isset($ldap_manager->id)) {
-                                // Link user to manager id.
-                                $user->manager_id = $ldap_manager->id;
+                                if ($ldap_manager && isset($ldap_manager->id)) {
+                                    // Link user to manager id.
+                                    $user->manager_id = $ldap_manager->id;
+                                }
+                            } catch (\Exception $e) {
+                                $add_manager_to_cache = false;
+                                \Log::warning('Handling ldap manager ' . $item['manager'] . ' caused an exception: ' . $e->getMessage() . '. Continuing synchronization.');
                             }
                         }
-                        $manager_cache[$item['manager']] = $ldap_manager && isset($ldap_manager->id)  ? $ldap_manager->id : null; // Store results in cache, even if 'failed'
+                        if ($add_manager_to_cache) {
+                            $manager_cache[$item['manager']] = $ldap_manager && isset($ldap_manager->id)  ? $ldap_manager->id : null; // Store results in cache, even if 'failed'
+                        }
 
                     }
                 }
             }
 
-                // Sync activated state for Active Directory.
-                if ( !empty($ldap_result_active_flag)) { // IF we have an 'active' flag set....
-                    // ....then *most* things that are truthy will activate the user. Anything falsey will deactivate them.
-                    // (Specifically, we don't handle a value of '0.0' correctly)
-                    $raw_value = @$results[$i][$ldap_result_active_flag][0];
-                    $filter_var = filter_var($raw_value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
-                    $boolean_cast = (bool)$raw_value;
+            // Sync activated state for Active Directory.
+            if (!empty($ldap_map["active_flag"])) { // IF we have an 'active' flag set....
+                // ....then *most* things that are truthy will activate the user. Anything falsey will deactivate them.
+                // (Specifically, we don't handle a value of '0.0' correctly)
+                $raw_value = @$results[$i][$ldap_map["active_flag"]][0];
+                $filter_var = filter_var($raw_value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+                $boolean_cast = (bool) $raw_value;
 
-                    $user->activated = $filter_var ?? $boolean_cast; // if filter_var() was true or false, use that. If it's null, use the $boolean_cast
+                $user->activated = $filter_var ?? $boolean_cast; // if filter_var() was true or false, use that. If it's null, use the $boolean_cast
 
-                } elseif (array_key_exists('useraccountcontrol', $results[$i]) ) {
-                    // ....otherwise, (ie if no 'active' LDAP flag is defined), IF the UAC setting exists,
-                    // ....then use the UAC setting on the account to determine can-log-in vs. cannot-log-in
+            } elseif (array_key_exists('useraccountcontrol', $results[$i])) {
+                // ....otherwise, (ie if no 'active' LDAP flag is defined), IF the UAC setting exists,
+                // ....then use the UAC setting on the account to determine can-log-in vs. cannot-log-in
 
 
-                   /* The following is _probably_ the correct logic, but we can't use it because
-                       some users may have been dependent upon the previous behavior, and this
-                       could cause additional access to be available to users they don't want
-                       to allow to log in.
+                /* The following is _probably_ the correct logic, but we can't use it because
+                    some users may have been dependent upon the previous behavior, and this
+                    could cause additional access to be available to users they don't want
+                    to allow to log in.
 
-                    $useraccountcontrol = $results[$i]['useraccountcontrol'][0];
-                    if(
-                        // based on MS docs at: https://support.microsoft.com/en-us/help/305144/how-to-use-useraccountcontrol-to-manipulate-user-account-properties
-                        ($useraccountcontrol & 0x200) && // is a NORMAL_ACCOUNT
-                        !($useraccountcontrol & 0x02) && // *and* _not_ ACCOUNTDISABLE
-                        !($useraccountcontrol & 0x10)    // *and* _not_ LOCKOUT
-                    ) {
-                        $user->activated = 1;
-                    } else {
-                        $user->activated = 0;
-                    } */
-                    $enabled_accounts = [
+                 $useraccountcontrol = $results[$i]['useraccountcontrol'][0];
+                 if(
+                     // based on MS docs at: https://support.microsoft.com/en-us/help/305144/how-to-use-useraccountcontrol-to-manipulate-user-account-properties
+                     ($useraccountcontrol & 0x200) && // is a NORMAL_ACCOUNT
+                     !($useraccountcontrol & 0x02) && // *and* _not_ ACCOUNTDISABLE
+                     !($useraccountcontrol & 0x10)    // *and* _not_ LOCKOUT
+                 ) {
+                     $user->activated = 1;
+                 } else {
+                     $user->activated = 0;
+                 } */
+                $enabled_accounts = [
                     '512',    //     0x200 NORMAL_ACCOUNT
                     '544',    //     0x220 NORMAL_ACCOUNT, PASSWD_NOTREQD
                     '66048',  //   0x10200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD
@@ -374,44 +395,55 @@ class LdapSync extends Command
                     '4260352', // 0x410200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, DONT_REQ_PREAUTH
                     '1049088', // 0x100200 NORMAL_ACCOUNT, NOT_DELEGATED
                     '1114624', // 0x110200 NORMAL_ACCOUNT, DONT_EXPIRE_PASSWORD, NOT_DELEGATED,
-                  ];
-                    $user->activated = (in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts)) ? 1 : 0;
+                ];
+                $user->activated = (in_array($results[$i]['useraccountcontrol'][0], $enabled_accounts)) ? 1 : 0;
 
                 // If we're not using AD, and there isn't an activated flag set, activate all users
-                } /* implied 'else' here - leave the $user->activated flag alone. Newly-created accounts will be active.
-                already-existing accounts will be however the administrator has set them */
+            } /* implied 'else' here - leave the $user->activated flag alone. Newly-created accounts will be active.
+            already-existing accounts will be however the administrator has set them */
 
 
-                if ($item['ldap_location_override'] == true) {
-                    $user->location_id = $item['location_id'];
-                } elseif ((isset($location)) && (! empty($location))) {
-                    if ((is_array($location)) && (array_key_exists('id', $location))) {
-                        $user->location_id = $location['id'];
-                    } elseif (is_object($location)) {
-                        $user->location_id = $location->id;
+            if ($item['ldap_location_override'] == true) {
+                $user->location_id = $item['location_id'];
+            } elseif ((isset($location)) && (!empty($location))) {
+                if ((is_array($location)) && (array_key_exists('id', $location))) {
+                    $user->location_id = $location['id'];
+                } elseif (is_object($location)) {
+                    $user->location_id = $location->id; //THIS is the magic line, this should do it.
+                }
+            }
+            // TODO - should we be NULLING locations if $location is really `null`, and that's what we came up with?
+            // will that conflict with any overriding setting that the user set? Like, if they moved someone from
+            // the 'null' location to somewhere, we wouldn't want to try to override that, right?
+            $location = null;
+            $user->ldap_import = 1;
+
+            $errors = '';
+
+            if ($user->save()) {
+                $item['note'] = $item['createorupdate'];
+                $item['status'] = 'success';
+                if ($item['createorupdate'] === 'created' && $ldap_default_group) {
+                    $user->groups()->attach($ldap_default_group);
+                }
+                //updates assets location based on user's location
+                if ($user->wasChanged('location_id')) {
+                    foreach ($user->assets as $asset) {
+                        $asset->location_id = $user->location_id;
+                        // TODO: somehow add note? "Asset Location Changed because of thing"
+                        $asset->save();
                     }
                 }
-                $location = null;
-                $user->ldap_import = 1;
 
-                $errors = '';
-
-                if ($user->save()) {
-                    $item['note'] = $item['createorupdate'];
-                    $item['status'] = 'success';
-                    if ( $item['createorupdate'] === 'created' && $ldap_default_group) {
-                         $user->groups()->attach($ldap_default_group);
-                    }
-
-                } else {
-                    foreach ($user->getErrors()->getMessages() as $key => $err) {
-                        $errors .= $err[0];
-                    }
-                    $item['note'] = $errors;
-                    $item['status'] = 'error';
+            } else {
+                foreach ($user->getErrors()->getMessages() as $key => $err) {
+                    $errors .= $err[0];
                 }
+                $item['note'] = $errors;
+                $item['status'] = 'error';
+            }
 
-                array_push($summary, $item);
+            array_push($summary, $item);
         }
 
         if ($this->option('summary')) {

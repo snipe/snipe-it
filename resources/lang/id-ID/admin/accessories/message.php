@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'Aksesori [:id] tidak ada.',
-    'not_found' => 'That accessory was not found.',
+    'not_found' => 'Aksesori tersebut tidak ditemukan.',
     'assoc_users'	 => 'Aksesori ini saat ini memiliki: count item yang dikeluarkan ke pengguna. Silakan periksa di aksesoris dan dan coba lagi. . Silakan periksa di aksesoris dan dan coba lagi. ',
 
     'create' => array(
@@ -25,10 +25,10 @@ return array(
      'checkout' => array(
         'error'   		=> 'Aksesori ini belum dikeluarkan, silahkan coba kembali',
         'success' 		=> 'Aksesori telah berhasil dikeluarkan.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
+        'unavailable'   => 'Aksesori tidak tersedia untuk dipinjam atau diambil. Periksa jumlah yang tersedia',
         'user_does_not_exist' => 'Terdapat kesalahan pada user ini. Silahkan coba kembali.',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => 'Saat ini hanya ada satu aksesori jenis ini yang tersedia, dan Anda mencoba meminjam atau mengambil :checkout_qty. Harap sesuaikan jumlah pinjaman-pengambilan atau total stok aksesori ini dan coba lagi.|Terdapat :number_currently_remaining total aksesori yang tersedia, dan Anda mencoba meminjam atau mengambil :checkout_qty. Harap sesuaikan jumlah pinjaman-pengambilan atau total stok aksesori ini dan coba lagi.',
             ),
            
     ),

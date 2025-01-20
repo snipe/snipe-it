@@ -37,7 +37,7 @@ return array(
     'delete' => array(
         'confirm'   => '¿Está seguro de que desea eliminar esta licencia?',
         'error'   => 'Hubo un problema al eliminar la licencia. Por favor, inténtelo de nuevo.',
-        'success' => 'Categoría eliminada.'
+        'success' => 'La licencia se ha eliminado correctamente.'
     ),
 
     'checkout' => array(
@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Hubo un problema ingresando la licencia. Por favor, inténtelo de nuevo.',
+        'not_reassignable' => 'La licencia no se puede volver a asignar',
         'success' => 'La licencia fue ingresada correctamente'
     ),
 

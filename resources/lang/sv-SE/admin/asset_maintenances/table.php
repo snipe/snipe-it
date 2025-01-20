@@ -1,8 +1,8 @@
 <?php
 
     return [
-        'title'         => 'Inventarieunderhåll',
-        'asset_name'    => 'Namn på tillgång',
+        'title'         => 'Tillgångsunderhåll',
+        'asset_name'    => 'Företagsnamn',
         'is_warranty'   => 'Garanti',
-        'dl_csv'        => 'Ladda ner CSV',
+        'dl_csv'        => 'Ladda ned CSV',
     ];

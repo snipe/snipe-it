@@ -6,7 +6,7 @@ return array(
     'declined'                  => '您已拒絕這項資產。',
     'bulk_manager_warn'	        => '您的使用者已成功更新，但主管條目未保存，因為您選擇的主管也在要編輯的使用者列表中，使用者不能是自己的主管。 請再次選擇您的使用者並排除主管。',
     'user_exists'               => '使用者已存在！',
-    'user_not_found'            => '找不到使用者。',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => '登入欄位是必需的',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => '密碼欄位是必需的',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => '查詢 LDAP 伺服器失敗，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'ldap_could_not_get_entries' => ' LDAP 伺服器取得資訊條目失敗，請檢查 LDAP 設定文件中的相關設定。<br>LDAP 伺服器錯誤訊息：',
         'password_ldap' => '此帳戶的密碼由 LDAP/AD 管理。若要更改您的密碼，請聯繫您的 IT 部門。 ',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

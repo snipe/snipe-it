@@ -114,6 +114,7 @@ class UserImporter extends ItemImporter
 
         $this->log('No matching user, creating one');
         $user = new User();
+        $user->created_by = auth()->id();
         $user->fill($this->sanitizeItemForStoring($user));
 
         if ($user->save()) {
@@ -165,7 +166,7 @@ class UserImporter extends ItemImporter
 
         $department = new department();
         $department->name = $department_name;
-        $department->user_id = $this->user_id;
+        $department->created_by = $this->created_by;
 
         if ($department->save()) {
             $this->log('department ' . $department_name . ' was created');

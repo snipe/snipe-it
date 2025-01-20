@@ -90,12 +90,21 @@
                         </div>
 
 
-                        <!-- language -->
+                        <!-- Language -->
                         <div class="form-group {{ $errors->has('locale') ? 'has-error' : '' }}">
                             <label class="col-md-3 control-label" for="locale">{{ trans('general.language') }}</label>
                             <div class="col-md-8">
-                                {!! Form::locales('locale', old('locale', $user->locale), 'select2') !!}
+                                {!! Form::locales('locale', old('locale', ''), 'select2') !!}
                                 {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class=" col-md-9 col-md-offset-3">
+                                <label class="form-control">
+                                    {{ Form::checkbox('null_locale', '1', false) }}
+                                    {{ trans_choice('general.set_users_field_to_null', count($users), ['field' => trans('general.language'), 'user_count' => count($users)]) }}
+                                </label>
                             </div>
                         </div>
 
@@ -135,7 +144,7 @@
                         <!-- ldap_sync -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
-                                {{ trans('general.ldap_sync') }}
+                                {{ trans('general.user_managed_passwords') }}
                             </div>
                             <div class="col-sm-9">
                                     <label for="no_change" class="form-control">
@@ -144,7 +153,11 @@
                                     </label>
                                     <label for="ldap_import" class="form-control">
                                         {{ Form::radio('ldap_import', '0', old('ldap_import'), ['id' => 'ldap_import', 'aria-label'=>'ldap_import']) }}
-                                        {{ trans('general.ldap_import') }}
+                                        {{ trans('general.user_managed_passwords_allow') }}
+                                    </label>
+                                    <label for="ldap_import" class="form-control">
+                                        {{ Form::radio('ldap_import', '1', old('ldap_import'), ['id' => 'ldap_import', 'aria-label'=>'ldap_import']) }}
+                                        {{ trans('general.user_managed_passwords_disallow') }}
                                     </label>
                             </div>
                         </div> <!--/form-group-->

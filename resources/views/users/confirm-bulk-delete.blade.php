@@ -109,7 +109,7 @@
 
                   <tr>
                     <td colspan="8">
-                      {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:250px')) }}
+                      {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:250px', 'required' => true)) }}
                       <label>{{ trans('admin/users/general.update_user_assets_status') }}</label>
                     </td>
                   </tr>

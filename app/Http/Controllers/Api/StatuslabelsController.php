@@ -25,9 +25,17 @@ class StatuslabelsController extends Controller
     public function index(Request $request) : array
     {
         $this->authorize('view', Statuslabel::class);
-        $allowed_columns = ['id', 'name', 'created_at', 'assets_count', 'color', 'notes', 'default_label'];
+        $allowed_columns = [
+            'id',
+            'name',
+            'created_at',
+            'assets_count',
+            'color',
+            'notes',
+            'default_label'
+        ];
 
-        $statuslabels = Statuslabel::withCount('assets as assets_count');
+        $statuslabels = Statuslabel::with('adminuser')->withCount('assets as assets_count');
 
         if ($request->filled('search')) {
             $statuslabels = $statuslabels->TextSearch($request->input('search'));
@@ -54,10 +62,18 @@ class StatuslabelsController extends Controller
         // Make sure the offset and limit are actually integers and do not exceed system limits
         $offset = ($request->input('offset') > $statuslabels->count()) ? $statuslabels->count() : app('api_offset_value');
         $limit = app('api_limit_value');
-
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'created_at';
-        $statuslabels->orderBy($sort, $order);
+        $sort_override =  $request->input('sort');
+        $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
+
+        switch ($sort_override) {
+            case 'created_by':
+                $statuslabels = $statuslabels->OrderByCreatedBy($order);
+                break;
+            default:
+                $statuslabels = $statuslabels->orderBy($column_sort, $order);
+                break;
+        }
 
         $total = $statuslabels->count();
         $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
@@ -79,7 +95,8 @@ class StatuslabelsController extends Controller
         $request->except('deployable', 'pending', 'archived');
 
         if (! $request->filled('type')) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => ['Status label type is required.']]), 500);
+
+            return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => ['Status label type is required.']]));
         }
 
         $statuslabel = new Statuslabel;

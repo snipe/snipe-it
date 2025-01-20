@@ -6,7 +6,7 @@ return array(
     'declined'                  => 'Si guul leh ayaad u diiday hantidan.',
     'bulk_manager_warn'	        => 'Isticmaalayaashaada si guul leh ayaa loo cusboonaysiiyay, si kastaba ha ahaatee gelitaanka maamulahaaga lama kaydin sababtoo ah maareeyaha aad dooratay sidoo kale waxa uu ku jiray liiska isticmaalayaasha ee la tafatiray, isticmaalayaashuna waxa laga yaabaa in aanay noqon maamulahooda. Fadlan dooro isticmaalayaashaada mar labaad, marka laga reebo maamulaha.',
     'user_exists'               => 'Isticmaale ayaa hore u jiray!',
-    'user_not_found'            => 'Isticmaaluhu ma jiro.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => 'Goobta galitaanka ayaa loo baahan yahay',
     'user_has_no_assets_assigned' => 'Ma jirto hanti hadda loo qoondeeyay isticmaalaha.',
     'user_password_required'    => 'Furaha sirta ah ayaa loo baahan yahay.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'Ma baadhi karin server-ka LDAP Fadlan ka hubi server-kaaga LDAP ee ku jira faylka habaynta LDAP. <br>Khalad ka yimid Server LDAP:',
         'ldap_could_not_get_entries' => 'Waa lagu xidhi kari waayay serfarka LDAP Fadlan ka hubi server-kaaga LDAP ee ku jira faylka habaynta LDAP. Khalad ka yimid Server LDAP:',
         'password_ldap' => 'Furaha koontada waxaa maamula LDAP/Hagaha Firfircoon. Fadlan la xidhiidh waaxda IT-ga si aad u bedesho eraygaaga sirta ah. ',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(
@@ -68,7 +69,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'Isticmaalahaan ma laha wax iimayl ah oo la dhigay,',
+        'error'   => 'Isticmaalahaan ma heysto Email loo abuuray.',
         'success' => 'Isticmaalaha waa la ogeysiiyay wax ku saabsan alaabtooda hadda.'
     )
 );

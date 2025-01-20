@@ -6,7 +6,7 @@ return array(
     'declined'                  => '이 자산이 거부되었습니다.',
     'bulk_manager_warn'	        => '사용자가 성공적으로 갱신되었지만, 선택한 관리자가 편집할 사용자 목록에도 있었고, 사용자가 자신의 관리자가 아니 어서 관리자 항목이 저장되지 않았습니다. 관리자를 제외한 사용자를 다시 선택하십시오.',
     'user_exists'               => '사용자가 이미 존재합니다!',
-    'user_not_found'            => '사용자가 존재하지 않습니다.',
+    'user_not_found'            => 'User does not exist or you do not have permission view them.',
     'user_login_required'       => '로그인 항목을 입력해 주세요.',
     'user_has_no_assets_assigned' => 'No assets currently assigned to user.',
     'user_password_required'    => '비밀번호를 입력해 주세요.',
@@ -53,6 +53,7 @@ return array(
         'ldap_could_not_search' => 'LDAP 서버를 찾을 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'ldap_could_not_get_entries' => 'LDAP 서버 목록을 가져올 수 없습니다. LDAP 설정 파일의 LDAP 서버 구성을 확인해 보세요.<br>LDAP 서버 오류:',
         'password_ldap' => '이 계정의 비밀번호는 LDAP/Active 디렉토리에 의해 관리됩니다. 비밀번호를 변경하려면 IT 부서에 문의하세요. ',
+        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
     ),
 
     'deletefile' => array(

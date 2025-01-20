@@ -31,7 +31,7 @@ class AccessoriesController extends Controller
     public function index() : View
     {
         $this->authorize('index', Accessory::class);
-        return view('accessories/index');
+        return view('accessories.index');
     }
 
     /**
@@ -73,7 +73,7 @@ class AccessoriesController extends Controller
         $accessory->purchase_date           = request('purchase_date');
         $accessory->purchase_cost           = request('purchase_cost');
         $accessory->qty                     = request('qty');
-        $accessory->user_id                 = auth()->id();
+        $accessory->created_by              = auth()->id();
         $accessory->supplier_id             = request('supplier_id');
         $accessory->notes                   = request('notes');
 
@@ -100,7 +100,7 @@ class AccessoriesController extends Controller
 
         if ($item = Accessory::find($accessoryId)) {
             $this->authorize($item);
-            return view('accessories/edit', compact('item'))->with('category_type', 'accessory');
+            return view('accessories.edit', compact('item'))->with('category_type', 'accessory');
         }
 
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
@@ -236,7 +236,7 @@ class AccessoriesController extends Controller
         $accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessoryID);
         $this->authorize('view', $accessory);
         if (isset($accessory->id)) {
-            return view('accessories/view', compact('accessory'));
+            return view('accessories.view', compact('accessory'));
         }
 
         return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist', ['id' => $accessoryID]));

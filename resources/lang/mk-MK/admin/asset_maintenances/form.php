@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Тип на оддржување на средства',
         'title'                  => 'Наслов',
-        'start_date'             => 'Start Date',
-        'completion_date'        => 'Completion Date',
+        'start_date'             => 'Почетен датум',
+        'completion_date'        => 'Датум на завршување',
         'cost'                   => 'Цена',
         'is_warranty'            => 'Подобрување на гаранцијата',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'asset_maintenance_time' => 'Време на одржување на средства (во денови)',
         'notes'                  => 'Забелешки',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Освежи одржување на средства',
+        'create'                 => 'Креирај одржување на средства'
     ];

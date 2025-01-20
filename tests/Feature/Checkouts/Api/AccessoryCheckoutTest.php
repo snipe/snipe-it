@@ -2,16 +2,19 @@
 
 namespace Tests\Feature\Checkouts\Api;
 
+use App\Mail\CheckoutAccessoryMail;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\User;
 use App\Notifications\CheckoutAccessoryNotification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class AccessoryCheckoutTest extends TestCase
+class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirement
 {
-    public function testCheckingOutAccessoryRequiresCorrectPermission()
+    public function testRequiresPermission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.accessories.checkout', Accessory::factory()->create()))
@@ -85,7 +88,7 @@ class AccessoryCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
-                'user_id' => $admin->id,
+                'created_by' => $admin->id,
             ])->count(),'Log entry either does not exist or there are more than expected'
         );
     }
@@ -118,7 +121,7 @@ class AccessoryCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
-                'user_id' => $admin->id,
+                'created_by' => $admin->id,
             ])->count(),
             'Log entry either does not exist or there are more than expected'
         );
@@ -145,7 +148,7 @@ class AccessoryCheckoutTest extends TestCase
 
     public function testUserSentNotificationUponCheckout()
     {
-        Notification::fake();
+        Mail::fake();
 
         $accessory = Accessory::factory()->requiringAcceptance()->create();
         $user = User::factory()->create();
@@ -156,7 +159,9 @@ class AccessoryCheckoutTest extends TestCase
                 'checkout_to_type' => 'user',
             ]);
 
-        Notification::assertSentTo($user, CheckoutAccessoryNotification::class);
+        Mail::assertSent(CheckoutAccessoryMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
     }
 
     public function testActionLogCreatedUponCheckout()
@@ -180,7 +185,7 @@ class AccessoryCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
-                'user_id' => $actor->id,
+                'created_by' => $actor->id,
                 'note' => 'oh hi there',
             ])->count(),
             'Log entry either does not exist or there are more than expected'

@@ -91,6 +91,33 @@
               </div>
           </div>
 
+          <!-- EOL Date -->
+          <div class="form-group {{ $errors->has('asset_eol_date') ? ' has-error' : '' }}">
+            <label for="eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
+            <div class="col-md-4">
+              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="asset_eol_date" id="asset_eol_date" value="{{ old('asset_eol_date') }}">
+                <span class="input-group-addon"><x-icon type="calendar" /></span>
+              </div>
+              {!! $errors->first('asset_eol_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+            </div>
+            <div class="col-md-5">
+              <label class="form-control">
+                {{ Form::checkbox('null_asset_eol_date', '1', false) }}
+                {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-md-9 col-md-offset-3">
+              <label class="form-control">
+                {{ Form::checkbox('calc_eol', '1', false) }}
+                {{ trans('admin/hardware/form.calc_eol') }}
+              </label>
+            </div>
+          </div>
+
 
           <!-- Status -->
           <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">

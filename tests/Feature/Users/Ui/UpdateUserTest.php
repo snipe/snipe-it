@@ -9,6 +9,13 @@ use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('users.edit', User::factory()->create()->id))
+            ->assertOk();
+    }
+
     public function testUsersCanBeActivatedWithNumber()
     {
         $admin = User::factory()->superuser()->create();
@@ -82,7 +89,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(1, $admin->refresh()->activated);
     }
 
-    public function testMultiCompanyUserCannotBeMovedIfHasAsset()
+    public function testMultiCompanyUserCannotBeMovedIfHasAssetInDifferentCompany()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -94,7 +101,9 @@ class UpdateUserTest extends TestCase
         ]);
         $superUser = User::factory()->superuser()->create();
 
-        $asset = Asset::factory()->create();
+        $asset = Asset::factory()->create([
+            'company_id' => $companyA->id,
+        ]);
 
         // no assets assigned, therefore success
         $this->actingAs($superUser)->put(route('users.update', $user), [
@@ -115,5 +124,41 @@ class UpdateUserTest extends TestCase
         ]);
 
         $this->followRedirects($response)->assertSee('error');
+    }
+
+    public function testMultiCompanyUserCanBeUpdatedIfHasAssetInSameCompany()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $companyA = Company::factory()->create();
+
+        $user = User::factory()->create([
+            'company_id' => $companyA->id,
+        ]);
+        $superUser = User::factory()->superuser()->create();
+
+        $asset = Asset::factory()->create([
+            'company_id' => $companyA->id,
+        ]);
+
+        // no assets assigned, therefore success
+        $this->actingAs($superUser)->put(route('users.update', $user), [
+            'first_name'      => 'test',
+            'username'        => 'test',
+            'company_id'      => $companyA->id,
+            'redirect_option' => 'index'
+        ])->assertRedirect(route('users.index'));
+
+        $asset->checkOut($user, $superUser);
+
+        // asset assigned, therefore error
+        $response = $this->actingAs($superUser)->patchJson(route('users.update', $user), [
+            'first_name'      => 'test',
+            'username'        => 'test',
+            'company_id'      => $companyA->id,
+            'redirect_option' => 'index'
+        ]);
+
+        $this->followRedirects($response)->assertSee('success');
     }
 }

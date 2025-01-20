@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Dooro luqad',
+    'select_language' => 'Select a Language',
     'languages' => [
         'en-US'=> 'Ingiriis, US',
         'en-GB'=> 'Ingiriis, UK',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Dal dooro',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Jasiiradda Ascension',
@@ -109,7 +109,7 @@ return [
         'BY'=>'Belarus',
         'BZ'=>'Belize',
         'CA'=>'Kanada',
-        'CC'=>'Jasiiradaha Cocos (Keeling).',
+        'CC'=>'Jasiiradaha Cocos (Keeling)',
         'CD'=>'Kongo (Jamhuuriyadda Dimuqraadiga ah)',
         'CF'=>'Jamhuuriyadda Afrikada Dhexe',
         'CG'=>'Kongo (Jamhuuriyadda)',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Estonia',
         'EG'=>'Masar',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Isbayn',
         'ET'=>'Itoobiya',
@@ -203,7 +204,7 @@ return [
         'LT'=>'Lithuania',
         'LU'=>'Luxembourg',
         'LV'=>'Latfiya',
-        'LY'=>'Liibiya Carab Jaamaca',
+        'LY'=>'Liibiya',
         'MA'=>'Morocco',
         'MC'=>'Monaco',
         'MD'=>'Moldova, Jamhuuriyadda',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Nederlaan',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norway',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Xiriirka Ruushka',
         'RW'=>'Rwanda',
         'SA'=>'Sacuudi Carabiya',
-        'UK'=>'Scotland',
+        'GB-SCT'=>'Scotland',
         'SB'=>'Solomon Islands',
         'SC'=>'Seychelles',
         'SS'=>'Koonfurta Suudaan',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Jasiiradaha Virgin (US)',
         'VN'=>'Fiitnaam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis iyo Futuna Islands',
         'WS'=>'Samoa',
         'YE'=>'Yemen',

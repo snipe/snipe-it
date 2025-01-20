@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>警告： </strong> 此资产已被标记为当前不可借出。如果此状态已经改变，请更新资产状态。',
-    'does_not_exist' 	=> '资产不存在',
-    'does_not_exist_var'=> '找不到标签为 :asset_tag 的资产',
-    'no_tag' 	        => '未提供资产标签。',
+    'undeployable' 		 => '<strong>警告： </strong> 此资产已被标记为当前不可借出。如果此状态已经改变，请更新资产状态。',
+    'does_not_exist' 	 => '资产不存在',
+    'does_not_exist_var' => '找不到标签为 :asset_tag 的资产',
+    'no_tag' 	         => '未提供资产标签。',
     'does_not_exist_or_not_requestable' => '该资产不存在或不可申领。',
-    'assoc_users'	 	=> '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
+    'assoc_users'	 	 => '这个资产目前已经借给某个用户，不能被删除，请检查资产信息，然后再尝试删除。',
     'warning_audit_date_mismatch' 	=> '此资产的下一个盘点日期 (:next_audit_date) 早于上一个盘点日期 (:last_audit_date)。请更新下一个盘点日期。',
+    'labels_generated'   => '标签已成功生成。',
+    'error_generating_labels' => '生成标签时出错。',
+    'no_assets_selected' => '没有选择资产。',
 
     'create' => [
         'error'   		=> '资产创建失败，请重试。:(',
         'success' 		=> '资产创建成功。 :)',
         'success_linked' => '带有 :tag 标签的资产已成功创建。<strong><a href=":link" style="color: white;">点击此处查看</a></strong>。',
+        'multi_success_linked' => '带有标签 :links 的资产已成功创建。| :count 个资产已成功创建。 :links。',
+        'partial_failure' => '无法创建资产。原因：:failures|:count 个资产无法创建。原因：:failures',
     ],
 
     'update' => [
@@ -58,7 +63,7 @@ return [
         'file_delete_success'   => '您的文件已成功删除',
         'file_delete_error'      => '该文件无法被删除',
         'file_missing' => '所选文件丢失',
-        'file_already_deleted' => 'The file selected was already deleted',
+        'file_already_deleted' => '选择的文件已被删除',
         'header_row_has_malformed_characters' => '标题行中的一个或多个属性包含格式错误的 UTF-8 字符',
         'content_row_has_malformed_characters' => '第一行内容中的一个或多个属性包含格式错误的 UTF-8 字符',
     ],
@@ -77,6 +82,11 @@ return [
         'user_does_not_exist' => '无效用户，请重试。',
         'not_available' => '此资产无法借出',
         'no_assets_selected' => '您必须在这个列表中选择至少一项资产',
+    ],
+
+    'multi-checkout' => [
+        'error'   => '资产未借出，请重试 |资产未借出，请重试',
+        'success' => '资产借出成功。 |资产借出成功。',
     ],
 
     'checkin' => [

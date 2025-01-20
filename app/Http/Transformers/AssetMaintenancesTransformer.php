@@ -29,14 +29,15 @@ class AssetMaintenancesTransformer
                 'name'=> ($assetmaintenance->asset->name) ? e($assetmaintenance->asset->name) : null,
                 'asset_tag'=> e($assetmaintenance->asset->asset_tag),
                 'serial'=> e($assetmaintenance->asset->serial),
-                'deleted_at'=> e($assetmaintenance->asset->deleted_at),
-                'created_at'=> e($assetmaintenance->asset->created_at),
+                'deleted_at'=> Helper::getFormattedDateObject($assetmaintenance->asset->deleted_at, 'datetime'),
+                'created_at' => Helper::getFormattedDateObject($assetmaintenance->asset->created_at, 'datetime'),
+                'updated_at' => Helper::getFormattedDateObject($assetmaintenance->asset->updated_at, 'datetime'),
             ] : null,
             'model' => (($assetmaintenance->asset) && ($assetmaintenance->asset->model)) ? [
                 'id' => (int) $assetmaintenance->asset->model->id,
                 'name'=> ($assetmaintenance->asset->model->name) ? e($assetmaintenance->asset->model->name).' '.e($assetmaintenance->asset->model->model_number) : null,
             ] : null,
-            'status_label' => ($assetmaintenance->asset->assetstatus) ? [
+            'status_label' => (($assetmaintenance->asset) && ($assetmaintenance->asset->assetstatus)) ? [
                 'id' => (int) $assetmaintenance->asset->assetstatus->id,
                 'name'=> e($assetmaintenance->asset->assetstatus->name),
                 'status_type'=> e($assetmaintenance->asset->assetstatus->getStatuslabelType()),
@@ -64,7 +65,14 @@ class AssetMaintenancesTransformer
             'start_date'         => Helper::getFormattedDateObject($assetmaintenance->start_date, 'date'),
             'asset_maintenance_time'          => $assetmaintenance->asset_maintenance_time,
             'completion_date'     => Helper::getFormattedDateObject($assetmaintenance->completion_date, 'date'),
-            'user_id'    => ($assetmaintenance->admin) ? ['id' => $assetmaintenance->admin->id, 'name'=> e($assetmaintenance->admin->getFullNameAttribute())] : null,
+            'user_id'    => ($assetmaintenance->adminuser) ? [
+                'id' => $assetmaintenance->adminuser->id,
+                'name'=> e($assetmaintenance->adminuser->present()->fullName())
+            ] : null, // legacy to not change the shape of the API
+            'created_by' => ($assetmaintenance->adminuser) ? [
+                'id' => (int) $assetmaintenance->adminuser->id,
+                'name'=> e($assetmaintenance->adminuser->present()->fullName()),
+            ] : null,
             'created_at' => Helper::getFormattedDateObject($assetmaintenance->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmaintenance->updated_at, 'datetime'),
             'is_warranty'=> $assetmaintenance->is_warranty,
@@ -72,7 +80,7 @@ class AssetMaintenancesTransformer
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => (Gate::allows('update', Asset::class) && ($assetmaintenance->asset->deleted_at=='')) ? true : false,
+            'update' => (Gate::allows('update', Asset::class) && ((($assetmaintenance->asset) && $assetmaintenance->asset->deleted_at==''))) ? true : false,
             'delete' => Gate::allows('delete', Asset::class),
         ];
 

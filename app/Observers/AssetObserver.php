@@ -62,7 +62,7 @@ class AssetObserver
             $logAction->item_type = Asset::class;
             $logAction->item_id = $asset->id;
             $logAction->created_at = date('Y-m-d H:i:s');
-            $logAction->user_id = Auth::id();
+            $logAction->created_by = auth()->id();
             $logAction->log_meta = json_encode($changed);
             $logAction->logaction('update');
         }
@@ -80,7 +80,7 @@ class AssetObserver
     {
         if ($settings = Setting::getSettings()) {
             $tag = $asset->asset_tag;
-            $prefix = $settings->auto_increment_prefix;
+            $prefix = (string)($settings->auto_increment_prefix ?? '');
             $number = substr($tag, strlen($prefix));
             // IF - auto_increment_assets is on, AND (there is no prefix OR the prefix matches the start of the tag)
             //      AND the rest of the string after the prefix is all digits, THEN...
@@ -108,7 +108,7 @@ class AssetObserver
         $logAction->item_type = Asset::class; // can we instead say $logAction->item = $asset ?
         $logAction->item_id = $asset->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         if($asset->imported) {
             $logAction->setActionSource('importer');
         }
@@ -127,7 +127,7 @@ class AssetObserver
         $logAction->item_type = Asset::class;
         $logAction->item_id = $asset->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         $logAction->logaction('delete');
     }
 
@@ -143,7 +143,7 @@ class AssetObserver
         $logAction->item_type = Asset::class;
         $logAction->item_id = $asset->id;
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->user_id = Auth::id();
+        $logAction->created_by = auth()->id();
         $logAction->logaction('restore');
     }
 

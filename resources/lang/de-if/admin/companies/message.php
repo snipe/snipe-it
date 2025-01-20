@@ -13,7 +13,7 @@ return [
         'success' => 'Firma erfolgreich aktualisiert.',
     ],
     'delete' => [
-        'confirm' => 'Bist Du sicher, dass Du diese Firma löschen willst?',
+        'confirm' => 'Bist du sicher, dass du diese Firma löschen willst?',
         'error'   => 'Es gab ein Problem beim Löschen der Firma. Bitte versuche es erneut.',
         'success' => 'Die Firma wurde erfolgreich gelöscht.',
     ],

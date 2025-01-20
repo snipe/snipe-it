@@ -2,14 +2,14 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
+    'does_not_exist' => 'Лиценцата не постои или вие немате овластување да ја видите.',
+    'user_does_not_exist' => 'Корисникот не постои или вие намате овластување да го видите.',
     'asset_does_not_exist' 	=> 'Средството што се обидувате да го поврзете со оваа лиценца не постои.',
     'owner_doesnt_match_asset' => 'Средството што се обидувате да го поврзете со оваа лиценца е задолжено на различно лице од она кое е избрано на паѓачкото мени.',
     'assoc_users'	 => 'Оваа лиценца е задолжено на корисник и не може да се избрише. Проверете го, а потоа пробајте повторно да ја избришете. ',
     'select_asset_or_person' => 'Мора да изберете основно средство или корисник, но не и двете.',
-    'not_found' => 'License not found',
-    'seats_available' => ':seat_count seats available',
+    'not_found' => 'Лиценцата не е пронајдена',
+    'seats_available' => ':seat_count достапни места',
 
 
     'create' => array(
@@ -43,13 +43,14 @@ return array(
     'checkout' => array(
         'error'   => 'Имаше проблем со задолжување на лиценцата. Обидете се повторно.',
         'success' => 'Лиценцата беше успешно задолжена',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
-        'mismatch' => 'The license seat provided does not match the license',
-        'unavailable' => 'This seat is not available for checkout.',
+        'not_enough_seats' => 'Нема доволно достапни места за задолжување',
+        'mismatch' => 'Обезбеденото место за лиценца не одговара на лиценцата',
+        'unavailable' => 'Ова не е место достапно за задолжување.',
     ),
 
     'checkin' => array(
         'error'   => 'Имаше проблем со раздолжување на лиценцата. Обидете се повторно.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Лиценцата беше успешно раздолжена'
     ),
 

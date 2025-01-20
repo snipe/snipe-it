@@ -2,6 +2,8 @@
 
 namespace App\Http\Transformers;
 
+use App\Helpers\Helper;
+use App\Models\Asset;
 use App\Models\PredefinedKit;
 use App\Models\SnipeModel;
 use Illuminate\Support\Facades\Gate;
@@ -30,12 +32,18 @@ class PredefinedKitsTransformer
         $array = [
             'id' => (int) $kit->id,
             'name' => e($kit->name),
+            'created_by' => ($kit->adminuser) ? [
+                'id' => (int) $kit->adminuser->id,
+                'name'=> e($kit->adminuser->present()->fullName()),
+            ] : null,
+            'created_at' => Helper::getFormattedDateObject($kit->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($kit->updated_at, 'datetime'),
         ];
 
         $permissions_array['available_actions'] = [
             'update' => Gate::allows('update', PredefinedKit::class),
             'delete' => Gate::allows('delete', PredefinedKit::class),
-            'checkout' => Gate::allows('checkout', PredefinedKit::class),
+            'checkout' => Gate::allows('checkout', Asset::class),
             // 'clone' => Gate::allows('create', PredefinedKit::class),
             // 'restore' => Gate::allows('create', PredefinedKit::class),
         ];

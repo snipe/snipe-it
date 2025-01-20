@@ -36,7 +36,6 @@ class AssetModel extends SnipeModel
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
     protected $table = 'models';
-    protected $hidden = ['user_id', 'deleted_at'];
     protected $presenter = AssetModelPresenter::class;
 
     // Declare the rules for the model validation
@@ -69,7 +68,7 @@ class AssetModel extends SnipeModel
         'model_number',
         'name',
         'notes',
-        'user_id',
+        'requestable',
     ];
 
     use Searchable;
@@ -226,6 +225,18 @@ class AssetModel extends SnipeModel
             ->orderBy('created_at', 'desc');
     }
 
+    /**
+     * Get user who created the item
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v1.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function adminuser()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'created_by');
+    }
+
 
     /**
      * -----------------------------------------------
@@ -318,4 +329,14 @@ class AssetModel extends SnipeModel
     {
         return $query->leftJoin('custom_fieldsets', 'models.fieldset_id', '=', 'custom_fieldsets.id')->orderBy('custom_fieldsets.name', $order);
     }
+
+    /**
+     * Query builder scope to order on created_by name
+     *
+     */
+    public function scopeOrderByCreatedByName($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'models.created_by', '=', 'admin_sort.id')->select('models.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
+
 }

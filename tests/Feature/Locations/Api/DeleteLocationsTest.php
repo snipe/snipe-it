@@ -5,10 +5,21 @@ namespace Tests\Feature\Locations\Api;
 use App\Models\Asset;
 use App\Models\Location;
 use App\Models\User;
+use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteLocationsTest extends TestCase
+class DeleteLocationsTest extends TestCase implements TestsPermissionsRequirement
 {
+    public function testRequiresPermission()
+    {
+        $location = Location::factory()->create();
+
+        $this->actingAsForApi(User::factory()->create())
+            ->deleteJson(route('api.locations.destroy', $location))
+            ->assertForbidden();
+
+        $this->assertNotSoftDeleted($location);
+    }
 
     public function testErrorReturnedViaApiIfLocationDoesNotExist()
     {
@@ -90,4 +101,15 @@ class DeleteLocationsTest extends TestCase
             ->json();
     }
 
+    public function testCanDeleteLocation()
+    {
+        $location = Location::factory()->create();
+
+        $this->actingAsForApi(User::factory()->deleteLocations()->create())
+            ->deleteJson(route('api.locations.destroy', $location->id))
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($location);
+    }
 }

@@ -2,12 +2,14 @@
 
 namespace Tests\Feature\Checkouts\Ui;
 
+use App\Mail\CheckoutConsumableMail;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\User;
 use App\Notifications\CheckoutConsumableNotification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -20,6 +22,12 @@ class ConsumableCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('consumables.checkout.show', Consumable::factory()->create()->id))
+            ->assertOk();
+    }
     public function testValidationWhenCheckingOutConsumable()
     {
         $this->actingAs(User::factory()->checkoutConsumables()->create())
@@ -53,7 +61,7 @@ class ConsumableCheckoutTest extends TestCase
 
     public function testUserSentNotificationUponCheckout()
     {
-        Notification::fake();
+        Mail::fake();
 
         $consumable = Consumable::factory()->create();
         $user = User::factory()->create();
@@ -63,7 +71,9 @@ class ConsumableCheckoutTest extends TestCase
                 'assigned_to' => $user->id,
             ]);
 
-        Notification::assertSentTo($user, CheckoutConsumableNotification::class);
+        Mail::assertSent(CheckoutConsumableMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
     }
 
     public function testActionLogCreatedUponCheckout()
@@ -86,7 +96,7 @@ class ConsumableCheckoutTest extends TestCase
                 'target_type' => User::class,
                 'item_id' => $consumable->id,
                 'item_type' => Consumable::class,
-                'user_id' => $actor->id,
+                'created_by' => $actor->id,
                 'note' => 'oh hi there',
             ])->count(),
             'Log entry either does not exist or there are more than expected'

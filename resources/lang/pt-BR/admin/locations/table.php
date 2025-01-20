@@ -31,7 +31,7 @@ return [
     'asset_model'               => 'Modelo',
     'asset_serial'              => 'Nº de Série',
     'asset_location'            => 'Local',
-    'asset_checked_out'         => 'Alocado',
+    'asset_checked_out'         => 'Disponibilizado',
     'asset_expected_checkin'    => 'Check-in Esperado',
     'date'                      => 'Data:',
     'phone'                     => 'Telefone da Localização',

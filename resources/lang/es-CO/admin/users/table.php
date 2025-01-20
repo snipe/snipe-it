@@ -3,7 +3,7 @@
 return array(
     'activated'  			=> 'Activo',
     'allow'  				=> 'Permitir',
-    'checkedout'  			=> 'Equipos',
+    'checkedout'  			=> 'Activos',
     'created_at' 			=> 'Creado',
     'createuser' 			=> 'Crear usuario',
     'deny'  				=> 'Denegar',
@@ -31,7 +31,7 @@ return array(
     'show_deleted'          => 'Mostrar usuarios eliminados',
     'title' 				=> 'Cargo',
 	'to_restore_them'		=> 'para restaurarlos.',
-    'total_assets_cost'     => "Coste total de activos",
+    'total_assets_cost'     => "Costo total de activos",
     'updateuser' 			=> 'Actualizar usuario',
     'username' 				=> 'Nombre de usuario',
 	'user_deleted_text' 	=> 'Este usuario ha sido marcado como eliminado.',

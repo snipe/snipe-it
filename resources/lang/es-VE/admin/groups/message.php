@@ -4,19 +4,19 @@ return array(
 
     'group_exists'        => '¡El grupo ya existe!',
     'group_not_found'     => 'El ID del grupo :id no existe.',
-    'group_name_required' => 'El nombre del campo es necesario',
+    'group_name_required' => 'El campo nombre es obligatorio',
 
     'success' => array(
         'create' => 'Grupo creado con éxito.',
-        'update' => 'Grupo actualizado con éxito.',
-        'delete' => 'Grupo borrado con éxito.',
+        'update' => 'El grupo fue actualizado exitosamente.',
+        'delete' => 'El grupo fue eliminado exitosamente.',
     ),
 
     'delete' => array(
         'confirm'   => '¿Está seguro de que desea eliminar este grupo?',
-        'create' => 'Hubo un problema creando el grupo. Por favor intente nuevamente.',
+        'create' => 'Hubo un problema creando el grupo. Por favor, intente nuevamente.',
         'update' => 'Hubo un problema actualizando el grupo. Por favor, intente nuevamente.',
-        'delete' => 'Hubo un problema al borrar el grupo, por favor, inténtalo de nuevo.',
+        'delete' => 'Hubo un problema eliminando el grupo. Por favor, intente nuevamente.',
     ),
 
 );

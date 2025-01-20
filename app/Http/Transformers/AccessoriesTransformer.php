@@ -38,9 +38,12 @@ class AccessoriesTransformer
             'purchase_cost' => Helper::formatCurrencyOutput($accessory->purchase_cost),
             'order_number' => ($accessory->order_number) ? e($accessory->order_number) : null,
             'min_qty' => ($accessory->min_amt) ? (int) $accessory->min_amt : null,
-            'remaining_qty' => (int) $accessory->numRemaining(),
+            'remaining_qty' => (int) ($accessory->qty - $accessory->checkouts_count),
             'checkouts_count' =>  $accessory->checkouts_count,
-
+            'created_by' => ($accessory->adminuser) ? [
+                'id' => (int) $accessory->adminuser->id,
+                'name'=> e($accessory->adminuser->present()->fullName()),
+            ] : null,
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
 
@@ -57,7 +60,7 @@ class AccessoriesTransformer
 
         $permissions_array['user_can_checkout'] = false;
 
-        if ($accessory->numRemaining() > 0) {
+        if (($accessory->qty - $accessory->checkouts_count) > 0) {
             $permissions_array['user_can_checkout'] = true;
         }
 
@@ -66,7 +69,7 @@ class AccessoriesTransformer
         return $array;
     }
 
-    public function transformCheckedoutAccessory($accessory, $accessory_checkouts, $total)
+    public function transformCheckedoutAccessory($accessory_checkouts, $total)
     {
         $array = [];
 
@@ -74,9 +77,13 @@ class AccessoriesTransformer
             $array[] = [
                 'id' => $checkout->id,
                 'assigned_to' => $this->transformAssignedTo($checkout),
-                'checkout_notes' => e($checkout->note),
-                'last_checkout' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
-                'available_actions' => ['checkin' => true],
+                'note' => $checkout->note ? e($checkout->note) : null,
+                'created_by' => $checkout->adminuser ? [
+                    'id' => (int) $checkout->adminuser->id,
+                    'name'=> e($checkout->adminuser->present()->fullName),
+                ]: null,
+                'created_at' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
+                'available_actions' => Gate::allows('checkout', Accessory::class) ? ['checkin' => true] : ['checkin' => false],
             ];
         }
 
@@ -86,22 +93,11 @@ class AccessoriesTransformer
     public function transformAssignedTo($accessoryCheckout)
     {
         if ($accessoryCheckout->checkedOutToUser()) {
-            return [
-                    'id' => (int) $accessoryCheckout->assigned->id,
-                    'username' => e($accessoryCheckout->assigned->username),
-                    'name' => e($accessoryCheckout->assigned->getFullNameAttribute()),
-                    'first_name'=> e($accessoryCheckout->assigned->first_name),
-                    'last_name'=> ($accessoryCheckout->assigned->last_name) ? e($accessoryCheckout->assigned->last_name) : null,
-                    'email'=> ($accessoryCheckout->assigned->email) ? e($accessoryCheckout->assigned->email) : null,
-                    'employee_number' =>  ($accessoryCheckout->assigned->employee_num) ? e($accessoryCheckout->assigned->employee_num) : null,
-                    'type' => 'user',
-                ];
+            return (new UsersTransformer)->transformUserCompact($accessoryCheckout->assigned);
+        } elseif ($accessoryCheckout->checkedOutToLocation()) {
+            return (new LocationsTransformer())->transformLocationCompact($accessoryCheckout->assigned);
+        } elseif ($accessoryCheckout->checkedOutToAsset()) {
+            return (new AssetsTransformer())->transformAssetCompact($accessoryCheckout->assigned);
         }
-
-        return $accessoryCheckout->assigned ? [
-            'id' => $accessoryCheckout->assigned->id,
-            'name' => e($accessoryCheckout->assigned->display_name),
-            'type' => $accessoryCheckout->assignedType(),
-        ] : null;
     }
 }

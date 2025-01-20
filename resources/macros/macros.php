@@ -40,18 +40,18 @@ Form::macro('countries', function ($name = 'country', $selected = null, $class =
 
     foreach ($countries_array as $abbr => $country) {
 
-        // We have to handle it this way to handle deprecication warnings since you can't strtoupper on null
+        // We have to handle it this way to handle deprecation warnings since you can't strtoupper on null
         if ($abbr!='') {
             $abbr = strtoupper($abbr);
         }
 
         // Loop through the countries configured in the localization file
-        $select .= '<option value="'.$abbr.'" selected="selected" role="option" '.(($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$country.'</option> ';
+        $select .= '<option value="' . $abbr . '" role="option" ' . (($selected == $abbr) ? ' selected="selected" aria-selected="true"' : ' aria-selected="false"') . '>' . $country . '</option> ';
 
     }
 
     // If the country value doesn't exist in the array, add it as a new option and select it so we don't drop that data
-    if (!in_array($selected, $countries_array)) {
+    if (!array_key_exists($selected, $countries_array)) {
         $select .= '<option value="' . $selected . '" selected="selected" role="option" aria-selected="true">' . $selected .' *</option> ';
     }
 

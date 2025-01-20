@@ -932,7 +932,7 @@ case $setupmail in
 
     echo -n "  From name:"
     read -r mailfromname
-    sed -i "s|^\\(MAIL_FROM_NAME=\\).*|\\1$mailfromname|" "$APP_PATH/.env"
+    sed -i  "s|^\\(MAIL_FROM_NAME=\\).*|\\1\\'$mailfromname\\'|" "$APP_PATH/.env"
 
     echo -n "  Reply to address:"
     read -r mailreplytoaddr
@@ -940,7 +940,7 @@ case $setupmail in
 
     echo -n "  Reply to name:"
     read -r mailreplytoname
-    sed -i "s|^\\(MAIL_REPLYTO_NAME=\\).*|\\1$mailreplytoname|" "$APP_PATH/.env"
+    sed -i "s|^\\(MAIL_REPLYTO_NAME=\\).*|\\1\\'$mailreplytoname\\'|" "$APP_PATH/.env"
     setupmail="yes"
     ;;
   [nN] | [n|N][O|o] )

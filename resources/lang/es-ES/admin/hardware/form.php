@@ -23,7 +23,7 @@ return [
     'depreciation'	    => 'Depreciación',
     'depreciates_on'	=> 'Se deprecia en',
     'default_location'	=> 'Ubicación predeterminada',
-    'default_location_phone' => 'Teléfono de ubicación por defecto',
+    'default_location_phone' => 'Teléfono de ubicación predeterminada',
     'eol_date'			=> 'Fecha fin de soporte (EOL)',
     'eol_rate'			=> 'Tasa fin de soporte (EOL)',
     'expected_checkin'  => 'Fecha esperada de devolución',
@@ -55,8 +55,10 @@ return [
     'asset_location_update_default' => 'Actualizar sólo la ubicación predeterminada',
     'asset_location_update_actual' => 'Actualizar sólo la ubicación actual',
     'asset_not_deployable' => 'Ese estado de activos es no utilizable. Este activo no puede ser asignado.',
+    'asset_not_deployable_checkin' => 'Ese estado del activo no es utilizable. El uso de esta etiqueta de estado ingresará el activo.',
     'asset_deployable' => 'El estado indica que es utilizable. Este activo puede ser asignado.',
     'processing_spinner' => 'Procesando... (Esto puede tomar un poco de tiempo en archivos grandes)',
     'optional_infos'  => 'Información opcional',
-    'order_details'   => 'Información relacionada con el pedido'
+    'order_details'   => 'Información relacionada con el pedido',
+    'calc_eol'    => 'Si deja nula la fecha EOL, utilice el cálculo automático basado en la fecha de compra y la frecuencia de EOL.',
 ];

@@ -55,8 +55,10 @@ return [
     'asset_location_update_default' => 'Actualizați doar locația implicită',
     'asset_location_update_actual' => 'Actualizează doar locația reală',
     'asset_not_deployable' => 'Activul este indisponibil și nu poate fi eliberat.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Activul e disponibil și poate fi eliberat.',
     'processing_spinner' => 'Procesare... (Ar putea dura puţin timp pe fişiere mari)',
     'optional_infos'  => 'Informații opționale',
-    'order_details'   => 'Informații legate de comandă'
+    'order_details'   => 'Informații legate de comandă',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

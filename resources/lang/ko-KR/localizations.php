@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Select a language',
+    'select_language' => '언어선택',
     'languages' => [
         'en-US'=> 'English, US',
         'en-GB'=> 'English, UK',
@@ -33,7 +33,7 @@ return [
         'it-IT'=> 'Italian',
         'ja-JP'=> 'Japanese',
         'km-KH'=>'Khmer',
-        'ko-KR'=> 'Korean',
+        'ko-KR'=> '한국어',
         'lt-LT'=>'Lithuanian',
         'lv-LV'=> 'Latvian',
         'mk-MK'=> 'Macedonian',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Select a country',
+    'select_country' => 'Select a Country',
     
     'countries' => [
         'AC'=>'Ascension Island',
@@ -135,6 +135,7 @@ return [
         'EC'=>'Ecuador',
         'EE'=>'Estonia',
         'EG'=>'Egypt',
+        'GB-ENG'=>'England',
         'ER'=>'Eritrea',
         'ES'=>'Spain',
         'ET'=>'Ethiopia',
@@ -233,6 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Netherlands',
+        'GB-NIR' => 'Northern Ireland',
         'NO'=>'Norway',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -260,7 +262,7 @@ return [
         'RU'=>'Russian Federation',
         'RW'=>'Rwanda',
         'SA'=>'Saudi Arabia',
-        'UK'=>'Scotland',
+        'GB-SCT'=>'Scotland',
         'SB'=>'Solomon Islands',
         'SC'=>'Seychelles',
         'SS'=>'남수단',
@@ -312,6 +314,7 @@ return [
         'VI'=>'Virgin Islands (U.S.)',
         'VN'=>'Viet Nam',
         'VU'=>'Vanuatu',
+        'GB-WLS' =>'Wales',
         'WF'=>'Wallis And Futuna Islands',
         'WS'=>'Samoa',
         'YE'=>'Yemen',

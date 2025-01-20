@@ -21,7 +21,7 @@ return [
     'field_element_short'     => 'Element',
     'field_format'            => 'Format',
     'field_custom_format'     => 'Benutzerdefiniertes Regex-Format',
-    'field_custom_format_help'     => 'In diesem Feld kannst Du einen Regex-Ausdruck zur Validierung verwenden. Er sollte mit "regex:" beginnen. Um beispielsweise zu validieren, dass ein benutzerdefiniertes Feld eine gültige IMEI (15 numerische Ziffern) enthält, würdest Du <code>regex:/^[0-9]{15}$/</code> nutzen.',
+    'field_custom_format_help'     => 'In diesem Feld kannst du einen Regex-Ausdruck zur Validierung verwenden. Er sollte mit "regex:" beginnen. Um beispielsweise zu validieren, dass ein benutzerdefiniertes Feld eine gültige IMEI (15 numerische Ziffern) enthält, würdest du <code>regex:/^[0-9]{15}$/</code> nutzen.',
     'required'   		          => 'Pflichtfeld',
     'req'   		              => 'Erf.',
     'used_by_models'   		    => 'Von Modellen benutzt',

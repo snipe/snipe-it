@@ -67,6 +67,7 @@ return [
     'checkout'  			=> 'پرداخت',
     'checkouts_count'       => 'پرداخت',
     'checkins_count'        => 'پذیرش',
+    'checkin_and_delete'  	=> 'Checkin and Delete',
     'user_requests_count'   => 'درخواست ها',
     'city'  				=> 'شهر',
     'click_here'			=> 'اینجا کلیک کنید',
@@ -246,8 +247,7 @@ return [
     'purchase_date'         => 'تاریخ خرید',
     'qty'		            => 'QTY',
     'quantity'		        => 'مقدار',
-    'quantity_minimum'      => 'شما باید : موارد را زیر یا تقریباً کمتر از سطح حداقل مقدار بشمارید
-',
+    'quantity_minimum'      => 'You have one item below or almost below minimum quantity levels|You have :count items below or almost below minimum quantity levels',
     'quickscan_checkin'  	=> 'اسکن سریع اعلام حضور
 ',
     'quickscan_checkin_status'  	=> 'وضعیت  ورود
@@ -308,6 +308,7 @@ return [
     'status'    			=> 'وضعیت',
     'accept_eula'           => 'توافق نامه پذیرش
 ',
+    'show_or_hide_eulas' => 'Show/Hide EULAs',
     'supplier'              => 'تامین کننده',
     'suppliers'  			=> 'تامین کننده',
     'sure_to_delete'        => 'مطمئنید که میخواهید حذف شود',
@@ -326,6 +327,7 @@ return [
     'username_format'		=> 'فرمت نام کاربری',
     'username'              => 'نام کاربری',
     'update'                => 'بروزرسانی',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'انواع فایل های مجاز عبارتند از png، gif، jpg، jpeg، doc، docx، pdf، xls، xlsx، txt، lic، xml، zip، rtf و rar. حداکثر اندازه مجاز بارگذاری: اندازه است.
 ',
     'uploaded'              => 'بارگزاری شد',
@@ -502,7 +504,7 @@ return [
 ',
     'bulk_checkin_success' => 'موارد برای کاربران انتخاب شده بررسی شده است.
 ',
-    'set_to_null'           => 'Delete values for this asset|Delete values for all :asset_count assets ',
+    'set_to_null'           => 'Delete values for this selection|Delete values for all :selection_count selections ',
     'set_users_field_to_null'  => 'Delete :field values for this user|Delete :field values for all :user_count users ',
     'na_no_purchase_date'   => 'N/A - No purchase date provided',
     'assets_by_status'      => 'Assets by Status',
@@ -515,6 +517,7 @@ return [
     'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
     'placeholder_kit'       => 'Select a kit',
     'file_not_found'        => 'فایل پیدا نشد',
+    'log_record_not_found'  => 'No record for that log entry was found.',
     'preview_not_available' => '(no preview)',
     'setup'                 => 'Setup',
     'pre_flight'            => 'Pre-Flight',
@@ -643,10 +646,11 @@ return [
     'something_went_wrong' => 'Something went wrong with your request.',
     'close' => 'Close',
     'expires' => 'منقضی می شود',
-    'map_fields'=> 'Map :item_type Field',
+    'map_fields'=> 'Map :item_type Fields',
     'remaining_var' => ':count Remaining',
-    'assets_in_var' => 'Assets in :name :type',
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
+    'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
 
 ];

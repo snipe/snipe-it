@@ -29,15 +29,12 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
-
           <table
             data-columns="{{ \App\Presenters\ManufacturerPresenter::dataTableLayout() }}"
             data-cookie-id-table="manufacturersTable"
             data-pagination="true"
             data-id-table="manufacturersTable"
             data-search="true"
-            data-show-footer="true"
             data-side-pagination="server"
             data-show-columns="true"
             data-show-fullscreen="true"
@@ -51,9 +48,7 @@
               "fileName": "export-manufacturers-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
-
           </table>
-        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>

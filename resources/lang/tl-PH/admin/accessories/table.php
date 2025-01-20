@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'Ang ID',
     'require_acceptance'      	=> 'Pagtanggap',
     'title'      				=> 'Ang Pangalan ng Accessory',
-
-
 );

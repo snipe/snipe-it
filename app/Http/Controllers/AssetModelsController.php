@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
+use Illuminate\Support\MessageBag;
 
 
 /**
@@ -29,6 +30,7 @@ use \Illuminate\Http\RedirectResponse;
  */
 class AssetModelsController extends Controller
 {
+    protected MessageBag $validatorErrors;
     /**
      * Returns a view that invokes the ajax tables which actually contains
      * the content for the accessories listing, which is generated in getDatatable.
@@ -78,7 +80,7 @@ class AssetModelsController extends Controller
         $model->manufacturer_id = $request->input('manufacturer_id');
         $model->category_id = $request->input('category_id');
         $model->notes = $request->input('notes');
-        $model->user_id = Auth::id();
+        $model->created_by = auth()->id();
         $model->requestable = $request->has('requestable');
 
         if ($request->input('fieldset_id') != '') {
@@ -158,7 +160,7 @@ class AssetModelsController extends Controller
 
             if ($this->shouldAddDefaultValues($request->input())) {
                 if (!$this->assignCustomFieldsDefaultValues($model, $request->input('default_values'))) {
-                    return redirect()->back()->withInput()->with('error', trans('admin/custom_fields/message.fieldset_default_value.error'));
+                    return redirect()->back()->withInput()->withErrors($this->validatorErrors);
                 }
             }
 
@@ -237,7 +239,7 @@ class AssetModelsController extends Controller
                 $logaction->item_type = AssetModel::class;
                 $logaction->item_id = $model->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
 
@@ -481,9 +483,15 @@ class AssetModelsController extends Controller
             $rules[$field] = $validation;
         }
 
-        $validator = Validator::make($data, $rules);
+        $attributes = [];
+        foreach ($model->fieldset->fields as $field) {
+            $attributes[$field->db_column] = trim(preg_replace('/_+|snipeit|\d+/', ' ', $field->db_column));
+        }
+
+        $validator = Validator::make($data, $rules)->setAttributeNames($attributes);
 
         if($validator->fails()){
+            $this->validatorErrors = $validator->errors();
             return false;
         }
 

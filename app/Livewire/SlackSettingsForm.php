@@ -4,10 +4,11 @@ namespace App\Livewire;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use App\Models\Setting;
 use App\Helpers\Helper;
-
+use Osama\LaravelTeamsNotification\TeamsNotification;
 class SlackSettingsForm extends Component
 {
     public $webhook_endpoint;
@@ -19,6 +20,7 @@ class SlackSettingsForm extends Component
     public $webhook_placeholder;
     public $webhook_icon;
     public $webhook_selected;
+    public $teams_webhook_deprecated;
     public array $webhook_text;
 
     public Setting $setting;
@@ -62,7 +64,7 @@ class SlackSettingsForm extends Component
                 "name" => trans('admin/settings/general.ms_teams'),
                 "icon" => "fa-brands fa-microsoft",
                 "placeholder" => "https://abcd.webhook.office.com/webhookb2/XXXXXXX",
-                "link" => "https://learn.microsoft.com/en-us/microsoftteams/platform/webhooks-and-connectors/how-to/add-incoming-webhook?tabs=dotnet#create-incoming-webhooks-1",
+                "link" => "https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498",
                 "test" => "msTeamTestWebhook"
             ),
         ];
@@ -79,15 +81,17 @@ class SlackSettingsForm extends Component
         $this->webhook_channel = $this->setting->webhook_channel;
         $this->webhook_botname = $this->setting->webhook_botname;
         $this->webhook_options = $this->setting->webhook_selected;
-        if($this->webhook_selected == 'microsoft' || $this->webhook_selected == 'google'){
+        $this->teams_webhook_deprecated = !Str::contains($this->webhook_endpoint, 'workflows');
+        if($this->webhook_selected === 'microsoft' || $this->webhook_selected === 'google'){
             $this->webhook_channel = '#NA';
         }
-
 
         if($this->setting->webhook_endpoint != null && $this->setting->webhook_channel != null){
             $this->isDisabled= '';
         }
-
+        if($this->webhook_selected === 'microsoft' && $this->teams_webhook_deprecated) {
+            session()->flash('warning', 'The selected Microsoft Teams webhook URL will be deprecated Jan 31st, 2025. Please use a workflow URL. Microsofts Documentation on creating a workflow can be found <a href="https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498" target="_blank"> here.</a>');
+        }
     }
     public function updated($field) {
 
@@ -109,7 +113,11 @@ class SlackSettingsForm extends Component
         if($this->webhook_selected == 'microsoft' || $this->webhook_selected == 'google'){
             $this->webhook_channel = '#NA';
         }
+    }
 
+    public function updatedwebhookEndpoint()
+    {
+        $this->teams_webhook_deprecated = !Str::contains($this->webhook_endpoint, 'workflows');
     }
 
     private function isButtonDisabled() {
@@ -126,7 +134,9 @@ class SlackSettingsForm extends Component
     public function render()
     {
         $this->isButtonDisabled();
+
         return view('livewire.slack-settings-form');
+
     }
 
     public function testWebhook(){
@@ -149,7 +159,7 @@ class SlackSettingsForm extends Component
             ]);
 
         try {
-            $test = $webhook->post($this->webhook_endpoint, ['body' => $payload]);
+            $test = $webhook->post($this->webhook_endpoint, ['body' => $payload, ['headers' => ['Content-Type' => 'application/json']]]);
 
             if(($test->getStatusCode() == 302)||($test->getStatusCode() == 301)){
                 return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
@@ -214,7 +224,7 @@ class SlackSettingsForm extends Component
 
         try {
             $response = Http::withHeaders([
-                'content-type' => 'applications/json',
+                'content-type' => 'application/json',
             ])->post($this->webhook_endpoint,
                 $payload)->throw();
 
@@ -236,20 +246,32 @@ class SlackSettingsForm extends Component
     }
     public function msTeamTestWebhook(){
 
-     $payload =
-        [
-            "@type" => "MessageCard",
-            "@context" => "http://schema.org/extensions",
-            "summary" => trans('mail.snipe_webhook_summary'),
-            "title" => trans('mail.snipe_webhook_test'),
-            "text" => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
-        ];
+        try {
 
-         try {
-         $response = Http::withHeaders([
-             'content-type' => 'applications/json',
-         ])->post($this->webhook_endpoint,
-            $payload)->throw();
+            if($this->teams_webhook_deprecated){
+                //will use the deprecated webhook format
+                $payload =
+                    [
+                        "@type" => "MessageCard",
+                        "@context" => "http://schema.org/extensions",
+                        "summary" => trans('mail.snipe_webhook_summary'),
+                        "title" => trans('mail.snipe_webhook_test'),
+                        "text" => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
+                    ];
+                $response = Http::withHeaders([
+                    'content-type' => 'application/json',
+                ])->post($this->webhook_endpoint,
+                    $payload)->throw();
+            }
+             else {
+                 $notification = new TeamsNotification($this->webhook_endpoint);
+                 $message = trans('general.webhook_test_msg', ['app' => $this->webhook_name]);
+                 $notification->success()->sendMessage($message);
+
+                 $response = Http::withHeaders([
+                     'content-type' => 'application/json',
+                 ])->post($this->webhook_endpoint);
+             }
 
          if(($response->getStatusCode() == 302)||($response->getStatusCode() == 301)){
              return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));

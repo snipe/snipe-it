@@ -124,8 +124,22 @@ class ManufacturerPresenter extends Presenter
                 'title' => trans('general.accessories'),
                 'visible' => true,
                 'class' => 'css-accessory',
-            ],
-            [
+            ], [
+                'field' => 'components_count',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.components'),
+                'visible' => true,
+                'class' => 'css-component',
+            ], [
+                'field' => 'created_by',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.created_by'),
+                'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
+            ], [
                 'field' => 'created_at',
                 'searchable' => true,
                 'sortable' => true,
@@ -133,9 +147,15 @@ class ManufacturerPresenter extends Presenter
                 'title' => trans('general.created_at'),
                 'visible' => false,
                 'formatter' => 'dateDisplayFormatter',
-            ],
-
-            [
+            ], [
+                'field' => 'updated_at',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.updated_at'),
+                'visible' => false,
+                'formatter' => 'dateDisplayFormatter',
+            ], [
                 'field' => 'actions',
                 'searchable' => false,
                 'sortable' => false,

@@ -11,7 +11,7 @@ return array(
 
     'two_factor' => array(
         'already_enrolled'      => 'Dein Gerät ist bereits eingeschrieben.',
-        'success'               => 'Du hast Dich erfolgreich angemeldet.',
+        'success'               => 'Du hast dich erfolgreich angemeldet.',
         'code_required'         => 'Zwei-Faktor-Code ist erforderlich.',
         'invalid_code'          => 'Zwei-Faktor-Code ist ungültig.',
         'enter_two_factor_code' => 'Bitte gebe deinen Zwei-Faktor-Authentifizierungscode ein.',
@@ -20,12 +20,12 @@ return array(
 
     'signin' => array(
         'error'   => 'Bei der Anmeldung ist ein Problem aufgetreten, bitte versuche es erneut.',
-        'success' => 'Du hast Dich erfolgreich angemeldet.',
+        'success' => 'Du hast dich erfolgreich angemeldet.',
     ),
 
     'logout' => array(
         'error'   => 'Beim Abmelden ist ein Fehler aufgetreten. Bitte versuche es erneut.',
-        'success' => 'Du hast Dich erfolgreich abgemeldet.',
+        'success' => 'Du hast dich erfolgreich abgemeldet.',
     ),
 
     'signup' => array(

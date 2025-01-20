@@ -55,8 +55,10 @@ return [
     'asset_location_update_default' => '仅更新默认位置',
     'asset_location_update_actual' => '仅更新实际位置',
     'asset_not_deployable' => '该资产状态为不可部署。无法借出此资产。',
+    'asset_not_deployable_checkin' => '此资产状态为不可部署。使用此状态标签将会归还资产。',
     'asset_deployable' => '该状态为可部署。可以借出此资产。',
     'processing_spinner' => '处理中...（对于大型文件可能需要一些时间）',
     'optional_infos'  => '可选信息',
-    'order_details'   => '订单相关信息'
+    'order_details'   => '订单相关信息',
+    'calc_eol'    => '如果将 EOL 日期设为零，则根据购买日期和EOL率自动计算EOL。',
 ];

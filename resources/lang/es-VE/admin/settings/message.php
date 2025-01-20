@@ -9,8 +9,8 @@ return [
     'backup' => [
         'delete_confirm'        => '¿Está seguro de que desea eliminar este archivo de respaldo? Esta acción no puede se puede deshacer. ',
         'file_deleted'          => 'El archivo de respaldo fue eliminado satisfactoriamente. ',
-        'generated'             => 'Un nuevo archivo de respaldo ha sido creado con éxito.',
-        'file_not_found'        => 'El archivo de respaldo no puede ser encontrado en el servidor.',
+        'generated'             => 'Se ha creado correctamente un nuevo archivo de copia de seguridad.',
+        'file_not_found'        => 'Ese archivo de copia de seguridad no se pudo encontrar en el servidor.',
         'restore_warning'       => 'Sí, restaurarlo. Reconozco que esto sobrescribirá cualquier dato existente actualmente en la base de datos. Esto también cerrará la sesión de todos sus usuarios existentes (incluido usted).',
         'restore_confirm'       => '¿Está seguro que desea restaurar su base de datos desde :filename?'
     ],
@@ -38,7 +38,7 @@ return [
     ],
     'webhook' => [
         'sending' => 'Enviando mensaje de prueba :app...',
-        'success' => '¡Su Integración :webhook_name funciona!',
+        'success' => '¡Su integración :webhook_name funciona!',
         'success_pt1' => '¡Éxito! Compruebe el ',
         'success_pt2' => ' para su mensaje de prueba, y asegúrese de hacer clic en GUARDAR abajo para guardar su configuración.',
         '500' => 'Error 500 del servidor.',

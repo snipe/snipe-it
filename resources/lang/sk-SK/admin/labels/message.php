@@ -2,10 +2,10 @@
 
 return [
 
-    'invalid_return_count' => 'Invalid count returned from :name. Expected :expected, got :actual.',
-    'invalid_return_type'  => 'Invalid type returned from :name. Expected :expected, got :actual.',
-    'invalid_return_value' => 'Invalid value returned from :name. Expected :expected, got :actual.',
+    'invalid_return_count' => 'Neplatný počet vrátený z :name. Očakávaný :expected, vrátený :actual.',
+    'invalid_return_type'  => 'Nesprávny typ vrátený z :name. Očakávaný :expected, vrátený :actual.',
+    'invalid_return_value' => 'Nesprávna hodnota vrátaná z :name. Očakávaná :expected, vrátaná: actual.',
 
-    'does_not_exist' => 'Label does not exist',
+    'does_not_exist' => 'Štítok neexistuje',
     
 ];

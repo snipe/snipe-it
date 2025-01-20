@@ -3,6 +3,7 @@
 namespace Tests\Unit\Listeners;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Events\NoteAdded;
 use App\Listeners\LogListener;
 use App\Models\Asset;
 use App\Models\User;
@@ -16,7 +17,7 @@ class LogListenerTest extends TestCase
         $checkedOutTo = User::factory()->create();
         $checkedOutBy = User::factory()->create();
 
-        // Simply to ensure `user_id` is set in the action log
+        // Simply to ensure `created_by` is set in the action log
         $this->actingAs($checkedOutBy);
 
         (new LogListener())->onCheckoutableCheckedOut(new CheckoutableCheckedOut(
@@ -28,12 +29,28 @@ class LogListenerTest extends TestCase
 
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'checkout',
-            'user_id' => $checkedOutBy->id,
+            'created_by' => $checkedOutBy->id,
             'target_id' => $checkedOutTo->id,
             'target_type' => User::class,
             'item_id' => $asset->id,
             'item_type' => Asset::class,
             'note' => 'A simple note...',
+        ]);
+    }
+
+    public function testLogsEntryOnAssetNoteCreation()
+    {
+        $asset = Asset::factory()->create();
+        $noteAddedBy = User::factory()->create();
+
+        event(new NoteAdded($asset, $noteAddedBy, 'My Cool Note!'));
+
+        $this->assertDatabaseHas('action_logs', [
+            'action_type' => 'note_added',
+            'created_by' => $noteAddedBy->id,
+            'item_id' => $asset->id,
+            'item_type' => Asset::class,
+            'note' => 'My Cool Note!',
         ]);
     }
 }

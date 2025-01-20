@@ -39,7 +39,7 @@ return [
     'order'				=> 'Nº de encomenda',
     'qr'				=> 'Código QR',
     'requestable'		=> 'Utilizadores podem solicitar este ativo',
-    'redirect_to_all'   => 'Return to all :type',
+    'redirect_to_all'   => 'Retornar para :type',
     'redirect_to_type'   => 'Go to :type',
     'redirect_to_checked_out_to'   => 'Go to Checked Out to',
     'select_statustype'	=> 'Selecionar Estado',
@@ -55,8 +55,10 @@ return [
     'asset_location_update_default' => 'Atualizar apenas a localização por defeito',
     'asset_location_update_actual' => 'Atualizar apenas a localização atual',
     'asset_not_deployable' => 'Este estado de artigo não é implementável. Este artigo não pode ser verificado.',
+    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Este estado é implementável. Este ativo pode ser entregue.',
     'processing_spinner' => 'A processar... (Isto pode levar algum tempo em ficheiros grandes)',
     'optional_infos'  => 'Informação opcional',
-    'order_details'   => 'Informação de estado da encomenda'
+    'order_details'   => 'Informação de estado da encomenda',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

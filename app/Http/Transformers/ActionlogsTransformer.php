@@ -141,6 +141,8 @@ class ActionlogsTransformer
                 if ($actionlog->item) {
                     if ($actionlog->itemType() == 'asset') {
                         $file_url = route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
+                    } elseif ($actionlog->itemType() == 'accessory') {
+                        $file_url = route('show.accessoryfile', ['accessoryId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                     } elseif ($actionlog->itemType() == 'license') {
                         $file_url = route('show.licensefile', ['licenseId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                     } elseif ($actionlog->itemType() == 'user') {
@@ -158,7 +160,6 @@ class ActionlogsTransformer
                 [
                     'url' => $file_url,
                     'filename' => $actionlog->filename,
-                    'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
 
             'item' => ($actionlog->item) ? [
@@ -176,11 +177,17 @@ class ActionlogsTransformer
             'next_audit_date' => ($actionlog->itemType()=='asset') ? Helper::getFormattedDateObject($actionlog->calcNextAuditDate(null, $actionlog->item), 'date'): null,
             'days_to_next_audit' => $actionlog->daysUntilNextAudit($settings->audit_interval, $actionlog->item),
             'action_type'   => $actionlog->present()->actionType(),
-            'admin' => ($actionlog->admin) ? [
-                'id' => (int) $actionlog->admin->id,
-                'name' => e($actionlog->admin->getFullNameAttribute()),
-                'first_name'=> e($actionlog->admin->first_name),
-                'last_name'=> e($actionlog->admin->last_name)
+            'admin' => ($actionlog->adminuser) ? [
+                'id' => (int) $actionlog->adminuser->id,
+                'name' => e($actionlog->adminuser->getFullNameAttribute()),
+                'first_name'=> e($actionlog->adminuser->first_name),
+                'last_name'=> e($actionlog->adminuser->last_name)
+            ] : null,
+            'created_by' => ($actionlog->adminuser) ? [
+                'id' => (int) $actionlog->adminuser->id,
+                'name' => e($actionlog->adminuser->getFullNameAttribute()),
+                'first_name'=> e($actionlog->adminuser->first_name),
+                'last_name'=> e($actionlog->adminuser->last_name)
             ] : null,
             'target' => ($actionlog->target) ? [
                 'id' => (int) $actionlog->target->id,

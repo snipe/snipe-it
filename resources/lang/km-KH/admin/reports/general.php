@@ -13,5 +13,10 @@ return [
         'user_state' => 'រដ្ឋអ្នកប្រើប្រាស់',
         'user_country' => 'ប្រទេសអ្នកប្រើប្រាស់',
         'user_zip' => 'លេខ​កូដ​អ្នក​ប្រើ'
-    ]
+    ],
+    'open_saved_template' => 'Open Saved Template',
+    'save_template' =>  'Save Template',
+    'select_a_template' => 'Select a Template',
+    'template_name' => 'Template Name',
+    'update_template' => 'Update Template',
 ];

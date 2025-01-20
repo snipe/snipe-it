@@ -393,6 +393,10 @@ a:visited {
 .text-primary {
   color: #fff;
 }
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
+}
 :root {
   --background: #222;
   --back-main: #333;
@@ -1184,6 +1188,10 @@ a:visited {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;
@@ -2151,6 +2159,10 @@ a:visited {
 .text-primary {
   color: #fff;
 }
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
+}
 :root {
   --background: #222;
   --back-main: #333;
@@ -2661,6 +2673,10 @@ li.dropdown-item-marker {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;
@@ -3390,6 +3406,10 @@ a:visited {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;
@@ -4127,6 +4147,10 @@ a:visited {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;
@@ -5067,6 +5091,10 @@ a:visited {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;

@@ -288,33 +288,31 @@ class UsersController extends Controller
             $user->password = bcrypt($request->input('password'));
         }
 
-
         // Update the location of any assets checked out to this user
         Asset::where('assigned_type', User::class)
             ->where('assigned_to', $user->id)
             ->update(['location_id' => $user->location_id]);
 
-            $permissions_array = $request->input('permission');
+        $permissions_array = $request->input('permission');
 
+        // Strip out the superuser permission if the user isn't a superadmin
+        if (! auth()->user()->isSuperUser()) {
+            unset($permissions_array['superuser']);
+            $permissions_array['superuser'] = $orig_superuser;
+        }
 
-            // Strip out the superuser permission if the user isn't a superadmin
-            if (! auth()->user()->isSuperUser()) {
-                unset($permissions_array['superuser']);
-                $permissions_array['superuser'] = $orig_superuser;
-            }
+        $user->permissions = json_encode($permissions_array);
 
-            $user->permissions = json_encode($permissions_array);
+        // Handle uploaded avatar
+        app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
+        session()->put(['redirect_option' => $request->get('redirect_option')]);
 
-            // Handle uploaded avatar
-            app(ImageUploadRequest::class)->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
-            session()->put(['redirect_option' => $request->get('redirect_option')]);
-
-            if ($user->save()) {
-                // Redirect to the user page
-                return redirect()->to(Helper::getRedirectOption($request, $user->id, 'Users'))
-                    ->with('success', trans('admin/users/message.success.update'));
-            }
-            return redirect()->back()->withInput()->withErrors($user->getErrors());
+        if ($user->save()) {
+            // Redirect to the user page
+            return redirect()->to(Helper::getRedirectOption($request, $user->id, 'Users'))
+                ->with('success', trans('admin/users/message.success.update'));
+        }
+        return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
 
     /**
@@ -372,7 +370,7 @@ class UsersController extends Controller
                 $logaction->item_type = User::class;
                 $logaction->item_id = $user->id;
                 $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->user_id = auth()->id();
+                $logaction->created_by = auth()->id();
                 $logaction->logaction('restore');
 
                 // Redirect them to the deleted page if there are more, otherwise the section index
@@ -597,23 +595,37 @@ class UsersController extends Controller
     public function printInventory($id)
     {
         $this->authorize('view', User::class);
-        if ($user = User::where('id', $id)->withTrashed()->first()) {
 
+        $user = User::where('id', $id)
+            ->with([
+                'assets.assetlog',
+                'assets.assignedAssets.assetlog',
+                'assets.assignedAssets.defaultLoc',
+                'assets.assignedAssets.location',
+                'assets.assignedAssets.model.category',
+                'assets.defaultLoc',
+                'assets.location',
+                'assets.model.category',
+                'accessories.assetlog',
+                'accessories.category',
+                'accessories.manufacturer',
+                'consumables.assetlog',
+                'consumables.category',
+                'consumables.manufacturer',
+                'licenses.category',
+            ])
+            ->withTrashed()
+            ->first();
+
+        if ($user) {
             $this->authorize('view', $user);
-            $assets = Asset::where('assigned_to', $id)->where('assigned_type', User::class)->with('model', 'model.category')->get();
-            $accessories = $user->accessories()->get();
-            $consumables = $user->consumables()->get();
 
-            return view('users/print')->with('assets', $assets)
-                ->with('licenses', $user->licenses()->get())
-                ->with('accessories', $accessories)
-                ->with('consumables', $consumables)
-                ->with('show_user', $user)
+            return view('users.print')
+                ->with('users', [$user])
                 ->with('settings', Setting::getSettings());
         }
 
         return redirect()->route('users.index')->with('error', trans('admin/users/message.user_not_found', compact('id')));
-
     }
 
     /**

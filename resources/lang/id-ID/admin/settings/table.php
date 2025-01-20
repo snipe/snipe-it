@@ -2,5 +2,5 @@
 
 return array(
     'created'   => 'Dibuat',
-    'size' => 'Size',
+    'size' => 'Ukuran',
 );

@@ -174,9 +174,9 @@ class AssetMaintenance extends Model implements ICompanyableChild
      * @author  A. Gianotto <snipe@snipe.net>
      * @version v3.0
      */
-    public function admin()
+    public function adminuser()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id')
+        return $this->belongsTo(\App\Models\User::class, 'created_by')
             ->withTrashed();
     }
 
@@ -207,20 +207,6 @@ class AssetMaintenance extends Model implements ICompanyableChild
     }
 
 
-    /**
-     * Query builder scope to order on admin user
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  string                              $order       Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeOrderAdmin($query, $order)
-    {
-        return $query->leftJoin('users', 'asset_maintenances.user_id', '=', 'users.id')
-            ->orderBy('users.first_name', $order)
-            ->orderBy('users.last_name', $order);
-    }
 
     /**
      * Query builder scope to order on asset tag
@@ -277,5 +263,13 @@ class AssetMaintenance extends Model implements ICompanyableChild
         return $query->join('assets as maintained_asset', 'asset_maintenances.asset_id', '=', 'maintained_asset.id')
             ->leftjoin('status_labels as maintained_asset_status', 'maintained_asset_status.id', '=', 'maintained_asset.status_id')
             ->orderBy('maintained_asset_status.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on the user that created it
+     */
+    public function scopeOrderByCreatedBy($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'asset_maintenances.created_by', '=', 'admin_sort.id')->select('asset_maintenances.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }

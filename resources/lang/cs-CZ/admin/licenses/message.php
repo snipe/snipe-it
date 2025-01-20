@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Vyskytl se problém při ověřování licence. Zkuste to znovu prosím.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Licence byla úspěšně zkontrolována'
     ),
 

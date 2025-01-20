@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => '您确定要从 :filename还原您的数据库吗？'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please log in again.'
+        'success'               => '您的系统备份已恢复。请重新登录。'
     ],
     'purge' => [
         'error'     => '清除过程中出现了错误。 ',

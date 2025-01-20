@@ -6,11 +6,11 @@ return [
     'asset_depreciations'  					=> 'Амортизациони планови',
     'create'  					            => 'Креирај амортизационен план',
     'depreciation_name'  					=> 'Име на амортизационен план',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Подна предност на амортизација',
     'number_of_months'  					=> 'Број на месеци',
     'update'  					            => 'Ажурирај амортизационен план',
-    'depreciation_min'                      => 'Minimum Value after Depreciation',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'depreciation_min'                      => 'Минимална вредност после амортизација',
+    'no_depreciations_warning'               => '<strong>Предупредување: </strong>
+                      Во моментов немате поставено амортизација.
+                      Поставете барем една амортизација за да го видите извештајот за амортизација.',
 ];

@@ -20,11 +20,11 @@ return [
     'requestable'               => 'Solicitável',
     'requested'				    => 'Solicitado',
     'not_requestable'           => 'Não solicitável',
-    'requestable_status_warning' => 'Não altere o status solicitável',
+    'requestable_status_warning' => 'Não altere a situação de solicitável',
     'restore'  					=> 'Restaurar Ativo',
     'pending'  					=> 'Pendente',
     'undeployable'  			=> 'Não implementável',
-    'undeployable_tooltip'  	=> 'Este ativo possui uma etiqueta de status que não é implantável e não pode ser check-out no momento.',
+    'undeployable_tooltip'  	=> 'Este ativo possui uma etiqueta de situação que não é implementável e não pode ser disponibilizado no momento.',
     'view'  					=> 'Ver Ativo',
     'csv_error' => 'Você tem um erro no seu arquivo CSV:',
     'import_text' => '<p>Upload de um CSV que contém o histórico de ativos. Os ativos e usuários já existem no sistema, ou serão ignorados. Correspondência de mídias para o histórico de importação acontece com a tag de conteúdo. Tentaremos encontrar um usuário correspondente com base no nome de usuário que você fornece, e nos critérios que você selecionar abaixo. Se você não selecionar nenhum critério abaixo, ele simplesmente tentará combinar com o formato de nome de usuário configurado na <code>Administração &gt; Configurações Gerais</code>.</p><p>Campos incluídos no CSV devem corresponder aos cabeçalhos: <strong>Marcador de Ativo, Nome, Data de Finalização, Data de Entrada</strong>. Quaisquer campos adicionais serão ignorados. </p><p>Data de check-in: em branco ou em datas futuras de check-in fará check-in dos itens para o usuário associado. Excluindo a coluna Data de check-in criará uma data de check-in com a data de hoje.</p>

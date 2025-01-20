@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Contracts\Translation\HasLocalePreference;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
@@ -122,6 +123,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'jobtitle',
         'employee_num',
         'website',
+        'locale',
     ];
 
     /**
@@ -332,6 +334,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function accessories()
     {
         return $this->belongsToMany(\App\Models\Accessory::class, 'accessories_checkout', 'assigned_to', 'accessory_id')
+            ->where('assigned_type', '=', 'App\Models\User')
             ->withPivot('id', 'created_at', 'note')->withTrashed()->orderBy('accessory_id');
     }
 
@@ -357,6 +360,15 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     public function licenses()
     {
         return $this->belongsToMany(\App\Models\License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id', 'created_at', 'updated_at');
+    }
+
+    /**
+     * Establishes the user -> reportTemplates relationship
+     *
+     */
+    public function reportTemplates(): HasMany
+    {
+        return $this->hasMany(ReportTemplate::class, 'created_by');
     }
 
     /**
