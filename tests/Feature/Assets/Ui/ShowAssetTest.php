@@ -11,7 +11,7 @@ class ShowAssetTest extends TestCase
     public function testPageForAssetWithMissingModelStillRenders()
     {
         $asset = Asset::factory()->create();
-        
+
         $asset->model_id = null;
         $asset->forceSave();
 
