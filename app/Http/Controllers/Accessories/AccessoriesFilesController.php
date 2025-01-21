@@ -51,7 +51,7 @@ class AccessoriesFilesController extends Controller
                 }
 
 
-                return redirect()->route('accessories.show', $accessory->id)->with('success', trans('general.file_upload_success'));
+                return redirect()->route('accessories.show', $accessory->id)->withFragment('files')->with('success', trans('general.file_upload_success'));
 
             }
 
@@ -90,8 +90,7 @@ class AccessoriesFilesController extends Controller
 
             $log->delete();
 
-            return redirect()->back()
-                ->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
         // Redirect to the licence management page

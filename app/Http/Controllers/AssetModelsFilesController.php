@@ -44,10 +44,10 @@ class AssetModelsFilesController extends Controller
                 $model->logUpload($file_name, $request->get('notes'));
             }
 
-            return redirect()->back()->with('success', trans('general.file_upload_success'));
+            return redirect()->back()->withFragment('files')->with('success', trans('general.file_upload_success'));
         }
 
-        return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
+        return redirect()->back()->withFragment('files')->with('error', trans('admin/hardware/message.upload.nofiles'));
     }
 
     /**
@@ -119,11 +119,10 @@ class AssetModelsFilesController extends Controller
                 }
                 $log->delete();
 
-                return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
+                return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
             }
 
-            return redirect()->back()
-                ->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
         // Redirect to the hardware management page
