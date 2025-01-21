@@ -138,11 +138,12 @@ class LicenseSeatsController extends Controller
         if ($licenseSeat->save()) {
 
             if ($is_checkin) {
-                $licenseSeat->logCheckin($target, $request->input('note'));
                 if(!$licenseSeat->license->reassignable){
+                    $licenseSeat->notes .= "\n" .trans('admin/licenses/message.checkin.not_reassignable') . ".";
                     $licenseSeat->unreassignable_seat = true;
                     $licenseSeat->save();
                 }
+                $licenseSeat->logCheckin($target, $licenseSeat->notes);
 
                 return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
             }
