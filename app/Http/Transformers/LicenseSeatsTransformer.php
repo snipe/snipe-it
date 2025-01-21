@@ -2,12 +2,10 @@
 
 namespace App\Http\Transformers;
 
-use App\Models\Actionlog;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
-
 class LicenseSeatsTransformer
 {
     public function transformLicenseSeats(Collection $seats, $total)
@@ -68,17 +66,4 @@ class LicenseSeatsTransformer
 
         return $array;
     }
-//    private function unReassignable($seat)
-//    {
-//        if (!$seat->license->reassignable) {
-//           $exists = Actionlog::where('action_type', '=', 'checkin from')
-//                ->where('item_id', '=', $seat->license->id)
-//                ->where('updated_at', '=', $seat->updated_at)
-//                ->exists();
-//           if($exists) {
-//               return true;
-//           }
-//            return false;
-//        }
-//    }
 }
