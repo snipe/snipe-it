@@ -49,7 +49,7 @@
                 </li>
 
                 <li>
-                    <a href="#uploads" data-toggle="tab">
+                    <a href="#files" data-toggle="tab">
 
                         <span class="hidden-lg hidden-md">
                           <i class="fas fa-barcode fa-2x"></i>
@@ -102,7 +102,7 @@
                 </div> <!-- /.tab-pane assets -->
 
 
-                <div class="tab-pane fade" id="uploads">
+                <div class="tab-pane fade" id="files">
 
                     <div class="row">
                         <div class="col-md-12">
