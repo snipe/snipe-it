@@ -139,7 +139,6 @@ class LicenseSeatsController extends Controller
 
             if ($is_checkin) {
                 if(!$licenseSeat->license->reassignable){
-                    $licenseSeat->notes .= "\n" .trans('admin/licenses/message.checkin.not_reassignable') . ".";
                     $licenseSeat->unreassignable_seat = true;
                     $licenseSeat->save();
                 }

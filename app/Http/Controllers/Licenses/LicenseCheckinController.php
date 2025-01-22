@@ -97,8 +97,6 @@ class LicenseCheckinController extends Controller
         $licenseSeat->notes = $request->input('notes');
         if (! $licenseSeat->license->reassignable) {
             $licenseSeat->unreassignable_seat = true;
-            $licenseSeat->notes .= "\n" . trans('admin/licenses/message.checkin.not_reassignable') . '.';
-
         }
 
         session()->put(['redirect_option' => $request->get('redirect_option')]);
@@ -131,21 +129,17 @@ class LicenseCheckinController extends Controller
         $license = License::findOrFail($licenseId);
         $this->authorize('checkin', $license);
 
-        if (! $license->reassignable) {
-            // Not allowed to checkin
-            Session::flash('error', 'License not reassignable.');
-
-            return redirect()->back()->withInput();
-        }
-
         $licenseSeatsByUser = LicenseSeat::where('license_id', '=', $licenseId)
             ->whereNotNull('assigned_to')
-            ->with('user')
+            ->with('user', 'license')
             ->get();
 
+        $license = $licenseSeatsByUser->first()?->license;
         foreach ($licenseSeatsByUser as $user_seat) {
             $user_seat->assigned_to = null;
-
+            if ($license && ! $license->reassignable) {
+                $user_seat->unreassignable_seat = true;
+            }
             if ($user_seat->save()) {
                 Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
                 $user_seat->logCheckin($user_seat->user, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
@@ -160,7 +154,9 @@ class LicenseCheckinController extends Controller
         $count = 0;
         foreach ($licenseSeatsByAsset as $asset_seat) {
             $asset_seat->asset_id = null;
-
+            if ($license && ! $license->reassignable) {
+                $asset_seat->unreassignable_seat = true;
+            }
             if ($asset_seat->save()) {
                 Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
                 $asset_seat->logCheckin($asset_seat->asset, trans('admin/licenses/general.bulk.checkin_all.log_msg'));
