@@ -45,5 +45,6 @@ return [
         'error' => 'Algo deu errado. :app respondeu com: :error_message',
         'error_redirect' => 'ERRO: 301/302 :endpoint retorna um redirecionamento. Por razões de segurança, não seguimos redirecionamentos. Por favor, use o ponto de extremidade atual.',
         'error_misc' => 'Algo deu errado. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

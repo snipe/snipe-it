@@ -45,5 +45,6 @@ return [
         'error' => 'Κάτι πήγε στραβά. :app απάντησε με: :error_message',
         'error_redirect' => 'ΣΦΑΛΜΑ: 301/302:endpoint επιστρέφει μια ανακατεύθυνση. Για λόγους ασφαλείας, δεν ακολουθούμε ανακατευθύνσεις. Παρακαλούμε χρησιμοποιήστε το πραγματικό τελικό σημείο.',
         'error_misc' => 'Κάτι πήγε στραβά. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

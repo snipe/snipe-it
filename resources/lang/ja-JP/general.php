@@ -216,6 +216,12 @@ return [
     'no_results'			=> '結果はありません。',
     'no'  					=> 'いいえ',
     'notes'  				=> '備考',
+    'note_added'            => 'Note Added',
+    'add_note'              => 'Add Note',
+    'note_edited'            => 'Note Edited',
+    'edit_note'              => 'Edit Note',
+    'note_deleted'            => 'Note Deleted',
+    'delete_note'              => 'Delete Note',
     'order_number'          => '注文番号',
     'only_deleted'          => '削除された資産のみ',
     'page_menu'				=> 'メニューアイテムを表示',
@@ -567,5 +573,8 @@ return [
     'import_asset_tag_exists' => 'アセットタグ :asset_tag のアセットは既に存在し、アップデートは要求されませんでした。変更はありません。',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
     'accessories_assigned' => '割り当てられたアクセサリー',
+    'user_managed_passwords' => 'Password Management',
+    'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
+    'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
 
 ];

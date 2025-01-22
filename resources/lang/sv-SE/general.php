@@ -216,6 +216,12 @@ return [
     'no_results'			=> 'Inga resultat.',
     'no'  					=> 'Nej',
     'notes'  				=> 'Anteckningar',
+    'note_added'            => 'Note Added',
+    'add_note'              => 'Add Note',
+    'note_edited'            => 'Note Edited',
+    'edit_note'              => 'Edit Note',
+    'note_deleted'            => 'Note Deleted',
+    'delete_note'              => 'Delete Note',
     'order_number'          => 'Ordernummer',
     'only_deleted'          => 'Endast borttagna tillgångar',
     'page_menu'				=> 'Visar _MENU_ objekt',
@@ -567,5 +573,8 @@ return [
     'import_asset_tag_exists' => 'En tillgång med tillgångstaggen :asset_tag finns redan och en uppdatering begärdes inte. Ingen ändring gjordes.',
     'countries_manually_entered_help' => 'Värden med en asterisk (*) matades in manuellt och matchar inte befintliga ISO 3166 rullgardinsvärden',
     'accessories_assigned' => 'Assigned Accessories',
+    'user_managed_passwords' => 'Password Management',
+    'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
+    'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
 
 ];
