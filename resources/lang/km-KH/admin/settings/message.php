@@ -45,5 +45,6 @@ return [
         'error' => 'មាន​អ្វីមួយ​មិន​ប្រក្រតី។ :app បានឆ្លើយតបជាមួយ៖ :error_message',
         'error_redirect' => 'កំហុស៖ 301/302៖ ចំណុចបញ្ចប់ត្រឡប់ការបញ្ជូនបន្ត។ សម្រាប់ហេតុផលសុវត្ថិភាព យើងមិនធ្វើតាមការបញ្ជូនបន្តទេ។ សូមប្រើចំណុចបញ្ចប់ពិតប្រាកដ។',
         'error_misc' => 'មាន​អ្វីមួយ​មិន​ប្រក្រតី។ :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

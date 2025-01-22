@@ -216,6 +216,12 @@ return [
     'no_results'			=> 'Нема резултати.',
     'no'  					=> 'Не',
     'notes'  				=> 'Забелешки',
+    'note_added'            => 'Note Added',
+    'add_note'              => 'Add Note',
+    'note_edited'            => 'Note Edited',
+    'edit_note'              => 'Edit Note',
+    'note_deleted'            => 'Note Deleted',
+    'delete_note'              => 'Delete Note',
     'order_number'          => 'Број на нарачка',
     'only_deleted'          => 'Само избришани средства',
     'page_menu'				=> 'Прикажани се _MENU_ ставки',
@@ -567,5 +573,8 @@ return [
     'import_asset_tag_exists' => 'Средство со ознаката :asset_tag веќе постои и не беше побарано ажурирање.Не е направена никаква промена.',
     'countries_manually_entered_help' => 'Вредности со звездичка (*) биле рачно внесени и не се совпаѓаат со постојните ISO 3166 вредности во менито',
     'accessories_assigned' => 'Assigned Accessories',
+    'user_managed_passwords' => 'Password Management',
+    'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
+    'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
 
 ];

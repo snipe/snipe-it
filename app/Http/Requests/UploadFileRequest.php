@@ -46,8 +46,6 @@ class UploadFileRequest extends Request
         $extension = $file->getClientOriginalExtension();
         $file_name = $name_prefix.'-'.str_random(8).'-'.str_slug(basename($file->getClientOriginalName(), '.'.$extension)).'.'.$file->guessExtension();
 
-
-        Log::debug("Your filetype IS: ".$file->getMimeType());
         // Check for SVG and sanitize it
         if ($file->getMimeType() === 'image/svg+xml') {
             Log::debug('This is an SVG');
@@ -66,7 +64,6 @@ class UploadFileRequest extends Request
 
         } else {
             $put_results = Storage::put($dirname.$file_name, file_get_contents($file));
-            Log::debug("Here are the '$put_results' (should be 0 or 1 or true or false or something?)");
         }
         return $file_name;
     }

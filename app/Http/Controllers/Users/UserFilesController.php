@@ -56,7 +56,7 @@ class UserFilesController extends Controller
                 $logActions[] = $logAction;
             }
             // dd($logActions);
-            return redirect()->back()->with('success', trans('admin/users/message.upload.success'));
+            return redirect()->back()->withFragment('files')->with('success', trans('admin/users/message.upload.success'));
         }
         return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
 
@@ -87,7 +87,7 @@ class UserFilesController extends Controller
                 
                 if (Storage::exists($rel_path.'/'.$filename)) {
                     Storage::delete($rel_path.'/'.$filename);
-                    return redirect()->back()->with('success', trans('admin/users/message.deletefile.success'));
+                    return redirect()->back()->withFragment('files')->with('success', trans('admin/users/message.deletefile.success'));
                 }
 
             }

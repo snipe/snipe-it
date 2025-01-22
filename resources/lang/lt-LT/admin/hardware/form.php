@@ -60,5 +60,5 @@ return [
     'processing_spinner' => 'Apdorojama... (Dideliems failams gali šiek tiek užtrukti)',
     'optional_infos'  => 'Papildoma informacija',
     'order_details'   => 'Su užsakymu susijusi informacija',
-    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
+    'calc_eol'    => 'Jei EOL data nustatoma iš naujo, naudoti automatinį EOL apskaičiavimą pagal pirkimo datą ir EOL laipsnį.',
 ];

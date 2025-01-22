@@ -216,6 +216,12 @@ return [
     'no_results'			=> 'Нет результатов.',
     'no'  					=> 'Нет',
     'notes'  				=> 'Примечания',
+    'note_added'            => 'Note Added',
+    'add_note'              => 'Add Note',
+    'note_edited'            => 'Note Edited',
+    'edit_note'              => 'Edit Note',
+    'note_deleted'            => 'Note Deleted',
+    'delete_note'              => 'Delete Note',
     'order_number'          => 'Номер заказа',
     'only_deleted'          => 'Только удаленные активы',
     'page_menu'				=> 'Показаны элементы _MENU_',
@@ -567,5 +573,8 @@ return [
     'import_asset_tag_exists' => 'Актив с тегом актива :asset_tag уже существует и обновление не было запрошено. Изменения не были произведены.',
     'countries_manually_entered_help' => 'Значения со звездочкой (*) были введены вручную и не соответствуют существующим значениям выпадающего списка ISO 3166',
     'accessories_assigned' => 'Assigned Accessories',
+    'user_managed_passwords' => 'Password Management',
+    'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
+    'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
 
 ];
