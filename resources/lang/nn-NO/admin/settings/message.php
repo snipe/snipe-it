@@ -45,5 +45,6 @@ return [
         'error' => 'Noe gikk galt. :app svarte med: :error_message',
         'error_redirect' => 'FEIL: 301/302 :endpoint returnerer en omaddressering. Av sikkerhetsgrunner følger vi ikke omadressering. Vennligst bruk det faktiske endepunktet.',
         'error_misc' => 'Noe gikk galt. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

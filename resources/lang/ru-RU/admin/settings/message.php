@@ -45,5 +45,6 @@ return [
         'error' => 'Что-то пошло не так. :app ответил: :error_message',
         'error_redirect' => 'ОШИБКА: 301/302 :endpoint возвращает редирект. По соображениям безопасности мы не переходим по редиректам. Пожалуйста, используйте фактическую конечную точку.',
         'error_misc' => 'Что-то пошло не так. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

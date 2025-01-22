@@ -45,5 +45,6 @@ return [
         'error' => 'Etwas ist schiefgelaufen. :app antwortete mit: :error_message',
         'error_redirect' => 'FEHLER: 301/302 :endpoint gibt eine Umleitung zurück. Aus Sicherheitsgründen folgen wir keine Umleitungen. Bitte verwende den aktuellen Endpunkt.',
         'error_misc' => 'Etwas ist schiefgelaufen! :( ',
+        'webhook_fail' => '',
     ]
 ];

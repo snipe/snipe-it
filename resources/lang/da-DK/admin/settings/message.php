@@ -45,5 +45,6 @@ return [
         'error' => 'Noget gik galt. :app svarede med: :error_message',
         'error_redirect' => 'FEJL: 301/302: endpoint returnerer en omdirigering. Af sikkerhedsmæssige årsager følger vi ikke omdirigeringer. Brug det faktiske slutpunkt.',
         'error_misc' => 'Noget gik galt. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

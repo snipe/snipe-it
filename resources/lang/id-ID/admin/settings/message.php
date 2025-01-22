@@ -45,5 +45,6 @@ return [
         'error' => 'Terjadi kesalahan. :app merespons dengan: :error_message',
         'error_redirect' => 'KESALAHAN: 301/302 :endpoint mengembalikan pengalihan. Untuk alasan keamanan, kami tidak mengikuti pengalihan. Harap gunakan endpoint yang sebenarnya.',
         'error_misc' => 'Terjadi kesalahan. :( ',
+        'webhook_fail' => ' notifikasi webhook gagal: Pastikan URL masih valid.',
     ]
 ];

@@ -45,5 +45,6 @@ return [
         'error' => 'Coś poszło nie tak. :app odpowiedział: :error_message',
         'error_redirect' => 'BŁĄD: 301/302 :endpoint zwraca przekierowanie. Ze względów bezpieczeństwa nie podążamy za przekierowaniami. Proszę użyć aktualnego punktu końcowego.',
         'error_misc' => 'Coś poszło nie tak. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

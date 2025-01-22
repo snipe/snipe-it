@@ -2,8 +2,8 @@
 
 return array(
 
-    'invalid_category_type' => 'The category must be a consumable category.',
-    'does_not_exist' => 'Consumable does not exist.',
+    'invalid_category_type' => 'ប្រភេទត្រូវតែជាប្រភេទប្រើប្រាស់បាន។',
+    'does_not_exist' => 'សម្ភារៈប្រើប្រាស់មិនមានទេ។',
 
     'create' => array(
         'error'   => 'Consumable was not created, please try again.',

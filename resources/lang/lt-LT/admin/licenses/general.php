@@ -27,7 +27,7 @@ return array(
                 'modal'             => 'Šis veiksmas paims vieną vietą. | Šis veiksmas paims visas :checkedout_seats_count šios licencijos vietas.',
                 'enabled_tooltip'   => 'Paimkite VISAS licencijos vietas – tiek iš naudotojų, tiek iš turto',
                 'disabled_tooltip'  => 'Išjungta, kadangi šiuo metu nėra išduotų vietų',
-                'disabled_tooltip_reassignable'  => 'Išjungta, kadangi licencijos negalima perskirti',
+                'disabled_tooltip_reassignable'  => 'Išjungta, kadangi licencijos negalima perduoti',
                 'success'           => 'Licencija paimta sėkmingai! | Visos licencijos paimtos sėkmingai!',
                 'log_msg'           => 'Paimta naudojant masinio licencijų paėmimo sąsają',
             ],

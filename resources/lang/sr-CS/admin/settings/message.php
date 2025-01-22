@@ -45,5 +45,6 @@ return [
         'error' => 'Nešto nije u redu. :app je adgovorila sa: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint vraća preusmerenje. Zbog bezbednosnih razloga, mi ne sledimo preusmerenja. Molim vas koristite direktnu krajnju tačku.',
         'error_misc' => 'Nešto nije u redu. :( ',
+        'webhook_fail' => ' neuspelo obaveštavanje putem veb zakačke: Proverite da li je URL i dalje validan.',
     ]
 ];
