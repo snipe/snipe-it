@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Helpers\Helper;
 use App\Models\Traits\Acceptable;
 use App\Notifications\CheckinLicenseNotification;
 use App\Notifications\CheckoutLicenseNotification;
@@ -116,33 +115,6 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
         }
 
         return false;
-    }
-    public static function usedSeatCount($license): array {
-        $total_seats_count = (int) $license->totalSeatsByLicenseID();
-        $available_seats_count = $license->availCount()->count();
-        $unreassignable_seats_count = self::unReassignableCount($license);
-        if(!$license->reassignable){
-            $checkedout_seats_count = ($total_seats_count - $available_seats_count - $unreassignable_seats_count );
-        }
-        else {
-            $checkedout_seats_count = ($total_seats_count - $available_seats_count);
-        }
-        return [
-            $checkedout_seats_count,
-            $total_seats_count,
-            $available_seats_count,
-            $unreassignable_seats_count,
-        ];
-    }
-    public static function unReassignableCount($license)
-    {
-
-        if (!$license->reassignable) {
-            $count = static::query()->where('unreassignable_seat', '=', true)
-                ->where('license_id', '=', $license->id)
-                ->count();
-            return $count;
-        }
     }
 
     /**
