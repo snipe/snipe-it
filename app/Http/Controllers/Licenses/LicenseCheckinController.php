@@ -152,6 +152,7 @@ class LicenseCheckinController extends Controller
             ->get();
 
         $count = 0;
+        $license = $licenseSeatsByAsset->first()?->license;
         foreach ($licenseSeatsByAsset as $asset_seat) {
             $asset_seat->asset_id = null;
             if ($license && ! $license->reassignable) {
