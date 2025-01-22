@@ -48,7 +48,7 @@ class AssetObserver
             $changed = [];
 
             foreach ($asset->getRawOriginal() as $key => $value) {
-                if (isset($asset->getAttributes()[$key]) && ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key])) {
+                if ((array_key_exists($key, $asset->getAttributes())) && ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key])) {
                     $changed[$key]['old'] = $asset->getRawOriginal()[$key];
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
                 }
