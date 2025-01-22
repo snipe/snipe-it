@@ -216,6 +216,12 @@ return [
     'no_results'			=> 'Tidak ada hasil.',
     'no'  					=> 'Tidak',
     'notes'  				=> 'Catatan',
+    'note_added'            => 'Catatan Ditambahkan',
+    'add_note'              => 'Tambah Catatan',
+    'note_edited'            => 'Catatan Diedit',
+    'edit_note'              => 'Edit Catatan',
+    'note_deleted'            => 'Catatan Dihapus',
+    'delete_note'              => 'Hapus Catatan',
     'order_number'          => 'Jumlah order',
     'only_deleted'          => 'Hanya Aset yang Dihapus',
     'page_menu'				=> 'Menampilkan item _MENU_',
@@ -567,5 +573,8 @@ return [
     'import_asset_tag_exists' => 'Aset dengan tag aset :asset_tag sudah ada dan tidak ada permintaan pembaruan. Tidak ada perubahan yang dibuat.',
     'countries_manually_entered_help' => 'Nilai yang ditandai dengan tanda bintang (*) dimasukkan secara manual dan tidak cocok dengan nilai dropdown ISO 3166 yang ada',
     'accessories_assigned' => 'Aksesoris yang Dipasangkan',
+    'user_managed_passwords' => 'Manajemen Kata Sandi',
+    'user_managed_passwords_disallow' => 'Jangan izinkan pengelolaan kata sandi oleh pengguna',
+    'user_managed_passwords_allow' => 'Izinkan pengguna mengelola kata sandi mereka sendiri',
 
 ];

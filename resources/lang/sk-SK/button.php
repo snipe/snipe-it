@@ -5,7 +5,7 @@ return [
     'add'    	                => 'Pridať nové',
     'cancel'                    => 'Zrušiť',
     'checkin_and_delete'  	    => 'Prijať všetko / Zmazať používateľa',
-    'delete'  	                => 'Odstrániť',
+    'delete'  	                => 'Vymazať',
     'edit'    	                => 'Upraviť',
     'clone'    	                => 'Duplikovať',
     'restore' 	                => 'Obnoviť',

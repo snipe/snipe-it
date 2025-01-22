@@ -45,5 +45,6 @@ return [
         'error' => 'Kažkas ne taip. :app atsakė: :error_message',
         'error_redirect' => 'KLAIDA: 301/302 :endpoint rodo peradresavimą. Saugumo sumetimais peradresavimų nevykdome. Naudokite tikrąjį galinį tašką.',
         'error_misc' => 'Kažkas ne taip. :( ',
+        'webhook_fail' => ' „Webhook“ pranešimas nepavyko: patikrinkite ar URL vis dar galioja.',
     ]
 ];

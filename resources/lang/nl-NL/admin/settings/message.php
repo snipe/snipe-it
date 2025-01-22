@@ -45,5 +45,6 @@ return [
         'error' => 'Er ging iets mis. :app reageerde met: :error_message',
         'error_redirect' => 'FOUT: 301/302 :endpoint geeft een omleiding. Om veiligheidsredenen volgen we geen omleidingen. Gebruik het werkelijke eindpunt.',
         'error_misc' => 'Er ging iets mis. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];
