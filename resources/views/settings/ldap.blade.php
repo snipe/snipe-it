@@ -324,7 +324,7 @@
                                 {{ Form::label('ldap_pword', trans('admin/settings/general.ldap_pword')) }}
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" type="password" name="ldap_pword" id="ldap_pword" value="" autocomplete="off" onfocus="this.removeAttribute('readonly');" readonly="">
+                                <input class="form-control" type="password" name="ldap_pword" id="ldap_pword" value="" autocomplete="off" onfocus="this.removeAttribute('readonly');" readonly>
                                 @error('ldap_pword')
                                     <span class="alert-msg">
                                          <x-icon type="x" />
