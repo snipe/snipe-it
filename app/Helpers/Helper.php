@@ -12,6 +12,7 @@ use App\Models\Depreciation;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\License;
+use App\Models\Location;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Carbon\Carbon;
@@ -1529,4 +1530,48 @@ class Helper
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
     }
+
+    /**
+     * Check for inconsistencies before activating scoped locations with FullMultipleCompanySupport
+     * If there are locations with different companies than related objects unforseen problems could arise
+     *
+     * @author T. Regnery <tobias.regnery@gmail.com>
+     * @since 7.0
+     *
+     * @param $artisan  when false, bail out on first inconsistent entry
+     * @return string []
+     */
+    static public function test_locations_fmcs($artisan) {
+        $ret = [];
+        $locations = Location::all();
+
+        foreach($locations as $location) {
+            $location_company = $location->company_id;
+
+            // depending on the relationship we must use different operations to retrieve the objects
+            $keywords_relation = ['many' => ['users', 'assets', 'rtd_assets', 'consumables', 'components', 'accessories', 'assignedAssets', 'assignedAccessories'],
+                                  'one'  => ['parent', 'manager']];
+
+            foreach ($keywords_relation as $relation => $keywords) {
+                foreach($keywords as $keyword) {
+                    if ($relation == 'many') {
+                        $items = $location->$keyword->all();
+                    } else {
+                        $items = array($location->$keyword);
+                    }
+                
+                    foreach ($items as $item) {
+                        if ($item && $item->company_id != $location_company) {
+                            $ret[] = 'type: ' . get_class($item) . ', id: ' . $item->id . ', company_id: ' . $item->company_id . ', location company_id: ' . $location_company;
+                            // when called from SettingsController we bail out on the first error
+                            if (!$artisan) {
+                                return $ret;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return $ret;
+    }        
 }
