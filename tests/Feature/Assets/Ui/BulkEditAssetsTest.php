@@ -225,8 +225,7 @@ class BulkEditAssetsTest extends TestCase
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on mysql');
         $edit_user = User::factory()->editAssets()->create();
-        // admin used to work, but now only superuser does????
-        $admin_user = User::factory()->superuser()->create();
+        $admin_user = User::factory()->admin()->create();
 
         CustomField::factory()->testEncrypted()->create();
 
