@@ -15,21 +15,21 @@ return [
 
     'more_info_title' => 'Viac info',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Zakliknutím tohto poľa upravíte majetkové záznamy tak, aby reflektovali novú lokalitu. Ak ho nezakliknete, tak sa iba poznačí lokalita v logovacom zázname.<br><br>Majte na pamäti, že pri priradení majetku nedochádza k zmene lokality používateľa, majetku alebo lokality, do ktorej na priradený.',
 
     'assets' => 'Majetkom sú položky identifikované sériovým čislom alebo značkou majetku. Väčšinou ide o položky s vyššou hodnotou, pri ktorých je dôležité identifikovať konkrétnu položku.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'categories' => 'Kategórie pomáhajú organizovať Vaše položky. Príkladom kategórií sú &quot;PC&quot;, &quot;Notebooky&quot;, &quot;Mobilné telefóny&quot;, &quot;Tablety&quot;, atď., ale môžete si kategórie vytvoriť ľubovoľne tak, ako Vám to vyhovuje.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'accessories' => 'Príslušenstvom je všetko čo je odovzdávané používateľom a nedisponuje sériovým číslom (alebo nezáleží na sledovaní každého kusu individuálne). Príkladom je počítačová myš alebo klávesnica.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'companies'     => 'Spoločnosti môžu byť použité ako jednoduchý identifikátor alebo môžu byť využité na obmedzenie viditeľnosti majetku, používateľov, atď. ak je zapnutý mód plnej podpory spoločností v Admin nastaveniach.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'components'    => 'Komponenty sú položky ktoré sú súčasťou majetku, napríklad HDD, RAM, atď.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
+    'consumables'   => 'Spotrebný materiál je čokoľvek zakúpené čo sa spotrebuje v čase. Napríklad tonery alebo papiere.',
 
     'depreciations' => 'Môžete nastaviť odpisovanie majetku, aby dochádzalo k rovnomernému odpisovaniu.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Importovací nástroj zistil, že tento súbor je prázdny.'
 ];

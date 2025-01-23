@@ -2,7 +2,7 @@
 
 return array(
 
-    'invalid_category_type' => 'The category must be a consumable category.',
+    'invalid_category_type' => 'Категорія має бути категорією витратних матеріалів.',
     'does_not_exist' => 'Витратний матеріал не існує.',
 
     'create' => array(

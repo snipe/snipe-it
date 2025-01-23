@@ -141,14 +141,14 @@
       <!-- password -->
       <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'password')) ? ' required' : '' }} {{ $errors->has('password') ? 'error' : '' }}">
         {{ Form::label('password', trans('admin/users/table.password')) }}
-        {{ Form::password('password', array('class' => 'form-control','required' => true)) }}
+        <input class="form-control" type="password" name="password" id="password" value="" required>
         {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
 
       <!-- password confirm -->
       <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'password')) ? ' required' : '' }} {{ $errors->has('password_confirm') ? 'error' : '' }}">
         {{ Form::label('password_confirmation', trans('admin/users/table.password_confirm')) }}
-        {{ Form::password('password_confirmation', array('class' => 'form-control','required' => true)) }}
+        <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" required>
         {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
     </div>

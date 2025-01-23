@@ -22,8 +22,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Location was not restored, please try again',
-        'success' => 'Location restored successfully.'
+        'error'   => 'Lokalizacja nie została przywrócona, spróbuj ponownie',
+        'success' => 'Lokalizacja została przywrócona pomyślnie.'
     ),
 
     'delete' => array(

@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
+        'not_reassignable' => 'Licencja nie może zostać ponownie przypisana',
         'success' => 'Licencja poprawna'
     ),
 

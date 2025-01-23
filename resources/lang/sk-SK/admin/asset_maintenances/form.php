@@ -1,14 +1,14 @@
 <?php
 
     return [
-        'asset_maintenance_type' => 'Asset Maintenance Type',
+        'asset_maintenance_type' => 'Typ údržby majetku',
         'title'                  => 'Názov',
         'start_date'             => 'Dátum začiatku',
-        'completion_date'        => 'Completion Date',
+        'completion_date'        => 'Dátum ukončenia',
         'cost'                   => 'Cena',
-        'is_warranty'            => 'Warranty Improvement',
-        'asset_maintenance_time' => 'Asset Maintenance Time (in days)',
+        'is_warranty'            => 'Rozšírenie záruky',
+        'asset_maintenance_time' => 'Doba údržby majetku (v dňoch)',
         'notes'                  => 'Poznámky',
-        'update'                 => 'Update Asset Maintenance',
-        'create'                 => 'Create Asset Maintenance'
+        'update'                 => 'Upraviť záznam o údržbe majetku',
+        'create'                 => 'Vytvoriť záznam o údržbe majetku'
     ];

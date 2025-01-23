@@ -13,5 +13,10 @@ return [
         'user_state' => 'Gobolka Isticmaalaha',
         'user_country' => 'Dalka Isticmaalaha',
         'user_zip' => 'Isticmaalaha Zip'
-    ]
+    ],
+    'open_saved_template' => 'Open Saved Template',
+    'save_template' =>  'Save Template',
+    'select_a_template' => 'Select a Template',
+    'template_name' => 'Template Name',
+    'update_template' => 'Update Template',
 ];

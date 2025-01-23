@@ -16,7 +16,7 @@ return array(
     'update'  							=> 'Upraviť príslušenstvo',
     'use_default_eula'					=> 'Použiť <a href="#" data-toggle="modal" data-target="#eulaModal">predvolený dokument EULA</a> namiesto aktuálneho.',
     'use_default_eula_disabled'			=> '<del>Použiť namiesto aktuálneho predvolený dokument EULA.</del> Predvolený dokument EULA nie je nastavený. Prosím vyberte predvolený dokument v Nastaveniach.',
-    'clone'                             => 'Clone Accessory',
-    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
+    'clone'                             => 'Duplikovať príslušenstvo',
+    'delete_disabled'                   => 'Toto príslušenstvo nemôže byť zmazané pretože niektoré položky sú stále odovzdané.',
 
 );

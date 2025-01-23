@@ -23,7 +23,7 @@ class CheckoutAssetMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $note, $acceptance)
+    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy,  $acceptance, $note)
     {
         $this->item = $asset;
         $this->admin = $checkedOutBy;

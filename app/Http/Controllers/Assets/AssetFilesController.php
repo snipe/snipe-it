@@ -45,7 +45,7 @@ class AssetFilesController extends Controller
                 $asset->logUpload($file_name, $request->get('notes'));
             }
 
-            return redirect()->back()->with('success', trans('admin/hardware/message.upload.success'));
+            return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.upload.success'));
         }
 
         return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
@@ -97,25 +97,19 @@ class AssetFilesController extends Controller
      */
     public function destroy($assetId = null, $fileId = null) : RedirectResponse
     {
-        $asset = Asset::find($assetId);
-        $this->authorize('update', $asset);
-        $rel_path = 'private_uploads/assets';
-
-        // the asset is valid
-        if (isset($asset->id)) {
+        if ($asset = Asset::find($assetId))  {
             $this->authorize('update', $asset);
-            $log = Actionlog::find($fileId);
-            if ($log) {
+            $rel_path = 'private_uploads/assets';
+
+            if ($log = Actionlog::find($fileId)) {
                 if (Storage::exists($rel_path.'/'.$log->filename)) {
                     Storage::delete($rel_path.'/'.$log->filename);
                 }
                 $log->delete();
-
-                return redirect()->back()->with('success', trans('admin/hardware/message.deletefile.success'));
+                return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
             }
 
-            return redirect()->back()
-                ->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->route('hardware.show', ['hardware' => $asset])->with('error',  trans('general.log_record_not_found'));
         }
 
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));

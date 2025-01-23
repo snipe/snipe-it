@@ -19,6 +19,13 @@ class CreateCategoriesTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('categories.create'))
+            ->assertOk();
+    }
+
     public function testUserCanCreateCategories()
     {
         $this->assertFalse(Category::where('name', 'Test Category')->exists());

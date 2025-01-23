@@ -427,7 +427,13 @@ class LdapSync extends Command
                     $user->groups()->attach($ldap_default_group);
                 }
                 //updates assets location based on user's location
-                Asset::where('assigned_to', '=', $user->id)->update(['location_id' => $user->location_id]);
+                if ($user->wasChanged('location_id')) {
+                    foreach ($user->assets as $asset) {
+                        $asset->location_id = $user->location_id;
+                        // TODO: somehow add note? "Asset Location Changed because of thing"
+                        $asset->save();
+                    }
+                }
 
             } else {
                 foreach ($user->getErrors()->getMessages() as $key => $err) {
