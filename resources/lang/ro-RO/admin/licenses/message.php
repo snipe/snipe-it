@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'A aparut o problema la primirea licentei. Va rugam incercati iar.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Licenta a fost primita'
     ),
 

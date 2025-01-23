@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Имаше проблем со раздолжување на лиценцата. Обидете се повторно.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Лиценцата беше успешно раздолжена'
     ),
 

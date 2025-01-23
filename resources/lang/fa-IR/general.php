@@ -233,6 +233,12 @@ return [
     'no_results'			=> 'بدون نتیجه.',
     'no'  					=> 'خیر',
     'notes'  				=> 'یادداشت ها',
+    'note_added'            => 'Note Added',
+    'add_note'              => 'Add Note',
+    'note_edited'            => 'Note Edited',
+    'edit_note'              => 'Edit Note',
+    'note_deleted'            => 'Note Deleted',
+    'delete_note'              => 'Delete Note',
     'order_number'          => 'شماره سفارش',
     'only_deleted'          => 'فقط دارایی های حذف شده',
     'page_menu'				=> 'نمایش_موارد_منو',
@@ -327,6 +333,7 @@ return [
     'username_format'		=> 'فرمت نام کاربری',
     'username'              => 'نام کاربری',
     'update'                => 'بروزرسانی',
+    'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'انواع فایل های مجاز عبارتند از png، gif، jpg، jpeg، doc، docx، pdf، xls، xlsx، txt، lic، xml، zip، rtf و rar. حداکثر اندازه مجاز بارگذاری: اندازه است.
 ',
     'uploaded'              => 'بارگزاری شد',
@@ -650,5 +657,9 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'accessories_assigned' => 'Assigned Accessories',
+    'user_managed_passwords' => 'Password Management',
+    'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
+    'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
 
 ];

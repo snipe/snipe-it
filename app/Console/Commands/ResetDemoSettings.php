@@ -50,12 +50,12 @@ class ResetDemoSettings extends Command
         $settings->alert_email = 'service@snipe-it.io';
         $settings->login_note = 'Use `admin` / `password` to login to the demo.';
         $settings->header_color = null;
-        $settings->barcode_type = 'QRCODE';
+        $settings->label2_2d_type = 'QRCODE';
         $settings->default_currency = 'USD';
         $settings->brand = 2;
         $settings->ldap_enabled = 0;
         $settings->full_multiple_companies_support = 0;
-        $settings->alt_barcode = 'C128';
+        $settings->label2_1d_type = 'C128';
         $settings->skin = '';
         $settings->email_domain = 'snipeitapp.com';
         $settings->email_format = 'filastname';
@@ -65,7 +65,7 @@ class ResetDemoSettings extends Command
         $settings->thumbnail_max_h = '30';
         $settings->locale = 'en-US';
         $settings->version_footer = 'on';
-        $settings->support_footer = null;
+        $settings->support_footer = 'on';
         $settings->saml_enabled = '0';
         $settings->saml_sp_x509cert = null;
         $settings->saml_idp_metadata = null;

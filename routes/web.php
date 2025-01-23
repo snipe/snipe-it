@@ -16,6 +16,7 @@ use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\ReportTemplatesController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\SuppliersController;
@@ -200,9 +201,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::get('asset_tags', [SettingsController::class, 'getAssetTags'])->name('settings.asset_tags.index');
     Route::post('asset_tags', [SettingsController::class, 'postAssetTags'])->name('settings.asset_tags.save');
 
-    Route::get('barcodes', [SettingsController::class, 'getBarcodes'])->name('settings.barcodes.index');
-    Route::post('barcodes', [SettingsController::class, 'postBarcodes'])->name('settings.barcodes.save');
-
     Route::get('labels', [SettingsController::class, 'getLabels'])->name('settings.labels.index');
     Route::post('labels', [SettingsController::class, 'postLabels'])->name('settings.labels.save');
 
@@ -378,6 +376,14 @@ Route::group(['middleware' => ['auth']], function () {
     )->name('reports/export/accessories');
     Route::get('reports/custom', [ReportsController::class, 'getCustomReport'])->name('reports/custom');
     Route::post('reports/custom', [ReportsController::class, 'postCustom']);
+
+    Route::prefix('reports/templates')->name('report-templates')->group(function () {
+        Route::post('/', [ReportTemplatesController::class, 'store'])->name('.store');
+        Route::get('/{reportTemplate}', [ReportTemplatesController::class, 'show'])->name('.show');
+        Route::get('/{reportTemplate}/edit', [ReportTemplatesController::class, 'edit'])->name('.edit');
+        Route::post('/{reportTemplate}', [ReportTemplatesController::class, 'update'])->name('.update');
+        Route::delete('/{reportTemplate}', [ReportTemplatesController::class, 'destroy'])->name('.destroy');
+    });
 
     Route::get(
         'reports/activity',

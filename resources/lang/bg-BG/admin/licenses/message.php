@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Възникна проблем при вписването на лиценза. Моля, опитайте отново.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Лицензът е вписан'
     ),
 

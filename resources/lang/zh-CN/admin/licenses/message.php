@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => '借入许可证的过程中出现了一些问题，请重试。',
+        'not_reassignable' => '许可证不可重新分配',
         'success' => '许可证已经成功借入。'
     ),
 

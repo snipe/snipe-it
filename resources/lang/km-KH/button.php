@@ -23,11 +23,11 @@ return [
     'append'                    => 'បន្ថែម',
     'new'                       => 'ថ្មី',
     'var' => [
-        'clone'     => 'Clone :item_type',
-        'edit'      => 'Edit :item_type',
-        'delete'    => 'Delete :item_type',
-        'restore'   => 'Restore :item_type',
-        'create'    => 'Create New :item_type',
+        'clone'     => 'ក្លូន៖ item_type',
+        'edit'      => 'កែសម្រួល៖ item_type',
+        'delete'    => 'លុប៖ item_type',
+        'restore'   => 'ស្ដារ៖ item_type',
+        'create'    => 'បង្កើតថ្មី៖ item_type',
         'checkout'  => 'Checkout :item_type',
         'checkin'   => 'Checkin :item_type',
     ]

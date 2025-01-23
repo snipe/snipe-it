@@ -13,5 +13,10 @@ return [
         'user_state' => 'Naudotojo rajonas',
         'user_country' => 'Naudotojo šalis',
         'user_zip' => 'Naudotojo pašto kodas'
-    ]
+    ],
+    'open_saved_template' => 'Atverti išsaugotą šabloną',
+    'save_template' =>  'Išsaugoti šabloną',
+    'select_a_template' => 'Pasirinkti šabloną',
+    'template_name' => 'Šablono pavadinimas',
+    'update_template' => 'Atnaujinti šabloną',
 ];

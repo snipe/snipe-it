@@ -45,5 +45,6 @@ return [
         'error' => 'Valami hiba történt. A Slack a következő üzenettel válaszolt: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => 'Valami hiba történt :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

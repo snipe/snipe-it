@@ -19,7 +19,7 @@ return [
     'location' 		=> 'Vieta',
     'purchase_cost'	=> 'Kaina',
     'purchase_date'	=> 'Nupirkta',
-    'serial'   		=> 'Serijos numeris',
+    'serial'   		=> 'Serijinis numeris',
     'status'   		=> 'Būsena',
     'title'      	=> 'Turtas ',
     'image'		    => 'Įrenginio atvaizdas',
