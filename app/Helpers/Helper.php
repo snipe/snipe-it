@@ -1538,32 +1538,52 @@ class Helper
      * @author T. Regnery <tobias.regnery@gmail.com>
      * @since 7.0
      *
-     * @param $artisan  when false, bail out on first inconsistent entry
+     * @param $artisan          when false, bail out on first inconsistent entry
+     * @param $location_id      when set, only test this specific location
+     * @param $new_company_id   in case of updating a location, this is the newly requested company_id
      * @return string []
      */
-    static public function test_locations_fmcs($artisan) {
+    static public function test_locations_fmcs($artisan, $location_id = null, $new_company_id = null) {
         $ret = [];
-        $locations = Location::all();
+
+        if ($location_id) {
+            $location = Location::find($location_id);
+            if ($location) {
+                $locations = collect([])->push(Location::find($location_id));
+            }
+        } else {
+            $locations = Location::all();
+        }
 
         foreach($locations as $location) {
-            $location_company = $location->company_id;
+            // in case of an update of a single location use the newly requested company_id
+            if ($new_company_id) {
+                $location_company = $new_company_id;
+            } else {
+                $location_company = $location->company_id;
+            }
 
             // depending on the relationship we must use different operations to retrieve the objects
             $keywords_relation = ['many' => ['users', 'assets', 'rtd_assets', 'consumables', 'components', 'accessories', 'assignedAssets', 'assignedAccessories'],
                                   'one'  => ['parent', 'manager']];
+
+            // In case of a single location the children must be checked either, becuase we don't walk every location
+            if ($location_id) {
+                $keywords_relation['many'][] = 'children';
+            }
 
             foreach ($keywords_relation as $relation => $keywords) {
                 foreach($keywords as $keyword) {
                     if ($relation == 'many') {
                         $items = $location->$keyword->all();
                     } else {
-                        $items = array($location->$keyword);
+                        $items = collect([])->push($location->$keyword);
                     }
-                
+
                     foreach ($items as $item) {
                         if ($item && $item->company_id != $location_company) {
                             $ret[] = 'type: ' . get_class($item) . ', id: ' . $item->id . ', company_id: ' . $item->company_id . ', location company_id: ' . $location_company;
-                            // when called from SettingsController we bail out on the first error
+                            // when not called from artisan command we bail out on the first error
                             if (!$artisan) {
                                 return $ret;
                             }

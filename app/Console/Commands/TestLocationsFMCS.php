@@ -12,7 +12,7 @@ class TestLocationsFMCS extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:test-locations-fmcs';
+    protected $signature = 'snipeit:test-locations-fmcs {--location_id=}';
 
     /**
      * The console command description.
@@ -28,7 +28,13 @@ class TestLocationsFMCS extends Command
     {
         $this->info('Test for inconsistencies if FullMultipleCompanySupport with scoped locations will be used');
         $this->info('Depending on the database size this will take a while, output will be displayed after the complete test is over');
-        $ret = Helper::test_locations_fmcs(true);
+
+        // if parameter location_id is set, only test this location
+        $location_id = null;
+        if ($this->option('location_id')) {
+            $location_id = $this->option('location_id');
+        }
+        $ret = Helper::test_locations_fmcs(true, $location_id);
 
         foreach($ret as $output) {
             $this->info($output);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
@@ -85,6 +86,10 @@ class LocationsController extends Controller
         // Only scope the location if the setting is enabled
         if (Setting::getSettings()->scope_locations_fmcs) {
             $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+            // check if parent is set and has a different company
+            if ($location->parent_id && Location::find($location->parent_id)->company_id != $location->company_id) {
+                return redirect()->back()->withInput()->withInput()->with('error', 'different company than parent');
+            }                
         } else {
             $location->company_id = $request->input('company_id');
         }
@@ -152,6 +157,10 @@ class LocationsController extends Controller
         // Only scope the location if the setting is enabled
         if (Setting::getSettings()->scope_locations_fmcs) {
             $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+            // check if there are related objects with different company
+            if (Helper::test_locations_fmcs(false, $locationId, $location->company_id)) {
+                return redirect()->back()->withInput()->withInput()->with('error', 'error scoped locations');
+            }            
         } else {
             $location->company_id = $request->input('company_id');
         }
