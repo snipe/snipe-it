@@ -125,15 +125,15 @@
                             <div class="col-sm-9">
 
                                     <label for="no_change" class="form-control">
-                                        {{ Form::radio('remote', '', true, ['id' => 'no_change', 'aria-label'=>'no_change']) }}
+                                        <input type="radio" name="remote" id="no_change" value="" checked="checked" aria-label="no_change">
                                         {{  trans('general.do_not_change') }}
                                     </label>
                                     <label for="remote" class="form-control">
-                                        {{ Form::radio('remote', '1', old('remote'), ['id' => 'remote', 'aria-label'=>'remote']) }}
+                                        <input type="radio" name="remote" id="remote" value="1" aria-label="remote">
                                         {{ trans('admin/users/general.remote_label') }}
                                     </label>
                                     <label for="not_remote" class="form-control">
-                                        {{ Form::radio('remote', '0', old('remote'), ['id' => 'not_remote', 'aria-label'=>'not_remote']) }}
+                                        <input type="radio" name="remote" id="not_remote" value="0" aria-label="not_remote">
                                         {{ trans('admin/users/general.not_remote_label') }}
                                     </label>
 
