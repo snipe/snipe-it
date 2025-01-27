@@ -308,10 +308,10 @@
                         @else
 
                             <!-- Hidden version of new settings -->
-                            {{ Form::hidden('label2_template', old('label2_template', $setting->label2_template)) }}
-                            {{ Form::hidden('label2_title', old('label2_title', $setting->label2_title)) }}
-                            {{ Form::hidden('label2_asset_logo', old('label2_asset_logo', $setting->label2_asset_logo)) }}
-                            {{ Form::hidden('label2_fields', old('label2_fields', $setting->label2_fields)) }}
+                            <input name="label2_template" type="hidden" value="{{ old('label2_template', $setting->label2_template) }}" />
+                            <input name="label2_title" type="hidden" value="{{ old('label2_title', $setting->label2_title) }}" />
+                            <input name="label2_asset_logo" type="hidden" value="{{ old('label2_asset_logo', $setting->label2_asset_logo) }}" />
+                            <input name="label2_fields" type="hidden" value="{{ old('label2_fields', $setting->label2_fields) }}" />
                         @endif
 
                         @if ($setting->label2_enable && ($setting->label2_template != 'DefaultLabel'))
