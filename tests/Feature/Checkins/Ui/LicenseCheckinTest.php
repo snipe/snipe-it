@@ -20,7 +20,7 @@ class LicenseCheckinTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testNonReassignableLicenseSeatIsUnavailable()
+    public function testNonReassignableLicenseSeatCantBeCheckedOut()
     {
         $licenseSeat = LicenseSeat::factory()
             ->notReassignable()
