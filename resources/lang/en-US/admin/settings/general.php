@@ -132,6 +132,7 @@ return [
     'login_user_agent'          => 'User Agent',
     'login_help'                => 'List of attempted logins',
     'login_note'                => 'Login Note',
+    'login_note_placeholder'            => "If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you.",
     'login_note_help'           => 'Optionally include a few sentences on your login screen, for example to assist people who have found a lost or stolen device. This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>',
     'login_remote_user_text'    => 'Remote User login options',
     'login_remote_user_enabled_text' => 'Enable Login with Remote User Header',
@@ -341,6 +342,7 @@ return [
     'setup_migration_create_user' => 'Next: Create User',
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
+    'status_label_name' => 'Status Label Name',
     'label2_enable'           => 'New Label Engine',
     'label2_enable_help'      => 'Switch to the new label engine. <b>Note: You will need to save this setting before setting others.</b>',
     'label2_template'         => 'Template',
@@ -374,6 +376,7 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'test_mail' => 'Test Mail',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
     'default_avatar' => 'Upload custom default avatar',
@@ -383,6 +386,15 @@ return [
     'due_checkin_days' => 'Due For Checkin Warning',
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
     'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
+    'text' => 'Text',
+
+
+    'logo_option_types' => [
+        '0' => trans('text'),
+        '1' => trans('logo'),
+        '2' => trans('logo'). ' + '. trans('text'),
+    ],
+
 
 
     /* Keywords for settings overview help */

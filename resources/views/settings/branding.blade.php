@@ -59,7 +59,9 @@
                             </div>
                         </div>
 
-
+                        @php
+                            $optionTypes = trans('admin/settings/general.logo_option_types');
+                        @endphp
 
                         <!-- Branding -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
@@ -67,7 +69,7 @@
                                  {{ Form::label('brand', trans('admin/settings/general.web_brand')) }}
                             </div>
                             <div class="col-md-9">
-                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                {!! Form::select('brand', array($optionTypes), old('brand', $setting->brand), ['class' => 'form-control select2', 'style' => 'width: 150px;']) !!}
                                 {!! $errors->first('brand', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
