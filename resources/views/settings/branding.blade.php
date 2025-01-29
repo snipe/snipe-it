@@ -66,7 +66,7 @@
                         <!-- Branding -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                <label for="brand">{{ __('Select Brand Type') }}</label>
+                                <label for="brand">{{ trans('admin/settings/general.web_brand') }}</label>
                             </div>
                             <div class="col-md-9">
                                 <select name="brand" id="brand" class="form-control select2 minimumResultsForSearch" style="width: 150px;">
