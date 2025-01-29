@@ -20,10 +20,12 @@ class CheckoutAssetMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    private bool $firstTimeSending;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy,  $acceptance, $note)
+    public function __construct(Asset $asset, $checkedOutTo, User $checkedOutBy, $acceptance, $note, bool $firstTimeSending = true)
     {
         $this->item = $asset;
         $this->admin = $checkedOutBy;
@@ -35,6 +37,8 @@ class CheckoutAssetMail extends Mailable
 
         $this->last_checkout = '';
         $this->expected_checkin = '';
+
+        $this->firstTimeSending = $firstTimeSending;
 
         if ($this->item->last_checkout) {
             $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
@@ -54,9 +58,16 @@ class CheckoutAssetMail extends Mailable
     {
         $from = new Address(config('mail.from.address'), config('mail.from.name'));
 
+        $subject = trans('mail.Asset_Checkout_Notification');
+
+        if (!$this->firstTimeSending) {
+            // @todo: translate
+            $subject = 'Reminder: ' . $subject;
+        }
+
         return new Envelope(
             from: $from,
-            subject: trans('mail.Asset_Checkout_Notification'),
+            subject: $subject,
         );
     }
 

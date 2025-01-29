@@ -1177,10 +1177,9 @@ class ReportsController extends Controller
         $locale = $assetItem->assignedTo?->locale;
         // Only send notification if assigned
         if ($locale && $email) {
-            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note))->locale($locale));
-
+            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note, firstTimeSending: false))->locale($locale));
             } elseif ($email) {
-            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)));
+            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note, firstTimeSending: false)));
             }
 
         if ($email == ''){

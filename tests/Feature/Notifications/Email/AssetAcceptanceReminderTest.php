@@ -6,6 +6,7 @@ use App\Mail\CheckoutAssetMail;
 use App\Models\CheckoutAcceptance;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class AssetAcceptanceReminderTest extends TestCase
@@ -67,16 +68,36 @@ class AssetAcceptanceReminderTest extends TestCase
         Mail::assertNotSent(CheckoutAssetMail::class);
     }
 
-    public function testReminderIsSentToUser()
+    public static function users()
     {
+        yield 'User with locale set' => [
+            function () {
+                return CheckoutAcceptance::factory()->pending()->create();
+            }
+        ];
+
+        yield 'User without locale set' => [
+            function () {
+                $checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
+                $checkoutAcceptance->assignedTo->update(['locale' => null]);
+
+                return $checkoutAcceptance;
+            }
+        ];
+    }
+
+    #[DataProvider('users')]
+    public function testReminderIsSentToUser($data)
+    {
+        $checkoutAcceptance = $data();
+
         $this->actingAs($this->actor)
-            ->post($this->routeFor($this->checkoutAcceptance))
+            ->post($this->routeFor($checkoutAcceptance))
             ->assertRedirect(route('reports/unaccepted_assets'));
 
         Mail::assertSent(CheckoutAssetMail::class, 1);
-        Mail::assertSent(CheckoutAssetMail::class, function (CheckoutAssetMail $mail) {
-            return $mail->hasTo($this->checkoutAcceptance->assignedTo->email)
-                // @todo:
+        Mail::assertSent(CheckoutAssetMail::class, function (CheckoutAssetMail $mail) use ($checkoutAcceptance) {
+            return $mail->hasTo($checkoutAcceptance->assignedTo->email)
                 && $mail->hasSubject('Reminder: ' . trans('mail.Asset_Checkout_Notification'));
         });
     }
