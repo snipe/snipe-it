@@ -68,7 +68,7 @@ class AssetAcceptanceReminderTest extends TestCase
         Mail::assertNotSent(CheckoutAssetMail::class);
     }
 
-    public static function users()
+    public static function acceptances()
     {
         yield 'User with locale set' => [
             function () {
@@ -86,10 +86,10 @@ class AssetAcceptanceReminderTest extends TestCase
         ];
     }
 
-    #[DataProvider('users')]
-    public function testReminderIsSentToUser($data)
+    #[DataProvider('acceptances')]
+    public function testReminderIsSentToUser($callback)
     {
-        $checkoutAcceptance = $data();
+        $checkoutAcceptance = $callback();
 
         $this->actingAs($this->actor)
             ->post($this->routeFor($checkoutAcceptance))
