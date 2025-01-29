@@ -42,6 +42,7 @@ return [
     'confirm_purge'			    => 'Confirm Purge',
     'confirm_purge_help'		=> 'Enter the text "DELETE" in the box below to purge your deleted records. This action cannot be undone and will PERMANENTLY delete all soft-deleted items and users. (You should make a backup first, just to be safe.)',
     'custom_css'				=> 'Custom CSS',
+    'custom_css_placeholder'	=> 'Add your custom CSS',
     'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
     'custom_forgot_pass_url'	=> 'Custom Password Reset URL',
     'custom_forgot_pass_url_help'	=> 'This replaces the built-in forgotten password URL on the login screen, useful to direct people to internal or hosted LDAP password reset functionality. It will effectively disable local user forgotten password functionality.',
@@ -69,6 +70,7 @@ return [
     'favicon_size'          => 'Favicons should be square images, 16x16 pixels.',
     'footer_text'               => 'Additional Footer Text ',
     'footer_text_help'          => 'This text will appear in the right-side footer. Links are allowed using <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>. Line breaks, headers, images, etc may result in unpredictable results.',
+    'footer_text_placeholder'   => 'Optional footer text',
     'general_settings'			=> 'General Settings',
     'general_settings_help'     => 'Default EULA and more',
     'generate_backup'			=> 'Generate Backup',
@@ -343,6 +345,7 @@ return [
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
     'status_label_name' => 'Status Label Name',
+    'super_admin_only'  => 'Super Admin Only',
     'label2_enable'           => 'New Label Engine',
     'label2_enable_help'      => 'Switch to the new label engine. <b>Note: You will need to save this setting before setting others.</b>',
     'label2_template'         => 'Template',
@@ -390,9 +393,9 @@ return [
 
 
     'logo_option_types' => [
-        '0' => trans('text'),
-        '1' => trans('logo'),
-        '2' => trans('logo'). ' + '. trans('text'),
+        'text' => 'Text',
+        'logo' => 'Logo',
+        'logo_and_text' => 'Logo and Text',
     ],
 
 
