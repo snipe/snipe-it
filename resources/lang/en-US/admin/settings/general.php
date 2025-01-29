@@ -248,6 +248,7 @@ return [
     'labels_pagewidth'          => 'Label sheet width',
     'labels_pageheight'         => 'Label sheet height',
     'label_gutters'        => 'Label spacing (inches)',
+    'label_qr_setting_invalid' => 'Your QR Code type is set to \'None\', but you have enabled QR Codes. Please select a QR Code type.',
     'page_dimensions'        => 'Page dimensions (inches)',
     'label_fields'          => 'Label visible fields',
     'inches'        => 'inches',

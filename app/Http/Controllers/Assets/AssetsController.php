@@ -531,7 +531,7 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function getQrCode($assetId = null) : Response | BinaryFileResponse | string | bool
+    public function getQrCode($assetId = null): Response|BinaryFileResponse|string|bool
     {
         $settings = Setting::getSettings();
 
@@ -548,6 +548,9 @@ class AssetsController extends Controller
                         return response()->file($qr_file, $header);
                     } else {
                         $barcode = new \Com\Tecnick\Barcode\Barcode();
+                        if ($settings->label2_2d_type == 'none') {
+                            return false;
+                        }
                         $barcode_obj = $barcode->getBarcodeObj($settings->label2_2d_type, route('hardware.show', $asset->id), $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
                         file_put_contents($qr_file, $barcode_obj->getPngData());
 
