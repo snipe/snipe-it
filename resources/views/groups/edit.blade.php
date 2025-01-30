@@ -88,11 +88,23 @@
                     </td>
                     <td class="col-md-1 permissions-item">
                         <label for="{{ 'permission['.$localPermission['permission'].']' }}" style="form-control"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
-                        {{ Form::radio('permission['.$localPermission['permission'].']', '1',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null),['value'=>"grant", 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+                        <input
+                            value="1"
+                            aria-label="permission[{{ $localPermission['permission'] }}]"
+                            name="permission[{{ $localPermission['permission'] }}]"
+                            type="radio"
+                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null)
+                        >
                     </td>
                     <td class="col-md-1 permissions-item">
                         <label for="{{ 'permission['.$localPermission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
-                        {{ Form::radio('permission['.$localPermission['permission'].']', '0',(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null),['value'=>"grant", 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+                        <input
+                            value="0"
+                            aria-label="permission[{{ $localPermission['permission'] }}]"
+                            name="permission[{{ $localPermission['permission'] }}]"
+                            type="radio"
+                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null)
+                        >
                     </td>
                 </tr>
             </tbody>
