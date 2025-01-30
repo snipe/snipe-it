@@ -11,7 +11,6 @@ use Tests\TestCase;
 
 class AssetAcceptanceReminderTest extends TestCase
 {
-    private CheckoutAcceptance $checkoutAcceptance;
     private User $actor;
 
     protected function setUp(): void
@@ -21,15 +20,15 @@ class AssetAcceptanceReminderTest extends TestCase
         Mail::fake();
 
         $this->actor = User::factory()->canViewReports()->create();
-        $this->checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
     }
 
     public function testMustHavePermissionToSendReminder()
     {
+        $checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
         $userWithoutPermission = User::factory()->create();
 
         $this->actingAs($userWithoutPermission)
-            ->post($this->routeFor($this->checkoutAcceptance))
+            ->post($this->routeFor($checkoutAcceptance))
             ->assertForbidden();
     }
 
