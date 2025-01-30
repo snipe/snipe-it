@@ -58,15 +58,9 @@ class CheckoutAssetMail extends Mailable
     {
         $from = new Address(config('mail.from.address'), config('mail.from.name'));
 
-        $subject = trans('mail.Asset_Checkout_Notification');
-
-        if (!$this->firstTimeSending) {
-            $subject = trans('mail.Asset_Checkout_Reminder_Notification');
-        }
-
         return new Envelope(
             from: $from,
-            subject: $subject,
+            subject: $this->getSubject(),
         );
     }
 
@@ -116,5 +110,14 @@ class CheckoutAssetMail extends Mailable
     public function attachments(): array
     {
         return [];
+    }
+
+    private function getSubject(): string
+    {
+        if ($this->firstTimeSending) {
+            return trans('mail.Asset_Checkout_Notification');
+        }
+
+        return trans('mail.Asset_Checkout_Reminder_Notification');
     }
 }
