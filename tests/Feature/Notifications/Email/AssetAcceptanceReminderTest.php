@@ -26,6 +26,8 @@ class AssetAcceptanceReminderTest extends TestCase
         $this->actingAs($userWithoutPermission)
             ->post($this->routeFor($checkoutAcceptance))
             ->assertForbidden();
+
+        Mail::assertNotSent(CheckoutAssetMail::class);
     }
 
     public function testReminderNotSentIfAcceptanceDoesNotExist()
