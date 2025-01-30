@@ -48,12 +48,31 @@ class AssetAcceptanceReminderTest extends TestCase
         Mail::assertNotSent(CheckoutAssetMail::class);
     }
 
-    public function testUserWithoutEmailAddressHandledGracefully()
+    public static function CheckoutAcceptancesToUsersWithoutEmailAddresses()
     {
-        $checkoutAcceptance = CheckoutAcceptance::factory()
-            ->pending()
-            ->forAssignedTo(['email' => null])
-            ->create();
+        yield 'User with null email address' => [
+            function () {
+                return CheckoutAcceptance::factory()
+                    ->pending()
+                    ->forAssignedTo(['email' => null])
+                    ->create();
+            }
+        ];
+
+        yield 'User with empty string email address' => [
+            function () {
+                return CheckoutAcceptance::factory()
+                    ->pending()
+                    ->forAssignedTo(['email' => ''])
+                    ->create();
+            }
+        ];
+    }
+
+    #[DataProvider('CheckoutAcceptancesToUsersWithoutEmailAddresses')]
+    public function testUserWithoutEmailAddressHandledGracefully($callback)
+    {
+        $checkoutAcceptance = $callback();
 
         $this->actingAs(User::factory()->canViewReports()->create())
             ->post($this->routeFor($checkoutAcceptance))
