@@ -11,15 +11,11 @@ use Tests\TestCase;
 
 class AssetAcceptanceReminderTest extends TestCase
 {
-    private User $actor;
-
     protected function setUp(): void
     {
         parent::setUp();
 
         Mail::fake();
-
-        $this->actor = User::factory()->canViewReports()->create();
     }
 
     public function testMustHavePermissionToSendReminder()
@@ -34,7 +30,7 @@ class AssetAcceptanceReminderTest extends TestCase
 
     public function testReminderNotSentIfAcceptanceDoesNotExist()
     {
-        $this->actingAs($this->actor)
+        $this->actingAs(User::factory()->canViewReports()->create())
             ->post(route('reports/unaccepted_assets_sent_reminder', [
                 'acceptance_id' => 999999,
             ]));
@@ -46,7 +42,7 @@ class AssetAcceptanceReminderTest extends TestCase
     {
         $checkoutAcceptanceAlreadyAccepted = CheckoutAcceptance::factory()->accepted()->create();
 
-        $this->actingAs($this->actor)
+        $this->actingAs(User::factory()->canViewReports()->create())
             ->post($this->routeFor($checkoutAcceptanceAlreadyAccepted));
 
         Mail::assertNotSent(CheckoutAssetMail::class);
@@ -59,7 +55,7 @@ class AssetAcceptanceReminderTest extends TestCase
             ->forAssignedTo(['email' => null])
             ->create();
 
-        $this->actingAs($this->actor)
+        $this->actingAs(User::factory()->canViewReports()->create())
             ->post($this->routeFor($checkoutAcceptance))
             // check we didn't crash...
             ->assertRedirect();
@@ -90,7 +86,7 @@ class AssetAcceptanceReminderTest extends TestCase
     {
         $checkoutAcceptance = $callback();
 
-        $this->actingAs($this->actor)
+        $this->actingAs(User::factory()->canViewReports()->create())
             ->post($this->routeFor($checkoutAcceptance))
             ->assertRedirect(route('reports/unaccepted_assets'));
 
