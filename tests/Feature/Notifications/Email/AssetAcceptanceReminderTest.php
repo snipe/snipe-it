@@ -55,13 +55,13 @@ class AssetAcceptanceReminderTest extends TestCase
 
     public function testUserWithoutEmailAddressHandledGracefully()
     {
-        $userWithoutEmailAddress = User::factory()->create(['email' => null]);
-
-        $this->checkoutAcceptance->assigned_to_id = $userWithoutEmailAddress->id;
-        $this->checkoutAcceptance->save();
+        $checkoutAcceptance = CheckoutAcceptance::factory()
+            ->pending()
+            ->forAssignedTo(['email' => null])
+            ->create();
 
         $this->actingAs($this->actor)
-            ->post($this->routeFor($this->checkoutAcceptance))
+            ->post($this->routeFor($checkoutAcceptance))
             // check we didn't crash...
             ->assertRedirect();
 
