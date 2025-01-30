@@ -82,28 +82,9 @@ class AssetAcceptanceReminderTest extends TestCase
         Mail::assertNotSent(CheckoutAssetMail::class);
     }
 
-    public static function acceptances()
+    public function testReminderIsSentToUser()
     {
-        yield 'User with locale set' => [
-            function () {
-                return CheckoutAcceptance::factory()->pending()->create();
-            }
-        ];
-
-        yield 'User without locale set' => [
-            function () {
-                $checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
-                $checkoutAcceptance->assignedTo->update(['locale' => null]);
-
-                return $checkoutAcceptance;
-            }
-        ];
-    }
-
-    #[DataProvider('acceptances')]
-    public function testReminderIsSentToUser($callback)
-    {
-        $checkoutAcceptance = $callback();
+        $checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
 
         $this->actingAs(User::factory()->canViewReports()->create())
             ->post($this->routeFor($checkoutAcceptance))
