@@ -1175,14 +1175,12 @@ class ReportsController extends Controller
         }
         $email = $assetItem->assignedTo?->email;
         $locale = $assetItem->assignedTo?->locale;
-        // Only send notification if assigned
-        if ($email) {
-            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note, firstTimeSending: false))->locale($locale));
-        }
 
-        if ($email == ''){
+        if (is_null($email) || $email === '') {
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.no_email'));
         }
+
+        Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note, firstTimeSending: false))->locale($locale));
 
         return redirect()->route('reports/unaccepted_assets')->with('success', trans('admin/reports/general.reminder_sent'));
     }
