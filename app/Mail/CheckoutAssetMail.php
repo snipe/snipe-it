@@ -61,8 +61,7 @@ class CheckoutAssetMail extends Mailable
         $subject = trans('mail.Asset_Checkout_Notification');
 
         if (!$this->firstTimeSending) {
-            // @todo: translate
-            $subject = 'Reminder: ' . $subject;
+            $subject = trans('mail.Asset_Checkout_Reminder_Notification');
         }
 
         return new Envelope(
