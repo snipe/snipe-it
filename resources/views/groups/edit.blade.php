@@ -91,9 +91,9 @@
                         <input
                             value="1"
                             aria-label="permission[{{ $localPermission['permission'] }}]"
+                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null)
                             name="permission[{{ $localPermission['permission'] }}]"
                             type="radio"
-                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null)
                         >
                     </td>
                     <td class="col-md-1 permissions-item">
@@ -101,9 +101,9 @@
                         <input
                             value="0"
                             aria-label="permission[{{ $localPermission['permission'] }}]"
+                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null)
                             name="permission[{{ $localPermission['permission'] }}]"
                             type="radio"
-                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null)
                         >
                     </td>
                 </tr>
