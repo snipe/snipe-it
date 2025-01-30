@@ -89,21 +89,21 @@
                     <td class="col-md-1 permissions-item">
                         <label for="{{ 'permission['.$localPermission['permission'].']' }}" style="form-control"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
                         <input
-                            value="1"
-                            aria-label="permission[{{ $localPermission['permission'] }}]"
-                            name="permission[{{ $localPermission['permission'] }}]"
                             type="radio"
+                            name="permission[{{ $localPermission['permission'] }}]"
+                            value="1"
                             @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null)
+                            aria-label="permission[{{ $localPermission['permission'] }}]"
                         >
                     </td>
                     <td class="col-md-1 permissions-item">
                         <label for="{{ 'permission['.$localPermission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ 'permission['.$localPermission['permission'].']' }}</span></label>
                         <input
-                            value="0"
-                            aria-label="permission[{{ $localPermission['permission'] }}]"
-                            name="permission[{{ $localPermission['permission'] }}]"
                             type="radio"
+                            name="permission[{{ $localPermission['permission'] }}]"
+                            value="0"
                             @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null)
+                            aria-label="permission[{{ $localPermission['permission'] }}]"
                         >
                     </td>
                 </tr>
