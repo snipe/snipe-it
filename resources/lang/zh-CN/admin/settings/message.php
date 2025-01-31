@@ -45,5 +45,6 @@ return [
         'error' => '出错了。:app响应：:error_message',
         'error_redirect' => '错误：301/302 :endpoint 返回重定向。出于安全原因，我们不跟随重定向。请使用实际端点。',
         'error_misc' => '出错了:( ',
+        'webhook_fail' => ' webhook 通知失败：请检查以确保URL仍然有效。',
     ]
 ];

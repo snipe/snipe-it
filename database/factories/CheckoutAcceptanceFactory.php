@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,6 +22,18 @@ class CheckoutAcceptanceFactory extends Factory
             'checkoutable_id' => Asset::factory(),
             'assigned_to_id' => User::factory(),
         ];
+    }
+
+    public function configure(): static
+    {
+        return $this->afterCreating(function (CheckoutAcceptance $acceptance) {
+            if ($acceptance->checkoutable instanceof Asset && $acceptance->assignedTo instanceof User) {
+                $acceptance->checkoutable->update([
+                    'assigned_to' => $acceptance->assigned_to_id,
+                    'assigned_type' => get_class($acceptance->assignedTo),
+                ]);
+            }
+        });
     }
 
     public function forAccessory()

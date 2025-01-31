@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'C\'è stato un problema nella registrazione della licenza. Riprova.',
+        'not_reassignable' => 'Licenza non riassegnabile',
         'success' => 'La licenza è stata registrata con successo'
     ),
 

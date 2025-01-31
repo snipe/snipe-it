@@ -12,8 +12,6 @@
     <div class="col-md-12">
         <div class="box box-default">
             <div class="box-body">
-                <div class="table-responsive">
-
                     <table
                             data-cookie-id-table="licensesReport"
                             data-pagination="true"
@@ -78,7 +76,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div> <!-- /.table-responsive-->
             </div>
         </div>
     </div>

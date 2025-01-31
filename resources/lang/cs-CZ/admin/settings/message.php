@@ -45,5 +45,6 @@ return [
         'error' => 'Něco se pokazilo. :app odpověděla v: :error_message',
         'error_redirect' => 'CHYBA: 301/302 :endpoint vrací přesměrování. Z bezpečnostních důvodů nesledujeme přesměrování. Použijte prosím skutečný koncový bod.',
         'error_misc' => 'Něco se nepovedlo.',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Det gick inte att checka in licensen. Vänligen försök igen.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Licens incheckad.'
     ),
 

@@ -72,6 +72,9 @@ class DepartmentsController extends Controller
             case 'manager':
                 $departments->OrderManager($order);
                 break;
+            case 'company':
+                $departments->OrderCompany($order);
+                break;
             default:
                 $departments->orderBy($sort, $order);
                 break;

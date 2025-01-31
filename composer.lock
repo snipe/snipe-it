@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0750e3a427347b2a56a05a8b9b533d48",
+    "content-hash": "2a6e7f5e039ee2f40605aefc5c5baf08",
     "packages": [
         {
             "name": "alek13/slack",
@@ -5575,6 +5575,70 @@
             "time": "2024-05-30T15:14:26+00:00"
         },
         {
+            "name": "onnov/detect-encoding",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/onnov/detect-encoding.git",
+                "reference": "6a8159ac3e6178ae043244b9d66a9b2701121e07"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/onnov/detect-encoding/zipball/6a8159ac3e6178ae043244b9d66a9b2701121e07",
+                "reference": "6a8159ac3e6178ae043244b9d66a9b2701121e07",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "infection/infection": "*",
+                "phpbench/phpbench": "*",
+                "phpcompatibility/php-compatibility": "*",
+                "phpmd/phpmd": "*",
+                "phpstan/phpstan": "*",
+                "phpstan/phpstan-strict-rules": "*",
+                "phpunit/phpunit": "*",
+                "roave/backward-compatibility-check": "*",
+                "squizlabs/php_codesniffer": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Onnov\\DetectEncoding\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "onnov",
+                    "email": "oblnn@yandex.ru"
+                }
+            ],
+            "description": "Text encoding definition class instead of mb_detect_encoding. Defines: utf-8, windows-1251, koi8-r, iso-8859-5, ibm866, .....",
+            "homepage": "https://github.com/onnov/detect-encoding",
+            "keywords": [
+                "cyrillic",
+                "encoding",
+                "ibm866",
+                "iconv",
+                "iso-8859-5",
+                "koi8-r",
+                "mb_detect_encoding",
+                "utf-8",
+                "windows-1251"
+            ],
+            "support": {
+                "issues": "https://github.com/onnov/detect-encoding/issues",
+                "source": "https://github.com/onnov/detect-encoding/tree/v2.0.0"
+            },
+            "time": "2021-01-04T14:29:34+00:00"
+        },
+        {
             "name": "osa-eg/laravel-teams-notification",
             "version": "v2.1.2",
             "source": {
@@ -11045,20 +11109,21 @@
         },
         {
             "name": "tecnickcom/tcpdf",
-            "version": "6.7.7",
+            "version": "6.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tecnickcom/TCPDF.git",
-                "reference": "cfbc0028cc23f057f2baf9e73bdc238153c22086"
+                "reference": "14ffa0e308f5634aa2489568b4b90b24073b6731"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/cfbc0028cc23f057f2baf9e73bdc238153c22086",
-                "reference": "cfbc0028cc23f057f2baf9e73bdc238153c22086",
+                "url": "https://api.github.com/repos/tecnickcom/TCPDF/zipball/14ffa0e308f5634aa2489568b4b90b24073b6731",
+                "reference": "14ffa0e308f5634aa2489568b4b90b24073b6731",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5.0"
+                "ext-curl": "*",
+                "php": ">=7.1.0"
             },
             "type": "library",
             "autoload": {
@@ -11105,7 +11170,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tecnickcom/TCPDF/issues",
-                "source": "https://github.com/tecnickcom/TCPDF/tree/6.7.7"
+                "source": "https://github.com/tecnickcom/TCPDF/tree/6.8.0"
             },
             "funding": [
                 {
@@ -11113,7 +11178,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2024-10-26T12:15:02+00:00"
+            "time": "2024-12-23T13:34:57+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -16569,6 +16634,7 @@
         "php": "^8.1",
         "ext-curl": "*",
         "ext-fileinfo": "*",
+        "ext-iconv": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
         "ext-pdo": "*"

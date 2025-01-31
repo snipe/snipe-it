@@ -45,5 +45,6 @@ return [
         'error' => 'حدث خطأ ما. استجاب :app :error_message',
         'error_redirect' => 'خطأ: 301/302 :endpoint يرجع إعادة توجيه. لأسباب أمنية، نحن لا نتابع إعادة التوجيه. الرجاء استخدام نقطة النهاية الفعلية.',
         'error_misc' => 'حدث خطأ ما. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

@@ -13,5 +13,10 @@ return [
         'user_state' => 'Provincia Utente',
         'user_country' => 'Nazione Utente',
         'user_zip' => 'CAP Utente'
-    ]
+    ],
+    'open_saved_template' => 'Apri il Modello Salvato',
+    'save_template' =>  'Salva modello',
+    'select_a_template' => 'Seleziona un modello',
+    'template_name' => 'Nome Del Modello',
+    'update_template' => 'Aggiorna Modello',
 ];

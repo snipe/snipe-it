@@ -45,5 +45,6 @@ return [
         'error' => 'Qualcosa è andato storto. :app ha risposto con: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint restituisce un reindirizzamento. Per motivi di sicurezza, non seguiamo reindirizzamenti. Si prega di utilizzare l\'endpoint attuale.',
         'error_misc' => 'Qualcosa è andato storto. :( ',
+        'webhook_fail' => ' notifica webhook fallita: Controlla che l\'URL sia ancora valido.',
     ]
 ];
