@@ -153,11 +153,24 @@
                         </td>
                         <td class="col-md-1 permissions-item">
                             <label for="{{ 'permission['.$this_permission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.allow')}} {{ 'permission['.$this_permission['permission'].']' }}</span></label>
-                            {{ Form::radio('permission['.$this_permission['permission'].']', '1',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '1' : null),['class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$this_permission['permission'].']']) }}
+                            <input
+                                class="radiochecker-{{ str_slug($area) }}"
+                                aria-label="permission[{{ $this_permission['permission'] }}]"
+                                name="permission[{{ $this_permission['permission'] }}]"
+                                type="radio"
+                                value="1"
+                            >
                         </td>
                         <td class="col-md-1 permissions-item">
                             <label for="{{ 'permission['.$this_permission['permission'].']' }}"><span class="sr-only">{{ trans('admin/groups/titles.deny')}} {{ 'permission['.$this_permission['permission'].']' }}</span></label>
-                            {{ Form::radio('permission['.$this_permission['permission'].']', '0',(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '0' : null),['class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$this_permission['permission'].']']) }}
+                            <input
+                                class="radiochecker-{{ str_slug($area) }}"
+                                aria-label="permission[{{ $this_permission['permission'] }}]"
+                                @checked(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '0' : null)
+                                name="permission[{{ $this_permission['permission'] }}]"
+                                type="radio"
+                                value="0"
+                            >
                         </td>
 
                     </tr>
