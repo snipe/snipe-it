@@ -143,7 +143,7 @@ class CheckinAssetNotification extends Notification
                             KeyValue::create(
                                 trans('mail.checked_into') ?: '',
                                 $item->location->name ? $item->location->name : '',
-                                trans('admin/hardware/form.status').": ".$item->assetstatus?->name,
+                                trans('admin/hardware/form.status').": ".$item->assetstatus->name,
                             )
                                 ->onClick(route('hardware.show', $item->id))
                         )
