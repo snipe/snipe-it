@@ -91,7 +91,7 @@
                         <input
                             value="1"
                             aria-label="permission[{{ $localPermission['permission'] }}]"
-                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '1' : null)
+                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) && $groupPermissions[$localPermission['permission']] == '1')
                             name="permission[{{ $localPermission['permission'] }}]"
                             type="radio"
                         >
@@ -101,7 +101,7 @@
                         <input
                             value="0"
                             aria-label="permission[{{ $localPermission['permission'] }}]"
-                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) ? $groupPermissions[$localPermission['permission'] ] == '0' : null)
+                            @checked(array_key_exists($localPermission['permission'], $groupPermissions) && $groupPermissions[$localPermission['permission']] == '0')
                             name="permission[{{ $localPermission['permission'] }}]"
                             type="radio"
                         >
