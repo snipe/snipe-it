@@ -308,31 +308,31 @@
                         @else
 
                             <!-- Hidden version of new settings -->
-                            {{ Form::hidden('label2_template', old('label2_template', $setting->label2_template)) }}
-                            {{ Form::hidden('label2_title', old('label2_title', $setting->label2_title)) }}
-                            {{ Form::hidden('label2_asset_logo', old('label2_asset_logo', $setting->label2_asset_logo)) }}
-                            {{ Form::hidden('label2_fields', old('label2_fields', $setting->label2_fields)) }}
+                            <input name="label2_template" type="hidden" value="{{ old('label2_template', $setting->label2_template) }}" />
+                            <input name="label2_title" type="hidden" value="{{ old('label2_title', $setting->label2_title) }}" />
+                            <input name="label2_asset_logo" type="hidden" value="{{ old('label2_asset_logo', $setting->label2_asset_logo) }}" />
+                            <input name="label2_fields" type="hidden" value="{{ old('label2_fields', $setting->label2_fields) }}" />
                         @endif
 
                         @if ($setting->label2_enable && ($setting->label2_template != 'DefaultLabel'))
                             <!-- Hidden version of legacy settings -->
-                            {{ Form::hidden('labels_per_page', old('labels_per_page', $setting->labels_per_page)) }}
-                            {{ Form::hidden('labels_fontsize', old('labels_fontsize', $setting->labels_fontsize)) }}
-                            {{ Form::hidden('labels_width', old('labels_width', $setting->labels_width)) }}
-                            {{ Form::hidden('labels_height', old('labels_height', $setting->labels_height)) }}
-                            {{ Form::hidden('labels_display_sgutter', old('labels_display_sgutter', $setting->labels_display_sgutter)) }}
-                            {{ Form::hidden('labels_display_bgutter', old('labels_display_bgutter', $setting->labels_display_bgutter)) }}
-                            {{ Form::hidden('labels_pmargin_top', old('labels_pmargin_top', $setting->labels_pmargin_top)) }}
-                            {{ Form::hidden('labels_pmargin_bottom', old('labels_pmargin_bottom', $setting->labels_pmargin_bottom)) }}
-                            {{ Form::hidden('labels_pmargin_left', old('labels_pmargin_left', $setting->labels_pmargin_left)) }}
-                            {{ Form::hidden('labels_pmargin_right', old('labels_pmargin_right', $setting->labels_pmargin_right)) }}
-                            {{ Form::hidden('labels_pagewidth', old('labels_pagewidth', $setting->labels_pagewidth)) }}
-                            {{ Form::hidden('labels_pageheight', old('labels_pageheight', $setting->labels_pageheight)) }}
-                            {{ Form::hidden('labels_display_name', old('labels_display_name', $setting->labels_display_name)) }}
-                            {{ Form::hidden('labels_display_serial', old('labels_display_serial', $setting->labels_display_serial)) }}
-                            {{ Form::hidden('labels_display_tag', old('labels_display_tag', $setting->labels_display_tag)) }}
-                            {{ Form::hidden('labels_display_model', old('labels_display_model', $setting->labels_display_model)) }}
-                            {{ Form::hidden('labels_display_company_name', old('labels_display_company_name', $setting->labels_display_company_name)) }}
+                            <input name="labels_per_page" type="hidden" value="{{ old('labels_per_page', $setting->labels_per_page) }}" />
+                            <input name="labels_fontsize" type="hidden" value="{{ old('labels_fontsize', $setting->labels_fontsize) }}" />
+                            <input name="labels_width" type="hidden" value="{{ old('labels_width', $setting->labels_width) }}" />
+                            <input name="labels_height" type="hidden" value="{{ old('labels_height', $setting->labels_height) }}" />
+                            <input name="labels_display_sgutter" type="hidden" value="{{ old('labels_display_sgutter', $setting->labels_display_sgutter) }}" />
+                            <input name="labels_display_bgutter" type="hidden" value="{{ old('labels_display_bgutter', $setting->labels_display_bgutter) }}" />
+                            <input name="labels_pmargin_top" type="hidden" value="{{ old('labels_pmargin_top', $setting->labels_pmargin_top) }}" />
+                            <input name="labels_pmargin_bottom" type="hidden" value="{{ old('labels_pmargin_bottom', $setting->labels_pmargin_bottom) }}" />
+                            <input name="labels_pmargin_left" type="hidden" value="{{ old('labels_pmargin_left', $setting->labels_pmargin_left) }}" />
+                            <input name="labels_pmargin_right" type="hidden" value="{{ old('labels_pmargin_right', $setting->labels_pmargin_right) }}" />
+                            <input name="labels_pagewidth" type="hidden" value="{{ old('labels_pagewidth', $setting->labels_pagewidth) }}" />
+                            <input name="labels_pageheight" type="hidden" value="{{ old('labels_pageheight', $setting->labels_pageheight) }}" />
+                            <input name="labels_display_name" type="hidden" value="{{ old('labels_display_name', $setting->labels_display_name) }}" />
+                            <input name="labels_display_serial" type="hidden" value="{{ old('labels_display_serial', $setting->labels_display_serial) }}" />
+                            <input name="labels_display_tag" type="hidden" value="{{ old('labels_display_tag', $setting->labels_display_tag) }}" />
+                            <input name="labels_display_model" type="hidden" value="{{ old('labels_display_model', $setting->labels_display_model) }}" />
+                            <input name="labels_display_company_name" type="hidden" value="{{ old('labels_display_company_name', $setting->labels_display_company_name) }}" />
                         @else
                             <!-- Legacy settings -->
                     <style>
