@@ -106,7 +106,13 @@ class CheckoutableListener
                 }
             }
         } catch (ClientException $e) {
-            Log::error("ClientException caught during checkin notification: " . $e->getMessage());
+            if (strpos($e->getMessage(), 'channel_not_found') !== false) {
+                Log::warning(Setting::getSettings()->webhook_selected." notification failed: " . $e->getMessage());
+                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_channel_not_found') );
+            }
+            else {
+                Log::error("ClientException caught during checkin notification: " . $e->getMessage());
+            }
             return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_fail') );
         } catch (Exception $e) {
             Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
@@ -196,8 +202,14 @@ class CheckoutableListener
                 }
             }
         } catch (ClientException $e) {
-            Log::error("ClientException caught during checkin notification: " . $e->getMessage());
-            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_fail'));
+            if (strpos($e->getMessage(), 'channel_not_found') !== false) {
+                Log::warning(Setting::getSettings()->webhook_selected." notification failed: " . $e->getMessage());
+                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_channel_not_found') );
+            }
+            else {
+                Log::error("ClientException caught during checkin notification: " . $e->getMessage());
+                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
+            }
         } catch (Exception $e) {
             Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
                 'error' => $e->getMessage(),
