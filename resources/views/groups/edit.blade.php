@@ -156,6 +156,7 @@
                             <input
                                 class="radiochecker-{{ str_slug($area) }}"
                                 aria-label="permission[{{ $this_permission['permission'] }}]"
+                                @checked(array_key_exists($this_permission['permission'], $groupPermissions) && $groupPermissions[$this_permission['permission']] == '1')
                                 name="permission[{{ $this_permission['permission'] }}]"
                                 type="radio"
                                 value="1"
@@ -166,7 +167,7 @@
                             <input
                                 class="radiochecker-{{ str_slug($area) }}"
                                 aria-label="permission[{{ $this_permission['permission'] }}]"
-                                @checked(array_key_exists($this_permission['permission'], $groupPermissions) ? $groupPermissions[$this_permission['permission'] ] == '0' : null)
+                                @checked(array_key_exists($this_permission['permission'], $groupPermissions) && $groupPermissions[$this_permission['permission']] == '0')
                                 name="permission[{{ $this_permission['permission'] }}]"
                                 type="radio"
                                 value="0"
