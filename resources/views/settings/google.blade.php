@@ -65,7 +65,7 @@
                         <!-- Google Client ID -->
                         <div class="form-group {{ $errors->has('google_client_id') ? 'error' : '' }}">
                             <div class="col-md-3 text-right">
-                                {{ Form::label('google_client_id', 'Client ID') }}
+                                <label for="google_client_id">Client ID</label>
                             </div>
                             <div class="col-md-8">
                                 {{ Form::text('google_client_id', old('google_client_id', $setting->google_client_id), ['class' => 'form-control','placeholder' => trans('general.example') .'000000000000-XXXXXXXXXXX.apps.googleusercontent.com', (config('app.lock_passwords')===true) ? 'disabled': '']) }}
@@ -79,7 +79,7 @@
                         <!-- Google Client Secret -->
                         <div class="form-group {{ $errors->has('google_client_secret') ? 'error' : '' }}">
                             <div class="col-md-3 text-right">
-                                {{ Form::label('google_client_secret', 'Client Secret') }}
+                                <label for="google_client_secret">Client Secret</label>
                             </div>
                             <div class="col-md-8">
 
