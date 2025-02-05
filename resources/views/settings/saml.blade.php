@@ -69,25 +69,25 @@
                                     <div class="col-md-9 col-md-offset-3">
                                     <!-- SAML SP Details -->
                                     <!-- SAML SP Entity ID -->
-                                    {{ Form::label('saml_sp_entitiyid', trans('admin/settings/general.saml_sp_entityid')) }}
+                                    <label for="saml_sp_entitiyid">{{ trans('admin/settings/general.saml_sp_entityid') }}</label>
                                     {{ Form::text('saml_sp_entitiyid', config('app.url'), ['class' => 'form-control', 'readonly']) }}
                                     <br>
                                     <!-- SAML SP ACS -->
-                                    {{ Form::label('saml_sp_acs_url', trans('admin/settings/general.saml_sp_acs_url')) }}
+                                    <label for="saml_sp_acs_url">{{ trans('admin/settings/general.saml_sp_acs_url') }}</label>
                                     {{ Form::text('saml_sp_acs_url', route('saml.acs'), ['class' => 'form-control', 'readonly']) }}
                                     <br>
                                     <!-- SAML SP SLS -->
-                                    {{ Form::label('saml_sp_sls_url', trans('admin/settings/general.saml_sp_sls_url')) }}
+                                    <label for="saml_sp_sls_url">{{ trans('admin/settings/general.saml_sp_sls_url') }}</label>
                                     {{ Form::text('saml_sp_sls_url', route('saml.sls'), ['class' => 'form-control', 'readonly']) }}
                                     <br>
                                     <!-- SAML SP Certificate -->
                                     @if (!empty($setting->saml_sp_x509cert))
-                                        {{ Form::label('saml_sp_x509cert', trans('admin/settings/general.saml_sp_x509cert')) }}
+                                        <label for="saml_sp_x509cert">{{ trans('admin/settings/general.saml_sp_x509cert') }}</label>
                                         {{ Form::textarea('saml_sp_x509cert', $setting->saml_sp_x509cert, ['class' => 'form-control', 'wrap' => 'off', 'readonly']) }}
                                         <br>
                                     @endif
                                     <!-- SAML SP Metadata URL -->
-                                    {{ Form::label('saml_sp_metadata_url', trans('admin/settings/general.saml_sp_metadata_url')) }}
+                                    <label for="saml_sp_metadata_url">{{ trans('admin/settings/general.saml_sp_metadata_url') }}</label>
                                     {{ Form::text('saml_sp_metadata_url', route('saml.metadata'), ['class' => 'form-control', 'readonly']) }}
                                     <br>
                                     <p class="help-block">
@@ -103,7 +103,7 @@
                         <!-- SAML IdP Metadata -->
                         <div class="form-group {{ $errors->has('saml_idp_metadata') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('saml_idp_metadata', trans('admin/settings/general.saml_idp_metadata')) }}
+                            <label for="saml_idp_metadata">{{ trans('admin/settings/general.saml_idp_metadata') }}</label>
                         </div>
                         <div class="col-md-9">
                             {{ Form::textarea('saml_idp_metadata', old('saml_idp_metadata', $setting->saml_idp_metadata), ['class' => 'form-control','placeholder' => 'https://example.com/idp/metadata', 'wrap' => 'off', $setting->demoMode]) }}
@@ -120,7 +120,7 @@
                         <!-- SAML Attribute Mapping Username -->
                         <div class="form-group {{ $errors->has('saml_attr_mapping_username') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('saml_attr_mapping_username', trans('admin/settings/general.saml_attr_mapping_username')) }}
+                                <label for="saml_attr_mapping_username">{{ trans('admin/settings/general.saml_attr_mapping_username') }}</label>
                             </div>
                             <div class="col-md-9">
                                 {{ Form::text('saml_attr_mapping_username', old('saml_attr_mapping_username', $setting->saml_attr_mapping_username), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
@@ -163,7 +163,7 @@
                         <!-- SAML Custom Options -->
                         <div class="form-group {{ $errors->has('saml_custom_settings') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('saml_custom_settings', trans('admin/settings/general.saml_custom_settings')) }}
+                            <label for="saml_custom_settings">{{ trans('admin/settings/general.saml_custom_settings') }}</label>
                         </div>
                         <div class="col-md-9">
                             {{ Form::textarea('saml_custom_settings', old('saml_custom_settings', $setting->saml_custom_settings), ['class' => 'form-control','placeholder' => 'example.option=false&#13;&#10;sp_x509cert=file:///...&#13;&#10;sp_private_key=file:///', 'wrap' => 'off', $setting->demoMode]) }}
