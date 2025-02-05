@@ -28,7 +28,7 @@
                 <div class="box-body">
                     <p>{{ trans('admin/settings/general.confirm_purge_help') }}</p>
                     <div class="col-md-3{{ $errors->has('confirm_purge') ? 'error' : '' }}">
-                        {{ Form::label('confirm_purge', trans('admin/settings/general.confirm_purge')) }}
+                        <label for="confirm_purge">{{ trans('admin/settings/general.confirm_purge') }}</label>
                     </div>
                     <div class="col-md-9{{ $errors->has('confirm_purge') ? 'error' : '' }}">
                         @if (config('app.lock_passwords')===true)
