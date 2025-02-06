@@ -1,6 +1,6 @@
 <!-- Consumable -->
 <div id="assigned_consumable" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}"{!!  (isset($style)) ? ' style="'.e($style).'"' : ''  !!}>
-    {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
+    <label for="{{ $fieldname }}" class="col-md-3 control-label">{{ $translated_name }}</label>
     <div class="col-md-7{{  ((isset($required) && ($required =='true'))) ?  ' required' : '' }}">
         <select class="js-data-ajax select2" data-endpoint="consumables" data-placeholder="{{ trans('general.select_consumable') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ (isset($select_id)) ? $select_id : 'assigned_consumable_select' }}"{{ (isset($multiple)) ? ' multiple' : '' }}>
         
