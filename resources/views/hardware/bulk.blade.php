@@ -140,15 +140,15 @@
           <div class="form-group">
             <div class="col-md-9 col-md-offset-3">
                 <label class="form-control">
-                  {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
+                  <input type="radio" name="update_real_loc" value="1" checked aria-label="update_real_loc">
                   {{ trans('admin/hardware/form.asset_location_update_default_current') }}
                 </label>
               <label class="form-control">
-                {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
+                <input type="radio" name="update_real_loc" value="0" aria-label="update_default_loc">
                 {{ trans('admin/hardware/form.asset_location_update_default') }}
               </label>
                 <label class="form-control">
-                  {{ Form::radio('update_real_loc', '2', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
+                  <input type="radio" name="update_real_loc" value="2" aria-label="update_default_loc">
                   {{ trans('admin/hardware/form.asset_location_update_actual') }}
                 </label>
 

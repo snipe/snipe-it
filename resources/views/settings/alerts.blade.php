@@ -66,7 +66,7 @@
                         <!-- Alert Email -->
                         <div class="form-group {{ $errors->has('alert_email') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('alert_email', trans('admin/settings/general.alert_email')) }}
+                                <label for="alert_email">{{ trans('admin/settings/general.alert_email') }}</label>
                             </div>
                             <div class="col-md-7">
                                 <input type="text" name="alert_email" value="{{ old('alert_email', $setting->alert_email) }}" class="form-control" placeholder="admin@yourcompany.com" maxlength="191">
@@ -80,7 +80,7 @@
                         <!-- Admin CC Email -->
                         <div class="form-group {{ $errors->has('admin_cc_email') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('admin_cc_email', trans('admin/settings/general.admin_cc_email')) }}
+                                <label for="admin_cc_email">{{ trans('admin/settings/general.admin_cc_email') }}</label>
                             </div>
                             <div class="col-md-7">
                                 <input type="text" name="admin_cc_email" value="{{ old('admin_cc_email', $setting->admin_cc_email) }}" class="form-control" placeholder="admin@yourcompany.com" maxlength="191">
@@ -95,7 +95,7 @@
                         <!-- Alert interval -->
                         <div class="form-group {{ $errors->has('alert_interval') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('alert_interval', trans('admin/settings/general.alert_interval')) }}
+                                <label for="alert_interval">{{ trans('admin/settings/general.alert_interval') }}</label>
                             </div>
                             <div class="col-md-9">
                                 {{ Form::text('alert_interval', old('alert_interval', $setting->alert_interval), array('class' => 'form-control','placeholder' => '30', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
@@ -106,7 +106,7 @@
                         <!-- Alert threshold -->
                         <div class="form-group {{ $errors->has('alert_threshold') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('alert_threshold', trans('admin/settings/general.alert_inv_threshold')) }}
+                                <label for="alert_threshold">{{ trans('admin/settings/general.alert_inv_threshold') }}</label>
                             </div>
                             <div class="col-md-9">
                                 {{ Form::text('alert_threshold', old('alert_threshold', $setting->alert_threshold), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
@@ -118,7 +118,7 @@
                         <!-- Alert interval -->
                         <div class="form-group {{ $errors->has('audit_interval') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('audit_interval', trans('admin/settings/general.audit_interval')) }}
+                                <label for="audit_interval">{{ trans('admin/settings/general.audit_interval') }}</label>
                             </div>
                             <div class="input-group col-md-3">
                                 {{ Form::text('audit_interval', old('audit_interval', $setting->audit_interval), array('class' => 'form-control','placeholder' => '12', 'maxlength'=>'3')) }}
@@ -133,7 +133,7 @@
                         <!-- Alert threshold -->
                         <div class="form-group {{ $errors->has('audit_warning_days') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('audit_warning_days', trans('admin/settings/general.audit_warning_days')) }}
+                                <label for="audit_warning_days">{{ trans('admin/settings/general.audit_warning_days') }}</label>
                             </div>
                             <div class="input-group col-md-3">
                                 {{ Form::text('audit_warning_days', old('audit_warning_days', $setting->audit_warning_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3')) }}
@@ -148,7 +148,7 @@
                         <!-- Due for checkin days -->
                         <div class="form-group {{ $errors->has('due_checkin_days') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('due_checkin_days', trans('admin/settings/general.due_checkin_days')) }}
+                                <label for="due_checkin_days">{{ trans('admin/settings/general.due_checkin_days') }}</label>
                             </div>
                             <div class="input-group col-md-3">
                                 {{ Form::text('due_checkin_days', old('due_checkin_days', $setting->due_checkin_days), array('class' => 'form-control','placeholder' => '14', 'maxlength'=>'3')) }}
