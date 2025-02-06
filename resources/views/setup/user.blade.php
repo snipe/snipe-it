@@ -124,8 +124,8 @@
     <div class="row">
       <!-- email-->
       <div class="form-group col-lg-6{{ $errors->has('email') ? 'error' : '' }}">
-        <label for="email">{{ trans('admin/users/table.email') }}</label>
-        {{ Form::email('email', config('mail.from.address'), array('class' => 'form-control','placeholder' => 'you@example.com', 'required' => true)) }}
+        <label for="email">{{ trans('admin/users/table.email') }}</label>       
+        <input class="form-control" type="email" name="email" id="email" value="{{ old('email', config('mail.from.address')) }}" placeholder="you@example.com" required>
         {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
 
