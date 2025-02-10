@@ -1,16 +1,16 @@
 <?php
 
 return [
-    'about_templates' => 'About Saved Templates',
-    'saving_templates_description' => 'Select your options, then enter the name of your template in the box above and click the \'Save Template\' button. Use the dropdown to select a previously saved template.',
+    'about_templates' => 'Apie išsaugotus šablonus',
+    'saving_templates_description' => 'Atlikite nustatymus, tada aukščiau esančiame laukelyje įveskite šablono pavadinimą ir spustelėkite mygtuką „Išsaugoti šabloną“. Norėdami pasirinkti anksčiau išsaugotą šabloną, naudokite išskleidžiamąjį meniu.',
     'create'  => [
-        'success' => 'Template saved successfully',
+        'success' => 'Šablonas išsaugotas sėkmingai',
     ],
     'update' => [
-        'success' => 'Template updated successfully',
+        'success' => 'Šablonas atnaujintas sėkmingai',
     ],
     'delete' => [
-        'success' => 'Template deleted',
-        'no_delete_permission' => 'Template does not exist or you do not have permission to delete it.',
+        'success' => 'Šablonas panaikintas',
+        'no_delete_permission' => 'Tokio šablono nėra arba jūs neturite teisės jį ištrinti.',
     ],
 ];

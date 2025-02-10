@@ -29,7 +29,7 @@ return array(
     'phone'  				=> 'Telefono Nr.',
     'show_current'          => 'Rodyti esamus naudotojus',
     'show_deleted'          => 'Rodyti panaikintus naudotojus',
-    'title' 				=> 'Antraštė',
+    'title' 				=> 'Pareigos',
 	'to_restore_them'		=> 'juos atkurti.',
     'total_assets_cost'     => "Bendra turto vertė",
     'updateuser' 			=> 'Atnaujinti naudotoją',

@@ -43,11 +43,10 @@ class AssetModelFilesTest extends TestCase
             ->getJson(
 		    route('api.models.files.index', ['model_id' => $model[0]["id"]]))
                 ->assertOk()
-		->assertJsonStructure([
-                    'status',
-		    'messages',
-		    'payload',
-		]);
+                ->assertJsonStructure([
+                    'rows',
+                    'total',
+                ]);
     }
 
     public function testAssetModelApiDownloadsFile()
@@ -66,20 +65,25 @@ class AssetModelFilesTest extends TestCase
                route('api.models.files.store', ['model_id' => $model[0]["id"]]), [
 		       'file' => [UploadedFile::fake()->create("test.jpg", 100)]
 	       ])
-	       ->assertOk();
+            ->assertOk()
+            ->assertJsonStructure([
+                'status',
+                'messages',
+            ]);
 
 	// List the files to get the file ID
 	$result = $this->actingAsForApi($user)
             ->getJson(
 		    route('api.models.files.index', ['model_id' => $model[0]["id"]]))
-                ->assertOk();
+            ->assertOk();
+
 
 	// Get the file
 	$this->actingAsForApi($user)
             ->get(
                route('api.models.files.show', [
                    'model_id' => $model[0]["id"],
-                   'file_id' => $result->decodeResponseJson()->json()["payload"][0]["id"],
+                   'file_id' => $result->decodeResponseJson()->json()["rows"][0]["id"],
 	       ]))
 	       ->assertOk();
     }
@@ -113,8 +117,12 @@ class AssetModelFilesTest extends TestCase
             ->delete(
                route('api.models.files.destroy', [
                    'model_id' => $model[0]["id"],
-                   'file_id' => $result->decodeResponseJson()->json()["payload"][0]["id"],
+                   'file_id' => $result->decodeResponseJson()->json()["rows"][0]["id"],
 	       ]))
-	       ->assertOk();
+	       ->assertOk()
+            ->assertJsonStructure([
+            'status',
+            'messages',
+        ]);
     }
 }

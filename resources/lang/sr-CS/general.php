@@ -216,6 +216,12 @@ return [
     'no_results'			=> 'Nema rezultata.',
     'no'  					=> 'Ne',
     'notes'  				=> 'Zabeleške',
+    'note_added'            => 'Napomena je dodata',
+    'add_note'              => 'Dodaj napomenu',
+    'note_edited'            => 'Napomena je izmenjena',
+    'edit_note'              => 'Izmeni napomenu',
+    'note_deleted'            => 'Napomena je obrisana',
+    'delete_note'              => 'Obriši napomenu',
     'order_number'          => 'Broj narudžbe',
     'only_deleted'          => 'Samo izbrisana sredstva',
     'page_menu'				=> 'Showing _MENU_ items',
@@ -567,5 +573,8 @@ return [
     'import_asset_tag_exists' => 'Imovina sa oznakom imovine :asset_tag već postoji i izmena nije zatražena. Nijedna izmena nije izvršena.',
     'countries_manually_entered_help' => 'Vrednosti sa zvezdicom (*) su ručno upisane i ne poklapaju se sa postojećim ISO 3166 vrednostima iz padajućeg menija',
     'accessories_assigned' => 'Dodeljen dodatni pribor',
+    'user_managed_passwords' => 'Upravljanje lozinkama',
+    'user_managed_passwords_disallow' => 'Onemogući korisnicima da upravljaju svojim lozinkama',
+    'user_managed_passwords_allow' => 'Omogući korisnicima da upravljaju svojim lozinkama',
 
 ];

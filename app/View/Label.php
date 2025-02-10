@@ -116,12 +116,9 @@ class Label implements View
                         }
                     }
               
-                if ($template->getSupport2DBarcode()) {
+            if ($template->getSupport2DBarcode()) {
                     $barcode2DType = $settings->label2_2d_type;
-                    $barcode2DType = ($barcode2DType == 'default') ? 
-                        $settings->barcode_type :
-                        $barcode2DType;
-                    if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
+                if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
                         switch ($settings->label2_2d_target) {
                             case 'ht_tag': 
                                 $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); 

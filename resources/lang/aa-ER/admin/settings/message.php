@@ -45,5 +45,6 @@ return [
         'error' => 'crwdns11381:0crwdne11381:0',
         'error_redirect' => 'crwdns11843:0crwdne11843:0',
         'error_misc' => 'crwdns11383:0crwdne11383:0',
+        'webhook_fail' => 'crwdns12830:0crwdne12830:0',
     ]
 ];

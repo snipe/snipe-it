@@ -65,7 +65,7 @@ class ResetDemoSettings extends Command
         $settings->thumbnail_max_h = '30';
         $settings->locale = 'en-US';
         $settings->version_footer = 'on';
-        $settings->support_footer = null;
+        $settings->support_footer = 'on';
         $settings->saml_enabled = '0';
         $settings->saml_sp_x509cert = null;
         $settings->saml_idp_metadata = null;

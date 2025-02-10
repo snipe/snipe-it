@@ -45,5 +45,6 @@ return [
         'error' => 'Нешто не е во ред. :app одговори со :error_message',
         'error_redirect' => 'ГРЕШКА: 301/302 :endpoint враќа пренасочување. Од безбедносни причини, ние не ги следиме пренасочувањата. Ве молиме користете директна крајна точка.',
         'error_misc' => 'Нешто не е во ред. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];
