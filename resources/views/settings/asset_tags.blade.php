@@ -55,7 +55,7 @@
 
                         <div class="form-group">
                             <div class="col-md-5">
-                                {{ Form::label('next_auto_tag_base', trans('admin/settings/general.next_auto_tag_base')) }}
+                                <label for="next_auto_tag_base">{{ trans('admin/settings/general.next_auto_tag_base') }}</label>
                             </div>
                             <div class="col-md-7">
                                 <input class="form-control" style="width: 150px;" aria-label="next_auto_tag_base" name="next_auto_tag_base" type="text" value="{{ old('next_auto_tag_base', $setting->next_auto_tag_base) }}" id="next_auto_tag_base">
@@ -67,7 +67,7 @@
                         <!-- auto prefix -->
                         <div class="form-group {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
                             <div class="col-md-5">
-                                {{ Form::label('auto_increment_prefix', trans('admin/settings/general.auto_increment_prefix')) }}
+                                <label for="auto_increment_prefix">{{ trans('admin/settings/general.auto_increment_prefix') }}</label>
                             </div>
                             <div class="col-md-7">
                                 @if ($setting->auto_increment_assets == 1)
@@ -82,7 +82,7 @@
                         <!-- auto zerofill -->
                         <div class="form-group {{ $errors->has('zerofill_count') ? 'error' : '' }}">
                             <div class="col-md-5">
-                                {{ Form::label('zerofill_count', trans('admin/settings/general.zerofill_count')) }}
+                                <label for="zerofill_count">{{ trans('admin/settings/general.zerofill_count') }}</label>
                             </div>
                             <div class="col-md-7">
                                 <input class="form-control" style="width: 150px;" aria-label="zerofill_count" name="zerofill_count" type="text" value="{{ old('zerofill_count', $setting->zerofill_count) }}" id="zerofill_count">

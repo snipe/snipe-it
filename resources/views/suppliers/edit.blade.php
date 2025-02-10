@@ -14,7 +14,7 @@
 @include ('partials.forms.edit.address')
 
 <div class="form-group {{ $errors->has('contact') ? ' has-error' : '' }}">
-    {{ Form::label('contact', trans('admin/suppliers/table.contact'), array('class' => 'col-md-3 control-label')) }}
+    <label for="contact" class="col-md-3 control-label">{{ trans('admin/suppliers/table.contact') }}</label>
     <div class="col-md-7">
         <input class="form-control" name="contact" type="text" id="contact" value="{{ old('contact', $item->contact) }}">
         {!! $errors->first('contact', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -26,7 +26,7 @@
 @include ('partials.forms.edit.email')
 
 <div class="form-group {{ $errors->has('url') ? ' has-error' : '' }}">
-    {{ Form::label('url', trans('general.url'), array('class' => 'col-md-3 control-label')) }}
+    <label for="url" class="col-md-3 control-label">{{ trans('general.url') }}</label>
     <div class="col-md-7">
         <input class="form-control" name="url" type="text" id="url" value="{{ old('url', $item->url) }}">
         {!! $errors->first('url', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}

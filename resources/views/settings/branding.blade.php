@@ -45,7 +45,7 @@
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
 
                             <div class="col-md-3">
-                                {{ Form::label('site_name', trans('admin/settings/general.site_name')) }}
+                                <label for="site_name">{{ trans('admin/settings/general.site_name') }}</label>
                             </div>
                             <div class="col-md-7 required">
                                 @if (config('app.lock_passwords')===true)
@@ -63,7 +63,7 @@
                         <!-- Branding -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                 {{ Form::label('brand', trans('admin/settings/general.web_brand')) }}
+                                <label for="brand">{{ trans('admin/settings/general.web_brand') }}</label>
                             </div>
                             <div class="col-md-9">
                                 {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
@@ -187,7 +187,7 @@
                         <!-- Header color -->
                         <div class="form-group {{ $errors->has('header_color') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('header_color', trans('admin/settings/general.header_color')) }}
+                                <label for="header_color">{{ trans('admin/settings/general.header_color') }}</label>
                             </div>
                             <div class="col-md-2">
                                 <div class="input-group header-color">
@@ -203,7 +203,7 @@
                         <!-- Skin -->
                         <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('skin', trans('general.skin')) }}
+                                <label for="skin">{{ trans('general.skin') }}</label>
                             </div>
                             <div class="col-md-9">
                                 {!! Form::skin('skin', old('skin', $setting->skin), 'select2') !!}
@@ -228,7 +228,7 @@
                         <!-- Custom css -->
                         <div class="form-group {{ $errors->has('custom_css') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('custom_css', trans('admin/settings/general.custom_css')) }}
+                                <label for="custom_css">{{ trans('admin/settings/general.custom_css') }}</label>
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
@@ -247,7 +247,7 @@
                         <!-- Support Footer -->
                         <div class="form-group {{ $errors->has('support_footer') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('support_footer', trans('admin/settings/general.support_footer')) }}
+                                <label for="support_footer">{{ trans('admin/settings/general.support_footer') }}</label>
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
@@ -266,7 +266,7 @@
                         <!-- Version Footer -->
                         <div class="form-group {{ $errors->has('version_footer') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('version_footer', trans('admin/settings/general.version_footer')) }}
+                                <label for="version_footer">{{ trans('admin/settings/general.version_footer') }}</label>
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
@@ -284,7 +284,7 @@
                         <!-- Additional footer -->
                         <div class="form-group {{ $errors->has('footer_text') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('footer_text', trans('admin/settings/general.footer_text')) }}
+                                <label for="footer_text">{{ trans('admin/settings/general.footer_text') }}</label>
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)

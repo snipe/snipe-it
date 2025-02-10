@@ -62,7 +62,7 @@ class SettingsSamlRequest extends FormRequest
             $custom_privateKey = '';
             $custom_x509certNew = '';
             if (! empty($this->input('saml_custom_settings'))) {
-                $req_custom_settings = preg_split('/\r\n|\r|\n/', $this->input('saml_custom_settings'));
+                $req_custom_settings = preg_split('/\r\n|\r|\n/', $this->input('saml_custom_settings', ''));
                 $custom_settings = [];
 
                 foreach ($req_custom_settings as $custom_setting) {
