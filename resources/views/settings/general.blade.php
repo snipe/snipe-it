@@ -77,7 +77,7 @@
                     <!-- Email domain -->
                     <div class="form-group {{ $errors->has('email_domain') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('email_domain', trans('general.email_domain')) }}
+                            <label for="email_domain">{{ trans('general.email_domain') }}</label>
                         </div>
                         <div class="col-md-9">
                             {{ Form::text('email_domain', old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
@@ -90,7 +90,7 @@
                     <!-- Email format -->
                     <div class="form-group {{ $errors->has('email_format') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('email_format', trans('general.email_format')) }}
+                            <label for="email_format">{{ trans('general.email_format') }}</label>
                         </div>
                         <div class="col-md-9">
                             {!! Form::username_format('email_format', old('email_format', $setting->email_format), 'select2') !!}
@@ -101,7 +101,7 @@
                     <!-- Username format -->
                     <div class="form-group {{ $errors->has('username_format') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('username_format', trans('general.username_format')) }}
+                            <label for="username_format">{{ trans('general.username_format') }}</label>
                         </div>
                         <div class="col-md-9">
                             {!! Form::username_format('username_format', old('username_format', $setting->username_format), 'select2') !!}
@@ -182,7 +182,7 @@
                        <!-- Per Page -->
                     <div class="form-group {{ $errors->has('per_page') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('per_page', trans('admin/settings/general.per_page')) }}
+                            <label for="per_page">{{ trans('admin/settings/general.per_page') }}</label>
                         </div>
                         <div class="col-md-9">
                             {{ Form::text('per_page', old('per_page', $setting->per_page), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
@@ -193,7 +193,7 @@
                    <!-- Thumb Size -->
                    <div class="form-group {{ $errors->has('thumbnail_max_h') ? 'error' : '' }}">
                        <div class="col-md-3">
-                           {{ Form::label('thumbnail_max_h', trans('admin/settings/general.thumbnail_max_h')) }}
+                           <label for="thumbnail_max_h">{{ trans('admin/settings/general.thumbnail_max_h') }}</label>
                        </div>
                        <div class="col-md-9">
                            {{ Form::text('thumbnail_max_h', old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
@@ -205,7 +205,7 @@
                     <!-- Default EULA -->
                    <div class="form-group {{ $errors->has('default_eula_text') ? 'error' : '' }}">
                        <div class="col-md-3">
-                           {{ Form::label('default_eula_text', trans('admin/settings/general.default_eula_text')) }}
+                           <label for="default_eula_text">{{ trans('admin/settings/general.default_eula_text') }}</label>
                        </div>
                        <div class="col-md-9">
                            {{ Form::textarea('default_eula_text', old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control','placeholder' => 'Add your default EULA text')) }}
@@ -236,7 +236,7 @@
                     <!-- login text -->
                     <div class="form-group {{ $errors->has('login_note') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            {{ Form::label('login_note', trans('admin/settings/general.login_note')) }}
+                            <label for="login_note">{{ trans('admin/settings/general.login_note') }}</label>
                         </div>
                         <div class="col-md-9">
                             @if (config('app.lock_passwords'))
@@ -255,7 +255,7 @@
                        <!-- Mail test -->
                        <div class="form-group">
                            <div class="col-md-3">
-                               {{ Form::label('login_note', 'Test Mail') }}
+                               <label for="login_note">Test Mail</label>
                            </div>
                            <div class="col-md-9" id="mailtestrow">
                                <a class="btn btn-default btn-sm pull-left" id="mailtest" style="margin-right: 10px;">
@@ -278,7 +278,7 @@
                        <!-- dashboard text -->
                        <div class="form-group {{ $errors->has('dashboard_message') ? 'error' : '' }}">
                            <div class="col-md-3">
-                               {{ Form::label('dashboard_message', trans('admin/settings/general.dashboard_message')) }}
+                               <label for="dashboard_message">{{ trans('admin/settings/general.dashboard_message') }}</label>
                            </div>
                            <div class="col-md-9">
                                @if (config('app.lock_passwords'))
@@ -302,8 +302,7 @@
                        <!-- Archived in List -->
                        <div class="form-group {{ $errors->has('show_archived_in_list') ? 'error' : '' }}">
                            <div class="col-md-3">
-                               {{ Form::label('show_archived_in_list',
-                                              trans('admin/settings/general.show_archived_in_list')) }}
+                               <label for="show_archived_in_list">{{ trans('admin/settings/general.show_archived_in_list') }}</label>
                            </div>
                            <div class="col-md-9">
 
@@ -318,8 +317,7 @@
                        <!-- Show assets assigned to user's assets -->
                        <div class="form-group {{ $errors->has('show_assigned_assets') ? 'error' : '' }}">
                            <div class="col-md-3">
-                               {{ Form::label('show_assigned_assets',
-                                              trans('admin/settings/general.show_assigned_assets')) }}
+                               <label for="show_assigned_assets">{{ trans('admin/settings/general.show_assigned_assets') }}</label>
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
@@ -355,8 +353,7 @@
                        <!-- dash chart -->
                        <div class="form-group {{ $errors->has('dash_chart_type') ? 'error' : '' }}">
                            <div class="col-md-3">
-                               {{ Form::label('show_in_model_list',
-                                              trans('general.pie_chart_type')) }}
+                               <label for="show_in_model_list">{{ trans('general.pie_chart_type') }}</label>
                            </div>
                            <div class="col-md-9">
                                {{ Form::select('dash_chart_type', array(
@@ -369,7 +366,7 @@
                        <!-- Depreciation method -->
                        <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">
                            <div class="col-md-3">
-                                {{ Form::label('depreciation_method', trans('Depreciation method')) }}
+                               <label for="depreciation_method">{{ trans('Depreciation method') }}</label>
                            </div>
                            <div class="col-md-9">
                                {{ Form::select('depreciation_method', array(
@@ -384,7 +381,7 @@
                        <!-- Privacy Policy Footer-->
                        <div class="form-group {{ $errors->has('privacy_policy_link') ? 'error' : '' }}">
                            <div class="col-md-3">
-                               {{ Form::label('privacy_policy_link', trans('admin/settings/general.privacy_policy_link')) }}
+                               <label for="privacy_policy_link">{{ trans('admin/settings/general.privacy_policy_link') }}</label>
                            </div>
                            <div class="col-md-9">
                                @if (config('app.lock_passwords'))

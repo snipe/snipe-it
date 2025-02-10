@@ -45,5 +45,6 @@ return [
         'error' => '發生了一些錯誤。:app 回應：:error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => '發生了一些錯誤。 :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

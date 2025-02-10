@@ -45,5 +45,6 @@ return [
         'error' => 'Något gick snett! :app svarade med: :error_message',
         'error_redirect' => 'FEL: 301/302 :endpoint returnerar en redirect. Av säkerhetsskäl följer vi inte redirects. Använd den faktiska endpointen.',
         'error_misc' => 'Någonting gick snett :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

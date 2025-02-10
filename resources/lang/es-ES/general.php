@@ -216,6 +216,12 @@ return [
     'no_results'			=> 'No hay resultados.',
     'no'  					=> 'No',
     'notes'  				=> 'Notas',
+    'note_added'            => 'Note Added',
+    'add_note'              => 'Add Note',
+    'note_edited'            => 'Note Edited',
+    'edit_note'              => 'Edit Note',
+    'note_deleted'            => 'Note Deleted',
+    'delete_note'              => 'Delete Note',
     'order_number'          => 'Número de orden',
     'only_deleted'          => 'Solo activos eliminados',
     'page_menu'				=> 'Mostrando elementos de _MENU_',
@@ -567,5 +573,8 @@ return [
     'import_asset_tag_exists' => 'Ya existe un activo con la placa :asset_tag y no se ha solicitado una actualización. No se ha realizado ningún cambio.',
     'countries_manually_entered_help' => 'Los valores con asterisco (*) fueron introducidos manualmente y no coinciden con los valores desplegables ISO 3166 existentes',
     'accessories_assigned' => 'Accesorios asignados',
+    'user_managed_passwords' => 'Password Management',
+    'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
+    'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
 
 ];

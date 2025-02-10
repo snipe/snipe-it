@@ -216,6 +216,12 @@ return [
     'no_results'			=> 'אין תוצאות.',
     'no'  					=> 'לא',
     'notes'  				=> 'הערות',
+    'note_added'            => 'Note Added',
+    'add_note'              => 'Add Note',
+    'note_edited'            => 'Note Edited',
+    'edit_note'              => 'Edit Note',
+    'note_deleted'            => 'Note Deleted',
+    'delete_note'              => 'Delete Note',
     'order_number'          => 'מספר הזמנה',
     'only_deleted'          => 'Only Deleted Assets',
     'page_menu'				=> 'מציג _MENU_ פריטים',
@@ -567,5 +573,8 @@ return [
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
     'accessories_assigned' => 'Assigned Accessories',
+    'user_managed_passwords' => 'ניהול סיסמאות',
+    'user_managed_passwords_disallow' => 'למנוע ממשתמשים לנהל את הסיסמאות של עצמם',
+    'user_managed_passwords_allow' => 'לאפשר למשתמשים לנהל את הסיסמאות של עצמם',
 
 ];

@@ -38,7 +38,15 @@ class LocationImporter extends ItemImporter
     {
 
         $editingLocation = false;
+
         $location = Location::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
+
+        if ($this->findCsvMatch($row, 'id')!='') {
+            // Override location if an ID was given
+            \Log::debug('Finding location by ID: '.$this->findCsvMatch($row, 'id'));
+            $location = Location::find($this->findCsvMatch($row, 'id'));
+        }
+
 
         if ($location) {
             if (! $this->updating) {
@@ -95,6 +103,7 @@ class LocationImporter extends ItemImporter
 
         } else {
             Log::debug($location->getErrors());
+            $this->logError($location, 'Location "'.$this->item['name'].'"');
             return $location->errors;
         }
 

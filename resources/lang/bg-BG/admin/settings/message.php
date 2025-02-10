@@ -45,5 +45,6 @@ return [
         'error' => 'Възникна грешка. :app върна грешка: :error_message',
         'error_redirect' => 'Грешка 301/302 :endpoint върна пренасочване. От съображения за сигурност, ние не отваряме пренасочванията. Моля ползвайте действителната крайна точка.',
         'error_misc' => 'Възникна грешка. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

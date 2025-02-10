@@ -45,5 +45,6 @@ return [
         'error' => 'Ceva nu a funcționat. :app a răspuns cu: :error_message',
         'error_redirect' => 'EROARE: 301/302 :endpoint returnează o redirecționare. Din motive de securitate, nu urmărim redirecționările. Vă rugăm să folosiți obiectivul final.',
         'error_misc' => 'Ceva nu a mers bine. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

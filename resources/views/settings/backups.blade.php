@@ -12,7 +12,7 @@
     </a>
 
     <form method="POST" style="display: inline">
-      {{ Form::hidden('_token', csrf_token()) }}
+            @csrf
             <button class="btn btn-primary {{ (config('app.lock_passwords')) ? ' disabled': '' }}">{{ trans('admin/settings/general.generate_backup') }}</button>
       </form>
 
