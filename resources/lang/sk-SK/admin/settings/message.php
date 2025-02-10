@@ -45,5 +45,6 @@ return [
         'error' => 'Nastala chyba. :app odpovedala s: :error_message',
         'error_redirect' => 'CHBA: 301/302 :endpoint vrátil presmerovanie. Z bezpečnostných dôvodov nenasledujeme presmerovania. Prosím použite správny koncový bod.',
         'error_misc' => 'Niečo sa pokazilo. :( ',
+        'webhook_fail' => ' webhook notifikácia zlyhala: Overte správnosť zadanej URL adresy.',
     ]
 ];

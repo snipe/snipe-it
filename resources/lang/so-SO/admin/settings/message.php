@@ -45,5 +45,6 @@ return [
         'error' => 'Waxbaa qaldamay. :app waxa uu kaga jawaabay: : error_message',
         'error_redirect' => 'CILAD: 301/302 :endpoint Sababo ammaan dartood, ma raacno dib u jiheynta Fadlan isticmaal barta dhamaadka dhabta ah.',
         'error_misc' => 'Waxbaa qaldamay. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

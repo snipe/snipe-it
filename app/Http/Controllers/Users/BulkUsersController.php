@@ -70,7 +70,7 @@ class BulkUsersController extends Controller
             // bulk password reset, just do the thing
             } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
                 foreach ($users as $user) {
-                    if (($user->activated == '1') && ($user->email != '')) {
+                    if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import != '1')) {
                         $credentials = ['email' => $user->email];
                         Password::sendResetLink($credentials/* , function (Message $message) {
                         $message->subject($this->getEmailSubject()); // TODO - I'm not sure if we still need this, but this second parameter is no longer accepted in later Laravel versions.

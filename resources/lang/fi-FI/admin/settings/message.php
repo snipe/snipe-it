@@ -45,5 +45,6 @@ return [
         'error' => 'Jokin meni pieleen. :app vastasi: :error_message',
         'error_redirect' => 'VIRHE: 301/302 :endpoint palauttaa uudelleenohjauksen. Turvallisuussyistä emme seuraa uudelleenohjauksia. Käytä todellista päätepistettä.',
         'error_misc' => 'Jokin meni pieleen. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
     ]
 ];

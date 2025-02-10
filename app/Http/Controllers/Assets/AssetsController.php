@@ -535,7 +535,7 @@ class AssetsController extends Controller
     {
         $settings = Setting::getSettings();
 
-        if ($settings->qr_code == '1') {
+        if (($settings->qr_code === '1') && ($settings->label2_2d_type !== 'none')) {
             $asset = Asset::withTrashed()->find($assetId);
             if ($asset) {
                 $size = Helper::barcodeDimensions($settings->label2_2d_type);
@@ -865,8 +865,8 @@ class AssetsController extends Controller
     public function quickScan()
     {
         $this->authorize('audit', Asset::class);
-        $dt = Carbon::now()->addMonths(12)->toDateString();
-
+        $settings = Setting::getSettings();
+        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
         return view('hardware/quickscan')->with('next_audit_date', $dt);
     }
 
@@ -883,7 +883,6 @@ class AssetsController extends Controller
         $this->authorize('audit', Asset::class);
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
         $asset = Asset::findOrFail($id);
-
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 

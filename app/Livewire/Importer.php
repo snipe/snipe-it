@@ -329,6 +329,7 @@ class Importer extends Component
         ];
 
         $this->locations_fields = [
+            'id' => trans('general.id'),
             'name' => trans('general.item_name_var', ['item' => trans('general.location')]),
             'address' => trans('general.address'),
             'address2' => trans('general.importer.address2'),
@@ -400,7 +401,6 @@ class Importer extends Component
                     'requestable',
                     'Requestable',
                 ],
-
             'gravatar' =>
                 [
                     'gravatar',

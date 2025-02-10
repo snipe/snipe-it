@@ -113,7 +113,7 @@
 
                 <div class="checkbox-inline">
                     <label>
-                    {{ Form::checkbox('required', 'on', old('required')) }}
+                      <input type="checkbox" name="required" value="on" @checked(old('required'))>
                       <span style="padding-left: 10px;">{{ trans('admin/custom_fields/general.required') }}</span>
                     </label>
                 </div>

@@ -216,6 +216,12 @@ return [
     'no_results'			=> 'crwdns1074:0crwdne1074:0',
     'no'  					=> 'crwdns1075:0crwdne1075:0',
     'notes'  				=> 'crwdns1076:0crwdne1076:0',
+    'note_added'            => 'crwdns12858:0crwdne12858:0',
+    'add_note'              => 'crwdns12860:0crwdne12860:0',
+    'note_edited'            => 'crwdns12862:0crwdne12862:0',
+    'edit_note'              => 'crwdns12864:0crwdne12864:0',
+    'note_deleted'            => 'crwdns12866:0crwdne12866:0',
+    'delete_note'              => 'crwdns12868:0crwdne12868:0',
     'order_number'          => 'crwdns1829:0crwdne1829:0',
     'only_deleted'          => 'crwdns10520:0crwdne10520:0',
     'page_menu'				=> 'crwdns1276:0crwdne1276:0',
@@ -566,5 +572,8 @@ return [
     'import_asset_tag_exists' => 'crwdns12692:0crwdne12692:0',
     'countries_manually_entered_help' => 'crwdns12702:0crwdne12702:0',
     'accessories_assigned' => 'crwdns12800:0crwdne12800:0',
+    'user_managed_passwords' => 'crwdns12870:0crwdne12870:0',
+    'user_managed_passwords_disallow' => 'crwdns12872:0crwdne12872:0',
+    'user_managed_passwords_allow' => 'crwdns12874:0crwdne12874:0',
 
 ];
