@@ -187,7 +187,7 @@
         <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
       </div>
     </div> <!-- .box-default -->
-    {{ Form::close() }}
+    </form>
   </div> <!-- .col-md-9 -->
 </div> <!-- .row-->
 

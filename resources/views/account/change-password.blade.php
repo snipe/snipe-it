@@ -63,7 +63,7 @@
             </div>
 
         </div> <!-- .box-default -->
-        {{ Form::close() }}
+        </form>
     </div> <!-- .col-md-9 -->
 </div> <!-- .row-->
 @stop

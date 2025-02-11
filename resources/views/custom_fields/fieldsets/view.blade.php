@@ -115,7 +115,7 @@
                   <button type="submit" class="btn btn-primary"> {{ trans('general.save') }}</button>
                 </span>
 
-                {{ Form::close() }}
+                </form>
 
               </td>
             </tr>

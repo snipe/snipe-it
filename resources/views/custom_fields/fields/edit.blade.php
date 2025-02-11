@@ -269,7 +269,7 @@
 
 
 </div>
-{{ Form::close() }}
+</form>
 @stop
 
 @section('moar_scripts')
