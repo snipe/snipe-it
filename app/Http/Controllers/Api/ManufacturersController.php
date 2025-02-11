@@ -39,7 +39,8 @@ class ManufacturersController extends Controller
             'assets_count',
             'consumables_count',
             'components_count',
-            'licenses_count'
+            'licenses_count',
+            'notes',
         ];
 
         $manufacturers = Manufacturer::select([
@@ -55,6 +56,7 @@ class ManufacturersController extends Controller
                 'updated_at',
                 'image',
                 'deleted_at',
+                'notes',
             ])
             ->with('adminuser')
             ->withCount('assets as assets_count')

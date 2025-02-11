@@ -53,6 +53,7 @@ class LocationsController extends Controller
             'updated_at',
             'users_count',
             'zip',
+            'notes',
             ];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
@@ -73,6 +74,7 @@ class LocationsController extends Controller
             'locations.image',
             'locations.ldap_ou',
             'locations.currency',
+            'locations.notes',
         ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
@@ -190,6 +192,7 @@ class LocationsController extends Controller
                 'locations.updated_at',
                 'locations.image',
                 'locations.currency',
+                'locations.notes',
             ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
