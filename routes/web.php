@@ -280,7 +280,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 
     // Profile
     Route::get('profile', [ProfileController::class, 'getIndex'])->name('profile');
-    Route::post('profile', [ProfileController::class, 'postIndex']);
+    Route::post('profile', [ProfileController::class, 'postIndex'])->name('profile.update');
 
     Route::get('menu', [ProfileController::class, 'getMenuState'])->name('account.menuprefs');
 

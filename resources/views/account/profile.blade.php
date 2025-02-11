@@ -10,7 +10,7 @@
 
 <div class="row">
   <div class="col-md-9">
-  {{ Form::open(['method' => 'POST', 'files' => true, 'class' => 'form-horizontal', 'autocomplete' => 'off']) }}
+  <form method="POST" action="{{ route('profile.update') }}" accept-charset="UTF-8" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
   <!-- CSRF Token -->
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     <div class="box box-default">
