@@ -60,6 +60,23 @@
         {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
+
+<div class="form-group{!! $errors->has('notes') ? ' has-error' : '' !!}">
+    <label for="notes" class="col-md-3 control-label">{{ trans('general.notes') }}</label>
+    <div class="col-md-8">
+        <x-input.textarea
+                name="notes"
+                id="notes"
+                :value="old('notes', $group->notes)"
+                placeholder="{{ trans('general.placeholders.notes') }}"
+                aria-label="notes"
+                rows="2"
+        />
+
+        {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+    </div>
+</div>
+
 <div class="col-md-12">
 
     <table class="table table-striped permissions">
