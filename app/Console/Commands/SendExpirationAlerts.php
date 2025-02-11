@@ -6,10 +6,7 @@ use App\Mail\ExpiringAssetsMail;
 use App\Mail\ExpiringLicenseMail;
 use App\Models\Asset;
 use App\Models\License;
-use App\Models\Recipients\AlertRecipient;
 use App\Models\Setting;
-use App\Notifications\ExpiringAssetsNotification;
-use App\Notifications\ExpiringLicenseNotification;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
