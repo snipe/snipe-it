@@ -285,7 +285,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     Route::get('menu', [ProfileController::class, 'getMenuState'])->name('account.menuprefs');
 
     Route::get('password', [ProfileController::class, 'password'])->name('account.password.index');
-    Route::post('password', [ProfileController::class, 'passwordSave']);
+    Route::post('password', [ProfileController::class, 'passwordSave'])->name('account.password.update');
 
     Route::get('api', [ProfileController::class, 'api'])->name('user.api');
 
