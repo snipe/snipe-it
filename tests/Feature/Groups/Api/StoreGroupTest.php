@@ -21,6 +21,7 @@ class StoreGroupTest extends TestCase
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.groups.store'), [
                 'name' => 'My Awesome Group',
+                'notes' => 'My Awesome Note',
                 'permissions' => [
                     'admin' => '1',
                     'import' => '1',
@@ -29,7 +30,7 @@ class StoreGroupTest extends TestCase
             ])
             ->assertOk();
 
-        $group = Group::where('name', 'My Awesome Group')->first();
+        $group = Group::where('name', 'My Awesome Group')->where('notes', 'My Awesome Note')->first();
 
         $this->assertNotNull($group);
         $this->assertEquals('1', $group->decodePermissions()['admin']);

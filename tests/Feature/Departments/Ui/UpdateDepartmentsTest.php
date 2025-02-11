@@ -34,13 +34,14 @@ class UpdateDepartmentsTest extends TestCase
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->put(route('departments.update', ['department' => $department]), [
                 'name' => 'Test Department Edited',
+                'notes' => 'Test Note Edited',
             ])
             ->assertStatus(302)
             ->assertSessionHasNoErrors()
             ->assertRedirect(route('departments.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertTrue(Department::where('name', 'Test Department Edited')->exists());
+        $this->assertTrue(Department::where('name', 'Test Department Edited')->where('notes', 'Test Note Edited')->exists());
 
     }
 

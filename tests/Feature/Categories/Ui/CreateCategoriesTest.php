@@ -33,11 +33,12 @@ class CreateCategoriesTest extends TestCase
         $this->actingAs(User::factory()->superuser()->create())
             ->post(route('categories.store'), [
                 'name' => 'Test Category',
-                'category_type' => 'asset'
+                'category_type' => 'asset',
+                'notes' => 'Test Note',
             ])
             ->assertRedirect(route('categories.index'));
 
-        $this->assertTrue(Category::where('name', 'Test Category')->exists());
+        $this->assertTrue(Category::where('name', 'Test Category')->where('notes', 'Test Note')->exists());
     }
 
     public function testUserCannotCreateCategoriesWithInvalidType()
@@ -48,7 +49,7 @@ class CreateCategoriesTest extends TestCase
             ->from(route('categories.create'))
             ->post(route('categories.store'), [
                 'name' => 'Test Category',
-                'category_type' => 'invalid'
+                'category_type' => 'invalid',
             ])
             ->assertRedirect(route('categories.create'));
 
