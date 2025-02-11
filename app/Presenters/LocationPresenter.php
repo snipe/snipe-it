@@ -184,6 +184,12 @@ class LocationPresenter extends Presenter
                 'title' =>  trans('admin/users/table.manager'),
                 'visible' => false,
                 'formatter' => 'usersLinkObjFormatter',
+            ],  [
+                'field' => 'notes',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.notes'),
             ], [
                 'field' => 'created_at',
                 'searchable' => true,

@@ -28,6 +28,7 @@ class ManufacturerFactory extends Factory
             'support_phone' => $this->faker->phoneNumber(),
             'url' => $this->faker->url(),
             'support_email' => $this->faker->safeEmail(),
+            'notes'   => 'Created by DB seeder',
         ];
     }
 

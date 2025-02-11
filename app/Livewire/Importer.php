@@ -342,6 +342,7 @@ class Importer extends Component
             'manager_username' => trans('general.importer.manager_username'),
             'manager' => trans('general.importer.manager_full_name'),
             'parent_location' => trans('admin/locations/table.parent'),
+            'notes' => trans('general.notes'),
         ];
 
         $this->assetmodels_fields  = [
