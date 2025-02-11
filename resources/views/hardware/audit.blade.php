@@ -21,11 +21,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="box box-default">
 
-                {{ Form::open([
-                  'method' => 'POST',
-                  'route' => ['asset.audit.store', $asset->id],
-                  'files' => true,
-                  'class' => 'form-horizontal' ]) }}
+                <form method="POST" action="{{ route('asset.audit.store', $asset->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
 
                     <div class="box-header with-border">
                         <h2 class="box-title"> {{ trans('admin/hardware/form.tag') }} {{ $asset->asset_tag }}</h2>
