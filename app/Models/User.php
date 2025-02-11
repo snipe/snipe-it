@@ -94,7 +94,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'locale'                  => 'max:10|nullable',
         'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
-        'location_id'             => 'exists:locations,id|nullable',
+        'location_id'             => 'exists:locations,id|nullable|fmcs_location',
         'start_date'              => 'nullable|date_format:Y-m-d',
         'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
         'autoassign_licenses'     => 'boolean',
