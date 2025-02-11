@@ -55,6 +55,7 @@ class LocationsTransformer
                 'users_count'    => (int) $location->users_count,
                 'currency' =>  ($location->currency) ? e($location->currency) : null,
                 'ldap_ou' =>  ($location->ldap_ou) ? e($location->ldap_ou) : null,
+                'notes' => Helper::parseEscapedMarkedownInline($location->notes),
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
                 'parent' => ($location->parent) ? [
