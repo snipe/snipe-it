@@ -50,9 +50,9 @@ class SendExpirationAlerts extends Command
             $recipients = collect(explode(',', $settings->alert_email))
                 ->map(fn($item) => trim($item)) // Trim each email
                 ->all();
-
             // Expiring Assets
             $assets = Asset::getExpiringWarrantee($threshold);
+
             if ($assets->count() > 0) {
                 $this->info(trans_choice('mail.assets_warrantee_alert', $assets->count(), ['count' => $assets->count(), 'threshold' => $threshold]));
                 Mail::to($recipients)->send(new ExpiringAssetsMail($assets, $threshold));
