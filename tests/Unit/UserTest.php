@@ -51,7 +51,7 @@ class UserTest extends TestCase
     public function testFirstInitialUnderscoreLastName()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
-        $expected_username = 'nallanovna-romanova-oshostakova';
+        $expected_username = 'n_allanovna-romanova-oshostakova';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstinitial_lastname');
         $this->assertEquals($expected_username, $user['username']);
     }
@@ -75,7 +75,7 @@ class UserTest extends TestCase
     public function testLastNameUnderscoreFirstInitial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
-        $expected_username = 'allanovnaromanovaoshostakova_n';
+        $expected_username = 'allanovna-romanova-oshostakova_n';
         $user = User::generateFormattedNameFromFullName($fullname, 'lastname_firstinitial');
         $this->assertEquals($expected_username, $user['username']);
     }
@@ -83,7 +83,7 @@ class UserTest extends TestCase
     public function testFirstNameLastName()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
-        $expected_username = 'nataliaallanovnaromanovaoshostakova';
+        $expected_username = 'nataliaallanovna-romanova-oshostakova';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastname');
         $this->assertEquals($expected_username, $user['username']);
     }
