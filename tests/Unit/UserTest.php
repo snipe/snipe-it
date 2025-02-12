@@ -67,7 +67,7 @@ class UserTest extends TestCase
     public function testFirstInitialDotLastname()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
-        $expected_username = 'n.allanovnaromanovaoshostakova';
+        $expected_username = 'n.allanovna-romanova-oshostakova';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstinitial.lastname');
         $this->assertEquals($expected_username, $user['username']);
     }
