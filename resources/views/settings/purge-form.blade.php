@@ -22,7 +22,7 @@
                         <x-icon type="warning"/>
                         {{ trans('admin/settings/general.purge') }}</h2>
                 </div>
-            {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+                <form method="POST" action="{{ route('settings.purge.save') }}" accept-charset="UTF-8" autocomplete="off" class="form-horizontal" role="form">
             <!-- CSRF Token -->
                 {{csrf_field()}}
                 <div class="box-body">
@@ -45,11 +45,9 @@
                 <div class="box-footer text-right">
                     <button type="submit" class="btn btn-danger" {{ (config('app.lock_passwords')===true) ? ' disabled' : '' }}>{{ trans('admin/settings/general.purge') }}</button>
                 </div> <!--/box-footer-->
-                {{ Form::close() }}
+                </form>
             </div> <!--/.box-solid-->
         </div><!-- /.col-md-8-->
     </div><!--/.row-->
-
-    {{Form::close()}}
 
 @stop
