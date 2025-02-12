@@ -20,7 +20,7 @@
         }
     </style>
 
-    {{ Form::open(['id' => 'settingsForm', 'method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.labels.save') }}" accept-charset="UTF-8" id="settingsForm" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -513,7 +513,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 
