@@ -10,7 +10,7 @@
                 class="form-inline"
                 id="usersBulkForm"
             >
-
+            @csrf
 
             <div id="users-toolbar" style="width:100% !important;">
                 <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
