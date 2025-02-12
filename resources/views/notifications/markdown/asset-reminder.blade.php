@@ -1,7 +1,7 @@
 @component('mail::message')
 # {{ trans('mail.hello') }} {{ $assigned_to }},
 
-{{ trans_choice('mail.item_checked_reminder', ['count' => $count]) }}
+{{ trans_choice('mail.item_checked_reminder', $count) }}
 [{{ trans('general.click_here')}}]({{ $accept_url }})
 
 {{ trans('mail.best_regards') }}
