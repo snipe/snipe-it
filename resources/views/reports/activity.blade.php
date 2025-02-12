@@ -7,13 +7,13 @@
 @stop
 
 @section('header_right')
-    {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
+    <form method="POST" action="{{ route('reports.activity.post') }}" accept-charset="UTF-8" class="form-horizontal">
     {{csrf_field()}}
     <button type="submit" class="btn btn-default">
         <x-icon type="download" />
         {{ trans('general.download_all') }}
     </button>
-    {{ Form::close() }}
+    </form>
 @stop
 
 {{-- Page content --}}
