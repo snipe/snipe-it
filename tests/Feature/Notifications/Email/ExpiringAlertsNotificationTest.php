@@ -3,6 +3,7 @@
 namespace Tests\Feature\Notifications\Email;
 
 use App\Mail\ExpiringAssetsMail;
+use App\Mail\ExpiringLicenseMail;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\Setting;
@@ -57,7 +58,33 @@ class ExpiringAlertsNotificationTest extends TestCase
      public function testExpiringLicensesEmailNotification()
      {
          Mail::fake();
-         $user = User::factory()->create();
-         $license = License::factory()->create();
+         $this->settings->enableAlertEmail('admin@example.com');
+         $this->settings->setAlertInterval(60);
+
+         $alert_email = Setting::first()->alert_email;
+
+         $expiringLicense = License::factory()->create([
+             'expiration_date' => now()->addDays(30)->format('Y-m-d'),
+             'deleted_at' => null,
+         ]);
+
+         $expiredLicense = License::factory()->create([
+             'expiration_date' => now()->subDays(10)->format('Y-m-d'),
+             'deleted_at' => null,
+         ]);
+         $notExpiringLicense = License::factory()->create([
+             'expiration_date' => now()->addMonths(3)->format('Y-m-d'),
+             'deleted_at' => null,
+         ]);
+
+         $this->artisan('snipeit:expiring-alerts')->assertExitCode(0);
+
+         Mail::assertSent(ExpiringLicenseMail::class, function($mail) use ($alert_email, $expiringLicense) {
+             return $mail->hasTo($alert_email) && $mail->licenses->contains($expiringLicense);
+         });
+
+         Mail::assertNotSent(ExpiringLicenseMail::class, function($mail) use ($expiredLicense, $notExpiringLicense) {
+             return $mail->licenses->contains($expiredLicense) || $mail->licenses->contains($notExpiringLicense);
+         });
      }
 }
