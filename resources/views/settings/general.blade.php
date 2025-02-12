@@ -366,7 +366,7 @@
                            </div>
                        </div>
 
-                       
+
                        <!-- Depreciation method -->
                        <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">
                            <div class="col-md-3">
@@ -374,9 +374,9 @@
                            </div>
                            <div class="col-md-9">
                                {{ Form::select('depreciation_method', array(
-                                    'default' => 'Linear (default)', 
-                                    'half_1' => 'Half-year convention, always applied', 
-                                    'half_2' => 'Half-year convention, applied with condition', 
+                                    'default' => 'Linear (default)',
+                                    'half_1' => 'Half-year convention, always applied',
+                                    'half_2' => 'Half-year convention, applied with condition',
                                 ), old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
@@ -423,7 +423,7 @@
     </div> <!-- /.col-md-8-->
 
 
-    {{ Form::close() }}
+    </form>
 
 @stop
 
