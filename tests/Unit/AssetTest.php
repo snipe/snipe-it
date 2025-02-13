@@ -7,6 +7,7 @@ use App\Models\Category;
 use Carbon\Carbon;
 use Tests\TestCase;
 use App\Models\Setting;
+use Watson\Validating\ValidationException;
 
 class AssetTest extends TestCase
 {
@@ -31,7 +32,8 @@ class AssetTest extends TestCase
         $b = Asset::factory()->make(['asset_tag' => Asset::autoincrement_asset() ]);
 
         $this->assertTrue($a->save());
-        $this->assertFalse($b->save());
+        $this->expectException(ValidationException::class);
+        $b->save();
     }
 
     public function testAutoIncrementDouble()
@@ -181,7 +183,7 @@ class AssetTest extends TestCase
                         ]
                 )->id,   
                 'warranty_months' => 24,
-                'purchase_date' =>   Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)                  
+                'purchase_date' => Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)->format("Y-m-d")
             ]);
 
         

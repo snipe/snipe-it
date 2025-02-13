@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Assets;
 
+use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\Traits\MayContainCustomFields;
 use App\Models\Asset;
 use App\Models\Setting;
@@ -28,11 +29,21 @@ class UpdateAssetRequest extends ImageUploadRequest
      */
     public function rules()
     {
+        $modelRules = (new Asset)->getRules();
+        if ((Setting::getSettings()->digit_separator === '1.234,56' || '1,234.56') && is_string($this->input('purchase_cost'))) {
+            // If purchase_cost was submitted as a string with a comma separator
+            // then we need to ignore the normal numeric rules.
+            // Since the original rules still live on the model they will be run
+            // right before saving (and after purchase_cost has been
+            // converted to a float via setPurchaseCostAttribute).
+            $modelRules = $this->removeNumericRulesFromPurchaseCost($modelRules);
+        }
         $rules = array_merge(
             parent::rules(),
-            (new Asset)->getRules(),
+            $modelRules,
             // this is to overwrite rulesets that include required, and rewrite unique_undeleted
             [
+                'image_delete' => ['bool'],
                 'model_id'  => ['integer', 'exists:models,id,deleted_at,NULL', 'not_array'],
                 'status_id' => ['integer', 'exists:status_labels,id'],
                 'asset_tag' => [
@@ -47,6 +58,21 @@ class UpdateAssetRequest extends ImageUploadRequest
         if (Setting::getSettings()->digit_separator === '1.234,56' && is_string($this->input('purchase_cost'))) {
             $rules['purchase_cost'] = ['nullable', 'string'];
         }
+        return $rules;
+    }
+
+    private function removeNumericRulesFromPurchaseCost(array $rules): array
+    {
+        $purchaseCost = $rules['purchase_cost'];
+
+        // If rule is in "|" format then turn it into an array
+        if (is_string($purchaseCost)) {
+            $purchaseCost = explode('|', $purchaseCost);
+        }
+
+        $rules['purchase_cost'] = array_filter($purchaseCost, function ($rule) {
+            return $rule !== 'numeric' && $rule !== 'gte:0';
+        });
 
         return $rules;
     }
