@@ -4,11 +4,8 @@ namespace App\Console\Commands;
 
 use App\Mail\SendUpcomingAuditMail;
 use App\Models\Asset;
-use App\Models\Recipients\AlertRecipient;
 use App\Models\Setting;
-use App\Notifications\SendUpcomingAuditNotification;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
 
