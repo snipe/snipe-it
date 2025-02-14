@@ -27,6 +27,7 @@ class DepartmentFactory extends Factory
             'name' => $this->faker->unique()->word() . ' Department',
             'created_by' => User::factory()->superuser(),
             'location_id' => Location::factory(),
+            'notes'   => 'Created by DB seeder',
         ];
     }
 

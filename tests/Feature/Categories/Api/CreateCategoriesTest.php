@@ -27,6 +27,7 @@ class CreateCategoriesTest extends TestCase
                 'name' => 'Test Category',
                 'eula_text' => 'Test EULA',
                 'category_type' => 'accessory',
+                'notes' => 'Test Note',
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -38,6 +39,7 @@ class CreateCategoriesTest extends TestCase
         $category = Category::find($response['payload']['id']);
         $this->assertEquals('Test Category', $category->name);
         $this->assertEquals('Test EULA', $category->eula_text);
+        $this->assertEquals('Test Note', $category->notes);
         $this->assertEquals('accessory', $category->category_type);
     }
 

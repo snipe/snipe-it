@@ -22,7 +22,8 @@ class UpdateLocationsTest extends TestCase
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->patchJson(route('api.locations.update', $location), [
-                'name' => 'Test Location',
+                'name' => 'Test Updated Location',
+                'notes' => 'Test Updated Note',
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -30,7 +31,8 @@ class UpdateLocationsTest extends TestCase
             ->json();
 
         $location->refresh();
-        $this->assertEquals('Test Location', $location->name, 'Name was not updated');
+        $this->assertEquals('Test Updated Location', $location->name, 'Name was not updated');
+        $this->assertEquals('Test Updated Note', $location->notes, 'Note was not updated');
 
     }
 

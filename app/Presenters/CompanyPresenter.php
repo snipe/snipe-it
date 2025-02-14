@@ -105,7 +105,13 @@ class CompanyPresenter extends Presenter
                 'title' => trans('general.components'),
                 'visible' => true,
                 'class' => 'css-component',
-            ],[
+            ], [
+                'field' => 'notes',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.notes'),
+            ], [
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => true,

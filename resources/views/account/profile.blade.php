@@ -128,7 +128,7 @@
           <div class="form-group{{ $errors->has('image_delete') ? ' has-error' : '' }}">
             <div class="col-md-9 col-md-offset-3">
               <label for="image_delete" class="form-control">
-                {{ Form::checkbox('image_delete', '1', old('image_delete'), ['id' => 'image_delete', 'aria-label'=>'image_delete']) }}
+                <input type="checkbox" name="image_delete" id="image_delete" value="1" @checked(old('image_delete')) aria-label="image_delete">
                 {{ trans('general.image_delete') }}
               </label>
               {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
@@ -150,13 +150,23 @@
         @if ($snipeSettings->two_factor_enabled=='1')
         <div class="form-group {{ $errors->has('two_factor_optin') ? 'has-error' : '' }}">
           <div class="col-md-7 col-md-offset-3">
-            @can('self.two_factor')
-              <label class="form-control">{{ Form::checkbox('two_factor_optin', '1', old('two_factor_optin', $user->two_factor_optin)) }}
-            @else
-                <label class="form-control form-control--disabled">{{ Form::checkbox('two_factor_optin', '1', old('two_factor_optin', $user->two_factor_optin),['disabled' => 'disabled']) }}
-            @endcan
-
-            {{ trans('admin/settings/general.two_factor_enabled_text') }}</label>
+              <label
+                  for="two_factor_optin"
+                  @class([
+                    'form-control',
+                    'form-control--disabled' => auth()->user()->cannot('self.two_factor'),
+                  ])
+              >
+                <input
+                    type="checkbox"
+                    name="two_factor_optin"
+                    id="two_factor_optin"
+                    value="1"
+                    @checked(old('two_factor_optin', $user->two_factor_optin))
+                    @disabled(auth()->user()->cannot('self.two_factor'))
+                >
+                {{ trans('admin/settings/general.two_factor_enabled_text') }}
+              </label>
             @can('self.two_factor')
               <p class="help-block">{{ trans('admin/settings/general.two_factor_enabled_warning') }}</p>
             @else

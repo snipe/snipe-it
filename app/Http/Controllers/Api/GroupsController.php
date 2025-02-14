@@ -24,7 +24,7 @@ class GroupsController extends Controller
 
         $this->authorize('view', Group::class);
 
-        $groups = Group::select('id', 'name', 'permissions', 'created_at', 'updated_at', 'created_by')->with('adminuser')->withCount('users as users_count');
+        $groups = Group::select('id', 'name', 'permissions', 'notes', 'created_at', 'updated_at', 'created_by')->with('adminuser')->withCount('users as users_count');
 
         if ($request->filled('search')) {
             $groups = $groups->TextSearch($request->input('search'));
@@ -81,6 +81,7 @@ class GroupsController extends Controller
 
         $group->name = $request->input('name');
         $group->created_by = auth()->id();
+        $group->notes = $request->input('notes');
         $group->permissions = json_encode($request->input('permissions', $groupPermissions));
 
         if ($group->save()) {
@@ -118,6 +119,7 @@ class GroupsController extends Controller
         $group = Group::findOrFail($id);
 
         $group->name = $request->input('name');
+        $group->notes = $request->input('notes');
         $group->permissions = $request->input('permissions'); // Todo - some JSON validation stuff here
 
         if ($group->save()) {
