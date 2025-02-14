@@ -22,7 +22,7 @@ return [
     'archived'              => 'Archived',
     'asset_models'			=> 'Asset Models',
     'asset_model'			=> 'Model',
-    'asset'					=> 'Asset',
+    'asset'					=> 'Sample',
     'asset_report'          => 'Asset Report',
     'asset_tag'				=> 'Asset Tag',
     'asset_tags'            => 'Asset Tags',
