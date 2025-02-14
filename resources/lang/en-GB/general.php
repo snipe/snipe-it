@@ -31,7 +31,7 @@ return [
     'accept_assets_menu'    => 'Accept Assets',
     'audit'				    => 'Audit',
     'audit_report'			=> 'Audit Log',
-    'assets'				=> 'Assets',
+    'assets'				=> 'Samples',
     'assets_audited'        => 'assets audited',
     'assets_checked_in_count'     => 'assets checked in',
     'assets_checked_out_count'     => 'assets checked out',
