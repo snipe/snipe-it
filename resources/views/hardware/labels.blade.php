@@ -29,7 +29,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
         margin-top: 5%;
         margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
         margin-bottom: {{ $settings->labels_display_bgutter }}in;
-        display: ;
+        display: inline-block;
         overflow: hidden; 
     }
 
@@ -40,12 +40,16 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
     div.qr_img {
         width: {{ $qr_size }}in;
         height: {{ $qr_size }}in;
+        float: right;
+        display: inline-flex;
         padding-right: .15in;
     }
+    
     img.qr_img {
+
         width: 120.79%;
         height: 120.79%;
-        margin-top: 12%;
+        margin-top: -6.9%;
         margin-left: -6.9%;
         padding-bottom: .04in;
     }
@@ -57,8 +61,8 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
     }
     
     div.label-logo {
-        top:0;
-        display: absolute;
+        float:left;
+        display: inline-block;
     }
     
     img.label-logo {
@@ -77,14 +81,12 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
         word-wrap: break-word;
         word-break: break-all;
     }
-    
     div.barcode_container {
 
         width: 100%;
         display: inline;
         overflow: hidden;
     }
-    
     .next-padding {
         margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
     }
@@ -117,7 +119,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
 
         @if ($settings->qr_code=='1')
             <div class="qr_img">
-                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img" style"top:150; float:left; position:fixed;">
+                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="qr_img">
             </div>
         @endif
 
