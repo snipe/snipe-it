@@ -26,6 +26,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
         width: {{ $settings->labels_width }}in;
         height: {{ $settings->labels_height }}in;
         padding: 0in;
+        margin-top: 5%;
         margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
         margin-bottom: {{ $settings->labels_display_bgutter }}in;
         display: inline-block;
@@ -39,8 +40,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
     div.qr_img {
         width: {{ $qr_size }}in;
         height: {{ $qr_size }}in;
-
-        float: left;
+        float: right;
         display: inline-flex;
         padding-right: .15in;
     }
@@ -58,7 +58,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
         width: 100%;
     }
     div.label-logo {
-        align-self: flex-start;
+        float:left;
         display: inline-block;
     }
     img.label-logo {
