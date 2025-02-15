@@ -22,27 +22,15 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
         margin: {{ $settings->labels_pmargin_top }}in {{ $settings->labels_pmargin_right }}in {{ $settings->labels_pmargin_bottom }}in {{ $settings->labels_pmargin_left }}in;
         font-size: {{ $settings->labels_fontsize }}pt;
     }
-    /*.label {
+    .label {
         width: {{ $settings->labels_width }}in;
         height: {{ $settings->labels_height }}in;
         padding: 0in;
-        margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter 
+        margin-right: {{ $settings->labels_display_sgutter }}in; /* the gutter */
         margin-bottom: {{ $settings->labels_display_bgutter }}in;
         display: inline-block;
         overflow: hidden; 
-    }*/
-
-.label {
-        width: 500px;
-        height: 1000px;
-        padding: 0in;
-        margin-right:25px; 
-        margin-bottom: 50px;
-        background-color:#f6f6f6; 
-        display: inline-block;
-        overflow: hidden;
     }
-
 
     
     .page-break  {
