@@ -7,7 +7,7 @@ use App\Models\Setting;
 
 class DefaultLabel extends RectangleSheet
 {
-    private const BARCODE1D_SIZE = 0.15;
+    private const BARCODE1D_SIZE = 0.25;
 
     private const BARCODE2D_SIZE = 0.76;
     private const BARCODE2D_MARGIN = 0.075;
