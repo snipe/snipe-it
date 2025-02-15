@@ -13,7 +13,7 @@ class DefaultLabel extends RectangleSheet
     private const BARCODE2D_MARGIN = 0.075;
 
     private const LOGO_SIZE = [1.75, 1.50];
-    private const LOGO_MARGIN = 0.05;
+    private const LOGO_MARGIN = 0.15;
 
     private const TEXT_MARGIN = 0.04;
 
