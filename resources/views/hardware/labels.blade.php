@@ -37,8 +37,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
     div.qr_img {
         width: {{ $qr_size }}in;
         height: {{ $qr_size }}in;
-        position: absolute;
-        align-self: flex-end;
+        float:left;
         display: inline-flex;
         padding-right: .15in;
     }
