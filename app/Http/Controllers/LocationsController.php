@@ -78,6 +78,7 @@ class LocationsController extends Controller
         $location->created_by = auth()->id();
         $location->phone = request('phone');
         $location->fax = request('fax');
+        $location->notes = $request->input('notes');
 
         $location = $request->handleImages($location);
 
@@ -138,6 +139,7 @@ class LocationsController extends Controller
         $location->fax = request('fax');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
+        $location->notes = $request->input('notes');
 
         $location = $request->handleImages($location);
 

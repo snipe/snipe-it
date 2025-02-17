@@ -33,13 +33,14 @@ class UpdateLocationsTest extends TestCase
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->put(route('locations.update', ['location' => $location]), [
                 'name' => 'Test Location Edited',
+                'notes' => 'Test Note Edited',
             ])
             ->assertStatus(302)
             ->assertSessionHasNoErrors()
             ->assertRedirect(route('locations.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertTrue(Location::where('name', 'Test Location Edited')->exists());
+        $this->assertTrue(Location::where('name', 'Test Location Edited')->where('notes', 'Test Note Edited')->exists());
     }
 
     public function testUserCannotEditLocationsToMakeThemTheirOwnParent()

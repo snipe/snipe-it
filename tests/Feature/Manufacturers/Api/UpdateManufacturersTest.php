@@ -3,11 +3,22 @@
 namespace Tests\Feature\Manufacturers\Ui;
 
 use App\Models\Manufacturer;
+use App\Models\Category;
 use App\Models\User;
 use Tests\TestCase;
 
-class UpdateManufacturerTest extends TestCase
+class UpdateManufacturersTest extends TestCase
 {
+    public function testPermissionRequiredToStoreManufacturer()
+    {
+        $this->actingAs(User::factory()->create())
+            ->post(route('manufacturers.store'), [
+                'name' => 'Test Manufacturer',
+            ])
+            ->assertStatus(403)
+            ->assertForbidden();
+    }
+
     public function testPageRenders()
     {
         $this->actingAs(User::factory()->superuser()->create())
@@ -17,11 +28,11 @@ class UpdateManufacturerTest extends TestCase
 
     public function testUserCanEditManufacturers()
     {
-        $manufacturer = Manufacturer::factory()->create(['name' => 'Test Manufacturer']);
+        $department = Manufacturer::factory()->create(['name' => 'Test Manufacturer']);
         $this->assertTrue(Manufacturer::where('name', 'Test Manufacturer')->exists());
 
         $response = $this->actingAs(User::factory()->superuser()->create())
-            ->put(route('manufacturers.update', ['manufacturer' => $manufacturer]), [
+            ->put(route('manufacturers.update', ['manufacturer' => $department]), [
                 'name' => 'Test Manufacturer Edited',
                 'notes' => 'Test Note Edited',
             ])
@@ -31,6 +42,9 @@ class UpdateManufacturerTest extends TestCase
 
         $this->followRedirects($response)->assertSee('Success');
         $this->assertTrue(Manufacturer::where('name', 'Test Manufacturer Edited')->where('notes', 'Test Note Edited')->exists());
+
     }
+
+
 
 }

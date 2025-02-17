@@ -62,6 +62,7 @@ class GroupsController extends Controller
         $group->name = $request->input('name');
         $group->permissions = json_encode($request->input('permission'));
         $group->created_by = auth()->id();
+        $group->notes = $request->input('notes');
 
         if ($group->save()) {
             return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.create'));
@@ -108,6 +109,7 @@ class GroupsController extends Controller
         }
         $group->name = $request->input('name');
         $group->permissions = json_encode($request->input('permission'));
+        $group->notes = $request->input('notes');
 
         if (! config('app.lock_passwords')) {
             if ($group->save()) {
