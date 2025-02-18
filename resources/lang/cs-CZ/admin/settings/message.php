@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testování LDAP ověření...',
         'authentication_success' => 'Uživatel byl úspěšně ověřen přes LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Odesílání testovací zprávy :app...',
         'success' => 'Vaše integrace :webhook_name funguje!',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'CHYBA: 301/302 :endpoint vrací přesměrování. Z bezpečnostních důvodů nesledujeme přesměrování. Použijte prosím skutečný koncový bod.',
         'error_misc' => 'Něco se nepovedlo.',
         'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

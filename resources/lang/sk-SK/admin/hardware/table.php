@@ -15,7 +15,7 @@ return [
     'dl_csv' 		=> 'Stiahnuť CSV',
     'eol' 			=> 'Koniec životnosti',
     'id'      		=> 'ID',
-    'last_checkin_date' => 'Posledný dátum vrátenia',
+    'last_checkin_date' => 'Dátum posledného prevzatia',
     'location' 		=> 'Umiestnenie',
     'purchase_cost'	=> 'Cena',
     'purchase_date'	=> 'Zakúpené',

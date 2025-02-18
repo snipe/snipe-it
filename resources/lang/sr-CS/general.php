@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Prilagodi izveštaj',
     'custom_report'         => 'Prilagođeni izveštaj o imovini',
     'dashboard'				=> 'Dashboard',
+    'data_source'           => 'Izvor podataka',
     'days'      			=> 'dana',
     'days_to_next_audit'    => 'Dana do sledeće revizije',
     'date'					=> 'Datum',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Ime Prezime (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Prezime Prvo slovo imena (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Inicijal imena Prezime (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Prezime Prvo slovo imena (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Ime Prezime (Petar Petrović)',
     'lastname_firstname_display'	=> 'Prezime Ime (Petrović Petar)',
     'name_display_format'	=> 'Format prikaza imena',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Ne',
     'notes'  				=> 'Zabeleške',
     'note_added'            => 'Napomena je dodata',
+    'options'				=> 'Opcije',
+    'preview'				=> 'Pregled',
     'add_note'              => 'Dodaj napomenu',
     'note_edited'            => 'Napomena je izmenjena',
     'edit_note'              => 'Izmeni napomenu',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count potrošni materijal|:count potrošnih materijala',
         'components'  => ':count komponenta|:count komponenti',
     ],
+
     'more_info' => 'Više informacija',
     'quickscan_bulk_help' => 'Potvrđivanjem ovog polja će izmeniti zapis imovine kako bi se ažurirala ova nova lokacija. Ukoliko ostane nepotvrđeno lokacija će se evidentirati samo u zapisu popisa. Imajte na umu da, ukoliko je imovina zadužena, neće promeniti lokaciju osobe, imovine ili lokacije za koju je zadužena.',
     'whoops' => 'Ups!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Upravljanje lozinkama',
     'user_managed_passwords_disallow' => 'Onemogući korisnicima da upravljaju svojim lozinkama',
     'user_managed_passwords_allow' => 'Omogući korisnicima da upravljaju svojim lozinkama',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Dodaj napomenu',
+    ],
 
 ];

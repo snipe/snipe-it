@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'LDAP-Authentifizierung wird getestet...',
         'authentication_success' => 'Benutzer wurde erfolgreich gegen LDAP authentifiziert!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => ':app Testnachricht wird gesendet ...',
         'success' => 'Deine :webhook_name Integration funktioniert!',
@@ -45,6 +48,7 @@ return [
         'error' => 'Etwas ist schiefgelaufen. :app antwortete mit: :error_message',
         'error_redirect' => 'FEHLER: 301/302 :endpoint gibt eine Umleitung zurück. Aus Sicherheitsgründen folgen wir keine Umleitungen. Bitte verwende den aktuellen Endpunkt.',
         'error_misc' => 'Etwas ist schiefgelaufen! :( ',
-        'webhook_fail' => '',
+        'webhook_fail' => ' Webhook-Benachrichtigung fehlgeschlagen: Überprüfen Sie, ob die URL noch gültig ist.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

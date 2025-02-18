@@ -15,7 +15,7 @@ return [
     'upload'                    => 'Ladda upp',
     'select_file'				=> 'Välj fil...',
     'select_files'				=> 'Välj filer...',
-    'generate_labels'           => '{1} Generera etikett|[2,*]] Generera etiketter',
+    'generate_labels'           => '{1} Generera etikett|[2,*] Generera etiketter',
     'send_password_link'        => 'Skicka länk för lösenordsåterställning',
     'go'                        => 'Kör',
     'bulk_actions'              => 'Massåtgärder',

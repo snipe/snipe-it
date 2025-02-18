@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Tilpas rapport',
     'custom_report'         => 'Tilpasset Aktiv Rapport',
     'dashboard'				=> 'Oversigtspanel',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dage',
     'days_to_next_audit'    => 'Dage til næste revision',
     'date'					=> 'Dato',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Fornavn Efternavn (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Efternavn Første initial (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Første bogstav i fornavn efternavn (jsmith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Fornavn Efternavn (Jane Smith)',
     'lastname_firstname_display'	=> 'Efternavn Fornavn (Smith Jane)',
     'name_display_format'	=> 'Navn Visningsformat',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Nej',
     'notes'  				=> 'Noter',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Forbrugsparti:count Forbrugsvarer',
         'components'  => ':count Komponent:count Komponenter',
     ],
+
     'more_info' => 'Mere Info',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];
