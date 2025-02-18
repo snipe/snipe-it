@@ -2,34 +2,34 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Part does not exist.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Part was not created, please try again.',
+        'success' => 'Part created successfully.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Part was not updated, please try again',
+        'success' => 'Part updated successfully.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Are you sure you wish to delete this part?',
+        'error'   => 'There was an issue deleting the part. Please try again.',
+        'success' => 'The part was deleted successfully.'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
+        'error'   		=> 'Part was not checked out, please try again',
+        'success' 		=> 'Part checked out successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Not enough parts remaining: :remaining remaining, :requested requested ',
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
+        'error'   		=> 'Part was not checked in, please try again',
+        'success' 		=> 'Part checked in successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.'
     )
 
