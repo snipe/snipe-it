@@ -23,10 +23,10 @@
 
     <!-- Horizontal Form -->
     @if ($field->id)
-        {{ Form::open(['route' => ['fields.update', $field->id], 'class'=>'form-horizontal']) }}
+        <form method="POST" action="{{ route('fields.update', $field->id) }}" accept-charset="UTF-8" class="form-horizontal">
         {{ method_field('PUT') }}
     @else
-        {{ Form::open(['route' => 'fields.store', 'class'=>'form-horizontal']) }}
+        <form method="POST" action="{{ route('fields.store') }}" accept-charset="UTF-8" class="form-horizontal">
     @endif
 
     @csrf
@@ -269,7 +269,7 @@
 
 
 </div>
-{{ Form::close() }}
+</form>
 @stop
 
 @section('moar_scripts')
