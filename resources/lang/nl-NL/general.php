@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Rapport aanpassen',
     'custom_report'         => 'Aangepaste Asset Rapport',
     'dashboard'				=> 'Dashboard',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dagen',
     'days_to_next_audit'    => 'Dagen tot de volgende controle',
     'date'					=> 'Datum',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Voornaam Achternaam (nomen.nescio@voorbeeld.nl)',
     'lastnamefirstinitial_format' =>  'Achternaam eerste initiaal (nescion@voorbeeld.nl)',
     'firstintial_dot_lastname_format' => 'Eerste Initiaal Achternaam (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Voornaam Achternaam (Jane Smith)',
     'lastname_firstname_display'	=> 'Achternaam Voornaam (Smith Jane)',
     'name_display_format'	=> 'Weergave naam',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Nee',
     'notes'  				=> 'Notities',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Verbruiksverbruiker|:count Verbruiksartikelen',
         'components'  => ':count Component|:count componenten',
     ],
+
     'more_info' => 'Meer Info',
     'quickscan_bulk_help' => 'Als u dit selectievakje aanvinkt, wordt het asset record bewerkt om deze nieuwe locatie te weerspiegelen. Als u het uitgevinkt laat staan ziet u de locatie in het audit logboek. Let op dat als dit asset is uitgecheckt, dan zal de locatie van de persoon, product of locatie waar het uitgecheckt is niet veranderen.',
     'whoops' => 'Oeps!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

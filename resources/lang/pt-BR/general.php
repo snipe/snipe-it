@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Personalizar Relatório',
     'custom_report'         => 'Relatório de Ativos Personalizado',
     'dashboard'				=> 'Painel de Controle',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dias',
     'days_to_next_audit'    => 'Dias Até a Próxima Auditoria',
     'date'					=> 'Data',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Primeiro Nome com Sobrenome (jose.silva@exemplo.com.br)',
     'lastnamefirstinitial_format' =>  'Sobrenome Inicial do Nome (silvaj@exemplo.com.br)',
     'firstintial_dot_lastname_format' => 'Inicial do Nome com Sobrenome (j.silva@exemplo.com.br)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Primeiro nome com sobrenome (João Silva)',
     'lastname_firstname_display'	=> 'Sobrenome com Primeiro Nome (Silva João)',
     'name_display_format'	=> 'Formato de exibição de nome',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Não',
     'notes'  				=> 'Notas',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -562,6 +566,7 @@ Resultados da Sincronização',
         'consumables'  => ':count Consumível|:count Consumíveis',
         'components'  => ':count Componente|:count Componentes',
     ],
+
     'more_info' => 'Mais Informações',
     'quickscan_bulk_help' => 'Marcar esta caixa irá editar o registro do ativo para refletir este novo local. Deixar desmarcado irá apenas registrar a localização no log de auditoria. Observe que, se este ativo estiver emprestado, não alterará o local da pessoa, do ativo ou do local para onde ele foi emprestado.',
     'whoops' => 'Opa!',
@@ -577,5 +582,10 @@ Resultados da Sincronização',
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

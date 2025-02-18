@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Personalizar relatório',
     'custom_report'         => 'Relatório de Artigo personalizado',
     'dashboard'				=> 'Dashboard',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dias',
     'days_to_next_audit'    => 'Dias para próxima auditoria',
     'date'					=> 'Data',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Nome próprio e Sobrenome (jane_smith@exemplo.com)',
     'lastnamefirstinitial_format' =>  'Sobrenome Primeira Inicial (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Inicial Nome Próprio Sobrenome (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Primeiro nome com sobrenome (Jane Smith)',
     'lastname_firstname_display'	=> 'Primeiro Nome do Último Nome (Smith Jane)',
     'name_display_format'	=> 'Formato de exibição de nome',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Não',
     'notes'  				=> 'Notas',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Consumível|:count Consumíveis',
         'components'  => ':count Componente|:count Componentes',
     ],
+
     'more_info' => 'Mais Informações',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

@@ -29,6 +29,6 @@ return [
         'restore'   => 'Obnoviť :item_type',
         'create'    => 'Vytvoriť nový :item_type',
         'checkout'  => 'Odovzdať :item_type',
-        'checkin'   => 'Prijať :item_type',
+        'checkin'   => 'Prevziať :item_type',
     ]
 ];

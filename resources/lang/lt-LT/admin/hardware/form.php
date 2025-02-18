@@ -17,9 +17,9 @@ return [
     'checkout_date'		=> 'Išdavimo data',
     'checkin_date'		=> 'Paėmimo data',
     'checkout_to'		=> 'Išduoti',
-    'cost'				=> 'Pirkimo kaina',
+    'cost'				=> 'Įsigijimo kaina',
     'create'			=> 'Sukurti turtą',
-    'date'				=> 'Pirkimo data',
+    'date'				=> 'Įsigijimo data',
     'depreciation'	    => 'Nusidėvėjimas',
     'depreciates_on'	=> 'Nusidėvėjimo data',
     'default_location'	=> 'Numatytoji vieta',
@@ -60,5 +60,5 @@ return [
     'processing_spinner' => 'Apdorojama... (Dideliems failams gali šiek tiek užtrukti)',
     'optional_infos'  => 'Papildoma informacija',
     'order_details'   => 'Su užsakymu susijusi informacija',
-    'calc_eol'    => 'Jei EOL data nustatoma iš naujo, naudoti automatinį EOL apskaičiavimą pagal pirkimo datą ir EOL laipsnį.',
+    'calc_eol'    => 'Jei EOL data nustatoma iš naujo, naudoti automatinį EOL apskaičiavimą pagal įsigijimo datą ir nusidėvėjimo laipsnį.',
 ];

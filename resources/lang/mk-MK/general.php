@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Прилагоди извештај',
     'custom_report'         => 'Приспособен извештај за основни средства',
     'dashboard'				=> 'Табла',
+    'data_source'           => 'Data Source',
     'days'      			=> 'денови',
     'days_to_next_audit'    => 'Денови до следна ревизија',
     'date'					=> 'Датум',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Име, _, Презиме (janko_jankov@example.com)',
     'lastnamefirstinitial_format' =>  'Презиме, Почетна буква од име (jankovj@example.com)',
     'firstintial_dot_lastname_format' => 'Иницијал од име Презиме (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Име Презиме (Jane Smith)',
     'lastname_firstname_display'	=> 'Презиме Име (Smith Jane)',
     'name_display_format'	=> 'Формат на приказ на име',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Не',
     'notes'  				=> 'Забелешки',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Потрошен материјал|:count Потрошни материјали',
         'components'  => ':count Компонента|:count Компоненти',
     ],
+
     'more_info' => 'Повеќе информации',
     'quickscan_bulk_help' => 'Потврдувањето на ова поле ќе го уреди записот на средствата за да ја одрази оваа нова локација. Оставањето непотврдено, едноставно ќе ја забележи локацијата во пописот. Забележете дека ако се потврди ова средство, нема да ја промени локацијата на лицето, средството или локацијата на која се задолжува.',
     'whoops' => 'Упс!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

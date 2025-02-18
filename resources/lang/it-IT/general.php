@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Personalizza Report',
     'custom_report'         => 'Report personalizzato Beni',
     'dashboard'				=> 'Cruscotto',
+    'data_source'           => 'Data Source',
     'days'      			=> 'giorni',
     'days_to_next_audit'    => 'Giorni al prossimo controllo inventario',
     'date'					=> 'Data',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Nome_Cognome (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Cognome + Iniziale Nome (smithj@esempio.it)',
     'firstintial_dot_lastname_format' => 'Iniziale Nome . Cognome (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Nome Cognome (Jane Smith)',
     'lastname_firstname_display'	=> 'Cognome Nome (Smith Jane)',
     'name_display_format'	=> 'Formato Nome',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'No',
     'notes'  				=> 'Note',
     'note_added'            => 'Nota Aggiunta',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Aggiungi nota',
     'note_edited'            => 'Nota Modificata',
     'edit_note'              => 'Modifica Nota',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Consumabile|:count Consumabili',
         'components'  => ':count Componente|:count Componenti',
     ],
+
     'more_info' => 'Altre informazioni',
     'quickscan_bulk_help' => 'Spuntare questa casella modificherà la Sede di questo Bene. Non spuntandola, la Sede verrà solo annotata nel registro del controllo inventario. Nota che se questo bene è già assegnato, non verrà modificata la Sede della persona, del Bene o della Sede a cui è assegnato.',
     'whoops' => 'Ops!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Gestione password',
     'user_managed_passwords_disallow' => 'Non consentire agli utenti di gestire le proprie password',
     'user_managed_passwords_allow' => 'Consenti agli utenti di gestire le proprie password',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Aggiungere una nota',
+    ],
 
 ];

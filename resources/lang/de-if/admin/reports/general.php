@@ -14,9 +14,9 @@ return [
         'user_country' => 'Benutzerland',
         'user_zip' => 'Benutzer PLZ'
     ],
-    'open_saved_template' => 'Open Saved Template',
-    'save_template' =>  'Save Template',
-    'select_a_template' => 'Select a Template',
-    'template_name' => 'Template Name',
-    'update_template' => 'Update Template',
+    'open_saved_template' => 'Gespeicherte Vorlage öffnen',
+    'save_template' =>  'Vorlage speichern',
+    'select_a_template' => 'Wählen Sie eine Vorlage aus',
+    'template_name' => 'Vorlagenname',
+    'update_template' => 'Vorlage aktualisieren',
 ];

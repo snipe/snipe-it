@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Customize Report',
     'custom_report'         => '맞춤형 자산 보고서',
     'dashboard'				=> '대시보드',
+    'data_source'           => 'Data Source',
     'days'      			=> '일자',
     'days_to_next_audit'    => '다음 감사까지의 일자',
     'date'					=> '날짜',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => '이름 성 (jane.smith@example.com)',
     'lastnamefirstinitial_format' =>  '성 (姓)의 첫 이니셜 (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'First Initial Last Name (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'First Name Last Name (Jane Smith)',
     'lastname_firstname_display'	=> 'Last Name First Name (Smith Jane)',
     'name_display_format'	=> 'Name Display Format',
@@ -217,6 +219,8 @@ return [
     'no'  					=> '아니오',
     'notes'  				=> '비고',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
     ],
+
     'more_info' => '자세한 정보',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

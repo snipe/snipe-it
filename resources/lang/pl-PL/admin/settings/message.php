@@ -15,7 +15,7 @@ return [
         'restore_confirm'       => 'Czy na pewno chcesz przywrócić bazę danych z :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please log in again.'
+        'success'               => 'Kopia zapasowa została przywrócona. Zaloguj się ponownie.'
     ],
     'purge' => [
         'error'     => 'Wystąpił błąd podczas czyszczenia. ',
@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testowanie uwierzytelniania LDAP...',
         'authentication_success' => 'Użytkownik uwierzytelniony z LDAP pomyślnie!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Wysyłanie wiadomości testowej :app...',
         'success' => 'Twoja integracja :webhook_name działa!',
@@ -45,6 +48,7 @@ return [
         'error' => 'Coś poszło nie tak. :app odpowiedział: :error_message',
         'error_redirect' => 'BŁĄD: 301/302 :endpoint zwraca przekierowanie. Ze względów bezpieczeństwa nie podążamy za przekierowaniami. Proszę użyć aktualnego punktu końcowego.',
         'error_misc' => 'Coś poszło nie tak. :( ',
-        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_fail' => ' Powiadomienie webhook nie powiodło się: Sprawdź, czy adres URL jest nadal prawidłowy.',
+        'webhook_channel_not_found' => ' Nie znaleziono kanału webhook.'
     ]
 ];

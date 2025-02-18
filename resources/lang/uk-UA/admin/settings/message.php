@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Тестування авторизації LDAP...',
         'authentication_success' => 'Користувач успішно пройшов перевірку на зв\'язку з LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Відправка :app тестове повідомлення...',
         'success' => 'Ваша функція з інтеграцією :webhook_name!',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'ПОМИЛКА: 301/302 :endpoint повертає редиректор. З міркувань безпеки ми не слідуємо перенаправленням. Будь ласка, використовуйте фактичну кінцеву точку.',
         'error_misc' => 'Щось пішло не так. :( ',
         'webhook_fail' => 'не вдалося надіслати повідомлення webhook для перевірки: Переконайтесь, що посилання ще дійсне.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

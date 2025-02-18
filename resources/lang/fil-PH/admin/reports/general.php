@@ -4,7 +4,7 @@ return [
     'info'   => 'Pumili ng opsyon na gusto mo para sa iyong report sa asset.',
     'deleted_user' => 'Deleted user',
     'send_reminder' => 'Send reminder',
-    'reminder_sent' => 'Reminder sent',
+    'reminder_sent' => 'Naipadala ang paalala',
     'acceptance_deleted' => 'Acceptance request deleted',
     'acceptance_request' => 'Acceptance request',
     'custom_export' => [

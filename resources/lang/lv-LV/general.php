@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Pielāgot atskaiti',
     'custom_report'         => 'Pielāgoto aktīvu pārskats',
     'dashboard'				=> 'Informācijas panelis',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dienas',
     'days_to_next_audit'    => 'Dienas līdz nākamajam auditam',
     'date'					=> 'Datums',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Vārds Uzvārds (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Uzvārds un vārda pirmais burts (berzinsj@epasts.lv)',
     'firstintial_dot_lastname_format' => 'Vārds un uzvārds (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Vārds Uzvārds (Liene Ozoliņa)',
     'lastname_firstname_display'	=> 'Uzvārds Vārds (Ozoliņa Liene)',
     'name_display_format'	=> 'Vārda Attēlošanas Formāts',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Nē',
     'notes'  				=> 'Piezīmes',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
     ],
+
     'more_info' => 'Vairāk informācijas',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];
