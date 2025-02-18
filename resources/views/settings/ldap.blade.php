@@ -741,7 +741,7 @@
                             <!-- LDAP test -->
                             <div class="form-group">
                                 <div class="col-md-3">
-                                    {{ Form::label('test_ldap_sync', 'Test LDAP Sync') }}
+                                    <label for="test_ldap_sync"> {{trans('admin/settings/general.ldap_test_label')}} </label>
                                 </div>
                                 <div class="col-md-8" id="ldaptestrow">
                                     <a class="btn btn-default btn-sm" id="ldaptest" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test_sync') }}</a>
@@ -765,15 +765,15 @@
                             <!-- LDAP Login test -->
                             <div class="form-group">
                                 <div class="col-md-3">
-                                    {{ Form::label('test_ldap_login', 'Test LDAP Login') }}
+                                    <label for="test_ldap_login"> {{trans('admin/settings/general.ldap_test_login')}} </label>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="row">
                                     <div class="col-md-4">
-                                        <input type="text" name="ldaptest_user" id="ldaptest_user"  class="form-control" placeholder="LDAP username">
+                                        <input type="text" name="ldaptest_user" id="ldaptest_user"  class="form-control" placeholder="{{trans('admin/settings/general.ldap_username_placeholder')}}">
                                     </div>
                                     <div class="col-md-4">
-                                    <input type="password" name="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="LDAP password" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
+                                    <input type="password" name="ldaptest_password" id="ldaptest_password" class="form-control" placeholder="{{trans('admin/settings/general.ldap_password_placeholder')}}" autocomplete="off" readonly onfocus="this.removeAttribute('readonly');">
                                     </div>
                                     <div class="col-md-3">
                                         <a class="btn btn-default btn-sm" id="ldaptestlogin" style="margin-right: 10px;">{{ trans('admin/settings/general.ldap_test') }}</a>
