@@ -217,8 +217,6 @@
 
                                         <!-- Add notes -->
                                         @can('update', \App\Models\Asset::class)
-
-
                                             <div class="col-md-12 hidden-print" style="padding-top: 5px;">
                                                 <a href="#" style="width: 100%" data-toggle="modal" data-target="#createNoteModal" class="btn btn-sm btn-primary btn-block btn-social hidden-print">
                                                     <x-icon type="note" />
@@ -226,7 +224,6 @@
                                                 </a>
                                                 @include ('modals.add-note', ['type' => 'asset', 'id' => $asset->id])
                                             </div>
-
                                         @endcan
 
 
