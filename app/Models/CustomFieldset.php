@@ -24,6 +24,7 @@ class CustomFieldset extends Model
      */
     public $rules = [
         'name' => 'required|unique:custom_fieldsets',
+        ''
     ];
 
     /**
@@ -52,11 +53,13 @@ class CustomFieldset extends Model
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      * @since [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function models()
+    public function customizables() // TODO - I don't like this name, but I can't think of anything better
     {
-        return $this->hasMany(\App\Models\AssetModel::class, 'fieldset_id');
+        $customizable_class_name = $this->type; //TODO - copypasta from Customizable trait?
+        \Log::debug("Customizable Class name is: ".$customizable_class_name);
+        return $customizable_class_name::getFieldsetUsers($this->id);
     }
 
     /**
@@ -81,6 +84,7 @@ class CustomFieldset extends Model
      */
     public function validation_rules()
     {
+        \Log::debug("CALLING validation_rules FOR customfiledsets!");
         $rules = [];
         foreach ($this->fields as $field) {
             $rule = [];
@@ -94,7 +98,12 @@ class CustomFieldset extends Model
                     $rule[] = 'unique_undeleted';
             }
 
-            array_push($rule, $field->attributes['format']);
+            \Log::debug("Field Format for".$field->name." is: ".$field->format);
+            if($field->format == 'DATE') { //we do a weird mutator thing, it's confusing - but, yes, it's all-caps
+                $rule[] = 'date_format:Y-m-d';
+            } else {
+                array_push($rule, $field->attributes['format']);
+            }
             $rules[$field->db_column_name()] = $rule;
 
 

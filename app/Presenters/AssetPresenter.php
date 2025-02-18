@@ -2,8 +2,11 @@
 
 namespace App\Presenters;
 
+use App\Helpers\CustomFieldHelper;
+use App\Models\Asset;
 use App\Models\CustomField;
 use Carbon\CarbonImmutable;
+use App\Models\CustomFieldset;
 use DateTime;
 
 /**
@@ -309,25 +312,21 @@ class AssetPresenter extends Presenter
         // models. We only pass the fieldsets that pertain to each asset (via their model) so that we
         // don't junk up the REST API with tons of custom fields that don't apply
 
-        $fields = CustomField::whereHas('fieldset', function ($query) {
-            $query->whereHas('models');
-        })->get();
+        //only get fieldsets that have fields
+        $fieldsets = CustomFieldset::where("type", Asset::class)->whereHas('fields')->get();
+        $ids = [];
+        foreach($fieldsets as $fieldset) {
+            if (count($fieldset->customizables()) > 0) { //only get fieldsets that are 'in use'
+                $ids[] = $fieldset->id;
+            }
+        }
 
+        $fields = CustomField::whereIn('id',$ids)->get(); // FIXME: d'oh! this is wrong. We just got fieldsets, above. Now we're getting fields?
         // Note: We do not need to e() escape the field names here, as they are already escaped when
         // they are presented in the blade view. If we escape them here, custom fields with quotes in their
         // name can break the listings page. - snipe
         foreach ($fields as $field) {
-            $layout[] = [
-                'field' => 'custom_fields.'.$field->db_column,
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => true,
-                'title' => $field->name,
-                'formatter'=> 'customFieldsFormatter',
-                'escape' => true,
-                'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
-                'visible' => ($field->show_in_listview == '1') ? true : false,
-            ];
+            $layout[] = CustomFieldHelper::present($field);
         }
 
         $layout[] = [

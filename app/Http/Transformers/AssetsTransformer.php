@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers;
 
+use App\Helpers\CustomFieldHelper;
 use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Models\AccessoryCheckout;
@@ -105,49 +106,7 @@ class AssetsTransformer
         ];
 
 
-        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields->count() > 0)) {
-            $fields_array = [];
-
-            foreach ($asset->model->fieldset->fields as $field) {
-                if ($field->isFieldDecryptable($asset->{$field->db_column})) {
-                    $decrypted = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
-                    $value = (Gate::allows('assets.view.encrypted_custom_fields')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
-
-                    if ($field->format == 'DATE'){
-                        if (Gate::allows('assets.view.encrypted_custom_fields')){
-                            $value = Helper::getFormattedDateObject($value, 'date', false);
-                        } else {
-                           $value = strtoupper(trans('admin/custom_fields/general.encrypted'));
-                        }
-                    }
-
-                    $fields_array[$field->name] = [
-                            'field' => e($field->db_column),
-                            'value' => e($value),
-                            'field_format' => $field->format,
-                            'element' => $field->element,
-                        ];
-
-                } else {
-                    $value = $asset->{$field->db_column};
-
-                    if (($field->format == 'DATE') && (!is_null($value)) && ($value!='')){
-                        $value = Helper::getFormattedDateObject($value, 'date', false);
-                    }
-                    
-                    $fields_array[$field->name] = [
-                        'field' => e($field->db_column),
-                        'value' => e($value),
-                        'field_format' => $field->format,
-                        'element' => $field->element,
-                    ];
-                }
-
-                $array['custom_fields'] = $fields_array;
-            }
-        } else {
-            $array['custom_fields'] = new \stdClass; // HACK to force generation of empty object instead of empty list
-        }
+        $array['custom_fields'] = CustomFieldHelper::transform($asset->model->fieldset,$asset);
 
         $permissions_array['available_actions'] = [
             'checkout'      => ($asset->deleted_at=='' && Gate::allows('checkout', Asset::class)) ? true : false,

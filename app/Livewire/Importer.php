@@ -108,7 +108,7 @@ class Importer extends Component
         if ($type == "asset") {
             // add Custom Fields after a horizontal line
             $results['-'] = "———" . trans('admin/custom_fields/general.custom_fields') . "———’";
-            foreach (CustomField::orderBy('name')->get() as $field) {
+            foreach (CustomField::where('type', \App\Models\Asset::class)->orderBy('name')->get() as $field) { // TODO - generalize?
                 $results[$field->db_column_name()] = $field->name;
             }
         }

@@ -30,6 +30,8 @@
     @endif
 
     @csrf
+
+    <input type="hidden" name="tab" value="{{ Request::query('tab') }}" />
 <div class="row">
   <div class="col-md-12">
     <div class="box box-default">
@@ -157,12 +159,16 @@
 
 
               <!-- Auto-Add to Future Fieldsets  -->
+             <div class="form-group {{ $errors->has('auto_add_to_fieldsets') ? ' has-error' : '' }}"
+                  id="auto_add_to_fieldsets">
+                 @if (Request::query('tab') != 1)
               <div class="col-md-9 col-md-offset-3">
                   <label class="form-control">
                       <input type="checkbox" name="auto_add_to_fieldsets" aria-label="auto_add_to_fieldsets" value="1"{{ (old('auto_add_to_fieldsets') || $field->auto_add_to_fieldsets) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.auto_add_to_fieldsets') }}
                   </label>
               </div>
+                 @endif
 
               <!-- Show in list view -->
               <div class="col-md-9 col-md-offset-3">
@@ -214,7 +220,7 @@
 
           </div>
 
-          @if ($fieldsets->count() > 0)
+              @if ($fieldsets->count() > 0 && Request::query('tab') != 1)
           <!-- begin fieldset columns -->
           <div class="col-md-4">
 

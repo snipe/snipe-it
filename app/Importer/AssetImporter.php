@@ -28,9 +28,10 @@ class AssetImporter extends ItemImporter
         // ItemImporter handles the general fetching.
         parent::handle($row);
 
+        // FIXME : YUP!!!!! This shit needs to go (?) Yeah?
         if ($this->customFields) {
             foreach ($this->customFields as $customField) {
-                $customFieldValue = $this->array_smart_custom_field_fetch($row, $customField);
+                $customFieldValue = $this->array_smart_custom_field_fetch($row, $customField); // TODO/FIXME - this might require a new 'mode' on customFill()?
 
                 if ($customFieldValue) {
                     if ($customField->field_encrypted == 1) {
@@ -40,7 +41,7 @@ class AssetImporter extends ItemImporter
                         $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
                         $this->log('Custom Field '.$customField->name.': '.$customFieldValue);
                     }
-                } else {
+                } else { // FIXME - think this through? Do we want to blank this? Is that how other stuff works?
                     // Clear out previous data.
                     $this->item['custom_fields'][$customField->db_column_name()] = null;
                 }

@@ -16,6 +16,7 @@ use App\Models\Asset;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\Consumable;
+use App\Models\CustomField;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
@@ -42,7 +43,7 @@ class UsersController extends Controller
     {
         $this->authorize('view', User::class);
 
-        $users = User::select([
+        $allowed_columns = [
             'users.activated',
             'users.address',
             'users.avatar',
@@ -80,7 +81,12 @@ class UsersController extends Controller
             'users.autoassign_licenses',
             'users.website',
 
-        ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy', 'managesUsers', 'managedLocations')
+        ];
+
+        foreach (CustomField::where('type', User::class)->get() as $field) {
+            $allowed_columns[] = $field->db_column_name();
+        }
+        $users = User::select($allowed_columns)->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy', 'managesUsers', 'managedLocations')
             ->withCount([
                 'assets as assets_count' => function(Builder $query) {
                     $query->withoutTrashed();
@@ -404,7 +410,9 @@ class UsersController extends Controller
         }
 
         app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
-        
+
+        $user->customFill($request,Auth::user());
+
         if ($user->save()) {
             if ($request->filled('groups')) {
                 $user->groups()->sync($request->input('groups'));
@@ -476,6 +484,12 @@ class UsersController extends Controller
             if ($request->filled('password')) {
                 $user->password = bcrypt($request->input('password'));
             }
+
+        app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
+
+        $user->customFill($request,Auth::user());
+
+        if ($user->save()) {
 
             // We need to use has()  instead of filled()
             // here because we need to overwrite permissions

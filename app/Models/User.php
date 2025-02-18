@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\HasCustomFields;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Auth\Authenticatable;
@@ -33,6 +34,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use Notifiable;
     use Presentable;
     use Searchable;
+    use HasCustomFields;
 
     protected $hidden = ['password', 'remember_token', 'permissions', 'reset_password_code', 'persist_code'];
     protected $table = 'users';
@@ -138,6 +140,20 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username'],
     ];
+
+    public function getFieldsetKey(): object|int|null
+    {
+        // TODO/FIXME - that's hardcoded text, but what language should you use?! I don't know.
+        // also TODO - is this going to beat on the DB too hard?
+        return CustomFieldset::where('type', User::class)->first()?->id;
+    }
+
+    public static function getFieldsetUsers(int $fieldset_id): array
+    {
+        return [
+            'no_idea_what_id_to_put' => 'No idea what string to put?' // FIXME obvs.
+        ];
+    }
 
     /**
      * Internally check the user permission for the given section

@@ -2,7 +2,10 @@
 
 namespace App\Http\Transformers;
 
+use App\Helpers\CustomFieldHelper;
 use App\Helpers\Helper;
+use App\Models\CustomField;
+use App\Models\CustomFieldset;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Gate;
@@ -79,6 +82,8 @@ class UsersTransformer
                 'last_login' => Helper::getFormattedDateObject($user->last_login, 'datetime'),
                 'deleted_at' => ($user->deleted_at) ? Helper::getFormattedDateObject($user->deleted_at, 'datetime') : null,
             ];
+
+        $array['custom_fields'] = CustomFieldHelper::transform(CustomFieldset::where('type',User::class)->first(), $user);
 
         $permissions_array['available_actions'] = [
             'update' => (Gate::allows('update', User::class) && ($user->deleted_at == '')),
