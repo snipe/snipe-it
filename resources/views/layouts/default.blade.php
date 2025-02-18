@@ -101,6 +101,34 @@ dir="{{ Helper::determineLanguageDirection() }}">
 
             <header class="main-header">
 
+                <div class="row" style="background: #3c8dbd;padding: 10px;">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <a class="btn bg-teal" style="width: 100%" href="#">
+                                    <img height="25px" src="https://cdn-ilcenip.nitrocdn.com/MFOJuBWDJGWtSXlHPEYkvnOeIlEJMLPx/assets/images/optimized/rev-3220738/60hertzenergy.com/wp-content/uploads/elementor/thumbs/60-hertz-logo-pg5l3j7g1n69due7haggwl466f0bxga0k61ryq1b0g.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn bg-maroon" style="width: 100%" href="#">
+                                    <img height="25px" src="https://cdn-ilcenip.nitrocdn.com/MFOJuBWDJGWtSXlHPEYkvnOeIlEJMLPx/assets/images/optimized/rev-3220738/60hertzenergy.com/wp-content/uploads/elementor/thumbs/60-hertz-logo-pg5l3j7g1n69due7haggwl466f0bxga0k61ryq1b0g.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn bg-orange" style="width: 100%" href="#">
+                                    <img height="25px" src="https://cdn-ilcenip.nitrocdn.com/MFOJuBWDJGWtSXlHPEYkvnOeIlEJMLPx/assets/images/optimized/rev-3220738/60hertzenergy.com/wp-content/uploads/elementor/thumbs/60-hertz-logo-pg5l3j7g1n69due7haggwl466f0bxga0k61ryq1b0g.png" />
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <a class="btn bg-purple" style="width: 100%" href="#">
+                                    <img height="25px" src="https://cdn-ilcenip.nitrocdn.com/MFOJuBWDJGWtSXlHPEYkvnOeIlEJMLPx/assets/images/optimized/rev-3220738/60hertzenergy.com/wp-content/uploads/elementor/thumbs/60-hertz-logo-pg5l3j7g1n69due7haggwl466f0bxga0k61ryq1b0g.png" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Logo -->
 
 
