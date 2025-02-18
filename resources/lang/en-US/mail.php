@@ -2,13 +2,13 @@
 
 return [
 
-    'Accessory_Checkin_Notification' => 'Accessory checked in',
-    'Accessory_Checkout_Notification' => 'Accessory checked out',
+    'Accessory_Checkin_Notification' => 'Tool checked in',
+    'Accessory_Checkout_Notification' => 'Tool checked out',
     'Asset_Checkin_Notification' => 'Asset checked in',
     'Asset_Checkout_Notification' => 'Asset checked out',
-    'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
+    'Confirm_Accessory_Checkin' => 'Tool checkin confirmation',
     'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
-    'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
+    'Confirm_accessory_delivery' => 'Tool delivery confirmation',
     'Confirm_asset_delivery' => 'Asset delivery confirmation',
     'Confirm_consumable_delivery' => 'Consumable delivery confirmation',
     'Confirm_license_delivery' => 'License delivery confirmation',
@@ -29,7 +29,7 @@ return [
     'a_user_requested' => 'A user has requested an item on the website',
     'acceptance_asset_accepted' => 'A user has accepted an item',
     'acceptance_asset_declined' => 'A user has declined an item',
-    'accessory_name' => 'Accessory Name',
+    'accessory_name' => 'Tool Name',
     'additional_notes' => 'Additional Notes',
     'admin_has_created' => 'An administrator has created an account for you on the :web website.',
     'asset' => 'Asset',

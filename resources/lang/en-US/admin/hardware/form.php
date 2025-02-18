@@ -39,7 +39,7 @@ return [
     'order'				=> 'Order Number',
     'qr'				=> 'QR Code',
     'requestable'		=> 'Users may request this asset',
-    'redirect_to_all'   => 'Return to all :type',
+    'redirect_to_all'   => 'Return to list',
     'redirect_to_type'   => 'Go to :type',
     'redirect_to_checked_out_to'   => 'Go to Checked Out to',
     'select_statustype'	=> 'Select Status Type',
