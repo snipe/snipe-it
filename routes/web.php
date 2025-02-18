@@ -14,6 +14,7 @@ use App\Http\Controllers\LabelsController;
 use App\Http\Controllers\LocationsController;
 use App\Http\Controllers\ManufacturersController;
 use App\Http\Controllers\ModalController;
+use App\Http\Controllers\NotesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\ReportTemplatesController;
@@ -337,6 +338,10 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         ]
     )->name('profile.email_assets');
 
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::post('notes', [NotesController::class, 'store'])->name('notes.store');
 });
 
 Route::group(['middleware' => ['auth']], function () {
