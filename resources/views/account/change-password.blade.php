@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-md-9">
-    <form method="POST" action="{{ route('account.password.update') }}" accept-charset="UTF-8" class="form-horizontal" autocomplete="off" enctype="multipart/form-data">
+    <form method="POST" action="{{ route('account.password.update') }}" accept-charset="UTF-8" class="form-horizontal" autocomplete="off">
     <!-- CSRF Token -->
         <input type="hidden" name="_token" value="{{ csrf_token() }}" />
         <div class="box box-default">
