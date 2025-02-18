@@ -19,7 +19,7 @@
 
 
     <div class="row">
-    {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'audit-form' ]) }}
+    <form method="POST" accept-charset="UTF-8" class="form-horizontal" role="form" id="audit-form">
         <!-- left column -->
         <div class="col-md-6">
             <div class="box box-default">
@@ -92,7 +92,7 @@
 
 
 
-            {{Form::close()}}
+            </form>
         </div> <!--/.col-md-6-->
 
         <div class="col-md-6">

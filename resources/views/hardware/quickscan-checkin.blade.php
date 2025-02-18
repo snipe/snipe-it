@@ -16,10 +16,10 @@
         }
     </style>
 
-    
+
 
     <div class="row">
-    {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'checkin-form' ]) }}
+    <form method="POST" action="{{ route('hardware/quickscancheckin') }}" accept-charset="UTF-8" class="form-horizontal" role="form" id="checkin-form">
         <!-- left column -->
         <div class="col-md-6">
             <div class="box box-default">
@@ -63,8 +63,8 @@
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
-    
-    
+
+
 
                 </div> <!--/.box-body-->
                 <div class="box-footer">
@@ -78,7 +78,7 @@
 
 
 
-            {{Form::close()}}
+            </form>
         </div> <!--/.col-md-6-->
 
         <div class="col-md-6">
@@ -87,7 +87,7 @@
                     <h2 class="box-title"> {{ trans('general.quickscan_checkin_status') }} (<span id="checkin-counter">0</span> {{ trans('general.assets_checked_in_count') }}) </h2>
                 </div>
                 <div class="box-body">
-    
+
                     <table id="checkedin" class="table table-striped snipe-table">
                         <thead>
                         <tr>
