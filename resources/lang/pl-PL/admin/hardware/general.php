@@ -16,7 +16,7 @@ return [
     'edit'  					=> 'Edytuj zasób',
     'model_deleted'  			=> 'Ten model zasobów został usunięty. Musisz przywrócić model zanim będziesz mógł przywrócić zasób.',
     'model_invalid'             => 'Nieprawidłowy model dla tego zasobu.',
-    'model_invalid_fix'         => 'The asset must be updated use a valid asset model before attempting to check it in or out, or to audit it.',
+    'model_invalid_fix'         => 'Zasób musi być zaktualizowany za pomocą ważnego modelu aktywów przed próbą sprawdzenia go w lub poza nim lub audytu.',
     'requestable'               => 'Żądane',
     'requested'				    => 'Zamówione',
     'not_requestable'           => 'Brak możliwości zarządzania',

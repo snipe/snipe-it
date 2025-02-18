@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Настройка отчета',
     'custom_report'         => 'Пользовательский отчет по активам',
     'dashboard'				=> 'Панель мониторинга',
+    'data_source'           => 'Data Source',
     'days'      			=> 'дней',
     'days_to_next_audit'    => 'Дней на следующий аудит',
     'date'					=> 'Дата',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Имя и фамилия (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Фамилия и первая буква имени (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Первая буква имени Фамилия (i.ivanov@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Имя Фамилия (Иван Иванов)',
     'lastname_firstname_display'	=> 'Фамилия Имя (Иванов Иван)',
     'name_display_format'	=> 'Формат имени',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Нет',
     'notes'  				=> 'Примечания',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count расходный материал|:count расходников',
         'components'  => ':count компонент|:count компонентов',
     ],
+
     'more_info' => 'Подробнее',
     'quickscan_bulk_help' => 'Установка этого флажка приведет к изменению записи об активе с учетом нового местоположения. Если флажок не установлен, то местоположение будет просто отмечено в журнале аудита. Обратите внимание, что если этот актив выписан, то он не изменит местоположение человека, актива или места, на которое он выписан.',
     'whoops' => 'Упс!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

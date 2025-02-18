@@ -21,7 +21,7 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'false', 'class' => 'form-horizontal', 'role' => 'form']) }}
+    <form method="POST" action="{{ route('settings.saml.save') }}" accept-charset="UTF-8" autocomplete="false" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -70,15 +70,15 @@
                                     <!-- SAML SP Details -->
                                     <!-- SAML SP Entity ID -->
                                     <label for="saml_sp_entitiyid">{{ trans('admin/settings/general.saml_sp_entityid') }}</label>
-                                    {{ Form::text('saml_sp_entitiyid', config('app.url'), ['class' => 'form-control', 'readonly']) }}
+                                    <input class="form-control" readonly="" name="saml_sp_entitiyid" type="text" value="{{ config('app.url') }}" id="saml_sp_entitiyid">
                                     <br>
                                     <!-- SAML SP ACS -->
                                     <label for="saml_sp_acs_url">{{ trans('admin/settings/general.saml_sp_acs_url') }}</label>
-                                    {{ Form::text('saml_sp_acs_url', route('saml.acs'), ['class' => 'form-control', 'readonly']) }}
+                                    <input class="form-control" readonly="" name="saml_sp_acs_url" type="text" value="{{ route('saml.acs') }}" id="saml_sp_acs_url">
                                     <br>
                                     <!-- SAML SP SLS -->
                                     <label for="saml_sp_sls_url">{{ trans('admin/settings/general.saml_sp_sls_url') }}</label>
-                                    {{ Form::text('saml_sp_sls_url', route('saml.sls'), ['class' => 'form-control', 'readonly']) }}
+                                    <input class="form-control" readonly="" name="saml_sp_sls_url" type="text" value="{{ route('saml.sls') }}" id="saml_sp_sls_url">
                                     <br>
                                     <!-- SAML SP Certificate -->
                                     @if (!empty($setting->saml_sp_x509cert))
@@ -93,7 +93,7 @@
                                     @endif
                                     <!-- SAML SP Metadata URL -->
                                     <label for="saml_sp_metadata_url">{{ trans('admin/settings/general.saml_sp_metadata_url') }}</label>
-                                    {{ Form::text('saml_sp_metadata_url', route('saml.metadata'), ['class' => 'form-control', 'readonly']) }}
+                                    <input class="form-control" readonly="" name="saml_sp_metadata_url" type="text" value="{{ route('saml.metadata') }}" id="saml_sp_metadata_url">
                                     <br>
                                     <p class="help-block">
                                         <a href="{{ route('saml.metadata') }}" target="_blank" class="btn btn-default" style="margin-right: 5px;">{{ trans('admin/settings/general.saml_download') }}</a>
@@ -133,7 +133,7 @@
                                 <label for="saml_attr_mapping_username">{{ trans('admin/settings/general.saml_attr_mapping_username') }}</label>
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('saml_attr_mapping_username', old('saml_attr_mapping_username', $setting->saml_attr_mapping_username), ['class' => 'form-control','placeholder' => '', $setting->demoMode]) }}
+                                <input class="form-control" name="saml_attr_mapping_username" type="text" id="saml_attr_mapping_username" value="{{ old('saml_attr_mapping_username', $setting->saml_attr_mapping_username) }}">
                                 <p class="help-block">{{ trans('admin/settings/general.saml_attr_mapping_username_help') }}</p>
                                 {!! $errors->first('saml_attr_mapping_username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -202,7 +202,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 
 @stop

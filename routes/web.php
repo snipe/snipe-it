@@ -280,12 +280,12 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 
     // Profile
     Route::get('profile', [ProfileController::class, 'getIndex'])->name('profile');
-    Route::post('profile', [ProfileController::class, 'postIndex']);
+    Route::post('profile', [ProfileController::class, 'postIndex'])->name('profile.update');
 
     Route::get('menu', [ProfileController::class, 'getMenuState'])->name('account.menuprefs');
 
     Route::get('password', [ProfileController::class, 'password'])->name('account.password.index');
-    Route::post('password', [ProfileController::class, 'passwordSave']);
+    Route::post('password', [ProfileController::class, 'passwordSave'])->name('account.password.update');
 
     Route::get('api', [ProfileController::class, 'api'])->name('user.api');
 
@@ -390,7 +390,7 @@ Route::group(['middleware' => ['auth']], function () {
         [ReportsController::class, 'getActivityReport']
     )->name('reports.activity');
 
-    Route::post('reports/activity', [ReportsController::class, 'postActivityReport']);
+    Route::post('reports/activity', [ReportsController::class, 'postActivityReport'])->name('reports.activity.post');
 
     Route::get(
         'reports/unaccepted_assets/{deleted?}',

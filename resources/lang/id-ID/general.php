@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Sesuaikan Laporan',
     'custom_report'         => 'Laporan kustom aset',
     'dashboard'				=> 'Dashboard',
+    'data_source'           => 'Data Source',
     'days'      			=> 'hari',
     'days_to_next_audit'    => 'Hari ke Audit Berikutnya',
     'date'					=> 'Tanggal',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Nama Depan Nama Belakang (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Nama Depan First Initial (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Nama Belakang Inisial Pertama (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Nama Depan Nama Belakang (Jane Smith)',
     'lastname_firstname_display'	=> 'Nama Belakang Nama Depan (Smith Jane)',
     'name_display_format'	=> 'Format tampilan nama',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Tidak',
     'notes'  				=> 'Catatan',
     'note_added'            => 'Catatan Ditambahkan',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Tambah Catatan',
     'note_edited'            => 'Catatan Diedit',
     'edit_note'              => 'Edit Catatan',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Barang Habis Pakai|:count Barang Habis Pakai',
         'components'  => ':count Komponen|:count Komponen',
     ],
+
     'more_info' => 'Lebih Lanjut',
     'quickscan_bulk_help' => 'Menandai kotak ini akan mengedit catatan aset untuk mencerminkan lokasi baru ini. Jika dibiarkan tidak dicentang, hanya lokasi tersebut yang akan dicatat dalam log audit. Perhatikan bahwa jika aset ini sedang dipinjam, lokasi orang, aset, atau lokasi tempat aset dipinjam tidak akan berubah.',
     'whoops' => 'Waduh!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Manajemen Kata Sandi',
     'user_managed_passwords_disallow' => 'Jangan izinkan pengelolaan kata sandi oleh pengguna',
     'user_managed_passwords_allow' => 'Izinkan pengguna mengelola kata sandi mereka sendiri',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

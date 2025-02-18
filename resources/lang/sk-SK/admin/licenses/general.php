@@ -3,9 +3,9 @@
 return array(
     'about_licenses_title'      => 'O licenciach',
     'about_licenses'            => 'Licencie sa využívajú k sledovaniu softvéru. Majú stanovený počet slotov, ktoré môžu byť odovzdané používateľom',
-    'checkin'  					=> 'Odovzdať licenčný slot',
-    'checkout_history'  		=> 'História',
-    'checkout'  				=> 'Odovzdať licenčných slotov',
+    'checkin'  					=> 'Prevziať licenčný slot',
+    'checkout_history'  		=> 'História odovzdania',
+    'checkout'  				=> 'Odovzdať licenčný slot',
     'edit'  					=> 'Upraviť licenciu',
     'filetype_info'				=> 'Podporované typy súborov: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip a rar.',
     'clone'  					=> 'Duplikovať licenciu',
@@ -37,11 +37,11 @@ return array(
                 'modal'                 => 'Táto akcia odovzdá jeden slot prvému dostupnému používateľovi. | Táto akcia odovzdá všetkých :available_seats_count slotov prvých dostupných používateľom. Používateľ je považovaný za dostupného v prípade, ak mu ešte nebola odovzdaná táto licencia a daný používateľ ma povolené automatické priradzovanie licencií.',
                 'enabled_tooltip'   => 'Odovzdať všetky (dostupné) sloty všetkých používateľom',
                 'disabled_tooltip'  => 'Táto možnosť je zablokovaná pretože nie sú dostupné žiadne sloty',
-                'success'           => 'Licencia bola úspešne priradená! | :count licencií bolo úspešne priradených!',
+                'success'           => 'Licencia bola úspešne odovzdaná! | :count licencií bolo úspešne odovzdaných!',
                 'error_no_seats'    => 'Nezostávajú žiadne voľné sloty pri tejto licencii.',
                 'warn_not_enough_seats'    => ':count používateľom bola licencia priradená, avšak už nezostali žiadne voľné sloty.',
-                'warn_no_avail_users'    => 'Nie je možné zrealizovať. Nezostali žiadny používateľlia, ktorí by túto licenciu ešte nemali priradenú.',
-                'log_msg'           => 'Hromadne priradiť v rozhraní pre správu licencií',
+                'warn_no_avail_users'    => 'Nie je možné zrealizovať. Nezostal žiaden používateľ, ktorý by túto licenciu ešte nemal priradenú.',
+                'log_msg'           => 'Hromadne odovzdať v rozhraní pre správu licencií',
 
 
             ],

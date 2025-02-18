@@ -1,10 +1,12 @@
 <div id="{{ (isset($id_divname)) ? $id_divname : 'assetsBulkEditToolbar' }}" style="min-width:400px">
-{{ Form::open([
-      'method' => 'POST',
-      'route' => ['hardware/bulkedit'],
-      'class' => 'form-inline',
-      'id' => (isset($id_formname)) ? $id_formname : 'assetsBulkForm',
- ]) }}
+    <form
+    method="POST"
+    action="{{ route('hardware/bulkedit') }}"
+    accept-charset="UTF-8"
+    class="form-inline"
+    id="{{ (isset($id_formname)) ? $id_formname : 'assetsBulkForm' }}"
+>
+    @csrf
 
     {{-- The sort and order will only be used if the cookie is actually empty (like on first-use) --}}
     <input name="sort" type="hidden" value="assets.id">
@@ -34,5 +36,5 @@
     </select>
 
     <button class="btn btn-primary" id="{{ (isset($id_button)) ? $id_button : 'bulkAssetEditButton' }}" disabled>{{ trans('button.go') }}</button>
-    {{ Form::close() }}
+    </form>
 </div>

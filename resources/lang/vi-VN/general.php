@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Điều chỉnh báo cáo',
     'custom_report'         => 'Điều chỉnh báo cáo tài sản',
     'dashboard'				=> 'Bảng điều khiển',
+    'data_source'           => 'Data Source',
     'days'      			=> 'ngày',
     'days_to_next_audit'    => 'Ngày kiểm tra tiếp theo',
     'date'					=> 'Ngày',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Tên họ (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Tên của bạn (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Ký tự đầu Tên Họ (jsmith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Tên Họ (jane_smith)',
     'lastname_firstname_display'	=> 'Họ và tên (Smith Jane)',
     'name_display_format'	=> 'Định dạng hiển thị tên',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'No',
     'notes'  				=> 'Ghi chú',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
     ],
+
     'more_info' => 'Xem thêm thông tin',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

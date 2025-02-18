@@ -87,13 +87,15 @@
                 @endcan
 
                 @can('delete', $fieldset)
-                {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
+                <form method="POST" action="{{ route('fieldsets.destroy', $fieldset->id) }}" accept-charset="UTF-8" style="display:inline-block">
+                  {{ method_field('DELETE') }}
+                  @csrf
                   @if($fieldset->models->count() > 0)
                   <button type="submit" class="btn btn-danger btn-sm disabled" data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}" disabled><i class="fas fa-trash"></i></button>
                   @else
                   <button type="submit" class="btn btn-danger btn-sm" data-tooltip="true" title="{{ trans('general.delete') }}"><i class="fas fa-trash"></i></button>
                   @endif
-                {{ Form::close() }}
+                </form>
                 @endcan
                   </nobr>
               </td>
@@ -192,7 +194,9 @@
               </td>
               <td>
                 <nobr>
-                  {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
+                  <form method="POST" action="{{ route('fields.destroy', $field->id) }}" accept-charset="UTF-8" style="display:inline-block">
+                    {{ method_field('DELETE') }}
+                    @csrf
                   @can('update', $field)
                     <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
                       <i class="fas fa-pencil-alt" aria-hidden="true"></i>
@@ -214,7 +218,7 @@
                   @endif
 
                 @endcan
-                  {{ Form::close() }}
+                  </form>
                 </nobr>
               </td>
             </tr>

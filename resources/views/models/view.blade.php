@@ -98,7 +98,6 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                     </table>
-                    {{ Form::close() }}
                 </div> <!-- /.tab-pane assets -->
 
 

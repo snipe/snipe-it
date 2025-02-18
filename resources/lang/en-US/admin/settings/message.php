@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testing LDAP Authentication...',
         'authentication_success' => 'User authenticated against LDAP successfully!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Sending :app test message...',
         'success' => 'Your :webhook_name Integration works!',

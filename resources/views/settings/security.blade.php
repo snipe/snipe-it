@@ -62,7 +62,7 @@
                                 <label for="pwd_secure_min">{{ trans('admin/settings/general.pwd_secure_min') }}</label>
                             </div>
                             <div class="col-md-9">
-                                {{ Form::text('pwd_secure_min', old('pwd_secure_min', $setting->pwd_secure_min), array('class' => 'form-control',  'style'=>'width: 50px;')) }}
+                                <input class="form-control" style="width: 50px;" name="pwd_secure_min" type="text" value="{{ old('pwd_secure_min', $setting->pwd_secure_min) }}" id="pwd_secure_min">
 
                                 {!! $errors->first('pwd_secure_min', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="help-block">
@@ -139,14 +139,14 @@
                                     </p>
                                     <!-- Use custom remote user header name -->
                                     <label for="login_remote_user_header_name">{{ trans('admin/settings/general.login_remote_user_header_name_text') }}</label>
-                                    {{ Form::text('login_remote_user_header_name', old('login_remote_user_header_name', $setting->login_remote_user_header_name),array('class' => 'form-control')) }}
+                                    <input class="form-control" name="login_remote_user_header_name" type="text" value="{{ old('login_remote_user_header_name', $setting->login_remote_user_header_name) }}" id="login_remote_user_header_name">
                                     {!! $errors->first('login_remote_user_header_name', '<span class="alert-msg">:message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.login_remote_user_header_name_help') }}
                                     </p>
                                     <!-- Custom logout url to redirect to authentication provider -->
                                     <label for="login_remote_user_custom_logout_url">{{ trans('admin/settings/general.login_remote_user_custom_logout_url_text') }}</label>
-                                    {{ Form::text('login_remote_user_custom_logout_url', old('login_remote_user_custom_logout_url', $setting->login_remote_user_custom_logout_url),array('class' => 'form-control', 'aria-label'=>'login_remote_user_custom_logout_url')) }}
+                                    <input class="form-control" aria-label="login_remote_user_custom_logout_url" name="login_remote_user_custom_logout_url" type="text" value="{{ old('login_remote_user_custom_logout_url', $setting->login_remote_user_custom_logout_url) }}" id="login_remote_user_custom_logout_url">
 
                                     {!! $errors->first('login_remote_user_custom_logout_url', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">
@@ -190,6 +190,6 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop

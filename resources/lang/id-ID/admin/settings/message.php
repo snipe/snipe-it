@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Menguji Autentikasi LDAP...',
         'authentication_success' => 'Pengguna berhasil diautentikasi terhadap LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Mengirim pesan uji :app...',
         'success' => 'Integrasi :webhook_name Anda berfungsi!',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'KESALAHAN: 301/302 :endpoint mengembalikan pengalihan. Untuk alasan keamanan, kami tidak mengikuti pengalihan. Harap gunakan endpoint yang sebenarnya.',
         'error_misc' => 'Terjadi kesalahan. :( ',
         'webhook_fail' => ' notifikasi webhook gagal: Pastikan URL masih valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

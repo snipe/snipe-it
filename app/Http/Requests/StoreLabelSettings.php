@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
+
+use App\Models\Labels\Label;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class StoreLabelSettings extends FormRequest
 {
@@ -22,6 +25,10 @@ class StoreLabelSettings extends FormRequest
      */
     public function rules(): array
     {
+        $names = Label::find()?->map(function ($label) {
+            return $label->getName();
+        })->values()->toArray();
+
         return [
             'labels_per_page'                     => 'numeric',
             'labels_width'                        => 'numeric',
@@ -36,6 +43,10 @@ class StoreLabelSettings extends FormRequest
             'labels_pagewidth'                    => 'numeric|nullable',
             'labels_pageheight'                   => 'numeric|nullable',
             'qr_text'                             => 'max:31|nullable',
+            'label2_template'                     => [
+                'required',
+                Rule::in($names),
+            ],
         ];
     }
 }

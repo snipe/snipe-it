@@ -7,6 +7,7 @@ use App\Models\Labels\Label as LabelModel;
 use App\Models\Labels\Sheet;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Traits\Macroable;
 use TCPDF;
@@ -38,7 +39,7 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
-        $template = LabelModel::find($settings->label2_template);
+
 
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable)) {
@@ -47,6 +48,12 @@ class Label implements View
                 ->with('settings', $settings)
                 ->with('bulkedit', $this->data->get('bulkedit'))
                 ->with('count', $this->data->get('count'));
+        }
+
+            $template = LabelModel::find($settings->label2_template);
+
+        if ($template === null) {
+            return redirect()->route('settings.labels.index')->with('error', trans('admin/settings/message.labels.null_template'));
         }
 
         $template->validate();

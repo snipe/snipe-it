@@ -16,7 +16,7 @@ return [
     'superuser_tooltip'		=> 'This user has superuser privileges',
     'administrator'			=> 'אדמיניסטרטור',
     'add_seats'             => 'מושבים נוספים',
-    'age'                   => "Age",
+    'age'                   => "גיל",
     'all_assets'			=> 'כל הנכסים',
     'all'       			=> 'את כל',
     'archived'              => 'בארכיון',
@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'דוח מותאם אישית',
     'custom_report'         => 'דוח נכס מותאם אישית',
     'dashboard'				=> 'לוּחַ מַחווָנִים',
+    'data_source'           => 'Data Source',
     'days'      			=> 'ימים',
     'days_to_next_audit'    => 'ימים לביקורת',
     'date'					=> 'תַאֲרִיך',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'שם פרטי שם משפחה (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'שם משפחה ראשי תיבות שם פרטי (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'ראשי תיבות שם פרטי שם משפחה (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'First Name Last Name (Jane Smith)',
     'lastname_firstname_display'	=> 'Last Name First Name (Smith Jane)',
     'name_display_format'	=> 'Name Display Format',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'לא',
     'notes'  				=> 'הערות',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
     ],
+
     'more_info' => 'עוד מידע',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -574,7 +579,12 @@ return [
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
     'accessories_assigned' => 'Assigned Accessories',
     'user_managed_passwords' => 'ניהול סיסמאות',
-    'user_managed_passwords_disallow' => 'למנוע ממשתמשים לנהל את הסיסמאות של עצמם',
-    'user_managed_passwords_allow' => 'לאפשר למשתמשים לנהל את הסיסמאות של עצמם',
+    'user_managed_passwords_disallow' => 'מנע ממשתמשים לנהל את הסיסמאות של עצמם',
+    'user_managed_passwords_allow' => 'אפשר למשתמשים לנהל את הסיסמאות של עצמם',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];
