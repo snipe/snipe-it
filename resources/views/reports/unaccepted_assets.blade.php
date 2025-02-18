@@ -19,10 +19,10 @@
             @endif
         </div>
         <div class="btn-group mr-2" role="group">
-            {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
+            <form method="POST" action="{{ route('reports/export/unaccepted_assets') }}" accept-charset="UTF-8" class="form-horizontal">
             {{csrf_field()}}
             <button type="submit" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i> {{ trans('general.download_all') }}</button>
-            {{ Form::close() }}
+            </form>
         </div>
     </div>
 @stop

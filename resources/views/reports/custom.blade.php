@@ -35,12 +35,13 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-1">
 
-        {{ Form::open([
-            'method' => 'post',
-            'class' => 'form-horizontal',
-            'id' => 'custom-report-form',
-            'url' => request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : '/reports/custom',
-        ]) }}
+        <form
+            method="POST"
+            action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : '/reports/custom' }}"
+            accept-charset="UTF-8"
+            class="form-horizontal"
+            id="custom-report-form"
+        >
         {{csrf_field()}}
 
     <!-- Horizontal Form -->
@@ -631,7 +632,7 @@
                 @endif
             </div>
         </div> <!--/.box.box-default-->
-    {{ Form::close() }}
+        </form>
     </div>
 
     <!-- Saved Reports right column -->
