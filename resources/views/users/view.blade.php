@@ -891,7 +891,7 @@
                     data-sort-name="name"
                     class="table table-striped snipe-table table-hover"
                     data-export-options='{
-                    "fileName": "export-accessory-{{ str_slug($user->username) }}-{{ date('Y-m-d') }}",
+                    "fileName": "export-tool-{{ str_slug($user->username) }}-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
                     }'>
               <thead>

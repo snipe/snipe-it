@@ -36,7 +36,7 @@
                 class="table table-striped snipe-table"
                 data-url="{{ route('api.components.index') }}"
                 data-export-options='{
-                "fileName": "export-components-{{ date('Y-m-d') }}",
+                "fileName": "export-parts-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
         </table>

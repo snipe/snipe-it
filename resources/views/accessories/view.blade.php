@@ -91,7 +91,7 @@
                                     class="table table-striped snipe-table"
                                     data-url="{{ route('api.accessories.checkedout', $accessory->id) }}"
                                     data-export-options='{
-                                    "fileName": "export-accessories-{{ str_slug($accessory->name) }}-checkouts-{{ date('Y-m-d') }}",
+                                    "fileName": "export-tools-{{ str_slug($accessory->name) }}-checkouts-{{ date('Y-m-d') }}",
                                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                                     }'>
                                 </table>

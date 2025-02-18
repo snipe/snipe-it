@@ -110,7 +110,7 @@
                     class="table table-striped snipe-table"
                     data-url="{{ route('api.components.assets', $component->id)}}"
                     data-export-options='{
-                "fileName": "export-components-{{ str_slug($component->name) }}-checkedout-{{ date('Y-m-d') }}",
+                "fileName": "export-parts-{{ str_slug($component->name) }}-checkedout-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
               <thead>

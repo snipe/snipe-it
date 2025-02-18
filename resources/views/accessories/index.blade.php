@@ -38,7 +38,7 @@
                 class="table table-striped snipe-table"
                 data-url="{{route('api.accessories.index') }}"
                 data-export-options='{
-                    "fileName": "export-accessories-{{ date('Y-m-d') }}",
+                    "fileName": "export-tools-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
           </table>
