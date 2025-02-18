@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="form-group" style="display: none;">
-                  {{ Form::text('order', $maxid, array('aria-label'=>'order', 'maxlength'=>'3', 'size'=>'3')) }}
+                  <input aria-label="order" maxlength="3" size="3" name="order" type="text" value="{{ $maxid }}">
                   <label for="order">{{ trans('admin/custom_fields/general.order') }}</label>
                 </div>
 
