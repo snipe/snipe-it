@@ -95,7 +95,7 @@ Route::group(
         )->name('label/hardware');
         
 
-        Route::get('{assetId}/checkout',
+        Route::get('{asset}/checkout',
             [AssetCheckoutController::class, 'create']
         )->name('hardware.checkout.create');
 
