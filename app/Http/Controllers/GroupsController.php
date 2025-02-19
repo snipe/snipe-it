@@ -84,7 +84,7 @@ class GroupsController extends Controller
         $permissions = config('permissions');
         $groupPermissions = $group->decodePermissions();
         $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
-        return view('groups.edit', compact('permissions', 'selected_array', 'groupPermissions'));
+        return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
     }
 
     /**
