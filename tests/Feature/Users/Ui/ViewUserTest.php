@@ -20,11 +20,11 @@ class ViewUserTest extends TestCase
         $user = User::factory()->for($companyB)->create();
 
         $this->actingAs(User::factory()->editUsers()->for($companyA)->create())
-            ->get(route('users.show', ['user' => $user->id]))
+            ->get(route('users.show', $user))
             ->assertStatus(403);
 
         $this->actingAs($superuser)
-            ->get(route('users.show', ['user' => $user->id]))
+            ->get(route('users.show', $user))
             ->assertOk()
             ->assertStatus(200);
     }

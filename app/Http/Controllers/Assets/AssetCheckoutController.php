@@ -26,17 +26,14 @@ class AssetCheckoutController extends Controller
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
-    public function create($assetId) : View | RedirectResponse
+    public function create(Asset $asset) : View | RedirectResponse
     {
-        // Check if the asset exists
-        if (is_null($asset = Asset::with('company')->find(e($assetId)))) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
 
         $this->authorize('checkout', $asset);
 
         if (!$asset->model) {
-            return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+            return redirect()->route('hardware.show', $asset)
+                ->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
 
         if ($asset->availableForCheckout()) {
@@ -45,8 +42,8 @@ class AssetCheckoutController extends Controller
                 ->with('table_name', 'Assets');
         }
 
-
-        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
+        return redirect()->route('hardware.index')
+            ->with('error', trans('admin/hardware/message.checkout.not_available'));
     }
 
     /**
@@ -68,7 +65,7 @@ class AssetCheckoutController extends Controller
             $this->authorize('checkout', $asset);
 
             if (!$asset->model) {
-                return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+                return redirect()->route('hardware.show', $asset)->with('error', trans('admin/hardware/general.model_invalid_fix'));
             }
 
             $admin = auth()->user();

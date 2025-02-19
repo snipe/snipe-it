@@ -28,7 +28,7 @@ class StatusLabelPresenter extends Presenter
                 'switchable' => false,
                 'title' => trans('general.name'),
                 'visible' => true,
-                'formatter' => 'statuslabelsAssetLinkFormatter',
+                'formatter' => 'statuslabelsLinkFormatter',
             ],[
                 'field' => 'type',
                 'searchable' => false,

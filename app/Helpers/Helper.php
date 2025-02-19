@@ -1520,11 +1520,11 @@ class Helper
         if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
-                    return route('users.show', ['user' => $request->assigned_user]);
+                    return route('users.show', $request->assigned_user);
                 case 'location':
-                    return route('locations.show', ['location' => $request->assigned_location]);
+                    return route('locations.show', $request->assigned_location);
                 case 'asset':
-                    return route('hardware.show', ['hardware' => $request->assigned_asset]);
+                    return route('hardware.show', $request->assigned_asset);
             }
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));

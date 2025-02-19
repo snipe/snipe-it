@@ -290,9 +290,6 @@
                 var dest = 'admin/groups';
             }
 
-            if (dest =='maintenances') {
-                var dest = 'hardware/maintenances';
-            }
 
             if(element_name != '') {
                 dest = dest + '/' + row.owner_id + '/' + element_name;

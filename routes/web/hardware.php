@@ -6,6 +6,7 @@ use App\Http\Controllers\Assets\BulkAssetsController;
 use App\Http\Controllers\Assets\AssetCheckoutController;
 use App\Http\Controllers\Assets\AssetCheckinController;
 use App\Http\Controllers\Assets\AssetFilesController;
+use Tabuna\Breadcrumbs\Trail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,23 +25,26 @@ Route::group(
     
     function () {
         
-        Route::get('bulkaudit',
-            [AssetsController::class, 'quickScan']
-        )->name('assets.bulkaudit');
+        Route::get('bulkaudit', [AssetsController::class, 'quickScan'])
+            ->name('assets.bulkaudit')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')
+                ->push(trans('general.bulkaudit'), route('asset.import-history'))
+            );
 
-        Route::get('quickscancheckin',
-            [AssetsController::class, 'quickScanCheckin']
-        )->name('hardware/quickscancheckin');
+        Route::get('quickscancheckin', [AssetsController::class, 'quickScanCheckin'])
+            ->name('hardware/quickscancheckin')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')
+                ->push('Quickscan Checkin', route('hardware/quickscancheckin'))
+            );
 
-        // Asset Maintenances
-        Route::resource('maintenances', 
-            AssetMaintenancesController::class, [
-            'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id'],
-        ]);
-
-        Route::get('requested', [
-            AssetsController::class, 'getRequestedIndex']
-        )->name('assets.requested');
+        Route::get('requested', [AssetsController::class, 'getRequestedIndex'])
+            ->name('assets.requested')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')
+                ->push(trans('admin/hardware/general.requested'), route('assets.requested'))
+            );
 
         Route::get('scan',
             [AssetsController::class, 'scan']
@@ -62,9 +66,12 @@ Route::group(
             [AssetsController::class, 'auditStore']
         )->name('asset.audit.store');
 
-        Route::get('history',
-            [AssetsController::class, 'getImportHistory']
-        )->name('asset.import-history');
+        Route::get('history', [AssetsController::class, 'getImportHistory'])
+            ->name('asset.import-history')
+            ->breadcrumbs(fn (Trail $trail) =>
+                $trail->parent('hardware.index')
+                ->push(trans('general.import-history'), route('asset.import-history'))
+            );
 
         Route::post('history',
             [AssetsController::class, 'postImportHistory']
@@ -87,7 +94,7 @@ Route::group(
         )->name('label/hardware');
         
 
-        Route::get('{assetId}/checkout',
+        Route::get('{asset}/checkout',
             [AssetCheckoutController::class, 'create']
         )->name('hardware.checkout.create');
 
@@ -108,7 +115,7 @@ Route::group(
             return redirect()->route('hardware.show', ['hardware' => $assetId]);
         });
 
-        Route::get('{assetId}/qr_code', 
+        Route::get('{asset}/qr_code',
             [AssetsController::class, 'getQrCode']
         )->name('qr_code/hardware');
 
@@ -153,9 +160,12 @@ Route::group(
         )->name('hardware/bulksave');
 
         // Bulk checkout / checkin
-        Route::get('bulkcheckout',
-            [BulkAssetsController::class, 'showCheckout']
-        )->name('hardware.bulkcheckout.show');
+        Route::get('bulkcheckout', [BulkAssetsController::class, 'showCheckout'])
+            ->name('hardware.bulkcheckout.show')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')
+                ->push(trans('admin/hardware/general.bulk_checkout'), route('hardware.index'))
+            );
 
         Route::post('bulkcheckout',
             [BulkAssetsController::class, 'storeCheckout']
@@ -163,16 +173,17 @@ Route::group(
 
     });
 
-Route::resource('hardware', 
-        AssetsController::class, 
-        [
-            'middleware' => ['auth'],
-            'parameters' => ['asset' => 'asset_id',
-                'names' => [
-                    'show' => 'view',
-                ],
-        ],
-]);
+Route::resource('hardware',
+        AssetsController::class,
+        ['middleware' => ['auth']
+])->parameters(['hardware' => 'asset']);
+
+
+// Asset Maintenances
+Route::resource('maintenances',
+    AssetMaintenancesController::class, [
+        'parameters' => ['maintenance' => 'maintenance', 'asset' => 'asset_id'],
+    ]);
 
 Route::get('ht/{any?}',
     [AssetsController::class, 'getAssetByTag']

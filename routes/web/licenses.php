@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Licenses;
 use Illuminate\Support\Facades\Route;
+use App\Models\License;
+use Tabuna\Breadcrumbs\Trail;
 
 // Licenses
 Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function () {
@@ -10,14 +12,17 @@ Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function () {
     Route::get('{licenseId}/freecheckout',
         [Licenses\LicensesController::class, 'getFreeLicense']
     )->name('licenses.freecheckout');
-    Route::get('{licenseId}/checkout/{seatId?}', 
+
+    Route::get('{license}/checkout/{seatId?}',
         [Licenses\LicenseCheckoutController::class, 'create']
     )->name('licenses.checkout');
+
     Route::post(
         '{licenseId}/checkout/{seatId?}',
         [Licenses\LicenseCheckoutController::class, 'store']
     ); //name() would duplicate here, so we skip it.
-    Route::get('{licenseSeatId}/checkin/{backto?}',
+
+    Route::get('{licenseSeat}/checkin/{backto?}',
         [Licenses\LicenseCheckinController::class, 'create']
     )->name('licenses.checkin');
 
@@ -59,5 +64,4 @@ Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function () {
 
 Route::resource('licenses', Licenses\LicensesController::class, [
     'middleware' => ['auth'],
-    'parameters' => ['license' => 'license_id'],
 ]);

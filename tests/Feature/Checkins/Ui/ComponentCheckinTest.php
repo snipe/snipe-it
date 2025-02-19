@@ -16,9 +16,7 @@ class ComponentCheckinTest extends TestCase
         $componentAsset = DB::table('components_assets')->where('component_id', $component->id)->first();
 
         $this->actingAs(User::factory()->create())
-            ->post(route('components.checkin.store', [
-                'componentID' => $componentAsset->id,
-            ]))
+            ->post(route('components.checkin.store', $componentAsset->id))
             ->assertForbidden();
     }
 
@@ -67,6 +65,6 @@ class ComponentCheckinTest extends TestCase
             ])
             ->assertStatus(302)
             ->assertSessionHasNoErrors()
-            ->assertRedirect(route('components.show', ['component' => $component->id]));
+            ->assertRedirect(route('components.show', $component));
     }
 }

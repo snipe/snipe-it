@@ -53,6 +53,5 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
 });
 
 Route::resource('accessories', Accessories\AccessoriesController::class, [
-    'middleware' => ['auth'],
-    'parameters' => ['accessory' => 'accessory_id'],
+    'middleware' => ['auth']
 ]);
