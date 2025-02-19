@@ -813,7 +813,6 @@ dir="{{ Helper::determineLanguageDirection() }}">
             <!-- Content Wrapper. Contains page content -->
 
             <div class="content-wrapper" role="main" id="setting-list">
-                <barepay></barepay>
 
                 @if ($debug_in_production)
                     <div class="row" style="margin-bottom: 0px; background-color: red; color: white; font-size: 15px;">
@@ -828,6 +827,37 @@ dir="{{ Helper::determineLanguageDirection() }}">
 
                 <!-- Content Header (Page header) -->
                 <section class="content-header" style="padding-bottom: 30px;">
+
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom: 10px;">
+
+                        <style>
+                            .breadcrumb-item {
+                                display: inline;
+                                list-style: none;
+                                font-size: 110%;
+                            }
+                        </style>
+
+                            @if(Breadcrumbs::has())
+                                @foreach (Breadcrumbs::current() as $crumbs)
+                                    @if ($crumbs->url() && !$loop->last)
+                                        <li class="breadcrumb-item">
+                                            <a href="{{ $crumbs->url() }}">
+                                                {{ $crumbs->title() }}
+                                            </a> <i class="fa-solid fa-angle-right"></i>
+                                        </li>
+                                    @else
+                                        <li class="breadcrumb-item active">
+                                            {{ $crumbs->title() }}
+                                        </li>
+                                    @endif
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
+
                     <h1 class="pull-left pagetitle">@yield('title') </h1>
 
                     @if (isset($helpText))

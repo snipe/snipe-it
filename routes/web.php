@@ -26,6 +26,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Livewire\Importer;
 use Illuminate\Support\Facades\Route;
+use Tabuna\Breadcrumbs\Trail;
 use Illuminate\Support\Facades\Auth;
 
 Route::group(['middleware' => 'auth'], function () {
@@ -521,14 +522,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('google/callback', 'App\Http\Controllers\GoogleAuthController@handleGoogleCallback')->name('google.callback');
 
 
-    Route::get(
-        '/',
-        [
-            'as' => 'home',
-            'middleware' => ['auth'],
-            'uses' => 'DashboardController@getIndex' ]
-    );
-
     // need to keep GET /logout for SAML SLO
     Route::get(
         'logout',
@@ -554,4 +547,7 @@ Route::withoutMiddleware(['web'])->get(
 Route::middleware(['auth'])->get(
     '/',
     [DashboardController::class, 'index']
-)->name('home');
+)->name('home')
+    ->breadcrumbs(fn (Trail $trail) =>
+    $trail->push('Home', route('home'))
+    );

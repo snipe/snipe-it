@@ -66,6 +66,7 @@
     "rollbar/rollbar-laravel": "^8.0",
     "spatie/laravel-backup": "^8.8",
     "spatie/laravel-ignition": "^2.0",
+    "tabuna/breadcrumbs": "^4.2",
     "tecnickcom/tc-lib-barcode": "^1.15",
     "tecnickcom/tcpdf": "^6.5",
     "unicodeveloper/laravel-password": "^1.0",

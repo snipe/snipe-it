@@ -6,6 +6,7 @@ use App\Http\Controllers\Assets\BulkAssetsController;
 use App\Http\Controllers\Assets\AssetCheckoutController;
 use App\Http\Controllers\Assets\AssetCheckinController;
 use App\Http\Controllers\Assets\AssetFilesController;
+use Tabuna\Breadcrumbs\Trail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,11 +27,18 @@ Route::group(
         
         Route::get('bulkaudit',
             [AssetsController::class, 'quickScan']
-        )->name('assets.bulkaudit');
+        )
+            ->name('assets.bulkaudit')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('home')->push(trans('general.assets'), route('hardware.index'))
+            );
 
         Route::get('quickscancheckin',
             [AssetsController::class, 'quickScanCheckin']
-        )->name('hardware/quickscancheckin');
+        )->name('hardware/quickscancheckin')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')->push('Quickscan Checkin', route('hardware/quickscancheckin'))
+            );
 
         // Asset Maintenances
         Route::resource('maintenances', 
@@ -108,7 +116,7 @@ Route::group(
             return redirect()->route('hardware.show', ['hardware' => $assetId]);
         });
 
-        Route::get('{assetId}/qr_code', 
+        Route::get('{asset}/qr_code',
             [AssetsController::class, 'getQrCode']
         )->name('qr_code/hardware');
 
@@ -167,10 +175,11 @@ Route::resource('hardware',
         AssetsController::class, 
         [
             'middleware' => ['auth'],
-            'parameters' => ['asset' => 'asset_id',
+            'parameters' => [
                 'names' => [
-                    'show' => 'view',
-                ],
+                'show' => 'view',
+                'index' => 'index',
+            ],
         ],
 ]);
 

@@ -244,16 +244,11 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit($assetId = null) : View | RedirectResponse
+    public function edit(Asset $asset) : View | RedirectResponse
     {
-        if (! $item = Asset::find($assetId)) {
-            // Redirect to the asset management page with error
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
-        //Handles company checks and permissions.
-        $this->authorize($item);
+        $this->authorize($asset);
 
-        return view('hardware/edit', compact('item'))
+        return view('hardware/edit', compact('asset'))
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('statuslabel_types', Helper::statusTypeList());
     }
@@ -267,15 +262,14 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
-    public function show($assetId = null) : View | RedirectResponse
+    public function show(Asset $asset) : View | RedirectResponse
     {
-        $asset = Asset::withTrashed()->find($assetId);
         $this->authorize('view', $asset);
         $settings = Setting::getSettings();
 
         if (isset($asset)) {
             $audit_log = Actionlog::where('action_type', '=', 'audit')
-                ->where('item_id', '=', $assetId)
+                ->where('item_id', '=', $asset->id)
                 ->where('item_type', '=', Asset::class)
                 ->orderBy('created_at', 'DESC')->first();
 
@@ -291,7 +285,7 @@ class AssetsController extends Controller
 
             $qr_code = (object) [
                 'display' => $settings->qr_code == '1',
-                'url' => route('qr_code/hardware', $asset->id),
+                //'url' => route('qr_code/hardware', ['asset' => $asset]),
             ];
 
             return view('hardware/view', compact('asset', 'qr_code', 'settings'))
@@ -531,12 +525,12 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function getQrCode($assetId = null) : Response | BinaryFileResponse | string | bool
+    public function getQrCode(Asset $asset) : Response | BinaryFileResponse | string | bool
     {
         $settings = Setting::getSettings();
 
         if (($settings->qr_code == '1') && ($settings->label2_2d_type !== 'none')) {
-            $asset = Asset::withTrashed()->find($assetId);
+
             if ($asset) {
                 $size = Helper::barcodeDimensions($settings->label2_2d_type);
                 $qr_file = public_path().'/uploads/barcodes/qr-'.str_slug($asset->asset_tag).'-'.str_slug($asset->id).'.png';
