@@ -129,7 +129,7 @@ class Handler extends ExceptionHandler
             $route_base = str_plural(strtolower(last(explode('\\', $e->getModel()))));
 
             // Sigh. Fucking laravel.
-            if ($route_base =='assets') {
+            if ($route_base == 'assets') {
                 $route_base = 'hardware';
             }
             return redirect()
