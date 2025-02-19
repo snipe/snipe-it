@@ -126,14 +126,17 @@ class Handler extends ExceptionHandler
         // The only alternative is to set that at *each* route, which is crazypants
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             $model_name = last(explode('\\', $e->getModel()));
-            $route_base = str_plural(strtolower(last(explode('\\', $e->getModel()))));
+            $route = str_plural(strtolower(last(explode('\\', $e->getModel())))).'.index';
 
             // Sigh. Fucking laravel.
-            if ($route_base == 'assets') {
-                $route_base = 'hardware';
+            if ($route == 'assets.index') {
+                $route = 'hardware.index';
+            } elseif ($route == 'reporttemplates.index') {
+                $route = 'reports/custom';
             }
+
             return redirect()
-                ->route($route_base.'.index')
+                ->route($route)
                 ->withError(trans('general.generic_model_not_found', ['model' => $model_name]));
         }
 
