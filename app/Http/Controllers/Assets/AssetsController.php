@@ -30,6 +30,7 @@ use Illuminate\Http\Response;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use TypeError;
 
 /**
  * This class controls all actions related to assets for
@@ -590,7 +591,7 @@ class AssetsController extends Controller
                         file_put_contents($barcode_file, $barcode_obj->getPngData());
 
                         return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
-                    } catch (\Exception $e) {
+                    } catch (\Exception|TypeError $e) {
                         Log::debug('The barcode format is invalid.');
 
                         return response(file_get_contents(public_path('uploads/barcodes/invalid_barcode.gif')))->header('Content-type', 'image/gif');
