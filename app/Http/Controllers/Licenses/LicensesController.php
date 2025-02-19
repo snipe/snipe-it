@@ -133,6 +133,7 @@ class LicensesController extends Controller
         ];
 
         return view('licenses/edit')
+            ->with('item', $license)
             ->with('depreciation_list', Helper::depreciationList())
             ->with('maintained_list', $maintained_list);
     }
