@@ -25,7 +25,7 @@ class NotesController extends Controller
 
         $item = Asset::findOrFail($validated['id']);
 
-        // @todo: authorization
+        $this->authorize('update', $item);
 
         $logaction = new Actionlog();
         $logaction->item_id = $item->id;
