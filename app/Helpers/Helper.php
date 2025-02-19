@@ -1529,4 +1529,5 @@ class Helper
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
     }
+
 }
