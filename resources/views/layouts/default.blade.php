@@ -842,22 +842,35 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             <h1 class="pull-left pagetitle" style="font-size: 22px; margin-top: 10px;">
 
                                 @if (Breadcrumbs::has() && (Breadcrumbs::current()->count() > 1))
+                                    <ul style="padding-left: 0;">
 
                                     @foreach (Breadcrumbs::current() as $crumbs)
                                         @if ($crumbs->url() && !$loop->last)
                                             <li class="breadcrumb-item">
                                                 <a href="{{ $crumbs->url() }}">
-                                                    {{ $crumbs->title() }}
-                                                </a> <i class="fa-solid fa-angle-right"></i>
+                                                    @if ($loop->first)
+                                                        {!! Blade::render($crumbs->title()) !!}
+                                                    @else
+                                                        {{ Blade::render($crumbs->title()) }}
+                                                    @endif
+                                                </a>
+                                                <x-icon type="angle-right" />
                                             </li>
-                                        @else
+                                        @elseif (is_null($crumbs->url()) && !$loop->last)
+                                            <li class="breadcrumb-item active">
+                                                {{ $crumbs->title() }}
+                                                <x-icon type="angle-right" />
+                                            </li>
+                                       @else
                                             <li class="breadcrumb-item active">
                                                 {{ $crumbs->title() }}
                                             </li>
                                         @endif
                                     @endforeach
+
+                                    </ul>
                                 @else
-                                        @yield('title')
+                                    @yield('title')
                                 @endif
 
                             </h1>
