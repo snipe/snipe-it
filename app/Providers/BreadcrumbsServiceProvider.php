@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
+use App\Models\CustomField;
 use App\Models\Department;
 use App\Models\Depreciation;
 use App\Models\Group;
@@ -87,7 +88,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
          * Asset Model Breadcrumbs
          */
         Breadcrumbs::for('models.index', fn (Trail $trail) =>
-        $trail->parent('home', route('home'))
+        $trail->parent('hardware.index', route('hardware.index'))
             ->push(trans('general.asset_models'), route('models.index'))
         );
 
@@ -227,7 +228,23 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $consumable->name]), route('home'))
         );
 
+        /**
+         * Custom fields Breadcrumbs
+         */
+        Breadcrumbs::for('fields.index', fn (Trail $trail) =>
+        $trail->parent('models.index', route('models.index'))
+            ->push(trans('admin/custom_fields/general.custom_fields'), route('fields.index'))
+        );
 
+        Breadcrumbs::for('fields.create', fn (Trail $trail) =>
+        $trail->parent('fields.index', route('fields.index'))
+            ->push(trans('general.create'), route('fields.create'))
+        );
+
+        Breadcrumbs::for('fields.edit', fn (Trail $trail, CustomField $field) =>
+        $trail->parent('fields.index', route('fields.index'))
+            ->push($field->name, route('fields.edit', $field))
+        );
 
         /**
          * Department Breadcrumbs
