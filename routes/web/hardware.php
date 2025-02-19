@@ -33,18 +33,12 @@ Route::group(
             $trail->parent('home')->push(trans('general.assets'), route('hardware.index'))
             );
 
-        Route::get('quickscancheckin',
-            [AssetsController::class, 'quickScanCheckin']
-        )->name('hardware/quickscancheckin')
+        Route::get('quickscancheckin', [AssetsController::class, 'quickScanCheckin'])
+            ->name('hardware/quickscancheckin')
             ->breadcrumbs(fn (Trail $trail) =>
-            $trail->parent('hardware.index')->push('Quickscan Checkin', route('hardware/quickscancheckin'))
+            $trail->parent('hardware.index')
+                ->push('Quickscan Checkin', route('hardware/quickscancheckin'))
             );
-
-        // Asset Maintenances
-        Route::resource('maintenances', 
-            AssetMaintenancesController::class, [
-            'parameters' => ['maintenance' => 'maintenance_id', 'asset' => 'asset_id'],
-        ]);
 
         Route::get('requested', [
             AssetsController::class, 'getRequestedIndex']
@@ -175,6 +169,13 @@ Route::resource('hardware',
         AssetsController::class,
         ['middleware' => ['auth']
 ])->parameters(['hardware' => 'asset']);
+
+
+// Asset Maintenances
+Route::resource('maintenances',
+    AssetMaintenancesController::class, [
+        'parameters' => ['maintenance' => 'maintenance', 'asset' => 'asset_id'],
+    ]);
 
 Route::get('ht/{any?}',
     [AssetsController::class, 'getAssetByTag']

@@ -2,6 +2,7 @@
 
 use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\AssetMaintenance;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
@@ -358,6 +359,29 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $location->name]), route('home'))
         );
 
+        /**
+         * Maintenances Breadcrumbs
+         */
+        Breadcrumbs::for('maintenances.index', fn (Trail $trail) =>
+        $trail->parent('hardware.index', route('hardware.index'))
+            ->push(trans('general.maintenances'), route('maintenances.index'))
+        );
+
+        Breadcrumbs::for('maintenances.create', fn (Trail $trail) =>
+        $trail->parent('maintenances.index', route('maintenances.index'))
+            ->push(trans('general.create'), route('maintenances.create'))
+        );
+
+        Breadcrumbs::for('maintenances.show', fn (Trail $trail, AssetMaintenance $maintenance) =>
+        $trail->parent('maintenances.index', route('locations.index'))
+            ->push($maintenance->title, route('maintenances.show', $maintenance))
+        );
+
+        Breadcrumbs::for('manufacturers.edit', fn (Trail $trail, Manufacturer $manufacturer) =>
+        $trail->parent('manufacturers.index', route('manufacturers.index'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $manufacturer->name]), route('home'))
+        );
+
 
         /**
          * Manufacturers Breadcrumbs
@@ -381,6 +405,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         $trail->parent('manufacturers.index', route('manufacturers.index'))
             ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $manufacturer->name]), route('home'))
         );
+
 
         /**
          * Predefined Kits Breadcrumbs
