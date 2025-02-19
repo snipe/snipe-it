@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\NoteAdded;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,12 @@ class NotesController extends Controller
 
         // @todo: authorization
 
-        event(new NoteAdded($item, Auth::user(), $validated['note']));
+        $logaction = new Actionlog();
+        $logaction->item_id = $item->id;
+        $logaction->item_type = get_class($item);
+        $logaction->note = $validated['note'];
+        $logaction->created_by = Auth::id();
+        $logaction->logaction('note added');
 
         return redirect()
             ->route('hardware.show', $validated['id'])
