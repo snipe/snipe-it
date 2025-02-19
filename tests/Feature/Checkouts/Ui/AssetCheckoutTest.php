@@ -260,7 +260,7 @@ class AssetCheckoutTest extends TestCase
         $asset->forceSave();
 
         $this->actingAs(User::factory()->admin()->create())
-            ->get(route('hardware.checkout.create', ['assetId' => $asset->id]))
+            ->get(route('hardware.checkout.create', $asset))
             ->assertStatus(302)
             ->assertSessionHas('error')
             ->assertRedirect(route('hardware.show', $asset));
