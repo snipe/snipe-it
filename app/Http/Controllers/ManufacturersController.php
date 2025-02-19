@@ -88,7 +88,7 @@ class ManufacturersController extends Controller
     public function edit(Manufacturer $manufacturer) : View | RedirectResponse
     {
         $this->authorize('update', Manufacturer::class);
-        return view('manufacturers/edit');
+        return view('manufacturers/edit')->with('item', $manufacturer);
     }
 
     /**
