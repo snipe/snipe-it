@@ -529,18 +529,18 @@ class BulkAssetsController extends Controller
         if ($request->session()->has('bulk_back_url')) {
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
-        $assetIds = $request->get('ids') ?? [];
+        $assetIds = $request->get('ids');
 
         if(empty($assetIds)) {
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.delete.nothing_updated'));
         }
 
         $assignedAssets = Asset::whereIn('id', $assetIds)->whereNotNull('assigned_to')->get();
-
         if($assignedAssets->isNotEmpty()) {
+
             //if assets are checked out, return a list of asset tags that would need to be checked in first.
             $assetTags = $assignedAssets->pluck('asset_tag')->implode(', ');
-            return redirect()->route($bulk_back_url)->with('error', trans_choice('admin/hardware/message.delete.assigned_to_error', $assignedAssets->count(), ['asset_tag' => $assetTags] ));
+            return redirect($bulk_back_url)->with('error', trans_choice('admin/hardware/message.delete.assigned_to_error', $assignedAssets->count(), ['asset_tag' => $assetTags] ));
         }
 
         foreach (Asset::wherein('id', $assetIds)->get() as $asset) {
