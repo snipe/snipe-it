@@ -35,7 +35,7 @@ class AssetPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.company'),
                 'visible' => false,
-                'formatter' => 'assetCompanyObjFilterFormatter',
+                'formatter' => 'companiesLinkObjFormatter',
             ], [
                 'field' => 'name',
                 'searchable' => true,
