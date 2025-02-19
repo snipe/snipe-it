@@ -25,12 +25,11 @@ Route::group(
     
     function () {
         
-        Route::get('bulkaudit',
-            [AssetsController::class, 'quickScan']
-        )
+        Route::get('bulkaudit', [AssetsController::class, 'quickScan'])
             ->name('assets.bulkaudit')
             ->breadcrumbs(fn (Trail $trail) =>
-            $trail->parent('home')->push(trans('general.assets'), route('hardware.index'))
+            $trail->parent('hardware.index')
+                ->push(trans('general.bulkaudit'), route('asset.import-history'))
             );
 
         Route::get('quickscancheckin', [AssetsController::class, 'quickScanCheckin'])
@@ -40,9 +39,12 @@ Route::group(
                 ->push('Quickscan Checkin', route('hardware/quickscancheckin'))
             );
 
-        Route::get('requested', [
-            AssetsController::class, 'getRequestedIndex']
-        )->name('assets.requested');
+        Route::get('requested', [AssetsController::class, 'getRequestedIndex'])
+            ->name('assets.requested')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')
+                ->push(trans('admin/hardware/general.requested'), route('assets.requested'))
+            );
 
         Route::get('scan',
             [AssetsController::class, 'scan']
@@ -64,9 +66,12 @@ Route::group(
             [AssetsController::class, 'auditStore']
         )->name('asset.audit.store');
 
-        Route::get('history',
-            [AssetsController::class, 'getImportHistory']
-        )->name('asset.import-history');
+        Route::get('history', [AssetsController::class, 'getImportHistory'])
+            ->name('asset.import-history')
+            ->breadcrumbs(fn (Trail $trail) =>
+                $trail->parent('hardware.index')
+                ->push(trans('general.import-history'), route('asset.import-history'))
+            );
 
         Route::post('history',
             [AssetsController::class, 'postImportHistory']
@@ -155,9 +160,12 @@ Route::group(
         )->name('hardware/bulksave');
 
         // Bulk checkout / checkin
-        Route::get('bulkcheckout',
-            [BulkAssetsController::class, 'showCheckout']
-        )->name('hardware.bulkcheckout.show');
+        Route::get('bulkcheckout', [BulkAssetsController::class, 'showCheckout'])
+            ->name('hardware.bulkcheckout.show')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')
+                ->push(trans('admin/hardware/general.bulk_checkout'), route('hardware.index'))
+            );
 
         Route::post('bulkcheckout',
             [BulkAssetsController::class, 'storeCheckout']
