@@ -26,14 +26,10 @@ class StatuslabelsController extends Controller
         return view('statuslabels.index');
     }
 
-    public function show($id) : View | RedirectResponse
+    public function show(Statuslabel $statuslabel) : View | RedirectResponse
     {
         $this->authorize('view', Statuslabel::class);
-        if ($statuslabel = Statuslabel::find($id)) {
-            return view('statuslabels.view')->with('statuslabel', $statuslabel);
-        }
-
-        return redirect()->route('statuslabels.index')->with('error', trans('admin/statuslabels/message.does_not_exist'));
+        return view('statuslabels.view')->with('statuslabel', $statuslabel);
     }
 
     /**

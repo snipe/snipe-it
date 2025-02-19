@@ -102,9 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('{manufacturers_id}/restore', [ManufacturersController::class, 'restore'] )->name('restore/manufacturer');
     });
 
-    Route::resource('manufacturers', ManufacturersController::class, [
-        'parameters' => ['manufacturer' => 'manufacturers_id'],
-    ]);
+    Route::resource('manufacturers', ManufacturersController::class);
 
     /*
     * Suppliers
@@ -124,9 +122,7 @@ Route::group(['middleware' => 'auth'], function () {
     /*
     * Departments
     */
-    Route::resource('departments', DepartmentsController::class, [
-        'parameters' => ['department' => 'department_id'],
-    ]);
+    Route::resource('departments', DepartmentsController::class);
 });
 
 /*

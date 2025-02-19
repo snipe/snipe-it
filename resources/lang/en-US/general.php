@@ -587,6 +587,6 @@ return [
         'notes'  => 'Add a note',
     ],
 
-    'generic_model_not_found' => ':model not found',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
 
 ];
