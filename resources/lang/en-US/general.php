@@ -587,6 +587,12 @@ return [
         'notes'  => 'Add a note',
     ],
 
+    'actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
     'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
 
 ];

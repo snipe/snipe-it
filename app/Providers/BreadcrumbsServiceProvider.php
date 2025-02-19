@@ -11,6 +11,7 @@ use App\Models\Department;
 use App\Models\Depreciation;
 use App\Models\Group;
 use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Manufacturer;
 use App\Models\Statuslabel;
@@ -38,10 +39,24 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         /**
          * Asset Breadcrumbs
          */
-        Breadcrumbs::for('hardware.index', fn (Trail $trail) =>
-            $trail->parent('home', route('home'))
-                ->push(trans('general.assets'), route('hardware.index'))
-        );
+
+
+            if ((request()->is('hardware*')) && (request()->status!='')) {
+                Breadcrumbs::for('hardware.index', fn (Trail $trail) =>
+                $trail->parent('home', route('home'))
+                    ->push(trans('general.assets'), route('hardware.index'))
+                    ->push(request()->status.' Assets', route('hardware.index', ['status' => request()->status]))
+                );
+
+            } else {
+                Breadcrumbs::for('hardware.index', fn (Trail $trail) =>
+                $trail->parent('home', route('home'))
+                    ->push(trans('general.assets'), route('hardware.index'))
+                );
+            }
+
+
+
 
         Breadcrumbs::for('hardware.create', fn (Trail $trail) =>
         $trail->parent('hardware.index', route('hardware.index'))
@@ -50,13 +65,21 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('hardware.show', fn (Trail $trail, Asset $asset) =>
         $trail->parent('hardware.index', route('hardware.index'))
-            ->push('View '.$asset->asset_tag, route('home'))
+            ->push($asset->asset_tag, route('home'))
         );
 
         Breadcrumbs::for('hardware.edit', fn (Trail $trail, Asset $asset) =>
         $trail->parent('hardware.index', route('hardware.index'))
-            ->push('Edit asset: '.$asset->asset_tag, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $asset->asset_tag]), route('home'))
         );
+
+        // Non-resource routes
+        Breadcrumbs::for('hardware.checkout.create', fn(Trail $trail, Asset $asset) => $trail
+            ->parent('hardware.show', $asset)
+            ->push(trans('general.checkout'), null)
+        );
+
+
 
         /**
          * Asset Model Breadcrumbs
@@ -73,12 +96,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('models.show', fn (Trail $trail, AssetModel $model) =>
         $trail->parent('models.index', route('models.index'))
-            ->push('View '.$model->name, route('home'))
+            ->push($model->name, route('home'))
         );
 
         Breadcrumbs::for('models.edit', fn (Trail $trail, AssetModel $model) =>
         $trail->parent('models.index', route('models.index'))
-            ->push('Edit: '.$model->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $model->name]), route('home'))
         );
 
 
@@ -102,7 +125,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('accessories.edit', fn (Trail $trail, Accessory $accessory) =>
         $trail->parent('accessories.index', route('accessories.index'))
-            ->push('Edit: '.$accessory->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $accessory->name]), route('home'))
         );
 
 
@@ -126,7 +149,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('categories.edit', fn (Trail $trail, Category $category) =>
         $trail->parent('categories.index', route('categories.index'))
-            ->push('Edit: '.$category->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $category->name]), route('home'))
         );
 
 
@@ -151,7 +174,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('companies.edit', fn (Trail $trail, Company $company) =>
         $trail->parent('companies.index', route('companies.index'))
-            ->push('Edit: '.$company->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $company->name]), route('home'))
         );
 
 
@@ -175,7 +198,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('components.edit', fn (Trail $trail, Component $component) =>
         $trail->parent('components.index', route('components.index'))
-            ->push('Edit: '.$component->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $component->name]), route('home'))
         );
 
 
@@ -199,7 +222,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('consumables.edit', fn (Trail $trail, Consumable $consumable) =>
         $trail->parent('consumables.index', route('consumables.index'))
-            ->push('Edit: '.$consumable->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $consumable->name]), route('home'))
         );
 
 
@@ -219,12 +242,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('departments.show', fn (Trail $trail, Department $department) =>
         $trail->parent('departments.index', route('departments.index'))
-            ->push('View '.$department->name, route('home'))
+            ->push($department->name, route('home'))
         );
 
         Breadcrumbs::for('departments.edit', fn (Trail $trail, Department $department) =>
         $trail->parent('departments.index', route('departments.index'))
-            ->push('Edit: '.$department->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $department->name]), route('home'))
         );
 
 
@@ -243,12 +266,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('depreciations.show', fn (Trail $trail, Depreciation $depreciation) =>
         $trail->parent('depreciations.index', route('depreciations.index'))
-            ->push('View '.$depreciation->name, route('home'))
+            ->push($depreciation->name, route('home'))
         );
 
         Breadcrumbs::for('depreciations.edit', fn (Trail $trail, Depreciation $depreciation) =>
         $trail->parent('depreciations.index', route('depreciations.index'))
-            ->push('Edit: '.$depreciation->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $depreciation->name]), route('home'))
         );
 
         /**
@@ -266,12 +289,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('groups.show', fn (Trail $trail, Group $group) =>
         $trail->parent('groups.index', route('groups.index'))
-            ->push('View '.$group->name, route('home'))
+            ->push($group->name, route('home'))
         );
 
         Breadcrumbs::for('groups.edit', fn (Trail $trail, Group $group) =>
         $trail->parent('groups.index', route('groups.index'))
-            ->push('Edit: '.$group->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $group->name]), route('home'))
         );
 
 
@@ -290,13 +313,26 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('licenses.show', fn (Trail $trail, License $license) =>
         $trail->parent('licenses.index', route('licenses.index'))
-            ->push('View '.$license->username, route('home'))
+            ->push($license->name, route('licenses.show', $license))
         );
 
         Breadcrumbs::for('licenses.edit', fn (Trail $trail, License $license) =>
         $trail->parent('licenses.index', route('licenses.index'))
-            ->push('Edit: '.$license->username, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $license->name]), route('home'))
         );
+
+
+        // Non-resource routes
+        Breadcrumbs::for('licenses.checkout', fn(Trail $trail, License $license) => $trail
+            ->parent('licenses.show', $license)
+            ->push(trans('general.checkout'), null)
+        );
+
+        Breadcrumbs::for('licenses.checkin', fn(Trail $trail, LicenseSeat $licenseSeat) => $trail
+            ->parent('licenses.show', $licenseSeat->license)
+            ->push(trans('general.checkin'), null)
+        );
+
 
         /**
          * Locations Breadcrumbs
@@ -313,12 +349,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('locations.show', fn (Trail $trail, Location $location) =>
         $trail->parent('locations.index', route('locations.index'))
-            ->push('View '.$location->name, route('home'))
+            ->push($location->name, route('home'))
         );
 
         Breadcrumbs::for('locations.edit', fn (Trail $trail, Location $location) =>
         $trail->parent('locations.index', route('locations.index'))
-            ->push('Edit: '.$location->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $location->name]), route('home'))
         );
 
 
@@ -337,12 +373,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('manufacturers.show', fn (Trail $trail, Manufacturer $manufacturer) =>
         $trail->parent('manufacturers.index', route('manufacturers.index'))
-            ->push('View '.$manufacturer->name, route('home'))
+            ->push($manufacturer->name, route('home'))
         );
 
         Breadcrumbs::for('manufacturers.edit', fn (Trail $trail, Manufacturer $manufacturer) =>
         $trail->parent('manufacturers.index', route('manufacturers.index'))
-            ->push('Edit: '.$manufacturer->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $manufacturer->name]), route('home'))
         );
 
 
@@ -361,12 +397,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('statuslabels.show', fn (Trail $trail, Statuslabel $statuslabel) =>
         $trail->parent('statuslabels.index', route('statuslabels.index'))
-            ->push('View '.$statuslabel->name, route('home'))
+            ->push($statuslabel->name, route('home'))
         );
 
         Breadcrumbs::for('statuslabels.edit', fn (Trail $trail, Statuslabel $statuslabel) =>
         $trail->parent('statuslabels.index', route('statuslabels.index'))
-            ->push('Edit: '.$statuslabel->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $statuslabel->name]), route('home'))
         );
 
 
@@ -385,12 +421,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('suppliers.show', fn (Trail $trail, Supplier $supplier) =>
         $trail->parent('suppliers.index', route('suppliers.index'))
-            ->push('View '.$supplier->name, route('home'))
+            ->push($supplier->name, route('home'))
         );
 
         Breadcrumbs::for('suppliers.edit', fn (Trail $trail, Supplier $supplier) =>
         $trail->parent('suppliers.index', route('suppliers.index'))
-            ->push('Edit: '.$supplier->name, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $supplier->name]), route('home'))
         );
 
 
@@ -410,12 +446,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('users.show', fn (Trail $trail, User $user) =>
         $trail->parent('users.index', route('users.index'))
-            ->push('View '.$user->username, route('home'))
+            ->push($user->username, route('home'))
         );
 
         Breadcrumbs::for('users.edit', fn (Trail $trail, User $user) =>
         $trail->parent('users.index', route('users.index'))
-            ->push('Edit: '.$user->username, route('home'))
+            ->push(trans('general.actions.edit_item', ['name' => $user->name]), route('home'))
         );
 
 
