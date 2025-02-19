@@ -107,15 +107,11 @@ class ComponentsController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function edit($componentId = null)
+    public function edit(Component $component)
     {
-        if ($item = Component::find($componentId)) {
-            $this->authorize('update', $item);
 
-            return view('components/edit', compact('item'))->with('category_type', 'component');
-        }
-
-        return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
+            $this->authorize('update', $component);
+            return view('components/edit')->with('category_type', 'component');
     }
 
 
@@ -130,11 +126,8 @@ class ComponentsController extends Controller
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v3.0]
      */
-    public function update(ImageUploadRequest $request, $componentId = null)
+    public function update(ImageUploadRequest $request, Component $component)
     {
-        if (is_null($component = Component::find($componentId))) {
-            return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
-        }
         $min = $component->numCheckedOut();
         $validator = Validator::make($request->all(), [
             'qty' => "required|numeric|min:$min",
@@ -216,17 +209,9 @@ class ComponentsController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($componentId = null)
+    public function show(Component $component)
     {
-        $component = Component::find($componentId);
-
-        if (isset($component->id)) {
             $this->authorize('view', $component);
-
             return view('components/view', compact('component'));
-        }
-        // Redirect to the user management page
-        return redirect()->route('components.index')
-            ->with('error', trans('admin/components/message.does_not_exist'));
     }
 }

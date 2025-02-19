@@ -77,17 +77,10 @@ class SuppliersController extends Controller
      *
      * @param  int $supplierId
      */
-    public function edit($supplierId = null) : View | RedirectResponse
+    public function edit(Supplier $supplier) : View | RedirectResponse
     {
         $this->authorize('update', Supplier::class);
-        // Check if the supplier exists
-        if (is_null($item = Supplier::find($supplierId))) {
-            // Redirect to the supplier  page
-            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.does_not_exist'));
-        }
-
-        // Show the page
-        return view('suppliers/edit', compact('item'));
+        return view('suppliers/edit');
     }
 
     /**
@@ -95,14 +88,9 @@ class SuppliersController extends Controller
      *
      * @param  int $supplierId
      */
-    public function update($supplierId, ImageUploadRequest $request) : RedirectResponse
+    public function update(ImageUploadRequest $request, Supplier $supplier) : RedirectResponse
     {
         $this->authorize('update', Supplier::class);
-
-        if (is_null($supplier = Supplier::find($supplierId))) {
-            return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.does_not_exist'));
-        }
-
         // Save the  data
         $supplier->name = request('name');
         $supplier->address = request('address');
@@ -163,15 +151,10 @@ class SuppliersController extends Controller
      * @param null $supplierId
      * @internal param int $assetId
      */
-    public function show($supplierId = null) : View | RedirectResponse
+    public function show(Supplier $supplier) : View | RedirectResponse
     {
         $this->authorize('view', Supplier::class);
-        $supplier = Supplier::find($supplierId);
+        return view('suppliers/view', compact('supplier'));
 
-        if (isset($supplier->id)) {
-            return view('suppliers/view', compact('supplier'));
-        }
-
-        return redirect()->route('suppliers.index')->with('error', trans('admin/suppliers/message.does_not_exist'));
     }
 }

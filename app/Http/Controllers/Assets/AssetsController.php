@@ -201,7 +201,7 @@ class AssetsController extends Controller
                     $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
                 }
 
-                $successes[] = "<a href='" . route('hardware.show', ['hardware' => $asset->id]) . "' style='color: white;'>" . e($asset->asset_tag) . "</a>";
+                $successes[] = "<a href='" . route('hardware.show', $asset) . "' style='color: white;'>" . e($asset->asset_tag) . "</a>";
 
             } else {
                 $failures[] = join(",", $asset->getErrors()->all());
@@ -222,7 +222,7 @@ class AssetsController extends Controller
                     //the most common case, keeping it so we don't have to make every use of that translation string be trans_choice'ed
                     //and re-translated
                     return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
-                        ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
+                        ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', $asset), 'id', 'tag' => e($asset->asset_tag)]));
                 } else {
                     //multi-success
                     return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
@@ -240,15 +240,13 @@ class AssetsController extends Controller
      * Returns a view that presents a form to edit an existing asset.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $assetId
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
     public function edit(Asset $asset) : View | RedirectResponse
     {
         $this->authorize($asset);
-
-        return view('hardware/edit', compact('asset'))
+        return view('hardware/edit')
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('statuslabel_types', Helper::statusTypeList());
     }
@@ -285,7 +283,7 @@ class AssetsController extends Controller
 
             $qr_code = (object) [
                 'display' => $settings->qr_code == '1',
-                //'url' => route('qr_code/hardware', ['asset' => $asset]),
+                'url' => route('qr_code/hardware', $asset),
             ];
 
             return view('hardware/view', compact('asset', 'qr_code', 'settings'))
@@ -302,14 +300,9 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function update(ImageUploadRequest $request, $assetId = null) : RedirectResponse
+    public function update(ImageUploadRequest $request, Asset $asset) : RedirectResponse
     {
 
-        // Check if the asset exists
-        if (! $asset = Asset::find($assetId)) {
-            // Redirect to the asset management page with error
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
         $this->authorize($asset);
 
         $asset->status_id = $request->input('status_id', null);
@@ -424,7 +417,7 @@ class AssetsController extends Controller
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
         if ($asset->save()) {
-            return redirect()->to(Helper::getRedirectOption($request, $assetId, 'Assets'))
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
 

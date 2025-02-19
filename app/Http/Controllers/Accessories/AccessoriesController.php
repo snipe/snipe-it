@@ -95,16 +95,9 @@ class AccessoriesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @param  int $accessoryId
      */
-    public function edit($accessoryId = null) : View | RedirectResponse
+    public function edit(Accessory $accessory) : View | RedirectResponse
     {
-
-        if ($item = Accessory::find($accessoryId)) {
-            $this->authorize($item);
-            return view('accessories.edit', compact('item'))->with('category_type', 'accessory');
-        }
-
-        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
-
+            return view('accessories.edit')->with('category_type', 'accessory');
     }
 
     /**
@@ -114,19 +107,12 @@ class AccessoriesController extends Controller
      * @param int $accessoryId
      * @since [v6.0]
      */
-    public function getClone($accessoryId = null) : View | RedirectResponse
+    public function getClone(Accessory $accessory) : View | RedirectResponse
     {
 
         $this->authorize('create', Accessory::class);
 
-        // Check if the asset exists
-        if (is_null($accessory_to_clone = Accessory::find($accessoryId))) {
-            // Redirect to the asset management page
-            return redirect()->route('accessories.index')
-                ->with('error', trans('admin/accessories/message.does_not_exist', ['id' => $accessoryId]));
-        }
-
-        $accessory = clone $accessory_to_clone;
+        $accessory = clone $accessory;
         $accessory->id = null;
         $accessory->location_id = null;
 
@@ -142,9 +128,9 @@ class AccessoriesController extends Controller
      * @param ImageUploadRequest $request
      * @param  int $accessoryId
      */
-    public function update(ImageUploadRequest $request, $accessoryId = null) : RedirectResponse
+    public function update(ImageUploadRequest $request, Accessory $accessory) : RedirectResponse
     {
-        if ($accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessoryId)) {
+        if ($accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessory->id)) {
 
             $this->authorize($accessory);
 
@@ -231,14 +217,10 @@ class AccessoriesController extends Controller
      * @see AccessoriesController::getDataView() method that generates the JSON response
      * @since [v1.0]
      */
-    public function show($accessoryID = null) : View | RedirectResponse
+    public function show(Accessory $accessory) : View | RedirectResponse
     {
-        $accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessoryID);
+        $accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessory->id);
         $this->authorize('view', $accessory);
-        if (isset($accessory->id)) {
-            return view('accessories.view', compact('accessory'));
-        }
-
-        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist', ['id' => $accessoryID]));
+        return view('accessories.view', compact('accessory'));
     }
 }
