@@ -188,7 +188,7 @@ class AssetCheckinTest extends TestCase
             ->get(route('hardware.checkin.create', ['assetId' => $asset->id]))
             ->assertStatus(302)
             ->assertSessionHas('error')
-            ->assertRedirect(route('hardware.show',['hardware' => $asset->id]));
+            ->assertRedirect(route('hardware.show', $asset->id));
     }
 
     public function testAssetCheckinPagePostIsRedirectedIfModelIsInvalid()
@@ -201,7 +201,7 @@ class AssetCheckinTest extends TestCase
             ->post(route('hardware.checkin.store', ['assetId' => $asset->id]))
             ->assertStatus(302)
             ->assertSessionHas('error')
-            ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
+            ->assertRedirect(route('hardware.show', $asset));
     }
 
     public function testAssetCheckinPagePostIsRedirectedIfRedirectSelectionIsIndex()
@@ -228,6 +228,6 @@ class AssetCheckinTest extends TestCase
             ])
             ->assertStatus(302)
             ->assertSessionHasNoErrors()
-            ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
+            ->assertRedirect(route('hardware.show', $asset));
     }
 }

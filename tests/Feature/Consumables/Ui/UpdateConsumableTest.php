@@ -29,7 +29,7 @@ class UpdateConsumableTest extends TestCase
         $userForCompanyB = User::factory()->editConsumables()->for($companyB)->create();
 
         $this->actingAs($userForCompanyB)
-            ->get(route('consumables.edit', $consumableForCompanyA->id))
+            ->get(route('consumables.edit', $consumableForCompanyA))
             ->assertRedirect(route('consumables.index'));
     }
 
@@ -51,7 +51,7 @@ class UpdateConsumableTest extends TestCase
         $userForCompanyB = User::factory()->editConsumables()->for($companyB)->create();
 
         $this->actingAs($userForCompanyB)
-            ->put(route('consumables.update', $consumableForCompanyA->id), [
+            ->put(route('consumables.update', $consumableForCompanyA), [
                 //
             ])
             ->assertForbidden();
@@ -99,7 +99,7 @@ class UpdateConsumableTest extends TestCase
         ];
 
         $this->actingAs(User::factory()->createConsumables()->editConsumables()->create())
-            ->put(route('consumables.update', $consumable->id), $data + [
+            ->put(route('consumables.update', $consumable), $data + [
                     'redirect_option' => 'index',
                     'category_type' => 'consumable',
                 ])

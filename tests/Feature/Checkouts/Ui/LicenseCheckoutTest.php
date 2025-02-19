@@ -90,7 +90,7 @@ class LicenseCheckoutTest extends TestCase
                 'redirect_option' => 'item',
             ])
             ->assertStatus(302)
-            ->assertRedirect(route('licenses.show', ['license' => $license->id]));
+            ->assertRedirect(route('licenses.show', $license));
     }
 
     public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsUserTarget()
@@ -105,7 +105,7 @@ class LicenseCheckoutTest extends TestCase
                 'redirect_option' => 'target',
             ])
             ->assertStatus(302)
-            ->assertRedirect(route('users.show', ['user' => $user->id]));
+            ->assertRedirect(route('users.show', $user));
     }
     public function testLicenseCheckoutPagePostIsRedirectedIfRedirectSelectionIsAssetTarget()
     {
@@ -119,6 +119,6 @@ class LicenseCheckoutTest extends TestCase
                 'redirect_option' => 'target',
             ])
             ->assertStatus(302)
-            ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
+            ->assertRedirect(route('hardware.show', $asset));
     }
 }

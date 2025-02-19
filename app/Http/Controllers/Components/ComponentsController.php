@@ -111,7 +111,9 @@ class ComponentsController extends Controller
     {
 
             $this->authorize('update', $component);
-            return view('components/edit')->with('category_type', 'component');
+            return view('components/edit')
+                ->with('item', $component)
+                ->with('category_type', 'component');
     }
 
 
