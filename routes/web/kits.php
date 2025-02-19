@@ -5,7 +5,7 @@ use App\Models\PredefinedKit;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
-Route::group(['prefix' => 'kits/{kit_id}', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
 
     // Route::get('licenses',
     //     [Kits\PredefinedKitsController::class, 'indexLicenses']
