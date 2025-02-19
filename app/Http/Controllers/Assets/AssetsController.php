@@ -247,6 +247,7 @@ class AssetsController extends Controller
     {
         $this->authorize($asset);
         return view('hardware/edit')
+            ->with('item', $asset)
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('statuslabel_types', Helper::statusTypeList());
     }
