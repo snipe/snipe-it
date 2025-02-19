@@ -14,6 +14,7 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Manufacturer;
+use App\Models\PredefinedKit;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
@@ -33,7 +34,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         // Default home
         Breadcrumbs::for('home', fn (Trail $trail) =>
-        $trail->push(trans('general.dashboard'), route('home'))
+        $trail->push('<x-icon type="home" /><span class="sr-only">'.trans('general.dashboard').'</span>', route('home'))
         );
 
         /**
@@ -379,6 +380,29 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         Breadcrumbs::for('manufacturers.edit', fn (Trail $trail, Manufacturer $manufacturer) =>
         $trail->parent('manufacturers.index', route('manufacturers.index'))
             ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $manufacturer->name]), route('home'))
+        );
+
+        /**
+         * Predefined Kits Breadcrumbs
+         */
+        Breadcrumbs::for('kits.index', fn (Trail $trail) =>
+        $trail->parent('home', route('home'))
+            ->push(trans('general.kits'), route('kits.index'))
+        );
+
+        Breadcrumbs::for('kits.create', fn (Trail $trail) =>
+        $trail->parent('kits.index', route('kits.index'))
+            ->push(trans('general.create'), route('kits.create'))
+        );
+
+        Breadcrumbs::for('kits.show', fn (Trail $trail, PredefinedKit $kit) =>
+        $trail->parent('kits.index', route('kits.index'))
+            ->push($kit->name, route('kits.show', $kit))
+        );
+
+        Breadcrumbs::for('kits.edit', fn (Trail $trail, PredefinedKit $kit) =>
+        $trail->parent('kits.index', route('kits.index'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $kit->name]), route('kits.edit', $kit))
         );
 
 
