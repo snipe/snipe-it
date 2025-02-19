@@ -123,7 +123,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('accessories.show', fn (Trail $trail, Accessory $accessory) =>
         $trail->parent('accessories.index', route('accessories.index'))
-            ->push('View '.$accessory->name, route('home'))
+            ->push($accessory->name, route('home'))
         );
 
         Breadcrumbs::for('accessories.edit', fn (Trail $trail, Accessory $accessory) =>
@@ -147,7 +147,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('categories.show', fn (Trail $trail, Category $category) =>
         $trail->parent('categories.index', route('categories.index'))
-            ->push('View '.$category->name, route('home'))
+            ->push($category->name, route('home'))
         );
 
         Breadcrumbs::for('categories.edit', fn (Trail $trail, Category $category) =>
@@ -172,7 +172,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('companies.show', fn (Trail $trail, Company $company) =>
         $trail->parent('companies.index', route('companies.index'))
-            ->push('View '.$company->name, route('home'))
+            ->push($company->name, route('home'))
         );
 
         Breadcrumbs::for('companies.edit', fn (Trail $trail, Company $company) =>
@@ -196,7 +196,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('components.show', fn (Trail $trail, Component $component) =>
         $trail->parent('components.index', route('components.index'))
-            ->push('View '.$component->name, route('home'))
+            ->push($component->name, route('home'))
         );
 
         Breadcrumbs::for('components.edit', fn (Trail $trail, Component $component) =>
@@ -220,7 +220,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('consumables.show', fn (Trail $trail, Consumable $consumable) =>
         $trail->parent('consumables.index', route('consumables.index'))
-            ->push('View '.$consumable->name, route('home'))
+            ->push($consumable->name, route('home'))
         );
 
         Breadcrumbs::for('consumables.edit', fn (Trail $trail, Consumable $consumable) =>
