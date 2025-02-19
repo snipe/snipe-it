@@ -93,6 +93,7 @@ use Carbon\Carbon;
               </div>
             </div> <!-- /row -->
 
+            @if ($assetMaintenance->cost > 0)
             <div class="row">
               <div class="col-md-3">
                 {{ trans('admin/asset_maintenances/form.cost') }}
@@ -101,6 +102,7 @@ use Carbon\Carbon;
                 {{ trans( 'general.currency' ) . Helper::formatCurrencyOutput($assetMaintenance->cost) }}
               </div>
             </div> <!-- /row -->
+            @endif
 
             <div class="row">
               <div class="col-md-3">
@@ -111,6 +113,7 @@ use Carbon\Carbon;
               </div>
             </div> <!-- /row -->
 
+            @if ($assetMaintenance->notes)
             <div class="row">
               <div class="col-md-3">
                 {{ trans('admin/asset_maintenances/form.notes') }}
@@ -119,6 +122,7 @@ use Carbon\Carbon;
                 {!! nl2br(Helper::parseEscapedMarkedownInline($assetMaintenance->notes)) !!}
               </div>
             </div> <!-- /row -->
+            @endif
 
 
           </div><!-- /row-new-striped -->
