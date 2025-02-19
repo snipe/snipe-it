@@ -107,7 +107,9 @@ class ConsumablesController extends Controller
     public function edit(Consumable $consumable) : View | RedirectResponse
     {
             $this->authorize($consumable);
-            return view('consumables/edit')->with('category_type', 'consumable');
+            return view('consumables/edit')
+                ->with('item', $consumable)
+                ->with('category_type', 'consumable');
 
     }
 
@@ -199,7 +201,7 @@ class ConsumablesController extends Controller
     {
         $consumable = Consumable::withCount('users as users_consumables')->find($consumable->id);
         $this->authorize($consumable);
-            return view('consumables/view');
+        return view('consumables/view', compact('consumable'));
     }
 
     public function clone(Consumable $consumable) : View

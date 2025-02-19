@@ -143,6 +143,6 @@ class GroupsController extends Controller
      */
     public function show(Group $group) : View | RedirectResponse
     {
-      return view('groups/view');
+      return view('groups/view', compact('group'));
     }
 }
