@@ -587,4 +587,6 @@ return [
         'notes'  => 'Add a note',
     ],
 
+    'generic_model_not_found' => ':model not found',
+
 ];

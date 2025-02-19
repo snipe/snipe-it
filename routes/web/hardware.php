@@ -171,17 +171,10 @@ Route::group(
 
     });
 
-Route::resource('hardware', 
-        AssetsController::class, 
-        [
-            'middleware' => ['auth'],
-            'parameters' => [
-                'names' => [
-                'show' => 'view',
-                'index' => 'index',
-            ],
-        ],
-]);
+Route::resource('hardware',
+        AssetsController::class,
+        ['middleware' => ['auth']
+])->parameters(['hardware' => 'asset']);
 
 Route::get('ht/{any?}',
     [AssetsController::class, 'getAssetByTag']

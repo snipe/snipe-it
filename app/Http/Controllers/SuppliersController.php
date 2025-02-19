@@ -80,7 +80,7 @@ class SuppliersController extends Controller
     public function edit(Supplier $supplier) : View | RedirectResponse
     {
         $this->authorize('update', Supplier::class);
-        return view('suppliers/edit');
+        return view('suppliers/edit')->with('item',  $supplier);
     }
 
     /**

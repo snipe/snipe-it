@@ -109,23 +109,17 @@ Route::group(['middleware' => 'auth'], function () {
     /*
     * Suppliers
     */
-    Route::resource('suppliers', SuppliersController::class, [
-        'parameters' => ['supplier' => 'supplier_id'],
-    ]);
+    Route::resource('suppliers', SuppliersController::class);
 
     /*
     * Depreciations
      */
-    Route::resource('depreciations', DepreciationsController::class, [
-         'parameters' => ['depreciation' => 'depreciation_id'],
-     ]);
+    Route::resource('depreciations', DepreciationsController::class);
 
     /*
     * Status Labels
      */
-    Route::resource('statuslabels', StatuslabelsController::class, [
-          'parameters' => ['statuslabel' => 'statuslabel_id'],
-      ]);
+    Route::resource('statuslabels', StatuslabelsController::class);
 
     /*
     * Departments
@@ -188,8 +182,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
     Route::get('security', [SettingsController::class, 'getSecurity'])->name('settings.security.index');
     Route::post('security', [SettingsController::class, 'postSecurity'])->name('settings.security.save');
 
-    Route::get('groups', [GroupsController::class, 'index'])->name('settings.groups.index');
-
     Route::get('localization', [SettingsController::class, 'getLocalization'])->name('settings.localization.index');
     Route::post('localization', [SettingsController::class, 'postLocalization'])->name('settings.localization.save');
 
@@ -248,10 +240,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
         Route::get('/', [SettingsController::class, 'getBackups'])->name('settings.backups.index');
     });
 
-    Route::resource('groups', GroupsController::class, [
-        'middleware' => ['auth'],
-        'parameters' => ['group' => 'group_id'],
-    ]);
+    Route::resource('groups', GroupsController::class);
 
     Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
 });

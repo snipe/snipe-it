@@ -3,6 +3,7 @@
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
@@ -103,6 +104,31 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         $trail->parent('accessories.index', route('accessories.index'))
             ->push('Edit: '.$accessory->name, route('home'))
         );
+
+
+        /**
+         * Categories Breadcrumbs
+         */
+        Breadcrumbs::for('categories.index', fn (Trail $trail) =>
+        $trail->parent('home', route('home'))
+            ->push(trans('general.categories'), route('categories.index'))
+        );
+
+        Breadcrumbs::for('categories.create', fn (Trail $trail) =>
+        $trail->parent('categories.index', route('categories.index'))
+            ->push(trans('general.create'), route('home'))
+        );
+
+        Breadcrumbs::for('categories.show', fn (Trail $trail, Category $category) =>
+        $trail->parent('categories.index', route('categories.index'))
+            ->push('View '.$category->name, route('home'))
+        );
+
+        Breadcrumbs::for('categories.edit', fn (Trail $trail, Category $category) =>
+        $trail->parent('categories.index', route('categories.index'))
+            ->push('Edit: '.$category->name, route('home'))
+        );
+
 
 
         /**
@@ -249,7 +275,6 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         );
 
 
-
         /**
          * Licenses Breadcrumbs
          */
@@ -295,6 +320,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         $trail->parent('locations.index', route('locations.index'))
             ->push('Edit: '.$location->name, route('home'))
         );
+
 
         /**
          * Manufacturers Breadcrumbs

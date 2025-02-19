@@ -99,7 +99,7 @@ class DepreciationsController extends Controller
     {
 
         $this->authorize('update', $depreciation);
-        return view('depreciations/edit');
+        return view('depreciations/edit')->with('item', $depreciation);
     }
 
     /**

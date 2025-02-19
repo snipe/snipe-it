@@ -826,52 +826,55 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 @endif
 
                 <!-- Content Header (Page header) -->
-                <section class="content-header" style="padding-bottom: 30px;">
+                <section class="content-header">
 
 
                     <div class="row">
-                        <div class="col-md-12" style="margin-bottom: 10px;">
+                        <div class="col-md-12">
 
                         <style>
                             .breadcrumb-item {
                                 display: inline;
                                 list-style: none;
-                                font-size: 110%;
                             }
                         </style>
 
-                            @if(Breadcrumbs::has())
-                                @foreach (Breadcrumbs::current() as $crumbs)
-                                    @if ($crumbs->url() && !$loop->last)
-                                        <li class="breadcrumb-item">
-                                            <a href="{{ $crumbs->url() }}">
+                            <h1 class="pull-left pagetitle" style="font-size: 22px; margin-top: 10px;">
+
+                                @if (Breadcrumbs::has() && (Breadcrumbs::current()->count() > 1))
+
+                                    @foreach (Breadcrumbs::current() as $crumbs)
+                                        @if ($crumbs->url() && !$loop->last)
+                                            <li class="breadcrumb-item">
+                                                <a href="{{ $crumbs->url() }}">
+                                                    {{ $crumbs->title() }}
+                                                </a> <i class="fa-solid fa-angle-right"></i>
+                                            </li>
+                                        @else
+                                            <li class="breadcrumb-item active">
                                                 {{ $crumbs->title() }}
-                                            </a> <i class="fa-solid fa-angle-right"></i>
-                                        </li>
-                                    @else
-                                        <li class="breadcrumb-item active">
-                                            {{ $crumbs->title() }}
-                                        </li>
-                                    @endif
-                                @endforeach
-                            @endif
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                @else
+                                        @yield('title')
+                                @endif
+
+                            </h1>
+
+                                @if (isset($helpText))
+                                    @include ('partials.more-info',
+                                                           [
+                                                               'helpText' => $helpText,
+                                                               'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                                                           ])
+                                @endif
+                                <div class="pull-right">
+                                    @yield('header_right')
+                                </div>
+
                         </div>
                     </div>
-
-                    <h1 class="pull-left pagetitle">@yield('title') </h1>
-
-                    @if (isset($helpText))
-                        @include ('partials.more-info',
-                                               [
-                                                   'helpText' => $helpText,
-                                                   'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
-                                               ])
-                    @endif
-                    <div class="pull-right">
-                        @yield('header_right')
-                    </div>
-
-
                 </section>
 
 
