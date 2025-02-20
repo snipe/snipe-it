@@ -19,7 +19,25 @@ class CreateNotesTest extends TestCase
 
     public function testValidation()
     {
-        $this->markTestIncomplete();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->editAssets()->create())
+            ->post(route('notes.store'), [
+                'id' => $asset->id,
+                // should be more...
+            ])
+            ->assertSessionHas('errors');
+    }
+
+    public function testAssetMustExist()
+    {
+        $this->actingAs(User::factory()->editAssets()->create())
+            ->post(route('notes.store'), [
+                'id' => 999_999,
+                'type' => 'asset',
+                'note' => 'my note',
+            ])
+            ->assertStatus(404);
     }
 
     public function testCanCreateNoteForAsset()
