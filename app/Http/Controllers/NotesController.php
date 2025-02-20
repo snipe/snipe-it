@@ -35,7 +35,6 @@ class NotesController extends Controller
         return redirect()
             ->route('hardware.show', $validated['id'])
             ->withFragment('history')
-            // @todo: translate
             ->with('success', trans('general.note_added'));
     }
 }
