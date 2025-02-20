@@ -6,8 +6,10 @@ use App\Http\Controllers\Assets\BulkAssetsController;
 use App\Http\Controllers\Assets\AssetCheckoutController;
 use App\Http\Controllers\Assets\AssetCheckinController;
 use App\Http\Controllers\Assets\AssetFilesController;
+use App\Models\Setting;
 use Tabuna\Breadcrumbs\Trail;
 use Illuminate\Support\Facades\Route;
+use App\Models\Asset;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,23 +48,29 @@ Route::group(
                 ->push(trans('admin/hardware/general.requested'), route('assets.requested'))
             );
 
-        Route::get('scan',
-            [AssetsController::class, 'scan']
-        )->name('asset.scan');
-
-        Route::get('audit/due',
-            [AssetsController::class, 'dueForAudit']
-        )->name('assets.audit.due');
+        Route::get('audit/due', [AssetsController::class, 'dueForAudit'])
+            ->name('assets.audit.due')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')
+                ->push(trans_choice('general.audit_due_days', Setting::getSettings()->audit_warning_days, ['days' => Setting::getSettings()->audit_warning_days]), route('assets.audit.due'))
+            );
 
         Route::get('checkins/due',
             [AssetsController::class, 'dueForCheckin']
-        )->name('assets.checkins.due');
+        )->name('assets.checkins.due')
+            ->breadcrumbs(fn (Trail $trail) =>
+            $trail->parent('hardware.index')
+                ->push(trans_choice('general.checkin_due_days', Setting::getSettings()->due_checkin_days, ['days' => Setting::getSettings()->due_checkin_days]), route('assets.audit.due'))
+            );
         
-        Route::get('audit/{id}',
-            [AssetsController::class, 'audit']
-        )->name('asset.audit.create');
+        Route::get('audit/{asset}', [AssetsController::class, 'audit'])
+            ->name('asset.audit.create')
+            ->breadcrumbs(fn (Trail $trail, Asset $asset) =>
+            $trail->parent('hardware.show', $asset)
+                ->push(trans('general.audit'))
+            );
 
-        Route::post('audit/{id}',
+        Route::post('audit/{asset}',
             [AssetsController::class, 'auditStore']
         )->name('asset.audit.store');
 
@@ -92,11 +100,12 @@ Route::group(
         Route::get('{assetId}/label',
             [AssetsController::class, 'getLabel']
         )->name('label/hardware');
-        
 
-        Route::get('{asset}/checkout',
-            [AssetCheckoutController::class, 'create']
-        )->name('hardware.checkout.create');
+        Route::get('{asset}/checkout', [AssetCheckoutController::class, 'create'])->name('hardware.checkout.create')
+            ->breadcrumbs(fn (Trail $trail, Asset $asset) =>
+            $trail->parent('hardware.show', $asset)
+                ->push(trans('admin/hardware/general.bulk_checkout'), route('hardware.index'))
+            );
 
         Route::post('{assetId}/checkout',
             [AssetCheckoutController::class, 'store']
