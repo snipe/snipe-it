@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Přizpůsobit report',
     'custom_report'         => 'Vlastní report majetku',
     'dashboard'				=> 'Nástěnka',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dnů',
     'days_to_next_audit'    => 'Dny k dalšímu auditu',
     'date'					=> 'Datum',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Jméno Příjmení (jan_novak@example.com)',
     'lastnamefirstinitial_format' =>  'Příjmení první písmeno ze jména (novakj@example.com)',
     'firstintial_dot_lastname_format' => 'Iniciál Príjmení (j.novak@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Jméno příjmení (Jane Smith)',
     'lastname_firstname_display'	=> 'Příjmení (Smith Jane)',
     'name_display_format'	=> 'Formát zobrazení jména',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Ne',
     'notes'  				=> 'Poznámky',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Spotřební materiál|:count Spotřební materiál',
         'components'  => ':count komponenta|:count komponenty',
     ],
+
     'more_info' => 'Více informací',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

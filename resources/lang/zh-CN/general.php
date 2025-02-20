@@ -92,6 +92,7 @@ return [
     'customize_report'      => '自定义报告',
     'custom_report'         => '自定义资产报表',
     'dashboard'				=> '控制面板',
+    'data_source'           => 'Data Source',
     'days'      			=> '天数',
     'days_to_next_audit'    => '距离下一次盘点的天数',
     'date'					=> '日期',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => '名 姓，例如(jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  '姓氏首字母（smithj@example.com）',
     'firstintial_dot_lastname_format' => '缩写名 姓，例如(jsmith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> '名 姓，例如 (Jane Smith)',
     'lastname_firstname_display'	=> '姓 名，例如 (Smith Jane)',
     'name_display_format'	=> '姓名显示格式',
@@ -217,6 +219,8 @@ return [
     'no'  					=> '否',
     'notes'  				=> '备注',
     'note_added'            => '备注已添加',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => '添加备注',
     'note_edited'            => '备注已编辑',
     'edit_note'              => '编辑备注',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count 个耗材|:count 个耗材',
         'components'  => ':count 组件|:count 组件',
     ],
+
     'more_info' => '更多信息',
     'quickscan_bulk_help' => '勾选此框将编辑资产记录以反映其新的位置。不勾选则只会在盘点日志中记录该位置。注意，如果此资产已被借出，则不会更改其借出到的人员、资产或位置的位置。',
     'whoops' => '哎呀！',
@@ -573,8 +578,13 @@ return [
     'import_asset_tag_exists' => '资产标签为:asset_tag的资产已经存在，且未请求更新。没有做任何更改。',
     'countries_manually_entered_help' => '带星号(*) 的值是手动输入的，与现有的 ISO 3166 下拉值不匹配',
     'accessories_assigned' => '已分配的配件',
-    'user_managed_passwords' => 'Password Management',
-    'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
-    'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'user_managed_passwords' => '密码管理',
+    'user_managed_passwords_disallow' => '禁止用户管理自己的密码',
+    'user_managed_passwords_allow' => '允许用户管理自己的密码',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

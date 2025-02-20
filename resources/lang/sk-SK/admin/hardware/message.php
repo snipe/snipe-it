@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		 => '<strong>Varovanie: </strong> Tento majetok bol označný ako nepriraditeľný. Ak došlo k zmene, prosím upravte aktuálny stav majetku.',
+    'undeployable' 		 => '<strong>Varovanie: </strong> Tento majetok bol označný ako neodovzdateľný. Ak došlo k zmene, prosím upravte aktuálny stav majetku.',
     'does_not_exist' 	 => 'Majetok neexistuje.',
     'does_not_exist_var' => 'Majetok s označením :asset_tag nebol nájdený.',
     'no_tag' 	         => 'Nebolo zadané žiadne označenie majetku.',
@@ -11,7 +11,7 @@ return [
     'warning_audit_date_mismatch' 	=> 'Nastavený dátum nasledujúceho auditu (:next_audit_date) je skorší ako dátum posledného auditu (:last_audit_date). Prosím upravte dátum nasledujúceho auditu.',
     'labels_generated'   => 'Štítky boli úspešne vygenerované.',
     'error_generating_labels' => 'Pri generovaní štítkov nastala chyba.',
-    'no_assets_selected' => 'Neboli zvolené žiadne majetky.',
+    'no_assets_selected' => 'Neboli zvolené žiadne položky majetku.',
 
     'create' => [
         'error'   		=> 'Majetok nebol vytvorený, prosím skúste znovu. :(',
@@ -27,14 +27,14 @@ return [
         'encrypted_warning' => 'Majetok bol úspešne upravený, avšak šifrované vlastné polia neboli upravené z dôvodu oprávnení',
         'nothing_updated'	=>  'Neboli vybrané žiadne položky, preto nebolo nič upravené.',
         'no_assets_selected'  =>  'Neboli vybrané žiadne majetky, preto nebolo nič upravené.',
-        'assets_do_not_exist_or_are_invalid' => 'Vybratné majetky nemôzu byť upravené.',
+        'assets_do_not_exist_or_are_invalid' => 'Zvolené položky majetku nemôžu byť upravené.',
     ],
 
     'restore' => [
         'error'   		=> 'Majetok nebol obnovený, prosím skúste znovu',
         'success' 		=> 'Majetok bol úspešne obnovený.',
         'bulk_success' 		=> 'Majetok bol úspešne obnovený.',
-        'nothing_updated'   => 'Nebol vybraný žiaden majetok, preto nebolo nič obnovené.', 
+        'nothing_updated'   => 'Neboli zvolené žiadne položky majetku, preto nebolo nič obnovené.', 
     ],
 
     'audit' => [
@@ -72,26 +72,26 @@ return [
     'delete' => [
         'confirm'   	=> 'Ste si istý, že chcete odstrániť tento majetok?',
         'error'   		=> 'Pri odstraňovaní majetku sa vyskytla chyba. Skúste prosím znovu.',
-        'nothing_updated'   => 'Neboli zvolený žiaden majetok, preto nebolo nič odstránené.',
+        'nothing_updated'   => 'Neboli zvolený žiadne položky majetku, preto nebolo nič odstránené.',
         'success' 		=> 'Majetok bol úspešne odstránený.',
     ],
 
     'checkout' => [
-        'error'   		=> 'Majetok sa nepodarilo priradiť, skúste prosím znovu',
-        'success' 		=> 'Majetok bol úspešne priradený.',
+        'error'   		=> 'Majetok sa nepodarilo odovzdať, skúste prosím znovu',
+        'success' 		=> 'Majetok bol úspešne odovzdaný.',
         'user_does_not_exist' => 'Tento užívateľ nie je platný. Prosím skúste znovu.',
-        'not_available' => 'Tento majetok nie je k dospozícii pre priradenie!',
+        'not_available' => 'Tento majetok nie je k dospozícii pre odovzdanie!',
         'no_assets_selected' => 'Musíte vybrať najmenej jednu položku majetku zo zoznamu',
     ],
 
     'multi-checkout' => [
-        'error'   => 'Majetok nebol odovzadený, prosím skúste znovu|Majetky neboli odovzadné, prosím skúste znovu',
-        'success' => 'Majetok bol úspešne odovzadný.|Majetky boli úspešne odovzdané.',
+        'error'   => 'Majetok nebol odovzdaný, prosím skúste znovu|Majetky neboli odovzdané, prosím skúste znovu',
+        'success' => 'Majetok bol úspešne odovzdaný.|Majetky boli úspešne odovzdané.',
     ],
 
     'checkin' => [
-        'error'   		=> 'Majetok sa nepodarilo prijať, skúste prosím znovu',
-        'success' 		=> 'Majetok bol úspešne prijatý.',
+        'error'   		=> 'Majetok sa nepodarilo prevziať, skúste prosím znovu',
+        'success' 		=> 'Majetok bol úspešne prevzatý.',
         'user_does_not_exist' => 'Tento užívateľ nie je platný. Prosím skúste znovu.',
         'already_checked_in'  => 'Tento majetok je už prevzatý.',
 
@@ -100,7 +100,7 @@ return [
     'requests' => [
         'error'   		=> 'Majetok nebol vyžiadaný, prosím skúste znovu',
         'success' 		=> 'Majetok úspešne vyžiadaný.',
-        'canceled'      => 'Požiadavka na priradenie bola úspešne zrušená',
+        'canceled'      => 'Požiadavka na odovzdanie bola úspešne zrušená',
     ],
 
 ];

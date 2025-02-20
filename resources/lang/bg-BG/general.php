@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'Персонализиран отчет',
     'custom_report'         => 'Потребителски справки за активи',
     'dashboard'				=> 'Табло',
+    'data_source'           => 'Data Source',
     'days'      			=> 'дни',
     'days_to_next_audit'    => 'Дни до следващия одит',
     'date'					=> 'Дата',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'Име Фамилия (jane.smith@example.com)',
     'lastnamefirstinitial_format' =>  'Фамилно име Инициал на собствено (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Първа буква от името и Фамилия (i.ivanov@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Име Фамилия (Иван Иванов)',
     'lastname_firstname_display'	=> 'Фамилия Име (Иванов Иван)',
     'name_display_format'	=> 'Формат на показване на името',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'Не',
     'notes'  				=> 'Бележки',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count Консуматив|:count Консумативи',
         'components'  => ':count Компонент|:count Компоненти',
     ],
+
     'more_info' => 'Повече информация',
     'quickscan_bulk_help' => 'Поставянето на отметка в това квадратче ще редактира записа на актива, за да отрази това ново местоположение. Оставянето му без отметка просто ще отбележи местоположението в журнала за проверка. Обърнете внимание, че ако този актив бъде извлечен, той няма да промени местоположението на лицето, актива или местоположението, към които е извлечен.',
     'whoops' => 'Упс!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];

@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'crwdns6115:0crwdne6115:0',
     'custom_report'         => 'crwdns1139:0crwdne1139:0',
     'dashboard'				=> 'crwdns1202:0crwdne1202:0',
+    'data_source'           => 'crwdns12886:0crwdne12886:0',
     'days'      			=> 'crwdns1917:0crwdne1917:0',
     'days_to_next_audit'    => 'crwdns1918:0crwdne1918:0',
     'date'					=> 'crwdns1045:0crwdne1045:0',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'crwdns1995:0crwdne1995:0',
     'lastnamefirstinitial_format' =>  'crwdns1999:0crwdne1999:0',
     'firstintial_dot_lastname_format' => 'crwdns5948:0crwdne5948:0',
+    'lastname_dot_firstinitial_format' => 'crwdns12880:0crwdne12880:0',
     'firstname_lastname_display'	=> 'crwdns11779:0crwdne11779:0',
     'lastname_firstname_display'	=> 'crwdns11781:0crwdne11781:0',
     'name_display_format'	=> 'crwdns11783:0crwdne11783:0',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'crwdns1075:0crwdne1075:0',
     'notes'  				=> 'crwdns1076:0crwdne1076:0',
     'note_added'            => 'crwdns12858:0crwdne12858:0',
+    'options'				=> 'crwdns12888:0crwdne12888:0',
+    'preview'				=> 'crwdns12890:0crwdne12890:0',
     'add_note'              => 'crwdns12860:0crwdne12860:0',
     'note_edited'            => 'crwdns12862:0crwdne12862:0',
     'edit_note'              => 'crwdns12864:0crwdne12864:0',
@@ -560,6 +564,7 @@ return [
         'consumables'  => 'crwdns12144:0crwdne12144:0',
         'components'  => 'crwdns12146:0crwdne12146:0',
     ],
+
     'more_info' => 'crwdns12288:0crwdne12288:0',
     'quickscan_bulk_help' => 'crwdns12290:0crwdne12290:0',
     'whoops' => 'crwdns12304:0crwdne12304:0',
@@ -575,5 +580,10 @@ return [
     'user_managed_passwords' => 'crwdns12870:0crwdne12870:0',
     'user_managed_passwords_disallow' => 'crwdns12872:0crwdne12872:0',
     'user_managed_passwords_allow' => 'crwdns12874:0crwdne12874:0',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'crwdns12878:0crwdne12878:0',
+    ],
 
 ];

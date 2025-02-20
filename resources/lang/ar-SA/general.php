@@ -92,6 +92,7 @@ return [
     'customize_report'      => 'تخصيص التقرير',
     'custom_report'         => 'تقرير مخصص للأصول',
     'dashboard'				=> 'لوحة القيادة',
+    'data_source'           => 'Data Source',
     'days'      			=> 'أيام',
     'days_to_next_audit'    => 'أيام إلى التدقيق التالي',
     'date'					=> 'التاريخ',
@@ -127,6 +128,7 @@ return [
     'firstname_lastname_underscore_format' => 'الاسم الأول الاسم الأخير (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'اللقب والحرف الاول من الاسم (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'الاسم الأخير الأول (jsmith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'الاسم الأول الاسم الأخير (جين سميث)',
     'lastname_firstname_display'	=> 'اسم العائلة الأول (ميث جاني)',
     'name_display_format'	=> 'تنسيق عرض الاسم',
@@ -217,6 +219,8 @@ return [
     'no'  					=> 'لا',
     'notes'  				=> 'مُلاحظات',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -561,6 +565,7 @@ return [
         'consumables'  => ':count مستهلكة<unk> :count مستهلك',
         'components'  => ':count مكون<unk> :count مكونات',
     ],
+
     'more_info' => 'المزيد من المعلومات',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +581,10 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
 
 ];
