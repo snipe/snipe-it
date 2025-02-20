@@ -865,12 +865,11 @@ class AssetsController extends Controller
         return view('hardware/quickscan-checkin')->with('statusLabel_list', Helper::statusLabelList());
     }
 
-    public function audit($id)
+    public function audit(Asset $asset)
     {
         $settings = Setting::getSettings();
         $this->authorize('audit', Asset::class);
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
-        $asset = Asset::findOrFail($id);
         return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
@@ -889,7 +888,7 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(UploadFileRequest $request, $id)
+    public function auditStore(UploadFileRequest $request, Asset $asset)
     {
         $this->authorize('audit', Asset::class);
 
@@ -903,8 +902,6 @@ class AssetsController extends Controller
         if ($validator->fails()) {
             return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
         }
-
-        $asset = Asset::findOrFail($id);
 
         /**
          * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
