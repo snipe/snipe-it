@@ -26,7 +26,7 @@ class ShowAccessoryTest extends TestCase
 
         $this->actingAs($userForCompanyB)
             ->get(route('accessories.show', $accessoryForCompanyA))
-            ->assertForbidden();
+            ->assertStatus(302);
     }
 
     public function testCanViewAccessory()

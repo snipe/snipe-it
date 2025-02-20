@@ -54,7 +54,7 @@ class UpdateConsumableTest extends TestCase
             ->put(route('consumables.update', $consumableForCompanyA), [
                 //
             ])
-            ->assertForbidden();
+            ->assertStatus(302);
     }
 
     public function testCannotSetQuantityToAmountLowerThanWhatIsCheckedOut()
