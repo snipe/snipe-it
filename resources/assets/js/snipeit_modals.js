@@ -28,7 +28,7 @@ $(function () {
 
   var baseUrl = $('meta[name="baseUrl"]').attr('content');
   //handle modal-add-interstitial calls
-    var model, select, refreshSelector;
+  var model, select, refreshSelector;
 
   if($('#createModal').length == 0) {
     $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
