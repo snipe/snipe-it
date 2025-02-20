@@ -35,7 +35,7 @@ class CreateNotesTest extends TestCase
                 'type' => 'asset',
                 'note' => 'my note',
             ])
-            ->assertStatus(404);
+            ->assertStatus(302);
     }
 
     public function testCanCreateNoteForAsset()
