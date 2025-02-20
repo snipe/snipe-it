@@ -324,11 +324,11 @@ class UsersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function destroy(DeleteUserRequest $request, User $user)
+    public function destroy(DeleteUserRequest $request, $id)
     {
         $this->authorize('delete', User::class);
 
-        if ($user = User::find($user->id)) {
+        if ($user = User::find($id)) {
 
             $this->authorize('delete', $user);
 
