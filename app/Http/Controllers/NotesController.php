@@ -12,6 +12,8 @@ class NotesController extends Controller
 {
     public function store(Request $request)
     {
+        $this->authorize('update', Asset::class);
+
         $validated = $request->validate([
             'id' => 'required',
             'note' => 'required|string|max:500',

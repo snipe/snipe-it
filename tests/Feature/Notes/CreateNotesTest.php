@@ -10,8 +10,6 @@ class CreateNotesTest extends TestCase
 {
     public function testRequiresPermission()
     {
-        $this->markTestIncomplete();
-
         $this->actingAs(User::factory()->create())
             ->post(route('notes.store'))
             ->assertForbidden();
