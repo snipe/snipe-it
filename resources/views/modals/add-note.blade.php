@@ -20,7 +20,7 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <textarea class="form-control" id="note" name="note">{{ old('note') }}</textarea>
+                            <textarea class="form-control" id="note" name="note" required>{{ old('note') }}</textarea>
                             {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                         </div>
                     </div>
