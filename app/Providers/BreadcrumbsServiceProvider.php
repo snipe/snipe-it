@@ -9,6 +9,7 @@ use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\CustomField;
+use App\Models\CustomFieldset;
 use App\Models\Department;
 use App\Models\Depreciation;
 use App\Models\Group;
@@ -68,20 +69,13 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('hardware.show', fn (Trail $trail, Asset $asset) =>
         $trail->parent('hardware.index', route('hardware.index'))
-            ->push($asset->asset_tag, route('home'))
+            ->push($asset->present()->fullName(), route('hardware.show', $asset))
         );
 
         Breadcrumbs::for('hardware.edit', fn (Trail $trail, Asset $asset) =>
         $trail->parent('hardware.index', route('hardware.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $asset->asset_tag]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $asset->asset_tag]), route('hardware.edit', $asset))
         );
-
-        // Non-resource routes
-        Breadcrumbs::for('hardware.checkout.create', fn(Trail $trail, Asset $asset) => $trail
-            ->parent('hardware.show', $asset)
-            ->push(trans('general.checkout'), null)
-        );
-
 
 
         /**
@@ -94,17 +88,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('models.create', fn (Trail $trail) =>
         $trail->parent('models.index', route('models.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('models.create'))
         );
 
         Breadcrumbs::for('models.show', fn (Trail $trail, AssetModel $model) =>
         $trail->parent('models.index', route('models.index'))
-            ->push($model->name, route('home'))
+            ->push($model->name, route('models.show', $model))
         );
 
         Breadcrumbs::for('models.edit', fn (Trail $trail, AssetModel $model) =>
         $trail->parent('models.index', route('models.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $model->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $model->name]), route('models.edit', $model))
         );
 
 
@@ -118,17 +112,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('accessories.create', fn (Trail $trail) =>
         $trail->parent('accessories.index', route('accessories.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('accessories.create'))
         );
 
         Breadcrumbs::for('accessories.show', fn (Trail $trail, Accessory $accessory) =>
         $trail->parent('accessories.index', route('accessories.index'))
-            ->push($accessory->name, route('home'))
+            ->push($accessory->name, route('accessories.show', $accessory))
         );
 
         Breadcrumbs::for('accessories.edit', fn (Trail $trail, Accessory $accessory) =>
         $trail->parent('accessories.index', route('accessories.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $accessory->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $accessory->name]), route('accessories.edit', $accessory))
         );
 
 
@@ -142,17 +136,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('categories.create', fn (Trail $trail) =>
         $trail->parent('categories.index', route('categories.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('categories.create'))
         );
 
         Breadcrumbs::for('categories.show', fn (Trail $trail, Category $category) =>
         $trail->parent('categories.index', route('categories.index'))
-            ->push($category->name, route('home'))
+            ->push($category->name, route('categories.show', $category))
         );
 
         Breadcrumbs::for('categories.edit', fn (Trail $trail, Category $category) =>
         $trail->parent('categories.index', route('categories.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $category->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $category->name]), route('categories.edit', $category))
         );
 
 
@@ -167,17 +161,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('companies.create', fn (Trail $trail) =>
         $trail->parent('companies.index', route('companies.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('companies.create'))
         );
 
         Breadcrumbs::for('companies.show', fn (Trail $trail, Company $company) =>
         $trail->parent('companies.index', route('companies.index'))
-            ->push($company->name, route('home'))
+            ->push($company->name, route('companies.show', $company))
         );
 
         Breadcrumbs::for('companies.edit', fn (Trail $trail, Company $company) =>
         $trail->parent('companies.index', route('companies.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $company->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $company->name]), route('companies.edit', $company))
         );
 
 
@@ -191,17 +185,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('components.create', fn (Trail $trail) =>
         $trail->parent('components.index', route('components.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('components.create'))
         );
 
         Breadcrumbs::for('components.show', fn (Trail $trail, Component $component) =>
         $trail->parent('components.index', route('components.index'))
-            ->push($component->name, route('home'))
+            ->push($component->name, route('components.show', $component))
         );
 
         Breadcrumbs::for('components.edit', fn (Trail $trail, Component $component) =>
         $trail->parent('components.index', route('components.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $component->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $component->name]), route('components.edit', $component))
         );
 
 
@@ -215,17 +209,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('consumables.create', fn (Trail $trail) =>
         $trail->parent('consumables.index', route('consumables.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('consumables.create'))
         );
 
         Breadcrumbs::for('consumables.show', fn (Trail $trail, Consumable $consumable) =>
         $trail->parent('consumables.index', route('consumables.index'))
-            ->push($consumable->name, route('home'))
+            ->push($consumable->name, route('consumables.show', $consumable))
         );
 
         Breadcrumbs::for('consumables.edit', fn (Trail $trail, Consumable $consumable) =>
         $trail->parent('consumables.index', route('consumables.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $consumable->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $consumable->name]), route('consumables.edit', $consumable))
         );
 
         /**
@@ -247,6 +241,25 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         );
 
         /**
+         * Custom fieldsets Breadcrumbs
+         */
+
+        Breadcrumbs::for('fieldsets.create', fn (Trail $trail) =>
+        $trail->parent('fields.index', route('fields.index'))
+            ->push(trans('general.create'), route('fieldsets.create'))
+        );
+
+        Breadcrumbs::for('fieldsets.show', fn (Trail $trail, CustomFieldset $fieldset) =>
+        $trail->parent('fields.index', route('fields.index'))
+            ->push($fieldset->name, route('fields.index'))
+        );
+
+        Breadcrumbs::for('fieldsets.edit', fn (Trail $trail, CustomFieldset $fieldset) =>
+        $trail->parent('fields.index', route('fields.index'))
+            ->push($fieldset->name, route('fieldsets.edit', $fieldset))
+        );
+
+        /**
          * Department Breadcrumbs
          */
         Breadcrumbs::for('departments.index', fn (Trail $trail) =>
@@ -256,7 +269,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('departments.create', fn (Trail $trail) =>
         $trail->parent('departments.index', route('departments.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('departments.create'))
         );
 
         Breadcrumbs::for('departments.show', fn (Trail $trail, Department $department) =>
@@ -266,7 +279,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('departments.edit', fn (Trail $trail, Department $department) =>
         $trail->parent('departments.index', route('departments.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $department->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $department->name]), route('departments.edit', $department))
         );
 
 
@@ -280,40 +293,40 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('depreciations.create', fn (Trail $trail) =>
         $trail->parent('depreciations.index', route('depreciations.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('depreciations.create'))
         );
 
         Breadcrumbs::for('depreciations.show', fn (Trail $trail, Depreciation $depreciation) =>
         $trail->parent('depreciations.index', route('depreciations.index'))
-            ->push($depreciation->name, route('home'))
+            ->push($depreciation->name, route('depreciations.show', $depreciation))
         );
 
         Breadcrumbs::for('depreciations.edit', fn (Trail $trail, Depreciation $depreciation) =>
         $trail->parent('depreciations.index', route('depreciations.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $depreciation->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $depreciation->name]), route('depreciations.edit', $depreciation))
         );
 
         /**
          * Groups Breadcrumbs
          */
         Breadcrumbs::for('groups.index', fn (Trail $trail) =>
-        $trail->parent('home', route('home'))
+        $trail->parent('settings.index', route('settings.index'))
             ->push(trans('general.groups'), route('groups.index'))
         );
 
         Breadcrumbs::for('groups.create', fn (Trail $trail) =>
         $trail->parent('groups.index', route('groups.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('groups.create'))
         );
 
         Breadcrumbs::for('groups.show', fn (Trail $trail, Group $group) =>
         $trail->parent('groups.index', route('groups.index'))
-            ->push($group->name, route('home'))
+            ->push($group->name, route('groups.show', $group))
         );
 
         Breadcrumbs::for('groups.edit', fn (Trail $trail, Group $group) =>
         $trail->parent('groups.index', route('groups.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $group->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $group->name]), route('groups.edit', $group))
         );
 
 
@@ -327,7 +340,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('licenses.create', fn (Trail $trail) =>
         $trail->parent('licenses.index', route('licenses.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('licenses.create'))
         );
 
         Breadcrumbs::for('licenses.show', fn (Trail $trail, License $license) =>
@@ -337,19 +350,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('licenses.edit', fn (Trail $trail, License $license) =>
         $trail->parent('licenses.index', route('licenses.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $license->name]), route('home'))
-        );
-
-
-        // Non-resource routes
-        Breadcrumbs::for('licenses.checkout', fn(Trail $trail, License $license) => $trail
-            ->parent('licenses.show', $license)
-            ->push(trans('general.checkout'), null)
-        );
-
-        Breadcrumbs::for('licenses.checkin', fn(Trail $trail, LicenseSeat $licenseSeat) => $trail
-            ->parent('licenses.show', $licenseSeat->license)
-            ->push(trans('general.checkin'), null)
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $license->name]), route('licenses.edit', $license))
         );
 
 
@@ -363,17 +364,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('locations.create', fn (Trail $trail) =>
         $trail->parent('locations.index', route('locations.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('locations.create'))
         );
 
         Breadcrumbs::for('locations.show', fn (Trail $trail, Location $location) =>
         $trail->parent('locations.index', route('locations.index'))
-            ->push($location->name, route('home'))
+            ->push($location->name, route('locations.show', $location))
         );
 
         Breadcrumbs::for('locations.edit', fn (Trail $trail, Location $location) =>
         $trail->parent('locations.index', route('locations.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $location->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $location->name]), route('locations.edit', $location))
         );
 
         /**
@@ -396,7 +397,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('manufacturers.edit', fn (Trail $trail, Manufacturer $manufacturer) =>
         $trail->parent('manufacturers.index', route('manufacturers.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $manufacturer->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $manufacturer->name]), route('manufacturers.edit', $manufacturer))
         );
 
 
@@ -410,7 +411,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('manufacturers.create', fn (Trail $trail) =>
         $trail->parent('manufacturers.index', route('manufacturers.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('manufacturers.create'))
         );
 
         Breadcrumbs::for('manufacturers.show', fn (Trail $trail, Manufacturer $manufacturer) =>
@@ -420,7 +421,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('manufacturers.edit', fn (Trail $trail, Manufacturer $manufacturer) =>
         $trail->parent('manufacturers.index', route('manufacturers.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $manufacturer->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $manufacturer->name]), route('manufacturers.edit', $manufacturer))
         );
 
 
@@ -458,18 +459,28 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('statuslabels.create', fn (Trail $trail) =>
         $trail->parent('statuslabels.index', route('statuslabels.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('statuslabels.create'))
         );
 
         Breadcrumbs::for('statuslabels.show', fn (Trail $trail, Statuslabel $statuslabel) =>
         $trail->parent('statuslabels.index', route('statuslabels.index'))
-            ->push($statuslabel->name, route('home'))
+            ->push($statuslabel->name, route('statuslabels.show', $statuslabel))
         );
 
         Breadcrumbs::for('statuslabels.edit', fn (Trail $trail, Statuslabel $statuslabel) =>
         $trail->parent('statuslabels.index', route('statuslabels.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $statuslabel->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $statuslabel->name]), route('statuslabels.edit', $statuslabel))
         );
+
+
+        /**
+         * Settings Breadcrumbs
+         */
+        Breadcrumbs::for('settings.index', fn (Trail $trail) =>
+        $trail->parent('home', route('home'))
+            ->push(trans('general.admin'), route('settings.index'))
+        );
+
 
 
         /**
@@ -482,7 +493,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('suppliers.create', fn (Trail $trail) =>
         $trail->parent('suppliers.index', route('suppliers.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('suppliers.create'))
         );
 
         Breadcrumbs::for('suppliers.show', fn (Trail $trail, Supplier $supplier) =>
@@ -492,7 +503,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('suppliers.edit', fn (Trail $trail, Supplier $supplier) =>
         $trail->parent('suppliers.index', route('suppliers.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $supplier->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $supplier->name]), route('suppliers.edit', $supplier))
         );
 
 
@@ -507,17 +518,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('users.create', fn (Trail $trail) =>
         $trail->parent('users.index', route('users.index'))
-            ->push(trans('general.create'), route('home'))
+            ->push(trans('general.create'), route('users.create'))
         );
 
         Breadcrumbs::for('users.show', fn (Trail $trail, User $user) =>
         $trail->parent('users.index', route('users.index'))
-            ->push($user->username, route('home'))
+            ->push($user->username, route('users.show', $user))
         );
 
         Breadcrumbs::for('users.edit', fn (Trail $trail, User $user) =>
         $trail->parent('users.index', route('users.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $user->name]), route('home'))
+            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $user->name]), route('users.edit', $user))
         );
 
 
