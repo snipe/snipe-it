@@ -3,6 +3,7 @@
 use App\Http\Controllers\Licenses;
 use Illuminate\Support\Facades\Route;
 use App\Models\License;
+use App\Models\LicenseSeat;
 use Tabuna\Breadcrumbs\Trail;
 
 // Licenses
@@ -13,18 +14,24 @@ Route::group(['prefix' => 'licenses', 'middleware' => ['auth']], function () {
         [Licenses\LicensesController::class, 'getFreeLicense']
     )->name('licenses.freecheckout');
 
-    Route::get('{license}/checkout/{seatId?}',
-        [Licenses\LicenseCheckoutController::class, 'create']
-    )->name('licenses.checkout');
+    Route::get('{license}/checkout/{seatId?}', [Licenses\LicenseCheckoutController::class, 'create'])
+        ->name('licenses.checkout')
+        ->breadcrumbs(fn (Trail $trail, License $license) =>
+        $trail->parent('licenses.show', $license)
+            ->push(trans('general.checkout'), route('licenses.checkout', $license))
+        );
 
     Route::post(
         '{licenseId}/checkout/{seatId?}',
         [Licenses\LicenseCheckoutController::class, 'store']
     ); //name() would duplicate here, so we skip it.
 
-    Route::get('{licenseSeat}/checkin/{backto?}',
-        [Licenses\LicenseCheckinController::class, 'create']
-    )->name('licenses.checkin');
+    Route::get('{licenseSeat}/checkin/{backto?}', [Licenses\LicenseCheckinController::class, 'create'])
+        ->name('licenses.checkin')
+        ->breadcrumbs(fn (Trail $trail, LicenseSeat $licenseSeat) =>
+        $trail->parent('licenses.show', $licenseSeat->license)
+            ->push(trans('general.checkin'), route('licenses.checkin', $licenseSeat))
+        );
 
     Route::post('{licenseId}/checkin/{backto?}',
         [Licenses\LicenseCheckinController::class, 'store']
