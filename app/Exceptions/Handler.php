@@ -133,6 +133,8 @@ class Handler extends ExceptionHandler
                 $route = 'hardware.index';
             } elseif ($route == 'reporttemplates.index') {
                 $route = 'reports/custom';
+            } elseif ($route == 'predefinedkits.index') {
+                $route = 'kits.index';
             }
 
             return redirect()
