@@ -97,7 +97,8 @@ class AccessoriesController extends Controller
      */
     public function edit(Accessory $accessory) : View | RedirectResponse
     {
-            return view('accessories.edit')->with('item', $accessory)->with('category_type', 'accessory');
+        $this->authorize('update', Accessory::class);
+        return view('accessories.edit')->with('item', $accessory)->with('category_type', 'accessory');
     }
 
     /**
