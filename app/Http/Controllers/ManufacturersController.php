@@ -85,18 +85,10 @@ class ManufacturersController extends Controller
      * @param int $manufacturerId
      * @since [v1.0]
      */
-    public function edit($manufacturerId = null) : View | RedirectResponse
+    public function edit(Manufacturer $manufacturer) : View | RedirectResponse
     {
-        // Handles manufacturer checks and permissions.
         $this->authorize('update', Manufacturer::class);
-
-        // Check if the manufacturer exists
-        if (! $item = Manufacturer::find($manufacturerId)) {
-            return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
-        }
-
-        // Show the page
-        return view('manufacturers/edit', compact('item'));
+        return view('manufacturers/edit')->with('item', $manufacturer);
     }
 
     /**
@@ -108,16 +100,10 @@ class ManufacturersController extends Controller
      * @param int $manufacturerId
      * @since [v1.0]
      */
-    public function update(ImageUploadRequest $request, $manufacturerId = null) : RedirectResponse
+    public function update(ImageUploadRequest $request, Manufacturer $manufacturer) : RedirectResponse
     {
         $this->authorize('update', Manufacturer::class);
-        // Check if the manufacturer exists
-        if (is_null($manufacturer = Manufacturer::find($manufacturerId))) {
-            // Redirect to the manufacturer  page
-            return redirect()->route('manufacturers.index')->with('error', trans('admin/manufacturers/message.does_not_exist'));
-        }
 
-        // Save the data
         $manufacturer->name = $request->input('name');
         $manufacturer->url = $request->input('url');
         $manufacturer->support_url = $request->input('support_url');
@@ -185,18 +171,10 @@ class ManufacturersController extends Controller
      * @param int $manufacturerId
      * @since [v1.0]
      */
-    public function show($manufacturerId = null) : View | RedirectResponse
+    public function show(Manufacturer $manufacturer) : View | RedirectResponse
     {
         $this->authorize('view', Manufacturer::class);
-        $manufacturer = Manufacturer::find($manufacturerId);
-
-        if (isset($manufacturer->id)) {
-            return view('manufacturers/view', compact('manufacturer'));
-        }
-
-        $error = trans('admin/manufacturers/message.does_not_exist');
-        // Redirect to the user management page
-        return redirect()->route('manufacturers.index')->with('error', $error);
+        return view('manufacturers/view', compact('manufacturer'));
     }
 
     /**

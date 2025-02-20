@@ -151,6 +151,5 @@ Route::group(['prefix' => 'users', 'middleware' => ['auth']], function () {
 
 Route::resource('users', Users\UsersController::class, [
     'middleware' => ['auth'],
-    'parameters' => ['user' => 'user_id'],
     'except' => ['update']
 ]);

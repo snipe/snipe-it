@@ -316,6 +316,7 @@ return [
         App\Providers\LivewireServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
+        App\Providers\BreadcrumbsServiceProvider::class,
 
     ],
 
