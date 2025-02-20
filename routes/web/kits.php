@@ -11,7 +11,7 @@ Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
     //     [Kits\PredefinedKitsController::class, 'indexLicenses']
     // )->name('kits.licenses.index');
 
-    Route::post('licenses',
+    Route::put('licenses',
         [Kits\PredefinedKitsController::class, 'storeLicense']
     )->name('kits.licenses.store');
 
@@ -33,7 +33,7 @@ Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
 
     Route::put('models/{model_id}',
         [Kits\PredefinedKitsController::class, 'updateModel']
-    )/* ->parameters([2 => 'kit_id', 1 => 'model_id'])*/->name('kits.models.update');
+    )->name('kits.models.update');
 
     Route::get('models/{model_id}/edit',
         [Kits\PredefinedKitsController::class, 'editModel']
@@ -70,8 +70,8 @@ Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
     Route::get('checkout', [Kits\CheckoutKitController::class, 'showCheckout'])
         ->name('kits.checkout.show')
         ->breadcrumbs(fn (Trail $trail, PredefinedKit $kit) =>
-        $trail->parent('kits.index')
-            ->push(trans('general.checkout'), route('kits.checkout.show', $kit)));;
+        $trail->parent('kits.show', $kit)
+            ->push(trans('general.checkout'), route('kits.checkout.show', $kit)));
 
     Route::post('checkout', [Kits\CheckoutKitController::class, 'store'])
         ->name('kits.checkout.store');
