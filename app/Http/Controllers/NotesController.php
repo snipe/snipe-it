@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\NoteAdded;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use Illuminate\Http\Request;
@@ -14,7 +13,6 @@ class NotesController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            // @todo: improve?
             'id' => 'required',
             'note' => 'required|string|max:500',
             'type' => [
@@ -27,7 +25,7 @@ class NotesController extends Controller
 
         $this->authorize('update', $item);
 
-        $logaction = new Actionlog();
+        $logaction = new Actionlog;
         $logaction->item_id = $item->id;
         $logaction->item_type = get_class($item);
         $logaction->note = $validated['note'];
@@ -38,6 +36,6 @@ class NotesController extends Controller
             ->route('hardware.show', $validated['id'])
             ->withFragment('history')
             // @todo: translate
-            ->with('success', 'Note Added!');
+            ->with('success', trans('general.note_added'));
     }
 }
