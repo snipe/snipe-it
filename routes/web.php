@@ -287,6 +287,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
             ->push(trans('admin/settings/general.login'), route('settings.logins.index')));
 
 
+    // SAML
+    Route::get('/saml', [SettingsController::class, 'getSamlSettings'])
+        ->name('settings.saml.index')
+        ->breadcrumbs(fn (Trail $trail) =>
+        $trail->parent('settings.index')
+            ->push(trans('admin/settings/general.saml_title'), route('settings.saml.index')));
+
+    Route::post('/saml', [SettingsController::class, 'postSamlSettings'])
+        ->name('settings.saml.save');
+
+
+
+
     // Backups
     Route::group(['prefix' => 'backups', 'middleware' => 'auth'], function () {
         Route::get('download/{filename}',
@@ -321,11 +334,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 
     Route::resource('groups', GroupsController::class);
 
+
+    /**
+     * This breadcrumb is repeated for groups in the BreadcrumbServiceProvider, since groups uses resource routes
+     * and that servcie provider cannot see the breadcrumbs defined below
+     */
     Route::get('/', [SettingsController::class, 'index'])
         ->name('settings.index')
         ->breadcrumbs(fn (Trail $trail) =>
         $trail->parent('home')
-            ->push(trans('general.admin'), route('settings.index')));;
+            ->push(trans('general.admin'), route('settings.index')));
 });
 
 /*
