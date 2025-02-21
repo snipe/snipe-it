@@ -39,66 +39,93 @@
                 return htmlData
             }
             $(this).bootstrapTable({
-            classes: 'table table-responsive table-no-bordered',
-            ajaxOptions: {
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            },
-            // reorderableColumns: true,
-            stickyHeader: true,
-            stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
-            stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
-            undefinedText: '',
-            iconsPrefix: 'fa',
-            cookieStorage: '{{ config('session.bs_table_storage') }}',
-            cookie: true,
-            cookieExpire: '2y',
-            showColumnsToggleAll: true,
-            minimumCountColumns: 2,
-            mobileResponsive: true,
-            maintainSelected: true,
-            trimOnSearch: false,
-            showSearchClearButton: true,
-            addrbar: {{ (config('session.bs_table_addrbar') == 'true') ? 'true' : 'false'}}, // deeplink search phrases, sorting, etc
-            paginationFirstText: "{{ trans('general.first') }}",
-            paginationLastText: "{{ trans('general.last') }}",
-            paginationPreText: "{{ trans('general.previous') }}",
-            paginationNextText: "{{ trans('general.next') }}",
-            pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
-            pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
-            paginationVAlign: 'both',
-            queryParams: function (params) {
-                var newParams = {};
-                for(var i in params) {
-                    if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
-                        newParams[i] = params[i];
+                classes: 'table table-responsive table-no-bordered',
+                ajaxOptions: {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
+                },
+                // reorderableColumns: true,
+                stickyHeader: true,
+                stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
+                stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
+                undefinedText: '',
+                iconsPrefix: 'fa',
+                cookieStorage: '{{ config('session.bs_table_storage') }}',
+                cookie: true,
+                cookieExpire: '2y',
+                showColumnsToggleAll: true,
+                minimumCountColumns: 2,
+                mobileResponsive: true,
+                maintainSelected: true,
+                trimOnSearch: false,
+                showSearchClearButton: true,
+                addrbar: {{ (config('session.bs_table_addrbar') == 'true') ? 'true' : 'false'}}, // deeplink search phrases, sorting, etc
+                paginationFirstText: "{{ trans('general.first') }}",
+                paginationLastText: "{{ trans('general.last') }}",
+                paginationPreText: "{{ trans('general.previous') }}",
+                paginationNextText: "{{ trans('general.next') }}",
+                pageList: ['10', '20', '30', '50', '100', '150', '200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
+                pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
+                paginationVAlign: 'both',
+                queryParams: function (params) {
+                    var newParams = {};
+                    for (var i in params) {
+                        if (!keyBlocked(i)) { // only send the field if it's not in blockedFields
+                            newParams[i] = params[i];
+                        }
+                    }
+                    return newParams;
+                },
+                formatLoadingMessage: function () {
+                    return '<h2><x-icon type="spinner" /> {{ trans('general.loading') }} </h2>';
+                },
+                icons: {
+                    advancedSearchIcon: 'fas fa-search-plus',
+                    paginationSwitchDown: 'fa-caret-square-o-down',
+                    paginationSwitchUp: 'fa-caret-square-o-up',
+                    fullscreen: 'fa-expand',
+                    columns: 'fa-columns',
+                    refresh: 'fas fa-sync-alt',
+                    export: 'fa-download',
+                    clearSearch: 'fa-times'
+                },
+                locale: '{{ app()->getLocale() }}',
+                exportOptions: export_options,
+                exportTypes: ['xlsx', 'excel', 'csv', 'pdf', 'json', 'xml', 'txt', 'sql', 'doc'],
+                onLoadSuccess: function () { // possible 'fixme'? this might be for contents, not for headers?
+                    $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call
+                },
+                onPostHeader: function () {
+                    var lookup = {};
+                    var lookup_initialized = false;
+                    var ths = $('th');
+                    ths.each(function (index, element) {
+                        th = $(element);
+                        //only populate the lookup table once; don't need to keep doing it.
+                        if (!lookup_initialized) {
+                            // th -> tr -> thead -> table
+                            var table = th.parent().parent().parent()
+                            var column_data = table.data('columns')
+                            for (var column in column_data) {
+                                lookup[column_data[column].field] = column_data[column].titleTooltip;
+                            }
+                            lookup_initialized = true
+                        }
+
+                        field = th.data('field'); // find fieldname this column refers to
+                        title = lookup[field];
+                        if (title) {
+                            th.attr('data-toggle', 'tooltip');
+                            th.attr('data-placement', 'top');
+                            // th.attr('title', title) //this causes 'double-titles' which looks gross
+                            th.tooltip({container: 'body', title: title});
+                        }
+                    })
+                },
+                formatNoMatches: function () {
+                    return '{{ trans('table.no_matching_records') }}';
                 }
-                return newParams;
-            },
-            formatLoadingMessage: function () {
-                return '<h2><x-icon type="spinner" /> {{ trans('general.loading') }} </h2>';
-            },
-            icons: {
-                advancedSearchIcon: 'fas fa-search-plus',
-                paginationSwitchDown: 'fa-caret-square-o-down',
-                paginationSwitchUp: 'fa-caret-square-o-up',
-                fullscreen: 'fa-expand',
-                columns: 'fa-columns',
-                refresh: 'fas fa-sync-alt',
-                export: 'fa-download',
-                clearSearch: 'fa-times'
-            },
-            locale: '{{ app()->getLocale() }}',
-            exportOptions: export_options,
-            exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
-            onLoadSuccess: function () {
-                $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call
-            },
-            formatNoMatches: function () {
-                return '{{ trans('table.no_matching_records') }}';
-            }
 
             });
 
