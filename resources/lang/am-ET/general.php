@@ -3,7 +3,7 @@
 return [
     '2FA_reset'             => '2FA reset',
     'accessories'			=> 'መለዋወጫዎች',
-    'activated'			    => 'Activated',
+    'activated'			    => 'ነቅቷል',
     'accepted_date'         => 'የተቀበለበት ቀን',
     'accessory'				=> 'መለዋወጫ',
     'accessory_report'		=> 'የመለዋወጫ ዘገባ',
@@ -55,7 +55,7 @@ return [
     'bystatus'              => 'በሁኔታ',
     'cancel'  				=> 'ተወው',
     'categories'			=> 'ምድብ',
-    'category'				=> 'Category',
+    'category'				=> 'ምድብ',
     'change' 		        => 'In/Out',
     'changeemail'  			=> 'Change Email Address',
     'changepassword'  		=> 'Change Password',
