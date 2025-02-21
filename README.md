@@ -3,9 +3,9 @@
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://app.codacy.com/gh/snipe/snipe-it/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) [![Tests](https://github.com/snipe/snipe-it/actions/workflows/tests.yml/badge.svg)](https://github.com/snipe/snipe-it/actions/workflows/tests.yml)
 [![All Contributors](https://img.shields.io/badge/all_contributors-331-orange.svg?style=flat-square)](#contributing) [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/yZFtShAcKk)
 
-## Fixed Asset and Inventory Management - Open Source Asset Management System
+## Fixed Asset and Inventory Management - Open Source Fixed Asset and Inventory Management System
 
-This is a FOSS project for asset management in any Operations. Knowing who has which laptop,Furniture when it was purchased in order to depreciate it correctly, handling software licenses, etc.
+This is a FOSS project for asset management in any Operations. Knowing who has which laptop,machines, and/or any electronic devices, Furnitures, and other assets when they're purchased in order to depreciate it correctly, handling software licenses, etc.
 
 It is built on [Laravel 10](http://laravel.com).
 
