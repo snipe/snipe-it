@@ -1,35 +1,31 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Language Lines - Afaan Oromoo
+|--------------------------------------------------------------------------
+| Translated by Adugna Gizaw - Snipe IT Localization Partner
+| Contact: gizawadugna@gmail.com | +251925582067
+*/
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reminder Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are the default lines which match reasons
-    | that are given by the password broker for a password update attempt
-    | has failed, such as for an invalid token or invalid new password.
-    |
-    */
+    'more_info_title' => 'Oduu Dabalataa',
 
-    'more_info_title' => 'More Info',
+    'audit_help' => 'Sanduuqa kana filachuun bakka haaraa qabeenya galchuu ni jijjiira. Yoo hin filanne, bakka galmee kuusaa keessatti qofa galmeessina.<br><br>Yaadattaa: Qabeenyi kun yoo kenname ta\'e, bakka namicha, qabeenyaa ykn bakka kennamee hin jijjiiramu.',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'assets' => 'Qabeenyoonni mallattoo qabeenyaa ykn lakkoofsa sirii tiin qoratamu. Waanti guddaa ta\'anii kan maddaaguudhaan adda baafamuu qaban.',
 
-    'assets' => 'Assets are items tracked by serial number or asset tag.  They tend to be higher value items where identifying a specific item matters.',
+    'categories' => 'Gareewwan waantiilee sirreessuu keessan gargaaru. Fakkeenyaaf "Deesktoppii", "Laaptoppii", "Bilbila Mobilaa", "Paajii", akkasumas gareewwan biroo fayyadamuun danda\'ama.',
 
-    'categories' => 'Categories help you organize your items. Some example categories might be &quot;Desktops&quot;, &quot;Laptops&quot;, &quot;Mobile Phones&quot;, &quot;Tablets&quot;, and so on, but you can use categories any way that makes sense for you.',
+    'accessories' => 'Meeshaaleen gargaarsaa waantiilee fayyadamaa irratti kennaman kan lakkoofsa sirii hin qabne ykn adda hin baafatamne. Fakkeenyaaf, xaa\'oota kompiitaraa ykn kibooddoowwan.',
 
-    'accessories' => 'Accessories are anything you issue to users but that do not have a serial number (or you do not care about tracking them uniquely). For example, computer mice or keyboards.',
+    'companies' => 'Dhaabbileen saayinsii ida\'ama ta\'uun ykn Saagiin Hoggantaa keessatti dhaabbilee guutuu deeggaree ta\'e, qabeenyaa, fayyadamootaa fi kkf. irraa fagaachuu ni danda\'u.',
 
-    'companies'     => 'Companies can be used as a simple identifier field, or can be used to limit visibility of assets, users, etc if full company support is enabled in your Admin settings.',
+    'components' => 'Qaamoleen waantiilee qabeenyaa wajjin hirmaatan. Fakkeenyaaf, HDD, RAM, fi kkf.',
 
-    'components'    => 'Components are items that are part of an asset, for example HDD, RAM, etc.',
+    'consumables' => 'Ittisuun waantiilee yeroo dheeraaf itti fayyadamatan. Fakkeenyaaf, dhiiga priinterii ykn xaashiya kopii.',
 
-    'consumables'   => 'Consumables are anything purchased that will be used up over time. For example, printer ink or copier paper.',
-
-    'depreciations' => 'You can set up asset depreciations to depreciate assets based on straight-line depreciation.',
+    'depreciations' => 'Qabeenyaa dhiisuu akkaataa dhiisuu sirrii (straight-line) tiin saagiin dhiisuu ni dandeessu.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file' => 'Socho’aan kun failii duwwaa ta’uu agarsiisa.'
 ];

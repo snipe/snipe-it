@@ -1,22 +1,29 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Language Lines - Afaan Oromoo
+|--------------------------------------------------------------------------
+| Translated by Adugna Gizaw - Snipe IT Localization Partner
+| Contact: gizawadugna@gmail.com | +251925582067
+*/
 
 return array(
 
-    'group_exists'        => 'Group already exists!',
-    'group_not_found'     => 'Group ID :id does not exist.',
-    'group_name_required' => 'The name field is required',
+    'group_exists'        => 'Gareen duraan jira!',
+    'group_not_found'     => 'Gareen ID :id hin argamne.',
+    'group_name_required' => 'Maqaa garee barbaachisaa dha',
 
     'success' => array(
-        'create' => 'Group was successfully created.',
-        'update' => 'Group was successfully updated.',
-        'delete' => 'Group was successfully deleted.',
+        'create' => 'Gareen sirriitti uumame.',
+        'update' => 'Gareen sirriitti haaromsame.',
+        'delete' => 'Gareen sirriitti haqame.',
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this group?',
-        'create' => 'There was an issue creating the group. Please try again.',
-        'update' => 'There was an issue updating the group. Please try again.',
-        'delete' => 'There was an issue deleting the group. Please try again.',
+        'confirm'   => 'Dhugumatti, garee kana haquu barbaaddaa?',
+        'create' => 'Rakkoon uumuu garee dhufee jira. Irra deebi\'aa.',
+        'update' => 'Rakkoon jijjiiraa garee dhufee jira. Irra deebi\'aa.',
+        'delete' => 'Rakkoon haquu garee dhufee jira. Irra deebi\'aa.',
     ),
 
 );
