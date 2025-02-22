@@ -352,6 +352,74 @@ class AssetPresenter extends Presenter
         return json_encode($layout);
     }
 
+
+    public static function assignedAccessoriesDataTableLayout()
+    {
+        $layout = [
+            [
+                'field' => 'id',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.id'),
+                'visible' => false,
+            ],
+            [
+                'field' => 'accessory',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.accessory'),
+                'visible' => true,
+                'formatter' => 'accessoriesLinkObjFormatter',
+            ],
+            [
+                'field' => 'image',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.image'),
+                'visible' => true,
+                'formatter' => 'imageFormatter',
+            ],
+            [
+                'field' => 'note',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.notes'),
+                'visible' => true,
+            ],
+            [
+                'field' => 'created_at',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('admin/hardware/table.checkout_date'),
+                'visible' => true,
+                'formatter' => 'dateDisplayFormatter',
+            ],
+            [
+                'field' => 'created_by',
+                'searchable' => false,
+                'sortable' => false,
+                'title' => trans('general.created_by'),
+                'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
+            ],
+            [
+                'field' => 'available_actions',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('table.actions'),
+                'formatter' => 'accessoriesInOutFormatter',
+            ],
+        ];
+
+        return json_encode($layout);
+    }
+
     /**
      * Generate html link to this items name.
      * @return string
