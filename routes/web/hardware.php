@@ -101,19 +101,24 @@ Route::group(
             [AssetsController::class, 'getLabel']
         )->name('label/hardware');
 
-        Route::get('{asset}/checkout', [AssetCheckoutController::class, 'create'])->name('hardware.checkout.create')
+        Route::get('{asset}/checkout', [AssetCheckoutController::class, 'create'])
+            ->name('hardware.checkout.create')
             ->breadcrumbs(fn (Trail $trail, Asset $asset) =>
             $trail->parent('hardware.show', $asset)
-                ->push(trans('admin/hardware/general.bulk_checkout'), route('hardware.index'))
+                ->push(trans('admin/hardware/general.checkout'), route('hardware.index'))
             );
 
         Route::post('{assetId}/checkout',
             [AssetCheckoutController::class, 'store']
         )->name('hardware.checkout.store');
 
-        Route::get('{assetId}/checkin/{backto?}',
+        Route::get('{asset}/checkin/{backto?}',
             [AssetCheckinController::class, 'create']
-        )->name('hardware.checkin.create');
+        )->name('hardware.checkin.create')
+        ->breadcrumbs(fn (Trail $trail, Asset $asset) =>
+        $trail->parent('hardware.show', $asset)
+            ->push(trans('admin/hardware/general.checkin'), route('hardware.index'))
+        );
 
         Route::post('{assetId}/checkin/{backto?}',
             [AssetCheckinController::class, 'store']

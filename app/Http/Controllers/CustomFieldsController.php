@@ -104,6 +104,8 @@ class CustomFieldsController extends Controller
             "auto_add_to_fieldsets" => $request->get("auto_add_to_fieldsets", 0),
             "show_in_listview" => $request->get("show_in_listview", 0),
             "show_in_requestable_list" => $request->get("show_in_requestable_list", 0),
+            "display_checkin" => $request->get("display_checkin", 0),
+            "display_checkout" => $request->get("display_checkout", 0),
             "created_by" => auth()->id()
         ]);
 
@@ -246,6 +248,8 @@ class CustomFieldsController extends Controller
         $field->auto_add_to_fieldsets = $request->get("auto_add_to_fieldsets", 0);
         $field->show_in_listview = $request->get("show_in_listview", 0);
         $field->show_in_requestable_list = $request->get("show_in_requestable_list", 0);
+        $field->display_checkin = $request->get("display_checkin", 0);
+        $field->display_checkout = $request->get("display_checkout", 0);
 
         if ($request->get('format') == 'CUSTOM REGEX') {
             $field->format = e($request->get('custom_format'));

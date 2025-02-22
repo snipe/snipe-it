@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Show in requestable assets list',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

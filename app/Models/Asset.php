@@ -413,6 +413,17 @@ class Asset extends Depreciable
         return $this->rules;
     }
 
+    public function customFieldsForCheckinCheckout($checkin_checkout) {
+        // Check to see if any of the custom fields were included on the form and if they have any values
+        if (($this->model) && ($this->model->fieldset) && ($this->model->fieldset->fields)) {
+            foreach ($this->model->fieldset->fields as $field) {
+                if (($field->{$checkin_checkout} == 1) && (request()->has($field->db_column))){
+                    $this->{$field->db_column} = request()->get($field->db_column);
+                }
+            }
+        }
+    }
+
 
     /**
      * Establishes the asset -> depreciation relationship

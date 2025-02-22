@@ -53,9 +53,9 @@
                                                         {{ $asset->model->name }}
                                                     @else
                                                         <span class="text-danger text-bold">
-                              <x-icon type="warning" />
-                              {{ trans('admin/hardware/general.model_invalid')}}
-                            </span>
+                                                          <x-icon type="warning" />
+                                                          {{ trans('admin/hardware/general.model_invalid')}}
+                                                        </span>
                                                         {{ trans('admin/hardware/general.model_invalid_fix')}}
                                                         <a href="{{ route('hardware.edit', $asset->id) }}">
                                                             <strong>{{ trans('admin/hardware/general.edit') }}</strong>
@@ -112,6 +112,18 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Custom fields -->
+                                        @include("models/custom_fields_form", [
+                                                'model' => $asset->model,
+                                                'show_display_checkin_fields' => 'true'
+                                        ])
+
+
+
+
+
+
 
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">

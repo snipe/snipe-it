@@ -830,7 +830,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
 
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12" style="margin-bottom: 0px;">
 
                         <style>
                             .breadcrumb-item {
@@ -839,7 +839,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             }
                         </style>
 
-                            <h1 class="pull-left pagetitle" style="font-size: 22px; margin-top: 10px;">
+                            <h1 class="pull-left pagetitle" style="font-size: 22px; margin-top: 5px;">
 
                                 @if (Breadcrumbs::has() && (Breadcrumbs::current()->count() > 1))
                                     <ul style="padding-left: 0;">
@@ -891,7 +891,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 </section>
 
 
-                <section class="content" id="main" tabindex="-1">
+                <section class="content" id="main" tabindex="-1" style="padding-top: 0px;">
 
                     <!-- Notifications -->
                     <div class="row">
