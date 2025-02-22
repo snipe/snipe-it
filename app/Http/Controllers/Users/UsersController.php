@@ -333,13 +333,6 @@ class UsersController extends Controller
             $this->authorize('delete', $user);
 
             if ($user->delete()) {
-                if (Storage::disk('public')->exists('avatars/' . $user->avatar)) {
-                    try {
-                        Storage::disk('public')->delete('avatars/' . $user->avatar);
-                    } catch (\Exception $e) {
-                        Log::debug($e);
-                    }
-                }
                 return redirect()->route('users.index')->with('success', trans('admin/users/message.success.delete'));
             }
         }
