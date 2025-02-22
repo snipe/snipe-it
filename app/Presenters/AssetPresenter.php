@@ -21,7 +21,7 @@ class AssetPresenter extends Presenter
             [
                 'field' => 'checkbox',
                 'checkbox' => true,
-                'titleTooltip' => 'Toggle Select All' //FIXME - translate.
+                'titleTooltip' => trans('general.select_all_none'),
             ], [
                 'field' => 'id',
                 'searchable' => false,
