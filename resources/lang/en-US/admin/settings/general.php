@@ -378,6 +378,8 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'checkin_notification_user' => 'Checkin Notification for User',
+    'checkin_notification_user_help' => 'Send an E-Mail to the User when an asset check-in is expected or overdue.',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
     'default_avatar' => 'Upload custom default avatar',

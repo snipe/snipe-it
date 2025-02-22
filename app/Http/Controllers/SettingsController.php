@@ -324,6 +324,7 @@ class SettingsController extends Controller
         $setting->email_format = $request->input('email_format');
         $setting->username_format = $request->input('username_format');
         $setting->require_accept_signature = $request->input('require_accept_signature');
+        $setting->checkin_notification_user = $request->input('checkin_notification_user', '1');
         $setting->show_assigned_assets = $request->input('show_assigned_assets', '0');
         if (! config('app.lock_passwords')) {
             $setting->login_note = $request->input('login_note');
