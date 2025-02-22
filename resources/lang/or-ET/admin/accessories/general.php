@@ -1,22 +1,28 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Language Lines - Afaan Oromoo
+|--------------------------------------------------------------------------
+| Translated by Adugna Gizaw - Snipe IT Localization Partner
+| Contact: gizawadugna@gmail.com | +251925582067
+*/
 
 return array(
-    'accessory_category' 				=> 'Accessory Category',
-    'accessory_name'  					=> 'Accessory Name',
-    'checkout'  							=> 'Checkout Accessory',
-    'checkin'  							=> 'Checkin Accessory',
-    'create'  							=> 'Create Accessory',
-    'edit'  							=> 'Edit Accessory',
-    'eula_text'							=> 'Category EULA',
-    'eula_text_help'					=> 'This field allows you to customize your EULAs for specific types of assets. If you only have one EULA for all of your assets, you can check the box below to use the primary default.',
-    'require_acceptance'				=> 'Require users to confirm acceptance of assets in this category.',
-    'no_default_eula'					=> 'No primary default EULA found. Add one in Settings.',
-    'total'  							=> 'Total',
-    'remaining'  						=> 'Avail',
-    'update'  							=> 'Update Accessory',
-    'use_default_eula'					=> 'Use the <a href="#" data-toggle="modal" data-target="#eulaModal">primary default EULA</a> instead.',
-    'use_default_eula_disabled'			=> '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
-    'clone'                             => 'Clone Accessory',
-    'delete_disabled'                   => 'This accessory cannot be deleted yet because some items are still checked out.',
-
+    'accessory_category'               => 'Garee Meeshaa Gargaarsaa',
+    'accessory_name'                  => 'Maqaa Meeshaa Gargaarsaa',
+    'checkout'                        => 'Baasi',
+    'checkin'                         => 'Galchi',
+    'create'                          => 'Uumi',
+    'edit'                            => 'Jijjiiri',
+    'eula_text'                       => 'EULA Garee',
+    'eula_text_help'                  => 'Kun EULA gara garee qabeenyaa tiif jijjiiraa. Yoo EULA tokkicha qabdan, sanduuqa gadiitti filadhu.',
+    'require_acceptance'              => 'Fayyadamoonni fudhachuu ragoomsuu qabu',
+    'no_default_eula'                 => 'EULA Dhaabbataa Hin Argamne. Sirreessa irratti dabali.',
+    'total'                           => 'Waliigala',
+    'remaining'                       => 'Haftee',
+    'update'                          => 'Meeshaa Gargaarsaa Haaressuu',
+    'use_default_eula'                => '<a href="#" data-toggle="modal" data-target="#eulaModal">EULA Dhaabbataa</a> fayyadami',
+    'use_default_eula_disabled'       => '<del>EULA Dhaabbataa fayyadami</del> EULA Dhaabbataa hin jiru. Settings irratti dabalchi.',
+    'clone'                           => 'Kloonii Meeshaa Gargaarsaa',
+    'delete_disabled'                 => 'Meeshaan kana yeroo ammaatti haquu hindanda’amu, sababni isaa meeshaan baasii tahee jira.',
 );
