@@ -87,9 +87,9 @@ class AuthServiceProvider extends ServiceProvider
         ]);
 
         $this->registerPolicies();
-        Passport::tokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
-        Passport::refreshTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
-        Passport::personalAccessTokensExpireIn(Carbon::now()->addYears(config('passport.expiration_years')));
+        Passport::tokensExpireIn(Carbon::now()->addYears((int)config('passport.expiration_years')));
+        Passport::refreshTokensExpireIn(Carbon::now()->addYears((int)config('passport.expiration_years')));
+        Passport::personalAccessTokensExpireIn(Carbon::now()->addYears((int)config('passport.expiration_years')));
 
         Passport::cookie(config('passport.cookie_name'));
 
