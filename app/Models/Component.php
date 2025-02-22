@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Companyable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -18,7 +19,7 @@ class Component extends SnipeModel
     use HasFactory;
 
     protected $presenter = \App\Presenters\ComponentPresenter::class;
-    use CompanyableTrait;
+    use Companyable;
     use Loggable, Presentable;
     use SoftDeletes;
     protected $casts = [
@@ -234,7 +235,7 @@ class Component extends SnipeModel
         // In case there are elements checked out to assets that belong to a different company
         // than this asset and full multiple company support is on we'll remove the global scope,
         // so they are included in the count.
-        foreach ($this->assets()->withoutGlobalScope(new CompanyableScope)->get() as $checkout) {
+        foreach ($this->assets()->withoutGlobalScope('companyable')->get() as $checkout) {
             $checkedout += $checkout->pivot->assigned_qty;
         }
 

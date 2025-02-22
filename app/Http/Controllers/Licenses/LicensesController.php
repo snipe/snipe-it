@@ -308,8 +308,8 @@ class LicensesController extends Controller
                           'supplier',
                           'adminuser',
                           'assignedusers')
-                          ->orderBy('created_at', 'DESC');
-            Company::scopeCompanyables($licenses)
+                ->orderBy('created_at', 'DESC') //;
+                //Company::scopeCompanyables($licenses)
                 ->chunk(500, function ($licenses) use ($handle) {
                     $headers = [
                         // strtolower to prevent Excel from trying to open it as a SYLK file

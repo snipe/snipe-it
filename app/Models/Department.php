@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Traits\Companyable;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Watson\Validating\ValidatingTrait;
 
 class Department extends SnipeModel
 {
-    use CompanyableTrait;
+    use Companyable;
     use HasFactory;
 
     /**

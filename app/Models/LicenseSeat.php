@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\CompanyableChild;
 use App\Notifications\CheckinLicenseNotification;
 use App\Notifications\CheckoutLicenseNotification;
 use App\Presenters\Presentable;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LicenseSeat extends SnipeModel implements ICompanyableChild
 {
-    use CompanyableChildTrait;
+    use CompanyableChild;
     use HasFactory;
     use Loggable;
     use SoftDeletes;

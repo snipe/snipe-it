@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Companyable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Actionlog extends SnipeModel
 {
-    use CompanyableTrait;
+    use Companyable;
     use HasFactory;
 
     // This is to manually set the source (via setActionSource()) for determineActionSource()

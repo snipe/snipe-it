@@ -4,28 +4,22 @@ namespace App\Models;
 
 use App\Helpers\Helper;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Companyable;
 use App\Models\Traits\Searchable;
+use App\Presenters\ConsumablePresenter;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use App\Presenters\ConsumablePresenter;
-use App\Models\Actionlog;
-use App\Models\ConsumableAssignment;
-use App\Models\User;
-use App\Models\Location;
-use App\Models\Manufacturer;
-use App\Models\Supplier;
-use App\Models\Category;
 
 class Consumable extends SnipeModel
 {
     use HasFactory;
 
     protected $presenter = ConsumablePresenter::class;
-    use CompanyableTrait;
+    use Companyable;
     use Loggable, Presentable;
     use SoftDeletes;
     use Acceptable;
