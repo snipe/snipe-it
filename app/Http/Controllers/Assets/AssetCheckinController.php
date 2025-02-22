@@ -27,18 +27,12 @@ class AssetCheckinController extends Controller
      * @param string $backto
      * @since [v1.0]
      */
-    public function create($assetId, $backto = null) : View | RedirectResponse
+    public function create(Asset $asset, $backto = null) : View | RedirectResponse
     {
-        // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
-            // Redirect to the asset management page with error
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
 
         $this->authorize('checkin', $asset);
 
         // This asset is already checked in, redirect
-        
         if (is_null($asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
@@ -47,7 +41,11 @@ class AssetCheckinController extends Controller
             return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
 
-        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto)->with('table_name', 'Assets');
+        return view('hardware/checkin', compact('asset'))
+            ->with('item', $asset)
+            ->with('statusLabel_list', Helper::statusLabelList())
+            ->with('backto', $backto)
+            ->with('table_name', 'Assets');
     }
 
     /**
@@ -91,6 +89,17 @@ class AssetCheckinController extends Controller
             $asset->status_id = e($request->get('status_id'));
         }
 
+        // Check to see if any of the custom fields were included on the form and if they have any values
+        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields)) {
+            foreach ($asset->model->fieldset->fields as $field) {
+                if ($field->display_checkin == 1) {
+                    if ($request->has($field->db_column)) {
+                        $asset->{$field->db_column} = $request->get($field->db_column);
+                    }
+                }
+            }
+        }
+
         $this->migrateLegacyLocations($asset);
 
         $asset->location_id = $asset->rtd_location_id;
@@ -127,6 +136,16 @@ class AssetCheckinController extends Controller
         });
 
         session()->put('redirect_option', $request->get('redirect_option'));
+        // Check to see if any of the custom fields were included on the form and if they have any values
+        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields)) {
+            foreach ($asset->model->fieldset->fields as $field) {
+                if ($field->display_checkin == 1) {
+                    if ($request->filled($field->db_column)) {
+                        $asset->{$field->db_column} = $request->get($field->db_column);
+                    }
+                }
+            }
+        }
 
         if ($asset->save()) {
 
