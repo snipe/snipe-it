@@ -136,6 +136,26 @@
                             </div>
                         </div>
 
+                        <!-- Custom fields -->
+                        @can('assets.edit')
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"></label>
+                                <div class="col-md-9 col-sm-9 col-md-offset-3">
+                                    <a id="optional_info" class="dropdown-toggle">
+                                        <i class="fa fa-2x fa-caret-right" id="optional_info_icon"></i>
+                                        <strong>{{ trans('admin/custom_fields/general.custom_fields') }}</strong>
+                                    </a>
+                                </div>
+                                <div class="col-md-12">
+                                    <ul class="treeview-menu" style="display: none; padding-top: 10px;" id="optional_details">
+                                        <li>
+                                            @include("models/custom_fields_form",["model" => $asset->model, "item"=>$asset])
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        @endcan
+
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                             <label for="note" class="col-md-3 control-label">
@@ -221,4 +241,26 @@
 
 
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#optional_info").on("click", function () {
+                $('#optional_details').fadeToggle(100);
+                $('#optional_info_icon').toggleClass('fa-caret-right fa-caret-down');
+                var optional_info_open = $('#optional_info_icon').hasClass('fa-caret-down');
+                document.cookie = "optional_info_open=" + optional_info_open + '; path=/';
+            });
+            var all_cookies = document.cookie.split(';')
+            for (var i in all_cookies) {
+                var trimmed_cookie = all_cookies[i].trim(' ')
+                if (trimmed_cookie.startsWith('optional_info_open=')) {
+                    elems = all_cookies[i].split('=', 2)
+                    if (elems[1] == 'true') {
+                        $('#optional_info').trigger('click')
+                    }
+                }
+            }
+        });
+    </script>
+
 @stop

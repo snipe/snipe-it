@@ -97,6 +97,26 @@ class AssetCheckoutController extends Controller
                 }
             }
 
+            if (($asset->model->fieldset)) {
+                foreach ($asset->model->fieldset->fields as $field) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('admin')) {
+                            if (is_array($request->input($field->db_column))) {
+                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            } else {
+                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            }
+                        }
+                    } else {
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        } else {
+                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
+                    }
+                }
+            }
+
             $settings = \App\Models\Setting::getSettings();
 
             // We have to check whether $target->company_id is null here since locations don't have a company yet

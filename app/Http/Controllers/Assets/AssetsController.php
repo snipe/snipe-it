@@ -929,7 +929,7 @@ class AssetsController extends Controller
         if ($request->input('update_location') == '1') {
             $asset->location_id = $request->input('location_id');
         }
-        
+
 
         /**
          * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
