@@ -25,7 +25,8 @@ class DepreciationFactory extends Factory
         return [
             'name' => $this->faker->unique()->catchPhrase(),
             'created_by' => User::factory()->superuser(),
-            'months' => 36,
+            'term_length' => 365,
+            'term_type' => 'days',
         ];
     }
 
@@ -34,7 +35,8 @@ class DepreciationFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Computer Depreciation',
-                'months' => 36,
+                'term_length' => 36,
+                'term_type' => 'months',
             ];
         });
     }
@@ -44,7 +46,8 @@ class DepreciationFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Display Depreciation',
-                'months' => 12,
+                'term_length' => 36,
+                'term_type' => 'months',
             ];
         });
     }
@@ -54,7 +57,8 @@ class DepreciationFactory extends Factory
         return $this->state(function () {
             return [
                 'name' => 'Mobile Phone Depreciation',
-                'months' => 24,
+                'term_length' => 365,
+                'term_type' => 'days',
             ];
         });
     }

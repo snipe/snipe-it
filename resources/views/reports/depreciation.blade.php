@@ -14,7 +14,6 @@
     <div class="box box-default">
       <div class="box-body">
 
-
           @if (($depreciations) && ($depreciations->count() > 0))
                   <table
                         data-cookie-id-table="depreciationReport"
