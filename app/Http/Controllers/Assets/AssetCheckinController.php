@@ -89,16 +89,8 @@ class AssetCheckinController extends Controller
             $asset->status_id = e($request->get('status_id'));
         }
 
-        // Check to see if any of the custom fields were included on the form and if they have any values
-        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields)) {
-            foreach ($asset->model->fieldset->fields as $field) {
-                if ($field->display_checkin == 1) {
-                    if ($request->has($field->db_column)) {
-                        $asset->{$field->db_column} = $request->get($field->db_column);
-                    }
-                }
-            }
-        }
+        // Add any custom fields that should be included in the checkout
+        $asset->customFieldsForCheckinCheckout('display_checkin');
 
         $this->migrateLegacyLocations($asset);
 
@@ -136,16 +128,9 @@ class AssetCheckinController extends Controller
         });
 
         session()->put('redirect_option', $request->get('redirect_option'));
-        // Check to see if any of the custom fields were included on the form and if they have any values
-        if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields)) {
-            foreach ($asset->model->fieldset->fields as $field) {
-                if ($field->display_checkin == 1) {
-                    if ($request->filled($field->db_column)) {
-                        $asset->{$field->db_column} = $request->get($field->db_column);
-                    }
-                }
-            }
-        }
+
+        // Add any custom fields that should be included in the checkout
+        $asset->customFieldsForCheckinCheckout('display_checkin');
 
         if ($asset->save()) {
 

@@ -99,17 +99,8 @@ class AssetCheckoutController extends Controller
                 }
             }
 
-            // Check to see if any of the custom fields were included on the form and if they have any values
-            if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields)) {
-                foreach ($asset->model->fieldset->fields as $field) {
-                    if ($field->display_checkout == 1) {
-                        if ($request->has($field->db_column)) {
-                            $asset->{$field->db_column} = $request->get($field->db_column);
-                        }
-                    }
-                }
-            }
-
+            // Add any custom fields that should be included in the checkout
+            $asset->customFieldsForCheckinCheckout('display_checkout');
 
             $settings = \App\Models\Setting::getSettings();
 
