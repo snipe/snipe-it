@@ -1,21 +1,17 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Language Lines - Afaan Oromoo
+|--------------------------------------------------------------------------
+| Translated by Adugna Gizaw - Snipe IT Localization Partner
+| Contact: gizawadugna@gmail.com | +251925582067
+*/
 
 return array(
 
-    /*
-    |--------------------------------------------------------------------------
-    | Password Reminder Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are the default lines which match reasons
-    | that are given by the password broker for a password update attempt
-    | has failed, such as for an invalid token or invalid new password.
-    |
-    */
-
-    "password" => "Passwords must be six characters and match the confirmation.",
-    "user"     => "Username or email address is incorrect",
-    "token"    => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'sent'	   => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
+    "password" => "Jecha darbiin jakkoota 6 ta'uu qaba fi mirkaneessicha waliin walqabata.",
+    "user"     => "Maqaa fayyadamaa ykn imeelii sirrii miti",
+    "token"    => 'Tokeni jecha darbii kun hin danda'amne, yeroo isaa dhumee ykn maqaa waliin wal hin qabne.',
+    'sent'     => 'Yoo fayyadamaa imeelii sirrii qabu jiraate, emaili jecha darbii deebisuu ergifame.',
 
 );
