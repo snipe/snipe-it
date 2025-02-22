@@ -16,7 +16,7 @@ class NotesController extends Controller
 
         $validated = $request->validate([
             'id' => 'required',
-            'note' => 'required|string|max:500',
+            'note' => 'required|string|max:50000',
             'type' => [
                 'required',
                 Rule::in(['asset']),
