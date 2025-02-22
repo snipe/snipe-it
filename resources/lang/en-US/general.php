@@ -594,6 +594,7 @@ return [
         'checkin_item' => 'Checkin :name',
     ],
 
+    'select_all_none' => 'Select/Unselect All',
     'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
 
 ];
