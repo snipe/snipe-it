@@ -1,43 +1,49 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Language Lines - Afaan Oromoo
+|--------------------------------------------------------------------------
+| Translated by Adugna Gizaw - Snipe IT Localization Partner
+| Contact: gizawadugna@gmail.com | +251925582067
+*/
 
 return array(
 
-    'does_not_exist' => 'The accessory [:id] does not exist.',
-    'not_found' => 'That accessory was not found.',
-    'assoc_users'	 => 'This accessory currently has :count items checked out to users. Please check in the accessories and and try again. ',
+    'does_not_exist' => 'Meeshaa Gargaarsaa [:id] hin jiru.',
+    'not_found' => 'Meeshaa Gargaarsaa sana hin argamne.',
+    'assoc_users'	 => 'Meeshaan kun fayyadamoota :count irratti kenname jira. Galchuu itti fufuuf dura galchaa.',
 
     'create' => array(
-        'error'   => 'The accessory was not created, please try again.',
-        'success' => 'The accessory was successfully created.'
+        'error'   => 'Meeshaan Gargaarsaa hin uumamne, irra deebi\'aa',
+        'success' => 'Meeshaa Gargaarsaa sirriitti uumame'
     ),
 
     'update' => array(
-        'error'   => 'The accessory was not updated, please try again',
-        'success' => 'The accessory was updated successfully.'
+        'error'   => 'Meeshaan Gargaarsaa hin jijjiiramne, irra deebi\'aa',
+        'success' => 'Meeshaa Gargaarsaa sirriitti haaromsame'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this accessory?',
-        'error'   => 'There was an issue deleting the accessory. Please try again.',
-        'success' => 'The accessory was deleted successfully.'
+        'confirm'   => 'Meeshaa Gargaarsaa kana haquu dhugummaa?',
+        'error'   => 'Rakkoon haquu dhufee jira. Irra deebi\'aa.',
+        'success' => 'Meeshaa Gargaarsaa sirriitti haqame'
     ),
 
      'checkout' => array(
-        'error'   		=> 'Accessory was not checked out, please try again',
-        'success' 		=> 'Accessory checked out successfully.',
-        'unavailable'   => 'Accessory is not available for checkout. Check quantity available',
-        'user_does_not_exist' => 'That user is invalid. Please try again.',
+        'error'   		=> 'Baasii hin taane, irra deebi\'aa',
+        'success' 		=> 'Kenniinsi Meeshaa Gargaarsaa sirriitti milkaa\'e',
+        'unavailable'   => 'Meeshaan kan kennuun hin danda\'amu. Qabiyyeessaa ilaali',
+        'user_does_not_exist' => 'Fayyadamaa sirrii miti. Irra deebi\'aa.',
          'checkout_qty' => array(
-            'lte'  => 'There is currently only one available accessory of this type, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.|There are :number_currently_remaining total available accessories, and you are trying to check out :checkout_qty. Please adjust the checkout quantity or the total stock of this accessory and try again.',
+            'lte'  => 'Meeshaa Gargaarsaa tokko qofa argama. Baasii :checkout_qty feeta? Qabiyyeessaa ykn meeshaa dabalchi.|Meeshaa Gargaarsaa :number_currently_remaining qofa argama. Baasii :checkout_qty feeta? Qabiyyeessaa jijjiiraa.',
             ),
            
     ),
 
     'checkin' => array(
-        'error'   		=> 'Accessory was not checked in, please try again',
-        'success' 		=> 'Accessory checked in successfully.',
-        'user_does_not_exist' => 'That user is invalid. Please try again.'
+        'error'   		=> 'Dogoggora, irra deebi\'aa',
+        'success' 		=> 'Meeshaa Gargaarsaa sirriitti galmaa\'eera',
+        'user_does_not_exist' => 'Fayyadamaa sirrii miti. Irra deebi\'aa.'
     )
-
 
 );
