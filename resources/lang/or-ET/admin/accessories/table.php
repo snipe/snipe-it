@@ -1,9 +1,16 @@
 <?php
+/*
+|--------------------------------------------------------------------------
+| Language Lines - Afaan Oromoo
+|--------------------------------------------------------------------------
+| Translated by Adugna Gizaw - Snipe IT Localization Partner
+| Contact: gizawadugna@gmail.com | +251925582067
+*/
 
 return array(
-	'dl_csv'      				=> 'Download CSV',
-	'eula_text'      			=> 'EULA',
-    'id'      					=> 'ID',
-    'require_acceptance'      	=> 'Acceptance',
-    'title'      				=> 'Accessory Name',
+    'dl_csv'                => 'CSV gadi buusi',
+    'eula_text'             => 'EULA',
+    'id'                    => 'ID',
+    'require_acceptance'    => 'Simannaa Gaafata',
+    'title'                 => 'Maqaa',
 );
