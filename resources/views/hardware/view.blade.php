@@ -77,12 +77,29 @@
                           <span class="hidden-lg hidden-md">
                             <x-icon type="assets" class="fa-2x" />
                           </span>
-                            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
+                            <span class="hidden-xs hidden-sm">
+                                {{ trans('general.assets') }}
                                 {!! ($asset->assignedAssets()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->assignedAssets()->count()).'</span>' : '' !!}
 
                           </span>
                         </a>
                     </li>
+
+                    @if ($asset->assignedAccessories->count() > 0)
+                        <li>
+                            <a href="#accessories_assigned" data-toggle="tab" data-tooltip="true">
+
+                                <span class="hidden-lg hidden-md">
+                                    <i class="fas fa-keyboard fa-2x"></i>
+                                </span>
+                                <span class="hidden-xs hidden-sm">
+                                    {{ trans('general.accessories_assigned') }}
+                                    {!! ($asset->assignedAccessories()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->assignedAccessories()->count()).'</span>' : '' !!}
+
+                                </span>
+                            </a>
+                        </li>
+                    @endif
 
 
                     <li>
@@ -1292,6 +1309,40 @@
                             </div><!-- /col -->
                         </div> <!-- row -->
                     </div> <!-- /.tab-pane software -->
+
+
+                <div class="tab-pane" id="accessories_assigned">
+
+
+                    <div class="table table-responsive">
+
+                        <h2 class="box-title" style="float:left">
+                            {{ trans('general.accessories_assigned') }}
+                        </h2>
+
+                        <table
+                                data-columns="{{ \App\Presenters\AssetPresenter::assignedAccessoriesDataTableLayout() }}"
+                                data-cookie-id-table="accessoriesAssignedListingTable"
+                                data-pagination="true"
+                                data-id-table="accessoriesAssignedListingTable"
+                                data-search="true"
+                                data-side-pagination="server"
+                                data-show-columns="true"
+                                data-show-export="true"
+                                data-show-refresh="true"
+                                data-sort-order="asc"
+                                data-click-to-select="true"
+                                id="accessoriesAssignedListingTable"
+                                class="table table-striped snipe-table"
+                                data-url="{{ route('api.assets.assigned_accessories', ['asset' => $asset]) }}"
+                                data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($asset->name) }}-accessories-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                        </table>
+
+                    </div><!-- /.table-responsive -->
+                </div><!-- /.tab-pane -->
 
 
                     <div class="tab-pane fade" id="maintenances">
