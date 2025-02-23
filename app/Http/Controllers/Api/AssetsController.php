@@ -559,7 +559,7 @@ class AssetsController extends Controller
         ])->with('model', 'assetstatus', 'assignedTo')
             ->NotArchived();
 
-        if ($request->filled('companyId')) {
+        if ((Setting::getSettings()->full_multiple_companies_support=='1') &&  ($request->filled('companyId'))) {
             $assets->where('company_id', $request->input('companyId'));
         }
 
