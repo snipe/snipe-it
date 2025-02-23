@@ -47,7 +47,7 @@
         "jquery-validation": "^1.21.0",
         "jquery.iframe-transport": "^1.0.0",
         "jspdf-autotable": "^3.8.4",
-        "less": "^4.2.1",
+        "less": "^4.2.2",
         "less-loader": "^6.0",
         "list.js": "^1.5.0",
         "morris.js": "github:morrisjs/morris.js",
