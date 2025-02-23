@@ -48,8 +48,6 @@ class DeleteComponentTest extends TestCase implements TestsFullMultipleCompanies
             ->delete(route('components.destroy', $component->id))
             ->assertSessionHas('error')
             ->assertRedirect(route('components.index'));
-
-        $this->assertSoftDeleted($component);
     }
 
     public function testDeletingComponentRemovesComponentImage()
