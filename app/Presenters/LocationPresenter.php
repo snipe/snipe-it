@@ -102,13 +102,13 @@ class LocationPresenter extends Presenter
                 'titleTooltip' =>  trans('general.people'),
                 'visible' => true,
                 'class' => 'css-house-user',
-                // 'data-tooltip' => true, - not working, but I want to try to use regular tooltips here
             ], [
                 'field' => 'currency',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('general.currency'),
+                'title' =>  trans('general.currency_text'),
+                'titleTooltip' =>  trans('general.currency_text'),
                 'visible' => true,
                 'class' => 'css-currency',
             ], [
