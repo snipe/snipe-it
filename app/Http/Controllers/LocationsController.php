@@ -266,7 +266,6 @@ class LocationsController extends Controller
                 return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.location')]));
             }
 
-            $location->setLogMessage(ActionType::Restore);
             if ($location->restore()) {
 
                 return redirect()->route('locations.index')->with('success', trans('admin/locations/message.restore.success'));

@@ -217,7 +217,6 @@ class ManufacturersController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('error', trans('general.not_deleted', ['item_type' => trans('general.manufacturer')])), 200);
             }
 
-            $manufacturer->setLogMessage('restore');
             if ($manufacturer->restore()) {
                 
                 return response()->json(Helper::formatStandardApiResponse('success', trans('admin/manufacturers/message.restore.success')), 200);

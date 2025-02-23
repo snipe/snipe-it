@@ -195,7 +195,6 @@ class ManufacturersController extends Controller
                 return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.manufacturer')]));
             }
 
-            $manufacturer->setLogMessage(ActionType::Restore);
             if ($manufacturer->restore()) {
 
                 // Redirect them to the deleted page if there are more, otherwise the section index

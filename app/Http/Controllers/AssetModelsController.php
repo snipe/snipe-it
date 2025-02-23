@@ -225,7 +225,6 @@ class AssetModelsController extends Controller
                 return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.asset_model')]));
             }
 
-            $model->setLogMessage(ActionType::Restore);
             if ($model->restore()) {
 
                 // Redirect them to the deleted page if there are more, otherwise the section index
