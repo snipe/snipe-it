@@ -88,6 +88,7 @@ return [
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Updated at',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'Current',
     'current_password'      => 'Current Password',
     'customize_report'      => 'Customize Report',
