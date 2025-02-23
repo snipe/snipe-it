@@ -196,6 +196,10 @@ class ComponentsController extends Controller
             }
         }
 
+        if ($component->numCheckedOut() > 0) {
+            return redirect()->route('components.index')->with('error', trans('admin/components/message.delete.error_qty'));
+        }
+
         $component->delete();
 
         return redirect()->route('components.index')->with('success', trans('admin/components/message.delete.success'));
