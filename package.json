@@ -51,7 +51,7 @@
         "less-loader": "^6.0",
         "list.js": "^1.5.0",
         "morris.js": "github:morrisjs/morris.js",
-        "papaparse": "5.5.1",
+        "papaparse": "5.5.2",
         "select2": "4.0.13",
         "sheetjs": "^2.0.0",
         "signature_pad": "^4.2.0",
