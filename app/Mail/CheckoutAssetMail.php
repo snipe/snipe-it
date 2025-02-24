@@ -118,6 +118,6 @@ class CheckoutAssetMail extends Mailable
             return trans('mail.Asset_Checkout_Notification');
         }
 
-        return trans('mail.Asset_Checkout_Reminder_Notification');
+        return trans('mail.unaccepted_asset_reminder');
     }
 }
