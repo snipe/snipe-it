@@ -1440,21 +1440,23 @@
                         </div> <!-- /.row -->
                     </div> <!-- /.tab-pane files -->
 
-                    @can('view', $asset->model)
-                    <div class="tab-pane fade" id="modelfiles">
-                        <div class="row{{ (($asset->model) && ($asset->model->uploads->count() > 0)) ? '' : ' hidden-print' }}">
-                            <div class="col-md-12">
+                    @if ($asset->model)
+                        @can('view', $asset->model)
+                            <div class="tab-pane fade" id="modelfiles">
+                                <div class="row{{ (($asset->model) && ($asset->model->uploads->count() > 0)) ? '' : ' hidden-print' }}">
+                                    <div class="col-md-12">
 
-                                <x-filestable
-                                        filepath="private_uploads/assetmodels/"
-                                        showfile_routename="show/modelfile"
-                                        deletefile_routename="delete/modelfile"
-                                        :object="$asset->model" />
+                                        <x-filestable
+                                                filepath="private_uploads/assetmodels/"
+                                                showfile_routename="show/modelfile"
+                                                deletefile_routename="delete/modelfile"
+                                                :object="$asset->model" />
 
-                            </div> <!-- /.col-md-12 -->
-                        </div> <!-- /.row -->
-                    </div> <!-- /.tab-pane files -->
-                    @endcan
+                                    </div> <!-- /.col-md-12 -->
+                                </div> <!-- /.row -->
+                            </div> <!-- /.tab-pane files -->
+                        @endcan
+                    @endif
             </div><!-- /.tab-content -->
         </div><!-- nav-tabs-custom -->
     </div>
