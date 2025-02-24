@@ -40,7 +40,6 @@ autoconf \
 libc-dev \
 libldap-common \
 pkg-config \
-libmcrypt-dev \
 php8.3-dev \
 ca-certificates \
 unzip \
@@ -51,11 +50,6 @@ dnsutils \
 RUN curl -L -O https://github.com/pear/pearweb_phars/raw/master/go-pear.phar
 RUN php go-pear.phar
 
-RUN pecl install mcrypt
-
-RUN bash -c "echo extension=/usr/lib/php/20210902/mcrypt.so > /etc/php/8.3/mods-available/mcrypt.ini"
-
-RUN phpenmod mcrypt
 RUN phpenmod gd
 RUN phpenmod bcmath
 
