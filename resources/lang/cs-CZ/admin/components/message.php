@@ -17,7 +17,8 @@ return array(
     'delete' => array(
         'confirm'   => 'Opravdu si přejete odstranit tento díl?',
         'error'   => 'Nepodařilo se díl odstranit. Zkuste to prosím později.',
-        'success' => 'Díl byl v pořádku odstraněn.'
+        'success' => 'Díl byl v pořádku odstraněn.',
+        'error_qty'   => 'Some components of this type are still checked out. Please check them in and try again.',
     ),
 
      'checkout' => array(

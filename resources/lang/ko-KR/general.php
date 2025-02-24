@@ -10,7 +10,7 @@ return [
     'action'                => '작업',
     'activity_report'		=> '활동 보고서',
     'address'				=> '주소',
-    'admin'					=> '관리자',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> '현재 사용자는 어드민 권한을 가지고 있습니다.',
     'superuser'				=> '슈퍼유저',
     'superuser_tooltip'		=> '현재 사용자는 슈퍼유저 권한을 가지고 있습니다.',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> '사용 가능한 자산',
     'accept_assets'         => '승인된 자산 :name',
     'accept_assets_menu'    => '승인된 자산',
+    'accept_item'           => 'Accept Item',
     'audit'				    => '감사',
     'audit_report'			=> '감사 기록',
     'assets'				=> '자산',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> '레코드 생성',
     'updated_at' 			=> '업데이트',
     'currency'  			=> '원', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> '현재',
     'current_password'      => 'Current Password',
     'customize_report'      => 'Customize Report',
     'custom_report'         => '맞춤형 자산 보고서',
     'dashboard'				=> '대시보드',
+    'data_source'           => 'Data Source',
     'days'      			=> '일자',
     'days_to_next_audit'    => '다음 감사까지의 일자',
     'date'					=> '날짜',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => '이름 성 (jane.smith@example.com)',
     'lastnamefirstinitial_format' =>  '성 (姓)의 첫 이니셜 (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'First Initial Last Name (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'First Name Last Name (Jane Smith)',
     'lastname_firstname_display'	=> 'Last Name First Name (Smith Jane)',
     'name_display_format'	=> 'Name Display Format',
@@ -217,6 +221,8 @@ return [
     'no'  					=> '아니오',
     'notes'  				=> '비고',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => '폼의 세션이 끝났습니다. 다시 시도해 주세요.',
     'login_enabled'         => '로그인 활성화됨',
     'audit_due'             => 'Due for Audit',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Overdue for Audit',
     'accept'                => '허가됨 :asset',
     'i_accept'              => '동의합니다',
@@ -561,6 +567,7 @@ return [
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
     ],
+
     'more_info' => '자세한 정보',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +583,21 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

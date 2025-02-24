@@ -10,7 +10,7 @@ return [
     'action'                => 'Ficil',
     'activity_report'		=> 'Warbixinta Dhaqdhaqaaqa',
     'address'				=> 'Cinwaanka',
-    'admin'					=> 'Masuul',
+    'admin'					=> 'Dejinta maamulka',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Hanti la heli karo',
     'accept_assets'         => 'Aqbal hantida :name',
     'accept_assets_menu'    => 'Aqbal Hantida',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Hantidhawrka',
     'audit_report'			=> 'Diiwaanka Hanti-dhawrka',
     'assets'				=> 'Hantida',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'Diiwaanka la sameeyay',
     'updated_at' 			=> 'La cusboonaysiiyay',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Lacagta', //
     'current'  				=> 'Hadda',
     'current_password'      => 'Magaca Sirta Hadda',
     'customize_report'      => 'Habbee Warbixinta',
     'custom_report'         => 'Warbixinta Hantida Gaarka ah',
     'dashboard'				=> 'Dashboard-ka',
+    'data_source'           => 'Data Source',
     'days'      			=> 'maalmo',
     'days_to_next_audit'    => 'Maalmo ku xiga Hanti-dhawrka',
     'date'					=> 'Taariikhda',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Magaca Hore Magaca Dambe (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Magaca Dambe ee Hore (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Magaca Dambe ee Koowaad (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Magaca Hore Magaca Dambe (Jane Smith)',
     'lastname_firstname_display'	=> 'Magaca Dambe Magaca Hore (Smith Jane)',
     'name_display_format'	=> 'Qaabka Muujinta Magaca',
@@ -217,6 +221,8 @@ return [
     'no'  					=> 'Maya',
     'notes'  				=> 'Xusuusin',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => 'Foomkaagu wuu dhacay. Fadlan isku day markale.',
     'login_enabled'         => 'Login waa la dajiyay',
     'audit_due'             => 'Hanti-dhawrka awgeed',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Dib u dhac ku yimid Hanti-dhawrka',
     'accept'                => 'Aqbal :asset',
     'i_accept'              => 'Waan aqbalay',
@@ -560,6 +566,7 @@ return [
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
     ],
+
     'more_info' => 'Macluumaad dheeraad ah',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -575,5 +582,21 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

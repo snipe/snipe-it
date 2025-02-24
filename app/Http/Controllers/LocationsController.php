@@ -97,15 +97,10 @@ class LocationsController extends Controller
      * @param int $locationId
      * @since [v1.0]
      */
-    public function edit($locationId = null) : View | RedirectResponse
+    public function edit(Location $location) : View | RedirectResponse
     {
         $this->authorize('update', Location::class);
-        // Check if the location exists
-        if (is_null($item = Location::find($locationId))) {
-            return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
-        }
-
-        return view('locations/edit', compact('item'));
+        return view('locations/edit');
     }
 
     /**
@@ -117,15 +112,10 @@ class LocationsController extends Controller
      * @param int $locationId
      * @since [v1.0]
      */
-    public function update(ImageUploadRequest $request, $locationId = null) : RedirectResponse
+    public function update(ImageUploadRequest $request, Location $location) : RedirectResponse
     {
         $this->authorize('update', Location::class);
-        // Check if the location exists
-        if (is_null($location = Location::find($locationId))) {
-            return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
-        }
 
-        // Update the location data
         $location->name = $request->input('name');
         $location->parent_id = $request->input('parent_id', null);
         $location->currency = $request->input('currency', '$');
@@ -194,7 +184,7 @@ class LocationsController extends Controller
      * @param int $id
      * @since [v1.0]
      */
-    public function show($id = null) : View | RedirectResponse
+    public function show(Location $location) : View | RedirectResponse
     {
         $location = Location::withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
@@ -202,7 +192,7 @@ class LocationsController extends Controller
             ->withCount('children as children_count')
             ->withCount('users as users_count')
             ->withTrashed()
-            ->find($id);
+            ->find($location->id);
 
         if (isset($location->id)) {
             return view('locations/view', compact('location'));

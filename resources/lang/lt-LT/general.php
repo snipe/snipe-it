@@ -10,7 +10,7 @@ return [
     'action'                => 'Veiksmas',
     'activity_report'		=> 'Veiklos ataskaita',
     'address'				=> 'Adresas',
-    'admin'					=> 'Administratorius',
+    'admin'					=> 'Administratoriaus nustatymai',
     'admin_tooltip'			=> 'Šis naudotojas turi administratoriaus teises',
     'superuser'				=> 'Supernaudotojas',
     'superuser_tooltip'		=> 'Šis naudotojas turi supernaudotojo teises',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Turimas turtas',
     'accept_assets'         => 'Priimti turtą :name',
     'accept_assets_menu'    => 'Priimti turtą',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Auditas',
     'audit_report'			=> 'Audito žurnalas',
     'assets'				=> 'Turtas',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'Įrašas sukurtas',
     'updated_at' 			=> 'Atnaujinta',
     'currency'  			=> 'Valiuta', // this is deprecated
+    'currency_text'  		=> 'Valiuta', //
     'current'  				=> 'Dabartinis',
     'current_password'      => 'Dabartinis slaptažodis',
     'customize_report'      => 'Individualizuoti ataskaitą',
     'custom_report'         => 'Individualizuota turto ataskaita',
     'dashboard'				=> 'Valdymo skydas',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dienos',
     'days_to_next_audit'    => 'Dienos iki kito audito',
     'date'					=> 'Data',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Vardas_Pavardė (vardas_pavarde@example.com)',
     'lastnamefirstinitial_format' =>  'Pavardė, Vardo pirmoji raidė (pavardev@example.com)',
     'firstintial_dot_lastname_format' => 'Vardo pirmoji raidė.Pavardė (v.pavarde@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Vardas Pavardė (Vardenis Pavardenis)',
     'lastname_firstname_display'	=> 'Pavardė Vardas (Pavardenis Vardenis)',
     'name_display_format'	=> 'Vardo atvaizdavimo formatas',
@@ -217,6 +221,8 @@ return [
     'no'  					=> 'Ne',
     'notes'  				=> 'Pastabos',
     'note_added'            => 'Pastaba pridėta',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Pridėti pastabą',
     'note_edited'            => 'Pastaba atnaujinta',
     'edit_note'              => 'Redaguoti pastabą',
@@ -232,8 +238,8 @@ return [
     'previous'				=> 'Ankstesnis',
     'processing'			=> 'Vykdoma',
     'profile'				=> 'Jūsų profilis',
-    'purchase_cost'                              => 'Pirkimo kaina',
-    'purchase_date'         => 'Pirkimo data',
+    'purchase_cost'                              => 'Įsigijimo kaina',
+    'purchase_date'         => 'Įsigijimo data',
     'qty'		            => 'Kiekis',
     'quantity'		        => 'Kiekis',
     'quantity_minimum'      => 'Turite vieną daiktą, kurio kiekis yra mažesnis arba beveik mažesnis už nurodytą minimalų kiekį|Turite :count daiktus (-ų), kurių kiekis yra mažesnis arba beveik mažesnis už nurodytą minimalų kiekį',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => 'Jūsų sesija baigėsi. Bandykite dar kartą.',
     'login_enabled'         => 'Prisijungimas įjungtas',
     'audit_due'             => 'Laukia audito',
-    'audit_due_days'        => 'Turtas, kuriam turi būti atliktas auditas per :days dieną|Turtas, kuriam turi būti atliktas auditas per :days dienas (-ų)',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Laukia paėmimo',
     'checkin_overdue'       => 'Vėluojama paimti',
-    'checkin_due_days'      => 'Turtas, kuris turi būti paimtas per :days dieną|Turtas, kuris turi būti paimtas per :days dienas (-ų)',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Audito laikas praėjęs',
     'accept'                => 'Priimti :asset',
     'i_accept'              => 'Aš priimu',
@@ -561,6 +567,7 @@ return [
         'consumables'  => ':count Eksploatacinė medžiaga|:count Eksploatacinės medžiagos',
         'components'  => ':count Komponentas|:count Komponentai',
     ],
+
     'more_info' => 'Išsamiau',
     'quickscan_bulk_help' => 'Pažymėjus šį langelį, turto įrašas bus atnaujintas, kad atspindėtų šią naują vietą. Jei paliksite jį nepažymėtą, vieta bus pažymėta tik audito žurnale. Atkreipkite dėmesį, kad jei šis turtas bus išduotas, tai nepakeis to asmens, turto ar vietos, kuriems išduodamas turtas, buvimo vietos.',
     'whoops' => 'Oi!',
@@ -576,5 +583,21 @@ return [
     'user_managed_passwords' => 'Slaptažodžių tvarkymas',
     'user_managed_passwords_disallow' => 'Neleisti naudotojams tvarkyti savo slaptažodžių',
     'user_managed_passwords_allow' => 'Leisti naudotojams tvarkyti savo slaptažodžius',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Pridėti pastabą',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

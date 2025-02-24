@@ -1230,7 +1230,10 @@ class AssetsController extends Controller
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', $asset);
-        $accessory_checkouts = AccessoryCheckout::AssetsAssigned()->with('adminuser')->with('accessories');
+        $accessory_checkouts = AccessoryCheckout::AssetsAssigned()
+            ->where('assigned_to', $asset->id)
+            ->with('adminuser')
+            ->with('accessories');
 
         $offset = ($request->input('offset') > $accessory_checkouts->count()) ? $accessory_checkouts->count() : app('api_offset_value');
         $limit = app('api_limit_value');
@@ -1239,6 +1242,8 @@ class AssetsController extends Controller
         $accessory_checkouts = $accessory_checkouts->skip($offset)->take($limit)->get();
         return (new AssetsTransformer)->transformCheckedoutAccessories($accessory_checkouts, $total);
     }
+
+
     /**
      * Generate asset labels by tag
      * 

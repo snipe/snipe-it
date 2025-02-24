@@ -19,6 +19,8 @@ return [
     'print_assigned'    => '割り当て先をすべて印刷',
     'email_assigned'    => '割り当てられたすべてのメール一覧',
     'user_notified'     => 'ユーザーは現在割り当てられているアイテムのリストを電子メールで送信しました。',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => '該当するライセンスを自動で割り当てる場合の、このユーザーを含める',
     'auto_assign_help'  => 'このユーザーのライセンスの自動割り当てをスキップ',
     'software_user'     => 'ソフトウェアは :name にチェックアウトしました。',

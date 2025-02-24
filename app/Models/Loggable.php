@@ -34,7 +34,11 @@ trait Loggable
      */
     public function logCheckout($note, $target, $action_date = null, $originalValues = [])
     {
+
         $log = new Actionlog;
+
+        $fields_array = [];
+
         $log = $this->determineLogItemType($log);
         if (auth()->user()) {
             $log->created_by = auth()->id();
@@ -55,6 +59,7 @@ trait Loggable
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
 
+
         // Figure out what the target is
         if ($log->target_type == Location::class) {
             $log->location_id = $target->id;
@@ -62,6 +67,21 @@ trait Loggable
             $log->location_id = $target->location_id;
         } else {
             $log->location_id = $target->location_id;
+        }
+
+        if (static::class == Asset::class) {
+            if ($asset = Asset::find($log->item_id)) {
+
+                // add the custom fields that were changed
+                if ($asset->model->fieldset) {
+                    $fields_array = [];
+                    foreach ($asset->model->fieldset->fields as $field) {
+                        if ($field->display_checkout == 1) {
+                            $fields_array[$field->db_column] = $asset->{$field->db_column};
+                        }
+                    }
+                }
+            }
         }
 
         $log->note = $note;
@@ -72,7 +92,10 @@ trait Loggable
         }
 
         $changed = [];
-        $originalValues = array_intersect_key($originalValues, array_flip(['action_date','name','status_id','location_id','expected_checkin']));
+        $array_to_flip = array_keys($fields_array);
+        $array_to_flip = array_merge($array_to_flip, ['action_date','name','status_id','location_id','expected_checkin']);
+        $originalValues = array_intersect_key($originalValues, array_flip($array_to_flip));
+
 
         foreach ($originalValues as $key => $value) {
             if ($key == 'action_date' && $value != $action_date) {
@@ -119,6 +142,8 @@ trait Loggable
     {
         $log = new Actionlog;
 
+        $fields_array = [];
+
         if($target != null){
             $log->target_type = get_class($target);
             $log->target_id = $target->id;
@@ -135,6 +160,16 @@ trait Loggable
             if (static::class == Asset::class) {
                 if ($asset = Asset::find($log->item_id)) {
                     $asset->increment('checkin_counter', 1);
+
+                    // add the custom fields that were changed
+                    if ($asset->model->fieldset) {
+                        $fields_array = [];
+                        foreach ($asset->model->fieldset->fields as $field) {
+                            if ($field->display_checkin == 1) {
+                                $fields_array[$field->db_column] = $asset->{$field->db_column};
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -152,9 +187,14 @@ trait Loggable
         }
 
         $changed = [];
-        $originalValues = array_intersect_key($originalValues, array_flip(['action_date','name','status_id','location_id','rtd_location_id','expected_checkin']));
+
+        $array_to_flip = array_keys($fields_array);
+        $array_to_flip = array_merge($array_to_flip, ['action_date','name','status_id','location_id','expected_checkin']);
+
+        $originalValues = array_intersect_key($originalValues, array_flip($array_to_flip));
 
         foreach ($originalValues as $key => $value) {
+
             if ($key == 'action_date' && $value != $action_date) {
                 $changed[$key]['old'] = $value;
                 $changed[$key]['new'] = is_string($action_date) ? $action_date : $action_date->format('Y-m-d H:i:s');
