@@ -569,12 +569,6 @@ class BulkAssetsController extends Controller
 
             return redirect($bulk_back_url)->with('error', $combinedErrorMessage);
         }
-//        if($assignedAssets->isNotEmpty() && $parentAsset->isNotEmpty()) {
-//
-//            //if assets are checked out, return a list of asset tags that would need to be checked in first.
-//            $assetTags = $assignedAssets->pluck('asset_tag')->implode(', ');
-//            return redirect($bulk_back_url)->with('error', trans_choice('admin/hardware/message.delete.assigned_to_error', $assignedAssets->count(), ['asset_tag' => $assetTags] ));
-//        }
 
         foreach (Asset::wherein('id', $assetIds)->get() as $asset) {
                 $asset->delete();
