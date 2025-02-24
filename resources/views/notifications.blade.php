@@ -109,7 +109,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>{{ trans('general.error') }}: </strong>
-        {{ $message }}
+        {!! $message !!}
     </div>
 </div>
 @endif

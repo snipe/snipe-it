@@ -535,13 +535,46 @@ class BulkAssetsController extends Controller
             return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.delete.nothing_updated'));
         }
 
-        $assignedAssets = Asset::whereIn('id', $assetIds)->whereNotNull('assigned_to')->get();
-        if($assignedAssets->isNotEmpty()) {
+        $parentAssets = Asset::whereIn('id', $assetIds)
+            ->whereHas('assignedAssets')
+            ->get();
 
-            //if assets are checked out, return a list of asset tags that would need to be checked in first.
-            $assetTags = $assignedAssets->pluck('asset_tag')->implode(', ');
-            return redirect($bulk_back_url)->with('error', trans_choice('admin/hardware/message.delete.assigned_to_error', $assignedAssets->count(), ['asset_tag' => $assetTags] ));
+        $assignedAssets = Asset::whereIn('id', $assetIds)
+            ->whereNotNull('assigned_to')
+            ->get();
+
+        $errorMessages = [];
+
+        if ($assignedAssets->isNotEmpty()) {
+            $assignedTags = $assignedAssets->pluck('asset_tag')->implode(', ');
+            $errorMessages[] = trans_choice(
+                'admin/hardware/message.delete.assigned_to_error',
+                $assignedAssets->count(),
+                ['asset_tag' => $assignedTags]
+            );
         }
+
+        if ($parentAssets->isNotEmpty()) {
+            $parentTags = $parentAssets->pluck('asset_tag')->implode(', ');
+            $errorMessages[] = trans_choice(
+                'admin/hardware/message.delete.parent_assigned_error',
+                $parentAssets->count(),
+                ['asset_tag' => $parentTags]
+            );
+        }
+
+        if (!empty($errorMessages)) {
+            // Combine both messages
+            $combinedErrorMessage = implode('<br>', $errorMessages);
+
+            return redirect($bulk_back_url)->with('error', $combinedErrorMessage);
+        }
+//        if($assignedAssets->isNotEmpty() && $parentAsset->isNotEmpty()) {
+//
+//            //if assets are checked out, return a list of asset tags that would need to be checked in first.
+//            $assetTags = $assignedAssets->pluck('asset_tag')->implode(', ');
+//            return redirect($bulk_back_url)->with('error', trans_choice('admin/hardware/message.delete.assigned_to_error', $assignedAssets->count(), ['asset_tag' => $assetTags] ));
+//        }
 
         foreach (Asset::wherein('id', $assetIds)->get() as $asset) {
                 $asset->delete();
