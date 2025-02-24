@@ -3280,6 +3280,15 @@
       "contributions": [
         "translation"
       ]
+    },
+    {
+      "login": "jostrander",
+      "name": "Jesse Ostrander",
+      "avatar_url": "https://avatars.githubusercontent.com/u/760989?v=4",
+      "profile": "https://github.com/jostrander",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
