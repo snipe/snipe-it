@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Ste si istý, že chcete odstrániť tento majetok?',
         'error'   		=> 'Pri odstraňovaní majetku sa vyskytla chyba. Skúste prosím znovu.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Neboli zvolený žiadne položky majetku, preto nebolo nič odstránené.',
         'success' 		=> 'Majetok bol úspešne odstránený.',
     ],

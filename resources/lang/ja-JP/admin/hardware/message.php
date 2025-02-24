@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'この資産を削除してもよろしいですか？',
         'error'   		=> '資産を削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => '資産が選択されていないため、削除されませんでした。',
         'success' 		=> '資産は正常に削除されました。',
     ],

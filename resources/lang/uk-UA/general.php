@@ -10,7 +10,7 @@ return [
     'action'                => 'Дія',
     'activity_report'		=> 'Звіт про діяльність',
     'address'				=> 'Адреса',
-    'admin'					=> 'Адміністратор',
+    'admin'					=> 'Адміністративні налаштування',
     'admin_tooltip'			=> 'Цей користувач має права адміністратора',
     'superuser'				=> 'Суперкористувач',
     'superuser_tooltip'		=> 'Цей користувач має права суперкористувача',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Активів доступно',
     'accept_assets'         => 'Прийняти :name',
     'accept_assets_menu'    => 'Прийняти активи',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Аудит',
     'audit_report'			=> 'Історія активності',
     'assets'				=> 'Активи',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Запис створено',
     'updated_at' 			=> 'Оновлено',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Валюта', //
     'current'  				=> 'Поточний',
     'current_password'      => 'Поточний пароль',
     'customize_report'      => 'Налаштувати звіт',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Ваша login-сесія закінчилась. Будь ласка, увійдіть в систему знову.',
     'login_enabled'         => 'Вхід дозволено',
     'audit_due'             => 'Належно від аудиту',
-    'audit_due_days'        => 'Збитки в призначенні для аудиту протягом :days |Активи в строку аудиту протягом :days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Одержувач входу',
     'checkin_overdue'       => 'Прострочено для входу',
-    'checkin_due_days'      => 'Залежні Активи для оформлення протягом :days Дня|Активів в рамках :days днів',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Прострочені для аудиту',
     'accept'                => 'Прийняти :asset',
     'i_accept'              => 'Я приймаю',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

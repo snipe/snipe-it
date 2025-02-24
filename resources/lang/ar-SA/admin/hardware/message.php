@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'هل تريد بالتأكيد حذف هذا الأصل؟',
         'error'   		=> 'حدثت مشكلة أثناء حذف هذا الأصل. حاول مرة اخرى.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'لم يتم اختيار أي أصول، لذلك لم يتم حذف أي شيء.',
         'success' 		=> 'تم حذف الأصل بنجاح.',
     ],

@@ -10,7 +10,7 @@ return [
     'action'                => 'Akcijski',
     'activity_report'		=> 'Izvješće o aktivnostima',
     'address'				=> 'Adresa',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Dostupna imovina',
     'accept_assets'         => 'Accept Assets :name',
     'accept_assets_menu'    => 'Accept Assets',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Revizija',
     'audit_report'			=> 'Zapisnik revizije',
     'assets'				=> 'Imovina',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Zapis izrađen',
     'updated_at' 			=> 'Ažurirano u',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'struja',
     'current_password'      => 'Postojeća lozinka',
     'customize_report'      => 'Prilagodi izvještaj',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Sesija za obrazac istekla je. Molim te pokušaj ponovno.',
     'login_enabled'         => 'Login Enabled',
     'audit_due'             => 'Due for Audit',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Overdue for Audit',
     'accept'                => 'Accept :asset',
     'i_accept'              => 'Prihvaćam',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

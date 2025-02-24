@@ -10,7 +10,7 @@ return [
     'action'                => 'Åtgärd',
     'activity_report'		=> 'Aktivitetsrapport',
     'address'				=> 'Adress',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Administratörsinställningar',
     'admin_tooltip'			=> 'Den här användaren har administratörsrättigheter',
     'superuser'				=> 'Huvudanvändare',
     'superuser_tooltip'		=> 'Den här användaren har huvudanvändarrättigheter',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Tillgängliga tillgångar',
     'accept_assets'         => 'Acceptera tillgångar :name',
     'accept_assets_menu'    => 'Acceptera tillgångar',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Inventering',
     'audit_report'			=> 'Inventeringsloggar',
     'assets'				=> 'Tillgångar',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Poster skapade',
     'updated_at' 			=> 'Senast uppdaterad',
     'currency'  			=> 'SEK', // this is deprecated
+    'currency_text'  		=> 'Valuta', //
     'current'  				=> 'Nuvarande',
     'current_password'      => 'Nuvarande lösenord',
     'customize_report'      => 'Anpassa rapport',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Din session har löpt ut. Var god försök igen.',
     'login_enabled'         => 'Inloggning aktiverad',
     'audit_due'             => 'Nästa inventering',
-    'audit_due_days'        => 'Tillgångar som skall inventeras inom :days dag|Tillgångar som ska inventeras inom :days dagar',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Förväntas checkas in',
     'checkin_overdue'       => 'Förfallen för incheckning',
-    'checkin_due_days'      => 'Tillgångar som förfaller för incheckning inom :days dag|Tillgångar som förfaller för incheckning inom :days dagar',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Förfallen för inventering',
     'accept'                => 'Acceptera :asset',
     'i_accept'              => 'Jag accepterar',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

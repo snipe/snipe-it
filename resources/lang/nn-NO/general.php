@@ -10,7 +10,7 @@ return [
     'action'                => 'Handlinger',
     'activity_report'		=> 'Aktivitetsrapport',
     'address'				=> 'Adresse',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Admin innstillinger',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Tilgjengelige eiendeler',
     'accept_assets'         => 'Godta Eiendelen :name',
     'accept_assets_menu'    => 'Godta eiendeler',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Revisjon',
     'audit_report'			=> 'Overvåkingslogg',
     'assets'				=> 'Eiendeler',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Post opprettet',
     'updated_at' 			=> 'Oppdatert',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Valuta', //
     'current'  				=> 'Nåværende',
     'current_password'      => 'Gjeldende passord',
     'customize_report'      => 'Tilpass rapport',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Din sesjon har utløpt. Prøv igjen.',
     'login_enabled'         => 'Innlogging aktiv',
     'audit_due'             => 'Revisjonsfrist nær',
-    'audit_due_days'        => 'Aktiva Frist for revisjon innen :days days|Due for Audit Om dager',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Forfalt for innsjekk',
     'checkin_overdue'       => 'Forfalt for innsjekk',
-    'checkin_due_days'      => 'Eiendeler Tidsfrist for innsjekk innen :days Day|Asset Due for Checkin Innen :days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Revisjonsfrist forfalt',
     'accept'                => 'Akseptér :asset',
     'i_accept'              => 'Jeg aksepterer',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

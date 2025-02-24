@@ -19,6 +19,8 @@ return [
     'print_assigned'    => '打印所有已分配资产',
     'email_assigned'    => '邮件发送所有已分配的列表',
     'user_notified'     => '用户已通过电子邮件收到当前分配给他们的物品列表。',
+    'users_notified'    => '已通过电子邮件向该用户发送了其当前分配项目的列表。|:count 位用户已通过电子邮件收到其当前分配项目的列表。',
+    'users_notified_warning' => ':count 位用户已通过电子邮件收到了其当前分配项目的列表，但是 :no_email 用户没有电子邮件地址，因此无法收到电子邮件。| :count 位用户已通过电子邮件收到了其当前分配项目的列表，但是 :no_email 用户没有电子邮件地址，因此无法收到电子邮件。',
     'auto_assign_label' => '在自动分配符合条件的许可证时包括此用户',
     'auto_assign_help'  => '在自动分配许可证时跳过此用户',
     'software_user'     => ':name 借走的软件',

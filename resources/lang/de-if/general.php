@@ -10,7 +10,7 @@ return [
     'action'                => 'Aktion',
     'activity_report'		=> 'Aktivitätsbericht',
     'address'				=> 'Adresse',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Admin-Einstellungen',
     'admin_tooltip'			=> 'Dieser Benutzer hat Administratorrechte',
     'superuser'				=> 'Superbenutzer',
     'superuser_tooltip'		=> 'Dieser Benutzer hat Superbenutzer-Rechte',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Verfügbare Assets',
     'accept_assets'         => 'Assets :name akzeptieren',
     'accept_assets_menu'    => 'Assets akzeptieren',
+    'accept_item'           => 'Gegenstand akzeptieren',
     'audit'				    => 'Prüfung',
     'audit_report'			=> 'Prüfungsbericht',
     'assets'				=> 'Assets',
@@ -87,12 +88,13 @@ return [
     'record_created' 		=> 'Eintrag erstellt',
     'updated_at' 			=> 'Aktualisiert am',
     'currency'  			=> '€', // this is deprecated
+    'currency_text'  		=> 'Währung', //
     'current'  				=> 'Aktuell',
     'current_password'      => 'Aktuelles Passwort',
     'customize_report'      => 'Bericht anpassen',
     'custom_report'         => 'Benutzerdefinierter Asset-Bericht',
     'dashboard'				=> 'Dashboard',
-    'data_source'           => 'Data Source',
+    'data_source'           => 'Datenquelle',
     'days'      			=> 'Tage',
     'days_to_next_audit'    => 'Tage bis zur nächsten Prüfung',
     'date'					=> 'Datum',
@@ -128,7 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Vorname_Nachname (erika_mustermann@example.com)',
     'lastnamefirstinitial_format' =>  'Nachname & Initiale des Vornamens (mustere@example.com)',
     'firstintial_dot_lastname_format' => 'Initiale des Vornamen.Nachname (e.mustermann@example.com)',
-    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
+    'lastname_dot_firstinitial_format' => 'Nachname & Initiale des Vornamens (mustermann.e@example.com)',
     'firstname_lastname_display'	=> 'Vorname Nachname (Max Mustermann)',
     'lastname_firstname_display'	=> 'Nachname Vorname (Mustermann Max)',
     'name_display_format'	=> 'Name Anzeigeformat',
@@ -219,8 +221,8 @@ return [
     'no'  					=> 'Nein',
     'notes'  				=> 'Anmerkungen',
     'note_added'            => 'Notiz hinzugefügt',
-    'options'				=> 'Options',
-    'preview'				=> 'Preview',
+    'options'				=> 'Optionen',
+    'preview'				=> 'Vorschau',
     'add_note'              => 'Notiz hinzufügen',
     'note_edited'            => 'Notiz bearbeitet',
     'edit_note'              => 'Notiz bearbeiten',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Deine Sitzung ist abgelaufen. Bitte versuche es erneut.',
     'login_enabled'         => 'Login aktiviert',
     'audit_due'             => 'Prüfung fällig',
-    'audit_due_days'        => 'Fällige Assets für Prüfung innerhalb von :days Tag|Fällige Assets für Prüfung innerhalb von :days',
+    'audit_due_days'        => '{}Vermögenswerte, die innerhalb eines Tages zur Prüfung fällig oder überfällig sind|[1]Vermögenswerte, die innerhalb eines Tages zur Prüfung fällig oder überfällig sind|[2,*]Vermögenswerte, die innerhalb von :days Tagen zur Prüfung fällig oder überfällig sind',
     'checkin_due'           => 'Fällig zum Check-in',
     'checkin_overdue'       => 'Überfällig für den Check-in',
-    'checkin_due_days'      => 'Fällige Assets für den Check-in innerhalb von :days Tag|Fällige Assets für den Check-in innerhalb von :days',
+    'checkin_due_days'      => '{}Zum Einchecken fällig|[1]Vermögenswerte müssen innerhalb von :days am Tag eingecheckt werden|[2,*]Vermögenswerte müssen innerhalb von :days Days eingecheckt werden',
     'audit_overdue'         => 'Prüfung überfällig',
     'accept'                => 'Erhalt bestätigen: :asset',
     'i_accept'              => 'Ich akzeptiere',
@@ -584,7 +586,18 @@ return [
 
 // Add form placeholders here
     'placeholders' => [
-        'notes'  => 'Add a note',
+        'notes'  => 'Notiz hinzufügen',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => ':name bearbeiten',
+        'checkout_item' => ':name herausgeben',
+        'checkin_item' => ':name zurücknehmen',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'Dieses :model wurde nicht gefunden oder Sie haben keine Berechtigung, darauf zuzugreifen',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

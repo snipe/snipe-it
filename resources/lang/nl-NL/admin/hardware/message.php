@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Weet je zeker dat je dit asset wilt verwijderen?',
         'error'   		=> 'Er was een probleem tijdens het verwijderen van het asset. Probeer het opnieuw.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Er zijn geen assets geselecteerd, er is dus niets verwijderd.',
         'success' 		=> 'Het asset is succesvol verwijderd.',
     ],

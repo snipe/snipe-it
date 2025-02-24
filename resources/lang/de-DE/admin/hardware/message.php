@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Asset entfernen möchten?',
         'error'   		=> 'Beim Entfernen dieses Assets ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Es wurden keine Assets ausgewählt, somit wurde auch nichts gelöscht.',
         'success' 		=> 'Dieses Asset wurde erfolgreich entfernt.',
     ],

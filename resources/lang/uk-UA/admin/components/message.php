@@ -17,7 +17,8 @@ return array(
     'delete' => array(
         'confirm'   => 'Ви впевнені, що хочете видалити цей компонент?',
         'error'   => 'Виникла проблема при видаленні компонента. Спробуйте ще раз.',
-        'success' => 'Компонент було успішно видалено.'
+        'success' => 'Компонент було успішно видалено.',
+        'error_qty'   => 'Some components of this type are still checked out. Please check them in and try again.',
     ),
 
      'checkout' => array(

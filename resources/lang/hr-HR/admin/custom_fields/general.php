@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Vrijednost ovog polja je šifrirana u bazi podataka. Samo administratori administratora moći će vidjeti dešifriranu vrijednost',
     'show_in_email'     => 'Prikazati vrijednost ovog polja u checkout e-mailovima koji se šalju korisnicima? Enkriptirana polja se ne mogu prikazati u e-mailovima',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short' => 'Include in emails',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'about_custom_fields_title' => 'About Custom Fields',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Show in requestable assets list',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

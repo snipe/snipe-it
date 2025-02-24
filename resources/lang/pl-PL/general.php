@@ -10,7 +10,7 @@ return [
     'action'                => 'Edycja',
     'activity_report'		=> 'Raport Aktywności',
     'address'				=> 'Adres',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Ustawienia administratora',
     'admin_tooltip'			=> 'Ten użytkownik ma uprawnienia administratora',
     'superuser'				=> 'Superużytkownik',
     'superuser_tooltip'		=> 'Ten użytkownik ma uprawnienia superużytkownika',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Dostępne zasoby',
     'accept_assets'         => 'Akceptuje zasoby',
     'accept_assets_menu'    => 'Zaakceptuj zasoby',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Audyt',
     'audit_report'			=> 'Dziennik zdarzeń',
     'assets'				=> 'Zasoby',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Rekord utworzony',
     'updated_at' 			=> 'Zaktualizowano',
     'currency'  			=> 'PLN', // this is deprecated
+    'currency_text'  		=> 'Waluta', //
     'current'  				=> 'Lista użytkowników',
     'current_password'      => 'Bieżące hasło',
     'customize_report'      => 'Dostosuj raport',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Czas trwania sesji upłynął. Spróbuj ponownie.',
     'login_enabled'         => 'Logowanie włączone',
     'audit_due'             => 'Termin przeprowadzenia audytu',
-    'audit_due_days'        => 'Należności z tytułu Audytu w ciągu :days Dnia|Należne aktywa do audytu w ciągu :days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Należne za Checkin',
     'checkin_overdue'       => 'Zaległe za odprawę',
-    'checkin_due_days'      => 'Należne aktywa do Checkin W ciągu :days Day|Aktywa do Checkin w ciągu :days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Zaległe z tytułu audytu',
     'accept'                => 'Zaakceptuj :asset',
     'i_accept'              => 'Akceptuję',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Dodaj notatkę',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

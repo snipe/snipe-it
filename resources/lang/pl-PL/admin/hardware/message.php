@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Czy na pewno chcesz usunąć?',
         'error'   		=> 'Nie można usunąć. Proszę spróbować ponownie.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Aktywa nie zostały wybrane, więc nic nie zostało usunięte.',
         'success' 		=> 'Nabytek został usunięty.',
     ],

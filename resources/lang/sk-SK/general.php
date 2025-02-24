@@ -10,7 +10,7 @@ return [
     'action'                => 'Akcia',
     'activity_report'		=> 'Report aktivity',
     'address'				=> 'Adresa',
-    'admin'					=> 'Administrátor',
+    'admin'					=> 'Admin nastavenia',
     'admin_tooltip'			=> 'Tento používateľ má admin oprávnenia',
     'superuser'				=> 'Superadmin',
     'superuser_tooltip'		=> 'Tento používateľ má superadmin oprávnenia',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Dostupné zariadenia',
     'accept_assets'         => 'Potvrdiť prijatie majetku :name',
     'accept_assets_menu'    => 'Prijať majetok',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Audit',
     'audit_report'			=> 'Záznam z auditu',
     'assets'				=> 'Majetok',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Záznam vytvorený',
     'updated_at' 			=> 'Aktualizované',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Mena', //
     'current'  				=> 'Aktuálne',
     'current_password'      => 'Aktuálne heslo',
     'customize_report'      => 'Prispôsobiť report',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Platnosť relácie vypršala. Prosím skúste to znovu.',
     'login_enabled'         => 'Prihlásenie povolené',
     'audit_due'             => 'K inventúre',
-    'audit_due_days'        => 'Majetky k inventúre behom :days dňa|Majetky k inventúre behom :days dní',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Do prevzatia',
     'checkin_overdue'       => 'Po termíne prevzatia',
-    'checkin_due_days'      => 'Majetok k prevzatiu počas :days dňa|Majetok k prevzatiu počas :days dní',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Po termíne na inventúru',
     'accept'                => 'Prijať :asset',
     'i_accept'              => 'Príjmam',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

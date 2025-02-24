@@ -10,7 +10,7 @@ return [
     'action'                => 'Действие',
     'activity_report'		=> 'Oтчет о деятельности',
     'address'				=> 'Адрес',
-    'admin'					=> 'Администратор',
+    'admin'					=> 'Настройки администратора',
     'admin_tooltip'			=> 'Этот пользователь имеет права администратора',
     'superuser'				=> 'Суперпользователь',
     'superuser_tooltip'		=> 'Этот пользователь имеет права суперпользователя',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Доступные активы',
     'accept_assets'         => 'Принять активы: название',
     'accept_assets_menu'    => 'Принять активы',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'аудит',
     'audit_report'			=> 'Журнал аудита',
     'assets'				=> 'Активы',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Запись Создана',
     'updated_at' 			=> 'Обновлено',
     'currency'  			=> 'Руб.', // this is deprecated
+    'currency_text'  		=> 'Валюта', //
     'current'  				=> 'Текущий',
     'current_password'      => 'Текущий пароль',
     'customize_report'      => 'Настройка отчета',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Время вашей сессии истекло. Пожалуйста, войдите снова.',
     'login_enabled'         => 'Вход разрешен',
     'audit_due'             => 'Ожидает аудита',
-    'audit_due_days'        => 'Активы, подлежащие аудиту в течение :days дней|Срок сдачи активов в течение :days дней',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Срок сдачи чека',
     'checkin_overdue'       => 'Просрочено для чекина',
-    'checkin_due_days'      => 'Срок действия активов зачисления в течение :days дней|Активы должны быть зачислены в течение :days дней',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Проверка просрочена',
     'accept'                => 'Принять :asset',
     'i_accept'              => 'Принимаю',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Samee goob cusub oo caado ah',
     'value_encrypted'      	        => 'Qiimaha goobtan waxa lagu sir ah kaydka xogta. Kaliya isticmaalayaasha maamulka ayaa awoodi doona inay arkaan qiimaha la furay',
     'show_in_email'     => 'Ku dar qiimaha goobtan fariimaha hubinta ee loo soo diray isticmaalaha? Goobaha sirta ah laguma dari karo iimaylada',
-    'show_in_email_short'     => 'Ku dar emails.',
+    'show_in_email_short' => 'Ku dar emails',
     'help_text' => 'Qoraalka Caawinta',
     'help_text_description' => 'Kani waa qoraal ikhtiyaari ah oo ka soo bixi doona hoosta qaybaha foomka marka la tafatiro hantida si loo bixiyo macnaha guud ee goobta.',
     'about_custom_fields_title' => 'Ku saabsan Goobaha Gaarka ah',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Ku muuji liiska hantida la codsan karo',
     'show_in_requestable_list' => 'Muuji qiimaha liiska hantida la codsan karo. Goobaha sirta ah lama tusi doono',
     'encrypted_options' => 'Goobtan waa la sir sir ah, marka qaar ka mid ah xulashooyinka bandhiga lama heli doono.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

@@ -10,7 +10,7 @@ return [
     'action'                => 'សកម្មភាព',
     'activity_report'		=> 'របាយការណ៍សកម្មភាព',
     'address'				=> 'អាស័យដ្ឋាន',
-    'admin'					=> 'Admin',
+    'admin'					=> 'ការកំណត់អ្នកគ្រប់គ្រង',
     'admin_tooltip'			=> 'អ្នកប្រើប្រាស់នេះមានសិទ្ធិជាអ្នកគ្រប់គ្រង',
     'superuser'				=> 'អ្នកប្រើជាន់ខ្ពស់',
     'superuser_tooltip'		=> 'អ្នកប្រើប្រាស់នេះមានសិទ្ធិអ្នកប្រើប្រាស់ជាន់ខ្ពស់',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'ទ្រព្យសកម្មដែលមាន',
     'accept_assets'         => 'ទទួលទ្រព្យសកម្ម៖ ឈ្មោះ',
     'accept_assets_menu'    => 'ទទួលយកទ្រព្យសកម្ម',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'សវនកម្ម',
     'audit_report'			=> 'កំណត់ហេតុសវនកម្ម',
     'assets'				=> 'ទ្រព្យសកម្ម',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'បានបង្កើតកំណត់ត្រា',
     'updated_at' 			=> 'បានធ្វើបច្ចុប្បន្នភាពនៅ',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'រូបិយប័ណ្ណ', //
     'current'  				=> 'នា​ពេល​បច្ចុប្បន្ន',
     'current_password'      => 'លេខសំងាត់​បច្ចុប្បន្ន',
     'customize_report'      => 'កំណត់របាយការណ៍តាមបំណង',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'វគ្គទម្រង់របស់អ្នកបានផុតកំណត់ហើយ។ សូមព្យាយាមម្តងទៀត។',
     'login_enabled'         => 'បានបើកការចូល',
     'audit_due'             => 'ដល់កំណត់សម្រាប់សវនកម្ម',
-    'audit_due_days'        => 'ទ្រព្យសកម្មដែលត្រូវធ្វើសវនកម្មក្នុងរយៈពេល : ថ្ងៃ ថ្ងៃ | ទ្រព្យសកម្មដែលត្រូវធ្វើសវនកម្មក្នុងរយៈពេល : ថ្ងៃ ថ្ងៃ',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'ដល់ពេលសងមកវិញ',
     'checkin_overdue'       => 'ហួសកាលកំណត់សម្រាប់ការសងមកវិញ',
-    'checkin_due_days'      => 'ទ្រព្យសកម្មដែលត្រូវសងមកវិញក្នុងរយៈពេល : ថ្ងៃ ថ្ងៃ| ទ្រព្យសកម្មដែលត្រូវសងមកវិញក្នុង : ថ្ងៃ ថ្ងៃ',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'ហួសកាលកំណត់សម្រាប់សវនកម្ម',
     'accept'                => 'ទទួលយក៖ ទ្រព្យសម្បត្តិ',
     'i_accept'              => 'ខ្ញុំទទួលយក',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'បន្ថែមកំណត់ចំណាំ',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

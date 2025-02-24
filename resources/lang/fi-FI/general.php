@@ -10,7 +10,7 @@ return [
     'action'                => 'Toiminto',
     'activity_report'		=> 'Toimintaraportti',
     'address'				=> 'Osoite',
-    'admin'					=> 'Ylläpitäjä',
+    'admin'					=> 'Ylläpitäjän Asetukset',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Laitetta vapaana',
     'accept_assets'         => 'Hyväksy Laitteet :name',
     'accept_assets_menu'    => 'Hyväksy Laitteet',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Tarkasta',
     'audit_report'			=> 'Tarkastusloki',
     'assets'				=> 'Laitteet',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Tietue luotu',
     'updated_at' 			=> 'Päivitetty klo',
     'currency'  			=> '€', // this is deprecated
+    'currency_text'  		=> 'Valuutta', //
     'current'  				=> 'Nykyiset',
     'current_password'      => 'Nykyinen Salasana',
     'customize_report'      => 'Mukautettu raportti',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Istuntosi on vanhentunut. Ole hyvä ja kirjaudu uudelleen.',
     'login_enabled'         => 'Kirjautuminen käytössä',
     'audit_due'             => 'Tarkastettava',
-    'audit_due_days'        => 'Varat Tilintarkastuksesta erääntyvät :days Päivän n n aikana Varat Erääntyvät tilintarkastuksesta :days Päivää',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Tarkistuksen eräpäivä',
     'checkin_overdue'       => 'Erääntynyt kassalle',
-    'checkin_due_days'      => 'Checkinin omaisuus :days Päivän n kuluessa|Checkinin omaisuus :days Päivän kuluessa',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Erääntynyt tarkastettava',
     'accept'                => 'Hyväksy :asset',
     'i_accept'              => 'Hyväksyn',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

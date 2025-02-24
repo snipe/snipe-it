@@ -10,7 +10,7 @@ return [
     'action'                => 'Veiksmas',
     'activity_report'		=> 'Veiklos ataskaita',
     'address'				=> 'Adresas',
-    'admin'					=> 'Administratorius',
+    'admin'					=> 'Administratoriaus nustatymai',
     'admin_tooltip'			=> 'Šis naudotojas turi administratoriaus teises',
     'superuser'				=> 'Supernaudotojas',
     'superuser_tooltip'		=> 'Šis naudotojas turi supernaudotojo teises',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Turimas turtas',
     'accept_assets'         => 'Priimti turtą :name',
     'accept_assets_menu'    => 'Priimti turtą',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Auditas',
     'audit_report'			=> 'Audito žurnalas',
     'assets'				=> 'Turtas',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Įrašas sukurtas',
     'updated_at' 			=> 'Atnaujinta',
     'currency'  			=> 'Valiuta', // this is deprecated
+    'currency_text'  		=> 'Valiuta', //
     'current'  				=> 'Dabartinis',
     'current_password'      => 'Dabartinis slaptažodis',
     'customize_report'      => 'Individualizuoti ataskaitą',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Jūsų sesija baigėsi. Bandykite dar kartą.',
     'login_enabled'         => 'Prisijungimas įjungtas',
     'audit_due'             => 'Laukia audito',
-    'audit_due_days'        => 'Turtas, kuriam turi būti atliktas auditas per :days dieną|Turtas, kuriam turi būti atliktas auditas per :days dienas (-ų)',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Laukia paėmimo',
     'checkin_overdue'       => 'Vėluojama paimti',
-    'checkin_due_days'      => 'Turtas, kuris turi būti paimtas per :days dieną|Turtas, kuris turi būti paimtas per :days dienas (-ų)',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Audito laikas praėjęs',
     'accept'                => 'Priimti :asset',
     'i_accept'              => 'Aš priimu',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Pridėti pastabą',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

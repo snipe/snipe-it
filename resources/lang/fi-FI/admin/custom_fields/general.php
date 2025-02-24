@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Luo uusi mukautettu kenttä',
     'value_encrypted'      	        => 'Kentän arvo salataan tietokannassa. Vain järjestelmänvalvojat voivat tarkastella purettua arvoa',
     'show_in_email'     => 'Käytetäänkö kentän arvoa käyttäjälle lähetettävissä luovutus-sähköposteissa? Salattuja kenttiä ei voi lisätä sähköposteihin',
-    'show_in_email_short'     => 'Sisällytä sähköposteihin.',
+    'show_in_email_short' => 'Sisällytä sähköposteihin',
     'help_text' => 'Aputeksti',
     'help_text_description' => 'Tämä on valinnainen teksti joka ilmestyy lomakekentän alapuolelle laitetta muokatessa tarjotakseen kontekstia kentälle.',
     'about_custom_fields_title' => 'Mukautetuista kentistä',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Näytä pyydettävien assettien luettelossa',
     'show_in_requestable_list' => 'Näytä arvo pyydettävissä olevien assettien luettelossa. Salattuja kenttiä ei näytetä',
     'encrypted_options' => 'Tämä kenttä on salattu, joten jotkin näyttöasetukset eivät ole käytettävissä.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

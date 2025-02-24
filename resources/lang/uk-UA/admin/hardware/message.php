@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Ви впевнені, що хочете видалити цей медіафайл?',
         'error'   		=> 'Виникла проблема при видаленні активу. Будь ласка, спробуйте ще раз.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Активи не були вибрані, тому нічого не було видалено.',
         'success' 		=> 'Актив успішно видалений.',
     ],

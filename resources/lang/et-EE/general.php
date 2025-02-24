@@ -10,7 +10,7 @@ return [
     'action'                => 'Tegevus',
     'activity_report'		=> 'Tegevuste aruanne',
     'address'				=> 'Aadress',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> 'Sellel kasutajal on administraatori õigused',
     'superuser'				=> 'Superkasutaja',
     'superuser_tooltip'		=> 'Sellel kasutajal on superkasutaja õigused',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Saadaolevad vahendid',
     'accept_assets'         => 'Aktsepteeri vahendid :name nimel',
     'accept_assets_menu'    => 'Aktsepteeri vahendeid',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Auditeerimine',
     'audit_report'			=> 'Auditilogi',
     'assets'				=> 'Vahendid',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Väärtus loodud',
     'updated_at' 			=> 'Viimati muudetud',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'Praegune',
     'current_password'      => 'Praegune parool',
     'customize_report'      => 'Kohanda aruannet',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Teie vormi seanss on aegunud. Palun proovi uuesti.',
     'login_enabled'         => 'Sisselogimine lubatud',
     'audit_due'             => 'Audit',
-    'audit_due_days'        => 'Auditiks vajalikud varad :days päeva jooksulAuditiks vajalikud varad :days päeva jooksul',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Tagastamiseks vajalik',
     'checkin_overdue'       => 'Tagastamise tähtaeg ületatud',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Hilinenud audit',
     'accept'                => 'Kinnita :asset',
     'i_accept'              => 'Ma kinnitan',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

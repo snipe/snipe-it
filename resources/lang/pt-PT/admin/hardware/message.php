@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Tem a certeza de que pretende eliminar este artigo?',
         'error'   		=> 'Ocorreu um problema ao remover o artigo. Por favor, tente novamente.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Nenhum recurso foi selecionado, então nada foi excluído.',
         'success' 		=> 'O artigo foi removido com sucesso.',
     ],

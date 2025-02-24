@@ -10,7 +10,7 @@ return [
     'action'                => 'Azione',
     'activity_report'		=> 'Report delle attività',
     'address'				=> 'Indirizzo',
-    'admin'					=> 'Amministratore',
+    'admin'					=> 'Impostazioni Admin',
     'admin_tooltip'			=> 'L\'utente è un amministratore',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'L\'utente è un superuser',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Beni disponibili',
     'accept_assets'         => 'Accetta Beni :name',
     'accept_assets_menu'    => 'Accetta Beni',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Revisione Inventario',
     'audit_report'			=> 'Registro Revisione Inventario',
     'assets'				=> 'Beni',
@@ -49,7 +50,7 @@ return [
     'bulk_edit'             => 'Modifica Massiva',
     'bulk_delete'           => 'Cancellazione Massiva',
     'bulk_actions'          => 'Azioni Massive',
-    'bulk_checkin_delete'   => 'Registrazione / Cancellazione Massiva di Utenti',
+    'bulk_checkin_delete'   => 'Restituzione Massiva / Cancellazione Utenti',
     'byod'                  => 'BYOD',
     'byod_help'             => 'Questo dispositivo appartiene all\'utente',
     'bystatus'              => 'per Stato',
@@ -60,7 +61,7 @@ return [
     'changeemail'  			=> 'Modifica indirizzo email',
     'changepassword'  		=> 'Modifica password',
     'checkin'  				=> 'Restituzione',
-    'checkin_from'  		=> 'Restituito da',
+    'checkin_from'  		=> 'Restituzione da',
     'checkout'  			=> 'Assegna',
     'checkouts_count'       => 'Assegnazioni',
     'checkins_count'        => 'Restituzioni',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Record creato',
     'updated_at' 			=> 'Aggiornato a',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Valuta', //
     'current'  				=> 'Attuale',
     'current_password'      => 'Password attuale',
     'customize_report'      => 'Personalizza Report',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'La sessione del modulo è scaduta. Riprova.',
     'login_enabled'         => 'Login Abilitato',
     'audit_due'             => 'In scadenza per Controllo Inventario',
-    'audit_due_days'        => 'Bene da inventariare entro :days giorni|Beni da inventariare entro :days giorni',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Scadenza per la restituzione',
     'checkin_overdue'       => 'Oltre la scadenza per restituzione',
-    'checkin_due_days'      => 'Beni da restituire entro :days giorno|Beni da restituire entro :days giorni',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Scaduto per Controllo Inventario',
     'accept'                => 'Accetta :asset',
     'i_accept'              => 'Accetto',
@@ -389,7 +391,7 @@ return [
     'sync_results'          => 'Risultati Sincronizzazione',
     'license_serial'        => 'Codice Seriale/Prodotto',
     'invalid_category'      => 'Categoria non valida o mancante',
-    'invalid_item_category_single' => 'Categoria :type non valida o mancante. Aggiorna la categoria di :type per includere una categoria valida prima del check-out.',
+    'invalid_item_category_single' => 'Categoria :type non valida o mancante. Aggiorna la categoria di :type per includere una categoria valida prima dell\'assegnazione.',
     'dashboard_info'        => 'Questa è la tua dashboard. Ce ne sono tante, ma questa è solo tua.',
     '60_percent_warning'    => 'Completo al 60% (Avvertimento)',
     'dashboard_empty'       => 'Sembra che tu non abbia aggiunto ancora niente, per cui non abbiamo niente di eclatante da mostrarti. Inizia aggiungendo adesso qualche Bene, Accessorio, Consumabili o Licenze!',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Aggiungere una nota',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Seleziona/Deseleziona Tutto',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

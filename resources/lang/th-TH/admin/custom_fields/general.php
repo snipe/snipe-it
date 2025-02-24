@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'สร้างฟิลด์ที่กำหนดเองใหม่',
     'value_encrypted'      	        => 'ค่าของฟิลด์นี้ถูกเข้ารหัสในฐานข้อมูล เฉพาะผู้ดูแลระบบเท่านั้นที่สามารถดูค่าที่ถอดรหัสได้',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short' => 'Include in emails',
     'help_text' => 'ช่วยเหลือ',
     'help_text_description' => 'ข้อความนี้จะปรากฏขึ้นมาด้านล่างในขณะแก้แบบฟอร์มของเนื้อหาสินทรัพย์',
     'about_custom_fields_title' => 'เกี่ยวกับการกำหนดฟิลด์',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Show in requestable assets list',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

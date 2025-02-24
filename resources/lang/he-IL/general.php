@@ -10,7 +10,7 @@ return [
     'action'                => 'פעולה',
     'activity_report'		=> 'דוח פעילות',
     'address'				=> 'כתובת',
-    'admin'					=> 'מנהל מערכת',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'נכסים זמינים',
     'accept_assets'         => 'אשר נכס :name',
     'accept_assets_menu'    => 'אשר הנכסים',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'בְּדִיקָה',
     'audit_report'			=> 'יומן ביקורת',
     'assets'				=> 'נכסים',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'רשומה נוצרה',
     'updated_at' 			=> 'עודכן ב',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'נוֹכְחִי',
     'current_password'      => 'סיסמא נוכחית',
     'customize_report'      => 'דוח מותאם אישית',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'פג תוקף הטופס שלך. בבקשה נסה שוב.',
     'login_enabled'         => 'Login Enabled',
     'audit_due'             => 'Due for Audit',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Overdue for Audit',
     'accept'                => 'אשר :asset',
     'i_accept'              => 'קיבלתי',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

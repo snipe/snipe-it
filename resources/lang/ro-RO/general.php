@@ -10,7 +10,7 @@ return [
     'action'                => 'Acțiune',
     'activity_report'		=> 'Raport de activitate',
     'address'				=> 'Adresa',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Setări Admin',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Active disponibile',
     'accept_assets'         => 'Acceptați active :name',
     'accept_assets_menu'    => 'Acceptați active',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Audit',
     'audit_report'			=> 'Jurnal de audit',
     'assets'				=> 'Active',
@@ -64,7 +65,7 @@ return [
     'checkout'  			=> 'Preda',
     'checkouts_count'       => 'Comenzi',
     'checkins_count'        => 'Verificări',
-    'checkin_and_delete'  	=> 'Checkin and Delete',
+    'checkin_and_delete'  	=> '',
     'user_requests_count'   => 'Cereri',
     'city'  				=> 'Oras',
     'click_here'			=> 'Click aici',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Înregistrare creată',
     'updated_at' 			=> 'Actualizat la',
     'currency'  			=> 'LEI', // this is deprecated
+    'currency_text'  		=> 'Monedă', //
     'current'  				=> 'Curent',
     'current_password'      => 'Parola curentă',
     'customize_report'      => 'Personalizați raportul',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Sesiunea de formular a expirat. Vă rugăm să încercați din nou.',
     'login_enabled'         => 'Autentificare activată',
     'audit_due'             => 'De auditat',
-    'audit_due_days'        => 'Activele scadente pentru audit în termen de :days Active datorate pentru audit în următoarele zile',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'De finalizat pentru Checkin',
     'checkin_overdue'       => 'Restabilit pentru Checkin',
-    'checkin_due_days'      => 'Activele scadente pentru verificare în termen de :days Active de ziua De finalizat pentru Verificare în următoarele zile',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Audit întârziat',
     'accept'                => 'Acceptă :asset',
     'i_accept'              => 'Accept',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

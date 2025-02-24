@@ -37,7 +37,7 @@ return [
         'authentication_success' => 'Utente autenticato correttamente con LDAP!'
     ],
     'labels' => [
-        'null_template' => 'Label template not found. Please select a template.',
+        'null_template' => 'Modello di etichetta non trovato. Si prega di selezionare un modello.',
         ],
     'webhook' => [
         'sending' => 'Invio a :app un messaggio di prova...',

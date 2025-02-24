@@ -10,7 +10,7 @@ return [
     'action'                => '操作',
     'activity_report'		=> '活動報告',
     'address'				=> '地址',
-    'admin'					=> '管理員',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> '超級使用者',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> '可用資產',
     'accept_assets'         => '接受資產',
     'accept_assets_menu'    => '授權資產',
+    'accept_item'           => 'Accept Item',
     'audit'				    => '稽核',
     'audit_report'			=> '稽核記錄',
     'assets'				=> '資產',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> '記錄已建立',
     'updated_at' 			=> '更新日',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> '幣別', //
     'current'  				=> '目前',
     'current_password'      => '目前的密碼',
     'customize_report'      => '自訂報告',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => '表單已過期，請重新送出',
     'login_enabled'         => '登入已啟用',
     'audit_due'             => '審核到期',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => '審核過期',
     'accept'                => '接受 :asset',
     'i_accept'              => '我接受',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

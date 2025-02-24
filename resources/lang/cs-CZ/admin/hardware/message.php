@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Opravdu si přejete tento majetek odstranit?',
         'error'   		=> 'Nepodařilo se nám tento majetek odstranit. Zkuste to prosím znovu.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Žádný majetek nebyl vybrán, takže nic nebylo odstraněno.',
         'success' 		=> 'Majetek byl úspěšně smazán.',
     ],
