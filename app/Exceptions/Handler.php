@@ -128,11 +128,13 @@ class Handler extends ExceptionHandler
             $model_name = last(explode('\\', $e->getModel()));
             $route = str_plural(strtolower(last(explode('\\', $e->getModel())))).'.index';
 
-            // Sigh. Fucking laravel.
+            // Sigh.
             if ($route == 'assets.index') {
                 $route = 'hardware.index';
             } elseif ($route == 'reporttemplates.index') {
                 $route = 'reports/custom';
+            } elseif ($route == 'assetmodels.index') {
+                $route = 'models.index';
             } elseif ($route == 'predefinedkits.index') {
                 $route = 'kits.index';
             }
