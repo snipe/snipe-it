@@ -214,7 +214,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                     </a>
                                     <ul class="dropdown-menu">
                                         @can('create', \App\Models\Asset::class)
-                                            <li{!! (Request::is('hardware/create') ? ' class="active">' : '') !!}>
+                                            <li{!! (Request::is('hardware/create') ? ' class="active"' : '') !!}>
                                                 <a href="{{ route('hardware.create') }}" tabindex="-1">
                                                     <x-icon type="assets" />
                                                     {{ trans('general.asset') }}
