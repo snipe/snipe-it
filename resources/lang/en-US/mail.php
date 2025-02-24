@@ -6,7 +6,6 @@ return [
     'Accessory_Checkout_Notification' => 'Accessory checked out',
     'Asset_Checkin_Notification' => 'Asset checked in',
     'Asset_Checkout_Notification' => 'Asset checked out',
-    'Asset_Checkout_Reminder_Notification' => 'Reminder: Asset checked out',
     'Confirm_Accessory_Checkin' => 'Accessory checkin confirmation',
     'Confirm_Asset_Checkin' => 'Asset checkin confirmation',
     'Confirm_accessory_delivery' => 'Accessory delivery confirmation',
