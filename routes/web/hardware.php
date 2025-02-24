@@ -131,27 +131,27 @@ Route::group(
 
         Route::get('{asset}/qr_code',
             [AssetsController::class, 'getQrCode']
-        )->name('qr_code/hardware');
+        )->name('qr_code/hardware')->withTrashed();
 
-        Route::get('{assetId}/barcode', 
+        Route::get('{asset}/barcode',
             [AssetsController::class, 'getBarCode']
-        )->name('barcode/hardware');
+        )->name('barcode/hardware')->withTrashed();
 
-        Route::post('{assetId}/restore',
+        Route::post('{asset}/restore',
             [AssetsController::class, 'getRestore']
-        )->name('restore/hardware');
+        )->name('restore/hardware')->withTrashed();
 
-        Route::post('{assetId}/upload',
+        Route::post('{asset}/upload',
             [AssetFilesController::class, 'store']
-        )->name('upload/asset');
+        )->name('upload/asset')->withTrashed();
 
-        Route::get('{assetId}/showfile/{fileId}/{download?}',
+        Route::get('{asset}/showfile/{fileId}/{download?}',
             [AssetFilesController::class, 'show']
-        )->name('show/assetfile');
+        )->name('show/assetfile')->withTrashed();
 
-        Route::delete('{assetId}/showfile/{fileId}/delete',
+        Route::delete('{asset}/showfile/{fileId}/delete',
             [AssetFilesController::class, 'destroy']
-        )->name('delete/assetfile');
+        )->name('delete/assetfile')->withTrashed();
 
         Route::post(
             'bulkedit',
@@ -190,7 +190,7 @@ Route::group(
 Route::resource('hardware',
         AssetsController::class,
         ['middleware' => ['auth']
-])->parameters(['hardware' => 'asset']);
+])->parameters(['hardware' => 'asset'])->withTrashed();
 
 
 // Asset Maintenances

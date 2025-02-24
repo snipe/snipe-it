@@ -37,6 +37,15 @@
             </div>
         @endif
 
+        @if ($asset->deleted_at!='')
+            <div class="col-md-12">
+                <div class="callout callout-warning">
+                    <x-icon type="warning" />
+                    {{ trans('general.asset_deleted_warning') }}
+                </div>
+            </div>
+        @endif
+
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs hidden-print">
@@ -169,15 +178,6 @@
                     <div class="tab-pane fade in active" id="details">
                     <div class="row">
 
-                            @if ($asset->deleted_at!='')
-                                <div class="col-md-12">
-                                    <div class="callout callout-warning">
-                                        <x-icon type="warning" />
-                                        {{ trans('general.asset_deleted_warning') }}
-                                    </div>
-                                </div>
-                            @endif
-
                         <div class="info-stack-container">
                             <!-- Start button column -->
                             <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
@@ -300,7 +300,7 @@
                                             </button>
                                             <span class="sr-only">{{ trans('general.delete') }}</span>
                                         @else
-                                            <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
+                                            <form method="POST" action="{{ route('restore/hardware', [$asset]) }}">
                                                 @csrf
                                                 <button class="btn btn-sm btn-block btn-warning btn-social delete-asset">
                                                     <x-icon type="restore" />
