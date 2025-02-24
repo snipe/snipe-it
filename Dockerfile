@@ -40,7 +40,6 @@ autoconf \
 libc-dev \
 libldap-common \
 pkg-config \
-libmcrypt-dev \
 php8.3-dev \
 ca-certificates \
 unzip \
