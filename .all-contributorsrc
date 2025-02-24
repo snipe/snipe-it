@@ -3271,6 +3271,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "addex12",
+      "name": "Adugna Gizaw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18550946?v=4",
+      "profile": "https://orbalia.pythonanywhere.com/",
+      "contributions": [
+        "translation"
+      ]
     }
   ]
 }
