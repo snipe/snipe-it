@@ -100,7 +100,7 @@ class LocationsController extends Controller
     public function edit(Location $location) : View | RedirectResponse
     {
         $this->authorize('update', Location::class);
-        return view('locations/edit');
+        return view('locations/edit')->with('item', $location);
     }
 
     /**
