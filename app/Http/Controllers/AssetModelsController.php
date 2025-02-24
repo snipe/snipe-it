@@ -178,26 +178,14 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param int $modelId
      */
-    public function destroy($modelId) : RedirectResponse
+    public function destroy(AssetModel $model) : RedirectResponse
     {
         $this->authorize('delete', AssetModel::class);
-        // Check if the model exists
-        if (is_null($model = AssetModel::find($modelId))) {
-            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
-        }
+
 
         if ($model->assets()->count() > 0) {
             // Throw an error that this model is associated with assets
             return redirect()->route('models.index')->with('error', trans('admin/models/message.assoc_users'));
-        }
-
-        if ($model->image) {
-            try {
-                Storage::disk('public')->delete('models/'.$model->image);
-                $model->update(['image' => null]);
-            } catch (\Exception $e) {
-                Log::info($e);
-            }
         }
 
         // Delete the model
@@ -270,23 +258,20 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param int $modelId
      */
-    public function getClone($modelId = null) : View | RedirectResponse
+    public function getClone(AssetModel $model) : View | RedirectResponse
     {
         $this->authorize('create', AssetModel::class);
-        // Check if the model exists
-        if (is_null($model_to_clone = AssetModel::find($modelId))) {
-            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
-        }
 
-        $model = clone $model_to_clone;
+        $cloned_model = clone $model;
         $model->id = null;
+        $model->deleted_at = null;
 
         // Show the page
         return view('models/edit')
             ->with('depreciation_list', Helper::depreciationList())
             ->with('item', $model)
-            ->with('model_id', $model_to_clone->id)
-            ->with('clone_model', $model_to_clone);
+            ->with('model_id', $model->id)
+            ->with('clone_model', $cloned_model);
     }
 
 
@@ -305,7 +290,7 @@ class AssetModelsController extends Controller
 
 
     /**
-     * Returns a view that allows the user to bulk edit model attrbutes
+     * Returns a view that allows the user to bulk edit model attributes
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
