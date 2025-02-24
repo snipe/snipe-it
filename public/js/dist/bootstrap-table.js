@@ -976,9 +976,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -1129,10 +1129,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -4691,7 +4691,7 @@
   	  (!CORRECT_NEW || MISSED_STICKY || UNSUPPORTED_DOT_ALL || UNSUPPORTED_NCG || fails(function () {
   	    re2[MATCH] = false;
   	    // RegExp constructor can alter flags and IsRegExp works correct with @@match
-  	    // eslint-disable-next-line sonar/inconsistent-function-call -- required for testing
+  	    // eslint-disable-next-line sonarjs/inconsistent-function-call -- required for testing
   	    return NativeRegExp(re1) !== re1 || NativeRegExp(re2) === re2 || String(NativeRegExp(re1, 'i')) !== '/a/i';
   	  }));
 
@@ -6893,26 +6893,21 @@
 
   var Utils = {
     getBootstrapVersion: function getBootstrapVersion() {
+      var _window$bootstrap, _$$fn;
       var bootstrapVersion = 5;
-      try {
-        var rawVersion = $.fn.dropdown.Constructor.VERSION;
-
-        // Only try to parse VERSION if it is defined.
-        // It is undefined in older versions of Bootstrap (tested with 3.1.1).
+      if (typeof window !== 'undefined' && (_window$bootstrap = window.bootstrap) !== null && _window$bootstrap !== void 0 && (_window$bootstrap = _window$bootstrap.Tooltip) !== null && _window$bootstrap !== void 0 && _window$bootstrap.VERSION) {
+        var rawVersion = window.bootstrap.Tooltip.VERSION;
         if (rawVersion !== undefined) {
           bootstrapVersion = parseInt(rawVersion, 10);
         }
-      } catch (e) {
-        // ignore
-      }
-      try {
-        // eslint-disable-next-line no-undef
-        var _rawVersion = bootstrap.Tooltip.VERSION;
+      } else if (typeof $ !== 'undefined' && (_$$fn = $.fn) !== null && _$$fn !== void 0 && (_$$fn = _$$fn.dropdown) !== null && _$$fn !== void 0 && (_$$fn = _$$fn.Constructor) !== null && _$$fn !== void 0 && _$$fn.VERSION) {
+        var _rawVersion = $.fn.dropdown.Constructor.VERSION;
+
+        // Only try to parse VERSION if it is defined.
+        // It is undefined in older versions of Bootstrap (tested with 3.1.1).
         if (_rawVersion !== undefined) {
           bootstrapVersion = parseInt(_rawVersion, 10);
         }
-      } catch (e) {
-        // ignore
       }
       return bootstrapVersion;
     },
@@ -7342,6 +7337,7 @@
           return true;
         }
       } catch (e) {
+        console.error(e);
         return false;
       }
       return false;
@@ -7770,7 +7766,7 @@
     }
   };
 
-  var VERSION = '1.23.5';
+  var VERSION = '1.24.0';
   var bootstrapVersion = Utils.getBootstrapVersion();
   var CONSTANTS = {
     3: {
@@ -8597,7 +8593,9 @@
         this.options.columns = Utils.extend(true, [], columns, this.options.columns);
         this.columns = [];
         this.fieldsColumnsIndex = [];
-        Utils.setFieldIndex(this.options.columns);
+        if (this.optionsColumnsChanged !== false) {
+          Utils.setFieldIndex(this.options.columns);
+        }
         this.options.columns.forEach(function (columns, i) {
           columns.forEach(function (_column, j) {
             var column = Utils.extend({}, BootstrapTable.COLUMN_DEFAULTS, _column, {
@@ -9343,42 +9341,49 @@
                 }
               }
               if (typeof value === 'string' || typeof value === 'number') {
-                if (_this5.options.strictSearch && "".concat(value).toLowerCase() === searchText || _this5.options.regexSearch && Utils.regexCompare(value, rawSearchText)) {
-                  return true;
-                }
-                var largerSmallerEqualsRegex = /(?:(<=|=>|=<|>=|>|<)(?:\s+)?(-?\d+)?|(-?\d+)?(\s+)?(<=|=>|=<|>=|>|<))/gm;
-                var matches = largerSmallerEqualsRegex.exec(_this5.searchText);
-                var comparisonCheck = false;
-                if (matches) {
-                  var operator = matches[1] || "".concat(matches[5], "l");
-                  var comparisonValue = matches[2] || matches[3];
-                  var int = parseInt(value, 10);
-                  var comparisonInt = parseInt(comparisonValue, 10);
-                  switch (operator) {
-                    case '>':
-                    case '<l':
-                      comparisonCheck = int > comparisonInt;
-                      break;
-                    case '<':
-                    case '>l':
-                      comparisonCheck = int < comparisonInt;
-                      break;
-                    case '<=':
-                    case '=<':
-                    case '>=l':
-                    case '=>l':
-                      comparisonCheck = int <= comparisonInt;
-                      break;
-                    case '>=':
-                    case '=>':
-                    case '<=l':
-                    case '=<l':
-                      comparisonCheck = int >= comparisonInt;
-                      break;
+                if (_this5.options.strictSearch) {
+                  if ("".concat(value).toLowerCase() === searchText) {
+                    return true;
                   }
-                }
-                if (comparisonCheck || "".concat(value).toLowerCase().includes(searchText)) {
-                  return true;
+                } else if (_this5.options.regexSearch) {
+                  if (Utils.regexCompare(value, rawSearchText)) {
+                    return true;
+                  }
+                } else {
+                  var largerSmallerEqualsRegex = /(?:(<=|=>|=<|>=|>|<)(?:\s+)?(-?\d+)?|(-?\d+)?(\s+)?(<=|=>|=<|>=|>|<))/gm;
+                  var matches = largerSmallerEqualsRegex.exec(_this5.searchText);
+                  var comparisonCheck = false;
+                  if (matches) {
+                    var operator = matches[1] || "".concat(matches[5], "l");
+                    var comparisonValue = matches[2] || matches[3];
+                    var int = parseInt(value, 10);
+                    var comparisonInt = parseInt(comparisonValue, 10);
+                    switch (operator) {
+                      case '>':
+                      case '<l':
+                        comparisonCheck = int > comparisonInt;
+                        break;
+                      case '<':
+                      case '>l':
+                        comparisonCheck = int < comparisonInt;
+                        break;
+                      case '<=':
+                      case '=<':
+                      case '>=l':
+                      case '=>l':
+                        comparisonCheck = int <= comparisonInt;
+                        break;
+                      case '>=':
+                      case '=>':
+                      case '<=l':
+                      case '=<l':
+                        comparisonCheck = int >= comparisonInt;
+                        break;
+                    }
+                  }
+                  if (comparisonCheck || "".concat(value).toLowerCase().includes(searchText)) {
+                    return true;
+                  }
                 }
               }
             }
@@ -9456,7 +9461,7 @@
           html.push("<div class=\"".concat(this.constants.classes.pull, "-").concat(opts.paginationDetailHAlign, " pagination-detail\">"));
         }
         if (this.paginationParts.includes('pageInfo') || this.paginationParts.includes('pageInfoShort')) {
-          var totalRows = this.options.totalRows + (this.options.sidePagination === 'client' && this.options.paginationLoadMore && !this._paginationLoaded ? ' +' : '');
+          var totalRows = this.options.totalRows + (this.options.sidePagination === 'client' && this.options.paginationLoadMore && !this._paginationLoaded && this.totalPages > 1 ? ' +' : '');
           var paginationInfo = this.paginationParts.includes('pageInfoShort') ? opts.formatDetailPagination(totalRows) : opts.formatShowingRows(this.pageFrom, this.pageTo, totalRows, opts.totalNotFiltered);
           html.push("<span class=\"pagination-info\">\n      ".concat(paginationInfo, "\n      </span>"));
         }
@@ -9686,14 +9691,14 @@
             data_["data-".concat(k)] = _typeof(v) === 'object' ? JSON.stringify(v) : v;
           }
         }
-        var tr = Utils.h('tr', _objectSpread2(_objectSpread2({}, attributes), {}, {
+        var tr = Utils.h('tr', _objectSpread2(_objectSpread2({
           id: Array.isArray(item) ? undefined : item._id,
           class: style && style.classes || (Array.isArray(item) ? undefined : item._class),
           style: style && style.css || (Array.isArray(item) ? undefined : item._style),
           'data-index': i,
           'data-uniqueid': Utils.getItemField(item, this.options.uniqueId, false),
           'data-has-detail-view': this.options.detailView && Utils.calculateObjectValue(null, this.options.detailFilter, [i, item]) ? 'true' : undefined
-        }, data_));
+        }, attributes), data_));
         var trChildren = [];
         var detailViewTemplate = '';
         if (Utils.hasDetailViewIcon(this.options)) {
@@ -9717,6 +9722,7 @@
             class: _this7.header.classes[j] ? [_this7.header.classes[j]] : [],
             style: _this7.header.styles[j] ? [_this7.header.styles[j]] : []
           };
+          var cardViewClass = "card-view card-view-field-".concat(field);
           if ((_this7.fromHtml || _this7.autoMergeCells) && typeof value_ === 'undefined') {
             if (!column.checkbox && !column.radio) {
               return;
@@ -9731,15 +9737,15 @@
 
           // handle class, style, id, rowspan, colspan and title of td
           for (var _i10 = 0, _arr = ['class', 'style', 'id', 'rowspan', 'colspan', 'title']; _i10 < _arr.length; _i10++) {
-            var _item = _arr[_i10];
-            var _value = _item["_".concat(field, "_").concat(_item)];
+            var attr = _arr[_i10];
+            var _value = item["_".concat(field, "_").concat(attr)];
             if (!_value) {
               continue;
             }
-            if (attrs[_item]) {
-              attrs[_item].push(_value);
+            if (attrs[attr]) {
+              attrs[attr].push(_value);
             } else {
-              attrs[_item] = _value;
+              attrs[attr] = _value;
             }
           }
           var cellStyle = Utils.calculateObjectValue(_this7.header, _this7.header.cellStyles[j], [value_, item, i, field], {});
@@ -9784,7 +9790,7 @@
             var valueNodes = _this7.header.formatters[j] && (typeof value === 'string' || value instanceof Node || value instanceof $) ? Utils.htmlToNodes(value) : [];
             item[_this7.header.stateField] = value === true || !!value_ || value && value.checked;
             return Utils.h(_this7.options.cardView ? 'div' : 'td', {
-              class: [_this7.options.cardView ? 'card-view' : 'bs-checkbox', column.class],
+              class: [_this7.options.cardView ? cardViewClass : 'bs-checkbox', column.class],
               style: _this7.options.cardView ? undefined : attrs.style
             }, [Utils.h('label', {}, [Utils.h('input', {
               'data-index': i,
@@ -9798,7 +9804,7 @@
           if (_this7.options.cardView) {
             if (_this7.options.smartDisplay && value === '') {
               return Utils.h('div', {
-                class: 'card-view'
+                class: cardViewClass
               });
             }
             var cardTitle = _this7.options.showHeader ? Utils.h('span', {
@@ -9807,7 +9813,7 @@
               html: Utils.getFieldTitle(_this7.columns, field)
             }) : '';
             return Utils.h('div', {
-              class: 'card-view'
+              class: cardViewClass
             }, [cardTitle, Utils.h('span', {
               class: ['card-view-value', cellStyle.classes],
               style: attrs.style
@@ -10452,6 +10458,7 @@
         if (Utils.compareObjects(this.options, options, true)) {
           return;
         }
+        this.optionsColumnsChanged = !!options.columns;
         this.options = Utils.extend(this.options, options);
         this.trigger('refresh-options', this.options);
         this.destroy();
@@ -10591,6 +10598,10 @@
         }
         var row = this.data[params.index];
         var originalIndex = this.options.data.indexOf(row);
+        if (originalIndex === -1) {
+          this.append([params.row]);
+          return;
+        }
         this.data.splice(params.index, 0, params.row);
         this.options.data.splice(originalIndex, 0, params.row);
         this.initSearch();
@@ -11109,6 +11120,7 @@
     }, {
       key: "destroy",
       value: function destroy() {
+        clearTimeout(this.timeoutId_);
         this.$el.insertBefore(this.$container);
         $(this.options.toolbar).insertBefore(this.$el);
         this.$container.next().remove();
@@ -11499,7 +11511,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -11551,11 +11563,11 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -11969,9 +11981,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -12122,10 +12134,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -14131,7 +14143,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -14239,21 +14251,21 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(1 & o ? t.prototype : t), e, r);
-    return 2 & o ? function (t) {
-      return p.apply(r, t);
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e);
+    return 2 & r && "function" == typeof p ? function (t) {
+      return p.apply(e, t);
     } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
-      var i = e.call(t, r || "default");
+      var i = e.call(t, r);
       if ("object" != typeof i) return i;
       throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-    return ("string" === r ? String : Number)(t);
+    return (String )(t);
   }
   function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
@@ -14664,9 +14676,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -14817,10 +14829,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -17797,7 +17809,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -17927,11 +17939,11 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -18352,9 +18364,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -18505,10 +18517,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -21568,6 +21580,7 @@
       pageNumber: 'bs.table.pageNumber',
       pageList: 'bs.table.pageList',
       hiddenColumns: 'bs.table.hiddenColumns',
+      columns: 'bs.table.columns',
       cardView: 'bs.table.cardView',
       customView: 'bs.table.customView',
       searchText: 'bs.table.searchText',
@@ -21585,6 +21598,9 @@
       return navigator.cookieEnabled;
     },
     isCookieEnabled: function isCookieEnabled(that, cookieName) {
+      if (cookieName === 'bs.table.columns') {
+        return that.options.cookiesEnabled.includes('bs.table.hiddenColumns');
+      }
       return that.options.cookiesEnabled.includes(cookieName);
     },
     setCookie: function setCookie(that, cookieName, cookieValue) {
@@ -21741,6 +21757,7 @@
     return _createClass(_class, [{
       key: "init",
       value: function init() {
+        var _this = this;
         if (this.options.cookie) {
           if (this.options.cookieStorage === 'cookieStorage' && !UtilsCookie.isCookieSupportedByBrowser()) {
             throw new Error('Cookies are not enabled in this browser.');
@@ -21756,6 +21773,7 @@
           try {
             filterByCookie = JSON.parse(filterByCookieValue);
           } catch (e) {
+            console.error(e);
             throw new Error('Could not parse the json of the filterBy cookie!');
           }
           this.filterColumns = filterByCookie ? filterByCookie : {};
@@ -21765,24 +21783,23 @@
           this._filterControlValuesLoaded = false;
           this.options.cookiesEnabled = typeof this.options.cookiesEnabled === 'string' ? this.options.cookiesEnabled.replace('[', '').replace(']', '').replace(/'/g, '').replace(/ /g, '').split(',') : this.options.cookiesEnabled;
           if (this.options.filterControl) {
-            var that = this;
             this.$el.on('column-search.bs.table', function (e, field, text) {
               var isNewField = true;
-              for (var i = 0; i < that._filterControls.length; i++) {
-                if (that._filterControls[i].field === field) {
-                  that._filterControls[i].text = text;
+              for (var i = 0; i < _this._filterControls.length; i++) {
+                if (_this._filterControls[i].field === field) {
+                  _this._filterControls[i].text = text;
                   isNewField = false;
                   break;
                 }
               }
               if (isNewField) {
-                that._filterControls.push({
+                _this._filterControls.push({
                   field: field,
                   text: text
                 });
               }
-              UtilsCookie.setCookie(that, UtilsCookie.cookieIds.filterControl, JSON.stringify(that._filterControls));
-            }).on('created-controls.bs.table', UtilsCookie.initCookieFilters(that));
+              UtilsCookie.setCookie(_this, UtilsCookie.cookieIds.filterControl, JSON.stringify(_this._filterControls));
+            }).on('created-controls.bs.table', UtilsCookie.initCookieFilters(this));
           }
         }
         _superPropGet(_class, "init", this)([]);
@@ -21912,6 +21929,9 @@
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.hiddenColumns, JSON.stringify(this.getHiddenColumns().map(function (column) {
           return column.field;
         })));
+        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.columns, JSON.stringify(this.columns.map(function (column) {
+          return column.field;
+        })));
       }
     }, {
       key: "_toggleAllColumns",
@@ -21924,6 +21944,9 @@
           return;
         }
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.hiddenColumns, JSON.stringify(this.getHiddenColumns().map(function (column) {
+          return column.field;
+        })));
+        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.columns, JSON.stringify(this.columns.map(function (column) {
           return column.field;
         })));
       }
@@ -22008,15 +22031,20 @@
         var cardViewCookie = UtilsCookie.getCookie(this, UtilsCookie.cookieIds.cardView);
         var customViewCookie = UtilsCookie.getCookie(this, UtilsCookie.cookieIds.customView);
         var hiddenColumnsCookieValue = UtilsCookie.getCookie(this, UtilsCookie.cookieIds.hiddenColumns);
+        var columnsCookieValue = UtilsCookie.getCookie(this, UtilsCookie.cookieIds.columns);
         var hiddenColumnsCookie = {};
+        var columnsCookie = {};
         try {
           hiddenColumnsCookie = JSON.parse(hiddenColumnsCookieValue);
+          columnsCookie = JSON.parse(columnsCookieValue);
         } catch (e) {
-          throw new Error('Could not parse the json of the hidden columns cookie!', hiddenColumnsCookieValue);
+          console.error(e);
+          throw new Error('Could not parse the json of the columns cookie!');
         }
         try {
           sortPriorityCookie = JSON.parse(sortPriorityCookie);
         } catch (e) {
+          console.error(e);
           throw new Error('Could not parse the json of the sortPriority cookie!', sortPriorityCookie);
         }
         if (!sortPriorityCookie) {
@@ -22050,12 +22078,15 @@
         }
         this.customViewDefaultView = customViewCookie === 'true';
         if (hiddenColumnsCookie) {
+          columnsCookie = columnsCookie || this.columns.map(function (column) {
+            return column.field;
+          });
           var _iterator2 = _createForOfIteratorHelper(this.columns),
             _step2;
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var column = _step2.value;
-              if (!column.switchable) {
+              if (!column.switchable || !columnsCookie.includes(column.field)) {
                 continue;
               }
               column.visible = this.isSelectionColumn(column) || !hiddenColumnsCookie.includes(column.field);
@@ -22070,14 +22101,13 @@
     }, {
       key: "getCookies",
       value: function getCookies() {
-        var bootstrapTable = this;
         var cookies = {};
         for (var _i = 0, _Object$entries = Object.entries(UtilsCookie.cookieIds); _i < _Object$entries.length; _i++) {
           var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
             key = _Object$entries$_i[0],
             value = _Object$entries$_i[1];
-          cookies[key] = UtilsCookie.getCookie(bootstrapTable, value);
-          if (key === 'columns' || key === 'hiddenColumns' || key === 'sortPriority') {
+          cookies[key] = UtilsCookie.getCookie(this, value);
+          if (['columns', 'hiddenColumns', 'sortPriority'].includes(key)) {
             cookies[key] = JSON.parse(cookies[key]);
           }
         }
@@ -22094,12 +22124,11 @@
     }, {
       key: "configureStorage",
       value: function configureStorage() {
-        var that = this;
         this._storage = {};
         switch (this.options.cookieStorage) {
           case 'cookieStorage':
             this._storage.setItem = function (cookieName, cookieValue) {
-              document.cookie = [cookieName, '=', encodeURIComponent(cookieValue), "; expires=".concat(UtilsCookie.calculateExpiration(that.options.cookieExpire)), that.options.cookiePath ? "; path=".concat(that.options.cookiePath) : '', that.options.cookieDomain ? "; domain=".concat(that.options.cookieDomain) : '', that.options.cookieSecure ? '; secure' : '', ";SameSite=".concat(that.options.cookieSameSite)].join('');
+              document.cookie = [cookieName, '=', encodeURIComponent(cookieValue), "; expires=".concat(UtilsCookie.calculateExpiration(this.options.cookieExpire)), this.options.cookiePath ? "; path=".concat(this.options.cookiePath) : '', this.options.cookieDomain ? "; domain=".concat(this.options.cookieDomain) : '', this.options.cookieSecure ? '; secure' : '', ";SameSite=".concat(this.options.cookieSameSite)].join('');
             };
             this._storage.getItem = function (cookieName) {
               var value = "; ".concat(document.cookie);
@@ -22107,7 +22136,7 @@
               return parts.length === 2 ? decodeURIComponent(parts.pop().split(';').shift()) : null;
             };
             this._storage.removeItem = function (cookieName) {
-              document.cookie = [encodeURIComponent(cookieName), '=', '; expires=Thu, 01 Jan 1970 00:00:00 GMT', that.options.cookiePath ? "; path=".concat(that.options.cookiePath) : '', that.options.cookieDomain ? "; domain=".concat(that.options.cookieDomain) : '', ";SameSite=".concat(that.options.cookieSameSite)].join('');
+              document.cookie = [encodeURIComponent(cookieName), '=', '; expires=Thu, 01 Jan 1970 00:00:00 GMT', this.options.cookiePath ? "; path=".concat(this.options.cookiePath) : '', this.options.cookieDomain ? "; domain=".concat(this.options.cookieDomain) : '', ";SameSite=".concat(this.options.cookieSameSite)].join('');
             };
             break;
           case 'localStorage':
@@ -22137,13 +22166,13 @@
               throw new Error('The following options must be set while using the customStorage: cookieCustomStorageSet, cookieCustomStorageGet and cookieCustomStorageDelete');
             }
             this._storage.setItem = function (cookieName, cookieValue) {
-              Utils.calculateObjectValue(that.options, that.options.cookieCustomStorageSet, [cookieName, cookieValue], '');
+              Utils.calculateObjectValue(this.options, this.options.cookieCustomStorageSet, [cookieName, cookieValue], '');
             };
             this._storage.getItem = function (cookieName) {
-              return Utils.calculateObjectValue(that.options, that.options.cookieCustomStorageGet, [cookieName], '');
+              return Utils.calculateObjectValue(this.options, this.options.cookieCustomStorageGet, [cookieName], '');
             };
             this._storage.removeItem = function (cookieName) {
-              Utils.calculateObjectValue(that.options, that.options.cookieCustomStorageDelete, [cookieName], '');
+              Utils.calculateObjectValue(this.options, this.options.cookieCustomStorageDelete, [cookieName], '');
             };
             break;
           default:
@@ -22178,7 +22207,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -22230,11 +22259,11 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -22648,9 +22677,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -22801,10 +22830,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -24630,7 +24659,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -24712,11 +24741,11 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -25137,9 +25166,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -25290,10 +25319,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -29823,7 +29852,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -29875,11 +29904,11 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -30293,9 +30322,9 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -30446,10 +30475,10 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -32278,7 +32307,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -32414,11 +32443,11 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toConsumableArray(r) {
     return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
@@ -32842,9 +32871,9 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -32995,10 +33024,10 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;

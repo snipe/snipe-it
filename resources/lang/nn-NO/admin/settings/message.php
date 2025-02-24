@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Tester LDAP-autentisering...',
         'authentication_success' => 'Brukeren ble autentisert mot LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Sender :app test melding...',
         'success' => 'Ditt :webhook_name integrasjon fungerer!',
@@ -45,5 +48,7 @@ return [
         'error' => 'Noe gikk galt. :app svarte med: :error_message',
         'error_redirect' => 'FEIL: 301/302 :endpoint returnerer en omaddressering. Av sikkerhetsgrunner følger vi ikke omadressering. Vennligst bruk det faktiske endepunktet.',
         'error_misc' => 'Noe gikk galt. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

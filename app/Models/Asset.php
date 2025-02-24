@@ -413,6 +413,17 @@ class Asset extends Depreciable
         return $this->rules;
     }
 
+    public function customFieldsForCheckinCheckout($checkin_checkout) {
+        // Check to see if any of the custom fields were included on the form and if they have any values
+        if (($this->model) && ($this->model->fieldset) && ($this->model->fieldset->fields)) {
+            foreach ($this->model->fieldset->fields as $field) {
+                if (($field->{$checkin_checkout} == 1) && (request()->has($field->db_column))){
+                    $this->{$field->db_column} = request()->get($field->db_column);
+                }
+            }
+        }
+    }
+
 
     /**
      * Establishes the asset -> depreciation relationship
@@ -521,6 +532,18 @@ class Asset extends Depreciable
     public function assignedAssets()
     {
         return $this->morphMany(self::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+    }
+
+    /**
+     * Establishes the accessory -> asset assignment relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function assignedAccessories()
+    {
+        return $this->morphMany(\App\Models\AccessoryCheckout::class, 'assigned', 'assigned_type', 'assigned_to');
     }
 
 

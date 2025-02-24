@@ -32,7 +32,8 @@ class ModalController extends Controller
             'statuslabel',
             'supplier',
             'upload-file',
-            'user',         
+            'user',
+            'add-note',
         ];
 
 

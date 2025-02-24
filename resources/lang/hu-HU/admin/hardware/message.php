@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Biztos benne, hogy törli ezt az elemet?',
         'error'   		=> 'Hiba történt az eszköz törlése közben. Kérlek próbáld újra.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Nincsenek eszközök kijelölve, így semmit sem töröltek.',
         'success' 		=> 'Az eszköz sikeresen törölve lett.',
     ],

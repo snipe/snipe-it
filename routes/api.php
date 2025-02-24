@@ -1302,7 +1302,9 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             )->name('api.activity.index');
         }); // end reports api routes
 
-        /**
+
+
+    /**
          * Version API routes
          */
 

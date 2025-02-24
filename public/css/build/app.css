@@ -1414,4 +1414,8 @@ input[type="radio"]:checked::before {
   filter: brightness(70%);
   font-size: 70%;
 }
+/** this is needed to override ekko-lightboxes card view styles **/
+.bootstrap-table .fixed-table-container .table tbody tr .card-view {
+  display: table-row !important;
+}
 

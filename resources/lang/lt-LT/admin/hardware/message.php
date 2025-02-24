@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Ar tikrai norite panaikinti šį turtą?',
         'error'   		=> 'Bandant panaikinti turtą įvyko klaida. Bandykite dar kartą.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Nebuvo pasirinkta jokio turto, todėl nieko nebuvo panaikinta.',
         'success' 		=> 'Turtas sėkmingai panaikintas.',
     ],

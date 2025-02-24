@@ -48,7 +48,7 @@ class ConsumablesFilesController extends Controller
                 }
 
 
-                return redirect()->route('consumables.show', $consumable->id)->with('success', trans('general.file_upload_success'));
+                return redirect()->route('consumables.show', $consumable->id)->withFragment('files')->with('success', trans('general.file_upload_success'));
 
             }
 
@@ -89,7 +89,7 @@ class ConsumablesFilesController extends Controller
 
             $log->delete();
 
-            return redirect()->back()
+            return redirect()->back()->withFragment('files')
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 

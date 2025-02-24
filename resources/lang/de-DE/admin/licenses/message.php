@@ -50,7 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Lizenz wurde nicht zurückgenommen, bitte versuchen Sie es erneut.',
-        'not_reassignable' => 'License not reassignable',
+        'not_reassignable' => 'Lizenz nicht neu zuweisbar',
         'success' => 'Die Lizenz wurde erfolgreich zurückgenommen'
     ),
 

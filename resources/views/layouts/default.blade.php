@@ -214,7 +214,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                     </a>
                                     <ul class="dropdown-menu">
                                         @can('create', \App\Models\Asset::class)
-                                            <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
+                                            <li{!! (Request::is('hardware/create') ? ' class="active"' : '') !!}>
                                                 <a href="{{ route('hardware.create') }}" tabindex="-1">
                                                     <x-icon type="assets" />
                                                     {{ trans('general.asset') }}
@@ -222,7 +222,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                             </li>
                                         @endcan
                                         @can('create', \App\Models\License::class)
-                                            <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
+                                            <li{!! (Request::is('licenses/create') ? ' class="active"' : '') !!}>
                                                 <a href="{{ route('licenses.create') }}" tabindex="-1">
                                                     <x-icon type="licenses" />
                                                     {{ trans('general.license') }}
@@ -373,12 +373,14 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                         </li>
                                         @endcan
 
+                                        @if (Auth::user()->ldap_import!='1')
                                         <li>
                                             <a href="{{ route('account.password.index') }}">
                                                 <x-icon type="password" class="fa-fw" />
                                                 {{ trans('general.changepassword') }}
                                             </a>
                                         </li>
+                                        @endif
 
 
                                         @can('self.api')
@@ -811,7 +813,6 @@ dir="{{ Helper::determineLanguageDirection() }}">
             <!-- Content Wrapper. Contains page content -->
 
             <div class="content-wrapper" role="main" id="setting-list">
-                <barepay></barepay>
 
                 @if ($debug_in_production)
                     <div class="row" style="margin-bottom: 0px; background-color: red; color: white; font-size: 15px;">
@@ -825,25 +826,72 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 @endif
 
                 <!-- Content Header (Page header) -->
-                <section class="content-header" style="padding-bottom: 30px;">
-                    <h1 class="pull-left pagetitle">@yield('title') </h1>
+                <section class="content-header">
 
-                    @if (isset($helpText))
-                        @include ('partials.more-info',
-                                               [
-                                                   'helpText' => $helpText,
-                                                   'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
-                                               ])
-                    @endif
-                    <div class="pull-right">
-                        @yield('header_right')
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom: 0px;">
+
+                        <style>
+                            .breadcrumb-item {
+                                display: inline;
+                                list-style: none;
+                            }
+                        </style>
+
+                            <h1 class="pull-left pagetitle" style="font-size: 22px; margin-top: 5px;">
+
+                                @if (Breadcrumbs::has() && (Breadcrumbs::current()->count() > 1))
+                                    <ul style="padding-left: 0;">
+
+                                    @foreach (Breadcrumbs::current() as $crumbs)
+                                        @if ($crumbs->url() && !$loop->last)
+                                            <li class="breadcrumb-item">
+                                                <a href="{{ $crumbs->url() }}">
+                                                    @if ($loop->first)
+                                                        {!! Blade::render($crumbs->title()) !!}
+                                                    @else
+                                                        {{ Blade::render($crumbs->title()) }}
+                                                    @endif
+                                                </a>
+                                                <x-icon type="angle-right" />
+                                            </li>
+                                        @elseif (is_null($crumbs->url()) && !$loop->last)
+                                            <li class="breadcrumb-item active">
+                                                {{ $crumbs->title() }}
+                                                <x-icon type="angle-right" />
+                                            </li>
+                                       @else
+                                            <li class="breadcrumb-item active">
+                                                {{ $crumbs->title() }}
+                                            </li>
+                                        @endif
+                                    @endforeach
+
+                                    </ul>
+                                @else
+                                    @yield('title')
+                                @endif
+
+                            </h1>
+
+                                @if (isset($helpText))
+                                    @include ('partials.more-info',
+                                                           [
+                                                               'helpText' => $helpText,
+                                                               'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                                                           ])
+                                @endif
+                                <div class="pull-right">
+                                    @yield('header_right')
+                                </div>
+
+                        </div>
                     </div>
-
-
                 </section>
 
 
-                <section class="content" id="main" tabindex="-1">
+                <section class="content" id="main" tabindex="-1" style="padding-top: 0px;">
 
                     <!-- Notifications -->
                     <div class="row">

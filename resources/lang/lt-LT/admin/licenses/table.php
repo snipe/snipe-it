@@ -8,7 +8,7 @@ return array(
     'id'      			=> 'ID',
     'license_email'   	=> 'Licencijos el. paštas',
     'license_name'   	=> 'Licencija išduota',
-    'purchase_date'   	=> 'Pirkimo data',
+    'purchase_date'   	=> 'Įsigijimo data',
     'purchased'   		=> 'Įsigyta',
     'seats'   			=> 'Vietos',
     'hardware'   		=> 'Įranga',

@@ -140,13 +140,13 @@ class ActionlogsTransformer
             } else {
                 if ($actionlog->item) {
                     if ($actionlog->itemType() == 'asset') {
-                        $file_url = route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
+                        $file_url = route('show/assetfile', ['asset' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                     } elseif ($actionlog->itemType() == 'accessory') {
                         $file_url = route('show.accessoryfile', ['accessoryId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                     } elseif ($actionlog->itemType() == 'license') {
                         $file_url = route('show.licensefile', ['licenseId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                     } elseif ($actionlog->itemType() == 'user') {
-                        $file_url = route('show/userfile', ['userId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
+                        $file_url = route('show/userfile', ['user' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                     }
                 }
             }

@@ -19,6 +19,8 @@ return [
     'print_assigned'    => 'Skriv ut alt tilordnet',
     'email_assigned'    => 'Epostliste for alle tilknyttede',
     'user_notified'     => 'Brukeren har blitt sendt en liste over elementer som er tildelt brukeren.',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Inkluder denne brukeren ved automatisk tildeling av kvalifiserte lisenser',
     'auto_assign_help'  => 'Hopp over brukeren i autotildeling av lisenser',
     'software_user'     => 'Programvare utsjekket til :name',

@@ -258,7 +258,7 @@
 <div x-data="{{ $name }}" x-init="_init" class="l2fd-root">
     <input type="hidden" name="{{ $name }}" x-model="valueString" x-ref="input" />
     <div class="l2fd-main">
-        <h1 class="l2fd-title" style="grid-area: fields-title">Fields</h1>
+        <h1 class="l2fd-title" style="grid-area: fields-title">{{trans('general.fields')}}</h1>
         <div class="l2fd-list" style="grid-area: fields-list">
             <template x-for="(field, index) in fields">
                 <div
@@ -296,7 +296,7 @@
                 ><i class="fa-solid fa-trash"></i></button>
         </div>
 
-        <h1 class="l2fd-title" style="grid-area: options-title">Options</h1>
+        <h1 class="l2fd-title" style="grid-area: options-title">{{trans('general.options')}}</h1>
         <div class="l2fd-list" style="grid-area: options-list">
             <template x-if="selectedField">
                 <template x-for="(option, index) in selectedField.options">
@@ -308,11 +308,11 @@
                             'selected': selectedOption == option 
                         }"
                         x-on:click="selectedOption = option" >
-                        <label style="grid-area: label-title">Label</label>
+                        <label style="grid-area: label-title">{{trans('general.label')}}</label>
                         <input style="grid-area: label-field" x-model="option.label" />
-                        <label style="grid-area: source-title">DataSource</label>
+                        <label style="grid-area: source-title">{{trans('general.data_source')}}</label>
                         <select style="grid-area: source-field" x-model="option.datasource">
-                            <optgroup label="Asset">
+                            <optgroup label="{{trans('general.asset')}}">
                                 <option value="" disabled>{{ trans('general.select_datasource') }}</option>
                                 <option value="asset_tag">{{trans('admin/hardware/table.asset_tag')}}</option>
                                 <option value="name">{{trans('admin/hardware/form.name')}}</option>
@@ -324,34 +324,34 @@
                                 <option value="last_audit_date">{{trans('general.last_audit')}}</option>
                                 <option value="next_audit_date">{{trans('general.next_audit_date')}}</option>
                             </optgroup>
-                            <optgroup label="Asset Model">
+                            <optgroup label="{{trans('general.asset')." ".trans('general.asset_model')}}">
                                 <option value="model.name">{{trans('admin/models/table.name')}}</option>
                                 <option value="model.model_number">{{trans('admin/models/table.modelnumber')}}</option>
                             </optgroup>
-                            <optgroup label="Manufacturer">
+                            <optgroup label="{{trans('general.manufacturer')}}">
                                 <option value="model.manufacturer.name">{{trans('admin/hardware/form.manufacturer')}}</option>
                                 <option value="model.manufacturer.support_email">{{trans('admin/manufacturers/table.support_email')}}</option>
                                 <option value="model.manufacturer.support_phone">{{trans('admin/manufacturers/table.support_phone')}}</option>
                                 <option value="model.manufacturer.support_url">{{trans('general.url')}}</option>
                             </optgroup>
-                            <optgroup label="Category">
+                            <optgroup label="{{trans('general.category')}}">
                                 <option value="model.category.name">{{trans('admin/categories/general.category_name')}}</option>
                             </optgroup>
-                            <optgroup label="Status">
+                            <optgroup label="{{trans('general.status')}}">
                                 <option value="assetstatus.name">{{trans('admin/statuslabels/table.name')}}</option>
                             </optgroup>
-                            <optgroup label="Supplier">
+                            <optgroup label="{{trans('general.supplier')}}">
                                 <option value="supplier.name">{{trans('admin/suppliers/table.name')}}</option>
                             </optgroup>
-                            <optgroup label="Default Location">
+                            <optgroup label=" {{trans('admin/hardware/form.default_location')}}">
                                 <option value="defaultLoc.name">{{trans('admin/hardware/form.default_location')}}</option>
                                 <option value="defaultLoc.phone">{{trans('admin/hardware/form.default_location_phone')}}</option>
                             </optgroup>
-                            <optgroup label="Location">
+                            <optgroup label="{{trans('general.location')}}">
                                 <option value="location.name">{{trans('admin/locations/table.name')}}</option>
                                 <option value="location.phone">{{trans('admin/locations/table.phone')}}</option>
                             </optgroup>
-                            <optgroup label="Company">
+                            <optgroup label="{{trans('general.company')}}">
                                 <option value="company.email">{{trans('admin/companies/table.email')}}</option>
                                 <option value="company.name">{{trans('admin/companies/table.name')}}</option>
                                 <option value="company.phone">{{trans('admin/companies/table.phone')}}</option>

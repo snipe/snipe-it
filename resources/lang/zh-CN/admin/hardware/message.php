@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> '你确定要删除这个资产吗？',
         'error'   		=> '删除资产的过程中出现了一点儿问题，请重试。',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag 目前已借出。在删除此设备之前请先归还。 [2,*] Asset Tags: :asset_tag 目前已借出。在删除此设备之前请先归还。',
         'nothing_updated'   => '没有选择任何资产，所以没有删除任何资产。',
         'success' 		=> '资产成功被删除。',
     ],

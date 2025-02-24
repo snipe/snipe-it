@@ -7,6 +7,7 @@ use App\Models\Labels\Label as LabelModel;
 use App\Models\Labels\Sheet;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Traits\Macroable;
 use TCPDF;
@@ -38,7 +39,7 @@ class Label implements View
         $settings = $this->data->get('settings');
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
-        $template = LabelModel::find($settings->label2_template);
+
 
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable)) {
@@ -47,6 +48,12 @@ class Label implements View
                 ->with('settings', $settings)
                 ->with('bulkedit', $this->data->get('bulkedit'))
                 ->with('count', $this->data->get('count'));
+        }
+
+            $template = LabelModel::find($settings->label2_template);
+
+        if ($template === null) {
+            return redirect()->route('settings.labels.index')->with('error', trans('admin/settings/message.labels.null_template'));
         }
 
         $template->validate();
@@ -116,12 +123,9 @@ class Label implements View
                         }
                     }
               
-                if ($template->getSupport2DBarcode()) {
+            if ($template->getSupport2DBarcode()) {
                     $barcode2DType = $settings->label2_2d_type;
-                    $barcode2DType = ($barcode2DType == 'default') ? 
-                        $settings->barcode_type :
-                        $barcode2DType;
-                    if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
+                if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
                         switch ($settings->label2_2d_target) {
                             case 'ht_tag': 
                                 $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); 

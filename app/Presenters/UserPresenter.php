@@ -24,6 +24,7 @@ class UserPresenter extends Presenter
             [
                 'field' => 'checkbox',
                 'checkbox' => true,
+                'titleTooltip' => trans('general.select_all_none'),
             ],
             [
                 'field' => 'id',

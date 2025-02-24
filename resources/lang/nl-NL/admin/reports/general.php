@@ -14,9 +14,9 @@ return [
         'user_country' => 'Gebruiker Land',
         'user_zip' => 'Gebruiker Postcode'
     ],
-    'open_saved_template' => 'Open Saved Template',
-    'save_template' =>  'Save Template',
-    'select_a_template' => 'Select a Template',
-    'template_name' => 'Template Name',
-    'update_template' => 'Update Template',
+    'open_saved_template' => 'Opgeslagen sjabloon openen',
+    'save_template' =>  'Sjabloon opslaan',
+    'select_a_template' => 'Kies een sjabloon',
+    'template_name' => 'Sjabloonnaam',
+    'update_template' => 'Sjabloon bijwerken',
 ];

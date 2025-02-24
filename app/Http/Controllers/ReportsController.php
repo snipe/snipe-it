@@ -11,6 +11,7 @@ use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\AssetMaintenance;
 use App\Models\CheckoutAcceptance;
+use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\Depreciation;
 use App\Models\License;
@@ -18,6 +19,7 @@ use App\Models\ReportTemplate;
 use App\Models\Setting;
 use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Mail;
@@ -1109,28 +1111,31 @@ class ReportsController extends Controller
         $this->authorize('reports.view');
         $showDeleted = $deleted == 'deleted';
 
-        /**
-         * Get all assets with pending checkout acceptances
-         */
-        if($showDeleted) {
-            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->withTrashed()->with(['assignedTo' , 'checkoutable.assignedTo', 'checkoutable.model'])->get();
-        } else {
-            $acceptances = CheckoutAcceptance::pending()->where('checkoutable_type', 'App\Models\Asset')->with(['assignedTo' => function ($query) {
-                $query->withTrashed();
-            }, 'checkoutable.assignedTo', 'checkoutable.model'])->get();
+        $query = CheckoutAcceptance::pending()
+            ->where('checkoutable_type', 'App\Models\Asset')
+            ->with([
+                'checkoutable' => function (MorphTo $query) {
+                    $query->morphWith([
+                        AssetModel::class => ['model'],
+                        Company::class => ['company'],
+                        Asset::class => ['assignedTo'],
+                    ])->with('model.category');
+                },
+                'assignedTo' => function($query){
+                         $query->withTrashed();
+                    }
+            ]);
+
+        if ($showDeleted) {
+            $query->withTrashed();
         }
 
-        $assetsForReport = $acceptances
-            ->filter(function ($acceptance) {
-                $acceptance_checkoutable_flag = false;
-                if ($acceptance->checkoutable){
-                    $acceptance_checkoutable_flag = $acceptance->checkoutable->checkedOutToUser();
-                }
-                
-                return $acceptance->checkoutable_type == 'App\Models\Asset' && $acceptance_checkoutable_flag;
-            })
-            ->map(function($acceptance) {
-                return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
+        $assetsForReport = $query->get()
+                ->map(function ($acceptance) {
+                    return [
+                        'assetItem' => $acceptance->checkoutable,
+                        'acceptance' => $acceptance,
+                    ];
             });
 
         return view('reports/unaccepted_assets', compact('assetsForReport','showDeleted' ));

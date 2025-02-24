@@ -50,7 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Bandant paimti licenciją įvyko klaida. Bandykite dar kartą.',
-        'not_reassignable' => 'License not reassignable',
+        'not_reassignable' => 'Ši licencija nėra perduodama',
         'success' => 'Licencija paimta sėkmingai'
     ),
 

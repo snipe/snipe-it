@@ -37,6 +37,15 @@
             </div>
         @endif
 
+        @if ($asset->deleted_at!='')
+            <div class="col-md-12">
+                <div class="callout callout-warning">
+                    <x-icon type="warning" />
+                    {{ trans('general.asset_deleted_warning') }}
+                </div>
+            </div>
+        @endif
+
         <div class="col-md-12">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs hidden-print">
@@ -77,12 +86,29 @@
                           <span class="hidden-lg hidden-md">
                             <x-icon type="assets" class="fa-2x" />
                           </span>
-                            <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
+                            <span class="hidden-xs hidden-sm">
+                                {{ trans('general.assets') }}
                                 {!! ($asset->assignedAssets()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->assignedAssets()->count()).'</span>' : '' !!}
 
                           </span>
                         </a>
                     </li>
+
+                    @if ($asset->assignedAccessories->count() > 0)
+                        <li>
+                            <a href="#accessories_assigned" data-toggle="tab" data-tooltip="true">
+
+                                <span class="hidden-lg hidden-md">
+                                    <i class="fas fa-keyboard fa-2x"></i>
+                                </span>
+                                <span class="hidden-xs hidden-sm">
+                                    {{ trans('general.accessories_assigned') }}
+                                    {!! ($asset->assignedAccessories()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->assignedAccessories()->count()).'</span>' : '' !!}
+
+                                </span>
+                            </a>
+                        </li>
+                    @endif
 
 
                     <li>
@@ -152,15 +178,6 @@
                     <div class="tab-pane fade in active" id="details">
                     <div class="row">
 
-                            @if ($asset->deleted_at!='')
-                                <div class="col-md-12">
-                                    <div class="callout callout-warning">
-                                        <x-icon type="warning" />
-                                        {{ trans('general.asset_deleted_warning') }}
-                                    </div>
-                                </div>
-                            @endif
-
                         <div class="info-stack-container">
                             <!-- Start button column -->
                             <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
@@ -181,7 +198,7 @@
                                 @if ($asset->deleted_at=='')
                                     @can('update', $asset)
                                         <div class="col-md-12 hidden-print" style="padding-top: 5px;">
-                                            <a href="{{ route('hardware.edit', $asset->id) }}" class="btn btn-sm btn-warning btn-social btn-block hidden-print">
+                                            <a href="{{ route('hardware.edit', $asset) }}" class="btn btn-sm btn-warning btn-social btn-block hidden-print">
                                                 <x-icon type="edit" />
                                                 {{ trans('admin/hardware/general.edit') }}
                                             </a>
@@ -215,6 +232,18 @@
                                     @endif
                                 @endif
 
+                                        <!-- Add notes -->
+                                        @can('update', \App\Models\Asset::class)
+                                            <div class="col-md-12 hidden-print" style="padding-top: 5px;">
+                                                <a href="#" style="width: 100%" data-toggle="modal" data-target="#createNoteModal" class="btn btn-sm btn-primary btn-block btn-social hidden-print">
+                                                    <x-icon type="note" />
+                                                    {{ trans('general.add_note') }}
+                                                </a>
+                                                @include ('modals.add-note', ['type' => 'asset', 'id' => $asset->id])
+                                            </div>
+                                        @endcan
+
+
 
 
                                     @can('audit', \App\Models\Asset::class)
@@ -239,18 +268,21 @@
                                 @endcan
 
                                 <div class="col-md-12 hidden-print" style="padding-top: 5px;">
-                                    {{ Form::open([
-                                                     'method' => 'POST',
-                                                     'route' => ['hardware/bulkedit'],
-                                                     'class' => 'form-inline',
-                                                      'target'=>'_blank',
-                                                      'id' => 'bulkForm']) }}
+                                    <form
+                                        method="POST"
+                                        action="{{ route('hardware/bulkedit') }}"
+                                        accept-charset="UTF-8"
+                                        class="form-inline"
+                                        target="_blank"
+                                        id="bulkForm"
+                                    >
+                                    @csrf
                                     <input type="hidden" name="bulk_actions" value="labels" />
                                     <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
                                     <button class="btn btn-block btn-social btn-sm btn-default" id="bulkEdit"{{ (!$asset->model ? ' disabled' : '') }}{!! (!$asset->model ? ' data-tooltip="true" title="'.trans('admin/hardware/general.model_invalid').'"' : '') !!}>
                                         <x-icon type="assets" />
                                         {{ trans_choice('button.generate_labels', 1) }}</button>
-                                        {{ Form::close() }}
+                                    </form>
                                 </div>
 
                                 @can('delete', $asset)
@@ -268,7 +300,7 @@
                                             </button>
                                             <span class="sr-only">{{ trans('general.delete') }}</span>
                                         @else
-                                            <form method="POST" action="{{ route('restore/hardware', ['assetId' => $asset->id]) }}">
+                                            <form method="POST" action="{{ route('restore/hardware', [$asset]) }}">
                                                 @csrf
                                                 <button class="btn btn-sm btn-block btn-warning btn-social delete-asset">
                                                     <x-icon type="restore" />
@@ -417,7 +449,7 @@
                                                     {{ $asset->assetstatus->name }}
                                                     <label class="label label-default">{{ trans('general.deployed') }}</label>
 
-                                                
+
                                                     <x-icon type="long-arrow-right" />
                                                     <x-icon type="{{ $asset->assignedType() }}" class="fa-fw" />
                                                     {!!  $asset->assignedTo->present()->nameUrl() !!}
@@ -1099,7 +1131,7 @@
                                             {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
                                         </div>
                                     </div>
-                                    
+
                                 </div> <!--/end striped container-->
                             </div> <!-- end col-md-9 -->
                         </div><!-- end info-stack-container -->
@@ -1217,11 +1249,14 @@
                                 @if ($asset->assignedAssets->count() > 0)
 
 
-                                    {{ Form::open([
-                                              'method' => 'POST',
-                                              'route' => ['hardware/bulkedit'],
-                                              'class' => 'form-inline',
-                                               'id' => 'bulkForm']) }}
+                                    <form
+                                        method="POST"
+                                        action="{{ route('hardware/bulkedit') }}"
+                                        accept-charset="UTF-8"
+                                        class="form-inline"
+                                        id="bulkForm"
+                                    >
+                                    @csrf
                                     <div id="toolbar">
                                         <label for="bulk_actions"><span class="sr-only">{{ trans('general.bulk_actions')}}</span></label>
                                         <select name="bulk_actions" class="form-control select2" style="width: 150px;" aria-label="bulk_actions">
@@ -1259,7 +1294,7 @@
                                         </table>
 
 
-                                        {{ Form::close() }}
+                                        </form>
                                     </div>
 
                                 @else
@@ -1274,6 +1309,40 @@
                             </div><!-- /col -->
                         </div> <!-- row -->
                     </div> <!-- /.tab-pane software -->
+
+
+                <div class="tab-pane" id="accessories_assigned">
+
+
+                    <div class="table table-responsive">
+
+                        <h2 class="box-title" style="float:left">
+                            {{ trans('general.accessories_assigned') }}
+                        </h2>
+
+                        <table
+                                data-columns="{{ \App\Presenters\AssetPresenter::assignedAccessoriesDataTableLayout() }}"
+                                data-cookie-id-table="accessoriesAssignedListingTable"
+                                data-pagination="true"
+                                data-id-table="accessoriesAssignedListingTable"
+                                data-search="true"
+                                data-side-pagination="server"
+                                data-show-columns="true"
+                                data-show-export="true"
+                                data-show-refresh="true"
+                                data-sort-order="asc"
+                                data-click-to-select="true"
+                                id="accessoriesAssignedListingTable"
+                                class="table table-striped snipe-table"
+                                data-url="{{ route('api.assets.assigned_accessories', ['asset' => $asset]) }}"
+                                data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($asset->name) }}-accessories-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                        </table>
+
+                    </div><!-- /.table-responsive -->
+                </div><!-- /.tab-pane -->
 
 
                     <div class="tab-pane fade" id="maintenances">
@@ -1371,21 +1440,23 @@
                         </div> <!-- /.row -->
                     </div> <!-- /.tab-pane files -->
 
-                    @can('view', $asset->model)
-                    <div class="tab-pane fade" id="modelfiles">
-                        <div class="row{{ (($asset->model) && ($asset->model->uploads->count() > 0)) ? '' : ' hidden-print' }}">
-                            <div class="col-md-12">
+                    @if ($asset->model)
+                        @can('view', $asset->model)
+                            <div class="tab-pane fade" id="modelfiles">
+                                <div class="row{{ (($asset->model) && ($asset->model->uploads->count() > 0)) ? '' : ' hidden-print' }}">
+                                    <div class="col-md-12">
 
-                                <x-filestable
-                                        filepath="private_uploads/assetmodels/"
-                                        showfile_routename="show/modelfile"
-                                        deletefile_routename="delete/modelfile"
-                                        :object="$asset->model" />
+                                        <x-filestable
+                                                filepath="private_uploads/assetmodels/"
+                                                showfile_routename="show/modelfile"
+                                                deletefile_routename="delete/modelfile"
+                                                :object="$asset->model" />
 
-                            </div> <!-- /.col-md-12 -->
-                        </div> <!-- /.row -->
-                    </div> <!-- /.tab-pane files -->
-                    @endcan
+                                    </div> <!-- /.col-md-12 -->
+                                </div> <!-- /.row -->
+                            </div> <!-- /.tab-pane files -->
+                        @endcan
+                    @endif
             </div><!-- /.tab-content -->
         </div><!-- nav-tabs-custom -->
     </div>
@@ -1394,7 +1465,6 @@
         @include ('modals.upload-file', ['item_type' => 'asset', 'item_id' => $asset->id])
     @endcan
 @stop
-
             @section('moar_scripts')
                 <script>
 

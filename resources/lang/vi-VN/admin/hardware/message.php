@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Bạn có chắc chắn muốn xoá bỏ tài sản này?',
         'error'   		=> 'Đã có vấn đề xảy ra khi xoá tài sản này. Bạn hãy thử lại xem.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Không có nội dung nào được chọn, vì vậy không có gì bị xóa.',
         'success' 		=> 'Tài sản này được xoá thành công.',
     ],

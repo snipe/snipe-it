@@ -46,7 +46,7 @@ class ActionlogPresenter extends Presenter
                 return 'fa-solid fa-mobile-screen';
             }
 
-            if ($this->action_type == 'create new') {
+            if ($this->action_type == 'create') {
                 return 'fa-solid fa-user-plus';
             }
 
@@ -70,7 +70,7 @@ class ActionlogPresenter extends Presenter
         }
 
         // Everything else
-        if ($this->action_type == 'create new') {
+        if ($this->action_type == 'create') {
             return 'fa-solid fa-plus';
         }
 
@@ -96,6 +96,10 @@ class ActionlogPresenter extends Presenter
 
         if ($this->action_type == 'checkin from') {
             return 'fa-solid fa-rotate-right';
+        }
+
+        if ($this->action_type == 'note_added') {
+            return 'fas fa-sticky-note';
         }
 
         return 'fa-solid fa-rotate-right';
