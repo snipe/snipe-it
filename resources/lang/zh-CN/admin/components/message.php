@@ -17,7 +17,8 @@ return array(
     'delete' => array(
         'confirm'   => '你确定要删除这个组件吗？',
         'error'   => '删除组件出错，请重试。',
-        'success' => '删除组件成功。'
+        'success' => '删除组件成功。',
+        'error_qty'   => '此类型的某些组件仍然处于已借出状态，请先归还它们，然后重试。',
     ),
 
      'checkout' => array(

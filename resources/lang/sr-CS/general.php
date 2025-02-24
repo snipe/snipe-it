@@ -10,7 +10,7 @@ return [
     'action'                => 'Akcija',
     'activity_report'		=> 'Izveštaj o aktivnostima',
     'address'				=> 'Adresa',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Administratorska podešavanja',
     'admin_tooltip'			=> 'Ovaj korisnik ima admin privilegije',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'Ovaj korisnik ima superuser privilegije',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Dostupna imovina',
     'accept_assets'         => 'Prihvati imovinu :name',
     'accept_assets_menu'    => 'Prihvati imovinu',
+    'accept_item'           => 'Prihvati stavku',
     'audit'				    => 'Revizija',
     'audit_report'			=> 'Zapisnik revizije',
     'assets'				=> 'Imovina',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Zapis kreiran',
     'updated_at' 			=> 'Ažurirano',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Valuta', //
     'current'  				=> 'Current',
     'current_password'      => 'Trenutna lozinka',
     'customize_report'      => 'Prilagodi izveštaj',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Sesija za obrazac je istekla. Molim pokušajte ponovo.',
     'login_enabled'         => 'Prijava je omogućena',
     'audit_due'             => 'Spremno za reviziju',
-    'audit_due_days'        => 'Imovina u roku za popis u narednih :days dana|Imovina u roku za popis u narednih :days dana',
+    'audit_due_days'        => '{}Imovine u roku ili preko roka za popis|[1]Imovine u roku ili preko roka za popis za jedan dan|[2,*]Imovine u roku ili preko roka za popis u okviru :days dana',
     'checkin_due'           => 'Rok za razduživanje',
     'checkin_overdue'       => 'Preko roka za razduživanje',
-    'checkin_due_days'      => 'Imovina do roka za razduživanje u narednih :days dana|Imovina do roka za razduživanje u narednih :days dana',
+    'checkin_due_days'      => '{}U roku za razduživanje|[1]Imovine u roku za razduživanje u okviru :days dana|[2,*]Imovine u roku za razduživanje u okviru :days dana',
     'audit_overdue'         => 'Preko roka za reviziju',
     'accept'                => 'Prihvati :asset',
     'i_accept'              => 'Prihvatam',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Dodaj napomenu',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Izmeni :name',
+        'checkout_item' => 'Zaduži :name',
+        'checkin_item' => 'Razduži :name',
+    ],
+
+    'select_all_none' => 'Izaberi sve/ništa',
+    'generic_model_not_found' => 'Taj :model nije pronađen ili vi nemate ovlašćenja da mu pristupite',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

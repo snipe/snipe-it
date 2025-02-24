@@ -10,7 +10,7 @@ return [
     'action'                => 'Dejanje',
     'activity_report'		=> 'Poročilo o dejavnosti',
     'address'				=> 'Naslov',
-    'admin'					=> 'Administrator',
+    'admin'					=> 'Adminske nastavitve',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Razpoložljiva sredstva',
     'accept_assets'         => 'Accept Assets :name',
     'accept_assets_menu'    => 'Accept Assets',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Revizija',
     'audit_report'			=> 'Dnevnik revizije',
     'assets'				=> 'Sredstva',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Zapis ustvarjen',
     'updated_at' 			=> 'Posodobljeno ob',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'Trenutni',
     'current_password'      => 'Trenutno geslo',
     'customize_report'      => 'Customize Report',
@@ -338,10 +340,10 @@ return [
     'token_expired'         => 'Vaša seja je potekla. Prosimo, poizkusite ponovno.',
     'login_enabled'         => 'Prijava omogočena',
     'audit_due'             => 'Za revizijo',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Zamuda za revizijo',
     'accept'                => 'Sprejmi :asset',
     'i_accept'              => 'Sprejmem',
@@ -587,5 +589,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

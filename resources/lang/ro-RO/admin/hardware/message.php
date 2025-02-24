@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Sunteti sigur ca vreti sa stergeti acest activ?',
         'error'   		=> 'S-a intampinat o problema la stergerea activului. Va rugam incercati iar.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Nu au fost selectate active, deci nimic nu a fost șters.',
         'success' 		=> 'Activul a fost sters.',
     ],

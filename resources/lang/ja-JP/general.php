@@ -10,7 +10,7 @@ return [
     'action'                => '操作',
     'activity_report'		=> '操作レポート',
     'address'				=> '住所',
-    'admin'					=> '管理',
+    'admin'					=> '管理者設定',
     'admin_tooltip'			=> 'このユーザーには管理者権限があります',
     'superuser'				=> 'スーパーユーザー',
     'superuser_tooltip'		=> 'このユーザーはスーパーユーザー権限を持っています',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> '利用可能な資産',
     'accept_assets'         => ':name の資産を承認 ',
     'accept_assets_menu'    => '資産を承認',
+    'accept_item'           => 'Accept Item',
     'audit'				    => '監査',
     'audit_report'			=> '監査ログ',
     'assets'				=> '資産数',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'レコードが作成されました',
     'updated_at' 			=> '更新日',
     'currency'  			=> '¥', // this is deprecated
+    'currency_text'  		=> '通貨', //
     'current'  				=> '現在の状況',
     'current_password'      => '現在のパスワード',
     'customize_report'      => 'レポートのカスタマイズ',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'セッションが失効しました。再度ログインしてください。',
     'login_enabled'         => 'ログイン可能',
     'audit_due'             => '監査期日',
-    'audit_due_days'        => '監査のための資産期限内:days|資産期限内:days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'チェックインの期限',
     'checkin_overdue'       => 'チェックインの期限を超過しました',
-    'checkin_due_days'      => '納入納入納入納入納入納入納入納入納付:days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => '監査期日を超過',
     'accept'                => ':assetを承認',
     'i_accept'              => '承認',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'メモを追加する',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

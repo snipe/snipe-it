@@ -10,7 +10,7 @@ return [
     'action'                => 'ተግባር',
     'activity_report'		=> 'የእንቅስቃሴ ዘገባ',
     'address'				=> 'አድራሻ',
-    'admin'					=> 'ተቆጣጣሪ',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'የሚያገለግሉ ንብረቶች',
     'accept_assets'         => 'ገቢ ንብረቶች፥ ስም',
     'accept_assets_menu'    => 'የገቡ ንብረቶች',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'ቁጥጥር',
     'audit_report'			=> 'የቁጥጥር መዝገብ',
     'assets'				=> 'ንብረቶች',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'Updated at',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'Current',
     'current_password'      => 'Current Password',
     'customize_report'      => 'Customize Report',
@@ -154,7 +156,7 @@ return [
     'gravatar_url'          => '<a href="http://gravatar.com"><small>Change your avatar at Gravatar.com</small></a>.',
     'history'  			    => 'History',
     'history_for'  			=> 'History for',
-    'id'  					=> 'ID',
+    'id'  					=> 'መለያ',
     'image'                 => 'Image',
     'image_delete'         	=> 'Delete Image',
     'include_deleted'       => 'Include Deleted Assets',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Your form session has expired. Please try again.',
     'login_enabled'         => 'Login Enabled',
     'audit_due'             => 'Due for Audit',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Overdue for Audit',
     'accept'                => 'Accept :asset',
     'i_accept'              => 'I accept',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

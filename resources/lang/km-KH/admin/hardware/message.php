@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'តើអ្នកប្រាកដថាចង់លុបទ្រព្យសម្បត្តិនេះទេ?',
         'error'   		=> 'មានបញ្ហាក្នុងការលុបទ្រព្យសម្បត្តិ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'មិនមានទ្រព្យសម្បត្តិត្រូវបានជ្រើសរើស ដូច្នេះគ្មានអ្វីត្រូវបានលុបទេ។',
         'success' 		=> 'ទ្រព្យសកម្មត្រូវបានលុបដោយជោគជ័យ។',
     ],

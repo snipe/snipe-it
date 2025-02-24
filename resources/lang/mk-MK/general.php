@@ -10,7 +10,7 @@ return [
     'action'                => 'Акција',
     'activity_report'		=> 'Извештај за активност',
     'address'				=> 'Адреса',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Административни подесувања',
     'admin_tooltip'			=> 'Корисникот има администраторски привилегии',
     'superuser'				=> 'Суперкорисник',
     'superuser_tooltip'		=> 'Корисникот има привилегии на суперкорисник',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Достапни средства',
     'accept_assets'         => 'Прифати средства :name',
     'accept_assets_menu'    => 'Прифати средства',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Ревизија',
     'audit_report'			=> 'Дневник за ревизија',
     'assets'				=> 'Основни средства',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Записот креиран',
     'updated_at' 			=> 'Ажурирано во',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Валута', //
     'current'  				=> 'Тековна',
     'current_password'      => 'Тековна лозинка',
     'customize_report'      => 'Прилагоди извештај',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Вашата сесија истече. Најавете се повторно.',
     'login_enabled'         => 'Најавувањето е овозможено',
     'audit_due'             => 'Спремно за ревизија',
-    'audit_due_days'        => 'Имот во рок за попис во наредните :days дена|Имот во рок за попис во наредните :days дена',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Рок за раздолжување',
     'checkin_overdue'       => 'Поминат рок за раздолжување',
-    'checkin_due_days'      => 'Средства со рок за раздолжување во наредните :days дена|Средства со рок за раздолжување во наредните :days дена',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Преку рокот за ревизија',
     'accept'                => 'Прифати :asset',
     'i_accept'              => 'Прифаќам',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

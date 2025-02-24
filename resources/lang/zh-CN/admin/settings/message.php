@@ -37,7 +37,7 @@ return [
         'authentication_success' => '用户已成功通过LDAP认证！'
     ],
     'labels' => [
-        'null_template' => 'Label template not found. Please select a template.',
+        'null_template' => '未找到标签模板。请选择一个模板。',
         ],
     'webhook' => [
         'sending' => '正在发送 :app 测试消息...',

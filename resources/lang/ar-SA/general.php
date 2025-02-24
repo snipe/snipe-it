@@ -10,7 +10,7 @@ return [
     'action'                => 'الإجراء',
     'activity_report'		=> 'تقرير الأنشطة',
     'address'				=> 'العنوان',
-    'admin'					=> 'الإدارة',
+    'admin'					=> 'إعدادات المدير',
     'admin_tooltip'			=> 'هذا المستخدم لديه صلاحيات المشرف',
     'superuser'				=> 'مدير النظام',
     'superuser_tooltip'		=> 'هذا المستخدم لديه امتيازات المستخدم المتميز',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'الأصول المتاحة',
     'accept_assets'         => 'قبول الأصول :name',
     'accept_assets_menu'    => 'قبول الأصول',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'تدقيق',
     'audit_report'			=> 'سجل التدقيق',
     'assets'				=> 'الأصول',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'إنشاء سجل',
     'updated_at' 			=> 'تم التحديث في',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'العملة', //
     'current'  				=> 'الحالي',
     'current_password'      => 'كلمة المرور الحالية',
     'customize_report'      => 'تخصيص التقرير',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'انتهت صلاحية جلسة النموذج. حاول مرة اخرى.',
     'login_enabled'         => 'تسجيل الدخول مفعل',
     'audit_due'             => 'الواجب مراجعته',
-    'audit_due_days'        => 'الأصول المستحقة للمراجعة خلال :أيام الأصول اليومية المستحقة للمراجعة خلال :أيام',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'من المقرر تسجيل الدخول',
     'checkin_overdue'       => 'تأخر في تسجيل الدخول',
-    'checkin_due_days'      => 'الأصول المستحقة للتسجيل في غضون :أيام الأصول اليومية المستحقة للتسجيل في غضون :أيام',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'مراجعة الحسابات المتأخرة',
     'accept'                => 'قبول :asset',
     'i_accept'              => 'قبول',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

@@ -10,7 +10,7 @@ return [
     'action'                => 'Darbība',
     'activity_report'		=> 'Darbības pārskats',
     'address'				=> 'Adrese',
-    'admin'					=> 'Administrators',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> 'Šim lietotājam ir administratora tiesības',
     'superuser'				=> 'Galvenais lietotājs',
     'superuser_tooltip'		=> 'Šim lietotājam ir glavenā lietotāja tiesības',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Pieejamais inventārs',
     'accept_assets'         => 'Apstiprināt inventāru :name',
     'accept_assets_menu'    => 'Apstiprināt inventāru',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Audits',
     'audit_report'			=> 'Revīzijas žurnāls',
     'assets'				=> 'Aktīvi',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Ieraksts izceidots',
     'updated_at' 			=> 'Atjaunināts vietnē',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'Pašreizējais',
     'current_password'      => 'Pāsreizējā parole',
     'customize_report'      => 'Pielāgot atskaiti',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Jūsu veidlapas sesija ir beidzies. Lūdzu mēģiniet vēlreiz.',
     'login_enabled'         => 'Pieteikšanās Iespējota',
     'audit_due'             => 'Gaida Auditu',
-    'audit_due_days'        => 'Inventāra Audits pēc :days dienas|Inventāra Audits pēc :days dienām',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Jāpieņem',
     'checkin_overdue'       => 'Aizkavējusies Pieņemšana',
-    'checkin_due_days'      => 'Inventāra Pieņemšana pēc :days dienas|Inventāra Pieņemšana pēc :days dienām',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Aizkavējies Audits',
     'accept'                => 'Apstiprināt :asset',
     'i_accept'              => 'Es pieņemu',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

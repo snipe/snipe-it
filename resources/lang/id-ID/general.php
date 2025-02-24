@@ -10,7 +10,7 @@ return [
     'action'                => 'Tindakan',
     'activity_report'		=> 'Laporan kegiatan',
     'address'				=> 'Alamat',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Pengaturan Admin',
     'admin_tooltip'			=> 'Pengguna ini memilik hak admin',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'Pengguna ini memiliki hak superuser',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Aset yang tersedia',
     'accept_assets'         => 'Terima aset :nama',
     'accept_assets_menu'    => 'Terima Aset',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Audit',
     'audit_report'			=> 'Log Audit',
     'assets'				=> 'Aset',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Rekam Dibuat',
     'updated_at' 			=> 'Diperbarui pada',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Mata uang', //
     'current'  				=> 'Saat ini',
     'current_password'      => 'Kata Sandi Saat Ini',
     'customize_report'      => 'Sesuaikan Laporan',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Sesi login Anda telah kadaluarsa. Silakan login lagi.',
     'login_enabled'         => 'Login Diaktifkan',
     'audit_due'             => 'Jatuh Tempo untuk Audit',
-    'audit_due_days'        => 'Aset yang Jatuh Tempo untuk Audit Dalam :days Hari|Aset yang Jatuh Tempo untuk Audit Dalam :days Hari',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Jatuh Tempo untuk Cek masuk',
     'checkin_overdue'       => 'Jatuh Tempo untuk Cek masuk',
-    'checkin_due_days'      => 'Aset-aset yang Harus dicek masuk Dalam :days Day|Aset-aset yang Harus dicek masuk Dalam :day Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Terlambat untuk Audit',
     'accept'                => 'Terima :asset',
     'i_accept'              => 'Saya Setuju',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

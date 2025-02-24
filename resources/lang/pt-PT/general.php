@@ -10,7 +10,7 @@ return [
     'action'                => 'Ação',
     'activity_report'		=> 'Relatório de atividades',
     'address'				=> 'Morada',
-    'admin'					=> 'Administração',
+    'admin'					=> 'Configurações de administrador',
     'admin_tooltip'			=> 'Este usuário tem privilégios de administrador',
     'superuser'				=> 'Superusuário',
     'superuser_tooltip'		=> 'Este usuário tem privilégios de superusuário',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Artigos Disponíveis',
     'accept_assets'         => 'Artigos Aceites :name',
     'accept_assets_menu'    => 'Artigos Aceites',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Auditoria',
     'audit_report'			=> 'Registro de auditoria',
     'assets'				=> 'Artigos',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Registro criado',
     'updated_at' 			=> 'Atualizado em',
     'currency'  			=> '€', // this is deprecated
+    'currency_text'  		=> 'Moeda', //
     'current'  				=> 'Atuais',
     'current_password'      => 'Senha atual',
     'customize_report'      => 'Personalizar relatório',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'A sua sessão expirou. Inicie sessão novamente.',
     'login_enabled'         => 'Login Ativado',
     'audit_due'             => 'Marcado para Auditoria',
-    'audit_due_days'        => 'Atributos devidos para auditoria dentro de :days Dias|Ativos devido para auditoria dentro de :days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Vencimento para o checkin',
     'checkin_overdue'       => 'Atrasado por check-in',
-    'checkin_due_days'      => 'Ativos devidos para o check-in dentro de :days Dia| Ativos devido para check-in dentro de :days Dias',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Atrasado para Auditoria',
     'accept'                => 'Aceitar :asset',
     'i_accept'              => 'Aceito',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

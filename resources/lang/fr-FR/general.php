@@ -10,7 +10,7 @@ return [
     'action'                => 'Action',
     'activity_report'		=> 'Rapport d\'activité',
     'address'				=> 'Adresse',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Paramètres de l\'administrateur',
     'admin_tooltip'			=> 'Cet utilisateur a des privilèges d\'administrateur',
     'superuser'				=> 'Super-utilisateur',
     'superuser_tooltip'		=> 'Cet utilisateur a des privilèges de super-utilisateur',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Actifs disponibles',
     'accept_assets'         => 'Accepter les actifs :name',
     'accept_assets_menu'    => 'Accepter les actifs',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Audit',
     'audit_report'			=> 'Journal d\'audit',
     'assets'				=> 'Actifs',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Enregistrement créé',
     'updated_at' 			=> 'Mise à jour à',
     'currency'  			=> '€', // this is deprecated
+    'currency_text'  		=> 'Devise', //
     'current'  				=> 'Actuels',
     'current_password'      => 'Mot de passe actuel',
     'customize_report'      => 'Personnaliser le rapport',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'La session de votre formulaire a expiré. Merci d\'essayer à nouveau.',
     'login_enabled'         => 'Connexion activée',
     'audit_due'             => 'Dû pour l\'audit',
-    'audit_due_days'        => 'Actifs dus pour vérification dans :days jour|Actifs dus pour audit dans :days jours',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Echéance du check-in',
     'checkin_overdue'       => 'En retard pour le check-kin',
-    'checkin_due_days'      => 'Échéance des actifs en cours de check-in dans :days jour|Les actifs dus pour l\'enregistrement dans :days Jours',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'En retard pour l\'audit',
     'accept'                => 'Accepter :asset',
     'i_accept'              => 'J\'accepte',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Ajouter une note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

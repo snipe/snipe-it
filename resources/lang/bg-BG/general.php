@@ -10,7 +10,7 @@ return [
     'action'                => 'Действие',
     'activity_report'		=> 'Справка за дейностите',
     'address'				=> 'Aдрес',
-    'admin'					=> 'Администриране',
+    'admin'					=> 'Админ настройки',
     'admin_tooltip'			=> 'Този потребител има администраторски привилегии',
     'superuser'				=> 'Супер потребител',
     'superuser_tooltip'		=> 'Този потребител има привилегии на супер потребител',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Налични активи',
     'accept_assets'         => 'Приеми Актив :name',
     'accept_assets_menu'    => 'Приеми активите',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'проверка',
     'audit_report'			=> 'Отчет за одита',
     'assets'				=> 'Активи',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Създаден на',
     'updated_at' 			=> 'Обновено на',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Валута', //
     'current'  				=> 'Текущи',
     'current_password'      => 'Текуща парола',
     'customize_report'      => 'Персонализиран отчет',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Вашата сесия за формуляр изтече. Моля опитайте отново.',
     'login_enabled'         => 'Разрешен вход',
     'audit_due'             => 'За Одит',
-    'audit_due_days'        => 'Активи, подлежащи на одит в рамките на :days Ден|Активи, подлежащи на одит в рамките на :days дни',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Предстои проверка',
     'checkin_overdue'       => 'Просрочен срок за регистрация',
-    'checkin_due_days'      => 'Активи, дължими за проверка в рамките на :days ден|Активи, дължими за проверка в рамките на :days дни',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Просрочен Одит',
     'accept'                => 'Приеми :asset',
     'i_accept'              => 'Съгласен съм',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

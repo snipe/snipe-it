@@ -10,7 +10,7 @@ return [
     'action'                => '操作',
     'activity_report'		=> '活动报告',
     'address'				=> '地址',
-    'admin'					=> '管理员',
+    'admin'					=> '管理员设置',
     'admin_tooltip'			=> '此用户拥有管理员权限',
     'superuser'				=> '超级用户',
     'superuser_tooltip'		=> '此用户拥有超级用户权限',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> '可用资产',
     'accept_assets'         => '接受资产 :name',
     'accept_assets_menu'    => '接受资产',
+    'accept_item'           => '接受物品',
     'audit'				    => '审计',
     'audit_report'			=> '审核日志',
     'assets'				=> '资产',
@@ -87,12 +88,13 @@ return [
     'record_created' 		=> '记录已创建',
     'updated_at' 			=> '更新日期',
     'currency'  			=> 'RMB', // this is deprecated
+    'currency_text'  		=> '货币', //
     'current'  				=> '当前',
     'current_password'      => '当前密码',
     'customize_report'      => '自定义报告',
     'custom_report'         => '自定义资产报表',
     'dashboard'				=> '控制面板',
-    'data_source'           => 'Data Source',
+    'data_source'           => '数据源',
     'days'      			=> '天数',
     'days_to_next_audit'    => '距离下一次盘点的天数',
     'date'					=> '日期',
@@ -128,7 +130,7 @@ return [
     'firstname_lastname_underscore_format' => '名 姓，例如(jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  '姓氏首字母（smithj@example.com）',
     'firstintial_dot_lastname_format' => '缩写名 姓，例如(jsmith@example.com)',
-    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
+    'lastname_dot_firstinitial_format' => '姓氏.名字首字母（smith.j@example.com）',
     'firstname_lastname_display'	=> '名 姓，例如 (Jane Smith)',
     'lastname_firstname_display'	=> '姓 名，例如 (Smith Jane)',
     'name_display_format'	=> '姓名显示格式',
@@ -220,7 +222,7 @@ return [
     'notes'  				=> '备注',
     'note_added'            => '备注已添加',
     'options'				=> 'Options',
-    'preview'				=> 'Preview',
+    'preview'				=> '预览',
     'add_note'              => '添加备注',
     'note_edited'            => '备注已编辑',
     'edit_note'              => '编辑备注',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => '表单会话已过期，请重新提交',
     'login_enabled'         => '登录已启用',
     'audit_due'             => '到期审计',
-    'audit_due_days'        => '在:天内到期的资产 |应在:天内审计的资产',
+    'audit_due_days'        => '{}到期或逾期未盘点的资产|[1]一天内到期或逾期未盘点的资产|[2,*] :days 天内到期或逾期未盘点的资产',
     'checkin_due'           => '到期签入',
     'checkin_overdue'       => '过期签入',
-    'checkin_due_days'      => '到期签入的资产在:day|到期签入的资产在:days',
+    'checkin_due_days'      => '{}到期归还|[1] :days 天内应归还的资产|[2,*] :days 天内应归还的资产',
     'audit_overdue'         => '过期审计',
     'accept'                => '接受 :asset',
     'i_accept'              => '我接受',
@@ -584,7 +586,18 @@ return [
 
 // Add form placeholders here
     'placeholders' => [
-        'notes'  => 'Add a note',
+        'notes'  => '添加备注',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => '编辑 :name',
+        'checkout_item' => '借出 :name',
+        'checkin_item' => '归还 :name',
+    ],
+
+    'select_all_none' => '选择/取消选择所有',
+    'generic_model_not_found' => ':model 未找到或您没有访问权限',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

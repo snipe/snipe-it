@@ -19,7 +19,7 @@ return [
     'alert_interval'			=> 'Soglia Avvisi di Scadenza (giorni)',
     'alert_inv_threshold'		=> 'Soglia di avviso di inventario',
     'allow_user_skin'           => 'Consenti tema utente',
-    'allow_user_skin_help_text' => 'Selezionando questa casella, l\'utente potrà sovrascrivere il tema dell\'interfaccia utente con uno diverso.',
+    'allow_user_skin_help_text' => 'Selezionando questa casella, l\'utente potrà sovrascrivere il tema dell\'interfaccia con uno diverso.',
     'asset_ids'					=> 'ID Bene',
     'audit_interval'            => 'Intervallo Inventari',
     'audit_interval_help'       => 'Se dovete inventariare fisicamente e regolarmente i vostri beni, inserite l\'intervallo in mesi. Se si aggiorna questo valore, tutte le "prossime date" per i beni con una prossima data d\'inventario saranno aggiornate.',

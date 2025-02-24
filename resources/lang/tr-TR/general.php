@@ -10,7 +10,7 @@ return [
     'action'                => 'Hareket',
     'activity_report'		=> 'Aktivite Raporu',
     'address'				=> 'Adres',
-    'admin'					=> 'Yönetici',
+    'admin'					=> 'Yönetici Ayarları',
     'admin_tooltip'			=> 'Kullanici admin yetkisine sahiptir',
     'superuser'				=> 'Super Kullanici',
     'superuser_tooltip'		=> 'Super Kullanici yetkisine sahiptir',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Kullanılabilir Demirbaşlar',
     'accept_assets'         => 'Varlıkları Kabul Et :name',
     'accept_assets_menu'    => 'Demirbaş Kabul',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Denetim',
     'audit_report'			=> 'Denetim Günlüğü',
     'assets'				=> 'Demirbaşlar',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Kayıt Tarihi',
     'updated_at' 			=> 'Güncellendiği tarih',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Para Birimi', //
     'current'  				=> 'Geçerli',
     'current_password'      => 'Mevcut Şifre',
     'customize_report'      => 'Raporu Özelleştir',
@@ -340,10 +342,10 @@ Context | Request Context
     'token_expired'         => 'Oturum zaman aşımına uğradı. Lütfen tekrar giriş yapın.',
     'login_enabled'         => 'Kullanıcı Aktif',
     'audit_due'             => 'Beklenen Denetimler',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Zamanı Geçmiş Denetimler',
     'accept'                => 'Demirbaş Kabul',
     'i_accept'              => 'Kabul ediyorum',
@@ -589,5 +591,16 @@ Context | Request Context
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

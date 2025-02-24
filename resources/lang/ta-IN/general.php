@@ -10,7 +10,7 @@ return [
     'action'                => 'அதிரடி',
     'activity_report'		=> 'செயல்பாட்டு அறிக்கை',
     'address'				=> 'முகவரி',
-    'admin'					=> 'நிர்வாகம்',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> 'இந்தப் பயனருக்கு நிர்வாகச் சிறப்புரிமைகள் உள்ளன',
     'superuser'				=> 'சூப்பர் யூசர்',
     'superuser_tooltip'		=> 'இந்தப் பயனருக்கு சூப்பர் யூசர் சிறப்புரிமைகள் உள்ளன',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'சொத்துக்கள் கிடைக்கின்றன',
     'accept_assets'         => ':name சொத்துக்களை ஒப்புக்கொள்',
     'accept_assets_menu'    => 'சொத்துக்களை ஒப்புக்கொள்',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'தணிக்கை',
     'audit_report'			=> 'தணிக்கைப் பதிவு',
     'assets'				=> 'சொத்துக்கள்',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Record Created',
     'updated_at' 			=> 'புதுப்பிக்கப்பட்டது',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'தற்போதைய',
     'current_password'      => 'Current Password',
     'customize_report'      => 'Customize Report',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'உங்கள் படிவத்தின் அமர்வு காலாவதியாகிவிட்டது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
     'login_enabled'         => 'Login Enabled',
     'audit_due'             => 'Due for Audit',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Overdue for Audit',
     'accept'                => 'Accept :asset',
     'i_accept'              => 'I accept',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

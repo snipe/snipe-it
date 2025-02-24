@@ -10,7 +10,7 @@ return [
     'action'                => 'crwdns1304:0crwdne1304:0',
     'activity_report'		=> 'crwdns1291:0crwdne1291:0',
     'address'				=> 'crwdns1019:0crwdne1019:0',
-    'admin'					=> 'crwdns1020:0crwdne1020:0',
+    'admin'					=> 'crwdns12906:0crwdne12906:0',
     'admin_tooltip'			=> 'crwdns12216:0crwdne12216:0',
     'superuser'				=> 'crwdns12218:0crwdne12218:0',
     'superuser_tooltip'		=> 'crwdns12220:0crwdne12220:0',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'crwdns6099:0crwdne6099:0',
     'accept_assets'         => 'crwdns6101:0crwdne6101:0',
     'accept_assets_menu'    => 'crwdns6103:0crwdne6103:0',
+    'accept_item'           => 'crwdns12908:0crwdne12908:0',
     'audit'				    => 'crwdns1913:0crwdne1913:0',
     'audit_report'			=> 'crwdns1914:0crwdne1914:0',
     'assets'				=> 'crwdns1027:0crwdne1027:0',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'crwdns5946:0crwdne5946:0',
     'updated_at' 			=> 'crwdns1856:0crwdne1856:0',
     'currency'  			=> 'crwdns1043:0crwdne1043:0', // this is deprecated
+    'currency_text'  		=> 'crwdns12935:0crwdne12935:0', //
     'current'  				=> 'crwdns1044:0crwdne1044:0',
     'current_password'      => 'crwdns6113:0crwdne6113:0',
     'customize_report'      => 'crwdns6115:0crwdne6115:0',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'crwdns1578:0crwdne1578:0',
     'login_enabled'         => 'crwdns5984:0crwdne5984:0',
     'audit_due'             => 'crwdns5986:0crwdne5986:0',
-    'audit_due_days'        => 'crwdns12174:0crwdne12174:0',
+    'audit_due_days'        => 'crwdns12910:0crwdne12910:0',
     'checkin_due'           => 'crwdns12176:0crwdne12176:0',
     'checkin_overdue'       => 'crwdns12178:0crwdne12178:0',
-    'checkin_due_days'      => 'crwdns12180:0crwdne12180:0',
+    'checkin_due_days'      => 'crwdns12912:0crwdne12912:0',
     'audit_overdue'         => 'crwdns5988:0crwdne5988:0',
     'accept'                => 'crwdns6016:0crwdne6016:0',
     'i_accept'              => 'crwdns6018:0crwdne6018:0',
@@ -585,5 +587,16 @@ return [
     'placeholders' => [
         'notes'  => 'crwdns12878:0crwdne12878:0',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'crwdns12914:0crwdne12914:0',
+        'checkout_item' => 'crwdns12916:0crwdne12916:0',
+        'checkin_item' => 'crwdns12918:0crwdne12918:0',
+    ],
+
+    'select_all_none' => 'crwdns12927:0crwdne12927:0',
+    'generic_model_not_found' => 'crwdns12920:0crwdne12920:0',
+    'deleted_models' => 'crwdns12939:0crwdne12939:0',
+    'deleted_users' => 'crwdns12941:0crwdne12941:0',
 
 ];

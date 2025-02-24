@@ -10,7 +10,7 @@ return [
     'action'                => 'Ενέργεια',
     'activity_report'		=> 'Έκθεση Δραστηριότητας',
     'address'				=> 'Διεύθυνση',
-    'admin'					=> 'Διαχειριστής',
+    'admin'					=> 'Ρυθμίσεις Διαχειριστή',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Διαθέσιμα στοιχεία',
     'accept_assets'         => 'Αποδοχή Αντικειμένων :name',
     'accept_assets_menu'    => 'Αποδοχή Αντικειμένων',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Ελεγχος',
     'audit_report'			=> 'Αρχείο ελέγχου',
     'assets'				=> 'Πάγια',
@@ -87,6 +88,7 @@ return [
     'record_created' 		=> 'Η Εγγραφή Δημιουργήθηκε',
     'updated_at' 			=> 'Ενημερώθηκε στο',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Νόμισμα', //
     'current'  				=> 'Τρέχουσα',
     'current_password'      => 'Τρέχων Κωδικός Πρόσβασης',
     'customize_report'      => 'Προσαρμογή Αναφοράς',
@@ -337,10 +339,10 @@ return [
     'token_expired'         => 'Έχει λήξει η συνεδρία σας. Παρακαλώ συνδεθείτε ξανά.',
     'login_enabled'         => 'Ενεργοποίηση Σύνδεσης',
     'audit_due'             => 'Οφειλόμενη για έλεγχο',
-    'audit_due_days'        => 'Στοιχεία που οφείλονται για έλεγχο Εντός :days Ημερήσια Εξόφληση περιουσιακών στοιχείων για έλεγχο Εντός :days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Πληρωμή για Checkin',
     'checkin_overdue'       => 'Εκπρόθεσμο για Checkin',
-    'checkin_due_days'      => 'Τα περιουσιακά στοιχεία που οφείλονται για Checkin Εντός :days Ημερήσια Πάγια Checkin Μέσα σε :days Ημέρες',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Εκπρόθεσμο για έλεγχο',
     'accept'                => 'Αποδοχή :asset',
     'i_accept'              => 'Αποδέχομαι',
@@ -586,5 +588,16 @@ return [
     'placeholders' => [
         'notes'  => 'Add a note',
     ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];
