@@ -1,9 +1,17 @@
 @if (($model) && ($model->fieldset))
   @foreach($model->fieldset->fields AS $field)
+      @if (
+    ((!isset($show_display_checkin_fields))
+        || (($field->display_checkin == '1')
+        && ($show_display_checkin_fields =='true'))) &&
+         ((!isset($show_display_checkout_fields))
+        || (($field->display_checkout == '1')
+        && ($show_display_checkout_fields =='true')))
+        )
+
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
       <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>
       <div class="col-md-7 col-sm-12">
-
 
           @if ($field->element!='text')
 
@@ -83,6 +91,7 @@
 
 
     </div>
+    @endif
   @endforeach
 @endif
 

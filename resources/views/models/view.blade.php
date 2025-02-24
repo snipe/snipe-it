@@ -31,7 +31,18 @@
 
 
 <div class="row">
+
+    @if ($model->deleted_at!='')
+        <div class="col-md-12">
+            <div class="callout callout-warning">
+                <x-icon type="warning" />
+                {{ trans('admin/models/general.deleted') }}
+            </div>
+        </div>
+    @endif
+
     <div class="col-md-9">
+
         <div class="nav-tabs-custom">
 
             <ul class="nav nav-tabs">
@@ -153,6 +164,24 @@
                         </li>
                     @endif
 
+                    @if ($model->created_by)
+                        <li>{{ trans('general.created_by') }}:
+                            {{ $model->adminuser->present()->name() }}
+                        </li>
+                    @endif
+
+                    @if ($model->deleted_at)
+                        <li>
+                            <strong>
+                                <span class="text-danger">
+                                {{ trans('general.deleted') }}:
+                                {{ Helper::getFormattedDateObject($model->deleted_at, 'datetime', false) }}
+                                </span>
+                            </strong>
+
+                        </li>
+                    @endif
+
                     @if ($model->min_amt)
                         <li>{{ trans('general.min_amt') }}:
                            {{$model->min_amt }}
@@ -243,7 +272,7 @@
         </div>
             @can('update', \App\Models\AssetModel::class)
             <div class="col-md-12" style="padding-bottom: 5px;">
-                <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                <a href="{{ ($model->deleted_at=='') ? route('models.edit', $model->id) : '#' }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print{{ ($model->deleted_at!='') ? ' disabled' : '' }}">
                     <x-icon type="edit" />
                     {{ trans('admin/models/table.edit') }}
                 </a>

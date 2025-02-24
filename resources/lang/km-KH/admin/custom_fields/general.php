@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'The value of this field is encrypted in the database. Only admin users will be able to view the decrypted value',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short' => 'Include in emails',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'about_custom_fields_title' => 'About Custom Fields',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'បង្ហាញក្នុងបញ្ជីទ្ទ្រព្យសកម្មដែលអាចស្នើសុំបាន។',
     'show_in_requestable_list' => 'បង្ហាញតម្លៃក្នុងបញ្ជីទ្រព្យសកម្មដែលអាចស្នើសុំបាន។ fields ដែលបានអ៊ិនគ្រីបនឹងមិនត្រូវបានបង្ហាញទេ។',
     'encrypted_options' => 'Fieldនេះត្រូវបានអ៊ិនគ្រីប ដូច្នេះជម្រើសបង្ហាញមួយចំនួននឹងមិនមានទេ។',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

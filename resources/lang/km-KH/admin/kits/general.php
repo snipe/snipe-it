@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'about_kits_title'                  => 'About Predefined Kits',
+    'about_kits_title'                  => 'អំពីកញ្ចប់ដែលបានកំណត់ជាមុន',
     'about_kits_text'                   => 'Predefined Kits let you quickly check out a collection of items (assets, licenses, etc) to a user. This can be helpful when your onboarding process is consistent across many users and all users receive the same items.',
     'checkout'                          => 'Checkout Kit ',
-    'create_success'                    => 'Kit was successfully created.',
-    'create'                            => 'Create Predefined Kit',
+    'create_success'                    => 'កញ្ចប់ត្រូវបានបង្កើតដោយជោគជ័យ។',
+    'create'                            => 'បង្កើតកញ្ចប់ដែលបានកំណត់ជាមុន',
     'update'                            => 'Update Predefined Kit',
     'delete_success'                    => 'Kit was successfully deleted.',
     'update_success'                    => 'Kit was successfully updated.',

@@ -100,6 +100,7 @@ class LocationsTransformer
 
             $array = [
                 'id' => $accessory_checkout->id,
+                'assigned_to' => $accessory_checkout->assigned_to,
                 'accessory' => [
                     'id' => $accessory_checkout->accessory->id,
                     'name' => $accessory_checkout->accessory->name,

@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Opret et nyt brugerdefineret felt',
     'value_encrypted'      	        => 'Værdien af dette felt er krypteret i databasen. Kun admins vil være i stand til at se den krypteret værdi',
     'show_in_email'     => 'Inkludér værdien af ​​dette felt i tjekud-e-mail til brugeren? Krypterede felter kan ikke medtages i e-mails',
-    'show_in_email_short'     => 'Inkluder i e-mails.',
+    'show_in_email_short' => 'Inkluder i e-mails',
     'help_text' => 'Hjælp Tekst',
     'help_text_description' => 'Dette er valgfri tekst, der vises under formelementerne, mens du redigerer et aktiv for at give kontekst på feltet.',
     'about_custom_fields_title' => 'Om Brugerdefinerede Felter',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Vis i liste over anfordringsberettigede aktiver',
     'show_in_requestable_list' => 'Vis værdi i liste over anfordringsaktiver. Krypterede felter vil ikke blive vist',
     'encrypted_options' => 'Dette felt er krypteret, så nogle visningsindstillinger vil ikke være tilgængelige.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

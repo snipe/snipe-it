@@ -21,7 +21,17 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'create-form' ]) }}
+    <form
+        method="POST"
+        action="{{ route('settings.branding.save') }}"
+        accept-charset="UTF-8"
+        autocomplete="off"
+        class="form-horizontal"
+        role="form"
+        id="create-form"
+        enctype="multipart/form-data"
+        novalidate="novalidate"
+    >
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -340,7 +350,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 

@@ -10,7 +10,7 @@ return [
     'action'                => 'Действие',
     'activity_report'		=> 'Справка за дейностите',
     'address'				=> 'Aдрес',
-    'admin'					=> 'Администриране',
+    'admin'					=> 'Админ настройки',
     'admin_tooltip'			=> 'Този потребител има администраторски привилегии',
     'superuser'				=> 'Супер потребител',
     'superuser_tooltip'		=> 'Този потребител има привилегии на супер потребител',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Налични активи',
     'accept_assets'         => 'Приеми Актив :name',
     'accept_assets_menu'    => 'Приеми активите',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'проверка',
     'audit_report'			=> 'Отчет за одита',
     'assets'				=> 'Активи',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'Създаден на',
     'updated_at' 			=> 'Обновено на',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Валута', //
     'current'  				=> 'Текущи',
     'current_password'      => 'Текуща парола',
     'customize_report'      => 'Персонализиран отчет',
     'custom_report'         => 'Потребителски справки за активи',
     'dashboard'				=> 'Табло',
+    'data_source'           => 'Data Source',
     'days'      			=> 'дни',
     'days_to_next_audit'    => 'Дни до следващия одит',
     'date'					=> 'Дата',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Име Фамилия (jane.smith@example.com)',
     'lastnamefirstinitial_format' =>  'Фамилно име Инициал на собствено (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Първа буква от името и Фамилия (i.ivanov@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Име Фамилия (Иван Иванов)',
     'lastname_firstname_display'	=> 'Фамилия Име (Иванов Иван)',
     'name_display_format'	=> 'Формат на показване на името',
@@ -217,6 +221,8 @@ return [
     'no'  					=> 'Не',
     'notes'  				=> 'Бележки',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => 'Вашата сесия за формуляр изтече. Моля опитайте отново.',
     'login_enabled'         => 'Разрешен вход',
     'audit_due'             => 'За Одит',
-    'audit_due_days'        => 'Активи, подлежащи на одит в рамките на :days Ден|Активи, подлежащи на одит в рамките на :days дни',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Предстои проверка',
     'checkin_overdue'       => 'Просрочен срок за регистрация',
-    'checkin_due_days'      => 'Активи, дължими за проверка в рамките на :days ден|Активи, дължими за проверка в рамките на :days дни',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Просрочен Одит',
     'accept'                => 'Приеми :asset',
     'i_accept'              => 'Съгласен съм',
@@ -561,6 +567,7 @@ return [
         'consumables'  => ':count Консуматив|:count Консумативи',
         'components'  => ':count Компонент|:count Компоненти',
     ],
+
     'more_info' => 'Повече информация',
     'quickscan_bulk_help' => 'Поставянето на отметка в това квадратче ще редактира записа на актива, за да отрази това ново местоположение. Оставянето му без отметка просто ще отбележи местоположението в журнала за проверка. Обърнете внимание, че ако този актив бъде извлечен, той няма да промени местоположението на лицето, актива или местоположението, към които е извлечен.',
     'whoops' => 'Упс!',
@@ -576,5 +583,21 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];
