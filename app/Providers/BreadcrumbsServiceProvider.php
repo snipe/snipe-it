@@ -49,7 +49,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
                 Breadcrumbs::for('hardware.index', fn (Trail $trail) =>
                 $trail->parent('home', route('home'))
                     ->push(trans('general.assets'), route('hardware.index'))
-                    ->push(request()->status.' Assets', route('hardware.index', ['status' => request()->status]))
+                    ->push(request()->status.' '.trans('general.assets'), route('hardware.index', ['status' => request()->status]))
                 );
 
             } else {
@@ -81,10 +81,20 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         /**
          * Asset Model Breadcrumbs
          */
-        Breadcrumbs::for('models.index', fn (Trail $trail) =>
-        $trail->parent('hardware.index', route('hardware.index'))
-            ->push(trans('general.asset_models'), route('models.index'))
-        );
+
+        if ((request()->is('models*')) && (request()->status=='deleted')) {
+            Breadcrumbs::for('models.index', fn (Trail $trail) =>
+            $trail->parent('hardware.index', route('hardware.index'))
+                ->push(trans('general.asset_models'), route('models.index'))
+                ->push(trans('general.deleted_models'), route('models.index', ['status' => request()->status]))
+            );
+        } else {
+            Breadcrumbs::for('models.index', fn (Trail $trail) =>
+            $trail->parent('hardware.index', route('hardware.index'))
+                ->push(trans('general.asset_models'), route('models.index'))
+            );
+        }
+
 
         Breadcrumbs::for('models.create', fn (Trail $trail) =>
         $trail->parent('models.index', route('models.index'))
@@ -511,10 +521,16 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         /**
          * Users Breadcrumbs
          */
-        Breadcrumbs::for('users.index', fn (Trail $trail) =>
-        $trail->parent('home', route('home'))
-            ->push(trans('general.users'), route('users.index'))
-        );
+        if ((request()->is('users*')) && (request()->status=='deleted')) {
+            Breadcrumbs::for('users.index', fn(Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.users'), route('users.index'))
+                ->push(trans('general.deleted_users'), route('users.index'))
+            );
+        } else {
+            Breadcrumbs::for('users.index', fn(Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.users'), route('users.index'))
+            );
+        }
 
         Breadcrumbs::for('users.create', fn (Trail $trail) =>
         $trail->parent('users.index', route('users.index'))

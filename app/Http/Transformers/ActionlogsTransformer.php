@@ -146,7 +146,7 @@ class ActionlogsTransformer
                     } elseif ($actionlog->itemType() == 'license') {
                         $file_url = route('show.licensefile', ['licenseId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                     } elseif ($actionlog->itemType() == 'user') {
-                        $file_url = route('show/userfile', ['userId' => $actionlog->item->id, 'fileId' => $actionlog->id]);
+                        $file_url = route('show/userfile', ['user' => $actionlog->item->id, 'fileId' => $actionlog->id]);
                     }
                 }
             }
