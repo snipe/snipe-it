@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Test LDAP Autentificering...',
         'authentication_success' => 'Bruger godkendt mod LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Sender :app test besked...',
         'success' => 'Dine :webhook_name Integration virker!',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'FEJL: 301/302: endpoint returnerer en omdirigering. Af sikkerhedsmæssige årsager følger vi ikke omdirigeringer. Brug det faktiske slutpunkt.',
         'error_misc' => 'Noget gik galt. :( ',
         'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

@@ -16,10 +16,10 @@
         }
     </style>
 
-    
+
 
     <div class="row">
-    {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'checkin-form' ]) }}
+    <form method="POST" action="{{ route('hardware/quickscancheckin') }}" accept-charset="UTF-8" class="form-horizontal" role="form" id="checkin-form">
         <!-- left column -->
         <div class="col-md-6">
             <div class="box box-default">
@@ -31,7 +31,7 @@
 
                     <!-- Asset Tag -->
                     <div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
-                        {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'checkin_tag')) }}
+                        <label for="asset_tag" class="col-md-3 control-label" id="checkin_tag">{{ trans('general.asset_tag') }}</label>
                         <div class="col-md-9">
                             <div class="input-group col-md-11 required">
                                 <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}" required>
@@ -57,14 +57,14 @@
 
                     <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                             <div class="col-md-8">
                                 <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
-    
-    
+
+
 
                 </div> <!--/.box-body-->
                 <div class="box-footer">
@@ -78,7 +78,7 @@
 
 
 
-            {{Form::close()}}
+            </form>
         </div> <!--/.col-md-6-->
 
         <div class="col-md-6">
@@ -87,7 +87,7 @@
                     <h2 class="box-title"> {{ trans('general.quickscan_checkin_status') }} (<span id="checkin-counter">0</span> {{ trans('general.assets_checked_in_count') }}) </h2>
                 </div>
                 <div class="box-body">
-    
+
                     <table id="checkedin" class="table table-striped snipe-table">
                         <thead>
                         <tr>

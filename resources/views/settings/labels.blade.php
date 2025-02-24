@@ -20,7 +20,7 @@
         }
     </style>
 
-    {{ Form::open(['id' => 'settingsForm', 'method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.labels.save') }}" accept-charset="UTF-8" id="settingsForm" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -35,7 +35,6 @@
                     </h2>
                 </div>
                 <div class="box-body">
-
 
                     <div class="col-md-12">
 
@@ -109,7 +108,7 @@
                                     {{ Form::label('label2_title', trans('admin/settings/general.label2_title'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-7">
-                                    {{ Form::text('label2_title', old('label2_title', $setting->label2_title), [ 'class'=>'form-control', 'placeholder'=>$setting->qr_text, 'aria-label'=>'label2_title' ]) }}
+                                    <input class="form-control" aria-label="label2_title" name="label2_title" type="text" id="label2_title" value="{{ old('label2_title', $setting->label2_title) }}">
                                     {!! $errors->first('label2_title', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">{!! trans('admin/settings/general.label2_title_help') !!}</p>
                                     <p class="help-block">
@@ -233,20 +232,28 @@
                                     </div>
                                     <div class="col-md-7">
                                         @if ($setting->qr_code == 1)
-                                            {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array(
-                                                'class' => 'form-control',
-                                                'placeholder' => 'Property of Your Company',
-                                                'rel' => 'txtTooltip',
-                                                'title' =>'Extra text that you would like to display on your labels.',
-                                                'data-toggle' =>'tooltip',
-                                                'data-placement'=>'top'
-                                            )) }}
+                                            <input
+                                                class="form-control"
+                                                placeholder="Property of Your Company"
+                                                rel="txtTooltip"
+                                                title="Extra text that you would like to display on your labels."
+                                                data-toggle="tooltip"
+                                                data-placement="top"
+                                                name="qr_text"
+                                                type="text"
+                                                id="qr_text"
+                                                value="{{ old('qr_text', $setting->qr_text) }}"
+                                            >
                                         @else
-                                            {{ Form::text('qr_text', old('qr_text', $setting->qr_text), array(
-                                                'class' => 'form-control',
-                                                'disabled' => 'disabled',
-                                                'placeholder' => 'Property of Your Company'
-                                            )) }}
+                                            <input
+                                                class="form-control"
+                                                disabled="disabled"
+                                                placeholder="Property of Your Company"
+                                                name="qr_text"
+                                                type="text"
+                                                id="qr_text"
+                                                value="{{ old('qr_text', $setting->qr_text) }}"
+                                            >
                                             <p class="help-block">{{ trans('admin/settings/general.qr_help') }}</p>
                                         @endif
                                         {!! $errors->first('qr_text', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -341,8 +348,6 @@
                         }
                     </style>
 
-
-                    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
                     <!-- CSRF Token -->
                     {{csrf_field()}}
 
@@ -351,7 +356,7 @@
                                     {{ Form::label('labels_per_page', trans('admin/settings/general.labels_per_page'), ['class'=>'control-label']) }}
                                 </div>
                                 <div class="col-md-9">
-                                    {{ Form::text('labels_per_page', old('labels_per_page', $setting->labels_per_page), ['class' => 'form-control','style' => 'width: 100px;', 'aria-label'=>'labels_per_page']) }}
+                                    <input class="form-control" style="width: 100px;" aria-label="labels_per_page" name="labels_per_page" type="text" value="{{ old('labels_per_page', $setting->labels_per_page) }}" id="labels_per_page">
                                     {!! $errors->first('labels_per_page', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </div>
                             </div>
@@ -362,7 +367,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        {{ Form::text('labels_fontsize', old('labels_fontsize', $setting->labels_fontsize), ['class' => 'form-control', 'aria-label'=>'labels_fontsize']) }}
+                                        <input class="form-control" aria-label="labels_fontsize" name="labels_fontsize" type="text" value="{{ old('labels_fontsize', $setting->labels_fontsize) }}" id="labels_fontsize">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.text_pt') }}</div>
                                     </div>
                                 </div>
@@ -377,13 +382,13 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        {{ Form::text('labels_width', old('labels_width', $setting->labels_width), ['class' => 'form-control', 'aria-label'=>'labels_width']) }}
+                                        <input class="form-control" aria-label="labels_width" name="labels_width" type="text" value="{{ old('labels_width', $setting->labels_width) }}" id="labels_width">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.width_w') }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        {{ Form::text('labels_height', old('labels_height', $setting->labels_height), ['class' => 'form-control', 'aria-label'=>'labels_height']) }}
+                                        <input class="form-control" aria-label="labels_height" name="labels_height" type="text" value="{{ old('labels_height', $setting->labels_height) }}">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.height_h') }}</div>
                                     </div>
                                 </div>
@@ -399,13 +404,13 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        {{ Form::text('labels_display_sgutter', old('labels_display_sgutter', $setting->labels_display_sgutter), ['class' => 'form-control', 'aria-label'=>'labels_display_sgutter']) }}
+                                        <input class="form-control" aria-label="labels_display_sgutter" name="labels_display_sgutter" type="text" value="{{ old('labels_display_sgutter', $setting->labels_display_sgutter) }}" id="labels_display_sgutter">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.horizontal') }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        {{ Form::text('labels_display_bgutter', old('labels_display_bgutter', $setting->labels_display_bgutter), ['class' => 'form-control', 'aria-label'=>'labels_display_bgutter']) }}
+                                        <input class="form-control" aria-label="labels_display_bgutter" name="labels_display_bgutter" type="text" value="{{ old('labels_display_bgutter', $setting->labels_display_bgutter) }}">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.vertical') }}</div>
                                     </div>
                                 </div>
@@ -421,21 +426,21 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group" style="margin-bottom: 15px;">
-                                        {{ Form::text('labels_pmargin_top', old('labels_pmargin_top', $setting->labels_pmargin_top), ['class' => 'form-control', 'aria-label'=>'labels_pmargin_top']) }}
+                                        <input class="form-control" aria-label="labels_pmargin_top" name="labels_pmargin_top" type="text" value="{{ old('labels_pmargin_top', $setting->labels_pmargin_top) }}" id="labels_pmargin_top">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.top') }}</div>
                                     </div>
                                     <div class="input-group">
-                                        {{ Form::text('labels_pmargin_right', old('labels_pmargin_right', $setting->labels_pmargin_right), ['class' => 'form-control', 'aria-label'=>'labels_pmargin_right']) }}
+                                        <input class="form-control" aria-label="labels_pmargin_right" name="labels_pmargin_right" type="text" value="{{ old('labels_pmargin_right', $setting->labels_pmargin_right) }}">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.right') }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-3" style="margin-left: 10px; ">
                                     <div class="input-group" style="margin-bottom: 15px;">
-                                        {{ Form::text('labels_pmargin_bottom', old('labels_pmargin_bottom', $setting->labels_pmargin_bottom), ['class' => 'form-control', 'aria-label'=>'labels_pmargin_bottom']) }}
+                                        <input class="form-control" aria-label="labels_pmargin_bottom" name="labels_pmargin_bottom" type="text" value="{{ old('labels_pmargin_bottom', $setting->labels_pmargin_bottom) }}">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.bottom') }}</div>
                                     </div>
                                     <div class="input-group">
-                                        {{ Form::text('labels_pmargin_left', old('labels_pmargin_left', $setting->labels_pmargin_left), ['class' => 'form-control', 'aria-label'=>'labels_pmargin_left']) }}
+                                        <input class="form-control" aria-label="labels_pmargin_left" name="labels_pmargin_left" type="text" value="{{ old('labels_pmargin_left', $setting->labels_pmargin_left) }}">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.left') }}</div>
                                     </div>
 
@@ -452,13 +457,13 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
-                                        {{ Form::text('labels_pagewidth', old('labels_pagewidth', $setting->labels_pagewidth), ['class' => 'form-control', 'aria-label'=>'labels_pagewidth']) }}
+                                        <input class="form-control" aria-label="labels_pagewidth" name="labels_pagewidth" type="text" value="{{ old('labels_pagewidth', $setting->labels_pagewidth) }}" id="labels_pagewidth">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.width_w') }}</div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 form-group" style="margin-left: 10px">
                                     <div class="input-group">
-                                        {{ Form::text('labels_pageheight', old('labels_pageheight', $setting->labels_pageheight), ['class' => 'form-control', 'aria-label'=>'labels_pageheight']) }}
+                                        <input class="form-control" aria-label="labels_pageheight" name="labels_pageheight" type="text" value="{{ old('labels_pageheight', $setting->labels_pageheight) }}">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.height_h') }}</div>
                                     </div>
                                 </div>
@@ -513,7 +518,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 

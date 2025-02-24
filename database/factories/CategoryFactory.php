@@ -30,6 +30,7 @@ class CategoryFactory extends Factory
             'require_acceptance' => false,
             'use_default_eula' => $this->faker->boolean(),
             'created_by' => User::factory()->superuser(),
+            'notes'   => 'Created by DB seeder',
         ];
     }
 

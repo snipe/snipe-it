@@ -19,6 +19,8 @@ return [
     'print_assigned'    => 'Alles zugewiesene drucken',
     'email_assigned'    => 'Alles zugewiesene per Mail zusenden',
     'user_notified'     => 'Der Benutzer hat eine Liste seiner aktuell zugewiesenen Artikel per E-Mail erhalten.',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Diesen Benutzer bei der automatischen Zuweisung berechtigter Lizenzen einbeziehen',
     'auto_assign_help'  => 'Diesen Benutzer bei der automatischen Zuweisung von Lizenzen überspringen',
     'software_user'     => 'Software herausgegeben an :name',

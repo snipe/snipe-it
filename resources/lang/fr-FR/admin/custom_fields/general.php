@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Créer un champ personnalisé',
     'value_encrypted'      	        => 'La valeur de ce champ est chiffrée dans la base de donnée. Seuls les administrateurs seront capable de voir les données déchiffrées',
     'show_in_email'     => 'Inclure la valeur de ce champ dans les e-mails envoyés à l\'utilisateur·trice ? Les champs chiffrés ne peuvent pas être inclus dans les e-mails',
-    'show_in_email_short'     => 'Inclure dans les emails.',
+    'show_in_email_short' => 'Inclure dans les emails',
     'help_text' => 'Texte d\'aide',
     'help_text_description' => 'Ceci est un texte optionnel qui apparaîtra sous les éléments de formulaire lors de l\'édition d\'un actif pour fournir un contexte pour le champ.',
     'about_custom_fields_title' => 'À propos des champs personnalisés',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Afficher dans la liste des actifs demandables',
     'show_in_requestable_list' => 'Afficher la valeur dans la liste des actifs demandables. Les champs chiffrés ne seront pas affichés',
     'encrypted_options' => 'Ce champ est chiffré, donc certaines options d\'affichage ne seront pas disponibles.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

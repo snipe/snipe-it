@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'คุณแน่ใจหรือไม่ว่าต้องการลบเนื้อหานี้',
         'error'   		=> 'เกิดปัญหาในการลบเนื้อหา กรุณาลองอีกครั้ง.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'ไม่มีการเลือกเนื้อหาใด ๆ ดังนั้นจึงไม่มีสิ่งใดถูกลบ',
         'success' 		=> 'เนื้อหาถูกลบเรียบร้อยแล้ว',
     ],

@@ -6,7 +6,7 @@ return array(
     'does_not_exist' => 'Model neexistuje.',
     'no_association' => 'VAROVANIE! Model majetku pre túto položku je neplatný alebo neexistuje!',
     'no_association_fix' => 'Tento stav môže spôsobiť nepredvídateľné problémy. Priraďte danému majetku správny model.',
-    'assoc_users'	 => 'Tento model je použítý v jednom alebo viacerých majetkoch, preto nemôže byť odstránený. Prosím odstráňte príslušný majetok a skúste odstrániť znovu. ',
+    'assoc_users'	 => 'Tento model je použitý v jednom alebo viacerých majetkoch, preto nemôže byť odstránený. Prosím odstráňte príslušný majetok a skúste odstrániť znovu. ',
     'invalid_category_type' => 'Táto kategória musí byť kategóriou majetku.',
 
     'create' => array(

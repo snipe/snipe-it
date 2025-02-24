@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'An bhfuil tú cinnte gur mian leat an tsócmhainn seo a scriosadh?',
         'error'   		=> 'Bhí ceist ann a scriosadh an tsócmhainn. Arís, le d\'thoil.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Níor roghnaíodh aon sócmhainní, mar sin níor scriosadh aon rud.',
         'success' 		=> 'Scriosadh an tsócmhainn go rathúil.',
     ],

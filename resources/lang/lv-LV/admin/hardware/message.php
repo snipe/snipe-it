@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Vai tiešām vēlaties dzēst šo īpašumu?',
         'error'   		=> 'Radās problēma, noņemot aktīvu. Lūdzu mēģiniet vēlreiz.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Netika atlasīti neviens aktīvs, tāpēc nekas netika izdzēsts.',
         'success' 		=> 'Aktīvs tika veiksmīgi dzēsts.',
     ],

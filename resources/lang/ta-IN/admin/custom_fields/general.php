@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'இந்த புலத்தின் மதிப்பு தரவுத்தளத்தில் குறியாக்கம் செய்யப்பட்டுள்ளது. நிர்வாக பயனர்கள் மட்டுமே குறியாக்கப்பட்ட மதிப்புகளைக் காண முடியும்',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short' => 'Include in emails',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'about_custom_fields_title' => 'About Custom Fields',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Show in requestable assets list',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

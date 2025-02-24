@@ -800,6 +800,7 @@ class SettingsController extends Controller
         }
 
         if ($setting->save()) {
+
             return redirect()->route('settings.labels.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
@@ -869,7 +870,6 @@ class SettingsController extends Controller
         }
 
         if ($setting->save()) {
-            $setting->update_client_side_cert_files();
             return redirect()->route('settings.ldap.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }

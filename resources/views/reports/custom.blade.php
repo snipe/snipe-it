@@ -33,27 +33,30 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-1">
+    <div class="col-md-9">
 
-        {{ Form::open([
-            'method' => 'post',
-            'class' => 'form-horizontal',
-            'id' => 'custom-report-form',
-            'url' => request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : '/reports/custom',
-        ]) }}
+        <form
+            method="POST"
+            action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : '/reports/custom' }}"
+            accept-charset="UTF-8"
+            class="form-horizontal"
+            id="custom-report-form"
+        >
         {{csrf_field()}}
 
     <!-- Horizontal Form -->
         <div class="box box-default">
             <div class="box-header with-border">
                 @if (request()->routeIs('reports/custom') || request()->routeIs('report-templates.show'))
-                    <h2 class="box-title">
+                    <h2 class="box-title" style="padding-top: 7px;">
                         {{ trans('general.customize_report') }}
                     </h2>
+
                 @endif
+
                 @if (request()->routeIs('report-templates.edit'))
                     <div class="row">
-                        <div class="col-md-7 col-md-offset-5">
+                        <div class="col-md-7 col-md-offset-4">
                             <div class="{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label
                                     for="name"
@@ -77,29 +80,7 @@
                         </div>
                     </div>
                 @endif
-                @if (request()->routeIs('report-templates.show'))
-                    <div class="box-tools pull-right">
-                        <a
-                            href="{{ route('report-templates.edit', $template) }}"
-                            class="btn btn-sm btn-warning"
-                            data-tooltip="true"
-                            title="{{ trans('admin/reports/general.update_template') }}"
-                        >
-                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                            <span class="sr-only">{{ trans('general.update') }}</span>
-                        </a>
-                        <button
-                            class="btn btn-sm btn-danger delete-asset"
-                            data-toggle="modal"
-                            data-title="{{ trans('general.delete') }}"
-                            data-content="{{ trans('general.delete_confirm', ['item' => $template->name]) }}"
-                            data-target="#dataConfirmModal"
-                            type="button"
-                        >
-                            <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
-                        </button>
-                    </div>
-                @endif
+
         </div><!-- /.box-header -->
 
         <div class="box-body">
@@ -581,15 +562,36 @@
 
               <div class="col-md-9 col-md-offset-3">
                   <label class="form-control">
-                    {{ Form::radio('deleted_assets', 'exclude_deleted', $template->radioValue('deleted_assets', 'exclude_deleted', true), ['aria-label'=>'deleted_assets', 'id'=>'deleted_assets_exclude_deleted'])}}
-                    {{ trans('general.exclude_deleted') }}
+                      <input
+                          name="deleted_assets"
+                          id="deleted_assets_exclude_deleted"
+                          type="radio"
+                          value="exclude_deleted"
+                          @checked($template->radioValue('deleted_assets', 'exclude_deleted', true))
+                          aria-label="deleted_assets"
+                      >
+                      {{ trans('general.exclude_deleted') }}
                   </label>
                   <label class="form-control">
-                    {{ Form::radio('deleted_assets', 'include_deleted', $template->radioValue('deleted_assets', 'include_deleted'), ['aria-label'=>'deleted_assets', 'id'=>'deleted_assets_include_deleted']) }}
+                      <input
+                          name="deleted_assets"
+                          id="deleted_assets_include_deleted"
+                          type="radio"
+                          value="include_deleted"
+                          @checked($template->radioValue('deleted_assets', 'include_deleted'))
+                          aria-label="deleted_assets"
+                      >
                     {{ trans('general.include_deleted') }}
                   </label>
                   <label class="form-control">
-                    {{ Form::radio('deleted_assets', 'only_deleted', $template->radioValue('deleted_assets', 'only_deleted'), ['aria-label'=>'deleted_assets','id'=>'deleted_assets_only_deleted']) }}
+                      <input
+                          name="deleted_assets"
+                          type="radio"
+                          id="deleted_assets_only_deleted"
+                          value="only_deleted"
+                          @checked($template->radioValue('deleted_assets', 'only_deleted'))
+                          aria-label="deleted_assets"
+                      >
                     {{ trans('general.only_deleted') }}
                   </label>
               </div>
@@ -610,11 +612,11 @@
                 @endif
             </div>
         </div> <!--/.box.box-default-->
-    {{ Form::close() }}
+        </form>
     </div>
 
     <!-- Saved Reports right column -->
-    <div class="col-md-2">
+    <div class="col-md-3">
         @if (! request()->routeIs('report-templates.edit'))
             <div class="form-group">
                 <label for="saved_report_select">{{ trans('admin/reports/general.open_saved_template') }}</label>
@@ -630,6 +632,41 @@
                         </option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                @if (request()->routeIs('report-templates.show'))
+                        <a
+                                href="{{ route('report-templates.edit', $template) }}"
+                                class="btn btn-sm btn-warning btn-social btn-block"
+                                data-tooltip="true"
+                                title="{{ trans('admin/reports/general.update_template') }}"
+                                style="margin-bottom: 5px;"
+                        >
+                            <x-icon type="edit" />
+                            {{ trans('general.update') }}
+                        </a>
+
+                    <span data-tooltip="true" title="{{ trans('general.delete') }}">
+                        <a href="#"
+                                class="btn btn-sm btn-danger btn-social btn-block"
+                                data-toggle="modal"
+                                data-title="{{ trans('general.delete') }}"
+                                data-content="{{ trans('general.delete_confirm', ['item' => $template->name]) }}"
+                                data-target="#dataConfirmModal"
+                                type="button"
+                        >
+
+                                <x-icon type="delete" />
+                                {{ trans('general.delete') }}
+
+                        </a>
+                    </span>
+
+
+                @endif
+                </div>
             </div>
         @endif
         @if (request()->routeIs('reports/custom'))

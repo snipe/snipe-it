@@ -3,7 +3,12 @@
     <div class="form-group {{ $errors->has('eula_text') ? 'error' : '' }}">
         <label for="eula_text" class="col-md-3 control-label">{{ trans('admin/categories/general.eula_text') }}</label>
         <div class="col-md-7">
-            {{ Form::textarea('eula_text', null, ['wire:model.live' => 'eulaText', 'class' => 'form-control', 'aria-label'=>'eula_text', 'disabled' => $this->eulaTextDisabled]) }}
+            <x-input.textarea
+                name="eula_text"
+                wire:model.live="eulaText"
+                aria-label="eula_text"
+                :disabled="$this->eulaTextDisabled"
+            />
             <p class="help-block">{!! trans('admin/categories/general.eula_text_help') !!} </p>
             <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!} </p>
             {!! $errors->first('eula_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
