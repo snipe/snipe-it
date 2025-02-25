@@ -71,6 +71,7 @@ echo "- check your PHP version and extension requirements \n";
 echo "- check directory permissions \n";
 echo "- do a git pull to bring you to the latest version \n";
 echo "- run composer install to get your vendors up to date \n";
+echo "- run a backup \n";
 echo "- run migrations to get your schema up to date \n";
 echo "- clear out old cache settings\n\n";
 
@@ -419,29 +420,9 @@ if ($dirs_not_writable!='') {
 
 
 
-echo "--------------------------------------------------------\n";
-echo "STEP 4: Backing up database: \n";
-echo "--------------------------------------------------------\n\n";
-$backup = exec('php artisan snipeit:backup', $backup_results, $return_code);
-echo '-- ' . implode("\n", $backup_results) . "\n\n";
-if ($return_code > 0) {
-    die("Something went wrong with your backup. Aborting!\n\n");
-}
-unset($return_code);
 
 echo "--------------------------------------------------------\n";
-echo "STEP 5: Putting application into maintenance mode: \n";
-echo "--------------------------------------------------------\n\n";
-exec('php artisan down',  $down_results, $return_code);
-echo '-- ' . implode("\n", $down_results) . "\n";
-if ($return_code > 0) {
-    die("Something went wrong with downing you site. This can't be good. Please investigate the error. Aborting!n\n");
-}
-unset($return_code);
-
-
-echo "--------------------------------------------------------\n";
-echo "STEP 6: Pulling latest from Git (".$branch." branch): \n";
+echo "STEP 4: Pulling latest from Git (".$branch." branch): \n";
 echo "--------------------------------------------------------\n\n";
 $git_version = shell_exec('git --version');
 
@@ -467,7 +448,7 @@ if ((strpos('git version', $git_version)) === false) {
 
 
 echo "--------------------------------------------------------\n";
-echo "STEP 7: Cleaning up old cached files:\n";
+echo "STEP 5: Cleaning up old cached files:\n";
 echo "--------------------------------------------------------\n\n";
 
 // Build an array of the files we generally want to delete because they
@@ -500,7 +481,7 @@ echo '-- '.$view_clear;
 echo "\n";
 
 echo "--------------------------------------------------------\n";
-echo "STEP 8: Updating composer dependencies:\n";
+echo "STEP 6: Updating composer dependencies:\n";
 echo "(This may take a moment.)\n";
 echo "--------------------------------------------------------\n\n";
 echo "-- Running the app in ".$app_environment." mode.\n";
@@ -546,6 +527,30 @@ if (file_exists('composer.phar')) {
 
 echo $composer_dump."\n";
 echo $composer;
+
+
+
+echo "--------------------------------------------------------\n";
+echo "STEP 7: Putting application into maintenance mode: \n";
+echo "--------------------------------------------------------\n\n";
+exec('php artisan down',  $down_results, $return_code);
+echo '-- ' . implode("\n", $down_results) . "\n";
+if ($return_code > 0) {
+    die("Something went wrong with downing your site. This can't be good. Please investigate the error. Aborting!n\n");
+}
+unset($return_code);
+
+
+echo "--------------------------------------------------------\n";
+echo "STEP 8: Backing up database: \n";
+echo "--------------------------------------------------------\n\n";
+$backup = exec('php artisan snipeit:backup', $backup_results, $return_code);
+echo '-- ' . implode("\n", $backup_results) . "\n\n";
+if ($return_code > 0) {
+    die("Something went wrong with your backup. Aborting!\n\n");
+}
+unset($return_code);
+
 
 
 echo "--------------------------------------------------------\n";
