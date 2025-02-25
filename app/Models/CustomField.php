@@ -149,11 +149,6 @@ class CustomField extends Model
                     return true;
                 }
 
-                // This is just a dumb thing we have to include because Laraval/Doctrine doesn't
-                // play well with enums or a table that EVER had enums. :(
-                $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
-                $platform->registerDoctrineTypeMapping('enum', 'string');
-
                 // Rename the field if the name has changed
                 Schema::table(self::$table_name, function ($table) use ($custom_field) {
                     $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal('name')), $custom_field->convertUnicodeDbSlug());
