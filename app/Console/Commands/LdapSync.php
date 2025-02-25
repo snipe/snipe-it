@@ -125,6 +125,10 @@ class LdapSync extends Command
              */
             $attributes = array_values(array_filter($ldap_map));
 
+            if (Setting::getSettings()->is_ad === 1 && is_null($ldap_map['active_flag'])) {
+                $attributes[] = 'useraccountcontrol';
+            }
+
             $results = Ldap::findLdapUsers($search_base, -1, $filter, $attributes);
 
         } catch (\Exception $e) {
