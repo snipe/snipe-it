@@ -71,12 +71,12 @@ class AssetFilesController extends Controller
             try {
                  return StorageHelper::showOrDownloadFile($file, $log->filename);
             } catch (\Exception $e) {
-                return redirect()->route('hardware.show', ['hardware' => $asset])->with('error',  trans('general.file_not_found'));
+                return redirect()->route('hardware.show', $asset)->with('error', trans('general.file_not_found'));
             }
 
         }
 
-        return redirect()->route('hardware.show', ['hardware' => $asset])->with('error',  trans('general.log_record_not_found'));
+        return redirect()->route('hardware.show', $asset)->with('error', trans('general.log_record_not_found'));
 
 
     }
@@ -102,7 +102,7 @@ class AssetFilesController extends Controller
             return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
-        return redirect()->route('hardware.show', ['hardware' => $asset])->with('error',  trans('general.log_record_not_found'));
+        return redirect()->route('hardware.show', $asset)->with('error', trans('general.log_record_not_found'));
     }
 
 }
