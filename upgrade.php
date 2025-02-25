@@ -437,14 +437,14 @@ $git_version = shell_exec('git --version');
 
 if ((strpos('git version', $git_version)) === false) {
     echo "Git is installed. \n";
-//    $git_fetch = shell_exec('git fetch');
-//    $git_checkout = shell_exec('git checkout '.$branch);
-//    $git_stash = shell_exec('git stash');
-//    $git_pull = shell_exec('git pull');
-//    echo $git_fetch;
-//    echo '-- '.$git_stash;
-//    echo '-- '.$git_checkout;
-//    echo '-- '.$git_pull."\n";
+    $git_fetch = shell_exec('git fetch');
+    $git_checkout = shell_exec('git checkout '.$branch);
+    $git_stash = shell_exec('git stash');
+    $git_pull = shell_exec('git pull');
+    echo $git_fetch;
+    echo '-- '.$git_stash;
+    echo '-- '.$git_checkout;
+    echo '-- '.$git_pull."\n";
 } else {
     echo "Git is NOT installed. You can still use this upgrade script to run common \n";
     echo "migration commands, but you will have to manually download the updated files. \n\n";
