@@ -104,6 +104,8 @@ class CustomFieldsController extends Controller
             "auto_add_to_fieldsets" => $request->get("auto_add_to_fieldsets", 0),
             "show_in_listview" => $request->get("show_in_listview", 0),
             "show_in_requestable_list" => $request->get("show_in_requestable_list", 0),
+            "display_checkin" => $request->get("display_checkin", 0),
+            "display_checkout" => $request->get("display_checkout", 0),
             "created_by" => auth()->id()
         ]);
 
@@ -193,10 +195,8 @@ class CustomFieldsController extends Controller
      * @param  int $id
      * @since [v4.0]
      */
-    public function edit(Request $request, $id) : View | RedirectResponse
+    public function edit(Request $request, CustomField $field) : View | RedirectResponse
     {
-        if ($field = CustomField::find($id)) {
-
         $this->authorize('update', $field);
         $fieldsets = CustomFieldset::get();
         $customFormat = '';
@@ -210,11 +210,7 @@ class CustomFieldsController extends Controller
             'fieldsets'         => $fieldsets,
             'predefinedFormats' => Helper::predefined_formats(),
         ]);
-        } 
 
-        return redirect()->route("fields.index")
-            ->with("error", trans('admin/custom_fields/message.field.invalid'));
-        
     }
 
 
@@ -229,13 +225,9 @@ class CustomFieldsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(CustomFieldRequest $request, $id) : RedirectResponse
+    public function update(CustomFieldRequest $request, CustomField $field) : RedirectResponse
     {
-        $field = CustomField::find($id);
-
         $this->authorize('update', $field);
-
-
         $show_in_email = $request->get("show_in_email", 0);
         $display_in_user_view = $request->get("display_in_user_view", 0);
 
@@ -256,6 +248,8 @@ class CustomFieldsController extends Controller
         $field->auto_add_to_fieldsets = $request->get("auto_add_to_fieldsets", 0);
         $field->show_in_listview = $request->get("show_in_listview", 0);
         $field->show_in_requestable_list = $request->get("show_in_requestable_list", 0);
+        $field->display_checkin = $request->get("display_checkin", 0);
+        $field->display_checkout = $request->get("display_checkout", 0);
 
         if ($request->get('format') == 'CUSTOM REGEX') {
             $field->format = e($request->get('custom_format'));

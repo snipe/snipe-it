@@ -198,6 +198,7 @@ Form::macro('username_format', function ($name = 'username_format', $selected = 
         'firstname_lastname' => trans('general.firstname_lastname_underscore_format'),
         'firstinitial.lastname' => trans('general.firstinitial.lastname'),
         'lastname_firstinitial' => trans('general.lastname_firstinitial'),
+        'lastname.firstinitial' => trans('general.lastname_dot_firstinitial_format'),
         'firstnamelastname' => trans('general.firstnamelastname'),
         'firstnamelastinitial' => trans('general.firstnamelastinitial'),
         'lastname.firstname' => trans('general.lastnamefirstname'),

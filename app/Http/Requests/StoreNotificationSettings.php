@@ -28,7 +28,7 @@ class StoreNotificationSettings extends FormRequest
             'admin_cc_email'                      => 'email_array|nullable',
             'alert_threshold'                     => 'numeric|nullable|gt:0',
             'alert_interval'                      => 'numeric|nullable|gt:0',
-            'audit_warning_days'                  => 'numeric|nullable|gt:0',
+            'audit_warning_days'                  => 'numeric|nullable',
             'due_checkin_days'                    => 'numeric|nullable|gt:0',
             'audit_interval'                      => 'numeric|nullable|gt:0',
         ];

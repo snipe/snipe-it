@@ -10,7 +10,7 @@ return [
     'action'                => 'Darbība',
     'activity_report'		=> 'Darbības pārskats',
     'address'				=> 'Adrese',
-    'admin'					=> 'Administrators',
+    'admin'					=> 'Admin Settings',
     'admin_tooltip'			=> 'Šim lietotājam ir administratora tiesības',
     'superuser'				=> 'Galvenais lietotājs',
     'superuser_tooltip'		=> 'Šim lietotājam ir glavenā lietotāja tiesības',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Pieejamais inventārs',
     'accept_assets'         => 'Apstiprināt inventāru :name',
     'accept_assets_menu'    => 'Apstiprināt inventāru',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Audits',
     'audit_report'			=> 'Revīzijas žurnāls',
     'assets'				=> 'Aktīvi',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'Ieraksts izceidots',
     'updated_at' 			=> 'Atjaunināts vietnē',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'Pašreizējais',
     'current_password'      => 'Pāsreizējā parole',
     'customize_report'      => 'Pielāgot atskaiti',
     'custom_report'         => 'Pielāgoto aktīvu pārskats',
     'dashboard'				=> 'Informācijas panelis',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dienas',
     'days_to_next_audit'    => 'Dienas līdz nākamajam auditam',
     'date'					=> 'Datums',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Vārds Uzvārds (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Uzvārds un vārda pirmais burts (berzinsj@epasts.lv)',
     'firstintial_dot_lastname_format' => 'Vārds un uzvārds (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Vārds Uzvārds (Liene Ozoliņa)',
     'lastname_firstname_display'	=> 'Uzvārds Vārds (Ozoliņa Liene)',
     'name_display_format'	=> 'Vārda Attēlošanas Formāts',
@@ -217,6 +221,8 @@ return [
     'no'  					=> 'Nē',
     'notes'  				=> 'Piezīmes',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => 'Jūsu veidlapas sesija ir beidzies. Lūdzu mēģiniet vēlreiz.',
     'login_enabled'         => 'Pieteikšanās Iespējota',
     'audit_due'             => 'Gaida Auditu',
-    'audit_due_days'        => 'Inventāra Audits pēc :days dienas|Inventāra Audits pēc :days dienām',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Jāpieņem',
     'checkin_overdue'       => 'Aizkavējusies Pieņemšana',
-    'checkin_due_days'      => 'Inventāra Pieņemšana pēc :days dienas|Inventāra Pieņemšana pēc :days dienām',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Aizkavējies Audits',
     'accept'                => 'Apstiprināt :asset',
     'i_accept'              => 'Es pieņemu',
@@ -561,6 +567,7 @@ return [
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
     ],
+
     'more_info' => 'Vairāk informācijas',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +583,21 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

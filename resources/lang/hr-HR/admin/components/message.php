@@ -17,7 +17,8 @@ return array(
     'delete' => array(
         'confirm'   => 'Jeste li sigurni da želite izbrisati ovu komponentu?',
         'error'   => 'Došlo je do problema s brisanjem komponente. Molim te pokušaj ponovno.',
-        'success' => 'Komponenta je uspješno izbrisana.'
+        'success' => 'Komponenta je uspješno izbrisana.',
+        'error_qty'   => 'Some components of this type are still checked out. Please check them in and try again.',
     ),
 
      'checkout' => array(

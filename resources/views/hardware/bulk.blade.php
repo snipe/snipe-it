@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-5">
               <label class="form-control">
-                {{ Form::checkbox('null_name', '1', false) }}
+                <input type="checkbox" name="null_name" value="1">
                 {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
             </div>
@@ -66,7 +66,7 @@
             </div>
             <div class="col-md-5">
               <label class="form-control">
-                {{ Form::checkbox('null_purchase_date', '1', false) }}
+                <input type="checkbox" name="null_purchase_date" value="1">
                 {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
               </label>
             </div>
@@ -85,7 +85,7 @@
              </div>
               <div class="col-md-5">
                 <label class="form-control">
-                  {{ Form::checkbox('null_expected_checkin_date', '1', false) }}
+                  <input type="checkbox" name="null_expected_checkin_date" value="1">
                   {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
                 </label>
               </div>
@@ -103,7 +103,7 @@
             </div>
             <div class="col-md-5">
               <label class="form-control">
-                {{ Form::checkbox('null_asset_eol_date', '1', false) }}
+                <input type="checkbox" name="null_asset_eol_date" value="1">
                 {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
               </label>
             </div>
@@ -112,7 +112,7 @@
           <div class="form-group">
             <div class="col-md-9 col-md-offset-3">
               <label class="form-control">
-                {{ Form::checkbox('calc_eol', '1', false) }}
+                <input type="checkbox" name="calc_eol" value="1">
                 {{ trans('admin/hardware/form.calc_eol') }}
               </label>
             </div>
@@ -215,7 +215,7 @@
             </div>
             <div class="col-md-5">
               <label class="form-control">
-                {{ Form::checkbox('null_next_audit_date', '1', false) }}
+                <input type="checkbox" name="null_next_audit_date" value="1">
                 {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
             </div>

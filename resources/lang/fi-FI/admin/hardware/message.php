@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Oletko varma että haluat poistaa tämän laitteen?',
         'error'   		=> 'Laitteen poistamisessa tapahtui virhe. Yritä uudelleen.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Laitetta ei ollut valittuna, joten mitään ei poistettu.',
         'success' 		=> 'Laite poistettu onnistuneesti.',
     ],

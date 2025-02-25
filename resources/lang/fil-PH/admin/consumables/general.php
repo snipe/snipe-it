@@ -8,5 +8,5 @@ return array(
     'remaining' 			            => 'Ang natitira',
     'total' 			                => 'Ang Kabuuan',
     'update'                            => 'I-update ang Consumable',
-    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
+    'inventory_warning'                 => 'Ang imbentaryo ng consumable na ito ay nasa mababang bilang na :min_count',
 );

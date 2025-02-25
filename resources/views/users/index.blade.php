@@ -66,9 +66,6 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                     </table>
-
-
-                    {{ Form::close() }}
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>

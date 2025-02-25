@@ -21,7 +21,7 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.localization.save') }}" accept-charset="UTF-8" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -88,7 +88,16 @@
                                 <label for="default_currency">{{ trans('admin/settings/general.default_currency') }}</label>
                             </div>
                             <div class="col-md-9 col-xs-12">
-                                {{ Form::text('default_currency', old('default_currency', $setting->default_currency), array('class' => 'form-control select2-container','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px; display: inline-block; ')) }}
+                                <input
+                                    class="form-control select2-container"
+                                    placeholder="USD"
+                                    maxlength="3"
+                                    style="width: 60px; display: inline-block; "
+                                    name="default_currency"
+                                    type="text"
+                                    value="{{ old('default_currency', $setting->default_currency) }}"
+                                    id="default_currency"
+                                >
 
                                 {!! Form::digit_separator('digit_separator', old('digit_separator', $setting->digit_separator), 'select2') !!}
 
@@ -113,7 +122,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 

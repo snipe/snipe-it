@@ -10,7 +10,7 @@ return [
     'action'                => 'Ação',
     'activity_report'		=> 'Relatório de atividades',
     'address'				=> 'Morada',
-    'admin'					=> 'Administração',
+    'admin'					=> 'Configurações de administrador',
     'admin_tooltip'			=> 'Este usuário tem privilégios de administrador',
     'superuser'				=> 'Superusuário',
     'superuser_tooltip'		=> 'Este usuário tem privilégios de superusuário',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Artigos Disponíveis',
     'accept_assets'         => 'Artigos Aceites :name',
     'accept_assets_menu'    => 'Artigos Aceites',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Auditoria',
     'audit_report'			=> 'Registro de auditoria',
     'assets'				=> 'Artigos',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'Registro criado',
     'updated_at' 			=> 'Atualizado em',
     'currency'  			=> '€', // this is deprecated
+    'currency_text'  		=> 'Moeda', //
     'current'  				=> 'Atuais',
     'current_password'      => 'Senha atual',
     'customize_report'      => 'Personalizar relatório',
     'custom_report'         => 'Relatório de Artigo personalizado',
     'dashboard'				=> 'Dashboard',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dias',
     'days_to_next_audit'    => 'Dias para próxima auditoria',
     'date'					=> 'Data',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Nome próprio e Sobrenome (jane_smith@exemplo.com)',
     'lastnamefirstinitial_format' =>  'Sobrenome Primeira Inicial (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Inicial Nome Próprio Sobrenome (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Primeiro nome com sobrenome (Jane Smith)',
     'lastname_firstname_display'	=> 'Primeiro Nome do Último Nome (Smith Jane)',
     'name_display_format'	=> 'Formato de exibição de nome',
@@ -217,6 +221,8 @@ return [
     'no'  					=> 'Não',
     'notes'  				=> 'Notas',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => 'A sua sessão expirou. Inicie sessão novamente.',
     'login_enabled'         => 'Login Ativado',
     'audit_due'             => 'Marcado para Auditoria',
-    'audit_due_days'        => 'Atributos devidos para auditoria dentro de :days Dias|Ativos devido para auditoria dentro de :days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Vencimento para o checkin',
     'checkin_overdue'       => 'Atrasado por check-in',
-    'checkin_due_days'      => 'Ativos devidos para o check-in dentro de :days Dia| Ativos devido para check-in dentro de :days Dias',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Atrasado para Auditoria',
     'accept'                => 'Aceitar :asset',
     'i_accept'              => 'Aceito',
@@ -561,6 +567,7 @@ return [
         'consumables'  => ':count Consumível|:count Consumíveis',
         'components'  => ':count Componente|:count Componentes',
     ],
+
     'more_info' => 'Mais Informações',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +583,21 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

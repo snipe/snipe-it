@@ -21,7 +21,17 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'create-form' ]) }}
+    <form
+        method="POST"
+        action="{{ route('settings.branding.save') }}"
+        accept-charset="UTF-8"
+        autocomplete="off"
+        class="form-horizontal"
+        role="form"
+        id="create-form"
+        enctype="multipart/form-data"
+        novalidate="novalidate"
+    >
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -49,11 +59,10 @@
                             </div>
                             <div class="col-md-7 required">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('site_name', old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
+                                    <input class="form-control" disabled="disabled" placeholder="Snipe-IT Asset Management" name="site_name" type="text" value="{{ old('site_name', $setting->site_name) }}" id="site_name">
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::text('site_name',
-                                        old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'required' => 'required')) }}
+                                    <input class="form-control" placeholder="Snipe-IT Asset Management" required="required" name="site_name" type="text" value="{{ old('site_name', $setting->site_name) }}" id="site_name">
                                 @endif
                                 {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -192,7 +201,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="input-group header-color">
-                                    {{ Form::text('header_color', old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;','placeholder' => '#FF0000', 'aria-label'=>'header_color')) }}
+                                    <input class="form-control" style="width: 100px;" placeholder="#FF0000" aria-label="header_color" name="header_color" type="text" id="header_color" value="{{ old('header_color', $setting->header_color) }}">
                                     <div class="input-group-addon">
                                         <i></i>
                                     </div>
@@ -233,11 +242,22 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('custom_css', old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS','disabled'=>'disabled', 'aria-label'=>'custom_css')) }}
+                                    <x-input.textarea
+                                        name="custom_css"
+                                        :value="old('custom_css', $setting->custom_css)"
+                                        placeholder="Add your custom CSS"
+                                        aria-label="custom_css"
+                                        disabled
+                                    />
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::textarea('custom_css', old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => 'Add your custom CSS', 'aria-label'=>'custom_css')) }}
+                                    <x-input.textarea
+                                        name="custom_css"
+                                        :value="old('custom_css', $setting->custom_css)"
+                                        placeholder="Add your custom CSS"
+                                        aria-label="custom_css"
+                                    />
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
@@ -289,10 +309,21 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('footer_text', old('footer_text', $setting->footer_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => 'Optional footer text','disabled'=>'disabled')) }}
+                                    <x-input.textarea
+                                        name="footer_text"
+                                        :value="old('footer_text', $setting->footer_text)"
+                                        rows="4"
+                                        placeholder="Optional footer text"
+                                        disabled
+                                    />
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::textarea('footer_text', old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => 'Optional footer text')) }}
+                                    <x-input.textarea
+                                        name="footer_text"
+                                        :value="old('footer_text', $setting->footer_text)"
+                                        rows="4"
+                                        placeholder="Optional footer text"
+                                    />
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
                                 {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -319,7 +350,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 

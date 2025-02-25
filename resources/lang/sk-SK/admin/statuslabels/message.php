@@ -23,7 +23,7 @@ return [
     ],
 
     'help' => [
-        'undeployable'   => 'Tieto majetky nemôžu byť nikomu priradené.',
+        'undeployable'   => 'Tieto položky majetku nemôžu byť nikomu priradené.',
         'deployable'   => 'Tieto majetky môžu byť priradené. Akonáhle sú priradené nadobudnú stav <i class="fas fa-circle text-blue"></i> <strong>Priradené</strong>.',
         'archived'   => 'Tieto majetky nemôžu byť priradené, budú zobrazené iba vo výpise Archovavné. Tento stav je vhodný, ak si chcete ponechať informácie o predchádzajúcom majetku pre historické účely alebo prípravu rozpočtu, ale zároveň ich nechcete mať zobrazené v prehľade aktuálneho majetku.',
         'pending'   => 'Tieto majetky nemôžu byť ešte nikomu priradené. Často sa používa na predmety, ktoré čakajú na opravu ale očakáva sa ich návrat do obehu.',

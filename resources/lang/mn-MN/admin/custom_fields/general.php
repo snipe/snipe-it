@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Энэ талбарын үнэ цэнийг мэдээллийн санд шифрлэдэг. Зөвхөн админ хэрэглэгч нар нь буцаагдсан утгыг харах боломжтой байна',
     'show_in_email'     => 'Хэрэглэгчид илгээсэн олголтын имэйлд энэ талбарын утгыг оруулах уу? Шифрлэгдсэн талбаруудыг имэйлд оруулах боломжгүй',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short' => 'Include in emails',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'about_custom_fields_title' => 'About Custom Fields',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Show in requestable assets list',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

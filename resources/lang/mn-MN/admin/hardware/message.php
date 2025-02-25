@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Та энэ хөрөнгийг устгахыг хүсч байна уу?',
         'error'   		=> 'Хөрөнгийг устгах асуудал гарлаа. Дахин оролдоно уу.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Ямар ч хөрөнгө сонгогдоогүй тул юу ч устгаагүй.',
         'success' 		=> 'Хөрөнгийг амжилттай устгасан байна.',
     ],

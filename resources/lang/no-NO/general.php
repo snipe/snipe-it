@@ -10,7 +10,7 @@ return [
     'action'                => 'Handlinger',
     'activity_report'		=> 'Aktivitetsrapport',
     'address'				=> 'Adresse',
-    'admin'					=> 'Admin',
+    'admin'					=> 'Admin innstillinger',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Tilgjengelige eiendeler',
     'accept_assets'         => 'Godta Eiendelen :name',
     'accept_assets_menu'    => 'Godta eiendeler',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Revisjon',
     'audit_report'			=> 'Overvåkingslogg',
     'assets'				=> 'Eiendeler',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'Post opprettet',
     'updated_at' 			=> 'Oppdatert',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Valuta', //
     'current'  				=> 'Nåværende',
     'current_password'      => 'Gjeldende passord',
     'customize_report'      => 'Tilpass rapport',
     'custom_report'         => 'Tilpasset eiendelsrapport',
     'dashboard'				=> 'Kontrollpanel',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dager',
     'days_to_next_audit'    => 'Dager til neste revisjon',
     'date'					=> 'Dato',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Fornavn Etternavn (oladunk@example.com)',
     'lastnamefirstinitial_format' =>  'Etternavn Initialer (oladunk@example.com)',
     'firstintial_dot_lastname_format' => 'Fornavn Initialer. Etternavn (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Fornavn Etternavn (Kari Torildsdottir)',
     'lastname_firstname_display'	=> 'Etternavn Fornavn (Torildsdottir, Kari)',
     'name_display_format'	=> 'Navneformat',
@@ -217,6 +221,8 @@ return [
     'no'  					=> 'Nei',
     'notes'  				=> 'Notater',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => 'Din sesjon har utløpt. Prøv igjen.',
     'login_enabled'         => 'Innlogging aktiv',
     'audit_due'             => 'Revisjonsfrist nær',
-    'audit_due_days'        => 'Aktiva Frist for revisjon innen :days days|Due for Audit Om dager',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Forfalt for innsjekk',
     'checkin_overdue'       => 'Forfalt for innsjekk',
-    'checkin_due_days'      => 'Eiendeler Tidsfrist for innsjekk innen :days Day|Asset Due for Checkin Innen :days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Revisjonsfrist forfalt',
     'accept'                => 'Akseptér :asset',
     'i_accept'              => 'Jeg aksepterer',
@@ -561,6 +567,7 @@ return [
         'consumables'  => ':count Forbruksvare|:count Forbruksvarer',
         'components'  => ':count Komponenter|:count komponenter',
     ],
+
     'more_info' => 'Mer info',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +583,21 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

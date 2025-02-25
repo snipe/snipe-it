@@ -80,7 +80,7 @@
                             <label for="email_domain">{{ trans('general.email_domain') }}</label>
                         </div>
                         <div class="col-md-9">
-                            {{ Form::text('email_domain', old('email_domain', $setting->email_domain), array('class' => 'form-control','placeholder' => 'example.com')) }}
+                            <input class="form-control" placeholder="example.com" name="email_domain" type="text" value="{{ old('email_domain', $setting->email_domain) }}" id="email_domain">
                             <span class="help-block">{{ trans('general.email_domain_help')  }}</span>
                             {!! $errors->first('email_domain', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
@@ -185,7 +185,7 @@
                             <label for="per_page">{{ trans('admin/settings/general.per_page') }}</label>
                         </div>
                         <div class="col-md-9">
-                            {{ Form::text('per_page', old('per_page', $setting->per_page), array('class' => 'form-control','placeholder' => '5', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                            <input class="form-control" placeholder="5" maxlength="3" style="width: 60px;" name="per_page" type="text" value="{{ old('per_page', $setting->per_page) }}" id="per_page">
                             {!! $errors->first('per_page', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
                     </div>
@@ -196,7 +196,7 @@
                            <label for="thumbnail_max_h">{{ trans('admin/settings/general.thumbnail_max_h') }}</label>
                        </div>
                        <div class="col-md-9">
-                           {{ Form::text('thumbnail_max_h', old('thumbnail_max_h', $setting->thumbnail_max_h), array('class' => 'form-control','placeholder' => '50', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+                           <input class="form-control" placeholder="50" maxlength="3" style="width: 60px;" name="thumbnail_max_h" type="text" value="{{ old('thumbnail_max_h', $setting->thumbnail_max_h) }}" id="thumbnail_max_h">
                            <p class="help-block">{{ trans('admin/settings/general.thumbnail_max_h_help') }}</p>
                            {!! $errors->first('thumbnail_max_h', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                        </div>
@@ -208,7 +208,11 @@
                            <label for="default_eula_text">{{ trans('admin/settings/general.default_eula_text') }}</label>
                        </div>
                        <div class="col-md-9">
-                           {{ Form::textarea('default_eula_text', old('default_eula_text', $setting->default_eula_text), array('class' => 'form-control','placeholder' => 'Add your default EULA text')) }}
+                           <x-input.textarea
+                               name="default_eula_text"
+                               :value="old('default_eula_text', $setting->default_eula_text)"
+                               placeholder="Add your default EULA text"
+                           />
                            {!! $errors->first('default_eula_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                            <p class="help-block">{{ trans('admin/settings/general.default_eula_help_text') }}</p>
                            <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!}</p>
@@ -362,7 +366,7 @@
                            </div>
                        </div>
 
-                       
+
                        <!-- Depreciation method -->
                        <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">
                            <div class="col-md-3">
@@ -370,9 +374,9 @@
                            </div>
                            <div class="col-md-9">
                                {{ Form::select('depreciation_method', array(
-                                    'default' => 'Linear (default)', 
-                                    'half_1' => 'Half-year convention, always applied', 
-                                    'half_2' => 'Half-year convention, applied with condition', 
+                                    'default' => 'Linear (default)',
+                                    'half_1' => 'Half-year convention, always applied',
+                                    'half_2' => 'Half-year convention, applied with condition',
                                 ), old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
@@ -385,9 +389,9 @@
                            </div>
                            <div class="col-md-9">
                                @if (config('app.lock_passwords'))
-                                   {{ Form::text('privacy_policy_link', old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control disabled', 'disabled' => 'disabled')) }}
+                                   <input class="form-control disabled" disabled="disabled" name="privacy_policy_link" type="text" id="privacy_policy_link" value="{{ old('privacy_policy_link', $setting->privacy_policy_link) }}">
                                @else
-                                   {{ Form::text('privacy_policy_link', old('privacy_policy_link', $setting->privacy_policy_link), array('class' => 'form-control')) }}
+                                   <input class="form-control" name="privacy_policy_link" type="text" id="privacy_policy_link" value="{{ old('privacy_policy_link', $setting->privacy_policy_link) }}">
 
                                @endif
 
@@ -419,7 +423,7 @@
     </div> <!-- /.col-md-8-->
 
 
-    {{ Form::close() }}
+    </form>
 
 @stop
 
