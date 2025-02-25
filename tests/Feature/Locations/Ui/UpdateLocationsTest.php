@@ -21,7 +21,7 @@ class UpdateLocationsTest extends TestCase
     public function testPageRenders()
     {
         $this->actingAs(User::factory()->superuser()->create())
-            ->get(route('locations.update', Location::factory()->create()))
+            ->get(route('locations.edit', Location::factory()->create()))
             ->assertOk();
     }
 
