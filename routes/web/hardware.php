@@ -126,7 +126,7 @@ Route::group(
 
         // Redirect old legacy /asset_id/view urls to the resource route version
         Route::get('{assetId}/view', function ($assetId) {
-            return redirect()->route('hardware.show', ['hardware' => $assetId]);
+            return redirect()->route('hardware.show', $assetId);
         });
 
         Route::get('{asset}/qr_code',

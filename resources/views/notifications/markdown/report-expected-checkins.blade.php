@@ -10,7 +10,7 @@
 @php
 $checkin = Helper::getFormattedDateObject($asset->expected_checkin, 'date');
 @endphp
-| [{{ $asset->present()->name }}]({{ route('hardware.show', ['asset' => $asset]) }}) | [{{ $asset->assignedTo->present()->fullName }}]({{ route($asset->targetShowRoute().'.show', [$asset->assignedTo->id]) }})  | {{ $checkin['formatted'] }}
+| [{{ $asset->present()->name }}]({{ route('hardware.show', $asset) }}) | [{{ $asset->assignedTo->present()->fullName }}]({{ route($asset->targetShowRoute().'.show', [$asset->assignedTo->id]) }})  | {{ $checkin['formatted'] }}
 @endforeach
 @endcomponent
 

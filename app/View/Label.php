@@ -140,8 +140,8 @@ class Label implements View
                                 $barcode2DTarget = $asset->serial; 
                                 break;
                             case 'hardware_id':
-                            default: 
-                                $barcode2DTarget = route('hardware.show', ['hardware' => $asset->id]); 
+                            default:
+                                $barcode2DTarget = route('hardware.show', $asset);
                                 break;
                             }
                             $assetData->put('barcode2d', (object)[
