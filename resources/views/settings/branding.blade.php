@@ -187,7 +187,7 @@
                             </div>
                             <div class="col-md-9">
                                 <label class="form-control">
-                                    {{ Form::checkbox('show_url_in_emails', '1', old('show_url_in_emails', $setting->show_url_in_emails),array('aria-label'=>'show_url_in_emails')) }}
+                                    <input type="checkbox" name="show_url_in_emails" value="1" @checked(old('show_url_in_emails', $setting->show_url_in_emails)) aria-label="show_url_in_emails" />
                                     {{ trans('general.yes') }}
                                 </label>
                                 <p class="help-block">{{ trans('admin/settings/general.show_url_in_emails_help_text') }}</p>
@@ -228,7 +228,7 @@
                             </div>
                             <div class="col-md-9">
                                 <label class="form-control">
-                                    {{ Form::checkbox('allow_user_skin', '1', old('allow_user_skin', $setting->allow_user_skin)) }}
+                                    <input type="checkbox" name="allow_user_skin" value="1" @checked(old('allow_user_skin', $setting->allow_user_skin))/>
                                     {{ trans('general.yes') }}
                                 </label>
                                 <p class="help-block">{{ trans('admin/settings/general.allow_user_skin_help_text') }}</p>
