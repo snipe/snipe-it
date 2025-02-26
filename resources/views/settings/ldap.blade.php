@@ -75,7 +75,7 @@
                             <div class="col-md-8">
 
                                 <label class="form-control">
-                                    {{ Form::checkbox('ldap_enabled', '1', old('ldap_enabled', $setting->ldap_enabled)) }}
+                                    <input type="checkbox" name="ldap_enabled" value="1" id="ldap_enabled" @checked(old('ldap_enabled', $setting->ldap_enabled)) />
                                 {{ trans('admin/settings/general.ldap_enabled') }}
                                 </label>
 
@@ -96,7 +96,7 @@
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
-                                {{ Form::checkbox('is_ad', '1', old('is_ad', $setting->is_ad)) }}
+                                    <input type="checkbox" name="is_ad" value="1" id="is_ad" @checked(old('is_ad', $setting->is_ad))/>
                                 {{ trans('admin/settings/general.is_ad') }}
                                 </label>
                                 @error('is_ad')
@@ -122,7 +122,7 @@
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
-                                {{ Form::checkbox('ldap_pw_sync', '1', old('ldap_pw_sync', $setting->ldap_pw_sync)) }}
+                                    <input type="checkbox" name="ldap_pw_sync" value="1" id="ldap_pw_sync" @checked(old('ldap_pw_sync', $setting->ldap_pw_sync)) />
                                 {{ trans('general.yes') }}
                                 </label>
 
@@ -255,7 +255,7 @@
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
-                                    {{ Form::checkbox('ldap_tls', '1', old('ldap_tls', $setting->ldap_tls)) }}
+                                    <input type="checkbox" name="ldap_tls" value="1" id="ldap_tls" @checked(old('ldap_tls', $setting->ldap_tls)) />
                                     {{ trans('admin/settings/general.ldap_tls_help') }}
                                 </label>
                                 @error('ldap_tls')
@@ -281,7 +281,7 @@
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
-                                    {{ Form::checkbox('ldap_server_cert_ignore', '1', old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore)) }}
+                                    <input type="checkbox" name="ldap_server_cert_ignore" value="1" id="ldap_server_cert_ignore" @checked(old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore)) />
                                     {{ trans('admin/settings/general.ldap_server_cert_ignore') }}
                                 </label>
                                 @error('ldap_server_cert_ignore')
