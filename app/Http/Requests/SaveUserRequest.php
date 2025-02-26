@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Rules\UserCannotSwitchCompaniesIfItemsAssigned;
+use Illuminate\Support\Facades\Gate;
 
 class SaveUserRequest extends FormRequest
 {
@@ -17,7 +18,7 @@ class SaveUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return (Gate::allows('users.create') || Gate::allows('users.edit'));
     }
 
     public function response(array $errors)
@@ -35,7 +36,8 @@ class SaveUserRequest extends FormRequest
         $rules = [
             'department_id' => 'nullable|exists:departments,id',
             'manager_id' => 'nullable|exists:users,id',
-            'company_id' => ['nullable','exists:companies,id']
+            'company_id' => ['nullable','exists:companies,id'],
+            'groups' => ['nullable','exists:permission_groups,id']
         ];
 
         switch ($this->method()) {
