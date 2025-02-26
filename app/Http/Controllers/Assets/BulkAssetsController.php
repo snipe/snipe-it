@@ -550,7 +550,7 @@ class BulkAssetsController extends Controller
             $errorMessages[] = trans_choice(
                 'admin/hardware/message.delete.assigned_to_error',
                 $assignedAssets->count(),
-                ['asset_tag' => $assignedTags]
+                ['asset_tag' => e($assignedTags)]
             );
         }
 
@@ -559,7 +559,7 @@ class BulkAssetsController extends Controller
             $errorMessages[] = trans_choice(
                 'admin/hardware/message.delete.parent_assigned_error',
                 $parentAssets->count(),
-                ['asset_tag' => $parentTags]
+                ['asset_tag' => e($parentTags)]
             );
         }
 
@@ -567,7 +567,7 @@ class BulkAssetsController extends Controller
             // Combine both messages
             $combinedErrorMessage = implode('<br>', $errorMessages);
 
-            return redirect($bulk_back_url)->with('error', $combinedErrorMessage);
+            return redirect($bulk_back_url)->with('error-unescaped', $combinedErrorMessage);
         }
 
         foreach (Asset::wherein('id', $assetIds)->get() as $asset) {
