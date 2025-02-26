@@ -342,7 +342,7 @@ class AssetsController extends Controller
 
         // This is an archived or undeployable - we should check the asset back in.
         // Pending is allowed here
-        if (($status) && (($status->getStatuslabelType() != 'pending') || ($status->getStatuslabelType() != 'deployable')) && ($target = $asset->assignedTo)) {
+        if (($status) && (($status->getStatuslabelType() != 'pending') && ($status->getStatuslabelType() != 'deployable')) && ($target = $asset->assignedTo)) {
             $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;
             $asset->assigned_type = null;
