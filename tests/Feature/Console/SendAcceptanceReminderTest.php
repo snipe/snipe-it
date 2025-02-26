@@ -45,7 +45,7 @@ class SendAcceptanceReminderTest extends TestCase
         ]);
 
         $this->artisan('snipeit:acceptance-reminder')
-            ->expectsOutput($userA->present()->fullName().' has no email address.')
+            ->expectsOutput("The following users do not have an email address:\nID: {$userA->id}, Name: {$userA->present()->fullName()}\n")
             ->assertExitCode(0);
 
         Mail::assertNotSent(UnacceptedAssetReminderMail::class);
