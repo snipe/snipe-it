@@ -580,7 +580,7 @@ echo "--------------------------------------------------------\e[39m\n\n";
 
 if ((!file_exists('storage/oauth-public.key')) || (!file_exists('storage/oauth-private.key'))) {
     echo $info_icon." No OAuth keys detected. Running passport install now.\n\n";
-    $passport = shell_exec('php artisan passport:install');
+    $passport = shell_exec('php artisan passport:install --no-interaction');
     echo $passport;
 } else {
     echo $success_icon." OAuth keys detected. Skipping passport install.\n\n";

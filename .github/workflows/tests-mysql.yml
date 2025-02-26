@@ -67,7 +67,7 @@ jobs:
         run: |
           php artisan key:generate
           php artisan migrate --force
-          php artisan passport:install
+          php artisan passport:install --no-interaction
           chmod -R 777 storage bootstrap/cache
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
