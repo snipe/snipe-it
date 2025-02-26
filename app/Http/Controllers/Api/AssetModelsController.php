@@ -77,6 +77,18 @@ class AssetModelsController extends Controller
             $assetmodels->onlyTrashed();
         }
 
+        if ($request->filled('name')) {
+            $assetmodels = $assetmodels->where('models.name', '=', $request->input('name'));
+        }
+
+        if ($request->filled('model_number')) {
+            $assetmodels = $assetmodels->where('models.model_number', '=', $request->input('model_number'));
+        }
+
+        if ($request->filled('notes')) {
+            $assetmodels = $assetmodels->where('models.notes', '=', $request->input('notes'));
+        }
+
         if ($request->filled('category_id')) {
             $assetmodels = $assetmodels->where('models.category_id', '=', $request->input('category_id'));
         }
