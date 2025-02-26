@@ -117,7 +117,7 @@
     <div class="col-md-12">
         <div class="alert alert-error fade in">
             <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <i class="fas fa-check faa-pulse animated"></i>
+            <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
             <strong>{{ trans('general.notification_error') }}: </strong>
             {!!  $message !!}
         </div>
