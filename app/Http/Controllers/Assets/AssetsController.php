@@ -340,15 +340,14 @@ class AssetsController extends Controller
 
         $status = Statuslabel::find($request->input('status_id'));
 
-        // This is a non-deployable status label - we should check the asset back in.
-        if (($status && $status->getStatuslabelType() != 'deployable') && ($target = $asset->assignedTo)) {
-
+        // This is an archived or undeployable - we should check the asset back in.
+        // Pending is allowed here
+        if (($status) && (($status->getStatuslabelType() != 'pending') && ($status->getStatuslabelType() != 'deployable')) && ($target = $asset->assignedTo)) {
             $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;
             $asset->assigned_type = null;
             $asset->accepted = null;
-
-            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update', date('Y-m-d H:i:s'), $originalValues));
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update with '.$status->getStatuslabelType().' status', date('Y-m-d H:i:s'), $originalValues));
         }
 
         if ($asset->assigned_to == '') {
