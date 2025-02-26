@@ -479,15 +479,6 @@ foreach ($unused_files as $unused_file) {
 }
 echo "\n";
 
-$config_clear = shell_exec('php artisan config:clear');
-$cache_clear = shell_exec('php artisan cache:clear');
-$route_clear = shell_exec('php artisan route:clear');
-$view_clear = shell_exec('php artisan view:clear');
-echo $success_icon.' '.trim($config_clear)."\n";
-echo $success_icon.' '.trim($cache_clear)."\n";
-echo $success_icon.' '.trim($route_clear)."\n";
-echo $success_icon.' '.trim($view_clear)."\n";
-echo "\n";
 
 echo "\e[95m--------------------------------------------------------\n";
 echo "STEP 6: Updating composer dependencies:\n";
@@ -497,12 +488,10 @@ echo "-- Running the app in ".$app_environment." mode.\n";
 
 // Composer install
 if (file_exists('composer.phar')) {
-    echo "√ Local composer.phar detected, so we'll use that.\n\n";
+    echo $success_icon." Local composer.phar detected, so we'll use that.\n\n";
     echo "-- Updating local composer.phar\n\n";
     $composer_update = shell_exec('php composer.phar self-update');
     echo $composer_update."\n\n";
-
-
 
     // Use --no-dev only if we are in production mode.
     // This will cause errors otherwise, if the user is in develop or local for their APP_ENV
@@ -511,9 +500,8 @@ if (file_exists('composer.phar')) {
     } else {
         $composer = shell_exec('php composer.phar install --prefer-source');
     }
+
     $composer_dump = shell_exec('php composer.phar dump');
-
-
 
 } else {
 
@@ -531,13 +519,20 @@ if (file_exists('composer.phar')) {
     $composer_dump = shell_exec('composer dump');
 
 
-
 }
 
 echo $composer_dump."\n";
 echo $composer;
 
-
+$config_clear = shell_exec('php artisan config:clear');
+$cache_clear = shell_exec('php artisan cache:clear');
+$route_clear = shell_exec('php artisan route:clear');
+$view_clear = shell_exec('php artisan view:clear');
+echo $success_icon.' '.trim($config_clear)."\n";
+echo $success_icon.' '.trim($cache_clear)."\n";
+echo $success_icon.' '.trim($route_clear)."\n";
+echo $success_icon.' '.trim($view_clear)."\n";
+echo "\n";
 
 echo "\e[95m--------------------------------------------------------\n";
 echo "STEP 7: Putting application into maintenance mode: \n";
