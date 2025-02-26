@@ -135,7 +135,7 @@
 
                             <div class="col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('restore_default_avatar', '1', old('restore_default_avatar', $setting->restore_default_avatar)) }}
+                                    <input type="checkbox" name="restore_default_avatar" value="1" @checked(old('restore_default_avatar', $setting->restore_default_avatar)) />
                                     <span>{!! trans('admin/settings/general.restore_default_avatar', ['default_avatar'=> Storage::disk('public')->url('default.png')]) !!}</span>
                                 </label>
                                 <p class="help-block">
@@ -152,7 +152,7 @@
                             </div>
                             <div class="col-md-9">
                                 <label class="form-control">
-                                    {{ Form::checkbox('load_remote', '1', old('load_remote', $setting->load_remote)) }}
+                                    <input type="checkbox" name="load_remote" value="1" @checked(old('load_remote', $setting->load_remote)) />
                                     {{ trans('general.yes') }}
                                     {!! $errors->first('load_remote', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </label>
@@ -172,7 +172,7 @@
                             </div>
                             <div class="col-md-9">
                                 <label class="form-control">
-                                {{ Form::checkbox('logo_print_assets', '1', old('logo_print_assets', $setting->logo_print_assets),array('aria-label'=>'logo_print_assets')) }}
+                                    <input type="checkbox" name="logo_print_assets" value="1" @checked(old('logo_print_assets', $setting->logo_print_assets)) aria-label="logo_print_assets"/>
                                 {{ trans('admin/settings/general.logo_print_assets_help') }}
                                 </label>
 
