@@ -115,7 +115,7 @@ class CheckoutableListener
             }
             return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_fail') );
         } catch (Exception $e) {
-            Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
+            Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
                 'error' => $e->getMessage(),
                 'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
                 'event' => $event,
@@ -211,7 +211,7 @@ class CheckoutableListener
                 return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
             }
         } catch (Exception $e) {
-            Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
+            Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
                 'error' => $e->getMessage(),
                 'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
                 'event' => $event,
