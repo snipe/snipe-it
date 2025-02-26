@@ -164,7 +164,7 @@
                         </li>
                     @endif
 
-                    @if ($model->created_by)
+                    @if ($model->adminuser)
                         <li>{{ trans('general.created_by') }}:
                             {{ $model->adminuser->present()->name() }}
                         </li>
