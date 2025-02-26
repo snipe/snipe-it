@@ -71,6 +71,9 @@ class SendAcceptanceReminder extends Command
             $acceptance = $unacceptedAssetGroup[0]['acceptance'];
             $locale = $acceptance->assignedTo?->locale;
             $email = $acceptance->assignedTo?->email;
+            if(!$email){
+                $this->info($acceptance->assignedTo?->present()->fullName().' has no email address.');
+            }
             $item_count = $unacceptedAssetGroup->count();
 
             if ($locale && $email) {
