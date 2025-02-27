@@ -144,7 +144,7 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-md-offset-3">
                                     <label class="form-control">
-                                        {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array( 'aria-label'=>'alt_barcode_enabled')) }}
+                                        <input type="checkbox" name="alt_barcode_enabled" value="1" @checked(old('alt_barcode_enabled', $setting->alt_barcode_enabled)) aria-label="alt_barcode_enabled"/>
                                         {{ trans('admin/settings/general.display_alt_barcode') }}
                                     </label>
                                 </div>
@@ -189,7 +189,7 @@
                         <div class="form-group">
                             <div class="col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('qr_code', '1', old('qr_code', $setting->qr_code),array('aria-label'=>'qr_code')) }}
+                                    <input type="checkbox" name="qr_code" value="1" @checked(old('qr_code', $setting->qr_code)) aria-label="qr_code" />
                                     {{ trans('admin/settings/general.display_qr') }}
                                 </label>
                             </div>
@@ -480,23 +480,23 @@
                                 </div>
                                 <div class="col-md-9">
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_name', '1', old('labels_display_name',   $setting->labels_display_name),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
+                                            <input type="checkbox" name="labels_display_name" value="1" @checked(old('labels_display_name',   $setting->labels_display_name)) aria-label="labels_display_name" />
                                             {{ trans('admin/hardware/form.name') }}
                                         </label>
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_serial', '1', old('labels_display_serial',   $setting->labels_display_serial),['class' => 'minimal', 'aria-label'=>'labels_display_serial']) }}
+                                            <input type="checkbox" name="labels_display_serial" value="1" @checked(old('labels_display_serial',   $setting->labels_display_serial)) aria-label="labels_display_serial" />
                                             {{ trans('admin/hardware/form.serial') }}
                                         </label>
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_tag', '1', old('labels_display_tag',   $setting->labels_display_tag),['class' => 'minimal', 'aria-label'=>'labels_display_tag']) }}
+                                            <input type="checkbox" name="labels_display_tag" value="1" @checked(old('labels_display_tag',   $setting->labels_display_tag)) aria-label="labels_display_tag" />
                                             {{ trans('admin/hardware/form.tag') }}
                                         </label>
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_model', '1', old('labels_display_model',   $setting->labels_display_model),['class' => 'minimal', 'aria-label'=>'labels_display_model']) }}
+                                            <input type="checkbox" name="labels_display_model" value="1" @checked(old('labels_display_model',   $setting->labels_display_model)) aria-label="labels_display_model" />
                                             {{ trans('admin/hardware/form.model') }}
                                         </label>
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_company_name', '1', old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal', 'aria-label'=>'labels_display_company_name']) }}
+                                            <input type="checkbox" name="labels_display_company_name" value="1" @checked(old('labels_display_company_name',   $setting->labels_display_company_name)) aria-label="labels_display_company_name"/>
                                             {{ trans('admin/companies/table.name') }}
                                         </label>
                                 </div> <!--/.col-md-9-->
