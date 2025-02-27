@@ -30,6 +30,9 @@
             export_options = data_export_options ? JSON.parse(data_export_options) : {};
             export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
             export_options['jspdf']= {"orientation": "l"};
+            export_options['jspdf'] = {"autotable": {"styles": {overflow: 'linebreak'},
+                                            tableWidth: 'wrap'}};
+            // tableWidth: 'wrap',
             // the following callback method is necessary to prevent XSS vulnerabilities
             // (this is taken from Bootstrap Tables's default wrapper around jQuery Table Export)
             export_options['onCellHtmlData'] = function (cell, rowIndex, colIndex, htmlData) {
