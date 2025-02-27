@@ -62,6 +62,7 @@ class GroupsController extends Controller
         $group->name = $request->input('name');
         $group->permissions = json_encode($request->input('permission'));
         $group->created_by = auth()->id();
+        $group->notes = $request->input('notes');
 
         if ($group->save()) {
             return redirect()->route('groups.index')->with('success', trans('admin/groups/message.success.create'));
@@ -78,19 +79,12 @@ class GroupsController extends Controller
      * @param int $id
      * @since [v1.0]
      */
-    public function edit($id) : View | RedirectResponse
+    public function edit(Group $group) : View | RedirectResponse
     {
-        $group = Group::find($id);
-
-        if ($group) {
-            $permissions = config('permissions');
-            $groupPermissions = $group->decodePermissions();
-            $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
-
-            return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
-        }
-
-        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', ['id' => $id]));
+        $permissions = config('permissions');
+        $groupPermissions = $group->decodePermissions();
+        $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
+        return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'));
     }
 
     /**
@@ -101,13 +95,11 @@ class GroupsController extends Controller
      * @param int $id
      * @since [v1.0]
      */
-    public function update(Request $request, $id = null) : RedirectResponse
+    public function update(Request $request, Group $group) : RedirectResponse
     {
-        if (! $group = Group::find($id)) {
-            return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', ['id' => $id]));
-        }
         $group->name = $request->input('name');
         $group->permissions = json_encode($request->input('permission'));
+        $group->notes = $request->input('notes');
 
         if (! config('app.lock_passwords')) {
             if ($group->save()) {
@@ -149,14 +141,8 @@ class GroupsController extends Controller
      * @param $id
      * @since [v4.0.11]
      */
-    public function show($id) : View | RedirectResponse
+    public function show(Group $group) : View | RedirectResponse
     {
-        $group = Group::find($id);
-
-        if ($group) {
-            return view('groups/view', compact('group'));
-        }
-
-        return redirect()->route('groups.index')->with('error', trans('admin/groups/message.group_not_found', ['id' => $id]));
+      return view('groups/view', compact('group'));
     }
 }

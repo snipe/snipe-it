@@ -21,7 +21,17 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => true, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'create-form' ]) }}
+    <form
+        method="POST"
+        action="{{ route('settings.branding.save') }}"
+        accept-charset="UTF-8"
+        autocomplete="off"
+        class="form-horizontal"
+        role="form"
+        id="create-form"
+        enctype="multipart/form-data"
+        novalidate="novalidate"
+    >
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -45,15 +55,14 @@
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
 
                             <div class="col-md-3">
-                                {{ Form::label('site_name', trans('admin/settings/general.site_name')) }}
+                                <label for="site_name">{{ trans('admin/settings/general.site_name') }}</label>
                             </div>
                             <div class="col-md-7 required">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('site_name', old('site_name', $setting->site_name), array('class' => 'form-control', 'disabled'=>'disabled','placeholder' => 'Snipe-IT Asset Management')) }}
+                                    <input class="form-control" disabled="disabled" placeholder="Snipe-IT Asset Management" name="site_name" type="text" value="{{ old('site_name', $setting->site_name) }}" id="site_name">
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::text('site_name',
-                                        old('site_name', $setting->site_name), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'required' => 'required')) }}
+                                    <input class="form-control" placeholder="Snipe-IT Asset Management" required="required" name="site_name" type="text" value="{{ old('site_name', $setting->site_name) }}" id="site_name">
                                 @endif
                                 {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
@@ -133,7 +142,7 @@
 
                             <div class="col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('restore_default_avatar', '1', old('restore_default_avatar', $setting->restore_default_avatar)) }}
+                                    <input type="checkbox" name="restore_default_avatar" value="1" @checked(old('restore_default_avatar', $setting->restore_default_avatar)) />
                                     <span>{!! trans('admin/settings/general.restore_default_avatar', ['default_avatar'=> Storage::disk('public')->url('default.png')]) !!}</span>
                                 </label>
                                 <p class="help-block">
@@ -150,7 +159,7 @@
                             </div>
                             <div class="col-md-9">
                                 <label class="form-control">
-                                    {{ Form::checkbox('load_remote', '1', old('load_remote', $setting->load_remote)) }}
+                                    <input type="checkbox" name="load_remote" value="1" @checked(old('load_remote', $setting->load_remote)) />
                                     {{ trans('general.yes') }}
                                     {!! $errors->first('load_remote', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </label>
@@ -170,7 +179,7 @@
                             </div>
                             <div class="col-md-9">
                                 <label class="form-control">
-                                {{ Form::checkbox('logo_print_assets', '1', old('logo_print_assets', $setting->logo_print_assets),array('aria-label'=>'logo_print_assets')) }}
+                                    <input type="checkbox" name="logo_print_assets" value="1" @checked(old('logo_print_assets', $setting->logo_print_assets)) aria-label="logo_print_assets"/>
                                 {{ trans('admin/settings/general.logo_print_assets_help') }}
                                 </label>
 
@@ -185,7 +194,7 @@
                             </div>
                             <div class="col-md-9">
                                 <label class="form-control">
-                                    {{ Form::checkbox('show_url_in_emails', '1', old('show_url_in_emails', $setting->show_url_in_emails),array('aria-label'=>'show_url_in_emails')) }}
+                                    <input type="checkbox" name="show_url_in_emails" value="1" @checked(old('show_url_in_emails', $setting->show_url_in_emails)) aria-label="show_url_in_emails" />
                                     {{ trans('general.yes') }}
                                 </label>
                                 <p class="help-block">{{ trans('admin/settings/general.show_url_in_emails_help_text') }}</p>
@@ -195,11 +204,11 @@
                         <!-- Header color -->
                         <div class="form-group {{ $errors->has('header_color') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('header_color', trans('admin/settings/general.header_color')) }}
+                                <label for="header_color">{{ trans('admin/settings/general.header_color') }}</label>
                             </div>
                             <div class="col-md-2">
                                 <div class="input-group header-color">
-                                    {{ Form::text('header_color', old('header_color', $setting->header_color), array('class' => 'form-control', 'style' => 'width: 100px;','placeholder' => '#FF0000', 'aria-label'=>'header_color')) }}
+                                    <input class="form-control" style="width: 100px;" placeholder="#FF0000" aria-label="header_color" name="header_color" type="text" id="header_color" value="{{ old('header_color', $setting->header_color) }}">
                                     <div class="input-group-addon">
                                         <i></i>
                                     </div>
@@ -211,7 +220,7 @@
                         <!-- Skin -->
                         <div class="form-group {{ $errors->has('skin') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('skin', trans('general.skin')) }}
+                                <label for="skin">{{ trans('general.skin') }}</label>
                             </div>
                             <div class="col-md-9">
                                 {!! Form::skin('skin', old('skin', $setting->skin), 'select2') !!}
@@ -226,7 +235,7 @@
                             </div>
                             <div class="col-md-9">
                                 <label class="form-control">
-                                    {{ Form::checkbox('allow_user_skin', '1', old('allow_user_skin', $setting->allow_user_skin)) }}
+                                    <input type="checkbox" name="allow_user_skin" value="1" @checked(old('allow_user_skin', $setting->allow_user_skin))/>
                                     {{ trans('general.yes') }}
                                 </label>
                                 <p class="help-block">{{ trans('admin/settings/general.allow_user_skin_help_text') }}</p>
@@ -236,15 +245,26 @@
                         <!-- Custom css -->
                         <div class="form-group {{ $errors->has('custom_css') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('custom_css', trans('admin/settings/general.custom_css')) }}
+                                <label for="custom_css">{{ trans('admin/settings/general.custom_css') }}</label>
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('custom_css', old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => trans('admin/settings/general.custom_css_placeholder'),'disabled'=>'disabled', 'aria-label'=>'custom_css')) }}
+                                    <x-input.textarea
+                                        name="custom_css"
+                                        :value="old('custom_css', $setting->custom_css)"
+                                        placeholder="Add your custom CSS"
+                                        aria-label="custom_css"
+                                        disabled
+                                    />
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::textarea('custom_css', old('custom_css', $setting->custom_css), array('class' => 'form-control','placeholder' => trans('admin/settings/general.custom_css_placeholder'), 'aria-label'=>'custom_css')) }}
+                                    <x-input.textarea
+                                        name="custom_css"
+                                        :value="old('custom_css', $setting->custom_css)"
+                                        placeholder="Add your custom CSS"
+                                        aria-label="custom_css"
+                                    />
                                     {!! $errors->first('custom_css', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.custom_css_help') !!}</p>
@@ -255,7 +275,7 @@
                         <!-- Support Footer -->
                         <div class="form-group {{ $errors->has('support_footer') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('support_footer', trans('admin/settings/general.support_footer')) }}
+                                <label for="support_footer">{{ trans('admin/settings/general.support_footer') }}</label>
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
@@ -274,7 +294,7 @@
                         <!-- Version Footer -->
                         <div class="form-group {{ $errors->has('version_footer') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('version_footer', trans('admin/settings/general.version_footer')) }}
+                                <label for="version_footer">{{ trans('admin/settings/general.version_footer') }}</label>
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
@@ -292,14 +312,25 @@
                         <!-- Additional footer -->
                         <div class="form-group {{ $errors->has('footer_text') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('footer_text', trans('admin/settings/general.footer_text')) }}
+                                <label for="footer_text">{{ trans('admin/settings/general.footer_text') }}</label>
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::textarea('footer_text', old('footer_text', $setting->footer_text), array('class' => 'form-control', 'rows' => '4', 'placeholder' => trans('admin/settings/general.footer_text_placeholder'),'disabled'=>'disabled')) }}
+                                    <x-input.textarea
+                                        name="footer_text"
+                                        :value="old('footer_text', $setting->footer_text)"
+                                        rows="4"
+                                        placeholder="Optional footer text"
+                                        disabled
+                                    />
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {{ Form::textarea('footer_text', old('footer_text', $setting->footer_text), array('class' => 'form-control','rows' => '4','placeholder' => trans('admin/settings/general.footer_text_placeholder'))) }}
+                                    <x-input.textarea
+                                        name="footer_text"
+                                        :value="old('footer_text', $setting->footer_text)"
+                                        rows="4"
+                                        placeholder="Optional footer text"
+                                    />
                                 @endif
                                 <p class="help-block">{!! trans('admin/settings/general.footer_text_help') !!}</p>
                                 {!! $errors->first('footer_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -326,7 +357,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 

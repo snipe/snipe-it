@@ -34,10 +34,10 @@
 
 <!-- Chart color -->
 <div class="form-group{{ $errors->has('color') ? ' has-error' : '' }}">
-    {{ Form::label('color', trans('admin/statuslabels/table.color'), ['class' => 'col-md-3 control-label']) }}
+    <label for="color" class="col-md-3 control-label">{{ trans('admin/statuslabels/table.color') }}</label>
     <div class="col-md-9">
         <div class="input-group color">
-            {{ Form::text('color', old('color', $item->color), array('class' => 'form-control col-md-10', 'maxlength'=>'20')) }}
+            <input class="form-control col-md-10" maxlength="20" name="color" type="text" id="color" value="{{ old('color', $item->color) }}">
             <div class="input-group-addon"><i></i></div>
         </div><!-- /.input group -->
         {!! $errors->first('color', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}

@@ -55,11 +55,11 @@ class AccessoriesFilesController extends Controller
 
             }
 
-            return redirect()->route('accessories.show', $accessory->id)->with('error', trans('general.no_files_uploaded'));
+            return redirect()->route('accessories.show', $accessory->id)->withFragment('files')->with('error', trans('general.no_files_uploaded'));
         }
         // Prepare the error message
-        return redirect()->route('accessories.index')
-            ->with('error', trans('general.file_does_not_exist'));
+        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+
     }
 
     /**
@@ -72,29 +72,27 @@ class AccessoriesFilesController extends Controller
      */
     public function destroy($accessoryId = null, $fileId = null) : RedirectResponse
     {
-        $accessory = Accessory::find($accessoryId);
-
-        // the asset is valid
-        if (isset($accessory->id)) {
+        if ($accessory = Accessory::find($accessoryId)) {
             $this->authorize('update', $accessory);
-            $log = Actionlog::find($fileId);
 
-            // Remove the file if one exists
-            if (Storage::exists('accessories/'.$log->filename)) {
-                try {
-                    Storage::delete('accessories/'.$log->filename);
-                } catch (\Exception $e) {
-                    Log::debug($e);
+            if ($log = Actionlog::find($fileId)) {
+
+                if (Storage::exists('private_uploads/accessories/'.$log->filename)) {
+                    try {
+                        Storage::delete('private_uploads/accessories/' . $log->filename);
+                        $log->delete();
+                        return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
+                    } catch (\Exception $e) {
+                        Log::debug($e);
+                        return redirect()->route('accessories.index')->with('error', trans('general.file_does_not_exist'));
+                    }
                 }
+
             }
-
-            $log->delete();
-
-            return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
+            return redirect()->route('accessories.show', ['accessory' => $accessory])->withFragment('files')->with('error',  trans('general.log_record_not_found'));
         }
 
-        // Redirect to the licence management page
-        return redirect()->route('accessories.index')->with('error', trans('general.file_does_not_exist'));
+        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
     }
 
     /**
@@ -124,10 +122,11 @@ class AccessoriesFilesController extends Controller
                 }
             }
 
-            return redirect()->route('accessories.show', ['accessory' => $accessory])->with('error',  trans('general.log_record_not_found'));
+            return redirect()->route('accessories.show', ['accessory' => $accessory])->withFragment('files')->with('error',  trans('general.log_record_not_found'));
 
         }
 
-        return redirect()->route('accessories.index')->with('error', trans('general.file_not_found'));
+        return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.does_not_exist'));
+
     }
 }

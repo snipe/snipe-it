@@ -37,6 +37,7 @@ class ManufacturersTransformer
                 'consumables_count' => (int) $manufacturer->consumables_count,
                 'accessories_count' => (int) $manufacturer->accessories_count,
                 'components_count' => (int) $manufacturer->components_count,
+                'notes' => Helper::parseEscapedMarkedownInline($manufacturer->notes),
                 'created_by' => ($manufacturer->adminuser) ? [
                     'id' => (int) $manufacturer->adminuser->id,
                     'name'=> e($manufacturer->adminuser->present()->fullName()),

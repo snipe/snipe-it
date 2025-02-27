@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> '您確定要刪除此資產嗎？',
         'error'   		=> '刪除資產時發生問題，請重試。',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => '沒有資產被選擇，因此沒有更新任何內容。',
         'success' 		=> '刪除資產成功。',
     ],

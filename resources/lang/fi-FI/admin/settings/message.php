@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testataan Ldap Todennusta...',
         'authentication_success' => 'Käyttäjä tunnistettu LDAP vastaan!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Lähetetään :app testiviestiä...',
         'success' => 'Sinun :webhook_name Integraatio toimii!',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'VIRHE: 301/302 :endpoint palauttaa uudelleenohjauksen. Turvallisuussyistä emme seuraa uudelleenohjauksia. Käytä todellista päätepistettä.',
         'error_misc' => 'Jokin meni pieleen. :( ',
         'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

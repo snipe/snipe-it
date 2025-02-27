@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Hubo un problema al eliminar el activo. Por favor, inténtelo de nuevo.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Ningún activo se seleccionó, así que nada fue borrado.',
         'success' 		=> 'El activo se ha eliminado correctamente.',
     ],

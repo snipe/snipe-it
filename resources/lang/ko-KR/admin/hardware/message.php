@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> '이 자산을 삭제하시겠습니까?',
         'error'   		=> '그룹을 삭제하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => '선택된 자산이 없기에, 삭제되지 않습니다.',
         'success' 		=> '자산이 삭제되었습니다.',
     ],

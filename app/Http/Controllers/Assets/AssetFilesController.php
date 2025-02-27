@@ -26,11 +26,8 @@ class AssetFilesController extends Controller
      *@since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function store(UploadFileRequest $request, $assetId = null) : RedirectResponse
+    public function store(UploadFileRequest $request, Asset $asset) : RedirectResponse
     {
-        if (! $asset = Asset::find($assetId)) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
 
         $this->authorize('update', $asset);
 
@@ -59,31 +56,28 @@ class AssetFilesController extends Controller
      * @param  int $fileId
      * @since [v1.0]
      */
-    public function show($assetId = null, $fileId = null) : View | RedirectResponse | Response | StreamedResponse | BinaryFileResponse
+    public function show(Asset $asset, $fileId = null) : View | RedirectResponse | Response | StreamedResponse | BinaryFileResponse
     {
-        if ($asset = Asset::find($assetId)) {
 
-            $this->authorize('view', $asset);
+        $this->authorize('view', $asset);
 
-            if ($log = Actionlog::whereNotNull('filename')->where('item_id', $asset->id)->find($fileId)) {
-                $file = 'private_uploads/assets/'.$log->filename;
+        if ($log = Actionlog::whereNotNull('filename')->where('item_id', $asset->id)->find($fileId)) {
+            $file = 'private_uploads/assets/'.$log->filename;
 
-                if ($log->action_type == 'audit') {
-                    $file = 'private_uploads/audits/'.$log->filename;
-                }
-
-                try {
-                     return StorageHelper::showOrDownloadFile($file, $log->filename);
-                } catch (\Exception $e) {
-                    return redirect()->route('hardware.show', ['hardware' => $asset])->with('error',  trans('general.file_not_found'));
-                }
-
+            if ($log->action_type == 'audit') {
+                $file = 'private_uploads/audits/'.$log->filename;
             }
 
-            return redirect()->route('hardware.show', ['hardware' => $asset])->with('error',  trans('general.log_record_not_found'));
+            try {
+                 return StorageHelper::showOrDownloadFile($file, $log->filename);
+            } catch (\Exception $e) {
+                return redirect()->route('hardware.show', $asset)->with('error', trans('general.file_not_found'));
+            }
+
         }
 
-        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        return redirect()->route('hardware.show', $asset)->with('error', trans('general.log_record_not_found'));
+
 
     }
 
@@ -95,23 +89,20 @@ class AssetFilesController extends Controller
      * @param  int $fileId
      * @since [v1.0]
      */
-    public function destroy($assetId = null, $fileId = null) : RedirectResponse
+    public function destroy(Asset $asset, $fileId = null) : RedirectResponse
     {
-        if ($asset = Asset::find($assetId))  {
-            $this->authorize('update', $asset);
-            $rel_path = 'private_uploads/assets';
+        $this->authorize('update', $asset);
+        $rel_path = 'private_uploads/assets';
 
-            if ($log = Actionlog::find($fileId)) {
-                if (Storage::exists($rel_path.'/'.$log->filename)) {
-                    Storage::delete($rel_path.'/'.$log->filename);
-                }
-                $log->delete();
-                return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
+        if ($log = Actionlog::find($fileId)) {
+            if (Storage::exists($rel_path.'/'.$log->filename)) {
+                Storage::delete($rel_path.'/'.$log->filename);
             }
-
-            return redirect()->route('hardware.show', ['hardware' => $asset])->with('error',  trans('general.log_record_not_found'));
+            $log->delete();
+            return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
-        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
+        return redirect()->route('hardware.show', $asset)->with('error', trans('general.log_record_not_found'));
     }
+
 }

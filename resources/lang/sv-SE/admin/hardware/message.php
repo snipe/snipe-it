@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Är du säker på att du vill radera den här tillgången?',
         'error'   		=> 'Det gick inte att ta bort tillgången. Var god försök igen.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Inga tillgångar valdes. Ingenting togs bort.',
         'success' 		=> 'Tillgång raderad.',
     ],

@@ -21,7 +21,7 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.localization.save') }}" accept-charset="UTF-8" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -43,7 +43,7 @@
                         <!-- Language -->
                         <div class="form-group {{ $errors->has('site_name') ? 'error' : '' }}">
                             <div class="col-md-3 col-xs-12">
-                                {{ Form::label('site_name', trans('admin/settings/general.default_language')) }}
+                                <label for="site_name">{{ trans('admin/settings/general.default_language') }}</label>
                             </div>
                             <div class="col-md-5 col-xs-12">
                                 {!! Form::locales('locale', old('locale', $setting->locale), 'select2') !!}
@@ -55,7 +55,7 @@
                         <!-- name display format -->
                         <div class="form-group {{ $errors->has('name_display_format') ? 'error' : '' }}">
                             <div class="col-md-3 col-xs-12">
-                                {{ Form::label('name_display_format', trans('general.name_display_format')) }}
+                                <label for="name_display_format">{{ trans('general.name_display_format') }}</label>
                             </div>
                             <div class="col-md-5 col-xs-12">
                                 {!! Form::name_display_format('name_display_format', old('name_display_format', $setting->name_display_format), 'select2') !!}
@@ -69,7 +69,7 @@
                         <!-- Date format -->
                         <div class="form-group {{ $errors->has('time_display_format') ? 'error' : '' }}">
                             <div class="col-md-3 col-xs-12">
-                                {{ Form::label('time_display_format', trans('general.time_and_date_display')) }}
+                                <label for="time_display_format">{{ trans('general.time_and_date_display') }}</label>
                             </div>
                             <div class="col-md-5 col-xs-12">
                                 {!! Form::date_display_format('date_display_format', old('date_display_format', $setting->date_display_format), 'select2') !!}
@@ -85,10 +85,19 @@
                         <!-- Currency -->
                         <div class="form-group {{ $errors->has('default_currency') ? 'error' : '' }}">
                             <div class="col-md-3 col-xs-12">
-                                {{ Form::label('default_currency', trans('admin/settings/general.default_currency')) }}
+                                <label for="default_currency">{{ trans('admin/settings/general.default_currency') }}</label>
                             </div>
                             <div class="col-md-9 col-xs-12">
-                                {{ Form::text('default_currency', old('default_currency', $setting->default_currency), array('class' => 'form-control select2-container','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px; display: inline-block; ')) }}
+                                <input
+                                    class="form-control select2-container"
+                                    placeholder="USD"
+                                    maxlength="3"
+                                    style="width: 60px; display: inline-block; "
+                                    name="default_currency"
+                                    type="text"
+                                    value="{{ old('default_currency', $setting->default_currency) }}"
+                                    id="default_currency"
+                                >
 
                                 {!! Form::digit_separator('digit_separator', old('digit_separator', $setting->digit_separator), 'select2') !!}
 
@@ -113,7 +122,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 

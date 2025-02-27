@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'アーカイブ',
     'asset'  					=> '資産',
     'bulk_checkout'             => '一括チェックアウト',
-    'bulk_checkin'              => '資産をチェックイン',
+    'bulk_checkin'              => 'Bulk Checkin',
     'checkin'  					=> '資産をチェックイン',
     'checkout'  				=> '資産をチェックアウト',
     'clone'  					=> '資産を複製',

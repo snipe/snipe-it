@@ -19,6 +19,8 @@ return [
     'print_assigned'    => 'Imprimir todos atribuídos',
     'email_assigned'    => 'Lista de e-mails de todos os atribuídos',
     'user_notified'     => 'Um usuário recebeu um e-mail com uma lista de seus itens atualmente atribuídos.',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Inclua este usuário quando atribuir licenças elegíveis automaticamente',
     'auto_assign_help'  => 'Ignorar este usuário em atribuição automática de licenças',
     'software_user'     => 'Disponibilização de software para :name',

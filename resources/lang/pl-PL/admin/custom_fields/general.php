@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Utwórz pole niestandardowe',
     'value_encrypted'      	        => 'Wartość tego pola jest zaszyfrowana w bazie danych. Tylko admini będą mogli wyświetlić rozszyfrowaną wartość',
     'show_in_email'     => 'Czy podać wartość tego pola w e-mailach z przypisaniem, wysłanych do użytkownika? Zaszyfrowane pola nie mogą być zawarte w wiadomościach e-mail',
-    'show_in_email_short'     => 'Dołącz do wiadomości e-mail.',
+    'show_in_email_short' => 'Dołącz do wiadomości e-mail',
     'help_text' => 'Tekst pomocniczy',
     'help_text_description' => 'Jest to tekst opcjonalny, który pojawi się pod elementami formularza podczas edycji zasobu w celu zapewnienia kontekstu.',
     'about_custom_fields_title' => 'O polach niestandardowych',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Pokaż na liście żądanych zasobów',
     'show_in_requestable_list' => 'Pokaż wartość w żądanej liście zasobów. Zaszyfrowane pola nie będą wyświetlane',
     'encrypted_options' => 'To pole jest zaszyfrowane, więc niektóre opcje wyświetlania nie będą dostępne.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

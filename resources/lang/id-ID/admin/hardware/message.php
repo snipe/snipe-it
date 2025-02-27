@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Apakah Anda yakin untuk menghapus aset ini?',
         'error'   		=> 'Terdapat kesalahan pada saat penghapusan aset. Silahkan coba kembali.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Tidak ada aset yang dipilih, jadi tidak ada yang dihapus.',
         'success' 		=> 'Aset sukses terhapus.',
     ],

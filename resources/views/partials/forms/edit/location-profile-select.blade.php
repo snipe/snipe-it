@@ -1,7 +1,7 @@
 <!-- Location -->
 <div id="location_id" class="form-group{{ $errors->has('location_id') ? ' has-error' : '' }}"{!!  (isset($style)) ? ' style="'.e($style).'"' : ''  !!}>
 
-    {{ Form::label('location_id', $translated_name, array('class' => 'col-md-3 control-label')) }}
+    <label for="location_id" class="col-md-3 control-label">{{ $translated_name }}</label>
     <div class="col-md-8">
         <select class="js-data-ajax" data-endpoint="locations" data-placeholder="{{ trans('general.select_location') }}" name="location_id" style="width: 100%" id="location_id_location_select" aria-label="location_id">
             @if ($location_id = old('location_id', (isset($user)) ? $user->location_id : ''))
