@@ -70,23 +70,26 @@ class SendAcceptanceReminder extends Command
             // The [0] is weird, but it allows for the item_count to work and grabs the appropriate info for each user.
             // Collapsing and flattening the collection doesn't work above.
             $acceptance = $unacceptedAssetGroup[0]['acceptance'];
+
             $locale = $acceptance->assignedTo?->locale;
             $email = $acceptance->assignedTo?->email;
+
             if(!$email){
                 $no_email_list[] = [
-                    'id' => $acceptance->assignedTo->id,
-                    'name' => $acceptance->assignedTo->present()->fullName(),
+                    'id' => $acceptance->assignedTo?->id,
+                    'name' => $acceptance->assignedTo?->present()->fullName(),
                 ];
+            } else {
+                $count++;
             }
             $item_count = $unacceptedAssetGroup->count();
 
             if ($locale && $email) {
                 Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count))->locale($locale));
-
             } elseif ($email) {
                 Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count)));
             }
-            $count++;
+
         }
 
         $this->info($count.' users notified.');
