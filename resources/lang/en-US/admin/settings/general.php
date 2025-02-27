@@ -118,6 +118,8 @@ return [
     'ldap_version'              => 'LDAP Version',
     'ldap_active_flag'          => 'LDAP Active Flag',
     'ldap_activated_flag_help'  => 'This value is used to determine whether a synced user can login to Snipe-IT. <strong>It does not affect the ability to check items in or out to them</strong>, and should be the <strong>attribute name</strong> within your AD/LDAP, <strong>not the value</strong>. <br><br>If this field is set to a field name that does not exist in your AD/LDAP, or the value in the AD/LDAP field is set to <code>0</code> or <code>false</code>, <strong>user login will be disabled</strong>. If the value in the AD/LDAP field is set to <code>1</code> or <code>true</code> or <em>any other text</em> means the user can log in. When the field is blank in your AD, we respect the <code>userAccountControl</code> attribute, which usually allows non-suspended users to log in.',
+    'ldap_invert_active_flag'   => 'LDAP Invert Active Flad',
+    'ldap_invert_active_flag_help'     => 'If enabled: when the value returned by LDAP Active Flag is <code>0</code> or <code>false</code> the user account will be active.',
     'ldap_emp_num'              => 'LDAP Employee Number',
     'ldap_email'                => 'LDAP Email',
     'ldap_test'                 => 'Test LDAP',
