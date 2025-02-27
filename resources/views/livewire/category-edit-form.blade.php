@@ -23,7 +23,14 @@
         <div class="col-md-9 col-md-offset-3">
             @if ($defaultEulaText!='')
                 <label class="form-control">
-                    {{ Form::checkbox('use_default_eula', '1', $useDefaultEula, ['wire:model.live' => 'useDefaultEula', 'aria-label'=>'use_default_eula']) }}
+                    <input
+                        type="checkbox"
+                        name="use_default_eula"
+                        value="1"
+                        wire:model.live="useDefaultEula"
+                        aria-label="use_default_eula"
+                        @checked($useDefaultEula)
+                    />
                     <span>{!! trans('admin/categories/general.use_default_eula') !!}</span>
                 </label>
             @else
