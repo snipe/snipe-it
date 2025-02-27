@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-md-9">
                             <label class="form-control">
-                                {{ Form::checkbox('full_multiple_companies_support', '1', old('full_multiple_companies_support', $setting->full_multiple_companies_support),array('aria-label'=>'full_multiple_companies_support')) }}
+                                <input type="checkbox" name="full_multiple_companies_support" value="1" @checked(old('full_multiple_companies_support', $setting->full_multiple_companies_support)) aria-label="full_multiple_companies_support" />
                                 {{ trans('admin/settings/general.full_multiple_companies_support_text') }}
                             </label>
                             {!! $errors->first('full_multiple_companies_support', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -64,7 +64,7 @@
                         </div>
                         <div class="col-md-9">
                             <label class="form-control">
-                                {{ Form::checkbox('require_accept_signature', '1', old('require_accept_signature', $setting->require_accept_signature)) }}
+                                <input type="checkbox" name="require_accept_signature" value="1" @checked(old('require_accept_signature', $setting->require_accept_signature)) />
                                 {{ trans('general.yes') }}
                             </label>
                             {!! $errors->first('require_accept_signature', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -136,7 +136,7 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                                   {{ Form::checkbox('show_images_in_email', '1', old('show_images_in_email', $setting->show_images_in_email)) }}
+                                   <input type="checkbox" name="show_images_in_email" value="1" @checked(old('show_images_in_email', $setting->show_images_in_email)) />
                                    {{ trans('general.yes') }}
                                    {!! $errors->first('show_images_in_email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                </label>
@@ -152,7 +152,7 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                                   {{ Form::checkbox('unique_serial', '1', old('unique_serial', $setting->unique_serial),array('class' => 'minimal')) }}
+                                   <input type="checkbox" name="unique_serial" value="1" @checked(old('unique_serial', $setting->unique_serial)) />
                                    {{ trans('general.yes') }}
                                    {!! $errors->first('unique_serial', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                </label>
@@ -311,7 +311,7 @@
                            <div class="col-md-9">
 
                                    <label class="form-control">
-                                       {{ Form::checkbox('show_archived_in_list', '1', old('show_archived_in_list', $setting->show_archived_in_list),array('aria-label'=>'show_archived_in_list')) }}
+                                       <input type="checkbox" name="show_archived_in_list" value="1" @checked(old('show_archived_in_list', $setting->show_archived_in_list)) aria-label="show_archived_in_list" />
                                        {{ trans('admin/settings/general.show_archived_in_list_text') }}
                                    </label>
                                    {!! $errors->first('show_archived_in_list', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -325,7 +325,7 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                               {{ Form::checkbox('show_assigned_assets', '1', old('show_assigned_assets', $setting->show_assigned_assets),array('class' => 'minimal')) }}
+                               <input type="checkbox" name="show_assigned_assets" value="1" @checked(old('show_assigned_assets', $setting->show_assigned_assets)) />
                                {{ trans('general.yes') }}
                                </label>
                                <p class="help-block">{{ trans('admin/settings/general.show_assigned_assets_help') }}</p>
@@ -340,15 +340,19 @@
                            </div>
                            <div class="col-md-9">
                                <label class="form-control">
-                               {{ Form::checkbox('show_in_model_list[]', 'image', old('show_in_model_list', $snipeSettings->modellistCheckedValue('image')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.image') }}
+                                   <input type="checkbox" name="show_in_model_list[]" value="image" @checked(old('show_in_model_list', $snipeSettings->modellistCheckedValue('image'))) aria-label="show_in_model_list"/>
+                                   {{ trans('general.image') }}
                                </label>
                                <label class="form-control">
-                               {{ Form::checkbox('show_in_model_list[]', 'category', old('show_in_model_list', $snipeSettings->modellistCheckedValue('category')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.category') }}
+                                   <input type="checkbox" name="show_in_model_list[]" value="category" @checked(old('show_in_model_list', $snipeSettings->modellistCheckedValue('category'))) aria-label="show_in_model_list"/>
+                                   {{ trans('general.category') }}
                                </label>
                                <label class="form-control">
-                               {{ Form::checkbox('show_in_model_list[]', 'manufacturer', old('show_in_model_list', $snipeSettings->modellistCheckedValue('manufacturer')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }}  {{ trans('general.manufacturer') }} </label>
+                                   <input type="checkbox" name="show_in_model_list[]" value="manufacturer" @checked(old('show_in_model_list', $snipeSettings->modellistCheckedValue('manufacturer'))) aria-label="show_in_model_list"/>
+                                   {{ trans('general.manufacturer') }} </label>
                                <label class="form-control">
-                               {{ Form::checkbox('show_in_model_list[]', 'model_number', old('show_in_model_list', $snipeSettings->modellistCheckedValue('model_number')),array('class' => 'minimal', 'aria-label'=>'show_in_model_list' )) }} {{ trans('general.model_no') }}
+                                   <input type="checkbox" name="show_in_model_list[]" value="model_number" @checked(old('show_in_model_list', $snipeSettings->modellistCheckedValue('model_number'))) aria-label="show_in_model_list"/>
+                                   {{ trans('general.model_no') }}
                                </label>
                            </div>
                        </div>
