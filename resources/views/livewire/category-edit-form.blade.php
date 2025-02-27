@@ -34,7 +34,14 @@
                 </label>
             @else
                 <label class="form-control form-control--disabled">
-                    {{ Form::checkbox('use_default_eula', '0', $useDefaultEula, ['wire:model.live' => 'useDefaultEula', 'class'=>'disabled','disabled' => 'disabled', 'aria-label'=>'use_default_eula']) }}
+                    <input
+                        type="checkbox"
+                        name="use_default_eula"
+                        value="0"
+                        wire:model.live="useDefaultEula"
+                        aria-label="use_default_eula"
+                        disabled
+                    />
                     <span>{!! trans('admin/categories/general.use_default_eula_disabled') !!}</span>
                 </label>
             @endif
