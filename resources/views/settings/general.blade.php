@@ -245,11 +245,11 @@
                         <div class="col-md-9">
                             @if (config('app.lock_passwords'))
 
-                                <textarea class="form-control disabled" name="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2" aria-label="login_note" readonly>{{ old('login_note', $setting->login_note) }}</textarea>
+                                <textarea class="form-control disabled" name="login_note" placeholder="{{trans('admin/settings/general.login_note_placeholder')}}" rows="2" aria-label="login_note" readonly>{{ old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                             @else
-                                <textarea class="form-control" name="login_note" aria-label="login_note" placeholder="If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you." rows="2">{{ old('login_note', $setting->login_note) }}</textarea>
+                                <textarea class="form-control" name="login_note" aria-label="login_note" placeholder="{{trans('admin/settings/general.login_note_placeholder')}}" rows="2">{{ old('login_note', $setting->login_note) }}</textarea>
                                 {!! $errors->first('login_note', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             @endif
                             <p class="help-block">{!!  trans('admin/settings/general.login_note_help') !!}</p>
@@ -259,7 +259,7 @@
                        <!-- Mail test -->
                        <div class="form-group">
                            <div class="col-md-3">
-                               <label for="login_note">Test Mail</label>
+                               <label for="login_note">{{trans('admin/settings/general.test_mail')}}</label>
                            </div>
                            <div class="col-md-9" id="mailtestrow">
                                <a class="btn btn-default btn-sm pull-left" id="mailtest" style="margin-right: 10px;">
@@ -374,13 +374,13 @@
                        <!-- Depreciation method -->
                        <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">
                            <div class="col-md-3">
-                               <label for="depreciation_method">{{ trans('Depreciation method') }}</label>
+                               <label for="depreciation_method">{{ trans('admin/depreciations/general.depreciation_method') }}</label>
                            </div>
                            <div class="col-md-9">
                                {{ Form::select('depreciation_method', array(
-                                    'default' => 'Linear (default)',
-                                    'half_1' => 'Half-year convention, always applied',
-                                    'half_2' => 'Half-year convention, applied with condition',
+                                    'default' => trans('admin/depreciations/general.linear_depreciation'),
+                                    'half_1' => trans('admin/depreciations/general.half_1'),
+                                    'half_2' => trans('admin/depreciations/general.half_2'),
                                 ), old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
                            </div>
                        </div>
