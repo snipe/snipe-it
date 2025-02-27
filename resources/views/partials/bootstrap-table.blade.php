@@ -299,7 +299,6 @@
         return '<a href="{{ config('app.url') }}/hardware/audit/' + row.id + '/" class="btn btn-sm bg-yellow" data-tooltip="true" title="Audit this item">{{ trans('general.audit') }}</a>';
     }
 
-
     // Make the edit/delete buttons
     function genericActionsFormatter(owner_name, element_name) {
         if (!element_name) {
@@ -351,9 +350,12 @@
             } else {
                 // Do not show the delete button on things that are already deleted
                 if ((row.available_actions) && (row.available_actions.restore != true)) {
-                    actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}"><a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><x-icon type="delete" /><span class="sr-only">{{ trans('general.cannot_be_deleted') }}</span></a></span>&nbsp;';
+                    var message = "{{trans('general.cannot_be_deleted')}}";
+                    if(row.child_asset_count > 0){
+                        message = "{{trans('general.cannot_delete_parent_asset')}}";
+                    }
+                    actions += '<span data-tooltip="true" title="'+message+'"><a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><x-icon type="delete" /><span class="sr-only">{{ trans('general.cannot_be_deleted') }}</span></a></span>&nbsp;';
                 }
-
             }
 
 
