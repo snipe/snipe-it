@@ -68,7 +68,14 @@
     <div class="form-group">
         <div class="col-md-9 col-md-offset-3">
             <label class="form-control">
-                {{ Form::checkbox('checkin_email', '1', $sendCheckInEmail, ['wire:model.live' => 'sendCheckInEmail', 'aria-label'=>'checkin_email', 'disabled' => $this->sendCheckInEmailDisabled]) }}
+                <input
+                    type="checkbox"
+                    name="checkin_email"
+                    value="1"
+                    wire:model.live="sendCheckInEmail"
+                    aria-label="checkin_email"
+                    @disabled($this->sendCheckInEmailDisabled)
+                />
                 {{ trans('admin/categories/general.checkin_email') }}
             </label>
             @if ($this->shouldDisplayEmailMessage)

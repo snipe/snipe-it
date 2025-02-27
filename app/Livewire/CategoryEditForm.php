@@ -14,7 +14,7 @@ class CategoryEditForm extends Component
 
     public bool $requireAcceptance;
 
-    public $sendCheckInEmail;
+    public bool $sendCheckInEmail;
 
     public bool $useDefaultEula;
 
