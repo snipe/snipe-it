@@ -361,9 +361,15 @@ class LdapSync extends Command
                 // (Specifically, we don't handle a value of '0.0' correctly)
                 $raw_value = @$results[$i][$ldap_map["active_flag"]][0];
                 $filter_var = filter_var($raw_value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+                
                 $boolean_cast = (bool) $raw_value;
-
-                $user->activated = $filter_var ?? $boolean_cast; // if filter_var() was true or false, use that. If it's null, use the $boolean_cast
+                
+                if (Setting::getSettings()->ldap_invert_active_flag === 1) {
+                    // Because ldap_active_flag is set, if filter_var is true or boolean_cast is true, then user is suspended
+                    $user->activated = !($filter_var ?? $boolean_cast);
+                }else{
+                    $user->activated = $filter_var ?? $boolean_cast; // if filter_var() was true or false, use that. If it's null, use the $boolean_cast
+                }
 
             } elseif (array_key_exists('useraccountcontrol', $results[$i])) {
                 // ....otherwise, (ie if no 'active' LDAP flag is defined), IF the UAC setting exists,
