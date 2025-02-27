@@ -68,7 +68,7 @@
               @foreach ($assetsForReport as $item)
                   @if ($item['assetItem'])
                   <tr @if($item['acceptance']->trashed()) style="text-decoration: line-through" @endif>
-                    <td>{{ $item['acceptance']->created_at }}</td>
+                    <td>{{ Helper::getFormattedDateObject($item['acceptance']->created_at, 'datetime', false) }}</td>
                     <td>{{ ($item['assetItem']->company) ? $item['assetItem']->company->name : '' }}</td>
                     <td>{!! $item['assetItem']->model->category->present()->nameUrl() !!}</td>
                     <td>{!! $item['assetItem']->present()->modelUrl() !!}</td>
