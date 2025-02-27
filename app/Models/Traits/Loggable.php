@@ -1,16 +1,171 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Traits;
 
+use App\Enums\ActionType;
+use App\Models\Actionlog;
+use App\Models\Asset;
+use App\Models\License;
+use App\Models\LicenseSeat;
+use App\Models\Location;
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Model;
 
 trait Loggable
 {
     // an attribute for setting whether or not the item was imported
     public ?bool $imported = false;
+    private ?string $log_message = null;
+    private ?Model $item = null;
+    private array $log_meta = [];
+    private ?Model $target = null;
+    private ?string $note = null;
+
+    private ?Location $location_override = null;
+
+    //public static array $hide_changes = [];
+
+    public static function bootLoggable()
+    {
+        //these tiny methods just set up what the log message is going to be
+        // it looks like 'restoring' fires *BEFORE* 'updating' - so we need to handle that
+        static::restoring(function ($model) {
+            \Log::error("Restor*ing* callback firing...");
+            $model->setLogMessage(ActionType::Restore);
+        });
+
+        static::updating(function ($model) {
+            \Log::error("Updating is fired, current log message is: ".$model->log_message);
+            // if we're doing a restore, this 'updating' hook fires *after* the restoring hook
+            // so we make sure not to overwrite the log_message
+            if (!$model->log_message) {
+                $model->setLogMessage(ActionType::Update);
+            }
+        });
+
+        static::creating(function ($model) {
+            $model->setLogMessage(ActionType::Create);
+        });
+
+        static::deleting(function ($model) { //TODO - is this only for 'hard' delete? Or soft?
+            \Log::error("DELETING TRIGGER HAS FIRED!!!!!!!!!!!!!!! for id: ".$model->id." old log_message was: ".$model->log_message);
+            if (self::class == \App\Models\User::class) { //FIXME - Janky AF!
+                $model->setLogTarget($model); //FIXME - this makes *NO* sense!!!!
+            }
+            $model->setLogMessage(ActionType::Delete);
+        });
+
+        //static::trashing(function ($model) { //TODO - is *this* the right one?
+        //    $model->setLogMessage(ActionType::Delete); // No, no it is very much not. there is 'trashed' but not 'trashING'
+        //});
+
+        // THIS sets up the transaction, and gets the 'diff' between the original for the model,
+        // and the way it's about to get saved to.
+        // note that this may run *BEFORE* the more specific events, above? I don't know why that is though.
+        // OPEN QUESTION - does this run on soft-delete? I don't know.
+        static::saving(function ($model) {
+            //possibly consider a "$this->saveWithoutTransaction" thing you can invoke?
+            // use "BEGIN" here?! TODO FIXME
+            $changed = [];
+
+            foreach ($model->getRawOriginal() as $key => $value) {
+                if ($model->getRawOriginal()[$key] != $model->getAttributes()[$key]) {
+                    $changed[$key]['old'] = $model->getRawOriginal()[$key];
+                    $changed[$key]['new'] = $model->getAttributes()[$key];
+
+                    if (property_exists(self::class, 'hide_changes') && in_array($key, self::$hide_changes)) {
+                        $changed[$key]['old'] = '*************';
+                        $changed[$key]['new'] = '*************';
+                    }
+                }
+            }
+
+            $model->setLogMeta($changed);
+        });
+
+        // THIS is the whole enchilada, the MAIN thing that you've got to do to make things work.
+        //if we've set everything up correctly, this should pretty much do everything we want, all in one place
+        static::saved(function ($model) {
+            if (!$model->log_message && !$model->log_meta) {
+                //nothing was changed, nothing was saved, nothing happened. So there should be no log message.
+                //FIXME if we do the transaction thing!!!!
+                \Log::error("LOG MESSAGE IS BLANK, ****AND**** log_meta is blank! Not sure what that means though...");
+                return;
+            }
+            if (!$model->log_message) {
+                throw new \Exception("Log Message was unset, but log_meta *does* exist - it's: ".print_r($model->log_meta, true));
+            }
+            $model->logWithoutSave();
+            // DO COMMIT HERE? TODO FIXME
+        });
+        static::deleted(function ($model) {
+            \Log::error("Deleted callback has fired!!!!!!!!!!! I guess that means do stuff here? For id: ".$model->id);
+            $results = $model->logWithoutSave(); //TODO - if we do commits up there, we should do them here too?
+            \Log::error("result of logging without save? ".($results ? 'true' : 'false'));
+        });
+        static::restored(function ($model) {
+            \Log::error("RestorED callback firing.");
+            $model->logWithoutSave(); //TODO - this is getting duplicative.
+        });
+
+        // CRAP.
+        //static::trashed(function ($model) {
+        //    $model->logWithoutSave(ActionType::Delete);
+        //});
+
+    }
+
+    // and THIS is the main, primary logging system
+    // it *can* be called on its own, but in *general* you should let it trigger from the 'save'
+    public function logWithoutSave(ActionType $log_action = null): bool
+    {
+        if ($log_action) {
+            $this->setLogMessage($log_action);
+        }
+        $logAction = new Actionlog();
+        $logAction->item_type = self::class;
+        $logAction->item_id = $this->id;
+        $logAction->created_at = date('Y-m-d H:i:s');
+        $logAction->created_by = auth()->id();
+        if ($this->imported) {
+            $logAction->setActionSource('importer');
+        }
+        $logAction->log_meta = $this->log_meta ? json_encode($this->log_meta) : null;
+        if ($this->target) {
+            $logAction->target_type = $this->target::class;
+            $logAction->target_id = $this->target->id;
+        }
+        if ($this->note) {
+            $logAction->note = $this->note;
+        }
+        if ($this->location_override) {
+            $logAction->location_id = $this->location->id;
+        }
+
+        \Log::error("Here is the logaction BEFORE we save it ($this->log_message)...".print_r($logAction->toArray(), true));
+        return $logAction->logaction($this->log_message);
+    }
+
+    public function setLogMessage(ActionType $message)
+    {
+        $this->log_message = $message->value;
+    }
+
+    public function setLogMeta(array $changed)
+    {
+        $this->log_meta = $changed;
+    }
+
+    public function setLogTarget(Model $target)
+    {
+        $this->target = $target;
+    }
+
+    public function setLogNote(string $note)
+    {
+        $this->note = $note;
+    }
 
     /**
      * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
