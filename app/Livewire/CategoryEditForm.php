@@ -16,7 +16,7 @@ class CategoryEditForm extends Component
 
     public $sendCheckInEmail;
 
-    public $useDefaultEula;
+    public bool $useDefaultEula;
 
     public function mount()
     {

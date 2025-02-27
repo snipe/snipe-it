@@ -29,7 +29,6 @@
                         value="1"
                         wire:model.live="useDefaultEula"
                         aria-label="use_default_eula"
-                        @checked($useDefaultEula)
                     />
                     <span>{!! trans('admin/categories/general.use_default_eula') !!}</span>
                 </label>
