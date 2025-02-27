@@ -79,13 +79,18 @@
                         <nobr>
                         @if(!$item['acceptance']->trashed())
                            <form method="post" class="white-space: nowrap;" action="{{ route('reports/unaccepted_assets_sent_reminder') }}">
-                            @if ($item['acceptance']->assignedTo)
+                            @if (($item['acceptance']->assignedTo) && ($item['acceptance']->assignedTo->email))
                                 @csrf
                                <input type="hidden" name="acceptance_id" value="{{ $item['acceptance']->id }}">
                                 <button class="btn btn-sm btn-warning" data-tooltip="true" data-title="{{ trans('admin/reports/general.send_reminder') }}">
                                     <i class="fa fa-repeat" aria-hidden="true"></i>
                                 </button>
-
+                            @else
+                                   <span data-tooltip="true" data-title="{{ trans('admin/reports/general.cannot_send_reminder') }}">
+                                       <a class="btn btn-sm btn-warning disabled" href="#">
+                                           <i class="fa fa-repeat" aria-hidden="true"></i>
+                                       </a>
+                                  </span>
                             @endif
                             <a href="{{ route('reports/unaccepted_assets_delete', ['acceptanceId' => $item['acceptance']->id]) }}" class="btn btn-sm btn-danger delete-asset" data-tooltip="true" data-toggle="modal" data-content="{{ trans('general.delete_confirm', ['item' =>trans('admin/reports/general.acceptance_request')]) }}" data-title="{{  trans('general.delete') }}" onClick="return false;"><i class="fa fa-trash"></i></a>
                            </form>
