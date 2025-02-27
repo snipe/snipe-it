@@ -52,7 +52,13 @@
     <div class="form-group">
         <div class="col-md-9 col-md-offset-3">
             <label class="form-control">
-                {{ Form::checkbox('require_acceptance', '1', $requireAcceptance, ['wire:model.live' => 'requireAcceptance', 'aria-label'=>'require_acceptance']) }}
+                <input
+                    type="checkbox"
+                    name="require_acceptance"
+                    value="1"
+                    wire:model.live="requireAcceptance"
+                    aria-label="require_acceptance"
+                />
                 {{ trans('admin/categories/general.require_acceptance') }}
             </label>
         </div>

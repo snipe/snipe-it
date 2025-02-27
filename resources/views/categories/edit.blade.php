@@ -26,7 +26,7 @@
 <livewire:category-edit-form
     :default-eula-text="$snipeSettings->default_eula_text"
     :eula-text="old('eula_text', $item->eula_text)"
-    :require-acceptance="old('require_acceptance', $item->require_acceptance)"
+    :require-acceptance="(bool) old('require_acceptance', $item->require_acceptance)"
     :send-check-in-email="old('checkin_email', $item->checkin_email)"
     :use-default-eula="(bool) old('use_default_eula', $item->use_default_eula)"
 />

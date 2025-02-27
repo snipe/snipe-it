@@ -12,7 +12,7 @@ class CategoryEditForm extends Component
 
     public $originalSendCheckInEmailValue;
 
-    public $requireAcceptance;
+    public bool $requireAcceptance;
 
     public $sendCheckInEmail;
 
