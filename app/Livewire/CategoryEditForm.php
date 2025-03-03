@@ -12,11 +12,11 @@ class CategoryEditForm extends Component
 
     public $originalSendCheckInEmailValue;
 
-    public $requireAcceptance;
+    public bool $requireAcceptance;
 
-    public $sendCheckInEmail;
+    public bool $sendCheckInEmail;
 
-    public $useDefaultEula;
+    public bool $useDefaultEula;
 
     public function mount()
     {
