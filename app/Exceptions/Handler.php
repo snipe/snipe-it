@@ -125,7 +125,9 @@ class Handler extends ExceptionHandler
         // This is traaaaash but it handles models that are not found while using route model binding :(
         // The only alternative is to set that at *each* route, which is crazypants
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
-            $model_name = last(explode('\\', $e->getModel()));
+
+            // This gets the MVC model name from the exception and formats in a way that's less fugly
+            $model_name = strtolower(implode(" ", preg_split('/(?=[A-Z])/', last(explode('\\', $e->getModel())))));
             $route = str_plural(strtolower(last(explode('\\', $e->getModel())))).'.index';
 
             // Sigh.
