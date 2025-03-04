@@ -78,13 +78,11 @@
                                 <label for="brand">{{ trans('admin/settings/general.web_brand') }}</label>
                             </div>
                             <div class="col-md-9">
-                                <select name="brand" id="brand" class="form-control select2 minimumResultsForSearch" style="width: 150px;">
-                                    @foreach($optionTypes as $value => $label)
-                                        <option value="{{ $value }}" {{ old('brand', $setting->brand) == $value ? 'selected' : '' }}>
-                                            {{ $label }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                {!! Form::select('brand', [
+                                                '1'=> trans('admin/settings/general.logo_option_types.text'),
+                                                '2'=> trans('admin/settings/general.logo_option_types.logo'),
+                                                '3'=> trans('admin/settings/general.logo_option_types.logo_and_text')], old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+
                             </div>
                         </div>
 
