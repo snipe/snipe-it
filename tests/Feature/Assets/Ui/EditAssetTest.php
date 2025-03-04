@@ -96,9 +96,9 @@ class EditAssetTest extends TestCase
         $this->actingAs(User::factory()->viewAssets()->editAssets()->create())
             ->from(route('hardware.edit', $asset))
             ->put(route('hardware.update', $asset), [
-                    'status_id' => $achived_status->id,
-                    'model_id' => $asset->model_id,
-                    'asset_tags' => $asset->asset_tag,
+                'status_id'  => $archived_status->id,
+                'model_id'   => $asset->model_id,
+                'asset_tags' => $asset->asset_tag,
                 ],
             )
             ->assertStatus(302);
