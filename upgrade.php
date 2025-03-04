@@ -150,8 +150,7 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 
 
 echo "\e[95m--------------------------------------------------------\n";
-echo "STEP 1: Checking .env file: \n";
-echo "- Your .env is located at ".getcwd()."/.env \n";
+echo "STEP 1: Checking .env file: ".getcwd()."/.env \n";
 echo "--------------------------------------------------------\e[39m\n\n";
 
 
@@ -163,7 +162,7 @@ if (! $env){
     exit(1);
 }
 
-$env_good = '';
+$env_good = $success_icon.' Your .env file is located at '.getcwd()."/.env \n";
 $env_bad = '';
 
 // Loop through each line of the .env
