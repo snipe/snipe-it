@@ -27,18 +27,12 @@ class AssetCheckinController extends Controller
      * @param string $backto
      * @since [v1.0]
      */
-    public function create($assetId, $backto = null) : View | RedirectResponse
+    public function create(Asset $asset, $backto = null) : View | RedirectResponse
     {
-        // Check if the asset exists
-        if (is_null($asset = Asset::find($assetId))) {
-            // Redirect to the asset management page with error
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
 
         $this->authorize('checkin', $asset);
 
         // This asset is already checked in, redirect
-        
         if (is_null($asset->assignedTo)) {
             return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.already_checked_in'));
         }
@@ -47,7 +41,11 @@ class AssetCheckinController extends Controller
             return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
 
-        return view('hardware/checkin', compact('asset'))->with('statusLabel_list', Helper::statusLabelList())->with('backto', $backto)->with('table_name', 'Assets');
+        return view('hardware/checkin', compact('asset'))
+            ->with('item', $asset)
+            ->with('statusLabel_list', Helper::statusLabelList())
+            ->with('backto', $backto)
+            ->with('table_name', 'Assets');
     }
 
     /**
@@ -91,6 +89,9 @@ class AssetCheckinController extends Controller
             $asset->status_id = e($request->get('status_id'));
         }
 
+        // Add any custom fields that should be included in the checkout
+        $asset->customFieldsForCheckinCheckout('display_checkin');
+
         $this->migrateLegacyLocations($asset);
 
         $asset->location_id = $asset->rtd_location_id;
@@ -127,6 +128,9 @@ class AssetCheckinController extends Controller
         });
 
         session()->put('redirect_option', $request->get('redirect_option'));
+
+        // Add any custom fields that should be included in the checkout
+        $asset->customFieldsForCheckinCheckout('display_checkin');
 
         if ($asset->save()) {
 

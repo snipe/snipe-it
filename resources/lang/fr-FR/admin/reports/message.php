@@ -2,9 +2,9 @@
 
 return [
     'about_templates' => 'About Saved Templates',
-    'saving_templates_description' => 'Select your options, then enter the name of your template in the box above and click the \'Save Template\' button. Use the dropdown to select a previously saved template.',
+    'saving_templates_description' => 'Sélectionnez vos options, puis entrez le nom de votre modèle dans la case ci-dessus et cliquez sur le bouton \'Enregistrer le modèle\'. Utilisez le menu déroulant pour sélectionner un modèle précédemment enregistré.',
     'create'  => [
-        'success' => 'Template saved successfully',
+        'success' => 'Modèle sauvegardé avec succès',
     ],
     'update' => [
         'success' => 'Template updated successfully',

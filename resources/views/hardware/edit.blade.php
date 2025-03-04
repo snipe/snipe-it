@@ -5,7 +5,7 @@
     'topSubmit' => true,
     'helpText' => trans('help.assets'),
     'helpPosition' => 'right',
-    'formAction' => ($item->id) ? route('hardware.update', ['asset' => $item->id]) : route('hardware.store'),
+    'formAction' => ($item->id) ? route('hardware.update', $item) : route('hardware.store'),
     'index_route' => 'hardware.index',
     'options' => [
                 'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'assets']),

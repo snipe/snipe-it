@@ -21,7 +21,7 @@ return new class extends Migration {
          */
         if (Schema::hasTable('report_templates') && Schema::hasColumn('report_templates', 'options')) {
             Schema::table('report_templates', function (Blueprint $table) {
-                $table->text('options')->change();
+                $table->text('options')->nullable(false)->change();
             });
         }
     }

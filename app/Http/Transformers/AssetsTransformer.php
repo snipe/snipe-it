@@ -309,6 +309,7 @@ class AssetsTransformer
                 'id' => $accessory_checkout->accessory->id,
                 'name' => $accessory_checkout->accessory->name,
             ],
+            'assigned_to' => $accessory_checkout->assigned_to,
             'image' => ($accessory_checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory_checkout->accessory->image)) : null,
             'note' => $accessory_checkout->note ? e($accessory_checkout->note) : null,
             'created_by' => $accessory_checkout->adminuser ? [

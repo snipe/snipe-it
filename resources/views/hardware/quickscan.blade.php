@@ -16,10 +16,10 @@
         }
     </style>
 
-    
+
 
     <div class="row">
-    {{ Form::open(['method' => 'POST', 'class' => 'form-horizontal', 'role' => 'form', 'id' => 'audit-form' ]) }}
+    <form method="POST" accept-charset="UTF-8" class="form-horizontal" role="form" id="audit-form">
         <!-- left column -->
         <div class="col-md-6">
             <div class="box box-default">
@@ -29,7 +29,7 @@
 
                     <!-- Next Audit -->
                         <div class="form-group {{ $errors->has('asset_tag') ? 'error' : '' }}">
-                            {{ Form::label('asset_tag', trans('general.asset_tag'), array('class' => 'col-md-3 control-label', 'id' => 'audit_tag')) }}
+                            <label for="asset_tag" class="col-md-3 control-label" id="audit_tag">{{ trans('general.asset_tag') }}</label>
                             <div class="col-md-9">
                                 <div class="input-group date col-md-11 required" data-date-format="yyyy-mm-dd">
                                     <input type="text" class="form-control" name="asset_tag" id="asset_tag" value="{{ old('asset_tag') }}">
@@ -60,7 +60,7 @@
 
                         <!-- Next Audit -->
                         <div class="form-group {{ $errors->has('next_audit_date') ? 'error' : '' }}">
-                            {{ Form::label('next_audit_date', trans('general.next_audit_date'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="next_audit_date" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
                             <div class="col-md-9">
                                 <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-clear-btn="true">
                                     <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $next_audit_date) }}">
@@ -73,7 +73,7 @@
 
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                            {{ Form::label('note', trans('admin/hardware/form.notes'), array('class' => 'col-md-3 control-label')) }}
+                            <label for="note" class="col-md-3 control-label">{{ trans('admin/hardware/form.notes') }}</label>
                             <div class="col-md-8">
                                 <textarea class="col-md-6 form-control" id="note" name="note">{{ old('note') }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
@@ -92,7 +92,7 @@
 
 
 
-            {{Form::close()}}
+            </form>
         </div> <!--/.col-md-6-->
 
         <div class="col-md-6">
@@ -101,7 +101,7 @@
                     <h2 class="box-title"> {{ trans('general.bulkaudit_status') }} (<span id="audit-counter">0</span> {{ trans('general.assets_audited') }}) </h2>
                 </div>
                 <div class="box-body">
-    
+
                     <table id="audited" class="table table-striped snipe-table">
                         <thead>
                         <tr>
@@ -158,7 +158,7 @@
                         var audio = new Audio('{{ config('app.url') }}/sounds/success.mp3');
                         audio.play()
                         @endif
-                            
+
                         incrementOnSuccess();
                     } else {
                         handleAuditFail(data);

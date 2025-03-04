@@ -34,11 +34,12 @@ class CreateDepartmentsTest extends TestCase
         $this->actingAs(User::factory()->superuser()->create())
             ->post(route('departments.store'), [
                 'name' => 'Test Department',
-                'company_id' => Company::factory()->create()->id
+                'company_id' => Company::factory()->create()->id,
+                'notes' => 'Test Note',
             ])
             ->assertRedirect(route('departments.index'));
 
-        $this->assertTrue(Department::where('name', 'Test Department')->exists());
+        $this->assertTrue(Department::where('name', 'Test Department')->where('notes', 'Test Note')->exists());
     }
 
 

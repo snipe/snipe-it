@@ -290,21 +290,31 @@ class BulkAssetsController extends Controller
         $this->authorize('delete', Asset::class);
 
         $bulk_back_url = route('hardware.index');
+
         if ($request->session()->has('bulk_back_url')) {
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
+        $assetIds = $request->get('ids');
 
-        if ($request->filled('ids')) {
-            $assets = Asset::find($request->get('ids'));
-            foreach ($assets as $asset) {
-                $asset->delete();
-            } // endforeach
-
-            return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.delete.success'));
-            // no values given, nothing to update
+        if(empty($assetIds)) {
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.delete.nothing_updated'));
         }
 
-        return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.delete.nothing_updated'));
+        $assignedAssets = Asset::whereIn('id', $assetIds)->whereNotNull('assigned_to')->get();
+        if($assignedAssets->isNotEmpty()) {
+
+            //if assets are checked out, return a list of asset tags that would need to be checked in first.
+            $assetTags = $assignedAssets->pluck('asset_tag')->implode(', ');
+            return redirect($bulk_back_url)->with('error', trans_choice('admin/hardware/message.delete.assigned_to_error', $assignedAssets->count(), ['asset_tag' => $assetTags] ));
+        }
+
+        foreach (Asset::wherein('id', $assetIds)->get() as $asset) {
+                $asset->delete();
+            }
+
+        return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.delete.success'));
+            // no values given, nothing to update
+
     }
 
     /**

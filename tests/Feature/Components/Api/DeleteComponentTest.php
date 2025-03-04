@@ -9,7 +9,7 @@ use Tests\Concerns\TestsFullMultipleCompaniesSupport;
 use Tests\Concerns\TestsPermissionsRequirement;
 use Tests\TestCase;
 
-class DeleteComponentsTest extends TestCase implements TestsFullMultipleCompaniesSupport, TestsPermissionsRequirement
+class DeleteComponentTest extends TestCase implements TestsFullMultipleCompaniesSupport, TestsPermissionsRequirement
 {
     public function testRequiresPermission()
     {
@@ -62,5 +62,14 @@ class DeleteComponentsTest extends TestCase implements TestsFullMultipleCompanie
             ->assertStatusMessageIs('success');
 
         $this->assertSoftDeleted($component);
+    }
+
+    public function testCannotDeleteComponentIfCheckedOut()
+    {
+        $component = Component::factory()->checkedOutToAsset()->create();
+
+        $this->actingAsForApi(User::factory()->deleteComponents()->create())
+            ->deleteJson(route('api.components.destroy', $component))
+            ->assertStatusMessageIs('error');
     }
 }

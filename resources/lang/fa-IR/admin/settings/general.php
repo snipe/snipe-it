@@ -148,8 +148,8 @@ return [
     'ldap_pword'                => 'LDAP اتصال رمز عبور',
     'ldap_basedn'               => 'اتصال پایگاه DN',
     'ldap_filter'               => 'LDAP فیلتر',
-    'ldap_pw_sync'              => 'همگام سازی رمز عبور LDAP',
-    'ldap_pw_sync_help'         => 'اگر نمیخواهید گذرواژههای LDAP را با گذرواژههای محلی همگامسازی کنید، این کادر را بردارید. غیرفعال کردن این به این معنی است که کاربران شما ممکن است قادر به ورود به سیستم اگر سرور LDAP شما به دلایلی غیر قابل دسترس است.',
+    'ldap_pw_sync'              => 'Cache LDAP Passwords',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords cached as local hashed passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => 'فیلد نام کاربری',
     'ldap_lname_field'          => 'نام خانوادگی',
     'ldap_fname_field'          => 'LDAP نام',
@@ -459,6 +459,10 @@ return [
 ',
     'ldap_ad' => 'LDAP/AD
 ',
+    'ldap_test_label' => 'Test LDAP Sync',
+    'ldap_test_login' => ' Test LDAP Login',
+    'ldap_username_placeholder' => 'LDAP Username',
+    'ldap_password_placeholder' => 'LDAP Password',
     'employee_number' => 'تعداد کارکنان
 ',
     'create_admin_user' => 'ایجاد کاربر جدید ::',

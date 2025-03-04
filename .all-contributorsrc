@@ -3271,6 +3271,42 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "addex12",
+      "name": "Adugna Gizaw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18550946?v=4",
+      "profile": "https://orbalia.pythonanywhere.com/",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "jostrander",
+      "name": "Jesse Ostrander",
+      "avatar_url": "https://avatars.githubusercontent.com/u/760989?v=4",
+      "profile": "https://github.com/jostrander",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "azmcnutt",
+      "name": "James M",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31522486?v=4",
+      "profile": "https://github.com/azmcnutt",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Fiala06",
+      "name": "Fiala06",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5183146?v=4",
+      "profile": "https://github.com/Fiala06",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

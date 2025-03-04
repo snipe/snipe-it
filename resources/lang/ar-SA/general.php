@@ -10,7 +10,7 @@ return [
     'action'                => 'الإجراء',
     'activity_report'		=> 'تقرير الأنشطة',
     'address'				=> 'العنوان',
-    'admin'					=> 'الإدارة',
+    'admin'					=> 'إعدادات المدير',
     'admin_tooltip'			=> 'هذا المستخدم لديه صلاحيات المشرف',
     'superuser'				=> 'مدير النظام',
     'superuser_tooltip'		=> 'هذا المستخدم لديه امتيازات المستخدم المتميز',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'الأصول المتاحة',
     'accept_assets'         => 'قبول الأصول :name',
     'accept_assets_menu'    => 'قبول الأصول',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'تدقيق',
     'audit_report'			=> 'سجل التدقيق',
     'assets'				=> 'الأصول',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'إنشاء سجل',
     'updated_at' 			=> 'تم التحديث في',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'العملة', //
     'current'  				=> 'الحالي',
     'current_password'      => 'كلمة المرور الحالية',
     'customize_report'      => 'تخصيص التقرير',
     'custom_report'         => 'تقرير مخصص للأصول',
     'dashboard'				=> 'لوحة القيادة',
+    'data_source'           => 'Data Source',
     'days'      			=> 'أيام',
     'days_to_next_audit'    => 'أيام إلى التدقيق التالي',
     'date'					=> 'التاريخ',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'الاسم الأول الاسم الأخير (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'اللقب والحرف الاول من الاسم (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'الاسم الأخير الأول (jsmith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'الاسم الأول الاسم الأخير (جين سميث)',
     'lastname_firstname_display'	=> 'اسم العائلة الأول (ميث جاني)',
     'name_display_format'	=> 'تنسيق عرض الاسم',
@@ -217,6 +221,8 @@ return [
     'no'  					=> 'لا',
     'notes'  				=> 'مُلاحظات',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => 'انتهت صلاحية جلسة النموذج. حاول مرة اخرى.',
     'login_enabled'         => 'تسجيل الدخول مفعل',
     'audit_due'             => 'الواجب مراجعته',
-    'audit_due_days'        => 'الأصول المستحقة للمراجعة خلال :أيام الأصول اليومية المستحقة للمراجعة خلال :أيام',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'من المقرر تسجيل الدخول',
     'checkin_overdue'       => 'تأخر في تسجيل الدخول',
-    'checkin_due_days'      => 'الأصول المستحقة للتسجيل في غضون :أيام الأصول اليومية المستحقة للتسجيل في غضون :أيام',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'مراجعة الحسابات المتأخرة',
     'accept'                => 'قبول :asset',
     'i_accept'              => 'قبول',
@@ -561,6 +567,7 @@ return [
         'consumables'  => ':count مستهلكة<unk> :count مستهلك',
         'components'  => ':count مكون<unk> :count مكونات',
     ],
+
     'more_info' => 'المزيد من المعلومات',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Whoops!',
@@ -576,5 +583,21 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

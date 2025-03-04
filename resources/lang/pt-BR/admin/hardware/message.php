@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Tem certeza de que deseja excluir este ativo?',
         'error'   		=> 'Houve um problema ao excluir o ativo. Tente novamente.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Nenhum ativo foi selecionado, então nada foi deletado.',
         'success' 		=> 'O ativo foi excluído com sucesso.',
     ],

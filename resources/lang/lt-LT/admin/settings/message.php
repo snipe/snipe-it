@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Tikrinamas LDAP autentifikavimas...',
         'authentication_success' => 'Naudotojas sėkmingai atpažintas naudojant LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => ':app siunčiamas bandomasis pranešimas...',
         'success' => 'Jūsų :webhook_name integracija veikia!',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'KLAIDA: 301/302 :endpoint rodo peradresavimą. Saugumo sumetimais peradresavimų nevykdome. Naudokite tikrąjį galinį tašką.',
         'error_misc' => 'Kažkas ne taip. :( ',
         'webhook_fail' => ' „Webhook“ pranešimas nepavyko: patikrinkite ar URL vis dar galioja.',
+        'webhook_channel_not_found' => ' „webhook“ kanalas nerastas.'
     ]
 ];
