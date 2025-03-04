@@ -137,6 +137,8 @@ class Handler extends ExceptionHandler
                 $route = 'models.index';
             } elseif ($route == 'predefinedkits.index') {
                 $route = 'kits.index';
+            } elseif ($route == 'assetmaintenances.index') {
+                $route = 'maintenances.index';
             }
 
             return redirect()
