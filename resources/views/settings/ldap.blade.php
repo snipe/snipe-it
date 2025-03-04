@@ -171,7 +171,9 @@
                         <!-- LDAP Client-Side TLS key -->
                         <div class="form-group {{ $errors->has('ldap_client_tls_key') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_client_tls_key', trans('admin/settings/general.ldap_client_tls_key')) }}
+                                <label for="ldap_client_tls_key">
+                                    {{ trans('admin/settings/general.ldap_client_tls_key') }}
+                                </label>
                             </div>
                             <div class="col-md-8">
                                 <x-input.textarea
@@ -557,27 +559,34 @@
                         <!-- LDAP invert active flag -->
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_invert_active_flag', trans('admin/settings/general.ldap_invert_active_flag')) }}
+                                <label for="ldap_invert_active_flag">
+                                    {{ trans('admin/settings/general.ldap_invert_active_flag') }}
+                                </label>
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
                                     <input type="checkbox" name="ldap_invert_active_flag" value="1" id="ldap_invert_active_flag" @checked(old('ldap_invert_active_flag', $setting->ldap_invert_active_flag)) />
-                                    <p class="help-block">{!! trans('admin/settings/general.ldap_invert_active_flag_help') !!}</p>
+                                    {{ trans('general.yes') }}
                                 </label>
                                 @error('ldap_invert_active_flag')
-                                    <span class="alert-msg">
+                                <span class="alert-msg">
                                          <x-icon type="x" />
                                         {{ $message }}
                                     </span>
                                 @enderror
 
+                                <p class="help-block">
+                                    {!! trans('admin/settings/general.ldap_invert_active_flag_help') !!}
+                                </p>
+
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning">
                                         <x-icon type="locked" />
-                                        {{ trans('general.feature_disabled') }}
+                                        {!! trans('general.feature_disabled') !!}
                                     </p>
                                 @endif
                             </div>
+
                         </div>
 
                         <!-- LDAP emp number -->
