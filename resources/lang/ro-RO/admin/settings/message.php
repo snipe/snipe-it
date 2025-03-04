@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testare autentificare LDAP...',
         'authentication_success' => 'Utilizatorul s-a autentificat cu succes împotriva LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Se trimite mesajul de testare :app...',
         'success' => 'Integrarea ta :webhook_name funcționează!',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'EROARE: 301/302 :endpoint returnează o redirecționare. Din motive de securitate, nu urmărim redirecționările. Vă rugăm să folosiți obiectivul final.',
         'error_misc' => 'Ceva nu a mers bine. :( ',
         'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

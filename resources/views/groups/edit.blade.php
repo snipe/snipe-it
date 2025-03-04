@@ -54,12 +54,29 @@
 @section('inputFields')
 <!-- Name -->
 <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-    <label for="name" class="col-md-3 control-label">{{ trans('admin/groups/titles.group_name') }}</label>
-    <div class="col-md-6 required">
+    <label for="name" class="col-md-2 control-label">{{ trans('admin/groups/titles.group_name') }}</label>
+    <div class="col-md-9 required">
         <input class="form-control" type="text" name="name" id="name" value="{{ old('name', $group->name) }}" required />
         {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
+
+<div class="form-group{!! $errors->has('notes') ? ' has-error' : '' !!}">
+    <label for="notes" class="col-md-2 control-label">{{ trans('general.notes') }}</label>
+    <div class="col-md-9">
+        <x-input.textarea
+                name="notes"
+                id="notes"
+                :value="old('notes', $group->notes)"
+                placeholder="{{ trans('general.placeholders.notes') }}"
+                aria-label="notes"
+                rows="2"
+        />
+
+        {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+    </div>
+</div>
+
 <div class="col-md-12">
 
     <table class="table table-striped permissions">

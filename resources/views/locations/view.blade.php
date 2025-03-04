@@ -314,11 +314,13 @@
               </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="accessories_assigned">
-                  <h2 class="box-title">
-                      Assigned Accessories
-                  </h2>
 
                   <div class="table table-responsive">
+
+                      <h2 class="box-title" style="float:left">
+                          {{ trans('general.accessories_assigned') }}
+                      </h2>
+
                       <table
                               data-columns="{{ \App\Presenters\LocationPresenter::assignedAccessoriesDataTableLayout() }}"
                               data-cookie-id-table="accessoriesAssignedListingTable"

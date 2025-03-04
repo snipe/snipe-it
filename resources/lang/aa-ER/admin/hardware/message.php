@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'crwdns746:0crwdne746:0',
         'error'   		=> 'crwdns747:0crwdne747:0',
+        'assigned_to_error' => 'crwdns12925:0{1}crwdne12925:0',
         'nothing_updated'   => 'crwdns1876:0crwdne1876:0',
         'success' 		=> 'crwdns748:0crwdne748:0',
     ],

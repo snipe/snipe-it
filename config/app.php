@@ -242,7 +242,7 @@ return [
     |
     */
 
-    'min_php' => '8.1.2',
+    'min_php' => '8.2.0',
 
 
     /*
@@ -316,6 +316,7 @@ return [
         App\Providers\LivewireServiceProvider::class,
         App\Providers\MacroServiceProvider::class,
         App\Providers\SamlServiceProvider::class,
+        App\Providers\BreadcrumbsServiceProvider::class,
 
     ],
 

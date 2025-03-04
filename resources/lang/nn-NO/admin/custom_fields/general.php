@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Opprett nytt egendefinert felt',
     'value_encrypted'      	        => 'Verdien i dette feltet er kryptert i databasen. Bare administratorer kan se hva som står i dette feltet',
     'show_in_email'     => 'Inkluder verdien i dette feltet i utsjekkseposter sendt til brukeren? Krypterte felter kan ikke inkluderes i eposter',
-    'show_in_email_short'     => 'Inkludere i epost.',
+    'show_in_email_short' => 'Inkludere i epost',
     'help_text' => 'Hjelpetekst',
     'help_text_description' => 'Dette er en valgfri tekst som vises under feltet når man redigerer et element, ment for å gi kontekst til feltets innhold.',
     'about_custom_fields_title' => 'Om egendefinerte felt',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Vis i liste over ressurser som kan være tilgjengelig på forespørsel',
     'show_in_requestable_list' => 'Vis verdi i listen over ressurser som kan være tilgjengelig på forspørsel. Krypterte felter vises ikke',
     'encrypted_options' => 'Feltet er kryptert, så noen visningsalternativer er ikke tilgjengelig.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

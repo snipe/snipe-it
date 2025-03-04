@@ -19,6 +19,8 @@ return [
     'print_assigned'    => 'Az összes hozzárendelt nyomtatása',
     'email_assigned'    => 'A hozzárendeltek e-mail listája',
     'user_notified'     => 'A felhasználó e-mailben megkapta az aktuálisan hozzárendelt elemek listáját.',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Include this user when auto-assigning eligible licenses',
     'auto_assign_help'  => 'Felhasználó kihagyása a licencek automatikus hozzárendelésénél',
     'software_user'     => 'Szoftver ellenőrzése: név',

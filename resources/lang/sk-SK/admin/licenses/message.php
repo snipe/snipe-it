@@ -41,17 +41,17 @@ return array(
     ),
 
     'checkout' => array(
-        'error'   => 'Pri priraďovaní licencie nastala chyba. Skúste prosím znovu.',
-        'success' => 'Licencia bola úspešne priradená',
-        'not_enough_seats' => 'Nedostatok licenčných miest pre priradenie',
-        'mismatch' => 'Poskytnuté licenčne miest sa nezhodujú s licenciou',
-        'unavailable' => 'Toto miesto nie je dostupné pre priradenie.',
+        'error'   => 'Pri odovzdaní licencie nastala chyba. Skúste prosím znovu.',
+        'success' => 'Licencia bola úspešne odovzdaná',
+        'not_enough_seats' => 'Nedostatok licenčných miest pre odovzdanie',
+        'mismatch' => 'Poskytnutý licenčný slot sa nezhoduje s licenciou',
+        'unavailable' => 'Tento slot nie je dostupné pre odovzdanie.',
     ),
 
     'checkin' => array(
-        'error'   => 'Pri odoberaní licencie nastala chyba. Skúste prosím znovu.',
+        'error'   => 'Pri prevzatí licencie nastala chyba. Skúste prosím znovu.',
         'not_reassignable' => 'Licencia nie je preraditeľná',
-        'success' => 'Licencia bola úspešne odobratá'
+        'success' => 'Licencia bola úspešne prevzatá'
     ),
 
 );

@@ -19,8 +19,15 @@
         <div class="col-md-3">
             @if ($fieldset_id)
                 <label class="form-control">
-
-                    {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values', 'disabled' => $this->fields->isEmpty()]) }}
+                    <input
+                        type="checkbox"
+                        name="add_default_values"
+                        value="1"
+                        id="add_default_values"
+                        wire:model.live="add_default_values"
+                        data-livewire-component="{{ $this->getId() }}"
+                        @disabled($this->fields->isEmpty())
+                    />
                     {{ trans('admin/models/general.add_default_values') }}
                 </label>
             @endif

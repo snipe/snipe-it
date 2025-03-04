@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Тестирање LDAP Автентификација...',
         'authentication_success' => 'Автентификацијата на корисникот на LDAP е успешна!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Испраќање :app тест порака...',
         'success' => 'Вашата :webhook_name Интеграција работи!',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'ГРЕШКА: 301/302 :endpoint враќа пренасочување. Од безбедносни причини, ние не ги следиме пренасочувањата. Ве молиме користете директна крајна точка.',
         'error_misc' => 'Нешто не е во ред. :( ',
         'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

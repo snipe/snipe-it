@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'Ang Natitira',
     'total' 			                 => 'Ang Kabuuan',
     'update'                            => 'I-update ang Komponent',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'Ang bilang ng nai-check in ay dapat pareho o mas mababa sa :assigned_qty'
 );

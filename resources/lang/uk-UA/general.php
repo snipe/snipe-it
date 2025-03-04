@@ -10,7 +10,7 @@ return [
     'action'                => 'Дія',
     'activity_report'		=> 'Звіт про діяльність',
     'address'				=> 'Адреса',
-    'admin'					=> 'Адміністратор',
+    'admin'					=> 'Адміністративні налаштування',
     'admin_tooltip'			=> 'Цей користувач має права адміністратора',
     'superuser'				=> 'Суперкористувач',
     'superuser_tooltip'		=> 'Цей користувач має права суперкористувача',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Активів доступно',
     'accept_assets'         => 'Прийняти :name',
     'accept_assets_menu'    => 'Прийняти активи',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Аудит',
     'audit_report'			=> 'Історія активності',
     'assets'				=> 'Активи',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'Запис створено',
     'updated_at' 			=> 'Оновлено',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Валюта', //
     'current'  				=> 'Поточний',
     'current_password'      => 'Поточний пароль',
     'customize_report'      => 'Налаштувати звіт',
     'custom_report'         => 'Персоналізований звіт про активи',
     'dashboard'				=> 'Дашборд',
+    'data_source'           => 'Data Source',
     'days'      			=> 'днів',
     'days_to_next_audit'    => 'Дні до наступного аудиту',
     'date'					=> 'Дата',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Прізвище (jane_smith@example.com)',
     'lastnamefirstinitial_format' =>  'Прізвище Першою початковою (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Перше початкове ім\'я (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'Прізвище (Jane Smith)',
     'lastname_firstname_display'	=> 'Прізвище Ім\'я (Ковальська Січка)',
     'name_display_format'	=> 'Формат відображення імені',
@@ -217,6 +221,8 @@ return [
     'no'  					=> 'Ні',
     'notes'  				=> 'Примітки.',
     'note_added'            => 'Примітку додано',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Додати примітку',
     'note_edited'            => 'Нотатку відредаговано',
     'edit_note'              => 'Редагувати примітку',
@@ -333,10 +339,10 @@ return [
     'token_expired'         => 'Ваша login-сесія закінчилась. Будь ласка, увійдіть в систему знову.',
     'login_enabled'         => 'Вхід дозволено',
     'audit_due'             => 'Належно від аудиту',
-    'audit_due_days'        => 'Збитки в призначенні для аудиту протягом :days |Активи в строку аудиту протягом :days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Одержувач входу',
     'checkin_overdue'       => 'Прострочено для входу',
-    'checkin_due_days'      => 'Залежні Активи для оформлення протягом :days Дня|Активів в рамках :days днів',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Прострочені для аудиту',
     'accept'                => 'Прийняти :asset',
     'i_accept'              => 'Я приймаю',
@@ -561,6 +567,7 @@ return [
         'consumables'  => ':count витратно|:count витратних товарів',
         'components'  => ':count компонент|:count компонентів',
     ],
+
     'more_info' => 'Детальніше',
     'quickscan_bulk_help' => 'Поставивши цю позначку, ви зміните запис активу, щоб він відображав нове розташування. Якщо залишити поле без позначки, розташування буде лише зафіксовано в журналі аудиту. Зверніть увагу, що якщо актив перебуває в статусі "видано", це не змінить місцеперебування особи, активу чи місця, куди його видано.',
     'whoops' => 'Упс!',
@@ -573,8 +580,24 @@ return [
     'import_asset_tag_exists' => 'Медіафайл з тегом активів :asset_tag вже існує, і оновлення не було запитано. Зміни не були зроблені.',
     'countries_manually_entered_help' => 'Значення з зірочкою (*) були введені вручну і не збігаються з існуючими значеннями ISO 3166',
     'accessories_assigned' => 'Призначені аксесуари',
-    'user_managed_passwords' => 'Password Management',
-    'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
-    'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'user_managed_passwords' => 'Керування паролями',
+    'user_managed_passwords_disallow' => 'Заборонити користувачам керувати власними паролями',
+    'user_managed_passwords_allow' => 'Дозволити користувачам керувати своїми паролями',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

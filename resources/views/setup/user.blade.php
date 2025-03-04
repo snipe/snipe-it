@@ -21,7 +21,7 @@
         <label for="site_name">
           {{ trans('general.site_name') }}
         </label>
-        {{ Form::text('site_name', old('site_name'), array('class' => 'form-control','placeholder' => 'Snipe-IT Asset Management', 'required' => true)) }}
+        <input class="form-control" placeholder="Snipe-IT Asset Management" required="" name="site_name" type="text" value="{{ old('site_name') }}">
 
         {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
@@ -41,7 +41,7 @@
     <!-- Currency -->
     <div class="form-group col-lg-6{{$errors->has('default_currency') ? ' error' : ''}}">
       <label for="default_currency">{{ trans('admin/settings/general.default_currency') }}</label>
-      {{ Form::text('default_currency', old('default_currency'), array('class' => 'form-control','placeholder' => 'USD', 'maxlength'=>'3', 'style'=>'width: 60px;')) }}
+      <input class="form-control" placeholder="USD" maxlength="3" style="width: 60px;" name="default_currency" type="text" id="default_currency" value="{{ old('default_currency') }}">
 
       {!! $errors->first('default_currency', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
@@ -72,14 +72,14 @@
 
     <div class="form-group col-lg-6{{ $errors->has('auto_increment_prefix') ? ' error' : '' }}">
       <label for="auto_increment_prefix">{{ trans('admin/settings/general.auto_increment_prefix') }}</label>
-      {{ Form::text('auto_increment_prefix', old('auto_increment_prefix'), array('class' => 'form-control')) }}
+      <input class="form-control" name="auto_increment_prefix" type="text" id="auto_increment_prefix" value="{{ old('auto_increment_prefix') }}">
 
       {!! $errors->first('auto_increment_prefix', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 
     <div class="form-group col-lg-6{{ $errors->has('zerofill_count') ? ' error' : '' }}">
       <label for="zerofill_count">{{ trans('admin/settings/general.zerofill_count') }}</label>
-      {{ Form::text('zerofill_count', old('zerofill_count', 5), array('class' => 'form-control')) }}
+      <input class="form-control" name="zerofill_count" type="text" value="{{ old('zerofill_count', 5) }}" id="zerofill_count">
 
       {!! $errors->first('zerofill_count', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
@@ -90,7 +90,7 @@
     <div class="row">
       <div class="form-group col-lg-6 required {{ $errors->has('email_domain') ? 'error' : '' }}">
         <label for="email_domain">{{ trans('general.email_domain') }}</label>
-        {{ Form::text('email_domain', old('email_domain'), array('class' => 'form-control','placeholder' => 'example.com','required' => true)) }}
+        <input class="form-control" placeholder="example.com" required="" name="email_domain" type="text" id="email_domain" value="{{ old('email_domain') }}">
         <span class="help-block">{{ trans('general.email_domain_help')  }}</span>
 
         {!! $errors->first('email_domain', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -109,14 +109,14 @@
       <!-- first name -->
       <div class="form-group col-lg-6">
         <label for="first_name">{{ trans('general.first_name') }}</label>
-        {{ Form::text('first_name', old('first_name'), array('class' => 'form-control','placeholder' => 'Jane', 'required' => true)) }}
+        <input class="form-control" placeholder="Jane" required="" name="first_name" type="text" id="first_name" value="{{ old('first_name') }}">
         {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
 
       <!-- last name -->
       <div class="form-group col-lg-6 required {{ $errors->has('last_name') ? 'error' : '' }}">
         <label for="last_name">{{ trans('general.last_name') }}</label>
-        {{ Form::text('last_name', old('last_name'), array('class' => 'form-control','placeholder' => 'Smith', 'required' => true)) }}
+        <input class="form-control" placeholder="Smith" required="" name="last_name" type="text" id="last_name" value="{{ old('last_name') }}">
         {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
     </div>
@@ -124,7 +124,7 @@
     <div class="row">
       <!-- email-->
       <div class="form-group col-lg-6{{ $errors->has('email') ? 'error' : '' }}">
-        <label for="email">{{ trans('admin/users/table.email') }}</label>       
+        <label for="email">{{ trans('admin/users/table.email') }}</label>
         <input class="form-control" type="email" name="email" id="email" value="{{ old('email', config('mail.from.address')) }}" placeholder="you@example.com" required>
         {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
@@ -132,7 +132,7 @@
       <!-- username -->
       <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'username')) ? ' required' : '' }} {{ $errors->has('username') ? 'error' : '' }}">
         <label for="username">{{ trans('admin/users/table.username') }}</label>
-        {{ Form::text('username', old('username'), array('class' => 'form-control','placeholder' => 'jsmith', 'required' => true)) }}
+        <input class="form-control" placeholder="jsmith" required="" name="username" type="text" id="username" value="{{ old('username') }}">
         {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
     </div>

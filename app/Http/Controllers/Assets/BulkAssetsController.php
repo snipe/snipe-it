@@ -358,7 +358,11 @@ class BulkAssetsController extends Controller
                  * to someone/something.
                  */
                 if ($request->filled('status_id')) {
-                    $updated_status = Statuslabel::find($request->input('status_id'));
+                    try {
+                        $updated_status = Statuslabel::findOrFail($request->input('status_id'));
+                    } catch (ModelNotFoundException $e) {
+                        return redirect($bulk_back_url)->with('error', trans('admin/statuslabels/message.does_not_exist'));
+                    }
 
                     // We cannot assign a non-deployable status type if the asset is already assigned.
                     // This could probably be added to a form request.
@@ -366,7 +370,7 @@ class BulkAssetsController extends Controller
                     // Otherwise we need to make sure the status type is still a deployable one.
                     if (
                         ($asset->assigned_to == '')
-                        || ($updated_status->deployable == '1') && ($asset->assetstatus->deployable == '1')
+                        || ($updated_status->deployable == '1') && ($asset->assetstatus?->deployable == '1')
                     ) {
                         $this->update_array['status_id'] = $updated_status->id;
                     }
@@ -525,21 +529,31 @@ class BulkAssetsController extends Controller
         $this->authorize('delete', Asset::class);
 
         $bulk_back_url = route('hardware.index');
+
         if ($request->session()->has('bulk_back_url')) {
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
+        $assetIds = $request->get('ids');
 
-        if ($request->filled('ids')) {
-            $assets = Asset::find($request->get('ids'));
-            foreach ($assets as $asset) {
-                $asset->delete();
-            } // endforeach
-
-            return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.delete.success'));
-            // no values given, nothing to update
+        if(empty($assetIds)) {
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.delete.nothing_updated'));
         }
 
-        return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.delete.nothing_updated'));
+        $assignedAssets = Asset::whereIn('id', $assetIds)->whereNotNull('assigned_to')->get();
+        if($assignedAssets->isNotEmpty()) {
+
+            //if assets are checked out, return a list of asset tags that would need to be checked in first.
+            $assetTags = $assignedAssets->pluck('asset_tag')->implode(', ');
+            return redirect($bulk_back_url)->with('error', trans_choice('admin/hardware/message.delete.assigned_to_error', $assignedAssets->count(), ['asset_tag' => $assetTags] ));
+        }
+
+        foreach (Asset::wherein('id', $assetIds)->get() as $asset) {
+                $asset->delete();
+            }
+
+        return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.delete.success'));
+            // no values given, nothing to update
+
     }
 
     /**

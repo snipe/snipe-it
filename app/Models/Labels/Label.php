@@ -411,14 +411,14 @@ abstract class Label
     /**
      * Checks the template is internally valid
      */
-    public final function validate() {
+    public final function validate() : void {
         $this->validateUnits();
         $this->validateSize();
         $this->validateMargins();
         $this->validateSupport();
     }
 
-    private function validateUnits() {
+    private function validateUnits() : void {
         $validUnits = [ 'pt', 'mm', 'cm', 'in' ];
         $unit = $this->getUnit();
         if (!in_array(strtolower($unit), $validUnits)) {
@@ -430,7 +430,7 @@ abstract class Label
         }
     }
 
-    private function validateSize() {
+    private function validateSize() : void {
         $width = $this->getWidth();
         if (!is_numeric($width) || is_string($width)) {
             throw new \UnexpectedValueException(trans('admin/labels/message.invalid_return_type', [
@@ -450,7 +450,7 @@ abstract class Label
         }
     }
 
-    private function validateMargins() {
+    private function validateMargins() : void {
         $marginTop = $this->getMarginTop();
         if (!is_numeric($marginTop) || is_string($marginTop)) {
             throw new \UnexpectedValueException(trans('admin/labels/message.invalid_return_type', [
@@ -488,7 +488,7 @@ abstract class Label
         }
     }
 
-    private function validateSupport() {
+    private function validateSupport() : void {
         $support1D = $this->getSupport1DBarcode();
         if (!is_bool($support1D)) {
             throw new \UnexpectedValueException(trans('admin/labels/message.invalid_return_type', [

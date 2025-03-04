@@ -19,6 +19,8 @@ return [
     'print_assigned'    => 'Vypsat všechna přiřazení',
     'email_assigned'    => 'Odeslat seznam aktuálně přiřazeného majetku',
     'user_notified'     => 'Uživateli byl zaslán e-mail se seznamem aktuálně přiřazeného majetku.',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Zahrnout tohoto uživatele do automatického přiřazování licencí',
     'auto_assign_help'  => 'Nezahrnout tohoto uživatele do automatického přiřazování licencí',
     'software_user'     => 'Software vydaný pro :name',

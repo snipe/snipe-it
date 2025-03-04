@@ -3,12 +3,14 @@
 
         @if (request('status')!='deleted')
 
-            {{ Form::open([
-              'method' => 'POST',
-              'route' => ['users/bulkedit'],
-              'class' => 'form-inline',
-              'id' => 'usersBulkForm']) }}
-
+            <form
+                method="POST"
+                action="{{ route('users/bulkedit') }}"
+                accept-charset="UTF-8"
+                class="form-inline"
+                id="usersBulkForm"
+            >
+            @csrf
 
             <div id="users-toolbar" style="width:100% !important;">
                 <label for="bulk_actions" class="sr-only">{{ trans('general.bulk_actions') }}</label>
@@ -16,6 +18,7 @@
 
                     @can('update', \App\Models\User::class)
                         <option value="edit">{{ trans('general.bulk_edit') }}</option>
+                        <option value="send_assigned">{{ trans('admin/users/general.email_assigned') }}</option>
                     @endcan
 
                     @can('delete', \App\Models\User::class)
@@ -28,7 +31,7 @@
                 </select>
                 <button class="btn btn-primary" id="bulkUserEditButton" disabled>{{ trans('button.go') }}</button>
             </div>
-            {{ Form::close() }}
+            </form>
         @endif
 
     </div>

@@ -199,7 +199,7 @@
       <div class="col-md-12">
         {!! nl2br(Helper::parseEscapedMarkedownInline($component->notes)) !!}
       </div>
-    </div>
+
     @endif
 
   @can('update', $component)
@@ -211,7 +211,7 @@
     </div>
   @endcan
 
-  @can('checkout', Component::class)
+  @can('checkout', $component)
     <div class="col-md-12 hidden-print" style="padding-top: 5px;">
             <a href="{{ route('components.checkout.show', $component->id)  }}" class="btn btn-sm bg-maroon btn-social btn-block hidden-print">
                  <x-icon type="checkout" />

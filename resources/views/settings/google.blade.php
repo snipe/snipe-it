@@ -16,7 +16,7 @@
 
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.google.save') }}" accept-charset="UTF-8" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -54,7 +54,7 @@
                             <div class="col-md-8 col-md-offset-3">
                                 <label class="form-control{{ (config('app.lock_passwords')===true) ? ' form-control--disabled': '' }}">
                                     <span class="sr-only">{{ trans('admin/settings/general.pwd_secure_uncommon') }}</span>
-                                    {{ Form::checkbox('google_login', '1', old('google_login', $setting->google_login),array('aria-label'=>'google_login', (config('app.lock_passwords')===true) ? 'disabled': '')) }}
+                                    <input type="checkbox" name="google_login" value="1" @checked(old('google_login', $setting->google_login)) @disabled(config('app.lock_passwords')) aria-label="google_login">
                                     {{ trans('admin/settings/general.enable_google_login') }}
                                 </label>
                                 <p class="help-block">{{ trans('admin/settings/general.enable_google_login_help') }}</p>
@@ -68,7 +68,15 @@
                                 <label for="google_client_id">Client ID</label>
                             </div>
                             <div class="col-md-8">
-                                {{ Form::text('google_client_id', old('google_client_id', $setting->google_client_id), ['class' => 'form-control','placeholder' => trans('general.example') .'000000000000-XXXXXXXXXXX.apps.googleusercontent.com', (config('app.lock_passwords')===true) ? 'disabled': '']) }}
+                                <input
+                                    class="form-control"
+                                    placeholder="{{ trans('general.example') .'000000000000-XXXXXXXXXXX.apps.googleusercontent.com' }}"
+                                    name="google_client_id"
+                                    type="text"
+                                    id="google_client_id"
+                                    value="{{ old('google_client_id', $setting->google_client_id) }}"
+                                    @disabled(config('app.lock_passwords')===true)
+                                >
                                 {!! $errors->first('google_client_id', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @if (config('app.lock_passwords')===true)
                                     <p class="text-warning"><i class="fas fa-lock" aria-hidden="true"></i> {{ trans('general.feature_disabled') }}</p>
@@ -84,9 +92,9 @@
                             <div class="col-md-8">
 
                                 @if (config('app.lock_passwords')===true)
-                                    {{ Form::text('google_client_secret', 'XXXXXXXXXXXXXXXXXXXXXXX', ['class' => 'form-control', 'disabled']) }}
+                                    <input class="form-control" disabled="" name="google_client_secret" type="text" value="XXXXXXXXXXXXXXXXXXXXXXX" id="google_client_secret">
                                 @else
-                                    {{ Form::text('google_client_secret', old('google_client_secret', $setting->google_client_secret), ['class' => 'form-control','placeholder' => trans('general.example') .'XXXXXXXXXXXX']) }}
+                                    <input class="form-control" placeholder="{{ trans('general.example') .'XXXXXXXXXXXX' }}" name="google_client_secret" type="text" id="google_client_secret" value="{{ old('google_client_secret', $setting->google_client_secret) }}">
                                 @endif
 
                                 {!! $errors->first('google_client_secret', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -113,6 +121,6 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop

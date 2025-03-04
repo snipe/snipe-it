@@ -142,6 +142,12 @@
                             </div>
                         </div>
 
+                        <!-- Custom fields -->
+                        @include("models/custom_fields_form", [
+                                'model' => $asset->model,
+                                'show_display_checkout_fields' => 'true'
+                        ])
+
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                             <label for="note" class="col-md-3 control-label">

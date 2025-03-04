@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'இந்த சொத்தை நிச்சயமாக நீக்க விரும்புகிறீர்களா?',
         'error'   		=> 'சொத்தை நீக்குவதில் ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'சொத்துகள் எதுவும் தேர்ந்தெடுக்கப்படவில்லை, எனவே எதுவும் நீக்கப்படவில்லை.',
         'success' 		=> 'சொத்து வெற்றிகரமாக நீக்கப்பட்டது.',
     ],

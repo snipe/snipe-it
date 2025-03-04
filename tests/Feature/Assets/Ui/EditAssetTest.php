@@ -27,7 +27,7 @@ class EditAssetTest extends TestCase
     {
         $asset = Asset::factory()->create();
         $user = User::factory()->editAssets()->create();
-        $response = $this->actingAs($user)->get(route('hardware.edit', $asset->id));
+        $response = $this->actingAs($user)->get(route('hardware.edit', $asset));
         $response->assertStatus(200);
     }
 
@@ -63,7 +63,7 @@ class EditAssetTest extends TestCase
                 'model_id' => AssetModel::factory()->create()->id,
             ])
             ->assertStatus(302)
-            ->assertRedirect(route('hardware.show', ['hardware' => $asset->id]));
+            ->assertRedirect(route('hardware.show', $asset));
 
         $this->assertDatabaseHas('assets', ['asset_tag' => 'New Asset Tag']);
     }
@@ -81,8 +81,8 @@ class EditAssetTest extends TestCase
         $currentTimestamp = now();
 
         $this->actingAs(User::factory()->viewAssets()->editAssets()->create())
-            ->from(route('hardware.edit', $asset->id))
-            ->put(route('hardware.update', $asset->id), [
+            ->from(route('hardware.edit', $asset))
+            ->put(route('hardware.update', $asset), [
                     'status_id' => $achived_status->id,
                     'model_id' => $asset->model_id,
                     'asset_tags' => $asset->asset_tag,
