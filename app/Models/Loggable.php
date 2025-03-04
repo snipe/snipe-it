@@ -6,6 +6,8 @@ use App\Models\Setting;
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
+use Osama\LaravelTeamsNotification\TeamsNotification;
 
 trait Loggable
 {
@@ -242,7 +244,14 @@ trait Loggable
             'location' => ($location) ? $location->name : '',
             'note' => $note,
         ];
-        Setting::getSettings()->notify(new AuditNotification($params));
+        if(Setting::getSettings()->webhook_selected === 'microsoft' && Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')){
+            $message = AuditNotification::toMicrosoftTeams($params);
+            $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+            $notification->success()->sendMessage($message[0], $message[1]);
+        }
+        else {
+            Setting::getSettings()->notify(new AuditNotification($params));
+        }
 
         return $log;
     }
