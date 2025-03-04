@@ -599,5 +599,6 @@ return [
     'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
     'deleted_models' => 'Deleted Asset Models',
     'deleted_users' => 'Deleted Users',
+    'cost_each' => ':amount each',
 
 ];

@@ -261,7 +261,7 @@ if ($env_bad !='') {
 
 if(!$skip_php_checks){
     echo "\n\e[95m--------------------------------------------------------\n";
-    echo "STEP 2: Checking PHP requirements: (Required PHP >=". $php_min_works. " - <".$php_max_wontwork.") \e[39m\n";
+    echo "STEP 2: Checking PHP requirements: (Required PHP >=". $php_min_works. " - <".$php_max_wontwork.")\n";
     echo "--------------------------------------------------------\e[39m\n\n";
 
     if ((version_compare(phpversion(), $php_min_works, '>=')) && (version_compare(phpversion(), $php_max_wontwork, '<'))) {
@@ -540,7 +540,7 @@ echo "--------------------------------------------------------\e[39m\n\n";
 exec('php artisan down',  $down_results, $return_code);
 echo '-- ' . implode("\n", $down_results) . "\n";
 if ($return_code > 0) {
-    die("Something went wrong with downing your site. This can't be good. Please investigate the error. Aborting!n\n");
+    die("Something went wrong with downing your site. This can't be good. Please investigate the error. Aborting!\n\n");
 }
 unset($return_code);
 
