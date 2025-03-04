@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
+use App\Models\AssetModel;
 
 class ModalController extends Controller
 {
@@ -42,7 +43,11 @@ class ModalController extends Controller
 
             if ($type == "statuslabel") {
             $view->with('statuslabel_types', Helper::statusTypeList());
-        }
+            }
+            if ($type == "model") {
+                $view->with('depreciation_list', Helper::depreciationList())
+                     ->with('item', new AssetModel);
+            }
         if (in_array($type, ['kit-model', 'kit-license', 'kit-consumable', 'kit-accessory'])) {
             $view->with('kitId', $itemId);
             }
