@@ -28,6 +28,7 @@ class LdapSettingsTest extends TestCase
                 'ldap_basedn' => 'uid=',
                 'ldap_fname_field' => 'SomeFirstnameField',
                 'ldap_server' => 'ldaps://ldap.example.com',
+                'ldap_invert_active_flag' => 0,
             ]))
             ->assertStatus(302)
             ->assertValid('ldap_enabled')
