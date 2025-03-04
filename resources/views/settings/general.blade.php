@@ -364,9 +364,12 @@
                                <label for="show_in_model_list">{{ trans('general.pie_chart_type') }}</label>
                            </div>
                            <div class="col-md-9">
-                               {{ Form::select('dash_chart_type', array(
-                                   'name' => 'Status Label Name',
-                                   'type' => 'Status Label Type'), old('dash_chart_type', $setting->dash_chart_type), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                               <x-input.select
+                                   name="dash_chart_type"
+                                   :options="['name' => 'Status Label Name', 'type' => 'Status Label Type']"
+                                   :selected="old('dash_chart_type', $setting->dash_chart_type)"
+                                   style="width: 80%"
+                               />
                            </div>
                        </div>
 
@@ -377,11 +380,13 @@
                                <label for="depreciation_method">{{ trans('admin/depreciations/general.depreciation_method') }}</label>
                            </div>
                            <div class="col-md-9">
-                               {{ Form::select('depreciation_method', array(
-                                    'default' => trans('admin/depreciations/general.linear_depreciation'),
-                                    'half_1' => trans('admin/depreciations/general.half_1'),
-                                    'half_2' => trans('admin/depreciations/general.half_2'),
-                                ), old('username_format', $setting->depreciation_method), ['class' =>'select2', 'style' => 'width: 80%']) }}
+                               <x-input.select
+                                   name="depreciation_method"
+                                   id="depreciation_method"
+                                   :options="['default' => trans('admin/depreciations/general.linear_depreciation'), 'half_1' => trans('admin/depreciations/general.half_1'), 'half_2' => trans('admin/depreciations/general.half_2')]"
+                                   :selected="old('depreciation_method', $setting->depreciation_method)"
+                                   style="width: 80%"
+                               />
                            </div>
                        </div>
                        <!-- /.form-group -->

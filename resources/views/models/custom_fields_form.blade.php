@@ -17,8 +17,13 @@
 
               @if ($field->element=='listbox')
                   <!-- Listbox -->
-                   {{ Form::select($field->db_column_name(), $field->formatFieldValuesAsArray(),
-                  old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))), ['class' => 'format select2 form-control',  ($field->pivot->required=='1' ? ' required' : '') ]) }}
+                  <x-input.select
+                      :name="$field->db_column_name()"
+                      :options="$field->formatFieldValuesAsArray()"
+                      :selected="old($field->db_column_name(), (isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id)))"
+                      :required="$field->pivot->required == '1'"
+                      class="format form-control"
+                  />
 
               @elseif ($field->element=='textarea')
                   <!-- Textarea -->
