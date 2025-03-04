@@ -127,7 +127,7 @@ class Handler extends ExceptionHandler
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
 
             // This gets the MVC model name from the exception and formats in a way that's less fugly
-            $model_name = implode(" ", preg_split('/(?=[A-Z])/', last(explode('\\', $e->getModel()))));
+            $model_name = strtolower(implode(" ", preg_split('/(?=[A-Z])/', last(explode('\\', $e->getModel())))));
             $route = str_plural(strtolower(last(explode('\\', $e->getModel())))).'.index';
 
             // Sigh.
