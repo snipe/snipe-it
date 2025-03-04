@@ -150,7 +150,7 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 
 
 echo "\e[95m--------------------------------------------------------\n";
-echo "STEP 1: Checking .env file: ".getcwd()."/.env \n";
+echo "STEP 1: Checking .env file: \n";
 echo "--------------------------------------------------------\e[39m\n\n";
 
 
