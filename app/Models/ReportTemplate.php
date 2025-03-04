@@ -44,44 +44,6 @@ class ReportTemplate extends Model
                 $builder->where('created_by', auth()->id());
             }
         });
-
-        static::created(function (ReportTemplate $reportTemplate) {
-            $logAction = new Actionlog([
-                'item_type' => ReportTemplate::class,
-                'item_id' => $reportTemplate->id,
-                'created_by' => auth()->id(),
-            ]);
-
-            $logAction->logaction('create');
-        });
-
-        static::updated(function (ReportTemplate $reportTemplate) {
-            $changed = [];
-
-            foreach ($reportTemplate->getDirty() as $key => $value) {
-                $changed[$key] = [
-                    'old' => $reportTemplate->getOriginal($key),
-                    'new' => $reportTemplate->getAttribute($key),
-                ];
-            }
-
-            $logAction = new Actionlog();
-            $logAction->item_type = ReportTemplate::class;
-            $logAction->item_id = $reportTemplate->id;
-            $logAction->created_by = auth()->id();
-            $logAction->log_meta = json_encode($changed);
-            $logAction->logaction('update');
-        });
-
-        static::deleted(function (ReportTemplate $reportTemplate) {
-            $logAction = new Actionlog([
-                'item_type' => ReportTemplate::class,
-                'item_id' => $reportTemplate->id,
-                'created_by' => auth()->id(),
-            ]);
-
-            $logAction->logaction('delete');
-        });
     }
 
     /**
