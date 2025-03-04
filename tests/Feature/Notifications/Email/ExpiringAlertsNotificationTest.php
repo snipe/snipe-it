@@ -31,12 +31,14 @@ class ExpiringAlertsNotificationTest extends TestCase
              'archived' => 0,
              'deleted_at' => null,
          ]);
+
          $expiredAsset = Asset::factory()->create([
              'purchase_date' => now()->subDays(370)->format('Y-m-d'),
              'warranty_months' => 12,
              'archived' => 0,
              'deleted_at' => null,
          ]);
+
          $notExpiringAsset = Asset::factory()->create([
              'purchase_date' => now()->subDays(330)->format('Y-m-d'),
              'warranty_months' => 12,
