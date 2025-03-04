@@ -26,20 +26,19 @@ class ExpiringAlertsNotificationTest extends TestCase
          $alert_email = Setting::first()->alert_email;
 
          $expiringAsset = Asset::factory()->create([
-             'purchase_date' => now()->subMonths(11)->format('Y-m-d'),
+             'purchase_date' => now()->subDays(350)->format('Y-m-d'),
              'warranty_months' => 12,
              'archived' => 0,
              'deleted_at' => null,
          ]);
-
          $expiredAsset = Asset::factory()->create([
-             'purchase_date' => now()->subMonths(13)->format('Y-m-d'),
+             'purchase_date' => now()->subDays(370)->format('Y-m-d'),
              'warranty_months' => 12,
              'archived' => 0,
              'deleted_at' => null,
          ]);
          $notExpiringAsset = Asset::factory()->create([
-             'purchase_date' => now()->subMonths(10)->format('Y-m-d'),
+             'purchase_date' => now()->subDays(330)->format('Y-m-d'),
              'warranty_months' => 12,
              'archived' => 0,
              'deleted_at' => null,
