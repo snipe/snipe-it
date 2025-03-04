@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('settings', function (Blueprint $table) {
-            $table->boolean('ldap_invert_active_flag')->default(false);
+            $table->boolean('ldap_invert_active_flag')->default(0);
         });
     }
 
