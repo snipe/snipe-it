@@ -73,7 +73,8 @@ return [
     'delete' => [
         'confirm'   	=> 'Are you sure you wish to delete this asset?',
         'error'   		=> 'There was an issue deleting the asset. Please try again.',
-        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
+        'assigned_to_error' => 'Asset Tag: :asset_tag is currently checked out. Check in this device before deletion of this asset.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion of these assets.',
+        'parent_assigned_error' => 'Asset Tag: :asset_tag currently has items checked out. Check in all items attached before deletion of this asset.|[2,*]Asset Tags: :asset_tag currently have items checked out. Check in these devices before deletion of these assets.',
         'nothing_updated'   => 'No assets were selected, so nothing was deleted.',
         'success' 		=> 'The asset was deleted successfully.',
     ],
