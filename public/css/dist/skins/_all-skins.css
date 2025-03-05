@@ -966,9 +966,9 @@ a.btn-default:hover,
   /* Use same as Header picker */
   --text-main: #BBB;
   --text-sub: #9b9b9b;
-  --link: #003366;
+  --link: #296282;
   /* Use same as Header picker, lighten by 70% */
-  --visited-link: #0066cc;
+  --visited-link: #5fa4cc;
   /* Use same as Header picker, lighten by 70% */
   --hover-link: #86bad8;
   /* Use same as Header picker, lighten by 70% */
@@ -1016,6 +1016,18 @@ a.settings_button:link,
 a.settings_button:visited,
 a.settings_button:hover {
   color: #3c8dbc;
+}
+a.label.label-default:link {
+  color: #307095;
+  /* Use same as Header picker, lighten by 70% */
+}
+a.label.label-default:visited {
+  color: #23536f;
+  /* Use same as Header picker, lighten by 70% */
+}
+a.label.label-default:hover {
+  background-color: #BBB;
+  color: #296282;
 }
 /*
  * Skin: blue dark
