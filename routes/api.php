@@ -596,15 +596,16 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
     Route::put('/hardware/{asset}', [Api\AssetsController::class, 'update'])->name('api.assets.put-update');
 
+    Route::delete('/hardware/{asset}', [Api\AssetsController::class, 'destroy'])->name('api.assets.destroy');
+
     Route::resource('hardware',
         Api\AssetsController::class,
         ['names' => [
                 'index' => 'api.assets.index',
                 'show' => 'api.assets.show',
                 'store' => 'api.assets.store',
-                'destroy' => 'api.assets.destroy',
             ],
-            'except' => ['create', 'edit', 'update'],
+         'except' => ['create', 'edit', 'update', 'destroy'],
         'parameters' => ['asset' => 'asset_id'],
         ]
         ); // end assets API routes

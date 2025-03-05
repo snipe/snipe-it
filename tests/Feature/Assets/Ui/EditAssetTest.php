@@ -68,13 +68,26 @@ class EditAssetTest extends TestCase
         $this->assertDatabaseHas('assets', ['asset_tag' => 'New Asset Tag']);
     }
 
+    public function test_user_without_permission_is_denied()
+    {
+        $user = User::factory()->create();
+        $asset = Asset::factory()->create();
+
+        $this->actingAs($user)->put(route('hardware.update', $asset), [
+            'name'       => 'New name',
+            'asset_tags' => 'New Asset Tag',
+            'status_id'  => StatusLabel::factory()->create()->id,
+            'model_id'   => AssetModel::factory()->create()->id,
+        ])->assertForbidden();
+    }
+
     public function testNewCheckinIsLoggedIfStatusChangedToUndeployable()
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
         $user = User::factory()->create();
         $deployable_status = Statuslabel::factory()->rtd()->create();
-        $achived_status = Statuslabel::factory()->archived()->create();
+        $archived_status = Statuslabel::factory()->archived()->create();
         $asset = Asset::factory()->assignedToUser($user)->create(['status_id' => $deployable_status->id]);
         $this->assertTrue($asset->assignedTo->is($user));
 
@@ -83,9 +96,9 @@ class EditAssetTest extends TestCase
         $this->actingAs(User::factory()->viewAssets()->editAssets()->create())
             ->from(route('hardware.edit', $asset))
             ->put(route('hardware.update', $asset), [
-                    'status_id' => $achived_status->id,
-                    'model_id' => $asset->model_id,
-                    'asset_tags' => $asset->asset_tag,
+                'status_id'  => $archived_status->id,
+                'model_id'   => $asset->model_id,
+                'asset_tags' => $asset->asset_tag,
                 ],
             )
             ->assertStatus(302);
@@ -95,7 +108,7 @@ class EditAssetTest extends TestCase
         $asset = Asset::find($asset->id);
         $this->assertNull($asset->assigned_to);
         $this->assertNull($asset->assigned_type);
-        $this->assertEquals($achived_status->id, $asset->status_id);
+        $this->assertEquals($archived_status->id, $asset->status_id);
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) use ($currentTimestamp) {
             return Carbon::parse($event->action_date)->diffInSeconds($currentTimestamp) < 2;
