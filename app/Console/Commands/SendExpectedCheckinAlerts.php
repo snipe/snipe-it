@@ -52,7 +52,17 @@ class SendExpectedCheckinAlerts extends Command
 
 
         foreach ($assets as $asset) {
-            if ($asset->assignedTo && (isset($asset->assignedTo->email)) && ($asset->assignedTo->email!='') && $asset->checkedOutToUser()) {
+            if ($asset->assignedTo
+                && (isset($asset->assignedTo->email))
+                && ($asset->assignedTo->email!='')
+                && $asset->checkedOutToUser()) {
+                $email = $asset->assignedTo->email;
+                // Check if the email contains only ASCII characters
+                if (!preg_match('/^[\x00-\x7F]+$/', $email)) {
+                    $this->info("Skipping invalid email: {$email}");
+                    continue;
+                }
+
                 $this->info('Sending User ExpectedCheckinNotification to: '.$asset->assignedTo->email);
                 $asset->assignedTo->notify((new ExpectedCheckinNotification($asset)));
             }
