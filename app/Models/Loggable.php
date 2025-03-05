@@ -224,6 +224,10 @@ trait Loggable
     {
         $log = new Actionlog;
         $location = Location::find($location_id);
+        $settings = Setting::getSettings();
+        if (!$settings) {
+        throw new \RuntimeException('Settings not found.');
+        }
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
             $log->item_id = $this->license_id;
@@ -244,13 +248,13 @@ trait Loggable
             'location' => ($location) ? $location->name : '',
             'note' => $note,
         ];
-        if(Setting::getSettings()->webhook_selected === 'microsoft' && Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')){
+        if($settings->webhook_selected === 'microsoft' && Str::contains($settings->webhook_endpoint, 'workflows')){
             $message = AuditNotification::toMicrosoftTeams($params);
-            $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+            $notification = new TeamsNotification($settings->webhook_endpoint);
             $notification->success()->sendMessage($message[0], $message[1]);
         }
-        else {
-            Setting::getSettings()->notify(new AuditNotification($params));
+        else if($settings->webhook_endpoint !== null) {
+            $settings->notify(new AuditNotification($params));
         }
 
         return $log;
