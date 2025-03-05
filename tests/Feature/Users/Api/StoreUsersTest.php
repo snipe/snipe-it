@@ -57,4 +57,22 @@ class StoreUsersTest extends TestCase
                 $json->has('messages.department_id')->etc();
             });
     }
+
+    public function testCanStoreUser()
+    {
+        $this->actingAsForApi(User::factory()->createUsers()->create())
+            ->postJson(route('api.users.store'), [
+                'first_name' => 'Darth',
+                'username' => 'darthvader',
+                'password' => 'darth_password',
+                'password_confirmation' => 'darth_password',
+            ])
+            ->assertStatusMessageIs('success')
+            ->assertOk();
+
+        $this->assertDatabaseHas('users', [
+            'first_name' => 'Darth',
+            'username' => 'darthvader',
+        ]);
+    }
 }
