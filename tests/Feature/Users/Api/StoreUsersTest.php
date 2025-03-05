@@ -10,6 +10,18 @@ use Tests\TestCase;
 
 class StoreUsersTest extends TestCase
 {
+    public function testRequiresPermission()
+    {
+        $this->actingAsForApi(User::factory()->create())
+            ->postJson(route('api.users.store'), [
+                'first_name' => 'Joe',
+                'username' => 'joe',
+                'password' => 'joe_password',
+                'password_confirmation' => 'joe_password',
+            ])
+            ->assertForbidden();
+    }
+
     public function testCompanyIdNeedsToBeInteger()
     {
         $company = Company::factory()->create();
