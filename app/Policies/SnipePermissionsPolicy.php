@@ -23,7 +23,7 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 abstract class SnipePermissionsPolicy
 {
     /**
-     * This should return the key of the model in the users json permission string.
+     * This should return the key of the model in the user's JSON permission string.
      *
      * @return bool
      */
@@ -37,11 +37,7 @@ abstract class SnipePermissionsPolicy
     {
         /**
          * If an admin, they can do all item related tasks, but ARE constrained by FMCSA company access.
-         * That scoping happens on the model level (except for the Users model) via the Companyable trait.
-         *
-         * This does lead to some inconsistencies in the responses, since attempting to edit assets,
-         * accessories, etc (anything other than users) will result in a Forbidden error, whereas the users
-         * area will redirect with "That user doesn't exist" since the scoping is handled directly on those queries.
+         * That scoping happens on the model level via the Companyable trait.
          *
          * The *superuser* global permission gets handled in the AuthServiceProvider before() method.
          *
@@ -53,7 +49,7 @@ abstract class SnipePermissionsPolicy
         }
 
         /**
-         * If we got here by $this→authorize('something', $actualModel) then we can continue on Il but if we got here
+         * If we got here by $this→authorize('something', $actualModel) then we can continue on, but if we got here
          * via $this→authorize('something', Model::class) then calling Company:: isCurrentUserHasAccess($item) gets weird.
          * Bail out here by returning "nothing" and allow the relevant method lower in this class to be called and handle authorization.
          */
@@ -85,7 +81,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can view the accessory.
+     * Determine whether the user can view the item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
@@ -112,7 +108,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can update the accessory.
+     * Determine whether the user can update the item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
@@ -124,7 +120,7 @@ abstract class SnipePermissionsPolicy
 
 
     /**
-     * Determine whether the user can update the accessory.
+     * Determine whether the user can checkout the item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
@@ -135,7 +131,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can delete the accessory.
+     * Determine whether the user can delete the item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
@@ -151,7 +147,7 @@ abstract class SnipePermissionsPolicy
     }
 
     /**
-     * Determine whether the user can manage the accessory.
+     * Determine whether the user can manage the item.
      *
      * @param  \App\Models\User  $user
      * @return mixed
