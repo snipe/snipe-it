@@ -94,7 +94,14 @@
               }
               @endphp
             <div class="col-md-8 required">
-              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format', 'style' => 'width:100%;')) }}
+                <x-input.select
+                    name="format"
+                    :options="Helper::predefined_formats()"
+                    :selected="($field_format == '') ? $field->format : $field_format"
+                    class="format form-control"
+                    style="width:100%"
+                    aria-label="format"
+                />
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
