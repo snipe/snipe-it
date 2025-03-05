@@ -52,7 +52,7 @@ class StoreAssetTest extends TestCase
 
         $storedAsset = Asset::where('asset_tag', 'TEST-ASSET')->sole();
 
-        $response->assertRedirect(route('hardware.show', ['hardware' => $storedAsset->id]));
+        $response->assertRedirect(route('hardware.show', $storedAsset));
 
         $this->assertDatabaseHas('assets', [
             'id'              => $storedAsset->id,
