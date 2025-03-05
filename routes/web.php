@@ -532,7 +532,8 @@ Route::group(['prefix' => 'reports', 'middleware' => ['auth']], function () {
         $trail->parent('home')
             ->push(trans('general.custom_report'), route('reports/custom')));
 
-    Route::post('custom', [ReportsController::class, 'postCustom']);
+    Route::post('custom', [ReportsController::class, 'postCustom'])
+        ->name('reports.post-custom');
 
 
     Route::prefix('templates')
