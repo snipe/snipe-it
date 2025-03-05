@@ -37,7 +37,7 @@
 
         <form
             method="POST"
-            action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : '/reports/custom' }}"
+            action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : route('reports/custom') }}"
             accept-charset="UTF-8"
             class="form-horizontal"
             id="custom-report-form"
