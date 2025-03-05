@@ -10,8 +10,8 @@ return array(
     'api_base_url_endpoint' => '/&lt;endpoint&gt;',
     'api_token_expiration_time' => 'تم تعيين رموز API لانتهاء صلاحيتها في:',
     'api_reference' => 'Please check the <a href="https://snipe-it.readme.io/reference" target="_blank">API reference</a> to find specific API endpoints and additional API documentation.',
-    'profile_updated' => 'Account successfully updated',
-    'no_tokens' => 'You have not created any personal access tokens.',
-    'enable_sounds' => 'Enable sound effects',
+    'profile_updated' => 'تم تحديث الحساب بنجاح',
+    'no_tokens' => 'لم تقم بإنشاء أي رموز خاصة للوصول الشخصي.',
+    'enable_sounds' => 'تمكين المؤثرات الصوتية',
     'enable_confetti' => 'Enable confetti effects',
 );

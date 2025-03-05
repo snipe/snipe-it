@@ -17,6 +17,7 @@ class UpdateCategoriesTest extends TestCase
             ->patchJson(route('api.categories.update', $category), [
                 'name' => 'Test Category',
                 'eula_text' => 'Test EULA',
+                'notes' => 'Test Note',
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -27,6 +28,7 @@ class UpdateCategoriesTest extends TestCase
         $category->refresh();
         $this->assertEquals('Test Category', $category->name, 'Name was not updated');
         $this->assertEquals('Test EULA', $category->eula_text, 'EULA was not updated');
+        $this->assertEquals('Test Note', $category->notes, 'Note was not updated');
 
     }
 
@@ -39,6 +41,7 @@ class UpdateCategoriesTest extends TestCase
                 'name' => 'Test Category',
                 'eula_text' => 'Test EULA',
                 'category_type' => 'accessory',
+                'note' => 'Test Note',
             ])
             ->assertOk()
             ->assertStatusMessageIs('error')
@@ -48,6 +51,7 @@ class UpdateCategoriesTest extends TestCase
         $category->refresh();
         $this->assertNotEquals('Test Category', $category->name, 'Name was not updated');
         $this->assertNotEquals('Test EULA', $category->eula_text, 'EULA was not updated');
+        $this->assertNotEquals('Test Note', $category->notes, 'Note was not updated');
         $this->assertNotEquals('accessory', $category->category_type, 'EULA was not updated');
 
     }

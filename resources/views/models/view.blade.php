@@ -31,7 +31,18 @@
 
 
 <div class="row">
+
+    @if ($model->deleted_at!='')
+        <div class="col-md-12">
+            <div class="callout callout-warning">
+                <x-icon type="warning" />
+                {{ trans('admin/models/general.deleted') }}
+            </div>
+        </div>
+    @endif
+
     <div class="col-md-9">
+
         <div class="nav-tabs-custom">
 
             <ul class="nav nav-tabs">
@@ -49,7 +60,7 @@
                 </li>
 
                 <li>
-                    <a href="#uploads" data-toggle="tab">
+                    <a href="#files" data-toggle="tab">
 
                         <span class="hidden-lg hidden-md">
                           <i class="fas fa-barcode fa-2x"></i>
@@ -98,11 +109,10 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                     </table>
-                    {{ Form::close() }}
                 </div> <!-- /.tab-pane assets -->
 
 
-                <div class="tab-pane fade" id="uploads">
+                <div class="tab-pane fade" id="files">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -151,6 +161,24 @@
                     @if ($model->created_at)
                         <li>{{ trans('general.created_at') }}:
                             {{ Helper::getFormattedDateObject($model->created_at, 'datetime', false) }}
+                        </li>
+                    @endif
+
+                    @if ($model->adminuser)
+                        <li>{{ trans('general.created_by') }}:
+                            {{ $model->adminuser->present()->name() }}
+                        </li>
+                    @endif
+
+                    @if ($model->deleted_at)
+                        <li>
+                            <strong>
+                                <span class="text-danger">
+                                {{ trans('general.deleted') }}:
+                                {{ Helper::getFormattedDateObject($model->deleted_at, 'datetime', false) }}
+                                </span>
+                            </strong>
+
                         </li>
                     @endif
 
@@ -244,7 +272,7 @@
         </div>
             @can('update', \App\Models\AssetModel::class)
             <div class="col-md-12" style="padding-bottom: 5px;">
-                <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                <a href="{{ ($model->deleted_at=='') ? route('models.edit', $model->id) : '#' }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print{{ ($model->deleted_at!='') ? ' disabled' : '' }}">
                     <x-icon type="edit" />
                     {{ trans('admin/models/table.edit') }}
                 </a>

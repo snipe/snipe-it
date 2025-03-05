@@ -456,14 +456,13 @@ class ItemImporter extends Importer
     {
         if (empty($asset_location)) {
             $this->log('No location given, so none created.');
-
             return null;
         }
+
         $location = Location::where(['name' => $asset_location])->first();
 
         if ($location) {
             $this->log('Location '.$asset_location.' already exists');
-
             return $location->id;
         }
         // No matching locations in the collection, create a new one.

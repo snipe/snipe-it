@@ -23,7 +23,7 @@ return [
     'Item_Requested' => 'Daiktas užsakytas',
     'License_Checkin_Notification' => 'Licencija paimta',
     'License_Checkout_Notification' => 'Licencija išduota',
-    'license_for'   => 'License for',
+    'license_for'   => 'Licencija skirta',
     'Low_Inventory_Report' => 'Ataskaita apie mažas atsargas',
     'a_user_canceled' => 'Naudotojas svetainėje atšaukė daikto užsakymą',
     'a_user_requested' => 'Naudotojas svetainėje užsakė daiktą',

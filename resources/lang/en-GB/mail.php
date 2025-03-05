@@ -23,7 +23,7 @@ return [
     'Item_Requested' => 'Item Requested',
     'License_Checkin_Notification' => 'License checked in',
     'License_Checkout_Notification' => 'Licence checked out',
-    'license_for'   => 'License for',
+    'license_for'   => 'Licence for',
     'Low_Inventory_Report' => 'Low Inventory Report',
     'a_user_canceled' => 'A user has canceled an item request on the website',
     'a_user_requested' => 'A user has requested an item on the website',

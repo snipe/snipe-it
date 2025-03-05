@@ -5,6 +5,6 @@ return array(
     'id'      					=> 'Aqoonsi',
     'parent'   					=> 'Waalid',
     'require_acceptance'      	=> 'Ogolaanshaha',
-    'title'      				=> 'Magaca Qaybta Hantida',
+    'title'      				=> 'Magaca qaanadda Hantida',
 
 );

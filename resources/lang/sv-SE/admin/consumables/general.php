@@ -1,12 +1,12 @@
 <?php
 
 return array(
-    'checkout'                          => 'Förbrukningsvaror',
+    'checkout'                          => 'Checka ut förbrukningsvara till användare',
     'consumable_name'                   => 'Namn på förbrukningsvara',
     'create'                            => 'Skapa förbrukningvara',
-    'item_no'                           => 'Artikelnummer',
+    'item_no'                           => 'Objektnummer',
     'remaining' 			            => 'Återstående',
     'total' 			                => 'Totalt',
     'update'                            => 'Uppdatera förbrukningsvara',
-    'inventory_warning'                 => 'Lagret av denna förbrukningsvara är under minimiantal :min_count',
+    'inventory_warning'                 => 'Lagret av denna förbrukningsvara är under minima; :min_count stycken.',
 );

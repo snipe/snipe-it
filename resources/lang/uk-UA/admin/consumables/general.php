@@ -8,5 +8,5 @@ return array(
     'remaining' 			            => 'Залишилось',
     'total' 			                => 'Загалом',
     'update'                            => 'Оновити витратний матеріал',
-    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
+    'inventory_warning'                 => 'Запас цього витратного матеріалу нижчий за мінімальну кількість :min_count',
 );

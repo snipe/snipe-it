@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testing LDAP Authentication...',
         'authentication_success' => 'User authenticated against LDAP successfully!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Sending :app test message...',
         'success' => 'Your :webhook_name Integration works!',
@@ -45,5 +48,7 @@ return [
         'error' => 'Something went wrong. :app responded with: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => 'Something went wrong. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

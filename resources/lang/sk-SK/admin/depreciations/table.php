@@ -6,6 +6,6 @@ return [
     'months'   => 'Mesiace',
     'term'   => 'Lehota',
     'title'      => 'Názov ',
-    'depreciation_min' => 'Floor Value',
+    'depreciation_min' => 'Minimálna hodnota',
 
 ];

@@ -46,7 +46,7 @@ class CheckoutableListener
      */
     public function onCheckedOut($event)
     {
-        if ($this->shouldNotSendAnyNotifications($event->checkoutable)){
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
             return;
         }
 
@@ -57,7 +57,7 @@ class CheckoutableListener
         $acceptance = $this->getCheckoutAcceptance($event);
         $adminCcEmailsArray = [];
 
-        if($settings->admin_cc_email !== '') {
+        if ($settings->admin_cc_email !== '') {
             $adminCcEmail = $settings->admin_cc_email;
             $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
         }
@@ -65,7 +65,7 @@ class CheckoutableListener
         $mailable = $this->getCheckoutMailType($event, $acceptance);
         $notifiable = $this->getNotifiables($event);
 
-        if  (!$event->checkedOutTo->locale){
+        if ($event->checkedOutTo->locale) {
             $mailable->locale($event->checkedOutTo->locale);
         }
         // Send email notifications
@@ -77,39 +77,54 @@ class CheckoutableListener
              * 3. The item should send an email at check-in/check-out
              */
 
-                if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                    $this->checkoutableShouldSendEmail($event)) {
-                    Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
-                    if (!empty($notifiable)) {
-                        Mail::to($notifiable)->cc($ccEmails)->send($mailable);
-                    } elseif (!empty($ccEmails)) {
-                        Mail::cc($ccEmails)->send($mailable);
-                    }
-                    Log::info('Checkout Mail sent.');
+            if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
+                $this->checkoutableShouldSendEmail($event)) {
+                Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
+                if (!empty($notifiable)) {
+                    Mail::to($notifiable)->cc($ccEmails)->send($mailable);
+                } elseif (!empty($ccEmails)) {
+                    Mail::cc($ccEmails)->send($mailable);
                 }
+                Log::info('Checkout Mail sent.');
+            }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout email: " . $e->getMessage());
         } catch (Exception $e) {
             Log::debug("Exception caught during checkout email: " . $e->getMessage());
         }
 //                 Send Webhook notification
-        try{
-                if ($this->shouldSendWebhookNotification()) {
-                    if ($this->newMicrosoftTeamsWebhookEnabled()) {
-                        $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
-                        $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
-                        $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
-                    } else {
-                        Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
-                            ->notify($this->getCheckoutNotification($event, $acceptance));
-                    }
+        try {
+            if ($this->shouldSendWebhookNotification()) {
+                if ($this->newMicrosoftTeamsWebhookEnabled()) {
+                    $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
+                    $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                    $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
+                } else {
+
+                    Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
+                        ->notify($this->getCheckoutNotification($event, $acceptance));
                 }
+            }
         } catch (ClientException $e) {
-            Log::debug("Exception caught during checkout notification: " . $e->getMessage());
+            if (strpos($e->getMessage(), 'channel_not_found') !== false) {
+                Log::warning(Setting::getSettings()->webhook_selected." notification failed: " . $e->getMessage());
+                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_channel_not_found') );
+            }
+            else {
+                Log::error("ClientException caught during checkin notification: " . $e->getMessage());
+            }
+            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_fail') );
         } catch (Exception $e) {
-            Log::debug("Exception caught during checkout notification: " . $e->getMessage());
+            Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
+                'error' => $e->getMessage(),
+                'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
+                'event' => $event,
+            ]);
+            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
         }
     }
+
+
 
 
     /**
@@ -147,7 +162,7 @@ class CheckoutableListener
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable =  $this->getCheckinMailType($event);
         $notifiable = $this->getNotifiables($event);
-        if  (!$event->checkedOutTo->locale){
+        if ($event->checkedOutTo?->locale) {
             $mailable->locale($event->checkedOutTo->locale);
         }
         // Send email notifications
@@ -178,18 +193,30 @@ class CheckoutableListener
         try {
             if ($this->shouldSendWebhookNotification()) {
                 if ($this->newMicrosoftTeamsWebhookEnabled()) {
-                        $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
-                        $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
-                        $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
-                    } else {
-                        Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
-                            ->notify($this->getCheckinNotification($event));
-                    }
+                    $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
+                    $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                    $notification->success()->sendMessage($message[0], $message[1]); // Send the message to Microsoft Teams
+                } else {
+                    Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
+                        ->notify($this->getCheckinNotification($event));
                 }
+            }
         } catch (ClientException $e) {
-            Log::warning("Exception caught during checkin notification: " . $e->getMessage());
+            if (strpos($e->getMessage(), 'channel_not_found') !== false) {
+                Log::warning(Setting::getSettings()->webhook_selected." notification failed: " . $e->getMessage());
+                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_channel_not_found') );
+            }
+            else {
+                Log::error("ClientException caught during checkin notification: " . $e->getMessage());
+                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
+            }
         } catch (Exception $e) {
-            Log::warning("Exception caught during checkin notification: " . $e->getMessage());
+            Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
+                'error' => $e->getMessage(),
+                'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
+                'event' => $event,
+            ]);
+            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_fail'));
         }
     }      
 
@@ -282,7 +309,7 @@ class CheckoutableListener
         ];
         $mailable= $lookup[get_class($event->checkoutable)];
 
-        return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $event->note, $acceptance);
+        return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
 
     }
     private function getCheckinMailType($event){

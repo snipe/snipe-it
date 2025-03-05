@@ -69,7 +69,7 @@ class Actionlog extends SnipeModel
         'company'     => ['name'],
         'adminuser'   => ['first_name','last_name','username', 'email'],
         'user'        => ['first_name','last_name','username', 'email'],
-        'assets'      => ['asset_tag','name'],
+        'assets'      => ['asset_tag','name', 'serial'],
     ];
 
     /**
@@ -293,16 +293,22 @@ class Actionlog extends SnipeModel
     public function daysUntilNextAudit($monthInterval = 12, $asset = null)
     {
         $now = Carbon::now();
-        $last_audit_date = $this->created_at;
-        $next_audit = $last_audit_date->addMonth($monthInterval);
-        $next_audit_days = $now->diffInDays($next_audit);
+        $last_audit_date = $this->created_at; // this is the action log's created at, not the asset itself
+        $next_audit = $last_audit_date->addMonth($monthInterval); // this actually *modifies* the $last_audit_date
+        $next_audit_days = round($now->diffInDays($next_audit, true));
+        $override_default_next = $next_audit;
 
         // Override the default setting for interval if the asset has its own next audit date
         if (($asset) && ($asset->next_audit_date)) {
-            $override_default_next = \Carbon::parse($asset->next_audit_date);
-            $next_audit_days = $override_default_next->diffInDays($now);
+            $override_default_next = Carbon::parse($asset->next_audit_date);
+            $next_audit_days = round($override_default_next->diffInDays($now, true));
         }
 
+        // Show as negative number if the next audit date is before the audit date we're looking at
+        if ($this->created_at > $override_default_next) {
+            $next_audit_days = '-'.$next_audit_days;
+        }
+        
         return $next_audit_days;
     }
 

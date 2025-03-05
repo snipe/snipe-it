@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Litsentsis kontrolliti probleemi. Palun proovi uuesti.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Litsents märgiti edukalt'
     ),
 

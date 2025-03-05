@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testando Autenticação LDAP...',
         'authentication_success' => 'Utilizador autenticado no LDAP com sucesso!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'A enviar mensagem :app de teste...',
         'success' => 'Sua integração com :webhook_name funciona!',
@@ -45,5 +48,7 @@ return [
         'error' => 'Algo deu erro. :app respondeu com: :error_message',
         'error_redirect' => 'ERRO: 301/302 :endpoint retorna um redirecionamento. Por razões de segurança, não seguimos redirecionamentos. Por favor, use o ponto de extremidade atual.',
         'error_misc' => 'Algo deu erro. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

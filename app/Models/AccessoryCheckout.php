@@ -22,7 +22,14 @@ class AccessoryCheckout extends Model
 {
     use Searchable;
 
-    protected $fillable = ['created_by', 'accessory_id', 'assigned_to', 'assigned_type', 'note'];
+    protected $fillable = [
+        'accessory_id',
+        'assigned_to',
+        'assigned_type',
+        'note'
+    ];
+
+    protected $presenter = \App\Presenters\AccessoryPresenter::class;
     protected $table = 'accessories_checkout';
     
     /**
@@ -34,9 +41,13 @@ class AccessoryCheckout extends Model
      */
     public function accessory()
     {
-        return $this->hasOne(\App\Models\Accessory::class, 'accessory_id');
+        return $this->hasOne(Accessory::class, 'id', 'accessory_id');
     }
 
+    public function accessories()
+    {
+        return $this->hasMany(Accessory::class, 'id', 'accessory_id');
+    }
     /**
      * Establishes the accessory checkout -> user relationship
      *
@@ -44,9 +55,9 @@ class AccessoryCheckout extends Model
      * @since [v7.0.9]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    public function user()
+    public function adminuser()
     {
-        return $this->hasOne(\App\Models\User::class, 'user_id');
+        return $this->hasOne(\App\Models\User::class, 'id', 'created_by');
     }
 
     /**
@@ -76,7 +87,7 @@ class AccessoryCheckout extends Model
     /**
      * Determines whether the accessory is checked out to a user
      *
-     * Even though we allow allow for checkout to things beyond users
+     * Even though we allow for checkout to things beyond users
      * this method is an easy way of seeing if we are checked out to a user.
      *
      * @author [A. Kroeger]
@@ -84,12 +95,32 @@ class AccessoryCheckout extends Model
      */
     public function checkedOutToUser(): bool
     {
-      return $this->assignedType() === Asset::USER;
+        return $this->assigned_type == User::class;
+    }
+
+    public function checkedOutToLocation(): bool
+    {
+        return $this->assigned_type == Location::class;
+    }
+
+    public function checkedOutToAsset(): bool
+    {
+        return $this->assigned_type == Asset::class;
     }
 
     public function scopeUserAssigned(Builder $query): void
     {
         $query->where('assigned_type', '=', User::class);
+    }
+
+    public function scopeLocationAssigned(Builder $query): void
+    {
+        $query->where('assigned_type', '=', Location::class);
+    }
+
+    public function scopeAssetsAssigned(Builder $query): void
+    {
+        $query->where('assigned_type', '=', Asset::class);
     }
 
     /**

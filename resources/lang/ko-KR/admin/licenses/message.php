@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => '라이선스 반입 중 문제가 발생했습니다. 다시 시도해 주세요.',
+        'not_reassignable' => 'License not reassignable',
         'success' => '라이선스가 반입 되었습니다.'
     ),
 

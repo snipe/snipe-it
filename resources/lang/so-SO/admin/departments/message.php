@@ -11,12 +11,12 @@ return array(
     ),
     'update' => array(
         'error'   => 'Waaxda lama cusboonaysiin, fadlan isku day mar kale',
-        'success' => 'Waaxdu si guul leh ayaa loo cusboonaysiiyay'
+        'success' => 'Waaxda waa lagu guuleystay in la cusbooneysiiyo.'
     ),
     'delete' => array(
         'confirm'   	=> 'Ma hubtaa inaad rabto inaad tirtirto waaxdan?',
-        'error'   => 'Waxaa jirtay arrin la tirtiray waaxda. Fadlan isku day mar kale',
-        'success' => 'Waaxda si guul leh ayaa loo tirtiray'
+        'error'   => 'Waxaa jirtay arin tir-tireysay waaxda. Fadlan isku day mar kale.',
+        'success' => 'Waaxda waa lagu guuleystay in la tir-tiro.'
     )
 
 );

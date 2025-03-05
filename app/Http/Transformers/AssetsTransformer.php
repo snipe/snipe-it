@@ -3,12 +3,14 @@
 namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
+use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AssetsTransformer
 {
@@ -225,7 +227,7 @@ class AssetsTransformer
     public function transformRequestedAsset(Asset $asset)
     {
         $array = [
-            'id' => (int) $asset->id,
+            'id' => (int)$asset->id,
             'name' => e($asset->name),
             'asset_tag' => e($asset->asset_tag),
             'serial' => e($asset->serial),
@@ -234,7 +236,7 @@ class AssetsTransformer
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'date'),
             'location' => ($asset->location) ? e($asset->location->name) : null,
-            'status'=> ($asset->assetstatus) ? $asset->present()->statusMeta : null,
+            'status' => ($asset->assetstatus) ? $asset->present()->statusMeta : null,
             'assigned_to_self' => ($asset->assigned_to == auth()->id()),
         ];
 
@@ -244,7 +246,7 @@ class AssetsTransformer
             foreach ($asset->model->fieldset->fields as $field) {
 
                 // Only display this if it's allowed via the custom field setting
-                if (($field->field_encrypted=='0') && ($field->show_in_requestable_list=='1')) {
+                if (($field->field_encrypted == '0') && ($field->show_in_requestable_list == '1')) {
 
                     $value = $asset->{$field->db_column};
                     if (($field->format == 'DATE') && (!is_null($value)) && ($value != '')) {
@@ -268,7 +270,62 @@ class AssetsTransformer
 
         $array += $permissions_array;
         return $array;
-
-
     }
+
+    public function transformAssetCompact(Asset $asset)
+    {
+        $array = [
+            'id' => (int) $asset->id,
+            'image' => ($asset->getImageUrl()) ? $asset->getImageUrl() : null,
+            'type' => 'asset',
+            'name' => e($asset->present()->fullName()),
+            'model' => ($asset->model) ? e($asset->model->name) : null,
+            'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
+            'asset_tag' => e($asset->asset_tag),
+            'serial' => e($asset->serial),
+        ];
+
+        return $array;
+    }
+
+    public function transformCheckedoutAccessories($accessory_checkouts, $total)
+    {
+
+        $array = [];
+        foreach ($accessory_checkouts as $checkout) {
+            $array[] = self::transformCheckedoutAccessory($checkout);
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+
+    public function transformCheckedoutAccessory(AccessoryCheckout $accessory_checkout)
+    {
+
+        $array = [
+            'id' => $accessory_checkout->id,
+            'accessory' => [
+                'id' => $accessory_checkout->accessory->id,
+                'name' => $accessory_checkout->accessory->name,
+            ],
+            'assigned_to' => $accessory_checkout->assigned_to,
+            'image' => ($accessory_checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory_checkout->accessory->image)) : null,
+            'note' => $accessory_checkout->note ? e($accessory_checkout->note) : null,
+            'created_by' => $accessory_checkout->adminuser ? [
+                'id' => (int) $accessory_checkout->adminuser->id,
+                'name'=> e($accessory_checkout->adminuser->present()->fullName),
+            ]: null,
+            'created_at' => Helper::getFormattedDateObject($accessory_checkout->created_at, 'datetime'),
+        ];
+
+        $permissions_array['available_actions'] = [
+            'checkout' => false,
+            'checkin' => Gate::allows('checkin', Accessory::class),
+        ];
+
+        $array += $permissions_array;
+        return $array;
+    }
+
 }

@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Có vấn đề xảy ra khi checkin bản quyền. Xin vui lòng thử lại.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Bản quyền đã được checkin thành công'
     ),
 

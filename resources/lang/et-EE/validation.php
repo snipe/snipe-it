@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'accepted' => 'The :attribute field must be accepted.',
+    'accepted' => ':attribute väli peab olema aktsepteeritud.',
     'accepted_if' => 'The :attribute field must be accepted when :other is :value.',
     'active_url' => 'The :attribute field must be a valid URL.',
     'after' => 'The :attribute field must be a date after :date.',

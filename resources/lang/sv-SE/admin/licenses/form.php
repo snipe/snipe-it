@@ -9,14 +9,14 @@ return array(
     'license_key'       => 'Produktnyckel',
     'maintained'        => 'Bibehållen',
     'name'              => 'Programnamn',
-    'no_depreciation'   => 'Depreciera inte',
-    'purchase_order'    => 'Beställningsnummer',
-    'reassignable'      => 'Reassignable',
-    'remaining_seats'   => 'Återstående platser',
+    'no_depreciation'   => 'Ingen värdeminskning',
+    'purchase_order'    => 'Ordernummer',
+    'reassignable'      => 'Allokerbar',
+    'remaining_seats'   => 'Återstående säten',
     'seats'             => 'Säten',
     'termination_date'  => 'Slutdatum',
-    'to_email'          => 'Licensierad till Email',
+    'to_email'          => 'Licensierad till E-post',
     'to_name'           => 'Licensierad till Namn',
     'update'            => 'Uppdateringslicens',
-    'checkout_help'     => 'Du måste kolla en licens ut till en maskinvaru tillgång eller en person. Du kan välja båda, men ägaren av tillgången måste matcha den person du kontrollerar tillgången ut till.'
+    'checkout_help'     => 'Du behöver checka ut en licens till en tillgång eller en användare. Du kan välja båda, men ägaren av tillgången måste matcha den användare du checkar ut tillgången till.'
 );

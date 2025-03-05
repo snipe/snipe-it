@@ -48,7 +48,7 @@ class AssetObserver
             $changed = [];
 
             foreach ($asset->getRawOriginal() as $key => $value) {
-                if ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key]) {
+                if ((array_key_exists($key, $asset->getAttributes())) && ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key])) {
                     $changed[$key]['old'] = $asset->getRawOriginal()[$key];
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
                 }
@@ -80,7 +80,7 @@ class AssetObserver
     {
         if ($settings = Setting::getSettings()) {
             $tag = $asset->asset_tag;
-            $prefix = $settings->auto_increment_prefix;
+            $prefix = (string)($settings->auto_increment_prefix ?? '');
             $number = substr($tag, strlen($prefix));
             // IF - auto_increment_assets is on, AND (there is no prefix OR the prefix matches the start of the tag)
             //      AND the rest of the string after the prefix is all digits, THEN...

@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Δοκιμή Πιστοποίησης Ldap...',
         'authentication_success' => 'Ο χρήστης πιστοποιήθηκε με επιτυχία στο LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Αποστολή δοκιμαστικού μηνύματος :app...',
         'success' => 'Το :webhook_name σας λειτουργεί!',
@@ -45,5 +48,7 @@ return [
         'error' => 'Κάτι πήγε στραβά. :app απάντησε με: :error_message',
         'error_redirect' => 'ΣΦΑΛΜΑ: 301/302:endpoint επιστρέφει μια ανακατεύθυνση. Για λόγους ασφαλείας, δεν ακολουθούμε ανακατευθύνσεις. Παρακαλούμε χρησιμοποιήστε το πραγματικό τελικό σημείο.',
         'error_misc' => 'Κάτι πήγε στραβά. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

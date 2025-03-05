@@ -74,7 +74,7 @@ return [
     'display_asset_name'        => 'نمایش نام حساب',
     'display_checkout_date'     => 'نمایش تاریخ پرداخت',
     'display_eol'               => 'نمایش EOL در جدول',
-    'display_qr'                => 'نمایش کدهای مربعی',
+    'display_qr'                => 'نمایش بارکد دو بعدی',
     'display_alt_barcode'		=> 'نمایش بارکد 1D',
     'email_logo'                => 'آرم ایمیل
 ',
@@ -96,7 +96,6 @@ return [
     'footer_text_help'          => 'این متن در فوتر سمت راست ظاهر می شود. پیوندها با استفاده از <a href="https://help.github.com/articles/github-flavored-markdown/">نشان‌گذاری طعم‌دار Github</a> مجاز هستند. شکستگی خطوط، هدرها، تصاویر و غیره ممکن است منجر به نتایج غیر قابل پیش بینی شود.
 ',
     'general_settings'			=> 'تنظیمات عمومی',
-    'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
     'general_settings_help'     => 'EULA پیش فرض و موارد دیگر
 ',
     'generate_backup'			=> 'تولید پشتیبان گیری',
@@ -149,8 +148,8 @@ return [
     'ldap_pword'                => 'LDAP اتصال رمز عبور',
     'ldap_basedn'               => 'اتصال پایگاه DN',
     'ldap_filter'               => 'LDAP فیلتر',
-    'ldap_pw_sync'              => 'همگام سازی رمز عبور LDAP',
-    'ldap_pw_sync_help'         => 'اگر نمیخواهید گذرواژههای LDAP را با گذرواژههای محلی همگامسازی کنید، این کادر را بردارید. غیرفعال کردن این به این معنی است که کاربران شما ممکن است قادر به ورود به سیستم اگر سرور LDAP شما به دلایلی غیر قابل دسترس است.',
+    'ldap_pw_sync'              => 'Cache LDAP Passwords',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords cached as local hashed passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => 'فیلد نام کاربری',
     'ldap_lname_field'          => 'نام خانوادگی',
     'ldap_fname_field'          => 'LDAP نام',
@@ -213,7 +212,6 @@ return [
     'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP
 ',
-    'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'PHP System info
 ',
     'php_gd_info'               => 'شما باید  php-gd را نصب کنید تا QR کد ها را ببنید، به دستورالعمل های نصب نگاه کنید.',
@@ -327,8 +325,6 @@ return [
     'update'                    => 'به‌ روزرسانی تنظیمات',
     'value'                     => 'عنوان آیتم',
     'brand'                     => 'نام تجاری',
-    'brand_keywords'            => 'پاورقی، لوگو، چاپ، تم، پوسته، هدر، رنگ ها، رنگ، css
-',
     'brand_help'                => 'لوگو، نام سایت
 ',
     'web_brand'                 => 'نوع برندینگ وب
@@ -381,6 +377,8 @@ return [
     'two_factor_enrollment_text'	=> "احراز هویت دو عامل لازم است، اما دستگاه شما هنوز ثبت نشده است. برنامه Google Authenticator خود را باز کنید و کد QR زیر را برای ثبت نام دستگاه خود اسکن کنید. هنگامی که دستگاه خود را ثبت نام کردید، کد زیر را وارد کنید",
     'require_accept_signature'      => 'امضا لازم است',
     'require_accept_signature_help_text'      => 'فعال کردن این ویژگی، کاربران را مجبور به فیزیکی در پذیرش یک دارایی می کند.',
+    'require_checkinout_notes'  => 'Require Notes on Checkin/Checkout',
+    'require_checkinout_notes_help_text'    => 'Enabling this feature will require the note fields to be populated when checking in or checking out an asset.',
     'left'        => 'چپ',
     'right'        => 'راست',
     'top'        => 'بالا',
@@ -437,19 +435,13 @@ return [
     'security' => 'امنیت',
     'security_title' => 'تنظیمات امنیتی را به روز کنید
 ',
-    'security_keywords' => 'رمز عبور، رمزهای عبور، الزامات، دو عاملی، دو عاملی، رمزهای عبور رایج، ورود از راه دور، خروج از سیستم، احراز هویت
-',
     'security_help' => 'دو عامل، محدودیت رمز عبور
-',
-    'groups_keywords' => 'مجوزها، گروه‌های مجوز، مجوزها
 ',
     'groups_help' => 'گروه های مجوز حساب
 ',
     'localization' => 'بومی سازی
 ',
     'localization_title' => 'تنظیمات محلی سازی را به روز کنید
-',
-    'localization_keywords' => 'محلی سازی، واحد پول، محلی، منطقه، منطقه زمانی، منطقه زمانی، بین المللی، بین المللی، زبان، زبان ها، ترجمه
 ',
     'localization_help' => 'زبان، نمایش تاریخ
 ',
@@ -460,16 +452,17 @@ return [
     'labels' => 'برچسب ها',
     'labels_title' => 'تنظیمات برچسب را به روز کنید
 ',
-    'labels_help' => 'اندازه برچسب &amp; تنظیمات
-',
-    'purge_keywords' => 'برای همیشه حذف کنید
-',
+    'labels_help' => 'Barcodes &amp; label settings',
     'purge_help' => 'پاک کردن رکوردهای حذف شده
 ',
     'ldap_extension_warning' => 'به نظر نمی رسد که برنامه افزودنی LDAP روی این سرور نصب یا فعال باشد. همچنان می‌توانید تنظیمات خود را ذخیره کنید، اما قبل از اینکه همگام‌سازی یا ورود به سیستم LDAP کار کند، باید افزونه LDAP را برای PHP فعال کنید.
 ',
     'ldap_ad' => 'LDAP/AD
 ',
+    'ldap_test_label' => 'Test LDAP Sync',
+    'ldap_test_login' => ' Test LDAP Login',
+    'ldap_username_placeholder' => 'LDAP Username',
+    'ldap_password_placeholder' => 'LDAP Password',
     'employee_number' => 'تعداد کارکنان
 ',
     'create_admin_user' => 'ایجاد کاربر جدید ::',
@@ -505,12 +498,14 @@ return [
     'label2_2d_type'          => 'نوع بارکد 2D',
     'label2_2d_type_help'     => 'Format for 2D barcodes',
     'label2_2d_target'        => '2D Barcode Target',
-    'label2_2d_target_help'   => 'The URL the 2D barcode points to when scanned',
+    'label2_2d_target_help'   => 'The data that will be contained in the 2D barcode',
     'label2_fields'           => 'Field Definitions',
     'label2_fields_help'      => 'Fields can be added, removed, and reordered in the left column. For each field, multiple options for Label and DataSource can be added, removed, and reordered in the right column.',
     'help_asterisk_bold'    => 'Text entered as <code>**text**</code> will be displayed as bold',
     'help_blank_to_use'     => 'Leave blank to use the value from <code>:setting_name</code>',
     'help_default_will_use' => '<code>:default</code> will use the value from <code>:setting_name</code>. <br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
+    'asset_id'              => 'Asset ID',
+    'data'               => 'Data',
     'default'               => 'Default',
     'none'                  => 'None',
     'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
@@ -531,5 +526,23 @@ return [
     'due_checkin_days' => 'Due For Checkin Warning',
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
     'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
+
+
+    /* Keywords for settings overview help */
+    'keywords' => [
+        'brand'             => 'پاورقی، لوگو، چاپ، تم، پوسته، هدر، رنگ ها، رنگ، css
+',
+        'general_settings'  => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
+        'groups'            => 'مجوزها، گروه‌های مجوز، مجوزها
+',
+        'labels'            => 'labels, barcodes, barcode, sheets, print, upc, qr, 1d, 2d',
+        'localization'      => 'محلی سازی، واحد پول، محلی، منطقه، منطقه زمانی، منطقه زمانی، بین المللی، بین المللی، زبان، زبان ها، ترجمه
+',
+        'php_overview'      => 'phpinfo, system, info',
+        'purge'             => 'برای همیشه حذف کنید
+',
+        'security'          => 'رمز عبور، رمزهای عبور، الزامات، دو عاملی، دو عاملی، رمزهای عبور رایج، ورود از راه دور، خروج از سیستم، احراز هویت
+',
+    ],
 
 ];

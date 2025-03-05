@@ -13,5 +13,10 @@ return [
         'user_state' => 'ユーザーの状態',
         'user_country' => 'ユーザーの国',
         'user_zip' => 'ユーザー郵便番号'
-    ]
+    ],
+    'open_saved_template' => '保存済みテンプレートを開く',
+    'save_template' =>  'テンプレートを保存',
+    'select_a_template' => 'テンプレートを選択',
+    'template_name' => 'テンプレート名',
+    'update_template' => 'テンプレートを更新',
 ];

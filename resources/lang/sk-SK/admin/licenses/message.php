@@ -2,19 +2,19 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
-    'asset_does_not_exist' 	=> 'The asset you are trying to associate with this license does not exist.',
-    'owner_doesnt_match_asset' => 'The asset you are trying to associate with this license is owned by somene other than the person selected in the assigned to dropdown.',
-    'assoc_users'	 => 'This license is currently checked out to a user and cannot be deleted. Please check the license in first, and then try deleting again. ',
-    'select_asset_or_person' => 'You must select an asset or a user, but not both.',
-    'not_found' => 'License not found',
-    'seats_available' => ':seat_count seats available',
+    'does_not_exist' => 'Licencia neexistuje alebo nemáte oprávnenie na jej zobrazenie.',
+    'user_does_not_exist' => 'Používateľ neexistuje alebo nemáte oprávnenie na jeho zobrazenie.',
+    'asset_does_not_exist' 	=> 'Majetok, ktorý sa pokúšate spojiť s touto licenciou, neexistuje.',
+    'owner_doesnt_match_asset' => 'Majetok, ktorý sa snažíte spojiť s touto licenciou je vlastné niekým iným ako zvolenou osobou.',
+    'assoc_users'	 => 'Táto licencia je aktuálne priradená používateľovi a preto nemôže byť zmazaná. Prosím odoberte najprv licenciou používateľovi a následne skúste zmazať znovu. ',
+    'select_asset_or_person' => 'Musíte vybrať majetok alebo používatelia, ale nie oboje.',
+    'not_found' => 'Licencia nebol nájdená',
+    'seats_available' => ':seat_count miest k dispozícií',
 
 
     'create' => array(
-        'error'   => 'License was not created, please try again.',
-        'success' => 'License created successfully.'
+        'error'   => 'Licencia nebola pridaná, prosím skúste znovu.',
+        'success' => 'Licencia bol úspešne pridaná.'
     ),
 
     'deletefile' => array(
@@ -41,16 +41,17 @@ return array(
     ),
 
     'checkout' => array(
-        'error'   => 'Pri priraďovaní licencie nastala chyba. Skúste prosím znovu.',
-        'success' => 'Licencia bola úspešne priradená',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
-        'mismatch' => 'The license seat provided does not match the license',
-        'unavailable' => 'This seat is not available for checkout.',
+        'error'   => 'Pri odovzdaní licencie nastala chyba. Skúste prosím znovu.',
+        'success' => 'Licencia bola úspešne odovzdaná',
+        'not_enough_seats' => 'Nedostatok licenčných miest pre odovzdanie',
+        'mismatch' => 'Poskytnutý licenčný slot sa nezhoduje s licenciou',
+        'unavailable' => 'Tento slot nie je dostupné pre odovzdanie.',
     ),
 
     'checkin' => array(
-        'error'   => 'Pri odoberaní licencie nastala chyba. Skúste prosím znovu.',
-        'success' => 'Licencia bola úspešne odobratá'
+        'error'   => 'Pri prevzatí licencie nastala chyba. Skúste prosím znovu.',
+        'not_reassignable' => 'Licencia nie je preraditeľná',
+        'success' => 'Licencia bola úspešne prevzatá'
     ),
 
 );

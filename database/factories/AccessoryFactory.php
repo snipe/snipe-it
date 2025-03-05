@@ -163,7 +163,7 @@ class AccessoryFactory extends Factory
                 $accessory->checkouts()->create([
                     'accessory_id' => $accessory->id,
                     'created_at' => Carbon::now(),
-                    'user_id' => 1,
+                    'created_by' => 1,
                     'assigned_to' => $user->id,
                     'assigned_type' => User::class,
                 ]);

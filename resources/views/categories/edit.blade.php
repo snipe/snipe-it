@@ -26,12 +26,27 @@
 <livewire:category-edit-form
     :default-eula-text="$snipeSettings->default_eula_text"
     :eula-text="old('eula_text', $item->eula_text)"
-    :require-acceptance="old('require_acceptance', $item->require_acceptance)"
-    :send-check-in-email="old('checkin_email', $item->checkin_email)"
-    :use-default-eula="old('use_default_eula', $item->use_default_eula)"
+    :require-acceptance="(bool) old('require_acceptance', $item->require_acceptance)"
+    :send-check-in-email="(bool) old('checkin_email', $item->checkin_email)"
+    :use-default-eula="(bool) old('use_default_eula', $item->use_default_eula)"
 />
 
 @include ('partials.forms.edit.image-upload', ['image_path' => app('categories_upload_path')])
+
+<div class="form-group{!! $errors->has('notes') ? ' has-error' : '' !!}">
+    <label for="notes" class="col-md-3 control-label">{{ trans('general.notes') }}</label>
+    <div class="col-md-8">
+        <x-input.textarea
+                name="notes"
+                id="notes"
+                :value="old('notes', $item->notes)"
+                placeholder="{{ trans('general.placeholders.notes') }}"
+                aria-label="notes"
+                rows="5"
+        />
+        {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+    </div>
+</div>
 
 
 @stop

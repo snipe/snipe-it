@@ -13,5 +13,10 @@ return [
         'user_state' => 'Benutzerstaat',
         'user_country' => 'Benutzerland',
         'user_zip' => 'Benutzer PLZ'
-    ]
+    ],
+    'open_saved_template' => 'Gespeicherte Vorlage öffnen',
+    'save_template' =>  'Vorlage speichern',
+    'select_a_template' => 'Wählen Sie eine Vorlage aus',
+    'template_name' => 'Vorlagenname',
+    'update_template' => 'Vorlage aktualisieren',
 ];

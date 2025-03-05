@@ -2,9 +2,9 @@
 return array(
     'companies' => 'Perusahaan',
     'create'    => 'Membuat perusahaan',
-    'email'     => 'Company Email',
+    'email'     => 'Email Company',
     'title'     => 'Perusahaan',
-    'phone'     => 'Company Phone',
+    'phone'     => 'Nomor Telepon Company',
     'update'    => 'Perbarui Perusahaan',
     'name'      => 'Nama Perusahaan',
     'id'        => 'ID',

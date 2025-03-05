@@ -6,6 +6,7 @@ use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
 /**
@@ -103,6 +104,13 @@ class Component extends SnipeModel
         'manufacturer' => ['name'],
     ];
 
+
+    public function isDeletable()
+    {
+        return Gate::allows('delete', $this)
+            && ($this->numCheckedOut() === 0)
+            && ($this->deleted_at == '');
+    }
 
     /**
      * Establishes the components -> action logs -> uploads relationship
@@ -234,12 +242,23 @@ class Component extends SnipeModel
         // In case there are elements checked out to assets that belong to a different company
         // than this asset and full multiple company support is on we'll remove the global scope,
         // so they are included in the count.
-        foreach ($this->assets()->withoutGlobalScope(new CompanyableScope)->get() as $checkout) {
-            $checkedout += $checkout->pivot->assigned_qty;
-        }
-
-        return $checkedout;
+        return $this->uncontrainedAssets->sum('pivot.assigned_qty');
     }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     *
+     * This allows us to get the assets with assigned components without the company restriction
+     */
+    public function uncontrainedAssets() {
+
+        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')
+                ->withPivot('id', 'assigned_qty', 'created_at', 'created_by', 'note')
+                ->withoutGlobalScope(new CompanyableScope);
+
+    }
+
 
     /**
      * Check how many items within a component are remaining

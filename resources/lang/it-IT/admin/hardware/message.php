@@ -72,26 +72,27 @@ return [
     'delete' => [
         'confirm'   	=> 'Sei sicuro di voler eliminare questo bene?',
         'error'   		=> 'C\'è stato un problema durante la cancellazione del bene. Riprova per favore.',
+        'assigned_to_error' => '{1}Il tag: :asset_tag è assegnato. Effettua il check in del dispositivo prima di cancellarlo.|[2,*] :asset_tag sono assegnati. Effettua il check-in dei dispositivi prima di cancellarli.',
         'nothing_updated'   => 'Nessun patrimonio è stato selezionato, quindi niente è stato eliminato.',
         'success' 		=> 'Il bene è stato eliminato con successo.',
     ],
 
     'checkout' => [
-        'error'   		=> 'Il bene non è stato estratto, per favore riprova',
-        'success' 		=> 'Il bene è stato estratto con successo.',
+        'error'   		=> 'Il bene non è stato assegnato, per favore riprova',
+        'success' 		=> 'Il bene è stato assegnato con successo.',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
-        'not_available' => 'Questo prodotto non è disponibile per il checkout!',
-        'no_assets_selected' => 'È necessario selezionare almeno una risorsa dall\'elenco',
+        'not_available' => 'Questo Bene non è disponibile per l\'assegnazione!',
+        'no_assets_selected' => 'Devi selezionare almeno un Bene dall\'elenco',
     ],
 
     'multi-checkout' => [
-        'error'   => 'Il check-out non è andato a buon fine, riprova|Il check-out non è andato a buon fine, riprova',
-        'success' => 'Check-out del bene effettuato.|Check-out dei beni effettuato.',
+        'error'   => 'L\'assegnazione non è andata a buon fine, riprova|Le assegnazioni non sono andate a buon fine, riprova',
+        'success' => 'Bene assegnato correttamente.|Beni assegnati correttamente.',
     ],
 
     'checkin' => [
-        'error'   		=> 'Il bene non è stato registrato, per favore riprova',
-        'success' 		=> 'Il bene è stato registrato con successo.',
+        'error'   		=> 'Il Bene non è stato restituito, riprova',
+        'success' 		=> 'Bene restituito con successo.',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
         'already_checked_in'  => 'Il prodotto è già rientrato.',
 
@@ -100,7 +101,7 @@ return [
     'requests' => [
         'error'   		=> 'L\'asset non è stato richiesto, si prega di riprovare',
         'success' 		=> 'Asset richiesto con successo.',
-        'canceled'      => 'Richiesta di checkout cancellata con successo',
+        'canceled'      => 'Richiesta di assegnazione annullata con successo',
     ],
 
 ];

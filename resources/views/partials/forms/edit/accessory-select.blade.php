@@ -1,6 +1,6 @@
 <!-- Accessory -->
 <div id="assigned_accessory" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}"{!!  (isset($style)) ? ' style="'.e($style).'"' : ''  !!}>
-    {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
+    <label for="{{ $fieldname }}" class="col-md-3 control-label">{{ $translated_name }}</label>
     <div class="col-md-7">
         <select class="js-data-ajax select2" data-endpoint="accessories" data-placeholder="{{ trans('general.select_accessory') }}" name="{{ $fieldname }}" style="width: 100%" id="{{ (isset($select_id)) ? $select_id : 'assigned_accessory_select' }}"{{ (isset($multiple)) ? ' multiple' : '' }}{{  ((isset($required) && ($required =='true'))) ?  ' required' : '' }}>
 

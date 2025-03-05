@@ -37,7 +37,6 @@
       <div class="box-body">
 
         @include('partials.models-bulk-actions')
-              <div class="table-responsive">
                 <table
                         data-columns="{{ \App\Presenters\AssetModelPresenter::dataTableLayout() }}"
                         data-cookie-id-table="asssetModelsTable"
@@ -61,11 +60,8 @@
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
               </table>
-
-          </div>
         </div>
         </div>
-        {{ Form::close() }}
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>

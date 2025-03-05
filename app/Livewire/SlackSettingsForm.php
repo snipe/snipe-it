@@ -159,7 +159,7 @@ class SlackSettingsForm extends Component
             ]);
 
         try {
-            $test = $webhook->post($this->webhook_endpoint, ['body' => $payload]);
+            $test = $webhook->post($this->webhook_endpoint, ['body' => $payload, ['headers' => ['Content-Type' => 'application/json']]]);
 
             if(($test->getStatusCode() == 302)||($test->getStatusCode() == 301)){
                 return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
@@ -224,7 +224,7 @@ class SlackSettingsForm extends Component
 
         try {
             $response = Http::withHeaders([
-                'content-type' => 'applications/json',
+                'content-type' => 'application/json',
             ])->post($this->webhook_endpoint,
                 $payload)->throw();
 
@@ -259,7 +259,7 @@ class SlackSettingsForm extends Component
                         "text" => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
                     ];
                 $response = Http::withHeaders([
-                    'content-type' => 'applications/json',
+                    'content-type' => 'application/json',
                 ])->post($this->webhook_endpoint,
                     $payload)->throw();
             }
@@ -269,7 +269,7 @@ class SlackSettingsForm extends Component
                  $notification->success()->sendMessage($message);
 
                  $response = Http::withHeaders([
-                     'content-type' => 'applications/json',
+                     'content-type' => 'application/json',
                  ])->post($this->webhook_endpoint);
              }
 

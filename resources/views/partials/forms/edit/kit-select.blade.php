@@ -1,6 +1,6 @@
 <div id="kit_id" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}"{!!  (isset($style)) ? ' style="'.e($style).'"' : ''  !!}>
 
-    {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
+    <label for="{{ $fieldname }}" class="col-md-3 control-label">{{ $translated_name }}</label>
 
     <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="kits" data-placeholder="{{ trans('partials/forms/general.placeholder_kit') }}" name="{{ $fieldname }}" style="width: 100%" id="kit_id_select"{{  ((isset($required)) && ($required=='true')) ? ' required' : '' }}>

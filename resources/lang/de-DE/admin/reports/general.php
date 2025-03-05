@@ -13,5 +13,10 @@ return [
         'user_state' => 'Stadt des Benutzers',
         'user_country' => 'Land des Benutzers',
         'user_zip' => 'Postleitzahl des Benutzers'
-    ]
+    ],
+    'open_saved_template' => 'Gespeicherte Vorlage öffnen',
+    'save_template' =>  'Vorlage speichern',
+    'select_a_template' => 'Wählen Sie eine Vorlage aus',
+    'template_name' => 'Vorlagenname',
+    'update_template' => 'Vorlage aktualisieren',
 ];

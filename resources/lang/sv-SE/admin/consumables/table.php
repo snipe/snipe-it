@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'title'      				=> 'Förbrukningsnamn',
+    'title'      				=> 'Förbrukningsvarunamn',
 );

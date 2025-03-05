@@ -2,43 +2,43 @@
 
 return [
 
-    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'undeployable' 		 => '<strong>Varovanie: </strong> Tento majetok bol označný ako neodovzdateľný. Ak došlo k zmene, prosím upravte aktuálny stav majetku.',
     'does_not_exist' 	 => 'Majetok neexistuje.',
-    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
-    'no_tag' 	         => 'No asset tag provided.',
-    'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
+    'does_not_exist_var' => 'Majetok s označením :asset_tag nebol nájdený.',
+    'no_tag' 	         => 'Nebolo zadané žiadne označenie majetku.',
+    'does_not_exist_or_not_requestable' => 'Tento majetok neexistuje alebo sa nedá vyžiadať.',
     'assoc_users'	 	 => 'Tento majetok je práve priradený používateľovi, preto nemôže byť odstránený. Prosim najprv odoberte majetok používateľovi, následne skúste znovu. ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
-    'labels_generated'   => 'Labels were successfully generated.',
-    'error_generating_labels' => 'Error while generating labels.',
-    'no_assets_selected' => 'No assets selected.',
+    'warning_audit_date_mismatch' 	=> 'Nastavený dátum nasledujúceho auditu (:next_audit_date) je skorší ako dátum posledného auditu (:last_audit_date). Prosím upravte dátum nasledujúceho auditu.',
+    'labels_generated'   => 'Štítky boli úspešne vygenerované.',
+    'error_generating_labels' => 'Pri generovaní štítkov nastala chyba.',
+    'no_assets_selected' => 'Neboli zvolené žiadne položky majetku.',
 
     'create' => [
         'error'   		=> 'Majetok nebol vytvorený, prosím skúste znovu. :(',
         'success' 		=> 'Majetok bol úspešne vytvorený. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
-        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
-        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
+        'success_linked' => 'Majetok s označením :tag bol úspešne pridaný. <strong><a href=":link" style="color: white;">Kliknite sem pre zobrazenie</a></strong>.',
+        'multi_success_linked' => 'Majetok s označením :links bol úspešne pridaný.|:count majetkov bolo úspešne pridaných :links.',
+        'partial_failure' => 'Majetok sa nepodarilo pridať. Dôvod: :failuers|:count majetkov nebolo možné pridať. Dôvody: :failures',
     ],
 
     'update' => [
         'error'   			=> 'Majetok sa nepodarilo upraviť, skúste prosím znovu',
         'success' 			=> 'Majetok bol úspešne upravený.',
-        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
+        'encrypted_warning' => 'Majetok bol úspešne upravený, avšak šifrované vlastné polia neboli upravené z dôvodu oprávnení',
         'nothing_updated'	=>  'Neboli vybrané žiadne položky, preto nebolo nič upravené.',
-        'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
-        'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
+        'no_assets_selected'  =>  'Neboli vybrané žiadne majetky, preto nebolo nič upravené.',
+        'assets_do_not_exist_or_are_invalid' => 'Zvolené položky majetku nemôžu byť upravené.',
     ],
 
     'restore' => [
         'error'   		=> 'Majetok nebol obnovený, prosím skúste znovu',
         'success' 		=> 'Majetok bol úspešne obnovený.',
         'bulk_success' 		=> 'Majetok bol úspešne obnovený.',
-        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
+        'nothing_updated'   => 'Neboli zvolené žiadne položky majetku, preto nebolo nič obnovené.', 
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Audit majetku nebol úspešný :error ',
         'success' 		=> 'Audit majetko bol úspešne zaznamenaný.',
     ],
 
@@ -56,42 +56,43 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Spracovať import',
         'error'                 => 'Niektoré položky neboli správne naimportované.',
         'errorDetail'           => 'Nasledujúce položky neboli kvôli chybám importované.',
         'success'               => 'Súbor bol naimportovaný',
         'file_delete_success'   => 'Súbor bol úspešné odstránený',
         'file_delete_error'      => 'Súbor sa nepodarilo odstrániť',
-        'file_missing' => 'The file selected is missing',
-        'file_already_deleted' => 'The file selected was already deleted',
-        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
-        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'file_missing' => 'Vybraný súbor nebol nájdený',
+        'file_already_deleted' => 'Vybraný súbor už bol odstránený',
+        'header_row_has_malformed_characters' => 'Jeden alebo viacero stĺpcov obsahujú poškodené UTF-8 znaky',
+        'content_row_has_malformed_characters' => 'Jeden alebo viacero atribútov v prvom riadku obsahu obsahuje poškodené UTF-8 znaky',
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Ste si istý, že chcete odstrániť tento majetok?',
         'error'   		=> 'Pri odstraňovaní majetku sa vyskytla chyba. Skúste prosím znovu.',
-        'nothing_updated'   => 'Neboli zvolený žiaden majetok, preto nebolo nič odstránené.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
+        'nothing_updated'   => 'Neboli zvolený žiadne položky majetku, preto nebolo nič odstránené.',
         'success' 		=> 'Majetok bol úspešne odstránený.',
     ],
 
     'checkout' => [
-        'error'   		=> 'Majetok sa nepodarilo priradiť, skúste prosím znovu',
-        'success' 		=> 'Majetok bol úspešne priradený.',
+        'error'   		=> 'Majetok sa nepodarilo odovzdať, skúste prosím znovu',
+        'success' 		=> 'Majetok bol úspešne odovzdaný.',
         'user_does_not_exist' => 'Tento užívateľ nie je platný. Prosím skúste znovu.',
-        'not_available' => 'Tento majetok nie je k dospozícii pre priradenie!',
+        'not_available' => 'Tento majetok nie je k dospozícii pre odovzdanie!',
         'no_assets_selected' => 'Musíte vybrať najmenej jednu položku majetku zo zoznamu',
     ],
 
     'multi-checkout' => [
-        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
-        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
+        'error'   => 'Majetok nebol odovzdaný, prosím skúste znovu|Majetky neboli odovzdané, prosím skúste znovu',
+        'success' => 'Majetok bol úspešne odovzdaný.|Majetky boli úspešne odovzdané.',
     ],
 
     'checkin' => [
-        'error'   		=> 'Majetok sa nepodarilo prijať, skúste prosím znovu',
-        'success' 		=> 'Majetok bol úspešne prijatý.',
+        'error'   		=> 'Majetok sa nepodarilo prevziať, skúste prosím znovu',
+        'success' 		=> 'Majetok bol úspešne prevzatý.',
         'user_does_not_exist' => 'Tento užívateľ nie je platný. Prosím skúste znovu.',
         'already_checked_in'  => 'Tento majetok je už prevzatý.',
 
@@ -100,7 +101,7 @@ return [
     'requests' => [
         'error'   		=> 'Majetok nebol vyžiadaný, prosím skúste znovu',
         'success' 		=> 'Majetok úspešne vyžiadaný.',
-        'canceled'      => 'Požiadavka na priradenie bola úspešne zrušená',
+        'canceled'      => 'Požiadavka na odovzdanie bola úspešne zrušená',
     ],
 
 ];

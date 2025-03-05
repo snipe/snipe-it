@@ -7,7 +7,7 @@ return [
     'assets_checkedout'         => 'Tilldelade tillgångar',
     'id'                        => 'ID',
     'city'                      => 'Stad',
-    'state'                     => 'Stat',
+    'state'                     => 'Län',
     'country'                   => 'Land',
     'create'                    => 'Skapa plats',
     'update'                    => 'Uppdatera plats',
@@ -36,7 +36,7 @@ return [
     'date'                      => 'Datum:',
     'phone'                     => 'Plats Telefon',
     'signed_by_asset_auditor'   => 'Signerad av (Tillgångsansvarig):',
-    'signed_by_finance_auditor' => 'Undertecknad av (Finansrevisor):',
+    'signed_by_finance_auditor' => 'Undertecknad av (Revisor):',
     'signed_by_location_manager' => 'Undertecknad av (Platschef):',
     'signed_by'                 => 'Undertecknad av:',
 ];

@@ -20,7 +20,6 @@
 
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
 
             <table
                 data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
@@ -43,7 +42,6 @@
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
           </table>
-        </div>
       </div>
     </div>
   </div>

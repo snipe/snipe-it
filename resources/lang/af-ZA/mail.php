@@ -39,7 +39,7 @@ return [
     'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
     'assigned_to' => 'Toevertrou aan',
     'best_regards' => 'Beste wense,',
-    'canceled' => 'gekanselleer',
+    'canceled' => 'Gekanselleer',
     'checkin_date' => 'Incheckdatum',
     'checkout_date' => 'Checkout Datum',
     'checkedout_from' => 'Checked out from',

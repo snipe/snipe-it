@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Ma hubtaa inaad rabto inaad tirtirto hantidan?',
         'error'   		=> 'Waxaa jirtay arrin la tirtiray hantida Fadlan isku day mar kale.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Wax hanti ah lama dooran, markaa waxba lama tirtirin.',
         'success' 		=> 'Hantida si guul leh ayaa loo tirtiray.',
     ],

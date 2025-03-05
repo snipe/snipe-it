@@ -9,19 +9,19 @@ return array(
 
         'create' => array(
             'error'   => 'Goobta lama abuurin, fadlan isku day mar kale.',
-            'success' => 'Goobta si guul leh ayaa loo sameeyay',
+            'success' => 'Feild-dhiga waa lagu guuleystay in la sameeyo.',
             'assoc_success' => 'Goobta si guul leh ayaa loogu daray goobta.'
         ),
 
         'update' => array(
             'error'   => 'Goobta lama cusboonaysiin, fadlan isku day mar kale',
-            'success' => 'Goobta si guul leh ayaa loo cusboonaysiiyay'
+            'success' => 'Feild-dhiga waa lagu guuleystay in la cusbooneysiiyo.'
         ),
 
         'delete' => array(
             'confirm'   	=> 'Ma hubtaa inaad doonayso inaad tirtirto goobtan?',
-            'error'   => 'Waxaa jirtay arrin la tirtiray garoonka. Fadlan isku day mar kale',
-            'success' => 'Goobta si guul leh ayaa loo tirtiray',
+            'error'   => 'Waxaa jirtay arrin tir-tireysay feild-dhiga. Fadlan isku day mar kale.',
+            'success' => 'Feild-dhiga waa lagu guuleystay in la tir-tiro.',
             'in_use'   => 'Goobta weli waa la isticmaalayaa.',
         )
 
@@ -33,26 +33,26 @@ return array(
 
         'create' => array(
             'error'   => 'Fieldset lama abuurin, fadlan isku day mar kale.',
-            'success' => 'Fieldset si guul leh ayaa loo sameeyay'
+            'success' => 'Fieldset waa lagu guuleystay in la sameeyo.'
         ),
 
         'update' => array(
             'error'   => 'Fieldset lama cusboonaysiin, fadlan isku day mar kale',
-            'success' => 'Goobta goobta ayaa si guul leh loo cusboonaysiiyay'
+            'success' => 'Feildset waa lagu guuleystay in la cusbooneysiiyo.'
         ),
 
         'delete' => array(
             'confirm'   	=> 'Ma hubtaa inaad rabto inaad tirtirto goobtan?',
-            'error'   => 'Waxaa jirtay arrin la tirtiray goobta. Fadlan isku day mar kale',
-            'success' => 'Goobta garoonka si guul leh ayaa loo tirtiray',
-            'in_use'   => 'Fieldset weli waa la isticmaalayaa',
+            'error'   => 'Waxaa jirtay arrin tir-tireysay feild-dhiga. Fadlan isku day mar kale.',
+            'success' => 'Fieldset waa lagu guuleystay in la tir-tiro.',
+            'in_use'   => 'Fieldset weli waa la isticmaalayaa.',
         )
 
     ),
 
     'fieldset_default_value' => array(
 
-        'error' => 'Khalad ansaxinta qiyamka godadka goobta caadiga ah',
+        'error' => 'Khalad ayaa kajira hubinta qiimaha feildset-ka.',
 
     ),
 

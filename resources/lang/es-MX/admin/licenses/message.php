@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Hubo un problema ingresando la licencia. Por favor, inténtelo de nuevo.',
+        'not_reassignable' => 'La licencia no se puede volver a asignar',
         'success' => 'La licencia fue ingresada correctamente'
     ),
 

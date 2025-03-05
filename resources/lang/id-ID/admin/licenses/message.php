@@ -2,14 +2,14 @@
 
 return array(
 
-    'does_not_exist' => 'License does not exist or you do not have permission to view it.',
-    'user_does_not_exist' => 'User does not exist or you do not have permission to view them.',
+    'does_not_exist' => 'Lisensi tidak ada atau Anda tidak memiliki izin untuk melihatnya.',
+    'user_does_not_exist' => 'Pengguna tidak ada atau Anda tidak memiliki izin untuk melihatnya.',
     'asset_does_not_exist' 	=> 'Aset yang hendak di asosiasikan dengan lisensi ini tidak ada.',
     'owner_doesnt_match_asset' => 'Aset yang hendak di asosiasikan dengan lisensi ini di miliki oleh seseorang yang tidak masuk dalam daftar.',
     'assoc_users'	 => 'Lisensi ini sudah diberikan kepada pengguna dan tidak dapat di hapus. Silahkan cek lisensi terlebih dahulu kemudian coba hapus kembali. ',
     'select_asset_or_person' => 'Anda harus memilih aset atau pengguna, namun tidak keduanya.',
     'not_found' => 'Berkas Lisensi tidak ditemukan',
-    'seats_available' => ':seat_count seats available',
+    'seats_available' => ':seat_count slot lisensi tersedia',
 
 
     'create' => array(
@@ -43,13 +43,14 @@ return array(
     'checkout' => array(
         'error'   => 'Terdapat kesalahan pada saat pemberian lisensi ini. Silahkan coba kembali.',
         'success' => 'Lisensi telah berhasil diberikan',
-        'not_enough_seats' => 'Not enough license seats available for checkout',
-        'mismatch' => 'The license seat provided does not match the license',
-        'unavailable' => 'This seat is not available for checkout.',
+        'not_enough_seats' => 'Jumlah slot lisensi yang tersedia tidak mencukupi untuk dipinjam atau diambil',
+        'mismatch' => 'Slot lisensi yang diberikan tidak cocok dengan lisensi',
+        'unavailable' => 'Slot lisensi ini tidak tersedia untuk dipinjam atau diambil.',
     ),
 
     'checkin' => array(
         'error'   => 'Terdapat kesalahan pada saat penerimaan lisensi ini. Silahkan coba kembali.',
+        'not_reassignable' => 'Lisensi tidak dapat dialihkan atau ditetapkan ulang',
         'success' => 'Lisensi telah berhasil diterima'
     ),
 

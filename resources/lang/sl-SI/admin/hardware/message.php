@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Ali ste prepričani, da želite izbrisati to sredstvo?',
         'error'   		=> 'Prišlo je do težave z izbrisom sredstva. Prosim poskusite ponovno.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Nobena sredstva niso bila izbrana, zato ni bilo nič izbrisanih.',
         'success' 		=> 'Sredstvo je bilo uspešno izbrisano.',
     ],

@@ -9,16 +9,16 @@ return [
     'does_not_exist_or_not_requestable' => 'Aktywo nie istnieje albo nie można go zażądać.',
     'assoc_users'	 	 => 'Ten nabytek/zasób jest przypisany do użytkownika i nie może być usunięty. Proszę sprawdzić przypisanie nabytków/zasobów a następnie spróbować ponownie.',
     'warning_audit_date_mismatch' 	=> 'Data następnego audytu (:next_audit_date) jest przed datą poprzedniego audytu (:last_audit_date). Zaktualizuj datę następnego audytu.',
-    'labels_generated'   => 'Labels were successfully generated.',
-    'error_generating_labels' => 'Error while generating labels.',
-    'no_assets_selected' => 'No assets selected.',
+    'labels_generated'   => 'Etykiety zostały pomyślnie wygenerowane.',
+    'error_generating_labels' => 'Błąd podczas generowania etykiet.',
+    'no_assets_selected' => 'Nie wybrano żadnych zasobów.',
 
     'create' => [
         'error'   		=> 'Nabytek nie został utworzony, proszę spróbować ponownie. :(',
         'success' 		=> 'Nowy nabytek został utworzony. :)',
         'success_linked' => 'Zasób o tagu :tag został utworzony pomyślnie. <strong><a href=":link" style="color: white;">Kliknij tutaj, aby wyświetlić</a></strong>.',
-        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
-        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
+        'multi_success_linked' => 'Zasób z tagiem :link został utworzony pomyślnie.|:count aktywów zostało utworzonych pomyślnie. :links.',
+        'partial_failure' => 'Nie można utworzyć zasobu. Powód: :failures|:count aktywów nie mogły zostać utworzone. Powód: :failed',
     ],
 
     'update' => [
@@ -63,7 +63,7 @@ return [
         'file_delete_success'   => 'Twój plik został poprawnie usunięty',
         'file_delete_error'      => 'Plik nie może zostać usunięty',
         'file_missing' => 'Brakuje wybranego pliku',
-        'file_already_deleted' => 'The file selected was already deleted',
+        'file_already_deleted' => 'Wybrany plik został już usunięty',
         'header_row_has_malformed_characters' => 'Jeden lub więcej atrybutów w wierszu nagłówka zawiera nieprawidłowe znaki UTF-8',
         'content_row_has_malformed_characters' => 'Jeden lub więcej atrybutów w pierwszym rzędzie zawartości zawiera nieprawidłowe znaki UTF-8',
     ],
@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Czy na pewno chcesz usunąć?',
         'error'   		=> 'Nie można usunąć. Proszę spróbować ponownie.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Aktywa nie zostały wybrane, więc nic nie zostało usunięte.',
         'success' 		=> 'Nabytek został usunięty.',
     ],
@@ -85,8 +86,8 @@ return [
     ],
 
     'multi-checkout' => [
-        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
-        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
+        'error'   => 'Zasób nie został zablokowany, spróbuj ponownie|Zasoby nie zostały zablokowane, spróbuj ponownie',
+        'success' => 'Zasób wydany pomyślnie.|Zasoby wydane pomyślnie.',
     ],
 
     'checkin' => [

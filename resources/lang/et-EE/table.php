@@ -5,7 +5,7 @@ return array(
     'actions'	 	        => 'Tegevused',
     'action' 		        => 'Tegevus',
     'by'      		        => 'Kes',
-    'item' 			        => 'Kirje',
+    'item' 			        => 'Vara',
     'no_matching_records'   => 'No matching records found',
 
 );

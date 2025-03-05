@@ -1,17 +1,22 @@
 <?php
 
 return [
-    'info'   => 'Select the options you want for your asset report.',
-    'deleted_user' => 'Deleted user',
-    'send_reminder' => 'Send reminder',
-    'reminder_sent' => 'Reminder sent',
-    'acceptance_deleted' => 'Acceptance request deleted',
-    'acceptance_request' => 'Acceptance request',
+    'info'   => 'Vyberte možnosti pre váš report majetku.',
+    'deleted_user' => 'Zmazaní používatelia',
+    'send_reminder' => 'Poslať pripomienku',
+    'reminder_sent' => 'Pripomienka zaslaná',
+    'acceptance_deleted' => 'Požiadavka na akceptáciu odstránená',
+    'acceptance_request' => 'Požiadavka na akceptáciu',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
-    ]
+        'user_address' => 'Adresa používateľa',
+        'user_city' => 'Mesto používateľa',
+        'user_state' => 'Štát používateľa',
+        'user_country' => 'Krajina používateľa',
+        'user_zip' => 'PSČ používateľa'
+    ],
+    'open_saved_template' => 'Otvoriť uloženú šablónu',
+    'save_template' =>  'Uložiť šablónu',
+    'select_a_template' => 'Vybrať šablónu',
+    'template_name' => 'Názov šablóny',
+    'update_template' => 'Upraviť šablónu',
 ];

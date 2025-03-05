@@ -141,6 +141,7 @@ class LogListener
             'CheckoutAccepted',
             'CheckoutDeclined',
             'UserMerged',
+            'NoteAdded',
         ];
 
         foreach ($list as $event) {

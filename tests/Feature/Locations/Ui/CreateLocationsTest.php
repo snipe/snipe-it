@@ -19,6 +19,13 @@ class CreateLocationsTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('locations.create'))
+            ->assertOk();
+    }
+
     public function testUserCanCreateLocations()
     {
         $this->assertFalse(Location::where('name', 'Test Location')->exists());
@@ -26,11 +33,11 @@ class CreateLocationsTest extends TestCase
         $this->actingAs(User::factory()->superuser()->create())
             ->post(route('locations.store'), [
                 'name' => 'Test Location',
-                'company_id' => Company::factory()->create()->id
+                'notes' => 'Test Note',
             ])
             ->assertRedirect(route('locations.index'));
 
-        $this->assertTrue(Location::where('name', 'Test Location')->exists());
+        $this->assertTrue(Location::where('name', 'Test Location')->where('notes', 'Test Note')->exists());
     }
 
     public function testUserCannotCreateLocationsWithInvalidParent()

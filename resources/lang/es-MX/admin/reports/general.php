@@ -13,5 +13,10 @@ return [
         'user_state' => 'Estado del usuario',
         'user_country' => 'País del usuario',
         'user_zip' => 'Código postal del usuario'
-    ]
+    ],
+    'open_saved_template' => 'Abrir plantilla guardada',
+    'save_template' =>  'Guardar plantilla',
+    'select_a_template' => 'Seleccione una plantilla',
+    'template_name' => 'Nombre de la plantilla',
+    'update_template' => 'Actualizar plantilla',
 ];

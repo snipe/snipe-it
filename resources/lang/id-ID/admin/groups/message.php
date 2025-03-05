@@ -3,7 +3,7 @@
 return array(
 
     'group_exists'        => 'Kelompok sudah ada!',
-    'group_not_found'     => 'Group ID :id does not exist.',
+    'group_not_found'     => 'ID Grup :id tidak ada.',
     'group_name_required' => 'Field nama di perlukan',
 
     'success' => array(

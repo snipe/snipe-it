@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testiranje LDAP Avtentikacije...',
         'authentication_success' => 'Uporabnik se je uspešno avtoriziral z LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Pošiljanje :apikacija testirno sporočilo...',
         'success' => 'Tvoj :ime_webhooka integracija deluje!',
@@ -45,5 +48,7 @@ return [
         'error' => 'Something went wrong. :app responded with: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => 'Nekaj je šlo narobe. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

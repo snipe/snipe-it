@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'example_company'    => 'Test Company Limited',
+    'example_company'    => 'Testbolaget AB',
     'example_defaultloc' => 'Byggnad 1',
-    'example_category'   => 'Testa kategori',
+    'example_category'   => 'Testkategori',
     'example_location'   => 'Byggnad 2',
     'example_manufacturer'  => 'Testtillverkaren AB',
     'example_model'      => 'Testa modell',

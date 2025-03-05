@@ -329,6 +329,7 @@ class Importer extends Component
         ];
 
         $this->locations_fields = [
+            'id' => trans('general.id'),
             'name' => trans('general.item_name_var', ['item' => trans('general.location')]),
             'address' => trans('general.address'),
             'address2' => trans('general.importer.address2'),
@@ -341,6 +342,7 @@ class Importer extends Component
             'manager_username' => trans('general.importer.manager_username'),
             'manager' => trans('general.importer.manager_full_name'),
             'parent_location' => trans('admin/locations/table.parent'),
+            'notes' => trans('general.notes'),
         ];
 
         $this->assetmodels_fields  = [
@@ -400,7 +402,6 @@ class Importer extends Component
                     'requestable',
                     'Requestable',
                 ],
-
             'gravatar' =>
                 [
                     'gravatar',

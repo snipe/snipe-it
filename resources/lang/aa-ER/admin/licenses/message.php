@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'crwdns948:0crwdne948:0',
+        'not_reassignable' => 'crwdns12802:0crwdne12802:0',
         'success' => 'crwdns949:0crwdne949:0'
     ),
 

@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => 'Pemasok yang dihapus',
     'does_not_exist' => 'Pemasok tidak ada.',
 
 
