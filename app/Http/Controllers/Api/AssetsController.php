@@ -560,7 +560,7 @@ class AssetsController extends Controller
             ->NotArchived();
 
         if ((Setting::getSettings()->full_multiple_companies_support=='1') &&  ($request->filled('companyId'))) {
-            $assets->where('company_id', $request->input('companyId'));
+            $assets->where('assets.company_id', $request->input('companyId'));
         }
 
         if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
