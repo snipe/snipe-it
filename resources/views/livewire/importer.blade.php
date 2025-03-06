@@ -219,7 +219,7 @@
                                                                     <hr style="border-top: 1px solid lightgray">
                                                                 </div>
                                                                 <div class="form-group col-md-12">
-                                                                    <div class="col-md-3 text-right">
+                                                                    <div class="col-md-2 text-right">
                                                                         <strong>{{ trans('general.csv_header_field') }}</strong>
                                                                     </div>
                                                                     <div class="col-md-4">
@@ -227,6 +227,9 @@
                                                                     </div>
                                                                     <div class="col-md-5">
                                                                         <strong>{{ trans('general.sample_value') }}</strong>
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                        <strong>Status</strong> {{-- FIXME - TRANSLATE ME! --}}
                                                                     </div>
                                                                 </div><!-- /div row -->
 
@@ -236,9 +239,9 @@
 
                                                                         <div class="form-group col-md-12" wire:key="header-row-{{ $index }}">
 
-                                                                            <label for="field_map.{{ $index }}" class="col-md-3 control-label text-right">{{ $header }}</label>
+                                                                            <label for="field_map.{{ $index }}"
+                                                                                   class="col-md-2 control-label text-right">{{ $header }}</label>
                                                                             <div class="col-md-4">
-
                                                                                 {{ Form::select('field_map.'.$index, $columnOptions[$typeOfImport], @$field_map[$index],
                                                                                     [
                                                                                         'class' => 'mappings livewire-select2',
@@ -254,6 +257,11 @@
                                                                             <div class="col-md-5">
                                                                                 <p class="form-control-static">{{ str_limit($this->activeFile->first_row[$index], 50, '...') }}</p>
                                                                             </div>
+                                                                                <div class="col-md-1">
+                                                                                    @if(array_key_exists($index, $mapping_errors))
+                                                                                        BAD MAPPING
+                                                                                    @endif
+                                                                                </div>
                                                                         @else
                                                                             @php
                                                                             $statusText = trans('help.empty_file');
@@ -271,7 +279,9 @@
                                                                         <a href="#" wire:click.prevent="$set('activeFileId',null)">{{ trans('general.cancel') }}</a>
                                                                     </div>
                                                                     <div class="col-md-9">
-                                                                        <button type="submit" class="btn btn-primary col-md-5" id="import">{{ trans('admin/hardware/message.import.import_button') }}</button>
+                                                                        <button type="submit"
+                                                                                class="btn btn-primary col-md-5"
+                                                                                {{ $enough_data_to_import ? '' : ' disabled="disabled"' }} id="import">{{ trans('admin/hardware/message.import.import_button') }}</button>
                                                                         <br><br>
                                                                     </div>
                                                                 </div>

@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\CustomField;
 use App\Models\Import;
+use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
@@ -30,6 +31,8 @@ class Importer extends Component
     public $send_welcome;
     public $run_backup;
     public $field_map; // we need a separate variable for the field-mapping, because the keys in the normal array are too complicated for Livewire to understand
+    public $mapping_errors = []; // helps keep track of duplicate mappings
+    public $enough_data_to_import = false;
 
     // Make these variables public - we set the properties in the constructor so we can localize them (versus the old static arrays)
     public $accessories_fields;
@@ -118,6 +121,7 @@ class Importer extends Component
     public function updatingTypeOfImport($type)
     {
 
+        \Log::error("UPDATING TYPE OF IMPORT!!!!!! to: $type");
         // go through each header, find a matching field to try and map it to.
         foreach ($this->headerRow as $i => $header) {
             // do we have something mapped already?
@@ -159,6 +163,107 @@ class Importer extends Component
         }
     }
 
+    public function updatedFieldMap($value, $index)
+    {
+        \Log::error("Updated (past tense!) THE FIELD MAP! HERE's...something? $index - the value it's changing to is: $value");
+        //check first if you've tried to map two different things to the same field.
+        $already_mapped = [];
+        foreach ($this->field_map as $i => $mapping) {
+            if (!$mapping) {
+                //'Do Not Import' *can* be reused
+                continue;
+            }
+            if (array_key_exists($mapping, $already_mapped)) {
+                $this->mapping_errors[$i] = true;
+            } else {
+                $already_mapped[$mapping] = true;
+            }
+        }
+
+        //finally, check to see if you have enough to import this type of file
+        $this->enough_data_to_import = $this->check_minimum_mappings($already_mapped);
+    }
+
+    private function check_minimum_mappings($already_mapped)
+    {
+        /*****************************
+         * TODO (maybe more than that) -
+         * should we shrink this into some kind of language?
+         * When we allow for an 'update' - should we insist on getting *any* column so we
+         * can guarantee an update?
+         * If we're *not* doing an update, should we have a fuller list?
+         * And, again, is there a better way of doing this other than 'code'? I'm still not sure
+         * (Also, I hate the '@' signs everywhere, it's gross :/)
+         *******************************/
+        switch ($this->typeOfImport) {
+            case 'asset':
+                if ($this->update) {
+                    //on *update* you need asset_tag, and something to update
+                    return @$already_mapped['asset_tag'] && count($already_mapped) > 1;
+                } else {
+                    //model is required on create.
+                    if (!@$already_mapped['asset_model']) {
+                        return false;
+                    }
+
+                    //on *create* we need either an asset tag, or we need autoincrement
+                    return (Setting::getSetting()->auto_increment_assets || @$already_mapped['asset_tag']);
+                }
+            case 'user':
+                if ($this->update) {
+                    //a username + one other field is a valid update.
+                    if (@$already_mapped['username'] && count($already_mapped) > 1) {
+                        return true;
+                    }
+                    //or, a full_name and one other field will do
+                    if (@$already_mapped['full_name'] && count($already_mapped) > 1) {
+                        return true;
+                    }
+                    //but just a first name isn't enough to update users - you don't have enough to import
+                    return false;
+                } else {
+                    // to create a new user in the importer, having any *one* of these things is enough to guess
+                    // the rest (!)
+                    return @$already_mapped['full_name'] || @$already_mapped['username'] || @$already_mapped['first_name'];
+                }
+            case 'accessory':
+                if ($this->update) {
+                    return @$already_mapped['name'] && count($already_mapped) > 1;
+                } else {
+                    return @$already_mapped['name'] && @$already_mapped['category'] && @$already_mapped['qty'];
+                }
+            case 'consumable':
+                // PHPStorm complains that this 'branch' is a dupe of accessory, and it kinda is,
+                // but it may not *always* be, so let's keep this as its own thing for now
+                if ($this->update) {
+                    return @$already_mapped['name'] && count($already_mapped) > 1;
+                } else {
+                    return @$already_mapped['name'] && @$already_mapped['category'] && @$already_mapped['qty'];
+                }
+            case 'component':
+                //similarly here for 'component'
+                if ($this->update) {
+                    return (@$already_mapped['name'] && count($already_mapped) > 1);
+                } else {
+                    return @$already_mapped['name'] && @$already_mapped['category'] && @$already_mapped['qty'];
+                }
+            case 'license':
+                if ($this->update) {
+                    return @$already_mapped['name'] && count($already_mapped) > 1;
+                } else {
+                    return @$already_mapped['name'] && @$already_mapped['seats'] && @$already_mapped['category'];
+                }
+            case 'location':
+                // Weird - this one is the only one where the update is _stricter_ than the insert!
+                if ($this->update) {
+                    return @$already_mapped['name'] && count($already_mapped) > 1;
+                } else {
+                    return @$already_mapped['name'];
+                }
+        }
+        return true; //go with a conservative option here, we can tighten this up later
+
+    }
     public function mount()
     {
         $this->authorize('import');
@@ -179,7 +284,7 @@ class Importer extends Component
         $this->accessories_fields = [
             'company' => trans('general.company'),
             'location' => trans('general.location'),
-            'quantity' => trans('general.qty'),
+            'quantity' => trans('general.quantity'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.accessory')]),
             'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
@@ -240,7 +345,7 @@ class Importer extends Component
         $this->consumables_fields = [
             'company' => trans('general.company'),
             'location' => trans('general.location'),
-            'quantity' => trans('general.qty'),
+            'quantity' => trans('general.quantity'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.consumable')]),
             'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
@@ -258,7 +363,7 @@ class Importer extends Component
         $this->components_fields = [
             'company' => trans('general.company'),
             'location' => trans('general.location'),
-            'quantity' => trans('general.qty'),
+            'quantity' => trans('general.quantity'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.component')]),
             'model_number' => trans('general.model_no'),
             'notes' => trans('general.notes'),
@@ -476,7 +581,7 @@ class Importer extends Component
                     'Warranty',
                     'Warranty Months'
                 ],
-            'qty' =>
+            'quantity' =>
                 [
                     'QTY',
                     'Quantity'
@@ -535,6 +640,8 @@ class Importer extends Component
         foreach ($this->importTypes as $type => $name) {
             $this->columnOptions[$type] = $this->getColumns($type);
         }
+
+        $this->mapping_errors = [];
     }
 
     public function selectFile($id)
@@ -564,6 +671,8 @@ class Importer extends Component
         $this->file_id = $id;
         $this->import_errors = null;
         $this->statusText = null;
+        $this->mapping_errors = [];
+        $this->updatedFieldMap("x", -1); //force trigger the duplicate-fieldmapping (and minimum fieldmapping) code
 
     }
 
