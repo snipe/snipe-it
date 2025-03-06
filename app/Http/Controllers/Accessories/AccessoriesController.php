@@ -184,15 +184,15 @@ class AccessoriesController extends Controller
      */
     public function destroy($accessoryId) : RedirectResponse
     {
-        if (is_null($accessory = Accessory::find($accessoryId))) {
+        if (is_null($accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessoryId))) {
             return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.not_found'));
         }
 
         $this->authorize($accessory);
 
 
-        if ($accessory->hasUsers() > 0) {
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.assoc_users', ['count'=> $accessory->hasUsers()]));
+        if ($accessory->checkouts_count > 0) {
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/general.delete_disabled'));
         }
 
         if ($accessory->image) {
