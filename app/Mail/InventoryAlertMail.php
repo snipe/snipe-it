@@ -10,8 +10,8 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-
-#[AllowDynamicProperties] class InventoryAlertMail extends Mailable
+#[AllowDynamicProperties]
+class InventoryAlertMail extends Mailable
 {
     use Queueable, SerializesModels;
 
