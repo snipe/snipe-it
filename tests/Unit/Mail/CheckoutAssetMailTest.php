@@ -6,83 +6,70 @@ use App\Mail\CheckoutAssetMail;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\User;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class CheckoutAssetMailTest extends TestCase
 {
-    public function testSubjectLine()
+    public static function data()
     {
-        $user = User::factory()->create();
-        $actor = User::factory()->create();
+        yield 'Asset requiring acceptance' => [
+            function () {
+                $asset = Asset::factory()->requiresAcceptance()->create();
+                return [
+                    'asset' => $asset,
+                    'acceptance' => CheckoutAcceptance::factory()->for($asset, 'checkoutable')->create(),
+                    'first_time_sending' => true,
+                    'expected_subject' => 'Asset checked out',
+                    'expected_opening' => 'A new item has been checked out under your name that requires acceptance, details are below.'
+                ];
+            }
+        ];
 
-        $assetRequiringAcceptance = Asset::factory()->requiresAcceptance()->create();
-        $assetNotRequiringAcceptance = Asset::factory()->doesNotRequireAcceptance()->create();
+        yield 'Asset not requiring acceptance' => [
+            function () {
+                return [
+                    'asset' => Asset::factory()->doesNotRequireAcceptance()->create(),
+                    'acceptance' => null,
+                    'first_time_sending' => true,
+                    'expected_subject' => 'Asset checked out',
+                    'expected_opening' => 'A new item has been checked out under your name, details are below.'
+                ];
+            }
+        ];
 
-        $acceptance = CheckoutAcceptance::factory()->for($assetRequiringAcceptance, 'checkoutable')->create();
-
-        (new CheckoutAssetMail(
-            $assetRequiringAcceptance,
-            $user,
-            $actor,
-            $acceptance,
-            'A note goes here',
-            true,
-        ))->assertHasSubject('Asset checked out');
-
-        (new CheckoutAssetMail(
-            $assetNotRequiringAcceptance,
-            $user,
-            $actor,
-            null,
-            'A note goes here',
-            true,
-        ))->assertHasSubject('Asset checked out');
-
-        (new CheckoutAssetMail(
-            $assetRequiringAcceptance,
-            $user,
-            $actor,
-            $acceptance,
-            'A note goes here',
-            false,
-        ))->assertHasSubject('Reminder: You have Unaccepted Assets.');
+        yield 'Reminder' => [
+            function () {
+                return [
+                    'asset' => Asset::factory()->requiresAcceptance()->create(),
+                    'acceptance' => CheckoutAcceptance::factory()->create(),
+                    'first_time_sending' => false,
+                    'expected_subject' => 'Reminder: You have Unaccepted Assets.',
+                    'expected_opening' => 'An item was recently checked out under your name that requires acceptance, details are below.'
+                ];
+            }
+        ];
     }
 
-    public function testContent()
+    #[DataProvider('data')]
+    public function testSubjectLineAndOpening($data)
     {
-        $user = User::factory()->create();
-        $actor = User::factory()->create();
-
-        $assetRequiringAcceptance = Asset::factory()->requiresAcceptance()->create();
-        $assetNotRequiringAcceptance = Asset::factory()->doesNotRequireAcceptance()->create();
-
-        $acceptance = CheckoutAcceptance::factory()->for($assetRequiringAcceptance, 'checkoutable')->create();
+        [
+            'asset' => $asset,
+            'acceptance' => $acceptance,
+            'first_time_sending' => $firstTimeSending,
+            'expected_subject' => $expectedSubject,
+            'expected_opening' => $expectedOpening,
+        ] = $data();
 
         (new CheckoutAssetMail(
-            $assetRequiringAcceptance,
-            $user,
-            $actor,
+            $asset,
+            User::factory()->create(),
+            User::factory()->create(),
             $acceptance,
             'A note goes here',
-            true,
-        ))->assertSeeInText('A new item has been checked out under your name that requires acceptance, details are below.');
-
-        (new CheckoutAssetMail(
-            $assetNotRequiringAcceptance,
-            $user,
-            $actor,
-            null,
-            'A note goes here',
-            true,
-        ))->assertSeeInText('A new item has been checked out under your name, details are below.');
-
-        (new CheckoutAssetMail(
-            $assetRequiringAcceptance,
-            $user,
-            $actor,
-            $acceptance,
-            'A note goes here',
-            false,
-        ))->assertSeeInText('An item was recently checked out under your name that requires acceptance, details are below.');
+            $firstTimeSending,
+        ))->assertHasSubject($expectedSubject)
+            ->assertSeeInText($expectedOpening);
     }
 }
