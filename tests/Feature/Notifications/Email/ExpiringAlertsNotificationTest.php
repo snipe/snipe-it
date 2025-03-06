@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Notifications\Email;
 
-use App\Console\Commands\SendInventoryAlerts;
 use App\Helpers\Helper;
 use App\Mail\ExpiringAssetsMail;
 use App\Mail\ExpiringLicenseMail;
