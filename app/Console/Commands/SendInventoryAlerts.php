@@ -3,11 +3,10 @@
 namespace App\Console\Commands;
 
 use App\Helpers\Helper;
-use App\Models\Recipients\AlertRecipient;
+use App\Mail\InventoryAlertMail;
 use App\Models\Setting;
-use App\Notifications\InventoryAlert;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
 
 class SendInventoryAlerts extends Command
 {
@@ -41,6 +40,9 @@ class SendInventoryAlerts extends Command
     public function handle()
     {
         $settings = Setting::getSettings();
+        if(!$settings){
+            throw new \RuntimeException('Settings not found');
+        }
 
         if (($settings->alert_email != '') && ($settings->alerts_enabled == 1)) {
             $items = Helper::checkLowInventory();
@@ -48,11 +50,11 @@ class SendInventoryAlerts extends Command
             if (($items) && (count($items) > 0)) {
                 $this->info(trans_choice('mail.low_inventory_alert', count($items)));
                 // Send a rollup to the admin, if settings dictate
-                $recipients = collect(explode(',', $settings->alert_email))->map(function ($item, $key) {
-                    return new AlertRecipient($item);
-                });
+                $recipients = collect(explode(',', $settings->alert_email))
+                    ->map(fn($item) => trim($item)) // Trim each email
+                    ->all();
 
-                \Notification::send($recipients, new InventoryAlert($items, $settings->alert_threshold));
+                Mail::to($recipients)->send(new InventoryAlertMail($items, $settings->alert_threshold));
             }
         } else {
             if ($settings->alert_email == '') {
