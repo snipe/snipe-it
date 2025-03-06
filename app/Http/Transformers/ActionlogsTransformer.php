@@ -201,7 +201,7 @@ class ActionlogsTransformer
             'remote_ip'          => ($actionlog->remote_ip) ??  null,
             'user_agent'          => ($actionlog->user_agent) ??  null,
             'action_source'          => ($actionlog->action_source) ??  null,
-            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
+            'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'date'): Helper::getFormattedDateObject($actionlog->created_at, 'date'),
         ];
 
 //        Log::info("Clean Meta is: ".print_r($clean_meta,true));
