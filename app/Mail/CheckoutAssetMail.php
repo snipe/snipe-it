@@ -98,7 +98,7 @@ class CheckoutAssetMail extends Mailable
                 'accept_url'    => $accept_url,
                 'last_checkout' => $this->last_checkout,
                 'expected_checkin'  => $this->expected_checkin,
-                'opening_line' => $this->openingLine(),
+                'introduction_line' => $this->introductionLine(),
             ],
         );
     }
@@ -119,21 +119,21 @@ class CheckoutAssetMail extends Mailable
             return trans('mail.Asset_Checkout_Notification');
         }
 
-        return 'Reminder: ' . trans('mail.unaccepted_asset_reminder');
+        return trans('mail.unaccepted_asset_reminder');
     }
 
-    private function openingLine(): string
+    private function introductionLine(): string
     {
         if ($this->firstTimeSending && $this->requiresAcceptance()) {
-            return 'A new item has been checked out under your name that requires acceptance, details are below.';
+            return trans('mail.new_item_checked_with_acceptance');
         }
 
         if ($this->firstTimeSending && !$this->requiresAcceptance()) {
-            return 'A new item has been checked out under your name, details are below.';
+            return trans('mail.new_item_checked');
         }
 
         if (!$this->firstTimeSending && $this->requiresAcceptance()) {
-            return 'An item was recently checked out under your name that requires acceptance, details are below.';
+            return trans('mail.recent_item_checked');
         }
 
         // we shouldn't get here but let's send a default message just in case

@@ -1,7 +1,7 @@
 @component('mail::message')
 # {{ trans('mail.hello') }} {{ $target->present()->fullName() }},
 
-{{ $opening_line }}
+{{ $introduction_line }}
 
 @if (($snipeSettings->show_images_in_email =='1') && $item->getImageUrl())
 <center><img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;"></center>
