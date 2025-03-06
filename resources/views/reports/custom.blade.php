@@ -37,7 +37,7 @@
 
         <form
             method="POST"
-            action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : '/reports/custom' }}"
+            action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : route('reports.post-custom') }}"
             accept-charset="UTF-8"
             class="form-horizontal"
             id="custom-report-form"
@@ -627,7 +627,11 @@
                 >
                     <option></option>
                     @foreach($report_templates as $savedTemplate)
-                        <option value="{{ $savedTemplate->id }}" @selected($savedTemplate->is(request()->route()->parameter('reportTemplate')))>
+                        <option
+                            value="{{ $savedTemplate->id }}"
+                            data-route="{{ route('report-templates.show', $savedTemplate->id) }}"
+                            @selected($savedTemplate->is(request()->route()->parameter('reportTemplate')))
+                        >
                             {{ $savedTemplate->name }}
                         </option>
                     @endforeach
@@ -774,7 +778,7 @@
 
       $('#saved_report_select')
           .on('select2:select', function (event) {
-              window.location.href = '/reports/templates/' + event.params.data.id;
+              window.location.href = event.params.data.element.dataset.route;
           });
 
       $('#dataConfirmModal').on('show.bs.modal', function (event) {

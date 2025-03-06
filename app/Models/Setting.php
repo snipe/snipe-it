@@ -247,7 +247,7 @@ class Setting extends Model
      *
      * @return string
      */
-    public function routeNotificationForSlack(): string
+    public function routeNotificationForSlack(): ?string
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
@@ -259,7 +259,7 @@ class Setting extends Model
      *
      * @return string
      */
-    public function routeNotificationForMail(): string
+    public function routeNotificationForMail(): ?string
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
