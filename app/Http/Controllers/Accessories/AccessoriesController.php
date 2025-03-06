@@ -192,7 +192,7 @@ class AccessoriesController extends Controller
 
 
         if ($accessory->checkouts_count > 0) {
-            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/message.assoc_checkouts', ['count' => $accessory->checkouts_count]));
+            return redirect()->route('accessories.index')->with('error', trans('admin/accessories/general.delete_disabled'));
         }
 
         if ($accessory->image) {

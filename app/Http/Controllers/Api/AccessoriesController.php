@@ -253,7 +253,7 @@ class AccessoriesController extends Controller
         $this->authorize($accessory);
 
         if ($accessory->checkouts_count > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.assoc_checkouts', ['count' => $accessory->checkouts_count])));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/general.delete_disabled')));
         }
 
         $accessory->delete();
