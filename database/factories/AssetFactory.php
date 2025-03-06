@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\Category;
 use App\Models\CustomField;
 use App\Models\Location;
 use App\Models\Statuslabel;
@@ -329,6 +330,15 @@ class AssetFactory extends Factory
                 'model_id' => function () {
                     return AssetModel::where('name', 'Macbook Pro 13')->first() ?? AssetModel::factory()->mbp13Model();
                 },
+            ];
+        });
+    }
+
+    public function doesNotRequireAcceptance()
+    {
+        return $this->state(function () {
+            return [
+                'model_id' => AssetModel::factory()->doesNotRequireAcceptance(),
             ];
         });
     }
