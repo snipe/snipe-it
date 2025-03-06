@@ -151,8 +151,7 @@ if ((strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') || (!function_exists('posix_get
 
 echo "\e[95m--------------------------------------------------------\n";
 echo "STEP 1: Checking .env file: \n";
-echo "- Your .env is located at ".getcwd()."/.env \n";
-echo "--------------------------------------------------------\e[39m\\n\n";
+echo "--------------------------------------------------------\e[39m\n\n";
 
 
 // Check the .env looks ok
@@ -163,7 +162,7 @@ if (! $env){
     exit(1);
 }
 
-$env_good = '';
+$env_good = $success_icon.' Your .env file is located at '.getcwd()."/.env \n";
 $env_bad = '';
 
 // Loop through each line of the .env
@@ -261,7 +260,7 @@ if ($env_bad !='') {
 
 if(!$skip_php_checks){
     echo "\n\e[95m--------------------------------------------------------\n";
-    echo "STEP 2: Checking PHP requirements: (Required PHP >=". $php_min_works. " - <".$php_max_wontwork.") \e[39m\n";
+    echo "STEP 2: Checking PHP requirements: (Required PHP >=". $php_min_works. " - <".$php_max_wontwork.")\n";
     echo "--------------------------------------------------------\e[39m\n\n";
 
     if ((version_compare(phpversion(), $php_min_works, '>=')) && (version_compare(phpversion(), $php_max_wontwork, '<'))) {
@@ -540,7 +539,7 @@ echo "--------------------------------------------------------\e[39m\n\n";
 exec('php artisan down',  $down_results, $return_code);
 echo '-- ' . implode("\n", $down_results) . "\n";
 if ($return_code > 0) {
-    die("Something went wrong with downing your site. This can't be good. Please investigate the error. Aborting!n\n");
+    die("Something went wrong with downing your site. This can't be good. Please investigate the error. Aborting!\n\n");
 }
 unset($return_code);
 

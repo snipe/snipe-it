@@ -68,7 +68,9 @@
                             </div>
                         </div>
 
-
+                        @php
+                            $optionTypes = trans('admin/settings/general.logo_option_types');
+                        @endphp
 
                         <!-- Branding -->
                         <div class="form-group {{ $errors->has('brand') ? 'error' : '' }}">
@@ -76,8 +78,11 @@
                                 <label for="brand">{{ trans('admin/settings/general.web_brand') }}</label>
                             </div>
                             <div class="col-md-9">
-                                {!! Form::select('brand', array('1'=>'Text','2'=>'Logo','3'=>'Logo + Text'), old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
-                                {!! $errors->first('brand', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                {!! Form::select('brand', [
+                                                '1'=> trans('admin/settings/general.logo_option_types.text'),
+                                                '2'=> trans('admin/settings/general.logo_option_types.logo'),
+                                                '3'=> trans('admin/settings/general.logo_option_types.logo_and_text')], old('brand', $setting->brand), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+
                             </div>
                         </div>
 
@@ -272,10 +277,10 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), old('support_footer', $setting->support_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    {!! Form::select('support_footer', array('on'=>trans('admin/settings/general.enabled'),'off'=>trans('admin/settings/general.two_factor_disabled'),'admin'=>trans('admin/settings/general.super_admin_only')), old('support_footer', $setting->support_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {!! Form::select('support_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), old('support_footer', $setting->support_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                    {!! Form::select('support_footer', array('on'=>trans('admin/settings/general.enabled'),'off'=>trans('admin/settings/general.two_factor_disabled'),'admin'=>trans('admin/settings/general.super_admin_only')), old('support_footer', $setting->support_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 @endif
 
 
@@ -291,10 +296,10 @@
                             </div>
                             <div class="col-md-9">
                                 @if (config('app.lock_passwords')===true)
-                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), old('version_footer', $setting->version_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
+                                    {!! Form::select('version_footer', array('on'=>trans('admin/settings/general.enabled'),'off'=>trans('admin/settings/general.two_factor_disabled'),'admin'=>trans('admin/settings/general.super_admin_only')), old('version_footer', $setting->version_footer), ['class' => 'form-control select2 disabled', 'style'=>'width: 150px ;', 'disabled' => 'disabled']) !!}
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
-                                    {!! Form::select('version_footer', array('on'=>'Enabled','off'=>'Disabled','admin'=>'Superadmin Only'), old('version_footer', $setting->version_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
+                                    {!! Form::select('version_footer', array('on'=>trans('admin/settings/general.enabled'),'off'=>trans('admin/settings/general.two_factor_disabled'),'admin'=>trans('admin/settings/general.super_admin_only')), old('version_footer', $setting->version_footer), array('class' => 'form-control select2', 'style'=>'width: 150px ;')) !!}
                                 @endif
 
                                 <p class="help-block">{{ trans('admin/settings/general.version_footer_help') }}</p>

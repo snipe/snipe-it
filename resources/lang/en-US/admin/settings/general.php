@@ -42,6 +42,7 @@ return [
     'confirm_purge'			    => 'Confirm Purge',
     'confirm_purge_help'		=> 'Enter the text "DELETE" in the box below to purge your deleted records. This action cannot be undone and will PERMANENTLY delete all soft-deleted items and users. (You should make a backup first, just to be safe.)',
     'custom_css'				=> 'Custom CSS',
+    'custom_css_placeholder'	=> 'Add your custom CSS',
     'custom_css_help'			=> 'Enter any custom CSS overrides you would like to use. Do not include the &lt;style&gt;&lt;/style&gt; tags.',
     'custom_forgot_pass_url'	=> 'Custom Password Reset URL',
     'custom_forgot_pass_url_help'	=> 'This replaces the built-in forgotten password URL on the login screen, useful to direct people to internal or hosted LDAP password reset functionality. It will effectively disable local user forgotten password functionality.',
@@ -69,6 +70,7 @@ return [
     'favicon_size'          => 'Favicons should be square images, 16x16 pixels.',
     'footer_text'               => 'Additional Footer Text ',
     'footer_text_help'          => 'This text will appear in the right-side footer. Links are allowed using <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>. Line breaks, headers, images, etc may result in unpredictable results.',
+    'footer_text_placeholder'   => 'Optional footer text',
     'general_settings'			=> 'General Settings',
     'general_settings_help'     => 'Default EULA and more',
     'generate_backup'			=> 'Generate Backup',
@@ -134,6 +136,7 @@ return [
     'login_user_agent'          => 'User Agent',
     'login_help'                => 'List of attempted logins',
     'login_note'                => 'Login Note',
+    'login_note_placeholder'            => "If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you.",
     'login_note_help'           => 'Optionally include a few sentences on your login screen, for example to assist people who have found a lost or stolen device. This field accepts <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>',
     'login_remote_user_text'    => 'Remote User login options',
     'login_remote_user_enabled_text' => 'Enable Login with Remote User Header',
@@ -347,6 +350,8 @@ return [
     'setup_migration_create_user' => 'Next: Create User',
     'ldap_settings_link' => 'LDAP Settings Page',
     'slack_test' => 'Test <i class="fab fa-slack"></i> Integration',
+    'status_label_name' => 'Status Label Name',
+    'super_admin_only'  => 'Super Admin Only',
     'label2_enable'           => 'New Label Engine',
     'label2_enable_help'      => 'Switch to the new label engine. <b>Note: You will need to save this setting before setting others.</b>',
     'label2_template'         => 'Template',
@@ -364,6 +369,7 @@ return [
     'label2_2d_target_help'   => 'The data that will be contained in the 2D barcode',
     'label2_fields'           => 'Field Definitions',
     'label2_fields_help'      => 'Fields can be added, removed, and reordered in the left column. For each field, multiple options for Label and DataSource can be added, removed, and reordered in the right column.',
+    'purge_barcodes' => 'Purge Barcodes',
     'help_asterisk_bold'    => 'Text entered as <code>**text**</code> will be displayed as bold',
     'help_blank_to_use'     => 'Leave blank to use the value from <code>:setting_name</code>',
     'help_default_will_use' => '<code>:default</code> will use the value from <code>:setting_name</code>. <br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
@@ -380,6 +386,7 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'test_mail' => 'Test Mail',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
     'default_avatar' => 'Upload custom default avatar',
@@ -389,6 +396,15 @@ return [
     'due_checkin_days' => 'Due For Checkin Warning',
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
     'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
+    'text' => 'Text',
+
+
+    'logo_option_types' => [
+        'text' => 'Text',
+        'logo' => 'Logo',
+        'logo_and_text' => 'Logo and Text',
+    ],
+
 
 
     /* Keywords for settings overview help */
