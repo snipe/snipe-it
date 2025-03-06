@@ -2,9 +2,13 @@
 
 namespace Tests\Feature\Notifications\Email;
 
+use App\Console\Commands\SendInventoryAlerts;
+use App\Helpers\Helper;
 use App\Mail\ExpiringAssetsMail;
 use App\Mail\ExpiringLicenseMail;
+use App\Mail\InventoryAlertMail;
 use App\Mail\SendUpcomingAuditMail;
+use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\Setting;
@@ -129,33 +133,21 @@ class ExpiringAlertsNotificationTest extends TestCase
     {
         $this->markIncompleteIfSqlite();
         Mail::fake();
-        $this->settings->enableAlertEmail('admin@example.com');
-        $this->settings->setAuditWarningDays(15);
+
+        $accessory = Accessory::factory()->create([
+            'min_amt' => 4,
+            'qty' => 2
+        ]);
+        $this->settings->enableAlertEmail('admin@example.com, coadmin@example.com');
+        $this->settings->alert_threshhold = 5;
 
         $alert_email = Setting::first()->alert_email;
 
-        $upcomingAuditableAsset = Asset::factory()->create([
-            'next_audit_date' => now()->addDays(14)->format('Y-m-d'),
-            'deleted_at' => null,
-        ]);
-
-        $overDueForAuditableAsset = Asset::factory()->create([
-            'next_audit_date' => now()->subDays(1)->format('Y-m-d'),
-            'deleted_at' => null,
-        ]);
-
-        $notAuditableAsset = Asset::factory()->create([
-            'next_audit_date' => now()->addDays(30)->format('Y-m-d'),
-            'deleted_at' => null,
-        ]);
-
         $this->artisan('snipeit:inventory-alerts')->assertExitCode(0);
 
-        Mail::assertSent(SendUpcomingAuditMail::class, function($mail) use ($alert_email, $upcomingAuditableAsset, $overDueForAuditableAsset) {
-            return $mail->hasTo($alert_email) && ($mail->assets->contains($upcomingAuditableAsset) && $mail->assets->contains($overDueForAuditableAsset));
-        });
-        Mail::assertNotSent(SendUpcomingAuditMail::class, function($mail) use ($alert_email, $notAuditableAsset) {
-            return $mail->hasTo($alert_email) && $mail->assets->contains($notAuditableAsset);
-        });
+        Mail::assertSent(InventoryAlertMail::class, function($mail) use ($alert_email) {
+            return $mail->hasTo($alert_email) && (collect($mail->items)->count() === 1);
+    });
+
     }
 }
