@@ -134,20 +134,25 @@ class ExpiringAlertsNotificationTest extends TestCase
         $this->markIncompleteIfSqlite();
         Mail::fake();
 
-        $accessory = Accessory::factory()->create([
-            'min_amt' => 4,
-            'qty' => 2
-        ]);
-        $this->settings->enableAlertEmail('admin@example.com, coadmin@example.com');
-        $this->settings->alert_threshhold = 5;
+        $this->settings->enableAlertEmail('admin@example.com, admin2@example.com');
+        $this->settings->setAlertInterval(5);
 
         $alert_email = Setting::first()->alert_email;
 
+        Accessory::factory()->create([
+            'min_amt' => 4,
+            'qty' => 2
+        ]);
+
+        $inventory = Helper::checkLowInventory();
+        $this->assertCount(1, $inventory);
+
         $this->artisan('snipeit:inventory-alerts')->assertExitCode(0);
 
-        Mail::assertSent(InventoryAlertMail::class, function($mail) use ($alert_email) {
-            return $mail->hasTo($alert_email) && (collect($mail->items)->count() === 1);
-    });
-
+        foreach(explode(', ', $alert_email) as $recipient) {
+            Mail::assertSent(InventoryAlertMail::class, function (InventoryAlertMail $mail) use ($recipient) {
+                return $mail->hasTo($recipient);
+            });
+        }
     }
 }
