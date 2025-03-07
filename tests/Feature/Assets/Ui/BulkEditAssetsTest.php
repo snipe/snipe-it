@@ -211,7 +211,7 @@ class BulkEditAssetsTest extends TestCase
 
         $id_array = $assets->pluck('id')->toArray();
 
-        $this->actingAs(User::factory()->admin()->create())->post(route('hardware/bulksave'), [
+        $this->actingAs(User::factory()->superuser()->create())->post(route('hardware/bulksave'), [
             'ids'                 => $id_array,
             $encrypted->db_column => 'New Encrypted Text',
         ])->assertStatus(302);
@@ -221,7 +221,7 @@ class BulkEditAssetsTest extends TestCase
         });
     }
 
-    public function testBulkEditAssetsRequiresadminToUpdateEncryptedCustomFields()
+    public function testBulkEditAssetsRequiresAdminToUpdateEncryptedCustomFields()
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on mysql');
         $edit_user = User::factory()->editAssets()->create();

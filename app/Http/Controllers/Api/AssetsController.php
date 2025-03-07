@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\Assets\DestroyAssetAction;
+use App\Actions\Assets\StoreAssetAction;
+use App\Actions\Assets\UpdateAssetAction;
 use App\Events\CheckoutableCheckedIn;
-use App\Http\Requests\StoreAssetRequest;
-use App\Http\Requests\UpdateAssetRequest;
+use App\Exceptions\CustomFieldPermissionException;
+use App\Exceptions\CheckoutNotAllowed;
+use App\Http\Requests\Assets\StoreAssetRequest;
+use App\Http\Requests\Assets\UpdateAssetRequest;
 use App\Http\Traits\MigratesLegacyAssetLocations;
 use App\Models\AccessoryCheckout;
 use App\Models\CheckoutAcceptance;
 use App\Models\LicenseSeat;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Support\Facades\Gate;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
@@ -21,7 +25,6 @@ use App\Http\Transformers\LicensesTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Asset;
 use App\Models\AssetModel;
-use App\Models\Company;
 use App\Models\CustomField;
 use App\Models\License;
 use App\Models\Location;
@@ -32,6 +35,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Watson\Validating\ValidationException;
 use App\View\Label;
 use Illuminate\Support\Facades\Storage;
 
@@ -127,7 +131,7 @@ class AssetsController extends Controller
         }
 
         $assets = Asset::select('assets.*')
-            ->with(
+            ->with([
                 'model',
                 'location',
                 'assetstatus',
@@ -140,7 +144,7 @@ class AssetsController extends Controller
                 'model.manufacturer',
                 'model.fieldset',
                 'supplier'
-            ); // it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
+            ]); //it might be tempting to add 'assetlog' here, but don't. It blows up update-heavy users.
 
 
         if ($filter_non_deprecable_assets) {
@@ -602,87 +606,42 @@ class AssetsController extends Controller
      */
     public function store(StoreAssetRequest $request): JsonResponse
     {
-        $asset = new Asset();
-        $asset->model()->associate(AssetModel::find((int) $request->get('model_id')));
-
-        $asset->fill($request->validated());
-        $asset->created_by    = auth()->id();
-
-        /**
-         * this is here just legacy reasons. Api\AssetController
-         * used image_source  once to allow encoded image uploads.
-         */
-        if ($request->has('image_source')) {
-            $request->offsetSet('image', $request->offsetGet('image_source'));
-        }
-
-        $asset = $request->handleImages($asset);
-
-        // Update custom fields in the database.
-        $model = AssetModel::find($request->input('model_id'));
-
-        // Check that it's an object and not a collection
-        // (Sometimes people send arrays here and they shouldn't
-        if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
-            foreach ($model->fieldset->fields as $field) {
-
-                // Set the field value based on what was sent in the request
-                $field_val = $request->input($field->db_column, null);
-
-                // If input value is null, use custom field's default value
-                if ($field_val == null) {
-                    Log::debug('Field value for ' . $field->db_column . ' is null');
-                    $field_val = $field->defaultValue($request->get('model_id'));
-                    Log::debug('Use the default fieldset value of ' . $field->defaultValue($request->get('model_id')));
-                }
-
-                // if the field is set to encrypted, make sure we encrypt the value
-                if ($field->field_encrypted == '1') {
-                    Log::debug('This model field is encrypted in this fieldset.');
-
-                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
-
-                        // If input value is null, use custom field's default value
-                        if (($field_val == null) && ($request->has('model_id') != '')) {
-                            $field_val = Crypt::encrypt($field->defaultValue($request->get('model_id')));
-                        } else {
-                            $field_val = Crypt::encrypt($request->input($field->db_column));
-                        }
-                    }
-                }
-                if ($field->element == 'checkbox') {
-                    if (is_array($field_val)) {
-                        $field_val = implode(',', $field_val);
-                    }
-                }
-
-
-                $asset->{$field->db_column} = $field_val;
-            }
-        }
-
-        if ($asset->save()) {
-            if ($request->get('assigned_user')) {
-                $target = User::find(request('assigned_user'));
-            } elseif ($request->get('assigned_asset')) {
-                $target = Asset::find(request('assigned_asset'));
-            } elseif ($request->get('assigned_location')) {
-                $target = Location::find(request('assigned_location'));
-            }
-            if (isset($target)) {
-                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
-            }
-
-            if ($asset->image) {
-                $asset->image = $asset->getImageUrl();
-            }
-
+        try {
+            $asset = StoreAssetAction::run(
+                model_id: $request->validated('model_id'),
+                status_id: $request->validated('status_id'),
+                request: $request, // this is for handleImages and custom fields
+                name: $request->validated('name'),
+                serial: $request->validated('serial'),
+                company_id: $request->validated('company_id'),
+                asset_tag: $request->validated('asset_tag'),
+                order_number: $request->validated('order_number'),
+                notes: $request->validated('notes'),
+                warranty_months: $request->validated('warranty_months'),
+                purchase_cost: $request->validated('purchase_cost'),
+                asset_eol_date: $request->validated('asset_eol_date'),
+                purchase_date: $request->validated('purchase_date'),
+                assigned_to: $request->validated('assigned_to'),
+                supplier_id: $request->validated('supplier_id'),
+                requestable: $request->validated('requestable'),
+                rtd_location_id: $request->validated('rtd_location_id'),
+                location_id: $request->validated('location_id'),
+                byod: $request->validated('byod'),
+                assigned_user: $request->validated('assigned_user'),
+                assigned_asset: $request->validated('assigned_asset'),
+                assigned_location: $request->validated('assigned_location'),
+                last_audit_date: $request->validated('last_audit_date'),
+            );
             return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.create.success')));
 
+            // not sure why we're not using this yet, but i know there's a reason
             return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.create.success')));
+        } catch (CheckoutNotAllowed $e) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()), 200);
+        } catch (Exception $e) {
+            report($e);
+            return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()));
         }
-
-        return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
 
 
@@ -694,87 +653,19 @@ class AssetsController extends Controller
      */
     public function update(UpdateAssetRequest $request, Asset $asset): JsonResponse
     {
-        $asset->fill($request->validated());
-
-        if ($request->has('model_id')) {
-            $asset->model()->associate(AssetModel::find($request->validated()['model_id']));
+        try {
+            $updatedAsset = UpdateAssetAction::run($asset, $request, ...$request->validated());
+            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+        } catch (CheckoutNotAllowed $e) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, $e->getMessage()), 200);
+        } catch (ValidationException $e) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, $e->getErrors()), 200);
+        } catch (CustomFieldPermissionException $e) {
+            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
+        } catch (Exception $e) {
+            report($e);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.something_went_wrong')));
         }
-        if ($request->has('company_id')) {
-            $asset->company_id = Company::getIdForCurrentUser($request->validated()['company_id']);
-        }
-        if ($request->has('rtd_location_id') && !$request->has('location_id')) {
-            $asset->location_id = $request->validated()['rtd_location_id'];
-        }
-        if ($request->input('last_audit_date')) {
-            $asset->last_audit_date = Carbon::parse($request->input('last_audit_date'))->startOfDay()->format('Y-m-d H:i:s');
-        }
-
-        /**
-         * this is here just legacy reasons. Api\AssetController
-         * used image_source  once to allow encoded image uploads.
-         */
-        if ($request->has('image_source')) {
-            $request->offsetSet('image', $request->offsetGet('image_source'));
-        }
-
-        $asset = $request->handleImages($asset);
-        $model = $asset->model;
-
-        // Update custom fields
-        $problems_updating_encrypted_custom_fields = false;
-        if (($model) && (isset($model->fieldset))) {
-            foreach ($model->fieldset->fields as $field) {
-                $field_val = $request->input($field->db_column, null);
-
-                if ($request->has($field->db_column)) {
-                    if ($field->element == 'checkbox') {
-                        if (is_array($field_val)) {
-                            $field_val = implode(',', $field_val);
-                        }
-                    }
-                    if ($field->field_encrypted == '1') {
-                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
-                            $field_val = Crypt::encrypt($field_val);
-                        } else {
-                            $problems_updating_encrypted_custom_fields = true;
-                            continue;
-                        }
-                    }
-                    $asset->{$field->db_column} = $field_val;
-                }
-            }
-        }
-        if ($asset->save()) {
-            if (($request->filled('assigned_user')) && ($target = User::find($request->get('assigned_user')))) {
-                $location = $target->location_id;
-            } elseif (($request->filled('assigned_asset')) && ($target = Asset::find($request->get('assigned_asset')))) {
-                $location = $target->location_id;
-
-                Asset::where('assigned_type', \App\Models\Asset::class)->where('assigned_to', $asset->id)
-                    ->update(['location_id' => $target->location_id]);
-            } elseif (($request->filled('assigned_location')) && ($target = Location::find($request->get('assigned_location')))) {
-                $location = $target->id;
-            }
-
-            if (isset($target)) {
-                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
-            }
-
-            if ($asset->image) {
-                $asset->image = $asset->getImageUrl();
-            }
-
-            if ($problems_updating_encrypted_custom_fields) {
-                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
-                // Below is the *correct* return since it uses the transformer, but we have to use the old, flat return for now until we can update Jamf2Snipe and Kanji2Snipe
-                // return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.encrypted_warning')));
-            } else {
-                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
-                // Below is the *correct* return since it uses the transformer, but we have to use the old, flat return for now until we can update Jamf2Snipe and Kanji2Snipe
-                /// return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
-            }
-        }
-        return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
     }
 
 
@@ -785,30 +676,16 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v4.0]
      */
-    public function destroy($id): JsonResponse
+    public function destroy(Asset $asset): JsonResponse
     {
-        $this->authorize('delete', Asset::class);
-
-        if ($asset = Asset::find($id)) {
-            $this->authorize('delete', $asset);
-
-            if ($asset->assignedTo) {
-
-                $target = $asset->assignedTo;
-                $checkin_at = date('Y-m-d H:i:s');
-                $originalValues = $asset->getRawOriginal();
-                event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on delete', $checkin_at, $originalValues));
-                DB::table('assets')
-                    ->where('id', $asset->id)
-                    ->update(['assigned_to' => null]);
-            }
-
-            $asset->delete();
-
+        $this->authorize('delete', $asset);
+        try {
+            DestroyAssetAction::run($asset);
             return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.delete.success')));
+        } catch (Exception $e) {
+            report($e);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.something_went_wrong')));
         }
-
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
     }
 
 
@@ -1246,9 +1123,9 @@ class AssetsController extends Controller
 
     /**
      * Generate asset labels by tag
-     * 
+     *
      * @author [Nebelkreis] [https://github.com/NebelKreis]
-     * 
+     *
      * @param Request $request Contains asset_tags array of asset tags to generate labels for
      * @return JsonResponse Returns base64 encoded PDF on success, error message on failure
      */
@@ -1259,7 +1136,7 @@ class AssetsController extends Controller
 
              // Validate that asset tags were provided in the request
             if (!$request->filled('asset_tags')) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, 
+                return response()->json(Helper::formatStandardApiResponse('error', null,
                     trans('admin/hardware/message.no_assets_selected')), 400);
             }
 
@@ -1282,7 +1159,7 @@ class AssetsController extends Controller
 
 
                 $label = new Label();
-                
+
                 if (!$label) {
                     throw new \Exception('Label object could not be created');
                 }
