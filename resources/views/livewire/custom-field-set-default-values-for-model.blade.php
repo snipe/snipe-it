@@ -4,7 +4,16 @@
             {{ trans('admin/models/general.fieldset') }}
         </label>
         <div class="col-md-5">
-            {{ Form::select('fieldset_id', Helper::customFieldsetList(), old('fieldset_id', $fieldset_id), array('class'=>'select2 js-fieldset-field livewire-select2', 'style'=>'width:100%; min-width:350px', 'aria-label'=>'custom_fieldset', 'data-livewire-component' => $this->getId())) }}
+             <x-input.select
+                 name="fieldset_id"
+                 id="fieldset_id"
+                 :options="Helper::customFieldsetList()"
+                 :selected="old('fieldset_id', $fieldset_id)"
+                 :for-livewire="true"
+                 class="js-fieldset-field"
+                 style="width:100%; min-width:350px;"
+                 aria-label="custom_fieldset"
+             />
             {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
         </div>
         <div class="col-md-3">

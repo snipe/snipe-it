@@ -84,7 +84,13 @@
                                                 {{ trans('admin/hardware/form.status') }}
                                             </label>
                                             <div class="col-md-8 required">
-                                                {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types', 'aria-label'=>'status_id')) }}
+                                                <x-input.select
+                                                    name="status_id"
+                                                    id="modal-statuslabel_types"
+                                                    :options="$statusLabel_list"
+                                                    style="width: 100%"
+                                                    aria-label="status_id"
+                                                />
                                                 {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                             </div>
                                         </div>
