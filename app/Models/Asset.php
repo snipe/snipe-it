@@ -161,7 +161,6 @@ class Asset extends Depreciable
         'asset_eol_date',
         'last_checkin',
         'last_checkout',
-        'maintenance_date',
     ];
 
     use Searchable;
