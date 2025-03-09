@@ -150,13 +150,13 @@ class Asset extends Depreciable
         'status_id',
         'supplier_id',
         'warranty_months',
-        'requestable'
+        'requestable',
         'expected_checkin',
         'byod',
         'asset_eol_date',
         'eol_explicit',
         'last_audit_date',
-        'next_audit_date'
+        'next_audit_date',
         'last_checkin',
         'last_checkout',
     ];
