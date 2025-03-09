@@ -57,6 +57,6 @@
         "signature_pad": "^4.2.0",
         "tableexport.jquery.plugin": "1.30.0",
         "tether": "^1.4.0",
-        "webpack": "^5.97.1"
+        "webpack": "^5.98.0"
     }
 }
