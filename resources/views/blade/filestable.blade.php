@@ -120,7 +120,7 @@
                     @endif
                 </td>
                 <td>
-                    {{ $file->created_at }}
+                    {{ $file->created_at ? Helper::getFormattedDateObject($file->created_at, 'datetime', false) : '' }}
                 </td>
                 <td>
                     {{ ($file->adminuser) ? $file->adminuser->present()->getFullNameAttribute() : '' }}
