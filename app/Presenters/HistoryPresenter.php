@@ -11,9 +11,19 @@ class HistoryPresenter extends Presenter
      * Json Column Layout for bootstrap table
      * @return string
      */
-    public static function dataTableLayout()
+    public static function dataTableLayout($serial = false)
     {
-        $layout = [
+        $extra = [];
+        $layout_start = [
+            [
+                'id' => 'id',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.id'),
+                'visible' => false,
+                'class' => 'hidden-xs',
+            ],
             [
                 'field' => 'icon',
                 'searchable' => false,
@@ -65,7 +75,22 @@ class HistoryPresenter extends Presenter
                 'title' => trans('general.item'),
                 'visible' => false,
                 'formatter' => 'polymorphicItemFormatter',
-            ], [
+            ],
+        ];
+
+
+        if ($serial) {
+            $extra =  [
+                [
+                'field' => 'item.serial',
+                'title' => trans('admin/hardware/table.serial'),
+                'visible' => false,
+            ]
+            ];
+        }
+
+        $layout_end = [
+            [
                 'field' => 'target',
                 'searchable' => true,
                 'sortable' => true,
@@ -140,7 +165,8 @@ class HistoryPresenter extends Presenter
             ],
         ];
 
-        return json_encode($layout);
+        $merged = array_merge($layout_start, $extra, $layout_end);
+        return json_encode($merged);
     }
 
 }
