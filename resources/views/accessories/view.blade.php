@@ -106,7 +106,7 @@
                              <div class="row">
                                  <div class="col-md-12">
                                 <table
-                                        data-columns="{{ \App\Presenters\HistoryPresenter::assignedDataTableLayout() }}"
+                                        data-columns="{{ \App\Presenters\HistoryPresenter::dataTableLayout() }}"
                                         class="table table-striped snipe-table"
                                         data-cookie-id-table="AccessoryHistoryTable"
                                         data-id-table="AccessoryHistoryTable"
