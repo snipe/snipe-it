@@ -121,38 +121,7 @@
                        "fileName": "export-{{ str_slug($accessory->name) }}-history-{{ date('Y-m-d') }}",
                        "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                      }'
-                                                data-url="{{ route('api.activity.index', ['item_id' => $accessory->id, 'item_type' => 'accessory']) }}">
-
-                                            <thead>
-                                            <tr>
-                                                <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">
-                                                    {{ trans('general.date') }}
-                                                </th>
-                                                <th class="col-sm-2" data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">
-                                                    {{ trans('general.admin_user') }}
-                                                </th>
-                                                <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">
-                                                    {{ trans('general.action') }}
-                                                </th>
-                                                <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">
-                                                    {{ trans('general.file_name') }}
-                                                </th>
-                                                <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">
-                                                    {{ trans('general.item') }}
-                                                </th>
-                                                <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">
-                                                    {{ trans('general.target') }}
-                                                </th>
-                                                <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">
-                                                    {{ trans('general.notes') }}
-                                                </th>
-                                                @if  ($snipeSettings->require_accept_signature=='1')
-                                                    <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">
-                                                        {{ trans('general.signature') }}
-                                                    </th>
-                                                @endif
-                                            </tr>
-                                            </thead>
+                                        data-url="{{ route('api.activity.index', ['item_id' => $accessory->id, 'item_type' => 'accessory']) }}">
                                         </table>
                                     </div> <!-- /.col-md-12-->
                                 </div> <!-- /.row-->
