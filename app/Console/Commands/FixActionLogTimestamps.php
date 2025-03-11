@@ -53,7 +53,9 @@ class FixActionLogTimestamps extends Command
             })
         );
 
-        // @todo: get confirmation?
+        if (!$this->dryrun && !$this->confirm('Update these logs?')) {
+            return 0;
+        }
 
         foreach ($logs as $log) {
             if (!$this->dryrun){
@@ -67,5 +69,7 @@ class FixActionLogTimestamps extends Command
                 $this->line(vsprintf('DRYRUN: Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
             }
         }
+
+        return 0;
     }
 }
