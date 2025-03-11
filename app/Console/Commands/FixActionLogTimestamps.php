@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Actionlog;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Model;
 
 class FixActionLogTimestamps extends Command
 {
@@ -43,9 +44,16 @@ class FixActionLogTimestamps extends Command
 
         // @todo: write ids to console
 
+        // @todo: get confirmation?
+
         foreach ($logs as $log) {
             if (!$this->dryrun){
                 $this->line(vsprintf('Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
+
+                Model::withoutTimestamps(function () use ($log) {
+                    $log->created_at = $log->updated_at;
+                    $log->saveQuietly();
+                });
             } else {
                 $this->line(vsprintf('DRYRUN: Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
             }
