@@ -40,9 +40,18 @@ class FixActionLogTimestamps extends Command
         // Logs that were improperly timestamped should have created_at in the 1970s
         $logs = Actionlog::whereYear('created_at', '1970')->get();
 
-        $this->info('Found ' . $logs->count() . ' logs with incorrect timestamps.');
+        $this->info('Found ' . $logs->count() . ' logs with incorrect timestamps:');
 
-        // @todo: write ids to console
+        $this->table(
+            ['ID', 'Created At', 'Updated At'],
+            $logs->map(function ($log) {
+                return [
+                    $log->id,
+                    $log->created_at,
+                    $log->updated_at,
+                ];
+            })
+        );
 
         // @todo: get confirmation?
 
