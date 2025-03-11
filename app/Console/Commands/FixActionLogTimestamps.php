@@ -47,7 +47,7 @@ class FixActionLogTimestamps extends Command
             if (!$this->dryrun){
                 $this->line(vsprintf('Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
             } else {
-                $this->line(vsprintf('DRYRUN...Would update log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
+                $this->line(vsprintf('DRYRUN: Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
             }
         }
     }
