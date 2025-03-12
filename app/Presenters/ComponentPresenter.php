@@ -85,7 +85,7 @@ class ComponentPresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('general.min_amt'),
                 'visible' => true,
-                'class' => 'text-right',
+                'class' => 'text-right text-padding-number-cell',
                 'formatter' => 'minAmtFormatter',
             ], [
                 'field' => 'qty',
@@ -93,7 +93,7 @@ class ComponentPresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('admin/components/general.total'),
                 'visible' => true,
-                'class' => 'text-right',
+                'class' => 'text-right text-padding-number-cell',
                 'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'remaining',
@@ -101,7 +101,7 @@ class ComponentPresenter extends Presenter
                 'sortable' => false,
                 'title' => trans('admin/components/general.remaining'),
                 'visible' => true,
-                'class' => 'text-right',
+                'class' => 'text-right text-padding-number-cell',
                 'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'location',

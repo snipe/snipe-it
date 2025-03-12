@@ -79,14 +79,14 @@ class ConsumablePresenter extends Presenter
                 'title' => trans('general.min_amt'),
                 'visible' => true,
                 'formatter' => 'minAmtFormatter',
-                'class' => 'text-right',
+                'class' => 'text-right text-padding-number-cell',
             ], [
                 'field' => 'qty',
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('admin/components/general.total'),
                 'visible' => true,
-                'class' => 'text-right',
+                'class' => 'text-right text-padding-number-cell',
                 'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'remaining',
@@ -94,6 +94,7 @@ class ConsumablePresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('admin/components/general.remaining'),
                 'visible' => true,
+                'class' => 'text-right text-padding-number-cell',
                 'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'location',
@@ -128,7 +129,7 @@ class ConsumablePresenter extends Presenter
                 'title' => trans('general.purchase_cost'),
                 'visible' => true,
                 'footerFormatter' => 'sumFormatterQuantity',
-                'class' => 'text-right',
+                'class' => 'text-right text-padding-number-cell',
             ], [
                 'field' => 'notes',
                 'searchable' => true,

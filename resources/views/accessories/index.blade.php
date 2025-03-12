@@ -34,6 +34,7 @@
                 data-show-refresh="true"
                 data-show-footer="true"
                 data-sort-order="asc"
+                data-footer-style="footerStyle"
                 id="accessoriesTable"
                 class="table table-striped snipe-table"
                 data-url="{{route('api.accessories.index') }}"
