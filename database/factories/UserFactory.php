@@ -107,7 +107,7 @@ class UserFactory extends Factory
                     return User::where('permissions->superuser', '1')->first() ?? User::factory()->firstAdmin();
                 },
             ];
-        });
+        })->appendPermission(['assets.view.encrypted_custom_fields' => '1']);
     }
 
     public function viewAssets()

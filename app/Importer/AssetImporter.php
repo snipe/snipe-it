@@ -7,6 +7,7 @@ use App\Models\Statuslabel;
 use App\Models\User;
 use App\Events\CheckoutableCheckedIn;
 use Illuminate\Support\Facades\Crypt;
+use Watson\Validating\ValidationException;
 
 class AssetImporter extends ItemImporter
 {
@@ -172,26 +173,30 @@ class AssetImporter extends ItemImporter
         // This sets an attribute on the Loggable trait for the action log
         $asset->setImported(true);
 
-        if ($asset->save()) {
-
+        try {
+            $asset->save();
             $this->log('Asset '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
 
             // If we have a target to checkout to, lets do so.
             //-- created_by is a property of the abstract class Importer, which this class inherits from and it's set by
             //-- the class that needs to use it (command importer or GUI importer inside the project).
             if (isset($target) && ($target !== false)) {
-                if (!is_null($asset->assigned_to)){
+                if (!is_null($asset->assigned_to)) {
                     if ($asset->assigned_to != $target->id) {
                         event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), auth()->user(), 'Checkin from CSV Importer', $checkin_date));
                     }
                 }
 
-                $asset->fresh()->checkOut($target, $this->created_by, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
+                $asset->fresh()->checkOut($target, $this->created_by, $checkout_date, null, 'Checkout from CSV Importer', $asset->name);
             }
 
             return;
+        } catch (ValidationException $e) {
+            $this->logError($asset, 'Asset "'.$this->item['name'].'"');
+        } catch (\Exception $e) {
+            report($e);
+            $this->logError($asset, trans('general.something_went_wrong'));
         }
-        $this->logError($asset, 'Asset "'.$this->item['name'].'"');
     }
 
 

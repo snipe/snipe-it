@@ -38,8 +38,7 @@ class DepreciationTest extends TestCase
             ->laptopMbp()
             ->create(
                 [
-                    'category_id' => Category::factory()->assetLaptopCategory()->create(),
-                    'purchase_date' => now()->subDecade(),
+                    'purchase_date' => now()->subDecade()->format("Y-m-d"),
                     'purchase_cost' => 4000,
                 ]);
         $asset->model->update([
@@ -62,8 +61,7 @@ class DepreciationTest extends TestCase
             ->laptopMbp()
             ->create(
                 [
-                    'category_id' => Category::factory()->assetLaptopCategory()->create(),
-                    'purchase_date' => now()->subDecade(),
+                    'purchase_date' => now()->subDecade()->format("Y-m-d"),
                     'purchase_cost' => 4000,
                 ]);
         $asset->model->update([

@@ -136,7 +136,7 @@
         <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
         <strong>{{ trans('general.notification_error') }}: </strong>
        {{ trans('general.notification_bulk_error_hint') }}
-            @foreach($messages as $key => $message)
+        @foreach($messages as $key => $message)
                 @for ($x = 0; $x < count($message); $x++)
                 <ul>
                     <li>{{ $message[$x] }}</li>

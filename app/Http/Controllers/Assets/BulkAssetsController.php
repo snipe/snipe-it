@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Actions\Assets\UpdateAssetAction;
+use App\Exceptions\CustomFieldPermissionException;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImageUploadRequest;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Statuslabel;
@@ -21,6 +24,7 @@ use App\Models\CustomField;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Watson\Validating\ValidationException;
 
 class BulkAssetsController extends Controller
 {
@@ -199,302 +203,59 @@ class BulkAssetsController extends Controller
      * @internal param array $assets
      * @since [v2.0]
      */
-    public function update(Request $request) : RedirectResponse
+    public function update(ImageUploadRequest $request): RedirectResponse
     {
+        // this should be in request, but request weird, need to think it through a little
         $this->authorize('update', Asset::class);
-        $has_errors = 0;
-        $error_array = array();
-
         // Get the back url from the session and then destroy the session
         $bulk_back_url = route('hardware.index');
-
+        $custom_field_problem = false;
+        // is this necessary?
+        if (!$request->filled('ids') || count($request->input('ids')) == 0) {
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
+        }
         if ($request->session()->has('bulk_back_url')) {
             $bulk_back_url = $request->session()->pull('bulk_back_url');
         }
-
-       $custom_field_columns = CustomField::all()->pluck('db_column')->toArray();
-
-     
-        if (! $request->filled('ids') || count($request->input('ids')) == 0) {
-            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.no_assets_selected'));
-        }
-
-
+        // find and update assets
         $assets = Asset::whereIn('id', $request->input('ids'))->get();
-
-
-
-        /**
-         * If ANY of these are filled, prepare to update the values on the assets.
-         *
-         * Additional checks will be needed for some of them to make sure the values
-         * make sense (for example, changing the status ID to something incompatible with
-         * its checkout status.
-         */
-
-        if (($request->filled('name'))
-            || ($request->filled('purchase_date'))
-            || ($request->filled('expected_checkin'))
-            || ($request->filled('purchase_cost'))
-            || ($request->filled('supplier_id'))
-            || ($request->filled('order_number'))
-            || ($request->filled('warranty_months'))
-            || ($request->filled('rtd_location_id'))
-            || ($request->filled('requestable'))
-            || ($request->filled('company_id'))
-            || ($request->filled('status_id'))
-            || ($request->filled('model_id'))
-            || ($request->filled('next_audit_date'))
-            || ($request->filled('asset_eol_date'))
-            || ($request->filled('null_name'))
-            || ($request->filled('null_purchase_date'))
-            || ($request->filled('null_expected_checkin_date'))
-            || ($request->filled('null_next_audit_date'))
-            || ($request->filled('null_asset_eol_date'))
-            || ($request->anyFilled($custom_field_columns))
-
-        ) {
-            // Let's loop through those assets and build an update array
-            foreach ($assets as $asset) {
-
-                $this->update_array = [];
-
-                /**
-                 * Leave out model_id and status here because we do math on that later. We have to do some
-                 * extra validation and checks on those two.
-                 *
-                 * It's tempting to make these match the request check above, but some of these values require
-                 * extra work to make sure the data makes sense.
-                 */
-                $this->conditionallyAddItem('name')
-                    ->conditionallyAddItem('purchase_date')
-                    ->conditionallyAddItem('expected_checkin')
-                    ->conditionallyAddItem('order_number')
-                    ->conditionallyAddItem('requestable')
-                    ->conditionallyAddItem('supplier_id')
-                    ->conditionallyAddItem('warranty_months')
-                    ->conditionallyAddItem('next_audit_date')
-                    ->conditionallyAddItem('asset_eol_date');
-                    foreach ($custom_field_columns as $key => $custom_field_column) {
-                        $this->conditionallyAddItem($custom_field_column); 
-                   }
-
-                if (!($asset->eol_explicit)) {
-					if ($request->filled('model_id')) {
-						$model = AssetModel::find($request->input('model_id'));
-						if ($model->eol > 0) {
-							if ($request->filled('purchase_date')) {
-								$this->update_array['asset_eol_date'] = Carbon::parse($request->input('purchase_date'))->addMonths($model->eol)->format('Y-m-d');
-							} else {
-								$this->update_array['asset_eol_date'] = Carbon::parse($asset->purchase_date)->addMonths($model->eol)->format('Y-m-d');
-							}
-						} else {
-							$this->update_array['asset_eol_date'] = null;
-						}
-					} elseif (($request->filled('purchase_date')) && ($asset->model->eol > 0)) {
-						$this->update_array['asset_eol_date'] = Carbon::parse($request->input('purchase_date'))->addMonths($asset->model->eol)->format('Y-m-d');
-					}
-				}                
-                
-                /**
-                 * Blank out fields that were requested to be blanked out via checkbox
-                 */
-                if ($request->input('null_name')=='1') {
-
-                    $this->update_array['name'] = null;
-                }
-
-                if ($request->input('null_purchase_date')=='1') {
-                    $this->update_array['purchase_date'] = null;
-                    if (!($asset->eol_explicit)) {
-						$this->update_array['asset_eol_date'] = null;
-					}
-                }
-
-                if ($request->input('null_expected_checkin_date')=='1') {
-                    $this->update_array['expected_checkin'] = null;
-                }
-
-                if ($request->input('null_next_audit_date')=='1') {
-                    $this->update_array['next_audit_date'] = null;
-                }
-
-                if ($request->input('null_asset_eol_date')=='1') {
-                    $this->update_array['asset_eol_date'] = null;
-
-                    // If they are nulling the EOL date to allow it to calculate, set eol explicit to 0
-                    if ($request->input('calc_eol')=='1') {
-                        $this->update_array['eol_explicit'] = 0;
-                    }
-                }
-
-
-
-                if ($request->filled('purchase_cost')) {
-                    $this->update_array['purchase_cost'] =  $request->input('purchase_cost');
-                }
-
-                if ($request->filled('company_id')) {
-                    $this->update_array['company_id'] = $request->input('company_id');
-                    if ($request->input('company_id') == 'clear') {
-                        $this->update_array['company_id'] = null;
-                    }
-                }
-
-                /**
-                 * We're trying to change the model ID - we need to do some extra checks here to make sure
-                 * the custom field values work for the custom fieldset rules around this asset. Uniqueness
-                 * and requiredness across the fieldset is particularly important, since those are
-                 * fieldset-specific attributes.
-                 */
-                if ($request->filled('model_id')) {
-                    $this->update_array['model_id'] = AssetModel::find($request->input('model_id'))->id;
-                }
-
-                /**
-                 * We're trying to change the status ID - we need to do some extra checks here to
-                 * make sure the status label type is one that makes sense for the state of the asset,
-                 * for example, we shouldn't be able to make an asset archived if it's currently assigned
-                 * to someone/something.
-                 */
-                if ($request->filled('status_id')) {
-                    try {
-                        $updated_status = Statuslabel::findOrFail($request->input('status_id'));
-                    } catch (ModelNotFoundException $e) {
-                        return redirect($bulk_back_url)->with('error', trans('admin/statuslabels/message.does_not_exist'));
-                    }
-
-                    // We cannot assign a non-deployable status type if the asset is already assigned.
-                    // This could probably be added to a form request.
-                    // If the asset isn't assigned, we don't care what the status is.
-                    // Otherwise we need to make sure the status type is still a deployable one.
-                    if (
-                        ($asset->assigned_to == '')
-                        || ($updated_status->deployable == '1') && ($asset->assetstatus?->deployable == '1')
-                    ) {
-                        $this->update_array['status_id'] = $updated_status->id;
-                    }
-
-                }
-
-                /**
-                 * We're changing the location ID - figure out which location we should apply
-                 * this change to:
-                 *
-                 * 0 - RTD location only
-                 * 1 - location ID and RTD location ID
-                 * 2 - location ID only
-                 *
-                 * Note: this is kinda dumb and we should just use human-readable values IMHO. - snipe
-                 */
-                if ($request->filled('rtd_location_id')) {
-
-                    if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '0')) {
-                        $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
-                    }
-
-                    if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '1')) {
-                        $this->update_array['location_id'] = $request->input('rtd_location_id');
-                        $this->update_array['rtd_location_id'] = $request->input('rtd_location_id');
-                    }
-
-                    if (($request->filled('update_real_loc')) && (($request->input('update_real_loc')) == '2')) {
-                        $this->update_array['location_id'] = $request->input('rtd_location_id');
-                    }
-
-                }
-
-
-                /**
-                 * ------------------------------------------------------------------------------
-                 * ANYTHING that happens past this foreach
-                 * WILL NOT BE logged in the edit log_meta data
-                 *  ------------------------------------------------------------------------------
-                 */
-                $changed = [];
-
-                foreach ($this->update_array as $key => $value) {
-
-                    if ($this->update_array[$key] != $asset->{$key}) {
-                        $changed[$key]['old'] = $asset->{$key};
-                        $changed[$key]['new'] = $this->update_array[$key];
-                    }
-
-                }
-
-                /**
-                 * Start all the custom fields shenanigans
-                 */
-
-                // Does the model have a fieldset?
-                if ($asset->model->fieldset) {
-                    foreach ($asset->model->fieldset->fields as $field) {
-
-                        if ((array_key_exists($field->db_column, $this->update_array)) && ($field->field_encrypted == '1')) {
-                            if (Gate::allows('admin')) {
-                                $decrypted_old = Helper::gracefulDecrypt($field, $asset->{$field->db_column});
-
-                                /*
-                                 * Check if the decrypted existing value is different from one we just submitted
-                                 * and if not, pull it out of the object since it shouldn't really be updating at all.
-                                 * If we don't do this, it will try to re-encrypt it, and the same value encrypted two
-                                 * different times will have different values, so it will *look* like it was updated
-                                 * but it wasn't.
-                                 */
-                                if ($decrypted_old != $this->update_array[$field->db_column]) {
-                                    $asset->{$field->db_column} = Crypt::encrypt($this->update_array[$field->db_column]);
-                                } else {
-                                    /*
-                                     * Remove the encrypted custom field from the update_array, since nothing changed
-                                     */
-                                    unset($this->update_array[$field->db_column]);
-                                    unset($asset->{$field->db_column});
-                                }
-
-                                /*
-                                 * These custom fields aren't encrypted, just carry on as usual
-                                 */
-                            }
-                        } else {
-
-                            if ((array_key_exists($field->db_column, $this->update_array)) && ($asset->{$field->db_column} != $this->update_array[$field->db_column])) {
-
-                                // Check if this is an array, and if so, flatten it
-                                if (is_array($this->update_array[$field->db_column])) {
-                                    $asset->{$field->db_column} = implode(', ', $this->update_array[$field->db_column]);
-                                } else {
-                                    $asset->{$field->db_column} = $this->update_array[$field->db_column];
-                                }
-                            }
-                        }
-
-                    } // endforeach
-                }
-
-
-                // Check if it passes validation, and then try to save
-                if (!$asset->update($this->update_array)) {
-
-                    // Build the error array
-                    foreach ($asset->getErrors()->toArray() as $key => $message) {
-                        for ($x = 0; $x < count($message); $x++) {
-                            $error_array[$key][] = trans('general.asset') . ' ' . $asset->id . ': ' . $message[$x];
-                            $has_errors++;
-                        }
-                    }
-
-                }  // end if saved
-
-            } // end asset foreach
-
-            if ($has_errors > 0) {
-                return redirect($bulk_back_url)->with('bulk_asset_errors', $error_array);
+        $errors = [];
+        foreach ($assets as $key => $asset) {
+            try {
+                $updatedAsset = UpdateAssetAction::run(
+                    asset: $asset,
+                    request: $request,
+                    status_id: $request->input('status_id'),
+                    warranty_months: $request->input('warranty_months'),
+                    purchase_cost: $request->input('purchase_cost'),
+                    purchase_date: $request->filled('null_purchase_date') ? null : $request->input('purchase_date'),
+                    next_audit_date: $request->filled('null_next_audit_date') ? null : $request->input('next_audit_date'),
+                    supplier_id: $request->input('supplier_id'),
+                    expected_checkin: $request->filled('null_expected_checkin_date') ? null : $request->input('expected_checkin'),
+                    requestable: $request->input('requestable'),
+                    rtd_location_id: $request->input('rtd_location_id'),
+                    name: $request->filled('null_name') ? null : $request->input('name'),
+                    company_id: $request->input('company_id'),
+                    model_id: $request->input('model_id'),
+                    order_number: $request->input('order_number'),
+                    isBulk: true,
+                );
+            } catch (ValidationException $e) {
+                $errors = $e->validator->errors()->toArray();
+            } catch (CustomFieldPermissionException $e) {
+                $custom_field_problem = true;
+            } catch (\Exception $e) {
+                report($e);
+                $errors[$key] = [trans('general.something_went_wrong')];
             }
-
-            return redirect($bulk_back_url)->with('success', trans('admin/hardware/message.update.success'));
         }
-        // no values given, nothing to update
-        return redirect($bulk_back_url)->with('warning', trans('admin/hardware/message.update.nothing_updated'));
+        if (!empty($errors)) {
+            return redirect($bulk_back_url)->with('bulk_asset_errors', $errors);
+        }
+        if ($custom_field_problem) {
+            return redirect($bulk_back_url)->with('error', trans('admin/hardware/message.update.encrypted_warning'));
+        }
+        return redirect($bulk_back_url)->with('success', trans('bulk.update.success'));
     }
 
     /**
