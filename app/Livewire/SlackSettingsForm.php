@@ -247,23 +247,6 @@ class SlackSettingsForm extends Component
     public function msTeamTestWebhook(){
 
         try {
-
-            if($this->teams_webhook_deprecated){
-                //will use the deprecated webhook format
-                $payload =
-                    [
-                        "@type" => "MessageCard",
-                        "@context" => "http://schema.org/extensions",
-                        "summary" => trans('mail.snipe_webhook_summary'),
-                        "title" => trans('mail.snipe_webhook_test'),
-                        "text" => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
-                    ];
-                $response = Http::withHeaders([
-                    'content-type' => 'application/json',
-                ])->post($this->webhook_endpoint,
-                    $payload)->throw();
-            }
-             else {
                  $notification = new TeamsNotification($this->webhook_endpoint);
                  $message = trans('general.webhook_test_msg', ['app' => $this->webhook_name]);
                  $notification->success()->sendMessage($message);
@@ -271,7 +254,6 @@ class SlackSettingsForm extends Component
                  $response = Http::withHeaders([
                      'content-type' => 'application/json',
                  ])->post($this->webhook_endpoint);
-             }
 
          if(($response->getStatusCode() == 302)||($response->getStatusCode() == 301)){
              return session()->flash('error' , trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]));
