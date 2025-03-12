@@ -25,6 +25,7 @@
                 data-id-table="componentsTable"
                 data-search="true"
                 data-side-pagination="server"
+                data-footer-style="footerStyle"
                 data-show-columns="true"
                 data-show-fullscreen="true"
                 data-show-export="true"

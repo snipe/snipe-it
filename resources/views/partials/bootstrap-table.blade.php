@@ -13,6 +13,7 @@
 <script nonce="{{ csrf_token() }}">
     $(function () {
 
+
         var blockedFields = "searchable,sortable,switchable,title,visible,formatter,class".split(",");
 
         var keyBlocked = function(key) {
@@ -241,7 +242,35 @@
     });
 
 
-    
+
+    // This specifies the footer columns that should have special styles associated
+    // (usually numbers)
+    window.footerStyle = column => ({
+        remaining: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        qty: {
+            classes: 'text-padding-number-footer-cell',
+        },
+        purchase_cost: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        checkouts_count: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        assets_count: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        seats: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        free_seats_count: {
+            classes: 'text-padding-number-footer-cell'
+        },
+    }[column.field]);
+
+
+
 
     // This only works for model index pages because it uses the row's model ID
     function genericRowLinkFormatter(destination) {
@@ -664,14 +693,16 @@
     function minAmtFormatter(row, value) {
 
         if ((row) && (row!=undefined)) {
-            if (value.free_seats_count <= value.min_amt) {
-                return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}">' + value.min_amt + '</span>';
+            
+            if (value.remaining <= value.min_amt) {
+                return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}"><x-icon type="warning" class="text-yellow" /> ' + value.min_amt + '</span>';
             }
             return value.min_amt
         }
-
+        return '--';
     }
 
+    
 
     // Create a linked phone number in the table list
     function phoneFormatter(value) {
@@ -904,6 +935,19 @@
             decimalfixed = number.toString().replace(/\,/g,"");
         }
         return parseFloat(decimalfixed);
+    }
+
+
+    function qtySumFormatter(data) {
+        var currentField = this.field;
+        var total = 0;
+        var fieldname = this.field;
+
+        $.each(data, function() {
+            var r = this;
+            total += this[currentField];
+        });
+        return total;
     }
 
     function sumFormatter(data) {
