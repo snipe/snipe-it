@@ -94,13 +94,18 @@ class CheckoutableListener
         }
 //                 Send Webhook notification
         try {
-            if ($this->shouldSendWebhookNotification()){
-                if($this->isDeprecatedTeamsWebhook()){
-                    return redirect()->back()->with('warning',trans('admin/settings/message.webhook.webhook_fail'));
+            if ($this->shouldSendWebhookNotification()) {
+                if (Setting::getSettings()->webhook_selected === 'microsoft') {
+                    if ($this->isDeprecatedTeamsWebhook()) {
+                        return redirect()->back()->with('warning', trans('admin/settings/message.webhook.webhook_fail'));
+                    }
+                    $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
+                    $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                    $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
+                } else {
+                    Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
+                        ->notify($this->getCheckoutNotification($event, $acceptance));
                 }
-                $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
-                $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
-                $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
             }
         } catch (ClientException $e) {
             if (strpos($e->getMessage(), 'channel_not_found') !== false) {
@@ -188,13 +193,18 @@ class CheckoutableListener
 
         // Send Webhook notification
         try {
-            if ($this->shouldSendWebhookNotification()){
-                if($this->isDeprecatedTeamsWebhook()){
-                    return redirect()->back()->with('warning',trans('admin/settings/message.webhook.webhook_fail'));
+            if ($this->shouldSendWebhookNotification()) {
+                if (Setting::getSettings()->webhook_selected === 'microsoft') {
+                    if ($this->isDeprecatedTeamsWebhook()) {
+                        return redirect()->back()->with('warning', trans('admin/settings/message.webhook.webhook_fail'));
+                    }
+                    $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
+                    $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
+                    $notification->success()->sendMessage($message[0], $message[1]); // Send the message to Microsoft Teams
+                } else {
+                    Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
+                        ->notify($this->getCheckinNotification($event));
                 }
-                $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
-                $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
-                $notification->success()->sendMessage($message[0], $message[1]); // Send the message to Microsoft Teams
             }
         } catch (ClientException $e) {
             if (strpos($e->getMessage(), 'channel_not_found') !== false) {
