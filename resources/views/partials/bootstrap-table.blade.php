@@ -664,12 +664,13 @@
     function minAmtFormatter(row, value) {
 
         if ((row) && (row!=undefined)) {
+            
             if (value.remaining <= value.min_amt) {
                 return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}"><x-icon type="warning" class="text-yellow" /> ' + value.min_amt + '</span>';
             }
             return value.min_amt
         }
-
+        return '--';
     }
 
 
