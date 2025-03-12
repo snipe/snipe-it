@@ -2,9 +2,12 @@
 
 namespace Tests\Feature\Notifications\Email;
 
+use App\Helpers\Helper;
 use App\Mail\ExpiringAssetsMail;
 use App\Mail\ExpiringLicenseMail;
+use App\Mail\InventoryAlertMail;
 use App\Mail\SendUpcomingAuditMail;
+use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\License;
 use App\Models\Setting;
@@ -124,4 +127,31 @@ class ExpiringAlertsNotificationTest extends TestCase
              return $mail->hasTo($alert_email) && $mail->assets->contains($notAuditableAsset);
          });
      }
+
+    public function testLowInventoryWarningThresholdEmailNotification()
+    {
+        $this->markIncompleteIfSqlite();
+        Mail::fake();
+
+        $this->settings->enableAlertEmail('admin@example.com, admin2@example.com');
+        $this->settings->setAlertInterval(5);
+
+        $alert_email = Setting::first()->alert_email;
+
+        Accessory::factory()->create([
+            'min_amt' => 4,
+            'qty' => 2
+        ]);
+
+        $inventory = Helper::checkLowInventory();
+        $this->assertCount(1, $inventory);
+
+        $this->artisan('snipeit:inventory-alerts')->assertExitCode(0);
+
+        foreach(explode(', ', $alert_email) as $recipient) {
+            Mail::assertSent(InventoryAlertMail::class, function (InventoryAlertMail $mail) use ($recipient) {
+                return $mail->hasTo($recipient);
+            });
+        }
+    }
 }
