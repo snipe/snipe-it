@@ -53,6 +53,14 @@ class BulkAssetsController extends Controller
 
         $asset_ids = $request->input('ids');
         if ($request->input('bulk_actions') === 'checkout') {
+            $undeployable_assets = Asset::whereIn('id', $asset_ids)
+                ->whereHas('assetStatus', function ($query){
+                    $query->where('deployable', 0);
+                })
+                ->get();
+            if($undeployable_assets->count() > 0) {
+                return redirect()->back()->with('error', trans_choice('admin/hardware/form.bulk_asset_undeployable', $undeployable_assets->count()));
+            }
             $request->session()->flashInput(['selected_assets' => $asset_ids]);
             return redirect()->route('hardware.bulkcheckout.show');
         }
