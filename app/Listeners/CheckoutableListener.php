@@ -96,6 +96,9 @@ class CheckoutableListener
         try {
             if ($this->shouldSendWebhookNotification()) {
                 if ($this->newMicrosoftTeamsWebhookEnabled()) {
+                    if(!Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')){
+                        return redirect()->back()->with('warning',trans('admin/settings/message.webhook.webhook_fail'));
+                    }
                     $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
                     $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
                     $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
