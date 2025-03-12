@@ -360,7 +360,7 @@ class BulkUsersController extends Controller
             $logAction->item_type = Accessory::class;
             $logAction->target_id = $accessoryUserRow->assigned_to;
             $logAction->target_type = User::class;
-            $logAction->created_at = auth()->id();
+            $logAction->created_by = auth()->id();
             $logAction->note = 'Bulk checkin items';
             $logAction->logaction('checkin from');
         }
@@ -374,7 +374,7 @@ class BulkUsersController extends Controller
             $logAction->item_type = Consumable::class;
             $logAction->target_id = $consumableUserRow->assigned_to;
             $logAction->target_type = User::class;
-            $logAction->created_at = auth()->id();
+            $logAction->created_by = auth()->id();
             $logAction->note = 'Bulk checkin items';
             $logAction->logaction('checkin from');
         }
