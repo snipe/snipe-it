@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helpers\Helper;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class SnipeModel extends Model
 {
@@ -159,5 +160,21 @@ class SnipeModel extends Model
     public function getDisplayNameAttribute()
     {
         return $this->name;
+    }
+
+    /**
+     * Check if the user is allowed to view the purchase cost of the specific item.
+     * If the user doesn't have permissions, set the value to null so it will be hidden.
+     *
+     * @param $value
+     * @return null|float The purchase cost
+     */
+    public function getPurchaseCostAttribute($value)
+    {
+        if (Auth::check() && !Auth::user()->can('viewPurchaseCost', $this)) {
+            return null;
+        }
+
+        return $value;
     }
 }
