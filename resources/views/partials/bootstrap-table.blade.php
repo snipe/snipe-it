@@ -664,8 +664,8 @@
     function minAmtFormatter(row, value) {
 
         if ((row) && (row!=undefined)) {
-            if (value.free_seats_count <= value.min_amt) {
-                return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}">' + value.min_amt + '</span>';
+            if (value.remaining <= value.min_amt) {
+                return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}"><x-icon type="warning" class="text-yellow" /> ' + value.min_amt + '</span>';
             }
             return value.min_amt
         }
@@ -904,6 +904,19 @@
             decimalfixed = number.toString().replace(/\,/g,"");
         }
         return parseFloat(decimalfixed);
+    }
+
+
+    function qtySumFormatter(data) {
+        var currentField = this.field;
+        var total = 0;
+        var fieldname = this.field;
+
+        $.each(data, function() {
+            var r = this;
+            total += this[currentField];
+        });
+        return total;
     }
 
     function sumFormatter(data) {
