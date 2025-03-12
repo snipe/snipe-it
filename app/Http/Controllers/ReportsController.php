@@ -1081,10 +1081,10 @@ class ReportsController extends Controller
             $row[] = e($assetMaintenance->start_date);
             $row[] = e($assetMaintenance->completion_date);
             if (is_null($assetMaintenance->asset_maintenance_time)) {
-                $improvementTime = intval(Carbon::now()
-                                                 ->diffInDays(Carbon::parse($assetMaintenance->start_date)));
+                $improvementTime = (int) Carbon::now()
+                    ->diffInDays(Carbon::parse($assetMaintenance->start_date), true);
             } else {
-                $improvementTime = intval($assetMaintenance->asset_maintenance_time);
+                $improvementTime = (int) $assetMaintenance->asset_maintenance_time;
             }
             $row[]  = $improvementTime;
             $row[]  = trans('general.currency') . Helper::formatCurrencyOutput($assetMaintenance->cost);
