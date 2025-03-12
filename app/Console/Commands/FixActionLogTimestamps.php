@@ -104,6 +104,10 @@ class FixActionLogTimestamps extends Command
         return 0;
     }
 
+    /**
+     * This method attempts to find a bulk check in log that was
+     * created at the same time as the log passed in.
+     */
     private function getCreatedByAttributeFromSimilarLog(Actionlog $log): null|int
     {
         $similarLog = Actionlog::query()
