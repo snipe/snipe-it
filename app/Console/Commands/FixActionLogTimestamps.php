@@ -67,13 +67,24 @@ class FixActionLogTimestamps extends Command
 
         foreach ($logs as $log) {
             $this->line(vsprintf('Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
+            $log->created_at = $log->updated_at;
+
+            $createdBy = $this->getCreatedByAttributeFromSimilarLog($log);
+
+            if ($createdBy) {
+                $this->line(vsprintf('Updating log id:%s created_by to %s', [$log->id, $createdBy]));
+                $log->created_by = $createdBy;
+            } else {
+                $this->line(vsprintf('No created_by found for log id:%s', [$log->id]));
+            }
 
             if (!$this->dryrun) {
                 Model::withoutTimestamps(function () use ($log) {
-                    $log->created_at = $log->updated_at;
                     $log->saveQuietly();
                 });
             }
+
+            $this->newLine();
         }
 
         if ($this->dryrun) {
@@ -81,5 +92,27 @@ class FixActionLogTimestamps extends Command
         }
 
         return 0;
+    }
+
+    private function getCreatedByAttributeFromSimilarLog(Actionlog $log): null|int
+    {
+        if (is_null($log->created_by)) {
+            $similarLog = Actionlog::query()
+                ->whereNotNull('created_by')
+                ->where([
+                    'action_type' => 'checkin from',
+                    'note' => 'Bulk checkin items',
+                    'target_id' => $log->target_id,
+                    'target_type' => $log->target_type,
+                    'created_at' => $log->updated_at,
+                ])
+                ->first();
+
+            if ($similarLog) {
+                return $similarLog->created_by;
+            }
+
+            return null;
+        }
     }
 }
