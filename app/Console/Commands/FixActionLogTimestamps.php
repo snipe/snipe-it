@@ -15,7 +15,7 @@ class FixActionLogTimestamps extends Command
      */
     protected $signature = 'snipeit:fix-action-log-timestamps {--dryrun : Run the sync process but don\'t update the database}';
 
-    // @todo: 
+    // @todo:
     /**
      * The console command description.
      *
@@ -23,7 +23,7 @@ class FixActionLogTimestamps extends Command
      */
     protected $description = 'Command description';
 
-    private $dryrun = false;
+    private bool $dryrun = false;
 
     /**
      * Execute the console command.
@@ -46,10 +46,11 @@ class FixActionLogTimestamps extends Command
         $this->info('Found ' . $logs->count() . ' logs with incorrect timestamps:');
 
         $this->table(
-            ['ID', 'Created At', 'Updated At'],
+            ['ID', 'Created By', 'Created At', 'Updated At'],
             $logs->map(function ($log) {
                 return [
                     $log->id,
+                    $log->created_by,
                     $log->created_at,
                     $log->updated_at,
                 ];
