@@ -957,7 +957,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-9">
-                                                {{ Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date) }}
+                                                {{ (int) Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date, true) }}
                                                 {{ trans('admin/hardware/form.months') }}
 
                                             </div>
