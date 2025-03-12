@@ -36,6 +36,7 @@ class FixActionLogTimestamps extends Command
 
         if ($this->dryrun) {
             $this->info('This is a DRY RUN - no changes will be saved.');
+            $this->newLine();
         }
 
         // Logs that were improperly timestamped should have created_at in the 1970s
@@ -62,32 +63,39 @@ class FixActionLogTimestamps extends Command
         }
 
         if ($this->dryrun) {
+            $this->newLine();
             $this->info('DRY RUN. NOT ACTUALLY UPDATING LOGS.');
         }
 
         foreach ($logs as $log) {
-            $this->line(vsprintf('Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
-            $log->created_at = $log->updated_at;
+            $this->newLine();
+            $this->info('Processing log id:' . $log->id);
 
             if (is_null($log->created_by)) {
-                $createdBy = $this->getCreatedByAttributeFromSimilarLog($log);
+                $createdByFromSimilarLog = $this->getCreatedByAttributeFromSimilarLog($log);
 
-                if ($createdBy) {
-                    $this->line(vsprintf('Updating log id:%s created_by to %s', [$log->id, $createdBy]));
-                    $log->created_by = $createdBy;
+                if ($createdByFromSimilarLog) {
+                    $this->line(vsprintf('Updating log id:%s created_by to %s', [$log->id, $createdByFromSimilarLog]));
+                    $log->created_by = $createdByFromSimilarLog;
                 } else {
                     $this->warn(vsprintf('No created_by found for log id:%s', [$log->id]));
+                    $this->warn('Skipping updating this log since no similar log was found to update created_by from.');
+
+                    continue;
                 }
             }
+
+            $this->line(vsprintf('Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
+            $log->created_at = $log->updated_at;
 
             if (!$this->dryrun) {
                 Model::withoutTimestamps(function () use ($log) {
                     $log->saveQuietly();
                 });
             }
-
-            $this->newLine();
         }
+
+        $this->newLine();
 
         if ($this->dryrun) {
             $this->info('DRY RUN. NO CHANGES WERE ACTUALLY MADE.');
