@@ -249,7 +249,7 @@ class AssetCheckoutTest extends TestCase
 
         $asset->refresh();
 
-        $this->assertTrue(Carbon::parse($asset->last_checkout)->diffInSeconds(now()) < 2);
+        $this->assertTrue((int) Carbon::parse($asset->last_checkout)->diffInSeconds(now(), true) < 2);
     }
 
     public function testAssetCheckoutPageIsRedirectedIfModelIsInvalid()
