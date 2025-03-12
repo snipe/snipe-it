@@ -80,24 +80,28 @@ class LicensePresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('general.manufacturer'),
                 'formatter' => 'manufacturersLinkObjFormatter',
-            ], [
-                'field' => 'seats',
-                'searchable' => false,
-                'sortable' => true,
-                'title' => trans('admin/accessories/general.total'),
-            ], [
-                'field' => 'free_seats_count',
-                'searchable' => false,
-                'sortable' => true,
-                'title' => trans('admin/accessories/general.remaining'),
-            ],
-            [
+            ],  [
                 'field' => 'min_amt',
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('mail.min_QTY'),
                 'formatter' => 'minAmtFormatter',
-            ],[
+                'class' => 'text-right',
+            ], [
+                'field' => 'seats',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('admin/accessories/general.total'),
+                'class' => 'text-right',
+                'footerFormatter' => 'qtySumFormatter',
+            ], [
+                'field' => 'free_seats_count',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('admin/accessories/general.remaining'),
+                'class' => 'text-right',
+                'footerFormatter' => 'qtySumFormatter',
+            ], [
                 'field' => 'purchase_date',
                 'searchable' => true,
                 'sortable' => true,

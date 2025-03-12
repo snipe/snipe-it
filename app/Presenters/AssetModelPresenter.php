@@ -74,7 +74,10 @@ class AssetModelPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('mail.min_QTY'),
                 'visible' => true,
+                'formatter' => 'minAmtFormatter',
+                'class' => 'text-right',
             ],
+
             [
                 'field' => 'assets_count',
                 'searchable' => false,
@@ -82,6 +85,19 @@ class AssetModelPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('admin/models/table.numassets'),
                 'visible' => true,
+                'class' => 'text-right',
+                'footerFormatter' => 'qtySumFormatter',
+            ],
+
+            [
+                'field' => 'remaining',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.remaining'),
+                'visible' => true,
+                'class' => 'text-right',
+                'footerFormatter' => 'qtySumFormatter',
             ],
             [
                 'field' => 'depreciation',

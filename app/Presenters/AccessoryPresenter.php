@@ -79,27 +79,32 @@ class AccessoryPresenter extends Presenter
                 'title' => trans('general.location'),
                 'formatter' => 'locationsLinkObjFormatter',
             ], [
+                'field' => 'min_amt',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.min_amt'),
+                'formatter' => 'minAmtFormatter',
+                'class' => 'text-right',
+            ], [
                 'field' => 'qty',
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('admin/accessories/general.total'),
+                'footerFormatter' => 'qtySumFormatter',
             ], [
-                'field' => 'remaining_qty',
+                'field' => 'remaining',
                 'searchable' => false,
                 'sortable' => false,
                 'visible' => false,
                 'title' => trans('admin/accessories/general.remaining'),
+                'footerFormatter' => 'qtySumFormatter',
             ],[
                 'field' => 'checkouts_count',
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => true,
                 'title' => trans('general.checked_out'),
-            ], [
-                'field' => 'min_qty',
-                'searchable' => false,
-                'sortable' => true,
-                'title' => trans('general.min_amt'),
+                'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'purchase_date',
                 'searchable' => true,
