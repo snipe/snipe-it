@@ -61,17 +61,23 @@ class FixActionLogTimestamps extends Command
             return 0;
         }
 
-        foreach ($logs as $log) {
-            if (!$this->dryrun){
-                $this->line(vsprintf('Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
+        if ($this->dryrun) {
+            $this->info('DRY RUN. NOT ACTUALLY UPDATING LOGS.');
+        }
 
+        foreach ($logs as $log) {
+            $this->line(vsprintf('Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
+
+            if (!$this->dryrun) {
                 Model::withoutTimestamps(function () use ($log) {
                     $log->created_at = $log->updated_at;
                     $log->saveQuietly();
                 });
-            } else {
-                $this->line(vsprintf('DRYRUN: Updating log id:%s from %s to %s', [$log->id, $log->created_at, $log->updated_at]));
             }
+        }
+
+        if ($this->dryrun) {
+            $this->info('DRY RUN. NO CHANGES WERE ACTUALLY MADE.');
         }
 
         return 0;
