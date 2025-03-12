@@ -9,8 +9,12 @@ class CreateUserTest extends TestCase
 {
     public function testPageRenders()
     {
-        $this->actingAs(User::factory()->superuser()->create())
+        $admin = User::factory()->createUsers()->create();
+        $response = $this->actingAs(User::factory()->superuser()->create())
             ->get(route('users.create'))
             ->assertOk();
+        $response->assertDontSee($admin->first_name);
+        $response->assertDontSee($admin->last_name);
+        $response->assertDontSee($admin->email);
     }
 }
