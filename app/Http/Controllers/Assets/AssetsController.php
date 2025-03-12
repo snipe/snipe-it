@@ -318,7 +318,7 @@ class AssetsController extends Controller
             $asset->eol_explicit = false;
         } elseif ($request->filled('asset_eol_date')) {
            $asset->asset_eol_date = $request->input('asset_eol_date', null);
-           $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
+            $months = (int) Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date, true);
            if($asset->model->eol) {
                if($months != $asset->model->eol > 0) {
                    $asset->eol_explicit = true;
