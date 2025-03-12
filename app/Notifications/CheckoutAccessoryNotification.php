@@ -50,11 +50,6 @@ class CheckoutAccessoryNotification extends Notification
             $notifyBy[] = GoogleChatChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_selected == 'microsoft' && Setting::getSettings()->webhook_endpoint) {
-
-            $notifyBy[] = MicrosoftTeamsChannel::class;
-        }
-
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
             $notifyBy[] = 'slack';
         }
@@ -120,22 +115,6 @@ class CheckoutAccessoryNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-
-        if(!Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {
-            return MicrosoftTeamsMessage::create()
-                ->to($this->settings->webhook_endpoint)
-                ->type('success')
-                ->addStartGroupToSection('activityTitle')
-                ->title(trans('mail.Accessory_Checkout_Notification'))
-                ->addStartGroupToSection('activityText')
-                ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
-                ->fact(trans('mail.assigned_to'), $target->present()->name)
-                ->fact(trans('general.qty'), $this->checkout_qty)
-                ->fact(trans('mail.checkedout_from'), $item->location->name ? $item->location->name : '')
-                ->fact(trans('mail.Accessory_Checkout_Notification') . " by ", $admin->present()->fullName())
-                ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
-                ->fact(trans('mail.notes'), $note ?: '');
-        }
 
         $message = trans('mail.Accessory_Checkout_Notification');
         $details = [
