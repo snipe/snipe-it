@@ -117,7 +117,7 @@ class AssetMaintenancesController extends Controller
         ) {
             $startDate = Carbon::parse($assetMaintenance->start_date);
             $completionDate = Carbon::parse($assetMaintenance->completion_date);
-            $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
+            $assetMaintenance->asset_maintenance_time = (int) $completionDate->diffInDays($startDate, true);
         }
 
         // Was the asset maintenance created?
@@ -210,7 +210,7 @@ class AssetMaintenancesController extends Controller
         ) {
             $startDate = Carbon::parse($maintenance->start_date);
             $completionDate = Carbon::parse($maintenance->completion_date);
-            $maintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
+            $maintenance->asset_maintenance_time = (int) $completionDate->diffInDays($startDate, true);
         }
 
       // Was the asset maintenance created?
