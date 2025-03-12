@@ -15,6 +15,7 @@ class FixActionLogTimestamps extends Command
      */
     protected $signature = 'snipeit:fix-action-log-timestamps {--dryrun : Run the sync process but don\'t update the database}';
 
+    // @todo: 
     /**
      * The console command description.
      *
@@ -39,6 +40,8 @@ class FixActionLogTimestamps extends Command
 
         // Logs that were improperly timestamped should have created_at in the 1970s
         $logs = Actionlog::whereYear('created_at', '1970')->get();
+
+        // @todo: handle created_by being null...
 
         $this->info('Found ' . $logs->count() . ' logs with incorrect timestamps:');
 
