@@ -55,7 +55,9 @@ class BulkAssetsController extends Controller
         if ($request->input('bulk_actions') === 'checkout') {
             $undeployable_assets = Asset::whereIn('id', $asset_ids)
                 ->whereHas('assetStatus', function ($query){
-                    $query->where('deployable', 0);
+                    $query->where('deployable', 0)
+                          ->where('archived', 0)
+                          ->where('pending', 0);
                 })
                 ->get();
             if($undeployable_assets->count() > 0) {
