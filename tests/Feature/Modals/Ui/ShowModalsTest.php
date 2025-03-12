@@ -9,9 +9,15 @@ class ShowModalsTest extends TestCase
 {
     public function testUserModalRenders()
     {
-        $this->actingAs(User::factory()->createUsers()->create())
+        $admin = User::factory()->createUsers()->create();
+        $response = $this->actingAs($admin)
             ->get('modals/user')
             ->assertOk();
+
+        $response->assertStatus(200);
+        $response->assertDontSee($admin->first_name);
+        $response->assertDontSee($admin->last_name);
+        $response->assertDontSee($admin->email);
     }
 
     public function testDepartmentModalRenders()
