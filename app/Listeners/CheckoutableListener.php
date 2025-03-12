@@ -95,12 +95,14 @@ class CheckoutableListener
 //                 Send Webhook notification
         try {
             if ($this->shouldSendWebhookNotification()) {
-                if ($this->newMicrosoftTeamsWebhookEnabled()) {
+                if (Setting::getSettings()->webhook_selected === 'microsoft') {
+                    if ($this->isDeprecatedTeamsWebhook()) {
+                        return redirect()->back()->with('warning', trans('admin/settings/message.webhook.webhook_fail'));
+                    }
                     $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
                     $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
                     $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
                 } else {
-
                     Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckoutNotification($event, $acceptance));
                 }
@@ -192,7 +194,10 @@ class CheckoutableListener
         // Send Webhook notification
         try {
             if ($this->shouldSendWebhookNotification()) {
-                if ($this->newMicrosoftTeamsWebhookEnabled()) {
+                if (Setting::getSettings()->webhook_selected === 'microsoft') {
+                    if ($this->isDeprecatedTeamsWebhook()) {
+                        return redirect()->back()->with('warning', trans('admin/settings/message.webhook.webhook_fail'));
+                    }
                     $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
                     $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
                     $notification->success()->sendMessage($message[0], $message[1]); // Send the message to Microsoft Teams
@@ -381,8 +386,8 @@ class CheckoutableListener
         return (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email());
     }
 
-    private function newMicrosoftTeamsWebhookEnabled(): bool
+    private function isDeprecatedTeamsWebhook(): bool
     {
-        return Setting::getSettings()->webhook_selected === 'microsoft' && Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows');
+        return !Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows');
     }
 }
