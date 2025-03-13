@@ -6,14 +6,14 @@ use App\Models\Actionlog;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 
-class FixBulkAccessoryCheckinActionLogTimestamps extends Command
+class FixBulkAccessoryCheckinActionLogEntries extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'snipeit:fix-bulk-accessory-action-log-timestamps {--dryrun : Run the sync process but don\'t update the database}';
+    protected $signature = 'snipeit:fix-bulk-accessory-action-log-entries {--dryrun : Run the sync process but don\'t update the database}';
 
     /**
      * The console command description.
