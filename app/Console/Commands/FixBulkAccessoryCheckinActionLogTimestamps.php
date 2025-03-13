@@ -6,14 +6,14 @@ use App\Models\Actionlog;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
 
-class FixActionLogTimestamps extends Command
+class FixBulkAccessoryCheckinActionLogTimestamps extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'snipeit:fix-action-log-timestamps {--dryrun : Run the sync process but don\'t update the database}';
+    protected $signature = 'snipeit:fix-bulk-accessory-action-log-timestamps {--dryrun : Run the sync process but don\'t update the database}';
 
     /**
      * The console command description.
@@ -68,6 +68,9 @@ class FixActionLogTimestamps extends Command
             $this->newLine();
             $this->info('Processing log id:' . $log->id);
 
+            // created_by was not being set for accessory bulk checkins
+            // so let's see if there was another bulk checkin log
+            // with the same timestamp and a created_by value we can use.
             if (is_null($log->created_by)) {
                 $createdByFromSimilarLog = $this->getCreatedByAttributeFromSimilarLog($log);
 
@@ -78,6 +81,7 @@ class FixActionLogTimestamps extends Command
                     $this->warn(vsprintf('No created_by found for log id:%s', [$log->id]));
                     $this->warn('Skipping updating this log since no similar log was found to update created_by from.');
 
+                    // If we can't find a similar log then let's skip updating it
                     continue;
                 }
             }
