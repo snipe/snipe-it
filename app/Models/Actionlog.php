@@ -93,7 +93,13 @@ class Actionlog extends SnipeModel
             } elseif (auth()->user() && auth()->user()->company) {
                 $actionlog->company_id = auth()->user()->company_id;
             }
+
+            if ($actionlog->action_date == '') {
+                $actionlog->action_date = Carbon::now();
+            }
+
         });
+
     }
 
 
