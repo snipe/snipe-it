@@ -146,12 +146,14 @@ class AssetsController extends Controller
             $asset->requestable             = request('requestable', 0);
             $asset->rtd_location_id         = request('rtd_location_id', null);
             $asset->byod                    = request('byod', 0);
-            $asset->next_audit_date         = request('next_audit_date', null);
 
             if (! empty($settings->audit_interval)) {
                 $asset->next_audit_date = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
-            }
-
+            } 
+	    else {
+		$asset->next_audit_date = request('next_audit_date', null);
+	    }
+		
             // Set location_id to rtd_location_id ONLY if the asset isn't being checked out
             if (!request('assigned_user') && !request('assigned_asset') && !request('assigned_location')) {
                 $asset->location_id = $request->input('rtd_location_id', null);
