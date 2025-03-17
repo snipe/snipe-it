@@ -395,13 +395,22 @@ class UsersController extends Controller
         // Make sure the user can view users at all
         $this->authorize('view', User::class);
 
-        $user = User::with('assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc')->withTrashed()->find($user->id);
+        $user = User::with([
+            'consumables',
+            'accessories',
+            'licenses',
+            'userloc',
+        ])
+            ->withTrashed()
+            ->find($user->id);
 
         // Make sure they can view this particular user
         $this->authorize('view', $user);
 
-            $userlog = $user->userlog->load('item');
-            return view('users/view', compact('user', 'userlog'))->with('settings', Setting::getSettings());
+        return view('users/view', [
+            'user' => $user,
+            'settings' => Setting::getSettings(),
+        ]);
     }
 
 
