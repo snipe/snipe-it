@@ -49,6 +49,7 @@ class SendExpirationAlerts extends Command
             // Send a rollup to the admin, if settings dictate
             $recipients = collect(explode(',', $settings->alert_email))
                 ->map(fn($item) => trim($item)) // Trim each email
+                ->filter(fn($item) => !empty($item))
                 ->all();
             // Expiring Assets
             $assets = Asset::getExpiringWarrantee($alert_interval);
