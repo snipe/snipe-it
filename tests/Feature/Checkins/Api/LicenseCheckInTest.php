@@ -1,5 +1,5 @@
 <?php
-namespace Feature\Checkins\Api;
+namespace Tests\Feature\Checkins\Api;
 
 use App\Models\License;
 use App\Models\LicenseSeat;
@@ -9,7 +9,7 @@ use Tests\TestCase;
 class LicenseCheckInTest extends TestCase {
     public function testLicenseCheckin()
     {
-        $authUser = User::factory()->superuser()->make();
+        $authUser = User::factory()->superuser()->create();
         $this->actingAsForApi($authUser);
 
         $license = License::factory()->create();

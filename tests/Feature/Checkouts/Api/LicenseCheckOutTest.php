@@ -1,5 +1,5 @@
 <?php
-namespace Feature\Checkouts\Api;
+namespace Tests\Feature\Checkouts\Api;
 
 use App\Models\License;
 use App\Models\LicenseSeat;
@@ -9,7 +9,7 @@ use Tests\TestCase;
 class LicenseCheckOutTest extends TestCase {
     public function testLicenseCheckout()
     {
-        $authUser = User::factory()->superuser()->make();
+        $authUser = User::factory()->superuser()->create();
         $this->actingAsForApi($authUser);
 
         $license = License::factory()->create();
