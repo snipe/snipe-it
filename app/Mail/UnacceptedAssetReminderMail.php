@@ -29,11 +29,13 @@ class UnacceptedAssetReminderMail extends Mailable
      */
     public function envelope(): Envelope
     {
+        $this->count = $count;
         $from = new Address(config('mail.from.address'), config('mail.from.name'));
+        $subject = trans_choice('mail.unaccepted_asset_reminder', $count);
 
         return new Envelope(
             from: $from,
-            subject: trans('mail.unaccepted_asset_reminder'),
+            subject: $subject,
         );
     }
 

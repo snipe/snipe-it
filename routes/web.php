@@ -25,6 +25,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Livewire\Importer;
+use App\Models\CheckoutAcceptance;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -338,6 +339,21 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     )->name('profile.email_assets');
 
 });
+
+Route::get('/mailable', function (){
+$checkout_info = [];
+$acceptance = CheckoutAcceptance::first();
+//dd($acceptance);
+    $count = [];
+
+$checkout_info['acceptance'] = $acceptance;
+
+return new App\Mail\UnacceptedAssetReminderMail($checkout_info,2);
+});
+
+
+
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('reports/audit', 
