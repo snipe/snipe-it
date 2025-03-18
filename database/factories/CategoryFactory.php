@@ -207,4 +207,11 @@ class CategoryFactory extends Factory
             'category_type' => 'consumable',
         ]);
     }
+
+    public function doesNotRequireAcceptance()
+    {
+        return $this->state([
+            'require_acceptance' => false,
+        ]);
+    }
 }
