@@ -57,10 +57,6 @@ class CheckinAssetNotification extends Notification
             $notifyBy[] = GoogleChatChannel::class;
         }
 
-        if (Setting::getSettings()->webhook_selected == 'microsoft' && Setting::getSettings()->webhook_endpoint) {
-
-            $notifyBy[] = MicrosoftTeamsChannel::class;
-        }
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
             Log::debug('use webhook');
             $notifyBy[] = SlackWebhookChannel::class;
@@ -98,20 +94,6 @@ class CheckinAssetNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
-
-        if(!Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {
-            return MicrosoftTeamsMessage::create()
-                ->to($this->settings->webhook_endpoint)
-                ->type('success')
-                ->title(trans('mail.Asset_Checkin_Notification'))
-                ->addStartGroupToSection('activityText')
-                ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityText')
-                ->fact(trans('mail.checked_into'), ($item->location) ? $item->location->name : '')
-                ->fact(trans('mail.Asset_Checkin_Notification') . " by ", $admin->present()->fullName())
-                ->fact(trans('admin/hardware/form.status'), $item->assetstatus?->name)
-                ->fact(trans('mail.notes'), $note ?: '');
-        }
-
 
         $message = trans('mail.Asset_Checkin_Notification');
         $details = [
