@@ -94,6 +94,10 @@ class AccessoriesTransformer
 
     public function transformAssignedTo($accessoryCheckout)
     {
+        if (is_null($accessoryCheckout->assigned)) {
+            return null;
+        }
+
         if ($accessoryCheckout->checkedOutToUser()) {
             return (new UsersTransformer)->transformUserCompact($accessoryCheckout->assigned);
         } elseif ($accessoryCheckout->checkedOutToLocation()) {
