@@ -101,11 +101,8 @@ class LocationsTransformer
             $array = [
                 'id' => $accessory_checkout->id,
                 'assigned_to' => $accessory_checkout->assigned_to,
-                'accessory' => [
-                    'id' => $accessory_checkout->accessory->id,
-                    'name' => $accessory_checkout->accessory->name,
-                ],
-                'image' => ($accessory_checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory_checkout->accessory->image)) : null,
+                'accessory' => $this->transformAccessory($accessory_checkout->accessory),
+                'image' => ($accessory_checkout?->accessory?->image) ? Storage::disk('public')->url('accessories/' . e($accessory_checkout->accessory->image)) : null,
                 'note' => $accessory_checkout->note ? e($accessory_checkout->note) : null,
                 'created_by' => $accessory_checkout->adminuser ? [
                     'id' => (int) $accessory_checkout->adminuser->id,
@@ -152,5 +149,17 @@ class LocationsTransformer
 
             return $array;
         }
+    }
+
+    private function transformAccessory(?Accessory $accessory): ?array
+    {
+        if ($accessory) {
+            return [
+                'id' => $accessory->id,
+                'name' => $accessory->name,
+            ];
+        }
+
+        return null;
     }
 }
