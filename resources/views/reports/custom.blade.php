@@ -148,6 +148,16 @@
                 </label>
 
                 <label class="form-control">
+                    <input type="checkbox" name="warranty" value="1" @checked($template->checkmarkValue('warranty')) />
+                    {{ trans('admin/hardware/form.warranty') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="depreciation" value="1" @checked($template->checkmarkValue('depreciation')) />
+                    {{ trans('general.depreciation') }}
+                </label>
+
+                <label class="form-control">
                     <input type="checkbox" name="order" value="1" @checked($template->checkmarkValue('order')) />
                     {{ trans('admin/hardware/form.order') }}
                 </label>
@@ -180,16 +190,6 @@
                 <label class="form-control">
                     <input type="checkbox" name="status" value="1" @checked($template->checkmarkValue('status')) />
                     {{ trans('general.status') }}
-                </label>
-
-                <label class="form-control">
-                    <input type="checkbox" name="warranty" value="1" @checked($template->checkmarkValue('warranty')) />
-                    {{ trans('admin/hardware/form.warranty') }}
-                </label>
-
-                <label class="form-control">
-                    <input type="checkbox" name="depreciation" value="1" @checked($template->checkmarkValue('depreciation')) />
-                    {{ trans('general.depreciation') }}
                 </label>
 
                 <label class="form-control">
