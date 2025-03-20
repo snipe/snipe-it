@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 class ViewUserTest extends TestCase
 {
-
     public function testRequiresPermissionToViewUser()
     {
         $this->actingAs(User::factory()->create())
