@@ -570,7 +570,6 @@ class BulkAssetsController extends Controller
      */
     public function storeCheckout(AssetCheckoutRequest $request) : RedirectResponse | ModelNotFoundException
     {
-
         $this->authorize('checkout', Asset::class);
 
         try {
@@ -583,6 +582,8 @@ class BulkAssetsController extends Controller
             }
 
             $asset_ids = array_filter($request->get('selected_assets'));
+
+            $assets = Asset::findOrFail($asset_ids);
 
             if (request('checkout_to_type') == 'asset') {
                 foreach ($asset_ids as $asset_id) {
@@ -603,9 +604,8 @@ class BulkAssetsController extends Controller
             }
 
             $errors = [];
-            DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, &$errors, $asset_ids, $request) { //NOTE: $errors is passsed by reference!
-                foreach ($asset_ids as $asset_id) {
-                    $asset = Asset::findOrFail($asset_id);
+            DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, &$errors, $assets, $request) { //NOTE: $errors is passsed by reference!
+                foreach ($assets as $asset) {
                     $this->authorize('checkout', $asset);
 
                     $checkout_success = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $asset->name, null);
