@@ -25,7 +25,6 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Livewire\Importer;
-use App\Models\CheckoutAcceptance;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
