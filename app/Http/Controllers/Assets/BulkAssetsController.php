@@ -632,7 +632,7 @@ class BulkAssetsController extends Controller
             // Redirect to the asset management page with error
             return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans_choice('admin/hardware/message.multi-checkout.error', $asset_ids))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
-            return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
+            return redirect()->route('hardware.bulkcheckout.show')->with('error', trans_choice('admin/hardware/message.multi-checkout.error', $request->input('selected_assets')));
         }
         
     }
