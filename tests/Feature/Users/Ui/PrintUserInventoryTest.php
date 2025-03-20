@@ -6,7 +6,7 @@ use App\Models\Company;
 use App\Models\User;
 use Tests\TestCase;
 
-class PrintUserTest extends TestCase
+class PrintUserInventoryTest extends TestCase
 {
     public function testPermissionsForPrintAllInventoryPage()
     {
