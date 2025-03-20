@@ -300,7 +300,7 @@
 
             e.preventDefault();
 
-            var auto_tag = $("#asset_tag").val().replace(/^{{ preg_quote(App\Models\Setting::getSettings()->auto_increment_prefix) }}/g, '');
+            var auto_tag = $("#asset_tag").val().replace(/^{{ preg_quote(App\Models\Setting::getSettings()->auto_increment_prefix, '/') }}/g, '');
             var box_html        = '';
 			const zeroPad 		= (num, places) => String(num).padStart(places, '0');
 
