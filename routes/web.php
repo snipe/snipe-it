@@ -340,21 +340,6 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
 
 });
 
-Route::get('/mailable', function (){
-$checkout_info = [];
-$acceptance = CheckoutAcceptance::first();
-//dd($acceptance);
-    $count = [];
-
-$checkout_info['acceptance'] = $acceptance;
-
-return new App\Mail\UnacceptedAssetReminderMail($checkout_info,2);
-});
-
-
-
-
-
 Route::group(['middleware' => ['auth']], function () {
     Route::get('reports/audit', 
         [ReportsController::class, 'audit']
