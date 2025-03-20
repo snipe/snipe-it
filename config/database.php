@@ -81,6 +81,7 @@ return [
             'unix_socket' => env('DB_SOCKET', ''),
             'dump' => [
                 'dump_binary_path' => env('DB_DUMP_PATH', '/usr/local/bin'),  // only the path, so without 'mysqldump'
+                'skip_ssl' => env('DB_DUMP_SKIP_SSL', false),  // turn off SSL if not available
                 'use_single_transaction' => false,
                 'timeout' => 60 * 5, // 5 minute timeout
                 //'exclude_tables' => ['table1', 'table2'],
