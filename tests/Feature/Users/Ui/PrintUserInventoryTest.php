@@ -8,26 +8,34 @@ use Tests\TestCase;
 
 class PrintUserInventoryTest extends TestCase
 {
-    public function testPermissionsForPrintAllInventoryPage()
+    public function testPermissionRequiredToPrintUserInventory()
+    {
+        $this->actingAs(User::factory()->create())
+            ->get(route('users.print', User::factory()->create()))
+            ->assertStatus(403);
+    }
+
+    public function testCanPrintUserInventory()
+    {
+        $actor = User::factory()->viewUsers()->create();
+
+        $this->actingAs($actor)
+            ->get(route('users.print', User::factory()->create()))
+            ->assertOk()
+            ->assertStatus(200);
+    }
+
+    public function testCannotPrintUserInventoryFromAnotherCompany()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
-        $superuser = User::factory()->superuser()->create();
+        $actor = User::factory()->for($companyA)->viewUsers()->create();
         $user = User::factory()->for($companyB)->create();
 
-        $this->actingAs(User::factory()->viewUsers()->for($companyA)->create())
-            ->get(route('users.print', ['userId' => $user->id]))
+        $this->actingAs($actor)
+            ->get(route('users.print', $user))
             ->assertStatus(302);
-
-        $this->actingAs(User::factory()->viewUsers()->for($companyB)->create())
-            ->get(route('users.print', ['userId' => $user->id]))
-            ->assertStatus(200);
-
-        $this->actingAs($superuser)
-            ->get(route('users.print', ['userId' => $user->id]))
-            ->assertOk()
-            ->assertStatus(200);
     }
 }
