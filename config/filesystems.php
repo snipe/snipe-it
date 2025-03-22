@@ -105,4 +105,17 @@ $config = [
 // (by default, the PUBLIC_FILESYSTEM DISK is 'local_public', in the public/uploads directory)
 $config['disks']['public'] = $config['disks'][env('PUBLIC_FILESYSTEM_DISK','local_public')];
 
+// Handle the 'backup' disk for S3 consideration
+if (env('PRIVATE_FILESYSTEM_DISK') == 's3_private') {
+    $config['disks']['backup']['driver'] = 's3';
+    $config['disks']['backup']['key'] = $config['disks']['s3_private']['key'];
+    $config['disks']['backup']['secret'] = $config['disks']['s3_private']['secret'];
+    $config['disks']['backup']['region'] = $config['disks']['s3_private']['region'];
+    $config['disks']['backup']['bucket'] = $config['disks']['s3_private']['bucket'];
+    $config['disks']['backup']['url'] = $config['disks']['s3_private']['url'];
+    $config['disks']['backup']['root'] = $config['disks']['s3_private']['root'];
+    $config['disks']['backup']['visibility'] = 'private';
+}
+
+
 return $config;
