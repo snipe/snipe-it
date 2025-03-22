@@ -47,6 +47,17 @@
             @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'asset_selector_div_id' => 'assigned_asset', 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;'])
           @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;'])
 
+            <!-- Status -->
+            <div class="form-group {{ $errors->has('status_id') ? 'error' : '' }}">
+                <label for="status_id" class="col-md-3 control-label">
+                    {{ trans('admin/hardware/form.status') }}
+                </label>
+                <div class="col-md-7">
+                    {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','', 'aria-label'=>'status_id')) }}
+                    {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                </div>
+            </div>
+
           <!-- Checkout/Checkin Date -->
               <div class="form-group {{ $errors->has('checkout_at') ? 'error' : '' }}">
                   <label for="checkout_at" class="col-sm-3 control-label">

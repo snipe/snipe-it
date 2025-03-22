@@ -562,7 +562,7 @@ class BulkAssetsController extends Controller
     public function showCheckout() : View
     {
         $this->authorize('checkout', Asset::class);
-        return view('hardware/bulk-checkout');
+        return view('hardware/bulk-checkout')->with('statusLabel_list', Helper::deployableStatusLabelList());
     }
 
     /**
@@ -591,6 +591,7 @@ class BulkAssetsController extends Controller
                     }
                 }
             }
+
             $checkout_at = date('Y-m-d H:i:s');
             if (($request->filled('checkout_at')) && ($request->get('checkout_at') != date('Y-m-d'))) {
                 $checkout_at = e($request->get('checkout_at'));
@@ -603,10 +604,14 @@ class BulkAssetsController extends Controller
             }
 
             $errors = [];
-            DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, &$errors, $asset_ids, $request) { //NOTE: $errors is passsed by reference!
+            DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, &$errors, $asset_ids, $request) { //NOTE: $errors is passed by reference!
                 foreach ($asset_ids as $asset_id) {
                     $asset = Asset::findOrFail($asset_id);
                     $this->authorize('checkout', $asset);
+
+                    if ($request->filled('status_id')) {
+                        $asset->status_id = $request->input('status_id');
+                    }
 
                     $checkout_success = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $asset->name, null);
 
