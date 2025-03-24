@@ -12,7 +12,6 @@ class EmailAssignedToUserTest extends TestCase
 {
     public function testUserWithoutCompanyPermissionsCannotSendInventory()
     {
-
         Notification::fake();
 
         $this->settings->enableMultipleFullCompanySupport();
