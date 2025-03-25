@@ -17,8 +17,10 @@ use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\ReportTemplate;
 use App\Models\Setting;
+use App\Models\User;
 use App\Notifications\CheckoutAssetNotification;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -1119,7 +1121,8 @@ class ReportsController extends Controller
                         AssetModel::class => ['model'],
                         Company::class => ['company'],
                         Asset::class => ['assignedTo'],
-                    ])->with('model.category');
+                    ])->with('model.category')
+                        ->where('assigned_type', User::class);
                 },
                 'assignedTo' => function($query){
                          $query->withTrashed();
