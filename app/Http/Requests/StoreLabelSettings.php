@@ -29,6 +29,12 @@ class StoreLabelSettings extends FormRequest
             return $label->getName();
         })->values()->toArray();
 
+        if (empty($this->input('label2_template'))) {
+            $this->merge([
+                'label2_template' => 'DefaultLabel',
+            ]);
+        }
+
         return [
             'labels_per_page'                     => 'numeric',
             'labels_width'                        => 'numeric',
