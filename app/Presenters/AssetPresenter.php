@@ -555,7 +555,7 @@ class AssetPresenter extends Presenter
      */
     public function statusMeta()
     {
-        if ($this->model->assigned) {
+        if ($this->model->assigned_to) {
             return 'deployed';
         }
 
