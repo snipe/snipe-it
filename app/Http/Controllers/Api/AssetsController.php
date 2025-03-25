@@ -498,8 +498,14 @@ class AssetsController extends Controller
             $assets = $assets->withTrashed();
         }
 
-        if (($assets = $assets->get()) && ($assets->count()) > 0) {
-            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
+
+        $total = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
+
+        if (($assets) && ($assets->count()) > 0) {
+            return (new AssetsTransformer)->transformAssets($assets, $total);
         }
 
         // If there are 0 results, return the "no such asset" response
