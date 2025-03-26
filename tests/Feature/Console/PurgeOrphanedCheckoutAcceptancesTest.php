@@ -9,8 +9,6 @@ class PurgeOrphanedCheckoutAcceptancesTest extends TestCase
 {
     public function testPurgeOrphanedCheckoutAcceptances()
     {
-        // $this->markTestIncomplete();
-
         [$pendingForAccessory, $pendingForAccessoryWithDeletedUser] = CheckoutAcceptance::factory()->count(2)->pending()->forAccessory()->create();
         [$pendingForAsset, $pendingForAssetWithDeletedUser] = CheckoutAcceptance::factory()->count(2)->pending()->forAsset()->create();
         [$pendingForConsumable, $pendingForConsumableWithDeletedUser] = CheckoutAcceptance::factory()->count(2)->pending()->forConsumable()->create();
