@@ -33,7 +33,7 @@ class PurgeOrphanedCheckoutAcceptancesTest extends TestCase
 
         $this->assertDatabaseCount('checkout_acceptances', 16);
 
-        $this->artisan('snipeit:purge-orphaned-checkout-acceptances');
+        $this->artisan('snipeit:purge-orphaned-checkout-acceptances')->assertSuccessful();
 
         $this->assertDatabaseHas('checkout_acceptances', ['id' => $pendingForAccessory->id]);
         $this->assertDatabaseHas('checkout_acceptances', ['id' => $pendingForAsset->id]);
