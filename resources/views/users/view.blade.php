@@ -984,7 +984,7 @@
                     data-sort-order="desc"
                     id="usersHistoryTable"
                     class="table table-striped snipe-table"
-                    data-url="{{ route('api.activity.index', ['target_id' => $user->id, 'target_type' => 'user']) }}"
+                    data-url="{{ route('api.activity.index', ['item_id' => $user->id, 'item_type' => 'user']) }}"
                     data-export-options='{
                 "fileName": "export-{{ str_slug($user->present()->fullName ) }}-history-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
