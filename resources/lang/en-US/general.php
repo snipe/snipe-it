@@ -317,6 +317,7 @@ return [
     'updating_item' => 'Updating :item',
     'upload_filetypes_help'      => 'Allowed filetypes are png, gif, jpg, jpeg, doc, docx, pdf, xls, xlsx, txt, lic, xml, zip, rtf and rar. Max upload size allowed is :size.',
     'uploaded'              => 'Uploaded',
+    'upload_deleted'        => 'Upload Deleted',
     'user'					=> 'User',
     'accepted'			    => 'accepted',
     'declined'			    => 'declined',

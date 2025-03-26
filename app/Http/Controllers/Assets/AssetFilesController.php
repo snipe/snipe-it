@@ -96,6 +96,7 @@ class AssetFilesController extends Controller
 
         if ($log = Actionlog::find($fileId)) {
             if (Storage::exists($rel_path.'/'.$log->filename)) {
+                $asset->logUploadDelete($log->filename);
                 Storage::delete($rel_path.'/'.$log->filename);
             }
             $log->delete();
