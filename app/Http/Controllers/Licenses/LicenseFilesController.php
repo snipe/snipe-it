@@ -82,7 +82,6 @@ class LicenseFilesController extends Controller
                     }
                 }
                 $license->logUploadDelete($log->filename);
-                $log->delete();
 
                 return redirect()->back()
                     ->with('success', trans('admin/hardware/message.deletefile.success'));
