@@ -95,6 +95,7 @@ class Ldap extends Model
         $connection = self::connectToLdap();
         $ldap_username_field = $settings->ldap_username_field;
         $baseDn = $settings->ldap_basedn;
+	// userDn should *not* depend on baseDN if LDAP auth -> redeclared further down
         $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
 
         if ($settings->is_ad == '1') {
@@ -118,6 +119,25 @@ class Ldap extends Model
         $filterQuery = "({$filter}({$filterQuery}))";
 
         Log::debug('Filter query: '.$filterQuery);
+
+	// userDn should be independent from baseDn (maybe you want to search in >=2 subtrees)
+	// -> better ask LDAP for user dn, that's why it is for
+	if ($settings->is_ad != '1') {
+		$userresults = ldap_search($connection, $baseDn, $filterQuery);
+		$userentries = ldap_get_entries($connection, $userresults);
+		// Can be empty if user does not exist
+		if ( $userentries["count"] == 1 ) {
+			$dn = $userentries[0]['dn'];
+			if ( $dn ) {
+				\Log::debug('User dn is: ' .$dn);
+				$userDn = $dn;
+			} else {
+				\Log::debug('User dn is empty.');
+			}
+		} else {
+			\Log::debug('Status of LDAP entries for user ' .$username. ': ' .$userentries["count"]. ' result(s).');
+		}
+	}
 
         if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
             Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
