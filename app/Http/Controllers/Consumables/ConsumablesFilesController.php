@@ -86,7 +86,7 @@ class ConsumablesFilesController extends Controller
                     Log::debug($e);
                 }
             }
-
+            $consumable->logUploadDelete($log->filename);
             $log->delete();
 
             return redirect()->back()->withFragment('files')
