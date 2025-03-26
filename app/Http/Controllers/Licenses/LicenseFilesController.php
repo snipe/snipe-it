@@ -75,12 +75,13 @@ class LicenseFilesController extends Controller
                 // Remove the file if one exists
                 if (Storage::exists('licenses/'.$log->filename)) {
                     try {
+
                         Storage::delete('licenses/'.$log->filename);
                     } catch (\Exception $e) {
                         Log::debug($e);
                     }
                 }
-                
+                $license->logUploadDelete($log->filename);
                 $log->delete();
 
                 return redirect()->back()
