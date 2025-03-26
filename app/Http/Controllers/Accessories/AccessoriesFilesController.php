@@ -80,6 +80,7 @@ class AccessoriesFilesController extends Controller
                 if (Storage::exists('private_uploads/accessories/'.$log->filename)) {
                     try {
                         Storage::delete('private_uploads/accessories/' . $log->filename);
+                        $accessory->logUploadDelete($log->filename);
                         $log->delete();
                         return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
                     } catch (\Exception $e) {
