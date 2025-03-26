@@ -25,6 +25,7 @@ return [
     'image'		    => 'Device Image',
     'days_without_acceptance' => 'Days Without Acceptance',
     'monthly_depreciation' => 'Monthly Depreciation',
+    'rate_of_depreciation' => 'Rate of Depreciation',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',

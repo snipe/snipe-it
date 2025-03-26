@@ -32,10 +32,18 @@ class DepreciationPresenter extends Presenter
             ],
 
             [
-                'field' => 'months',
+                'field' => 'term_length',
                 'searchable' => true,
                 'sortable' => true,
                 'title' =>  trans('admin/depreciations/table.term'),
+                'visible' => true,
+            ],
+
+            [
+                'field' => 'term_type',
+                'searchable' => true,
+                'sortable' => true,
+                'title' =>  trans('admin/depreciations/table.term_type'),
                 'visible' => true,
             ],
 

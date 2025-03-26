@@ -35,9 +35,21 @@ class DepreciationReportTransformer
          */
         $purchase_cost = null;
         $depreciated_value = null;
-        $monthly_depreciation = null;
+        $rate_of_depreciation = null;
         $diff = null;
         $checkout_target = null;
+        $term_length = null;
+
+
+        /** Sets the term length based on the term_type months/days
+         */
+        if (($asset->model) && ($asset->model->depreciation)) {
+            if ($asset->model->depreciation->term_type == "days") {
+                $term_length =  e($asset->model->depreciation->term_length).' '.trans('admin/depreciations/table.days');
+            } else {
+                $term_length =  e($asset->model->depreciation->term_length).' '.trans('admin/depreciations/table.months');
+            }
+        }
 
         /**
          * If there is a location set and a currency set, use that for display
@@ -63,11 +75,11 @@ class DepreciationReportTransformer
          */
         if (($asset->model) && ($asset->model->depreciation) && ($asset->model->depreciation->months !== 0)) {
             $depreciated_value = Helper::formatCurrencyOutput($asset->getDepreciatedValue());
-            $monthly_depreciation =Helper::formatCurrencyOutput($asset->purchase_cost / $asset->model->depreciation->months);
+            $rate_of_depreciation = Helper::formatCurrencyOutput($asset->purchase_cost / $asset->model->depreciation->term_length);
             $diff = Helper::formatCurrencyOutput(($asset->purchase_cost - $asset->getDepreciatedValue()));
         }
         else if($asset->model->eol !== null) {
-            $monthly_depreciation = Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
+            $rate_of_depreciation = Helper::formatCurrencyOutput(($asset->model->eol > 0 ? ($asset->purchase_cost / $asset->model->eol) : 0));
         }
 
         if ($asset->assigned) {
@@ -100,10 +112,10 @@ class DepreciationReportTransformer
             'purchase_date' => Helper::getFormattedDateObject($asset->purchase_date, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($asset->purchase_cost),
             'book_value' => Helper::formatCurrencyOutput($depreciated_value),
-            'monthly_depreciation' => $monthly_depreciation,
+            'rate_of_depreciation' => $rate_of_depreciation,
             'checked_out_to' => ($checkout_target) ? e($checkout_target) : null,
             'diff' =>  Helper::formatCurrencyOutput($diff),
-            'number_of_months' =>  ($asset->model && $asset->model->depreciation) ? e($asset->model->depreciation->months) : null,
+            'term_length' =>  $term_length,
             'depreciation' => (($asset->model) && ($asset->model->depreciation)) ?  e($asset->model->depreciation->name) : null,
             
 

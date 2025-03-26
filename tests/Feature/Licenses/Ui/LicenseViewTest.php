@@ -26,7 +26,10 @@ class LicenseViewTest extends TestCase
     
     public function testLicenseWithPurchaseDateDepreciatesCorrectly()
     {
-        $depreciation = Depreciation::factory()->create(['months' => 12]);
+        $depreciation = Depreciation::factory()->create(
+            ['term_length' => 12,
+             'term_type' => 'months',
+            ]);
         $license = License::factory()->create(['depreciation_id' => $depreciation->id, 'purchase_date' => '2020-01-01']);
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('licenses.show', $license))

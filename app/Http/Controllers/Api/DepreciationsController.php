@@ -23,21 +23,21 @@ class DepreciationsController extends Controller
         $allowed_columns = [
             'id',
             'name',
-            'months',
+            'term_length',
+            'term_type',
             'depreciation_min',
             'depreciation_type',
             'created_at',
             'assets_count',
             'models_count',
             'licenses_count',
-        ];
+            ];
 
-        $depreciations = Depreciation::select('id','name','months','depreciation_min','depreciation_type','created_at','updated_at', 'created_by')
+        $depreciations = Depreciation::select('id','name','term_length','term_type','depreciation_min','depreciation_type','created_at','updated_at', 'created_by')
             ->with('adminuser')
             ->withCount('assets as assets_count')
             ->withCount('models as models_count')
             ->withCount('licenses as licenses_count');
-
         if ($request->filled('search')) {
             $depreciations = $depreciations->TextSearch($request->input('search'));
         }

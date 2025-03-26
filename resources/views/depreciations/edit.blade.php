@@ -10,15 +10,21 @@
 @section('inputFields')
 
 @include ('partials.forms.edit.name', ['translated_name' => trans('admin/depreciations/general.depreciation_name')])
-<!-- Months -->
-<div class="form-group {{ $errors->has('months') ? ' has-error' : '' }}">
-    <label for="months" class="col-md-3 control-label">
-        {{ trans('admin/depreciations/general.number_of_months') }}
+
+<!-- Term -->
+<div class="form-group {{ $errors->has('term_length') ? ' has-error' : '' }}">
+    <label for="term" class="col-md-3 control-label">
+        {{ trans('admin/depreciations/general.term_length') }}
     </label>
-    <div class="col-md-7 col-sm-12">
-        <div class="col-md-7" style="padding-left:0px">
-            <input class="form-control" type="text" name="months" id="months" value="{{ old('months', $item->months) }}" style="width: 80px;"{!!  (\App\Helpers\Helper::checkIfRequired($item, 'months')) ? ' required' : '' !!} />
-            {!! $errors->first('months', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+    <div class="col-md-7 col-sm-12 {{  (Helper::checkIfRequired($item, 'term_length')) ? ' required' : '' }}">
+        <div class="col-md-7" style="padding-left:0px;">
+            <input class="form-control" type="text" name="term_length" id="term_length" value="{{ Request::old('term_length', $item->term_length) }}" style="width: 80px;display:inline-block;"{!!  (\App\Helpers\Helper::checkIfRequired($item, 'term_length')) ? ' data-validation="required" required' : '' !!} />
+            {!! $errors->first('term_length', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+            <select class="form-control select2" name="term_type" id="term_type" data-minimum-results-for-search="Infinity" style="width:130px;display:inline-block;">
+                <option value="months" @if (old('term_type', $item->term_type) == 'months') selected="selected" @endif>Months</option>
+                <option value="days" @if (old('term_type', $item->term_type) == 'days') selected="selected" @endif>Days</option>
+            </select>
+
         </div>
     </div>
 </div>

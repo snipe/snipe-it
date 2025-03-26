@@ -60,7 +60,8 @@ class DepreciationsController extends Controller
         $depreciation = new Depreciation();
         // Depreciation data
         $depreciation->name = $request->input('name');
-        $depreciation->months = $request->input('months');
+        $depreciation->term_length = $request->input('term_length');
+        $depreciation->term_type = $request->input('term_type');
         $depreciation->created_by = auth()->id();
 
         $request->validate([
@@ -116,8 +117,8 @@ class DepreciationsController extends Controller
 
         $this->authorize('update', $depreciation);
         $depreciation->name             = $request->input('name');
-        $depreciation->months           = $request->input('months');
-
+        $depreciation->term_length      = $request->input('term_length');
+        $depreciation->term_type        = $request->input('term_type');
         $request->validate([
             'depreciation_min' => [
                 'required',
