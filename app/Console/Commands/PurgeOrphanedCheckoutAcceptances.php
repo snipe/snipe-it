@@ -26,8 +26,36 @@ class PurgeOrphanedCheckoutAcceptances extends Command
      */
     public function handle()
     {
-        CheckoutAcceptance::pending()
+        $orphanedAcceptances = CheckoutAcceptance::pending()
             ->whereDoesntHave('assignedTo')
-            ->forceDelete();
+            ->get();
+
+        if ($orphanedAcceptances->isEmpty()) {
+            $this->info('No orphaned checkout acceptances found.');
+
+            return 0;
+        }
+
+        $this->info('Found ' . $orphanedAcceptances->count() . ' orphaned checkout acceptances.');
+
+        $this->table(['ID', 'Checkoutable Type', 'Assigned To ID'], $orphanedAcceptances->map(function ($acceptance) {
+            return [
+                $acceptance->id,
+                $acceptance->checkoutable_type,
+                $acceptance->assigned_to_id,
+            ];
+        }));
+
+        if (!$this->confirm('Do you wish to permanently delete these ' . $orphanedAcceptances->count() . ' orphaned checkout acceptances?')) {
+            $this->info('Aborting.');
+
+            return 0;
+        }
+
+        $orphanedAcceptances->each->forceDelete();
+
+        $this->info('Orphaned checkout acceptances have been deleted.');
+
+        return 0;
     }
 }
