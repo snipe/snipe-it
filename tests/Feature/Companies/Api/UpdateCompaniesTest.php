@@ -41,10 +41,13 @@ class UpdateCompaniesTest extends TestCase
         $this->actingAsForApi(User::factory()->editCompanies()->create())
             ->patchJson(route('api.companies.update', ['company' => $company->id]), [
                 'name' => 'A Changed Name',
+                'notes' => 'A Changed Note',
             ])
             ->assertStatus(200)
             ->assertStatusMessageIs('success');
 
-        $this->assertEquals('A Changed Name', $company->fresh()->name);
+        $company->refresh();
+        $this->assertEquals('A Changed Name', $company->name);
+        $this->assertEquals('A Changed Note', $company->notes);
     }
 }

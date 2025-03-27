@@ -33,12 +33,14 @@ class CreateCompaniesTest extends TestCase implements TestsPermissionsRequiremen
         $this->actingAsForApi(User::factory()->createCompanies()->create())
             ->postJson(route('api.companies.store'), [
                 'name' => 'My Cool Company',
+                'notes' => 'A Cool Note',
             ])
             ->assertStatus(200)
             ->assertStatusMessageIs('success');
 
         $this->assertDatabaseHas('companies', [
             'name' => 'My Cool Company',
+            'notes' => 'A Cool Note',
         ]);
     }
 }
