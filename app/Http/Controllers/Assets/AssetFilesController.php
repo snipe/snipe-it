@@ -98,7 +98,7 @@ class AssetFilesController extends Controller
             if (Storage::exists($rel_path.'/'.$log->filename)) {
                 Storage::delete($rel_path.'/'.$log->filename);
             }
-            $asset->logUploadDelete($log->filename);
+                $asset->logUploadDelete($log->filename);
 
             return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.deletefile.success'));
         }

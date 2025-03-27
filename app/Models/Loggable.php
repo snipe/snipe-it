@@ -325,7 +325,6 @@ trait Loggable
         }
         $log->created_by = auth()->id();
         $log->target_id = null;
-        $log->note = $filename;
         $log->filename = $filename;
         $log->created_at = date('Y-m-d H:i:s');
         $log->logaction('upload deleted');
