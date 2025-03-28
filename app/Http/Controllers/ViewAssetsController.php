@@ -27,47 +27,66 @@ class ViewAssetsController extends Controller
      * Redirect to the profile page.
      *
      */
-    public function getIndex() : View | RedirectResponse
+    public function getIndex(Request $request) : View | RedirectResponse
     {
-        $user = User::with(
+        $authUser = auth()->user();
+        $settings = Setting::getSettings();
+        $subordinates = collect();
+        $selectedUserId = $authUser->id;
+
+        // Check if manager view is enabled and get subordinates if applicable
+        if ($settings->manager_view_enabled) {
+            // Get all subordinates including self, sorted for the dropdown
+            $subordinates = $authUser->getAllSubordinates(true)->sortBy('last_name')->sortBy('first_name');
+
+            // If the user has subordinates and a user_id is provided in the request
+            if ($subordinates->count() > 1 && $request->filled('user_id')) {
+                $requestedUserId = (int) $request->input('user_id');
+
+                // Validate if the requested user is allowed (self or subordinate)
+                if ($subordinates->contains('id', $requestedUserId)) {
+                    $selectedUserId = $requestedUserId;
+                }
+                // If invalid ID or not authorized, $selectedUserId remains $authUser->id (default)
+            }
+        }
+
+        // Load the data for the user to be viewed (either auth user or selected subordinate)
+        $userToView = User::with([
             'assets',
             'assets.model',
-            'assets.model.fieldset.fields',
-            'consumables',
-            'accessories',
-            'licenses',
-        )->find(auth()->id());
+             'assets.model.fieldset.fields',
+             'consumables',
+             'accessories',
+             'licenses'
+         ])->find($selectedUserId);
 
-        $field_array = array();
+        // If the user to view couldn't be found (shouldn't happen with proper logic), redirect with error
+        if (!$userToView) {
+             return redirect()->route('home')->with('error', trans('admin/users/message.user_not_found'));
+        }
 
-        // Loop through all the custom fields that are applied to any model the user has assigned
-        foreach ($user->assets as $asset) {
-
-            // Make sure the model has a custom fieldset before trying to loop through the associated fields
-            if ($asset->model->fieldset) {
-
+        // Process custom fields for the user being viewed
+        $field_array = [];
+        foreach ($userToView->assets as $asset) {
+            if ($asset->model && $asset->model->fieldset) {
                 foreach ($asset->model->fieldset->fields as $field) {
-                    // check and make sure they're allowed to see the value of the custom field
                     if ($field->display_in_user_view == '1') {
                         $field_array[$field->db_column] = $field->name;
                     }
-                    
                 }
             }
-
         }
+        array_unique($field_array); // Remove duplicate field names
 
-        // Since some models may re-use the same fieldsets/fields, let's make the array unique so we don't repeat columns
-        array_unique($field_array);
-
-        if (isset($user->id)) {
-            return view('account/view-assets', compact('user', 'field_array' ))
-                ->with('settings', Setting::getSettings());
-        }
-
-        // Redirect to the user management page
-        return redirect()->route('users.index')
-            ->with('error', trans('admin/users/message.user_not_found', $user->id));
+        // Pass the necessary data to the view
+        return view('account/view-assets', [
+            'user' => $userToView, // Use 'user' for compatibility with the existing view
+            'field_array' => $field_array,
+            'settings' => $settings,
+            'subordinates' => $subordinates,
+            'selectedUserId' => $selectedUserId
+        ]);
     }
 
     /**

@@ -67,6 +67,7 @@ class Setting extends Model
         'google_login',
         'google_client_id',
         'google_client_secret',
+        'manager_view_enabled',
     ];
 
     protected $casts = [

@@ -868,6 +868,73 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
         return $this;
     }
+
+    /**
+     * Get all direct and indirect subordinates for this user.
+     *
+     * @param bool $includeSelf Include the current user in the results
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllSubordinates($includeSelf = false)
+    {
+        $subordinates = collect();
+        if ($includeSelf) {
+            $subordinates->push($this);
+        }
+
+        // Use a recursive helper function to avoid scope issues
+        $this->fetchSubordinatesRecursive($this, $subordinates);
+
+        return $subordinates->unique('id'); // Ensure uniqueness
+    }
+
+    /**
+     * Recursive helper function to fetch subordinates.
+     *
+     * @param User $manager
+     * @param \Illuminate\Support\Collection $subordinatesCollection
+     */
+    protected function fetchSubordinatesRecursive(User $manager, \Illuminate\Support\Collection &$subordinatesCollection)
+    {
+        // Eager load 'managesUsers' to prevent N+1 queries in recursion
+        $directSubordinates = $manager->managesUsers()->with('managesUsers')->get();
+
+        foreach ($directSubordinates as $directSubordinate) {
+            // Add subordinate if not already in the collection
+            if (!$subordinatesCollection->contains('id', $directSubordinate->id)) {
+                 $subordinatesCollection->push($directSubordinate);
+                 // Recursive call for this subordinate's subordinates
+                 $this->fetchSubordinatesRecursive($directSubordinate, $subordinatesCollection);
+            }
+        }
+    }
+
+    /**
+     * Check if the current user is a direct or indirect manager of the given user.
+     *
+     * @param User $userToCheck
+     * @return bool
+     */
+    public function isManagerOf(User $userToCheck): bool
+    {
+        // Optimization: If it's the same user, they are not their own manager
+        if ($this->id === $userToCheck->id) {
+            return false;
+        }
+
+        // Eager load manager relationship to potentially reduce queries in the loop
+        $manager = $userToCheck->load('manager')->manager;
+        while ($manager) {
+            if ($manager->id === $this->id) {
+                return true;
+            }
+            // Move up the hierarchy (load relationship if not already loaded)
+            $manager = $manager->load('manager')->manager;
+        }
+        return false;
+    }
+
+
     public function scopeUserLocation($query, $location, $search){
 
 

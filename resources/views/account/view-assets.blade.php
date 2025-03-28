@@ -25,6 +25,29 @@
   </div>
 @endif
 
+{{-- Subordinate Selection Dropdown --}}
+@if ($settings->manager_view_enabled && $subordinates->count() > 1)
+<div class="row hidden-print">
+    <div class="col-md-5 pull-right">
+        <form method="get" action="{{ route('view-assets') }}" class="form-horizontal" role="form">
+            <div class="form-group mb-2"> {{-- Reduced bottom margin --}}
+                <label for="user_id" class="col-sm-5 control-label">{{ trans('general.view_user_assets') }}:</label>
+                <div class="col-sm-7">
+                    <select name="user_id" id="user_id" class="form-control select2" onchange="this.form.submit()">
+                        @foreach ($subordinates as $subordinate)
+                            <option value="{{ $subordinate->id }}" {{ (int)$selectedUserId === (int)$subordinate->id ? ' selected' : '' }}>
+                                {{ $subordinate->present()->fullName() }} ({{ $subordinate->username }})
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@endif
+
+
   <div class="row">
     <div class="col-md-12">
       <div class="nav-tabs-custom">

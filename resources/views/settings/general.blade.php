@@ -236,6 +236,24 @@
                    </div>
                    <!-- /.form-group -->
 
+                   <!-- Manager View Enabled -->
+                   <div class="form-group {{ $errors->has('manager_view_enabled') ? 'error' : '' }}">
+                       <div class="col-md-3">
+                           <strong>{{ trans('admin/settings/general.manager_view') }}</strong> <!-- TODO: Add translation -->
+                       </div>
+                       <div class="col-md-9">
+                           <label class="form-control">
+                               <input type="checkbox" name="manager_view_enabled" value="1" @checked(old('manager_view_enabled', $setting->manager_view_enabled)) aria-label="manager_view_enabled" />
+                               {{ trans('admin/settings/general.manager_view_enabled_text') }} <!-- TODO: Add translation -->
+                           </label>
+                           {!! $errors->first('manager_view_enabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                           <p class="help-block">
+                               {{ trans('admin/settings/general.manager_view_enabled_help') }} <!-- TODO: Add translation -->
+                           </p>
+                       </div>
+                   </div>
+                   <!-- /.form-group -->
+
 
                     <!-- login text -->
                     <div class="form-group {{ $errors->has('login_note') ? 'error' : '' }}">
