@@ -50,6 +50,7 @@ return [
         'ro-RO'=> 'Romanian',
         'ru-RU'=> 'Russian',
         'sr-CS' => 'Serbian (Latin)',
+        'si-EL' => 'Sindarin',
         'sk-SK'=> 'Slovak',
         'sl-SI'=> 'Slovenian',
         'so-SO'=> 'Somali',
