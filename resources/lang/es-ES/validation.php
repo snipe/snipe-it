@@ -143,7 +143,7 @@ return [
     'required_if_accepted' => 'El campo :attribute es obligatorio cuando se acepta :other.',
     'required_if_declined' => 'El campo :attribute es requerido cuando :other es rechazado.',
     'required_unless' => 'El campo :attribute es obligatorio a menos que :other esté en :values.',
-    'required_with' => ':attribute es obligatrio cuando :values es present.',
+    'required_with' => 'El campo :attribute es obligatorio cuando :values está presente.',
     'required_with_all' => 'El campo :attribute es requerido cuando :values están presentes.',
     'required_without' => ':attribute es obligatrio cuando :values es not present.',
     'required_without_all' => 'El campo :attribute es obligatorio cuando no está presente ninguno de los :values.',
@@ -156,8 +156,8 @@ return [
     ],
     'starts_with' => 'El campo :attribute debe iniciar con uno de los siguientes: :values.',
     'string'               => 'El atributo: debe ser una cadena.',
-    'two_column_unique_undeleted' => ':attribute debe ser único a través de :table1 y :table2. ',
-    'unique_undeleted'     => 'El :attribute debe ser único.',
+    'two_column_unique_undeleted' => ':attribute debe ser único entre la :table1 y :table2. ',
+    'unique_undeleted'     => ':attribute debe ser único.',
     'non_circular'         => ':attribute no debe crear una referencia circular.',
     'not_array'            => ':attribute no puede ser una matriz.',
     'disallow_same_pwd_as_user_fields' => 'La contraseña no puede ser la misma que el nombre de usuario.',
@@ -166,12 +166,13 @@ return [
     'case_diff'            => 'La contraseña debe usar mayúsculas y minúsculas.',
     'symbols'              => 'La contraseña debe contener símbolos.',
     'timezone' => 'El campo :attribute debe ser una zona horaria válida.',
-    'unique' => ':attribute ya ha sido introducido.',
-    'uploaded' => 'El atributo: no se pudo cargar.',
+    'unique' => ':attribute ya está en uso.',
+    'uploaded' => ':attribute no se pudo cargar.',
     'uppercase' => 'El campo :attribute debe estar en mayúsculas.',
     'url' => 'El campo :attribute debe ser una URL válida.',
     'ulid' => 'El campo :attribute debe ser un ULID válido.',
     'uuid' => 'El campo :attribute debe ser un UUID válido.',
+
 
     /*
     |--------------------------------------------------------------------------
@@ -185,8 +186,8 @@ return [
     */
 
     'custom' => [
-        'alpha_space' => 'El campo: atributo contiene un carácter que no está permitido.',
-        'email_array'      => 'Una o más direcciones de correo electrónico no es válida.',
+        'alpha_space' => 'El campo :attribute contiene un carácter que no está permitido.',
+        'email_array'      => 'Una o más direcciones de correo electrónico no son válidas.',
         'hashed_pass'      => 'Su contraseña actual es incorrecta',
         'dumbpwd'          => 'Esa contraseña es muy común.',
         'statuslabel_type' => 'Debe seleccionar un tipo de etiqueta de estado válido.',
@@ -194,18 +195,25 @@ return [
         'custom_field_not_found_on_model' => 'Este campo parece existir, pero no está disponible en este conjunto de campos para el modelo de activo.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
-        'purchase_date.date_format'     => 'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'last_audit_date.date_format'   =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD hh:mm:ss',
-        'expiration_date.date_format'   =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'termination_date.date_format'  =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'expected_checkin.date_format'  =>  ':attribute debe ser una fecha válida en formato AAA-MM-DD',
-        'start_date.date_format'        =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
-        'end_date.date_format'          =>  'El :attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'purchase_date.date_format'     => ':attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'last_audit_date.date_format'   =>  'El campo :attribute debe ser una fecha válida en formato AAAA-MM-DD hh:mm:ss',
+        'expiration_date.date_format'   =>  ':attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'termination_date.date_format'  =>  ':attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'expected_checkin.date_format'  =>  ':attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'start_date.date_format'        =>  ':attribute debe ser una fecha válida en formato AAAA-MM-DD',
+        'end_date.date_format'          =>  ':attribute debe ser una fecha válida en formato AAAA-MM-DD',
         'checkboxes'           => ':attribute contiene opciones no válidas.',
         'radio_buttons'        => 'El valor de :attribute no es válido.',
         'invalid_value_in_field' => 'Valor no válido incluido en este campo',
+
+        'ldap_username_field' => [
+            'not_in' =>         '<code>sAMAccountName</code> (mezcla de mayúsculas y minúsculas) no funcionará. Debe utilizar <code>samaccountname</code> (minúsculas) en su lugar.'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> probablemente no es un filtro de autenticación válido Probablemente quiera <code>uid=</code> '],
+        'ldap_filter' => ['regex' => 'Este valor probablemente no debería ir entre paréntesis.'],
+
         ],
     /*
     |--------------------------------------------------------------------------

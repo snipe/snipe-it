@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Šis statuss ir izmantojams. Pamatlīdzeklis ir pieejams izrakstīšanai.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Neobligātā informācija',
-    'order_details'   => 'Pasūtījuma informācija'
+    'order_details'   => 'Pasūtījuma informācija',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

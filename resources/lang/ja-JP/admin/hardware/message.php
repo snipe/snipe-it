@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> '資産が存在しません。',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>警告: </strong> このアセットは現在デプロイ不可能としてマークされています。このステータスが変更された場合は、アセットのステータスを更新してください。',
+    'does_not_exist' 	 => '資産が存在しません。',
+    'does_not_exist_var' => 'タグ:asset_tag を持つアセットが見つかりません。',
+    'no_tag' 	         => 'アセットタグが提供されていません。',
     'does_not_exist_or_not_requestable' => 'その資産は存在しないか要求可能ではありません。',
-    'assoc_users'	 	=> 'この資産はユーザーに貸し出されているため削除できません。資産を返却後、もう一度、やり直して下さい。 ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'assoc_users'	 	 => 'この資産はユーザーに貸し出されているため削除できません。資産を返却後、もう一度、やり直して下さい。 ',
+    'warning_audit_date_mismatch' 	=> 'この資産の次の監査日 (:next_audit_date) は最終監査日 (:last_audit_date) より前です。次の監査日を更新してください。',
+    'labels_generated'   => 'ラベルの生成に成功しました。',
+    'error_generating_labels' => 'ラベルを生成中にエラーが発生しました。',
+    'no_assets_selected' => '資産が選択されていません。',
 
     'create' => [
         'error'   		=> '資産は作成されませんでした。もう一度、やり直して下さい。',
         'success' 		=> '資産は作成されました。',
         'success_linked' => ':tag を持つアセットは正常に作成されました。 <strong><a href=":link" style="color: white;"></a></strong> を表示するにはここをクリックしてください。',
+        'multi_success_linked' => 'タグ:links のアセットが正常に作成されました。|:count アセットが正常に作成されました。',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'この資産を削除してもよろしいですか？',
         'error'   		=> '資産を削除する際に問題が発生しました。もう一度やり直して下さい。',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => '資産が選択されていないため、削除されませんでした。',
         'success' 		=> '資産は正常に削除されました。',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'その利用者は不正です。もう一度、やり直して下さい。',
         'not_available' => 'この資産はチェックアウトできません!',
         'no_assets_selected' => 'リストから少なくとも1つの資産を選択する必要があります',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

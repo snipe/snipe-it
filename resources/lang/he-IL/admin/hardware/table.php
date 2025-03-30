@@ -25,7 +25,6 @@ return [
     'image'		    => 'תמונה של מכשיר',
     'days_without_acceptance' => 'ימים ללא קבלה',
     'monthly_depreciation' => 'פחות חודשי',
-    'assigned_to'    => 'שוייך ל',
     'requesting_user' => 'דרישה של',
     'requested_date' => 'תאריך דרישה',
     'changed'       => 'שונה',

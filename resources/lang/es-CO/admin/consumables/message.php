@@ -12,13 +12,13 @@ return array(
 
     'update' => array(
         'error'   => 'El consumible no fue actualizado, por favor, inténtelo de nuevo',
-        'success' => 'Consumible actualizado con éxito.'
+        'success' => 'Consumible actualizado correctamente.'
     ),
 
     'delete' => array(
         'confirm'   => '¿Está seguro de que desea eliminar este consumible?',
         'error'   => 'Hubo un problema al eliminar el consumible. Por favor inténtelo de nuevo.',
-        'success' => 'El consumible fue eliminado con éxito.'
+        'success' => 'El consumible ha sido eliminado correctamente.'
     ),
 
      'checkout' => array(

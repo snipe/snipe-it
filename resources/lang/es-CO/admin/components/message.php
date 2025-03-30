@@ -11,13 +11,14 @@ return array(
 
     'update' => array(
         'error'   => 'El componente no se actualizó, por favor inténtelo de nuevo',
-        'success' => 'Componente actualizado con éxito.'
+        'success' => 'Componente actualizado correctamente.'
     ),
 
     'delete' => array(
         'confirm'   => '¿Está seguro de que desea eliminar este componente?',
         'error'   => 'Hubo un problema eliminando el componente. Por favor, inténtelo de nuevo.',
-        'success' => 'El componente fue eliminado con éxito.'
+        'success' => 'El componente fue borrado correctamente.',
+        'error_qty'   => 'Some components of this type are still checked out. Please check them in and try again.',
     ),
 
      'checkout' => array(

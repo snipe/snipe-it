@@ -73,6 +73,9 @@ class Importer extends Component
             case 'asset':
                 $results = $this->assets_fields;
                 break;
+            case 'assetModel':
+                $results = $this->assetmodels_fields;
+                break;
             case 'accessory':
                 $results = $this->accessories_fields;
                 break;
@@ -81,6 +84,9 @@ class Importer extends Component
                 break;
             case 'component':
                 $results = $this->components_fields;
+                break;
+            case 'consumable':
+                $results = $this->consumables_fields;
                 break;
             case 'license':
                 $results = $this->licenses_fields;
@@ -91,10 +97,14 @@ class Importer extends Component
             case 'location':
                 $results = $this->locations_fields;
                 break;
+            case 'user':
+                $results = $this->users_fields;
+                break;
             default:
                 $results = [];
         }
         asort($results, SORT_FLAG_CASE | SORT_STRING);
+
         if ($type == "asset") {
             // add Custom Fields after a horizontal line
             $results['-'] = "———" . trans('admin/custom_fields/general.custom_fields') . "———’";
@@ -107,6 +117,7 @@ class Importer extends Component
 
     public function updatingTypeOfImport($type)
     {
+
         // go through each header, find a matching field to try and map it to.
         foreach ($this->headerRow as $i => $header) {
             // do we have something mapped already?
@@ -152,13 +163,14 @@ class Importer extends Component
     {
         $this->authorize('import');
         $this->importTypes = [
-            'asset' => trans('general.assets'),
-            'accessory' => trans('general.accessories'),
-            'consumable' => trans('general.consumables'),
-            'component' => trans('general.components'),
-            'license' => trans('general.licenses'),
-            'user' => trans('general.users'),
-            'location' => trans('general.locations'),
+            'accessory'     =>  trans('general.accessories'),
+            'asset'         =>      trans('general.assets'),
+            'assetModel'    =>      trans('general.asset_models'),
+            'component'     =>  trans('general.components'),
+            'consumable'    => trans('general.consumables'),
+            'license'       =>    trans('general.licenses'),
+            'location'      =>   trans('general.locations'),
+            'user'          =>       trans('general.users'),
         ];
 
         /**
@@ -196,7 +208,6 @@ class Importer extends Component
             'supplier' => trans('general.supplier'),
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
-            'purchase_order' => trans('admin/licenses/form.purchase_order'),
             'asset_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/general.asset')]),
             'model_notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
             'manufacturer' => trans('general.manufacturer'),
@@ -318,6 +329,7 @@ class Importer extends Component
         ];
 
         $this->locations_fields = [
+            'id' => trans('general.id'),
             'name' => trans('general.item_name_var', ['item' => trans('general.location')]),
             'address' => trans('general.address'),
             'address2' => trans('general.importer.address2'),
@@ -330,6 +342,20 @@ class Importer extends Component
             'manager_username' => trans('general.importer.manager_username'),
             'manager' => trans('general.importer.manager_full_name'),
             'parent_location' => trans('admin/locations/table.parent'),
+            'notes' => trans('general.notes'),
+        ];
+
+        $this->assetmodels_fields  = [
+            'item_name' => trans('general.item_name_var', ['item' => trans('general.asset_model')]),
+            'category' => trans('general.category'),
+            'manufacturer' => trans('general.manufacturer'),
+            'model_number' => trans('general.model_no'),
+            'notes' => trans('general.item_notes', ['item' => trans('admin/hardware/form.model')]),
+            'min_amt' => trans('mail.min_QTY'),
+            'fieldset' => trans('admin/models/general.fieldset'),
+            'eol' => trans('general.eol'),
+            'requestable' => trans('admin/models/general.requestable'),
+
         ];
 
         // "real fieldnames" to a list of aliases for that field
@@ -359,6 +385,22 @@ class Importer extends Component
                     'eol',
                     'eol date',
                     'asset eol date',
+                ],
+            'eol' =>
+                [
+                    'eol',
+                    'EOL',
+                    'eol months',
+                ],
+            'depreciation' =>
+                [
+                    'Depreciation',
+                    'depreciation',
+                ],
+            'requestable' =>
+                [
+                    'requestable',
+                    'Requestable',
                 ],
             'gravatar' =>
                 [
@@ -504,7 +546,6 @@ class Importer extends Component
         if (!$this->activeFile) {
             $this->message = trans('admin/hardware/message.import.file_missing');
             $this->message_type = 'danger';
-
             return;
         }
 
@@ -519,6 +560,8 @@ class Importer extends Component
                 $this->field_map[] = null; // re-inject the 'nulls' if a file was imported with some 'Do Not Import' settings
             }
         }
+
+        $this->file_id = $id;
         $this->import_errors = null;
         $this->statusText = null;
 

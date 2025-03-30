@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'ไอดี',
     'require_acceptance'      	=> 'การยอมรับ',
     'title'      				=> 'ชื่ออุปกรณ์เสริม',
-
-
 );

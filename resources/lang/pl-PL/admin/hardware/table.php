@@ -25,7 +25,6 @@ return [
     'image'		    => 'Zdjęcie urządzenia',
     'days_without_acceptance' => 'Dni bez akceptacji',
     'monthly_depreciation' => 'Amortyzacja miesięczna',
-    'assigned_to'    => 'Przypisany do',
     'requesting_user' => 'Zapotrzebowanie od użytkownika',
     'requested_date' => 'Data złożenia zapotrzebowania',
     'changed'       => 'Zmieniono',

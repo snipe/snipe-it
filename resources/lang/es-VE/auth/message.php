@@ -2,19 +2,19 @@
 
 return array(
 
-    'account_already_exists' => 'Una cuenta con este correo ya existe.',
+    'account_already_exists' => 'Ya existe una cuenta con este correo electrónico.',
     'account_not_found'      => 'El nombre de usuario o la contraseña son incorrectos.',
-    'account_not_activated'  => 'La cuenta de este usuario no está activada.',
-    'account_suspended'      => 'La cuenta de este usuario está suspendida.',
-    'account_banned'         => 'La cuenta de este usuario está bloqueada.',
-    'throttle'               => 'Demasiados intentos fallidos de inicio de sesión. Por favor, inténtalo de nuevo en :minutes minutos.',
+    'account_not_activated'  => 'Esta cuenta de usuario no está activada.',
+    'account_suspended'      => 'Esta cuenta de usuario está suspendida.',
+    'account_banned'         => 'Esta cuenta de usuario está bloqueada.',
+    'throttle'               => 'Demasiados intentos de inicio de sesión fallidos. Por favor, intente otra vez en :minutes minuto(s).',
 
     'two_factor' => array(
         'already_enrolled'      => 'Su dispositivo ya está inscrito.',
         'success'               => 'Ha iniciado sesión exitosamente.',
-        'code_required'         => 'El código de doble factor es necesario.',
+        'code_required'         => 'Se requiere el código de autenticación de doble factor (2FA).',
         'invalid_code'          => 'El código de doble factor no es válido.',
-        'enter_two_factor_code' => 'Por favor ingrese su código de autenticación de dos factores.',
+        'enter_two_factor_code' => 'Por favor ingrese su código de autenticación de doble factor.',
         'please_enroll'         => 'Por favor inscriba un dispositivo en la autenticación de dos factores.',
     ),
 

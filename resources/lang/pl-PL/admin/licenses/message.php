@@ -44,12 +44,13 @@ return array(
         'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
         'success' => 'Licencja poprawna',
         'not_enough_seats' => 'Za mało dostępnych miejsc do zamówienia',
-        'mismatch' => 'The license seat provided does not match the license',
-        'unavailable' => 'This seat is not available for checkout.',
+        'mismatch' => 'Podane miejsce licencji nie jest zgodne z licencją',
+        'unavailable' => 'To miejsce nie jest dostępne do wydania.',
     ),
 
     'checkin' => array(
         'error'   => 'Nastąpił problem podczas weryfikacji licencji. Spróbuj ponownie',
+        'not_reassignable' => 'Licencja nie może zostać ponownie przypisana',
         'success' => 'Licencja poprawna'
     ),
 

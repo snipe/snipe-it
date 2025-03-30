@@ -6,6 +6,6 @@ return array(
     'action' 		        => 'Tindakan',
     'by'      		        => 'Oleh',
     'item' 			        => 'Item',
-    'no_matching_records'   => 'No matching records found',
+    'no_matching_records'   => 'Tidak ditemukan data yang cocok',
 
 );

@@ -20,7 +20,6 @@
 
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
 
             <table
                 data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
@@ -35,6 +34,7 @@
                 data-show-refresh="true"
                 data-show-footer="true"
                 data-sort-order="asc"
+                data-footer-style="footerStyle"
                 id="accessoriesTable"
                 class="table table-striped snipe-table"
                 data-url="{{route('api.accessories.index') }}"
@@ -43,7 +43,6 @@
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                     }'>
           </table>
-        </div>
       </div>
     </div>
   </div>

@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Esta situação pode ser implementado. A saída deste ativo pode ser realizada.',
     'processing_spinner' => 'Processando... (Isso pode levar algum tempo em arquivos grandes)',
     'optional_infos'  => 'Informação Opcional',
-    'order_details'   => 'Informações do pedido relacionado'
+    'order_details'   => 'Informações do pedido relacionado',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

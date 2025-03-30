@@ -103,6 +103,7 @@ php artisan migrate --force
 php artisan config:clear
 php artisan config:cache
 
+touch /var/www/html/storage/logs/laravel.log
 chown -R apache:root /var/www/html/storage/logs/laravel.log
 
 export APACHE_LOG_DIR=/var/log/apache2

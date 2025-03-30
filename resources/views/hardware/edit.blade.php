@@ -5,7 +5,7 @@
     'topSubmit' => true,
     'helpText' => trans('help.assets'),
     'helpPosition' => 'right',
-    'formAction' => ($item->id) ? route('hardware.update', ['hardware' => $item->id]) : route('hardware.store'),
+    'formAction' => ($item->id) ? route('hardware.update', $item) : route('hardware.store'),
     'index_route' => 'hardware.index',
     'options' => [
                 'index' => trans('admin/hardware/form.redirect_to_all', ['type' => 'assets']),
@@ -28,8 +28,7 @@
 
       @if  ($item->id)
           <!-- we are editing an existing asset,  there will be only one asset tag -->
-          <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
-
+          <div class="col-md-7 col-sm-12">
 
           <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', $item->asset_tag) }}" required>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
@@ -37,7 +36,7 @@
           </div>
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
-          <div class="col-md-7 col-sm-12{{  (Helper::checkIfRequired($item, 'asset_tag')) ? ' required' : '' }}">
+          <div class="col-md-7 col-sm-12">
               <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tags.1', \App\Models\Asset::autoincrement_asset()) }}" required>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}

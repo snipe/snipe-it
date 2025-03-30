@@ -23,9 +23,9 @@ return [
     ],
 
     'help' => [
-        'undeployable'   => 'Estos equipos no pueden ser asignados.',
+        'undeployable'   => 'Estos activos no pueden ser asignados.',
         'deployable'   => 'Estos activos pueden ser asignados. Una vez estén asignados, asumirán el meta estado de <i class="fas fa-circle text-blue"></i> <strong>Asignado</strong>.',
-        'archived'   => 'Estos equipos no pueden ser asignados, y solo se mostrarán en la vista de Archivados. Esto es útil para retener información sobre activos por razones de presupuesto/revisión histórica, mientras están fuera de la lista de equipos del día a día.',
+        'archived'   => 'Estos activos no pueden ser asignados y solo se mostrarán en la vista de Archivados. Esto es útil para mantener información de activos por razones de presupuesto o de revisión histórica y al mismo tiempo se excluyen de los activos que se pueden usar en el día a día.',
         'pending'   => 'Estos activos aún no pueden asignarse, y suelen utilizarse para elementos que están en reparación, pero que se espera que regresen a circulación.',
     ],
 

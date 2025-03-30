@@ -76,6 +76,7 @@
                           <div class="row">
                               <div class="col-md-12">
                                 <table
+                                    data-columns="{{ \App\Presenters\AccessoryPresenter::assignedDataTableLayout() }}"
                                     data-cookie-id-table="checkoutsTable"
                                     data-pagination="true"
                                     data-id-table="checkoutsTable"
@@ -93,14 +94,6 @@
                                     "fileName": "export-accessories-{{ str_slug($accessory->name) }}-checkouts-{{ date('Y-m-d') }}",
                                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                                     }'>
-                                <thead>
-                                    <tr>
-                                    <th data-searchable="false" data-formatter="polymorphicItemFormatter" data-sortable="false" data-field="assigned_to">{{ trans('general.checked_out_to') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="checkout_notes">{{ trans('general.notes') }}</th>
-                                    <th data-searchable="false" data-formatter="dateDisplayFormatter" data-sortable="false" data-field="last_checkout">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                                    <th data-searchable="false" data-sortable="false" data-field="actions" data-formatter="accessoriesInOutFormatter">{{ trans('table.actions') }}</th>
-                                    </tr>
-                                </thead>
                                 </table>
                             </div><!--col-md-9-->
                           </div> <!-- close tab-pane div -->
@@ -155,102 +148,16 @@
                     @can('accessories.files', $accessory)
                         <div class="tab-pane" id="files">
 
-                            <div class="table table-responsive">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                <table
-                                        data-cookie-id-table="accessoryUploadsTable"
-                                        data-id-table="accessoryUploadsTable"
-                                        id="accessoryUploadsTable"
-                                        data-search="true"
-                                        data-pagination="true"
-                                        data-side-pagination="client"
-                                        data-show-columns="true"
-                                        data-show-export="true"
-                                        data-show-footer="true"
-                                        data-toolbar="#upload-toolbar"
-                                        data-show-refresh="true"
-                                        data-sort-order="asc"
-                                        data-sort-name="name"
-                                        class="table table-striped snipe-table"
-                                        data-export-options='{
-            "fileName": "export-accessories-uploads-{{ str_slug($accessory->name) }}-{{ date('Y-m-d') }}",
-            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
-            }'>
-                                    <thead>
-                                    <tr>
-                                        <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
-                                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @if ($accessory->uploads->count() > 0)
-                                        @foreach ($accessory->uploads as $file)
-                                            <tr>
-                                                <td>
-                                                    <x-icon type="paperclip" class="fa-2x" />
-                                                    <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
-                                                    <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
-
-                                                </td>
-                                                <td>
-                                                    @if ($file->filename)
-                                                        @if ( Helper::checkUploadIsImage($file->get_src('accessories')))
-                                                            <a href="{{ route('show.accessoryfile', ['accessoryId' => $accessory->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.accessoryfile', ['accessoryId' => $accessory->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                                                        @endif
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    {{ $file->filename }}
-                                                </td>
-                                                <td data-value="{{ (Storage::exists('private_uploads/accessories/'.$file->filename) ? Storage::size('private_uploads/accessories/'.$file->filename) : '') }}">
-                                                    {{ @Helper::formatFilesizeUnits(Storage::exists('private_uploads/accessories/'.$file->filename) ? Storage::size('private_uploads/accessories/'.$file->filename) : '') }}
-                                                </td>
-
-                                                <td>
-                                                    @if ($file->note)
-                                                        {{ $file->note }}
-                                                    @endif
-                                                </td>
-                                                <td style="white-space: nowrap;">
-                                                    @if ($file->filename)
-                                                        <a href="{{ route('show.accessoryfile', [$accessory->id, $file->id]) }}" class="btn btn-sm btn-default">
-                                                            <i class="fas fa-download" aria-hidden="true"></i>
-                                                            <span class="sr-only">{{ trans('general.download') }}</span>
-                                                        </a>
-
-                                                        <a href="{{ route('show.accessoryfile', [$accessory->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                                            <x-icon type="external-link" />
-                                                        </a>
-
-                                                    @endif
-                                                </td>
-                                                <td>{{ $file->created_at }}</td>
-                                                <td>
-                                                    <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/accessoryfile', [$accessory->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">
-                                                        <i class="fas fa-trash icon-white" aria-hidden="true"></i>
-                                                        <span class="sr-only">{{ trans('general.delete') }}</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @else
-                                        <tr>
-                                            <td colspan="8">{{ trans('general.no_results') }}</td>
-                                        </tr>
-                                    @endif
-                                    </tbody>
-                                </table>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <x-filestable
+                                        filepath="private_uploads/accessories/"
+                                        showfile_routename="show.accessoryfile"
+                                        deletefile_routename="delete/accessoryfile"
+                                        :object="$accessory" />
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div> <!-- /.tab-pane -->
+                        </div> <!-- /.tab-pane -->
                 @endcan
             </div>
         </div>
@@ -265,7 +172,8 @@
       @if ($accessory->image!='')
           <div class="row">
               <div class="col-md-12 text-center" style="padding-bottom: 15px;">
-                  <a href="{{ Storage::disk('public')->url('accessories/'.e($accessory->image)) }}" data-toggle="lightbox"><img src="{{ Storage::disk('public')->url('accessories/'.e($accessory->image)) }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
+                  <a href="{{ Storage::disk('public')->url('accessories/'.e($accessory->image)) }}" data-toggle="lightbox" data-type="image">
+                      <img src="{{ Storage::disk('public')->url('accessories/'.e($accessory->image)) }}" class="img-responsive img-thumbnail" alt="{{ $accessory->name }}"></a>
               </div>
           </div>
       @endif
@@ -301,7 +209,7 @@
                   {{ trans('general.notes') }}
               </strong>
           </div>
-          <div class="col-md-9">
+          <div class="col-md-9" style="word-wrap: break-word;">
               {!! nl2br(Helper::parseEscapedMarkedownInline($accessory->notes)) !!}
           </div>
        </div>

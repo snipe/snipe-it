@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Hiba történt az engedélyben. Kérlek próbáld újra.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Az engedélyt sikeresen ellenőrizték'
     ),
 

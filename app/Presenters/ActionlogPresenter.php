@@ -42,27 +42,27 @@ class ActionlogPresenter extends Presenter
         // User related icons
         if ($this->itemType() == 'user') {
 
-            if ($this->actionType()=='2fa reset') {
+            if ($this->action_type == '2fa reset') {
                 return 'fa-solid fa-mobile-screen';
             }
 
-            if ($this->actionType()=='create new') {
+            if ($this->action_type == 'create') {
                 return 'fa-solid fa-user-plus';
             }
 
-            if ($this->actionType()=='merged') {
+            if ($this->action_type == 'merged') {
                 return 'fa-solid fa-people-arrows';
             }
 
-            if ($this->actionType()=='delete') {
+            if ($this->action_type == 'delete') {
                 return 'fa-solid fa-user-minus';
             }
 
-            if ($this->actionType()=='delete') {
+            if ($this->action_type == 'delete') {
                 return 'fa-solid fa-user-minus';
             }
 
-            if ($this->actionType()=='update') {
+            if ($this->action_type == 'update') {
                 return 'fa-solid fa-user-pen';
             }
 
@@ -70,32 +70,36 @@ class ActionlogPresenter extends Presenter
         }
 
         // Everything else
-        if ($this->actionType()=='create new') {
+        if ($this->action_type == 'create') {
             return 'fa-solid fa-plus';
         }
 
-        if ($this->actionType()=='delete') {
+        if ($this->action_type == 'delete') {
             return 'fa-solid fa-trash';
         }
 
-        if ($this->actionType()=='update') {
+        if ($this->action_type == 'update') {
             return 'fa-solid fa-pen';
         }
 
-        if ($this->actionType()=='restore') {
+        if ($this->action_type == 'restore') {
             return 'fa-solid fa-trash-arrow-up';
         }
 
-        if ($this->actionType()=='upload') {
+        if ($this->action_type == 'upload') {
             return 'fas fa-paperclip';
         }
 
-        if ($this->actionType()=='checkout') {
+        if ($this->action_type == 'checkout') {
             return 'fa-solid fa-rotate-left';
         }
 
-        if ($this->actionType()=='checkin from') {
+        if ($this->action_type == 'checkin from') {
             return 'fa-solid fa-rotate-right';
+        }
+
+        if ($this->action_type == 'note_added') {
+            return 'fas fa-sticky-note';
         }
 
         return 'fa-solid fa-rotate-right';

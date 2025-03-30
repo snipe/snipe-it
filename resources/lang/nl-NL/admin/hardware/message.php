@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Waarschuwing: </strong> Dit bestand is gemarkeerd als niet-uitgeefbaar. Als deze status is veranderd, update dan de asset status.',
-    'does_not_exist' 	=> 'Dit asset bestaat niet.',
-    'does_not_exist_var'=> 'Asset met tag :asset_tag niet gevonden.',
-    'no_tag' 	        => 'Geen asset tag opgegeven.',
+    'undeployable' 		 => '<strong>Waarschuwing: </strong> Dit bestand is gemarkeerd als niet-uitgeefbaar. Als deze status is veranderd, update dan de asset status.',
+    'does_not_exist' 	 => 'Dit asset bestaat niet.',
+    'does_not_exist_var' => 'Asset met tag :asset_tag niet gevonden.',
+    'no_tag' 	         => 'Geen asset tag opgegeven.',
     'does_not_exist_or_not_requestable' => 'Die asset bestaat niet of is niet aanvraagbaar.',
-    'assoc_users'	 	=> 'Dit asset is momenteel toegewezen aan een gebruiker en kan niet worden verwijderd. Controleer het asset eerst en probeer het opnieuw. ',
+    'assoc_users'	 	 => 'Dit asset is momenteel toegewezen aan een gebruiker en kan niet worden verwijderd. Controleer het asset eerst en probeer het opnieuw. ',
     'warning_audit_date_mismatch' 	=> 'De volgende auditdatum van dit asset (:next_audit_date) ligt vóór de laatste auditdatum (:last_audit_date). Gelieve de volgende auditdatum bij te werken.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Asset is niet aangemaakt, probeer het opnieuw :(',
         'success' 		=> 'Asset is succesvol aangemaakt. :)',
         'success_linked' => 'Asset met tag :tag is succesvol gemaakt. <strong><a href=":link" style="color: white;">Klik hier om te bekijken</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Weet je zeker dat je dit asset wilt verwijderen?',
         'error'   		=> 'Er was een probleem tijdens het verwijderen van het asset. Probeer het opnieuw.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Er zijn geen assets geselecteerd, er is dus niets verwijderd.',
         'success' 		=> 'Het asset is succesvol verwijderd.',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'De gebruiker is ongeldig. Probeer het opnieuw.',
         'not_available' => 'Dat asset is niet beschikbaar voor check-out!',
         'no_assets_selected' => 'U moet minstens één asset selecteren uit de lijst',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

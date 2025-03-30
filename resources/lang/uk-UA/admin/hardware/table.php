@@ -25,7 +25,6 @@ return [
     'image'		    => 'Зображення пристрою',
     'days_without_acceptance' => 'Днів без прийняття',
     'monthly_depreciation' => 'Місячна амортизація',
-    'assigned_to'    => 'Призначено',
     'requesting_user' => 'Запит користувача',
     'requested_date' => 'Дата запиту',
     'changed'       => 'Змінено',

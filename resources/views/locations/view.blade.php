@@ -22,100 +22,133 @@
       <div class="nav-tabs-custom">
           <ul class="nav nav-tabs hidden-print">
 
-              <li class="active">
-                  <a href="#users" data-toggle="tab">
-                        <span class="hidden-lg hidden-md">
-                            <x-icon type="users" class="fa-2x" />
-                        </span>
-                      <span class="hidden-xs hidden-sm">
-                          {{ trans('general.users') }}
-                          {!! ($location->users->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->users->count()).'</badge>' : '' !!}
+              @can('view', \App\Models\User::class)
+                  @if ($location->users->count() > 0)
+                      <li class="active">
+                          <a href="#users" data-toggle="tab">
+                              <i class="fa-solid fa-house-user" style="font-size: 17px" aria-hidden="true"></i>
+                              <span class="sr-only">
+                            {{ trans('general.users') }}
+                              </span>
+                              <span class="badge">
+                                {{ number_format($location->users->count()) }}
+                              </span>
+                          </a>
+                      </li>
+                  @endif
+              @endcan
 
+              @can('view', \App\Models\Asset::class)
+                  @if ($location->assets()->AssetsForShow()->count() > 0)
+                      <li>
+                          <a href="#assets" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/locations/message.current_location') }}">
+                              <i class="fa-solid fa-house-laptop" style="font-size: 17px" aria-hidden="true"></i>
+                              <span class="badge">
+                          {{ number_format($location->assets()->AssetsForShow()->count()) }}
                       </span>
-                  </a>
-              </li>
-
-              <li>
-                  <a href="#assets" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <x-icon type="assets" class="fa-2x" />
-                    </span>
-                    <span class="hidden-xs hidden-sm">
+                              <span class="sr-only">
                           {{ trans('admin/locations/message.current_location') }}
-                          {!! ($location->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
-                    </span>
-                  </a>
-              </li>
+                      </span>
+                          </a>
+                      </li>
+                  @endif
 
-
-              <li>
-                  <a href="#rtd_assets" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-
-                        <x-icon type="assets" class="fa-2x" />
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  @if ($location->rtd_assets()->AssetsForShow()->count() > 0)
+                      <li>
+                          <a href="#rtd_assets" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/hardware/form.default_location') }}">
+                              <i class="fa-solid fa-house-flag" style="font-size: 17px" aria-hidden="true"></i>
+                              <span class="badge">
+                          {{ number_format($location->rtd_assets()->AssetsForShow()->count()) }}
+                      </span>
+                              <span class="sr-only">
                           {{ trans('admin/hardware/form.default_location') }}
-                          {!! ($location->rtd_assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->rtd_assets()->AssetsForShow()->count()).'</badge>' : '' !!}
-                    </span>
-                  </a>
-              </li>
+                      </span>
+                          </a>
+                      </li>
+                  @endif
 
-              <li>
-                  <a href="#assets_assigned" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <x-icon type="assets" class="fa-2x" />
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  @if ($location->assignedAssets()->AssetsForShow()->count() > 0)
+                      <li>
+                          <a href="#assets_assigned" data-toggle="tab" data-tooltip="true" title="{{ trans('admin/locations/message.assigned_assets') }}">
+                              <i class="fas fa-barcode" style="font-size: 17px" aria-hidden="true"></i>
+                              <span class="badge">
+                          {{ number_format($location->assignedAssets()->AssetsForShow()->count()) }}
+                      </span>
+                              <span class="sr-only">
                           {{ trans('admin/locations/message.assigned_assets') }}
-                          {!! ($location->assignedAssets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->assignedAssets()->AssetsForShow()->count()).'</badge>' : '' !!}
-                    </span>
-                  </a>
-              </li>
+                      </span>
+                          </a>
+                      </li>
+                  @endif
+              @endcan
+
+                  @can('view', \App\Models\Accessory::class)
+                      @if ($location->accessories->count() > 0)
+                          <li>
+                              <a href="#accessories" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories') }}">
+                                  <i class="far fa-keyboard" style="font-size: 17px" aria-hidden="true"></i>
+                                  <span class="badge">
+                                    {{ number_format($location->accessories->count()) }}
+                                  </span>
+                                  <span class="sr-only">
+                                    {{ trans('general.accessories') }}
+                                  </span>
+                              </a>
+                          </li>
+                      @endif
+
+                      @if ($location->assignedAccessories->count() > 0)
+                          <li>
+                              <a href="#accessories_assigned" data-toggle="tab" data-tooltip="true" title="{{ trans('general.accessories_assigned') }}">
+                                  <i class="fas fa-keyboard" style="font-size: 17px" aria-hidden="true"></i>
+                                  <span class="badge">
+                                      {{ number_format($location->assignedAccessories->count()) }}
+                                  </span>
+                                  <span class="sr-only">
+                                      {{ trans('general.accessories_assigned') }}
+                                  </span>
+                              </a>
+                          </li>
+                      @endif
+                  @endcan
 
 
-              <li>
-                  <a href="#accessories" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <x-icon type="accessories" class="fa-2x "/>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
-                          {{ trans('general.accessories') }}
-                          {!! ($location->accessories->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->accessories->count()).'</badge>' : '' !!}
-                    </span>
-                  </a>
-              </li>
+              @can('view', \App\Models\Consumable::class)
+                      @if ($location->consumables->count() > 0)
+                          <li>
+                              <a href="#consumables" data-toggle="tab" data-tooltip="true" title="{{ trans('general.consumables') }}">
+                                  <i class="fas fa-tint" style="font-size: 17px" aria-hidden="true"></i>
+                                  <span class="badge">
+                              {{ number_format($location->consumables->count()) }}
+                          </span>
+                                  <span class="sr-only">
+                              {{ trans('general.consumables') }}
+                          </span>
+                              </a>
+                          </li>
+                      @endif
+                  @endcan
 
-              <li>
-                  <a href="#consumables" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <x-icon type="consumables" class="fa-2x "/>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
-                          {{ trans('general.consumables') }}
-                          {!! ($location->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->consumables->count()).'</badge>' : '' !!}
-                    </span>
-                  </a>
-              </li>
-
-              <li>
-                  <a href="#components" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <x-icon type="components" class="fa-2x "/>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
-                          {{ trans('general.components') }}
-                          {!! ($location->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->components->count()).'</badge>' : '' !!}
-                    </span>
-                  </a>
-              </li>
+                  @can('view', \App\Models\Component::class)
+                      @if ($location->components->count() > 0)
+                          <li>
+                              <a href="#components" data-toggle="tab" data-tooltip="true" title="{{ trans('general.components') }}">
+                                  <i class="fas fa-hdd" style="font-size: 17px" aria-hidden="true"></i>
+                                  <span class="badge">
+                                    {{ number_format($location->components->count()) }}
+                                  </span>
+                                  <span class="sr-only">
+                                    {{ trans('general.components') }}
+                                  </span>
+                              </a>
+                          </li>
+                      @endif
+                  @endcan
               
               <li>
-                  <a href="#history" data-toggle="tab">
-                    <span class="hidden-lg hidden-md">
-                        <x-icon type="history" class="fa-2x "/>
-                    </span>
-                      <span class="hidden-xs hidden-sm">
+                  <a href="#history" data-toggle="tab" data-toggle="tab" data-tooltip="true" title="{{ trans('general.history') }}">
+                      <i class="fa-solid fa-clock-rotate-left" style="font-size: 17px" aria-hidden="true"></i>
+                      <span class="sr-only">
                           {{ trans('general.history') }}
                     </span>
                   </a>
@@ -124,7 +157,42 @@
 
 
           <div class="tab-content">
-              <div class="tab-pane active" id="users">
+
+              <div class="tab-pane active" id="assets">
+                  <h2 class="box-title">{{ trans('admin/locations/message.current_location') }}</h2>
+
+                  <div class="table table-responsive">
+                      @include('partials.asset-bulk-actions')
+                      <table
+                              data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                              data-cookie-id-table="assetsListingTable"
+                              data-pagination="true"
+                              data-id-table="assetsListingTable"
+                              data-search="true"
+                              data-side-pagination="server"
+                              data-show-columns="true"
+                              data-show-export="true"
+                              data-show-refresh="true"
+                              data-sort-order="asc"
+                              data-toolbar="#assetsBulkEditToolbar"
+                              data-bulk-button-id="#bulkAssetEditButton"
+                              data-bulk-form-id="#assetsBulkForm"
+                              data-click-to-select="true"
+                              id="assetsListingTable"
+                              class="table table-striped snipe-table"
+                              data-url="{{route('api.assets.index', ['location_id' => $location->id]) }}"
+                              data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                      </table>
+
+                  </div><!-- /.table-responsive -->
+              </div><!-- /.tab-pane -->
+
+
+              
+              <div class="tab-pane" id="users">
                     <h2 class="box-title">{{ trans('general.users') }}</h2>
                       <div class="table table-responsive">
                           @include('partials.users-bulk-actions')
@@ -155,37 +223,6 @@
                       </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
 
-              <div class="tab-pane" id="assets">
-                      <h2 class="box-title">{{ trans('admin/locations/message.current_location') }}</h2>
-
-                      <div class="table table-responsive">
-                          @include('partials.asset-bulk-actions')
-                          <table
-                                  data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
-                                  data-cookie-id-table="assetsListingTable"
-                                  data-pagination="true"
-                                  data-id-table="assetsListingTable"
-                                  data-search="true"
-                                  data-side-pagination="server"
-                                  data-show-columns="true"
-                                  data-show-export="true"
-                                  data-show-refresh="true"
-                                  data-sort-order="asc"
-                                  data-toolbar="#assetsBulkEditToolbar"
-                                  data-bulk-button-id="#bulkAssetEditButton"
-                                  data-bulk-form-id="#assetsBulkForm"
-                                  data-click-to-select="true"
-                                  id="assetsListingTable"
-                                  class="table table-striped snipe-table"
-                                  data-url="{{route('api.assets.index', ['location_id' => $location->id]) }}"
-                                  data-export-options='{
-                              "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
-                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                              }'>
-                          </table>
-
-                      </div><!-- /.table-responsive -->
-              </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="assets_assigned">
                   <h2 class="box-title">
@@ -211,7 +248,7 @@
                               data-click-to-select="true"
                               id="assetsListingTable"
                               class="table table-striped snipe-table"
-                              data-url="{{route('api.assets.index', ['assigned_to' => $location->id, 'assigned_type' => \App\Models\Location::class]) }}"
+                              data-url="{{route('api.locations.assigned_assets', ['location' => $location]) }}"
                               data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -277,6 +314,38 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                       </table>
+                  </div><!-- /.table-responsive -->
+              </div><!-- /.tab-pane -->
+
+              <div class="tab-pane" id="accessories_assigned">
+
+                  <div class="table table-responsive">
+
+                      <h2 class="box-title" style="float:left">
+                          {{ trans('general.accessories_assigned') }}
+                      </h2>
+
+                      <table
+                              data-columns="{{ \App\Presenters\LocationPresenter::assignedAccessoriesDataTableLayout() }}"
+                              data-cookie-id-table="accessoriesAssignedListingTable"
+                              data-pagination="true"
+                              data-id-table="accessoriesAssignedListingTable"
+                              data-search="true"
+                              data-side-pagination="server"
+                              data-show-columns="true"
+                              data-show-export="true"
+                              data-show-refresh="true"
+                              data-sort-order="asc"
+                              data-click-to-select="true"
+                              id="accessoriesAssignedListingTable"
+                              class="table table-striped snipe-table"
+                              data-url="{{ route('api.locations.assigned_accessories', ['location' => $location]) }}"
+                              data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-accessories-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                      </table>
+
                   </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
 
@@ -387,7 +456,7 @@
   <div class="col-md-3">
 
       @if ($location->image!='')
-          <div class="col-md-12 text-center" style="padding-bottom: 20px;">
+          <div class="col-md-12 text-center" style="padding-bottom: 17px;">
               <img src="{{ Storage::disk('public')->url('locations/'.e($location->image)) }}" class="img-responsive img-thumbnail" style="width:100%" alt="{{ $location->name }}">
           </div>
       @endif

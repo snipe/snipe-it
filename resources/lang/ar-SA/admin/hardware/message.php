@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'الأصل غير موجود.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'الأصل غير موجود.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'ذالك الأصل غير موجود أو غير قابل للطلب.',
-    'assoc_users'	 	=> 'هذا الأصل مخرج حاليا لمستخدم ولا يمكن حذفه. يرجى التحقق من الأصل أولا، ثم حاول الحذف مرة أخرى. ',
+    'assoc_users'	 	 => 'هذا الأصل مخرج حاليا لمستخدم ولا يمكن حذفه. يرجى التحقق من الأصل أولا، ثم حاول الحذف مرة أخرى. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'لم يتم إنشاء الأصل، يرجى إعادة المحاولة. :(',
         'success' 		=> 'تم إنشاء الأصل بنجاح. :)',
         'success_linked' => 'تم إنشاء الأصل مع العلامة :tag بنجاح. <strong><a href=":link" style="color: white;">انقر هنا لعرض</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'هل تريد بالتأكيد حذف هذا الأصل؟',
         'error'   		=> 'حدثت مشكلة أثناء حذف هذا الأصل. حاول مرة اخرى.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'لم يتم اختيار أي أصول، لذلك لم يتم حذف أي شيء.',
         'success' 		=> 'تم حذف الأصل بنجاح.',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'هذا المستخدم غير صالح. حاول مرة اخرى.',
         'not_available' => 'هذا الأصل غير متاح للخروج!',
         'no_assets_selected' => 'يجب عليك تحديد أصل واحد على الأقل من القائمة',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

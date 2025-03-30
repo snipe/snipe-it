@@ -2,8 +2,8 @@
 
 return [
     'about_locations_title'     => 'O lokalitách',
-    'about_locations'           => 'Lokality sa využívajú na sledovanie umiestnenia používateľov, majetku a ostatných položiek',
-    'assets_rtd'                => 'Majetok', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
+    'about_locations'           => 'Lokality sa využívajú na sledovanie umiestnenia používateľov, položiek majetku a ostatných položiek',
+    'assets_rtd'                => 'Položky majetku', // This has NEVER meant Assets Retired. I don't know how it keeps getting reverted.
     'assets_checkedout'         => 'Priradený majetok',
     'id'                        => 'ID',
     'city'                      => 'Mesto',
@@ -15,7 +15,7 @@ return [
     'print_all_assigned'        => 'Vytlačiť všetky priradené',
     'name'                      => 'Názov lokality',
     'address'                   => 'Adresa',
-    'address2'                   => 'Address Line 2',
+    'address2'                   => 'Adresa 2. riadok',
     'zip'                       => 'PSČ',
     'locations'                 => 'Lokality',
     'parent'                    => 'Nadradené',
@@ -24,7 +24,7 @@ return [
     'user_name'                 => 'Meno používateľa',
     'department'                => 'Oddelenie',
     'location'                  => 'Lokalita',
-    'asset_tag'                 => 'Označenie majetku',
+    'asset_tag'                 => 'Označenia majetku',
     'asset_name'                => 'Názov',
     'asset_category'            => 'Kategória',
     'asset_manufacturer'        => 'Výrobca',
@@ -32,9 +32,9 @@ return [
     'asset_serial'              => 'Sériové číslo',
     'asset_location'            => 'Lokalita',
     'asset_checked_out'         => 'Odovzdané',
-    'asset_expected_checkin'    => 'Očakávaný dátum prijatia',
+    'asset_expected_checkin'    => 'Očakávaný dátum prevzatia',
     'date'                      => 'Dátum:',
-    'phone'                     => 'Location Phone',
+    'phone'                     => 'Telefónne čislo lokality',
     'signed_by_asset_auditor'   => 'Podpísané (Audítor majetku):',
     'signed_by_finance_auditor' => 'Podpísané (Finančný auditor):',
     'signed_by_location_manager' => 'Podpísané (Manažér lokality):',

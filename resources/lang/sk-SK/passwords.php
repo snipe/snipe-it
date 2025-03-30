@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'sent'	        => 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'user'			=> 'If a matching user with a valid email address exists in our system, a password recovery email has been sent.',
-    'token'         => 'This password reset token is invalid or expired, or does not match the username provided.',
-    'reset'         => 'Your password has been reset!',
-    'password_change'  => 'Your password has been updated!',
+    'sent'	        => 'Ak uvedený používateľ s platnou emailovou adresou existuje v našom systému, bude odoslaný email s inštrukciami pre obnovu hesla.',
+    'user'			=> 'Ak uvedený používateľ s platnou emailovou adresou existuje v našom systému, bude odoslaný email s inštrukciami pre obnovu hesla.',
+    'token'         => 'Kód na reset hesla je neplatný, vypršal alebo exspiroval alebo sa nezhoduje so zadaným používateľským menom.',
+    'reset'         => 'Vaše heslo bolo úspešne resetované!',
+    'password_change'  => 'Vaše heslo bolo úspešne aktualizované!',
 ];

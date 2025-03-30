@@ -15,7 +15,7 @@ return [
 
     'more_info_title' => 'Lebih Lanjut',
 
-    'audit_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log.<br><br>Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
+    'audit_help' => 'Mencentang kotak ini akan mengubah catatan aset untuk mencerminkan lokasi baru ini. Membiarkannya tidak dicentang hanya akan mencatat lokasi di log audit.<br><br>Perhatikan bahwa jika aset ini sedang dipinjam, ini tidak akan mengubah lokasi orang, aset, atau lokasi tempat aset tersebut dipinjam.',
 
     'assets' => 'Aset adalah barang yang dilacak dengan nomor seri atau tanda aset. Cenderung menjadi barang dengan nilai lebih tinggi dimana identifikasi barang secara spesifik berpengaruh.',
 
@@ -31,5 +31,5 @@ return [
 
     'depreciations' => 'Anda dapat mengatur penyusutan aset dengan perhitungan penyusutan garis lurus.',
     
-    'empty_file'    => 'The importer detects that this file is empty.'
+    'empty_file'    => 'Pengimpor mendeteksi bahwa berkas ini kosong.'
 ];

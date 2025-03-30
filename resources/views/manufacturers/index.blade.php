@@ -29,8 +29,6 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
-
           <table
             data-columns="{{ \App\Presenters\ManufacturerPresenter::dataTableLayout() }}"
             data-cookie-id-table="manufacturersTable"
@@ -50,9 +48,7 @@
               "fileName": "export-manufacturers-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
-
           </table>
-        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>

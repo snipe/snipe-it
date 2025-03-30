@@ -3,13 +3,13 @@
 return array(
 
     'asset'             => 'Bene',
-    'checkin'           => 'Riassegna',
+    'checkin'           => 'Restituzione',
     'create'            => 'Crea Licenza',
     'expiration'        => 'Data di scadenza',
     'license_key'       => 'Chiave licenza',
     'maintained'        => 'Mantenuto',
     'name'              => 'Nome Software',
-    'no_depreciation'   => 'Non svaluta',
+    'no_depreciation'   => 'Non soggetto a deprezzamento',
     'purchase_order'    => 'Acquisto numero d\'ordine',
     'reassignable'      => 'Reassegnabile',
     'remaining_seats'   => 'Licenze disponibili',
@@ -18,5 +18,5 @@ return array(
     'to_email'          => 'Licenza Email',
     'to_name'           => 'Licenza Nome',
     'update'            => 'Aggiornamento Licenze',
-    'checkout_help'     => 'È necessario verificare una licenza ad una bene hardware o una persona. È possibile selezionare, ma il proprietario del bene deve corrispondere alla persona che ha il bene fuori.'
+    'checkout_help'     => 'Devi assegnare una Licenza a un Bene o a una persona. Puoi selezionarli entrambi, ma in tal caso l\'assegnatario del Bene deve corrispondere alla persona a cui stai assegnando la licenza.'
 );

@@ -64,7 +64,7 @@
                 <x-icon type="branding" class="fa-4x"/>
                 <br><br>
                 <span class="name">{{ trans('admin/settings/general.brand') }}</span>
-                <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.brand_keywords') }}</span>
+                <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.brand') }}</span>
               </a>
               </h5>
               <p class="help-block">{{ trans('admin/settings/general.brand_help') }}</p>
@@ -81,7 +81,7 @@
                   <x-icon type="general-settings" class="fa-4x"/>
                   <br><br>
                   <span class="name"> {{ trans('admin/settings/general.general_settings') }}</span>
-                  <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.general_settings_keywords') }}</span>
+                  <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.general_settings') }}</span>
                 </a>
               </h5>
               <p class="help-block">{{ trans('admin/settings/general.general_settings_help') }}</p>
@@ -98,7 +98,7 @@
                   <x-icon type="locked" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.security') }}</span>
-                  <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.security_keywords') }}</span>
+                  <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.security') }}</span>
                 </a>
               </h5>
               <p class="help-block">{{ trans('admin/settings/general.security_help') }}</p>
@@ -114,7 +114,7 @@
                   <x-icon type="groups" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('general.groups') }}</span>
-                  <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.groups_keywords') }}</span>
+                  <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.keywords.groups') }}</span>
                   </a>
               </h5>
               <p class="help-block">{{ trans('admin/settings/general.groups_help') }}</p>
@@ -131,7 +131,7 @@
                   <x-icon type="globe-us" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.localization') }}</span>
-                  <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.localization_keywords') }}</span>
+                  <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.keywords.localization') }}</span>
                 </a>
               </h5>
               <p class="help-block">{{ trans('admin/settings/general.localization_help') }}</p>
@@ -191,25 +191,11 @@
           <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
-                <a href="{{ route('settings.barcodes.index') }}" class="settings_button">
-                  <x-icon type="assets" class="fa-4x"/>
-                  <br><br>
-                  <span class="name">{{ trans('admin/settings/general.barcodes') }}</span>
-                </a>
-              </h5>
-              <p class="help-block">{!! trans('admin/settings/general.barcodes_help_overview') !!}</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
-          <div class="admin box box-default">
-            <div class="box-body text-center">
-              <h5>
                 <a href="{{ route('settings.labels.index') }}" class="settings_button">
                   <x-icon type="labels" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.labels') }}</span>
+                  <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.keywords.labels') }}</span>
                 </a>
               </h5>
               <p class="help-block">{!! trans('admin/settings/general.labels_help') !!}</p>
@@ -318,7 +304,7 @@
                     <i class="fab fa-php fa-4x" aria-hidden="true"></i>
                     <br><br>
                     <span class="name">{{ trans('admin/settings/general.php_overview') }}</span>
-                    <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.php_overview_keywords') }}</span>
+                    <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.php_overview') }}</span>
                   </a>
                 </h5>
                 <p class="help-block">{{ trans('admin/settings/general.php_overview_help') }}</p>
@@ -336,7 +322,7 @@
               <i class="fas fa-trash fa-4x" aria-hidden="true"></i>
               <br><br>
               <span class="name">{{ trans('admin/settings/general.purge') }}</span>
-              <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.purge_keywords') }}</span>
+              <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.purge') }}</span>
             </a>
           </h5>
           <p class="help-block">{{ trans('admin/settings/general.purge_help') }}</p>
@@ -356,7 +342,7 @@
         <h2 class="box-title">{{ trans('admin/settings/general.system') }}</h2>
       </div>
       <div class="box-body">
-        <div class="row" style="margin-right:4px;">
+        <div class="col-md-12" style="margin-right:4px;">
         <div class="row row-new-striped" style="line-height: 23px;">
 
           <!-- row -->

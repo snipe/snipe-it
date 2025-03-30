@@ -25,7 +25,6 @@ return [
     'image'		    => '设备图片',
     'days_without_acceptance' => '过期天数',
     'monthly_depreciation' => '每月折旧率',
-    'assigned_to'    => '已分配给',
     'requesting_user' => '申领中的用户',
     'requested_date' => '请求日期',
     'changed'       => '已修改',

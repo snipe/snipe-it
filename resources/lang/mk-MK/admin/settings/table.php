@@ -2,5 +2,5 @@
 
 return array(
     'created'   => 'Креиран',
-    'size' => 'Size',
+    'size' => 'Големина',
 );

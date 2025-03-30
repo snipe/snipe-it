@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'To πάγιο δεν υπάρχει.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'To πάγιο δεν υπάρχει.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Αυτό το στοιχείο δεν υπάρχει ή δεν απαιτείται.',
-    'assoc_users'	 	=> 'Αυτό το στοιχείο είναι συνήθως αποσυνδεδεμένο από έναν χρήστη και δεν μπορεί να διαγραφεί. Ελέγξτε πρώτα το στοιχείο και, στη συνέχεια, δοκιμάστε ξανά τη διαγραφή.',
+    'assoc_users'	 	 => 'Αυτό το στοιχείο είναι συνήθως αποσυνδεδεμένο από έναν χρήστη και δεν μπορεί να διαγραφεί. Ελέγξτε πρώτα το στοιχείο και, στη συνέχεια, δοκιμάστε ξανά τη διαγραφή.',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Το περιουσιακού στοιχείο δεν δημιουργήθηκε, παρακαλώ προσπαθήστε ξανά. :(',
         'success' 		=> 'Το πάγιο δημιουργήθηκε επιτυχώς',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το πάγιο;',
         'error'   		=> 'Παρουσιάστηκε ένα ζήτημα κατάργησης του στοιχείου. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Δεν επιλέχθηκαν στοιχεία ενεργητικού, οπότε τίποτα δεν διαγράφηκε.',
         'success' 		=> 'Το πάγιο διαγράφηκε με επιτυχία.',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'Αυτός ο χρήστης είναι άκυρος. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
         'not_available' => 'Αυτό το πάγιο δεν είναι διαθέσιμο για την ολοκλήρωση της παραγγελίας!',
         'no_assets_selected' => 'Πρέπει να επιλέξετε τουλάχιστον ένα στοιχείο προς δημοσίευση.',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

@@ -236,4 +236,16 @@ a.settings_button:visited,
 a.settings_button:hover {
   color: #3c8dbc;
 }
+a.label.label-default:link {
+  color: #307095;
+  /* Use same as Header picker, lighten by 70% */
+}
+a.label.label-default:visited {
+  color: #23536f;
+  /* Use same as Header picker, lighten by 70% */
+}
+a.label.label-default:hover {
+  background-color: #BBB;
+  color: #296282;
+}
 

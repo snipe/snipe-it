@@ -25,7 +25,6 @@ return [
     'image'		    => 'ภาพอุปกรณ์',
     'days_without_acceptance' => 'วันโดยปราศจากการยอมรับ',
     'monthly_depreciation' => 'ค่าเสื่อมราคารายเดือน',
-    'assigned_to'    => 'ได้รับมอบหมายให้',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'วันที่ขอ',
     'changed'       => 'เปลี่ยนแปลงแล้ว',

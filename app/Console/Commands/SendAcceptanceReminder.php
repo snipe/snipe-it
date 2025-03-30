@@ -2,15 +2,15 @@
 
 namespace App\Console\Commands;
 
+use App\Mail\UnacceptedAssetReminderMail;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CurrentInventory;
-use App\Notifications\UnacceptedAssetReminderNotification;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
 
 class SendAcceptanceReminder extends Command
 {
@@ -64,43 +64,45 @@ class SendAcceptanceReminder extends Command
             ->groupBy(function($item) {
                 return $item['acceptance']->assignedTo ? $item['acceptance']->assignedTo->id : '';
             });
-
-        $no_mail_address = [];
+            $no_email_list= [];
 
         foreach($unacceptedAssetGroups as $unacceptedAssetGroup) {
+            // The [0] is weird, but it allows for the item_count to work and grabs the appropriate info for each user.
+            // Collapsing and flattening the collection doesn't work above.
+            $acceptance = $unacceptedAssetGroup[0]['acceptance'];
+
+            $locale = $acceptance->assignedTo?->locale;
+            $email = $acceptance->assignedTo?->email;
+
+            if(!$email){
+                $no_email_list[] = [
+                    'id' => $acceptance->assignedTo?->id,
+                    'name' => $acceptance->assignedTo?->present()->fullName(),
+                ];
+            } else {
+                $count++;
+            }
             $item_count = $unacceptedAssetGroup->count();
-            foreach ($unacceptedAssetGroup as $unacceptedAsset) {
-//            if ($unacceptedAsset['acceptance']->assignedTo->email == ''){
-//                $no_mail_address[] = $unacceptedAsset['checkoutable']->assignedTo->present()->fullName;
-//            }
-                if ($unacceptedAsset['acceptance']->assignedTo) {
 
-                    if (!$unacceptedAsset['acceptance']->assignedTo->locale) {
-                        Notification::locale(Setting::getSettings()->locale)->send(
-                            $unacceptedAsset['acceptance']->assignedTo,
-                            new UnacceptedAssetReminderNotification($unacceptedAsset['assetItem'], $count)
-                        );
-                    } else {
-                        Notification::send(
-                            $unacceptedAsset['acceptance']->assignedTo,
-                            new UnacceptedAssetReminderNotification($unacceptedAsset, $item_count)
-                        );
-                    }
-                    $count++;
-                }
-            }
-        }
-
-        if (!empty($no_mail_address)) {
-            foreach($no_mail_address as $user) {
-                return $user.' has no email.';
+            if ($locale && $email) {
+                Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count))->locale($locale));
+            } elseif ($email) {
+                Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count)));
             }
 
-
         }
-
-
 
         $this->info($count.' users notified.');
+        $headers = ['ID', 'Name'];
+        $rows = [];
+
+        foreach ($no_email_list as $user) {
+            $rows[] = [$user['id'], $user['name']];
+        }
+        $this->info("The following users do not have an email address:");
+        $this->table($headers, $rows);
+
+        return 0;
     }
+
 }

@@ -2,24 +2,29 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'הנכס אינו קיים.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'הנכס אינו קיים.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'לא סופק תג נכס.',
     'does_not_exist_or_not_requestable' => 'הנכס אינו קיים או לא זמין.',
-    'assoc_users'	 	=> 'הנכס הזה מסומן כרגע למשתמש ולא ניתן למחוק אותו. בדוק תחילה את הנכס ולאחר מכן נסה למחוק שוב.',
+    'assoc_users'	 	 => 'הנכס הזה מסומן כרגע למשתמש ולא ניתן למחוק אותו. בדוק תחילה את הנכס ולאחר מכן נסה למחוק שוב.',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'תוויות נוצרו בהצלחה.',
+    'error_generating_labels' => 'שגיאה ביצירת תוויות.',
+    'no_assets_selected' => 'לא נבחרו נכסים.',
 
     'create' => [
         'error'   		=> 'הנכס לא נוצר, נסה שוב. You',
         'success' 		=> 'הנכס נוצר בהצלחה. :)',
-        'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'success_linked' => 'נכס עם תג :tag נוצר בהצלחה. <strong><a href=":link" style="color: white;">לחץ כאן לצפייה</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
         'error'   			=> 'הנכס לא עודכן, נסה שוב',
         'success' 			=> 'הנכס עודכן בהצלחה.',
-        'encrypted_warning' => 'Asset updated successfully, but encrypted custom fields were not due to permissions',
+        'encrypted_warning' => 'הנכס עודכן בהצלחה, אבל השדות המותאמים-אישית שמוצפנים לא עודכנו בגלל מחסור בהרשאות',
         'nothing_updated'	=>  'לא נבחרו שדות, ולכן דבר לא עודכן.',
         'no_assets_selected'  =>  'No assets were selected, so nothing was updated.',
         'assets_do_not_exist_or_are_invalid' => 'Selected assets cannot be updated.',
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'האם אתה בטוח שברצונך למחוק את הנכס הזה?',
         'error'   		=> 'היתה בעיה במחיקת הנכס. בבקשה נסה שוב.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'לא נבחרו נכסים ולכן לא נמחק דבר.',
         'success' 		=> 'הנכס נמחק בהצלחה.',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'משתמש זה אינו חוקי. בבקשה נסה שוב.',
         'not_available' => 'הנכס הזה אינו זמין לקופה!',
         'no_assets_selected' => 'עליך לבחור לפחות בנכס אחד מהרשימה',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'ID',
     'require_acceptance'      	=> 'Elfogad',
     'title'      				=> 'Tartozék neve',
-
-
 );

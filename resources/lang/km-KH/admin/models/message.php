@@ -7,7 +7,7 @@ return array(
     'no_association' => 'ព្រមាន! គំរូទ្រព្យសកម្មសម្រាប់ធាតុនេះមិនត្រឹមត្រូវ ឬបាត់!',
     'no_association_fix' => 'វា​នឹង​បំបែក​រឿង​ក្នុង​វិធី​ចម្លែក និង​គួរ​ឲ្យ​រន្ធត់។ កែសម្រួលទ្រព្យសកម្មនេះឥឡូវនេះ ដើម្បីចាត់ឱ្យវាជាគំរូមួយ។',
     'assoc_users'	 => 'បច្ចុប្បន្ន ម៉ូដែលនេះត្រូវបានភ្ជាប់ជាមួយទ្រព្យសកម្មមួយ ឬច្រើន ហើយមិនអាចលុបបានទេ។ សូមលុបទ្រព្យសម្បត្តិ ហើយបន្ទាប់មកព្យាយាមលុបម្តងទៀត។ ',
-    'invalid_category_type' => 'This category must be an asset category.',
+    'invalid_category_type' => 'ប្រភេទនេះត្រូវតែជាប្រភេទទ្រព្យសកម្ម។',
 
     'create' => array(
         'error'   => 'គំរូមិនត្រូវបានបង្កើតទេ សូមព្យាយាមម្តងទៀត។',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'គ្មាន fields ត្រូវបានផ្លាស់ប្តូរ ដូច្នេះគ្មានអ្វីត្រូវបានធ្វើបច្ចុប្បន្នភាពទេ។',
         'success' 		=> 'បានធ្វើបច្ចុប្បន្នភាពគំរូដោយជោគជ័យ។ |:model_count model បានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។',
-        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
+        'warn'          => 'អ្នកហៀបនឹងធ្វើបច្ចុប្បន្នភាពលក្ខណសម្បត្តិនៃគំរូខាងក្រោម៖|អ្នករៀបនឹងកែសម្រួលលក្ខណសម្បត្តិដូចខាងក្រោម៖ model_count models៖',
 
     ),
 

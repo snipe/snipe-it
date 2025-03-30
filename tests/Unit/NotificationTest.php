@@ -1,13 +1,13 @@
 <?php
 namespace Tests\Unit;
 
+use App\Mail\CheckoutAssetMail;
 use App\Models\User;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
 use Carbon\Carbon;
-use App\Notifications\CheckoutAssetNotification;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class NotificationTest extends TestCase
@@ -29,13 +29,15 @@ class NotificationTest extends TestCase
                 'purchase_date' =>   Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)->format('Y-m-d')
             ]);
 
-        Notification::fake();
+        Mail::fake();
         $asset->checkOut($user, $admin->id);
-        Notification::assertSentTo($user, CheckoutAssetNotification::class);
+        Mail::assertSent(CheckoutAssetMail::class, function (CheckoutAssetMail $mail) use ($user) {
+            return $mail->hasTo($user->email) && $mail->hasSubject(trans('mail.Asset_Checkout_Notification'));
+        });
     }
     public function testDefaultEulaIsSentWhenSetInCategory()
     {
-        Notification::fake();
+        Mail::fake();
 
         $this->settings->setEula('My Custom EULA Text');
 
@@ -51,10 +53,10 @@ class NotificationTest extends TestCase
 
         $asset->checkOut($user, User::factory()->superuser()->create()->id);
 
-        Notification::assertSentTo($user, CheckoutAssetNotification::class, function ($notification) {
-            $content = $notification->toMail()->render();
-
-            return str_contains($content, 'My Custom EULA Text') && !str_contains($content, 'EULA Text that should not be used');
+        Mail::assertSent(CheckoutAssetMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email) &&
+                str_contains($mail->render(), 'My Custom EULA Text') &&
+                !str_contains($mail->render(), 'EULA Text that should not be used');
         });
     }
 }

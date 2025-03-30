@@ -428,7 +428,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -465,7 +465,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -502,7 +502,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -543,7 +543,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -584,7 +584,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -628,7 +628,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.28.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.28.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -688,12 +688,11 @@ EOL
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
         create_virtualhost
-        log "phpenmod mcrypt"
         log "phpenmod mbstring"
         log "a2enmod rewrite"
         log "a2ensite $APP_NAME.conf"
@@ -728,7 +727,7 @@ EOL
         amazon-linux-extras install -y php8.2
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip  php-sodium"
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-ldap php-json php-simplexml php-process php-zip  php-sodium"
         install_packages
 
         echo "* Configuring Apache."
@@ -769,7 +768,7 @@ EOL
         log "yum-config-manager --enable remi-php82"
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-ldap php-json php-simplexml php-process php-zip"
         install_packages
 
         echo "* Configuring Apache."
@@ -812,7 +811,7 @@ EOL
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-ldap php-json php-simplexml php-process php-zip"
         install_packages
 
         echo "* Configuring Apache."
@@ -932,7 +931,7 @@ case $setupmail in
 
     echo -n "  From name:"
     read -r mailfromname
-    sed -i "s|^\\(MAIL_FROM_NAME=\\).*|\\1$mailfromname|" "$APP_PATH/.env"
+    sed -i  "s|^\\(MAIL_FROM_NAME=\\).*|\\1\\'$mailfromname\\'|" "$APP_PATH/.env"
 
     echo -n "  Reply to address:"
     read -r mailreplytoaddr
@@ -940,7 +939,7 @@ case $setupmail in
 
     echo -n "  Reply to name:"
     read -r mailreplytoname
-    sed -i "s|^\\(MAIL_REPLYTO_NAME=\\).*|\\1$mailreplytoname|" "$APP_PATH/.env"
+    sed -i "s|^\\(MAIL_REPLYTO_NAME=\\).*|\\1\\'$mailreplytoname\\'|" "$APP_PATH/.env"
     setupmail="yes"
     ;;
   [nN] | [n|N][O|o] )

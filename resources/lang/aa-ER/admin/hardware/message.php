@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> 'crwdns12562:0crwdne12562:0',
-    'does_not_exist' 	=> 'crwdns740:0crwdne740:0',
-    'does_not_exist_var'=> 'crwdns12188:0crwdne12188:0',
-    'no_tag' 	        => 'crwdns12190:0crwdne12190:0',
+    'undeployable' 		 => 'crwdns12562:0crwdne12562:0',
+    'does_not_exist' 	 => 'crwdns740:0crwdne740:0',
+    'does_not_exist_var' => 'crwdns12188:0crwdne12188:0',
+    'no_tag' 	         => 'crwdns12190:0crwdne12190:0',
     'does_not_exist_or_not_requestable' => 'crwdns6581:0crwdne6581:0',
-    'assoc_users'	 	=> 'crwdns741:0crwdne741:0',
+    'assoc_users'	 	 => 'crwdns741:0crwdne741:0',
     'warning_audit_date_mismatch' 	=> 'crwdns12192:0crwdne12192:0',
+    'labels_generated'   => 'crwdns12786:0crwdne12786:0',
+    'error_generating_labels' => 'crwdns12788:0crwdne12788:0',
+    'no_assets_selected' => 'crwdns12790:0crwdne12790:0',
 
     'create' => [
         'error'   		=> 'crwdns742:0crwdne742:0',
         'success' 		=> 'crwdns743:0crwdne743:0',
         'success_linked' => 'crwdns11882:0crwdne11882:0',
+        'multi_success_linked' => 'crwdns12776:0crwdne12776:0',
+        'partial_failure' => 'crwdns12778:0crwdne12778:0',
     ],
 
     'update' => [
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'crwdns746:0crwdne746:0',
         'error'   		=> 'crwdns747:0crwdne747:0',
+        'assigned_to_error' => 'crwdns12925:0{1}crwdne12925:0',
         'nothing_updated'   => 'crwdns1876:0crwdne1876:0',
         'success' 		=> 'crwdns748:0crwdne748:0',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'crwdns751:0crwdne751:0',
         'not_available' => 'crwdns1691:0crwdne1691:0',
         'no_assets_selected' => 'crwdns1965:0crwdne1965:0',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'crwdns12768:0crwdne12768:0',
+        'success' => 'crwdns12770:0crwdne12770:0',
     ],
 
     'checkin' => [

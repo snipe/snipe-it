@@ -25,7 +25,6 @@ return [
     'image'		    => '写真',
     'days_without_acceptance' => '未受理期間',
     'monthly_depreciation' => '毎月の減価償却費（減価償却費）',
-    'assigned_to'    => '割り当て先',
     'requesting_user' => '要求ユーザー',
     'requested_date' => '要求日',
     'changed'       => '変更済み',

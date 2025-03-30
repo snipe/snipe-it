@@ -50,7 +50,7 @@ class ConsumablesController extends Controller
     {
         $this->authorize('create', Consumable::class);
 
-        return view('consumables/edit')->with('category_type', 'consumable')
+        return view('consumables.edit')->with('category_type', 'consumable')
             ->with('item', new Consumable);
     }
 
@@ -104,15 +104,13 @@ class ConsumablesController extends Controller
      * @see ConsumablesController::postEdit() method that stores the form data.
      * @since [v1.0]
      */
-    public function edit($consumableId = null) : View | RedirectResponse
+    public function edit(Consumable $consumable) : View | RedirectResponse
     {
-        if ($item = Consumable::find($consumableId)) {
-            $this->authorize($item);
+            $this->authorize($consumable);
+            return view('consumables/edit')
+                ->with('item', $consumable)
+                ->with('category_type', 'consumable');
 
-            return view('consumables/edit', compact('item'))->with('category_type', 'consumable');
-        }
-
-        return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
     }
 
     /**
@@ -126,11 +124,8 @@ class ConsumablesController extends Controller
      * @see ConsumablesController::getEdit() method that stores the form data.
      * @since [v1.0]
      */
-    public function update(StoreConsumableRequest $request, $consumableId = null)
+    public function update(StoreConsumableRequest $request, Consumable $consumable)
     {
-        if (is_null($consumable = Consumable::find($consumableId))) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.does_not_exist'));
-        }
 
         $min = $consumable->numCheckedOut();
         $validator = Validator::make($request->all(), [
@@ -202,16 +197,11 @@ class ConsumablesController extends Controller
      * @return \Illuminate\Contracts\View\View
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function show($consumableId = null)
+    public function show(Consumable $consumable)
     {
-        $consumable = Consumable::withCount('users as users_consumables')->find($consumableId);
+        $consumable = Consumable::withCount('users as users_consumables')->find($consumable->id);
         $this->authorize($consumable);
-        if (isset($consumable->id)) {
-            return view('consumables/view', compact('consumable'));
-        }
-
-        return redirect()->route('consumables.index')
-            ->with('error', trans('admin/consumables/message.does_not_exist'));
+        return view('consumables/view', compact('consumable'));
     }
 
     public function clone(Consumable $consumable) : View

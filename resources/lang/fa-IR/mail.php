@@ -31,6 +31,7 @@ return [
     'License_Checkin_Notification' => 'مجوز بررسی شد
 ',
     'License_Checkout_Notification' => 'License checked out',
+    'license_for'   => 'License for',
     'Low_Inventory_Report' => 'گزارش موجودی کم',
     'a_user_canceled' => 'یک کاربر یک درخواست اقساط در وب سایت را لغو کرده است',
     'a_user_requested' => 'یک کاربر یک مورد را در وبسایت درخواست کرده است',
@@ -68,7 +69,7 @@ return [
     'item_checked_reminder' => 'This is a reminder that you currently have :count items checked out to you that you have not accepted or declined. Please click the link below to confirm your decision.',
     'license_expiring_alert' => 'مجوز :count در روزهای بعدی :threshold منقضی می شود.|مجوزهای :count در روزهای بعدی :threshold منقضی می شوند.',
     'link_to_update_password' => 'برای به روزرسانی لطفا بر روی لینک زیر کلیک کنید: web password:',
-    'login' => 'ورود:',
+    'login' => 'ورود',
     'login_first_admin' => 'با نصب مجدد Snipe-IT جدید خود به سیستم وارد شوید',
     'low_inventory_alert' => 'آیتم :count وجود دارد که زیر حداقل موجودی است یا به زودی کم می شود.',
     'min_QTY' => 'حداقل QTY',

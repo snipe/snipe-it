@@ -25,7 +25,6 @@ return [
     'image'		    => 'Φωτογραφία συσκευής',
     'days_without_acceptance' => 'Ημέρες χωρίς αποδοχή',
     'monthly_depreciation' => 'Μηνιαία Απόσβεση',
-    'assigned_to'    => 'Ανατέθηκε στον',
     'requesting_user' => 'Αίτηση Χρήστη',
     'requested_date' => 'Ημερομηνία Που Ζητήθηκε',
     'changed'       => 'Άλλαξε',

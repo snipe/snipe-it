@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'crwdns6551:0crwdne6551:0',
     'processing_spinner' => 'crwdns11515:0crwdne11515:0',
     'optional_infos'  => 'crwdns10490:0crwdne10490:0',
-    'order_details'   => 'crwdns10492:0crwdne10492:0'
+    'order_details'   => 'crwdns10492:0crwdne10492:0',
+    'calc_eol'    => 'crwdns12782:0crwdne12782:0',
 ];

@@ -8,17 +8,17 @@ return array(
 
     'create' => array(
         'error'   => 'El fabricante no fue creado, por favor inténtelo de nuevo.',
-        'success' => 'Fabricante creado con éxito.'
+        'success' => 'Fabricante creado exitosamente.'
     ),
 
     'update' => array(
-        'error'   => 'El fabricante no fue actualizado, por favor inténtelo de nuevo',
-        'success' => 'El fabricante se ha actualizado correctamente.'
+        'error'   => 'El fabricante no fue actualizado, por favor, inténtelo de nuevo',
+        'success' => 'El fabricante se ha actualizado exitosamente.'
     ),
 
     'restore' => array(
-        'error'   => 'El fabricante no ha sido restaurado, por favor inténtalo de nuevo',
-        'success' => 'Fabricante restaurado con éxito.'
+        'error'   => 'El fabricante no fue restaurado, por favor, inténtelo de nuevo',
+        'success' => 'El fabricante fue restaurado exitosamente.'
     ),
 
     'delete' => array(

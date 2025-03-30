@@ -99,9 +99,13 @@ class ProfileController extends Controller
      * User change email page.
      *
      */
-    public function password() : View
+    public function password() : View | RedirectResponse
     {
+
         $user = auth()->user();
+        if ($user->ldap_import=='1') {
+            return redirect()->route('account')->with('error', trans('admin/users/message.error.password_ldap'));
+        }
         return view('account/change-password', compact('user'));
     }
 
@@ -116,7 +120,7 @@ class ProfileController extends Controller
 
         $user = auth()->user();
         if ($user->ldap_import == '1') {
-            return redirect()->route('account.password.index')->with('error', trans('admin/users/message.error.password_ldap'));
+            return redirect()->route('account')->with('error', trans('admin/users/message.error.password_ldap'));
         }
 
         $rules = [
@@ -194,14 +198,14 @@ class ProfileController extends Controller
      */
     public function printInventory() : View
     {
-        $show_user = auth()->user();
+        $show_users = User::where('id',auth()->user()->id)->get();
 
         return view('users/print')
-            ->with('assets', auth()->user()->assets)
-            ->with('licenses', $show_user->licenses()->get())
-            ->with('accessories', $show_user->accessories()->get())
-            ->with('consumables', $show_user->consumables()->get())
-            ->with('show_user', $show_user)
+            ->with('assets', auth()->user()->assets())
+            ->with('licenses', auth()->user()->licenses()->get())
+            ->with('accessories', auth()->user()->accessories()->get())
+            ->with('consumables', auth()->user()->consumables()->get())
+            ->with('users', $show_users)
             ->with('settings', Setting::getSettings());
     }
 
@@ -222,7 +226,12 @@ class ProfileController extends Controller
             return redirect()->back()->with('error', trans('admin/users/message.user_has_no_email'));
         }
 
-        $user->notify((new CurrentInventory($user)));
+        try {
+            $user->notify((new CurrentInventory($user)));
+        } catch (\Exception $e) {
+            \Log::error($e);
+        }
+
         return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
     }
 }

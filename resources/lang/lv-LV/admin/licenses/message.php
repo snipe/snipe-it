@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Licencē tika pārbaudīta problēma. Lūdzu mēģiniet vēlreiz.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Licence tika veiksmīgi reģistrēta'
     ),
 

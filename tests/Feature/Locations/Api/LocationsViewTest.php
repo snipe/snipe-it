@@ -28,10 +28,27 @@ class LocationsViewTest extends TestCase
     public function testViewingLocationAssetIndex()
     {
         $location = Location::factory()->create();
-        Asset::factory()->count(3)->assignedToLocation($location)->create();
+        Asset::factory()->count(3)->create(['location_id' => $location->id]);
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->getJson(route('api.locations.viewassets', $location->id))
+            ->assertOk()
+            ->assertJsonStructure([
+                'total',
+                'rows',
+            ])
+            ->assertJson([
+                'total' => 3,
+            ]);
+    }
+
+    public function testViewingAssignedLocationAssetIndex()
+    {
+        $location = Location::factory()->create();
+        Asset::factory()->count(3)->assignedToLocation($location)->create();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(route('api.locations.assigned_assets', $location->id))
             ->assertOk()
             ->assertJsonStructure([
                 'total',

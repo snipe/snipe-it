@@ -53,6 +53,10 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\CheckLocale::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        'health' => [
+
+        ],
     ];
 
     /**
@@ -69,5 +73,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'health' => null,
     ];
 }

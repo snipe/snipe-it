@@ -29,7 +29,7 @@ return [
 
     'consumables'   => 'I Consumabili sono qualsiasi cosa acquistata che si esaurisce col passare del tempo. Per esempio l\'inchiostro per stampanti o la carta per fotocopiatrici.',
 
-    'depreciations' => 'Puoi impostare la svalutazione dei Beni, per svalutare un Bene con criterio di calcolo lineare.',
+    'depreciations' => 'Puoi impostare i deprezzamenti dei Beni, per deprezzarli con criterio di calcolo lineare.',
     
     'empty_file'    => 'Il processo di Import rileva che questo file è vuoto.'
 ];

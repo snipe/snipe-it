@@ -39,9 +39,9 @@ return [
     'order'				=> '注文番号',
     'qr'				=> 'ＱＲコード',
     'requestable'		=> '利用者がこの資産を要求するかもしれません。',
-    'redirect_to_all'   => 'Return to all :type',
-    'redirect_to_type'   => 'Go to :type',
-    'redirect_to_checked_out_to'   => 'Go to Checked Out to',
+    'redirect_to_all'   => '全ての:typeに戻る',
+    'redirect_to_type'   => ':type に移動',
+    'redirect_to_checked_out_to'   => 'チェックアウト先へ移動',
     'select_statustype'	=> 'ステータスタイプを選択',
     'serial'			=> 'シリアル',
     'status'			=> 'ステータス',
@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'その資産ステータスは配備可能です。この資産はチェックアウトできます。',
     'processing_spinner' => '処理中です... (これは大きなファイルで少し時間がかかる可能性があります)',
     'optional_infos'  => 'オプション情報',
-    'order_details'   => 'オーダー関連情報'
+    'order_details'   => 'オーダー関連情報',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

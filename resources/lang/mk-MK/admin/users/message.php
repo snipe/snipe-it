@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => 'Не можам да го пребарам LDAP серверот. Проверете ја конфигурацијата за LDAP сервер во LDAP конфигурациската датотека. <br>Грешка од LDAP-серверот:',
         'ldap_could_not_get_entries' => 'Не можам да добијам записи од LDAP серверот. Проверете ја конфигурацијата за LDAP сервер во LDAP конфигурациската датотека. <br>Грешка од LDAP-серверот:',
         'password_ldap' => 'Лозинката за корисникот е управувана од LDAP/Active Directory. Ве молиме контактирајте го одделот за ИТ за да ја смените вашата лозинка. ',
-        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
+        'multi_company_items_assigned' => 'Овој корисник има доделени ставки кои припаѓаат на друга компанија. Ве молиме проверете ги или уредете ја нивната компанија.'
     ),
 
     'deletefile' => array(

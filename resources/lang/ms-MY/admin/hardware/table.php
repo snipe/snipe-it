@@ -25,7 +25,6 @@ return [
     'image'		    => 'Imej Peranti',
     'days_without_acceptance' => 'Hari Tanpa Penerimaan',
     'monthly_depreciation' => 'Susut Nilai Bulanan',
-    'assigned_to'    => 'Ditugaskan untuk',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
     'changed'       => 'Berubah',

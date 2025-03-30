@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Settings;
 
-use App\Models\Asset;
 use Tests\TestCase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;

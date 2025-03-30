@@ -12,7 +12,7 @@ return array(
 
     'update' => array(
         'error'   => 'El consumible no fue actualizado, por favor, inténtelo de nuevo',
-        'success' => 'El consumible fue subido con éxito.'
+        'success' => 'Consumible actualizado correctamente.'
     ),
 
     'delete' => array(

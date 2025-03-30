@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'מזהה',
     'require_acceptance'      	=> 'קבלה',
     'title'      				=> 'שם אבזר',
-
-
 );

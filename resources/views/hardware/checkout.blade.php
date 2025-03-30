@@ -82,19 +82,25 @@
                                 {{ trans('admin/hardware/form.status') }}
                             </label>
                             <div class="col-md-7 required">
-                                {{ Form::select('status_id', $statusLabel_list, $asset->status_id, array('class'=>'select2', 'style'=>'width:100%','', 'aria-label'=>'status_id')) }}
+                                <x-input.select
+                                    name="status_id"
+                                    :options="$statusLabel_list"
+                                    :selected="$asset->status_id"
+                                    style="width: 100%;"
+                                    aria-label="status_id"
+                                />
                                 {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
 
                         @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true'])
 
-                        @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user', 'required'=>'true'])
+                        @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_user'])
 
                         <!-- We have to pass unselect here so that we don't default to the asset that's being checked out. We want that asset to be pre-selected everywhere else. -->
-                        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;', 'required'=>'true'])
+                        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.asset'), 'fieldname' => 'assigned_asset', 'unselect' => 'true', 'style' => 'display:none;'])
 
-                        @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required'=>'true'])
+                        @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'assigned_location', 'style' => 'display:none;'])
 
 
 
@@ -136,13 +142,20 @@
                             </div>
                         </div>
 
+                        <!-- Custom fields -->
+                        @include("models/custom_fields_form", [
+                                'model' => $asset->model,
+                                'show_display_checkout_fields' => 'true'
+                        ])
+
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                             <label for="note" class="col-md-3 control-label">
                                 {{ trans('general.notes') }}
                             </label>
+
                             <div class="col-md-8">
-                                <textarea class="col-md-6 form-control" id="note"
+                                <textarea class="col-md-6 form-control" id="note" @required($snipeSettings->require_checkinout_notes)
                                           name="note">{{ old('note', $asset->note) }}</textarea>
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>

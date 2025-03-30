@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Медіафайл не існує.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Попередження: </strong> цей актив позначено як такий, що наразі неможливо розгорнути. Якщо цей статус змінився, оновіть статус активу.',
+    'does_not_exist' 	 => 'Медіафайл не існує.',
+    'does_not_exist_var' => 'Активу з тегом :asset_tag не знайдено.',
+    'no_tag' 	         => 'Тег Активу не надано.',
     'does_not_exist_or_not_requestable' => 'Цей актив не існує або його не можна запитувати.',
-    'assoc_users'	 	=> 'Цей актив в даний час відмічений користувачу і не може бути видалений. Спочатку перевірте активи, а потім спробуйте видалити знову. ',
-    'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'assoc_users'	 	 => 'Цей актив в даний час відмічений користувачу і не може бути видалений. Спочатку перевірте активи, а потім спробуйте видалити знову. ',
+    'warning_audit_date_mismatch' 	=> 'Ця дата наступного аудиту Активів (:next_audit_date) раніша до дати останнього аудиту (:last_audit_date). Будь ласка, оновіть дату наступного контролю.',
+    'labels_generated'   => 'Мітки були успішно створені.',
+    'error_generating_labels' => 'Помилка при формуванні міток.',
+    'no_assets_selected' => 'Не вибрано жодного Актива.',
 
     'create' => [
         'error'   		=> 'Актив не був створений, будь ласка, спробуйте ще раз :(',
         'success' 		=> 'Актив успішно створений. :)',
         'success_linked' => 'Активу з тегом :tag було успішно створено. <strong><a href=":link" style="color: white;">Натисніть тут, щоб переглянути</a></strong>.',
+        'multi_success_linked' => 'Активу з тегом :links було успішно створено.|:count активів було успішно створено. :links.',
+        'partial_failure' => 'Актив не може бути створений. Причина: :відмова створення |:count активів. Причина: :відмова',
     ],
 
     'update' => [
@@ -33,7 +38,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> 'Помилка аудиту активів: :error ',
         'success' 		=> 'Активу успішно зараховано журнал.',
     ],
 
@@ -51,14 +56,14 @@ return [
     ],
 
     'import' => [
-        'import_button'         => 'Process Import',
+        'import_button'         => 'Імпорт процесу',
         'error'                 => 'Деякі елементи не імпортовано належним чином.',
         'errorDetail'           => 'Наступні елементи не були імпортовані через помилки.',
         'success'               => 'Ваш файл імпортовано',
         'file_delete_success'   => 'Ваш файл успішно вилучено',
         'file_delete_error'      => 'Файл не може бути видалений',
         'file_missing' => 'Відсутній файл',
-        'file_already_deleted' => 'The file selected was already deleted',
+        'file_already_deleted' => 'Обраний файл вже видалено',
         'header_row_has_malformed_characters' => 'Один або кілька атрибутів у рядку заголовка містять невірні символи UTF-8',
         'content_row_has_malformed_characters' => 'Один або кілька атрибутів у першому рядку вмісту містять неправильні символи UTF-8',
     ],
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Ви впевнені, що хочете видалити цей медіафайл?',
         'error'   		=> 'Виникла проблема при видаленні активу. Будь ласка, спробуйте ще раз.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Активи не були вибрані, тому нічого не було видалено.',
         'success' 		=> 'Актив успішно видалений.',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'Невірний користувач. Спробуйте ще раз.',
         'not_available' => 'Цей актив недоступний для оформлення!',
         'no_assets_selected' => 'Ви повинні вибрати хоча б один медіафайл зі списку',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Актив не був перевірений, будь ласка, спробуйте ще раз|Активи не були відмічені, будь ласка, спробуйте ще раз',
+        'success' => 'Актив успішно перевірено. | Активи успішно перевірені.',
     ],
 
     'checkin' => [

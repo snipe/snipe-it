@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Mayroong isyu sa pag-check in ng lisensya. Mangyaring subukang muli.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Matagumpay na nai-check in ang lisensya'
     ),
 

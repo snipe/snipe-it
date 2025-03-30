@@ -8,20 +8,13 @@
         </div>
         <div class="modal-body">
             <form action="{{ route('api.manufacturers.store') }}" onsubmit="return false">
-                <div class="alert alert-danger" id="modal_error_msg" style="display:none">
-                </div>
                 <div class="dynamic-form-row">
-                    <div class="col-md-4 col-xs-12"><label for="modal-name">{{ trans('general.name') }}:
-                        </label></div>
-                    <div class="col-md-8 col-xs-12 required">
-                        <input type='text' name="name" id='modal-name' class="form-control">
-                    </div>
+                    @include('partials.forms.edit.name', ['item' => new \App\Models\Manufacturer(), 'translated_name' => trans('admin/manufacturers/table.name')])
                 </div>
             </form>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">{{ trans('button.cancel') }}</button>
-            <button type="button" class="btn btn-primary" id="modal-save">{{ trans('general.save') }}</button>
+        <div class="dynamic-form-row">
+            @include('modals.partials.footer')
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->

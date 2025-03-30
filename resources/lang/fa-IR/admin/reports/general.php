@@ -10,10 +10,15 @@ return [
 ',
     'acceptance_request' => 'قبول درخواست',
     'custom_export' => [
-        'user_address' => 'User Address',
-        'user_city' => 'User City',
-        'user_state' => 'User State',
-        'user_country' => 'User Country',
-        'user_zip' => 'User Zip'
-    ]
+        'user_address' => 'آدرس کاربر',
+        'user_city' => 'شهر کاربر',
+        'user_state' => 'وضعیت کاربر',
+        'user_country' => 'کشوور کاربر',
+        'user_zip' => 'کد پستی کاربر'
+    ],
+    'open_saved_template' => 'باز کردن قالب ذخیره شده',
+    'save_template' =>  'ذخیره‌ قالب',
+    'select_a_template' => 'انتخاب قالب',
+    'template_name' => 'نام قالب',
+    'update_template' => 'به روز رسانی قالب',
 ];

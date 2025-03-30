@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Αυτή η κατάσταση μπορεί να χρησιμοποιηθεί. Αυτό το στοιχείο μπορεί να ελεγχθεί.',
     'processing_spinner' => 'Επεξεργασία... (Αυτό μπορεί να πάρει λίγο χρόνο σε μεγάλα αρχεία)',
     'optional_infos'  => 'Προαιρετικές Πληροφορίες',
-    'order_details'   => 'Σχετικές Πληροφορίες Παραγγελίας'
+    'order_details'   => 'Σχετικές Πληροφορίες Παραγγελίας',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

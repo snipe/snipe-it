@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Bu demirbaş dağıtılabilir durumda. Çıkışı yapılabilir.',
     'processing_spinner' => 'İşleniyor... (Büyük dosyalarda bu işlem biraz zaman alabilir)',
     'optional_infos'  => 'Opsiyonel Bilgi',
-    'order_details'   => 'Sipariş Bilgileri'
+    'order_details'   => 'Sipariş Bilgileri',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

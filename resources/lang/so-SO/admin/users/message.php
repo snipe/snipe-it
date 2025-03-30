@@ -69,7 +69,7 @@ return array(
     ),
 
     'inventorynotification' => array(
-        'error'   => 'Isticmaalahaan ma laha wax iimayl ah oo la dhigay,',
+        'error'   => 'Isticmaalahaan ma heysto Email loo abuuray.',
         'success' => 'Isticmaalaha waa la ogeysiiyay wax ku saabsan alaabtooda hadda.'
     )
 );

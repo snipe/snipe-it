@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Tento majetek lze vyskladnit.',
     'processing_spinner' => 'Zpracovávání... (S velkými soubory to může chvíli trvat)',
     'optional_infos'  => 'Volitelné informace',
-    'order_details'   => 'Informace související s objednávkou'
+    'order_details'   => 'Informace související s objednávkou',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

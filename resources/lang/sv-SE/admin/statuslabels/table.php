@@ -14,6 +14,6 @@ return array(
     'status_type'   => 'Statustyp',
     'show_in_nav'   => 'Visa i sidofältet',
     'title'      	=> 'Statusetiketter',
-    'undeployable'  => 'Ej tillgänglig',
+    'undeployable'  => 'Otillgänglig',
     'update'      	=> 'Uppdatera statusetikett',
 );

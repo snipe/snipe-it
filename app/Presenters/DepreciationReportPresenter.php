@@ -140,7 +140,7 @@ class DepreciationReportPresenter extends Presenter
             ], [
                 "field" => "book_value",
                 "searchable" => true,
-                "sortable" => true,
+                "sortable" => false,
                 "visible" => true,
                 "title" => trans('admin/hardware/table.book_value'),
                 "footerFormatter" => 'sumFormatter',

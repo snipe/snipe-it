@@ -25,7 +25,6 @@ return [
     'image'		    => 'Hình ảnh Thiết bị',
     'days_without_acceptance' => 'Những ngày không chấp nhận',
     'monthly_depreciation' => 'Khấu hao tháng',
-    'assigned_to'    => 'Bàn giao cho',
     'requesting_user' => 'Người dùng đang yêu cầu',
     'requested_date' => 'Ngày yêu cầu',
     'changed'       => 'Đã thay đổi',

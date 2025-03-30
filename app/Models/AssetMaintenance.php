@@ -176,7 +176,7 @@ class AssetMaintenance extends Model implements ICompanyableChild
      */
     public function adminuser()
     {
-        return $this->belongsTo(\App\Models\User::class, 'user_id')
+        return $this->belongsTo(\App\Models\User::class, 'created_by')
             ->withTrashed();
     }
 

@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'Tunnus',
     'require_acceptance'      	=> 'Hyväksyminen',
     'title'      				=> 'Oheistarvikkeen nimi',
-
-
 );

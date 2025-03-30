@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Creați un nou câmp personalizat',
     'value_encrypted'      	        => 'Valoarea acestui câmp este criptată în baza de date. Numai utilizatorii de administrare vor putea vizualiza valoarea decriptată',
     'show_in_email'     => 'Includeți valoarea acestui câmp în e-mailurile trimise utilizatorului? Căsuțele criptate nu pot fi incluse în e-mailuri',
-    'show_in_email_short'     => 'Include în e-mailuri.',
+    'show_in_email_short' => 'Include în e-mailuri',
     'help_text' => 'Text de ajutor',
     'help_text_description' => 'Acesta este un text opțional care va apărea mai jos de elementele formularului în timp ce editezi un activ pentru a oferi informații contextuale pentru fiecare câmp.',
     'about_custom_fields_title' => 'Despre câmpuri personalizate',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Arată în lista de active care pot fi solicitate',
     'show_in_requestable_list' => 'Arată valoarea în lista de active solicitate. Câmpurile criptate nu vor fi afișate',
     'encrypted_options' => 'Acest câmp este criptat, astfel încât unele opțiuni de afișare nu vor fi disponibile.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

@@ -4,10 +4,10 @@ return array(
 
     'deleted' => 'Raderad tillgångsmodell',
     'does_not_exist' => 'Modellen finns inte.',
-    'no_association' => 'VARNING! Modellen för detta objekt är ogiltigt eller saknas!',
-    'no_association_fix' => 'Detta kommer att bryta saker på konstiga och hemska sätt. Redigera denna tillgång nu för att tilldela det en modell.',
+    'no_association' => 'VARNING! Tillgångsmodellen för detta objekt är ogiltig eller saknas!',
+    'no_association_fix' => 'Detta kommer att förstöra saker på märkliga sätt. Redigera denna tillgång nu för att tilldela det till en modell.',
     'assoc_users'	 => 'Denna modell är redan associerad med en eller flera tillgångar och kan inte tas bort. Ta bort tillgången och försök sedan igen. ',
-    'invalid_category_type' => 'This category must be an asset category.',
+    'invalid_category_type' => 'Denna kategori måste vara en tillgångskategori.',
 
     'create' => array(
         'error'   => 'Modellen skapades inte, försök igen.',
@@ -17,24 +17,24 @@ return array(
 
     'update' => array(
         'error'   => 'Modellen uppdaterades inte, försök igen',
-        'success' => 'Modellen uppdaterad.',
+        'success' => 'Modellen uppdaterades.',
     ),
 
     'delete' => array(
         'confirm'   => 'Är du säker på att du vill ta bort denna modell?',
-        'error'   => 'Problem att ta bort modellen. Försök igen.',
+        'error'   => 'Kunde inte ta bort modellen. Försök igen.',
         'success' => 'Modellen borttagen.'
     ),
 
     'restore' => array(
-        'error'   		=> 'Modellen återskapades inte, försök igen',
+        'error'   		=> 'Modellen kunde inte återskapas, försök igen',
         'success' 		=> 'Modellen återskapades.'
     ),
 
     'bulkedit' => array(
         'error'   		=> 'Inga fält ändrades, så ingenting uppdaterades.',
         'success' 		=> 'Modellen har uppdaterats. |:model_count modeller har uppdaterats.',
-        'warn'          => 'Du håller på att uppdatera egenskaperna för följande modell:|Du håller på att redigera egenskaperna för följande :model_count modeller:',
+        'warn'          => 'Du är på väg att uppdatera egenskaperna för följande modell:|Du håller på att redigera egenskaperna för följande :model_count modeller:',
 
     ),
 

@@ -13,5 +13,10 @@ return [
         'user_state' => 'Стан користувача',
         'user_country' => 'Країна',
         'user_zip' => 'Поштовий індекс користувача'
-    ]
+    ],
+    'open_saved_template' => 'Відкрити збережений шаблон',
+    'save_template' =>  'Зберегти шаблон',
+    'select_a_template' => 'Виберіть шаблон',
+    'template_name' => 'Ім\'я шаблону',
+    'update_template' => 'Оновити шаблон',
 ];

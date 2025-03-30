@@ -122,7 +122,7 @@ class AssetMaintenancesController extends Controller
      * @version v1.0
      * @since [v1.8]
      */
-    public function store(Request $request) : JsonResponse
+    public function store(Request $request) : JsonResponse | array
     {
         $this->authorize('update', Asset::class);
         // create a new model instance
@@ -149,7 +149,7 @@ class AssetMaintenancesController extends Controller
      * @version v1.0
      * @since [v4.0]
      */
-    public function update(Request $request, $id) : JsonResponse
+    public function update(Request $request, $id) : JsonResponse | array
     {
         $this->authorize('update', Asset::class);
 
@@ -186,7 +186,7 @@ class AssetMaintenancesController extends Controller
      * @version v1.0
      * @since [v4.0]
      */
-    public function destroy($assetMaintenanceId) : JsonResponse
+    public function destroy($assetMaintenanceId) : JsonResponse | array
     {
         $this->authorize('update', Asset::class);
         // Check if the asset maintenance exists
@@ -208,7 +208,7 @@ class AssetMaintenancesController extends Controller
      * @version v1.0
      * @since [v4.0]
      */
-    public function show($assetMaintenanceId) : JsonResponse
+    public function show($assetMaintenanceId) : JsonResponse | array
     {
         $this->authorize('view', Asset::class);
         $assetMaintenance = AssetMaintenance::findOrFail($assetMaintenanceId);

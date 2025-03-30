@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Az eszköz kiadásra kész, kiadható.',
     'processing_spinner' => 'Feldolgozás folyamatban... (Nagyméretű fájlok esetében ez eltarthat egy darabig)',
     'optional_infos'  => 'Nem kötelező információk',
-    'order_details'   => 'Megrendeléssel kapcsolatos információk'
+    'order_details'   => 'Megrendeléssel kapcsolatos információk',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

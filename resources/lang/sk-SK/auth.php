@@ -13,8 +13,8 @@ return array(
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Prihlasovacie údaje nezodpovedajú žiadnemu záznamu.',
+    'password' => 'Zadané heslo je nesprávne.',
+    'throttle' => 'Priliš veľa pokusov o prihlásenie. Prosím skúste znovu o :seconds sekúnd.',
 
 );

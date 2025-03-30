@@ -12,7 +12,21 @@
 
 
 <div class="row">
+
+    @if ($user->deleted_at!='')
+        <div class="col-md-12">
+            <div class="callout callout-warning">
+                <x-icon type="warning" />
+                {{ trans('admin/users/message.user_deleted_warning') }}
+            </div>
+        </div>
+    @endif
+
   <div class="col-md-12">
+
+
+
+
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs hidden-print">
 
@@ -31,7 +45,7 @@
             <x-icon type="assets" class="fa-2x" />
             </span>
             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
-              {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->count()).'</badge>' : '' !!}
+              {!! ($user->assets()->AssetsForShow()->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($user->assets()->AssetsForShow()->withoutTrashed()->count()).'</badge>' : '' !!}
             </span>
           </a>
         </li>
@@ -115,27 +129,6 @@
 
 
       @can('update', $user)
-          <li class="dropdown pull-right">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <span class="hidden-xs"><x-icon type="cog" /></span>
-              <span class="hidden-lg hidden-md hidden-xl"><x-icon type="cog" class="fa-2x" /></span>
-              
-              <span class="hidden-xs hidden-sm">
-                {{ trans('button.actions') }}
-              </span>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
-              <li><a href="{{ route('users.clone.show', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
-              @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at=='') && ($user->isDeletable()))
-                <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
-              @endif
-            </ul>
-          </li>
-        @endcan
-
-        @can('update', \App\Models\User::class)
           <li class="pull-right">
               <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <span class="hidden-xs"><x-icon type="paperclip" /></span>
@@ -150,15 +143,6 @@
         <div class="tab-pane active" id="details">
           <div class="row">
 
-            
-            @if ($user->deleted_at!='')
-              <div class="col-md-12">
-                <div class="callout callout-warning">
-                    <x-icon type="warning" />
-                  {{ trans('admin/users/message.user_deleted_warning') }}
-                </div>
-              </div>
-            @endif
         <div class="info-stack-container">
             <!-- Start button column -->
             <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
@@ -177,12 +161,10 @@
               <div class="col-md-12 text-center">
                 <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">  
                </div>
-               
-          
 
               @can('update', $user)
                 <div class="col-md-12">
-                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                  <a href="{{ ($user->deleted_at=='') ? route('users.edit', $user->id) : '#' }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print{{ ($user->deleted_at!='') ? ' disabled' : '' }}">
                       <x-icon type="edit" />
                       {{ trans('admin/users/general.edit') }}
                   </a>
@@ -311,10 +293,10 @@
                   <div class="row">
                     <!-- name -->
     
-                      <div class="col-md-3 col-sm-2">
+                      <div class="col-md-3">
                         {{ trans('admin/users/table.name') }}
                       </div>
-                      <div class="col-md-9 col-sm-2">
+                      <div class="col-md-9">
                         {{ $user->present()->fullName() }}
                       </div>
 
@@ -673,7 +655,7 @@
                               {{ trans('admin/users/general.two_factor_active') }}
                             </div>
                             <div class="col-md-9">
-                                @if ($user->two_factor_active()) == '1')
+                                @if ($user->two_factor_active())
                                     <x-icon type="checkmark" class="fa-fw text-success" />
                                     {{ trans('general.yes') }}
                                 @else
@@ -690,7 +672,7 @@
                               {{ trans('admin/users/general.two_factor_enrolled') }}
                             </div>
                             <div class="col-md-9" id="two_factor_reset_toggle">
-                                @if ($user->two_factor_active_and_enrolled()) == '1')
+                                @if ($user->two_factor_active_and_enrolled())
                                 <x-icon type="checkmark" class="fa-fw text-success" />
                                 {{ trans('general.yes') }}
                                 @else
@@ -753,7 +735,7 @@
                            {{Helper::formatCurrencyOutput($user->getUserTotalCost()->total_user_cost)}}
 
                            <a id="optional_info" class="text-primary">
-                               <x-icon type="caret-right" id="optional_info_icon" /></i>
+                               <x-icon type="caret-right" id="optional_info_icon" />
                                <strong>{{ trans('admin/hardware/form.optional_infos') }}</strong>
                            </a>
                        </div>
@@ -865,7 +847,7 @@
                   </td>
                   <td class="hidden-print col-md-2">
                     @can('update', $license)
-                      <a href="{{ route('licenses.checkin', array('licenseSeatId'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                      <a href="{{ route('licenses.checkin', $license->pivot->id, ['backto'=>'user']) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                      @endcan
                   </td>
                 </tr>
@@ -898,7 +880,8 @@
                     }'>
               <thead>
                 <tr>
-                    <th class="col-md-5">{{ trans('general.name') }}</th>
+                    <th class="col-md-1">{{ trans('general.id') }}</th>
+                    <th class="col-md-4">{{ trans('general.name') }}</th>
                     <th class-="col-md-5" data-fieldname="note">{{ trans('general.notes') }}</th>
                     <th class="col-md-1" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                     <th class="col-md-1 hidden-print">{{ trans('general.action') }}</th>
@@ -907,7 +890,8 @@
               <tbody>
                   @foreach ($user->accessories as $accessory)
                   <tr>
-                    <td>{!!$accessory->present()->nameUrl()!!}</td>
+                      <td>{{ $accessory->pivot->id }}</td>
+                      <td>{!!$accessory->present()->nameUrl()!!}</td>
                       <td>{!! $accessory->pivot->note !!}</td>
                       <td>
                       {!! Helper::formatCurrencyOutput($accessory->purchase_cost) !!}
@@ -973,102 +957,11 @@
           <div class="row">
 
             <div class="col-md-12 col-sm-12">
-              <div class="table-responsive">
-                  <table
-                          data-cookie-id-table="userUploadsTable"
-                          data-id-table="userUploadsTable"
-                          id="userUploadsTable"
-                          data-search="true"
-                          data-pagination="true"
-                          data-side-pagination="client"
-                          data-show-columns="true"
-                          data-show-fullscreen="true"
-                          data-show-export="true"
-                          data-show-footer="true"
-                          data-toolbar="#upload-toolbar"
-                          data-show-refresh="true"
-                          data-sort-order="asc"
-                          data-sort-name="name"
-                          class="table table-striped snipe-table"
-                          data-export-options='{
-                    "fileName": "export-license-uploads-{{ str_slug($user->name) }}-{{ date('Y-m-d') }}",
-                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
-                    }'>
-
-                  <thead>
-                    <tr>
-                        <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                        <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
-                        <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($user->uploads as $file)
-                        <tr>
-                            <td>
-                                <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
-                                <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
-
-                            </td>
-                            <td>
-                                @if (($file->filename) && (Storage::exists('private_uploads/users/'.$file->filename)))
-                                   @if (Helper::checkUploadIsImage($file->get_src('users')))
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                                    @else
-                                        {{ trans('general.preview_not_available') }}
-                                    @endif
-                                @else
-                                    <x-icon type="x" class="text-danger" />
-                                        {{ trans('general.file_not_found') }}
-                                @endif
-                            </td>
-                            <td>
-                                {{ $file->filename }}
-                            </td>
-                            <td data-value="{{ (Storage::exists('private_uploads/users/'.$file->filename)) ? Storage::size('private_uploads/users/'.$file->filename) : '' }}">
-                                {{ (Storage::exists('private_uploads/users/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/users/'.$file->filename)) : '' }}
-                            </td>
-
-                            <td>
-                                @if ($file->note)
-                                    {{ $file->note }}
-                                @endif
-                            </td>
-                            <td>
-                                @if ($file->filename)
-                                    @if (Storage::exists('private_uploads/users/'.$file->filename))
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id]) }}" class="btn btn-sm btn-default">
-                                            <x-icon type="download" />
-                                            <span class="sr-only">{{ trans('general.download') }}</span>
-                                        </a>
-
-                                        <a href="{{ route('show/userfile', [$user->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                                            <x-icon type="external-link" />
-                                        </a>
-                                    @endif
-                                @endif
-                            </td>
-                            <td>{{ $file->created_at }}</td>
-
-                            <td>
-                                <a class="btn delete-asset btn-danger btn-sm hidden-print" href="{{ route('userfile.destroy', [$user->id, $file->id]) }}" data-content="Are you sure you wish to delete this file?" data-title="{{ trans('general.delete') }} {{ $file->filename }}?">
-                                    <x-icon type="delete" />
-                                    <span class="sr-only">{{ trans('general.delete') }}</span>
-                                </a>
-                            </td>
-
-
-                        </tr>
-                    @endforeach
-
-                  </tbody>
-                </table>
-              </div>
+                <x-filestable
+                        filepath="private_uploads/users/"
+                        showfile_routename="show/userfile"
+                        deletefile_routename="userfile.destroy"
+                        :object="$user" />
             </div>
           </div> <!--/ROW-->
         </div><!--/FILES-->
@@ -1135,7 +1028,6 @@
                     data-bulk-button-id="#bulkLocationsEditButton"
                     data-bulk-form-id="#locationsBulkForm"
                     data-search="true"
-                    data-show-footer="true"
                     data-side-pagination="server"
                     data-show-columns="true"
                     data-show-fullscreen="true"
@@ -1155,7 +1047,7 @@
 
           <div class="tab-pane" id="managed-users">
 
-              @include('partials.locations-bulk-actions')
+              @include('partials.users-bulk-actions')
 
 
               <table
@@ -1165,10 +1057,9 @@
                       data-pagination="true"
                       data-id-table="managedUsersTable"
                       data-toolbar="#usersBulkEditToolbar"
-                      data-bulk-button-id="#bulkUsersEditButton"
+                      data-bulk-button-id="#bulkUserEditButton"
                       data-bulk-form-id="#usersBulkForm"
                       data-search="true"
-                      data-show-footer="true"
                       data-side-pagination="server"
                       data-show-columns="true"
                       data-show-fullscreen="true"

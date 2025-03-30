@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Актива може да бъде предоставен. Този активк може да бъде изписан.',
     'processing_spinner' => 'Обработка...(Това може да отнеме време при големи файлове)',
     'optional_infos'  => 'Допълнителна информация',
-    'order_details'   => 'Информация за състоянието на поръчка'
+    'order_details'   => 'Информация за състоянието на поръчка',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

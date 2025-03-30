@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Hantidu ma jirto.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'Hantidu ma jirto.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Hantidaas ma jirto ama lama codsan karo.',
-    'assoc_users'	 	=> 'Hantidan hadda waa la hubiyay isticmaale lamana tirtiri karo Fadlan marka hore hubi hantida, ka dibna isku day mar kale in aad tirtirto. ',
+    'assoc_users'	 	 => 'Hantidan hadda waa la hubiyay isticmaale lamana tirtiri karo Fadlan marka hore hubi hantida, ka dibna isku day mar kale in aad tirtirto. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Hantida lama abuurin, fadlan isku day mar kale. :(',
         'success' 		=> 'Hantida loo sameeyay si guul leh :)',
         'success_linked' => 'Hanti leh sumad :tag si guul leh ayaa loo abuuray. <strong><a href=":link" style="color: white;">Riix halkan si aad u aragto</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Ma hubtaa inaad rabto inaad tirtirto hantidan?',
         'error'   		=> 'Waxaa jirtay arrin la tirtiray hantida Fadlan isku day mar kale.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Wax hanti ah lama dooran, markaa waxba lama tirtirin.',
         'success' 		=> 'Hantida si guul leh ayaa loo tirtiray.',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'Isticmaalahaasi waa khalad Fadlan isku day mar kale.',
         'not_available' => 'Hantidaas looma hayo hubin!',
         'no_assets_selected' => 'Waa inaad liiska ka doorataa ugu yaraan hal hanti',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

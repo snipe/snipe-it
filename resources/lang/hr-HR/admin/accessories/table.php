@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'iskaznica',
     'require_acceptance'      	=> 'Prihvaćanje',
     'title'      				=> 'Naziv dodatne opreme',
-
-
 );

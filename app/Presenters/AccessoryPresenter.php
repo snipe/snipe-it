@@ -79,27 +79,35 @@ class AccessoryPresenter extends Presenter
                 'title' => trans('general.location'),
                 'formatter' => 'locationsLinkObjFormatter',
             ], [
+                'field' => 'min_amt',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('general.min_amt'),
+                'formatter' => 'minAmtFormatter',
+                'class' => 'text-right text-padding-number-cell',
+            ], [
                 'field' => 'qty',
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('admin/accessories/general.total'),
+                'footerFormatter' => 'qtySumFormatter',
+                'class' => 'text-right text-padding-number-cell',
             ], [
-                'field' => 'remaining_qty',
+                'field' => 'remaining',
                 'searchable' => false,
                 'sortable' => false,
                 'visible' => false,
                 'title' => trans('admin/accessories/general.remaining'),
+                'footerFormatter' => 'qtySumFormatter',
+                'class' => 'text-right text-padding-number-cell',
             ],[
                 'field' => 'checkouts_count',
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => true,
                 'title' => trans('general.checked_out'),
-            ], [
-                'field' => 'min_qty',
-                'searchable' => false,
-                'sortable' => true,
-                'title' => trans('general.min_amt'),
+                'footerFormatter' => 'qtySumFormatter',
+                'class' => 'text-right text-padding-number-cell',
             ], [
                 'field' => 'purchase_date',
                 'searchable' => true,
@@ -113,7 +121,7 @@ class AccessoryPresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('general.purchase_cost'),
                 'footerFormatter' => 'sumFormatterQuantity',
-                'class' => 'text-right',
+                'class' => 'text-right text-padding-number-cell',
             ], [
                 'field' => 'order_number',
                 'searchable' => true,
@@ -158,12 +166,80 @@ class AccessoryPresenter extends Presenter
                 'title' => trans('general.change'),
                 'formatter' => 'accessoriesInOutFormatter',
             ], [
-                'field' => 'actions',
+                'field' => 'available_actions',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => false,
                 'title' => trans('table.actions'),
                 'formatter' => 'accessoriesActionsFormatter',
+            ],
+        ];
+
+        return json_encode($layout);
+    }
+
+
+    public static function assignedDataTableLayout()
+    {
+        $layout = [
+            [
+                'field' => 'id',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.id'),
+                'visible' => false,
+            ],
+            [
+                'field' => 'assigned_to.image',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.image'),
+                'visible' => true,
+                'formatter' => 'imageFormatter',
+            ],
+            [
+                'field' => 'assigned_to',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.checked_out_to'),
+                'visible' => true,
+                'formatter' => 'polymorphicItemFormatter',
+            ],
+            [
+                'field' => 'note',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.notes'),
+                'visible' => true,
+            ],
+            [
+                'field' => 'created_at',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('admin/hardware/table.checkout_date'),
+                'visible' => true,
+                'formatter' => 'dateDisplayFormatter',
+            ],
+            [
+                'field' => 'created_by',
+                'searchable' => false,
+                'sortable' => false,
+                'title' => trans('general.admin'),
+                'visible' => false,
+                'formatter' => 'usersLinkObjFormatter',
+            ],
+            [
+                'field' => 'available_actions',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => false,
+                'title' => trans('table.actions'),
+                'formatter' => 'accessoriesInOutFormatter',
             ],
         ];
 

@@ -2,12 +2,12 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Odstránený model majetku',
     'does_not_exist' => 'Model neexistuje.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
-    'no_association_fix' => 'This will break things in weird and horrible ways. Edit this asset now to assign it a model.',
-    'assoc_users'	 => 'Tento model je použítý v jednom alebo viacerých majetkoch, preto nemôže byť odstránený. Prosím odstráňte príslušný majetok a skúste odstrániť znovu. ',
-    'invalid_category_type' => 'This category must be an asset category.',
+    'no_association' => 'VAROVANIE! Model majetku pre túto položku je neplatný alebo neexistuje!',
+    'no_association_fix' => 'Tento stav môže spôsobiť nepredvídateľné problémy. Priraďte danému majetku správny model.',
+    'assoc_users'	 => 'Tento model je použitý v jednom alebo viacerých majetkoch, preto nemôže byť odstránený. Prosím odstráňte príslušný majetok a skúste odstrániť znovu. ',
+    'invalid_category_type' => 'Táto kategória musí byť kategóriou majetku.',
 
     'create' => array(
         'error'   => 'Model nebol vytovrený, prosím skúste znovu.',
@@ -33,14 +33,14 @@ return array(
 
     'bulkedit' => array(
         'error'   		=> 'Neboli zmenené žiadne polia, preto nebolo nič aktualizované.',
-        'success' 		=> 'Model successfully updated. |:model_count models successfully updated.',
-        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
+        'success' 		=> 'Model bol úspešne upravený. |:model_count modelov bolo úspešne upravených.',
+        'warn'          => 'Chystáte sa upraviť nastavenia nasledovného modelu:|Chystáte sa upraviť nastavenia nasledovných :model_count modelov:',
 
     ),
 
     'bulkdelete' => array(
         'error'   		    => 'Neboli vybrané ziadne modely, preto nebolo nič odmazané.',
-        'success' 		    => 'Model deleted!|:success_count models deleted!',
+        'success' 		    => 'Model zmazaný!|:success_count_models modelov zmazaných!',
         'success_partial' 	=> ':success_count model(y) odstránené, avšak :fail_count nebolo možné odstrániť pretože stále majú priradené majetky.'
     ),
 

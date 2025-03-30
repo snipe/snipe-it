@@ -2,12 +2,12 @@
 
 return array(
 
-    'deleted' => 'Deleted asset model',
+    'deleted' => 'Model aset yang dihapus',
     'does_not_exist' => 'Model tidak ada.',
-    'no_association' => 'WARNING! The asset model for this item is invalid or missing!',
+    'no_association' => 'PERINGATAN! Model aset untuk item ini tidak valid atau hilang!',
     'no_association_fix' => 'Ini akan merusak banyak hal dengan cara yang aneh dan mengerikan. Edit aset ini sekarang untuk menetapkannya sebagai model.',
     'assoc_users'	 => 'Saat ini model tersebut terhubung dengan 1 atau lebih dengan aset dan tidak dapat di hapus. Silahkan hapus aset terlebih dahulu, kemudian coba hapus kembali. ',
-    'invalid_category_type' => 'This category must be an asset category.',
+    'invalid_category_type' => 'Kategori ini harus berupa kategori aset.',
 
     'create' => array(
         'error'   => 'Model gagal di buat, silahkan coba kembali.',
@@ -34,7 +34,7 @@ return array(
     'bulkedit' => array(
         'error'   		=> 'Tidak ada bidang yang berubah, jadi tidak ada yang diperbarui.',
         'success' 		=> 'Model berhasil diperbarui. |:model_count model berhasil diperbarui.',
-        'warn'          => 'You are about to update the properties of the following model:|You are about to edit the properties of the following :model_count models:',
+        'warn'          => 'Anda akan memperbarui properti model berikut:|Anda akan mengedit properti dari :model_count model berikut:',
 
     ),
 

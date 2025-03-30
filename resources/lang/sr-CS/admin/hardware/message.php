@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Upozorenje: </strong> Ova imovina je trenutno označena kao nezaduživa. Ukoliko je status drugačiji, molim vas ažurirajte status imovine.',
-    'does_not_exist' 	=> 'Imovina ne postoji.',
-    'does_not_exist_var'=> 'Nije pronađena imovina za oznakom :asset_tag.',
-    'no_tag' 	        => 'Nije navedena oznaka imovine.',
+    'undeployable' 		 => '<strong>Upozorenje: </strong> Ova imovina je trenutno označena kao nezaduživa. Ukoliko je status drugačiji, molim vas ažurirajte status imovine.',
+    'does_not_exist' 	 => 'Imovina ne postoji.',
+    'does_not_exist_var' => 'Nije pronađena imovina za oznakom :asset_tag.',
+    'no_tag' 	         => 'Nije navedena oznaka imovine.',
     'does_not_exist_or_not_requestable' => 'Imovina ne postoji ili se ne može zatražiti.',
-    'assoc_users'	 	=> 'Ovaj je resurs trenutno poveren korisniku i ne može se izbrisati. Najprije proverite resurs, a zatim ponovo pokušajte brisanje. ',
+    'assoc_users'	 	 => 'Ovaj je resurs trenutno poveren korisniku i ne može se izbrisati. Najprije proverite resurs, a zatim ponovo pokušajte brisanje. ',
     'warning_audit_date_mismatch' 	=> 'Naredni datum popisa ove imovine (:next_audit_date) je pre poslednjeg datuma popisa (:last_audit_date). Molim vas izmenite datum narednog popisa.',
+    'labels_generated'   => 'Oznake su uspešno generisane.',
+    'error_generating_labels' => 'Greška prilikom generisanja oznaka.',
+    'no_assets_selected' => 'Nijedna imovina nije izabrana.',
 
     'create' => [
         'error'   		=> 'Imovina, resurs nije kreiran, pokušajte ponovo. :(',
         'success' 		=> 'Imovina, resurs uspešno kreiran. :)',
         'success_linked' => 'Imovina sa oznakom :tag je uspešno napravljena. <strong><a href=":link" style="color: white;">Kliknite ovde za pregled</a></strong>.',
+        'multi_success_linked' => 'Imovina sa oznakom :links je uspešno dodata.|:count imovine je uspešno dodato. :links.',
+        'partial_failure' => 'Imovina nije mogla biti dodata. Razlog: :failures|:count imovine nisu mogle biti dodate. Razlozi: :failures',
     ],
 
     'update' => [
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovaj resurs?',
         'error'   		=> 'Došlo je do problema s brisanjem resursa. Molim pokušajte ponovo.',
+        'assigned_to_error' => '{1}Oznaka imovine: :asset_tag je trenutno zadužena. Razduži ovaj uređaj pre brisanja.|[2,*]Oznake imovine: :asset_tag su trenutno zadužene. Razduži ove uređaje pre brisanja.',
         'nothing_updated'   => 'Nijedna imovina nije odabrana, tako da ništa nije izbrisano.',
         'success' 		=> 'Imovina je uspešno obrisana.',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'Korisnik je nevažeći. Molim pokušajte ponovo.',
         'not_available' => 'That asset is not available for checkout!',
         'no_assets_selected' => 'Morate odabrati barem jednu imovinu s popisa',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Imovina nije zadužena, molim vas pokušajte ponovo|Imovine nisu zadužene, molim vas pokušajte ponovo',
+        'success' => 'Imovina je uspešno zadužena.|Imovine su uspešno zadužene.',
     ],
 
     'checkin' => [

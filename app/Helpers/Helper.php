@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Session;
 
@@ -708,6 +709,28 @@ class Helper
 
         return $randomString;
     }
+    /**
+     * A method to be used to handle deprecations notifications, currently handling MS Teams. more can be added when needed.
+     *
+     *
+     * @author [Godfrey Martinez]
+     * @since [v7.0.14]
+     * @return array
+     */
+    public static function deprecationCheck()  : array {
+        // The check and message that the user is still using the deprecated version
+        $deprecations = [
+            'ms_teams_deprecated' => array(
+            'check' => !Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows'),
+            'message' => 'The Microsoft Teams webhook URL being used will be deprecated Jan 31st, 2025. <a class="btn btn-primary" href="' . route('settings.slack.index') . '">Change webhook endpoint</a>'),
+        ];
+
+        // if item of concern is being used and its being used with the deprecated values return the notification array.
+        if(Setting::getSettings()->webhook_selected === 'microsoft' && $deprecations['ms_teams_deprecated']['check']) {
+            return $deprecations;
+        }
+            return [];
+    }
 
     /**
      * This nasty little method gets the low inventory info for the
@@ -1123,6 +1146,7 @@ class Helper
             'png'   => 'far fa-image',
             'webp'   => 'far fa-image',
             'avif'   => 'far fa-image',
+            'svg' => 'fas fa-vector-square',
             // word
             'doc'   => 'far fa-file-word',
             'docx'   => 'far fa-file-word',
@@ -1135,7 +1159,7 @@ class Helper
             //Text
             'txt'   => 'far fa-file-alt',
             'rtf'   => 'far fa-file-alt',
-            'xml'   => 'far fa-file-alt',
+            'xml'   => 'fas fa-code',
             // Misc
             'pdf'   => 'far fa-file-pdf',
             'lic'   => 'far fa-save',
@@ -1148,41 +1172,7 @@ class Helper
         return 'far fa-file';
     }
 
-    public static function show_file_inline($filename)
-    {
-        $extension = substr(strrchr($filename, '.'), 1);
 
-        if ($extension) {
-            switch ($extension) {
-                case 'jpg':
-                case 'jpeg':
-                case 'gif':
-                case 'png':
-                case 'webp':
-                case 'avif':
-                    return true;
-                    break;
-                default:
-                    return false;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Generate a random encrypted password.
-     *
-     * @author Wes Hulette <jwhulette@gmail.com>
-     *
-     * @since 5.0.0
-     *
-     * @return string
-     */
-    public static function generateEncyrptedPassword(): string
-    {
-        return bcrypt(self::generateUnencryptedPassword());
-    }
 
     /**
      * Get a random unencrypted password.
@@ -1530,11 +1520,11 @@ class Helper
         if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
-                    return route('users.show', ['user' => $request->assigned_user]);
+                    return route('users.show', $request->assigned_user);
                 case 'location':
-                    return route('locations.show', ['location' => $request->assigned_location]);
+                    return route('locations.show', $request->assigned_location);
                 case 'asset':
-                    return route('hardware.show', ['hardware' => $request->assigned_asset]);
+                    return route('hardware.show', $request->assigned_asset);
             }
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));

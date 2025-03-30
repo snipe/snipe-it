@@ -18,8 +18,6 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
-        <div class="table-responsive">
-
           @include('partials.locations-bulk-actions')
 
           <table
@@ -32,7 +30,6 @@
                   data-bulk-button-id="#bulkLocationsEditButton"
                   data-bulk-form-id="#locationsBulkForm"
                   data-search="true"
-                  data-show-footer="true"
                   data-side-pagination="server"
                   data-show-columns="true"
                   data-show-fullscreen="true"
@@ -47,7 +44,6 @@
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
           </table>
-        </div>
       </div>
     </div>
   </div>

@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use \Auth;
 
+/**
+ * @extends Factory<User>
+ */
 class UserFactory extends Factory
 {
     /**
@@ -145,6 +148,11 @@ class UserFactory extends Factory
     public function deleteAssetModels()
     {
         return $this->appendPermission(['models.delete' => '1']);
+    }
+
+    public function viewAssetModels()
+    {
+        return $this->appendPermission(['models.view' => '1']);
     }
 
     public function viewAccessories()
@@ -355,6 +363,11 @@ class UserFactory extends Factory
     public function deletePredefinedKits()
     {
         return $this->appendPermission(['kits.delete' => '1']);
+    }
+
+    public function viewPredefinedKits()
+    {
+        return $this->appendPermission(['kits.view' => '1']);
     }
 
     public function deleteStatusLabels()

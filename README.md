@@ -1,13 +1,13 @@
 ![snipe-it-by-grok](https://github.com/snipe/snipe-it/assets/197404/b515673b-c7c8-4d9a-80f5-9fa58829a602)
 
-[![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Twitter Follow](https://img.shields.io/twitter/follow/snipeitapp.svg?style=social)](https://twitter.com/snipeitapp) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://app.codacy.com/gh/snipe/snipe-it/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) [![Tests](https://github.com/snipe/snipe-it/actions/workflows/tests.yml/badge.svg)](https://github.com/snipe/snipe-it/actions/workflows/tests.yml)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/snipe-it/localized.svg)](https://crowdin.com/project/snipe-it) [![Docker Pulls](https://img.shields.io/docker/pulls/snipe/snipe-it.svg)](https://hub.docker.com/r/snipe/snipe-it/) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/553ce52037fc43ea99149785afcfe641)](https://app.codacy.com/gh/snipe/snipe-it/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade) [![Tests](https://github.com/snipe/snipe-it/actions/workflows/tests.yml/badge.svg)](https://github.com/snipe/snipe-it/actions/workflows/tests.yml)
 [![All Contributors](https://img.shields.io/badge/all_contributors-331-orange.svg?style=flat-square)](#contributing) [![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/yZFtShAcKk)
 
 ## Snipe-IT - Open Source Asset Management System
 
 This is a FOSS project for asset management in IT Operations. Knowing who has which laptop, when it was purchased in order to depreciate it correctly, handling software licenses, etc.
 
-It is built on [Laravel 10](http://laravel.com).
+It is built on [Laravel 11](http://laravel.com).
 
 Snipe-IT is actively developed and we [release quite frequently](https://github.com/snipe/snipe-it/releases). ([Check out the live demo here](https://snipeitapp.com/demo/).)
 
@@ -16,13 +16,26 @@ Snipe-IT is actively developed and we [release quite frequently](https://github.
 
 -----
 
+### Table of Contents
+* [Installation](#installation)
+* [User's Manual](#users-manual)
+* [Bug Reports & Feature Requests](#bug-reports--feature-requests)
+* [Security](#security)
+* [Upgrading](#upgrading)
+* [Translations!](#translations-)
+* [Libraries, Modules & Related Projects](#libraries-modules--related-projects)
+* [Join the Community!](#join-the-community)
+* [Contributing](#contributing)
+* [Announcement List](#announcement-list)
+
+
+-----
+
 ### Installation
 
 For instructions on installing and configuring Snipe-IT on your server, check out the [installation manual](https://snipe-it.readme.io/docs). (Please see the [requirements documentation](https://snipe-it.readme.io/docs/requirements) for full requirements.)
 
 If you're having trouble with the installation, please check the [Common Issues](https://snipe-it.readme.io/docs/common-issues) and [Getting Help](https://snipe-it.readme.io/docs/getting-help) documentation, and search this repository's open *and* closed issues for help.
-
-<!-- [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy) -->
 
 -----
 ### User's Manual
@@ -35,20 +48,21 @@ Feel free to check out the [GitHub Issues for this project](https://github.com/s
 
 > [!IMPORTANT]  
 > **PLEASE see the [Getting Help Guidelines](https://snipe-it.readme.io/docs/getting-help) and [Common Issues](https://snipe-it.readme.io/docs/common-issues) before opening a ticket, and be sure to complete all of the questions in the Github Issue template to help us to help you as quickly as possible.**
-> 
+
 -----
+
+### Security
+
+> [!IMPORTANT]
+> **To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker.**
+-----
+
 
 ### Upgrading
 
 Please see the [upgrading documentation](https://snipe-it.readme.io/docs/upgrading) for instructions on upgrading Snipe-IT.
 
 ------
-### Announcement List
-
-To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
-
-------
-
 ### Translations!
 
 Please see the [translations documentation](https://snipe-it.readme.io/docs/translations) for information about available languages and how to add translations to Snipe-IT.
@@ -80,21 +94,37 @@ Since the release of the JSON REST API, several third-party developers have been
 - [SnipeAgent](https://github.com/ReticentRobot/SnipeAgent) by [@ReticentRobot](https://github.com/ReticentRobot) - Windows agent for Snipe-IT.
 - [Gate Pass Generator](https://github.com/cha7uraAE/snipe-it-gate-pass-system) by [@cha7uraAE](https://github.com/cha7uraAE) - A Streamlit application for generating gate passes based on hardware data from a Snipe-IT API.
 
+We also have a handful of [Google Apps scripts](https://github.com/grokability/google-apps-scripts-for-snipe-it) to help with various tasks.
+
+-----
+
+### Join the Community!
+
+- **[Join our Discord](https://discord.gg/yZFtShAcKk)!** It’s full of great people. We even wrote about it [here](https://grokstar.dev/culture/2024/06/the-unlikely-rise-of-discord-as-a-support-channel/)!
+- **Follow us on Bluesky** at [@snipeitapp.com](https://bsky.app/profile/snipeitapp.com)
+- **Follow us on Mastodon** at [hachyderm.io/@grokability](https://hachyderm.io/@grokability)
+- **Follow our blog** at [Grokstar.Dev](https://grokstar.dev)
+- **Subscribe here** on Github for notifications about new releases. (We recommend selecting "Releases" only for most users - this repo can get noisy.)
+
 -----
 
 ### Contributing
 
-Please see the documentation on [contributing and developing for Snipe-IT](https://snipe-it.readme.io/docs/contributing-overview).
+**Please refrain from submitting issues or pull requests generated by fully-automated tools. Maintainers reserve the right, at their sole discretion, to close such submissions and to block any account responsible for them.** 
 
-Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
+Contributions should follow from a human-to-human discussion in the form of an issue for the best chances of being merged into the core project. (Sometimes we might already be working on that feature, sometimes we've decided against )
+
+Please see the complete documentation on [contributing and developing for Snipe-IT](https://snipe-it.readme.io/docs/contributing-overview).
+
+This project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 The ERD is available [online here](https://drawsql.app/templates/snipe-it).
 
-[Here is a list](CONTRIBUTORS.md) of the wonderful people that have contributed to the Snipe-IT.
+Be sure to check out all of the [amazing people](CONTRIBUTORS.md) that have contributed to Snipe-IT over the years!
 
------
+------
+### Announcement List
 
-### Security
+To be notified of important news (such as new releases, security advisories, etc), [sign up for our list](http://eepurl.com/XyZKz). We'll never sell or give away your info, and we'll only email you when it's important.
 
-> [!IMPORTANT]
-> **To report a security vulnerability, please email security@snipeitapp.com instead of using the issue tracker.**
+

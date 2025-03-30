@@ -13,5 +13,10 @@ return [
         'user_state' => 'Województwo użytkownika',
         'user_country' => 'Kraj użytkownika',
         'user_zip' => 'Kod pocztowy użytkownika'
-    ]
+    ],
+    'open_saved_template' => 'Otwórz zapisany szablon',
+    'save_template' =>  'Zapisz szablon',
+    'select_a_template' => 'Wybierz szablon',
+    'template_name' => 'Nazwa szablonu',
+    'update_template' => 'Aktualizuj szablon',
 ];

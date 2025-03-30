@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Статусот е задолжливо. Средството може да се задолжи.',
     'processing_spinner' => 'Се обработува... (Ова може да потрае за поголеми датотеки)',
     'optional_infos'  => 'Опционални информации',
-    'order_details'   => 'Информации за набавка'
+    'order_details'   => 'Информации за набавка',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

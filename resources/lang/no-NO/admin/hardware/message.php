@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utplasserbar. Vennligst endre status for eiendel dette har endret seg.',
-    'does_not_exist' 	=> 'Eiendel eksisterer ikke.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Advarsel:</strong> Denne eiendelen er merket som ikke utplasserbar. Vennligst endre status for eiendel dette har endret seg.',
+    'does_not_exist' 	 => 'Eiendel eksisterer ikke.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'Eiendelen eksisterer ikke eller kan ikke forespørres.',
-    'assoc_users'	 	=> 'Denne eiendelen er merket som utsjekket til en bruker og kan ikke slettes. Vennligst sjekk inn eiendelen først, og forsøk sletting på nytt. ',
+    'assoc_users'	 	 => 'Denne eiendelen er merket som utsjekket til en bruker og kan ikke slettes. Vennligst sjekk inn eiendelen først, og forsøk sletting på nytt. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Eiendelen ble ikke opprettet, prøv igjen :(',
         'success' 		=> 'Eiendelen ble opprettet :)',
         'success_linked' => 'Eiendelen med taggen :tag ble opprettet. <strong><a href=":link" style="color: white;">Klikk her for å vise</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -67,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',
         'error'   		=> 'Det oppstod et problem under sletting av eiendel. Vennligst prøv igjen.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Ingen assets ble valgt, så ingenting ble slettet.',
         'success' 		=> 'Vellykket sletting av eiendel.',
     ],
@@ -77,6 +83,11 @@ return [
         'user_does_not_exist' => 'Denne brukeren er ugyldig. Vennligst prøv igjen.',
         'not_available' => 'Den eiendelen er ikke tilgjengelig til å sjekkes ut!',
         'no_assets_selected' => 'Du må velge minst én enhet fra listen',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
     ],
 
     'checkin' => [

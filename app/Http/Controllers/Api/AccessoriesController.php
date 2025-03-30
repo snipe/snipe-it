@@ -13,6 +13,7 @@ use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Accessory;
 use App\Models\Company;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -137,7 +138,6 @@ class AccessoriesController extends Controller
      */
     public function store(StoreAccessoryRequest $request)
     {
-        $this->authorize('create', Accessory::class);
         $accessory = new Accessory;
         $accessory->fill($request->all());
         $accessory = $request->handleImages($accessory);
@@ -185,42 +185,33 @@ class AccessoriesController extends Controller
 
 
     /**
-     * Display the specified resource.
+     * Get the list of checkouts for a specific accessory
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return  | array
      */
-    public function checkedout($id, Request $request)
+    public function checkedout(Request $request, $id)
     {
         $this->authorize('view', Accessory::class);
 
         $accessory = Accessory::with('lastCheckout')->findOrFail($id);
-        if (! Company::isCurrentUserHasAccess($accessory)) {
-            return ['total' => 0, 'rows' => []];
-        }
-
         $offset = request('offset', 0);
         $limit = request('limit', 50);
 
-        $accessory_checkouts = $accessory->checkouts;
-        $total = $accessory_checkouts->count();
+        // Total count of all checkouts for this asset
+        $accessory_checkouts = $accessory->checkouts();
 
-        if ($total < $offset) {
-            $offset = 0;
-        }
-
-        $accessory_checkouts = $accessory->checkouts()->skip($offset)->take($limit)->get();
-
+        // Check for search text in the request
         if ($request->filled('search')) {
-            
-            $accessory_checkouts = $accessory->checkouts()->TextSearch($request->input('search'))
-                                         ->get();
-            $total = $accessory_checkouts->count();
+            $accessory_checkouts = $accessory_checkouts->TextSearch($request->input('search'));
         }
 
-        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory, $accessory_checkouts, $total);
+        $total = $accessory_checkouts->count();
+        $accessory_checkouts = $accessory_checkouts->skip($offset)->take($limit)->get();
+
+        return (new AccessoriesTransformer)->transformCheckedoutAccessory($accessory_checkouts, $total);
     }
 
 
@@ -231,7 +222,7 @@ class AccessoriesController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(ImageUploadRequest $request, $id)
     {
@@ -253,7 +244,7 @@ class AccessoriesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
@@ -288,14 +279,17 @@ class AccessoriesController extends Controller
         $accessory->checkout_qty = $request->input('checkout_qty', 1);
 
         for ($i = 0; $i < $accessory->checkout_qty; $i++) {
-            AccessoryCheckout::create([
+
+            $accessory_checkout = new AccessoryCheckout([
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
-                'created_by' => auth()->id(),
                 'assigned_to' => $target->id,
                 'assigned_type' => $target::class,
                 'note' => $request->input('note'),
             ]);
+
+            $accessory_checkout->created_by = auth()->id();
+            $accessory_checkout->save();
         }
 
         // Set this value to be able to pass the qty through to the event
@@ -325,21 +319,13 @@ class AccessoriesController extends Controller
         $accessory = Accessory::find($accessory_checkout->accessory_id);
         $this->authorize('checkin', $accessory);
 
-        $logaction = $accessory->logCheckin(User::find($accessory_checkout->assigned_to), $request->input('note'));
+        $accessory->logCheckin(User::find($accessory_checkout->assigned_to), $request->input('note'));
 
         // Was the accessory updated?
         if ($accessory_checkout->delete()) {
             if (! is_null($accessory_checkout->assigned_to)) {
                 $user = User::find($accessory_checkout->assigned_to);
             }
-
-            $data['log_id'] = $logaction->id;
-            $data['first_name'] = $user->first_name;
-            $data['last_name'] = $user->last_name;
-            $data['item_name'] = $accessory->name;
-            $data['checkin_date'] = $logaction->created_at;
-            $data['item_tag'] = '';
-            $data['note'] = $logaction->note;
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
         }

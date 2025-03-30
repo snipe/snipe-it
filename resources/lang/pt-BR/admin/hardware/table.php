@@ -25,7 +25,6 @@ return [
     'image'		    => 'Imagem do equipamento',
     'days_without_acceptance' => 'Dias sem que fosse aceito',
     'monthly_depreciation' => 'Depreciação Mensal',
-    'assigned_to'    => 'Atribuído a',
     'requesting_user' => 'Usuário solicitante',
     'requested_date' => 'Data de Solicitação',
     'changed'       => 'Alterado',

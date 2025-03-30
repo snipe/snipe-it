@@ -23,7 +23,7 @@ return [
     'depreciation'	    => 'ការរំលោះ',
     'depreciates_on'	=> 'ទម្លាក់តម្លៃលើ',
     'default_location'	=> 'ទីតាំងលំនាំដើម',
-    'default_location_phone' => 'Default Location Phone',
+    'default_location_phone' => 'ទូរស័ព្ទទីតាំងលំនាំដើម',
     'eol_date'			=> 'កាលបរិច្ឆេទនៃ EOL',
     'eol_rate'			=> 'អត្រា EOL',
     'expected_checkin'  => 'កាលបរិច្ឆេទដែលរំពឹងទុកនឹង Checkin',
@@ -39,8 +39,8 @@ return [
     'order'				=> 'លេខបញ្ជាទិញ',
     'qr'				=> 'QR Code',
     'requestable'		=> 'អ្នកប្រើប្រាស់អាចស្នើសុំ Asset នេះ',
-    'redirect_to_all'   => 'Return to all :type',
-    'redirect_to_type'   => 'Go to :type',
+    'redirect_to_all'   => 'ត្រឡប់ទៅ ទាំងអស់ វិញ ៖ ប្រភេទ',
+    'redirect_to_type'   => 'ចូលទៅកាន់៖ ប្រភេទ',
     'redirect_to_checked_out_to'   => 'Go to Checked Out to',
     'select_statustype'	=> 'ជ្រើសរើសប្រភេទស្ថានភាព',
     'serial'			=> 'Serial',
@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'That status is deployable. This asset can be checked out.',
     'processing_spinner' => 'កំពុងដំណើរការ... (វាអាចចំណាយពេលបន្តិចលើឯកសារធំ)',
     'optional_infos'  => 'ព័ត៌មានមិនសូវចាំបាច់',
-    'order_details'   => 'ព័ត៌មានពាក់ព័ន្ធនឹងការបញ្ជាទិញ'
+    'order_details'   => 'ព័ត៌មានពាក់ព័ន្ធនឹងការបញ្ជាទិញ',
+    'calc_eol'    => 'ប្រសិនបើទុកជាមោឃៈកាលបរិច្ឆេទ EOL ប្រើការគណនា EOL ដោយស្វ័យប្រវត្តិដោយផ្អែកលើកាលបរិច្ឆេទទិញ និងអត្រា EOL ។',
 ];

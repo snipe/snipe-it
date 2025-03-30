@@ -258,6 +258,8 @@ class ConsumablesController extends Controller
 
         $this->authorize('checkout', $consumable);
 
+        $consumable->checkout_qty = $request->input('checkout_qty', 1);
+
         // Make sure there is at least one available to checkout
         if ($consumable->numRemaining() <= 0) {
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.checkout.unavailable')));
@@ -267,6 +269,12 @@ class ConsumablesController extends Controller
         if (!$consumable->category){
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.invalid_item_category_single', ['type' => trans('general.consumable')])));
         }
+
+        // Make sure there is at least one available to checkout
+        if ($consumable->numRemaining() <= 0 || $consumable->checkout_qty > $consumable->numRemaining()) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.checkout.unavailable', ['requested' => $consumable->checkout_qty, 'remaining' => $consumable->numRemaining() ])));
+        }
+
 
 
         // Check if the user exists - @TODO:  this should probably be handled via validation, not here??
@@ -278,7 +286,8 @@ class ConsumablesController extends Controller
         // Update the consumable data
         $consumable->assigned_to = $request->input('assigned_to');
 
-        $consumable->users()->attach($consumable->id,
+        for ($i = 0; $i < $consumable->checkout_qty; $i++) {
+            $consumable->users()->attach($consumable->id,
                 [
                     'consumable_id' => $consumable->id,
                     'created_by' => $user->id,
@@ -286,6 +295,8 @@ class ConsumablesController extends Controller
                     'note' => $request->input('note'),
                 ]
             );
+        }
+
 
         event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
 

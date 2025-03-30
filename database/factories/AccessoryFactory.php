@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Accessory;
-use App\Models\AccessoryCheckout;
 use App\Models\Category;
 use App\Models\Location;
 use App\Models\Manufacturer;
@@ -154,6 +153,21 @@ class AccessoryFactory extends Factory
                 'assigned_to' => $user->id ?? User::factory()->create()->id,
                 'assigned_type' => User::class,
             ]);
+        });
+    }
+
+    public function checkedOutToUsers(array $users)
+    {
+        return $this->afterCreating(function (Accessory $accessory) use ($users) {
+            foreach ($users as $user) {
+                $accessory->checkouts()->create([
+                    'accessory_id' => $accessory->id,
+                    'created_at' => Carbon::now(),
+                    'created_by' => 1,
+                    'assigned_to' => $user->id,
+                    'assigned_type' => User::class,
+                ]);
+            }
         });
     }
 }

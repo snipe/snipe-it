@@ -13,5 +13,10 @@ return [
         'user_state' => 'crwdns11874:0crwdne11874:0',
         'user_country' => 'crwdns11876:0crwdne11876:0',
         'user_zip' => 'crwdns11878:0crwdne11878:0'
-    ]
+    ],
+    'open_saved_template' => 'crwdns12818:0crwdne12818:0',
+    'save_template' =>  'crwdns12820:0crwdne12820:0',
+    'select_a_template' => 'crwdns12822:0crwdne12822:0',
+    'template_name' => 'crwdns12824:0crwdne12824:0',
+    'update_template' => 'crwdns12826:0crwdne12826:0',
 ];

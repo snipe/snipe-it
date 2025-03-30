@@ -25,7 +25,6 @@ return [
     'image'		    => 'Obrázek zařízení',
     'days_without_acceptance' => 'Dní bez schválení',
     'monthly_depreciation' => 'Měsíční odpisy',
-    'assigned_to'    => 'Přiděleno',
     'requesting_user' => 'Požaduje uživatel',
     'requested_date' => 'Požadované datum',
     'changed'       => 'Upraveno',

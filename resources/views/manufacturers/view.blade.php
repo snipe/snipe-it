@@ -79,6 +79,19 @@
               {{ trans('general.consumables') }}
               {!! ($manufacturer->consumables->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->consumables->count()).'</badge>' : '' !!}
             </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#components" data-toggle="tab">
+
+             <span class="hidden-lg hidden-md">
+               <x-icon type="components" class="fa-2x" />
+            </span>
+            <span class="hidden-xs hidden-sm">
+              {{ trans('general.components') }}
+              {!! ($manufacturer->components->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($manufacturer->components->count()).'</badge>' : '' !!}
+            </span>
 
           </a>
         </li>
@@ -186,12 +199,35 @@
                   class="table table-striped snipe-table"
                   data-url="{{ route('api.consumables.index', ['manufacturer_id' => $manufacturer->id]) }}"
                   data-export-options='{
-              "fileName": "export-manufacturers-{{ str_slug($manufacturer->name) }}-consumabled-{{ date('Y-m-d') }}",
+              "fileName": "export-manufacturers-{{ str_slug($manufacturer->name) }}-consumables-{{ date('Y-m-d') }}",
               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
           </table>
 
+        </div> <!-- /.tab-pan consumables-->
 
+        <div class="tab-pane fade" id="components">
+
+          <table
+                  data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
+                  data-cookie-id-table="componentsTable"
+                  data-pagination="true"
+                  data-id-table="componentsTable"
+                  data-search="true"
+                  data-show-footer="true"
+                  data-side-pagination="server"
+                  data-show-columns="true"
+                  data-show-export="true"
+                  data-show-refresh="true"
+                  data-sort-order="asc"
+                  id="componentsTable"
+                  class="table table-striped snipe-table"
+                  data-url="{{ route('api.components.index', ['manufacturer_id' => $manufacturer->id]) }}"
+                  data-export-options='{
+              "fileName": "export-manufacturers-{{ str_slug($manufacturer->name) }}-components-{{ date('Y-m-d') }}",
+              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+              }'>
+          </table>
 
         </div> <!-- /.tab-pan consumables-->
 

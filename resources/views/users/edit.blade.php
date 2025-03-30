@@ -86,28 +86,16 @@
             <div class="row">
               <div class="col-md-12">
                 <!-- First Name -->
-                <div class="form-group {{ $errors->has('first_name') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="first_name">{{ trans('general.first_name') }}</label>
-                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'first_name')) ? ' required' : '' }}">
-                    <input class="form-control" type="text" name="first_name" id="first_name" value="{{ old('first_name', $user->first_name) }}" maxlength="191" />
-                    {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                  </div>
-                </div>
+                 @include('partials.forms.edit.name-first')
 
                 <!-- Last Name -->
-                <div class="form-group {{ $errors->has('last_name') ? 'has-error' : '' }}">
-                  <label class="col-md-3 control-label" for="last_name">{{ trans('general.last_name') }} </label>
-                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'last_name')) ? ' required' : '' }}">
-                    <input class="form-control" type="text" name="last_name" id="last_name" value="{{ old('last_name', $user->last_name) }}" maxlength="191" />
-                    {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                  </div>
-                </div>
+                @include('partials.forms.edit.name-last')
 
                 <!-- Username -->
                 <div class="form-group {{ $errors->has('username') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="username">{{ trans('admin/users/table.username') }}</label>
 
-                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}">
+                  <div class="col-md-6">
                     @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone'))
                       <input
                         class="form-control"
@@ -118,6 +106,7 @@
                         autocomplete="off"
                         maxlength="191"
                         readonly
+                        {{  (Helper::checkIfRequired($user, 'username')) ? ' required' : '' }}
                         onfocus="this.removeAttribute('readonly');"
                         {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       >
@@ -150,7 +139,7 @@
                   <label class="col-md-3 control-label" for="password">
                     {{ trans('admin/users/table.password') }}
                   </label>
-                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'password')) ? ' required' : '' }}">
+                  <div class="col-md-6">
                     @if ($user->ldap_import!='1' || str_contains(Route::currentRouteName(), 'clone') )
                       <input
                         type="password"
@@ -161,6 +150,7 @@
                         maxlength="500"
                         autocomplete="off"
                         readonly
+                        {{  ((Helper::checkIfRequired($user, 'password')) && (!$user->id)) ? ' required' : '' }}
                         onfocus="this.removeAttribute('readonly');"
                         {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}>
                     @else
@@ -183,7 +173,7 @@
                   <label class="col-md-3 control-label" for="password_confirmation">
                     {{ trans('admin/users/table.password_confirm') }}
                   </label>
-                  <div class="col-md-6{{  ((Helper::checkIfRequired($user, 'password_confirmation')) && (!$user->id)) ? ' required' : '' }}">
+                  <div class="col-md-6">
                     <input
                     type="password"
                     name="password_confirmation"
@@ -194,6 +184,7 @@
                     autocomplete="off"
                     aria-label="password_confirmation"
                     readonly
+                    {{  (!$user->id) ? ' required' : '' }}
                     onfocus="this.removeAttribute('readonly');"
                     {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                     >
@@ -222,7 +213,7 @@
                               @elseif ($user->id === Auth::user()->id)
                                   <!-- disallow the user from editing their own login status -->
                                   <label class="form-control form-control--disabled">
-                                      {{ Form::checkbox('activated', '1', old('activated', $user->activated), ['disabled' => true, 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
+                                      <input type="checkbox" name="activated" value="1" checked disabled aria-label="activated">
                                       {{ trans('admin/users/general.activated_help_text') }}
                                   </label>
                                   <p class="text-warning">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
@@ -237,11 +228,10 @@
                           </div>
                   </div>
 
-
                   <!-- Email -->
                 <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                   <label class="col-md-3 control-label" for="email">{{ trans('admin/users/table.email') }} </label>
-                  <div class="col-md-6{{  (Helper::checkIfRequired($user, 'email')) ? ' required' : '' }}">
+                  <div class="col-md-6">
                     <input
                       class="form-control"
                       type="text"
@@ -252,6 +242,7 @@
                       {{ ((config('app.lock_passwords') && ($user->id)) ? ' disabled' : '') }}
                       autocomplete="off"
                       readonly
+                      {{  (Helper::checkIfRequired($user, 'email')) ? ' required' : '' }}
                       onfocus="this.removeAttribute('readonly');">
                     @if (config('app.lock_passwords') && ($user->id))
                     <p class="help-block">{{ trans('admin/users/table.lock_passwords') }}</p>
@@ -268,7 +259,7 @@
                           <div class="col-md-8 col-md-offset-3">
                               <label class="form-control form-control--disabled">
 
-                                  {{ Form::checkbox('email_user', '1', old('email_user'), ['id' => "email_user_checkbox", 'aria-label'=>'email_user']) }}
+                                  <input type="checkbox" name="email_user" value="1" id="email_user_checkbox" @checked(old('email_user')) aria-label="email_user">
 
                                   {{ trans('admin/users/general.email_user_creds_on_create') }}
                               </label>

@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'Aqoonsi',
     'require_acceptance'      	=> 'Ogolaanshaha',
     'title'      				=> 'Magaca dheeriga ah',
-
-
 );

@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Attenzione: </strong> Questo Bene è stato marcato come non distribuibile. Se lo stato del Bene è cambiato si prega di aggiornarlo.',
-    'does_not_exist' 	=> 'Questo Asset non esiste.',
-    'does_not_exist_var'=> 'Bene con tag :asset_tag non trovato.',
-    'no_tag' 	        => 'Nessun tag del Bene è stato fornito.',
+    'undeployable' 		 => '<strong>Attenzione: </strong> Questo Bene è stato marcato come non distribuibile. Se lo stato del Bene è cambiato si prega di aggiornarlo.',
+    'does_not_exist' 	 => 'Questo Asset non esiste.',
+    'does_not_exist_var' => 'Bene con tag :asset_tag non trovato.',
+    'no_tag' 	         => 'Nessun tag del Bene è stato fornito.',
     'does_not_exist_or_not_requestable' => 'Questo bene non esiste o non è disponibile.',
-    'assoc_users'	 	=> 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
+    'assoc_users'	 	 => 'Questo asset è stato assegnato ad un Utente e non può essere cancellato. Per favore Riassegnalo in magazzino,e dopo riprova a cancellarlo.',
     'warning_audit_date_mismatch' 	=> 'La prossima data d\'inventario di questo Bene (:next_audit_date) precede l\'ultima data d\'inventario (:last_audit_date). Si prega di aggiornare la prossima data d\'inventario.',
+    'labels_generated'   => 'Etichette generate con successo.',
+    'error_generating_labels' => 'Errore durante la generazione delle etichette.',
+    'no_assets_selected' => 'Nessun Bene selezionato.',
 
     'create' => [
         'error'   		=> 'L\'asset non è stato creato, riprova per favore. :(',
         'success' 		=> 'L\'asset è stato creato con successo. :)',
         'success_linked' => 'Bene creato con tag :tag . <strong><a href=":link" style="color: white;">Clicca per vedere</a></strong>.',
+        'multi_success_linked' => 'Il bene con tag :links è stato creato con successo.|:count beni sono stati creati con successo. :links.',
+        'partial_failure' => 'Non è stato possibile creare un bene. Motivo: :failures|Non è stato possibile creare :count beni. Motivi: :failures',
     ],
 
     'update' => [
@@ -67,21 +72,27 @@ return [
     'delete' => [
         'confirm'   	=> 'Sei sicuro di voler eliminare questo bene?',
         'error'   		=> 'C\'è stato un problema durante la cancellazione del bene. Riprova per favore.',
+        'assigned_to_error' => '{1}Il tag: :asset_tag è assegnato. Effettua il check in del dispositivo prima di cancellarlo.|[2,*] :asset_tag sono assegnati. Effettua il check-in dei dispositivi prima di cancellarli.',
         'nothing_updated'   => 'Nessun patrimonio è stato selezionato, quindi niente è stato eliminato.',
         'success' 		=> 'Il bene è stato eliminato con successo.',
     ],
 
     'checkout' => [
-        'error'   		=> 'Il bene non è stato estratto, per favore riprova',
-        'success' 		=> 'Il bene è stato estratto con successo.',
+        'error'   		=> 'Il bene non è stato assegnato, per favore riprova',
+        'success' 		=> 'Il bene è stato assegnato con successo.',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
-        'not_available' => 'Questo prodotto non è disponibile per il checkout!',
-        'no_assets_selected' => 'È necessario selezionare almeno una risorsa dall\'elenco',
+        'not_available' => 'Questo Bene non è disponibile per l\'assegnazione!',
+        'no_assets_selected' => 'Devi selezionare almeno un Bene dall\'elenco',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'L\'assegnazione non è andata a buon fine, riprova|Le assegnazioni non sono andate a buon fine, riprova',
+        'success' => 'Bene assegnato correttamente.|Beni assegnati correttamente.',
     ],
 
     'checkin' => [
-        'error'   		=> 'Il bene non è stato registrato, per favore riprova',
-        'success' 		=> 'Il bene è stato registrato con successo.',
+        'error'   		=> 'Il Bene non è stato restituito, riprova',
+        'success' 		=> 'Bene restituito con successo.',
         'user_does_not_exist' => 'Questo utente non è valido. Riprova.',
         'already_checked_in'  => 'Il prodotto è già rientrato.',
 
@@ -90,7 +101,7 @@ return [
     'requests' => [
         'error'   		=> 'L\'asset non è stato richiesto, si prega di riprovare',
         'success' 		=> 'Asset richiesto con successo.',
-        'canceled'      => 'Richiesta di checkout cancellata con successo',
+        'canceled'      => 'Richiesta di assegnazione annullata con successo',
     ],
 
 ];

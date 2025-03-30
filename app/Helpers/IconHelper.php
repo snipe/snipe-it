@@ -59,6 +59,8 @@ class IconHelper
                 return 'fas fa-cog';
             case 'angle-left':
                 return 'fas fa-angle-left';
+            case 'angle-right':
+                return 'fas fa-angle-right';
             case 'warning':
                 return 'fas fa-exclamation-triangle';
             case 'kits':
@@ -184,7 +186,11 @@ class IconHelper
                 return 'fa-regular fa-id-card';
             case 'department' :
                 return 'fa-solid fa-building-user';
-
+            case 'home' :
+                return 'fa-solid fa-house';
+            case 'note':
+            case 'notes':
+                return 'fas fa-sticky-note';
         }
     }
 }

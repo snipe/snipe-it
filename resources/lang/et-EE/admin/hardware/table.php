@@ -25,7 +25,6 @@ return [
     'image'		    => 'Seadme pilt',
     'days_without_acceptance' => 'Päeva ilma vastuvõtmiseta',
     'monthly_depreciation' => 'Igakuine amortatsioon',
-    'assigned_to'    => 'Väljastatud kasutajale',
     'requesting_user' => 'Taotlev kasutaja',
     'requested_date' => 'Taotletav kuupäev',
     'changed'       => 'Muudetud',

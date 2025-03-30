@@ -59,5 +59,6 @@ return [
     'asset_deployable' => 'Deze status is uitgeefbaar. Dit Asset kan uitgegeven worden.',
     'processing_spinner' => 'Verwerken... (Dit kan enige tijd duren bij grote bestanden)',
     'optional_infos'  => 'Optionele informatie',
-    'order_details'   => 'Bestelling Gerelateerde Informatie'
+    'order_details'   => 'Bestelling Gerelateerde Informatie',
+    'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',
 ];

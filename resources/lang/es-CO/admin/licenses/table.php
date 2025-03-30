@@ -6,7 +6,7 @@ return array(
     'checkout'   		=> 'Entrada/Salida',
     'deleted_at'        => 'Eliminado el',
     'id'      			=> 'ID',
-    'license_email'   	=> 'Email de licencia',
+    'license_email'   	=> 'Correo electrónico de la licencia',
     'license_name'   	=> 'Licenciado a',
     'purchase_date'   	=> 'Fecha de compra',
     'purchased'   		=> 'Comprado',

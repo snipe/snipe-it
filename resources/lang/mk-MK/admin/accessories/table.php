@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'ID',
     'require_acceptance'      	=> 'Прифаќање',
     'title'      				=> 'Име на додаток',
-
-
 );

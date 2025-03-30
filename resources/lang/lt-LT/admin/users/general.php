@@ -19,6 +19,8 @@ return [
     'print_assigned'    => 'Spausdinti išduotą',
     'email_assigned'    => 'El. paštu nusiųsti išduoto turto sąrašą',
     'user_notified'     => 'Naudotojui el. paštu išsiųstas jam priskirtų daiktų sąrašas.',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Įtraukti šį naudotoją, kai automatiškai priskiriamos tinkamos licencijos',
     'auto_assign_help'  => 'Praleisti šį naudotoją, kai automatiškai priskiriamos licencijos',
     'software_user'     => 'Programinė įranga išduota: :name',

@@ -14,11 +14,13 @@ use App\Http\Transformers\UsersTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Accessory;
+use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -42,13 +44,14 @@ class UsersController extends Controller
 
         $users = User::select([
             'users.activated',
-            'users.created_by',
             'users.address',
             'users.avatar',
             'users.city',
             'users.company_id',
             'users.country',
+            'users.created_by',
             'users.created_at',
+            'users.updated_at',
             'users.deleted_at',
             'users.department_id',
             'users.email',
@@ -67,7 +70,6 @@ class UsersController extends Controller
             'users.state',
             'users.two_factor_enrolled',
             'users.two_factor_optin',
-            'users.updated_at',
             'users.username',
             'users.zip',
             'users.remote',
@@ -79,7 +81,16 @@ class UsersController extends Controller
             'users.website',
 
         ])->with('manager', 'groups', 'userloc', 'company', 'department', 'assets', 'licenses', 'accessories', 'consumables', 'createdBy', 'managesUsers', 'managedLocations')
-            ->withCount('assets as assets_count', 'licenses as licenses_count', 'accessories as accessories_count', 'consumables as consumables_count', 'managesUsers as manages_users_count', 'managedLocations as manages_locations_count');
+            ->withCount([
+                'assets as assets_count' => function(Builder $query) {
+                    $query->withoutTrashed();
+                },
+                'licenses as licenses_count',
+                'accessories as accessories_count',
+                'consumables as consumables_count',
+                'managesUsers as manages_users_count',
+                'managedLocations as manages_locations_count'
+            ]);
 
 
         if ($request->filled('search') != '') {
@@ -255,6 +266,7 @@ class UsersController extends Controller
                         'groups',
                         'activated',
                         'created_at',
+                        'updated_at',
                         'two_factor_enrolled',
                         'two_factor_optin',
                         'last_login',
@@ -281,6 +293,7 @@ class UsersController extends Controller
                         'autoassign_licenses',
                         'website',
                         'locale',
+                        'notes',
                     ];
 
                 $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'first_name';
@@ -370,6 +383,7 @@ class UsersController extends Controller
 
         $user = new User;
         $user->fill($request->all());
+        $user->company_id = Company::getIdForCurrentUser($request->input('company_id'));
         $user->created_by = auth()->id();
 
         if ($request->has('permissions')) {
@@ -451,6 +465,10 @@ class UsersController extends Controller
 
             $user->fill($request->all());
 
+            if ($request->filled('company_id')) {
+                $user->company_id = Company::getIdForCurrentUser($request->input('company_id'));
+            }
+
             if ($user->id == $request->input('manager_id')) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, 'You cannot be your own manager'));
             }
@@ -473,10 +491,11 @@ class UsersController extends Controller
                 $user->permissions = $permissions_array;
             }
 
-            // Update the location of any assets checked out to this user
-            Asset::where('assigned_type', User::class)
-                ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
-
+            if($request->has('location_id')) {
+                // Update the location of any assets checked out to this user
+                Asset::where('assigned_type', User::class)
+                    ->where('assigned_to', $user->id)->update(['location_id' => $request->input('location_id', null)]);
+            }
             app('App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'image', 'avatars', 'avatar');
 
             if ($user->save()) {

@@ -25,7 +25,6 @@ return [
     'image'		    => 'Asset afbeelding',
     'days_without_acceptance' => 'Dagen zonder acceptatie',
     'monthly_depreciation' => 'Maandelijkse afschrijving',
-    'assigned_to'    => 'Toegewezen aan',
     'requesting_user' => 'Verzoekende gebruiker',
     'requested_date' => 'Aangevraagde datum',
     'changed'       => 'Gewijzigd',

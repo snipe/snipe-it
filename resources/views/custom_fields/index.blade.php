@@ -87,13 +87,15 @@
                 @endcan
 
                 @can('delete', $fieldset)
-                {{ Form::open(['route' => array('fieldsets.destroy', $fieldset->id), 'method' => 'delete','style' => 'display:inline-block']) }}
+                <form method="POST" action="{{ route('fieldsets.destroy', $fieldset->id) }}" accept-charset="UTF-8" style="display:inline-block">
+                  {{ method_field('DELETE') }}
+                  @csrf
                   @if($fieldset->models->count() > 0)
                   <button type="submit" class="btn btn-danger btn-sm disabled" data-tooltip="true" title="{{ trans('general.cannot_be_deleted') }}" disabled><i class="fas fa-trash"></i></button>
                   @else
                   <button type="submit" class="btn btn-danger btn-sm" data-tooltip="true" title="{{ trans('general.delete') }}"><i class="fas fa-trash"></i></button>
                   @endif
-                {{ Form::close() }}
+                </form>
                 @endcan
                   </nobr>
               </td>
@@ -125,7 +127,6 @@
       </div><!-- /.box-header -->
       <div class="box-body">
 
-        <div class="table-responsive">
         <table
                 data-cookie-id-table="customFieldsTable"
                 data-id-table="customFieldsTable"
@@ -149,17 +150,56 @@
               <th data-sortable="true" data-searchable="true">{{ trans('admin/custom_fields/general.unique') }}</th>
               <th data-sortable="true" data-visible="false">{{ trans('admin/custom_fields/general.db_field') }}</th>
               <th data-sortable="true" data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
-              <th data-sortable="true"><i class="fa fa-lock" aria-hidden="true"></i>
+              <th data-sortable="true" data-tooltip="{{ trans('admin/custom_fields/general.encrypted') }}"><i
+                        class="fa fa-lock" aria-hidden="true"></i>
                 <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.encrypted') }}</span>
               </th>
-              <th data-sortable="true" class="text-center"><i class="fa fa-list" aria-hidden="true"></i>
+              <th data-sortable="true" class="text-center"
+                  data-tooltip="{{ trans('admin/custom_fields/general.show_in_listview_short') }}"><i class="fa fa-list"
+                                                                                                      aria-hidden="true"></i>
                 <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.show_in_listview_short') }}</span>
               </th>
-              <th data-visible="false" data-sortable="true" class="text-center"><i class="fa fa-eye" aria-hidden="true"><span class="sr-only">Visible to User</span></i></th>
-              <th data-sortable="true" data-searchable="true" class="text-center"><i class="fa fa-envelope" aria-hidden="true"><span class="sr-only">{{ trans('admin/custom_fields/general.show_in_email_short') }}</span></i></th>
-              <th data-sortable="true" data-searchable="true" class="text-center"><i class="fa fa-laptop fa-fw" aria-hidden="true"><span class="sr-only">{{ trans('admin/custom_fields/general.show_in_requestable_list_short') }}</span></i></th>
-              <th data-sortable="true" data-searchable="true" class="text-center"><i class="fa-solid fa-fingerprint"><span class="sr-only">{{ trans('admin/custom_fields/general.unique') }}</span></i></th>
+              <th data-visible="false" data-sortable="true" class="text-center"
+                  data-tooltip="{{ trans('admin/custom_fields/general.display_in_user_view_table') }}"><i
+                        class="fa fa-eye"
+                        aria-hidden="true"><span
+                          class="sr-only">{{ trans('admin/custom_fields/general.display_in_user_view_table') }}</span></i>
+              </th>
+              <th data-sortable="true" data-searchable="true" class="text-center"
+                  data-tooltip="{{ trans('admin/custom_fields/general.show_in_email_short') }}"><i
+                        class="fa fa-envelope" aria-hidden="true"><span
+                          class="sr-only">{{ trans('admin/custom_fields/general.show_in_email_short') }}</span></i></th>
+              <th data-sortable="true" data-searchable="true" class="text-center"
+                  data-tooltip="{{ trans('admin/custom_fields/general.show_in_requestable_list_short') }}"><i
+                        class="fa fa-laptop fa-fw" aria-hidden="true"><span
+                          class="sr-only">{{ trans('admin/custom_fields/general.show_in_requestable_list_short') }}</span></i>
+              </th>
+              <th data-sortable="true" data-searchable="true" class="text-center"
+                  data-tooltip="{{ trans('admin/custom_fields/general.unique') }}"><i
+                        class="fa-solid fa-fingerprint"><span
+                          class="sr-only">{{ trans('admin/custom_fields/general.unique') }}</span></i></th>
+
+
+              <th data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
+                  data-tooltip="{{ trans('admin/custom_fields/general.display_checkin') }}">
+                <x-icon type="checkin" />
+                <span class="sr-only">
+                    {{ trans('admin/custom_fields/general.display_checkin') }}
+                  </span>
+              </th>
+
+              <th data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
+                  data-tooltip="{{ trans('admin/custom_fields/general.display_checkout') }}">
+                <x-icon type="checkout" />
+                <span class="sr-only">
+                    {{ trans('admin/custom_fields/general.display_checkout') }}
+                  </span>
+              </th>
+
+
               <th data-sortable="true" data-searchable="true" class="text-center">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
+
+
               <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
               <th>{{ trans('button.actions') }}</th>
             </tr>
@@ -185,6 +225,8 @@
               <td class="text-center">{!! ($field->show_in_email=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td class="text-center">{!! ($field->show_in_requestable_list=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td class="text-center">{!! ($field->is_unique=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class="text-center">{!! ($field->display_checkin=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class="text-center">{!! ($field->display_checkout=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>{{ $field->element }}</td>
               <td>
                 @foreach($field->fieldset as $fieldset)
@@ -193,7 +235,9 @@
               </td>
               <td>
                 <nobr>
-                  {{ Form::open(array('route' => array('fields.destroy', $field->id), 'method' => 'delete', 'style' => 'display:inline-block')) }}
+                  <form method="POST" action="{{ route('fields.destroy', $field->id) }}" accept-charset="UTF-8" style="display:inline-block">
+                    {{ method_field('DELETE') }}
+                    @csrf
                   @can('update', $field)
                     <a href="{{ route('fields.edit', $field->id) }}" class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
                       <i class="fas fa-pencil-alt" aria-hidden="true"></i>
@@ -215,14 +259,13 @@
                   @endif
 
                 @endcan
-                  {{ Form::close() }}
+                  </form>
                 </nobr>
               </td>
             </tr>
             @endforeach
           </tbody>
         </table>
-        </div>
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div> <!-- /.col-md-9-->
@@ -232,4 +275,14 @@
 @stop
 @section('moar_scripts')
   @include ('partials.bootstrap-table')
+  <script>
+    $(function () {
+      $('th').each(function (index, raw_element) {
+        var element = $(raw_element);
+        if (element.data('tooltip')) {
+          element.tooltip({container: 'body', title: element.data('tooltip')})
+        }
+      });
+    })
+  </script>
 @stop

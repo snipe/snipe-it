@@ -3,7 +3,7 @@
 return array(
 
     'does_not_exist' => 'La categoria non esiste.',
-    'assoc_models'	 => 'Questa categoria è attualmente associata ad almeno un modello pertanto non può essere eliminata. Aggiorna i tuoi modelli e riprova. ',
+    'assoc_models'	 => 'La categoria è già associata ad almeno un modello, pertanto non può essere eliminata. Aggiorna i modelli in modo che non si riferiscano alla categoria e riprova. ',
     'assoc_items'	 => 'Questa Categoria al momento è associata ad almeno un :asset_type perciò non può essere eliminata. Aggiorna il tuo :asset_type in modo che non si riferisca più alla Categoria e riprova. ',
 
     'create' => array(

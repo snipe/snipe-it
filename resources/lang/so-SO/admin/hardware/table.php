@@ -25,7 +25,6 @@ return [
     'image'		    => 'Sawirka Qalabka',
     'days_without_acceptance' => 'Maalmo Aqbali La\'aan',
     'monthly_depreciation' => 'Qiima dhaca bishii',
-    'assigned_to'    => 'Loo xilsaaray',
     'requesting_user' => 'Codsada Isticmaalaha',
     'requested_date' => 'Taariikhda la codsaday',
     'changed'       => 'Bedelay',

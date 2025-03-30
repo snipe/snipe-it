@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Asset Maintenance you were looking for was not found!',
+        'not_found'                    => 'Hľadaný záznam o údržbe majetku nebol nájdený!',
         'delete'                       => [
-            'confirm' => 'Are you sure you wish to delete this asset maintenance?',
-            'error'   => 'There was an issue deleting the asset maintenance. Please try again.',
-            'success' => 'The asset maintenance was deleted successfully.',
+            'confirm' => 'Ste si istý, že chcete zmazať tento záznam o údržbe majetku?',
+            'error'   => 'Pri odstrňovaní záznamu o údržbe majetku nastala chyba. Prosím skúste znovu.',
+            'success' => 'Záznam o údržbe majetku bol úspešne odstránený.',
         ],
         'create'                       => [
-            'error'   => 'Asset Maintenance was not created, please try again.',
-            'success' => 'Asset Maintenance created successfully.',
+            'error'   => 'Záznam o údržba majetku nebol vytvorený, prosím skúste znovu.',
+            'success' => 'Záznam o údržbe majetku bol úspešne vytvorený.',
         ],
         'edit'                       => [
-            'error'   => 'Asset Maintenance was not edited, please try again.',
-            'success' => 'Asset Maintenance edited successfully.',
+            'error'   => 'Záznam o údržba majetku nebol upravený, prosím skúste znovu.',
+            'success' => 'Záznam o údržbe majetku bol úspešne upravený.',
         ],
-        'asset_maintenance_incomplete' => 'Not Completed Yet',
+        'asset_maintenance_incomplete' => 'Zatiaľ nedokončené',
         'warranty'                     => 'Záruka',
-        'not_warranty'                 => 'Not Warranty',
+        'not_warranty'                 => 'Bez záruky',
     ];

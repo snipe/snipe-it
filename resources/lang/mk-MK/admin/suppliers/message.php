@@ -2,7 +2,7 @@
 
 return array(
 
-    'deleted' => 'Deleted supplier',
+    'deleted' => 'Избришан добавувач',
     'does_not_exist' => 'Добавувачот не постои.',
 
 

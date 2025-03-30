@@ -50,13 +50,6 @@ class LabelWriter_30252 extends LabelWriter
             );
             $currentX += $barcodeSize + self::BARCODE_MARGIN;
             $usableWidth -= $barcodeSize + self::BARCODE_MARGIN;
-        } else {
-            static::writeText(
-                $pdf, $record->get('tag'),
-                $pa->x1, $pa->y2 - self::TAG_SIZE,
-                'freemono', 'b', self::TAG_SIZE, 'R',
-                $usableWidth, self::TAG_SIZE, true, 0
-            );
         }
 
         if ($record->has('title')) {

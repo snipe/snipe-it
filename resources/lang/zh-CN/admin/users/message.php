@@ -53,7 +53,7 @@ return array(
         'ldap_could_not_search' => '查询LDAP服务器失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'ldap_could_not_get_entries' => '从LDAP服务器获取信息条目失败，请检查LDAP配置文件中的相关设置。<br>LDAP服务器错误信息:',
         'password_ldap' => '此帐户的密码由LDAP / Active Directory管理。请联系您的IT部门更改您的密码。',
-        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
+        'multi_company_items_assigned' => '该用户分配的物品属于另一家公司。请归还它们或编辑它们的公司。'
     ),
 
     'deletefile' => array(

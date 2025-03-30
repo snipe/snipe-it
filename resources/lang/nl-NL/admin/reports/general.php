@@ -13,5 +13,10 @@ return [
         'user_state' => 'Gebruiker Provincie',
         'user_country' => 'Gebruiker Land',
         'user_zip' => 'Gebruiker Postcode'
-    ]
+    ],
+    'open_saved_template' => 'Opgeslagen sjabloon openen',
+    'save_template' =>  'Sjabloon opslaan',
+    'select_a_template' => 'Kies een sjabloon',
+    'template_name' => 'Sjabloonnaam',
+    'update_template' => 'Sjabloon bijwerken',
 ];

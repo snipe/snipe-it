@@ -42,7 +42,7 @@ class Location extends SnipeModel
     ];
 
     /**
-     * Whether the model should inject it's identifier to the unique
+     * Whether the model should inject its identifier to the unique
      * validation rules before attempting validation. If this property
      * is not set in the model it will default to true.
      *
@@ -72,6 +72,7 @@ class Location extends SnipeModel
         'currency',
         'manager_id',
         'image',
+        'notes',
     ];
     protected $hidden = ['user_id'];
 
@@ -82,7 +83,7 @@ class Location extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at', 'ldap_ou', 'phone', 'fax'];
+    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at', 'ldap_ou', 'phone', 'fax', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -251,6 +252,18 @@ class Location extends SnipeModel
     public function assignedAssets()
     {
         return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+    }
+
+    /**
+     * Establishes the accessory -> location assignment relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function assignedAccessories()
+    {
+        return $this->morphMany(\App\Models\AccessoryCheckout::class, 'assigned', 'assigned_type', 'assigned_to');
     }
 
     public function setLdapOuAttribute($ldap_ou)

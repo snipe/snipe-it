@@ -12,5 +12,5 @@ return array(
     'remaining' 			             => 'Sisa',
     'total' 			                 => 'Total',
     'update'                            => 'Perbarui Komponen',
-    'checkin_limit'            => 'Amount checked in must be equal to or less than :assigned_qty'
+    'checkin_limit'            => 'Jumlah yang dikembalikan harus sama dengan atau kurang dari :assigned_qty'
 );

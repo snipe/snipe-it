@@ -25,7 +25,6 @@ return [
     'image'		    => 'crwdns1466:0crwdne1466:0',
     'days_without_acceptance' => 'crwdns1402:0crwdne1402:0',
     'monthly_depreciation' => 'crwdns5842:0crwdne5842:0',
-    'assigned_to'    => 'crwdns12052:0crwdne12052:0',
     'requesting_user' => 'crwdns6589:0crwdne6589:0',
     'requested_date' => 'crwdns6591:0crwdne6591:0',
     'changed'       => 'crwdns6593:0crwdne6593:0',

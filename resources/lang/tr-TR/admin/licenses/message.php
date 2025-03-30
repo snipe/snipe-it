@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Lisans girişi yapılırken hata oluştu. Lütfen tekrar deneyin.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Lisans girişi yapıldı'
     ),
 

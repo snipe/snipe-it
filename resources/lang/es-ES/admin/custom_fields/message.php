@@ -10,19 +10,19 @@ return array(
         'create' => array(
             'error'   => 'Campo no creado, por favor, inténtalo de nuevo.',
             'success' => 'Campo creado correctamente.',
-            'assoc_success' => 'Campo correctamente añadido al grupo.'
+            'assoc_success' => 'Campo correctamente añadido al grupo de campos.'
         ),
 
         'update' => array(
-            'error'   => 'Campo no actualizado, por favor inténtelo de nuevo',
+            'error'   => 'El campo no fue actualizado, por favor, inténtelo de nuevo',
             'success' => 'Campo actualizado correctamente.'
         ),
 
         'delete' => array(
             'confirm'   	=> '¿Está seguro de que quiere eliminar este campo?',
-            'error'   => 'Hubo un problema al eliminar el campo. Inténtelo de nuevo.',
+            'error'   => 'Hubo un problema al eliminar el campo. Por favor, inténtelo de nuevo.',
             'success' => 'El campo se eliminó correctamente.',
-            'in_use'   => 'El campo está aún en uso.',
+            'in_use'   => 'El campo aún está en uso.',
         )
 
     ),
@@ -45,14 +45,14 @@ return array(
             'confirm'   	=> '¿Está seguro de que quiere eliminar este grupo de campos?',
             'error'   => 'Hubo un problema al eliminar el grupo de campos. Inténtelo de nuevo.',
             'success' => 'El grupo de campos se eliminó correctamente.',
-            'in_use'   => 'El grupo de campos está aún en uso.',
+            'in_use'   => 'El grupo de campos aún está en uso.',
         )
 
     ),
 
     'fieldset_default_value' => array(
 
-        'error' => 'Error al validar los valores por defecto del grupo de campos.',
+        'error' => 'Error al validar los valores predeterminados del grupo de campos.',
 
     ),
 

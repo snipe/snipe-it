@@ -25,7 +25,6 @@ return [
     'image'		    => 'சாதன படம்',
     'days_without_acceptance' => 'ஏற்றுக்கொள்ளாத நாட்கள்',
     'monthly_depreciation' => 'Monthly Depreciation',
-    'assigned_to'    => 'ஒதுக்கப்படும்',
     'requesting_user' => 'Requesting User',
     'requested_date' => 'Requested Date',
     'changed'       => 'Changed',

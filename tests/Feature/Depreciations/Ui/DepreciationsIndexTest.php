@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Categories\Ui;
+namespace Tests\Feature\Depreciations\Ui;
 
 use App\Models\User;
 use Tests\TestCase;

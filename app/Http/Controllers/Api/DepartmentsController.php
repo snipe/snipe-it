@@ -23,7 +23,7 @@ class DepartmentsController extends Controller
     public function index(Request $request) : JsonResponse | array
     {
         $this->authorize('view', Department::class);
-        $allowed_columns = ['id', 'name', 'image', 'users_count'];
+        $allowed_columns = ['id', 'name', 'image', 'users_count', 'notes'];
 
         $departments = Department::select(
             'departments.id',
@@ -35,7 +35,8 @@ class DepartmentsController extends Controller
             'departments.manager_id',
             'departments.created_at',
             'departments.updated_at',
-            'departments.image'
+            'departments.image',
+            'departments.notes',
         )->with('users')->with('location')->with('manager')->with('company')->withCount('users as users_count');
 
         if ($request->filled('search')) {
@@ -71,6 +72,9 @@ class DepartmentsController extends Controller
                 break;
             case 'manager':
                 $departments->OrderManager($order);
+                break;
+            case 'company':
+                $departments->OrderCompany($order);
                 break;
             default:
                 $departments->orderBy($sort, $order);

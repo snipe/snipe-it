@@ -13,6 +13,7 @@
 <script nonce="{{ csrf_token() }}">
     $(function () {
 
+
         var blockedFields = "searchable,sortable,switchable,title,visible,formatter,class".split(",");
 
         var keyBlocked = function(key) {
@@ -29,7 +30,16 @@
             data_export_options = $(this).attr('data-export-options');
             export_options = data_export_options ? JSON.parse(data_export_options) : {};
             export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
-            export_options['jspdf']= {"orientation": "l"};
+            export_options['jspdf'] = {
+                "orientation": "l",
+                "autotable": {
+                        "styles": {
+                            overflow: 'linebreak'
+                        },
+                        tableWidth: 'wrap'
+                }
+            };
+            // tableWidth: 'wrap',
             // the following callback method is necessary to prevent XSS vulnerabilities
             // (this is taken from Bootstrap Tables's default wrapper around jQuery Table Export)
             export_options['onCellHtmlData'] = function (cell, rowIndex, colIndex, htmlData) {
@@ -39,66 +49,93 @@
                 return htmlData
             }
             $(this).bootstrapTable({
-            classes: 'table table-responsive table-no-bordered',
-            ajaxOptions: {
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            },
-            // reorderableColumns: true,
-            stickyHeader: true,
-            stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
-            stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
-            undefinedText: '',
-            iconsPrefix: 'fa',
-            cookieStorage: '{{ config('session.bs_table_storage') }}',
-            cookie: true,
-            cookieExpire: '2y',
-            showColumnsToggleAll: true,
-            minimumCountColumns: 2,
-            mobileResponsive: true,
-            maintainSelected: true,
-            trimOnSearch: false,
-            showSearchClearButton: true,
-            addrbar: {{ (config('session.bs_table_addrbar') == 'true') ? 'true' : 'false'}}, // deeplink search phrases, sorting, etc
-            paginationFirstText: "{{ trans('general.first') }}",
-            paginationLastText: "{{ trans('general.last') }}",
-            paginationPreText: "{{ trans('general.previous') }}",
-            paginationNextText: "{{ trans('general.next') }}",
-            pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
-            pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
-            paginationVAlign: 'both',
-            queryParams: function (params) {
-                var newParams = {};
-                for(var i in params) {
-                    if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
-                        newParams[i] = params[i];
+                classes: 'table table-responsive table-no-bordered',
+                ajaxOptions: {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
+                },
+                // reorderableColumns: true,
+                stickyHeader: true,
+                stickyHeaderOffsetLeft: parseInt($('body').css('padding-left'), 10),
+                stickyHeaderOffsetRight: parseInt($('body').css('padding-right'), 10),
+                undefinedText: '',
+                iconsPrefix: 'fa',
+                cookieStorage: '{{ config('session.bs_table_storage') }}',
+                cookie: true,
+                cookieExpire: '2y',
+                showColumnsToggleAll: true,
+                minimumCountColumns: 2,
+                mobileResponsive: true,
+                maintainSelected: true,
+                trimOnSearch: false,
+                showSearchClearButton: true,
+                addrbar: {{ (config('session.bs_table_addrbar') == 'true') ? 'true' : 'false'}}, // deeplink search phrases, sorting, etc
+                paginationFirstText: "{{ trans('general.first') }}",
+                paginationLastText: "{{ trans('general.last') }}",
+                paginationPreText: "{{ trans('general.previous') }}",
+                paginationNextText: "{{ trans('general.next') }}",
+                pageList: ['10', '20', '30', '50', '100', '150', '200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
+                pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
+                paginationVAlign: 'both',
+                queryParams: function (params) {
+                    var newParams = {};
+                    for (var i in params) {
+                        if (!keyBlocked(i)) { // only send the field if it's not in blockedFields
+                            newParams[i] = params[i];
+                        }
+                    }
+                    return newParams;
+                },
+                formatLoadingMessage: function () {
+                    return '<h2><x-icon type="spinner" /> {{ trans('general.loading') }} </h2>';
+                },
+                icons: {
+                    advancedSearchIcon: 'fas fa-search-plus',
+                    paginationSwitchDown: 'fa-caret-square-o-down',
+                    paginationSwitchUp: 'fa-caret-square-o-up',
+                    fullscreen: 'fa-expand',
+                    columns: 'fa-columns',
+                    refresh: 'fas fa-sync-alt',
+                    export: 'fa-download',
+                    clearSearch: 'fa-times'
+                },
+                locale: '{{ app()->getLocale() }}',
+                exportOptions: export_options,
+                exportTypes: ['xlsx', 'excel', 'csv', 'pdf', 'json', 'xml', 'txt', 'sql', 'doc'],
+                onLoadSuccess: function () { // possible 'fixme'? this might be for contents, not for headers?
+                    $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call
+                },
+                onPostHeader: function () {
+                    var lookup = {};
+                    var lookup_initialized = false;
+                    var ths = $('th');
+                    ths.each(function (index, element) {
+                        th = $(element);
+                        //only populate the lookup table once; don't need to keep doing it.
+                        if (!lookup_initialized) {
+                            // th -> tr -> thead -> table
+                            var table = th.parent().parent().parent()
+                            var column_data = table.data('columns')
+                            for (var column in column_data) {
+                                lookup[column_data[column].field] = column_data[column].titleTooltip;
+                            }
+                            lookup_initialized = true
+                        }
+
+                        field = th.data('field'); // find fieldname this column refers to
+                        title = lookup[field];
+                        if (title) {
+                            th.attr('data-toggle', 'tooltip');
+                            th.attr('data-placement', 'top');
+                            // th.attr('title', title) //this causes 'double-titles' which looks gross
+                            th.tooltip({container: 'body', title: title});
+                        }
+                    })
+                },
+                formatNoMatches: function () {
+                    return '{{ trans('table.no_matching_records') }}';
                 }
-                return newParams;
-            },
-            formatLoadingMessage: function () {
-                return '<h2><x-icon type="spinner" /> {{ trans('general.loading') }} </h2>';
-            },
-            icons: {
-                advancedSearchIcon: 'fas fa-search-plus',
-                paginationSwitchDown: 'fa-caret-square-o-down',
-                paginationSwitchUp: 'fa-caret-square-o-up',
-                fullscreen: 'fa-expand',
-                columns: 'fa-columns',
-                refresh: 'fas fa-sync-alt',
-                export: 'fa-download',
-                clearSearch: 'fa-times'
-            },
-            locale: '{{ app()->getLocale() }}',
-            exportOptions: export_options,
-            exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
-            onLoadSuccess: function () {
-                $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call
-            },
-            formatNoMatches: function () {
-                return '{{ trans('table.no_matching_records') }}';
-            }
 
             });
 
@@ -205,7 +242,35 @@
     });
 
 
-    
+
+    // This specifies the footer columns that should have special styles associated
+    // (usually numbers)
+    window.footerStyle = column => ({
+        remaining: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        qty: {
+            classes: 'text-padding-number-footer-cell',
+        },
+        purchase_cost: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        checkouts_count: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        assets_count: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        seats: {
+            classes: 'text-padding-number-footer-cell'
+        },
+        free_seats_count: {
+            classes: 'text-padding-number-footer-cell'
+        },
+    }[column.field]);
+
+
+
 
     // This only works for model index pages because it uses the row's model ID
     function genericRowLinkFormatter(destination) {
@@ -279,8 +344,8 @@
             element_name = '';
         }
 
-        return function (value,row) {
 
+        return function (value,row) {
             var actions = '<nobr>';
 
             // Add some overrides for any funny urls we have
@@ -290,9 +355,6 @@
                 var dest = 'admin/groups';
             }
 
-            if (dest =='maintenances') {
-                var dest = 'hardware/maintenances';
-            }
 
             if(element_name != '') {
                 dest = dest + '/' + row.owner_id + '/' + element_name;
@@ -441,7 +503,7 @@
     }
 
     function genericCheckinCheckoutFormatter(destination) {
-        return function (value,row) {
+        return function (value, row) {
 
             // The user is allowed to check items out, AND the item is deployable
             if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
@@ -631,14 +693,16 @@
     function minAmtFormatter(row, value) {
 
         if ((row) && (row!=undefined)) {
-            if (value.free_seats_count <= value.min_amt) {
-                return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}">' + value.min_amt + '</span>';
+            
+            if (value.remaining <= value.min_amt) {
+                return  '<span class="text-danger text-bold" data-tooltip="true" title="{{ trans('admin/licenses/general.below_threshold_short') }}"><x-icon type="warning" class="text-yellow" /> ' + value.min_amt + '</span>';
             }
             return value.min_amt
         }
-
+        return '--';
     }
 
+    
 
     // Create a linked phone number in the table list
     function phoneFormatter(value) {
@@ -663,7 +727,7 @@
 
     function assetTagLinkFormatter(value, row) {
         if ((row.asset) && (row.asset.id)) {
-            if (row.asset.deleted_at!='') {
+            if (row.asset.deleted_at) {
                 return '<span style="white-space: nowrap;"><x-icon type="x" class="text-danger" /><span class="sr-only">{{ trans('admin/hardware/general.deleted') }}</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.asset_tag + '</a></del></span>';
             }
             return '<a href="{{ config('app.url') }}/hardware/' + row.asset.id + '">' + row.asset.asset_tag + '</a>';
@@ -688,7 +752,7 @@
     function assetSerialLinkFormatter(value, row) {
 
         if ((row.asset) && (row.asset.serial)) {
-            if (row.asset.deleted_at!='') {
+            if (row.asset.deleted_at) {
                 return '<span style="white-space: nowrap;"><x-icon type="x" class="text-danger" /><span class="sr-only">deleted</span> <del><a href="{{ config('app.url') }}/hardware/' + row.asset.id + '" data-tooltip="true" title="{{ trans('admin/hardware/general.deleted') }}">' + row.asset.serial + '</a></del></span>';
             }
             return '<a href="{{ config('app.url') }}/hardware/' + row.asset.id + '">' + row.asset.serial + '</a>';
@@ -871,6 +935,19 @@
             decimalfixed = number.toString().replace(/\,/g,"");
         }
         return parseFloat(decimalfixed);
+    }
+
+
+    function qtySumFormatter(data) {
+        var currentField = this.field;
+        var total = 0;
+        var fieldname = this.field;
+
+        $.each(data, function() {
+            var r = this;
+            total += this[currentField];
+        });
+        return total;
     }
 
     function sumFormatter(data) {

@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Advertencia:</strong> Este activo actualmente está marcado como no utilizable. Si este estado ha cambiado, por favor, actualice el estado del activo.',
-    'does_not_exist' 	=> 'Equipo inexistente.',
-    'does_not_exist_var'=> 'Activo con placa :asset_tag no encontrado.',
-    'no_tag' 	        => 'No se ha proporcionado ninguna placa de activo.',
+    'undeployable' 		 => '<strong>Advertencia:</strong> Este activo actualmente está marcado como no utilizable. Si este estado ha cambiado, por favor, actualice el estado del activo.',
+    'does_not_exist' 	 => 'Equipo inexistente.',
+    'does_not_exist_var' => 'Activo con placa :asset_tag no encontrado.',
+    'no_tag' 	         => 'No se ha proporcionado ninguna placa de activo.',
     'does_not_exist_or_not_requestable' => 'Ese activo no existe o no puede ser solicitado.',
-    'assoc_users'	 	=> 'Actualmente este activo está asignado a un usuario y no puede ser eliminado. Por favor, primero ingrese el activo y vuelva a intentarlo. ',
+    'assoc_users'	 	 => 'Actualmente este activo está asignado a un usuario y no puede ser eliminado. Por favor, primero ingrese el activo y vuelva a intentarlo. ',
     'warning_audit_date_mismatch' 	=> 'La próxima fecha de auditoría de este activo (:next_audit_date) es anterior a la última fecha de auditoría (:last_audit_date). Por favor, actualice la próxima fecha de auditoría.',
+    'labels_generated'   => 'Las etiquetas fueron generadas exitosamente.',
+    'error_generating_labels' => 'Error en la generación de etiquetas.',
+    'no_assets_selected' => 'No se han seleccionado activos.',
 
     'create' => [
         'error'   		=> 'El activo no fue creado, por favor, inténtelo de nuevo. :(',
         'success' 		=> 'Activo creado con éxito. :)',
         'success_linked' => 'Activo con placa :tag creado con éxito. <strong><a href=":link" style="color: white;">Haga clic aquí para ver</a></strong>.',
+        'multi_success_linked' => 'Activo con etiqueta :links fue creado exitosamente.|:count activos fueron creados correctamente. :links.',
+        'partial_failure' => 'No se ha podido crear un activo: Motivo: :failures|No se pudieron crear :count activos. Motivos: :failures',
     ],
 
     'update' => [
@@ -67,8 +72,9 @@ return [
     'delete' => [
         'confirm'   	=> '¿Está seguro de que desea eliminar este activo?',
         'error'   		=> 'Hubo un problema al eliminar el activo. Por favor, inténtelo de nuevo.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'No se seleccionaron los activos, por lo que no se eliminó nada.',
-        'success' 		=> 'Equipo eliminado.',
+        'success' 		=> 'El activo se ha eliminado correctamente.',
     ],
 
     'checkout' => [
@@ -76,7 +82,12 @@ return [
         'success' 		=> 'Equipo asignado correctamente.',
         'user_does_not_exist' => 'Este usuario no es correcto. Por favor, inténtelo de nuevo.',
         'not_available' => '¡Ese equipo no está disponible para ser asignado!',
-        'no_assets_selected' => 'Debes seleccionar al menos un elemento de la lista',
+        'no_assets_selected' => 'Debe seleccionar al menos un activo de la lista',
+    ],
+
+    'multi-checkout' => [
+        'error'   => 'El activo no fue asignado, por favor, intente nuevamente|Los activos no fueron asignados, por favor, intente nuevamente',
+        'success' => 'El activo fue asignado correctamente|Los activos fueron asignados correctamente.',
     ],
 
     'checkin' => [

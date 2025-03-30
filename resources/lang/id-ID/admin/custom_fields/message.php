@@ -5,7 +5,7 @@ return array(
     'field' => array(
         'invalid'   => 'Field tersebut tidak ada.',
         'already_added'   => 'Field sudah di tambahkan',
-        'none_selected'   => 'No field selected',
+        'none_selected'   => 'Tidak ada kolom yang dipilih',
 
         'create' => array(
             'error'   => 'Field gagal di buat, silahkan coba kembali.',
@@ -52,7 +52,7 @@ return array(
 
     'fieldset_default_value' => array(
 
-        'error' => 'Error validating default fieldset values.',
+        'error' => 'Terjadi kesalahan saat memvalidasi nilai default kelompok kolom.',
 
     ),
 
