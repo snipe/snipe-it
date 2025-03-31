@@ -1119,14 +1119,11 @@ class ReportsController extends Controller
                 'checkoutable' => function (MorphTo $query) {
                     $query->morphWith([
                         AssetModel::class => ['model'],
-                        // @todo:
-                        // Company::class => ['company'],
                         Asset::class => ['assignedTo'],
-                    ])
-                        // @todo:
-                        ->with('company')
-                        ->with('model.category')
-                        ->where('assigned_type', User::class);
+                    ])->with([
+                        'company',
+                        'model.category',
+                    ])->where('assigned_type', User::class);
                 },
                 'assignedTo' => function($query){
                          $query->withTrashed();
