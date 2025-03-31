@@ -491,7 +491,18 @@ class AssetsController extends Controller
     public function showBySerial(Request $request, $serial): JsonResponse | array
     {
         $this->authorize('index', Asset::class);
-        $assets = Asset::where('serial', $serial)->with('assetstatus')->with('assignedTo');
+        $assets = Asset::where('serial', $serial)->with([
+            'assetstatus',
+            'assignedTo',
+            'company',
+            'defaultLoc',
+            'location',
+            'model.category',
+            'model.depreciation',
+            'model.fieldset',
+            'model.manufacturer',
+            'supplier',
+        ]);
 
         // Check if they've passed ?deleted=true
         if ($request->input('deleted', 'false') == 'true') {
