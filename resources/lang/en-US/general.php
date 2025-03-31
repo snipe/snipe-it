@@ -327,6 +327,7 @@ return [
     'viewall'				=> 'View All',
     'viewassets'  			=> 'View Assigned Assets',
     'viewassetsfor'         => 'View Assets for :name',
+    'view_user_assets'      => 'View User Assets',
     'website'               => 'Website',
     'welcome'				=> 'Welcome, :name',
     'years'					=> 'years',
@@ -600,5 +601,6 @@ return [
     'deleted_models' => 'Deleted Asset Models',
     'deleted_users' => 'Deleted Users',
     'cost_each' => ':amount each',
+    'view_as_user' => 'View As',
 
 ];

@@ -884,6 +884,33 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                 @endif
                                 <div class="pull-right">
                                     @yield('header_right')
+
+                                    {{-- Manager View Dropdown - Moved to Header (Attempt 3: After Yield, Restored) --}}
+                                    {{-- NOTE: This requires $settings, $subordinates, and $selectedUserId to be available globally or passed via View Composer --}}
+                                    @if (
+                                        isset($settings) && $settings->manager_view_enabled &&
+                                        isset($subordinates) && $subordinates->count() > 1 &&
+                                        (Request::is('account/view-assets') || Request::is('users/*')) /* Restore Request::is check */
+                                    )
+                                        {{-- Add dropdown to the header --}}
+                                        <div class="form-inline pull-right" style="margin-left: 15px; margin-top: 5px;"> {{-- Add some spacing --}}
+                                            <form method="GET" action="{{ route('view-assets') }}" role="form">
+                                                <div class="form-group">
+                                                    <label for="header_user_id" style="padding-right: 5px;">{{ trans('general.view_as_user') }}:</label>
+                                                    {{-- Use a different ID to avoid conflicts --}}
+                                                    <select name="user_id" id="header_user_id" class="select2 form-control" onchange="this.form.submit()" style="min-width: 200px; width: auto;">
+                                                        @foreach ($subordinates as $subordinate)
+                                                            {{-- Check if $selectedUserId is set before using it --}}
+                                                            <option value="{{ $subordinate->id }}"{{ (isset($selectedUserId) && $subordinate->id == $selectedUserId) ? ' selected' : '' }}>
+                                                                {{ $subordinate->present()->fullName() }} {{ ($subordinate->id == auth()->id()) ? '('.trans('general.me').')' : '' }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @endif
+                                    {{-- End Manager View Dropdown --}}
                                 </div>
 
                         </div>
@@ -892,6 +919,8 @@ dir="{{ Helper::determineLanguageDirection() }}">
 
 
                 <section class="content" id="main" tabindex="-1" style="padding-top: 0px;">
+
+                    {{-- Dropdown code removed from test location --}}
 
                     <!-- Notifications -->
                     <div class="row">
