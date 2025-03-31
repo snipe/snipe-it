@@ -67,7 +67,7 @@
                 <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.brand') }}</span>
               </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.brand_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.brand_help') }}</p>
             </div>
           </div>
         </div>
@@ -84,7 +84,7 @@
                   <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.general_settings') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.general_settings_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.general_settings_help') }}</p>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@
                   <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.security') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.security_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.security_help') }}</p>
             </div>
           </div>
         </div>
@@ -117,7 +117,7 @@
                   <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.keywords.groups') }}</span>
                   </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.groups_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.groups_help') }}</p>
             </div>
           </div>
         </div>
@@ -134,7 +134,7 @@
                   <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.keywords.localization') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.localization_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.localization_help') }}</p>
 
             </div>
           </div>
@@ -152,7 +152,7 @@
 
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.notifications_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.notifications_help') }}</p>
             </div>
           </div>
         </div>
@@ -167,7 +167,7 @@
                   <span class="name">{{ trans('admin/settings/general.integrations') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.webhook_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.webhook_help') }}</p>
             </div>
           </div>
         </div>
@@ -182,7 +182,7 @@
                   <span class="name">{{ trans('general.asset_tags') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.asset_tags_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.asset_tags_help') }}</p>
             </div>
           </div>
         </div>
@@ -198,7 +198,7 @@
                   <span class="keywords" aria-hidden="true" style="display:none"> {{ trans('admin/settings/general.keywords.labels') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{!! trans('admin/settings/general.labels_help') !!}</p>
+              <p class="index-blocks">{!! trans('admin/settings/general.labels_help') !!}</p>
             </div>
           </div>
         </div>
@@ -214,7 +214,7 @@
                   <span class="name">{{ trans('admin/settings/general.ldap') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{{ trans('admin/settings/general.ldap_help') }}</p>
+              <p class="index-blocks">{{ trans('admin/settings/general.ldap_help') }}</p>
             </div>
           </div>
         </div>
@@ -229,7 +229,7 @@
                 <span class="name">Google</span>
               </a>
             </h5>
-            <p class="help-block">{{ trans('admin/settings/general.google_login') }}</p>
+            <p class="index-blocks">{{ trans('admin/settings/general.google_login') }}</p>
           </div>
         </div>
       </div>
@@ -244,7 +244,7 @@
                 <span class="name">{{ trans('admin/settings/general.saml') }}</span>
               </a>
             </h5>
-            <p class="help-block">{{ trans('admin/settings/general.saml_help') }}</p>
+            <p class="index-blocks">{{ trans('admin/settings/general.saml_help') }}</p>
           </div>
         </div>
       </div>
@@ -259,7 +259,7 @@
                   <span class="name">{{ trans('admin/settings/general.backups') }}</span>
                 </a>
               </h5>
-              <p class="help-block">{!! trans('admin/settings/general.backups_help') !!}</p>
+              <p class="index-blocks">{!! trans('admin/settings/general.backups_help') !!}</p>
             </div>
           </div>
         </div>
@@ -275,7 +275,7 @@
                 <span class="name">{{ trans('admin/settings/general.login') }}</span>
               </a>
             </h5>
-            <p class="help-block">{{ trans('admin/settings/general.login_help') }} </p>
+            <p class="index-blocks">{{ trans('admin/settings/general.login_help') }} </p>
           </div>
         </div>
       </div>
@@ -290,7 +290,7 @@
                 <span class="name">{{  trans('admin/settings/general.oauth') }}</span>
               </a>
               </h5>
-              <p class="help-block">{{  trans('admin/settings/general.oauth_help') }}</p>
+              <p class="index-blocks">{{  trans('admin/settings/general.oauth_help') }}</p>
             </div>
           </div>
         </div>
@@ -307,7 +307,7 @@
                     <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.php_overview') }}</span>
                   </a>
                 </h5>
-                <p class="help-block">{{ trans('admin/settings/general.php_overview_help') }}</p>
+                <p class="index-blocks">{{ trans('admin/settings/general.php_overview_help') }}</p>
               </div>
             </div>
           </div>
@@ -325,7 +325,7 @@
               <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.purge') }}</span>
             </a>
           </h5>
-          <p class="help-block">{{ trans('admin/settings/general.purge_help') }}</p>
+          <p class="index-blocks">{{ trans('admin/settings/general.purge_help') }}</p>
         </div>
       </div>
     </div>
@@ -448,7 +448,7 @@
 
 
   var options = {
-    valueNames: [ 'name', 'keywords', 'summary', 'help-block']
+    valueNames: [ 'name', 'keywords', 'summary', 'index-blocks']
   };
 
   var settingList = new List('setting-list', options);
