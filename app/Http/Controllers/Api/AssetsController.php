@@ -491,15 +491,32 @@ class AssetsController extends Controller
     public function showBySerial(Request $request, $serial): JsonResponse | array
     {
         $this->authorize('index', Asset::class);
-        $assets = Asset::where('serial', $serial)->with('assetstatus')->with('assignedTo');
+        $assets = Asset::where('serial', $serial)->with([
+            'assetstatus',
+            'assignedTo',
+            'company',
+            'defaultLoc',
+            'location',
+            'model.category',
+            'model.depreciation',
+            'model.fieldset',
+            'model.manufacturer',
+            'supplier',
+        ]);
 
         // Check if they've passed ?deleted=true
         if ($request->input('deleted', 'false') == 'true') {
             $assets = $assets->withTrashed();
         }
 
-        if (($assets = $assets->get()) && ($assets->count()) > 0) {
-            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
+
+        $total = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
+
+        if (($assets) && ($assets->count()) > 0) {
+            return (new AssetsTransformer)->transformAssets($assets, $total);
         }
 
         // If there are 0 results, return the "no such asset" response
