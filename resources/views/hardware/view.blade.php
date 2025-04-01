@@ -726,15 +726,21 @@
                                                             @endphp
                                                             @if ($fieldSize>0)
                                                                 <span id="text-{{ $field->id }}-to-hide">{{ str_repeat('*', $fieldSize) }}</span>
-                                                                <span class="js-copy-{{ $field->id }} hidden-print" id="text-{{ $field->id }}-to-show" style="font-size: 0px;">
-                                                                @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
-                                                                        <a href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                                                    @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                                                        <span class="js-copy-{{ $field->id }} hidden-print"
+                                                                              id="text-{{ $field->id }}-to-show"
+                                                                              style="font-size: 0px;"><a
+                                                                                    href="{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}"
+                                                                                    target="_new">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a></span>
                                                                     @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
-                                                                        {{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}
+                                                                        <span class="js-copy-{{ $field->id }} hidden-print"
+                                                                              id="text-{{ $field->id }}-to-show"
+                                                                              style="font-size: 0px;">{{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}</span>
                                                                     @else
-                                                                        {{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
+                                                                        <span class="js-copy-{{ $field->id }} hidden-print"
+                                                                              id="text-{{ $field->id }}-to-show"
+                                                                              style="font-size: 0px;">{{ Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</span>
                                                                     @endif
-                                                                </span>
                                                                 <i class="fa-regular fa-clipboard js-copy-link hidden-print" data-clipboard-target=".js-copy-{{ $field->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
                                                                     <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                                                                 </i>
