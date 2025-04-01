@@ -427,10 +427,14 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         [ViewAssetsController::class, 'getRequestAsset']
     )->name('account/request-asset');
 
-    Route::post(
-        'request/{itemType}/{itemId}/{cancel_by_admin?}/{requestingUser?}',
-        [ViewAssetsController::class, 'getRequestItem']
-    )->name('account/request-item');
+    Route::post('request-asset/{asset}', [ViewAssetsController::class, 'store'])
+        ->name('account.request-asset');
+
+    Route::post('request-asset/{asset}/cancel', [ViewAssetsController::class, 'destroy'])
+        ->name('account.request-asset.cancel');
+
+    Route::post('request/{itemType}/{itemId}/{cancel_by_admin?}/{requestingUser?}', [ViewAssetsController::class, 'getRequestItem'])
+        ->name('account/request-item');
 
     // Account Dashboard
     Route::get('/', [ViewAssetsController::class, 'getIndex'])
