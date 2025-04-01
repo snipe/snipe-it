@@ -270,13 +270,12 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                 <?php $alert_items = ($snipeSettings->show_alerts_in_menu=='1') ? Helper::checkLowInventory() : [];
                                       $deprecations = Helper::deprecationCheck()?>
 
+                            @if (count($alert_items) || count($deprecations))
                                 <li class="dropdown tasks-menu">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                         <x-icon type="alerts" />
                                         <span class="sr-only">{{ trans('general.alerts') }}</span>
-                                        @if (count($alert_items) || count($deprecations))
                                             <span class="label label-danger">{{ count($alert_items) + count($deprecations) }}</span>
-                                        @endif
                                     </a>
                                     <ul class="dropdown-menu">
                                         @can('superadmin')
@@ -323,6 +322,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                         </li> --}}
                                     </ul>
                                 </li>
+                                @endif
                             @endcan
 
 
