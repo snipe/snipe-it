@@ -95,7 +95,7 @@ class AssetAcceptanceReminderTest extends TestCase
         Mail::assertSent(CheckoutAssetMail::class, 1);
         Mail::assertSent(CheckoutAssetMail::class, function (CheckoutAssetMail $mail) use ($checkoutAcceptance) {
             return $mail->hasTo($checkoutAcceptance->assignedTo->email)
-                && $mail->hasSubject(trans('mail.unaccepted_asset_reminder'));
+                && $mail->hasSubject(trans_choice('mail.unaccepted_asset_reminder',1));
         });
     }
 

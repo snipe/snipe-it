@@ -88,7 +88,7 @@ return [
     'upcoming-audits' => 'There is :count asset that is coming up for audit within :threshold days.|There are :count assets that are coming up for audit within :threshold days.',
     'user' => 'User',
     'username' => 'Username',
-    'unaccepted_asset_reminder' => 'You have :count Unaccepted Asset|You have :count Unaccepted Assets',
+    'unaccepted_asset_reminder' => 'You have an Unaccepted Asset.|You have :count Unaccepted Assets.',
     'welcome' => 'Welcome :name',
     'welcome_to' => 'Welcome to :web!',
     'your_assets' => 'View Your Assets',
