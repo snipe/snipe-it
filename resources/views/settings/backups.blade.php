@@ -183,7 +183,7 @@
         <div class="col-md-12">
           
           <p class="label label-default col-md-12" style="font-size: 120%!important; margin-top: 10px; margin-bottom: 10px;" id="uploadFile-info"></p>
-          <p class="help-block" style="margin-top: 10px;" id="uploadFile-status">{{ trans_choice('general.filetypes_accepted_help', 1, ['size' => Helper::file_upload_max_size_readable(), 'types' => '.zip']) }}</p>     
+          <p class="help-block" style="margin-top: 10px;" id="uploadFile-status">{{ trans_choice('general.filetypes_accepted_help', 1, ['size' => Helper::file_upload_max_size_readable(), 'filetypes' => '.zip']) }}</p>
           {!! $errors->first('file', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             
         </div>  

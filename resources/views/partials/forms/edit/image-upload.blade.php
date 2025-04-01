@@ -32,7 +32,7 @@
         </label>
         <span class='label label-default' id="uploadFile-info"></span>
 
-        <p class="help-block" id="uploadFile-status">{{ trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]) }} {{ $help_text ?? '' }}</p>
+        <p class="help-block" id="uploadFile-status">{{ trans('general.filetypes_accepted_help', ['filetypes' => 'jpg, webp, png, gif, svg, and avif', 'size' => Helper::file_upload_max_size_readable()]) }} {{ $help_text ?? '' }}</p>
 
 
 
