@@ -47,7 +47,7 @@
             </div>
             <div class="col-md-5">
               <label class="form-control">
-                {{ Form::checkbox('null_name', '1', false) }}
+                <input type="checkbox" name="null_name" value="1">
                 {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
             </div>
@@ -66,7 +66,7 @@
             </div>
             <div class="col-md-5">
               <label class="form-control">
-                {{ Form::checkbox('null_purchase_date', '1', false) }}
+                <input type="checkbox" name="null_purchase_date" value="1">
                 {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
               </label>
             </div>
@@ -85,7 +85,7 @@
              </div>
               <div class="col-md-5">
                 <label class="form-control">
-                  {{ Form::checkbox('null_expected_checkin_date', '1', false) }}
+                  <input type="checkbox" name="null_expected_checkin_date" value="1">
                   {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
                 </label>
               </div>
@@ -103,7 +103,7 @@
             </div>
             <div class="col-md-5">
               <label class="form-control">
-                {{ Form::checkbox('null_asset_eol_date', '1', false) }}
+                <input type="checkbox" name="null_asset_eol_date" value="1">
                 {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
               </label>
             </div>
@@ -112,7 +112,7 @@
           <div class="form-group">
             <div class="col-md-9 col-md-offset-3">
               <label class="form-control">
-                {{ Form::checkbox('calc_eol', '1', false) }}
+                <input type="checkbox" name="calc_eol" value="1">
                 {{ trans('admin/hardware/form.calc_eol') }}
               </label>
             </div>
@@ -125,7 +125,13 @@
               {{ trans('admin/hardware/form.status') }}
             </label>
             <div class="col-md-7">
-              {{ Form::select('status_id', $statuslabel_list , old('status_id'), array('class'=>'select2', 'style'=>'width:100%', 'aria-label'=>'status_id')) }}
+              <x-input.select
+                  name="status_id"
+                  :options="$statuslabel_list"
+                  :selected="old('status_id')"
+                  style="width: 100%"
+                  aria-label="status_id"
+              />
               <p class="help-block">{{ trans('general.status_compatibility') }}</p>
               {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
@@ -140,15 +146,15 @@
           <div class="form-group">
             <div class="col-md-9 col-md-offset-3">
                 <label class="form-control">
-                  {{ Form::radio('update_real_loc', '1', old('update_real_loc'), ['checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
+                  <input type="radio" name="update_real_loc" value="1" checked aria-label="update_real_loc">
                   {{ trans('admin/hardware/form.asset_location_update_default_current') }}
                 </label>
               <label class="form-control">
-                {{ Form::radio('update_real_loc', '0', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
+                <input type="radio" name="update_real_loc" value="0" aria-label="update_default_loc">
                 {{ trans('admin/hardware/form.asset_location_update_default') }}
               </label>
                 <label class="form-control">
-                  {{ Form::radio('update_real_loc', '2', old('update_real_loc'), ['aria-label'=>'update_default_loc']) }}
+                  <input type="radio" name="update_real_loc" value="2" aria-label="update_default_loc">
                   {{ trans('admin/hardware/form.asset_location_update_actual') }}
                 </label>
 
@@ -215,7 +221,7 @@
             </div>
             <div class="col-md-5">
               <label class="form-control">
-                {{ Form::checkbox('null_next_audit_date', '1', false) }}
+                <input type="checkbox" name="null_next_audit_date" value="1">
                 {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
               </label>
             </div>

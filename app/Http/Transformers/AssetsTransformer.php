@@ -42,7 +42,7 @@ class AssetsTransformer
             'requestable' => ($asset->requestable ? true : false),
 
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
-            'eol' => (($asset->asset_eol_date != '') && ($asset->purchase_date != '')) ? Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date).' months' : null,
+            'eol' => (($asset->asset_eol_date != '') && ($asset->purchase_date != '')) ? (int) Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date, true) . ' months' : null,
             'asset_eol_date' => ($asset->asset_eol_date != '') ? Helper::getFormattedDateObject($asset->asset_eol_date, 'date') : null,
             'status_label' => ($asset->assetstatus) ? [
                 'id' => (int) $asset->assetstatus->id,
@@ -309,6 +309,7 @@ class AssetsTransformer
                 'id' => $accessory_checkout->accessory->id,
                 'name' => $accessory_checkout->accessory->name,
             ],
+            'assigned_to' => $accessory_checkout->assigned_to,
             'image' => ($accessory_checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory_checkout->accessory->image)) : null,
             'note' => $accessory_checkout->note ? e($accessory_checkout->note) : null,
             'created_by' => $accessory_checkout->adminuser ? [

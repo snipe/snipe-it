@@ -33,27 +33,30 @@
 @section('content')
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-1">
+    <div class="col-md-9">
 
-        {{ Form::open([
-            'method' => 'post',
-            'class' => 'form-horizontal',
-            'id' => 'custom-report-form',
-            'url' => request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : '/reports/custom',
-        ]) }}
+        <form
+            method="POST"
+            action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : route('reports.post-custom') }}"
+            accept-charset="UTF-8"
+            class="form-horizontal"
+            id="custom-report-form"
+        >
         {{csrf_field()}}
 
     <!-- Horizontal Form -->
         <div class="box box-default">
             <div class="box-header with-border">
                 @if (request()->routeIs('reports/custom') || request()->routeIs('report-templates.show'))
-                    <h2 class="box-title">
+                    <h2 class="box-title" style="padding-top: 7px;">
                         {{ trans('general.customize_report') }}
                     </h2>
+
                 @endif
+
                 @if (request()->routeIs('report-templates.edit'))
                     <div class="row">
-                        <div class="col-md-7 col-md-offset-5">
+                        <div class="col-md-7 col-md-offset-4">
                             <div class="{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label
                                     for="name"
@@ -77,29 +80,7 @@
                         </div>
                     </div>
                 @endif
-                @if (request()->routeIs('report-templates.show'))
-                    <div class="box-tools pull-right">
-                        <a
-                            href="{{ route('report-templates.edit', $template) }}"
-                            class="btn btn-sm btn-warning"
-                            data-tooltip="true"
-                            title="{{ trans('admin/reports/general.update_template') }}"
-                        >
-                            <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                            <span class="sr-only">{{ trans('general.update') }}</span>
-                        </a>
-                        <button
-                            class="btn btn-sm btn-danger delete-asset"
-                            data-toggle="modal"
-                            data-title="{{ trans('general.delete') }}"
-                            data-content="{{ trans('general.delete_confirm', ['item' => $template->name]) }}"
-                            data-target="#dataConfirmModal"
-                            type="button"
-                        >
-                            <i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span>
-                        </button>
-                    </div>
-                @endif
+
         </div><!-- /.box-header -->
 
         <div class="box-body">
@@ -112,152 +93,152 @@
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('id', '1', $template->checkmarkValue('id')) }}
+                    <input type="checkbox" name="id" value="1" @checked($template->checkmarkValue('id')) />
                     {{ trans('general.id') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('company', '1', $template->checkmarkValue('company')) }}
+                    <input type="checkbox" name="company" value="1" @checked($template->checkmarkValue('company')) />
                     {{ trans('general.company') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('asset_tag', '1', $template->checkmarkValue('asset_tag')) }}
+                    <input type="checkbox" name="asset_tag" value="1" @checked($template->checkmarkValue('asset_tag')) />
                     {{ trans('general.asset_tag') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('asset_name', '1', $template->checkmarkValue('asset_name')) }}
+                    <input type="checkbox" name="asset_name" value="1" @checked($template->checkmarkValue('asset_name')) />
                     {{ trans('admin/hardware/form.name') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('manufacturer', '1', $template->checkmarkValue('manufacturer')) }}
+                    <input type="checkbox" name="manufacturer" value="1" @checked($template->checkmarkValue('manufacturer')) />
                     {{ trans('general.manufacturer') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('model', '1', $template->checkmarkValue('model')) }}
+                    <input type="checkbox" name="model" value="1" @checked($template->checkmarkValue('model')) />
                     {{ trans('general.asset_models') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('category', '1', $template->checkmarkValue('category')) }}
+                    <input type="checkbox" name="category" value="1" @checked($template->checkmarkValue('category')) />
                     {{ trans('general.category') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('serial', '1', $template->checkmarkValue('serial')) }}
+                    <input type="checkbox" name="serial" value="1" @checked($template->checkmarkValue('serial')) />
                     {{ trans('admin/hardware/table.serial') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('purchase_date', '1', $template->checkmarkValue('purchase_date')) }}
+                    <input type="checkbox" name="purchase_date" value="1" @checked($template->checkmarkValue('purchase_date')) />
                     {{ trans('admin/licenses/table.purchase_date') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('purchase_cost', '1', $template->checkmarkValue('purchase_cost')) }}
+                    <input type="checkbox" name="purchase_cost" value="1" @checked($template->checkmarkValue('purchase_cost')) />
                     {{ trans('admin/hardware/form.cost') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('eol', '1', $template->checkmarkValue('eol')) }}
+                    <input type="checkbox" name="eol" value="1" @checked($template->checkmarkValue('eol')) />
                     {{ trans('admin/hardware/form.eol_date') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('order', '1', $template->checkmarkValue('order')) }}
-                    {{ trans('admin/hardware/form.order') }}
-                </label>
-
-                <label class="form-control">
-                    {{ Form::checkbox('supplier', '1', $template->checkmarkValue('supplier')) }}
-                    {{ trans('general.suppliers') }}
-                </label>
-
-                <label class="form-control">
-                    {{ Form::checkbox('location', '1', $template->checkmarkValue('location')) }}
-                    {{ trans('general.location') }}
-                </label>
-
-              <label class="form-control" style="margin-left: 25px;">
-                  {{ Form::checkbox('location_address', '1', $template->checkmarkValue('location_address')) }}
-                  {{ trans('general.address') }}
-              </label>
-
-                <label class="form-control">
-                    {{ Form::checkbox('rtd_location', '1', $template->checkmarkValue('rtd_location')) }}
-                    {{ trans('admin/hardware/form.default_location') }}
-                </label>
-
-              <label class="form-control" style="margin-left: 25px;">
-                  {{ Form::checkbox('rtd_location_address', '1', $template->checkmarkValue('rtd_location_address')) }}
-                {{ trans('general.address') }}
-              </label>
-
-                <label class="form-control">
-                    {{ Form::checkbox('status', '1', $template->checkmarkValue('status')) }}
-                    {{ trans('general.status') }}
-                </label>
-
-                <label class="form-control">
-                    {{ Form::checkbox('warranty', '1', $template->checkmarkValue('warranty')) }}
+                    <input type="checkbox" name="warranty" value="1" @checked($template->checkmarkValue('warranty')) />
                     {{ trans('admin/hardware/form.warranty') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('depreciation', '1', $template->checkmarkValue('depreciation')) }}
+                    <input type="checkbox" name="depreciation" value="1" @checked($template->checkmarkValue('depreciation')) />
                     {{ trans('general.depreciation') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('checkout_date', '1', $template->checkmarkValue('checkout_date')) }}
+                    <input type="checkbox" name="order" value="1" @checked($template->checkmarkValue('order')) />
+                    {{ trans('admin/hardware/form.order') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="supplier" value="1" @checked($template->checkmarkValue('supplier')) />
+                    {{ trans('general.suppliers') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="location" value="1" @checked($template->checkmarkValue('location')) />
+                    {{ trans('general.location') }}
+                </label>
+
+              <label class="form-control" style="margin-left: 25px;">
+                  <input type="checkbox" name="location_address" value="1" @checked($template->checkmarkValue('location_address')) />
+                  {{ trans('general.address') }}
+              </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="rtd_location" value="1" @checked($template->checkmarkValue('rtd_location')) />
+                    {{ trans('admin/hardware/form.default_location') }}
+                </label>
+
+              <label class="form-control" style="margin-left: 25px;">
+                  <input type="checkbox" name="rtd_location_address" value="1" @checked($template->checkmarkValue('rtd_location_address')) />
+                {{ trans('general.address') }}
+              </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="status" value="1" @checked($template->checkmarkValue('status')) />
+                    {{ trans('general.status') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="checkout_date" value="1" @checked($template->checkmarkValue('checkout_date')) />
                     {{ trans('admin/hardware/table.checkout_date') }}
                 </label>
 
               <label class="form-control">
-                {{ Form::checkbox('checkin_date', '1', $template->checkmarkValue('checkin_date')) }}
+                  <input type="checkbox" name="checkin_date" value="1" @checked($template->checkmarkValue('checkin_date')) />
                 {{ trans('admin/hardware/table.last_checkin_date') }}
               </label>
 
               <label class="form-control">
-                {{ Form::checkbox('expected_checkin', '1', $template->checkmarkValue('expected_checkin')) }}
+                  <input type="checkbox" name="expected_checkin" value="1" @checked($template->checkmarkValue('expected_checkin')) />
                 {{ trans('admin/hardware/form.expected_checkin') }}
               </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('created_at', '1', $template->checkmarkValue('created_at')) }}
+                    <input type="checkbox" name="created_at" value="1" @checked($template->checkmarkValue('created_at')) />
                     {{ trans('general.created_at') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('updated_at', '1', $template->checkmarkValue('updated_at')) }}
+                    <input type="checkbox" name="updated_at" value="1" @checked($template->checkmarkValue('updated_at')) />
                     {{ trans('general.updated_at') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('deleted_at', '1', $template->checkmarkValue('deleted_at')) }}
+                    <input type="checkbox" name="deleted_at" value="1" @checked($template->checkmarkValue('deleted_at')) />
                     {{ trans('general.deleted') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('last_audit_date', '1', $template->checkmarkValue('last_audit_date')) }}
+                    <input type="checkbox" name="last_audit_date" value="1" @checked($template->checkmarkValue('last_audit_date')) />
                     {{ trans('general.last_audit') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('next_audit_date', '1', $template->checkmarkValue('next_audit_date')) }}
+                    <input type="checkbox" name="next_audit_date" value="1" @checked($template->checkmarkValue('next_audit_date')) />
                     {{ trans('general.next_audit_date') }}
                 </label>
 
                 <label class="form-control">
-                    {{ Form::checkbox('notes', '1', $template->checkmarkValue('notes')) }}
+                    <input type="checkbox" name="notes" value="1" @checked($template->checkmarkValue('notes')) />
                     {{ trans('general.notes') }}
                 </label>
 
               <label class="form-control" style="margin-left: 25px;">
-                  {{ Form::checkbox('url', '1', $template->checkmarkValue('url')) }}
+                  <input type="checkbox" name="url" value="1" @checked($template->checkmarkValue('url')) />
                 {{ trans('general.url') }}
               </label>
 
@@ -267,64 +248,64 @@
               <h2>{{ trans('general.checked_out_to_fields') }}: </h2>
 
               <label class="form-control">
-                {{ Form::checkbox('assigned_to', '1', $template->checkmarkValue('assigned_to')) }}
+                  <input type="checkbox" name="assigned_to" value="1" @checked($template->checkmarkValue('assigned_to')) />
                 {{ trans('admin/licenses/table.assigned_to') }}
               </label>
 
               <label class="form-control">
-                {{ Form::checkbox('username', '1', $template->checkmarkValue('username')) }}
+                  <input type="checkbox" name="username" value="1" @checked($template->checkmarkValue('username')) />
                 {{ trans('admin/users/table.username') }}
               </label>
 
               <label class="form-control">
-                {{ Form::checkbox('employee_num', '1', $template->checkmarkValue('employee_num')) }}
+                  <input type="checkbox" name="employee_num" value="1" @checked($template->checkmarkValue('employee_num')) />
                 {{ trans('general.employee_number') }}
               </label>
 
               <label class="form-control">
-                {{ Form::checkbox('manager', '1', $template->checkmarkValue('manager')) }}
+                  <input type="checkbox" name="manager" value="1" @checked($template->checkmarkValue('manager')) />
                 {{ trans('admin/users/table.manager') }}
               </label>
 
               <label class="form-control">
-                {{ Form::checkbox('department', '1', $template->checkmarkValue('department')) }}
+                  <input type="checkbox" name="department" value="1" @checked($template->checkmarkValue('department')) />
                 {{ trans('general.department') }}
               </label>
 
               <label class="form-control">
-                {{ Form::checkbox('title', '1', $template->checkmarkValue('title')) }}
+                  <input type="checkbox" name="title" value="1" @checked($template->checkmarkValue('title')) />
                 {{ trans('admin/users/table.title') }}
               </label>
 
                 <!-- new -->
 
               <label class="form-control">
-                  {{ Form::checkbox('phone', '1', $template->checkmarkValue('phone')) }}
+                  <input type="checkbox" name="phone" value="1" @checked($template->checkmarkValue('phone')) />
                   {{ trans('admin/users/table.phone') }}
               </label>
 
               <label class="form-control">
-                  {{ Form::checkbox('user_address', '1', $template->checkmarkValue('user_address')) }}
+                  <input type="checkbox" name="user_address" value="1" @checked($template->checkmarkValue('user_address')) />
                   {{ trans('general.address') }}
               </label>
 
               <label class="form-control">
-                  {{Form::checkbox('user_city', '1', $template->checkmarkValue('user_city'))}}
+                  <input type="checkbox" name="user_city" value="1" @checked($template->checkmarkValue('user_city')) />
                   {{ trans('general.city') }}
               </label>
 
               <label class="form-control">
-                  {{Form::checkbox('user_state', '1', $template->checkmarkValue('user_state'))}}
+                  <input type="checkbox" name="user_state" value="1" @checked($template->checkmarkValue('user_state')) />
                   {{ trans('general.state') }}
               </label>
 
               <label class="form-control">
-                  {{Form::checkbox('user_country', '1', $template->checkmarkValue('user_country'))}}
+                  <input type="checkbox" name="user_country" value="1" @checked($template->checkmarkValue('user_country')) />
                   {{ trans('general.country') }}
               </label>
 
               <label class="form-control">
-                  {{Form::checkbox('user_zip', '1', $template->checkmarkValue('user_zip'))}}
+                  <input type="checkbox" name="user_zip" value="1" @checked($template->checkmarkValue('user_zip')) />
                   {{ trans('general.zip') }}
               </label>
 
@@ -337,7 +318,7 @@
               @foreach ($customfields as $customfield)
 
                   <label class="form-control">
-                    {{ Form::checkbox($customfield->db_column_name(), '1', $template->checkmarkValue($customfield->db_column_name())) }}
+                      <input type="checkbox" name="{{ $customfield->db_column_name() }}" value="1" @checked($template->checkmarkValue($customfield->db_column_name())) />
                     {{ $customfield->name }}
                   </label>
 
@@ -568,28 +549,49 @@
 
             <div class="col-md-9 col-md-offset-3">
             <label class="form-control">
-              {{ Form::checkbox('exclude_archived', '1', $template->checkmarkValue('exclude_archived', '0')) }}
+                <input type="checkbox" name="exclude_archived" value="1" @checked($template->checkmarkValue('exclude_archived', '0')) />
               {{ trans('general.exclude_archived') }}
             </label>
             </div>
             <div class="col-md-9 col-md-offset-3">
               <label class="form-control">
-                {{ Form::checkbox('use_bom', '1', $template->checkmarkValue('use_bom', '0')) }}
+                  <input type="checkbox" name="use_bom" value="1" @checked($template->checkmarkValue('use_bom', '0')) />
                 {{ trans('general.bom_remark') }}
               </label>
             </div>
 
               <div class="col-md-9 col-md-offset-3">
                   <label class="form-control">
-                    {{ Form::radio('deleted_assets', 'exclude_deleted', $template->radioValue('deleted_assets', 'exclude_deleted', true), ['aria-label'=>'deleted_assets', 'id'=>'deleted_assets_exclude_deleted'])}}
-                    {{ trans('general.exclude_deleted') }}
+                      <input
+                          name="deleted_assets"
+                          id="deleted_assets_exclude_deleted"
+                          type="radio"
+                          value="exclude_deleted"
+                          @checked($template->radioValue('deleted_assets', 'exclude_deleted', true))
+                          aria-label="deleted_assets"
+                      >
+                      {{ trans('general.exclude_deleted') }}
                   </label>
                   <label class="form-control">
-                    {{ Form::radio('deleted_assets', 'include_deleted', $template->radioValue('deleted_assets', 'include_deleted'), ['aria-label'=>'deleted_assets', 'id'=>'deleted_assets_include_deleted']) }}
+                      <input
+                          name="deleted_assets"
+                          id="deleted_assets_include_deleted"
+                          type="radio"
+                          value="include_deleted"
+                          @checked($template->radioValue('deleted_assets', 'include_deleted'))
+                          aria-label="deleted_assets"
+                      >
                     {{ trans('general.include_deleted') }}
                   </label>
                   <label class="form-control">
-                    {{ Form::radio('deleted_assets', 'only_deleted', $template->radioValue('deleted_assets', 'only_deleted'), ['aria-label'=>'deleted_assets','id'=>'deleted_assets_only_deleted']) }}
+                      <input
+                          name="deleted_assets"
+                          type="radio"
+                          id="deleted_assets_only_deleted"
+                          value="only_deleted"
+                          @checked($template->radioValue('deleted_assets', 'only_deleted'))
+                          aria-label="deleted_assets"
+                      >
                     {{ trans('general.only_deleted') }}
                   </label>
               </div>
@@ -610,11 +612,11 @@
                 @endif
             </div>
         </div> <!--/.box.box-default-->
-    {{ Form::close() }}
+        </form>
     </div>
 
     <!-- Saved Reports right column -->
-    <div class="col-md-2">
+    <div class="col-md-3">
         @if (! request()->routeIs('report-templates.edit'))
             <div class="form-group">
                 <label for="saved_report_select">{{ trans('admin/reports/general.open_saved_template') }}</label>
@@ -625,11 +627,50 @@
                 >
                     <option></option>
                     @foreach($report_templates as $savedTemplate)
-                        <option value="{{ $savedTemplate->id }}" @selected($savedTemplate->is(request()->route()->parameter('reportTemplate')))>
+                        <option
+                            value="{{ $savedTemplate->id }}"
+                            data-route="{{ route('report-templates.show', $savedTemplate->id) }}"
+                            @selected($savedTemplate->is(request()->route()->parameter('reportTemplate')))
+                        >
                             {{ $savedTemplate->name }}
                         </option>
                     @endforeach
                 </select>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                @if (request()->routeIs('report-templates.show'))
+                        <a
+                                href="{{ route('report-templates.edit', $template) }}"
+                                class="btn btn-sm btn-warning btn-social btn-block"
+                                data-tooltip="true"
+                                title="{{ trans('admin/reports/general.update_template') }}"
+                                style="margin-bottom: 5px;"
+                        >
+                            <x-icon type="edit" />
+                            {{ trans('general.update') }}
+                        </a>
+
+                    <span data-tooltip="true" title="{{ trans('general.delete') }}">
+                        <a href="#"
+                                class="btn btn-sm btn-danger btn-social btn-block"
+                                data-toggle="modal"
+                                data-title="{{ trans('general.delete') }}"
+                                data-content="{{ trans('general.delete_confirm', ['item' => $template->name]) }}"
+                                data-target="#dataConfirmModal"
+                                type="button"
+                        >
+
+                                <x-icon type="delete" />
+                                {{ trans('general.delete') }}
+
+                        </a>
+                    </span>
+
+
+                @endif
+                </div>
             </div>
         @endif
         @if (request()->routeIs('reports/custom'))
@@ -737,7 +778,7 @@
 
       $('#saved_report_select')
           .on('select2:select', function (event) {
-              window.location.href = '/reports/templates/' + event.params.data.id;
+              window.location.href = event.params.data.element.dataset.route;
           });
 
       $('#dataConfirmModal').on('show.bs.modal', function (event) {

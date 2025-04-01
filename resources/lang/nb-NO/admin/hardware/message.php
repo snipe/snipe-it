@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Er du sikker på at du vil slette eiendelen?',
         'error'   		=> 'Det oppstod et problem under sletting av eiendel. Vennligst prøv igjen.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Ingen assets ble valgt, så ingenting ble slettet.',
         'success' 		=> 'Vellykket sletting av eiendel.',
     ],

@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Kei te hiahia koe ki te muku i tenei taonga?',
         'error'   		=> 'He raru kei te whakakore i te taonga. Tena ngana ano.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Kaore he rawa i tohua, na reira kaore i whakakorehia.',
         'success' 		=> 'Kua mukua te taonga.',
     ],

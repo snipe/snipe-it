@@ -1,16 +1,16 @@
 <?php
 
 return [
-    'about_templates' => 'About Saved Templates',
-    'saving_templates_description' => 'Select your options, then enter the name of your template in the box above and click the \'Save Template\' button. Use the dropdown to select a previously saved template.',
+    'about_templates' => 'Om sparade mallar',
+    'saving_templates_description' => 'Gör dina val, skriv sedan in namnet på din mall i rutan ovanför och tryck på "Spara mall"-knappen. Använd listrutan för att välja en tidigare sparad mall.',
     'create'  => [
-        'success' => 'Template saved successfully',
+        'success' => 'Mall sparad',
     ],
     'update' => [
-        'success' => 'Template updated successfully',
+        'success' => 'Mall uppdaterad',
     ],
     'delete' => [
-        'success' => 'Template deleted',
-        'no_delete_permission' => 'Template does not exist or you do not have permission to delete it.',
+        'success' => 'Mall borttagen',
+        'no_delete_permission' => 'Mallen existerar inte eller så har du inte tillgång till att ta bort den.',
     ],
 ];

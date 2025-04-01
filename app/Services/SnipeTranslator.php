@@ -26,17 +26,19 @@ class SnipeTranslator extends Translator {
     public function choice($key, $number, array $replace = [], $locale = null)
     {
         $line = $this->get(
-            $key, $replace, $locale = $this->localeForChoice($locale)
+            $key, [], $locale = $this->localeForChoice($key, $locale)
         );
 
         // If the given "number" is actually an array or countable we will simply count the
         // number of elements in an instance. This allows developers to pass an array of
         // items without having to count it on their end first which gives bad syntax.
-        if (is_array($number) || $number instanceof Countable) {
+        if (is_countable($number)) {
             $number = count($number);
         }
 
-        $replace['count'] = $number;
+        if (!isset($replace['count'])) {
+            $replace['count'] = $number;
+        }
 
         $underscored_locale = str_replace("-","_",$locale); // OUR CHANGE.
         return $this->makeReplacements( // BELOW - that $underscored_locale is the *ONLY* modified part

@@ -7,13 +7,13 @@
 @stop
 
 @section('header_right')
-    {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
+    <form method="POST" action="{{ route('reports.activity.post') }}" accept-charset="UTF-8" class="form-horizontal">
     {{csrf_field()}}
     <button type="submit" class="btn btn-default">
         <x-icon type="download" />
         {{ trans('general.download_all') }}
     </button>
-    {{ Form::close() }}
+    </form>
 @stop
 
 {{-- Page content --}}
@@ -56,7 +56,7 @@
                                 {{ trans('general.date') }}
                             </th>
                             <th class="col-sm-2" data-searchable="true" data-sortable="true" data-field="created_by" data-formatter="usersLinkObjFormatter">
-                                {{ trans('general.admin') }}
+                                {{ trans('general.created_by') }}
                             </th>
                             <th class="col-sm-2" data-field="action_type">
                                 {{ trans('general.action') }}

@@ -157,7 +157,42 @@
 
 
           <div class="tab-content">
-              <div class="tab-pane active" id="users">
+
+              <div class="tab-pane active" id="assets">
+                  <h2 class="box-title">{{ trans('admin/locations/message.current_location') }}</h2>
+
+                  <div class="table table-responsive">
+                      @include('partials.asset-bulk-actions')
+                      <table
+                              data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
+                              data-cookie-id-table="assetsListingTable"
+                              data-pagination="true"
+                              data-id-table="assetsListingTable"
+                              data-search="true"
+                              data-side-pagination="server"
+                              data-show-columns="true"
+                              data-show-export="true"
+                              data-show-refresh="true"
+                              data-sort-order="asc"
+                              data-toolbar="#assetsBulkEditToolbar"
+                              data-bulk-button-id="#bulkAssetEditButton"
+                              data-bulk-form-id="#assetsBulkForm"
+                              data-click-to-select="true"
+                              id="assetsListingTable"
+                              class="table table-striped snipe-table"
+                              data-url="{{route('api.assets.index', ['location_id' => $location->id]) }}"
+                              data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                      </table>
+
+                  </div><!-- /.table-responsive -->
+              </div><!-- /.tab-pane -->
+
+
+              
+              <div class="tab-pane" id="users">
                     <h2 class="box-title">{{ trans('general.users') }}</h2>
                       <div class="table table-responsive">
                           @include('partials.users-bulk-actions')
@@ -188,37 +223,6 @@
                       </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
 
-              <div class="tab-pane" id="assets">
-                      <h2 class="box-title">{{ trans('admin/locations/message.current_location') }}</h2>
-
-                      <div class="table table-responsive">
-                          @include('partials.asset-bulk-actions')
-                          <table
-                                  data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
-                                  data-cookie-id-table="assetsListingTable"
-                                  data-pagination="true"
-                                  data-id-table="assetsListingTable"
-                                  data-search="true"
-                                  data-side-pagination="server"
-                                  data-show-columns="true"
-                                  data-show-export="true"
-                                  data-show-refresh="true"
-                                  data-sort-order="asc"
-                                  data-toolbar="#assetsBulkEditToolbar"
-                                  data-bulk-button-id="#bulkAssetEditButton"
-                                  data-bulk-form-id="#assetsBulkForm"
-                                  data-click-to-select="true"
-                                  id="assetsListingTable"
-                                  class="table table-striped snipe-table"
-                                  data-url="{{route('api.assets.index', ['location_id' => $location->id]) }}"
-                                  data-export-options='{
-                              "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
-                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                              }'>
-                          </table>
-
-                      </div><!-- /.table-responsive -->
-              </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="assets_assigned">
                   <h2 class="box-title">
@@ -314,11 +318,13 @@
               </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="accessories_assigned">
-                  <h2 class="box-title">
-                      Assigned Accessories
-                  </h2>
 
                   <div class="table table-responsive">
+
+                      <h2 class="box-title" style="float:left">
+                          {{ trans('general.accessories_assigned') }}
+                      </h2>
+
                       <table
                               data-columns="{{ \App\Presenters\LocationPresenter::assignedAccessoriesDataTableLayout() }}"
                               data-cookie-id-table="accessoriesAssignedListingTable"

@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Вы уверены что хотите удалить этот актив?',
         'error'   		=> 'При удалении актива возникла проблема. Пожалуйста попробуйте снова.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Ни один из активов не выбран, поэтому ничего не удалено.',
         'success' 		=> 'Актив был успешно удален.',
     ],

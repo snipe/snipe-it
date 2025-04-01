@@ -45,6 +45,7 @@
                         data-search="true"
                         data-show-footer="true"
                         data-side-pagination="server"
+                        data-footer-style="footerStyle"
                         data-show-columns="true"
                         data-toolbar="#modelsBulkEditToolbar"
                         data-bulk-button-id="#bulkModelsEditButton"
@@ -62,7 +63,6 @@
               </table>
         </div>
         </div>
-        {{ Form::close() }}
       </div><!-- /.box-body -->
     </div><!-- /.box -->
   </div>

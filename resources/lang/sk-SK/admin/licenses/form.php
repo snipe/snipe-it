@@ -3,7 +3,7 @@
 return array(
 
     'asset'             => 'Majetok',
-    'checkin'           => 'Vrátenie',
+    'checkin'           => 'Prevzatie',
     'create'            => 'Pridať licenciu',
     'expiration'        => 'Exspirácia licencie',
     'license_key'       => 'Produktový kľúč',

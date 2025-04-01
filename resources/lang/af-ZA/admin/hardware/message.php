@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Is jy seker jy wil hierdie bate uitvee?',
         'error'   		=> 'Daar was \'n probleem met die verwydering van die bate. Probeer asseblief weer.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Geen bates is gekies nie, so niks is verwyder nie.',
         'success' 		=> 'Die bate is suksesvol verwyder.',
     ],

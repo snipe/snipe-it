@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovaj resurs?',
         'error'   		=> 'Došlo je do problema s brisanjem resursa. Molim pokušajte ponovo.',
+        'assigned_to_error' => '{1}Oznaka imovine: :asset_tag je trenutno zadužena. Razduži ovaj uređaj pre brisanja.|[2,*]Oznake imovine: :asset_tag su trenutno zadužene. Razduži ove uređaje pre brisanja.',
         'nothing_updated'   => 'Nijedna imovina nije odabrana, tako da ništa nije izbrisano.',
         'success' 		=> 'Imovina je uspešno obrisana.',
     ],

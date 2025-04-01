@@ -22,6 +22,15 @@ class AssetMaintenancesPresenter extends Presenter
                 'title' => trans('general.id'),
                 'visible' => false,
             ], [
+                'field' => 'title',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.name'),
+                'visible' => true,
+                'formatter' => 'maintenancesLinkFormatter',
+            ],
+            [
                 'field' => 'company',
                 'searchable' => true,
                 'sortable' => true,
@@ -81,12 +90,6 @@ class AssetMaintenancesPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/asset_maintenances/form.asset_maintenance_type'),
-            ], [
-                'field' => 'title',
-                'searchable' => true,
-                'sortable' => true,
-                'switchable' => false,
-                'title' => trans('admin/asset_maintenances/form.title'),
             ], [
                 'field' => 'start_date',
                 'searchable' => true,

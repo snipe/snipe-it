@@ -292,8 +292,10 @@
                       </div>
                       <div class="col-md-9">
 
-                        <span class="js-copy">{{ $consumable->item_no  }}</span>
-                        <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                        <span class="js-copy-item_no">{{ $consumable->item_no  }}</span>
+                        <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-item_no"
+                           aria-hidden="true" data-tooltip="true" data-placement="top"
+                           title="{{ trans('general.copy_to_clipboard') }}">
                           <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                         </i>
 
@@ -308,8 +310,10 @@
                       </div>
                       <div class="col-md-9">
 
-                        <span class="js-copy">{{ $consumable->model_number  }}</span>
-                        <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                        <span class="js-copy-model_no">{{ $consumable->model_number  }}</span>
+                        <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-model_no"
+                           aria-hidden="true" data-tooltip="true" data-placement="top"
+                           title="{{ trans('general.copy_to_clipboard') }}">
                           <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                         </i>
 

@@ -10,7 +10,7 @@ return [
     'action'                => 'Dejanje',
     'activity_report'		=> 'Poročilo o dejavnosti',
     'address'				=> 'Naslov',
-    'admin'					=> 'Administrator',
+    'admin'					=> 'Adminske nastavitve',
     'admin_tooltip'			=> 'This user has admin privileges',
     'superuser'				=> 'Superuser',
     'superuser_tooltip'		=> 'This user has superuser privileges',
@@ -29,6 +29,7 @@ return [
     'assets_available'		=> 'Razpoložljiva sredstva',
     'accept_assets'         => 'Accept Assets :name',
     'accept_assets_menu'    => 'Accept Assets',
+    'accept_item'           => 'Accept Item',
     'audit'				    => 'Revizija',
     'audit_report'			=> 'Dnevnik revizije',
     'assets'				=> 'Sredstva',
@@ -87,11 +88,13 @@ return [
     'record_created' 		=> 'Zapis ustvarjen',
     'updated_at' 			=> 'Posodobljeno ob',
     'currency'  			=> '$', // this is deprecated
+    'currency_text'  		=> 'Currency', //
     'current'  				=> 'Trenutni',
     'current_password'      => 'Trenutno geslo',
     'customize_report'      => 'Customize Report',
     'custom_report'         => 'Poročilo o sredstvih po meri',
     'dashboard'				=> 'Nadzorna plošča',
+    'data_source'           => 'Data Source',
     'days'      			=> 'dni',
     'days_to_next_audit'    => 'Dnevi do naslednje revizije',
     'date'					=> 'Datum',
@@ -127,6 +130,7 @@ return [
     'firstname_lastname_underscore_format' => 'Ime priimek (jane.smith@example.com)',
     'lastnamefirstinitial_format' =>  'Priimek s prvo črko imena (smithj@example.com)',
     'firstintial_dot_lastname_format' => 'Prva črka imena s priimkom (j.smith@example.com)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
     'firstname_lastname_display'	=> 'First Name Last Name (Jane Smith)',
     'lastname_firstname_display'	=> 'Last Name First Name (Smith Jane)',
     'name_display_format'	=> 'Name Display Format',
@@ -218,6 +222,8 @@ return [
     'no'  					=> 'Ne',
     'notes'  				=> 'Opombe',
     'note_added'            => 'Note Added',
+    'options'				=> 'Options',
+    'preview'				=> 'Preview',
     'add_note'              => 'Add Note',
     'note_edited'            => 'Note Edited',
     'edit_note'              => 'Edit Note',
@@ -334,10 +340,10 @@ return [
     'token_expired'         => 'Vaša seja je potekla. Prosimo, poizkusite ponovno.',
     'login_enabled'         => 'Prijava omogočena',
     'audit_due'             => 'Za revizijo',
-    'audit_due_days'        => 'Assets Due for Audit Within :days Day|Assets Due for Audit Within :days Days',
+    'audit_due_days'        => '{}Assets Due or Overdue for Audit|[1]Assets Due or Overdue for Audit Within a Day|[2,*]Assets Due or Overdue for Audit Within :days Days',
     'checkin_due'           => 'Due for Checkin',
     'checkin_overdue'       => 'Overdue for Checkin',
-    'checkin_due_days'      => 'Assets Due for Checkin Within :days Day|Assets Due for Checkin Within :days Days',
+    'checkin_due_days'      => '{}Due for Checkin|[1]Assets Due for Checkin Within :days Day|[2,*]Assets Due for Checkin Within :days Days',
     'audit_overdue'         => 'Zamuda za revizijo',
     'accept'                => 'Sprejmi :asset',
     'i_accept'              => 'Sprejmem',
@@ -562,6 +568,7 @@ return [
         'consumables'  => ':count Consumable|:count Consumables',
         'components'  => ':count Component|:count Components',
     ],
+
     'more_info' => 'Več informacij',
     'quickscan_bulk_help' => 'Checking this box will edit the asset record to reflect this new location. Leaving it unchecked will simply note the location in the audit log. Note that if this asset is checked out, it will not change the location of the person, asset or location it is checked out to.',
     'whoops' => 'Ups!',
@@ -577,5 +584,21 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+
+// Add form placeholders here
+    'placeholders' => [
+        'notes'  => 'Add a note',
+    ],
+
+    'breadcrumb_button_actions' => [
+        'edit_item' => 'Edit :name',
+        'checkout_item' => 'Checkout :name',
+        'checkin_item' => 'Checkin :name',
+    ],
+
+    'select_all_none' => 'Select/Unselect All',
+    'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
+    'deleted_models' => 'Deleted Asset Models',
+    'deleted_users' => 'Deleted Users',
 
 ];

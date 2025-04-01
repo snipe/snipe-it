@@ -21,7 +21,7 @@ class UpdateLocationsTest extends TestCase
     public function testPageRenders()
     {
         $this->actingAs(User::factory()->superuser()->create())
-            ->get(route('locations.update', Location::factory()->create()->id))
+            ->get(route('locations.edit', Location::factory()->create()))
             ->assertOk();
     }
 
@@ -33,13 +33,14 @@ class UpdateLocationsTest extends TestCase
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->put(route('locations.update', ['location' => $location]), [
                 'name' => 'Test Location Edited',
+                'notes' => 'Test Note Edited',
             ])
             ->assertStatus(302)
             ->assertSessionHasNoErrors()
             ->assertRedirect(route('locations.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertTrue(Location::where('name', 'Test Location Edited')->exists());
+        $this->assertTrue(Location::where('name', 'Test Location Edited')->where('notes', 'Test Note Edited')->exists());
     }
 
     public function testUserCannotEditLocationsToMakeThemTheirOwnParent()
@@ -47,8 +48,8 @@ class UpdateLocationsTest extends TestCase
         $location = Location::factory()->create();
 
         $response = $this->actingAs(User::factory()->superuser()->create())
-            ->from(route('locations.edit', ['location' => $location->id]))
-            ->put(route('locations.update', ['location' => $location]), [
+            ->from(route('locations.edit', $location))
+            ->put(route('locations.update', $location), [
                 'name' => 'Test Location',
                 'parent_id' => $location->id,
             ])
@@ -62,7 +63,7 @@ class UpdateLocationsTest extends TestCase
     {
         $location = Location::factory()->create();
         $response = $this->actingAs(User::factory()->superuser()->create())
-            ->from(route('locations.edit', ['location' => $location->id]))
+            ->from(route('locations.edit', $location))
             ->put(route('locations.update', ['location' => $location]), [
                 'name' => 'Test Location',
                 'parent_id' => '100000000'

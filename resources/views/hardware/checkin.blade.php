@@ -53,9 +53,9 @@
                                                         {{ $asset->model->name }}
                                                     @else
                                                         <span class="text-danger text-bold">
-                              <x-icon type="warning" />
-                              {{ trans('admin/hardware/general.model_invalid')}}
-                            </span>
+                                                          <x-icon type="warning" />
+                                                          {{ trans('admin/hardware/general.model_invalid')}}
+                                                        </span>
                                                         {{ trans('admin/hardware/general.model_invalid_fix')}}
                                                         <a href="{{ route('hardware.edit', $asset->id) }}">
                                                             <strong>{{ trans('admin/hardware/general.edit') }}</strong>
@@ -84,12 +84,37 @@
                                                 {{ trans('admin/hardware/form.status') }}
                                             </label>
                                             <div class="col-md-8 required">
-                                                {{ Form::select('status_id', $statusLabel_list, '', array('class'=>'select2', 'style'=>'width:100%','id' =>'modal-statuslabel_types', 'aria-label'=>'status_id')) }}
+                                                <x-input.select
+                                                    name="status_id"
+                                                    id="modal-statuslabel_types"
+                                                    :options="$statusLabel_list"
+                                                    style="width: 100%"
+                                                    aria-label="status_id"
+                                                />
                                                 {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                             </div>
                                         </div>
 
-                                        @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id', 'help_text' => ($asset->defaultLoc) ? trans('general.checkin_to_diff_location', ['default_location' => $asset->defaultLoc->name]) : null, 'hide_location_radio' => true])
+                                        <x-input.location-select
+                                            :label="trans('general.location')"
+                                            name="location_id"
+                                            :help_text="($asset->defaultLoc) ? trans('general.checkin_to_diff_location', ['default_location' => $asset->defaultLoc->name]) : null"
+                                            :selected="old('location_id')"
+                                        />
+
+                                        <!-- Update actual location  -->
+                                        <div class="form-group">
+                                            <div class="col-md-9 col-md-offset-3">
+                                                <label class="form-control">
+                                                    {{ Form::radio('update_default_location', '1', old('update_default_location'), ['checked'=> 'checked', 'aria-label'=>'update_default_location']) }}
+                                                    {{ trans('admin/hardware/form.asset_location') }}
+                                                </label>
+                                                <label class="form-control">
+                                                    {{ Form::radio('update_default_location', '0', old('update_default_location'), ['aria-label'=>'update_default_location']) }}
+                                                    {{ trans('admin/hardware/form.asset_location_update_default_current') }}
+                                                </label>
+                                            </div>
+                                        </div> <!--/form-group-->
 
                                         <!-- Checkout/Checkin Date -->
                                         <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
@@ -112,6 +137,18 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- Custom fields -->
+                                        @include("models/custom_fields_form", [
+                                                'model' => $asset->model,
+                                                'show_display_checkin_fields' => 'true'
+                                        ])
+
+
+
+
+
+
 
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">

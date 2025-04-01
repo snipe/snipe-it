@@ -122,6 +122,33 @@ class Handler extends ExceptionHandler
         }
 
 
+        // This is traaaaash but it handles models that are not found while using route model binding :(
+        // The only alternative is to set that at *each* route, which is crazypants
+        if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+
+            // This gets the MVC model name from the exception and formats in a way that's less fugly
+            $model_name = strtolower(implode(" ", preg_split('/(?=[A-Z])/', last(explode('\\', $e->getModel())))));
+            $route = str_plural(strtolower(last(explode('\\', $e->getModel())))).'.index';
+
+            // Sigh.
+            if ($route == 'assets.index') {
+                $route = 'hardware.index';
+            } elseif ($route == 'reporttemplates.index') {
+                $route = 'reports/custom';
+            } elseif ($route == 'assetmodels.index') {
+                $route = 'models.index';
+            } elseif ($route == 'predefinedkits.index') {
+                $route = 'kits.index';
+            } elseif ($route == 'assetmaintenances.index') {
+                $route = 'maintenances.index';
+            } elseif ($route === 'licenseseats.index') {
+                $route = 'licenses.index';
+            }
+
+            return redirect()
+                ->route($route)
+                ->withError(trans('general.generic_model_not_found', ['model' => $model_name]));
+        }
 
 
         if ($this->isHttpException($e) && (isset($statusCode)) && ($statusCode == '404' )) {

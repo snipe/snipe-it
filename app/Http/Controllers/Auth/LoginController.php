@@ -206,6 +206,7 @@ class LoginController extends Controller
                 $user->password = bcrypt($request->input('password'));
             }
 
+            $user->last_login = \Carbon::now();
             $user->email = $ldap_attr['email'];
             $user->first_name = $ldap_attr['firstname'];
             $user->last_name = $ldap_attr['lastname']; //FIXME (or TODO?) - do we need to map additional fields that we now support? E.g. country, phone, etc.
@@ -432,6 +433,7 @@ class LoginController extends Controller
 
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
             $user->two_factor_enrolled = 1;
+            $user->last_login = \Carbon::now();
             $user->saveQuietly();
             $request->session()->put('2fa_authed', $user->id);
 

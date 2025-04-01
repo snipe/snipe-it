@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Vytvoriť nové vlastné pole',
     'value_encrypted'      	        => 'Hodnota tohto poľa je v databáze šifrovaná. Iba admin používatelia budú schopní dešiforvať jeho hodnotu',
     'show_in_email'     => 'Zahrnúť hodnotu tohto poľa do emailu o priradení posielaného používateľom? Šifrované polia nemôžu byť použíté v mailoch',
-    'show_in_email_short'     => 'Zahnúť do mailu.',
+    'show_in_email_short' => 'Zahnúť do mailu',
     'help_text' => 'Text nápovedy',
     'help_text_description' => 'Toto je voliteľný text, ktorý sa zobrazí pod prvkami formuláru pri editovaní majetku pre poskytnutie kontextu k vypĺňanému polu.',
     'about_custom_fields_title' => 'O vlastných poliach',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Zobraziť v zozname vyžiadateľných majetkov',
     'show_in_requestable_list' => 'Zobraziť hodnotu v zoznamu vyžiadateľných majetkov. Šifrované polia nebudu zobratené',
     'encrypted_options' => 'Toto pole je šifrované, takže niektoré možnosti zobrazenia nebudú k dispozícii.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'LDAP認証のテスト中...',
         'authentication_success' => 'LDAPによるユーザー認証に成功しました！'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => ':app テストメッセージを送信しています...',
         'success' => 'あなたの:webhook_name連携は動作します！',
@@ -46,5 +49,6 @@ return [
         'error_redirect' => 'エラー: 301/302 :endpoint はリダイレクトを返します。セキュリティ上の理由から、リダイレクトには従いません。実際のエンドポイントを使用してください。',
         'error_misc' => '問題が発生しました。:( ',
         'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

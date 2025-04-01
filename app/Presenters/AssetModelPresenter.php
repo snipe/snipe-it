@@ -15,6 +15,7 @@ class AssetModelPresenter extends Presenter
             [
                 'field' => 'checkbox',
                 'checkbox' => true,
+                'titleTooltip' => trans('general.select_all_none'),
             ],
             [
                 'field' => 'id',
@@ -73,7 +74,10 @@ class AssetModelPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('mail.min_QTY'),
                 'visible' => true,
+                'formatter' => 'minAmtFormatter',
+                'class' => 'text-right text-padding-number-cell',
             ],
+
             [
                 'field' => 'assets_count',
                 'searchable' => false,
@@ -81,6 +85,19 @@ class AssetModelPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('admin/models/table.numassets'),
                 'visible' => true,
+                'class' => 'text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
+            ],
+
+            [
+                'field' => 'remaining',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.remaining'),
+                'visible' => true,
+                'class' => 'text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ],
             [
                 'field' => 'depreciation',

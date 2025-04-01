@@ -55,6 +55,7 @@ class LocationsTransformer
                 'users_count'    => (int) $location->users_count,
                 'currency' =>  ($location->currency) ? e($location->currency) : null,
                 'ldap_ou' =>  ($location->ldap_ou) ? e($location->ldap_ou) : null,
+                'notes' => Helper::parseEscapedMarkedownInline($location->notes),
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
                 'parent' => ($location->parent) ? [
@@ -99,11 +100,9 @@ class LocationsTransformer
 
             $array = [
                 'id' => $accessory_checkout->id,
-                'accessory' => [
-                    'id' => $accessory_checkout->accessory->id,
-                    'name' => $accessory_checkout->accessory->name,
-                ],
-                'image' => ($accessory_checkout->accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory_checkout->accessory->image)) : null,
+                'assigned_to' => $accessory_checkout->assigned_to,
+                'accessory' => $this->transformAccessory($accessory_checkout->accessory),
+                'image' => ($accessory_checkout?->accessory?->image) ? Storage::disk('public')->url('accessories/' . e($accessory_checkout->accessory->image)) : null,
                 'note' => $accessory_checkout->note ? e($accessory_checkout->note) : null,
                 'created_by' => $accessory_checkout->adminuser ? [
                     'id' => (int) $accessory_checkout->adminuser->id,
@@ -150,5 +149,17 @@ class LocationsTransformer
 
             return $array;
         }
+    }
+
+    private function transformAccessory(?Accessory $accessory): ?array
+    {
+        if ($accessory) {
+            return [
+                'id' => $accessory->id,
+                'name' => $accessory->name,
+            ];
+        }
+
+        return null;
     }
 }

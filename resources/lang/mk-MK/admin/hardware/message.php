@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Дали сте сигурни дека сакате да го избришете ова основно средство?',
         'error'   		=> 'Имаше проблем со бришење на основното средство. Обидете се повторно.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Не беа избрани основни средства, затоа ништо не беше избришано.',
         'success' 		=> 'Основното средство беше избришано.',
     ],

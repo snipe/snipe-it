@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Kas olete kindel, et soovite selle vara kustutada?',
         'error'   		=> 'Viga kustutas. Palun proovi uuesti.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Varasid ei valitud, nii et midagi ei kustutatud.',
         'success' 		=> 'Varasus kustutati edukalt.',
     ],

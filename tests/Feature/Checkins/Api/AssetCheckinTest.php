@@ -72,7 +72,7 @@ class AssetCheckinTest extends TestCase
 
         Event::assertDispatched(function (CheckoutableCheckedIn $event) use ($currentTimestamp) {
             // this could be better mocked but is ok for now.
-            return Carbon::parse($event->action_date)->diffInSeconds($currentTimestamp) < 2;
+            return (int) Carbon::parse($event->action_date)->diffInSeconds($currentTimestamp, true) < 2;
         }, 1);
     }
 

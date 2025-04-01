@@ -71,6 +71,7 @@ class Category extends SnipeModel
         'require_acceptance',
         'use_default_eula',
         'created_by',
+        'notes',
     ];
 
     use Searchable;
@@ -80,7 +81,7 @@ class Category extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'category_type'];
+    protected $searchableAttributes = ['name', 'category_type', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.

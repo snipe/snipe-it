@@ -57,7 +57,7 @@ class AccessoryCheckout extends Model
      */
     public function adminuser()
     {
-        return $this->hasOne(\App\Models\User::class, 'created_by');
+        return $this->hasOne(\App\Models\User::class, 'id', 'created_by');
     }
 
     /**
@@ -118,7 +118,7 @@ class AccessoryCheckout extends Model
         $query->where('assigned_type', '=', Location::class);
     }
 
-    public function scopeAssetAssigned(Builder $query): void
+    public function scopeAssetsAssigned(Builder $query): void
     {
         $query->where('assigned_type', '=', Asset::class);
     }

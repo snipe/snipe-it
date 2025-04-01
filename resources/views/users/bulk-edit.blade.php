@@ -42,7 +42,7 @@
                         <div class="form-group">
                             <div class=" col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('null_department_id', '1', false) }}
+                                    <input type="checkbox" name="null_department_id" value="1" />
                                     {{ trans_choice('general.set_users_field_to_null', count($users), ['field' => trans('general.department'), 'user_count' => count($users)]) }}
                                 </label>
                             </div>
@@ -55,7 +55,7 @@
                         <div class="form-group">
                             <div class=" col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('null_location_id', '1', false) }}
+                                    <input type="checkbox" name="null_location_id" value="1" />
                                     {{ trans_choice('general.set_users_field_to_null', count($users), ['field' => trans('general.location'), 'user_count' => count($users)]) }}
                                 </label>
                             </div>
@@ -69,7 +69,7 @@
                             <div class="form-group">
                                 <div class=" col-md-9 col-md-offset-3">
                                     <label class="form-control">
-                                        {{ Form::checkbox('null_company_id', '1', false) }}
+                                        <input type="checkbox" name="null_company_id" value="1" />
                                         {{ trans_choice('general.set_users_field_to_null', count($users), ['field' => trans('general.company'), 'user_count' => count($users)]) }}
                                     </label>
                                 </div>
@@ -83,7 +83,7 @@
                         <div class="form-group">
                             <div class=" col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('null_manager_id', '1', false) }}
+                                    <input type="checkbox" name="null_manager_id" value="1" />
                                     {{ trans_choice('general.set_users_field_to_null', count($users), ['field' => trans('admin/users/table.manager'), 'user_count' => count($users)]) }}
                                 </label>
                             </div>
@@ -102,7 +102,7 @@
                         <div class="form-group">
                             <div class=" col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('null_locale', '1', false) }}
+                                    <input type="checkbox" name="null_locale" value="1" />
                                     {{ trans_choice('general.set_users_field_to_null', count($users), ['field' => trans('general.language'), 'user_count' => count($users)]) }}
                                 </label>
                             </div>
@@ -124,16 +124,16 @@
                             </div>
                             <div class="col-sm-9">
 
-                                    <label for="no_change" class="form-control">
-                                        {{ Form::radio('remote', '', true, ['id' => 'no_change', 'aria-label'=>'no_change']) }}
+                                    <label for="no_change_remote" class="form-control">
+                                        <input type="radio" name="remote" id="no_change_remote" value="" checked aria-label="no_change_remote">
                                         {{  trans('general.do_not_change') }}
                                     </label>
                                     <label for="remote" class="form-control">
-                                        {{ Form::radio('remote', '1', old('remote'), ['id' => 'remote', 'aria-label'=>'remote']) }}
+                                        <input type="radio" name="remote" id="remote" value="1" aria-label="remote">
                                         {{ trans('admin/users/general.remote_label') }}
                                     </label>
                                     <label for="not_remote" class="form-control">
-                                        {{ Form::radio('remote', '0', old('remote'), ['id' => 'not_remote', 'aria-label'=>'not_remote']) }}
+                                        <input type="radio" name="remote" id="not_remote" value="0" aria-label="not_remote">
                                         {{ trans('admin/users/general.not_remote_label') }}
                                     </label>
 
@@ -147,16 +147,16 @@
                                 {{ trans('general.user_managed_passwords') }}
                             </div>
                             <div class="col-sm-9">
-                                    <label for="no_change" class="form-control">
-                                        {{ Form::radio('ldap_import', '', true, ['id' => 'no_change', 'aria-label'=>'ldap_import']) }}
+                                    <label for="no_change_ldap_import" class="form-control">
+                                        <input type="radio" name="ldap_import" id="no_change_ldap_import" value="" checked aria-label="no_change_ldap_import">
                                         {{  trans('general.do_not_change') }}
                                     </label>
-                                    <label for="ldap_import" class="form-control">
-                                        {{ Form::radio('ldap_import', '0', old('ldap_import'), ['id' => 'ldap_import', 'aria-label'=>'ldap_import']) }}
+                                    <label for="no_ldap_import" class="form-control">
+                                        <input type="radio" name="ldap_import" id="no_ldap_import" value="0" aria-label="no_ldap_import">
                                         {{ trans('general.user_managed_passwords_allow') }}
                                     </label>
                                     <label for="ldap_import" class="form-control">
-                                        {{ Form::radio('ldap_import', '1', old('ldap_import'), ['id' => 'ldap_import', 'aria-label'=>'ldap_import']) }}
+                                        <input type="radio" name="ldap_import" id="ldap_import" value="1" aria-label="ldap_import">
                                         {{ trans('general.user_managed_passwords_disallow') }}
                                     </label>
                             </div>
@@ -170,15 +170,15 @@
                             <div class="col-sm-9">
 
                                 <label for="no_change_autoassign_licenses" class="form-control">
-                                    {{ Form::radio('autoassign_licenses', '', true, ['id' => 'no_change_autoassign_licenses', 'aria-label'=>'no_change_autoassign_licenses']) }}
+                                    <input type="radio" name="autoassign_licenses" id="no_change_autoassign_licenses" value="" checked aria-label="no_change_autoassign_licenses">
                                     {{  trans('general.do_not_change') }}
                                 </label>
                                 <label for="autoassign_licenses" class="form-control">
-                                    {{ Form::radio('autoassign_licenses', '1', old('autoassign_licenses'), ['id' => 'autoassign_licenses', 'aria-label'=>'autoassign_licenses']) }}
+                                    <input type="radio" name="autoassign_licenses" id="autoassign_licenses" value="1" aria-label="autoassign_licenses">
                                     {{  trans('general.autoassign_licenses_help')}}
                                 </label>
                                 <label for="dont_autoassign_licenses" class="form-control">
-                                    {{ Form::radio('autoassign_licenses', '0', old('autoassign_licenses'), ['id' => 'dont_autoassign_licenses', 'aria-label'=>'dont_autoassign_licenses']) }}
+                                    <input type="radio" name="autoassign_licenses" id="dont_autoassign_licenses" value="0" aria-label="dont_autoassign_licenses">
                                     {{  trans('general.no_autoassign_licenses_help')}}
                                 </label>
 
@@ -192,16 +192,16 @@
                             </div>
                             <div class="col-sm-9">
 
-                                    <label for="no_change" class="form-control">
-                                        {{ Form::radio('activated', '', true, ['id' => 'no_change', 'aria-label'=>'no_change']) }}
+                                    <label for="no_change_activated" class="form-control">
+                                        <input type="radio" name="activated" id="no_change_activated" value="" checked aria-label="no_change_activated">
                                         {{  trans('general.do_not_change') }}
                                     </label>
                                     <label for="activated" class="form-control">
-                                        {{ Form::radio('activated', '1', old('activated'), ['id' => 'activated', 'aria-label'=>'activated']) }}
+                                        <input type="radio" name="activated" id="activated" value="1" aria-label="activated">
                                         {{  trans('admin/users/general.user_activated')}}
                                     </label>
                                     <label for="deactivated" class="form-control">
-                                        {{ Form::radio('activated', '0', old('activated'), ['id' => 'deactivated', 'aria-label'=>'deactivated']) }}
+                                        <input type="radio" name="activated" id="deactivated" value="0" aria-label="deactivated">
                                         {{  trans('admin/users/general.user_deactivated')}}
                                     </label>
 
@@ -246,7 +246,7 @@
                             </div>
                             <div class="col-md-5">
                                 <label class="form-control">
-                                    {{ Form::checkbox('null_start_date', '1', false) }}
+                                    <input type="checkbox" name="null_start_date" value="1" />
                                     {{ trans_choice('general.set_to_null', count($users),['selection_count' => count($users)]) }}
                                 </label>
                             </div>
@@ -264,7 +264,7 @@
                             </div>
                             <div class="col-md-5">
                                 <label class="form-control">
-                                    {{ Form::checkbox('null_end_date', '1', false) }}
+                                    <input type="checkbox" name="null_end_date" value="1" />
                                     {{ trans_choice('general.set_to_null', count($users),['selection_count' => count($users)]) }}
                                 </label>
                             </div>

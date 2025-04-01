@@ -491,15 +491,32 @@ class AssetsController extends Controller
     public function showBySerial(Request $request, $serial): JsonResponse | array
     {
         $this->authorize('index', Asset::class);
-        $assets = Asset::where('serial', $serial)->with('assetstatus')->with('assignedTo');
+        $assets = Asset::where('serial', $serial)->with([
+            'assetstatus',
+            'assignedTo',
+            'company',
+            'defaultLoc',
+            'location',
+            'model.category',
+            'model.depreciation',
+            'model.fieldset',
+            'model.manufacturer',
+            'supplier',
+        ]);
 
         // Check if they've passed ?deleted=true
         if ($request->input('deleted', 'false') == 'true') {
             $assets = $assets->withTrashed();
         }
 
-        if (($assets = $assets->get()) && ($assets->count()) > 0) {
-            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+        $offset = ($request->input('offset') > $assets->count()) ? $assets->count() : app('api_offset_value');
+        $limit = app('api_limit_value');
+
+        $total = $assets->count();
+        $assets = $assets->skip($offset)->take($limit)->get();
+
+        if (($assets) && ($assets->count()) > 0) {
+            return (new AssetsTransformer)->transformAssets($assets, $total);
         }
 
         // If there are 0 results, return the "no such asset" response
@@ -765,9 +782,13 @@ class AssetsController extends Controller
             }
 
             if ($problems_updating_encrypted_custom_fields) {
-                return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.encrypted_warning')));
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.encrypted_warning')));
+                // Below is the *correct* return since it uses the transformer, but we have to use the old, flat return for now until we can update Jamf2Snipe and Kanji2Snipe
+                // return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.encrypted_warning')));
             } else {
-                return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
+                return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.update.success')));
+                // Below is the *correct* return since it uses the transformer, but we have to use the old, flat return for now until we can update Jamf2Snipe and Kanji2Snipe
+                /// return response()->json(Helper::formatStandardApiResponse('success', (new AssetsTransformer)->transformAsset($asset), trans('admin/hardware/message.update.success')));
             }
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $asset->getErrors()), 200);
@@ -1226,7 +1247,10 @@ class AssetsController extends Controller
     {
         $this->authorize('view', Asset::class);
         $this->authorize('view', $asset);
-        $accessory_checkouts = AccessoryCheckout::AssetsAssigned()->with('adminuser')->with('accessories');
+        $accessory_checkouts = AccessoryCheckout::AssetsAssigned()
+            ->where('assigned_to', $asset->id)
+            ->with('adminuser')
+            ->with('accessories');
 
         $offset = ($request->input('offset') > $accessory_checkouts->count()) ? $accessory_checkouts->count() : app('api_offset_value');
         $limit = app('api_limit_value');
@@ -1235,6 +1259,8 @@ class AssetsController extends Controller
         $accessory_checkouts = $accessory_checkouts->skip($offset)->take($limit)->get();
         return (new AssetsTransformer)->transformCheckedoutAccessories($accessory_checkouts, $total);
     }
+
+
     /**
      * Generate asset labels by tag
      * 

@@ -21,7 +21,7 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.asset_tags.save') }}" accept-charset="UTF-8" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-7">
                                 <label class="form-control">
-                                    {{ Form::checkbox('auto_increment_assets', '1', old('auto_increment_assets', $setting->auto_increment_assets),array('aria-label'=>'auto_increment_assets')) }}
+                                    <input type="checkbox" name="auto_increment_assets" value="1" @checked(old('auto_increment_assets', $setting->auto_increment_assets)) aria-label="auto_increment_assets">
                                     {{ trans('admin/settings/general.enabled') }}
                                 </label>
                             </div>
@@ -55,10 +55,10 @@
 
                         <div class="form-group">
                             <div class="col-md-5">
-                                {{ Form::label('next_auto_tag_base', trans('admin/settings/general.next_auto_tag_base')) }}
+                                <label for="next_auto_tag_base">{{ trans('admin/settings/general.next_auto_tag_base') }}</label>
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('next_auto_tag_base', old('next_auto_tag_base', $setting->next_auto_tag_base), array('class' => 'form-control', 'style'=>'width: 150px;', 'aria-label'=>'next_auto_tag_base')) }}
+                                <input class="form-control" style="width: 150px;" aria-label="next_auto_tag_base" name="next_auto_tag_base" type="text" value="{{ old('next_auto_tag_base', $setting->next_auto_tag_base) }}" id="next_auto_tag_base">
                                 {!! $errors->first('next_auto_tag_base', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -67,14 +67,14 @@
                         <!-- auto prefix -->
                         <div class="form-group {{ $errors->has('auto_increment_prefix') ? 'error' : '' }}">
                             <div class="col-md-5">
-                                {{ Form::label('auto_increment_prefix', trans('admin/settings/general.auto_increment_prefix')) }}
+                                <label for="auto_increment_prefix">{{ trans('admin/settings/general.auto_increment_prefix') }}</label>
                             </div>
                             <div class="col-md-7">
                                 @if ($setting->auto_increment_assets == 1)
-                                    {{ Form::text('auto_increment_prefix', old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'style'=>'width: 150px;', 'aria-label'=>'auto_increment_prefix')) }}
+                                    <input class="form-control" style="width: 150px;" aria-label="auto_increment_prefix" name="auto_increment_prefix" type="text" id="auto_increment_prefix" value="{{ old('auto_increment_prefix', $setting->auto_increment_prefix) }}">
                                     {!! $errors->first('auto_increment_prefix', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 @else
-                                    {{ Form::text('auto_increment_prefix', old('auto_increment_prefix', $setting->auto_increment_prefix), array('class' => 'form-control', 'disabled'=>'disabled', 'style'=>'width: 150px;', 'aria-label'=>'auto_increment_prefix')) }}
+                                    <input class="form-control" disabled="disabled" style="width: 150px;" aria-label="auto_increment_prefix" name="auto_increment_prefix" type="text" id="auto_increment_prefix" value="{{ old('auto_increment_prefix', $setting->auto_increment_prefix) }}">
                                 @endif
                             </div>
                         </div>
@@ -82,10 +82,10 @@
                         <!-- auto zerofill -->
                         <div class="form-group {{ $errors->has('zerofill_count') ? 'error' : '' }}">
                             <div class="col-md-5">
-                                {{ Form::label('zerofill_count', trans('admin/settings/general.zerofill_count')) }}
+                                <label for="zerofill_count">{{ trans('admin/settings/general.zerofill_count') }}</label>
                             </div>
                             <div class="col-md-7">
-                                {{ Form::text('zerofill_count', old('zerofill_count', $setting->zerofill_count), array('class' => 'form-control', 'style'=>'width: 150px;', 'aria-label'=>'zerofill_count')) }}
+                                <input class="form-control" style="width: 150px;" aria-label="zerofill_count" name="zerofill_count" type="text" value="{{ old('zerofill_count', $setting->zerofill_count) }}" id="zerofill_count">
                                 {!! $errors->first('zerofill_count', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -106,6 +106,6 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop

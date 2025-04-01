@@ -266,7 +266,7 @@ class ReportsController extends Controller
 
             $actionlogs = Actionlog::with('item', 'user', 'target', 'location', 'adminuser')
                 ->orderBy('created_at', 'DESC')
-                ->chunk(20, function ($actionlogs) use ($handle) {
+                ->chunk(500, function ($actionlogs) use ($handle) {
                     $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
                 Log::debug('Walking results: '.$executionTime);
                 $count = 0;
@@ -493,6 +493,17 @@ class ReportsController extends Controller
                 $header[] = trans('admin/hardware/table.eol');
             }
 
+            if ($request->filled('warranty')) {
+                $header[] = trans('admin/hardware/form.warranty');
+                $header[] = trans('admin/hardware/form.warranty_expires');
+            }
+
+            if ($request->filled('depreciation')) {
+                $header[] = trans('admin/hardware/table.book_value');
+                $header[] = trans('admin/hardware/table.diff');
+                $header[] = trans('admin/hardware/form.fully_depreciated');
+            }
+
             if ($request->filled('order')) {
                 $header[] = trans('admin/hardware/form.order');
             }
@@ -577,17 +588,6 @@ class ReportsController extends Controller
 
             if ($request->filled('status')) {
                 $header[] = trans('general.status');
-            }
-
-            if ($request->filled('warranty')) {
-                $header[] = trans('admin/hardware/form.warranty');
-                $header[] = trans('admin/hardware/form.warranty_expires');
-            }
-
-            if ($request->filled('depreciation')) {
-                $header[] = trans('admin/hardware/table.book_value');
-                $header[] = trans('admin/hardware/table.diff');
-                $header[] = trans('admin/hardware/form.fully_depreciated');
             }
 
             if ($request->filled('checkout_date')) {
@@ -748,7 +748,7 @@ class ReportsController extends Controller
             }
 
             Log::debug($assets->toSql());
-            $assets->orderBy('assets.id', 'ASC')->chunk(20, function ($assets) use ($handle, $customfields, $request) {
+            $assets->orderBy('assets.id', 'ASC')->chunk(500, function ($assets) use ($handle, $customfields, $request) {
             
                 $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
                 Log::debug('Walking results: '.$executionTime);
@@ -803,6 +803,19 @@ class ReportsController extends Controller
 
                     if ($request->filled('eol')) {
                         $row[] = ($asset->purchase_date != '') ? $asset->asset_eol_date : '';
+                    }
+
+                    if ($request->filled('warranty')) {
+                        $row[] = ($asset->warranty_months) ? $asset->warranty_months : '';
+                        $row[] = $asset->present()->warranty_expires();
+                    }
+
+                    if ($request->filled('depreciation')) {
+                        $depreciation = $asset->getDepreciatedValue();
+                        $diff = ($asset->purchase_cost - $depreciation);
+                        $row[] = Helper::formatCurrencyOutput($depreciation);
+                        $row[] = Helper::formatCurrencyOutput($diff);
+                        $row[] = (($asset->depreciation) && ($asset->depreciated_date())) ? $asset->depreciated_date()->format('Y-m-d') : '';
                     }
 
                     if ($request->filled('order')) {
@@ -938,19 +951,6 @@ class ReportsController extends Controller
                         $row[] = ($asset->assetstatus) ? $asset->assetstatus->name.' ('.$asset->present()->statusMeta.')' : '';
                     }
 
-                    if ($request->filled('warranty')) {
-                        $row[] = ($asset->warranty_months) ? $asset->warranty_months : '';
-                        $row[] = $asset->present()->warranty_expires();
-                    }
-
-                    if ($request->filled('depreciation')) {
-                            $depreciation = $asset->getDepreciatedValue();
-                            $diff = ($asset->purchase_cost - $depreciation);
-                        $row[] = Helper::formatCurrencyOutput($depreciation);
-                        $row[] = Helper::formatCurrencyOutput($diff);
-                        $row[] = (($asset->depreciation) && ($asset->depreciated_date())) ? $asset->depreciated_date()->format('Y-m-d') : '';
-                    }
-
                     if ($request->filled('checkout_date')) {
                         $row[] = ($asset->last_checkout) ? $asset->last_checkout : '';
                     }
@@ -1081,10 +1081,10 @@ class ReportsController extends Controller
             $row[] = e($assetMaintenance->start_date);
             $row[] = e($assetMaintenance->completion_date);
             if (is_null($assetMaintenance->asset_maintenance_time)) {
-                $improvementTime = intval(Carbon::now()
-                                                 ->diffInDays(Carbon::parse($assetMaintenance->start_date)));
+                $improvementTime = (int) Carbon::now()
+                    ->diffInDays(Carbon::parse($assetMaintenance->start_date), true);
             } else {
-                $improvementTime = intval($assetMaintenance->asset_maintenance_time);
+                $improvementTime = (int) $assetMaintenance->asset_maintenance_time;
             }
             $row[]  = $improvementTime;
             $row[]  = trans('general.currency') . Helper::formatCurrencyOutput($assetMaintenance->cost);
@@ -1175,17 +1175,12 @@ class ReportsController extends Controller
         }
         $email = $assetItem->assignedTo?->email;
         $locale = $assetItem->assignedTo?->locale;
-        // Only send notification if assigned
-        if ($locale && $email) {
-            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note))->locale($locale));
 
-            } elseif ($email) {
-            Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note)));
-            }
-
-        if ($email == ''){
+        if (is_null($email) || $email === '') {
             return redirect()->route('reports/unaccepted_assets')->with('error', trans('general.no_email'));
         }
+
+        Mail::to($email)->send((new CheckoutAssetMail($assetItem, $assetItem->assignedTo, $logItem->user, $acceptance, $logItem->note, firstTimeSending: false))->locale($locale));
 
         return redirect()->route('reports/unaccepted_assets')->with('success', trans('admin/reports/general.reminder_sent'));
     }
