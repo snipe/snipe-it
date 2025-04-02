@@ -477,7 +477,7 @@ class Asset extends Depreciable
      */
     public function uploads()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+        return $this->hasMany(Actionlog::class, 'item_id')
             ->where('item_type', '=', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
