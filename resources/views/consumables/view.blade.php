@@ -340,7 +340,11 @@
                         {{ trans('general.created_by') }}
                       </div>
                       <div class="col-md-9">
-                        {{ $consumable->adminuser->present()->fullName }}
+                        @if ($consumable->adminuser->deleted_at == '')
+                          <a href="{{ route('users.show', ['user' => $consumable->adminuser]) }}">{{ $consumable->adminuser->present()->fullName }}</a>
+                        @else
+                          <del>{{ $consumable->adminuser->present()->fullName }}</del>
+                        @endif
                       </div>
                     </div>
                   @endif
@@ -365,24 +369,6 @@
                       </div>
                       <div class="col-md-9">
                         {{ \App\Helpers\Helper::getFormattedDateObject($consumable->updated_at, 'datetime')['formatted']}}
-                      </div>
-                    </div>
-                  @endif
-
-                  @if ($consumable->admin)
-                    <!-- created at -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('general.created_by') }}
-                      </div>
-                      <div class="col-md-9">
-
-                          @if ($consumable->admin->deleted_at == '')
-                            <a href="{{ route('users.show', ['user' => $consumable->admin]) }}">{{ $consumable->admin->present()->fullName }}</a>
-                          @else
-                            <del>{{ $consumable->admin->present()->fullName }}</del>
-                          @endif
-
                       </div>
                     </div>
                   @endif
