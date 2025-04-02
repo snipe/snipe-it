@@ -98,7 +98,7 @@
                     @include('partials/forms/edit/uploadLogo', [
                         "logoVariable" => "logo",
                         "logoId" => "uploadLogo",
-                        "logoLabel" => trans('admin/settings/general.logo'),
+                        "logoLabel" => trans('admin/settings/general.logo_labels.logo'),
                         "logoClearVariable" => "clear_logo",
                         "helpBlock" => trans('general.logo_size') . trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
                     ])
@@ -107,25 +107,34 @@
                     @include('partials/forms/edit/uploadLogo', [
                         "logoVariable" => "email_logo",
                         "logoId" => "uploadEmailLogo",
-                        "logoLabel" => trans('admin/settings/general.email_logo'),
+                        "logoLabel" => trans('admin/settings/general.logo_labels.email_logo'),
                         "logoClearVariable" => "clear_email_logo",
-                        "helpBlock" => trans('admin/settings/general.email_logo_size') . trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
+                        "helpBlock" => trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
                     ])
 
                     <!-- Label Logo -->
                     @include('partials/forms/edit/uploadLogo', [
                         "logoVariable" => "label_logo",
                         "logoId" => "uploadLabelLogo",
-                        "logoLabel" => trans('admin/settings/general.label_logo'),
+                        "logoLabel" => trans('admin/settings/general.logo_labels.label_logo'),
                         "logoClearVariable" => "clear_label_logo",
-                        "helpBlock" => trans('admin/settings/general.label_logo_size') . trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
+                        "helpBlock" => trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
+                    ])
+
+                    <!-- PDF Logo -->
+                    @include('partials/forms/edit/uploadLogo', [
+                        "logoVariable" => "acceptance_pdf_logo",
+                        "logoId" => "acceptancePdfEmailLogo",
+                        "logoLabel" => trans('admin/settings/general.logo_labels.acceptance_pdf_logo'),
+                        "logoClearVariable" => "clear_acceptance_pdf_logo",
+                        "helpBlock" => trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]),
                     ])
 
                     <!-- Favicon -->
                     @include('partials/forms/edit/uploadLogo', [
                         "logoVariable" => "favicon",
                         "logoId" => "uploadFavicon",
-                        "logoLabel" => trans('admin/settings/general.favicon'),
+                        "logoLabel" => trans('admin/settings/general.logo_labels.favicon'),
                         "logoClearVariable" => "clear_favicon",
                         "helpBlock" => trans('admin/settings/general.favicon_size') .' '. trans('admin/settings/general.favicon_format'),
                         "allowedTypes" => "image/x-icon,image/gif,image/jpeg,image/png,image/svg,image/svg+xml,image/vnd.microsoft.icon",

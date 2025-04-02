@@ -428,12 +428,20 @@ class SettingsController extends Controller
                 $setting->label_logo = null;
             }
 
+            // Acceptance PDF upload
+            $setting = $request->handleImages($setting, 600, 'acceptance_pdf_logo', '', 'acceptance_pdf_logo');
+            if ('1' == $request->input('clear_acceptance_pdf_logo')) {
+                $setting = $request->deleteExistingImage($setting, '', 'acceptance_pdf_logo');
+                $setting->acceptance_pdf_logo = null;
+            }
+
             // Favicon upload
             $setting = $request->handleImages($setting, 100, 'favicon', '', 'favicon');
             if ('1' == $request->input('clear_favicon')) {
                 $setting = $request->deleteExistingImage($setting, '', 'favicon');
                 $setting->favicon = null;
             }
+
 
             // Default avatar upload
             $setting = $request->handleImages($setting, 500, 'default_avatar', 'avatars', 'default_avatar');
