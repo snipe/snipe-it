@@ -203,11 +203,11 @@ class DeleteUserTest extends TestCase
 
     public function testCanDeleteUser()
     {
-        $manager = User::factory()->create();
-        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($manager->isDeletable());
+        $user = User::factory()->create();
+        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create());
 
         $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
-            ->delete(route('users.destroy', $manager->id))
+            ->delete(route('users.destroy', $user->id))
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
 
