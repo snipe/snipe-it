@@ -33,7 +33,7 @@ class CheckoutAcceptanceFactory extends Factory
                 $this->createdAssociatedActionLogEntry($acceptance);
             }
 
-            if ($acceptance->checkoutable instanceof Asset && $acceptance->assignedTo instanceof User) {
+            if ($acceptance->checkoutable instanceof Asset && $acceptance->assignedTo instanceof User && !$acceptance->isPending()) {
                 $acceptance->checkoutable->update([
                     'assigned_to' => $acceptance->assigned_to_id,
                     'assigned_type' => get_class($acceptance->assignedTo),
