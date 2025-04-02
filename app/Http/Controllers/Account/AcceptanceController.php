@@ -248,23 +248,18 @@ class AcceptanceController extends Controller
                 Log::warning($e);
             }
             //this came from the previous 'listener' thing
-            // TODO - we should work directly with the 'checkoutable' to just do this stuff with that,
-            // so we don't have to direclty muck with an Actionlog
             Log::debug('event passed to the onCheckoutAccepted listener:'); //[sic]
-            $logaction = new Actionlog();
-            $logaction->item()->associate($acceptance->checkoutable); //we can just work with $acceptance->checkoutable directly
-            $logaction->target()->associate($acceptance->assignedTo); //setLogTarget()
-            $logaction->accept_signature = $acceptance->signature_filename; //TODO don't have this!
-            $logaction->filename = $acceptance->stored_eula_file; //I do have this now
-            $logaction->note = $acceptance->note; //setLogNote
-            $logaction->action_type = ActionType::Accepted->value; //'accepted'; //setLogAction
+            $acceptance->checkoutable->setLogTarget(User::find($acceptance->assigned_to));
+            $acceptance->checkoutable->setLogFilename($acceptance->stored_eula_file);
+            $acceptance->checkoutable->setLogAcceptSignature($acceptance->signature_filename);
+            $acceptance->checkoutable->setLogNote($acceptance->note);
 
-            // TODO: log the actual license seat that was checked out
-            if ($acceptance->checkoutable instanceof LicenseSeat) {
-                $logaction->item()->associate($acceptance->checkoutable->license);
-            }
+            //// TODO: log the actual license seat that was checked out
+            //if ($acceptance->checkoutable instanceof LicenseSeat) {
+            //    $logaction->item()->associate($acceptance->checkoutable->license);
+            //} // FIXME - confirm this is already handled within Loggable!
 
-            $logaction->save(); //logAndSaveIfNeeded() instead?
+            $acceptance->checkoutable->logAndSaveIfNeeded(ActionType::Accepted);
 
             $return_msg = trans('admin/users/message.accepted');
 
@@ -352,21 +347,18 @@ class AcceptanceController extends Controller
 
             $acceptance->decline($sig_filename, $request->input('note'));
             $acceptance->notify(new AcceptanceAssetDeclinedNotification($data));
-            //event(new CheckoutDeclined($acceptance));
+            // The below is from the former event(new CheckoutDeclined($acceptance));
 
-            $logaction = new Actionlog();
-            $logaction->item()->associate($acceptance->checkoutable);
-            $logaction->target()->associate($acceptance->assignedTo);
-            $logaction->accept_signature = $acceptance->signature_filename;
-            $logaction->note = $acceptance->note;
-            $logaction->action_type = ActionType::Declined->value; //'declined';
+            $acceptance->checkoutable->setLogTarget(User::find($acceptance->assigned_to));
+            $acceptance->checkoutable->setLogAcceptSignature($acceptance->signature_filename);
+            $acceptance->checkoutable->setLogNote($acceptance->note);
 
-            // TODO: log the actual license seat that was checked out
-            if ($acceptance->checkoutable instanceof LicenseSeat) {
-                $logaction->item()->associate($acceptance->checkoutable->license);
-            }
+            //// TODO: log the actual license seat that was checked out
+            //if ($acceptance->checkoutable instanceof LicenseSeat) {
+            //    $logaction->item()->associate($acceptance->checkoutable->license);
+            //} //FIXME - confirm this actually works automatically
 
-            $logaction->save();
+            $acceptance->checkoutable->logAndSaveIfNeeded(ActionType::Declined);
 
             $return_msg = trans('admin/users/message.declined');
         }

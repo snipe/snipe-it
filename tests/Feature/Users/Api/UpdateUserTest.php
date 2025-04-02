@@ -451,7 +451,8 @@ class UpdateUserTest extends TestCase
             'company_id' => $companyB->id,
         ])->assertStatusMessageIs('success');
 
-        $asset->checkOut($user, $superUser);
+        $asset->setLogTarget($user);
+        $asset->checkOutAndSave();
 
         // asset assigned, therefore error
         $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [
@@ -496,7 +497,8 @@ class UpdateUserTest extends TestCase
             'company_id' => $companyB->id,
         ])->assertStatusMessageIs('success');
 
-        $asset->checkOut($user, $superUser);
+        $asset->setLogTarget($user);
+        $asset->checkOutAndSave();
 
         // asset assigned from other company, therefore error
         $this->actingAsForApi($superUser)->patchJson(route('api.users.update', $user), [

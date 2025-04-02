@@ -607,17 +607,11 @@ class BulkAssetsController extends Controller
             DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, &$errors, $assets, $request) { //NOTE: $errors is passsed by reference!
                 foreach ($assets as $asset) {
                     $this->authorize('checkout', $asset);
-
-                    $checkout_success = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $asset->name, null);
-
-                    //TODO - I think this logic is duplicated in the checkOut method?
-                    if ($target->location_id != '') {
-                        $asset->location_id = $target->location_id;
-                        // TODO - I don't know why this is being saved without events
-                        $asset::withoutEvents(function () use ($asset) {
-                            $asset->save();
-                        });
-                    }
+                    $asset->setLogTarget($target);
+                    $asset->setLogDate(new Carbon($checkout_at));
+                    $asset->expected_checkin = $expected_checkin;
+                    $asset->setLogNote(e($request->get('note')));
+                    $checkout_success = $asset->checkOutAndSave();
 
                     if (!$checkout_success) {
                         $errors = array_merge_recursive($errors, $asset->getErrors()->toArray());

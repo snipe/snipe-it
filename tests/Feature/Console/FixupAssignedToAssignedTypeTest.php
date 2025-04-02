@@ -32,7 +32,7 @@ class FixupAssignedToAssignedTypeTest extends TestCase
         $user = User::factory()->create();
         $admin = User::factory()->admin()->create();
 
-        $asset->checkOut($user, $admin);
+        $asset->checkOutAndSave($user, $admin);
         $asset->assigned_type=null;
         $asset->assigned_to=null;
         $asset->saveOrFail(); //*should* generate a 'checkin'?

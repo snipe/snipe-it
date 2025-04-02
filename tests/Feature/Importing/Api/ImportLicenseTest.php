@@ -251,7 +251,7 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
 
         $updatedLicense = License::query()
-            ->with(['manufacturer', 'category', 'supplier'])
+            //    ->with(['manufacturer', 'category', 'supplier'])
             ->where('serial', $row['serialNumber'])
             ->sole();
 

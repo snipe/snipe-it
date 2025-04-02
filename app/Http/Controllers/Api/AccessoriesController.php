@@ -281,7 +281,7 @@ class AccessoriesController extends Controller
         $accessory->setLogNote($request->input('note'));
         //$accessory->checkout_qty = ;
         //dump($accessory->getLogTarget());
-        $accessory->checkout();
+        $accessory->checkOutAndSave();
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/accessories/message.checkout.success')));
 
     }

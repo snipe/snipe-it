@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Events\CheckoutableCheckedOut;
 use App\Models\PredefinedKit;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -149,8 +150,11 @@ class PredefinedKitCheckoutService
             function () use ($user, $admin, $checkout_at, $expected_checkin, $errors, $assets_to_add, $license_seats_to_add, $consumables_to_add, $accessories_to_add, $note) {
                 // assets
                 foreach ($assets_to_add as $asset) {
-                    $asset->location_id = $user->location_id;
-                    $error = $asset->checkOut($user, $admin, $checkout_at, $expected_checkin, $note, null);
+                    $asset->setLogTarget($user);
+                    $asset->setLogNote($note);
+                    $asset->expected_checkin = $expected_checkin;
+                    $asset->setLogDate(new Carbon($checkout_at));
+                    $error = $asset->checkoutAndSave();
                     if ($error) {
                         array_merge_recursive($errors, $asset->getErrors()->toArray());
                     }

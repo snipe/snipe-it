@@ -113,7 +113,8 @@ class UpdateUserTest extends TestCase
             'redirect_option' => 'index'
         ])->assertRedirect(route('users.index'));
 
-        $asset->checkOut($user, $superUser);
+        $asset->setLogTarget($user);
+        $asset->checkOutAndSave();
 
         // asset assigned, therefore error
         $response = $this->actingAs($superUser)->patchJson(route('users.update', $user), [
@@ -149,7 +150,8 @@ class UpdateUserTest extends TestCase
             'redirect_option' => 'index'
         ])->assertRedirect(route('users.index'));
 
-        $asset->checkOut($user, $superUser);
+        $asset->setLogTarget($user);
+        $asset->checkOutAndSave();
 
         // asset assigned, therefore error
         $response = $this->actingAs($superUser)->patchJson(route('users.update', $user), [

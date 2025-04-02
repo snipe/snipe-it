@@ -373,80 +373,6 @@ class Asset extends Depreciable
         return false;
     }
 
-
-    //FIXME - delete this once it's no longer used.
-    /**
-     * Checks the asset out to the target
-     *
-     * @todo The admin parameter is never used. Can probably be removed.
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param User $user
-     * @param User $admin
-     * @param Carbon $checkout_at
-     * @param Carbon $expected_checkin
-     * @param string $note
-     * @param null $name
-     * @return bool
-     * @since [v3.0]
-     * @return bool
-     */
-    public function checkOut($target, $admin = null, $checkout_at = null, $expected_checkin = null, $note = null, $name = null, $location = null)
-    {
-        if (! $target) {
-            return false;
-        }
-        if ($this->is($target)) {
-            throw new CheckoutNotAllowed('You cannot check an asset out to itself.');
-        }
-
-        if ($expected_checkin) {
-            $this->expected_checkin = $expected_checkin;
-        }
-
-        $this->last_checkout = $checkout_at;
-        $this->name = $name;
-
-        $this->assignedTo()->associate($target); //THIS is causing the save?
-
-        if ($location != null) { //STET - this is Asset logic.
-            $this->location_id = $location;
-        } else {
-            if (isset($target->location)) {
-                $this->location_id = $target->location->id;
-            }
-            if ($target instanceof Location) {
-                $this->location_id = $target->id;
-            }
-        }
-
-        $originalValues = $this->getRawOriginal();
-
-        //checkout_at is action_date.
-        // attempt to detect change in value if different from today's date
-        if ($checkout_at && strpos($checkout_at, date('Y-m-d')) === false) {
-            $originalValues['action_date'] = date('Y-m-d H:i:s');
-        }
-
-        if ($this->saveQuietly()) { //THIS is the save that fires that's making the update FIXME - on checkout, this causes an update.
-            if (is_int($admin)) {
-                $checkedOutBy = User::findOrFail($admin);
-            } elseif ($admin && get_class($admin) === \App\Models\User::class) {
-                $checkedOutBy = $admin;
-            } else {
-                $checkedOutBy = auth()->user();
-            }
-            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note)); //THIS is probably causing the checkout?
-            // this is just doing this: (along with notifications, which we'll probably keep as-is
-            //         $event->checkoutable->logCheckout($event->note, $event->checkedOutTo, $event->checkoutable->last_checkout, $event->originalValues);
-            $this->increment('checkout_counter', 1); //huh. FIXME? second thihng, goig to fall out of transaction?
-
-            return true;
-        }
-
-        return false;
-    }
-
     /**
      * Checks out asset to previously-set target
      * @return bool
@@ -516,14 +442,8 @@ class Asset extends Depreciable
             //} else {
             //    $checkedOutBy = auth()->user();
             //}
-            // FIXME - what to do here - should I make a 'new' event? Should I let this one fire?
             // FIXME - I'm not sure of the 'general solution' for if there's no autheenticated user (CLI?)
-            if (auth()->user()) { // FIXME - this seems BROKEN! righ?!
-                event(new CheckoutableCheckedOut($this, $this->getLogTarget(), auth()->user(), $this->getLogNote()));
-            }
-            // this is just doing this: (along with notifications, which we'll probably keep as-is
-            //         $event->checkoutable->logCheckout($event->note, $event->checkedOutTo, $event->checkoutable->last_checkout, $event->originalValues);
-
+            event(new CheckoutableCheckedOut($this, $this->getLogTarget(), $this->getLogAdmin(), $this->getLogNote()));
             return true;
         }
 

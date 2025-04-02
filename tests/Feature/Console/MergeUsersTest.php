@@ -127,7 +127,9 @@ class MergeUsersTest extends TestCase
 
         // This needs to be more than the otherwise expected because the merge action itself is logged for the two merging users
         $this->assertEquals(7, $user_to_merge_into->refresh()->userlog->count());
-        $this->assertEquals(1, $user1->refresh()->userlog->count()); //okay, in the *GUI* merge, this makes *TWO* records - one for the merge, one for the delete. but apparently not in the CLI merge?
+        //okay, in the *GUI* merge, this makes *TWO* records - one for the merge, one for the delete. but apparently it used to _not_ in the CLI merge
+        //I decided to make them the same, so this expected amount is now changed
+        $this->assertEquals(2, $user1->refresh()->userlog->count());
 
     }
 

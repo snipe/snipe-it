@@ -292,7 +292,7 @@ class ComponentsController extends Controller
 
             $component->setLogQuantity($request->input('assigned_qty'));
             $component->setLogNote($request->input('note'));
-            $component->checkout();
+            $component->checkOutAndSave();
 
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkout.success')));

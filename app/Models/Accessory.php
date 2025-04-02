@@ -318,7 +318,7 @@ class Accessory extends SnipeModel
         //TODO - COMMIT?
     }
 
-    public function checkout(): bool
+    public function checkOutAndSave(): bool
     {
         //FIXME - what if there are _more_ checkotus than there are availabliieties?
         for ($i = 0; $i < $this->getLogQuantity() ?? 1; $i++) {

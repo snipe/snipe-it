@@ -111,7 +111,7 @@ class Component extends SnipeModel
         'manufacturer' => ['name'],
     ];
 
-    public function checkout()
+    public function checkOutAndSave()
     {
         //FIXME - can we emit some kind of error *here* if you don't have enough? A validation error, maybe?
         // I think it wants to be *here* and not in the controller; the controller shouldn't need to know

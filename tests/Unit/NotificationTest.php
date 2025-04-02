@@ -30,7 +30,9 @@ class NotificationTest extends TestCase
             ]);
 
         Mail::fake();
-        $asset->checkOut($user, $admin->id);
+        $asset->setLogTarget($user);
+        $asset->setLogAdmin($admin);
+        $asset->checkOutAndSave();
         Mail::assertSent(CheckoutAssetMail::class, function (CheckoutAssetMail $mail) use ($user) {
             return $mail->hasTo($user->email) && $mail->hasSubject(trans('mail.Asset_Checkout_Notification'));
         });
@@ -51,7 +53,9 @@ class NotificationTest extends TestCase
         $model = AssetModel::factory()->for($category)->create();
         $asset = Asset::factory()->for($model, 'model')->create();
 
-        $asset->checkOut($user, User::factory()->superuser()->create()->id);
+        $asset->setLogTarget($user);
+        $asset->setLogAdmin(User::factory()->superuser()->create());
+        $asset->checkOutAndSave();
 
         Mail::assertSent(CheckoutAssetMail::class, function ($mail) use ($user) {
             return $mail->hasTo($user->email) &&

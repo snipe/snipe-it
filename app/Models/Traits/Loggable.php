@@ -9,6 +9,7 @@ use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Setting;
+use App\Models\User;
 use App\Notifications\AuditNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -32,6 +33,8 @@ trait Loggable
     private ?Carbon $log_date = null;
     private ?int $log_quantity = null;
     private ?string $log_filename = null;
+    private ?string $log_accept_signature = null;
+    private ?User $log_admin = null;
 
     private ?Location $location_override = null; //FIXME - possibly delete if truly unused
 
@@ -138,7 +141,7 @@ trait Loggable
         if ($log_action) {
             $this->setLogAction($log_action);
         }
-        $logAction = new Actionlog();
+        $logAction = new Actionlog(); // THIS should be the only place you _instantiate_ one of these, for the most part
         //$logAction->item_type = self::class;
         //$logAction->item_id = $this->id;
 
@@ -151,7 +154,7 @@ trait Loggable
             $logAction->item_id = $this->id;
         }
         $logAction->created_at = date('Y-m-d H:i:s');
-        $logAction->created_by = auth()->id();
+        $logAction->created_by = auth()->id(); //TODO - should we use the log_admin attribute here, and build in a default of auth()->user() or whatever?
         $logAction->log_meta = $this->log_meta ? json_encode($this->log_meta) : null;
         if ($this->log_target) {
             $logAction->target_type = $this->log_target::class;
@@ -189,6 +192,10 @@ trait Loggable
 
         if ($this->log_filename) {
             $logAction->filename = $this->log_filename;
+        }
+
+        if ($this->log_accept_signature) {
+            $logAction->accept_signature = $this->log_accept_signature;
         }
 
         //\Log::error("Here is the logaction BEFORE we save it ($this->log_action)...".print_r($logAction->toArray(), true));
@@ -283,6 +290,16 @@ trait Loggable
         $this->log_filename = $filename;
     }
 
+    public function setLogAdmin(?User $admin)
+    {
+        $this->log_admin = $admin;
+    }
+
+    public function setLogAcceptSignature(?string $signature)
+    {
+        $this->log_accept_signature = $signature;
+    }
+
     // getter functions for private variables
     public function getLogTarget(): mixed //?Model FIXME!!!!!!!
     {
@@ -306,6 +323,11 @@ trait Loggable
     public function getLogQuantity(): ?int
     {
         return $this->log_quantity;
+    }
+
+    public function getLogAdmin(): ?User
+    {
+        return $this->log_admin ?? auth()->user();
     }
 
     // relationships

@@ -12,7 +12,7 @@ trait CheckInOutRequest
     /**
      * Find target for checkout
      */
-    protected function determineCheckoutTarget(): ?SnipeModel // FIXME - I don't know that I want this here anymore
+    protected function determineCheckoutTarget(): ?SnipeModel // FIXME - I don't know that I want this here anymore. But maybe I do? It *does* have to do with the request?
     {
         // This item is checked out to a location
         switch (request('checkout_to_type')) {
