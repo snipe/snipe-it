@@ -3,7 +3,7 @@
 <div class="form-group">
     <div class="col-md-3">
         <label {!! $errors->has($logoVariable) ? 'class="alert-msg"' : '' !!} for="{{ $logoVariable }}">
-        {{ ucwords(str_replace('_', ' ', $logoVariable)) }}
+        {{ trans($logoLabel) }}
         </label>
     </div>
     <div class="col-md-9">
@@ -48,7 +48,7 @@
     <div class="col-md-9 col-md-offset-3">
         <label id="{{ $logoId }}-deleteCheckbox" for="{{ $logoClearVariable }}" style="font-weight: normal" class="form-control">
             <input type="checkbox" name="{{ $logoClearVariable }}" value="1" @checked(old($logoClearVariable))>
-            Remove current {{ ucwords(str_replace('_', ' ', $logoVariable)) }} image
+            Remove current {{ $logoLabel }} image
         </label>
     </div>
     @endif
