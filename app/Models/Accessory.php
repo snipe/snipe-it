@@ -302,7 +302,7 @@ class Accessory extends SnipeModel
         return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
 
-    public function checkin(): bool //FIXME - is this checkIn or checkin?
+    public function checkInAndSave(): bool
     {
         //FIXME - emit checkoutablecheckedin?
         //TODO - begin?

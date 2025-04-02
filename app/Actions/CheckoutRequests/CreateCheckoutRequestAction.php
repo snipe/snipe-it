@@ -2,6 +2,7 @@
 
 namespace App\Actions\CheckoutRequests;
 
+use App\Enums\ActionType;
 use App\Exceptions\AssetNotRequestable;
 use App\Models\Actionlog;
 use App\Models\Asset;
@@ -10,6 +11,7 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\RequestAssetNotification;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Support\Facades\Auth;
 use Log;
 
 class CreateCheckoutRequestAction
@@ -32,17 +34,11 @@ class CreateCheckoutRequestAction
         $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
-        $logaction = new Actionlog();
-        $logaction->item_id = $data['asset_id'] = $asset->id;
-        $logaction->item_type = $data['item_type'] = Asset::class;
-        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
-        $logaction->target_id = $data['user_id'] = auth()->id();
-        $logaction->target_type = User::class;
-        $logaction->location_id = $user->location_id ?? null;
-        $logaction->logaction('requested');
+        $asset->setLogTarget(Auth::user());
+        $asset->logAndSaveIfNeeded(ActionType::Requested);
 
-        $asset->request();
-        $asset->increment('requests_counter', 1);
+        $asset->request(); // TODO: could argue that the above stuff belongs here? This
+        $asset->increment('requests_counter', 1); // TODO - would rather hit the DB once, but we don't yet have transaction safety
         try {
             $settings->notify(new RequestAssetNotification($data));
         } catch (\Exception $e) {

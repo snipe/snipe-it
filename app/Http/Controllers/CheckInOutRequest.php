@@ -12,7 +12,7 @@ trait CheckInOutRequest
     /**
      * Find target for checkout
      */
-    protected function determineCheckoutTarget() : ?SnipeModel
+    protected function determineCheckoutTarget(): ?SnipeModel // FIXME - I don't know that I want this here anymore
     {
         // This item is checked out to a location
         switch (request('checkout_to_type')) {
@@ -33,7 +33,7 @@ trait CheckInOutRequest
      * @param  SnipeModel $target Target with location
      * @return Asset        Asset being updated
      */
-    protected function updateAssetLocation($asset, $target) : Asset
+    protected function updateAssetLocation($asset, $target): Asset //FIXME -this does some logic we *DON'T* DO!
     {
         switch (request('checkout_to_type')) {
             case 'location':

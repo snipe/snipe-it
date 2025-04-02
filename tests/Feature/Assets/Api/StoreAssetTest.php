@@ -68,7 +68,7 @@ class StoreAssetTest extends TestCase
         $this->assertEquals($userAssigned->id, $asset->assigned_to);
         $this->assertTrue($asset->company->is($company));
         $this->assertEquals('2023-09-03 00:00:00', $asset->last_audit_date);
-        $this->assertTrue($asset->location->is($location));
+        $this->assertTrue($asset->location->is($location)); // FIXME - the _test_ or the behavior are somehow incorrect or weird? What is the correct behavior here?!
         $this->assertTrue($asset->model->is($model));
         $this->assertEquals('A New Asset', $asset->name);
         $this->assertEquals('Some notes', $asset->notes);

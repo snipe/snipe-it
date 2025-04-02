@@ -310,7 +310,7 @@ class AccessoriesController extends Controller
         $accessory->setLogTarget($accessory_checkout); //need to do some 'magic' to convert this to a user (or location), elsewhere.
 
         // Was the accessory updated?
-        if ($accessory->checkIn()) {
+        if ($accessory->checkInAndSave()) {
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/accessories/message.checkin.success')));
         }

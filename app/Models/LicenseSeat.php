@@ -99,7 +99,7 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
         return $this->belongsTo(\App\Models\Asset::class, 'asset_id')->withTrashed();
     }
 
-    public function checkin()
+    public function checkInAndSave(): bool
     {
         // Update the asset data
         $this->assigned_to = null;
@@ -111,7 +111,7 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
         return false;
     }
 
-    public function checkout()
+    public function checkOutAndSave()
     {
         if ($this->logAndSaveIfNeeded(ActionType::Checkout)) {
             event(new CheckoutableCheckedOut($this, $this->getLogTarget(), auth()->user(), $this->getLogNote()));

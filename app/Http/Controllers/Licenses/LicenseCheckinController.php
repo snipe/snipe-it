@@ -84,7 +84,7 @@ class LicenseCheckinController extends Controller
 
 
         // Was the asset updated?
-        if ($licenseSeat->checkin()) { //here is the thing - this becomes ->logAndSaveIfNeeded()
+        if ($licenseSeat->checkInAndSave()) { //here is the thing - this becomes ->logAndSaveIfNeeded()
             return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkin.success'));
         }
 
@@ -123,7 +123,7 @@ class LicenseCheckinController extends Controller
             $user_seat->assigned_to = null; //FIXME/TODO - is this already handled in the checkin method?
 
             $user_seat->setLogNote(trans('admin/licenses/general.bulk.checkin_all.log_msg'));
-            if ($user_seat->checkin()) {
+            if ($user_seat->checkInAndSave()) {
                 Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
             }
         }
@@ -138,7 +138,7 @@ class LicenseCheckinController extends Controller
             $asset_seat->asset_id = null; //FIXME/TODO - don't we have this already?
 
             $asset_seat->setLogNote(trans('admin/licenses/general.bulk.checkin_all.log_msg'));
-            if ($asset_seat->checkin()) {
+            if ($asset_seat->checkInAndSave()) {
                 Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
                 $count++;
             }

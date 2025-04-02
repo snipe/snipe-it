@@ -458,6 +458,7 @@ class Asset extends Depreciable
         \Log::error("checkout and save has fired!!!!!!");
         if (!$this->getLogTarget()) {
             \Log::error("NO TARGET SET FOR CHECKOUT!");
+            throw new \Exception("NO TARGET SET FOR CHECKOUT!"); //TODO - use a first-class Exception?
             return false;
         }
         if ($this->is($this->getLogTarget())) {
@@ -517,7 +518,9 @@ class Asset extends Depreciable
             //}
             // FIXME - what to do here - should I make a 'new' event? Should I let this one fire?
             // FIXME - I'm not sure of the 'general solution' for if there's no autheenticated user (CLI?)
-            event(new CheckoutableCheckedOut($this, $this->getLogTarget(), auth()->user(), $this->getLogNote())); //THIS is probably causing the checkout?
+            if (auth()->user()) { // FIXME - this seems BROKEN! righ?!
+                event(new CheckoutableCheckedOut($this, $this->getLogTarget(), auth()->user(), $this->getLogNote()));
+            }
             // this is just doing this: (along with notifications, which we'll probably keep as-is
             //         $event->checkoutable->logCheckout($event->note, $event->checkedOutTo, $event->checkoutable->last_checkout, $event->originalValues);
 

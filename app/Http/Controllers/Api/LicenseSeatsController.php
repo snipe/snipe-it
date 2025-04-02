@@ -137,11 +137,11 @@ class LicenseSeatsController extends Controller
 
         //since we are, effectively, going seat-by-seat here, should this really live on the licenseSeat itself?
         if ($is_checkin) {
-            if ($licenseSeat->checkin()) {
+            if ($licenseSeat->checkInAndSave()) {
                 return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
             }
         } else {
-            if ($licenseSeat->checkout()) {
+            if ($licenseSeat->checkOutAndSave()) {
                 return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
             }
         }

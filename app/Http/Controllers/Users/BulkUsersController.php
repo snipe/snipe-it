@@ -411,7 +411,7 @@ class BulkUsersController extends Controller
 
         // Walk users
         foreach ($users_to_merge as $user_to_merge) {
-
+            \Log::error("MERGING USER: ".$user_to_merge->username." into: ".$merge_into_user->username);
             $merge_into_user->merge($user_to_merge);
 
         }

@@ -963,8 +963,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
         // Mark the user as deleted
         Log::info('Marking the user as deleted');
-        $bad_user->deleted_at = Carbon::now()->timestamp;
-        $bad_user->save();
+        //$bad_user->deleted_at = Carbon::now()->timestamp;
+        $bad_user->delete();
 
         //This used to be in LogListener -
         $to_from_array = [

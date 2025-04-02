@@ -207,9 +207,9 @@ class MergeUsersTest extends TestCase
         $this->assertTrue($user1->refresh()->trashed(), "User 1 should be trashed and isn't!");
         $this->assertTrue($user2->refresh()->trashed(), "User 2 should be trashed and isn't!");
         dump($user1->refresh()->userlog);
-        $this->assertEquals(2, $user1->refresh()->userlog->count());
+        $this->assertEquals(2, $user1->refresh()->userlog->count()); //wait, so what _are_ the two messages we should see? A merge, sure, but then a delete?
         $this->assertEquals(2, $user2->refresh()->userlog->count());
-
+        dump($user2->refresh()->userlog);
     }
 
 

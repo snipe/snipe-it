@@ -74,7 +74,7 @@ class CheckinLicensesFromAllUsers extends Command
             $seat->assigned_to = null;
 
             $seat->setLogNote('Checked in via cli tool');
-            if ($seat->checkin()) {
+            if ($seat->checkInAndSave()) {
 
                 // Override the email address so we don't notify on checkin
                 if (! $notify) {

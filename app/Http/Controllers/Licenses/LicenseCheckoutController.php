@@ -101,7 +101,7 @@ class LicenseCheckoutController extends Controller
         }
 
         $licenseSeat->setLogTarget($target);
-        if ($licenseSeat->checkout()) {
+        if ($licenseSeat->checkOutAndSave()) {
             return redirect()->to(Helper::getRedirectOption($request, $license->id, 'Licenses'))->with('success', trans('admin/licenses/message.checkout.success'));
         }
 

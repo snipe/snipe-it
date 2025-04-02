@@ -14,14 +14,11 @@ class FixupAssignedToAssignedTypeTest extends TestCase
         $user = User::factory()->create();
         $admin = User::factory()->admin()->create();
 
-        //$asset->checkOut($user, $admin); //FIXME - switch this to a regular checkout!!!
-        //$asset->setLogTarget($user);
-        //$asset->checkOutAndSave();
-        $asset->assigned_to = $user->id;
-        $asset->saveQuietly();
+        $asset->setLogTarget($user);
+        $asset->checkOutAndSave(); //this _should_ work but we don't have an auth::user() to work with and the null notification breaks things?
 
-        //$asset->assigned_type=null; //blank out the assigned type
-        //$asset->saveQuietly();
+        $asset->assigned_type = null; //blank out the assigned type
+        $asset->forceSave();
 
         $this->artisan('snipeit:assigned-to-fixup --debug')->assertExitCode(0);
 

@@ -62,7 +62,7 @@ class AccessoryCheckinController extends Controller
         $accessory->setLogTarget($accessory_checkout);
 
         // Was the accessory updated?
-        if ($accessory->checkIn()) {
+        if ($accessory->checkInAndSave()) {
 
             session()->put(['redirect_option' => $request->get('redirect_option')]);
 

@@ -687,8 +687,10 @@ class AssetsController extends Controller
             } elseif ($request->get('assigned_location')) {
                 $target = Location::find(request('assigned_location'));
             }
-            if (isset($target)) { //FIXME - another usage of checkOut; it's going to fail!
-                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset creation', e($request->get('name')));
+            if (isset($target)) {
+                $asset->setLogTarget($target);
+                $asset->setLogNote('Checked out on asset creation');
+                $asset->checkOutAndSave();
             }
 
             if ($asset->image) {
@@ -775,7 +777,9 @@ class AssetsController extends Controller
             }
 
             if (isset($target)) {
-                $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), '', 'Checked out on asset update', e($request->get('name')), $location);
+                $asset->setLogTarget($target);
+                $asset->setLogNote('Checked out on asset update');
+                $asset->checkOutAndSave();
             }
 
             if ($asset->image) {
