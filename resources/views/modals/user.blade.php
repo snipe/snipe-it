@@ -42,10 +42,10 @@
                         @include ('partials.forms.edit.location-profile-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
                     </div>
                     <div class="dynamic-form-row">
-                        @include('partials.forms.edit.name-first', [ 'required' => 'true', 'class' => 'col-md-8 col-xs-12-pull', 'style' => 'width:67%;'])
+                        @include('partials.forms.edit.name-first', ['value' => '', 'required' => 'true', 'class' => 'col-md-8 col-xs-12-pull', 'style' => 'width:67%;'])
                     </div>
                     <div class="dynamic-form-row">
-                    @include('partials.forms.edit.name-last', ['required' => 'true', 'class' => 'col-md-8 col-xs-12-pull', 'style' => 'width:67%;'])
+                    @include('partials.forms.edit.name-last', ['value' => '', 'required' => 'true', 'class' => 'col-md-8 col-xs-12-pull', 'style' => 'width:67%;'])
                     </div>
                     <div class="dynamic-form-row">
                         @include('partials.forms.edit.email')

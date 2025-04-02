@@ -292,8 +292,10 @@
                       </div>
                       <div class="col-md-9">
 
-                        <span class="js-copy">{{ $consumable->item_no  }}</span>
-                        <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                        <span class="js-copy-item_no">{{ $consumable->item_no  }}</span>
+                        <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-item_no"
+                           aria-hidden="true" data-tooltip="true" data-placement="top"
+                           title="{{ trans('general.copy_to_clipboard') }}">
                           <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                         </i>
 
@@ -308,8 +310,10 @@
                       </div>
                       <div class="col-md-9">
 
-                        <span class="js-copy">{{ $consumable->model_number  }}</span>
-                        <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                        <span class="js-copy-model_no">{{ $consumable->model_number  }}</span>
+                        <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy-model_no"
+                           aria-hidden="true" data-tooltip="true" data-placement="top"
+                           title="{{ trans('general.copy_to_clipboard') }}">
                           <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
                         </i>
 
@@ -325,6 +329,22 @@
                       </div>
                       <div class="col-md-9">
                         {{ \App\Helpers\Helper::getFormattedDateObject($consumable->purchase_date, 'datetime', false) }}
+                      </div>
+                    </div>
+                  @endif
+
+                  @if ($consumable->adminuser)
+                    <!-- created at -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.created_by') }}
+                      </div>
+                      <div class="col-md-9">
+                        @if ($consumable->adminuser->deleted_at == '')
+                          <a href="{{ route('users.show', ['user' => $consumable->adminuser]) }}">{{ $consumable->adminuser->present()->fullName }}</a>
+                        @else
+                          <del>{{ $consumable->adminuser->present()->fullName }}</del>
+                        @endif
                       </div>
                     </div>
                   @endif
@@ -349,24 +369,6 @@
                       </div>
                       <div class="col-md-9">
                         {{ \App\Helpers\Helper::getFormattedDateObject($consumable->updated_at, 'datetime')['formatted']}}
-                      </div>
-                    </div>
-                  @endif
-
-                  @if ($consumable->admin)
-                    <!-- created at -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('general.created_by') }}
-                      </div>
-                      <div class="col-md-9">
-
-                          @if ($consumable->admin->deleted_at == '')
-                            <a href="{{ route('users.show', ['user' => $consumable->admin]) }}">{{ $consumable->admin->present()->fullName }}</a>
-                          @else
-                            <del>{{ $consumable->admin->present()->fullName }}</del>
-                          @endif
-
                       </div>
                     </div>
                   @endif

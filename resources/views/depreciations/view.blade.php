@@ -171,7 +171,7 @@
                                 </div>
 
                             </div>
-                            {{ Form::close() }}
+                            </form>
 
                         </div> <!--/.row-->
                     </div> <!-- /.tab-pane -->

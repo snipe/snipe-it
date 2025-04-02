@@ -1418,4 +1418,12 @@ input[type="radio"]:checked::before {
 .bootstrap-table .fixed-table-container .table tbody tr .card-view {
   display: table-row !important;
 }
+td.text-right.text-padding-number-cell {
+  padding-right: 30px !important;
+  white-space: nowrap;
+}
+th.text-right.text-padding-number-footer-cell {
+  padding-right: 20px !important;
+  white-space: nowrap;
+}
 

@@ -56,7 +56,7 @@
                                 {{ trans('general.date') }}
                             </th>
                             <th class="col-sm-2" data-searchable="true" data-sortable="true" data-field="created_by" data-formatter="usersLinkObjFormatter">
-                                {{ trans('general.admin') }}
+                                {{ trans('general.created_by') }}
                             </th>
                             <th class="col-sm-2" data-field="action_type">
                                 {{ trans('general.action') }}

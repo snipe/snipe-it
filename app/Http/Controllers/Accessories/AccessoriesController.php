@@ -112,13 +112,13 @@ class AccessoriesController extends Controller
     {
 
         $this->authorize('create', Accessory::class);
-
-        $accessory = clone $accessory;
-        $accessory->id = null;
-        $accessory->location_id = null;
+        $cloned = clone $accessory;
+        $cloned->id = null;
+        $cloned->deleted_at = '';
+        $cloned->location_id = null;
 
         return view('accessories/edit')
-            ->with('item', $accessory);
+            ->with('item', $cloned);
         
     }
 
