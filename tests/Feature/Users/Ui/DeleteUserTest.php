@@ -159,20 +159,6 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testAllowUserDeletionIfNotManagingLocations()
-    {
-        $manager = User::factory()->create();
-        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($manager->isDeletable());
-
-        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
-            ->delete(route('users.destroy', $manager->id))
-            ->assertStatus(302)
-            ->assertRedirect(route('users.index'));
-
-        $this->followRedirects($response)->assertSee('Success');
-
-    }
-
     public function testDisallowUserDeletionIfNoDeletePermissions()
     {
         $manager = User::factory()->create();
@@ -202,7 +188,6 @@ class DeleteUserTest extends TestCase
         $this->followRedirects($response)->assertSee('Error');
     }
 
-
     public function testUsersCannotDeleteThemselves()
     {
         $manager = User::factory()->deleteUsers()->viewUsers()->create();
@@ -216,5 +201,16 @@ class DeleteUserTest extends TestCase
         $this->followRedirects($response)->assertSee('Error');
     }
 
+    public function testCanDeleteUser()
+    {
+        $manager = User::factory()->create();
+        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($manager->isDeletable());
 
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', $manager->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee('Success');
+    }
 }
