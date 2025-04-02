@@ -212,5 +212,7 @@ class DeleteUserTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
+
+        $this->assertSoftDeleted($user);
     }
 }
