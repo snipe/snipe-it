@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Authentication;
+namespace Tests\Feature\Authentication;
 
 use App\Models\User;
 use Tests\TestCase;
@@ -32,7 +32,6 @@ class LoginTest extends TestCase
     public function testLoginThrottleConfigIsRespected()
     {
 
-        // Why do we need this? The app should already be set up
        User::factory()->create(['username' => 'username_here']);
 
        config(['auth.passwords.users.throttle.max_attempts' => 1]);
