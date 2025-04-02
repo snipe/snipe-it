@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Users\Ui;
 
+use App\Models\CheckoutAcceptance;
 use Tests\TestCase;
 use App\Models\LicenseSeat;
 use App\Models\Location;
@@ -204,7 +205,6 @@ class DeleteUserTest extends TestCase
     public function testCanDeleteUser()
     {
         $user = User::factory()->create();
-        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create());
 
         $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->delete(route('users.destroy', $user->id))
@@ -214,5 +214,20 @@ class DeleteUserTest extends TestCase
         $this->followRedirects($response)->assertSee('Success');
 
         $this->assertSoftDeleted($user);
+    }
+
+    public function testUsersUnacceptedCheckoutAcceptancesAreSoftDeletedWhenUserIsDeleted()
+    {
+        $user = User::factory()->create();
+
+        $checkoutAcceptance = CheckoutAcceptance::factory()
+            ->pending()
+            ->for($user, 'assignedTo')
+            ->create();
+
+        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', $user->id));
+
+        $this->assertSoftDeleted($checkoutAcceptance);
     }
 }
