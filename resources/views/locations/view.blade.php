@@ -468,7 +468,16 @@
       @endif
 
       <div class="col-md-12">
-          <ul class="list-unstyled" style="line-height: 20px; padding-bottom: 20px;">
+
+          <ul class="list-unstyled" style="line-height: 22px; padding-bottom: 20px;">
+
+              @if ($location->notes)
+                  <li>
+                      <strong>{{ trans('general.notes') }}</strong>:
+                      {!! nl2br(Helper::parseEscapedMarkedownInline($location->notes)) !!}
+                  </li>
+              @endif
+
               @if ($location->address!='')
                   <li>{{ $location->address }}</li>
               @endif
@@ -487,6 +496,7 @@
               @if ($location->ldap_ou)
                   <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
               @endif
+
 
               @if ((($location->address!='') && ($location->city!='')) || ($location->state!='') || ($location->country!=''))
                       <li>

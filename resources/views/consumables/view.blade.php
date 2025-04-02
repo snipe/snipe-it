@@ -333,6 +333,18 @@
                     </div>
                   @endif
 
+                  @if ($consumable->created_by)
+                    <!-- created at -->
+                    <div class="row">
+                      <div class="col-md-3">
+                        {{ trans('general.created_by') }}
+                      </div>
+                      <div class="col-md-9">
+                        {{ $consumable->adminuser->present()->fullName }}
+                      </div>
+                    </div>
+                  @endif
+
                   @if ($consumable->created_at)
                     <!-- created at -->
                     <div class="row">
