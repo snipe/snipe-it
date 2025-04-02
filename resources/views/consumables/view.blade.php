@@ -333,7 +333,7 @@
                     </div>
                   @endif
 
-                  @if ($consumable->created_by)
+                  @if ($consumable->adminuser)
                     <!-- created at -->
                     <div class="row">
                       <div class="col-md-3">
