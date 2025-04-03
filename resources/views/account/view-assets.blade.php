@@ -554,21 +554,24 @@
                     }'>
                 <thead>
                 <tr>
-                  <th>{{ trans('general.name') }}</th>
-                  <th>{{ trans('admin/licenses/form.license_key') }}</th>
-                  <th>{{ trans('admin/licenses/form.to_name') }}</th>
-                  <th>{{ trans('admin/licenses/form.to_email') }}</th>
-                  <th>{{ trans('general.category') }}</th>
+                  <th class="col-md-2">{{ trans('general.name') }}</th>
+                  <th class="col-md-4">{{ trans('admin/licenses/form.license_key') }}</th>
+                  <th class="col-md-2">{{ trans('admin/licenses/form.to_name') }}</th>
+                  <th class="col-md-2">{{ trans('admin/licenses/form.to_email') }}</th>
+                  <th class="col-md-2">{{ trans('general.category') }}</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 @foreach ($user->licenses as $license)
                   <tr>
-                    <td>{{ $license->name }}</td>
+                    <td>
+                      {{ $license->name }}
+                    </td>
                     <td>
                       @can('viewKeys', $license)
-                        {{ $license->serial }}
+                        <code class="single-line"><span class="js-copy-link" data-clipboard-target=".js-copy-key-{{ $license->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key-{{ $license->id }}">{{ $license->serial }}</span></span></code>
+
                       @else
                         ------------
                       @endcan

@@ -124,13 +124,13 @@
                   <div class="row">
                     <div class="col-md-3">
                       <strong>{{ trans('admin/licenses/form.license_key') }}</strong>
+                      <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                        <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
+                      </i>
                     </div>
                     <div class="col-md-9">
                       @can('viewKeys', $license)
-                        <span class="js-copy">{!! nl2br(e($license->serial)) !!}</span>
-                          <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
-                            <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
-                          </i>
+                        <code><span class="js-copy">{!! nl2br(e($license->serial)) !!}</span></code>
                       @else
                         ------------
                       @endcan
