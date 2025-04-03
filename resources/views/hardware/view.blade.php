@@ -1165,7 +1165,7 @@
                                                     <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
                                                     <td>
                                                         @can('viewKeys', $seat->license)
-                                                            {!! nl2br(e($seat->license->serial)) !!}
+                                                            <code style="white-space: pre-wrap"><span class="js-copy-link" data-clipboard-target=".js-copy-key-{{ $seat->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key-{{ $seat->id }}">{{ $seat->license->serial }}</span></span></code>
                                                         @else
                                                             ------------
                                                         @endcan

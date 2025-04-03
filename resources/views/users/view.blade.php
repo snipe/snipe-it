@@ -831,7 +831,7 @@
                   </td>
                   <td class="col-md-4">
                     @can('viewKeys', $license)
-                    {!! $license->present()->serialUrl() !!}
+                          <code style="white-space: pre-wrap"><span class="js-copy-link" data-clipboard-target=".js-copy-key" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key">{{ $license->serial }}</span></span></code>
                     @else
                       ------------
                     @endcan
