@@ -1152,10 +1152,10 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th class="col-md-4">{{ trans('general.name') }}</th>
-                                            <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.license_key') }}</th>
-                                            <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.expiration') }}</th>
-                                            <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
+                                            <th>{{ trans('general.name') }}</th>
+                                            <th><span class="line"></span>{{ trans('admin/licenses/form.license_key') }}</th>
+                                            <th><span class="line"></span>{{ trans('admin/licenses/form.expiration') }}</th>
+                                            <th><span class="line"></span>{{ trans('table.actions') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -1165,7 +1165,7 @@
                                                     <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
                                                     <td>
                                                         @can('viewKeys', $seat->license)
-                                                            {!! nl2br(e($seat->license->serial)) !!}
+                                                            <code class="single-line"><span class="js-copy-link" data-clipboard-target=".js-copy-key-{{ $seat->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key-{{ $seat->id }}">{{ $seat->license->serial }}</span></span></code>
                                                         @else
                                                             ------------
                                                         @endcan

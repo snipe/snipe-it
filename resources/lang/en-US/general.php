@@ -62,6 +62,8 @@ return [
     'changepassword'  		=> 'Change Password',
     'checkin'  				=> 'Checkin',
     'checkin_from'  		=> 'Checkin from',
+    'checkin_note'  		=> 'Checkin Note',
+    'checkout_note'  		=> 'Checkout Note',
     'checkout'  			=> 'Checkout',
     'checkouts_count'       => 'Checkouts',
     'checkins_count'        => 'Checkins',
