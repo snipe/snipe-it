@@ -224,7 +224,7 @@ install_snipeit () {
   mysql -u root --execute="CREATE DATABASE snipeit;CREATE USER snipeit_dbuser@localhost IDENTIFIED BY '$mysqluserpw'; GRANT ALL PRIVILEGES ON snipeit.* TO snipeit_dbuser@localhost;"
 
   echo -e "\n\n* Cloning Snipe-IT from github to the web directory."
-  log "git clone https://github.com/snipe/snipe-it $APP_PATH" & pid=$!
+  log "git clone https://github.com/grokability/snipe-it $APP_PATH" & pid=$!
   progress
   pushd $APP_PATH
   git checkout master
