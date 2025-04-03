@@ -14,7 +14,7 @@ class FixBulkAccessoryCheckinActionLogEntries extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:fix-bulk-accessory-action-log-entries {--dry-run : Run the sync process but don\'t update the database}';
+    protected $signature = 'snipeit:fix-bulk-accessory-action-log-entries {--dry-run : Run the sync process but don\'t update the database} {--skip-backup : Skip pre-execution backup}';
 
     /**
      * The console command description.
@@ -24,15 +24,15 @@ class FixBulkAccessoryCheckinActionLogEntries extends Command
     protected $description = 'This script attempts to fix timestamps and missing created_by values for bulk checkin entries in the log table';
 
     private bool $dryrun = false;
+    private bool $skipBackup = false;
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        if ($this->option('dry-run')) {
-            $this->dryrun = true;
-        }
+        $this->skipBackup = $this->option('skip-backup');
+        $this->dryrun = $this->option('dry-run');
 
         if ($this->dryrun) {
             $this->info('This is a DRY RUN - no changes will be saved.');
@@ -69,6 +69,11 @@ class FixBulkAccessoryCheckinActionLogEntries extends Command
 
         if (!$this->dryrun && !$this->confirm('Update these logs?')) {
             return 0;
+        }
+
+        if (!$this->dryrun && !$this->skipBackup) {
+            $this->info('Backing up the database before making changes...');
+            $this->call('snipeit:backup');
         }
 
         if ($this->dryrun) {
