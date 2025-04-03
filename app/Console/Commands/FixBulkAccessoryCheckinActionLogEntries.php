@@ -41,6 +41,11 @@ class FixBulkAccessoryCheckinActionLogEntries extends Command
         // Logs that were improperly timestamped should have created_at in the 1970s
         $logs = Actionlog::whereYear('created_at', '1970')->get();
 
+        if ($logs->isEmpty()) {
+            $this->info('No logs found with incorrect timestamps.');
+            return 0;
+        }
+
         $this->info('Found ' . $logs->count() . ' logs with incorrect timestamps:');
 
         $this->table(
