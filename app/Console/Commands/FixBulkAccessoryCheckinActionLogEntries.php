@@ -118,6 +118,9 @@ class FixBulkAccessoryCheckinActionLogEntries extends Command
     }
 
     /**
+     * Hopefully the bulk checkin included other items like assets or licenses
+     * so we can use one of those logs to get the correct created_by value.
+     *
      * This method attempts to find a bulk check in log that was
      * created at the same time as the log passed in.
      */
