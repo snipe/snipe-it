@@ -75,6 +75,7 @@ class Consumable extends SnipeModel
         'item_no',
         'location_id',
         'manufacturer_id',
+        'supplier_id',
         'name',
         'order_number',
         'model_number',
