@@ -792,6 +792,8 @@
         </div><!-- /asset -->
 
         <div class="tab-pane" id="licenses">
+
+
           <div class="table-responsive">
             <table
                     data-cookie-id-table="userLicenseTable"
@@ -815,7 +817,7 @@
 
               <thead>
                 <tr>
-                  <th class="col-md-5">{{ trans('general.name') }}</th>
+                  <th>{{ trans('general.name') }}</th>
                   <th>{{ trans('admin/licenses/form.license_key') }}</th>
                   <th data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                   <th>{{ trans('admin/licenses/form.purchase_order') }}</th>
@@ -831,7 +833,7 @@
                   </td>
                   <td class="col-md-4">
                     @can('viewKeys', $license)
-                          <code style="white-space: pre-wrap"><span class="js-copy-link" data-clipboard-target=".js-copy-key-{{ $license->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key-{{ $license->id }}">{{ $license->serial }}</span></span></code>
+                          <code class="single-line"><span class="js-copy-link" data-clipboard-target=".js-copy-key-{{ $license->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key-{{ $license->id }}">{{ $license->serial }}</span></span></code>
                     @else
                       ------------
                     @endcan
