@@ -13,7 +13,7 @@ class FixBulkAccessoryCheckinActionLogEntries extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:fix-bulk-accessory-action-log-entries {--dryrun : Run the sync process but don\'t update the database}';
+    protected $signature = 'snipeit:fix-bulk-accessory-action-log-entries {--dry-run : Run the sync process but don\'t update the database}';
 
     /**
      * The console command description.
@@ -29,7 +29,7 @@ class FixBulkAccessoryCheckinActionLogEntries extends Command
      */
     public function handle()
     {
-        if ($this->option('dryrun')) {
+        if ($this->option('dry-run')) {
             $this->dryrun = true;
         }
 
