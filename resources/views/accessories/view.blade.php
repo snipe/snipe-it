@@ -102,7 +102,7 @@
 
                     <!-- history tab pane -->
                      <div class="tab-pane fade" id="history">
-                         <div class="table table-responsive">
+                         <div class="table-responsive">
                              <div class="row">
                                  <div class="col-md-12">
                                 <table
