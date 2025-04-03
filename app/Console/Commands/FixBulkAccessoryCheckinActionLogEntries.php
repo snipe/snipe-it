@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Accessory;
 use App\Models\Actionlog;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Model;
@@ -38,8 +39,14 @@ class FixBulkAccessoryCheckinActionLogEntries extends Command
             $this->newLine();
         }
 
-        // Logs that were improperly timestamped should have created_at in the 1970s
-        $logs = Actionlog::whereYear('created_at', '1970')->get();
+        $logs = Actionlog::query()
+            // only look for accessory checkin logs
+            ->where('item_type', Accessory::class)
+            // that were part of a bulk checkin
+            ->where('note', 'Bulk checkin items')
+            // logs that were improperly timestamped should have created_at in the 1970s
+            ->whereYear('created_at', '1970')
+            ->get();
 
         if ($logs->isEmpty()) {
             $this->info('No logs found with incorrect timestamps.');
