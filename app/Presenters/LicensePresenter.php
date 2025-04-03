@@ -41,7 +41,7 @@ class LicensePresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/licenses/form.license_key'),
-                'formatter' => 'licensesLinkFormatter',
+                'formatter' => 'licenseKeyFormatter',
             ], [
                 'field' => 'expiration_date',
                 'searchable' => true,
