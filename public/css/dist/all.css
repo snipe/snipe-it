@@ -22766,6 +22766,7 @@ code.single-line {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
+  max-width: 400px;
 }
 
 
@@ -24315,5 +24316,6 @@ code.single-line {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
+  max-width: 400px;
 }
 
