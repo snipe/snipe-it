@@ -185,6 +185,7 @@ return [
     'last'					=> 'Last',
     'last_login'            => 'Last Login',
     'last_name'             => 'Last Name',
+    'last_name_format'		=> 'Last Name (doe@example.com)',
     'license'				=> 'License',
     'license_report'        => 'License Report',
     'licenses_available'	=> 'Licenses available',
