@@ -22762,6 +22762,7 @@ th.text-right.text-padding-number-footer-cell {
   white-space: nowrap;
 }
 code.single-line {
+  white-space: pre-wrap;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
@@ -24312,6 +24313,7 @@ th.text-right.text-padding-number-footer-cell {
   white-space: nowrap;
 }
 code.single-line {
+  white-space: pre-wrap;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
