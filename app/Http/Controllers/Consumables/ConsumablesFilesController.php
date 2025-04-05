@@ -86,8 +86,7 @@ class ConsumablesFilesController extends Controller
                     Log::debug($e);
                 }
             }
-
-            $log->delete();
+            $consumable->logUploadDelete($log->filename);
 
             return redirect()->back()->withFragment('files')
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
