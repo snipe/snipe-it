@@ -422,10 +422,6 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
         $trail->parent('home')
             ->push(trans('general.requestable_items'), route('requestable-assets')));
 
-    Route::post(
-        'request-asset/{assetId}',
-        [ViewAssetsController::class, 'getRequestAsset']
-    )->name('account/request-asset');
 
     Route::post('request-asset/{asset}', [ViewAssetsController::class, 'store'])
         ->name('account.request-asset');
