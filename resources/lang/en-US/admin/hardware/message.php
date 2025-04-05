@@ -100,9 +100,9 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Asset was not requested, please try again',
-        'success' 		=> 'Asset requested successfully.',
-        'canceled'      => 'Checkout request successfully canceled',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Requested successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
     ],
 
 ];
