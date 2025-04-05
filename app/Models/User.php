@@ -521,6 +521,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             ->orderBy('created_at', 'desc');
     }
 
+    public function pendingCheckoutAcceptances()
+    {
+        return $this->hasMany(CheckoutAcceptance::class, 'assigned_to_id')->pending();
+    }
+
     /**
      * Establishes the user -> requested assets relationship
      *
