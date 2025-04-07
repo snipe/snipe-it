@@ -1064,7 +1064,7 @@ class AssetsController extends Controller
      * @param int $id
      * @since [v4.0]
      */
-    public function audit(Request $request): JsonResponse
+    public function audit(Request $request, Asset $asset): JsonResponse
 
     {
         $this->authorize('audit', Asset::class);
@@ -1072,19 +1072,14 @@ class AssetsController extends Controller
         $settings = Setting::getSettings();
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
 
-        // No tag passed - return an error
-        if (!$request->filled('asset_tag')) {
-            return response()->json(Helper::formatStandardApiResponse('error', [
-                'asset_tag' => '',
-                'error' => trans('admin/hardware/message.no_tag'),
-            ], trans('admin/hardware/message.no_tag')), 200);
+        // Allow the asset tag to be passed in the payload (legacy method)
+        if ($request->filled('asset_tag')) {
+            $asset = Asset::where('asset_tag', '=', $request->input('asset_tag'))->first();
         }
 
-
-        $asset = Asset::where('asset_tag', '=', $request->input('asset_tag'))->first();
-
-
         if ($asset) {
+
+            $originalValues = $asset->getRawOriginal();
 
             /**
              * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
@@ -1116,18 +1111,52 @@ class AssetsController extends Controller
 
             $asset->last_audit_date = date('Y-m-d H:i:s');
 
+            // Set up the payload for re-display in the API response
+            $payload = [
+                'id' => $asset->id,
+                'asset_tag' => $asset->asset_tag,
+                'note' => $request->input('note'),
+                'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
+            ];
+
+
+            /**
+             * Update custom fields in the database.
+             * Validation for these fields is handled through the AssetRequest form request
+             * $model = AssetModel::find($request->get('model_id'));
+            */
+
+            if (($asset->model) && ($asset->model->fieldset)) {
+                $payload['custom_fields'] = [];
+                foreach ($asset->model->fieldset->fields as $field) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                            if (is_array($request->input($field->db_column))) {
+                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            } else {
+                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            }
+                        }
+                    } else {
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        } else {
+                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
+                    }
+                    $payload['custom_fields'][$field->db_column] =  $request->input($field->db_column);
+                }
+            } 
+
+
+
             /**
              * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
              * We have to invoke this manually because of the unsetEventDispatcher() above.)
              */
             if ($asset->isValid() && $asset->save()) {
-                $asset->logAudit(request('note'), request('location_id'));
-
-                return response()->json(Helper::formatStandardApiResponse('success', [
-                    'asset_tag' => e($asset->asset_tag),
-                    'note' => e($request->input('note')),
-                    'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
-                ], trans('admin/hardware/message.audit.success')));
+                $asset->logAudit(request('note'), request('location_id'), null, $originalValues);
+                return response()->json(Helper::formatStandardApiResponse('success', $payload, trans('admin/hardware/message.audit.success')));
             }
 
             // Asset failed validation or was not able to be saved
