@@ -93,7 +93,7 @@
                             <label for="email_format">{{ trans('general.email_format') }}</label>
                         </div>
                         <div class="col-md-9">
-                            {!! Form::username_format('email_format', old('email_format', $setting->email_format), 'select2') !!}
+                            {!! Form::email_format('email_format', old('email_format', $setting->email_format), 'select2') !!}
                             {!! $errors->first('email_format', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                         </div>
                     </div>
