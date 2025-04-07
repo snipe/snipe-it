@@ -301,7 +301,10 @@
                                     <x-input.select
                                         name="label2_2d_target"
                                         id="label2_2d_target"
-                                        :options="['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')', 'ht_tag'=>'/ht/{asset_tag}', 'location' => '/location/{location_id}']"
+                                        :options="['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')',
+                                                   'ht_tag'=>'/ht/{asset_tag}',
+                                                   'location' => '/location/{location_id}',
+                                                   ]"
                                         :selected="old('label2_2d_target', $setting->label2_2d_target)"
                                         class="col-md-4"
                                         aria-label="label2_2d_target"
