@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Unit;
 
+use App\Models\CheckoutAcceptance;
 use App\Models\User;
 use Tests\TestCase;
 
@@ -102,5 +103,23 @@ class UserTest extends TestCase
         $expected_username = 'nataliaa';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastinitial');
         $this->assertEquals($expected_username, $user['username']);
+    }
+
+    public function testPendingCheckoutAcceptancesRelationship()
+    {
+        $user = User::factory()->create();
+
+        $acceptedAcceptance = CheckoutAcceptance::factory()
+            ->accepted()
+            ->for($user, 'assignedTo')
+            ->create();
+
+        $pendingAcceptance = CheckoutAcceptance::factory()
+            ->pending()
+            ->for($user, 'assignedTo')
+            ->create();
+
+        $this->assertFalse($user->pendingCheckoutAcceptances->contains($acceptedAcceptance));
+        $this->assertTrue($user->pendingCheckoutAcceptances->contains($pendingAcceptance));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Users\Ui;
 
+use App\Models\CheckoutAcceptance;
 use Tests\TestCase;
 use App\Models\LicenseSeat;
 use App\Models\Location;
@@ -159,20 +160,6 @@ class DeleteUserTest extends TestCase
     }
 
 
-    public function testAllowUserDeletionIfNotManagingLocations()
-    {
-        $manager = User::factory()->create();
-        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())->assertTrue($manager->isDeletable());
-
-        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
-            ->delete(route('users.destroy', $manager->id))
-            ->assertStatus(302)
-            ->assertRedirect(route('users.index'));
-
-        $this->followRedirects($response)->assertSee('Success');
-
-    }
-
     public function testDisallowUserDeletionIfNoDeletePermissions()
     {
         $manager = User::factory()->create();
@@ -202,7 +189,6 @@ class DeleteUserTest extends TestCase
         $this->followRedirects($response)->assertSee('Error');
     }
 
-
     public function testUsersCannotDeleteThemselves()
     {
         $manager = User::factory()->deleteUsers()->viewUsers()->create();
@@ -216,5 +202,32 @@ class DeleteUserTest extends TestCase
         $this->followRedirects($response)->assertSee('Error');
     }
 
+    public function testCanDeleteUser()
+    {
+        $user = User::factory()->create();
 
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', $user->id))
+            ->assertStatus(302)
+            ->assertRedirect(route('users.index'));
+
+        $this->followRedirects($response)->assertSee('Success');
+
+        $this->assertSoftDeleted($user);
+    }
+
+    public function testUsersUnacceptedCheckoutAcceptancesAreSoftDeletedWhenUserIsDeleted()
+    {
+        $user = User::factory()->create();
+
+        $checkoutAcceptance = CheckoutAcceptance::factory()
+            ->pending()
+            ->for($user, 'assignedTo')
+            ->create();
+
+        $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
+            ->delete(route('users.destroy', $user->id));
+
+        $this->assertSoftDeleted($checkoutAcceptance);
+    }
 }
