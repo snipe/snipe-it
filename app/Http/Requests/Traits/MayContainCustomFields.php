@@ -15,7 +15,7 @@ trait MayContainCustomFields
         // For auditing and some other non-standard things where $this is only the form submission and may not have the asset info
        if ((request()->route('asset') && (request()->route('asset')->model_id))) {
            $asset_model = AssetModel::find(request()->route('asset')->model_id);
-=       } else {
+       } else {
            // find the model
            if ($this->method() == 'POST') {
                $asset_model = AssetModel::find($this->model_id);
@@ -24,6 +24,7 @@ trait MayContainCustomFields
                $asset_model = $this->asset->model;
            }
        }
+
 
         // collect the custom fields in the request
         $validator->after(function ($validator) use ($asset_model) {
