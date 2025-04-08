@@ -19,25 +19,33 @@ class TestLocationsFMCS extends Command
      *
      * @var string
      */
-    protected $description = 'Test for inconsistencies if FullMultipleCompanySupport with scoped locations will be used';
+    protected $description = 'Test for company ID inconsistencies if FullMultipleCompanySupport with scoped locations will be used.';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $this->info('Test for inconsistencies if FullMultipleCompanySupport with scoped locations will be used');
-        $this->info('Depending on the database size this will take a while, output will be displayed after the complete test is over');
+        $this->info('This script checks for company ID inconsistencies if Full Multiple Company Support with scoped locations will be used.');
+        $this->info('This could take few moments if have a very large dataset.');
+        $this->newLine();
 
         // if parameter location_id is set, only test this location
         $location_id = null;
         if ($this->option('location_id')) {
             $location_id = $this->option('location_id');
         }
-        $ret = Helper::test_locations_fmcs(true, $location_id);
 
-        foreach($ret as $output) {
-            $this->info($output);
-        }
+        $mismatched = Helper::test_locations_fmcs(true, $location_id);
+        $this->warn(trans_choice('admin/settings/message.location_scoping.mismatch', count($mismatched)));
+        $this->newLine();
+        $this->info('Edit your locations to associate them with the correct company.');
+
+        $header = ['Type', 'ID', 'Name', 'Checkout Type',  'Company ID', 'Item Company', 'Item Location', 'Location Company', 'Location Company ID'];
+        sort($mismatched);
+
+        $this->table($header, $mismatched);
+
     }
+
 }

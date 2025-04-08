@@ -1544,7 +1544,7 @@ class Helper
      * @return string []
      */
     static public function test_locations_fmcs($artisan, $location_id = null, $new_company_id = null) {
-        $ret = [];
+        $mismatched = [];
 
         if ($location_id) {
             $location = Location::find($location_id);
@@ -1556,18 +1556,31 @@ class Helper
         }
 
         foreach($locations as $location) {
-            // in case of an update of a single location use the newly requested company_id
+            // in case of an update of a single location, use the newly requested company_id
             if ($new_company_id) {
                 $location_company = $new_company_id;
             } else {
                 $location_company = $location->company_id;
             }
 
-            // depending on the relationship we must use different operations to retrieve the objects
-            $keywords_relation = ['many' => ['users', 'assets', 'rtd_assets', 'consumables', 'components', 'accessories', 'assignedAssets', 'assignedAccessories'],
-                                  'one'  => ['parent', 'manager']];
+            // Depending on the relationship, we must use different operations to retrieve the objects
+            $keywords_relation = [
+                'many' => [
+                            'accessories',
+                            'assets',
+                            'assignedAccessories',
+                            'assignedAssets',
+                            'components',
+                            'consumables',
+                            'rtd_assets',
+                            'users',
+                        ],
+                    'one'  => [
+                        'manager',
+                        'parent',
+                    ]];
 
-            // In case of a single location the children must be checked either, becuase we don't walk every location
+            // In case of a single location, the children must be checked as well, because we don't walk every location
             if ($location_id) {
                 $keywords_relation['many'][] = 'children';
             }
@@ -1575,23 +1588,35 @@ class Helper
             foreach ($keywords_relation as $relation => $keywords) {
                 foreach($keywords as $keyword) {
                     if ($relation == 'many') {
-                        $items = $location->$keyword->all();
+                        $items = $location->{$keyword}->all();
                     } else {
                         $items = collect([])->push($location->$keyword);
                     }
 
                     foreach ($items as $item) {
+
                         if ($item && $item->company_id != $location_company) {
-                            $ret[] = 'type: ' . get_class($item) . ', id: ' . $item->id . ', company_id: ' . $item->company_id . ', location company_id: ' . $location_company;
-                            // when not called from artisan command we bail out on the first error
-                            if (!$artisan) {
-                                return $ret;
-                            }
+                            $mismatched[] = [
+                                    class_basename(get_class($item)),
+                                    $item->id,
+                                    $item->name ?? $item->asset_tag ?? $item->serial ?? $item->username,
+                                    str_replace('App\\Models\\', '', $item->assigned_type) ?? null,
+                                    $item->company_id ?? null,
+                                    $item->company->name ?? null,
+//                                    $item->defaultLoc->id ?? null,
+//                                    $item->defaultLoc->name ?? null,
+//                                    $item->defaultLoc->company->id ?? null,
+//                                    $item->defaultLoc->company->name ?? null,
+                                    $item->location->name ?? null,
+                                    $item->location->company->name ?? null,
+                                    $location_company ?? null,
+                                ];
+
                         }
                     }
                 }
             }
         }
-        return $ret;
+        return $mismatched;
     }        
 }
