@@ -200,6 +200,7 @@ class RestoreFromBackup extends Command
      */
     public function handle()
     {
+        $unsafe_files = [];
         $dir = getcwd();
         if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
             Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
@@ -338,7 +339,9 @@ class RestoreFromBackup extends Command
                 if ($last_pos !== false) {
                     $extension = strtolower(pathinfo($raw_path, PATHINFO_EXTENSION));
                     if (!in_array($extension, $good_extensions)) {
-                        $this->warn('Potentially unsafe file ' . $raw_path . ' is being skipped');
+                        // gathering potentially unsafe files here to return at exit
+                        $unsafe_files[] = $raw_path;
+                        Log::debug('Potentially unsafe file '.$raw_path.' is being skipped');
                         $boring_files[] = $raw_path;
                         continue 2;
                     }
@@ -372,6 +375,11 @@ class RestoreFromBackup extends Command
         if ($this->option('sanitize-guess-prefix')) {
             $prefix = SQLStreamer::guess_prefix($sql_contents);
             $this->line($prefix);
+            if (count($unsafe_files) > 0) {
+                foreach ($unsafe_files as $unsafe_file) {
+                    $this->warn('Potentially unsafe file '.$unsafe_file.' is being skipped');
+                }
+            }
             return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitize your SQL.");
         }
 
