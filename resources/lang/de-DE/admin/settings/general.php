@@ -147,6 +147,8 @@ return [
     'logo_print_assets_help'    => 'Firmenlogo anzeigen beim Drucken der Asset-Liste ',
     'full_multiple_companies_support_help_text' => 'Beschränkung von Benutzern (inklusive Administratoren) die einer Firma zugewiesen sind zu den Assets der Firma.',
     'full_multiple_companies_support_text' => 'Volle Mehrmandanten-Unterstützung für Firmen',
+    'scope_locations_fmcs_support_text'  => 'Beschränke Standorte mit voller Mehrmandanten-Unterstützung für Firmen',
+    'scope_locations_fmcs_support_help_text'  => 'Bis zu Version 7.0 waren Standorte nicht auf die Firma des Benutzers beschränkt. Wenn diese Einstellung deaktiviert ist, wird die Kompatibilität zu älteren Versionen gewahrt und die Standorte nicht beschränkt. Wenn diese Einstellung aktiviert ist, werden Standorte ebenfalls auf die Firma des Benutzers beschränkt.',
     'show_in_model_list'   => 'In Modell-Dropdown-Liste anzeigen',
     'optional'					=> 'optional',
     'per_page'                  => 'Ergebnisse pro Seite',
