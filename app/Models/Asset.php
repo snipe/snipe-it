@@ -213,6 +213,31 @@ class Asset extends Depreciable
         $this->attributes['expected_checkin'] = $value;
     }
 
+
+
+    public function customFieldValidationRules()
+    {
+
+        $customFieldValidationRules = [];
+
+            if (($this->model) && ($this->model->fieldset)) {
+
+                foreach ($this->model->fieldset->fields as $field) {
+
+                    if ($field->format == 'BOOLEAN'){
+                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                    }
+                }
+
+                $customFieldValidationRules += $this->model->fieldset->validation_rules();
+            }
+
+        return $customFieldValidationRules;
+
+    }
+
+
+
     /**
      * This handles the custom field validation for assets
      *
@@ -220,29 +245,7 @@ class Asset extends Depreciable
      */
     public function save(array $params = [])
     {
-        if ($this->model_id != '') {
-            $model = AssetModel::find($this->model_id);
-
-            if (($model) && ($model->fieldset)) {
-
-                foreach ($model->fieldset->fields as $field){
-                    if($field->format == 'BOOLEAN'){
-                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
-                    }
-                }
-
-                $this->rules += $model->fieldset->validation_rules();
-
-                if ($this->model->fieldset){
-                    foreach ($this->model->fieldset->fields as $field){
-                        if($field->format == 'BOOLEAN'){
-                            $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
-                        }
-                    }
-                }
-            }
-        }
-
+        $this->rules += $this->customFieldValidationRules();
         return parent::save($params);
     }
 
@@ -254,7 +257,7 @@ class Asset extends Depreciable
 
     /**
      * Returns the warranty expiration date as Carbon object
-     * @return \Carbon|null
+     * @return \Carbon\Carbon|null
      */
     public function getWarrantyExpiresAttribute()
     {
@@ -683,6 +686,21 @@ class Asset extends Depreciable
     public function checkouts()
     {
         return $this->assetlog()->where('action_type', '=', 'checkout')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
+
+    /**
+     * Get the list of audits for this asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function audits()
+    {
+        return $this->assetlog()->where('action_type', '=', 'audit')
             ->orderBy('created_at', 'desc')
             ->withTrashed();
     }
@@ -1456,7 +1474,7 @@ class Asset extends Depreciable
    * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
-    public function scopeRequestableAssets($query)
+    public function scopeRequestableAssets($query): Builder
     {
         $table = $query->getModel()->getTable();
 

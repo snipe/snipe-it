@@ -224,6 +224,14 @@
                  </label>
              </div>
 
+             <!-- Show in Audit Form  -->
+             <div class="col-md-9 col-md-offset-3" id="display_audit" style="padding-bottom: 10px;">
+                 <label class="form-control">
+                     <input type="checkbox" name="display_audit" aria-label="display_audit" value="1" {{ (old('display_audit') || $field->display_audit) ? ' checked="checked"' : '' }}>
+                     {{ trans('admin/custom_fields/general.display_audit') }}
+                 </label>
+             </div>
+
 
              <!-- Show in View All Assets profile view  -->
               <div class="col-md-9 col-md-offset-3" id="display_in_user_view">

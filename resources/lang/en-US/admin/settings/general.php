@@ -58,10 +58,8 @@ return [
     'display_eol'               => 'Display EOL in table view',
     'display_qr'                => 'Display 2D barcode',
     'display_alt_barcode'		=> 'Display 1D barcode',
-    'email_logo'                => 'Email Logo',
     'barcode_type'				=> '2D Barcode Type',
     'alt_barcode_type'			=> '1D barcode type',
-    'email_logo_size'       => 'Square logos in email look best. ',
     'enabled'                   => 'Enabled',
     'eula_settings'				=> 'EULA Settings',
     'eula_markdown'				=> 'This EULA allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
@@ -77,7 +75,6 @@ return [
     'google_workspaces'         => 'Google Workspaces',
     'header_color'              => 'Header Color',
     'info'                      => 'These settings let you customize certain aspects of your installation.',
-    'label_logo'                => 'Label Logo',
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
     'laravel'                   => 'Laravel Version',
     'ldap'                      => 'LDAP',
@@ -389,7 +386,7 @@ return [
     'test_mail' => 'Test Mail',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar' => 'Custom Default Avatar',
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
@@ -397,7 +394,31 @@ return [
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
     'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
     'text' => 'Text',
+    'firstname_lastname_format'	=> 'First Name Last Name (jane.smith)',
+    'first_name_format'	        => 'First Name (jane)',
+    'filastname_format'			=> 'First Initial Last Name (jsmith)',
+    'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj)',
+    'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith)',
+    'firstinitial.lastname' => 'First Initial Last Name (j.smith)',
+    'lastname_firstinitial' => 'Last Name First Initial (smith_j)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j)',
+    'firstnamelastname'     => 'First Name Last Name (janesmith)',
+    'firstnamelastinitial'  => 'First Name Last Initial (janes)',
+    'lastnamefirstname'      => 'Last Name.First Name (smith.jane)',
 
+
+
+    'logo_labels' => [
+        'acceptance_pdf_logo'       => 'PDF Logo',
+        'email_logo'                => 'Email Logo',
+        'label_logo'                => 'Label Logo',
+        'logo'                      => 'Site Logo',
+        'favicon'                   => 'Favicon',
+    ],
+
+    'logo_help' => [
+        'email_logo_size'       => 'Square logos in email look best. ',
+    ],
 
     'logo_option_types' => [
         'text' => 'Text',

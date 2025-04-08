@@ -886,7 +886,7 @@ th.css-history > .th-inner::before {
   height: 34px;
 }
 
-.form-group.has-error label {
+.form-group.has-error label, .form-group.has-error .help-block {
   color: #a94442;
 }
 
@@ -1163,4 +1163,23 @@ input[type="radio"]:checked::before {
 /** this is needed to override ekko-lightboxes card view styles **/
 .bootstrap-table .fixed-table-container .table tbody tr .card-view {
   display: table-row !important;
+}
+
+td.text-right.text-padding-number-cell {
+  padding-right: 30px !important;
+  white-space: nowrap;
+}
+
+th.text-right.text-padding-number-footer-cell {
+  padding-right: 20px !important;
+  white-space: nowrap;
+}
+
+code.single-line {
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  max-width: 400px;
 }
