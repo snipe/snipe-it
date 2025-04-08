@@ -123,7 +123,7 @@
                 <th data-field="asset_location" data-sortable="true" data-visible="false">{{ trans('general.location') }}</th>
                 <th data-field="asset_serial" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
                 <th data-field="asset_checkout_date" data-sortable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                <th data-field="signature" data-sortable="true" data-visible="true">{{ trans('general.signature') }}</th>
+                <th data-field="signature" data-sortable="false" data-visible="true">{{ trans('general.signature') }}</th>
             </thead>
             <tbody>
             @foreach ($show_user->assets as $asset)
@@ -213,10 +213,11 @@
             data-cookie-id-table="licensessAssigned">
             <thead>
             <tr>
-                <th style="width: 20px;" data-sortable="false" data-switchable="false">#</th>
-                <th style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
-                <th style="width: 50%;" data-sortable="true">{{ trans('admin/licenses/form.license_key') }}</th>
-                <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th data-sortable="false" data-switchable="false">#</th>
+                <th data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
+                <th data-sortable="true">{{ trans('admin/licenses/form.license_key') }}</th>
+                <th data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th data-field="signature" data-sortable="false" data-visible="true">{{ trans('general.signature') }}</th>
             </tr>
             </thead>
             @php
@@ -238,6 +239,11 @@
                         @endcan
                     </td>
                     <td>{{  $license->pivot->updated_at }}</td>
+                    <td>
+                        @if (($license->assetlog->firstWhere('action_type', 'accepted')) && ($license->assetlog->firstWhere('action_type', 'accepted')->accept_signature!=''))
+                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $license->assetlog->firstWhere('action_type', 'accepted')->accept_signature }}">
+                        @endif
+                    </td>
                 </tr>
                 @php
                     $lcounter++
