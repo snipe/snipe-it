@@ -189,7 +189,7 @@ Form::macro('barcode_types', function ($name = 'barcode_type', $selected = null,
     return $select;
 });
 
-Form::macro('username_format', function ($name = 'username_format', $selected = null, $class = null) {
+Form::macro('email_format', function ($name = 'email_format', $selected = null, $class = null) {
     $formats = [
         'firstname.lastname' => trans('general.firstname_lastname_format'),
         'firstname' => trans('general.first_name_format'),
@@ -203,6 +203,31 @@ Form::macro('username_format', function ($name = 'username_format', $selected = 
         'firstnamelastname' => trans('general.firstnamelastname'),
         'firstnamelastinitial' => trans('general.firstnamelastinitial'),
         'lastname.firstname' => trans('general.lastnamefirstname'),
+    ];
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
+    }
+
+    $select .= '</select>';
+
+    return $select;
+});
+
+Form::macro('username_format', function ($name = 'username_format', $selected = null, $class = null) {
+    $formats = [
+        'firstname.lastname' => trans('admin/settings/general.firstname_lastname_format'),
+        'firstname' => trans('admin/settings/general.first_name_format'),
+        'filastname' => trans('admin/settings/general.filastname_format'),
+        'lastnamefirstinitial' => trans('admin/settings/general.lastnamefirstinitial_format'),
+        'firstname_lastname' => trans('admin/settings/general.firstname_lastname_underscore_format'),
+        'firstinitial.lastname' => trans('admin/settings/general.firstinitial.lastname'),
+        'lastname_firstinitial' => trans('admin/settings/general.lastname_firstinitial'),
+        'lastname.firstinitial' => trans('admin/settings/general.lastname_dot_firstinitial_format'),
+        'firstnamelastname' => trans('admin/settings/general.firstnamelastname'),
+        'firstnamelastinitial' => trans('admin/settings/general.firstnamelastinitial'),
+        'lastname.firstname' => trans('admin/settings/general.lastnamefirstname'),
     ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';

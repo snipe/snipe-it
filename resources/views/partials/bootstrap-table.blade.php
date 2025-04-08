@@ -341,7 +341,7 @@
 
 
     function hardwareAuditFormatter(value, row) {
-        return '<a href="{{ config('app.url') }}/hardware/audit/' + row.id + '/" class="btn btn-sm bg-yellow" data-tooltip="true" title="Audit this item">{{ trans('general.audit') }}</a>';
+        return '<a href="{{ config('app.url') }}/hardware/' + row.id + '/audit" class="btn btn-sm bg-yellow" data-tooltip="true" title="Audit this item">{{ trans('general.audit') }}</a>';
     }
 
 
@@ -547,11 +547,11 @@
     // This is only used by the requestable assets section
     function assetRequestActionsFormatter (row, value) {
         if (value.assigned_to_self == true){
-            return '<button class="btn btn-danger btn-sm disabled" data-tooltip="true" title="Cancel this item request">{{ trans('button.cancel') }}</button>';
+            return '<button class="btn btn-danger btn-sm btn-block disabled" data-tooltip="true" title="{{ trans('admin/hardware/message.requests.cancel') }}">{{ trans('button.cancel') }}</button>';
         } else if (value.available_actions.cancel == true)  {
-            return '<form action="{{ config('app.url') }}/account/request-asset/' + value.id + '/cancel" method="POST">@csrf<button class="btn btn-danger btn-sm" data-tooltip="true" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
+            return '<form action="{{ config('app.url') }}/account/request-asset/' + value.id + '/cancel" method="POST">@csrf<button class="btn btn-danger btn-block btn-sm" data-tooltip="true" title="{{ trans('admin/hardware/message.requests.cancel') }}">{{ trans('button.cancel') }}</button></form>';
         } else if (value.available_actions.request == true)  {
-            return '<form action="{{ config('app.url') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-primary btn-sm" data-tooltip="true" title="{{ trans('general.request_item') }}">{{ trans('button.request') }}</button></form>';
+            return '<form action="{{ config('app.url') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-block btn-primary btn-sm" data-tooltip="true" title="{{ trans('general.request_item') }}">{{ trans('button.request') }}</button></form>';
         }
 
     }
@@ -814,6 +814,14 @@
     function usersCompanyObjFilterFormatter(value, row) {
         if (value) {
             return '<a href="{{ config('app.url') }}/users/?company_id=' + row.id + '">' + value + '</a>';
+        } else {
+            return value;
+        }
+    }
+
+    function locationCompanyObjFilterFormatter(value, row) {
+        if (value) {
+            return '<a href="{{ url('/') }}/locations/?company_id=' + row.company.id + '">' + row.company.name + '</a>';
         } else {
             return value;
         }

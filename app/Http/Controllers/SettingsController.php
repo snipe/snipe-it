@@ -314,7 +314,23 @@ class SettingsController extends Controller
             $setting->modellist_displays = implode(',', $request->input('show_in_model_list'));
         }
 
+        $old_locations_fmcs = $setting->scope_locations_fmcs;
         $setting->full_multiple_companies_support = $request->input('full_multiple_companies_support', '0');
+        $setting->scope_locations_fmcs = $request->input('scope_locations_fmcs', '0');
+
+        // Backward compatibility for locations makes no sense without FullMultipleCompanySupport
+        if (!$setting->full_multiple_companies_support) {
+            $setting->scope_locations_fmcs = '0';
+        }
+
+        // check for inconsistencies when activating scoped locations
+        if ($old_locations_fmcs == '0' && $setting->scope_locations_fmcs == '1') {
+            $mismatched = Helper::test_locations_fmcs(false);
+            if (count($mismatched) != 0) {
+                return redirect()->back()->withInput()->with('error', trans_choice('admin/settings/message.location_scoping.mismatch', count($mismatched)).' '.trans('admin/settings/message.location_scoping.not_saved'));
+            }
+        }
+
         $setting->unique_serial = $request->input('unique_serial', '0');
         $setting->shortcuts_enabled = $request->input('shortcuts_enabled', '0');
         $setting->show_images_in_email = $request->input('show_images_in_email', '0');

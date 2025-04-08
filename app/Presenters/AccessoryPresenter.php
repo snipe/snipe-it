@@ -229,7 +229,7 @@ class AccessoryPresenter extends Presenter
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => trans('general.admin'),
+                'title' => trans('general.created_by'),
                 'visible' => false,
                 'formatter' => 'usersLinkObjFormatter',
             ],

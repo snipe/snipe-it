@@ -149,6 +149,8 @@ return [
     'logo_print_assets_help'    => 'Use branding on printable asset lists ',
     'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
+    'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
+    'scope_locations_fmcs_support_help_text'  => 'Up until Version 7.0 locations were not restricted to the users company. If this setting is disabled, this preserves backward compatibility with older versions and locations are not restricted. If this setting is enabled, locations are also restricted to the users company',
     'show_in_model_list'   => 'Show in Model Dropdowns',
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',
@@ -394,6 +396,19 @@ return [
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
     'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
     'text' => 'Text',
+    'firstname_lastname_format'	=> 'First Name Last Name (jane.smith)',
+    'first_name_format'	        => 'First Name (jane)',
+    'filastname_format'			=> 'First Initial Last Name (jsmith)',
+    'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj)',
+    'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith)',
+    'firstinitial.lastname' => 'First Initial Last Name (j.smith)',
+    'lastname_firstinitial' => 'Last Name First Initial (smith_j)',
+    'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j)',
+    'firstnamelastname'     => 'First Name Last Name (janesmith)',
+    'firstnamelastinitial'  => 'First Name Last Initial (janes)',
+    'lastnamefirstname'      => 'Last Name.First Name (smith.jane)',
+
+
 
     'logo_labels' => [
         'acceptance_pdf_logo'       => 'PDF Logo',

@@ -511,8 +511,17 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         ->where(['action' => 'audit|audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
 
 
+        // Legacy URL for audit
+          Route::post('audit',
+              [
+                  Api\AssetsController::class,
+                  'audit'
+              ]
+          )->name('api.asset.audit.legacy');
 
-        Route::post('audit',
+
+          // Newer url for audit
+        Route::post('{asset}/audit',
         [
             Api\AssetsController::class, 
             'audit'
