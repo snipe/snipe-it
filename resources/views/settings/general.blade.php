@@ -36,7 +36,7 @@
 
                <div class="box-body">
 
-                   <div class="col-md-12">
+                   <div class="col-md-11">
 
                     <!-- Full Multiple Companies Support -->
                     <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
