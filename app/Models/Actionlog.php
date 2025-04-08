@@ -69,7 +69,25 @@ class Actionlog extends SnipeModel
         'company'     => ['name'],
         'adminuser'   => ['first_name','last_name','username', 'email'],
         'user'        => ['first_name','last_name','username', 'email'],
-        'assets'      => ['asset_tag','name', 'serial'],
+        'assets'      => ['asset_tag','name', 'serial', 'order_number'],
+        'assets.model'              => ['name', 'model_number', 'eol'],
+        'assets.model.category'     => ['name'],
+        'assets.model.manufacturer' => ['name'],
+        'licenses'    => ['name', 'serial', 'notes', 'order_number', 'license_email', 'license_name', 'purchase_order'],
+        'licenses.category'     => ['name'],
+        'licenses.supplier'     => ['name'],
+        'consumables'    => ['name', 'notes', 'order_number', 'model_number', 'item_no'],
+        'consumables.category'     => ['name'],
+        'consumables.location'     => ['name'],
+        'consumables.supplier'     => ['name'],
+        'components'     => ['name'],
+        'components.category'     => ['name'],
+        'components.location'     => ['name'],
+        'components.supplier'     => ['name'],
+        'accessories'     => ['name'],
+        'accessories.category'     => ['name'],
+        'accessories.location'     => ['name'],
+        'accessories.supplier'     => ['name'],
     ];
 
     /**
@@ -132,6 +150,54 @@ class Actionlog extends SnipeModel
     public function assets()
     {
         return $this->hasMany(\App\Models\Asset::class, 'id', 'item_id');
+    }
+
+    /**
+     * Establishes the actionlog -> license relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function licenses()
+    {
+        return $this->hasMany(\App\Models\License::class, 'id', 'item_id');
+    }
+
+    /**
+     * Establishes the actionlog -> consumable relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function consumables()
+    {
+        return $this->hasMany(\App\Models\Consumable::class, 'id', 'item_id');
+    }
+
+    /**
+     * Establishes the actionlog -> consumable relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function accessories()
+    {
+        return $this->hasMany(\App\Models\Accessory::class, 'id', 'item_id');
+    }
+
+    /**
+     * Establishes the actionlog -> components relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function components()
+    {
+        return $this->hasMany(\App\Models\Component::class, 'id', 'item_id');
     }
 
     /**
