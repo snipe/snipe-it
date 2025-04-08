@@ -200,7 +200,6 @@ class RestoreFromBackup extends Command
      */
     public function handle()
     {
-        $unsafe_files = [];
         $dir = getcwd();
         if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
             Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
@@ -290,6 +289,7 @@ class RestoreFromBackup extends Command
 
         $interesting_files = [];
         $boring_files = [];
+        $unsafe_files = [];
 
         for ($i = 0; $i < $za->numFiles; $i++) {
             $stat_results = $za->statIndex($i);
@@ -375,11 +375,7 @@ class RestoreFromBackup extends Command
         if ($this->option('sanitize-guess-prefix')) {
             $prefix = SQLStreamer::guess_prefix($sql_contents);
             $this->line($prefix);
-            if (count($unsafe_files) > 0) {
-                foreach ($unsafe_files as $unsafe_file) {
-                    $this->warn('Potentially unsafe file '.$unsafe_file.' is being skipped');
-                }
-            }
+
             return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitize your SQL.");
         }
 
@@ -512,6 +508,11 @@ class RestoreFromBackup extends Command
             $this->line('');
         } else {
             $this->info(count($interesting_files).' files were succesfully transferred');
+        }
+        if (count($unsafe_files) > 0) {
+            foreach ($unsafe_files as $unsafe_file) {
+                $this->warn('Potentially unsafe file '.$unsafe_file.' was skipped');
+            }
         }
         foreach ($boring_files as $boring_file) {
             $this->warn($boring_file.' was skipped.');
