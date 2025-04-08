@@ -19,25 +19,27 @@ class TestLocationsFMCS extends Command
      *
      * @var string
      */
-    protected $description = 'Test for inconsistencies if FullMultipleCompanySupport with scoped locations will be used';
+    protected $description = 'Test for company ID inconsistencies if FullMultipleCompanySupport with scoped locations will be used.';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        $this->info('Test for inconsistencies if FullMultipleCompanySupport with scoped locations will be used');
-        $this->info('Depending on the database size this will take a while, output will be displayed after the complete test is over');
+        $this->info('This script checks for company ID inconsistencies if Full Multiple Company Support with scoped locations will be used.');
+        $this->info('This could take few moments if have a very large dataset.');
+        $this->newLine();
 
         // if parameter location_id is set, only test this location
         $location_id = null;
         if ($this->option('location_id')) {
             $location_id = $this->option('location_id');
         }
-        $ret = Helper::test_locations_fmcs(true, $location_id);
 
-        foreach($ret as $output) {
-            $this->info($output);
-        }
+
+        $ret = Helper::test_locations_fmcs(true, $location_id);
+        $this->warn('There are '.count($ret).' items in the database that need your attention before you can enable location scoping.');
+        $this->table(['Item Type', 'Item ID', 'Item Company ID', 'Location Company ID'], $ret);
+
     }
 }
