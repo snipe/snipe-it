@@ -690,6 +690,21 @@ class Asset extends Depreciable
             ->withTrashed();
     }
 
+
+    /**
+     * Get the list of audits for this asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function audits()
+    {
+        return $this->assetlog()->where('action_type', '=', 'audit')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
     /**
      * Get the list of checkins for this asset
      *
