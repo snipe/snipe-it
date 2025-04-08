@@ -51,9 +51,8 @@ class AccessoryCheckinController extends Controller
         $accessory = Accessory::find($accessory_checkout->accessory_id);
 
         if($accessory_checkout->assigned_type === 'App\Models\User') {
-            $checkedInBy = $accessory_checkout->assigned_to;
             session()->put('checkout_to_type', 'user');
-            session()->put('checkedInBy', $checkedInBy);
+            session()->put('checkedInBy', $accessory_checkout->assigned_to);
         }
 
         $this->authorize('checkin', $accessory);
