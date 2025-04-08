@@ -1544,7 +1544,7 @@ class Helper
      * @return string []
      */
     static public function test_locations_fmcs($artisan, $location_id = null, $new_company_id = null) {
-        $ret = [];
+        $mismatched = [];
 
         if ($location_id) {
             $location = Location::find($location_id);
@@ -1566,18 +1566,18 @@ class Helper
             // depending on the relationship, we must use different operations to retrieve the objects
             $keywords_relation = [
                 'many' => [
-                            'users',
-                            'assets',
-                            'rtd_assets',
-                            'consumables',
-                            'components',
                             'accessories',
+                            'assets',
+                            'assignedAccessories',
                             'assignedAssets',
-                            'assignedAccessories'
+                            'components',
+                            'consumables',
+                            'rtd_assets',
+                            'users',
                         ],
                     'one'  => [
+                        'manager',
                         'parent',
-                        'manager'
                     ]];
 
             // In case of a single location, the children must be checked as well, because we don't walk every location
@@ -1595,22 +1595,18 @@ class Helper
 
                     foreach ($items as $item) {
                         if ($item && $item->company_id != $location_company) {
-                            $row[] = [
-                                    $ret['type'] = class_basename(get_class($item)),
-                                    $ret['id'] = $item->id,
-                                    $ret['company_id'] = $item->company_id,
-                                    $ret['location_company_id'] = $location_company ?? 'null',
+                            $mismatched[] = [
+                                    class_basename(get_class($item)),
+                                    $item->id,
+                                    $item->company_id,
+                                    $location_company ?? 'null',
                                 ];
 
-                            // when not called from artisan command we bail out on the first error
-                            if (!$artisan) {
-                                return $ret;
-                            }
                         }
                     }
                 }
             }
         }
-        return $row;
+        return $mismatched;
     }        
 }
