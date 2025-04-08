@@ -398,6 +398,7 @@ return [
     'text' => 'Text',
     'firstname_lastname_format'	=> 'First Name Last Name (jane.smith)',
     'first_name_format'	        => 'First Name (jane)',
+    'last_name_format'		=> 'Last Name (doe)',
     'filastname_format'			=> 'First Initial Last Name (jsmith)',
     'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj)',
     'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith)',

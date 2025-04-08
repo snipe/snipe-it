@@ -219,6 +219,7 @@ Form::macro('username_format', function ($name = 'username_format', $selected = 
     $formats = [
         'firstname.lastname' => trans('admin/settings/general.firstname_lastname_format'),
         'firstname' => trans('admin/settings/general.first_name_format'),
+        'lastname' => trans('admin/settings/general.last_name_format'),
         'filastname' => trans('admin/settings/general.filastname_format'),
         'lastnamefirstinitial' => trans('admin/settings/general.lastnamefirstinitial_format'),
         'firstname_lastname' => trans('admin/settings/general.firstname_lastname_underscore_format'),
