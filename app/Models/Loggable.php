@@ -220,9 +220,41 @@ trait Loggable
      * @since [v4.0]
      * @return \App\Models\Actionlog
      */
-    public function logAudit($note, $location_id, $filename = null)
+    public function logAudit($note, $location_id, $filename = null, $originalValues = [])
     {
+
         $log = new Actionlog;
+
+        if (static::class == Asset::class) {
+            if ($asset = Asset::find($log->item_id)) {
+                // add the custom fields that were changed
+                if ($asset->model->fieldset) {
+                    $fields_array = [];
+                    foreach ($asset->model->fieldset->fields as $field) {
+                        if ($field->display_audit == 1) {
+                            $fields_array[$field->db_column] = $asset->{$field->db_column};
+                        }
+                    }
+                }
+            }
+        }
+
+        $changed = [];
+
+        unset($originalValues['updated_at'], $originalValues['last_audit_date']);
+        foreach ($originalValues as $key => $value) {
+
+            if ($value != $this->getAttributes()[$key]) {
+                $changed[$key]['old'] = $value;
+                $changed[$key]['new'] = $this->getAttributes()[$key];
+            }
+        }
+
+        if (!empty($changed)){
+            $log->log_meta = json_encode($changed);
+        }
+
+
         $location = Location::find($location_id);
         if (static::class == LicenseSeat::class) {
             $log->item_type = License::class;
@@ -235,6 +267,7 @@ trait Loggable
         $log->note = $note;
         $log->created_by = auth()->id();
         $log->filename = $filename;
+        $log->action_date = date('Y-m-d H:i:s');
         $log->logaction('audit');
 
         $params = [
