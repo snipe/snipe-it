@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Tijaabi aqoonsiga LDAP...',
         'authentication_success' => 'Isticmaaluhu wuxuu ka xaqiijiyay LDAP si guul leh!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Diraya :app fariinta tijaabada abka...',
         'success' => 'Magacaaga:webhook_name Isdhexgalka wuu shaqeeyaa!',
@@ -45,5 +48,7 @@ return [
         'error' => 'Waxbaa qaldamay. :app waxa uu kaga jawaabay: : error_message',
         'error_redirect' => 'CILAD: 301/302 :endpoint Sababo ammaan dartood, ma raacno dib u jiheynta Fadlan isticmaal barta dhamaadka dhabta ah.',
         'error_misc' => 'Waxbaa qaldamay. :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

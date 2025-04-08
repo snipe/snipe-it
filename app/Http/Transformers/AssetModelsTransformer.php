@@ -46,8 +46,9 @@ class AssetModelsTransformer
                 'name'=> e($assetmodel->manufacturer->name),
             ] : null,
             'image' => ($assetmodel->image != '') ? Storage::disk('public')->url('models/'.e($assetmodel->image)) : null,
-            'model_number' => e($assetmodel->model_number),
+            'model_number' => ($assetmodel->model_number ? e($assetmodel->model_number): null),
             'min_amt'   => ($assetmodel->min_amt) ? (int) $assetmodel->min_amt : null,
+            'remaining' => (int) ($assetmodel->assets_count - $assetmodel->min_amt),
             'depreciation' => ($assetmodel->depreciation) ? [
                 'id' => (int) $assetmodel->depreciation->id,
                 'name'=> e($assetmodel->depreciation->name),
@@ -84,6 +85,41 @@ class AssetModelsTransformer
 
         $array += $permissions_array;
 
+        return $array;
+    }
+
+    public function transformAssetModelFiles($assetmodel, $total)
+    {
+
+        $array = [];
+        foreach ($assetmodel->uploads as $file) {
+            $array[] = self::transformAssetModelFile($file, $assetmodel);
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformAssetModelFile($file, $assetmodel)
+    {
+
+        $array = [
+            'id' => (int) $file->id,
+            'filename' => e($file->filename),
+            'url' => route('show/modelfile', [$assetmodel->id, $file->id]),
+            'created_by' => ($file->adminuser) ? [
+                'id' => (int) $file->adminuser->id,
+                'name'=> e($file->adminuser->present()->fullName),
+            ] : null,
+            'created_at' => Helper::getFormattedDateObject($file->created_at, 'datetime'),
+            'updated_at' => Helper::getFormattedDateObject($file->updated_at, 'datetime'),
+            'deleted_at' => Helper::getFormattedDateObject($file->deleted_at, 'datetime'),
+        ];
+
+        $permissions_array['available_actions'] = [
+            'delete' => (Gate::allows('update', AssetModel::class) && ($assetmodel->deleted_at == '')),
+        ];
+
+        $array += $permissions_array;
         return $array;
     }
 

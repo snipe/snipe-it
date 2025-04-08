@@ -19,6 +19,8 @@ return [
     'print_assigned'    => 'Natisni vse dodeljene',
     'email_assigned'    => 'Izpis E pošt od vseh dodeljenih',
     'user_notified'     => 'Uporabnik je bil po E pošti obveščen o seznamu vseh njemu dodeljenih stvari.',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Vključi tega uporabnika pri samodejni dodelitvi upravičenih licenc',
     'auto_assign_help'  => 'Preskoči tega uporabnika pri samodejni dodelitvi licenc',
     'software_user'     => 'Programska oprema izdana osebi :name',

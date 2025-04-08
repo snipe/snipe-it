@@ -5,7 +5,7 @@ return [
     'add'    	                => 'Pridať nové',
     'cancel'                    => 'Zrušiť',
     'checkin_and_delete'  	    => 'Prijať všetko / Zmazať používateľa',
-    'delete'  	                => 'Odstrániť',
+    'delete'  	                => 'Vymazať',
     'edit'    	                => 'Upraviť',
     'clone'    	                => 'Duplikovať',
     'restore' 	                => 'Obnoviť',
@@ -29,6 +29,6 @@ return [
         'restore'   => 'Obnoviť :item_type',
         'create'    => 'Vytvoriť nový :item_type',
         'checkout'  => 'Odovzdať :item_type',
-        'checkin'   => 'Prijať :item_type',
+        'checkin'   => 'Prevziať :item_type',
     ]
 ];

@@ -14,9 +14,9 @@ return [
         'user_country' => 'Naudotojo šalis',
         'user_zip' => 'Naudotojo pašto kodas'
     ],
-    'open_saved_template' => 'Open Saved Template',
-    'save_template' =>  'Save Template',
-    'select_a_template' => 'Select a Template',
-    'template_name' => 'Template Name',
-    'update_template' => 'Update Template',
+    'open_saved_template' => 'Atverti išsaugotą šabloną',
+    'save_template' =>  'Išsaugoti šabloną',
+    'select_a_template' => 'Pasirinkti šabloną',
+    'template_name' => 'Šablono pavadinimas',
+    'update_template' => 'Atnaujinti šabloną',
 ];

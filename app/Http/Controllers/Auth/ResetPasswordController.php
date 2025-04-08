@@ -103,21 +103,23 @@ class ResetPasswordController extends Controller
                     ], $messages);
             }
 
+            if ($user->ldap_import != '1') {
 
-            // set the response
-            $response = $broker->reset(
-                $this->credentials($request), function ($user, $password) {
-                $this->resetPassword($user, $password);
-            });
+                    // set the response
+                    $response = $broker->reset(
+                        $this->credentials($request), function ($user, $password) {
+                        $this->resetPassword($user, $password);
+                    });
 
-            // Check if the password reset above actually worked
-            if ($response == \Password::PASSWORD_RESET) {
-                Log::debug('Password reset for '.$user->username.' worked');
-                return redirect()->guest('login')->with('success', trans('passwords.reset'));
+                    // Check if the password reset above actually worked
+                    if ($response == \Password::PASSWORD_RESET) {
+                        Log::debug('Password reset for ' . $user->username . ' worked');
+                        return redirect()->guest('login')->with('success', trans('passwords.reset'));
+                    }
+
+                    Log::debug('Password reset for ' . $user->username . ' FAILED - this user exists but the token is not valid');
+                    return redirect()->back()->withInput($request->only('email'))->with('success', trans('passwords.reset'));
             }
-
-            Log::debug('Password reset for '.$user->username.' FAILED - this user exists but the token is not valid');
-            return redirect()->back()->withInput($request->only('email'))->with('success', trans('passwords.reset'));
 
         }
 

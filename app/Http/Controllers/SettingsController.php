@@ -256,7 +256,7 @@ class SettingsController extends Controller
         Artisan::call('migrate', ['--force' => true]);
         if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {
             Artisan::call('migrate', ['--path' => 'vendor/laravel/passport/database/migrations', '--force' => true]);
-            Artisan::call('passport:install');
+            Artisan::call('passport:install', ['--no-interaction' => true]);
         }
 
         return view('setup/migrate')
@@ -444,12 +444,20 @@ class SettingsController extends Controller
                 $setting->label_logo = null;
             }
 
+            // Acceptance PDF upload
+            $setting = $request->handleImages($setting, 600, 'acceptance_pdf_logo', '', 'acceptance_pdf_logo');
+            if ('1' == $request->input('clear_acceptance_pdf_logo')) {
+                $setting = $request->deleteExistingImage($setting, '', 'acceptance_pdf_logo');
+                $setting->acceptance_pdf_logo = null;
+            }
+
             // Favicon upload
             $setting = $request->handleImages($setting, 100, 'favicon', '', 'favicon');
             if ('1' == $request->input('clear_favicon')) {
                 $setting = $request->deleteExistingImage($setting, '', 'favicon');
                 $setting->favicon = null;
             }
+
 
             // Default avatar upload
             $setting = $request->handleImages($setting, 500, 'default_avatar', 'avatars', 'default_avatar');
@@ -816,6 +824,7 @@ class SettingsController extends Controller
         }
 
         if ($setting->save()) {
+
             return redirect()->route('settings.labels.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }
@@ -865,7 +874,8 @@ class SettingsController extends Controller
             $setting->ldap_fname_field = $request->input('ldap_fname_field');
             $setting->ldap_auth_filter_query = $request->input('ldap_auth_filter_query');
             $setting->ldap_version = $request->input('ldap_version', 3);
-            $setting->ldap_active_flag = $request->input('ldap_active_flag');
+            $setting->ldap_active_flag = $request->input('ldap_active_flag', 0);
+            $setting->ldap_invert_active_flag = $request->input('ldap_invert_active_flag', 0);
             $setting->ldap_emp_num = $request->input('ldap_emp_num');
             $setting->ldap_email = $request->input('ldap_email');
             $setting->ldap_manager = $request->input('ldap_manager');
@@ -885,7 +895,6 @@ class SettingsController extends Controller
         }
 
         if ($setting->save()) {
-            $setting->update_client_side_cert_files();
             return redirect()->route('settings.ldap.index')
                 ->with('success', trans('admin/settings/message.update.success'));
         }

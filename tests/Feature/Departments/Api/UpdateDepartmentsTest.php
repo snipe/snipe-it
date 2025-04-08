@@ -25,6 +25,7 @@ class UpdateDepartmentsTest extends TestCase
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->patchJson(route('api.departments.update', $department), [
                 'name' => 'Test Department',
+                'notes' => 'Test Note',
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -33,6 +34,7 @@ class UpdateDepartmentsTest extends TestCase
 
         $department->refresh();
         $this->assertEquals('Test Department', $department->name, 'Name was not updated');
+        $this->assertEquals('Test Note', $department->notes, 'Note was not updated');
 
     }
 

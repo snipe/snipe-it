@@ -56,6 +56,7 @@ class LocationsController extends Controller
             'updated_at',
             'users_count',
             'zip',
+            'notes',
             ];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
@@ -77,6 +78,7 @@ class LocationsController extends Controller
             'locations.ldap_ou',
             'locations.currency',
             'locations.company_id',
+            'locations.notes',
         ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assignedAssets as assigned_assets_count')
@@ -216,6 +218,7 @@ class LocationsController extends Controller
                 'locations.updated_at',
                 'locations.image',
                 'locations.currency',
+                'locations.notes',
             ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
@@ -294,7 +297,7 @@ class LocationsController extends Controller
     {
         $this->authorize('view', Accessory::class);
         $this->authorize('view', $location);
-        $accessory_checkouts = AccessoryCheckout::LocationAssigned()->with('adminuser')->with('accessories');
+        $accessory_checkouts = AccessoryCheckout::LocationAssigned()->where('assigned_to', $location->id)->with('adminuser')->with('accessories');
 
         $offset = ($request->input('offset') > $accessory_checkouts->count()) ? $accessory_checkouts->count() : app('api_offset_value');
         $limit = app('api_limit_value');

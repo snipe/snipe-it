@@ -9,7 +9,7 @@ return array(
     'license_email'   	=> 'License Email',
     'license_name'   	=> 'Licensed To',
     'purchase_date'   	=> 'កាលបរិច្ឆេទទិញ',
-    'purchased'   		=> 'Purchased',
+    'purchased'   		=> 'បានទិញ',
     'seats'   			=> 'កៅអី',
     'hardware'   		=> 'Hardware',
     'serial'   			=> 'Serial',

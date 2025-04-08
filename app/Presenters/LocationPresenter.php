@@ -112,13 +112,13 @@ class LocationPresenter extends Presenter
                 'titleTooltip' =>  trans('general.people'),
                 'visible' => true,
                 'class' => 'css-house-user',
-                // 'data-tooltip' => true, - not working, but I want to try to use regular tooltips here
             ], [
                 'field' => 'currency',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('general.currency'),
+                'title' =>  trans('general.currency_text'),
+                'titleTooltip' =>  trans('general.currency_text'),
                 'visible' => true,
                 'class' => 'css-currency',
             ], [
@@ -194,6 +194,12 @@ class LocationPresenter extends Presenter
                 'title' =>  trans('admin/users/table.manager'),
                 'visible' => false,
                 'formatter' => 'usersLinkObjFormatter',
+            ],  [
+                'field' => 'notes',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.notes'),
             ], [
                 'field' => 'created_at',
                 'searchable' => true,
@@ -266,7 +272,7 @@ class LocationPresenter extends Presenter
                 'field' => 'created_by',
                 'searchable' => false,
                 'sortable' => false,
-                'title' => trans('general.admin'),
+                'title' => trans('general.created_by'),
                 'visible' => false,
                 'formatter' => 'usersLinkObjFormatter',
             ],

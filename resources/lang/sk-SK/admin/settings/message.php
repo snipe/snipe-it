@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testujem LDAP autentifikáciu...',
         'authentication_success' => 'Používateľ sa úspešne autentifikoval voči LDAP-u!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Posielam :app testovaciu správu...',
         'success' => 'Vaša :webhook_name integrácia funguje!',
@@ -45,5 +48,7 @@ return [
         'error' => 'Nastala chyba. :app odpovedala s: :error_message',
         'error_redirect' => 'CHBA: 301/302 :endpoint vrátil presmerovanie. Z bezpečnostných dôvodov nenasledujeme presmerovania. Prosím použite správny koncový bod.',
         'error_misc' => 'Niečo sa pokazilo. :( ',
+        'webhook_fail' => ' webhook notifikácia zlyhala: Overte správnosť zadanej URL adresy.',
+        'webhook_channel_not_found' => ' kanál webhooku nebol nájdený.'
     ]
 ];

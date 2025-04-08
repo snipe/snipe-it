@@ -24,6 +24,12 @@ class ItemImporter extends Importer
 
     protected function handle($row)
     {
+
+        /**
+         * This section adds the most common fields into the $item array so we don't have to manually add them to
+         * things like accessories, consumables, etc.
+         */
+
         // Need to reset this between iterations or we'll have stale data.
         $this->item = [];
 
@@ -73,29 +79,20 @@ class ItemImporter extends Importer
         $this->item['notes'] = $this->findCsvMatch($row, 'notes');
         $this->item['order_number'] = $this->findCsvMatch($row, 'order_number');
         $this->item['purchase_cost'] = $this->findCsvMatch($row, 'purchase_cost');
+        $this->item['model_number'] = trim($this->findCsvMatch($row, 'model_number'));
+        $this->item['min_amt'] = $this->findCsvMatch($row, 'min_amt');
+        $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
+        $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
+        $this->item['created_by'] = auth()->id();
+        $this->item['serial'] = $this->findCsvMatch($row, 'serial');
+        $this->item['item_no'] = trim($this->findCsvMatch($row, 'item_number'));
+
 
         $this->item['purchase_date'] = null;
         if ($this->findCsvMatch($row, 'purchase_date') != '') {
             $this->item['purchase_date'] = date('Y-m-d', strtotime($this->findCsvMatch($row, 'purchase_date')));
         }
 
-//        $this->item['asset_eol_date'] = null;
-//        if ($this->findCsvMatch($row, 'asset_eol_date') != '') {
-//            $csvMatch = $this->findCsvMatch($row, 'asset_eol_date');
-//            \Log::warning('EOL Date for $csvMatch is '.$csvMatch);
-//            try {
-//                $this->item['asset_eol_date'] = CarbonImmutable::parse($csvMatch)->format('Y-m-d');
-//            } catch (\Exception $e) {
-//                Log::info($e->getMessage());
-//                $this->log('Unable to parse date: '.$csvMatch);
-//            }
-//        }
-
-
-        $this->item['qty'] = $this->findCsvMatch($row, 'quantity');
-        $this->item['requestable'] = $this->findCsvMatch($row, 'requestable');
-        $this->item['created_by'] = auth()->id();
-        $this->item['serial'] = $this->findCsvMatch($row, 'serial');
         // NO need to call this method if we're running the user import.
         // TODO: Merge these methods.
         $this->item['checkout_class'] = $this->findCsvMatch($row, 'checkout_class');
@@ -456,14 +453,13 @@ class ItemImporter extends Importer
     {
         if (empty($asset_location)) {
             $this->log('No location given, so none created.');
-
             return null;
         }
+
         $location = Location::where(['name' => $asset_location])->first();
 
         if ($location) {
             $this->log('Location '.$asset_location.' already exists');
-
             return $location->id;
         }
         // No matching locations in the collection, create a new one.
@@ -513,7 +509,6 @@ class ItemImporter extends Importer
 
         if ($supplier->save()) {
             $this->log('Supplier '.$item_supplier.' was created');
-
             return $supplier->id;
         }
         $this->logError($supplier, 'Supplier');

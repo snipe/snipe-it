@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'កំពុងសាកល្បងការផ្ទៀងផ្ទាត់ LDAP...',
         'authentication_success' => 'អ្នកប្រើប្រាស់បានផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវប្រឆាំងនឹង LDAP ដោយជោគជ័យ!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'កំពុងផ្ញើ៖ សារសាកល្បងកម្មវិធី...',
         'success' => 'ការរួមបញ្ចូល៖ webhook_name របស់អ្នកដំណើរការ!',
@@ -45,5 +48,7 @@ return [
         'error' => 'មាន​អ្វីមួយ​មិន​ប្រក្រតី។ :app បានឆ្លើយតបជាមួយ៖ :error_message',
         'error_redirect' => 'កំហុស៖ 301/302៖ ចំណុចបញ្ចប់ត្រឡប់ការបញ្ជូនបន្ត។ សម្រាប់ហេតុផលសុវត្ថិភាព យើងមិនធ្វើតាមការបញ្ជូនបន្តទេ។ សូមប្រើចំណុចបញ្ចប់ពិតប្រាកដ។',
         'error_misc' => 'មាន​អ្វីមួយ​មិន​ប្រក្រតី។ :( ',
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
     ]
 ];

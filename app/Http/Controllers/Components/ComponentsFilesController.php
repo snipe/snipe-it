@@ -50,7 +50,7 @@ class ComponentsFilesController extends Controller
                 }
 
 
-                return redirect()->route('components.show', $component->id)->with('success', trans('general.file_upload_success'));
+                return redirect()->route('components.show', $component->id)->withFragment('files')->with('success', trans('general.file_upload_success'));
 
             }
 
@@ -91,7 +91,7 @@ class ComponentsFilesController extends Controller
 
             $log->delete();
 
-            return redirect()->back()
+            return redirect()->back()->withFragment('files')
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 

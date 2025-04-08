@@ -36,6 +36,9 @@ return [
         'testing_authentication' => '测试 LDAP 身份验证...',
         'authentication_success' => '用户已成功通过LDAP认证！'
     ],
+    'labels' => [
+        'null_template' => '未找到标签模板。请选择一个模板。',
+        ],
     'webhook' => [
         'sending' => '正在发送 :app 测试消息...',
         'success' => '您的 :webhook_name 集成工作！',
@@ -45,5 +48,7 @@ return [
         'error' => '出错了。:app响应：:error_message',
         'error_redirect' => '错误：301/302 :endpoint 返回重定向。出于安全原因，我们不跟随重定向。请使用实际端点。',
         'error_misc' => '出错了:( ',
+        'webhook_fail' => ' webhook 通知失败：请检查以确保URL仍然有效。',
+        'webhook_channel_not_found' => ' 未找到 webhook 频道。'
     ]
 ];

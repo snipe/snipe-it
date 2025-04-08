@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AssetModel;
 use App\Models\Actionlog;
 use App\Http\Requests\UploadFileRequest;
+use App\Http\Transformers\AssetModelsTransformer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -68,37 +69,15 @@ class AssetModelFilesController extends Controller
     /**
      * List the files for an asset.
      *
-     * @param  int $assetModelId
+     * @param  int $assetmodel
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function list($assetModelId = null) : JsonResponse
+    public function list($assetmodel_id) : JsonResponse | array
     {
-        // Start by checking if the asset being acted upon exists
-        if (! $assetModel = AssetModel::find($assetModelId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.does_not_exist')), 404);
-        }
-        
-        // the asset is valid
-        if (isset($assetModel->id)) {
-            $this->authorize('view', $assetModel);
-
-            // Check that there are some uploads on this asset that can be listed
-            if ($assetModel->uploads->count() > 0) {
-                $files = array();
-                foreach ($assetModel->uploads as $upload) {
-                    array_push($files, $upload);
-                }
-                // Give the list of files back to the user
-                return response()->json(Helper::formatStandardApiResponse('success', $files, trans('admin/models/message.upload.success')));
-            }
-
-            // There are no files.
-            return response()->json(Helper::formatStandardApiResponse('success', array(), trans('admin/models/message.upload.success')));
-        }
-
-        // Send back an error message
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.error')), 500);
+            $assetmodel = AssetModel::with('uploads')->find($assetmodel_id);
+            $this->authorize('view', $assetmodel);
+            return (new AssetModelsTransformer)->transformAssetModelFiles($assetmodel, $assetmodel->uploads()->count());
     }
 
     /**

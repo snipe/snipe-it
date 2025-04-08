@@ -3,10 +3,10 @@
 return array(
     'checkout'                          => 'Checkout Consumable to User',
     'consumable_name'                   => 'ឈ្មោះ Consumable',
-    'create'                            => 'Create Consumable',
-    'item_no'                           => 'Item No.',
-    'remaining' 			            => 'Remaining',
+    'create'                            => 'បង្កើតឧបករណ៍ប្រើប្រាស់',
+    'item_no'                           => 'ធាតុលេខ',
+    'remaining' 			            => 'នៅសល់',
     'total' 			                => 'សរុប',
-    'update'                            => 'Update Consumable',
-    'inventory_warning'                 => 'The inventory of this consumable is below the minimum amount of :min_count',
+    'update'                            => 'ធ្វើបច្ចុប្បន្នភាពឧបករណ៍ប្រើប្រាស់',
+    'inventory_warning'                 => 'សារពើភ័ណ្ឌនៃសម្ភារៈប្រើប្រាស់នេះគឺទាបជាងចំនួនអប្បបរមានៃ :min_count',
 );

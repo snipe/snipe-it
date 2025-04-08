@@ -162,5 +162,28 @@ class BulkDeleteAssetsTest extends TestCase
         );
     }
 
+     public function testBulkDeleteAssignedAssetTriggersError(){
+        $user = User::factory()->viewAssets()->deleteAssets()->editAssets()->create();
+        $asset = Asset::factory()->create([
+            'id' => 5,
+            'assigned_to' => $user->id,
+            'asset_tag' => '12345',
+        ]);
+
+        $response = $this->actingAs($user)
+                ->from(route('hardware/bulkedit'))
+                ->post('/hardware/bulkdelete', [
+                    'ids'          => [$asset->id],
+                    'bulk_actions' => 'delete',
+                ]);
+
+        $this->assertEquals(302, $response->getStatusCode());
+        $this->assertEquals(route('hardware.index'), $response->headers->get('Location'));
+
+
+        $errorMessage = session('error');
+        $expectedMessage = trans_choice('admin/hardware/message.delete.assigned_to_error',1, ['asset_tag' => $asset->asset_tag]);
+        $this->assertEquals($expectedMessage, $errorMessage);
+     }
 
 }

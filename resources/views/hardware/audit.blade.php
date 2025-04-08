@@ -21,11 +21,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="box box-default">
 
-                {{ Form::open([
-                  'method' => 'POST',
-                  'route' => ['asset.audit.store', $asset->id],
-                  'files' => true,
-                  'class' => 'form-horizontal' ]) }}
+                <form method="POST" action="{{ route('asset.audit.store', $asset) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
 
                     <div class="box-header with-border">
                         <h2 class="box-title"> {{ trans('admin/hardware/form.tag') }} {{ $asset->asset_tag }}</h2>
@@ -58,6 +54,8 @@
 
 
                     <!-- Asset Name -->
+
+                        @if ($asset->name)
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-sm-3 control-label">
                                 {{ trans('general.name') }}
@@ -66,6 +64,7 @@
                                 <p class="form-control-static">{{ $asset->name }}</p>
                             </div>
                         </div>
+                        @endif
 
                         <!-- Locations -->
                     @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
@@ -115,6 +114,12 @@
                                  <p class="help-block">{!! trans('general.next_audit_date_help') !!}</p>
                             </div>
                         </div>
+
+                        <!-- Custom fields -->
+                        @include("models/custom_fields_form", [
+                                'model' => $asset->model,
+                                'show_display_checkout_fields' => 'true'
+                        ])
 
 
                         <!-- Note -->

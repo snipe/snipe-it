@@ -976,9 +976,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -1129,10 +1129,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -4691,7 +4691,7 @@
   	  (!CORRECT_NEW || MISSED_STICKY || UNSUPPORTED_DOT_ALL || UNSUPPORTED_NCG || fails(function () {
   	    re2[MATCH] = false;
   	    // RegExp constructor can alter flags and IsRegExp works correct with @@match
-  	    // eslint-disable-next-line sonar/inconsistent-function-call -- required for testing
+  	    // eslint-disable-next-line sonarjs/inconsistent-function-call -- required for testing
   	    return NativeRegExp(re1) !== re1 || NativeRegExp(re2) === re2 || String(NativeRegExp(re1, 'i')) !== '/a/i';
   	  }));
 
@@ -6893,29 +6893,30 @@
 
   var Utils = {
     getBootstrapVersion: function getBootstrapVersion() {
+      var _window$bootstrap, _$$fn;
       var bootstrapVersion = 5;
-      try {
-        var rawVersion = $.fn.dropdown.Constructor.VERSION;
-
-        // Only try to parse VERSION if it is defined.
-        // It is undefined in older versions of Bootstrap (tested with 3.1.1).
+      if (typeof window !== 'undefined' && (_window$bootstrap = window.bootstrap) !== null && _window$bootstrap !== void 0 && (_window$bootstrap = _window$bootstrap.Tooltip) !== null && _window$bootstrap !== void 0 && _window$bootstrap.VERSION) {
+        var rawVersion = window.bootstrap.Tooltip.VERSION;
         if (rawVersion !== undefined) {
           bootstrapVersion = parseInt(rawVersion, 10);
         }
-      } catch (e) {
-        // ignore
-      }
-      try {
-        // eslint-disable-next-line no-undef
-        var _rawVersion = bootstrap.Tooltip.VERSION;
+      } else if (typeof $ !== 'undefined' && (_$$fn = $.fn) !== null && _$$fn !== void 0 && (_$$fn = _$$fn.dropdown) !== null && _$$fn !== void 0 && (_$$fn = _$$fn.Constructor) !== null && _$$fn !== void 0 && _$$fn.VERSION) {
+        var _rawVersion = $.fn.dropdown.Constructor.VERSION;
+
+        // Only try to parse VERSION if it is defined.
+        // It is undefined in older versions of Bootstrap (tested with 3.1.1).
         if (_rawVersion !== undefined) {
           bootstrapVersion = parseInt(_rawVersion, 10);
         }
-      } catch (e) {
-        // ignore
       }
       return bootstrapVersion;
     },
+    /**
+     * Returns the prefix for the icons based on the theme.
+     *
+     * @param {string} theme - The theme name (bootstrap3, bootstrap4, bootstrap5, bootstrap-table, bulma, foundation, materialize, semantic).
+     * @returns {string} The icons prefix.
+     */
     getIconsPrefix: function getIconsPrefix(theme) {
       return {
         bootstrap3: 'glyphicon',
@@ -6928,75 +6929,28 @@
         semantic: 'fa'
       }[theme] || 'fa';
     },
-    getIcons: function getIcons(prefix) {
-      return {
-        glyphicon: {
-          clearSearch: 'glyphicon-trash',
-          columns: 'glyphicon-th icon-th',
-          detailClose: 'glyphicon-minus icon-minus',
-          detailOpen: 'glyphicon-plus icon-plus',
-          fullscreen: 'glyphicon-fullscreen',
-          paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
-          paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
-          refresh: 'glyphicon-refresh icon-refresh',
-          search: 'glyphicon-search',
-          toggleOff: 'glyphicon-list-alt icon-list-alt',
-          toggleOn: 'glyphicon-list-alt icon-list-alt'
-        },
-        fa: {
-          clearSearch: 'fa-trash',
-          columns: 'fa-th-list',
-          detailClose: 'fa-minus',
-          detailOpen: 'fa-plus',
-          fullscreen: 'fa-arrows-alt',
-          paginationSwitchDown: 'fa-caret-square-down',
-          paginationSwitchUp: 'fa-caret-square-up',
-          refresh: 'fa-sync',
-          search: 'fa-search',
-          toggleOff: 'fa-toggle-off',
-          toggleOn: 'fa-toggle-on'
-        },
-        bi: {
-          clearSearch: 'bi-trash',
-          columns: 'bi-list-ul',
-          detailClose: 'bi-dash',
-          detailOpen: 'bi-plus',
-          fullscreen: 'bi-arrows-move',
-          paginationSwitchDown: 'bi-caret-down-square',
-          paginationSwitchUp: 'bi-caret-up-square',
-          refresh: 'bi-arrow-clockwise',
-          search: 'bi-search',
-          toggleOff: 'bi-toggle-off',
-          toggleOn: 'bi-toggle-on'
-        },
-        icon: {
-          clearSearch: 'icon-trash-2',
-          columns: 'icon-list',
-          detailClose: 'icon-minus',
-          detailOpen: 'icon-plus',
-          fullscreen: 'icon-maximize',
-          paginationSwitchDown: 'icon-arrow-up-circle',
-          paginationSwitchUp: 'icon-arrow-down-circle',
-          refresh: 'icon-refresh-cw',
-          search: 'icon-search',
-          toggleOff: 'icon-toggle-right',
-          toggleOn: 'icon-toggle-right'
-        },
-        'material-icons': {
-          clearSearch: 'delete',
-          columns: 'view_list',
-          detailClose: 'remove',
-          detailOpen: 'add',
-          fullscreen: 'fullscreen',
-          paginationSwitchDown: 'grid_on',
-          paginationSwitchUp: 'grid_off',
-          refresh: 'refresh',
-          search: 'search',
-          sort: 'sort',
-          toggleOff: 'tablet',
-          toggleOn: 'tablet_android'
-        }
-      }[prefix] || {};
+    /**
+     * Gets the icons for a given prefix.
+     *
+     * @param {Object.<string, Object>} icons - The icons object.
+     * @param {string} prefix - The prefix. For example, 'fa', 'bi', etc.
+     * @return {Object} The icons object for the given prefix.
+     */
+    getIcons: function getIcons(icons, prefix) {
+      return icons[prefix] || {};
+    },
+    /**
+     * Assigns new icons to icons object.
+     *
+     * @param {Object.<string, Object>} icons - The icons object.
+     * @param {string} icon - The icon name. For example, 'search', 'refresh', etc.
+     * @param {Object.<string, string>} values - The values object.
+     */
+    assignIcons: function assignIcons(icons, icon, values) {
+      for (var _i = 0, _Object$keys = Object.keys(icons); _i < _Object$keys.length; _i++) {
+        var key = _Object$keys[_i];
+        icons[key][icon] = values[key];
+      }
     },
     getSearchInput: function getSearchInput(that) {
       if (typeof that.options.searchSelector === 'string') {
@@ -7150,15 +7104,15 @@
           flag[i][j] = false;
         }
       }
-      for (var _i = 0; _i < columns.length; _i++) {
-        var _iterator3 = _createForOfIteratorHelper(columns[_i]),
+      for (var _i2 = 0; _i2 < columns.length; _i2++) {
+        var _iterator3 = _createForOfIteratorHelper(columns[_i2]),
           _step3;
         try {
           for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
             var r = _step3.value;
             var rowspan = +r.rowspan || 1;
             var colspan = +r.colspan || 1;
-            var index = flag[_i].indexOf(false);
+            var index = flag[_i2].indexOf(false);
             r.colspanIndex = index;
             if (colspan === 1) {
               r.fieldIndex = index;
@@ -7171,7 +7125,7 @@
             }
             for (var _j = 0; _j < rowspan; _j++) {
               for (var k = 0; k < colspan; k++) {
-                flag[_i + _j][index + k] = true;
+                flag[_i2 + _j][index + k] = true;
               }
             }
           }
@@ -7327,8 +7281,8 @@
       if (compareLength && aKeys.length !== bKeys.length) {
         return false;
       }
-      for (var _i2 = 0, _aKeys = aKeys; _i2 < _aKeys.length; _i2++) {
-        var key = _aKeys[_i2];
+      for (var _i3 = 0, _aKeys = aKeys; _i3 < _aKeys.length; _i3++) {
+        var key = _aKeys[_i3];
         if (bKeys.includes(key) && objectA[key] !== objectB[key]) {
           return false;
         }
@@ -7342,6 +7296,7 @@
           return true;
         }
       } catch (e) {
+        console.error(e);
         return false;
       }
       return false;
@@ -7368,8 +7323,8 @@
       return text.toString().replace(/(<([^>]+)>)/ig, '').replace(/&[#A-Za-z0-9]+;/gi, '').trim();
     },
     getRealDataAttr: function getRealDataAttr(dataAttr) {
-      for (var _i3 = 0, _Object$entries = Object.entries(dataAttr); _i3 < _Object$entries.length; _i3++) {
-        var _Object$entries$_i = _slicedToArray(_Object$entries[_i3], 2),
+      for (var _i4 = 0, _Object$entries = Object.entries(dataAttr); _i4 < _Object$entries.length; _i4++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i4], 2),
           attr = _Object$entries$_i[0],
           value = _Object$entries$_i[1];
         var auxAttr = attr.split(/(?=[A-Z])/).join('-').toLowerCase();
@@ -7538,8 +7493,8 @@
       try {
         for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
           var row = _step11.value;
-          for (var _i4 = 0, _Object$keys = Object.keys(row); _i4 < _Object$keys.length; _i4++) {
-            var key = _Object$keys[_i4];
+          for (var _i5 = 0, _Object$keys2 = Object.keys(row); _i5 < _Object$keys2.length; _i5++) {
+            var key = _Object$keys2[_i5];
             if (key.startsWith('_') && (key.endsWith('_rowspan') || key.endsWith('_colspan'))) {
               return true;
             }
@@ -7683,8 +7638,8 @@
           _iterator13.f();
         }
       } else if (_typeof(style) === 'object') {
-        for (var _i5 = 0, _Object$entries2 = Object.entries(style); _i5 < _Object$entries2.length; _i5++) {
-          var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i5], 2),
+        for (var _i6 = 0, _Object$entries2 = Object.entries(style); _i6 < _Object$entries2.length; _i6++) {
+          var _Object$entries2$_i = _slicedToArray(_Object$entries2[_i6], 2),
             k = _Object$entries2$_i[0],
             v = _Object$entries2$_i[1];
           dom.style.setProperty(k, v);
@@ -7701,8 +7656,8 @@
       if (el.tagName === 'A') {
         el.href = 'javascript:';
       }
-      for (var _i6 = 0, _Object$entries3 = Object.entries(_attrs); _i6 < _Object$entries3.length; _i6++) {
-        var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i6], 2),
+      for (var _i7 = 0, _Object$entries3 = Object.entries(_attrs); _i7 < _Object$entries3.length; _i7++) {
+        var _Object$entries3$_i = _slicedToArray(_Object$entries3[_i7], 2),
           k = _Object$entries3$_i[0],
           v = _Object$entries3$_i[1];
         if (v === undefined) {
@@ -7760,8 +7715,8 @@
         baseUrl = _hashArray$0$split2[0],
         search = _hashArray$0$split2[1];
       var urlParams = new URLSearchParams(search);
-      for (var _i7 = 0, _Object$entries4 = Object.entries(query); _i7 < _Object$entries4.length; _i7++) {
-        var _Object$entries4$_i = _slicedToArray(_Object$entries4[_i7], 2),
+      for (var _i8 = 0, _Object$entries4 = Object.entries(query); _i8 < _Object$entries4.length; _i8++) {
+        var _Object$entries4$_i = _slicedToArray(_Object$entries4[_i8], 2),
           key = _Object$entries4$_i[0],
           value = _Object$entries4$_i[1];
         urlParams.set(key, value);
@@ -7770,7 +7725,7 @@
     }
   };
 
-  var VERSION = '1.23.5';
+  var VERSION = '1.24.1';
   var bootstrapVersion = Utils.getBootstrapVersion();
   var CONSTANTS = {
     3: {
@@ -7874,6 +7829,74 @@
       }
     }
   }[bootstrapVersion];
+  var ICONS = {
+    glyphicon: {
+      clearSearch: 'glyphicon-trash',
+      columns: 'glyphicon-th icon-th',
+      detailClose: 'glyphicon-minus icon-minus',
+      detailOpen: 'glyphicon-plus icon-plus',
+      fullscreen: 'glyphicon-fullscreen',
+      paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
+      paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
+      refresh: 'glyphicon-refresh icon-refresh',
+      search: 'glyphicon-search',
+      toggleOff: 'glyphicon-list-alt icon-list-alt',
+      toggleOn: 'glyphicon-list-alt icon-list-alt'
+    },
+    fa: {
+      clearSearch: 'fa-trash',
+      columns: 'fa-th-list',
+      detailClose: 'fa-minus',
+      detailOpen: 'fa-plus',
+      fullscreen: 'fa-arrows-alt',
+      paginationSwitchDown: 'fa-caret-square-down',
+      paginationSwitchUp: 'fa-caret-square-up',
+      refresh: 'fa-sync',
+      search: 'fa-search',
+      toggleOff: 'fa-toggle-off',
+      toggleOn: 'fa-toggle-on'
+    },
+    bi: {
+      clearSearch: 'bi-trash',
+      columns: 'bi-list-ul',
+      detailClose: 'bi-dash',
+      detailOpen: 'bi-plus',
+      fullscreen: 'bi-arrows-move',
+      paginationSwitchDown: 'bi-caret-down-square',
+      paginationSwitchUp: 'bi-caret-up-square',
+      refresh: 'bi-arrow-clockwise',
+      search: 'bi-search',
+      toggleOff: 'bi-toggle-off',
+      toggleOn: 'bi-toggle-on'
+    },
+    icon: {
+      clearSearch: 'icon-trash-2',
+      columns: 'icon-list',
+      detailClose: 'icon-minus',
+      detailOpen: 'icon-plus',
+      fullscreen: 'icon-maximize',
+      paginationSwitchDown: 'icon-arrow-up-circle',
+      paginationSwitchUp: 'icon-arrow-down-circle',
+      refresh: 'icon-refresh-cw',
+      search: 'icon-search',
+      toggleOff: 'icon-toggle-right',
+      toggleOn: 'icon-toggle-right'
+    },
+    'material-icons': {
+      clearSearch: 'delete',
+      columns: 'view_list',
+      detailClose: 'remove',
+      detailOpen: 'add',
+      fullscreen: 'fullscreen',
+      paginationSwitchDown: 'grid_on',
+      paginationSwitchUp: 'grid_off',
+      refresh: 'refresh',
+      search: 'search',
+      sort: 'sort',
+      toggleOff: 'tablet',
+      toggleOn: 'tablet_android'
+    }
+  };
   var DEFAULTS = {
     ajax: undefined,
     ajaxOptions: {},
@@ -8286,6 +8309,7 @@
     CONSTANTS: CONSTANTS,
     DEFAULTS: DEFAULTS,
     EVENTS: EVENTS,
+    ICONS: ICONS,
     LOCALES: {
       en: EN,
       'en-US': EN
@@ -8466,7 +8490,7 @@
           opts.icons = Utils.calculateObjectValue(null, opts.icons);
         }
         opts.iconsPrefix = opts.iconsPrefix || $.fn.bootstrapTable.defaults.iconsPrefix || iconsPrefix;
-        opts.icons = Object.assign(Utils.getIcons(opts.iconsPrefix), $.fn.bootstrapTable.defaults.icons, opts.icons);
+        opts.icons = Object.assign(Utils.getIcons(Constants.ICONS, opts.iconsPrefix), $.fn.bootstrapTable.defaults.icons, opts.icons);
 
         // init buttons class
         var buttonsPrefix = opts.buttonsPrefix ? "".concat(opts.buttonsPrefix, "-") : '';
@@ -8597,7 +8621,9 @@
         this.options.columns = Utils.extend(true, [], columns, this.options.columns);
         this.columns = [];
         this.fieldsColumnsIndex = [];
-        Utils.setFieldIndex(this.options.columns);
+        if (this.optionsColumnsChanged !== false) {
+          Utils.setFieldIndex(this.options.columns);
+        }
         this.options.columns.forEach(function (columns, i) {
           columns.forEach(function (_column, j) {
             var column = Utils.extend({}, BootstrapTable.COLUMN_DEFAULTS, _column, {
@@ -9343,42 +9369,49 @@
                 }
               }
               if (typeof value === 'string' || typeof value === 'number') {
-                if (_this5.options.strictSearch && "".concat(value).toLowerCase() === searchText || _this5.options.regexSearch && Utils.regexCompare(value, rawSearchText)) {
-                  return true;
-                }
-                var largerSmallerEqualsRegex = /(?:(<=|=>|=<|>=|>|<)(?:\s+)?(-?\d+)?|(-?\d+)?(\s+)?(<=|=>|=<|>=|>|<))/gm;
-                var matches = largerSmallerEqualsRegex.exec(_this5.searchText);
-                var comparisonCheck = false;
-                if (matches) {
-                  var operator = matches[1] || "".concat(matches[5], "l");
-                  var comparisonValue = matches[2] || matches[3];
-                  var int = parseInt(value, 10);
-                  var comparisonInt = parseInt(comparisonValue, 10);
-                  switch (operator) {
-                    case '>':
-                    case '<l':
-                      comparisonCheck = int > comparisonInt;
-                      break;
-                    case '<':
-                    case '>l':
-                      comparisonCheck = int < comparisonInt;
-                      break;
-                    case '<=':
-                    case '=<':
-                    case '>=l':
-                    case '=>l':
-                      comparisonCheck = int <= comparisonInt;
-                      break;
-                    case '>=':
-                    case '=>':
-                    case '<=l':
-                    case '=<l':
-                      comparisonCheck = int >= comparisonInt;
-                      break;
+                if (_this5.options.strictSearch) {
+                  if ("".concat(value).toLowerCase() === searchText) {
+                    return true;
                   }
-                }
-                if (comparisonCheck || "".concat(value).toLowerCase().includes(searchText)) {
-                  return true;
+                } else if (_this5.options.regexSearch) {
+                  if (Utils.regexCompare(value, rawSearchText)) {
+                    return true;
+                  }
+                } else {
+                  var largerSmallerEqualsRegex = /(?:(<=|=>|=<|>=|>|<)(?:\s+)?(-?\d+)?|(-?\d+)?(\s+)?(<=|=>|=<|>=|>|<))/gm;
+                  var matches = largerSmallerEqualsRegex.exec(_this5.searchText);
+                  var comparisonCheck = false;
+                  if (matches) {
+                    var operator = matches[1] || "".concat(matches[5], "l");
+                    var comparisonValue = matches[2] || matches[3];
+                    var int = parseInt(value, 10);
+                    var comparisonInt = parseInt(comparisonValue, 10);
+                    switch (operator) {
+                      case '>':
+                      case '<l':
+                        comparisonCheck = int > comparisonInt;
+                        break;
+                      case '<':
+                      case '>l':
+                        comparisonCheck = int < comparisonInt;
+                        break;
+                      case '<=':
+                      case '=<':
+                      case '>=l':
+                      case '=>l':
+                        comparisonCheck = int <= comparisonInt;
+                        break;
+                      case '>=':
+                      case '=>':
+                      case '<=l':
+                      case '=<l':
+                        comparisonCheck = int >= comparisonInt;
+                        break;
+                    }
+                  }
+                  if (comparisonCheck || "".concat(value).toLowerCase().includes(searchText)) {
+                    return true;
+                  }
                 }
               }
             }
@@ -9456,7 +9489,10 @@
           html.push("<div class=\"".concat(this.constants.classes.pull, "-").concat(opts.paginationDetailHAlign, " pagination-detail\">"));
         }
         if (this.paginationParts.includes('pageInfo') || this.paginationParts.includes('pageInfoShort')) {
-          var totalRows = this.options.totalRows + (this.options.sidePagination === 'client' && this.options.paginationLoadMore && !this._paginationLoaded ? ' +' : '');
+          var totalRows = this.options.totalRows;
+          if (this.options.sidePagination === 'client' && this.options.paginationLoadMore && !this._paginationLoaded && this.totalPages > 1) {
+            totalRows += ' +';
+          }
           var paginationInfo = this.paginationParts.includes('pageInfoShort') ? opts.formatDetailPagination(totalRows) : opts.formatShowingRows(this.pageFrom, this.pageTo, totalRows, opts.totalNotFiltered);
           html.push("<span class=\"pagination-info\">\n      ".concat(paginationInfo, "\n      </span>"));
         }
@@ -9686,14 +9722,14 @@
             data_["data-".concat(k)] = _typeof(v) === 'object' ? JSON.stringify(v) : v;
           }
         }
-        var tr = Utils.h('tr', _objectSpread2(_objectSpread2({}, attributes), {}, {
+        var tr = Utils.h('tr', _objectSpread2(_objectSpread2({
           id: Array.isArray(item) ? undefined : item._id,
           class: style && style.classes || (Array.isArray(item) ? undefined : item._class),
           style: style && style.css || (Array.isArray(item) ? undefined : item._style),
           'data-index': i,
           'data-uniqueid': Utils.getItemField(item, this.options.uniqueId, false),
           'data-has-detail-view': this.options.detailView && Utils.calculateObjectValue(null, this.options.detailFilter, [i, item]) ? 'true' : undefined
-        }, data_));
+        }, attributes), data_));
         var trChildren = [];
         var detailViewTemplate = '';
         if (Utils.hasDetailViewIcon(this.options)) {
@@ -9717,6 +9753,7 @@
             class: _this7.header.classes[j] ? [_this7.header.classes[j]] : [],
             style: _this7.header.styles[j] ? [_this7.header.styles[j]] : []
           };
+          var cardViewClass = "card-view card-view-field-".concat(field);
           if ((_this7.fromHtml || _this7.autoMergeCells) && typeof value_ === 'undefined') {
             if (!column.checkbox && !column.radio) {
               return;
@@ -9731,15 +9768,15 @@
 
           // handle class, style, id, rowspan, colspan and title of td
           for (var _i10 = 0, _arr = ['class', 'style', 'id', 'rowspan', 'colspan', 'title']; _i10 < _arr.length; _i10++) {
-            var _item = _arr[_i10];
-            var _value = _item["_".concat(field, "_").concat(_item)];
+            var attr = _arr[_i10];
+            var _value = item["_".concat(field, "_").concat(attr)];
             if (!_value) {
               continue;
             }
-            if (attrs[_item]) {
-              attrs[_item].push(_value);
+            if (attrs[attr]) {
+              attrs[attr].push(_value);
             } else {
-              attrs[_item] = _value;
+              attrs[attr] = _value;
             }
           }
           var cellStyle = Utils.calculateObjectValue(_this7.header, _this7.header.cellStyles[j], [value_, item, i, field], {});
@@ -9784,7 +9821,7 @@
             var valueNodes = _this7.header.formatters[j] && (typeof value === 'string' || value instanceof Node || value instanceof $) ? Utils.htmlToNodes(value) : [];
             item[_this7.header.stateField] = value === true || !!value_ || value && value.checked;
             return Utils.h(_this7.options.cardView ? 'div' : 'td', {
-              class: [_this7.options.cardView ? 'card-view' : 'bs-checkbox', column.class],
+              class: [_this7.options.cardView ? cardViewClass : 'bs-checkbox', column.class],
               style: _this7.options.cardView ? undefined : attrs.style
             }, [Utils.h('label', {}, [Utils.h('input', {
               'data-index': i,
@@ -9798,7 +9835,7 @@
           if (_this7.options.cardView) {
             if (_this7.options.smartDisplay && value === '') {
               return Utils.h('div', {
-                class: 'card-view'
+                class: cardViewClass
               });
             }
             var cardTitle = _this7.options.showHeader ? Utils.h('span', {
@@ -9807,7 +9844,7 @@
               html: Utils.getFieldTitle(_this7.columns, field)
             }) : '';
             return Utils.h('div', {
-              class: 'card-view'
+              class: cardViewClass
             }, [cardTitle, Utils.h('span', {
               class: ['card-view-value', cellStyle.classes],
               style: attrs.style
@@ -10452,6 +10489,7 @@
         if (Utils.compareObjects(this.options, options, true)) {
           return;
         }
+        this.optionsColumnsChanged = !!options.columns;
         this.options = Utils.extend(this.options, options);
         this.trigger('refresh-options', this.options);
         this.destroy();
@@ -10591,6 +10629,10 @@
         }
         var row = this.data[params.index];
         var originalIndex = this.options.data.indexOf(row);
+        if (originalIndex === -1) {
+          this.append([params.row]);
+          return;
+        }
         this.data.splice(params.index, 0, params.row);
         this.options.data.splice(originalIndex, 0, params.row);
         this.initSearch();
@@ -11109,6 +11151,7 @@
     }, {
       key: "destroy",
       value: function destroy() {
+        clearTimeout(this.timeoutId_);
         this.$el.insertBefore(this.$container);
         $(this.options.toolbar).insertBefore(this.$el);
         this.$container.next().remove();
@@ -11239,7 +11282,7 @@
     }, {
       key: "filterBy",
       value: function filterBy(columns, options) {
-        this.filterOptions = Utils.isEmptyObject(options) ? this.options.filterOptions : Utils.extend(this.options.filterOptions, options);
+        this.filterOptions = Utils.isEmptyObject(options) ? this.options.filterOptions : Utils.extend({}, this.options.filterOptions, options);
         this.filterColumns = Utils.isEmptyObject(columns) ? {} : columns;
         this.options.pageNumber = 1;
         this.initSearch();
@@ -11458,6 +11501,7 @@
   $.fn.bootstrapTable.Constructor = BootstrapTable;
   $.fn.bootstrapTable.theme = Constants.THEME;
   $.fn.bootstrapTable.VERSION = Constants.VERSION;
+  $.fn.bootstrapTable.icons = Constants.ICONS;
   $.fn.bootstrapTable.defaults = BootstrapTable.DEFAULTS;
   $.fn.bootstrapTable.columnDefaults = BootstrapTable.COLUMN_DEFAULTS;
   $.fn.bootstrapTable.events = BootstrapTable.EVENTS;
@@ -11499,7 +11543,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -11551,11 +11595,11 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -11969,9 +12013,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -12122,10 +12166,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -14131,7 +14175,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -14239,21 +14283,21 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(1 & o ? t.prototype : t), e, r);
-    return 2 & o ? function (t) {
-      return p.apply(r, t);
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(1 & r ? t.prototype : t), o, e);
+    return 2 & r && "function" == typeof p ? function (t) {
+      return p.apply(e, t);
     } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
     var e = t[Symbol.toPrimitive];
     if (void 0 !== e) {
-      var i = e.call(t, r || "default");
+      var i = e.call(t, r);
       if ("object" != typeof i) return i;
       throw new TypeError("@@toPrimitive must return a primitive value.");
     }
-    return ("string" === r ? String : Number)(t);
+    return (String )(t);
   }
   function _toPropertyKey(t) {
     var i = _toPrimitive(t, "string");
@@ -14664,9 +14708,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -14817,10 +14861,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -17509,13 +17553,12 @@
     forceExport: false,
     forceHide: false
   });
-  Object.assign($.fn.bootstrapTable.defaults.icons, {
-    export: {
-      bootstrap3: 'glyphicon-export icon-share',
-      bootstrap5: 'bi-download',
-      materialize: 'file_download',
-      'bootstrap-table': 'icon-download'
-    }[$.fn.bootstrapTable.theme] || 'fa-download'
+  Utils.assignIcons($.fn.bootstrapTable.icons, 'export', {
+    glyphicon: 'glyphicon-export icon-share',
+    fa: 'fa-download',
+    bi: 'bi-download',
+    icon: 'icon-download',
+    'material-icons': 'file_download'
   });
   Object.assign($.fn.bootstrapTable.locales, {
     formatExport: function formatExport() {
@@ -17797,7 +17840,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -17927,11 +17970,11 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -18352,9 +18395,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -18505,10 +18548,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -21568,6 +21611,7 @@
       pageNumber: 'bs.table.pageNumber',
       pageList: 'bs.table.pageList',
       hiddenColumns: 'bs.table.hiddenColumns',
+      columns: 'bs.table.columns',
       cardView: 'bs.table.cardView',
       customView: 'bs.table.customView',
       searchText: 'bs.table.searchText',
@@ -21585,6 +21629,9 @@
       return navigator.cookieEnabled;
     },
     isCookieEnabled: function isCookieEnabled(that, cookieName) {
+      if (cookieName === 'bs.table.columns') {
+        return that.options.cookiesEnabled.includes('bs.table.hiddenColumns');
+      }
       return that.options.cookiesEnabled.includes(cookieName);
     },
     setCookie: function setCookie(that, cookieName, cookieValue) {
@@ -21741,6 +21788,7 @@
     return _createClass(_class, [{
       key: "init",
       value: function init() {
+        var _this = this;
         if (this.options.cookie) {
           if (this.options.cookieStorage === 'cookieStorage' && !UtilsCookie.isCookieSupportedByBrowser()) {
             throw new Error('Cookies are not enabled in this browser.');
@@ -21756,6 +21804,7 @@
           try {
             filterByCookie = JSON.parse(filterByCookieValue);
           } catch (e) {
+            console.error(e);
             throw new Error('Could not parse the json of the filterBy cookie!');
           }
           this.filterColumns = filterByCookie ? filterByCookie : {};
@@ -21765,24 +21814,23 @@
           this._filterControlValuesLoaded = false;
           this.options.cookiesEnabled = typeof this.options.cookiesEnabled === 'string' ? this.options.cookiesEnabled.replace('[', '').replace(']', '').replace(/'/g, '').replace(/ /g, '').split(',') : this.options.cookiesEnabled;
           if (this.options.filterControl) {
-            var that = this;
             this.$el.on('column-search.bs.table', function (e, field, text) {
               var isNewField = true;
-              for (var i = 0; i < that._filterControls.length; i++) {
-                if (that._filterControls[i].field === field) {
-                  that._filterControls[i].text = text;
+              for (var i = 0; i < _this._filterControls.length; i++) {
+                if (_this._filterControls[i].field === field) {
+                  _this._filterControls[i].text = text;
                   isNewField = false;
                   break;
                 }
               }
               if (isNewField) {
-                that._filterControls.push({
+                _this._filterControls.push({
                   field: field,
                   text: text
                 });
               }
-              UtilsCookie.setCookie(that, UtilsCookie.cookieIds.filterControl, JSON.stringify(that._filterControls));
-            }).on('created-controls.bs.table', UtilsCookie.initCookieFilters(that));
+              UtilsCookie.setCookie(_this, UtilsCookie.cookieIds.filterControl, JSON.stringify(_this._filterControls));
+            }).on('created-controls.bs.table', UtilsCookie.initCookieFilters(this));
           }
         }
         _superPropGet(_class, "init", this)([]);
@@ -21912,6 +21960,9 @@
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.hiddenColumns, JSON.stringify(this.getHiddenColumns().map(function (column) {
           return column.field;
         })));
+        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.columns, JSON.stringify(this.columns.map(function (column) {
+          return column.field;
+        })));
       }
     }, {
       key: "_toggleAllColumns",
@@ -21924,6 +21975,9 @@
           return;
         }
         UtilsCookie.setCookie(this, UtilsCookie.cookieIds.hiddenColumns, JSON.stringify(this.getHiddenColumns().map(function (column) {
+          return column.field;
+        })));
+        UtilsCookie.setCookie(this, UtilsCookie.cookieIds.columns, JSON.stringify(this.columns.map(function (column) {
           return column.field;
         })));
       }
@@ -22008,15 +22062,20 @@
         var cardViewCookie = UtilsCookie.getCookie(this, UtilsCookie.cookieIds.cardView);
         var customViewCookie = UtilsCookie.getCookie(this, UtilsCookie.cookieIds.customView);
         var hiddenColumnsCookieValue = UtilsCookie.getCookie(this, UtilsCookie.cookieIds.hiddenColumns);
+        var columnsCookieValue = UtilsCookie.getCookie(this, UtilsCookie.cookieIds.columns);
         var hiddenColumnsCookie = {};
+        var columnsCookie = {};
         try {
           hiddenColumnsCookie = JSON.parse(hiddenColumnsCookieValue);
+          columnsCookie = JSON.parse(columnsCookieValue);
         } catch (e) {
-          throw new Error('Could not parse the json of the hidden columns cookie!', hiddenColumnsCookieValue);
+          console.error(e);
+          throw new Error('Could not parse the json of the columns cookie!');
         }
         try {
           sortPriorityCookie = JSON.parse(sortPriorityCookie);
         } catch (e) {
+          console.error(e);
           throw new Error('Could not parse the json of the sortPriority cookie!', sortPriorityCookie);
         }
         if (!sortPriorityCookie) {
@@ -22050,12 +22109,15 @@
         }
         this.customViewDefaultView = customViewCookie === 'true';
         if (hiddenColumnsCookie) {
+          columnsCookie = columnsCookie || this.columns.map(function (column) {
+            return column.field;
+          });
           var _iterator2 = _createForOfIteratorHelper(this.columns),
             _step2;
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
               var column = _step2.value;
-              if (!column.switchable) {
+              if (!column.switchable || !columnsCookie.includes(column.field)) {
                 continue;
               }
               column.visible = this.isSelectionColumn(column) || !hiddenColumnsCookie.includes(column.field);
@@ -22070,14 +22132,13 @@
     }, {
       key: "getCookies",
       value: function getCookies() {
-        var bootstrapTable = this;
         var cookies = {};
         for (var _i = 0, _Object$entries = Object.entries(UtilsCookie.cookieIds); _i < _Object$entries.length; _i++) {
           var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
             key = _Object$entries$_i[0],
             value = _Object$entries$_i[1];
-          cookies[key] = UtilsCookie.getCookie(bootstrapTable, value);
-          if (key === 'columns' || key === 'hiddenColumns' || key === 'sortPriority') {
+          cookies[key] = UtilsCookie.getCookie(this, value);
+          if (['columns', 'hiddenColumns', 'sortPriority'].includes(key)) {
             cookies[key] = JSON.parse(cookies[key]);
           }
         }
@@ -22094,12 +22155,12 @@
     }, {
       key: "configureStorage",
       value: function configureStorage() {
-        var that = this;
+        var _this2 = this;
         this._storage = {};
         switch (this.options.cookieStorage) {
           case 'cookieStorage':
             this._storage.setItem = function (cookieName, cookieValue) {
-              document.cookie = [cookieName, '=', encodeURIComponent(cookieValue), "; expires=".concat(UtilsCookie.calculateExpiration(that.options.cookieExpire)), that.options.cookiePath ? "; path=".concat(that.options.cookiePath) : '', that.options.cookieDomain ? "; domain=".concat(that.options.cookieDomain) : '', that.options.cookieSecure ? '; secure' : '', ";SameSite=".concat(that.options.cookieSameSite)].join('');
+              document.cookie = [cookieName, '=', encodeURIComponent(cookieValue), "; expires=".concat(UtilsCookie.calculateExpiration(_this2.options.cookieExpire)), _this2.options.cookiePath ? "; path=".concat(_this2.options.cookiePath) : '', _this2.options.cookieDomain ? "; domain=".concat(_this2.options.cookieDomain) : '', _this2.options.cookieSecure ? '; secure' : '', ";SameSite=".concat(_this2.options.cookieSameSite)].join('');
             };
             this._storage.getItem = function (cookieName) {
               var value = "; ".concat(document.cookie);
@@ -22107,7 +22168,7 @@
               return parts.length === 2 ? decodeURIComponent(parts.pop().split(';').shift()) : null;
             };
             this._storage.removeItem = function (cookieName) {
-              document.cookie = [encodeURIComponent(cookieName), '=', '; expires=Thu, 01 Jan 1970 00:00:00 GMT', that.options.cookiePath ? "; path=".concat(that.options.cookiePath) : '', that.options.cookieDomain ? "; domain=".concat(that.options.cookieDomain) : '', ";SameSite=".concat(that.options.cookieSameSite)].join('');
+              document.cookie = [encodeURIComponent(cookieName), '=', '; expires=Thu, 01 Jan 1970 00:00:00 GMT', _this2.options.cookiePath ? "; path=".concat(_this2.options.cookiePath) : '', _this2.options.cookieDomain ? "; domain=".concat(_this2.options.cookieDomain) : '', ";SameSite=".concat(_this2.options.cookieSameSite)].join('');
             };
             break;
           case 'localStorage':
@@ -22137,13 +22198,13 @@
               throw new Error('The following options must be set while using the customStorage: cookieCustomStorageSet, cookieCustomStorageGet and cookieCustomStorageDelete');
             }
             this._storage.setItem = function (cookieName, cookieValue) {
-              Utils.calculateObjectValue(that.options, that.options.cookieCustomStorageSet, [cookieName, cookieValue], '');
+              Utils.calculateObjectValue(_this2.options, _this2.options.cookieCustomStorageSet, [cookieName, cookieValue], '');
             };
             this._storage.getItem = function (cookieName) {
-              return Utils.calculateObjectValue(that.options, that.options.cookieCustomStorageGet, [cookieName], '');
+              return Utils.calculateObjectValue(_this2.options, _this2.options.cookieCustomStorageGet, [cookieName], '');
             };
             this._storage.removeItem = function (cookieName) {
-              Utils.calculateObjectValue(that.options, that.options.cookieCustomStorageDelete, [cookieName], '');
+              Utils.calculateObjectValue(_this2.options, _this2.options.cookieCustomStorageDelete, [cookieName], '');
             };
             break;
           default:
@@ -22178,7 +22239,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -22230,11 +22291,11 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -22648,9 +22709,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -22801,10 +22862,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -24630,7 +24691,7 @@
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -24712,11 +24773,11 @@
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -25137,9 +25198,9 @@
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -25290,10 +25351,10 @@
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -29823,7 +29884,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -29875,11 +29936,11 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toPrimitive(t, r) {
     if ("object" != typeof t || !t) return t;
@@ -30293,9 +30354,9 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -30446,10 +30507,10 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -32278,7 +32339,7 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     }
   }
   function _createClass(e, r, t) {
-    return r && _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
+    return _defineProperties(e.prototype, r), Object.defineProperty(e, "prototype", {
       writable: !1
     }), e;
   }
@@ -32414,11 +32475,11 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
     for (; !{}.hasOwnProperty.call(t, o) && null !== (t = _getPrototypeOf(t)););
     return t;
   }
-  function _superPropGet(t, e, r, o) {
-    var p = _get(_getPrototypeOf(t.prototype ), e, r);
-    return function (t) {
-      return p.apply(r, t);
-    } ;
+  function _superPropGet(t, o, e, r) {
+    var p = _get(_getPrototypeOf(t.prototype ), o, e);
+    return "function" == typeof p ? function (t) {
+      return p.apply(e, t);
+    } : p;
   }
   function _toConsumableArray(r) {
     return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
@@ -32842,9 +32903,9 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   	/* eslint-disable es/no-symbol -- required for testing */
   	var NATIVE_SYMBOL = requireSymbolConstructorDetection();
 
-  	useSymbolAsUid = NATIVE_SYMBOL
-  	  && !Symbol.sham
-  	  && typeof Symbol.iterator == 'symbol';
+  	useSymbolAsUid = NATIVE_SYMBOL &&
+  	  !Symbol.sham &&
+  	  typeof Symbol.iterator == 'symbol';
   	return useSymbolAsUid;
   }
 
@@ -32995,10 +33056,10 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   	var store = sharedStore.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
   	(store.versions || (store.versions = [])).push({
-  	  version: '3.38.1',
+  	  version: '3.39.0',
   	  mode: IS_PURE ? 'pure' : 'global',
   	  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
-  	  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  	  license: 'https://github.com/zloirock/core-js/blob/v3.39.0/LICENSE',
   	  source: 'https://github.com/zloirock/core-js'
   	});
   	return sharedStore.exports;
@@ -35645,27 +35706,18 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
   var Utils = $.fn.bootstrapTable.utils;
   var theme = {
     bootstrap3: {
-      icons: {
-        advancedSearchIcon: 'glyphicon-chevron-down'
-      },
       classes: {},
       html: {
         modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <button class=\"close toolbar-modal-close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n                <h4 class=\"modal-title toolbar-modal-title\"></h4>\n              </div>\n              <div class=\"modal-body toolbar-modal-body\"></div>\n              <div class=\"modal-footer toolbar-modal-footer\">\n                <button class=\"btn btn-%s toolbar-modal-close\"></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
       }
     },
     bootstrap4: {
-      icons: {
-        advancedSearchIcon: 'fa-chevron-down'
-      },
       classes: {},
       html: {
         modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-xs\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4 class=\"modal-title toolbar-modal-title\"></h4>\n                <button class=\"close toolbar-modal-close\" data-dismiss=\"modal\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n              <div class=\"modal-body toolbar-modal-body\"></div>\n              <div class=\"modal-footer toolbar-modal-footer\">\n                <button class=\"btn btn-%s toolbar-modal-close\"></button>\n              </div>\n            </div>\n          </div>\n        </div>\n      "
       }
     },
     bootstrap5: {
-      icons: {
-        advancedSearchIcon: 'bi-chevron-down'
-      },
       classes: {
         formGroup: 'mb-3'
       },
@@ -35674,36 +35726,24 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       }
     },
     bulma: {
-      icons: {
-        advancedSearchIcon: 'fa-chevron-down'
-      },
       classes: {},
       html: {
         modal: "\n        <div class=\"modal\" id=\"avdSearchModal_%s\">\n          <div class=\"modal-background\"></div>\n          <div class=\"modal-card\">\n            <header class=\"modal-card-head\">\n              <p class=\"modal-card-title toolbar-modal-title\"></p>\n              <button class=\"delete toolbar-modal-close\"></button>\n            </header>\n            <section class=\"modal-card-body toolbar-modal-body\"></section>\n            <footer class=\"modal-card-foot toolbar-modal-footer\">\n              <button class=\"button button-%s toolbar-modal-close\"></button>\n            </footer>\n          </div>\n        </div>\n      "
       }
     },
     foundation: {
-      icons: {
-        advancedSearchIcon: 'fa-chevron-down'
-      },
       classes: {},
       html: {
         modal: "\n        <div class=\"reveal\" id=\"avdSearchModal_%s\" data-reveal>\n          <h1 class=\"toolbar-modal-title\"></h1>\n          <div class=\"toolbar-modal-body\"></div>\n          <button class=\"close-button toolbar-modal-close\" data-close aria-label=\"Close modal\">\n            <span aria-hidden=\"true\">&times;</span>\n          </button>\n          <div class=\"toolbar-modal-footer\">\n            <button class=\"button button-%s toolbar-modal-close\"></button>\n          </div>\n        </div>\n      "
       }
     },
     materialize: {
-      icons: {
-        advancedSearchIcon: 'expand_more'
-      },
       classes: {},
       html: {
         modal: "\n        <div id=\"avdSearchModal_%s\" class=\"modal\">\n          <div class=\"modal-content\">\n            <h4 class=\"toolbar-modal-title\"></h4>\n            <div class=\"toolbar-modal-body\"></div>\n          </div>\n          <div class=\"modal-footer toolbar-modal-footer\">\n            <a href=\"javascript:void(0)\" class=\"modal-close waves-effect waves-green btn-flat btn-%s toolbar-modal-close\"></a>\n          </div>\n        </div>\n      "
       }
     },
     semantic: {
-      icons: {
-        advancedSearchIcon: 'fa-chevron-down'
-      },
       classes: {},
       html: {
         modal: "\n        <div class=\"ui modal\" id=\"avdSearchModal_%s\">\n          <i class=\"close icon toolbar-modal-close\"></i>\n          <div class=\"header toolbar-modal-title\"\"></div>\n          <div class=\"image content ui form toolbar-modal-body\"></div>\n          <div class=\"actions toolbar-modal-footer\">\n            <div class=\"ui black deny button button-%s toolbar-modal-close\"></div>\n          </div>\n        </div>\n      "
@@ -35720,8 +35760,11 @@ if(xr(e,"index.xml"))throw new Error("Unsupported NUMBERS 09 file");throw new Er
       return false;
     }
   });
-  Object.assign($.fn.bootstrapTable.defaults.icons, {
-    advancedSearchIcon: theme.icons.advancedSearchIcon
+  Utils.assignIcons($.fn.bootstrapTable.icons, 'advancedSearchIcon', {
+    glyphicon: 'glyphicon-chevron-down',
+    fa: 'fa-chevron-down',
+    bi: 'bi-chevron-down',
+    'material-icons': 'expand_more'
   });
   Object.assign($.fn.bootstrapTable.events, {
     'column-advanced-search.bs.table': 'onColumnAdvancedSearch'

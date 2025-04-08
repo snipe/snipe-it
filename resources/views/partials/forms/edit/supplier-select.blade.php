@@ -1,6 +1,6 @@
 <div id="assigned_user" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}">
 
-    {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
+    <label for="{{ $fieldname }}" class="col-md-3 control-label">{{ $translated_name }}</label>
 
     <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="suppliers" data-placeholder="{{ trans('general.select_supplier') }}" name="{{ $fieldname }}" style="width: 100%" id="supplier_select" aria-label="{{ $fieldname }}"{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}{{ (isset($item) && (Helper::checkIfRequired($item, $fieldname))) ? ' required' : '' }}>

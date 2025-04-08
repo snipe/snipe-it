@@ -21008,7 +21008,7 @@ hr {
 @charset "UTF-8";
 /**
  * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.23.5
+ * version: 1.24.1
  * https://github.com/wenzhixin/bootstrap-table/
  */
 /* stylelint-disable annotation-no-unknown, max-line-length */
@@ -22510,7 +22510,8 @@ th.css-history > .th-inner::before {
   padding: 6px 12px;
   height: 34px;
 }
-.form-group.has-error label {
+.form-group.has-error label,
+.form-group.has-error .help-block {
   color: #a94442;
 }
 .select2-container--default .select2-selection--multiple {
@@ -22752,6 +22753,22 @@ input[type="radio"]:checked::before {
 /** this is needed to override ekko-lightboxes card view styles **/
 .bootstrap-table .fixed-table-container .table tbody tr .card-view {
   display: table-row !important;
+}
+td.text-right.text-padding-number-cell {
+  padding-right: 30px !important;
+  white-space: nowrap;
+}
+th.text-right.text-padding-number-footer-cell {
+  padding-right: 20px !important;
+  white-space: nowrap;
+}
+code.single-line {
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  max-width: 400px;
 }
 
 
@@ -24045,7 +24062,8 @@ th.css-history > .th-inner::before {
   padding: 6px 12px;
   height: 34px;
 }
-.form-group.has-error label {
+.form-group.has-error label,
+.form-group.has-error .help-block {
   color: #a94442;
 }
 .select2-container--default .select2-selection--multiple {
@@ -24287,5 +24305,21 @@ input[type="radio"]:checked::before {
 /** this is needed to override ekko-lightboxes card view styles **/
 .bootstrap-table .fixed-table-container .table tbody tr .card-view {
   display: table-row !important;
+}
+td.text-right.text-padding-number-cell {
+  padding-right: 30px !important;
+  white-space: nowrap;
+}
+th.text-right.text-padding-number-footer-cell {
+  padding-right: 20px !important;
+  white-space: nowrap;
+}
+code.single-line {
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  max-width: 400px;
 }
 

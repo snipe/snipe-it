@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'Sigurado kaba na gusto mong i-delete ang asset na ito?',
         'error'   		=> 'Mayroong isyu sa pag-delete ng asset. Mangyaring subukang muli.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Walang napiling mga asset, kaya walang nai-delete.',
         'success' 		=> 'Matagumpay na nai-delete ang asset.',
     ],

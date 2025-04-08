@@ -14,9 +14,9 @@ return [
         'user_country' => 'Країна',
         'user_zip' => 'Поштовий індекс користувача'
     ],
-    'open_saved_template' => 'Open Saved Template',
-    'save_template' =>  'Save Template',
-    'select_a_template' => 'Select a Template',
-    'template_name' => 'Template Name',
-    'update_template' => 'Update Template',
+    'open_saved_template' => 'Відкрити збережений шаблон',
+    'save_template' =>  'Зберегти шаблон',
+    'select_a_template' => 'Виберіть шаблон',
+    'template_name' => 'Ім\'я шаблону',
+    'update_template' => 'Оновити шаблон',
 ];

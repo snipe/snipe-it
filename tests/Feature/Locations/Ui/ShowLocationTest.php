@@ -11,7 +11,7 @@ class ShowLocationTest extends TestCase
     public function testPageRenders()
     {
         $this->actingAs(User::factory()->superuser()->create())
-            ->get(route('locations.show', Location::factory()->create()->id))
+            ->get(route('locations.show', Location::factory()->create()))
             ->assertOk();
     }
 }
