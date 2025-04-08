@@ -890,7 +890,7 @@ class AssetsController extends Controller
         return view('hardware/audit')->with('asset', $asset)->with('item', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
 
-    public function auditStore(UpdateAssetRequest $request, Asset $asset)
+    public function auditStore(UploadFileRequest $request, Asset $asset)
     {
 
         $this->authorize('audit', Asset::class);
