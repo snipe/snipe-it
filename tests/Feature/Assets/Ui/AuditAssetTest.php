@@ -24,9 +24,11 @@ class AuditAssetTest extends TestCase
 
     public function testAssetCanBeAudited()
     {
-        $this->actingAs(User::factory()->auditAssets()->create())
+        $response = $this->actingAs(User::factory()->auditAssets()->create())
             ->post(route('asset.audit.store', Asset::factory()->create()))
             ->assertStatus(302)
             ->assertRedirect(route('assets.audit.due'));
+
+        $this->followRedirects($response)->assertSee('success');
     }
 }
