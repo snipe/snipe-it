@@ -1556,14 +1556,14 @@ class Helper
         }
 
         foreach($locations as $location) {
-            // in case of an update of a single location use the newly requested company_id
+            // in case of an update of a single location, use the newly requested company_id
             if ($new_company_id) {
                 $location_company = $new_company_id;
             } else {
                 $location_company = $location->company_id;
             }
 
-            // depending on the relationship, we must use different operations to retrieve the objects
+            // Depending on the relationship, we must use different operations to retrieve the objects
             $keywords_relation = [
                 'many' => [
                             'accessories',
@@ -1594,14 +1594,17 @@ class Helper
                     }
 
                     foreach ($items as $item) {
+
                         if ($item && $item->company_id != $location_company) {
                             $mismatched[] = [
-                                    class_basename(get_class($item)),
-                                    $item->name,
                                     $item->id,
-                                    $item->company->name ?? null,
+                                    class_basename(get_class($item)),
+                                    $item->name ?? $item->asset_tag ?? $item->serial ?? $item->username,
+                                    str_replace('App\\Models\\', '', $item->assigned_type) ?? null,
                                     $item->company_id ?? null,
+                                    $item->company->name ?? null,
                                     $item->location->name ?? null,
+                                    $item->location->company->name ?? null,
                                     $location_company ?? null,
                                 ];
 
