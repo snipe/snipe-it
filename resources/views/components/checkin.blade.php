@@ -62,6 +62,7 @@
                                 :options="[
                                 'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.components')]),
                                 'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.component')]),
+                                'target' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.user')]),
                                ]"
                         />
                     </div> <!-- /.box-->
