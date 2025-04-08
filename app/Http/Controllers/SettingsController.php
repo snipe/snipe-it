@@ -327,7 +327,7 @@ class SettingsController extends Controller
         if ($old_locations_fmcs == '0' && $setting->scope_locations_fmcs == '1') {
             $mismatched = Helper::test_locations_fmcs(false);
             if (count($mismatched) != 0) {
-                return redirect()->back()->withInput()->with('error', trans_choice('admin/settings/message.location_scoping.mismatch', count($mismatched)));
+                return redirect()->back()->withInput()->with('error', trans_choice('admin/settings/message.location_scoping.mismatch', count($mismatched)).' '.trans('admin/settings/message.location_scoping.not_saved'));
             }
         }
 

@@ -38,8 +38,10 @@ class TestLocationsFMCS extends Command
 
         $mismatched = Helper::test_locations_fmcs(true, $location_id);
         $this->warn(trans_choice('admin/settings/message.location_scoping.mismatch', count($mismatched)));
+        $this->newLine();
+        $this->info('Edit your locations to associate them with the correct company.');
 
-        $header = ['Item Type', 'Item ID', 'Item Company ID', 'Location Company ID'];
+        $header = ['Type', 'Name', 'ID', 'Item Company', 'Company ID', 'Item Location', 'Location Company ID'];
         sort($mismatched);
 
         $this->table($header, $mismatched);

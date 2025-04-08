@@ -1597,9 +1597,12 @@ class Helper
                         if ($item && $item->company_id != $location_company) {
                             $mismatched[] = [
                                     class_basename(get_class($item)),
+                                    $item->name,
                                     $item->id,
-                                    $item->company_id,
-                                    $location_company ?? 'null',
+                                    $item->company->name ?? null,
+                                    $item->company_id ?? null,
+                                    $item->location->name ?? null,
+                                    $location_company ?? null,
                                 ];
 
                         }
