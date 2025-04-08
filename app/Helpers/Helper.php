@@ -1563,11 +1563,24 @@ class Helper
                 $location_company = $location->company_id;
             }
 
-            // depending on the relationship we must use different operations to retrieve the objects
-            $keywords_relation = ['many' => ['users', 'assets', 'rtd_assets', 'consumables', 'components', 'accessories', 'assignedAssets', 'assignedAccessories'],
-                                  'one'  => ['parent', 'manager']];
+            // depending on the relationship, we must use different operations to retrieve the objects
+            $keywords_relation = [
+                'many' => [
+                            'users',
+                            'assets',
+                            'rtd_assets',
+                            'consumables',
+                            'components',
+                            'accessories',
+                            'assignedAssets',
+                            'assignedAccessories'
+                        ],
+                    'one'  => [
+                        'parent',
+                        'manager'
+                    ]];
 
-            // In case of a single location the children must be checked either, becuase we don't walk every location
+            // In case of a single location, the children must be checked as well, because we don't walk every location
             if ($location_id) {
                 $keywords_relation['many'][] = 'children';
             }
@@ -1575,14 +1588,20 @@ class Helper
             foreach ($keywords_relation as $relation => $keywords) {
                 foreach($keywords as $keyword) {
                     if ($relation == 'many') {
-                        $items = $location->$keyword->all();
+                        $items = $location->{$keyword}->all();
                     } else {
                         $items = collect([])->push($location->$keyword);
                     }
 
                     foreach ($items as $item) {
                         if ($item && $item->company_id != $location_company) {
-                            $ret[] = 'type: ' . get_class($item) . ', id: ' . $item->id . ', company_id: ' . $item->company_id . ', location company_id: ' . $location_company;
+                            $row[] = [
+                                    $ret['type'] = class_basename(get_class($item)),
+                                    $ret['id'] = $item->id,
+                                    $ret['company_id'] = $item->company_id,
+                                    $ret['location_company_id'] = $location_company ?? 'null',
+                                ];
+
                             // when not called from artisan command we bail out on the first error
                             if (!$artisan) {
                                 return $ret;
@@ -1592,6 +1611,6 @@ class Helper
                 }
             }
         }
-        return $ret;
+        return $row;
     }        
 }
