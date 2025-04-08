@@ -1066,4 +1066,8 @@ code.single-line {
   overflow: hidden;
   max-width: 400px;
 }
+p.monospace,
+span.monospace {
+  font-family: monospace, monospace;
+}
 
