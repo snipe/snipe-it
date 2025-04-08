@@ -10,25 +10,22 @@ class AuditAssetTest extends TestCase
 {
     public function testPermissionRequiredToCreateAssetModel()
     {
-        $asset = Asset::factory()->create();
         $this->actingAs(User::factory()->create())
-            ->get(route('clone/hardware', $asset))
+            ->get(route('clone/hardware', Asset::factory()->create()))
             ->assertForbidden();
     }
 
     public function testPageCanBeAccessed(): void
     {
-        $asset = Asset::factory()->create();
-        $response = $this->actingAs(User::factory()->auditAssets()->create())
-            ->get(route('asset.audit.create', $asset));
-        $response->assertStatus(200);
+        $this->actingAs(User::factory()->auditAssets()->create())
+            ->get(route('asset.audit.create', Asset::factory()->create()))
+            ->assertStatus(200);
     }
 
     public function testAssetCanBeAudited()
     {
-        $asset = Asset::factory()->create(['name'=>'Asset to clone']);
         $this->actingAs(User::factory()->auditAssets()->create())
-            ->post(route('asset.audit.store', $asset))
+            ->post(route('asset.audit.store', Asset::factory()->create()))
             ->assertStatus(302)
             ->assertRedirect(route('assets.audit.due'));
     }
