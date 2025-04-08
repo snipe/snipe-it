@@ -6,6 +6,7 @@ use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\UpdateAssetRequest;
 use App\Models\Actionlog;
 use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Log;
@@ -390,26 +391,26 @@ class AssetsController extends Controller
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
-        // Validation for these fields is handlded through the AssetRequest form request
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
-
-                if ($field->field_encrypted == '1') {
-                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                        } else {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                if ($request->has($field->db_column)) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                            if (is_array($request->input($field->db_column))) {
+                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            } else {
+                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            }
                         }
-                    }
-                } else {
-                    if (is_array($request->input($field->db_column))) {
-                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
                     } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        } else {
+                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
                     }
                 }
             }
@@ -865,13 +866,6 @@ class AssetsController extends Controller
         return view('hardware/quickscan-checkin')->with('statusLabel_list', Helper::statusLabelList());
     }
 
-    public function audit(Asset $asset)
-    {
-        $settings = Setting::getSettings();
-        $this->authorize('audit', Asset::class);
-        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
-        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
-    }
 
     public function dueForAudit()
     {
@@ -888,19 +882,59 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(UploadFileRequest $request, Asset $asset)
+    public function audit(Asset $asset)
     {
+        $settings = Setting::getSettings();
+        $this->authorize('audit', Asset::class);
+        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+        return view('hardware/audit')->with('asset', $asset)->with('item', $asset)->with('next_audit_date', $dt)->with('locations_list');
+    }
+
+    public function auditStore(UpdateAssetRequest $request, Asset $asset)
+    {
+
         $this->authorize('audit', Asset::class);
 
-        $rules = [
-            'location_id' => 'exists:locations,id|nullable|numeric',
-            'next_audit_date' => 'date|nullable',
-        ];
+        $originalValues = $asset->getRawOriginal();
 
-        $validator = Validator::make($request->all(), $rules);
+        $asset->next_audit_date = $request->input('next_audit_date');
+        $asset->last_audit_date = date('Y-m-d H:i:s');
 
-        if ($validator->fails()) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
+        // Check to see if they checked the box to update the physical location,
+        // not just note it in the audit notes
+        if ($request->input('update_location') == '1') {
+            $asset->location_id = $request->input('location_id');
+        }
+
+        // Update custom fields in the database
+        if (($asset->model) && ($asset->model->fieldset)) {
+            foreach ($asset->model->fieldset->fields as $field) {
+                if (($field->display_audit=='1') && ($request->has($field->db_column))) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                            if (is_array($request->input($field->db_column))) {
+                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            } else {
+                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            }
+                        }
+                    } else {
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        } else {
+                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Validate custom fields
+        Validator::make($asset->toArray(), $asset->customFieldValidationRules())->validate();
+
+        // Validate the rest of the data before we turn off the event dispatcher
+        if ($asset->isInvalid()) {
+            return redirect()->back()->withInput()->withErrors($asset->getErrors());
         }
 
         /**
@@ -917,18 +951,11 @@ class AssetsController extends Controller
          * which manually invokes Watson Validating to make sure the asset's model is valid.
          *
          * @see \App\Observers\AssetObserver::updating()
+         * @see \App\Models\Asset::save()
          */
+
         $asset->unsetEventDispatcher();
 
-        $asset->next_audit_date = $request->input('next_audit_date');
-        $asset->last_audit_date = date('Y-m-d H:i:s');
-
-        // Check to see if they checked the box to update the physical location,
-        // not just note it in the audit notes
-        if ($request->input('update_location') == '1') {
-            $asset->location_id = $request->input('location_id');
-        }
-        
 
         /**
          * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
@@ -942,7 +969,7 @@ class AssetsController extends Controller
                 $file_name = $request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('image'));
             }
 
-            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
+            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name, $originalValues);
             return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
 

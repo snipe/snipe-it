@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use App\View\Label;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 
 /**
@@ -1081,22 +1082,6 @@ class AssetsController extends Controller
 
             $originalValues = $asset->getRawOriginal();
 
-            /**
-             * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
-             * which would trigger the Asset Observer and would log an asset *update* log entry (because the
-             * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
-             * the audit log entry we're creating through this controller.
-             *
-             * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
-             * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
-             * will bypass normal model-level validation that's usually handled at the observer )
-             *
-             * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
-             * which manually invokes Watson Validating to make sure the asset's model is valid.
-             *
-             * @see \App\Observers\AssetObserver::updating()
-             */
-            $asset->unsetEventDispatcher();
             $asset->next_audit_date = $dt;
 
             if ($request->filled('next_audit_date')) {
@@ -1125,29 +1110,58 @@ class AssetsController extends Controller
              * Validation for these fields is handled through the AssetRequest form request
              * $model = AssetModel::find($request->get('model_id'));
             */
-
             if (($asset->model) && ($asset->model->fieldset)) {
                 $payload['custom_fields'] = [];
                 foreach ($asset->model->fieldset->fields as $field) {
-                    if ($field->field_encrypted == '1') {
-                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                    if (($field->display_audit=='1') && ($request->has($field->db_column))) {
+                        if ($field->field_encrypted == '1') {
+                            if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                                if (is_array($request->input($field->db_column))) {
+                                    $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                                } else {
+                                    $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                                }
+                            }
+                        } else {
                             if (is_array($request->input($field->db_column))) {
-                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                                $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
                             } else {
-                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                                $asset->{$field->db_column} = $request->input($field->db_column);
                             }
                         }
-                    } else {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
-                        } else {
-                            $asset->{$field->db_column} = $request->input($field->db_column);
-                        }
+                        $payload['custom_fields'][$field->db_column] =  $request->input($field->db_column);
                     }
-                    $payload['custom_fields'][$field->db_column] =  $request->input($field->db_column);
-                }
-            } 
 
+                }
+            }
+
+            // Validate custom fields
+            Validator::make($asset->toArray(), $asset->customFieldValidationRules())->validate();
+
+            // Validate the rest of the data before we turn off the event dispatcher
+            if ($asset->isInvalid()) {
+                return response()->json(Helper::formatStandardApiResponse('error', null,  $asset->getErrors()));
+            }
+
+
+            /**
+             * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
+             * which would trigger the Asset Observer and would log an asset *update* log entry (because the
+             * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
+             * the audit log entry we're creating through this controller.
+             *
+             * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
+             * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
+             * will bypass normal model-level validation that's usually handled at the observer)
+             *
+             * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
+             * which manually invokes Watson Validating to make sure the asset's model is valid.
+             *
+             * @see \App\Observers\AssetObserver::updating()
+             * @see \App\Models\Asset::save()
+             */
+
+             $asset->unsetEventDispatcher();
 
 
             /**
@@ -1159,19 +1173,12 @@ class AssetsController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('success', $payload, trans('admin/hardware/message.audit.success')));
             }
 
-            // Asset failed validation or was not able to be saved
-            return response()->json(Helper::formatStandardApiResponse('error', [
-                'asset_tag' => e($asset->asset_tag),
-                'error' => $asset->getErrors()->first(),
-            ], trans('admin/hardware/message.audit.error', ['error' => $asset->getErrors()->first()])), 200);
         }
 
 
         // No matching asset for the asset tag that was passed.
-        return response()->json(Helper::formatStandardApiResponse('error', [
-            'asset_tag' => e($request->input('asset_tag')),
-            'error' => trans('admin/hardware/message.audit.error'),
-        ], trans('admin/hardware/message.audit.error', ['error' => trans('admin/hardware/message.does_not_exist')])), 200);
+        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/hardware/message.does_not_exist')), 200);
+
     }
 
 
