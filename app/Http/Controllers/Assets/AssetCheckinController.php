@@ -77,6 +77,7 @@ class AssetCheckinController extends Controller
 
         if ($asset->assignedType() == Asset::USER) {
             $user = $asset->assignedTo;
+            session()->put('checkedInBy', $user->id);
         }
 
         $asset->expected_checkin = null;
@@ -133,13 +134,8 @@ class AssetCheckinController extends Controller
         $asset->customFieldsForCheckinCheckout('display_checkin');
 
         if ($asset->save()) {
-            Log::debug([
-                'redirect_option' => $request->get('redirect_option'),
-                'checkout_to_type' => session()->get('checkout_to_type'),
-                'assigned_user' => session()->get('assigned_user'),
-            ]);
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
-            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets', $user->id))->with('success', trans('admin/hardware/message.checkin.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.checkin.success'));
         }
         // Redirect to the asset management page with error
         return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkin.error').$asset->getErrors());

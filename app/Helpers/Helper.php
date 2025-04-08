@@ -1475,11 +1475,19 @@ class Helper
     }
 
 
-    static public function getRedirectOption($request, $id, $table, $checkedInBy=null, $item_id = null)
+    static public function getRedirectOption($request, $id, $table,$item_id = null)
     {
 
         $redirect_option = Session::get('redirect_option');
         $checkout_to_type = Session::get('checkout_to_type');
+        $checkedInBy = Session::get('checkedInBy');
+//        dd([
+//            'called from' => __FILE__,
+//            'line' => __LINE__,
+//            'redirect_option' => Session::get('redirect_option'),
+//            'checkout_to_type' => Session::get('checkout_to_type'),
+//            'target_id_param' => $checkedInBy,
+//        ]);
 
         // return to index
         if ($redirect_option == 'index') {
