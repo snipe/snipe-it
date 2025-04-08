@@ -6,26 +6,26 @@ use App\Models\Company;
 use App\Models\User;
 use Tests\TestCase;
 
-class ViewUserTest extends TestCase
+class PrintUserInventoryTest extends TestCase
 {
-    public function testRequiresPermissionToViewUser()
+    public function testPermissionRequiredToPrintUserInventory()
     {
         $this->actingAs(User::factory()->create())
-            ->get(route('users.show', User::factory()->create()))
+            ->get(route('users.print', User::factory()->create()))
             ->assertStatus(403);
     }
 
-    public function testCanViewUser()
+    public function testCanPrintUserInventory()
     {
         $actor = User::factory()->viewUsers()->create();
 
         $this->actingAs($actor)
-            ->get(route('users.show', User::factory()->create()))
+            ->get(route('users.print', User::factory()->create()))
             ->assertOk()
             ->assertStatus(200);
     }
 
-    public function testCannotViewUserFromAnotherCompany()
+    public function testCannotPrintUserInventoryFromAnotherCompany()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -35,7 +35,7 @@ class ViewUserTest extends TestCase
         $user = User::factory()->for($companyB)->create();
 
         $this->actingAs($actor)
-            ->get(route('users.show', $user))
+            ->get(route('users.print', $user))
             ->assertStatus(302);
     }
 }
