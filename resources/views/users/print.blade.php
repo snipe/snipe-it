@@ -172,7 +172,8 @@
                             <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
                             <td>{{ $asset->serial }}</td>
                             <td>
-                                {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}</td>
+                                {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
+                            </td>
                             <td>
                                 @if (($asset->assetlog->firstWhere('action_type', 'accepted')) && ($asset->assetlog->firstWhere('action_type', 'accepted')->accept_signature!=''))
                                     <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->firstWhere('action_type', 'accepted')->accept_signature }}">
@@ -233,12 +234,14 @@
                     <td>{{ $license->name }}</td>
                     <td>
                         @can('viewKeys', $license)
-                            {{ $license->serial }}
+                            <p class="monospace">{{ $license->serial }}</p>
                         @else
                             <i class="fa-lock" aria-hidden="true"></i> {{ str_repeat('x', 15) }}
                         @endcan
                     </td>
-                    <td>{{  $license->pivot->updated_at }}</td>
+                    <td>
+                        {{ Helper::getFormattedDateObject($license->pivot->updated_at, 'datetime', false) }}
+                    </td>
                     <td>
                         @if (($license->assetlog->firstWhere('action_type', 'accepted')) && ($license->assetlog->firstWhere('action_type', 'accepted')->accept_signature!=''))
                             <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $license->assetlog->firstWhere('action_type', 'accepted')->accept_signature }}">
@@ -300,7 +303,9 @@
                         </td>
                         <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
                         <td>{{ $accessory->category->name }}</td>
-                        <td>{{ $accessory->pivot->created_at }}</td>
+                        <td>
+                            {{ Helper::getFormattedDateObject($accessory->pivot->created_at, 'datetime', false) }}
+                        </td>
 
                         <td>
                             @if (($accessory->assetlog->first()) && ($accessory->assetlog->first()->accept_signature!=''))
@@ -364,7 +369,9 @@
                             @endif
                             </td>
                             <td>{{ ($consumable->category) ? $consumable->category->name : ' invalid/deleted category' }} </td>
-                            <td>{{  $consumable->pivot->created_at }}</td>
+                            <td>
+                                {{ Helper::getFormattedDateObject($consumable->pivot->created_at, 'datetime', false) }}
+                            </td>
                             <td>
                                 @if (($consumable->assetlog->first()) && ($consumable->assetlog->first()->accept_signature!=''))
                                     <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $consumable->assetlog->first()->accept_signature }}">
