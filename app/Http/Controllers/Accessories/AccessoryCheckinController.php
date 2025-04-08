@@ -7,8 +7,6 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
 use App\Models\AccessoryCheckout;
-use App\Models\Asset;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use \Illuminate\Contracts\View\View;
@@ -51,7 +49,7 @@ class AccessoryCheckinController extends Controller
         }
 
         $accessory = Accessory::find($accessory_checkout->accessory_id);
-        $checkedInBy = 0;
+
         if($accessory_checkout->assigned_type === 'App\Models\User') {
             $checkedInBy = $accessory_checkout->assigned_to;
             session()->put('checkout_to_type', 'user');

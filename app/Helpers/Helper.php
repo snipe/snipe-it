@@ -1475,7 +1475,7 @@ class Helper
     }
 
 
-    static public function getRedirectOption($request, $id, $table,$item_id = null)
+    static public function getRedirectOption($request, $id, $table, $item_id = null)
     {
 
         $redirect_option = Session::get('redirect_option');
@@ -1517,6 +1517,7 @@ class Helper
                     return route('consumables.show', $id ?? $item_id);
             }
         }
+
         // return to assignment target
         if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
