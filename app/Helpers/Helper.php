@@ -1475,7 +1475,7 @@ class Helper
     }
 
 
-    static public function getRedirectOption($request, $id, $table, $item_id = null)
+    static public function getRedirectOption($request, $id, $table, $checkedInBy=null, $item_id = null)
     {
 
         $redirect_option = Session::get('redirect_option');
@@ -1516,12 +1516,11 @@ class Helper
                     return route('consumables.show', $id ?? $item_id);
             }
         }
-
         // return to assignment target
         if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
-                    return route('users.show', $request->assigned_user);
+                    return route('users.show', $request->assigned_user ?? $checkedInBy);
                 case 'location':
                     return route('locations.show', $request->assigned_location);
                 case 'asset':
