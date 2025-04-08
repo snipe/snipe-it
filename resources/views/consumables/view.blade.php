@@ -421,7 +421,7 @@
                   {{ trans('general.date') }}
                 </th>
                 <th data-searchable="false" data-sortable="false" data-field="note">{{ trans('general.notes') }}</th>
-                <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.admin') }}</th>
+                <th data-searchable="false" data-sortable="false" data-field="admin">{{ trans('general.created_by') }}</th>
               </tr>
               </thead>
             </table>
@@ -472,7 +472,7 @@
                 <tr>
                   <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
                   <th data-visible="true" data-field="action_date" data-sortable="true" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                  <th data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
                   <th data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
                   <th data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>

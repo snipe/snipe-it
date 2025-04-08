@@ -385,6 +385,12 @@ class UserFactory extends Factory
         return $this->appendPermission(['suppliers.delete' => '1']);
     }
 
+    public function auditAssets()
+    {
+        return $this->appendPermission(['assets.audit' => '1']);
+    }
+
+
     private function appendPermission(array $permission)
     {
         return $this->state(function ($currentState) use ($permission) {

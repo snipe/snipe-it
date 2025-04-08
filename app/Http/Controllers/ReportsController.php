@@ -243,7 +243,7 @@ class ReportsController extends Controller
 
             $header = [
                 trans('general.date'),
-                trans('general.admin'),
+                trans('general.created_by'),
                 trans('general.action'),
                 trans('general.type'),
                 trans('general.item'),

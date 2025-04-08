@@ -142,7 +142,7 @@
             var formData = $('#audit-form').serializeArray();
 
             $.ajax({
-                url: "{{ route('api.asset.audit') }}",
+                url: "{{ route('api.asset.audit.legacy') }}",
                 type : 'POST',
                 headers: {
                     "X-Requested-With": 'XMLHttpRequest',
