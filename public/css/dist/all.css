@@ -22770,6 +22770,10 @@ code.single-line {
   overflow: hidden;
   max-width: 400px;
 }
+p.monospace,
+span.monospace {
+  font-family: monospace, monospace;
+}
 
 
 .select2-container {
@@ -24321,5 +24325,9 @@ code.single-line {
   -webkit-line-clamp: 1;
   overflow: hidden;
   max-width: 400px;
+}
+p.monospace,
+span.monospace {
+  font-family: monospace, monospace;
 }
 
