@@ -309,6 +309,7 @@ trait Loggable
             $log->item_id = $this->id;
         }
         $log->location_id = null;
+        $log->action_date = date('Y-m-d H:i:s');
         $log->note = $note;
         $log->created_by = $created_by;
         $log->logaction('create');
@@ -336,6 +337,7 @@ trait Loggable
         $log->note = $note;
         $log->target_id = null;
         $log->created_at = date('Y-m-d H:i:s');
+        $log->action_date = date('Y-m-d H:i:s');
         $log->filename = $filename;
         $log->logaction('uploaded');
 
