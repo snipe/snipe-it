@@ -22510,7 +22510,8 @@ th.css-history > .th-inner::before {
   padding: 6px 12px;
   height: 34px;
 }
-.form-group.has-error label {
+.form-group.has-error label,
+.form-group.has-error .help-block {
   color: #a94442;
 }
 .select2-container--default .select2-selection--multiple {
@@ -24061,7 +24062,8 @@ th.css-history > .th-inner::before {
   padding: 6px 12px;
   height: 34px;
 }
-.form-group.has-error label {
+.form-group.has-error label,
+.form-group.has-error .help-block {
   color: #a94442;
 }
 .select2-container--default .select2-selection--multiple {
