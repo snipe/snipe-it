@@ -1597,12 +1597,16 @@ class Helper
 
                         if ($item && $item->company_id != $location_company) {
                             $mismatched[] = [
-                                    $item->id,
                                     class_basename(get_class($item)),
+                                    $item->id,
                                     $item->name ?? $item->asset_tag ?? $item->serial ?? $item->username,
                                     str_replace('App\\Models\\', '', $item->assigned_type) ?? null,
                                     $item->company_id ?? null,
                                     $item->company->name ?? null,
+//                                    $item->defaultLoc->id ?? null,
+//                                    $item->defaultLoc->name ?? null,
+//                                    $item->defaultLoc->company->id ?? null,
+//                                    $item->defaultLoc->company->name ?? null,
                                     $item->location->name ?? null,
                                     $item->location->company->name ?? null,
                                     $location_company ?? null,

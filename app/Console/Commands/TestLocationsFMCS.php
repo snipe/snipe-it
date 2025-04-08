@@ -41,7 +41,7 @@ class TestLocationsFMCS extends Command
         $this->newLine();
         $this->info('Edit your locations to associate them with the correct company.');
 
-        $header = ['ID', 'Type', 'Name', 'Checkout Type',  'Company ID', 'Item Company','Item Location', 'Location Company', 'Location Company ID'];
+        $header = ['Type', 'ID', 'Name', 'Checkout Type',  'Company ID', 'Item Company', 'Item Location', 'Location Company', 'Location Company ID'];
         sort($mismatched);
 
         $this->table($header, $mismatched);
