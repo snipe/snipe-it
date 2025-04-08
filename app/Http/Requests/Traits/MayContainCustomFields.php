@@ -11,12 +11,10 @@ trait MayContainCustomFields
     public function withValidator($validator)
     {
 
+        // In case the model is being changed via form
+        if (request()->has('model_id')!='') {
 
-        // For auditing and some other non-standard things where $this is only the form submission and may not have the asset info
-        // In case the model is being changed
-        if (request()->input('model_id')!='') {
-
-            $asset_model = AssetModel::find(request()->route('asset')->model_id);
+            $asset_model = AssetModel::find(request()->input('model_id'));
 
         // or if we have it available to route-model-binding
         } elseif ((request()->route('asset') && (request()->route('asset')->model_id))) {
