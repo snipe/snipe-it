@@ -36,10 +36,14 @@ class TestLocationsFMCS extends Command
             $location_id = $this->option('location_id');
         }
 
+        $mismatched = Helper::test_locations_fmcs(true, $location_id);
+        $this->warn(trans_choice('admin/settings/message.location_scoping.mismatch', count($mismatched)));
 
-        $ret = Helper::test_locations_fmcs(true, $location_id);
-        $this->warn('There are '.count($ret).' items in the database that need your attention before you can enable location scoping.');
-        $this->table(['Item Type', 'Item ID', 'Item Company ID', 'Location Company ID'], $ret);
+        $header = ['Item Type', 'Item ID', 'Item Company ID', 'Location Company ID'];
+        sort($mismatched);
+
+        $this->table($header, $mismatched);
 
     }
+
 }
