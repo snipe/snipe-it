@@ -436,12 +436,6 @@ class AssetsController extends Controller
             }]);
         }
 
-
-
-        /**
-         * Here we're just determining which Transformer (via $transformer) to use based on the 
-         * variables we set earlier on in this method - we default to AssetsTransformer.
-         */
         return (new $transformer)->transformAssets($assets, $total, $request);
     }
 
