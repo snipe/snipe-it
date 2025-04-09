@@ -22,7 +22,6 @@ permissions:
 jobs:
   docker:
     # Ensure this job never runs on forked repos. It's only executed for 'snipe/snipe-it'
-    if: github.repository == 'snipe/snipe-it'
     runs-on: ubuntu-latest
     env:
       # Define tags to use for Docker images based on Git tags/branches (for docker/metadata-action)
