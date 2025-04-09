@@ -87,7 +87,7 @@ class LicenseCheckinController extends Controller
 
         if($licenseSeat->assigned_to != null){
             $return_to = User::find($licenseSeat->assigned_to);
-            session()->put('checkedInBy', $return_to->id);
+            session()->put('checkedInFrom', $return_to->id);
         } else {
             $return_to = Asset::find($licenseSeat->asset_id);
         }

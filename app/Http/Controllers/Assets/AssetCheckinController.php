@@ -40,8 +40,12 @@ class AssetCheckinController extends Controller
         if (!$asset->model) {
             return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
-
-        return view('hardware/checkin', compact('asset'))
+        $target_option = match ($asset->assigned_type) {
+            'App\Models\Asset' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset_previous')]),
+            'App\Models\Location' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.location')]),
+            default => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.user')]),
+        };
+        return view('hardware/checkin', compact('asset', 'target_option'))
             ->with('item', $asset)
             ->with('statusLabel_list', Helper::statusLabelList())
             ->with('backto', $backto)
@@ -75,10 +79,12 @@ class AssetCheckinController extends Controller
 
         $this->authorize('checkin', $asset);
 
-        if ($asset->assignedType() == Asset::USER) {
-            $user = $asset->assignedTo;
-            session()->put('checkedInBy', $user->id);
-        }
+        session()->put('checkedInFrom', $asset->assignedTo->id);
+        session()->put('checkout_to_type', match ($asset->assigned_type) {
+            'App\Models\User' => 'user',
+            'App\Models\Location' => 'location',
+            'App\Models\Asset' => 'asset',
+        });
 
         $asset->expected_checkin = null;
         $asset->last_checkin = now();

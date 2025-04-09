@@ -1480,7 +1480,7 @@ class Helper
 
         $redirect_option = Session::get('redirect_option');
         $checkout_to_type = Session::get('checkout_to_type');
-        $checkedInBy = Session::get('checkedInBy');
+        $checkedInFrom = Session::get('checkedInFrom');
 
         // return to index
         if ($redirect_option == 'index') {
@@ -1522,11 +1522,11 @@ class Helper
         if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
-                    return route('users.show', $request->assigned_user ?? $checkedInBy);
+                    return route('users.show', $request->assigned_user ?? $checkedInFrom);
                 case 'location':
-                    return route('locations.show', $request->assigned_location);
+                    return route('locations.show', $request->assigned_location ?? $checkedInFrom);
                 case 'asset':
-                    return route('hardware.show', $request->assigned_asset);
+                    return route('hardware.show', $request->assigned_asset ?? $checkedInFrom);
             }
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));

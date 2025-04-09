@@ -29,9 +29,17 @@ class AccessoryCheckinController extends Controller
         }
 
         $accessory = Accessory::find($accessory_user->accessory_id);
+
+        //based on what the accessory is checked out to the target redirect option will be displayed accordingly.
+        $target_option = match ($accessory_user->assigned_type) {
+            'App\Models\Asset' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset')]),
+            'App\Models\Location' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.location')]),
+            default => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.user')]),
+        };
         $this->authorize('checkin', $accessory);
 
-        return view('accessories/checkin', compact('accessory'))->with('backto', $backto);
+        return view('accessories/checkin', compact('accessory', 'target_option'))->with('backto', $backto);
+
     }
 
     /**
@@ -50,10 +58,12 @@ class AccessoryCheckinController extends Controller
 
         $accessory = Accessory::find($accessory_checkout->accessory_id);
 
-        if($accessory_checkout->assigned_type === 'App\Models\User') {
-            session()->put('checkout_to_type', 'user');
-            session()->put('checkedInBy', $accessory_checkout->assigned_to);
-        }
+        session()->put('checkedInFrom', $accessory_checkout->assigned_to);
+        session()->put('checkout_to_type', match ($accessory_checkout->assigned_type) {
+            'App\Models\User' => 'user',
+            'App\Models\Location' => 'location',
+            'App\Models\Asset' => 'asset',
+        });
 
         $this->authorize('checkin', $accessory);
         $checkin_hours = date('H:i:s');

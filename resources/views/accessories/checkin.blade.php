@@ -77,7 +77,7 @@
                                 :options="[
                                 'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.accessories')]),
                                 'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.accessory')]),
-                                'target' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.user')]),
+                                'target' => $target_option
                                ]"
                         />
 
