@@ -9,7 +9,7 @@ on:
       - master
       - sixtyhertz
     tags:
-      - 'v**'
+      - "v**"
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -32,7 +32,7 @@ jobs:
         type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=-alpine
         type=ref,event=branch,enable=${{ !endsWith(github.ref, github.event.repository.default_branch) }},suffix=-alpine
         type=ref,event=tag,suffix=-alpine
-        type=semver,pattern=v{{major}}-latest-alpine 
+        type=semver,pattern=v{{major}}-latest-alpine
       # Define default tag "flavor" for docker/metadata-action per
       # https://github.com/docker/metadata-action#flavor-input
       # We turn off 'latest' tag by default.

@@ -1,41 +1,41 @@
 FROM alpine:3.19
 # Apache + PHP
 RUN  apk add --no-cache \
-        apache2 \
-        php82 \
-        php82-common \
-        php82-apache2 \
-        php82-curl \
-        php82-ldap \
-        php82-mysqli \
-        php82-gd \
-        php82-xml \
-        php82-mbstring \
-        php82-zip \
-        php82-ctype \
-        php82-tokenizer \
-        php82-pdo_mysql \
-        php82-openssl \
-        php82-bcmath \
-        php82-phar \
-        php82-json \
-        php82-iconv \
-        php82-fileinfo \
-        php82-simplexml \
-        php82-session \
-        php82-dom \
-        php82-xmlwriter \
-        php82-xmlreader \
-        php82-sodium \
-        php82-redis \
-        php82-pecl-memcached \
-        php82-exif \
-        curl \
-        wget \
-        vim \
-        git \
-        mysql-client \
-        tini
+    apache2 \
+    php82 \
+    php82-common \
+    php82-apache2 \
+    php82-curl \
+    php82-ldap \
+    php82-mysqli \
+    php82-gd \
+    php82-xml \
+    php82-mbstring \
+    php82-zip \
+    php82-ctype \
+    php82-tokenizer \
+    php82-pdo_mysql \
+    php82-openssl \
+    php82-bcmath \
+    php82-phar \
+    php82-json \
+    php82-iconv \
+    php82-fileinfo \
+    php82-simplexml \
+    php82-session \
+    php82-dom \
+    php82-xmlwriter \
+    php82-xmlreader \
+    php82-sodium \
+    php82-redis \
+    php82-pecl-memcached \
+    php82-exif \
+    curl \
+    wget \
+    vim \
+    git \
+    mysql-client \
+    tini
 
 COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
 
@@ -45,8 +45,9 @@ RUN mkdir -p /run/apache2 && chown apache:apache /run/apache2
 RUN sed -i 's/variables_order = .*/variables_order = "EGPCS"/' /etc/php82/php.ini
 COPY  docker/000-default-2.4.conf /etc/apache2/conf.d/default.conf
 
-# Enable mod_rewrite
-RUN sed -i '/LoadModule rewrite_module/s/^#//g' /etc/apache2/httpd.conf
+# Enable mod_rewrite and set listen port
+RUN sed -i '/LoadModule rewrite_module/s/^#//g' /etc/apache2/httpd.conf \
+    && echo 'Listen 8000' >> /etc/apache2/httpd.conf
 
 COPY . /var/www/html
 
@@ -57,8 +58,8 @@ COPY docker/docker.env /var/www/html/.env
 RUN chown -R apache:apache /var/www/html
 
 RUN \
-	rm -r "/var/www/html/storage/private_uploads" \
-	&& mkdir -p "/var/lib/snipeit/data/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
+    rm -r "/var/www/html/storage/private_uploads" \
+    && mkdir -p "/var/lib/snipeit/data/private_uploads" && ln -fs "/var/lib/snipeit/data/private_uploads" "/var/www/html/storage/private_uploads" \
     && rm -rf "/var/www/html/public/uploads" \
     && mkdir -p "/var/lib/snipeit/data/uploads" && ln -fs "/var/lib/snipeit/data/uploads" "/var/www/html/public/uploads" \
     && mkdir -p "/var/lib/snipeit/dumps" && rm -r "/var/www/html/storage/app/backups" && ln -fs "/var/lib/snipeit/dumps" "/var/www/html/storage/app/backups" \
