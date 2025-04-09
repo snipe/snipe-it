@@ -107,7 +107,7 @@
                     <!-- Email format -->
                     <div class="form-group {{ $errors->has('email_format') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            <label for="email_format">{{ trans('general.email_format') }}</label>
+                            <label for="email_format">{{ trans('admin/settings/general.email_formats.email_format') }}</label>
                         </div>
                         <div class="col-md-9">
                             {!! Form::email_format('email_format', old('email_format', $setting->email_format), 'select2') !!}
@@ -118,7 +118,7 @@
                     <!-- Username format -->
                     <div class="form-group {{ $errors->has('username_format') ? 'error' : '' }}">
                         <div class="col-md-3">
-                            <label for="username_format">{{ trans('general.username_format') }}</label>
+                            <label for="username_format">{{ trans('admin/settings/general.username_formats.username_format') }}</label>
                         </div>
                         <div class="col-md-9">
                             {!! Form::username_format('username_format', old('username_format', $setting->username_format), 'select2') !!}
