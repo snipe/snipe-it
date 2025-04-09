@@ -122,10 +122,17 @@ class Component extends SnipeModel
      */
     public function uploads()
     {
-        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')
+        return $this->hasMany(Actionlog::class, 'item_id')
             ->where('item_type', '=', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
+            ->whereNotIn('filename', function ($query) {
+                $query->select('filename')
+                    ->from('action_logs')
+                    ->where('item_type', '=', self::class)
+                    ->where('action_type', '=', 'upload deleted')
+                    ->where('item_id', $this->id);
+            })
             ->orderBy('created_at', 'desc');
     }
 
@@ -226,7 +233,7 @@ class Component extends SnipeModel
      */
     public function assetlog()
     {
-        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany(Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**

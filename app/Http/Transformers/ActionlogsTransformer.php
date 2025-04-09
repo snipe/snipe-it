@@ -57,7 +57,7 @@ class ActionlogsTransformer
         }
 
         if ($actionlog->filename!='') {
-            $icon =  Helper::filetype_icon($actionlog->filename);
+            $icon =  $actionlog->action_type === 'upload deleted' ? 'fas fa-trash' : Helper::filetype_icon($actionlog->filename);
         }
 
         // This is necessary since we can't escape special characters within a JSON object
