@@ -32,6 +32,22 @@ class UserTest extends TestCase
         $this->assertEquals($expected_email, $user['username'] . '@example.com');
     }
 
+    public function testLastName()
+    {
+        $fullname = "Natalia Allanovna Romanova-O'Shostakova";
+        $expected_username = 'allanovna-romanova-oshostakova';
+        $user = User::generateFormattedNameFromFullName($fullname, 'lastname');
+        $this->assertEquals($expected_username, $user['username']);
+    }
+
+    public function testLastNameEmail()
+    {
+        $fullname = "Natalia Allanovna Romanova-O'Shostakova";
+        $expected_username = 'allanovna-romanova-oshostakova@example.com';
+        $user = User::generateFormattedNameFromFullName($fullname, 'lastname');
+        $this->assertEquals($expected_username, $user['username'] . '@example.com');
+    }
+
     public function testFirstNameDotLastName()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
