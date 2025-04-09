@@ -66,6 +66,7 @@ class LocationsController extends Controller
     public function store(ImageUploadRequest $request) : RedirectResponse
     {
         $this->authorize('create', Location::class);
+        
         $location = new Location();
         $location->name = $request->input('name');
         $location->parent_id = $request->input('parent_id', null);
@@ -150,7 +151,7 @@ class LocationsController extends Controller
         if (Setting::getSettings()->scope_locations_fmcs) {
             $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
             // check if there are related objects with different company
-            if (Helper::test_locations_fmcs(false, $locationId, $location->company_id)) {
+            if (Helper::test_locations_fmcs(false, $location->id, $location->company_id)) {
                 return redirect()->back()->withInput()->withInput()->with('error', 'error scoped locations');
             }            
         } else {
@@ -176,6 +177,7 @@ class LocationsController extends Controller
     public function destroy($locationId) : RedirectResponse
     {
         $this->authorize('delete', Location::class);
+
         if (is_null($location = Location::find($locationId))) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.does_not_exist'));
         }
@@ -212,6 +214,8 @@ class LocationsController extends Controller
      */
     public function show(Location $location) : View | RedirectResponse
     {
+        $this->authorize('view', Location::class);
+
         $location = Location::withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
             ->withCount('rtd_assets as rtd_assets_count')
@@ -229,6 +233,8 @@ class LocationsController extends Controller
 
     public function print_assigned($id) : View | RedirectResponse
     {
+        $this->authorize('view', Location::class);
+
         if ($location = Location::where('id', $id)->first()) {
             $parent = Location::where('id', $location->parent_id)->first();
             $manager = User::where('id', $location->manager_id)->first();
@@ -313,6 +319,7 @@ class LocationsController extends Controller
     }
     public function print_all_assigned($id) : View | RedirectResponse
     {
+        $this->authorize('view', Location::class);
         if ($location = Location::where('id', $id)->first()) {
             $parent = Location::where('id', $location->parent_id)->first();
             $manager = User::where('id', $location->manager_id)->first();
@@ -339,6 +346,8 @@ class LocationsController extends Controller
      */
     public function postBulkDelete(Request $request) : View | RedirectResponse
     {
+        $this->authorize('update', Location::class);
+
         $locations_raw_array = $request->input('ids');
 
         // Make sure some IDs have been selected
@@ -372,6 +381,8 @@ class LocationsController extends Controller
      */
     public function postBulkDeleteStore(Request $request) : RedirectResponse
     {
+        $this->authorize('delete', Location::class);
+
         $locations_raw_array = $request->input('ids');
 
         if ((is_array($locations_raw_array)) && (count($locations_raw_array) > 0)) {
