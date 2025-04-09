@@ -48,7 +48,7 @@
     <div class="col-md-9 col-md-offset-3">
         <label id="{{ $logoId }}-deleteCheckbox" for="{{ $logoClearVariable }}" style="font-weight: normal" class="form-control">
             <input type="checkbox" name="{{ $logoClearVariable }}" value="1" @checked(old($logoClearVariable))>
-            Remove current {{ $logoLabel }} image
+            {{ trans('general.remove_current_image', ['type' => $logoLabel]) }}
         </label>
     </div>
     @endif

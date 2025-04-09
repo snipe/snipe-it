@@ -623,5 +623,6 @@ return [
     'deleted_models' => 'Deleted Asset Models',
     'deleted_users' => 'Deleted Users',
     'cost_each' => ':amount each',
+    'remove_current_image' => 'Remove current :type image',
 
 ];
