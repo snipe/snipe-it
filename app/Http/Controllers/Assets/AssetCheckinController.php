@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Assets;
 use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Assets\AssetsController;
 use App\Http\Requests\AssetCheckinRequest;
 use App\Http\Traits\MigratesLegacyAssetLocations;
 use App\Models\Asset;
@@ -75,6 +76,10 @@ class AssetCheckinController extends Controller
 
         $this->authorize('checkin', $asset);
 
+        if($request->filled('audit_on_checkinout') == "1") {
+            $this->authorize('audit', Asset::class);
+        }
+
         if ($asset->assignedType() == Asset::USER) {
             $user = $asset->assignedTo;
         }
@@ -133,7 +138,9 @@ class AssetCheckinController extends Controller
         $asset->customFieldsForCheckinCheckout('display_checkin');
 
         if ($asset->save()) {
-
+            if($request->filled('audit_on_checkinout') == "1") {
+                $asset->logAudit($request->input('note'),$request->input('location_id'));
+            }
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
             return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.checkin.success'));
         }

@@ -156,7 +156,8 @@
                             </div>
                         </div>
 
-                        <!-- Log an audit checkbox -->
+                        @can("audit")
+                                        <!-- Log an audit checkbox -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label" >
                                 <label>
@@ -172,6 +173,7 @@
                             </div>
                         </div>
                         <!-- /.form-group -->
+                        @endcan
 
                     </div> <!--/.box-body-->
                 </div> <!--/.box-body-->
