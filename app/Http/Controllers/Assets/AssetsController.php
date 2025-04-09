@@ -190,7 +190,7 @@ class AssetsController extends Controller
             if ($asset->isValid() && $asset->save()) {
                 $target = null;
                 $location = null;
-                request()->merge(['assigned_asset' => -1]);
+
                 if ($userId = request('assigned_user')) {
                     $target = User::find($userId);
 
