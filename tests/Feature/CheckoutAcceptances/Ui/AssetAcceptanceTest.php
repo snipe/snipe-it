@@ -88,6 +88,31 @@ class AssetAcceptanceTest extends TestCase
         Event::assertDispatched(CheckoutAccepted::class);
     }
 
+    public function testUserCanDeclineAsset()
+    {
+        Event::fake([CheckoutAccepted::class]);
+
+        $checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
+
+        $this->assertTrue($checkoutAcceptance->isPending());
+
+        $this->actingAs($checkoutAcceptance->assignedTo)
+            ->post(route('account.store-acceptance', $checkoutAcceptance), [
+                'asset_acceptance' => 'declined',
+                'note' => 'my note',
+            ])
+            ->assertRedirectToRoute('account.accept')
+            ->assertSessionHas('success');
+
+        $checkoutAcceptance->refresh();
+
+        $this->assertFalse($checkoutAcceptance->isPending());
+        $this->assertNull($checkoutAcceptance->accepted_at);
+        $this->assertNotNull($checkoutAcceptance->declined_at);
+
+        Event::assertNotDispatched(CheckoutAccepted::class);
+    }
+
     public function testActionLoggedWhenAcceptingAsset()
     {
         $checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
