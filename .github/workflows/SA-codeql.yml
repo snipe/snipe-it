@@ -13,6 +13,8 @@ on:
 
 jobs:
   analyze:
+    # Ensure this job only runs on snipe/snipe-it repository
+    if: github.repository == 'snipe/snipe-it'
     name: CodeQL Security Scan
     runs-on: ubuntu-latest
     permissions:

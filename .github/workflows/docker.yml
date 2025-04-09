@@ -7,9 +7,9 @@ on:
   push:
     branches:
       - master
-      - develop
+      - sixtyhertz
     tags:
-      - 'v**'
+      - "v**"
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -21,7 +21,8 @@ permissions:
 
 jobs:
   docker:
-    # Run in any repository that has this workflow
+    # Ensure this job only runs on snipe/snipe-it repository
+    if: github.repository == 'snipe/snipe-it'
     runs-on: ubuntu-latest
     env:
       # Define tags to use for Docker images based on Git tags/branches (for docker/metadata-action)

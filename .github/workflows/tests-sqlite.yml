@@ -9,6 +9,8 @@ on:
 
 jobs:
   tests:
+    # Ensure this job only runs on snipe/snipe-it repository
+    if: github.repository == 'snipe/snipe-it'
     runs-on: ubuntu-latest
 
     strategy:
