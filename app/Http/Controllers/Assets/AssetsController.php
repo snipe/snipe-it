@@ -190,12 +190,12 @@ class AssetsController extends Controller
             if ($asset->isValid() && $asset->save()) {
                 $target = null;
                 $location = null;
-
+                request()->merge(['assigned_asset' => -1]);
                 if ($userId = request('assigned_user')) {
                     $target = User::find($userId);
 
                     if (!$target) {
-                        return redirect()->back()->with('error', trans('admin/hardware/message.create.target_not_found.user'));
+                        return redirect()->back()->withInput()->with('error', trans('admin/hardware/message.create.target_not_found.user'));
                     }
                     $location = $target->location_id;
 
@@ -203,7 +203,7 @@ class AssetsController extends Controller
                     $target = Asset::find($assetId);
 
                     if (!$target) {
-                        return redirect()->back()->with('error', trans('admin/hardware/message.create.target_not_found.asset'));
+                        return redirect()->back()->withInput()->with('error', trans('admin/hardware/message.create.target_not_found.asset'));
                     }
                     $location = $target->location_id;
 
@@ -211,7 +211,7 @@ class AssetsController extends Controller
                     $target = Location::find($locationId);
 
                     if (!$target) {
-                        return redirect()->back()->with('error', trans('admin/hardware/message.create.target_not_found.location'));
+                        return redirect()->back()->withInput()->with('error', trans('admin/hardware/message.create.target_not_found.location'));
                     }
                     $location = $target->id;
                 }
