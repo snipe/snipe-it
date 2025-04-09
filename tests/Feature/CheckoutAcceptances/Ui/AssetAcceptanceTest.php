@@ -3,6 +3,8 @@
 namespace Tests\Feature\CheckoutAcceptances\Ui;
 
 use App\Events\CheckoutAccepted;
+use App\Models\Actionlog;
+use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
@@ -84,6 +86,25 @@ class AssetAcceptanceTest extends TestCase
 
     public function testActionLoggedWhenAcceptingAsset()
     {
-        $this->markTestIncomplete();
+        $checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
+
+        $this->actingAs($checkoutAcceptance->assignedTo)
+            ->post(route('account.store-acceptance', $checkoutAcceptance), [
+                'asset_acceptance' => 'accepted',
+                'note' => 'my note',
+            ]);
+
+        $this->assertTrue(Actionlog::query()
+            ->where([
+                'action_type' => 'accepted',
+                'target_id' => $checkoutAcceptance->assignedTo->id,
+                'target_type' => User::class,
+                'note' => 'my note',
+                'item_type' => Asset::class,
+                'item_id' => $checkoutAcceptance->checkoutable->id,
+            ])
+            ->whereNotNull('action_date')
+            ->exists()
+        );
     }
 }
