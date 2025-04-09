@@ -63,7 +63,7 @@ class AssetAcceptanceTest extends TestCase
         Event::assertNotDispatched(CheckoutAccepted::class);
     }
 
-    public function testUserCanAcceptAssetCheckout()
+    public function testUserCanAcceptAsset()
     {
         Event::fake([CheckoutAccepted::class]);
 
