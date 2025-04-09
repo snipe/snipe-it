@@ -136,4 +136,28 @@ class AssetAcceptanceTest extends TestCase
             ->exists()
         );
     }
+
+    public function testActionLoggedWhenDecliningAsset()
+    {
+        $checkoutAcceptance = CheckoutAcceptance::factory()->pending()->create();
+
+        $this->actingAs($checkoutAcceptance->assignedTo)
+            ->post(route('account.store-acceptance', $checkoutAcceptance), [
+                'asset_acceptance' => 'declined',
+                'note' => 'my note',
+            ]);
+
+        $this->assertTrue(Actionlog::query()
+            ->where([
+                'action_type' => 'declined',
+                'target_id' => $checkoutAcceptance->assignedTo->id,
+                'target_type' => User::class,
+                'note' => 'my note',
+                'item_type' => Asset::class,
+                'item_id' => $checkoutAcceptance->checkoutable->id,
+            ])
+            ->whereNotNull('action_date')
+            ->exists()
+        );
+    }
 }
