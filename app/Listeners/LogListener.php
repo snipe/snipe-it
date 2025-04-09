@@ -65,6 +65,7 @@ class LogListener
         $logaction->filename = $event->acceptance->stored_eula_file;
         $logaction->note = $event->acceptance->note;
         $logaction->action_type = 'accepted';
+        $logaction->action_date = $event->acceptance->accepted_at;
 
         // TODO: log the actual license seat that was checked out
         if ($event->acceptance->checkoutable instanceof LicenseSeat) {
