@@ -161,6 +161,23 @@
                             </div>
                         </div>
 
+                        <!-- Log an audit checkbox -->
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label" >
+                                <label>
+                                    {{ trans('admin/settings/general.audit_on_checkinout') }}
+                                </label>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-control">
+                                    <input type="checkbox" value="1" name="audit_on_checkinout" {{ (old('audit_on_checkinout')) == '1' ? ' checked="checked"' : '' }} aria-label="audit_on_checkinout">
+                                    {{ trans('general.yes') }}
+                                </label>
+                                <p class="help-block">{{ trans('admin/settings/general.audit_on_checkinout_help_text')  . " " .  trans('general.checkout') . "." }}</p>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+
                         @if ($asset->requireAcceptance() || $asset->getEula() || ($snipeSettings->webhook_endpoint!=''))
                             <div class="form-group notification-callout">
                                 <div class="col-md-8 col-md-offset-3">
