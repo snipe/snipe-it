@@ -1,4 +1,4 @@
-# Snipe-IT Docker image build for hub.docker.com
+# Snipe-IT Docker image build for AWS ECR
 name: Docker images
 
 # Run this Build for all pushes to 'master' or develop branch, or tagged releases.
@@ -17,11 +17,11 @@ on:
 
 permissions:
   contents: read
+  id-token: write
 
 jobs:
   docker:
-    # Ensure this job never runs on forked repos. It's only executed for 'snipe/snipe-it'
-    if: github.repository == 'snipe/snipe-it'
+    # Run in any repository that has this workflow
     runs-on: ubuntu-latest
     env:
       # Define tags to use for Docker images based on Git tags/branches (for docker/metadata-action)
@@ -48,25 +48,29 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # https://github.com/docker/login-action
-      - name: Login to DockerHub
-        # Only login if not a PR, as PRs only trigger a Docker build and not a push
+      # Configure AWS credentials using OIDC
+      - name: Configure AWS credentials
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v3
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Login to Amazon ECR
+      - name: Login to Amazon ECR
+        if: github.event_name != 'pull_request'
+        uses: aws-actions/amazon-ecr-login@v2
 
       ###############################################
-      # Build/Push the 'snipe/snipe-it' image
+      # Build/Push to Amazon ECR
       ###############################################
       # https://github.com/docker/metadata-action
       # Get Metadata for docker_build step below
-      - name: Sync metadata (tags, labels) from GitHub to Docker for 'snipe-it' image
+      - name: Sync metadata (tags, labels) from GitHub to ECR
         id: meta_build
         uses: docker/metadata-action@v5
         with:
-          images: snipe/snipe-it
+          images: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/snipe-it
           tags: ${{ env.IMAGE_TAGS }}
           flavor: ${{ env.TAGS_FLAVOR }}
 
