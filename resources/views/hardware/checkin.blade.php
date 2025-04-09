@@ -144,10 +144,42 @@
                                                 'show_display_checkin_fields' => 'true'
                                         ])
 
+                @if($snipeSettings->audit_on_checkinout){
+                                        <!-- Show last audit date -->
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3">
+                                                {{ trans('general.last_audit') }}
+                                            </label>
+                                            <div class="col-md-8">
+
+                                                <p class="form-control-static">
+                                                    @if ($asset->last_audit_date)
+                                                        {{ Helper::getFormattedDateObject($asset->last_audit_date, 'datetime', false) }}
+                                                    @else
+                                                        {{ trans('admin/settings/general.none') }}
+                                                    @endif
+                                                </p>
+                                            </div>
+                                        </div>
 
 
+                                        <!-- Next Audit -->
+                                        <div class="form-group{{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
+                                            <label for="next_audit_date" class="col-sm-3 control-label">
+                                                {{ trans('general.next_audit_date') }}
+                                            </label>
+                                            <div class="col-md-8">
+                                                <div class="input-group date col-md-5" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-date-clear-btn="true">
+                                                    <input type="text" class="form-control" placeholder="{{ trans('general.next_audit_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date', $next_audit_date) }}">
+                                                    <span class="input-group-addon"><x-icon type="calendar" /></span>
+                                                </div>
+                                                {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                                <p class="help-block">{!! trans('general.next_audit_date_help') !!}</p>
+                                            </div>
+                                        </div>
 
 
+} @endif
 
 
                         <!-- Note -->
