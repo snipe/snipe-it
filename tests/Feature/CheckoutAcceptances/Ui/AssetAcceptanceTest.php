@@ -79,7 +79,11 @@ class AssetAcceptanceTest extends TestCase
             ->assertRedirectToRoute('account.accept')
             ->assertSessionHas('success');
 
-        $this->assertFalse($checkoutAcceptance->fresh()->isPending());
+        $checkoutAcceptance->refresh();
+
+        $this->assertFalse($checkoutAcceptance->isPending());
+        $this->assertNotNull($checkoutAcceptance->accepted_at);
+        $this->assertNull($checkoutAcceptance->declined_at);
 
         Event::assertDispatched(CheckoutAccepted::class);
     }
