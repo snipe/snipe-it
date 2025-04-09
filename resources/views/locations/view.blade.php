@@ -461,6 +461,9 @@
               @if ($location->manager)
                   <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
               @endif
+              @if ($location->company)
+                  <li>{{ trans('admin/companies/table.name') }}: {!! $location->company->present()->nameUrl() !!}</li>
+              @endif
               @if ($location->parent)
                   <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
               @endif

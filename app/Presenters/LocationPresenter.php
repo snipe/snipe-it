@@ -25,7 +25,17 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.id'),
                 'visible' => false,
-            ], [
+            ],
+            [
+                'field' => 'company',
+                'searchable' => true,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.company'),
+                'visible' => false,
+                'formatter' => 'locationCompanyObjFilterFormatter'
+            ],
+            [
                 'field' => 'name',
                 'searchable' => true,
                 'sortable' => true,

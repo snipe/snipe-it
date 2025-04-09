@@ -149,6 +149,8 @@ return [
     'logo_print_assets_help'    => 'Use branding on printable asset lists ',
     'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
+    'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
+    'scope_locations_fmcs_support_help_text'  => 'Up until Version 7.0 locations were not restricted to the users company. If this setting is disabled, this preserves backward compatibility with older versions and locations are not restricted. If this setting is enabled, locations are also restricted to the users company',
     'show_in_model_list'   => 'Show in Model Dropdowns',
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',

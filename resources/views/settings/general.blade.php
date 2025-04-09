@@ -36,7 +36,7 @@
 
                <div class="box-body">
 
-                   <div class="col-md-12">
+                   <div class="col-md-11">
 
                     <!-- Full Multiple Companies Support -->
                     <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
@@ -54,7 +54,24 @@
                             </p>
                         </div>
                     </div>
+                    <!-- /.form-group -->
 
+                    <!-- Scope Locations with Full Multiple Companies Support -->
+                    <div class="form-group {{ $errors->has('scope_locations_fmcs') ? 'error' : '' }}">
+                        <div class="col-md-3">
+                            {{ Form::label('scope_locations_fmcs', trans('admin/settings/general.scope_locations_fmcs_support_text')) }}
+                        </div>
+                        <div class="col-md-9">
+                            <label class="form-control">
+                                {{ Form::checkbox('scope_locations_fmcs', '1', old('scope_locations_fmcs', $setting->scope_locations_fmcs),array('class' => 'minimal', 'aria-label'=>'scope_locations_fmcs')) }}
+                                {{ trans('admin/settings/general.scope_locations_fmcs_support_text') }}
+                            </label>
+                            {!! $errors->first('scope_locations_fmcs', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                            <p class="help-block">
+                                {{ trans('admin/settings/general.scope_locations_fmcs_support_help_text') }}
+                            </p>
+                        </div>
+                    </div>
                     <!-- /.form-group -->
 
                     <!-- Require signature for acceptance -->
@@ -505,7 +522,6 @@
 
             });
         });
-
 
     </script>
 @stop

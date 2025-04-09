@@ -598,10 +598,31 @@ return [
         'checkin_item' => 'Checkin :name',
     ],
 
+    'skins' => [
+        'site_default' => 'Site Default',
+        'default_blue' => 'Default Blue',
+        'blue_dark' => 'Blue (Dark Mode)',
+        'green' => 'Green Dark',
+        'green_dark' => 'Green (Dark Mode)',
+        'red' => 'Red Dark',
+        'red_dark' => 'Red (Dark Mode)',
+        'orange' => 'Orange Dark',
+        'orange_dark' => 'Orange (Dark Mode)',
+        'black' => 'Black',
+        'black_dark' => 'Black (Dark Mode)',
+        'purple' => 'Purple',
+        'purple_dark' => 'Purple (Dark Mode)',
+        'yellow' => 'Yellow',
+        'yellow_dark' => 'Yellow (Dark Mode)',
+        'high_contrast' => 'High Contrast',
+
+    ],
+
     'select_all_none' => 'Select/Unselect All',
     'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
     'deleted_models' => 'Deleted Asset Models',
     'deleted_users' => 'Deleted Users',
     'cost_each' => ':amount each',
+    'remove_current_image' => 'Remove current :type image',
 
 ];
