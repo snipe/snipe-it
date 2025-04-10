@@ -29,7 +29,6 @@ class AssetImporter extends ItemImporter
                 'pending' => 1,
                 'archived' => 0,
                 'notes' => 'Default status label created by AssetImporter',
-                'created_by' => $this->created_by,
             ]);
 
             $this->defaultStatusLabelId = $defaultLabel->id;
