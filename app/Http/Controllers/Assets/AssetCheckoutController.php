@@ -71,7 +71,7 @@ class AssetCheckoutController extends Controller
 
             $admin = auth()->user();
 
-            if($request->filled('audit_on_checkinout') == "1") {
+            if($request->filled('log_audit') == "1") {
                 $this->authorize('audit', Asset::class);
             }
 
@@ -118,7 +118,7 @@ class AssetCheckoutController extends Controller
             session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
-                if($request->filled('audit_on_checkinout') == "1") {
+                if($request->filled('log_audit') == "1") {
                     $asset->logAudit($request->input('note'),$request->input('location_id'));
                 }
                 return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))

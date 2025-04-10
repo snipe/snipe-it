@@ -75,7 +75,7 @@ class AssetCheckinController extends Controller
 
         $this->authorize('checkin', $asset);
 
-        if($request->filled('audit_on_checkinout') == "1") {
+        if($request->filled('log_audit') == "1") {
             $this->authorize('audit', Asset::class);
         }
 
@@ -137,7 +137,7 @@ class AssetCheckinController extends Controller
         $asset->customFieldsForCheckinCheckout('display_checkin');
 
         if ($asset->save()) {
-            if($request->filled('audit_on_checkinout') == "1") {
+            if($request->filled('log_audit') == "1") {
                 $asset->logAudit($request->input('note'),$request->input('location_id'));
             }
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
