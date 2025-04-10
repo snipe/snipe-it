@@ -16,10 +16,23 @@ class AssetImporter extends ItemImporter
     {
         parent::__construct($filename);
 
-        $this->defaultStatusLabelId = Statuslabel::first()->id;
-        
+        $this->defaultStatusLabelId = Statuslabel::first()?->id;
+
         if (!is_null(Statuslabel::deployable()->first())) {
-            $this->defaultStatusLabelId = Statuslabel::deployable()->first()->id;
+            $this->defaultStatusLabelId = Statuslabel::deployable()->first()?->id;
+        }
+
+        if (is_null($this->defaultStatusLabelId)) {
+            $defaultLabel = Statuslabel::create([
+                'name' => 'Default Status',
+                'deployable' => 0,
+                'pending' => 1,
+                'archived' => 0,
+                'notes' => 'Default status label created by AssetImporter',
+                'created_by' => $this->created_by,
+            ]);
+
+            $this->defaultStatusLabelId = $defaultLabel->id;
         }
     }
 
