@@ -147,8 +147,8 @@
                     <td>
                         {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}</td>
                     <td>
-                        @if (($asset->assetlog->firstWhere('action_type', 'accepted')) && ($asset->assetlog->firstWhere('action_type', 'accepted')->accept_signature!=''))
-                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->firstWhere('action_type', 'accepted')->accept_signature }}">
+                        @if ($asset->getLatestSignedAcceptance($show_user))
+                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->getLatestSignedAcceptance($show_user)->accept_signature }}">
                         @endif
                     </td>
                 </tr>
@@ -175,8 +175,8 @@
                                 {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
                             </td>
                             <td>
-                                @if (($asset->assetlog->firstWhere('action_type', 'accepted')) && ($asset->assetlog->firstWhere('action_type', 'accepted')->accept_signature!=''))
-                                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->firstWhere('action_type', 'accepted')->accept_signature }}">
+                                @if ($asset->getLatestSignedAcceptance($show_user))
+                                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->getLatestSignedAcceptance($show_user)->accept_signature }}">
                                 @endif
                             </td>
                         </tr>
@@ -243,8 +243,8 @@
                         {{ Helper::getFormattedDateObject($license->pivot->updated_at, 'datetime', false) }}
                     </td>
                     <td>
-                        @if (($license->assetlog->firstWhere('action_type', 'accepted')) && ($license->assetlog->firstWhere('action_type', 'accepted')->accept_signature!=''))
-                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $license->assetlog->firstWhere('action_type', 'accepted')->accept_signature }}">
+                        @if ($license->getLatestSignedAcceptance($show_user))
+                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $license->getLatestSignedAcceptance($show_user)->accept_signature }}">
                         @endif
                     </td>
                 </tr>
@@ -308,8 +308,8 @@
                         </td>
 
                         <td>
-                            @if (($accessory->assetlog->first()) && ($accessory->assetlog->first()->accept_signature!=''))
-                                <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $accessory->assetlog->first()->accept_signature }}">
+                            @if ($accessory->getLatestSignedAcceptance($show_user))
+                                <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $accessory->getLatestSignedAcceptance($show_user)->accept_signature }}">
                             @endif
                         </td>
                     </tr>
@@ -373,8 +373,8 @@
                                 {{ Helper::getFormattedDateObject($consumable->pivot->created_at, 'datetime', false) }}
                             </td>
                             <td>
-                                @if (($consumable->assetlog->first()) && ($consumable->assetlog->first()->accept_signature!=''))
-                                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $consumable->assetlog->first()->accept_signature }}">
+                                @if ($consumable->getLatestSignedAcceptance($show_user))
+                                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $consumable->getLatestSignedAcceptance($show_user)->accept_signature }}">
                                 @endif
                             </td>
                     </tr>

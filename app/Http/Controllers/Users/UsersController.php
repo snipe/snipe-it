@@ -594,18 +594,18 @@ class UsersController extends Controller
 
         $user = User::where('id', $id)
             ->with([
-                'assets.assetlog',
-                'assets.assignedAssets.assetlog',
+                'assets.log' => fn($query) => $query->withTrashed()->where('target_type', User::class)->where('target_id', $id)->where('action_type', 'accepted'),
+                'assets.assignedAssets.log' => fn($query) => $query->withTrashed()->where('target_type', User::class)->where('target_id', $id)->where('action_type', 'accepted'),
                 'assets.assignedAssets.defaultLoc',
                 'assets.assignedAssets.location',
                 'assets.assignedAssets.model.category',
                 'assets.defaultLoc',
                 'assets.location',
                 'assets.model.category',
-                'accessories.assetlog',
+                'accessories.log' => fn($query) => $query->withTrashed()->where('target_type', User::class)->where('target_id', $id)->where('action_type', 'accepted'),
                 'accessories.category',
                 'accessories.manufacturer',
-                'consumables.assetlog',
+                'consumables.log' => fn($query) => $query->withTrashed()->where('target_type', User::class)->where('target_id', $id)->where('action_type', 'accepted'),
                 'consumables.category',
                 'consumables.manufacturer',
                 'licenses.category',
