@@ -351,11 +351,6 @@ class AssetsController extends Controller
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update with '.$status->getStatuslabelType().' status', date('Y-m-d H:i:s'), $originalValues));
         }
 
-        if ($asset->assigned_to == '') {
-            $asset->location_id = $request->input('rtd_location_id', null);
-        }
-
-
         if ($request->filled('image_delete')) {
             try {
                 unlink(public_path().'/uploads/assets/'.$asset->image);
