@@ -378,7 +378,7 @@ class CustomField extends Model
 
     /**
      * Check to see if there is a custom regex format type
-     * @see https://github.com/snipe/snipe-it/issues/5896
+     * @see https://github.com/grokability/snipe-it/issues/5896
      *
      * @author Wes Hulette <jwhulette@gmail.com>
      *
