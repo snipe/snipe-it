@@ -22362,7 +22362,7 @@ h4 {
  Instead, we use CSS to add the icon into the table header, which leaves the column selector
  "title" text as-is and hides the icon.
 
- See https://github.com/snipe/snipe-it/issues/7989
+ See https://github.com/grokability/snipe-it/issues/7989
  */
 th.css-accessory > .th-inner,
 th.css-accessory-alt > .th-inner,
@@ -23918,7 +23918,7 @@ h4 {
  Instead, we use CSS to add the icon into the table header, which leaves the column selector
  "title" text as-is and hides the icon.
 
- See https://github.com/snipe/snipe-it/issues/7989
+ See https://github.com/grokability/snipe-it/issues/7989
  */
 th.css-accessory > .th-inner,
 th.css-accessory-alt > .th-inner,

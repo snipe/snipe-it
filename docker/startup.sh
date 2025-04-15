@@ -59,7 +59,7 @@ fi
 
 # create data directories
 # Note: Keep in sync with expected directories by the app
-# https://github.com/snipe/snipe-it/blob/master/app/Console/Commands/RestoreFromBackup.php#L232
+# https://github.com/grokability/snipe-it/blob/master/app/Console/Commands/RestoreFromBackup.php#L232
 for dir in \
   'data/private_uploads' \
   'data/private_uploads/assets' \

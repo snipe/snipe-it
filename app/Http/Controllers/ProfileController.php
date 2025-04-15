@@ -136,7 +136,7 @@ class ProfileController extends Controller
             }
 
             // This checks to make sure that the user's password isn't the same as their username,
-            // email address, first name or last name (see https://github.com/snipe/snipe-it/issues/8661)
+            // email address, first name or last name (see https://github.com/grokability/snipe-it/issues/8661)
             // While this is handled via SaveUserRequest form request in other places, we have to do this manually
             // here because we don't have the username, etc form fields available in the profile password change
             // form.

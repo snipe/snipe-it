@@ -227,7 +227,7 @@ class LoginController extends Controller
 
             $strip_prefixes = [
                 // IIS/AD
-                // https://github.com/snipe/snipe-it/pull/5862
+                // https://github.com/grokability/snipe-it/pull/5862
                 '\\',
 
                 // Google Cloud IAP
