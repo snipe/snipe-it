@@ -181,7 +181,7 @@ class BulkDeleteAssetsTest extends TestCase
         $this->assertEquals(route('hardware.index'), $response->headers->get('Location'));
 
 
-        $errorMessage = session('error');
+        $errorMessage = session('error-unescaped');
         $expectedMessage = trans_choice('admin/hardware/message.delete.assigned_to_error',1, ['asset_tag' => $asset->asset_tag]);
         $this->assertEquals($expectedMessage, $errorMessage);
      }
