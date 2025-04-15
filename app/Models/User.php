@@ -151,6 +151,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @return void
      */
 
+    public $name;
     protected static function boot()
     {
         parent::boot();
