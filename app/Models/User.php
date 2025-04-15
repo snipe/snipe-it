@@ -20,6 +20,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\HasApiTokens;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
@@ -844,10 +845,33 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query->leftJoin('companies as companies_user', 'users.company_id', '=', 'companies_user.id')->orderBy('companies_user.name', $order);
     }
 
+
+
+    /**
+     * This is a mutator to allow the emails to fall back to the system settings if no locale is set.
+     *
+     * @return Attribute
+     *
+     */
+    protected function locale(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => $value ?? Setting::getSettings()->locale,
+        );
+    }
+
+    /**
+     * Get the preferred locale for the user.
+     * This is used via the HasLocalePreference interface, which is part of Laravel. This would
+     * normally work natively, but because we allow the override in the Settings model and we also
+     * manually set it in the notifications (for now), this doesn't handle all use cases.
+     *
+     */
     public function preferredLocale()
     {
         return $this->locale;
     }
+
     public function getUserTotalCost(){
         $asset_cost= 0;
         $license_cost= 0;
