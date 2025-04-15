@@ -70,12 +70,12 @@
                         <!-- Enable LDAP -->
                         <div class="form-group {{ $errors->has('ldap_integration') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_enabled', trans('admin/settings/general.ldap_integration')) }}
+                                <label for="ldap_enabled">{{ trans('admin/settings/general.ldap_integration') }}</label>
                             </div>
                             <div class="col-md-8">
 
                                 <label class="form-control">
-                                    {{ Form::checkbox('ldap_enabled', '1', old('ldap_enabled', $setting->ldap_enabled)) }}
+                                    <input type="checkbox" name="ldap_enabled" value="1" id="ldap_enabled" @checked(old('ldap_enabled', $setting->ldap_enabled)) />
                                 {{ trans('admin/settings/general.ldap_enabled') }}
                                 </label>
 
@@ -92,11 +92,11 @@
                         <!-- AD Flag -->
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('is_ad', trans('admin/settings/general.ad')) }}
+                                <label for="is_ad">{{ trans('admin/settings/general.ad') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
-                                {{ Form::checkbox('is_ad', '1', old('is_ad', $setting->is_ad)) }}
+                                    <input type="checkbox" name="is_ad" value="1" id="is_ad" @checked(old('is_ad', $setting->is_ad))/>
                                 {{ trans('admin/settings/general.is_ad') }}
                                 </label>
                                 @error('is_ad')
@@ -118,11 +118,11 @@
                         <!-- LDAP Password Sync -->
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_pw_sync', trans('admin/settings/general.ldap_pw_sync')) }}
+                                <label for="ldap_pw_sync">{{ trans('admin/settings/general.ldap_pw_sync') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
-                                {{ Form::checkbox('ldap_pw_sync', '1', old('ldap_pw_sync', $setting->ldap_pw_sync)) }}
+                                    <input type="checkbox" name="ldap_pw_sync" value="1" id="ldap_pw_sync" @checked(old('ldap_pw_sync', $setting->ldap_pw_sync)) />
                                 {{ trans('general.yes') }}
                                 </label>
 
@@ -147,7 +147,7 @@
                         <!-- AD Domain -->
                         <div class="form-group {{ $errors->has('ad_domain') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ad_domain', trans('admin/settings/general.ad_domain')) }}
+                                <label for="ad_domain">{{ trans('admin/settings/general.ad_domain') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'example.com' }}" name="ad_domain" type="text" id="ad_domain" value="{{ old('ad_domain', $setting->ad_domain) }}">
@@ -171,7 +171,9 @@
                         <!-- LDAP Client-Side TLS key -->
                         <div class="form-group {{ $errors->has('ldap_client_tls_key') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_client_tls_key', trans('admin/settings/general.ldap_client_tls_key')) }}
+                                <label for="ldap_client_tls_key">
+                                    {{ trans('admin/settings/general.ldap_client_tls_key') }}
+                                </label>
                             </div>
                             <div class="col-md-8">
                                 <x-input.textarea
@@ -198,7 +200,7 @@
                         <!-- LDAP Client-Side TLS certificate -->
                         <div class="form-group {{ $errors->has('ldap_client_tls_cert') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_client_tls_cert', trans('admin/settings/general.ldap_client_tls_cert')) }}
+                                <label for="ldap_client_tls_cert">{{ trans('admin/settings/general.ldap_client_tls_cert') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <x-input.textarea
@@ -226,7 +228,7 @@
                         <!-- LDAP Server -->
                         <div class="form-group {{ $errors->has('ldap_server') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_server', trans('admin/settings/general.ldap_server')) }}
+                                <label for="ldap_server">{{ trans('admin/settings/general.ldap_server') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'ldap://ldap.example.com' }}" name="ldap_server" type="text" id="ldap_server" value="{{ old('ldap_server', $setting->ldap_server) }}">
@@ -251,11 +253,11 @@
                         <!-- Start TLS -->
                         <div class="form-group">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_tls', trans('admin/settings/general.ldap_tls')) }}
+                                <label for="ldap_tls">{{ trans('admin/settings/general.ldap_tls') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
-                                    {{ Form::checkbox('ldap_tls', '1', old('ldap_tls', $setting->ldap_tls)) }}
+                                    <input type="checkbox" name="ldap_tls" value="1" id="ldap_tls" @checked(old('ldap_tls', $setting->ldap_tls)) />
                                     {{ trans('admin/settings/general.ldap_tls_help') }}
                                 </label>
                                 @error('ldap_tls')
@@ -277,11 +279,11 @@
                         <!-- Ignore LDAP Certificate -->
                         <div class="form-group {{ $errors->has('ldap_server_cert_ignore') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_server_cert_ignore', trans('admin/settings/general.ldap_server_cert')) }}
+                                <label for="ldap_server_cert_ignore">{{ trans('admin/settings/general.ldap_server_cert') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <label class="form-control">
-                                    {{ Form::checkbox('ldap_server_cert_ignore', '1', old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore)) }}
+                                    <input type="checkbox" name="ldap_server_cert_ignore" value="1" id="ldap_server_cert_ignore" @checked(old('ldap_server_cert_ignore', $setting->ldap_server_cert_ignore)) />
                                     {{ trans('admin/settings/general.ldap_server_cert_ignore') }}
                                 </label>
                                 @error('ldap_server_cert_ignore')
@@ -306,7 +308,7 @@
                         <!-- LDAP Username -->
                         <div class="form-group {{ $errors->has('ldap_uname') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_uname', trans('admin/settings/general.ldap_uname')) }}
+                                <label for="ldap_uname">{{ trans('admin/settings/general.ldap_uname') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" autocomplete="off" placeholder="{{ trans('general.example') .'binduser@example.com' }}" name="ldap_uname" type="text" id="ldap_uname" value="{{ old('ldap_uname', $setting->ldap_uname) }}">
@@ -329,7 +331,7 @@
                         <!-- LDAP pword -->
                         <div class="form-group {{ $errors->has('ldap_pword') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_pword', trans('admin/settings/general.ldap_pword')) }}
+                                <label for="ldap_pword">{{ trans('admin/settings/general.ldap_pword') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" type="password" name="ldap_pword" id="ldap_pword" value="" autocomplete="off" onfocus="this.removeAttribute('readonly');" readonly>
@@ -352,7 +354,7 @@
                         <!-- LDAP basedn -->
                         <div class="form-group {{ $errors->has('ldap_basedn') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_basedn', trans('admin/settings/general.ldap_basedn')) }}
+                                <label for="ldap_basedn">{{ trans('admin/settings/general.ldap_basedn') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'cn=users/authorized,dc=example,dc=com' }}" name="ldap_basedn" type="text" id="ldap_basedn" value="{{ old('ldap_basedn', $setting->ldap_basedn) }}">
@@ -375,7 +377,7 @@
                         <!-- LDAP filter -->
                         <div class="form-group {{ $errors->has('ldap_filter') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_filter', trans('admin/settings/general.ldap_filter')) }}
+                                <label for="ldap_filter">{{ trans('admin/settings/general.ldap_filter') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" name="ldap_filter" id="ldap_filter" value="{{  old('ldap_filter', $setting->ldap_filter) }}" class="form-control" placeholder="{{  trans('general.example') .'&(cn=*)' }}">
@@ -398,7 +400,7 @@
                         <!-- LDAP  username field-->
                         <div class="form-group {{ $errors->has('ldap_username_field') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_username_field', trans('admin/settings/general.ldap_username_field')) }}
+                                <label for="ldap_username_field">{{ trans('admin/settings/general.ldap_username_field') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" name="ldap_username_field" id="ldap_username_field" value="{{  old('ldap_username_field', $setting->ldap_username_field) }}" class="form-control" placeholder="{{  trans('general.example') .'samaccountname' }}">
@@ -421,7 +423,7 @@
                         <!-- LDAP Last Name Field -->
                         <div class="form-group {{ $errors->has('ldap_lname_field') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_lname_field', trans('admin/settings/general.ldap_lname_field')) }}
+                                <label for="ldap_lname_field">{{ trans('admin/settings/general.ldap_lname_field') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" name="ldap_lname_field" id="ldap_lname_field" value="{{  old('ldap_lname_field', $setting->ldap_lname_field) }}" class="form-control" placeholder="{{  trans('general.example') .'sn' }}">
@@ -444,7 +446,7 @@
                         <!-- LDAP First Name field -->
                         <div class="form-group {{ $errors->has('ldap_fname_field') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_fname_field', trans('admin/settings/general.ldap_fname_field')) }}
+                                <label for="ldap_fname_field">{{ trans('admin/settings/general.ldap_fname_field') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" name="ldap_fname_field" id="ldap_fname_field" value="{{  old('ldap_fname_field', $setting->ldap_fname_field) }}" class="form-control" placeholder="{{ trans('general.example') .'givenname'  }}">
@@ -492,7 +494,7 @@
 
                         <div class="form-group{{ $errors->has('group') ? ' has-error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_default_group', trans('admin/settings/general.ldap_default_group')) }}
+                                <label for="ldap_default_group">{{ trans('admin/settings/general.ldap_default_group') }}</label>
                             </div>
 
                             <div class="col-md-8">
@@ -532,7 +534,7 @@
                         <!-- LDAP active flag -->
                         <div class="form-group {{ $errors->has('ldap_active_flag') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_active_flag', trans('admin/settings/general.ldap_active_flag')) }}
+                                <label for="ldap_active_flag">{{ trans('admin/settings/general.ldap_active_flag') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input type="text" name="ldap_active_flag" id="ldap_active_flag" value="{{  old('ldap_active_flag', $setting->ldap_active_flag) }}" class="form-control">
@@ -554,10 +556,43 @@
                             </div>
                         </div>
 
+                        <!-- LDAP invert active flag -->
+                        <div class="form-group">
+                            <div class="col-md-3">
+                                <label for="ldap_invert_active_flag">
+                                    {{ trans('admin/settings/general.ldap_invert_active_flag') }}
+                                </label>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-control">
+                                    <input type="checkbox" name="ldap_invert_active_flag" value="1" id="ldap_invert_active_flag" @checked(old('ldap_invert_active_flag', $setting->ldap_invert_active_flag)) />
+                                    {{ trans('general.yes') }}
+                                </label>
+                                @error('ldap_invert_active_flag')
+                                <span class="alert-msg">
+                                         <x-icon type="x" />
+                                        {{ $message }}
+                                    </span>
+                                @enderror
+
+                                <p class="help-block">
+                                    {!! trans('admin/settings/general.ldap_invert_active_flag_help') !!}
+                                </p>
+
+                                @if (config('app.lock_passwords')===true)
+                                    <p class="text-warning">
+                                        <x-icon type="locked" />
+                                        {!! trans('general.feature_disabled') !!}
+                                    </p>
+                                @endif
+                            </div>
+
+                        </div>
+
                         <!-- LDAP emp number -->
                         <div class="form-group {{ $errors->has('ldap_emp_num') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_emp_num', trans('admin/settings/general.ldap_emp_num')) }}
+                                <label for="ldap_emp_num">{{ trans('admin/settings/general.ldap_emp_num') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'employeenumber/employeeid' }}" name="ldap_emp_num" type="text" id="ldap_emp_num" value="{{ old('ldap_emp_num', $setting->ldap_emp_num) }}">
@@ -579,7 +614,7 @@
                         <!-- LDAP department -->
                         <div class="form-group {{ $errors->has('ldap_dept') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_dept', trans('admin/settings/general.ldap_dept')) }}
+                                <label for="ldap_dept">{{ trans('admin/settings/general.ldap_dept') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'department' }}" name="ldap_dept" type="text" id="ldap_dept" value="{{ old('ldap_dept', $setting->ldap_dept) }}">
@@ -602,7 +637,7 @@
                         <!-- LDAP Manager -->
                         <div class="form-group {{ $errors->has('ldap_dept') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_dept', trans('admin/settings/general.ldap_manager')) }}
+                                <label for="ldap_manager">{{ trans('admin/settings/general.ldap_manager') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder=" {{ trans('general.example') .'manager' }}" name="ldap_manager" type="text" value="{{ old('ldap_manager', $setting->ldap_manager) }}">
@@ -625,7 +660,7 @@
                         <!-- LDAP email -->
                         <div class="form-group {{ $errors->has('ldap_email') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_email', trans('admin/settings/general.ldap_email')) }}
+                                <label for="ldap_email">{{ trans('admin/settings/general.ldap_email') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'mail' }}" name="ldap_email" type="text" id="ldap_email" value="{{ old('ldap_email', $setting->ldap_email) }}">
@@ -648,7 +683,7 @@
                         <!-- LDAP Phone -->
                         <div class="form-group {{ $errors->has('ldap_phone') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_phone', trans('admin/settings/general.ldap_phone')) }}
+                                <label for="ldap_phone">{{ trans('admin/settings/general.ldap_phone') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'telephonenumber' }}" name="ldap_phone" type="text" id="ldap_phone" value="{{ old('ldap_phone', $setting->ldap_phone_field) }}">
@@ -671,7 +706,7 @@
                         <!-- LDAP Job title -->
                         <div class="form-group {{ $errors->has('ldap_jobtitle') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_jobtitle', trans('admin/settings/general.ldap_jobtitle')) }}
+                                <label for="ldap_jobtitle">{{ trans('admin/settings/general.ldap_jobtitle') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'title' }}" name="ldap_jobtitle" type="text" id="ldap_jobtitle" value="{{ old('ldap_jobtitle', $setting->ldap_jobtitle) }}">
@@ -694,7 +729,7 @@
                         <!-- LDAP Country -->
                         <div class="form-group {{ $errors->has('ldap_country') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_country', trans('admin/settings/general.ldap_country')) }}
+                                <label for="ldap_country">{{ trans('admin/settings/general.ldap_country') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'c' }}" name="ldap_country" type="text" id="ldap_country" value="{{ old('ldap_country', $setting->ldap_country) }}">
@@ -716,7 +751,7 @@
                         <!-- LDAP Location -->
                         <div class="form-group {{ $errors->has('ldap_location') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('ldap_location', trans('admin/settings/general.ldap_location')) }}
+                                <label for="ldap_location">{{ trans('admin/settings/general.ldap_location') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'physicaldeliveryofficename' }}" name="ldap_location" type="text" id="ldap_location" value="{{ old('ldap_location', $setting->ldap_location) }}">
@@ -799,7 +834,7 @@
                         <!-- LDAP Forgotten password -->
                         <div class="form-group {{ $errors->has('custom_forgot_pass_url') ? 'error' : '' }}">
                             <div class="col-md-3">
-                                {{ Form::label('custom_forgot_pass_url', trans('admin/settings/general.custom_forgot_pass_url')) }}
+                                <label for="custom_forgot_pass_url">{{ trans('admin/settings/general.custom_forgot_pass_url') }}</label>
                             </div>
                             <div class="col-md-8">
                                 <input class="form-control" placeholder="{{ trans('general.example') .'https://my.ldapserver-forgotpass.com' }}" name="custom_forgot_pass_url" type="text" id="custom_forgot_pass_url" value="{{ old('custom_forgot_pass_url', $setting->custom_forgot_pass_url) }}">
@@ -837,7 +872,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 
 @endsection

@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Új egyéni mező létrehozása',
     'value_encrypted'      	        => 'A mező értéke titkosítva van az adatbázisban. Csak az adminisztrátor felhasználók láthatják a dekódolt értéket',
     'show_in_email'     => 'Szerepeljen ez a mező az eszköz kiadásakor a felhasználónak küldött emailben? A titkosított mezők nem szerepelhetnek az emailekben',
-    'show_in_email_short'     => 'Szerepeljen az emailekben.',
+    'show_in_email_short' => 'Szerepeljen az emailekben',
     'help_text' => 'Súgó szöveg',
     'help_text_description' => 'Ez egy opcionális szöveg, amely az űrlapelemek alatt jelenik meg az eszköz szerkesztése közben, hogy kontextust adjon a mezőhöz.',
     'about_custom_fields_title' => 'Az egyéni mezőkről',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'Show in requestable assets list',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
 
 ];

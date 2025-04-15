@@ -12,7 +12,21 @@
 
 
 <div class="row">
+
+    @if ($user->deleted_at!='')
+        <div class="col-md-12">
+            <div class="callout callout-warning">
+                <x-icon type="warning" />
+                {{ trans('admin/users/message.user_deleted_warning') }}
+            </div>
+        </div>
+    @endif
+
   <div class="col-md-12">
+
+
+
+
     <div class="nav-tabs-custom">
       <ul class="nav nav-tabs hidden-print">
 
@@ -115,27 +129,6 @@
 
 
       @can('update', $user)
-          <li class="dropdown pull-right">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <span class="hidden-xs"><x-icon type="cog" /></span>
-              <span class="hidden-lg hidden-md hidden-xl"><x-icon type="cog" class="fa-2x" /></span>
-              
-              <span class="hidden-xs hidden-sm">
-                {{ trans('button.actions') }}
-              </span>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="{{ route('users.edit', $user->id) }}">{{ trans('admin/users/general.edit') }}</a></li>
-              <li><a href="{{ route('users.clone.show', $user->id) }}">{{ trans('admin/users/general.clone') }}</a></li>
-              @if ((Auth::user()->id !== $user->id) && (!config('app.lock_passwords')) && ($user->deleted_at=='') && ($user->isDeletable()))
-                <li><a href="{{ route('users.destroy', $user->id) }}">{{ trans('button.delete') }}</a></li>
-              @endif
-            </ul>
-          </li>
-        @endcan
-
-        @can('update', \App\Models\User::class)
           <li class="pull-right">
               <a href="#" data-toggle="modal" data-target="#uploadFileModal">
               <span class="hidden-xs"><x-icon type="paperclip" /></span>
@@ -150,15 +143,6 @@
         <div class="tab-pane active" id="details">
           <div class="row">
 
-            
-            @if ($user->deleted_at!='')
-              <div class="col-md-12">
-                <div class="callout callout-warning">
-                    <x-icon type="warning" />
-                  {{ trans('admin/users/message.user_deleted_warning') }}
-                </div>
-              </div>
-            @endif
         <div class="info-stack-container">
             <!-- Start button column -->
             <div class="col-md-3 col-xs-12 col-sm-push-9 info-stack">
@@ -180,7 +164,7 @@
 
               @can('update', $user)
                 <div class="col-md-12">
-                  <a href="{{ route('users.edit', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                  <a href="{{ ($user->deleted_at=='') ? route('users.edit', $user->id) : '#' }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print{{ ($user->deleted_at!='') ? ' disabled' : '' }}">
                       <x-icon type="edit" />
                       {{ trans('admin/users/general.edit') }}
                   </a>
@@ -808,6 +792,8 @@
         </div><!-- /asset -->
 
         <div class="tab-pane" id="licenses">
+
+
           <div class="table-responsive">
             <table
                     data-cookie-id-table="userLicenseTable"
@@ -831,7 +817,7 @@
 
               <thead>
                 <tr>
-                  <th class="col-md-5">{{ trans('general.name') }}</th>
+                  <th>{{ trans('general.name') }}</th>
                   <th>{{ trans('admin/licenses/form.license_key') }}</th>
                   <th data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                   <th>{{ trans('admin/licenses/form.purchase_order') }}</th>
@@ -847,7 +833,7 @@
                   </td>
                   <td class="col-md-4">
                     @can('viewKeys', $license)
-                    {!! $license->present()->serialUrl() !!}
+                          <code class="single-line"><span class="js-copy-link" data-clipboard-target=".js-copy-key-{{ $license->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key-{{ $license->id }}">{{ $license->serial }}</span></span></code>
                     @else
                       ------------
                     @endcan
@@ -863,7 +849,7 @@
                   </td>
                   <td class="hidden-print col-md-2">
                     @can('update', $license)
-                      <a href="{{ route('licenses.checkin', array('licenseSeatId'=> $license->pivot->id, 'backto'=>'user')) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
+                      <a href="{{ route('licenses.checkin', $license->pivot->id, ['backto'=>'user']) }}" class="btn btn-primary btn-sm hidden-print">{{ trans('general.checkin') }}</a>
                      @endcan
                   </td>
                 </tr>
@@ -1017,7 +1003,7 @@
                       <th data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
                   <th data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
-                  <th data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
                   <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
                   <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
                   <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>
@@ -1044,7 +1030,6 @@
                     data-bulk-button-id="#bulkLocationsEditButton"
                     data-bulk-form-id="#locationsBulkForm"
                     data-search="true"
-                    data-show-footer="true"
                     data-side-pagination="server"
                     data-show-columns="true"
                     data-show-fullscreen="true"
@@ -1077,7 +1062,6 @@
                       data-bulk-button-id="#bulkUserEditButton"
                       data-bulk-form-id="#usersBulkForm"
                       data-search="true"
-                      data-show-footer="true"
                       data-side-pagination="server"
                       data-show-columns="true"
                       data-show-fullscreen="true"

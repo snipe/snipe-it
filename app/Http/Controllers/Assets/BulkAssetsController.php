@@ -358,7 +358,11 @@ class BulkAssetsController extends Controller
                  * to someone/something.
                  */
                 if ($request->filled('status_id')) {
-                    $updated_status = Statuslabel::find($request->input('status_id'));
+                    try {
+                        $updated_status = Statuslabel::findOrFail($request->input('status_id'));
+                    } catch (ModelNotFoundException $e) {
+                        return redirect($bulk_back_url)->with('error', trans('admin/statuslabels/message.does_not_exist'));
+                    }
 
                     // We cannot assign a non-deployable status type if the asset is already assigned.
                     // This could probably be added to a form request.
@@ -366,7 +370,7 @@ class BulkAssetsController extends Controller
                     // Otherwise we need to make sure the status type is still a deployable one.
                     if (
                         ($asset->assigned_to == '')
-                        || ($updated_status->deployable == '1') && ($asset->assetstatus->deployable == '1')
+                        || ($updated_status->deployable == '1') && ($asset->assetstatus?->deployable == '1')
                     ) {
                         $this->update_array['status_id'] = $updated_status->id;
                     }
@@ -593,7 +597,6 @@ class BulkAssetsController extends Controller
      */
     public function storeCheckout(AssetCheckoutRequest $request) : RedirectResponse | ModelNotFoundException
     {
-
         $this->authorize('checkout', Asset::class);
 
         try {
@@ -606,6 +609,8 @@ class BulkAssetsController extends Controller
             }
 
             $asset_ids = array_filter($request->get('selected_assets'));
+
+            $assets = Asset::findOrFail($asset_ids);
 
             if (request('checkout_to_type') == 'asset') {
                 foreach ($asset_ids as $asset_id) {
@@ -626,9 +631,8 @@ class BulkAssetsController extends Controller
             }
 
             $errors = [];
-            DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, &$errors, $asset_ids, $request) { //NOTE: $errors is passsed by reference!
-                foreach ($asset_ids as $asset_id) {
-                    $asset = Asset::findOrFail($asset_id);
+            DB::transaction(function () use ($target, $admin, $checkout_at, $expected_checkin, &$errors, $assets, $request) { //NOTE: $errors is passsed by reference!
+                foreach ($assets as $asset) {
                     $this->authorize('checkout', $asset);
 
                     $checkout_success = $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, e($request->get('note')), $asset->name, null);
@@ -655,7 +659,7 @@ class BulkAssetsController extends Controller
             // Redirect to the asset management page with error
             return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans_choice('admin/hardware/message.multi-checkout.error', $asset_ids))->withErrors($errors);
         } catch (ModelNotFoundException $e) {
-            return redirect()->route('hardware.bulkcheckout.show')->with('error', $e->getErrors());
+            return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans_choice('admin/hardware/message.multi-checkout.error', $request->input('selected_assets')));
         }
         
     }

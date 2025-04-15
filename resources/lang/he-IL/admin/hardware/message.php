@@ -72,6 +72,7 @@ return [
     'delete' => [
         'confirm'   	=> 'האם אתה בטוח שברצונך למחוק את הנכס הזה?',
         'error'   		=> 'היתה בעיה במחיקת הנכס. בבקשה נסה שוב.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'לא נבחרו נכסים ולכן לא נמחק דבר.',
         'success' 		=> 'הנכס נמחק בהצלחה.',
     ],

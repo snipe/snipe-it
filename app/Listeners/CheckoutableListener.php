@@ -63,11 +63,9 @@ class CheckoutableListener
         }
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable = $this->getCheckoutMailType($event, $acceptance);
-        $notifiable = $this->getNotifiables($event);
+        $notifiable = $this->getNotifiableUsers($event);
 
-        if ($event->checkedOutTo->locale) {
-            $mailable->locale($event->checkedOutTo->locale);
-        }
+
         // Send email notifications
         try {
             /**
@@ -79,7 +77,7 @@ class CheckoutableListener
 
             if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                 $this->checkoutableShouldSendEmail($event)) {
-                Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
+                //Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                 if (!empty($notifiable)) {
                     Mail::to($notifiable)->cc($ccEmails)->send($mailable);
                 } elseif (!empty($ccEmails)) {
@@ -115,7 +113,7 @@ class CheckoutableListener
             }
             return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_fail') );
         } catch (Exception $e) {
-            Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
+            Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
                 'error' => $e->getMessage(),
                 'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
                 'event' => $event,
@@ -161,10 +159,8 @@ class CheckoutableListener
         }
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable =  $this->getCheckinMailType($event);
-        $notifiable = $this->getNotifiables($event);
-        if ($event->checkedOutTo?->locale) {
-            $mailable->locale($event->checkedOutTo->locale);
-        }
+        $notifiable = $this->getNotifiableUsers($event);
+
         // Send email notifications
         try {
             /**
@@ -175,7 +171,6 @@ class CheckoutableListener
              */
                 if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                     $this->checkoutableShouldSendEmail($event)) {
-                    Log::info('Sending checkin email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
                     if (!empty($notifiable)) {
                         Mail::to($notifiable)->cc($ccEmails)->send($mailable);
                     } elseif (!empty($ccEmails)){
@@ -211,7 +206,7 @@ class CheckoutableListener
                 return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
             }
         } catch (Exception $e) {
-            Log::error(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
+            Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
                 'error' => $e->getMessage(),
                 'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
                 'event' => $event,
@@ -324,17 +319,26 @@ class CheckoutableListener
         return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);
 
     }
-    private function getNotifiables($event){
+
+    /**
+     * This gets the recipient objects based on the type of checkoutable.
+     * The 'name' property for users is set in the boot method in the User model.
+     *
+     * @see \App\Models\User::boot()
+     * @param $event
+     * @return mixed
+     */
+    private function getNotifiableUsers($event){
 
         if($event->checkedOutTo instanceof Asset){
             $event->checkedOutTo->load('assignedTo');
-            return $event->checkedOutTo->assignedto?->email ?? '';
+            return $event->checkedOutTo->assignedto;
         }
         else if($event->checkedOutTo instanceof Location) {
-            return $event->checkedOutTo->manager?->email ?? '';
+            return $event->checkedOutTo->manager;
         }
         else{
-            return $event->checkedOutTo?->email ?? '';
+            return $event->checkedOutTo;
         }
     }
     private function webhookSelected(){

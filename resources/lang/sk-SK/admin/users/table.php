@@ -3,7 +3,7 @@
 return array(
     'activated'  			=> 'Aktívny',
     'allow'  				=> 'Povoliť',
-    'checkedout'  			=> 'Majetok',
+    'checkedout'  			=> 'Položky majetku',
     'created_at' 			=> 'Vytvorený',
     'createuser' 			=> 'Vytvoriť používateľa',
     'deny'  				=> 'Odmietnuť',

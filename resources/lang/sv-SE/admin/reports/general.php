@@ -14,9 +14,9 @@ return [
         'user_country' => 'Användarens land',
         'user_zip' => 'Användarens postnummer'
     ],
-    'open_saved_template' => 'Open Saved Template',
-    'save_template' =>  'Save Template',
-    'select_a_template' => 'Select a Template',
-    'template_name' => 'Template Name',
-    'update_template' => 'Update Template',
+    'open_saved_template' => 'Öppna sparad mall',
+    'save_template' =>  'Spara mall',
+    'select_a_template' => 'Välj mall',
+    'template_name' => 'Mallnamn',
+    'update_template' => 'Uppdatera mall',
 ];

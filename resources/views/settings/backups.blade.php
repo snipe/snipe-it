@@ -158,12 +158,8 @@
         @if (config('app.lock_passwords')===true)
         <p class="alert alert-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
           @else
-              
-      {{ Form::open([
-        'method' => 'POST',
-        'route' => 'settings.backups.upload',
-        'files' => true,
-        'class' => 'form-horizontal' ]) }}
+
+      <form method="POST" action="{{ route('settings.backups.upload') }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
         @csrf
 
         
@@ -194,7 +190,7 @@
             
     </div>
     
-    {{ Form::close() }}
+    </form>
     @endif  
       </div>
     </div>

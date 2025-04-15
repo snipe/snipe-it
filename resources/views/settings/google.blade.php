@@ -16,7 +16,7 @@
 
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.google.save') }}" accept-charset="UTF-8" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -54,7 +54,7 @@
                             <div class="col-md-8 col-md-offset-3">
                                 <label class="form-control{{ (config('app.lock_passwords')===true) ? ' form-control--disabled': '' }}">
                                     <span class="sr-only">{{ trans('admin/settings/general.pwd_secure_uncommon') }}</span>
-                                    {{ Form::checkbox('google_login', '1', old('google_login', $setting->google_login),array('aria-label'=>'google_login', (config('app.lock_passwords')===true) ? 'disabled': '')) }}
+                                    <input type="checkbox" name="google_login" value="1" @checked(old('google_login', $setting->google_login)) @disabled(config('app.lock_passwords')) aria-label="google_login">
                                     {{ trans('admin/settings/general.enable_google_login') }}
                                 </label>
                                 <p class="help-block">{{ trans('admin/settings/general.enable_google_login_help') }}</p>
@@ -121,6 +121,6 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop

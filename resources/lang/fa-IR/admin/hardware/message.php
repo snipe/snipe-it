@@ -74,6 +74,7 @@ return [
     'delete' => [
         'confirm'   	=> 'آیا شما مطمئن هستید که می خواهید این تنظیمات دارایی را حذف کنید؟',
         'error'   		=> 'اشکال در حذف دارایی.لطفا دوباره تلاش کنید.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'هیچ دارایی انتخاب نشده بود، بنابراین هیچ چیز حذف نشد.',
         'success' 		=> 'دارایی با موفقیت حذف شد.',
     ],

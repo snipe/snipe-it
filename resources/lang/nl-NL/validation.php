@@ -209,10 +209,10 @@ return [
         'invalid_value_in_field' => 'Ongeldige waarde ingevoerd in dit veld',
 
         'ldap_username_field' => [
-            'not_in' =>         '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.'
+            'not_in' =>         '<code>sAMAccountName</code> (Hoofd- en kleine letters) zal waarschijnlijk niet werken. Je zou in plaats hiervan <code>samaccountname</code> (kleine letters) kunnen gebruiken.'
         ],
-        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> '],
-        'ldap_filter' => ['regex' => 'This value should probably not be wrapped in parentheses.'],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is waarschijnlijk geen geldig authenticatiefilter. Je wilt waarschijnlijk <code>uid=</code> gebruiken.'],
+        'ldap_filter' => ['regex' => 'Deze waarde hoeft waarschijnlijk niet verpakt te worden in haakjes.'],
 
         ],
     /*

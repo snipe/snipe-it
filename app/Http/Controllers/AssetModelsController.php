@@ -109,16 +109,11 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param int $modelId
      */
-    public function edit($modelId = null) : View | RedirectResponse
+    public function edit(AssetModel $model) : View | RedirectResponse
     {
         $this->authorize('update', AssetModel::class);
-        if ($item = AssetModel::find($modelId)) {
-            $category_type = 'asset';
-            return view('models/edit', compact('item', 'category_type'))->with('depreciation_list', Helper::depreciationList());
-
-        }
-
-        return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
+        $category_type = 'asset';
+        return view('models/edit', compact('category_type'))->with('item', $model)->with('depreciation_list', Helper::depreciationList());
     }
 
 
@@ -133,16 +128,11 @@ class AssetModelsController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function update(StoreAssetModelRequest $request, $modelId) : RedirectResponse
+    public function update(StoreAssetModelRequest $request, AssetModel $model) : RedirectResponse
     {
         $this->authorize('update', AssetModel::class);
 
-        if (is_null($model = AssetModel::find($modelId))) {
-            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
-        }
-
         $model = $request->handleImages($model);
-
         $model->depreciation_id = $request->input('depreciation_id');
         $model->eol = $request->input('eol');
         $model->name = $request->input('name');
@@ -188,26 +178,14 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param int $modelId
      */
-    public function destroy($modelId) : RedirectResponse
+    public function destroy(AssetModel $model) : RedirectResponse
     {
         $this->authorize('delete', AssetModel::class);
-        // Check if the model exists
-        if (is_null($model = AssetModel::find($modelId))) {
-            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
-        }
+
 
         if ($model->assets()->count() > 0) {
             // Throw an error that this model is associated with assets
             return redirect()->route('models.index')->with('error', trans('admin/models/message.assoc_users'));
-        }
-
-        if ($model->image) {
-            try {
-                Storage::disk('public')->delete('models/'.$model->image);
-                $model->update(['image' => null]);
-            } catch (\Exception $e) {
-                Log::info($e);
-            }
         }
 
         // Delete the model
@@ -267,16 +245,10 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param int $modelId
      */
-    public function show($modelId = null) : View | RedirectResponse
+    public function show(AssetModel $model) : View | RedirectResponse
     {
         $this->authorize('view', AssetModel::class);
-        $model = AssetModel::withTrashed()->find($modelId);
-
-        if (isset($model->id)) {
-            return view('models/view', compact('model'));
-        }
-
-        return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
+        return view('models/view', compact('model'));
     }
 
     /**
@@ -286,23 +258,20 @@ class AssetModelsController extends Controller
      * @since [v1.0]
      * @param int $modelId
      */
-    public function getClone($modelId = null) : View | RedirectResponse
+    public function getClone(AssetModel $model) : View | RedirectResponse
     {
         $this->authorize('create', AssetModel::class);
-        // Check if the model exists
-        if (is_null($model_to_clone = AssetModel::find($modelId))) {
-            return redirect()->route('models.index')->with('error', trans('admin/models/message.does_not_exist'));
-        }
 
-        $model = clone $model_to_clone;
+        $cloned_model = clone $model;
         $model->id = null;
+        $model->deleted_at = null;
 
         // Show the page
         return view('models/edit')
             ->with('depreciation_list', Helper::depreciationList())
             ->with('item', $model)
-            ->with('model_id', $model_to_clone->id)
-            ->with('clone_model', $model_to_clone);
+            ->with('model_id', $model->id)
+            ->with('clone_model', $cloned_model);
     }
 
 
@@ -321,7 +290,7 @@ class AssetModelsController extends Controller
 
 
     /**
-     * Returns a view that allows the user to bulk edit model attrbutes
+     * Returns a view that allows the user to bulk edit model attributes
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]

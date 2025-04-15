@@ -108,8 +108,8 @@ class Asset extends Depreciable
         'expected_checkin'  => ['nullable', 'date'],
         'last_audit_date'   => ['nullable', 'date_format:Y-m-d H:i:s'],
         'next_audit_date'   => ['nullable', 'date'],
-        'location_id'       => ['nullable', 'exists:locations,id'],
-        'rtd_location_id'   => ['nullable', 'exists:locations,id'],
+        'location_id'       => ['nullable', 'exists:locations,id', 'fmcs_location'],
+        'rtd_location_id'   => ['nullable', 'exists:locations,id', 'fmcs_location'],
         'purchase_date'     => ['nullable', 'date', 'date_format:Y-m-d'],
         'serial'            => ['nullable', 'unique_undeleted:assets,serial'],
         'purchase_cost'     => ['nullable', 'numeric', 'gte:0', 'max:9999999999999'],
@@ -122,7 +122,7 @@ class Asset extends Depreciable
         'assigned_to'       => ['nullable', 'integer'],
         'requestable'       => ['nullable', 'boolean'],
         'assigned_user'     => ['nullable', 'exists:users,id,deleted_at,NULL'],
-        'assigned_location' => ['nullable', 'exists:locations,id,deleted_at,NULL'],
+        'assigned_location' => ['nullable', 'exists:locations,id,deleted_at,NULL', 'fmcs_location'],
         'assigned_asset'    => ['nullable', 'exists:assets,id,deleted_at,NULL']
     ];
 
@@ -213,6 +213,31 @@ class Asset extends Depreciable
         $this->attributes['expected_checkin'] = $value;
     }
 
+
+
+    public function customFieldValidationRules()
+    {
+
+        $customFieldValidationRules = [];
+
+            if (($this->model) && ($this->model->fieldset)) {
+
+                foreach ($this->model->fieldset->fields as $field) {
+
+                    if ($field->format == 'BOOLEAN'){
+                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
+                    }
+                }
+
+                $customFieldValidationRules += $this->model->fieldset->validation_rules();
+            }
+
+        return $customFieldValidationRules;
+
+    }
+
+
+
     /**
      * This handles the custom field validation for assets
      *
@@ -220,29 +245,7 @@ class Asset extends Depreciable
      */
     public function save(array $params = [])
     {
-        if ($this->model_id != '') {
-            $model = AssetModel::find($this->model_id);
-
-            if (($model) && ($model->fieldset)) {
-
-                foreach ($model->fieldset->fields as $field){
-                    if($field->format == 'BOOLEAN'){
-                        $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
-                    }
-                }
-
-                $this->rules += $model->fieldset->validation_rules();
-
-                if ($this->model->fieldset){
-                    foreach ($this->model->fieldset->fields as $field){
-                        if($field->format == 'BOOLEAN'){
-                            $this->{$field->db_column} = filter_var($this->{$field->db_column}, FILTER_VALIDATE_BOOLEAN);
-                        }
-                    }
-                }
-            }
-        }
-
+        $this->rules += $this->customFieldValidationRules();
         return parent::save($params);
     }
 
@@ -254,7 +257,7 @@ class Asset extends Depreciable
 
     /**
      * Returns the warranty expiration date as Carbon object
-     * @return \Carbon|null
+     * @return \Carbon\Carbon|null
      */
     public function getWarrantyExpiresAttribute()
     {
@@ -413,6 +416,17 @@ class Asset extends Depreciable
         return $this->rules;
     }
 
+    public function customFieldsForCheckinCheckout($checkin_checkout) {
+        // Check to see if any of the custom fields were included on the form and if they have any values
+        if (($this->model) && ($this->model->fieldset) && ($this->model->fieldset->fields)) {
+            foreach ($this->model->fieldset->fields as $field) {
+                if (($field->{$checkin_checkout} == 1) && (request()->has($field->db_column))){
+                    $this->{$field->db_column} = request()->get($field->db_column);
+                }
+            }
+        }
+    }
+
 
     /**
      * Establishes the asset -> depreciation relationship
@@ -521,6 +535,18 @@ class Asset extends Depreciable
     public function assignedAssets()
     {
         return $this->morphMany(self::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+    }
+
+    /**
+     * Establishes the accessory -> asset assignment relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function assignedAccessories()
+    {
+        return $this->morphMany(\App\Models\AccessoryCheckout::class, 'assigned', 'assigned_type', 'assigned_to');
     }
 
 
@@ -664,6 +690,21 @@ class Asset extends Depreciable
             ->withTrashed();
     }
 
+
+    /**
+     * Get the list of audits for this asset
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v2.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function audits()
+    {
+        return $this->assetlog()->where('action_type', '=', 'audit')
+            ->orderBy('created_at', 'desc')
+            ->withTrashed();
+    }
+
     /**
      * Get the list of checkins for this asset
      *
@@ -762,7 +803,7 @@ class Asset extends Depreciable
             ->whereNotNull('warranty_months')
             ->whereNotNull('purchase_date')
             ->whereNull('deleted_at')
-            ->whereRaw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH) <= DATE(NOW() + INTERVAL '
+            ->whereRaw('DATE_ADD(`purchase_date`, INTERVAL `warranty_months` MONTH) <= DATE_ADD(NOW(), INTERVAL '
                                  . $days
                                  . ' DAY) AND DATE_ADD(`purchase_date`, INTERVAL `warranty_months` MONTH) > NOW()')
             ->orderByRaw('DATE_ADD(`purchase_date`,INTERVAL `warranty_months` MONTH)')
@@ -1433,7 +1474,7 @@ class Asset extends Depreciable
    * @return \Illuminate\Database\Query\Builder          Modified query builder
    */
 
-    public function scopeRequestableAssets($query)
+    public function scopeRequestableAssets($query): Builder
     {
         $table = $query->getModel()->getTable();
 

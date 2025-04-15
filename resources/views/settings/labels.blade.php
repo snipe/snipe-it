@@ -20,7 +20,7 @@
         }
     </style>
 
-    {{ Form::open(['id' => 'settingsForm', 'method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.labels.save') }}" accept-charset="UTF-8" id="settingsForm" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -36,7 +36,6 @@
                 </div>
                 <div class="box-body">
 
-
                     <div class="col-md-12">
 
                         <!-- New Label Engine -->
@@ -46,7 +45,7 @@
 
                                 <label class="form-control">
                                     <input type="checkbox" value="1" name="label2_enable"{{ ((old('label2_enable') == '1') || ($setting->label2_enable) == '1') ? ' checked="checked"' : '' }} aria-label="label2_enable">
-                                    {{ Form::label('label2_enable', trans('admin/settings/general.label2_enable')) }}
+                                    <label for="label2_enable">{{ trans('admin/settings/general.label2_enable') }}</label>
                                 </label>
 
                                 {!! $errors->first('label2_enable', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -106,7 +105,7 @@
                             <!-- Title -->
                             <div class="form-group{{ $errors->has('label2_title') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_title', trans('admin/settings/general.label2_title'), ['class'=>'control-label']) }}
+                                    <label for="label2_title" class="control-label">{{trans('admin/settings/general.label2_title')}}</label>
                                 </div>
                                 <div class="col-md-7">
                                     <input class="form-control" aria-label="label2_title" name="label2_title" type="text" id="label2_title" value="{{ old('label2_title', $setting->label2_title) }}">
@@ -130,7 +129,7 @@
 
                                     <label class="form-control">
                                         <input type="checkbox" value="1" name="label2_asset_logo"{{ ((old('label2_asset_logo') == '1') || ($setting->label2_asset_logo) == '1') ? ' checked="checked"' : '' }} aria-label="label2_asset_logo">
-                                        {{ Form::label('label2_asset_logo', trans('admin/settings/general.label2_asset_logo')) }}
+                                        <label for="label2_asset_logo">{{ trans('admin/settings/general.label2_asset_logo') }}</label>
                                     </label>
                                     <p class="help-block">
                                         {!! trans('admin/settings/general.label2_asset_logo_help', ['setting_name' => trans('admin/settings/general.brand').' &gt; '.trans('admin/settings/general.label_logo')]) !!}
@@ -145,7 +144,7 @@
                             <div class="form-group">
                                 <div class="col-md-9 col-md-offset-3">
                                     <label class="form-control">
-                                        {{ Form::checkbox('alt_barcode_enabled', '1', old('alt_barcode_enabled', $setting->alt_barcode_enabled),array( 'aria-label'=>'alt_barcode_enabled')) }}
+                                        <input type="checkbox" name="alt_barcode_enabled" value="1" @checked(old('alt_barcode_enabled', $setting->alt_barcode_enabled)) aria-label="alt_barcode_enabled"/>
                                         {{ trans('admin/settings/general.display_alt_barcode') }}
                                     </label>
                                 </div>
@@ -156,7 +155,7 @@
                             <!-- 1D Barcode Type -->
                             <div class="form-group{{ $errors->has('label2_1d_type') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_1d_type', trans('admin/settings/general.label2_1d_type'), ['class'=>'control-label']) }}
+                                    <label for="label2_1d_type" class="control-label">{{ trans('admin/settings/general.label2_1d_type') }}</label>
                                 </div>
                                 <div class="col-md-7">
                                     @php
@@ -170,7 +169,14 @@
                                             'none'    => trans('admin/settings/general.none'),
                                         ];
                                     @endphp
-                                    {{ Form::select('label2_1d_type', $select1DValues, old('label2_1d_type', $setting->label2_1d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_1d_type' ]) }}
+                                    <x-input.select
+                                        name="label2_1d_type"
+                                        id="label2_1d_type"
+                                        :options="$select1DValues"
+                                        :selected="old('label2_1d_type', $setting->label2_1d_type)"
+                                        class="col-md-4"
+                                        aria-label="label2_1d_type"
+                                    />
                                     {!! $errors->first('label2_1d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.label2_1d_type_help') }}.
@@ -190,7 +196,7 @@
                         <div class="form-group">
                             <div class="col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('qr_code', '1', old('qr_code', $setting->qr_code),array('aria-label'=>'qr_code')) }}
+                                    <input type="checkbox" name="qr_code" value="1" @checked(old('qr_code', $setting->qr_code)) aria-label="qr_code" />
                                     {{ trans('admin/settings/general.display_qr') }}
                                 </label>
                             </div>
@@ -199,7 +205,7 @@
                                 <!-- 2D Barcode Type -->
                                 <div class="form-group{{ $errors->has('label2_2d_type') ? ' has-error' : '' }}">
                                     <div class="col-md-3 text-right">
-                                        {{ Form::label('label2_2d_type', trans('admin/settings/general.label2_2d_type'), ['class'=>'control-label']) }}
+                                        <label for="label2_2d_type" class="control-label">{{ trans('admin/settings/general.label2_2d_type') }}</label>
                                     </div>
                                     <div class="col-md-7">
                                         @php
@@ -214,7 +220,14 @@
                                                 'none'       => trans('admin/settings/general.none'),
                                             ]);
                                         @endphp
-                                        {{ Form::select('label2_2d_type', $select2DValues, old('label2_2d_type', $setting->label2_2d_type), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_type' ]) }}
+                                        <x-input.select
+                                            name="label2_2d_type"
+                                            id="label2_2d_type"
+                                            :options="$select2DValues"
+                                            :selected="old('label2_2d_type', $setting->label2_2d_type)"
+                                            class="col-md-4"
+                                            aria-label="label2_2d_type"
+                                        />
                                         {!! $errors->first('label2_2d_type', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                         <p class="help-block">
                                             {{ trans('admin/settings/general.label2_2d_type_help', ['current' => $setting->barcode_type]) }}.
@@ -229,7 +242,7 @@
                                 <!-- QR Text -->
                                 <div class="form-group{{ $errors->has('qr_text') ? ' has-error' : '' }}">
                                     <div class="col-md-3 text-right">
-                                        {{ Form::label('qr_text', trans('admin/settings/general.qr_text'), ['class'=>'control-label']) }}
+                                        <label for="qr_text" class="control-label">{{ trans('admin/settings/general.qr_text') }}</label>
                                     </div>
                                     <div class="col-md-7">
                                         @if ($setting->qr_code == 1)
@@ -264,7 +277,7 @@
                                 <!-- Nuke barcode cache -->
                                 <div class="form-group">
                                     <div class="col-md-3 text-right">
-                                        {{ Form::label('purge_barcodes', 'Purge Barcodes', ['class'=>'control-label']) }}
+                                        <label for="purge_barcodes" class="control-label">{{ trans('admin/settings/general.purge_barcodes') }}</label>
                                     </div>
                                     <div class="col-md-7">
                                         <a class="btn btn-default btn-sm pull-left" id="purgebarcodes" style="margin-right: 10px;">
@@ -282,16 +295,20 @@
                             <!-- 2D Barcode Target -->
                             <div class="form-group{{ $errors->has('label2_2d_target') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_2d_target', trans('admin/settings/general.label2_2d_target'), ['class'=>'control-label']) }}
+                                    <label for="label2_2d_target" class="control-label">{{ trans('admin/settings/general.label2_2d_target') }}</label>
                                 </div>
                                 <div class="col-md-9">
-                                    {{ Form::select('label2_2d_target', [
-                                        'hardware_id'           =>  trans('general.url') .': /hardware/{id} ('.trans('admin/settings/general.default').')', 
-                                        'ht_tag'                =>  trans('general.url') .': /ht/{asset_tag}', 
-                                        'plain_asset_id'        =>  trans('admin/settings/general.data') .': '. trans('admin/settings/general.asset_id') .' {id}',
-                                        'plain_asset_tag'       =>  trans('admin/settings/general.data') .': '. trans('general.asset_tag') .' {asset_tag}',
-                                        'plain_serial_number'   =>  trans('admin/settings/general.data') .': '. trans('general.serial_number') .' {serial}',
-                                       ], old('label2_2d_target', $setting->label2_2d_target), [ 'class'=>'select2 col-md-4', 'aria-label'=>'label2_2d_target' ]) }}
+                                    <x-input.select
+                                        name="label2_2d_target"
+                                        id="label2_2d_target"
+                                        :options="['hardware_id'=>'/hardware/{id} ('.trans('admin/settings/general.default').')',
+                                                   'ht_tag'=>'/ht/{asset_tag}',
+                                                   'location' => '/location/{location_id}',
+                                                   ]"
+                                        :selected="old('label2_2d_target', $setting->label2_2d_target)"
+                                        class="col-md-4"
+                                        aria-label="label2_2d_target"
+                                    />
                                     {!! $errors->first('label2_2d_target', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                     <p class="help-block">{{ trans('admin/settings/general.label2_2d_target_help') }}</p>
                                 </div>
@@ -302,7 +319,7 @@
                             <!-- Fields -->
                             <div class="form-group {{ $errors->has('label2_fields') ? 'error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('label2_fields', trans('admin/settings/general.label2_fields')) }}
+                                    <label for="label2_fields">{{ trans('admin/settings/general.label2_fields') }}</label>
                                 </div>
                                 <div class="col-md-9">
                                     @include('partials.label2-field-definitions', [ 'name' => 'label2_fields', 'value' => old('label2_fields', $setting->label2_fields), 'customFields' => $customFields, 'template' => $setting->label2_template])
@@ -349,14 +366,12 @@
                         }
                     </style>
 
-
-                    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
                     <!-- CSRF Token -->
                     {{csrf_field()}}
 
                             <div class="form-group{{ $errors->has('labels_per_page') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('labels_per_page', trans('admin/settings/general.labels_per_page'), ['class'=>'control-label']) }}
+                                    <label for="labels_per_page" class="control-label">{{ trans('admin/settings/general.labels_per_page') }}</label>
                                 </div>
                                 <div class="col-md-9">
                                     <input class="form-control" style="width: 100px;" aria-label="labels_per_page" name="labels_per_page" type="text" value="{{ old('labels_per_page', $setting->labels_per_page) }}" id="labels_per_page">
@@ -366,7 +381,7 @@
 
                             <div class="form-group{{ $errors->has('labels_fontsize') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('labels_fontsize', trans('admin/settings/general.labels_fontsize'), ['class'=>'control-label']) }}
+                                    <label for="labels_fontsize" class="control-label">{{ trans('admin/settings/general.labels_fontsize') }}</label>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="input-group">
@@ -381,7 +396,7 @@
 
                             <div class="form-group{{ $errors->has('labels_width') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('labels_width', trans('admin/settings/general.label_dimensions'), ['class'=>'control-label']) }}
+                                    <label for="labels_width" class="control-label">{{ trans('admin/settings/general.label_dimensions') }}</label>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
@@ -403,7 +418,7 @@
 
                             <div class="form-group{{ $errors->has('labels_display_sgutter') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('labels_display_sgutter', trans('admin/settings/general.label_gutters')) }}
+                                    <label for="labels_display_sgutter">{{ trans('admin/settings/general.label_gutters') }}</label>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
@@ -425,7 +440,7 @@
 
                             <div class="form-group{{ $errors->has('labels_pmargin_top') ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('labels_pmargin_top', trans('admin/settings/general.page_padding')) }}
+                                    <label for="labels_pmargin_top">{{ trans('admin/settings/general.page_padding') }}</label>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group" style="margin-bottom: 15px;">
@@ -456,7 +471,7 @@
 
                             <div class="form-group{{ (($errors->has('labels_pageheight')) || $errors->has('labels_pagewidth')) ? ' has-error' : '' }}">
                                 <div class="col-md-3 text-right">
-                                    {{ Form::label('labels_pagewidth', trans('admin/settings/general.page_dimensions'), ['class'=>'control-label']) }}
+                                    <label for="labels_pagewidth" class="control-label">{{ trans('admin/settings/general.page_dimensions') }}</label>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
@@ -479,27 +494,27 @@
                         @if(!$setting->label2_enable)
                             <div class="form-group">
                                 <div class="col-md-3 text-right">
-                                {{ Form::label('labels_display', trans('admin/settings/general.label_fields'), ['class' => 'control-label']) }}
+                                    <label for="labels_display" class="control-label">{{ trans('admin/settings/general.label_fields') }}</label>
                                 </div>
                                 <div class="col-md-9">
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_name', '1', old('labels_display_name',   $setting->labels_display_name),['class' => 'minimal', 'aria-label'=>'labels_display_name']) }}
+                                            <input type="checkbox" name="labels_display_name" value="1" @checked(old('labels_display_name',   $setting->labels_display_name)) aria-label="labels_display_name" />
                                             {{ trans('admin/hardware/form.name') }}
                                         </label>
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_serial', '1', old('labels_display_serial',   $setting->labels_display_serial),['class' => 'minimal', 'aria-label'=>'labels_display_serial']) }}
+                                            <input type="checkbox" name="labels_display_serial" value="1" @checked(old('labels_display_serial',   $setting->labels_display_serial)) aria-label="labels_display_serial" />
                                             {{ trans('admin/hardware/form.serial') }}
                                         </label>
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_tag', '1', old('labels_display_tag',   $setting->labels_display_tag),['class' => 'minimal', 'aria-label'=>'labels_display_tag']) }}
+                                            <input type="checkbox" name="labels_display_tag" value="1" @checked(old('labels_display_tag',   $setting->labels_display_tag)) aria-label="labels_display_tag" />
                                             {{ trans('admin/hardware/form.tag') }}
                                         </label>
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_model', '1', old('labels_display_model',   $setting->labels_display_model),['class' => 'minimal', 'aria-label'=>'labels_display_model']) }}
+                                            <input type="checkbox" name="labels_display_model" value="1" @checked(old('labels_display_model',   $setting->labels_display_model)) aria-label="labels_display_model" />
                                             {{ trans('admin/hardware/form.model') }}
                                         </label>
                                         <label class="form-control">
-                                            {{ Form::checkbox('labels_display_company_name', '1', old('labels_display_company_name',   $setting->labels_display_company_name),['class' => 'minimal', 'aria-label'=>'labels_display_company_name']) }}
+                                            <input type="checkbox" name="labels_display_company_name" value="1" @checked(old('labels_display_company_name',   $setting->labels_display_company_name)) aria-label="labels_display_company_name"/>
                                             {{ trans('admin/companies/table.name') }}
                                         </label>
                                 </div> <!--/.col-md-9-->
@@ -521,7 +536,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 

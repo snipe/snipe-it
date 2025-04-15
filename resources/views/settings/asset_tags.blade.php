@@ -21,7 +21,7 @@
     </style>
 
 
-    {{ Form::open(['method' => 'POST', 'files' => false, 'autocomplete' => 'off', 'class' => 'form-horizontal', 'role' => 'form' ]) }}
+    <form method="POST" action="{{ route('settings.asset_tags.save') }}" accept-charset="UTF-8" autocomplete="off" class="form-horizontal" role="form">
     <!-- CSRF Token -->
     {{csrf_field()}}
 
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-7">
                                 <label class="form-control">
-                                    {{ Form::checkbox('auto_increment_assets', '1', old('auto_increment_assets', $setting->auto_increment_assets),array('aria-label'=>'auto_increment_assets')) }}
+                                    <input type="checkbox" name="auto_increment_assets" value="1" @checked(old('auto_increment_assets', $setting->auto_increment_assets)) aria-label="auto_increment_assets">
                                     {{ trans('admin/settings/general.enabled') }}
                                 </label>
                             </div>
@@ -106,6 +106,6 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop

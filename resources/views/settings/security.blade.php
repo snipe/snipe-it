@@ -83,27 +83,27 @@
                             <div class="col-md-9">
                                 <label class="form-control">
                                     <span class="sr-only">{{ trans('admin/settings/general.pwd_secure_uncommon') }}</span>
-                                    {{ Form::checkbox('pwd_secure_uncommon', '1', old('pwd_secure_uncommon', $setting->pwd_secure_uncommon),array( 'aria-label'=>'pwd_secure_uncommon')) }}
+                                    <input type="checkbox" name="pwd_secure_uncommon" value="1" @checked(old('pwd_secure_uncommon', $setting->pwd_secure_uncommon)) aria-label="pwd_secure_uncommon"/>
                                     {{ trans('admin/settings/general.pwd_secure_uncommon') }}
                                 </label>
                                 <label class="form-control">
-                                    {{ Form::checkbox("pwd_secure_complexity['disallow_same_pwd_as_user_fields']", 'disallow_same_pwd_as_user_fields', old('disallow_same_pwd_as_user_fields', strpos($setting->pwd_secure_complexity, 'disallow_same_pwd_as_user_fields')!==false), array('aria-label'=>'pwd_secure_complexity')) }}
+                                    <input type="checkbox" name="pwd_secure_complexity['disallow_same_pwd_as_user_fields']" value="disallow_same_pwd_as_user_fields" @checked(old('disallow_same_pwd_as_user_fields', strpos($setting->pwd_secure_complexity, 'disallow_same_pwd_as_user_fields')!==false)) aria-label="pwd_secure_complexity"/>
                                     {{ trans('admin/settings/general.pwd_secure_complexity_disallow_same_pwd_as_user_fields') }}
                                 </label>
                                 <label class="form-control">
-                                    {{ Form::checkbox("pwd_secure_complexity['letters']", 'letters', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'letters')!==false), array('aria-label'=>'pwd_secure_complexity')) }}
+                                    <input type="checkbox" name="pwd_secure_complexity['letters']" value="letters" @checked(old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'letters')!==false)) aria-label="pwd_secure_complexity"/>
                                     {{ trans('admin/settings/general.pwd_secure_complexity_letters') }}
                                 </label>
                                 <label class="form-control">
-                                    {{ Form::checkbox("pwd_secure_complexity['numbers']", 'numbers', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'numbers')!==false), array('aria-label'=>'pwd_secure_complexity')) }}
+                                    <input type="checkbox" name="pwd_secure_complexity['numbers']" value="numbers" @checked(old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'numbers')!==false)) aria-label="pwd_secure_complexity"/>
                                     {{ trans('admin/settings/general.pwd_secure_complexity_numbers') }}
                                 </label>
                                 <label class="form-control">
-                                    {{ Form::checkbox("pwd_secure_complexity['symbols']", 'symbols', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'symbols')!==false), array('aria-label'=>'pwd_secure_complexity')) }}
+                                    <input type="checkbox" name="pwd_secure_complexity['symbols']" value="symbols" @checked(old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'symbols')!==false)) aria-label="pwd_secure_complexity"/>
                                     {{ trans('admin/settings/general.pwd_secure_complexity_symbols') }}
                                 </label>
                                 <label class="form-control">
-                                    {{ Form::checkbox("pwd_secure_complexity['case_diff']", 'case_diff', old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'case_diff')!==false), array('aria-label'=>'pwd_secure_complexity')) }}
+                                    <input type="checkbox" name="pwd_secure_complexity['case_diff']" value="case_diff" @checked(old('pwd_secure_uncommon', strpos($setting->pwd_secure_complexity, 'case_diff')!==false)) aria-label="pwd_secure_complexity"/>
                                     {{ trans('admin/settings/general.pwd_secure_complexity_case_diff') }}
                                 </label>
 
@@ -129,7 +129,7 @@
                                     <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
                                 @else
                                     <label class="form-control">
-                                        {{ Form::checkbox('login_remote_user_enabled', '1', old('login_remote_user_enabled', $setting->login_remote_user_enabled),array('aria-label'=>'login_remote_user')) }}
+                                        <input type="checkbox" name="login_remote_user_enabled" value="1" @checked(old('login_remote_user_enabled', $setting->login_remote_user_enabled)) aria-label="login_remote_user"/>
                                         <label for="login_remote_user_enabled">{{ trans('admin/settings/general.login_remote_user_enabled_text') }}</label>
                                     </label>
 
@@ -158,7 +158,7 @@
                                     <!--  Disable other logins mechanism -->
                                     <label class="form-control">
 
-                                        {{ Form::checkbox('login_common_disabled', '1', old('login_common_disabled', $setting->login_common_disabled),array('aria-label'=>'login_common_disabled')) }}
+                                        <input type="checkbox" name="login_common_disabled" value="1" @checked(old('login_common_disabled', $setting->login_common_disabled)) aria-label="login_common_disabled"/>
                                         {{ trans('admin/settings/general.login_common_disabled_text') }}
                                     </label>
                                     {!! $errors->first('login_common_disabled', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
@@ -190,6 +190,6 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop

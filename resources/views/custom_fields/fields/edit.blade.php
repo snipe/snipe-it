@@ -94,7 +94,14 @@
               }
               @endphp
             <div class="col-md-8 required">
-              {{ Form::select("format",Helper::predefined_formats(), ($field_format == '') ? $field->format : $field_format, array('class'=>'format select2 form-control', 'aria-label'=>'format', 'style' => 'width:100%;')) }}
+                <x-input.select
+                    name="format"
+                    :options="Helper::predefined_formats()"
+                    :selected="($field_format == '') ? $field->format : $field_format"
+                    class="format form-control"
+                    style="width:100%"
+                    aria-label="format"
+                />
               {!! $errors->first('format', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
@@ -157,7 +164,7 @@
 
 
               <!-- Auto-Add to Future Fieldsets  -->
-              <div class="col-md-9 col-md-offset-3">
+              <div class="col-md-9 col-md-offset-3" style="padding-bottom: 10px;">
                   <label class="form-control">
                       <input type="checkbox" name="auto_add_to_fieldsets" aria-label="auto_add_to_fieldsets" value="1"{{ (old('auto_add_to_fieldsets') || $field->auto_add_to_fieldsets) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.auto_add_to_fieldsets') }}
@@ -165,7 +172,7 @@
               </div>
 
               <!-- Show in list view -->
-              <div class="col-md-9 col-md-offset-3">
+              <div class="col-md-9 col-md-offset-3" style="padding-bottom: 10px;">
                   <label class="form-control">
                       <input type="checkbox" name="show_in_listview" aria-label="show_in_listview" value="1"{{ (old('show_in_listview') || $field->show_in_listview) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_listview') }}
@@ -176,7 +183,7 @@
               @if ((!$field->id) || ($field->field_encrypted=='0'))
 
               <!-- Show in requestable list view -->
-              <div class="col-md-9 col-md-offset-3" id="show_in_requestable_list">
+              <div class="col-md-9 col-md-offset-3" id="show_in_requestable_list" style="padding-bottom: 10px;">
                   <label class="form-control">
                       <input type="checkbox" name="show_in_requestable_list" aria-label="show_in_requestable_list" value="1"{{ (old('show_in_requestable_list') || $field->show_in_requestable_list) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_requestable_list') }}
@@ -184,7 +191,7 @@
               </div>
 
               <!-- Show in Email  -->
-              <div class="col-md-9 col-md-offset-3" id="show_in_email">
+              <div class="col-md-9 col-md-offset-3" id="show_in_email" style="padding-bottom: 10px;">
                   <label class="form-control">
                       <input type="checkbox" name="show_in_email" aria-label="show_in_email" value="1"{{ (old('show_in_email') || $field->show_in_email) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.show_in_email') }}
@@ -192,7 +199,7 @@
               </div>
 
               <!-- Value Must be Unique -->
-              <div class="col-md-9 col-md-offset-3" id="is_unique">
+              <div class="col-md-9 col-md-offset-3" id="is_unique" style="padding-bottom: 10px;">
                   <label class="form-control">
                       <input type="checkbox" name="is_unique" aria-label="is_unique" value="1"{{ (old('is_unique') || $field->is_unique) ? ' checked="checked"' : '' }}>
                       {{ trans('admin/custom_fields/general.is_unique') }}
@@ -200,7 +207,33 @@
               </div>
               @endif
 
-              <!-- Show in View All Assets profile view  -->
+
+             <!-- Show in Checkout Form  -->
+             <div class="col-md-9 col-md-offset-3" id="display_checkout" style="padding-bottom: 10px;">
+                 <label class="form-control">
+                     <input type="checkbox" name="display_checkout" aria-label="display_checkout" value="1" {{ (old('display_checkout') || $field->display_checkout) ? ' checked="checked"' : '' }}>
+                     {{ trans('admin/custom_fields/general.display_checkout') }}
+                 </label>
+             </div>
+
+             <!-- Show in Checkin Form  -->
+             <div class="col-md-9 col-md-offset-3" id="display_checkin" style="padding-bottom: 10px;">
+                 <label class="form-control">
+                     <input type="checkbox" name="display_checkin" aria-label="display_checkin" value="1" {{ (old('display_checkin') || $field->display_checkin) ? ' checked="checked"' : '' }}>
+                     {{ trans('admin/custom_fields/general.display_checkin') }}
+                 </label>
+             </div>
+
+             <!-- Show in Audit Form  -->
+             <div class="col-md-9 col-md-offset-3" id="display_audit" style="padding-bottom: 10px;">
+                 <label class="form-control">
+                     <input type="checkbox" name="display_audit" aria-label="display_audit" value="1" {{ (old('display_audit') || $field->display_audit) ? ' checked="checked"' : '' }}>
+                     {{ trans('admin/custom_fields/general.display_audit') }}
+                 </label>
+             </div>
+
+
+             <!-- Show in View All Assets profile view  -->
               <div class="col-md-9 col-md-offset-3" id="display_in_user_view">
                   <label class="form-control">
                       <input type="checkbox" name="display_in_user_view" aria-label="display_in_user_view" value="1" {{ (old('display_in_user_view') || $field->display_in_user_view) ? ' checked="checked"' : '' }}>

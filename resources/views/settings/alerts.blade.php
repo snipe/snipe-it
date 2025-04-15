@@ -45,7 +45,7 @@
                         <div class="form-group {{ $errors->has('alerts_enabled') ? 'error' : '' }}">
                             <div class="col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('alerts_enabled', '1', old('alerts_enabled', $setting->alerts_enabled)) }}
+                                    <input type="checkbox" name="alerts_enabled" value="1" @checked(old('alerts_enabled', $setting->alerts_enabled))>
                                     {{  trans('admin/settings/general.alerts_enabled') }}
                                 </label>
                             </div>
@@ -55,7 +55,7 @@
                         <div class="form-group {{ $errors->has('show_alerts_in_menu') ? 'error' : '' }}">
                             <div class="col-md-9 col-md-offset-3">
                                 <label class="form-control">
-                                    {{ Form::checkbox('show_alerts_in_menu', '1', old('show_alerts_in_menu', $setting->show_alerts_in_menu)) }}
+                                    <input type="checkbox" name="show_alerts_in_menu" value="1" @checked(old('show_alerts_in_menu', $setting->show_alerts_in_menu))>
                                     {{ trans('admin/settings/general.show_alerts_in_menu') }}
                                 </label>
                             </div>
@@ -176,7 +176,7 @@
         </div> <!-- /.col-md-8-->
     </div> <!-- /.row-->
 
-    {{Form::close()}}
+    </form>
 
 @stop
 

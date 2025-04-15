@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CheckoutRequests\CancelCheckoutRequestAction;
+use App\Actions\CheckoutRequests\CreateCheckoutRequestAction;
+use App\Exceptions\AssetNotRequestable;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
-use App\Models\Company;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\RequestAssetCancelation;
 use App\Notifications\RequestAssetNotification;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use \Illuminate\Contracts\View\View;
-use Log;
+use Exception;
 
 /**
  * This controller handles all actions related to the ability for users
@@ -81,7 +84,7 @@ class ViewAssetsController extends Controller
         return view('account/requestable-assets', compact('assets', 'models'));
     }
 
-    public function getRequestItem(Request $request, $itemType, $itemId = null, $cancel_by_admin = false, $requestingUser = null) : RedirectResponse
+    public function getRequestItem(Request $request, $itemType, $itemId = null, $cancel_by_admin = false, $requestingUser = null): RedirectResponse
     {
         $item = null;
         $fullItemType = 'App\\Models\\'.studly_case($itemType);
@@ -144,62 +147,32 @@ class ViewAssetsController extends Controller
      * Process a specific requested asset
      * @param null $assetId
      */
-    public function getRequestAsset($assetId = null) : RedirectResponse
+    public function store(Asset $asset): RedirectResponse
     {
-        $user = auth()->user();
-
-        // Check if the asset exists and is requestable
-        if (is_null($asset = Asset::RequestableAssets()->find($assetId))) {
-            return redirect()->route('requestable-assets')
-                ->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
-        }
-        if (! Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('requestable-assets')
-                ->with('error', trans('general.insufficient_permissions'));
-        }
-
-        $data['item'] = $asset;
-        $data['target'] = auth()->user();
-        $data['item_quantity'] = 1;
-        $settings = Setting::getSettings();
-
-        $logaction = new Actionlog();
-        $logaction->item_id = $data['asset_id'] = $asset->id;
-        $logaction->item_type = $data['item_type'] = Asset::class;
-        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
-
-        if ($user->location_id) {
-            $logaction->location_id = $user->location_id;
-        }
-        $logaction->target_id = $data['user_id'] = auth()->id();
-        $logaction->target_type = User::class;
-
-        // If it's already requested, cancel the request.
-        if ($asset->isRequestedBy(auth()->user())) {
-            $asset->cancelRequest();
-            $asset->decrement('requests_counter', 1);
-
-            $logaction->logaction('request canceled');
-            try {
-                $settings->notify(new RequestAssetCancelation($data));
-            } catch (\Exception $e) {
-                Log::warning($e);
-            }
-            return redirect()->route('requestable-assets')
-                ->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
-        }
-
-        $logaction->logaction('requested');
-        $asset->request();
-        $asset->increment('requests_counter', 1);
         try {
-            $settings->notify(new RequestAssetNotification($data));
-        } catch (\Exception $e) {
-            Log::warning($e);
+            CreateCheckoutRequestAction::run($asset, auth()->user());
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+        } catch (AssetNotRequestable $e) {
+            return redirect()->back()->with('error', 'Asset is not requestable');
+        } catch (AuthorizationException $e) {
+            return redirect()->back()->with('error', trans('admin/hardware/message.requests.error'));
+        } catch (Exception $e) {
+            report($e);
+            return redirect()->back()->with('error', trans('general.something_went_wrong'));
         }
-
-        return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
     }
+
+    public function destroy(Asset $asset): RedirectResponse
+    {
+        try {
+            CancelCheckoutRequestAction::run($asset, auth()->user());
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
+        } catch (Exception $e) {
+            report($e);
+            return redirect()->back()->with('error', trans('general.something_went_wrong'));
+        }
+    }
+
 
     public function getRequestedAssets() : View
     {

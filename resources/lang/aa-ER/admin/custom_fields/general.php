@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'crwdns6509:0crwdne6509:0',
     'value_encrypted'      	        => 'crwdns1696:0crwdne1696:0',
     'show_in_email'     => 'crwdns11854:0crwdne11854:0',
-    'show_in_email_short'     => 'crwdns11856:0crwdne11856:0',
+    'show_in_email_short' => 'crwdns12933:0crwdne12933:0',
     'help_text' => 'crwdns6511:0crwdne6511:0',
     'help_text_description' => 'crwdns6513:0crwdne6513:0',
     'about_custom_fields_title' => 'crwdns6515:0crwdne6515:0',
@@ -57,5 +57,7 @@ return [
     'show_in_requestable_list_short' => 'crwdns11860:0crwdne11860:0',
     'show_in_requestable_list' => 'crwdns11862:0crwdne11862:0',
     'encrypted_options' => 'crwdns11864:0crwdne11864:0',
+    'display_checkin' => 'crwdns12929:0crwdne12929:0',
+    'display_checkout' => 'crwdns12931:0crwdne12931:0',
 
 ];
