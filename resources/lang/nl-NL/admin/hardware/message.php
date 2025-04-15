@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'Het geselecteerde bestand is al verwijderd',
         'header_row_has_malformed_characters' => 'Een of meer attributen in de kopregel bevatten ongeldige UTF-8-tekens',
         'content_row_has_malformed_characters' => 'Een of meer attributen in de eerste rij inhoud bevat ongeldige UTF-8 tekens',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Asset is niet aangevraagd. Probeer het opnieuw',
-        'success' 		=> 'Asset is succesvol aangevraagd.',
-        'canceled'      => 'Checkout aanvraag succesvol geannuleerd',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Annuleer deze aanvraag',
     ],
 
 ];

@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'Šis statuss nav izmantojams. Pamatlīdzeklis nevar tikt izrakstīts.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Šis statuss ir izmantojams. Pamatlīdzeklis ir pieejams izrakstīšanai.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'optional_infos'  => 'Neobligātā informācija',
     'order_details'   => 'Pasūtījuma informācija',

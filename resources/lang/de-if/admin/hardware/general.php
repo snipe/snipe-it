@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Archiviert',
     'asset'  					=> 'Asset',
     'bulk_checkout'             => 'Massenherausgabe',
-    'bulk_checkin'              => 'Masseneinchecken',
+    'bulk_checkin'              => 'Massen-Rücknahme',
     'checkin'  					=> 'Asset zurücknehmen',
     'checkout'  				=> 'Asset herausgeben',
     'clone'  					=> 'Asset duplizieren',

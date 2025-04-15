@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'crwdns11864:0crwdne11864:0',
     'display_checkin' => 'crwdns12929:0crwdne12929:0',
     'display_checkout' => 'crwdns12931:0crwdne12931:0',
+    'display_audit' => 'crwdns13023:0crwdne13023:0',
 
 ];

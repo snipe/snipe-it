@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Fieldនេះត្រូវបានអ៊ិនគ្រីប ដូច្នេះជម្រើសបង្ហាញមួយចំនួននឹងមិនមានទេ។',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

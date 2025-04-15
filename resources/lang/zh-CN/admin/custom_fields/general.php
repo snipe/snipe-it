@@ -59,5 +59,6 @@ return [
     'encrypted_options' => '此字段已加密，因此一些显示选项将不可用。',
     'display_checkin' => '在归还表格中显示',
     'display_checkout' => '在借出表格中显示',
+    'display_audit' => '在盘点表中显示',
 
 ];

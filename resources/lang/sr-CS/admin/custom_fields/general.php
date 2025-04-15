@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Ovo polje je enkriptovano, zato neke opcije prikaza neće biti dostupne.',
     'display_checkin' => 'Prikaži u formularima razduživanja',
     'display_checkout' => 'Prikaži u formularima zaduživanja',
+    'display_audit' => 'Prikaži u formularu revizije',
 
 ];

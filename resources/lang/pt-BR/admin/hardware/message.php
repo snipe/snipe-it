@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'O arquivo selecionado já foi excluído',
         'header_row_has_malformed_characters' => 'Um ou mais atributos na linha do cabeçalho contém caracteres UTF-8 malformados',
         'content_row_has_malformed_characters' => 'Um ou mais atributos na primeira linha de conteúdo contém caracteres UTF-8 malformados',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Ativo não foi solicitado, por favor tente novamente',
-        'success' 		=> 'Ativo solicitado com sucesso.',
-        'canceled'      => 'Requisição cancelada com sucesso',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Cancelar solicitação deste item',
     ],
 
 ];

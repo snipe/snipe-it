@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Päivitä vain todellinen sijainti',
     'asset_not_deployable' => 'Laite ei ole käyttöönotettavissa. Laitetta ei voida luovuttaa.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Laite on käyttöönotettavissa. Laite voidaan luovuttaa.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Käsitellään... (Tämä saattaa kestää jonkin aikaa suurien tiedostojen kanssa)',
     'optional_infos'  => 'Valinnaiset tiedot',
     'order_details'   => 'Tilaukseen liityvät tiedot',

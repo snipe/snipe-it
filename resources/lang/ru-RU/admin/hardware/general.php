@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Архивированные',
     'asset'  					=> 'Актив',
     'bulk_checkout'             => 'Массовая выдача',
-    'bulk_checkin'              => 'Bulk Checkin',
+    'bulk_checkin'              => 'Массовый возврат',
     'checkin'  					=> 'Вернуть актив на склад',
     'checkout'  				=> 'Выдать актив пользователю',
     'clone'  					=> 'Клонировать актив',

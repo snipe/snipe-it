@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'To pole jest zaszyfrowane, więc niektóre opcje wyświetlania nie będą dostępne.',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

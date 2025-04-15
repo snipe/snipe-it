@@ -50,5 +50,11 @@ return [
         'error_misc' => 'Щось пішло не так. :( ',
         'webhook_fail' => 'не вдалося надіслати повідомлення webhook для перевірки: Переконайтесь, що посилання ще дійсне.',
         'webhook_channel_not_found' => ' webhook channel not found.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

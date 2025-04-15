@@ -50,5 +50,11 @@ return [
         'error_misc' => 'Qualcosa è andato storto. :( ',
         'webhook_fail' => ' notifica webhook fallita: Controlla che l\'URL sia ancora valido.',
         'webhook_channel_not_found' => ' canale webhook non trovato.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Le tue impostazioni non sono state salvate.',
+        'mismatch' => 'C\'è 1 elemento nel database che ha bisogno della vostra attenzione prima di abilitare i filtri per posizione.|Ci sono :count elementi nel database che hanno bisogno della vostra attenzione prima di abilitare i filtri per posizione.',
+    ],
+
 ];

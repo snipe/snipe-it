@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => '选择的文件已被删除',
         'header_row_has_malformed_characters' => '标题行中的一个或多个属性包含格式错误的 UTF-8 字符',
         'content_row_has_malformed_characters' => '第一行内容中的一个或多个属性包含格式错误的 UTF-8 字符',
+        'transliterate_failure' => '从 :encoding 到 UTF-8 翻译失败，因为输入的字符无效'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> '未能成功请求分配资产，请重试。',
-        'success' 		=> '成功请求资产',
-        'canceled'      => '借出申请已取消。',
+        'error'   		=> '申请失败，请重试。',
+        'success' 		=> '申请提交成功。',
+        'canceled'      => '申请已取消。',
+        'cancel'        => '取消申请此物品',
     ],
 
 ];

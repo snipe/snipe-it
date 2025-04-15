@@ -57,7 +57,8 @@ return [
     'show_in_requestable_list_short' => 'In anforderbarer Asset-Liste anzeigen',
     'show_in_requestable_list' => 'Wert in der anforderbaren Asset-Liste anzeigen. Verschlüsselte Felder werden nicht angezeigt',
     'encrypted_options' => 'Dieses Feld ist verschlüsselt, so dass einige Display-Optionen nicht verfügbar sind.',
-    'display_checkin' => 'Display in checkin forms',
-    'display_checkout' => 'Display in checkout forms',
+    'display_checkin' => 'In Check-in-Formularen anzeigen',
+    'display_checkout' => 'In Check-out-Formularen anzeigen',
+    'display_audit' => 'Display in audit forms',
 
 ];

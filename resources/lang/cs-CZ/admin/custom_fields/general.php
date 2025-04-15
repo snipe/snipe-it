@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Toto pole je šifrované, takže některé možnosti zobrazení nebudou k dispozici.',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

@@ -15,6 +15,6 @@ return array(
 
     'failed' => 'Ці облікові дані не збігаються з нашими записами.',
     'password' => 'Наданий пароль неправильний.',
-    'throttle' => 'Занадто багато спроб входу. Будь ласка, спробуйте ще раз, через :seconds.',
+    'throttle' => 'Too many login attempts. Please try again in :minutes minute(s).',
 
 );

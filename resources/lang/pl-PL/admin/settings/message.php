@@ -50,5 +50,11 @@ return [
         'error_misc' => 'Coś poszło nie tak. :( ',
         'webhook_fail' => ' Powiadomienie webhook nie powiodło się: Sprawdź, czy adres URL jest nadal prawidłowy.',
         'webhook_channel_not_found' => ' Nie znaleziono kanału webhook.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

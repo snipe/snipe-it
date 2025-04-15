@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Oppdater bare faktisk plassering',
     'asset_not_deployable' => 'Den eiendelstatusen gjør at denne eiendelen ikke kan sjekkes ut.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Den statusen gjør det mulig å sjekke ut denne eiendelen.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Behandler... (Dette kan ta litt tid for store filer)',
     'optional_infos'  => 'Valgfri informasjon',
     'order_details'   => 'Ordrerelatert informasjon',

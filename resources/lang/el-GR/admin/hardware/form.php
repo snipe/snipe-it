@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Ενημέρωση μόνο πραγματικής τοποθεσίας',
     'asset_not_deployable' => 'Αυτή η κατάσταση ενεργητικού δεν μπορεί να αναπτυχθεί. Αυτό το στοιχείο δεν μπορεί να ελεγχθεί.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Αυτή η κατάσταση μπορεί να χρησιμοποιηθεί. Αυτό το στοιχείο μπορεί να ελεγχθεί.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Επεξεργασία... (Αυτό μπορεί να πάρει λίγο χρόνο σε μεγάλα αρχεία)',
     'optional_infos'  => 'Προαιρετικές Πληροφορίες',
     'order_details'   => 'Σχετικές Πληροφορίες Παραγγελίας',

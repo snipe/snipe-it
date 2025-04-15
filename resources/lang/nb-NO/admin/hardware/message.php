@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'En eller flere attributter i overskriftsraden inneholder feilformede UTF-8 tegn',
         'content_row_has_malformed_characters' => 'En eller flere attributter i første rad i inneholdet inneholder feilformet UTF-8 tegn',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Eiendelen ble ikke forespurt, prøv igjen',
-        'success' 		=> 'Eiendel ble forespurt.',
-        'canceled'      => 'Utsjekkingsforespørselen ble kansellert',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Avbryt forespørsel om element',
     ],
 
 ];
