@@ -86,13 +86,13 @@ class UsersForSelectListTest extends TestCase
         $this->settings->enableMultipleFullCompanySupport();
 
         $jedi = Company::factory()->has(User::factory()->count(3)->sequence(
-            ['first_name' => 'Luke', 'last_name' => 'Skywalker', 'username' => 'lskywalker'],
-            ['first_name' => 'Obi-Wan', 'last_name' => 'Kenobi', 'username' => 'okenobi'],
-            ['first_name' => 'Anakin', 'last_name' => 'Skywalker', 'username' => 'askywalker'],
+            ['first_name' => 'Luke', 'last_name' => 'Skywalker', 'username' => 'lskywalker', 'email' => 'lskywalker@jedis.org'],
+            ['first_name' => 'Obi-Wan', 'last_name' => 'Kenobi', 'username' => 'okenobi', 'email' => 'okenobi@jedis.org'],
+            ['first_name' => 'Anakin', 'last_name' => 'Skywalker', 'username' => 'askywalker', 'email' => 'askywalker@alliance.org'],
         ))->create();
 
         Company::factory()
-            ->has(User::factory()->state(['first_name' => 'Darth', 'last_name' => 'Vader', 'username' => 'dvader']))
+            ->has(User::factory()->state(['first_name' => 'Darth', 'last_name' => 'Vader', 'username' => 'dvader', 'email' => 'dvader@empire.jerks']))
             ->create();
 
         Passport::actingAs($jedi->users->first());
@@ -104,7 +104,7 @@ class UsersForSelectListTest extends TestCase
         $this->assertTrue($results->pluck('text')->contains(fn($text) => str_contains($text, 'Luke')));
         $this->assertTrue($results->pluck('text')->contains(fn($text) => str_contains($text, 'Anakin')));
 
-        $response = $this->getJson(route('api.users.selectlist', ['search' => 'v']))->assertOk();
+        $response = $this->getJson(route('api.users.selectlist', ['search' => 'dvader']))->assertOk();
         $this->assertEquals(0, collect($response->json('results'))->count());
     }
 }
