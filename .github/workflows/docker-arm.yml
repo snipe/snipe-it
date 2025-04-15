@@ -1,5 +1,5 @@
 # Snipe-IT Docker image build for hub.docker.com
-name: Docker Intel/amd64 images (Ubuntu)
+name: Docker ARM64 images (Ubuntu)
 
 # Run this Build for all pushes to 'master' or develop branch, or tagged releases.
 # Also run for PRs to ensure PR doesn't break Docker build process
