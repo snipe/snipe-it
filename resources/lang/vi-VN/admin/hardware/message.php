@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Một hoặc nhiều thuộc tính trong hàng tiêu đề chứa các ký tự không đúng định dạng UTF-8',
         'content_row_has_malformed_characters' => 'Một hoặc nhiều thuộc tính ở hàng đầu tiên của nội dung chứa ký tự không đúng định dạng UTF-8',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Tài sản không được yêu cầu, vui lòng thử lại',
-        'success' 		=> 'Tài sản đã yêu cầu thành công.',
-        'canceled'      => 'Yêu cầu Thanh toán đã được hủy thành công',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Cancel this item request',
     ],
 
 ];

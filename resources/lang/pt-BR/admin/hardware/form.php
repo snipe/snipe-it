@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Atualizar somente a localização atual',
     'asset_not_deployable' => 'Esta situação de ativo não é implementável. A saída deste ativo não pode ser realizada.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Esta situação pode ser implementado. A saída deste ativo pode ser realizada.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Processando... (Isso pode levar algum tempo em arquivos grandes)',
     'optional_infos'  => 'Informação Opcional',
     'order_details'   => 'Informações do pedido relacionado',

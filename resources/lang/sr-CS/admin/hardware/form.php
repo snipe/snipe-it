@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Izmeni samo stvarnu lokaciju',
     'asset_not_deployable' => 'Status imovine je nezaduživo. Ova imovina se ne može zadužiti.',
     'asset_not_deployable_checkin' => 'Status ove imovine nije zaduživ. Korišćenje ove oznake statusa će razdužiti imovinu.',
-    'asset_deployable' => 'Status imovine je zaduživo. Ova imovina se može zadužiti.',
+    'asset_deployable' => 'Ova imovina može biti zadužena.',
     'processing_spinner' => 'Obrađivanje... (Ovo bi moglo da potraje u slučaju velikih datoteka)',
     'optional_infos'  => 'Opcione informacije',
     'order_details'   => 'Informacije o nabavci',

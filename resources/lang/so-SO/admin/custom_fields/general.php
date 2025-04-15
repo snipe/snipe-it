@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Goobtan waa la sir sir ah, marka qaar ka mid ah xulashooyinka bandhiga lama heli doono.',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

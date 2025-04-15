@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Posodobi samo aktualno lokacijo',
     'asset_not_deployable' => 'Tega statusa sredstev ni mogoče uporabiti. Tega sredstva ni mogoče odjaviti.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Ta status se lahko uporabi. To sredstvo je mogoče odjaviti.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Obdelava (pri velikih datotekah lahko traja nekaj časa)',
     'optional_infos'  => 'Neobvezne informacije',
     'order_details'   => 'Informacije povezane z naročilom',

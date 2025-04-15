@@ -60,5 +60,6 @@ return [
     'encrypted_options' => 'Este campo está criptografado, então algumas opções de exibição não estarão disponíveis.',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'File yang dipilih telah dihapus',
         'header_row_has_malformed_characters' => 'Salah satu atau lebih atribut di baris header mengandung karakter UTF-8 yang tidak sah',
         'content_row_has_malformed_characters' => 'Salah satu atau lebih atribut di baris pertama konten mengandung karakter UTF-8 yang tidak sah',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Aset gagal di minta, silahkan coba kembali',
-        'success' 		=> 'Sukses meminta aset.',
-        'canceled'      => 'Permintaan pemeriksaan berhasil dibatalkan',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Batalkan permintaan barang ini',
     ],
 
 ];

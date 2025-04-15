@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Ένα ή περισσότερα χαρακτηριστικά στη σειρά κεφαλίδας περιέχουν κακοσχηματισμένους UTF-8 χαρακτήρες',
         'content_row_has_malformed_characters' => 'Ένα ή περισσότερα χαρακτηριστικά στην πρώτη σειρά περιεχομένου περιέχουν κακοσχηματισμένους UTF-8 χαρακτήρες',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Το στοιχείο δεν ζητήθηκε, δοκιμάστε ξανά',
-        'success' 		=> 'Τα πάγια ενημερώθηκαν επιτυχώς.',
-        'canceled'      => 'Η αίτηση πληρωμής ακυρώθηκε με επιτυχία',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Ακυρώστε αυτό το αίτημα στοιχείου',
     ],
 
 ];

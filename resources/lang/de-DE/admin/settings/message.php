@@ -50,5 +50,11 @@ return [
         'error_misc' => 'Etwas ist schiefgelaufen. :( ',
         'webhook_fail' => ' Webhook-Benachrichtigung fehlgeschlagen: Überprüfen Sie, ob die URL noch gültig ist.',
         'webhook_channel_not_found' => ' Webhook-Channel nicht gefunden.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

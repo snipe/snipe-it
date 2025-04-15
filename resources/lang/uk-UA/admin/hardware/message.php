@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'Обраний файл вже видалено',
         'header_row_has_malformed_characters' => 'Один або кілька атрибутів у рядку заголовка містять невірні символи UTF-8',
         'content_row_has_malformed_characters' => 'Один або кілька атрибутів у першому рядку вмісту містять неправильні символи UTF-8',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Актив не був запитаний, будь ласка, спробуйте ще раз',
-        'success' 		=> 'Актив успішно запитаний.',
-        'canceled'      => 'Запит на оформлення замовлення успішно скасовано',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Відмінити цей запит на додавання',
     ],
 
 ];

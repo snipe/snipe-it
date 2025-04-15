@@ -4,6 +4,7 @@ return [
     'info'   => 'Виберіть варіанти, які Ви хочете для звіту про активи.',
     'deleted_user' => 'Видалений користувач',
     'send_reminder' => 'Надіслати нагадування',
+    'cannot_send_reminder' => 'User has been deleted or does not have an email address so cannot receive a reminder',
     'reminder_sent' => 'Нагадування надіслано',
     'acceptance_deleted' => 'Видалено запит на підтвердження',
     'acceptance_request' => 'Прийнятий запит',

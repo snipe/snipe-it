@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'واحدة أو أكثر من السمات في الصف الترويجي تحتوي على أحرف UTF-8 سيئة',
         'content_row_has_malformed_characters' => 'واحدة أو أكثر من السمات في الصف الأول من المحتوى تحتوي على أحرف UTF-8 سيئة',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'لم يتم طلب الأصل، يرجى إعادة المحاولة',
-        'success' 		=> 'تم طلب الأصل بنجاح.',
-        'canceled'      => 'تم إلغاء طلب الاخراج بنجاح',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'إلغاء طلب هذا العنصر',
     ],
 
 ];

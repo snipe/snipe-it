@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Aggiorna solo la Sede effettiva',
     'asset_not_deployable' => 'Lo stato del bene è "Non Assegnabile". Non puoi fare l\'assegnazione di questo Bene.',
     'asset_not_deployable_checkin' => 'Questo stato è "Non Assegnabile". Usando questo stato, verrà effettuata la restituzione del Bene.',
-    'asset_deployable' => 'Lo stato del bene è "Assegnabile". Puoi fare l\'Assegnazione di questo Bene.',
+    'asset_deployable' => 'Questo bene può essere assegnato.',
     'processing_spinner' => 'Elaborazione... (Può volerci un po\' su file di grandi dimensioni)',
     'optional_infos'  => 'Informazioni Opzionali',
     'order_details'   => 'Informazioni relative all\'ordine',

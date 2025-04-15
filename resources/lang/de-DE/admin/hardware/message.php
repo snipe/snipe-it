@@ -66,13 +66,14 @@ return [
         'file_already_deleted' => 'Die ausgewählte Datei wurde bereits gelöscht',
         'header_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der Kopfzeile enthalten fehlerhafte UTF-8 Zeichen',
         'content_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der ersten Zeile des Inhalts enthalten fehlerhafte UTF-8-Zeichen',
+        'transliterate_failure' => 'Umschreibung von :encoding nach UTF-8 fehlgeschlagen wegen ungültiger Zeichen in Eingabe'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Sind Sie sicher, dass Sie dieses Asset entfernen möchten?',
         'error'   		=> 'Beim Entfernen dieses Assets ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag ist derzeit herausgegeben. Überprüfen Sie dieses Gerät bevor Sie es löschen. [2,*]Asset Tags: :asset_tag sind derzeit herausgegeben. Überprüfen Sie diese Geräte bevor Sie sie löschen.',
         'nothing_updated'   => 'Es wurden keine Assets ausgewählt, somit wurde auch nichts gelöscht.',
         'success' 		=> 'Dieses Asset wurde erfolgreich entfernt.',
     ],
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuchen Sie es erneut',
-        'success' 		=> 'Gegenstand erfolgreich angefordert.',
-        'canceled'      => 'Herausgeben erfolgreich abgebrochen',
+        'error'   		=> 'Die Anfrage war nicht erfolgreich, bitte versuchen Sie es erneut.',
+        'success' 		=> 'Anfrage erfolgreich eingereicht.',
+        'canceled'      => 'Anfrage erfolgreich abgebrochen.',
+        'cancel'        => 'Diese Artikelanfrage abbrechen',
     ],
 
 ];

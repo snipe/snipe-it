@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Archyvuotas',
     'asset'  					=> 'Turtas',
     'bulk_checkout'             => 'Išduoti kelis',
-    'bulk_checkin'              => 'Bulk Checkin',
+    'bulk_checkin'              => 'Paimti kelis',
     'checkin'  					=> 'Paimti turtą',
     'checkout'  				=> 'Išduoti turtą',
     'clone'  					=> 'Klonuoti turtą',
