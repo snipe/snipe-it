@@ -13,4 +13,8 @@ return [
     'no_depreciations_warning'               => '<strong>Uyarı: </strong>
                       Şu anda ayarlanmış herhangi bir amortismanınız yok.
                       Amortisman raporunu görüntülemek için lütfen en az bir amortisman ayarlayın.',
+    'depreciation_method'                   => 'Depreciation Method',
+    'linear_depreciation'                   => 'Linear (Default)',
+    'half_1'                                => 'Half-year convention, always applied',
+    'half_2'                                => 'Half-year convention, applied with condition',
 ];

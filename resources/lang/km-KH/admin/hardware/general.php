@@ -5,7 +5,7 @@ return [
     'about_assets_text'            => 'ទ្រព្យសកម្មគឺជាធាតុដែលតាមដានដោយលេខស៊េរី ឬស្លាកទ្រព្យសម្បត្តិ។ ពួកវាមានទំនោរទៅជាធាតុមានតម្លៃខ្ពស់ជាង ដែលការកំណត់អត្តសញ្ញាណធាតុជាក់លាក់មួយមានសារៈសំខាន់។',
     'archived'  				=> 'ទុកក្នុងប័ណ្ណសារ',
     'asset'  					=> 'ទ្រព្យសកម្ម',
-    'bulk_checkout'             => 'Bulk Checkout',
+    'bulk_checkout'             => 'ការបញ្ចេញច្រើន',
     'bulk_checkin'              => 'Bulk Checkin',
     'checkin'  					=> 'Checkin Asset',
     'checkout'  				=> 'Checkout Asset',

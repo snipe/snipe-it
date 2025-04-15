@@ -50,5 +50,11 @@ return [
         'error_misc' => '出错了:( ',
         'webhook_fail' => ' webhook 通知失败：请检查以确保URL仍然有效。',
         'webhook_channel_not_found' => ' 未找到 webhook 频道。'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => '您的设置未保存。',
+        'mismatch' => '在启用位置范围限定功能之前，数据库中有1个待处理项目需要您关注。|在启用位置范围限定功能之前，数据库中有:count个待处理项目需要您关注。',
+    ],
+
 ];

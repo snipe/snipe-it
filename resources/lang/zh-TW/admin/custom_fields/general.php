@@ -59,5 +59,6 @@ return [
     'encrypted_options' => '該欄位已加密，因此某些顯示選項將無法使用',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

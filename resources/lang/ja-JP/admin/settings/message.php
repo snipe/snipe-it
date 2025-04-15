@@ -50,5 +50,11 @@ return [
         'error_misc' => '問題が発生しました。:( ',
         'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
         'webhook_channel_not_found' => ' webhook channel not found.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => '設定は保存されませんでした。',
+        'mismatch' => '位置情報を有効にする前に対応が必要な項目が、データベースに 1 件あります。|位置情報を有効にする前に対応が必要な項目が、データベースに :count 件あります。',
+    ],
+
 ];

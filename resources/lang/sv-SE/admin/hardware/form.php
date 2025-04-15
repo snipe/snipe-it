@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Uppdatera endast nuvarande plats',
     'asset_not_deployable' => 'Denna tillgångsstatus kan inte levereras. Denna tillgång kan inte checkas ut.',
     'asset_not_deployable_checkin' => 'Denna tillgångsstatus kan inte levereras. Användning av denna statusetikett kommer att checka in tillgången.',
-    'asset_deployable' => 'Statusen är tillgänglig. Denna tillgång kan checkas ut.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Bearbetar... (Detta kan ta tid vid stora filer)',
     'optional_infos'  => 'Valfri information',
     'order_details'   => 'Beställningsrelaterad information',

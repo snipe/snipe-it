@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Upraviť iba aktuálnu lokalitu',
     'asset_not_deployable' => 'Tento majetok nie je odovzdateľný. Tento majetok nemôže byť priradený.',
     'asset_not_deployable_checkin' => 'Tento majetok nie je odovzdateľný. Použitím tohto typu stavu bude majetok prevzatý od priradeného používateľa.',
-    'asset_deployable' => 'Tento majetok je odovzdateľný. Tento majetok môže byť priradený.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Procesujem... (Môže to chvíľu trvať v prípade veľkých súborov)',
     'optional_infos'  => 'Nepovinné informácie',
     'order_details'   => 'Informácie súvisiace s objednávkou',

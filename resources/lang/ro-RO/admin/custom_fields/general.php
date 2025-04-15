@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Acest câmp este criptat, astfel încât unele opțiuni de afișare nu vor fi disponibile.',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

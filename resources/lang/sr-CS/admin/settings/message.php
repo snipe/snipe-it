@@ -50,5 +50,11 @@ return [
         'error_misc' => 'Nešto nije u redu. :( ',
         'webhook_fail' => ' neuspelo obaveštavanje putem veb zakačke: Proverite da li je URL i dalje validan.',
         'webhook_channel_not_found' => ' kanal veb zakačke nije pronađen.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Vaša podešavanja nisu sačuvana.',
+        'mismatch' => 'Postoji 1 stavka u bazi podataka koja iziskuje vašu pažnju pre uključivanja opsega lokacije.|Postoji :count stavki u bazi podataka koje iziskuju vašu pažnju pre uključivanja opsega lokacije.',
+    ],
+
 ];

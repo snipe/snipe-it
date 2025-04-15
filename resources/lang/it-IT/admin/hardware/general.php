@@ -6,7 +6,7 @@ return [
     'archived'  				=> 'Archiviato',
     'asset'  					=> 'Bene',
     'bulk_checkout'             => 'Assegnazione Massiva',
-    'bulk_checkin'              => 'Bulk Checkin',
+    'bulk_checkin'              => 'Check-in massivo',
     'checkin'  					=> 'Restituzione Bene',
     'checkout'  				=> 'Assegnazione Bene',
     'clone'  					=> 'Copia Bene',

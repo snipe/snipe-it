@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'Wybrany plik został już usunięty',
         'header_row_has_malformed_characters' => 'Jeden lub więcej atrybutów w wierszu nagłówka zawiera nieprawidłowe znaki UTF-8',
         'content_row_has_malformed_characters' => 'Jeden lub więcej atrybutów w pierwszym rzędzie zawartości zawiera nieprawidłowe znaki UTF-8',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Aktywo nie zostało zawnioskowane, spróbuj ponownie',
-        'success' 		=> 'Aktywo zawnioskowe pomyślnie.',
-        'canceled'      => 'Żądanie przypisania zostało anulowane',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Anuluj żądanie tego elementu',
     ],
 
 ];

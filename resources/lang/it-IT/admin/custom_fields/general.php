@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Questo campo è criptato, quindi alcune opzioni di visualizzazione non saranno disponibili.',
     'display_checkin' => 'Mostra nei moduli di check-in',
     'display_checkout' => 'Mostra nei moduli di assegnazione',
+    'display_audit' => 'Mostra nei moduli di revisione',
 
 ];

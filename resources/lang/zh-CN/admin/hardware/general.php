@@ -5,7 +5,7 @@ return [
     'about_assets_text'            => '资产是按照序列号或者资产标签跟踪的物品。可以标记特殊物品为高价值资产。',
     'archived'  				=> '已存档',
     'asset'  					=> '资产',
-    'bulk_checkout'             => '批量借出',
+    'bulk_checkout'             => '批量签出',
     'bulk_checkin'              => '批量归还',
     'checkin'  					=> '借入资产',
     'checkout'  				=> '借出资产',
