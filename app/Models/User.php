@@ -140,6 +140,27 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'manager'    => ['first_name', 'last_name', 'username'],
     ];
 
+
+    /**
+     * This sets the name property on the user. It's not a real field in the database
+     * (since we use first_name and last_name, but the Laravel mailable method
+     * uses this to determine the name of the user to send emails to.
+     *
+     * We only have to do this on the User model and no other models because other
+     * first-class objects have a name field.
+     * @return void
+     */
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::retrieved(function($user){
+            $user->name = $user->getFullNameAttribute();
+        });
+    }
+
+
     /**
      * Internally check the user permission for the given section
      *
@@ -279,6 +300,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->activated == 1;
     }
+
 
     /**
      * Returns the full name attribute
@@ -847,29 +869,18 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
 
 
-    /**
-     * This is a mutator to allow the emails to fall back to the system settings if no locale is set.
-     *
-     * @return Attribute
-     *
-     */
-    protected function locale(): Attribute
-    {
-        return Attribute::make(
-            set: fn ($value) => $value ?? Setting::getSettings()->locale,
-        );
-    }
 
     /**
      * Get the preferred locale for the user.
-     * This is used via the HasLocalePreference interface, which is part of Laravel. This would
-     * normally work natively, but because we allow the override in the Settings model and we also
-     * manually set it in the notifications (for now), this doesn't handle all use cases.
+     *
+     * This uses the HasLocalePreference contract to determine the user's preferred locale,
+     * used by Laravel's mail system to determine the locale for sending emails.
+     * https://laravel.com/docs/11.x/mail#user-preferred-locales
      *
      */
-    public function preferredLocale()
+    public function preferredLocale(): string
     {
-        return $this->locale;
+        return $this->locale ?? Setting::getSettings()->locale ?? config('app.locale');
     }
 
     public function getUserTotalCost(){
