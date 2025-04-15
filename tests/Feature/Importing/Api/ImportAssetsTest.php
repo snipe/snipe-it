@@ -146,7 +146,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         $this->assertEquals(1, $newAsset->checkout_counter);
         $this->assertEquals(0, $newAsset->requests_counter);
         $this->assertEquals(0, $newAsset->byod);
-        die("By NOW");
+//        die("By NOW");
         //Notes is never read.
         // $this->assertEquals($row['notes'], $newAsset->notes);
 

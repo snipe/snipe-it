@@ -417,6 +417,9 @@ class Asset extends Depreciable
                 //I'm going to guess it's an asset checkout to an asset?
                 $this->location_id = $this->getLogTarget()->rtd_location_id; //FIXME - this is *WEIRD*
                 //FIXME - I'm commenting that line out for a minute, I'm not sure it's right?
+            } elseif (!$this->location_id) {
+                //uh, okay, so now this is for - there is still no location_id, but we're not dealing with being checked out to an asset?
+                $this->location_id = $this->rtd_location_id; //I guess?! I mean, that's how it works now...FIXME or TODO or at least DOCUMENT
             }
         }
         //}

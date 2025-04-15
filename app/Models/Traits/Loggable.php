@@ -26,7 +26,6 @@ trait Loggable
 
     // These are private variables that handle the actual creation of the log
     private ?string $log_action = null;
-    private ?Model $log_item = null; //TODO - is this unused? log_item might always be 'this'?
     private array $log_meta = [];
     private Model|stdClass|null $log_target = null; //FIXME I HATE THIS THIS SUCKS SO BAD!!!!!
     private ?string $log_note = null;
@@ -36,7 +35,7 @@ trait Loggable
     private ?string $log_accept_signature = null;
     private ?User $log_admin = null;
 
-    private ?Location $location_override = null; //FIXME - possibly delete if truly unused
+    private ?Location $log_location_override = null;
 
     //public static array $hide_changes = [];
 
@@ -169,6 +168,14 @@ trait Loggable
                 $logAction->location_id = $this->log_target->location_id;
             }
         }
+        // TODO - this allows for 'weird' behavior, but is how the system currently works
+        // we don't want to break things for people who are already used to our ways of doing things
+        if ($this->log_location_override) {
+            \Log::error("Log Location Override!!!!!!!!!!!!!!!!");
+            //so - FIXME - open question - do we _log_ the location the same way we _set_ the location on the FCO?
+            $this->location_id = $this->log_location_override->id;
+            $logAction->location_id = $this->log_location_override->id;
+        }
 
 
         if ($this->log_note) {
@@ -177,9 +184,6 @@ trait Loggable
         } else {
             \Log::error("NO LOG NOTE!");
         }
-        //if ($this->location_override) {
-        //    $logAction->location_id = $this->location->id;
-        //}
 
 
         if ($this->log_date) { //FIXME - there's _something_ wrong with this; I'm just not sure _what_ - see the various Asset checkin tests that are failing
@@ -298,6 +302,11 @@ trait Loggable
     public function setLogAcceptSignature(?string $signature)
     {
         $this->log_accept_signature = $signature;
+    }
+
+    public function setLogLocationOverride(?Location $location)
+    {
+        $this->log_location_override = $location;
     }
 
     // getter functions for private variables

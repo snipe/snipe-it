@@ -690,6 +690,10 @@ class AssetsController extends Controller
             if (isset($target)) {
                 $asset->setLogTarget($target);
                 $asset->setLogNote('Checked out on asset creation');
+                if ($request->validated('location_id')) {
+                    \Log::error("OKAY - we are OVERRIDING the location for the checkoutandsave I guess? to:" . $request->validated('location_id'));
+                    $asset->setLogLocationOverride(Location::find($request->validated('location_id'))); //TODO - weird behavior in different contexts
+                }
                 $asset->checkOutAndSave();
             }
 
@@ -778,6 +782,9 @@ class AssetsController extends Controller
 
             if (isset($target)) {
                 $asset->setLogTarget($target);
+                if ($location) {
+                    //$asset->setLocationOverride(Location::find($location)); //TODO - weird location override
+                }
                 $asset->setLogNote('Checked out on asset update');
                 $asset->checkOutAndSave();
             }

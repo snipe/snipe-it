@@ -3,6 +3,7 @@
 namespace App\Importer;
 
 use App\Models\Asset;
+use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\User;
 use App\Events\CheckoutableCheckedIn;
@@ -195,6 +196,9 @@ class AssetImporter extends ItemImporter
                 $asset->setLogTarget($target);
                 $asset->setLogNote('Checkout from CSV Importer');
                 $asset->setLogDate(new Carbon($checkout_date));
+                if ($this->item['location_id']) {
+                    //$asset->setLogLocationOverride(Location::find($this->item['location_id']));
+                }
                 $asset->checkOutAndSave();
                 //$asset->fresh()->checkOut($target, $this->created_by, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
             }
