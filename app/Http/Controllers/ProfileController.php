@@ -53,7 +53,7 @@ class ProfileController extends Controller
         $user->enable_confetti = $request->input('enable_confetti', false);
 
         if (! config('app.lock_passwords')) {
-            $user->locale = $request->input('locale', 'en-US');
+            $user->locale = $request->input('locale');
         }
 
         if ((Gate::allows('self.two_factor')) && ((Setting::getSettings()->two_factor_enabled == '1') && (! config('app.lock_passwords')))) {
