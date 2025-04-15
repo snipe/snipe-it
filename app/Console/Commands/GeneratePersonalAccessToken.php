@@ -2,11 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Helpers\Helper;
 use Illuminate\Console\Command;
 use App\Models\User;
 use Laravel\Passport\TokenRepository;
-use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Support\Facades\DB;
 
 class GeneratePersonalAccessToken extends Command
@@ -43,9 +41,9 @@ class GeneratePersonalAccessToken extends Command
      *
      * @return void
      */
-    public function __construct(TokenRepository $tokenRepository, ValidationFactory $validation)
+    public function __construct(TokenRepository $tokenRepository)
     {
-        $this->validation = $validation;
+        //$this->validation = $validation;
         $this->tokenRepository = $tokenRepository;
         parent::__construct();
     }
