@@ -143,7 +143,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     /**
      * This sets the name property on the user. It's not a real field in the database
-     * (since we use first_name and last_name, but the Laravel mailable method
+     * (since we use first_name and last_name), but the Laravel mailable method
      * uses this to determine the name of the user to send emails to.
      *
      * We only have to do this on the User model and no other models because other
@@ -152,6 +152,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
 
     public $name;
+
     protected static function boot()
     {
         parent::boot();
