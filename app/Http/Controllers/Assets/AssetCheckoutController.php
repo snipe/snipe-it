@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Session;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
+use Gate;
 
 class AssetCheckoutController extends Controller
 {
@@ -71,8 +72,10 @@ class AssetCheckoutController extends Controller
 
             $admin = auth()->user();
 
-            if($request->filled('log_audit') == "1") {
-                $this->authorize('audit', Asset::class);
+            if(Gate::allows('audit',$asset)) {
+                if ($request->filled('log_audit') == "1") {
+                    $this->authorize('audit', Asset::class);
+                }
             }
 
             $target = $this->determineCheckoutTarget();
