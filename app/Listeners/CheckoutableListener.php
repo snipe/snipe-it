@@ -385,8 +385,24 @@ class CheckoutableListener
 
     private function shouldNotSendAnyNotifications($checkoutable): bool
     {
-        return in_array(get_class($checkoutable), $this->skipNotificationsFor);
+        if(in_array(get_class($checkoutable), $this->skipNotificationsFor)) {
+            return true;
+        }
+        //runs a check if the category wants to send checkin/checkout emails to users
+        $category = match (true) {
+            $checkoutable instanceof Asset => $checkoutable->model->category,
+            $checkoutable instanceof Accessory,
+            $checkoutable instanceof Consumable => $checkoutable->category,
+            $checkoutable instanceof LicenseSeat => $checkoutable->license->category,
+            default => null,
+        };
+
+        if (!$category->checkin_email) {
+            return true;
+        }
+        return false;
     }
+
 
     private function shouldSendWebhookNotification(): bool
     {
