@@ -3,6 +3,9 @@
 namespace Tests\Feature\Notifications\Email;
 
 use App\Mail\CheckinAssetMail;
+use App\Models\Accessory;
+use App\Models\Consumable;
+use App\Models\LicenseSeat;
 use Illuminate\Support\Facades\Mail;
 use PHPUnit\Framework\Attributes\Group;
 use App\Events\CheckoutableCheckedIn;
@@ -45,20 +48,49 @@ class EmailNotificationsUponCheckinTest extends TestCase
         Mail::fake();
 
         $user = User::factory()->create();
-        $asset = Asset::factory()->assignedToUser($user)->create();
-
-        $asset->model->category->update([
-            'checkin_email' => false,
-            'eula_text' => null,
-            'require_acceptance' => false,
+        $checkoutables = collect([
+            Asset::factory()->assignedToUser($user)->create(),
+            LicenseSeat::factory()->assignedToUser($user)->create(),
+            Accessory::factory()->checkedOutToUser($user)->create(),
+            Consumable::factory()->checkedOutToUser($user)->create(),
         ]);
 
-        $this->fireCheckInEvent($asset, $user);
+        foreach ($checkoutables as $checkoutable) {
 
-        Mail::assertNotSent(CheckinAssetMail::class, function($mail) use ($user) {
-                return $mail->hasTo($user->email);
+            if ($checkoutable instanceof Asset) {
+                $checkoutable->model->category->update([
+                    'checkin_email' => false,
+                    'eula_text' => null,
+                    'require_acceptance' => false,
+                ]);
+                $checkoutable = $checkoutable->fresh(['model.category']);
             }
-        );
+
+            if ($checkoutable instanceof Accessory || $checkoutable instanceof \App\Models\Consumable) {
+                $checkoutable->category->update([
+                    'checkin_email' => false,
+                    'eula_text' => null,
+                    'require_acceptance' => false,
+                ]);
+                $checkoutable = $checkoutable->fresh(['category']);
+            }
+
+            if ($checkoutable instanceof LicenseSeat) {
+                $checkoutable->license->category->update([
+                    'checkin_email' => false,
+                    'eula_text' => null,
+                    'require_acceptance' => false,
+                ]);
+                $checkoutable = $checkoutable->fresh(['license.category']);
+            }
+
+            // Fire event manually
+            $this->fireCheckInEvent($checkoutable, $user);
+        }
+
+        Mail::assertNotSent(CheckinAssetMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
     }
 
     private function fireCheckInEvent($asset, $user): void
