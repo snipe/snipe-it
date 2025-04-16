@@ -77,20 +77,28 @@ class CheckoutableListener
 
             if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                 $this->checkoutableShouldSendEmail($event)) {
-                //Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
-                if (!empty($notifiable)) {
-                    Mail::to($notifiable)->cc($ccEmails)->send($mailable);
-                } elseif (!empty($ccEmails)) {
-                    Mail::cc($ccEmails)->send($mailable);
+
+
+                // Send a checkout email to the admin CC addresses, even if the target has no email
+                if (!empty($ccEmails)) {
+                    Mail::to($ccEmails)->send($mailable);
+                    Log::info('Checkout Mail sent to CC addresses');
                 }
-                Log::info('Checkout Mail sent.');
+
+                // Send a checkout email to the target if it has an email
+                if (!empty($notifiable->email)) {
+                    Mail::to($notifiable)->send($mailable);
+                    Log::info('Checkout Mail sent to checkout target');
+                }
+
             }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout email: " . $e->getMessage());
         } catch (Exception $e) {
             Log::debug("Exception caught during checkout email: " . $e->getMessage());
         }
-//                 Send Webhook notification
+
+        // Send notification
         try {
             if ($this->shouldSendWebhookNotification()) {
                 if ($this->newMicrosoftTeamsWebhookEnabled()) {
@@ -169,15 +177,17 @@ class CheckoutableListener
              * 2. The item has a EULA
              * 3. The item should send an email at check-in/check-out
              */
-                if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                    $this->checkoutableShouldSendEmail($event)) {
-                    if (!empty($notifiable)) {
-                        Mail::to($notifiable)->cc($ccEmails)->send($mailable);
-                    } elseif (!empty($ccEmails)){
-                        Mail::cc($ccEmails)->send($mailable);
-                    }
-                    Log::info('Checkin Mail sent.');
-                }
+            // Send a checkout email to the admins CC addresses, even if the target has no email
+            if (!empty($ccEmails)) {
+                Mail::to($ccEmails)->send($mailable);
+                Log::info('Checkin Mail sent to CC addresses');
+            }
+
+            // Send a checkout email to the target if it has an email
+            if (!empty($notifiable->email)) {
+                Mail::to($notifiable)->send($mailable);
+                Log::info('Checkin Mail sent to checkout target');
+            }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkin email: " . $e->getMessage());
         } catch (Exception $e) {
@@ -330,14 +340,17 @@ class CheckoutableListener
      */
     private function getNotifiableUsers($event){
 
-        if($event->checkedOutTo instanceof Asset){
+        // If it's assigned to an asset, get that asset's assignedTo object
+        if ($event->checkedOutTo instanceof Asset){
             $event->checkedOutTo->load('assignedTo');
             return $event->checkedOutTo->assignedto;
-        }
-        else if($event->checkedOutTo instanceof Location) {
+
+        // If it's assigned to a location, get that location's manager object
+        } elseif ($event->checkedOutTo instanceof Location) {
             return $event->checkedOutTo->manager;
-        }
-        else{
+
+        // Otherwise just return the assigned to object
+        } else {
             return $event->checkedOutTo;
         }
     }
