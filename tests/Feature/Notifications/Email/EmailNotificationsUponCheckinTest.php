@@ -66,7 +66,7 @@ class EmailNotificationsUponCheckinTest extends TestCase
                 $checkoutable = $checkoutable->fresh(['model.category']);
             }
 
-            if ($checkoutable instanceof Accessory || $checkoutable instanceof \App\Models\Consumable) {
+            if ($checkoutable instanceof Accessory || $checkoutable instanceof Consumable) {
                 $checkoutable->category->update([
                     'checkin_email' => false,
                     'eula_text' => null,
