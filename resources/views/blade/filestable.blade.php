@@ -25,7 +25,7 @@
             data-sort-name="name"
             class="table table-striped snipe-table"
             data-export-options='{
-                    "fileName": "export-license-uploads-{{ str_slug($object->name) }}-{{ date('Y-m-d') }}",
+                    "fileName": "export-uploads-{{ str_slug($object->name) }}-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
                     }'>
 
