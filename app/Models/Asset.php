@@ -487,6 +487,13 @@ class Asset extends Depreciable
                   ->orderBy('created_at', 'desc');
     }
 
+    public function targetLogs()
+    {
+        return $this->hasMany('\App\Models\Actionlog', 'target_id')
+            ->where('target_type', '=', Asset::class)
+            ->orderBy('created_at', 'desc');
+    }
+
     /**
      * Determines whether the asset is checked out to a user
      *
