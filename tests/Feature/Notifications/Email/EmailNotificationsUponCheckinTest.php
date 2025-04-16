@@ -41,6 +41,7 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
     public function testCheckInEmailNotSentToUserIfSettingDisabled()
     {
+        $this->settings->disableAdminCC();
         Mail::fake();
 
         $user = User::factory()->create();
