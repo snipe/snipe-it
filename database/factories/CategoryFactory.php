@@ -25,7 +25,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->catchPhrase(),
             'category_type' => 'asset',
-            'checkin_email' => $this->faker->boolean(),
+            'checkin_email' => true,
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,
             'use_default_eula' => $this->faker->boolean(),

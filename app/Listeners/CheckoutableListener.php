@@ -73,6 +73,7 @@ class CheckoutableListener
              * 1. The asset requires acceptance
              * 2. The item has a EULA
              * 3. The item should send an email at check-in/check-out
+             * 4. If the admin CC email is set, even if the item being checked out doesn't have an email address (location, etc)
              */
 
             if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
@@ -176,8 +177,10 @@ class CheckoutableListener
              * 1. The asset requires acceptance
              * 2. The item has a EULA
              * 3. The item should send an email at check-in/check-out
+             * 4. If the admin CC email is set, even if the item being checked in doesn't have an email address (location, etc)
              */
-            // Send a checkout email to the admins CC addresses, even if the target has no email
+
+            // Send a checkout email to the admin's CC addresses, even if the target has no email
             if (!empty($ccEmails)) {
                 Mail::to($ccEmails)->send($mailable);
                 Log::info('Checkin Mail sent to CC addresses');
@@ -382,8 +385,24 @@ class CheckoutableListener
 
     private function shouldNotSendAnyNotifications($checkoutable): bool
     {
-        return in_array(get_class($checkoutable), $this->skipNotificationsFor);
+        if(in_array(get_class($checkoutable), $this->skipNotificationsFor)) {
+            return true;
+        }
+        //runs a check if the category wants to send checkin/checkout emails to users
+        $category = match (true) {
+            $checkoutable instanceof Asset => $checkoutable->model->category,
+            $checkoutable instanceof Accessory,
+            $checkoutable instanceof Consumable => $checkoutable->category,
+            $checkoutable instanceof LicenseSeat => $checkoutable->license->category,
+            default => null,
+        };
+
+        if (!$category->checkin_email) {
+            return true;
+        }
+        return false;
     }
+
 
     private function shouldSendWebhookNotification(): bool
     {
