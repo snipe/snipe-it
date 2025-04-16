@@ -238,6 +238,18 @@
 
 @section('moar_scripts')
     @include('partials/assets-assigned')
+    <script>
+        // Only display the audit fields if the checkbox is selected
+        $(".format").change(function(){
+        $(this).find("option:selected").each(function(){
+        if ($('.format').prop("selectedIndex") == 1) {
+        $("#custom_regex").show();
+        } else{
+        $("#custom_regex").hide();
+        }
+        });
+        }).change();
+    </script>
 
     <script>
         //        $('#checkout_at').datepicker({
