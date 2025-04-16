@@ -76,10 +76,6 @@ class AssetCheckinController extends Controller
 
         $this->authorize('checkin', $asset);
 
-        if ($request->filled('log_audit') == "1") {
-            $this->authorize('audit', Asset::class);
-        }
-
         if ($asset->assignedType() == Asset::USER) {
             $user = $asset->assignedTo;
         }
