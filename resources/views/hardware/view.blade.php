@@ -133,6 +133,7 @@
                               <x-icon type="history" class="fa-2x "/>
                           </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.history') }}
+                                {!! ($asset->targetLogs->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($asset->targetLogs->count()).'</badge>' : '' !!}
                           </span>
                         </a>
                     </li>
@@ -1453,52 +1454,13 @@
 
 
                 <div class="tab-pane fade" id="history">
-                        <!-- checked out assets table -->
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table
-                                        class="table table-striped snipe-table"
-                                        id="assetHistory"
-                                        data-pagination="true"
-                                        data-id-table="assetHistory"
-                                        data-search="true"
-                                        data-side-pagination="server"
-                                        data-show-columns="true"
-                                        data-show-fullscreen="true"
-                                        data-show-refresh="true"
-                                        data-sort-order="desc"
-                                        data-sort-name="created_at"
-                                        data-show-export="true"
-                                        data-export-options='{
-                         "fileName": "export-asset-{{  $asset->id }}-history",
-                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                       }'
 
-                                        data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset']) }}"
-                                        data-cookie-id-table="assetHistory"
-                                        data-cookie="true">
-                                    <thead>
-                                    <tr>
-                                        <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
-                                        <th data-visible="true" data-field="action_date" data-sortable="true" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                                        <th data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
-                                        <th data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
-                                        <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
-                                        <th data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                                        <th data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
-                                        <th data-field="note">{{ trans('general.notes') }}</th>
-                                        <th data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                                        <th data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
-                                        <th data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
-                                        <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
-                                        <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
-                                        <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>
-                                    </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div> <!-- /.row -->
-                    </div> <!-- /.tab-pane history -->
+                    <x-historytable
+                            filepath="private_uploads/hardware/"
+                            showfile_routename="show/assetfile"
+                            object_type="asset"
+                            :object="$asset" />
+                </div> <!-- /.tab-pane history -->
 
                     <div class="tab-pane fade" id="files">
                         <div class="row{{ ($asset->uploads->count() > 0 ) ? '' : ' hidden-print' }}">
