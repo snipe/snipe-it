@@ -76,10 +76,8 @@ class AssetCheckinController extends Controller
 
         $this->authorize('checkin', $asset);
 
-        if(Gate::allows('audit',$asset)) {
-            if ($request->filled('log_audit') == "1") {
-                $this->authorize('audit', Asset::class);
-            }
+        if ($request->filled('log_audit') == "1") {
+            $this->authorize('audit', Asset::class);
         }
 
         if ($asset->assignedType() == Asset::USER) {
@@ -140,8 +138,10 @@ class AssetCheckinController extends Controller
         $asset->customFieldsForCheckinCheckout('display_checkin');
 
         if ($asset->save()) {
-            if($request->filled('log_audit') == "1") {
-                $asset->logAudit($request->input('note'),$request->input('location_id'));
+            if(Gate::allows('audit',$asset)) {
+                if ($request->filled('log_audit') == "1") {
+                    $asset->logAudit($request->input('note'), $request->input('location_id'));
+                }
             }
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
             return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.checkin.success'));
