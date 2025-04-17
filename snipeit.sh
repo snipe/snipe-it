@@ -18,8 +18,9 @@
 #         Updated Snipe-IT Install Script            #
 #          Update created by Aaron Myers             #
 # Change log                                         #
+# * add support for linux mint 22.1                  #
 # * add support for php8.2, awslinux2, alma 8/9      #
-# * fix rocky8/9 support
+# * fix rocky8/9 support                             #
 # * remove Fedora support because short timelines    #
 # * Added support for CentOS/Rocky 9                 #
 # * Fixed CentOS 7 repository for PHP 7.4            #
@@ -347,6 +348,12 @@ case $distro in
     apache_group=www-data
     apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
+  *linuxmint*)
+    echo "  The installer has detected $distro version $version codename $codename."
+    distro=Ubuntu
+    apache_group=www-data
+    apachefile=/etc/apache2/sites-available/$APP_NAME.conf
+    ;;
   *raspbian*)
     echo "  The installer has detected $distro version $version codename $codename."
     distro=Raspbian
@@ -544,6 +551,42 @@ case $distro in
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
         PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        install_packages
+
+        echo "* Configuring Apache."
+        create_virtualhost
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
+        log "a2ensite $APP_NAME.conf"
+        rename_default_vhost
+
+        set_hosts
+
+        echo "* Starting MariaDB."
+        log "systemctl start mariadb.service"
+
+        install_snipeit
+
+        echo "* Restarting Apache httpd."
+        log "systemctl restart apache2"
+
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
+    elif [ "${version//./}" -eq "221" ]; then
+        # Install for Linux Mint 22.1
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
+
+        echo -n "* Updating installed packages."
+        log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+        progress
+
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.3 php8.3  php8.3-curl php8.3-mysql php8.3-gd php8.3-ldap php8.3-zip php8.3-mbstring php8.3-xml php8.3-bcmath php8.3-cli curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
