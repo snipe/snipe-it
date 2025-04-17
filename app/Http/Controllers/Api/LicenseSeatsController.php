@@ -47,11 +47,11 @@ class LicenseSeatsController extends Controller
             }
 
             $limit = app('api_limit_value');
-
+            $page = $request->get('page');
             $seats = $seats->skip($offset)->take($limit)->get();
 
             if ($seats) {
-                return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $total);
+                return (new LicenseSeatsTransformer)->transformLicenseSeats($seats, $total,$offset,$page);
             }
         }
 
