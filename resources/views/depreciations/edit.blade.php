@@ -29,7 +29,7 @@
         {{ trans('admin/depreciations/general.depreciation_min') }}
     </label>
     <div class="col-md-2" style="display: flex;">
-        <input class="form-control" name="depreciation_min" id="depreciation_min" required value="{{ old('depreciation_min', $item->depreciation_min) }}" style="width: 80px; margin-right: 15px; display: inline-block;" />
+        <input class="form-control" name="depreciation_min" id="depreciation_min" required type="number" value="{{ old('depreciation_min', $item->depreciation_min) }}" style="width: 80px; margin-right: 15px; display: inline-block;" />
         <select class="form-control select2" name="depreciation_type" id="depreciation_type" data-minimum-results-for-search="Infinity" style="width: 150px; display: inline-block;">
             <option value="amount" {{ old('depreciation_type', $item->depreciation_type) == 'amount' ? 'selected' : '' }}>Amount</option>
             <option value="percent" {{ old('depreciation_type', $item->depreciation_type) == 'percent' ? 'selected' : '' }}>Percentage</option>
