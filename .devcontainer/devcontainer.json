@@ -1,5 +1,6 @@
 {
-    "dockerComposeFile": [
-		"../dev.docker-compose.yml"
-    ]
+    "dockerComposeFile": "../dev.docker-compose.yml",
+    "service": "snipeit",
+    "workspaceFolder": "/var/www/html/",
+    "postCreateCommand": "cp -R /workspaces/snipe-it/.[^.]* /var/www/html/ && git config --global --add safe.directory /var/www/html"
 }
