@@ -185,9 +185,11 @@ return [
     |
     */
 
+    'email_array'      => 'One or more email addresses is invalid.',
+    
     'custom' => [
         'alpha_space' => 'The :attribute field contains a character that is not allowed.',
-        'email_array'      => 'One or more email addresses is invalid.',
+
         'hashed_pass'      => 'Your current password is incorrect',
         'dumbpwd'          => 'That password is too common.',
         'statuslabel_type' => 'You must select a valid status label type',
