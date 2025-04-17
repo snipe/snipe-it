@@ -302,7 +302,6 @@ class AssetsTransformer
 
     public function transformCheckedoutAccessory(AccessoryCheckout $accessory_checkout)
     {
-
         if ($accessory_checkout->accessory) {
             $array = [
                 'id' => $accessory_checkout->id,
@@ -327,8 +326,8 @@ class AssetsTransformer
             ];
 
             $array += $permissions_array;
+            return $array;
         }
-        return $array;
     }
 
 }
