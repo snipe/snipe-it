@@ -46,7 +46,7 @@
                             </label>
 
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="password" aria-label="password">
+                                <input type="password" class="form-control" name="password" aria-label="password" autocomplete="new-password" passwordrules="minlength: 8">
                                 {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>

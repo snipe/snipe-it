@@ -34,7 +34,7 @@
     <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
         <label for="password" class="col-md-3 control-label">{{ trans('general.new_password') }}</label>
         <div class="col-md-5 required">
-            <input class="form-control" type="password" name="password" id="password" required {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
+            <input class="form-control" type="password" name="password" id="password" required autocomplete="new-password" passwordrules="minlength: 8" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
             {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             @if (config('app.lock_passwords')===true)
                 <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>

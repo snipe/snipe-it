@@ -141,7 +141,7 @@
       <!-- password -->
       <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'password')) ? ' required' : '' }} {{ $errors->has('password') ? 'error' : '' }}">
         <label for="password">{{ trans('admin/users/table.password') }}</label>
-        <input class="form-control" type="password" name="password" id="password" value="" required>
+        <input class="form-control" type="password" name="password" id="password" value="" required autocomplete="new-password" passwordrules="minlength: 8">
         {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
       </div>
 
