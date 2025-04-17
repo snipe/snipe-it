@@ -26,20 +26,18 @@ class ReportsController extends Controller
             $actionlogs = $actionlogs->TextSearch(e($request->input('search')));
         }
 
-        if (($request->filled('target_type')) && ($request->filled('target_id'))) {
-            $actionlogs = $actionlogs->where('target_id', '=', $request->input('target_id'))
-                ->where('target_type', '=', 'App\\Models\\'.ucwords($request->input('target_type')));
-        }
 
-        if (($request->filled('item_type')) && ($request->filled('item_id'))) {
+        if (($request->filled('target_type')) && ($request->filled('target_id'))
+            ||
+            (($request->filled('item_type')) && ($request->filled('item_id')))) {
             $actionlogs = $actionlogs->where(function($query) use ($request)
             {
                 $query->where('item_id', '=', $request->input('item_id'))
-                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')))
+                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('target_type')))
                 ->orWhere(function($query) use ($request)
                 {
-                    $query->where('target_id', '=', $request->input('item_id'))
-                    ->where('target_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')));
+                    $query->where('target_id', '=', $request->input('target_id'))
+                    ->where('target_type', '=', 'App\\Models\\'.ucwords($request->input('target_type')));
                 });
             });
         }
