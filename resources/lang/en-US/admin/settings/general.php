@@ -50,6 +50,7 @@ return [
     'dashboard_message_help'	=> 'This text will appear on the dashboard for anyone with permission to view the dashboard.',
     'default_currency'  		=> 'Default Currency',
     'default_eula_text'			=> 'Default EULA',
+    'default_eula_text_placeholder' => 'Add your default EULA text',
     'default_language'			=> 'Default Language',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'acceptance_note'           => 'Add a note for your decision (Optional)',

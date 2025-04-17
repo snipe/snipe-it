@@ -228,7 +228,7 @@
                            <x-input.textarea
                                name="default_eula_text"
                                :value="old('default_eula_text', $setting->default_eula_text)"
-                               placeholder="Add your default EULA text"
+                               placeholder="{{ trans('admin/settings/general.default_eula_text_placeholder') }}"
                            />
                            {!! $errors->first('default_eula_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                            <p class="help-block">{{ trans('admin/settings/general.default_eula_help_text') }}</p>
