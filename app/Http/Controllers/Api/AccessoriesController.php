@@ -66,7 +66,7 @@ class AccessoriesController extends Controller
         }
 
         if ($request->filled('company_id')) {
-            $accessories->where('company_id', '=', $request->input('company_id'));
+            $accessories->where('accessories.company_id', '=', $request->input('company_id'));
         }
 
         if ($request->filled('category_id')) {
