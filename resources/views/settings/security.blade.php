@@ -146,7 +146,7 @@
                                     </p>
                                     <!-- Custom logout url to redirect to authentication provider -->
                                     <label for="login_remote_user_custom_logout_url">{{ trans('admin/settings/general.login_remote_user_custom_logout_url_text') }}</label>
-                                    <input class="form-control" aria-label="login_remote_user_custom_logout_url" name="login_remote_user_custom_logout_url" type="text" value="{{ old('login_remote_user_custom_logout_url', $setting->login_remote_user_custom_logout_url) }}" id="login_remote_user_custom_logout_url">
+                                    <input class="form-control" aria-label="login_remote_user_custom_logout_url" name="login_remote_user_custom_logout_url" type="url" value="{{ old('login_remote_user_custom_logout_url', $setting->login_remote_user_custom_logout_url) }}" id="login_remote_user_custom_logout_url">
 
                                     {!! $errors->first('login_remote_user_custom_logout_url', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">
