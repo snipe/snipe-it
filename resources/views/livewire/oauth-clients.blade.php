@@ -250,6 +250,7 @@
                                        class="form-control"
                                        wire:model="name"
                                        wire:keydown.enter="createClient"
+                                       required
                                        autofocus>
 
                                 <span class="help-block">
@@ -269,6 +270,7 @@
                                        name="redirect"
                                        wire:model="redirect"
                                        wire:keydown.enter="createClient"
+                                       required
                                 >
 
                                 <span class="help-block">
