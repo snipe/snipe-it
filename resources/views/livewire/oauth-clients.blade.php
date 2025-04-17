@@ -264,7 +264,7 @@
                             <label class="col-md-3 control-label" for="redirect">{{ trans('admin/settings/general.oauth_redirect_url') }}</label>
 
                             <div class="col-md-7">
-                                <input type="text"
+                                <input type="url"
                                        class="form-control"
                                        aria-label="redirect"
                                        name="redirect"
