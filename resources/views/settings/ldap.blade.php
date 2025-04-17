@@ -231,7 +231,7 @@
                                 <label for="ldap_server">{{ trans('admin/settings/general.ldap_server') }}</label>
                             </div>
                             <div class="col-md-8">
-                                <input class="form-control" placeholder="{{ trans('general.example') .'ldap://ldap.example.com' }}" name="ldap_server" type="url" pattern="ldap://.*|ldaps://.*" id="ldap_server" value="{{ old('ldap_server', $setting->ldap_server) }}">
+                                <input class="form-control" placeholder="{{ trans('general.example') .'ldap://ldap.example.com' }}" name="ldap_server" type="text" id="ldap_server" value="{{ old('ldap_server', $setting->ldap_server) }}">
                                 @error('ldap_server')
                                     <span class="alert-msg">
                                         <x-icon type="x" />
