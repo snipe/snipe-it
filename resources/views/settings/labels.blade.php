@@ -374,7 +374,7 @@
                                     <label for="labels_per_page" class="control-label">{{ trans('admin/settings/general.labels_per_page') }}</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <input class="form-control" style="width: 100px;" aria-label="labels_per_page" name="labels_per_page" type="text" value="{{ old('labels_per_page', $setting->labels_per_page) }}" id="labels_per_page">
+                                    <input class="form-control" style="width: 100px;" aria-label="labels_per_page" name="labels_per_page" type="number" value="{{ old('labels_per_page', $setting->labels_per_page) }}" id="labels_per_page">
                                     {!! $errors->first('labels_per_page', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 </div>
                             </div>
@@ -385,7 +385,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="input-group">
-                                        <input class="form-control" aria-label="labels_fontsize" name="labels_fontsize" type="text" value="{{ old('labels_fontsize', $setting->labels_fontsize) }}" id="labels_fontsize">
+                                        <input class="form-control" aria-label="labels_fontsize" name="labels_fontsize" type="number" min="5" max="127" value="{{ old('labels_fontsize', $setting->labels_fontsize) }}" id="labels_fontsize">
                                         <div class="input-group-addon">{{ trans('admin/settings/general.text_pt') }}</div>
                                     </div>
                                 </div>
