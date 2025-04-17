@@ -1,1 +1,5 @@
-{"image":"mcr.microsoft.com/devcontainers/universal:2"}
+{
+    "dockerComposeFile": [
+		"../dev.docker-compose.yml"
+    ]
+}
