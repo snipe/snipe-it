@@ -8,46 +8,6 @@
 @parent
 @stop
 
-{{-- Right header --}}
-@section('header_right')
-  @can('manage', $component)
-    <div class="dropdown pull-right">
-      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        {{ trans('button.actions') }}
-          <span class="caret"></span>
-      </button>
-      
-      <ul class="dropdown-menu pull-right" role="menu22">
-        @if ($component->assigned_to != '')
-          @can('checkin', $component)
-          <li role="menuitem">
-            <a href="{{ route('components.checkin.show', $component->id) }}">
-              {{ trans('admin/components/general.checkin') }}
-            </a>
-          </li>
-          @endcan
-        @else
-          @can('checkout', $component)
-          <li role="menuitem">
-            <a href="{{ route('components.checkout.show', $component->id)  }}">
-              {{ trans('admin/components/general.checkout') }}
-            </a>
-          </li>
-          @endcan
-        @endif
-
-        @can('update', $component)
-        <li role="menuitem">
-          <a href="{{ route('components.edit', $component->id) }}">
-            {{ trans('admin/components/general.edit') }}
-          </a>
-        </li>
-        @endcan
-      </ul>
-    </div>
-  @endcan
-@stop
-
 {{-- Page content --}}
 @section('content')
 {{-- Page content --}}
@@ -87,6 +47,21 @@
             </a>
           </li>
         @endcan
+
+        @if ($component->assetlog->count() >= 0 )
+          <li>
+            <a href="#history" data-toggle="tab">
+                <span class="hidden-lg hidden-md">
+                  <i class="far fa-history fa-2x" aria-hidden="true"></i>
+                </span>
+              <span class="hidden-xs hidden-sm">
+                  {{ trans('general.history') }}
+                {!! ($component->assetlog->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($component->assetlog->count()).'</badge>' : '' !!}
+                </span>
+            </a>
+          </li>
+        @endif
+
       </ul>
 
       <div class="tab-content">
@@ -151,6 +126,18 @@
             </div>
           </div> <!-- /.tab-pane -->
         @endcan
+
+        <!-- history tab pane -->
+        <div class="tab-pane fade" id="history">
+
+          <x-historytable
+                  filepath="private_uploads/components/"
+                  showfile_routename="show.componentfile"
+                  object_type="component"
+                  :object="$component" />
+
+        </div>
+
 
       </div>
     </div>

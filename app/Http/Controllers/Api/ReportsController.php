@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ActionlogsTransformer;
 use App\Models\Actionlog;
+use App\Models\Location;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -27,19 +29,21 @@ class ReportsController extends Controller
         }
 
 
-        if (($request->filled('target_type')) && ($request->filled('target_id'))
-            ||
-            (($request->filled('item_type')) && ($request->filled('item_id')))) {
-            $actionlogs = $actionlogs->where(function($query) use ($request)
-            {
-                $query->where('item_id', '=', $request->input('item_id'))
-                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('target_type')))
-                ->orWhere(function($query) use ($request)
-                {
-                    $query->where('target_id', '=', $request->input('target_id'))
-                    ->where('target_type', '=', 'App\\Models\\'.ucwords($request->input('target_type')));
-                });
-            });
+        // If we want allll the logs
+        if (($request->filled('id')) && ($request->filled('type'))) {
+            $actionlogs = $actionlogs->ByTargetOrItem($request->input('id'), $request->input('type'));
+        }
+
+        // We've passed a target
+        if (($request->filled('target_type')) && ($request->filled('target_id'))) {
+            $actionlogs = $actionlogs->where('target_id', '=', $request->input('target_id'))
+                ->where('target_type', '=', 'App\\Models\\' . ucwords($request->input('target_type')));
+        }
+
+        // We've passed an item
+        if (($request->filled('item_type')) && ($request->filled('item_id'))) {
+            $actionlogs = $actionlogs->where('item_id', '=', $request->input('item_id'))
+                ->where('item_type', '=', 'App\\Models\\'.ucwords($request->input('item_type')));
         }
 
         if ($request->filled('action_type')) {

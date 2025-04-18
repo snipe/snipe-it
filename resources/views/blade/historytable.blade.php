@@ -9,9 +9,9 @@
 <!-- begin non-ajaxed file listing table -->
 <div class="table-responsive">
     <table
-            data-cookie-id-table="{{ str_slug($object->name) }}HistoryTable"
-            data-id-table="{{ str_slug($object->name) }}HistoryTable"
-            id="{{ str_slug($object->name) }}}HistoryTable"
+            data-cookie-id-table="{{ $object_type }}HistoryTable"
+            data-id-table="{{ $object_type }}HistoryTable"
+            id="{{ $object_type }}HistoryTable"
             data-search="true"
             data-pagination="true"
             data-side-pagination="server"
@@ -23,7 +23,7 @@
             data-show-refresh="true"
             data-sort-order="asc"
             data-sort-name="name"
-            data-url="{{ route('api.activity.index', ['target_id' => $object->id, 'target_type' => $object_type]) }}"
+            data-url="{{ route('api.activity.index', ['id' => $object->id, 'type' => $object_type]) }}"
             class="table table-striped snipe-table"
             data-export-options='{
                     "fileName": "export-history-{{ str_slug($object->name) }}-{{ date('Y-m-d') }}",

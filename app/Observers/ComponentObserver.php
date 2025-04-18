@@ -4,7 +4,6 @@ namespace App\Observers;
 
 use App\Models\Actionlog;
 use App\Models\Component;
-use Illuminate\Support\Facades\Auth;
 
 class ComponentObserver
 {
@@ -16,11 +15,37 @@ class ComponentObserver
      */
     public function updated(Component $component)
     {
+        $attributes = $component->getAttributes();
+        $attributesOriginal = $component->getRawOriginal();
+        $restoring_or_deleting = false;
+
+        // This is a gross hack to prevent the double logging when restoring an asset
+        if (array_key_exists('deleted_at', $attributes)  && array_key_exists('deleted_at', $attributesOriginal)){
+            $restoring_or_deleting = (($attributes['deleted_at'] != $attributesOriginal['deleted_at']));
+        }
+
+        if (!$restoring_or_deleting) {
+            $changed = [];
+            foreach ($component->getRawOriginal() as $key => $value) {
+                if ((array_key_exists($key, $component->getAttributes())) && ($component->getRawOriginal()[$key] != $component->getAttributes()[$key])) {
+                    $changed[$key]['old'] = $component->getRawOriginal()[$key];
+                    $changed[$key]['new'] = $component->getAttributes()[$key];
+                }
+            }
+        }
+
+
+        if (empty($changed)){
+            return;
+        }
+
         $logAction = new Actionlog();
         $logAction->item_type = Component::class;
         $logAction->item_id = $component->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
+        $logAction->action_date = date('Y-m-d H:i:s');
+        $logAction->log_meta = json_encode($changed);
         $logAction->logaction('update');
     }
 
@@ -38,6 +63,7 @@ class ComponentObserver
         $logAction->item_id = $component->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
+        $logAction->action_date = date('Y-m-d H:i:s');
         if($component->imported) {
             $logAction->setActionSource('importer');
         }
@@ -57,6 +83,7 @@ class ComponentObserver
         $logAction->item_id = $component->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
+        $logAction->action_date = date('Y-m-d H:i:s');
         $logAction->logaction('delete');
     }
 }

@@ -4,7 +4,6 @@ namespace App\Observers;
 
 use App\Models\Actionlog;
 use App\Models\License;
-use Illuminate\Support\Facades\Auth;
 
 class LicenseObserver
 {
@@ -16,11 +15,39 @@ class LicenseObserver
      */
     public function updated(License $license)
     {
+        $attributes = $license->getAttributes();
+        $attributesOriginal = $license->getRawOriginal();
+        $restoring_or_deleting = false;
+
+        // This is a gross hack to prevent the double logging when restoring an asset
+        if (array_key_exists('deleted_at', $attributes)  && array_key_exists('deleted_at', $attributesOriginal)){
+            $restoring_or_deleting = (($attributes['deleted_at'] != $attributesOriginal['deleted_at']));
+        }
+
+
+
+        if (!$restoring_or_deleting) {
+            $changed = [];
+            foreach ($license->getRawOriginal() as $key => $value) {
+                if ((array_key_exists($key, $license->getAttributes())) && ($license->getRawOriginal()[$key] != $license->getAttributes()[$key])) {
+                    $changed[$key]['old'] = $license->getRawOriginal()[$key];
+                    $changed[$key]['new'] = $license->getAttributes()[$key];
+                }
+            }
+        }
+
+
+        if (empty($changed)){
+            return;
+        }
+
         $logAction = new Actionlog();
         $logAction->item_type = License::class;
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
+        $logAction->action_date = date('Y-m-d H:i:s');
+        $logAction->log_meta = json_encode($changed);
         $logAction->logaction('update');
     }
 
@@ -38,6 +65,7 @@ class LicenseObserver
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
+        $logAction->action_date = date('Y-m-d H:i:s');
         if($license->imported) {
             $logAction->setActionSource('importer');
         }
@@ -57,6 +85,7 @@ class LicenseObserver
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
+        $logAction->action_date = date('Y-m-d H:i:s');
         $logAction->logaction('delete');
     }
 }

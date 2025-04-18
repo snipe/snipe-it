@@ -60,16 +60,18 @@
               </li>
             @endcan
 
-            <li>
-              <a href="#history" data-toggle="tab">
+            @if ($consumable->assetlog->count() >= 0 )
+              <li>
+                <a href="#history" data-toggle="tab">
                 <span class="hidden-lg hidden-md">
-                  <i class="fas fa-history fa-2x" aria-hidden="true"></i>
+                  <i class="far fa-history fa-2x" aria-hidden="true"></i>
                 </span>
-                <span class="hidden-xs hidden-sm">
-                  {{ trans('general.history') }}
-                </span>
-              </a>
-            </li>
+                  <span class="hidden-xs hidden-sm">{{ trans('general.history') }}
+                    {!! ($consumable->assetlog->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($consumable->assetlog->count()).'</badge>' : '' !!}
+                  </span>
+                </a>
+              </li>
+            @endif
 
             @can('update', $consumable)
               <li class="pull-right">
@@ -445,11 +447,13 @@
           </div><!--/FILES-->
 
           <div class="tab-pane" id="history">
+
             <x-historytable
                     filepath="private_uploads/consumables/"
                     showfile_routename="show.consumablefile"
                     object_type="consumable"
                     :object="$consumable" />
+
           </div><!-- /.tab-pane -->
       </div><!-- /.tab-content -->
     </div><!-- nav-tabs-custom -->

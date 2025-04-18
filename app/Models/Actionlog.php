@@ -398,21 +398,6 @@ class Actionlog extends SnipeModel
         return  \Carbon::parse($last_audit_date)->addMonths($monthInterval)->toDateString();
     }
 
-    /**
-     * Gets action logs in chronological order, excluding uploads
-     *
-     * @author  Vincent Sposato <vincent.sposato@gmail.com>
-     * @since v1.0
-     * @return \Illuminate\Database\Eloquent\Collection
-     */
-    public function getListingOfActionLogsChronologicalOrder()
-    {
-        return $this->all()
-                 ->where('action_type', '!=', 'uploaded')
-                 ->orderBy('item_id', 'asc')
-                 ->orderBy('created_at', 'asc')
-                 ->get();
-    }
 
     /**
      * Determines what the type of request is so we can log it to the action_log
@@ -453,5 +438,20 @@ class Actionlog extends SnipeModel
     public function scopeOrderByCreatedBy($query, $order)
     {
         return $query->leftJoin('users as admin_sort', 'action_logs.created_by', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
+
+    public function scopeByTargetOrItem($query, $id, $type) {
+
+            return $query->where(function($query) use ($id, $type)
+            {
+                $query->where('item_id', '=', $id)
+                    ->where('item_type', '=', 'App\\Models\\'.ucwords($type));
+            })
+                ->orWhere(function($query) use ($id, $type)
+                {
+                    $query->where('target_id', '=', $id)
+                        ->where('target_type', '=', 'App\\Models\\'.ucwords($type));
+                });
+
     }
 }
