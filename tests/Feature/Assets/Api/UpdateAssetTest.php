@@ -32,7 +32,6 @@ class UpdateAssetTest extends TestCase
     }
 
     public function testGivenPermissionUpdateAssetIsAllowed()
-
     {
         $asset = Asset::factory()->create();
 
@@ -459,7 +458,6 @@ class UpdateAssetTest extends TestCase
         $asset->refresh();
         $this->assertEquals($assigned_location->id, $asset->assigned_to);
         $this->assertEquals($asset->assigned_type, 'App\Models\Location');
-
     }
 
     public function testCheckoutToDeletedLocationFailsOnAssetUpdate()
@@ -499,7 +497,6 @@ class UpdateAssetTest extends TestCase
         $asset->refresh();
         $this->assertEquals($assigned_asset->id, $asset->assigned_to);
         $this->assertEquals($asset->assigned_type, 'App\Models\Asset');
-
     }
 
     public function testCheckoutToDeletedAssetFailsOnAssetUpdate()

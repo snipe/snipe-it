@@ -32,5 +32,4 @@ class UpdateManufacturerTest extends TestCase
         $this->followRedirects($response)->assertSee('Success');
         $this->assertTrue(Manufacturer::where('name', 'Test Manufacturer Edited')->where('notes', 'Test Note Edited')->exists());
     }
-
 }

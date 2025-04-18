@@ -30,7 +30,6 @@ class AssetLabelTest extends TestCase
             'ids'          => $id_array,
             'bulk_actions'        => 'Labels',
         ])->assertStatus(302)
-       ->assertRedirect(route('hardware.index'));
+        ->assertRedirect(route('hardware.index'));
     }
-
 }
