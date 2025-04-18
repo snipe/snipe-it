@@ -48,7 +48,7 @@ class DeleteUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user' =>  Rule::notIn([auth()->id()]), # codespell:ignore
+            'user' =>  Rule::notIn([auth()->id()]), // codespell:ignore
             'managed_users' =>  Rule::in([0]),
             'managed_locations' => Rule::in([0]),
             'assigned_assets' => Rule::in([0]),
