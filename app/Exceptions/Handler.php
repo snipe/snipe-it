@@ -53,7 +53,7 @@ class Handler extends ExceptionHandler
 
     /**
      * Render an exception into an HTTP response.
-     * 
+     *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Exception  $e
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
@@ -77,7 +77,7 @@ class Handler extends ExceptionHandler
         if ($e instanceof SCIMException) {
             try {
                 $e->report(); // logs as 'debug', so shouldn't get too noisy
-            } catch(\Exception $reportException) {
+            } catch (\Exception $reportException) {
                 //do nothing
             }
             return $e->render($request); // ALL SCIMExceptions have the 'render()' method
@@ -90,7 +90,6 @@ class Handler extends ExceptionHandler
 
         // Handle API requests that fail
         if ($request->ajax() || $request->wantsJson()) {
-
             // Handle API requests that fail because Carbon cannot parse the date on validation (when a submitted date value is definitely not a date)
             if ($e instanceof InvalidFormatException) {
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('validation.date', ['attribute' => 'date'])), 200);
@@ -104,19 +103,17 @@ class Handler extends ExceptionHandler
 
             // Handle API requests that fail because of an HTTP status code and return a useful error message
             if ($this->isHttpException($e)) {
-
                 $statusCode = $e->getStatusCode();
 
                 switch ($e->getStatusCode()) {
                     case '404':
-                       return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' endpoint not found'), 404);
+                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' endpoint not found'), 404);
                     case '429':
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Too many requests'), 429);
-                     case '405':
+                    case '405':
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
                     default:
                         return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode), $statusCode);
-
                 }
             }
         }
@@ -125,10 +122,9 @@ class Handler extends ExceptionHandler
         // This is traaaaash but it handles models that are not found while using route model binding :(
         // The only alternative is to set that at *each* route, which is crazypants
         if ($e instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
-
             // This gets the MVC model name from the exception and formats in a way that's less fugly
             $model_name = strtolower(implode(" ", preg_split('/(?=[A-Z])/', last(explode('\\', $e->getModel())))));
-            $route = str_plural(strtolower(last(explode('\\', $e->getModel())))).'.index';
+            $route = str_plural(strtolower(last(explode('\\', $e->getModel())))) . '.index';
 
             // Sigh.
             if ($route == 'assets.index') {
@@ -154,11 +150,10 @@ class Handler extends ExceptionHandler
         if ($this->isHttpException($e) && (isset($statusCode)) && ($statusCode == '404' )) {
             return response()->view('layouts/basic', [
                 'content' => view('errors/404')
-            ],$statusCode);
+            ], $statusCode);
         }
 
         return parent::render($request, $e);
-
     }
 
  /**
@@ -183,7 +178,7 @@ class Handler extends ExceptionHandler
     }
 
 
-    /** 
+    /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
      * @var array
