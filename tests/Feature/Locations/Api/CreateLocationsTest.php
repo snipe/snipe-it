@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 class CreateLocationsTest extends TestCase
 {
-
     public function testRequiresPermissionToCreateLocation()
     {
         $this->actingAsForApi(User::factory()->create())
@@ -49,8 +48,6 @@ class CreateLocationsTest extends TestCase
             ->assertStatusMessageIs('error')
             ->assertStatus(200)
             ->json();
-
-
     }
 
     public function testUserCannotCreateLocationsThatAreTheirOwnParent()
@@ -69,8 +66,5 @@ class CreateLocationsTest extends TestCase
                 ],
             ])
             ->json();
-
-
     }
-
 }
