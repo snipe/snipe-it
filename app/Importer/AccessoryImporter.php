@@ -28,7 +28,7 @@ class AccessoryImporter extends ItemImporter
         $accessory = Accessory::where('name', $this->item['name'])->first();
         if ($accessory) {
             if (! $this->updating) {
-                $this->log('A matching Accessory '.$this->item['name'].' already exists.  ');
+                $this->log('A matching Accessory ' . $this->item['name'] . ' already exists.  ');
 
                 return;
             }
@@ -50,7 +50,7 @@ class AccessoryImporter extends ItemImporter
         // This sets an attribute on the Loggable trait for the action log
         $accessory->setImported(true);
         if ($accessory->save()) {
-            $this->log('Accessory '.$this->item['name'].' was created');
+            $this->log('Accessory ' . $this->item['name'] . ' was created');
 
             return;
         }
