@@ -56,6 +56,5 @@ class ShowAccessoryTest extends TestCase implements TestsFullMultipleCompaniesSu
                 'name' => 'My Accessory',
                 'checkouts_count' => 1,
             ]);
-
     }
 }

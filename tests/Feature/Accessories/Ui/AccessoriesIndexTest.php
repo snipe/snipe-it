@@ -23,7 +23,7 @@ class AccessoriesIndexTest extends TestCase implements TestsPermissionsRequireme
             ->assertOk()
             ->assertViewIs('accessories.index');
     }
-  
+
     public function testPageRenders()
     {
         $this->actingAs(User::factory()->superuser()->create())
