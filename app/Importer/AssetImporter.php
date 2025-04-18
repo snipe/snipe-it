@@ -47,10 +47,10 @@ class AssetImporter extends ItemImporter
                 if ($customFieldValue) {
                     if ($customField->field_encrypted == 1) {
                         $this->item['custom_fields'][$customField->db_column_name()] = Crypt::encrypt($customFieldValue);
-                        $this->log('Custom Field '.$customField->name.': '.Crypt::encrypt($customFieldValue));
+                        $this->log('Custom Field ' . $customField->name . ': ' . Crypt::encrypt($customFieldValue));
                     } else {
                         $this->item['custom_fields'][$customField->db_column_name()] = $customFieldValue;
-                        $this->log('Custom Field '.$customField->name.': '.$customFieldValue);
+                        $this->log('Custom Field ' . $customField->name . ': ' . $customFieldValue);
                     }
                 } else {
                     // Clear out previous data.
