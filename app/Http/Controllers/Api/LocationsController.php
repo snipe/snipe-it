@@ -164,7 +164,7 @@ class LocationsController extends Controller
         $total = $locations->count();
         $locations = $locations->skip($offset)->take($limit)->get();
 
-        return (new LocationsTransformer)->transformLocations($locations, $total);
+        return (new LocationsTransformer())->transformLocations($locations, $total);
     }
 
 
@@ -178,7 +178,7 @@ class LocationsController extends Controller
     public function store(ImageUploadRequest $request) : JsonResponse
     {
         $this->authorize('create', Location::class);
-        $location = new Location;
+        $location = new Location();
         $location->fill($request->all());
         $location = $request->handleImages($location);
 
@@ -188,11 +188,11 @@ class LocationsController extends Controller
             // check if parent is set and has a different company
             if ($location->parent_id && Location::find($location->parent_id)->company_id != $location->company_id) {
                 response()->json(Helper::formatStandardApiResponse('error', null, 'different company than parent'));
-            }    
+            }
         }
 
         if ($location->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', (new LocationsTransformer)->transformLocation($location), trans('admin/locations/message.create.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new LocationsTransformer())->transformLocation($location), trans('admin/locations/message.create.success')));
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, $location->getErrors()));
@@ -234,7 +234,7 @@ class LocationsController extends Controller
             ->withCount('users as users_count')
             ->findOrFail($id);
 
-        return (new LocationsTransformer)->transformLocation($location);
+        return (new LocationsTransformer())->transformLocation($location);
     }
 
 
@@ -261,19 +261,19 @@ class LocationsController extends Controller
                 // check if there are related objects with different company
                 if (Helper::test_locations_fmcs(false, $id, $location->company_id)) {
                     return response()->json(Helper::formatStandardApiResponse('error', null, 'error scoped locations'));
-                }                
+                }
             } else {
                 $location->company_id = $request->get('company_id');
             }
         }
 
         if ($location->isValid()) {
-
             $location->save();
+
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
-                    (new LocationsTransformer)->transformLocation($location),
+                    (new LocationsTransformer())->transformLocation($location),
                     trans('admin/locations/message.update.success')
                 )
             );
@@ -289,7 +289,7 @@ class LocationsController extends Controller
         $this->authorize('view', $location);
         $assets = Asset::where('location_id', '=', $location->id)->with('model', 'model.category', 'assetstatus', 'location', 'company', 'defaultLoc');
         $assets = $assets->get();
-        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+        return (new AssetsTransformer())->transformAssets($assets, $assets->count(), $request);
     }
 
     public function assignedAssets(Request $request, Location $location) : JsonResponse | array
@@ -298,7 +298,7 @@ class LocationsController extends Controller
         $this->authorize('view', $location);
         $assets = Asset::where('assigned_to', '=', $location->id)->where('assigned_type', '=', Location::class)->with('model', 'model.category', 'assetstatus', 'location', 'company', 'defaultLoc');
         $assets = $assets->get();
-        return (new AssetsTransformer)->transformAssets($assets, $assets->count(), $request);
+        return (new AssetsTransformer())->transformAssets($assets, $assets->count(), $request);
     }
 
     public function assignedAccessories(Request $request, Location $location) : JsonResponse | array
@@ -312,7 +312,7 @@ class LocationsController extends Controller
 
         $total = $accessory_checkouts->count();
         $accessory_checkouts = $accessory_checkouts->skip($offset)->take($limit)->get();
-        return (new LocationsTransformer)->transformCheckedoutAccessories($accessory_checkouts, $total);
+        return (new LocationsTransformer())->transformCheckedoutAccessories($accessory_checkouts, $total);
     }
 
     /**
@@ -398,7 +398,7 @@ class LocationsController extends Controller
         }
 
         if ($request->filled('search')) {
-            $locations = $locations->where('locations.name', 'LIKE', '%'.$request->input('search').'%');
+            $locations = $locations->where('locations.name', 'LIKE', '%' . $request->input('search') . '%');
         }
 
         $locations = $locations->orderBy('name', 'ASC')->get();
@@ -421,6 +421,6 @@ class LocationsController extends Controller
 
         $paginated_results = new LengthAwarePaginator($locations_formatted->forPage($page, 500), $locations_formatted->count(), 500, $page, []);
 
-        return (new SelectlistTransformer)->transformSelectlist($paginated_results);
+        return (new SelectlistTransformer())->transformSelectlist($paginated_results);
     }
 }
