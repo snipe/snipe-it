@@ -22,7 +22,7 @@ class ComponentImporter extends ItemImporter
      * Create a component if a duplicate does not exist
      *
      * @author Daniel Melzter
-     * @since 3.0
+     * @since  3.0
      */
     public function createComponentIfNotExists()
     {
@@ -33,7 +33,7 @@ class ComponentImporter extends ItemImporter
                         ->first();
 
         if ($component) {
-            $this->log('A matching Component '.$this->item['name'].' with serial '.$this->item['serial'].' already exists.  ');
+            $this->log('A matching Component ' . $this->item['name'] . ' with serial ' . $this->item['serial'] . ' already exists.  ');
             if (! $this->updating) {
                 $this->log('Skipping Component');
 
@@ -46,14 +46,14 @@ class ComponentImporter extends ItemImporter
             return;
         }
         $this->log('No matching component, creating one');
-        $component = new Component;
+        $component = new Component();
         $component->created_by = auth()->id();
         $component->fill($this->sanitizeItemForStoring($component));
 
         // This sets an attribute on the Loggable trait for the action log
         $component->setImported(true);
         if ($component->save()) {
-            $this->log('Component '.$this->item['name'].' was created');
+            $this->log('Component ' . $this->item['name'] . ' was created');
 
             // If we have an asset tag, checkout to that asset.
             if (isset($this->item['asset_tag']) && ($asset = Asset::where('asset_tag', $this->item['asset_tag'])->first())) {
