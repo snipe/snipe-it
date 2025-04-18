@@ -58,7 +58,7 @@
                                 <label for="next_auto_tag_base">{{ trans('admin/settings/general.next_auto_tag_base') }}</label>
                             </div>
                             <div class="col-md-7">
-                                <input class="form-control" style="width: 150px;" aria-label="next_auto_tag_base" name="next_auto_tag_base" type="text" value="{{ old('next_auto_tag_base', $setting->next_auto_tag_base) }}" id="next_auto_tag_base">
+                                <input class="form-control" style="width: 150px;" aria-label="next_auto_tag_base" name="next_auto_tag_base" type="number" min="1" value="{{ old('next_auto_tag_base', $setting->next_auto_tag_base) }}" id="next_auto_tag_base">
                                 {!! $errors->first('next_auto_tag_base', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                                 <label for="zerofill_count">{{ trans('admin/settings/general.zerofill_count') }}</label>
                             </div>
                             <div class="col-md-7">
-                                <input class="form-control" style="width: 150px;" aria-label="zerofill_count" name="zerofill_count" type="text" value="{{ old('zerofill_count', $setting->zerofill_count) }}" id="zerofill_count">
+                                <input class="form-control" style="width: 150px;" aria-label="zerofill_count" name="zerofill_count" type="number" min="0" value="{{ old('zerofill_count', $setting->zerofill_count) }}" id="zerofill_count">
                                 {!! $errors->first('zerofill_count', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
