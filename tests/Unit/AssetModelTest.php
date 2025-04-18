@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Models\Asset;
@@ -16,7 +17,7 @@ class AssetModelTest extends TestCase
         $model = AssetModel::factory()->create([
             'category_id' => $category->id,
         ]);
-    
+
         $asset = Asset::factory()->create([
                     'model_id' => $model->id
                 ]);

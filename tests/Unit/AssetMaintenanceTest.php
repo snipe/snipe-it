@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Models\AssetMaintenance;
@@ -8,7 +9,7 @@ class AssetMaintenanceTest extends TestCase
 {
     public function testZerosOutWarrantyIfBlank()
     {
-        $c = new AssetMaintenance;
+        $c = new AssetMaintenance();
         $c->is_warranty = '';
         $this->assertTrue($c->is_warranty === 0);
         $c->is_warranty = '4';
@@ -28,7 +29,7 @@ class AssetMaintenanceTest extends TestCase
 
     public function testNullsOutNotesIfBlank()
     {
-        $c = new AssetMaintenance;
+        $c = new AssetMaintenance();
         $c->notes = '';
         $this->assertTrue($c->notes === null);
         $c->notes = 'This is a long note';
@@ -37,7 +38,7 @@ class AssetMaintenanceTest extends TestCase
 
     public function testNullsOutCompletionDateIfBlankOrInvalid()
     {
-        $c = new AssetMaintenance;
+        $c = new AssetMaintenance();
         $c->completion_date = '';
         $this->assertTrue($c->completion_date === null);
         $c->completion_date = '0000-00-00';

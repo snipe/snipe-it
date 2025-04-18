@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit\Models\Company;
 
 use App\Models\Company;
@@ -13,9 +14,9 @@ class CompanyTest extends TestCase
         $user = User::factory()
                 ->create(
                     [
-                        'company_id'=> $company->id
+                        'company_id' => $company->id
                     ]
-        );
+                );
 
         $this->assertCount(1, $company->users);
     }

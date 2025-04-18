@@ -24,7 +24,7 @@ class LdapTest extends TestCase
 
 
         $blah = Ldap::connectToLdap();
-        $this->assertEquals('hello',$blah,"LDAP_connect should return 'hello'");
+        $this->assertEquals('hello', $blah, "LDAP_connect should return 'hello'");
     }
 
     // other test cases - with/without client-side certs?
@@ -43,7 +43,7 @@ class LdapTest extends TestCase
     {
         $this->settings->enableLdap();
         $this->getFunctionMock("App\\Models", "ldap_bind")->expects($this->once())->willReturn(false);
-        $this->getFunctionMock("App\\Models","ldap_error")->expects($this->once())->willReturn("exception");
+        $this->getFunctionMock("App\\Models", "ldap_error")->expects($this->once())->willReturn("exception");
         $this->expectExceptionMessage("Could not bind to LDAP:");
 
         $this->assertNull(Ldap::bindAdminToLdap("dummy"));
@@ -62,7 +62,7 @@ class LdapTest extends TestCase
     {
         $this->settings->enableAnonymousLdap();
         $this->getFunctionMock("App\\Models", "ldap_bind")->expects($this->once())->willReturn(false);
-        $this->getFunctionMock("App\\Models","ldap_error")->expects($this->once())->willReturn("exception");
+        $this->getFunctionMock("App\\Models", "ldap_error")->expects($this->once())->willReturn("exception");
         $this->expectExceptionMessage("Could not bind to LDAP:");
 
         $this->assertNull(Ldap::bindAdminToLdap("dummy"));
@@ -102,8 +102,8 @@ class LdapTest extends TestCase
             ]
         );
 
-        $results = Ldap::findAndBindUserLdap("username","password");
-        $this->assertEqualsCanonicalizing(["count" =>1,0 =>['sn' => 'Surname','firstname' => 'FirstName']],$results);
+        $results = Ldap::findAndBindUserLdap("username", "password");
+        $this->assertEqualsCanonicalizing(["count" => 1,0 => ['sn' => 'Surname','firstname' => 'FirstName']], $results);
     }
 
     public function testFindAndBindBadPassword()
@@ -123,7 +123,7 @@ class LdapTest extends TestCase
 
 
 //        $this->expectExceptionMessage("exception");
-        $results = Ldap::findAndBindUserLdap("username","password");
+        $results = Ldap::findAndBindUserLdap("username", "password");
         $this->assertFalse($results);
     }
 
@@ -142,7 +142,7 @@ class LdapTest extends TestCase
         $this->getFunctionMock("App\\Models", "ldap_search")->expects($this->once())->willReturn(false);
 
         $this->expectExceptionMessage("Could not search LDAP:");
-        $results = Ldap::findAndBindUserLdap("username","password");
+        $results = Ldap::findAndBindUserLdap("username", "password");
         $this->assertFalse($results);
     }
 
@@ -186,9 +186,9 @@ class LdapTest extends TestCase
         $this->getFunctionMock("App\\Models", "ldap_search")->expects($this->exactly(2))->willReturn(["stuff"]);
 
         $this->getFunctionMock("App\\Models", "ldap_parse_result")->expects($this->exactly(2))->willReturnCallback(
-            function ($ldapconn, $search_results, $errcode , $matcheddn , $errmsg , $referrals, &$controls) {
+            function ($ldapconn, $search_results, $errcode, $matcheddn, $errmsg, $referrals, &$controls) {
                 static $count = 0;
-                if($count == 0) {
+                if ($count == 0) {
                     $count++;
                     $controls[LDAP_CONTROL_PAGEDRESULTS]['value']['cookie'] = "cookie";
                     return ["count" => 1];
@@ -196,7 +196,6 @@ class LdapTest extends TestCase
                     $controls = [];
                     return ["count" => 1];
                 }
-
             }
         );
 
@@ -232,5 +231,4 @@ class LdapTest extends TestCase
         $possibly_recached_cert_file = Setting::get_client_side_cert_path(); //this should *NOT* re-cache from the Settings
         $this->assertStringEqualsFile($possibly_recached_cert_file, 'WEIRDLY UPDATED CERT FILE');
     }
-
 }

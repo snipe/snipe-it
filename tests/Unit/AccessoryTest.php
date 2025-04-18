@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Models\Accessory;
@@ -14,9 +15,8 @@ class AccessoryTest extends TestCase
     {
         $accessory = Accessory::factory()
         ->create(
-            [
-                'company_id' => 
-                    Company::factory()->create()->id]);
+            ['company_id' => Company::factory()->create()->id]
+        );
         $this->assertInstanceOf(Company::class, $accessory->company);
     }
 
@@ -26,7 +26,8 @@ class AccessoryTest extends TestCase
             ->create(
                 [
                     'location_id' => Location::factory()->create()->id
-                ]);
+                ]
+            );
         $this->assertInstanceOf(Location::class, $accessory->location);
     }
 
@@ -35,12 +36,13 @@ class AccessoryTest extends TestCase
         $accessory = Accessory::factory()->appleBtKeyboard()
             ->create(
                 [
-                    'category_id' => 
+                    'category_id' =>
                         Category::factory()->create(
                             [
                                 'category_type' => 'accessory'
                             ]
-                )->id]);
+                        )->id]
+            );
         $this->assertInstanceOf(Category::class, $accessory->category);
         $this->assertEquals('accessory', $accessory->category->category_type);
     }
@@ -51,7 +53,8 @@ class AccessoryTest extends TestCase
             [
                 'category_id' => Category::factory()->create(),
                 'manufacturer_id' => Manufacturer::factory()->apple()->create()
-            ]);
+            ]
+        );
         $this->assertInstanceOf(Manufacturer::class, $accessory->manufacturer);
     }
 }

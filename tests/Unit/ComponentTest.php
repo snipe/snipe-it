@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Models\Asset;
@@ -15,10 +16,10 @@ class ComponentTest extends TestCase
     {
         $component = Component::factory()
             ->create(
-                    [
+                [
                         'company_id' => Company::factory()->create()->id
                     ]
-                );
+            );
         $this->assertInstanceOf(Company::class, $component->company);
     }
 
@@ -34,12 +35,13 @@ class ComponentTest extends TestCase
         $component = Component::factory()->ramCrucial4()
             ->create(
                 [
-                    'category_id' => 
+                    'category_id' =>
                         Category::factory()->create(
                             [
                                 'category_type' => 'component'
                             ]
-                )->id]);
+                        )->id]
+            );
         $this->assertInstanceOf(Category::class, $component->category);
         $this->assertEquals('component', $component->category->category_type);
     }

@@ -13,19 +13,19 @@ class SnipeTranslatorTest extends TestCase
 
     public function testBasic()
     {
-        $this->assertEquals('This user has admin privileges',trans('general.admin_tooltip',[],'en-US'));
+        $this->assertEquals('This user has admin privileges', trans('general.admin_tooltip', [], 'en-US'));
     }
 
     public function testPortuguese()
     {
-        $this->assertEquals('Acessório',trans('general.accessory',[],'pt-PT'));
+        $this->assertEquals('Acessório', trans('general.accessory', [], 'pt-PT'));
     }
 
     public function testFallback()
     {
         $this->assertEquals(
             'This user has admin privileges',
-            trans('general.admin_tooltip',[],'xx-ZZ'),
+            trans('general.admin_tooltip', [], 'xx-ZZ'),
             "Nonexistent locale should fall-back to en-US"
         );
     }
@@ -34,7 +34,7 @@ class SnipeTranslatorTest extends TestCase
     {
         $this->assertEquals(
             'Ingen sikkerhetskopier ble gjort ennå',
-            trans('backup::notifications.no_backups_info',[],'nb-NO'),
+            trans('backup::notifications.no_backups_info', [], 'nb-NO'),
             "Norwegian 'no backups info' message should be here"
         );
     }
@@ -43,17 +43,16 @@ class SnipeTranslatorTest extends TestCase
     {
         $this->assertEquals(
             'No backups were made yet',
-            trans('backup::notifications.no_backups_info',[],'xx-ZZ'),
+            trans('backup::notifications.no_backups_info', [], 'xx-ZZ'),
             "'no backups info' string should fallback to 'en'"
         );
-
     }
 
     public function testTransChoiceSingular()
     {
         $this->assertEquals(
             '1 Consumível',
-            trans_choice('general.countable.consumables',1,[],'pt-PT')
+            trans_choice('general.countable.consumables', 1, [], 'pt-PT')
         );
     }
 
@@ -61,7 +60,7 @@ class SnipeTranslatorTest extends TestCase
     {
         $this->assertEquals(
             '2 Consumíveis',
-            trans_choice('general.countable.consumables',2,[],'pt-PT')
+            trans_choice('general.countable.consumables', 2, [], 'pt-PT')
         );
     }
 
@@ -69,24 +68,26 @@ class SnipeTranslatorTest extends TestCase
     {
         $this->assertEquals(
             'bogus_key',
-            trans('bogus_key',[],'pt-PT'),
+            trans('bogus_key', [], 'pt-PT'),
             "Translating a completely bogus key should at least just return back that key"
         );
     }
 
-    public function testReplacements() {
+    public function testReplacements()
+    {
         $this->assertEquals(
             'Artigos alocados a Some Name Here',
-            trans('admin/users/general.assets_user',['name' => 'Some Name Here'],'pt-PT'),
+            trans('admin/users/general.assets_user', ['name' => 'Some Name Here'], 'pt-PT'),
             "Text should get replaced in translations when given"
         );
     }
 
-    public function testNonlegacyBackupLocale() {
+    public function testNonlegacyBackupLocale()
+    {
         //Spatie backup *usually* uses two-character locales, but pt-BR is an exception
         $this->assertEquals(
             'Mensagem de exceção: MESSAGE',
-            trans('backup::notifications.exception_message',['message' => 'MESSAGE'],'pt-BR')
+            trans('backup::notifications.exception_message', ['message' => 'MESSAGE'], 'pt-BR')
         );
     }
 }

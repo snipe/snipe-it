@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Models\Asset;
@@ -21,9 +22,10 @@ class DepreciationTest extends TestCase
                     ->create(
                         [
                             'category_id' => Category::factory()->assetLaptopCategory()->create(),
-                            'depreciation_id' => $depreciation->id               
-                        ]);
-        
+                            'depreciation_id' => $depreciation->id
+                        ]
+                    );
+
         $this->assertEquals(5, $depreciation->models->count());
     }
     public function testDepreciationAmount()
@@ -31,7 +33,7 @@ class DepreciationTest extends TestCase
         $depreciation = Depreciation::factory()->create([
             'depreciation_type' => 'amount',
             'depreciation_min' => 1000,
-            'months'=> 36,
+            'months' => 36,
         ]);
 
         $asset = Asset::factory()
@@ -41,7 +43,8 @@ class DepreciationTest extends TestCase
                     'category_id' => Category::factory()->assetLaptopCategory()->create(),
                     'purchase_date' => now()->subDecade(),
                     'purchase_cost' => 4000,
-                ]);
+                ]
+            );
         $asset->model->update([
             'depreciation_id' => $depreciation->id,
         ]);
@@ -55,7 +58,7 @@ class DepreciationTest extends TestCase
         $depreciation = Depreciation::factory()->create([
             'depreciation_type' => 'percent',
             'depreciation_min' => 50,
-            'months'=> 36,
+            'months' => 36,
         ]);
 
         $asset = Asset::factory()
@@ -65,7 +68,8 @@ class DepreciationTest extends TestCase
                     'category_id' => Category::factory()->assetLaptopCategory()->create(),
                     'purchase_date' => now()->subDecade(),
                     'purchase_cost' => 4000,
-                ]);
+                ]
+            );
         $asset->model->update([
             'depreciation_id' => $depreciation->id,
         ]);
@@ -85,8 +89,9 @@ class DepreciationTest extends TestCase
                     ->create(
                         [
                             'category_id' => Category::factory()->licenseGraphicsCategory()->create(),
-                            'depreciation_id' => $depreciation->id               
-                        ]);
+                            'depreciation_id' => $depreciation->id
+                        ]
+                    );
 
         $this->assertEquals(5, $depreciation->licenses()->count());
     }

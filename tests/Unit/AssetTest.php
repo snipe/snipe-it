@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Models\Asset;
@@ -19,7 +20,6 @@ class AssetTest extends TestCase
 
         $this->assertModelExists($a);
         $this->assertModelExists($b);
-
     }
 
     public function testAutoIncrementCollision()
@@ -179,14 +179,14 @@ class AssetTest extends TestCase
                         [
                             'category_id' => Category::factory()->assetLaptopCategory()->create()->id
                         ]
-                )->id,   
+                    )->id,
                 'warranty_months' => 24,
-                'purchase_date' =>   Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)                  
-            ]);
+                'purchase_date' =>   Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)
+            ]
+        );
 
-        
+
         $this->assertEquals(Carbon::createFromDate(2017, 1, 1)->format('Y-m-d'), $asset->purchase_date->format('Y-m-d'));
         $this->assertEquals(Carbon::createFromDate(2019, 1, 1)->format('Y-m-d'), $asset->warranty_expires->format('Y-m-d'));
-
     }
 }

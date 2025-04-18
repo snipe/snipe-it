@@ -13,7 +13,7 @@ class ReportTemplateParsingValuesTest extends TestCase
 {
     public function testParsingValuesOnNonExistentReportTemplate()
     {
-        $unsavedTemplate = new ReportTemplate;
+        $unsavedTemplate = new ReportTemplate();
 
         // checkmarkValue() should be "checked" (1) by default
         $this->assertEquals('1', $unsavedTemplate->checkmarkValue('is_a_checkbox_field'));
@@ -49,7 +49,7 @@ class ReportTemplateParsingValuesTest extends TestCase
         $this->assertEquals('1', $template->checkmarkValue('is_a_checkbox_field'));
         $this->assertEquals('0', $template->checkmarkValue('non_existent_key'));
         $this->assertEquals('0', $template->checkmarkValue('is_checkbox_field_with_zero'));
-        $this->assertEquals('0', (new ReportTemplate)->checkmarkValue('non_existent_key_that_is_overwritten_to_default_to_zero', '0'));
+        $this->assertEquals('0', (new ReportTemplate())->checkmarkValue('non_existent_key_that_is_overwritten_to_default_to_zero', '0'));
     }
 
     public function testParsingTextValue()
@@ -63,8 +63,8 @@ class ReportTemplateParsingValuesTest extends TestCase
         $this->assertEquals('some text', $template->textValue('is_a_text_field'));
         $this->assertEquals('', $template->textValue('non_existent_key'));
 
-        $this->assertEquals('', (new ReportTemplate)->textValue('is_a_text_field'));
-        $this->assertEquals('my fallback', (new ReportTemplate)->textValue('non_existent_key', 'my fallback'));
+        $this->assertEquals('', (new ReportTemplate())->textValue('is_a_text_field'));
+        $this->assertEquals('my fallback', (new ReportTemplate())->textValue('non_existent_key', 'my fallback'));
     }
 
     public function testParsingRadioValue()
@@ -137,7 +137,7 @@ class ReportTemplateParsingValuesTest extends TestCase
 
         $this->assertNull($templateWithDeletedId->selectValue('single_value', Location::class));
         $this->assertNull($templateWithInvalidId->selectValue('single_value', Location::class));
-        $this->assertNull((new ReportTemplate)->selectValue('value_on_unsaved_template', Location::class));
+        $this->assertNull((new ReportTemplate())->selectValue('value_on_unsaved_template', Location::class));
     }
 
     public function testSelectValuesDoNotIncludeDeletedOrNonExistentModels()

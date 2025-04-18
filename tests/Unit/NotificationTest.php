@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Mail\CheckoutAssetMail;
@@ -24,10 +25,11 @@ class NotificationTest extends TestCase
                         [
                             'category_id' => Category::factory()->assetLaptopCategory()->create()->id
                         ]
-                )->id,
+                    )->id,
                 'warranty_months' => 24,
                 'purchase_date' =>   Carbon::createFromDate(2017, 1, 1)->hour(0)->minute(0)->second(0)->format('Y-m-d')
-            ]);
+            ]
+        );
 
         Mail::fake();
         $asset->checkOut($user, $admin->id);

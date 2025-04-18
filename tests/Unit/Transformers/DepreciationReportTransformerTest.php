@@ -15,7 +15,7 @@ class DepreciationReportTransformerTest extends TestCase
         $depreciation = Depreciation::factory()->create(['months' => 0]);
         $asset->model->depreciation()->associate($depreciation);
 
-        $transformer = new DepreciationReportTransformer;
+        $transformer = new DepreciationReportTransformer();
 
         $result = $transformer->transformAsset($asset);
 

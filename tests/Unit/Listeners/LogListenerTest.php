@@ -36,5 +36,4 @@ class LogListenerTest extends TestCase
             'note' => 'A simple note...',
         ]);
     }
-
 }

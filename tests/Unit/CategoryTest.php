@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Models\Category;
@@ -26,21 +27,21 @@ class CategoryTest extends TestCase
 
     public function testACategoryCanHaveAssets()
     {
-       $category = Category::factory()->assetDesktopCategory()->create();
+        $category = Category::factory()->assetDesktopCategory()->create();
 
        // Generate 5 models via factory
-       $models =  AssetModel::factory()
+        $models =  AssetModel::factory()
             ->count(5)
             ->create(
                 [
                     'category_id' => $category->id
                 ]
-        );
+            );
 
-        
+
 
         // Loop through the models and create 2 assets in each model
-       $models->each(function ($model) {
+        $models->each(function ($model) {
             //dd($model);
             $asset = Asset::factory()
             ->count(2)
