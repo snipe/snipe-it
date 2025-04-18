@@ -58,7 +58,7 @@ class StoreGroupTest extends TestCase
         );
 
         $this->actingAsForApi($superuser)
-            ->getJson(route('api.groups.show',  ['group' => $group]))
+            ->getJson(route('api.groups.show', ['group' => $group]))
             ->assertOk();
     }
 
@@ -78,6 +78,5 @@ class StoreGroupTest extends TestCase
         $this->assertNotNull($group);
         $this->assertEquals('1', $group->decodePermissions()['admin']);
         $this->assertNotContains('snipe_is_awesome', $group->decodePermissions());
-
     }
 }
