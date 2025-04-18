@@ -13,7 +13,7 @@ class LoginAttemptsTransformer
             $array[] = self::transformLoginAttempt($login_attempt);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformLoginAttempt($login_attempt)
