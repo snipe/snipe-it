@@ -84,7 +84,7 @@
         <div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
           <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
           <div class="col-md-8">
-            <input class="form-control" type="text" name="website" id="website" value="{{ old('website', $user->website) }}" />
+            <input class="form-control" type="url" name="website" id="website" value="{{ old('website', $user->website) }}" />
             {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -113,7 +113,7 @@
             <small>(Private)</small>
           </label>
           <div class="col-md-8">
-            <input class="form-control" type="text" name="gravatar" id="gravatar" value="{{ old('gravatar', $user->gravatar) }}" />
+            <input class="form-control" type="email" name="gravatar" id="gravatar" value="{{ old('gravatar', $user->gravatar) }}" />
             {!! $errors->first('gravatar', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
             <p style="padding-top: 3px;">
               <img src="//secure.gravatar.com/avatar/{{ md5(strtolower(trim($user->gravatar))) }}" width="30" height="30" alt="{{ $user->present()->fullName() }} avatar image">
