@@ -34,13 +34,21 @@ class UpdateLocationsTest extends TestCase
             ->put(route('locations.update', ['location' => $location]), [
                 'name' => 'Test Location Edited',
                 'notes' => 'Test Note Edited',
+                'latitude' => '38.7532',
+                'longitude' => '-77.1969'
             ])
             ->assertStatus(302)
             ->assertSessionHasNoErrors()
             ->assertRedirect(route('locations.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-        $this->assertTrue(Location::where('name', 'Test Location Edited')->where('notes', 'Test Note Edited')->exists());
+        $this->assertTrue(
+            Location::where('name', 'Test Location Edited')
+                ->where('notes', 'Test Note Edited')
+                ->where('latitude', 38.7532)
+                ->where('longitude', -77.1969)
+                ->exists()
+        );
     }
 
     public function testUserCannotEditLocationsToMakeThemTheirOwnParent()
