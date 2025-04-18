@@ -32,8 +32,8 @@ class Supplier extends SnipeModel
         'country'            => 'min:2|max:191|nullable',
         'zip'               => 'max:10|nullable',
         'url'               => 'sometimes|nullable|string|max:250',
-        'latitude' => 'float|nullable|min:-90|max:90',
-        'longitude' => 'float|nullable|min:-180|max:180'
+        'latitude' => 'numeric|nullable|min:-90|max:90',
+        'longitude' => 'numeric|nullable|min:-180|max:180'
     ];
 
     /**

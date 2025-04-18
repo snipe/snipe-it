@@ -40,8 +40,8 @@ class Location extends SnipeModel
         'manager_id'    => 'exists:users,id|nullable',
         'parent_id'     => 'nullable|exists:locations,id|non_circular:locations,id',
         'company_id'    => 'integer|nullable|exists:companies,id',
-        'latitude'      => 'float|nullable|min:-90|max:90',
-        'longitude'     => 'float|nullable|min:-180|max:180'
+        'latitude'      => 'numeric|nullable|min:-90|max:90',
+        'longitude'     => 'numeric|nullable|min:-180|max:180'
     ];
 
     protected $casts = [
