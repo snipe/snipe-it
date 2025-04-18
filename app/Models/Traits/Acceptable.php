@@ -4,6 +4,7 @@ namespace App\Models\Traits;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
+
 /**
  * This trait allows models to have a callback after their checkout gets accepted or declined.
  *
