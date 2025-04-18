@@ -16,8 +16,8 @@ use Illuminate\Translation\Translator;
  *
  * This method is called by the trans_choice() helper, which we *do* use a lot.
  ***************************************************************/
-class SnipeTranslator extends Translator {
-
+class SnipeTranslator extends Translator
+{
     static $legacy_translation_namespaces = [
         "backup::" //Spatie backup uses 'legacy' locale names
     ];
@@ -26,7 +26,9 @@ class SnipeTranslator extends Translator {
     public function choice($key, $number, array $replace = [], $locale = null)
     {
         $line = $this->get(
-            $key, [], $locale = $this->localeForChoice($key, $locale)
+            $key,
+            [],
+            $locale = $this->localeForChoice($key, $locale)
         );
 
         // If the given "number" is actually an array or countable we will simply count the
@@ -40,9 +42,10 @@ class SnipeTranslator extends Translator {
             $replace['count'] = $number;
         }
 
-        $underscored_locale = str_replace("-","_",$locale); // OUR CHANGE.
+        $underscored_locale = str_replace("-", "_", $locale); // OUR CHANGE.
         return $this->makeReplacements( // BELOW - that $underscored_locale is the *ONLY* modified part
-            $this->getSelector()->choose($line, $number, $underscored_locale), $replace
+            $this->getSelector()->choose($line, $number, $underscored_locale),
+            $replace
         );
     }
 
@@ -68,6 +71,4 @@ class SnipeTranslator extends Translator {
         }
         return $result;
     }
-
-
 }

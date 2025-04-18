@@ -27,7 +27,6 @@ class PredefinedKitCheckoutService
     public function checkout(Request $request, PredefinedKit $kit, User $user)
     {
         try {
-
             // Check if the user exists
             if (is_null($user)) {
                 return ['errors' => trans('admin/users/message.user_not_found')];
@@ -93,7 +92,7 @@ class PredefinedKitCheckoutService
                 }
             }
             if ($quantity > 0) {
-                $errors[] = trans('admin/kits/general.none_models', ['model'=> $model->name, 'qty' => $model->pivot->quantity]);
+                $errors[] = trans('admin/kits/general.none_models', ['model' => $model->name, 'qty' => $model->pivot->quantity]);
             }
         }
 
@@ -109,7 +108,7 @@ class PredefinedKitCheckoutService
         foreach ($licenses as $license) {
             $quantity = $license->pivot->quantity;
             if ($quantity > count($license->freeSeats)) {
-                $errors[] = trans('admin/kits/general.none_licenses', ['license'=> $license->name, 'qty' => $license->pivot->quantity]);
+                $errors[] = trans('admin/kits/general.none_licenses', ['license' => $license->name, 'qty' => $license->pivot->quantity]);
             }
             for ($i = 0; $i < $quantity; $i++) {
                 $seats_to_add[] = $license->freeSeats[$i];
@@ -124,7 +123,7 @@ class PredefinedKitCheckoutService
         $consumables = $kit->consumables()->with('users')->get();
         foreach ($consumables as $consumable) {
             if ($consumable->numRemaining() < $consumable->pivot->quantity) {
-                $errors[] = trans('admin/kits/general.none_consumables', ['consumable'=> $consumable->name, 'qty' => $consumable->pivot->quantity]);
+                $errors[] = trans('admin/kits/general.none_consumables', ['consumable' => $consumable->name, 'qty' => $consumable->pivot->quantity]);
             }
         }
 
@@ -136,7 +135,7 @@ class PredefinedKitCheckoutService
         $accessories = $kit->accessories()->with('users')->get();
         foreach ($accessories as $accessory) {
             if ($accessory->numRemaining() < $accessory->pivot->quantity) {
-                $errors[] = trans('admin/kits/general.none_accessory', ['accessory'=> $accessory->name, 'qty' => $accessory->pivot->quantity]);
+                $errors[] = trans('admin/kits/general.none_accessory', ['accessory' => $accessory->name, 'qty' => $accessory->pivot->quantity]);
             }
         }
 
