@@ -1,6 +1,13 @@
 {
     "dockerComposeFile": "../dev.docker-compose.yml",
     "service": "snipeit",
+    "forwardPorts": [80],
     "workspaceFolder": "/workspaces/snipe-it",
-    "postCreateCommand": "git config --global --add safe.directory /workspaces/snipe-it && sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html; if [ -f composer.json ];then composer install;fi"
+    "postCreateCommand": [
+        "git config --global --add safe.directory /workspaces/snipe-it",
+        "chmod a+x \"$(pwd)\" && rm -rf /var/www/html",
+        "ln -s \"$(pwd)\" /var/www/html",
+        "if [ -f composer.json ];then composer install;fi",
+        "ln -s docker/.env /var/www/html/.env"
+    ]
 }
