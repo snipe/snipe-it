@@ -29,7 +29,6 @@ class LicenseImporter extends ItemImporter
      * @return License|mixed|null
      * updated @author Jes Vinsmoke
      * @since 6.1
-     *
      */
     public function createLicenseIfNotExists(array $row)
     {
@@ -37,12 +36,10 @@ class LicenseImporter extends ItemImporter
         $license = License::where('serial', $this->item['serial'])->where('name', $this->item['name'])
                     ->first();
         if ($license) {
-            if (! $this->updating) {
-
-                if($this->item['serial'] != "") {
+            if (!$this->updating) {
+                if ($this->item['serial'] != "") {
                     $this->log('A matching License ' . $this->item['name'] . ' with serial ' . $this->item['serial'] . ' already exists');
-                }
-                else {
+                } else {
                     $this->log('A matching License ' . $this->item['name'] . ' with no serial number already exists');
                 }
 
@@ -53,12 +50,12 @@ class LicenseImporter extends ItemImporter
             $editingLicense = true;
         } else {
             $this->log('No Matching License, Creating a new one');
-            $license = new License;
+            $license = new License();
         }
         $asset_tag = $this->item['asset_tag'] = trim($this->findCsvMatch($row, 'asset_tag')); // used for checkout out to an asset.
 
         $this->item["expiration_date"] = null;
-        if ($this->findCsvMatch($row, "expiration_date")!='') {
+        if ($this->findCsvMatch($row, "expiration_date") != '') {
             $this->item["expiration_date"] = date("Y-m-d 00:00:01", strtotime(trim($this->findCsvMatch($row, "expiration_date"))));
         }
         $this->item['license_email'] = trim($this->findCsvMatch($row, 'license_email'));
@@ -70,14 +67,13 @@ class LicenseImporter extends ItemImporter
         $this->item['manufacturer'] = $this->createOrFetchManufacturer(trim($this->findCsvMatch($row, 'manufacturer')));
         $this->item['min_amt'] = trim($this->findCsvMatch($row, 'min_amt'));
 
-        if($this->item['reassignable'] == "")
-        {
+        if ($this->item['reassignable'] == "") {
             $this->item['reassignable'] = 1;
         }
         $this->item['seats'] = $this->findCsvMatch($row, 'seats');
-        
+
         $this->item["termination_date"] = null;
-        if ($this->findCsvMatch($row, "termination_date")!='') {
+        if ($this->findCsvMatch($row, "termination_date") != '') {
             $this->item["termination_date"] = date("Y-m-d 00:00:01", strtotime($this->findCsvMatch($row, "termination_date")));
         }
 
@@ -91,7 +87,7 @@ class LicenseImporter extends ItemImporter
         // This sets an attribute on the Loggable trait for the action log
         $license->setImported(true);
         if ($license->save()) {
-            $this->log('License '.$this->item['name'].' with serial number '.$this->item['serial'].' was created');
+            $this->log('License ' . $this->item['name'] . ' with serial number ' . $this->item['serial'] . ' was created');
 
             // Lets try to checkout seats if the fields exist and we have seats.
             if ($license->seats > 0) {
@@ -99,7 +95,7 @@ class LicenseImporter extends ItemImporter
                 $asset = Asset::where('asset_tag', $asset_tag)->first();
                 $targetLicense = $license->freeSeat();
 
-                if (is_null($targetLicense)){
+                if (is_null($targetLicense)) {
                     return;
                 }
 
@@ -119,6 +115,6 @@ class LicenseImporter extends ItemImporter
 
             return;
         }
-        $this->logError($license, 'License "'.$this->item['name'].'"');
+        $this->logError($license, 'License "' . $this->item['name'] . '"');
     }
 }

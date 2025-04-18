@@ -114,7 +114,7 @@ class ItemImporter extends Importer
             return;
         }
 
-        if (strtolower($this->item['checkout_class']) === 'location' && $this->findCsvMatch($row, 'checkout_location') != null ) {
+        if (strtolower($this->item['checkout_class']) === 'location' && $this->findCsvMatch($row, 'checkout_location') != null) {
             return Location::findOrFail($this->createOrFetchLocation($this->findCsvMatch($row, 'checkout_location')));
         }
 
@@ -221,7 +221,6 @@ class ItemImporter extends Importer
         $asset_model = $asset_model->first();
 
         if ($asset_model) {
-
             if (! $this->updating) {
                 $this->log('A matching model already exists, returning it.');
                 return $asset_model->id;
@@ -232,16 +231,15 @@ class ItemImporter extends Importer
             $item['name'] = $asset_model_name;
             $item['notes'] = $this->findCsvMatch($row, 'model_notes');
 
-            if (!empty($asset_modelNumber)){
+            if (!empty($asset_modelNumber)) {
                 $item['model_number'] = $asset_modelNumber;
             }
 
             $asset_model->update($item);
             $asset_model->save();
             $this->log('Asset Model Updated');
-            
-            return $asset_model->id;
 
+            return $asset_model->id;
         }
 
         $this->log('No Matching Model, Creating a new one');
@@ -257,12 +255,12 @@ class ItemImporter extends Importer
         $item = null;
 
         if ($asset_model->save()) {
-            $this->log('Asset Model '.$asset_model_name.' with model number '.$asset_modelNumber.' was created');
+            $this->log('Asset Model ' . $asset_model_name . ' with model number ' . $asset_modelNumber . ' was created');
 
             return $asset_model->id;
         }
-        $this->log('Asset Model Errors: '.$asset_model->getErrors());
-        $this->logError($asset_model, 'Asset Model "'.$asset_model_name.'"');
+        $this->log('Asset Model Errors: ' . $asset_model->getErrors());
+        $this->logError($asset_model, 'Asset Model "' . $asset_model_name . '"');
 
         return null;
     }
@@ -296,7 +294,7 @@ class ItemImporter extends Importer
 
 
         if ($category) {
-            $this->log('A matching category: '.$category->name.' already exists');
+            $this->log('A matching category: ' . $category->name . ' already exists');
             return $category->id;
         }
 
@@ -306,11 +304,11 @@ class ItemImporter extends Importer
         $category->category_type = $item_type;
 
         if ($category->save()) {
-            $this->log('Category '.$asset_category.' was created');
+            $this->log('Category ' . $asset_category . ' was created');
 
             return $category->id;
         }
-        $this->logError($category, 'Category "'. $asset_category. '"');
+        $this->logError($category, 'Category "' . $asset_category . '"');
 
         return null;
     }
@@ -327,7 +325,7 @@ class ItemImporter extends Importer
     {
         $company = Company::where(['name' => $asset_company_name])->first();
         if ($company) {
-            $this->log('A matching Company '.$asset_company_name.' already exists');
+            $this->log('A matching Company ' . $asset_company_name . ' already exists');
 
             return $company->id;
         }
@@ -336,7 +334,7 @@ class ItemImporter extends Importer
         $company->name = $asset_company_name;
 
         if ($company->save()) {
-            $this->log('Company '.$asset_company_name.' was created');
+            $this->log('Company ' . $asset_company_name . ' was created');
 
             return $company->id;
         }
@@ -358,11 +356,11 @@ class ItemImporter extends Importer
         $manager = User::where('first_name', '=', $user_manager_first_name)
             ->where('last_name', '=', $user_manager_last_name)->first();
         if ($manager) {
-            $this->log('A matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' already exists');
+            $this->log('A matching Manager ' . $user_manager_first_name . ' ' . $user_manager_last_name . ' already exists');
 
             return $manager->id;
         }
-        $this->log('No matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' found. If their user account is being created through this import, you should re-process this file again. ');
+        $this->log('No matching Manager ' . $user_manager_first_name . ' ' . $user_manager_last_name . ' found. If their user account is being created through this import, you should re-process this file again. ');
 
         return null;
     }
@@ -380,10 +378,10 @@ class ItemImporter extends Importer
         if (empty($asset_statuslabel_name)) {
             return null;
         }
-       $status = Statuslabel::where(['name' => trim($asset_statuslabel_name)])->first();
+        $status = Statuslabel::where(['name' => trim($asset_statuslabel_name)])->first();
 
         if ($status) {
-            $this->log('A matching Status '.$asset_statuslabel_name.' already exists');
+            $this->log('A matching Status ' . $asset_statuslabel_name . ' already exists');
 
             return $status->id;
         }
@@ -397,11 +395,11 @@ class ItemImporter extends Importer
         $status->archived = 0;
 
         if ($status->save()) {
-            $this->log('Status '.$asset_statuslabel_name.' was created');
+            $this->log('Status ' . $asset_statuslabel_name . ' was created');
             return $status->id;
         }
 
-        $this->logError($status, 'Status "'.$asset_statuslabel_name.'"');
+        $this->logError($status, 'Status "' . $asset_statuslabel_name . '"');
         return null;
     }
 
@@ -418,10 +416,10 @@ class ItemImporter extends Importer
         if (empty($item_manufacturer)) {
             $item_manufacturer = 'Unknown';
         }
-        $manufacturer = Manufacturer::where(['name'=> $item_manufacturer])->first();
+        $manufacturer = Manufacturer::where(['name' => $item_manufacturer])->first();
 
         if ($manufacturer) {
-            $this->log('Manufacturer '.$item_manufacturer.' already exists');
+            $this->log('Manufacturer ' . $item_manufacturer . ' already exists');
 
             return $manufacturer->id;
         }
@@ -432,11 +430,11 @@ class ItemImporter extends Importer
         $manufacturer->created_by = auth()->id();
 
         if ($manufacturer->save()) {
-            $this->log('Manufacturer '.$manufacturer->name.' was created');
+            $this->log('Manufacturer ' . $manufacturer->name . ' was created');
 
             return $manufacturer->id;
         }
-        $this->logError($manufacturer, 'Manufacturer "'.$manufacturer->name.'"');
+        $this->logError($manufacturer, 'Manufacturer "' . $manufacturer->name . '"');
 
         return null;
     }
@@ -459,7 +457,7 @@ class ItemImporter extends Importer
         $location = Location::where(['name' => $asset_location])->first();
 
         if ($location) {
-            $this->log('Location '.$asset_location.' already exists');
+            $this->log('Location ' . $asset_location . ' already exists');
             return $location->id;
         }
         // No matching locations in the collection, create a new one.
@@ -472,7 +470,7 @@ class ItemImporter extends Importer
         $location->created_by = auth()->id();
 
         if ($location->save()) {
-            $this->log('Location '.$asset_location.' was created');
+            $this->log('Location ' . $asset_location . ' was created');
 
             return $location->id;
         }
@@ -498,7 +496,7 @@ class ItemImporter extends Importer
         $supplier = Supplier::where(['name' => $item_supplier])->first();
 
         if ($supplier) {
-            $this->log('Supplier '.$item_supplier.' already exists');
+            $this->log('Supplier ' . $item_supplier . ' already exists');
 
             return $supplier->id;
         }
@@ -508,12 +506,11 @@ class ItemImporter extends Importer
         $supplier->created_by = auth()->id();
 
         if ($supplier->save()) {
-            $this->log('Supplier '.$item_supplier.' was created');
+            $this->log('Supplier ' . $item_supplier . ' was created');
             return $supplier->id;
         }
         $this->logError($supplier, 'Supplier');
 
         return null;
     }
-
 }

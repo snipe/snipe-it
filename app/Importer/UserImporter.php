@@ -64,8 +64,8 @@ class UserImporter extends ItemImporter
         $this->item['department_id'] = trim($this->createOrFetchDepartment(trim($this->findCsvMatch($row, 'department'))));
         $this->item['manager_id'] = $this->fetchManager(trim($this->findCsvMatch($row, 'manager_first_name')), trim($this->findCsvMatch($row, 'manager_last_name')));
         $this->item['remote'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'remote'))) == 1 ) ? '1' : 0;
-        $this->item['vip'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'vip'))) ==1 ) ? '1' : 0;
-        $this->item['autoassign_licenses'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'autoassign_licenses'))) ==1 ) ? '1' : 0;
+        $this->item['vip'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'vip'))) == 1 ) ? '1' : 0;
+        $this->item['autoassign_licenses'] = ($this->fetchHumanBoolean(trim($this->findCsvMatch($row, 'autoassign_licenses'))) == 1 ) ? '1' : 0;
 
         $this->handleEmptyStringsForDates();
 
@@ -81,16 +81,15 @@ class UserImporter extends ItemImporter
         }
 
         // Check if a numeric ID was passed. If it does, use that above all else.
-        if ((array_key_exists('id', $this->item) && ($this->item['id'] != "") && (is_numeric($this->item['id']))))  {
+        if ((array_key_exists('id', $this->item) && ($this->item['id'] != "") && (is_numeric($this->item['id'])))) {
             $user = User::find($this->item['id']);
         } else {
             $user = User::where('username', $this->item['username'])->first();
         }
 
         if ($user) {
-
             if (! $this->updating) {
-                Log::debug('A matching User '.$this->item['name'].' already exists.  ');
+                Log::debug('A matching User ' . $this->item['name'] . ' already exists.  ');
                 return;
             }
             $this->log('Updating User');
@@ -101,7 +100,7 @@ class UserImporter extends ItemImporter
             Asset::where('assigned_type', User::class)
                 ->where('assigned_to', $user->id)
                 ->update(['location_id' => $user->location_id]);
-            
+
             // Log::debug('UserImporter.php Updated User ' . print_r($user, true));
             return;
         }
@@ -118,7 +117,7 @@ class UserImporter extends ItemImporter
         $user->fill($this->sanitizeItemForStoring($user));
 
         if ($user->save()) {
-            $this->log('User '.$this->item['name'].' was created');
+            $this->log('User ' . $this->item['name'] . ' was created');
 
             if (($user->email) && ($user->activated == '1')) {
                 $data = [
@@ -153,7 +152,7 @@ class UserImporter extends ItemImporter
      */
     public function createOrFetchDepartment($department_name)
     {
-        if (is_null($department_name) || $department_name == ''){
+        if (is_null($department_name) || $department_name == '') {
             return null;
         }
 
@@ -176,7 +175,7 @@ class UserImporter extends ItemImporter
         $this->logError($department, 'Department');
         return null;
     }
-    
+
     public function sendWelcome($send = true)
     {
         $this->send_welcome = $send;

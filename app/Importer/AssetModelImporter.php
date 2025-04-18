@@ -44,7 +44,7 @@ class AssetModelImporter extends ItemImporter
 
         if ($assetModel) {
             if (! $this->updating) {
-                $this->log('A matching Model '.$this->item['name'].' already exists');
+                $this->log('A matching Model ' . $this->item['name'] . ' already exists');
                 return;
             }
 
@@ -104,15 +104,13 @@ class AssetModelImporter extends ItemImporter
         }
 
         if ($assetModel->save()) {
-            $this->log('AssetModel '.$assetModel->name.' created or updated from CSV import');
+            $this->log('AssetModel ' . $assetModel->name . ' created or updated from CSV import');
             return $assetModel;
-
         } else {
             $this->log($assetModel->getErrors()->first());
-            $this->addErrorToBag($assetModel,  $assetModel->getErrors()->keys()[0], $assetModel->getErrors()->first());
+            $this->addErrorToBag($assetModel, $assetModel->getErrors()->keys()[0], $assetModel->getErrors()->first());
             return $assetModel->getErrors();
         }
-
     }
 
 
@@ -130,9 +128,8 @@ class AssetModelImporter extends ItemImporter
     public function fetchDepreciation($depreciation_name) : ?int
     {
         if ($depreciation_name != '') {
-
             if ($depreciation = Depreciation::where('name', '=', $depreciation_name)->first()) {
-                $this->log('A matching Depreciation '.$depreciation_name.' already exists');
+                $this->log('A matching Depreciation ' . $depreciation_name . ' already exists');
                 return $depreciation->id;
             }
         }
@@ -154,7 +151,7 @@ class AssetModelImporter extends ItemImporter
             $fieldset = CustomFieldset::where('name', '=', $fieldset_name)->first();
 
             if ($fieldset) {
-                $this->log('A matching fieldset '.$fieldset_name.' already exists');
+                $this->log('A matching fieldset ' . $fieldset_name . ' already exists');
                 return $fieldset->id;
             }
 
@@ -162,7 +159,7 @@ class AssetModelImporter extends ItemImporter
             $fieldset->name = $fieldset_name;
 
             if ($fieldset->save()) {
-                $this->log('Fieldset '.$fieldset_name.' was created');
+                $this->log('Fieldset ' . $fieldset_name . ' was created');
 
                 return $fieldset->id;
             }
