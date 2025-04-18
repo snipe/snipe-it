@@ -1,13 +1,10 @@
 {
-    "dockerComposeFile": "../dev.docker-compose.yml",
-    "service": "snipeit",
-    "workspaceFolder": "/workspaces/snipe-it",
+    "image": "mcr.microsoft.com/devcontainers/php:8.3",
     "postCreateCommand": [
         "git config --global --add safe.directory /workspaces/snipe-it",
-        "&& chmod a+x /workspaces/snipe-it",
-        "&& rm -rf /var/www/html",
-        "&& ln -s /workspaces/snipe-it /var/www/html",
-        "&& ln -s /workspaces/snipe-it/.env.dev.docker /var/www/html/.env",
+        "&& sudo chmod a+x /workspaces/snipe-it",
+        "&& sudo rm -rf /var/www/html",
+        "&& sudo ln -s /workspaces/snipe-it /var/www/html",
         "&& if [ -f composer.json ];then composer install;fi;"
     ]
 }
