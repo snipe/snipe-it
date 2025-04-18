@@ -272,7 +272,7 @@ abstract class Importer
         }
     }
 
-    protected function addErrorToBag($item, $field,  $error_message)
+    protected function addErrorToBag($item, $field, $error_message)
     {
         if ($this->errorCallback) {
             call_user_func($this->errorCallback, $item, $field, [$field => [$error_message]]);
@@ -299,8 +299,8 @@ abstract class Importer
             'first_name' => $this->findCsvMatch($row, 'first_name'),
             'last_name' => $this->findCsvMatch($row, 'last_name'),
             'email'     => $this->findCsvMatch($row, 'email'),
-            'manager_id'=>  '',
-            'department_id' =>  '',
+            'manager_id' => '',
+            'department_id' => '',
             'username'  => $this->findCsvMatch($row, 'username'),
             'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
             'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
@@ -314,7 +314,7 @@ abstract class Importer
         // Maybe we're lucky and the username was passed and it already exists.
         if (!empty($user_array['username'])) {
             if ($user = User::where('username', $user_array['username'])->first()) {
-                $this->log('User '.$user_array['username'].' already exists');
+                $this->log('User ' . $user_array['username'] . ' already exists');
                 return $user;
             }
         }
@@ -352,7 +352,7 @@ abstract class Importer
 
             // Check for a matching username one more time after trying to guess username.
             if ($user = User::where('username', $user_array['username'])->first()) {
-                $this->log('User '.$user_array['username'].' already exists');
+                $this->log('User ' . $user_array['username'] . ' already exists');
                 return $user;
             }
         }
@@ -363,7 +363,7 @@ abstract class Importer
         }
 
         // No luck finding a user on username or first name, let's create one.
-        $user = new User;
+        $user = new User();
 
         $user->first_name = $user_array['first_name'];
         $user->last_name = $user_array['last_name'];
@@ -374,14 +374,14 @@ abstract class Importer
         $user->activated = 1;
         $user->password = $this->tempPassword;
 
-        Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
+        Log::debug('Creating a user with the following attributes: ' . print_r($user_array, true));
 
         if ($user->save()) {
-            $this->log('User '.$user_array['username'].' created');
+            $this->log('User ' . $user_array['username'] . ' created');
             return $user;
         }
 
-        $this->logError($user, 'User "'.$user_array['username'].'" was not able to be created.');
+        $this->logError($user, 'User "' . $user_array['username'] . '" was not able to be created.');
 
         return false;
     }
@@ -395,7 +395,7 @@ abstract class Importer
     {
         // A number was given instead of a name
         if (is_numeric($user_name)) {
-            $this->log('User '.$user_name.' is a number - lets see if it matches a user id');
+            $this->log('User ' . $user_name . ' is a number - lets see if it matches a user id');
 
             return User::find($user_name);
         }
@@ -521,7 +521,7 @@ abstract class Importer
             $department = Department::where('name', '=', $user_department_name)->first();
 
             if ($department) {
-                $this->log('A matching Department '.$user_department_name.' already exists');
+                $this->log('A matching Department ' . $user_department_name . ' already exists');
 
                 return $department->id;
             }
@@ -530,7 +530,7 @@ abstract class Importer
             $department->name = $user_department_name;
 
             if ($department->save()) {
-                $this->log('Department '.$user_department_name.' was created');
+                $this->log('Department ' . $user_department_name . ' was created');
 
                 return $department->id;
             }
@@ -554,11 +554,11 @@ abstract class Importer
         $manager = User::where('first_name', '=', $user_manager_first_name)
             ->where('last_name', '=', $user_manager_last_name)->first();
         if ($manager) {
-            $this->log('A matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' already exists');
+            $this->log('A matching Manager ' . $user_manager_first_name . ' ' . $user_manager_last_name . ' already exists');
 
             return $manager->id;
         }
-        $this->log('No matching Manager '.$user_manager_first_name.' '.$user_manager_last_name.' found. If their user account is being created through this import, you should re-process this file again. ');
+        $this->log('No matching Manager ' . $user_manager_first_name . ' ' . $user_manager_last_name . ' found. If their user account is being created through this import, you should re-process this file again. ');
 
         return null;
     }
@@ -573,8 +573,8 @@ abstract class Importer
      * @return string|null
 
      */
-    public function parseOrNullDate($field, $format = 'date') {
-
+    public function parseOrNullDate($field, $format = 'date')
+    {
         $date_format = 'Y-m-d';
 
         if ($format == 'datetime') {
@@ -582,7 +582,6 @@ abstract class Importer
         }
 
         if (array_key_exists($field, $this->item) && $this->item[$field] != '') {
-
             try {
                 $value = CarbonImmutable::parse($this->item[$field])->format($date_format);
                 return $value;
