@@ -90,7 +90,7 @@
                                 <label for="webhook_endpoint">{{ trans('admin/settings/general.webhook_endpoint',['app' => $webhook_name ]) }}</label>
                             </div>
                             <div class="col-md-9 required">
-                                    <input type="text" wire:model.blur="webhook_endpoint" class="form-control" placeholder="{{$webhook_placeholder}}" value="{{old('webhook_endpoint', $webhook_endpoint)}}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
+                                    <input type="url" wire:model.blur="webhook_endpoint" class="form-control" placeholder="{{$webhook_placeholder}}" value="{{old('webhook_endpoint', $webhook_endpoint)}}"{{ Helper::isDemoMode() ? ' disabled' : ''}}>
                                 {!! $errors->first('webhook_endpoint', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
