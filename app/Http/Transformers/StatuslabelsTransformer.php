@@ -16,7 +16,7 @@ class StatuslabelsTransformer
             $array[] = self::transformStatuslabel($statuslabel);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformStatuslabel(Statuslabel $statuslabel)
@@ -32,7 +32,7 @@ class StatuslabelsTransformer
             'notes' => e($statuslabel->notes),
             'created_by' => ($statuslabel->adminuser) ? [
                 'id' => (int) $statuslabel->adminuser->id,
-                'name'=> e($statuslabel->adminuser->present()->fullName()),
+                'name' => e($statuslabel->adminuser->present()->fullName()),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($statuslabel->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($statuslabel->updated_at, 'datetime'),
