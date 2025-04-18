@@ -125,7 +125,7 @@ class AssetModelImporter extends ItemImporter
      * @param $depreciation_name string
      * @return int id of depreciation created/found
      */
-    public function fetchDepreciation($depreciation_name) : ?int
+    public function fetchDepreciation($depreciation_name): ?int
     {
         if ($depreciation_name != '') {
             if ($depreciation = Depreciation::where('name', '=', $depreciation_name)->first()) {
@@ -145,7 +145,7 @@ class AssetModelImporter extends ItemImporter
      * @param $fieldset_name string
      * @return int id of fieldset created/found
      */
-    public function createOrFetchCustomFieldset($fieldset_name) : ?int
+    public function createOrFetchCustomFieldset($fieldset_name): ?int
     {
         if ($fieldset_name != '') {
             $fieldset = CustomFieldset::where('name', '=', $fieldset_name)->first();
