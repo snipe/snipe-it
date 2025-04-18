@@ -57,7 +57,7 @@ abstract class SnipePermissionsPolicy
          * via $this→authorize('something', Model::class) then calling Company:: isCurrentUserHasAccess($item) gets weird.
          * Bail out here by returning "nothing" and allow the relevant method lower in this class to be called and handle authorization.
          */
-        if (!$item instanceof Model){
+        if (!$item instanceof Model) {
             return;
         }
 
@@ -69,7 +69,6 @@ abstract class SnipePermissionsPolicy
         if (!Company::isCurrentUserHasAccess($item)) {
             return false;
         }
-
     }
 
 
@@ -81,7 +80,7 @@ abstract class SnipePermissionsPolicy
      */
     public function index(User $user)
     {
-        return $user->hasAccess($this->columnName().'.view');
+        return $user->hasAccess($this->columnName() . '.view');
     }
 
     /**
@@ -92,12 +91,12 @@ abstract class SnipePermissionsPolicy
      */
     public function view(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.view');
+        return $user->hasAccess($this->columnName() . '.view');
     }
 
     public function files(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.files');
+        return $user->hasAccess($this->columnName() . '.files');
     }
 
     /**
@@ -108,7 +107,7 @@ abstract class SnipePermissionsPolicy
      */
     public function create(User $user)
     {
-        return $user->hasAccess($this->columnName().'.create');
+        return $user->hasAccess($this->columnName() . '.create');
     }
 
     /**
@@ -119,7 +118,7 @@ abstract class SnipePermissionsPolicy
      */
     public function update(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.edit');
+        return $user->hasAccess($this->columnName() . '.edit');
     }
 
 
@@ -131,7 +130,7 @@ abstract class SnipePermissionsPolicy
      */
     public function checkout(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.checkout');
+        return $user->hasAccess($this->columnName() . '.checkout');
     }
 
     /**
@@ -147,7 +146,7 @@ abstract class SnipePermissionsPolicy
             $itemConditional = empty($item->deleted_at);
         }
 
-        return $itemConditional && $user->hasAccess($this->columnName().'.delete');
+        return $itemConditional && $user->hasAccess($this->columnName() . '.delete');
     }
 
     /**
@@ -158,6 +157,6 @@ abstract class SnipePermissionsPolicy
      */
     public function manage(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.edit');
+        return $user->hasAccess($this->columnName() . '.edit');
     }
 }

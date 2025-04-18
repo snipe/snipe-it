@@ -44,10 +44,9 @@ class LicensePolicy extends CheckoutablePermissionsPolicy
      */
     public function files(User $user, $license = null)
     {
-        if ($user->hasAccess('licenses.files'))  {
+        if ($user->hasAccess('licenses.files')) {
             return true;
         }
         return false;
-
     }
 }
