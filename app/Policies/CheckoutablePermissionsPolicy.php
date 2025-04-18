@@ -14,7 +14,7 @@ abstract class CheckoutablePermissionsPolicy extends SnipePermissionsPolicy
      */
     public function checkout(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.checkout');
+        return $user->hasAccess($this->columnName() . '.checkout');
     }
 
     /**
@@ -25,7 +25,7 @@ abstract class CheckoutablePermissionsPolicy extends SnipePermissionsPolicy
      */
     public function checkin(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.checkin');
+        return $user->hasAccess($this->columnName() . '.checkin');
     }
 
     /**
@@ -36,8 +36,8 @@ abstract class CheckoutablePermissionsPolicy extends SnipePermissionsPolicy
      */
     public function manage(User $user, $item = null)
     {
-        return $user->hasAccess($this->columnName().'.checkin')
-             || $user->hasAccess($this->columnName().'.edit')
-             || $user->hasAccess($this->columnName().'.checkout');
+        return $user->hasAccess($this->columnName() . '.checkin')
+             || $user->hasAccess($this->columnName() . '.edit')
+             || $user->hasAccess($this->columnName() . '.checkout');
     }
 }

@@ -134,8 +134,8 @@ class Saml
         try {
             $this->_auth = new OneLogin_Saml2_Auth($this->_settings);
         } catch (Exception $e) {
-            if ( $this->isEnabled() ) { // $this->loadSettings() initializes this to true if SAML is enabled by settings.
-                Log::warning('Trying OneLogin_Saml2_Auth failed. Setting SAML enabled to false. OneLogin_Saml2_Auth error message is: '.  $e->getMessage());
+            if ($this->isEnabled()) { // $this->loadSettings() initializes this to true if SAML is enabled by settings.
+                Log::warning('Trying OneLogin_Saml2_Auth failed. Setting SAML enabled to false. OneLogin_Saml2_Auth error message is: ' .  $e->getMessage());
             }
             $this->_enabled = false;
         }
