@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class UpdateDepartmentsTest extends TestCase
 {
-
     public function testRequiresPermissionToEditDepartment()
     {
         $department = Department::factory()->create();
@@ -35,9 +34,5 @@ class UpdateDepartmentsTest extends TestCase
         $department->refresh();
         $this->assertEquals('Test Department', $department->name, 'Name was not updated');
         $this->assertEquals('Test Note', $department->notes, 'Note was not updated');
-
     }
-
-
-
 }

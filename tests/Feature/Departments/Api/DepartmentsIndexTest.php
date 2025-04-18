@@ -33,7 +33,8 @@ class DepartmentsIndexTest extends TestCase
                     'order' => 'asc',
                     'offset' => '0',
                     'limit' => '20',
-                ]))
+                ])
+            )
             ->assertOk()
             ->assertJsonStructure([
                 'total',
