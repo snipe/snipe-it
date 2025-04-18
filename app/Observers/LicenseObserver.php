@@ -38,7 +38,7 @@ class LicenseObserver
         $logAction->item_id = $license->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
-        if($license->imported) {
+        if ($license->imported) {
             $logAction->setActionSource('importer');
         }
         $logAction->logaction('create');
