@@ -21,7 +21,7 @@ class UpdateSupplierTest extends TestCase
         $this->assertTrue(Supplier::where('name', 'Test Supplier')->exists());
 
         $response = $this->actingAs(User::factory()->superuser()->create())
-            ->put(route('supplier.update', ['supplier' => $supplier]), [
+            ->put(route('suppliers.update', ['supplier' => $supplier]), [
                 'name' => 'Test Supplier Edited',
                 'notes' => 'Test Note Edited',
                 'latitude' => '38.7532',
