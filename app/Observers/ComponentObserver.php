@@ -38,7 +38,7 @@ class ComponentObserver
         $logAction->item_id = $component->id;
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
-        if($component->imported) {
+        if ($component->imported) {
             $logAction->setActionSource('importer');
         }
         $logAction->logaction('create');
