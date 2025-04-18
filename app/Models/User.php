@@ -28,8 +28,12 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use CompanyableTrait;
 
     protected $presenter = \App\Presenters\UserPresenter::class;
-    use SoftDeletes, ValidatingTrait;
-    use Authenticatable, Authorizable, CanResetPassword, HasApiTokens;
+    use SoftDeletes;
+    use ValidatingTrait;
+    use Authenticatable;
+    use Authorizable;
+    use CanResetPassword;
+    use HasApiTokens;
     use UniqueUndeletedTrait;
     use Notifiable;
     use Presentable;
@@ -129,7 +133,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
@@ -157,7 +161,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         parent::boot();
 
-        static::retrieved(function($user){
+        static::retrieved(function ($user) {
             $user->name = $user->getFullNameAttribute();
         });
     }
@@ -172,7 +176,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         $user_groups = $this->groups;
         if (($this->permissions == '') && (count($user_groups) == 0)) {
-
             return false;
         }
 
@@ -238,7 +241,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @since [v6.3.4]
      * @return bool
      */
-    public function canEditProfile() : bool {
+    public function canEditProfile(): bool
+    {
 
         $setting = Setting::getSettings();
         if ($setting->profile_edit == 1) {
@@ -315,10 +319,10 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         $setting = Setting::getSettings();
 
-        if ($setting->name_display_format=='last_first') {
-            return ($this->last_name) ? $this->last_name.' '.$this->first_name : $this->first_name;
+        if ($setting->name_display_format == 'last_first') {
+            return ($this->last_name) ? $this->last_name . ' ' . $this->first_name : $this->first_name;
         }
-        return $this->last_name ? $this->first_name.' '.$this->last_name : $this->first_name;
+        return $this->last_name ? $this->first_name . ' ' . $this->last_name : $this->first_name;
     }
 
 
@@ -372,7 +376,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function consumables()
     {
-        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id','created_at','note')->withTrashed();
+        return $this->belongsToMany(\App\Models\Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
     /**
@@ -403,16 +407,17 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @since [v6.1]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-    Public function allAssignedCount() {
+    public function allAssignedCount()
+    {
         $assetsCount = $this->assets()->count();
         $licensesCount = $this->licenses()->count();
         $accessoriesCount = $this->accessories()->count();
         $consumablesCount = $this->consumables()->count();
-        
+
         $totalCount = $assetsCount + $licensesCount + $accessoriesCount + $consumablesCount;
-    
+
         return (int) $totalCount;
-        }
+    }
 
     /**
      * Establishes the user -> actionlogs relationship
@@ -608,7 +613,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     /**
      * Generate email from full name
-     * 
+     *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v2.0]
      *
@@ -619,7 +624,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         $username = self::generateFormattedNameFromFullName($name, Setting::getSettings()->email_format);
 
-        return $username['username'].'@'.Setting::getSettings()->email_domain;
+        return $username['username'] . '@' . Setting::getSettings()->email_domain;
     }
 
     public static function generateFormattedNameFromFullName($users_name, $format = 'filastname')
@@ -631,36 +636,35 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             $last_name = '';
             $username = $users_name;
         } else {
-
             list($first_name, $last_name) = explode(' ', $users_name, 2);
 
             // Assume filastname by default
-            $username = str_slug(substr($first_name, 0, 1).$last_name);
+            $username = str_slug(substr($first_name, 0, 1) . $last_name);
 
-            if ($format=='firstname.lastname') {
+            if ($format == 'firstname.lastname') {
                 $username = str_slug($first_name) . '.' . str_slug($last_name);
             } elseif ($format == 'lastnamefirstinitial') {
-                $username = str_slug($last_name.substr($first_name, 0, 1));
+                $username = str_slug($last_name . substr($first_name, 0, 1));
             } elseif ($format == 'firstintial.lastname') {
-                $username = substr($first_name, 0, 1).'.'.str_slug($last_name);
+                $username = substr($first_name, 0, 1) . '.' . str_slug($last_name);
             } elseif ($format == 'firstname_lastname') {
-                $username = str_slug($first_name).'_'.str_slug($last_name);
+                $username = str_slug($first_name) . '_' . str_slug($last_name);
             } elseif ($format == 'firstname') {
                 $username = str_slug($first_name);
             } elseif ($format == 'lastname') {
                 $username = str_slug($last_name);
             } elseif ($format == 'firstinitial.lastname') {
-                $username = str_slug(substr($first_name, 0, 1).'.'.str_slug($last_name));
+                $username = str_slug(substr($first_name, 0, 1) . '.' . str_slug($last_name));
             } elseif ($format == 'lastname_firstinitial') {
-                $username = str_slug($last_name).'_'.str_slug(substr($first_name, 0, 1));
+                $username = str_slug($last_name) . '_' . str_slug(substr($first_name, 0, 1));
             } elseif ($format == 'lastname.firstinitial') {
-                $username = str_slug($last_name).'.'.str_slug(substr($first_name, 0, 1));
+                $username = str_slug($last_name) . '.' . str_slug(substr($first_name, 0, 1));
             } elseif ($format == 'firstnamelastname') {
-                $username = str_slug($first_name).str_slug($last_name);
+                $username = str_slug($first_name) . str_slug($last_name);
             } elseif ($format == 'firstnamelastinitial') {
-                $username = str_slug(($first_name.substr($last_name, 0, 1)));
+                $username = str_slug(($first_name . substr($last_name, 0, 1)));
             } elseif ($format == 'lastname.firstname') {
-                $username = str_slug($last_name).'.'.str_slug($first_name);
+                $username = str_slug($last_name) . '.' . str_slug($first_name);
             }
         }
 
@@ -725,7 +729,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             return true;
         }
         return false;
-
     }
 
     /**
@@ -773,8 +776,9 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @param  array  $terms The search terms
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function advancedTextSearch(Builder $query, array $terms) {
-        foreach($terms as $term) {
+    public function advancedTextSearch(Builder $query, array $terms)
+    {
+        foreach ($terms as $term) {
             $query->orWhereMultipleColumns([
                 'users.first_name',
                 'users.last_name',
@@ -885,19 +889,20 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $this->locale ?? Setting::getSettings()->locale ?? config('app.locale');
     }
 
-    public function getUserTotalCost(){
-        $asset_cost= 0;
-        $license_cost= 0;
-        $accessory_cost= 0;
-        foreach ($this->assets as $asset){
+    public function getUserTotalCost()
+    {
+        $asset_cost = 0;
+        $license_cost = 0;
+        $accessory_cost = 0;
+        foreach ($this->assets as $asset) {
             $asset_cost += $asset->purchase_cost;
             $this->asset_cost = $asset_cost;
         }
-        foreach ($this->licenses as $license){
+        foreach ($this->licenses as $license) {
             $license_cost += $license->purchase_cost;
             $this->license_cost = $license_cost;
         }
-        foreach ($this->accessories as $accessory){
+        foreach ($this->accessories as $accessory) {
             $accessory_cost += $accessory->purchase_cost;
             $this->accessory_cost = $accessory_cost;
         }
@@ -907,10 +912,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
         return $this;
     }
-    public function scopeUserLocation($query, $location, $search){
+    public function scopeUserLocation($query, $location, $search)
+    {
 
 
-        return $query->where('location_id','=', $location)
+        return $query->where('location_id', '=', $location)
             ->where('users.first_name', 'LIKE', '%' . $search . '%')
             ->orWhere('users.email', 'LIKE', '%' . $search . '%')
             ->orWhere('users.last_name', 'LIKE', '%' . $search . '%')
@@ -920,10 +926,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
             ->orWhere('users.jobtitle', 'LIKE', '%' . $search . '%')
             ->orWhere('users.employee_num', 'LIKE', '%' . $search . '%')
             ->orWhere('users.username', 'LIKE', '%' . $search . '%')
-            ->orwhereRaw('CONCAT(users.first_name," ",users.last_name) LIKE \''.$search.'%\'');
-
-
-
-
+            ->orwhereRaw('CONCAT(users.first_name," ",users.last_name) LIKE \'' . $search . '%\'');
     }
 }
