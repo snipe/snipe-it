@@ -13,5 +13,4 @@ class DepreciationsIndexTest extends TestCase
             ->getJson(route('api.departments.index'))
             ->assertForbidden();
     }
-
 }
