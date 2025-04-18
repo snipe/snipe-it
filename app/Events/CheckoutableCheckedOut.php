@@ -8,7 +8,8 @@ use Illuminate\Queue\SerializesModels;
 
 class CheckoutableCheckedOut
 {
-    use Dispatchable, SerializesModels;
+    use Dispatchable;
+    use SerializesModels;
 
     public $checkoutable;
     public $checkedOutTo;
