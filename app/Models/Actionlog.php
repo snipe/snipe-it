@@ -439,19 +439,5 @@ class Actionlog extends SnipeModel
     {
         return $query->leftJoin('users as admin_sort', 'action_logs.created_by', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
-
-    public function scopeByTargetOrItem($query, $id, $type) {
-
-            return $query->where(function($query) use ($id, $type)
-            {
-                $query->where('item_id', '=', $id)
-                    ->where('item_type', '=', 'App\\Models\\'.ucwords($type));
-            })
-                ->orWhere(function($query) use ($id, $type)
-                {
-                    $query->where('target_id', '=', $id)
-                        ->where('target_type', '=', 'App\\Models\\'.ucwords($type));
-                });
-
-    }
+    
 }
