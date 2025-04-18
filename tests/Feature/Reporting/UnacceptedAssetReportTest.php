@@ -57,5 +57,4 @@ class UnacceptedAssetReportTest extends TestCase
             ->get(route('reports/unaccepted_assets'))
             ->assertOk();
     }
-    
 }
