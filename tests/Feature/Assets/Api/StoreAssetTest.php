@@ -469,7 +469,7 @@ class StoreAssetTest extends TestCase
             ->assertStatusMessageIs('success')
             ->json();
 
-       Asset::find($response['payload']['id'])->delete();
+        Asset::find($response['payload']['id'])->delete();
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.assets.store'), [
