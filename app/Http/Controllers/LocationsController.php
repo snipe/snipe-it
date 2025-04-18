@@ -427,11 +427,13 @@ class LocationsController extends Controller
                     ->route('locations.index')
                     ->with(
                         'warning',
-                        trans('general.bulk.delete.partial', ['success' => $success_count, 'error' => $error_count, 'object_type' => trans('general.locations')])
+                        trans(
+                            'general.bulk.delete.partial',
+                            ['success' => $success_count, 'error' => $error_count, 'object_type' => trans('general.locations')]
+                        )
                     );
-                }
             }
-
+        }
 
         // Nothing was selected - return to the index
         return redirect()
