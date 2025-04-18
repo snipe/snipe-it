@@ -8,8 +8,6 @@ use Tests\TestCase;
 
 class CreateManufacturersTest extends TestCase
 {
-
-
     public function testRequiresPermissionToCreateDepartment()
     {
         $this->actingAsForApi(User::factory()->create())
@@ -35,5 +33,4 @@ class CreateManufacturersTest extends TestCase
         $this->assertEquals('Test Manufacturer', $manufacturer->name);
         $this->assertEquals('Test Note', $manufacturer->notes);
     }
-
 }

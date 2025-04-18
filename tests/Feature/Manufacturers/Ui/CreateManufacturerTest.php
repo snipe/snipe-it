@@ -28,5 +28,4 @@ class CreateManufacturerTest extends TestCase
 
         $this->assertTrue(Manufacturer::where('name', 'Test Manufacturer')->where('notes', 'Test Note')->exists());
     }
-
 }
