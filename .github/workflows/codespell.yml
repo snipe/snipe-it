@@ -1,0 +1,22 @@
+name: codespell
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+
+jobs:
+  codespell:
+    runs-on: \${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run codespell
+        uses: codespell-project/actions-codespell@v2.0
