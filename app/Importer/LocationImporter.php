@@ -69,7 +69,9 @@ class LocationImporter extends ItemImporter
         $this->item['city'] = trim($this->findCsvMatch($row, 'city'));
         $this->item['state'] = trim($this->findCsvMatch($row, 'state'));
         $this->item['country'] = trim($this->findCsvMatch($row, 'country'));
-        $this->item['zip'] = trim($this->findCsvMatch($row, 'zip'));
+	$this->item['zip'] = trim($this->findCsvMatch($row, 'zip'));
+	$this->item['latitude'] = trim($this->findCsvMatch($row, 'latitude'));
+	$item->item['longitude'] = trim($this->findCsvMatch($row, 'longitude'));
         $this->item['currency'] = trim($this->findCsvMatch($row, 'currency'));
         $this->item['ldap_ou'] = trim($this->findCsvMatch($row, 'ldap_ou'));
         $this->item['manager'] = trim($this->findCsvMatch($row, 'manager'));

@@ -55,7 +55,9 @@ class SuppliersController extends Controller
         $supplier->city = request('city');
         $supplier->state = request('state');
         $supplier->country = request('country');
-        $supplier->zip = request('zip');
+	$supplier->zip = request('zip');
+	$supplier->latitude = request('latitude');
+	$supplier->longitude = request('longitude');
         $supplier->contact = request('contact');
         $supplier->phone = request('phone');
         $supplier->fax = request('fax');
@@ -98,7 +100,9 @@ class SuppliersController extends Controller
         $supplier->city = request('city');
         $supplier->state = request('state');
         $supplier->country = request('country');
-        $supplier->zip = request('zip');
+	$supplier->zip = request('zip');
+	$supplier->latitude = request('latitude');
+	$supplier->longitude = request('longitude');
         $supplier->contact = request('contact');
         $supplier->phone = request('phone');
         $supplier->fax = request('fax');

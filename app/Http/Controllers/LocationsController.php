@@ -76,7 +76,9 @@ class LocationsController extends Controller
         $location->city = $request->input('city');
         $location->state = $request->input('state');
         $location->country = $request->input('country');
-        $location->zip = $request->input('zip');
+	$location->zip = $request->input('zip');
+	$location->latitude = $request->input('latitude');
+	$location->longitude = $request->input('longitude');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
         $location->created_by = auth()->id();
@@ -140,7 +142,9 @@ class LocationsController extends Controller
         $location->city = $request->input('city');
         $location->state = $request->input('state');
         $location->country = $request->input('country');
-        $location->zip = $request->input('zip');
+	$location->zip = $request->input('zip');
+	$location->latitude = $request->input('latitude');
+	$location->longitude = $request->input('longitude');
         $location->phone = request('phone');
         $location->fax = request('fax');
         $location->ldap_ou = $request->input('ldap_ou');
