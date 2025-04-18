@@ -124,7 +124,7 @@ class ConsumableCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('consumables.index'))
-            ->post(route('consumables.checkout.store' , $consumable), [
+            ->post(route('consumables.checkout.store', $consumable), [
                 'assigned_to' =>  User::factory()->create()->id,
                 'redirect_option' => 'item',
                 'assigned_qty' => 1,
@@ -140,7 +140,7 @@ class ConsumableCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('components.index'))
-            ->post(route('consumables.checkout.store' , $consumable), [
+            ->post(route('consumables.checkout.store', $consumable), [
                 'assigned_to' =>  $user->id,
                 'redirect_option' => 'target',
                 'assigned_qty' => 1,
@@ -148,5 +148,4 @@ class ConsumableCheckoutTest extends TestCase
             ->assertStatus(302)
             ->assertRedirect(route('users.show', $user));
     }
-
 }

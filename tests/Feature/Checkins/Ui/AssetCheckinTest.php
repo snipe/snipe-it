@@ -163,7 +163,8 @@ class AssetCheckinTest extends TestCase
 
         $this->actingAs(User::factory()->checkinAssets()->create())
             ->post(route(
-                'hardware.checkin.store', [Asset::factory()->assignedToUser()->create()]
+                'hardware.checkin.store',
+                [Asset::factory()->assignedToUser()->create()]
             ), [
                 'checkin_at' => '2023-01-02',
                 'note' => 'hello'

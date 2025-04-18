@@ -64,9 +64,8 @@ class AccessoryCheckinTest extends TestCase
             User::factory()->checkinAccessories()->create(),
             '',
         ));
-        Mail::assertSent(CheckinAccessoryMail::class, function (CheckinAccessoryMail $mail) use ( $accessory, $user) {
+        Mail::assertSent(CheckinAccessoryMail::class, function (CheckinAccessoryMail $mail) use ($accessory, $user) {
             return $mail->hasTo($user->email);
-
         });
     }
 

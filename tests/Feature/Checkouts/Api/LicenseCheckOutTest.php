@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Feature\Checkouts\Api;
 
 use App\Models\License;
@@ -6,7 +7,8 @@ use App\Models\LicenseSeat;
 use App\Models\User;
 use Tests\TestCase;
 
-class LicenseCheckOutTest extends TestCase {
+class LicenseCheckOutTest extends TestCase
+{
     public function testLicenseCheckout()
     {
         $authUser = User::factory()->superuser()->create();
@@ -26,7 +28,8 @@ class LicenseCheckOutTest extends TestCase {
 
         $response = $this->patchJson(
             route('api.licenses.seats.update', [$license->id, $licenseSeat->id]),
-            $payload);
+            $payload
+        );
 
         $response->assertStatus(200)
             ->assertJsonFragment([

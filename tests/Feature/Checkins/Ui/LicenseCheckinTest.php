@@ -118,14 +118,12 @@ class LicenseCheckinTest extends TestCase
                 && $event->checkedInBy->is($actor)
                 && $event->note === 'my note';
         });
-
     }
-  
+
     public function testPageRenders()
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('licenses.checkin', LicenseSeat::factory()->assignedToUser()->create()->id))
             ->assertOk();
-
     }
 }

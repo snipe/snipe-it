@@ -70,7 +70,7 @@ class ComponentsCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('components.index'))
-            ->post(route('components.checkout.store' , $component), [
+            ->post(route('components.checkout.store', $component), [
                 'asset_id' =>  Asset::factory()->create()->id,
                 'redirect_option' => 'item',
                 'assigned_qty' => 1,
@@ -86,7 +86,7 @@ class ComponentsCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('components.index'))
-            ->post(route('components.checkout.store' , $component), [
+            ->post(route('components.checkout.store', $component), [
                 'asset_id' => $asset->id,
                 'redirect_option' => 'target',
                 'assigned_qty' => 1,

@@ -46,17 +46,21 @@ class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirem
                     [
                         'checkout_qty' =>
                             [
-                                trans_choice('admin/accessories/message.checkout.checkout_qty.lte', 0,
+                                trans_choice(
+                                    'admin/accessories/message.checkout.checkout_qty.lte',
+                                    0,
                                     [
                                         'number_currently_remaining' => 0,
                                         'checkout_qty' => 1,
                                         'number_remaining_after_checkout' => 0
-                                    ])
+                                    ]
+                                )
                             ],
 
                     ],
                     'payload' => null,
-                ])
+                ]
+            )
             ->assertStatus(200)
             ->json();
     }
@@ -89,7 +93,8 @@ class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirem
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
                 'created_by' => $admin->id,
-            ])->count(),'Log entry either does not exist or there are more than expected'
+            ])->count(),
+            'Log entry either does not exist or there are more than expected'
         );
     }
 

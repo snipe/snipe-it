@@ -287,7 +287,7 @@ class AssetCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('hardware.checkout.create', $asset))
-            ->post(route('hardware.checkout.store' , $asset), [
+            ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'user',
                 'assigned_user' =>  User::factory()->create()->id,
                 'redirect_option' => 'item',
@@ -304,7 +304,7 @@ class AssetCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('hardware.checkout.create', $asset))
-            ->post(route('hardware.checkout.store' , $asset), [
+            ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'user',
                 'assigned_user' =>  $user->id,
                 'redirect_option' => 'target',
@@ -321,7 +321,7 @@ class AssetCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('hardware.checkout.create', $asset))
-            ->post(route('hardware.checkout.store' , $asset), [
+            ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'asset',
                 'assigned_asset' =>  $target->id,
                 'redirect_option' => 'target',
@@ -338,7 +338,7 @@ class AssetCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('hardware.checkout.create', $asset))
-            ->post(route('hardware.checkout.store' , $asset), [
+            ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'location',
                 'assigned_location' =>  $target->id,
                 'redirect_option' => 'target',
