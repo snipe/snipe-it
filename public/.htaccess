@@ -12,7 +12,8 @@
     # RewriteCond %{HTTPS} off
     # RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-
+    # https://www.w3.org/TR/change-password-url/
+    Redirect /.well-known/change-password /account/password
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
