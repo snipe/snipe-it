@@ -32,10 +32,10 @@ class LoginTest extends TestCase
     public function testLoginThrottleConfigIsRespected()
     {
 
-       User::factory()->create(['username' => 'username_here']);
+        User::factory()->create(['username' => 'username_here']);
 
-       config(['auth.passwords.users.throttle.max_attempts' => 1]);
-       config(['auth.passwords.users.throttle.lockout_duration' => 1]);
+        config(['auth.passwords.users.throttle.max_attempts' => 1]);
+        config(['auth.passwords.users.throttle.lockout_duration' => 1]);
 
         for ($i = 0; $i < 2; ++$i) {
             $this->from('/login')
