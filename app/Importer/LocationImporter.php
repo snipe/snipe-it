@@ -41,16 +41,16 @@ class LocationImporter extends ItemImporter
 
         $location = Location::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
 
-        if ($this->findCsvMatch($row, 'id')!='') {
+        if ($this->findCsvMatch($row, 'id') != '') {
             // Override location if an ID was given
-            \Log::debug('Finding location by ID: '.$this->findCsvMatch($row, 'id'));
+            \Log::debug('Finding location by ID: ' . $this->findCsvMatch($row, 'id'));
             $location = Location::find($this->findCsvMatch($row, 'id'));
         }
 
 
         if ($location) {
             if (! $this->updating) {
-                $this->log('A matching Location '.$this->item['name'].' already exists');
+                $this->log('A matching Location ' . $this->item['name'] . ' already exists');
                 return;
             }
 
@@ -58,7 +58,7 @@ class LocationImporter extends ItemImporter
             $editingLocation = true;
         } else {
             $this->log('No Matching Location, Create a new one');
-            $location = new Location;
+            $location = new Location();
             $location->created_by = auth()->id();
         }
 
@@ -69,9 +69,9 @@ class LocationImporter extends ItemImporter
         $this->item['city'] = trim($this->findCsvMatch($row, 'city'));
         $this->item['state'] = trim($this->findCsvMatch($row, 'state'));
         $this->item['country'] = trim($this->findCsvMatch($row, 'country'));
-	$this->item['zip'] = trim($this->findCsvMatch($row, 'zip'));
-	$this->item['latitude'] = trim($this->findCsvMatch($row, 'latitude'));
-	$item->item['longitude'] = trim($this->findCsvMatch($row, 'longitude'));
+        $this->item['zip'] = trim($this->findCsvMatch($row, 'zip'));
+        $this->item['latitude'] = trim($this->findCsvMatch($row, 'latitude'));
+        $this->item['longitude'] = trim($this->findCsvMatch($row, 'longitude'));
         $this->item['currency'] = trim($this->findCsvMatch($row, 'currency'));
         $this->item['ldap_ou'] = trim($this->findCsvMatch($row, 'ldap_ou'));
         $this->item['manager'] = trim($this->findCsvMatch($row, 'manager'));
@@ -102,15 +102,12 @@ class LocationImporter extends ItemImporter
         }
 
         if ($location->save()) {
-            $this->log('Location '.$location->name.' created or updated from CSV import');
+            $this->log('Location ' . $location->name . ' created or updated from CSV import');
             return $location;
-
         } else {
             Log::debug($location->getErrors());
-            $this->logError($location, 'Location "'.$this->item['name'].'"');
+            $this->logError($location, 'Location "' . $this->item['name'] . '"');
             return $location->errors;
         }
-
-
     }
 }
