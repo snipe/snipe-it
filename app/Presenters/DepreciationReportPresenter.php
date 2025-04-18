@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Presenters;
 
 use DateTime;
@@ -9,7 +10,6 @@ use DateTime;
  */
 class DepreciationReportPresenter extends Presenter
 {
-
     /**
      * Json Column Layout for bootstrap table
      * @return string
@@ -166,7 +166,7 @@ class DepreciationReportPresenter extends Presenter
                 "visible" => false,
                 "title" => trans('admin/hardware/form.warranty_expires'),
                 "formatter" => "dateDisplayFormatter"
-            ], 
+            ],
         ];
 
         return json_encode($layout);
@@ -207,7 +207,7 @@ class DepreciationReportPresenter extends Presenter
         }
         $url = config('app.url');
         if (!empty($imagePath)) {
-            $imagePath = '<img src="'.$url.'/uploads/assets/'.$imagePath.' height="50" width="50" alt="'.$imageAlt.'">';
+            $imagePath = '<img src="' . $url . '/uploads/assets/' . $imagePath . ' height="50" width="50" alt="' . $imageAlt . '">';
         }
         return $imagePath;
     }
@@ -225,7 +225,7 @@ class DepreciationReportPresenter extends Presenter
             $imagePath = $this->model->image;
         }
         if (!empty($imagePath)) {
-            return config('app.url').'/uploads/assets/'.$imagePath;
+            return config('app.url') . '/uploads/assets/' . $imagePath;
         }
         return $imagePath;
     }
@@ -257,12 +257,12 @@ class DepreciationReportPresenter extends Presenter
 
         // Asset tag
         if ($this->asset_tag) {
-            $str .= ' ('.$this->model->asset_tag.')';
+            $str .= ' (' . $this->model->asset_tag . ')';
         }
 
         // Asset Model name
         if ($this->model->model) {
-            $str .= ' - '.$this->model->model->name;
+            $str .= ' - ' . $this->model->model->name;
         }
         return $str;
     }
@@ -273,12 +273,11 @@ class DepreciationReportPresenter extends Presenter
     public function eol_date()
     {
 
-        if (( $this->purchase_date ) && ( $this->model->model ) && ($this->model->model->eol) ) {
+        if (( $this->purchase_date ) && ( $this->model->model ) && ($this->model->model->eol)) {
             $date = date_create($this->purchase_date);
             date_add($date, date_interval_create_from_date_string($this->model->model->eol . ' months'));
             return date_format($date, 'Y-m-d');
         }
-
     }
 
     /**
@@ -341,16 +340,15 @@ class DepreciationReportPresenter extends Presenter
      * (if not deployed:)
      * Another Status Label
      */
-    public function fullStatusText() {
+    public function fullStatusText()
+    {
         // Make sure the status is valid
         if ($this->assetstatus) {
-
             // If the status is assigned to someone or something...
             if ($this->model->assigned) {
-
                 // If it's assigned and not set to the default "ready to deploy" status
                 if ($this->assetstatus->name != trans('general.ready_to_deploy')) {
-                    return trans('general.deployed'). ' (' . $this->model->assetstatus->name.')';
+                    return trans('general.deployed') . ' (' . $this->model->assetstatus->name . ')';
                 }
 
                 // If it's assigned to the default "ready to deploy" status, just
