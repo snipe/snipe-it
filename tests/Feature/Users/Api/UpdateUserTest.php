@@ -216,8 +216,8 @@ class UpdateUserTest extends TestCase
     {
         $this->settings->enableMultipleFullCompanySupport();
 
-        $companyA = Company::factory()->create(['name'=>'Company A']);
-        $companyB = Company::factory()->create(['name'=>'Company B']);
+        $companyA = Company::factory()->create(['name' => 'Company A']);
+        $companyB = Company::factory()->create(['name' => 'Company B']);
 
         $adminA = User::factory(['company_id' => $companyA->id])->admin()->create();
         $adminB = User::factory(['company_id' => $companyB->id])->admin()->create();
@@ -321,7 +321,8 @@ class UpdateUserTest extends TestCase
                 'groups' => [$groupToJoin->id],
             ]);
 
-        $this->assertFalse($userToUpdateByUserWhoCanEditUsers->refresh()->groups->contains($groupToJoin),
+        $this->assertFalse(
+            $userToUpdateByUserWhoCanEditUsers->refresh()->groups->contains($groupToJoin),
             'Non-super-user was able to modify user group'
         );
 
@@ -364,10 +365,10 @@ class UpdateUserTest extends TestCase
                 'groups' => [$groupToJoin->id],
             ]);
 
-        $this->assertFalse($user->refresh()->groups->contains($groupToJoin),
+        $this->assertFalse(
+            $user->refresh()->groups->contains($groupToJoin),
             'Non-super-user was able to modify user group'
         );
-
     }
 
     public function testNonSuperuserCannotUpdateGroups()
@@ -383,12 +384,12 @@ class UpdateUserTest extends TestCase
             ]);
 
 
-        $this->assertFalse($user->refresh()->groups->contains($newGroupToJoin),
+        $this->assertFalse(
+            $user->refresh()->groups->contains($newGroupToJoin),
             'Non-super-user was able to modify user group membership'
         );
 
         $this->assertTrue($user->refresh()->groups->contains($group));
-
     }
 
     public function testUsersGroupsAreNotClearedIfNoGroupPassedBySuperUser()
@@ -410,8 +411,8 @@ class UpdateUserTest extends TestCase
         $user = User::factory()->create();
         $superUser = User::factory()->superuser()->create();
 
-        $groupA = Group::factory()->create(['name'=>'Group A']);
-        $groupB = Group::factory()->create(['name'=>'Group B']);
+        $groupA = Group::factory()->create(['name' => 'Group A']);
+        $groupB = Group::factory()->create(['name' => 'Group B']);
 
         $this->actingAsForApi($superUser)
             ->patchJson(route('api.users.update', $user), [
@@ -511,5 +512,4 @@ class UpdateUserTest extends TestCase
             'company_id' => $companyB->id,
         ])->assertStatusMessageIs('error');
     }
-
 }

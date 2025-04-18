@@ -10,7 +10,6 @@ use Tests\TestCase;
 
 class ViewUserTest extends TestCase
 {
-
     public function testCanReturnUser()
     {
         $user = User::factory()->create();
@@ -19,5 +18,4 @@ class ViewUserTest extends TestCase
             ->getJson(route('api.users.show', $user))
             ->assertOk();
     }
-
 }
