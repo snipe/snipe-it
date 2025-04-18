@@ -14,7 +14,7 @@ class ActionlogPresenter extends Presenter
                 return $user->present()->nameUrl();
             }
             // The user was deleted
-            return '<del>'.$user->getFullNameAttribute().'</del> (deleted)';
+            return '<del>' . $user->getFullNameAttribute() . '</del> (deleted)';
         }
 
         return '';
@@ -30,7 +30,7 @@ class ActionlogPresenter extends Presenter
                 return $this->model->item->present()->nameUrl();
             }
             // The item was deleted
-            return '<del>'.$item->name.'</del> (deleted)';
+            return '<del>' . $item->name . '</del> (deleted)';
         }
 
         return '';
@@ -41,7 +41,6 @@ class ActionlogPresenter extends Presenter
 
         // User related icons
         if ($this->itemType() == 'user') {
-
             if ($this->action_type == '2fa reset') {
                 return 'fa-solid fa-mobile-screen';
             }
@@ -107,12 +106,11 @@ class ActionlogPresenter extends Presenter
         }
 
         return 'fa-solid fa-rotate-right';
-
     }
 
     public function actionType()
     {
-        return mb_strtolower(trans('general.'.str_replace(' ', '_', $this->action_type)));
+        return mb_strtolower(trans('general.' . str_replace(' ', '_', $this->action_type)));
     }
 
     public function target()
@@ -141,7 +139,7 @@ class ActionlogPresenter extends Presenter
                 return $target->present()->nameUrl();
             }
 
-            return '<del>'.$target->present()->name().'</del>';
+            return '<del>' . $target->present()->name() . '</del>';
         }
 
         return '';
