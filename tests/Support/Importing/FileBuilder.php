@@ -45,7 +45,7 @@ abstract class FileBuilder
      */
     public static function new(array $attributes = [])
     {
-        $instance = new static;
+        $instance = new static();
 
         return $instance->push($instance->definition())->replace($attributes);
     }
@@ -57,7 +57,7 @@ abstract class FileBuilder
      */
     public static function fromFile(string $filepath)
     {
-        $instance = new static;
+        $instance = new static();
 
         $reader = Reader::createFromPath($filepath);
         $importFileHeaders = $reader->first();
@@ -92,7 +92,7 @@ abstract class FileBuilder
      */
     public static function times(int $amountOfRows = 1)
     {
-        $instance = new static;
+        $instance = new static();
 
         for ($i = 1; $i <= $amountOfRows; $i++) {
             $instance->push($instance->definition());

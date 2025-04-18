@@ -11,7 +11,7 @@ trait AssertsAgainstSlackNotifications
     public function assertSlackNotificationSent(string $notificationClass)
     {
         Notification::assertSentTo(
-            new AnonymousNotifiable,
+            new AnonymousNotifiable(),
             $notificationClass,
             function ($notification, $channels, $notifiable) {
                 return $notifiable->routes['slack'] === Setting::getSettings()->webhook_endpoint;
@@ -21,6 +21,6 @@ trait AssertsAgainstSlackNotifications
 
     public function assertNoSlackNotificationSent(string $notificationClass)
     {
-        Notification::assertNotSentTo(new AnonymousNotifiable, $notificationClass);
+        Notification::assertNotSentTo(new AnonymousNotifiable(), $notificationClass);
     }
 }
