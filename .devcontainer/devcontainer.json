@@ -1,6 +1,6 @@
 {
     "dockerComposeFile": "../dev.docker-compose.yml",
     "service": "snipeit",
-    "workspaceFolder": "/var/www/html/",
-    "postCreateCommand": "cp -R /workspaces/snipe-it/.[^.]* /var/www/html/ && git config --global --add safe.directory /var/www/html"
+    "workspaceFolder": "/workspaces/snipe-it",
+    "postCreateCommand": "git config --global --add safe.directory /workspaces/snipe-it && sudo chmod a+x \"$(pwd)\" && sudo rm -rf /var/www/html && sudo ln -s \"$(pwd)\" /var/www/html; if [ -f composer.json ];then composer install;fi"
 }
