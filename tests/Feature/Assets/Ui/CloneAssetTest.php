@@ -26,7 +26,7 @@ class CloneAssetTest extends TestCase
 
     public function testAssetCanBeCloned()
     {
-        $asset_to_clone = Asset::factory()->create(['name'=>'Asset to clone']);
+        $asset_to_clone = Asset::factory()->create(['name' => 'Asset to clone']);
         $this->actingAs(User::factory()->createAssets()->create())
             ->get(route('clone/hardware', $asset_to_clone))
             ->assertOk()
