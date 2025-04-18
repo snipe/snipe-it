@@ -46,7 +46,7 @@ class SuppliersController extends Controller
             'latitude',
             'longitude'
         ];
-        
+
         $suppliers = Supplier::select([
             'id',
             'name',
@@ -133,7 +133,7 @@ class SuppliersController extends Controller
         $total = $suppliers->count();
         $suppliers = $suppliers->skip($offset)->take($limit)->get();
 
-        return (new SuppliersTransformer)->transformSuppliers($suppliers, $total);
+        return (new SuppliersTransformer())->transformSuppliers($suppliers, $total);
     }
 
 
@@ -147,7 +147,7 @@ class SuppliersController extends Controller
     public function store(ImageUploadRequest $request) : JsonResponse
     {
         $this->authorize('create', Supplier::class);
-        $supplier = new Supplier;
+        $supplier = new Supplier();
         $supplier->fill($request->all());
         $supplier = $request->handleImages($supplier);
 
@@ -155,7 +155,6 @@ class SuppliersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', $supplier, trans('admin/suppliers/message.create.success')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $supplier->getErrors()));
-
     }
 
     /**
@@ -246,7 +245,7 @@ class SuppliersController extends Controller
         ]);
 
         if ($request->filled('search')) {
-            $suppliers = $suppliers->where('suppliers.name', 'LIKE', '%'.$request->get('search').'%');
+            $suppliers = $suppliers->where('suppliers.name', 'LIKE', '%' . $request->get('search') . '%');
         }
 
         $suppliers = $suppliers->orderBy('name', 'ASC')->paginate(50);
@@ -256,7 +255,7 @@ class SuppliersController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($suppliers as $supplier) {
             $supplier->use_text = $supplier->name;
-            $supplier->use_image = ($supplier->image) ? Storage::disk('public')->url('suppliers/'.$supplier->image, $supplier->image) : null;
+            $supplier->use_image = ($supplier->image) ? Storage::disk('public')->url('suppliers/' . $supplier->image, $supplier->image) : null;
         }
 
         return (new SelectlistTransformer())->transformSelectlist($suppliers);
