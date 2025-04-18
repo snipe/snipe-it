@@ -58,7 +58,7 @@ class LocationImporter extends ItemImporter
             $editingLocation = true;
         } else {
             $this->log('No Matching Location, Create a new one');
-            $location = new Location;
+            $location = new Location();
             $location->created_by = auth()->id();
         }
 
@@ -100,15 +100,12 @@ class LocationImporter extends ItemImporter
         }
 
         if ($location->save()) {
-            $this->log('Location '.$location->name.' created or updated from CSV import');
+            $this->log('Location ' . $location->name . ' created or updated from CSV import');
             return $location;
-
         } else {
             Log::debug($location->getErrors());
-            $this->logError($location, 'Location "'.$this->item['name'].'"');
+            $this->logError($location, 'Location "' . $this->item['name'] . '"');
             return $location->errors;
         }
-
-
     }
 }
