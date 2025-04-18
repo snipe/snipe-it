@@ -319,12 +319,12 @@ class AssetPresenter extends Presenter
         // name can break the listings page. - snipe
         foreach ($fields as $field) {
             $layout[] = [
-                'field' => 'custom_fields.'.$field->db_column,
+                'field' => 'custom_fields.' . $field->db_column,
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => $field->name,
-                'formatter'=> 'customFieldsFormatter',
+                'formatter' => 'customFieldsFormatter',
                 'escape' => true,
                 'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
                 'visible' => ($field->show_in_listview == '1') ? true : false,
@@ -336,7 +336,7 @@ class AssetPresenter extends Presenter
             'searchable' => false,
             'sortable' => false,
             'switchable' => false,
-            'title' => trans('general.checkin').'/'.trans('general.checkout'),
+            'title' => trans('general.checkin') . '/' . trans('general.checkout'),
             'visible' => true,
             'formatter' => 'hardwareInOutFormatter',
         ];
@@ -455,7 +455,7 @@ class AssetPresenter extends Presenter
         }
         $url = config('app.url');
         if (! empty($imagePath)) {
-            $imagePath = '<img src="'.$url.'/uploads/assets/'.$imagePath.' height="50" width="50" alt="'.$imageAlt.'">';
+            $imagePath = '<img src="' . $url . '/uploads/assets/' . $imagePath . ' height="50" width="50" alt="' . $imageAlt . '">';
         }
 
         return $imagePath;
@@ -474,7 +474,7 @@ class AssetPresenter extends Presenter
             $imagePath = $this->model->image;
         }
         if (! empty($imagePath)) {
-            return config('app.url').'/uploads/assets/'.$imagePath;
+            return config('app.url') . '/uploads/assets/' . $imagePath;
         }
 
         return $imagePath;
@@ -507,12 +507,12 @@ class AssetPresenter extends Presenter
 
         // Asset tag
         if ($this->asset_tag) {
-            $str .= ' ('.$this->model->asset_tag.')';
+            $str .= ' (' . $this->model->asset_tag . ')';
         }
 
         // Asset Model name
         if ($this->model->model) {
-            $str .= ' - '.$this->model->model->name;
+            $str .= ' - ' . $this->model->model->name;
         }
 
         return $str;
@@ -594,13 +594,11 @@ class AssetPresenter extends Presenter
     {
         // Make sure the status is valid
         if ($this->assetstatus) {
-
             // If the status is assigned to someone or something...
             if ($this->model->assigned) {
-
                 // If it's assigned and not set to the default "ready to deploy" status
                 if ($this->assetstatus->name != trans('general.ready_to_deploy')) {
-                    return trans('general.deployed').' ('.$this->model->assetstatus->name.')';
+                    return trans('general.deployed') . ' (' . $this->model->assetstatus->name . ')';
                 }
 
                 // If it's assigned to the default "ready to deploy" status, just
@@ -626,7 +624,7 @@ class AssetPresenter extends Presenter
     {
         if (($this->purchase_date) && ($this->warranty_months)) {
             $date = date_create($this->purchase_date);
-            date_add($date, date_interval_create_from_date_string($this->warranty_months.' months'));
+            date_add($date, date_interval_create_from_date_string($this->warranty_months . ' months'));
 
             return date_format($date, 'Y-m-d');
         }
@@ -640,7 +638,7 @@ class AssetPresenter extends Presenter
      */
     public function dynamicUrl($dynamic_url)
     {
-        $url = (str_replace('{LOCALE}',\App\Models\Setting::getSettings()->locale, $dynamic_url));
+        $url = (str_replace('{LOCALE}', \App\Models\Setting::getSettings()->locale, $dynamic_url));
         $url = (str_replace('{SERIAL}', urlencode($this->model->serial), $url));
         $url = (str_replace('{MODEL_NAME}', urlencode($this->model->model->name), $url));
         $url = (str_replace('{MODEL_NUMBER}', urlencode($this->model->model->model_number), $url));
