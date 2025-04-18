@@ -1,5 +1,7 @@
 {
-    "image": "mcr.microsoft.com/devcontainers/php:8.3",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "snipeit",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "postCreateCommand": [
         "git config --global --add safe.directory /workspaces/snipe-it",
         "&& sudo chmod a+x /workspaces/snipe-it",
