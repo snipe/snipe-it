@@ -44,5 +44,4 @@ class CancelCheckoutRequestAction
 
         return true;
     }
-
 }

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Log;
+
 class LogSuccessfulLogin
 {
     /**

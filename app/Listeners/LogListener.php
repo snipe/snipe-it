@@ -105,7 +105,7 @@ class LogListener
         ];
 
         // Add a record to the users being merged FROM
-        Log::debug('Users merged: '.$event->merged_from->id .' ('.$event->merged_from->username.') merged into '. $event->merged_to->id. ' ('.$event->merged_to->username.')');
+        Log::debug('Users merged: ' . $event->merged_from->id . ' (' . $event->merged_from->username . ') merged into ' . $event->merged_to->id . ' (' . $event->merged_to->username . ')');
         $logaction = new Actionlog();
         $logaction->item_id = $event->merged_from->id;
         $logaction->item_type = User::class;
@@ -126,8 +126,6 @@ class LogListener
         $logaction->note = trans('general.merged_log_this_user_into', $to_from_array);
         $logaction->created_by = $event->admin->id ?? null;
         $logaction->save();
-
-
     }
 
     /**
@@ -148,11 +146,9 @@ class LogListener
 
         foreach ($list as $event) {
             $events->listen(
-                'App\Events\\'.$event,
-                'App\Listeners\LogListener@on'.$event
+                'App\Events\\' . $event,
+                'App\Listeners\LogListener@on' . $event
             );
         }
     }
-
-
 }

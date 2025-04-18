@@ -60,12 +60,12 @@ class Purge extends Command
              */
             $assets = Asset::whereNotNull('deleted_at')->withTrashed()->get();
             $assetcount = $assets->count();
-            $this->info($assets->count().' assets purged.');
+            $this->info($assets->count() . ' assets purged.');
             $asset_assoc = 0;
             $asset_maintenances = 0;
 
             foreach ($assets as $asset) {
-                $this->info('- Asset "'.$asset->present()->name().'" deleted.');
+                $this->info('- Asset "' . $asset->present()->name() . '" deleted.');
                 $asset_assoc += $asset->assetlog()->count();
                 $asset->assetlog()->forceDelete();
                 $asset_maintenances += $asset->assetmaintenances()->count();
@@ -73,83 +73,82 @@ class Purge extends Command
                 $asset->forceDelete();
             }
 
-            $this->info($asset_assoc.' corresponding log records purged.');
-            $this->info($asset_maintenances.' corresponding maintenance records purged.');
+            $this->info($asset_assoc . ' corresponding log records purged.');
+            $this->info($asset_maintenances . ' corresponding maintenance records purged.');
 
             $locations = Location::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($locations->count().' locations purged.');
+            $this->info($locations->count() . ' locations purged.');
             foreach ($locations as $location) {
-                $this->info('- Location "'.$location->name.'" deleted.');
+                $this->info('- Location "' . $location->name . '" deleted.');
                 $location->forceDelete();
             }
 
             $accessories = Accessory::whereNotNull('deleted_at')->withTrashed()->get();
             $accessory_assoc = 0;
-            $this->info($accessories->count().' accessories purged.');
+            $this->info($accessories->count() . ' accessories purged.');
             foreach ($accessories as $accessory) {
-                $this->info('- Accessory "'.$accessory->name.'" deleted.');
+                $this->info('- Accessory "' . $accessory->name . '" deleted.');
                 $accessory_assoc += $accessory->assetlog()->count();
                 $accessory->assetlog()->forceDelete();
                 $accessory->forceDelete();
             }
-            $this->info($accessory_assoc.' corresponding log records purged.');
+            $this->info($accessory_assoc . ' corresponding log records purged.');
 
             $consumables = Consumable::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($consumables->count().' consumables purged.');
+            $this->info($consumables->count() . ' consumables purged.');
             foreach ($consumables as $consumable) {
-                $this->info('- Consumable "'.$consumable->name.'" deleted.');
+                $this->info('- Consumable "' . $consumable->name . '" deleted.');
                 $consumable->assetlog()->forceDelete();
                 $consumable->forceDelete();
             }
 
             $components = Component::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($components->count().' components purged.');
+            $this->info($components->count() . ' components purged.');
             foreach ($components as $component) {
-                $this->info('- Component "'.$component->name.'" deleted.');
+                $this->info('- Component "' . $component->name . '" deleted.');
                 $component->assetlog()->forceDelete();
                 $component->forceDelete();
             }
 
             $licenses = License::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($licenses->count().' licenses purged.');
+            $this->info($licenses->count() . ' licenses purged.');
             foreach ($licenses as $license) {
-                $this->info('- License "'.$license->name.'" deleted.');
+                $this->info('- License "' . $license->name . '" deleted.');
                 $license->assetlog()->forceDelete();
                 $license->licenseseats()->forceDelete();
                 $license->forceDelete();
             }
 
             $models = AssetModel::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($models->count().' asset models purged.');
+            $this->info($models->count() . ' asset models purged.');
             foreach ($models as $model) {
-                $this->info('- Asset Model "'.$model->name.'" deleted.');
+                $this->info('- Asset Model "' . $model->name . '" deleted.');
                 $model->forceDelete();
             }
 
             $categories = Category::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($categories->count().' categories purged.');
+            $this->info($categories->count() . ' categories purged.');
             foreach ($categories as $category) {
-                $this->info('- Category "'.$category->name.'" deleted.');
+                $this->info('- Category "' . $category->name . '" deleted.');
                 $category->forceDelete();
             }
 
             $suppliers = Supplier::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($suppliers->count().' suppliers purged.');
+            $this->info($suppliers->count() . ' suppliers purged.');
             foreach ($suppliers as $supplier) {
-                $this->info('- Supplier "'.$supplier->name.'" deleted.');
+                $this->info('- Supplier "' . $supplier->name . '" deleted.');
                 $supplier->forceDelete();
             }
 
             $users = User::whereNotNull('deleted_at')->where('show_in_list', '!=', '0')->withTrashed()->get();
-            $this->info($users->count().' users purged.');
+            $this->info($users->count() . ' users purged.');
             $user_assoc = 0;
             foreach ($users as $user) {
-
                 $rel_path = 'private_uploads/users';
                 $filenames = Actionlog::where('action_type', 'uploaded')
                     ->where('item_id', $user->id)
                     ->pluck('filename');
-                foreach($filenames as $filename) {
+                foreach ($filenames as $filename) {
                     try {
                         if (Storage::exists($rel_path . '/' . $filename)) {
                             Storage::delete($rel_path . '/' . $filename);
@@ -158,24 +157,24 @@ class Purge extends Command
                         Log::info('An error occurred while deleting files: ' . $e->getMessage());
                     }
                 }
-                $this->info('- User "'.$user->username.'" deleted.');
+                $this->info('- User "' . $user->username . '" deleted.');
                 $user_assoc += $user->userlog()->count();
                 $user->userlog()->forceDelete();
                 $user->forceDelete();
             }
-            $this->info($user_assoc.' corresponding user log records purged.');
+            $this->info($user_assoc . ' corresponding user log records purged.');
 
             $manufacturers = Manufacturer::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($manufacturers->count().' manufacturers purged.');
+            $this->info($manufacturers->count() . ' manufacturers purged.');
             foreach ($manufacturers as $manufacturer) {
-                $this->info('- Manufacturer "'.$manufacturer->name.'" deleted.');
+                $this->info('- Manufacturer "' . $manufacturer->name . '" deleted.');
                 $manufacturer->forceDelete();
             }
 
             $status_labels = Statuslabel::whereNotNull('deleted_at')->withTrashed()->get();
-            $this->info($status_labels->count().' status labels purged.');
+            $this->info($status_labels->count() . ' status labels purged.');
             foreach ($status_labels as $status_label) {
-                $this->info('- Status Label "'.$status_label->name.'" deleted.');
+                $this->info('- Status Label "' . $status_label->name . '" deleted.');
                 $status_label->forceDelete();
             }
         } else {
