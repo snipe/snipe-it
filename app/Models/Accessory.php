@@ -22,7 +22,8 @@ class Accessory extends SnipeModel
 
     protected $presenter = \App\Presenters\AccessoryPresenter::class;
     use CompanyableTrait;
-    use Loggable, Presentable;
+    use Loggable;
+    use Presentable;
     use SoftDeletes;
 
     protected $table = 'accessories';
@@ -32,17 +33,17 @@ class Accessory extends SnipeModel
 
     use Searchable;
     use Acceptable;
-    
+
     /**
      * The attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableAttributes = ['name', 'model_number', 'order_number', 'purchase_date', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
-     * 
+     *
      * @var array
      */
     protected $searchableRelations = [
@@ -198,7 +199,7 @@ class Accessory extends SnipeModel
 
     /**
      * Get the LAST checkout for this accessory.
-     * 
+     *
      * This is kinda gross, but is necessary for how the accessory
      * pivot stuff works for now.
      *
@@ -241,10 +242,9 @@ class Accessory extends SnipeModel
     public function getImageUrl()
     {
         if ($this->image) {
-            return Storage::disk('public')->url(app('accessories_upload_path').$this->image);
+            return Storage::disk('public')->url(app('accessories_upload_path') . $this->image);
         }
         return false;
-
     }
 
     /**
@@ -380,7 +380,7 @@ class Accessory extends SnipeModel
 
     /**
      * Run after the checkout acceptance was declined by the user
-     * 
+     *
      * @param  User   $acceptedBy
      * @param  string $signature
      */

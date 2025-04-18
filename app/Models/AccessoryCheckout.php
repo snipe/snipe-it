@@ -31,7 +31,7 @@ class AccessoryCheckout extends Model
 
     protected $presenter = \App\Presenters\AccessoryPresenter::class;
     protected $table = 'accessories_checkout';
-    
+
     /**
      * Establishes the accessory checkout -> accessory relationship
      *
@@ -159,13 +159,13 @@ class AccessoryCheckout extends Model
         $query->where(function ($query) use ($userQuery) {
             $query->where('assigned_type', User::class)
             ->whereIn('assigned_to', $userQuery);
-        })->orWhere(function($query) use ($locationQuery) {
+        })->orWhere(function ($query) use ($locationQuery) {
             $query->where('assigned_type', Location::class)
             ->whereIn('assigned_to', $locationQuery);
-        })->orWhere(function($query) use ($assetQuery) {
+        })->orWhere(function ($query) use ($assetQuery) {
             $query->where('assigned_type', Asset::class)
             ->whereIn('assigned_to', $assetQuery);
-        })->orWhere(function($query) use ($terms) {
+        })->orWhere(function ($query) use ($terms) {
             foreach ($terms as $term) {
                 $search_str = '%' . $term . '%';
                 $query->where('note', 'like', $search_str);
@@ -174,6 +174,4 @@ class AccessoryCheckout extends Model
 
         return $query;
     }
-
-
 }
