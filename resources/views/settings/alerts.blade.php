@@ -69,7 +69,7 @@
                                 <label for="alert_email">{{ trans('admin/settings/general.alert_email') }}</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="alert_email" value="{{ old('alert_email', $setting->alert_email) }}" class="form-control" placeholder="admin@yourcompany.com" maxlength="191">
+                                <input type="email" multiple name="alert_email" value="{{ old('alert_email', $setting->alert_email) }}" class="form-control" placeholder="admin@yourcompany.com" maxlength="191">
                                 {!! $errors->first('alert_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
                                 <p class="help-block">{{ trans('admin/settings/general.alert_email_help') }}</p>
 
@@ -83,7 +83,7 @@
                                 <label for="admin_cc_email">{{ trans('admin/settings/general.admin_cc_email') }}</label>
                             </div>
                             <div class="col-md-7">
-                                <input type="text" name="admin_cc_email" value="{{ old('admin_cc_email', $setting->admin_cc_email) }}" class="form-control" placeholder="admin@yourcompany.com" maxlength="191">
+                                <input type="email" multiple name="admin_cc_email" value="{{ old('admin_cc_email', $setting->admin_cc_email) }}" class="form-control" placeholder="admin@yourcompany.com" maxlength="191">
                                 {!! $errors->first('admin_cc_email', '<span class="alert-msg" aria-hidden="true">:message</span><br>') !!}
 
                                 <p class="help-block">{{ trans('admin/settings/general.admin_cc_email_help') }}</p>
@@ -98,7 +98,7 @@
                                 <label for="alert_interval">{{ trans('admin/settings/general.alert_interval') }}</label>
                             </div>
                             <div class="col-md-9">
-                                <input class="form-control" placeholder="30" maxlength="3" style="width: 60px;" name="alert_interval" type="text" value="{{ old('alert_interval', $setting->alert_interval) }}" id="alert_interval">
+                                <input class="form-control" placeholder="30" maxlength="3" style="width: 60px;" name="alert_interval" type="number" min="1" value="{{ old('alert_interval', $setting->alert_interval) }}" id="alert_interval">
                                 {!! $errors->first('alert_interval', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
@@ -109,19 +109,19 @@
                                 <label for="alert_threshold">{{ trans('admin/settings/general.alert_inv_threshold') }}</label>
                             </div>
                             <div class="col-md-9">
-                                <input class="form-control" placeholder="5" maxlength="3" style="width: 60px;" name="alert_threshold" type="text" value="{{ old('alert_threshold', $setting->alert_threshold) }}" id="alert_threshold">
+                                <input class="form-control" placeholder="5" maxlength="3" style="width: 60px;" name="alert_threshold" type="number" value="{{ old('alert_threshold', $setting->alert_threshold) }}" id="alert_threshold">
                                 {!! $errors->first('alert_threshold', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                             </div>
                         </div>
 
 
-                        <!-- Alert interval -->
+                        <!-- Audit interval -->
                         <div class="form-group {{ $errors->has('audit_interval') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 <label for="audit_interval">{{ trans('admin/settings/general.audit_interval') }}</label>
                             </div>
                             <div class="input-group col-md-3">
-                                <input class="form-control" placeholder="12" maxlength="3" name="audit_interval" type="text" id="audit_interval" value="{{ old('audit_interval', $setting->audit_interval) }}">
+                                <input class="form-control" placeholder="12" maxlength="3" name="audit_interval" type="number" min="1" id="audit_interval" value="{{ old('audit_interval', $setting->audit_interval) }}">
                                 <span class="input-group-addon">{{ trans('general.months') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
@@ -130,13 +130,13 @@
                             </div>
                         </div>
 
-                        <!-- Alert threshold -->
+                        <!-- Audit threshold -->
                         <div class="form-group {{ $errors->has('audit_warning_days') ? 'error' : '' }}">
                             <div class="col-md-3">
                                 <label for="audit_warning_days">{{ trans('admin/settings/general.audit_warning_days') }}</label>
                             </div>
                             <div class="input-group col-md-3">
-                                <input class="form-control" placeholder="14" maxlength="3" name="audit_warning_days" type="text" id="audit_warning_days" value="{{ old('audit_warning_days', $setting->audit_warning_days) }}">
+                                <input class="form-control" placeholder="14" maxlength="3" name="audit_warning_days" type="number" id="audit_warning_days" value="{{ old('audit_warning_days', $setting->audit_warning_days) }}">
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
@@ -151,7 +151,7 @@
                                 <label for="due_checkin_days">{{ trans('admin/settings/general.due_checkin_days') }}</label>
                             </div>
                             <div class="input-group col-md-3">
-                                <input class="form-control" placeholder="14" maxlength="3" name="due_checkin_days" type="text" id="due_checkin_days" value="{{ old('due_checkin_days', $setting->due_checkin_days) }}">
+                                <input class="form-control" placeholder="14" maxlength="3" name="due_checkin_days" type="number" min="1" id="due_checkin_days" value="{{ old('due_checkin_days', $setting->due_checkin_days) }}">
                                 <span class="input-group-addon">{{ trans('general.days') }}</span>
                             </div>
                             <div class="col-md-9 col-md-offset-3">
