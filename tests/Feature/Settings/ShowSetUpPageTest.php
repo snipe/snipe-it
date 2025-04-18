@@ -21,7 +21,6 @@ use Tests\TestCase;
 
 class ShowSetUpPageTest extends TestCase
 {
-
     static ?TestResponse $latestResponse;
     /**
      * We do not want to make actual http request on every test to check .env file
@@ -293,7 +292,7 @@ class ShowSetUpPageTest extends TestCase
             return;
         }
 
-        self::$latestResponse->assertSee($successMessage, false)->assertDontSee($errorMessage,false);
+        self::$latestResponse->assertSee($successMessage, false)->assertDontSee($errorMessage, false);
     }
 
     public function testWillNotSeeDirectoryPermissionErrorWhenStoragePathIsWritable(): void

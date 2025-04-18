@@ -5,7 +5,6 @@ namespace Tests\Feature\Settings;
 use Tests\TestCase;
 use App\Models\User;
 
-
 class LdapSettingsTest extends TestCase
 {
     public function testPermissionRequiredToViewLdapSettings()
@@ -57,5 +56,4 @@ class LdapSettingsTest extends TestCase
             ]);
         $this->followRedirects($response)->assertSee('alert-danger');
     }
-
 }

@@ -5,7 +5,6 @@ namespace Tests\Feature\Settings;
 use Tests\TestCase;
 use App\Models\User;
 
-
 class SecuritySettingTest extends TestCase
 {
     public function testPermissionRequiredToViewSecuritySettings()
@@ -14,5 +13,4 @@ class SecuritySettingTest extends TestCase
             ->get(route('settings.security.index'))
             ->assertForbidden();
     }
-
 }

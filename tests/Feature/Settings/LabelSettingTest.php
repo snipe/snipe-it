@@ -5,7 +5,6 @@ namespace Tests\Feature\Settings;
 use Tests\TestCase;
 use App\Models\User;
 
-
 class LabelSettingTest extends TestCase
 {
     public function testPermissionRequiredToViewLabelSettings()
@@ -14,5 +13,4 @@ class LabelSettingTest extends TestCase
             ->get(route('settings.labels.index'))
             ->assertForbidden();
     }
-
 }
