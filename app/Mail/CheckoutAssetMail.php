@@ -18,7 +18,8 @@ use Illuminate\Queue\SerializesModels;
 
 class CheckoutAssetMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     private bool $firstTimeSending;
 
@@ -41,13 +42,19 @@ class CheckoutAssetMail extends Mailable
         $this->firstTimeSending = $firstTimeSending;
 
         if ($this->item->last_checkout) {
-            $this->last_checkout = Helper::getFormattedDateObject($this->item->last_checkout, 'date',
-                false);
+            $this->last_checkout = Helper::getFormattedDateObject(
+                $this->item->last_checkout,
+                'date',
+                false
+            );
         }
 
         if ($this->item->expected_checkin) {
-            $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
-                false);
+            $this->expected_checkin = Helper::getFormattedDateObject(
+                $this->item->expected_checkin,
+                'date',
+                false
+            );
         }
     }
 

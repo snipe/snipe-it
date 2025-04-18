@@ -12,7 +12,8 @@ use Illuminate\Queue\SerializesModels;
 
 class SendUpcomingAuditMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
@@ -44,7 +45,6 @@ class SendUpcomingAuditMail extends Mailable
 
 
         return new Content(
-
             markdown: 'notifications.markdown.upcoming-audits',
             with:  [
                 'assets'  => $this->assets,
