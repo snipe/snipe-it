@@ -553,7 +553,7 @@ class License extends Depreciable
     }
 
     /**
-     * Retuns the number of assigned seats for this asset
+     * Returns the number of assigned seats for this asset
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v3.0]

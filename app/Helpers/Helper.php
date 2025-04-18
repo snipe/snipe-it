@@ -1534,7 +1534,7 @@ class Helper
 
     /**
      * Check for inconsistencies before activating scoped locations with FullMultipleCompanySupport
-     * If there are locations with different companies than related objects unforseen problems could arise
+     * If there are locations with different companies than related objects unforeseen problems could arise
      *
      * @author T. Regnery <tobias.regnery@gmail.com>
      * @since 7.0

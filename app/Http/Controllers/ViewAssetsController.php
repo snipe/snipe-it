@@ -60,7 +60,7 @@ class ViewAssetsController extends Controller
 
         }
 
-        // Since some models may re-use the same fieldsets/fields, let's make the array unique so we don't repeat columns
+        // Since some models may reuse the same fieldsets/fields, let's make the array unique so we don't repeat columns
         array_unique($field_array);
 
         if (isset($user->id)) {

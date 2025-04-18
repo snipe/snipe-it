@@ -109,8 +109,8 @@
                 onPostHeader: function () {
                     var lookup = {};
                     var lookup_initialized = false;
-                    var ths = $('th');
-                    ths.each(function (index, element) {
+                    var table_headers = $('th');
+                    table_headers.each(function (index, element) {
                         th = $(element);
                         //only populate the lookup table once; don't need to keep doing it.
                         if (!lookup_initialized) {

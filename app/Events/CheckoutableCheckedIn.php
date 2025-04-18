@@ -14,7 +14,7 @@ class CheckoutableCheckedIn
     public $checkedOutTo;
     public $checkedInBy;
     public $note;
-    public $action_date; // Date setted in the hardware.checkin view at the checkin_at input, for the action log
+    public $action_date; // Date set in the hardware.checkin view at the checkin_at input, for the action log
     public $originalValues;
 
     /**

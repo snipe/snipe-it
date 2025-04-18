@@ -170,7 +170,7 @@ abstract class Importer
 
                 $this->log('------------- Action Summary ----------------');
             }
-            Model::reguard();
+            Model::reguard(); # codespell:ignore
         });
     }
 

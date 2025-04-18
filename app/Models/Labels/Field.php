@@ -17,7 +17,7 @@ class Field {
     
     public function toArray(Asset $asset) { return Field::makeArray($this, $asset); }
 
-    /* Statics */
+    /* Static functions */
 
     public static function makeArray(Field $field, Asset $asset) {
         return $field->getOptions()

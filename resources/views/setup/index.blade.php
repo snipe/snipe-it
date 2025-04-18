@@ -126,7 +126,7 @@ Create a User ::
         @if (!$start_settings['owner_is_admin'])
           Your app files are owned by <code>{{ $start_settings['owner'] }}</code>. That doesn't look like a default root/admin account. Nice!
         @else
-          It looks like your files are owned by <code>{{ $start_settings['owner'] }}</code>, which might be a root/admin account. It's never a good idea to run a website with escalated priveliges.
+          It looks like your files are owned by <code>{{ $start_settings['owner'] }}</code>, which might be a root/admin account. It's never a good idea to run a website with escalated privileges.
         @endif
       </td>
     </tr>

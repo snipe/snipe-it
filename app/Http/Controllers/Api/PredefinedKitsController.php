@@ -121,7 +121,7 @@ class PredefinedKitsController extends Controller
         $this->authorize('delete', PredefinedKit::class);
         $kit = PredefinedKit::findOrFail($id);
 
-        // Delete childs
+        // Delete children
         $kit->models()->detach();
         $kit->licenses()->detach();
         $kit->consumables()->detach();

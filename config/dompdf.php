@@ -124,7 +124,7 @@ return array(
          *
          * @link http://www.pdflib.com
          *
-         * If pdflib present in web server and auto or selected explicitely above,
+         * If pdflib present in web server and auto or selected explicitly above,
          * a real license code must exist!
          */
         //"DOMPDF_PDFLIB_LICENSE" => "your license key here",
@@ -162,7 +162,7 @@ return array(
          * Image DPI setting
          *
          * This setting determines the default DPI setting for images and fonts.  The
-         * DPI may be overridden for inline images by explictly setting the
+         * DPI may be overridden for inline images by explicitly setting the
          * image's width & height style attributes (i.e. if the image's native
          * width is 600 pixels and you specify the image's width as 72 points,
          * the image will have a DPI of 600 in the rendered PDF.  The DPI of

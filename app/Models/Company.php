@@ -250,7 +250,7 @@ final class Company extends SnipeModel
     /**
      * Scoping table queries, determining if a logged in user is part of a company, and only allows the user to access items associated with that company if FMCS is enabled.
      *
-     * This method is the one that the CompanyableTrait uses to contrain queries automatically, however that trait CANNOT be
+     * This method is the one that the CompanyableTrait uses to constrain queries automatically, however that trait CANNOT be
      * applied to the user's model, since it causes an infinite loop against the authenticated user.
      *
      * @todo - refactor that trait to handle the user's model as well.

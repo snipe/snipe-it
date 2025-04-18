@@ -299,7 +299,7 @@ class Accessory extends SnipeModel
     }
 
     /**
-     * Determins whether or not an email should be sent for checkin/checkout of this
+     * Determines whether or not an email should be sent for checkin/checkout of this
      * accessory based on the category it belongs to.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

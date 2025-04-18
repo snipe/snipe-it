@@ -6,9 +6,9 @@ use App\Models\Asset;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- *  This tranformer looks like it's extraneous, since we return as much or more
+ *  This transformer looks like it's extraneous, since we return as much or more
  * info in the AssetsTransformer, but we want to flatten these results out so that they 
- * don't dislose more information than we want. Folks with depreciation powers don't necessaily 
+ * don't dislose more information than we want. Folks with depreciation powers don't necessarily 
  * have the right to see additional info, and inspecting the API call here could disclose 
  * info they're not supposed to see.
  * 

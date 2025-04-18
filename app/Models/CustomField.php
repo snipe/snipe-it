@@ -16,7 +16,7 @@ class CustomField extends Model
         UniqueUndeletedTrait;
 
     /**
-     * Custom field predfined formats
+     * Custom field predefined formats
      *
      * @var array
      */

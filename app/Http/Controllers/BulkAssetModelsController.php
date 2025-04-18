@@ -11,7 +11,7 @@ use \Illuminate\Contracts\View\View;
 class BulkAssetModelsController extends Controller
 {
     /**
-     * Returns a view that allows the user to bulk edit model attrbutes
+     * Returns a view that allows the user to bulk edit model attributes
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]
@@ -55,7 +55,7 @@ class BulkAssetModelsController extends Controller
     }
 
     /**
-     * Returns a view that allows the user to bulk edit model attrbutes
+     * Returns a view that allows the user to bulk edit model attributes
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]

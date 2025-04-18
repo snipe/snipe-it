@@ -162,7 +162,7 @@ return [
     | ENABLE HTTP Strict Transport Security (HSTS)
     |--------------------------------------------------------------------------
     |
-    | This is set to default false for backwards compatibilty but should be
+    | This is set to default false for backwards compatibility but should be
     | set to true if the hosting environment allows it.
     |
     | See https://scotthelme.co.uk/hsts-the-missing-link-in-tls/
@@ -421,7 +421,7 @@ return [
   | Escape Excel formulas in CSV exports
   |--------------------------------------------------------------------------
   |
-  | This determins whether or not we should escape Excel formulas in CSV exports.
+  | This determines whether or not we should escape Excel formulas in CSV exports.
   | This can be UNSAFE in untrusted environments, and therefore defaults to true
   | so that Excel forumals WILL be escaped in CSV exports, however if your workflow
   | is designed around using formulas in your fields, you

@@ -8,7 +8,7 @@
  * and GPL (GPL-LICENSE.txt) licenses.
  *
  * Inspired by the the dragtable from Dan Vanderkam (danvk.org/dragtable/)
- * Thanks to the jquery and jqueryui comitters
+ * Thanks to the jquery and jqueryui committers
  *
  * Any comment, bug report, feature-request is welcome
  * Feel free to contact me.
@@ -49,7 +49,7 @@
  * beforeStop: beforeStop
  */
 /*
- * Special thx to all pull requests comitters
+ * Special thx to all pull requests committers
  */
 
 (function($) {
@@ -65,7 +65,7 @@
             restoreState: null,          // JSON-Object or function:  some kind of experimental aka Quick-Hack TODO: do it better
             exact: true,                 // removes pixels, so that the overlay table width fits exactly the original table width
             clickDelay: 10,              // ms to wait before rendering sortable list and delegating click event
-            containment: null,           // @see http://api.jqueryui.com/sortable/#option-containment, use it if you want to move in 2 dimesnions (together with axis: null)
+            containment: null,           // @see http://api.jqueryui.com/sortable/#option-containment, use it if you want to move in 2 dimensions (together with axis: null)
             cursor: 'move',              // @see http://api.jqueryui.com/sortable/#option-cursor
             cursorAt: false,             // @see http://api.jqueryui.com/sortable/#option-cursorAt
             distance: 0,                 // @see http://api.jqueryui.com/sortable/#option-distance, for immediate feedback use "0"
@@ -395,9 +395,9 @@
     }
 
     function swapNodes(a, b) {
-        var aparent = a.parentNode;
+        var aparent = a.parentNode; // codespell:ignore
         var asibling = a.nextSibling === b ? a : a.nextSibling;
         b.parentNode.insertBefore(a, b);
-        aparent.insertBefore(b, asibling);
+        aparent.insertBefore(b, asibling); // codespell:ignore
     }
 })(jQuery);

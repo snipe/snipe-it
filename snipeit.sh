@@ -73,7 +73,7 @@ fi
 
 # ensure running as root
 if [ "$(id -u)" != "0" ]; then
-    #Debian doesnt have sudo if root has a password.
+    # Debian doesn't have sudo if root has a password.
     if ! hash sudo 2>/dev/null; then
         exec su -c "$0" "$@"
     else
@@ -394,8 +394,8 @@ set_fqdn () {
 }
 
 set_dbpass () {
-   ans=default
-   until [[ $ans == "yes" ]] || [[ $ans == "no" ]]; do
+   answer=default
+   until [[ $answer == "yes" ]] || [[ $answer == "no" ]]; do
       echo -n "  Q. Do you want to automatically create the SnipeIT database user password? (y/n) "
       read -r setpw
 
@@ -403,13 +403,13 @@ set_dbpass () {
          [yY] | [yY][Ee][Ss] )
          mysqluserpw="$(< /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c16; echo)"
          echo ""
-         ans="yes"
+         answer="yes"
       ;;
       [nN] | [n|N][O|o] )
          echo -n  "  Q. What do you want your snipeit user password to be?"
          read -rs mysqluserpw
          echo ""
-         ans="no"
+         answer="no"
       ;;
       *)  echo "  Invalid answer. Please type y or n"
       ;;

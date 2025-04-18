@@ -8,14 +8,14 @@ window._ = require('lodash');
 //window.$ = window.jQuery = require('jquery');
 
 /**
- * jQuery UI is loaded here and then the tooltip is assigned another funtion name
+ * jQuery UI is loaded here and then the tooltip is assigned another function name
  * This resolves the issue of jquery-ui & bootstrap tooltip conflict
  */
 require('jquery-ui');
 jQuery.fn.uitooltip = jQuery.fn.tooltip; 
 
 /**
- * Load boostrap
+ * Load bootstrap
  */
 require('bootstrap-less');
 

@@ -125,7 +125,7 @@ class PredefinedKitsController extends Controller
             return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_not_found'));
         }
 
-        // Delete childs
+        // Delete children
         $kit->models()->detach();
         $kit->licenses()->detach();
         $kit->consumables()->detach();
@@ -217,7 +217,7 @@ class PredefinedKitsController extends Controller
             return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
-        // Delete childs
+        // Delete children
         $kit->models()->detach($model_id);
 
         // Redirect to the kit management page
@@ -250,7 +250,7 @@ class PredefinedKitsController extends Controller
     }
 
     /**
-     * Update attached licese
+     * Update attached license
      *
      * @author [D. Minaev] [<dmitriy.minaev.v@gmail.com>]
      * @param int $kit_id
@@ -296,7 +296,7 @@ class PredefinedKitsController extends Controller
             return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
-        // Delete childs
+        // Delete children
         $kit->licenses()->detach($license_id);
 
         // Redirect to the kit management page
@@ -374,7 +374,7 @@ class PredefinedKitsController extends Controller
             return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
-        // Delete childs
+        // Delete children
         $kit->accessories()->detach($accessory_id);
 
         // Redirect to the kit management page
@@ -452,7 +452,7 @@ class PredefinedKitsController extends Controller
             return redirect()->route('kits.index')->with('error', trans('admin/kits/general.kit_none'));
         }
 
-        // Delete childs
+        // Delete children
         $kit->consumables()->detach($consumable_id);
 
         // Redirect to the kit management page

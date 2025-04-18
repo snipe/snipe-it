@@ -2063,31 +2063,31 @@
                         if (_this.options.cookie) {
                             _this.persistReorderColumnsState(_this);
                         }
-                        var ths = [];
+                        var table_headers = [];
                         var formatters = [];
                         var columns = [];
                         var columnsHidden = [];
                         var columnIndex = -1;
                         var optionsColumns = [];
                         _this.$header.find('th:not(.detail)').each(function (i, el) {
-                            ths.push($$6(el).data('field'));
+                            table_headers.push($$6(el).data('field'));
                             formatters.push($$6(el).data('formatter'));
                         });
 
                         // Exist columns not shown
-                        if (ths.length < _this.columns.length) {
+                        if (table_headers.length < _this.columns.length) {
                             columnsHidden = _this.columns.filter(function (column) {
                                 return !column.visible;
                             });
                             for (var i = 0; i < columnsHidden.length; i++) {
-                                ths.push(columnsHidden[i].field);
+                                table_headers.push(columnsHidden[i].field);
                                 formatters.push(columnsHidden[i].formatter);
                             }
                         }
-                        for (var _i2 = 0; _i2 < ths.length; _i2++) {
-                            columnIndex = _this.fieldsColumnsIndex[ths[_i2]];
+                        for (var _i2 = 0; _i2 < table_headers.length; _i2++) {
+                            columnIndex = _this.fieldsColumnsIndex[table_headers[_i2]];
                             if (columnIndex !== -1) {
-                                _this.fieldsColumnsIndex[ths[_i2]] = _i2;
+                                _this.fieldsColumnsIndex[table_headers[_i2]] = _i2;
                                 _this.columns[columnIndex].fieldIndex = _i2;
                                 columns.push(_this.columns[columnIndex]);
                             }
@@ -2107,14 +2107,14 @@
                             });
                         });
                         _this.options.columns[0] = optionsColumns;
-                        _this.header.fields = ths;
+                        _this.header.fields = table_headers;
                         _this.header.formatters = formatters;
                         _this.initHeader();
                         _this.initToolbar();
                         _this.initSearchText();
                         _this.initBody();
                         _this.resetView();
-                        _this.trigger('reorder-column', ths);
+                        _this.trigger('reorder-column', table_headers);
                     }
                 });
             }

@@ -93,7 +93,7 @@ class SQLStreamer {
         $parser->should_guess = true;
         $parser->line_aware_piping(); // <----- THIS is doing the heavy lifting!
 
-        $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */]; //TODO - move to statics?
+        $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */]; //TODO - move to static?
         //can't use 'users' because the 'accessories_checkout' table?
         // can't use 'assets' because 'ver1_components_assets'
         foreach($check_tables as $check_table => $_ignore) {
@@ -508,7 +508,7 @@ class RestoreFromBackup extends Command
             $bar->finish();
             $this->line('');
         } else {
-            $this->info(count($interesting_files).' files were succesfully transferred');
+            $this->info(count($interesting_files).' files were successfully transferred');
         }
         if (count($unsafe_files) > 0) {
             foreach ($unsafe_files as $unsafe_file) {

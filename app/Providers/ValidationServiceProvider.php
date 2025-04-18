@@ -199,7 +199,7 @@ class ValidationServiceProvider extends ServiceProvider
 
                 $test_string = 'My hovercraft is full of eels';
 
-                // We have to stip out the regex: part here to check with preg_match
+                // We have to strip out the regex: part here to check with preg_match
                 $test_pattern = str_replace('regex:', '', $value);
 
                 try {
