@@ -4,10 +4,10 @@
     "workspaceFolder": "/workspaces/snipe-it",
     "postCreateCommand": [
         "git config --global --add safe.directory /workspaces/snipe-it",
-        "&& chmod a+x \"$(pwd)\"",
+        "&& chmod a+x /workspaces/snipe-it",
         "&& rm -rf /var/www/html",
-        "&& ln -s \"$(pwd)\" /var/www/html",
-        "&& if [ -f composer.json ];then composer install;fi;",
-        "ln -s docker/.env /var/www/html/.env"
+        "&& ln -s /workspaces/snipe-it /var/www/html",
+        "&& ln -s /workspaces/snipe-it/docker/.env /var/www/html/.env",
+        "&& if [ -f composer.json ];then composer install;fi;"
     ]
 }
