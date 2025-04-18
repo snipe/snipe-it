@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Traits\TwoColumnUniqueUndeletedTrait;
 use App\Models\Traits\Loggable;
+use App\Models\Traits\Requestable;
 use App\Models\Traits\Searchable;
 use App\Presenters\AssetModelPresenter;
 use App\Presenters\Presentable;
