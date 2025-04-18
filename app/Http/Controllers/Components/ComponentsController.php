@@ -53,7 +53,7 @@ class ComponentsController extends Controller
         $this->authorize('create', Component::class);
 
         return view('components/edit')->with('category_type', 'component')
-            ->with('item', new Component);
+            ->with('item', new Component());
     }
 
     /**
@@ -190,7 +190,7 @@ class ComponentsController extends Controller
         // Remove the image if one exists
         if ($component->image && Storage::disk('public')->exists('components/' . $component->image)) {
             try {
-                Storage::disk('public')->delete('components/'.$component->image);
+                Storage::disk('public')->delete('components/' . $component->image);
             } catch (\Exception $e) {
                 Log::debug($e);
             }
