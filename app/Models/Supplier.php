@@ -12,6 +12,9 @@ class Supplier extends SnipeModel
 {
     use HasFactory;
     use SoftDeletes;
+    use ValidatingTrait;
+    use UniqueUndeletedTrait;
+    use Searchable;
 
     protected $table = 'suppliers';
 
@@ -41,9 +44,6 @@ class Supplier extends SnipeModel
      * @var bool
      */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
-    use UniqueUndeletedTrait;
-    use Searchable;
 
     /**
      * The attributes that should be included when searching the model.
@@ -96,7 +96,7 @@ class Supplier extends SnipeModel
     {
         return $this->hasMany(Asset::class)->whereNull('deleted_at')->selectRaw('supplier_id, count(*) as count')->groupBy('supplier_id');
     }
-    
+
 
     /**
      * Establishes the supplier -> assets relationship
@@ -209,8 +209,8 @@ class Supplier extends SnipeModel
      */
     public function addhttp($url)
     {
-        if (($url!='') && (! preg_match('~^(?:f|ht)tps?://~i', $url))) {
-            $url = 'http://'.$url;
+        if (($url != '') && (! preg_match('~^(?:f|ht)tps?://~i', $url))) {
+            $url = 'http://' . $url;
         }
 
         return $url;
