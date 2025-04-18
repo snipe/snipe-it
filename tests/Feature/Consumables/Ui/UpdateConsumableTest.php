@@ -74,7 +74,6 @@ class UpdateConsumableTest extends TestCase
                 'category_type' => 'consumable',
             ])
             ->assertSessionHasErrors('qty');
-
     }
 
     public function testCanUpdateConsumable()

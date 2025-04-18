@@ -62,6 +62,5 @@ class CreateConsumableTest extends TestCase implements TestsPermissionsRequireme
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('consumables.create'))
             ->assertOk();
-
     }
 }
