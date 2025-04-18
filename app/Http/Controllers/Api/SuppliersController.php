@@ -28,6 +28,7 @@ class SuppliersController extends Controller
             id',
             'name',
             'address',
+            'address2',
             'phone',
             'contact',
             'fax',
@@ -39,15 +40,40 @@ class SuppliersController extends Controller
             'components_count',
             'consumables_count',
             'url',
+            'city',
+            'state',
+            'zip',
+            'latitude',
+            'longitude'
         ];
         
-        $suppliers = Supplier::select(
-                ['id', 'name', 'address', 'address2', 'city', 'state', 'country', 'fax', 'phone', 'email', 'contact', 'created_at', 'updated_at', 'deleted_at', 'image', 'notes', 'url'])
-                    ->withCount('assets as assets_count')
-                    ->withCount('licenses as licenses_count')
-                    ->withCount('accessories as accessories_count')
-                    ->withCount('components as components_count')
-                    ->withCount('consumables as consumables_count');
+        $suppliers = Supplier::select([
+            'id',
+            'name',
+            'address',
+            'address2',
+            'city',
+            'state',
+            'country',
+            'fax',
+            'phone',
+            'email',
+            'contact',
+            'created_at',
+            'updated_at',
+            'deleted_at',
+            'image',
+            'notes',
+            'url',
+            'zip',
+            'latitude',
+            'longitude'
+        ])
+            ->withCount('assets as assets_count')
+            ->withCount('licenses as licenses_count')
+            ->withCount('accessories as accessories_count')
+            ->withCount('components as components_count')
+            ->withCount('consumables as consumables_count');
 
 
         if ($request->filled('search')) {
@@ -73,6 +99,8 @@ class SuppliersController extends Controller
         if ($request->filled('zip')) {
             $suppliers->where('zip', '=', $request->input('zip'));
         }
+
+        // TBA: Should this API support basic lat/long filtering?
 
         if ($request->filled('country')) {
             $suppliers->where('country', '=', $request->input('country'));
@@ -142,7 +170,7 @@ class SuppliersController extends Controller
         $this->authorize('view', Supplier::class);
         $supplier = Supplier::findOrFail($id);
 
-        return (new SuppliersTransformer)->transformSupplier($supplier);
+        return (new SuppliersTransformer())->transformSupplier($supplier);
     }
 
 
@@ -231,6 +259,6 @@ class SuppliersController extends Controller
             $supplier->use_image = ($supplier->image) ? Storage::disk('public')->url('suppliers/'.$supplier->image, $supplier->image) : null;
         }
 
-        return (new SelectlistTransformer)->transformSelectlist($suppliers);
+        return (new SelectlistTransformer())->transformSelectlist($suppliers);
     }
 }

@@ -57,7 +57,9 @@ class LocationsController extends Controller
             'users_count',
             'zip',
             'notes',
-            ];
+            'latitude',
+            'longitude'
+        ];
 
         $locations = Location::with('parent', 'manager', 'children')->select([
             'locations.id',
@@ -79,6 +81,8 @@ class LocationsController extends Controller
             'locations.currency',
             'locations.company_id',
             'locations.notes',
+            'locations.latitude',
+            'locations.longitude'
         ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assignedAssets as assigned_assets_count')
@@ -121,6 +125,8 @@ class LocationsController extends Controller
         if ($request->filled('country')) {
             $locations->where('locations.country', '=', $request->input('country'));
         }
+
+        // TBA: Should this API support basic lat/long filtering?
 
         if ($request->filled('manager_id')) {
             $locations->where('locations.manager_id', '=', $request->input('manager_id'));
@@ -219,6 +225,8 @@ class LocationsController extends Controller
                 'locations.image',
                 'locations.currency',
                 'locations.notes',
+                'locations.latitude',
+                'locations.longitude'
             ])
             ->withCount('assignedAssets as assigned_assets_count')
             ->withCount('assets as assets_count')
