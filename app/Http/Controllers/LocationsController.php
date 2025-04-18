@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\RedirectResponse;
-use \Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\View;
+
 /**
  * This controller handles all actions related to Locations for
  * the Snipe-IT Asset Management application.
@@ -51,7 +52,7 @@ class LocationsController extends Controller
         $this->authorize('create', Location::class);
 
         return view('locations/edit')
-            ->with('item', new Location);
+            ->with('item', new Location());
     }
 
     /**
@@ -66,7 +67,7 @@ class LocationsController extends Controller
     public function store(ImageUploadRequest $request) : RedirectResponse
     {
         $this->authorize('create', Location::class);
-        
+
         $location = new Location();
         $location->name = $request->input('name');
         $location->parent_id = $request->input('parent_id', null);
@@ -76,9 +77,9 @@ class LocationsController extends Controller
         $location->city = $request->input('city');
         $location->state = $request->input('state');
         $location->country = $request->input('country');
-	$location->zip = $request->input('zip');
-	$location->latitude = $request->input('latitude');
-	$location->longitude = $request->input('longitude');
+        $location->zip = $request->input('zip');
+        $location->latitude = $request->input('latitude');
+        $location->longitude = $request->input('longitude');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
         $location->created_by = auth()->id();
@@ -93,7 +94,7 @@ class LocationsController extends Controller
             // check if parent is set and has a different company
             if ($location->parent_id && Location::find($location->parent_id)->company_id != $location->company_id) {
                 return redirect()->back()->withInput()->withInput()->with('error', 'different company than parent');
-            }                
+            }
         } else {
             $location->company_id = $request->input('company_id');
         }
@@ -142,9 +143,9 @@ class LocationsController extends Controller
         $location->city = $request->input('city');
         $location->state = $request->input('state');
         $location->country = $request->input('country');
-	$location->zip = $request->input('zip');
-	$location->latitude = $request->input('latitude');
-	$location->longitude = $request->input('longitude');
+        $location->zip = $request->input('zip');
+        $location->latitude = $request->input('latitude');
+        $location->longitude = $request->input('longitude');
         $location->phone = request('phone');
         $location->fax = request('fax');
         $location->ldap_ou = $request->input('ldap_ou');
@@ -157,7 +158,7 @@ class LocationsController extends Controller
             // check if there are related objects with different company
             if (Helper::test_locations_fmcs(false, $location->id, $location->company_id)) {
                 return redirect()->back()->withInput()->withInput()->with('error', 'error scoped locations');
-            }            
+            }
         } else {
             $location->company_id = $request->input('company_id');
         }
@@ -198,7 +199,7 @@ class LocationsController extends Controller
 
         if ($location->image) {
             try {
-                Storage::disk('public')->delete('locations/'.$location->image);
+                Storage::disk('public')->delete('locations/' . $location->image);
             } catch (\Exception $e) {
                 Log::error($e);
             }
@@ -247,7 +248,7 @@ class LocationsController extends Controller
             $assets = Asset::where('assigned_to', $id)->where('assigned_type', Location::class)->with('model', 'model.category')->get();
             return view('locations/print')
                 ->with('assets', $assets)
-                ->with('users',$users)
+                ->with('users', $users)
                 ->with('location', $location)
                 ->with('parent', $parent)
                 ->with('manager', $manager)
@@ -298,7 +299,6 @@ class LocationsController extends Controller
         $this->authorize('create', Location::class);
 
         if ($location = Location::withTrashed()->find($id)) {
-
             if ($location->deleted_at == '') {
                 return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.location')]));
             }
@@ -319,8 +319,8 @@ class LocationsController extends Controller
         }
 
         return redirect()->back()->with('error', trans('admin/models/message.does_not_exist'));
-
     }
+
     public function print_all_assigned($id) : View | RedirectResponse
     {
         $this->authorize('view', Location::class);
@@ -332,7 +332,7 @@ class LocationsController extends Controller
             $assets = Asset::where('location_id', $id)->with('model', 'model.category')->get();
             return view('locations/print')
                 ->with('assets', $assets)
-                ->with('users',$users)
+                ->with('users', $users)
                 ->with('location', $location)
                 ->with('parent', $parent)
                 ->with('manager', $manager)
@@ -363,13 +363,13 @@ class LocationsController extends Controller
                 ->withCount('children as children_count')
                 ->withCount('users as users_count')->get();
 
-                $valid_count = 0;
-                foreach ($locations as $location) {
-                    if ($location->isDeletable()) {
-                        $valid_count++;
-                    }
+            $valid_count = 0;
+            foreach ($locations as $location) {
+                if ($location->isDeletable()) {
+                    $valid_count++;
                 }
-                return view('locations/bulk-delete', compact('locations'))->with('valid_count', $valid_count);
+            }
+            return view('locations/bulk-delete', compact('locations'))->with('valid_count', $valid_count);
         }
 
         return redirect()->route('models.index')
@@ -401,7 +401,6 @@ class LocationsController extends Controller
             $error_count = 0;
 
             foreach ($locations as $location) {
-
                 // Can we delete this location?
                 if ($location->isDeletable()) {
                     $location->delete();
@@ -411,8 +410,8 @@ class LocationsController extends Controller
                 }
             }
 
-            Log::debug('Success count: '.$success_count);
-            Log::debug('Error count: '.$error_count);
+            Log::debug('Success count: ' . $success_count);
+            Log::debug('Error count: ' . $error_count);
             // Complete success
             if ($success_count == count($locations_raw_array)) {
                 return redirect()
@@ -426,9 +425,10 @@ class LocationsController extends Controller
             if ($error_count > 0) {
                 return redirect()
                     ->route('locations.index')
-                    ->with('warning', trans('general.bulk.delete.partial',
-                        ['success' => $success_count, 'error' => $error_count, 'object_type' => trans('general.locations')]
-                    ));
+                    ->with(
+                        'warning',
+                        trans('general.bulk.delete.partial', ['success' => $success_count, 'error' => $error_count, 'object_type' => trans('general.locations')])
+                    );
                 }
             }
 
@@ -436,9 +436,6 @@ class LocationsController extends Controller
         // Nothing was selected - return to the index
         return redirect()
             ->route('locations.index')
-            ->with('error', trans('general.bulk.nothing_selected',
-                ['object_type' => trans('general.locations')]
-            ));
-
+            ->with('error', trans('general.bulk.nothing_selected', ['object_type' => trans('general.locations')]));
     }
 }
