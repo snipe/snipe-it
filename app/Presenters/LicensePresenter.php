@@ -199,7 +199,7 @@ class LicensePresenter extends Presenter
             'searchable' => false,
             'sortable' => false,
             'switchable' => false,
-            'title' => trans('general.checkin').'/'.trans('general.checkout'),
+            'title' => trans('general.checkin') . '/' . trans('general.checkout'),
             'visible' => true,
             'formatter' => 'licensesInOutFormatter',
         ];
@@ -230,8 +230,8 @@ class LicensePresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.id'),
                 'visible' => false,
-           ],
-           [
+            ],
+            [
                 'field' => 'name',
                 'searchable' => false,
                 'sortable' => false,
@@ -293,7 +293,7 @@ class LicensePresenter extends Presenter
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => false,
-                'title' => trans('general.checkin').'/'.trans('general.checkout'),
+                'title' => trans('general.checkin') . '/' . trans('general.checkout'),
                 'visible' => true,
                 'formatter' => 'licenseSeatInOutFormatter',
             ],
@@ -326,7 +326,7 @@ class LicensePresenter extends Presenter
      */
     public function serialUrl()
     {
-        return (string) link_to('/licenses/'.$this->id, mb_strimwidth($this->serial, 0, 50, '...'));
+        return (string) link_to('/licenses/' . $this->id, mb_strimwidth($this->serial, 0, 50, '...'));
     }
 
     /**
