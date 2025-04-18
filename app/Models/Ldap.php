@@ -126,11 +126,11 @@ class Ldap extends Model
                  * TODO PLEASE:
                  *
                  * this isn't very clear, so it's important to note: the $ldapbind value is never correctly returned - we never 'return true' from self::bindAdminToLdap() (the function
-                 * just "falls off the end" without ever explictly returning 'true')
+                 * just "falls off the end" without ever explicitly returning 'true')
                  *
                  * but it *does* have an interesting side-effect of checking for the LDAP password being incorrectly encrypted with the wrong APP_KEY, so I'm leaving it in for now.
                  *
-                 * If it *did* correctly return 'true' on a succesful bind, it would _probably_ allow users to log in with an incorrect password. Which would be horrible!
+                 * If it *did* correctly return 'true' on a successful bind, it would _probably_ allow users to log in with an incorrect password. Which would be horrible!
                  *
                  * Let's definitely fix this at the next refactor!!!!
                  *

@@ -333,7 +333,7 @@ class AssetModelsController extends Controller
 
 
     /**
-     * Returns a view that allows the user to bulk edit model attrbutes
+     * Returns a view that allows the user to bulk edit model attributes
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.7]

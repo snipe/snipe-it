@@ -1,0 +1,5 @@
+[codespell]
+skip = ./phpmd.xml,./CONTRIBUTORS.md,./composer.lock,*.min.js,*.map,./resources/lang/*,./node_modules/*,./public/vendor/*,./sample_csvs/*,./database/migrations/*,./public/js/*
+count =
+quiet-level = 3
+ignore-words-list = checkin,Checkin,currentY,userA

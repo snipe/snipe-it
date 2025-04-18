@@ -143,7 +143,7 @@ class Setting extends Model
     }
 
     /**
-     * Check wether to show in model dropdowns.
+     * Check whether to show in model dropdowns.
      *
      * @param string $element
      *

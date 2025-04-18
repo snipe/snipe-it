@@ -27,7 +27,7 @@ class LocationFactory extends Factory
         ];
     }
   
-    // one of these can eventuall go away - left temporarily for conflict resolution
+    // one of these can eventually go away - left temporarily for conflict resolution
     public function deleted(): self
     {
         return $this->state(['deleted_at' => $this->faker->dateTime()]);

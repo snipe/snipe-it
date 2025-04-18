@@ -54,7 +54,7 @@ class PredefinedKitsTransformer
     }
 
     /**
-     * transform collection of any elemets attached to kit
+     * transform collection of any elements attached to kit
      * @return array
      */
     public function transformElements(Collection $elements, $total)

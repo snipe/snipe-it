@@ -128,7 +128,7 @@ Route::group(['middleware' => 'auth'], function () {
 /*
 |
 |--------------------------------------------------------------------------
-| Re-Usable Modal Dialog routes.
+| Reusable Modal Dialog routes.
 |--------------------------------------------------------------------------
 |
 | Routes for various modal dialogs to interstitially create various things
@@ -338,7 +338,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
 
     /**
      * This breadcrumb is repeated for groups in the BreadcrumbServiceProvider, since groups uses resource routes
-     * and that servcie provider cannot see the breadcrumbs defined below
+     * and that service provider cannot see the breadcrumbs defined below
      */
     Route::get('/', [SettingsController::class, 'index'])
         ->name('settings.index')

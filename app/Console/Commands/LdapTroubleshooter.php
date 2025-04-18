@@ -273,7 +273,7 @@ class LdapTroubleshooter extends Command
             $this->line("Trying TLS first for port $port");
             $ldap_url = "ldaps://".$parsed['host'].":$port";
             if($this->test_anonymous_bind($ldap_url)) {
-                $this->info("Anonymous bind succesful to $ldap_url!");
+                $this->info("Anonymous bind successful to $ldap_url!");
                 $ldap_urls[] = [ $ldap_url, true, false ];
                 $pretty_ldap_urls[] = [ $ldap_url, "YES", "no" ];
                 continue; // TODO - lots of copypasta in these if(test_anonymous_bind()) routines...
@@ -282,7 +282,7 @@ class LdapTroubleshooter extends Command
             }
 
             if($this->test_anonymous_bind($ldap_url, false)) {
-                $this->info("Anonymous bind succesful to $ldap_url with certifcate-checks disabled");
+                $this->info("Anonymous bind successful to $ldap_url with certificate-checks disabled");
                 $ldap_urls[] = [ $ldap_url, false, false ]; 
                 $pretty_ldap_urls[] = [ $ldap_url, "no", "no" ]; 
                 continue;
@@ -292,7 +292,7 @@ class LdapTroubleshooter extends Command
 
             $ldap_url = "ldap://".$parsed['host'].":$port";
             if($this->test_anonymous_bind($ldap_url, true, true)) {
-                $this->info("Plain connection to $ldap_url with STARTTLS succesful!");
+                $this->info("Plain connection to $ldap_url with STARTTLS successful!");
                 $ldap_urls[] = [ $ldap_url, true, true ];
                 $pretty_ldap_urls[] = [ $ldap_url, "YES", "YES" ];
                 continue;
@@ -301,7 +301,7 @@ class LdapTroubleshooter extends Command
             }
 
             if($this->test_anonymous_bind($ldap_url)) {
-                $this->info("Plain connection to $ldap_url succesful!");
+                $this->info("Plain connection to $ldap_url successful!");
                 $ldap_urls[] = [ $ldap_url, true, false ];
                 $pretty_ldap_urls[] = [ $ldap_url, "YES", "no" ];
                 continue;

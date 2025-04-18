@@ -63,7 +63,7 @@ class ConsumableFactory extends Factory
     {
         return $this->state(function () {
             return [
-                'name' => 'Laserjet Paper (Ream)',
+                'name' => 'Laserjet Paper (Ream)', // codespell:ignore
                 'category_id' => function () {
                     return Category::where('name', 'Printer Paper')->first() ?? Category::factory()->consumablePaperCategory();
                 },

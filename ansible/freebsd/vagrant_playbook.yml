@@ -45,9 +45,9 @@
       become: true          
 
     #
-    # Install php and php dependancies
+    # Install php and php dependencies
     #
-    - name: Install PHP dependancies
+    - name: Install PHP dependencies
       pkgng:
         name: "{{ item }}"
         state: present
@@ -94,7 +94,7 @@
       become: true   
 
     #
-    # Install the lastest version of composer
+    # Install the latest version of composer
     #
     - name: Composer check
       stat:

@@ -96,7 +96,7 @@ class SettingsSamlRequest extends FormRequest
                 $x509 = openssl_x509_read($custom_x509cert);
                 $pkey = openssl_pkey_get_private($custom_privateKey);
             } elseif ($this->input('saml_sp_regenerate_keypair') == '1' || ! $this->has('saml_sp_x509cert') || $was_custom_x509cert) {
-                // key regeneration requested, no certificate defined yet or previous custom certicate was removed
+                // key regeneration requested, no certificate defined yet or previous custom certificate was removed
                 error_log('regen');
                 $cert_updated = true;
                 $dn = [

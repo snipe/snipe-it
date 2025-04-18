@@ -44,7 +44,7 @@
           - unzip
           - python-pymysql
     #
-    # Install the lastest version of composer
+    # Install the latest version of composer
     #
     - name: Composer check
       stat:

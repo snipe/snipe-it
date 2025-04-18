@@ -42,7 +42,7 @@ class FieldOption {
     public function toArray(Asset $asset=null) { return FieldOption::makeArray($this, $asset); }
     public function toString() { return FieldOption::makeString($this); }
 
-    /* Statics */
+    /* Static functions */
 
     public static function makeArray(FieldOption $option, Asset $asset=null) {
         return [

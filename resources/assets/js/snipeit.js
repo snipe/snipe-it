@@ -346,7 +346,7 @@ $(function () {
             var inner_div = $("<div style='width: 30px;'>");
             /******************************************************************
              * 
-             * We are specifically chosing empty alt-text below, because this 
+             * We are specifically choosing empty alt-text below, because this 
              * image conveys no additional information, relative to the text
              * that will *always* be there in any select2 list that is in use
              * in Snipe-IT. If that changes, we would probably want to change

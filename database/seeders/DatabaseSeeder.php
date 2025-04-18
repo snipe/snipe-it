@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
         $output = Artisan::output();
         Log::info($output);
 
-        Model::reguard();
+        Model::reguard(); // codespell:ignore
 
         DB::table('imports')->truncate();
         DB::table('asset_maintenances')->truncate();

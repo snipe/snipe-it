@@ -415,7 +415,7 @@ echo $dirs_writable."\n";
 // Print out a useful error message
 if ($dirs_not_writable!='') {
     echo "\e[91m--------------------------------------------------------\n";
-    echo "\eThe following directories/files do not seem writable: \n";
+    echo "\eThe following directories/files do not seem writable: \n"; // codespell:ignore
     echo "\e--------------------------------------------------------\e[39m\n";
 
     echo $dirs_not_writable;

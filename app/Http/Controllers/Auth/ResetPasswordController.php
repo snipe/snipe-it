@@ -99,7 +99,7 @@ class ResetPasswordController extends Controller
             if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
                 $request->validate(
                     [
-                        'password' => 'required|notIn:["'.$user->email.'","'.$user->username.'","'.$user->first_name.'","'.$user->last_name.'"',
+                        'password' => 'required|notIn:["'.$user->email.'","'.$user->username.'","'.$user->first_name.'","'.$user->last_name.'"',  // codespell:ignore
                     ], $messages);
             }
 
