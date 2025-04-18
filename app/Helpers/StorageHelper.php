@@ -8,9 +8,10 @@ use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+
 class StorageHelper
 {
-    public static function downloader($filename, $disk = 'default') : BinaryFileResponse | RedirectResponse | StreamedResponse
+    public static function downloader($filename, $disk = 'default'): BinaryFileResponse | RedirectResponse | StreamedResponse
     {
         if ($disk == 'default') {
             $disk = config('filesystems.default');
@@ -37,7 +38,8 @@ class StorageHelper
      * @param $file_with_path
      * @return bool
      */
-    public static function allowSafeInline($file_with_path) {
+    public static function allowSafeInline($file_with_path)
+    {
 
         $allowed_inline = [
             'pdf',
@@ -56,18 +58,17 @@ class StorageHelper
             return true;
         }
         return false;
-
     }
 
     /**
      * Decide whether to show the file inline or download it.
      */
-    public static function showOrDownloadFile($file, $filename) {
+    public static function showOrDownloadFile($file, $filename)
+    {
 
         $headers = [];
 
         if (request('inline') == 'true') {
-
             $headers = [
                 'Content-Disposition' => 'inline',
             ];
@@ -84,6 +85,5 @@ class StorageHelper
         }
 
         return Storage::download($file, $filename, $headers);
-
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Helpers;
+
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -23,8 +24,6 @@ use Illuminate\Support\Facades\Session;
 
 class Helper
 {
-
-
     /**
      * This is only used for reversing the migration that updates the locale to the 5-6 letter codes from two
      * letter codes. The normal dropdowns use the autoglossonyms in the language files located
@@ -120,8 +119,7 @@ class Helper
     public static function formatCurrencyOutput($cost)
     {
         if (is_numeric($cost)) {
-
-            if (Setting::getSettings()->digit_separator=='1.234,56') {
+            if (Setting::getSettings()->digit_separator == '1.234,56') {
                 return number_format($cost, 2, ',', '.');
             }
             return number_format($cost, 2, '.', ',');
@@ -416,17 +414,15 @@ class Helper
         $total_colors = count($colors);
 
         if ($index >= $total_colors) {
-
-            Log::info('Status label count is '.$index.' and exceeds the allowed count of 266.');
+            Log::info('Status label count is ' . $index . ' and exceeds the allowed count of 266.');
             //patch fix for array key overflow (color count starts at 1, array starts at 0)
             $index = $index - $total_colors - 1;
 
             //constraints to keep result in 0-265 range. This should never be needed, but if something happens
             //to create this many status labels and it DOES happen, this will keep it from failing at least.
-            if($index < 0) {
+            if ($index < 0) {
                 $index = 0;
-            }
-            elseif($index >($total_colors - 1)) {
+            } elseif ($index > ($total_colors - 1)) {
                 $index = $total_colors - 1;
             }
         }
@@ -447,7 +443,7 @@ class Helper
         $hexCode = ltrim($hexCode, '#');
 
         if (strlen($hexCode) == 3) {
-            $hexCode = $hexCode[0].$hexCode[0].$hexCode[1].$hexCode[1].$hexCode[2].$hexCode[2];
+            $hexCode = $hexCode[0] . $hexCode[0] . $hexCode[1] . $hexCode[1] . $hexCode[2] . $hexCode[2];
         }
 
         $hexCode = array_map('hexdec', str_split($hexCode, 2));
@@ -459,7 +455,7 @@ class Helper
             $color = str_pad(dechex($color + $adjustAmount), 2, '0', STR_PAD_LEFT);
         }
 
-        return '#'.implode($hexCode);
+        return '#' . implode($hexCode);
     }
 
     /**
@@ -499,17 +495,17 @@ class Helper
     public static function ParseFloat($floatString)
     {
         /*******
-         * 
+         *
          * WARNING: This does conversions based on *locale* - a Unix-ey-like thing.
-         * 
+         *
          * Everything else in the system tends to convert based on the Snipe-IT settings
-         * 
+         *
          * So it's very likely this is *not* what you want - instead look for the new
-         * 
+         *
          * ParseCurrency($currencyString)
-         * 
+         *
          * Which should be directly below here
-         * 
+         *
          */
         $LocaleInfo = localeconv();
         $floatString = str_replace(',', '', $floatString);
@@ -525,17 +521,18 @@ class Helper
 
         return floatval($floatString);
     }
-    
+
     /**
      * Format currency using comma or period for thousands, and period or comma for decimal, based on settings.
-     * 
+     *
      * @author [B. Wetherington] [<bwetherington@grokability.com>]
      * @since [v5.2]
      * @return Float
      */
-    public static function ParseCurrency($currencyString) {
+    public static function ParseCurrency($currencyString)
+    {
         $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
-        if(Setting::getSettings()->digit_separator=='1.234,56') {
+        if (Setting::getSettings()->digit_separator == '1.234,56') {
             //EU format
             $without_thousands = str_replace('.', '', $without_currency);
             $corrected_decimal = str_replace(',', '.', $without_thousands);
@@ -623,7 +620,7 @@ class Helper
      * @since [v2.5]
      * @return array
      */
-    public static function categoryTypeList($selection=null)
+    public static function categoryTypeList($selection = null)
     {
         $category_types = [
             '' => '',
@@ -634,11 +631,11 @@ class Helper
             'license' => trans('general.license'),
         ];
 
-        if ($selection != null){
+        if ($selection != null) {
             return $category_types[strtolower($selection)];
+        } else {
+            return $category_types;
         }
-        else
-        return $category_types;
     }
     /**
      * Get the list of custom fields in an array to make a dropdown menu
@@ -718,7 +715,8 @@ class Helper
      * @since [v7.0.14]
      * @return array
      */
-    public static function deprecationCheck()  : array {
+    public static function deprecationCheck(): array
+    {
         // The check and message that the user is still using the deprecated version
         $deprecations = [
             'ms_teams_deprecated' => array(
@@ -727,7 +725,7 @@ class Helper
         ];
 
         // if item of concern is being used and its being used with the deprecated values return the notification array.
-        if(Setting::getSettings()->webhook_selected === 'microsoft' && $deprecations['ms_teams_deprecated']['check']) {
+        if (Setting::getSettings()->webhook_selected === 'microsoft' && $deprecations['ms_teams_deprecated']['check']) {
             return $deprecations;
         }
             return [];
@@ -810,8 +808,7 @@ class Helper
             }
         }
 
-        foreach ($asset_models as $asset_model){
-
+        foreach ($asset_models as $asset_model) {
             $asset = new Asset();
             $total_owned = $asset->where('model_id', '=', $asset_model->id)->count();
             $avail = $asset->where('model_id', '=', $asset_model->id)->whereNull('assigned_to')->count();
@@ -832,7 +829,7 @@ class Helper
             }
         }
 
-        foreach ($licenses as $license){
+        foreach ($licenses as $license) {
             $avail = $license->remaincount();
             if ($avail < ($license->min_amt) + $alert_threshold) {
                 if ($avail > 0) {
@@ -849,7 +846,6 @@ class Helper
                 $items_array[$all_count]['min_amt'] = $license->min_amt;
                 $all_count++;
             }
-
         }
 
         return $items_array;
@@ -902,15 +898,12 @@ class Helper
                 $permission_name = $permission[$x]['permission'];
 
                 if ($permission[$x]['display'] === true) {
-
                     if (is_array($selected_arr)) {
-
                         if (array_key_exists($permission_name, $selected_arr)) {
                             $permissions_arr[$permission_name] = $selected_arr[$permission_name];
                         } else {
                             $permissions_arr[$permission_name] = '0';
                         }
-
                     } else {
                         $permissions_arr[$permission_name] = '0';
                     }
@@ -940,17 +933,17 @@ class Helper
             if ($rule_name == $field) {
                 if (is_array($rule)) {
                     if (in_array('required', $rule)) {
-                       return true;
+                        return true;
                     } else {
                         return false;
                     }
                 } else {
                     if (strpos($rule, 'required') === false) {
                             return false;
-                        } else {
-                            return true;
-                        }
+                    } else {
+                        return true;
                     }
+                }
             }
         }
         return false;
@@ -992,14 +985,13 @@ class Helper
 
                 return Crypt::decrypt($string);
             } catch (DecryptException $e) {
-                return 'Error Decrypting: '.$e->getMessage();
+                return 'Error Decrypting: ' . $e->getMessage();
             }
-            }
+        }
 
         return $string;
     }
     public static function formatStandardApiResponse($status, $payload = null, $messages = null)
-
     {
         $array['status'] = $status;
         $array['messages'] = $messages;
@@ -1055,7 +1047,7 @@ class Helper
 
             if ($type == 'datetime') {
                 $dt['datetime'] = $tmp_date->format('Y-m-d H:i:s');
-                $dt['formatted'] = $tmp_date->format($settings->date_display_format.' '.$settings->time_display_format);
+                $dt['formatted'] = $tmp_date->format($settings->date_display_format . ' ' . $settings->time_display_format);
             } else {
                 $dt['date'] = $tmp_date->format('Y-m-d');
                 $dt['formatted'] = $tmp_date->format($settings->date_display_format);
@@ -1066,12 +1058,10 @@ class Helper
             }
 
             return $dt['formatted'];
-
         } catch (\Exception $e) {
             Log::warning($e);
-            return $date.' (Invalid '.$type.' value.)';
+            return $date . ' (Invalid ' . $type . ' value.)';
         }
-
     }
 
     // Nicked from Drupal :)
@@ -1082,7 +1072,6 @@ class Helper
         static $max_size = -1;
 
         if ($max_size < 0) {
-
             // Start with post_max_size.
             $post_max_size = self::parse_size(ini_get('post_max_size'));
             if ($post_max_size > 0) {
@@ -1203,7 +1192,7 @@ class Helper
      * @param string $save_path path to a folder where the image should be saved
      * @return string path to uploaded image or false if something went wrong
      */
-    public static function processUploadedImage(String $image_data, String $save_path)
+    public static function processUploadedImage(string $image_data, string $save_path)
     {
         if ($image_data == null || $save_path == null) {
             return false;
@@ -1217,7 +1206,7 @@ class Helper
         // Start reading the image after the first comma, postceding the base64.
         $image = substr($image_data, strpos($image_data, ',') + 1);
 
-        $file_name = str_random(25).'.'.$extension;
+        $file_name = str_random(25) . '.' . $extension;
 
         $directory = public_path($save_path);
         // Check if the uploads directory exists.  If not, try to create it.
@@ -1225,7 +1214,7 @@ class Helper
             mkdir($directory, 0755, true);
         }
 
-        $path = public_path($save_path.$file_name);
+        $path = public_path($save_path . $file_name);
 
         try {
             Image::make($image)->resize(500, 500, function ($constraint) {
@@ -1250,28 +1239,17 @@ class Helper
      */
     public static function formatFilesizeUnits($bytes)
     {
-        if ($bytes >= 1073741824)
-        {
+        if ($bytes >= 1073741824) {
             $bytes = number_format($bytes / 1073741824, 2) . ' GB';
-        }
-        elseif ($bytes >= 1048576)
-        {
+        } elseif ($bytes >= 1048576) {
             $bytes = number_format($bytes / 1048576, 2) . ' MB';
-        }
-        elseif ($bytes >= 1024)
-        {
+        } elseif ($bytes >= 1024) {
             $bytes = number_format($bytes / 1024, 2) . ' KB';
-        }
-        elseif ($bytes > 1)
-        {
+        } elseif ($bytes > 1) {
             $bytes = $bytes . ' bytes';
-        }
-        elseif ($bytes == 1)
-        {
+        } elseif ($bytes == 1) {
             $bytes = $bytes . ' byte';
-        }
-        else
-        {
+        } else {
             $bytes = '0 bytes';
         }
 
@@ -1286,11 +1264,12 @@ class Helper
      *
      * @return string[]
      */
-    public static function SettingUrls(){
-        $settings=['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
+    public static function SettingUrls()
+    {
+        $settings = ['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
 
         return $settings;
-        }
+    }
 
 
     /**
@@ -1302,7 +1281,8 @@ class Helper
      *
      * @return string
      */
-    public static function iconTypeByItem($item) {
+    public static function iconTypeByItem($item)
+    {
 
         switch ($item) {
             case 'asset':
@@ -1327,7 +1307,6 @@ class Helper
                 return 'fas fa-user';
                 break;
         }
-
     }
 
 
@@ -1345,16 +1324,17 @@ class Helper
      * }
      * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff
      */
-    public static function isDemoMode() {
+    public static function isDemoMode()
+    {
         if (config('app.lock_passwords') === true) {
             return true;
             Log::debug('app locked!');
         }
-        
+
         return false;
     }
 
-  
+
     /**
      * Conversion between units of measurement
      *
@@ -1366,13 +1346,14 @@ class Helper
      * @param int    $round    Round the result to decimals (Default false - No rounding)
      * @return float
      */
-    public static function convertUnit($value, $srcUnit, $dstUnit, $round=false) {
+    public static function convertUnit($value, $srcUnit, $dstUnit, $round = false)
+    {
         $srcFactor = static::getUnitConversionFactor($srcUnit);
         $dstFactor = static::getUnitConversionFactor($dstUnit);
         $output = $value * $srcFactor / $dstFactor;
         return ($round !== false) ? round($output, $round) : $output;
     }
-  
+
     /**
      * Get conversion factor from unit of measurement to mm
      *
@@ -1381,7 +1362,8 @@ class Helper
      * @param string $unit  Unit of measurement
      * @return float
      */
-    public static function getUnitConversionFactor($unit) {
+    public static function getUnitConversionFactor($unit)
+    {
         switch (strtolower($unit)) {
             case 'mm':
                 return 1.0;
@@ -1409,7 +1391,8 @@ class Helper
      * I know it's gauche to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
      * it seemed pretty safe to do here. Don't you judge me.
      */
-    public static function showDemoModeFieldWarning() {
+    public static function showDemoModeFieldWarning()
+    {
         if (Helper::isDemoMode()) {
             return "<p class=\"text-warning\"><i class=\"fas fa-lock\"></i>" . trans('general.feature_disabled') . "</p>";
         }
@@ -1465,17 +1448,20 @@ class Helper
         return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
     }
 
-    public static function determineLanguageDirection() {
-        return in_array(app()->getLocale(),
+    public static function determineLanguageDirection()
+    {
+        return in_array(
+            app()->getLocale(),
             [
                 'ar-SA',
                 'fa-IR',
                 'he-IL'
-            ]) ? 'rtl' : 'ltr';
+            ]
+        ) ? 'rtl' : 'ltr';
     }
 
 
-    static public function getRedirectOption($request, $id, $table, $item_id = null)
+    public static function getRedirectOption($request, $id, $table, $item_id = null)
     {
 
         $redirect_option = Session::get('redirect_option');
@@ -1544,7 +1530,8 @@ class Helper
      * @param $new_company_id   in case of updating a location, this is the newly requested company_id
      * @return string []
      */
-    static public function test_locations_fmcs($artisan, $location_id = null, $new_company_id = null) {
+    public static function test_locations_fmcs($artisan, $location_id = null, $new_company_id = null)
+    {
         $mismatched = [];
 
         if ($location_id) {
@@ -1556,7 +1543,7 @@ class Helper
             $locations = Location::all();
         }
 
-        foreach($locations as $location) {
+        foreach ($locations as $location) {
             // in case of an update of a single location, use the newly requested company_id
             if ($new_company_id) {
                 $location_company = $new_company_id;
@@ -1587,7 +1574,7 @@ class Helper
             }
 
             foreach ($keywords_relation as $relation => $keywords) {
-                foreach($keywords as $keyword) {
+                foreach ($keywords as $keyword) {
                     if ($relation == 'many') {
                         $items = $location->{$keyword}->all();
                     } else {
@@ -1595,7 +1582,6 @@ class Helper
                     }
 
                     foreach ($items as $item) {
-
                         if ($item && $item->company_id != $location_company) {
                             $mismatched[] = [
                                     class_basename(get_class($item)),
@@ -1612,12 +1598,11 @@ class Helper
                                     $item->location->company->name ?? null,
                                     $location_company ?? null,
                                 ];
-
                         }
                     }
                 }
             }
         }
         return $mismatched;
-    }        
+    }
 }
