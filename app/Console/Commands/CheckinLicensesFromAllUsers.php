@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\ActionType;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
@@ -73,15 +74,18 @@ class CheckinLicensesFromAllUsers extends Command
             $this->info($seat->user->username.' has a license seat for '.$license->name);
             $seat->assigned_to = null;
 
-            if ($seat->save()) {
+            if ($seat->save()) { //FIXME: seat itself may _not_ actually be 'Loggable' - so I don't know.
 
                 // Override the email address so we don't notify on checkin
                 if (! $notify) {
-                    $seat->user->email = null;
+                    $seat->user->email = null; //FIXME - should this get hoisted?
                 }
 
                 // Log the checkin
-                $seat->logCheckin($seat->user, 'Checked in via cli tool');
+                $seat->setLogTarget($seat->user);
+                $seat->setLogNote('Checked in via cli tool');
+                $seat->logAndSaveIfNeeded(ActionType::CheckinFrom); //this is going to be a dual-save, do we want that?!
+//                $seat->logCheckin($seat->user, 'Checked in via cli tool');
             }
         }
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Consumables;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -90,7 +91,8 @@ class ConsumableCheckoutController extends Controller
         }
 
         // Update the consumable data
-        $consumable->assigned_to = e($request->input('assigned_to'));
+//        $consumable->assigned_to = e($request->input('assigned_to'));
+        $consumable->setLogTarget(User::find($request->input('assigned_to')));
 
         for ($i = 0; $i < $quantity; $i++){
         $consumable->users()->attach($consumable->id, [
@@ -101,7 +103,9 @@ class ConsumableCheckoutController extends Controller
         ]);
         }
 
-        $consumable->checkout_qty = $quantity;
+        $consumable->setLogQuantity($quantity);
+        $consumable->setLogNote($request->input('note'));
+        $consumable->logAndSaveIfNeeded(ActionType::Checkout);
         event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
 
         $request->request->add(['checkout_to_type' => 'user']);

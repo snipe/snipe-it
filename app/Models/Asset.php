@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
@@ -407,7 +408,10 @@ class Asset extends Depreciable
         $this->name = $name;
 
         $this->assignedTo()->associate($target); //THIS is causing the save?
+        $this->setLogTarget($target);
+        $this->setLogNote($note);
 
+        // FIXME - what to do with this? It's weird. I guess leave it?
         if ($location != null) {
             $this->location_id = $location;
         } else {
@@ -419,14 +423,13 @@ class Asset extends Depreciable
             }
         }
 
-        $originalValues = $this->getRawOriginal();
-
         // attempt to detect change in value if different from today's date
         if ($checkout_at && strpos($checkout_at, date('Y-m-d')) === false) {
-            $originalValues['action_date'] = date('Y-m-d H:i:s');
+            $this->setLogActionDate(date('Y-m-d H:i:s'));
         }
 
-        if ($this->saveQuietly()) { //THIS is the save that fires that's making the update FIXME - on checkout, this causes an update.
+        if ($this->logAndSaveIfNeeded(ActionType::Checkout)) {
+            // FIXME - we aren't doing any of this logic; should we?
             if (is_int($admin)) {
                 $checkedOutBy = User::findOrFail($admin);
             } elseif ($admin && get_class($admin) === \App\Models\User::class) {
@@ -434,7 +437,7 @@ class Asset extends Depreciable
             } else {
                 $checkedOutBy = auth()->user();
             }
-            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues)); //THIS is probably causing the checkout?
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
 
             $this->increment('checkout_counter', 1);
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ActionType;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\ComponentsTransformer;
@@ -285,7 +286,7 @@ class ComponentsController extends Controller
         if ($component->numRemaining() >= $request->get('assigned_qty')) {
 
             $asset = Asset::find($request->input('assigned_to'));
-            $component->assigned_to = $request->input('assigned_to');
+            $component->setLogTarget($asset); // I mean, sure?
 
             $component->assets()->attach($component->id, [
                 'component_id' => $component->id,
@@ -296,7 +297,11 @@ class ComponentsController extends Controller
                 'note' => $request->get('note'),
             ]);
 
-            $component->logCheckout($request->input('note'), $asset);
+            //FIXME - something here with location_id - maybe something for setLogLocation or something like that?
+            $component->setLogLocationOverride($asset->location);
+            $component->setLogNote($request->input('note'));
+            $component->setLogQuantity($request->get('assigned_qty'));
+            $component->logAndSaveIfNeeded(ActionType::Checkout);
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkout.success')));
         }
@@ -349,6 +354,12 @@ class ComponentsController extends Controller
             }
 
             $asset = Asset::find($component_assets->asset_id);
+
+            // the 'event()' below no longer does the logging; that needs to be done here.
+            $component->setLogTarget($asset);
+            //FIXME - problem with 'lcoation_id' apaparently?!
+            $component->setLogNote($request->input('note'));
+            $component->logAndSaveIfNeeded(ActionType::CheckinFrom);
 
             event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
 

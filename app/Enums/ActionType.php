@@ -13,4 +13,8 @@ enum ActionType: string {
     case Update = 'update';
     case Create = 'create';
     case Delete = 'delete';
+    case Uploaded = 'uploaded';
+    case NoteAdded = 'note added';
+    case Audit = 'audit';
+    case Checkout = 'checkout';
 }

@@ -28,7 +28,7 @@ class CheckoutConsumableMail extends Mailable
         $this->note = $note;
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
-        $this->qty = $consumable->checkout_qty;
+        $this->qty = $consumable->getLogQuantity();
 
         $this->settings = Setting::getSettings();
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Accessories;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\CheckInOutRequest;
@@ -71,10 +72,10 @@ class AccessoryCheckoutController extends Controller
         $this->authorize('checkout', $accessory);
 
         $target = $this->determineCheckoutTarget();
-        
-        $accessory->checkout_qty = $request->input('checkout_qty', 1);
-        
-        for ($i = 0; $i < $accessory->checkout_qty; $i++) {
+
+        $checkout_qty = $request->input('checkout_qty', 1);
+
+        for ($i = 0; $i < $checkout_qty; $i++) {
 
             $accessory_checkout = new AccessoryCheckout([
                 'accessory_id' => $accessory->id,
@@ -88,6 +89,10 @@ class AccessoryCheckoutController extends Controller
             $accessory_checkout->save();
         }
 
+        $accessory->setLogTarget($target);
+        $accessory->setLogNote($request->input('note'));
+        $accessory->setLogQuantity($checkout_qty);
+        $accessory->logAndSaveIfNeeded(ActionType::Checkout);
         event(new CheckoutableCheckedOut($accessory,  $target, auth()->user(), $request->input('note')));
 
         $request->request->add(['checkout_to_type' => request('checkout_to_type')]);

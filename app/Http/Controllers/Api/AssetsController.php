@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedIn;
 use App\Http\Requests\StoreAssetRequest;
 use App\Http\Requests\UpdateAssetRequest;
@@ -1137,33 +1138,10 @@ class AssetsController extends Controller
                 return response()->json(Helper::formatStandardApiResponse('error', null,  $asset->getErrors()));
             }
 
-
-            /**
-             * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
-             * which would trigger the Asset Observer and would log an asset *update* log entry (because the
-             * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
-             * the audit log entry we're creating through this controller.
-             *
-             * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
-             * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
-             * will bypass normal model-level validation that's usually handled at the observer)
-             *
-             * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
-             * which manually invokes Watson Validating to make sure the asset's model is valid.
-             *
-             * @see \App\Observers\AssetObserver::updating()
-             * @see \App\Models\Asset::save()
-             */
-
-             $asset->unsetEventDispatcher();
-
-
-            /**
-             * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
-             * We have to invoke this manually because of the unsetEventDispatcher() above.)
-             */
-            if ($asset->isValid() && $asset->save()) {
-                $asset->logAudit(request('note'), request('location_id'), null, $originalValues);
+            // this 'new' audit system logs the changes via log_meta
+            $asset->setLogNote(request('note'));
+            $asset->location_id = request('location_id'); //FIXME - is this changing the assets location? the action_log location? or what?
+            if ($asset->logAndSaveIfNeeded(ActionType::Audit)) {
                 return response()->json(Helper::formatStandardApiResponse('success', $payload, trans('admin/hardware/message.audit.success')));
             }
 

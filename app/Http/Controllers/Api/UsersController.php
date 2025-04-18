@@ -703,7 +703,7 @@ class UsersController extends Controller
                 $this->authorize('update', $user);
                 $user->two_factor_secret = null;
                 $user->two_factor_enrolled = 0;
-                $user->setLogMessage(ActionType::TwoFactorReset);
+                $user->setLogAction(ActionType::TwoFactorReset);
                 $user->save();
 
                 return response()->json(['message' => trans('admin/settings/general.two_factor_reset_success')], 200);

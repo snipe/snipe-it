@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -932,39 +933,12 @@ class AssetsController extends Controller
             return redirect()->back()->withInput()->withErrors($asset->getErrors());
         }
 
-        /**
-         * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
-         * which would trigger the Asset Observer and would log an asset *update* log entry (because the
-         * de-normed fields like next_audit_date on the asset itself will change on save()) *in addition* to
-         * the audit log entry we're creating through this controller.
-         *
-         * To prevent this double-logging (one for update and one for audit), we skip the observer and bypass
-         * that de-normed update log entry by using unsetEventDispatcher(), BUT invoking unsetEventDispatcher()
-         * will bypass normal model-level validation that's usually handled at the observer )
-         *
-         * We handle validation on the save() by checking if the asset is valid via the ->isValid() method,
-         * which manually invokes Watson Validating to make sure the asset's model is valid.
-         *
-         * @see \App\Observers\AssetObserver::updating()
-         * @see \App\Models\Asset::save()
-         */
-
-        $asset->unsetEventDispatcher();
-
-
-        /**
-         * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
-         * We have to invoke this manually because of the unsetEventDispatcher() above.)
-         */
-        if ($asset->isValid() && $asset->save()) {
-
-            $file_name = null;
-            // Create the image (if one was chosen.)
-            if ($request->hasFile('image')) {
-                $file_name = $request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('image'));
-            }
-
-            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name, $originalValues);
+        if ($request->hasFile('image')) {
+            $asset->setLogFile($request->handleFile('private_uploads/audits/', 'audit-' . $asset->id, $request->file('image')));
+        }
+        $asset->setLogNote($request->input('note'));
+        $asset->location_id = $request->input('location_id');
+        if ($asset->logAndSaveIfNeeded(ActionType::Audit)) {
             return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
 

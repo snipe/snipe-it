@@ -26,7 +26,7 @@ class CheckoutAccessoryMail extends Mailable
         $this->item = $accessory;
         $this->admin = $checkedOutBy;
         $this->note = $note;
-        $this->checkout_qty = $accessory->checkout_qty;
+        $this->checkout_qty = $accessory->getLogQuantity();
         $this->target = $checkedOutTo;
         $this->acceptance = $acceptance;
         $this->settings = Setting::getSettings();

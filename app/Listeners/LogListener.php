@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Enums\ActionType;
 use App\Events\AccessoryCheckedIn;
 use App\Events\AccessoryCheckedOut;
 use App\Events\AssetCheckedIn;
@@ -25,31 +26,6 @@ use Illuminate\Support\Facades\Log;
 
 class LogListener
 {
-    /**
-     * These onBlah methods are used by the subscribe() method further down in this file.
-     * This one creates an action_logs entry for the checkin
-     * @param CheckoutableCheckedIn $event
-     * @return void
-     *
-     */
-    public function onCheckoutableCheckedIn(CheckoutableCheckedIn $event)
-    {
-        $event->checkoutable->logCheckin($event->checkedOutTo, $event->note, $event->action_date, $event->originalValues);
-    }
-
-    /**
-     * These onBlah methods are used by the subscribe() method further down in this file.
-     * This one creates an action_logs entry for the checkout
-     *
-     * @param CheckoutableCheckedOut $event
-     * @return void
-     *
-     */
-    public function onCheckoutableCheckedOut(CheckoutableCheckedOut $event)
-    {
-        $event->checkoutable->logCheckout($event->note, $event->checkedOutTo, $event->checkoutable->last_checkout, $event->originalValues);
-    }
-
     /**
      * These onBlah methods are used by the subscribe() method further down in this file.
      * This creates the entry in the action_logs table for the accept/decline action
@@ -138,8 +114,6 @@ class LogListener
     public function subscribe($events)
     {
         $list = [
-            'CheckoutableCheckedIn',
-            'CheckoutableCheckedOut',
             'CheckoutAccepted',
             'CheckoutDeclined',
             'UserMerged',

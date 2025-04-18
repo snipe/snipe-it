@@ -10,54 +10,58 @@ use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Notifications\AuditNotification;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 trait Loggable
 {
     // an attribute for setting whether or not the item was imported
     public ?bool $imported = false;
-    private ?string $log_message = null;
-    private ?Model $item = null;
+    private ?string $log_action = null;
     private array $log_meta = [];
-    private ?Model $target = null;
-    private ?string $note = null;
+    private ?Model $log_target = null;
+    private ?string $log_note = null;
 
-    private ?Location $location_override = null;
+    private ?Location $log_location_override = null;
+    private ?string $log_filename = null;
+    private ?string $log_action_date = null;
+    private ?int $log_quantity = null;
 
     //public static array $hide_changes = [];
 
+    // FIXME - if we save() a non-dirty object, will it still fire the right events? If so this gets even simpler.
     public static function bootLoggable()
     {
         //these tiny methods just set up what the log message is going to be
         // it looks like 'restoring' fires *BEFORE* 'updating' - so we need to handle that
         static::restoring(function ($model) {
             \Log::error("Restor*ing* callback firing...");
-            $model->setLogMessage(ActionType::Restore);
+            $model->setLogAction(ActionType::Restore);
         });
 
         static::updating(function ($model) {
-            \Log::error("Updating is fired, current log message is: ".$model->log_message);
+            \Log::error("Updating is fired, current log message is: " . $model->log_action);
             // if we're doing a restore, this 'updating' hook fires *after* the restoring hook
-            // so we make sure not to overwrite the log_message
-            if (!$model->log_message) {
-                $model->setLogMessage(ActionType::Update);
+            // so we make sure not to overwrite the log_action
+            if (!$model->log_action) {
+                $model->setLogAction(ActionType::Update);
             }
         });
 
         static::creating(function ($model) {
-            $model->setLogMessage(ActionType::Create);
+            $model->setLogAction(ActionType::Create);
         });
 
         static::deleting(function ($model) { //TODO - is this only for 'hard' delete? Or soft?
-            \Log::error("DELETING TRIGGER HAS FIRED!!!!!!!!!!!!!!! for id: ".$model->id." old log_message was: ".$model->log_message);
+            \Log::error("DELETING TRIGGER HAS FIRED!!!!!!!!!!!!!!! for id: " . $model->id . " old log_action was: " . $model->log_action);
             if (self::class == \App\Models\User::class) { //FIXME - Janky AF!
                 $model->setLogTarget($model); //FIXME - this makes *NO* sense!!!!
             }
-            $model->setLogMessage(ActionType::Delete);
+            $model->setLogAction(ActionType::Delete);
         });
 
         //static::trashing(function ($model) { //TODO - is *this* the right one?
-        //    $model->setLogMessage(ActionType::Delete); // No, no it is very much not. there is 'trashed' but not 'trashING'
+        //    $model->setLogAction(ActionType::Delete); // No, no it is very much not. there is 'trashed' but not 'trashING'
         //});
 
         // THIS sets up the transaction, and gets the 'diff' between the original for the model,
@@ -88,13 +92,13 @@ trait Loggable
         // THIS is the whole enchilada, the MAIN thing that you've got to do to make things work.
         //if we've set everything up correctly, this should pretty much do everything we want, all in one place
         static::saved(function ($model) {
-            if (!$model->log_message && !$model->log_meta) {
+            if (!$model->log_action && !$model->log_meta) {
                 //nothing was changed, nothing was saved, nothing happened. So there should be no log message.
                 //FIXME if we do the transaction thing!!!!
                 \Log::error("LOG MESSAGE IS BLANK, ****AND**** log_meta is blank! Not sure what that means though...");
                 return;
             }
-            if (!$model->log_message) {
+            if (!$model->log_action) {
                 throw new \Exception("Log Message was unset, but log_meta *does* exist - it's: ".print_r($model->log_meta, true));
             }
             $model->logWithoutSave();
@@ -125,7 +129,7 @@ trait Loggable
     private function logWithoutSave(ActionType $log_action = null): bool
     {
         if ($log_action) {
-            $this->setLogMessage($log_action);
+            $this->setLogAction($log_action);
         }
         $logAction = new Actionlog();
         //$logAction->item_type = self::class; //FIXME - going to fail on Licenses (see other notes)
@@ -134,44 +138,77 @@ trait Loggable
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
         if ($this->imported) {
-            $logAction->setActionSource('importer');
+            \Log::error("FOUND SOMETHING THAT WAS IMPORTED --- ooh, how FANCY!");
+            $logAction->action_source = 'importer';
         }
         $logAction->log_meta = $this->log_meta ? json_encode($this->log_meta) : null;
-        if ($this->target) {
-            $logAction->target_type = $this->target::class;
-            $logAction->target_id = $this->target->id;
+        if ($this->log_target) {
+            $logAction->target_type = $this->log_target::class;
+            $logAction->target_id = $this->log_target->id;
         }
-        if ($this->note) {
-            $logAction->note = $this->note;
+        if ($this->log_note) {
+            \Log::error("FOUND LOG NOTE! " . $this->log_note);
+            $logAction->note = $this->log_note;
         }
-        if ($this->location_override) {
-            $logAction->location_id = $this->location->id;
+        if ($this->log_location_override) { // TODO - this is a weird feature and we shouldn't need it.
+            $logAction->location_id = $this->log_location_override->id;
+        }
+        if ($this->log_filename) {
+            $logAction->filename = $this->log_filename;
         }
 
-        \Log::error("Here is the logaction BEFORE we save it ($this->log_message)...".print_r($logAction->toArray(), true));
-        return $logAction->logaction($this->log_message);
+        \Log::error("Here is the logaction BEFORE we save it ($this->log_action)..." . print_r($logAction->toArray(), true));
+        $logAction->action_type = $this->log_action;
+        $logAction->remote_ip = request()->ip();
+        $logAction->user_agent = request()->header('User-Agent');
+        if ($this->log_action_date) {
+            $logAction->action_date = $this->log_action_date;
+        } else {
+            $logAction->action_date = Carbon::now();
+        }
+
+        //determine action source if we don't have one
+        if (!$logAction->action_source) {
+            if (((request()->header('content-type') && (request()->header('accept')) == 'application/json'))
+                && (starts_with(request()->header('authorization'), 'Bearer '))) {
+                // This is an API call
+
+                $logAction->action_source = 'api';
+            } else if (request()->filled('_token')) {
+                // This is probably NOT an API call
+                $logAction->action_source = 'gui';
+            } else {
+                $logAction->action_source = 'cli/unknown';
+            }
+        }
+
+        if ($logAction->save()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // EXPERIMENTAL - this 'feels' like the main interface we should be using, most of the time
     // if the object is dirty, save it and let the save hooks fire. If it's not, then just
     // enter the log.
-    public function logAndSaveIfNeeded(?ActionType $log_action = null)
+    public function logAndSaveIfNeeded(?ActionType $log_action = null): bool
     {
         if ($this->isDirty()) {
             if ($log_action) {
-                $this->setLogMessage($log_action);
+                $this->setLogAction($log_action);
             }
-            $this->save(); //save will do what you need
+            return $this->save(); //save will do what you need
         } else {
             //transact this? We won't have the 'saving'/'saved' entries - but it generally is just one insert anyway, so it either works or doesn't.
-            $this->logWithoutSave($log_action);
+            return $this->logWithoutSave($log_action);
         }
     }
 
-    // setter functions for private variables
-    public function setLogMessage(ActionType $message)
+    // PUBLIC SETTER METHODS for private values
+    public function setLogAction(ActionType $message)
     {
-        $this->log_message = $message->value;
+        $this->log_action = $message->value;
     }
 
     public function setLogMeta(array $changed)
@@ -181,12 +218,44 @@ trait Loggable
 
     public function setLogTarget(Model $target)
     {
-        $this->target = $target;
+        $this->log_target = $target;
     }
 
-    public function setLogNote(string $note)
+    public function setLogNote(?string $note)
     {
-        $this->note = $note;
+        $this->log_note = $note;
+    }
+
+    public function setLogFilename(?string $filename)
+    {
+        $this->log_filename = $filename;
+    }
+
+    public function setLogActionDate(?string $date)
+    {
+        $this->log_action_date = $date;
+    }
+
+    public function setLogQuantity(?int $quantity)
+    {
+        $this->log_quantity = $quantity;
+    }
+
+    public function setLogLocationOverride(?Location $location)
+    {
+        $this->log_location_override = $location;
+    }
+
+    // PUBLIC GETTERS WHEN NEEDED
+
+    public function getLogTarget()
+    {
+        return $this->log_target;
+    }
+
+    public function getLogQuantity()
+    {
+        return $this->log_quantity;
     }
 
     /**
@@ -202,109 +271,6 @@ trait Loggable
     public function setImported(bool $bool): void
     {
         $this->imported = $bool;
-    }
-
-    /*
-     * logCheckout seems mostly duplicative with what we already have
-     *
-     * The finding differences thing, we already do that, elsewhere.
-     *
-     * The target stuff, I _think_ we may already have, elsewhere?
-     * The stuff about location, I dunno - I ran into trouble with that before. Maybe
-     * that goes into the 'thingee' in question. I don't know that 'loggable' should
-     * be so intimately aware of individual classes and stuff -
-     *
-     * But the action date, notes, all that stuff - all seems pretty innocuous to me.
-     * That's all stuff we can handle with our various little 'setters', above.
-     */
-
-    /**
-     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
-     * @since [v3.4]
-     * @return \App\Models\Actionlog
-     */
-    public function logCheckout($note, $target, $action_date = null, $originalValues = [])
-    {
-
-        $log = new Actionlog;
-
-        $fields_array = [];
-
-        $log = $this->determineLogItemType($log);
-        if (auth()->user()) {
-            $log->created_by = auth()->id();
-        }
-
-        if (! isset($target)) {
-            throw new \Exception('All checkout logs require a target.');
-
-            return;
-        }
-
-        if (! isset($target->id)) {
-            throw new \Exception('That target seems invalid (no target ID available).');
-
-            return;
-        }
-
-        $log->target_type = get_class($target);
-        $log->target_id = $target->id;
-
-
-        // Figure out what the target is
-        if ($log->target_type == Location::class) {
-            $log->location_id = $target->id;
-        } elseif ($log->target_type == Asset::class) {
-            $log->location_id = $target->location_id;
-        } else {
-            $log->location_id = $target->location_id;
-        }
-
-        if (static::class == Asset::class) {
-            if ($asset = Asset::find($log->item_id)) {
-
-                // add the custom fields that were changed
-                if ($asset->model->fieldset) {
-                    $fields_array = [];
-                    foreach ($asset->model->fieldset->fields as $field) {
-                        if ($field->display_checkout == 1) { //FIXME - asset-checkout-specific logic
-                            $fields_array[$field->db_column] = $asset->{$field->db_column};
-                        }
-                    }
-                }
-            }
-        }
-
-        $log->note = $note;
-        $log->action_date = $action_date;
-
-        if (! $log->action_date) {
-            $log->action_date = date('Y-m-d H:i:s');
-        }
-
-        $changed = [];
-        $array_to_flip = array_keys($fields_array);
-        $array_to_flip = array_merge($array_to_flip, ['action_date','name','status_id','location_id','expected_checkin']);
-        $originalValues = array_intersect_key($originalValues, array_flip($array_to_flip));
-
-
-        foreach ($originalValues as $key => $value) {
-            if ($key == 'action_date' && $value != $action_date) {
-                $changed[$key]['old'] = $value;
-                $changed[$key]['new'] = is_string($action_date) ? $action_date : $action_date->format('Y-m-d H:i:s');
-            } elseif ($value != $this->getAttributes()[$key]) {
-                $changed[$key]['old'] = $value;
-                $changed[$key]['new'] = $this->getAttributes()[$key];
-            }
-        }
-
-        if (!empty($changed)){
-            $log->log_meta = json_encode($changed);
-        }
-
-        $log->logaction('checkout');
-
-        return $log;
     }
 
     /**
@@ -329,192 +295,4 @@ trait Loggable
         return $log;
     }
 
-    /**
-     * So for logCheckin, this is more duplication - the same logic
-     * for finding differences, we have that here. There's some
-     * target-setting here, which maybe could go into the controller
-     * or directly into the Model that is implementing this trait?
-     * I'm not exactly sure yet.
-     *
-     */
-
-    /**
-     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
-     * @since [v3.4]
-     * @return \App\Models\Actionlog
-     */
-    public function logCheckin($target, $note, $action_date = null, $originalValues = [])
-    {
-        $log = new Actionlog;
-
-        $fields_array = [];
-
-        if($target != null){
-            $log->target_type = get_class($target);
-            $log->target_id = $target->id;
-
-        }
-
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
-            $log->item_id = $this->license_id;
-        } else {
-            $log->item_type = static::class;
-            $log->item_id = $this->id;
-
-            if (static::class == Asset::class) {
-                if ($asset = Asset::find($log->item_id)) {
-                    $asset->increment('checkin_counter', 1); //FIXME - this might go directly into the checkin method on the asset?
-
-                    // add the custom fields that were changed
-                    if ($asset->model->fieldset) {
-                        $fields_array = [];
-                        foreach ($asset->model->fieldset->fields as $field) {
-                            if ($field->display_checkin == 1) {
-                                $fields_array[$field->db_column] = $asset->{$field->db_column};
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        $log->location_id = null;
-        $log->note = $note;
-        $log->action_date = $action_date;
-
-        if (! $log->action_date) {
-            $log->action_date = date('Y-m-d H:i:s');
-        }
-
-        if (auth()->user()) {
-            $log->created_by = auth()->id();
-        }
-
-        $changed = [];
-
-        $array_to_flip = array_keys($fields_array);
-        $array_to_flip = array_merge($array_to_flip, ['action_date','name','status_id','location_id','expected_checkin']);
-
-        $originalValues = array_intersect_key($originalValues, array_flip($array_to_flip));
-
-        foreach ($originalValues as $key => $value) {
-
-            if ($key == 'action_date' && $value != $action_date) {
-                $changed[$key]['old'] = $value;
-                $changed[$key]['new'] = is_string($action_date) ? $action_date : $action_date->format('Y-m-d H:i:s');
-            } elseif ($value != $this->getAttributes()[$key]) {
-                $changed[$key]['old'] = $value;
-                $changed[$key]['new'] = $this->getAttributes()[$key];
-            }
-        }
-
-        if (!empty($changed)){
-            $log->log_meta = json_encode($changed);
-        }
-
-        $log->logaction('checkin from');
-
-        return $log;
-    }
-
-    /**
-     * @author  A. Gianotto <snipe@snipe.net>
-     * @since [v4.0]
-     * @return \App\Models\Actionlog
-     */
-    public function logAudit($note, $location_id, $filename = null)
-    {
-        $log = new Actionlog;
-        $location = Location::find($location_id);
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
-            $log->item_id = $this->license_id;
-        } else {
-            $log->item_type = static::class;
-            $log->item_id = $this->id;
-        }
-        $log->location_id = ($location_id) ? $location_id : null;
-        $log->note = $note;
-        $log->created_by = auth()->id();
-        $log->filename = $filename;
-        $log->logaction('audit');
-
-        $params = [
-            'item' => $log->item,
-            'filename' => $log->filename,
-            'admin' => $log->adminuser,
-            'location' => ($location) ? $location->name : '',
-            'note' => $note,
-        ];
-        Setting::getSettings()->notify(new AuditNotification($params));
-
-        return $log;
-    }
-
-    /**
-     * This one, too, seems a little 'extra' - we get most of this for free, don't we?
-     * Wow, and it's not even used. Huh.
-     *
-     * Do note that it does the same kind of item_type 'juggle' as seen elsewhere - I think
-     * that's all that's "interesting" about this
-     *
-     */
-
-    /**
-     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
-     * @since [v3.5]
-     * @return \App\Models\Actionlog
-     */
-    public function logCreate($note = null)
-    {
-        $created_by = -1;
-        if (auth()->user()) {
-            $created_by = auth()->id();
-        }
-        $log = new Actionlog;
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
-            $log->item_id = $this->license_id;
-        } else {
-            $log->item_type = static::class;
-            $log->item_id = $this->id;
-        }
-        $log->location_id = null;
-        $log->note = $note;
-        $log->created_by = $created_by;
-        $log->logaction('create');
-        $log->save();
-
-        return $log;
-    }
-
-    /**
-     * This does the item-type juggle, and sets a filename. Can be replaced I think.
-     */
-
-    /**
-     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
-     * @since [v3.4]
-     * @return \App\Models\Actionlog
-     */
-    public function logUpload($filename, $note)
-    {
-        $log = new Actionlog;
-        if (static::class == LicenseSeat::class) {
-            $log->item_type = License::class;
-            $log->item_id = $this->license_id;
-        } else {
-            $log->item_type = static::class;
-            $log->item_id = $this->id;
-        }
-        $log->created_by = auth()->id();
-        $log->note = $note;
-        $log->target_id = null;
-        $log->created_at = date('Y-m-d H:i:s');
-        $log->filename = $filename;
-        $log->logaction('uploaded');
-
-        return $log;
-    }
 }

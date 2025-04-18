@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Accessories;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
@@ -47,7 +48,9 @@ class AccessoriesFilesController extends Controller
 
                     $file_name = $request->handleFile('private_uploads/accessories/', 'accessory-'.$accessory->id, $file);
                     //Log the upload to the log
-                    $accessory->logUpload($file_name, e($request->input('notes')));
+                    $accessory->setLogFilename($file_name);
+                    $accessory->setLogNote(e($request->input('notes')));
+                    $accessory->logAndSaveIfNeeded(ActionType::Uploaded);
                 }
 
 

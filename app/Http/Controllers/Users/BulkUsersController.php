@@ -357,7 +357,7 @@ class BulkUsersController extends Controller
             //$logAction->target_id = $item->assigned_to;
             //$logAction->target_type = User::class;
             $real_item->setLogNote('Bulk checkin items');
-            $real_item->setLogMessage(ActionType::CheckinFrom);
+            $real_item->setLogAction(ActionType::CheckinFrom);
             $real_item->logAndSaveIfNeeded(ActionType::CheckinFrom);
         }
     }
