@@ -23,6 +23,8 @@ class UpdateLocationsTest extends TestCase
             ->patchJson(route('api.locations.update', $location), [
                 'name' => 'Test Updated Location',
                 'notes' => 'Test Updated Note',
+                'latitude' => '38.7532',
+                'longitude' => '-77.1969'
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -32,5 +34,7 @@ class UpdateLocationsTest extends TestCase
         $location->refresh();
         $this->assertEquals('Test Updated Location', $location->name, 'Name was not updated');
         $this->assertEquals('Test Updated Note', $location->notes, 'Note was not updated');
+        $this->assertEquals(38.7532, $location->latitude, 'Latitude was not updated');
+        $this->assertEquals(-77.1969, $location->longitude, 'Longitude was not updated');
     }
 }

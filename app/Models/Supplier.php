@@ -12,6 +12,9 @@ class Supplier extends SnipeModel
 {
     use HasFactory;
     use SoftDeletes;
+    use ValidatingTrait;
+    use UniqueUndeletedTrait;
+    use Searchable;
 
     protected $table = 'suppliers';
 
@@ -29,6 +32,8 @@ class Supplier extends SnipeModel
         'country'            => 'min:2|max:191|nullable',
         'zip'               => 'max:10|nullable',
         'url'               => 'sometimes|nullable|string|max:250',
+        'latitude' => 'numeric|nullable|min:-90|max:90',
+        'longitude' => 'numeric|nullable|min:-180|max:180'
     ];
 
     /**
@@ -39,9 +44,6 @@ class Supplier extends SnipeModel
      * @var bool
      */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
-    use UniqueUndeletedTrait;
-    use Searchable;
 
     /**
      * The attributes that should be included when searching the model.
@@ -62,7 +64,23 @@ class Supplier extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'address2', 'city', 'state', 'country', 'zip', 'phone', 'fax', 'email', 'contact', 'url', 'notes'];
+    protected $fillable = [
+        'name',
+        'address',
+        'address2',
+        'city',
+        'state',
+        'country',
+        'zip',
+        'phone',
+        'fax',
+        'email',
+        'contact',
+        'url',
+        'notes',
+        'latitude',
+        'longitude'
+    ];
 
     /**
      * Eager load counts
@@ -78,7 +96,7 @@ class Supplier extends SnipeModel
     {
         return $this->hasMany(Asset::class)->whereNull('deleted_at')->selectRaw('supplier_id, count(*) as count')->groupBy('supplier_id');
     }
-    
+
 
     /**
      * Establishes the supplier -> assets relationship
@@ -191,8 +209,8 @@ class Supplier extends SnipeModel
      */
     public function addhttp($url)
     {
-        if (($url!='') && (! preg_match('~^(?:f|ht)tps?://~i', $url))) {
-            $url = 'http://'.$url;
+        if (($url != '') && (! preg_match('~^(?:f|ht)tps?://~i', $url))) {
+            $url = 'http://' . $url;
         }
 
         return $url;

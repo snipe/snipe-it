@@ -47,3 +47,31 @@
         {!! $errors->first('zip', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
     </div>
 </div>
+
+<div class="form-group {{ ($errors->has('latitude') || $errors->has('longitude')) ? ' has-error' : '' }}">
+    <label for="latitude" class="col-md-3 control-label" maxlength="10">{{ trans('general.coordinates') }}</label>
+    <div class="col-md-2">
+        <input class="form-control" name="latitude" type="number" min="-90" max="90" placeholder="0.00000" pattern="-?\d{1,3}\.\d+" id="latitude" value="{{ old('latitude', $item->latitude) }}">
+        {!! $errors->first('latitude', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+    </div>
+    <div class="col-md-2">
+        <input class="form-control" name="longitude" type="number" min="-180" max="180" placeholder="0.00000" pattern="-?\d{1,3}\.\d+" id="longitude" value="{{ old('longitude', $item->longitude) }}">
+        {!! $errors->first('longitude', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+    </div>
+    <div class="col-md-1">
+      <a href="javascript:getCurrentLocation()" title="{{ trans('general.my_location') }}"><i class="fas fa-globe" aria-hidden="true"></i></a>
+    </div>
+</div>
+<script type="text/javascript">
+function getCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(pos) {
+      $('#latitude').val(pos.coords.latitude);
+      $('#longitude').val(pos.coords.longitude);
+    });
+  } else {
+    console.log("Geolocation is not supported by this browser.");
+  }
+}
+</script>
+

@@ -20,10 +20,13 @@ class Location extends SnipeModel
 {
     use HasFactory;
     use CompanyableTrait;
-
-    protected $presenter = \App\Presenters\LocationPresenter::class;
     use Presentable;
     use SoftDeletes;
+    use ValidatingTrait;
+    use UniqueUndeletedTrait;
+    use Searchable;
+
+    protected $presenter = \App\Presenters\LocationPresenter::class;
 
     protected $table = 'locations';
     protected $rules = [
@@ -37,6 +40,8 @@ class Location extends SnipeModel
         'manager_id'    => 'exists:users,id|nullable',
         'parent_id'     => 'nullable|exists:locations,id|non_circular:locations,id',
         'company_id'    => 'integer|nullable|exists:companies,id',
+        'latitude'      => 'numeric|nullable|min:-90|max:90',
+        'longitude'     => 'numeric|nullable|min:-180|max:180'
     ];
 
     protected $casts = [
@@ -53,8 +58,6 @@ class Location extends SnipeModel
      * @var bool
      */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
-    use UniqueUndeletedTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -78,10 +81,10 @@ class Location extends SnipeModel
         'image',
         'company_id',
         'notes',
+        'latitude',
+        'longitude'
     ];
     protected $hidden = ['user_id'];
-
-    use Searchable;
 
     /**
      * The attributes that should be included when searching the model.
@@ -305,12 +308,12 @@ class Location extends SnipeModel
         }
 
         foreach ($locations_with_children[$parent_id] as $location) {
-            $location->use_text = $prefix.' '.$location->name;
-            $location->use_image = ($location->image) ? config('app.url').'/uploads/locations/'.$location->image : null;
+            $location->use_text = $prefix . ' ' . $location->name;
+            $location->use_image = ($location->image) ? config('app.url') . '/uploads/locations/' . $location->image : null;
             $results[] = $location;
             //now append the children. (if we have any)
             if (array_key_exists($location->id, $locations_with_children)) {
-                $results = array_merge($results, self::indenter($locations_with_children, $location->id, $prefix.'--'));
+                $results = array_merge($results, self::indenter($locations_with_children, $location->id, $prefix . '--'));
             }
         }
 
