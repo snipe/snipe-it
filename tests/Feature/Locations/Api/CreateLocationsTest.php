@@ -23,6 +23,8 @@ class CreateLocationsTest extends TestCase
             ->postJson(route('api.locations.store'), [
                 'name' => 'Test Location',
                 'notes' => 'Test Note',
+                'latitude' => '38.7532',
+                'longitude' => '-77.1969'
             ])
             ->assertOk()
             ->assertStatusMessageIs('success')
@@ -31,9 +33,11 @@ class CreateLocationsTest extends TestCase
 
         $this->assertTrue(Location::where('name', 'Test Location')->exists());
 
-        $department = Location::find($response['payload']['id']);
-        $this->assertEquals('Test Location', $department->name);
-        $this->assertEquals('Test Note', $department->notes);
+        $location = Location::find($response['payload']['id']);
+        $this->assertEquals('Test Location', $location->name);
+        $this->assertEquals('Test Note', $location->notes);
+        $this->assertEquals(38.7532, $location->latitude);
+        $this->assertEquals(-77.1969, $location->longitude);
     }
 
     public function testCannotCreateNewLocationsWithTheSameName()
