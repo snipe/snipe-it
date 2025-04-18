@@ -6,7 +6,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Supplier;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
-use \Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\View;
 
 /**
  * This controller handles all actions related to Suppliers for
@@ -35,7 +35,7 @@ class SuppliersController extends Controller
     public function create() : View
     {
         $this->authorize('create', Supplier::class);
-        return view('suppliers/edit')->with('item', new Supplier);
+        return view('suppliers/edit')->with('item', new Supplier());
     }
 
     /**
@@ -47,7 +47,7 @@ class SuppliersController extends Controller
     {
         $this->authorize('create', Supplier::class);
         // Create a new supplier
-        $supplier = new Supplier;
+        $supplier = new Supplier();
         // Save the location data
         $supplier->name = request('name');
         $supplier->address = request('address');
@@ -55,9 +55,9 @@ class SuppliersController extends Controller
         $supplier->city = request('city');
         $supplier->state = request('state');
         $supplier->country = request('country');
-	$supplier->zip = request('zip');
-	$supplier->latitude = request('latitude');
-	$supplier->longitude = request('longitude');
+        $supplier->zip = request('zip');
+        $supplier->latitude = request('latitude');
+        $supplier->longitude = request('longitude');
         $supplier->contact = request('contact');
         $supplier->phone = request('phone');
         $supplier->fax = request('fax');
@@ -82,7 +82,7 @@ class SuppliersController extends Controller
     public function edit(Supplier $supplier) : View | RedirectResponse
     {
         $this->authorize('update', Supplier::class);
-        return view('suppliers/edit')->with('item',  $supplier);
+        return view('suppliers/edit')->with('item', $supplier);
     }
 
     /**
@@ -100,9 +100,9 @@ class SuppliersController extends Controller
         $supplier->city = request('city');
         $supplier->state = request('state');
         $supplier->country = request('country');
-	$supplier->zip = request('zip');
-	$supplier->latitude = request('latitude');
-	$supplier->longitude = request('longitude');
+        $supplier->zip = request('zip');
+        $supplier->latitude = request('latitude');
+        $supplier->longitude = request('longitude');
         $supplier->contact = request('contact');
         $supplier->phone = request('phone');
         $supplier->fax = request('fax');
@@ -144,7 +144,8 @@ class SuppliersController extends Controller
 
         $supplier->delete();
 
-        return redirect()->route('suppliers.index')->with('success',
+        return redirect()->route('suppliers.index')->with(
+            'success',
             trans('admin/suppliers/message.delete.success')
         );
     }
@@ -159,6 +160,5 @@ class SuppliersController extends Controller
     {
         $this->authorize('view', Supplier::class);
         return view('suppliers/view', compact('supplier'));
-
     }
 }
