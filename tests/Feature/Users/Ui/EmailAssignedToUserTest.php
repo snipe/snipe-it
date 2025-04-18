@@ -34,7 +34,8 @@ class EmailAssignedToUserTest extends TestCase
             ->assertStatus(302);
 
         Notification::assertSentTo(
-            [$user], CurrentInventory::class
+            [$user],
+            CurrentInventory::class
         );
     }
 }
