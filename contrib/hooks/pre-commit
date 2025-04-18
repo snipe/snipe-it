@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+FILES=$(git diff --cached --name-only --diff-filter=ACMR | grep ".php")
+
+if ! [ -z "${FILES}" ]; then
+    codespell $FILES
+fi
