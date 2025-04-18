@@ -14,7 +14,9 @@ use TCPDF;
 
 class Label implements View
 {
-    use Macroable { __call as macroCall; }
+    use Macroable {
+        __call as macroCall;
+    }
 
     protected const NAME = 'label';
 
@@ -25,7 +27,8 @@ class Label implements View
      */
     protected $data;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->data = new Collection();
     }
 
@@ -96,15 +99,14 @@ class Label implements View
                 }
 
                 if ($template->getSupportLogo()) {
-
                     $logo = null;
 
                     // Should we use the assets assigned company logo? (A.K.A. "Is `Labels > Use Asset Logo` enabled?"), and do we have a company logo?
-                    if ($settings->label2_asset_logo && $asset->company && $asset->company->image!='') {
-                        $logo = Storage::disk('public')->path('companies/'.e($asset->company->image));
+                    if ($settings->label2_asset_logo && $asset->company && $asset->company->image != '') {
+                        $logo = Storage::disk('public')->path('companies/' . e($asset->company->image));
                     } elseif (!empty($settings->label_logo)) {
                         // Use the general site label logo, if available
-                        $logo = Storage::disk('public')->path('/'.e($settings->label_logo));
+                        $logo = Storage::disk('public')->path('/' . e($settings->label_logo));
                     }
 
                     if (!empty($logo)) {
@@ -113,31 +115,31 @@ class Label implements View
                 }
 
 
-                    if ($template->getSupport1DBarcode()) {
-                        $barcode1DType = $settings->label2_1d_type;
-                        if ($barcode1DType != 'none') {
-                            $assetData->put('barcode1d', (object)[
-                                'type' => $barcode1DType,
-                                'content' => $asset->asset_tag,
-                            ]);
-                        }
+                if ($template->getSupport1DBarcode()) {
+                    $barcode1DType = $settings->label2_1d_type;
+                    if ($barcode1DType != 'none') {
+                        $assetData->put('barcode1d', (object)[
+                            'type' => $barcode1DType,
+                            'content' => $asset->asset_tag,
+                        ]);
                     }
-              
-            if ($template->getSupport2DBarcode()) {
+                }
+
+                if ($template->getSupport2DBarcode()) {
                     $barcode2DType = $settings->label2_2d_type;
-                if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
+                    if (($barcode2DType != 'none') && (!is_null($barcode2DType))) {
                         switch ($settings->label2_2d_target) {
-                            case 'ht_tag': 
-                                $barcode2DTarget = route('ht/assetTag', $asset->asset_tag); 
+                            case 'ht_tag':
+                                $barcode2DTarget = route('ht/assetTag', $asset->asset_tag);
                                 break;
-                            case 'plain_asset_id': 
-                                $barcode2DTarget = (string) $asset->id; 
+                            case 'plain_asset_id':
+                                $barcode2DTarget = (string) $asset->id;
                                 break;
-                            case 'plain_asset_tag': 
-                                $barcode2DTarget = $asset->asset_tag; 
+                            case 'plain_asset_tag':
+                                $barcode2DTarget = $asset->asset_tag;
                                 break;
-                            case 'plain_serial_number': 
-                                $barcode2DTarget = $asset->serial; 
+                            case 'plain_serial_number':
+                                $barcode2DTarget = $asset->serial;
                                 break;
                             case 'location':
                                 $barcode2DTarget = route('locations.show', $asset->location_id);
@@ -146,18 +148,18 @@ class Label implements View
                             default:
                                 $barcode2DTarget = route('hardware.show', $asset);
                                 break;
-                            }
+                        }
                             $assetData->put('barcode2d', (object)[
                                 'type' => $barcode2DType,
                                 'content' => $barcode2DTarget,
                             ]);
-                        }
                     }
+                }
 
                 $fields = $fieldDefinitions
                     ->map(fn($field) => $field->toArray($asset))
                     ->filter(fn($field) => $field != null)
-                    ->reduce(function($myFields, $field) {
+                    ->reduce(function ($myFields, $field) {
                         // Remove Duplicates
                         $toAdd = $field
                             ->filter(fn($o) => !$myFields->contains('dataSource', $o['dataSource']))
@@ -195,13 +197,13 @@ class Label implements View
 
                 return $assetData;
             });
-        
+
         if ($template instanceof Sheet) {
             $template->setLabelIndexOffset($offset ?? 0);
         }
         $template->writeAll($pdf, $data);
 
-        $filename = $assets->count() > 1 ? 'assets.pdf' : $assets->first()->asset_tag.'.pdf';
+        $filename = $assets->count() > 1 ? 'assets.pdf' : $assets->first()->asset_tag . '.pdf';
         $pdf->Output($filename, 'I');
     }
 
@@ -217,7 +219,7 @@ class Label implements View
         $this->data->put($key, $value);
         return $this;
     }
-    
+
     /**
      * Get the array of view data.
      *
@@ -247,5 +249,4 @@ class Label implements View
     {
         return self::NAME;
     }
-
 }
