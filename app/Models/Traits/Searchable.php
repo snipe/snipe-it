@@ -90,13 +90,13 @@ trait Searchable
                  * @todo  This does the job, but is inelegant and fragile
                  */
                 if (! $firstConditionAdded) {
-                    $query = $query->where($table.'.'.$column, 'LIKE', '%'.$term.'%');
+                    $query = $query->where($table . '.' . $column, 'LIKE', '%' . $term . '%');
 
                     $firstConditionAdded = true;
                     continue;
                 }
 
-                $query = $query->orWhere($table.'.'.$column, 'LIKE', '%'.$term.'%');
+                $query = $query->orWhere($table . '.' . $column, 'LIKE', '%' . $term . '%');
             }
         }
 
@@ -124,7 +124,7 @@ trait Searchable
 
         foreach ($customFields as $field) {
             foreach ($terms as $term) {
-                $query->orWhere($this->getTable().'.'.$field->db_column_name(), 'LIKE', '%'.$term.'%');
+                $query->orWhere($this->getTable() . '.' . $field->db_column_name(), 'LIKE', '%' . $term . '%');
             }
         }
 
@@ -155,23 +155,23 @@ trait Searchable
                 foreach ($columns as $column) {
                     foreach ($terms as $term) {
                         if (! $firstConditionAdded) {
-                            $query->where($table.'.'.$column, 'LIKE', '%'.$term.'%');
+                            $query->where($table . '.' . $column, 'LIKE', '%' . $term . '%');
                             $firstConditionAdded = true;
                             continue;
                         }
 
-                        $query->orWhere($table.'.'.$column, 'LIKE', '%'.$term.'%');
+                        $query->orWhere($table . '.' . $column, 'LIKE', '%' . $term . '%');
                     }
                 }
                 // I put this here because I only want to add the concat one time in the end of the user relation search
-                if($relation == 'user') {
+                if ($relation == 'user') {
                     $query->orWhereRaw(
-                            $this->buildMultipleColumnSearch([
+                        $this->buildMultipleColumnSearch([
                                 'users.first_name',
                                 'users.last_name',
                             ]),
-                            ["%{$term}%"]
-                        );
+                        ["%{$term}%"]
+                    );
                 }
             });
         }
