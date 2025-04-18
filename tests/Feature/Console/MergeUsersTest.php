@@ -10,7 +10,6 @@ use App\Models\User;
 use App\Models\Actionlog;
 use Tests\TestCase;
 
-
 class MergeUsersTest extends TestCase
 {
     public function testAssetsAreTransferredOnUserMerge()
@@ -25,7 +24,6 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(6, $user_to_merge_into->refresh()->assets->count());
         $this->assertEquals(0, $user1->refresh()->assets->count());
-
     }
 
     public function testLicensesAreTransferredOnUserMerge(): void
@@ -42,7 +40,6 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(6, $user_to_merge_into->refresh()->licenses->count());
         $this->assertEquals(0, $user1->refresh()->licenses->count());
-
     }
 
     public function testAccessoriesTransferredOnUserMerge(): void
@@ -59,7 +56,6 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(6, $user_to_merge_into->refresh()->accessories->count());
         $this->assertEquals(0, $user1->refresh()->accessories->count());
-
     }
 
     public function testConsumablesTransferredOnUserMerge(): void
@@ -76,7 +72,6 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(6, $user_to_merge_into->refresh()->consumables->count());
         $this->assertEquals(0, $user1->refresh()->consumables->count());
-
     }
 
     public function testFilesAreTransferredOnUserMerge(): void
@@ -93,7 +88,6 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(6, $user_to_merge_into->refresh()->uploads->count());
         $this->assertEquals(0, $user1->refresh()->uploads->count());
-
     }
 
     public function testAcceptancesAreTransferredOnUserMerge(): void
@@ -110,7 +104,6 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(6, $user_to_merge_into->refresh()->acceptances->count());
         $this->assertEquals(0, $user1->refresh()->acceptances->count());
-
     }
 
     public function testUserUpdateHistoryIsTransferredOnUserMerge(): void
@@ -128,8 +121,5 @@ class MergeUsersTest extends TestCase
         // This needs to be more than the otherwise expected because the merge action itself is logged for the two merging users
         $this->assertEquals(7, $user_to_merge_into->refresh()->userlog->count());
         $this->assertEquals(1, $user1->refresh()->userlog->count());
-
     }
-
-
 }
