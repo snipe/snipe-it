@@ -28,7 +28,7 @@ class Supplier extends SnipeModel
         'state'              => 'min:2|max:191|nullable',
         'country'            => 'min:2|max:191|nullable',
         'zip'               => 'max:10|nullable',
-	'url'               => 'sometimes|nullable|string|max:250',
+        'url'               => 'sometimes|nullable|string|max:250',
         'latitude' => 'float|nullable|min:-90|max:90',
         'longitude' => 'float|nullable|min:-180|max:180'
     ];
@@ -64,7 +64,23 @@ class Supplier extends SnipeModel
      *
      * @var array
      */
-    protected $fillable = ['name', 'address', 'address2', 'city', 'state', 'country', 'zip', 'phone', 'fax', 'email', 'contact', 'url', 'notes'];
+    protected $fillable = [
+        'name',
+        'address',
+        'address2',
+        'city',
+        'state',
+        'country',
+        'zip',
+        'phone',
+        'fax',
+        'email',
+        'contact',
+        'url',
+        'notes',
+        'latitude',
+        'longitude'
+    ];
 
     /**
      * Eager load counts

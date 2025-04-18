@@ -80,6 +80,8 @@ class Location extends SnipeModel
         'image',
         'company_id',
         'notes',
+        'latitude',
+        'longitude'
     ];
     protected $hidden = ['user_id'];
 
