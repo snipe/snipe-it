@@ -36,10 +36,9 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
         $this->fireCheckInEvent($asset, $user);
 
-        Mail::assertSent(CheckinAssetMail::class, function($mail) use ($user) {
+        Mail::assertSent(CheckinAssetMail::class, function ($mail) use ($user) {
                 return $mail->hasTo($user->email);
         });
-
     }
 
     public function testCheckInEmailNotSentToUserIfSettingDisabled()
@@ -56,7 +55,6 @@ class EmailNotificationsUponCheckinTest extends TestCase
         ]);
 
         foreach ($checkoutables as $checkoutable) {
-
             if ($checkoutable instanceof Asset) {
                 $checkoutable->model->category->update([
                     'checkin_email' => false,

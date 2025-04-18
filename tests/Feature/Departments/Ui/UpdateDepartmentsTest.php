@@ -42,9 +42,5 @@ class UpdateDepartmentsTest extends TestCase
 
         $this->followRedirects($response)->assertSee('Success');
         $this->assertTrue(Department::where('name', 'Test Department Edited')->where('notes', 'Test Note Edited')->exists());
-
     }
-
-
-
 }

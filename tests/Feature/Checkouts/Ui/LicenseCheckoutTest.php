@@ -100,7 +100,7 @@ class LicenseCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('licenses.checkout', $license))
-            ->post(route('licenses.checkout' , $license), [
+            ->post(route('licenses.checkout', $license), [
                 'assigned_to' =>  $user->id,
                 'redirect_option' => 'target',
             ])
@@ -114,7 +114,7 @@ class LicenseCheckoutTest extends TestCase
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('licenses.checkout', $license))
-            ->post(route('licenses.checkout' , $license), [
+            ->post(route('licenses.checkout', $license), [
                 'asset_id' =>  $asset->id,
                 'redirect_option' => 'target',
             ])

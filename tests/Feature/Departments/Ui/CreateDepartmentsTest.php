@@ -41,6 +41,4 @@ class CreateDepartmentsTest extends TestCase
 
         $this->assertTrue(Department::where('name', 'Test Department')->where('notes', 'Test Note')->exists());
     }
-
-
 }

@@ -36,7 +36,6 @@ class AssetCheckoutTest extends TestCase
         $this->actingAsForApi(User::factory()->create())
             ->post(route('api.assets.requests.store', $nonRequestable->id))
             ->assertStatusMessageIs('error');
-
     }
 
     public function testCheckingOutAssetRequiresCorrectPermission()
@@ -179,7 +178,7 @@ class AssetCheckoutTest extends TestCase
         $this->actingAsForApi($admin)
             ->postJson(route('api.asset.checkout', $asset), [
                 'checkout_to_type' => $type,
-                'assigned_'.$type => $target->id,
+                'assigned_' . $type => $target->id,
                 'status_id' => $newStatus->id,
                 'checkout_at' => '2024-04-01',
                 'expected_checkin' => '2024-04-08',

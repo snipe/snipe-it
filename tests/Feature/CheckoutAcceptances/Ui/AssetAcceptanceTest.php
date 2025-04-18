@@ -133,8 +133,7 @@ class AssetAcceptanceTest extends TestCase
                 'item_id' => $checkoutAcceptance->checkoutable->id,
             ])
             ->whereNotNull('action_date')
-            ->exists()
-        );
+            ->exists());
     }
 
     public function testActionLoggedWhenDecliningAsset()
@@ -157,7 +156,6 @@ class AssetAcceptanceTest extends TestCase
                 'item_id' => $checkoutAcceptance->checkoutable->id,
             ])
             ->whereNotNull('action_date')
-            ->exists()
-        );
+            ->exists());
     }
 }

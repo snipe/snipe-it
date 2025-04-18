@@ -61,6 +61,4 @@ class ShowModalsTest extends TestCase
             ->get('modals/supplier')
             ->assertOk();
     }
-
-
 }

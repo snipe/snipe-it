@@ -11,8 +11,6 @@ use Tests\TestCase;
 
 class CreateDepartmentsTest extends TestCase
 {
-
-
     public function testRequiresPermissionToCreateDepartment()
     {
         $this->actingAsForApi(User::factory()->create())
@@ -38,5 +36,4 @@ class CreateDepartmentsTest extends TestCase
         $this->assertEquals('Test Department', $department->name);
         $this->assertEquals('Test Note', $department->notes);
     }
-
 }
