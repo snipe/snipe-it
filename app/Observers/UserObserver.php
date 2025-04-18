@@ -51,17 +51,14 @@ class UserObserver
             'vip',
             'password'
         ];
-        
+
         $changed = [];
 
         foreach ($user->getRawOriginal() as $key => $value) {
-
             // Make sure the info is in the allow fields array
             if (in_array($key, $allowed_fields)) {
-
                 // Check and see if the value changed
                 if ($user->getRawOriginal()[$key] != $user->getAttributes()[$key]) {
-
                     $changed[$key]['old'] = $user->getRawOriginal()[$key];
                     $changed[$key]['new'] = $user->getAttributes()[$key];
 
@@ -70,10 +67,8 @@ class UserObserver
                         $changed['password']['old'] = '*************';
                         $changed['password']['new'] = '*************';
                     }
-
                 }
             }
-
         }
 
         if (count($changed) > 0) {
@@ -87,8 +82,6 @@ class UserObserver
             $logAction->log_meta = json_encode($changed);
             $logAction->logaction('update');
         }
-
-
     }
 
     /**
@@ -144,6 +137,4 @@ class UserObserver
         $logAction->created_by = auth()->id();
         $logAction->logaction('restore');
     }
-
-
 }
