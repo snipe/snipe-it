@@ -398,6 +398,21 @@ class Actionlog extends SnipeModel
         return  \Carbon::parse($last_audit_date)->addMonths($monthInterval)->toDateString();
     }
 
+    /**
+     * Gets action logs in chronological order, excluding uploads
+     *
+     * @author  Vincent Sposato <vincent.sposato@gmail.com>
+     * @since v1.0
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getListingOfActionLogsChronologicalOrder()
+    {
+        return $this->all()
+                 ->where('action_type', '!=', 'uploaded')
+                 ->orderBy('item_id', 'asc')
+                 ->orderBy('created_at', 'asc')
+                 ->get();
+    }
 
     /**
      * Determines what the type of request is so we can log it to the action_log
@@ -439,5 +454,4 @@ class Actionlog extends SnipeModel
     {
         return $query->leftJoin('users as admin_sort', 'action_logs.created_by', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
-    
 }
