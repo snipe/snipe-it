@@ -62,7 +62,7 @@
                                 <label for="pwd_secure_min">{{ trans('admin/settings/general.pwd_secure_min') }}</label>
                             </div>
                             <div class="col-md-9">
-                                <input class="form-control" style="width: 50px;" name="pwd_secure_min" type="text" value="{{ old('pwd_secure_min', $setting->pwd_secure_min) }}" id="pwd_secure_min">
+                                <input class="form-control" style="width: 50px;" name="pwd_secure_min" type="number" min="8" value="{{ old('pwd_secure_min', $setting->pwd_secure_min) }}" id="pwd_secure_min">
 
                                 {!! $errors->first('pwd_secure_min', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                 <p class="help-block">
