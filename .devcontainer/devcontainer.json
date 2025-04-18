@@ -7,7 +7,7 @@
         "&& chmod a+x /workspaces/snipe-it",
         "&& rm -rf /var/www/html",
         "&& ln -s /workspaces/snipe-it /var/www/html",
-        "&& ln -s /workspaces/snipe-it/docker/.env /var/www/html/.env",
+        "&& ln -s /workspaces/snipe-it/.env.dev.docker /var/www/html/.env",
         "&& if [ -f composer.json ];then composer install;fi;"
     ]
 }
