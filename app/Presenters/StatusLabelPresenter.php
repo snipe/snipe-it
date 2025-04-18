@@ -110,6 +110,4 @@ class StatusLabelPresenter extends Presenter
 
         return json_encode($layout);
     }
-
-
 }

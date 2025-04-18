@@ -204,7 +204,7 @@ class AssetModelPresenter extends Presenter
     public function eolText()
     {
         if ($this->eol) {
-            return $this->eol.' '.trans('general.months');
+            return $this->eol . ' ' . trans('general.months');
         }
 
         return '';
@@ -218,12 +218,12 @@ class AssetModelPresenter extends Presenter
     {
         $name = '';
         if ($this->model->manufacturer) {
-            $name .= $this->model->manufacturer->name.' ';
+            $name .= $this->model->manufacturer->name . ' ';
         }
         $name .= $this->name;
 
         if ($this->model_number) {
-            $name .= ' (#'.$this->model_number.')';
+            $name .= ' (#' . $this->model_number . ')';
         }
 
         return $name;
@@ -245,7 +245,7 @@ class AssetModelPresenter extends Presenter
     public function imageUrl()
     {
         if (! empty($this->image)) {
-            return '<img src="'.config('app.url').'/uploads/models/'.$this->image.'" alt="'.$this->name.'" height="50" width="50">';
+            return '<img src="' . config('app.url') . '/uploads/models/' . $this->image . '" alt="' . $this->name . '" height="50" width="50">';
         }
 
         return '';
@@ -258,7 +258,7 @@ class AssetModelPresenter extends Presenter
     public function imageSrc()
     {
         if (! empty($this->image)) {
-            return config('app.url').'/uploads/models/'.$this->image;
+            return config('app.url') . '/uploads/models/' . $this->image;
         }
 
         return '';

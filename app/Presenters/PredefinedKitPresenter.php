@@ -58,7 +58,7 @@ class PredefinedKitPresenter extends Presenter
             'searchable' => false,
             'sortable' => false,
             'switchable' => true,
-            'title' => trans('general.checkin').'/'.trans('general.checkout'),
+            'title' => trans('general.checkin') . '/' . trans('general.checkout'),
             'visible' => true,
             'formatter' => 'kitsInOutFormatter',
         ];

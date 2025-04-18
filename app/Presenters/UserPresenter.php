@@ -415,7 +415,7 @@ class UserPresenter extends Presenter
     public function emailLink()
     {
         if ($this->email) {
-            return '<a href="mailto:'.$this->email.'">'.$this->email.'</a><a href="mailto:'.$this->email.'" class="hidden-xs hidden-sm"><i class="far fa-envelope"></i></a>';
+            return '<a href="mailto:' . $this->email . '">' . $this->email . '</a><a href="mailto:' . $this->email . '" class="hidden-xs hidden-sm"><i class="far fa-envelope"></i></a>';
         }
 
         return '';
@@ -429,7 +429,7 @@ class UserPresenter extends Presenter
      */
     public function fullName()
     {
-        return html_entity_decode($this->first_name.' '.$this->last_name, ENT_QUOTES | ENT_XML1, 'UTF-8');
+        return html_entity_decode($this->first_name . ' ' . $this->last_name, ENT_QUOTES | ENT_XML1, 'UTF-8');
     }
 
     /**
@@ -452,14 +452,13 @@ class UserPresenter extends Presenter
 
         // User's specific avatar
         if ($this->avatar) {
-
             // Check if it's a google avatar or some external avatar
             if (Str::startsWith($this->avatar, ['http://', 'https://'])) {
                 return $this->avatar;
             }
 
             // Otherwise assume it's an uploaded image
-            return Storage::disk('public')->url('avatars/'.e($this->avatar));
+            return Storage::disk('public')->url('avatars/' . e($this->avatar));
         }
 
 
@@ -470,19 +469,17 @@ class UserPresenter extends Presenter
 
         // If there is a custom default avatar
         if (Setting::getSettings()->default_avatar != '') {
-            return Storage::disk('public')->url('avatars/'.e(Setting::getSettings()->default_avatar));
+            return Storage::disk('public')->url('avatars/' . e(Setting::getSettings()->default_avatar));
         }
 
         // If there is no default and no custom avatar, check for gravatar
         if ((Setting::getSettings()->load_remote == '1') && (Setting::getSettings()->default_avatar == '')) {
-
             if ($this->model->gravatar != '') {
                 $gravatar = md5(strtolower(trim($this->model->gravatar)));
-                return '//gravatar.com/avatar/'.$gravatar;
-
+                return '//gravatar.com/avatar/' . $gravatar;
             } elseif ($this->email != '') {
                 $gravatar = md5(strtolower(trim($this->email)));
-                return '//gravatar.com/avatar/'.$gravatar;
+                return '//gravatar.com/avatar/' . $gravatar;
             }
         }
 

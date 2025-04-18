@@ -52,7 +52,7 @@ class CompanyPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('admin/suppliers/table.email'),
                 'visible' => true,
-				'formatter' => 'emailFormatter',
+                'formatter' => 'emailFormatter',
             ], [
                 'field' => 'image',
                 'searchable' => false,

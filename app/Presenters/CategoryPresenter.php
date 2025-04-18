@@ -112,7 +112,7 @@ class CategoryPresenter extends Presenter
                 'sortable' => false,
                 'switchable' => false,
                 'title' => trans('table.actions'),
-		'formatter' => 'categoriesActionsFormatter',
+                'formatter' => 'categoriesActionsFormatter',
             ],
         ];
 
