@@ -68,7 +68,8 @@ class ConsumableIndexTest extends TestCase
                     'order' => 'asc',
                     'offset' => '0',
                     'limit' => '20',
-                ]))
+                ])
+            )
             ->assertOk()
             ->assertJsonStructure([
                 'total',
@@ -77,6 +78,5 @@ class ConsumableIndexTest extends TestCase
             ->assertJson([
                 'total' => 1,
             ]);
-
     }
 }
