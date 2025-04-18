@@ -10,8 +10,6 @@ use Tests\TestCase;
 
 class CreateAssetModelsTest extends TestCase
 {
-
-
     public function testRequiresPermissionToCreateAssetModel()
     {
         $this->actingAsForApi(User::factory()->create())
@@ -54,12 +52,11 @@ class CreateAssetModelsTest extends TestCase
             ->json();
 
         $this->assertFalse(AssetModel::where('name', 'Test AssetModel')->exists());
-
     }
 
     public function testUniquenessAcrossModelNameAndModelNumber()
     {
-        AssetModel::factory()->create(['name' => 'Test Model', 'model_number'=>'1234']);
+        AssetModel::factory()->create(['name' => 'Test Model', 'model_number' => '1234']);
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.models.store'), [
@@ -77,7 +74,6 @@ class CreateAssetModelsTest extends TestCase
                 ],
             ])
             ->json();
-
     }
 
     public function testUniquenessAcrossModelNameAndModelNumberWithBlankModelNumber()
@@ -98,7 +94,5 @@ class CreateAssetModelsTest extends TestCase
                 ],
             ])
             ->json();
-
     }
-
 }

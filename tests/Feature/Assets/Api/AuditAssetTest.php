@@ -41,15 +41,15 @@ class AuditAssetTest extends TestCase
             ->assertStatusMessageIs('success')
             ->assertJson(
                 [
-                    'messages' =>trans('admin/hardware/message.audit.success'),
+                    'messages' => trans('admin/hardware/message.audit.success'),
                     'payload' => [
                         'id' => $asset->id,
                         'asset_tag' => $asset->asset_tag,
                         'note' => 'test'
                     ],
-                ])
+                ]
+            )
             ->assertStatus(200);
-
     }
 
 
@@ -63,16 +63,14 @@ class AuditAssetTest extends TestCase
             ->assertStatusMessageIs('success')
             ->assertJson(
                 [
-                    'messages' =>trans('admin/hardware/message.audit.success'),
+                    'messages' => trans('admin/hardware/message.audit.success'),
                     'payload' => [
                         'id' => $asset->id,
                         'asset_tag' => $asset->asset_tag,
                         'note' => 'test'
                     ],
-                ])
+                ]
+            )
             ->assertStatus(200);
-
     }
-
-
 }

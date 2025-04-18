@@ -33,7 +33,8 @@ class IndexAssetModelsTest extends TestCase
                     'order' => 'asc',
                     'offset' => '0',
                     'limit' => '20',
-                ]))
+                ])
+            )
             ->assertOk()
             ->assertJsonStructure([
                 'total',
@@ -55,7 +56,8 @@ class IndexAssetModelsTest extends TestCase
                     'order' => 'asc',
                     'offset' => '0',
                     'limit' => '20',
-                ]))
+                ])
+            )
             ->assertOk()
             ->assertJsonStructure([
                 'total',
@@ -63,5 +65,4 @@ class IndexAssetModelsTest extends TestCase
             ])
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 1)->etc());
     }
-
 }

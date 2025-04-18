@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class UpdateAssetModelsTest extends TestCase
 {
-
     public function testRequiresPermissionToEditAssetModel()
     {
         $model = AssetModel::factory()->create();
@@ -34,7 +33,6 @@ class UpdateAssetModelsTest extends TestCase
 
         $model->refresh();
         $this->assertEquals('Test Model', $model->name, 'Name was not updated');
-
     }
 
     public function testCannotUpdateAssetModelViaPatchWithAccessoryCategory()
@@ -116,5 +114,4 @@ class UpdateAssetModelsTest extends TestCase
         $this->assertNotEquals('Test Model', $model->name, 'Name was not updated');
         $this->assertNotEquals('category_id', $category->id, 'Category ID was not updated');
     }
-
 }
