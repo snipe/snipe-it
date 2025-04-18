@@ -138,7 +138,6 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
 
         //Notes is never read.
         // $this->assertEquals($row['notes'], $newAsset->notes);
-
     }
 
     #[Test]

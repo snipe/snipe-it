@@ -56,13 +56,12 @@ class CreateAssetModelsTest extends TestCase
         $response->assertSessionHasErrors(['category_type']);
         $this->followRedirects($response)->assertSee(trans('general.error'));
         $this->assertFalse(AssetModel::where('name', 'Test Invalid Model Category')->exists());
-
     }
 
     public function testUniquenessAcrossModelNameAndModelNumber()
     {
 
-        AssetModel::factory()->create(['name' => 'Test Model', 'model_number'=>'1234']);
+        AssetModel::factory()->create(['name' => 'Test Model', 'model_number' => '1234']);
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('models.create'))
@@ -77,13 +76,12 @@ class CreateAssetModelsTest extends TestCase
             ->assertInvalid(['name','model_number']);
 
         $this->followRedirects($response)->assertSee(trans('general.error'));
-
     }
 
     public function testUniquenessAcrossModelNameAndModelNumberWithoutModelNumber()
     {
 
-        AssetModel::factory()->create(['name' => 'Test Model', 'model_number'=> null]);
+        AssetModel::factory()->create(['name' => 'Test Model', 'model_number' => null]);
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('models.create'))
@@ -98,7 +96,5 @@ class CreateAssetModelsTest extends TestCase
             ->assertInvalid(['name']);
 
         $this->followRedirects($response)->assertSee(trans('general.error'));
-
     }
-
 }

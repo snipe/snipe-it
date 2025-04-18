@@ -11,8 +11,6 @@ use Tests\TestCase;
 
 class CreateCategoriesTest extends TestCase
 {
-
-
     public function testRequiresPermissionToCreateCategory()
     {
         $this->actingAsForApi(User::factory()->create())
@@ -58,7 +56,6 @@ class CreateCategoriesTest extends TestCase
                 ],
             ]);
         $this->assertFalse(Category::where('name', 'Test Category')->exists());
-
     }
 
     public function testCannotCreateCategoryWithInvalidCategoryType()
@@ -77,9 +74,7 @@ class CreateCategoriesTest extends TestCase
                     'category_type'    => ['The selected category type is invalid.'],
                 ],
             ]);
-        
+
         $this->assertFalse(Category::where('name', 'Test Category')->exists());
-
     }
-
 }

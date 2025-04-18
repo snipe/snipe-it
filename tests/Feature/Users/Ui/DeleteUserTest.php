@@ -8,12 +8,10 @@ use App\Models\Location;
 use App\Models\Accessory;
 use App\Models\User;
 use App\Models\Company;
-
 use App\Models\Asset;
 
 class DeleteUserTest extends TestCase
 {
-
     public function testUserCanDeleteAnotherUser()
     {
         $user = User::factory()->deleteUsers()->viewUsers()->create();
@@ -94,7 +92,6 @@ class DeleteUserTest extends TestCase
 
         $userFromA->refresh();
         $this->assertNotNull($userFromA->deleted_at);
-
     }
 
 
@@ -170,7 +167,6 @@ class DeleteUserTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-
     }
 
     public function testDisallowUserDeletionIfNoDeletePermissions()
@@ -215,6 +211,4 @@ class DeleteUserTest extends TestCase
 
         $this->followRedirects($response)->assertSee('Error');
     }
-
-
 }

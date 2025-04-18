@@ -97,7 +97,6 @@ class DeleteUsersTest extends TestCase implements TestsFullMultipleCompaniesSupp
             ->assertStatus(200)
             ->assertStatusMessageIs('error')
             ->json();
-
     }
 
     public function testAdheresToFullMultipleCompaniesSupportScoping()
@@ -111,7 +110,7 @@ class DeleteUsersTest extends TestCase implements TestsFullMultipleCompaniesSupp
         $userFromB = User::factory()->deleteUsers()->for($companyB)->create();
 
         $this->actingAsForApi($userFromA)
-            ->deleteJson(route('api.users.destroy',  $userFromB))
+            ->deleteJson(route('api.users.destroy', $userFromB))
             ->assertOk()
             ->assertStatus(200)
             ->assertStatusMessageIs('error')

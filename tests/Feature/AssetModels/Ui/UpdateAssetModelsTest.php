@@ -45,7 +45,6 @@ class UpdateAssetModelsTest extends TestCase
 
         $this->followRedirects($response)->assertSee('Success');
         $this->assertTrue(AssetModel::where('name', 'Test Model Edited')->exists());
-
     }
 
     public function testUserCannotChangeAssetModelCategoryType()
@@ -67,7 +66,6 @@ class UpdateAssetModelsTest extends TestCase
 
         $this->followRedirects($response)->assertSee(trans('general.error'));
         $this->assertFalse(AssetModel::where('name', 'Test Model Edited')->exists());
-
     }
 
     public function test_default_values_remain_unchanged_after_validation_error_occurs()

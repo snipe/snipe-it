@@ -5,7 +5,6 @@ namespace Tests\Feature\Settings;
 use Tests\TestCase;
 use App\Models\User;
 
-
 class AlertsSettingTest extends TestCase
 {
     public function testPermissionRequiredToViewAlertSettings()
@@ -25,5 +24,4 @@ class AlertsSettingTest extends TestCase
             ->assertSessionHasNoErrors();
         $this->followRedirects($response)->assertSee('alert-success');
     }
-
 }

@@ -23,7 +23,7 @@ class LicenseViewTest extends TestCase
             ->get(route('licenses.show', License::factory()->create()->id))
             ->assertOk();
     }
-    
+
     public function testLicenseWithPurchaseDateDepreciatesCorrectly()
     {
         $depreciation = Depreciation::factory()->create(['months' => 12]);

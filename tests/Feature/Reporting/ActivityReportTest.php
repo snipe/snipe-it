@@ -65,17 +65,12 @@ class ActivityReportTest extends TestCase
 
         $this->actingAsForApi($userInCompanyB)
             ->getJson(
-                route('api.activity.index'))
+                route('api.activity.index')
+            )
             ->assertOk()
             ->assertJsonStructure([
                 'rows',
             ])
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 7)->etc());
-
-
-
-
-
     }
-
 }

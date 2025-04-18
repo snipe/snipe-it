@@ -54,5 +54,4 @@ class EditAssetMaintenanceTest extends TestCase
             'cost' => '100.00',
         ]);
     }
-
 }

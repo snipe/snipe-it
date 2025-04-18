@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class IndexCategoriesTest extends TestCase
 {
-
     public function testViewingCategoryIndexRequiresPermission()
     {
         $this->actingAsForApi(User::factory()->create())
@@ -30,7 +29,8 @@ class IndexCategoriesTest extends TestCase
                     'order' => 'asc',
                     'offset' => '0',
                     'limit' => '20',
-                ]))
+                ])
+            )
             ->assertOk()
             ->assertJsonStructure([
                 'total',
@@ -39,7 +39,6 @@ class IndexCategoriesTest extends TestCase
             ->assertJson([
                 'total' => 1,
             ]);
-
     }
 
 
@@ -55,7 +54,8 @@ class IndexCategoriesTest extends TestCase
                     'order' => 'asc',
                     'offset' => '0',
                     'limit' => '20',
-                ]))
+                ])
+            )
             ->assertOk()
             ->assertJsonStructure([
                 'total',
@@ -64,7 +64,5 @@ class IndexCategoriesTest extends TestCase
             ->assertJson([
                 'total' => 3,
             ]);
-
     }
-
 }

@@ -57,7 +57,6 @@ class UpdateCategoriesTest extends TestCase
 
         $this->followRedirects($response)->assertSee('Success');
         $this->assertTrue(Category::where('name', 'Test Category Edited')->where('notes', 'Test Note Edited')->exists());
-
     }
 
     public function testUserCanChangeCategoryTypeIfNoAssetsAssociated()
@@ -78,7 +77,6 @@ class UpdateCategoriesTest extends TestCase
 
         $this->followRedirects($response)->assertSee('Success');
         $this->assertTrue(Category::where('name', 'Test Category Edited')->where('notes', 'Test Note Edited')->exists());
-
     }
 
     public function testUserCannotChangeCategoryTypeIfAssetsAreAssociated()
@@ -100,7 +98,5 @@ class UpdateCategoriesTest extends TestCase
 
         $this->followRedirects($response)->assertSee(trans('general.error'));
         $this->assertFalse(Category::where('name', 'Test Category Edited')->where('notes', 'Test Note Edited')->exists());
-
     }
-
 }

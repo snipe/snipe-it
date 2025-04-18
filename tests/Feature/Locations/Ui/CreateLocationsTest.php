@@ -54,5 +54,4 @@ class CreateLocationsTest extends TestCase
 
         $this->assertFalse(Location::where('name', 'Test Location')->exists());
     }
-
 }

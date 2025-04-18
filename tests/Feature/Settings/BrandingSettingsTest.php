@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 use App\Models\Setting;
 
-
 class BrandingSettingsTest extends TestCase
 {
     public function testSiteNameIsRequired()
@@ -43,7 +42,8 @@ class BrandingSettingsTest extends TestCase
         $setting = Setting::factory()->create(['logo' => null]);
 
         $response = $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 ['logo' => UploadedFile::fake()->image('test_logo.png')->storeAs('', 'test_logo.png', 'public')]
             ))
             ->assertValid('logo')
@@ -69,7 +69,8 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 ['clear_logo' => '1']
             ))
             ->assertValid('logo')
@@ -92,7 +93,8 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 [
                     'email_logo' => UploadedFile::fake()->image('new_test_email_logo.png')->storeAs('', 'new_test_email_logo.png', 'public')
                 ]
@@ -119,7 +121,8 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 ['clear_email_logo' => '1']
             ))
             ->assertValid('email_logo')
@@ -130,7 +133,6 @@ class BrandingSettingsTest extends TestCase
         $this->assertDatabaseHas('settings', ['email_logo' => null]);
 
         //Storage::disk('public')->assertMissing('new_test_email_logo.png');
-
     }
 
 
@@ -146,7 +148,8 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 [
                     'label_logo' => UploadedFile::fake()->image('new_test_label_logo.png')->storeAs('', 'new_test_label_logo.png', 'public')
                 ]
@@ -159,8 +162,6 @@ class BrandingSettingsTest extends TestCase
 
         Storage::disk('public')->assertExists('new_test_label_logo.png');
         // Storage::disk('public')->assertMissing($original_file);
-
-
     }
 
     public function testLabelLogoCanBeDeleted()
@@ -176,7 +177,8 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 ['label_logo' => '1']
             ))
             ->assertValid('label_logo')
@@ -187,7 +189,6 @@ class BrandingSettingsTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('alert-success'));
         // $this->assertNull($setting->refresh()->logo);
         // Storage::disk('public')->assertMissing($original_file);
-
     }
 
     public function testDefaultAvatarCanBeUploaded()
@@ -196,7 +197,8 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 [
                     'default_avatar' => UploadedFile::fake()->image('default_avatar.png')->storeAs('', 'default_avatar.png', 'public')
                 ]
@@ -224,7 +226,8 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 ['clear_default_avatar' => '1']
             ))
             ->assertValid('default_avatar')
@@ -244,7 +247,8 @@ class BrandingSettingsTest extends TestCase
         Storage::fake('public');
 
         $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 ['default_avatar' => UploadedFile::fake()->image('default.png')->storeAs('avatars', 'default.png', 'public')]
             ));
 
@@ -252,14 +256,14 @@ class BrandingSettingsTest extends TestCase
 
 
         $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 ['clear_default_avatar' => '1']
             ));
 
         $this->assertNull($setting->refresh()->default_avatar);
         $this->assertDatabaseHas('settings', ['default_avatar' => null]);
         Storage::disk('public')->assertExists('avatars/default.png');
-
     }
 
     public function testFaviconCanBeUploaded()
@@ -269,9 +273,10 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 [
-                    'favicon' =>UploadedFile::fake()->image('favicon.svg')->storeAs('', 'favicon.svg', 'public')
+                    'favicon' => UploadedFile::fake()->image('favicon.svg')->storeAs('', 'favicon.svg', 'public')
                 ]
             ))
             ->assertValid('favicon')
@@ -296,7 +301,8 @@ class BrandingSettingsTest extends TestCase
 
         $response = $this->actingAs(User::factory()->superuser()->create())
             ->from(route('settings.branding.index'))
-            ->post(route('settings.branding.save',
+            ->post(route(
+                'settings.branding.save',
                 ['clear_favicon' => '1']
             ))
             ->assertValid('favicon')
@@ -309,7 +315,4 @@ class BrandingSettingsTest extends TestCase
         // This fails for some reason - the file is not being deleted, or at least the test doesn't think it is
         // Storage::disk('public')->assertMissing('favicon.png');
     }
-
-
-
 }

@@ -33,7 +33,8 @@ class IndexLocationsTest extends TestCase
                     'order' => 'asc',
                     'offset' => '0',
                     'limit' => '20',
-                ]))
+                ])
+            )
             ->assertOk()
             ->assertJsonStructure([
                 'total',
@@ -41,5 +42,4 @@ class IndexLocationsTest extends TestCase
             ])
             ->assertJson(fn(AssertableJson $json) => $json->has('rows', 3)->etc());
     }
-
 }

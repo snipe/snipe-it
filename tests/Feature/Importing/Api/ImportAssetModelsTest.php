@@ -36,7 +36,7 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
 
         $this->importFileResponse(['import' => 44])->assertForbidden();
     }
-    
+
     #[Test]
     public function importAssetModels(): void
     {
@@ -60,7 +60,6 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
 
         $this->assertEquals($row['name'], $newAssetModel->name);
         $this->assertEquals($row['model_number'], $newAssetModel->model_number);
-
     }
 
     #[Test]
@@ -136,5 +135,4 @@ class ImportAssetModelsTest extends ImportDataTestCase implements TestsPermissio
             Arr::except($updatedAssetmodel->attributesToArray(), $updatedAttributes),
         );
     }
-
 }

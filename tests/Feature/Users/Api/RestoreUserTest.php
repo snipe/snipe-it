@@ -10,8 +10,6 @@ use Tests\TestCase;
 
 class RestoreUserTest extends TestCase
 {
-
-
     public function testErrorReturnedViaApiIfUserDoesNotExist()
     {
         $this->actingAsForApi(User::factory()->deleteUsers()->create())
@@ -96,10 +94,5 @@ class RestoreUserTest extends TestCase
 
         $userFromA->refresh();
         $this->assertNull($userFromA->deleted_at);
-
     }
-
-
-
-
 }

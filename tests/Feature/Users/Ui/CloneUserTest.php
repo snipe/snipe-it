@@ -13,6 +13,4 @@ class CloneUserTest extends TestCase
             ->get(route('users.clone.show', User::factory()->create()))
             ->assertOk();
     }
-
-
 }

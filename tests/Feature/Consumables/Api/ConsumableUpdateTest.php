@@ -9,7 +9,6 @@ use Tests\TestCase;
 
 class ConsumableUpdateTest extends TestCase
 {
-
     public function testCanUpdateConsumableViaPatchWithoutCategoryType()
     {
         $consumable = Consumable::factory()->create();
@@ -25,7 +24,6 @@ class ConsumableUpdateTest extends TestCase
 
         $consumable->refresh();
         $this->assertEquals('Test Consumable', $consumable->name, 'Name was not updated');
-
     }
 
     public function testCannotUpdateConsumableViaPatchWithInvalidCategoryType()
@@ -46,7 +44,5 @@ class ConsumableUpdateTest extends TestCase
         $category->refresh();
         $this->assertNotEquals('Test Consumable', $consumable->name, 'Name was not updated');
         $this->assertNotEquals('consumable', $consumable->category_id, 'Category was not updated');
-
     }
-
 }

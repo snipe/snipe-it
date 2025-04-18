@@ -55,5 +55,4 @@ class CreateCategoriesTest extends TestCase
 
         $this->assertFalse(Category::where('name', 'Test Category')->exists());
     }
-
 }

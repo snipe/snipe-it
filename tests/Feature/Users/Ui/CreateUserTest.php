@@ -7,7 +7,6 @@ use Tests\TestCase;
 
 class CreateUserTest extends TestCase
 {
-
     public function testPermissionRequiredToCreateUser()
     {
         $this->actingAs(User::factory()->create())
@@ -20,7 +19,6 @@ class CreateUserTest extends TestCase
         $this->actingAs(User::factory()->createUsers()->create())
             ->get(route('users.create'))
             ->assertOk();
-
     }
 
     public function testCanCreateUser()
@@ -39,6 +37,5 @@ class CreateUserTest extends TestCase
             ->assertRedirect(route('users.index'));
 
         $this->followRedirects($response)->assertSee('Success');
-
     }
 }
