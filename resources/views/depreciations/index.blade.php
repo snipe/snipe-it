@@ -40,14 +40,13 @@
           </table>
       </div>
     </div>
-  </div> <!-- /.col-md-9-->
+  </div>
 
+  <div class="well">
+    <h4>{{ trans('admin/depreciations/general.about_asset_depreciations') }}</h4>
+    <p>{{ trans('admin/depreciations/general.about_depreciations') }} </p>
+  </div>
 </div>
-<div class="well">
-  <h4>{{ trans('admin/depreciations/general.about_asset_depreciations') }}</h4>
-  <p>{{ trans('admin/depreciations/general.about_depreciations') }} </p>
-</div>
-
 @stop
 
 @section('moar_scripts')

@@ -39,9 +39,10 @@
         </div>
       </div>
     </div>
-  <div class="well">
-    <h4>{{ trans('admin/companies/general.about_companies') }}</h4>
-    <p>{{ trans('admin/companies/general.about_companies_description') }}</p>
+    <div class="well">
+      <h4>{{ trans('admin/companies/general.about_companies') }}</h4>
+      <p>{{ trans('admin/companies/general.about_companies_description') }}</p>
+    </div>
   </div>
 @stop
 
