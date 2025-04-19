@@ -1,5 +1,5 @@
 {
-    "/js/build/app.js": "/js/build/app.js?id=e03cda01c82f4c5a18a0ce4ccd7ee4d5",
+    "/js/build/app.js": "/js/build/app.js?id=19253af36b58ed3fb6770c7bb944f079",
     "/css/dist/skins/skin-black-dark.css": "/css/dist/skins/skin-black-dark.css?id=06c13e817cc022028b3f4a33c0ca303a",
     "/css/dist/skins/_all-skins.css": "/css/dist/skins/_all-skins.css?id=e71ef4171dee5da63af390966ac60ffc",
     "/css/build/overrides.css": "/css/build/overrides.css?id=6528155ed5ed8fddf4047de7f0d0298d",
@@ -19,7 +19,7 @@
     "/css/dist/skins/skin-blue.css": "/css/dist/skins/skin-blue.css?id=f677207c6cf9678eb539abecb408c374",
     "/css/dist/skins/skin-blue-dark.css": "/css/dist/skins/skin-blue-dark.css?id=6ea836d8126de101081c49abbdb89417",
     "/css/dist/skins/skin-black.css": "/css/dist/skins/skin-black.css?id=76482123f6c70e866d6b971ba91de7bb",
-    "/css/dist/all.css": "/css/dist/all.css?id=18ebb9c284b49dcf6c8e4fdb923ad923",
+    "/css/dist/all.css": "/css/dist/all.css?id=d1c7c0879c64c070cd210aefb0544c5d",
     "/css/dist/signature-pad.css": "/css/dist/signature-pad.css?id=6a89d3cd901305e66ced1cf5f13147f7",
     "/css/dist/signature-pad.min.css": "/css/dist/signature-pad.min.css?id=6a89d3cd901305e66ced1cf5f13147f7",
     "/js/select2/i18n/af.js": "/js/select2/i18n/af.js?id=4f6fcd73488ce79fae1b7a90aceaecde",
@@ -90,8 +90,8 @@
     "/css/webfonts/fa-solid-900.woff2": "/css/webfonts/fa-solid-900.woff2?id=109ad919b74a62a8a223361da1651bbc",
     "/css/webfonts/fa-v4compatibility.ttf": "/css/webfonts/fa-v4compatibility.ttf?id=53c2e50ef821f7b8dd514611d5e0772c",
     "/css/webfonts/fa-v4compatibility.woff2": "/css/webfonts/fa-v4compatibility.woff2?id=331c85bd61ffa93af09273d1bc2add5a",
-    "/js/dist/bootstrap-table-locale-all.min.js": "/js/dist/bootstrap-table-locale-all.min.js?id=02dfc50d5b951dc6d260bd508968d319",
-    "/js/dist/bootstrap-table-en-US.min.js": "/js/dist/bootstrap-table-en-US.min.js?id=1c350eabf064c309f67d6779e5cc4afa",
+    "/js/dist/bootstrap-table-locale-all.min.js": "/js/dist/bootstrap-table-locale-all.min.js?id=5e93ef0a1889bed3f92a705dc1e92c9b",
+    "/js/dist/bootstrap-table-en-US.min.js": "/js/dist/bootstrap-table-en-US.min.js?id=c0f21fb7e62d6f0a0153f1cdbf26782a",
     "/css/dist/skins/_all-skins.min.css": "/css/dist/skins/_all-skins.min.css?id=e71ef4171dee5da63af390966ac60ffc",
     "/css/dist/skins/skin-black-dark.min.css": "/css/dist/skins/skin-black-dark.min.css?id=06c13e817cc022028b3f4a33c0ca303a",
     "/css/dist/skins/skin-black.min.css": "/css/dist/skins/skin-black.min.css?id=76482123f6c70e866d6b971ba91de7bb",
@@ -108,8 +108,8 @@
     "/css/dist/skins/skin-red.min.css": "/css/dist/skins/skin-red.min.css?id=44bf834f2110504a793dadec132a5898",
     "/css/dist/skins/skin-yellow-dark.min.css": "/css/dist/skins/skin-yellow-dark.min.css?id=ea22079836a432d7f46a5d390c445e13",
     "/css/dist/skins/skin-yellow.min.css": "/css/dist/skins/skin-yellow.min.css?id=7b315b9612b8fde8f9c5b0ddb6bba690",
-    "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=ceded08e0cc745a83c13647035b03406",
+    "/css/dist/bootstrap-table.css": "/css/dist/bootstrap-table.css?id=54d676a6ea8677dd48f6c4b3041292cf",
     "/js/build/vendor.js": "/js/build/vendor.js?id=89dffa552c6e3abe3a2aac6c9c7b466b",
-    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=61285c8ac5ea7b46002ea8c451c94e60",
-    "/js/dist/all.js": "/js/dist/all.js?id=27ea1d91dc20808bc6e09e8c739c4e00"
+    "/js/dist/bootstrap-table.js": "/js/dist/bootstrap-table.js?id=783d3a8076337744f0176d60e1041ea4",
+    "/js/dist/all.js": "/js/dist/all.js?id=8c6d7286f667eeb62a0a28a09851a6c3"
 }
