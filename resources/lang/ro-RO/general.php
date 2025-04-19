@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Modele active',
     'asset_model'			=> 'Model',
     'asset'					=> 'Activ',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Raport de active',
     'asset_tag'				=> 'Eticheta activ',
     'asset_tags'            => 'Etichete active',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Facut de',
 
 // Add form placeholders here
     'placeholders' => [

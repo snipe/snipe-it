@@ -37,7 +37,7 @@ return [
         'authentication_success' => 'Користувач успішно пройшов перевірку на зв\'язку з LDAP!'
     ],
     'labels' => [
-        'null_template' => 'Label template not found. Please select a template.',
+        'null_template' => 'Ярличок не знайдено. Будь ласка, виберіть шаблон.',
         ],
     'webhook' => [
         'sending' => 'Відправка :app тестове повідомлення...',
@@ -49,12 +49,12 @@ return [
         'error_redirect' => 'ПОМИЛКА: 301/302 :endpoint повертає редиректор. З міркувань безпеки ми не слідуємо перенаправленням. Будь ласка, використовуйте фактичну кінцеву точку.',
         'error_misc' => 'Щось пішло не так. :( ',
         'webhook_fail' => 'не вдалося надіслати повідомлення webhook для перевірки: Переконайтесь, що посилання ще дійсне.',
-        'webhook_channel_not_found' => ' webhook channel not found.'
+        'webhook_channel_not_found' => ' канал webhook не знайдено.'
     ],
 
     'location_scoping' => [
-        'not_saved' => 'Your settings were not saved.',
-        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+        'not_saved' => 'Ваші налаштування не були збережені.',
+        'mismatch' => 'Є 1 елемент у базі даних, який потребує вашої уваги перед тим, як ви зможете увімкнути визначення місцезнаходження. Є :count елементи в базі даних, які потребують вашої уваги перед тим, як ви зможете увімкнути визначення місцезнаходжень.',
     ],
 
 ];

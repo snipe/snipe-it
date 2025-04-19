@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Modeli sredstva',
     'asset_model'			=> 'Model',
     'asset'					=> 'Sredstvo',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Poročilo o sredstvih',
     'asset_tag'				=> 'Oznaka sredstva',
     'asset_tags'            => 'Asset Tags',
@@ -574,6 +575,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Od',
 
 // Add form placeholders here
     'placeholders' => [

@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Um ou mais endereços de e-mail são inválidos.',
+    'checkboxes'           => ':attribute contém opções inválidas.',
+    'radio_buttons'        => ':attribute é inválido.',
+    
     'custom' => [
         'alpha_space' => 'O campo: atributo contém um caractere que não é permitido.',
-        'email_array'      => 'Um ou mais endereços de e-mail são inválidos.',
+
         'hashed_pass'      => 'Sua senha atual está incorreta',
         'dumbpwd'          => 'Essa senha é muito comum.',
         'statuslabel_type' => 'Você deve selecionar um tipo de etiqueta de status válido',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'O :attribute deve ser uma data válida em formato YYYY-MM-DD',
         'start_date.date_format'        =>  'O :attribute deve ser uma data válida em formato YYYY-MM-DD',
         'end_date.date_format'          =>  'O :attribute deve ser uma data válida em formato YYYY-MM-DD',
-        'checkboxes'           => ':attribute contém opções inválidas.',
-        'radio_buttons'        => ':attribute é inválido.',
         'invalid_value_in_field' => 'Valor inválido incluído neste campo',
 
         'ldap_username_field' => [

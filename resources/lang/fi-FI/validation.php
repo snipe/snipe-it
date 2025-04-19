@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Yksi tai useampi sähköpostiosoite on virheellinen.',
+    'checkboxes'           => ':attribute sisältää virheellisiä vaihtoehtoja.',
+    'radio_buttons'        => ':attribute on virheellinen.',
+    
     'custom' => [
         'alpha_space' => ':attribute -kenttä sisältää merkin, jota ei sallita.',
-        'email_array'      => 'Yksi tai useampi sähköpostiosoite on virheellinen.',
+
         'hashed_pass'      => 'Nykyinen salasanasi on virheellinen',
         'dumbpwd'          => 'Salasana on liian yleinen.',
         'statuslabel_type' => 'Sinun on valittava kelvollinen tilamerkintätyyppi',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'Attribuutin on oltava kelvollinen päivämäärä muodossa VVVV-KK-PP',
         'start_date.date_format'        =>  'Attribuutin on oltava kelvollinen päivämäärä muodossa VVVV-KK-PP',
         'end_date.date_format'          =>  'Attribuutin on oltava kelvollinen päivämäärä muodossa VVVV-KK-PP',
-        'checkboxes'           => ':attribute sisältää virheellisiä vaihtoehtoja.',
-        'radio_buttons'        => ':attribute on virheellinen.',
         'invalid_value_in_field' => 'Virheellinen arvo sisältyy tähän kenttään',
 
         'ldap_username_field' => [

@@ -23,6 +23,7 @@ return [
     'asset_models'			=> '資産モデル',
     'asset_model'			=> 'モデル',
     'asset'					=> '資産',
+    'asset_previous'        => '資産 (以前に割り当て済)',
     'asset_report'          => '資産レポート',
     'asset_tag'				=> '資産タグ',
     'asset_tags'            => '資産タグ',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => '差出人',
+    'by' => '実行者',
 
 // Add form placeholders here
     'placeholders' => [
@@ -607,7 +610,7 @@ return [
 
     'select_all_none' => 'すべてを選択/選択解除',
     'generic_model_not_found' => 'That :model was not found or you do not have permission to access it',
-    'deleted_models' => 'Deleted Asset Models',
+    'deleted_models' => '削除された資産モデル',
     'deleted_users' => 'Deleted Users',
     'cost_each' => '各:amount',
     'remove_current_image' => 'Remove current :type image',

@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Viena vai vairākas e-pasta adreses nav derīgas.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'Laukā: atribūta lauks ir rakstzīme, kas nav atļauta.',
-        'email_array'      => 'Viena vai vairākas e-pasta adreses nav derīgas.',
+
         'hashed_pass'      => 'Jūsu pašreizējā parole nav pareiza',
         'dumbpwd'          => 'Šī parole ir pārāk izplatīta.',
         'statuslabel_type' => 'Jums ir jāizvēlas derīgs statusa etiķetes veids',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

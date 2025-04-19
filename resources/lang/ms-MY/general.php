@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Model Harta',
     'asset_model'			=> 'Model',
     'asset'					=> 'Harta',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Laporan Harta',
     'asset_tag'				=> 'Tag Harta',
     'asset_tags'            => 'Tag Aset:',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Oleh',
 
 // Add form placeholders here
     'placeholders' => [

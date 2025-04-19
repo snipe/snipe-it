@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Kiểu tài sản',
     'asset_model'			=> 'Mô hình',
     'asset'					=> 'Tài sản',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Báo cáo tài sản',
     'asset_tag'				=> 'Thẻ tài sản',
     'asset_tags'            => 'Tên tài sản',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Bởi',
 
 // Add form placeholders here
     'placeholders' => [

@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'één of meer e-mail adressen kloppen niet.',
+    'checkboxes'           => ':attribute bevat ongeldige opties.',
+    'radio_buttons'        => ':attribute is ongeldig.',
+    
     'custom' => [
         'alpha_space' => ':attribute veld bevat een karakter wat niet is toegestaan.',
-        'email_array'      => 'één of meer e-mail adressen kloppen niet.',
+
         'hashed_pass'      => 'Je huidige wachtwoord is incorrect',
         'dumbpwd'          => 'Dat wachtwoord is te veelvoorkomend.',
         'statuslabel_type' => 'Selecteer een valide status label',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
         'start_date.date_format'        =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
         'end_date.date_format'          =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
-        'checkboxes'           => ':attribute bevat ongeldige opties.',
-        'radio_buttons'        => ':attribute is ongeldig.',
         'invalid_value_in_field' => 'Ongeldige waarde ingevoerd in dit veld',
 
         'ldap_username_field' => [

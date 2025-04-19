@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'சொத்து மாதிரிகள்',
     'asset_model'			=> 'மாதிரி',
     'asset'					=> 'சொத்து',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'சொத்து அறிக்கை',
     'asset_tag'				=> 'சொத்து டேக்',
     'asset_tags'            => 'சொத்துக் குறிகள்',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'மூலம்',
 
 // Add form placeholders here
     'placeholders' => [

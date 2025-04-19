@@ -38,7 +38,7 @@ return [
     ],
 
     'audit' => [
-        'error'   		=> 'Asset audit unsuccessful: :error ',
+        'error'   		=> '資産監査に失敗しました: :error ',
         'success' 		=> '資産の監査ログに記録しました。',
     ],
 

@@ -23,6 +23,7 @@ return [
     'asset_models'			=> '자산 모델',
     'asset_model'			=> '모델',
     'asset'					=> '자산',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => '자산 보고서',
     'asset_tag'				=> '자산 태그',
     'asset_tags'            => '자산 태그',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => '요청자',
 
 // Add form placeholders here
     'placeholders' => [

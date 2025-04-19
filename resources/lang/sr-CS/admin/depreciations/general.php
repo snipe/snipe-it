@@ -13,7 +13,7 @@ return [
     'no_depreciations_warning'               => 'strong>Upozorenje: </strong>
  Trenutno nemate podešene stope amortizacije.
  Podesite najmanje jednu stopu amortizacije da biste videli izveštaj o amortizaciji.',
-    'depreciation_method'                   => 'Vrsta amortizacije',
+    'depreciation_method'                   => 'Izvještaj o amortizaciji',
     'linear_depreciation'                   => 'Linearna (podrazumevano)',
     'half_1'                                => 'Polugodišnja, uvek se primenjuje',
     'half_2'                                => 'Polugodišnja, primenjuje se uz uslov',

@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Modellbezeichnungen',
     'asset_model'			=> 'Modell',
     'asset'					=> 'Asset',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Bestandsbericht',
     'asset_tag'				=> 'Kennzeichnung',
     'asset_tags'            => 'Inventarnummern',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Passwort-Verwaltung',
     'user_managed_passwords_disallow' => 'Benutzern die Verwaltung ihrer eigenen Passwörter verbieten',
     'user_managed_passwords_allow' => 'Benutzern erlauben, ihre eigenen Passwörter zu verwalten',
+    'from' => 'From',
+    'by' => 'Von',
 
 // Add form placeholders here
     'placeholders' => [

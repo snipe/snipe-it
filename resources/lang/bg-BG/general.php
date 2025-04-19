@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Модели на активи',
     'asset_model'			=> 'Модел',
     'asset'					=> 'Актив',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Справка за активите',
     'asset_tag'				=> 'Инвентарен номер',
     'asset_tags'            => 'Етикет на актив',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'От',
 
 // Add form placeholders here
     'placeholders' => [

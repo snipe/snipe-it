@@ -27,7 +27,7 @@ return [
     'undeployable_tooltip'  	=> 'crwdns11579:0crwdne11579:0',
     'view'  					=> 'crwdns761:0crwdne761:0',
     'csv_error' => 'crwdns6559:0crwdne6559:0',
-    'import_text' => 'crwdns12112:0crwdne12112:0',
+    'import_text' => 'crwdns13144:0crwdne13144:0',
     'csv_import_match_f-l' => 'crwdns12114:0crwdne12114:0',
     'csv_import_match_initial_last' => 'crwdns12116:0crwdne12116:0',
     'csv_import_match_first' => 'crwdns12118:0crwdne12118:0',

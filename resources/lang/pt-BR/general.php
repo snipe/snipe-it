@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Modelos de Ativos',
     'asset_model'			=> 'Modelo',
     'asset'					=> 'Ativo',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Relatório de Ativos',
     'asset_tag'				=> 'Etiqueta do Ativo',
     'asset_tags'            => 'Etiquetas de Ativo',
@@ -574,6 +575,8 @@ Resultados da Sincronização',
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Por',
 
 // Add form placeholders here
     'placeholders' => [

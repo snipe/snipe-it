@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Ngā Ahua Ahua',
     'asset_model'			=> 'Tauira',
     'asset'					=> 'Tahua',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Pūrongo Ahua',
     'asset_tag'				=> 'Tae Taonga',
     'asset_tags'            => 'Asset Tags',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Na',
 
 // Add form placeholders here
     'placeholders' => [

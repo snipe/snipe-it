@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'info'   => '请选择你要报备资产的选项。',
+    'info'   => '选择您需要的资产报告选项。',
     'deleted_user' => '已删除用户',
     'send_reminder' => '发送提醒',
     'cannot_send_reminder' => '用户已被删除或没有电子邮件地址，因此无法接收提醒',

@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'מודלים של נכסים',
     'asset_model'			=> 'דֶגֶם',
     'asset'					=> 'נכס',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'דוח נכסים',
     'asset_tag'				=> 'תג נכס',
     'asset_tags'            => 'תגיות נכס',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'ניהול סיסמאות',
     'user_managed_passwords_disallow' => 'מנע ממשתמשים לנהל את הסיסמאות של עצמם',
     'user_managed_passwords_allow' => 'אפשר למשתמשים לנהל את הסיסמאות של עצמם',
+    'from' => 'From',
+    'by' => 'על ידי',
 
 // Add form placeholders here
     'placeholders' => [

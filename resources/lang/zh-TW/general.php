@@ -23,6 +23,7 @@ return [
     'asset_models'			=> '資產樣板',
     'asset_model'			=> '模型',
     'asset'					=> '資產',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => '資產報告',
     'asset_tag'				=> '資產標籤',
     'asset_tags'            => '資產標籤',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => '經由',
 
 // Add form placeholders here
     'placeholders' => [

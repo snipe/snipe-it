@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Aktīvu modeļi',
     'asset_model'			=> 'Modelis',
     'asset'					=> 'Aktīvs',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Aktīvu pārskats',
     'asset_tag'				=> 'Asset Tag',
     'asset_tags'            => 'Inventāra birka',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Līdz',
 
 // Add form placeholders here
     'placeholders' => [
