@@ -16,7 +16,7 @@
 @section('content')
 
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
           <table
@@ -40,17 +40,13 @@
           </table>
       </div>
     </div>
-  </div> <!-- /.col-md-9-->
-
-
-  <!-- side address column -->
-  <div class="col-md-3">
-    <h2>{{ trans('admin/depreciations/general.about_asset_depreciations') }}</h4>
-    <p>{{ trans('admin/depreciations/general.about_depreciations') }} </p>
   </div>
 
+  <div class="well">
+    <h4>{{ trans('admin/depreciations/general.about_asset_depreciations') }}</h4>
+    <p>{{ trans('admin/depreciations/general.about_depreciations') }} </p>
+  </div>
 </div>
-
 @stop
 
 @section('moar_scripts')
