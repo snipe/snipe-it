@@ -18,7 +18,7 @@ class UploadedFilesTransformer
             $array[] = self::transformFile($file);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
 
@@ -38,7 +38,7 @@ class UploadedFilesTransformer
             'url' => $file_url,
             'created_by' => ($file->adminuser) ? [
                 'id' => (int) $file->adminuser->id,
-                'name'=> e($file->adminuser->present()->fullName),
+                'name' => e($file->adminuser->present()->fullName),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($file->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($file->updated_at, 'datetime'),
@@ -52,5 +52,4 @@ class UploadedFilesTransformer
         $array += $permissions_array;
         return $array;
     }
-
 }

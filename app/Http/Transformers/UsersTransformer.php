@@ -16,7 +16,7 @@ class UsersTransformer
             $array[] = self::transformUser($user);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformUser(User $user)
@@ -34,7 +34,7 @@ class UsersTransformer
                 'employee_num' => ($user->employee_num) ? e($user->employee_num) : null,
                 'manager' => ($user->manager) ? [
                     'id' => (int) $user->manager->id,
-                    'name'=> e($user->manager->first_name).' '.e($user->manager->last_name),
+                    'name' => e($user->manager->first_name) . ' ' . e($user->manager->last_name),
                 ] : null,
                 'jobtitle' => ($user->jobtitle) ? e($user->jobtitle) : null,
                 'vip' => ($user->vip == '1') ? true : false,
@@ -48,13 +48,13 @@ class UsersTransformer
                 'email' => ($user->email) ? e($user->email) : null,
                 'department' => ($user->department) ? [
                     'id' => (int) $user->department->id,
-                    'name'=> e($user->department->name),
+                    'name' => e($user->department->name),
                 ] : null,
                 'location' => ($user->userloc) ? [
                     'id' => (int) $user->userloc->id,
-                    'name'=> e($user->userloc->name),
+                    'name' => e($user->userloc->name),
                 ] : null,
-                'notes'=> Helper::parseEscapedMarkedownInline($user->notes),
+                'notes' => Helper::parseEscapedMarkedownInline($user->notes),
                 'permissions' => $user->decodePermissions(),
                 'activated' => ($user->activated == '1') ? true : false,
                 'autoassign_licenses' => ($user->autoassign_licenses == '1') ? true : false,
@@ -67,10 +67,10 @@ class UsersTransformer
                 'consumables_count' => (int) $user->consumables_count,
                 'manages_users_count' => (int) $user->manages_users_count,
                 'manages_locations_count' => (int) $user->manages_locations_count,
-                'company' => ($user->company) ? ['id' => (int) $user->company->id, 'name'=> e($user->company->name)] : null,
+                'company' => ($user->company) ? ['id' => (int) $user->company->id, 'name' => e($user->company->name)] : null,
                 'created_by' => ($user->createdBy) ? [
                     'id' => (int) $user->createdBy->id,
-                    'name'=> e($user->createdBy->present()->fullName),
+                    'name' => e($user->createdBy->present()->fullName),
                 ] : null,
                 'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
                 'updated_at' => Helper::getFormattedDateObject($user->updated_at, 'datetime'),
@@ -115,7 +115,7 @@ class UsersTransformer
      * @return array
      * @throws \Exception
      */
-    public function transformUserCompact(User $user) : array
+    public function transformUserCompact(User $user): array
     {
 
         $array = [
@@ -128,8 +128,8 @@ class UsersTransformer
             'username' => e($user->username),
             'created_by' => $user->adminuser ? [
                 'id' => (int) $user->adminuser->id,
-                'name'=> e($user->adminuser->present()->fullName),
-            ]: null,
+                'name' => e($user->adminuser->present()->fullName),
+            ] : null,
             'created_at' => Helper::getFormattedDateObject($user->created_at, 'datetime'),
             'deleted_at' => ($user->deleted_at) ? Helper::getFormattedDateObject($user->deleted_at, 'datetime') : null,
         ];
@@ -139,6 +139,6 @@ class UsersTransformer
 
     public function transformUsersDatatable($users)
     {
-        return (new DatatablesTransformer)->transformDatatables($users);
+        return (new DatatablesTransformer())->transformDatatables($users);
     }
 }
