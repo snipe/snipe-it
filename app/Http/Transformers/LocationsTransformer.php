@@ -19,7 +19,7 @@ class LocationsTransformer
             $array[] = self::transformLocation($location);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformLocation(Location $location = null)
@@ -44,9 +44,9 @@ class LocationsTransformer
                 'city' =>  ($location->city) ? e($location->city) : null,
                 'state' =>  ($location->state) ? e($location->state) : null,
                 'country' => ($location->country) ? e($location->country) : null,
-		'zip' => ($location->zip) ? e($location->zip) : null,
-		'latitude' => ($location->latitude) ? e($location->latitude) : null,
-		'longitude' => ($location->longitude) ? e($location->longitude) : null,
+                'zip' => ($location->zip) ? e($location->zip) : null,
+                'latitude' => ($location->latitude) ? e($location->latitude) : null,
+                'longitude' => ($location->longitude) ? e($location->longitude) : null,
                 'phone' => ($location->phone!='') ? e($location->phone): null,
                 'fax' => ($location->fax!='') ? e($location->fax): null,
                 'accessories_count' => (int) $location->accessories_count,
@@ -97,7 +97,7 @@ class LocationsTransformer
             $array[] = self::transformCheckedoutAccessory($checkout);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
 
