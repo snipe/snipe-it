@@ -343,4 +343,24 @@ trait Loggable
 
         return $log;
     }
+
+    /**
+     * Get latest signature from a specific user
+     *
+     * This just makes the print view a bit cleaner
+     * Returns the latest acceptance ActionLog that contains a signature
+     * from $user or null if there is none
+     *
+     * @param User $user
+     * @return null|Actionlog
+     **/
+    public function getLatestSignedAcceptance(User $user)
+    {
+        return $this->log->where('target_type', User::class)
+            ->where('target_id', $user->id)
+            ->where('action_type', 'accepted')
+            ->where('accept_signature', '!=', null)
+            ->sortByDesc('created_at')
+            ->first();
+    }
 }
