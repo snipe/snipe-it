@@ -2,8 +2,8 @@
 
 namespace App\Http\Transformers;
 
-
 use App\Helpers\Helper;
+
 /**
  * Class PieChartTransformer
  *
@@ -25,10 +25,8 @@ class PieChartTransformer
         $colors_array = [];
 
         foreach ($totals as $total) {
-
             if ($total['count'] > 0) {
-
-                $labels[] = $total['label']." (".$total['count'].")";
+                $labels[] = $total['label'] . " (" . $total['count'] . ")";
                 $counts[] = $total['count'];
 
                 if (isset($total['color'])) {
