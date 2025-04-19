@@ -574,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'created_at_tooltip' => 'The date the record was created in the database. This is usually the same as the Date column, but may sometimes be different',
+    'action_date_tooltip' => 'This is usually the same as the Created At column, but may sometimes be different if an action was pre or post-dated',
     'from' => 'From',
     'by' => 'By',
 

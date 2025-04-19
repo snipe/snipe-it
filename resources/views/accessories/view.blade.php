@@ -31,27 +31,33 @@
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#history" data-toggle="tab">
-                        <span class="hidden-lg hidden-md">
-                            <x-icon type="history" class="fa-2x" />
-                        </span>
-                        <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
-                        </a>
-                    </li>
-
-
-                    @can('accessories.files', $accessory)
+                    @if ($accessory->assetlog->count() >= 0 )
                         <li>
-                            <a href="#files" data-toggle="tab">
+                            <a href="#history" data-toggle="tab">
                                 <span class="hidden-lg hidden-md">
-                                <x-icon type="files" class="fa-2x" />
+                                  <i class="far fa-history fa-2x" aria-hidden="true"></i>
                                 </span>
-                                <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
-                                    {!! ($accessory->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($accessory->uploads->count()).'</badge>' : '' !!}
+                                <span class="hidden-xs hidden-sm">{{ trans('general.history') }}
+                                    {!! ($accessory->assetlog->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($accessory->assetlog->count()).'</badge>' : '' !!}
                                 </span>
                             </a>
                         </li>
+                    @endif
+
+
+                    @can('accessories.files', $accessory)
+                        @if ($accessory->uploads->count() > 0 )
+                            <li>
+                                <a href="#files" data-toggle="tab">
+                                    <span class="hidden-lg hidden-md">
+                                    <x-icon type="files" class="fa-2x" />
+                                    </span>
+                                    <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
+                                        {!! ($accessory->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($accessory->uploads->count()).'</badge>' : '' !!}
+                                    </span>
+                                </a>
+                            </li>
+                        @endif
                     @endcan
 
                     @can('update', $accessory)
@@ -102,45 +108,13 @@
 
                     <!-- history tab pane -->
                      <div class="tab-pane fade" id="history">
-                         <div class="table-responsive">
-                             <div class="row">
-                                 <div class="col-md-12">
-                                <table
-                                        class="table table-striped snipe-table"
-                                        data-cookie-id-table="AccessoryHistoryTable"
-                                        data-id-table="AccessoryHistoryTable"
-                                        id="AccessoryHistoryTable"
-                                        data-pagination="true"
-                                        data-show-columns="true"
-                                        data-side-pagination="server"
-                                        data-show-refresh="true"
-                                        data-show-export="true"
-                                        data-sort-order="desc"
-                                        data-export-options='{
-                       "fileName": "export-{{ str_slug($accessory->name) }}-history-{{ date('Y-m-d') }}",
-                       "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                     }'
-                                                data-url="{{ route('api.activity.index', ['item_id' => $accessory->id, 'item_type' => 'accessory']) }}">
 
-                                            <thead>
-                                            <tr>
-                                                <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
-                                                <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
-                                                <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
-                                                <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
-                                                <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                                                <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
-                                                <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">{{ trans('general.notes') }}</th>
-                                                <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                                                @if  ($snipeSettings->require_accept_signature=='1')
-                                                    <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                                                @endif
-                                            </tr>
-                                            </thead>
-                                        </table>
-                                    </div> <!-- /.col-md-12-->
-                                </div> <!-- /.row-->
-                            </div><!--tab history-->
+                         <x-historytable
+                                 filepath="private_uploads/accessories/"
+                                 showfile_routename="show.accessoryfile"
+                                 object_type="accessory"
+                                 :object="$accessory" />
+
                      </div>
 
 

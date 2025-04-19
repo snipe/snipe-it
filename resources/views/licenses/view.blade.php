@@ -50,14 +50,19 @@
         </li>
         @endcan
 
-        <li>
-          <a href="#history" data-toggle="tab">
-            <span class="hidden-lg hidden-md">
-            <x-icon type="history" class="fa-2x" />
-            </span>
-            <span class="hidden-xs hidden-sm">{{ trans('general.history') }}</span>
-          </a>
-        </li>
+        @if ($license->assetlog->count() >= 0 )
+          <li>
+            <a href="#history" data-toggle="tab">
+                <span class="hidden-lg hidden-md">
+                  <i class="far fa-history fa-2x" aria-hidden="true"></i>
+                </span>
+                <span class="hidden-xs hidden-sm">
+                  {{ trans('general.history') }}
+                  {!! ($license->assetlog->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($license->assetlog->count()).'</badge>' : '' !!}
+                </span>
+            </a>
+          </li>
+        @endif
         
         @can('update', \App\Models\License::class)
           <li class="pull-right"><a href="#" data-toggle="modal" data-target="#uploadFileModal">
@@ -475,47 +480,11 @@
         @endcan
 
         <div class="tab-pane" id="history">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="table-responsive">
-              <table
-                      class="table table-striped snipe-table"
-                      data-cookie-id-table="licenseHistoryTable"
-                      data-id-table="licenseHistoryTable"
-                      id="licenseHistoryTable"
-                      data-pagination="true"
-                      data-show-columns="true"
-                      data-side-pagination="server"
-                      data-show-refresh="true"
-                      data-show-export="true"
-                      data-sort-order="desc"
-                      data-export-options='{
-                       "fileName": "export-{{ str_slug($license->name) }}-history-{{ date('Y-m-d') }}",
-                       "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                     }'
-                      data-url="{{ route('api.activity.index', ['item_id' => $license->id, 'item_type' => 'license']) }}">
-
-                <thead>
-                <tr>
-                  <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
-                  <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
-                  <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
-                  <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
-                  <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                  <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
-                  <th class="col-sm-2" data-sortable="true" data-visible="true" data-field="note">{{ trans('general.notes') }}</th>
-                  <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                  @if  ($snipeSettings->require_accept_signature=='1')
-                    <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                  @endif
-                </tr>
-                </thead>
-              </table>
-              </div>
-            </div> <!-- /.col-md-12-->
-
-
-          </div> <!-- /.row-->
+          <x-historytable
+                  filepath="private_uploads/licenses/"
+                  showfile_routename="show.licensefile"
+                  object_type="license"
+                  :object="$license" />
         </div> <!-- /.tab-pane -->
 
       </div> <!-- /.tab-content -->

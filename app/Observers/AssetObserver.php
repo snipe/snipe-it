@@ -5,7 +5,6 @@ namespace App\Observers;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
 class AssetObserver
@@ -52,7 +51,7 @@ class AssetObserver
                     $changed[$key]['old'] = $asset->getRawOriginal()[$key];
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
                 }
-	    }
+	        }
 
 	    if (empty($changed)){
 	        return;

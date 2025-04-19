@@ -26,12 +26,14 @@ class UserFilesController extends Controller
     {
         $this->authorize('update', $user);
         $files = $request->file('file');
+        $errors = 0;
 
         if (is_null($files)) {
             return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
         }
+
         foreach ($files as $file) {
-            $file_name = $request->handleFile('private_uploads/users/', 'user-'.$user->id, $file);
+            $file_name = $request->handleFile('private_uploads/users/', 'user-' . $user->id, $file);
 
             //Log the uploaded file to the log
             $logAction = new Actionlog();
@@ -39,18 +41,25 @@ class UserFilesController extends Controller
             $logAction->item_type = User::class;
             $logAction->created_by = auth()->id();
             $logAction->note = $request->input('notes');
-            $logAction->target_id = null;
-            $logAction->created_at = date("Y-m-d H:i:s");
+            $logAction->target_type = User::class;
+            $logAction->target_id = $user->id;
+            $logAction->action_date = date("Y-m-d H:i:s");
             $logAction->filename = $file_name;
+            $logAction->action_source = 'gui';
+            $logAction->user_agent = request()->header('User-Agent');
+            $logAction->remote_ip = request()->ip();
             $logAction->action_type = 'uploaded';
 
-            if (! $logAction->save()) {
-                return JsonResponse::create(['error' => 'Failed validation: '.print_r($logAction->getErrors(), true)], 500);
+            if (!$logAction->save()) {
+                $errors++;
             }
-
-        return redirect()->back()->withFragment('files')->with('success', trans('admin/users/message.upload.success'));
         }
 
+        if ($errors > 0) {
+            return redirect()->back()->withFragment('files')->with('warning', 'Some files could not be uploaded');
+        }
+        
+        return redirect()->back()->withFragment('files')->with('success', trans('admin/users/message.upload.success'));
 
     }
 
