@@ -15,7 +15,7 @@ class CustomFieldsTransformer
             $array[] = self::transformCustomField($field);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     /**
@@ -33,7 +33,7 @@ class CustomFieldsTransformer
             $array[] = self::transformCustomFieldWithDefaultValue($field, $modelId);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformCustomField(CustomField $field)
@@ -46,8 +46,8 @@ class CustomFieldsTransformer
             'field_values'   => ($field->field_values) ? e($field->field_values) : null,
             'field_values_array'   => ($field->field_values) ? explode("\r\n", e($field->field_values)) : null,
             'type'   =>  e($field->element),
-            'required'   =>  (($field->pivot) && ($field->pivot->required=='1')) ? true : false,
-            'display_in_user_view' =>  ($field->display_in_user_view =='1') ? true : false,
+            'required'   =>  (($field->pivot) && ($field->pivot->required == '1')) ? true : false,
+            'display_in_user_view' =>  ($field->display_in_user_view == '1') ? true : false,
             'auto_add_to_fieldsets' =>  ($field->auto_add_to_fieldsets == '1') ? true : false,
             'show_in_listview'  => ($field->show_in_listview == '1') ? true : false,
             'display_checkin'  => ($field->display_checkin == '1') ? true : false,
