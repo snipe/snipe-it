@@ -249,11 +249,11 @@ class AccessoriesController extends Controller
     public function destroy($id)
     {
         $this->authorize('delete', Accessory::class);
-        $accessory = Accessory::findOrFail($id);
+        $accessory = Accessory::withCount('checkouts as checkouts_count')->findOrFail($id);
         $this->authorize($accessory);
 
-        if ($accessory->hasUsers() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/message.assoc_users', ['count'=> $accessory->hasUsers()])));
+        if ($accessory->checkouts_count > 0) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/accessories/general.delete_disabled')));
         }
 
         $accessory->delete();
