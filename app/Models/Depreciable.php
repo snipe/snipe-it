@@ -49,15 +49,15 @@ class Depreciable extends SnipeModel
         $setting = Setting::getSettings();
         switch ($setting->depreciation_method) {
             case 'half_1':
-            $depreciation = $this->getHalfYearDepreciatedValue(true);
-            break;
+                $depreciation = $this->getHalfYearDepreciatedValue(true);
+                break;
 
             case 'half_2':
-            $depreciation = $this->getHalfYearDepreciatedValue(false);
-            break;
+                $depreciation = $this->getHalfYearDepreciatedValue(false);
+                break;
 
             default:
-            $depreciation = $this->getLinearDepreciatedValue();
+                $depreciation = $this->getLinearDepreciatedValue();
         }
 
         return $depreciation;
@@ -69,34 +69,30 @@ class Depreciable extends SnipeModel
     public function getLinearDepreciatedValue() // TODO - for testing it might be nice to have an optional $relative_to param here, defaulted to 'now'
     {
         if (($this->get_depreciation()) && ($this->purchase_date)) {
-            $months_passed = ($this->purchase_date->diff(now())->m)+($this->purchase_date->diff(now())->y*12);
+            $months_passed = ($this->purchase_date->diff(now())->m) + ($this->purchase_date->diff(now())->y * 12);
         } else {
             return null;
         }
 
-        if ($months_passed >= $this->get_depreciation()->months){
+        if ($months_passed >= $this->get_depreciation()->months) {
             //if there is a floor use it
-            if($this->get_depreciation()->depreciation_min) {
-
+            if ($this->get_depreciation()->depreciation_min) {
                 $current_value = $this->calculateDepreciation();
-
-            }else{
+            } else {
                 $current_value = 0;
             }
-        }
-        else {
+        } else {
             // The equation here is (Purchase_Cost-Floor_min)*(Months_passed/Months_til_depreciated)
-            $current_value = round(($this->purchase_cost-($this->purchase_cost - ($this->calculateDepreciation())) * ($months_passed / $this->get_depreciation()->months)), 2);
-
+            $current_value = round(($this->purchase_cost - ($this->purchase_cost - ($this->calculateDepreciation())) * ($months_passed / $this->get_depreciation()->months)), 2);
         }
 
         return $current_value;
     }
 
-    public function getMonthlyDepreciation(){
+    public function getMonthlyDepreciation()
+    {
 
-        return ($this->purchase_cost-$this->calculateDepreciation())/$this->get_depreciation()->months;
-
+        return ($this->purchase_cost - $this->calculateDepreciation()) / $this->get_depreciation()->months;
     }
 
     /**
@@ -179,11 +175,10 @@ class Depreciable extends SnipeModel
         if (($this->purchase_date) && ($this->get_depreciation())) {
             $date = date_create($this->purchase_date);
 
-            return date_add($date, date_interval_create_from_date_string($this->get_depreciation()->months.' months'));//date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
+            return date_add($date, date_interval_create_from_date_string($this->get_depreciation()->months . ' months'));//date_format($date, 'Y-m-d'); //don't bake-in format, for internationalization
         }
 
         return null;
-
     }
 
     // it's necessary for unit tests
@@ -194,9 +189,9 @@ class Depreciable extends SnipeModel
 
     private function calculateDepreciation()
     {
-        if($this->get_depreciation()->depreciation_type === 'percent') {
-            $depreciation_percent= $this->get_depreciation()->depreciation_min / 100;
-            $depreciation_min= $this->purchase_cost * $depreciation_percent;
+        if ($this->get_depreciation()->depreciation_type === 'percent') {
+            $depreciation_percent = $this->get_depreciation()->depreciation_min / 100;
+            $depreciation_min = $this->purchase_cost * $depreciation_percent;
             return $depreciation_min;
         }
 
