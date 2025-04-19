@@ -22,7 +22,7 @@ class ManufacturersController extends Controller
      * @since [v4.0]
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) : JsonResponse | array
+    public function index(Request $request): JsonResponse | array
     {
         $this->authorize('view', Manufacturer::class);
         $allowed_columns =  [
@@ -116,7 +116,7 @@ class ManufacturersController extends Controller
         $total = $manufacturers->count();
         $manufacturers = $manufacturers->skip($offset)->take($limit)->get();
 
-        return (new ManufacturersTransformer)->transformManufacturers($manufacturers, $total);
+        return (new ManufacturersTransformer())->transformManufacturers($manufacturers, $total);
     }
 
     /**
@@ -126,10 +126,10 @@ class ManufacturersController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
      */
-    public function store(ImageUploadRequest $request) : JsonResponse
+    public function store(ImageUploadRequest $request): JsonResponse
     {
         $this->authorize('create', Manufacturer::class);
-        $manufacturer = new Manufacturer;
+        $manufacturer = new Manufacturer();
         $manufacturer->fill($request->all());
         $manufacturer = $request->handleImages($manufacturer);
 
@@ -137,7 +137,6 @@ class ManufacturersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', $manufacturer, trans('admin/manufacturers/message.create.success')));
         }
         return response()->json(Helper::formatStandardApiResponse('error', null, $manufacturer->getErrors()));
-
     }
 
     /**
@@ -147,12 +146,12 @@ class ManufacturersController extends Controller
      * @since [v4.0]
      * @param  int  $id
      */
-    public function show($id) : JsonResponse | array
+    public function show($id): JsonResponse | array
     {
         $this->authorize('view', Manufacturer::class);
         $manufacturer = Manufacturer::withCount('assets as assets_count')->withCount('licenses as licenses_count')->withCount('consumables as consumables_count')->withCount('accessories as accessories_count')->findOrFail($id);
 
-        return (new ManufacturersTransformer)->transformManufacturer($manufacturer);
+        return (new ManufacturersTransformer())->transformManufacturer($manufacturer);
     }
 
     /**
@@ -163,7 +162,7 @@ class ManufacturersController extends Controller
      * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      */
-    public function update(ImageUploadRequest $request, $id) : JsonResponse
+    public function update(ImageUploadRequest $request, $id): JsonResponse
     {
         $this->authorize('update', Manufacturer::class);
         $manufacturer = Manufacturer::findOrFail($id);
@@ -184,7 +183,7 @@ class ManufacturersController extends Controller
      * @since [v4.0]
      * @param  int  $id
      */
-    public function destroy($id) : JsonResponse
+    public function destroy($id): JsonResponse
     {
         $this->authorize('delete', Manufacturer::class);
         $manufacturer = Manufacturer::findOrFail($id);
@@ -192,11 +191,10 @@ class ManufacturersController extends Controller
 
         if ($manufacturer->isDeletable()) {
             $manufacturer->delete();
-            return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/manufacturers/message.delete.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/manufacturers/message.delete.success')));
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.assoc_users')));
-
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/manufacturers/message.assoc_users')));
     }
 
     /**
@@ -207,18 +205,16 @@ class ManufacturersController extends Controller
      * @param int $id
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
-    public function restore($id) : JsonResponse
+    public function restore($id): JsonResponse
     {
         $this->authorize('delete', Manufacturer::class);
 
         if ($manufacturer = Manufacturer::withTrashed()->find($id)) {
-
             if ($manufacturer->deleted_at == '') {
                 return response()->json(Helper::formatStandardApiResponse('error', trans('general.not_deleted', ['item_type' => trans('general.manufacturer')])), 200);
             }
 
             if ($manufacturer->restore()) {
-
                 $logaction = new Actionlog();
                 $logaction->item_type = Manufacturer::class;
                 $logaction->item_id = $manufacturer->id;
@@ -233,7 +229,7 @@ class ManufacturersController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', trans('general.could_not_restore', ['item_type' => trans('general.manufacturer'), 'error' => $manufacturer->getErrors()->first()])), 200);
         }
 
-        return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/manufacturers/message.does_not_exist')));
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/manufacturers/message.does_not_exist')));
     }
 
     /**
@@ -243,7 +239,7 @@ class ManufacturersController extends Controller
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      */
-    public function selectlist(Request $request) : array
+    public function selectlist(Request $request): array
     {
 
         $this->authorize('view.selectlists');
@@ -254,7 +250,7 @@ class ManufacturersController extends Controller
         ]);
 
         if ($request->filled('search')) {
-            $manufacturers = $manufacturers->where('name', 'LIKE', '%'.$request->get('search').'%');
+            $manufacturers = $manufacturers->where('name', 'LIKE', '%' . $request->get('search') . '%');
         }
 
         $manufacturers = $manufacturers->orderBy('name', 'ASC')->paginate(50);
@@ -264,9 +260,9 @@ class ManufacturersController extends Controller
         // they may not have a ->name value but we want to display something anyway
         foreach ($manufacturers as $manufacturer) {
             $manufacturer->use_text = $manufacturer->name;
-            $manufacturer->use_image = ($manufacturer->image) ? Storage::disk('public')->url('manufacturers/'.$manufacturer->image, $manufacturer->image) : null;
+            $manufacturer->use_image = ($manufacturer->image) ? Storage::disk('public')->url('manufacturers/' . $manufacturer->image, $manufacturer->image) : null;
         }
 
-        return (new SelectlistTransformer)->transformSelectlist($manufacturers);
+        return (new SelectlistTransformer())->transformSelectlist($manufacturers);
     }
 }

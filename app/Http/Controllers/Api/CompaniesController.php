@@ -20,7 +20,7 @@ class CompaniesController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v4.0]
      */
-    public function index(Request $request) : JsonResponse | array
+    public function index(Request $request): JsonResponse | array
     {
         $this->authorize('view', Company::class);
 
@@ -53,7 +53,7 @@ class CompaniesController extends Controller
             $companies->where('name', '=', $request->input('name'));
         }
 
-		if ($request->filled('email')) {
+        if ($request->filled('email')) {
             $companies->where('email', '=', $request->input('email'));
         }
 
@@ -81,8 +81,7 @@ class CompaniesController extends Controller
         $total = $companies->count();
 
         $companies = $companies->skip($offset)->take($limit)->get();
-        return (new CompaniesTransformer)->transformCompanies($companies, $total);
-
+        return (new CompaniesTransformer())->transformCompanies($companies, $total);
     }
 
 
@@ -93,15 +92,15 @@ class CompaniesController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest $request
      */
-    public function store(ImageUploadRequest $request) : JsonResponse
+    public function store(ImageUploadRequest $request): JsonResponse
     {
         $this->authorize('create', Company::class);
-        $company = new Company;
+        $company = new Company();
         $company->fill($request->all());
         $company = $request->handleImages($company);
-        
+
         if ($company->save()) {
-            return response()->json(Helper::formatStandardApiResponse('success', (new CompaniesTransformer)->transformCompany($company), trans('admin/companies/message.create.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new CompaniesTransformer())->transformCompany($company), trans('admin/companies/message.create.success')));
         }
 
         return response()
@@ -115,12 +114,11 @@ class CompaniesController extends Controller
      * @since [v4.0]
      * @param  int  $id
      */
-    public function show($id) : array
+    public function show($id): array
     {
         $this->authorize('view', Company::class);
         $company = Company::findOrFail($id);
-        return (new CompaniesTransformer)->transformCompany($company);
-
+        return (new CompaniesTransformer())->transformCompany($company);
     }
 
 
@@ -132,7 +130,7 @@ class CompaniesController extends Controller
      * @param  \App\Http\Requests\ImageUploadRequest  $request
      * @param  int  $id
      */
-    public function update(ImageUploadRequest $request, $id) : JsonResponse
+    public function update(ImageUploadRequest $request, $id): JsonResponse
     {
         $this->authorize('update', Company::class);
         $company = Company::findOrFail($id);
@@ -141,7 +139,7 @@ class CompaniesController extends Controller
 
         if ($company->save()) {
             return response()
-                ->json(Helper::formatStandardApiResponse('success', (new CompaniesTransformer)->transformCompany($company), trans('admin/companies/message.update.success')));
+                ->json(Helper::formatStandardApiResponse('success', (new CompaniesTransformer())->transformCompany($company), trans('admin/companies/message.update.success')));
         }
 
         return response()
@@ -155,7 +153,7 @@ class CompaniesController extends Controller
      * @since [v4.0]
      * @param  int  $id
      */
-    public function destroy($id) : JsonResponse
+    public function destroy($id): JsonResponse
     {
         $this->authorize('delete', Company::class);
         $company = Company::findOrFail($id);
@@ -178,7 +176,7 @@ class CompaniesController extends Controller
      * @since [v4.0.16]
      * @see \App\Http\Transformers\SelectlistTransformer
      */
-    public function selectlist(Request $request) : array
+    public function selectlist(Request $request): array
     {
         $this->authorize('view.selectlists');
         $companies = Company::select([
@@ -189,7 +187,7 @@ class CompaniesController extends Controller
         ]);
 
         if ($request->filled('search')) {
-            $companies = $companies->where('companies.name', 'LIKE', '%'.$request->get('search').'%');
+            $companies = $companies->where('companies.name', 'LIKE', '%' . $request->get('search') . '%');
         }
 
         $companies = $companies->orderBy('name', 'ASC')->paginate(50);
@@ -198,9 +196,9 @@ class CompaniesController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($companies as $company) {
-            $company->use_image = ($company->image) ? Storage::disk('public')->url('companies/'.$company->image, $company->image) : null;
+            $company->use_image = ($company->image) ? Storage::disk('public')->url('companies/' . $company->image, $company->image) : null;
         }
 
-        return (new SelectlistTransformer)->transformSelectlist($companies);
+        return (new SelectlistTransformer())->transformSelectlist($companies);
     }
 }
