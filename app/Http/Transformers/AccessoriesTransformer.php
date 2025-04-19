@@ -17,7 +17,7 @@ class AccessoriesTransformer
             $array[] = self::transformAccessory($accessory);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformAccessory(Accessory $accessory)
@@ -25,13 +25,13 @@ class AccessoriesTransformer
         $array = [
             'id' => $accessory->id,
             'name' => e($accessory->name),
-            'image' => ($accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory->image)) : null,
-            'company' => ($accessory->company) ? ['id' => $accessory->company->id, 'name'=> e($accessory->company->name)] : null,
-            'manufacturer' => ($accessory->manufacturer) ? ['id' => $accessory->manufacturer->id, 'name'=> e($accessory->manufacturer->name)] : null,
-            'supplier' => ($accessory->supplier) ? ['id' => $accessory->supplier->id, 'name'=> e($accessory->supplier->name)] : null,
+            'image' => ($accessory->image) ? Storage::disk('public')->url('accessories/' . e($accessory->image)) : null,
+            'company' => ($accessory->company) ? ['id' => $accessory->company->id, 'name' => e($accessory->company->name)] : null,
+            'manufacturer' => ($accessory->manufacturer) ? ['id' => $accessory->manufacturer->id, 'name' => e($accessory->manufacturer->name)] : null,
+            'supplier' => ($accessory->supplier) ? ['id' => $accessory->supplier->id, 'name' => e($accessory->supplier->name)] : null,
             'model_number' => ($accessory->model_number) ? e($accessory->model_number) : null,
-            'category' => ($accessory->category) ? ['id' => $accessory->category->id, 'name'=> e($accessory->category->name)] : null,
-            'location' => ($accessory->location) ? ['id' => $accessory->location->id, 'name'=> e($accessory->location->name)] : null,
+            'category' => ($accessory->category) ? ['id' => $accessory->category->id, 'name' => e($accessory->category->name)] : null,
+            'location' => ($accessory->location) ? ['id' => $accessory->location->id, 'name' => e($accessory->location->name)] : null,
             'notes' => ($accessory->notes) ? Helper::parseEscapedMarkedownInline($accessory->notes) : null,
             'qty' => ($accessory->qty) ? (int) $accessory->qty : null,
             'purchase_date' => ($accessory->purchase_date) ? Helper::getFormattedDateObject($accessory->purchase_date, 'date') : null,
@@ -44,7 +44,7 @@ class AccessoriesTransformer
             'checkouts_count' =>  $accessory->checkouts_count,
             'created_by' => ($accessory->adminuser) ? [
                 'id' => (int) $accessory->adminuser->id,
-                'name'=> e($accessory->adminuser->present()->fullName()),
+                'name' => e($accessory->adminuser->present()->fullName()),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($accessory->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($accessory->updated_at, 'datetime'),
@@ -57,7 +57,7 @@ class AccessoriesTransformer
             'update' => Gate::allows('update', Accessory::class),
             'delete' => Gate::allows('delete', Accessory::class),
             'clone' => Gate::allows('create', Accessory::class),
-            
+
         ];
 
         $permissions_array['user_can_checkout'] = false;
@@ -82,20 +82,20 @@ class AccessoriesTransformer
                 'note' => $checkout->note ? e($checkout->note) : null,
                 'created_by' => $checkout->adminuser ? [
                     'id' => (int) $checkout->adminuser->id,
-                    'name'=> e($checkout->adminuser->present()->fullName),
-                ]: null,
+                    'name' => e($checkout->adminuser->present()->fullName),
+                ] : null,
                 'created_at' => Helper::getFormattedDateObject($checkout->created_at, 'datetime'),
                 'available_actions' => Gate::allows('checkout', Accessory::class) ? ['checkin' => true] : ['checkin' => false],
             ];
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformAssignedTo($accessoryCheckout)
     {
         if ($accessoryCheckout->checkedOutToUser()) {
-            return (new UsersTransformer)->transformUserCompact($accessoryCheckout->assigned);
+            return (new UsersTransformer())->transformUserCompact($accessoryCheckout->assigned);
         } elseif ($accessoryCheckout->checkedOutToLocation()) {
             return (new LocationsTransformer())->transformLocationCompact($accessoryCheckout->assigned);
         } elseif ($accessoryCheckout->checkedOutToAsset()) {
