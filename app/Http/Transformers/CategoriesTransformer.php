@@ -17,7 +17,7 @@ class CategoriesTransformer
             $array[] = self::transformCategory($category);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformCategory(Category $category = null)
@@ -49,10 +49,10 @@ class CategoriesTransformer
             $array = [
                 'id' => (int) $category->id,
                 'name' => e($category->name),
-                'image' =>   ($category->image) ? Storage::disk('public')->url('categories/'.e($category->image)) : null,
+                'image' =>   ($category->image) ? Storage::disk('public')->url('categories/' . e($category->image)) : null,
                 'category_type' => Helper::categoryTypeList($category->category_type),
                 'has_eula' => ($category->getEula() ? true : false),
-                'use_default_eula' => ($category->use_default_eula=='1' ? true : false),
+                'use_default_eula' => ($category->use_default_eula == '1' ? true : false),
                 'eula' => ($category->getEula()),
                 'checkin_email' => ($category->checkin_email == '1'),
                 'require_acceptance' => ($category->require_acceptance == '1'),
@@ -64,7 +64,7 @@ class CategoriesTransformer
                 'licenses_count' => (int) $category->licenses_count,
                 'created_by' => ($category->adminuser) ? [
                     'id' => (int) $category->adminuser->id,
-                    'name'=> e($category->adminuser->present()->fullName()),
+                    'name' => e($category->adminuser->present()->fullName()),
                 ] : null,
                 'notes' => Helper::parseEscapedMarkedownInline($category->notes),
                 'created_at' => Helper::getFormattedDateObject($category->created_at, 'datetime'),
