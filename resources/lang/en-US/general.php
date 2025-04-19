@@ -487,6 +487,7 @@ return [
     'no_autoassign_licenses_help' => 'Do not include user for bulk-assigning through the license UI or cli tools.',
     'modal_confirm_generic'      => 'Are you sure?',
     'cannot_be_deleted'      => 'This item cannot be deleted',
+    'cannot_delete_parent_asset' => 'Cannot delete asset until attached assets are checked in.',
     'cannot_be_edited'      => 'This item cannot be edited.',
     'undeployable_tooltip'      => 'This item cannot be checked out. Check the quantity remaining.',
     'serial_number'        => 'Serial Number',
