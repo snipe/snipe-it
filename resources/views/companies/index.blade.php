@@ -13,7 +13,7 @@
 {{-- Page content --}}
 @section('content')
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
       <div class="box box-default">
         <div class="box-body">
             <table
@@ -39,12 +39,10 @@
         </div>
       </div>
     </div>
-    <!-- side address column -->
-    <div class="col-md-3">
-      <h2>{{ trans('admin/companies/general.about_companies') }}</h2>
-      <p>{{ trans('admin/companies/general.about_companies_description') }}</p>
+  <div class="well">
+    <h4>{{ trans('admin/companies/general.about_companies') }}</h4>
+    <p>{{ trans('admin/companies/general.about_companies_description') }}</p>
   </div>
-
 @stop
 
 @section('moar_scripts')
