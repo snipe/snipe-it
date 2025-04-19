@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Una o più email sono invalidi.',
+    'checkboxes'           => ':attribute contiene opzioni non valide.',
+    'radio_buttons'        => ':attribute non è valido.',
+    
     'custom' => [
         'alpha_space' => 'Il campo :attribute contiene un carattere non consentito.',
-        'email_array'      => 'Uno o più indirizzi email non sono validi.',
+
         'hashed_pass'      => 'La tua attuale password non è corretta',
         'dumbpwd'          => 'Questa password è troppo comune.',
         'statuslabel_type' => 'È necessario selezionare un tipo di etichetta di stato valido',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute deve essere in formato AAAA-MM-GG',
         'start_date.date_format'        =>  ':attribute deve essere in formato AAAA-MM-GG',
         'end_date.date_format'          =>  ':attribute deve essere in formato AAAA-MM-GG',
-        'checkboxes'           => ':attribute contiene opzioni non valide.',
-        'radio_buttons'        => ':attribute non è valido.',
         'invalid_value_in_field' => 'Valore non valido incluso in questo campo',
 
         'ldap_username_field' => [

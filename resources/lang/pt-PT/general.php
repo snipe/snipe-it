@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Modelos de Artigo',
     'asset_model'			=> 'Modelo',
     'asset'					=> 'Artigo',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Relatório de Artigo',
     'asset_tag'				=> 'Etiqueta de Artigo',
     'asset_tags'            => 'Etiquetas de Artigo',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Por',
 
 // Add form placeholders here
     'placeholders' => [

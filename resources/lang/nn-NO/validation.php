@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'En eller flere e-postadresser er ugyldige.',
+    'checkboxes'           => ':attribute inneholder ugyldige valg.',
+    'radio_buttons'        => ':attribute er ugyldig.',
+    
     'custom' => [
         'alpha_space' => 'Attributtfeltet inneholder et tegn som ikke er tillatt.',
-        'email_array'      => 'En eller flere e-postadresser er ugyldige.',
+
         'hashed_pass'      => 'Gjeldende passord er feil',
         'dumbpwd'          => 'Passordet er for vanlig.',
         'statuslabel_type' => 'Du må velge en gyldig statusetikett-type',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute må være en gyldig dato i YYYY-MM-DD format',
         'start_date.date_format'        =>  ':attribute må være en gyldig dato i YYYY-MM-DD format',
         'end_date.date_format'          =>  ':attribute må være en gyldig dato i YYYY-MM-DD format',
-        'checkboxes'           => ':attribute inneholder ugyldige valg.',
-        'radio_buttons'        => ':attribute er ugyldig.',
         'invalid_value_in_field' => 'Ugyldig verdi inkludert i dette feltet',
 
         'ldap_username_field' => [

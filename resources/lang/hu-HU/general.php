@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Eszköz modell',
     'asset_model'			=> 'Modell',
     'asset'					=> 'Eszköz',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Eszköz riport',
     'asset_tag'				=> 'Eszköz azonosító',
     'asset_tags'            => 'Eszköz címkék',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Által',
 
 // Add form placeholders here
     'placeholders' => [

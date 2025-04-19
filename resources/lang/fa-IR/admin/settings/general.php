@@ -12,14 +12,13 @@ return [
 ',
     'admin_cc_email'            => 'ایمیل CC
 ',
-    'admin_cc_email_help'       => 'اگر می‌خواهید یک کپی از ایمیل‌های ورود/تسویه حساب که برای کاربران ارسال می‌شود را به یک حساب ایمیل اضافی ارسال کنید، آن را در اینجا وارد کنید. در غیر این صورت، این قسمت را خالی بگذارید.
-',
+    'admin_cc_email_help'       => 'Send a copy of checkin/checkout emails to this address.',
     'admin_settings'            => 'Admin Settings',
     'is_ad'				        => 'این سرور Active Directory است',
     'alerts'                	=> 'هشدار',
     'alert_title'               => 'Update Notification Settings',
     'alert_email'				=> 'ارسال هشدار به',
-    'alert_email_help'    => 'آدرس‌های ایمیل یا لیست‌های توزیعی که می‌خواهید هشدارها به آنها ارسال شود، با کاما از هم جدا شده‌اند
+    'alert_email_help'          => 'آدرس‌های ایمیل یا لیست‌های توزیعی که می‌خواهید هشدارها به آنها ارسال شود، با کاما از هم جدا شده‌اند.
 ',
     'alerts_enabled'			=> 'هشدارها فعال شد',
     'alert_interval'			=> 'آستانه ی انقضای هشدارها( به روز)',
@@ -32,8 +31,7 @@ return [
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date will be updated.',
     'audit_warning_days'        => 'آستانه هشدار حسابرسی',
     'audit_warning_days_help'   => 'چند روز پیش باید به شما هشدار می دهیم هنگامی که دارایی ها برای حسابرسی مورد نیاز است؟',
-    'auto_increment_assets'		=> 'برچسب‌های دارایی با افزایش خودکار را ایجاد کنید
-',
+    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
     'auto_increment_prefix'		=> 'پیشوند (اختیاری)',
     'auto_incrementing_help'    => 'برای تنظیم، ابتدا برچسب‌های دارایی افزایش خودکار را فعال کنید
 ',
@@ -47,7 +45,7 @@ return [
     'backups_upload'            => 'نسخه پشتیبان را دانلود کنید',
     'backups_path'              => 'نسخه‌های پشتیبان روی سرور در <code>:path</code> ذخیره می‌شوند
 ',
-    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file  ',
     'backups_logged_out'         => 'همه کاربران موجود، از جمله شما، پس از تکمیل بازیابی شما از سیستم خارج می شوند.
 ',
     'backups_large'             => 'پشتیبان‌گیری‌های بسیار بزرگ ممکن است در تلاش بازیابی به پایان برسد و ممکن است همچنان نیاز باشد از طریق خط فرمان اجرا شوند.
@@ -69,6 +67,7 @@ return [
 ',
     'default_currency'  		=> 'ارز پیش فرض',
     'default_eula_text'			=> 'EULA پیش فرض',
+    'default_eula_text_placeholder' => 'Add your default EULA text',
     'default_language'			=> 'زبان پیش فرض',
     'default_eula_help_text'	=> 'همچنین می توانید  EULA های سفارشی به دسته های خاص دارایی مرتبط کنید.',
     'acceptance_note'           => 'Add a note for your decision (Optional)',

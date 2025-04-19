@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Een of meer e-posadresse is ongeldig.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'Die: attribuut veld bevat \'n karakter wat nie toegelaat word nie.',
-        'email_array'      => 'Een of meer e-posadresse is ongeldig.',
+
         'hashed_pass'      => 'Jou huidige wagwoord is verkeerd',
         'dumbpwd'          => 'Daardie wagwoord is te algemeen.',
         'statuslabel_type' => 'U moet \'n geldige statusetiket tipe kies',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

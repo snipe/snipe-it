@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'គំរូទ្រព្យសកម្ម',
     'asset_model'			=> 'គំរូ',
     'asset'					=> 'ទ្រព្យសកម្ម',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'របាយការណ៍ទ្រព្យសកម្ម',
     'asset_tag'				=> 'ស្លាកទ្រព្យសម្បត្តិ',
     'asset_tags'            => 'ស្លាកទ្រព្យសម្បត្តិ',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'ការគ្រប់គ្រងពាក្យសម្ងាត់',
     'user_managed_passwords_disallow' => 'មិនអនុញ្ញាតឱ្យអ្នកប្រើប្រាស់គ្រប់គ្រងពាក្យសម្ងាត់ផ្ទាល់ខ្លួនរបស់ពួកគេ។',
     'user_managed_passwords_allow' => 'អនុញ្ញាតឱ្យអ្នកប្រើប្រាស់គ្រប់គ្រងពាក្យសម្ងាត់ផ្ទាល់ខ្លួនរបស់ពួកគេ។',
+    'from' => 'From',
+    'by' => 'ដោយ',
 
 // Add form placeholders here
     'placeholders' => [

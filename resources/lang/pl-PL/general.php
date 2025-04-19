@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Typy aktywów',
     'asset_model'			=> 'Model',
     'asset'					=> 'Aktywa',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Raporty Aktywów',
     'asset_tag'				=> 'Krótka nazwa',
     'asset_tags'            => 'Tagi zasobu',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Zarządzanie hasłami',
     'user_managed_passwords_disallow' => 'Nie zezwalaj użytkownikom na zarządzanie własnymi hasłami',
     'user_managed_passwords_allow' => 'Zezwalaj użytkownikom na zarządzanie własnymi hasłami',
+    'from' => 'From',
+    'by' => 'Przez',
 
 // Add form placeholders here
     'placeholders' => [

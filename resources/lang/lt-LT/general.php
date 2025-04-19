@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Turto modeliai',
     'asset_model'			=> 'Modelis',
     'asset'					=> 'Turtas',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Turto ataskaita',
     'asset_tag'				=> 'Inventorinis numeris',
     'asset_tags'            => 'Inventoriniai numeriai',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Slaptažodžių tvarkymas',
     'user_managed_passwords_disallow' => 'Neleisti naudotojams tvarkyti savo slaptažodžių',
     'user_managed_passwords_allow' => 'Leisti naudotojams tvarkyti savo slaptažodžius',
+    'from' => 'From',
+    'by' => 'Atlikti',
 
 // Add form placeholders here
     'placeholders' => [

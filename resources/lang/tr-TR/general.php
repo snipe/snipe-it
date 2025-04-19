@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Demirbaş Modelleri',
     'asset_model'			=> 'model',
     'asset'					=> 'Demirbaş',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Demirbaş Raporu',
     'asset_tag'				=> 'Demirbaş Etiketi',
     'asset_tags'            => 'Varlık Adı',
@@ -576,6 +577,8 @@ Context | Request Context
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Tarafından',
 
 // Add form placeholders here
     'placeholders' => [

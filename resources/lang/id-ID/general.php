@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Model aset',
     'asset_model'			=> 'Model',
     'asset'					=> 'Aset',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Laporan aset',
     'asset_tag'				=> 'Tag Aset',
     'asset_tags'            => 'Tag Aset',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Manajemen Kata Sandi',
     'user_managed_passwords_disallow' => 'Jangan izinkan pengelolaan kata sandi oleh pengguna',
     'user_managed_passwords_allow' => 'Izinkan pengguna mengelola kata sandi mereka sendiri',
+    'from' => 'From',
+    'by' => 'Oleh',
 
 // Add form placeholders here
     'placeholders' => [

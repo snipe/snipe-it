@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Един или повече email адреси е невалиден.',
+    'checkboxes'           => ':attribute съдържа невалидни опции.',
+    'radio_buttons'        => ':attribute е невалиден.',
+    
     'custom' => [
         'alpha_space' => 'Полето атрибут: съдържа знак, който не е разрешен.',
-        'email_array'      => 'Един или повече имейл адреси са невалидни.',
+
         'hashed_pass'      => 'Текущата ви парола е неправилна',
         'dumbpwd'          => 'Тази парола е твърде често срещана.',
         'statuslabel_type' => 'Трябва да изберете валиден тип етикет на състоянието',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD формат',
         'start_date.date_format'        =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD формат',
         'end_date.date_format'          =>  ':attribute трябва да бъде валидна дата в YYYY-MM-DD формат',
-        'checkboxes'           => ':attribute съдържа невалидни опции.',
-        'radio_buttons'        => ':attribute е невалиден.',
         'invalid_value_in_field' => 'В това поле е включена невалидна стойност',
 
         'ldap_username_field' => [

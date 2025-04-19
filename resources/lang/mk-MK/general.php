@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Модели на основни средства',
     'asset_model'			=> 'Модел',
     'asset'					=> 'Основно средство',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Извештај за основни средства',
     'asset_tag'				=> 'Код на основното средство',
     'asset_tags'            => 'Етикети на средства',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Од',
 
 // Add form placeholders here
     'placeholders' => [

@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Laitemallit',
     'asset_model'			=> 'Malli',
     'asset'					=> 'Laite',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Laiteraportti',
     'asset_tag'				=> 'Laitetunniste',
     'asset_tags'            => 'Laitetunnisteet',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Suorittaja',
 
 // Add form placeholders here
     'placeholders' => [

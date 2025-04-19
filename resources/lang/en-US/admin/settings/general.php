@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date will be updated.',
     'audit_warning_days'        => 'Audit Warning Threshold',
     'audit_warning_days_help'   => 'How many days in advance should we warn you when assets are due for auditing?',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
     'auto_increment_prefix'		=> 'Prefix (optional)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Backups',

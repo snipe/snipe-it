@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Typy majetku',
     'asset_model'			=> 'Model',
     'asset'					=> 'Majetok',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Report majetku',
     'asset_tag'				=> 'Označenie majetku',
     'asset_tags'            => 'Označenia majetku',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Správca hesiel',
     'user_managed_passwords_disallow' => 'Neumožniť používateľom spravovať ich vlastné heslá',
     'user_managed_passwords_allow' => 'Povoliť používateľom spravovať ich vlastné heslá',
+    'from' => 'From',
+    'by' => 'Podľa',
 
 // Add form placeholders here
     'placeholders' => [

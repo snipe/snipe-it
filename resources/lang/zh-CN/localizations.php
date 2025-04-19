@@ -4,7 +4,7 @@ return [
 
     'select_language' => '选择一种语言',
     'languages' => [
-        'en-US'=> '中文',
+        'en-US'=> '英语（美国）',
         'en-GB'=> '英语（英国）',
         'am-ET' => 'Amharic',
         'af-ZA'=> '南非荷兰语',
