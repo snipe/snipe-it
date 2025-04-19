@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
+use Gate;
 
 class AssetCheckinController extends Controller
 {
@@ -140,7 +141,11 @@ class AssetCheckinController extends Controller
         $asset->customFieldsForCheckinCheckout('display_checkin');
 
         if ($asset->save()) {
-
+            if(Gate::allows('audit',$asset)) {
+                if ($request->filled('log_audit') == "1") {
+                    $asset->logAudit($request->input('note'), $request->input('location_id'));
+                }
+            }
             event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
             return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.checkin.success'));
         }

@@ -145,12 +145,6 @@
                                                 'show_display_checkin_fields' => 'true'
                                         ])
 
-
-
-
-
-
-
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
                             <label for="note" class="col-md-3 control-label">
@@ -162,6 +156,22 @@
                                 {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
+
+                        @can('audit', \App\Models\Asset::class)
+                        <!-- Log an audit checkbox -->
+                        <div class="form-group">
+                            <div class="col-sm-3 control-label" ></div>
+                            <div class="col-md-8">
+                                <label class="form-control">
+                                    <input type="checkbox" value="1" name="log_audit" {{ (old('log_audit')) == '1' ? ' checked="checked"' : '' }} aria-label="log_audit">
+                                    {{ trans('admin/settings/general.log_audit') }}
+                                </label>
+                                <p class="help-block">{{ trans('admin/settings/general.log_audit_help_text')  . " " .  trans('general.checkin') . "." }}</p>
+                            </div>
+                        </div>
+                        <!-- /.form-group -->
+                        @endcan
+
                     </div> <!--/.box-body-->
                 </div> <!--/.box-body-->
 

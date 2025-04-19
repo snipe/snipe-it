@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Session;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
+use Gate;
 
 class AssetCheckoutController extends Controller
 {
@@ -114,6 +115,11 @@ class AssetCheckoutController extends Controller
             session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
+                if(Gate::allows('audit',$asset)) {
+                    if ($request->filled('log_audit') == "1") {
+                        $asset->logAudit($request->input('note'), $request->input('location_id'));
+                    }
+                }
                 return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                     ->with('success', trans('admin/hardware/message.checkout.success'));
             }
