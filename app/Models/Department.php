@@ -21,7 +21,8 @@ class Department extends SnipeModel
      */
     protected $injectUniqueIdentifier = true;
 
-    use ValidatingTrait, UniqueUndeletedTrait;
+    use ValidatingTrait;
+    use UniqueUndeletedTrait;
 
     protected $casts = [
         'manager_id'   => 'integer',
