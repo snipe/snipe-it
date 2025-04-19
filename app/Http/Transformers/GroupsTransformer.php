@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Collection;
 
 class GroupsTransformer
 {
-    public function transformGroups (Collection $groups, $total = null)
+    public function transformGroups(Collection $groups, $total = null)
     {
         $array = [];
         foreach ($groups as $group) {
             $array[] = self::transformGroup($group);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformGroup(Group $group)
@@ -29,7 +29,7 @@ class GroupsTransformer
             'notes' => Helper::parseEscapedMarkedownInline($group->notes),
             'created_by' => ($group->adminuser) ? [
                 'id' => (int) $group->adminuser->id,
-                'name'=> e($group->adminuser->present()->fullName()),
+                'name' => e($group->adminuser->present()->fullName()),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($group->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($group->updated_at, 'datetime'),
