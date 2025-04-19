@@ -88,7 +88,7 @@ class ComponentsFilesController extends Controller
                     Log::debug($e);
                 }
             }
-
+            $component->logUploadDelete($log->filename);
             $log->delete();
 
             return redirect()->back()->withFragment('files')
