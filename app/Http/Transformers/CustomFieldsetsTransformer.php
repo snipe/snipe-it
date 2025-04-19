@@ -15,7 +15,7 @@ class CustomFieldsetsTransformer
             $array[] = self::transformCustomFieldset($fieldset);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformCustomFieldset(CustomFieldset $fieldset)
@@ -34,8 +34,8 @@ class CustomFieldsetsTransformer
         $array = [
             'id' => (int) $fieldset->id,
             'name' => e($fieldset->name),
-            'fields' => (new CustomFieldsTransformer)->transformCustomFields($fields, $fieldset->fields_count),
-            'models' => (new DatatablesTransformer)->transformDatatables($modelsArray, $fieldset->models_count),
+            'fields' => (new CustomFieldsTransformer())->transformCustomFields($fields, $fieldset->fields_count),
+            'models' => (new DatatablesTransformer())->transformDatatables($modelsArray, $fieldset->models_count),
             'created_at' => Helper::getFormattedDateObject($fieldset->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($fieldset->updated_at, 'datetime'),
         ];
