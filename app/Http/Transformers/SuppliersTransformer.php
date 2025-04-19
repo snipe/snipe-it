@@ -34,7 +34,7 @@ class SuppliersTransformer
                 'state' => e($supplier->state),
                 'country' => e($supplier->country),
                 'zip' => e($supplier->zip),
-                'latitude' => e($supploer->latitude),
+                'latitude' => e($supplier->latitude),
                 'longitude' => e($supplier->longitude),
                 'fax' => e($supplier->fax),
                 'phone' => e($supplier->phone),
