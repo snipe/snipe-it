@@ -16,7 +16,7 @@ class LicensesTransformer
             $array[] = self::transformLicense($license);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformLicense(License $license)
@@ -24,14 +24,14 @@ class LicensesTransformer
         $array = [
             'id' => (int) $license->id,
             'name' => e($license->name),
-            'company' => ($license->company) ? ['id' => (int) $license->company->id, 'name'=> e($license->company->name)] : null,
-            'manufacturer' =>  ($license->manufacturer) ? ['id' => (int) $license->manufacturer->id, 'name'=> e($license->manufacturer->name)] : null,
+            'company' => ($license->company) ? ['id' => (int) $license->company->id, 'name' => e($license->company->name)] : null,
+            'manufacturer' =>  ($license->manufacturer) ? ['id' => (int) $license->manufacturer->id, 'name' => e($license->manufacturer->name)] : null,
             'product_key' => (Gate::allows('viewKeys', License::class)) ? e($license->serial) : '------------',
             'order_number' => ($license->order_number) ? e($license->order_number) : null,
             'purchase_order' => ($license->purchase_order) ? e($license->purchase_order) : null,
             'purchase_date' => Helper::getFormattedDateObject($license->purchase_date, 'date'),
             'termination_date' => Helper::getFormattedDateObject($license->termination_date, 'date'),
-            'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name'=> e($license->depreciation->name)] : null,
+            'depreciation' => ($license->depreciation) ? ['id' => (int) $license->depreciation->id,'name' => e($license->depreciation->name)] : null,
             'purchase_cost' => Helper::formatCurrencyOutput($license->purchase_cost),
             'purchase_cost_numeric' => $license->purchase_cost,
             'notes' => Helper::parseEscapedMarkedownInline($license->notes),
@@ -44,11 +44,11 @@ class LicensesTransformer
             'license_email' => ($license->license_email) ? e($license->license_email) : null,
             'reassignable' => ($license->reassignable == 1) ? true : false,
             'maintained' => ($license->maintained == 1) ? true : false,
-            'supplier' =>  ($license->supplier) ? ['id' => (int) $license->supplier->id, 'name'=> e($license->supplier->name)] : null,
-            'category' =>  ($license->category) ? ['id' => (int) $license->category->id, 'name'=> e($license->category->name)] : null,
+            'supplier' =>  ($license->supplier) ? ['id' => (int) $license->supplier->id, 'name' => e($license->supplier->name)] : null,
+            'category' =>  ($license->category) ? ['id' => (int) $license->category->id, 'name' => e($license->category->name)] : null,
             'created_by' => ($license->adminuser) ? [
                 'id' => (int) $license->adminuser->id,
-                'name'=> e($license->adminuser->present()->fullName()),
+                'name' => e($license->adminuser->present()->fullName()),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($license->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($license->updated_at, 'datetime'),
@@ -72,9 +72,6 @@ class LicensesTransformer
 
     public function transformAssetsDatatable($licenses)
     {
-        return (new DatatablesTransformer)->transformDatatables($licenses);
+        return (new DatatablesTransformer())->transformDatatables($licenses);
     }
-
-
-
 }

@@ -17,7 +17,7 @@ class AssetModelsTransformer
             $array[] = self::transformAssetModel($assetmodel);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformAssetModel(AssetModel $assetmodel)
@@ -27,7 +27,7 @@ class AssetModelsTransformer
 
         // Reach into the custom fields and models_custom_fields pivot table to find the default values for this model
         if ($assetmodel->fieldset) {
-            foreach($assetmodel->fieldset->fields AS $field) {
+            foreach ($assetmodel->fieldset->fields as $field) {
                 $default_field_values[] = [
                     'name' => e($field->name),
                     'db_column_name' => e($field->db_column_name()),
@@ -43,32 +43,32 @@ class AssetModelsTransformer
             'name' => e($assetmodel->name),
             'manufacturer' => ($assetmodel->manufacturer) ? [
                 'id' => (int) $assetmodel->manufacturer->id,
-                'name'=> e($assetmodel->manufacturer->name),
+                'name' => e($assetmodel->manufacturer->name),
             ] : null,
-            'image' => ($assetmodel->image != '') ? Storage::disk('public')->url('models/'.e($assetmodel->image)) : null,
-            'model_number' => ($assetmodel->model_number ? e($assetmodel->model_number): null),
+            'image' => ($assetmodel->image != '') ? Storage::disk('public')->url('models/' . e($assetmodel->image)) : null,
+            'model_number' => ($assetmodel->model_number ? e($assetmodel->model_number) : null),
             'min_amt'   => ($assetmodel->min_amt) ? (int) $assetmodel->min_amt : null,
             'remaining' => (int) ($assetmodel->assets_count - $assetmodel->min_amt),
             'depreciation' => ($assetmodel->depreciation) ? [
                 'id' => (int) $assetmodel->depreciation->id,
-                'name'=> e($assetmodel->depreciation->name),
+                'name' => e($assetmodel->depreciation->name),
             ] : null,
             'assets_count' => (int) $assetmodel->assets_count,
             'category' => ($assetmodel->category) ? [
                 'id' => (int) $assetmodel->category->id,
-                'name'=> e($assetmodel->category->name),
+                'name' => e($assetmodel->category->name),
             ] : null,
             'fieldset' => ($assetmodel->fieldset) ? [
                 'id' => (int) $assetmodel->fieldset->id,
-                'name'=> e($assetmodel->fieldset->name),
+                'name' => e($assetmodel->fieldset->name),
             ] : null,
             'default_fieldset_values' => $default_field_values,
-            'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol.' months' : 'None',
+            'eol' => ($assetmodel->eol > 0) ? $assetmodel->eol . ' months' : 'None',
             'requestable' => ($assetmodel->requestable == '1') ? true : false,
             'notes' => Helper::parseEscapedMarkedownInline($assetmodel->notes),
             'created_by' => ($assetmodel->adminuser) ? [
                 'id' => (int) $assetmodel->adminuser->id,
-                'name'=> e($assetmodel->adminuser->present()->fullName()),
+                'name' => e($assetmodel->adminuser->present()->fullName()),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($assetmodel->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($assetmodel->updated_at, 'datetime'),
@@ -96,7 +96,7 @@ class AssetModelsTransformer
             $array[] = self::transformAssetModelFile($file, $assetmodel);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformAssetModelFile($file, $assetmodel)
@@ -109,7 +109,7 @@ class AssetModelsTransformer
             'url' => route('show/modelfile', [$assetmodel->id, $file->id]),
             'created_by' => ($file->adminuser) ? [
                 'id' => (int) $file->adminuser->id,
-                'name'=> e($file->adminuser->present()->fullName),
+                'name' => e($file->adminuser->present()->fullName),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($file->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($file->updated_at, 'datetime'),
@@ -126,6 +126,6 @@ class AssetModelsTransformer
 
     public function transformAssetModelsDatatable($assetmodels)
     {
-        return (new DatatablesTransformer)->transformDatatables($assetmodels);
+        return (new DatatablesTransformer())->transformDatatables($assetmodels);
     }
 }

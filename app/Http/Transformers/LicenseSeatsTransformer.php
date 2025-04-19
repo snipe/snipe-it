@@ -18,7 +18,7 @@ class LicenseSeatsTransformer
             $array[] = self::transformLicenseSeat($seat, $seat_count);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformLicenseSeat(LicenseSeat $seat, $seat_count = 0)
@@ -28,9 +28,9 @@ class LicenseSeatsTransformer
             'license_id' => (int) $seat->license->id,
             'assigned_user' => ($seat->user) ? [
                 'id' => (int) $seat->user->id,
-                'name'=> e($seat->user->present()->fullName),
+                'name' => e($seat->user->present()->fullName),
                 'email' => e($seat->user->email),
-                'department'=> ($seat->user->department) ?
+                'department' => ($seat->user->department) ?
                         [
                             'id' => (int) $seat->user->department->id,
                             'name' => e($seat->user->department->name),
@@ -39,11 +39,11 @@ class LicenseSeatsTransformer
             ] : null,
             'assigned_asset' => ($seat->asset) ? [
                 'id' => (int) $seat->asset->id,
-                'name'=> e($seat->asset->present()->fullName),
+                'name' => e($seat->asset->present()->fullName),
             ] : null,
             'location' => ($seat->location()) ? [
                 'id' => (int) $seat->location()->id,
-                'name'=> e($seat->location()->name),
+                'name' => e($seat->location()->name),
             ] : null,
             'reassignable' => (bool) $seat->license->reassignable,
             'notes' => e($seat->notes),

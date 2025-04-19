@@ -15,7 +15,7 @@ class ComponentsAssetsTransformer
             $array[] = self::transformAsset($asset);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformAsset(Asset $asset)
@@ -50,6 +50,6 @@ class ComponentsAssetsTransformer
 
     public function transformAssetsDatatable($assets)
     {
-        return (new DatatablesTransformer)->transformDatatables($assets);
+        return (new DatatablesTransformer())->transformDatatables($assets);
     }
 }

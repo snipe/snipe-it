@@ -17,7 +17,7 @@ class LabelsTransformer
             $array[] = self::transformLabel($label);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformLabel(Label $label)

@@ -24,7 +24,7 @@ class PredefinedKitsTransformer
             $array[] = self::transformPredefinedKit($kit);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformPredefinedKit(PredefinedKit $kit)
@@ -34,7 +34,7 @@ class PredefinedKitsTransformer
             'name' => e($kit->name),
             'created_by' => ($kit->adminuser) ? [
                 'id' => (int) $kit->adminuser->id,
-                'name'=> e($kit->adminuser->present()->fullName()),
+                'name' => e($kit->adminuser->present()->fullName()),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($kit->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($kit->updated_at, 'datetime'),
@@ -64,7 +64,7 @@ class PredefinedKitsTransformer
             $array[] = self::transformElement($element);
         }
 
-        return (new DatatablesTransformer)->transformDatatables($array, $total);
+        return (new DatatablesTransformer())->transformDatatables($array, $total);
     }
 
     public function transformElement(SnipeModel $element)
@@ -89,6 +89,6 @@ class PredefinedKitsTransformer
 
     public function transformPredefinedKitsDatatable($kits)
     {
-        return (new DatatablesTransformer)->transformDatatables($kits);
+        return (new DatatablesTransformer())->transformDatatables($kits);
     }
 }

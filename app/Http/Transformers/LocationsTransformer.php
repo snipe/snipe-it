@@ -38,7 +38,7 @@ class LocationsTransformer
             $array = [
                 'id' => (int) $location->id,
                 'name' => e($location->name),
-                'image' =>   ($location->image) ? Storage::disk('public')->url('locations/'.e($location->image)) : null,
+                'image' =>   ($location->image) ? Storage::disk('public')->url('locations/' . e($location->image)) : null,
                 'address' =>  ($location->address) ? e($location->address) : null,
                 'address2' =>  ($location->address2) ? e($location->address2) : null,
                 'city' =>  ($location->city) ? e($location->city) : null,
@@ -47,8 +47,8 @@ class LocationsTransformer
                 'zip' => ($location->zip) ? e($location->zip) : null,
                 'latitude' => ($location->latitude) ? e($location->latitude) : null,
                 'longitude' => ($location->longitude) ? e($location->longitude) : null,
-                'phone' => ($location->phone!='') ? e($location->phone): null,
-                'fax' => ($location->fax!='') ? e($location->fax): null,
+                'phone' => ($location->phone != '') ? e($location->phone) : null,
+                'fax' => ($location->fax != '') ? e($location->fax) : null,
                 'accessories_count' => (int) $location->accessories_count,
                 'assigned_accessories_count' => (int) $location->assigned_accessories_count,
                 'assigned_assets_count' => (int) $location->assigned_assets_count,
@@ -62,12 +62,12 @@ class LocationsTransformer
                 'updated_at' => Helper::getFormattedDateObject($location->updated_at, 'datetime'),
                 'parent' => ($location->parent) ? [
                     'id' => (int) $location->parent->id,
-                    'name'=> e($location->parent->name),
+                    'name' => e($location->parent->name),
                 ] : null,
-                'manager' => ($location->manager) ? (new UsersTransformer)->transformUser($location->manager) : null,
+                'manager' => ($location->manager) ? (new UsersTransformer())->transformUser($location->manager) : null,
                 'company' => ($location->company) ? [
                     'id' => (int) $location->company->id,
-                    'name'=> e($location->company->name)
+                    'name' => e($location->company->name)
                 ] : null,
 
                 'children' => $children_arr,
@@ -112,8 +112,8 @@ class LocationsTransformer
                 'note' => $accessory_checkout->note ? e($accessory_checkout->note) : null,
                 'created_by' => $accessory_checkout->adminuser ? [
                     'id' => (int) $accessory_checkout->adminuser->id,
-                    'name'=> e($accessory_checkout->adminuser->present()->fullName),
-                ]: null,
+                    'name' => e($accessory_checkout->adminuser->present()->fullName),
+                ] : null,
                 'created_at' => Helper::getFormattedDateObject($accessory_checkout->created_at, 'datetime'),
             ];
 
@@ -123,7 +123,7 @@ class LocationsTransformer
             ];
 
             $array += $permissions_array;
-        return $array;
+            return $array;
     }
 
 
@@ -140,16 +140,15 @@ class LocationsTransformer
     public function transformLocationCompact(Location $location = null)
     {
         if ($location) {
-
             $array = [
                 'id' => (int) $location->id,
-                'image' =>   ($location->image) ? Storage::disk('public')->url('locations/'.e($location->image)) : null,
+                'image' =>   ($location->image) ? Storage::disk('public')->url('locations/' . e($location->image)) : null,
                 'type' => "location",
                 'name' => e($location->name),
                 'created_by' => $location->adminuser ? [
                     'id' => (int) $location->adminuser->id,
-                    'name'=> e($location->adminuser->present()->fullName),
-                ]: null,
+                    'name' => e($location->adminuser->present()->fullName),
+                ] : null,
                 'created_at' => Helper::getFormattedDateObject($location->created_at, 'datetime'),
             ];
 
