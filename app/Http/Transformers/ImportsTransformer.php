@@ -36,6 +36,6 @@ class ImportsTransformer
 
     public function transformImportsDatatable($imports)
     {
-        return (new DatatablesTransformer)->transformDatatables($imports);
+        return (new DatatablesTransformer())->transformDatatables($imports);
     }
 }
