@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Madda Qabeenya',
     'asset_model'			=> 'Madda',
     'asset'					=> 'Qabeenya',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Gabaasa Qabeenya',
     'asset_tag'				=> 'Teessoo Qabeenya',
     'asset_tags'            => 'Teessoo Qabeenya',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'By',
 
 // Add form placeholders here
     'placeholders' => [

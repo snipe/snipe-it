@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Imbalido ang isa o higit pang mga email address.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'Ang :field ng katangian ay naglalaman ng karakter na hindi pinapayagan.',
-        'email_array'      => 'Imbalido ang isa o higit pang mga email address.',
+
         'hashed_pass'      => 'Ang iyong kasalukuyang password ay hindi wasto',
         'dumbpwd'          => 'Ang password ay sobrang pangkaraniwan.',
         'statuslabel_type' => 'Kinakailangang pumili ng balidong uri ng label ng estado',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

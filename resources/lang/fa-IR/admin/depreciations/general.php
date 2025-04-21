@@ -15,7 +15,7 @@ return [
     'no_depreciations_warning'               => '<strong>هشدار: </strong>
                       شما در حال حاضر هیچ استهلاکی تنظیم نکرده اید.
                       لطفاً حداقل یک استهلاک برای مشاهده گزارش استهلاک تنظیم کنید.',
-    'depreciation_method'                   => 'Depreciation Method',
+    'depreciation_method'                   => 'استهلاک گزارش',
     'linear_depreciation'                   => 'Linear (Default)',
     'half_1'                                => 'Half-year convention, always applied',
     'half_2'                                => 'Half-year convention, applied with condition',

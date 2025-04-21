@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Vienas ar keli el. pašto adresai yra neteisingi.',
+    'checkboxes'           => ':attribute yra neteisingų parinkčių.',
+    'radio_buttons'        => ':atributas yra neteisingas.',
+    
     'custom' => [
         'alpha_space' => 'Lauke :attribute yra simbolis, kurio negalima naudoti.',
-        'email_array'      => 'Vienas ar keli el. pašto adresai yra neteisingi.',
+
         'hashed_pass'      => 'Jūsų dabartinis slaptažodis yra neteisingas',
         'dumbpwd'          => 'Šis slaptažodis yra per dažnas.',
         'statuslabel_type' => 'Turite pasirinkti tinkamą būsenos žymos tipą',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute turi būti galiojanti data YYYY-MM-DD formatu',
         'start_date.date_format'        =>  ':attribute turi būti galiojanti data YYYY-MM-DD formatu',
         'end_date.date_format'          =>  ':attribute turi būti galiojanti data YYYY-MM-DD formatu',
-        'checkboxes'           => ':attribute yra neteisingų parinkčių.',
-        'radio_buttons'        => ':attribute yra neteisingas.',
         'invalid_value_in_field' => 'Šiame lauke yra neteisinga reikšmė',
 
         'ldap_username_field' => [

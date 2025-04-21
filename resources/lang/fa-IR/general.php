@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'مدل دارایی',
     'asset_model'			=> 'مدل',
     'asset'					=> 'دارایی',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'گزارش دارایی',
     'asset_tag'				=> 'برچسب دارایی',
     'asset_tags'            => 'نام دارایی',
@@ -658,6 +659,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'توسط',
 
 // Add form placeholders here
     'placeholders' => [

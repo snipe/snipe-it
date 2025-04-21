@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Mudelid',
     'asset_model'			=> 'Mudel',
     'asset'					=> 'Vahend',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Vahendite aruanne',
     'asset_tag'				=> 'Varade silt',
     'asset_tags'            => 'Vahendi sildid',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Kes',
 
 // Add form placeholders here
     'placeholders' => [

@@ -61,7 +61,7 @@ class ComponentsController extends Controller
         }
 
         if ($request->filled('company_id')) {
-            $components->where('company_id', '=', $request->input('company_id'));
+            $components->where('components.company_id', '=', $request->input('company_id'));
         }
 
         if ($request->filled('category_id')) {

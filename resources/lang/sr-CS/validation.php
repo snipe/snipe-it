@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Jedna ili više adresa e-pošte nisu ispravne.',
+    'checkboxes'           => ':attribute sadrži neispravne opcije.',
+    'radio_buttons'        => ':attribute je neispravan.',
+    
     'custom' => [
         'alpha_space' => ':attribute polje sadrži znak koji nije dozvoljen.',
-        'email_array'      => 'Jedna ili više email adresa nisu ispravne.',
+
         'hashed_pass'      => 'Vaša lozinka je neispravna',
         'dumbpwd'          => 'Lozinka nije sigurna.',
         'statuslabel_type' => 'Morate odabrati ispravnu vrstu oznake statusa',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
         'start_date.date_format'        =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
         'end_date.date_format'          =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
-        'checkboxes'           => ':attribute sadrži neispravne opcije.',
-        'radio_buttons'        => ':attribute je neispravan.',
         'invalid_value_in_field' => 'Neispravna vrednost je sadržana u ovom polju',
 
         'ldap_username_field' => [

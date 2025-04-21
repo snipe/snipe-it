@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'crwdns1023:0crwdne1023:0',
     'asset_model'			=> 'crwdns1950:0crwdne1950:0',
     'asset'					=> 'crwdns1024:0crwdne1024:0',
+    'asset_previous'        => 'crwdns13162:0crwdne13162:0',
     'asset_report'          => 'crwdns1138:0crwdne1138:0',
     'asset_tag'				=> 'crwdns1025:0crwdne1025:0',
     'asset_tags'            => 'crwdns6097:0crwdne6097:0',
@@ -572,6 +573,8 @@ return [
     'user_managed_passwords' => 'crwdns12870:0crwdne12870:0',
     'user_managed_passwords_disallow' => 'crwdns12872:0crwdne12872:0',
     'user_managed_passwords_allow' => 'crwdns12874:0crwdne12874:0',
+    'from' => 'crwdns13170:0crwdne13170:0',
+    'by' => 'crwdns13172:0crwdne13172:0',
 
 // Add form placeholders here
     'placeholders' => [

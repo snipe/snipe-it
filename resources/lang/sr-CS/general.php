@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Modeli imovine',
     'asset_model'			=> 'Model',
     'asset'					=> 'Imovina',
+    'asset_previous'        => 'Imovina (prethodno dodeljena)',
     'asset_report'          => 'Izveštaj o imovini',
     'asset_tag'				=> 'Oznaka imovine',
     'asset_tags'            => 'Oznake imovine',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Upravljanje lozinkama',
     'user_managed_passwords_disallow' => 'Onemogući korisnicima da upravljaju svojim lozinkama',
     'user_managed_passwords_allow' => 'Omogući korisnicima da upravljaju svojim lozinkama',
+    'from' => 'Od',
+    'by' => 'By',
 
 // Add form placeholders here
     'placeholders' => [

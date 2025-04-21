@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Tillgångsmodeller',
     'asset_model'			=> 'Modell',
     'asset'					=> 'Tillgång',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Tillgångsrapport',
     'asset_tag'				=> 'Tillgångstagg',
     'asset_tags'            => 'Tillgångstaggar',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Lösenordshantering',
     'user_managed_passwords_disallow' => 'Neka användare att hantera sina egna lösenord',
     'user_managed_passwords_allow' => 'Tillåt användare att hantera sina egna lösenord',
+    'from' => 'From',
+    'by' => 'Av',
 
 // Add form placeholders here
     'placeholders' => [

@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'موديلات الأصول',
     'asset_model'			=> 'موديل',
     'asset'					=> 'الأصول',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'تقرير الأصول',
     'asset_tag'				=> 'ترميز الأصل',
     'asset_tags'            => 'وسم الأصل',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'بواسطة',
 
 // Add form placeholders here
     'placeholders' => [

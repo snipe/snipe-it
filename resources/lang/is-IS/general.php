@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Tegundir',
     'asset_model'			=> 'Tegund',
     'asset'					=> 'Eign',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Eignaskýrsla',
     'asset_tag'				=> 'Eignar merki',
     'asset_tags'            => 'Búnaðarmmiðar',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Eftir',
 
 // Add form placeholders here
     'placeholders' => [

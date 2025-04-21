@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'የንብረት ዓይነቶች',
     'asset_model'			=> 'ሞዴል',
     'asset'					=> 'ንብረት',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'የንብረት ዘገባ',
     'asset_tag'				=> 'የንብረት መለያ',
     'asset_tags'            => 'የንብረት መለያዎች',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'By',
 
 // Add form placeholders here
     'placeholders' => [

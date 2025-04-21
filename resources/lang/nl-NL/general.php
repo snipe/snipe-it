@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Asset modellen',
     'asset_model'			=> 'Model',
     'asset'					=> 'Asset',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Asset Rapport',
     'asset_tag'				=> 'Asset Tag',
     'asset_tags'            => 'Asset Tags',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Wachtwoordbeheer',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Door',
 
 // Add form placeholders here
     'placeholders' => [

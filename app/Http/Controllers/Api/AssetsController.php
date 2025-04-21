@@ -569,7 +569,12 @@ class AssetsController extends Controller
             'assets.assigned_to',
             'assets.assigned_type',
             'assets.status_id',
-        ])->with('model', 'assetstatus', 'assignedTo')->NotArchived();
+        ])->with('model', 'assetstatus', 'assignedTo')
+            ->NotArchived();
+
+        if ((Setting::getSettings()->full_multiple_companies_support=='1') &&  ($request->filled('companyId'))) {
+            $assets->where('assets.company_id', $request->input('companyId'));
+        }
 
         if ($request->filled('assetStatusType') && $request->input('assetStatusType') === 'RTD') {
             $assets = $assets->RTD();
@@ -578,7 +583,6 @@ class AssetsController extends Controller
         if ($request->filled('search')) {
             $assets = $assets->AssignedSearch($request->input('search'));
         }
-
 
         $assets = $assets->paginate(50);
 

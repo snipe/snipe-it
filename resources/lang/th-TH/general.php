@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'รุ่นทรัพย์สิน',
     'asset_model'			=> 'แบบ',
     'asset'					=> 'ทรัพย์สิน',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'รายงานทรัพย์สิน',
     'asset_tag'				=> 'รหัสทรัพย์สิน',
     'asset_tags'            => 'รหัสทรัพย์สิน',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'โดย',
 
 // Add form placeholders here
     'placeholders' => [

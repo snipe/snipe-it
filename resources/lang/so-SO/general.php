@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Qaababka Hantida',
     'asset_model'			=> 'Qaabka',
     'asset'					=> 'Hantida',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Warbixinta Hantida',
     'asset_tag'				=> 'Hantida Tag',
     'asset_tags'            => 'Asset Tags',
@@ -572,6 +573,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Loo marayo',
 
 // Add form placeholders here
     'placeholders' => [

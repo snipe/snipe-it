@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Modelli Bene',
     'asset_model'			=> 'Modello',
     'asset'					=> 'Bene',
+    'asset_previous'        => 'Bene (Precedentemente Assegnato)',
     'asset_report'          => 'Report Beni',
     'asset_tag'				=> 'Etichetta del Bene',
     'asset_tags'            => 'Etichette dei Beni',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Gestione password',
     'user_managed_passwords_disallow' => 'Non consentire agli utenti di gestire le proprie password',
     'user_managed_passwords_allow' => 'Consenti agli utenti di gestire le proprie password',
+    'from' => 'Da',
+    'by' => 'per',
 
 // Add form placeholders here
     'placeholders' => [

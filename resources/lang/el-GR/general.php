@@ -23,6 +23,7 @@ return [
     'asset_models'			=> 'Μοντέλα Παγίων',
     'asset_model'			=> 'Μοντέλο',
     'asset'					=> 'Πάγιο',
+    'asset_previous'        => 'Asset (Previously Assigned)',
     'asset_report'          => 'Αναφορά παγίων',
     'asset_tag'				=> 'Ετικέτα παγίων',
     'asset_tags'            => 'Ετικέτες Παγίου',
@@ -573,6 +574,8 @@ return [
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',
     'user_managed_passwords_allow' => 'Allow users to manage their own passwords',
+    'from' => 'From',
+    'by' => 'Από',
 
 // Add form placeholders here
     'placeholders' => [

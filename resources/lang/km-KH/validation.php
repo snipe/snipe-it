@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'អាសយដ្ឋានអ៊ីមែលមួយ ឬច្រើនមិនត្រឹមត្រូវទេ។',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'វាល :attribute មានតួអក្សរដែលមិនត្រូវបានអនុញ្ញាត។',
-        'email_array'      => 'អាសយដ្ឋានអ៊ីមែលមួយ ឬច្រើនមិនត្រឹមត្រូវទេ។',
+
         'hashed_pass'      => 'ពាក្យសម្ងាត់បច្ចុប្បន្នរបស់អ្នកមិនត្រឹមត្រូវទេ។',
         'dumbpwd'          => 'ពាក្យសម្ងាត់នោះជារឿងធម្មតាពេកហើយ។',
         'statuslabel_type' => 'អ្នកត្រូវតែជ្រើសរើសប្រភេទស្លាកស្ថានភាពត្រឹមត្រូវ។',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
         'start_date.date_format'        =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
         'end_date.date_format'          =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [
