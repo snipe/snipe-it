@@ -74,11 +74,11 @@ class CheckinLicensesFromAllUsers extends Command
             $this->info($seat->user->username.' has a license seat for '.$license->name);
             $seat->assigned_to = null;
 
-            if ($seat->save()) { //FIXME: seat itself may _not_ actually be 'Loggable' - so I don't know.
+            if ($seat->save()) {
 
                 // Override the email address so we don't notify on checkin
                 if (! $notify) {
-                    $seat->user->email = null; //FIXME - should this get hoisted?
+                    $seat->user->email = null;
                 }
 
                 // Log the checkin

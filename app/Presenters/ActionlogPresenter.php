@@ -100,7 +100,7 @@ class ActionlogPresenter extends Presenter
             return 'fa-solid fa-rotate-right';
         }
 
-        if ($this->action_type == ActionType::NoteAdded) { //FIXME - should we just make action_type actually be an Enum
+        if ($this->action_type == ActionType::NoteAdded->value) { //TODO - should we just make action_type actually be an Enum
             return 'fas fa-sticky-note';
         }
 

@@ -286,7 +286,7 @@ class ComponentsController extends Controller
         if ($component->numRemaining() >= $request->get('assigned_qty')) {
 
             $asset = Asset::find($request->input('assigned_to'));
-            $component->setLogTarget($asset); // I mean, sure?
+            $component->setLogTarget($asset);
 
             $component->assets()->attach($component->id, [
                 'component_id' => $component->id,

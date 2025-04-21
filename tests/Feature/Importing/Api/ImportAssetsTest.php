@@ -88,7 +88,6 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
         $this->assertEquals(Asset::class, $activityLogs[0]->item_type);
         $this->assertEquals($assignee->id, $activityLogs[0]->target_id);
         $this->assertEquals(User::class, $activityLogs[0]->target_type);
-        dump($activityLogs->toArray());
         $this->assertEquals('Checkout from CSV Importer', $activityLogs[0]->note);
 
         $this->assertEquals('create', $activityLogs[1]->action_type);

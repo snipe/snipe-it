@@ -28,9 +28,8 @@ class CancelCheckoutRequestAction
         $data['item_quantity'] = 1;
         $settings = Setting::getSettings();
 
-        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
         $asset->setLogTarget(auth()->user());
-        $logaction->location_id = $user->location_id ?? null;
+        $asset->setLogLocationOverride($user->location_id);
         $asset->logAndSaveIfNeeded(ActionType::RequestCanceled);
 
         try {

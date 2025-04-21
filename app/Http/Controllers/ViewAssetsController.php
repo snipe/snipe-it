@@ -97,18 +97,12 @@ class ViewAssetsController extends Controller
 
         $user = auth()->user();
 
-        //$logaction = new Actionlog();
-        //$logaction->item_id = $data['asset_id'] = $item->id;
-        //$logaction->item_type = $fullItemType;
-        //$logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
-        $data['requested_date'] = date('Y-m-d H:i:s');
+        $data['requested_date'] = date('Y-m-d H:i:s'); //FIXME - shouldn't this be recorded somewhere?
         if ($user->location_id) {
             $item->setLocation($user->location);
         }
 
         $item->setLogTarget($user);
-        //$logaction->target_id = $data['user_id'] = auth()->id();
-        //$logaction->target_type = User::class;
 
         $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
@@ -135,7 +129,7 @@ class ViewAssetsController extends Controller
 
             return redirect()->back()->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
         } else {
-            $item->request(); //!!!!!!!!!!!!!
+            $item->request();
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
                 $item->logAndSaveIfNeeded(ActionType::Requested);
                 $settings->notify(new RequestAssetNotification($data));
