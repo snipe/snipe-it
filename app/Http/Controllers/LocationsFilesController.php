@@ -26,17 +26,16 @@ class LocationsFilesController extends Controller
      */
     public function store(UploadFileRequest $request, Location $location) : RedirectResponse
     {
-
         $this->authorize('update', $location);
 
         if ($request->hasFile('file')) {
+
             if (! Storage::exists('private_uploads/locations')) {
                 Storage::makeDirectory('private_uploads/locations', 775);
             }
 
             foreach ($request->file('file') as $file) {
-
-                $file_name = $request->handleFile('private_uploads/locations/','model-'.$location->id,$file);
+                $file_name = $request->handleFile('private_uploads/locations/','location-'.$location->id, $file);
                 $location->logUpload($file_name, $request->get('notes'));
             }
 
