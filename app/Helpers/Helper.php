@@ -896,6 +896,12 @@ class Helper
     public static function selectedPermissionsArray($permissions, $selected_arr = [])
     {
         $permissions_arr = [];
+        if (is_array($permissions)) {
+            $permissions = json_encode($permissions);
+        }
+
+        // Set default to empty JSON if the value is null
+        $permissions = json_decode($permissions ?? '{}', JSON_OBJECT_AS_ARRAY);
 
         foreach ($permissions as $permission) {
             for ($x = 0; $x < count($permission); $x++) {
