@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'crwdns6729:0crwdne6729:0',
         'authentication_success' => 'crwdns6731:0crwdne6731:0'
     ],
+    'labels' => [
+        'null_template' => 'crwdns12900:0crwdne12900:0',
+        ],
     'webhook' => [
         'sending' => 'crwdns11373:0crwdne11373:0',
         'success' => 'crwdns11841:0crwdne11841:0',
@@ -45,5 +48,13 @@ return [
         'error' => 'crwdns11381:0crwdne11381:0',
         'error_redirect' => 'crwdns11843:0crwdne11843:0',
         'error_misc' => 'crwdns11383:0crwdne11383:0',
-    ]
+        'webhook_fail' => 'crwdns12830:0crwdne12830:0',
+        'webhook_channel_not_found' => 'crwdns12876:0crwdne12876:0'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'crwdns13053:0crwdne13053:0',
+        'mismatch' => 'crwdns13055:0crwdne13055:0',
+    ],
+
 ];

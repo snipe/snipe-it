@@ -12,6 +12,7 @@ use App\Models\Depreciation;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\License;
+use App\Models\Location;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Carbon\Carbon;
@@ -868,7 +869,7 @@ class Helper
         $filetype = @finfo_file($finfo, $file);
         finfo_close($finfo);
 
-        if (($filetype == 'image/jpeg') || ($filetype == 'image/jpg') || ($filetype == 'image/png') || ($filetype == 'image/bmp') || ($filetype == 'image/gif') || ($filetype == 'image/avif')) {
+        if (($filetype == 'image/jpeg') || ($filetype == 'image/jpg') || ($filetype == 'image/png') || ($filetype == 'image/bmp') || ($filetype == 'image/gif') || ($filetype == 'image/avif') || ($filetype == 'image/webp')) {
             return $filetype;
         }
 
@@ -895,6 +896,12 @@ class Helper
     public static function selectedPermissionsArray($permissions, $selected_arr = [])
     {
         $permissions_arr = [];
+        if (is_array($permissions)) {
+            $permissions = json_encode($permissions);
+        }
+
+        // Set default to empty JSON if the value is null
+        $permissions = json_decode($permissions ?? '{}', JSON_OBJECT_AS_ARRAY);
 
         foreach ($permissions as $permission) {
             for ($x = 0; $x < count($permission); $x++) {
@@ -905,13 +912,13 @@ class Helper
                     if (is_array($selected_arr)) {
 
                         if (array_key_exists($permission_name, $selected_arr)) {
-                            $permissions_arr[$permission_name] = $selected_arr[$permission_name];
+                            $permissions_arr[$permission_name] = (int) $selected_arr[$permission_name];
                         } else {
-                            $permissions_arr[$permission_name] = '0';
+                            $permissions_arr[$permission_name] = 0;
                         }
 
                     } else {
-                        $permissions_arr[$permission_name] = '0';
+                        $permissions_arr[$permission_name] = 0;
                     }
                 }
             }
@@ -1479,6 +1486,7 @@ class Helper
 
         $redirect_option = Session::get('redirect_option');
         $checkout_to_type = Session::get('checkout_to_type');
+        $checkedInFrom = Session::get('checkedInFrom');
 
         // return to index
         if ($redirect_option == 'index') {
@@ -1520,14 +1528,102 @@ class Helper
         if ($redirect_option == 'target') {
             switch ($checkout_to_type) {
                 case 'user':
-                    return route('users.show', ['user' => $request->assigned_user]);
+                    return route('users.show', $request->assigned_user ?? $checkedInFrom);
                 case 'location':
-                    return route('locations.show', ['location' => $request->assigned_location]);
+                    return route('locations.show', $request->assigned_location ?? $checkedInFrom);
                 case 'asset':
-                    return route('hardware.show', ['hardware' => $request->assigned_asset]);
+                    return route('hardware.show', $request->assigned_asset ?? $checkedInFrom);
             }
         }
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
     }
 
+    /**
+     * Check for inconsistencies before activating scoped locations with FullMultipleCompanySupport
+     * If there are locations with different companies than related objects unforseen problems could arise
+     *
+     * @author T. Regnery <tobias.regnery@gmail.com>
+     * @since 7.0
+     *
+     * @param $artisan          when false, bail out on first inconsistent entry
+     * @param $location_id      when set, only test this specific location
+     * @param $new_company_id   in case of updating a location, this is the newly requested company_id
+     * @return string []
+     */
+    static public function test_locations_fmcs($artisan, $location_id = null, $new_company_id = null) {
+        $mismatched = [];
+
+        if ($location_id) {
+            $location = Location::find($location_id);
+            if ($location) {
+                $locations = collect([])->push(Location::find($location_id));
+            }
+        } else {
+            $locations = Location::all();
+        }
+
+        foreach($locations as $location) {
+            // in case of an update of a single location, use the newly requested company_id
+            if ($new_company_id) {
+                $location_company = $new_company_id;
+            } else {
+                $location_company = $location->company_id;
+            }
+
+            // Depending on the relationship, we must use different operations to retrieve the objects
+            $keywords_relation = [
+                'many' => [
+                            'accessories',
+                            'assets',
+                            'assignedAccessories',
+                            'assignedAssets',
+                            'components',
+                            'consumables',
+                            'rtd_assets',
+                            'users',
+                        ],
+                    'one'  => [
+                        'manager',
+                        'parent',
+                    ]];
+
+            // In case of a single location, the children must be checked as well, because we don't walk every location
+            if ($location_id) {
+                $keywords_relation['many'][] = 'children';
+            }
+
+            foreach ($keywords_relation as $relation => $keywords) {
+                foreach($keywords as $keyword) {
+                    if ($relation == 'many') {
+                        $items = $location->{$keyword}->all();
+                    } else {
+                        $items = collect([])->push($location->$keyword);
+                    }
+
+                    foreach ($items as $item) {
+
+                        if ($item && $item->company_id != $location_company) {
+                            $mismatched[] = [
+                                    class_basename(get_class($item)),
+                                    $item->id,
+                                    $item->name ?? $item->asset_tag ?? $item->serial ?? $item->username,
+                                    str_replace('App\\Models\\', '', $item->assigned_type) ?? null,
+                                    $item->company_id ?? null,
+                                    $item->company->name ?? null,
+//                                    $item->defaultLoc->id ?? null,
+//                                    $item->defaultLoc->name ?? null,
+//                                    $item->defaultLoc->company->id ?? null,
+//                                    $item->defaultLoc->company->name ?? null,
+                                    $item->location->name ?? null,
+                                    $item->location->company->name ?? null,
+                                    $location_company ?? null,
+                                ];
+
+                        }
+                    }
+                }
+            }
+        }
+        return $mismatched;
+    }
 }

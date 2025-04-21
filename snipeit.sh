@@ -18,8 +18,9 @@
 #         Updated Snipe-IT Install Script            #
 #          Update created by Aaron Myers             #
 # Change log                                         #
+# * add support for linux mint 22.1                  #
 # * add support for php8.2, awslinux2, alma 8/9      #
-# * fix rocky8/9 support
+# * fix rocky8/9 support                             #
 # * remove Fedora support because short timelines    #
 # * Added support for CentOS/Rocky 9                 #
 # * Fixed CentOS 7 repository for PHP 7.4            #
@@ -224,7 +225,7 @@ install_snipeit () {
   mysql -u root --execute="CREATE DATABASE snipeit;CREATE USER snipeit_dbuser@localhost IDENTIFIED BY '$mysqluserpw'; GRANT ALL PRIVILEGES ON snipeit.* TO snipeit_dbuser@localhost;"
 
   echo -e "\n\n* Cloning Snipe-IT from github to the web directory."
-  log "git clone https://github.com/snipe/snipe-it $APP_PATH" & pid=$!
+  log "git clone https://github.com/grokability/snipe-it $APP_PATH" & pid=$!
   progress
   pushd $APP_PATH
   git checkout master
@@ -347,6 +348,12 @@ case $distro in
     apache_group=www-data
     apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
+  *linuxmint*)
+    echo "  The installer has detected $distro version $version codename $codename."
+    distro=Ubuntu
+    apache_group=www-data
+    apachefile=/etc/apache2/sites-available/$APP_NAME.conf
+    ;;
   *raspbian*)
     echo "  The installer has detected $distro version $version codename $codename."
     distro=Raspbian
@@ -428,7 +435,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -465,7 +472,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -502,7 +509,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -543,7 +550,43 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-mcrypt php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        install_packages
+
+        echo "* Configuring Apache."
+        create_virtualhost
+        log "phpenmod mcrypt"
+        log "phpenmod mbstring"
+        log "a2enmod rewrite"
+        log "a2ensite $APP_NAME.conf"
+        rename_default_vhost
+
+        set_hosts
+
+        echo "* Starting MariaDB."
+        log "systemctl start mariadb.service"
+
+        install_snipeit
+
+        echo "* Restarting Apache httpd."
+        log "systemctl restart apache2"
+
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
+    elif [ "${version//./}" -eq "221" ]; then
+        # Install for Linux Mint 22.1
+        set_fqdn
+        set_dbpass
+        tzone=$(cat /etc/timezone)
+
+        echo -n "* Updating installed packages."
+        log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
+        progress
+
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.3 php8.3  php8.3-curl php8.3-mysql php8.3-gd php8.3-ldap php8.3-zip php8.3-mbstring php8.3-xml php8.3-bcmath php8.3-cli curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -584,7 +627,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -628,7 +671,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.28.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php8.28.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
@@ -688,12 +731,11 @@ EOL
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2 php8.2-mcrypt php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.2 php8.2  php8.2-curl php8.2-mysql php8.2-gd php8.2-ldap php8.2-zip php8.2-mbstring php8.2-xml php8.2-bcmath curl git unzip"
         install_packages
 
         echo "* Configuring Apache."
         create_virtualhost
-        log "phpenmod mcrypt"
         log "phpenmod mbstring"
         log "a2enmod rewrite"
         log "a2ensite $APP_NAME.conf"
@@ -728,7 +770,7 @@ EOL
         amazon-linux-extras install -y php8.2
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip  php-sodium"
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-ldap php-json php-simplexml php-process php-zip  php-sodium"
         install_packages
 
         echo "* Configuring Apache."
@@ -769,7 +811,7 @@ EOL
         log "yum-config-manager --enable remi-php82"
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-ldap php-json php-simplexml php-process php-zip"
         install_packages
 
         echo "* Configuring Apache."
@@ -812,7 +854,7 @@ EOL
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-mcrypt php-ldap php-json php-simplexml php-process php-zip"
+        PACKAGES="httpd mariadb-server git unzip php php-mysqlnd php-bcmath php-embedded php-gd php-mbstring php-ldap php-json php-simplexml php-process php-zip"
         install_packages
 
         echo "* Configuring Apache."

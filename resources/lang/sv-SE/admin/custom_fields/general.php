@@ -5,7 +5,7 @@ return [
     'manage'                    => 'Hantera',
     'field'		                => 'Fält',
     'about_fieldsets_title'		=> 'Om fältuppsättningar',
-    'about_fieldsets_text'		=> 'Fältuppsättningar låter dig skapa grupper av anpassade fält som ofta återanvänds för specifika tillgångsmodelltyper.',
+    'about_fieldsets_text'		=> 'Fieldsets låter dig skapa grupper av fält som är anpassade efter och ofta använda av en viss typ av tillgång. Ex. "CPU", "RAM", "HDD", etc.',
     'custom_format'             => 'Anpassat Regex-format...',
     'encrypt_field'      	        => 'Kryptera värdet för det här fältet i databasen',
     'encrypt_field_help'      => 'VARNING: Kryptering av ett fält genererar fältet osökbart.',
@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Skapa ett nytt anpassat fält',
     'value_encrypted'      	        => 'Värdet på det här fältet är krypterat i databasen. Endast adminanvändare kan se det dekrypterade värdet',
     'show_in_email'     => 'Inkludera värdet på det här fältet i utcheckningsmejlen som skickas till användarna? Krypterade fält inkluderas inte i e-postmeddelanden',
-    'show_in_email_short'     => 'Inkludera i e-post.',
+    'show_in_email_short' => 'Inkludera i e-post',
     'help_text' => 'Hjälptext',
     'help_text_description' => 'Detta är valfri text som visas under formulärelementen medan du redigerar en tillgång för att ge sammanhang till fältet.',
     'about_custom_fields_title' => 'Om anpassade fält',
@@ -57,5 +57,8 @@ return [
     'show_in_requestable_list_short' => 'Visa i vyn för begärbara tillgångar',
     'show_in_requestable_list' => 'Visa värde i vyn för begärbara tillgångar. Krypterade fält kommer inte att visas',
     'encrypted_options' => 'Detta fält är krypterat, så vissa visningsalternativ kommer inte att vara tillgängliga.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

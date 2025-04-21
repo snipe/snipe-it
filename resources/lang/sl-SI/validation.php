@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'En ali več e-poštnih naslovov je napačnih.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'Polje atributa vsebuje znak, ki ni dovoljen.',
-        'email_array'      => 'En ali več e-poštnih naslovov je napačnih.',
+
         'hashed_pass'      => 'Vaše trenutno geslo je napačno',
         'dumbpwd'          => 'To geslo je preveč pogosto.',
         'statuslabel_type' => 'Izbrati morate veljavn status oznake',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

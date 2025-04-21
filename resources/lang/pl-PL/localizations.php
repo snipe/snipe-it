@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Select a Language',
+    'select_language' => 'Wybierz język',
     'languages' => [
         'en-US'=> 'angielski (USA)',
         'en-GB'=> 'angielski (UK)',
@@ -40,8 +40,8 @@ return [
         'ms-MY'=> 'malajski',
         'mi-NZ'=> 'maoryski',
         'mn-MN'=> 'mongolski',
-        //'no-NO'=> 'Norwegian',
-        'nb-NO'=> 'Norwegian Bokmål',
+        'nb-NO'=> 'Norweski',
+        'om-ET' => 'Etiopski (ORMO)',
         //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'perski',
         'pl-PL'=> 'polski',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'zuluski',
     ],
 
-    'select_country' => 'Select a Country',
+    'select_country' => 'Wybierz kraj',
     
     'countries' => [
         'AC'=>'Wyspa Wniebowstąpienia',
@@ -135,7 +135,7 @@ return [
         'EC'=>'Ekwador',
         'EE'=>'Estonia',
         'EG'=>'Egipt',
-        'GB-ENG'=>'England',
+        'GB-ENG'=>'Anglia',
         'ER'=>'Erytrea',
         'ES'=>'Hiszpania',
         'ET'=>'Etiopia',
@@ -234,7 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nikaragua',
         'NL'=>'Holandia',
-        'GB-NIR' => 'Northern Ireland',
+        'GB-NIR' => 'Irlandia Północna',
         'NO'=>'Norwegia',
         'NP'=>'Nepal',
         'NR'=>'Nauru',
@@ -314,7 +314,7 @@ return [
         'VI'=>'Wyspy Dziewicze Stanów Zjednoczonych',
         'VN'=>'Wietnam',
         'VU'=>'Vanuatu',
-        'GB-WLS' =>'Wales',
+        'GB-WLS' =>'Walia',
         'WF'=>'Wallis i Futuna',
         'WS'=>'Samoa',
         'YE'=>'Jemen',

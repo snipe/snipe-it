@@ -62,7 +62,13 @@
                                     {{ trans('admin/models/general.fieldset') }}
                                 </label>
                                 <div class="col-md-7">
-                                    {{ Form::select('fieldset_id', $fieldset_list , old('fieldset_id', 'NC'), array('class'=>'select2 js-fieldset-field', 'style'=>'width:350px')) }}
+                                    <x-input.select
+                                        name="fieldset_id"
+                                        :options="$fieldset_list"
+                                        :selected="old('fieldset_id', 'NC')"
+                                        class="js-fieldset-field"
+                                        style="width:350px"
+                                    />
                                     {!! $errors->first('fieldset_id', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
                                 </div>
                             </div>
@@ -74,25 +80,33 @@
                                     {{ trans('general.depreciation') }}
                                 </label>
                                 <div class="col-md-7">
-                                    {{ Form::select('depreciation_id', $depreciation_list , old('depreciation_id', 'NC'), array('class'=>'select2', 'style'=>'width:350px')) }}
+                                    <x-input.select
+                                        name="depreciation_id"
+                                        :options="$depreciation_list"
+                                        :selected="old('depreciation_id', 'NC')"
+                                        style="width:350px"
+                                    />
                                     {!! $errors->first('depreciation_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
+
+                            @include ('partials.forms.edit.minimum_quantity')
+
 
                             <!-- requestable -->
                                 <div class="form-group{{ $errors->has('requestable') ? ' has-error' : '' }}">
                                     <div class="col-md-7 col-md-offset-3">
 
                                         <label for="requestable_nochange" class="form-control">
-                                            {{ Form::radio('requestable', '', true, ['id' => 'requestable_nochange', 'aria-label'=>'requestable_nochange']) }}
+                                            <input type="radio" name="requestable" id="requestable_nochange" value="" aria-label="requestable_nochange" checked>
                                             {{  trans('admin/hardware/general.requestable_status_warning')}}
                                         </label>
                                         <label for="requestable" class="form-control">
-                                            {{ Form::radio('requestable', '1', old('requestable'), ['id' => 'requestable', 'aria-label'=>'requestable']) }}
+                                            <input type="radio" name="requestable" id="requestable" value="1" aria-label="requestable">
                                             {{  trans('admin/hardware/general.requestable')}}
                                         </label>
                                         <label for="not_requestable" class="form-control">
-                                            {{ Form::radio('requestable', '0', old('requestable'), ['id' => 'not_requestable','aria-label'=>'not_requestable']) }}
+                                            <input type="radio" name="requestable" id="not_requestable" value="0" aria-label="not_requestable">
                                             {{  trans('admin/hardware/general.not_requestable')}}
                                         </label>
 

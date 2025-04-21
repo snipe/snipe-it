@@ -3271,6 +3271,96 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "addex12",
+      "name": "Adugna Gizaw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18550946?v=4",
+      "profile": "https://orbalia.pythonanywhere.com/",
+      "contributions": [
+        "translation"
+      ]
+    },
+    {
+      "login": "jostrander",
+      "name": "Jesse Ostrander",
+      "avatar_url": "https://avatars.githubusercontent.com/u/760989?v=4",
+      "profile": "https://github.com/jostrander",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "azmcnutt",
+      "name": "James M",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31522486?v=4",
+      "profile": "https://github.com/azmcnutt",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Fiala06",
+      "name": "Fiala06",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5183146?v=4",
+      "profile": "https://github.com/Fiala06",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "ntaylor-86",
+      "name": "Nathan Taylor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28693782?v=4",
+      "profile": "https://github.com/ntaylor-86",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "fvollmer",
+      "name": "fvollmer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16699443?v=4",
+      "profile": "https://github.com/fvollmer",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "36864",
+      "name": 36864,
+      "avatar_url": "https://avatars.githubusercontent.com/u/109086466?v=4",
+      "profile": "https://github.com/36864",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "CloCkWeRX",
+      "name": "Daniel O'Connor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/365751?v=4",
+      "profile": "http://clockwerx.blogspot.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "BeatSpark",
+      "name": "BeatSpark",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102852568?v=4",
+      "profile": "https://github.com/BeatSpark",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mrdahbi",
+      "name": "mrdahbi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59203607?v=4",
+      "profile": "https://github.com/mrdahbi",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

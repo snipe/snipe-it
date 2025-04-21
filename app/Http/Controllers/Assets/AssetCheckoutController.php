@@ -26,27 +26,25 @@ class AssetCheckoutController extends Controller
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
-    public function create($assetId) : View | RedirectResponse
+    public function create(Asset $asset) : View | RedirectResponse
     {
-        // Check if the asset exists
-        if (is_null($asset = Asset::with('company')->find(e($assetId)))) {
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
 
         $this->authorize('checkout', $asset);
 
         if (!$asset->model) {
-            return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+            return redirect()->route('hardware.show', $asset)
+                ->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
 
         if ($asset->availableForCheckout()) {
             return view('hardware/checkout', compact('asset'))
                 ->with('statusLabel_list', Helper::deployableStatusLabelList())
-                ->with('table_name', 'Assets');
+                ->with('table_name', 'Assets')
+                ->with('item', $asset);
         }
 
-
-        return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.checkout.not_available'));
+        return redirect()->route('hardware.index')
+            ->with('error', trans('admin/hardware/message.checkout.not_available'));
     }
 
     /**
@@ -68,7 +66,7 @@ class AssetCheckoutController extends Controller
             $this->authorize('checkout', $asset);
 
             if (!$asset->model) {
-                return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
+                return redirect()->route('hardware.show', $asset)->with('error', trans('admin/hardware/general.model_invalid_fix'));
             }
 
             $admin = auth()->user();
@@ -91,6 +89,7 @@ class AssetCheckoutController extends Controller
                 $asset->status_id = $request->get('status_id');
             }
 
+
             if(!empty($asset->licenseseats->all())){
                 if(request('checkout_to_type') == 'user') {
                     foreach ($asset->licenseseats as $seat){
@@ -100,23 +99,26 @@ class AssetCheckoutController extends Controller
                 }
             }
 
+            // Add any custom fields that should be included in the checkout
+            $asset->customFieldsForCheckinCheckout('display_checkout');
+
             $settings = \App\Models\Setting::getSettings();
 
             // We have to check whether $target->company_id is null here since locations don't have a company yet
             if (($settings->full_multiple_companies_support) && ((!is_null($target->company_id)) &&  (!is_null($asset->company_id)))) {
                 if ($target->company_id != $asset->company_id){
-                    return redirect()->to("hardware/$assetId/checkout")->with('error', trans('general.error_user_company'));
+                    return redirect()->route('hardware.checkout.create', $asset)->with('error', trans('general.error_user_company'));
                 }
             }
 
-                session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
+            session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
             if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->get('note'), $request->get('name'))) {
                 return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                     ->with('success', trans('admin/hardware/message.checkout.success'));
             }
             // Redirect to the asset management page with error
-            return redirect()->to("hardware/$assetId/checkout")->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());
+            return redirect()->route("hardware.checkout.create", $asset)->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
         } catch (CheckoutNotAllowed $e) {

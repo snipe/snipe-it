@@ -5,7 +5,7 @@ return [
     'manage'                    => 'Manage',
     'field'		                => 'veld',
     'about_fieldsets_title'		=> 'Oor Fieldsets',
-    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'about_fieldsets_text'		=> 'Veldstelle stel jou in staat om groepe van persoonlike velde te skep wat gereeld hergebruik word vir spesifieke tipe bates.',
     'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Enkripteer die waarde van hierdie veld in die databasis',
     'encrypt_field_help'      => 'WAARSKUWING: Om \'n veld te enkripteer, maak dit onondersoekbaar.',
@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Die waarde van hierdie veld is geïnkripteer in die databasis. Slegs admingebruikers sal die gedecodeerde waarde kan sien',
     'show_in_email'     => 'Include the value of this field in checkout emails sent to the user? Encrypted fields cannot be included in emails',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short' => 'Include in emails',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'about_custom_fields_title' => 'About Custom Fields',
@@ -57,5 +57,8 @@ return [
     'show_in_requestable_list_short' => 'Show in requestable assets list',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

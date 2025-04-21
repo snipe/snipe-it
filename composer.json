@@ -1,5 +1,5 @@
 {
-  "name": "snipe/snipe-it",
+  "name": "grokability/snipe-it",
   "description": "Open source asset management system built on Laravel.",
   "keywords": [
     "assets",
@@ -14,17 +14,22 @@
     {
       "type": "vcs",
       "url": "https://github.com/grokability/laravel-scim-server"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/grokability/html"
     }
   ],
   "require": {
-    "php": "^8.1",
+    "php": "^8.2",
     "ext-curl": "*",
     "ext-fileinfo": "*",
+    "ext-iconv": "*",
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-pdo": "*",
     "alek13/slack": "^2.0",
-    "arietimmerman/laravel-scim-server": "dev-master",
+    "arietimmerman/laravel-scim-server": "dev-laravel_11_compatibility",
     "bacon/bacon-qr-code": "^2.0",
     "barryvdh/laravel-debugbar": "^3.13",
     "barryvdh/laravel-dompdf": "^2.0",
@@ -39,22 +44,23 @@
     "javiereguiluz/easyslugger": "^1.0",
     "laravel-notification-channels/google-chat": "^3.0",
     "laravel-notification-channels/microsoft-teams": "^1.2",
-    "laravel/framework": "^10.0",
+    "laravel/framework": "^11.0",
     "laravel/helpers": "^1.4",
-    "laravel/passport": "^11.0",
-    "laravel/slack-notification-channel": "^2.3",
+    "laravel/passport": "^12.0",
+    "laravel/slack-notification-channel": "^3.4",
     "laravel/socialite": "^5.6",
     "laravel/tinker": "^2.6",
     "laravel/ui": "^4.0",
-    "laravelcollective/html": "^6.2",
+    "laravelcollective/html": "6.x-dev",
     "league/csv": "^9.7",
     "league/flysystem-aws-s3-v3": "^3.0",
     "livewire/livewire": "^3.5",
     "neitanod/forceutf8": "^2.0",
-    "nesbot/carbon": "^2.32",
-    "nunomaduro/collision": "^7.0",
+    "nesbot/carbon": "^3.0",
+    "nunomaduro/collision": "^8.1",
     "okvpn/clock-lts": "^1.0",
     "onelogin/php-saml": "^3.4",
+    "onnov/detect-encoding": "^2.0",
     "osa-eg/laravel-teams-notification": "^2.1",
     "paragonie/constant_time_encoding": "^2.3",
     "paragonie/sodium_compat": "^1.19",
@@ -64,6 +70,7 @@
     "rollbar/rollbar-laravel": "^8.0",
     "spatie/laravel-backup": "^8.8",
     "spatie/laravel-ignition": "^2.0",
+    "tabuna/breadcrumbs": "^4.2",
     "tecnickcom/tc-lib-barcode": "^1.15",
     "tecnickcom/tcpdf": "^6.5",
     "unicodeveloper/laravel-password": "^1.0",
@@ -83,8 +90,7 @@
     "phpunit/phpunit": "^10.0",
     "squizlabs/php_codesniffer": "^3.5",
     "symfony/css-selector": "^4.4",
-    "symfony/dom-crawler": "^4.4",
-    "vimeo/psalm": "^5.13"
+    "symfony/dom-crawler": "^4.4"
   },
   "extra": {
     "laravel": {

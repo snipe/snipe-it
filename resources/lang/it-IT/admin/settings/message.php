@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testo l\'Autenticazione LDAP...',
         'authentication_success' => 'Utente autenticato correttamente con LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Modello di etichetta non trovato. Si prega di selezionare un modello.',
+        ],
     'webhook' => [
         'sending' => 'Invio a :app un messaggio di prova...',
         'success' => 'La tua integrazione :webhook_name funziona!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Qualcosa è andato storto. :app ha risposto con: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint restituisce un reindirizzamento. Per motivi di sicurezza, non seguiamo reindirizzamenti. Si prega di utilizzare l\'endpoint attuale.',
         'error_misc' => 'Qualcosa è andato storto. :( ',
-    ]
+        'webhook_fail' => ' notifica webhook fallita: Controlla che l\'URL sia ancora valido.',
+        'webhook_channel_not_found' => ' canale webhook non trovato.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Le tue impostazioni non sono state salvate.',
+        'mismatch' => 'C\'è 1 elemento nel database che ha bisogno della vostra attenzione prima di abilitare i filtri per posizione.|Ci sono :count elementi nel database che hanno bisogno della vostra attenzione prima di abilitare i filtri per posizione.',
+    ],
+
 ];

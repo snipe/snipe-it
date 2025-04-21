@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'O arquivo selecionado já foi excluído',
         'header_row_has_malformed_characters' => 'Um ou mais atributos na linha do cabeçalho contém caracteres UTF-8 malformados',
         'content_row_has_malformed_characters' => 'Um ou mais atributos na primeira linha de conteúdo contém caracteres UTF-8 malformados',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Tem certeza de que deseja excluir este ativo?',
         'error'   		=> 'Houve um problema ao excluir o ativo. Tente novamente.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Nenhum ativo foi selecionado, então nada foi deletado.',
         'success' 		=> 'O ativo foi excluído com sucesso.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Ativo não foi solicitado, por favor tente novamente',
-        'success' 		=> 'Ativo solicitado com sucesso.',
-        'canceled'      => 'Requisição cancelada com sucesso',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Cancelar solicitação deste item',
     ],
 
 ];

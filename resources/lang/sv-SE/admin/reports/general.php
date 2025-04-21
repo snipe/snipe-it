@@ -4,6 +4,7 @@ return [
     'info'   => 'Välj de alternativ du vill ha för din tillgångsrapport.',
     'deleted_user' => 'Raderad användare',
     'send_reminder' => 'Skicka påminnelse',
+    'cannot_send_reminder' => 'User has been deleted or does not have an email address so cannot receive a reminder',
     'reminder_sent' => 'Påminnelse har skickats',
     'acceptance_deleted' => 'Begäran om godkännande borttagen',
     'acceptance_request' => 'Begäran om godkännande',
@@ -14,9 +15,9 @@ return [
         'user_country' => 'Användarens land',
         'user_zip' => 'Användarens postnummer'
     ],
-    'open_saved_template' => 'Open Saved Template',
-    'save_template' =>  'Save Template',
-    'select_a_template' => 'Select a Template',
-    'template_name' => 'Template Name',
-    'update_template' => 'Update Template',
+    'open_saved_template' => 'Öppna sparad mall',
+    'save_template' =>  'Spara mall',
+    'select_a_template' => 'Välj mall',
+    'template_name' => 'Mallnamn',
+    'update_template' => 'Uppdatera mall',
 ];

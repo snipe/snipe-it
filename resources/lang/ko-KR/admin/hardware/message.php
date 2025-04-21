@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> '이 자산을 삭제하시겠습니까?',
         'error'   		=> '그룹을 삭제하는 중 문제가 발생했습니다. 다시 시도해 주세요.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => '선택된 자산이 없기에, 삭제되지 않습니다.',
         'success' 		=> '자산이 삭제되었습니다.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> '자산을 불러오지 못했습니다. 재시도해 주십시오.',
-        'success' 		=> '자산을 불러왔습니다.',
-        'canceled'      => '반출 요청이 취소되었습니다',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Cancel this item request',
     ],
 
 ];

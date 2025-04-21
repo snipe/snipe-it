@@ -62,7 +62,7 @@ class ComponentsTransformer
             'checkout' => Gate::allows('checkout', Component::class),
             'checkin' => Gate::allows('checkin', Component::class),
             'update' => Gate::allows('update', Component::class),
-            'delete' => Gate::allows('delete', Component::class),
+            'delete' => $component->isDeletable(),
         ];
         $array += $permissions_array;
 

@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Актуализиране само на местоположението',
     'asset_not_deployable' => 'Актива не може да бъде предоставен. Този активк не може да бъде изписан.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Актива може да бъде предоставен. Този активк може да бъде изписан.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Обработка...(Това може да отнеме време при големи файлове)',
     'optional_infos'  => 'Допълнителна информация',
     'order_details'   => 'Информация за състоянието на поръчка',

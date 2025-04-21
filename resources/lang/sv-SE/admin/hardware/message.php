@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'Den valda filen har redan tagits bort',
         'header_row_has_malformed_characters' => 'Ett eller flera attribut i rubrikraden innehåller felaktigt formatterade UTF-8-tecken',
         'content_row_has_malformed_characters' => 'Ett eller flera attribut i den första raden av innehållet innehåller felaktigt formatterade UTF-8-tecken',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Är du säker på att du vill radera den här tillgången?',
         'error'   		=> 'Det gick inte att ta bort tillgången. Var god försök igen.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Inga tillgångar valdes. Ingenting togs bort.',
         'success' 		=> 'Tillgång raderad.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Tillgången begärdes inte, försök igen',
-        'success' 		=> 'Tillgång begärd.',
-        'canceled'      => 'Utcheckningsförfrågan har avbrutits',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Avbryt objektbegäran',
     ],
 
 ];

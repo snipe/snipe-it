@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testare autentificare LDAP...',
         'authentication_success' => 'Utilizatorul s-a autentificat cu succes împotriva LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Se trimite mesajul de testare :app...',
         'success' => 'Integrarea ta :webhook_name funcționează!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Ceva nu a funcționat. :app a răspuns cu: :error_message',
         'error_redirect' => 'EROARE: 301/302 :endpoint returnează o redirecționare. Din motive de securitate, nu urmărim redirecționările. Vă rugăm să folosiți obiectivul final.',
         'error_misc' => 'Ceva nu a mers bine. :( ',
-    ]
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

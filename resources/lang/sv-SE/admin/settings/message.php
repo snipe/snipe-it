@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testar LDAP-autentisering...',
         'authentication_success' => 'Användaren har autentiserats via LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Skickar :app testmeddelande...',
         'success' => 'Din :webhook_name-integration fungerar!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Något gick snett! :app svarade med: :error_message',
         'error_redirect' => 'FEL: 301/302 :endpoint returnerar en redirect. Av säkerhetsskäl följer vi inte redirects. Använd den faktiska endpointen.',
         'error_misc' => 'Någonting gick snett :( ',
-    ]
+        'webhook_fail' => 'webhook-notis misslyckades. Kontrollera att URL\'en fortfarande är giltig.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

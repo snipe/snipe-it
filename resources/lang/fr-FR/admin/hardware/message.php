@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la ligne d\'en-tête contiennent des caractères UTF-8 invalides',
         'content_row_has_malformed_characters' => 'Un ou plusieurs attributs dans la première ligne de contenu contiennent des caractères UTF-8 invalides',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Etes-vous sûr de vouloir supprimer ce bien?',
         'error'   		=> 'Il y a eu un problème en supprimant ce bien. Veuillez réessayer.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Aucun actif n\'a été sélectionné, donc rien n\'a été supprimé.',
         'success' 		=> 'Ce bien a été supprimé correctement.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'L\'actif n\'a pas été demandé, merci d\'essayer à nouveau',
-        'success' 		=> 'L\'actif a été demandé avec succès.',
-        'canceled'      => 'La demande d\'association a été annulée avec succès',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Annuler cette demande',
     ],
 
 ];

@@ -1,16 +1,16 @@
 <?php
 
 return [
-    'about_templates' => 'About Saved Templates',
-    'saving_templates_description' => 'Select your options, then enter the name of your template in the box above and click the \'Save Template\' button. Use the dropdown to select a previously saved template.',
+    'about_templates' => 'Über gespeicherte Vorlagen',
+    'saving_templates_description' => 'Wähle Deine Optionen aus, gib dann den Namen Deiner Vorlage in das Feld oben ein und klicke auf die Schaltfläche „Vorlage speichern“. Verwende das Dropdown-Menü, um eine zuvor gespeicherte Vorlage auszuwählen.',
     'create'  => [
-        'success' => 'Template saved successfully',
+        'success' => 'Vorlage erfolgreich gespeichert',
     ],
     'update' => [
-        'success' => 'Template updated successfully',
+        'success' => 'Vorlage erfolgreich aktualisiert',
     ],
     'delete' => [
-        'success' => 'Template deleted',
-        'no_delete_permission' => 'Template does not exist or you do not have permission to delete it.',
+        'success' => 'Vorlage gelöscht',
+        'no_delete_permission' => 'Die Vorlage existiert nicht oder Du bist nicht berechtigt, sie zu löschen.',
     ],
 ];

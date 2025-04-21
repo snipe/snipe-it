@@ -12,14 +12,13 @@ return [
 ',
     'admin_cc_email'            => 'ایمیل CC
 ',
-    'admin_cc_email_help'       => 'اگر می‌خواهید یک کپی از ایمیل‌های ورود/تسویه حساب که برای کاربران ارسال می‌شود را به یک حساب ایمیل اضافی ارسال کنید، آن را در اینجا وارد کنید. در غیر این صورت، این قسمت را خالی بگذارید.
-',
+    'admin_cc_email_help'       => 'Send a copy of checkin/checkout emails to this address.',
     'admin_settings'            => 'Admin Settings',
     'is_ad'				        => 'این سرور Active Directory است',
     'alerts'                	=> 'هشدار',
     'alert_title'               => 'Update Notification Settings',
     'alert_email'				=> 'ارسال هشدار به',
-    'alert_email_help'    => 'آدرس‌های ایمیل یا لیست‌های توزیعی که می‌خواهید هشدارها به آنها ارسال شود، با کاما از هم جدا شده‌اند
+    'alert_email_help'          => 'آدرس‌های ایمیل یا لیست‌های توزیعی که می‌خواهید هشدارها به آنها ارسال شود، با کاما از هم جدا شده‌اند.
 ',
     'alerts_enabled'			=> 'هشدارها فعال شد',
     'alert_interval'			=> 'آستانه ی انقضای هشدارها( به روز)',
@@ -32,8 +31,7 @@ return [
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date will be updated.',
     'audit_warning_days'        => 'آستانه هشدار حسابرسی',
     'audit_warning_days_help'   => 'چند روز پیش باید به شما هشدار می دهیم هنگامی که دارایی ها برای حسابرسی مورد نیاز است؟',
-    'auto_increment_assets'		=> 'برچسب‌های دارایی با افزایش خودکار را ایجاد کنید
-',
+    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
     'auto_increment_prefix'		=> 'پیشوند (اختیاری)',
     'auto_incrementing_help'    => 'برای تنظیم، ابتدا برچسب‌های دارایی افزایش خودکار را فعال کنید
 ',
@@ -47,7 +45,7 @@ return [
     'backups_upload'            => 'نسخه پشتیبان را دانلود کنید',
     'backups_path'              => 'نسخه‌های پشتیبان روی سرور در <code>:path</code> ذخیره می‌شوند
 ',
-    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file  ',
     'backups_logged_out'         => 'همه کاربران موجود، از جمله شما، پس از تکمیل بازیابی شما از سیستم خارج می شوند.
 ',
     'backups_large'             => 'پشتیبان‌گیری‌های بسیار بزرگ ممکن است در تلاش بازیابی به پایان برسد و ممکن است همچنان نیاز باشد از طریق خط فرمان اجرا شوند.
@@ -57,6 +55,7 @@ return [
     'confirm_purge_help'		=> 'متن "DELETE" را در کادر زیر وارد کنید تا رکوردهای حذف شده خود را پاک کنید. این عمل قابل واگرد نیست و همه موارد و کاربران حذف شده را برای همیشه حذف می کند. (برای حفظ امنیت، ابتدا باید یک نسخه پشتیبان تهیه کنید.)
 ',
     'custom_css'				=> 'سفارشی CSS',
+    'custom_css_placeholder'	=> 'Add your custom CSS',
     'custom_css_help'			=> 'هر ابطال CSS سفارشی می خواهید استفاده کنید را وارد کنید.از  برچسب های &lt;style&gt;&lt;/style&gt; استفاده نکنید.',
     'custom_forgot_pass_url'	=> 'URL تنظیم مجدد رمز عبور سفارشی
 ',
@@ -68,6 +67,7 @@ return [
 ',
     'default_currency'  		=> 'ارز پیش فرض',
     'default_eula_text'			=> 'EULA پیش فرض',
+    'default_eula_text_placeholder' => 'Add your default EULA text',
     'default_language'			=> 'زبان پیش فرض',
     'default_eula_help_text'	=> 'همچنین می توانید  EULA های سفارشی به دسته های خاص دارایی مرتبط کنید.',
     'acceptance_note'           => 'Add a note for your decision (Optional)',
@@ -76,12 +76,8 @@ return [
     'display_eol'               => 'نمایش EOL در جدول',
     'display_qr'                => 'نمایش بارکد دو بعدی',
     'display_alt_barcode'		=> 'نمایش بارکد 1D',
-    'email_logo'                => 'آرم ایمیل
-',
     'barcode_type'				=> 'نوع بارکد 2D',
     'alt_barcode_type'			=> 'نوع بارکد 1D',
-    'email_logo_size'       => 'لوگوهای مربعی شکل در ایمیل بهترین به نظر می رسند.
-',
     'enabled'                   => 'فعال شد
 ',
     'eula_settings'				=> 'EULA تنظیمات',
@@ -95,16 +91,14 @@ return [
 ',
     'footer_text_help'          => 'این متن در فوتر سمت راست ظاهر می شود. پیوندها با استفاده از <a href="https://help.github.com/articles/github-flavored-markdown/">نشان‌گذاری طعم‌دار Github</a> مجاز هستند. شکستگی خطوط، هدرها، تصاویر و غیره ممکن است منجر به نتایج غیر قابل پیش بینی شود.
 ',
+    'footer_text_placeholder'   => 'Optional footer text',
     'general_settings'			=> 'تنظیمات عمومی',
-    'general_settings_keywords' => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
     'general_settings_help'     => 'EULA پیش فرض و موارد دیگر
 ',
     'generate_backup'			=> 'تولید پشتیبان گیری',
     'google_workspaces'         => 'Google Workspaces',
     'header_color'              => 'رنگ هدر',
     'info'                      => 'این تنظیمات به شما اجازه سفارشی کردن جنبه های خاصی از نصب و راه اندازی خود را می دهد.',
-    'label_logo'                => 'لوگوی برچسب
-',
     'label_logo_size'           => 'آرم های مربعی بهترین ظاهر را دارند - در سمت راست بالای هر برچسب دارایی نمایش داده می شوند.
 ',
     'laravel'                   => 'نسخه Laravel',
@@ -149,8 +143,8 @@ return [
     'ldap_pword'                => 'LDAP اتصال رمز عبور',
     'ldap_basedn'               => 'اتصال پایگاه DN',
     'ldap_filter'               => 'LDAP فیلتر',
-    'ldap_pw_sync'              => 'همگام سازی رمز عبور LDAP',
-    'ldap_pw_sync_help'         => 'اگر نمیخواهید گذرواژههای LDAP را با گذرواژههای محلی همگامسازی کنید، این کادر را بردارید. غیرفعال کردن این به این معنی است که کاربران شما ممکن است قادر به ورود به سیستم اگر سرور LDAP شما به دلایلی غیر قابل دسترس است.',
+    'ldap_pw_sync'              => 'Cache LDAP Passwords',
+    'ldap_pw_sync_help'         => 'Uncheck this box if you do not wish to keep LDAP passwords cached as local hashed passwords. Disabling this means that your users may not be able to login if your LDAP server is unreachable for some reason.',
     'ldap_username_field'       => 'فیلد نام کاربری',
     'ldap_lname_field'          => 'نام خانوادگی',
     'ldap_fname_field'          => 'LDAP نام',
@@ -158,6 +152,8 @@ return [
     'ldap_version'              => 'نسخهٔ LDAP',
     'ldap_active_flag'          => ' پرچم فعالLDAP',
     'ldap_activated_flag_help'  => 'This value is used to determine whether a synced user can login to Snipe-IT. <strong>It does not affect the ability to check items in or out to them</strong>, and should be the <strong>attribute name</strong> within your AD/LDAP, <strong>not the value</strong>. <br><br>If this field is set to a field name that does not exist in your AD/LDAP, or the value in the AD/LDAP field is set to <code>0</code> or <code>false</code>, <strong>user login will be disabled</strong>. If the value in the AD/LDAP field is set to <code>1</code> or <code>true</code> or <em>any other text</em> means the user can log in. When the field is blank in your AD, we respect the <code>userAccountControl</code> attribute, which usually allows non-suspended users to log in.',
+    'ldap_invert_active_flag'   => 'LDAP Invert Active Flag',
+    'ldap_invert_active_flag_help'     => 'If enabled: when the value returned by LDAP Active Flag is <code>0</code> or <code>false</code> the user account will be active.',
     'ldap_emp_num'              => 'LDAP تعداد کارکنان',
     'ldap_email'                => 'ایمیل LDAP',
     'ldap_test'                 => 'تست LDAP
@@ -179,6 +175,7 @@ return [
     'login_help'                => 'لیست تلاش برای ورود به سیستم
 ',
     'login_note'                => 'توجه داشته باشید ورود',
+    'login_note_placeholder'            => "If you do not have a login or have found a device belonging to this company, please call technical support at 888-555-1212. Thank you.",
     'login_note_help'           => 'به صورت دلخواه شامل چند جمله در صفحه ورود به سیستم خود، به عنوان مثال برای کمک به افرادی که یک دستگاه گم شده یا دزدیده شده را پیدا کرده اند. این فیلد <a href="https://help.github.com/articles/github-flavored-markdown/"> مارجین طعم Github</a> را می پذیرد',
     'login_remote_user_text'    => 'گزینه های ورود کاربر از راه دور
 ',
@@ -205,6 +202,8 @@ return [
 ',
     'full_multiple_companies_support_help_text' => 'محدود کردن کاربران (از جمله مدیران) اختصاص داده شده به شرکت ها برای دارایی های شرکت خود را.',
     'full_multiple_companies_support_text' => 'شرکت های متعدد پشتیبانی کامل',
+    'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
+    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
     'show_in_model_list'   => 'نمایش در مدل کشویی 
 ',
     'optional'					=> 'اختیاری',
@@ -213,7 +212,6 @@ return [
     'php_info'                  => 'PHP info',
     'php_overview'              => 'PHP
 ',
-    'php_overview_keywords'     => 'phpinfo, system, info',
     'php_overview_help'         => 'PHP System info
 ',
     'php_gd_info'               => 'شما باید  php-gd را نصب کنید تا QR کد ها را ببنید، به دستورالعمل های نصب نگاه کنید.',
@@ -327,8 +325,6 @@ return [
     'update'                    => 'به‌ روزرسانی تنظیمات',
     'value'                     => 'عنوان آیتم',
     'brand'                     => 'نام تجاری',
-    'brand_keywords'            => 'پاورقی، لوگو، چاپ، تم، پوسته، هدر، رنگ ها، رنگ، css
-',
     'brand_help'                => 'لوگو، نام سایت
 ',
     'web_brand'                 => 'نوع برندینگ وب
@@ -439,19 +435,13 @@ return [
     'security' => 'امنیت',
     'security_title' => 'تنظیمات امنیتی را به روز کنید
 ',
-    'security_keywords' => 'رمز عبور، رمزهای عبور، الزامات، دو عاملی، دو عاملی، رمزهای عبور رایج، ورود از راه دور، خروج از سیستم، احراز هویت
-',
     'security_help' => 'دو عامل، محدودیت رمز عبور
-',
-    'groups_keywords' => 'مجوزها، گروه‌های مجوز، مجوزها
 ',
     'groups_help' => 'گروه های مجوز حساب
 ',
     'localization' => 'بومی سازی
 ',
     'localization_title' => 'تنظیمات محلی سازی را به روز کنید
-',
-    'localization_keywords' => 'محلی سازی، واحد پول، محلی، منطقه، منطقه زمانی، منطقه زمانی، بین المللی، بین المللی، زبان، زبان ها، ترجمه
 ',
     'localization_help' => 'زبان، نمایش تاریخ
 ',
@@ -462,16 +452,17 @@ return [
     'labels' => 'برچسب ها',
     'labels_title' => 'تنظیمات برچسب را به روز کنید
 ',
-    'labels_help' => 'اندازه برچسب &amp; تنظیمات
-',
-    'purge_keywords' => 'برای همیشه حذف کنید
-',
+    'labels_help' => 'Barcodes &amp; label settings',
     'purge_help' => 'پاک کردن رکوردهای حذف شده
 ',
     'ldap_extension_warning' => 'به نظر نمی رسد که برنامه افزودنی LDAP روی این سرور نصب یا فعال باشد. همچنان می‌توانید تنظیمات خود را ذخیره کنید، اما قبل از اینکه همگام‌سازی یا ورود به سیستم LDAP کار کند، باید افزونه LDAP را برای PHP فعال کنید.
 ',
     'ldap_ad' => 'LDAP/AD
 ',
+    'ldap_test_label' => 'Test LDAP Sync',
+    'ldap_test_login' => ' Test LDAP Login',
+    'ldap_username_placeholder' => 'LDAP Username',
+    'ldap_password_placeholder' => 'LDAP Password',
     'employee_number' => 'تعداد کارکنان
 ',
     'create_admin_user' => 'ایجاد کاربر جدید ::',
@@ -493,6 +484,8 @@ return [
 ',
     'slack_test' => 'تست <i class="fab fa-slack"></i> یکپارچه سازی
 ',
+    'status_label_name' => 'Status Label Name',
+    'super_admin_only'  => 'Super Admin Only',
     'label2_enable'           => 'New Label Engine',
     'label2_enable_help'      => 'Switch to the new label engine. <b>Note: You will need to save this setting before setting others.</b>',
     'label2_template'         => 'Template',
@@ -507,12 +500,15 @@ return [
     'label2_2d_type'          => 'نوع بارکد 2D',
     'label2_2d_type_help'     => 'Format for 2D barcodes',
     'label2_2d_target'        => '2D Barcode Target',
-    'label2_2d_target_help'   => 'The URL the 2D barcode points to when scanned',
+    'label2_2d_target_help'   => 'The data that will be contained in the 2D barcode',
     'label2_fields'           => 'Field Definitions',
     'label2_fields_help'      => 'Fields can be added, removed, and reordered in the left column. For each field, multiple options for Label and DataSource can be added, removed, and reordered in the right column.',
+    'purge_barcodes' => 'Purge Barcodes',
     'help_asterisk_bold'    => 'Text entered as <code>**text**</code> will be displayed as bold',
     'help_blank_to_use'     => 'Leave blank to use the value from <code>:setting_name</code>',
-    'help_default_will_use' => '<br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
+    'help_default_will_use' => '<code>:default</code> will use the value from <code>:setting_name</code>. <br>Note that the value of the barcodes must comply with the respective barcode spec in order to be successfully generated. Please see <a href="https://snipe-it.readme.io/docs/barcodes">the documentation <i class="fa fa-external-link"></i></a> for more details. ',
+    'asset_id'              => 'Asset ID',
+    'data'               => 'Data',
     'default'               => 'Default',
     'none'                  => 'None',
     'google_callback_help' => 'This should be entered as the callback URL in your Google OAuth app settings in your organization&apos;s <strong><a href="https://console.cloud.google.com/" target="_blank">Google developer console <i class="fa fa-external-link" aria-hidden="true"></i></a></strong>.',
@@ -524,14 +520,90 @@ return [
     'database_driver' => 'Database Driver',
     'bs_table_storage' => 'Table Storage',
     'timezone' => 'Timezone',
+    'test_mail' => 'Test Mail',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar' => 'Custom Default Avatar',
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
     'due_checkin_days' => 'Due For Checkin Warning',
     'due_checkin_days_help' => 'How many days before the expected checkin of an asset should it be listed in the "Due for checkin" page?',
     'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
+    'text' => 'Text',
+
+    'username_formats' => [
+        'username_format'		=> 'فرمت نام کاربری',
+        'firstname_lastname_format'	=> 'نام خانوادگی (jane.smith)',
+        'first_name_format'	        => 'First Name (jane)',
+        'last_name_format'		=> 'Last Name (doe)',
+        'filastname_format'			=> 'First Initial Last Name (jsmith)',
+        'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj)',
+        'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith)',
+        'firstinitial.lastname' => 'First Initial Last Name (j.smith)',
+        'lastname_firstinitial' => 'Last Name First Initial (smith_j)',
+        'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j)',
+        'firstnamelastname'     => 'First Name Last Name (janesmith)',
+        'firstnamelastinitial'  => 'First Name Last Initial (janes)',
+        'lastnamefirstname'      => 'فامیل نام کوچک (smith.jane)',
+    ],
+
+    'email_formats' => [
+        'email_format'			=> 'فرمت ایمیل',
+        'firstname_lastname_format'	=> 'نام خانوادگی (jane.smith@example.com)',
+        'first_name_format'		=> 'نام (jane@example.com)',
+        'last_name_format'		=> 'Last Name (doe@example.com)',
+        'filastname_format'			=> 'اولین نام خانوادگی (jsmith@example.com)',
+        'lastnamefirstinitial_format' =>  'فامیل نام میانه (smithj@example.com)',
+        'firstname_lastname_underscore_format' => 'نام خانوادگی (jane.smith@example.com)',
+        'firstinitial.lastname' => 'نام میانه فامیل (j.smith@example.com)',
+        'lastname_firstinitial' => 'فامیل نام میانه (smith_j@example.com)',
+        'lastname_dot_firstinitial_format' => 'فامیل نام میانه (smith.j@example.com)',
+        'firstnamelastname'     => 'نام فامیل (janesmith@example.com)',
+        'firstnamelastinitial'  => 'نام فامیل میانه (janes@example.com)',
+        'lastnamefirstname'      => 'فامیل نام کوچک (smith.jane@example.com)',
+    ],
+
+
+
+    'logo_labels' => [
+        'acceptance_pdf_logo'       => 'PDF Logo',
+        'email_logo'                => 'آرم ایمیل
+',
+        'label_logo'                => 'لوگوی برچسب
+',
+        'logo'                      => 'Site Logo',
+        'favicon'                   => 'فاویکون',
+    ],
+
+    'logo_help' => [
+        'email_logo_size'       => 'لوگوهای مربعی شکل در ایمیل بهترین به نظر می رسند.
+',
+    ],
+
+    'logo_option_types' => [
+        'text' => 'Text',
+        'logo' => 'لوگو',
+        'logo_and_text' => 'Logo and Text',
+    ],
+
+
+
+    /* Keywords for settings overview help */
+    'keywords' => [
+        'brand'             => 'پاورقی، لوگو، چاپ، تم، پوسته، هدر، رنگ ها، رنگ، css
+',
+        'general_settings'  => 'company support, signature, acceptance, email format, username format, images, per page, thumbnail, eula, gravatar, tos, dashboard, privacy',
+        'groups'            => 'مجوزها، گروه‌های مجوز، مجوزها
+',
+        'labels'            => 'labels, barcodes, barcode, sheets, print, upc, qr, 1d, 2d',
+        'localization'      => 'محلی سازی، واحد پول، محلی، منطقه، منطقه زمانی، منطقه زمانی، بین المللی، بین المللی، زبان، زبان ها، ترجمه
+',
+        'php_overview'      => 'phpinfo, system, info',
+        'purge'             => 'برای همیشه حذف کنید
+',
+        'security'          => 'رمز عبور، رمزهای عبور، الزامات، دو عاملی، دو عاملی، رمزهای عبور رایج، ورود از راه دور، خروج از سیستم، احراز هویت
+',
+    ],
 
 ];

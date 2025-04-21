@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'ធ្វើបច្ចុប្បន្នភាពតែទីតាំងជាក់ស្តែងប៉ុណ្ណោះ។',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'That status is deployable. This asset can be checked out.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'កំពុងដំណើរការ... (វាអាចចំណាយពេលបន្តិចលើឯកសារធំ)',
     'optional_infos'  => 'ព័ត៌មានមិនសូវចាំបាច់',
     'order_details'   => 'ព័ត៌មានពាក់ព័ន្ធនឹងការបញ្ជាទិញ',

@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
         'content_row_has_malformed_characters' => 'Един или повече атрибути на заглавния ред съдържат неправилни UTF-8 символи',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Сигурни ли сте, че желаете изтриване на актива?',
         'error'   		=> 'Проблем при изтриване на актива. Моля опитайте отново.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Няма избрани активи, така че нищо не бе изтрито.',
         'success' 		=> 'Активът е изтрит успешно.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Активът не беше изискан. Моля опитайте отново.',
-        'success' 		=> 'Активът изискан успешно.',
-        'canceled'      => 'Заявка за отписване отказана успешно',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Отмени тази заявка за артикул',
     ],
 
 ];

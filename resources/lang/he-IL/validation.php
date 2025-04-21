@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'כתובת אימייל אחת או יותר אינה חוקית.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'השדה: מאפיין מכיל תו שאינו מותר.',
-        'email_array'      => 'כתובת אימייל אחת או יותר אינה חוקית.',
+
         'hashed_pass'      => 'הסיסמה הנוכחית שלך שגויה',
         'dumbpwd'          => 'סיסמה זו נפוצה מדי.',
         'statuslabel_type' => 'עליך לבחור סוג תווית סטטוס חוקי',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Yakin ingin menghapus aset ini?',
         'error'   		=> 'Terjadi masalah saat menghapus aset. Silahkan coba lagi.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Tidak ada aset yang dipilih, jadi tidak ada yang diperbarui.',
         'success' 		=> 'Aset berhasil dihapus.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Aset tidak dikembalikan, coba lagi',
-        'success' 		=> 'Aset Berhasil dikembalikan.',
-        'canceled'      => 'Permintaan checkout berhasil dibatalkan',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Cancel this item request',
     ],
 
 ];

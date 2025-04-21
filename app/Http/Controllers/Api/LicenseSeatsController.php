@@ -148,7 +148,7 @@ class LicenseSeatsController extends Controller
             }
 
             // in this case, relevant fields are touched but it's not a checkin operation. so it must be a checkout operation.
-            $licenseSeat->logCheckout($request->input('note'), $target);
+            $licenseSeat->logCheckout($request->input('notes'), $target);
 
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
         }

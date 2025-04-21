@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Unul sau mai multe atribute din rândul de antet conțin caractere UTF-8 incorecte',
         'content_row_has_malformed_characters' => 'Unul sau mai multe atribute din primul rând de conținut conțin caractere UTF-8 formatate incorect',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Sunteti sigur ca vreti sa stergeti acest activ?',
         'error'   		=> 'S-a intampinat o problema la stergerea activului. Va rugam incercati iar.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Nu au fost selectate active, deci nimic nu a fost șters.',
         'success' 		=> 'Activul a fost sters.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Nu a fost solicitat un activ, încercați din nou',
-        'success' 		=> 'Activele solicitate cu succes.',
-        'canceled'      => 'Solicitarea de checkout a fost anulată cu succes',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Anulează această cerere de articol',
     ],
 
 ];

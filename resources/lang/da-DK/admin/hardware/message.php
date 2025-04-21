@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'En eller flere attributter i overskriftsrækken indeholder misdannede UTF-8 tegn',
         'content_row_has_malformed_characters' => 'En eller flere attributter i den første række indhold indeholder misdannede UTF-8 tegn',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Er du sikker på, at du vil slette dette aktiv?',
         'error'   		=> 'Der opstod et problem ved at slette aktivet. Prøv igen.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Ingen aktiver blev valgt, så intet blev slettet.',
         'success' 		=> 'Aktivet blev slettet med succes.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Akten blev ikke anmodet om, prøv igen',
-        'success' 		=> 'Akten blev bedt om succes.',
-        'canceled'      => 'Afbestillingsanmodningen er aflyst',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Annuller denne vareanmodning',
     ],
 
 ];

@@ -31,7 +31,18 @@
 
 
 <div class="row">
+
+    @if ($model->deleted_at!='')
+        <div class="col-md-12">
+            <div class="callout callout-warning">
+                <x-icon type="warning" />
+                {{ trans('admin/models/general.deleted') }}
+            </div>
+        </div>
+    @endif
+
     <div class="col-md-9">
+
         <div class="nav-tabs-custom">
 
             <ul class="nav nav-tabs">
@@ -49,7 +60,7 @@
                 </li>
 
                 <li>
-                    <a href="#uploads" data-toggle="tab">
+                    <a href="#files" data-toggle="tab">
 
                         <span class="hidden-lg hidden-md">
                           <i class="fas fa-barcode fa-2x"></i>
@@ -98,11 +109,10 @@
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
                     </table>
-                    {{ Form::close() }}
                 </div> <!-- /.tab-pane assets -->
 
 
-                <div class="tab-pane fade" id="uploads">
+                <div class="tab-pane fade" id="files">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -143,26 +153,33 @@
 
                 <ul class="list-unstyled" style="line-height: 25px;">
                     @if ($model->category)
-                        <li>{{ trans('general.category') }}:
+                        <li>
+                            <strong>{{ trans('general.category') }}</strong>:
                             <a href="{{ route('categories.show', $model->category->id) }}">{{ $model->category->name }}</a>
                         </li>
                     @endif
+                    @if ($model->deleted_at)
+                        <li>
+                            <strong>
+                                <span class="text-danger">
+                                {{ trans('general.deleted') }}:
+                                {{ Helper::getFormattedDateObject($model->deleted_at, 'datetime', false) }}
+                                </span>
+                            </strong>
 
-                    @if ($model->created_at)
-                        <li>{{ trans('general.created_at') }}:
-                            {{ Helper::getFormattedDateObject($model->created_at, 'datetime', false) }}
                         </li>
                     @endif
 
                     @if ($model->min_amt)
-                        <li>{{ trans('general.min_amt') }}:
+                        <li>
+                            <strong>{{ trans('general.min_amt') }}</strong>:
                            {{$model->min_amt }}
                         </li>
                     @endif
 
                     @if ($model->manufacturer)
                         <li>
-                            {{ trans('general.manufacturer') }}:
+                            <strong>{{ trans('general.manufacturer') }}</strong>:
                             @can('view', \App\Models\Manufacturer::class)
                                 <a href="{{ route('manufacturers.show', $model->manufacturer->id) }}">
                                     {{ $model->manufacturer->name }}
@@ -200,51 +217,61 @@
                     @endif
                     @if ($model->model_number)
                         <li>
-                            {{ trans('general.model_no') }}:
+                            <strong>{{ trans('general.model_no') }}</strong>:
                             {{ $model->model_number }}
                         </li>
                     @endif
 
                     @if ($model->depreciation)
                         <li>
-                            {{ trans('general.depreciation') }}:
+                            <strong>{{ trans('general.depreciation') }}</strong>:
                             {{ $model->depreciation->name }} ({{ $model->depreciation->months.' '.trans('general.months')}})
                         </li>
                     @endif
 
                     @if ($model->eol)
-                        <li>{{ trans('general.eol') }}:
+                        <li>
+                            <strong>{{ trans('general.eol') }}</strong>:
                             {{ $model->eol .' '. trans('general.months') }}
                         </li>
                     @endif
 
                     @if ($model->fieldset)
-                        <li>{{ trans('admin/models/general.fieldset') }}:
+                        <li>
+                            <strong>{{ trans('admin/models/general.fieldset') }}</strong>:
                             <a href="{{ route('fieldsets.show', $model->fieldset->id) }}">{{ $model->fieldset->name }}</a>
                         </li>
                     @endif
 
                     @if ($model->notes)
                         <li>
-                            {{ trans('general.notes') }}:
+                            <strong>{{ trans('general.notes') }}</strong>:
                             {!! nl2br(Helper::parseEscapedMarkedownInline($model->notes)) !!}
                         </li>
                     @endif
 
-                </ul>
+                        @if ($model->created_at)
+                            <li>
+                                <strong>{{ trans('general.created_at') }}</strong>:
+                                {{ Helper::getFormattedDateObject($model->created_at, 'datetime', false) }}
+                            </li>
+                        @endif
 
-                @if ($model->note)
-                    Notes:
-                    <p>
-                        {!! $model->present()->note() !!}
-                    </p>
-                @endif
-            </div>
+                        @if ($model->adminuser)
+                            <li>
+                                <strong>{{ trans('general.created_by') }}</strong>:
+                                {{ $model->adminuser->present()->name() }}
+                            </li>
+                        @endif
+
+
+                </ul>
+                </div>
         </div>
         </div>
             @can('update', \App\Models\AssetModel::class)
             <div class="col-md-12" style="padding-bottom: 5px;">
-                <a href="{{ route('models.edit', $model->id) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print">
+                <a href="{{ ($model->deleted_at=='') ? route('models.edit', $model->id) : '#' }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social hidden-print{{ ($model->deleted_at!='') ? ' disabled' : '' }}">
                     <x-icon type="edit" />
                     {{ trans('admin/models/table.edit') }}
                 </a>

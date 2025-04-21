@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Jeden nebo více sloupců obsahuje v záhlaví poškozené UTF-8 znaky',
         'content_row_has_malformed_characters' => 'Jedna nebo více hodnot v prvním řádku obsahu obsahuje poškozené UTF-8 znaky',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Opravdu si přejete tento majetek odstranit?',
         'error'   		=> 'Nepodařilo se nám tento majetek odstranit. Zkuste to prosím znovu.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Žádný majetek nebyl vybrán, takže nic nebylo odstraněno.',
         'success' 		=> 'Majetek byl úspěšně smazán.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Majetek nebyl vyžádán, zkuste to prosím znovu',
-        'success' 		=> 'Vyžádání majetku proběhlo v pořádku.',
-        'canceled'      => 'Požadavek na výdej byl úspěšně zrušen',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Zrušit tuto žádost o položku',
     ],
 
 ];

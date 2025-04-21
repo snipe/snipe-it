@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'Izabrana datoteka je već obrisana',
         'header_row_has_malformed_characters' => 'Jedan ili više atributa u redu zaglavlja sadrži loše formatirane UTF-8 karaktere',
         'content_row_has_malformed_characters' => 'Jedan ili više atributa u prvom redu sadržaja sadrži loše formatirane UTF-8 karaktere',
+        'transliterate_failure' => 'Transliteracija iz :encoding u UTF8 nije uspela zbog neispravnih unetih karaktera'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Jeste li sigurni da želite izbrisati ovaj resurs?',
         'error'   		=> 'Došlo je do problema s brisanjem resursa. Molim pokušajte ponovo.',
+        'assigned_to_error' => '{1}Oznaka imovine: :asset_tag je trenutno zadužena. Razduži ovaj uređaj pre brisanja.|[2,*]Oznake imovine: :asset_tag su trenutno zadužene. Razduži ove uređaje pre brisanja.',
         'nothing_updated'   => 'Nijedna imovina nije odabrana, tako da ništa nije izbrisano.',
         'success' 		=> 'Imovina je uspešno obrisana.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Imovina nije zatražena, pokušajte ponovo',
-        'success' 		=> 'Imovina je uspešno zatražena.',
-        'canceled'      => 'Checkout request successfully canceled',
+        'error'   		=> 'Zahtev nije bio uspešan, pokušajte ponovo.',
+        'success' 		=> 'Zahtev je uspešno podnet.',
+        'canceled'      => 'Zahtev je uspešno poništen.',
+        'cancel'        => 'Otkažite zahtev za ovu stavku',
     ],
 
 ];

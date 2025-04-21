@@ -206,7 +206,7 @@ abstract class FileBuilder
      *
      * @return string The filename.
      */
-    public function saveToImportsDirectory(?string $filename = null): string
+    public function saveToImportsDirectory(?string $filename = null, ?string $locale = null): string
     {
         $filename ??= Str::random(40) . '.csv';
 
@@ -214,9 +214,15 @@ abstract class FileBuilder
             $stream = fopen(config('app.private_uploads') . "/imports/{$filename}", 'w');
 
             foreach ($this->toCsv() as $row) {
+                if ($locale) {
+                    $newrow = [];
+                    foreach ($row as $index => $cell) {
+                        $newrow[$index] = iconv('utf-8', $locale, (string) $cell);
+                    }
+                    $row = $newrow;
+                }
                 fputcsv($stream, $row);
             }
-
             return $filename;
         } finally {
             if (is_resource($stream)) {

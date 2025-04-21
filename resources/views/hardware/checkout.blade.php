@@ -82,7 +82,13 @@
                                 {{ trans('admin/hardware/form.status') }}
                             </label>
                             <div class="col-md-7 required">
-                                {{ Form::select('status_id', $statusLabel_list, $asset->status_id, array('class'=>'select2', 'style'=>'width:100%','', 'aria-label'=>'status_id')) }}
+                                <x-input.select
+                                    name="status_id"
+                                    :options="$statusLabel_list"
+                                    :selected="$asset->status_id"
+                                    style="width: 100%;"
+                                    aria-label="status_id"
+                                />
                                 {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
@@ -135,6 +141,12 @@
                                 {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                             </div>
                         </div>
+
+                        <!-- Custom fields -->
+                        @include("models/custom_fields_form", [
+                                'model' => $asset->model,
+                                'show_display_checkout_fields' => 'true'
+                        ])
 
                         <!-- Note -->
                         <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">

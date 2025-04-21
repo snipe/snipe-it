@@ -11,7 +11,7 @@ class UpdateLicenseTest extends TestCase
     public function testPageRenders()
     {
         $this->actingAs(User::factory()->superuser()->create())
-            ->get(route('licenses.update', License::factory()->create()->id))
+            ->get(route('licenses.edit', License::factory()->create()->id))
             ->assertOk();
     }
 }

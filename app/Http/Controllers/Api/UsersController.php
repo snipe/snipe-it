@@ -339,6 +339,7 @@ class UsersController extends Controller
             $users = $users->where(function ($query) use ($request) {
                 $query->SimpleNameSearch($request->get('search'))
                     ->orWhere('username', 'LIKE', '%'.$request->get('search').'%')
+                    ->orWhere('email', 'LIKE', '%'.$request->get('search').'%')
                     ->orWhere('employee_num', 'LIKE', '%'.$request->get('search').'%');
             });
         }

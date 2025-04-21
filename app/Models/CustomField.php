@@ -149,11 +149,6 @@ class CustomField extends Model
                     return true;
                 }
 
-                // This is just a dumb thing we have to include because Laraval/Doctrine doesn't
-                // play well with enums or a table that EVER had enums. :(
-                $platform = Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform();
-                $platform->registerDoctrineTypeMapping('enum', 'string');
-
                 // Rename the field if the name has changed
                 Schema::table(self::$table_name, function ($table) use ($custom_field) {
                     $table->renameColumn($custom_field->convertUnicodeDbSlug($custom_field->getOriginal('name')), $custom_field->convertUnicodeDbSlug());
@@ -307,7 +302,7 @@ class CustomField extends Model
     public function formatFieldValuesAsArray()
     {
         $result = [];
-        $arr = preg_split('/\\r\\n|\\r|\\n/', $this->field_values);
+        $arr = preg_split('/\\r\\n|\\r|\\n/', $this->field_values ?? '');
 
         if (($this->element != 'checkbox') && ($this->element != 'radio')) {
             $result[''] = 'Select '.strtolower($this->format);
@@ -383,7 +378,7 @@ class CustomField extends Model
 
     /**
      * Check to see if there is a custom regex format type
-     * @see https://github.com/snipe/snipe-it/issues/5896
+     * @see https://github.com/grokability/snipe-it/issues/5896
      *
      * @author Wes Hulette <jwhulette@gmail.com>
      *

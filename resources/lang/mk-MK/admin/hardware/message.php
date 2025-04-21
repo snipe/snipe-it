@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'Избраната датотека е веќе избришана',
         'header_row_has_malformed_characters' => 'Еден или повеќе атрибути во заглавието се содржат неправилни UTF-8 карактери',
         'content_row_has_malformed_characters' => 'Еден или повеќе атрибути во првиот ред на содржина содржат неправилноUTF-8 карактери',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Дали сте сигурни дека сакате да го избришете ова основно средство?',
         'error'   		=> 'Имаше проблем со бришење на основното средство. Обидете се повторно.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Не беа избрани основни средства, затоа ништо не беше избришано.',
         'success' 		=> 'Основното средство беше избришано.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Основното средство не е побарано, обидете се повторно',
-        'success' 		=> 'Основното средство е побарано.',
-        'canceled'      => 'Барањето за задолжување е откажано',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Откажи го ова барање',
     ],
 
 ];

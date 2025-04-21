@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Probando autenticación LDAP...',
         'authentication_success' => 'Usuario autenticado contra LDAP con éxito!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Enviando mensaje de prueba a :app...',
         'success' => '¡Su integración :webhook_name funciona!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Algo salió mal. :app respondió con: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint devuelve una redirección. Por razones de seguridad, no seguimos redirecciones. Por favor, utilice el punto final actual.',
         'error_misc' => 'Algo salió mal. :( ',
-    ]
+        'webhook_fail' => ' Notificación de webhook fallida: Compruebe que la URL sigue siendo válida.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

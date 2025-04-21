@@ -34,7 +34,7 @@
     <div class="form-group {{ $errors->has('serial') ? ' has-error' : '' }}">
         <label for="serial" class="col-md-3 control-label">{{ trans('admin/licenses/form.license_key') }}</label>
         <div class="col-md-7">
-            <textarea class="form-control" type="text" name="serial" id="serial"{{  (Helper::checkIfRequired($item, 'serial')) ? ' required' : '' }}>{{ old('serial', $item->serial) }}</textarea>
+            <textarea class="form-control" type="text" name="serial" id="serial" rows="5"{{  (Helper::checkIfRequired($item, 'serial')) ? ' required' : '' }}>{{ old('serial', $item->serial) }}</textarea>
             {!! $errors->first('serial', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
         </div>
     </div>
@@ -68,7 +68,7 @@
     </div>
     <div class="col-md-7">
         <label class="form-control">
-        {{ Form::Checkbox('reassignable', '1', old('reassignable', $item->id ? $item->reassignable : '1'),array('aria-label'=>'reassignable')) }}
+            <input type="checkbox" name="reassignable" value="1" aria-label="reassignable" @checked(old('reassignable', $item->id ? $item->reassignable : '1'))>
         {{ trans('general.yes') }}
         </label>
     </div>
@@ -124,7 +124,7 @@
     <div class="col-md-3 control-label"><strong>{{ trans('admin/licenses/form.maintained') }}</strong></div>
     <div class="col-md-7">
         <label class="form-control">
-        {{ Form::Checkbox('maintained', '1', old('maintained', $item->maintained),array('aria-label'=>'maintained')) }}
+            <input type="checkbox" name="maintained" value="1" aria-label="maintained" @checked(old('maintained', $item->maintained))>
         {{ trans('general.yes') }}
         </label>
     </div>

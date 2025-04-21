@@ -39,6 +39,7 @@ abstract class Importer
      * @var array
      */
     private $defaultFieldMap = [
+        'id' => 'id',
         'asset_tag' => 'asset tag',
         'activated' => 'activated',
         'category' => 'category',

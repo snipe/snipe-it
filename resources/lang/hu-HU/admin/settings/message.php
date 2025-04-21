@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'LDAP-hitelesítés tesztelése...',
         'authentication_success' => 'A felhasználó sikeresen hitelesített az LDAP-nál!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => ':app tesztüzenet küldése...',
         'success' => 'A :webhook_name integráció működik!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Valami hiba történt. A Slack a következő üzenettel válaszolt: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => 'Valami hiba történt :( ',
-    ]
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

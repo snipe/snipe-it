@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Ένα ή περισσότερα χαρακτηριστικά στη σειρά κεφαλίδας περιέχουν κακοσχηματισμένους UTF-8 χαρακτήρες',
         'content_row_has_malformed_characters' => 'Ένα ή περισσότερα χαρακτηριστικά στην πρώτη σειρά περιεχομένου περιέχουν κακοσχηματισμένους UTF-8 χαρακτήρες',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Είστε σίγουροι ότι θέλετε να διαγράψετε αυτό το πάγιο;',
         'error'   		=> 'Παρουσιάστηκε ένα ζήτημα κατάργησης του στοιχείου. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Δεν επιλέχθηκαν στοιχεία ενεργητικού, οπότε τίποτα δεν διαγράφηκε.',
         'success' 		=> 'Το πάγιο διαγράφηκε με επιτυχία.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Το στοιχείο δεν ζητήθηκε, δοκιμάστε ξανά',
-        'success' 		=> 'Τα πάγια ενημερώθηκαν επιτυχώς.',
-        'canceled'      => 'Η αίτηση πληρωμής ακυρώθηκε με επιτυχία',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Ακυρώστε αυτό το αίτημα στοιχείου',
     ],
 
 ];

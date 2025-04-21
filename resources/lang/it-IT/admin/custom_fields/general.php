@@ -5,7 +5,7 @@ return [
     'manage'                    => 'Gestire',
     'field'		                => 'Campo',
     'about_fieldsets_title'		=> 'Fileldsets',
-    'about_fieldsets_text'		=> 'I set di campi consentono di creare gruppi di campi personalizzati che vengono spesso riutilizzati per tipi di modelli di asset specifici.',
+    'about_fieldsets_text'		=> 'I Fieldsets ti permettono di creare gruppi di campi personalizzati che sono frequentemente riutilizzati per modelli specifici di asset.',
     'custom_format'             => 'Formato Regex personalizzato...',
     'encrypt_field'      	        => 'Crittografare il valore di questo campo nel database',
     'encrypt_field_help'      => 'ATTENZIONE: Se il campo viene crittografato non sarà possibile cercarlo.',
@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Crea un nuovo campo personalizzato',
     'value_encrypted'      	        => 'Il valore di questo campo viene crittografato nel database. Solo gli utenti amministratori saranno in grado di visualizzare il valore decrittografato',
     'show_in_email'     => 'Includere il valore di questo campo nelle e-mail di assegnazione inviate all\'utente? I campi crittografati non possono essere inclusi nelle e-mail',
-    'show_in_email_short'     => 'Includi nelle email.',
+    'show_in_email_short' => 'Includi nelle email',
     'help_text' => 'Testo guida',
     'help_text_description' => 'Questo è un testo facoltativo che apparirà sotto gli elementi del modulo durante la modifica di una risorsa per fornire il contesto sul campo.',
     'about_custom_fields_title' => 'Informazioni sui campi personalizzati',
@@ -57,5 +57,8 @@ return [
     'show_in_requestable_list_short' => 'Mostra nella lista beni richiedibili',
     'show_in_requestable_list' => 'Mostra nella lista dei beni richiedibili. I valori criptati non verranno mostrati',
     'encrypted_options' => 'Questo campo è criptato, quindi alcune opzioni di visualizzazione non saranno disponibili.',
+    'display_checkin' => 'Mostra nei moduli di check-in',
+    'display_checkout' => 'Mostra nei moduli di assegnazione',
+    'display_audit' => 'Mostra nei moduli di revisione',
 
 ];

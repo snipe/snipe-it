@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'Hal ama in ka badan oo sifooyin ah oo ku jira safka madaxa waxa ku jira xarfaha UTF-8 oo khaldan',
         'content_row_has_malformed_characters' => 'Hal ama in ka badan oo sifooyin ah safka koowaad ee nuxurka waxa ku jira xarfo UTF-8 oo khaldan',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Ma hubtaa inaad rabto inaad tirtirto hantidan?',
         'error'   		=> 'Waxaa jirtay arrin la tirtiray hantida Fadlan isku day mar kale.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Wax hanti ah lama dooran, markaa waxba lama tirtirin.',
         'success' 		=> 'Hantida si guul leh ayaa loo tirtiray.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Hantida lama codsan, fadlan isku day mar kale',
-        'success' 		=> 'Hantida ayaa si guul leh u codsatay.',
-        'canceled'      => 'Codsiga hubinta si guul leh waa la joojiyay',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Jooji codsiga shaygan',
     ],
 
 ];

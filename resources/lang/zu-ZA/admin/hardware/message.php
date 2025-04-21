@@ -66,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Uqinisekile ukuthi ufisa ukususa le mali?',
         'error'   		=> 'Kube nenkinga yokususa le mali. Ngicela uzame futhi.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Azikho izimpahla ezikhethiwe, ngakho akukho lutho olususwe.',
         'success' 		=> 'Impahla isusiwe ngempumelelo.',
     ],
@@ -98,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Ifa alizange liceliwe, sicela uzame futhi',
-        'success' 		=> 'Ifa liceliwe ngempumelelo.',
-        'canceled'      => 'Isicelo sokuhlola sikhanseliwe ngempumelelo',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Cancel this item request',
     ],
 
 ];

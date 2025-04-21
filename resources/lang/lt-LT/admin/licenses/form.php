@@ -11,7 +11,7 @@ return array(
     'name'              => 'Programinės įrangos pavadinimas',
     'no_depreciation'   => 'Neskaičiuoti nusidėvėjimo',
     'purchase_order'    => 'Pirkimo užsakymo numeris',
-    'reassignable'      => 'Perduodamas',
+    'reassignable'      => 'Perduodama',
     'remaining_seats'   => 'Likusių vietų skaičius',
     'seats'             => 'Vietos',
     'termination_date'  => 'Galiojimo pabaiga',
