@@ -99,7 +99,7 @@ class ViewAssetsController extends Controller
 
         $data['requested_date'] = date('Y-m-d H:i:s'); //FIXME - shouldn't this be recorded somewhere?
         if ($user->location_id) {
-            $item->setLocation($user->location);
+            $item->setLogLocationOverride($user->location);
         }
 
         $item->setLogTarget($user);
