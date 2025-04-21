@@ -151,68 +151,16 @@ class ViewAssetsController extends Controller
      */
     public function store(Asset $asset): RedirectResponse
     {
-        /*
-                //"new way" - maybe this is better?
-                try {
-                    CreateCheckoutRequestAction::run($asset, auth()->user());
-                    return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
-                } catch (AssetNotRequestable $e) {
-                    return redirect()->back()->with('error', 'Asset is not requestable');
-                } catch (AuthorizationException $e) {
-                    return redirect()->back()->with('error', trans('admin/hardware/message.requests.error'));
-                } catch (Exception $e) {
-                    report($e);
-                    return redirect()->back()->with('error', trans('general.something_went_wrong'));
-                }
-        */
-        $user = auth()->user();
-
-        // Check if the asset exists and is requestable
-        if ($asset->requestable) { // FIXME - too simplistic, might need to fold in some kind of scopeRequestableAssets bit here?
-            return redirect()->route('requestable-assets')
-                ->with('error', trans('admin/hardware/message.does_not_exist_or_not_requestable'));
-        }
-        if (!Company::isCurrentUserHasAccess($asset)) {
-            return redirect()->route('requestable-assets')
-                ->with('error', trans('general.insufficient_permissions'));
-        }
-
-        $data['item'] = $asset;
-        $data['target'] = auth()->user();
-        $data['item_quantity'] = 1;
-        $settings = Setting::getSettings();
-
-        //$logaction = new Actionlog();
-        $data['asset_id'] = $asset->id;
-        $data['item_type'] = Asset::class;
-        $data['requested_date'] = date('Y-m-d H:i:s');
-
-        $asset->setLocation = $user->location;
-        $asset->setLogTarget($user);
-        $data['user_id'] = auth()->id();
-
-        // If it's already requested, cancel the request.
-        if ($asset->isRequestedBy(auth()->user())) {
-            $asset->cancelRequest(); //wait, what?
-            $asset->decrement('requests_counter', 1); //this too
-
-            $asset->logAndSaveIfNeeded(ActionType::RequestCanceled);
-            try {
-                $settings->notify(new RequestAssetCancelation($data)); //and probably this
-            } catch (\Exception $e) {
-                Log::warning($e);
-            }
-            return redirect()->route('requestable-assets')
-                ->with('success')->with('success', trans('admin/hardware/message.requests.canceled'));
-        }
-
-        $asset->logAndSaveIfNeeded(ActionType::Requested); //ARGH
-        $asset->request(); //HERE <-
-        $asset->increment('requests_counter', 1); //ARGH
         try {
-            $settings->notify(new RequestAssetNotification($data)); // ANd this.
-        } catch (\Exception $e) {
-            Log::warning($e);
+            CreateCheckoutRequestAction::run($asset, auth()->user());
+            return redirect()->route('requestable-assets')->with('success')->with('success', trans('admin/hardware/message.requests.success'));
+        } catch (AssetNotRequestable $e) {
+            return redirect()->back()->with('error', 'Asset is not requestable');
+        } catch (AuthorizationException $e) {
+            return redirect()->back()->with('error', trans('admin/hardware/message.requests.error'));
+        } catch (Exception $e) {
+            report($e);
+            return redirect()->back()->with('error', trans('general.something_went_wrong'));
         }
     }
 
