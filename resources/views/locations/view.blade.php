@@ -144,7 +144,22 @@
                           </li>
                       @endif
                   @endcan
-              
+
+              @if ($location->uploads->count() > 0 )
+              <li>
+                  <a href="#files" data-toggle="tab">
+
+                    <span class="hidden-lg hidden-md">
+                      <i class="fas fa-barcode fa-2x"></i>
+                    </span>
+                      <span class="hidden-xs hidden-sm">
+                        {{ trans('general.files') }}
+                          {!! ($location->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->uploads->count()).'</badge>' : '' !!}
+                      </span>
+                  </a>
+              </li>
+              @endif
+
               <li>
                   <a href="#history" data-toggle="tab" data-toggle="tab" data-tooltip="true" title="{{ trans('general.history') }}">
                       <i class="fa-solid fa-clock-rotate-left" style="font-size: 17px" aria-hidden="true"></i>
@@ -153,6 +168,15 @@
                     </span>
                   </a>
               </li>
+
+              @can('update', $location)
+              <li class="pull-right">
+                  <a href="#" data-toggle="modal" data-target="#uploadFileModal">
+                      <x-icon type="paperclip" />
+                      {{ trans('button.upload') }}
+                  </a>
+              </li>
+              @endcan
           </ul>
 
 
@@ -375,6 +399,22 @@
                           </table>
               </div><!-- /.tab-pane -->
 
+                  <div class="tab-pane fade" id="files">
+
+                      <div class="row">
+                          <div class="col-md-12">
+
+                              <x-filestable
+                                      filepath="private_uploads/locations/"
+                                      showfile_routename="show/locationsfile"
+                                      deletefile_routename="delete/locationsfile"
+                                      :object="$location" />
+
+                          </div> <!-- /.col-md-12 -->
+                      </div> <!-- /.row -->
+
+                  </div>
+
                 <div class="tab-pane" id="history">
                     <h2 class="box-title">{{ trans('general.history') }}</h2>
                     <!-- checked out assets table -->
@@ -549,6 +589,10 @@
 @stop
 
 @section('moar_scripts')
+
+    @can('update', Location::class)
+        @include ('modals.upload-file', ['item_type' => 'locations', 'item_id' => $location->id])
+    @endcan
 
     <script>
         $('#dataConfirmModal').on('show.bs.modal', function (event) {
