@@ -35,12 +35,10 @@ trait Loggable
         //these tiny methods just set up what the log message is going to be
         // it looks like 'restoring' fires *BEFORE* 'updating' - so we need to handle that
         static::restoring(function ($model) {
-            \Log::error("Restor*ing* callback firing...");
             $model->setLogAction(ActionType::Restore);
         });
 
         static::updating(function ($model) {
-            \Log::error("Updating is fired, current log message is: " . $model->log_action);
             // if we're doing a restore, this 'updating' hook fires *after* the restoring hook
             // so we make sure not to overwrite the log_action
             if (!$model->log_action) {
@@ -53,7 +51,6 @@ trait Loggable
         });
 
         static::deleting(function ($model) { //TODO - is this only for 'hard' delete? Or soft?
-            \Log::error("DELETING TRIGGER HAS FIRED!!!!!!!!!!!!!!! for id: " . $model->id . " old log_action was: " . $model->log_action);
             if (self::class == \App\Models\User::class) { //FIXME - Janky AF!
                 $model->setLogTarget($model); //FIXME - this makes *NO* sense!!!!
             }
@@ -95,7 +92,6 @@ trait Loggable
             if (!$model->log_action && !$model->log_meta) {
                 //nothing was changed, nothing was saved, nothing happened. So there should be no log message.
                 //FIXME if we do the transaction thing!!!!
-                \Log::error("LOG MESSAGE IS BLANK, ****AND**** log_meta is blank! Not sure what that means though...");
                 return;
             }
             if (!$model->log_action) {
@@ -105,12 +101,9 @@ trait Loggable
             // DO COMMIT HERE? TODO FIXME
         });
         static::deleted(function ($model) {
-            \Log::error("Deleted callback has fired!!!!!!!!!!! I guess that means do stuff here? For id: ".$model->id);
             $results = $model->logWithoutSave(); //TODO - if we do commits up there, we should do them here too?
-            \Log::error("result of logging without save? ".($results ? 'true' : 'false'));
         });
         static::restored(function ($model) {
-            \Log::error("RestorED callback firing.");
             $model->logWithoutSave(); //TODO - this is getting duplicative.
         });
 
@@ -138,7 +131,6 @@ trait Loggable
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
         if ($this->imported) {
-            \Log::error("FOUND SOMETHING THAT WAS IMPORTED --- ooh, how FANCY!");
             $logAction->action_source = 'importer';
         }
         $logAction->log_meta = $this->log_meta ? json_encode($this->log_meta) : null;
@@ -147,7 +139,6 @@ trait Loggable
             $logAction->target_id = $this->log_target->id;
         }
         if ($this->log_note) {
-            \Log::error("FOUND LOG NOTE! " . $this->log_note);
             $logAction->note = $this->log_note;
         }
         if ($this->log_location_override) { // TODO - this is a weird feature and we shouldn't need it.
@@ -157,7 +148,6 @@ trait Loggable
             $logAction->filename = $this->log_filename;
         }
 
-        \Log::error("Here is the logaction BEFORE we save it ($this->log_action)..." . print_r($logAction->toArray(), true));
         $logAction->action_type = $this->log_action;
         $logAction->remote_ip = request()->ip();
         $logAction->user_agent = request()->header('User-Agent');

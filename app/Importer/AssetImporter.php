@@ -202,7 +202,6 @@ class AssetImporter extends ItemImporter
                         event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), auth()->user(), 'Checkin from CSV Importer', $checkin_date));
                     }
                 }
-                \Log::error("checkout method!!!!!");
                 $asset->fresh()->checkOut($target, $this->created_by, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
             }
 
