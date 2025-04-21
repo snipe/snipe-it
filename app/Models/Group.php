@@ -81,6 +81,9 @@ class Group extends SnipeModel
     public function decodePermissions()
     {
         // Set default to empty JSON if the value is null
+        if (is_array($this->permissions)) {
+            $this->permissions = json_encode($this->permissions);
+        }
         $permissions = json_decode($this->permissions ?? '{}', JSON_OBJECT_AS_ARRAY);
 
         // If there are no permissions, return an empty array
