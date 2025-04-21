@@ -27,10 +27,10 @@ class LocationsFilesController extends Controller
      */
     public function store(UploadFileRequest $request, Location $location) : RedirectResponse
     {
-
         $this->authorize('update', $location);
 
         if ($request->hasFile('file')) {
+
             if (! Storage::exists('private_uploads/locations')) {
                 Storage::makeDirectory('private_uploads/locations', 775);
             }
