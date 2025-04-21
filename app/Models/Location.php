@@ -20,6 +20,7 @@ class Location extends SnipeModel
 {
     use HasFactory;
     use CompanyableTrait;
+    use Loggable;
 
     protected $presenter = \App\Presenters\LocationPresenter::class;
     use Presentable;
@@ -287,6 +288,23 @@ class Location extends SnipeModel
     {
         return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
     }
+
+    /**
+     * Get uploads for this location
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+            ->where('item_type', '=', Location::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
 
     /**
      * Query builder scope to order on parent
