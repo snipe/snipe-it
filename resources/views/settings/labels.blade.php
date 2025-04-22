@@ -313,6 +313,28 @@
                                     <p class="help-block">{{ trans('admin/settings/general.label2_2d_target_help') }}</p>
                                 </div>
                             </div>
+                            <!-- Title -->
+                            <div class="form-group{{ $errors->has('label2_empty_row_count') ? ' has-error' : '' }}">
+                                <div class="col-md-3 text-right">
+                                    <label for="label2_empty_row_count" class="control-label">{{trans('admin/settings/general.empty_row_count')}}</label>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-2">
+                                        <input
+                                                class="form-control"
+                                                aria-label="Empty Row Count"
+                                                name="label2_empty_row_count"
+                                                type="number"
+                                                id="label2_empty_row_count"
+                                                min="0"
+                                                value="{{ old('label2_empty_row_count', $setting->label2_empty_row_count) }}">
+                                    </div>
+                                    <div class="col-md-7">
+                                        {!! $errors->first('empty_row_count', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+                                        <p class="help-block">{!! trans('admin/settings/general.empty_row_count_help') !!}</p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-9 col-md-offset-3" style="margin-bottom: 10px;">
                                 @include('partials.label2-preview')
                             </div>

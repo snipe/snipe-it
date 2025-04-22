@@ -64,6 +64,8 @@ return [
     'enabled'                   => 'Enabled',
     'eula_settings'				=> 'EULA Settings',
     'eula_markdown'				=> 'This EULA allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
+    'empty_row_count'           => 'Field Start Offset (Empty Rows)',
+    'empty_row_count_help'      => 'Fields will begin populating after this many empty rows are skipped at the top of the label.',
     'favicon'                   => 'Favicon',
     'favicon_format'            => 'Accepted filetypes are ico, png, and gif. Other image formats may not work in all browsers.',
     'favicon_size'          => 'Favicons should be square images, 16x16 pixels.',
