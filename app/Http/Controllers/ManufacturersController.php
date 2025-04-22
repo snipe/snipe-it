@@ -48,12 +48,14 @@ class ManufacturersController extends Controller
     {
         $this->authorize('index', Manufacturer::class);
 
-        if (Manufacturer::withTrashed()->count() == 0) {
+        $manufacturers_count = Manufacturer::withTrashed()->count();
+
+        if ($manufacturers_count == 0) {
             Artisan::call('db:seed', ['--class' => 'ManufacturerSeeder']);
             return redirect()->route('manufacturers.index')->with('success', trans('general.seeding.manufacturers.success'));
         }
 
-        return redirect()->route('manufacturers.index')->with('error', 'could not seed - manufacturers already exist');
+        return redirect()->route('manufacturers.index')->with('error', trans_choice('general.seeding.manufacturers.error', ['count' => $manufacturers_count]));
     }
 
     /**
