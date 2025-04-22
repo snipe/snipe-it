@@ -6,6 +6,7 @@ use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Manufacturer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
@@ -31,7 +32,28 @@ class ManufacturersController extends Controller
     public function index() : View
     {
         $this->authorize('index', Manufacturer::class);
-        return view('manufacturers/index');
+        $manufacturer_count = Manufacturer::withTrashed()->count();
+        return view('manufacturers/index')->with('manufacturer_count', $manufacturer_count);
+    }
+
+    /**
+     * Returns a view that invokes the ajax tables which actually contains
+     * the content for the manufacturers listing, which is generated in getDatatable.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @see Api\ManufacturersController::index() method that generates the JSON response
+     * @since [v1.0]
+     */
+    public function seed() : RedirectResponse
+    {
+        $this->authorize('index', Manufacturer::class);
+
+        if (Manufacturer::withTrashed()->count() == 0) {
+            Artisan::call('db:seed', ['--class' => 'ManufacturerSeeder']);
+            return redirect()->route('manufacturers.index')->with('success', trans('general.seeding.manufacturers.success'));
+        }
+
+        return redirect()->route('manufacturers.index')->with('error', 'could not seed - manufacturers already exist');
     }
 
     /**

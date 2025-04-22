@@ -615,4 +615,12 @@ return [
     'cost_each' => ':amount each',
     'remove_current_image' => 'Remove current :type image',
 
+    'seeding' => [
+        'manufacturers' => [
+            'button' => 'Create Manufacturers',
+            'prompt' => 'You do not have any manufacturers yet. Would you like to seed a list of common manufacturers? (THIS WILL OVERWRITE EXISTING MANUFACTURERS, including those that have been soft-deleted.)',
+            'success' => 'Manufacturers seeded successfully',
+        ],
+    ],
+
 ];
