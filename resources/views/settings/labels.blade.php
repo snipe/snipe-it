@@ -326,7 +326,7 @@
                                                 type="number"
                                                 id="label2_empty_row_count"
                                                 min="0"
-                                                max="{{ $template->getSupportFields() }}"
+                                                max="5"
                                                 value="{{ old('label2_empty_row_count', $setting->label2_empty_row_count) }}"
                                         >
                                     {!! $errors->first('label2_empty_row_count', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
