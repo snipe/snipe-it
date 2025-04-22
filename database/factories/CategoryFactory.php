@@ -25,11 +25,12 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->catchPhrase(),
             'category_type' => 'asset',
-            'checkin_email' => $this->faker->boolean(),
+            'checkin_email' => true,
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,
             'use_default_eula' => $this->faker->boolean(),
             'created_by' => User::factory()->superuser(),
+            'notes'   => 'Created by DB seeder',
         ];
     }
 
@@ -204,6 +205,13 @@ class CategoryFactory extends Factory
     {
         return $this->state([
             'category_type' => 'consumable',
+        ]);
+    }
+
+    public function doesNotRequireAcceptance()
+    {
+        return $this->state([
+            'require_acceptance' => false,
         ]);
     }
 }

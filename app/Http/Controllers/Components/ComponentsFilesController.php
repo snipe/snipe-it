@@ -50,7 +50,7 @@ class ComponentsFilesController extends Controller
                 }
 
 
-                return redirect()->route('components.show', $component->id)->with('success', trans('general.file_upload_success'));
+                return redirect()->route('components.show', $component->id)->withFragment('files')->with('success', trans('general.file_upload_success'));
 
             }
 
@@ -91,7 +91,7 @@ class ComponentsFilesController extends Controller
 
             $log->delete();
 
-            return redirect()->back()
+            return redirect()->back()->withFragment('files')
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
@@ -112,40 +112,25 @@ class ComponentsFilesController extends Controller
     public function show($componentId = null, $fileId = null)
     {
         Log::debug('Private filesystem is: '.config('filesystems.default'));
-        $component = Component::find($componentId);
+
 
         // the component is valid
-        if (isset($component->id)) {
+        if ($component = Component::find($componentId)) {
             $this->authorize('view', $component);
             $this->authorize('components.files', $component);
 
-            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $component->id)->find($fileId)) {
-                return response('No matching record for that asset/file', 500)
-                    ->header('Content-Type', 'text/plain');
-            }
+            if ($log = Actionlog::whereNotNull('filename')->where('item_id', $component->id)->find($fileId)) {
 
-            $file = 'private_uploads/components/'.$log->filename;
+                $file = 'private_uploads/components/'.$log->filename;
 
-            if (Storage::missing($file)) {
-                Log::debug('FILE DOES NOT EXISTS for '.$file);
-                Log::debug('URL should be '.Storage::url($file));
-
-                return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
-                    ->header('Content-Type', 'text/plain');
-            } else {
-
-                // Display the file inline
-                if (request('inline') == 'true') {
-                    $headers = [
-                        'Content-Disposition' => 'inline',
-                    ];
-                    return Storage::download($file, $log->filename, $headers);
+                try {
+                    return StorageHelper::showOrDownloadFile($file, $log->filename);
+                } catch (\Exception $e) {
+                    return redirect()->route('components.show', ['component' => $component])->with('error',  trans('general.file_not_found'));
                 }
-
-                if (config('filesystems.default') == 'local') { // TODO - is there any way to fix this at the StorageHelper layer?
-                    return StorageHelper::downloader($file);
-                } 
             }
+            return redirect()->route('components.show', ['component' => $component])->with('error',  trans('general.log_record_not_found'));
+
         }
 
         return redirect()->route('components.index')->with('error', trans('general.file_does_not_exist', ['id' => $fileId]));

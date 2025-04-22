@@ -143,4 +143,26 @@ class ImportFactory extends Factory
             return $attributes;
         });
     }
+
+
+
+    /**
+     * Create an asset model import type.
+     *
+     * @return static
+     */
+    public function assetmodel()
+    {
+        return $this->state(function (array $attributes) {
+            $fileBuilder = Importing\AssetModelsImportFileBuilder::new();
+
+            $attributes['name'] = "{$attributes['name']} Asset Model";
+            $attributes['import_type'] = 'assetModel';
+            $attributes['header_row'] = $fileBuilder->toCsv()[0];
+            $attributes['first_row'] = $fileBuilder->firstRow();
+
+            return $attributes;
+        });
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -70,6 +71,7 @@ class Setting extends Model
 
     protected $casts = [
         'label2_asset_logo' => 'boolean',
+        'require_checkinout_notes' => 'boolean',
     ];
 
     /**
@@ -245,7 +247,7 @@ class Setting extends Model
      *
      * @return string
      */
-    public function routeNotificationForSlack(): string
+    public function routeNotificationForSlack(): ?string
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
@@ -257,7 +259,7 @@ class Setting extends Model
      *
      * @return string
      */
-    public function routeNotificationForMail(): string
+    public function routeNotificationForMail(): ?string
     {
         // At this point the endpoint is the same for everything.
         //  In the future this may want to be adapted for individual notifications.
@@ -339,13 +341,40 @@ class Setting extends Model
     }
 
     /**
+     * For a particular cache-file, refresh it if the settings have
+     * been updated more recently than the file. Then return the
+     * full filepath
+     */
+    public static function get_fresh_file_path($attribute, $path)
+    {
+        $full_path = storage_path().'/'.$path;
+        $file_exists = file_exists($full_path);
+        if ($file_exists) {
+            $statblock = stat($full_path);
+        }
+        if (!$file_exists || Carbon::createFromTimestamp($statblock['mtime']) < Setting::getSettings()->updated_at) {
+            if (Setting::getSettings()->{$attribute}) {
+                file_put_contents($full_path, Setting::getSettings()->{$attribute});
+            } else {
+                //this doesn't fire when you might expect it to because a lot of the time we do something like:
+                // if ($settings->ldap_client_tls_cert && ...
+                // so we never get a chance to 'uncache' the file.
+                if ($file_exists) {
+                    unlink($full_path);
+                }
+            }
+        }
+        return $full_path;
+    }
+
+    /**
      * Return the filename for the client-side SSL cert
      *
      * @var string
      */
     public static function get_client_side_cert_path()
     {
-        return storage_path().'/ldap_client_tls.cert';
+        return self::get_fresh_file_path('ldap_client_tls_cert', 'ldap_client_tls.cert');
     }
 
     /**
@@ -355,36 +384,7 @@ class Setting extends Model
      */
     public static function get_client_side_key_path()
     {
-        return storage_path().'/ldap_client_tls.key';
+        return self::get_fresh_file_path('ldap_client_tls_key', 'ldap_client_tls.key');
     }
-
-    public function update_client_side_cert_files()
-    {
-        /**
-         * I'm not sure if it makes sense to have a cert but no key
-         * nor vice versa, but for now I'm just leaving it like this.
-         *
-         * Also, we could easily set this up with an event handler and
-         * self::saved() or something like that but there's literally only
-         * one place where we will do that, so I'll just explicitly call
-         * this method at that spot instead. It'll be easier to debug and understand.
-         */
-        if ($this->ldap_client_tls_cert) {
-            file_put_contents(self::get_client_side_cert_path(), $this->ldap_client_tls_cert);
-        } else {
-            if (file_exists(self::get_client_side_cert_path())) {
-                unlink(self::get_client_side_cert_path());
-            }
-        }
-
-        if ($this->ldap_client_tls_key) {
-            file_put_contents(self::get_client_side_key_path(), $this->ldap_client_tls_key);
-        } else {
-            if (file_exists(self::get_client_side_key_path())) {
-                unlink(self::get_client_side_key_path());
-            }
-        }
-    }
-
 
 }

@@ -393,6 +393,10 @@ a:visited {
 .text-primary {
   color: #fff;
 }
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
+}
 :root {
   --background: #222;
   --back-main: #333;
@@ -1013,6 +1017,18 @@ a.settings_button:visited,
 a.settings_button:hover {
   color: #3c8dbc;
 }
+a.label.label-default:link {
+  color: #307095;
+  /* Use same as Header picker, lighten by 70% */
+}
+a.label.label-default:visited {
+  color: #23536f;
+  /* Use same as Header picker, lighten by 70% */
+}
+a.label.label-default:hover {
+  background-color: #BBB;
+  color: #296282;
+}
 /*
  * Skin: blue dark
  * ----------
@@ -1184,6 +1200,10 @@ a:visited {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;
@@ -2151,6 +2171,10 @@ a:visited {
 .text-primary {
   color: #fff;
 }
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
+}
 :root {
   --background: #222;
   --back-main: #333;
@@ -2661,6 +2685,10 @@ li.dropdown-item-marker {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;
@@ -3390,6 +3418,10 @@ a:visited {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;
@@ -4127,6 +4159,10 @@ a:visited {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;
@@ -5067,6 +5103,10 @@ a:visited {
 }
 .text-primary {
   color: #fff;
+}
+#sort tr.cansort {
+  background-color: var(--back-main);
+  color: var(--text-main);
 }
 :root {
   --background: #222;

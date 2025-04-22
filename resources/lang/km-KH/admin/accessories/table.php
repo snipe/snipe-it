@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'ID',
     'require_acceptance'      	=> 'ការទទួលយក',
     'title'      				=> 'ឈ្មោះគ្រឿងបន្លាស់',
-
-
 );

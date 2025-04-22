@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'היתה בעיה בבדיקת הרישיון. בבקשה נסה שוב.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'הרישיון נבדק בהצלחה'
     ),
 

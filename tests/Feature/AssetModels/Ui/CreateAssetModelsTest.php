@@ -19,6 +19,13 @@ class CreateAssetModelsTest extends TestCase
             ->assertForbidden();
     }
 
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('models.create'))
+            ->assertOk();
+    }
+
     public function testUserCanCreateAssetModels()
     {
         $this->assertFalse(AssetModel::where('name', 'Test Model')->exists());

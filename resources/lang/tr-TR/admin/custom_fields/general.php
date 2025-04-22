@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Yeni bir özel alan oluştur',
     'value_encrypted'      	        => 'Bu alanın değeri veritabanında şifrelidir. Yalnızca yönetici kullanıcıları şifresi çözülen değeri görüntüleyebilir',
     'show_in_email'     => 'Bu hane içerisindeki bilgi "Zimmet e-postası" içerisinde kullanıcıya gönderilsinmi? Şifrelenmiş hanelerin içerisindeki bilgiler gönderilemez.',
-    'show_in_email_short'     => 'E-postalara dahil edin.',
+    'show_in_email_short' => 'E-postalara dahil edin',
     'help_text' => 'Yardım Metni',
     'help_text_description' => 'Bu isteğe bağlı metin alanı, varlık düzenleme esnasında formdaki öğelere bağlam kazandırmak amacıyla öğelerin altında gözükecektir.',
     'about_custom_fields_title' => 'Özel Alanlar Hakkında',
@@ -57,5 +57,8 @@ return [
     'show_in_requestable_list_short' => 'Talep edilebilir varlıklar listesinde göster',
     'show_in_requestable_list' => 'Değeri talep edilebilir varlıklar listesinde gösterin. Şifreli alanlar gösterilmeyecek',
     'encrypted_options' => 'Bu alan şifrelendiğinden bazı görüntüleme seçenekleri kullanılamayacaktır.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

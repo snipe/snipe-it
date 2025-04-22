@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'LDAP-authenticatie testen...',
         'authentication_success' => 'Gebruiker met succes geverifieerd met LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => ':app test bericht wordt verzonden...',
         'success' => 'Je :webhook_name integratie werkt!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Er ging iets mis. :app reageerde met: :error_message',
         'error_redirect' => 'FOUT: 301/302 :endpoint geeft een omleiding. Om veiligheidsredenen volgen we geen omleidingen. Gebruik het werkelijke eindpunt.',
         'error_misc' => 'Er ging iets mis. :( ',
-    ]
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

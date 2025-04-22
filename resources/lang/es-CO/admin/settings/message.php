@@ -9,7 +9,7 @@ return [
     'backup' => [
         'delete_confirm'        => '¿Está seguro de que desea eliminar este archivo de respaldo? Esta acción no puede se puede deshacer. ',
         'file_deleted'          => 'El archivo de copia de seguridad se ha eliminado correctamente. ',
-        'generated'             => 'Se ha creado un nuevo archivo de copia de seguridad satisfactoriamente.',
+        'generated'             => 'Se ha creado correctamente un nuevo archivo de copia de seguridad.',
         'file_not_found'        => 'Ese archivo de copia de seguridad no se pudo encontrar en el servidor.',
         'restore_warning'       => 'Sí, restaurarlo. Reconozco que esto sobrescribirá cualquier dato existente actualmente en la base de datos. Esto también cerrará la sesión de todos sus usuarios existentes (incluido usted).',
         'restore_confirm'       => '¿Está seguro que desea restaurar su base de datos desde :filename?'
@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Probando autenticación LDAP...',
         'authentication_success' => 'Usuario autenticado contra LDAP con éxito!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Enviando mensaje de prueba :app...',
         'success' => '¡Su integración :webhook_name funciona!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Algo salió mal. :app respondió con: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint devuelve una redirección. Por razones de seguridad, no seguimos redirecciones. Por favor, utilice el punto final actual.',
         'error_misc' => 'Algo salió mal. :( ',
-    ]
+        'webhook_fail' => ' Notificación de webhook fallida: Compruebe que la URL sigue siendo válida.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

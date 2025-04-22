@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Lisenssin palautuksessa tapahtui virhe. Yritä uudelleen.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Lisenssi palautettiin onnistuneesti'
     ),
 

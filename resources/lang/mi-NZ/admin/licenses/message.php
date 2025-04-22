@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'I kitea he take e tirotirohia ana i roto i te raihana. Tena ngana ano.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'I tohua te raihana i te angitu'
     ),
 

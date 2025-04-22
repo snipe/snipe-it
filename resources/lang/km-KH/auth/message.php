@@ -6,16 +6,14 @@ return array(
     'account_not_found'      => 'ឈ្មោះ​អ្នក​ប្រើ ឬ​ពាក្យ​សម្ងាត់​មិន​ត្រឹមត្រូវ។',
     'account_not_activated'  => 'គណនីអ្នកប្រើប្រាស់នេះមិនដំណើរការទេ។',
     'account_suspended'      => 'គណនីអ្នកប្រើប្រាស់នេះត្រូវបានផ្អាក។',
-    'account_banned'         => 'គណនីអ្នកប្រើប្រាស់នេះត្រូវបានហាមឃាត់។',
-    'throttle'               => 'ការព្យាយាមចូលដែលបរាជ័យច្រើនពេក។ សូមព្យាយាមម្តងទៀតក្នុងរយៈពេល៖ នាទីនាទី។',
 
     'two_factor' => array(
         'already_enrolled'      => 'ឧបករណ៍របស់អ្នកបានចុះឈ្មោះរួចហើយ។',
         'success'               => 'អ្នកបានចូលដោយជោគជ័យ។',
         'code_required'         => 'កូដកត្តាពីរត្រូវបានទាមទារ។',
         'invalid_code'          => 'កូដកត្តាពីរគឺមិនត្រឹមត្រូវទេ។',
-        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
-        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+        'enter_two_factor_code' => 'សូមបញ្ចូលលេខកូដផ្ទៀងផ្ទាត់ពីរកត្តារបស់អ្នក។',
+        'please_enroll'         => 'សូមចុះឈ្មោះឧបករណ៍មួយនៅក្នុងការផ្ទៀងផ្ទាត់ពីរកត្តា។',
     ),
 
     'signin' => array(

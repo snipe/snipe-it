@@ -1,21 +1,21 @@
 <?php
 
     return [
-        'not_found'                    => 'Underhåll av tillgången du letade efter kunde inte hittas!',
+        'not_found'                    => 'Tillgångsunderhållet du letade efter kunde inte hittas!',
         'delete'                       => [
-            'confirm' => 'År du säker på att du vill radera inventarieunderhållet?',
-            'error'   => 'Ett fel uppstod vid radering av underhåll av tillgång. Var god försök igen.',
-            'success' => 'Underhåll av tillgången raderades.',
+            'confirm' => 'År du säker på att du vill radera tillgångsunderhållet?',
+            'error'   => 'Ett fel uppstod vid radering av tillgångsunderhåll. Vänligen försök igen.',
+            'success' => 'Tillgångsunderhåll raderat.',
         ],
         'create'                       => [
-            'error'   => 'Underhåll av tillgången skapades inte. Var god försök igen.',
-            'success' => 'Underhåll av tillgången skapades.',
+            'error'   => 'Tillgångsunderhållet kunde inte skapas. Vänligen försök igen.',
+            'success' => 'Tillgångsunderhåll skapat.',
         ],
         'edit'                       => [
-            'error'   => 'Underhåll av tillgång redigerades inte, försök igen.',
-            'success' => 'Underhåll av tillgång redigerades.',
+            'error'   => 'Tillgångsunderhållet kunde inte redigeras. Vänligen försök igen.',
+            'success' => 'Tillgångsunderhåll redigerat.',
         ],
-        'asset_maintenance_incomplete' => 'Inte klar ännu',
+        'asset_maintenance_incomplete' => 'Inte färdigställt ännu',
         'warranty'                     => 'Garanti',
-        'not_warranty'                 => 'Inte garanti',
+        'not_warranty'                 => 'Ej garanti',
     ];

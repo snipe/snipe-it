@@ -6,11 +6,15 @@ return [
     'asset_depreciations'  					=> 'Odpisy majetku',
     'create'  					            => 'Vytovirť typ odpisu',
     'depreciation_name'  					=> 'Názov odpisovania',
-    'depreciation_min'                      => 'Floor Value of Depreciation',
+    'depreciation_min'                      => 'Minimálna hodnota odpisu',
     'number_of_months'  					=> 'Počet mesiacov',
     'update'  					            => 'Upraviť odpisovanie',
-    'depreciation_min'                      => 'Minimum Value after Depreciation',
-    'no_depreciations_warning'               => '<strong>Warning: </strong>
-                      You do not currently have any depreciations set up.
-                      Please set up at least one depreciation to view the depreciation report.',
+    'depreciation_min'                      => 'Minimálna hodnota po odpísaní',
+    'no_depreciations_warning'               => '<strong>Varovanie: </strong>
+                      Nenastavili ste žiadne odpisovanie.
+                      Prosím nastavte aspoň jeden typ odpisov aby sa zobrazoval prehľad odpisovania.',
+    'depreciation_method'                   => 'Report odpisov',
+    'linear_depreciation'                   => 'Linear (Default)',
+    'half_1'                                => 'Half-year convention, always applied',
+    'half_2'                                => 'Half-year convention, applied with condition',
 ];

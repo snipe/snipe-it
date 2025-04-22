@@ -1,10 +1,17 @@
 <!-- Asset Model -->
 <div id="{{ $fieldname }}" class="form-group{{ $errors->has($fieldname) ? ' has-error' : '' }}">
 
-    {{ Form::label($fieldname, $translated_name, array('class' => 'col-md-3 control-label')) }}
+    <label for="{{ $fieldname }}" class="col-md-3 control-label">{{ $translated_name }}</label>
 
     <div class="col-md-7">
         <select class="js-data-ajax" data-endpoint="statuslabels" data-placeholder="{{ trans('general.select_statuslabel') }}" name="{{ $fieldname }}" style="width: 100%" id="status_select_id" aria-label="{{ $fieldname }}" {!!  ((isset($item)) && (Helper::checkIfRequired($item, $fieldname))) ? ' required ' : '' !!}{{ (isset($multiple) && ($multiple=='true')) ? " multiple='multiple'" : '' }}>
+            @isset ($selected)
+                @foreach ($selected as $status_id)
+                    <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true">
+                        {{ \App\Models\Statuslabel::find($status_id)->name }}
+                    </option>
+                @endforeach
+            @endisset
             @if ($status_id = old($fieldname,  (isset($item)) ? $item->{$fieldname} : ''))
                 <option value="{{ $status_id }}" selected="selected" role="option" aria-selected="true"  role="option">
                     {{ (\App\Models\Statuslabel::find($status_id)) ? \App\Models\Statuslabel::find($status_id)->name : '' }}

@@ -2,34 +2,35 @@
 
 return array(
 
-    'does_not_exist' => 'Component does not exist.',
+    'does_not_exist' => 'Komponent neexistuje.',
 
     'create' => array(
-        'error'   => 'Component was not created, please try again.',
-        'success' => 'Component created successfully.'
+        'error'   => 'Komponent sa nepodarilo pridať, skúste znovu.',
+        'success' => 'Komponent bol úspešne pridaný.'
     ),
 
     'update' => array(
-        'error'   => 'Component was not updated, please try again',
-        'success' => 'Component updated successfully.'
+        'error'   => 'Komponent sa nepodarilo upraviť, skúste znovu',
+        'success' => 'Komponent bol úspešne upravený.'
     ),
 
     'delete' => array(
-        'confirm'   => 'Are you sure you wish to delete this component?',
-        'error'   => 'There was an issue deleting the component. Please try again.',
-        'success' => 'The component was deleted successfully.'
+        'confirm'   => 'Ste si istý, že chcete zmazať tento komponent?',
+        'error'   => 'Nastal problém pri mazani komponentu. Prosím skúste znovu.',
+        'success' => 'Komponent bol úspešne zmazaný.',
+        'error_qty'   => 'Some components of this type are still checked out. Please check them in and try again.',
     ),
 
      'checkout' => array(
-        'error'   		=> 'Component was not checked out, please try again',
-        'success' 		=> 'Component checked out successfully.',
+        'error'   		=> 'Komponent nebol priradený, prosím skúste znovu',
+        'success' 		=> 'Komponent bol úspešne priradený.',
         'user_does_not_exist' => 'Tento užívateľ nie je platný. Prosím skúste znovu.',
-        'unavailable'      => 'Not enough components remaining: :remaining remaining, :requested requested ',
+        'unavailable'      => 'Nedostatok komponentov: :remaining skladom, :requested vyžiadaných ',
     ),
 
     'checkin' => array(
-        'error'   		=> 'Component was not checked in, please try again',
-        'success' 		=> 'Component checked in successfully.',
+        'error'   		=> 'Komponent nebol prevzatý, skúste znovu',
+        'success' 		=> 'Komponent bol úspešne prevzatý.',
         'user_does_not_exist' => 'Tento užívateľ nie je platný. Prosím skúste znovu.'
     )
 

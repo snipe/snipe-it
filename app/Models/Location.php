@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Asset;
+use App\Models\Setting;
 use App\Models\SnipeModel;
 use App\Models\Traits\Searchable;
 use App\Models\User;
@@ -18,6 +19,8 @@ use Watson\Validating\ValidatingTrait;
 class Location extends SnipeModel
 {
     use HasFactory;
+    use CompanyableTrait;
+    use Loggable;
 
     protected $presenter = \App\Presenters\LocationPresenter::class;
     use Presentable;
@@ -34,11 +37,13 @@ class Location extends SnipeModel
         'zip'           => 'max:10|nullable',
         'manager_id'    => 'exists:users,id|nullable',
         'parent_id'     => 'nullable|exists:locations,id|non_circular:locations,id',
+        'company_id'    => 'integer|nullable|exists:companies,id',
     ];
 
     protected $casts = [
         'parent_id'     => 'integer',
         'manager_id'    => 'integer',
+        'company_id'    => 'integer',
     ];
 
     /**
@@ -72,6 +77,8 @@ class Location extends SnipeModel
         'currency',
         'manager_id',
         'image',
+        'company_id',
+        'notes',
     ];
     protected $hidden = ['user_id'];
 
@@ -82,7 +89,7 @@ class Location extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at', 'ldap_ou', 'phone', 'fax'];
+    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at', 'ldap_ou', 'phone', 'fax', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -90,7 +97,8 @@ class Location extends SnipeModel
      * @var array
      */
     protected $searchableRelations = [
-      'parent' => ['name'],
+      'parent'  => ['name'],
+      'company' => ['name']
     ];
 
 
@@ -214,6 +222,17 @@ class Location extends SnipeModel
             ->with('parent');
     }
 
+    /**
+    * Establishes the locations -> company relationship
+    *
+    * @author [T. Regnery] [<tobias.regnery@gmail.com>]
+    * @since [v7.0]
+    * @return \Illuminate\Database\Eloquent\Relations\Relation
+    */
+    public function company()
+    {
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
+    }
 
     /**
      * Find the manager of a location
@@ -253,10 +272,39 @@ class Location extends SnipeModel
         return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }
 
+    /**
+     * Establishes the accessory -> location assignment relationship
+     *
+     * @author A. Gianotto <snipe@snipe.net>
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function assignedAccessories()
+    {
+        return $this->morphMany(\App\Models\AccessoryCheckout::class, 'assigned', 'assigned_type', 'assigned_to');
+    }
+
     public function setLdapOuAttribute($ldap_ou)
     {
         return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
     }
+
+    /**
+     * Get uploads for this location
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v4.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function uploads()
+    {
+        return $this->hasMany('\App\Models\Actionlog', 'item_id')
+            ->where('item_type', '=', Location::class)
+            ->where('action_type', '=', 'uploaded')
+            ->whereNotNull('filename')
+            ->orderBy('created_at', 'desc');
+    }
+
 
     /**
      * Query builder scope to order on parent
@@ -312,5 +360,18 @@ class Location extends SnipeModel
     public function scopeOrderManager($query, $order)
     {
         return $query->leftJoin('users as location_user', 'locations.manager_id', '=', 'location_user.id')->orderBy('location_user.first_name', $order)->orderBy('location_user.last_name', $order);
+    }
+
+   /**
+    * Query builder scope to order on company
+    *
+    * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+    * @param  text                              $order       Order
+    *
+    * @return \Illuminate\Database\Query\Builder          Modified query builder
+    */
+    public function scopeOrderCompany($query, $order)
+    {
+        return $query->leftJoin('companies as company_sort', 'locations.company_id', '=', 'company_sort.id')->orderBy('company_sort.name', $order);
     }
 }

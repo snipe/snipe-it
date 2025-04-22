@@ -121,5 +121,26 @@ trait CustomTestMacros
                 return $this;
             }
         );
+
+        TestResponse::macro(
+            'assertPayloadContains',
+            function (array|string $keys) {
+                Assert::assertArrayHasKey('payload', $this, 'Response did not contain a payload');
+
+                if (is_string($keys)) {
+                    $keys = [$keys];
+                }
+
+                foreach ($keys as $key) {
+                    Assert::assertArrayHasKey(
+                        $key,
+                        $this['payload'],
+                        "Response messages did not contain the key: {$key}"
+                    );
+                }
+
+                return $this;
+            }
+        );
     }
 }

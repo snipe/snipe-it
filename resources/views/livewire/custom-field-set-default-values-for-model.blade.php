@@ -1,17 +1,33 @@
 <span>
-
     <div class="form-group{{ $errors->has('custom_fieldset') ? ' has-error' : '' }}">
         <label for="custom_fieldset" class="col-md-3 control-label">
             {{ trans('admin/models/general.fieldset') }}
         </label>
         <div class="col-md-5">
-            {{ Form::select('fieldset_id', Helper::customFieldsetList(), old('fieldset_id', $fieldset_id), array('class'=>'select2 js-fieldset-field livewire-select2', 'style'=>'width:100%; min-width:350px', 'aria-label'=>'custom_fieldset', 'data-livewire-component' => $this->getId())) }}
+             <x-input.select
+                 name="fieldset_id"
+                 id="fieldset_id"
+                 :options="Helper::customFieldsetList()"
+                 :selected="old('fieldset_id', $fieldset_id)"
+                 :for-livewire="true"
+                 class="js-fieldset-field"
+                 style="width:100%; min-width:350px;"
+                 aria-label="custom_fieldset"
+             />
             {!! $errors->first('custom_fieldset', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
         </div>
         <div class="col-md-3">
             @if ($fieldset_id)
                 <label class="form-control">
-                    {{ Form::checkbox('add_default_values', 1, old('add_default_values', $add_default_values), ['data-livewire-component' => $this->getId(), 'id' => 'add_default_values', 'wire:model.live' => 'add_default_values', 'disabled' => $this->fields->isEmpty()]) }}
+                    <input
+                        type="checkbox"
+                        name="add_default_values"
+                        value="1"
+                        id="add_default_values"
+                        wire:model.live="add_default_values"
+                        data-livewire-component="{{ $this->getId() }}"
+                        @disabled($this->fields->isEmpty())
+                    />
                     {{ trans('admin/models/general.add_default_values') }}
                 </label>
             @endif
@@ -19,12 +35,13 @@
     </div>
 
     @if ($add_default_values)
-            @if ($this->fields)
+
+        @if ($this->fields)
 
                 @foreach ($this->fields as $field)
                     <div class="form-group" wire:key="field-{{ $field->id }}">
 
-                        <label class="col-md-3 control-label{{ $errors->has($field->name) ? ' has-error' : '' }}">{{ $field->name }}</label>
+                        <label class="col-md-3 control-label{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">{{ $field->name }}</label>
 
                         <div class="col-md-7">
 
@@ -123,10 +140,16 @@
                                         Unknown field element: {{ $field->element }}
                                     </span>
                                 @endif
+                                        <?php
+                                        $errormessage = $errors->first($field->db_column_name());
+                                        if ($errormessage) {
+                                            print('<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> '.$errormessage.'</span>');
+                                        }
+                                        ?>
                         </div>
                     </div>
 
-                @endforeach
+            @endforeach
 
             @endif
 

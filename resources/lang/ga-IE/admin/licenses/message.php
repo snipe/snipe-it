@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Bhí ceist ann a sheiceáil sa cheadúnas. Arís, le d\'thoil.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Rinneadh an ceadúnas a sheiceáil go rathúil'
     ),
 

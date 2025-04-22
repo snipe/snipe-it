@@ -11,11 +11,11 @@ return [
         'file_deleted'          => 'Súbor so zálohou bol úspešne odstránený. ',
         'generated'             => 'Nový súbor so zálohou bol úspešne vytvorený.',
         'file_not_found'        => 'Súbor so zálohou sa nepodarilo nájsť na serveri.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Áno, obnoviť. Uvedomujem si, že táto akcia prepíše všetky existujúce dáta v databáze. Taktiež budú odhlásení všetci používatelia (vrátane vás).',
+        'restore_confirm'       => 'Ste si istí, že chcete obnoviť databázu z :fielname?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please log in again.'
+        'success'               => 'Vaša systémová záloha bola obnovená. Prosím znovu sa prihláste.'
     ],
     'purge' => [
         'error'     => 'Počas čistenia sa vyskytla chyba. ',
@@ -23,27 +23,38 @@ return [
         'success'               => 'Odstránené záznamy boli úspešne očistené.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
+        'sending' => 'Posielam testovací email...',
         'success' => 'Email odoslaný!',
         'error' => 'Email sa nepodarilo odoslať.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'additional' => 'Podrobná správa o chybe nie je dostupná. Skontrolujte nastavenia pošty a logy.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
+        'testing' => 'Testujem LDAP spojenie, väzbu a dopyty ...',
+        '500' => '500 chyba servera. Prosím skontroluje serverové logy pre viac informácií.',
         'error' => 'Niečo sa pokazilo :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'sync_success' => 'Ukážka 10 používateľov vrátená z LDAP server na základe vašich nastavení:',
+        'testing_authentication' => 'Testujem LDAP autentifikáciu...',
+        'authentication_success' => 'Používateľ sa úspešne autentifikoval voči LDAP-u!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
+        'sending' => 'Posielam :app testovaciu správu...',
+        'success' => 'Vaša :webhook_name integrácia funguje!',
+        'success_pt1' => 'Úspešné! Skontrolujte ',
+        'success_pt2' => ' kanál pre vaše testovacie správy a uistite sa, že kliknete na tlačidlo ULOŽIŤ pre uloženie nastavení.',
         '500' => '500 Chyba servera.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
+        'error' => 'Nastala chyba. :app odpovedala s: :error_message',
+        'error_redirect' => 'CHBA: 301/302 :endpoint vrátil presmerovanie. Z bezpečnostných dôvodov nenasledujeme presmerovania. Prosím použite správny koncový bod.',
         'error_misc' => 'Niečo sa pokazilo. :( ',
-    ]
+        'webhook_fail' => ' webhook notifikácia zlyhala: Overte správnosť zadanej URL adresy.',
+        'webhook_channel_not_found' => ' kanál webhooku nebol nájdený.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

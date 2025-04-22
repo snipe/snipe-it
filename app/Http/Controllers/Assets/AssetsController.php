@@ -6,6 +6,7 @@ use App\Events\CheckoutableCheckedIn;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
+use App\Http\Requests\UpdateAssetRequest;
 use App\Models\Actionlog;
 use App\Http\Requests\UploadFileRequest;
 use Illuminate\Support\Facades\Log;
@@ -17,7 +18,6 @@ use App\Models\Location;
 use App\Models\Setting;
 use App\Models\Statuslabel;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use App\View\Label;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +31,7 @@ use Illuminate\Http\Response;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use TypeError;
 
 /**
  * This class controls all actions related to assets for
@@ -112,8 +113,10 @@ class AssetsController extends Controller
 
         $settings = Setting::getSettings();
 
-        $success = false;
+        $successes = [];
+        $failures = [];
         $serials = $request->input('serials');
+        $asset = null;
 
         for ($a = 1; $a <= count($asset_tags); $a++) {
             $asset = new Asset();
@@ -200,20 +203,35 @@ class AssetsController extends Controller
                     $asset->checkOut($target, auth()->user(), date('Y-m-d H:i:s'), $request->input('expected_checkin', null), 'Checked out on asset creation', $request->get('name'), $location);
                 }
 
-                $success = true;
-                
+                $successes[] = "<a href='" . route('hardware.show', $asset) . "' style='color: white;'>" . e($asset->asset_tag) . "</a>";
+
+            } else {
+                $failures[] = join(",", $asset->getErrors()->all());
             }
         }
 
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
 
-        if ($success) {
+        if ($successes) {
+            if ($failures) {
+                //some succeeded, some failed
+                return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets')) //FIXME - not tested
+                ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]))
+                    ->with('warning', trans_choice('admin/hardware/message.create.partial_failure', $failures, ['failures' => join("; ", $failures)]));
+            } else {
+                if (count($successes) == 1) {
+                    //the most common case, keeping it so we don't have to make every use of that translation string be trans_choice'ed
+                    //and re-translated
+                    return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                        ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', $asset), 'id', 'tag' => e($asset->asset_tag)]));
+                } else {
+                    //multi-success
+                    return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
+                        ->with('success-unescaped', trans_choice('admin/hardware/message.create.multi_success_linked', $successes, ['links' => join(", ", $successes)]));
+                }
+            }
 
-            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
-                ->with('success-unescaped', trans('admin/hardware/message.create.success_linked', ['link' => route('hardware.show', ['hardware' => $asset->id]), 'id', 'tag' => e($asset->asset_tag)]));
-               
-      
         }
 
         return redirect()->back()->withInput()->withErrors($asset->getErrors());
@@ -224,20 +242,14 @@ class AssetsController extends Controller
      * Returns a view that presents a form to edit an existing asset.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $assetId
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
-    public function edit($assetId = null) : View | RedirectResponse
+    public function edit(Asset $asset) : View | RedirectResponse
     {
-        if (! $item = Asset::find($assetId)) {
-            // Redirect to the asset management page with error
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
-        //Handles company checks and permissions.
-        $this->authorize($item);
-
-        return view('hardware/edit', compact('item'))
+        $this->authorize($asset);
+        return view('hardware/edit')
+            ->with('item', $asset)
             ->with('statuslabel_list', Helper::statusLabelList())
             ->with('statuslabel_types', Helper::statusTypeList());
     }
@@ -251,15 +263,14 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @return \Illuminate\Contracts\View\View
      */
-    public function show($assetId = null) : View | RedirectResponse
+    public function show(Asset $asset) : View | RedirectResponse
     {
-        $asset = Asset::withTrashed()->find($assetId);
         $this->authorize('view', $asset);
         $settings = Setting::getSettings();
 
         if (isset($asset)) {
             $audit_log = Actionlog::where('action_type', '=', 'audit')
-                ->where('item_id', '=', $assetId)
+                ->where('item_id', '=', $asset->id)
                 ->where('item_type', '=', Asset::class)
                 ->orderBy('created_at', 'DESC')->first();
 
@@ -275,7 +286,7 @@ class AssetsController extends Controller
 
             $qr_code = (object) [
                 'display' => $settings->qr_code == '1',
-                'url' => route('qr_code/hardware', $asset->id),
+                'url' => route('qr_code/hardware', $asset),
             ];
 
             return view('hardware/view', compact('asset', 'qr_code', 'settings'))
@@ -292,14 +303,9 @@ class AssetsController extends Controller
      * @since [v1.0]
      * @author [A. Gianotto] [<snipe@snipe.net>]
      */
-    public function update(ImageUploadRequest $request, $assetId = null) : RedirectResponse
+    public function update(ImageUploadRequest $request, Asset $asset) : RedirectResponse
     {
 
-        // Check if the asset exists
-        if (! $asset = Asset::find($assetId)) {
-            // Redirect to the asset management page with error
-            return redirect()->route('hardware.index')->with('error', trans('admin/hardware/message.does_not_exist'));
-        }
         $this->authorize($asset);
 
         $asset->status_id = $request->input('status_id', null);
@@ -313,7 +319,7 @@ class AssetsController extends Controller
             $asset->eol_explicit = false;
         } elseif ($request->filled('asset_eol_date')) {
            $asset->asset_eol_date = $request->input('asset_eol_date', null);
-           $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
+            $months = (int) Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date, true);
            if($asset->model->eol) {
                if($months != $asset->model->eol > 0) {
                    $asset->eol_explicit = true;
@@ -335,21 +341,15 @@ class AssetsController extends Controller
 
         $status = Statuslabel::find($request->input('status_id'));
 
-        // This is a non-deployable status label - we should check the asset back in.
-        if (($status && $status->getStatuslabelType() != 'deployable') && ($target = $asset->assignedTo)) {
-
+        // This is an archived or undeployable - we should check the asset back in.
+        // Pending is allowed here
+        if (($status) && (($status->getStatuslabelType() != 'pending') && ($status->getStatuslabelType() != 'deployable')) && ($target = $asset->assignedTo)) {
             $originalValues = $asset->getRawOriginal();
             $asset->assigned_to = null;
             $asset->assigned_type = null;
             $asset->accepted = null;
-
-            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update', date('Y-m-d H:i:s'), $originalValues));
+            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), 'Checkin on asset update with '.$status->getStatuslabelType().' status', date('Y-m-d H:i:s'), $originalValues));
         }
-
-        if ($asset->assigned_to == '') {
-            $asset->location_id = $request->input('rtd_location_id', null);
-        }
-
 
         if ($request->filled('image_delete')) {
             try {
@@ -386,26 +386,26 @@ class AssetsController extends Controller
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
-        // Validation for these fields is handlded through the AssetRequest form request
         // FIXME: No idea why this is returning a Builder error on db_column_name.
         // Need to investigate and fix. Using static method for now.
         $model = AssetModel::find($request->get('model_id'));
         if (($model) && ($model->fieldset)) {
             foreach ($model->fieldset->fields as $field) {
-
-                if ($field->field_encrypted == '1') {
-                    if (Gate::allows('assets.view.encrypted_custom_fields')) {
-                        if (is_array($request->input($field->db_column))) {
-                            $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
-                        } else {
-                            $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                if ($request->has($field->db_column)) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                            if (is_array($request->input($field->db_column))) {
+                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            } else {
+                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            }
                         }
-                    }
-                } else {
-                    if (is_array($request->input($field->db_column))) {
-                        $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
                     } else {
-                        $asset->{$field->db_column} = $request->input($field->db_column);
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        } else {
+                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
                     }
                 }
             }
@@ -414,7 +414,7 @@ class AssetsController extends Controller
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
         if ($asset->save()) {
-            return redirect()->to(Helper::getRedirectOption($request, $assetId, 'Assets'))
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                 ->with('success', trans('admin/hardware/message.update.success'));
         }
 
@@ -515,14 +515,14 @@ class AssetsController extends Controller
      * @param int $assetId
      * @since [v1.0]
      */
-    public function getQrCode($assetId = null) : Response | BinaryFileResponse | string | bool
+    public function getQrCode(Asset $asset) : Response | BinaryFileResponse | string | bool
     {
         $settings = Setting::getSettings();
 
-        if ($settings->qr_code == '1') {
-            $asset = Asset::withTrashed()->find($assetId);
+        if (($settings->qr_code == '1') && ($settings->label2_2d_type !== 'none')) {
+
             if ($asset) {
-                $size = Helper::barcodeDimensions($settings->barcode_type);
+                $size = Helper::barcodeDimensions($settings->label2_2d_type);
                 $qr_file = public_path().'/uploads/barcodes/qr-'.str_slug($asset->asset_tag).'-'.str_slug($asset->id).'.png';
 
                 if (isset($asset->id, $asset->asset_tag)) {
@@ -532,7 +532,7 @@ class AssetsController extends Controller
                         return response()->file($qr_file, $header);
                     } else {
                         $barcode = new \Com\Tecnick\Barcode\Barcode();
-                        $barcode_obj = $barcode->getBarcodeObj($settings->barcode_type, route('hardware.show', $asset->id), $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
+                        $barcode_obj = $barcode->getBarcodeObj($settings->label2_2d_type, route('hardware.show', $asset->id), $size['height'], $size['width'], 'black', [-2, -2, -2, -2]);
                         file_put_contents($qr_file, $barcode_obj->getPngData());
 
                         return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
@@ -557,7 +557,7 @@ class AssetsController extends Controller
     {
         $settings = Setting::getSettings();
         if ($asset = Asset::withTrashed()->find($assetId)) {
-            $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->alt_barcode).'-'.str_slug($asset->asset_tag).'.png';
+            $barcode_file = public_path().'/uploads/barcodes/'.str_slug($settings->label2_1d_type).'-'.str_slug($asset->asset_tag).'.png';
 
             if (isset($asset->id, $asset->asset_tag)) {
                 if (file_exists($barcode_file)) {
@@ -570,11 +570,11 @@ class AssetsController extends Controller
 
                     $barcode = new \Com\Tecnick\Barcode\Barcode();
                     try {
-                        $barcode_obj = $barcode->getBarcodeObj($settings->alt_barcode, $asset->asset_tag, ($barcode_width < 300 ? $barcode_width : 300), 50);
+                        $barcode_obj = $barcode->getBarcodeObj($settings->label2_1d_type, $asset->asset_tag, ($barcode_width < 300 ? $barcode_width : 300), 50);
                         file_put_contents($barcode_file, $barcode_obj->getPngData());
 
                         return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
-                    } catch (\Exception $e) {
+                    } catch (\Exception|TypeError $e) {
                         Log::debug('The barcode format is invalid.');
 
                         return response(file_get_contents(public_path('uploads/barcodes/invalid_barcode.gif')))->header('Content-type', 'image/gif');
@@ -849,8 +849,8 @@ class AssetsController extends Controller
     public function quickScan()
     {
         $this->authorize('audit', Asset::class);
-        $dt = Carbon::now()->addMonths(12)->toDateString();
-
+        $settings = Setting::getSettings();
+        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
         return view('hardware/quickscan')->with('next_audit_date', $dt);
     }
 
@@ -861,15 +861,6 @@ class AssetsController extends Controller
         return view('hardware/quickscan-checkin')->with('statusLabel_list', Helper::statusLabelList());
     }
 
-    public function audit($id)
-    {
-        $settings = Setting::getSettings();
-        $this->authorize('audit', Asset::class);
-        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
-        $asset = Asset::findOrFail($id);
-
-        return view('hardware/audit')->with('asset', $asset)->with('next_audit_date', $dt)->with('locations_list');
-    }
 
     public function dueForAudit()
     {
@@ -886,22 +877,60 @@ class AssetsController extends Controller
     }
 
 
-    public function auditStore(UploadFileRequest $request, $id)
+    public function audit(Asset $asset)
     {
+        $settings = Setting::getSettings();
+        $this->authorize('audit', Asset::class);
+        $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
+        return view('hardware/audit')->with('asset', $asset)->with('item', $asset)->with('next_audit_date', $dt)->with('locations_list');
+    }
+
+    public function auditStore(UploadFileRequest $request, Asset $asset)
+    {
+
         $this->authorize('audit', Asset::class);
 
-        $rules = [
-            'location_id' => 'exists:locations,id|nullable|numeric',
-            'next_audit_date' => 'date|nullable',
-        ];
+        $originalValues = $asset->getRawOriginal();
 
-        $validator = Validator::make($request->all(), $rules);
+        $asset->next_audit_date = $request->input('next_audit_date');
+        $asset->last_audit_date = date('Y-m-d H:i:s');
 
-        if ($validator->fails()) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, $validator->errors()->all()));
+        // Check to see if they checked the box to update the physical location,
+        // not just note it in the audit notes
+        if ($request->input('update_location') == '1') {
+            $asset->location_id = $request->input('location_id');
         }
 
-        $asset = Asset::findOrFail($id);
+        // Update custom fields in the database
+        if (($asset->model) && ($asset->model->fieldset)) {
+            foreach ($asset->model->fieldset->fields as $field) {
+                if (($field->display_audit=='1') && ($request->has($field->db_column))) {
+                    if ($field->field_encrypted == '1') {
+                        if (Gate::allows('assets.view.encrypted_custom_fields')) {
+                            if (is_array($request->input($field->db_column))) {
+                                $asset->{$field->db_column} = Crypt::encrypt(implode(', ', $request->input($field->db_column)));
+                            } else {
+                                $asset->{$field->db_column} = Crypt::encrypt($request->input($field->db_column));
+                            }
+                        }
+                    } else {
+                        if (is_array($request->input($field->db_column))) {
+                            $asset->{$field->db_column} = implode(', ', $request->input($field->db_column));
+                        } else {
+                            $asset->{$field->db_column} = $request->input($field->db_column);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Validate custom fields
+        Validator::make($asset->toArray(), $asset->customFieldValidationRules())->validate();
+
+        // Validate the rest of the data before we turn off the event dispatcher
+        if ($asset->isInvalid()) {
+            return redirect()->back()->withInput()->withErrors($asset->getErrors());
+        }
 
         /**
          * Even though we do a save() further down, we don't want to log this as a "normal" asset update,
@@ -917,18 +946,11 @@ class AssetsController extends Controller
          * which manually invokes Watson Validating to make sure the asset's model is valid.
          *
          * @see \App\Observers\AssetObserver::updating()
+         * @see \App\Models\Asset::save()
          */
+
         $asset->unsetEventDispatcher();
 
-        $asset->next_audit_date = $request->input('next_audit_date');
-        $asset->last_audit_date = date('Y-m-d H:i:s');
-
-        // Check to see if they checked the box to update the physical location,
-        // not just note it in the audit notes
-        if ($request->input('update_location') == '1') {
-            $asset->location_id = $request->input('location_id');
-        }
-        
 
         /**
          * Invoke Watson Validating to check the asset itself and check to make sure it saved correctly.
@@ -942,7 +964,7 @@ class AssetsController extends Controller
                 $file_name = $request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('image'));
             }
 
-            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name);
+            $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name, $originalValues);
             return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
 

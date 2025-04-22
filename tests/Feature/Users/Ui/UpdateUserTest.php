@@ -9,6 +9,13 @@ use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('users.edit', User::factory()->create()->id))
+            ->assertOk();
+    }
+
     public function testUsersCanBeActivatedWithNumber()
     {
         $admin = User::factory()->superuser()->create();

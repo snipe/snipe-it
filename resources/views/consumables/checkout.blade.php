@@ -36,6 +36,15 @@
             </div>
           </div>
           @endif
+          @if ($consumable->category)
+              <!-- consumable name -->
+              <div class="form-group">
+                  <label class="col-sm-3 control-label">{{ trans('general.category') }}</label>
+                  <div class="col-md-6">
+                      <p class="form-control-static">{{ $consumable->category->name }}</p>
+                  </div>
+              </div>
+          @endif
 
           <!-- total -->
           <div class="form-group">
@@ -91,7 +100,7 @@
               <label for="qty" class="col-md-3 control-label">{{ trans('general.qty') }}</label>
               <div class="col-md-7 col-sm-12 required">
                   <div class="col-md-2" style="padding-left:0px">
-                    <input class="form-control" type="number" name="qty" id="qty" value="1" min="1" max="{{$consumable->numRemaining()}}" maxlength="999999"  />
+                    <input class="form-control" type="number" name="checkout_qty" id="checkout_qty" value="1" min="1" max="{{$consumable->numRemaining()}}" maxlength="999999"  />
                   </div>
               </div>
               {!! $errors->first('qty', '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span></div>') !!}

@@ -48,7 +48,7 @@ class AssetObserver
             $changed = [];
 
             foreach ($asset->getRawOriginal() as $key => $value) {
-                if ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key]) {
+                if ((array_key_exists($key, $asset->getAttributes())) && ($asset->getRawOriginal()[$key] != $asset->getAttributes()[$key])) {
                     $changed[$key]['old'] = $asset->getRawOriginal()[$key];
                     $changed[$key]['new'] = $asset->getAttributes()[$key];
                 }
@@ -80,7 +80,7 @@ class AssetObserver
     {
         if ($settings = Setting::getSettings()) {
             $tag = $asset->asset_tag;
-            $prefix = $settings->auto_increment_prefix;
+            $prefix = (string)($settings->auto_increment_prefix ?? '');
             $number = substr($tag, strlen($prefix));
             // IF - auto_increment_assets is on, AND (there is no prefix OR the prefix matches the start of the tag)
             //      AND the rest of the string after the prefix is all digits, THEN...
@@ -158,7 +158,7 @@ class AssetObserver
      * is used in this observer, it doesn't actually exist yet and the migration will break unless we
      * use saveQuietly() in the migration which skips this observer.
      *
-     * @see https://github.com/snipe/snipe-it/issues/13723#issuecomment-1761315938
+     * @see https://github.com/grokability/snipe-it/issues/13723#issuecomment-1761315938
      */
     public function saving(Asset $asset)
     {
@@ -171,7 +171,7 @@ class AssetObserver
        // determine if explicit and set eol_explicit to true
        if (!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) {
             if($asset->model->eol > 0) {
-                $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date); 
+                $months = (int) Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date, true);
                 if($months != $asset->model->eol) {
                     $asset->eol_explicit = true;
                 }

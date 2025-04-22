@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'ไม่มีสินทรัพย์',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'ไม่มีสินทรัพย์',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'สินทรัพย์นั้นไม่มีอยู่หรือไม่สามารถร้องขอได้',
-    'assoc_users'	 	=> 'ขณะนี้มีการตรวจสอบเนื้อหานี้แก่ผู้ใช้และไม่สามารถลบออกได้ โปรดตรวจสอบเนื้อหาเป็นครั้งแรกจากนั้นลองลบอีกครั้ง',
+    'assoc_users'	 	 => 'ขณะนี้มีการตรวจสอบเนื้อหานี้แก่ผู้ใช้และไม่สามารถลบออกได้ โปรดตรวจสอบเนื้อหาเป็นครั้งแรกจากนั้นลองลบอีกครั้ง',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'ไม่ได้สร้างเนื้อหาโปรดลองอีกครั้ง :(',
         'success' 		=> 'สร้างเนื้อหาสำเร็จแล้ว :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -61,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'คุณแน่ใจหรือไม่ว่าต้องการลบเนื้อหานี้',
         'error'   		=> 'เกิดปัญหาในการลบเนื้อหา กรุณาลองอีกครั้ง.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'ไม่มีการเลือกเนื้อหาใด ๆ ดังนั้นจึงไม่มีสิ่งใดถูกลบ',
         'success' 		=> 'เนื้อหาถูกลบเรียบร้อยแล้ว',
     ],
@@ -79,6 +86,11 @@ return [
         'no_assets_selected' => 'คุณต้องเลือกอย่างน้อยหนึ่งสินทรัพย์จากรายการ',
     ],
 
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
+    ],
+
     'checkin' => [
         'error'   		=> 'ไม่ได้เช็คอินเนื้อหาโปรดลองอีกครั้ง',
         'success' 		=> 'ตรวจสอบเนื้อหาเรียบร้อยแล้ว',
@@ -88,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'ไม่ได้ร้องขอเนื้อหาโปรดลองอีกครั้ง',
-        'success' 		=> 'ขอรับสินทรัพย์สำเร็จแล้ว',
-        'canceled'      => 'ยกเลิกคำขอชำระเงินเรียบร้อยแล้ว',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Cancel this item request',
     ],
 
 ];

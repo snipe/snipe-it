@@ -6,6 +6,4 @@ return array(
     'id'      					=> '아이디',
     'require_acceptance'      	=> '승인',
     'title'      				=> '부속품 명',
-
-
 );

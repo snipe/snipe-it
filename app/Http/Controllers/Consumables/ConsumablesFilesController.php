@@ -48,7 +48,7 @@ class ConsumablesFilesController extends Controller
                 }
 
 
-                return redirect()->route('consumables.show', $consumable->id)->with('success', trans('general.file_upload_success'));
+                return redirect()->route('consumables.show', $consumable->id)->withFragment('files')->with('success', trans('general.file_upload_success'));
 
             }
 
@@ -89,7 +89,7 @@ class ConsumablesFilesController extends Controller
 
             $log->delete();
 
-            return redirect()->back()
+            return redirect()->back()->withFragment('files')
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
 
@@ -104,7 +104,6 @@ class ConsumablesFilesController extends Controller
      * @since [v1.4]
      * @param int $consumableId
      * @param int $fileId
-     * @return \Symfony\Consumable\HttpFoundation\Response
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($consumableId = null, $fileId = null)
@@ -116,36 +115,18 @@ class ConsumablesFilesController extends Controller
             $this->authorize('view', $consumable);
             $this->authorize('consumables.files', $consumable);
 
-            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $consumable->id)->find($fileId)) {
-                return response('No matching record for that asset/file', 500)
-                    ->header('Content-Type', 'text/plain');
-            }
+            if ($log = Actionlog::whereNotNull('filename')->where('item_id', $consumable->id)->find($fileId)) {
+                $file = 'private_uploads/consumables/'.$log->filename;
 
-            $file = 'private_uploads/consumables/'.$log->filename;
-
-            if (Storage::missing($file)) {
-                Log::debug('FILE DOES NOT EXISTS for '.$file);
-                Log::debug('URL should be '.Storage::url($file));
-
-                return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
-                    ->header('Content-Type', 'text/plain');
-            } else {
-
-                // Display the file inline
-                if (request('inline') == 'true') {
-                    $headers = [
-                        'Content-Disposition' => 'inline',
-                    ];
-                    return Storage::download($file, $log->filename, $headers);
-                }
-
-
-                // We have to override the URL stuff here, since local defaults in Laravel's Flysystem
-                // won't work, as they're not accessible via the web
-                if (config('filesystems.default') == 'local') { // TODO - is there any way to fix this at the StorageHelper layer?
-                    return StorageHelper::downloader($file);
+                try {
+                    return StorageHelper::showOrDownloadFile($file, $log->filename);
+                } catch (\Exception $e) {
+                    return redirect()->route('consumables.show', ['consumable' => $consumable])->with('error',  trans('general.file_not_found'));
                 }
             }
+            // The log record doesn't exist somehow
+            return redirect()->route('consumables.show', ['consumable' => $consumable])->with('error',  trans('general.log_record_not_found'));
+
         }
 
         return redirect()->route('consumables.index')->with('error', trans('general.file_does_not_exist', ['id' => $fileId]));

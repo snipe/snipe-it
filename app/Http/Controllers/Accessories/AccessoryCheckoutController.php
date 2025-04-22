@@ -75,20 +75,23 @@ class AccessoryCheckoutController extends Controller
         $accessory->checkout_qty = $request->input('checkout_qty', 1);
         
         for ($i = 0; $i < $accessory->checkout_qty; $i++) {
-            AccessoryCheckout::create([
+
+            $accessory_checkout = new AccessoryCheckout([
                 'accessory_id' => $accessory->id,
                 'created_at' => Carbon::now(),
-                'created_by' => auth()->id(),
                 'assigned_to' => $target->id,
                 'assigned_type' => $target::class,
                 'note' => $request->input('note'),
             ]);
+
+            $accessory_checkout->created_by = auth()->id();
+            $accessory_checkout->save();
         }
+
         event(new CheckoutableCheckedOut($accessory,  $target, auth()->user(), $request->input('note')));
 
-        // Set this as user since we only allow checkout to user for this item type
         $request->request->add(['checkout_to_type' => request('checkout_to_type')]);
-        $request->request->add(['assigned_user' => $target->id]);
+        $request->request->add(['assigned_to' => $target->id]);
 
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 

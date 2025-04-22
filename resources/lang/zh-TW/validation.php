@@ -173,6 +173,7 @@ return [
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -184,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => '一個或多個郵件地址不正確',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => ':attribute 含有無效字元',
-        'email_array'      => '一個或多個郵件地址不正確',
+
         'hashed_pass'      => '當前密碼不正確！',
         'dumbpwd'          => '該密碼太常見。',
         'statuslabel_type' => '您必須選擇一個有效的狀態標籤',
@@ -194,7 +199,7 @@ return [
         'custom_field_not_found_on_model' => 'This field seems to exist, but is not available on this Asset Model\'s fieldset.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
         'purchase_date.date_format'     => ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
         'last_audit_date.date_format'   =>  ':attribute 必須是 YYYY-MM-DD hh:mm:ss 格式的有效日期',
@@ -203,9 +208,14 @@ return [
         'expected_checkin.date_format'  =>  ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
         'start_date.date_format'        =>  ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
         'end_date.date_format'          =>  ':attribute 必須是 YYYY-MM-DD 格式的有效日期',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
+
+        'ldap_username_field' => [
+            'not_in' =>         '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> '],
+        'ldap_filter' => ['regex' => 'This value should probably not be wrapped in parentheses.'],
+
         ],
     /*
     |--------------------------------------------------------------------------

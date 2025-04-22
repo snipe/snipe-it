@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'Id',
     'require_acceptance'      	=> 'Godtatt',
     'title'      				=> 'Tittel',
-
-
 );

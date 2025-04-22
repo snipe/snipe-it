@@ -173,6 +173,7 @@ return [
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -184,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Una sau mai multe adrese de e-mail este nevalidă.',
+    'checkboxes'           => ':attribute conține opțiuni invalide.',
+    'radio_buttons'        => ':attribute nu este valid.',
+    
     'custom' => [
         'alpha_space' => 'Câmpul atributului: conține un caracter care nu este permis.',
-        'email_array'      => 'Una sau mai multe adrese de e-mail este nevalidă.',
+
         'hashed_pass'      => 'Parola curentă este incorectă',
         'dumbpwd'          => 'Această parolă este prea obișnuită.',
         'statuslabel_type' => 'Trebuie să selectați un tip de etichetă de stare validă',
@@ -194,7 +199,7 @@ return [
         'custom_field_not_found_on_model' => 'This field seems to exist, but is not available on this Asset Model\'s fieldset.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
         'purchase_date.date_format'     => ':attribute trebuie să fie o dată validă în formatul AAAA-LL-ZZ',
         'last_audit_date.date_format'   =>  ':attribute trebuie să fie o dată validă în AAAA-LL-ZZ hh:mm:ss format',
@@ -203,9 +208,14 @@ return [
         'expected_checkin.date_format'  =>  ':attribute trebuie să fie o dată validă în formatul AAAA-LL-ZZ',
         'start_date.date_format'        =>  ':attribute trebuie să fie o dată validă în formatul AAAA-LL-ZZ',
         'end_date.date_format'          =>  ':attribute trebuie să fie o dată validă în formatul AAAA-LL-ZZ',
-        'checkboxes'           => ':attribute conține opțiuni invalide.',
-        'radio_buttons'        => ':attribute nu este valid.',
         'invalid_value_in_field' => 'Valoare nevalidă inclusă în acest câmp',
+
+        'ldap_username_field' => [
+            'not_in' =>         '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> '],
+        'ldap_filter' => ['regex' => 'This value should probably not be wrapped in parentheses.'],
+
         ],
     /*
     |--------------------------------------------------------------------------

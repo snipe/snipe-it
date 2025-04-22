@@ -68,6 +68,7 @@ class AssetModel extends SnipeModel
         'model_number',
         'name',
         'notes',
+        'requestable',
     ];
 
     use Searchable;
@@ -233,7 +234,7 @@ class AssetModel extends SnipeModel
      */
     public function adminuser()
     {
-        return $this->belongsTo(\App\Models\User::class, 'created_by');
+        return $this->belongsTo(\App\Models\User::class, 'created_by')->withTrashed();
     }
 
 
@@ -328,4 +329,14 @@ class AssetModel extends SnipeModel
     {
         return $query->leftJoin('custom_fieldsets', 'models.fieldset_id', '=', 'custom_fieldsets.id')->orderBy('custom_fieldsets.name', $order);
     }
+
+    /**
+     * Query builder scope to order on created_by name
+     *
+     */
+    public function scopeOrderByCreatedByName($query, $order)
+    {
+        return $query->leftJoin('users as admin_sort', 'models.created_by', '=', 'admin_sort.id')->select('models.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+    }
+
 }

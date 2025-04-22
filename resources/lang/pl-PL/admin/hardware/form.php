@@ -41,7 +41,7 @@ return [
     'requestable'		=> 'Użytkownicy mogą wymagać tego zasobu',
     'redirect_to_all'   => 'Wróć do wszystkich :type',
     'redirect_to_type'   => 'Przejdź do :type',
-    'redirect_to_checked_out_to'   => 'Go to Checked Out to',
+    'redirect_to_checked_out_to'   => 'Przejdź do wydania do',
     'select_statustype'	=> 'Wybierz status',
     'serial'			=> 'Numer seryjny',
     'status'			=> 'Status',
@@ -55,9 +55,10 @@ return [
     'asset_location_update_default' => 'Zaktualizuj tylko domyślną lokalizację',
     'asset_location_update_actual' => 'Aktualizuj tylko bieżącą lokalizację',
     'asset_not_deployable' => 'Ten status oznacza brak możliwości wdrożenia. Ten zasób nie może zostać przypisany.',
-    'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Ten status oznacza możliwość wdrożenia. Ten zasób może zostać przypisany.',
+    'asset_not_deployable_checkin' => 'Ten status nie jest wdrożeniowym. Użycie tego statusu uniemożliwi wydanie zasobu.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Przetwarzanie... (To może zająć trochę czasu dla dużych plików)',
     'optional_infos'  => 'Informacje opcjonalne',
-    'order_details'   => 'Informacje związane z zamówieniem'
+    'order_details'   => 'Informacje związane z zamówieniem',
+    'calc_eol'    => 'W przypadku unieważnienia daty wycofania z eksploatacji, użyj automatycznego obliczenia wycofania z eksploatacji w oparciu o datę zakupu i czas wycofania z eksploatacji.',
 ];

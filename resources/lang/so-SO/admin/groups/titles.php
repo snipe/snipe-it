@@ -8,9 +8,9 @@ return [
     'update' 	 		        => 'Kooxda wax ka beddel',
     'group_name' 	 		=> 'Magaca Kooxda',
     'group_admin' 	 		=> 'Kooxda Maamulka',
-    'allow' 	 			=> 'Oggolow',
+    'allow' 	 			=> 'Ogolaansho',
     'deny' 	 				=> 'Inkira',
     'permission'            => 'Ogolaanshaha',
     'grant'                 => 'Deeq',
-    'no_permissions'        => 'Kooxdani wax ogolaansho ah ma lahan'
+    'no_permissions'        => 'Kooxdani wax ogolaansho ah ma heysato.'
 ];

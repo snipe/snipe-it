@@ -5,7 +5,7 @@ return [
     'manage'                    => 'Manage',
     'field'		                => 'Väli',
     'about_fieldsets_title'		=> 'Andmeväljade kohta',
-    'about_fieldsets_text'		=> 'Fieldsets allow you to create groups of custom fields that are frequently re-used for specific asset model types.',
+    'about_fieldsets_text'		=> 'Valdkonnad lubavad teil luua kohandatud väljade rühmad, mida kasutatakse sageli teatud varade mudelitüüpide jaoks.',
     'custom_format'             => 'Custom Regex format...',
     'encrypt_field'      	        => 'Krüpti selle valdkonna väärtus andmebaasis',
     'encrypt_field_help'      => 'HOIATUS: põllu krüptimine muudab selle otsingumatuks.',
@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Create a new custom field',
     'value_encrypted'      	        => 'Selle välja väärtust krüpteeritakse andmebaasis. Dežrooveeritud väärtust saab vaadata ainult administraatoritel',
     'show_in_email'     => 'Kas lisame selle välja väärtuse kasutajale väljastatud emailile? Krüpteerituid välju emailis pole näha',
-    'show_in_email_short'     => 'Include in emails.',
+    'show_in_email_short' => 'Include in emails',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'about_custom_fields_title' => 'About Custom Fields',
@@ -57,5 +57,8 @@ return [
     'show_in_requestable_list_short' => 'Show in requestable assets list',
     'show_in_requestable_list' => 'Show value in requestable assets list. Encrypted fields will not be shown',
     'encrypted_options' => 'This field is encrypted, so some display options will not be available.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

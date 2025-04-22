@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
-    'does_not_exist' 	=> 'Nid yw\'r ased yn bodoli.',
-    'does_not_exist_var'=> 'Asset with tag :asset_tag not found.',
-    'no_tag' 	        => 'No asset tag provided.',
+    'undeployable' 		 => '<strong>Warning: </strong> This asset has been marked as currently undeployable. If this status has changed, please update the asset status.',
+    'does_not_exist' 	 => 'Nid yw\'r ased yn bodoli.',
+    'does_not_exist_var' => 'Asset with tag :asset_tag not found.',
+    'no_tag' 	         => 'No asset tag provided.',
     'does_not_exist_or_not_requestable' => 'That asset does not exist or is not requestable.',
-    'assoc_users'	 	=> 'Ar hyn o bryd mae\'r ased yma allan gan ddefnyddiwr ac ni ellir ei ddileu. Cofnodwch yr ased yn ol i fewn yn gyntaf, ac yna ceisiwch ei ddileu eto. ',
+    'assoc_users'	 	 => 'Ar hyn o bryd mae\'r ased yma allan gan ddefnyddiwr ac ni ellir ei ddileu. Cofnodwch yr ased yn ol i fewn yn gyntaf, ac yna ceisiwch ei ddileu eto. ',
     'warning_audit_date_mismatch' 	=> 'This asset\'s next audit date (:next_audit_date) is before the last audit date (:last_audit_date). Please update the next audit date.',
+    'labels_generated'   => 'Labels were successfully generated.',
+    'error_generating_labels' => 'Error while generating labels.',
+    'no_assets_selected' => 'No assets selected.',
 
     'create' => [
         'error'   		=> 'Ni crewyd yr ased, ceisiwch eto o. g. y. dd. :(',
         'success' 		=> 'Ased wedi creu yn llwyddiannus. :)',
         'success_linked' => 'Asset with tag :tag was created successfully. <strong><a href=":link" style="color: white;">Click here to view</a></strong>.',
+        'multi_success_linked' => 'Asset with tag :links was created successfully.|:count assets were created succesfully. :links.',
+        'partial_failure' => 'An asset was unable to be created. Reason: :failures|:count assets were unable to be created. Reasons: :failures',
     ],
 
     'update' => [
@@ -61,12 +66,14 @@ return [
         'file_already_deleted' => 'The file selected was already deleted',
         'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
         'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Ydych chi\'n sicr eich bod eisiau dileu\'r ased yma?',
         'error'   		=> 'Roedd problem wrth ceisio dileu\'r ased. Ceisiwch eto o. g. y. dd.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
         'nothing_updated'   => 'Dim asedau wedi dewis, felly dim byd wedi\'i dileu.',
         'success' 		=> 'Ased wedi dileu\'n llwyddiannus.',
     ],
@@ -79,6 +86,11 @@ return [
         'no_assets_selected' => 'Rhaid i chi ddewis o leiaf un ased o\'r rhestr',
     ],
 
+    'multi-checkout' => [
+        'error'   => 'Asset was not checked out, please try again|Assets were not checked out, please try again',
+        'success' => 'Asset checked out successfully.|Assets checked out successfully.',
+    ],
+
     'checkin' => [
         'error'   		=> 'Ased heb ei nodi i mewn, ceisiwch eto o. g. y. dd',
         'success' 		=> 'Ased wedi nodi i mewn yn llwyddiannus.',
@@ -88,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Nid oedd cais am yr ased, ceisiwch eto o. g. y. dd',
-        'success' 		=> 'Cais am ased yn llwyddiannus.',
-        'canceled'      => 'Wedi llwydo i canslo cais am ased',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Cancel this item request',
     ],
 
 ];

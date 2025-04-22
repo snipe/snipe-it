@@ -39,7 +39,8 @@ class ManufacturersController extends Controller
             'assets_count',
             'consumables_count',
             'components_count',
-            'licenses_count'
+            'licenses_count',
+            'notes',
         ];
 
         $manufacturers = Manufacturer::select([
@@ -55,12 +56,14 @@ class ManufacturersController extends Controller
                 'updated_at',
                 'image',
                 'deleted_at',
+                'notes',
             ])
             ->with('adminuser')
             ->withCount('assets as assets_count')
             ->withCount('licenses as licenses_count')
             ->withCount('consumables as consumables_count')
-            ->withCount('accessories as accessories_count');
+            ->withCount('accessories as accessories_count')
+            ->withCount('components as components_count');
 
         if ($request->input('deleted') == 'true') {
             $manufacturers->onlyTrashed();

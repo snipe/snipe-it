@@ -5,9 +5,9 @@
         'title'                  => 'Titel',
         'start_date'             => 'Startdatum',
         'completion_date'        => 'Datum för slutförande',
-        'cost'                   => 'Kostnad',
+        'cost'                   => 'Inköpspris',
         'is_warranty'            => 'Förbättring av garanti',
-        'asset_maintenance_time' => 'Tillgångs underhållstid (i dagar)',
+        'asset_maintenance_time' => 'Tillgångens underhållstid (i dagar)',
         'notes'                  => 'Anteckningar',
         'update'                 => 'Uppdatera tillgångsunderhåll',
         'create'                 => 'Skapa tillgångsunderhåll'

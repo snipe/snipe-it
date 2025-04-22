@@ -6,6 +6,7 @@ use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
 /**
@@ -35,9 +36,11 @@ class Component extends SnipeModel
         'category_id'    => 'required|integer|exists:categories,id',
         'supplier_id'    => 'nullable|integer|exists:suppliers,id',
         'company_id'     => 'integer|nullable|exists:companies,id',
+        'location_id'    => 'exists:locations,id|nullable|fmcs_location',
         'min_amt'        => 'integer|min:0|nullable',
         'purchase_date'   => 'date_format:Y-m-d|nullable',
         'purchase_cost'  => 'numeric|nullable|gte:0|max:9999999999999',
+        'manufacturer_id'   => 'integer|exists:manufacturers,id|nullable',
     ];
 
     /**
@@ -60,6 +63,8 @@ class Component extends SnipeModel
         'company_id',
         'supplier_id',
         'location_id',
+        'manufacturer_id',
+        'model_number',
         'name',
         'purchase_cost',
         'purchase_date',
@@ -77,7 +82,15 @@ class Component extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'order_number', 'serial', 'purchase_cost', 'purchase_date', 'notes'];
+    protected $searchableAttributes = [
+        'name',
+        'order_number',
+        'serial',
+        'purchase_cost',
+        'purchase_date',
+        'notes',
+        'model_number',
+    ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -89,8 +102,16 @@ class Component extends SnipeModel
         'company'      => ['name'],
         'location'     => ['name'],
         'supplier'     => ['name'],
+        'manufacturer' => ['name'],
     ];
 
+
+    public function isDeletable()
+    {
+        return Gate::allows('delete', $this)
+            && ($this->numCheckedOut() === 0)
+            && ($this->deleted_at == '');
+    }
 
     /**
      * Establishes the components -> action logs -> uploads relationship
@@ -183,6 +204,19 @@ class Component extends SnipeModel
         return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
 
+
+    /**
+     * Establishes the item -> manufacturer relationship
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     * @since [v3.0]
+     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     */
+    public function manufacturer()
+    {
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
+    }
+
     /**
      * Establishes the component -> action logs relationship
      *
@@ -209,12 +243,23 @@ class Component extends SnipeModel
         // In case there are elements checked out to assets that belong to a different company
         // than this asset and full multiple company support is on we'll remove the global scope,
         // so they are included in the count.
-        foreach ($this->assets()->withoutGlobalScope(new CompanyableScope)->get() as $checkout) {
-            $checkedout += $checkout->pivot->assigned_qty;
-        }
-
-        return $checkedout;
+        return $this->uncontrainedAssets->sum('pivot.assigned_qty');
     }
+
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     *
+     * This allows us to get the assets with assigned components without the company restriction
+     */
+    public function uncontrainedAssets() {
+
+        return $this->belongsToMany(\App\Models\Asset::class, 'components_assets')
+                ->withPivot('id', 'assigned_qty', 'created_at', 'created_by', 'note')
+                ->withoutGlobalScope(new CompanyableScope);
+
+    }
+
 
     /**
      * Check how many items within a component are remaining
@@ -309,6 +354,19 @@ class Component extends SnipeModel
     public function scopeOrderSupplier($query, $order)
     {
         return $query->leftJoin('suppliers', 'components.supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
+    }
+
+    /**
+     * Query builder scope to order on manufacturer
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
+     * @param  text                              $order       Order
+     *
+     * @return \Illuminate\Database\Query\Builder          Modified query builder
+     */
+    public function scopeOrderManufacturer($query, $order)
+    {
+        return $query->leftJoin('manufacturers', 'components.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
     }
 
     public function scopeOrderByCreatedBy($query, $order)

@@ -2,18 +2,23 @@
 
 return [
 
-    'undeployable' 		=> 'crwdns12562:0crwdne12562:0',
-    'does_not_exist' 	=> 'crwdns740:0crwdne740:0',
-    'does_not_exist_var'=> 'crwdns12188:0crwdne12188:0',
-    'no_tag' 	        => 'crwdns12190:0crwdne12190:0',
+    'undeployable' 		 => 'crwdns12562:0crwdne12562:0',
+    'does_not_exist' 	 => 'crwdns740:0crwdne740:0',
+    'does_not_exist_var' => 'crwdns12188:0crwdne12188:0',
+    'no_tag' 	         => 'crwdns12190:0crwdne12190:0',
     'does_not_exist_or_not_requestable' => 'crwdns6581:0crwdne6581:0',
-    'assoc_users'	 	=> 'crwdns741:0crwdne741:0',
+    'assoc_users'	 	 => 'crwdns741:0crwdne741:0',
     'warning_audit_date_mismatch' 	=> 'crwdns12192:0crwdne12192:0',
+    'labels_generated'   => 'crwdns12786:0crwdne12786:0',
+    'error_generating_labels' => 'crwdns12788:0crwdne12788:0',
+    'no_assets_selected' => 'crwdns12790:0crwdne12790:0',
 
     'create' => [
         'error'   		=> 'crwdns742:0crwdne742:0',
         'success' 		=> 'crwdns743:0crwdne743:0',
         'success_linked' => 'crwdns11882:0crwdne11882:0',
+        'multi_success_linked' => 'crwdns12776:0crwdne12776:0',
+        'partial_failure' => 'crwdns12778:0crwdne12778:0',
     ],
 
     'update' => [
@@ -61,12 +66,14 @@ return [
         'file_already_deleted' => 'crwdns12694:0crwdne12694:0',
         'header_row_has_malformed_characters' => 'crwdns11229:0crwdne11229:0',
         'content_row_has_malformed_characters' => 'crwdns11231:0crwdne11231:0',
+        'transliterate_failure' => 'crwdns12949:0crwdne12949:0'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'crwdns746:0crwdne746:0',
         'error'   		=> 'crwdns747:0crwdne747:0',
+        'assigned_to_error' => 'crwdns12925:0{1}crwdne12925:0',
         'nothing_updated'   => 'crwdns1876:0crwdne1876:0',
         'success' 		=> 'crwdns748:0crwdne748:0',
     ],
@@ -79,6 +86,11 @@ return [
         'no_assets_selected' => 'crwdns1965:0crwdne1965:0',
     ],
 
+    'multi-checkout' => [
+        'error'   => 'crwdns12768:0crwdne12768:0',
+        'success' => 'crwdns12770:0crwdne12770:0',
+    ],
+
     'checkin' => [
         'error'   		=> 'crwdns752:0crwdne752:0',
         'success' 		=> 'crwdns753:0crwdne753:0',
@@ -88,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'crwdns1484:0crwdne1484:0',
-        'success' 		=> 'crwdns1485:0crwdne1485:0',
-        'canceled'      => 'crwdns1700:0crwdne1700:0',
+        'error'   		=> 'crwdns13013:0crwdne13013:0',
+        'success' 		=> 'crwdns13021:0crwdne13021:0',
+        'canceled'      => 'crwdns13017:0crwdne13017:0',
+        'cancel'        => 'crwdns13019:0crwdne13019:0',
     ],
 
 ];

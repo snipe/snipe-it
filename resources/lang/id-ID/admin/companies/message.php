@@ -2,7 +2,7 @@
 
 return [
     'does_not_exist' => 'Perusahaan tidak ada.',
-    'deleted'        => 'Deleted company',
+    'deleted'        => 'Company dihapus',
     'assoc_users'    => 'Perusahaan saat ini dikaitkan dengan setidaknya satu model dan tidak dapat dihapus. Perbarui model anda yang tidak ada referensi dari perusahaan ini dan coba lagi. ',
     'create' => [
         'error'   => 'Perusahaan belum terbuat, silahkan coba kembali.',

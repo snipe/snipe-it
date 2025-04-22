@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Testiranje LDAP autentifikacije...',
         'authentication_success' => 'Autentifikacija korisnika na LDAP-u je uspešna!'
     ],
+    'labels' => [
+        'null_template' => 'Nije pronađen šablon oznake. Molim vas izaberite šablon.',
+        ],
     'webhook' => [
         'sending' => 'Slanje :app probne poruke...',
         'success' => 'Vaša :webhook_name integracija funkcioniše!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Nešto nije u redu. :app je adgovorila sa: :error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint vraća preusmerenje. Zbog bezbednosnih razloga, mi ne sledimo preusmerenja. Molim vas koristite direktnu krajnju tačku.',
         'error_misc' => 'Nešto nije u redu. :( ',
-    ]
+        'webhook_fail' => ' neuspelo obaveštavanje putem veb zakačke: Proverite da li je URL i dalje validan.',
+        'webhook_channel_not_found' => ' kanal veb zakačke nije pronađen.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Vaša podešavanja nisu sačuvana.',
+        'mismatch' => 'Postoji 1 stavka u bazi podataka koja iziskuje vašu pažnju pre uključivanja opsega lokacije.|Postoji :count stavki u bazi podataka koje iziskuju vašu pažnju pre uključivanja opsega lokacije.',
+    ],
+
 ];

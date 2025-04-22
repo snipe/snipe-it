@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'LDAP 授權測試中...',
         'authentication_success' => '用戶成功透過 LDAP 驗證'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => '正在傳送 :app 測試訊息...',
         'success' => 'Your :webhook_name Integration works!',
@@ -45,5 +48,13 @@ return [
         'error' => '發生了一些錯誤。:app 回應：:error_message',
         'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
         'error_misc' => '發生了一些錯誤。 :( ',
-    ]
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

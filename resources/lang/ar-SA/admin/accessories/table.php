@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'رقم التعريف',
     'require_acceptance'      	=> 'القبول',
     'title'      				=> 'اسم الملحق',
-
-
 );

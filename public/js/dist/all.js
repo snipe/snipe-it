@@ -12707,7 +12707,7 @@ return Tether;
 
 }));
 
-/*! jQuery UI - v1.14.0 - 2024-08-05
+/*! jQuery UI - v1.14.1 - 2024-10-30
 * https://jqueryui.com
 * Includes: widget.js, position.js, data.js, disable-selection.js, effect.js, effects/effect-blind.js, effects/effect-bounce.js, effects/effect-clip.js, effects/effect-drop.js, effects/effect-explode.js, effects/effect-fade.js, effects/effect-fold.js, effects/effect-highlight.js, effects/effect-puff.js, effects/effect-pulsate.js, effects/effect-scale.js, effects/effect-shake.js, effects/effect-size.js, effects/effect-slide.js, effects/effect-transfer.js, focusable.js, form-reset-mixin.js, jquery-patch.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/accordion.js, widgets/autocomplete.js, widgets/button.js, widgets/checkboxradio.js, widgets/controlgroup.js, widgets/datepicker.js, widgets/dialog.js, widgets/draggable.js, widgets/droppable.js, widgets/menu.js, widgets/mouse.js, widgets/progressbar.js, widgets/resizable.js, widgets/selectable.js, widgets/selectmenu.js, widgets/slider.js, widgets/sortable.js, widgets/spinner.js, widgets/tabs.js, widgets/tooltip.js
 * Copyright OpenJS Foundation and other contributors; Licensed MIT */
@@ -12729,11 +12729,11 @@ return Tether;
 
 $.ui = $.ui || {};
 
-var version = $.ui.version = "1.14.0";
+var version = $.ui.version = "1.14.1";
 
 
 /*!
- * jQuery UI Widget 1.14.0
+ * jQuery UI Widget 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -12776,6 +12776,9 @@ $.widget = function( name, base, prototype ) {
 
 	var namespace = name.split( "." )[ 0 ];
 	name = name.split( "." )[ 1 ];
+	if ( name === "__proto__" || name === "constructor" ) {
+		return $.error( "Invalid widget name: " + name );
+	}
 	var fullName = namespace + "-" + name;
 
 	if ( !prototype ) {
@@ -13475,7 +13478,7 @@ var widget = $.widget;
 
 
 /*!
- * jQuery UI Position 1.14.0
+ * jQuery UI Position 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -13972,7 +13975,7 @@ var position = $.ui.position;
 
 
 /*!
- * jQuery UI :data 1.14.0
+ * jQuery UI :data 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -13995,7 +13998,7 @@ var data = $.extend( $.expr.pseudos, {
 } );
 
 /*!
- * jQuery UI Disable Selection 1.14.0
+ * jQuery UI Disable Selection 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -14715,7 +14718,7 @@ colors = jQuery.Color.names = {
 
 
 /*!
- * jQuery UI Effects 1.14.0
+ * jQuery UI Effects 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -15078,7 +15081,7 @@ if ( $.uiBackCompat === true ) {
 }
 
 $.extend( $.effects, {
-	version: "1.14.0",
+	version: "1.14.1",
 
 	define: function( name, mode, effect ) {
 		if ( !effect ) {
@@ -15646,7 +15649,7 @@ var effect = $.effects;
 
 
 /*!
- * jQuery UI Effects Blind 1.14.0
+ * jQuery UI Effects Blind 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -15701,7 +15704,7 @@ var effectsEffectBlind = $.effects.define( "blind", "hide", function( options, d
 
 
 /*!
- * jQuery UI Effects Bounce 1.14.0
+ * jQuery UI Effects Bounce 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -15796,7 +15799,7 @@ var effectsEffectBounce = $.effects.define( "bounce", function( options, done ) 
 
 
 /*!
- * jQuery UI Effects Clip 1.14.0
+ * jQuery UI Effects Clip 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -15846,7 +15849,7 @@ var effectsEffectClip = $.effects.define( "clip", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Drop 1.14.0
+ * jQuery UI Effects Drop 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -15900,7 +15903,7 @@ var effectsEffectDrop = $.effects.define( "drop", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Explode 1.14.0
+ * jQuery UI Effects Explode 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -15996,7 +15999,7 @@ var effectsEffectExplode = $.effects.define( "explode", "hide", function( option
 
 
 /*!
- * jQuery UI Effects Fade 1.14.0
+ * jQuery UI Effects Fade 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16028,7 +16031,7 @@ var effectsEffectFade = $.effects.define( "fade", "toggle", function( options, d
 
 
 /*!
- * jQuery UI Effects Fold 1.14.0
+ * jQuery UI Effects Fold 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16102,7 +16105,7 @@ var effectsEffectFold = $.effects.define( "fold", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Highlight 1.14.0
+ * jQuery UI Effects Highlight 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16144,7 +16147,7 @@ var effectsEffectHighlight = $.effects.define( "highlight", "show", function( op
 
 
 /*!
- * jQuery UI Effects Size 1.14.0
+ * jQuery UI Effects Size 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16322,7 +16325,7 @@ var effectsEffectSize = $.effects.define( "size", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Scale 1.14.0
+ * jQuery UI Effects Scale 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16362,7 +16365,7 @@ var effectsEffectScale = $.effects.define( "scale", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Puff 1.14.0
+ * jQuery UI Effects Puff 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16388,7 +16391,7 @@ var effectsEffectPuff = $.effects.define( "puff", "hide", function( options, don
 
 
 /*!
- * jQuery UI Effects Pulsate 1.14.0
+ * jQuery UI Effects Pulsate 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16437,7 +16440,7 @@ var effectsEffectPulsate = $.effects.define( "pulsate", "show", function( option
 
 
 /*!
- * jQuery UI Effects Shake 1.14.0
+ * jQuery UI Effects Shake 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16496,7 +16499,7 @@ var effectsEffectShake = $.effects.define( "shake", function( options, done ) {
 
 
 /*!
- * jQuery UI Effects Slide 1.14.0
+ * jQuery UI Effects Slide 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16557,7 +16560,7 @@ var effectsEffectSlide = $.effects.define( "slide", "show", function( options, d
 
 
 /*!
- * jQuery UI Effects Transfer 1.14.0
+ * jQuery UI Effects Transfer 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16582,7 +16585,7 @@ var effectsEffectTransfer = effect;
 
 
 /*!
- * jQuery UI Focusable 1.14.0
+ * jQuery UI Focusable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16645,7 +16648,7 @@ var focusable = $.ui.focusable;
 
 
 /*!
- * jQuery UI Form Reset Mixin 1.14.0
+ * jQuery UI Form Reset Mixin 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16707,7 +16710,7 @@ var formResetMixin = $.ui.formResetMixin = {
 
 
 /*!
- * jQuery UI Legacy jQuery Core patches 1.14.0
+ * jQuery UI Legacy jQuery Core patches 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16749,7 +16752,7 @@ if ( !$.fn.even || !$.fn.odd ) {
 
 ;
 /*!
- * jQuery UI Keycode 1.14.0
+ * jQuery UI Keycode 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16784,7 +16787,7 @@ var keycode = $.ui.keyCode = {
 
 
 /*!
- * jQuery UI Labels 1.14.0
+ * jQuery UI Labels 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16838,7 +16841,7 @@ var labels = $.fn.labels = function() {
 
 
 /*!
- * jQuery UI Scroll Parent 1.14.0
+ * jQuery UI Scroll Parent 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16872,7 +16875,7 @@ var scrollParent = $.fn.scrollParent = function( includeHidden ) {
 
 
 /*!
- * jQuery UI Tabbable 1.14.0
+ * jQuery UI Tabbable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16896,7 +16899,7 @@ var tabbable = $.extend( $.expr.pseudos, {
 
 
 /*!
- * jQuery UI Unique ID 1.14.0
+ * jQuery UI Unique ID 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16934,7 +16937,7 @@ var uniqueId = $.fn.extend( {
 
 
 /*!
- * jQuery UI Accordion 1.14.0
+ * jQuery UI Accordion 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -16955,7 +16958,7 @@ var uniqueId = $.fn.extend( {
 
 
 var widgetsAccordion = $.widget( "ui.accordion", {
-	version: "1.14.0",
+	version: "1.14.1",
 	options: {
 		active: 0,
 		animate: {},
@@ -17536,7 +17539,7 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 
 
 /*!
- * jQuery UI Menu 1.14.0
+ * jQuery UI Menu 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -17555,7 +17558,7 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 
 
 var widgetsMenu = $.widget( "ui.menu", {
-	version: "1.14.0",
+	version: "1.14.1",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
@@ -18227,7 +18230,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 /*!
- * jQuery UI Autocomplete 1.14.0
+ * jQuery UI Autocomplete 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -18246,7 +18249,7 @@ var widgetsMenu = $.widget( "ui.menu", {
 
 
 $.widget( "ui.autocomplete", {
-	version: "1.14.0",
+	version: "1.14.1",
 	defaultElement: "<input>",
 	options: {
 		appendTo: null,
@@ -18846,7 +18849,7 @@ var widgetsAutocomplete = $.ui.autocomplete;
 
 
 /*!
- * jQuery UI Controlgroup 1.14.0
+ * jQuery UI Controlgroup 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -18867,7 +18870,7 @@ var widgetsAutocomplete = $.ui.autocomplete;
 var controlgroupCornerRegex = /ui-corner-([a-z]){2,6}/g;
 
 var widgetsControlgroup = $.widget( "ui.controlgroup", {
-	version: "1.14.0",
+	version: "1.14.1",
 	defaultElement: "<div>",
 	options: {
 		direction: "horizontal",
@@ -19131,7 +19134,7 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 } );
 
 /*!
- * jQuery UI Checkboxradio 1.14.0
+ * jQuery UI Checkboxradio 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -19151,7 +19154,7 @@ var widgetsControlgroup = $.widget( "ui.controlgroup", {
 
 
 $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
-	version: "1.14.0",
+	version: "1.14.1",
 	options: {
 		disabled: null,
 		label: null,
@@ -19402,7 +19405,7 @@ var widgetsCheckboxradio = $.ui.checkboxradio;
 
 
 /*!
- * jQuery UI Button 1.14.0
+ * jQuery UI Button 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -19421,7 +19424,7 @@ var widgetsCheckboxradio = $.ui.checkboxradio;
 
 
 $.widget( "ui.button", {
-	version: "1.14.0",
+	version: "1.14.1",
 	defaultElement: "<button>",
 	options: {
 		classes: {
@@ -19828,7 +19831,7 @@ var widgetsButton = $.ui.button;
 
 /* eslint-disable max-len, camelcase */
 /*!
- * jQuery UI Datepicker 1.14.0
+ * jQuery UI Datepicker 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -19846,7 +19849,7 @@ var widgetsButton = $.ui.button;
 //>>css.theme: ../../themes/base/theme.css
 
 
-$.extend( $.ui, { datepicker: { version: "1.14.0" } } );
+$.extend( $.ui, { datepicker: { version: "1.14.1" } } );
 
 var datepicker_instActive;
 
@@ -22040,13 +22043,13 @@ $.fn.datepicker = function( options ) {
 $.datepicker = new Datepicker(); // singleton instance
 $.datepicker.initialized = false;
 $.datepicker.uuid = new Date().getTime();
-$.datepicker.version = "1.14.0";
+$.datepicker.version = "1.14.1";
 
 var widgetsDatepicker = $.datepicker;
 
 
 /*!
- * jQuery UI Mouse 1.14.0
+ * jQuery UI Mouse 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -22066,7 +22069,7 @@ $( document ).on( "mouseup", function() {
 } );
 
 var widgetsMouse = $.widget( "ui.mouse", {
-	version: "1.14.0",
+	version: "1.14.1",
 	options: {
 		cancel: "input, textarea, button, select, option",
 		distance: 1,
@@ -22284,7 +22287,7 @@ var plugin = $.ui.plugin = {
 
 
 /*!
- * jQuery UI Draggable 1.14.0
+ * jQuery UI Draggable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -22301,7 +22304,7 @@ var plugin = $.ui.plugin = {
 
 
 $.widget( "ui.draggable", $.ui.mouse, {
-	version: "1.14.0",
+	version: "1.14.1",
 	widgetEventPrefix: "drag",
 	options: {
 		addClasses: true,
@@ -23519,7 +23522,7 @@ var widgetsDraggable = $.ui.draggable;
 
 
 /*!
- * jQuery UI Resizable 1.14.0
+ * jQuery UI Resizable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -23538,7 +23541,7 @@ var widgetsDraggable = $.ui.draggable;
 
 
 $.widget( "ui.resizable", $.ui.mouse, {
-	version: "1.14.0",
+	version: "1.14.1",
 	widgetEventPrefix: "resize",
 	options: {
 		alsoResize: false,
@@ -23579,12 +23582,18 @@ $.widget( "ui.resizable", $.ui.mouse, {
 
 	_hasScroll: function( el, a ) {
 
-		if ( $( el ).css( "overflow" ) === "hidden" ) {
+		var scroll,
+			has = false,
+			overflow = $( el ).css( "overflow" );
+
+		if ( overflow === "hidden" ) {
 			return false;
 		}
+		if ( overflow === "scroll" ) {
+			return true;
+		}
 
-		var scroll = ( a && a === "left" ) ? "scrollLeft" : "scrollTop",
-			has = false;
+		scroll = ( a && a === "left" ) ? "scrollLeft" : "scrollTop";
 
 		if ( el[ scroll ] > 0 ) {
 			return true;
@@ -23861,7 +23870,7 @@ $.widget( "ui.resizable", $.ui.mouse, {
 
 	_mouseStart: function( event ) {
 
-		var curleft, curtop, cursor,
+		var curleft, curtop, cursor, calculatedSize,
 			o = this.options,
 			el = this.element;
 
@@ -23880,20 +23889,24 @@ $.widget( "ui.resizable", $.ui.mouse, {
 		this.offset = this.helper.offset();
 		this.position = { left: curleft, top: curtop };
 
+		if ( !this._helper ) {
+			calculatedSize = this._calculateAdjustedElementDimensions( el );
+		}
+
 		this.size = this._helper ? {
 				width: this.helper.width(),
 				height: this.helper.height()
 			} : {
-				width: el.width(),
-				height: el.height()
+				width: calculatedSize.width,
+				height: calculatedSize.height
 			};
 
 		this.originalSize = this._helper ? {
 				width: el.outerWidth(),
 				height: el.outerHeight()
 			} : {
-				width: el.width(),
-				height: el.height()
+				width: calculatedSize.width,
+				height: calculatedSize.height
 			};
 
 		this.sizeDiff = {
@@ -24187,6 +24200,52 @@ $.widget( "ui.resizable", $.ui.mouse, {
 			height: widths[ 0 ] + widths[ 2 ],
 			width: widths[ 1 ] + widths[ 3 ]
 		};
+	},
+
+	_calculateAdjustedElementDimensions: function( element ) {
+		var elWidth, elHeight, paddingBorder,
+			ce = element.get( 0 );
+
+		if ( element.css( "box-sizing" ) !== "content-box" ||
+			( !this._hasScroll( ce ) && !this._hasScroll( ce, "left" ) ) ) {
+				return {
+					height: parseFloat( element.css( "height" ) ),
+					width: parseFloat( element.css( "width" ) )
+				};
+		}
+
+		// Check if CSS inline styles are set and use those (usually from previous resizes)
+		elWidth = parseFloat( ce.style.width );
+		elHeight = parseFloat( ce.style.height );
+
+		paddingBorder = this._getPaddingPlusBorderDimensions( element );
+		elWidth = isNaN( elWidth ) ?
+			this._getElementTheoreticalSize( element, paddingBorder, "width" ) :
+			elWidth;
+		elHeight = isNaN( elHeight ) ?
+			this._getElementTheoreticalSize( element, paddingBorder, "height" ) :
+			elHeight;
+
+		return {
+			height: elHeight,
+			width: elWidth
+		};
+	},
+
+	_getElementTheoreticalSize: function( element, extraSize, dimension ) {
+
+		// offsetWidth/offsetHeight is a rounded sum of content, padding, scroll gutter, and border
+		var size = Math.max( 0, Math.ceil(
+			element.get( 0 )[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ] -
+			extraSize[ dimension ] -
+			0.5
+
+		// If offsetWidth/offsetHeight is unknown, then we can't determine theoretical size.
+		// Use an explicit zero to avoid NaN.
+		// See https://github.com/jquery/jquery/issues/3964
+		) ) || 0;
+
+		return size;
 	},
 
 	_proportionallyResize: function() {
@@ -24543,9 +24602,11 @@ $.ui.plugin.add( "resizable", "alsoResize", {
 			o = that.options;
 
 		$( o.alsoResize ).each( function() {
-			var el = $( this );
+			var el = $( this ),
+				elSize = that._calculateAdjustedElementDimensions( el );
+
 			el.data( "ui-resizable-alsoresize", {
-				width: parseFloat( el.css( "width" ) ), height: parseFloat( el.css( "height" ) ),
+				width: elSize.width, height: elSize.height,
 				left: parseFloat( el.css( "left" ) ), top: parseFloat( el.css( "top" ) )
 			} );
 		} );
@@ -24715,7 +24776,7 @@ var widgetsResizable = $.ui.resizable;
 
 
 /*!
- * jQuery UI Dialog 1.14.0
+ * jQuery UI Dialog 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -24734,7 +24795,7 @@ var widgetsResizable = $.ui.resizable;
 
 
 $.widget( "ui.dialog", {
-	version: "1.14.0",
+	version: "1.14.1",
 	options: {
 		appendTo: "body",
 		autoOpen: true,
@@ -24770,6 +24831,7 @@ $.widget( "ui.dialog", {
 		resizable: true,
 		show: null,
 		title: null,
+		uiDialogTitleHeadingLevel: 0,
 		width: 300,
 
 		// Callbacks
@@ -25126,7 +25188,13 @@ $.widget( "ui.dialog", {
 			}
 		} );
 
-		uiDialogTitle = $( "<span>" ).uniqueId().prependTo( this.uiDialogTitlebar );
+		var uiDialogHeadingLevel = Number.isInteger( this.options.uiDialogTitleHeadingLevel ) &&
+			this.options.uiDialogTitleHeadingLevel > 0 &&
+			this.options.uiDialogTitleHeadingLevel <= 6 ?
+			"h" + this.options.uiDialogTitleHeadingLevel : "span";
+
+		uiDialogTitle = $( "<" + uiDialogHeadingLevel + ">" )
+			.uniqueId().prependTo( this.uiDialogTitlebar );
 		this._addClass( uiDialogTitle, "ui-dialog-title" );
 		this._title( uiDialogTitle );
 
@@ -25626,7 +25694,7 @@ var widgetsDialog = $.ui.dialog;
 
 
 /*!
- * jQuery UI Droppable 1.14.0
+ * jQuery UI Droppable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -25642,7 +25710,7 @@ var widgetsDialog = $.ui.dialog;
 
 
 $.widget( "ui.droppable", {
-	version: "1.14.0",
+	version: "1.14.1",
 	widgetEventPrefix: "drop",
 	options: {
 		accept: "*",
@@ -26109,7 +26177,7 @@ var widgetsDroppable = $.ui.droppable;
 
 
 /*!
- * jQuery UI Progressbar 1.14.0
+ * jQuery UI Progressbar 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -26130,7 +26198,7 @@ var widgetsDroppable = $.ui.droppable;
 
 
 var widgetsProgressbar = $.widget( "ui.progressbar", {
-	version: "1.14.0",
+	version: "1.14.1",
 	options: {
 		classes: {
 			"ui-progressbar": "ui-corner-all",
@@ -26272,7 +26340,7 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 
 
 /*!
- * jQuery UI Selectable 1.14.0
+ * jQuery UI Selectable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -26289,7 +26357,7 @@ var widgetsProgressbar = $.widget( "ui.progressbar", {
 
 
 var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
-	version: "1.14.0",
+	version: "1.14.1",
 	options: {
 		appendTo: "body",
 		autoRefresh: true,
@@ -26570,7 +26638,7 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Selectmenu 1.14.0
+ * jQuery UI Selectmenu 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -26591,7 +26659,7 @@ var widgetsSelectable = $.widget( "ui.selectable", $.ui.mouse, {
 
 
 var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
-	version: "1.14.0",
+	version: "1.14.1",
 	defaultElement: "<select>",
 	options: {
 		appendTo: null,
@@ -27212,7 +27280,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 
 
 /*!
- * jQuery UI Slider 1.14.0
+ * jQuery UI Slider 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -27231,7 +27299,7 @@ var widgetsSelectmenu = $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 
 
 var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
-	version: "1.14.0",
+	version: "1.14.1",
 	widgetEventPrefix: "slide",
 
 	options: {
@@ -27947,7 +28015,7 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Sortable 1.14.0
+ * jQuery UI Sortable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -27964,7 +28032,7 @@ var widgetsSlider = $.widget( "ui.slider", $.ui.mouse, {
 
 
 var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
-	version: "1.14.0",
+	version: "1.14.1",
 	widgetEventPrefix: "sort",
 	ready: false,
 	options: {
@@ -29534,7 +29602,7 @@ var widgetsSortable = $.widget( "ui.sortable", $.ui.mouse, {
 
 
 /*!
- * jQuery UI Spinner 1.14.0
+ * jQuery UI Spinner 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -29564,7 +29632,7 @@ function spinnerModifier( fn ) {
 }
 
 $.widget( "ui.spinner", {
-	version: "1.14.0",
+	version: "1.14.1",
 	defaultElement: "<input>",
 	widgetEventPrefix: "spin",
 	options: {
@@ -30073,7 +30141,7 @@ var widgetsSpinner = $.ui.spinner;
 
 
 /*!
- * jQuery UI Tabs 1.14.0
+ * jQuery UI Tabs 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -30092,7 +30160,7 @@ var widgetsSpinner = $.ui.spinner;
 
 
 $.widget( "ui.tabs", {
-	version: "1.14.0",
+	version: "1.14.1",
 	delay: 300,
 	options: {
 		active: null,
@@ -30175,14 +30243,14 @@ $.widget( "ui.tabs", {
 	_initialActive: function() {
 		var active = this.options.active,
 			collapsible = this.options.collapsible,
-			locationHash = location.hash.substring( 1 );
+			locationHashDecoded = decodeURIComponent( location.hash.substring( 1 ) );
 
 		if ( active === null ) {
 
 			// check the fragment identifier in the URL
-			if ( locationHash ) {
+			if ( locationHashDecoded ) {
 				this.tabs.each( function( i, tab ) {
-					if ( $( tab ).attr( "aria-controls" ) === locationHash ) {
+					if ( $( tab ).attr( "aria-controls" ) === locationHashDecoded ) {
 						active = i;
 						return false;
 					}
@@ -30366,10 +30434,6 @@ $.widget( "ui.tabs", {
 		}
 	},
 
-	_sanitizeSelector: function( hash ) {
-		return hash ? hash.replace( /[!"$%&'()*+,.\/:;<=>?@\[\]\^`{|}~]/g, "\\$&" ) : "";
-	},
-
 	refresh: function() {
 		var options = this.options,
 			lis = this.tablist.children( ":has(a[href])" );
@@ -30488,9 +30552,9 @@ $.widget( "ui.tabs", {
 
 			// Inline tab
 			if ( that._isLocal( anchor ) ) {
-				selector = anchor.hash;
+				selector = decodeURIComponent( anchor.hash );
 				panelId = selector.substring( 1 );
-				panel = that.element.find( that._sanitizeSelector( selector ) );
+				panel = that.element.find( "#" + CSS.escape( panelId ) );
 
 			// remote tab
 			} else {
@@ -30928,7 +30992,7 @@ $.widget( "ui.tabs", {
 
 	_getPanelForTab: function( tab ) {
 		var id = $( tab ).attr( "aria-controls" );
-		return this.element.find( this._sanitizeSelector( "#" + id ) );
+		return this.element.find( "#" + CSS.escape( id ) );
 	}
 } );
 
@@ -30949,7 +31013,7 @@ var widgetsTabs = $.ui.tabs;
 
 
 /*!
- * jQuery UI Tooltip 1.14.0
+ * jQuery UI Tooltip 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -30968,7 +31032,7 @@ var widgetsTabs = $.ui.tabs;
 
 
 $.widget( "ui.tooltip", {
-	version: "1.14.0",
+	version: "1.14.1",
 	options: {
 		classes: {
 			"ui-tooltip": "ui-corner-all ui-widget-shadow"
@@ -58870,799 +58934,16 @@ module.exports.TinyEmitter = E;
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/assets/js/bootstrap.js":
-/*!******************************************!*\
-  !*** ./resources/assets/js/bootstrap.js ***!
-  \******************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./node_modules/admin-lte/build/less/AdminLTE.less":
+/*!*********************************************************!*\
+  !*** ./node_modules/admin-lte/build/less/AdminLTE.less ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
 
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
-//window.$ = window.jQuery = require('jquery');
-
-/**
- * jQuery UI is loaded here and then the tooltip is assigned another funtion name
- * This resolves the issue of jquery-ui & bootstrap tooltip conflict
- */
-__webpack_require__(/*! jquery-ui */ "./node_modules/jquery-ui/ui/widget.js");
-jQuery.fn.uitooltip = jQuery.fn.tooltip;
-
-/**
- * Load boostrap
- */
-__webpack_require__(/*! bootstrap-less */ "./node_modules/bootstrap-less/js/bootstrap.js");
-
-// require('admin-lte');
-
-// require('chart.js');
-
-// require('jquery-form-validator'); //says something about dependency
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from "laravel-echo"
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: 'your-pusher-key'
-// });
-
-/***/ }),
-
-/***/ "./resources/assets/js/snipeit.js":
-/*!****************************************!*\
-  !*** ./resources/assets/js/snipeit.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-// var jQuery = require('jquery');
-// window.jQuery = jQuery
-// window.$ = jQuery
-
-__webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
-
-/**
- * Module containing core application logic.
- * @param  {jQuery} $        Insulated jQuery object
- * @param  {JSON} settings Insulated `window.snipeit.settings` object.
- * @return {IIFE}          Immediately invoked. Returns self.
- */
-
-lineOptions = {
-  legend: {
-    position: "bottom"
-  },
-  scales: {
-    yAxes: [{
-      ticks: {
-        fontColor: "rgba(0,0,0,0.5)",
-        fontStyle: "bold",
-        beginAtZero: true,
-        maxTicksLimit: 5,
-        padding: 20
-      },
-      gridLines: {
-        drawTicks: false,
-        display: false
-      }
-    }],
-    xAxes: [{
-      gridLines: {
-        zeroLineColor: "transparent"
-      },
-      ticks: {
-        padding: 20,
-        fontColor: "rgba(0,0,0,0.5)",
-        fontStyle: "bold"
-      }
-    }]
-  }
-};
-pieOptions = {
-  //Boolean - Whether we should show a stroke on each segment
-  segmentShowStroke: true,
-  //String - The colour of each segment stroke
-  segmentStrokeColor: "#fff",
-  //Number - The width of each segment stroke
-  segmentStrokeWidth: 1,
-  //Number - The percentage of the chart that we cut out of the middle
-  percentageInnerCutout: 50,
-  // This is 0 for Pie charts
-  //Number - Amount of animation steps
-  animationSteps: 100,
-  //String - Animation easing effect
-  animationEasing: "easeOutBounce",
-  //Boolean - Whether we animate the rotation of the Doughnut
-  animateRotate: true,
-  //Boolean - Whether we animate scaling the Doughnut from the centre
-  animateScale: false,
-  //Boolean - whether to make the chart responsive to window resizing
-  responsive: true,
-  // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-  maintainAspectRatio: false,
-  //String - A legend template
-  legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" + "<i class='fas fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" + "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
-  //String - A tooltip template
-  tooltipTemplate: "<%=value %> <%=label%> "
-};
-
-//-----------------
-//- END PIE CHART -
-//-----------------
-
-var baseUrl = $('meta[name="baseUrl"]').attr('content');
-$(function () {
-  var $el = $('table');
-
-  // confirm restore modal
-
-  $el.on('click', '.restore-asset', function (evnt) {
-    var $context = $(this);
-    var $restoreConfirmModal = $('#restoreConfirmModal');
-    var href = $context.attr('href');
-    var message = $context.attr('data-content');
-    var title = $context.attr('data-title');
-    $('#confirmModalLabel').text(title);
-    $restoreConfirmModal.find('.modal-body').text(message);
-    $('#restoreForm').attr('action', href);
-    $restoreConfirmModal.modal({
-      show: true
-    });
-    return false;
-  });
-
-  // confirm delete modal
-
-  $el.on('click', '.delete-asset', function (evnt) {
-    var $context = $(this);
-    var $dataConfirmModal = $('#dataConfirmModal');
-    var href = $context.attr('href');
-    var message = $context.attr('data-content');
-    var title = $context.attr('data-title');
-    $('#myModalLabel').text(title);
-    $dataConfirmModal.find('.modal-body').text(message);
-    $('#deleteForm').attr('action', href);
-    $dataConfirmModal.modal({
-      show: true
-    });
-    return false;
-  });
-
-  /*
-  * Slideout help menu
-  */
-  $('.slideout-menu-toggle').on('click', function (event) {
-    event.preventDefault();
-    // create menu variables
-    var slideoutMenu = $('.slideout-menu');
-    var slideoutMenuWidth = $('.slideout-menu').width();
-
-    // toggle open class
-    slideoutMenu.toggleClass("open");
-
-    // slide menu
-    if (slideoutMenu.hasClass("open")) {
-      slideoutMenu.show();
-      slideoutMenu.animate({
-        right: "0px"
-      });
-    } else {
-      slideoutMenu.animate({
-        right: -slideoutMenuWidth
-      }, "-350px");
-      slideoutMenu.fadeOut();
-    }
-  });
-
-  /*
-  * Select2
-  */
-
-  $('select.select2:not(".select2-hidden-accessible")').each(function (i, obj) {
-    {
-      $(obj).select2();
-    }
-  });
-
-  // $('.datepicker').datepicker();
-  // var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
-  // $.fn.bootstrapDP = datepicker;
-  // $('.datepicker').datepicker();
-
-  // Crazy select2 rich dropdowns with images!
-  $('.js-data-ajax').each(function (i, item) {
-    var link = $(item);
-    var endpoint = link.data("endpoint");
-    var select = link.data("select");
-    link.select2({
-      /**
-       * Adds an empty placeholder, allowing every select2 instance to be cleared.
-       * This placeholder can be overridden with the "data-placeholder" attribute.
-       */
-      placeholder: '',
-      allowClear: true,
-      language: $('meta[name="language"]').attr('content'),
-      dir: $('meta[name="language-direction"]').attr('content'),
-      ajax: {
-        // the baseUrl includes a trailing slash
-        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
-        dataType: 'json',
-        delay: 250,
-        headers: {
-          "X-Requested-With": 'XMLHttpRequest',
-          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        },
-        data: function data(params) {
-          var data = {
-            search: params.term,
-            page: params.page || 1,
-            assetStatusType: link.data("asset-status-type")
-          };
-          return data;
-        },
-        /* processResults: function (data, params) {
-             params.page = params.page || 1;
-             var answer =  {
-                results: data.items,
-                pagination: {
-                    more: data.pagination.more
-                }
-            };
-             return answer;
-        }, */
-        cache: true
-      },
-      //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-      templateResult: formatDatalistSafe
-      //templateSelection: formatDataSelection
-    });
-  });
-  function getSelect2Value(element) {
-    // if the passed object is not a jquery object, assuming 'element' is a selector
-    if (!(element instanceof jQuery)) element = $(element);
-    var select = element.data("select2");
-
-    // There's two different locations where the select2-generated input element can be. 
-    searchElement = select.dropdown.$search || select.$container.find(".select2-search__field");
-    var value = searchElement.val();
-    return value;
-  }
-  $(".select2-hidden-accessible").on('select2:selecting', function (e) {
-    var data = e.params.args.data;
-    var isMouseUp = false;
-    var element = $(this);
-    var value = getSelect2Value(element);
-    if (e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
-
-    // if selected item does not match typed text, do not allow it to pass - force close for ajax.
-    if (!isMouseUp) {
-      if (value.toLowerCase() && data.text.toLowerCase().indexOf(value) < 0) {
-        e.preventDefault();
-        element.select2('close');
-
-        // if it does match, we set a flag in the event (which gets passed to subsequent events), telling it not to worry about the ajax
-      } else if (value.toLowerCase() && data.text.toLowerCase().indexOf(value) > -1) {
-        e.params.args.noForceAjax = true;
-      }
-    }
-  });
-  $(".select2-hidden-accessible").on('select2:closing', function (e) {
-    var element = $(this);
-    var value = getSelect2Value(element);
-    var noForceAjax = false;
-    var isMouseUp = false;
-    if (e.params.args.originalSelect2Event) noForceAjax = e.params.args.originalSelect2Event.noForceAjax;
-    if (e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
-    if (value && !noForceAjax && !isMouseUp) {
-      var endpoint = element.data("endpoint");
-      var assetStatusType = element.data("asset-status-type");
-      $.ajax({
-        url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search=' + value + '&page=1' + (assetStatusType ? '&assetStatusType=' + assetStatusType : ''),
-        dataType: 'json',
-        headers: {
-          "X-Requested-With": 'XMLHttpRequest',
-          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        }
-      }).done(function (response) {
-        var currentlySelected = element.select2('data').map(function (x) {
-          return +x.id;
-        }).filter(function (x) {
-          return x !== 0;
-        });
-
-        // makes sure we're not selecting the same thing twice for multiples
-        var filteredResponse = response.results.filter(function (item) {
-          return currentlySelected.indexOf(+item.id) < 0;
-        });
-        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.results[0];
-        if (first && first.id) {
-          first.selected = true;
-          if ($("option[value='" + first.id + "']", element).length < 1) {
-            var option = new Option(first.text, first.id, true, true);
-            element.append(option);
-          } else {
-            var isMultiple = element.attr("multiple") == "multiple";
-            element.val(isMultiple ? element.val().concat(first.id) : element.val(first.id));
-          }
-          element.trigger('change');
-          element.trigger({
-            type: 'select2:select',
-            params: {
-              data: first
-            }
-          });
-        }
-      });
-    }
-  });
-  function formatDatalist(datalist) {
-    var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
-    if (datalist.loading) {
-      return loading_markup;
-    }
-    var markup = '<div class="clearfix">';
-    markup += '<div class="pull-left" style="padding-right: 10px;">';
-    if (datalist.image) {
-      markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;' alt='" + datalist.text + "'></div>";
-    } else {
-      markup += '<div style="height: 20px; width: 30px;"></div>';
-    }
-    markup += "</div><div>" + datalist.text + "</div>";
-    markup += "</div>";
-    return markup;
-  }
-  function formatDatalistSafe(datalist) {
-    // console.warn("What in the hell is going on with Select2?!?!!?!?");
-    // console.warn($.select2);
-    if (datalist.loading) {
-      return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
-    }
-    var root_div = $("<div class='clearfix'>");
-    var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
-    if (datalist.image) {
-      var inner_div = $("<div style='width: 30px;'>");
-      /******************************************************************
-       * 
-       * We are specifically chosing empty alt-text below, because this 
-       * image conveys no additional information, relative to the text
-       * that will *always* be there in any select2 list that is in use
-       * in Snipe-IT. If that changes, we would probably want to change
-       * some signatures of some functions, but right now, we don't want
-       * screen readers to say "HP SuperJet 5000, .... picture of HP 
-       * SuperJet 5000..." and so on, for every single row in a list of
-       * assets or models or whatever.
-       * 
-       *******************************************************************/
-      var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
-      // console.warn("Img is: ");
-      // console.dir(img);
-      // console.warn("Strigularly, that's: ");
-      // console.log(img);
-      img.attr("src", datalist.image);
-      inner_div.append(img);
-    } else {
-      var inner_div = $("<div style='height: 20px; width: 30px;'></div>");
-    }
-    left_pull.append(inner_div);
-    root_div.append(left_pull);
-    var name_div = $("<div>");
-    name_div.text(datalist.text);
-    root_div.append(name_div);
-    var safe_html = root_div.get(0).outerHTML;
-    var old_html = formatDatalist(datalist);
-    if (safe_html != old_html) {
-      //console.log("HTML MISMATCH: ");
-      //console.log("FormatDatalistSafe: ");
-      // console.dir(root_div.get(0));
-      //console.log(safe_html);
-      //console.log("FormatDataList: ");
-      //console.log(old_html);
-    }
-    return root_div;
-  }
-  function formatDataSelection(datalist) {
-    // This a heinous workaround for a known bug in Select2.
-    // Without this, the rich selectlists are vulnerable to XSS.
-    // Many thanks to @uberbrady for this fix. It ain't pretty,
-    // but it resolves the issue until Select2 addresses it on their end.
-    //
-    // Bug was reported in 2016 :{
-    // https://github.com/select2/select2/issues/4587
-
-    return datalist.text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-  }
-
-  // This handles the radio button selectors for the checkout-to-foo options
-  // on asset checkout and also on asset edit
-  $(function () {
-    $('input[name=checkout_to_type]').on("change", function () {
-      var assignto_type = $('input[name=checkout_to_type]:checked').val();
-      var userid = $('#assigned_user option:selected').val();
-      if (assignto_type == 'asset') {
-        $('#current_assets_box').fadeOut();
-        $('#assigned_asset').show();
-        $('#assigned_user').hide();
-        $('#assigned_location').hide();
-        $('.notification-callout').fadeOut();
-        $('[name="assigned_location"]').val('').trigger('change.select2');
-        $('[name="assigned_user"]').val('').trigger('change.select2');
-      } else if (assignto_type == 'location') {
-        $('#current_assets_box').fadeOut();
-        $('#assigned_asset').hide();
-        $('#assigned_user').hide();
-        $('#assigned_location').show();
-        $('.notification-callout').fadeOut();
-        $('[name="assigned_asset"]').val('').trigger('change.select2');
-        $('[name="assigned_user"]').val('').trigger('change.select2');
-      } else {
-        $('#assigned_asset').hide();
-        $('#assigned_user').show();
-        $('#assigned_location').hide();
-        if (userid) {
-          $('#current_assets_box').fadeIn();
-        }
-        $('.notification-callout').fadeIn();
-        $('[name="assigned_asset"]').val('').trigger('change.select2');
-        $('[name="assigned_location"]').val('').trigger('change.select2');
-      }
-    });
-  });
-
-  // ------------------------------------------------
-  // Deep linking for Bootstrap tabs
-  // ------------------------------------------------
-  var taburl = document.location.toString();
-
-  // Allow full page URL to activate a tab's ID
-  // ------------------------------------------------
-  // This allows linking to a tab on page load via the address bar.
-  // So a URL such as, http://snipe-it.local/hardware/2/#my_tab will
-  // cause the tab on that page with an ID of “my_tab” to be active.
-  if (taburl.match('#')) {
-    $('.nav-tabs a[href="#' + taburl.split('#')[1] + '"]').tab('show');
-  }
-
-  // Allow internal page links to activate a tab's ID.
-  // ------------------------------------------------
-  // This allows you to link to a tab from anywhere on the page
-  // including from within another tab. Also note that internal page
-  // links either inside or out of the tabs need to include data-toggle="tab"
-  // Ex: <a href="#my_tab" data-toggle="tab">Click me</a>
-  $('a[data-toggle="tab"]').click(function (e) {
-    var href = $(this).attr("href");
-    history.pushState(null, null, href);
-    e.preventDefault();
-    $('a[href="' + $(this).attr('href') + '"]').tab('show');
-  });
-
-  // ------------------------------------------------
-  // End Deep Linking for Bootstrap tabs
-  // ------------------------------------------------
-
-  // Image preview
-  function readURL(input, $preview) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $preview.attr('src', e.target.result);
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-  function formatBytes(bytes) {
-    if (bytes < 1024) return bytes + " Bytes";else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + " KB";else if (bytes < 1073741824) return (bytes / 1048576).toFixed(2) + " MB";else return (bytes / 1073741824).toFixed(2) + " GB";
-  }
-
-  // File size validation
-  $('.js-uploadFile').bind('change', function () {
-    var $this = $(this);
-    var id = '#' + $this.attr('id');
-    var status = id + '-status';
-    var $status = $(status);
-    var delete_id = $(id + '-deleteCheckbox');
-    var preview_container = $(id + '-previewContainer');
-    $status.removeClass('text-success').removeClass('text-danger');
-    $(status + ' .goodfile').remove();
-    $(status + ' .badfile').remove();
-    $(status + ' .previewSize').hide();
-    preview_container.hide();
-    $(id + '-info').html('');
-    var max_size = $this.data('maxsize');
-    var total_size = 0;
-    for (var i = 0; i < this.files.length; i++) {
-      total_size += this.files[i].size;
-      $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
-    }
-    if (total_size > max_size) {
-      $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
-    } else {
-      $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
-      var $preview = $(id + '-imagePreview');
-      readURL(this, $preview);
-      $preview.fadeIn();
-      preview_container.fadeIn();
-      delete_id.hide();
-    }
-  });
-});
-function htmlEntities(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
-/**
- * Toggle disabled
- */
-(function ($) {
-  $.fn.toggleDisabled = function (callback) {
-    return this.each(function () {
-      var disabled,
-        $this = $(this);
-      if ($this.attr('disabled')) {
-        $this.removeAttr('disabled');
-        disabled = false;
-      } else {
-        $this.attr('disabled', 'disabled');
-        disabled = true;
-      }
-      if (callback && typeof callback === 'function') {
-        callback(this, disabled);
-      }
-    });
-  };
-})(jQuery);
-
-/**
- * Universal Livewire Select2 integration
- *
- * How to use:
- *
- * 1. Set the class of your select2 elements to 'livewire-select2').
- * 2. Name your element to match a property in your Livewire component
- * 3. Add an attribute called 'data-livewire-component' that points to $this->getId() (via `{{ }}` if you're in a blade,
- *    or just $this->getId() if not).
- */
-document.addEventListener('livewire:init', function () {
-  $('.livewire-select2').select2();
-  $(document).on('select2:select', '.livewire-select2', function (event) {
-    var target = $(event.target);
-    if (!event.target.name || !target.data('livewire-component')) {
-      console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your Livewire-ed select2 elements!");
-      console.error("For data-livewire-component, you probably want to use $this->getId() or {{ $this->getId() }}, as appropriate");
-      return false;
-    }
-    Livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value);
-  });
-  Livewire.hook('request', function (_ref) {
-    var succeed = _ref.succeed;
-    succeed(function () {
-      queueMicrotask(function () {
-        $('.livewire-select2').select2();
-      });
-    });
-  });
-});
-
-/***/ }),
-
-/***/ "./resources/assets/js/snipeit_modals.js":
-/*!***********************************************!*\
-  !*** ./resources/assets/js/snipeit_modals.js ***!
-  \***********************************************/
-/***/ (() => {
-
-/* 
- * 
- * Snipe-IT Universal Modal support
- * 
- * Enables modal dialogs to create sub-resources throughout Snipe-IT
- * 
- */
-
-/* 
-HOW TO USE
- Create a Button looking like this:
- <a href='{{ route('modal.show', 'user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-primary">New</a>
- If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
- data-toggle="modal" - required for Bootstrap Modals
-data-target="#createModal" - fixed ID for the modal, do not change
-data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a success? Be on the lookout for duplicate ID's, it will confuse this library!
-class="btn btn-sm btn-primary" - makes it look button-ey, feel free to change :)
-
-If you want to pass additional variables to the modal (In the Category Create one, for example, you can pass category_id), you can encode them as URL variables in the href
-
-*/
-
-$(function () {
-  var baseUrl = $('meta[name="baseUrl"]').attr('content');
-  //handle modal-add-interstitial calls
-  var model, select, refreshSelector;
-  if ($('#createModal').length == 0) {
-    $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
-  }
-  $('#createModal').on("show.bs.modal", function (event) {
-    var link = $(event.relatedTarget);
-    model = link.data("dependency");
-    select = link.data("select");
-    refreshSelector = link.data("refresh");
-    $('#createModal').load(link.attr('href'), function () {
-      // this sets the focus to be the name field
-      $('#modal-name').focus();
-
-      //do we need to re-select2 this, after load? Probably.
-      $('#createModal').find('select.select2').select2();
-      // Initialize the ajaxy select2 with images.
-      // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
-
-      $('.js-data-ajax').each(function (i, item) {
-        var link = $(item);
-        var endpoint = link.data("endpoint");
-        var select = link.data("select");
-        link.select2({
-          ajax: {
-            // the baseUrl includes a trailing slash
-            url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
-            //WARNING - we're hoping that's defined on the page somewhere...
-            dataType: 'json',
-            delay: 250,
-            headers: {
-              "X-Requested-With": 'XMLHttpRequest',
-              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },
-            data: function data(params) {
-              var data = {
-                search: params.term,
-                page: params.page || 1,
-                assetStatusType: link.data("asset-status-type")
-              };
-              return data;
-            },
-            /*processResults: function (data, params) {
-                 params.page = params.page || 1;
-                 var answer =  {
-                    results: data.items,
-                    pagination: {
-                        more: data.pagination.more
-                    }
-                };
-                 return answer;
-            },*/
-            cache: true
-          },
-          //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-          templateResult: formatDatalistSafe
-          //templateSelection: formatDataSelection
-        });
-      });
-    });
-  });
-  $('#createModal').on('click', '#modal-save', function () {
-    $.ajax({
-      type: 'POST',
-      url: $('.modal-body form').attr('action'),
-      headers: {
-        "X-Requested-With": 'XMLHttpRequest',
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-      },
-      data: $('.modal-body form').serialize(),
-      success: function success(result) {
-        if (result.status == "error") {
-          var error_message = "";
-          for (var field in result.messages) {
-            error_message += "<li>Problem(s) with field <i><strong>" + field + "</strong></i>: " + result.messages[field];
-          }
-          $('#modal_error_msg').html(error_message).show();
-          return false;
-        }
-        var id = result.payload.id;
-        var name = result.payload.name || result.payload.first_name + " " + result.payload.last_name;
-        if (!id || !name) {
-          console.error("Could not find resulting name or ID from modal-create. Name: " + name + ", id: " + id);
-          return false;
-        }
-        $('#createModal').modal('hide');
-        $('#createModal').html("");
-        var refreshTable = $('#' + refreshSelector);
-        if (refreshTable.length > 0) {
-          refreshTable.bootstrapTable('refresh');
-        }
-
-        // "select" is the original drop-down menu that someone
-        // clicked 'add' on to add a new 'thing'
-        // this code adds the newly created object to that select
-        var selector = document.getElementById(select);
-        if (!selector) {
-          return false;
-        }
-        selector.options[selector.length] = new Option(name, id);
-        selector.selectedIndex = selector.length - 1;
-        $(selector).trigger("change");
-        if (window.fetchCustomFields) {
-          fetchCustomFields();
-        }
-      },
-      error: function error(result) {
-        msg = result.responseJSON.messages || result.responseJSON.error;
-        $('#modal_error_msg').html("Server Error: " + msg).show();
-      }
-    });
-  });
-});
-function formatDatalistSafe(datalist) {
-  // console.warn("What in the hell is going on with Select2?!?!!?!?");
-  // console.warn($.select2);
-  if (datalist.loading) {
-    return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
-  }
-  var root_div = $("<div class='clearfix'>");
-  var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
-  if (datalist.image) {
-    var inner_div = $("<div style='width: 30px;'>");
-    /******************************************************************
-     * 
-     * We are specifically chosing empty alt-text below, because this 
-     * image conveys no additional information, relative to the text
-     * that will *always* be there in any select2 list that is in use
-     * in Snipe-IT. If that changes, we would probably want to change
-     * some signatures of some functions, but right now, we don't want
-     * screen readers to say "HP SuperJet 5000, .... picture of HP 
-     * SuperJet 5000..." and so on, for every single row in a list of
-     * assets or models or whatever.
-     * 
-     *******************************************************************/
-    var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
-    // console.warn("Img is: ");
-    // console.dir(img);
-    // console.warn("Strigularly, that's: ");
-    // console.log(img);
-    img.attr("src", datalist.image);
-    inner_div.append(img);
-  } else {
-    var inner_div = $("<div style='height: 20px; width: 30px;'></div>");
-  }
-  left_pull.append(inner_div);
-  root_div.append(left_pull);
-  var name_div = $("<div>");
-  name_div.text(datalist.text);
-  root_div.append(name_div);
-  var safe_html = root_div.get(0).outerHTML;
-  var old_html = formatDatalist(datalist);
-  if (safe_html != old_html) {
-    // console.log("HTML MISMATCH: ");
-    // console.log("FormatDatalistSafe: ");
-    // console.dir(root_div.get(0));
-    // console.log(safe_html);
-    // console.log("FormatDataList: ");
-    // console.log(old_html);
-  }
-  return root_div;
-}
-function formatDatalist(datalist) {
-  var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
-  if (datalist.loading) {
-    return loading_markup;
-  }
-  var markup = "<div class='clearfix'>";
-  markup += "<div class='pull-left' style='padding-right: 10px;'>";
-  if (datalist.image) {
-    markup += "<div style='width: 30px;'><img src='" + datalist.image + "' alt='" + datalist.tex + "' style='max-height: 20px; max-width: 30px;'></div>";
-  } else {
-    markup += "<div style='height: 20px; width: 30px;'></div>";
-  }
-  markup += "</div><div>" + datalist.text + "</div>";
-  markup += "</div>";
-  return markup;
-}
-function formatDataSelection(datalist) {
-  return datalist.text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-}
 
 /***/ }),
 
@@ -62916,7 +62197,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 
 $.ui = $.ui || {};
 
-return $.ui.version = "1.14.0";
+return $.ui.version = "1.14.1";
 
 } );
 
@@ -62930,7 +62211,7 @@ return $.ui.version = "1.14.0";
 /***/ ((module, exports, __webpack_require__) => {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery UI Widget 1.14.0
+ * jQuery UI Widget 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -62986,6 +62267,9 @@ $.widget = function( name, base, prototype ) {
 
 	var namespace = name.split( "." )[ 0 ];
 	name = name.split( "." )[ 1 ];
+	if ( name === "__proto__" || name === "constructor" ) {
+		return $.error( "Invalid widget name: " + name );
+	}
 	var fullName = namespace + "-" + name;
 
 	if ( !prototype ) {
@@ -91783,6 +91067,855 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
+/***/ "./resources/assets/js/bootstrap.js":
+/*!******************************************!*\
+  !*** ./resources/assets/js/bootstrap.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
+
+/**
+ * We'll load jQuery and the Bootstrap jQuery plugin which provides support
+ * for JavaScript based Bootstrap features such as modals and tabs. This
+ * code may be modified to fit the specific needs of your application.
+ */
+//window.$ = window.jQuery = require('jquery');
+
+/**
+ * jQuery UI is loaded here and then the tooltip is assigned another funtion name
+ * This resolves the issue of jquery-ui & bootstrap tooltip conflict
+ */
+__webpack_require__(/*! jquery-ui */ "./node_modules/jquery-ui/ui/widget.js");
+jQuery.fn.uitooltip = jQuery.fn.tooltip;
+
+/**
+ * Load boostrap
+ */
+__webpack_require__(/*! bootstrap-less */ "./node_modules/bootstrap-less/js/bootstrap.js");
+
+// require('admin-lte');
+
+// require('chart.js');
+
+// require('jquery-form-validator'); //says something about dependency
+/**
+ * Echo exposes an expressive API for subscribing to channels and listening
+ * for events that are broadcast by Laravel. Echo and event broadcasting
+ * allows your team to easily build robust real-time web applications.
+ */
+
+// import Echo from "laravel-echo"
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: 'your-pusher-key'
+// });
+
+/***/ }),
+
+/***/ "./resources/assets/js/snipeit.js":
+/*!****************************************!*\
+  !*** ./resources/assets/js/snipeit.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+// var jQuery = require('jquery');
+// window.jQuery = jQuery
+// window.$ = jQuery
+
+__webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
+
+/**
+ * Module containing core application logic.
+ * @param  {jQuery} $        Insulated jQuery object
+ * @param  {JSON} settings Insulated `window.snipeit.settings` object.
+ * @return {IIFE}          Immediately invoked. Returns self.
+ */
+
+lineOptions = {
+  legend: {
+    position: "bottom"
+  },
+  scales: {
+    yAxes: [{
+      ticks: {
+        fontColor: "rgba(0,0,0,0.5)",
+        fontStyle: "bold",
+        beginAtZero: true,
+        maxTicksLimit: 5,
+        padding: 20
+      },
+      gridLines: {
+        drawTicks: false,
+        display: false
+      }
+    }],
+    xAxes: [{
+      gridLines: {
+        zeroLineColor: "transparent"
+      },
+      ticks: {
+        padding: 20,
+        fontColor: "rgba(0,0,0,0.5)",
+        fontStyle: "bold"
+      }
+    }]
+  }
+};
+pieOptions = {
+  //Boolean - Whether we should show a stroke on each segment
+  segmentShowStroke: true,
+  //String - The colour of each segment stroke
+  segmentStrokeColor: "#fff",
+  //Number - The width of each segment stroke
+  segmentStrokeWidth: 1,
+  //Number - The percentage of the chart that we cut out of the middle
+  percentageInnerCutout: 50,
+  // This is 0 for Pie charts
+  //Number - Amount of animation steps
+  animationSteps: 100,
+  //String - Animation easing effect
+  animationEasing: "easeOutBounce",
+  //Boolean - Whether we animate the rotation of the Doughnut
+  animateRotate: true,
+  //Boolean - Whether we animate scaling the Doughnut from the centre
+  animateScale: false,
+  //Boolean - whether to make the chart responsive to window resizing
+  responsive: true,
+  // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+  maintainAspectRatio: false,
+  //String - A legend template
+  legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" + "<i class='fas fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" + "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
+  //String - A tooltip template
+  tooltipTemplate: "<%=value %> <%=label%> "
+};
+
+//-----------------
+//- END PIE CHART -
+//-----------------
+
+var baseUrl = $('meta[name="baseUrl"]').attr('content');
+$(function () {
+  var $el = $('table');
+
+  // confirm restore modal
+
+  $el.on('click', '.restore-asset', function (evnt) {
+    var $context = $(this);
+    var $restoreConfirmModal = $('#restoreConfirmModal');
+    var href = $context.attr('href');
+    var message = $context.attr('data-content');
+    var title = $context.attr('data-title');
+    $('#confirmModalLabel').text(title);
+    $restoreConfirmModal.find('.modal-body').text(message);
+    $('#restoreForm').attr('action', href);
+    $restoreConfirmModal.modal({
+      show: true
+    });
+    return false;
+  });
+
+  // confirm delete modal
+
+  $el.on('click', '.delete-asset', function (evnt) {
+    var $context = $(this);
+    var $dataConfirmModal = $('#dataConfirmModal');
+    var href = $context.attr('href');
+    var message = $context.attr('data-content');
+    var title = $context.attr('data-title');
+    $('#myModalLabel').text(title);
+    $dataConfirmModal.find('.modal-body').text(message);
+    $('#deleteForm').attr('action', href);
+    $dataConfirmModal.modal({
+      show: true
+    });
+    return false;
+  });
+
+  /*
+  * Slideout help menu
+  */
+  $('.slideout-menu-toggle').on('click', function (event) {
+    event.preventDefault();
+    // create menu variables
+    var slideoutMenu = $('.slideout-menu');
+    var slideoutMenuWidth = $('.slideout-menu').width();
+
+    // toggle open class
+    slideoutMenu.toggleClass("open");
+
+    // slide menu
+    if (slideoutMenu.hasClass("open")) {
+      slideoutMenu.show();
+      slideoutMenu.animate({
+        right: "0px"
+      });
+    } else {
+      slideoutMenu.animate({
+        right: -slideoutMenuWidth
+      }, "-350px");
+      slideoutMenu.fadeOut();
+    }
+  });
+
+  /*
+  * Select2
+  */
+
+  $('select.select2:not(".select2-hidden-accessible")').each(function (i, obj) {
+    {
+      $(obj).select2();
+    }
+  });
+
+  // $('.datepicker').datepicker();
+  // var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
+  // $.fn.bootstrapDP = datepicker;
+  // $('.datepicker').datepicker();
+
+  // Crazy select2 rich dropdowns with images!
+  $('.js-data-ajax').each(function (i, item) {
+    var link = $(item);
+    var endpoint = link.data("endpoint");
+    var select = link.data("select");
+    link.select2({
+      /**
+       * Adds an empty placeholder, allowing every select2 instance to be cleared.
+       * This placeholder can be overridden with the "data-placeholder" attribute.
+       */
+      placeholder: '',
+      allowClear: true,
+      language: $('meta[name="language"]').attr('content'),
+      dir: $('meta[name="language-direction"]').attr('content'),
+      ajax: {
+        // the baseUrl includes a trailing slash
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+        dataType: 'json',
+        delay: 250,
+        headers: {
+          "X-Requested-With": 'XMLHttpRequest',
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        },
+        data: function data(params) {
+          var data = {
+            search: params.term,
+            page: params.page || 1,
+            assetStatusType: link.data("asset-status-type"),
+            companyId: link.data("company-id")
+          };
+          return data;
+        },
+        /* processResults: function (data, params) {
+             params.page = params.page || 1;
+             var answer =  {
+                results: data.items,
+                pagination: {
+                    more: data.pagination.more
+                }
+            };
+             return answer;
+        }, */
+        cache: true
+      },
+      //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      templateResult: formatDatalistSafe
+      //templateSelection: formatDataSelection
+    });
+  });
+  function getSelect2Value(element) {
+    // if the passed object is not a jquery object, assuming 'element' is a selector
+    if (!(element instanceof jQuery)) element = $(element);
+    var select = element.data("select2");
+
+    // There's two different locations where the select2-generated input element can be. 
+    searchElement = select.dropdown.$search || select.$container.find(".select2-search__field");
+    var value = searchElement.val();
+    return value;
+  }
+  $(".select2-hidden-accessible").on('select2:selecting', function (e) {
+    var data = e.params.args.data;
+    var isMouseUp = false;
+    var element = $(this);
+    var value = getSelect2Value(element);
+    if (e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
+
+    // if selected item does not match typed text, do not allow it to pass - force close for ajax.
+    if (!isMouseUp) {
+      if (value.toLowerCase() && data.text.toLowerCase().indexOf(value) < 0) {
+        e.preventDefault();
+        element.select2('close');
+
+        // if it does match, we set a flag in the event (which gets passed to subsequent events), telling it not to worry about the ajax
+      } else if (value.toLowerCase() && data.text.toLowerCase().indexOf(value) > -1) {
+        e.params.args.noForceAjax = true;
+      }
+    }
+  });
+  $(".select2-hidden-accessible").on('select2:closing', function (e) {
+    var element = $(this);
+    var value = getSelect2Value(element);
+    var noForceAjax = false;
+    var isMouseUp = false;
+    if (e.params.args.originalSelect2Event) noForceAjax = e.params.args.originalSelect2Event.noForceAjax;
+    if (e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
+    if (value && !noForceAjax && !isMouseUp) {
+      var endpoint = element.data("endpoint");
+      var assetStatusType = element.data("asset-status-type");
+      $.ajax({
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search=' + value + '&page=1' + (assetStatusType ? '&assetStatusType=' + assetStatusType : ''),
+        dataType: 'json',
+        headers: {
+          "X-Requested-With": 'XMLHttpRequest',
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        }
+      }).done(function (response) {
+        var currentlySelected = element.select2('data').map(function (x) {
+          return +x.id;
+        }).filter(function (x) {
+          return x !== 0;
+        });
+
+        // makes sure we're not selecting the same thing twice for multiples
+        var filteredResponse = response.results.filter(function (item) {
+          return currentlySelected.indexOf(+item.id) < 0;
+        });
+        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.results[0];
+        if (first && first.id) {
+          first.selected = true;
+          if ($("option[value='" + first.id + "']", element).length < 1) {
+            var option = new Option(first.text, first.id, true, true);
+            element.append(option);
+          } else {
+            var isMultiple = element.attr("multiple") == "multiple";
+            element.val(isMultiple ? element.val().concat(first.id) : element.val(first.id));
+          }
+          element.trigger('change');
+          element.trigger({
+            type: 'select2:select',
+            params: {
+              data: first
+            }
+          });
+        }
+      });
+    }
+  });
+  function formatDatalist(datalist) {
+    var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+    if (datalist.loading) {
+      return loading_markup;
+    }
+    var markup = '<div class="clearfix">';
+    markup += '<div class="pull-left" style="padding-right: 10px;">';
+    if (datalist.image) {
+      markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;' alt='" + datalist.text + "'></div>";
+    } else {
+      markup += '<div style="height: 20px; width: 30px;"></div>';
+    }
+    markup += "</div><div>" + datalist.text + "</div>";
+    markup += "</div>";
+    return markup;
+  }
+  function formatDatalistSafe(datalist) {
+    // console.warn("What in the hell is going on with Select2?!?!!?!?");
+    // console.warn($.select2);
+    if (datalist.loading) {
+      return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+    }
+    var root_div = $("<div class='clearfix'>");
+    var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
+    if (datalist.image) {
+      var inner_div = $("<div style='width: 30px;'>");
+      /******************************************************************
+       * 
+       * We are specifically chosing empty alt-text below, because this 
+       * image conveys no additional information, relative to the text
+       * that will *always* be there in any select2 list that is in use
+       * in Snipe-IT. If that changes, we would probably want to change
+       * some signatures of some functions, but right now, we don't want
+       * screen readers to say "HP SuperJet 5000, .... picture of HP 
+       * SuperJet 5000..." and so on, for every single row in a list of
+       * assets or models or whatever.
+       * 
+       *******************************************************************/
+      var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
+      // console.warn("Img is: ");
+      // console.dir(img);
+      // console.warn("Strigularly, that's: ");
+      // console.log(img);
+      img.attr("src", datalist.image);
+      inner_div.append(img);
+    } else {
+      var inner_div = $("<div style='height: 20px; width: 30px;'></div>");
+    }
+    left_pull.append(inner_div);
+    root_div.append(left_pull);
+    var name_div = $("<div>");
+    name_div.text(datalist.text);
+    root_div.append(name_div);
+    var safe_html = root_div.get(0).outerHTML;
+    var old_html = formatDatalist(datalist);
+    if (safe_html != old_html) {
+      //console.log("HTML MISMATCH: ");
+      //console.log("FormatDatalistSafe: ");
+      // console.dir(root_div.get(0));
+      //console.log(safe_html);
+      //console.log("FormatDataList: ");
+      //console.log(old_html);
+    }
+    return root_div;
+  }
+  function formatDataSelection(datalist) {
+    // This a heinous workaround for a known bug in Select2.
+    // Without this, the rich selectlists are vulnerable to XSS.
+    // Many thanks to @uberbrady for this fix. It ain't pretty,
+    // but it resolves the issue until Select2 addresses it on their end.
+    //
+    // Bug was reported in 2016 :{
+    // https://github.com/select2/select2/issues/4587
+
+    return datalist.text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+
+  // This handles the radio button selectors for the checkout-to-foo options
+  // on asset checkout and also on asset edit
+  $(function () {
+    $('input[name=checkout_to_type]').on("change", function () {
+      var assignto_type = $('input[name=checkout_to_type]:checked').val();
+      var userid = $('#assigned_user option:selected').val();
+      if (assignto_type == 'asset') {
+        $('#current_assets_box').fadeOut();
+        $('#assigned_asset').show();
+        $('#assigned_user').hide();
+        $('#assigned_location').hide();
+        $('.notification-callout').fadeOut();
+        $('[name="assigned_location"]').val('').trigger('change.select2');
+        $('[name="assigned_user"]').val('').trigger('change.select2');
+      } else if (assignto_type == 'location') {
+        $('#current_assets_box').fadeOut();
+        $('#assigned_asset').hide();
+        $('#assigned_user').hide();
+        $('#assigned_location').show();
+        $('.notification-callout').fadeOut();
+        $('[name="assigned_asset"]').val('').trigger('change.select2');
+        $('[name="assigned_user"]').val('').trigger('change.select2');
+      } else {
+        $('#assigned_asset').hide();
+        $('#assigned_user').show();
+        $('#assigned_location').hide();
+        if (userid) {
+          $('#current_assets_box').fadeIn();
+        }
+        $('.notification-callout').fadeIn();
+        $('[name="assigned_asset"]').val('').trigger('change.select2');
+        $('[name="assigned_location"]').val('').trigger('change.select2');
+      }
+    });
+  });
+
+  // ------------------------------------------------
+  // Deep linking for Bootstrap tabs
+  // ------------------------------------------------
+  var taburl = document.location.toString();
+
+  // Allow full page URL to activate a tab's ID
+  // ------------------------------------------------
+  // This allows linking to a tab on page load via the address bar.
+  // So a URL such as, http://snipe-it.local/hardware/2/#my_tab will
+  // cause the tab on that page with an ID of “my_tab” to be active.
+  if (taburl.match('#')) {
+    $('.nav-tabs a[href="#' + taburl.split('#')[1] + '"]').tab('show');
+  }
+
+  // Allow internal page links to activate a tab's ID.
+  // ------------------------------------------------
+  // This allows you to link to a tab from anywhere on the page
+  // including from within another tab. Also note that internal page
+  // links either inside or out of the tabs need to include data-toggle="tab"
+  // Ex: <a href="#my_tab" data-toggle="tab">Click me</a>
+  $('a[data-toggle="tab"]').click(function (e) {
+    var href = $(this).attr("href");
+    history.pushState(null, null, href);
+    e.preventDefault();
+    $('a[href="' + $(this).attr('href') + '"]').tab('show');
+  });
+
+  // ------------------------------------------------
+  // End Deep Linking for Bootstrap tabs
+  // ------------------------------------------------
+
+  // Image preview
+  function readURL(input, $preview) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $preview.attr('src', e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + " Bytes";else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + " KB";else if (bytes < 1073741824) return (bytes / 1048576).toFixed(2) + " MB";else return (bytes / 1073741824).toFixed(2) + " GB";
+  }
+
+  // File size validation
+  $('.js-uploadFile').bind('change', function () {
+    var $this = $(this);
+    var id = '#' + $this.attr('id');
+    var status = id + '-status';
+    var $status = $(status);
+    var delete_id = $(id + '-deleteCheckbox');
+    var preview_container = $(id + '-previewContainer');
+    $status.removeClass('text-success').removeClass('text-danger');
+    $(status + ' .goodfile').remove();
+    $(status + ' .badfile').remove();
+    $(status + ' .previewSize').hide();
+    preview_container.hide();
+    $(id + '-info').html('');
+    var max_size = $this.data('maxsize');
+    var total_size = 0;
+    for (var i = 0; i < this.files.length; i++) {
+      total_size += this.files[i].size;
+      $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+    }
+    if (total_size > max_size) {
+      $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
+    } else {
+      $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
+      var $preview = $(id + '-imagePreview');
+      readURL(this, $preview);
+      $preview.fadeIn();
+      preview_container.fadeIn();
+      delete_id.hide();
+    }
+  });
+});
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/**
+ * Toggle disabled
+ */
+(function ($) {
+  $.fn.toggleDisabled = function (callback) {
+    return this.each(function () {
+      var disabled,
+        $this = $(this);
+      if ($this.attr('disabled')) {
+        $this.removeAttr('disabled');
+        disabled = false;
+      } else {
+        $this.attr('disabled', 'disabled');
+        disabled = true;
+      }
+      if (callback && typeof callback === 'function') {
+        callback(this, disabled);
+      }
+    });
+  };
+})(jQuery);
+
+/**
+ * Universal Livewire Select2 integration
+ *
+ * How to use:
+ *
+ * 1. Set the class of your select2 elements to 'livewire-select2').
+ * 2. Name your element to match a property in your Livewire component
+ * 3. Add an attribute called 'data-livewire-component' that points to $this->getId() (via `{{ }}` if you're in a blade,
+ *    or just $this->getId() if not).
+ */
+document.addEventListener('livewire:init', function () {
+  $('.livewire-select2').select2();
+  $(document).on('select2:select', '.livewire-select2', function (event) {
+    var target = $(event.target);
+    if (!event.target.name || !target.data('livewire-component')) {
+      console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your Livewire-ed select2 elements!");
+      console.error("For data-livewire-component, you probably want to use $this->getId() or {{ $this->getId() }}, as appropriate");
+      return false;
+    }
+    Livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value);
+  });
+  Livewire.hook('request', function (_ref) {
+    var succeed = _ref.succeed;
+    succeed(function () {
+      queueMicrotask(function () {
+        $('.livewire-select2').select2();
+      });
+    });
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/assets/js/snipeit_modals.js":
+/*!***********************************************!*\
+  !*** ./resources/assets/js/snipeit_modals.js ***!
+  \***********************************************/
+/***/ (() => {
+
+/* 
+ * 
+ * Snipe-IT Universal Modal support
+ * 
+ * Enables modal dialogs to create sub-resources throughout Snipe-IT
+ * 
+ */
+
+/* 
+HOW TO USE
+ Create a Button looking like this:
+ <a href='{{ route('modal.show', 'user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-primary">New</a>
+ If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
+ data-toggle="modal" - required for Bootstrap Modals
+data-target="#createModal" - fixed ID for the modal, do not change
+data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a success? Be on the lookout for duplicate ID's, it will confuse this library!
+class="btn btn-sm btn-primary" - makes it look button-ey, feel free to change :)
+
+If you want to pass additional variables to the modal (In the Category Create one, for example, you can pass category_id), you can encode them as URL variables in the href
+
+*/
+
+$(function () {
+  var baseUrl = $('meta[name="baseUrl"]').attr('content');
+  //handle modal-add-interstitial calls
+  var model, select, refreshSelector;
+  if ($('#createModal').length == 0) {
+    $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
+  }
+  $('#createModal').on("show.bs.modal", function (event) {
+    var link = $(event.relatedTarget);
+    model = link.data("dependency");
+    select = link.data("select");
+    refreshSelector = link.data("refresh");
+    $('#createModal').load(link.attr('href'), function () {
+      // this sets the focus to be the name field
+      $('#modal-name').focus();
+
+      //do we need to re-select2 this, after load? Probably.
+      $('#createModal').find('select.select2').select2();
+      // Initialize the ajaxy select2 with images.
+      // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
+
+      $('.js-data-ajax').each(function (i, item) {
+        var link = $(item);
+        var endpoint = link.data("endpoint");
+        var select = link.data("select");
+        link.select2({
+          ajax: {
+            // the baseUrl includes a trailing slash
+            url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+            //WARNING - we're hoping that's defined on the page somewhere...
+            dataType: 'json',
+            delay: 250,
+            headers: {
+              "X-Requested-With": 'XMLHttpRequest',
+              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            },
+            data: function data(params) {
+              var data = {
+                search: params.term,
+                page: params.page || 1,
+                assetStatusType: link.data("asset-status-type")
+              };
+              return data;
+            },
+            /*processResults: function (data, params) {
+                 params.page = params.page || 1;
+                 var answer =  {
+                    results: data.items,
+                    pagination: {
+                        more: data.pagination.more
+                    }
+                };
+                 return answer;
+            },*/
+            cache: true
+          },
+          //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+          templateResult: formatDatalistSafe
+          //templateSelection: formatDataSelection
+        });
+      });
+    });
+  });
+  $('#createModal').on('click', '#modal-save', function () {
+    $.ajax({
+      type: 'POST',
+      url: $('.modal-body form').attr('action'),
+      headers: {
+        "X-Requested-With": 'XMLHttpRequest',
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+      },
+      data: $('.modal-body form').serialize(),
+      success: function success(result) {
+        if (result.status == "error") {
+          var error_message = "";
+          for (var field in result.messages) {
+            error_message += "<li>Problem(s) with field <i><strong>" + field + "</strong></i>: " + result.messages[field];
+          }
+          $('#modal_error_msg').html(error_message).show();
+          return false;
+        }
+        var id = result.payload.id;
+        var name = result.payload.name || result.payload.first_name + " " + result.payload.last_name;
+        if (!id || !name) {
+          console.error("Could not find resulting name or ID from modal-create. Name: " + name + ", id: " + id);
+          return false;
+        }
+        $('#createModal').modal('hide');
+        $('#createModal').html("");
+        var refreshTable = $('#' + refreshSelector);
+        if (refreshTable.length > 0) {
+          refreshTable.bootstrapTable('refresh');
+        }
+
+        // "select" is the original drop-down menu that someone
+        // clicked 'add' on to add a new 'thing'
+        // this code adds the newly created object to that select
+        var selector = document.getElementById(select);
+        if (!selector) {
+          return false;
+        }
+        selector.options[selector.length] = new Option(name, id);
+        selector.selectedIndex = selector.length - 1;
+        $(selector).trigger("change");
+        if (window.fetchCustomFields) {
+          fetchCustomFields();
+        }
+      },
+      error: function error(result) {
+        msg = result.responseJSON.messages || result.responseJSON.error;
+        $('#modal_error_msg').html("Server Error: " + msg).show();
+      }
+    });
+  });
+});
+function formatDatalistSafe(datalist) {
+  // console.warn("What in the hell is going on with Select2?!?!!?!?");
+  // console.warn($.select2);
+  if (datalist.loading) {
+    return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+  }
+  var root_div = $("<div class='clearfix'>");
+  var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
+  if (datalist.image) {
+    var inner_div = $("<div style='width: 30px;'>");
+    /******************************************************************
+     * 
+     * We are specifically chosing empty alt-text below, because this 
+     * image conveys no additional information, relative to the text
+     * that will *always* be there in any select2 list that is in use
+     * in Snipe-IT. If that changes, we would probably want to change
+     * some signatures of some functions, but right now, we don't want
+     * screen readers to say "HP SuperJet 5000, .... picture of HP 
+     * SuperJet 5000..." and so on, for every single row in a list of
+     * assets or models or whatever.
+     * 
+     *******************************************************************/
+    var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
+    // console.warn("Img is: ");
+    // console.dir(img);
+    // console.warn("Strigularly, that's: ");
+    // console.log(img);
+    img.attr("src", datalist.image);
+    inner_div.append(img);
+  } else {
+    var inner_div = $("<div style='height: 20px; width: 30px;'></div>");
+  }
+  left_pull.append(inner_div);
+  root_div.append(left_pull);
+  var name_div = $("<div>");
+  name_div.text(datalist.text);
+  root_div.append(name_div);
+  var safe_html = root_div.get(0).outerHTML;
+  var old_html = formatDatalist(datalist);
+  if (safe_html != old_html) {
+    // console.log("HTML MISMATCH: ");
+    // console.log("FormatDatalistSafe: ");
+    // console.dir(root_div.get(0));
+    // console.log(safe_html);
+    // console.log("FormatDataList: ");
+    // console.log(old_html);
+  }
+  return root_div;
+}
+function formatDatalist(datalist) {
+  var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+  if (datalist.loading) {
+    return loading_markup;
+  }
+  var markup = "<div class='clearfix'>";
+  markup += "<div class='pull-left' style='padding-right: 10px;'>";
+  if (datalist.image) {
+    markup += "<div style='width: 30px;'><img src='" + datalist.image + "' alt='" + datalist.tex + "' style='max-height: 20px; max-width: 30px;'></div>";
+  } else {
+    markup += "<div style='height: 20px; width: 30px;'></div>";
+  }
+  markup += "</div><div>" + datalist.text + "</div>";
+  markup += "</div>";
+  return markup;
+}
+function formatDataSelection(datalist) {
+  return datalist.text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+/***/ }),
+
+/***/ "./resources/assets/less/app.less":
+/*!****************************************!*\
+  !*** ./resources/assets/less/app.less ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/less/overrides.less":
+/*!**********************************************!*\
+  !*** ./resources/assets/less/overrides.less ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/less/skins/_all-skins.less":
+/*!*****************************************************!*\
+  !*** ./resources/assets/less/skins/_all-skins.less ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./resources/assets/less/skins/skin-black-dark.less":
+/*!**********************************************************!*\
+  !*** ./resources/assets/less/skins/skin-black-dark.less ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./resources/assets/less/skins/skin-black.less":
 /*!*****************************************************!*\
   !*** ./resources/assets/less/skins/skin-black.less ***!
@@ -91956,71 +92089,6 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************!*\
   !*** ./resources/assets/less/skins/skin-yellow.less ***!
   \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./node_modules/admin-lte/build/less/AdminLTE.less":
-/*!*********************************************************!*\
-  !*** ./node_modules/admin-lte/build/less/AdminLTE.less ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/assets/less/app.less":
-/*!****************************************!*\
-  !*** ./resources/assets/less/app.less ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/assets/less/overrides.less":
-/*!**********************************************!*\
-  !*** ./resources/assets/less/overrides.less ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/assets/less/skins/_all-skins.less":
-/*!*****************************************************!*\
-  !*** ./resources/assets/less/skins/_all-skins.less ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/assets/less/skins/skin-black-dark.less":
-/*!**********************************************************!*\
-  !*** ./resources/assets/less/skins/skin-black-dark.less ***!
-  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";

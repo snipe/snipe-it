@@ -13,8 +13,8 @@ return array(
     |
     */
 
-    'failed' => 'Aqoonsigani kuma eka diiwaannadayada.',
+    'failed' => 'Aqoonsigani kuma jiro diiwaankeenna.',
     'password' => 'Furaha sirta ah ee la bixiyay waa khalad.',
-    'throttle' => 'Isku dayo soo gal oo aad u badan Fadlan isku day mar kale :seconds ilbiriqsi gudahood.',
+    'throttle' => 'Too many login attempts. Please try again in :minutes minute(s).',
 
 );

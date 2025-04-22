@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Тестирање LDAP Автентификација...',
         'authentication_success' => 'Автентификацијата на корисникот на LDAP е успешна!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Испраќање :app тест порака...',
         'success' => 'Вашата :webhook_name Интеграција работи!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Нешто не е во ред. :app одговори со :error_message',
         'error_redirect' => 'ГРЕШКА: 301/302 :endpoint враќа пренасочување. Од безбедносни причини, ние не ги следиме пренасочувањата. Ве молиме користете директна крајна точка.',
         'error_misc' => 'Нешто не е во ред. :( ',
-    ]
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

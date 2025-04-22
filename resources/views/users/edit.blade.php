@@ -213,7 +213,7 @@
                               @elseif ($user->id === Auth::user()->id)
                                   <!-- disallow the user from editing their own login status -->
                                   <label class="form-control form-control--disabled">
-                                      {{ Form::checkbox('activated', '1', old('activated', $user->activated), ['disabled' => true, 'checked'=> 'checked', 'aria-label'=>'update_real_loc']) }}
+                                      <input type="checkbox" name="activated" value="1" checked disabled aria-label="activated">
                                       {{ trans('admin/users/general.activated_help_text') }}
                                   </label>
                                   <p class="text-warning">{{ trans('admin/users/general.activated_disabled_help_text') }}</p>
@@ -259,7 +259,7 @@
                           <div class="col-md-8 col-md-offset-3">
                               <label class="form-control form-control--disabled">
 
-                                  {{ Form::checkbox('email_user', '1', old('email_user'), ['id' => "email_user_checkbox", 'aria-label'=>'email_user']) }}
+                                  <input type="checkbox" name="email_user" value="1" id="email_user_checkbox" @checked(old('email_user')) aria-label="email_user">
 
                                   {{ trans('admin/users/general.email_user_creds_on_create') }}
                               </label>
@@ -407,7 +407,7 @@
                           <div class="form-group {{ $errors->has('website') ? ' has-error' : '' }}">
                               <label for="website" class="col-md-3 control-label">{{ trans('general.website') }}</label>
                               <div class="col-md-6">
-                                  <input class="form-control" type="text" name="website" id="website" value="{{ old('website', $user->website) }}" maxlength="191" />
+                                  <input class="form-control" type="url" name="website" id="website" value="{{ old('website', $user->website) }}" maxlength="191" />
                                   {!! $errors->first('website', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                               </div>
                           </div>

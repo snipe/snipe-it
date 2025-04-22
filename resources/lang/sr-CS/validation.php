@@ -173,6 +173,7 @@ return [
     'ulid' => 'Polje :attribute mora biti ispravan ULID.',
     'uuid' => 'Polje :attribute mora biti ispravan UUID.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -184,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Jedna ili više adresa e-pošte nisu ispravne.',
+    'checkboxes'           => ':attribute sadrži neispravne opcije.',
+    'radio_buttons'        => ':attribute je neispravan.',
+    
     'custom' => [
         'alpha_space' => ':attribute polje sadrži znak koji nije dozvoljen.',
-        'email_array'      => 'Jedna ili više email adresa nisu ispravne.',
+
         'hashed_pass'      => 'Vaša lozinka je neispravna',
         'dumbpwd'          => 'Lozinka nije sigurna.',
         'statuslabel_type' => 'Morate odabrati ispravnu vrstu oznake statusa',
@@ -194,7 +199,7 @@ return [
         'custom_field_not_found_on_model' => 'Izgleda da ovo polje postoji, ali nije dostupno za grupu polja ovog modela imovine.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
         'purchase_date.date_format'     => ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
         'last_audit_date.date_format'   =>  ':attribute mora biti ispravan datum u YYYY-MM-DD hh:mm:ss formatu',
@@ -203,9 +208,14 @@ return [
         'expected_checkin.date_format'  =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
         'start_date.date_format'        =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
         'end_date.date_format'          =>  ':attribute mora biti ispravan datum u YYYY-MM-DD formatu',
-        'checkboxes'           => ':attribute sadrži neispravne opcije.',
-        'radio_buttons'        => ':attribute je neispravan.',
         'invalid_value_in_field' => 'Neispravna vrednost je sadržana u ovom polju',
+
+        'ldap_username_field' => [
+            'not_in' =>         '<code>sAMAccountName</code> (mala i velika slova) verovatno neće raditi. Trebalo bi da umesto toga koristite <code>samaccountname</code> (mala slova).'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> verovatno nije ispravan filter za autentifikaciju. Verovatno želite <code>uid=</code> '],
+        'ldap_filter' => ['regex' => 'Ova vrednost verovatno ne bi trebalo da bude u zagradi.'],
+
         ],
     /*
     |--------------------------------------------------------------------------

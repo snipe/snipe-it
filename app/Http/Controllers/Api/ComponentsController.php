@@ -38,6 +38,7 @@ class ComponentsController extends Controller
                 'name',
                 'min_amt',
                 'order_number',
+                'model_number',
                 'serial',
                 'purchase_date',
                 'purchase_cost',
@@ -47,7 +48,8 @@ class ComponentsController extends Controller
             ];
 
         $components = Component::select('components.*')
-            ->with('company', 'location', 'category', 'assets', 'supplier', 'adminuser');
+            ->with('company', 'location', 'category', 'assets', 'supplier', 'adminuser', 'manufacturer', 'uncontrainedAssets')
+            ->withSum('uncontrainedAssets', 'components_assets.assigned_qty');
 
         if ($request->filled('search')) {
             $components = $components->TextSearch($request->input('search'));
@@ -58,7 +60,7 @@ class ComponentsController extends Controller
         }
 
         if ($request->filled('company_id')) {
-            $components->where('company_id', '=', $request->input('company_id'));
+            $components->where('components.company_id', '=', $request->input('company_id'));
         }
 
         if ($request->filled('category_id')) {
@@ -67,6 +69,14 @@ class ComponentsController extends Controller
 
         if ($request->filled('supplier_id')) {
             $components->where('supplier_id', '=', $request->input('supplier_id'));
+        }
+
+        if ($request->filled('manufacturer_id')) {
+            $components->where('manufacturer_id', '=', $request->input('manufacturer_id'));
+        }
+
+        if ($request->filled('model_number')) {
+            $components->where('model_number', '=', $request->input('model_number'));
         }
 
         if ($request->filled('location_id')) {
@@ -97,6 +107,9 @@ class ComponentsController extends Controller
                 break;
             case 'supplier':
                 $components = $components->OrderSupplier($order);
+                break;
+            case 'manufacturer':
+                $components = $components->OrderManufacturer($order);
                 break;
             case 'created_by':
                 $components = $components->OrderByCreatedBy($order);
@@ -185,6 +198,11 @@ class ComponentsController extends Controller
         $this->authorize('delete', Component::class);
         $component = Component::findOrFail($id);
         $this->authorize('delete', $component);
+
+        if ($component->numCheckedOut() > 0) {
+            return response()->json(Helper::formatStandardApiResponse('error', null,  trans('admin/components/message.delete.error_qty')));
+        }
+
         $component->delete();
 
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/components/message.delete.success')));
@@ -297,9 +315,7 @@ class ComponentsController extends Controller
     public function checkin(Request $request, $component_asset_id) : JsonResponse
     {
         if ($component_assets = DB::table('components_assets')->find($component_asset_id)) {
-
             if (is_null($component = Component::find($component_assets->component_id))) {
-
                 return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.not_found')));
             }
 
@@ -307,17 +323,13 @@ class ComponentsController extends Controller
 
             $max_to_checkin = $component_assets->assigned_qty;
 
-            if ($max_to_checkin > 1) {
-                
-                $validator = Validator::make($request->all(), [
-                    "checkin_qty" => "required|numeric|between:1,$max_to_checkin"
-                ]);
-    
-                if ($validator->fails()) {
-                    return response()->json(Helper::formatStandardApiResponse('error', null, 'Checkin quantity must be between 1 and '.$max_to_checkin));
-                }
+            $validator = Validator::make($request->all(), [
+                "checkin_qty" => "required|numeric|between:1,$max_to_checkin"
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, 'Checkin quantity must be between 1 and ' . $max_to_checkin));
             }
-            
 
             // Validation passed, so let's figure out what we have to do here.
             $qty_remaining_in_checkout = ($component_assets->assigned_qty - (int)$request->input('checkin_qty', 1));
@@ -327,28 +339,23 @@ class ComponentsController extends Controller
             $component_assets->assigned_qty = $qty_remaining_in_checkout;
 
             Log::debug($component_asset_id.' - '.$qty_remaining_in_checkout.' remaining in record '.$component_assets->id);
-            
-            DB::table('components_assets')->where('id',
-                $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);
+
+            DB::table('components_assets')->where('id', $component_asset_id)->update(['assigned_qty' => $qty_remaining_in_checkout]);
 
             // If the checked-in qty is exactly the same as the assigned_qty,
             // we can simply delete the associated components_assets record
-            if ($qty_remaining_in_checkout == 0) {
+            if ($qty_remaining_in_checkout === 0) {
                 DB::table('components_assets')->where('id', '=', $component_asset_id)->delete();
             }
-            
 
             $asset = Asset::find($component_assets->asset_id);
 
             event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkin.success')));
-
         }
 
         return response()->json(Helper::formatStandardApiResponse('error', null, 'No matching checkouts for that component join record'));
-
-    
     }
 
 }

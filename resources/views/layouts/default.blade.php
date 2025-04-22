@@ -214,7 +214,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                     </a>
                                     <ul class="dropdown-menu">
                                         @can('create', \App\Models\Asset::class)
-                                            <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
+                                            <li{!! (Request::is('hardware/create') ? ' class="active"' : '') !!}>
                                                 <a href="{{ route('hardware.create') }}" tabindex="-1">
                                                     <x-icon type="assets" />
                                                     {{ trans('general.asset') }}
@@ -222,7 +222,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                             </li>
                                         @endcan
                                         @can('create', \App\Models\License::class)
-                                            <li {!! (Request::is('licenses/create') ? 'class="active"' : '') !!}>
+                                            <li{!! (Request::is('licenses/create') ? ' class="active"' : '') !!}>
                                                 <a href="{{ route('licenses.create') }}" tabindex="-1">
                                                     <x-icon type="licenses" />
                                                     {{ trans('general.license') }}
@@ -268,18 +268,25 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @can('admin')
                                 @if ($snipeSettings->show_alerts_in_menu=='1')
                                     <!-- Tasks: style can be found in dropdown.less -->
-                                    <?php $alert_items = Helper::checkLowInventory(); ?>
+                                    <?php $alert_items = Helper::checkLowInventory(); $deprecations = Helper::deprecationCheck()?>
 
                                     <li class="dropdown tasks-menu">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <x-icon type="alerts" />
                                             <span class="sr-only">{{ trans('general.alerts') }}</span>
-                                            @if (count($alert_items))
-                                                <span class="label label-danger">{{ count($alert_items) }}</span>
+                                            @if (count($alert_items) || count($deprecations))
+                                                <span class="label label-danger">{{ count($alert_items) + count($deprecations) }}</span>
                                             @endif
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li class="header">{{ trans('general.quantity_minimum', array('count' => count($alert_items))) }}</li>
+                                            @if($deprecations)
+                                                @foreach ($deprecations as $key => $deprecation)
+                                                    @if ($deprecation['check'])
+                                                        <li class="header alert-warning">{!! $deprecation['message'] !!}</li>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                            <li class="header">{{ trans_choice('general.quantity_minimum', count($alert_items)) }}</li>
                                             <li>
                                                 <!-- inner menu: contains the actual data -->
                                                 <ul class="menu">
@@ -287,7 +294,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                                     @for($i = 0; count($alert_items) > $i; $i++)
 
                                                         <li><!-- Task item -->
-                                                            <a href="{{route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
+                                                            <a href="{{ route($alert_items[$i]['type'].'.show', $alert_items[$i]['id'])}}">
                                                                 <h2 class="task_menu">{{ $alert_items[$i]['name'] }}
                                                                     <small class="pull-right">
                                                                         {{ $alert_items[$i]['remaining'] }} {{ trans('general.remaining') }}
@@ -366,12 +373,14 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                         </li>
                                         @endcan
 
+                                        @if (Auth::user()->ldap_import!='1')
                                         <li>
                                             <a href="{{ route('account.password.index') }}">
                                                 <x-icon type="password" class="fa-fw" />
                                                 {{ trans('general.changepassword') }}
                                             </a>
                                         </li>
+                                        @endif
 
 
                                         @can('self.api')
@@ -517,7 +526,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                     @can('audit', \App\Models\Asset::class)
                                         <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('assets.audit.due') }}">
-                                                <x-icon type="due" class="text-yellow fa-fw"/>
+                                                <x-icon type="audit" class="text-yellow fa-fw"/>
                                                 {{ trans('general.audit_due') }}
                                                 <span class="badge">{{ (isset($total_due_and_overdue_for_audit)) ? $total_due_and_overdue_for_audit : '' }}</span>
                                             </a>
@@ -804,7 +813,6 @@ dir="{{ Helper::determineLanguageDirection() }}">
             <!-- Content Wrapper. Contains page content -->
 
             <div class="content-wrapper" role="main" id="setting-list">
-                <barepay></barepay>
 
                 @if ($debug_in_production)
                     <div class="row" style="margin-bottom: 0px; background-color: red; color: white; font-size: 15px;">
@@ -818,25 +826,72 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 @endif
 
                 <!-- Content Header (Page header) -->
-                <section class="content-header" style="padding-bottom: 30px;">
-                    <h1 class="pull-left pagetitle">@yield('title') </h1>
+                <section class="content-header">
 
-                    @if (isset($helpText))
-                        @include ('partials.more-info',
-                                               [
-                                                   'helpText' => $helpText,
-                                                   'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
-                                               ])
-                    @endif
-                    <div class="pull-right">
-                        @yield('header_right')
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-bottom: 0px;">
+
+                        <style>
+                            .breadcrumb-item {
+                                display: inline;
+                                list-style: none;
+                            }
+                        </style>
+
+                            <h1 class="pull-left pagetitle" style="font-size: 22px; margin-top: 5px;">
+
+                                @if (Breadcrumbs::has() && (Breadcrumbs::current()->count() > 1))
+                                    <ul style="padding-left: 0;">
+
+                                    @foreach (Breadcrumbs::current() as $crumbs)
+                                        @if ($crumbs->url() && !$loop->last)
+                                            <li class="breadcrumb-item">
+                                                <a href="{{ $crumbs->url() }}">
+                                                    @if ($loop->first)
+                                                        {!! Blade::render($crumbs->title()) !!}
+                                                    @else
+                                                        {{ Blade::render($crumbs->title()) }}
+                                                    @endif
+                                                </a>
+                                                <x-icon type="angle-right" />
+                                            </li>
+                                        @elseif (is_null($crumbs->url()) && !$loop->last)
+                                            <li class="breadcrumb-item active">
+                                                {{ $crumbs->title() }}
+                                                <x-icon type="angle-right" />
+                                            </li>
+                                       @else
+                                            <li class="breadcrumb-item active">
+                                                {{ $crumbs->title() }}
+                                            </li>
+                                        @endif
+                                    @endforeach
+
+                                    </ul>
+                                @else
+                                    @yield('title')
+                                @endif
+
+                            </h1>
+
+                                @if (isset($helpText))
+                                    @include ('partials.more-info',
+                                                           [
+                                                               'helpText' => $helpText,
+                                                               'helpPosition' => (isset($helpPosition)) ? $helpPosition : 'left'
+                                                           ])
+                                @endif
+                                <div class="pull-right">
+                                    @yield('header_right')
+                                </div>
+
+                        </div>
                     </div>
-
-
                 </section>
 
 
-                <section class="content" id="main" tabindex="-1">
+                <section class="content" id="main" tabindex="-1" style="padding-top: 0px;">
 
                     <!-- Notifications -->
                     <div class="row">
@@ -865,7 +920,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 <div class="1hidden-xs pull-left">
                     <div class="pull-left" >
                         <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software, made with <x-icon type="heart" style="color: #a94442; font-size: 10px" />
-                            <span class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+                            <span class="sr-only">love</span> by <a href="https://bsky.app/profile/snipeitapp.com" rel="noopener">@snipeitapp</a>.
                     </div>
                     <div class="pull-right">
                     @if ($snipeSettings->version_footer!='off')
@@ -989,8 +1044,8 @@ dir="{{ Helper::determineLanguageDirection() }}">
                 errorElement: 'span',
                 errorPlacement: function(error, element) {
                     $(element).hasClass('select2') || $(element).hasClass('js-data-ajax')
-                        // If the element is a select2 then place the error above the input
-                        ? element.parents('.required').append(error)
+                        // If the element is a select2 then append the error to the parent div
+                        ? element.parent('div').append(error)
                         // Otherwise place it after
                         : error.insertAfter(element);
                 },

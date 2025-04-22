@@ -13,8 +13,6 @@
         <div class="col-md-12">
             <div class="box box-default">
                 <div class="box-body">
-                    <div class="table-responsive">
-
                         <table
                                 data-cookie-id-table="accessoriesReport"
                                 data-pagination="true"
@@ -45,8 +43,6 @@
                             <tbody>
                             </tbody>
                         </table>
-
-                    </div>
                 </div>
             </div>
         </div>

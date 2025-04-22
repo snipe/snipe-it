@@ -23,7 +23,7 @@ return array(
     ),
 
     'upload' => array(
-        'error'   => 'Archivo(s) no cargado. Por favor, vuelva a intentarlo.',
+        'error'   => 'Archivo(s) no cargado(s). Por favor, inténtelo de nuevo.',
         'success' => 'Archivo(s) cargado correctamente.',
         'nofiles' => 'No seleccionó ningún archivo para ser cargado, o el archivo que seleccionó es demasiado grande',
         'invalidfiles' => 'Uno o más de sus archivos es demasiado grande o es un tipo de archivo que no está permitido. Los tipos de archivo permitidos son png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml y lic.',
@@ -37,19 +37,20 @@ return array(
     'delete' => array(
         'confirm'   => '¿Está seguro de que desea eliminar esta licencia?',
         'error'   => 'Hubo un problema al eliminar la licencia. Por favor, inténtelo de nuevo.',
-        'success' => 'Categoría eliminada.'
+        'success' => 'La licencia se ha eliminado correctamente.'
     ),
 
     'checkout' => array(
         'error'   => 'Hubo un problema asignando la licencia. Por favor, inténtelo de nuevo.',
         'success' => 'La licencia fue asignada con éxito',
-        'not_enough_seats' => 'No hay suficientes asientos de licencia disponibles para la compra',
+        'not_enough_seats' => 'No hay suficientes licencias disponibles para asignar',
         'mismatch' => 'La licencia proporcionada no coincide con la licencia seleccionada',
         'unavailable' => 'Esta licencia no está disponible para ser asignada.',
     ),
 
     'checkin' => array(
         'error'   => 'Hubo un problema ingresando la licencia. Por favor, inténtelo de nuevo.',
+        'not_reassignable' => 'La licencia no se puede volver a asignar',
         'success' => 'La licencia fue ingresada correctamente'
     ),
 

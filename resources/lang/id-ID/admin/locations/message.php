@@ -3,12 +3,12 @@
 return array(
 
     'does_not_exist' => 'Lokasi tidak ada.',
-    'assoc_users'    => 'This location is not currently deletable because it is the location of record for at least one asset or user, has assets assigned to it, or is the parent location of another location. Please update your records to no longer reference this location and try again. ',
+    'assoc_users'    => 'Lokasi ini saat ini tidak dapat dihapus karena merupakan lokasi catatan untuk minimal satu aset atau pengguna, memiliki aset yang ditetapkan pada lokasi tersebut, atau merupakan lokasi induk dari lokasi lain. Harap perbarui catatan Anda agar tidak lagi mereferensikan lokasi ini dan coba lagi ',
     'assoc_assets'	 => 'Lokasi saat ini dikaitkan dengan setidaknya oleh satu aset dan tidak dapat dihapus. Perbarui aset Anda yang tidak ada referensi dari lokasi ini dan coba lagi. ',
     'assoc_child_loc'	 => 'Lokasi saat ini digunakan oleh induk salah satu dari turunan lokasi dan tidak dapat di hapus. Mohon perbarui lokasi Anda ke yang tidak ada referensi dengan lokasi ini dan coba kembali. ',
     'assigned_assets' => 'Aset yang Ditetapkan',
     'current_location' => 'Lokasi Saat Ini',
-    'open_map' => 'Open in :map_provider_icon Maps',
+    'open_map' => 'Buka di Peta :map_provider_icon',
 
 
     'create' => array(
@@ -22,8 +22,8 @@ return array(
     ),
 
     'restore' => array(
-        'error'   => 'Location was not restored, please try again',
-        'success' => 'Location restored successfully.'
+        'error'   => 'Lokasi gagal dipulihkan, harap coba lagi',
+        'success' => 'Lokasi berhasil dipulihkan.'
     ),
 
     'delete' => array(

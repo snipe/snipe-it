@@ -2,45 +2,43 @@
 
 return array(
 
-    'account_already_exists' => 'An account with the this email already exists.',
-    'account_not_found'      => 'The username or password is incorrect.',
-    'account_not_activated'  => 'This user account is not activated.',
-    'account_suspended'      => 'This user account is suspended.',
-    'account_banned'         => 'This user account is banned.',
-    'throttle'               => 'Too many failed login attempts. Please try again in :minutes minutes.',
+    'account_already_exists' => 'Účet s touto emailovou adresou už existuje.',
+    'account_not_found'      => 'Používateľské meno alebo heslo je nesprávne.',
+    'account_not_activated'  => 'Tento účet nie je aktivovaný.',
+    'account_suspended'      => 'Tento účet bol pozastavený.',
 
     'two_factor' => array(
-        'already_enrolled'      => 'Your device is already enrolled.',
-        'success'               => 'You have successfully logged in.',
-        'code_required'         => 'Two-factor code is required.',
-        'invalid_code'          => 'Two-factor code is invalid.',
-        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
-        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+        'already_enrolled'      => 'Vaše zariadenie bolo už bolo zapísané.',
+        'success'               => 'Úspešne ste sa prihlásili.',
+        'code_required'         => 'Dvojfaktorová autentifikácia je vyžadovaná.',
+        'invalid_code'          => 'Kód pre dvojfaktorovú autentifikáciu je neplatný.',
+        'enter_two_factor_code' => 'Prosím zadajte váš kód pre dvojfaktorovú autentifikáciu.',
+        'please_enroll'         => 'Prosím pridajte zariadenie pre dvojfaktorovú autentifikáciu.',
     ),
 
     'signin' => array(
-        'error'   => 'There was a problem while trying to log you in, please try again.',
-        'success' => 'You have successfully logged in.',
+        'error'   => 'Nastal problém pri pokuse o prihlásenie, prosím skúste znovu.',
+        'success' => 'Úspešne ste sa prihlásili.',
     ),
 
     'logout' => array(
-        'error'   => 'There was a problem while trying to log you out, please try again.',
-        'success' => 'You have successfully logged out.',
+        'error'   => 'Nastal problém pri pokuse o odhlásenie, prosím skúste znovu.',
+        'success' => 'Úspešne ste sa odhlásili.',
     ),
 
     'signup' => array(
-        'error'   => 'There was a problem while trying to create your account, please try again.',
-        'success' => 'Account sucessfully created.',
+        'error'   => 'Nastal problém pri vytvorení vášho účtu, prosím skúste znovu.',
+        'success' => 'Účet bol úspešne vytvorený.',
     ),
 
     'forgot-password' => array(
-        'error'   => 'There was a problem while trying to get a reset password code, please try again.',
-        'success' => 'If that email address exists in our system, a password recovery email has been sent.',
+        'error'   => 'Nastal problém pri pokuse o získanie kódu pre reset hesla, prosím skúste znovu.',
+        'success' => 'Ak uvedená emailová adresa existuje v našom systému, bude na ňu odoslaný email s inštrukciami pre obnovu hesla.',
     ),
 
     'forgot-password-confirm' => array(
-        'error'   => 'There was a problem while trying to reset your password, please try again.',
-        'success' => 'Your password has been successfully reset.',
+        'error'   => 'Nastal problém pri pokuse o obnovu hesla, prosím skúste znovu.',
+        'success' => 'Vaše heslo bolo úspešne obnovené.',
     ),
 
 

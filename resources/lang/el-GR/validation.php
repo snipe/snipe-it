@@ -173,6 +173,7 @@ return [
     'ulid' => 'The :attribute field must be a valid ULID.',
     'uuid' => 'The :attribute field must be a valid UUID.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -184,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρες.',
+    'checkboxes'           => ':attribute περιέχει μη έγκυρες επιλογές.',
+    'radio_buttons'        => ':attribute δεν είναι έγκυρο.',
+    
     'custom' => [
         'alpha_space' => 'Το πεδίο ιδιοτήτων: περιέχει ένα χαρακτήρα που δεν επιτρέπεται.',
-        'email_array'      => 'Μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρες.',
+
         'hashed_pass'      => 'Ο τρέχων κωδικός πρόσβασης είναι εσφαλμένος',
         'dumbpwd'          => 'Αυτός ο κωδικός πρόσβασης είναι πολύ συνηθισμένος.',
         'statuslabel_type' => 'Πρέπει να επιλέξετε έναν έγκυρο τύπο ετικέτας κατάστασης',
@@ -194,7 +199,7 @@ return [
         'custom_field_not_found_on_model' => 'This field seems to exist, but is not available on this Asset Model\'s fieldset.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
         'purchase_date.date_format'     => 'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
         'last_audit_date.date_format'   =>  'Το :attribute πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD hh:mm:ss',
@@ -203,9 +208,14 @@ return [
         'expected_checkin.date_format'  =>  'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
         'start_date.date_format'        =>  'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
         'end_date.date_format'          =>  'Το χαρακτηριστικό: πρέπει να είναι έγκυρη ημερομηνία σε μορφή YYYY-MM-DD',
-        'checkboxes'           => ':attribute περιέχει μη έγκυρες επιλογές.',
-        'radio_buttons'        => ':attribute δεν είναι έγκυρο.',
         'invalid_value_in_field' => 'Μη έγκυρη τιμή που περιλαμβάνεται σε αυτό το πεδίο',
+
+        'ldap_username_field' => [
+            'not_in' =>         '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> '],
+        'ldap_filter' => ['regex' => 'This value should probably not be wrapped in parentheses.'],
+
         ],
     /*
     |--------------------------------------------------------------------------

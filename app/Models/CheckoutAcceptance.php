@@ -35,7 +35,7 @@ class CheckoutAcceptance extends Model
     /**
      * The resource that was is out
      *
-     * @return Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
     public function checkoutable()
     {

@@ -40,6 +40,9 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.assets.requested');
 
+        Route::post('request/{asset}', [Api\CheckoutRequest::class, 'store'])->name('api.assets.requests.store');
+        Route::post('request/{asset}/cancel', [Api\CheckoutRequest::class, 'destroy'])->name('api.assets.requests.destroy');
+
         Route::get('requestable/hardware',
             [
                 Api\AssetsController::class, 
@@ -430,13 +433,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             'parameters' => ['group' => 'group_id'],
             ]
         ); // end groups API routes
-        
+
 
      /**
       * Assets API routes
       */
       Route::group(['prefix' => 'hardware'], function () {
-        
+
         Route::get('selectlist',
             [
                 Api\AssetsController::class, 
@@ -508,8 +511,17 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         ->where(['action' => 'audit|audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
 
 
+        // Legacy URL for audit
+          Route::post('audit',
+              [
+                  Api\AssetsController::class,
+                  'audit'
+              ]
+          )->name('api.asset.audit.legacy');
 
-        Route::post('audit',
+
+          // Newer url for audit
+        Route::post('{asset}/audit',
         [
             Api\AssetsController::class, 
             'audit'
@@ -524,26 +536,27 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         )->name('api.asset.checkin');
 
         Route::post('{id}/checkout',
-        [
+          [
             Api\AssetsController::class, 
             'checkout'
-        ]
+          ]
         )->name('api.asset.checkout');
 
-      Route::post('{asset_id}/restore',
+        Route::post('{asset_id}/restore',
           [
               Api\AssetsController::class,
               'restore'
           ]
-      )->name('api.assets.restore');
-        Route::post('{asset_id}/files',
+        )->name('api.assets.restore');
+
+        Route::post('{asset}/files',
           [
               Api\AssetFilesController::class,
               'store'
           ]
         )->name('api.assets.files.store');
 
-        Route::get('{asset_id}/files',
+        Route::get('{asset}/files',
           [
               Api\AssetFilesController::class,
               'list'
@@ -563,7 +576,29 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
               'destroy'
           ]
         )->name('api.assets.files.destroy');
+
+
+
+          /** Begin assigned routes */
+          Route::get('{asset}/assigned/assets',
+              [
+                  Api\AssetsController::class,
+                  'assignedAssets'
+              ]
+          )->name('api.assets.assigned_assets');
+
+          Route::get('{asset}/assigned/accessories',
+              [
+                  Api\AssetsController::class,
+                  'assignedAccessories'
+              ]
+          )->name('api.assets.assigned_accessories');
+          /** End assigned routes */
+
       });
+
+
+
 
     // pulling this out of resource route group to begin normalizing for route-model binding.
     // this would probably keep working with the resource route group, but the general practice is for
@@ -698,6 +733,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.locations.selectlist');
 
+            // Users within a location
             Route::get('{location}/users',
                 [
                     Api\LocationsController::class, 
@@ -705,13 +741,32 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.locations.viewusers');
 
+
+            // Get list of assets with a default location
             Route::get('{location}/assets',
             [
                 Api\LocationsController::class, 
                 'assets'
             ]
             )->name('api.locations.viewassets');
-    
+
+
+            // Add a comment here, you moron
+            /** Begin assigned routes */
+            Route::get('{location}/assigned/assets',
+                [
+                    Api\LocationsController::class,
+                    'assignedAssets'
+                ]
+            )->name('api.locations.assigned_assets');
+
+            Route::get('{location}/assigned/accessories',
+                [
+                    Api\LocationsController::class,
+                    'assignedAccessories'
+                ]
+            )->name('api.locations.assigned_accessories');
+            /** End assigned routes */
         }); 
     
         Route::resource('locations', 
@@ -909,13 +964,11 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         Route::resource('settings', 
         Api\SettingsController::class,
         ['names' => [
-                'index' => 'api.settings.index',
                 'show' => 'api.settings.show',
                 'update' => 'api.settings.update',
                 'store' => 'api.settings.store',
-                'destroy' => 'api.settings.destroy',
             ],
-        'except' => ['create', 'edit'],
+        'except' => ['create', 'edit', 'index', 'destroy'],
         'parameters' => ['setting' => 'setting_id'],
         ]
         ); // end settings API
@@ -1261,7 +1314,9 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             )->name('api.activity.index');
         }); // end reports api routes
 
-        /**
+
+
+    /**
          * Version API routes
          */
 
@@ -1281,5 +1336,15 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     'payload' => null,
                 ], 404);
         }); // end fallback routes
+
+        /**
+         * Generate label routes
+         */
+        Route::post('hardware/labels', [
+            Api\AssetsController::class,
+            'getLabels'
+        ])->name('api.assets.labels');
+        // end generate label routes
+
 
 }); // end API routes

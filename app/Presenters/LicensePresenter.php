@@ -41,7 +41,7 @@ class LicensePresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/licenses/form.license_key'),
-                'formatter' => 'licensesLinkFormatter',
+                'formatter' => 'licenseKeyFormatter',
             ], [
                 'field' => 'expiration_date',
                 'searchable' => true,
@@ -80,24 +80,28 @@ class LicensePresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('general.manufacturer'),
                 'formatter' => 'manufacturersLinkObjFormatter',
-            ], [
-                'field' => 'seats',
-                'searchable' => false,
-                'sortable' => true,
-                'title' => trans('admin/accessories/general.total'),
-            ], [
-                'field' => 'free_seats_count',
-                'searchable' => false,
-                'sortable' => true,
-                'title' => trans('admin/accessories/general.remaining'),
-            ],
-            [
+            ],  [
                 'field' => 'min_amt',
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('mail.min_QTY'),
                 'formatter' => 'minAmtFormatter',
-            ],[
+                'class' => 'text-right text-padding-number-cell',
+            ], [
+                'field' => 'seats',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('admin/accessories/general.total'),
+                'class' => 'text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
+            ], [
+                'field' => 'free_seats_count',
+                'searchable' => false,
+                'sortable' => true,
+                'title' => trans('admin/accessories/general.remaining'),
+                'class' => 'text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
+            ], [
                 'field' => 'purchase_date',
                 'searchable' => true,
                 'sortable' => true,

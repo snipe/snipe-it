@@ -51,6 +51,8 @@ class SQLStreamer {
             /* we *could* have made the ^INSERT INTO blah VALUES$ turn on the capturing state, and closed it with
                a ^(blahblah);$ but it's cleaner to not have to manage the state machine. We're just going to
                assume that (blahblah), or (blahblah); are values for INSERT and are always acceptable. */
+            "<^/\*!40101 SET NAMES '?[a-zA-Z0-9_-]+'? \*/;$>"                                   => false, //using weird delimiters (<,>) for readability. allow quoted or unquoted charsets
+            "<^/\*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' \*/;$>" => false, //same, now handle zero-values
         ];
 
         foreach($allowed_statements as $statement => $statechange) {
@@ -287,6 +289,7 @@ class RestoreFromBackup extends Command
 
         $interesting_files = [];
         $boring_files = [];
+        $unsafe_files = [];
 
         for ($i = 0; $i < $za->numFiles; $i++) {
             $stat_results = $za->statIndex($i);
@@ -326,7 +329,8 @@ class RestoreFromBackup extends Command
                 }
             }
             $good_extensions = ['png', 'gif', 'jpg', 'svg', 'jpeg', 'doc', 'docx', 'pdf', 'txt',
-                'zip', 'rar', 'xls', 'xlsx', 'lic', 'xml', 'rtf', 'webp', 'key', 'ico',];
+                                'zip', 'rar', 'xls', 'xlsx', 'lic', 'xml', 'rtf', 'webp', 'key', 'ico', 'avif'
+            ];
             foreach (array_merge($private_files, $public_files) as $file) {
                 $has_wildcard = (strpos($file, '*') !== false);
                 if ($has_wildcard) {
@@ -336,7 +340,9 @@ class RestoreFromBackup extends Command
                 if ($last_pos !== false) {
                     $extension = strtolower(pathinfo($raw_path, PATHINFO_EXTENSION));
                     if (!in_array($extension, $good_extensions)) {
-                        $this->warn('Potentially unsafe file ' . $raw_path . ' is being skipped');
+                        // gathering potentially unsafe files here to return at exit
+                        $unsafe_files[] = $raw_path;
+                        Log::debug('Potentially unsafe file '.$raw_path.' is being skipped');
                         $boring_files[] = $raw_path;
                         continue 2;
                     }
@@ -370,7 +376,8 @@ class RestoreFromBackup extends Command
         if ($this->option('sanitize-guess-prefix')) {
             $prefix = SQLStreamer::guess_prefix($sql_contents);
             $this->line($prefix);
-            return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitze your SQL.");
+
+            return $this->info("Re-run this command with '--sanitize-with-prefix=".$prefix."' to see an attempt to sanitize your SQL.");
         }
 
         // If we're doing --sql-stdout-only, handle that now so we don't have to open pipes to mysql and all of that silliness
@@ -502,6 +509,11 @@ class RestoreFromBackup extends Command
             $this->line('');
         } else {
             $this->info(count($interesting_files).' files were succesfully transferred');
+        }
+        if (count($unsafe_files) > 0) {
+            foreach ($unsafe_files as $unsafe_file) {
+                $this->warn('Potentially unsafe file '.$unsafe_file.' was skipped');
+            }
         }
         foreach ($boring_files as $boring_file) {
             $this->warn($boring_file.' was skipped.');

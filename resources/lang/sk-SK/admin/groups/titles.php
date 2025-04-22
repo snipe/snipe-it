@@ -10,7 +10,7 @@ return [
     'group_admin' 	 		=> 'Administrátor skupiny',
     'allow' 	 			=> 'Povoliť',
     'deny' 	 				=> 'Odmietnuť',
-    'permission'            => 'Permission',
-    'grant'                 => 'Grant',
-    'no_permissions'        => 'This group has no permissions.'
+    'permission'            => 'Oprávnenia',
+    'grant'                 => 'Udeliť',
+    'no_permissions'        => 'Táto skupina nemá žiadne oprávnenia.'
 ];

@@ -6,8 +6,6 @@ return array(
     'account_not_found'      => 'Nazwa użytkownika lub hasło jest niepoprawne.',
     'account_not_activated'  => 'Użytkownik jest nieaktywowany.',
     'account_suspended'      => 'Twoje konto zostało zawieszone.',
-    'account_banned'         => 'Twoje konto zostało zablokowane.',
-    'throttle'               => 'Zbyt wiele nieudanych prób logowania. Spróbuj ponownie za :minutes minut(y).',
 
     'two_factor' => array(
         'already_enrolled'      => 'Twoje urządzenie jest już zapisane.',
@@ -15,7 +13,7 @@ return array(
         'code_required'         => 'Kod weryfikacji dwuskładnikowej jest wymagany.',
         'invalid_code'          => 'Kod weryfikacji dwuskładnikowej jest nieprawidłowy.',
         'enter_two_factor_code' => 'Wprowadź kod uwierzytelniania dwuskładnikowego.',
-        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+        'please_enroll'         => 'Proszę zapisać urządzenie w uwierzytelnianiu dwuskładnikowym.',
     ),
 
     'signin' => array(

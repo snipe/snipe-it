@@ -3,8 +3,8 @@
 
 {{ trans('mail.admin_has_created', ['web' => $snipeSettings->site_name]) }}
 
-{{ trans('mail.login') }} {{ $username }} <br>
-{{ trans('mail.password') }} {{ $password }}
+{{ trans('mail.login') }}: {{ $username }} <br>
+{{ trans('mail.password') }}: {{ $password }}
 
 @component('mail::button', ['url' => $url])
 Go To {{$snipeSettings->site_name}}

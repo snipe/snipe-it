@@ -38,6 +38,8 @@ class ComponentsTransformer
                 'name' => e($component->category->name),
             ] : null,
             'supplier' => ($component->supplier) ? ['id' => $component->supplier->id, 'name'=> e($component->supplier->name)] : null,
+            'manufacturer' => ($component->manufacturer) ? ['id' => $component->manufacturer->id, 'name'=> e($component->manufacturer->name)] : null,
+            'model_number' => ($component->model_number) ? e($component->model_number) : null,
             'order_number'  => e($component->order_number),
             'purchase_date' =>  Helper::getFormattedDateObject($component->purchase_date, 'date'),
             'purchase_cost' => Helper::formatCurrencyOutput($component->purchase_cost),
@@ -60,7 +62,7 @@ class ComponentsTransformer
             'checkout' => Gate::allows('checkout', Component::class),
             'checkin' => Gate::allows('checkin', Component::class),
             'update' => Gate::allows('update', Component::class),
-            'delete' => Gate::allows('delete', Component::class),
+            'delete' => $component->isDeletable(),
         ];
         $array += $permissions_array;
 

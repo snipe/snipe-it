@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'Rhif Unigryw',
     'require_acceptance'      	=> 'Derbyn',
     'title'      				=> 'Enw Ategolyn',
-
-
 );

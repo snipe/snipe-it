@@ -8,23 +8,23 @@ return array(
 
     'create' => array(
         'error'   => 'Soo saaraha lama abuurin, fadlan isku day mar kale.',
-        'success' => 'Soo saaraha ayaa si guul leh u abuuray'
+        'success' => 'Soo saaraha ayaa ku guuleystay inuu abuuro.'
     ),
 
     'update' => array(
         'error'   => 'Soo saaraha lama cusboonaysiin, fadlan isku day mar kale',
-        'success' => 'Soo saaraha si guul leh ayaa loo cusboonaysiiyay'
+        'success' => 'Soo saaraha ayaa ku guuleystay inuu cusbooneysiiyo.'
     ),
 
     'restore' => array(
         'error'   => 'Soo saaraha lama soo celin, fadlan isku day mar kale',
-        'success' => 'Soo saaraha si guul leh ayaa loo soo celiyay'
+        'success' => 'Soo saaraha ayaa ku guuleystay inuu dib usoo celiyio.'
     ),
 
     'delete' => array(
         'confirm'   => 'Ma hubtaa inaad rabto inaad tirtirto soo saarahan?',
-        'error'   => 'Waxaa jirtay arrin la tirtiray soo saaraha. Fadlan isku day mar kale',
-        'success' => 'Soo saaraha si guul leh ayaa loo tirtiray'
+        'error'   => 'Cillad ayaa kajirta tir-tiradda soo saaraha. Fadlan iskuday markale.',
+        'success' => 'Soo saaraha si guul leh ayaa loo tirtiray.'
     )
 
 );

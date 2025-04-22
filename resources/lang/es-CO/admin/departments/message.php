@@ -7,7 +7,7 @@ return array(
     'assoc_users'	 => 'Este departamento está actualmente asociado con al menos un usuario y no puede ser eliminado. Por favor, actualice sus usuarios para que no hagan referencia a este departamento e inténtelo de nuevo. ',
     'create' => array(
         'error'   => 'El departamento no fue creado, por favor, inténtelo de nuevo.',
-        'success' => 'Departamento fue creado con éxito.'
+        'success' => 'Departamento creado correctamente.'
     ),
     'update' => array(
         'error'   => 'El departamento no fue actualizado, por favor inténtelo de nuevo',
@@ -16,7 +16,7 @@ return array(
     'delete' => array(
         'confirm'   	=> '¿Está seguro de que desea eliminar este departamento?',
         'error'   => 'Hubo un problema al borrar el departamento. Por favor, inténtelo de nuevo.',
-        'success' => 'El departamento fue eliminado con éxito.'
+        'success' => 'El departamento fue eliminado correctamente.'
     )
 
 );

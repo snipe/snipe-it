@@ -173,6 +173,7 @@ return [
     'ulid' => 'Полето :attribute мора да биде валидна ULID.',
     'uuid' => 'Полето :attribute мора да биде валидна UUID.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -184,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Една или повеќе е-пошти не се валидни.',
+    'checkboxes'           => ':attribute содржи невалидни опции.',
+    'radio_buttons'        => ':attribute не е валиден.',
+    
     'custom' => [
         'alpha_space' => 'Полето :attribute содржи знак што не е дозволен.',
-        'email_array'      => 'Една или повеќе е-пошти не се валидни.',
+
         'hashed_pass'      => 'Вашата тековна лозинка е неточна',
         'dumbpwd'          => 'Таа лозинка е премногу честа.',
         'statuslabel_type' => 'Мора да изберете валидна етикета за статус',
@@ -194,7 +199,7 @@ return [
         'custom_field_not_found_on_model' => 'Полето изгледа дека постои, но не е достапно во овој модел на средство\\a.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
-        // We use this because the default error message for date_format is reflects php Y-m-d, which non-PHP
+        // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
         'purchase_date.date_format'     => 'Полето :attribute мора да биде валиден датум во YYYY-MM-DD формат',
         'last_audit_date.date_format'   =>  'Полето :attribute мора да биде валиден датум во YYYY-MM-DD hh:mm:ss формат',
@@ -203,9 +208,14 @@ return [
         'expected_checkin.date_format'  =>  'Полето :attribute мора да биде валиден датум во YYYY-MM-DD формат',
         'start_date.date_format'        =>  'Полето :attribute мора да биде валиден датум во YYYY-MM-DD формат',
         'end_date.date_format'          =>  'Полето :attribute мора да биде валиден датум во YYYY-MM-DD fформат',
-        'checkboxes'           => ':attribute содржи невалидни опции.',
-        'radio_buttons'        => ':attribute не е валиден.',
         'invalid_value_in_field' => 'Невалидна вредност вклучена во полето',
+
+        'ldap_username_field' => [
+            'not_in' =>         '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.'
+        ],
+        'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> '],
+        'ldap_filter' => ['regex' => 'This value should probably not be wrapped in parentheses.'],
+
         ],
     /*
     |--------------------------------------------------------------------------

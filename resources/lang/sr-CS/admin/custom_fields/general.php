@@ -5,7 +5,7 @@ return [
     'manage'                    => 'Uredi',
     'field'		                => 'Polje',
     'about_fieldsets_title'		=> 'O grupi polja',
-    'about_fieldsets_text'		=> 'Skupovi polja vam omogućavaju da kreirate grupe prilagođenih polja koja se često ponovo koriste za određene tipove modela sredstava.',
+    'about_fieldsets_text'		=> 'Skupovi polja vam omogućavaju da kreirate grupe prilagođenih polja koja se često ponovo koriste za određene tipove modela imovine.',
     'custom_format'             => 'Prilagodljivi Regex format...',
     'encrypt_field'      	        => 'Enkriptujte vrednost polja u bazi podataka',
     'encrypt_field_help'      => 'UPUZORENJE: Nije moguće pretraživati enkriptovana polja.',
@@ -35,7 +35,7 @@ return [
     'create_field_title' => 'Kreirajte prilagođeno polje',
     'value_encrypted'      	        => 'Vrednost ovog polja je šifrovana u bazi podataka. Samo administratori će moći da vide dešifrovanu vrednost',
     'show_in_email'     => 'Uvrsti vrednost ovog polja u e-porukama zaduženja koja se šalju korisnicima? Enkriptovana polja se ne mogu uvrstiti u e-porukama',
-    'show_in_email_short'     => 'Uvrsti u e-poruke.',
+    'show_in_email_short' => 'Uvrsti u e-poruke',
     'help_text' => 'Pomoćni tekst',
     'help_text_description' => 'Ovo je opcioni tekst koji će se pojaviti ispod elemenata obrasca tokom uređivanja elementa da bi se pružio kontekst na polju.',
     'about_custom_fields_title' => 'O prilagodljivom polju',
@@ -57,5 +57,8 @@ return [
     'show_in_requestable_list_short' => 'Prikaži u spisku imovine koja se može zatražiti',
     'show_in_requestable_list' => 'Prikaži vrednost u spisku imovine koja se može zatražiti. Enkriptovana polja neće biti prikazana',
     'encrypted_options' => 'Ovo polje je enkriptovano, zato neke opcije prikaza neće biti dostupne.',
+    'display_checkin' => 'Prikaži u formularima razduživanja',
+    'display_checkout' => 'Prikaži u formularima zaduživanja',
+    'display_audit' => 'Prikaži u formularu revizije',
 
 ];

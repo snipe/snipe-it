@@ -4,12 +4,12 @@ return [
 
     'update' => [
         'error'                 => 'Khalad ayaa dhacay markii la cusboonaysiiyay ',
-        'success'               => 'Dejinta si guul leh ayaa loo cusboonaysiiyay',
+        'success'               => 'Cusbooneysiinta qaabeynta waa lagu guuleystay.',
     ],
     'backup' => [
         'delete_confirm'        => 'Ma hubtaa inaad jeclaan lahayd inaad tirtirto faylka kaydka ah? Tallaabadan lama noqon karo. ',
         'file_deleted'          => 'Faylka kaabta ayaa si guul leh loo tirtiray ',
-        'generated'             => 'Fayl cusub oo gurmad ah ayaa si guul leh loo abuuray',
+        'generated'             => 'Feyl cusub oo keyd ah ayaa lagu guuleystay in la abuuro.',
         'file_not_found'        => 'Faylkaas kaydka ah ayaa laga waayay seerfarka.',
         'restore_warning'       => 'Haa, soo celi Waxaan qirayaa in tani ay dib u qori doonto xog kasta oo hadda ku jirta kaydka xogta. Tani waxay sidoo kale ka saari doontaa dhammaan isticmaalayaashaada jira (oo ay ku jirto adiga).',
         'restore_confirm'       => 'Ma hubtaa inaad rabto inaad ka soo celiso xogtaada: filename?'
@@ -20,7 +20,7 @@ return [
     'purge' => [
         'error'     => 'Khalad ayaa dhacay markii la nadiifinayo ',
         'validation_failed'     => 'Xaqiijinta nadiifintaadu waa khalad. Fadlan ku qor kelmadda "DELETE" sanduuqa xaqiijinta.',
-        'success'               => 'Diiwaanada la tirtiray ayaa si guul leh loo nadiifiyay',
+        'success'               => 'Diiwaanada la tirtiray si guul leh ayaa loo nadiifiyay.',
     ],
     'mail' => [
         'sending' => 'Diraya Iimayl tijaabo ah...',
@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Tijaabi aqoonsiga LDAP...',
         'authentication_success' => 'Isticmaaluhu wuxuu ka xaqiijiyay LDAP si guul leh!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Diraya :app fariinta tijaabada abka...',
         'success' => 'Magacaaga:webhook_name Isdhexgalka wuu shaqeeyaa!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Waxbaa qaldamay. :app waxa uu kaga jawaabay: : error_message',
         'error_redirect' => 'CILAD: 301/302 :endpoint Sababo ammaan dartood, ma raacno dib u jiheynta Fadlan isticmaal barta dhamaadka dhabta ah.',
         'error_misc' => 'Waxbaa qaldamay. :( ',
-    ]
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

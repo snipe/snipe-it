@@ -22,6 +22,9 @@
 @if ((isset($item_tag)) && ($item_tag!=''))
 | **{{ trans('mail.asset_tag') }}** | {{ $item_tag }} |
 @endif
+@if (isset($item->model->category))
+| **{{ trans('general.category') }}** | {{ $item->model->category->name }} |
+@endif
 @if ((isset($item_model)) && ($item_model!=''))
 | **{{ trans('mail.asset_name') }}** | {{ $item_model }} |
 @endif

@@ -3,47 +3,58 @@
 return [
 
     'update' => [
-        'error'                 => 'Ett fel har uppstått under uppdateringen.',
-        'success'               => 'Inställningarna uppdaterades framgångsrikt.',
+        'error'                 => 'Ett fel har uppstått vid uppdatering. ',
+        'success'               => 'Inställningarna uppdaterades.',
     ],
     'backup' => [
-        'delete_confirm'        => 'Är du säker på att du vill ta bort den här säkerhetskopieringsfilen? Den här åtgärden kan inte ångras.',
-        'file_deleted'          => 'Säkerhetsfilen har tagits bort.',
-        'generated'             => 'En ny säkerhetskopieringsfil skapades med framgång.',
-        'file_not_found'        => 'Den säkerhetskopieringsfilen kunde inte hittas på servern.',
-        'restore_warning'       => 'Ja, återställ den. Jag är medveten att detta kommer att skriva över befintliga data som finns i databasen. Detta kommer också att logga ut alla dina befintliga användare (inklusive dig).',
-        'restore_confirm'       => 'Är du säker på att du vill återställa din databas från :filnamn?'
+        'delete_confirm'        => 'Är du säker på att du vill ta bort den här säkerhetskopian? Den här åtgärden kan inte ångras. ',
+        'file_deleted'          => 'Säkerhetskopian har tagits bort. ',
+        'generated'             => 'En ny säkerhetskopia skapades.',
+        'file_not_found'        => 'Säkerhetskopian kunde inte hittas på servern.',
+        'restore_warning'       => 'Ja, återställ den. Jag är medveten att detta kommer att skriva över befintlig data som redan finns i databasen. Detta kommer också att logga ut alla befintliga användare (inklusive dig själv).',
+        'restore_confirm'       => 'Är du säker på att du vill återställa din databas från :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please log in again.'
+        'success'               => 'Din säkerhetskopia har återställts. Vänligen logga in igen.'
     ],
     'purge' => [
-        'error'     => 'Ett fel har uppstått vid spolning.',
-        'validation_failed'     => 'Din rengöringsbekräftelse är felaktig. Vänligen skriv ordet "DELETE" i bekräftelsen rutan.',
-        'success'               => 'Raderade poster som rensats framgångsrikt.',
+        'error'     => 'Ett fel har uppstått vid radering. ',
+        'validation_failed'     => 'Raderingsbekräftelsekoden är felaktig. Vänligen skriv ordet "DELETE" i bekräftelserutan.',
+        'success'               => 'Tidigare raderade poster har raderats för gott.',
     ],
     'mail' => [
-        'sending' => 'Skicka Testmeddelande...',
+        'sending' => 'Skickar testmeddelande...',
         'success' => 'E-post skickat!',
-        'error' => 'Mailet kunde inte skickas.',
-        'additional' => 'Inga ytterligare felmeddelanden tillhandahålls. Kontrollera dina e-postinställningar och din app-logg.'
+        'error' => 'E-postmeddelandet kunde inte skickas.',
+        'additional' => 'Inga ytterligare felmeddelanden. Kontrollera dina e-postinställningar och din app-logg.'
     ],
     'ldap' => [
-        'testing' => 'Testar LDAP-anslutning, bindning och fråga ...',
-        '500' => '500 Serverfel. Kontrollera dina serverloggar för mer information.',
-        'error' => 'Något gick fel :(',
+        'testing' => 'Testar LDAP-anslutning, Bindning och Query...',
+        '500' => '500 Server Error. Kontrollera dina serverloggar för mer information.',
+        'error' => 'Något gick snett :(',
         'sync_success' => 'Ett urval av 10 användare som returneras från LDAP-servern baserat på dina inställningar:',
         'testing_authentication' => 'Testar LDAP-autentisering...',
-        'authentication_success' => 'Användaren är autentiserad mot LDAP framgångsrikt!'
+        'authentication_success' => 'Användaren har autentiserats via LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Skickar :app testmeddelande...',
-        'success' => 'Din :webhook_name Integration fungerar!',
+        'success' => 'Din :webhook_name-integration fungerar!',
         'success_pt1' => 'Klart! Kontrollera ',
         'success_pt2' => ' kanal för ditt testmeddelande, och se till att klicka på SPARA nedan för att lagra dina inställningar.',
-        '500' => '500 Server fel.',
-        'error' => 'Något gick fel. :app svarade med: :error_message',
-        'error_redirect' => 'FEL: 301/302 :endpoint returnerar en omdirigering. Av säkerhetsskäl följer vi inte omdirigeringar. Använd själva slutpunkten.',
-        'error_misc' => 'Någonting gick fel. :( ',
-    ]
+        '500' => '500 Server Error.',
+        'error' => 'Något gick snett! :app svarade med: :error_message',
+        'error_redirect' => 'FEL: 301/302 :endpoint returnerar en redirect. Av säkerhetsskäl följer vi inte redirects. Använd den faktiska endpointen.',
+        'error_misc' => 'Någonting gick snett :( ',
+        'webhook_fail' => 'webhook-notis misslyckades. Kontrollera att URL\'en fortfarande är giltig.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

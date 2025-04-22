@@ -13,4 +13,8 @@ return [
     'no_depreciations_warning'               => '<strong>Внимание: </strong>
                       Нямате нагласена амортизация.
                       Моля настройте поне една амортизация за да видите справката.',
+    'depreciation_method'                   => 'Справка за амортизации',
+    'linear_depreciation'                   => 'Linear (Default)',
+    'half_1'                                => 'Half-year convention, always applied',
+    'half_2'                                => 'Half-year convention, applied with condition',
 ];

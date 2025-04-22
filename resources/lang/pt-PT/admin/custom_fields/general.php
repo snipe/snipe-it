@@ -5,7 +5,7 @@ return [
     'manage'                    => 'Gerir',
     'field'		                => 'Campo',
     'about_fieldsets_title'		=> 'Sobre conjuntos de campos',
-    'about_fieldsets_text'		=> 'Conjuntos de campos permitem criar grupos de campos personalizados que são frequentemente reutilizados para modelos de artigos específicos.',
+    'about_fieldsets_text'		=> 'Conjuntos de campos permitem criar grupos de campos personalizados que são frequentemente reutilizados para modelos de artigos especificos.',
     'custom_format'             => 'Formato Regex personalizado...',
     'encrypt_field'      	        => 'Encriptar valor deste campo na base de dados',
     'encrypt_field_help'      => 'AVISO: Criptografar um campo torna-o não pesquisável.',
@@ -36,7 +36,7 @@ return [
     'create_field_title' => 'Criar um novo campo personalizado',
     'value_encrypted'      	        => 'O valor deste campo está encriptado na base de dados. apenas administradores poderão ver o valor desencriptado',
     'show_in_email'     => 'Incluir o valor deste campo nos e-mails de checktout enviados ao utilizador? Os campos encriptados não serão incluídos',
-    'show_in_email_short'     => 'Incluir nos e-mails.',
+    'show_in_email_short' => 'Incluir nos e-mails',
     'help_text' => 'Texto de Ajuda',
     'help_text_description' => 'Este é um texto opcional que irá aparecer abaixo dos elementos de formulário ao editar um ativo para fornecer o contexto no campo.',
     'about_custom_fields_title' => 'Sobre os campos personalizados',
@@ -58,5 +58,8 @@ return [
     'show_in_requestable_list_short' => 'Mostrar na lista de mídias solicitáveis',
     'show_in_requestable_list' => 'Mostrar valor na lista de ativos solicitáveis. Campos criptografados não serão exibidos',
     'encrypted_options' => 'Este campo está criptografado, então algumas opções de exibição não estarão disponíveis.',
+    'display_checkin' => 'Display in checkin forms',
+    'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

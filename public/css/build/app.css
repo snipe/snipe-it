@@ -313,7 +313,8 @@ a.logo.no-hover a:hover {
   background-color: transparent;
 }
 input:required,
-select:required {
+select:required,
+textarea:required {
   border-right: 6px solid orange;
 }
 .sidebar-menu {
@@ -396,7 +397,7 @@ img.navbar-brand-img,
   padding: 10px;
   background: #f4f4f4;
   margin-bottom: 3px;
-  border-left: 2px solid #e6e7e8;
+  border-inline: 2px solid #e6e7e8;
   color: #444;
   cursor: move;
 }
@@ -1024,19 +1025,24 @@ h4 {
  any HTML used in the UserPresenter "title" attribute breaks the column selector HTML.
 
  Instead, we use CSS to add the icon into the table header, which leaves the column selector
- "title" text as-is.
+ "title" text as-is and hides the icon.
 
- See https://github.com/snipe/snipe-it/issues/7989
-
+ See https://github.com/grokability/snipe-it/issues/7989
  */
+th.css-accessory > .th-inner,
+th.css-accessory-alt > .th-inner,
 th.css-barcode > .th-inner,
-th.css-license > .th-inner,
+th.css-component > .th-inner,
 th.css-consumable > .th-inner,
 th.css-envelope > .th-inner,
-th.css-users > .th-inner,
+th.css-house-flag > .th-inner,
+th.css-house-laptop > .th-inner,
+th.css-house-user > .th-inner,
+th.css-license > .th-inner,
 th.css-location > .th-inner,
-th.css-component > .th-inner,
-th.css-accessory > .th-inner {
+th.css-users > .th-inner,
+th.css-currency > .th-inner,
+th.css-history > .th-inner {
   font-size: 0px;
   line-height: 0.75 !important;
   text-align: left;
@@ -1044,26 +1050,26 @@ th.css-accessory > .th-inner {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-th.css-padlock > .th-inner::before,
+th.css-location > .th-inner::before,
+th.css-accessory > .th-inner::before,
+th.css-accessory-alt > .th-inner::before,
 th.css-barcode > .th-inner::before,
-th.css-license > .th-inner::before,
+th.css-component > .th-inner::before,
 th.css-consumable > .th-inner::before,
 th.css-envelope > .th-inner::before,
-th.css-users > .th-inner::before,
+th.css-house-flag > .th-inner::before,
+th.css-house-laptop > .th-inner::before,
+th.css-house-user > .th-inner::before,
+th.css-license > .th-inner::before,
 th.css-location > .th-inner::before,
-th.css-component > .th-inner::before,
-th.css-accessory > .th-inner::before {
+th.css-padlock > .th-inner::before,
+th.css-users > .th-inner::before,
+th.css-currency > .th-inner::before,
+th.css-history > .th-inner::before {
   display: inline-block;
   font-size: 20px;
   font-family: "Font Awesome 5 Free";
   font-weight: 900;
-}
-th.css-padlock > .th-inner::before {
-  content: "\f023";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  padding-right: 4px;
-  font-size: 12px;
 }
 /**
 BEGIN ICON TABLE HEADERS
@@ -1110,6 +1116,47 @@ th.css-component > .th-inner::before {
   font-family: "Font Awesome 5 Free";
   font-weight: 500;
 }
+th.css-padlock > .th-inner::before {
+  content: "\f023";
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+}
+th.css-house-user > .th-inner::before {
+  content: "\e1b0";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-house-flag > .th-inner::before {
+  content: "\e50d";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-house-laptop > .th-inner::before {
+  content: "\e066";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-accessory-alt > .th-inner::before {
+  content: "\f11c";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-currency > .th-inner::before {
+  content: "\24";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
+th.css-history > .th-inner::before {
+  content: "\f1da";
+  font-family: "Font Awesome 5 Free";
+  font-size: 19px;
+  margin-bottom: 0px;
+}
 .small-box .inner {
   padding-left: 15px;
   padding-right: 15px;
@@ -1128,7 +1175,8 @@ th.css-component > .th-inner::before {
   padding: 6px 12px;
   height: 34px;
 }
-.form-group.has-error label {
+.form-group.has-error label,
+.form-group.has-error .help-block {
   color: #a94442;
 }
 .select2-container--default .select2-selection--multiple {
@@ -1160,7 +1208,6 @@ th.css-component > .th-inner::before {
 }
 @media screen and (max-width: 992px) {
   .info-stack-container {
-    display: flex;
     flex-direction: column;
   }
   .col-md-3.col-xs-12.col-sm-push-9.info-stack {
@@ -1174,6 +1221,11 @@ th.css-component > .th-inner::before {
   .info-stack-container > .col-md-9.col-xs-12.col-sm-pull-3.info-stack > .row-new-striped > .row > .col-sm-2 {
     width: auto;
     float: none;
+  }
+}
+@media screen and (max-width: 992px) {
+  .row-new-striped div {
+    width: 100%;
   }
 }
 @media screen and (max-width: 1318px) and (min-width: 1200px) {
@@ -1362,5 +1414,29 @@ input[type="radio"]:checked::before {
   margin-top: 0px;
   filter: brightness(70%);
   font-size: 70%;
+}
+/** this is needed to override ekko-lightboxes card view styles **/
+.bootstrap-table .fixed-table-container .table tbody tr .card-view {
+  display: table-row !important;
+}
+td.text-right.text-padding-number-cell {
+  padding-right: 30px !important;
+  white-space: nowrap;
+}
+th.text-right.text-padding-number-footer-cell {
+  padding-right: 20px !important;
+  white-space: nowrap;
+}
+code.single-line {
+  white-space: pre-wrap;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  max-width: 400px;
+}
+p.monospace,
+span.monospace {
+  font-family: monospace, monospace;
 }
 

@@ -5,7 +5,5 @@ return array(
 	'eula_text'      			=> 'Acuerdo de uso',
     'id'      					=> 'Identificación',
     'require_acceptance'      	=> 'Aceptación',
-    'title'      				=> 'Nombre del Accesorio',
-
-
+    'title'      				=> 'Nombre del accesorio',
 );

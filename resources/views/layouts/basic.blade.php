@@ -32,13 +32,6 @@
         .skin-blue .sidebar-menu > li:hover > a, .skin-blue .sidebar-menu > li.active > a {
         border-left-color: {{ $snipeSettings->header_color }};
         }
-
-        .btn-primary {
-        background-color: {{ $snipeSettings->header_color }};
-        border-color: {{ $snipeSettings->header_color }};
-        }
-
-
         </style>
     @endif
 

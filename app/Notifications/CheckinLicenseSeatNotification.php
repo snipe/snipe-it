@@ -6,9 +6,11 @@ use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Channels\SlackWebhookChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 use NotificationChannels\GoogleChat\Card;
 use NotificationChannels\GoogleChat\GoogleChatChannel;
 use NotificationChannels\GoogleChat\GoogleChatMessage;
@@ -58,15 +60,7 @@ class CheckinLicenseSeatNotification extends Notification
         }
 
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
-            $notifyBy[] = 'slack';
-        }
-
-        /**
-         * Only send checkin notifications to users if the category
-         * has the corresponding checkbox checked.
-         */
-        if ($this->item->checkin_email() && $this->target instanceof User && $this->target->email != '') {
-            $notifyBy[] = 'mail';
+            $notifyBy[] = SlackWebhookChannel::class;
         }
 
         return $notifyBy;
@@ -83,9 +77,18 @@ class CheckinLicenseSeatNotification extends Notification
 
         if ($admin) {
             $fields = [
-                'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-                'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+                trans('general.from')  => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+                trans('general.by') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
             ];
+
+            if ($item->location) {
+                $fields[trans('general.location')] = $item->location->name;
+            }
+
+            if ($item->company) {
+                $fields[trans('general.company')] = $item->company->name;
+            }
+
         } else {
             $fields = [
                 'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
@@ -109,18 +112,30 @@ class CheckinLicenseSeatNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+        if(!Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {
+            return MicrosoftTeamsMessage::create()
+                ->to($this->settings->webhook_endpoint)
+                ->type('success')
+                ->addStartGroupToSection('activityTitle')
+                ->title(trans('mail.License_Checkin_Notification'))
+                ->addStartGroupToSection('activityText')
+                ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
+                ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'CLI tool')
+                ->fact(trans('mail.checkedin_from'), $target->present()->fullName())
+                ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
+                ->fact(trans('mail.notes'), $note ?: '');
+        }
 
-        return MicrosoftTeamsMessage::create()
-            ->to($this->settings->webhook_endpoint)
-            ->type('success')
-            ->addStartGroupToSection('activityTitle')
-            ->title(trans('mail.License_Checkin_Notification'))
-            ->addStartGroupToSection('activityText')
-            ->fact(htmlspecialchars_decode($item->present()->name), '', 'header')
-            ->fact(trans('mail.License_Checkin_Notification')." by ", $admin->present()->fullName() ?: 'CLI tool')
-            ->fact(trans('mail.checkedin_from'), $target->present()->fullName())
-            ->fact(trans('admin/consumables/general.remaining'), $item->availCount()->count())
-            ->fact(trans('mail.notes'), $note ?: '');
+        $message = trans('mail.License_Checkin_Notification');
+        $details = [
+            trans('mail.checkedin_from')=> $target->present()->fullName(),
+            trans('mail.license_for') => htmlspecialchars_decode($item->present()->name),
+            trans('mail.License_Checkin_Notification')." by " => $admin->present()->fullName() ?: 'CLI tool',
+            trans('admin/consumables/general.remaining') => $item->availCount()->count(),
+            trans('mail.notes') => $note ?: '',
+        ];
+
+        return  array($message, $details);
     }
     public function toGoogleChat()
     {
@@ -148,24 +163,5 @@ class CheckinLicenseSeatNotification extends Notification
                     )
             );
 
-    }
-
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail()
-    {
-        return (new MailMessage)->markdown('notifications.markdown.checkin-license',
-            [
-                'item'          => $this->item,
-                'admin'         => $this->admin,
-                'note'          => $this->note,
-                'target'        => $this->target,
-            ])
-            ->subject(trans('mail.License_Checkin_Notification'));
     }
 }

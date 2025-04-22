@@ -88,28 +88,29 @@
           <tfoot>
             <tr>
               <td colspan="8">
-                {{ Form::open(['route' =>
-                ["fieldsets.associate",$custom_fieldset->id],
-                'class'=>'form-inline',
-                'id' => 'ordering']) }}
-
+                <form method="POST" action="{{ route('fieldsets.associate', $custom_fieldset->id) }}" accept-charset="UTF-8" class="form-inline" id="ordering">
+                  @csrf
 
                 <div class="form-group">
                   <label for="field_id" class="sr-only">
                     {{ trans('admin/custom-field/general.add_field_to_fieldset')}}
                   </label>
-                  {{ Form::select("field_id",$custom_fields_list,"",['aria-label'=>'field_id', 'class'=>'select2', 'style' => 'min-width:400px;']) }}
-
+                  <x-input.select
+                      name="field_id"
+                      :options="$custom_fields_list"
+                      style="min-width:400px"
+                      aria-label="field_id"
+                  />
                 </div>
 
                 <div class="form-group" style="display: none;">
-                  {{ Form::text('order', $maxid, array('aria-label'=>'order', 'maxlength'=>'3', 'size'=>'3')) }}
+                  <input aria-label="order" maxlength="3" size="3" name="order" type="text" value="{{ $maxid }}">
                   <label for="order">{{ trans('admin/custom_fields/general.order') }}</label>
                 </div>
 
                 <div class="checkbox-inline">
                     <label>
-                    {{ Form::checkbox('required', 'on', old('required')) }}
+                      <input type="checkbox" name="required" value="on" @checked(old('required'))>
                       <span style="padding-left: 10px;">{{ trans('admin/custom_fields/general.required') }}</span>
                     </label>
                 </div>
@@ -118,7 +119,7 @@
                   <button type="submit" class="btn btn-primary"> {{ trans('general.save') }}</button>
                 </span>
 
-                {{ Form::close() }}
+                </form>
 
               </td>
             </tr>

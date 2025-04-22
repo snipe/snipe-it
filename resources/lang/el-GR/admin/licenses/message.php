@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Παρουσιάστηκε ένα ζήτημα ελέγχου της άδειας. ΠΑΡΑΚΑΛΩ προσπαθησε ξανα.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Η άδεια έχει ελεγχθεί με επιτυχία'
     ),
 

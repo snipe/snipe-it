@@ -68,6 +68,7 @@ class LicenseImporter extends ItemImporter
         $this->item['order_number'] = trim($this->findCsvMatch($row, 'order_number'));
         $this->item['reassignable'] = trim($this->findCsvMatch($row, 'reassignable'));
         $this->item['manufacturer'] = $this->createOrFetchManufacturer(trim($this->findCsvMatch($row, 'manufacturer')));
+        $this->item['min_amt'] = trim($this->findCsvMatch($row, 'min_amt'));
 
         if($this->item['reassignable'] == "")
         {
@@ -84,6 +85,7 @@ class LicenseImporter extends ItemImporter
             $license->update($this->sanitizeItemForUpdating($license));
         } else {
             $license->fill($this->sanitizeItemForStoring($license));
+            $license->created_by = auth()->id();
         }
 
         // This sets an attribute on the Loggable trait for the action log

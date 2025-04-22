@@ -36,6 +36,9 @@ return [
         'testing_authentication' => 'Тестирование LDAP аутентификации...',
         'authentication_success' => 'Пользователь успешно аутентифицирован с LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
         'sending' => 'Отправка тестового сообщения в :app...',
         'success' => 'Ваша интеграция :webhook_name работает!',
@@ -45,5 +48,13 @@ return [
         'error' => 'Что-то пошло не так. :app ответил: :error_message',
         'error_redirect' => 'ОШИБКА: 301/302 :endpoint возвращает редирект. По соображениям безопасности мы не переходим по редиректам. Пожалуйста, используйте фактическую конечную точку.',
         'error_misc' => 'Что-то пошло не так. :( ',
-    ]
+        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

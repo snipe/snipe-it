@@ -18,7 +18,8 @@ class Group extends SnipeModel
 
     protected $fillable = [
         'name',
-        'permissions'
+        'permissions',
+        'notes',
     ];
 
     /**
@@ -37,7 +38,7 @@ class Group extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'created_at'];
+    protected $searchableAttributes = ['name', 'created_at', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -79,7 +80,24 @@ class Group extends SnipeModel
      */
     public function decodePermissions()
     {
-        return json_decode($this->permissions, true);
+        // Set default to empty JSON if the value is null
+        if (is_array($this->permissions)) {
+            $this->permissions = json_encode($this->permissions);
+        }
+        $permissions = json_decode($this->permissions ?? '{}', JSON_OBJECT_AS_ARRAY);
+
+        // If there are no permissions, return an empty array
+        if (!$permissions) {
+            return [];
+        }
+
+        // Otherwise, loop through the permissions and cast the values as integers
+        foreach ($permissions as $permission => $value) {
+            $permissions[$permission] = (int) $value;
+        }
+
+
+        return $permissions;
     }
 
     /**

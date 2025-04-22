@@ -11,11 +11,11 @@ return [
         'file_deleted'          => 'Sukses menghapus Berkas cadangan. ',
         'generated'             => 'Sukses membuat cadangan baru.',
         'file_not_found'        => 'Berkas cadangan tidak ditemukan di server.',
-        'restore_warning'       => 'Yes, restore it. I acknowledge that this will overwrite any existing data currently in the database. This will also log out all of your existing users (including you).',
-        'restore_confirm'       => 'Are you sure you wish to restore your database from :filename?'
+        'restore_warning'       => 'Ya, pulihkan. Saya mengerti bahwa ini akan menimpa data yang ada saat ini di database. Ini juga akan mengeluarkan semua pengguna yang ada (termasuk Anda).',
+        'restore_confirm'       => 'Apakah Anda yakin ingin memulihkan database Anda dari :filename?'
     ],
     'restore' => [
-        'success'               => 'Your system backup has been restored. Please log in again.'
+        'success'               => 'Cadangan sistem Anda telah dipulihkan. Silakan masuk kembali.'
     ],
     'purge' => [
         'error'     => 'Terdapat kesalahan ketika proses pembersihan. ',
@@ -23,27 +23,38 @@ return [
         'success'               => 'Sukses melakukan pembersihan data yang terhapus.',
     ],
     'mail' => [
-        'sending' => 'Sending Test Email...',
-        'success' => 'Mail sent!',
-        'error' => 'Mail could not be sent.',
-        'additional' => 'No additional error message provided. Check your mail settings and your app log.'
+        'sending' => 'Mengirim Email Uji...',
+        'success' => 'Email terkirim!',
+        'error' => 'Email gagal dikirim.',
+        'additional' => 'Tidak ada pesan kesalahan tambahan yang diberikan. Periksa pengaturan email dan log aplikasi Anda.'
     ],
     'ldap' => [
-        'testing' => 'Testing LDAP Connection, Binding & Query ...',
-        '500' => '500 Server Error. Please check your server logs for more information.',
-        'error' => 'Something went wrong :(',
-        'sync_success' => 'A sample of 10 users returned from the LDAP server based on your settings:',
-        'testing_authentication' => 'Testing LDAP Authentication...',
-        'authentication_success' => 'User authenticated against LDAP successfully!'
+        'testing' => 'Menguji Koneksi, Pengikatan & Kueri LDAP...',
+        '500' => 'Kesalahan Server 500. Silakan periksa log server Anda untuk informasi lebih lanjut.',
+        'error' => 'Terjadi kesalahan :(',
+        'sync_success' => 'Contoh 10 pengguna yang dikembalikan dari server LDAP berdasarkan pengaturan Anda:',
+        'testing_authentication' => 'Menguji Autentikasi LDAP...',
+        'authentication_success' => 'Pengguna berhasil diautentikasi terhadap LDAP!'
     ],
+    'labels' => [
+        'null_template' => 'Label template not found. Please select a template.',
+        ],
     'webhook' => [
-        'sending' => 'Sending :app test message...',
-        'success' => 'Your :webhook_name Integration works!',
-        'success_pt1' => 'Success! Check the ',
-        'success_pt2' => ' channel for your test message, and be sure to click SAVE below to store your settings.',
-        '500' => '500 Server Error.',
-        'error' => 'Something went wrong. :app responded with: :error_message',
-        'error_redirect' => 'ERROR: 301/302 :endpoint returns a redirect. For security reasons, we don’t follow redirects. Please use the actual endpoint.',
-        'error_misc' => 'Something went wrong. :( ',
-    ]
+        'sending' => 'Mengirim pesan uji :app...',
+        'success' => 'Integrasi :webhook_name Anda berfungsi!',
+        'success_pt1' => 'Berhasil! Periksa ',
+        'success_pt2' => ' saluran untuk pesan uji Anda, dan pastikan untuk mengklik SIMPAN di bawah untuk menyimpan pengaturan Anda.',
+        '500' => 'Kesalahan Server 500.',
+        'error' => 'Terjadi kesalahan. :app merespons dengan: :error_message',
+        'error_redirect' => 'KESALAHAN: 301/302 :endpoint mengembalikan pengalihan. Untuk alasan keamanan, kami tidak mengikuti pengalihan. Harap gunakan endpoint yang sebenarnya.',
+        'error_misc' => 'Terjadi kesalahan. :( ',
+        'webhook_fail' => ' notifikasi webhook gagal: Pastikan URL masih valid.',
+        'webhook_channel_not_found' => ' webhook channel not found.'
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Asset;
 use App\Models\Department;
 use App\Models\Group;
 use Illuminate\Console\Command;
@@ -123,6 +124,10 @@ class LdapSync extends Command
              * We only need to request the LDAP attributes that we process
              */
             $attributes = array_values(array_filter($ldap_map));
+
+            if (Setting::getSettings()->is_ad === 1 && is_null($ldap_map['active_flag'])) {
+                $attributes[] = 'useraccountcontrol';
+            }
 
             $results = Ldap::findLdapUsers($search_base, -1, $filter, $attributes);
 
@@ -322,22 +327,29 @@ class LdapSync extends Command
                                 ]
                             ];
                         }
-
+                        
+                        $add_manager_to_cache = true;
                         if ($ldap_manager["count"] > 0) {
+                            try {
+                                // Get the Manager's username
+                                // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
+                                $ldapManagerUsername = $ldap_manager[0][$ldap_map["username"]][0];
 
-                            // Get the Manager's username
-                            // PHP LDAP returns every LDAP attribute as an array, and 90% of the time it's an array of just one item. But, hey, it's an array.
-                            $ldapManagerUsername = $ldap_manager[0][$ldap_map["username"]][0];
+                                // Get User from Manager username.
+                                $ldap_manager = User::where('username', $ldapManagerUsername)->first();
 
-                            // Get User from Manager username.
-                            $ldap_manager = User::where('username', $ldapManagerUsername)->first();
-
-                            if ($ldap_manager && isset($ldap_manager->id)) {
-                                // Link user to manager id.
-                                $user->manager_id = $ldap_manager->id;
+                                if ($ldap_manager && isset($ldap_manager->id)) {
+                                    // Link user to manager id.
+                                    $user->manager_id = $ldap_manager->id;
+                                }
+                            } catch (\Exception $e) {
+                                $add_manager_to_cache = false;
+                                \Log::warning('Handling ldap manager ' . $item['manager'] . ' caused an exception: ' . $e->getMessage() . '. Continuing synchronization.');
                             }
                         }
-                        $manager_cache[$item['manager']] = $ldap_manager && isset($ldap_manager->id)  ? $ldap_manager->id : null; // Store results in cache, even if 'failed'
+                        if ($add_manager_to_cache) {
+                            $manager_cache[$item['manager']] = $ldap_manager && isset($ldap_manager->id)  ? $ldap_manager->id : null; // Store results in cache, even if 'failed'
+                        }
 
                     }
                 }
@@ -349,9 +361,15 @@ class LdapSync extends Command
                 // (Specifically, we don't handle a value of '0.0' correctly)
                 $raw_value = @$results[$i][$ldap_map["active_flag"]][0];
                 $filter_var = filter_var($raw_value, FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+                
                 $boolean_cast = (bool) $raw_value;
-
-                $user->activated = $filter_var ?? $boolean_cast; // if filter_var() was true or false, use that. If it's null, use the $boolean_cast
+                
+                if (Setting::getSettings()->ldap_invert_active_flag === 1) {
+                    // Because ldap_active_flag is set, if filter_var is true or boolean_cast is true, then user is suspended
+                    $user->activated = !($filter_var ?? $boolean_cast);
+                }else{
+                    $user->activated = $filter_var ?? $boolean_cast; // if filter_var() was true or false, use that. If it's null, use the $boolean_cast
+                }
 
             } elseif (array_key_exists('useraccountcontrol', $results[$i])) {
                 // ....otherwise, (ie if no 'active' LDAP flag is defined), IF the UAC setting exists,
@@ -416,7 +434,19 @@ class LdapSync extends Command
                 $item['note'] = $item['createorupdate'];
                 $item['status'] = 'success';
                 if ($item['createorupdate'] === 'created' && $ldap_default_group) {
-                    $user->groups()->attach($ldap_default_group);
+                 // Check if the relationship already exists
+                if (!$user->groups()->where('group_id', $ldap_default_group)->exists()) {
+                $user->groups()->attach($ldap_default_group);
+                    }
+                }
+                
+                //updates assets location based on user's location
+                if ($user->wasChanged('location_id')) {
+                    foreach ($user->assets as $asset) {
+                        $asset->location_id = $user->location_id;
+                        // TODO: somehow add note? "Asset Location Changed because of thing"
+                        $asset->save();
+                    }
                 }
 
             } else {

@@ -6,16 +6,14 @@ return array(
     'account_not_found'      => 'Неправильне ім\'я користувача або пароль.',
     'account_not_activated'  => 'Цей обліковий запис не активовано.',
     'account_suspended'      => 'Дію цього аккаунта призупинено.',
-    'account_banned'         => 'Цей аккаунт заблоковано.',
-    'throttle'               => 'Занадто багато невдалих спроб входу в систему. Будь ласка, спробуйте ще раз через :minutes хвилин.',
 
     'two_factor' => array(
         'already_enrolled'      => 'Пристрій вже зареєстровано.',
         'success'               => 'Ви успішно увійшли в систему.',
         'code_required'         => 'Необхідно вказати двофакторний код.',
         'invalid_code'          => 'Двофакторний код невірний.',
-        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
-        'please_enroll'         => 'Please enroll a device in two-factor authentication.',
+        'enter_two_factor_code' => 'Будь ласка, введіть свій код двофакторної аутентифікації.',
+        'please_enroll'         => 'Будь ласка, зареєструйте пристрій для двофакторної автентифікації.',
     ),
 
     'signin' => array(

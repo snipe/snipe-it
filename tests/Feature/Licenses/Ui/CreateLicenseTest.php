@@ -19,7 +19,12 @@ class CreateLicenseTest extends TestCase
             ->assertForbidden();
     }
 
-
+    public function testPageRenders()
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('licenses.create'))
+            ->assertOk();
+    }
 
     public function testLicenseWithoutPurchaseDateFailsValidation()
     {

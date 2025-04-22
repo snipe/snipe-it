@@ -8,7 +8,7 @@ return array(
 
     'create' => array(
         'error'   => 'El accesorio no fue creado, por favor inténtelo de nuevo.',
-        'success' => 'El accesorio se ha creado con éxito.'
+        'success' => 'Accesorio creado correctamente.'
     ),
 
     'update' => array(

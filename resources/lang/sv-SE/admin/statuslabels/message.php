@@ -2,18 +2,18 @@
 
 return [
 
-    'does_not_exist' => 'Status Label existerar inte.',
+    'does_not_exist' => 'Statusetiketten existerar inte.',
     'deleted_label' => 'Statusetikett borttagen',
-    'assoc_assets'	 => 'Denna statusetikett är för närvarande associerad med minst en tillgång och kan inte raderas. Uppdatera dina tillgångar för att inte längre referera till denna status och försök igen.',
+    'assoc_assets'	 => 'Denna statusetikett är för närvarande associerad med minst en tillgång och kan inte raderas. Uppdatera dina tillgångar och försök igen. ',
 
     'create' => [
         'error'   => 'Statusetiketten skapades inte, försök igen.',
-        'success' => 'Status Label skapades framgångsrikt.',
+        'success' => 'Statusetikett skapad.',
     ],
 
     'update' => [
         'error'   => 'Statusetiketten uppdaterades inte, var god försök igen',
-        'success' => 'Statusetiketten uppdateras framgångsrikt.',
+        'success' => 'Statusetikett uppdaterad.',
     ],
 
     'delete' => [
@@ -24,8 +24,8 @@ return [
 
     'help' => [
         'undeployable'   => 'Dessa tillgångar kan inte tilldelas någon.',
-        'deployable'   => 'Dessa tillgångar kan checkas ut. När de har tilldelats, antar de en metastatus på <i class="fas fa-circle text-blue"></i> <strong>Deployed</strong>.',
-        'archived'   => 'Dessa tillgångar kan inte checkas ut och visas bara i arkiverad vy. Detta är användbart för att behålla information om tillgångar för budgetering / historiska ändamål men att hålla dem borta från den dagliga tillgångslistan.',
+        'deployable'   => 'Dessa tillgångar kan checkas ut. När de har tilldelats, antar de en metastatus på <i class="fas fa-circle text-blue"></i> <strong>Levererad</strong>.',
+        'archived'   => 'Dessa tillgångar kan inte checkas ut och visas enbart i den arkiverade vyn. Detta är användbart för att behålla information om tillgångar för budgetering/historiska ändamål men att hålla dem borta från den dagliga tillgångslistan.',
         'pending'   => 'Dessa tillgångar kan ännu inte tilldelas någon som ofta används för föremål som är ute för reparation, men förväntas återgå till omlopp.',
     ],
 

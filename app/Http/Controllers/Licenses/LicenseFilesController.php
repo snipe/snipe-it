@@ -112,37 +112,19 @@ class LicenseFilesController extends Controller
             $this->authorize('view', $license);
             $this->authorize('licenses.files', $license);
 
-            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $license->id)->find($fileId)) {
-                return response('No matching record for that asset/file', 500)
-                    ->header('Content-Type', 'text/plain');
-            }
+            if ($log = Actionlog::whereNotNull('filename')->where('item_id', $license->id)->find($fileId)) {
+                $file = 'private_uploads/licenses/'.$log->filename;
 
-            $file = 'private_uploads/licenses/'.$log->filename;
-
-            if (Storage::missing($file)) {
-                Log::debug('NOT EXISTS for '.$file);
-                Log::debug('NOT EXISTS URL should be '.Storage::url($file));
-
-                return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
-                    ->header('Content-Type', 'text/plain');
-            } else {
-
-                if (request('inline') == 'true') {
-
-                    $headers = [
-                        'Content-Disposition' => 'inline',
-                    ];
-
-                    return Storage::download($file, $log->filename, $headers);
-                }
-
-                // We have to override the URL stuff here, since local defaults in Laravel's Flysystem
-                // won't work, as they're not accessible via the web
-                if (config('filesystems.default') == 'local') { // TODO - is there any way to fix this at the StorageHelper layer?
-                    return StorageHelper::downloader($file);
-
+                try {
+                    return StorageHelper::showOrDownloadFile($file, $log->filename);
+                } catch (\Exception $e) {
+                    return redirect()->route('licenses.show', ['licenses' => $license])->with('error',  trans('general.file_not_found'));
                 }
             }
+
+            // The log record doesn't exist somehow
+            return redirect()->route('licenses.show', ['licenses' => $license])->with('error',  trans('general.log_record_not_found'));
+
         }
 
         return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));

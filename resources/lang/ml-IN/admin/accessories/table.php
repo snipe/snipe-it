@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'ഐഡി',
     'require_acceptance'      	=> 'Acceptance',
     'title'      				=> 'Accessory Name',
-
-
 );

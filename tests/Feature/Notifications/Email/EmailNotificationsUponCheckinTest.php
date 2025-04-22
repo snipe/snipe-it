@@ -2,6 +2,11 @@
 
 namespace Tests\Feature\Notifications\Email;
 
+use App\Mail\CheckinAssetMail;
+use App\Models\Accessory;
+use App\Models\Consumable;
+use App\Models\LicenseSeat;
+use Illuminate\Support\Facades\Mail;
 use PHPUnit\Framework\Attributes\Group;
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
@@ -17,11 +22,13 @@ class EmailNotificationsUponCheckinTest extends TestCase
     {
         parent::setUp();
 
-        Notification::fake();
+        Mail::fake();
     }
 
     public function testCheckInEmailSentToUserIfSettingEnabled()
     {
+        Mail::fake();
+
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
@@ -29,29 +36,61 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
         $this->fireCheckInEvent($asset, $user);
 
-        Notification::assertSentTo(
-            $user,
-            function (CheckinAssetNotification $notification, $channels) {
-                return in_array('mail', $channels);
-            },
-        );
+        Mail::assertSent(CheckinAssetMail::class, function($mail) use ($user) {
+                return $mail->hasTo($user->email);
+        });
+
     }
 
     public function testCheckInEmailNotSentToUserIfSettingDisabled()
     {
+        $this->settings->disableAdminCC();
+        Mail::fake();
+
         $user = User::factory()->create();
-        $asset = Asset::factory()->assignedToUser($user)->create();
+        $checkoutables = collect([
+            Asset::factory()->assignedToUser($user)->create(),
+            LicenseSeat::factory()->assignedToUser($user)->create(),
+            Accessory::factory()->checkedOutToUser($user)->create(),
+            Consumable::factory()->checkedOutToUser($user)->create(),
+        ]);
 
-        $asset->model->category->update(['checkin_email' => false]);
+        foreach ($checkoutables as $checkoutable) {
 
-        $this->fireCheckInEvent($asset, $user);
-
-        Notification::assertNotSentTo(
-            $user,
-            function (CheckinAssetNotification $notification, $channels) {
-                return in_array('mail', $channels);
+            if ($checkoutable instanceof Asset) {
+                $checkoutable->model->category->update([
+                    'checkin_email' => false,
+                    'eula_text' => null,
+                    'require_acceptance' => false,
+                ]);
+                $checkoutable = $checkoutable->fresh(['model.category']);
             }
-        );
+
+            if ($checkoutable instanceof Accessory || $checkoutable instanceof Consumable) {
+                $checkoutable->category->update([
+                    'checkin_email' => false,
+                    'eula_text' => null,
+                    'require_acceptance' => false,
+                ]);
+                $checkoutable = $checkoutable->fresh(['category']);
+            }
+
+            if ($checkoutable instanceof LicenseSeat) {
+                $checkoutable->license->category->update([
+                    'checkin_email' => false,
+                    'eula_text' => null,
+                    'require_acceptance' => false,
+                ]);
+                $checkoutable = $checkoutable->fresh(['license.category']);
+            }
+
+            // Fire event manually
+            $this->fireCheckInEvent($checkoutable, $user);
+        }
+
+        Mail::assertNotSent(CheckinAssetMail::class, function ($mail) use ($user) {
+            return $mail->hasTo($user->email);
+        });
     }
 
     private function fireCheckInEvent($asset, $user): void

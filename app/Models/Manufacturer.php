@@ -53,6 +53,7 @@ class Manufacturer extends SnipeModel
         'support_url',
         'url',
         'warranty_lookup_url',
+        'notes',
     ];
 
     use Searchable;
@@ -62,7 +63,7 @@ class Manufacturer extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'created_at'];
+    protected $searchableAttributes = ['name', 'created_at', 'notes'];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -78,6 +79,7 @@ class Manufacturer extends SnipeModel
             && (($this->licenses_count ?? $this->licenses()->count()) === 0)
             && (($this->consumables_count ?? $this->consumables()->count()) === 0)
             && (($this->accessories_count ?? $this->accessories()->count()) === 0)
+            && (($this->components_count ?? $this->components()->count()) === 0)
             && ($this->deleted_at == '');
     }
 
@@ -106,6 +108,10 @@ class Manufacturer extends SnipeModel
         return $this->hasMany(\App\Models\Consumable::class, 'manufacturer_id');
     }
 
+    public function components()
+    {
+        return $this->hasMany(\App\Models\Component::class, 'manufacturer_id');
+    }
 
     public function adminuser()
     {

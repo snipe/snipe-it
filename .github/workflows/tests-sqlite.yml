@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "8.1.1"
+          - "8.3"
 
     name: PHP ${{ matrix.php-version }}
 
@@ -43,6 +43,9 @@ jobs:
           cp -v .env.testing.example .env
           cp -v .env.testing.example .env.testing
 
+      - name: Create database file
+        run: touch database/database.sqlite
+
       - name: Install Dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
@@ -57,5 +60,5 @@ jobs:
 
       - name: Execute tests (Unit and Feature tests) via PHPUnit
         env:
-          DB_CONNECTION: sqlite_testing
-        run: php artisan test --parallel
+          DB_CONNECTION: sqlite
+        run: php artisan test

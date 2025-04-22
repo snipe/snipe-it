@@ -114,6 +114,7 @@ class UserImporter extends ItemImporter
 
         $this->log('No matching user, creating one');
         $user = new User();
+        $user->created_by = auth()->id();
         $user->fill($this->sanitizeItemForStoring($user));
 
         if ($user->save()) {

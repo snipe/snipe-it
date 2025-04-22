@@ -124,13 +124,13 @@
                   <div class="row">
                     <div class="col-md-3">
                       <strong>{{ trans('admin/licenses/form.license_key') }}</strong>
+                      <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
+                        <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
+                      </i>
                     </div>
                     <div class="col-md-9">
                       @can('viewKeys', $license)
-                        <span class="js-copy">{!! nl2br(e($license->serial)) !!}</span>
-                          <i class="fa-regular fa-clipboard js-copy-link" data-clipboard-target=".js-copy" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}">
-                            <span class="sr-only">{{ trans('general.copy_to_clipboard') }}</span>
-                          </i>
+                        <code><span class="js-copy">{!! nl2br(e($license->serial)) !!}</span></code>
                       @else
                         ------------
                       @endcan
@@ -464,100 +464,13 @@
 
         @can('licenses.files', $license)
         <div class="tab-pane" id="files">
-          <div class="table-responsive">
-            <table
-                data-cookie-id-table="licenseUploadsTable"
-                data-id-table="licenseUploadsTable"
-                id="licenseUploadsTable"
-                data-search="true"
-                data-pagination="true"
-                data-side-pagination="client"
-                data-show-columns="true"
-                data-show-export="true"
-                data-show-footer="true"
-                data-toolbar="#upload-toolbar"
-                data-show-refresh="true"
-                data-sort-order="asc"
-                data-sort-name="name"
-                class="table table-striped snipe-table"
-                data-export-options='{
-                    "fileName": "export-license-uploads-{{ str_slug($license->name) }}-{{ date('Y-m-d') }}",
-                    "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
-                    }'>
-            <thead>
-              <tr>
-                <th data-visible="true" data-field="icon" data-sortable="true">{{trans('general.file_type')}}</th>
-                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="image">{{ trans('general.image') }}</th>
-                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="filename" data-sortable="true">{{ trans('general.file_name') }}</th>
-                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="filesize">{{ trans('general.filesize') }}</th>
-                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="notes" data-sortable="true">{{ trans('general.notes') }}</th>
-                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="download">{{ trans('general.download') }}</th>
-                <th class="col-md-2" data-searchable="true" data-visible="true" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
-                <th class="col-md-1" data-searchable="true" data-visible="true" data-field="actions">{{ trans('table.actions') }}</th>
-              </tr>
-            </thead>
-            <tbody>
-            @if ($license->uploads->count() > 0)
-              @foreach ($license->uploads as $file)
-              <tr>
-                <td>
-                  <i class="{{ Helper::filetype_icon($file->filename) }} icon-med" aria-hidden="true"></i>
-                  <span class="sr-only">{{ Helper::filetype_icon($file->filename) }}</span>
 
-                </td>
-                <td>
-                  @if ($file->filename)
-                    @if ((Storage::exists('private_uploads/licenses/'.$file->filename)) && ( Helper::checkUploadIsImage($file->get_src('licenses'))))
-                      <a href="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id, 'download' => 'false']) }}" data-toggle="lightbox" data-type="image"><img src="{{ route('show.licensefile', ['licenseId' => $license->id, 'fileId' => $file->id]) }}" class="img-thumbnail" style="max-width: 50px;"></a>
-                    @endif
-                  @endif
-                </td>
-                <td>
-                  @if (Storage::exists('private_uploads/licenses/'.$file->filename))
-                    {{ $file->filename }}
-                  @else
-                    <del>{{ $file->filename }}</del>
-                  @endif
-                </td>
-                <td data-value="{{ (Storage::exists('private_uploads/licenses/'.$file->filename)) ? Storage::size('private_uploads/licenses/'.$file->filename) : '' }}">
-                  {{ (Storage::exists('private_uploads/licenses/'.$file->filename)) ? Helper::formatFilesizeUnits(Storage::size('private_uploads/licenses/'.$file->filename)) : '' }}
-                </td>
+          <x-filestable
+                  filepath="private_uploads/licenses/"
+                  showfile_routename="show.licensefile"
+                  deletefile_routename="delete/licensefile"
+                  :object="$license" />
 
-                <td>
-                  @if ($file->note)
-                    {{ $file->note }}
-                  @endif
-                </td>
-                <td>
-                  @if ($file->filename)
-                    <a href="{{ route('show.licensefile', [$license->id, $file->id]) }}" class="btn btn-sm btn-default">
-                      <x-icon type="download"/>
-                      <span class="sr-only">{{ trans('general.download') }}</span>
-                    </a>
-
-                    <a href="{{ route('show.licensefile', [$license->id, $file->id, 'inline' => 'true']) }}" class="btn btn-sm btn-default" target="_blank">
-                      <x-icon type="external-link" />
-                    </a>
-
-                  @endif
-                </td>
-                <td>{{ $file->created_at }}</td>
-                <td>
-                  <a class="btn delete-asset btn-danger btn-sm" href="{{ route('delete/licensefile', [$license->id, $file->id]) }}" data-content="{{ trans('general.delete_confirm', ['item' => $file->filename]) }}" data-title="{{ trans('general.delete') }}">
-                    <x-icon type="delete" />
-                    <span class="sr-only">{{ trans('general.delete') }}</span>
-                  </a>
-                </td>
-              </tr>
-              @endforeach
-            @else
-              <tr>
-              <td colspan="8">{{ trans('general.no_results') }}</td>
-              </tr>
-            @endif
-            </tbody>
-          </table>
-          </div>
         </div> <!-- /.tab-pane -->
         @endcan
 
@@ -585,7 +498,7 @@
                 <thead>
                 <tr>
                   <th class="col-sm-2" data-visible="false" data-sortable="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.record_created') }}</th>
-                  <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th class="col-sm-2"data-visible="true" data-sortable="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
                   <th class="col-sm-2" data-sortable="true"  data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>

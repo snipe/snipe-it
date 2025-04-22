@@ -6,9 +6,11 @@ use App\Models\Accessory;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Channels\SlackWebhookChannel;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Str;
 use NotificationChannels\GoogleChat\Card;
 use NotificationChannels\GoogleChat\GoogleChatChannel;
 use NotificationChannels\GoogleChat\GoogleChatMessage;
@@ -55,21 +57,8 @@ class CheckinAccessoryNotification extends Notification
         }
 
         if (Setting::getSettings()->webhook_selected == 'slack' || Setting::getSettings()->webhook_selected == 'general' ) {
-            $notifyBy[] = 'slack';
+            $notifyBy[] = SlackWebhookChannel::class;
         }
-
-        /**
-         * Only send notifications to users that have email addresses
-         */
-        if ($this->target instanceof User && $this->target->email != '') {
-            Log::debug('The target is a user');
-
-            if ($this->item->checkin_email()) {
-                $notifyBy[] = 'mail';
-            }
-        }
-
-        Log::debug('checkin_email on this category is '.$this->item->checkin_email());
 
         return $notifyBy;
     }
@@ -84,9 +73,17 @@ class CheckinAccessoryNotification extends Notification
         $channel = ($this->settings->webhook_channel) ? $this->settings->webhook_channel : '';
 
         $fields = [
-            'To' => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
-            'By' => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
+            trans('general.from') => '<'.$target->present()->viewUrl().'|'.$target->present()->fullName().'>',
+            trans('general.by') => '<'.$admin->present()->viewUrl().'|'.$admin->present()->fullName().'>',
         ];
+
+        if ($item->location) {
+            $fields[trans('general.location')] = $item->location->name;
+        }
+
+        if ($item->company) {
+            $fields[trans('general.company')] = $item->company->name;
+        }
 
         return (new SlackMessage)
             ->content(':arrow_down: :keyboard: '.trans('mail.Accessory_Checkin_Notification'))
@@ -103,18 +100,29 @@ class CheckinAccessoryNotification extends Notification
         $admin = $this->admin;
         $item = $this->item;
         $note = $this->note;
+        if(!Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {
+            return MicrosoftTeamsMessage::create()
+                ->to($this->settings->webhook_endpoint)
+                ->type('success')
+                ->addStartGroupToSection('activityTitle')
+                ->title(trans('Accessory_Checkin_Notification'))
+                ->addStartGroupToSection('activityText')
+                ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
+                ->fact(trans('mail.checked_into'), $item->location->name ? $item->location->name : '')
+                ->fact(trans('mail.Accessory_Checkin_Notification')." by ", $admin->present()->fullName())
+                ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
+                ->fact(trans('mail.notes'), $note ?: '');
+        }
 
-        return MicrosoftTeamsMessage::create()
-            ->to($this->settings->webhook_endpoint)
-            ->type('success')
-            ->addStartGroupToSection('activityTitle')
-            ->title(trans('Accessory_Checkin_Notification'))
-            ->addStartGroupToSection('activityText')
-            ->fact(htmlspecialchars_decode($item->present()->name), '', 'activityTitle')
-            ->fact(trans('mail.checked_into'), $item->location->name ? $item->location->name : '')
-            ->fact(trans('mail.Accessory_Checkin_Notification')." by ", $admin->present()->fullName())
-            ->fact(trans('admin/consumables/general.remaining'), $item->numRemaining())
-            ->fact(trans('mail.notes'), $note ?: '');
+        $message = trans('mail.Accessory_Checkin_Notification');
+        $details = [
+            trans('mail.accessory_name') => htmlspecialchars_decode($item->present()->name),
+            trans('mail.checked_into') => $item->location->name ? $item->location->name : '',
+            trans('mail.Accessory_Checkin_Notification'). ' by' => $admin->present()->fullName(),
+            trans('admin/consumables/general.remaining')=> $item->numRemaining(),
+            trans('mail.notes') => $note ?: '',
+        ];
+        return  array($message, $details);
     }
     public function toGoogleChat()
     {
@@ -141,25 +149,5 @@ class CheckinAccessoryNotification extends Notification
                     )
             );
 
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail()
-    {
-        Log::debug('to email called');
-
-        return (new MailMessage)->markdown('notifications.markdown.checkin-accessory',
-            [
-                'item'          => $this->item,
-                'admin'         => $this->admin,
-                'note'          => $this->note,
-                'target'        => $this->target,
-            ])
-            ->subject(trans('mail.Accessory_Checkin_Notification'));
     }
 }

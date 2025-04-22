@@ -2,7 +2,7 @@
 
 return [
 
-    'select_language' => 'Select a Language',
+    'select_language' => 'Välj ett språk',
     'languages' => [
         'en-US'=> 'Engelska, USA',
         'en-GB'=> 'Engelska, Storbritannien',
@@ -40,8 +40,8 @@ return [
         'ms-MY'=> 'Malajiska',
         'mi-NZ'=> 'Maori',
         'mn-MN'=> 'Mongoliska',
-        //'no-NO'=> 'Norwegian',
-        'nb-NO'=> 'Norwegian Bokmål',
+        'nb-NO'=> 'Norsk bokmål',
+        'om-ET' => 'Oromo (Ethiopian)',
         //'nn-NO'=> 'Norwegian Nynorsk',
         'fa-IR'=> 'Persiska',
         'pl-PL'=> 'Polska',
@@ -68,7 +68,7 @@ return [
         'zu-ZA'=> 'Zulu',
     ],
 
-    'select_country' => 'Select a Country',
+    'select_country' => 'Välj ett land',
     
     'countries' => [
         'AC'=>'Ön Ascension',
@@ -234,7 +234,7 @@ return [
         'NG'=>'Nigeria',
         'NI'=>'Nicaragua',
         'NL'=>'Nederländerna',
-        'GB-NIR' => 'Northern Ireland',
+        'GB-NIR' => 'Nordirland',
         'NO'=>'Norge',
         'NP'=>'Nepal',
         'NR'=>'Nauru',

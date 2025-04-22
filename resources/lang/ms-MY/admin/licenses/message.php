@@ -50,6 +50,7 @@ return array(
 
     'checkin' => array(
         'error'   => 'Ada isu semasa terima lesen. Sila cuba lagi.',
+        'not_reassignable' => 'License not reassignable',
         'success' => 'Lesen berjaya diterima'
     ),
 

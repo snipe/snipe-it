@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'ஐடி',
     'require_acceptance'      	=> 'ஏற்றுக்கொள்ளுதல்',
     'title'      				=> 'துணை பெயர்',
-
-
 );

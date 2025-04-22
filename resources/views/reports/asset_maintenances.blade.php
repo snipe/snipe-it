@@ -12,9 +12,6 @@
   <div class="col-md-12">
     <div class="box box-default">
       <div class="box-body">
-
-        <div class="table-responsive">
-
             <table
                     data-cookie-id-table="maintenancesReport"
                     data-pagination="true"
@@ -49,13 +46,11 @@
                     <th data-sortable="true" data-field="location" data-formatter="deployedLocationFormatter" data-visible="false">{{ trans('general.location') }}</th>
                     <th data-sortable="true" data-field="rtd_location" data-formatter="deployedLocationFormatter" data-visible="false">{{ trans('admin/hardware/form.default_location') }}</th>
                     <th data-searchable="true" data-sortable="true" data-field="is_warranty" data-formatter="trueFalseFormatter">{{ trans('admin/asset_maintenances/table.is_warranty') }}</th>
-                    <th data-searchable="true" data-sortable="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
                     <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
                 </tr>
                 </thead>
             </table>
-
-        </div>
       </div>
     </div>
   </div>

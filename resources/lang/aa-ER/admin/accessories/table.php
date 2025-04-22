@@ -6,6 +6,4 @@ return array(
     'id'      					=> 'crwdns1236:0crwdne1236:0',
     'require_acceptance'      	=> 'crwdns1237:0crwdne1237:0',
     'title'      				=> 'crwdns1238:0crwdne1238:0',
-
-
 );

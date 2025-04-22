@@ -19,6 +19,8 @@ return [
     'print_assigned'    => 'Εκτύπωση Όλων Των Ανατεθέντων',
     'email_assigned'    => 'Λίστα Email όλων των ανατεθέντων',
     'user_notified'     => 'Ο χρήστης έχει αποσταλεί μέσω ηλεκτρονικού ταχυδρομείου σε μια λίστα των αντιστοιχισμένων αντικειμένων του.',
+    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Συμπερίληψη αυτού του χρήστη κατά την αυτόματη εκχώρηση κατάλληλων αδειών',
     'auto_assign_help'  => 'Παράλειψη αυτού του χρήστη στην αυτόματη ανάθεση αδειών',
     'software_user'     => 'Λογισμικό Έγινε έλεγχος σε: όνομα',
