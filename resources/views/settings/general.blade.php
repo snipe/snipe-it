@@ -14,30 +14,6 @@
 {{-- Page content --}}
 @section('content')
 
-<style>
-    legend {
-        background: repeating-linear-gradient(
-                45deg,
-                #222d32,
-                #222d32 10px,
-                #444 10px,
-                #444 11px
-        );
-
-        color: #fff;
-        font-size: 18px;
-        padding: 6px;
-    }
-
-    fieldset {
-        padding-bottom: 20px;
-    }
-
-
-</style>
-
-
-
     <form method="POST" autocomplete="off" class="form-horizontal" role="form" id="create-form">
     <!-- CSRF Token -->
     {{csrf_field()}}
@@ -87,7 +63,8 @@
                                     {!! $errors->first('scope_locations_fmcs', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
                                     <p class="help-block">
                                         {{ trans('admin/settings/general.scope_locations_fmcs_support_help_text') }}
-                                        {{ ($total_locations > 0) ? trans('admin/settings/general.scope_locations_fmcs_support_disabled_text', ['count' => $total_locations]) : '' }}
+
+                                        <strong>{{ ($total_locations > 0) ? trans('admin/settings/general.scope_locations_fmcs_support_disabled_text', ['count' => $total_locations]) : '' }}</strong>
 
                                     </p>
                                 </div>
