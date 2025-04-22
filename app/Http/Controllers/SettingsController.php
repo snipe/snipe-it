@@ -14,6 +14,7 @@ use App\Http\Requests\StoreLabelSettings;
 use App\Http\Requests\StoreSecuritySettings;
 use App\Models\CustomField;
 use App\Models\Group;
+use App\Models\Labels\Label as LabelModel;
 use App\Models\Setting;
 use App\Models\Asset;
 use App\Models\User;
@@ -750,6 +751,7 @@ class SettingsController extends Controller
         return view('settings.labels')
             ->with('setting', Setting::getSettings())
             ->with('is_gd_installed', $is_gd_installed)
+            ->with('template', LabelModel::find(Setting::getSettings()->label2_template))
             ->with('customFields', CustomField::where('field_encrypted', '=', 0)->get());
     }
 
