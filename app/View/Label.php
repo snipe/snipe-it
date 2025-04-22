@@ -190,9 +190,28 @@ class Label implements View
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
 
-                $assetData->put('fields', $fields->take($template->getSupportFields()));
+                $emptyRowsCount = $settings->label2_empty_row_count;
+                if($emptyRowsCount) {
+                    // Create empty rows
+                    $emptyRows = collect(range(1, $emptyRowsCount))->map(function () {
+                        return [
+                            'label' => '',
+                            'value' => '',
+                            'dataSource' => null,
+                        ];
+                    });
 
-                return $assetData;
+                    // Prepend empty rows to the existing fields
+                    $fieldsWithEmpty = $emptyRows->merge($fields);
+
+                    $assetData->put('fields', $fieldsWithEmpty->take($template->getSupportFields()));
+                    return $assetData;
+                }
+               else{
+                   $assetData->put('fields', $fields->take($template->getSupportFields()));
+                   return $assetData;
+               }
+
             });
         
         if ($template instanceof Sheet) {

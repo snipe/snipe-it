@@ -771,6 +771,7 @@ class SettingsController extends Controller
         $setting->label2_2d_type = $request->input('label2_2d_type');
         $setting->label2_2d_target = $request->input('label2_2d_target');
         $setting->label2_fields = $request->input('label2_fields');
+        $setting->label2_empty_row_count = $request->input('label2_empty_row_count');
         $setting->labels_per_page = $request->input('labels_per_page');
         $setting->labels_width = $request->input('labels_width');
         $setting->labels_height = $request->input('labels_height');
