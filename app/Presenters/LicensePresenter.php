@@ -281,6 +281,14 @@ class LicensePresenter extends Presenter
                 'formatter' => 'locationsLinkObjFormatter',
             ],
             [
+                'field' => 'updated_at',
+                'searchable' => false,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.date'),
+                'formatter' => 'dateDisplayFormatter',
+            ],
+            [
                 'field' => 'notes',
                 'searchable' => false,
                 'sortable' => false,
