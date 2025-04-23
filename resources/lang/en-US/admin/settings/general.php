@@ -460,7 +460,7 @@ return [
         'misc_display' => 'Miscellaneous Display Options',
         'email' => 'Email Preferences',
         'checkin' => 'Checkin Preferences',
-        'login' => 'Login & Dashboard Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
         'misc' => 'Miscellaneous',
 
     ],
