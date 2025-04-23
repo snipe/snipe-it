@@ -22,12 +22,6 @@
              "click element button[type=submit]",
              "wait for url to be https://snipe-it.test/"
           ]
-
-        },
-        {
-          "url": "https://snipe-it.test",
-          "actions": [
-          ]
         }
     ]
 }
