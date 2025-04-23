@@ -1070,13 +1070,13 @@ p.monospace,
 span.monospace {
   font-family: monospace, monospace;
 }
-legend {
+legend.highlight {
   background: repeating-linear-gradient(45deg, #222d32, #222d32 10px, #444 10px, #444 11px);
   color: #fff;
   font-size: 18px;
   padding: 6px;
 }
-fieldset {
+fieldset.bottom-padded {
   padding-bottom: 20px;
 }
 caption.tableCaption {
