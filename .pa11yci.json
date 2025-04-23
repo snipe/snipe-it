@@ -4,17 +4,12 @@
     "defaults": {
       "useIncognitoBrowserContext": false,
       "timeout": 500000,
-      "wait": 2000,
+      "wait": 5000,
       "ignore" : [
         "WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail",
         "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail"
       ],
-      "actions": [
-        "set field input[name='username'] to admin",
-        "set field input[name='password'] to password",
-        "click element button[type=submit]",
-        "wait for url to be https://snipe-it.test/"
-      ],
+
       "viewport": {
         "width": 1280,
         "height": 1024
@@ -25,6 +20,7 @@
           "__NOTE"  : "this should always be FIRST (if browser context is preserved)",
           "url": "https://snipe-it.test/login",
           "actions": [
+            "navigate to https://snipe-it.test/login",
             "screen capture tests/pa11y/login.png",
              "set field input[name='username'] to admin",
              "set field input[name='password'] to password",
@@ -32,6 +28,27 @@
              "wait for url to be https://snipe-it.test/",
              "screen capture tests/pa11y/dashboard.png"
           ]
-        }
+        },
+        {
+          "url"     : "https://snipe-it.test/admin",
+          "actions" : [
+            "navigate to https://snipe-it.test/admin",
+            "screen capture tests/pa11y/admin-settings.png"
+          ]
+        },
+        {
+          "url"     : "https://snipe-it.test/hardware/create",
+          "actions" : [
+            "navigate to https://snipe-it.test/hardware/create",
+            "screen capture tests/pa11y/asset-create.png"
+          ]
+        },
+       {
+        "url"     : "https://snipe-it.test/hardware",
+        "actions" : [
+          "navigate to https://snipe-it.test/hardware",
+          "screen capture tests/pa11y/asset-list.png"
+        ]
+      }
     ]
 }
