@@ -50,5 +50,11 @@ return [
         'error_misc' => 'Niečo sa pokazilo. :( ',
         'webhook_fail' => ' webhook notifikácia zlyhala: Overte správnosť zadanej URL adresy.',
         'webhook_channel_not_found' => ' kanál webhooku nebol nájdený.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

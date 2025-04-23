@@ -37,7 +37,7 @@ return [
         'authentication_success' => 'Naudotojas sėkmingai atpažintas naudojant LDAP!'
     ],
     'labels' => [
-        'null_template' => 'Label template not found. Please select a template.',
+        'null_template' => 'Etiketės šablonas nerastas. Pasirinkite šabloną.',
         ],
     'webhook' => [
         'sending' => ':app siunčiamas bandomasis pranešimas...',
@@ -50,5 +50,11 @@ return [
         'error_misc' => 'Kažkas ne taip. :( ',
         'webhook_fail' => ' „Webhook“ pranešimas nepavyko: patikrinkite ar URL vis dar galioja.',
         'webhook_channel_not_found' => ' „webhook“ kanalas nerastas.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

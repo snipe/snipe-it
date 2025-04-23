@@ -63,11 +63,9 @@ class CheckoutableListener
         }
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable = $this->getCheckoutMailType($event, $acceptance);
-        $notifiable = $this->getNotifiables($event);
+        $notifiable = $this->getNotifiableUsers($event);
 
-        if ($event->checkedOutTo->locale) {
-            $mailable->locale($event->checkedOutTo->locale);
-        }
+
         // Send email notifications
         try {
             /**
@@ -75,24 +73,33 @@ class CheckoutableListener
              * 1. The asset requires acceptance
              * 2. The item has a EULA
              * 3. The item should send an email at check-in/check-out
+             * 4. If the admin CC email is set, even if the item being checked out doesn't have an email address (location, etc)
              */
 
             if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
                 $this->checkoutableShouldSendEmail($event)) {
-                Log::info('Sending checkout email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
-                if (!empty($notifiable)) {
-                    Mail::to($notifiable)->cc($ccEmails)->send($mailable);
-                } elseif (!empty($ccEmails)) {
-                    Mail::cc($ccEmails)->send($mailable);
+
+
+                // Send a checkout email to the admin CC addresses, even if the target has no email
+                if (!empty($ccEmails)) {
+                    Mail::to($ccEmails)->send($mailable);
+                    Log::info('Checkout Mail sent to CC addresses');
                 }
-                Log::info('Checkout Mail sent.');
+
+                // Send a checkout email to the target if it has an email
+                if (!empty($notifiable->email)) {
+                    Mail::to($notifiable)->send($mailable);
+                    Log::info('Checkout Mail sent to checkout target');
+                }
+
             }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkout email: " . $e->getMessage());
         } catch (Exception $e) {
             Log::debug("Exception caught during checkout email: " . $e->getMessage());
         }
-//                 Send Webhook notification
+
+        // Send notification
         try {
             if ($this->shouldSendWebhookNotification()) {
                 if ($this->newMicrosoftTeamsWebhookEnabled()) {
@@ -161,10 +168,8 @@ class CheckoutableListener
         }
         $ccEmails = array_filter($adminCcEmailsArray);
         $mailable =  $this->getCheckinMailType($event);
-        $notifiable = $this->getNotifiables($event);
-        if ($event->checkedOutTo?->locale) {
-            $mailable->locale($event->checkedOutTo->locale);
-        }
+        $notifiable = $this->getNotifiableUsers($event);
+
         // Send email notifications
         try {
             /**
@@ -172,17 +177,20 @@ class CheckoutableListener
              * 1. The asset requires acceptance
              * 2. The item has a EULA
              * 3. The item should send an email at check-in/check-out
+             * 4. If the admin CC email is set, even if the item being checked in doesn't have an email address (location, etc)
              */
-                if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                    $this->checkoutableShouldSendEmail($event)) {
-                    Log::info('Sending checkin email, Locale: ' . ($event->checkedOutTo->locale ?? 'default'));
-                    if (!empty($notifiable)) {
-                        Mail::to($notifiable)->cc($ccEmails)->send($mailable);
-                    } elseif (!empty($ccEmails)){
-                        Mail::cc($ccEmails)->send($mailable);
-                    }
-                    Log::info('Checkin Mail sent.');
-                }
+
+            // Send a checkout email to the admin's CC addresses, even if the target has no email
+            if (!empty($ccEmails)) {
+                Mail::to($ccEmails)->send($mailable);
+                Log::info('Checkin Mail sent to CC addresses');
+            }
+
+            // Send a checkout email to the target if it has an email
+            if (!empty($notifiable->email)) {
+                Mail::to($notifiable)->send($mailable);
+                Log::info('Checkin Mail sent to checkout target');
+            }
         } catch (ClientException $e) {
             Log::debug("Exception caught during checkin email: " . $e->getMessage());
         } catch (Exception $e) {
@@ -324,17 +332,29 @@ class CheckoutableListener
         return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);
 
     }
-    private function getNotifiables($event){
 
-        if($event->checkedOutTo instanceof Asset){
+    /**
+     * This gets the recipient objects based on the type of checkoutable.
+     * The 'name' property for users is set in the boot method in the User model.
+     *
+     * @see \App\Models\User::boot()
+     * @param $event
+     * @return mixed
+     */
+    private function getNotifiableUsers($event){
+
+        // If it's assigned to an asset, get that asset's assignedTo object
+        if ($event->checkedOutTo instanceof Asset){
             $event->checkedOutTo->load('assignedTo');
-            return $event->checkedOutTo->assignedto?->email ?? '';
-        }
-        else if($event->checkedOutTo instanceof Location) {
-            return $event->checkedOutTo->manager?->email ?? '';
-        }
-        else{
-            return $event->checkedOutTo?->email ?? '';
+            return $event->checkedOutTo->assignedto;
+
+        // If it's assigned to a location, get that location's manager object
+        } elseif ($event->checkedOutTo instanceof Location) {
+            return $event->checkedOutTo->manager;
+
+        // Otherwise just return the assigned to object
+        } else {
+            return $event->checkedOutTo;
         }
     }
     private function webhookSelected(){
@@ -365,8 +385,24 @@ class CheckoutableListener
 
     private function shouldNotSendAnyNotifications($checkoutable): bool
     {
-        return in_array(get_class($checkoutable), $this->skipNotificationsFor);
+        if(in_array(get_class($checkoutable), $this->skipNotificationsFor)) {
+            return true;
+        }
+        //runs a check if the category wants to send checkin/checkout emails to users
+        $category = match (true) {
+            $checkoutable instanceof Asset => $checkoutable->model->category,
+            $checkoutable instanceof Accessory,
+            $checkoutable instanceof Consumable => $checkoutable->category,
+            $checkoutable instanceof LicenseSeat => $checkoutable->license->category,
+            default => null,
+        };
+
+        if (!$category->checkin_email) {
+            return true;
+        }
+        return false;
     }
+
 
     private function shouldSendWebhookNotification(): bool
     {

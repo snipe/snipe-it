@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Bir veya daha fazla e-posta adresi geçersiz.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => ': Attribute alanı, izin verilmeyen bir karakter içeriyor.',
-        'email_array'      => 'Bir veya daha fazla e-posta adresi geçersiz.',
+
         'hashed_pass'      => 'Geçerli şifre yanlış',
         'dumbpwd'          => 'Bu şifre çok yaygındır.',
         'statuslabel_type' => 'Geçerli bir durum etiketi türü seçmelisiniz',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute YYYY-MM-DD şeklinde geçerli bir tarih formatında olmalıdır',
         'start_date.date_format'        =>  ':attribute YYYY-MM-DD şeklinde geçerli bir tarih formatında olmalıdır',
         'end_date.date_format'          =>  ':attribute YYYY-MM-DD şeklinde geçerli bir tarih formatında olmalıdır',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

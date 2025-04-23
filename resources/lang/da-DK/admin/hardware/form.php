@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Opdater kun den faktiske placering',
     'asset_not_deployable' => 'Denne aktivstatus er ikke implementerbar. Dette aktiv kan ikke tjekkes ud.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Denne status er anvendelig. Dette aktiv kan tjekkes ud.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Behandler... (Dette kan tage lidt tid på store filer)',
     'optional_infos'  => 'Valgfri Information',
     'order_details'   => 'Ordre Relateret Information',

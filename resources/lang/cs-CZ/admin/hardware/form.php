@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Aktualizovat pouze skutečnou polohu',
     'asset_not_deployable' => 'Tento majetek nelze vyskladnit.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Tento majetek lze vyskladnit.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Zpracovávání... (S velkými soubory to může chvíli trvat)',
     'optional_infos'  => 'Volitelné informace',
     'order_details'   => 'Informace související s objednávkou',

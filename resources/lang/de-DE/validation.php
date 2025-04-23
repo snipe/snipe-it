@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Eine oder mehrere Email Adressen sind ungültig.',
+    'checkboxes'           => ':attribute enthält ungültige Optionen.',
+    'radio_buttons'        => ':attribute ist ungültig.',
+    
     'custom' => [
         'alpha_space' => 'Das :attribute Feld enthält ein nicht erlaubtes Zeichen.',
-        'email_array'      => 'Eine oder mehrere Email Adressen sind ungültig.',
+
         'hashed_pass'      => 'Ihr derzeitiges Passwort ist nicht korrekt',
         'dumbpwd'          => 'Das Passwort ist zu gebräuchlich.',
         'statuslabel_type' => 'Sie müssen einen gültigen Statuslabel-Typ auswählen',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
         'start_date.date_format'        =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
         'end_date.date_format'          =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
-        'checkboxes'           => ':attribute enthält ungültige Optionen.',
-        'radio_buttons'        => ':attribute ist ungültig.',
         'invalid_value_in_field' => 'Ungültiger Wert in diesem Feld enthalten',
 
         'ldap_username_field' => [

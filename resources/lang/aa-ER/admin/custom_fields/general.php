@@ -5,7 +5,7 @@ return [
     'manage'                    => 'crwdns6501:0crwdne6501:0',
     'field'		                => 'crwdns1487:0crwdne1487:0',
     'about_fieldsets_title'		=> 'crwdns1488:0crwdne1488:0',
-    'about_fieldsets_text'		=> 'crwdns6503:0crwdne6503:0',
+    'about_fieldsets_text'		=> 'crwdns13148:0crwdne13148:0',
     'custom_format'             => 'crwdns6505:0crwdne6505:0',
     'encrypt_field'      	        => 'crwdns1792:0crwdne1792:0',
     'encrypt_field_help'      => 'crwdns1683:0crwdne1683:0',
@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'crwdns11864:0crwdne11864:0',
     'display_checkin' => 'crwdns12929:0crwdne12929:0',
     'display_checkout' => 'crwdns12931:0crwdne12931:0',
+    'display_audit' => 'crwdns13023:0crwdne13023:0',
 
 ];

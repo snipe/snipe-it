@@ -144,7 +144,22 @@
                           </li>
                       @endif
                   @endcan
-              
+
+              @if ($location->uploads->count() > 0 )
+              <li>
+                  <a href="#files" data-toggle="tab">
+
+                    <span class="hidden-lg hidden-md">
+                      <i class="fas fa-barcode fa-2x"></i>
+                    </span>
+                      <span class="hidden-xs hidden-sm">
+                        {{ trans('general.files') }}
+                          {!! ($location->uploads->count() > 0 ) ? '<badge class="badge badge-secondary">'.number_format($location->uploads->count()).'</badge>' : '' !!}
+                      </span>
+                  </a>
+              </li>
+              @endif
+
               <li>
                   <a href="#history" data-toggle="tab" data-toggle="tab" data-tooltip="true" title="{{ trans('general.history') }}">
                       <i class="fa-solid fa-clock-rotate-left" style="font-size: 17px" aria-hidden="true"></i>
@@ -153,15 +168,52 @@
                     </span>
                   </a>
               </li>
+
+              @can('update', $location)
+              <li class="pull-right">
+                  <a href="#" data-toggle="modal" data-target="#uploadFileModal">
+                      <x-icon type="paperclip" />
+                      {{ trans('button.upload') }}
+                  </a>
+              </li>
+              @endcan
           </ul>
 
 
           <div class="tab-content">
+              @can('view', \App\Models\User::class)
+                    <div id="users" @class(['tab-pane','active' => $location->users->count() > 0 ]) >
+              @endcan
+                  <h2 class="box-title">{{ trans('general.users') }}</h2>
+                      @include('partials.users-bulk-actions')
+                      <table
+                              data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
+                              data-cookie-id-table="usersTable"
+                              data-pagination="true"
+                              data-id-table="usersTable"
+                              data-search="true"
+                              data-side-pagination="server"
+                              data-show-columns="true"
+                              data-show-export="true"
+                              data-show-refresh="true"
+                              data-sort-order="asc"
+                              data-toolbar="#userBulkEditToolbar"
+                              data-bulk-button-id="#bulkUserEditButton"
+                              data-bulk-form-id="#usersBulkForm"
+                              data-click-to-select="true"
+                              id="usersTable"
+                              class="table table-striped snipe-table"
+                              data-url="{{route('api.users.index', ['location_id' => $location->id])}}"
+                              data-export-options='{
+                              "fileName": "export-locations-{{ str_slug($location->name) }}-users-{{ date('Y-m-d') }}",
+                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                              }'>
+                      </table>
+                    </div><!-- /.tab-pane -->
+                <div id="assets" @class(['tab-pane', 'active' => $location->users->count() == 0]) >
 
-              <div class="tab-pane active" id="assets">
                   <h2 class="box-title">{{ trans('admin/locations/message.current_location') }}</h2>
 
-                  <div class="table table-responsive">
                       @include('partials.asset-bulk-actions')
                       <table
                               data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
@@ -186,50 +238,13 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                       </table>
-
-                  </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
-
-
-              
-              <div class="tab-pane" id="users">
-                    <h2 class="box-title">{{ trans('general.users') }}</h2>
-                      <div class="table table-responsive">
-                          @include('partials.users-bulk-actions')
-                          <table
-                                  data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
-                                  data-cookie-id-table="usersTable"
-                                  data-pagination="true"
-                                  data-id-table="usersTable"
-                                  data-search="true"
-                                  data-side-pagination="server"
-                                  data-show-columns="true"
-                                  data-show-export="true"
-                                  data-show-refresh="true"
-                                  data-sort-order="asc"
-                                  data-toolbar="#userBulkEditToolbar"
-                                  data-bulk-button-id="#bulkUserEditButton"
-                                  data-bulk-form-id="#usersBulkForm"
-                                  data-click-to-select="true"
-                                  id="usersTable"
-                                  class="table table-striped snipe-table"
-                                  data-url="{{route('api.users.index', ['location_id' => $location->id])}}"
-                                  data-export-options='{
-                              "fileName": "export-locations-{{ str_slug($location->name) }}-users-{{ date('Y-m-d') }}",
-                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                              }'>
-
-                          </table>
-                      </div><!-- /.table-responsive -->
-              </div><!-- /.tab-pane -->
-
 
               <div class="tab-pane" id="assets_assigned">
                   <h2 class="box-title">
                       {{ trans('admin/locations/message.assigned_assets') }}
                   </h2>
 
-                  <div class="table table-responsive">
                       @include('partials.asset-bulk-actions', ['id_divname' => 'AssignedAssetsBulkEditToolbar', 'id_formname' => 'assignedAssetsBulkForm', 'id_button' => 'AssignedbulkAssetEditButton'])
                       <table
                               data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
@@ -254,14 +269,11 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                       </table>
-
-                  </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="rtd_assets">
                   <h2 class="box-title">{{ trans('admin/hardware/form.default_location') }}</h2>
 
-                  <div class="table table-responsive">
                       @include('partials.asset-bulk-actions', ['id_divname' => 'RTDassetsBulkEditToolbar', 'id_formname' => 'RTDassets', 'id_button' => 'RTDbulkAssetEditButton'])
                       <table
                               data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
@@ -286,15 +298,12 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                       </table>
-
-                  </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
               
 
 
               <div class="tab-pane" id="accessories">
                   <h2 class="box-title">{{ trans('general.accessories') }}</h2>
-                  <div class="table table-responsive">
                       <table
                               data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
                               data-cookie-id-table="accessoriesListingTable"
@@ -314,13 +323,9 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                       </table>
-                  </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="accessories_assigned">
-
-                  <div class="table table-responsive">
-
                       <h2 class="box-title" style="float:left">
                           {{ trans('general.accessories_assigned') }}
                       </h2>
@@ -345,15 +350,11 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                       </table>
-
-                  </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
 
 
               <div class="tab-pane" id="consumables">
                   <h2 class="box-title">{{ trans('general.consumables') }}</h2>
-
-                      <div class="table table-responsive">
                           <table
                                   data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
                                   data-cookie-id-table="consumablesListingTable"
@@ -373,14 +374,10 @@
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
                           </table>
-
-                      </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
 
               <div class="tab-pane" id="components">
                   <h2 class="box-title">{{ trans('general.components') }}</h2>
-                      <div class="table table-responsive">
-
                           <table
                                   data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
                                   data-cookie-id-table="componentsTable"
@@ -399,10 +396,24 @@
                               "fileName": "export-locations-{{ str_slug($location->name) }}-components-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                               }'>
-
                           </table>
-                      </div><!-- /.table-responsive -->
               </div><!-- /.tab-pane -->
+
+                  <div class="tab-pane fade" id="files">
+
+                      <div class="row">
+                          <div class="col-md-12">
+
+                              <x-filestable
+                                      filepath="private_uploads/locations/"
+                                      showfile_routename="show/locationsfile"
+                                      deletefile_routename="delete/locationsfile"
+                                      :object="$location" />
+
+                          </div> <!-- /.col-md-12 -->
+                      </div> <!-- /.row -->
+
+                  </div>
 
                 <div class="tab-pane" id="history">
                     <h2 class="box-title">{{ trans('general.history') }}</h2>
@@ -434,7 +445,7 @@
                                     <tr>
                                         <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
                                         <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                                        <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                                        <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
                                         <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                                         <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                                         <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
@@ -468,7 +479,16 @@
       @endif
 
       <div class="col-md-12">
-          <ul class="list-unstyled" style="line-height: 20px; padding-bottom: 20px;">
+
+          <ul class="list-unstyled" style="line-height: 22px; padding-bottom: 20px;">
+
+              @if ($location->notes)
+                  <li>
+                      <strong>{{ trans('general.notes') }}</strong>:
+                      {!! nl2br(Helper::parseEscapedMarkedownInline($location->notes)) !!}
+                  </li>
+              @endif
+
               @if ($location->address!='')
                   <li>{{ $location->address }}</li>
               @endif
@@ -481,12 +501,16 @@
               @if ($location->manager)
                   <li>{{ trans('admin/users/table.manager') }}: {!! $location->manager->present()->nameUrl() !!}</li>
               @endif
+              @if ($location->company)
+                  <li>{{ trans('admin/companies/table.name') }}: {!! $location->company->present()->nameUrl() !!}</li>
+              @endif
               @if ($location->parent)
                   <li>{{ trans('admin/locations/table.parent') }}: {!! $location->parent->present()->nameUrl() !!}</li>
               @endif
               @if ($location->ldap_ou)
                   <li>{{ trans('admin/locations/table.ldap_ou') }}: {{ $location->ldap_ou }}</li>
               @endif
+
 
               @if ((($location->address!='') && ($location->city!='')) || ($location->state!='') || ($location->country!=''))
                       <li>
@@ -565,6 +589,10 @@
 @stop
 
 @section('moar_scripts')
+
+    @can('update', Location::class)
+        @include ('modals.upload-file', ['item_type' => 'locations', 'item_id' => $location->id])
+    @endcan
 
     <script>
         $('#dataConfirmModal').on('show.bs.modal', function (event) {

@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Aktualizuj tylko bieżącą lokalizację',
     'asset_not_deployable' => 'Ten status oznacza brak możliwości wdrożenia. Ten zasób nie może zostać przypisany.',
     'asset_not_deployable_checkin' => 'Ten status nie jest wdrożeniowym. Użycie tego statusu uniemożliwi wydanie zasobu.',
-    'asset_deployable' => 'Ten status oznacza możliwość wdrożenia. Ten zasób może zostać przypisany.',
+    'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Przetwarzanie... (To może zająć trochę czasu dla dużych plików)',
     'optional_infos'  => 'Informacje opcjonalne',
     'order_details'   => 'Informacje związane z zamówieniem',

@@ -56,7 +56,7 @@ return [
     'asset_location_update_actual' => 'Обновить только фактическое местоположение',
     'asset_not_deployable' => 'Этот статус актива не подлежит развертыванию. Этот актив не может быть проверен.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
-    'asset_deployable' => 'Этот статус доступен для развертывания. Этот актив может быть привязан.',
+    'asset_deployable' => 'Этот актив может быть выдан.',
     'processing_spinner' => 'Обработка... (Это может занять некоторое время на больших файлах)',
     'optional_infos'  => 'Дополнительная информация',
     'order_details'   => 'Информация, связанная с заказом',

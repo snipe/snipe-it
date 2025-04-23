@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Một hoặc nhiều địa chỉ email không hợp lệ.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'Trường: attribute chứa một ký tự không được phép.',
-        'email_array'      => 'Một hoặc nhiều địa chỉ email không hợp lệ.',
+
         'hashed_pass'      => 'Mật khẩu hiện tại của bạn không chính xác',
         'dumbpwd'          => 'Mật khẩu đó quá phổ biến.',
         'statuslabel_type' => 'Bạn phải chọn một loại nhãn tình trạng hợp lệ',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute phải là ngày hợp lệ ở định dạng YYYY-MM-DD',
         'start_date.date_format'        =>  ':attribute phải là ngày hợp lệ ở định dạng YYYY-MM-DD',
         'end_date.date_format'          =>  ':attribute phải là ngày hợp lệ ở định dạng YYYY-MM-DD',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

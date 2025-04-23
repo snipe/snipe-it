@@ -792,6 +792,8 @@
         </div><!-- /asset -->
 
         <div class="tab-pane" id="licenses">
+
+
           <div class="table-responsive">
             <table
                     data-cookie-id-table="userLicenseTable"
@@ -815,7 +817,7 @@
 
               <thead>
                 <tr>
-                  <th class="col-md-5">{{ trans('general.name') }}</th>
+                  <th>{{ trans('general.name') }}</th>
                   <th>{{ trans('admin/licenses/form.license_key') }}</th>
                   <th data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">{{ trans('general.purchase_cost') }}</th>
                   <th>{{ trans('admin/licenses/form.purchase_order') }}</th>
@@ -831,7 +833,7 @@
                   </td>
                   <td class="col-md-4">
                     @can('viewKeys', $license)
-                    {!! $license->present()->serialUrl() !!}
+                          <code class="single-line"><span class="js-copy-link" data-clipboard-target=".js-copy-key-{{ $license->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key-{{ $license->id }}">{{ $license->serial }}</span></span></code>
                     @else
                       ------------
                     @endcan
@@ -1001,7 +1003,7 @@
                       <th data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
                   @endif
                   <th data-field="item.serial" data-visible="false">{{ trans('admin/hardware/table.serial') }}</th>
-                  <th data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                  <th data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
                   <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
                   <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
                   <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>

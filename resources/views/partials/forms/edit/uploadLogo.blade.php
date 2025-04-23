@@ -3,13 +3,15 @@
 <div class="form-group">
     <div class="col-md-3">
         <label {!! $errors->has($logoVariable) ? 'class="alert-msg"' : '' !!} for="{{ $logoVariable }}">
-        {{ ucwords(str_replace('_', ' ', $logoVariable)) }}
+        {{ trans($logoLabel) }}
         </label>
     </div>
     <div class="col-md-9">
         <label class="btn btn-default{{ (config('app.lock_passwords')) ? ' disabled' : '' }}">
             {{ trans('button.select_file')  }}
-            <input type="file" name="{{ $logoVariable }}" class="js-uploadFile" id="{{ $logoId }}" accept="{{  $allowedTypes ?? "image/gif,image/jpeg,image/webp,image/png,image/svg,image/svg+xml" }}" data-maxsize="{{ $maxSize ?? Helper::file_upload_max_size() }}"
+            <input type="file" name="{{ $logoVariable }}" class="js-uploadFile" id="{{ $logoId }}"
+                   accept="{{  $allowedTypes ?? "image/gif,image/jpeg,image/webp,image/png,image/svg,image/svg+xml,image/avif" }}"
+                   data-maxsize="{{ $maxSize ?? Helper::file_upload_max_size() }}"
                    style="display:none; max-width: 90%"{{ (config('app.lock_passwords')) ? ' disabled' : '' }}>
         </label>
 
@@ -48,7 +50,7 @@
     <div class="col-md-9 col-md-offset-3">
         <label id="{{ $logoId }}-deleteCheckbox" for="{{ $logoClearVariable }}" style="font-weight: normal" class="form-control">
             <input type="checkbox" name="{{ $logoClearVariable }}" value="1" @checked(old($logoClearVariable))>
-            Remove current {{ ucwords(str_replace('_', ' ', $logoVariable)) }} image
+            {{ trans('general.remove_current_image', ['type' => $logoLabel]) }}
         </label>
     </div>
     @endif

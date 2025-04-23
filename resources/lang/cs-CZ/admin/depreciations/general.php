@@ -13,4 +13,8 @@ return [
     'no_depreciations_warning'               => '<strong>Upozornění: </strong>
                       V současné době nemáte nastavené žádné odpisy.
                       Prosím nastavte alespoň jedno odpisování pro zobrazení zprávy o odpisu.',
+    'depreciation_method'                   => 'Report zastarání',
+    'linear_depreciation'                   => 'Linear (Default)',
+    'half_1'                                => 'Half-year convention, always applied',
+    'half_2'                                => 'Half-year convention, applied with condition',
 ];

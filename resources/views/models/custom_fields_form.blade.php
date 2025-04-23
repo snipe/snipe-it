@@ -101,10 +101,4 @@
 @endif
 
 
-<script nonce="{{ csrf_token() }}">
-    // We have to re-call the tooltip since this is pulled in after the DOM has loaded
-    $('[data-tooltip="true"]').tooltip({
-        container: 'body',
-        animation: true,
-    });
-</script>
+

@@ -40,6 +40,9 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             ]
         )->name('api.assets.requested');
 
+        Route::post('request/{asset}', [Api\CheckoutRequest::class, 'store'])->name('api.assets.requests.store');
+        Route::post('request/{asset}/cancel', [Api\CheckoutRequest::class, 'destroy'])->name('api.assets.requests.destroy');
+
         Route::get('requestable/hardware',
             [
                 Api\AssetsController::class, 
@@ -508,8 +511,17 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         ->where(['action' => 'audit|audits|checkins', 'upcoming_status' => 'due|overdue|due-or-overdue']);
 
 
+        // Legacy URL for audit
+          Route::post('audit',
+              [
+                  Api\AssetsController::class,
+                  'audit'
+              ]
+          )->name('api.asset.audit.legacy');
 
-        Route::post('audit',
+
+          // Newer url for audit
+        Route::post('{asset}/audit',
         [
             Api\AssetsController::class, 
             'audit'
@@ -537,14 +549,14 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
           ]
         )->name('api.assets.restore');
 
-        Route::post('{asset_id}/files',
+        Route::post('{asset}/files',
           [
               Api\AssetFilesController::class,
               'store'
           ]
         )->name('api.assets.files.store');
 
-        Route::get('{asset_id}/files',
+        Route::get('{asset}/files',
           [
               Api\AssetFilesController::class,
               'list'

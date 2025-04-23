@@ -20,6 +20,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\HasApiTokens;
 use Watson\Validating\ValidatingTrait;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
@@ -94,7 +95,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'locale'                  => 'max:10|nullable',
         'website'                 => 'url|nullable|max:191',
         'manager_id'              => 'nullable|exists:users,id|cant_manage_self',
-        'location_id'             => 'exists:locations,id|nullable',
+        'location_id'             => 'exists:locations,id|nullable|fmcs_location',
         'start_date'              => 'nullable|date_format:Y-m-d',
         'end_date'                => 'nullable|date_format:Y-m-d|after_or_equal:start_date',
         'autoassign_licenses'     => 'boolean',
@@ -138,6 +139,29 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'company'    => ['name'],
         'manager'    => ['first_name', 'last_name', 'username'],
     ];
+
+
+    /**
+     * This sets the name property on the user. It's not a real field in the database
+     * (since we use first_name and last_name), but the Laravel mailable method
+     * uses this to determine the name of the user to send emails to.
+     *
+     * We only have to do this on the User model and no other models because other
+     * first-class objects have a name field.
+     * @return void
+     */
+
+    public $name;
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::retrieved(function($user){
+            $user->name = $user->getFullNameAttribute();
+        });
+    }
+
 
     /**
      * Internally check the user permission for the given section
@@ -278,6 +302,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return $this->activated == 1;
     }
+
 
     /**
      * Returns the full name attribute
@@ -622,6 +647,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
                 $username = str_slug($first_name).'_'.str_slug($last_name);
             } elseif ($format == 'firstname') {
                 $username = str_slug($first_name);
+            } elseif ($format == 'lastname') {
+                $username = str_slug($last_name);
             } elseif ($format == 'firstinitial.lastname') {
                 $username = str_slug(substr($first_name, 0, 1).'.'.str_slug($last_name));
             } elseif ($format == 'lastname_firstinitial') {
@@ -717,7 +744,21 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
     public function decodePermissions()
     {
-        return json_decode($this->permissions, true);
+        // Set default to empty JSON if the value is null
+        $permissions = json_decode($this->permissions ?? '{}', JSON_OBJECT_AS_ARRAY);
+
+        // If there are no permissions, return an empty array
+        if (!$permissions) {
+            return [];
+        }
+
+        // Otherwise, loop through the permissions and cast the values as integers
+        foreach ($permissions as $permission => $value) {
+            $permissions[$permission] = (int) $value;
+        }
+
+
+        return $permissions;
     }
 
     /**
@@ -842,10 +883,22 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         return $query->leftJoin('companies as companies_user', 'users.company_id', '=', 'companies_user.id')->orderBy('companies_user.name', $order);
     }
 
-    public function preferredLocale()
+
+
+
+    /**
+     * Get the preferred locale for the user.
+     *
+     * This uses the HasLocalePreference contract to determine the user's preferred locale,
+     * used by Laravel's mail system to determine the locale for sending emails.
+     * https://laravel.com/docs/11.x/mail#user-preferred-locales
+     *
+     */
+    public function preferredLocale(): string
     {
-        return $this->locale;
+        return $this->locale ?? Setting::getSettings()->locale ?? config('app.locale');
     }
+
     public function getUserTotalCost(){
         $asset_cost= 0;
         $license_cost= 0;

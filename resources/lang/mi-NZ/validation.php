@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Kotahi, neke atu ranei nga wahitau īmēra he muhu.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'Ko te: kei roto i te waahi tohu he momo e kore e whakaaetia.',
-        'email_array'      => 'Kotahi, neke atu ranei nga wahitau īmēra he muhu.',
+
         'hashed_pass'      => 'He hē tō kupuhipa o nāianei',
         'dumbpwd'          => 'He noa rawa te kupuhipa.',
         'statuslabel_type' => 'Me tīpako i te momo tahua tohu whaimana',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

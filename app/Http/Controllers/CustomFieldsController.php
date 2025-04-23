@@ -106,6 +106,7 @@ class CustomFieldsController extends Controller
             "show_in_requestable_list" => $request->get("show_in_requestable_list", 0),
             "display_checkin" => $request->get("display_checkin", 0),
             "display_checkout" => $request->get("display_checkout", 0),
+            "display_audit" => $request->get("display_audit", 0),
             "created_by" => auth()->id()
         ]);
 
@@ -250,6 +251,7 @@ class CustomFieldsController extends Controller
         $field->show_in_requestable_list = $request->get("show_in_requestable_list", 0);
         $field->display_checkin = $request->get("display_checkin", 0);
         $field->display_checkout = $request->get("display_checkout", 0);
+        $field->display_audit = $request->get("display_audit", 0);
 
         if ($request->get('format') == 'CUSTOM REGEX') {
             $field->format = e($request->get('custom_format'));

@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Dit veld is encrypted, dus sommige weergaveopties zullen niet beschikbaar zijn.',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

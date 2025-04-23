@@ -8,13 +8,13 @@ return [
     'ad_append_domain'          => 'Append domain name to username field',
     'ad_append_domain_help'     => 'User isn\'t required to write "username@domain.local", they can just type "username".',
     'admin_cc_email'            => 'CC Email',
-    'admin_cc_email_help'       => 'If you would like to send a copy of checkin/checkout emails that are sent to users to an additional email account, enter it here. Otherwise leave this field blank.',
+    'admin_cc_email_help'       => 'Send a copy of checkin/checkout emails to this address.',
     'admin_settings'            => 'Admin Settings',
     'is_ad'				        => 'This is an Active Directory server',
     'alerts'                	=> 'Alerts',
     'alert_title'               => 'Update Notification Settings',
     'alert_email'				=> 'Send alerts to',
-    'alert_email_help'    => 'Email addresses or distribution lists you want alerts to be sent to, comma separated',
+    'alert_email_help'          => 'Email addresses or distribution lists you want alerts to be sent to, comma separated.',
     'alerts_enabled'			=> 'Email Alerts Enabled',
     'alert_interval'			=> 'Expiring Alerts Threshold (in days)',
     'alert_inv_threshold'		=> 'Inventory Alert Threshold',
@@ -35,7 +35,7 @@ return [
     'backups_clean_helptext' => "This can be useful if you're changing between database versions",
     'backups_upload'            => 'Upload Backup',
     'backups_path'              => 'Backups on the server are stored in <code>:path</code>',
-    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file.  ',
+    'backups_restore_warning'   => 'Use the restore button <small><span class="btn btn-xs btn-warning"><i class="text-white fas fa-retweet" aria-hidden="true"></i></span></small> to restore from a previous backup. (This does not currently work with S3 file storage or Docker.)<br><br>Your <strong>entire :app_name database and any uploaded files will be completely replaced</strong> by what\'s in the backup file  ',
     'backups_logged_out'         => 'All existing users, including you, will be logged out once your restore is complete.',
     'backups_large'             => 'Very large backups may time out on the restore attempt and may still need to be run via command line. ',
     'barcode_settings'			=> 'Barcode Settings',
@@ -50,6 +50,7 @@ return [
     'dashboard_message_help'	=> 'This text will appear on the dashboard for anyone with permission to view the dashboard.',
     'default_currency'  		=> 'Default Currency',
     'default_eula_text'			=> 'Default EULA',
+    'default_eula_text_placeholder' => 'Add your default EULA text',
     'default_language'			=> 'Default Language',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'acceptance_note'           => 'Add a note for your decision (Optional)',
@@ -58,10 +59,8 @@ return [
     'display_eol'               => 'Display EOL in table view',
     'display_qr'                => 'Display 2D barcode',
     'display_alt_barcode'		=> 'Display 1D barcode',
-    'email_logo'                => 'Email Logo',
     'barcode_type'				=> '2D Barcode Type',
     'alt_barcode_type'			=> '1D barcode type',
-    'email_logo_size'       => 'Square logos in email look best. ',
     'enabled'                   => 'Enabled',
     'eula_settings'				=> 'EULA Settings',
     'eula_markdown'				=> 'This EULA allows <a href="https://help.github.com/articles/github-flavored-markdown/">Github flavored markdown</a>.',
@@ -77,7 +76,6 @@ return [
     'google_workspaces'         => 'Google Workspaces',
     'header_color'              => 'Header Color',
     'info'                      => 'These settings let you customize certain aspects of your installation.',
-    'label_logo'                => 'Label Logo',
     'label_logo_size'           => 'Square logos look best - will be displayed in the top right of each asset label. ',
     'laravel'                   => 'Laravel Version',
     'ldap'                      => 'LDAP',
@@ -152,6 +150,9 @@ return [
     'logo_print_assets_help'    => 'Use branding on printable asset lists ',
     'full_multiple_companies_support_help_text' => 'Restricting users (including admins) assigned to companies to their company\'s assets.',
     'full_multiple_companies_support_text' => 'Full Multiple Companies Support',
+    'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Show in Model Dropdowns',
     'optional'					=> 'optional',
     'per_page'                  => 'Results Per Page',
@@ -389,7 +390,7 @@ return [
     'test_mail' => 'Test Mail',
     'profile_edit'          => 'Edit Profile',
     'profile_edit_help'          => 'Allow users to edit their own profiles.',
-    'default_avatar' => 'Upload custom default avatar',
+    'default_avatar' => 'Custom Default Avatar',
     'default_avatar_help' => 'This image will be displayed as a profile if a user does not have a profile photo.',
     'restore_default_avatar' => 'Restore <a href=":default_avatar" data-toggle="lightbox" data-type="image">original system default avatar</a>',
     'restore_default_avatar_help' => '',
@@ -398,6 +399,51 @@ return [
     'no_groups' => 'No groups have been created yet. Visit <code>Admin Settings > Permission Groups</code> to add one.',
     'text' => 'Text',
 
+    'username_formats' => [
+        'username_format'		=> 'Username Format',
+        'firstname_lastname_format'	=> 'First Name Last Name (jane.smith)',
+        'first_name_format'	        => 'First Name (jane)',
+        'last_name_format'		=> 'Last Name (doe)',
+        'filastname_format'			=> 'First Initial Last Name (jsmith)',
+        'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj)',
+        'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith)',
+        'firstinitial.lastname' => 'First Initial Last Name (j.smith)',
+        'lastname_firstinitial' => 'Last Name First Initial (smith_j)',
+        'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j)',
+        'firstnamelastname'     => 'First Name Last Name (janesmith)',
+        'firstnamelastinitial'  => 'First Name Last Initial (janes)',
+        'lastnamefirstname'      => 'Last Name.First Name (smith.jane)',
+    ],
+
+    'email_formats' => [
+        'email_format'			=> 'Email Format',
+        'firstname_lastname_format'	=> 'First Name Last Name (jane.smith@example.com)',
+        'first_name_format'		=> 'First Name (jane@example.com)',
+        'last_name_format'		=> 'Last Name (doe@example.com)',
+        'filastname_format'			=> 'First Initial Last Name (jsmith@example.com)',
+        'lastnamefirstinitial_format' =>  'Last Name First Initial (smithj@example.com)',
+        'firstname_lastname_underscore_format' => 'First Name Last Name (jane_smith@example.com)',
+        'firstinitial.lastname' => 'First Initial Last Name (j.smith@example.com)',
+        'lastname_firstinitial' => 'Last Name First Initial (smith_j@example.com)',
+        'lastname_dot_firstinitial_format' => 'Last Name First Initial (smith.j@example.com)',
+        'firstnamelastname'     => 'First Name Last Name (janesmith@example.com)',
+        'firstnamelastinitial'  => 'First Name Last Initial (janes@example.com)',
+        'lastnamefirstname'      => 'Last Name.First Name (smith.jane@example.com)',
+    ],
+
+
+
+    'logo_labels' => [
+        'acceptance_pdf_logo'       => 'PDF Logo',
+        'email_logo'                => 'Email Logo',
+        'label_logo'                => 'Label Logo',
+        'logo'                      => 'Site Logo',
+        'favicon'                   => 'Favicon',
+    ],
+
+    'logo_help' => [
+        'email_logo_size'       => 'Square logos in email look best. ',
+    ],
 
     'logo_option_types' => [
         'text' => 'Text',
@@ -405,6 +451,19 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA &amp; Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+
+    ],
 
 
     /* Keywords for settings overview help */

@@ -66,13 +66,14 @@ return [
         'file_already_deleted' => 'Pasirinktas failas jau buvo panaikintas',
         'header_row_has_malformed_characters' => 'Vienas ar keli antraštinės eilutės atributai turi netinkamai suformuotų UTF-8 simbolių',
         'content_row_has_malformed_characters' => 'Vienas ar keli pirmosios eilutės atributai turi netinkamai suformuotų UTF-8 simbolių',
+        'transliterate_failure' => 'Transliteracija iš :encoding į UTF-8 nepavyko dėl netinkamų įvesties simbolių'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Ar tikrai norite panaikinti šį turtą?',
         'error'   		=> 'Bandant panaikinti turtą įvyko klaida. Bandykite dar kartą.',
-        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
+        'assigned_to_error' => '{1}Inventorinis numeris: :asset_tag šiuo metu yra išduotas. Paimkite šį įrenginį prieš panaikindami.|[2,*]Inventoriniai numeriai: :asset_tag šiuo metu yra išduoti. Paimkite šiuos įrenginius prieš panaikindami.',
         'nothing_updated'   => 'Nebuvo pasirinkta jokio turto, todėl nieko nebuvo panaikinta.',
         'success' 		=> 'Turtas sėkmingai panaikintas.',
     ],
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Turtas nebuvo užsakytas, bandykite dar kartą',
-        'success' 		=> 'Turtas užsakytas sėkmingai.',
-        'canceled'      => 'Išdavimo prašymas sėkmingai atšauktas',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Atšaukti šio daikto užklausą',
     ],
 
 ];

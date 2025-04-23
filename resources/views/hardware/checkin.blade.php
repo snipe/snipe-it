@@ -118,20 +118,21 @@
 
                                         <!-- Checkout/Checkin Date -->
                                         <div class="form-group{{ $errors->has('checkin_at') ? ' has-error' : '' }}">
-                                            <label for="checkin_at" class="col-sm-3 control-label">
+                                            <label for="checkin_at" class="col-sm-3 col-xs-12 col-sm-12 control-label">
                                                 {{ trans('admin/hardware/form.checkin_date') }}
                                             </label>
 
-                                            <div class="col-md-8">
-                                                <div class="input-group col-md-5 required">
+                                            <div class="col-md-8 col-xs-12 col-sm-12">
+                                                <div class="input-group col-xl-5 col-lg-5 col-md-7 col-sm-9 col-xs-12 required">
                                                     <div class="input-group date" data-provide="datepicker"
                                                          data-date-format="yyyy-mm-dd" data-autoclose="true">
                                                         <input type="text" class="form-control"
                                                                placeholder="{{ trans('general.select_date') }}"
                                                                name="checkin_at" id="checkin_at"
                                                                value="{{ old('checkin_at', date('Y-m-d')) }}">
-                                                        <span class="input-group-addon"><i class="fas fa-calendar"
-                                                                                           aria-hidden="true"></i></span>
+                                                        <span class="input-group-addon">
+                                                            <x-icon type="calendar" />
+                                                        </span>
                                                     </div>
                                                     {!! $errors->first('checkin_at', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                                 </div>
@@ -171,6 +172,7 @@
                         :options="[
                                 'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.assets')]),
                                 'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset')]),
+                                'target' => $target_option,
                                ]"
                 />
                 </form>

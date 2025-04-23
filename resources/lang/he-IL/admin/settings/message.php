@@ -50,5 +50,11 @@ return [
         'error_misc' => 'משהו השתבש אופסי פופסי. :( ',
         'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
         'webhook_channel_not_found' => ' ערוץ ההתליות לא נמצא.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Your settings were not saved.',
+        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+
 ];

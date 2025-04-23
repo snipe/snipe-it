@@ -66,13 +66,14 @@ return [
         'file_already_deleted' => 'Обраний файл вже видалено',
         'header_row_has_malformed_characters' => 'Один або кілька атрибутів у рядку заголовка містять невірні символи UTF-8',
         'content_row_has_malformed_characters' => 'Один або кілька атрибутів у першому рядку вмісту містять неправильні символи UTF-8',
+        'transliterate_failure' => 'Перенесення з :encoding в UTF-8 не вдалося через неприпустимі символи в введенні'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Ви впевнені, що хочете видалити цей медіафайл?',
         'error'   		=> 'Виникла проблема при видаленні активу. Будь ласка, спробуйте ще раз.',
-        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag в даний час відмічений. Перевірте цей пристрій перед видаленням. [2,*]Теги актива: :asset_tag наразі перевірені. Перевірте ці пристрої перед видаленням.',
         'nothing_updated'   => 'Активи не були вибрані, тому нічого не було видалено.',
         'success' 		=> 'Актив успішно видалений.',
     ],
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Актив не був запитаний, будь ласка, спробуйте ще раз',
-        'success' 		=> 'Актив успішно запитаний.',
-        'canceled'      => 'Запит на оформлення замовлення успішно скасовано',
+        'error'   		=> 'Актив не був запитаний, будь ласка, спробуйте ще раз.',
+        'success' 		=> 'Запит успішно надіслано.',
+        'canceled'      => 'Запит успішно скасовано.',
+        'cancel'        => 'Відмінити цей запит на додавання',
     ],
 
 ];
