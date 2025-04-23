@@ -140,7 +140,11 @@ class Label implements View
                                 $barcode2DTarget = $asset->serial; 
                                 break;
                             case 'location':
-                                $barcode2DTarget = route('locations.show', $asset->location_id);
+                                if ($asset->location_id) {
+                                    $barcode2DTarget = route('locations.show', $asset->location_id);
+                                } else {
+                                    return redirect()->back()->with('error', trans('admin/hardware/form.location_required'));
+                                }
                                 break;
                             case 'hardware_id':
                             default:
