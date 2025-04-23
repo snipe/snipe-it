@@ -415,7 +415,7 @@
                         {{ trans('admin/hardware/table.asset_tag') }}
                       </th>
                       <th class="col-md-2" data-switchable="true" data-visible="false">
-                        {{ trans('general.name') }}fljg
+                        {{ trans('general.name') }}
                       </th>
                       <th class="col-md-2" data-switchable="true" data-visible="true">
                         {{ trans('admin/hardware/table.asset_model') }}
