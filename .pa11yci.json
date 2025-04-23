@@ -49,6 +49,20 @@
           "navigate to https://snipe-it.test/hardware",
           "screen capture tests/pa11y/asset-list.png"
         ]
+      },
+      {
+        "url"     : "https://snipe-it.test/hardware/1",
+        "actions" : [
+          "navigate to https://snipe-it.test/hardware/1",
+          "screen capture tests/pa11y/asset-detail.png"
+        ]
+      },
+      {
+        "url"     : "https://snipe-it.test/account/view-assets",
+        "actions" : [
+          "navigate to https://snipe-it.test/account/view-assets",
+          "screen capture tests/pa11y/profile.png"
+        ]
       }
     ]
 }
