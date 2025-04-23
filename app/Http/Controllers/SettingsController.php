@@ -290,8 +290,8 @@ class SettingsController extends Controller
     public function getSettings() : View
     {
         $setting = Setting::getSettings();
-
-        return view('settings/general', compact('setting'));
+        $total_locations = count(Helper::test_locations_fmcs(false));
+        return view('settings/general', compact('setting'))->with('total_locations', $total_locations);
     }
 
     /**
