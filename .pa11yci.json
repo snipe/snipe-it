@@ -2,11 +2,18 @@
     "standard": "WCAG2AA",
     "level": "error",
     "defaults": {
+      "useIncognitoBrowserContext": false,
       "timeout": 500000,
       "wait": 2000,
       "ignore" : [
         "WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail",
         "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail"
+      ],
+      "actions": [
+        "set field input[name='username'] to admin",
+        "set field input[name='password'] to password",
+        "click element button[type=submit]",
+        "wait for url to be https://snipe-it.test/"
       ],
       "viewport": {
         "width": 1280,
@@ -15,12 +22,15 @@
     },
     "urls": [
         {
+          "__NOTE"  : "this should always be FIRST (if browser context is preserved)",
           "url": "https://snipe-it.test/login",
           "actions": [
+            "screen capture tests/pa11y/login.png",
              "set field input[name='username'] to admin",
              "set field input[name='password'] to password",
              "click element button[type=submit]",
-             "wait for url to be https://snipe-it.test/"
+             "wait for url to be https://snipe-it.test/",
+             "screen capture tests/pa11y/dashboard.png"
           ]
         }
     ]
