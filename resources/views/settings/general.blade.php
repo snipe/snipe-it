@@ -35,7 +35,9 @@
                    <div class="col-md-12">
 
                        <fieldset>
-                           <legend>Scoping</legend>
+                           <legend>
+                               {{ trans('admin/settings/general.legends.scoping') }}
+                           </legend>
                             <!-- Full Multiple Companies Support -->
                             <div class="form-group {{ $errors->has('full_multiple_companies_support') ? 'error' : '' }}">
                                 <div class="col-md-8 col-md-offset-3">
@@ -71,11 +73,12 @@
                             </div>
                             <!-- /.form-group -->
 
-
                        </fieldset>
 
                        <fieldset>
-                           <legend>Formats</legend>
+                           <legend>
+                               {{ trans('admin/settings/general.legends.formats') }}
+                           </legend>
 
                            <!-- Email domain -->
                            <div class="form-group {{ $errors->has('email_domain') ? 'error' : '' }}">
@@ -116,12 +119,13 @@
                                </div>
                            </div>
 
-
                        </fieldset>
 
 
                        <fieldset>
-                           <legend>User Profiles</legend>
+                           <legend>
+                               {{ trans('admin/settings/general.legends.profiles') }}
+                           </legend>
                            <!-- user profile edit checkbox -->
                            <div class="form-group">
                                <div class="col-md-8 col-md-offset-3">
@@ -135,7 +139,9 @@
                        </fieldset>
 
                        <fieldset>
-                           <legend>EULA &amp; Acceptance Preferences</legend>
+                           <legend>
+                               {{ trans('admin/settings/general.legends.eula') }}
+                           </legend>
 
                            <!-- Require signature for acceptance -->
                            <div class="form-group {{ $errors->has('require_accept_signature') ? 'error' : '' }}">
@@ -170,7 +176,7 @@
                        </fieldset>
 
                        <fieldset>
-                           <legend>Misc Display Preferences</legend>
+                           <legend>{{ trans('admin/settings/general.legends.misc_display') }}</legend>
 
                            <!-- Thumb Size -->
                            <div class="form-group {{ $errors->has('thumbnail_max_h') ? 'error' : '' }}">
@@ -245,15 +251,13 @@
                                </div>
                            </div>
 
-
-
-
                        </fieldset>
 
 
                        <fieldset>
-
-                           <legend>{{ trans('general.email') }}</legend>
+                           <legend>
+                               {{ trans('general.email') }}
+                           </legend>
 
                            <!-- Mail test -->
                            <div class="form-group">
@@ -319,11 +323,12 @@
 
 
                        <fieldset>
-                           <legend>Checkin Preferences</legend>
+                           <legend>
+                               {{ trans('admin/settings/general.legends.checkin') }}
+                           </legend>
 
                            <!-- Require Notes on checkin/checkout checkbox -->
                                <div class="form-group">
-
                                    <div class="col-md-8 col-md-offset-3">
                                        <label class="form-control">
                                            <input type="checkbox" value="1" name="require_checkinout_notes" {{ (old('require_checkinout_notes', $setting->require_checkinout_notes)) == '1' ? ' checked="checked"' : '' }} aria-label="require_checkinout_notes">
@@ -338,7 +343,9 @@
 
 
                        <fieldset>
-                           <legend>Login &amp; Dashboard Preferences</legend>
+                           <legend>
+                               {{ trans('admin/settings/general.legends.dashboard') }}
+                           </legend>
 
                            <!-- login text -->
                            <div class="form-group {{ $errors->has('login_note') ? 'error' : '' }}">
@@ -398,7 +405,9 @@
 
 
                        <fieldset>
-                           <legend>Miscellaneous</legend>
+                           <legend>
+                               {{ trans('admin/settings/general.legends.misc') }}
+                           </legend>
 
                                <!-- Depreciation method -->
                                <div class="form-group {{ $errors->has('depreciation_method') ? 'error' : '' }}">
