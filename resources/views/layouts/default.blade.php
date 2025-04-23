@@ -400,8 +400,8 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                                  {{ trans('general.logout') }}
                                             </a>
 
-                                            <form id="logout-form" action="{{ route('logout.post') }}" method="POST"
-                                                  style="display: none;">
+                                            <form id="logout-form" action="{{ route('logout.post') }}" method="POST" style="display: none;">
+                                                <button type="submit" style="display: none;" title="logout"></button>
                                                 {{ csrf_field() }}
                                             </form>
 
