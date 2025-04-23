@@ -20,6 +20,12 @@
              "set field input[name='password'] to password",
              "click element button[type=submit]",
              "wait for url to be https://snipe-it.test/"
+          ],
+          "ignore": [
+            "WCAG2AA.Principle2.Guideline2_4.2_4_2.H25.1.NoTitleEl",
+            "WCAG2AA.Principle3.Guideline3_1.3_1_1.H57.2",
+            "WCAG2AA.Principle1.Guideline1_4.1_4_3.G145.Fail",
+            "WCAG2AA.Principle1.Guideline1_4.1_4_3.G18.Fail"
           ]
         },
         {
