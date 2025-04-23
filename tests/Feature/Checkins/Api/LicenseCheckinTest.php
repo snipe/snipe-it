@@ -6,7 +6,7 @@ use App\Models\LicenseSeat;
 use App\Models\User;
 use Tests\TestCase;
 
-class LicenseCheckInTest extends TestCase {
+class LicenseCheckinTest extends TestCase {
     public function testLicenseCheckin()
     {
         $authUser = User::factory()->superuser()->create();
