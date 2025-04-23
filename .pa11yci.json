@@ -63,6 +63,41 @@
           "navigate to https://snipe-it.test/account/view-assets",
           "screen capture tests/pa11y/profile.png"
         ]
+      },
+      {
+        "url"     : "https://snipe-it.test/licences",
+        "actions" : [
+          "navigate to https://snipe-it.test/licenses",
+          "screen capture tests/pa11y/license-list.png"
+        ]
+      },
+      {
+        "url"     : "https://snipe-it.test/licences/create",
+        "actions" : [
+          "navigate to https://snipe-it.test/licenses/create",
+          "screen capture tests/pa11y/license-create.png"
+        ]
+      },
+      {
+        "url"     : "https://snipe-it.test/licences/1",
+        "actions" : [
+          "navigate to https://snipe-it.test/licenses/1",
+          "screen capture tests/pa11y/license-view.png"
+        ]
+      },
+      {
+        "url"     : "https://snipe-it.test/accessories",
+        "actions" : [
+          "navigate to https://snipe-it.test/accessories",
+          "screen capture tests/pa11y/accessory-list.png"
+        ]
+      },
+      {
+        "url"     : "https://snipe-it.test/accessories/create",
+        "actions" : [
+          "navigate to https://snipe-it.test/accessories/create",
+          "screen capture tests/pa11y/accessory-create.png"
+        ]
       }
     ]
 }

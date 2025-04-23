@@ -9,9 +9,9 @@
 <!-- begin non-ajaxed file listing table -->
 <div class="table-responsive">
     <table
-            data-cookie-id-table="{{ str_slug($object->name) }}UploadsTable"
-            data-id-table="{{ str_slug($object->name) }}UploadsTable"
-            id="{{ str_slug($object->name) }}}UploadsTable"
+            data-cookie-id-table="{{ str_slug($object->name ?? $object->id) }}UploadsTable"
+            data-id-table="{{ str_slug($object->name ?? $object->id) }}UploadsTable"
+            id="{{ str_slug($object->name ?? $object->id) }}UploadsTable"
             data-search="true"
             data-pagination="true"
             data-side-pagination="client"

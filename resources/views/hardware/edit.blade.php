@@ -42,8 +42,11 @@
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
           <div class="col-md-2 col-sm-12">
-              <button class="add_field_button btn btn-default btn-sm">
+              <button class="add_field_button btn btn-default btn-sm" name="add_field_button">
                   <x-icon type="plus" />
+                  <span class="sr-only">
+                      {{ trans('general.new') }}
+                  </span>
               </button>
           </div>
       @endif
@@ -116,7 +119,7 @@
             <!-- Datepicker -->
             <div class="form-group{{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
 
-                <label class="col-md-3 control-label">
+                <label class="col-md-3 control-label" for="next_audit_date">
                     {{ trans('general.next_audit_date') }}
                 </label>
 

@@ -40,16 +40,16 @@
                 <div class="icon" aria-hidden="true">
                     <x-icon type="assets" />
                 </div>
-                <a href="{{ route('hardware.index') }}" class="small-box-footer">
+                <span class="small-box-footer">
                     {{ trans('general.view_all') }}
                     <x-icon type="arrow-circle-right" />
-                </a>
+                </span>
             </div>
         </a>
     </div><!-- ./col -->
 
     <div class="col-lg-2 col-xs-6">
-        <a href="{{ route('licenses.index') }}">
+        <a href="{{ route('licenses.index') }}" aria-hidden="true">
             <!-- small license box -->
             <div class="dashboard small-box bg-maroon">
                 <div class="inner">
@@ -59,10 +59,10 @@
                 <div class="icon" aria-hidden="true">
                     <x-icon type="licenses" />
                 </div>
-                <a href="{{ route('licenses.index') }}" class="small-box-footer">
+                <span class="small-box-footer">
                     {{ trans('general.view_all') }}
                     <x-icon type="arrow-circle-right" />
-                </a>
+                </span>
             </div>
         </a>
     </div><!-- ./col -->
@@ -79,10 +79,10 @@
                 <div class="icon" aria-hidden="true">
                     <x-icon type="accessories" />
                 </div>
-                <a href="{{ route('accessories.index') }}" class="small-box-footer">
+                <span class="small-box-footer">
                     {{ trans('general.view_all') }}
                 <x-icon type="arrow-circle-right" />
-                </a>
+                </span>
             </div>
         </a>
     </div><!-- ./col -->
@@ -98,10 +98,10 @@
                 <div class="icon" aria-hidden="true">
                     <x-icon type="consumables" />
                 </div>
-                <a href="{{ route('consumables.index') }}" class="small-box-footer">
+                <span class="small-box-footer">
                     {{ trans('general.view_all') }}
                     <x-icon type="arrow-circle-right" />
-                </a>
+                </span>
             </div>
         </a>
     </div><!-- ./col -->
@@ -117,10 +117,10 @@
                 <div class="icon" aria-hidden="true">
                     <x-icon type="components" />
                 </div>
-                <a href="{{ route('components.index') }}" class="small-box-footer">
+                <span class="small-box-footer">
                     {{ trans('general.view_all') }}
                     <x-icon type="arrow-circle-right" />
-                </a>
+                </span>
             </div>
         </a>
     </div><!-- ./col -->
@@ -136,9 +136,10 @@
                 <div class="icon" aria-hidden="true">
                     <x-icon type="users" />
                 </div>
-                <a href="{{ route('users.index') }}" class="small-box-footer">{{ trans('general.view_all') }}
+                <span class="small-box-footer">
+                    {{ trans('general.view_all') }}
                     <x-icon type="arrow-circle-right" />
-                </a>
+                </span>
             </div>
         </a>
     </div><!-- ./col -->
