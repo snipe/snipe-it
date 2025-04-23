@@ -322,7 +322,7 @@
                        </fieldset>
 
 
-                       <fieldset class="bottom-padded">
+                       <fieldset name="checkin-preferences" class="bottom-padded">
                            <legend class="highlight">
                                {{ trans('admin/settings/general.legends.checkin') }}
                            </legend>
@@ -342,7 +342,7 @@
 
 
 
-                       <fieldset class="bottom-padded">
+                       <fieldset name="dashboard" class="bottom-padded">
                            <legend class="highlight">
                                {{ trans('admin/settings/general.legends.dashboard') }}
                            </legend>
