@@ -34,8 +34,8 @@
 
                    <div class="col-md-12">
 
-                       <fieldset>
-                           <legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">
                                {{ trans('admin/settings/general.legends.scoping') }}
                            </legend>
                             <!-- Full Multiple Companies Support -->
@@ -75,8 +75,8 @@
 
                        </fieldset>
 
-                       <fieldset>
-                           <legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">
                                {{ trans('admin/settings/general.legends.formats') }}
                            </legend>
 
@@ -122,8 +122,8 @@
                        </fieldset>
 
 
-                       <fieldset>
-                           <legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">
                                {{ trans('admin/settings/general.legends.profiles') }}
                            </legend>
                            <!-- user profile edit checkbox -->
@@ -138,8 +138,8 @@
                            </div>
                        </fieldset>
 
-                       <fieldset>
-                           <legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">
                                {{ trans('admin/settings/general.legends.eula') }}
                            </legend>
 
@@ -175,8 +175,8 @@
 
                        </fieldset>
 
-                       <fieldset>
-                           <legend>{{ trans('admin/settings/general.legends.misc_display') }}</legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">{{ trans('admin/settings/general.legends.misc_display') }}</legend>
 
                            <!-- Thumb Size -->
                            <div class="form-group {{ $errors->has('thumbnail_max_h') ? 'error' : '' }}">
@@ -254,8 +254,8 @@
                        </fieldset>
 
 
-                       <fieldset>
-                           <legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">
                                {{ trans('general.email') }}
                            </legend>
 
@@ -322,8 +322,8 @@
                        </fieldset>
 
 
-                       <fieldset>
-                           <legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">
                                {{ trans('admin/settings/general.legends.checkin') }}
                            </legend>
 
@@ -342,8 +342,8 @@
 
 
 
-                       <fieldset>
-                           <legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">
                                {{ trans('admin/settings/general.legends.dashboard') }}
                            </legend>
 
@@ -404,8 +404,8 @@
                        </fieldset>
 
 
-                       <fieldset>
-                           <legend>
+                       <fieldset class="bottom-padded">
+                           <legend class="highlight">
                                {{ trans('admin/settings/general.legends.misc') }}
                            </legend>
 
