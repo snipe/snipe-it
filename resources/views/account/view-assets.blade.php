@@ -99,7 +99,7 @@
 
                 </div>
                 <div class="col-md-12 text-center">
-                  <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">
+                  <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}" alt="User avatar">
                 </div>
                 @can('self.profile')
                   <div class="col-md-12">
@@ -468,9 +468,9 @@
                         <td>{{ $counter }}</td>
                         <td>
                           @if (($asset->image) && ($asset->image!=''))
-                            <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" style="max-height: 30px; width: auto" class="img-responsive">
+                            <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" style="max-height: 30px; width: auto" class="img-responsive" alt="">
                           @elseif (($asset->model) && ($asset->model->image!=''))
-                            <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" style="max-height: 30px; width: auto" class="img-responsive">
+                            <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" style="max-height: 30px; width: auto" class="img-responsive" alt="">
                           @endif
                         </td>
                         <td>
