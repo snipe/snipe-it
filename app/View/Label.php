@@ -40,6 +40,15 @@ class Label implements View
         $assets = $this->data->get('assets');
         $offset = $this->data->get('offset');
 
+        // if you're printing location target tags, make sure the assets have locations if not redirect with error
+        if (($settings->label2_2d_target == 'location')) {
+            foreach ($assets as $asset) {
+                if (!$asset->location_id) {
+                    return redirect()->back()->with('error', trans('admin/labels/message.asset_no_location'));
+                }
+            }
+        }
+
 
         // If disabled, pass to legacy view
         if ((!$settings->label2_enable)) {
@@ -140,11 +149,7 @@ class Label implements View
                                 $barcode2DTarget = $asset->serial; 
                                 break;
                             case 'location':
-                                if ($asset->location_id) {
-                                    $barcode2DTarget = route('locations.show', $asset->location_id);
-                                } else {
-                                    return redirect()->back()->with('error', trans('admin/hardware/form.location_required'));
-                                }
+                                $barcode2DTarget = route('locations.show', $asset->location_id);
                                 break;
                             case 'hardware_id':
                             default:
