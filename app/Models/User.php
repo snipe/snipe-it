@@ -115,16 +115,21 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
     protected $searchableAttributes = [
-        'first_name',
-        'last_name',
+        'address',
+        'city',
+        'country',
         'email',
-        'username',
+        'employee_num',
+        'first_name',
+        'jobtitle',
+        'last_name',
+        'locale',
         'notes',
         'phone',
-        'jobtitle',
-        'employee_num',
+        'state',
+        'username',
         'website',
-        'locale',
+        'zip',
     ];
 
     /**
@@ -133,7 +138,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @var array
      */
     protected $searchableRelations = [
-        'userloc'    => ['name'],
+        'userloc'    => ['name', 'address', 'address2', 'city', 'state', 'zip'],
         'department' => ['name'],
         'groups'     => ['name'],
         'company'    => ['name'],
