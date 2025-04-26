@@ -462,7 +462,9 @@ return [
         'checkin' => 'Checkin Preferences',
         'dashboard' => 'Login & Dashboard Preferences',
         'misc' => 'Miscellaneous',
-
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
     ],
 
 
