@@ -7,6 +7,7 @@ use App\Models\Accessory;
 use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\Setting;
+use Barryvdh\Debugbar\Controllers\AssetController;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Carbon\Carbon;
@@ -28,7 +29,6 @@ class AssetsTransformer
     {
         // This uses the getSettings() method so we're pulling from the cache versus querying the settings on single asset
         $setting = Setting::getSettings();
-
         $array = [
             'id' => (int) $asset->id,
             'name' => e($asset->name),
@@ -40,7 +40,7 @@ class AssetsTransformer
             ] : null,
             'byod' => ($asset->byod ? true : false),
             'requestable' => ($asset->requestable ? true : false),
-
+            'child_asset_count' => $asset->assignedAssets->count(),
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
             'eol' => (($asset->asset_eol_date != '') && ($asset->purchase_date != '')) ? (int) Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date, true) . ' months' : null,
             'asset_eol_date' => ($asset->asset_eol_date != '') ? Helper::getFormattedDateObject($asset->asset_eol_date, 'date') : null,
@@ -155,7 +155,7 @@ class AssetsTransformer
             'clone'         => Gate::allows('create', Asset::class) ? true : false,
             'restore'       => ($asset->deleted_at!='' && Gate::allows('create', Asset::class)) ? true : false,
             'update'        => ($asset->deleted_at=='' && Gate::allows('update', Asset::class)) ? true : false,
-            'delete'        => ($asset->deleted_at=='' && $asset->assigned_to =='' && Gate::allows('delete', Asset::class) && ($asset->deleted_at == '')) ? true : false,
+            'delete'        => ($asset->deleted_at=='' && $asset->assigned_to =='' && Gate::allows('delete', Asset::class) && ($asset->deleted_at == '')) && ($asset->assignedAssets->count() === 0) ? true : false,
         ];      
 
 
