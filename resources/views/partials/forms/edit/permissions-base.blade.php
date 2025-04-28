@@ -124,11 +124,15 @@
             />
           </td>
           <td class="col-md-1 permissions-item">
-            @if (($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-              {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit", 'disabled'=>'disabled', 'class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$permission['permission'].']']) }}
-            @else
-              {{ Form::radio('permission['.$permission['permission'].']', '0', $userPermissions[$permission['permission']] =='0', ["value"=>"inherit", 'class'=>'radiochecker-'.str_slug($area), 'aria-label'=>'permission['.$permission['permission'].']']) }}
-            @endif
+            <input
+                value="0"
+                class="radiochecker-{{ str_slug($area) }}"
+                aria-label="permission[{{ $permission['permission'] }}]"
+                @checked($userPermissions[$permission['permission']] =='0')
+                @disabled(($permission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
+                name="permission[{{ $permission['permission'] }}]"
+                type="radio"
+            />
           </td>
         @endif
       </tr>
