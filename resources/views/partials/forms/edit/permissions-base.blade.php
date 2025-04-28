@@ -59,15 +59,33 @@
       </td>
       <td class="col-md-1 permissions-item">
         <label for="{{ $area }}" class="sr-only">{{ $area }}</label>
-        {{ Form::radio("$area", '1',false,['value'=>"grant", 'data-checker-group' => str_slug($area), 'aria-label' => $area]) }}
+        <input
+            value="1"
+            data-checker-group="{{ str_slug($area) }}"
+            aria-label="{{ $area }}"
+            name="{{ $area }}"
+            type="radio"
+        />
       </td>
       <td class="col-md-1 permissions-item">
         <label for="{{ $area }}" class="sr-only">{{ $area }}</label>
-        {{ Form::radio("$area", '-1',false,['value'=>"deny", 'data-checker-group' => str_slug($area), 'aria-label' => $area]) }}
+        <input
+            value="-1"
+            data-checker-group="{{ str_slug($area) }}"
+            aria-label="{{ $area }}"
+            name="{{ $area }}"
+            type="radio"
+        />
       </td>
       <td class="col-md-1 permissions-item">
         <label for="{{ $area }}" class="sr-only">{{ $area }}</label>
-        {{ Form::radio("$area", '0',false,['value'=>"inherit", 'data-checker-group' => str_slug($area), 'aria-label' => $area] ) }}
+        <input
+            value="0"
+            data-checker-group="{{ str_slug($area) }}"
+            aria-label="{{ $area }}"
+            name="{{ $area }}"
+            type="radio"
+        />
       </td>
     </tr>
 
