@@ -37,11 +37,11 @@
           />
         @else
           <input
-              value="1"
               aria-label="permission[{{ $localPermission['permission'] }}]"
               @checked($userPermissions[$localPermission['permission']] == '1')
               name="permission[{{ $localPermission['permission'] }}]"
               type="radio"
+              value="1"
           />
         @endif
 
@@ -50,11 +50,31 @@
       <td class="col-md-1 permissions-item">
         <label class="sr-only" for="{{ 'permission['.$localPermission['permission'].']' }}">{{ 'permission['.$localPermission['permission'].']' }}</label>
         @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-          {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['disabled'=>"disabled", 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+          <input
+              disabled="disabled"
+              aria-label="permission[{{ $localPermission['permission'] }}]"
+              @checked($userPermissions[$localPermission['permission']] == '-1')
+              name="permission[{{ $localPermission['permission'] }}]"
+              type="radio"
+              value="-1"
+          />
         @elseif (($localPermission['permission'] == 'admin') && (!Auth::user()->hasAccess('admin')))
-          {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['disabled'=>"disabled", 'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+          <input
+              disabled="disabled"
+              aria-label="permission[{{ $localPermission['permission'] }}]"
+              @checked($userPermissions[$localPermission['permission']] == '-1')
+              name="permission[{{ $localPermission['permission'] }}]"
+              type="radio"
+              value="-1"
+          />
         @else
-          {{ Form::radio('permission['.$localPermission['permission'].']', '-1',$userPermissions[$localPermission['permission'] ] == '-1',['value'=>"deny",   'aria-label'=> 'permission['.$localPermission['permission'].']']) }}
+          <input
+              aria-label="permission[{{ $localPermission['permission'] }}]"
+              @checked($userPermissions[$localPermission['permission']] == '-1')
+              name="permission[{{ $localPermission['permission'] }}]"
+              type="radio"
+              value="-1"
+          />
         @endif
       </td>
       <td class="col-md-1 permissions-item">
