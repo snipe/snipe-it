@@ -81,11 +81,31 @@
         <label class="sr-only" for="{{ 'permission['.$localPermission['permission'].']' }}">
            {{ 'permission['.$localPermission['permission'].']' }}</label>
         @if (($localPermission['permission'] == 'superuser') && (!Auth::user()->isSuperUser()))
-          {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['disabled'=>"disabled", 'aria-label'=> 'permission['.$localPermission['permission'].']'] ) }}
+          <input
+              disabled="disabled"
+              aria-label="permission[{{ $localPermission['permission'] }}]"
+              @checked($userPermissions[$localPermission['permission']] == '0')
+              name="permission[{{ $localPermission['permission'] }}]"
+              type="radio"
+              value="0"
+          />
         @elseif (($localPermission['permission'] == 'admin') && (!Auth::user()->hasAccess('admin')))
-          {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['disabled'=>"disabled", 'aria-label'=> 'permission['.$localPermission['permission'].']'] ) }}
+          <input
+              disabled="disabled"
+              aria-label="permission[{{ $localPermission['permission'] }}]"
+              @checked($userPermissions[$localPermission['permission']] == '0')
+              name="permission[{{ $localPermission['permission'] }}]"
+              type="radio"
+              value="0"
+          />
         @else
-          {{ Form::radio('permission['.$localPermission['permission'].']','0',$userPermissions[$localPermission['permission'] ] == '0',['value'=>"inherit",   'aria-label'=> 'permission['.$localPermission['permission'].']'] ) }}
+          <input
+              aria-label="permission[{{ $localPermission['permission'] }}]"
+              @checked($userPermissions[$localPermission['permission']] == '0')
+              name="permission[{{ $localPermission['permission'] }}]"
+              type="radio"
+              value="0"
+          />
         @endif
       </td>
     </tr>
