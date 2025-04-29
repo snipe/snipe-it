@@ -79,6 +79,9 @@ class CustomField extends Model
         'auto_add_to_fieldsets',
         'show_in_listview',
         'show_in_email',
+        'display_checkout',
+        'display_checkin',
+        'display_audit',
         'show_in_requestable_list',
     ];
 
