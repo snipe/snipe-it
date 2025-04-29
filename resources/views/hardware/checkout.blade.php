@@ -145,7 +145,7 @@
                         <!-- Custom fields -->
                         @include("models/custom_fields_form", [
                                 'model' => $asset->model,
-                                'show_display_checkout_fields' => 'true'
+                                'show_custom_fields_type' => 'checkout'
                         ])
 
                         <!-- Note -->

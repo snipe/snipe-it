@@ -71,6 +71,20 @@ class CustomFieldset extends Model
         return $this->belongsTo(\App\Models\User::class); //WARNING - not all CustomFieldsets have a User!!
     }
 
+    public function displayAnyFieldsInForm($form_type = null)
+    {
+        switch ($form_type) {
+            case 'audit':
+                return $this->displayFieldInAuditForm();
+            case 'checkin':
+                return $this->displayFieldInCheckinForm();
+            case 'checkout':
+                return $this->displayFieldInCheckoutForm();
+            default:
+                return true;
+        }
+    }
+
     /**
      * Determine the validation rules we should apply based on the
      * custom field format
