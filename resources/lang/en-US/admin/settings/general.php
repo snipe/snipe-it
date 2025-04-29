@@ -465,6 +465,9 @@ return [
         'logos' => 'Logos & Display',
         'colors' => 'Colors & Skins',
         'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
     ],
 
 
