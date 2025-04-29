@@ -150,12 +150,13 @@ class AssetsTransformer
         }
 
         $permissions_array['available_actions'] = [
-            'checkout'      => ($asset->deleted_at=='' && Gate::allows('checkout', Asset::class)) ? true : false,
-            'checkin'       => ($asset->deleted_at=='' && Gate::allows('checkin', Asset::class)) ? true : false,
+            'checkout'      => ($asset->deleted_at=='' && Gate::allows('checkout', $asset)) ? true : false,
+            'checkin'       => ($asset->deleted_at=='' && Gate::allows('checkin', $asset)) ? true : false,
             'clone'         => Gate::allows('create', Asset::class) ? true : false,
-            'restore'       => ($asset->deleted_at!='' && Gate::allows('create', Asset::class)) ? true : false,
-            'update'        => ($asset->deleted_at=='' && Gate::allows('update', Asset::class)) ? true : false,
-            'delete'        => ($asset->deleted_at=='' && $asset->assigned_to =='' && Gate::allows('delete', Asset::class) && ($asset->deleted_at == '')) ? true : false,
+            'restore'       => ($asset->deleted_at!='' && Gate::allows('create', $asset)) ? true : false,
+            'update'        => ($asset->deleted_at=='' && Gate::allows('update', $asset)) ? true : false,
+            'audit'        => Gate::allows('audit', $asset) ? true : false,
+            'delete'        => ($asset->deleted_at=='' && $asset->assigned_to =='' && Gate::allows('delete', $asset) && ($asset->deleted_at == '')) ? true : false,
         ];      
 
 
