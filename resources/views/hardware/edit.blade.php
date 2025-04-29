@@ -224,6 +224,17 @@
                     //now re-populate the custom fields based on the previously saved values
                     $('#custom_fields_content').find('input,select').each(function (index,elem) {
                         if(transformed_oldvals[elem.name]) {
+                            if (elem.type === 'checkbox' || elem.type === 'radio'){
+                                let shouldBeChecked = oldvals.find(oldValElement => {
+                                    return oldValElement.name === elem.name && oldValElement.value === $(elem).val();
+                                });
+
+                                if (shouldBeChecked){
+                                    $(elem).prop('checked', true);
+                                }
+
+                                return;
+                            }
                              {{-- If there already *is* is a previously-input 'transformed_oldvals' handy,
                                   overwrite with that previously-input value *IF* this is an edit of an existing item *OR*
                                   if there is no new default custom field value coming from the model --}}
