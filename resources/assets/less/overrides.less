@@ -17,6 +17,7 @@
 
 .logo {
   background-color: inherit;
+  color: #111;
 }
 .main-header .logo {
   width: 100% !important;
@@ -106,6 +107,7 @@ a.accordion-header {
 }
 .main-header .logo {
   padding: 0px 5px 0px 15px;
+  color: #111;
 }
 
 
@@ -149,6 +151,30 @@ a.accordion-header {
   content: "\f0c9";
   font-weight: 900;
   font-family: 'Font Awesome\ 5 Free';
+  font-size: 20px;
+}
+
+.main-menu {
+    display: flex;
+    margin-left: 20px;
+}
+
+.main-menu li {
+    padding: 0;
+}
+
+.main-menu li a {
+    padding: 16px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.main-menu li.active a, 
+.main-menu li a:hover {
+    background-color: #102d7b;
 }
 
 .direct-chat-contacts {
@@ -313,6 +339,8 @@ a.accordion-header {
   color: white;
   padding: 0px;
   /* adjust based on your layout */
+  margin-top: 15px;
+  margin-bottom: 15px;
 
 }
 .skin-red
@@ -349,10 +377,7 @@ select:required + .select2-container .select2-selection, select:required + .sele
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont,
-  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-  "Fira Sans", "Droid Sans", "Helvetica Neue",
-  sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 13px;
 }
 
@@ -871,12 +896,15 @@ th.css-history > .th-inner::before {
   padding-left: 15px;
   padding-right: 15px;
   padding-top: 15px;
-  color: #fff;
+  color: #000;
 }
 
+.small-box .inner h3 {
+  color: #102d7b;
+}
 
 .small-box > a:link, .small-box > a:visited, .small-box > a:hover {
-  color: #fff;
+  color: #000;
 }
 
 .select2-container--default .select2-selection--single, .select2-selection .select2-selection--single {
@@ -914,9 +942,9 @@ th.css-history > .th-inner::before {
   }
 }
 
-@media screen and (max-width: 1268px) and (min-width: 912px){
+@media screen and (min-width: 912px){
   .sidebar-menu {
-    margin-top:50px
+    margin-top:32px
   }
 }
 @media screen and (max-width: 992px){

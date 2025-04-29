@@ -3,8 +3,11 @@
 
 
 //Changes the color and the hovering properties of the navbar
-.navbar-variant(@color; @font-color: rgba(255, 255, 255, 0.8); @hover-color: #f6f6f6; @hover-bg: rgba(0, 0, 0, 0.1)) {
+.navbar-variant(@color; @font-color: rgba(255, 255, 255, 0.8); @hover-color: rgba(244, 147, 33, 0.78); @hover-bg: rgba(244, 147, 33, 0.09)) {
   background-color: @color;
+  border-left: 1px solid @gray;
+  border-bottom: 1px solid @gray;
+  
   //Navbar links
   .nav > li > a {
     color: @font-color;
@@ -19,20 +22,18 @@
     .nav > .active > a {
     background: @hover-bg;
     color: @hover-color;
+    border-radius: 6px;
   }
 
   //Add color to the sidebar toggle button
   .sidebar-toggle {
     color: @font-color;
-    &:hover {
-      color: @hover-color;
-      background: @hover-bg;
-    }
+
   }
 }
 
 //Logo color variation
-.logo-variant(@bg-color; @color: #fff; @border-bottom-color: transparent; @border-bottom-width: 0) {
+.logo-variant(@bg-color; @color: #09090B; @border-bottom-color: transparent; @border-bottom-width: 0) {
   background-color: @bg-color;
   color: @color;
   border-bottom: @border-bottom-width solid @border-bottom-color;
@@ -197,8 +198,10 @@
     background-color: @sidebar-light-bg;
   }
   .content-wrapper,
-  .main-footer {
+  .main-footer,
+  .main-header.navbar {
     border-left: 1px solid @gray;
+    background-color: #fff;
   }
   //User Panel (resides in the sidebar)
   .user-panel {
@@ -218,7 +221,7 @@
     //links
     > a {
       border-left: 3px solid transparent;
-      font-weight: 600;
+      font-weight: 400;
     }
     //Hover and active states
     &:hover > a,
@@ -232,7 +235,8 @@
     &.active {
       border-left-color: @icon-active-color;
       > a {
-        font-weight: 600;
+        font-weight: 500;
+        line-height: 20px;
       }
     }
     //First Level Submenu
