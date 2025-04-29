@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'その資産状態はデプロイできません。このステータスラベルを使用すると、資産をチェックインします。',
     'asset_deployable' => 'この資産はチェックアウトできます。',
     'processing_spinner' => '処理中です... (これは大きなファイルで少し時間がかかる可能性があります)',
+    'processing' => '処理中... ',
     'optional_infos'  => 'オプション情報',
     'order_details'   => 'オーダー関連情報',
     'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',

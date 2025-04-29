@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Turto su šia būsenos žyma išduoti negalima. Nustačius šią būsenos žymą, turtas bus paimtas.',
     'asset_deployable' => 'Šį turtą galima išduoti.',
     'processing_spinner' => 'Apdorojama... (Dideliems failams gali šiek tiek užtrukti)',
+    'processing' => 'Processing... ',
     'optional_infos'  => 'Papildoma informacija',
     'order_details'   => 'Su užsakymu susijusi informacija',
     'calc_eol'    => 'Jei EOL data nustatoma iš naujo, naudoti automatinį EOL apskaičiavimą pagal įsigijimo datą ir nusidėvėjimo laipsnį.',

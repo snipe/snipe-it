@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'Ako ste u obavezi da redovno fizički popisujete imovinu, unesite interval u mesecima. Ako izmenite ovu vrednost, svi "datumi sledećih popisa" za imovinu sa datumima zakazanih popisa će biti ažurirani.',
     'audit_warning_days'        => 'Prag upozorenja za reviziju',
     'audit_warning_days_help'   => 'Koliko dana unapred treba da vas upozorimo kada sredstva dospevaju za reviziju?',
-    'auto_increment_assets'		=> 'Generiši automatski rastuće oznake imovine',
+    'auto_increment_assets'		=> 'Generišite oznake sredstava koje se automatski povećavaju',
     'auto_increment_prefix'		=> 'Prefiks (opciono)',
     'auto_incrementing_help'    => 'Prvo omogućite oznake sredstava za automatsko povećanje da biste ovo postavili',
     'backups'					=> 'Rezervne kopije',
@@ -50,7 +50,7 @@ return [
     'dashboard_message_help'	=> 'Ovaj tekst će se pojaviti na kontrolnoj tabli za svakoga ko ima dozvolu da vidi kontrolnu tablu.',
     'default_currency'  		=> 'Podrazumevana valuta',
     'default_eula_text'			=> 'Default EULA',
-    'default_eula_text_placeholder' => 'Add your default EULA text',
+    'default_eula_text_placeholder' => 'Dodajte tekst vaše podrazumevane EULA-e',
     'default_language'			=> 'Podrazumevani jezik',
     'default_eula_help_text'	=> 'Takođe možete da povežete prilagođene EULA-e sa određenim kategorijama sredstava.',
     'acceptance_note'           => 'Dodajte napomenu vašoj odluci (opciono)',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'Ograničavanje korisnika (uključujući administratore) dodeljenih kompanijama na imovinu njihove kompanije.',
     'full_multiple_companies_support_text' => 'Potpuna podrška za više kompanija',
     'scope_locations_fmcs_support_text'  => 'Opseg lokacija sa punom podrškom višestruko kompanija',
-    'scope_locations_fmcs_support_help_text'  => 'U prethodnim verzijama, lokacije nisu bile ograničene na određenu kompaniju. Ukoliko je ova opcija isključena, to zadržava povratnu kompatibilnost sa starijim verzijama i lokacije se mogu koristiti za više kompanija. Ako je opcija uključena, lokacije su ograničene na izabranu kompaniju.',
+    'scope_locations_fmcs_support_help_text'  => 'Ograniči lokacije prema izabranoj kompaniji.',
+    'scope_locations_fmcs_support_disabled_text'  => 'Ova opcija je onemogućena jer imate neispravne lokacije podešene za :count ili više stavki.',
     'show_in_model_list'   => 'Prikaži u padajućim menijima modela',
     'optional'					=> 'opciono',
     'per_page'                  => 'Rezultati po stranici',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logotip i tekst',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Opsezanje',
+        'formats' => 'Podrazumevani formati',
+        'profiles' => 'Korisnički profili',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Razne opcije prikaza',
+        'email' => 'Podešavanja e-pošte',
+        'checkin' => 'Podešavanja razduženja',
+        'dashboard' => 'Podešavanja prijave i kontrolne table',
+        'misc' => 'Razno',
+        'logos' => 'Logotipi i prikaz',
+        'colors' => 'Boje i izgled',
+        'footer' => 'Podešavanja podnožja',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */

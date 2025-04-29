@@ -614,4 +614,13 @@ return [
     'cost_each' => 'crwdns12983:0crwdne12983:0',
     'remove_current_image' => 'crwdns13089:0crwdne13089:0',
 
+    'seeding' => [
+        'manufacturers' => [
+            'button' => 'crwdns13180:0crwdne13180:0',
+            'prompt' => 'crwdns13182:0crwdne13182:0',
+            'success' => 'crwdns13184:0crwdne13184:0',
+            'error' => 'crwdns13186:0crwdne13186:0',
+        ],
+    ],
+
 ];

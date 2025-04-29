@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Varlık bu durumdayken dağıtılamaz. Bu durum etiketini kullanmak varlığı giriş yaptıracaktır.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'İşleniyor... (Büyük dosyalarda bu işlem biraz zaman alabilir)',
+    'processing' => 'İşleniyor... ',
     'optional_infos'  => 'Opsiyonel Bilgi',
     'order_details'   => 'Sipariş Bilgileri',
     'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',

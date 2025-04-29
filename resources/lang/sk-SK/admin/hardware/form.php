@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Tento majetok nie je odovzdateľný. Použitím tohto typu stavu bude majetok prevzatý od priradeného používateľa.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Procesujem... (Môže to chvíľu trvať v prípade veľkých súborov)',
+    'processing' => 'Processing... ',
     'optional_infos'  => 'Nepovinné informácie',
     'order_details'   => 'Informácie súvisiace s objednávkou',
     'calc_eol'    => 'Ak odstránite EOL dátum použite sa automatická EOL kalkulácia vychádzajúca z dátumu nákupu a EOL periody.',

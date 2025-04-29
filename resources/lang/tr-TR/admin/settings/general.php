@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'Varlıklarınızı düzenli olarak fiziksel olarak denetlemeniz gerekiyorsa, kullandığınız aralığı ay olarak girin. Bu değeri güncellerseniz, denetim tarihi yaklaşan varlıklar için tüm "sonraki denetim tarihleri" güncellenir.',
     'audit_warning_days'        => 'Denetim Uyarı Eşiği',
     'audit_warning_days_help'   => 'Mal varlığının denetime tabi olması gerektiği zaman sizi kaç gün öncesinden uyarmalıyız?',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Otomatik olarak artan varlık etiketi oluşturun',
     'auto_increment_prefix'		=> 'Ünvan (opsiyonel)',
     'auto_incrementing_help'    => 'Bunu ayarlamak için önce otomatik artan varlık etiketlerini etkinleştirin',
     'backups'					=> 'Yedekler',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'Kısıtlı kullanıcılar Firmaların varlıkları için firmalara atanmıştır.',
     'full_multiple_companies_support_text' => 'Birden Fazla Şirket Desteği',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
-    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Model açılır menüsünde göster',
     'optional'					=> 'İsteğe bağlı',
     'per_page'                  => 'Sayfa başına sonuç sayısı',
@@ -451,6 +452,24 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */
