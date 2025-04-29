@@ -198,7 +198,7 @@
 
               <th data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.display_audit') }}">
-                <x-icon type="due" />
+                <x-icon type="audit" />
                 <span class="sr-only">
                     {{ trans('admin/custom_fields/general.display_audit') }}
                   </span>
