@@ -139,29 +139,26 @@
                                             </div>
                                         </div>
 
+                                        <!-- Note -->
+                                        <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
+                                            <label for="note" class="col-md-3 control-label">
+                                                {{ trans('general.notes') }}
+                                            </label>
+                                            <div class="col-md-8">
+                                                <textarea class="col-md-6 form-control" id="note" @required($snipeSettings->require_checkinout_notes)
+                                                name="note">{{ old('note', $asset->note) }}</textarea>
+                                                {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                            </div>
+                                        </div>
+
+
                                         <!-- Custom fields -->
                                         @include("models/custom_fields_form", [
                                                 'model' => $asset->model,
-                                                'show_display_checkin_fields' => 'true'
+                                                'show_custom_fields_type' => 'checkin'
                                         ])
 
 
-
-
-
-
-
-                        <!-- Note -->
-                        <div class="form-group {{ $errors->has('note') ? 'error' : '' }}">
-                            <label for="note" class="col-md-3 control-label">
-                                {{ trans('general.notes') }}
-                            </label>
-                            <div class="col-md-8">
-                                <textarea class="col-md-6 form-control" id="note" @required($snipeSettings->require_checkinout_notes)
-                                        name="note">{{ old('note', $asset->note) }}</textarea>
-                                {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                            </div>
-                        </div>
                     </div> <!--/.box-body-->
                 </div> <!--/.box-body-->
 
