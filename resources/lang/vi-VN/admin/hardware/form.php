@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Đang xử lý... (Quá trình này có thể mất một chút thời gian đối với các tệp lớn)',
+    'processing' => 'Đang xử lý... ',
     'optional_infos'  => 'Thông tin bổ sung',
     'order_details'   => 'Thông tin đơn hàng',
     'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',

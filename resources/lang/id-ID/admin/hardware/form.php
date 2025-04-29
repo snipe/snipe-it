@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Status aset tersebut tidak dapat diterapkan. Menggunakan label status ini akan memeriksa kembali aset tersebut.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Memproses... (Mungkin memerlukan sedikit waktu untuk file besar)',
+    'processing' => 'Processing... ',
     'optional_infos'  => 'Informasi Tambahan',
     'order_details'   => 'Informasi Pesanan',
     'calc_eol'    => 'Jika mengosongkan tanggal EOL, gunakan perhitungan EOL otomatis berdasarkan tanggal pembelian dan tarif EOL.',

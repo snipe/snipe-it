@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'Этот актив может быть выдан.',
     'processing_spinner' => 'Обработка... (Это может занять некоторое время на больших файлах)',
+    'processing' => 'Обработка... ',
     'optional_infos'  => 'Дополнительная информация',
     'order_details'   => 'Информация, связанная с заказом',
     'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',

@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'Ak je požadovaný pravidelný fyzický audit majetku, zadajte interval v mesiacoch, ktorý používate. Ak túto hodnotu aktualizujete, aktualizujú sa všetky „dátumy ďalšieho auditu“ pre majetok s blížiacim sa dátumom auditu.',
     'audit_warning_days'        => 'Prah výstrahy auditu',
     'audit_warning_days_help'   => 'Koľko dní dopredu by sme vás mali upozorňovať, keď je majetok čakajúci na audit?',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Generovať automatické inkrementálne označenie majetku',
     'auto_increment_prefix'		=> 'Predpona (volitelna)',
     'auto_incrementing_help'    => 'Pre nastavenie musíte najprv povoliť automaticky generované označenie majetku',
     'backups'					=> 'Zálohy',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'Obmedzenie používateľov (vrátane administrátorov) iba na majetok vo vlastníctve ich spoločnosti.',
     'full_multiple_companies_support_text' => 'Plná podpora pre viacero spoločností',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
-    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Zobraziť v robaľovacom menu modelu',
     'optional'					=> 'voliteľné',
     'per_page'                  => 'Výsledkov na stránku',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */

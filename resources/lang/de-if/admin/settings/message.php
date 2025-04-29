@@ -53,8 +53,8 @@ return [
     ],
 
     'location_scoping' => [
-        'not_saved' => 'Your settings were not saved.',
-        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+        'not_saved' => 'Deine Einstellungen wurden nicht gespeichert.',
+        'mismatch' => 'Es gibt 1 Element in der Datenbank, das Deine Aufmerksamkeit benötigt, bevor Du die Standortbereicherung aktivieren kannst. Es gibt :count Elemente in der Datenbank, die Deine Aufmerksamkeit benötigen, bevor Du die Standortbereicherung aktivieren kannst.',
     ],
 
 ];

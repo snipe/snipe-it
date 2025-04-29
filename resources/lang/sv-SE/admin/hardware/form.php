@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Denna tillgångsstatus kan inte levereras. Användning av denna statusetikett kommer att checka in tillgången.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Bearbetar... (Detta kan ta tid vid stora filer)',
+    'processing' => 'Bearbetar... ',
     'optional_infos'  => 'Valfri information',
     'order_details'   => 'Beställningsrelaterad information',
     'calc_eol'    => 'Vid nollställning av EOL-datum, använd den automatiserade EOL-uträkningen baserat på inköpingsdatum och EOL-datum.',

@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Статусот на средството е незадолжливо. Користењето на оваа ознака за статус ќе го провери средството.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Се обработува... (Ова може да потрае за поголеми датотеки)',
+    'processing' => 'Processing... ',
     'optional_infos'  => 'Опционални информации',
     'order_details'   => 'Информации за набавка',
     'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',

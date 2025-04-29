@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Questo stato è "Non Assegnabile". Usando questo stato, verrà effettuata la restituzione del Bene.',
     'asset_deployable' => 'Questo bene può essere assegnato.',
     'processing_spinner' => 'Elaborazione... (Può volerci un po\' su file di grandi dimensioni)',
+    'processing' => 'Elaborazione... ',
     'optional_infos'  => 'Informazioni Opzionali',
     'order_details'   => 'Informazioni relative all\'ordine',
     'calc_eol'    => 'Se viene annullata la data di EOL, usa il calcolo automatico in base alla data d\'acquisto e al tasso di EOL.',

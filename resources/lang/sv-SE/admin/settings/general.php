@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'Om du regelbundet fysiskt behöver granska dina tillgångar, ange intervallet i månader. Om du uppdaterar detta värde kommer alla "nästkommande revisionsdatum" för tillgångar med ett kommande revisionsdatum att uppdateras.',
     'audit_warning_days'        => 'Gränsvärde för varning om nästa inventering',
     'audit_warning_days_help'   => 'Hur många dagar i förväg vill du bli varnad när det närmar sig inventering av tillgångar?',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Generera automatisk ökning av tillgångstaggar',
     'auto_increment_prefix'		=> 'Prefix (frivilligt)',
     'auto_incrementing_help'    => 'Aktivera automatisk ökning av tillgångstaggar innan du ställer in detta',
     'backups'					=> 'Säkerhetskopior',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'Begränsa användare (inklusive administratörer) tilldelade företag till företagets tillgångar.',
     'full_multiple_companies_support_text' => 'Stöd för fleranvändarföretag',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
-    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Visa i rullgardin för modeller',
     'optional'					=> 'frivillig',
     'per_page'                  => 'Resultat per sida',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */

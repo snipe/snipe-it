@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Ese estado del activo no es utilizable. El uso de esta etiqueta de estado ingresará el activo.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Procesando... (Esto puede tomar un poco de tiempo en archivos grandes)',
+    'processing' => 'Procesando... ',
     'optional_infos'  => 'Información opcional',
     'order_details'   => 'Información relacionada con el pedido',
     'calc_eol'    => 'Si deja nula la fecha EOL, utilice el cálculo automático basado en la fecha de compra y la frecuencia de EOL.',

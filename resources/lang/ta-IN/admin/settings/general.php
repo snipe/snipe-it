@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date will be updated.',
     'audit_warning_days'        => 'தணிக்கை எச்சரிக்கை புராணம்',
     'audit_warning_days_help'   => 'தணிக்கைக்கு ஆட்கள் தடையின்றி எத்தனை நாட்கள் முன்கூட்டியே நாம் எச்சரிக்க வேண்டும்?',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
     'auto_increment_prefix'		=> 'முன்னுரிமை (விரும்பினால்)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'காப்புப்பிரதிகளில்',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'தங்கள் நிறுவனத்தின் சொத்துக்களுக்கு நிறுவனங்களுக்கு ஒதுக்கப்பட்டுள்ள பயனர்களை (நிர்வாகிகள் உட்பட) கட்டுப்படுத்துதல்.',
     'full_multiple_companies_support_text' => 'முழு பல நிறுவனங்கள் ஆதரவு',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
-    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Show in Model Dropdowns',
     'optional'					=> 'விருப்ப',
     'per_page'                  => 'பக்கம் ஒன்றுக்கு முடிவு',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */

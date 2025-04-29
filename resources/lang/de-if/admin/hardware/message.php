@@ -100,7 +100,7 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Die Anfrage war nicht erfolgreich, bitte versuchen Sie es erneut.',
+        'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuche es erneut.',
         'success' 		=> 'Anfrage erfolgreich eingereicht.',
         'canceled'      => 'Anfrage erfolgreich abgebrochen.',
         'cancel'        => 'Storniere diese Gegenstandanfrage',

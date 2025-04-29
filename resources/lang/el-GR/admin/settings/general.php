@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'Εάν απαιτείται να ελέγχετε τακτικά τα περιουσιακά σας στοιχεία, εισάγετε το διάστημα σε μήνες που χρησιμοποιείτε. Εάν ενημερώσετε αυτήν την τιμή, όλες οι "επόμενες ημερομηνίες ελέγχου" για τα περιουσιακά στοιχεία με μια επερχόμενη ημερομηνία ελέγχου θα ενημερωθούν.',
     'audit_warning_days'        => 'Όριο προειδοποίησης ελέγχου',
     'audit_warning_days_help'   => 'Πόσες μέρες νωρίτερα θα πρέπει να σας προειδοποιήσουμε όταν τα περιουσιακά στοιχεία οφείλονται για έλεγχο;',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Δημιουργία ετικετών στοιχείων ενεργητικού αυτόματης αύξησης',
     'auto_increment_prefix'		=> 'Πρόθεμα (μη υποχρεωτικό)',
     'auto_incrementing_help'    => 'Ενεργοποιήστε πρώτα τις ετικέτες στοιχείων αυτόματης αύξησης για να το ορίσετε',
     'backups'					=> 'Αντίγραφα Ασφαλείας',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'Περιορισμός των χρηστών (συμπεριλαμβανομένων των διαχειριστών) που εκχωρούνται σε εταιρείες στα περιουσιακά στοιχεία της εταιρείας τους.',
     'full_multiple_companies_support_text' => 'Πλήρης υποστήριξη πολλαπλών εταιρειών',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
-    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Εμφάνιση στο μοντέλο Dropdowns',
     'optional'					=> 'προαιρετικός',
     'per_page'                  => 'Αποτελέσματα ανά σελίδα',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */

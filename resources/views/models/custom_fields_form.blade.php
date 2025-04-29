@@ -1,4 +1,10 @@
 @if (($model) && ($model->fieldset))
+    <div class="col-md-12 col-sm-12">
+    <fieldset name="custom-fields" class="bottom-padded">
+        <legend class="highlight">
+            {{ trans('admin/custom_fields/general.custom_fields') }}
+        </legend>
+
   @foreach($model->fieldset->fields AS $field)
       @if (
     ((!isset($show_display_checkin_fields))
@@ -10,7 +16,12 @@
         )
 
     <div class="form-group{{ $errors->has($field->db_column_name()) ? ' has-error' : '' }}">
-      <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">{{ $field->name }} </label>
+
+
+      <label for="{{ $field->db_column_name() }}" class="col-md-3 control-label">
+          {{ $field->name }}
+      </label>
+
       <div class="col-md-7 col-sm-12">
 
           @if ($field->element!='text')
@@ -98,6 +109,8 @@
     </div>
     @endif
   @endforeach
+    </fieldset>
+    </div>
 @endif
 
 

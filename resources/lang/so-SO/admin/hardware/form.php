@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Hagaajinta... (Tani waxa laga yaabaa inay wakhti yar ku qaadato faylalka waaweyn)',
+    'processing' => 'Processing... ',
     'optional_infos'  => 'Macluumaadka Ikhtiyaarka ah',
     'order_details'   => 'Dalbo Macluumaadka La Xiriira',
     'calc_eol'    => 'If nulling the EOL date, use automatic EOL calculation based on the purchase date and EOL rate.',

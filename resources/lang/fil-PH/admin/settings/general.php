@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'If you are required to regularly physically audit your assets, enter the interval in months that you use. If you update this value, all of the "next audit dates" for assets with an upcoming audit date will be updated.',
     'audit_warning_days'        => 'Ang Warning Threshold ng Audit',
     'audit_warning_days_help'   => 'Mga ilang araw na makaadvans kami sa pagpaalala sa iyo kapag ang mga asset ay nakasaad na para sa pag-audit?',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Generate auto-incrementing asset tags',
     'auto_increment_prefix'		=> 'Ang prefix (opsyonal)',
     'auto_incrementing_help'    => 'Enable auto-incrementing asset tags first to set this',
     'backups'					=> 'Mga backup',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'Pagbabawal sa mga gumagamit (kasama ang mga admin) na nakatalaga sa mga asset ng kanilang kompanya.',
     'full_multiple_companies_support_text' => 'Ang Buong Suporta sa Maramihang Kompanya',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
-    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Ipakita sa Modelo ng mga Dropdowns',
     'optional'					=> 'opsyonal',
     'per_page'                  => 'Ang mga Resulta Bawat Pahina',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */

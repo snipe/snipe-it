@@ -50,7 +50,7 @@ return [
     'dashboard_message_help'	=> '此文本将显示在仪表盘上，供有权查看仪表盘的任何人使用。',
     'default_currency'  		=> '默认货币',
     'default_eula_text'			=> '默认最终用户许可协议（EULA）',
-    'default_eula_text_placeholder' => 'Add your default EULA text',
+    'default_eula_text_placeholder' => '添加默认最终用户许可协议（EULA）文本',
     'default_language'			=> '默认语言',
     'default_eula_help_text'	=> '你也可以将自定义的最终用户许可协议（EULA）与特定资产分类相关联。',
     'acceptance_note'           => '为您的决定添加备注(可选)',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => '限制归属特定公司的用户（包括管理员）仅能访问该公司资产',
     'full_multiple_companies_support_text' => '完整多企业支持',
     'scope_locations_fmcs_support_text'  => '支持多个分公司架构的位置范围限定',
-    'scope_locations_fmcs_support_help_text'  => '旧版本中位置信息不受特定分公司限制。当禁用此配置项时，系统将保持与旧版本兼容模式，允许跨分公司使用位置数据；若启用该配置项，则位置数据将被严格限定在已选分公司范围内。',
+    'scope_locations_fmcs_support_help_text'  => '将位置限制在所选公司内。',
+    'scope_locations_fmcs_support_disabled_text'  => '当前选项已禁用，原因是有至少:count个项目的位置存在冲突。',
     'show_in_model_list'   => '在型号下拉列表中显示',
     'optional'					=> '可选',
     'per_page'                  => '每页搜索结果',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logo 和文本',
     ],
 
+
+    'legends' => [
+        'scoping' => '范围',
+        'formats' => '默认格式',
+        'profiles' => '用户资料',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => '杂项显示选项',
+        'email' => '电子邮件首选项',
+        'checkin' => '归还首选项',
+        'dashboard' => '登录和控制面板首选项',
+        'misc' => '杂项',
+        'logos' => '徽标和显示',
+        'colors' => '颜色和皮肤',
+        'footer' => '页脚首选项',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */
