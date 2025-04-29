@@ -18,6 +18,8 @@
 #         Updated Snipe-IT Install Script            #
 #          Update created by Aaron Myers             #
 # Change log                                         #
+# * verify support for Ubuntu 24.04 -> 25.04         #
+# * add support for linux Mint 21 -> 22 inclusive    #
 # * add support for linux mint 22.1                  #
 # * add support for php8.2, awslinux2, alma 8/9      #
 # * fix rocky8/9 support                             #
@@ -88,6 +90,7 @@ readonly APP_NAME="snipeit"
 readonly APP_PATH="/var/www/html/$APP_NAME"
 readonly APP_LOG="/var/log/snipeit-install.log"
 readonly COMPOSER_PATH="/home/$APP_USER"
+is_mint=false
 
 progress () {
   spin[0]="-"
@@ -351,6 +354,7 @@ case $distro in
   *linuxmint*)
     echo "  The installer has detected $distro version $version codename $codename."
     distro=Ubuntu
+    is_mint=true
     apache_group=www-data
     apachefile=/etc/apache2/sites-available/$APP_NAME.conf
     ;;
@@ -540,7 +544,7 @@ case $distro in
   ;;
   Ubuntu)
     if [ "${version//./}" -ge "2304" ]; then
-        # Install for Ubuntu 23.04 and 23.10
+        # Install for Ubuntu 23.04 and above
         set_fqdn
         set_dbpass
         tzone=$(cat /etc/timezone)
@@ -550,7 +554,7 @@ case $distro in
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
-        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip"
+        PACKAGES="cron mariadb-server mariadb-client apache2 libapache2-mod-php php php-curl php-mysql php-gd php-ldap php-zip php-mbstring php-xml php-bcmath curl git unzip wget"
         install_packages
 
         echo "* Configuring Apache."
@@ -575,11 +579,26 @@ case $distro in
         chmod 777 -R $APP_PATH/storage/framework/cache/
         log "run_as_app_user php $APP_PATH/artisan cache:clear"
         chmod 775 -R $APP_PATH/storage/
-    elif [ "${version//./}" -eq "221" ]; then
-        # Install for Linux Mint 22.1
+    elif [[ "${is_mint}" == "true" ]]; then
+        # Install for Linux Mint 21.2 - 22.1
+
+        if [[ "${version//.*/}" -eq "22" ]] ; then
+            ubuntu_codename=noble
+        elif [[ "${version//.*/}" -eq "21" ]]; then
+            ubuntu_codename=jammy
+        else
+            echo "Unsupported Linux Mint version. Version found: $version"
+            exit 1
+        fi
+
         set_fqdn
         set_dbpass
         tzone=$(cat /etc/timezone)
+
+        echo "* Set up Ondrej PHP repository"
+        echo "# Odrej PHP repo for ability to choose non-distro PHP versions" > /etc/apt/sources.list.d/ppa_ondrej_php_$ubuntu_codename.list
+        echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu $ubuntu_codename main" >> /etc/apt/sources.list.d/ppa_ondrej_php_$ubuntu_codename.list
+        sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
 
         echo -n "* Updating installed packages."
         log "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade" & pid=$!
