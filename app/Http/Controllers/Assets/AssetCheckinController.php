@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
 
 class AssetCheckinController extends Controller
 {
@@ -40,6 +41,15 @@ class AssetCheckinController extends Controller
         if (!$asset->model) {
             return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
+
+        // Validate custom fields on existing asset
+        $validator = Validator::make($asset->toArray(), $asset->customFieldValidationRules());
+
+        if ($validator->fails()) {
+            return redirect()->route('hardware.edit', $asset)
+                ->withErrors($validator);
+        }
+
         $target_option = match ($asset->assigned_type) {
             'App\Models\Asset' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.asset_previous')]),
             'App\Models\Location' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.location')]),
