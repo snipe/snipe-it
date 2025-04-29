@@ -218,7 +218,7 @@ class CustomField extends Model
                 return $this->displayFieldInAuditForm();
             case 'checkin':
                 return $this->displayFieldInCheckinForm();
-            case 'checkin':
+            case 'checkout':
                 return $this->displayFieldInCheckoutForm();
         }
     }
