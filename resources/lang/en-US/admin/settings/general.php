@@ -456,7 +456,7 @@ return [
         'scoping' => 'Scoping',
         'formats' => 'Default Formats',
         'profiles' => 'User Profiles',
-        'eula' => 'EULA &amp; Acceptance Preferences',
+        'eula' => 'EULA & Acceptance Preferences',
         'misc_display' => 'Miscellaneous Display Options',
         'email' => 'Email Preferences',
         'checkin' => 'Checkin Preferences',
