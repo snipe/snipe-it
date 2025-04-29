@@ -456,6 +456,18 @@ tr th div.th-inner {
 .box-header.with-border {
   border-bottom: #000;
 }
+#customFieldsTable a[href*='/models'] {
+  background-color: var(--back-sub-alt);
+  color: var(--link);
+}
+#customFieldsTable a[href*='/models']:hover {
+  background-color: var(--text-sub);
+  color: var(--button-hover);
+}
+#customFieldsTable a[href*='/models']:visited {
+  background-color: var(--background);
+  color: var(--visited-link);
+}
 .row-striped {
   vertical-align: top;
   line-height: 2.6;
