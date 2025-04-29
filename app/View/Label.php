@@ -203,12 +203,6 @@ class Label implements View
         $filename = $assets->count() > 1 ? 'assets.pdf' : $assets->first()->asset_tag.'.pdf';
         $pdf->Output($filename, 'I');
     }
-    protected function adjustXIfLabelEmpty($pdf, $field)
-    {
-        if (empty($field['label']) || $field['label'] === "\u{200B}") {
-            $pdf->SetX($pdf->GetX() - 2);
-        }
-    }
 
     /**
      * Add a piece of data.
