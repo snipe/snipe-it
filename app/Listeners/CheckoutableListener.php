@@ -397,7 +397,7 @@ class CheckoutableListener
             default => null,
         };
 
-        if (!$category->checkin_email) {
+        if (!$category?->checkin_email) {
             return true;
         }
         return false;
