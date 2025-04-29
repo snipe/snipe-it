@@ -74,10 +74,7 @@ class CustomFieldset extends Model
     public function displayAnyFieldsInForm($form_type = null)
     {
         if ($this->fields) {
-            // \Log::error(print_r($this->fields, true));
-            \Log::error($this->fields->where('display_audit', '1')->count());
-            \Log::error($this->fields->where('display_checkin', '1')->count());
-            \Log::error($this->fields->where('display_checkout', '1')->count());
+
             switch ($form_type) {
                 case 'audit':
                     return $this->fields->where('display_audit', '1')->count() > 0;
