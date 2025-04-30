@@ -455,15 +455,14 @@
 
                     </thead>
                     <tbody>
-                    @php
-                      $counter = 1
-                    @endphp
                     @foreach ($user->assets as $asset)
-                      <x-asset-table-row :asset="$asset" :field_array="$field_array" :counter="$counter" />
+                      <x-asset-table-row :asset="$asset" :field_array="$field_array" :counter="$loop->iteration" />
 
-                      @php
-                        $counter++
-                      @endphp
+                      @if ($settings->show_assigned_assets && $asset->assignedAssets->count())
+                        @foreach($asset->assignedAssets as $assignedAsset)
+                            <x-asset-table-row :asset="$assignedAsset" :field_array="$field_array" :counter="$loop->parent->iteration . '.' . $loop->iteration" />
+                        @endforeach
+                      @endif
                     @endforeach
                     </tbody>
                   </table>
