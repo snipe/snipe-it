@@ -239,7 +239,7 @@ class CustomFieldsController extends Controller
         }
         
         $field->name          = trim($request->get("name"));
-        $field->element       = e($request->get("element"));
+        $field->element       = $request->get("element");
         $field->field_values  = $request->get("field_values");
         $field->created_by       = auth()->id();
         $field->help_text     = $request->get("help_text");
@@ -254,9 +254,9 @@ class CustomFieldsController extends Controller
         $field->display_audit = $request->get("display_audit", 0);
 
         if ($request->get('format') == 'CUSTOM REGEX') {
-            $field->format = e($request->get('custom_format'));
+            $field->format = $request->get('custom_format');
         } else {
-            $field->format = e($request->get('format'));
+            $field->format = $request->get('format');
         }
 
         if ($field->element == 'checkbox' || $field->element == 'radio'){
