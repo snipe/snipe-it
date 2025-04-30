@@ -128,7 +128,7 @@
                         </div>
 
                         <!-- Audit Image -->
-                        @include ('partials.forms.edit.image-upload', ['image_path' => app('audits_upload_path'), 'help_text' => trans('general.audit_images_help')])
+                        @include ('partials.forms.edit.image-upload', ['help_text' => trans('general.audit_images_help')])
 
                         <!-- Custom fields -->
                         @include("models/custom_fields_form", [
