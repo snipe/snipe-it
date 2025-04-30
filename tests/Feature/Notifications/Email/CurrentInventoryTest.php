@@ -46,8 +46,6 @@ class CurrentInventoryTest extends TestCase
 
     public function test_current_inventory_contents()
     {
-        Notification::fake();
-
         $user = User::factory()->create();
 
         Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'complex-asset-tag']);
@@ -65,9 +63,14 @@ class CurrentInventoryTest extends TestCase
 
     public function test_current_inventory_includes_child_assets()
     {
-        $this->markTestIncomplete();
-
         $user = User::factory()->create();
 
+        $parentAsset = Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'parent-asset-tag']);
+        Asset::factory()->assignedToAsset($parentAsset)->create(['asset_tag' => 'child-asset-tag']);
+
+        $emailContents = (new CurrentInventory($user))->toMail()->render();
+
+        $this->assertStringContainsString('parent-asset-tag', $emailContents);
+        $this->assertStringContainsString('child-asset-tag', $emailContents);
     }
 }
