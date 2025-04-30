@@ -33,7 +33,7 @@ class LocationPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.company'),
                 'visible' => false,
-                'formatter' => 'locationCompanyObjFilterFormatter'
+                'formatter' => 'companiesLinkObjFormatter'
             ],
             [
                 'field' => 'name',
