@@ -76,7 +76,7 @@ class Group extends SnipeModel
      *
      * @author A. Gianotto <snipe@snipe.net>
      * @since [v1.0]
-     * @return array
+     * @return array | \stdClass
      */
     public function decodePermissions()
     {
@@ -84,20 +84,24 @@ class Group extends SnipeModel
         if (is_array($this->permissions)) {
             $this->permissions = json_encode($this->permissions);
         }
+
         $permissions = json_decode($this->permissions ?? '{}', JSON_OBJECT_AS_ARRAY);
 
-        // If there are no permissions, return an empty array
-        if (!$permissions) {
-            return [];
-        }
-
         // Otherwise, loop through the permissions and cast the values as integers
-        foreach ($permissions as $permission => $value) {
-            $permissions[$permission] = (int) $value;
+        if ((is_array($permissions)) && ($permissions)) {
+            foreach ($permissions as $permission => $value) {
+
+                if (!is_integer($permission)) {
+                    $permissions[$permission] = (int) $value;
+                } else {
+                    \Log::info('Weird data here - skipping it');
+                    unset($permissions[$permission]);
+                }
+            }
+            return $permissions ?: new \stdClass;
         }
+        return new \stdClass;
 
-
-        return $permissions;
     }
 
     /**
