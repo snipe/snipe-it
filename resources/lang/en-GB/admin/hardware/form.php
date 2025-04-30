@@ -34,7 +34,7 @@ return [
     'manufacturer'		=> 'Manufacturer',
     'model'				=> 'Model',
     'months'			=> 'months',
-    'name'				=> 'Asset Name',
+    'name'				=> 'Hostname',
     'notes'				=> 'Notes',
     'order'				=> 'Order Number',
     'qr'				=> 'QR Code',
