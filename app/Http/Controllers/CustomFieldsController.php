@@ -238,7 +238,7 @@ class CustomFieldsController extends Controller
             $display_in_user_view = '0';
         }
         
-        $field->name          = trim(e($request->get("name")));
+        $field->name          = trim($request->get("name"));
         $field->element       = e($request->get("element"));
         $field->field_values  = $request->get("field_values");
         $field->created_by       = auth()->id();
