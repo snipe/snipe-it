@@ -9,7 +9,7 @@
 ## {{ $assets->count() }} {{ trans('general.assets') }}
 
 <table width="100%">
-    <tr><th>#</th><th align="left">{{ trans('mail.name') }} </th><th align="left">{{ trans('mail.asset_tag') }}</th><th align="left">{{ trans('admin/hardware/table.serial') }}</th><th align="left">{{ trans('general.category') }}</th> <th></th> </tr>
+    <tr><th align="left">#</th><th align="left">{{ trans('mail.name') }} </th><th align="left">{{ trans('mail.asset_tag') }}</th><th align="left">{{ trans('admin/hardware/table.serial') }}</th><th align="left">{{ trans('general.category') }}</th> <th></th> </tr>
 
 
 @foreach($assets as $asset)
