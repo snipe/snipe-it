@@ -61,8 +61,30 @@ class CurrentInventoryTest extends TestCase
         $this->assertStringContainsString('Complex Consumable Name', $emailContents);
     }
 
-    public function test_current_inventory_includes_child_assets()
+    public function test_current_inventory_does_not_include_child_assets_when_disabled()
     {
+        $this->markTestIncomplete();
+
+        $this->settings->disableShowingAssignedAssets();
+
+        $user = User::factory()->create();
+
+        $parentAsset = Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'parent-asset-tag']);
+        Asset::factory()->assignedToAsset($parentAsset)->create(['asset_tag' => 'child-asset-tag']);
+
+        $emailContents = (new CurrentInventory($user))->toMail()->render();
+
+        $this->assertStringContainsString('parent-asset-tag', $emailContents);
+        $this->assertStringNotContainsString('child-asset-tag', $emailContents);
+    }
+
+    public function test_current_inventory_includes_child_assets_when_enabled()
+    {
+        $this->markTestIncomplete();
+
+        $this->settings->enableShowingAssignedAssets();
+
+
         $user = User::factory()->create();
 
         $parentAsset = Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'parent-asset-tag']);

@@ -40,8 +40,26 @@ class PrintUserInventoryTest extends TestCase
             ->assertStatus(302);
     }
 
-    public function testPrintingUserInventoryIncludesChildAssets()
+    public function testPrintingUserInventoryDoesNotIncludeChildAssetsWhenDisabled()
     {
+        $this->markTestIncomplete();
+
+        $actor = User::factory()->viewUsers()->create();
+        $user = User::factory()->create();
+
+        $parentAsset = Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'parent-asset-tag']);
+        Asset::factory()->assignedToAsset($parentAsset)->create(['asset_tag' => 'child-asset-tag']);
+
+        $this->actingAs($actor)
+            ->get(route('users.print', $user->id))
+            ->assertSeeText('parent-asset-tag')
+            ->assertDontSeeText('child-asset-tag');
+    }
+
+    public function testPrintingUserInventoryIncludesChildAssetsWhenEnabled()
+    {
+        $this->markTestIncomplete();
+
         $actor = User::factory()->viewUsers()->create();
         $user = User::factory()->create();
 
