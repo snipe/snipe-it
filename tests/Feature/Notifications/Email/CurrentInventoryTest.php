@@ -63,8 +63,6 @@ class CurrentInventoryTest extends TestCase
 
     public function test_current_inventory_does_not_include_child_assets_when_disabled()
     {
-        $this->markTestIncomplete();
-
         $this->settings->disableShowingAssignedAssets();
 
         $user = User::factory()->create();
@@ -80,8 +78,6 @@ class CurrentInventoryTest extends TestCase
 
     public function test_current_inventory_includes_child_assets_when_enabled()
     {
-        $this->markTestIncomplete();
-
         $this->settings->enableShowingAssignedAssets();
 
 

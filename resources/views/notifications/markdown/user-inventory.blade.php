@@ -24,7 +24,7 @@
     </td>
     @endif
 </tr>
-@if ($asset->assignedAssets->count())
+@if ($show_assigned_assets && $asset->assignedAssets->count())
 @foreach($asset->assignedAssets as $assignedAsset)
 <tr>
     <td>{{ $assignedAsset->present()->name }}</td>
