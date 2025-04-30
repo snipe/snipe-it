@@ -42,7 +42,7 @@ class PrintUserInventoryTest extends TestCase
 
     public function testPrintingUserInventoryDoesNotIncludeChildAssetsWhenDisabled()
     {
-        $this->markTestIncomplete();
+        $this->settings->disableShowingAssignedAssets();
 
         $actor = User::factory()->viewUsers()->create();
         $user = User::factory()->create();
@@ -58,7 +58,7 @@ class PrintUserInventoryTest extends TestCase
 
     public function testPrintingUserInventoryIncludesChildAssetsWhenEnabled()
     {
-        $this->markTestIncomplete();
+        $this->settings->enableShowingAssignedAssets();
 
         $actor = User::factory()->viewUsers()->create();
         $user = User::factory()->create();
