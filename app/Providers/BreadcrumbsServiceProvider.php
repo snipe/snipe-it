@@ -74,7 +74,8 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('hardware.edit', fn (Trail $trail, Asset $asset) =>
         $trail->parent('hardware.index', route('hardware.index'))
-            ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $asset->asset_tag]), route('hardware.edit', $asset))
+            ->push($asset->present()->fullName(), route('hardware.show', $asset))
+            ->push(trans('admin/hardware/general.edit'))
         );
 
 
