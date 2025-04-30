@@ -36,25 +36,38 @@ class CurrentInventoryTest extends TestCase
 
         $user = User::factory()->create(['email' => 'hi@there.com']);
 
-        Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'complex-asset-tag']);
-        Accessory::factory()->checkedOutToUser($user)->create(['name' => 'Complex Accessory Name']);
-        LicenseSeat::factory()->for(License::factory()->state(['name' => 'Complex License Name']))->assignedToUser($user)->create();
-        Consumable::factory()->checkedOutToUser($user)->create(['name' => 'Complex Consumable Name']);
-
         $this->actingAs(User::factory()->viewUsers()->create())
             ->post(route('users.email', $user->id))
             ->assertSessionHas('success');
 
         Notification::assertCount(1);
-        Notification::assertSentTo($user, function (CurrentInventory $notification) {
-            $emailContents = $notification->toMail()->render();
+        Notification::assertSentTo($user, CurrentInventory::class);
+    }
 
-            $this->assertStringContainsString('complex-asset-tag', $emailContents);
-            $this->assertStringContainsString('Complex Accessory Name', $emailContents);
-            $this->assertStringContainsString('Complex License Name', $emailContents);
-            $this->assertStringContainsString('Complex Consumable Name', $emailContents);
+    public function test_current_inventory_contents()
+    {
+        Notification::fake();
 
-            return true;
-        });
+        $user = User::factory()->create();
+
+        Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'complex-asset-tag']);
+        Accessory::factory()->checkedOutToUser($user)->create(['name' => 'Complex Accessory Name']);
+        LicenseSeat::factory()->for(License::factory()->state(['name' => 'Complex License Name']))->assignedToUser($user)->create();
+        Consumable::factory()->checkedOutToUser($user)->create(['name' => 'Complex Consumable Name']);
+
+        $emailContents = (new CurrentInventory($user))->toMail()->render();
+
+        $this->assertStringContainsString('complex-asset-tag', $emailContents);
+        $this->assertStringContainsString('Complex Accessory Name', $emailContents);
+        $this->assertStringContainsString('Complex License Name', $emailContents);
+        $this->assertStringContainsString('Complex Consumable Name', $emailContents);
+    }
+
+    public function test_current_inventory_includes_child_assets()
+    {
+        $this->markTestIncomplete();
+
+        $user = User::factory()->create();
+
     }
 }
