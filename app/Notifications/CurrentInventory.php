@@ -39,7 +39,7 @@ class CurrentInventory extends Notification
     public function toMail()
     {
         $this->user->load([
-            'assets',
+            'assets.assignedAssets',
             'accessories',
             'licenses',
             'consumables',

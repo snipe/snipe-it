@@ -24,6 +24,21 @@
     </td>
     @endif
 </tr>
+@if ($asset->assignedAssets->count())
+@foreach($asset->assignedAssets as $assignedAsset)
+<tr>
+    <td>{{ $assignedAsset->present()->name }}</td>
+    <td> {{ $assignedAsset->asset_tag }} </td>
+    <td> {{ $assignedAsset->serial }} </td>
+    <td> {{ $assignedAsset->model->category->name }}</td>
+    @if (($snipeSettings->show_images_in_email =='1') && $assignedAsset->getImageUrl())
+        <td>
+            <img src="{{ asset($assignedAsset->getImageUrl()) }}" alt="Asset" style="max-width: 64px;">
+        </td>
+    @endif
+</tr>
+@endforeach
+@endif
 @endforeach
 </table>
 @endif
