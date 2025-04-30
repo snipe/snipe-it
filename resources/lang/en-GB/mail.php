@@ -33,7 +33,7 @@ return [
     'additional_notes' => 'Additional Notes',
     'admin_has_created' => 'An administrator has created an account for you on the :web website.',
     'asset' => 'Asset',
-    'asset_name' => 'Asset Name',
+    'asset_name' => 'Hostname',
     'asset_requested' => 'Asset requested',
     'asset_tag' => 'Asset Tag',
     'assets_warrantee_alert' => 'There is :count asset with a warranty expiring in the next :threshold days.|There are :count assets with warranties expiring in the next :threshold days.',
