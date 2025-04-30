@@ -292,7 +292,7 @@
 <div class="row">
     <div class="col-md-6">
 
-		@if ($snipeSettings->full_multiple_companies_support=='1')
+		@if ((($snipeSettings->scope_locations_fmcs!='1') && ($snipeSettings->full_multiple_companies_support=='1')))
 			 <!-- Companies -->	
 			<div class="box box-default">
 				<div class="box-header with-border">
