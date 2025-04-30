@@ -755,7 +755,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      */
     public function decodePermissions()
     {
-        // Set default to empty JSON if the value is null
+        // If the permissions are an array, convert it to JSON
         if (is_array($this->permissions)) {
             $this->permissions = json_encode($this->permissions);
         }
