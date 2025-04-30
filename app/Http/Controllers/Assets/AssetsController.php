@@ -947,7 +947,8 @@ class AssetsController extends Controller
         }
         $asset->setLogNote($request->input('note'));
         $asset->location_id = $request->input('location_id');
-        if ($asset->logAndSaveIfNeeded(ActionType::Audit)) {
+        $asset->setLogAction(ActionType::Audit);
+        if ($asset->save()) {
             return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
         }
 

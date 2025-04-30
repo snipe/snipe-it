@@ -42,7 +42,8 @@ class AssetFilesController extends Controller
 
                 $asset->setLogFilename($file_name);
                 $asset->setLogNote($request->get('notes'));
-                $asset->logAndSaveIfNeeded(ActionType::Uploaded);
+                $asset->setLogAction(ActionType::Uploaded);
+                $asset->save();
             }
 
             return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.upload.success'));

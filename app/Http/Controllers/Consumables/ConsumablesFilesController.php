@@ -47,7 +47,8 @@ class ConsumablesFilesController extends Controller
                     //Log the upload to the log
                     $consumable->setLogFilename($file_name);
                     $consumable->setLogNote(e($request->input('notes')));
-                    $consumable->logAndSaveIfNeeded(ActionType::Uploaded);
+                    $consumable->setLogAction(ActionType::Uploaded);
+                    $consumable->save();
                 }
 
 

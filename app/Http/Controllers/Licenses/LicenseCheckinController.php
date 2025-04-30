@@ -147,7 +147,8 @@ class LicenseCheckinController extends Controller
                 Log::debug('Checking in '.$license->name.' from user '.$user_seat->username);
                 $user_seat->setLogTarget($user_seat->user);
                 $user_seat->setLogNote(trans('admin/licenses/general.bulk.checkin_all.log_msg'));
-                $user_seat->logAndSaveIfNeeded(ActionType::CheckinFrom);
+                $user_seat->setLogAction(ActionType::CheckinFrom);
+                $user_seat->save();
             }
         }
 
@@ -164,7 +165,8 @@ class LicenseCheckinController extends Controller
                 Log::debug('Checking in '.$license->name.' from asset '.$asset_seat->asset_tag);
                 $asset_seat->setLogTarget($asset_seat->asset);
                 $asset_seat->setLogNote(trans('admin/licenses/general.bulk.checkin_all.log_msg'));
-                $asset_seat->logAndSaveIfNeeded(ActionType::CheckinFrom);
+                $asset_seat->setLogAction(ActionType::CheckinFrom);
+                $asset_seat->save();
                 $count++;
             }
         }

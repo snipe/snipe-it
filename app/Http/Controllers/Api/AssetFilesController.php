@@ -59,7 +59,8 @@ class AssetFilesController extends Controller
 
                 $asset->setLogFilename($file_name);
                 $asset->setLogNote(e($request->input('notes')));
-                $asset->logAndSaveIfNeeded(ActionType::Uploaded);
+                $asset->setLogAction(ActionType::Uploaded);
+                $asset->save();
             }
 
             // All done - report success

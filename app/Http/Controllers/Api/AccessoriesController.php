@@ -296,7 +296,8 @@ class AccessoriesController extends Controller
         $accessory->setLogTarget($target);
         $accessory->setLogNote($request->input('note'));
         $accessory->setLogQuantity($checkout_qty);
-        $accessory->logAndSaveIfNeeded(ActionType::Checkout);
+        $accessory->setLogAction(ActionType::Checkout);
+        $accessory->save();
 
         // Set this value to be able to pass the qty through to the event
         event(new CheckoutableCheckedOut($accessory, $target, auth()->user(), $request->input('note')));
@@ -327,7 +328,8 @@ class AccessoriesController extends Controller
 
         $accessory->setLogTarget(User::find($accessory_checkout->assigned_to));
         $accessory->setLogNote($request->input('note'));
-        $accessory->logAndSaveIfNeeded(ActionType::CheckinFrom);
+        $accessory->setLogAction(ActionType::CheckinFrom);
+        $accessory->save();
 
         // Was the accessory updated?
         if ($accessory_checkout->delete()) {

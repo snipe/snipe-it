@@ -299,7 +299,8 @@ class ConsumablesController extends Controller
         }
         $consumable->setLogQuantity($checkout_qty);
         $consumable->setLogNote($request->input('note'));
-        $consumable->logAndSaveIfNeeded(ActionType::Checkout);
+        $consumable->setLogAction(ActionType::Checkout);
+        $consumable->save();
 
         event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
 

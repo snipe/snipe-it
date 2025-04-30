@@ -301,7 +301,8 @@ class ComponentsController extends Controller
             $component->setLogLocationOverride($asset->location);
             $component->setLogNote($request->input('note'));
             $component->setLogQuantity($request->get('assigned_qty'));
-            $component->logAndSaveIfNeeded(ActionType::Checkout);
+            $component->setLogAction(ActionType::Checkout);
+            $component->save();
 
             return response()->json(Helper::formatStandardApiResponse('success', null,  trans('admin/components/message.checkout.success')));
         }
@@ -359,7 +360,8 @@ class ComponentsController extends Controller
             $component->setLogTarget($asset);
             //FIXME - problem with 'lcoation_id' apaparently?!
             $component->setLogNote($request->input('note'));
-            $component->logAndSaveIfNeeded(ActionType::CheckinFrom);
+            $component->setLogAction(ActionType::CheckinFrom);
+            $component->save();
 
             event(new CheckoutableCheckedIn($component, $asset, auth()->user(), $request->input('note'), Carbon::now()));
 

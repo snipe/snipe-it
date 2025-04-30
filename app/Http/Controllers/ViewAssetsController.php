@@ -121,7 +121,8 @@ class ViewAssetsController extends Controller
         if (($item_request = $item->isRequestedBy($user)) || $cancel_by_admin) {
             $item->cancelRequest($requestingUser);
             $data['item_quantity'] = ($item_request) ? $item_request->qty : 1;
-            $item->logAndSaveIfNeeded(ActionType::RequestCanceled);
+            $item->setLogAction(ActionType::RequestCanceled);
+            $item->save();
 
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
                 $settings->notify(new RequestAssetCancelation($data));
@@ -131,7 +132,8 @@ class ViewAssetsController extends Controller
         } else {
             $item->request();
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
-                $item->logAndSaveIfNeeded(ActionType::Requested);
+                $item->setLogAction(ActionType::Requested);
+                $item->save();
                 $settings->notify(new RequestAssetNotification($data));
             }
 

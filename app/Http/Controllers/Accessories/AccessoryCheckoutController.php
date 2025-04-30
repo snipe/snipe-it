@@ -92,7 +92,8 @@ class AccessoryCheckoutController extends Controller
         $accessory->setLogTarget($target);
         $accessory->setLogNote($request->input('note'));
         $accessory->setLogQuantity($checkout_qty);
-        $accessory->logAndSaveIfNeeded(ActionType::Checkout);
+        $accessory->setLogAction(ActionType::Checkout);
+        $accessory->save();
         event(new CheckoutableCheckedOut($accessory,  $target, auth()->user(), $request->input('note')));
 
         $request->request->add(['checkout_to_type' => request('checkout_to_type')]);

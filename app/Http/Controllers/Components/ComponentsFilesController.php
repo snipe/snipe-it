@@ -49,7 +49,8 @@ class ComponentsFilesController extends Controller
                     //Log the upload to the log
                     $component->setLogFilename($file_name);
                     $component->setLogNote(e($request->input('notes')));
-                    $component->logAndSaveIfNeeded(ActionType::Uploaded);
+                    $component->setLogAction(ActionType::Uploaded);
+                    $component->save();
                 }
 
 

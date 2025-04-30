@@ -198,7 +198,8 @@ class AssetImporter extends ItemImporter
                         $asset->setLogTarget(User::find($asset->assigned_to));
                         $asset->setLogNote('Checkin from CSV Importer');
                         $asset->setLogActionDate($checkin_date);
-                        $asset->logAndSaveIfNeeded(ActionType::CheckinFrom);
+                        $asset->setLogAction(ActionType::CheckinFrom);
+                        $asset->save();
                         event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), auth()->user(), 'Checkin from CSV Importer', $checkin_date));
                     }
                 }

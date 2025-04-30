@@ -30,7 +30,8 @@ class CancelCheckoutRequestAction
 
         $asset->setLogTarget(auth()->user());
         $asset->setLogLocationOverride($user->location_id);
-        $asset->logAndSaveIfNeeded(ActionType::RequestCanceled);
+        $asset->setLogAction(ActionType::RequestCanceled);
+        $asset->save();
 
         try {
             $settings->notify(new RequestAssetCancelation($data));

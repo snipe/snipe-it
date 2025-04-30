@@ -98,29 +98,21 @@ trait Loggable
             if (!$model->log_action) {
                 throw new \Exception("Log Message was unset, but log_meta *does* exist - it's: ".print_r($model->log_meta, true));
             }
-            $model->logWithoutSave();
+            $model->createLogEntry();
             // DO COMMIT HERE? TODO FIXME
         });
         static::deleted(function ($model) {
-            $results = $model->logWithoutSave(); //TODO - if we do commits up there, we should do them here too?
+            $results = $model->createLogEntry(); //TODO - if we do commits up there, we should do them here too?
         });
         static::restored(function ($model) {
-            $model->logWithoutSave(); //TODO - this is getting duplicative.
+            $model->createLogEntry(); //TODO - this is getting duplicative.
         });
-
-        // CRAP.
-        //static::trashed(function ($model) {
-        //    $model->logWithoutSave(ActionType::Delete);
-        //});
 
     }
 
     // and THIS is the main, primary logging system
     // it *can* be called on its own, but in *general* you should let it trigger from the 'save'
-    // I think direct usage of it is probably, generally wrong - you should be using logAndSaveIfNeeded
-    // 99% of the time, unless a save got triggered somehow else. And if it was, you should probably
-    // rejigger it so it isn't.
-    private function logWithoutSave(ActionType $log_action = null): bool
+    private function createLogEntry(ActionType $log_action = null): bool
     {
         if ($log_action) {
             $this->setLogAction($log_action);
@@ -177,22 +169,6 @@ trait Loggable
             return true;
         } else {
             return false;
-        }
-    }
-
-    // EXPERIMENTAL - this 'feels' like the main interface we should be using, most of the time
-    // if the object is dirty, save it and let the save hooks fire. If it's not, then just
-    // enter the log.
-    public function logAndSaveIfNeeded(?ActionType $log_action = null): bool
-    {
-        if ($this->isDirty()) {
-            if ($log_action) {
-                $this->setLogAction($log_action);
-            }
-            return $this->save(); //save will do what you need
-        } else {
-            //transact this? We won't have the 'saving'/'saved' entries - but it generally is just one insert anyway, so it either works or doesn't.
-            return $this->logWithoutSave($log_action);
         }
     }
 
@@ -263,11 +239,6 @@ trait Loggable
     {
         $this->imported = $bool;
     }
-
-    /**
-     * We _might_ be able to handle this in setTarget? Or maybe embed this into
-     * logWithoutSave.
-     */
 
     /**
      * Helper method to determine the log item type

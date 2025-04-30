@@ -357,7 +357,7 @@ class BulkUsersController extends Controller
             //$logAction->target_type = User::class;
             $real_item->setLogNote('Bulk checkin items');
             $real_item->setLogAction(ActionType::CheckinFrom);
-            $real_item->logAndSaveIfNeeded(ActionType::CheckinFrom);
+            $real_item->save();
         }
     }
 
@@ -367,7 +367,8 @@ class BulkUsersController extends Controller
             $accessory = Accessory::find($accessoryUserRow->accessory_id);
             $accessory->setLogTarget(User::find($accessoryUserRow->assigned_to)); //FIXME - what if accessory was checked out to location?
             $accessory->setLogNote('Bulk checkin items');
-            $accessory->logAndSaveIfNeeded(ActionType::CheckinFrom);
+            $accessory->setLogAction(ActionType::CheckinFrom);
+            $accessory->save();
         }
     }
 

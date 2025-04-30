@@ -50,7 +50,8 @@ class AccessoriesFilesController extends Controller
                     //Log the upload to the log
                     $accessory->setLogFilename($file_name);
                     $accessory->setLogNote(e($request->input('notes')));
-                    $accessory->logAndSaveIfNeeded(ActionType::Uploaded);
+                    $accessory->setLogAction(ActionType::Uploaded);
+                    $accessory->save();
                 }
 
 

@@ -84,7 +84,8 @@ class CheckinLicensesFromAllUsers extends Command
                 // Log the checkin
                 $seat->setLogTarget($seat->user);
                 $seat->setLogNote('Checked in via cli tool');
-                $seat->logAndSaveIfNeeded(ActionType::CheckinFrom); //this is going to be a dual-save, do we want that?!
+                $seat->setLogAction(ActionType::CheckinFrom);
+                $seat->save(); //this is going to be a dual-save, do we want that?!
 //                $seat->logCheckin($seat->user, 'Checked in via cli tool');
             }
         }

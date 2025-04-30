@@ -29,7 +29,8 @@ class NotesController extends Controller
         $this->authorize('update', $item);
 
         $item->setLogNote($validated['note']);
-        $item->logAndSaveIfNeeded(ActionType::NoteAdded);
+        $item->setLogAction(ActionType::NoteAdded);
+        $item->save();
 
         return redirect()
             ->route('hardware.show', $validated['id'])

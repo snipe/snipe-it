@@ -40,8 +40,8 @@ class UserFilesController extends Controller
             $user->setLogTarget(null); //weird, but, well, that's what we do? TODO - will this still log with no target?
 //            $logAction->target_id = null;
             $user->setLogFilename($file_name);
-
-            if (!$user->logAndSaveIfNeeded(ActionType::Uploaded)) {
+            $user->setLogAction(ActionType::Uploaded);
+            if (!$user->save()) {
                 return JsonResponse::create(['error' => 'Failed validation: ' . print_r($user->getErrors(), true)], 500);
             }
 

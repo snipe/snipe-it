@@ -141,7 +141,7 @@ class LicenseSeatsController extends Controller
         } else {
             $licenseSeat->setLogAction(ActionType::Checkout);
         }
-        if ($licenseSeat->logAndSaveIfNeeded()) {
+        if ($licenseSeat->save()) {
 
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
         }

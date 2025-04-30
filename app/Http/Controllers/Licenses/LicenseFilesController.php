@@ -42,7 +42,8 @@ class LicenseFilesController extends Controller
                     //Log the upload to the log
                     $license->setLogFilename($file_name);
                     $license->setLogNote(e($request->input('notes')));
-                    $license->logAndSaveIfNeeded(ActionType::Uploaded);
+                    $license->setLogAction(ActionType::Uploaded);
+                    $license->save();
                 }
 
 

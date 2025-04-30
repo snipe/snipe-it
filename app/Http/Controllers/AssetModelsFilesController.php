@@ -44,7 +44,8 @@ class AssetModelsFilesController extends Controller
 
                 $model->setLogFilename($file_name);
                 $model->setLogNote($request->get('notes'));
-                $model->logAndSaveIfNeeded(ActionType::Uploaded);
+                $model->setLogAction(ActionType::Uploaded);
+                $model->save();
             }
 
             return redirect()->back()->withFragment('files')->with('success', trans('general.file_upload_success'));

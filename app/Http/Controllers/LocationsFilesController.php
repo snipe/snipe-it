@@ -40,7 +40,8 @@ class LocationsFilesController extends Controller
                 $file_name = $request->handleFile('private_uploads/locations/','model-'.$location->id,$file);
                 $location->setLogNote($request->get('notes'));
                 $location->setLogFilename($file_name);
-                $location->logAndSaveIfNeeded(ActionType::Uploaded);
+                $location->setLogAction(ActionType::Uploaded);
+                $location->save();
             }
 
             return redirect()->back()->withFragment('files')->with('success', trans('general.file_upload_success'));
