@@ -574,7 +574,7 @@ return [
     'user_managed_passwords' => '密码管理',
     'user_managed_passwords_disallow' => '禁止用户管理自己的密码',
     'user_managed_passwords_allow' => '允许用户管理自己的密码',
-    'from' => 'From',
+    'from' => '从',
     'by' => '经由',
 
 // Add form placeholders here
@@ -614,5 +614,14 @@ return [
     'deleted_users' => '已删除的用户',
     'cost_each' => '每项:amount',
     'remove_current_image' => '删除当前 :type 图像',
+
+    'seeding' => [
+        'manufacturers' => [
+            'button' => '创建制造商',
+            'prompt' => '当前制造商列表为空。是否加载常用制造商清单？（<b>此操作将覆盖所有现有制造商数据</b>，含已软删除条目。）',
+            'success' => '制造商已成功加载',
+            'error' => '制造商加载失败，当前系统中已存在一条制造商记录，执行此操作将覆盖现有数据。|制造商加载失败，当前系统中已存在:count条制造商记录，执行此操作将覆盖现有数据。',
+        ],
+    ],
 
 ];

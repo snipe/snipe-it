@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Status ove imovine nije zaduživ. Korišćenje ove oznake statusa će razdužiti imovinu.',
     'asset_deployable' => 'Ova imovina može biti zadužena.',
     'processing_spinner' => 'Obrađivanje... (Ovo bi moglo da potraje u slučaju velikih datoteka)',
+    'processing' => 'Obrada... ',
     'optional_infos'  => 'Opcione informacije',
     'order_details'   => 'Informacije o nabavci',
     'calc_eol'    => 'Ako nulirate datum isteka, koristite automatsko izračunavanje isteka na osnovu datuma kupovine i stope isticanja.',

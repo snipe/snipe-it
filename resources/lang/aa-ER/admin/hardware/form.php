@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'crwdns12752:0crwdne12752:0',
     'asset_deployable' => 'crwdns12945:0crwdne12945:0',
     'processing_spinner' => 'crwdns11515:0crwdne11515:0',
+    'processing' => 'crwdns13210:0crwdne13210:0',
     'optional_infos'  => 'crwdns10490:0crwdne10490:0',
     'order_details'   => 'crwdns10492:0crwdne10492:0',
     'calc_eol'    => 'crwdns12782:0crwdne12782:0',

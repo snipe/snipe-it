@@ -247,6 +247,7 @@
 
                       @include('partials.asset-bulk-actions', ['id_divname' => 'AssignedAssetsBulkEditToolbar', 'id_formname' => 'assignedAssetsBulkForm', 'id_button' => 'AssignedbulkAssetEditButton'])
                       <table
+                              role="table"
                               data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                               data-cookie-id-table="assetsAssignedListingTable"
                               data-pagination="true"
@@ -261,9 +262,9 @@
                               data-bulk-button-id="#AssignedbulkAssetEditButton"
                               data-bulk-form-id="#assignedAssetsBulkForm"
                               data-click-to-select="true"
-                              id="assetsListingTable"
+                              id="assetsAssignedListingTable"
                               class="table table-striped snipe-table"
-                              data-url="{{route('api.locations.assigned_assets', ['location' => $location]) }}"
+                              data-url="{{route('api.assets.index', ['assigned_to' => $location->id, 'assigned_type' => 'App\Models\Location']) }}"
                               data-export-options='{
                               "fileName": "export-locations-{{ str_slug($location->name) }}-assets-{{ date('Y-m-d') }}",
                               "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
@@ -276,6 +277,7 @@
 
                       @include('partials.asset-bulk-actions', ['id_divname' => 'RTDassetsBulkEditToolbar', 'id_formname' => 'RTDassets', 'id_button' => 'RTDbulkAssetEditButton'])
                       <table
+                              role="table"
                               data-columns="{{ \App\Presenters\AssetPresenter::dataTableLayout() }}"
                               data-cookie-id-table="RTDassetsListingTable"
                               data-pagination="true"
@@ -305,6 +307,7 @@
               <div class="tab-pane" id="accessories">
                   <h2 class="box-title">{{ trans('general.accessories') }}</h2>
                       <table
+                              role="table"
                               data-columns="{{ \App\Presenters\AccessoryPresenter::dataTableLayout() }}"
                               data-cookie-id-table="accessoriesListingTable"
                               data-pagination="true"
@@ -331,6 +334,7 @@
                       </h2>
 
                       <table
+                              role="table"
                               data-columns="{{ \App\Presenters\LocationPresenter::assignedAccessoriesDataTableLayout() }}"
                               data-cookie-id-table="accessoriesAssignedListingTable"
                               data-pagination="true"
@@ -356,6 +360,7 @@
               <div class="tab-pane" id="consumables">
                   <h2 class="box-title">{{ trans('general.consumables') }}</h2>
                           <table
+                                  role="table"
                                   data-columns="{{ \App\Presenters\ConsumablePresenter::dataTableLayout() }}"
                                   data-cookie-id-table="consumablesListingTable"
                                   data-pagination="true"
@@ -379,6 +384,7 @@
               <div class="tab-pane" id="components">
                   <h2 class="box-title">{{ trans('general.components') }}</h2>
                           <table
+                                  role="table"
                                   data-columns="{{ \App\Presenters\ComponentPresenter::dataTableLayout() }}"
                                   data-cookie-id-table="componentsTable"
                                   data-pagination="true"

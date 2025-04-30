@@ -299,9 +299,15 @@ class AssetsController extends Controller
         if ($request->input('requestable') == 'true') {
             $assets->where('assets.requestable', '=', '1');
         }
-
+        
         if ($request->filled('model_id')) {
-            $assets->InModelList([$request->input('model_id')]);
+            // If model_id is already an array, just use it as-is
+            if (is_array($request->input('model_id'))) {
+                $assets->InModelList($request->input('model_id'));
+            } else {
+                // Otherwise, turn it into an array
+                $assets->InModelList([$request->input('model_id')]);
+            }
         }
 
         if ($request->filled('category_id')) {

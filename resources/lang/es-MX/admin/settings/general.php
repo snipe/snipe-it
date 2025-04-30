@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'Si está obligado a auditar físicamente sus activos con regularidad, introduzca el intervalo en meses que utilice. Si actualiza este valor, se actualizarán todas las "próximas fechas de auditoría" de los activos con una fecha de auditoría próxima.',
     'audit_warning_days'        => 'Umbral para aviso de auditoría',
     'audit_warning_days_help'   => '¿Con cuántos días de antelación es necesario avisar que se deben auditar los activos?',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Generar incremento automático en las placas de activos',
     'auto_increment_prefix'		=> 'Prefijo (opcional)',
     'auto_incrementing_help'    => 'Habilite primero el incremento automático de las placas de activos antes de configurar esto',
     'backups'					=> 'Copias de seguridad',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'Limitar los usuarios asignados a compañías (incluyendo administradores) solo a los activos de esa compañía.',
     'full_multiple_companies_support_text' => 'Soporte completo a múltiples compañías',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
-    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Mostrar en menús desplegables de modelos',
     'optional'					=> 'opcional',
     'per_page'                  => 'Resultados por página',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */

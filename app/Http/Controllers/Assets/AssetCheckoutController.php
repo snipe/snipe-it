@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Session;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Validator;
 
 class AssetCheckoutController extends Controller
 {
@@ -36,6 +37,14 @@ class AssetCheckoutController extends Controller
                 ->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
 
+        // Validate custom fields on existing asset
+        $validator = Validator::make($asset->toArray(), $asset->customFieldValidationRules());
+
+        if ($validator->fails()) {
+            return redirect()->route('hardware.edit', $asset)
+                ->withErrors($validator);
+        }
+        
         if ($asset->availableForCheckout()) {
             return view('hardware/checkout', compact('asset'))
                 ->with('statusLabel_list', Helper::deployableStatusLabelList())

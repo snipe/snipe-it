@@ -112,7 +112,7 @@
                         <tr id="audit-loader" style="display: none;">
                             <td colspan="3">
                                 <x-icon type="spinner" />
-                                {{ trans('admin/hardware/form.processing_spinner') }}
+                                {{ trans('admin/hardware/form.processing') }}
                             </td>
                         </tr>
                         </thead>

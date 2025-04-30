@@ -20,7 +20,6 @@
                     <div class="row">
                         <div class="col-md-12">
 
-        @if ($requestedItems->count() > 0)
         <div class="table-responsive">
             <table
                     name="requestedAssets"
@@ -133,14 +132,7 @@
             </table>
         </div>
 
-        @else
-        <div class="col-md-12">
-            <div class="alert alert-info alert-block">
-                <i class="fas fa-info-circle"></i>
-                {{ trans('general.no_results') }}
-            </div>
-        </div>
-        @endif
+
                         </div>
                     </div>
                 </div>

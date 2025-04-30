@@ -25,7 +25,7 @@ return [
     'audit_interval_help'       => 'Haddii lagaa rabo inaad si joogto ah u xisaabiso hantidaada, geli inta u dhaxaysa bilaha aad isticmaasho. Haddii aad cusboonaysiiso qiimahan, dhammaan "taariikhda hantidhawrka soo socda" ee hantida leh taariikhda hantidhawrka ee soo socota waa la cusboonaysiin doonaa.',
     'audit_warning_days'        => 'Heerka Digniinta Hanti-dhawrka',
     'audit_warning_days_help'   => 'Immisa maalmood ka hor ayaan kaaga digaynaa marka hantida hanti dhawrku ku beegan tahay?',
-    'auto_increment_assets'		=> 'Enerate auto-incrementing asset tags',
+    'auto_increment_assets'		=> 'Samee calaamadaynta hantida oo si toos ah u kordhisa',
     'auto_increment_prefix'		=> 'Horgale (ikhtiyaar)',
     'auto_incrementing_help'    => 'Daree kor u qaadista otomaatigga ah ee sumadaha hantida marka hore si tan loo dejiyo',
     'backups'					=> 'Kaabta',
@@ -151,7 +151,8 @@ return [
     'full_multiple_companies_support_help_text' => 'Ku xaddidida isticmaalayaasha (ay ku jiraan admins) shirkadaha loo qoondeeyay hantida shirkadooda.',
     'full_multiple_companies_support_text' => 'Taageerada Shirkado Badan oo Buuxa',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
-    'scope_locations_fmcs_support_help_text'  => 'In previous versions, locations were not restricted to a particular company. If this setting is disabled, this preserves backward compatibility with older versions and locations can be used across multiple companies. If this setting is enabled, locations are restricted to their selected company.',
+    'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'Ku muuji Tusmooyinka Hoos u dhaca',
     'optional'					=> 'doorasho',
     'per_page'                  => 'Natiijooyinka boggiiba',
@@ -450,6 +451,24 @@ return [
         'logo_and_text' => 'Logo and Text',
     ],
 
+
+    'legends' => [
+        'scoping' => 'Scoping',
+        'formats' => 'Default Formats',
+        'profiles' => 'User Profiles',
+        'eula' => 'EULA & Acceptance Preferences',
+        'misc_display' => 'Miscellaneous Display Options',
+        'email' => 'Email Preferences',
+        'checkin' => 'Checkin Preferences',
+        'dashboard' => 'Login & Dashboard Preferences',
+        'misc' => 'Miscellaneous',
+        'logos' => 'Logos & Display',
+        'colors' => 'Colors & Skins',
+        'footer' => 'Footer Preferences',
+        'security' => 'Security Preferences',
+        'general' => 'General',
+        'intervals' => 'Intervals & Thresholds',
+    ],
 
 
     /* Keywords for settings overview help */

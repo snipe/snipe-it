@@ -23,7 +23,7 @@ return [
     'asset_models'			=> 'Asset Modelle',
     'asset_model'			=> 'Modell',
     'asset'					=> 'Asset',
-    'asset_previous'        => 'Asset (Previously Assigned)',
+    'asset_previous'        => 'Asset (Zuvor zugewiesen)',
     'asset_report'          => 'Asset Bericht',
     'asset_tag'				=> 'Asset Tag',
     'asset_tags'            => 'Asset Tags',
@@ -32,7 +32,7 @@ return [
     'accept_assets_menu'    => 'Assets akzeptieren',
     'accept_item'           => 'Gegenstand akzeptieren',
     'audit'				    => 'Prüfung',
-    'audits'				=> 'Audits',
+    'audits'				=> 'Prüfung',
     'audit_report'			=> 'Prüfungs-Log',
     'assets'				=> 'Assets',
     'assets_audited'        => 'geprüfte Assets',
@@ -574,7 +574,7 @@ return [
     'user_managed_passwords' => 'Passwortverwaltung',
     'user_managed_passwords_disallow' => 'Benutzern die Verwaltung ihrer eigenen Passwörter verbieten',
     'user_managed_passwords_allow' => 'Benutzern erlauben, ihre eigenen Passwörter zu verwalten',
-    'from' => 'From',
+    'from' => 'Von',
     'by' => 'Von',
 
 // Add form placeholders here
@@ -589,22 +589,22 @@ return [
     ],
 
     'skins' => [
-        'site_default' => 'Site Default',
-        'default_blue' => 'Default Blue',
-        'blue_dark' => 'Blue (Dark Mode)',
-        'green' => 'Green Dark',
-        'green_dark' => 'Green (Dark Mode)',
-        'red' => 'Red Dark',
-        'red_dark' => 'Red (Dark Mode)',
-        'orange' => 'Orange Dark',
-        'orange_dark' => 'Orange (Dark Mode)',
-        'black' => 'Black',
-        'black_dark' => 'Black (Dark Mode)',
-        'purple' => 'Purple',
-        'purple_dark' => 'Purple (Dark Mode)',
-        'yellow' => 'Yellow',
-        'yellow_dark' => 'Yellow (Dark Mode)',
-        'high_contrast' => 'High Contrast',
+        'site_default' => 'Seiten Standard',
+        'default_blue' => 'Standard Blau',
+        'blue_dark' => 'Blau (Dunkler Modus)',
+        'green' => 'Grün Dunkel',
+        'green_dark' => 'Grün (Dunkler Modus)',
+        'red' => 'Rot Dunkel',
+        'red_dark' => 'Rot (Dunkler Modus)',
+        'orange' => 'Orange Dunkel',
+        'orange_dark' => 'Orange (Dunkler Modus)',
+        'black' => 'Schwarz',
+        'black_dark' => 'Schwarz (Dunkler Modus)',
+        'purple' => 'Lila',
+        'purple_dark' => 'Lila (Dunkler Modus)',
+        'yellow' => 'Gelb',
+        'yellow_dark' => 'Gelb (Dunkler Modus)',
+        'high_contrast' => 'Hoher Kontrast',
 
     ],
 
@@ -613,6 +613,15 @@ return [
     'deleted_models' => 'Gelöschtes Asset-Modelle',
     'deleted_users' => 'Gelöschte Benutzer',
     'cost_each' => 'je :amount',
-    'remove_current_image' => 'Remove current :type image',
+    'remove_current_image' => 'Aktuelles :type Bild entfernen',
+
+    'seeding' => [
+        'manufacturers' => [
+            'button' => 'Hersteller anlegen',
+            'prompt' => 'Sie haben noch keine Hersteller. Möchten Sie eine Liste von gängigen Herstellern anbieten? (DIESE ÜBERSCHREIBEN BESTEHENDE HERSTELLER, einschließlich derer, die sanft gelöscht wurden.)',
+            'success' => 'Hersteller erfolgreich vorgefüllt',
+            'error' => 'Hersteller konnten nicht vorgefüllt werden. Ein Herstellerrekord existiert bereits, und das Füllen würde ihn überschreiben. Konnte Hersteller nicht liefern. :count Herstelleraufzeichnungen existieren bereits, und Füllung würde sie überschreiben.',
+        ],
+    ],
 
 ];

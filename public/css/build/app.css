@@ -312,6 +312,16 @@ a.accordion-header {
 a.logo.no-hover a:hover {
   background-color: transparent;
 }
+.index-block {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.index-block:hover {
+  overflow: visible;
+  white-space: normal;
+  height: auto;
+}
 input:required,
 select:required,
 textarea:required {
@@ -1438,5 +1448,22 @@ code.single-line {
 p.monospace,
 span.monospace {
   font-family: monospace, monospace;
+}
+legend.highlight {
+  background: repeating-linear-gradient(45deg, #222d32, #222d32 10px, #444 10px, #444 11px);
+  color: #fff;
+  font-size: 18px;
+  padding: 6px 6px 6px 10px;
+}
+legend.highlight a {
+  color: #fff;
+  cursor: pointer;
+}
+fieldset.bottom-padded {
+  padding-bottom: 20px;
+}
+caption.tableCaption {
+  font-size: 18px;
+  padding-left: 8px;
 }
 

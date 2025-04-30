@@ -58,6 +58,7 @@ return [
     'asset_not_deployable_checkin' => 'Ten status nie jest wdrożeniowym. Użycie tego statusu uniemożliwi wydanie zasobu.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Przetwarzanie... (To może zająć trochę czasu dla dużych plików)',
+    'processing' => 'Przetwarzanie... ',
     'optional_infos'  => 'Informacje opcjonalne',
     'order_details'   => 'Informacje związane z zamówieniem',
     'calc_eol'    => 'W przypadku unieważnienia daty wycofania z eksploatacji, użyj automatycznego obliczenia wycofania z eksploatacji w oparciu o datę zakupu i czas wycofania z eksploatacji.',

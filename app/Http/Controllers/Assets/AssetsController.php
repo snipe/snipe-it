@@ -878,10 +878,19 @@ class AssetsController extends Controller
     }
 
 
-    public function audit(Asset $asset)
+    public function audit(Asset $asset): View | RedirectResponse
     {
-        $settings = Setting::getSettings();
         $this->authorize('audit', Asset::class);
+        $settings = Setting::getSettings();
+
+        // Validate custom fields on existing asset
+        $validator = Validator::make($asset->toArray(), $asset->customFieldValidationRules());
+
+        if ($validator->fails()) {
+            return redirect()->route('hardware.edit', $asset)
+                ->withErrors($validator);
+        }
+
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
         return view('hardware/audit')->with('asset', $asset)->with('item', $asset)->with('next_audit_date', $dt)->with('locations_list');
     }
