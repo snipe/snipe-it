@@ -120,7 +120,7 @@ class LicenseSeatsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
         }
         if( $touched && $licenseSeat->unreassignable_seat) {
-            return response()->json(Helper::formatStandardApiResponse('error', $licenseSeat, trans('admin/licenses/message.checkout.unavailable')));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.checkout.unavailable')));
         }
         // the logging functions expect only one "target". if both asset and user are present in the request,
         // we simply let assets take precedence over users...
