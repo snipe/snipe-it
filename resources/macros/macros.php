@@ -292,8 +292,8 @@ Form::macro('skin', function ($name = 'skin', $selected = null, $class = null) {
         'black-dark' => trans('general.skins.black_dark'),
         'purple' => trans('general.skins.purple'),
         'purple-dark' => trans('general.skins.purple_dark'),
-        'yellow' => trans('general.skins.yellow_dark'),
-        'yellow-dark' => trans('general.skins.yellow'),
+        'yellow' => trans('general.skins.yellow'),
+        'yellow-dark' => trans('general.skins.yellow_dark'),
         'contrast' => trans('general.skins.high_contrast'),
     ];
 
