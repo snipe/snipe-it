@@ -80,7 +80,6 @@ class CurrentInventoryTest extends TestCase
     {
         $this->settings->enableShowingAssignedAssets();
 
-
         $user = User::factory()->create();
 
         $parentAsset = Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'parent-asset-tag']);
