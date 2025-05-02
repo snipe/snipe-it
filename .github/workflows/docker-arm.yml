@@ -19,7 +19,7 @@ permissions:
   contents: read
 
 jobs:
-  docker-ubuntu:
+  docker-ubuntu-arm:
     # Ensure this job never runs on forked repos. It's only executed for 'grokability/snipe-it'
     if: github.repository == 'grokability/snipe-it'
     runs-on: ubuntu-latest
@@ -58,7 +58,7 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       ###############################################
-      # Build/Push the 'grokability/snipe-it' image
+      # Build/Push the 'snipe/snipe-it' image
       ###############################################
       # https://github.com/docker/metadata-action
       # Get Metadata for docker_build step below
@@ -84,7 +84,7 @@ jobs:
           # Use tags / labels provided by 'docker/metadata-action' above
           tags: ${{ steps.meta_build.outputs.tags }}
           labels: ${{ steps.meta_build.outputs.labels }}
-  docker-alpine:
+  docker-alpine-arm:
     # Ensure this job never runs on forked repos. It's only executed for 'grokability/snipe-it'
     if: github.repository == 'grokability/snipe-it'
     runs-on: ubuntu-latest
@@ -97,7 +97,7 @@ jobs:
         type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=-alpine
         type=ref,event=branch,enable=${{ !endsWith(github.ref, github.event.repository.default_branch) }},suffix=-alpine
         type=ref,event=tag,suffix=-alpine
-        type=semver,pattern=v{{major}}-latest-alpine 
+        type=semver,pattern=v{{major}}-latest-alpine
       # Define default tag "flavor" for docker/metadata-action per
       # https://github.com/docker/metadata-action#flavor-input
       # We turn off 'latest' tag by default.
@@ -131,7 +131,7 @@ jobs:
         id: meta_build
         uses: docker/metadata-action@v5
         with:
-          images: grokability/snipe-it
+          images: snipe/snipe-it
           tags: ${{ env.IMAGE_TAGS }}
           flavor: ${{ env.TAGS_FLAVOR }}
 
