@@ -385,6 +385,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
 
         Breadcrumbs::for('locations.edit', fn (Trail $trail, Location $location) =>
         $trail->parent('locations.index', route('locations.index'))
+            ->push($location->name, route('locations.show', $location))
             ->push(trans('general.breadcrumb_button_actions.edit_item', ['name' => $location->name]), route('locations.edit', $location))
         );
 
