@@ -2,16 +2,12 @@
 
 namespace App\Models\Labels\Tapes\Generic;
 
-use Illuminate\Support\Collection;
-use TCPDF;
-
-class Tape_53mm_B extends Tape_53mm
+class Continuous_53mm_A extends Continuous_53mm
 {
-
-
+    
     public function getUnit() { return 'mm'; }
     public function getSupportAssetTag() { return false; }
-    public function getSupport1DBarcode() { return false; }
+    public function getSupport1DBarcode() { return true; }
     public function getSupport2DBarcode() { return true; }
     public function getSupportFields() { return 5; }
     public function getSupportLogo() { return false; }
@@ -44,15 +40,14 @@ class Tape_53mm_B extends Tape_53mm
         $barcodeSize = min($usableHeight * 0.8, $usableWidth * $this->getBarcodeRatio());
         
         if ($record->has('barcode2d')) {
-            $barcodeX = $pa->x1;
+            $barcodeX = $pa->x1 + ($usableWidth - $barcodeSize) / 2;
             
             static::write2DBarcode(
                 $pdf, $record->get('barcode2d')->content, $record->get('barcode2d')->type,
                 $barcodeX, $currentY,
                 $barcodeSize, $barcodeSize
             );
-            $currentX += $barcodeSize + $this->barcodeMargin;
-            $usableWidth -= $barcodeSize + $this->barcodeMargin;
+            $currentY += $barcodeSize + $this->barcodeMargin;
         }
         
         if ($record->has('fields')) {
