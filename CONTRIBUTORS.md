@@ -583,6 +583,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/m4us1ne"><img src="https://avatars.githubusercontent.com/u/33946590?v=4?s=110" width="110px;" alt="Lukas Jung"/><br /><sub><b>Lukas Jung</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=m4us1ne" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://leafedfox.xyz/"><img src="https://avatars.githubusercontent.com/u/10965027?v=4?s=110" width="110px;" alt="Ellie"/><br /><sub><b>Ellie</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=LeafedFox" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
