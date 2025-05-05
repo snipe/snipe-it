@@ -565,6 +565,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/MelonSmasher"><img src="https://avatars.githubusercontent.com/u/1491053?v=4?s=110" width="110px;" alt="MelonSmasher"/><br /><sub><b>MelonSmasher</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=MelonSmasher" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/AlexanderWPapyrus"><img src="https://avatars.githubusercontent.com/u/80526133?v=4?s=110" width="110px;" alt="AlexanderWPapyrus"/><br /><sub><b>AlexanderWPapyrus</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=AlexanderWPapyrus" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
