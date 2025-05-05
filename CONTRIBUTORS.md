@@ -487,6 +487,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mnemonicly"><img src="https://avatars.githubusercontent.com/u/3803132?v=4?s=110" width="110px;" alt="Dan"/><br /><sub><b>Dan</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=mnemonicly" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/NebelKreis"><img src="https://avatars.githubusercontent.com/u/43917728?v=4?s=110" width="110px;" alt="Nebel"/><br /><sub><b>Nebel</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=NebelKreis" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/test1337ahp"><img src="https://avatars.githubusercontent.com/u/132433803?v=4?s=110" width="110px;" alt="test1337ahp"/><br /><sub><b>test1337ahp</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=test1337ahp" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/JonathonReinhart"><img src="https://avatars.githubusercontent.com/u/1916566?v=4?s=110" width="110px;" alt="Jonathon Reinhart"/><br /><sub><b>Jonathon Reinhart</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=JonathonReinhart" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
