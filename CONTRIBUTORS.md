@@ -569,6 +569,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/disc"><img src="https://avatars.githubusercontent.com/u/306231?v=4?s=110" width="110px;" alt="Alexandr Hacicheant"/><br /><sub><b>Alexandr Hacicheant</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=disc" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://hex128.io/"><img src="https://avatars.githubusercontent.com/u/3032891?v=4?s=110" width="110px;" alt="Hex"/><br /><sub><b>Hex</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=hex128" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/arukompas"><img src="https://avatars.githubusercontent.com/u/8697942?v=4?s=110" width="110px;" alt="Arunas Skirius"/><br /><sub><b>Arunas Skirius</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=arukompas" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/benperiton"><img src="https://avatars.githubusercontent.com/u/104396?v=4?s=110" width="110px;" alt="Ben Periton"/><br /><sub><b>Ben Periton</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=benperiton" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
