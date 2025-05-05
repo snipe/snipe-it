@@ -534,6 +534,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mzack5020"><img src="https://avatars.githubusercontent.com/u/12749393?v=4?s=110" width="110px;" alt="Matthew Zackschewski"/><br /><sub><b>Matthew Zackschewski</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=mzack5020" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.frei.media/"><img src="https://avatars.githubusercontent.com/u/12660103?v=4?s=110" width="110px;" alt="Matthias Frei"/><br /><sub><b>Matthias Frei</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=firefrei" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nticaric"><img src="https://avatars.githubusercontent.com/u/824840?v=4?s=110" width="110px;" alt="Nenad Ticaric"/><br /><sub><b>Nenad Ticaric</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=nticaric" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Scorcher"><img src="https://avatars.githubusercontent.com/u/706439?v=4?s=110" width="110px;" alt="Nikolay Didenko"/><br /><sub><b>Nikolay Didenko</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Scorcher" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
