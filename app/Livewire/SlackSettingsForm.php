@@ -90,7 +90,7 @@ class SlackSettingsForm extends Component
             $this->isDisabled= '';
         }
         if($this->webhook_selected === 'microsoft' && $this->teams_webhook_deprecated) {
-            session()->flash('warning', 'The selected Microsoft Teams webhook URL will be deprecated Dec 31st, 2025. Please use a workflow URL. Microsoft\'s documentation on creating a workflow can be found <a href="https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498" target="_blank"> here.</a>');
+            session()->flash('warning', trans('admin/settings/message.webhook.ms_teams_deprecation'));
         }
     }
     public function updated($field) {
