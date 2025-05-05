@@ -509,6 +509,9 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="http://thinkl33t.co.uk/"><img src="https://avatars.githubusercontent.com/u/1016780?v=4?s=110" width="110px;" alt="Bob Clough"/><br /><sub><b>Bob Clough</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=thinkl33t" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/brandon-bailey"><img src="https://avatars.githubusercontent.com/u/10648463?v=4?s=110" width="110px;" alt="Brandon Daniel Bailey"/><br /><sub><b>Brandon Daniel Bailey</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=brandon-bailey" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/marcquark"><img src="https://avatars.githubusercontent.com/u/23556080?v=4?s=110" width="110px;" alt="Marc Bartelt"/><br /><sub><b>Marc Bartelt</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=marcquark" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
