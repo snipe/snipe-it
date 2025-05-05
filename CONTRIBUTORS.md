@@ -506,6 +506,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://robintemme.de/"><img src="https://avatars.githubusercontent.com/u/2809241?v=4?s=110" width="110px;" alt="Robin Temme"/><br /><sub><b>Robin Temme</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=robintemme" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/herroworrd"><img src="https://avatars.githubusercontent.com/u/47008367?v=4?s=110" width="110px;" alt="herroworrd"/><br /><sub><b>herroworrd</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=herroworrd" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://mubiu.com/"><img src="https://avatars.githubusercontent.com/u/28558609?v=4?s=110" width="110px;" alt="vicleos"/><br /><sub><b>vicleos</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=vicleos" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://thinkl33t.co.uk/"><img src="https://avatars.githubusercontent.com/u/1016780?v=4?s=110" width="110px;" alt="Bob Clough"/><br /><sub><b>Bob Clough</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=thinkl33t" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
