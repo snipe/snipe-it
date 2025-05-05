@@ -1562,6 +1562,11 @@ class Helper
             $locations = Location::all();
         }
 
+        // Bail out early if there are no locations
+        if ($locations->count() == 0) {
+            return [];
+        }
+
         foreach($locations as $location) {
             // in case of an update of a single location, use the newly requested company_id
             if ($new_company_id) {
@@ -1600,14 +1605,17 @@ class Helper
                         $items = collect([])->push($location->$keyword);
                     }
 
+                    $count = 0;
                     foreach ($items as $item) {
 
+
                         if ($item && $item->company_id != $location_company) {
+
                             $mismatched[] = [
                                     class_basename(get_class($item)),
                                     $item->id,
                                     $item->name ?? $item->asset_tag ?? $item->serial ?? $item->username,
-                                    str_replace('App\\Models\\', '', $item->assigned_type) ?? null,
+                                    $item->assigned_type ? str_replace('App\\Models\\', '', $item->assigned_type) : null,
                                     $item->company_id ?? null,
                                     $item->company->name ?? null,
 //                                    $item->defaultLoc->id ?? null,
@@ -1618,6 +1626,15 @@ class Helper
                                     $item->location->company->name ?? null,
                                     $location_company ?? null,
                                 ];
+
+                            $count++;
+
+                            // Bail early if this is not being run via artisan
+                            if ((!$artisan) && ($count > 0)) {
+                                return $mismatched;
+                            }
+
+
 
                         }
                     }
