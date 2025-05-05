@@ -489,6 +489,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/test1337ahp"><img src="https://avatars.githubusercontent.com/u/132433803?v=4?s=110" width="110px;" alt="test1337ahp"/><br /><sub><b>test1337ahp</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=test1337ahp" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/JonathonReinhart"><img src="https://avatars.githubusercontent.com/u/1916566?v=4?s=110" width="110px;" alt="Jonathon Reinhart"/><br /><sub><b>Jonathon Reinhart</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=JonathonReinhart" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/aranar-pro"><img src="https://avatars.githubusercontent.com/u/484742?v=4?s=110" width="110px;" alt="aranar-pro"/><br /><sub><b>aranar-pro</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=aranar-pro" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/phil-flip"><img src="https://avatars.githubusercontent.com/u/27019397?v=4?s=110" width="110px;" alt="Phil"/><br /><sub><b>Phil</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=phil-flip" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
