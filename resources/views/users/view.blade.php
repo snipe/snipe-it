@@ -785,7 +785,7 @@
                     data-url="{{ route('api.assets.index', [
                         'assigned_to' => e($user->id),
                         'assigned_type' => 'App\Models\User',
-                        'include_child_assets' => 'true',
+                        'include_child_assets' => $snipeSettings->show_assigned_assets ? 'true' : 'false',
                     ]) }}"
                     data-export-options='{
                 "fileName": "export-{{ str_slug($user->present()->fullName()) }}-assets-{{ date('Y-m-d') }}",
