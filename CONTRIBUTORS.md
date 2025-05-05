@@ -495,6 +495,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://fe80.fr/"><img src="https://avatars.githubusercontent.com/u/6473460?v=4?s=110" width="110px;" alt="Steffy Fort"/><br /><sub><b>Steffy Fort</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=fe80" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/sorvani"><img src="https://avatars.githubusercontent.com/u/3302372?v=4?s=110" width="110px;" alt="Jared Busch"/><br /><sub><b>Jared Busch</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=sorvani" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/seanborg-codethink"><img src="https://avatars.githubusercontent.com/u/111956991?v=4?s=110" width="110px;" alt="seanborg-codethink"/><br /><sub><b>seanborg-codethink</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=seanborg-codethink" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/dkaatz"><img src="https://avatars.githubusercontent.com/u/160669961?v=4?s=110" width="110px;" alt="dkaatz"/><br /><sub><b>dkaatz</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=dkaatz" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
