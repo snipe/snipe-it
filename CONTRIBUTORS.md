@@ -524,6 +524,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/SBrown2021"><img src="https://avatars.githubusercontent.com/u/77835667?v=4?s=110" width="110px;" alt="SBrown2021"/><br /><sub><b>SBrown2021</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=SBrown2021" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/serkanerip"><img src="https://avatars.githubusercontent.com/u/8780913?v=4?s=110" width="110px;" alt="Serkan"/><br /><sub><b>Serkan</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=serkanerip" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://www.yudelei.com/"><img src="https://avatars.githubusercontent.com/u/63188620?v=4?s=110" width="110px;" alt="Shanks"/><br /><sub><b>Shanks</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Shankschn" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/cendai-mis"><img src="https://avatars.githubusercontent.com/u/198525698?v=4?s=110" width="110px;" alt="cendai-mis"/><br /><sub><b>cendai-mis</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=cendai-mis" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
