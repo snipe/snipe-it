@@ -578,6 +578,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/juhotaipale"><img src="https://avatars.githubusercontent.com/u/13137708?v=4?s=110" width="110px;" alt="Juho Taipale"/><br /><sub><b>Juho Taipale</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=juhotaipale" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/KorvinSzanto"><img src="https://avatars.githubusercontent.com/u/1007419?v=4?s=110" width="110px;" alt="Korvin Szanto"/><br /><sub><b>Korvin Szanto</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=KorvinSzanto" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://lewisfoster.foo/"><img src="https://avatars.githubusercontent.com/u/8513053?v=4?s=110" width="110px;" alt="Lewis Foster"/><br /><sub><b>Lewis Foster</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=sniff122" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/loganswartz"><img src="https://avatars.githubusercontent.com/u/33877541?v=4?s=110" width="110px;" alt="Logan Swartzendruber"/><br /><sub><b>Logan Swartzendruber</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=loganswartz" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
