@@ -493,6 +493,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://fe80.fr/"><img src="https://avatars.githubusercontent.com/u/6473460?v=4?s=110" width="110px;" alt="Steffy Fort"/><br /><sub><b>Steffy Fort</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=fe80" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/sorvani"><img src="https://avatars.githubusercontent.com/u/3302372?v=4?s=110" width="110px;" alt="Jared Busch"/><br /><sub><b>Jared Busch</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=sorvani" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
