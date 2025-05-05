@@ -551,6 +551,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/viclou"><img src="https://avatars.githubusercontent.com/u/20525448?v=4?s=110" width="110px;" alt="victoria"/><br /><sub><b>victoria</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=viclou" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/valentyntu"><img src="https://avatars.githubusercontent.com/u/40685314?v=4?s=110" width="110px;" alt="Valentyn Tulub"/><br /><sub><b>Valentyn Tulub</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=valentyntu" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="http://wouter0100.nl/"><img src="https://avatars.githubusercontent.com/u/864520?v=4?s=110" width="110px;" alt="Wouter van Os"/><br /><sub><b>Wouter van Os</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Wouter0100" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/wyatt-teeter"><img src="https://avatars.githubusercontent.com/u/3946540?v=4?s=110" width="110px;" alt="Wyatt Teeter"/><br /><sub><b>Wyatt Teeter</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=xWyatt" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
