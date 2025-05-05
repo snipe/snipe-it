@@ -467,7 +467,7 @@ input[type=search] {
   background-color: var(--back-sub);
 }
 .table-striped > tbody > tr:nth-of-type(even) {
-  background-color: var(--back-sub-alt);
+  background-color: var(--back-main);
 }
 #webui > div > div > div > div > div > table > tbody > tr > td > a > i.fa,
 .box-body,
@@ -492,7 +492,16 @@ a:visited {
   color: var(--visited-link);
 }
 #customFieldsTable a[href*='/models'] {
-  color: var(--back-sub);
+  background-color: var(--back-sub-alt);
+  color: var(--link);
+}
+#customFieldsTable a[href*='/models']:hover {
+  background-color: var(--text-sub);
+  color: var(--button-hover);
+}
+#customFieldsTable a[href*='/models']:visited {
+  background-color: var(--background);
+  color: var(--visited-link);
 }
 #customFieldsTable a[href*='/fieldsets'] {
   background-color: transparent;

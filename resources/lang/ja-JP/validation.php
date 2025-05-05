@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => '1 つまたは複数の電子メール アドレスが無効です。',
+    'checkboxes'           => ':attribute に無効なオプションが含まれています。',
+    'radio_buttons'        => ':attribute は不正です。',
+    
     'custom' => [
         'alpha_space' => ':attribute フィールドに、禁止文字列が含まれています。',
-        'email_array'      => '1 つまたは複数の電子メール アドレスが無効です。',
+
         'hashed_pass'      => '現在のパスワードが正しくありません。',
         'dumbpwd'          => 'そのパスワードはあまりにも脆弱です。',
         'statuslabel_type' => '有効なステータスラベルの種類を選択する必要があります。',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
         'start_date.date_format'        =>  ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
         'end_date.date_format'          =>  ':attribute は YYYY-MM-DD 形式の有効な日付にして下さい',
-        'checkboxes'           => ':attribute に無効なオプションが含まれています。',
-        'radio_buttons'        => ':attribute は不正です。',
         'invalid_value_in_field' => 'このフィールドに含まれる値が無効です',
 
         'ldap_username_field' => [

@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'Vybraný súbor už bol odstránený',
         'header_row_has_malformed_characters' => 'Jeden alebo viacero stĺpcov obsahujú poškodené UTF-8 znaky',
         'content_row_has_malformed_characters' => 'Jeden alebo viacero atribútov v prvom riadku obsahu obsahuje poškodené UTF-8 znaky',
+        'transliterate_failure' => 'Transliteration from :encoding to UTF-8 failed due to invalid characters in input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Majetok nebol vyžiadaný, prosím skúste znovu',
-        'success' 		=> 'Majetok úspešne vyžiadaný.',
-        'canceled'      => 'Požiadavka na odovzdanie bola úspešne zrušená',
+        'error'   		=> 'Request was not successful, please try again.',
+        'success' 		=> 'Request successfully submitted.',
+        'canceled'      => 'Request successfully canceled.',
+        'cancel'        => 'Zrušiť túto žiadosť o položku',
     ],
 
 ];

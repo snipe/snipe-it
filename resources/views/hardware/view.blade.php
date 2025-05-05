@@ -111,6 +111,22 @@
                     @endif
 
 
+                    @if ($asset->audits->count() > 0)
+                        <li>
+                            <a href="#audits" data-toggle="tab" data-tooltip="true">
+
+                                <span class="hidden-lg hidden-md">
+                                    <i class="fas fa-clipboard-check fa-2x"></i>
+                                </span>
+                                <span class="hidden-xs hidden-sm">
+                                    {{ trans('general.audits') }}
+                                    {!! ($asset->audits()->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($asset->audits()->count()).'</span>' : '' !!}
+
+                                </span>
+                            </a>
+                        </li>
+                    @endif
+
                     <li>
                         <a href="#history" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
@@ -1148,14 +1164,13 @@
                         <div class="row{{($asset->licenses->count() > 0 ) ? '' : ' hidden-print'}}">
                             <div class="col-md-12">
                                 <!-- Licenses assets table -->
-                                @if ($asset->licenses->count() > 0)
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th class="col-md-4">{{ trans('general.name') }}</th>
-                                            <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.license_key') }}</th>
-                                            <th class="col-md-4"><span class="line"></span>{{ trans('admin/licenses/form.expiration') }}</th>
-                                            <th class="col-md-1"><span class="line"></span>{{ trans('table.actions') }}</th>
+                                            <th>{{ trans('general.name') }}</th>
+                                            <th><span class="line"></span>{{ trans('admin/licenses/form.license_key') }}</th>
+                                            <th><span class="line"></span>{{ trans('admin/licenses/form.expiration') }}</th>
+                                            <th><span class="line"></span>{{ trans('table.actions') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -1165,7 +1180,7 @@
                                                     <td><a href="{{ route('licenses.show', $seat->license->id) }}">{{ $seat->license->name }}</a></td>
                                                     <td>
                                                         @can('viewKeys', $seat->license)
-                                                            {!! nl2br(e($seat->license->serial)) !!}
+                                                            <code class="single-line"><span class="js-copy-link" data-clipboard-target=".js-copy-key-{{ $seat->id }}" aria-hidden="true" data-tooltip="true" data-placement="top" title="{{ trans('general.copy_to_clipboard') }}"><span class="js-copy-key-{{ $seat->id }}">{{ $seat->license->serial }}</span></span></code>
                                                         @else
                                                             ------------
                                                         @endcan
@@ -1181,13 +1196,6 @@
                                         @endforeach
                                         </tbody>
                                     </table>
-                                @else
-
-                                    <div class="alert alert-info alert-block hidden-print">
-                                        <x-icon type="info-circle" />
-                                        {{ trans('general.no_results') }}
-                                    </div>
-                                @endif
                             </div><!-- /col -->
                         </div> <!-- row -->
                     </div> <!-- /.tab-pane software -->
@@ -1196,7 +1204,7 @@
                         <!-- checked out assets table -->
                         <div class="row{{($asset->components->count() > 0 ) ? '' : ' hidden-print'}}">
                             <div class="col-md-12">
-                                @if($asset->components->count() > 0)
+
                                     <table class="table table-striped">
                                         <thead>
                                         <th>{{ trans('general.name') }}</th>
@@ -1241,12 +1249,6 @@
                                         </tr>
                                         </tfoot>
                                     </table>
-                                @else
-                                    <div class="alert alert-info alert-block hidden-print">
-                                        <x-icon type="info-circle" />
-                                        {{ trans('general.no_results') }}
-                                    </div>
-                                @endif
                             </div>
                         </div>
                     </div> <!-- /.tab-pane components -->
@@ -1255,9 +1257,6 @@
                     <div class="tab-pane fade" id="assets">
                         <div class="row{{($asset->assignedAssets->count() > 0 ) ? '' : ' hidden-print'}}">
                             <div class="col-md-12">
-
-                                @if ($asset->assignedAssets->count() > 0)
-
 
                                     <form
                                         method="POST"
@@ -1306,14 +1305,6 @@
 
                                         </form>
                                     </div>
-
-                                @else
-
-                                    <div class="alert alert-info alert-block hidden-print">
-                                        <x-icon type="info-circle" />
-                                        {{ trans('general.no_results') }}
-                                    </div>
-                                @endif
 
 
                             </div><!-- /col -->
@@ -1390,7 +1381,53 @@
                         </div> <!-- /.row -->
                     </div> <!-- /.tab-pane maintenances -->
 
-                    <div class="tab-pane fade" id="history">
+
+                <div class="tab-pane fade" id="audits">
+                    <!-- checked out assets table -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table
+                                    class="table table-striped snipe-table"
+                                    id="asseAuditHistory"
+                                    data-pagination="true"
+                                    data-id-table="asseAuditHistory"
+                                    data-search="true"
+                                    data-side-pagination="server"
+                                    data-show-columns="true"
+                                    data-show-fullscreen="true"
+                                    data-show-refresh="true"
+                                    data-sort-order="desc"
+                                    data-sort-name="created_at"
+                                    data-show-export="true"
+                                    data-export-options='{
+                         "fileName": "export-asset-{{  $asset->id }}-audits",
+                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
+                       }'
+
+                                    data-url="{{ route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset', 'action_type' => 'audit']) }}"
+                                    data-cookie-id-table="assetHistory"
+                                    data-cookie="true">
+                                <thead>
+                                <tr>
+                                    <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
+                                    <th data-visible="true" data-field="created_at" data-sortable="true" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
+                                    <th data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
+                                    <th class="col-sm-2" data-field="file" data-sortable="true" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
+                                    <th data-field="note">{{ trans('general.notes') }}</th>
+                                    <th data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
+                                    <th data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
+                                    <th data-field="remote_ip" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_ip') }}</th>
+                                    <th data-field="user_agent" data-visible="false" data-sortable="true">{{ trans('admin/settings/general.login_user_agent') }}</th>
+                                    <th data-field="action_source" data-visible="false" data-sortable="true">{{ trans('general.action_source') }}</th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div> <!-- /.row -->
+                </div> <!-- /.tab-pane history -->
+
+
+                <div class="tab-pane fade" id="history">
                         <!-- checked out assets table -->
                         <div class="row">
                             <div class="col-md-12">
@@ -1419,7 +1456,7 @@
                                     <tr>
                                         <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
                                         <th data-visible="true" data-field="action_date" data-sortable="true" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                                        <th data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
+                                        <th data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
                                         <th data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                                         <th class="col-sm-2" data-field="file" data-visible="false" data-formatter="fileUploadNameFormatter">{{ trans('general.file_name') }}</th>
                                         <th data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>

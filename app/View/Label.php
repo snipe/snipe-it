@@ -139,6 +139,9 @@ class Label implements View
                             case 'plain_serial_number': 
                                 $barcode2DTarget = $asset->serial; 
                                 break;
+                            case 'location':
+                                $barcode2DTarget = route('locations.show', $asset->location_id);
+                                break;
                             case 'hardware_id':
                             default:
                                 $barcode2DTarget = route('hardware.show', $asset);
@@ -181,16 +184,34 @@ class Label implements View
                                 // We'll set the label to an empty string since we
                                 // injected the label into the value field above.
                                 $previous['label'] = '';
-
                                 return $previous;
                             });
 
                         return $toAdd ? $myFields->push($toAdd) : $myFields;
                     }, new Collection());
 
-                $assetData->put('fields', $fields->take($template->getSupportFields()));
+                $emptyRowsCount = $settings->label2_empty_row_count;
+                if($emptyRowsCount) {
+                    // Create empty rows
+                    $emptyRows = collect(range(1, $emptyRowsCount))->map(function () {
+                        return [
+                            'label' => '',
+                            'value' => '',
+                            'dataSource' => null,
+                        ];
+                    });
 
-                return $assetData;
+                    // Prepend empty rows to the existing fields
+                    $fieldsWithEmpty = $emptyRows->merge($fields);
+
+                    $assetData->put('fields', $fieldsWithEmpty->take($template->getSupportFields()));
+                    return $assetData;
+                }
+               else{
+                   $assetData->put('fields', $fields->take($template->getSupportFields()));
+                   return $assetData;
+               }
+
             });
         
         if ($template instanceof Sheet) {

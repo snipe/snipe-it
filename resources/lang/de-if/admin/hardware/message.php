@@ -2,7 +2,7 @@
 
 return [
 
-    'undeployable' 		 => '<strong>Warnung: </strong> Dieses Asset wurde als derzeit nicht einsetzbar markiert. Wenn sich dieser Status geändert hat, aktualisieren Sie bitte den Asset-Status.',
+    'undeployable' 		 => '<strong>Warnung: </strong> Dieses Asset wurde als derzeit nicht einsetzbar markiert. Wenn sich dieser Status geändert hat, aktualisiere bitte den Asset-Status.',
     'does_not_exist' 	 => 'Asset existiert nicht.',
     'does_not_exist_var' => 'Asset mit Asset-Tag :asset_tag nicht gefunden.',
     'no_tag' 	         => 'Kein Asset-Tag angegeben.',
@@ -66,13 +66,14 @@ return [
         'file_already_deleted' => 'Die ausgewählte Datei wurde bereits gelöscht',
         'header_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der Kopfzeile enthalten fehlerhafte UTF-8 Zeichen',
         'content_row_has_malformed_characters' => 'Ein oder mehrere Attribute in der ersten Zeile des Inhalts enthalten fehlerhafte UTF-8-Zeichen',
+        'transliterate_failure' => 'Umschreibung von :encoding nach UTF-8 fehlgeschlagen wegen ungültiger Zeichen in Eingabe'
     ],
 
 
     'delete' => [
         'confirm'   	=> 'Bist du sicher, dass du dieses Asset entfernen möchtest?',
         'error'   		=> 'Beim Entfernen dieses Assets ist ein Fehler aufgetreten. Bitte versuche es erneut.',
-        'assigned_to_error' => '{1}Asset Tag: :asset_tag is currently checked out. Check in this device before deletion.|[2,*]Asset Tags: :asset_tag are currently checked out. Check in these devices before deletion.',
+        'assigned_to_error' => '{1}Asset Tag: :asset_tag ist derzeit ausgebucht. Überprüfe dieses Gerät bevor Du es löschst. [2,*]Asset Tags: :asset_tag sind derzeit ausgebucht. Überprüfe diese Geräte bevor Du sie löschst.',
         'nothing_updated'   => 'Es wurden keine Assets ausgewählt, somit wurde auch nichts gelöscht.',
         'success' 		=> 'Dass Asset wurde erfolgreich entfernt.',
     ],
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuche es erneut',
-        'success' 		=> 'Asset erfolgreich angefordert.',
-        'canceled'      => 'Herausgeben erfolgreich abgebrochen',
+        'error'   		=> 'Das Asset wurde nicht angefordert, bitte versuche es erneut.',
+        'success' 		=> 'Anfrage erfolgreich eingereicht.',
+        'canceled'      => 'Anfrage erfolgreich abgebrochen.',
+        'cancel'        => 'Storniere diese Gegenstandanfrage',
     ],
 
 ];

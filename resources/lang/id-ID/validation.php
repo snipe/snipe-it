@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Satu atau lebih alamat email tidak benar.',
+    'checkboxes'           => ':attribute berisi opsi yang tidak valid.',
+    'radio_buttons'        => ':attribute tidak valid.',
+    
     'custom' => [
         'alpha_space' => 'Bidang atribut: berisi karakter yang tidak diizinkan.',
-        'email_array'      => 'Satu atau lebih alamat email tidak valid.',
+
         'hashed_pass'      => 'Kata sandi Anda saat ini salah',
         'dumbpwd'          => 'Password itu terlalu umum',
         'statuslabel_type' => 'Anda harus memilih jenis label status yang valid',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute harus berupa tanggal yang valid dalam format YYYY-MM-DD',
         'start_date.date_format'        =>  ':attribute harus berupa tanggal yang valid dalam format YYYY-MM-DD',
         'end_date.date_format'          =>  ':attribute harus berupa tanggal yang valid dalam format YYYY-MM-DD',
-        'checkboxes'           => ':attribute berisi opsi yang tidak valid.',
-        'radio_buttons'        => ':attribute tidak valid.',
         'invalid_value_in_field' => 'Nilai tidak valid disertakan dalam isian kolom ini',
 
         'ldap_username_field' => [

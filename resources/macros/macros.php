@@ -189,19 +189,46 @@ Form::macro('barcode_types', function ($name = 'barcode_type', $selected = null,
     return $select;
 });
 
+Form::macro('email_format', function ($name = 'email_format', $selected = null, $class = null) {
+    $formats = [
+        'firstname.lastname' => trans('admin/settings/general.email_formats.firstname_lastname_format'),
+        'firstname' => trans('admin/settings/general.email_formats.first_name_format'),
+        'lastname' => trans('admin/settings/general.email_formats.last_name_format'),
+        'filastname' => trans('admin/settings/general.email_formats.filastname_format'),
+        'lastnamefirstinitial' => trans('admin/settings/general.email_formats.lastnamefirstinitial_format'),
+        'firstname_lastname' => trans('admin/settings/general.email_formats.firstname_lastname_underscore_format'),
+        'firstinitial.lastname' => trans('admin/settings/general.email_formats.firstinitial.lastname'),
+        'lastname_firstinitial' => trans('admin/settings/general.email_formats.lastname_firstinitial'),
+        'lastname.firstinitial' => trans('admin/settings/general.email_formats.lastname_dot_firstinitial_format'),
+        'firstnamelastname' => trans('admin/settings/general.email_formats.firstnamelastname'),
+        'firstnamelastinitial' => trans('admin/settings/general.email_formats.firstnamelastinitial'),
+        'lastname.firstname' => trans('admin/settings/general.email_formats.lastnamefirstname'),
+    ];
+
+    $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
+    foreach ($formats as $format => $label) {
+        $select .= '<option value="'.$format.'"'.($selected == $format ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$label.'</option> '."\n";
+    }
+
+    $select .= '</select>';
+
+    return $select;
+});
+
 Form::macro('username_format', function ($name = 'username_format', $selected = null, $class = null) {
     $formats = [
-        'firstname.lastname' => trans('general.firstname_lastname_format'),
-        'firstname' => trans('general.first_name_format'),
-        'filastname' => trans('general.filastname_format'),
-        'lastnamefirstinitial' => trans('general.lastnamefirstinitial_format'),
-        'firstname_lastname' => trans('general.firstname_lastname_underscore_format'),
-        'firstinitial.lastname' => trans('general.firstinitial.lastname'),
-        'lastname_firstinitial' => trans('general.lastname_firstinitial'),
-        'lastname.firstinitial' => trans('general.lastname_dot_firstinitial_format'),
-        'firstnamelastname' => trans('general.firstnamelastname'),
-        'firstnamelastinitial' => trans('general.firstnamelastinitial'),
-        'lastname.firstname' => trans('general.lastnamefirstname'),
+        'firstname.lastname' => trans('admin/settings/general.username_formats.firstname_lastname_format'),
+        'firstname' => trans('admin/settings/general.username_formats.first_name_format'),
+        'lastname' => trans('admin/settings/general.username_formats.last_name_format'),
+        'filastname' => trans('admin/settings/general.username_formats.filastname_format'),
+        'lastnamefirstinitial' => trans('admin/settings/general.username_formats.lastnamefirstinitial_format'),
+        'firstname_lastname' => trans('admin/settings/general.username_formats.firstname_lastname_underscore_format'),
+        'firstinitial.lastname' => trans('admin/settings/general.username_formats.firstinitial.lastname'),
+        'lastname_firstinitial' => trans('admin/settings/general.username_formats.lastname_firstinitial'),
+        'lastname.firstinitial' => trans('admin/settings/general.username_formats.lastname_dot_firstinitial_format'),
+        'firstnamelastname' => trans('admin/settings/general.username_formats.firstnamelastname'),
+        'firstnamelastinitial' => trans('admin/settings/general.username_formats.firstnamelastinitial'),
+        'lastname.firstname' => trans('admin/settings/general.username_formats.lastnamefirstname'),
     ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 100%" aria-label="'.$name.'">';
@@ -253,21 +280,21 @@ Form::macro('customfield_elements', function ($name = 'customfield_elements', $s
 
 Form::macro('skin', function ($name = 'skin', $selected = null, $class = null) {
     $formats = [
-        'blue' => 'Default Blue',
-        'blue-dark' => 'Blue (Dark Mode)',
-        'green' => 'Green Dark',
-        'green-dark' => 'Green (Dark Mode)',
-        'red' => 'Red Dark',
-        'red-dark' => 'Red (Dark Mode)',
-        'orange' => 'Orange Dark',
-        'orange-dark' => 'Orange (Dark Mode)',
-        'black' => 'Black',
-        'black-dark' => 'Black (Dark Mode)',
-        'purple' => 'Purple',
-        'purple-dark' => 'Purple (Dark Mode)',
-        'yellow' => 'Yellow',
-        'yellow-dark' => 'Yellow (Dark Mode)',
-        'contrast' => 'High Contrast',
+        'blue' => trans('general.skins.default_blue'),
+        'blue-dark' => trans('general.skins.blue_dark'),
+        'green' => trans('general.skins.green'),
+        'green-dark' => trans('general.skins.green_dark'),
+        'red' => trans('general.skins.red'),
+        'red-dark' => trans('general.skins.red_dark'),
+        'orange' => trans('general.skins.orange'),
+        'orange-dark' => trans('general.skins.orange_dark'),
+        'black' => trans('general.skins.black'),
+        'black-dark' => trans('general.skins.black_dark'),
+        'purple' => trans('general.skins.purple'),
+        'purple-dark' => trans('general.skins.purple_dark'),
+        'yellow' => trans('general.skins.yellow'),
+        'yellow-dark' => trans('general.skins.yellow_dark'),
+        'contrast' => trans('general.skins.high_contrast'),
     ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px" aria-label="'.$name.'">';
@@ -283,21 +310,21 @@ Form::macro('skin', function ($name = 'skin', $selected = null, $class = null) {
 Form::macro('user_skin', function ($name = 'skin', $selected = null, $class = null) {
     $formats = [
         '' => 'Site Default',
-        'blue' => 'Default Blue',
-        'blue-dark' => 'Blue (Dark Mode)',
-        'green' => 'Green Dark',
-        'green-dark' => 'Green (Dark Mode)',
-        'red' => 'Red Dark',
-        'red-dark' => 'Red (Dark Mode)',
-        'orange' => 'Orange Dark',
-        'orange-dark' => 'Orange (Dark Mode)',
-        'black' => 'Black',
-        'black-dark' => 'Black (Dark Mode)',
-        'purple' => 'Purple',
-        'purple-dark' => 'Purple (Dark Mode)',
-        'yellow' => 'Yellow',
-        'yellow-dark' => 'Yellow (Dark Mode)',
-        'contrast' => 'High Contrast',
+        'blue' => trans('general.skins.default_blue'),
+        'blue-dark' => trans('general.skins.blue_dark'),
+        'green' => trans('general.skins.green'),
+        'green-dark' => trans('general.skins.green_dark'),
+        'red' => trans('general.skins.red'),
+        'red-dark' => trans('general.skins.red_dark'),
+        'orange' => trans('general.skins.orange'),
+        'orange-dark' => trans('general.skins.orange_dark'),
+        'black' => trans('general.skins.black'),
+        'black-dark' => trans('general.skins.black_dark'),
+        'purple' => trans('general.skins.purple'),
+        'purple-dark' => trans('general.skins.purple_dark'),
+        'yellow' => trans('general.skins.yellow_dark'),
+        'yellow-dark' => trans('general.skins.yellow'),
+        'contrast' => trans('general.skins.high_contrast'),
     ];
 
     $select = '<select name="'.$name.'" class="'.$class.'" style="width: 250px">';

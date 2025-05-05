@@ -37,7 +37,7 @@ return [
         'authentication_success' => 'Benutzer wurde erfolgreich gegen LDAP authentifiziert!'
     ],
     'labels' => [
-        'null_template' => 'Etikettenvorlage nicht gefunden. Bitte wählen Sie eine Vorlage aus.',
+        'null_template' => 'Etikettenvorlage nicht gefunden. Bitte wähle eine Vorlage aus.',
         ],
     'webhook' => [
         'sending' => ':app Testnachricht wird gesendet ...',
@@ -48,7 +48,13 @@ return [
         'error' => 'Etwas ist schiefgelaufen. :app antwortete mit: :error_message',
         'error_redirect' => 'FEHLER: 301/302 :endpoint gibt eine Umleitung zurück. Aus Sicherheitsgründen folgen wir keine Umleitungen. Bitte verwende den aktuellen Endpunkt.',
         'error_misc' => 'Etwas ist schiefgelaufen! :( ',
-        'webhook_fail' => ' Webhook-Benachrichtigung fehlgeschlagen: Überprüfen Sie, ob die URL noch gültig ist.',
+        'webhook_fail' => ' Webhook-Benachrichtigung fehlgeschlagen: Überprüfe, ob die URL noch gültig ist.',
         'webhook_channel_not_found' => ' Webhook-Channel nicht gefunden.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Deine Einstellungen wurden nicht gespeichert.',
+        'mismatch' => 'Es gibt 1 Element in der Datenbank, das Deine Aufmerksamkeit benötigt, bevor Du die Standortbereicherung aktivieren kannst. Es gibt :count Elemente in der Datenbank, die Deine Aufmerksamkeit benötigen, bevor Du die Standortbereicherung aktivieren kannst.',
+    ],
+
 ];

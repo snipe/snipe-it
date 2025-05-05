@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Üks või mitu e-posti aadressi on kehtetu.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'Atribuudi väli sisaldab märk, mis pole lubatud.',
-        'email_array'      => 'Üks või mitu e-posti aadressi on kehtetu.',
+
         'hashed_pass'      => 'Teie praegune parool on vale',
         'dumbpwd'          => 'See parool on liiga levinud.',
         'statuslabel_type' => 'Peate valima kehtiva olekutüübi tüübi',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

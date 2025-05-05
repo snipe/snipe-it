@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Detta fält är krypterat, så vissa visningsalternativ kommer inte att vara tillgängliga.',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

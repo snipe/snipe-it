@@ -66,6 +66,7 @@ return [
         'file_already_deleted' => 'Il file selezionato è già stato eliminato',
         'header_row_has_malformed_characters' => 'Uno o più attributi nella riga d\'intestazione contengono caratteri UTF-8 malformati',
         'content_row_has_malformed_characters' => 'Uno o più attributi nella prima riga del contenuto contengono caratteri UTF-8 malformati',
+        'transliterate_failure' => 'Traslitterazione da :encoding a UTF-8 non riuscita a causa di caratteri non validi nell\'input'
     ],
 
 
@@ -99,9 +100,10 @@ return [
     ],
 
     'requests' => [
-        'error'   		=> 'L\'asset non è stato richiesto, si prega di riprovare',
-        'success' 		=> 'Asset richiesto con successo.',
-        'canceled'      => 'Richiesta di assegnazione annullata con successo',
+        'error'   		=> 'Richiesta non riuscita, riprova.',
+        'success' 		=> 'Richiesta inviata con successo.',
+        'canceled'      => 'Richiesta annullata con successo.',
+        'cancel'        => 'Annulla questa richiesta',
     ],
 
 ];

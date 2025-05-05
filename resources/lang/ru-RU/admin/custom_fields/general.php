@@ -57,7 +57,8 @@ return [
     'show_in_requestable_list_short' => 'Показать в списке запрашиваемых активов',
     'show_in_requestable_list' => 'Показать значение в списке запрашиваемых активов. Зашифрованные поля не будут показаны',
     'encrypted_options' => 'Это поле зашифровано, поэтому некоторые параметры отображения будут недоступны.',
-    'display_checkin' => 'Display in checkin forms',
-    'display_checkout' => 'Display in checkout forms',
+    'display_checkin' => 'Отображать в формах возврата',
+    'display_checkout' => 'Отображать в формах выдачи',
+    'display_audit' => 'Display in audit forms',
 
 ];

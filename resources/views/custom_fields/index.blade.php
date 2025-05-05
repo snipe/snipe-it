@@ -196,6 +196,14 @@
                   </span>
               </th>
 
+              <th data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
+                  data-tooltip="{{ trans('admin/custom_fields/general.display_audit') }}">
+                <x-icon type="audit" />
+                <span class="sr-only">
+                    {{ trans('admin/custom_fields/general.display_audit') }}
+                  </span>
+              </th>
+
 
               <th data-sortable="true" data-searchable="true" class="text-center">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
 
@@ -227,6 +235,7 @@
               <td class="text-center">{!! ($field->is_unique=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td class="text-center">{!! ($field->display_checkin=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td class="text-center">{!! ($field->display_checkout=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
+              <td class="text-center">{!! ($field->display_audit=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"><span class="sr-only">'.trans('general.yes').'</span></i>' : '<i class="fas fa-times text-danger" aria-hidden="true"><span class="sr-only">'.trans('general.no').'</span></i>'  !!}</td>
               <td>{{ $field->element }}</td>
               <td>
                 @foreach($field->fieldset as $fieldset)

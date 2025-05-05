@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'Una sau mai multe adrese de e-mail este nevalidă.',
+    'checkboxes'           => ':attribute conține opțiuni invalide.',
+    'radio_buttons'        => ':attribute nu este valid.',
+    
     'custom' => [
         'alpha_space' => 'Câmpul atributului: conține un caracter care nu este permis.',
-        'email_array'      => 'Una sau mai multe adrese de e-mail este nevalidă.',
+
         'hashed_pass'      => 'Parola curentă este incorectă',
         'dumbpwd'          => 'Această parolă este prea obișnuită.',
         'statuslabel_type' => 'Trebuie să selectați un tip de etichetă de stare validă',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  ':attribute trebuie să fie o dată validă în formatul AAAA-LL-ZZ',
         'start_date.date_format'        =>  ':attribute trebuie să fie o dată validă în formatul AAAA-LL-ZZ',
         'end_date.date_format'          =>  ':attribute trebuie să fie o dată validă în formatul AAAA-LL-ZZ',
-        'checkboxes'           => ':attribute conține opțiuni invalide.',
-        'radio_buttons'        => ':attribute nu este valid.',
         'invalid_value_in_field' => 'Valoare nevalidă inclusă în acest câmp',
 
         'ldap_username_field' => [

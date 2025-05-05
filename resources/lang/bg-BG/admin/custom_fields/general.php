@@ -59,5 +59,6 @@ return [
     'encrypted_options' => 'Това поле е криптирано, затова някой настройки няма да бъдат налични.',
     'display_checkin' => 'Display in checkin forms',
     'display_checkout' => 'Display in checkout forms',
+    'display_audit' => 'Display in audit forms',
 
 ];

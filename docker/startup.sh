@@ -59,7 +59,7 @@ fi
 
 # create data directories
 # Note: Keep in sync with expected directories by the app
-# https://github.com/snipe/snipe-it/blob/master/app/Console/Commands/RestoreFromBackup.php#L232
+# https://github.com/grokability/snipe-it/blob/master/app/Console/Commands/RestoreFromBackup.php#L232
 for dir in \
   'data/private_uploads' \
   'data/private_uploads/assets' \
@@ -101,8 +101,8 @@ chown -R docker:root /var/www/html/storage/framework/cache
 if [ -v "PHP_UPLOAD_LIMIT" ]
 then
     echo "Changing upload limit to ${PHP_UPLOAD_LIMIT}"
-    sed -i "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_LIMIT}M/" /etc/php/*/apache2/php.ini
-    sed -i "s/^post_max_size.*/post_max_size = ${PHP_UPLOAD_LIMIT}M/" /etc/php/*/apache2/php.ini
+    sed -i "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_LIMIT}M/" /etc/php*/php.ini
+    sed -i "s/^post_max_size.*/post_max_size = ${PHP_UPLOAD_LIMIT}M/" /etc/php*/php.ini
 fi
 
 # If the Oauth DB files are not present copy the vendor files over to the db migrations

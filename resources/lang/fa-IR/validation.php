@@ -185,9 +185,13 @@ return [
     |
     */
 
+    'email_array'      => 'یک یا بیش از یک آدرس ایمیل نامعتبر است.',
+    'checkboxes'           => ':attribute contains invalid options.',
+    'radio_buttons'        => ':attribute is invalid.',
+    
     'custom' => [
         'alpha_space' => 'فیلد attribute شامل یک شخصیت است که مجاز نیست.',
-        'email_array'      => 'یک یا چند آدرس ایمیل نامعتبر است',
+
         'hashed_pass'      => 'رمز عبور فعلی شما اشتباه است',
         'dumbpwd'          => 'این رمز عبور خیلی رایج است',
         'statuslabel_type' => 'شما باید نوع برچسب معتبر را انتخاب کنید',
@@ -204,8 +208,6 @@ return [
         'expected_checkin.date_format'  =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'start_date.date_format'        =>  'The :attribute must be a valid date in YYYY-MM-DD format',
         'end_date.date_format'          =>  'The :attribute must be a valid date in YYYY-MM-DD format',
-        'checkboxes'           => ':attribute contains invalid options.',
-        'radio_buttons'        => ':attribute is invalid.',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [

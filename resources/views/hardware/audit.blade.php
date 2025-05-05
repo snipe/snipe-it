@@ -130,6 +130,12 @@
                         <!-- Audit Image -->
                         @include ('partials.forms.edit.image-upload', ['help_text' => trans('general.audit_images_help')])
 
+                        <!-- Custom fields -->
+                        @include("models/custom_fields_form", [
+                                'model' => $asset->model,
+                                'show_custom_fields_type' => 'audit'
+                        ])
+
 
                     </div> <!--/.box-body-->
                     <div class="box-footer">

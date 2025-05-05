@@ -50,5 +50,11 @@ return [
         'error_misc' => 'Etwas ist schiefgelaufen. :( ',
         'webhook_fail' => ' Webhook-Benachrichtigung fehlgeschlagen: Überprüfen Sie, ob die URL noch gültig ist.',
         'webhook_channel_not_found' => ' Webhook-Channel nicht gefunden.'
-    ]
+    ],
+
+    'location_scoping' => [
+        'not_saved' => 'Ihre Einstellungen wurden nicht gespeichert.',
+        'mismatch' => 'Es gibt 1 Element in der Datenbank, das Ihre Aufmerksamkeit benötigt, bevor Sie die Standortbereicherung aktivieren können. Es gibt :count Elemente in der Datenbank, die Ihre Aufmerksamkeit benötigen, bevor Sie die Standortbereicherung aktivieren können.',
+    ],
+
 ];
