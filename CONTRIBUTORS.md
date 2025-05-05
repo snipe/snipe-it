@@ -540,6 +540,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://nunomaduro.com/sponsorships"><img src="https://avatars.githubusercontent.com/u/5457236?v=4?s=110" width="110px;" alt="Nuno Maduro"/><br /><sub><b>Nuno Maduro</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=nunomaduro" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://tektikhq.com/"><img src="https://avatars.githubusercontent.com/u/8883074?v=4?s=110" width="110px;" alt="Oliver Walerys"/><br /><sub><b>Oliver Walerys</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=owalerys" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://keybase.io/rcmcdonald91"><img src="https://avatars.githubusercontent.com/u/3102039?v=4?s=110" width="110px;" alt="R. Christian McDonald"/><br /><sub><b>R. Christian McDonald</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=rcmcdonald91" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://nnix.net/"><img src="https://avatars.githubusercontent.com/u/1525581?v=4?s=110" width="110px;" alt="nix"/><br /><sub><b>nix</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=nixn" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

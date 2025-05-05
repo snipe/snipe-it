@@ -3775,6 +3775,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "nixn",
+      "name": "nix",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1525581?v=4",
+      "profile": "https://nnix.net/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
