@@ -503,6 +503,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Serdnad"><img src="https://avatars.githubusercontent.com/u/4723453?v=4?s=110" width="110px;" alt="Andres Gutierrez"/><br /><sub><b>Andres Gutierrez</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Serdnad" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/wewhite"><img src="https://avatars.githubusercontent.com/u/111083379?v=4?s=110" width="110px;" alt="Warren White"/><br /><sub><b>Warren White</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=wewhite" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://robintemme.de/"><img src="https://avatars.githubusercontent.com/u/2809241?v=4?s=110" width="110px;" alt="Robin Temme"/><br /><sub><b>Robin Temme</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=robintemme" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
