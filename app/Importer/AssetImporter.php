@@ -2,6 +2,7 @@
 
 namespace App\Importer;
 
+use App\Enums\ActionType;
 use App\Models\Asset;
 use App\Models\Statuslabel;
 use App\Models\User;
@@ -194,10 +195,14 @@ class AssetImporter extends ItemImporter
             if (isset($target) && ($target !== false)) {
                 if (!is_null($asset->assigned_to)){
                     if ($asset->assigned_to != $target->id) {
+                        $asset->setLogTarget(User::find($asset->assigned_to));
+                        $asset->setLogNote('Checkin from CSV Importer');
+                        $asset->setLogActionDate($checkin_date);
+                        $asset->setLogAction(ActionType::CheckinFrom);
+                        $asset->save();
                         event(new CheckoutableCheckedIn($asset, User::find($asset->assigned_to), auth()->user(), 'Checkin from CSV Importer', $checkin_date));
                     }
                 }
-
                 $asset->fresh()->checkOut($target, $this->created_by, $checkout_date, null, 'Checkout from CSV Importer',  $asset->name);
             }
 

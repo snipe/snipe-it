@@ -4,21 +4,16 @@ namespace App\Models;
 
 use App\Helpers\Helper;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
+use App\Presenters\ConsumablePresenter;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Database\Eloquent\Relations\Relation;
-use App\Presenters\ConsumablePresenter;
-use App\Models\Actionlog;
-use App\Models\ConsumableAssignment;
-use App\Models\User;
-use App\Models\Location;
-use App\Models\Manufacturer;
-use App\Models\Supplier;
-use App\Models\Category;
 
 class Consumable extends SnipeModel
 {
@@ -54,6 +49,34 @@ class Consumable extends SnipeModel
         'purchase_cost'   => 'numeric|nullable|gte:0|max:9999999999999',
         'purchase_date'   => 'date_format:Y-m-d|nullable',
     ];
+
+    public static function boot()
+    {
+        self::deleting(function ($consumable) {
+            $consumable->users()->detach();
+            $uploads = $consumable->uploads;
+
+            foreach ($uploads as $file) {
+                try {
+                    Storage::delete('private_uploads/consumables/'.$file->filename);
+                    $file->delete();
+                } catch (\Exception $e) {
+                    Log::info($e);
+                }
+            }
+
+
+            try {
+                Storage::disk('public')->delete('consumables/'.$consumable->image);
+            } catch (\Exception $e) {
+                Log::info($e);
+            }
+
+            $consumable->image = null;
+
+        });
+        parent::boot();
+    }
 
     /**
      * Whether the model should inject it's identifier to the unique

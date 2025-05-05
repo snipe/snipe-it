@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\ActionType;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\User;
@@ -81,7 +82,11 @@ class CheckinLicensesFromAllUsers extends Command
                 }
 
                 // Log the checkin
-                $seat->logCheckin($seat->user, 'Checked in via cli tool');
+                $seat->setLogTarget($seat->user);
+                $seat->setLogNote('Checked in via cli tool');
+                $seat->setLogAction(ActionType::CheckinFrom);
+                $seat->save(); //this is going to be a dual-save, do we want that?!
+//                $seat->logCheckin($seat->user, 'Checked in via cli tool');
             }
         }
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -258,7 +259,7 @@ class ConsumablesController extends Controller
 
         $this->authorize('checkout', $consumable);
 
-        $consumable->checkout_qty = $request->input('checkout_qty', 1);
+        $checkout_qty = $request->input('checkout_qty', 1);
 
         // Make sure there is at least one available to checkout
         if ($consumable->numRemaining() <= 0) {
@@ -271,8 +272,8 @@ class ConsumablesController extends Controller
         }
 
         // Make sure there is at least one available to checkout
-        if ($consumable->numRemaining() <= 0 || $consumable->checkout_qty > $consumable->numRemaining()) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.checkout.unavailable', ['requested' => $consumable->checkout_qty, 'remaining' => $consumable->numRemaining() ])));
+        if ($consumable->numRemaining() <= 0 || $checkout_qty > $consumable->numRemaining()) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/consumables/message.checkout.unavailable', ['requested' => $checkout_qty, 'remaining' => $consumable->numRemaining()])));
         }
 
 
@@ -284,9 +285,9 @@ class ConsumablesController extends Controller
         }
 
         // Update the consumable data
-        $consumable->assigned_to = $request->input('assigned_to');
+        $consumable->setLogTarget($user);
 
-        for ($i = 0; $i < $consumable->checkout_qty; $i++) {
+        for ($i = 0; $i < $checkout_qty; $i++) {
             $consumable->users()->attach($consumable->id,
                 [
                     'consumable_id' => $consumable->id,
@@ -296,7 +297,10 @@ class ConsumablesController extends Controller
                 ]
             );
         }
-
+        $consumable->setLogQuantity($checkout_qty);
+        $consumable->setLogNote($request->input('note'));
+        $consumable->setLogAction(ActionType::Checkout);
+        $consumable->save();
 
         event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
 
