@@ -40,8 +40,9 @@ class AssetObserver
 
         // If the asset isn't being checked out or audited, log the update.
         // (Those other actions already create log entries.)
-	    if (($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
-	    && ($same_checkout_counter) && ($same_checkin_counter)
+        if (array_key_exists('assigned_to', $attributes) && array_key_exists('assigned_to', $attributesOriginal)
+            && ($attributes['assigned_to'] == $attributesOriginal['assigned_to'])
+            && ($same_checkout_counter) && ($same_checkin_counter)
             && ((isset( $attributes['next_audit_date']) ? $attributes['next_audit_date'] : null) == (isset($attributesOriginal['next_audit_date']) ? $attributesOriginal['next_audit_date']: null))
             && ($attributes['last_checkout'] == $attributesOriginal['last_checkout']) && (!$restoring_or_deleting))
         {
