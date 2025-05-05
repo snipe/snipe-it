@@ -576,6 +576,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/CalvinSchwartz"><img src="https://avatars.githubusercontent.com/u/56485508?v=4?s=110" width="110px;" alt="Calvin"/><br /><sub><b>Calvin</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=CalvinSchwartz" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/juanfont"><img src="https://avatars.githubusercontent.com/u/181059?v=4?s=110" width="110px;" alt="Juan Font"/><br /><sub><b>Juan Font</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=juanfont" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/juhotaipale"><img src="https://avatars.githubusercontent.com/u/13137708?v=4?s=110" width="110px;" alt="Juho Taipale"/><br /><sub><b>Juho Taipale</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=juhotaipale" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/KorvinSzanto"><img src="https://avatars.githubusercontent.com/u/1007419?v=4?s=110" width="110px;" alt="Korvin Szanto"/><br /><sub><b>Korvin Szanto</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=KorvinSzanto" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
