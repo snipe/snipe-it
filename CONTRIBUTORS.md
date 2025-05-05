@@ -500,6 +500,9 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ahpaleus"><img src="https://avatars.githubusercontent.com/u/38883201?v=4?s=110" width="110px;" alt="ahpaleus"/><br /><sub><b>ahpaleus</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=ahpaleus" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mink-adao-duy"><img src="https://avatars.githubusercontent.com/u/22906055?v=4?s=110" width="110px;" alt="Anh DAO-DUY"/><br /><sub><b>Anh DAO-DUY</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=mink-adao-duy" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/Serdnad"><img src="https://avatars.githubusercontent.com/u/4723453?v=4?s=110" width="110px;" alt="Andres Gutierrez"/><br /><sub><b>Andres Gutierrez</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Serdnad" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
