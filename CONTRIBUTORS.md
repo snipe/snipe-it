@@ -512,6 +512,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/marcquark"><img src="https://avatars.githubusercontent.com/u/23556080?v=4?s=110" width="110px;" alt="Marc Bartelt"/><br /><sub><b>Marc Bartelt</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=marcquark" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/manu-crealytics"><img src="https://avatars.githubusercontent.com/u/18286893?v=4?s=110" width="110px;" alt="manu-crealytics"/><br /><sub><b>manu-crealytics</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=manu-crealytics" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.galaxy102.de/"><img src="https://avatars.githubusercontent.com/u/18245993?v=4?s=110" width="110px;" alt="Konstantin Köhring"/><br /><sub><b>Konstantin Köhring</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Galaxy102" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
