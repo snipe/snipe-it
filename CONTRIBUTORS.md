@@ -522,6 +522,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/rosscdh"><img src="https://avatars.githubusercontent.com/u/397106?v=4?s=110" width="110px;" alt="Ross Crawford-d'Heureuse"/><br /><sub><b>Ross Crawford-d'Heureuse</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=rosscdh" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/McG800"><img src="https://avatars.githubusercontent.com/u/1621107?v=4?s=110" width="110px;" alt="Ryan McGuire"/><br /><sub><b>Ryan McGuire</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=McG800" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/SBrown2021"><img src="https://avatars.githubusercontent.com/u/77835667?v=4?s=110" width="110px;" alt="SBrown2021"/><br /><sub><b>SBrown2021</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=SBrown2021" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/serkanerip"><img src="https://avatars.githubusercontent.com/u/8780913?v=4?s=110" width="110px;" alt="Serkan"/><br /><sub><b>Serkan</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=serkanerip" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
