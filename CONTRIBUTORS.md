@@ -536,6 +536,9 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nticaric"><img src="https://avatars.githubusercontent.com/u/824840?v=4?s=110" width="110px;" alt="Nenad Ticaric"/><br /><sub><b>Nenad Ticaric</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=nticaric" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Scorcher"><img src="https://avatars.githubusercontent.com/u/706439?v=4?s=110" width="110px;" alt="Nikolay Didenko"/><br /><sub><b>Nikolay Didenko</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Scorcher" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://nunomaduro.com/sponsorships"><img src="https://avatars.githubusercontent.com/u/5457236?v=4?s=110" width="110px;" alt="Nuno Maduro"/><br /><sub><b>Nuno Maduro</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=nunomaduro" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
