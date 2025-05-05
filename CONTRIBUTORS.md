@@ -516,6 +516,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://deloz.net/"><img src="https://avatars.githubusercontent.com/u/685167?v=4?s=110" width="110px;" alt="Deloz"/><br /><sub><b>Deloz</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=deloz" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mbrrg"><img src="https://avatars.githubusercontent.com/u/2682426?v=4?s=110" width="110px;" alt="Martin Berg"/><br /><sub><b>Martin Berg</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=mbrrg" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Nothing4You"><img src="https://avatars.githubusercontent.com/u/3694534?v=4?s=110" width="110px;" alt="Richard Schwab"/><br /><sub><b>Richard Schwab</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Nothing4You" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://rickheil.com/"><img src="https://avatars.githubusercontent.com/u/8959676?v=4?s=110" width="110px;" alt="Rick Heil"/><br /><sub><b>Rick Heil</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=rickheil" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
