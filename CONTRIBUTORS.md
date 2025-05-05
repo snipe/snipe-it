@@ -587,6 +587,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/gastamper"><img src="https://avatars.githubusercontent.com/u/20960555?v=4?s=110" width="110px;" alt="GA Stamper"/><br /><sub><b>GA Stamper</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=gastamper" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/gl-pup"><img src="https://avatars.githubusercontent.com/u/206553556?v=4?s=110" width="110px;" alt="Guillaume Lefranc"/><br /><sub><b>Guillaume Lefranc</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=gl-pup" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/dasjoe"><img src="https://avatars.githubusercontent.com/u/733892?v=4?s=110" width="110px;" alt="Hajo Möller"/><br /><sub><b>Hajo Möller</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=dasjoe" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/pottom"><img src="https://avatars.githubusercontent.com/u/3420063?v=4?s=110" width="110px;" alt="Istvan Basa"/><br /><sub><b>Istvan Basa</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=pottom" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
