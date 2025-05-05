@@ -1641,7 +1641,6 @@ class Helper
                 }
             }
         }
-        \Log::error(count($mismatched));
         return $mismatched;
     }        
 }
