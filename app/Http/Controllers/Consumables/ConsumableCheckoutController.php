@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use \Illuminate\Contracts\View\View;
 use \Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class ConsumableCheckoutController extends Controller
 {
@@ -63,8 +64,9 @@ class ConsumableCheckoutController extends Controller
      */
     public function store(Request $request, $consumableId)
     {
-        if (is_null($consumable = Consumable::with('users')->find($consumableId))) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.not_found'));
+        if (is_null($consumable = Consumable::find($consumableId))) {
+            return redirect()->route('consumables.index')
+                ->with('error', trans('admin/consumables/message.not_found'));
         }
 
         $this->authorize('checkout', $consumable);
@@ -74,10 +76,16 @@ class ConsumableCheckoutController extends Controller
         if (!isset($quantity) || !ctype_digit((string)$quantity) || $quantity <= 0) {
             $quantity = 1;
         }
+        // attaching large amounts of checkouts can exhaust memory.
+        if($quantity > 10000){
+            return redirect()->back()
+                ->with('error', trans('admin/consumables/message.checkout.large_quantity_error', ['max_amount' => 10000]));
+        }
 
         // Make sure there is at least one available to checkout
-        if ($consumable->numRemaining() <= 0 || $quantity > $consumable->numRemaining()) {
-            return redirect()->route('consumables.index')->with('error', trans('admin/consumables/message.checkout.unavailable', ['requested' => $quantity, 'remaining' => $consumable->numRemaining() ]));
+        if ($consumable->numRemaining() <= 0 || $quantity > $consumable->numRemaining() ){
+            return redirect()->route('consumables.index')
+                ->with('error', trans('admin/consumables/message.checkout.unavailable', ['requested' => $quantity, 'remaining' => $consumable->numRemaining() ]));
         }
 
         $admin_user = auth()->user();
@@ -86,26 +94,35 @@ class ConsumableCheckoutController extends Controller
         // Check if the user exists
         if (is_null($user = User::find($assigned_to))) {
             // Redirect to the consumable management page with error
-            return redirect()->route('consumables.checkout.show', $consumable)->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))->withInput();
+            return redirect()->route('consumables.checkout.show', $consumable)
+                ->with('error', trans('admin/consumables/message.checkout.user_does_not_exist'))
+                ->withInput();
+        }
+        $now = now();
+
+        try {
+            $data = [
+                'consumable_id' => $consumable->id,
+                'created_by' => $admin_user->id,
+                'assigned_to' => $assigned_to,
+                'note' => $request->input('note') ?: null,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ];
+
+            // Update the consumable data
+            $attachData = array_fill(0,$quantity, $data);
+
+            DB::transaction(function () use ($consumable, $attachData, $user, $request) {
+                $consumable->users()->attach($attachData);
+                event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
+            });
+        }catch(\Exception $e){
+           report ($e);
+           return redirect()->back()->with('error', trans('admin/consumables/message.checkout.checkout_error'));
         }
 
-        // Update the consumable data
-        $consumable->assigned_to = e($request->input('assigned_to'));
-
-        for ($i = 0; $i < $quantity; $i++){
-        $consumable->users()->attach($consumable->id, [
-            'consumable_id' => $consumable->id,
-            'created_by' => $admin_user->id,
-            'assigned_to' => e($request->input('assigned_to')),
-            'note' => $request->input('note'),
-        ]);
-        }
-
-        $consumable->checkout_qty = $quantity;
-        event(new CheckoutableCheckedOut($consumable, $user, auth()->user(), $request->input('note')));
-
-        $request->request->add(['checkout_to_type' => 'user']);
-        $request->request->add(['assigned_user' => $user->id]);
+        $request->request->add(['checkout_to_type' => 'user', 'assigned_user' => $user->id]);
 
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 

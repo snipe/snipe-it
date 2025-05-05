@@ -5,6 +5,7 @@ return array(
     'invalid_category_type' => 'The category must be a consumable category.',
     'does_not_exist' => 'Consumable does not exist.',
 
+
     'create' => array(
         'error'   => 'Consumable was not created, please try again.',
         'success' => 'Consumable created successfully.'
@@ -26,6 +27,8 @@ return array(
         'success' 		=> 'Consumable checked out successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
          'unavailable'      => 'There are not enough consumables for this checkout. Please check the quantity left. ',
+         'checkout_error' => 'Something went wrong with your Checkout',
+         'large_quantity_error' => ':max_amount is the max quantity per checkout.',
     ),
 
     'checkin' => array(
