@@ -593,6 +593,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/JemCdo"><img src="https://avatars.githubusercontent.com/u/40404495?v=4?s=110" width="110px;" alt="James E. Msenga"/><br /><sub><b>James E. Msenga</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=JemCdo" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/jfwiebe"><img src="https://avatars.githubusercontent.com/u/6865786?v=4?s=110" width="110px;" alt="Jan Felix Wiebe"/><br /><sub><b>Jan Felix Wiebe</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=jfwiebe" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.nfon.com/"><img src="https://avatars.githubusercontent.com/u/43412008?v=4?s=110" width="110px;" alt="Jo Drexl"/><br /><sub><b>Jo Drexl</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=drexljo" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
