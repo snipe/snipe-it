@@ -22,7 +22,7 @@ jobs:
   docker-ubuntu-arm:
     # Ensure this job never runs on forked repos. It's only executed for 'grokability/snipe-it'
     if: github.repository == 'grokability/snipe-it'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     env:
       # Define tags to use for Docker images based on Git tags/branches (for docker/metadata-action)
       # For a new commit on default branch (master), use the literal tag 'latest' on Docker image.
@@ -87,7 +87,7 @@ jobs:
   docker-alpine-arm:
     # Ensure this job never runs on forked repos. It's only executed for 'grokability/snipe-it'
     if: github.repository == 'grokability/snipe-it'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     env:
       # Define tags to use for Docker images based on Git tags/branches (for docker/metadata-action)
       # For a new commit on default branch (master), use the literal tag 'latest' on Docker image.
