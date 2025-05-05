@@ -491,6 +491,9 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/aranar-pro"><img src="https://avatars.githubusercontent.com/u/484742?v=4?s=110" width="110px;" alt="aranar-pro"/><br /><sub><b>aranar-pro</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=aranar-pro" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/phil-flip"><img src="https://avatars.githubusercontent.com/u/27019397?v=4?s=110" width="110px;" alt="Phil"/><br /><sub><b>Phil</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=phil-flip" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://fe80.fr/"><img src="https://avatars.githubusercontent.com/u/6473460?v=4?s=110" width="110px;" alt="Steffy Fort"/><br /><sub><b>Steffy Fort</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=fe80" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
