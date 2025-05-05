@@ -485,6 +485,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://www.chrisolin.com"><img src="https://avatars.githubusercontent.com/u/1288116?v=4?s=110" width="110px;" alt="Chris Olin"/><br /><sub><b>Chris Olin</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=realchrisolin" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mnemonicly"><img src="https://avatars.githubusercontent.com/u/3803132?v=4?s=110" width="110px;" alt="Dan"/><br /><sub><b>Dan</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=mnemonicly" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/NebelKreis"><img src="https://avatars.githubusercontent.com/u/43917728?v=4?s=110" width="110px;" alt="Nebel"/><br /><sub><b>Nebel</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=NebelKreis" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
