@@ -574,6 +574,7 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/CalvinSchwartz"><img src="https://avatars.githubusercontent.com/u/56485508?v=4?s=110" width="110px;" alt="Calvin"/><br /><sub><b>Calvin</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=CalvinSchwartz" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/juanfont"><img src="https://avatars.githubusercontent.com/u/181059?v=4?s=110" width="110px;" alt="Juan Font"/><br /><sub><b>Juan Font</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=juanfont" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
