@@ -518,6 +518,9 @@ Thanks goes to all of these wonderful people ([emoji key](https://github.com/ken
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Nothing4You"><img src="https://avatars.githubusercontent.com/u/3694534?v=4?s=110" width="110px;" alt="Richard Schwab"/><br /><sub><b>Richard Schwab</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=Nothing4You" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://rickheil.com/"><img src="https://avatars.githubusercontent.com/u/8959676?v=4?s=110" width="110px;" alt="Rick Heil"/><br /><sub><b>Rick Heil</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=rickheil" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/rosscdh"><img src="https://avatars.githubusercontent.com/u/397106?v=4?s=110" width="110px;" alt="Ross Crawford-d'Heureuse"/><br /><sub><b>Ross Crawford-d'Heureuse</b></sub></a><br /><a href="https://github.com/snipe/snipe-it/commits?author=rosscdh" title="Code">💻</a></td>
+    </tr>
   </tbody>
 </table>
 
