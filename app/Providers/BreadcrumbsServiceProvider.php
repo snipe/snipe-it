@@ -67,6 +67,11 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         ->push(trans('general.create'), route('hardware.create'))
         );
 
+        Breadcrumbs::for('clone/hardware', fn (Trail $trail) =>
+        $trail->parent('hardware.index', route('hardware.index'))
+            ->push(trans('admin/hardware/general.clone'), route('hardware.create'))
+        );
+
         Breadcrumbs::for('hardware.show', fn (Trail $trail, Asset $asset) =>
         $trail->parent('hardware.index', route('hardware.index'))
             ->push($asset->present()->fullName(), route('hardware.show', $asset))
@@ -378,6 +383,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             ->push(trans('general.create'), route('locations.create'))
         );
 
+        Breadcrumbs::for('clone/location', fn (Trail $trail) =>
+        $trail->parent('locations.index', route('locations.index'))
+            ->push(trans('admin/locations/table.clone'), route('locations.create'))
+        );
+
+
         Breadcrumbs::for('locations.show', fn (Trail $trail, Location $location) =>
         $trail->parent('locations.index', route('locations.index'))
             ->push($location->name, route('locations.show', $location))
@@ -538,6 +549,13 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         $trail->parent('users.index', route('users.index'))
             ->push(trans('general.create'), route('users.create'))
         );
+
+        Breadcrumbs::for('users.clone.show', fn (Trail $trail) =>
+        $trail->parent('users.index', route('users.index'))
+            ->push(trans('admin/users/general.clone'), route('users.create'))
+        );
+
+
 
         Breadcrumbs::for('users.show', fn (Trail $trail, User $user) =>
         $trail->parent('users.index', route('users.index'))
