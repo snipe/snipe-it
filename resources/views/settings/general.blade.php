@@ -56,19 +56,7 @@
                             <!-- Scope Locations with Full Multiple Companies Support -->
                             <div class="form-group {{ $errors->has('scope_locations_fmcs') ? 'error' : '' }}">
                                 <div class="col-md-8 col-md-offset-3">
-                                    <label class="form-control{{ ($total_locations > 0) ? ' form-control--disabled' : '' }}">
-                                        <input type="checkbox" name="scope_locations_fmcs" value="1" @checked(old('scope_locations_fmcs', $setting->scope_locations_fmcs)) aria-label="scope_locations_fmcs" {{ ($total_locations > 0) ? ' disabled' : '' }}/>
-                                        {{ trans('admin/settings/general.scope_locations_fmcs_support_text') }}
-                                    </label>
-
-
-                                    {!! $errors->first('scope_locations_fmcs', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-                                    <p class="help-block">
-                                        {{ trans('admin/settings/general.scope_locations_fmcs_support_help_text') }}
-
-                                        <strong>{{ ($total_locations > 0) ? trans('admin/settings/general.scope_locations_fmcs_support_disabled_text', ['count' => $total_locations]) : '' }}</strong>
-
-                                    </p>
+                                    <livewire:location-scope-check />
                                 </div>
                             </div>
                             <!-- /.form-group -->

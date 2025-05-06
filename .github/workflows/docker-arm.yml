@@ -1,5 +1,5 @@
 # Snipe-IT Docker image build for hub.docker.com
-name: Docker ARM64 images (Ubuntu)
+name: Docker cross-platform images (Ubuntu and Alpine)
 
 # Run this Build for all pushes to 'master' or develop branch, or tagged releases.
 # Also run for PRs to ensure PR doesn't break Docker build process
@@ -58,7 +58,7 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       ###############################################
-      # Build/Push the 'grokability/snipe-it' image
+      # Build/Push the 'snipe/snipe-it' image
       ###############################################
       # https://github.com/docker/metadata-action
       # Get Metadata for docker_build step below
@@ -66,7 +66,7 @@ jobs:
         id: meta_build
         uses: docker/metadata-action@v5
         with:
-          images: grokability/snipe-it
+          images: snipe/snipe-it
           tags: ${{ env.IMAGE_TAGS }}
           flavor: ${{ env.TAGS_FLAVOR }}
 
@@ -97,7 +97,7 @@ jobs:
         type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }},suffix=-alpine
         type=ref,event=branch,enable=${{ !endsWith(github.ref, github.event.repository.default_branch) }},suffix=-alpine
         type=ref,event=tag,suffix=-alpine
-        type=semver,pattern=v{{major}}-latest-alpine 
+        type=semver,pattern=v{{major}}-latest-alpine
       # Define default tag "flavor" for docker/metadata-action per
       # https://github.com/docker/metadata-action#flavor-input
       # We turn off 'latest' tag by default.
@@ -123,7 +123,7 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       ###############################################
-      # Build/Push the 'grokability/snipe-it' image
+      # Build/Push the 'snipe/snipe-it' image
       ###############################################
       # https://github.com/docker/metadata-action
       # Get Metadata for docker_build step below
@@ -131,7 +131,7 @@ jobs:
         id: meta_build
         uses: docker/metadata-action@v5
         with:
-          images: grokability/snipe-it
+          images: snipe/snipe-it
           tags: ${{ env.IMAGE_TAGS }}
           flavor: ${{ env.TAGS_FLAVOR }}
 
@@ -142,7 +142,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile.alpine
-          platforms: linux/arm64
+          platforms: linux/arm64,linux/amd64
           # For pull requests, we run the Docker build (to ensure no PR changes break the build),
           # but we ONLY do an image push to DockerHub if it's NOT a PR
           push: ${{ github.event_name != 'pull_request' }}
