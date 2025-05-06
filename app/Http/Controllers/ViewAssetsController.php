@@ -97,7 +97,7 @@ class ViewAssetsController extends Controller
 
         $user = auth()->user();
 
-        $data['requested_date'] = date('Y-m-d H:i:s'); //FIXME - shouldn't this be recorded somewhere?
+        $data['requested_date'] = date('Y-m-d H:i:s'); //TODO - shouldn't this be recorded somewhere? the default action_date is going to be 'now' anyways, so this may not matter?
         if ($user->location_id) {
             $item->setLogLocationOverride($user->location);
         }

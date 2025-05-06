@@ -30,7 +30,6 @@ trait Loggable
 
     //public static array $hide_changes = [];
 
-    // FIXME - if we save() a non-dirty object, will it still fire the right events? If so this gets even simpler.
     public static function bootLoggable()
     {
         //these tiny methods just set up what the log message is going to be

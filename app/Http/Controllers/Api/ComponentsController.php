@@ -297,7 +297,6 @@ class ComponentsController extends Controller
                 'note' => $request->get('note'),
             ]);
 
-            //FIXME - something here with location_id - maybe something for setLogLocation or something like that?
             $component->setLogLocationOverride($asset->location);
             $component->setLogNote($request->input('note'));
             $component->setLogQuantity($request->get('assigned_qty'));
@@ -358,7 +357,6 @@ class ComponentsController extends Controller
 
             // the 'event()' below no longer does the logging; that needs to be done here.
             $component->setLogTarget($asset);
-            //FIXME - problem with 'lcoation_id' apaparently?!
             $component->setLogNote($request->input('note'));
             $component->setLogAction(ActionType::CheckinFrom);
             $component->save();

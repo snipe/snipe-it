@@ -29,7 +29,7 @@ trait Requestable
 
     public function request($qty = 1)
     {
-        // THIS is where the requested log action thing should go, yeah? FIXME
+        // THIS is where the requested log action thing should go, yeah? TODO (maybe)
         $this->requests()->save(
             new CheckoutRequest(['user_id' => auth()->id(), 'qty' => $qty])
         );

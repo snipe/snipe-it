@@ -340,7 +340,7 @@ class BulkUsersController extends Controller
                 $item_id = $item->id;
 
                 if ($itemType == License::class) {
-                    $item_id = $item->license_id; //FIXME - funkery happening here
+                    $item_id = $item->license_id;
                     $real_item = License::find($item->license_id);
                 } else {
                     $real_item = (new $itemType())::find($item_id);
@@ -365,7 +365,7 @@ class BulkUsersController extends Controller
     {
         foreach ($accessoryUserRows as $accessoryUserRow) {
             $accessory = Accessory::find($accessoryUserRow->accessory_id);
-            $accessory->setLogTarget(User::find($accessoryUserRow->assigned_to)); //FIXME - what if accessory was checked out to location?
+            $accessory->setLogTarget(User::find($accessoryUserRow->assigned_to)); // This is only called with _user_ checkouts (see the one caller of this)
             $accessory->setLogNote('Bulk checkin items');
             $accessory->setLogAction(ActionType::CheckinFrom);
             $accessory->save();

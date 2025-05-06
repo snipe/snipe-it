@@ -34,7 +34,7 @@ class CreateCheckoutRequestAction
         $settings = Setting::getSettings();
 
         $asset->setLogTarget(auth()->user());
-        //$logaction->location_id = $user->location_id ?? null; //??? FIXME - we were setting this logaction's location_id before and now we're not?!
+        $asset->setLogLocationOverride($user->location_id);
         $asset->setLogAction(ActionType::Requested);
         $asset->save();
 

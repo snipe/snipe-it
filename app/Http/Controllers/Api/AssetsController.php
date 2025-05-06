@@ -1152,7 +1152,7 @@ class AssetsController extends Controller
 
             // this 'new' audit system logs the changes via log_meta
             $asset->setLogNote(request('note'));
-            $asset->location_id = request('location_id'); //FIXME - is this changing the assets location? the action_log location? or what?
+            $asset->setLogLocationOverride(request('location_id'));
             $asset->setLogAction(ActionType::Audit);
             if ($asset->save()) {
                 return response()->json(Helper::formatStandardApiResponse('success', $payload, trans('admin/hardware/message.audit.success')));

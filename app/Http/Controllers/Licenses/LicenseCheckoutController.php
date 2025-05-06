@@ -88,7 +88,7 @@ class LicenseCheckoutController extends Controller
         }
 
         $license->setLogTarget($checkoutTarget);
-        $license->setLogNote($request->input('notes')); //FIXME - confirm this; the name is weird? (notes instead of note)
+        $license->setLogNote($request->input('notes')); // yes, this is 'notes' and not 'note' - but that's how we do it
         $license->setLogAction(ActionType::Checkout);
         $license->save();
 
