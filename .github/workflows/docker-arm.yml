@@ -1,5 +1,5 @@
 # Snipe-IT Docker image build for hub.docker.com
-name: Docker cross-platform images (Ubuntu and Alpine)
+name: Docker ARM images (Ubuntu and Alpine)
 
 # Run this Build for all pushes to 'master' or develop branch, or tagged releases.
 # Also run for PRs to ensure PR doesn't break Docker build process
@@ -142,7 +142,7 @@ jobs:
         with:
           context: .
           file: ./Dockerfile.alpine
-          platforms: linux/arm64,linux/amd64
+          platforms: linux/arm64
           # For pull requests, we run the Docker build (to ensure no PR changes break the build),
           # but we ONLY do an image push to DockerHub if it's NOT a PR
           push: ${{ github.event_name != 'pull_request' }}
