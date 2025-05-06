@@ -1487,6 +1487,7 @@ class Helper
         $redirect_option = Session::get('redirect_option');
         $checkout_to_type = Session::get('checkout_to_type');
         $checkedInFrom = Session::get('checkedInFrom');
+        $other_redirect = Session::get('other_redirect');
 
         // return to index
         if ($redirect_option == 'index') {
@@ -1535,6 +1536,16 @@ class Helper
                     return route('hardware.show', $request->assigned_asset ?? $checkedInFrom);
             }
         }
+
+        // return to somewhere else
+        if ($redirect_option == 'other_redirect') {
+            switch ($other_redirect) {
+                case 'audit':
+                    return route('assets.audit.due');
+            }
+
+        }
+
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
     }
 
