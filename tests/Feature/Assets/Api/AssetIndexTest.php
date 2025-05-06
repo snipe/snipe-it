@@ -177,7 +177,8 @@ class AssetIndexTest extends TestCase
         $user = User::factory()->create();
 
         $parentAsset = Asset::factory()->assignedToUser($user)->create(['asset_tag' => 'parent-asset-tag']);
-        Asset::factory()->assignedToAsset($parentAsset)->create(['asset_tag' => 'child-asset-tag']);
+        $childAsset = Asset::factory()->assignedToAsset($parentAsset)->create(['asset_tag' => 'child-asset-tag']);
+        Asset::factory()->assignedToAsset($childAsset)->create(['asset_tag' => 'grandchild-asset-tag']);
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->getJson(
@@ -196,9 +197,10 @@ class AssetIndexTest extends TestCase
                 'rows',
             ])
             ->assertJson(function (AssertableJson $json) {
-                return $json->has('rows', 2)
+                return $json->has('rows', 3)
                     ->where('rows.0.asset_tag', 'parent-asset-tag')
                     ->where('rows.1.asset_tag', 'child-asset-tag')
+                    ->where('rows.1.asset_tag', 'grandchild-asset-tag')
                     ->etc();
             });
     }
