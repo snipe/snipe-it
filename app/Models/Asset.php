@@ -85,7 +85,7 @@ class Asset extends Depreciable
             // determine if explicit and set eol_explicit to true
             if (!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) {
                 if ($asset->model->eol > 0) {
-                    $months = Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
+                    $months = (int)Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
                     if ($months != $asset->model->eol) {
                         $asset->eol_explicit = true;
                     }
@@ -179,8 +179,8 @@ class Asset extends Depreciable
         'byod'              => ['nullable', 'boolean'],
         'order_number'      => ['nullable', 'string', 'max:191'],
         'notes'             => ['nullable', 'string', 'max:65535'],
-        'assigned_to'   => ['nullable', 'integer', 'required_with:assigned_type'],
-        'assigned_type' => ['nullable', 'required_with:assigned_to', 'in:'.User::class.",".Location::class.",".Asset::class],
+        'assigned_to' => ['nullable', 'integer', 'required_with:assigned_type'],
+        'assigned_type' => ['nullable', 'required_with:assigned_to', 'in:' . User::class . "," . Location::class . "," . Asset::class],
         'requestable'       => ['nullable', 'boolean'],
         'assigned_user'     => ['nullable', 'exists:users,id,deleted_at,NULL'],
         'assigned_location' => ['nullable', 'exists:locations,id,deleted_at,NULL', 'fmcs_location'],
