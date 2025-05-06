@@ -899,6 +899,10 @@ class AssetsController extends Controller
 
         $this->authorize('audit', Asset::class);
 
+        session()->put('redirect_option', $request->get('redirect_option'));
+        session()->put('other_redirect', 'audit');
+
+
         $originalValues = $asset->getRawOriginal();
 
         $asset->next_audit_date = $request->input('next_audit_date');
@@ -974,7 +978,7 @@ class AssetsController extends Controller
             }
 
             $asset->logAudit($request->input('note'), $request->input('location_id'), $file_name, $originalValues);
-            return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.audit.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($asset->getErrors());

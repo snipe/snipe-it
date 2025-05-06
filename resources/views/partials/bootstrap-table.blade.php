@@ -341,7 +341,7 @@
 
 
     function hardwareAuditFormatter(value, row) {
-        return '<a href="{{ config('app.url') }}/hardware/' + row.id + '/audit" class="btn btn-sm bg-yellow" data-tooltip="true" title="Audit this item">{{ trans('general.audit') }}</a>';
+        return '<a href="{{ config('app.url') }}/hardware/' + row.id + '/audit" class="actions btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('general.audit') }}"><x-icon type="audit" /><span class="sr-only">{{ trans('general.audit') }}</span></a>&nbsp;';
     }
 
 

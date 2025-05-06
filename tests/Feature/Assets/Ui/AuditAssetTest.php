@@ -22,13 +22,50 @@ class AuditAssetTest extends TestCase
             ->assertStatus(200);
     }
 
-    public function testAssetCanBeAudited()
+    public function testAssetAuditPostIsRedirectedToAssetIndexIfRedirectSelectionIsIndex()
     {
-        $response = $this->actingAs(User::factory()->auditAssets()->create())
-            ->post(route('asset.audit.store', Asset::factory()->create()))
-            ->assertStatus(302)
-            ->assertRedirect(route('assets.audit.due'));
+        $asset = Asset::factory()->create();
 
+        $response = $this->actingAs(User::factory()->viewAssets()->editAssets()->auditAssets()->create())
+            ->from(route('asset.audit.create', $asset))
+            ->post(route('asset.audit.store', $asset),
+                [
+                    'redirect_option' => 'index',
+                ])
+            ->assertStatus(302)
+            ->assertRedirect(route('hardware.index'));
+        $this->followRedirects($response)->assertSee('success');
+
+    }
+
+    public function testAssetAuditPostIsRedirectedToAssetPageIfRedirectSelectionIsAsset()
+    {
+        $asset = Asset::factory()->create();
+
+        $response = $this->actingAs(User::factory()->viewAssets()->editAssets()->auditAssets()->create())
+            ->from(route('asset.audit.create', $asset))
+            ->post(route('asset.audit.store', $asset),
+                [
+                    'redirect_option' => 'item',
+                ])
+            ->assertStatus(302)
+            ->assertRedirect(route('hardware.show', $asset));
         $this->followRedirects($response)->assertSee('success');
     }
+
+    public function testAssetAuditPostIsRedirectedToAuditDuePageIfRedirectSelectionIsList()
+    {
+        $asset = Asset::factory()->create();
+
+        $response = $this->actingAs(User::factory()->viewAssets()->editAssets()->auditAssets()->create())
+            ->from(route('asset.audit.create', $asset))
+            ->post(route('asset.audit.store', $asset),
+                [
+                    'redirect_option' => 'other_redirect',
+                ])
+            ->assertStatus(302)
+            ->assertRedirect(route('assets.audit.due'));
+        $this->followRedirects($response)->assertSee('success');
+    }
+
 }
