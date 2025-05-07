@@ -407,7 +407,7 @@ return [
     'notification_info'      => 'Info',
     'asset_information'     => 'Asset Information',
     'model_name'            => 'Model Name',
-    'asset_name'            => 'Asset Name',
+    'asset_name'            => 'Hostname',
     'consumable_information' => 'Consumable Information:',
     'consumable_name'       => 'Consumable Name:',
     'accessory_information' => 'Accessory Information:',
