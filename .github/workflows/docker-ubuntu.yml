@@ -174,9 +174,9 @@ jobs:
 
       - name: combine manifests
         uses: Noelware/docker-manifest-action@v1
-          with:
-              tags: snipe/snipe-it:{{branch}}-combined
-              inputs: snipe/snipe-it:{{branch}}-intel,snipe/snipe-it:{{branch}}-arm
-              push: true
+        with:
+            tags: snipe/snipe-it:{{branch}}-combined
+            inputs: snipe/snipe-it:{{branch}}-intel,snipe/snipe-it:{{branch}}-arm
+            push: true
 
 
