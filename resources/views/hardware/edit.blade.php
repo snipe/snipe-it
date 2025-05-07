@@ -30,14 +30,14 @@
           <!-- we are editing an existing asset,  there will be only one asset tag -->
           <div class="col-md-7 col-sm-12">
 
-          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', $item->asset_tag) }}" required>
+          <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tag', $item->asset_tag) }}" placeholder="{{ trans('general.asset_tag_placeholder') }}" required>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
       @else
           <!-- we are creating a new asset - let people use more than one asset tag -->
           <div class="col-md-7 col-sm-12">
-              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tags.1', \App\Models\Asset::autoincrement_asset()) }}" required>
+              <input class="form-control" type="text" name="asset_tags[1]" id="asset_tag" value="{{ old('asset_tags.1', \App\Models\Asset::autoincrement_asset()) }}" placeholder="{{ trans('general.asset_tag_placeholder') }}" required>
               {!! $errors->first('asset_tags', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
               {!! $errors->first('asset_tag', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
           </div>
