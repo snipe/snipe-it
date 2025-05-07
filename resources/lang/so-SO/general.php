@@ -389,6 +389,8 @@ return [
     'new_license'           => 'Shatiga Cusub',
     'new_accessory'         => 'Qalabka Cusub',
     'new_consumable'        => 'La Isticmaali karo Cusub',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Burbur',
     'assigned'              => 'Loo xilsaaray',
     'asset_count'           => 'Tirada Hantida',

@@ -519,7 +519,7 @@ class AssetsController extends Controller
     {
         $settings = Setting::getSettings();
 
-        if (($settings->qr_code == '1') && ($settings->label2_2d_type !== 'none')) {
+        if ($settings->label2_2d_type !== 'none') {
 
             if ($asset) {
                 $size = Helper::barcodeDimensions($settings->label2_2d_type);

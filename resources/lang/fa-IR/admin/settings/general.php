@@ -83,6 +83,8 @@ return [
 ',
     'eula_settings'				=> 'EULA تنظیمات',
     'eula_markdown'				=> 'این EULA اجازه می دهد تا <a href="https://help.github.com/articles/github-flavored-markdown/">Github با طعم markdown</a>.',
+    'empty_row_count'           => 'Field Start Offset (Empty Rows)',
+    'empty_row_count_help'      => 'Fields will begin populating after this many empty rows are skipped at the top of the label.',
     'favicon'                   => 'فاویکون',
     'favicon_format'            => 'انواع فایل های پذیرفته شده عبارتند از ico، png و gif. سایر فرمت های تصویر ممکن است در همه مرورگرها کار نکنند.
 ',
@@ -205,6 +207,7 @@ return [
     'full_multiple_companies_support_text' => 'شرکت های متعدد پشتیبانی کامل',
     'scope_locations_fmcs_support_text'  => 'Scope Locations with Full Multiple Companies Support',
     'scope_locations_fmcs_support_help_text'  => 'Restrict locations to their selected company.',
+    'scope_locations_fmcs_check_button' => 'Check Compatibility',
     'scope_locations_fmcs_support_disabled_text'  => 'This option is disabled because you have conflicting locations set for :count or more items.',
     'show_in_model_list'   => 'نمایش در مدل کشویی 
 ',

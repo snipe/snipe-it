@@ -390,6 +390,8 @@ return [
     'new_license'           => 'អាជ្ញាប័ណ្ណថ្មី',
     'new_accessory'         => 'គ្រឿងបន្លាស់ថ្មី',
     'new_consumable'        => 'សម្ភារៈប្រើប្រាស់ថ្មី',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Collapse',
     'assigned'              => 'បានចាត់តាំង',
     'asset_count'           => 'ចំនួនទ្រព្យសកម្ម',

@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Создать лицензию',
     'new_accessory'         => 'Создать аксессуар',
     'new_consumable'        => 'Создать новый расходник',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Свернуть',
     'assigned'              => 'Назначено',
     'asset_count'           => 'Количество активов',

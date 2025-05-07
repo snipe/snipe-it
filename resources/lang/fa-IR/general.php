@@ -449,6 +449,8 @@ return [
 ',
     'new_consumable'        => 'قابل مصرف نو
 ',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'فروپاشی',
     'assigned'              => 'اختصاص داده
 ',

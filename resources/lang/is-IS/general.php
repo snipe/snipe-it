@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Ný hugbúnaðarleyfi',
     'new_accessory'         => 'Nýir aukahlutir',
     'new_consumable'        => 'Nýjar rekstrarvörur',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Collapse',
     'assigned'              => 'Úthluta',
     'asset_count'           => 'Asset Count',

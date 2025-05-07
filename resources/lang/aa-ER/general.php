@@ -389,6 +389,8 @@ return [
     'new_license'           => 'crwdns6249:0crwdne6249:0',
     'new_accessory'         => 'crwdns6251:0crwdne6251:0',
     'new_consumable'        => 'crwdns6253:0crwdne6253:0',
+    'new_component'         => 'crwdns13228:0crwdne13228:0',
+    'new_user'              => 'crwdns13230:0crwdne13230:0',
     'collapse'              => 'crwdns6255:0crwdne6255:0',
     'assigned'              => 'crwdns6257:0crwdne6257:0',
     'asset_count'           => 'crwdns6259:0crwdne6259:0',

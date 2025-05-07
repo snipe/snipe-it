@@ -172,6 +172,7 @@ return [
     'url' => ':attribute-fältet måste vara en giltig URL.',
     'ulid' => ':attribute-fältet måste vara ett giltigt ULID.',
     'uuid' => ':attribute-fältet måste vara ett giltigt UUID.',
+    'fmcs_location' => 'Full multiple company support and location scoping is enabled in the Admin Settings, and the selected location and selected company are not compatible.',
 
 
     /*

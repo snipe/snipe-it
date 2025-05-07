@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Ny licens',
     'new_accessory'         => 'Nyt tilbehør',
     'new_consumable'        => 'Ny forbrugsvare',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Skjul',
     'assigned'              => 'Tildelt',
     'asset_count'           => 'Antal aktiver',

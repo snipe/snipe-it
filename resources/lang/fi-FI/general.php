@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Uusi Lisenssi',
     'new_accessory'         => 'Uusi Oheistarvike',
     'new_consumable'        => 'Uusi kulutustarvike',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Kutista',
     'assigned'              => 'Määritetty',
     'asset_count'           => 'Laite määrä',

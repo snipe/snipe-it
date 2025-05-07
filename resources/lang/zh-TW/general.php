@@ -390,6 +390,8 @@ return [
     'new_license'           => '新增授權',
     'new_accessory'         => '新增配件',
     'new_consumable'        => '新增耗材',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => '收起',
     'assigned'              => '已分配',
     'asset_count'           => '資產數量',

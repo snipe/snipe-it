@@ -39,4 +39,5 @@ return [
     'signed_by_finance_auditor' => '签名(财务人员):',
     'signed_by_location_manager' => '签名(当地经理):',
     'signed_by'                 => '签名:',
+    'clone'  					=> '克隆位置',
 ];
