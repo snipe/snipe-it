@@ -54,7 +54,7 @@ return [
     'default_language'			=> 'Default Language',
     'default_eula_help_text'	=> 'You can also associate custom EULAs to specific asset categories.',
     'acceptance_note'           => 'Add a note for your decision (Optional)',
-    'display_asset_name'        => 'Display Asset Name',
+    'display_asset_name'        => 'Display Hostname',
     'display_checkout_date'     => 'Display Checkout Date',
     'display_eol'               => 'Display EOL in table view',
     'display_qr'                => 'Display 2D barcode',
