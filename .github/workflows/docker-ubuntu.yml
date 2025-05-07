@@ -154,6 +154,8 @@ jobs:
           labels: ${{ steps.meta_build.outputs.labels }}
   combinator:
     name: combine multiple arches into a single "image"
+    env:
+      BRANCH: ${{github.ref_name }}
     needs: [docker-ubuntu-intel, docker-ubuntu-arm]
     runs-on: ubuntu-latest
     steps:
@@ -169,8 +171,8 @@ jobs:
       - name: combine manifests
         uses: Noelware/docker-manifest-action@v1
         with:
-            tags: {{branch}}-combined
-            inputs: snipe/snipe-it:{{branch}}-intel,snipe/snipe-it:{{branch}}-arm
-            push: true
+          tags: ${{ env.BRANCH }}-combined
+          inputs: snipe/snipe-it:${{ env.BRANCH }}-intel,snipe/snipe-it:${{ env.BRANCH }}-arm
+          push: true
 
 
