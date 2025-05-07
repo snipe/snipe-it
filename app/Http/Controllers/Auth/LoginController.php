@@ -484,6 +484,7 @@ class LoginController extends Controller
         }
 
         $request->session()->regenerate(true);
+        $request->session()->forget('2fa_authed');
 
         if ($request->session()->has('password_hash_'.Auth::getDefaultDriver())){
             $request->session()->remove('password_hash_'.Auth::getDefaultDriver());
