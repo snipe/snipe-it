@@ -119,7 +119,7 @@
 
                 <label class="form-control">
                     <input type="checkbox" name="model" value="1" @checked($template->checkmarkValue('model')) />
-                    {{ trans('general.asset_models') }}
+                    {{ trans('general.asset_model') }}
                 </label>
 
                 <label class="form-control">
