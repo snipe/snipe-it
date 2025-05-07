@@ -172,7 +172,7 @@ jobs:
         uses: Noelware/docker-manifest-action@master
         with:
           tags: ${{ env.BRANCH }}-combined
-          inputs: snipe/snipe-it:${{ env.BRANCH }}-intel,snipe/snipe-it:${{ env.BRANCH }}-arm
+          inputs: snipe/snipe-it:${{ env.BRANCH }}-ubuntu-intel,snipe/snipe-it:${{ env.BRANCH }}-ubuntu-arm
           push: true
 
 
