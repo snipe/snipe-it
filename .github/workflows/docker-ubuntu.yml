@@ -169,7 +169,7 @@ jobs:
           password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
 
       - name: combine manifests
-        uses: Noelware/docker-manifest-action
+        uses: Noelware/docker-manifest-action@master
         with:
           tags: ${{ env.BRANCH }}-combined
           inputs: snipe/snipe-it:${{ env.BRANCH }}-intel,snipe/snipe-it:${{ env.BRANCH }}-arm
