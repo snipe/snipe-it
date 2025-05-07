@@ -32,6 +32,7 @@ jobs:
       IMAGE_TAGS: |
         type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
         type=ref,event=branch,enable=${{ !endsWith(github.ref, github.event.repository.default_branch) }}
+        type=raw,value={{branch}}-ubuntu-arm
         type=ref,event=tag
         type=semver,pattern=v{{major}}-latest
       # Define default tag "flavor" for docker/metadata-action per
@@ -89,6 +90,8 @@ jobs:
     # Ensure this job never runs on forked repos. It's only executed for 'grokability/snipe-it'
     if: github.repository == 'grokability/snipe-it'
     runs-on: ubuntu-latest
+    outputs:
+      tags: ${{ steps.gen_output.outputs.tags }}
     env:
       # Define tags to use for Docker images based on Git tags/branches (for docker/metadata-action)
       # For a new commit on default branch (master), use the literal tag 'latest' on Docker image.
@@ -96,6 +99,7 @@ jobs:
       # For a new tag, copy that tag name as the tag for Docker image.
       IMAGE_TAGS: |
         type=raw,value=latest,enable=${{ endsWith(github.ref, github.event.repository.default_branch) }}
+        type=raw,value={{branch}}-ubuntu-intel
         type=ref,event=branch,enable=${{ !endsWith(github.ref, github.event.repository.default_branch) }}
         type=ref,event=tag
         type=semver,pattern=v{{major}}-latest
@@ -150,3 +154,29 @@ jobs:
           # Use tags / labels provided by 'docker/metadata-action' above
           tags: ${{ steps.meta_build.outputs.tags }}
           labels: ${{ steps.meta_build.outputs.labels }}
+      - name: Generate output
+        id: gen_output
+        run: |
+          echo "tags=${{ steps.meta_build.outputs.tags }}" >> "$GITHUB_OUTPUT"
+  combinator:
+    name: combine multiple arches into a single "image"
+    needs: [docker-ubuntu-intel, docker-ubuntu-arm]
+    runs-on: ubuntu-latest
+    steps:
+      # https://github.com/docker/login-action
+      - name: Login to DockerHub
+        # Only login if not a PR, as PRs only trigger a Docker build and not a push
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_ACCESS_TOKEN }}
+
+      - name: combine manifests
+        uses: Noelware/docker-manifest-action@v1
+          with:
+              tags: snipe/snipe-it:{{branch}}-combined
+              inputs: snipe/snipe-it:{{branch}}-intel,snipe/snipe-it:{{branch}}-arm
+              push: true
+
+
