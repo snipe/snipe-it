@@ -1487,6 +1487,7 @@ class Helper
         $redirect_option = Session::get('redirect_option');
         $checkout_to_type = Session::get('checkout_to_type');
         $checkedInFrom = Session::get('checkedInFrom');
+        $other_redirect = Session::get('other_redirect');
 
         // return to index
         if ($redirect_option == 'index') {
@@ -1535,6 +1536,16 @@ class Helper
                     return route('hardware.show', $request->assigned_asset ?? $checkedInFrom);
             }
         }
+
+        // return to somewhere else
+        if ($redirect_option == 'other_redirect') {
+            switch ($other_redirect) {
+                case 'audit':
+                    return route('assets.audit.due');
+            }
+
+        }
+
         return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'));
     }
 
@@ -1560,6 +1571,11 @@ class Helper
             }
         } else {
             $locations = Location::all();
+        }
+
+        // Bail out early if there are no locations
+        if ($locations->count() == 0) {
+            return [];
         }
 
         foreach($locations as $location) {
@@ -1600,14 +1616,17 @@ class Helper
                         $items = collect([])->push($location->$keyword);
                     }
 
+                    $count = 0;
                     foreach ($items as $item) {
 
+
                         if ($item && $item->company_id != $location_company) {
+
                             $mismatched[] = [
                                     class_basename(get_class($item)),
                                     $item->id,
                                     $item->name ?? $item->asset_tag ?? $item->serial ?? $item->username,
-                                    str_replace('App\\Models\\', '', $item->assigned_type) ?? null,
+                                    $item->assigned_type ? str_replace('App\\Models\\', '', $item->assigned_type) : null,
                                     $item->company_id ?? null,
                                     $item->company->name ?? null,
 //                                    $item->defaultLoc->id ?? null,
@@ -1618,6 +1637,15 @@ class Helper
                                     $item->location->company->name ?? null,
                                     $location_company ?? null,
                                 ];
+
+                            $count++;
+
+                            // Bail early if this is not being run via artisan
+                            if ((!$artisan) && ($count > 0)) {
+                                return $mismatched;
+                            }
+
+
 
                         }
                     }
