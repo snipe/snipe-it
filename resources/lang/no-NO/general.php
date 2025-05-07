@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Ny lisens',
     'new_accessory'         => 'Nytt tilbehør',
     'new_consumable'        => 'Ny forbruksvare',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Kollaps',
     'assigned'              => 'Tilordnet',
     'asset_count'           => 'Antall eiendeler',

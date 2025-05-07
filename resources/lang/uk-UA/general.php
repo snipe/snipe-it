@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Нова ліцензія',
     'new_accessory'         => 'Новий аксесуар',
     'new_consumable'        => 'Новий витратний матеріал',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Згорнути',
     'assigned'              => 'Призначено',
     'asset_count'           => 'Кількість активів',

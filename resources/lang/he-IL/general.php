@@ -390,6 +390,8 @@ return [
     'new_license'           => 'New License',
     'new_accessory'         => 'New Accessory',
     'new_consumable'        => 'New Consumable',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'מזער',
     'assigned'              => 'משוייך',
     'asset_count'           => 'ספירת נכסים',

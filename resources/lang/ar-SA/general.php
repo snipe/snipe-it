@@ -390,6 +390,8 @@ return [
     'new_license'           => 'ترخيص جديد',
     'new_accessory'         => 'ملحق الجودة',
     'new_consumable'        => 'مادة إستهلاكية جديدة',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'اخفاء',
     'assigned'              => 'مسندة',
     'asset_count'           => 'عدد الأصول',

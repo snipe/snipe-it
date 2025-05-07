@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Lisensi Baru',
     'new_accessory'         => 'Aksesori Baru',
     'new_consumable'        => 'Barang Habis Pakai Baru',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Ciutkan',
     'assigned'              => 'Diberikan',
     'asset_count'           => 'Total Aset',

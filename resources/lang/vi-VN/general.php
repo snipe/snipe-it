@@ -390,6 +390,8 @@ return [
     'new_license'           => 'New License',
     'new_accessory'         => 'Thêm phụ kiện',
     'new_consumable'        => 'Tạo vật tư phụ',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Thu gọn',
     'assigned'              => 'Đã giao',
     'asset_count'           => 'Asset Count',

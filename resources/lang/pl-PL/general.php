@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Nowa licencja',
     'new_accessory'         => 'Nowe akcesorium',
     'new_consumable'        => 'Nowy materiał eksploatacyjny',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Zwiń',
     'assigned'              => 'Przypisane',
     'asset_count'           => 'Liczba aktywów',
