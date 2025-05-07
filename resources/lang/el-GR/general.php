@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Νέα Άδεια',
     'new_accessory'         => 'Νέο Αξεσουάρ',
     'new_consumable'        => 'Νέο Αναλώσιμο',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Σύμπτυξη',
     'assigned'              => 'Ανατεθειμένο',
     'asset_count'           => 'Μετρητής Περιουσιακών Στοιχείων',

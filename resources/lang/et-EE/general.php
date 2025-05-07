@@ -390,6 +390,8 @@ return [
     'new_license'           => 'New License',
     'new_accessory'         => 'New Accessory',
     'new_consumable'        => 'Uus kulumaterjal',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Ahenda',
     'assigned'              => 'Määratud',
     'asset_count'           => 'Vahendi kogus',

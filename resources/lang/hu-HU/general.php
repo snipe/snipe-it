@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Új szoftverlicenc',
     'new_accessory'         => 'Új tartozék',
     'new_consumable'        => 'Új fogyóeszköz',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Összecsukás',
     'assigned'              => 'Hozzárendelve',
     'asset_count'           => 'Eszközök száma',

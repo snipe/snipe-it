@@ -390,6 +390,8 @@ return [
     'new_license'           => 'สร้างข้อมูลลิขสิทธิ์',
     'new_accessory'         => 'สร้างข้อมูลอุปกรณ์',
     'new_consumable'        => 'สร้างข้อมูลวัสดุสิ้นเปลือง',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'ยุบ',
     'assigned'              => 'ได้มอบหมายให้',
     'asset_count'           => 'นับทรัพย์สิน',

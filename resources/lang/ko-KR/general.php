@@ -390,6 +390,8 @@ return [
     'new_license'           => '새 라이센스',
     'new_accessory'         => '새 부속품',
     'new_consumable'        => '새 소모품',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Collapse',
     'assigned'              => 'Assigned',
     'asset_count'           => 'Asset Count',

@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Nová licencia',
     'new_accessory'         => 'Nové príslušenstvo',
     'new_consumable'        => 'Nový spotrebný materiál',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Zbaliť',
     'assigned'              => 'Priradené',
     'asset_count'           => 'Počet majetkov',

@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Nova licenca',
     'new_accessory'         => 'Novi dodatak',
     'new_consumable'        => 'Nov potrošni materijal',
+    'new_component'         => 'Nova komponenta',
+    'new_user'              => 'Novi korisnik',
     'collapse'              => 'Skupi',
     'assigned'              => 'Dodeljeno',
     'asset_count'           => 'Količina imovine',
