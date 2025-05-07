@@ -90,8 +90,6 @@ jobs:
     # Ensure this job never runs on forked repos. It's only executed for 'grokability/snipe-it'
     if: github.repository == 'grokability/snipe-it'
     runs-on: ubuntu-latest
-    outputs:
-      tags: ${{ steps.gen_output.outputs.tags }}
     env:
       # Define tags to use for Docker images based on Git tags/branches (for docker/metadata-action)
       # For a new commit on default branch (master), use the literal tag 'latest' on Docker image.
@@ -154,10 +152,6 @@ jobs:
           # Use tags / labels provided by 'docker/metadata-action' above
           tags: ${{ steps.meta_build.outputs.tags }}
           labels: ${{ steps.meta_build.outputs.labels }}
-      - name: Generate output
-        id: gen_output
-        run: |
-          echo "tags=${{ steps.meta_build.outputs.tags }}" >> "$GITHUB_OUTPUT"
   combinator:
     name: combine multiple arches into a single "image"
     needs: [docker-ubuntu-intel, docker-ubuntu-arm]
@@ -175,7 +169,7 @@ jobs:
       - name: combine manifests
         uses: Noelware/docker-manifest-action@v1
         with:
-            tags: snipe/snipe-it:{{branch}}-combined
+            tags: {{branch}}-combined
             inputs: snipe/snipe-it:{{branch}}-intel,snipe/snipe-it:{{branch}}-arm
             push: true
 
