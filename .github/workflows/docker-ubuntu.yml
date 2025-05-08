@@ -42,10 +42,6 @@ jobs:
         latest=false
 
     steps:
-      # https://github.com/actions/checkout
-      - name: Checkout codebase
-        uses: actions/checkout@v4
-
       # https://github.com/docker/setup-buildx-action
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -108,10 +104,6 @@ jobs:
         latest=false
 
     steps:
-      # https://github.com/actions/checkout
-      - name: Checkout codebase
-        uses: actions/checkout@v4
-
       # https://github.com/docker/setup-buildx-action
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
