@@ -49,7 +49,7 @@
           <div class="col-md-7">
 
             @if (!config('app.lock_passwords'))
-              <x-input.locale-select name="locales" :selected="old('locale', $user->locale)"/>
+              <x-input.locale-select name="locale" :selected="old('locale', $user->locale)"/>
               {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
             @else
               <p class="help-block">{{ trans('general.feature_disabled') }}</p>
