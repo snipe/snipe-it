@@ -882,12 +882,12 @@ class AssetsController extends Controller
         $this->authorize('audit', Asset::class);
         $settings = Setting::getSettings();
 
-        // Validate custom fields on existing asset
-        $validator = Validator::make($asset->toArray(), $asset->customFieldValidationRules());
 
-        if ($validator->fails()) {
-            return redirect()->route('hardware.edit', $asset)
-                ->withErrors($validator);
+        // Invoke the validation to see if the audit will complete successfully
+        $asset->setRules($asset->getRules() + $asset->customFieldValidationRules());
+
+        if ($asset->isInvalid()) {
+            return redirect()->route('hardware.edit', $asset)->withErrors($asset->getErrors());
         }
 
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
