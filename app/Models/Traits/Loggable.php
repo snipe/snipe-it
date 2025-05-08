@@ -50,16 +50,12 @@ trait Loggable
             $model->setLogAction(ActionType::Create);
         });
 
-        static::deleting(function ($model) { //TODO - is this only for 'hard' delete? Or soft?
-            if (self::class == \App\Models\User::class) { //FIXME - Janky AF!
-                $model->setLogTarget($model); //FIXME - this makes *NO* sense!!!!
+        static::deleting(function ($model) {
+            if (self::class == \App\Models\User::class) { //TODO - can we maybe jam this into the delete method(s) in the controller instead?
+                $model->setLogTarget($model);
             }
             $model->setLogAction(ActionType::Delete);
         });
-
-        //static::trashing(function ($model) { //TODO - is *this* the right one?
-        //    $model->setLogAction(ActionType::Delete); // No, no it is very much not. there is 'trashed' but not 'trashING'
-        //});
 
         // THIS sets up the transaction, and gets the 'diff' between the original for the model,
         // and the way it's about to get saved to.
@@ -67,7 +63,7 @@ trait Loggable
         // OPEN QUESTION - does this run on soft-delete? I don't know.
         static::saving(function ($model) {
             //possibly consider a "$this->saveWithoutTransaction" thing you can invoke?
-            // use "BEGIN" here?! TODO FIXME
+            // use "BEGIN" here?! TODO
             $changed = [];
 
             // something here with custom fields is needed? or will getRawOriginal et al just do that for us?
@@ -91,14 +87,14 @@ trait Loggable
         static::saved(function ($model) {
             if (!$model->log_action && !$model->log_meta) {
                 //nothing was changed, nothing was saved, nothing happened. So there should be no log message.
-                //FIXME if we do the transaction thing!!!!
+                //TODO if we do the transaction thing!!!! (COMMIT?) (or, I dunno, maybe ROLLBACK?)
                 return;
             }
             if (!$model->log_action) {
                 throw new \Exception("Log Message was unset, but log_meta *does* exist - it's: ".print_r($model->log_meta, true));
             }
             $model->createLogEntry();
-            // DO COMMIT HERE? TODO FIXME
+            // DO COMMIT HERE? TODO (commit after save *and* logging?)
         });
         static::deleted(function ($model) {
             $results = $model->createLogEntry(); //TODO - if we do commits up there, we should do them here too?
@@ -117,8 +113,6 @@ trait Loggable
             $this->setLogAction($log_action);
         }
         $logAction = new Actionlog();
-        //$logAction->item_type = self::class; //FIXME - going to fail on Licenses (see other notes)
-        //$logAction->item_id = $this->id;
         $logAction = $this->determineLogItemType($logAction); //TODO - inline this if it becomes the only usage?
         $logAction->created_at = date('Y-m-d H:i:s');
         $logAction->created_by = auth()->id();
@@ -130,7 +124,7 @@ trait Loggable
             $logAction->target_type = $this->log_target::class;
             $logAction->target_id = $this->log_target->id;
         }
-        if ($this->log_note) {
+        if (!is_null($this->log_note)) { // for legacy reasons we need to special-case writing '' as the log notes :/
             $logAction->note = $this->log_note;
         }
         if ($this->log_location_override) { // TODO - this is a weird feature and we shouldn't need it.

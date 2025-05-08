@@ -57,7 +57,7 @@ class AssetModelFilesController extends Controller
                 $file_name = $request->handleFile('private_uploads/assetmodels/','model-'.$assetModel->id, $file);
 
                 $assetModel->setLogFilename($file_name);
-                $assetModel->setLogNote(e($request->input('notes')));
+                $assetModel->setLogNote(e($request->input('notes')) ?? ''); //weird, but we need this for tests to pass
                 $assetModel->setLogAction(ActionType::Uploaded);
                 $assetModel->save();
             }

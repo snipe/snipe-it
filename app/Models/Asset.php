@@ -77,7 +77,7 @@ class Asset extends Depreciable
         self::saving(function ($asset) {
             // determine if calculated eol and then calculate it - this should only happen on a new asset
             //\Log::error("Asset RAW array: ".print_r($asset->toArray(), true));
-            if (is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && ($asset->model?->eol > 0)) { //FIXME - I shouldn't have to do this.
+            if (is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && ($asset->model?->eol > 0)) {
                 $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');
                 $asset->eol_explicit = false;
             }
@@ -413,7 +413,10 @@ class Asset extends Depreciable
         $this->setLogTarget($target);
         $this->setLogNote($note);
 
-        // FIXME - what to do with this? It's weird. I guess leave it?
+        // TODO - what to do with this? It's weird. I guess leave it?
+        // it's weird that it's only used in this checkOut() method, and will probably have to be reproduced
+        // in other checkout contexts
+        // nah, that's a FIXME - much as I don't want it to be.
         if ($location != null) {
             $this->location_id = $location;
         } else {

@@ -41,15 +41,15 @@ class DeleteAssetMaintenancesTest extends TestCase implements TestsFullMultipleC
         $this->settings->enableMultipleFullCompanySupport();
 
         $this->actingAsForApi($userInCompanyA)
-            ->deleteJson(route('api.maintenances.destroy', $assetMaintenanceB))
+            ->deleteJson(route('api.maintenances.destroy', $assetMaintenanceB->id))
             ->assertStatusMessageIs('error');
 
         $this->actingAsForApi($userInCompanyB)
-            ->deleteJson(route('api.maintenances.destroy', $assetMaintenanceA))
+            ->deleteJson(route('api.maintenances.destroy', $assetMaintenanceA->id))
             ->assertStatusMessageIs('error');
 
         $this->actingAsForApi($superUser)
-            ->deleteJson(route('api.maintenances.destroy', $assetMaintenanceC))
+            ->deleteJson(route('api.maintenances.destroy', $assetMaintenanceC->id))
             ->assertStatusMessageIs('success');
 
         $this->assertNotSoftDeleted($assetMaintenanceA);

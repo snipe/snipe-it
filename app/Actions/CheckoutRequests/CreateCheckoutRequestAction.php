@@ -29,6 +29,7 @@ class CreateCheckoutRequestAction
         }
 
         $data['item'] = $asset;
+        $data['item_type'] = Asset::class; // TODO - generalize?
         $data['target'] = $user;
         $data['item_quantity'] = 1;
         $settings = Setting::getSettings();

@@ -105,9 +105,8 @@ class AssetModelFilesTest extends TestCase
                     ]
                 ]
             ])
-        ->assertJsonPath('rows.0.note', null) // FIXME - '' vs. `null` ?
-            ->assertJsonPath('rows.1.note','manual');
-        dump($result);
+        ->assertJsonPath('rows.0.note', '')
+        ->assertJsonPath('rows.1.note', 'manual');
 
 
 	// Get the file
