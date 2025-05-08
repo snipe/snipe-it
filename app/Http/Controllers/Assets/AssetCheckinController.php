@@ -42,12 +42,11 @@ class AssetCheckinController extends Controller
             return redirect()->route('hardware.show', $asset->id)->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
 
-        // Validate custom fields on existing asset
-        $validator = Validator::make($asset->toArray(), $asset->customFieldValidationRules());
+        // Invoke the validation to see if the audit will complete successfully
+        $asset->setRules($asset->getRules() + $asset->customFieldValidationRules());
 
-        if ($validator->fails()) {
-            return redirect()->route('hardware.edit', $asset)
-                ->withErrors($validator);
+        if ($asset->isInvalid()) {
+            return redirect()->route('hardware.edit', $asset)->withErrors($asset->getErrors());
         }
 
         $target_option = match ($asset->assigned_type) {
