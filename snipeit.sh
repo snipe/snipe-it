@@ -179,11 +179,22 @@ create_user () {
 
   if [[ "$distro" == "Ubuntu" ]] || [[ "$distro" == "Debian" ]] || [[ "$distro" == "Raspbian" ]] ; then
     /usr/sbin/adduser --quiet --disabled-password --gecos 'Snipe-IT User' "$APP_USER"
-    su -c "/usr/sbin/usermod -a -G "$apache_group" "$APP_USER""
   else
-    adduser "$APP_USER"
-    usermod -a -G "$apache_group" "$APP_USER"
+    adduser -c "Snipe-IT User" "$APP_USER"
   fi
+
+  # Add the user to the apache group so the app can write to any files apache
+  # creates (eg, if apache process creates the log, but then a an app-user-owned
+  # cron also tries writing
+  usermod -a -G "$apache_group" "$APP_USER"
+
+  # Now do the reverse -- so apache can write to the log that the user may
+  # have created. This was actively a problem on new installs, hobbling
+  # imports
+  # redefining these varaible just for clarity
+  apache_user="$apache_group"
+  app_group="$APP_USER"
+  usermod -a -G "$app_group" "$apache_user"
 }
 
 run_as_app_user () {
