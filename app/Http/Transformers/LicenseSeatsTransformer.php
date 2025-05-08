@@ -13,16 +13,15 @@ class LicenseSeatsTransformer
     public function transformLicenseSeats(Collection $seats, $total)
     {
         $array = [];
-        $seat_count = 0;
+
         foreach ($seats as $seat) {
-            $seat_count++;
-            $array[] = self::transformLicenseSeat($seat, $seat_count);
+            $array[] = self::transformLicenseSeat($seat);
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
     }
 
-    public function transformLicenseSeat(LicenseSeat $seat, $seat_count = 0)
+    public function transformLicenseSeat(LicenseSeat $seat)
     {
         $array = [
             'id' => (int) $seat->id,
@@ -54,10 +53,6 @@ class LicenseSeatsTransformer
             'notes' => e($seat->notes),
             'user_can_checkout' => (($seat->assigned_to == '') && ($seat->asset_id == '')),
         ];
-
-        if ($seat_count != 0) {
-            $array['name'] = trans('admin/licenses/general.seat_count', ['count' => $seat_count]);
-        }
 
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', License::class),

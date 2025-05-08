@@ -34,7 +34,7 @@ class LicenseSeatsController extends Controller
             if ($request->input('sort') == 'department') {
                 $seats->OrderDepartments($order);
             } else {
-                $seats->orderBy('id', $order);
+                $seats->orderBy('updated_at', $order);
             }
 
             $total = $seats->count();
