@@ -16,7 +16,7 @@ class LicenseSeatsTransformer
         $seat_count = 0;
         foreach ($seats as $seat) {
             $seat_count++;
-            $array[] = self::transformLicenseSeat($seat, $seat_count);
+            $array[] = self::transformLicenseSeat($seat, ($total - $seat_count));
         }
 
         return (new DatatablesTransformer)->transformDatatables($array, $total);
