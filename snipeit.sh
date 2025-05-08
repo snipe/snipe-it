@@ -191,7 +191,7 @@ create_user () {
   # Now do the reverse -- so apache can write to the log that the user may
   # have created. This was actively a problem on new installs, hobbling
   # imports
-  # redefining these varaible just for clarity
+  # redefining these variables just for clarity
   apache_user="$apache_group"
   app_group="$APP_USER"
   usermod -a -G "$app_group" "$apache_user"
