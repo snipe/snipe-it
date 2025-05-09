@@ -99,7 +99,7 @@ use Carbon\Carbon;
                 {{ trans('admin/asset_maintenances/form.cost') }}
               </div>
               <div class="col-md-9">
-                {{ trans( 'general.currency' ) . Helper::formatCurrencyOutput($assetMaintenance->cost) }}
+                {{ \App\Models\Setting::getSettings()->default_currency .' '. Helper::formatCurrencyOutput($assetMaintenance->cost) }}
               </div>
             </div> <!-- /row -->
             @endif
