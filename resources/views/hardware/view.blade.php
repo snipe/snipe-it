@@ -699,7 +699,7 @@
                                     </div>
 
                                     <!-- byod -->
-                                    <div class="row">
+                                    <div class="row byod">
                                         <div class="col-md-3">
                                             <strong>{{ trans('general.byod') }}</strong>
                                         </div>
