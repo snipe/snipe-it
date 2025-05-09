@@ -1072,24 +1072,40 @@ class AssetsController extends Controller
      * @since [v4.0]
      */
     public function audit(Request $request, Asset $asset): JsonResponse
-
     {
+
         $this->authorize('audit', Asset::class);
 
         $settings = Setting::getSettings();
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
 
-        // Allow the asset tag to be passed in the payload (legacy method)
+
+        // Allow the asset tag to be passed in the form payload
         if ($request->filled('asset_tag')) {
-            $asset = Asset::where('asset_tag', '=', $request->input('asset_tag'))->first();
+
+            // Check if it's an array or a string
+            if (is_array($request->input('asset_tag'))) {
+                $asset_tag = $request->input('asset_tag');
+                $multi_audit = true;
+                \Log::error('Multi-audit');
+            } else {
+                // If it's a string, make it into an array so we can use it in the whereIn query
+                $asset_tag = [$request->input('asset_tag')];
+                $multi_audit = false;
+                \Log::error('Single audit');
+            }
+
+            $assets = Asset::whereIn('asset_tag', $asset_tag)->get();
         }
 
-        if ($asset) {
+        foreach ($assets as $asset) {
 
             $originalValues = $asset->getRawOriginal();
 
             $asset->next_audit_date = $dt;
+            $asset->last_audit_date = date('Y-m-d H:i:s');
 
+            // Overwrite next_audit_date if it was specified in the request
             if ($request->filled('next_audit_date')) {
                 $asset->next_audit_date = $request->input('next_audit_date');
             }
@@ -1100,15 +1116,25 @@ class AssetsController extends Controller
                 $asset->location_id = $request->input('location_id');
             }
 
-            $asset->last_audit_date = date('Y-m-d H:i:s');
 
             // Set up the payload for re-display in the API response
-            $payload = [
-                'id' => $asset->id,
-                'asset_tag' => $asset->asset_tag,
-                'note' => $request->input('note'),
-                'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
-            ];
+
+            if ($multi_audit === true) {
+                $payload = [
+                    'id' => $asset->id,
+                    'asset_tag' => $asset->asset_tag,
+                    'note' => $request->input('note'),
+                    'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
+                ];
+            } else {
+                $payload[] = [
+                    'id' => $asset->id,
+                    'asset_tag' => $asset->asset_tag,
+                    'note' => $request->input('note'),
+                    'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
+                ];
+            }
+
 
 
             /**
@@ -1176,9 +1202,12 @@ class AssetsController extends Controller
              */
             if ($asset->isValid() && $asset->save()) {
                 $asset->logAudit(request('note'), request('location_id'), null, $originalValues);
-                return response()->json(Helper::formatStandardApiResponse('success', $payload, trans('admin/hardware/message.audit.success')));
             }
 
+        }
+
+        if (count($payload) > 0) {
+            return response()->json(Helper::formatStandardApiResponse('success', $payload, trans('admin/hardware/message.audit.success')));
         }
 
 
