@@ -230,16 +230,7 @@ class LicensePresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.id'),
                 'visible' => false,
-           ],
-           [
-                'field' => 'name',
-                'searchable' => false,
-                'sortable' => false,
-                'sorter'   => 'numericOnly',
-                'switchable' => true,
-                'title' => trans('admin/licenses/general.seat'),
-                'visible' => true,
-            ], [
+           ],[
                 'field' => 'assigned_user',
                 'searchable' => false,
                 'sortable' => false,
@@ -285,7 +276,7 @@ class LicensePresenter extends Presenter
                 'searchable' => false,
                 'sortable' => true,
                 'visible' => false,
-                'title' => trans('general.date'),
+                'title' => trans('general.updated_at'),
                 'formatter' => 'dateDisplayFormatter',
             ],
             [
