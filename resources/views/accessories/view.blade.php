@@ -178,6 +178,17 @@
           </div>
       @endif
 
+          @if ($accessory->model_number)
+              <div class="row">
+                  <div class="col-md-3" style="padding-bottom: 10px;">
+                      <strong>{{ trans('general.model_no')}}</strong>
+                  </div>
+                  <div class="col-md-9">
+                      {{ $accessory->model_number }}
+                  </div>
+              </div>
+          @endif
+
       @if ($accessory->company)
           <div class="row">
               <div class="col-md-3" style="padding-bottom: 15px;">
@@ -189,6 +200,16 @@
           </div>
       @endif
 
+          @if ($accessory->location)
+              <div class="row">
+                  <div class="col-md-3" style="padding-bottom: 10px;">
+                      <strong>{{ trans('general.location')}}</strong>
+                  </div>
+                  <div class="col-md-9">
+                      <a href="{{ route('locations.show', $accessory->location->id) }}">{{ $accessory->location->name }} </a>
+                  </div>
+              </div>
+          @endif
 
       @if ($accessory->category)
           <div class="row">
@@ -200,6 +221,18 @@
               </div>
           </div>
       @endif
+
+          @if ($accessory->manufacturer)
+              <div class="row">
+                  <div class="col-md-3" style="padding-bottom: 10px;">
+                      <strong>{{ trans('general.manufacturer')}}</strong>
+                  </div>
+                  <div class="col-md-9">
+                      <a href="{{ route('manufacturers.show', $accessory->manufacturer->id) }}">{{ $accessory->manufacturer->name }} </a>
+                  </div>
+              </div>
+          @endif
+
 
 
       @if ($accessory->notes)
@@ -213,9 +246,33 @@
               {!! nl2br(Helper::parseEscapedMarkedownInline($accessory->notes)) !!}
           </div>
        </div>
-
      @endif
 
+      @if ($accessory->purchase_date)
+          <div class="row">
+              <div class="col-md-3" style="padding-bottom: 10px;">
+                  <strong>
+                      {{ trans('general.purchase_date') }}
+                  </strong>
+              </div>
+              <div class="col-md-9" style="word-wrap: break-word;">
+                  {{ \App\Helpers\Helper::getFormattedDateObject($accessory->purchase_date, 'date')['formatted']}}
+              </div>
+          </div>
+      @endif
+
+          @if ($accessory->purchase_cost)
+              <div class="row">
+                  <div class="col-md-3" style="padding-bottom: 10px;">
+                      <strong>
+                          {{ trans('general.purchase_cost') }}
+                      </strong>
+                  </div>
+                  <div class="col-md-9" style="word-wrap: break-word;">
+                      {{ Helper::formatCurrencyOutput($accessory->purchase_cost) }}
+                  </div>
+              </div>
+          @endif
 
       <div class="row">
           <div class="col-md-3" style="padding-bottom: 10px;">
@@ -234,6 +291,43 @@
               {{ $accessory->checkouts_count }}
           </div>
       </div>
+
+          <div class="row">
+              <div class="col-md-3" style="padding-bottom: 10px;">
+                  <strong>
+                      {{ trans('general.created_at') }}
+                  </strong>
+              </div>
+              <div class="col-md-9" style="word-wrap: break-word;">
+                  {{ \App\Helpers\Helper::getFormattedDateObject($accessory->created_at, 'datetime')['formatted']}}
+              </div>
+          </div>
+
+          @if ($accessory->created_at!=$accessory->updated_at)
+          <div class="row">
+              <div class="col-md-3" style="padding-bottom: 10px;">
+                  <strong>
+                      {{ trans('general.updated_at') }}
+                  </strong>
+              </div>
+              <div class="col-md-9" style="word-wrap: break-word;">
+                  {{ \App\Helpers\Helper::getFormattedDateObject($accessory->updated_at, 'datetime')['formatted']}}
+              </div>
+          </div>
+
+          @endif
+
+          <div class="row">
+              <div class="col-md-3" style="padding-bottom: 10px;">
+                  <strong>
+                      {{ trans('general.created_by') }}
+                  </strong>
+              </div>
+              <div class="col-md-9" style="word-wrap: break-word;">
+                  {{ $accessory->adminuser->present()->fullName() }}
+              </div>
+          </div>
+
 </div>
 
     <div class="col-md-3 pull-right">
