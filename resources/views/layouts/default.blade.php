@@ -478,48 +478,48 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                     @endif
 
 
-                                    <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
+                                    <li id="deployed-sidenav-option" {!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=Deployed') }}">
                                             <x-icon type="circle" class="text-blue fa-fw" />
                                             {{ trans('general.deployed') }}
                                             <span class="badge">{{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }}</span>
                                         </a>
                                     </li>
-                                    <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
+                                    <li id="rtd-sidenav-option"{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=RTD') }}">
                                             <x-icon type="circle" class="text-green fa-fw" />
                                             {{ trans('general.ready_to_deploy') }}
                                             <span class="badge">{{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }}</span>
                                         </a>
                                     </li>
-                                    <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}">
+                                    <li id="pending-sidenav-option"{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}">
                                             <x-icon type="circle" class="text-orange fa-fw" />
                                             {{ trans('general.pending') }}
                                             <span class="badge">{{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }}</span>
                                         </a>
                                     </li>
-                                    <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a
+                                    <li id="undeployable-sidenav-option"{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a
                                                 href="{{ url('hardware?status=Undeployable') }}">
                                             <x-icon type="x" class="text-red fa-fw" />
                                             {{ trans('general.undeployable') }}
                                             <span class="badge">{{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }}</span>
                                         </a>
                                     </li>
-                                    <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
+                                    <li id="byod-sidenav-option"{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=byod') }}">
                                             <x-icon type="x" class="text-red fa-fw" />
                                             {{ trans('general.byod') }}
                                             <span class="badge">{{ (isset($total_byod_sidebar)) ? $total_byod_sidebar : '' }}</span>
                                         </a>
                                     </li>
-                                    <li{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a
+                                    <li id="archived-sidenav-option"{!! (Request::query('status') == 'Archived' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Archived') }}">
                                             <x-icon type="x" class="text-red fa-fw" />
                                             {{ trans('admin/hardware/general.archived') }}
                                             <span class="badge">{{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }}</span>
                                         </a>
                                     </li>
-                                    <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a
+                                    <li id="requestable-sidenav-option"{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Requestable') }}">
                                             <x-icon type="checkmark" class="text-blue fa-fw" />
                                             {{ trans('admin/hardware/general.requestable') }}
@@ -527,7 +527,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                     </li>
 
                                     @can('audit', \App\Models\Asset::class)
-                                        <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
+                                        <li id="audit-due-sidenav-option"{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('assets.audit.due') }}">
                                                 <x-icon type="audit" class="text-yellow fa-fw"/>
                                                 {{ trans('general.audit_due') }}
@@ -537,7 +537,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                     @endcan
 
                                     @can('checkin', \App\Models\Asset::class)
-                                    <li{!! (Request::is('hardware/checkins/due') ? ' class="active"' : '') !!}>
+                                    <li id="checkin-due-sidenav-option"{!! (Request::is('hardware/checkins/due') ? ' class="active"' : '') !!}>
                                         <a href="{{ route('assets.checkins.due') }}">
                                             <x-icon type="due" class="text-orange fa-fw"/>
                                             {{ trans('general.checkin_due') }}
@@ -580,14 +580,14 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                         </li>
                                     @endcan
                                     @can('admin')
-                                        <li>
+                                        <li id="import-history-sidenav-option">
                                             <a href="{{ url('hardware/history') }}">
                                                 {{ trans('general.import-history') }}
                                             </a>
                                         </li>
                                     @endcan
                                     @can('audit', \App\Models\Asset::class)
-                                        <li>
+                                        <li id="bulk-audit-sidenav-option">
                                             <a href="{{ route('assets.bulkaudit') }}">
                                                 {{ trans('general.bulkaudit') }}
                                             </a>
@@ -605,7 +605,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             </li>
                         @endcan
                         @can('index', \App\Models\Accessory::class)
-                            <li{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
+                            <li id="accessories-sidenav-option"{!! (Request::is('accessories*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('accessories.index') }}">
                                     <x-icon type="accessories" class="fa-fw" />
                                     <span>{{ trans('general.accessories') }}</span>
@@ -613,7 +613,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             </li>
                         @endcan
                         @can('view', \App\Models\Consumable::class)
-                            <li{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
+                            <li id="consumables-sidenav-option"{!! (Request::is('consumables*') ? ' class="active"' : '') !!}>
                                 <a href="{{ url('consumables') }}">
                                     <x-icon type="consumables" class="fa-fw" />
                                     <span>{{ trans('general.consumables') }}</span>
@@ -621,7 +621,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             </li>
                         @endcan
                         @can('view', \App\Models\Component::class)
-                            <li{!! (Request::is('components*') ? ' class="active"' : '') !!}>
+                            <li id="components-sidenav-option"{!! (Request::is('components*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('components.index') }}">
                                     <x-icon type="components" class="fa-fw" />
                                     <span>{{ trans('general.components') }}</span>
@@ -629,7 +629,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             </li>
                         @endcan
                         @can('view', \App\Models\PredefinedKit::class)
-                            <li{!! (Request::is('kits') ? ' class="active"' : '') !!}>
+                            <li id="kits-sidenav-option"{!! (Request::is('kits') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('kits.index') }}">
                                     <x-icon type="kits" class="fa-fw" />
                                     <span>{{ trans('general.kits') }}</span>
@@ -638,7 +638,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @endcan
 
                         @can('view', \App\Models\User::class)
-                            <li{!! (Request::is('users*') ? ' class="active"' : '') !!}>
+                            <li id="users-sidenav-option"{!! (Request::is('users*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('users.index') }}" {{$snipeSettings->shortcuts_enabled == 1 ? "accesskey=6" : ''}}>
                                     <x-icon type="users" class="fa-fw" />
                                     <span>{{ trans('general.people') }}</span>
@@ -646,7 +646,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             </li>
                         @endcan
                         @can('import')
-                            <li{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
+                            <li id="import-sidenav-option"{!! (Request::is('import/*') ? ' class="active"' : '') !!}>
                                 <a href="{{ route('imports.index') }}">
                                     <x-icon type="import" class="fa-fw" />
                                     <span>{{ trans('general.import') }}</span>
@@ -655,7 +655,7 @@ dir="{{ Helper::determineLanguageDirection() }}">
                         @endcan
 
                         @can('backend.interact')
-                            <li class="treeview {!! in_array(Request::route()->getName(),App\Helpers\Helper::SettingUrls()) ? ' active': '' !!}">
+                            <li id="settings-sidenav-option" class="treeview {!! in_array(Request::route()->getName(),App\Helpers\Helper::SettingUrls()) ? ' active': '' !!}">
                                 <a href="#" id="settings">
                                     <x-icon type="settings" class="fa-fw" />
                                     <span>{{ trans('general.settings') }}</span>
