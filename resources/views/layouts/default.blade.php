@@ -266,19 +266,21 @@ dir="{{ Helper::determineLanguageDirection() }}">
                             @endcan
 
                             @can('admin')
-                                @if ($snipeSettings->show_alerts_in_menu=='1')
-                                    <!-- Tasks: style can be found in dropdown.less -->
-                                    <?php $alert_items = Helper::checkLowInventory(); $deprecations = Helper::deprecationCheck()?>
+                                <!-- Tasks: style can be found in dropdown.less -->
+                                <?php $alert_items = ($snipeSettings->show_alerts_in_menu=='1') ? Helper::checkLowInventory() : [];
+                                      $deprecations = Helper::deprecationCheck()
+                                        ?>
 
-                                    <li class="dropdown tasks-menu">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <x-icon type="alerts" />
-                                            <span class="sr-only">{{ trans('general.alerts') }}</span>
-                                            @if (count($alert_items) || count($deprecations))
-                                                <span class="label label-danger">{{ count($alert_items) + count($deprecations) }}</span>
-                                            @endif
-                                        </a>
-                                        <ul class="dropdown-menu">
+                                <li class="dropdown tasks-menu">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        <x-icon type="alerts" />
+                                        <span class="sr-only">{{ trans('general.alerts') }}</span>
+                                        @if(count($alert_items) + count($deprecations))
+                                            <span class="label label-danger">{{ count($alert_items) + count($deprecations)}}</span>
+                                        @endif
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        @can('superadmin')
                                             @if($deprecations)
                                                 @foreach ($deprecations as $key => $deprecation)
                                                     @if ($deprecation['check'])
@@ -286,11 +288,12 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                                     @endif
                                                 @endforeach
                                             @endif
-                                            <li class="header">{{ trans_choice('general.quantity_minimum', count($alert_items)) }}</li>
+                                        @endcan
+                                        @if($alert_items)
+                                        <li class="header">{{ trans_choice('general.quantity_minimum', count($alert_items)) }}</li>
                                             <li>
-                                                <!-- inner menu: contains the actual data -->
+                                            <!-- inner menu: contains the actual data -->
                                                 <ul class="menu">
-
                                                     @for($i = 0; count($alert_items) > $i; $i++)
 
                                                         <li><!-- Task item -->
@@ -315,13 +318,13 @@ dir="{{ Helper::determineLanguageDirection() }}">
                                                     @endfor
                                                 </ul>
                                             </li>
-                                            {{-- <li class="footer">
-                                              <a href="#">{{ trans('general.tasks_view_all') }}</a>
-                                            </li> --}}
-                                        </ul>
-                                    </li>
-                                @endcan
-                            @endif
+                                        @endif
+                                        {{-- <li class="footer">
+                                          <a href="#">{{ trans('general.tasks_view_all') }}</a>
+                                        </li> --}}
+                                    </ul>
+                                </li>
+                            @endcan
 
 
 
