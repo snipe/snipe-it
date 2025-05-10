@@ -386,7 +386,30 @@ class Saml
     public function extractData()
     {
         $auth = $this->getAuth();
-
+        $auth->processResponse(); // Ensure this is called beforehand
+    
+        $assertionNotOnOrAfter = $auth->getLastAssertionNotOnOrAfter();
+    
+        // If null, try manually parsing the raw XML
+        if ($assertionNotOnOrAfter === null) {
+            try {
+                $responseXml = $auth->getLastResponseXml();
+    
+                libxml_use_internal_errors(true);
+                $xml = new \SimpleXMLElement($responseXml);
+                $xml->registerXPathNamespace('saml', 'urn:oasis:names:tc:SAML:2.0:assertion');
+    
+                $conditions = $xml->xpath('//saml:Conditions');
+    
+                if (!empty($conditions) && isset($conditions[0]['NotOnOrAfter'])) {
+                    $assertionNotOnOrAfter = (string) $conditions[0]['NotOnOrAfter'];
+                    \Log::debug("Manually extracted NotOnOrAfter: " . $assertionNotOnOrAfter);
+                }
+            } catch (\Exception $e) {
+                \Log::error("Failed to extract NotOnOrAfter manually: " . $e->getMessage());
+            }
+        }
+    
         return [
             'attributes' => $auth->getAttributes(),
             'attributesWithFriendlyName' => $auth->getAttributesWithFriendlyName(),
@@ -397,7 +420,7 @@ class Saml
             'sessionIndex' => $auth->getSessionIndex(),
             'sessionExpiration' => $auth->getSessionExpiration(),
             'nonce' => $auth->getLastAssertionId(),
-            'assertionNotOnOrAfter' => $auth->getLastAssertionNotOnOrAfter(),
+            'assertionNotOnOrAfter' => $assertionNotOnOrAfter,
         ];
     }
 
