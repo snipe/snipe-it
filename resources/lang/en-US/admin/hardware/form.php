@@ -56,6 +56,7 @@ return [
     'asset_location_update_actual' => 'Update only actual location',
     'asset_not_deployable' => 'That asset status is not deployable. This asset cannot be checked out.',
     'asset_not_deployable_checkin' => 'That asset status is not deployable. Using this status label will checkin the asset.',
+    'bulk_asset_undeployable' => 'Asset in this bulk checkout request is undeployable.|[2,*]Assets in this bulk checkout request are undeployable.',
     'asset_deployable' => 'This asset can be checked out.',
     'processing_spinner' => 'Processing... (This might take a bit of time on large files)',
     'processing' => 'Processing... ',
