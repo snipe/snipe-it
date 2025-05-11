@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Helpers\StorageHelper;
+use App\Http\Transformers\UploadedFilesTransformer;
+use App\Models\Asset;
 use Illuminate\Support\Facades\Storage;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -35,131 +37,118 @@ class AssetModelFilesController extends Controller
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function store(UploadFileRequest $request, $assetModelId = null) : JsonResponse
+    public function store(UploadFileRequest $request, AssetModel $model) : JsonResponse
     {
-        // Start by checking if the asset being acted upon exists
-        if (! $assetModel = AssetModel::find($assetModelId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.does_not_exist')), 404);
-        }
-
+        \Log::error('model files controller touched');
         // Make sure we are allowed to update this asset
-        $this->authorize('update', $assetModel);
+        $this->authorize('update', $model);
 
-            if ($request->hasFile('file')) {
-            // If the file storage directory doesn't exist; create it
-            if (! Storage::exists('private_uploads/assetmodels')) {
-                Storage::makeDirectory('private_uploads/assetmodels', 775);
-            }
 
-            // Loop over the attached files and add them to the asset
-            foreach ($request->file('file') as $file) {
-                $file_name = $request->handleFile('private_uploads/assetmodels/','model-'.$assetModel->id, $file);
-                
-                $assetModel->logUpload($file_name, e($request->get('notes')));
-            }
 
-            // All done - report success
-            return response()->json(Helper::formatStandardApiResponse('success', $assetModel, trans('admin/models/message.upload.success')));
+        if ($request->hasFile('file')) {
+        // If the file storage directory doesn't exist, create it
+        if (! Storage::exists('private_uploads/assetmodels')) {
+            Storage::makeDirectory('private_uploads/assetmodels', 775);
         }
 
-        // We only reach here if no files were included in the POST, so tell the user this
+        // Loop over the attached files and add them to the asset
+        foreach ($request->file('file') as $file) {
+            $file_name = $request->handleFile('private_uploads/assetmodels/','model-'.$model->id, $file);
+            $files[] = $file_name;
+            $model->logUpload($file_name, $request->get('notes'));
+            \Log::error($file_name);
+        }
+            $files = Actionlog::select('action_logs.*')->where('action_type', '=', 'uploaded')
+                ->where('item_type', '=', AssetModel::class)
+                ->where('item_id', '=', $model->id)->whereIn('filename', $files)
+                ->get();
+
+            return response()->json(Helper::formatStandardApiResponse('success', (new UploadedFilesTransformer())->transformFilesArray($files, count($files)), trans('admin/hardware/message.upload.success')));
+        }
+
+        // No files were submitted
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.upload.nofiles')), 500);
     }
 
     /**
      * List the files for an asset.
      *
-     * @param  int $assetmodel
+     * @param  AssetModel $model
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function list($assetmodel_id) : JsonResponse | array
+    public function list(AssetModel $model) : JsonResponse | array
     {
-        // Start by checking if the asset being acted upon exists
-        if (! $assetModel = AssetModel::find($assetmodel_id)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.does_not_exist')), 404);
-        }
 
-            $assetmodel = AssetModel::with('uploads')->find($assetmodel_id);
-            $this->authorize('view', $assetmodel);
-            return (new AssetModelsTransformer)->transformAssetModelFiles($assetmodel, $assetmodel->uploads()->count());
+            $assetmodel = AssetModel::with('uploads')->find($model);
+            $this->authorize('view', $model);
+            return (new AssetModelsTransformer)->transformAssetModelFiles($model, $model->uploads()->count());
     }
 
     /**
      * Check for permissions and display the file.
      *
-     * @param  int $assetModelId
+     * @param  AssetModel $model
      * @param  int $fileId
      * @return \Illuminate\Http\JsonResponse
      * @throws \Illuminate\Auth\Access\AuthorizationException
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function show($assetModelId = null, $fileId = null) : JsonResponse | StreamedResponse | Storage | StorageHelper | BinaryFileResponse
+    public function show(AssetModel $model, $fileId = null) : JsonResponse | StreamedResponse | Storage | StorageHelper | BinaryFileResponse
     {
-        // Start by checking if the asset being acted upon exists
-        if (! $assetModel = AssetModel::find($assetModelId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.does_not_exist')), 404);
+
+        $this->authorize('view', $model);
+
+        // Check that the file being requested exists for the asset
+        if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $model->id)->find($fileId)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.no_match', ['id' => $fileId])), 404);
         }
 
-        // the asset is valid
-        if (isset($assetModel->id)) {
-            $this->authorize('view', $assetModel);
+        // Form the full filename with path
+        $file = 'private_uploads/assetmodels/'.$log->filename;
+        Log::debug('Checking for '.$file);
 
-            // Check that the file being requested exists for the asset
-            if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $assetModel->id)->find($fileId)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.no_match', ['id' => $fileId])), 404);
-            }
-
-            // Form the full filename with path
-            $file = 'private_uploads/assetmodels/'.$log->filename;
-            Log::debug('Checking for '.$file);
-
-            if ($log->action_type == 'audit') {
-                $file = 'private_uploads/audits/'.$log->filename;
-            }
-
-            // Check the file actually exists on the filesystem
-            if (! Storage::exists($file)) {
-                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.does_not_exist', ['id' => $fileId])), 404);
-            }
-
-            if (request('inline') == 'true') {
-
-                $headers = [
-                    'Content-Disposition' => 'inline',
-                ];
-
-                return Storage::download($file, $log->filename, $headers);
-            }
-
-            return StorageHelper::downloader($file);
+        if ($log->action_type == 'audit') {
+            $file = 'private_uploads/audits/'.$log->filename;
         }
 
+        // Check the file actually exists on the filesystem
+        if (! Storage::exists($file)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.does_not_exist', ['id' => $fileId])), 404);
+        }
+
+        if (request('inline') == 'true') {
+
+            $headers = [
+                'Content-Disposition' => 'inline',
+            ];
+
+            return Storage::download($file, $log->filename, $headers);
+        }
+
+        return StorageHelper::downloader($file);
         // Send back an error message
+
+        //@TODO: respond if file doesn't exist
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.error', ['id' => $fileId])), 500);
     }
 
     /**
      * Delete the associated file
      *
-     * @param  int $assetModelId
+     * @param  AssetModel $model
      * @param  int $fileId
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function destroy($assetModelId = null, $fileId = null) : JsonResponse
+    public function destroy(AssetModel $model, $fileId = null) : JsonResponse
     {
-        // Start by checking if the asset being acted upon exists
-        if (! $assetModel = AssetModel::find($assetModelId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.does_not_exist')), 404);
-        }
-
         $rel_path = 'private_uploads/assetmodels';
 
         // the asset is valid
-        if (isset($assetModel->id)) {
-            $this->authorize('update', $assetModel);
+        if (isset($model->id)) {
+            $this->authorize('update', $model);
 
             // Check for the file
             $log = Actionlog::find($fileId);
