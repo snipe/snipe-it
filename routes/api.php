@@ -563,14 +563,14 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
           ]
         )->name('api.assets.files.index');
 
-        Route::get('{asset_id}/file/{file_id}',
+        Route::get('{asset}/file/{file_id}',
           [
               Api\AssetFilesController::class,
               'show'
           ]
         )->name('api.assets.files.show');
 
-        Route::delete('{asset_id}/file/{file_id}',
+        Route::delete('{asset}/file/{file_id}',
           [
               Api\AssetFilesController::class,
               'destroy'
@@ -846,28 +846,28 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.models.restore');
 
-            Route::post('{model_id}/files',
+            Route::post('{model}/files',
             [
                 Api\AssetModelFilesController::class,
                 'store'
             ]
             )->name('api.models.files.store');
 
-            Route::get('{model_id}/files',
+            Route::get('{model}/files',
             [
                 Api\AssetModelFilesController::class,
                 'list'
             ]
             )->name('api.models.files.index');
 
-            Route::get('{model_id}/file/{file_id}',
+            Route::get('{model}/file/{file_id}',
             [
                 Api\AssetModelFilesController::class,
                 'show'
             ]
             )->name('api.models.files.show');
 
-            Route::delete('{model_id}/file/{file_id}',
+            Route::delete('{model}/file/{file_id}',
             [
                 Api\AssetModelFilesController::class,
                 'destroy'
