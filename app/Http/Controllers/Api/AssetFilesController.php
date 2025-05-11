@@ -36,18 +36,16 @@ class AssetFilesController extends Controller
      * @since [v6.0]
      * @author [T. Scarsbrook] [<snipe@scarzybrook.co.uk>]
      */
-    public function store(UploadFileRequest $request, $assetId = null) : JsonResponse
+    public function store(UploadFileRequest $request, Asset $asset) : JsonResponse
     {
-        // Start by checking if the asset being acted upon exists
-        if (! $asset = Asset::find($assetId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 404);
-        }
+        \Log::error('asset files controller touched');
+
 
         // Make sure we are allowed to update this asset
         $this->authorize('update', $asset);
 
 	    if ($request->hasFile('file')) {
-            // If the file storage directory doesn't exist; create it
+            // If the file storage directory doesn't exist, create it
             if (! Storage::exists('private_uploads/assets')) {
                 Storage::makeDirectory('private_uploads/assets', 775);
             }
@@ -55,12 +53,12 @@ class AssetFilesController extends Controller
             // Loop over the attached files and add them to the asset
             foreach ($request->file('file') as $file) {
                 $file_name = $request->handleFile('private_uploads/assets/','hardware-'.$asset->id, $file);
-                
+                $files[] = $file_name;
                 $asset->logUpload($file_name, e($request->get('notes')));
             }
-
+            $files = Actionlog::select('action_logs.*')->where('action_type', '=', 'uploaded')->where('item_type', '=', Asset::class)->where('item_id', '=', $asset->id)->whereIn('filename', $files)->get();
             // All done - report success
-            return response()->json(Helper::formatStandardApiResponse('success', $asset, trans('admin/hardware/message.upload.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new UploadedFilesTransformer())->transformFilesArray($files, count($files)), trans('admin/hardware/message.upload.success')));
         }
 
         // We only reach here if no files were included in the POST, so tell the user this
