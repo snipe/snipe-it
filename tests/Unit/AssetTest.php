@@ -239,5 +239,11 @@ class AssetTest extends TestCase
         $category->save();
 
         $this->assertFalse($asset->refresh()->getImageUrl());
+
+        // handles case where model does not exist
+        $asset->model_id = 9999999;
+        $asset->forceSave();
+
+        $this->assertFalse($asset->refresh()->getImageUrl());
     }
 }
