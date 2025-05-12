@@ -41,6 +41,13 @@ class CategoryEditForm extends Component
         $this->sendCheckInEmail = $this->eulaText || $this->useDefaultEula ? 1 : $this->originalSendCheckInEmailValue;
     }
 
+    public function shouldUncheckDefaultEulaBox()
+    {
+        if($this->eulaText!='' && $this->defaultEulaText=='') {
+            return $this->useDefaultEula = false;
+        }
+    }
+
     public function getShouldDisplayEmailMessageProperty(): bool
     {
         return $this->eulaText || $this->useDefaultEula;
