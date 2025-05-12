@@ -4,27 +4,6 @@
 */
 
 /**
- * Locale macro
- * Generates the dropdown menu of available languages
- */
-Form::macro('locales', function ($name = 'locale', $selected = null, $class = null, $id = null) {
-
-    $idclause = (!is_null($id)) ? $id : '';
-
-    $select = '<select name="'.$name.'" class="'.$class.'" style="width:100%"'.$idclause.' aria-label="'.$name.'" data-placeholder="'.trans('localizations.select_language').'">';
-    $select .= '<option value=""  role="option">'.trans('localizations.select_language').'</option>';
-
-    // Pull the autoglossonym array from the localizations translation file
-    foreach (trans('localizations.languages') as $abbr => $locale) {
-        $select .= '<option value="'.$abbr.'"'.(($selected == $abbr) ? ' selected="selected" role="option" aria-selected="true"' : ' aria-selected="false"').'>'.$locale.'</option> ';
-    }
-
-    $select .= '</select>';
-
-    return $select;
-});
-
-/**
  * Country macro
  * Generates the dropdown menu of countries for the profile form
  */
