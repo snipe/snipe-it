@@ -204,17 +204,9 @@ class AssetTest extends TestCase
     {
         $urlBase = config('filesystems.disks.public.url');
 
-        $category = Category::factory()->create([
-            'image' => 'category-image.jpg',
-        ]);
-
-        $model = AssetModel::factory()->for($category)->create([
-            'image' => 'asset-model-image.jpg',
-        ]);
-
-        $asset = Asset::factory()->for($model, 'model')->create([
-            'image' => 'asset-image.jpg',
-        ]);
+        $category = Category::factory()->create(['image' => 'category-image.jpg']);
+        $model = AssetModel::factory()->for($category)->create(['image' => 'asset-model-image.jpg']);
+        $asset = Asset::factory()->for($model, 'model')->create(['image' => 'asset-image.jpg']);
 
         $this->assertEquals(
             "{$urlBase}/assets/asset-image.jpg",
