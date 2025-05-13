@@ -35,12 +35,14 @@
                             type="checkbox"
                             name="use_default_eula"
                             value="0"
-                            wire:model.live="shouldUncheckDefaultEulaBox"
+                            wire:="shouldUncheckDefaultEulaBox"
                             aria-label="use_default_eula"
                     />
                     <span>{!! trans('admin/categories/general.use_default_eula_disabled') !!}</span>
                 </label>
             @else
+                {{--so if we delete the eula text, then it will skip the one above, and then get to this.
+                Putting us back where we started--}}
                 <label class="form-control form-control--disabled">
                     <input
                         type="checkbox"

@@ -32,7 +32,7 @@ class CategoryEditForm extends Component
         return view('livewire.category-edit-form');
     }
 
-    public function updated($property, $value)
+    public function updated($property, $value) //this is what's throwing us off i think. not quite sure what this is doing.
     {
         if (! in_array($property, ['eulaText', 'useDefaultEula'])) {
             return;
