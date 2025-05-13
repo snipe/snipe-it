@@ -39,11 +39,8 @@ class AssetModelFilesController extends Controller
      */
     public function store(UploadFileRequest $request, AssetModel $model) : JsonResponse
     {
-        \Log::error('model files controller touched');
-        // Make sure we are allowed to update this asset
+
         $this->authorize('update', $model);
-
-
 
         if ($request->hasFile('file')) {
         // If the file storage directory doesn't exist, create it
@@ -63,7 +60,7 @@ class AssetModelFilesController extends Controller
                 ->where('item_id', '=', $model->id)->whereIn('filename', $files)
                 ->get();
 
-            return response()->json(Helper::formatStandardApiResponse('success', (new UploadedFilesTransformer())->transformFilesArray($files, count($files)), trans('admin/hardware/message.upload.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new UploadedFilesTransformer())->transformFiles($files, count($files)), trans('admin/hardware/message.upload.success')));
         }
 
         // No files were submitted
