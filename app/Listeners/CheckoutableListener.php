@@ -135,9 +135,6 @@ class CheckoutableListener
         }
     }
 
-
-
-
     /**
      * Notify the user and post to webhook about the checked in checkoutable
      */    
@@ -213,7 +210,6 @@ class CheckoutableListener
         if ($shouldSendWebhookNotification) {
             // Send Webhook notification
             try {
-                
                 if ($this->newMicrosoftTeamsWebhookEnabled()) {
                     $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
                     $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
