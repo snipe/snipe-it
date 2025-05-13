@@ -46,88 +46,92 @@ class CheckoutableListener
      */
     public function onCheckedOut($event)
     {
-        if (!$this->shouldSendEmailNotifications($event->checkoutable)) {
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
             return;
         }
 
-        /**
-         * Make a checkout acceptance and attach it in the notification
-         */
-        $settings = Setting::getSettings();
+        $shouldSendEmailNotifications = $this->shouldSendEmailNotifications($event->checkoutable);
+        $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
+
+        if (!$shouldSendEmailNotifications && !$shouldSendWebhookNotification) {
+            return;
+        }
+
         $acceptance = $this->getCheckoutAcceptance($event);
-        $adminCcEmailsArray = [];
 
-        if ($settings->admin_cc_email !== '') {
-            $adminCcEmail = $settings->admin_cc_email;
-            $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
-        }
-        $ccEmails = array_filter($adminCcEmailsArray);
-        $mailable = $this->getCheckoutMailType($event, $acceptance);
-        $notifiable = $this->getNotifiableUsers($event);
+        if ($shouldSendEmailNotifications) {
+            $settings = Setting::getSettings();
+            $adminCcEmailsArray = [];
 
-
-        // Send email notifications
-        try {
-            /**
-             * Send an email if any of the following conditions are met:
-             * 1. The asset requires acceptance
-             * 2. The item has a EULA
-             * 3. The item should send an email at check-in/check-out
-             * 4. If the admin CC email is set, even if the item being checked out doesn't have an email address (location, etc)
-             */
-
-            if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                $this->checkoutableShouldSendEmail($event)) {
-
-
-                // Send a checkout email to the admin CC addresses, even if the target has no email
-                if (!empty($ccEmails)) {
-                    Mail::to($ccEmails)->send($mailable);
-                    Log::info('Checkout Mail sent to CC addresses');
-                }
-
-                // Send a checkout email to the target if it has an email
-                if (!empty($notifiable->email)) {
-                    Mail::to($notifiable)->send($mailable);
-                    Log::info('Checkout Mail sent to checkout target');
-                }
-
+            if ($settings->admin_cc_email !== '') {
+                $adminCcEmail = $settings->admin_cc_email;
+                $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
             }
-        } catch (ClientException $e) {
-            Log::debug("Exception caught during checkout email: " . $e->getMessage());
-        } catch (Exception $e) {
-            Log::debug("Exception caught during checkout email: " . $e->getMessage());
+            $ccEmails = array_filter($adminCcEmailsArray);
+            $mailable = $this->getCheckoutMailType($event, $acceptance);
+            $notifiable = $this->getNotifiableUsers($event);
+
+
+            // Send email notifications
+            try {
+                /**
+                 * Send an email if any of the following conditions are met:
+                 * 1. The asset requires acceptance
+                 * 2. The item has a EULA
+                 * 3. The item should send an email at check-in/check-out
+                 * 4. If the admin CC email is set, even if the item being checked out doesn't have an email address (location, etc)
+                 */
+
+                if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
+                    $this->checkoutableShouldSendEmail($event)) {
+
+
+                    // Send a checkout email to the admin CC addresses, even if the target has no email
+                    if (!empty($ccEmails)) {
+                        Mail::to($ccEmails)->send($mailable);
+                        Log::info('Checkout Mail sent to CC addresses');
+                    }
+
+                    // Send a checkout email to the target if it has an email
+                    if (!empty($notifiable->email)) {
+                        Mail::to($notifiable)->send($mailable);
+                        Log::info('Checkout Mail sent to checkout target');
+                    }
+
+                }
+            } catch (ClientException $e) {
+                Log::debug("Exception caught during checkout email: " . $e->getMessage());
+            } catch (Exception $e) {
+                Log::debug("Exception caught during checkout email: " . $e->getMessage());
+            }
         }
 
-        // Send notification
-        try {
-            if ($this->shouldSendWebhookNotification()) {
+        if ($shouldSendWebhookNotification) {
+            try {
                 if ($this->newMicrosoftTeamsWebhookEnabled()) {
                     $message = $this->getCheckoutNotification($event)->toMicrosoftTeams();
                     $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
                     $notification->success()->sendMessage($message[0], $message[1]);  // Send the message to Microsoft Teams
                 } else {
-
                     Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckoutNotification($event, $acceptance));
                 }
+            } catch (ClientException $e) {
+                if (strpos($e->getMessage(), 'channel_not_found') !== false) {
+                    Log::warning(Setting::getSettings()->webhook_selected . " notification failed: " . $e->getMessage());
+                    return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_channel_not_found'));
+                } else {
+                    Log::error("ClientException caught during checkin notification: " . $e->getMessage());
+                }
+                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
+            } catch (Exception $e) {
+                Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
+                    'error' => $e->getMessage(),
+                    'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
+                    'event' => $event,
+                ]);
+                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
             }
-        } catch (ClientException $e) {
-            if (strpos($e->getMessage(), 'channel_not_found') !== false) {
-                Log::warning(Setting::getSettings()->webhook_selected." notification failed: " . $e->getMessage());
-                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_channel_not_found') );
-            }
-            else {
-                Log::error("ClientException caught during checkin notification: " . $e->getMessage());
-            }
-            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_fail') );
-        } catch (Exception $e) {
-            Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
-                'error' => $e->getMessage(),
-                'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
-                'event' => $event,
-            ]);
-            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
         }
     }
 
@@ -141,65 +145,75 @@ class CheckoutableListener
     {
         Log::debug('onCheckedIn in the Checkoutable listener fired');
 
-        if (!$this->shouldSendEmailNotifications($event->checkoutable)) {
+        if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
             return;
         }
 
-        /**
-         * Send the appropriate notification
-         */
-        if ($event->checkedOutTo && $event->checkoutable){
-            $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id)
-                                            ->where('assigned_to_id', $event->checkedOutTo->id)
-                                            ->get();
+        $shouldSendEmailNotifications = $this->shouldSendEmailNotifications($event->checkoutable);
+        $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
 
-            foreach($acceptances as $acceptance){
-                if($acceptance->isPending()){
-                    $acceptance->delete();
+        if (!$shouldSendEmailNotifications && !$shouldSendWebhookNotification) {
+            return;
+        }
+
+        if ($shouldSendEmailNotifications) {
+            /**
+             * Send the appropriate notification
+             */
+            if ($event->checkedOutTo && $event->checkoutable) {
+                $acceptances = CheckoutAcceptance::where('checkoutable_id', $event->checkoutable->id)
+                    ->where('assigned_to_id', $event->checkedOutTo->id)
+                    ->get();
+
+                foreach ($acceptances as $acceptance) {
+                    if ($acceptance->isPending()) {
+                        $acceptance->delete();
+                    }
                 }
             }
-        }
-        $settings = Setting::getSettings();
-        $adminCcEmailsArray = [];
+            $settings = Setting::getSettings();
+            $adminCcEmailsArray = [];
 
-        if($settings->admin_cc_email !== '') {
-            $adminCcEmail = $settings->admin_cc_email;
-            $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
-        }
-        $ccEmails = array_filter($adminCcEmailsArray);
-        $mailable =  $this->getCheckinMailType($event);
-        $notifiable = $this->getNotifiableUsers($event);
-
-        // Send email notifications
-        try {
-            /**
-             * Send an email if any of the following conditions are met:
-             * 1. The asset requires acceptance
-             * 2. The item has a EULA
-             * 3. The item should send an email at check-in/check-out
-             * 4. If the admin CC email is set, even if the item being checked in doesn't have an email address (location, etc)
-             */
-
-            // Send a checkout email to the admin's CC addresses, even if the target has no email
-            if (!empty($ccEmails)) {
-                Mail::to($ccEmails)->send($mailable);
-                Log::info('Checkin Mail sent to CC addresses');
+            if ($settings->admin_cc_email !== '') {
+                $adminCcEmail = $settings->admin_cc_email;
+                $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
             }
+            $ccEmails = array_filter($adminCcEmailsArray);
+            $mailable = $this->getCheckinMailType($event);
+            $notifiable = $this->getNotifiableUsers($event);
 
-            // Send a checkout email to the target if it has an email
-            if (!empty($notifiable->email)) {
-                Mail::to($notifiable)->send($mailable);
-                Log::info('Checkin Mail sent to checkout target');
+            // Send email notifications
+            try {
+                /**
+                 * Send an email if any of the following conditions are met:
+                 * 1. The asset requires acceptance
+                 * 2. The item has a EULA
+                 * 3. The item should send an email at check-in/check-out
+                 * 4. If the admin CC email is set, even if the item being checked in doesn't have an email address (location, etc)
+                 */
+
+                // Send a checkout email to the admin's CC addresses, even if the target has no email
+                if (!empty($ccEmails)) {
+                    Mail::to($ccEmails)->send($mailable);
+                    Log::info('Checkin Mail sent to CC addresses');
+                }
+
+                // Send a checkout email to the target if it has an email
+                if (!empty($notifiable->email)) {
+                    Mail::to($notifiable)->send($mailable);
+                    Log::info('Checkin Mail sent to checkout target');
+                }
+            } catch (ClientException $e) {
+                Log::debug("Exception caught during checkin email: " . $e->getMessage());
+            } catch (Exception $e) {
+                Log::debug("Exception caught during checkin email: " . $e->getMessage());
             }
-        } catch (ClientException $e) {
-            Log::debug("Exception caught during checkin email: " . $e->getMessage());
-        } catch (Exception $e) {
-            Log::debug("Exception caught during checkin email: " . $e->getMessage());
         }
 
-        // Send Webhook notification
-        try {
-            if ($this->shouldSendWebhookNotification()) {
+        if ($shouldSendWebhookNotification) {
+            // Send Webhook notification
+            try {
+                
                 if ($this->newMicrosoftTeamsWebhookEnabled()) {
                     $message = $this->getCheckinNotification($event)->toMicrosoftTeams();
                     $notification = new TeamsNotification(Setting::getSettings()->webhook_endpoint);
@@ -208,23 +222,22 @@ class CheckoutableListener
                     Notification::route($this->webhookSelected(), Setting::getSettings()->webhook_endpoint)
                         ->notify($this->getCheckinNotification($event));
                 }
-            }
-        } catch (ClientException $e) {
-            if (strpos($e->getMessage(), 'channel_not_found') !== false) {
-                Log::warning(Setting::getSettings()->webhook_selected." notification failed: " . $e->getMessage());
-                return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_channel_not_found') );
-            }
-            else {
-                Log::error("ClientException caught during checkin notification: " . $e->getMessage());
+            } catch (ClientException $e) {
+                if (strpos($e->getMessage(), 'channel_not_found') !== false) {
+                    Log::warning(Setting::getSettings()->webhook_selected . " notification failed: " . $e->getMessage());
+                    return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_channel_not_found'));
+                } else {
+                    Log::error("ClientException caught during checkin notification: " . $e->getMessage());
+                    return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
+                }
+            } catch (Exception $e) {
+                Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
+                    'error' => $e->getMessage(),
+                    'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
+                    'event' => $event,
+                ]);
                 return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
             }
-        } catch (Exception $e) {
-            Log::warning(ucfirst(Setting::getSettings()->webhook_selected) . ' webhook notification failed:', [
-                'error' => $e->getMessage(),
-                'webhook_endpoint' => Setting::getSettings()->webhook_endpoint,
-                'event' => $event,
-            ]);
-            return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) .trans('admin/settings/message.webhook.webhook_fail'));
         }
     }      
 
@@ -383,11 +396,13 @@ class CheckoutableListener
         ); 
     }
 
+    private function shouldNotSendAnyNotifications($checkoutable): bool
+    {
+        return in_array(get_class($checkoutable), $this->skipNotificationsFor);
+    }
+
     private function shouldSendEmailNotifications($checkoutable): bool
     {
-        if(in_array(get_class($checkoutable), $this->skipNotificationsFor)) {
-            return false;
-        }
         //runs a check if the category wants to send checkin/checkout emails to users
         $category = match (true) {
             $checkoutable instanceof Asset => $checkoutable->model->category,
