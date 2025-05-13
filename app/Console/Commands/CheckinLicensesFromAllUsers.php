@@ -74,18 +74,19 @@ class CheckinLicensesFromAllUsers extends Command
             $this->info($seat->user->username.' has a license seat for '.$license->name);
             $seat->assigned_to = null;
 
+            // Log the checkin
+            $seat->setLogTarget($seat->user);
+            $seat->setLogNote('Checked in via cli tool');
+            $seat->setLogAction(ActionType::CheckinFrom);
             if ($seat->save()) {
 
                 // Override the email address so we don't notify on checkin
+                // TODO - I don't see any *actual* notification firing - should we?
+                // or should we delete the following 3 lines?
                 if (! $notify) {
                     $seat->user->email = null;
                 }
 
-                // Log the checkin
-                $seat->setLogTarget($seat->user);
-                $seat->setLogNote('Checked in via cli tool');
-                $seat->setLogAction(ActionType::CheckinFrom);
-                $seat->save(); //this is going to be a dual-save, do we want that?!
 //                $seat->logCheckin($seat->user, 'Checked in via cli tool');
             }
         }
