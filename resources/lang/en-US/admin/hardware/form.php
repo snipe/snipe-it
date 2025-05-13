@@ -44,6 +44,7 @@ return [
     'redirect_to_checked_out_to'   => 'Go to Checked Out to',
     'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Serial',
+    'serial_required'	=> 'This asset model requires a serial number',
     'status'			=> 'Status',
     'tag'				=> 'Asset Tag',
     'update'			=> 'Asset Update',
