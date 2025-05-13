@@ -45,6 +45,7 @@ return [
     'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Serial',
     'serial_required'	=> 'This asset model requires a serial number',
+    'serial_required_post_model_update'	=> ':asset_model have been updated to require a serial number. Please add a serial number for this asset.',
     'status'			=> 'Status',
     'tag'				=> 'Asset Tag',
     'update'			=> 'Asset Update',
