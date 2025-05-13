@@ -43,8 +43,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     protected $table = 'users';
     protected $injectUniqueIdentifier = true;
 
-    public static array $hide_changes = ['password', 'remember_token', 'two_factor_secret', 'reset_password_code', 'persist_code'];
-
     protected $fillable = [
         'activated',
         'address',

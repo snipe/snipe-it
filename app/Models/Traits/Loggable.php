@@ -72,7 +72,7 @@ trait Loggable
                     $changed[$key]['old'] = $model->getRawOriginal()[$key];
                     $changed[$key]['new'] = $model->getAttributes()[$key];
 
-                    if (property_exists(self::class, 'hide_changes') && in_array($key, self::$hide_changes)) {
+                    if (property_exists($model, 'hidden') && in_array($key, $model->hidden)) {
                         $changed[$key]['old'] = '*************';
                         $changed[$key]['new'] = '*************';
                     }
