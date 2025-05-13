@@ -121,7 +121,13 @@ class Handler extends ExceptionHandler
 
             // This handles API validation exceptions that happen at the Form Request level, so they
             // never even get to the controller where we normally  nicely format JSON responses
-            return response()->json(Helper::formatStandardApiResponse('error', null,  $e->errors()), 200);
+            if ($e instanceof ValidationException) {
+                $response = $this->invalidJson($request, $e);
+                return response()->json(Helper::formatStandardApiResponse('error', null,  $e->errors()), 200);
+            }
+
+            return response()->json(Helper::formatStandardApiResponse('error', null,  'Undefined exception'), 200);
+
 
 
         }
