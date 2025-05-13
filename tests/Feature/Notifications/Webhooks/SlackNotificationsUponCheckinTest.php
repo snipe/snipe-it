@@ -2,6 +2,8 @@
 
 namespace Tests\Feature\Notifications\Webhooks;
 
+use App\Models\AssetModel;
+use App\Models\Category;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use App\Events\CheckoutableCheckedIn;
@@ -93,6 +95,22 @@ class SlackNotificationsUponCheckinTest extends TestCase
         );
 
         $this->assertNoSlackNotificationSent(CheckinAssetNotification::class);
+    }
+
+    public function testSlackNotificationIsStillSentWhenCategoryEmailIsNotSetToSendEmails()
+    {
+        $this->settings->enableSlackWebhook();
+
+        $category = Category::factory()->create(['checkin_email' => false]);
+        $assetModel = AssetModel::factory()->create(['category_id' => $category->id]);
+        $asset = Asset::factory()->assignedToUser()->create(['model_id' => $assetModel->id]);
+
+        $this->fireCheckInEvent(
+            $asset,
+            User::factory()->create(),
+        );
+
+        $this->assertSlackNotificationSent(CheckinAssetNotification::class);
     }
 
     public function testComponentCheckinDoesNotSendSlackNotification()
