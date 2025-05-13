@@ -46,7 +46,7 @@ class CheckoutableListener
      */
     public function onCheckedOut($event)
     {
-        if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
+        if ($this->shouldNotSendEmailNotifications($event->checkoutable)) {
             return;
         }
 
@@ -141,7 +141,7 @@ class CheckoutableListener
     {
         Log::debug('onCheckedIn in the Checkoutable listener fired');
 
-        if ($this->shouldNotSendAnyNotifications($event->checkoutable)) {
+        if ($this->shouldNotSendEmailNotifications($event->checkoutable)) {
             return;
         }
 
@@ -383,7 +383,7 @@ class CheckoutableListener
         ); 
     }
 
-    private function shouldNotSendAnyNotifications($checkoutable): bool
+    private function shouldNotSendEmailNotifications($checkoutable): bool
     {
         if(in_array(get_class($checkoutable), $this->skipNotificationsFor)) {
             return true;
