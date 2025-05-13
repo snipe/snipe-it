@@ -45,7 +45,6 @@ class UploadedFilesTransformer
             ] : null,
             'note' => e($file->note),
             'created_at' => Helper::getFormattedDateObject($file->created_at, 'datetime'),
-            'updated_at' => Helper::getFormattedDateObject($file->updated_at, 'datetime'),
             'deleted_at' => Helper::getFormattedDateObject($file->deleted_at, 'datetime'),
         ];
 
@@ -57,14 +56,5 @@ class UploadedFilesTransformer
         return $array;
     }
 
-    public function transformFilesArray(Collection $files, $total)
-    {
-        $array = [];
-        foreach ($files as $file) {
-            $array[] = self::transformFile($file);
-        }
-
-        return $array;
-    }
 
 }
