@@ -405,12 +405,9 @@
                                         </ul>
                                     </div>
                                 @endif
-                                    @if  ($snipeSettings->qr_code=='1')
-                                        <div class="col-md-12 text-center" style="padding-top: 15px;">
-                                            <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail" style="height: 150px; width: 150px; margin-right: 10px;" alt="QR code for {{ $asset->getDisplayNameAttribute() }}">
-                                        </div>
-                                    @endif
-
+                                    <div class="col-md-12 text-center" style="padding-top: 15px;">
+                                        <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/qr_code" class="img-thumbnail" style="height: 150px; width: 150px; margin-right: 10px;" alt="QR code for {{ $asset->getDisplayNameAttribute() }}">
+                                    </div>
                                 <br><br>
                             </div>
 
@@ -702,7 +699,7 @@
                                     </div>
 
                                     <!-- byod -->
-                                    <div class="row">
+                                    <div class="row byod">
                                         <div class="col-md-3">
                                             <strong>{{ trans('general.byod') }}</strong>
                                         </div>

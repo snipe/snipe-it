@@ -393,6 +393,8 @@ Context | Request Context
     'new_license'           => 'Yeni Lisans',
     'new_accessory'         => 'Yeni Aksesuar',
     'new_consumable'        => 'Yeni Sarf Malzemesi',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Daralt',
     'assigned'              => 'Atandı',
     'asset_count'           => 'Varlık Adedi',

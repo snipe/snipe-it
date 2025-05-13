@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Licență nouă',
     'new_accessory'         => 'Accesoriu nou',
     'new_consumable'        => 'Consumul nou',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Restrânge',
     'assigned'              => 'Atribuit',
     'asset_count'           => 'Numărul de active',

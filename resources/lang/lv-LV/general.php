@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Jauna licence',
     'new_accessory'         => 'Jauns piederums',
     'new_consumable'        => 'Jauns palīgmateriāls',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Sakļaut',
     'assigned'              => 'Izsniegts',
     'asset_count'           => 'Inventāra skaits',

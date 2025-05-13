@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Nieuwe licentie',
     'new_accessory'         => 'Nieuwe accessoire',
     'new_consumable'        => 'Nieuw verbruiksartikel',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Samenvouwen',
     'assigned'              => 'Toegewezen',
     'asset_count'           => 'Asset aantal',

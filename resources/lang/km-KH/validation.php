@@ -172,6 +172,7 @@ return [
     'url' => 'វាល :attribute ត្រូវតែជា URL ត្រឹមត្រូវ។',
     'ulid' => 'វាល :attribute ត្រូវតែជា ULID ត្រឹមត្រូវ។',
     'uuid' => 'វាល :attribute ត្រូវតែជា UUID ត្រឹមត្រូវ។',
+    'fmcs_location' => 'Full multiple company support and location scoping is enabled in the Admin Settings, and the selected location and selected company are not compatible.',
 
 
     /*

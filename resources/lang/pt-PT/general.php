@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Nova Licença',
     'new_accessory'         => 'Novo Acessório',
     'new_consumable'        => 'Novo Consumível',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Esconder',
     'assigned'              => 'Atribuir',
     'asset_count'           => 'Contagem de Artigos',

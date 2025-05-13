@@ -172,6 +172,7 @@ return [
     'url' => 'Pole :attribute musí obsahovať správnu URL adresu.',
     'ulid' => 'Pole :attribute musí obsahovať platný ULID.',
     'uuid' => 'Pole :attribute musí obsahovať platný ULID.',
+    'fmcs_location' => 'Full multiple company support and location scoping is enabled in the Admin Settings, and the selected location and selected company are not compatible.',
 
 
     /*

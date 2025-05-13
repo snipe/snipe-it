@@ -39,4 +39,5 @@ return [
     'signed_by_finance_auditor' => 'Ditandatangan oleh (Pengaudit Kewangan):',
     'signed_by_location_manager' => 'Ditandatangan oleh (Pengurus Lokasi):',
     'signed_by'                 => 'Signed Off By:',
+    'clone'  					=> 'Clone Location',
 ];

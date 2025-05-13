@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Нова лиценца',
     'new_accessory'         => 'Нов додаток',
     'new_consumable'        => 'Нов потрошен',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Собери',
     'assigned'              => 'Доделено',
     'asset_count'           => 'Количина на средства',

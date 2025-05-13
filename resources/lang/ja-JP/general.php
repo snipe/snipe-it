@@ -390,6 +390,8 @@ return [
     'new_license'           => '新しいライセンス',
     'new_accessory'         => '新しい付属品',
     'new_consumable'        => '新しい消耗品',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => '折りたたむ',
     'assigned'              => '割り当て済み',
     'asset_count'           => '資産数',

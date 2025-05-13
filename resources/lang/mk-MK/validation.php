@@ -172,6 +172,7 @@ return [
     'url' => 'Полето :attribute мора да биде валидна URL.',
     'ulid' => 'Полето :attribute мора да биде валидна ULID.',
     'uuid' => 'Полето :attribute мора да биде валидна UUID.',
+    'fmcs_location' => 'Full multiple company support and location scoping is enabled in the Admin Settings, and the selected location and selected company are not compatible.',
 
 
     /*

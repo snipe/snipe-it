@@ -721,6 +721,8 @@ class Asset extends Depreciable
             return Storage::disk('public')->url(app('assets_upload_path').e($this->image));
         } elseif ($this->model && ! empty($this->model->image)) {
             return Storage::disk('public')->url(app('models_upload_path').e($this->model->image));
+        } elseif ($this->model->category && ! empty($this->model->category->image)) {
+            return Storage::disk('public')->url(app('categories_upload_path').e($this->model->category->image));
         }
 
         return false;

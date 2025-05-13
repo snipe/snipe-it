@@ -520,7 +520,7 @@ class AssetsController extends Controller
     {
         $settings = Setting::getSettings();
 
-        if (($settings->qr_code == '1') && ($settings->label2_2d_type !== 'none')) {
+        if ($settings->label2_2d_type !== 'none') {
 
             if ($asset) {
                 $size = Helper::barcodeDimensions($settings->label2_2d_type);
@@ -883,12 +883,12 @@ class AssetsController extends Controller
         $this->authorize('audit', Asset::class);
         $settings = Setting::getSettings();
 
-        // Validate custom fields on existing asset
-        $validator = Validator::make($asset->toArray(), $asset->customFieldValidationRules());
 
-        if ($validator->fails()) {
-            return redirect()->route('hardware.edit', $asset)
-                ->withErrors($validator);
+        // Invoke the validation to see if the audit will complete successfully
+        $asset->setRules($asset->getRules() + $asset->customFieldValidationRules());
+
+        if ($asset->isInvalid()) {
+            return redirect()->route('hardware.edit', $asset)->withErrors($asset->getErrors());
         }
 
         $dt = Carbon::now()->addMonths($settings->audit_interval)->toDateString();
@@ -899,6 +899,10 @@ class AssetsController extends Controller
     {
 
         $this->authorize('audit', Asset::class);
+
+        session()->put('redirect_option', $request->get('redirect_option'));
+        session()->put('other_redirect', 'audit');
+
 
         $originalValues = $asset->getRawOriginal();
 
@@ -949,7 +953,7 @@ class AssetsController extends Controller
         $asset->location_id = $request->input('location_id');
         $asset->setLogAction(ActionType::Audit);
         if ($asset->save()) {
-            return redirect()->route('assets.audit.due')->with('success', trans('admin/hardware/message.audit.success'));
+            return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))->with('success', trans('admin/hardware/message.audit.success'));
         }
 
         return redirect()->back()->withInput()->withErrors($asset->getErrors());

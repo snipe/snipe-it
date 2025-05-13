@@ -324,7 +324,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         $setting = Setting::getSettings();
 
-        if ($setting->name_display_format=='last_first') {
+        if ($setting?->name_display_format == 'last_first') {
             return ($this->last_name) ? $this->last_name.' '.$this->first_name : $this->first_name;
         }
         return $this->last_name ? $this->first_name.' '.$this->last_name : $this->first_name;

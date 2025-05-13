@@ -390,6 +390,8 @@ return [
     'new_license'           => 'Nauja licencija',
     'new_accessory'         => 'Naujas priedas',
     'new_consumable'        => 'Nauja eksploatacinė medžiaga',
+    'new_component'         => 'New Component',
+    'new_user'              => 'New User',
     'collapse'              => 'Sutraukti',
     'assigned'              => 'Priskirta',
     'asset_count'           => 'Turto kiekis',

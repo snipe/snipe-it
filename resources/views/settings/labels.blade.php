@@ -318,9 +318,9 @@
                                 <div class="col-md-3 text-right">
                                     <label for="label2_empty_row_count" class="control-label">{{ trans('admin/settings/general.empty_row_count') }}</label>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-9 col-xl-2 col-lg-2">
                                         <input
-                                                class="form-control col-md-2"
+                                                class="form-control"
                                                 aria-label="Empty Row Count"
                                                 name="label2_empty_row_count"
                                                 type="number"
@@ -329,8 +329,11 @@
                                                 max="5"
                                                 value="{{ old('label2_empty_row_count', $setting->label2_empty_row_count) }}"
                                         >
-                                    {!! $errors->first('label2_empty_row_count', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                </div>
+
+                                <div class="col-md-9 col-md-offset-3">
                                     <p class="help-block">{!! trans('admin/settings/general.empty_row_count_help') !!}</p>
+                                    {!! $errors->first('label2_empty_row_count', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
                                 </div>
                             </div>
                             <div class="col-md-9 col-md-offset-3" style="margin-bottom: 10px;">
