@@ -61,14 +61,12 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e)
     {
 
-
         // CSRF token mismatch error
         if ($e instanceof \Illuminate\Session\TokenMismatchException) {
             return redirect()->back()->with('error', trans('general.token_expired'));
         }
 
         // Invalid JSON exception
-        // TODO: don't understand why we have to do this when we have the invalidJson() method, below, but, well, whatever
         if ($e instanceof JsonException) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid JSON'), 422);
         }
@@ -88,8 +86,9 @@ class Handler extends ExceptionHandler
             return redirect()->back()->withInput()->with('error', trans('validation.date', ['attribute' => 'date']));
         }
 
+
         // Handle API requests that fail
-        if ($request->ajax() || $request->wantsJson()) {
+        if ($request->ajax() || $request->wantsJson() || $request->route()->named('api.*.files') ) {
 
             // Handle API requests that fail because Carbon cannot parse the date on validation (when a submitted date value is definitely not a date)
             if ($e instanceof InvalidFormatException) {
@@ -101,6 +100,7 @@ class Handler extends ExceptionHandler
                 $className = last(explode('\\', $e->getModel()));
                 return response()->json(Helper::formatStandardApiResponse('error', null, $className . ' not found'), 200);
             }
+
 
             // Handle API requests that fail because of an HTTP status code and return a useful error message
             if ($this->isHttpException($e)) {
@@ -116,10 +116,16 @@ class Handler extends ExceptionHandler
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
                     default:
                         return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode), $statusCode);
-
                 }
             }
+
+            // This handles API validation exceptions that happen at the Form Request level, so they
+            // never even get to the controller where we normally  nicely format JSON responses
+            return response()->json(Helper::formatStandardApiResponse('error', null,  $e->errors()), 200);
+
+
         }
+
 
 
         // This is traaaaash but it handles models that are not found while using route model binding :(
