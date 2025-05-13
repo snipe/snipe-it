@@ -46,7 +46,7 @@ class CheckoutableListener
      */
     public function onCheckedOut($event)
     {
-        if ($this->shouldNotSendEmailNotifications($event->checkoutable)) {
+        if (!$this->shouldSendEmailNotifications($event->checkoutable)) {
             return;
         }
 
@@ -141,7 +141,7 @@ class CheckoutableListener
     {
         Log::debug('onCheckedIn in the Checkoutable listener fired');
 
-        if ($this->shouldNotSendEmailNotifications($event->checkoutable)) {
+        if (!$this->shouldSendEmailNotifications($event->checkoutable)) {
             return;
         }
 
@@ -383,10 +383,10 @@ class CheckoutableListener
         ); 
     }
 
-    private function shouldNotSendEmailNotifications($checkoutable): bool
+    private function shouldSendEmailNotifications($checkoutable): bool
     {
         if(in_array(get_class($checkoutable), $this->skipNotificationsFor)) {
-            return true;
+            return false;
         }
         //runs a check if the category wants to send checkin/checkout emails to users
         $category = match (true) {
@@ -398,9 +398,9 @@ class CheckoutableListener
         };
 
         if (!$category?->checkin_email) {
-            return true;
+            return false;
         }
-        return false;
+        return true;
     }
 
 
