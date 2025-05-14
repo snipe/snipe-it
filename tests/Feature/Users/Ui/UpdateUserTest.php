@@ -189,5 +189,12 @@ class UpdateUserTest extends TestCase
             // Avoid hard 500
             return $exception instanceof Error;
         }));
+
+        $this->assertDatabaseHas('users', [
+            'id' => $id,
+            'first_name' => 'test',
+            'username' => 'test',
+            'company_id' => $companyB->id,
+        ]);
     }
 }
