@@ -399,6 +399,10 @@ class CheckoutableListener
 
     private function shouldSendEmailNotifications($checkoutable): bool
     {
+        if (Setting::getSettings()->admin_cc_email) {
+            return true;
+        }
+
         //runs a check if the category wants to send checkin/checkout emails to users
         $category = match (true) {
             $checkoutable instanceof Asset => $checkoutable->model->category,
