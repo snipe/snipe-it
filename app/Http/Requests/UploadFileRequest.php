@@ -79,9 +79,12 @@ class UploadFileRequest extends Request
     {
         $attributes = [];
 
-        for ($i = 0; $i < count($this->file); $i++) {
-            $attributes['file.'.$i] = $this->file[$i]->getClientOriginalName();
+        if ($this->file) {
+            for ($i = 0; $i < count($this->file); $i++) {
+                $attributes['file.'.$i] = $this->file[$i]->getClientOriginalName();
+            }
         }
+
         return $attributes;
 
     }

@@ -126,7 +126,7 @@ class Handler extends ExceptionHandler
                 return response()->json(Helper::formatStandardApiResponse('error', null,  $e->errors()), 200);
             }
 
-            return response()->json(Helper::formatStandardApiResponse('error', null,  'Undefined exception'), 200);
+           // return response()->json(Helper::formatStandardApiResponse('error', null,  'Undefined exception'), 200);
 
 
 

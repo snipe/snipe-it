@@ -58,7 +58,7 @@ class AssetFilesController extends Controller
             }
             $files = Actionlog::select('action_logs.*')->where('action_type', '=', 'uploaded')->where('item_type', '=', Asset::class)->where('item_id', '=', $asset->id)->whereIn('filename', $files)->get();
             // All done - report success
-            return response()->json(Helper::formatStandardApiResponse('success', (new UploadedFilesTransformer())->transformFilesArray($files, count($files)), trans('admin/hardware/message.upload.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new UploadedFilesTransformer())->transformFiles($files, count($files)), trans('admin/hardware/message.upload.success')));
         }
 
         // We only reach here if no files were included in the POST, so tell the user this
