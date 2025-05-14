@@ -53,7 +53,7 @@
                     }'>
             <thead>
               <tr role="row">
-                <th class="col-sm-1" data-searchable="false" data-field="created_at" data-sortable="true" >{{ trans('general.date') }}</th>
+                <th class="col-sm-1" data-searchable="false" data-field="created_at" data-sortable="true">{{ trans('general.date') }}</th>
                 <th class="col-sm-1" data-sortable="true" >{{ trans('admin/companies/table.title') }}</th>
                 <th class="col-sm-1" data-sortable="true" >{{ trans('general.category') }}</th>
                 <th class="col-sm-1" data-sortable="true" >{{ trans('admin/hardware/form.model') }}</th>
@@ -117,5 +117,4 @@
 
 @section('moar_scripts')
     @include ('partials.bootstrap-table')
-
 @stop
