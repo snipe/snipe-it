@@ -388,6 +388,9 @@ class CheckoutableListener
         if(in_array(get_class($checkoutable), $this->skipNotificationsFor)) {
             return true;
         }
+        if ($this->shouldSendWebhookNotification()) {
+            return false;
+        }
         //runs a check if the category wants to send checkin/checkout emails to users
         $category = match (true) {
             $checkoutable instanceof Asset => $checkoutable->model->category,
