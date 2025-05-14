@@ -190,6 +190,7 @@ class UpdateUserTest extends TestCase
             return $exception instanceof Error;
         }));
 
+        // As of now, the user will be updated but not be restored
         $this->assertDatabaseHas('users', [
             'id' => $id,
             'first_name' => 'test',
