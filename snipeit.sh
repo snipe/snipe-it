@@ -218,7 +218,7 @@ install_composer () {
   fi
 
   if [ "$EXPECTED_SIGNATURE" != "$ACTUAL_SIGNATURE" ]; then
-    >?&2 echo 'ERROR: Invalid composer installer signature'
+    >&2 echo 'ERROR: Invalid composer installer signature'
     exit 1
   fi
 
