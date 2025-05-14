@@ -11,8 +11,6 @@ use PHPUnit\Framework\Attributes\Group;
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
 use App\Models\User;
-use App\Notifications\CheckinAssetNotification;
-use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 #[Group('notifications')]
@@ -91,6 +89,11 @@ class EmailNotificationsUponCheckinTest extends TestCase
         Mail::assertNotSent(CheckinAssetMail::class, function ($mail) use ($user) {
             return $mail->hasTo($user->email);
         });
+    }
+
+    public function testAdminCCEmailStillSentWhenCategoryEmailIsNotSetToSendEmailToUser()
+    {
+        $this->markTestIncomplete();
     }
 
     private function fireCheckInEvent($asset, $user): void
