@@ -32,7 +32,7 @@ class LabelsController extends Controller
 
         $exampleAsset->id = 999999;
         $exampleAsset->name = 'JEN-867-5309';
-        $exampleAsset->asset_tag = 'Inet Workstation (13th Gen)';
+        $exampleAsset->asset_tag = '100001';
         $exampleAsset->serial = 'SN9876543210';
         $exampleAsset->asset_eol_date = '2025-01-01';
         $exampleAsset->order_number = '12345';
