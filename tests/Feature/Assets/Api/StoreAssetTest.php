@@ -12,6 +12,7 @@ use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Testing\Fluent\AssertableJson;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class StoreAssetTest extends TestCase
@@ -570,6 +571,64 @@ class StoreAssetTest extends TestCase
         $this->assertTrue($asset->adminuser->is($user));
         $this->assertTrue($asset->checkedOutToUser());
         $this->assertTrue($asset->assignedTo->is($userAssigned));
+    }
+
+    public static function checkoutTargets()
+    {
+        yield 'Users' => [
+            function () {
+                return [
+                    'key' => 'assigned_user',
+                    'value' => [
+                        User::factory()->create()->id,
+                        User::factory()->create()->id,
+                    ],
+                ];
+            },
+        ];
+
+        yield 'Locations' => [
+            function () {
+                return [
+                    'key' => 'assigned_location',
+                    'value' => [
+                        Location::factory()->create()->id,
+                        Location::factory()->create()->id,
+                    ],
+                ];
+            },
+        ];
+
+        yield 'Assets' => [
+            function () {
+                return [
+                    'key' => 'assigned_asset',
+                    'value' => [
+                        Asset::factory()->create()->id,
+                        Asset::factory()->create()->id,
+                    ],
+                ];
+            },
+        ];
+    }
+
+    /** @link https://app.shortcut.com/grokability/story/29181 */
+    #[DataProvider('checkoutTargets')]
+    public function testAssignedFieldValidationCannotBeArray($data)
+    {
+        ['key' => $key, 'value' => $value] = $data();
+
+        $this->actingAsForApi(User::factory()->createAssets()->create())
+            ->postJson(route('api.assets.store'), [
+                'asset_tag' => '123456',
+                'model_id' => AssetModel::factory()->create()->id,
+                'status_id' => Statuslabel::factory()->readyToDeploy()->create()->id,
+                $key => $value,
+            ])
+            ->assertStatusMessageIs('error')
+            ->assertJson(function (AssertableJson $json) use ($key) {
+                $json->has("messages.{$key}")->etc();
+            });
     }
 
     public function testAnAssetCanBeCheckedOutToLocationOnStore()
