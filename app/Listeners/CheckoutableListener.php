@@ -67,26 +67,24 @@ class CheckoutableListener
 
             $notifiableHasEmail = $notifiable instanceof User && $notifiable->email;
 
+            $shouldSendEmailToUser = $shouldSendEmailToUser && $notifiableHasEmail;
+
             $to = [];
             $cc = [];
 
             // if user && cc: to user, cc admin
-            if (($shouldSendEmailToUser && $notifiableHasEmail) && $shouldSendEmailToAlertAddress) {
+            if ($shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
                 $to[] = $notifiable;
                 $cc[] = $this->getFormattedAlertAddresses();
             }
 
             // if user && no cc: to user
-            if (($shouldSendEmailToUser && $notifiableHasEmail) && !$shouldSendEmailToAlertAddress) {
+            if ($shouldSendEmailToUser && !$shouldSendEmailToAlertAddress) {
                 $to[] = $notifiable;
             }
 
             // if no user && cc: to admin
             if (!$shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
-                $to[] = $this->getFormattedAlertAddresses();
-            }
-
-            if (empty($to) && $shouldSendEmailToAlertAddress) {
                 $to[] = $this->getFormattedAlertAddresses();
             }
 
