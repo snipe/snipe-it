@@ -937,8 +937,8 @@ class AssetsController extends Controller
             }
         }
 
-        // Validate custom fields
-        Validator::make($asset->toArray(), $asset->customFieldValidationRules())->validate();
+        // Invoke the validation to see if the audit will complete successfully
+        $asset->setRules($asset->getRules() + $asset->customFieldValidationRules());
 
         // Validate the rest of the data before we turn off the event dispatcher
         if ($asset->isInvalid()) {
