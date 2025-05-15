@@ -17,6 +17,15 @@ class UpdateUserTest extends TestCase
             ->assertOk();
     }
 
+    public function testCannotViewEditPageForSoftDeletedUser()
+    {
+        $user = User::factory()->trashed()->create();
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->get(route('users.edit', $user->id))
+            ->assertRedirectToRoute('users.show', $user->id);
+    }
+
     public function testUsersCanBeActivatedWithNumber()
     {
         $admin = User::factory()->superuser()->create();
