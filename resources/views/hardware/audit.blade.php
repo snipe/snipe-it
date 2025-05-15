@@ -155,15 +155,8 @@
         </div> <!--/.col-md-7-->
     </div>
 
-    @if ($message = session()->get('error'))
-        <div class="col-md-12">
-            <div class="alert alert alert-danger fade in">
-                <button type="button" class="close" data-dismiss="alert">&times;</button>
-                <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
-                <strong>{{ trans('general.error') }}: </strong>
-                {{ $message }}
-            </div>
-        </div>
+    @if ($errors->any())
+        <?php print_r($errors, true); ?>
     @endif
     
 @stop
