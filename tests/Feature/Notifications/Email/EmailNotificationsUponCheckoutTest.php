@@ -89,16 +89,14 @@ class EmailNotificationsUponCheckoutTest extends TestCase
 
     public function test_sends_alert_email()
     {
-        $this->markTestIncomplete();
-
         $this->settings->enableAdminCC('cc@example.com');
 
         $this->category->update(['checkin_email' => true]);
 
         $this->fireCheckoutEvent();
 
-        Mail::assertSent(CheckoutAssetMail::class, function ($mail) {
-            return $mail->hasTo('cc@example.com');
+        Mail::assertSent(CheckoutAssetMail::class, function (CheckoutAssetMail $mail) {
+            return $mail->hasCc('cc@example.com');
         });
     }
 

@@ -51,13 +51,11 @@ class CheckoutableListener
             return;
         }
 
-        // @todo: remove this
-        // $shouldSendEmailNotifications = $this->shouldSendEmailNotifications($event->checkoutable);
         $shouldSendEmailToUser = $this->shouldSendEmailToUser($event->checkoutable);
         $shouldSendEmailToAlertAddress = $this->shouldSendEmailToAlertAddress();
         $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
 
-        if (!$shouldSendEmailToUser && !$shouldSendWebhookNotification) {
+        if (!$shouldSendEmailToUser && !$shouldSendWebhookNotification && !$shouldSendEmailToAlertAddress) {
             return;
         }
 
@@ -72,13 +70,13 @@ class CheckoutableListener
 
             // if user && cc: to user, cc admin
             if ($shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
-                $to[] = $notifiable->email;
+                $to[] = $notifiable;
                 $cc[] = $this->getFormattedAlertAddresses();
             }
 
             // if user && no cc: to user
             if ($shouldSendEmailToUser && !$shouldSendEmailToAlertAddress) {
-                $to[] = $notifiable->email;
+                $to[] = $notifiable;
             }
 
             // if no user && cc: to admin
@@ -87,7 +85,7 @@ class CheckoutableListener
             }
 
             try {
-                Mail::to($to)->cc($cc)->send($mailable);
+                Mail::to(array_flatten($to))->cc(array_flatten($cc))->send($mailable);
                 Log::info('Checkout Mail sent to checkout target');
             } catch (ClientException $e) {
                 Log::debug("Exception caught during checkout email: " . $e->getMessage());
