@@ -9,6 +9,7 @@ use App\Models\AssetModel;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Storage;
+use App\Helpers\StorageHelper;
 
 class UploadedFilesTransformer
 {
@@ -31,13 +32,18 @@ class UploadedFilesTransformer
         // This will be used later as we extend out this transformer to handle more types of uploads
         if ($file->item_type == Asset::class) {
             $file_url = route('show/assetfile', [$file->item_id, $file->id]);
+            $file_path = 'private_uploads/assets/'.$file->filename;
         } elseif ($file->item_type == AssetModel::class) {
             $file_url = route('show/modelfile', [$file->item_id, $file->id]);
+            $file_path = 'private_uploads/assetmodels/'.$file->filename;
         }
-
+        
         $array = [
             'id' => (int) $file->id,
+            'icon' => Helper::filetype_icon($file->filename),
             'filename' => e($file->filename),
+            'inline' => StorageHelper::allowSafeInline($file_path),
+            'filetype' => StorageHelper::getFiletype($file_path),
             'url' => $file_url,
             'created_by' => ($file->adminuser) ? [
                 'id' => (int) $file->adminuser->id,
