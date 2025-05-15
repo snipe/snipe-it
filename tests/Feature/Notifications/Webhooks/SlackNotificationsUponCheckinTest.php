@@ -101,9 +101,14 @@ class SlackNotificationsUponCheckinTest extends TestCase
     {
         $this->settings->enableSlackWebhook();
 
-        $category = Category::factory()->create(['checkin_email' => false]);
-        $assetModel = AssetModel::factory()->create(['category_id' => $category->id]);
-        $asset = Asset::factory()->assignedToUser()->create(['model_id' => $assetModel->id]);
+        $category = Category::factory()->create([
+            'checkin_email' => false,
+            'eula_text' => null,
+            'require_acceptance' => false,
+            'use_default_eula' => false,
+        ]);
+        $assetModel = AssetModel::factory()->for($category)->create();
+        $asset = Asset::factory()->for($assetModel, 'model')->assignedToUser()->create();
 
         $this->fireCheckInEvent(
             $asset,
