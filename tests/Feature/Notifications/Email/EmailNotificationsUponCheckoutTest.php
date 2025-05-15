@@ -79,15 +79,15 @@ class EmailNotificationsUponCheckoutTest extends TestCase
 
     public function test_handles_user_not_having_email_address_set()
     {
-        $this->markTestIncomplete();
-
         $this->category->update(['checkin_email' => true]);
         $this->user->update(['email' => null]);
 
         $this->fireCheckoutEvent();
+
+        Mail::assertNothingSent();
     }
 
-    public function test_sends_alert_email()
+    public function test_alert_email_sends()
     {
         $this->settings->enableAdminCC('cc@example.com');
 
@@ -103,6 +103,20 @@ class EmailNotificationsUponCheckoutTest extends TestCase
     public function test_alert_email_still_sent_when_category_is_not_set_to_send_email_to_user()
     {
         $this->settings->enableAdminCC('cc@example.com');
+
+        $this->fireCheckoutEvent();
+
+        Mail::assertSent(CheckoutAssetMail::class, function ($mail) {
+            return $mail->hasTo('cc@example.com');
+        });
+    }
+
+    public function test_alert_email_still_sent_when_user_has_no_email_address()
+    {
+        $this->settings->enableAdminCC('cc@example.com');
+
+        $this->category->update(['checkin_email' => true]);
+        $this->user->update(['email' => null]);
 
         $this->fireCheckoutEvent();
 
