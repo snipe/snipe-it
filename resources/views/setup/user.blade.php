@@ -34,7 +34,7 @@
       <label for="locale">
         {{ trans('admin/settings/general.default_language') }}
       </label>
-      {!! Form::locales('locale', old('locale', "en-US"), 'select2') !!}
+      <x-input.locale-select name="locale" :selected="old('locale', 'en-US')" />
       {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
     </div>
 

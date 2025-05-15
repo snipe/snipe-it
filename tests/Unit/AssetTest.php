@@ -199,4 +199,43 @@ class AssetTest extends TestCase
         ]);
         $this->assertModelMissing($asset);
     }
+
+    public function testGetImageUrlMethod()
+    {
+        $urlBase = config('filesystems.disks.public.url');
+
+        $category = Category::factory()->create(['image' => 'category-image.jpg']);
+        $model = AssetModel::factory()->for($category)->create(['image' => 'asset-model-image.jpg']);
+        $asset = Asset::factory()->for($model, 'model')->create(['image' => 'asset-image.jpg']);
+
+        $this->assertEquals(
+            "{$urlBase}/assets/asset-image.jpg",
+            $asset->getImageUrl()
+        );
+
+        $asset->update(['image' => null]);
+
+        $this->assertEquals(
+            "{$urlBase}/models/asset-model-image.jpg",
+            $asset->refresh()->getImageUrl()
+        );
+
+        $model->update(['image' => null]);
+
+        $this->assertEquals(
+            "{$urlBase}/categories/category-image.jpg",
+            $asset->refresh()->getImageUrl()
+        );
+
+        $category->image = null;
+        $category->save();
+
+        $this->assertFalse($asset->refresh()->getImageUrl());
+
+        // handles case where model does not exist
+        $asset->model_id = 9999999;
+        $asset->forceSave();
+
+        $this->assertFalse($asset->refresh()->getImageUrl());
+    }
 }
