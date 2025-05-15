@@ -55,7 +55,7 @@ class CheckoutableListener
         $shouldSendEmailToAlertAddress = $this->shouldSendEmailToAlertAddress();
         $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
 
-        if (!$shouldSendEmailToUser && !$shouldSendWebhookNotification && !$shouldSendEmailToAlertAddress) {
+        if (!$shouldSendEmailToUser && !$shouldSendEmailToAlertAddress && !$shouldSendWebhookNotification) {
             return;
         }
 
@@ -140,14 +140,15 @@ class CheckoutableListener
             return;
         }
 
-        $shouldSendEmailNotifications = $this->shouldSendEmailNotifications($event->checkoutable);
+        $shouldSendEmailToUser = $this->shouldSendEmailToUser($event->checkoutable);
+        $shouldSendEmailToAlertAddress = $this->shouldSendEmailToAlertAddress();
         $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
 
-        if (!$shouldSendEmailNotifications && !$shouldSendWebhookNotification) {
+        if (!$shouldSendEmailToUser && !$shouldSendEmailToAlertAddress && !$shouldSendWebhookNotification) {
             return;
         }
 
-        if ($shouldSendEmailNotifications) {
+        if ($shouldSendEmailToUser || $shouldSendEmailToAlertAddress) {
             /**
              * Send the appropriate notification
              */
@@ -394,11 +395,6 @@ class CheckoutableListener
 
     private function shouldSendEmailNotifications(Model $checkoutable): bool
     {
-        // @todo:
-        // if (Setting::getSettings()->admin_cc_email) {
-        //     return true;
-        // }
-
         //runs a check if the category wants to send checkin/checkout emails to users
         $category = match (true) {
             $checkoutable instanceof Asset => $checkoutable->model->category,
