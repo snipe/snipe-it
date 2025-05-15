@@ -45,7 +45,7 @@ class EmailNotificationsUponCheckoutTest extends TestCase
 
         $this->fireCheckoutEvent();
 
-        $this->thisAssertUserReceivedEmail();
+        $this->assertUserReceivedEmail();
     }
 
     public function test_email_sent_to_user_when_category_using_default_eula()
@@ -56,7 +56,7 @@ class EmailNotificationsUponCheckoutTest extends TestCase
 
         $this->fireCheckoutEvent();
 
-        $this->thisAssertUserReceivedEmail();
+        $this->assertUserReceivedEmail();
     }
 
     public function test_email_sent_to_user_when_category_using_local_eula()
@@ -65,7 +65,7 @@ class EmailNotificationsUponCheckoutTest extends TestCase
 
         $this->fireCheckoutEvent();
 
-        $this->thisAssertUserReceivedEmail();
+        $this->assertUserReceivedEmail();
     }
 
     public function test_email_sent_to_user_when_category_set_to_explicitly_send_email()
@@ -74,7 +74,7 @@ class EmailNotificationsUponCheckoutTest extends TestCase
 
         $this->fireCheckoutEvent();
 
-        $this->thisAssertUserReceivedEmail();
+        $this->assertUserReceivedEmail();
     }
 
     public function test_admin_cc_email_still_sent_when_category_is_not_set_to_send_email_to_user()
@@ -98,7 +98,7 @@ class EmailNotificationsUponCheckoutTest extends TestCase
         ));
     }
 
-    private function thisAssertUserReceivedEmail(): void
+    private function assertUserReceivedEmail(): void
     {
         Mail::assertSent(CheckoutAssetMail::class, function (CheckoutAssetMail $mail) {
             return $mail->hasTo($this->user->email);
