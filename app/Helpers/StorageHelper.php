@@ -50,12 +50,23 @@ class StorageHelper
             'png',
         ];
 
-
         // The file exists and is allowed to be displayed inline
         if (Storage::exists($file_with_path) && (in_array(pathinfo($file_with_path, PATHINFO_EXTENSION), $allowed_inline))) {
             return true;
         }
+
         return false;
+
+    }
+
+    public static function getFiletype($file_with_path) {
+
+        // The file exists and is allowed to be displayed inline
+        if (Storage::exists($file_with_path)) {
+            return pathinfo($file_with_path, PATHINFO_EXTENSION);
+        }
+
+        return null;
 
     }
 
