@@ -291,6 +291,7 @@
                 var text_help;
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
+                  'unaccepted': '{{ strtolower(trans('general.unaccepted')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
                   'archived': '{{ strtolower(trans('general.archived')) }}',
                   'pending': '{{ strtolower(trans('general.pending')) }}'
@@ -301,6 +302,11 @@
                         text_color = 'blue';
                         icon_style = 'fa-circle';
                         text_help = '<label class="label label-default">{{ trans('general.deployed') }}</label>';
+                    break;
+                    case 'unaccepted':
+                        text_color = 'yellow';
+                        icon_style = 'fa-circle';
+                        text_help = '<label class="label label-default">{{ trans('general.unaccepted') }}</label>';
                     break;
                     case 'deployable':
                         text_color = 'green';
