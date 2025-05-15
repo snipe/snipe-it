@@ -850,6 +850,12 @@
         }
     }
 
+    function inlineImageFormatter(value, row){
+        if (row.inline) {
+            return '<a href="' + row.url + '" data-toggle="lightbox" data-type="image"><img src="' + row.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt=""></a>'
+        }
+    }
+
 
    function imageFormatter(value, row) {
 

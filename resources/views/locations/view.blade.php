@@ -414,6 +414,7 @@
                                       filepath="private_uploads/locations/"
                                       showfile_routename="show/locationsfile"
                                       deletefile_routename="delete/locationsfile"
+                                      data_route="api.locations.files.index"
                                       :object="$location" />
 
                           </div> <!-- /.col-md-12 -->

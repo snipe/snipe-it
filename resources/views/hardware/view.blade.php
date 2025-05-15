@@ -1479,6 +1479,7 @@
                                         filepath="private_uploads/assets/"
                                         showfile_routename="show/assetfile"
                                         deletefile_routename="delete/assetfile"
+                                        data_route="api.assets.files.index"
                                         :object="$asset" />
                             </div> <!-- /.col-md-12 -->
                         </div> <!-- /.row -->
@@ -1494,6 +1495,7 @@
                                                 filepath="private_uploads/assetmodels/"
                                                 showfile_routename="show/modelfile"
                                                 deletefile_routename="delete/modelfile"
+                                                data_route="api.models.files.index"
                                                 :object="$asset->model" />
 
                                     </div> <!-- /.col-md-12 -->
