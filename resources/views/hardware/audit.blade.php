@@ -155,8 +155,4 @@
         </div> <!--/.col-md-7-->
     </div>
 
-    @if ($errors->any())
-        <?php print_r($errors, true); ?>
-    @endif
-    
 @stop
