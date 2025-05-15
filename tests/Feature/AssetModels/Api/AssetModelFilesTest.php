@@ -54,70 +54,68 @@ class AssetModelFilesTest extends TestCase
         // Download a file from a model
 
         // Create a model to work with
-        $model = AssetModel::factory()->count(1)->create();
+        $model = AssetModel::factory()->create();
 
-	// Create a superuser to run this as
-	$user = User::factory()->superuser()->create();
+        // Create a superuser to run this as
+        $user = User::factory()->superuser()->create();
 
-	// Upload a file
-	$this->actingAsForApi($user)
-            ->post(
-               route('api.models.files.store', $model), [
-		       'file' => [UploadedFile::fake()->create("test.jpg", 100)],
-	       ])
-            ->assertOk()
-            ->assertJsonStructure([
-                'status',
-                'messages',
-            ]);
+        // Upload a file
+        $this->actingAsForApi($user)
+                ->post(
+                   route('api.models.files.store', $model), [
+                   'file' => [UploadedFile::fake()->create("test.jpg", 100)],
+               ])
+                ->assertOk()
+                ->assertJsonStructure([
+                    'status',
+                    'messages',
+                ]);
 
-    // Upload a file with notes
-    $this->actingAsForApi($user)
-            ->post(
-                route('api.models.files.store', $model), [
-                'file' => [UploadedFile::fake()->create("test.jpg", 100)],
-                'notes' => 'manual'
-	       ])
-            ->assertOk()
-            ->assertJsonStructure([
-                'status',
-                'messages',
-            ]);
+        // Upload a file with notes
+        $this->actingAsForApi($user)
+                ->post(
+                    route('api.models.files.store', $model), [
+                    'file' => [UploadedFile::fake()->create("test.jpg", 100)],
+                    'notes' => 'manual'
+               ])
+                ->assertOk()
+                ->assertJsonStructure([
+                    'status',
+                    'messages',
+                ]);
 
-	// List the files to get the file ID
-	$result = $this->actingAsForApi($user)
-            ->getJson(
-		    route('api.models.files.index', $model))
-            ->assertOk()
-            ->assertJsonStructure([
-                'total',
-                'rows'=>[
-                    '*' => [
-                        'id',
-                        'filename',
-                        'url',
-                        'created_by',
-                        'created_at',
-                        'updated_at',
-                        'deleted_at',
-                        'note',
-                        'available_actions'
-                    ]
-                ]
-            ])
-            ->assertJsonPath('rows.0.note',null)
-            ->assertJsonPath('rows.1.note','manual');
+            // List the files to get the file ID
+            $result = $this->actingAsForApi($user)
+                    ->getJson(
+                    route('api.models.files.index', $model))
+                    ->assertOk()
+                    ->assertJsonStructure([
+                        'total',
+                        'rows'=>[
+                            '*' => [
+                                'id',
+                                'filename',
+                                'url',
+                                'created_by',
+                                'created_at',
+                                'updated_at',
+                                'deleted_at',
+                                'note',
+                                'available_actions'
+                            ]
+                        ]
+                    ])
+                    ->assertJsonPath('rows.0.note',null)
+                    ->assertJsonPath('rows.1.note','manual');
 
-
-
-	// Get the file
-	$this->actingAsForApi($user)
-            ->get(
-               route('api.models.files.show', [
-                   $model,
-                   'file_id' => $result->decodeResponseJson()->json()["rows"][0]["id"],
-	       ]))
-	       ->assertOk();
+            // Get the file
+            $this->actingAsForApi($user)
+                    ->get(
+                       route('api.models.files.show', [
+                           'model' => $model,
+                           'file_id' => $result->decodeResponseJson()->json()["rows"][0]["id"],
+                   ]))
+                   ->assertOk();
     }
 
     public function testAssetModelApiDeletesFile()
@@ -125,7 +123,7 @@ class AssetModelFilesTest extends TestCase
         // Delete a file from a model
 
         // Create a model to work with
-        $model = AssetModel::factory()->count(1)->create();
+        $model = AssetModel::factory()->create();
 
         // Create a superuser to run this as
         $user = User::factory()->superuser()->create();
