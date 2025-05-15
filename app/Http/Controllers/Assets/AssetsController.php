@@ -188,14 +188,31 @@ class AssetsController extends Controller
 
             // Validate the asset before saving
             if ($asset->isValid() && $asset->save()) {
-                if (request('assigned_user')) {
-                    $target = User::find(request('assigned_user'));
+                $target = null;
+                $location = null;
+
+                if ($userId = request('assigned_user')) {
+                    $target = User::find($userId);
+
+                    if (!$target) {
+                        return redirect()->back()->withInput()->with('error', trans('admin/hardware/message.create.target_not_found.user'));
+                    }
                     $location = $target->location_id;
-                } elseif (request('assigned_asset')) {
-                    $target = Asset::find(request('assigned_asset'));
+
+                } elseif ($assetId = request('assigned_asset')) {
+                    $target = Asset::find($assetId);
+
+                    if (!$target) {
+                        return redirect()->back()->withInput()->with('error', trans('admin/hardware/message.create.target_not_found.asset'));
+                    }
                     $location = $target->location_id;
-                } elseif (request('assigned_location')) {
-                    $target = Location::find(request('assigned_location'));
+
+                } elseif ($locationId = request('assigned_location')) {
+                    $target = Location::find($locationId);
+
+                    if (!$target) {
+                        return redirect()->back()->withInput()->with('error', trans('admin/hardware/message.create.target_not_found.location'));
+                    }
                     $location = $target->id;
                 }
 
