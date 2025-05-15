@@ -344,7 +344,7 @@ class CheckoutableListener
      * @param $event
      * @return mixed
      */
-    private function getNotifiableUser($event): Model
+    private function getNotifiableUser($event)
     {
 
         // If it's assigned to an asset, get that asset's assignedTo object
