@@ -63,19 +63,21 @@ class CheckoutableListener
 
         if ($shouldSendEmailToUser || $shouldSendEmailToAlertAddress) {
             $mailable = $this->getCheckoutMailType($event, $acceptance);
-            $notifiable = $this->getNotifiableUsers($event);
+            $notifiable = $this->getNotifiableUser($event);
+
+            $notifiableHasEmail = $notifiable instanceof User && $notifiable->email;
 
             $to = [];
             $cc = [];
 
             // if user && cc: to user, cc admin
-            if ($shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
+            if (($shouldSendEmailToUser && $notifiableHasEmail) && $shouldSendEmailToAlertAddress) {
                 $to[] = $notifiable;
                 $cc[] = $this->getFormattedAlertAddresses();
             }
 
             // if user && no cc: to user
-            if ($shouldSendEmailToUser && !$shouldSendEmailToAlertAddress) {
+            if (($shouldSendEmailToUser && $notifiableHasEmail) && !$shouldSendEmailToAlertAddress) {
                 $to[] = $notifiable;
             }
 
@@ -84,13 +86,19 @@ class CheckoutableListener
                 $to[] = $this->getFormattedAlertAddresses();
             }
 
-            try {
-                Mail::to(array_flatten($to))->cc(array_flatten($cc))->send($mailable);
-                Log::info('Checkout Mail sent to checkout target');
-            } catch (ClientException $e) {
-                Log::debug("Exception caught during checkout email: " . $e->getMessage());
-            } catch (Exception $e) {
-                Log::debug("Exception caught during checkout email: " . $e->getMessage());
+            if (empty($to) && $shouldSendEmailToAlertAddress) {
+                $to[] = $this->getFormattedAlertAddresses();
+            }
+
+            if (!empty($to)) {
+                try {
+                    Mail::to(array_flatten($to))->cc(array_flatten($cc))->send($mailable);
+                    Log::info('Checkout Mail sent to checkout target');
+                } catch (ClientException $e) {
+                    Log::debug("Exception caught during checkout email: " . $e->getMessage());
+                } catch (Exception $e) {
+                    Log::debug("Exception caught during checkout email: " . $e->getMessage());
+                }
             }
         }
 
@@ -165,7 +173,7 @@ class CheckoutableListener
             }
             $ccEmails = array_filter($adminCcEmailsArray);
             $mailable = $this->getCheckinMailType($event);
-            $notifiable = $this->getNotifiableUsers($event);
+            $notifiable = $this->getNotifiableUser($event);
 
             // Send email notifications
             try {
@@ -338,7 +346,8 @@ class CheckoutableListener
      * @param $event
      * @return mixed
      */
-    private function getNotifiableUsers($event){
+    private function getNotifiableUser($event): Model
+    {
 
         // If it's assigned to an asset, get that asset's assignedTo object
         if ($event->checkedOutTo instanceof Asset){
