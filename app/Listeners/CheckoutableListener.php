@@ -27,6 +27,7 @@ use App\Notifications\CheckoutAssetNotification;
 use App\Notifications\CheckoutConsumableNotification;
 use App\Notifications\CheckoutLicenseSeatNotification;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Exception;
@@ -50,55 +51,48 @@ class CheckoutableListener
             return;
         }
 
-        $shouldSendEmailNotifications = $this->shouldSendEmailNotifications($event->checkoutable);
+        // @todo: remove this
+        // $shouldSendEmailNotifications = $this->shouldSendEmailNotifications($event->checkoutable);
+        $shouldSendEmailToUser = $this->shouldSendEmailToUser($event->checkoutable);
+        // @todo:
+        // $shouldSendEmailToAlertAddress = $this->shouldSendEmailToAlertAddress();
         $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
 
-        if (!$shouldSendEmailNotifications && !$shouldSendWebhookNotification) {
+        if (!$shouldSendEmailToUser && !$shouldSendWebhookNotification) {
             return;
         }
 
         $acceptance = $this->getCheckoutAcceptance($event);
 
-        if ($shouldSendEmailNotifications) {
+        // @todo: || $shouldSendEmailToAlertAddress
+        if ($shouldSendEmailToUser) {
             $settings = Setting::getSettings();
-            $adminCcEmailsArray = [];
-
-            if ($settings->admin_cc_email !== '') {
-                $adminCcEmail = $settings->admin_cc_email;
-                $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
-            }
-            $ccEmails = array_filter($adminCcEmailsArray);
+            // $adminCcEmailsArray = [];
+            //
+            // if ($settings->admin_cc_email !== '') {
+            //     $adminCcEmail = $settings->admin_cc_email;
+            //     $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
+            // }
+            // $ccEmails = array_filter($adminCcEmailsArray);
             $mailable = $this->getCheckoutMailType($event, $acceptance);
             $notifiable = $this->getNotifiableUsers($event);
 
-
-            // Send email notifications
             try {
-                /**
-                 * Send an email if any of the following conditions are met:
-                 * 1. The asset requires acceptance
-                 * 2. The item has a EULA
-                 * 3. The item should send an email at check-in/check-out
-                 * 4. If the admin CC email is set, even if the item being checked out doesn't have an email address (location, etc)
-                 */
 
-                if ($event->checkoutable->requireAcceptance() || $event->checkoutable->getEula() ||
-                    $this->checkoutableShouldSendEmail($event)) {
 
 
                     // Send a checkout email to the admin CC addresses, even if the target has no email
-                    if (!empty($ccEmails)) {
-                        Mail::to($ccEmails)->send($mailable);
-                        Log::info('Checkout Mail sent to CC addresses');
-                    }
+                // if (!empty($ccEmails)) {
+                //     Mail::to($ccEmails)->send($mailable);
+                //     Log::info('Checkout Mail sent to CC addresses');
+                // }
 
-                    // Send a checkout email to the target if it has an email
-                    if (!empty($notifiable->email)) {
-                        Mail::to($notifiable)->send($mailable);
-                        Log::info('Checkout Mail sent to checkout target');
-                    }
-
+                if (!empty($notifiable->email)) {
+                    Mail::to($notifiable)->send($mailable);
+                    Log::info('Checkout Mail sent to checkout target');
                 }
+
+
             } catch (ClientException $e) {
                 Log::debug("Exception caught during checkout email: " . $e->getMessage());
             } catch (Exception $e) {
@@ -397,11 +391,12 @@ class CheckoutableListener
         return in_array(get_class($checkoutable), $this->skipNotificationsFor);
     }
 
-    private function shouldSendEmailNotifications($checkoutable): bool
+    private function shouldSendEmailNotifications(Model $checkoutable): bool
     {
-        if (Setting::getSettings()->admin_cc_email) {
-            return true;
-        }
+        // @todo:
+        // if (Setting::getSettings()->admin_cc_email) {
+        //     return true;
+        // }
 
         //runs a check if the category wants to send checkin/checkout emails to users
         $category = match (true) {
@@ -424,16 +419,40 @@ class CheckoutableListener
         return Setting::getSettings() && Setting::getSettings()->webhook_endpoint;
     }
 
-    private function checkoutableShouldSendEmail($event): bool
+    private function checkoutableCategoryShouldSendEmail(Model $checkoutable): bool
     {
-        if($event->checkoutable instanceof LicenseSeat){
-            return $event->checkoutable->license->checkin_email();
+        if ($checkoutable instanceof LicenseSeat) {
+            return $checkoutable->license->checkin_email();
         }
-        return (method_exists($event->checkoutable, 'checkin_email') && $event->checkoutable->checkin_email());
+        return (method_exists($checkoutable, 'checkin_email') && $checkoutable->checkin_email());
     }
 
     private function newMicrosoftTeamsWebhookEnabled(): bool
     {
         return Setting::getSettings()->webhook_selected === 'microsoft' && Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows');
+    }
+
+    private function shouldSendEmailToUser(Model $checkoutable): bool
+    {
+        /**
+         * Send an email if any of the following conditions are met:
+         * 1. The asset requires acceptance
+         * 2. The item has a EULA
+         * 3. The item should send an email at check-in/check-out
+         */
+
+        if ($checkoutable->requireAcceptance()) {
+            return true;
+        }
+
+        if ($checkoutable->getEula()) {
+            return true;
+        }
+
+        if ($this->checkoutableCategoryShouldSendEmail($checkoutable)) {
+            return true;
+        }
+
+        return false;
     }
 }
