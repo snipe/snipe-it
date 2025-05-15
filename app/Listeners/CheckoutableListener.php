@@ -54,8 +54,7 @@ class CheckoutableListener
         // @todo: remove this
         // $shouldSendEmailNotifications = $this->shouldSendEmailNotifications($event->checkoutable);
         $shouldSendEmailToUser = $this->shouldSendEmailToUser($event->checkoutable);
-        // @todo:
-        // $shouldSendEmailToAlertAddress = $this->shouldSendEmailToAlertAddress();
+        $shouldSendEmailToAlertAddress = $this->shouldSendEmailToAlertAddress();
         $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
 
         if (!$shouldSendEmailToUser && !$shouldSendWebhookNotification) {
@@ -64,35 +63,32 @@ class CheckoutableListener
 
         $acceptance = $this->getCheckoutAcceptance($event);
 
-        // @todo: || $shouldSendEmailToAlertAddress
-        if ($shouldSendEmailToUser) {
-            $settings = Setting::getSettings();
-            // $adminCcEmailsArray = [];
-            //
-            // if ($settings->admin_cc_email !== '') {
-            //     $adminCcEmail = $settings->admin_cc_email;
-            //     $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
-            // }
-            // $ccEmails = array_filter($adminCcEmailsArray);
+        if ($shouldSendEmailToUser || $shouldSendEmailToAlertAddress) {
             $mailable = $this->getCheckoutMailType($event, $acceptance);
             $notifiable = $this->getNotifiableUsers($event);
 
+            $to = [];
+            $cc = [];
+
+            // if user && cc: to user, cc admin
+            if ($shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
+                $to[] = $notifiable->email;
+                $cc[] = $this->getFormattedAlertAddresses();
+            }
+
+            // if user && no cc: to user
+            if ($shouldSendEmailToUser && !$shouldSendEmailToAlertAddress) {
+                $to[] = $notifiable->email;
+            }
+
+            // if no user && cc: to admin
+            if (!$shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
+                $to[] = $this->getFormattedAlertAddresses();
+            }
+
             try {
-
-
-
-                    // Send a checkout email to the admin CC addresses, even if the target has no email
-                // if (!empty($ccEmails)) {
-                //     Mail::to($ccEmails)->send($mailable);
-                //     Log::info('Checkout Mail sent to CC addresses');
-                // }
-
-                if (!empty($notifiable->email)) {
-                    Mail::to($notifiable)->send($mailable);
-                    Log::info('Checkout Mail sent to checkout target');
-                }
-
-
+                Mail::to($to)->cc($cc)->send($mailable);
+                Log::info('Checkout Mail sent to checkout target');
             } catch (ClientException $e) {
                 Log::debug("Exception caught during checkout email: " . $e->getMessage());
             } catch (Exception $e) {
@@ -454,5 +450,21 @@ class CheckoutableListener
         }
 
         return false;
+    }
+
+    private function shouldSendEmailToAlertAddress(): bool
+    {
+        return Setting::getSettings() && Setting::getSettings()->admin_cc_email;
+    }
+
+    private function getFormattedAlertAddresses(): array
+    {
+        $alertAddresses = Setting::getSettings()->admin_cc_email;
+
+        if ($alertAddresses !== '') {
+            return array_filter(array_map('trim', explode(',', $alertAddresses)));
+        }
+
+        return [];
     }
 }
