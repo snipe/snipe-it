@@ -18,6 +18,7 @@ class EmailNotificationsUponCheckoutTest extends TestCase
     private Asset $asset;
     private AssetModel $assetModel;
     private Category $category;
+    private User $user;
 
     protected function setUp(): void
     {
@@ -34,53 +35,73 @@ class EmailNotificationsUponCheckoutTest extends TestCase
 
         $this->assetModel = AssetModel::factory()->for($this->category)->create();
         $this->asset = Asset::factory()->for($this->assetModel, 'model')->create();
+
+        $this->user = User::factory()->create();
     }
 
     public function test_email_sent_to_user_when_category_requires_acceptance()
     {
-        $this->markTestIncomplete();
+        $this->category->update(['require_acceptance' => true]);
 
-        // require_acceptance = true
+        $this->fireCheckoutEvent();
+
+        $this->thisAssertUserReceivedEmail();
     }
 
     public function test_email_sent_to_user_when_category_using_default_eula()
     {
-        $this->markTestIncomplete();
+        $this->settings->setEula();
+
+        $this->category->update(['use_default_eula' => true]);
+
+        $this->fireCheckoutEvent();
+
+        $this->thisAssertUserReceivedEmail();
     }
 
     public function test_email_sent_to_user_when_category_using_local_eula()
     {
-        $this->markTestIncomplete();
+        $this->category->update(['eula_text' => 'Some EULA text']);
+
+        $this->fireCheckoutEvent();
+
+        $this->thisAssertUserReceivedEmail();
     }
 
     public function test_email_sent_to_user_when_category_set_to_explicitly_send_email()
     {
-        $this->markTestIncomplete();
+        $this->category->update(['checkin_email' => true]);
 
-        // checkin_email = true
+        $this->fireCheckoutEvent();
+
+        $this->thisAssertUserReceivedEmail();
     }
 
-    public function test_admin_cc_email_still_sent_when_category_email_is_not_set_to_send_email_to_user()
+    public function test_admin_cc_email_still_sent_when_category_is_not_set_to_send_email_to_user()
     {
         $this->settings->enableAdminCC('cc@example.com');
 
-        $category = Category::factory()->create([
-            'checkin_email' => false,
-            'eula_text' => null,
-            'use_default_eula' => false,
-        ]);
-        $assetModel = AssetModel::factory()->create(['category_id' => $category->id]);
-        $asset = Asset::factory()->create(['model_id' => $assetModel->id]);
-
-        event(new CheckoutableCheckedOut(
-            $asset,
-            User::factory()->create(),
-            User::factory()->superuser()->create(),
-            '',
-        ));
+        $this->fireCheckoutEvent();
 
         Mail::assertSent(CheckoutAssetMail::class, function ($mail) {
             return $mail->hasTo('cc@example.com');
+        });
+    }
+
+    private function fireCheckoutEvent(): void
+    {
+        event(new CheckoutableCheckedOut(
+            $this->asset,
+            $this->user,
+            User::factory()->superuser()->create(),
+            '',
+        ));
+    }
+
+    private function thisAssertUserReceivedEmail(): void
+    {
+        Mail::assertSent(CheckoutAssetMail::class, function (CheckoutAssetMail $mail) {
+            return $mail->hasTo($this->user->email);
         });
     }
 }
