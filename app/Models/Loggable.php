@@ -345,6 +345,29 @@ trait Loggable
 
         return $log;
     }
+    /**
+     * @author  Godfrey Martinez
+     * @since [v8.0.4]
+     * @return \App\Models\Actionlog
+     */
+    public function logUploadDelete($filename)
+    {
+        $log = new Actionlog;
+        if (static::class == LicenseSeat::class) {
+            $log->item_type = License::class;
+            $log->item_id = $this->license_id;
+        } else {
+            $log->item_type = static::class;
+            $log->item_id = $this->id;
+        }
+        $log->created_by = auth()->id();
+        $log->target_id = null;
+        $log->filename = $filename;
+        $log->created_at = date('Y-m-d H:i:s');
+        $log->logaction('upload deleted');
+
+        return $log;
+    }
 
     /**
      * Get latest signature from a specific user
