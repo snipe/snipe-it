@@ -27,7 +27,11 @@ class EmailNotificationsUponCheckoutTest extends TestCase
     {
         $this->settings->enableAdminCC('cc@example.com');
 
-        $category = Category::factory()->create(['checkin_email' => false]);
+        $category = Category::factory()->create([
+            'checkin_email' => false,
+            'eula_text' => null,
+            'use_default_eula' => false,
+        ]);
         $assetModel = AssetModel::factory()->create(['category_id' => $category->id]);
         $asset = Asset::factory()->create(['model_id' => $assetModel->id]);
 
