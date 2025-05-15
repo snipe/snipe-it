@@ -16,7 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
-
+use Illuminate\Http\Request;
 
 /**
  * This class controls file related actions related
@@ -74,12 +74,37 @@ class AssetModelFilesController extends Controller
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function list(AssetModel $model) : JsonResponse | array
+    public function list(Request $request, AssetModel $model) : JsonResponse | array
     {
+        $this->authorize('view', $model);
 
-            $assetmodel = AssetModel::with('uploads')->find($model);
-            $this->authorize('view', $model);
-            return (new AssetModelsTransformer)->transformAssetModelFiles($model, $model->uploads()->count());
+        $allowed_columns =
+            [
+                'id',
+                'filename',
+                'action_type',
+                'note',
+                'created_at',
+            ];
+
+        $uploads = $model->uploads();
+        $offset = ($request->input('offset') > $model->count()) ? $model->count() : abs($request->input('offset'));
+        $limit = app('api_limit_value');
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'action_logs.created_at';
+
+        if ($request->filled('search')) {
+
+            $uploads->where(function ($query) use ($request) {
+                $query->where('filename', 'LIKE', '%' . $request->input('search') . '%')
+                    ->orWhere('note', 'LIKE', '%' . $request->input('search') . '%');
+            });
+        }
+
+        $uploads = $uploads->skip($offset)->take($limit)->orderBy($sort, $order)->get();
+
+
+        return (new UploadedFilesTransformer())->transformFiles($uploads, $uploads->count());
     }
 
     /**
@@ -92,27 +117,24 @@ class AssetModelFilesController extends Controller
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function show(AssetModel $model, $fileId = null) : JsonResponse | StreamedResponse | Storage | StorageHelper | BinaryFileResponse
+    public function show(AssetModel $model, $file_id = null) : JsonResponse | StreamedResponse | Storage | StorageHelper | BinaryFileResponse
     {
 
         $this->authorize('view', $model);
 
         // Check that the file being requested exists for the asset
-        if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $model->id)->find($fileId)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.no_match', ['id' => $fileId])), 404);
+        if (! $log = Actionlog::whereNotNull('filename')->where('item_id', $model->id)->find($file_id)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.no_match', ['id' => $file_id])), 404);
         }
 
         // Form the full filename with path
         $file = 'private_uploads/assetmodels/'.$log->filename;
         Log::debug('Checking for '.$file);
 
-        if ($log->action_type == 'audit') {
-            $file = 'private_uploads/audits/'.$log->filename;
-        }
 
         // Check the file actually exists on the filesystem
         if (! Storage::exists($file)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.does_not_exist', ['id' => $fileId])), 404);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.does_not_exist', ['id' => $file_id])), 404);
         }
 
         if (request('inline') == 'true') {
@@ -128,7 +150,7 @@ class AssetModelFilesController extends Controller
         // Send back an error message
 
         //@TODO: respond if file doesn't exist
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.error', ['id' => $fileId])), 500);
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/models/message.download.error', ['id' => $file_id])), 500);
     }
 
     /**
