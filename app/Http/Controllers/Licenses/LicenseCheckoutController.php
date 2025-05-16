@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Licenses;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedOut;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -85,6 +86,11 @@ class LicenseCheckoutController extends Controller
             $request->request->add(['assigned_user' => $checkoutTarget->id]);
             session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => 'user']);
         }
+
+        $license->setLogTarget($checkoutTarget);
+        $license->setLogNote($request->input('notes')); // yes, this is 'notes' and not 'note' - but that's how we do it
+        $license->setLogAction(ActionType::Checkout);
+        $license->save();
 
 
 

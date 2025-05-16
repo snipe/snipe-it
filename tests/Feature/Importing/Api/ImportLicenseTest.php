@@ -247,8 +247,10 @@ class ImportLicenseTest extends ImportDataTestCase implements TestsPermissionsRe
         $row = $importFileBuilder->firstRow();
         $import = Import::factory()->license()->create(['file_path' => $importFileBuilder->saveToImportsDirectory()]);
 
+//        \Log::error("about to do acting as for api...");
         $this->actingAsForApi(User::factory()->superuser()->create());
         $this->importFileResponse(['import' => $import->id, 'import-update' => true])->assertOk();
+//        \Log::error("okay, just gave the import file response?");
 
         $updatedLicense = License::query()
             ->with(['manufacturer', 'category', 'supplier'])

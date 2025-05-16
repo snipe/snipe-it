@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
+use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Watson\Validating\ValidatingTrait;
+use App\Enums\ActionType;
 
 class License extends Depreciable
 {
@@ -180,13 +181,9 @@ class License extends Depreciable
                 $seatsAvailableForDelete->pop()->delete();
             }
             // Log Deletion of seats.
-            $logAction = new Actionlog;
-            $logAction->item_type = self::class;
-            $logAction->item_id = $license->id;
-            $logAction->created_by = auth()->id() ?: 1; // We don't have an id while running the importer from CLI.
-            $logAction->note = "deleted {$change} seats";
-            $logAction->target_id = null;
-            $logAction->logaction('delete seats');
+            $license->setLogNote("deleted {$change} seats");
+            $license->setLogAction(ActionType::DeleteSeats);
+            $license->save();
 
             return true;
         }
@@ -212,13 +209,9 @@ class License extends Depreciable
         // On initial create, we shouldn't log the addition of seats.
         if ($license->id) {
             //Log the addition of license to the log.
-            $logAction = new Actionlog();
-            $logAction->item_type = self::class;
-            $logAction->item_id = $license->id;
-            $logAction->created_by = auth()->id() ?: 1; // Importer.
-            $logAction->note = "added {$change} seats";
-            $logAction->target_id = null;
-            $logAction->logaction('add seats');
+            $license->setLogNote("added {$change} seats");
+            $license->setLogAction(ActionType::AddSeats);
+            $license->save();
         }
 
         return true;

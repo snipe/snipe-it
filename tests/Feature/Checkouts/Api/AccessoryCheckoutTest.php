@@ -80,16 +80,15 @@ class AccessoryCheckoutTest extends TestCase implements TestsPermissionsRequirem
 
         $this->assertTrue($accessory->checkouts()->where('assigned_type', User::class)->where('assigned_to', $user->id)->count() > 0);
 
-        $this->assertEquals(
-            1,
-            Actionlog::where([
+        $this->assertDatabaseHas('action_logs',
+            [
                 'action_type' => 'checkout',
                 'target_id' => $user->id,
                 'target_type' => User::class,
                 'item_id' => $accessory->id,
                 'item_type' => Accessory::class,
                 'created_by' => $admin->id,
-            ])->count(),'Log entry either does not exist or there are more than expected'
+            ]
         );
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Enums\ActionType;
 use App\Events\UserMerged;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
@@ -333,35 +334,41 @@ class BulkUsersController extends Controller
     protected function logItemCheckinAndDelete($items, $itemType)
     {
         foreach ($items as $item) {
-            $item_id = $item->id;
-            $logAction = new Actionlog();
+            if (gettype($item) == 'object' && get_class($item) != 'stdClass') {
+                $real_item = $item;
+            } else {
+                $item_id = $item->id;
 
-            if ($itemType == License::class){
-                $item_id = $item->license_id;
+                if ($itemType == License::class) {
+                    $item_id = $item->license_id;
+                    $real_item = License::find($item->license_id);
+                } else {
+                    $real_item = (new $itemType())::find($item_id);
+                }
+            }
+            if (property_exists($item, 'assigned_type')) {
+                $assigned_to = (new ($item->assigned_type))::find($item->assigned_to);
+            } else {
+                $assigned_to = User::find($item->assigned_to);
             }
 
-            $logAction->item_id = $item_id;
-            // We can't rely on get_class here because the licenses/accessories fetched above are not eloquent models, but simply arrays.
-            $logAction->item_type = $itemType;
-            $logAction->target_id = $item->assigned_to;
-            $logAction->target_type = User::class;
-            $logAction->created_by = auth()->id();
-            $logAction->note = 'Bulk checkin items';
-            $logAction->logaction('checkin from');
+            $real_item->setLogTarget($assigned_to); // will this work?!!?!?!?
+            //$logAction->target_id = $item->assigned_to;
+            //$logAction->target_type = User::class;
+            $real_item->setLogNote('Bulk checkin items');
+            $real_item->setLogAction(ActionType::CheckinFrom);
+            $real_item->save();
         }
     }
 
     private function logAccessoriesCheckin(Collection $accessoryUserRows): void
     {
         foreach ($accessoryUserRows as $accessoryUserRow) {
-            $logAction = new Actionlog();
-            $logAction->item_id = $accessoryUserRow->accessory_id;
-            $logAction->item_type = Accessory::class;
-            $logAction->target_id = $accessoryUserRow->assigned_to;
-            $logAction->target_type = User::class;
-            $logAction->created_by = auth()->id();
-            $logAction->note = 'Bulk checkin items';
-            $logAction->logaction('checkin from');
+            $accessory = Accessory::find($accessoryUserRow->accessory_id);
+            $accessory->setLogTarget(User::find($accessoryUserRow->assigned_to)); // This is only called with _user_ checkouts (see the one caller of this)
+            $accessory->setLogNote('Bulk checkin items');
+            $accessory->setLogAction(ActionType::CheckinFrom);
+            $accessory->save();
         }
     }
 

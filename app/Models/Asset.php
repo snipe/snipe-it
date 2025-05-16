@@ -2,24 +2,24 @@
 
 namespace App\Models;
 
+use App\Enums\ActionType;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
+use App\Models\Traits\Loggable;
+use App\Models\Traits\Requestable;
 use App\Models\Traits\Searchable;
-use App\Presenters\Presentable;
 use App\Presenters\AssetPresenter;
-use Illuminate\Support\Facades\Auth;
+use App\Presenters\Presentable;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Model for Assets.
@@ -40,6 +40,66 @@ class Asset extends Depreciable
     public const USER = 'user';
 
     use Acceptable;
+
+    public static function boot()
+    {
+        // handle incrementing of asset tags
+        self::created(function ($asset) {
+            if ($settings = Setting::getSettings()) {
+                $tag = $asset->asset_tag;
+                $prefix = $settings->auto_increment_prefix;
+                $number = substr($tag, strlen($prefix));
+                // IF - auto_increment_assets is on, AND (there is no prefix OR the prefix matches the start of the tag)
+                //      AND the rest of the string after the prefix is all digits, THEN...
+                if ($settings->auto_increment_assets && ($prefix == '' || strpos($tag, $prefix) === 0) && preg_match('/\d+/', $number) === 1) {
+                    // new way of auto-trueing-up auto_increment ID's
+                    $next_asset_tag = intval($number, 10) + 1;
+                    // we had to use 'intval' because the $number could be '01234' and
+                    // might get interpreted in Octal instead of decimal
+
+                    // only modify the 'next' one if it's *bigger* than the stored base
+                    //
+                    if ($next_asset_tag > $settings->next_auto_tag_base && $next_asset_tag < PHP_INT_MAX) {
+                        $settings->next_auto_tag_base = $next_asset_tag;
+                        $settings->save();
+                    }
+
+                } else {
+                    // legacy method
+                    $settings->increment('next_auto_tag_base');
+                    $settings->save();
+                }
+            }
+
+        });
+
+        //calculate and update EOL as necessary
+        self::saving(function ($asset) {
+            // determine if calculated eol and then calculate it - this should only happen on a new asset
+            //\Log::error("Asset RAW array: ".print_r($asset->toArray(), true));
+            if (is_null($asset->asset_eol_date) && !is_null($asset->purchase_date) && ($asset->model?->eol > 0)) {
+                $asset->asset_eol_date = $asset->purchase_date->addMonths($asset->model->eol)->format('Y-m-d');
+                $asset->eol_explicit = false;
+            }
+
+            // determine if explicit and set eol_explicit to true
+            if (!is_null($asset->asset_eol_date) && !is_null($asset->purchase_date)) {
+                if ($asset->model->eol > 0) {
+                    $months = (int)Carbon::parse($asset->asset_eol_date)->diffInMonths($asset->purchase_date);
+                    if ($months != $asset->model->eol) {
+                        $asset->eol_explicit = true;
+                    }
+                }
+            } elseif (!is_null($asset->asset_eol_date) && is_null($asset->purchase_date)) {
+                $asset->eol_explicit = true;
+            }
+            if ((!is_null($asset->asset_eol_date)) && (!is_null($asset->purchase_date)) && (is_null($asset->model->eol) || ($asset->model->eol == 0))) {
+                $asset->eol_explicit = true;
+            }
+
+        });
+        parent::boot();
+    }
 
     /**
      * Run after the checkout acceptance was declined by the user
@@ -119,8 +179,8 @@ class Asset extends Depreciable
         'byod'              => ['nullable', 'boolean'],
         'order_number'      => ['nullable', 'string', 'max:191'],
         'notes'             => ['nullable', 'string', 'max:65535'],
-        'assigned_to'   => ['nullable', 'integer', 'required_with:assigned_type'],
-        'assigned_type' => ['nullable', 'required_with:assigned_to', 'in:'.User::class.",".Location::class.",".Asset::class],
+        'assigned_to' => ['nullable', 'integer', 'required_with:assigned_type'],
+        'assigned_type' => ['nullable', 'required_with:assigned_to', 'in:' . User::class . "," . Location::class . "," . Asset::class],
         'requestable'       => ['nullable', 'boolean'],
         'assigned_user'     => ['nullable', 'exists:users,id,deleted_at,NULL'],
         'assigned_location' => ['nullable', 'exists:locations,id,deleted_at,NULL', 'fmcs_location'],
@@ -349,8 +409,14 @@ class Asset extends Depreciable
         $this->last_checkout = $checkout_at;
         $this->name = $name;
 
-        $this->assignedTo()->associate($target);
+        $this->assignedTo()->associate($target); //THIS is causing the save?
+        $this->setLogTarget($target);
+        $this->setLogNote($note);
 
+        // TODO - what to do with this? It's weird. I guess leave it?
+        // it's weird that it's only used in this checkOut() method, and will probably have to be reproduced
+        // in other checkout contexts
+        // nah, that's a FIXME - much as I don't want it to be.
         if ($location != null) {
             $this->location_id = $location;
         } else {
@@ -362,14 +428,13 @@ class Asset extends Depreciable
             }
         }
 
-        $originalValues = $this->getRawOriginal();
-
         // attempt to detect change in value if different from today's date
         if ($checkout_at && strpos($checkout_at, date('Y-m-d')) === false) {
-            $originalValues['action_date'] = date('Y-m-d H:i:s');
+            $this->setLogActionDate(date('Y-m-d H:i:s'));
         }
-
+        $this->setLogAction(ActionType::Checkout);
         if ($this->save()) {
+            // FIXME - we aren't doing any of this logic; should we?
             if (is_int($admin)) {
                 $checkedOutBy = User::findOrFail($admin);
             } elseif ($admin && get_class($admin) === \App\Models\User::class) {
@@ -377,7 +442,7 @@ class Asset extends Depreciable
             } else {
                 $checkedOutBy = auth()->user();
             }
-            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note, $originalValues));
+            event(new CheckoutableCheckedOut($this, $target, $checkedOutBy, $note));
 
             $this->increment('checkout_counter', 1);
 

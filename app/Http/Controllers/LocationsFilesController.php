@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
@@ -35,8 +36,12 @@ class LocationsFilesController extends Controller
             }
 
             foreach ($request->file('file') as $file) {
-                $file_name = $request->handleFile('private_uploads/locations/','location-'.$location->id, $file);
-                $location->logUpload($file_name, $request->get('notes'));
+
+                $file_name = $request->handleFile('private_uploads/locations/','model-'.$location->id,$file);
+                $location->setLogNote($request->get('notes'));
+                $location->setLogFilename($file_name);
+                $location->setLogAction(ActionType::Uploaded);
+                $location->save();
             }
 
             return redirect()->back()->withFragment('files')->with('success', trans('general.file_upload_success'));

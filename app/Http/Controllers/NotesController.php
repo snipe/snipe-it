@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActionType;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use Illuminate\Http\Request;
@@ -27,12 +28,9 @@ class NotesController extends Controller
 
         $this->authorize('update', $item);
 
-        $logaction = new Actionlog;
-        $logaction->item_id = $item->id;
-        $logaction->item_type = get_class($item);
-        $logaction->note = $validated['note'];
-        $logaction->created_by = Auth::id();
-        $logaction->logaction('note added');
+        $item->setLogNote($validated['note']);
+        $item->setLogAction(ActionType::NoteAdded);
+        $item->save();
 
         return redirect()
             ->route('hardware.show', $validated['id'])

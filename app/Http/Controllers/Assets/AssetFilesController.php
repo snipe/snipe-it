@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
@@ -38,8 +39,11 @@ class AssetFilesController extends Controller
 
             foreach ($request->file('file') as $file) {
                 $file_name = $request->handleFile('private_uploads/assets/','hardware-'.$asset->id, $file);
-                
-                $asset->logUpload($file_name, $request->get('notes'));
+
+                $asset->setLogFilename($file_name);
+                $asset->setLogNote($request->get('notes'));
+                $asset->setLogAction(ActionType::Uploaded);
+                $asset->save();
             }
 
             return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.upload.success'));
