@@ -7,15 +7,11 @@
                 name="eula_text"
                 wire:model.live="eulaText"
                 aria-label="eula_text"
-                :disabled="$this->eulaTextDisabled"
             />
             <p class="help-block">{!! trans('admin/categories/general.eula_text_help') !!} </p>
             <p class="help-block">{!! trans('admin/settings/general.eula_markdown') !!} </p>
             {!! $errors->first('eula_text', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
         </div>
-        @if ($this->eulaTextDisabled)
-            <input type="hidden" name="eula_text" wire:model.live="eulaText" />
-        @endif
     </div>
 
     <!-- Use default checkbox -->
@@ -32,7 +28,21 @@
                     />
                     <span>{!! trans('admin/categories/general.use_default_eula') !!}</span>
                 </label>
+            @elseif ($eulaText!='')
+                <label class="form-control form-control--disabled">
+
+                    <input
+                            type="checkbox"
+                            name="use_default_eula"
+                            value="0"
+                            wire:="shouldUncheckDefaultEulaBox"
+                            aria-label="use_default_eula"
+                    />
+                    <span>{!! trans('admin/categories/general.use_default_eula_disabled') !!}</span>
+                </label>
             @else
+                {{--so if we delete the eula text, then it will skip the one above, and then get to this.
+                Putting us back where we started--}}
                 <label class="form-control form-control--disabled">
                     <input
                         type="checkbox"
