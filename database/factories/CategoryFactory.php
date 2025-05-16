@@ -28,7 +28,7 @@ class CategoryFactory extends Factory
             'checkin_email' => true,
             'eula_text' => $this->faker->paragraph(),
             'require_acceptance' => false,
-            'use_default_eula' => $this->faker->boolean(),
+            'use_default_eula' => false,
             'created_by' => User::factory()->superuser(),
             'notes'   => 'Created by DB seeder',
         ];
