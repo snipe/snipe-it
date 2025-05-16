@@ -122,9 +122,9 @@ class Asset extends Depreciable
         'assigned_to'   => ['nullable', 'integer', 'required_with:assigned_type'],
         'assigned_type' => ['nullable', 'required_with:assigned_to', 'in:'.User::class.",".Location::class.",".Asset::class],
         'requestable'       => ['nullable', 'boolean'],
-        'assigned_user'     => ['nullable', 'exists:users,id,deleted_at,NULL'],
-        'assigned_location' => ['nullable', 'exists:locations,id,deleted_at,NULL', 'fmcs_location'],
-        'assigned_asset'    => ['nullable', 'exists:assets,id,deleted_at,NULL']
+        'assigned_user'     => ['integer', 'nullable', 'exists:users,id,deleted_at,NULL'],
+        'assigned_location' => ['integer', 'nullable', 'exists:locations,id,deleted_at,NULL', 'fmcs_location'],
+        'assigned_asset'    => ['integer', 'nullable', 'exists:assets,id,deleted_at,NULL']
     ];
 
 
