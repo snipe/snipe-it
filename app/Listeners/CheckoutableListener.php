@@ -87,24 +87,7 @@ class CheckoutableListener
 
             $shouldSendEmailToUser = $shouldSendEmailToUser && $notifiableHasEmail;
 
-            $to = [];
-            $cc = [];
-
-            // if user && cc: to user, cc admin
-            if ($shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
-                $to[] = $notifiable;
-                $cc[] = $this->getFormattedAlertAddresses();
-            }
-
-            // if user && no cc: to user
-            if ($shouldSendEmailToUser && !$shouldSendEmailToAlertAddress) {
-                $to[] = $notifiable;
-            }
-
-            // if no user && cc: to admin
-            if (!$shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
-                $to[] = $this->getFormattedAlertAddresses();
-            }
+            [$to, $cc] = $this->generateEmailRecipients($shouldSendEmailToUser, $shouldSendEmailToAlertAddress, $notifiable);
 
             if (!empty($to)) {
                 try {
@@ -467,5 +450,32 @@ class CheckoutableListener
         }
 
         return [];
+    }
+
+    private function generateEmailRecipients(
+        bool $shouldSendEmailToUser,
+        bool $shouldSendEmailToAlertAddress,
+        mixed $notifiable
+    ): array {
+        $to = [];
+        $cc = [];
+
+        // if user && cc: to user, cc admin
+        if ($shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
+            $to[] = $notifiable;
+            $cc[] = $this->getFormattedAlertAddresses();
+        }
+
+        // if user && no cc: to user
+        if ($shouldSendEmailToUser && !$shouldSendEmailToAlertAddress) {
+            $to[] = $notifiable;
+        }
+
+        // if no user && cc: to admin
+        if (!$shouldSendEmailToUser && $shouldSendEmailToAlertAddress) {
+            $to[] = $this->getFormattedAlertAddresses();
+        }
+
+        return array($to, $cc);
     }
 }
