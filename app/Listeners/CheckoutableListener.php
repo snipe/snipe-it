@@ -76,9 +76,9 @@ class CheckoutableListener
              * 4. If the admin CC email is set, even if the item being checked out doesn't have an email address (location, etc)
              */
 
-            if ($event->checkoutable->requireAcceptance() /* does category require acceptance? (no?) this seems REALLY clear */ ||
-                $event->checkoutable->getEula() /* is there *some* kind of EULA? (no?) I mean, this seems pretty straightforward too? */ ||
-                $this->checkoutableShouldSendEmail($event) /* does the category have 'checkin_email' set? (no?) */) {
+            if ($event->checkoutable->requireAcceptance() /* does category require acceptance? */ ||
+                $event->checkoutable->getEula() /* is there *some* kind of EULA? (no?) */ ||
+                $this->checkoutableShouldSendEmail($event) /* does the category have 'checkin_email' [sic] set? */) {
 
 
                 // Send a checkout email to the admin CC addresses, even if the target has no email
@@ -186,7 +186,7 @@ class CheckoutableListener
 
                 // Send a checkout email to the target if it has an email
                 if (!empty($notifiable->email)) {
-                    Mail::to($notifiable)->send($mailable); //I bet this is it?
+                    Mail::to($notifiable)->send($mailable);
                     Log::info('Checkin Mail sent to checkout target');
                 }
             } catch (ClientException $e) {
