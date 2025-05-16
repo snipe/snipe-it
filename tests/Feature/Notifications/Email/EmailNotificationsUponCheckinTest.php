@@ -25,10 +25,8 @@ class EmailNotificationsUponCheckinTest extends TestCase
         Mail::fake();
     }
 
-    public function testCheckInEmailSentToUserIfSettingEnabled()
+    public function test_check_in_email_sent_to_user_if_setting_enabled()
     {
-        Mail::fake();
-
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
@@ -39,13 +37,11 @@ class EmailNotificationsUponCheckinTest extends TestCase
         Mail::assertSent(CheckinAssetMail::class, function($mail) use ($user) {
                 return $mail->hasTo($user->email);
         });
-
     }
 
-    public function testCheckInEmailNotSentToUserIfSettingDisabled()
+    public function test_check_in_email_not_sent_to_user_if_setting_disabled()
     {
         $this->settings->disableAdminCC();
-        Mail::fake();
 
         $user = User::factory()->create();
         $checkoutables = collect([
@@ -93,7 +89,12 @@ class EmailNotificationsUponCheckinTest extends TestCase
         });
     }
 
-    public function testAdminCCEmailStillSentWhenCategoryEmailIsNotSetToSendEmailToUser()
+    public function test_handles_user_not_having_email_address_set()
+    {
+        $this->markTestIncomplete();
+    }
+
+    public function test_admin_alert_email_still_sent_when_category_email_is_not_set_to_send_email_to_user()
     {
         $this->settings->enableAdminCC('cc@example.com');
 
@@ -110,6 +111,11 @@ class EmailNotificationsUponCheckinTest extends TestCase
         Mail::assertSent(CheckinAssetMail::class, function ($mail) {
             return $mail->hasTo('cc@example.com');
         });
+    }
+
+    public function test_alert_email_still_sent_when_user_has_no_email_address()
+    {
+        $this->markTestIncomplete();
     }
 
     private function fireCheckInEvent($asset, $user): void
