@@ -91,7 +91,28 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
     public function test_handles_user_not_having_email_address_set()
     {
-        $this->markTestIncomplete();
+        $user = User::factory()->create(['email' => null]);
+        $asset = Asset::factory()->assignedToUser($user)->create();
+
+        $asset->model->category->update(['checkin_email' => true]);
+
+        $this->fireCheckInEvent($asset, $user);
+
+        Mail::assertNothingSent();
+    }
+
+    public function test_alert_email_sends()
+    {
+        $this->settings->enableAdminCC('cc@example.com');
+
+        $user = User::factory()->create();
+        $asset = Asset::factory()->assignedToUser($user)->create();
+
+        $this->fireCheckInEvent($asset, $user);
+
+        Mail::assertSent(CheckinAssetMail::class, function ($mail) use ($user) {
+            return $mail->hasCc($user->email);
+        });
     }
 
     public function test_admin_alert_email_still_sent_when_category_email_is_not_set_to_send_email_to_user()
@@ -115,7 +136,18 @@ class EmailNotificationsUponCheckinTest extends TestCase
 
     public function test_alert_email_still_sent_when_user_has_no_email_address()
     {
-        $this->markTestIncomplete();
+        $this->settings->enableAdminCC('cc@example.com');
+
+        $user = User::factory()->create(['email' => null]);
+        $asset = Asset::factory()->assignedToUser($user)->create();
+
+        $asset->model->category->update(['checkin_email' => true]);
+
+        $this->fireCheckInEvent($asset, $user);
+
+        Mail::assertSent(CheckinAssetMail::class, function ($mail) {
+            return $mail->hasTo('cc@example.com');
+        });
     }
 
     private function fireCheckInEvent($asset, $user): void
