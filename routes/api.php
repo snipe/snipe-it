@@ -957,21 +957,27 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     Api\SettingsController::class,
                     'downloadBackup'
                 ]
-            )->name('api.settings.backups.download');
+            )->name('api.settings.backups.download');  
+            
+            Route::get('version', 
+                [
+                    Api\VersionController::class, 
+                    'index'
+                ]
+            )->name('api.version.index');
 
-        }); 
-        
-        Route::resource('settings', 
-        Api\SettingsController::class,
-        ['names' => [
-                'show' => 'api.settings.show',
-                'update' => 'api.settings.update',
-                'store' => 'api.settings.store',
-            ],
-        'except' => ['create', 'edit', 'index', 'destroy'],
-        'parameters' => ['setting' => 'setting_id'],
-        ]
-        ); // end settings API
+            Route::resource('settings', 
+            Api\SettingsController::class,
+                ['names' => [
+                        'show' => 'api.settings.show',
+                        'update' => 'api.settings.update',
+                        'store' => 'api.settings.store',
+                    ],
+                'except' => ['create', 'edit', 'index', 'destroy'],
+                'parameters' => ['setting' => 'setting_id'],
+                ]
+            );
+        }); // end settings API
 
 
         /**
