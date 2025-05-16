@@ -77,7 +77,7 @@ class CheckoutableListener
              */
 
             if ($event->checkoutable->requireAcceptance() /* does category require acceptance? */ ||
-                $event->checkoutable->getEula() /* is there *some* kind of EULA? (no?) */ ||
+                $event->checkoutable->getEula() /* is there *some* kind of EULA? */ ||
                 $this->checkoutableShouldSendEmail($event) /* does the category have 'checkin_email' [sic] set? */) {
 
 
