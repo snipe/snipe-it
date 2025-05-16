@@ -42,6 +42,24 @@ class CheckoutableListener
     ];
 
     /**
+     * Register the listeners for the subscriber.
+     *
+     * @param  Illuminate\Events\Dispatcher  $events
+     */
+    public function subscribe($events)
+    {
+        $events->listen(
+            \App\Events\CheckoutableCheckedIn::class,
+            'App\Listeners\CheckoutableListener@onCheckedIn'
+        );
+
+        $events->listen(
+            \App\Events\CheckoutableCheckedOut::class,
+            'App\Listeners\CheckoutableListener@onCheckedOut'
+        );
+    }
+
+    /**
      * Notify the user and post to webhook about the checked out checkoutable
      * and add a record to the checkout_requests table.
      */
@@ -131,7 +149,7 @@ class CheckoutableListener
 
     /**
      * Notify the user and post to webhook about the checked in checkoutable
-     */    
+     */
     public function onCheckedIn($event)
     {
         Log::debug('onCheckedIn in the Checkoutable listener fired');
@@ -230,7 +248,7 @@ class CheckoutableListener
                 return redirect()->back()->with('warning', ucfirst(Setting::getSettings()->webhook_selected) . trans('admin/settings/message.webhook.webhook_fail'));
             }
         }
-    }      
+    }
 
     /**
      * Generates a checkout acceptance
@@ -252,13 +270,13 @@ class CheckoutableListener
         $acceptance->assignedTo()->associate($event->checkedOutTo);
         $acceptance->save();
 
-        return $acceptance;      
+        return $acceptance;
     }
 
     /**
      * Get the appropriate notification for the event
-     * 
-     * @param  CheckoutableCheckedIn $event 
+     *
+     * @param  CheckoutableCheckedIn  $event
      * @return Notification
      */
     private function getCheckinNotification($event)
@@ -272,7 +290,7 @@ class CheckoutableListener
                 break;
             case Asset::class:
                 $notificationClass = CheckinAssetNotification::class;
-                break;    
+                break;
             case LicenseSeat::class:
                 $notificationClass = CheckinLicenseSeatNotification::class;
                 break;
@@ -280,9 +298,8 @@ class CheckoutableListener
 
         Log::debug('Notification class: '.$notificationClass);
 
-        return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);  
+        return new $notificationClass($event->checkoutable, $event->checkedOutTo, $event->checkedInBy, $event->note);
     }
-
     /**
      * Get the appropriate notification for the event
      * 
@@ -324,6 +341,7 @@ class CheckoutableListener
         return new $mailable($event->checkoutable, $event->checkedOutTo, $event->checkedOutBy, $acceptance, $event->note);
 
     }
+
     private function getCheckinMailType($event){
         $lookup = [
             Accessory::class => CheckinAccessoryMail::class,
@@ -362,30 +380,13 @@ class CheckoutableListener
             return $event->checkedOutTo;
         }
     }
+
     private function webhookSelected(){
         if(Setting::getSettings()->webhook_selected === 'slack' || Setting::getSettings()->webhook_selected === 'general'){
             return 'slack';
         }
 
         return Setting::getSettings()->webhook_selected;
-    }
-
-    /**
-     * Register the listeners for the subscriber.
-     *
-     * @param  Illuminate\Events\Dispatcher  $events
-     */
-    public function subscribe($events)
-    {
-        $events->listen(
-            \App\Events\CheckoutableCheckedIn::class,
-            'App\Listeners\CheckoutableListener@onCheckedIn'
-        ); 
-
-        $events->listen(
-            \App\Events\CheckoutableCheckedOut::class,
-            'App\Listeners\CheckoutableListener@onCheckedOut'
-        ); 
     }
 
     private function shouldNotSendAnyNotifications($checkoutable): bool
@@ -409,7 +410,6 @@ class CheckoutableListener
         }
         return true;
     }
-
 
     private function shouldSendWebhookNotification(): bool
     {
