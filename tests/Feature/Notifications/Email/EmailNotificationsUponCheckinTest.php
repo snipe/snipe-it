@@ -111,7 +111,7 @@ class EmailNotificationsUponCheckinTest extends TestCase
         $this->fireCheckInEvent($asset, $user);
 
         Mail::assertSent(CheckinAssetMail::class, function ($mail) use ($user) {
-            return $mail->hasCc($user->email);
+            return $mail->hasTo($user->email);
         });
     }
 
