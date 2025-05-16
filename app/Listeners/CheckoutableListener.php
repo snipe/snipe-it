@@ -141,7 +141,7 @@ class CheckoutableListener
             return;
         }
 
-        $shouldSendEmailToUser = $this->shouldSendEmailToUser($event->checkoutable);
+        $shouldSendEmailToUser = $this->checkoutableCategoryShouldSendEmail($event->checkoutable);
         $shouldSendEmailToAlertAddress = $this->shouldSendEmailToAlertAddress();
         $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
 
@@ -164,37 +164,20 @@ class CheckoutableListener
                     }
                 }
             }
-            $settings = Setting::getSettings();
-            $adminCcEmailsArray = [];
 
-            if ($settings->admin_cc_email !== '') {
-                $adminCcEmail = $settings->admin_cc_email;
-                $adminCcEmailsArray = array_map('trim', explode(',', $adminCcEmail));
-            }
-            $ccEmails = array_filter($adminCcEmailsArray);
             $mailable = $this->getCheckinMailType($event);
             $notifiable = $this->getNotifiableUser($event);
 
-            // Send email notifications
+            $notifiableHasEmail = $notifiable instanceof User && $notifiable->email;
+
+            $shouldSendEmailToUser = $shouldSendEmailToUser && $notifiableHasEmail;
+
+            [$to, $cc] = $this->generateEmailRecipients($shouldSendEmailToUser, $shouldSendEmailToAlertAddress, $notifiable);
+
             try {
-                /**
-                 * Send an email if any of the following conditions are met:
-                 * 1. The asset requires acceptance
-                 * 2. The item has a EULA
-                 * 3. The item should send an email at check-in/check-out
-                 * 4. If the admin CC email is set, even if the item being checked in doesn't have an email address (location, etc)
-                 */
-
-                // Send a checkout email to the admin's CC addresses, even if the target has no email
-                if (!empty($ccEmails)) {
-                    Mail::to($ccEmails)->send($mailable);
+                if (!empty($to)) {
+                    Mail::to(array_flatten($to))->cc(array_flatten($cc))->send($mailable);
                     Log::info('Checkin Mail sent to CC addresses');
-                }
-
-                // Send a checkout email to the target if it has an email
-                if (!empty($notifiable->email)) {
-                    Mail::to($notifiable)->send($mailable);
-                    Log::info('Checkin Mail sent to checkout target');
                 }
             } catch (ClientException $e) {
                 Log::debug("Exception caught during checkin email: " . $e->getMessage());
