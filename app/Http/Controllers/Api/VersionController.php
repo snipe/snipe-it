@@ -9,8 +9,10 @@ class VersionController extends Controller
 {
     /**
      * Get the current version of Snipe-IT
-     *
-     * @return JsonResponse
+     * 
+     * @author [Nebelkreis] [https://github.com/NebelKreis]
+     * 
+     * @return JsonResponse Returns JSON response with version information
      */
     public function index(): JsonResponse
     {
