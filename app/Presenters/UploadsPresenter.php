@@ -55,6 +55,15 @@ class UploadsPresenter extends Presenter
                 'visible' => true,
             ],
             [
+                'field' => 'download',
+                'searchable' => false,
+                'sortable' => false,
+                'switchable' => true,
+                'title' => trans('general.download'),
+                'visible' => true,
+                'formatter' => 'fileDownloadFormatter',
+            ],
+            [
                 'field' => 'note',
                 'searchable' => true,
                 'sortable' => true,
