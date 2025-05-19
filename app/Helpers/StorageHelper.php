@@ -48,6 +48,7 @@ class StorageHelper
             'avif',
             'webp',
             'png',
+            'gif',
         ];
 
         // The file exists and is allowed to be displayed inline
