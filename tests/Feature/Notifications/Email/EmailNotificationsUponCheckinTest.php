@@ -101,7 +101,7 @@ class EmailNotificationsUponCheckinTest extends TestCase
         Mail::assertNothingSent();
     }
 
-    public function test_alert_email_sends()
+    public function test_admin_alert_email_sends()
     {
         $this->settings->enableAdminCC('cc@example.com');
 
@@ -134,7 +134,7 @@ class EmailNotificationsUponCheckinTest extends TestCase
         });
     }
 
-    public function test_alert_email_still_sent_when_user_has_no_email_address()
+    public function test_admin_alert_email_still_sent_when_user_has_no_email_address()
     {
         $this->settings->enableAdminCC('cc@example.com');
 
