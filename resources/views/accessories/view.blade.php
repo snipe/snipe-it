@@ -154,7 +154,7 @@
                                         filepath="private_uploads/accessories/"
                                         showfile_routename="show.accessoryfile"
                                         deletefile_routename="delete/accessoryfile"
-                                        data_route="api.accessories.files.index"
+                                        object_type="accessories"
                                         :object="$accessory" />
                                 </div>
                             </div>

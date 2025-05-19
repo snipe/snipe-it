@@ -4,7 +4,7 @@
     'object',
     'showfile_routename',
     'deletefile_routename',
-    'data_route'
+    'object_type',
 ])
 
 <!-- begin non-ajaxed file listing table -->
@@ -28,9 +28,9 @@
             data-sort-order="asc"
             data-sort-name="name"
             class="table table-striped snipe-table"
-            data-url="{{ route($data_route, $object->id) }}"
+            data-url="{{ route("api.files.list", ['object_type' => $object_type, 'id' => $object->id]) }}"
             data-export-options='{
-                    "fileName": "export-license-uploads-{{ str_slug($object->name) }}-{{ date('Y-m-d') }}",
+                    "fileName": "export-uploads-{{ str_slug($object->name) }}-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
                     }'>
     </table>
