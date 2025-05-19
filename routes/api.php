@@ -1302,7 +1302,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             Api\UploadedFilesController::class,
             'index'
         ]
-    )->name('api.files.list')
+    )->name('api.files.index')
         ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
 
     Route::get('{object_type}/{id}/files/{file_id}',

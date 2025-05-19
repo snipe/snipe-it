@@ -88,7 +88,7 @@ class Handler extends ExceptionHandler
 
 
         // Handle API requests that fail
-        if ($request->ajax() || $request->wantsJson() || $request->route()->named('api.*.files') ) {
+        if ($request->ajax() || $request->wantsJson() || ($request->route() && $request->route()->named('api.files.*'))) {
 
             // Handle API requests that fail because Carbon cannot parse the date on validation (when a submitted date value is definitely not a date)
             if ($e instanceof InvalidFormatException) {

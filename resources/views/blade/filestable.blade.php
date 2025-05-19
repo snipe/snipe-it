@@ -28,7 +28,7 @@
             data-sort-order="asc"
             data-sort-name="name"
             class="table table-striped snipe-table"
-            data-url="{{ route("api.files.list", ['object_type' => $object_type, 'id' => $object->id]) }}"
+            data-url="{{ route("api.files.index", ['object_type' => $object_type, 'id' => $object->id]) }}"
             data-export-options='{
                     "fileName": "export-uploads-{{ str_slug($object->name) }}-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]

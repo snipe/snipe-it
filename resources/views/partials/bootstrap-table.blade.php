@@ -874,10 +874,15 @@
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
         }
     }
-    function downloadFormatter(value) {
-        if (value) {
-            return '<a href="' + value + '" target="_blank"><x-icon type="download" /></a>';
+
+
+    function downloadOrOpenInNewWindowFormatter(value, row) {
+
+        if (row && row.url)
+        {
+            return '<a href="' + row.url + '" class="btn btn-sm btn-default"><x-icon type="download" /></a> <a href="' + row.url + '?inline=true" class="btn btn-sm btn-default" target="_blank"><x-icon type="external-link" /></a>';
         }
+
     }
 
     function fileUploadFormatter(value) {
@@ -890,7 +895,6 @@
 
 
     function fileUploadNameFormatter(value) {
-        console.dir(value);
         if ((value) && (value.filename) && (value.url)) {
             return '<a href="' + value.url + '">' + value.filename + '</a>';
         }

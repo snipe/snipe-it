@@ -61,7 +61,7 @@ class UploadsPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.download'),
                 'visible' => true,
-                'formatter' => 'fileDownloadFormatter',
+                'formatter' => 'downloadOrOpenInNewWindowFormatter',
             ],
             [
                 'field' => 'note',
