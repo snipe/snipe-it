@@ -549,34 +549,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
           ]
         )->name('api.assets.restore');
 
-        Route::post('{asset}/files',
-          [
-              Api\AssetFilesController::class,
-              'store'
-          ]
-        )->name('api.assets.files.store');
-
-        Route::get('{asset}/files',
-          [
-              Api\AssetFilesController::class,
-              'list'
-          ]
-        )->name('api.assets.files.index');
-
-        Route::get('{asset}/file/{file_id}',
-          [
-              Api\AssetFilesController::class,
-              'show'
-          ]
-        )->name('api.assets.files.show');
-
-        Route::delete('{asset}/file/{file_id}',
-          [
-              Api\AssetFilesController::class,
-              'destroy'
-          ]
-        )->name('api.assets.files.destroy');
-
 
 
           /** Begin assigned routes */
@@ -767,6 +739,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.locations.assigned_accessories');
             /** End assigned routes */
+
+
         }); 
     
         Route::resource('locations', 
@@ -846,37 +820,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.models.restore');
 
-            // Store files
-            Route::post('{model}/files',
-            [
-                Api\AssetModelFilesController::class,
-                'store'
-            ]
-            )->name('api.models.files.store');
-
-            // List files
-            Route::get('{model}/files',
-            [
-                Api\AssetModelFilesController::class,
-                'list'
-            ]
-            )->name('api.models.files.index');
-
-            // Show file
-            Route::get('{model}/file/{file_id}',
-            [
-                Api\AssetModelFilesController::class,
-                'show'
-            ]
-            )->name('api.models.files.show');
-
-            // Delete file
-            Route::delete('{model}/file/{file_id}',
-            [
-                Api\AssetModelFilesController::class,
-                'destroy'
-            ]
-            )->name('api.models.files.destroy');
         }); 
     
         Route::resource('models', 
@@ -1147,6 +1090,8 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                 ]
             )->name('api.users.restore');
 
+
+
         });
 
         Route::resource('users', 
@@ -1349,6 +1294,41 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             'getLabels'
         ])->name('api.assets.labels');
         // end generate label routes
+
+
+    // Uploaded files handler
+    Route::get('{object_type}/{id}/files',
+        [
+            Api\UploadedFilesController::class,
+            'index'
+        ]
+    )->name('api.files.list')
+        ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
+
+    Route::get('{object_type}/{id}/files/{file_id}',
+        [
+            Api\UploadedFilesController::class,
+            'show'
+        ]
+    )->name('api.files.show')
+        ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
+
+
+    Route::post('{object_type}/{id}/files',
+        [
+            Api\UploadedFilesController::class,
+            'store'
+        ]
+    )->name('api.files.show')
+        ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
+
+    Route::delete('{object_type}/files/{id}/delete',
+        [
+            Api\UploadedFilesController::class,
+            'destroy'
+        ]
+    )->name('api.files.destroy')
+        ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
 
 
 }); // end API routes
