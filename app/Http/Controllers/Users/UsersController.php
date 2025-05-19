@@ -178,7 +178,7 @@ class UsersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v1.0]
      * @param $permissions
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
      * @internal param int $id
      * @throws \Illuminate\Auth\Access\AuthorizationException
      */
@@ -189,6 +189,10 @@ class UsersController extends Controller
         $user = User::with(['assets', 'assets.model', 'consumables', 'accessories', 'licenses', 'userloc'])->withTrashed()->find($user->id);
 
         if ($user) {
+
+            if ($user->trashed()) {
+                return redirect()->route('users.show', $user->id);
+            }
 
             $permissions = config('permissions');
             $groups = Group::pluck('name', 'id');
