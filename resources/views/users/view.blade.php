@@ -963,7 +963,8 @@
                         filepath="private_uploads/users/"
                         showfile_routename="show/userfile"
                         deletefile_routename="userfile.destroy"
-                        data_route="api.users.files.index"
+                        object_type="users"
+                        data_route="api.files.index"
                         :object="$user" />
             </div>
           </div> <!--/ROW-->

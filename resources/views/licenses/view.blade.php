@@ -469,6 +469,7 @@
                   filepath="private_uploads/licenses/"
                   showfile_routename="show.licensefile"
                   deletefile_routename="delete/licensefile"
+                  object_type="licenses"
                   :object="$license" />
 
         </div> <!-- /.tab-pane -->

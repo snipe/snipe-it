@@ -146,7 +146,7 @@
                         filepath="private_uploads/components/"
                         showfile_routename="show.componentfile"
                         deletefile_routename="delete/componentfile"
-                        data_route="api.components.files.index"
+                        object_type="components"
                         :object="$component" />
               </div>
             </div>

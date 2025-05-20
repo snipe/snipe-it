@@ -1319,7 +1319,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
             Api\UploadedFilesController::class,
             'store'
         ]
-    )->name('api.files.show')
+    )->name('api.files.store')
         ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
 
     Route::delete('{object_type}/files/{id}/delete',

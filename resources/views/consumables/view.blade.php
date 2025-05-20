@@ -437,7 +437,7 @@
                         filepath="private_uploads/consumables/"
                         showfile_routename="show.consumablefile"
                         deletefile_routename="delete/consumablefile"
-                        data_route="api.consumables.files.index"
+                        object_type="consumables"
                         :object="$consumable" />
 
               </div>
