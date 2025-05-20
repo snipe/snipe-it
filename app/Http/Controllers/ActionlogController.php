@@ -17,9 +17,9 @@ class ActionlogController extends Controller
         error_reporting(0);
 
         $disk = config('filesystems.default');
-        switch (config("filesystems.disks.$disk.driver")) {
+        switch ($disk) {
 
-            case 's3':
+            case 's3_private':
                 $file = 'private_uploads/signatures/'.$filename;
                 return redirect()->away(Storage::disk($disk)->temporaryUrl($file, now()->addMinutes(5)));
             default:
