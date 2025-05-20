@@ -125,7 +125,7 @@ class AssetsController extends Controller
             $asset->name = $request->input('name');
 
             //Validate required serial based on model setting
-            if ($model && $model->require_serial === 1 && empty($serials[$a] ?? null)) {
+            if ($model && $model->require_serial === 1 && empty($serials[$a])) {
                 return redirect()->back()
                     ->withInput()
                     ->withErrors([
@@ -423,7 +423,7 @@ class AssetsController extends Controller
         session()->put(['redirect_option' => $request->get('redirect_option'), 'checkout_to_type' => $request->get('checkout_to_type')]);
 
         //Validate required serial based on model setting
-        if ($model && $model->require_serial === 1 && empty($serial[1] ?? null)) {
+        if ($model && $model->require_serial === 1 && empty($serial[1])) {
             return redirect()->to(Helper::getRedirectOption($request, $asset->id, 'Assets'))
                 ->with('warning', trans('admin/hardware/form.serial_required_post_model_update', [
                     'asset_model' => $model->name
