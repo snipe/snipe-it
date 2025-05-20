@@ -69,7 +69,7 @@ class CheckoutableListener
             return;
         }
 
-        $shouldSendEmailToUser = $this->shouldSendEmailToUser($event->checkoutable);
+        $shouldSendEmailToUser = $this->shouldSendCheckoutEmailToUser($event->checkoutable);
         $shouldSendEmailToAlertAddress = $this->shouldSendEmailToAlertAddress();
         $shouldSendWebhookNotification = $this->shouldSendWebhookNotification();
 
@@ -395,7 +395,7 @@ class CheckoutableListener
         return Setting::getSettings()->webhook_selected === 'microsoft' && Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows');
     }
 
-    private function shouldSendEmailToUser(Model $checkoutable): bool
+    private function shouldSendCheckoutEmailToUser(Model $checkoutable): bool
     {
         /**
          * Send an email if any of the following conditions are met:
