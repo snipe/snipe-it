@@ -191,7 +191,6 @@ class SlackSettingsForm extends Component
             $this->setting->webhook_endpoint = '';
             $this->setting->webhook_channel = '';
             $this->setting->webhook_botname = '';
-            $this->setting->webhook_selected = '';
 
             $this->setting->save();
 

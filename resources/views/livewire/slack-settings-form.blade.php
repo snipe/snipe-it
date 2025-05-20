@@ -72,6 +72,7 @@
                                     :options="['slack' => trans('admin/settings/general.slack'), 'general' => trans('admin/settings/general.general_webhook'),'google' => trans('admin/settings/general.google_workspaces'), 'microsoft' => trans('admin/settings/general.ms_teams')]"
                                     :selected="old('webhook_selected', $webhook_selected)"
                                     :disabled="Helper::isDemoMode()"
+                                    :for-livewire="true"
                                     data-minimum-results-for-search="-1"
                                     class="form-control"
                                     style="width:100%"
@@ -174,22 +175,3 @@
     </div> <!-- /.row -->
 </form>
 </div>  <!-- /livewire div -->
-
-
-
-
-@section('moar_scripts')
-<script>
-    $(document).ready(function () {
-        $('#select2').select2();
-        $('#select2').on('change', function (e) {
-            var data = $('#select2').select2("val");
-            @this.set('webhook_selected', data);
-        });
-    });
-
-
-</script>
-@endsection
-
-
