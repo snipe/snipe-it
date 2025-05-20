@@ -71,7 +71,7 @@ class SlackSettingsForm extends Component
 
         $this->setting = Setting::getSettings();
         $this->save_button = trans('general.save');
-        $this->webhook_selected = $this->setting->webhook_selected ?? 'slack';
+        $this->webhook_selected = ($this->setting->webhook_selected !== '') ? $this->setting->webhook_selected : 'slack';
         $this->webhook_name = $this->webhook_text[$this->setting->webhook_selected]["name"] ?? $this->webhook_text['slack']["name"];
         $this->webhook_icon = $this->webhook_text[$this->setting->webhook_selected]["icon"] ?? $this->webhook_text['slack']["icon"];
         $this->webhook_placeholder = $this->webhook_text[$this->setting->webhook_selected]["placeholder"] ?? $this->webhook_text['slack']["placeholder"];
