@@ -39,13 +39,13 @@ class UploadedFilesController extends Controller
     ];
 
     static $map_storage_path = [
-        'accessories' => 'private_uploads/accessories',
-        'assets' => 'private_uploads/assets',
-        'components' => 'private_uploads/components',
-        'consumables' => 'private_uploads/consumables',
-        'locations' => 'private_uploads/locations',
-        'models' => 'private_uploads/assetmodels',
-        'users' => 'private_uploads/users',
+        'accessories' => 'private_uploads/accessories/',
+        'assets' => 'private_uploads/assets/',
+        'components' => 'private_uploads/components/',
+        'consumables' => 'private_uploads/consumables/',
+        'locations' => 'private_uploads/locations/',
+        'models' => 'private_uploads/assetmodels/',
+        'users' => 'private_uploads/users/',
     ];
 
     static $map_file_prefix= [
@@ -74,7 +74,7 @@ class UploadedFilesController extends Controller
         $this->authorize('view', $object);
 
         if (!$object) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid item ID', 200));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_upload_status.invalid_object')));
         }
 
         // Columns allowed for sorting
@@ -119,16 +119,15 @@ class UploadedFilesController extends Controller
      */
     public function store(UploadFileRequest $request, $object_type, $id) : JsonResponse
     {
+        \Log::debug('store fired');
 
         $object = self::$map_object_type[$object_type]::find($id);
         $this->authorize('view', $object);
 
         if (!$object) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid item ID', 200));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_upload_status.invalid_object')));
         }
 
-
-        \Log::error('onject type: '.self::$map_storage_path[$object_type]);
         if ($request->hasFile('file')) {
             // If the file storage directory doesn't exist, create it
             if (! Storage::exists(self::$map_storage_path[$object_type])) {
@@ -147,11 +146,11 @@ class UploadedFilesController extends Controller
                 ->where('item_id', '=', $id)->whereIn('filename', $files)
                 ->get();
 
-            return response()->json(Helper::formatStandardApiResponse('success', (new UploadedFilesTransformer())->transformFiles($files, count($files)), trans('admin/hardware/message.upload.success')));
+            return response()->json(Helper::formatStandardApiResponse('success', (new UploadedFilesTransformer())->transformFiles($files, count($files)), trans_choice('general.file_upload_status.upload.success',  count($files))));
         }
 
         // No files were submitted
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.upload.nofiles')), 500);
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_upload_status.nofiles')));
     }
 
 
@@ -166,13 +165,13 @@ class UploadedFilesController extends Controller
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function show(Request $request,  $object_type, $id, $file_id) : JsonResponse | StreamedResponse | Storage | StorageHelper | BinaryFileResponse
+    public function show($object_type, $id, $file_id) : JsonResponse | StreamedResponse | Storage | StorageHelper | BinaryFileResponse
     {
         $object = self::$map_object_type[$object_type]::find($id);
         $this->authorize('view', $object);
 
         if (!$object) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid item ID', 200));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_upload_status.invalid_object')));
         }
 
 
@@ -180,12 +179,12 @@ class UploadedFilesController extends Controller
         if (! $log = Actionlog::whereNotNull('filename')
             ->where('item_type', AssetModel::class)
             ->where('item_id', $object->id)->find($file_id)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.no_match', ['id' => $file_id])), 404);
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_upload_status.invalid_id')), 404);
         }
 
 
         if (! Storage::exists(self::$map_storage_path[$object_type].'/'.$log->filename)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, 'File does not exist', 200));
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_upload_status.file_not_found'), 200));
         }
 
         if (request('inline') == 'true') {
@@ -213,6 +212,11 @@ class UploadedFilesController extends Controller
         $object = self::$map_object_type[$object_type]::find($id);
         $this->authorize('update', $file_id);
 
+        if (!$object) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_upload_status.invalid_object')));
+        }
+
+
         // Check for the file
         $log = Actionlog::find($file_id)->where('item_type', AssetModel::class)
             ->where('item_id', $object->id)->first();
@@ -224,14 +228,14 @@ class UploadedFilesController extends Controller
             }
             // Delete the record of the file
             if ($log->delete()) {
-                return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.deletefile.success')), 200);
+                return response()->json(Helper::formatStandardApiResponse('success', null, trans_choice('general.file_upload_status.delete.success', 1)), 200);
             }
 
 
         }
 
         // The file doesn't seem to really exist, so report an error
-        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.deletefile.error')), 500);
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans_choice('general.file_upload_status.delete.error', 1)), 500);
 
     }
 }
