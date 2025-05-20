@@ -378,7 +378,8 @@
             if ((row.available_actions) && (row.available_actions.update === true)) {
                 actions += '<a href="{{ config('app.url') }}/' + dest + '/' + row.id + '/edit" class="actions btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><x-icon type="edit" /><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
             } else {
-                if ((row.available_actions) && (row.available_actions.update != true)) {
+                // check that row.available_actions.update is set in the API response - if not, don't even show the button
+                if ((row.available_actions) && (row.available_actions.update) && (row.available_actions.update != true)) {
                     actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_edited') }}"><a class="btn btn-warning btn-sm disabled" onClick="return false;"><x-icon type="edit" /></a></span>&nbsp;';
                 }
             }
@@ -785,9 +786,13 @@
         }
     }
 
-    function iconFormatter(value) {
+    function iconFormatter(value, row) {
         if (value) {
+            if (row.filetype) {
+                return '<span data-tooltip="true" title=" ' + row.filetype + '"><i class="' + value + '  icon-med"></i></span>';
+            }
             return '<i class="' + value + '  icon-med"></i>';
+
         }
     }
 
@@ -880,7 +885,11 @@
 
         if (row && row.url)
         {
-            return '<a href="' + row.url + '" class="btn btn-sm btn-default"><x-icon type="download" /></a> <a href="' + row.url + '?inline=true" class="btn btn-sm btn-default" target="_blank"><x-icon type="external-link" /></a>';
+            if (row.exists_on_disk) {
+                return '<a href="' + row.url + '" class="btn btn-sm btn-default"><x-icon type="download" /></a> <a href="' + row.url + '?inline=true" class="btn btn-sm btn-default" target="_blank"><x-icon type="external-link" /></a>';
+            } else {
+                return '<span class="btn btn-sm btn-default disabled" data-tooltip="true" title="{{ trans('general.file_does_not_exist') }}"><x-icon type="download" /></span> <span class="btn btn-sm btn-default disabled" data-tooltip="true" title="{{ trans('general.file_does_not_exist') }}"><x-icon type="external-link" /></span>';
+            }
         }
 
     }
@@ -894,10 +903,16 @@
     }
 
 
-    function fileUploadNameFormatter(value) {
+    function fileUploadNameFormatter(row, value) {
+
         if ((value) && (value.filename) && (value.url)) {
-            return '<a href="' + value.url + '">' + value.filename + '</a>';
-        }
+            if (value.exists_on_disk) {
+                return '<a href="' + value.url + '?inline=true" target="_blank">' + value.filename + '</a>';
+            } else {
+                return '<span data-tooltip="true" title="{{ trans('general.file_does_not_exist') }}"><x-icon type="x" class="text-danger" /> <del>' + value.filename + '</del></span>';
+            }
+
+        } 
     }
 
     function linkToUserSectionBasedOnCount (count, id, section) {
