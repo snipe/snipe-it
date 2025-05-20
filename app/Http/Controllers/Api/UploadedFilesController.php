@@ -128,13 +128,14 @@ class UploadedFilesController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_upload_status.invalid_object')));
         }
 
-        if ($request->hasFile('file')) {
-            // If the file storage directory doesn't exist, create it
-            if (! Storage::exists(self::$map_storage_path[$object_type])) {
-                Storage::makeDirectory(self::$map_storage_path[$object_type], 775);
-            }
+        // If the file storage directory doesn't exist, create it
+        if (! Storage::exists(self::$map_storage_path[$object_type])) {
+            Storage::makeDirectory(self::$map_storage_path[$object_type], 775);
+        }
 
-            // Loop over the attached files and add them to the asset
+
+        if ($request->hasFile('file')) {
+            // Loop over the attached files and add them to the object
             foreach ($request->file('file') as $file) {
                 $file_name = $request->handleFile(self::$map_storage_path[$object_type],self::$map_file_prefix[$object_type].'-'.$object->id, $file);
                 $files[] = $file_name;
