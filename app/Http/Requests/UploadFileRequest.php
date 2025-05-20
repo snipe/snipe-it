@@ -6,6 +6,7 @@ use App\Http\Traits\ConvertsBase64ToFiles;
 use enshrined\svgSanitize\Sanitizer;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use \App\Helpers\Helper;
 
 class UploadFileRequest extends Request
 {
@@ -27,7 +28,7 @@ class UploadFileRequest extends Request
      */
     public function rules()
     {
-        $max_file_size = \App\Helpers\Helper::file_upload_max_size();
+        $max_file_size = Helper::file_upload_max_size();
 
         return [
           'file.*' => 'required|mimes:png,gif,jpg,svg,jpeg,doc,docx,pdf,txt,zip,rar,xls,xlsx,lic,xml,rtf,json,webp,avif|max:'.$max_file_size,
@@ -37,9 +38,6 @@ class UploadFileRequest extends Request
     /**
      * Sanitizes (if needed) and Saves a file to the appropriate location
      * Returns the 'short' (storage-relative) filename
-     *
-     * TODO - this has a lot of similarities to UploadImageRequest's handleImage; is there
-     *        a way to merge them or extend one into the other?
      */
     public function handleFile(string $dirname, string $name_prefix, $file): string
     {
