@@ -958,13 +958,6 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     'downloadBackup'
                 ]
             )->name('api.settings.backups.download');  
-            
-            Route::get('version', 
-                [
-                    Api\VersionController::class, 
-                    'index'
-                ]
-            )->name('api.version.index');
 
             Route::resource('settings', 
             Api\SettingsController::class,
@@ -1323,18 +1316,16 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
 
 
     /**
-         * Version API routes
-         */
-
-        Route::get('/version', function () {
-            return response()->json(
-                [
-                    'version' => config('version.app_version'),
-                ], 200);
-        }); // end version api routes
+     * Version API routes
+     */ Route::get('/version',
+        [
+            Api\VersionController::class,
+            'index'
+        ]
+        )->name('api.version.index'); // end version api routes
 
 
-        Route::fallback(function () {
+    Route::fallback(function () {
             return response()->json(
                 [
                     'status' => 'error',
