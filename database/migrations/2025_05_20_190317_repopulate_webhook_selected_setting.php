@@ -11,21 +11,23 @@ return new class extends Migration {
     {
         $settings = DB::table('settings')->first();
 
-        /** If webhook settings were cleared via the integration settings page,
-         * the webhook_selected was cleared as well when it should have reset to "slack".
-         */
-        if (
-            empty($settings->webhook_selected) &&
-            (empty($settings->webhook_botname) && empty($settings->webhook_channel) && empty($settings->webhook_endpoint))
-        ) {
-            DB::table('settings')->update(['webhook_selected' => 'slack']);
-        }
+        if ($settings) {
+            /** If webhook settings were cleared via the integration settings page,
+             * the webhook_selected was cleared as well when it should have reset to "slack".
+             */
+            if (
+                empty($settings->webhook_selected) &&
+                (empty($settings->webhook_botname) && empty($settings->webhook_channel) && empty($settings->webhook_endpoint))
+            ) {
+                DB::table('settings')->update(['webhook_selected' => 'slack']);
+            }
 
-        /** If webhook settings were cleared via the integration settings page,
-         * then slack settings were re-added; then webhook_selected was not being set to "slack" as needed.
-         */
-        if (str_contains($settings->webhook_endpoint, 'slack.com')) {
-            DB::table('settings')->update(['webhook_selected' => 'slack']);
+            /** If webhook settings were cleared via the integration settings page,
+             * then slack settings were re-added; then webhook_selected was not being set to "slack" as needed.
+             */
+            if (str_contains($settings->webhook_endpoint, 'slack.com')) {
+                DB::table('settings')->update(['webhook_selected' => 'slack']);
+            }
         }
     }
 
