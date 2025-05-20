@@ -27,7 +27,7 @@ class UploadsPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => false,
-                'title' => '',
+                'title' => trans('general.file_type'),
                 'formatter' => 'iconFormatter',
             ],
             [
@@ -45,14 +45,7 @@ class UploadsPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.file_name'),
                 'visible' => true,
-            ],
-            [
-                'field' => 'filetype',
-                'searchable' => true,
-                'sortable' => false,
-                'switchable' => true,
-                'title' => trans('general.file_type'),
-                'visible' => true,
+                'formatter' => 'fileUploadNameFormatter',
             ],
             [
                 'field' => 'download',
