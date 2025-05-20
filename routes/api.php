@@ -1296,39 +1296,46 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         // end generate label routes
 
 
-    // Uploaded files handler
+
+    /**
+     * Uploaded files API routes
+     */
+
+    // List files
     Route::get('{object_type}/{id}/files',
         [
             Api\UploadedFilesController::class,
             'index'
         ]
     )->name('api.files.index')
-        ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
+    ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
 
+    // Get a file
     Route::get('{object_type}/{id}/files/{file_id}',
         [
             Api\UploadedFilesController::class,
             'show'
         ]
     )->name('api.files.show')
-        ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
+    ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
 
-
+    // Upload files(s)
     Route::post('{object_type}/{id}/files',
         [
             Api\UploadedFilesController::class,
             'store'
         ]
     )->name('api.files.store')
-        ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
+    ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
 
-    Route::delete('{object_type}/files/{id}/delete',
+    // Delete files(s)
+    Route::delete('{object_type}/{id}/files/{file_id}/delete',
         [
             Api\UploadedFilesController::class,
             'destroy'
         ]
     )->name('api.files.destroy')
-        ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
+    ->where(['object_type' => 'assets|models|users|locations|accessories|consumables|licenses|components']);
 
 
 }); // end API routes
