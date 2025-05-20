@@ -19,9 +19,9 @@ class VersionController extends Controller
         return response()->json(
             [
                 'version' => config('version.app_version'),
-                'full_version' => config('version.full_app_version'),
                 'build_version' => config('version.build_version'),
-                'hash_version' => config('version.hash_version')
+                'hash_version' => config('version.hash_version'),
+                'full_version' => config('version.full_app_version')
             ]
         );
     }
