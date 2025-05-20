@@ -30,9 +30,7 @@ class UploadedFilesTransformer
             'id' => (int) $file->id,
             'icon' => Helper::filetype_icon($file->filename),
             'filename' => e($file->filename),
-            'inline' => StorageHelper::allowSafeInline($file->uploads_file_path()),
             'filetype' => StorageHelper::getFiletype($file->uploads_file_path()),
-            'exists_on_disk' => (Storage::exists($file->uploads_file_path()) ? true : false),
             'url' => $file->uploads_file_url(),
             'created_by' => ($file->adminuser) ? [
                 'id' => (int) $file->adminuser->id,
@@ -41,6 +39,8 @@ class UploadedFilesTransformer
             'note' =>  ($file->note) ? e($file->note) : null,
             'created_at' => Helper::getFormattedDateObject($file->created_at, 'datetime'),
             'deleted_at' => Helper::getFormattedDateObject($file->deleted_at, 'datetime'),
+            'inline' => StorageHelper::allowSafeInline($file->uploads_file_path()),
+            'exists_on_disk' => (Storage::exists($file->uploads_file_path()) ? true : false),
         ];
 
         $permissions_array['available_actions'] = [
