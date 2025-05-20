@@ -110,28 +110,37 @@ class AssetsController extends Controller
         // This is only necessary on create, not update, since bulk editing is handled
         // differently
         $asset_tags = $request->input('asset_tags');
+        $model = AssetModel::find($request->input('model_id'));
+        $serial_errors = [];
+        $serials = $request->input('serials');
 
         $settings = Setting::getSettings();
 
+        //Validate required serial based on model setting
+        for ($a = 1, $aMax = count($asset_tags); $a <= $aMax; $a++) {
+            if ($model && $model->require_serial === 1 && empty($serials[$a])) {
+                $serial_errors["serials.$a"] = trans('admin/hardware/form.serial_required', ['number' => $a]);
+            }
+
+        }
+
+        if (!empty($serial_errors)) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($serial_errors);
+        }
+
+        $asset = null;
+        $companyId = Company::getIdForCurrentUser($request->input('company_id'));
         $successes = [];
         $failures = [];
-        $serials = $request->input('serials');
-        $asset = null;
 
-        for ($a = 1; $a <= count($asset_tags); $a++) {
+        for ($a = 1, $aMax = count($asset_tags); $a <= $aMax; $a++) {
             $asset = new Asset();
-            $model = AssetModel::find($request->input('model_id'));
+
             $asset->model()->associate($model);
             $asset->name = $request->input('name');
 
-            //Validate required serial based on model setting
-            if ($model && $model->require_serial === 1 && empty($serials[$a])) {
-                return redirect()->back()
-                    ->withInput()
-                    ->withErrors([
-                        "serials.$a" => trans('admin/hardware/form.serial_required'),
-                    ]);
-            }
             // Check for a corresponding serial
             if (($serials) && (array_key_exists($a, $serials))) {
                 $asset->serial = $serials[$a];
@@ -141,7 +150,7 @@ class AssetsController extends Controller
                 $asset->asset_tag = $asset_tags[$a];
             }
 
-            $asset->company_id              = Company::getIdForCurrentUser($request->input('company_id'));
+            $asset->company_id              = $companyId;
             $asset->model_id                = $request->input('model_id');
             $asset->order_number            = $request->input('order_number');
             $asset->notes                   = $request->input('notes');
@@ -173,7 +182,6 @@ class AssetsController extends Controller
 
             // Update custom fields in the database.
             // Validation for these fields is handled through the AssetRequest form request
-            $model = AssetModel::find($request->get('model_id'));
 
             if (($model) && ($model->fieldset)) {
                 foreach ($model->fieldset->fields as $field) {
