@@ -108,10 +108,12 @@ class EmailNotificationsUponCheckinTest extends TestCase
         $user = User::factory()->create();
         $asset = Asset::factory()->assignedToUser($user)->create();
 
+        $asset->model->category->update(['checkin_email' => true]);
+
         $this->fireCheckInEvent($asset, $user);
 
-        Mail::assertSent(CheckinAssetMail::class, function ($mail) use ($user) {
-            return $mail->hasTo($user->email);
+        Mail::assertSent(CheckinAssetMail::class, function (CheckinAssetMail $mail) use ($user) {
+            return $mail->hasTo($user->email) && $mail->hasCc('cc@example.com');
         });
     }
 
