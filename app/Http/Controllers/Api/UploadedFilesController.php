@@ -31,6 +31,8 @@ class UploadedFilesController extends Controller
     static $map_object_type = [
         'accessories' => Accessory::class,
         'assets' => Asset::class,
+        'components' => Component::class,
+        'consumables' => Consumable::class,
         'locations' => Location::class,
         'models' => AssetModel::class,
         'users' => User::class,
@@ -39,9 +41,21 @@ class UploadedFilesController extends Controller
     static $map_storage_path = [
         'accessories' => 'private_uploads/accessories',
         'assets' => 'private_uploads/assets',
+        'components' => 'private_uploads/components',
+        'consumables' => 'private_uploads/consumables',
         'locations' => 'private_uploads/locations',
         'models' => 'private_uploads/assetmodels',
         'users' => 'private_uploads/users',
+    ];
+
+    static $map_file_prefix= [
+        'accessories' => 'accessory',
+        'assets' => 'asset',
+        'components' => 'component',
+        'consumables' => 'consumable',
+        'locations' => 'location',
+        'models' => 'model',
+        'users' => 'user',
     ];
 
 
@@ -59,6 +73,11 @@ class UploadedFilesController extends Controller
         $object = self::$map_object_type[$object_type]::find($id);
         $this->authorize('view', $object);
 
+        if (!$object) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid item ID', 200));
+        }
+
+        // Columns allowed for sorting
         $allowed_columns =
             [
                 'id',
@@ -74,6 +93,9 @@ class UploadedFilesController extends Controller
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
         $sort = in_array($request->input('sort'), $allowed_columns) ? $request->input('sort') : 'action_logs.created_at';
 
+        // Text search on action_logs fields
+        // We could use the normal Actionlogs text scope, but it's a very heavy query since it's searcghing across all relations
+        // And we generally won't need that here
         if ($request->filled('search')) {
 
             $uploads->where(function ($query) use ($request) {
@@ -101,6 +123,12 @@ class UploadedFilesController extends Controller
         $object = self::$map_object_type[$object_type]::find($id);
         $this->authorize('view', $object);
 
+        if (!$object) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid item ID', 200));
+        }
+
+
+        \Log::error('onject type: '.self::$map_storage_path[$object_type]);
         if ($request->hasFile('file')) {
             // If the file storage directory doesn't exist, create it
             if (! Storage::exists(self::$map_storage_path[$object_type])) {
@@ -109,7 +137,7 @@ class UploadedFilesController extends Controller
 
             // Loop over the attached files and add them to the asset
             foreach ($request->file('file') as $file) {
-                $file_name = $request->handleFile(self::$map_storage_path[$object_type],$object_type.'-'.$object->id, $file);
+                $file_name = $request->handleFile(self::$map_storage_path[$object_type],self::$map_file_prefix[$object_type].'-'.$object->id, $file);
                 $files[] = $file_name;
                 $object->logUpload($file_name, $request->get('notes'));
             }
@@ -138,10 +166,15 @@ class UploadedFilesController extends Controller
      * @since [v7.0.12]
      * @author [r-xyz]
      */
-    public function show($object_type, $id, $file_id) : JsonResponse | StreamedResponse | Storage | StorageHelper | BinaryFileResponse
+    public function show(Request $request,  $object_type, $id, $file_id) : JsonResponse | StreamedResponse | Storage | StorageHelper | BinaryFileResponse
     {
         $object = self::$map_object_type[$object_type]::find($id);
         $this->authorize('view', $object);
+
+        if (!$object) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'Invalid item ID', 200));
+        }
+
 
         // Check that the file being requested exists for the asset
         if (! $log = Actionlog::whereNotNull('filename')
@@ -150,24 +183,19 @@ class UploadedFilesController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.no_match', ['id' => $file_id])), 404);
         }
 
-        // Form the full filename with path
-        $file = 'private_uploads/assetmodels/'.$log->filename;
-        Log::debug('Checking for '.$file);
 
-        // Check the file actually exists on the filesystem
-        if (! Storage::exists($file)) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.download.does_not_exist', ['id' => $file_id])), 404);
+        if (! Storage::exists(self::$map_storage_path[$object_type].'/'.$log->filename)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, 'File does not exist', 200));
         }
 
         if (request('inline') == 'true') {
             $headers = [
                 'Content-Disposition' => 'inline',
             ];
-            return Storage::download($file, $log->filename, $headers);
+            return Storage::download(self::$map_storage_path[$object_type].'/'.$log->filename, $log->filename, $headers);
         }
 
-        return StorageHelper::downloader($file);
-        // Send back an error message
+        return StorageHelper::downloader(self::$map_storage_path[$object_type].'/'.$log->filename);
 
     }
 
