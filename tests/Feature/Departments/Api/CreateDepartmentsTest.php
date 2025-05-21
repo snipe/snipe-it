@@ -3,6 +3,7 @@
 namespace Tests\Feature\Departments\Api;
 
 use App\Models\AssetModel;
+use App\Models\Company;
 use App\Models\Department;
 use App\Models\Category;
 use App\Models\User;
@@ -37,6 +38,17 @@ class CreateDepartmentsTest extends TestCase
         $department = Department::find($response['payload']['id']);
         $this->assertEquals('Test Department', $department->name);
         $this->assertEquals('Test Note', $department->notes);
+    }
+
+    public function testNoArraysAllowed()
+    {
+        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.departments.store'), [
+                'name'       => 'Test Department',
+                'company_id' => [1, 2],
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
     }
 
 }

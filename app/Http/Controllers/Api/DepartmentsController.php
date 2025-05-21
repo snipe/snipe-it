@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Transformers\DepartmentsTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Department;
@@ -94,7 +95,7 @@ class DepartmentsController extends Controller
      * @since [v4.0]
      * @param  \App\Http\Requests\ImageUploadRequest  $request
      */
-    public function store(ImageUploadRequest $request) : JsonResponse
+    public function store(StoreDepartmentRequest $request): JsonResponse
     {
         $this->authorize('create', Department::class);
         $department = new Department;
