@@ -324,11 +324,7 @@
                   </strong>
               </div>
               <div class="col-md-9" style="word-wrap: break-word;">
-                  @if ($accessory->adminuser)
-                      {{ $accessory->adminuser->present()->fullName() }}
-                  @else
-                      {{ trans('admin/reports/general.deleted_user') }}
-                  @endif
+                  <x-full-user-name :user="$accessory->adminuser" />
               </div>
           </div>
 
