@@ -27,7 +27,8 @@ class CreateDepartmentsTest extends TestCase
         $company = Company::factory()->create();
         $location = Location::factory()->create();
         $manager = User::factory()->create();
-        $response = $this->actingAsForApi(User::factory()->superuser()->create())
+        $user = User::factory()->superuser()->create();
+        $response = $this->actingAsForApi($user)
             ->postJson(route('api.departments.store'), [
                 'name'       => 'Test Department',
                 'company_id' => $company->id,
@@ -46,6 +47,17 @@ class CreateDepartmentsTest extends TestCase
         $department = Department::find($response['payload']['id']);
         $this->assertEquals('Test Department', $department->name);
         $this->assertEquals('Test Note', $department->notes);
+
+        $this->assertDatabaseHas('departments', [
+            'name'        => 'Test Department',
+            'company_id'  => $company->id,
+            'location_id' => $location->id,
+            'manager_id'  => $manager->id,
+            'notes'       => 'Test Note',
+            'phone'       => '1234567890',
+            'fax'         => '1234567890',
+            'created_by'  => $user->id,
+        ]);
     }
 
     public function test_name_required_for_department()
