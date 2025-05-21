@@ -113,6 +113,12 @@ return [
             'display'    => true,
         ],
 
+        [
+            'permission' => 'assets.view.purchase_cost',
+            'label'      => 'View and Modify Purchase Cost',
+            'note'       => '',
+            'display'    => true,
+        ],
     ],
 
     'Accessories' => [
@@ -159,6 +165,13 @@ return [
             'display'    => true,
         ],
 
+        [
+            'permission' => 'accesories.view.purchase_cost',
+            'label'      => 'View and Modify Purchase Cost',
+            'note'       => '',
+            'display'    => true,
+        ],
+
     ],
 
     'Consumables' => [
@@ -195,6 +208,13 @@ return [
         [
             'permission' => 'consumables.files',
             'label'      => 'View and Modify Consumable Files',
+            'note'       => '',
+            'display'    => true,
+        ],
+
+        [
+            'permission' => 'consumables.view.purchase_cost',
+            'label'      => 'View and Modify Purchase Cost',
             'note'       => '',
             'display'    => true,
         ],
@@ -244,6 +264,13 @@ return [
             'note'       => '',
             'display'    => true,
         ],
+
+        [
+            'permission' => 'licenses.view.purchase_cost',
+            'label'      => 'View and Modify Purchase Cost',
+            'note'       => '',
+            'display'    => true,
+        ],
     ],
 
 
@@ -287,6 +314,13 @@ return [
         [
             'permission' => 'components.files',
             'label'      => 'View and Modify Component Files',
+            'note'       => '',
+            'display'    => true,
+        ],
+
+        [
+            'permission' => 'components.view.purchase_cost',
+            'label'      => 'View and Modify Purchase Cost',
             'note'       => '',
             'display'    => true,
         ],

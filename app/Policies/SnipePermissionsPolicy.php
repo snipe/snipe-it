@@ -160,4 +160,15 @@ abstract class SnipePermissionsPolicy
     {
         return $user->hasAccess($this->columnName().'.edit');
     }
+
+    /**
+     * Determine whether the user can view the purchase cost.
+     *
+     * @param \App\Models\User  $user
+     * @return mixed
+     */
+    public function viewPurchaseCost(User $user)
+    {
+        return $user->hasAccess($this->columnName().'.view.purchase_cost');
+    }
 }
