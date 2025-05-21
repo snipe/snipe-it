@@ -12,5 +12,5 @@
     @endif
 @else
     {{-- if the user does not exist --}}
-    <span>Unknown User</span>
+    <span>{{ trans('general.unknown_user') }}</span>
 @endif
