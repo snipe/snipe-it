@@ -6,9 +6,9 @@ use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\Department;
 use App\Models\Category;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Testing\Fluent\AssertableJson;
-use phpDocumentor\Reflection\Location;
 use Tests\TestCase;
 
 class CreateDepartmentsTest extends TestCase
@@ -25,13 +25,13 @@ class CreateDepartmentsTest extends TestCase
     public function test_can_create_department_with_all_fields()
     {
         $company = Company::factory()->create();
-        //$location = Location::factory()->create(); ???
+        $location = Location::factory()->create();
         $manager = User::factory()->create();
         $response = $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.departments.store'), [
                 'name'       => 'Test Department',
                 'company_id' => $company->id,
-                //'location_id' => $location->id,
+                'location_id' => $location->id,
                 'manager_id' => $manager->id,
                 'notes'      => 'Test Note',
                 'phone'      => '1234567890',
