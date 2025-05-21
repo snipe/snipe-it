@@ -97,9 +97,8 @@ class DepartmentsController extends Controller
      */
     public function store(StoreDepartmentRequest $request): JsonResponse
     {
-        $this->authorize('create', Department::class);
         $department = new Department;
-        $department->fill($request->all());
+        $department->fill($request->validated());
         $department = $request->handleImages($department);
 
         $department->created_by = auth()->id();
