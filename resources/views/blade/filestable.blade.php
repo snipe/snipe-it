@@ -52,9 +52,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         %INLINE_IMAGE%
-                        <p>{{ trans('general.created_at') }}: %CREATED_AT%</p>
-                        <p>{{ trans('general.created_by') }}: %CREATED_BY%</p>
-                        <p>{{ trans('general.notes') }}: %NOTE%</p>
+                        <br>
+                        <p>
+                            <strong>{{ trans('general.created_at') }}:</strong> %CREATED_AT% <br>
+                            <strong>{{ trans('general.created_by') }}:</strong> %CREATED_BY% <br>
+                            <strong>{{ trans('general.notes') }}:</strong> %NOTE%
+                        </p>
                     </div>
                 </div>
             </div>
