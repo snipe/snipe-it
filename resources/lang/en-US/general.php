@@ -303,7 +303,6 @@ return [
     'type'  				=> 'Type',
     'undeployable'			=> 'Un-deployable',
     'unknown_admin'			=> 'Unknown Admin',
-    'unknown_user' => 'Unknown User',
     'username'              => 'Username',
     'update'                => 'Update',
     'updating_item' => 'Updating :item',
