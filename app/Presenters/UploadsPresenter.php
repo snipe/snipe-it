@@ -13,11 +13,11 @@ class UploadsPresenter extends Presenter
      */
     public static function dataTableLayout($object)
     {
-        \Log::debug($object);
 
         if ($object =='assets') {
             $object = 'hardware';
         }
+
         $layout = [
             [
                 'field' => 'id',
@@ -91,7 +91,7 @@ class UploadsPresenter extends Presenter
                 'sortable' => false,
                 'switchable' => false,
                 'title' => trans('table.actions'),
-                'formatter' => $object.'deleteUploadFormatter',
+                'formatter' => $object.'ActionsFormatter',
             ],
         ];
 
