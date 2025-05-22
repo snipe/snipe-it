@@ -463,7 +463,7 @@ class Actionlog extends SnipeModel
             case Location::class:
                 return route('show/locationsfile', [$this->item_id, $this->id]);
             case User::class:
-                return route('show/usersfile', [$this->item_id, $this->id]);
+                return route('show/userfile', [$this->item_id, $this->id]);
             default:
                 return null;
         }
