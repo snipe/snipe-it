@@ -642,6 +642,7 @@ return [
         'invalid_id' => 'That file ID is invalid',
         'invalid_object' => 'That object ID is invalid',
         'nofiles' => 'No files were included for upload',
+        'confirm_delete' => 'Are you sure you want to delete this file?',
     ],
 
 ];
