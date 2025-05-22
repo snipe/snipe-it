@@ -25,30 +25,24 @@ class UserFilesController extends Controller
     public function store(UploadFileRequest $request, User $user)
     {
         $this->authorize('update', $user);
-        $files = $request->file('file');
 
-        if (is_null($files)) {
-            return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
+        if ($request->hasFile('file')) {
+
+            if (! Storage::exists('private_uploads/users')) {
+                Storage::makeDirectory('private_uploads/users', 775);
+            }
+
+            $file_count = 0;
+            foreach ($request->file('file') as $file) {
+                $file_name = $request->handleFile('private_uploads/users/','hardware-'.$user->id, $file);
+                $user->logUpload($file_name, $request->get('notes'));
+                $file_count++;
+            }
+
+            return redirect()->back()->withFragment('files')->with('success', trans_choice('general.file_upload_status.upload.success', $file_count));
         }
 
-        foreach ($files as $file) {
-            \Log::debug($file);
-
-            $file_name = $request->handleFile('private_uploads/users/', 'user-'.$user->id, $file);
-
-            //Log the uploaded file to the log
-            $logAction = new Actionlog();
-            $logAction->item_id = $user->id;
-            $logAction->item_type = User::class;
-            $logAction->created_by = auth()->id();
-            $logAction->note = $request->input('notes');
-            $logAction->target_id = null;
-            $logAction->created_at = date("Y-m-d H:i:s");
-            $logAction->filename = $file_name;
-            $logAction->action_type = 'uploaded';
-        }
-
-        return redirect()->back()->withFragment('files')->with('success', trans('admin/users/message.upload.success'));
+        return redirect()->back()->with('error', trans('general.file_upload_status.nofiles'));
 
 
     }
