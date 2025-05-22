@@ -10,11 +10,14 @@
 <!-- begin non-ajaxed file listing table -->
 
     <table
-            data-columns="{{ \App\Presenters\UploadsPresenter::dataTableLayout() }}"
+            data-columns="{{ \App\Presenters\UploadsPresenter::dataTableLayout($object_type) }}"
             data-cookie-id-table="{{ str_slug($object->name ?? $object->id) }}UploadsTable"
             data-id-table="{{ str_slug($object->name ?? $object->id) }}UploadsTable"
             id="{{ str_slug($object->name ?? $object->id) }}UploadsTable"
             data-search="true"
+            data-show-custom-view="true"
+            data-custom-view="fileGalleryFormatter"
+            data-show-custom-view-button="true"
             data-pagination="true"
             data-side-pagination="server"
             data-show-columns="true"
@@ -34,5 +37,38 @@
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","delete","download","icon"]
                     }'>
     </table>
+
+<template id="fileGalleryTemplate">
+    <div class="col-md-4">
+        <div class="panel panel-%PANEL_CLASS%">
+
+            <div class="panel-heading">
+                <h3 class="panel-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    <i class="%ICON%"></i> %FILENAME%
+                </h3>
+            </div>
+
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        %INLINE_IMAGE%
+                        <p>{{ trans('general.created_at') }}: %CREATED_AT%</p>
+                        <p>{{ trans('general.created_by') }}: %CREATED_BY%</p>
+                        <p>{{ trans('general.notes') }}: %NOTE%</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-footer">
+                <div class="pull-right">
+                    %DOWNLOAD_BUTTON% %NEW_WINDOW_BUTTON%
+                </div>
+                %DELETE_BUTTON%
+             </div>
+
+        </div>
+    </div>
+</template>
+
 
 <!-- end non-ajaxed file listing table -->
