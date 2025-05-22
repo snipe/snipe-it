@@ -30,7 +30,10 @@ class UserFilesController extends Controller
         if (is_null($files)) {
             return redirect()->back()->with('error', trans('admin/users/message.upload.nofiles'));
         }
+
         foreach ($files as $file) {
+            \Log::debug($file);
+
             $file_name = $request->handleFile('private_uploads/users/', 'user-'.$user->id, $file);
 
             //Log the uploaded file to the log
@@ -43,13 +46,9 @@ class UserFilesController extends Controller
             $logAction->created_at = date("Y-m-d H:i:s");
             $logAction->filename = $file_name;
             $logAction->action_type = 'uploaded';
-
-            if (! $logAction->save()) {
-                return JsonResponse::create(['error' => 'Failed validation: '.print_r($logAction->getErrors(), true)], 500);
-            }
+        }
 
         return redirect()->back()->withFragment('files')->with('success', trans('admin/users/message.upload.success'));
-        }
 
 
     }
