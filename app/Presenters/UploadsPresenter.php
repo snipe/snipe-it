@@ -11,8 +11,13 @@ class UploadsPresenter extends Presenter
      * Json Column Layout for bootstrap table
      * @return string
      */
-    public static function dataTableLayout()
+    public static function dataTableLayout($object)
     {
+        \Log::debug($object);
+
+        if ($object =='assets') {
+            $object = 'hardware';
+        }
         $layout = [
             [
                 'field' => 'id',
@@ -27,7 +32,7 @@ class UploadsPresenter extends Presenter
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => false,
-                'title' => trans('general.file_type'),
+                'title' => trans('general.type'),
                 'formatter' => 'iconFormatter',
             ],
             [
@@ -86,7 +91,7 @@ class UploadsPresenter extends Presenter
                 'sortable' => false,
                 'switchable' => false,
                 'title' => trans('table.actions'),
-                'formatter' => 'accessoriesActionsFormatter',
+                'formatter' => $object.'deleteUploadFormatter',
             ],
         ];
 
