@@ -42,7 +42,8 @@ class UploadFileRequest extends Request
     public function handleFile(string $dirname, string $name_prefix, $file): string
     {
 
-        $file_name = $name_prefix.'-'.str_random(8).'-'.$file->getClientOriginalName();
+        \Log::debug('handleFiles fired');
+        $file_name = $name_prefix.'-'.str_random(8).'-'.str_replace(' ', '-', $file->getClientOriginalName());
 
         // Check for SVG and sanitize it
         if ($file->getMimeType() === 'image/svg+xml') {
@@ -51,6 +52,7 @@ class UploadFileRequest extends Request
             $uploaded_file = file_get_contents($file);
         }
 
+        \Log::debug($dirname.$file_name);
         try {
             Storage::put($dirname.$file_name, $uploaded_file);
         } catch (\Exception $e) {
