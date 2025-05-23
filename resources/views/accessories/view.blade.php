@@ -317,20 +317,18 @@
 
           @endif
 
-          <div class="row">
-              <div class="col-md-3" style="padding-bottom: 10px;">
-                  <strong>
-                      {{ trans('general.created_by') }}
-                  </strong>
+          @if ($accessory->adminuser)
+              <div class="row">
+                  <div class="col-md-3" style="padding-bottom: 10px;">
+                      <strong>
+                          {{ trans('general.created_by') }}
+                      </strong>
+                  </div>
+                  <div class="col-md-9" style="word-wrap: break-word;">
+                      <x-full-user-name :user="$accessory->adminuser" />
+                  </div>
               </div>
-              <div class="col-md-9" style="word-wrap: break-word;">
-                  @if ($accessory->adminuser)
-                      {{ $accessory->adminuser->present()->fullName() }}
-                  @else
-                      {{ trans('admin/reports/general.deleted_user') }}
-                  @endif
-              </div>
-          </div>
+          @endif
 
 </div>
 
