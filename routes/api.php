@@ -1314,18 +1314,25 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         }); // end reports api routes
 
 
-
-    /**
-     * Version API routes
-     */ Route::get('/version',
-        [
-            Api\VersionController::class,
-            'index'
-        ]
+        /**
+        * Version API routes
+        */
+        Route::get(
+        '/version',
+            function () {
+                return response()->json(
+                    [
+                        'version' => config('version.app_version'),
+                        'build_version' => config('version.build_version'),
+                        'hash_version' => config('version.hash_version'),
+                        'full_version' => config('version.full_app_version')
+                    ]
+                );
+            }
         )->name('api.version.index'); // end version api routes
 
 
-    Route::fallback(function () {
+        Route::fallback(function () {
             return response()->json(
                 [
                     'status' => 'error',
