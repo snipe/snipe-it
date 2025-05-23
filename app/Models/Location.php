@@ -6,6 +6,7 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\SnipeModel;
+use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
 use App\Models\User;
 use App\Presenters\Presentable;

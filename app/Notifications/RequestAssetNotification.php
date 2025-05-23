@@ -29,7 +29,7 @@ class RequestAssetNotification extends Notification
         $this->note = '';
         $this->last_checkout = '';
         $this->expected_checkin = '';
-        $this->requested_date = Helper::getFormattedDateObject($params['requested_date'], 'datetime',
+        $this->requested_date = Helper::getFormattedDateObject($params['requested_date'] ?? now(), 'datetime',
             false);
         $this->settings = Setting::getSettings();
 

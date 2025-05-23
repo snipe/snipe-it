@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Licenses;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
@@ -39,7 +40,10 @@ class LicenseFilesController extends Controller
                     $file_name = $request->handleFile('private_uploads/licenses/','license-'.$license->id, $file);
 
                     //Log the upload to the log
-                    $license->logUpload($file_name, e($request->input('notes')));
+                    $license->setLogFilename($file_name);
+                    $license->setLogNote(e($request->input('notes')));
+                    $license->setLogAction(ActionType::Uploaded);
+                    $license->save();
                 }
 
 

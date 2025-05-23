@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\ActionType;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\LicenseSeatsTransformer;
@@ -133,16 +134,14 @@ class LicenseSeatsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Target not found'));
         }
 
+        $licenseSeat->setLogTarget($target);
+        $licenseSeat->setLogNote($request->input('notes'));
+        if ($is_checkin) {
+            $licenseSeat->setLogAction(ActionType::CheckinFrom);
+        } else {
+            $licenseSeat->setLogAction(ActionType::Checkout);
+        }
         if ($licenseSeat->save()) {
-
-            if ($is_checkin) {
-                $licenseSeat->logCheckin($target, $request->input('notes'));
-
-                return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
-            }
-
-            // in this case, relevant fields are touched but it's not a checkin operation. so it must be a checkout operation.
-            $licenseSeat->logCheckout($request->input('notes'), $target);
 
             return response()->json(Helper::formatStandardApiResponse('success', $licenseSeat, trans('admin/licenses/message.update.success')));
         }

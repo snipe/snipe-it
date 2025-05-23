@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\CheckoutRequests\CancelCheckoutRequestAction;
 use App\Actions\CheckoutRequests\CreateCheckoutRequestAction;
 use App\Exceptions\AssetNotRequestable;
+use App\Enums\ActionType;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -96,17 +97,12 @@ class ViewAssetsController extends Controller
 
         $user = auth()->user();
 
-        $logaction = new Actionlog();
-        $logaction->item_id = $data['asset_id'] = $item->id;
-        $logaction->item_type = $fullItemType;
-        $logaction->created_at = $data['requested_date'] = date('Y-m-d H:i:s');
-
+        $data['requested_date'] = date('Y-m-d H:i:s'); //TODO - shouldn't this be recorded somewhere? the default action_date is going to be 'now' anyways, so this may not matter?
         if ($user->location_id) {
-            $logaction->location_id = $user->location_id;
+            $item->setLogLocationOverride($user->location);
         }
 
-        $logaction->target_id = $data['user_id'] = auth()->id();
-        $logaction->target_type = User::class;
+        $item->setLogTarget($user);
 
         $data['item_quantity'] = $request->has('request-quantity') ? e($request->input('request-quantity')) : 1;
         $data['requested_by'] = $user->present()->fullName();
@@ -125,7 +121,8 @@ class ViewAssetsController extends Controller
         if (($item_request = $item->isRequestedBy($user)) || $cancel_by_admin) {
             $item->cancelRequest($requestingUser);
             $data['item_quantity'] = ($item_request) ? $item_request->qty : 1;
-            $logaction->logaction('request_canceled');
+            $item->setLogAction(ActionType::RequestCanceled);
+            $item->save();
 
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
                 $settings->notify(new RequestAssetCancelation($data));
@@ -135,7 +132,8 @@ class ViewAssetsController extends Controller
         } else {
             $item->request();
             if (($settings->alert_email != '') && ($settings->alerts_enabled == '1') && (! config('app.lock_passwords'))) {
-                $logaction->logaction('requested');
+                $item->setLogAction(ActionType::Requested);
+                $item->save();
                 $settings->notify(new RequestAssetNotification($data));
             }
 

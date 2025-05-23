@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Consumables;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
@@ -44,7 +45,10 @@ class ConsumablesFilesController extends Controller
                     $file_name = $request->handleFile('private_uploads/consumables/','consumable-'.$consumable->id, $file);
 
                     //Log the upload to the log
-                    $consumable->logUpload($file_name, e($request->input('notes')));
+                    $consumable->setLogFilename($file_name);
+                    $consumable->setLogNote(e($request->input('notes')));
+                    $consumable->setLogAction(ActionType::Uploaded);
+                    $consumable->save();
                 }
 
 

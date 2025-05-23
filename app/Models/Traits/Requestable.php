@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Traits;
 
-use Illuminate\Support\Facades\Auth;
+use App\Models\CheckoutRequest;
+use App\Models\User;
 
 // $asset->requests
 // $asset->isRequestedBy($user)
@@ -28,6 +29,7 @@ trait Requestable
 
     public function request($qty = 1)
     {
+        // THIS is where the requested log action thing should go, yeah? TODO (maybe)
         $this->requests()->save(
             new CheckoutRequest(['user_id' => auth()->id(), 'qty' => $qty])
         );

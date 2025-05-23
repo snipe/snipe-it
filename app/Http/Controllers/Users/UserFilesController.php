@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Enums\ActionType;
 use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UploadFileRequest;
@@ -34,18 +35,14 @@ class UserFilesController extends Controller
             $file_name = $request->handleFile('private_uploads/users/', 'user-'.$user->id, $file);
 
             //Log the uploaded file to the log
-            $logAction = new Actionlog();
-            $logAction->item_id = $user->id;
-            $logAction->item_type = User::class;
-            $logAction->created_by = auth()->id();
-            $logAction->note = $request->input('notes');
-            $logAction->target_id = null;
-            $logAction->created_at = date("Y-m-d H:i:s");
-            $logAction->filename = $file_name;
-            $logAction->action_type = 'uploaded';
 
-            if (! $logAction->save()) {
-                return JsonResponse::create(['error' => 'Failed validation: '.print_r($logAction->getErrors(), true)], 500);
+            $user->setLogNote($request->input('notes'));
+            $user->setLogTarget(null); //weird, but, well, that's what we do? TODO - will this still log with no target?
+//            $logAction->target_id = null;
+            $user->setLogFilename($file_name);
+            $user->setLogAction(ActionType::Uploaded);
+            if (!$user->save()) {
+                return JsonResponse::create(['error' => 'Failed validation: ' . print_r($user->getErrors(), true)], 500);
             }
 
         return redirect()->back()->withFragment('files')->with('success', trans('admin/users/message.upload.success'));
