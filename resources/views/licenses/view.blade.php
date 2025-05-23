@@ -32,7 +32,7 @@
               <x-icon type="seats" class="fa-2x" />
               </span>
               <span class="hidden-xs hidden-sm">{{ trans('admin/licenses/form.seats') }}</span>
-              <span class="badge badge-secondary">{{ number_format($license->availCount()->count()) }} / {{ number_format($license->seats) }}</span>
+              <span class="badge badge-secondary">{{ number_format($license->availCount()->count()) }} / {{ number_format($license->seats)}}</span>
 
             </a>
         </li>
@@ -568,13 +568,6 @@
 
       @if (($license->seats - $license->availCount()->count()) <= 0 )
         <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip') }}">
-            <a href="#"  class="btn btn-primary bg-purple btn-sm btn-social btn-block hidden-print disabled"  style="margin-bottom: 25px;">
-              <x-icon type="checkin" />
-             {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
-            </a>
-        </span>
-      @elseif (! $license->reassignable)
-        <span data-tooltip="true" title=" {{ trans('admin/licenses/general.bulk.checkin_all.disabled_tooltip_reassignable') }}">
             <a href="#"  class="btn btn-primary bg-purple btn-sm btn-social btn-block hidden-print disabled"  style="margin-bottom: 25px;">
               <x-icon type="checkin" />
              {{ trans('admin/licenses/general.bulk.checkin_all.button') }}
