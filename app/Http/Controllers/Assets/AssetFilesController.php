@@ -45,7 +45,7 @@ class AssetFilesController extends Controller
             return redirect()->back()->withFragment('files')->with('success', trans('admin/hardware/message.upload.success'));
         }
 
-        return redirect()->back()->with('error', trans('admin/hardware/message.upload.nofiles'));
+        return redirect()->back()->with('error', trans('general.file_upload_status.nofiles'));
     }
 
     /**

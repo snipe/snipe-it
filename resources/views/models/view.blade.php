@@ -121,6 +121,7 @@
                                     filepath="private_uploads/assetmodels/"
                                     showfile_routename="show/modelfile"
                                     deletefile_routename="delete/modelfile"
+                                    object_type="models"
                                     :object="$model" />
 
                         </div> <!-- /.col-md-12 -->

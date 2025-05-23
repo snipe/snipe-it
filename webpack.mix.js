@@ -128,7 +128,7 @@ mix.combine(
     "./node_modules/ekko-lightbox/dist/ekko-lightbox.js",
     "./resources/assets/js/extensions/pGenerator.jquery.js",
     "./node_modules/chart.js/dist/Chart.js",
-      "./resources/assets/js/signature_pad.js", //dupe?
+    "./resources/assets/js/signature_pad.js", //dupe?
     "./node_modules/jquery-validation/dist/jquery.validate.js",
     "./node_modules/list.js/dist/list.js",
     "./node_modules/clipboard/dist/clipboard.js",
@@ -149,6 +149,7 @@ mix
             './node_modules/bootstrap-table/dist/extensions/cookie/bootstrap-table-cookie.js',
             './node_modules/bootstrap-table/dist/extensions/sticky-header/bootstrap-table-sticky-header.js',
             './node_modules/bootstrap-table/dist/extensions/addrbar/bootstrap-table-addrbar.js',
+            './node_modules/bootstrap-table/dist/extensions/custom-view/bootstrap-table-custom-view.js',
             './resources/assets/js/extensions/jquery.base64.js',
             './node_modules/tableexport.jquery.plugin/tableExport.min.js',
             './node_modules/tableexport.jquery.plugin/libs/jsPDF/jspdf.umd.min.js',

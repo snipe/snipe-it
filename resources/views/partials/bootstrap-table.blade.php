@@ -344,6 +344,43 @@
         return '<a href="{{ config('app.url') }}/hardware/' + row.id + '/audit" class="actions btn btn-sm btn-primary" data-tooltip="true" title="{{ trans('general.audit') }}"><x-icon type="audit" /><span class="sr-only">{{ trans('general.audit') }}</span></a>&nbsp;';
     }
 
+    function deleteUploadFormatter(value, row) {
+        if ((row.available_actions) && (row.available_actions.delete === true)) {
+            return '<a href="{{ config('app.url') }}/' + dest + '/' + row.id + '" '
+                + ' class="actions btn btn-danger btn-sm delete-asset" data-tooltip="true"  '
+                + ' data-toggle="modal" '
+                + ' data-content="{{ trans('general.file_upload_status.confirm_delete') }} ' + name_for_box + '?" '
+                + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
+                + '<x-icon type="delete" /><span class="sr-only">{{ trans('general.delete') }}</span></a>&nbsp;';
+        }
+    }
+
+
+    // This handles the custom view for the filestable blade component
+    window.fileGalleryFormatter = data => {
+        const template = $('#fileGalleryTemplate').html()
+        let view = ''
+
+        $.each(data, function (i, row) {
+
+            view += template.replace('%ID%', row.id)
+                .replace('%ICON%', row.icon)
+                .replace('%FILETYPE%', row.filetype)
+                .replace('%FILE_URL%', row.url)
+                .replace('%LINK_URL%', row.url)
+                .replace('%FILENAME%', (row.exists_on_disk === true) ? row.filename : '<x-icon type="x" /> <del>' + row.filename + '</del>')
+                .replace('%CREATED_AT%', row.created_at.formatted)
+                .replace('%CREATED_BY%', row.created_by.name)
+                .replace('%NOTE%', row.note)
+                .replace('%PANEL_CLASS%', (row.exists_on_disk === true) ? 'default' : 'danger')
+                .replace('%INLINE_IMAGE%', (row.inline === true) ? '<a href="' + row.url + '" data-toggle="lightbox" data-type="image"><img src="' + row.url + '" alt="" class="img-thumbnail"></a>' : '')
+                .replace('%DOWNLOAD_BUTTON%', (row.exists_on_disk === true) ? '<a href="'+ row.url +'" class="btn btn-sm btn-default"><x-icon type="download" /></a> ' : '<span class="btn btn-sm btn-default disabled" data-tooltip="true" title="{{ trans('general.file_upload_status.file_not_found') }}"><x-icon type="download" /></span>')
+                .replace('%NEW_WINDOW_BUTTON%', (row.exists_on_disk === true) ? '<a href="'+ row.url +'?inline=true" class="btn btn-sm btn-default" target="_blank"><x-icon type="external-link" /></a> ' : '<span class="btn btn-sm btn-default disabled" data-tooltip="true" title="{{ trans('general.file_upload_status.file_not_found') }}" ><x-icon type="external-link"/></span>')
+                .replace('%DELETE_BUTTON%', ((row.exists_on_disk === true) && row.available_actions.delete === true) ? '<a href="'+ row.url +'" class="btn btn-sm btn-danger"><x-icon type="delete" /></a> ' : '<span class="btn btn-sm btn-danger disabled" data-tooltip="true" title="{{ trans('general.file_upload_status.file_not_found') }}" ><x-icon type="delete"/></span>');
+        })
+
+        return `<div class="row">${view}</div>`
+    }
 
     // Make the edit/delete buttons
     function genericActionsFormatter(owner_name, element_name) {
@@ -378,7 +415,8 @@
             if ((row.available_actions) && (row.available_actions.update === true)) {
                 actions += '<a href="{{ config('app.url') }}/' + dest + '/' + row.id + '/edit" class="actions btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><x-icon type="edit" /><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
             } else {
-                if ((row.available_actions) && (row.available_actions.update != true)) {
+                // check that row.available_actions.update is set in the API response - if not, don't even show the button
+                if ((row.available_actions) && (row.available_actions.update) && (row.available_actions.update != true)) {
                     actions += '<span data-tooltip="true" title="{{ trans('general.cannot_be_edited') }}"><a class="btn btn-warning btn-sm disabled" onClick="return false;"><x-icon type="edit" /></a></span>&nbsp;';
                 }
             }
@@ -785,9 +823,13 @@
         }
     }
 
-    function iconFormatter(value) {
+    function iconFormatter(value, row) {
         if (value) {
+            if (row.filetype) {
+                return '<span data-tooltip="true" title=" ' + row.filetype + '"><i class="' + value + '  icon-med"></i></span>';
+            }
             return '<i class="' + value + '  icon-med"></i>';
+
         }
     }
 
@@ -850,6 +892,12 @@
         }
     }
 
+    function inlineImageFormatter(value, row){
+        if (row.inline) {
+            return '<a href="' + row.url + '" data-toggle="lightbox" data-type="image"><img src="' + row.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt=""></a>'
+        }
+    }
+
 
    function imageFormatter(value, row) {
 
@@ -868,26 +916,40 @@
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
         }
     }
-    function downloadFormatter(value) {
-        if (value) {
-            return '<a href="' + value + '" target="_blank"><x-icon type="download" /></a>';
+
+
+    function downloadOrOpenInNewWindowFormatter(value, row) {
+
+        if (row && row.url)
+        {
+            if (row.exists_on_disk) {
+                return '<span style="white-space: nowrap;"><a href="' + row.url + '" class="btn btn-sm btn-default"><x-icon type="download" /></a> <a href="' + row.url + '?inline=true" class="btn btn-sm btn-default" target="_blank"><x-icon type="external-link" /></a></span>';
+            } else {
+                return '<span style="white-space: nowrap;"><span class="btn btn-sm btn-default disabled" data-tooltip="true" title="{{ trans('general.file_does_not_exist') }}"><x-icon type="download" /></span> <span class="btn btn-sm btn-default disabled" data-tooltip="true" title="{{ trans('general.file_does_not_exist') }}"><x-icon type="external-link" /></span></span>';
+            }
         }
+
     }
 
     function fileUploadFormatter(value) {
         if ((value) && (value.url) && (value.inlineable)) {
-            return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt=""></a>';
+            return '<nowrap><a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt=""></a></nowrap>';
         } else if ((value) && (value.url)) {
             return '<a href="' + value.url + '" class="btn btn-default"><x-icon type="download" /></a>';
         }
     }
 
 
-    function fileUploadNameFormatter(value) {
-        console.dir(value);
+    function fileUploadNameFormatter(row, value) {
+
         if ((value) && (value.filename) && (value.url)) {
-            return '<a href="' + value.url + '">' + value.filename + '</a>';
-        }
+            if (value.exists_on_disk) {
+                return '<a href="' + value.url + '?inline=true" target="_blank">' + value.filename + '</a>';
+            } else {
+                return '<span data-tooltip="true" title="{{ trans('general.file_does_not_exist') }}"><x-icon type="x" class="text-danger" /> <del>' + value.filename + '</del></span>';
+            }
+
+        } 
     }
 
     function linkToUserSectionBasedOnCount (count, id, section) {

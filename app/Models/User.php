@@ -34,6 +34,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     use Notifiable;
     use Presentable;
     use Searchable;
+    use Loggable;
 
     protected $hidden = ['password', 'remember_token', 'permissions', 'reset_password_code', 'persist_code'];
     protected $table = 'users';

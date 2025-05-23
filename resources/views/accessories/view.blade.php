@@ -154,6 +154,7 @@
                                         filepath="private_uploads/accessories/"
                                         showfile_routename="show.accessoryfile"
                                         deletefile_routename="delete/accessoryfile"
+                                        object_type="accessories"
                                         :object="$accessory" />
                                 </div>
                             </div>

@@ -414,6 +414,7 @@
                                       filepath="private_uploads/locations/"
                                       showfile_routename="show/locationsfile"
                                       deletefile_routename="delete/locationsfile"
+                                      object_type="locations"
                                       :object="$location" />
 
                           </div> <!-- /.col-md-12 -->
