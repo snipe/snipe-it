@@ -160,7 +160,7 @@ final class Company extends SnipeModel
 
 
         if (auth()->user()) {
-            Log::warning('Companyable is '.$companyable);
+            // Log::warning('Companyable is '.$companyable);
             $current_user_company_id = auth()->user()->company_id;
             $companyable_company_id = $companyable->company_id;
             return $current_user_company_id == null || $current_user_company_id == $companyable_company_id || auth()->user()->isSuperUser();
