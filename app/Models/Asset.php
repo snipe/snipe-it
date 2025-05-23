@@ -1302,7 +1302,7 @@ class Asset extends Depreciable
 
     public function scopeDueForAudit($query, $settings)
     {
-        $interval = $settings->audit_warning_days ?? 0;
+        $interval = (int) $settings->audit_warning_days ?? 0;
         $today = Carbon::now();
         $interval_date = $today->copy()->addDays($interval)->format('Y-m-d');
 
@@ -1370,7 +1370,7 @@ class Asset extends Depreciable
 
     public function scopeDueForCheckin($query, $settings)
     {
-        $interval = $settings->due_checkin_days ?? 0;
+        $interval = (int) $settings->due_checkin_days ?? 0;
         $today = Carbon::now();
         $interval_date = $today->copy()->addDays($interval)->format('Y-m-d');
 
