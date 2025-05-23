@@ -46,6 +46,13 @@ class Settings
         ]);
     }
 
+    public function enableAdminCC(string $email = 'cc@example.co'): Settings
+    {
+        return $this->update([
+            'admin_cc_email' => $email,
+        ]);
+    }
+
     public function disableAdminCC(): Settings
     {
         return $this->update([

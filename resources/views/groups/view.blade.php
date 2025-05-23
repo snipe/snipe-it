@@ -22,7 +22,7 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="table table-responsive">
+
 
                                 <table
                                     data-columns="{{  \App\Presenters\UserPresenter::dataTableLayout() }}"
@@ -41,7 +41,7 @@
                                         "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                                         }'>
                                 </table>
-                            </div>
+
                         </div>
                     </div>
                 </div>
