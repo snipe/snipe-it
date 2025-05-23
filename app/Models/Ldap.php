@@ -95,7 +95,20 @@ class Ldap extends Model
         $connection = self::connectToLdap();
         $ldap_username_field = $settings->ldap_username_field;
         $baseDn = $settings->ldap_basedn;
-        $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
+// Dynamically search for the user's DN under the broader base DN
+$userDn = null;
+$searchFilter = "({$ldap_username_field}={$username})";
+$search = @ldap_search($connection, $baseDn, $searchFilter);
+if ($search) {
+    $entries = ldap_get_entries($connection, $search);
+    if ($entries["count"] > 0) {
+        $userDn = $entries[0]["dn"];
+    }
+}
+if (!$userDn) {
+    Log::debug("Could not find DN for user: $username");
+    return false;
+}
 
         if ($settings->is_ad == '1') {
             // Check if they are using the userprincipalname for the username field.
@@ -362,3 +375,4 @@ class Ldap extends Model
         return $results;
     }
 }
+
