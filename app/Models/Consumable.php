@@ -124,6 +124,13 @@ class Consumable extends SnipeModel
             ->where('item_type', '=', self::class)
             ->where('action_type', '=', 'uploaded')
             ->whereNotNull('filename')
+            ->whereNotIn('filename', function ($query) {
+                $query->select('filename')
+                    ->from('action_logs')
+                    ->where('item_type', '=', self::class)
+                    ->where('action_type', '=', 'upload deleted')
+                    ->where('item_id', $this->id);
+            })
             ->orderBy('created_at', 'desc');
     }
 
