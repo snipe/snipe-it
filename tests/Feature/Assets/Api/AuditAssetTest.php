@@ -53,6 +53,36 @@ class AuditAssetTest extends TestCase
     }
 
 
+    public function testAssetAuditWithTagsArrayIsSaved()
+    {
+        $asset1 = Asset::factory()->create();
+        $asset2 = Asset::factory()->create();
+        $asset3 = Asset::factory()->create();
+
+        $this->actingAsForApi(User::factory()->auditAssets()->create())
+            ->postJson(route('api.asset.audit.legacy'), [
+                'asset_tag' => [
+                    $asset1->asset_tag,
+                    $asset2->asset_tag,
+                    $asset3->asset_tag
+                ],
+                'note' => 'test',
+            ])
+            ->assertStatusMessageIs('success')
+            ->assertJson(
+                [
+                    'messages' =>trans('admin/hardware/message.audit.success'),
+                    'payload' => [
+                        'id' => $asset1->id,
+                        'asset_tag' => $asset1->asset_tag,
+                        'note' => 'test'
+                    ],
+                ])
+            ->assertStatus(200);
+
+    }
+
+
     public function testAssetAuditIsSaved()
     {
         $asset = Asset::factory()->create();
