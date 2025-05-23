@@ -220,7 +220,10 @@ class AccessoriesController extends Controller
      */
     public function show(Accessory $accessory) : View | RedirectResponse
     {
-        $accessory = Accessory::withCount('checkouts as checkouts_count')->find($accessory->id);
+        $accessory->loadCount('checkouts as checkouts_count');
+
+        $accessory->load(['adminuser' => fn($query) => $query->withTrashed()]);
+
         $this->authorize('view', $accessory);
         return view('accessories.view', compact('accessory'));
     }
