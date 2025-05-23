@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use App\Helpers\Helper;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\AuthenticationException;
 use ArieTimmerman\Laravel\SCIMServer\Exceptions\SCIMException;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Throwable;
 use JsonException;
 use Carbon\Exceptions\InvalidFormatException;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 
 class Handler extends ExceptionHandler
 {
@@ -110,10 +112,13 @@ class Handler extends ExceptionHandler
                 switch ($e->getStatusCode()) {
                     case '404':
                        return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode . ' endpoint not found'), 404);
-                    case '429':
-                        return response()->json(Helper::formatStandardApiResponse('error', null, 'Too many requests'), 429);
                      case '405':
                         return response()->json(Helper::formatStandardApiResponse('error', null, 'Method not allowed'), 405);
+                    case '429':
+                        return response()->json(Helper::formatStandardApiResponse('error', ['requests_per_minute' => (int) config('app.api_throttle_per_minute'), 'retry-after' => $e->getHeaders()['Retry-After']], 'Too many requests. Try again in '.($e->getHeaders()['Retry-After'] ?? 60).' seconds'), 429)
+                            ->header('Retry-After', $e->getHeaders()['Retry-After'] ?? 60)
+                            ->header('X-Ratelimit-Remaining', $request->header('X-RateLimit-Remaining'))
+                            ->header('X-Ratelimit-Limit', config('app.api_throttle_per_minute'));
                     default:
                         return response()->json(Helper::formatStandardApiResponse('error', null, $statusCode), $statusCode);
 
@@ -201,6 +206,7 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+
         $this->reportable(function (Throwable $e) {
             //
         });
