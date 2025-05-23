@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Assets\Ui;
+namespace Tests\Feature\Categories\Ui;
 
 use App\Events\CheckoutableCheckedIn;
 use App\Models\Asset;
