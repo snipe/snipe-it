@@ -95,7 +95,7 @@ class Ldap extends Model
         $connection = self::connectToLdap();
         $ldap_username_field = $settings->ldap_username_field;
         $baseDn = $settings->ldap_basedn;
-        $userDn = $ldap_username_field.'='.$username.','.$settings->ldap_basedn;
+        $userDn = null;
 
         if ($settings->is_ad == '1') {
             // Check if they are using the userprincipalname for the username field.
@@ -119,38 +119,29 @@ class Ldap extends Model
 
         Log::debug('Filter query: '.$filterQuery);
 
+        // Find user in LDAP
+        $findResult = self::findLdapUsers(filter: $filterQuery);
+        if ($findResult['count'] != 1) {
+            Log::debug("No or multiple users found for query $filterQuery. baseDn: $baseDn");
+            return false;
+        }
+        
+        // Ensure found user ldap attributes match the required attributes
+        if (! $findResult[0][$ldap_username_field] == $username) {
+            Log::debug("Username from LDAP does not match the username provided.");
+            return false;
+        }
+
+        // Once user found, bind to LDAP
+        if ($userDn === null) {
+            $userDn = $findResult[0]['dn'];
+        }
         if (! $ldapbind = @ldap_bind($connection, $userDn, $password)) {
-            Log::debug("Status of binding user: $userDn to directory: (directly!) ".($ldapbind ? "success" : "FAILURE"));
-            if (! $ldapbind = self::bindAdminToLdap($connection)) {
-                /*
-                 * TODO PLEASE:
-                 *
-                 * this isn't very clear, so it's important to note: the $ldapbind value is never correctly returned - we never 'return true' from self::bindAdminToLdap() (the function
-                 * just "falls off the end" without ever explictly returning 'true')
-                 *
-                 * but it *does* have an interesting side-effect of checking for the LDAP password being incorrectly encrypted with the wrong APP_KEY, so I'm leaving it in for now.
-                 *
-                 * If it *did* correctly return 'true' on a succesful bind, it would _probably_ allow users to log in with an incorrect password. Which would be horrible!
-                 *
-                 * Let's definitely fix this at the next refactor!!!!
-                 *
-                 */
-                Log::debug("Status of binding Admin user: $userDn to directory instead: ".($ldapbind ? "success" : "FAILURE"));
-                return false;
-            }
-        }
-
-        if (! $results = ldap_search($connection, $baseDn, $filterQuery)) {
-            throw new Exception('Could not search LDAP: ');
-        }
-
-        if (! $entry = ldap_first_entry($connection, $results)) {
+            Log::debug("Could not bind to LDAP as $userDn");
             return false;
         }
 
-        if (! $user = ldap_get_attributes($connection, $entry)) {
-            return false;
-        }
+        $user = $findResult[0];
 
         return array_change_key_case($user);
     }
