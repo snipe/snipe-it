@@ -957,21 +957,20 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
                     Api\SettingsController::class,
                     'downloadBackup'
                 ]
-            )->name('api.settings.backups.download');
+            )->name('api.settings.backups.download');  
 
-        }); 
-        
-        Route::resource('settings', 
-        Api\SettingsController::class,
-        ['names' => [
-                'show' => 'api.settings.show',
-                'update' => 'api.settings.update',
-                'store' => 'api.settings.store',
-            ],
-        'except' => ['create', 'edit', 'index', 'destroy'],
-        'parameters' => ['setting' => 'setting_id'],
-        ]
-        ); // end settings API
+            Route::resource('settings', 
+            Api\SettingsController::class,
+                ['names' => [
+                        'show' => 'api.settings.show',
+                        'update' => 'api.settings.update',
+                        'store' => 'api.settings.store',
+                    ],
+                'except' => ['create', 'edit', 'index', 'destroy'],
+                'parameters' => ['setting' => 'setting_id'],
+                ]
+            );
+        }); // end settings API
 
 
         /**
@@ -1315,17 +1314,22 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'throttle:api']], functi
         }); // end reports api routes
 
 
-
-    /**
-         * Version API routes
-         */
-
-        Route::get('/version', function () {
-            return response()->json(
-                [
-                    'version' => config('version.app_version'),
-                ], 200);
-        }); // end version api routes
+        /**
+        * Version API routes
+        */
+        Route::get(
+        '/version',
+            function () {
+                return response()->json(
+                    [
+                        'version' => config('version.app_version'),
+                        'build_version' => config('version.build_version'),
+                        'hash_version' => config('version.hash_version'),
+                        'full_version' => config('version.full_app_version')
+                    ]
+                );
+            }
+        )->name('api.version.index'); // end version api routes
 
 
         Route::fallback(function () {
