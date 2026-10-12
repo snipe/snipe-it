@@ -613,7 +613,7 @@ return [
   | viewed without pagination. This is to prevent server timeouts.
   */
 
-    'max_unpaginated_records' => env('MAX_UNPAGINATED', '5000'),
+    'max_unpaginated_records' => env('MAX_UNPAGINATED', '10000'),
 
     /*
     |--------------------------------------------------------------------------

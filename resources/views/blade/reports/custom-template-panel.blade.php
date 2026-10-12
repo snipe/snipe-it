@@ -6,23 +6,25 @@
 {{-- Right-column "Saved Templates" panel shared by the three custom
      report pages (asset / component / consumable).
      Report-type-specific bits (Livewire component type, the route
-     name for the show-form guard) are derived from $type. --}}
+     name for the save-as-template guard) are derived from $type. --}}
 
 @php
-    $showFormRoutes = match ($type) {
+    $saveAsNewRoutes = match ($type) {
         'asset' => ['reports/custom'],
         'component' => ['reports/custom', 'reports.custom.component'],
         'consumable' => ['reports/custom', 'reports.custom.consumable'],
     };
+    $isTemplatePage = request()->routeIs('report-templates.show');
+    $isOwner = $template->created_by == auth()->id();
 @endphp
 
-@if (request()->routeIs('report-templates.edit'))
-    {{-- Edit mode: template name + is_shared are the only fields the
-         edit page adds on top of the report-config form. Rendered here
-         in the sidebar (rather than shoehorned into the main form's
-         box header, which crowded the two-line header). form="custom-report-form"
-         associates these inputs with the report form even though they
-         live outside its DOM subtree so they still POST as part of it. --}}
+@if ($isTemplatePage && $isOwner)
+    {{-- Owner-of-saved-template controls: name, is_shared, Save, Delete.
+         The name + is_shared inputs sit in the sidebar but belong to the
+         main report-config form; form="custom-report-form" wires them in
+         even though they're DOM-detached. The Save button uses the same
+         form attribute plus formaction so it POSTs to the template-update
+         endpoint instead of the main form's download action. --}}
     <div class="box box-default">
         <div class="box-header with-border">
             <h2 class="box-title">
@@ -46,89 +48,72 @@
                 <x-form.error name="name"/>
             </div>
 
-            @if ($template->created_by == auth()->id())
-                <label class="form-control">
-                    <input
-                        type="checkbox"
-                        name="is_shared"
-                        value="1"
-                        form="custom-report-form"
-                        @checked($template->is_shared)
-                    />
-                    {{ trans('admin/reports/general.share_template') }}
-                </label>
-            @endif
+            <label class="form-control">
+                <input
+                    type="checkbox"
+                    name="is_shared"
+                    value="1"
+                    form="custom-report-form"
+                    @checked($template->is_shared)
+                />
+                {{ trans('admin/reports/general.share_template') }}
+            </label>
 
-            {{-- The main form's submit button is buried under the report-
-                 configuration box further down the page, which makes it
-                 unclear that a name / is_shared change here needs the
-                 main form to be submitted. Explicit Save here as an
-                 anchor so the user can clearly see what they're saving. --}}
-            <button type="submit" form="custom-report-form" class="btn btn-success btn-block" style="margin-top: 10px;">
+            <button
+                type="submit"
+                form="custom-report-form"
+                formaction="{{ route('report-templates.update', $template) }}"
+                class="btn btn-success btn-social btn-block"
+                style="margin-top: 10px;"
+            >
                 <x-icon type="checkmark" class="icon-white"/>
                 {{ trans('general.save') }}
             </button>
+
+            {{-- .delete-asset is the snipeit.js delete-confirm modal
+                 trigger class (legacy name, not asset-specific). --}}
+            <a
+                href="#"
+                class="btn btn-danger btn-social btn-block delete-asset"
+                data-toggle="modal"
+                data-title="{{ trans('general.delete') }}"
+                data-content="{{ trans('general.delete_confirm', ['item' => $template->name]) }}"
+                data-target="#dataConfirmModal"
+                type="button"
+                style="margin-top: 5px;"
+            >
+                <x-icon type="delete"/>
+                {{ trans('general.delete') }}
+            </a>
         </div>
     </div>
 @endif
 
-@if (! request()->routeIs('report-templates.edit'))
-    <livewire:report-template-select :type="$type"/>
-
-    <div class="row">
-        <div class="col-md-12">
-
-            <div style="margin-bottom: 5px;">
-                @if ($template->name)
-                    @if ($template->created_by == auth()->id())
-                        <span class="text-center">{!! ($template->is_shared ? '<i class="fa fa-users"></i>'.' '.trans('admin/reports/general.template_shared_with_others') : '<i class="fa-solid fa-user-xmark"></i>'.' '.trans('admin/reports/general.template_not_shared')) !!}</span>
-                    @else
-                        <span class="text-center">{!! ($template->is_shared ? '<i class="fa fa-users"></i>'.' '.trans('admin/reports/general.template_shared') : '<i class="fa-solid fa-user-xmark"></i>'.' '.trans('admin/reports/general.template_not_shared')) !!}</span>
-                    @endif
-                @endif
+@if ($isTemplatePage && ! $isOwner)
+    {{-- Non-owner viewing a shared template: read-only status, no edit
+         controls. The Download button in the main form is still available
+         for ad-hoc report pulls using the shared config. --}}
+    <div class="box box-default">
+        <div class="box-body text-center">
+            <strong>{{ $template->name }}</strong>
+            <div style="margin-top: 5px;">
+                <i class="fa fa-users"></i> {{ trans('admin/reports/general.template_shared') }}
             </div>
-
-            @if ($template->created_by == auth()->id())
-                @if (request()->routeIs('report-templates.show'))
-                    <a
-                        href="{{ route('report-templates.edit', $template) }}"
-                        class="btn btn-sm btn-warning btn-social btn-block"
-                        data-tooltip="true"
-                        title="{{ trans('admin/reports/general.update_template') }}"
-                        style="margin-bottom: 5px;"
-                    >
-                        <x-icon type="edit"/>
-                        {{ trans('general.update') }}
-                    </a>
-                    <span data-tooltip="true" title="{{ trans('general.delete') }}">
-                        {{-- .delete-asset is the snipeit.js delete-confirm modal
-                             trigger class (legacy name; not asset-specific). --}}
-                        <a
-                            href="#"
-                            class="btn btn-sm btn-danger btn-social btn-block delete-asset"
-                            data-toggle="modal"
-                            data-title="{{ trans('general.delete') }}"
-                            data-content="{{ trans('general.delete_confirm', ['item' => $template->name]) }}"
-                            data-target="#dataConfirmModal"
-                            type="button"
-                        >
-                            <x-icon type="delete"/>
-                            {{ trans('general.delete') }}
-                        </a>
-                    </span>
-                @endif
-            @endif
         </div>
     </div>
 @endif
 
-@if (request()->routeIs(...$showFormRoutes))
+@if (! $isTemplatePage)
+    <livewire:report-template-select :type="$type"/>
+@endif
+
+@if (request()->routeIs(...$saveAsNewRoutes))
     <hr>
     <div class="form-group">
         {{-- data-report-save-template hooks the shared submit handler
-             in snipeit.js (`form[data-report-save-template]`). That
-             handler forwards the template name + type into the main
-             custom-report form and submits it to templates.store. --}}
+             in snipeit.js (form[data-report-save-template]). That handler
+             forwards the template name + type into the main custom-report
+             form and submits it to templates.store. --}}
         <form
             method="post"
             id="savetemplateform"
