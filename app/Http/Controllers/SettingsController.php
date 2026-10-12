@@ -21,6 +21,7 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\MailTest;
 use App\Rules\CssColor;
+use App\SyncAdapters\SyncErrorFormatter;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -1142,20 +1143,13 @@ class SettingsController extends Controller
                 }
             });
         } catch (\Throwable $e) {
-            // Log the full exception server-side so admins can dig into
-            // response bodies, stack traces, etc. via the dedicated
-            // sync-adapters channel. The flash message only exposes a
-            // short sanitized summary because Guzzle / Laravel HTTP
-            // client stuff the entire response body into the exception
-            // message on 4xx/5xx, and internal error pages regularly
-            // contain sensitive info we don't want to bounce into the
-            // admin's browser.
-            Log::channel('sync-adapters')->warning($instance->slug.' sync aborted: '.$e->getMessage(), [
-                'exception' => $e,
-            ]);
+            Log::channel('sync-adapters')->warning(
+                $instance->slug . ' sync aborted: ' . SyncErrorFormatter::summary($e),
+                SyncErrorFormatter::logContext($e),
+            );
 
             $failMessage = trans('admin/settings/sync_adapters.sync_failed', [
-                'summary' => self::sanitizeSyncErrorSummary($e),
+                'summary' => SyncErrorFormatter::summary($e),
             ]);
             $instance->last_synced_at = now();
             $instance->last_sync_result = $failMessage;
@@ -1266,31 +1260,24 @@ class SettingsController extends Controller
                             // surface in the log even when the vendor's
                             // JSON shape isn't one the summary
                             // extractor recognizes.
-                            $context = [];
-                            if ($e instanceof \Illuminate\Http\Client\RequestException) {
-                                $body = (string) $e->response->body();
-                                $context['response_body'] = mb_strlen($body) > 2048
-                                    ? mb_substr($body, 0, 2048).'…'
-                                    : $body;
-                            }
                             Log::channel('sync-adapters')->warning(sprintf(
                                 '%s push: asset %d failed: %s',
                                 $row->source,
                                 $asset->id,
-                                self::sanitizeSyncErrorSummary($e),
-                            ), $context);
+                                SyncErrorFormatter::summary($e),
+                            ), SyncErrorFormatter::logContext($e));
                         }
                     }
                 });
         } catch (\Throwable $e) {
             Log::channel('sync-adapters')->warning(
-                sprintf('%s push aborted: %s', $instance->slug, $e->getMessage()),
-                ['exception' => $e],
+                sprintf('%s push aborted: %s', $instance->slug, SyncErrorFormatter::summary($e)),
+                SyncErrorFormatter::logContext($e),
             );
 
             return redirect()->route('settings.adapters.index', ['adapter' => $instance->slug])
                 ->with('error', trans('admin/settings/sync_adapters.push_failed', [
-                    'summary' => self::sanitizeSyncErrorSummary($e),
+                    'summary' => SyncErrorFormatter::summary($e),
                 ]));
         }
 
@@ -1315,149 +1302,6 @@ class SettingsController extends Controller
                 'skipped' => $skipped,
                 'errors' => $errors,
             ]));
-    }
-
-    /**
-     * Short, safe summary of a sync failure for the admin flash. For
-     * HTTP-client exceptions, walk the common vendor error-body shapes
-     * (Fleet / DRF / Graph / Jamf / etc.) and surface the first
-     * human-readable message string we find, prefixed with the HTTP
-     * status. Falls back to just "HTTP {code}" when the response body
-     * doesn't parse or doesn't carry a recognizable message field.
-     * Full detail is still in the sync-adapters log via the caller.
-     */
-    private static function sanitizeSyncErrorSummary(\Throwable $e): string
-    {
-        if ($e instanceof \Illuminate\Http\Client\RequestException) {
-            $status = $e->response->status();
-            $vendorMessage = self::extractVendorErrorMessage($e->response);
-
-            return $vendorMessage !== null
-                ? sprintf('HTTP %d: %s', $status, $vendorMessage)
-                : 'HTTP '.$status;
-        }
-
-        if ($e instanceof \Illuminate\Http\Client\ConnectionException) {
-            return trans('admin/settings/sync_adapters.sync_failed_network');
-        }
-
-        // Vendor adapter errors (wrong base URL, unexpected
-        // content type, etc.) carry their own actionable message. Pass
-        // it through so the admin sees "check your Base URL" instead
-        // of "SyncAdapterVendorException".
-        if ($e instanceof \App\Exceptions\SyncAdapterVendorException) {
-            return $e->getMessage();
-        }
-
-        return class_basename($e);
-    }
-
-    /**
-     * Extract the first human-readable message from a vendor error
-     * response body. Handles the common shapes:
-     * - {"message": "..."}           Fleet, WS1, JumpCloud, Mosyle
-     * - {"detail": "..."}            DRF-based (Zentral, some others)
-     * - {"error": "..."}             plain string
-     * - {"error": {"message": "..."}}  Microsoft Graph
-     * - {"errorMessage": "..."}      NinjaOne
-     * - {"errors": [{"description|reason|message|detail": "..."}]}  Jamf, Fleet nested
-     * - {"errors": ["..."]}          Meraki
-     * Response bodies get truncated so a vendor returning a novel
-     * doesn't blow up the flash bar.
-     */
-    private static function extractVendorErrorMessage(\Illuminate\Http\Client\Response $response): ?string
-    {
-        $body = $response->json();
-        if (! is_array($body)) {
-            return null;
-        }
-
-        $candidate = self::pluckErrorCandidate($body);
-        if (! is_string($candidate) || trim($candidate) === '') {
-            return null;
-        }
-
-        $candidate = trim($candidate);
-
-        return mb_strlen($candidate) > 200
-            ? mb_substr($candidate, 0, 200).'…'
-            : $candidate;
-    }
-
-    /**
-     * Walk the shapes we know about in order (top-level scalar keys,
-     * nested error object, errors array of strings, errors array of
-     * objects). Returns the first string it lands on or null if none
-     * of the paths yield anything.
-     *
-     * @param  array<string, mixed>  $body
-     */
-    private static function pluckErrorCandidate(array $body): ?string
-    {
-        $candidate = $body['message']
-            ?? $body['detail']
-            ?? $body['errorMessage']
-            ?? null;
-        if (is_string($candidate)) {
-            return $candidate;
-        }
-
-        $candidate = self::pluckErrorFromErrorKey($body);
-        if (is_string($candidate)) {
-            return $candidate;
-        }
-
-        return self::pluckErrorFromErrorsArray($body);
-    }
-
-    /**
-     * Extract from a top-level `error` key. Handles both the string
-     * shape ({"error": "..."}) and the Microsoft Graph nested-object
-     * shape ({"error": {"message": "..."}}).
-     *
-     * @param  array<string, mixed>  $body
-     */
-    private static function pluckErrorFromErrorKey(array $body): ?string
-    {
-        if (! isset($body['error'])) {
-            return null;
-        }
-        if (is_string($body['error'])) {
-            return $body['error'];
-        }
-        if (is_array($body['error']) && isset($body['error']['message']) && is_string($body['error']['message'])) {
-            return $body['error']['message'];
-        }
-
-        return null;
-    }
-
-    /**
-     * Extract from an `errors` array. First entry wins. Handles the
-     * Meraki string-array shape and the Jamf / Fleet object-array
-     * shape whose entries carry description / reason / message /
-     * detail keys.
-     *
-     * @param  array<string, mixed>  $body
-     */
-    private static function pluckErrorFromErrorsArray(array $body): ?string
-    {
-        if (! isset($body['errors']) || ! is_array($body['errors'])) {
-            return null;
-        }
-        $first = $body['errors'][0] ?? null;
-        if (is_string($first)) {
-            return $first;
-        }
-        if (! is_array($first)) {
-            return null;
-        }
-
-        return $first['description']
-            ?? $first['reason']
-            ?? $first['message']
-            ?? $first['detail']
-            ?? null;
     }
 
     /**
@@ -1501,7 +1345,7 @@ class SettingsController extends Controller
 
             return redirect()->route('settings.adapters.index', ['adapter' => $instance->slug])
                 ->with('error', trans('admin/settings/sync_adapters.refresh_groups_failed', [
-                    'summary' => self::sanitizeSyncErrorSummary($e),
+                    'summary' => SyncErrorFormatter::summary($e),
                 ]));
         }
 
@@ -1552,7 +1396,7 @@ class SettingsController extends Controller
 
             return redirect()->route('settings.adapters.index', ['adapter' => $instance->slug])
                 ->with('error', trans('admin/settings/sync_adapters.refresh_custom_fields_failed', [
-                    'summary' => self::sanitizeSyncErrorSummary($e),
+                    'summary' => SyncErrorFormatter::summary($e),
                 ]));
         }
 
