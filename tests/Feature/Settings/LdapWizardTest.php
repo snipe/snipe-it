@@ -237,6 +237,29 @@ class LdapWizardTest extends TestCase
             ->assertSet('highestStepReached', 1);
     }
 
+    public function test_mount_clamps_highest_step_when_persisted_server_is_blank(): void
+    {
+        $user = $this->actAsSuperuser();
+        $this->ensureSetting(['ldap_enabled' => 0, 'ldap_server' => '']);
+
+        session()->put('ldap_wizard_highest_step:' . $user->id, 4);
+
+        Livewire::test(LdapSettings::class)
+            ->assertSet('currentStep', 1)
+            ->assertSet('highestStepReached', 1);
+    }
+
+    public function test_mount_clamps_highest_step_when_persisted_basedn_is_blank(): void
+    {
+        $user = $this->actAsSuperuser();
+        $this->ensureSetting(['ldap_enabled' => 0, 'ldap_server' => 'ldaps://ldap.example.com', 'ldap_basedn' => '']);
+
+        session()->put('ldap_wizard_highest_step:' . $user->id, 4);
+
+        Livewire::test(LdapSettings::class)
+            ->assertSet('highestStepReached', 2);
+    }
+
     // === Step 1 syntax =====================================================
 
     public function test_step1_requires_ldap_server(): void
