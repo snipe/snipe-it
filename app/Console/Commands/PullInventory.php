@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Actionlog;
 use App\Models\SyncAdapterInstance;
 use App\SyncAdapters\SyncAdapter;
+use App\SyncAdapters\SyncErrorFormatter;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -138,17 +139,20 @@ class PullInventory extends Command
                 }
             });
         } catch (Throwable $e) {
-            $message = $e->getMessage();
-            $abortSummary = "Sync aborted: {$message}";
+            // Brief summary for the UI "Last Synced" field and the
+            // console error output.
+            $summary = SyncErrorFormatter::summary($e);
+            $abortSummary = "Sync aborted: {$summary}";
             $instance->last_synced_at = now();
             $instance->last_sync_result = $abortSummary;
             $instance->save();
 
             $elapsed = self::formatElapsed($startedAt);
             $this->error("{$slug} {$abortSummary} ({$elapsed})");
-            Log::channel('sync-adapters')->warning("{$slug} sync aborted after {$seen} record(s), {$skipped} skipped, {$errors} error(s), elapsed {$elapsed}: {$message}", [
-                'exception' => $e,
-            ]);
+            Log::channel('sync-adapters')->warning(
+                "{$slug} sync aborted after {$seen} record(s), {$skipped} skipped, {$errors} error(s), elapsed {$elapsed}: {$summary}",
+                SyncErrorFormatter::logContext($e),
+            );
             $rows[] = [$slug, 'Aborted', $seen, $skipped, $errors, $elapsed];
 
             return self::FAILURE;
