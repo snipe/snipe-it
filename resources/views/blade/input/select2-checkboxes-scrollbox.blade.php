@@ -63,7 +63,7 @@
                     {{ trans('general.select_all') }}
                 </button>
                 <button type="button" class="btn btn-sm btn-theme js-select2-checkboxes-scrollbox-clear">
-                    {{ trans('admin/hardware/general.clear') }}
+                    {{ trans('general.deselect_all') }}
                 </button>
                 {{-- {n} is the JS-side placeholder convention. Laravel's
                      trans() substitutes `:key` not `{n}`, so render the

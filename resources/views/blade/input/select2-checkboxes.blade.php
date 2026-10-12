@@ -66,7 +66,7 @@
             @if ($selectAll)
                 data-select-all="1"
                 data-select-all-label="{{ trans('general.select_all') }}"
-                data-clear-all-label="{{ trans('admin/hardware/general.clear') }}"
+                data-clear-all-label="{{ trans('general.deselect_all') }}"
                 @if ($maxSelectAll) data-max-select-all="{{ (int) $maxSelectAll }}" @endif
             @endif
             @if ($companyId) data-company-id="{{ $companyId }}" @endif

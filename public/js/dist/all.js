@@ -1447,12 +1447,28 @@ $(function () {
         }, true);
       }
 
-      // select2's dropdown search ships without a placeholder or
-      // clear button. Add both: inject the Search placeholder,
-      // and append a × as a sibling of the input (not wrapping
-      // it, so select2's own layout stays intact).
+      // select2's search field lives in different places depending
+      // on single vs multi: single puts it in the dropdown, multi
+      // puts it inline in the selection control. Look in both
+      // (prefer the dropdown copy when both exist, since that's the
+      // one the user types in when the panel is open).
       var $search = $dropdown.find('.select2-search__field');
-      var $searchContainer = $search.parent();
+      var $searchContainer;
+      if ($search.length) {
+        $searchContainer = $search.parent();
+      } else {
+        // Multi-select inline case. The literal parent is
+        // .select2-search--inline whose width tracks the typed
+        // text, so an absolutely-positioned clear × anchored to
+        // it slides left as the input shrinks. Anchor to the
+        // outer control instead (stable full-width box).
+        var $selection = link.data('select2').$selection;
+        $search = $selection.find('.select2-search__field');
+        $searchContainer = $selection.find('.select2-selection--multiple').first();
+        if (!$searchContainer.length) {
+          $searchContainer = $selection;
+        }
+      }
       if ($search.length) {
         $search.attr('placeholder', $search.attr('placeholder') || link.data('search-placeholder') || 'Search');
       }

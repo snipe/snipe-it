@@ -351,6 +351,7 @@ return [
     'select_var' => 'Select :thing... ', // this will eventually replace all of our other selects
     'select' => 'Select',
     'select_all' => 'Select All',
+    'deselect_all' => 'Deselect All',
     'selected' => 'selected',
     'search' => 'Search',
     'select_category' => 'Select a Category',
