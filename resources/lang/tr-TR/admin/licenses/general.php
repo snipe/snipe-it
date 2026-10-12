@@ -50,8 +50,8 @@ return [
         ],
 
         'delete_with_checkin' => [
-            'label' => 'Check in seats and delete',
-            'log_msg' => 'Checked in via bulk delete-with-checkin in license index',
+            'label' => 'Koltukları Teslim Al ve Sil',
+            'log_msg' => 'Lisans dizininde toplu teslim alıp silme işlemiyle teslim alındı',
         ],
     ],
 

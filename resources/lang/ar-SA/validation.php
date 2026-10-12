@@ -203,6 +203,7 @@ return [
     'email_array' => 'عنوان بريد إلكتروني واحد أو أكثر غير صالح.',
     'checkboxes' => ':attribute يحتوي على خيارات غير صالحة.',
     'radio_buttons' => ':attribute غير صالح.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'يحتوي الحقل :attribute على حرف غير مسموح به.',

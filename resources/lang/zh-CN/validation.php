@@ -203,6 +203,7 @@ return [
     'email_array' => '一个或多个电子邮件地址无效。',
     'checkboxes' => ':attribute 包含无效的选项。',
     'radio_buttons' => ':attribute 无效。',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => ':attribute 字段包含不允许的字符。',

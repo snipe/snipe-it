@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Množično posodabljanje sredstev',
     'bulk_update_help' => 'Ta obrazec vam omogoča, da posodobite več sredstev hkrati. Izpolnite le polja, ki jih morate spremeniti. Vsa polja, ki ostanejo prazna, bodo ostala nespremenjena. ',
     'bulk_update_warn' => 'Urejali boste lastnosti posameznega sredstva.|Urejali boste lastnosti :asset_count sredstev.',
-    'bulk_update_with_custom_field' => 'Opomnik, da :asset_model_count različni tipi modelov.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Na modelih',
     'bulk_update_custom_field_unique' => 'To je unikatno polje in ne more biti množično urejeno.',
     'checkedout_to' => 'Izdano osebi',

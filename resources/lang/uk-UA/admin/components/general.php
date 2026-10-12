@@ -13,7 +13,7 @@ return [
     'total' => 'Загалом',
     'update' => 'Оновити компонент',
     'checkin_limit' => 'Відзначена сума повинна бути рівною або меншою за :assigned_qty',
-    'exclude_deleted' => 'Exclude Deleted Components',
-    'include_deleted' => 'Include Deleted Components',
-    'only_deleted' => 'Only Deleted Components',
+    'exclude_deleted' => 'Не включати видалені компоненти',
+    'include_deleted' => 'Включати видалені компоненти',
+    'only_deleted' => 'Лише видалені компоненти',
 ];

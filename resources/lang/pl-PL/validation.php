@@ -203,6 +203,7 @@ return [
     'email_array' => 'Jeden lub więcej wprowadzonych adresów jest nieprawidłowy.',
     'checkboxes' => ':attribute zawiera nieprawidłowe opcje.',
     'radio_buttons' => ':attribute jest nieprawidłowy.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Pole: attribute zawiera znak, który nie jest dozwolony.',

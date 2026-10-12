@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Actualizarea activelor în bloc',
     'bulk_update_help' => 'Acest formular vă permite să actualizați simultan mai multe elemente. Completați câmpurile pe care trebuie să le schimbați. Toate câmpurile rămase necompletate vor rămâne neschimbate.',
     'bulk_update_warn' => 'Sunteți pe cale să editați proprietățile unui singur activ. Sunteți pe cale să editați proprietățile din :asset_count assets.',
-    'bulk_update_with_custom_field' => 'Notă: activele sunt :asset_model_count diferite tipuri de modele.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Pe modele',
     'bulk_update_custom_field_unique' => 'Acesta este un câmp unic și nu poate fi editat în vrac.',
     'checkedout_to' => 'Alocat la',

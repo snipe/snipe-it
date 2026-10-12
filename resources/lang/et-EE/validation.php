@@ -203,6 +203,7 @@ return [
     'email_array' => 'Üks või mitu e-posti aadressi on kehtetu.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Atribuudi väli sisaldab märk, mis pole lubatud.',

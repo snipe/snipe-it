@@ -1,28 +1,28 @@
 <?php
 
 return [
-    'not_found' => 'お探しの資産管理が見つかりませんでした。',
+    'not_found' => '資産メンテナンスが見つかりません。',
     'delete' => [
-        'confirm' => 'この資産管理を本当に削除しますか？',
-        'error' => '資産管理の削除に失敗しました。もう一度試して下さい。',
-        'success' => '資産管理の削除に成功しました。',
+        'confirm' => 'この資産メンテナンスを削除してもよろしいですか？',
+        'error' => '資産メンテナンスを削除できませんでした。もう一度お試しください。',
+        'success' => '資産メンテナンスを削除しました。',
     ],
     'create' => [
-        'error' => '資産管理を作成できませんでした。もう一度試して下さい。',
-        'success' => '資産管理の作成に成功しました。',
+        'error' => '資産メンテナンスを作成できませんでした。もう一度お試しください。',
+        'success' => '資産メンテナンスを作成しました。',
     ],
     'edit' => [
-        'error' => '資産管理を編集できませんでした。もう一度試して下さい。',
-        'success' => '資産管理の編集に成功しました。',
+        'error' => '資産メンテナンスを編集できませんでした。もう一度お試しください。',
+        'success' => '資産メンテナンスを更新しました。',
     ],
-    'asset_maintenance_incomplete' => '不完全です。',
+    'asset_maintenance_incomplete' => '未完了',
     'warranty' => '保証',
-    'not_warranty' => '無保証',
+    'not_warranty' => '保証対象外',
     'complete' => [
-        'confirm' => 'Are you sure you want to mark this maintenance as complete? This cannot be undone.',
-        'success' => 'Maintenance marked as complete.',
-        'error' => 'There was an issue marking this maintenance as complete. Please try again.',
+        'confirm' => 'このメンテナンスを完了にしますか？この操作は取り消せません。',
+        'success' => 'メンテナンスを完了にしました。',
+        'error' => 'メンテナンスを完了にできませんでした。もう一度お試しください。',
     ],
-    'bulk_delete' => 'No maintenance records were deleted (:skipped skipped).|Deleted :count maintenance record. (:skipped skipped)|Deleted :count maintenance records. (:skipped skipped)',
-    'bulk_complete' => 'No maintenance records were marked complete (:skipped skipped or already complete).|Marked :count maintenance record complete. (:skipped skipped or already complete)|Marked :count maintenance records complete. (:skipped skipped or already complete)',
+    'bulk_delete' => 'メンテナンス記録は削除されませんでした（:skipped件をスキップ）。|メンテナンス記録を:count件削除しました（:skipped件をスキップ）。|メンテナンス記録を:count件削除しました（:skipped件をスキップ）。',
+    'bulk_complete' => '完了にしたメンテナンス記録はありません（:skipped件はスキップまたは完了済み）。|メンテナンス記録を:count件完了にしました（:skipped件はスキップまたは完了済み）。|メンテナンス記録を:count件完了にしました（:skipped件はスキップまたは完了済み）。',
 ];

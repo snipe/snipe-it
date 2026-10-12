@@ -203,6 +203,7 @@ return [
     'email_array' => 'En ali več e-poštnih naslovov je napačnih.',
     'checkboxes' => ':attribute vsebuje neveljavne možnosti.',
     'radio_buttons' => ':atribut je neveljaven.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Polje atributa vsebuje znak, ki ni dovoljen.',

@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Atualização de ativos em massa',
     'bulk_update_help' => 'Este formulário permite a atualização em massa de ativos. Preencha apenas os atributos que precisam de alteração. Qualquer atributo deixado em branco permanecerá inalterado. ',
     'bulk_update_warn' => 'Está prestes a editar as propriedades de um único ativo.|Está prestes a editar as propriedades de :asset_count ativos.',
-    'bulk_update_with_custom_field' => 'Observe que os ativos são :asset_model_count diferentes tipos de modelos.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Em Modelos',
     'bulk_update_custom_field_unique' => 'Este é um campo único e não pode ser editado em massa.',
     'checkedout_to' => 'Alocado a',

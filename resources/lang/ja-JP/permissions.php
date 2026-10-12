@@ -16,450 +16,450 @@ return [
     */
 
     'superuser' => [
-        'name' => 'Super User',
-        'note' => 'Determines whether the user has full access to all aspects of the admin. This setting overrides ALL more specific and restrictive permissions throughout the system. ',
+        'name' => 'スーパーユーザー',
+        'note' => 'システム全体への完全な管理権限を付与します。この設定は、個別に設定されたすべての制限付き権限より優先されます。',
     ],
     'admin' => [
-        'name' => 'Admin Access',
-        'note' => 'Determines whether the user has access to most aspects of the system EXCEPT the System Admin Settings. These users will be able to manage users, locations, categories, etc, but ARE constrained by Full Multiple Company Support if it is enabled.',
+        'name' => '管理者アクセス',
+        'note' => 'システム管理設定を除く、ほとんどの機能へのアクセスを許可します。ユーザー、場所、カテゴリなどを管理できます。完全な複数会社対応が有効な場合は、その会社範囲の制限が適用されます。',
     ],
 
     'import' => [
-        'name' => 'CSV Import',
-        'note' => 'This will allow users to import even if access to users, assets, etc is denied elsewhere.',
+        'name' => 'CSVインポート',
+        'note' => 'ユーザーや資産などへのアクセスが個別に拒否されていても、CSVからのインポートを許可します。',
     ],
 
     'reports' => [
-        'name' => 'Reports Access',
-        'note' => 'Determines whether the user has access to the Reports section of the application.',
+        'name' => 'レポートへのアクセス',
+        'note' => 'レポート画面へのアクセスを許可します。',
     ],
 
     'assets' => [
         'name' => '資産',
-        'note' => 'Grants access to the Assets section of the application. ',
+        'note' => '資産画面へのアクセスを許可します。',
     ],
 
     'assetsview' => [
-        'name' => 'View Assets',
-        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the asset model as well. This is to make it easier to share common documents like user manuals across assets without having to upload them to every asset, and to avoid having to grant the user permission to modify asset files. Users with this permission will also be able to view edit and checkin history.',
+        'name' => '資産を表示',
+        'note' => 'この権限を持つユーザーは、資産モデルにアップロードされたファイルも閲覧できます（変更や削除はできません）。取扱説明書などを資産ごとにアップロードせず共有するための仕様です。',
     ],
 
     'assetscreate' => [
-        'name' => 'Create New Assets',
+        'name' => '資産を作成',
     ],
 
     'assetsedit' => [
-        'name' => 'Edit Assets',
+        'name' => '資産を編集',
     ],
 
     'assetsdelete' => [
-        'name' => 'Delete Assets',
+        'name' => '資産を削除',
     ],
 
     'assetscheckin' => [
-        'name' => 'Check In',
-        'note' => 'Check assets back into inventory that are currently checked out.',
+        'name' => 'チェックイン',
+        'note' => 'チェックアウト中の資産を在庫へ戻す操作を許可します。',
     ],
 
     'assetscheckout' => [
-        'name' => 'Check Out',
-        'note' => 'Assign assets in inventory by checking them out.',
+        'name' => 'チェックアウト',
+        'note' => '在庫内の資産をチェックアウトして割り当てる操作を許可します。',
     ],
 
     'assetsaudit' => [
-        'name' => 'Audit Assets',
-        'note' => 'Allows the user to mark an asset as physically inventoried.',
+        'name' => '資産を監査',
+        'note' => '資産を現物確認済みとして記録する操作を許可します。',
     ],
 
     'assetsviewrequestable' => [
-        'name' => 'View Requestable Items',
-        'note' => 'Allows the user to view items that are marked as requestable.',
+        'name' => '申請可能な資産を表示',
+        'note' => '申請可能に設定された資産の表示を許可します。',
     ],
 
     'assetsviewencrypted-custom-fields' => [
-        'name' => 'View Encrypted Custom Fields',
-        'note' => 'Allows the user to view and modify encrypted custom fields on assets.',
+        'name' => '暗号化されたカスタムフィールドを表示',
+        'note' => '資産の暗号化されたカスタムフィールドの表示と変更を許可します。',
     ],
 
     'accessories' => [
         'name' => '付属品',
-        'note' => 'Grants access to the Accessories section of the application.',
+        'note' => '付属品画面へのアクセスを許可します。',
     ],
 
     'accessoriesview' => [
-        'name' => 'View Accessories',
+        'name' => '付属品を表示',
     ],
     'accessoriescreate' => [
-        'name' => 'Create New Accessories',
+        'name' => '付属品を作成',
     ],
     'accessoriesedit' => [
-        'name' => 'Edit Accessories',
+        'name' => '付属品を編集',
     ],
     'accessoriesdelete' => [
-        'name' => 'Delete Accessories',
+        'name' => '付属品を削除',
     ],
     'accessoriescheckout' => [
-        'name' => 'Check Out Accessories',
-        'note' => 'Assign accessories in inventory by checking them out.',
+        'name' => '付属品をチェックアウト',
+        'note' => '在庫内の付属品をチェックアウトして割り当てる操作を許可します。',
     ],
     'accessoriescheckin' => [
-        'name' => 'Check In Accessories',
-        'note' => 'Check accessories back into inventory that are currently checked out.',
+        'name' => '付属品をチェックイン',
+        'note' => 'チェックアウト中の付属品を在庫へ戻す操作を許可します。',
     ],
     'accessoriesfiles' => [
-        'name' => 'Manage Accessory Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with accessories. (This only makes sense with view privileges or higher.)',
+        'name' => '付属品のファイルを管理',
+        'note' => '付属品に関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'assetsfiles' => [
-        'name' => 'Manage Asset Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with assets. (This only makes sense with view privileges or higher.)',
+        'name' => '資産のファイルを管理',
+        'note' => '資産に関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'usersfiles' => [
-        'name' => 'Manage User Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with users. (This only makes sense with view privileges or higher.)',
+        'name' => 'ユーザーのファイルを管理',
+        'note' => 'ユーザーに関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'modelsfiles' => [
-        'name' => 'Manage Model Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with asset models on both the model view and the asset view screens. (This only makes sense with view privileges or higher.)',
+        'name' => '資産モデルのファイルを管理',
+        'note' => '資産モデル画面と資産画面で、資産モデルに関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'departmentsfiles' => [
-        'name' => 'Manage Department Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with departments. (This only makes sense with view privileges or higher.)',
+        'name' => '部署のファイルを管理',
+        'note' => '部署に関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'suppliersfiles' => [
-        'name' => 'Manage Supplier Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with suppliers. (This only makes sense with view privileges or higher.)',
+        'name' => '仕入先のファイルを管理',
+        'note' => '仕入先に関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'locationsfiles' => [
-        'name' => 'Manage Location Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with locations.(This only makes sense with view privileges or higher.)',
+        'name' => '場所のファイルを管理',
+        'note' => '場所に関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'companiesfiles' => [
-        'name' => 'Manage Company Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with companies. (This only makes sense with view privileges or higher.)',
+        'name' => '会社のファイルを管理',
+        'note' => '会社に関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'consumablesfiles' => [
-        'name' => 'Manage Consumable Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with consumables. (This only makes sense with view privileges or higher.)',
+        'name' => '消耗品のファイルを管理',
+        'note' => '消耗品に関連付けられたファイルのアップロード、ダウンロード、削除を許可します（表示以上の権限も必要です）。',
     ],
 
     'consumables' => [
-        'name' => '消耗品数',
-        'note' => 'Grants access to the Consumables section of the application.',
+        'name' => '消耗品',
+        'note' => '消耗品画面へのアクセスを許可します。',
     ],
     'consumablesview' => [
-        'name' => 'View Consumables',
+        'name' => '消耗品を表示',
     ],
     'consumablescreate' => [
-        'name' => 'Create New Consumables',
+        'name' => '消耗品を作成',
     ],
     'consumablesedit' => [
-        'name' => 'Edit Consumables',
+        'name' => '消耗品を編集',
     ],
     'consumablesdelete' => [
-        'name' => 'Delete Consumables',
+        'name' => '消耗品を削除',
     ],
     'consumablescheckout' => [
-        'name' => 'Check Out Consumables',
-        'note' => 'Assign consumables in inventory by checking them out.',
+        'name' => '消耗品をチェックアウト',
+        'note' => '在庫内の消耗品をチェックアウトして割り当てる操作を許可します。',
     ],
 
     'licenses' => [
-        'name' => 'ライセンス数',
-        'note' => 'Grants access to the Licenses section of the application.',
+        'name' => 'ライセンス',
+        'note' => 'ライセンス画面へのアクセスを許可します。',
     ],
     'licensesview' => [
-        'name' => 'View Licenses',
+        'name' => 'ライセンスを表示',
     ],
     'licensescreate' => [
-        'name' => 'Create New Licenses',
+        'name' => 'ライセンスを作成',
     ],
     'licensesedit' => [
-        'name' => 'Edit Licenses',
+        'name' => 'ライセンスを編集',
     ],
     'licensesdelete' => [
-        'name' => 'Delete Licenses',
+        'name' => 'ライセンスを削除',
     ],
     'licensescheckout' => [
-        'name' => 'Assign Licenses',
-        'note' => 'Allows the user to assign licenses to assets or users.',
+        'name' => 'ライセンスを割り当て',
+        'note' => '資産またはユーザーへのライセンス割り当てを許可します。',
     ],
     'licensescheckin' => [
-        'name' => 'Unassign Licenses',
-        'note' => 'Allows the user to unassign licenses from assets or users.',
+        'name' => 'ライセンスの割り当てを解除',
+        'note' => '資産またはユーザーからのライセンス割り当て解除を許可します。',
     ],
     'licensesfiles' => [
-        'name' => 'Manage License Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with licenses.',
+        'name' => 'ライセンスのファイルを管理',
+        'note' => 'ライセンスに関連付けられたファイルのアップロード、ダウンロード、削除を許可します。',
     ],
     'componentsfiles' => [
-        'name' => 'Manage Component Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with components.',
+        'name' => 'コンポーネントのファイルを管理',
+        'note' => 'コンポーネントに関連付けられたファイルのアップロード、ダウンロード、削除を許可します。',
     ],
 
     'licenseskeys' => [
-        'name' => 'Manage License Keys',
-        'note' => 'Allows the user to view product keys associated with licenses.',
+        'name' => 'ライセンスキーを管理',
+        'note' => 'ライセンスに関連付けられたプロダクトキーの表示を許可します。',
     ],
     'components' => [
-        'name' => '構成部品',
-        'note' => 'Grants access to the Components section of the application.',
+        'name' => 'コンポーネント',
+        'note' => 'コンポーネント画面へのアクセスを許可します。',
     ],
     'componentsview' => [
-        'name' => 'View Components',
+        'name' => 'コンポーネントを表示',
     ],
     'componentscreate' => [
-        'name' => 'Create New Components',
+        'name' => 'コンポーネントを作成',
     ],
     'componentsedit' => [
-        'name' => 'Edit Components',
+        'name' => 'コンポーネントを編集',
     ],
     'componentsdelete' => [
-        'name' => 'Delete Components',
+        'name' => 'コンポーネントを削除',
     ],
 
     'componentscheckout' => [
-        'name' => 'Check Out Components',
-        'note' => 'Assign components in inventory by checking them out.',
+        'name' => 'コンポーネントをチェックアウト',
+        'note' => '在庫内のコンポーネントをチェックアウトして割り当てる操作を許可します。',
     ],
     'componentscheckin' => [
-        'name' => 'Check In Components',
-        'note' => 'Check components back into inventory that are currently checked out.',
+        'name' => 'コンポーネントをチェックイン',
+        'note' => 'チェックアウト中のコンポーネントを在庫へ戻す操作を許可します。',
     ],
     'kits' => [
         'name' => '製品セット',
-        'note' => 'Grants access to the Predefined Kits section of the application.',
+        'note' => '定義済みキット画面へのアクセスを許可します。',
     ],
     'kitsview' => [
-        'name' => 'View Predefined Kits',
+        'name' => '定義済みキットを表示',
     ],
     'kitscreate' => [
-        'name' => 'Create New Predefined Kits',
+        'name' => '定義済みキットを作成',
     ],
     'kitsedit' => [
-        'name' => 'Edit Predefined Kits',
+        'name' => '定義済みキットを編集',
     ],
     'kitsdelete' => [
-        'name' => 'Delete Predefined Kits',
+        'name' => '定義済みキットを削除',
     ],
     'users' => [
-        'name' => '利用者',
-        'note' => 'Grants access to the Users section of the application.',
+        'name' => 'ユーザー',
+        'note' => 'ユーザー画面へのアクセスを許可します。',
     ],
     'usersview' => [
-        'name' => '利用者を表示',
-        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the user as well. Users with this permission will also be able to view edit and checkin history.',
+        'name' => 'ユーザーを表示',
+        'note' => 'この権限を持つユーザーは、ユーザーにアップロードされたファイルも表示できます（変更や削除はできません）。また、編集とチェックインの履歴も表示できます。',
     ],
     'userscreate' => [
-        'name' => 'Create New Users',
+        'name' => 'ユーザーを作成',
     ],
     'usersedit' => [
-        'name' => 'Edit Users',
+        'name' => 'ユーザーを編集',
     ],
     'usersdelete' => [
-        'name' => 'Delete Users',
+        'name' => 'ユーザーを削除',
     ],
     'models' => [
-        'name' => 'Models',
-        'note' => 'Grants access to the Models section of the application.',
+        'name' => '資産モデル',
+        'note' => '資産モデル画面へのアクセスを許可します。',
     ],
     'modelsview' => [
-        'name' => '型番を表示',
+        'name' => 'モデルを表示',
     ],
 
     'modelscreate' => [
-        'name' => 'Create New Models',
+        'name' => '資産モデルを作成',
     ],
     'modelsedit' => [
-        'name' => 'Edit Models',
+        'name' => '資産モデルを編集',
     ],
     'modelsdelete' => [
-        'name' => 'Delete Models',
+        'name' => '資産モデルを削除',
     ],
     'categories' => [
-        'name' => 'カテゴリー',
-        'note' => 'Grants access to the Categories section of the application.',
+        'name' => 'カテゴリ',
+        'note' => 'カテゴリ画面へのアクセスを許可します。',
     ],
     'categoriesview' => [
-        'name' => 'View Categories',
+        'name' => 'カテゴリを表示',
     ],
     'categoriescreate' => [
-        'name' => 'Create New Categories',
+        'name' => 'カテゴリを作成',
     ],
     'categoriesedit' => [
-        'name' => 'Edit Categories',
+        'name' => 'カテゴリを編集',
     ],
     'categoriesdelete' => [
-        'name' => 'Delete Categories',
+        'name' => 'カテゴリを削除',
     ],
     'departments' => [
         'name' => '部署',
-        'note' => 'Grants access to the Departments section of the application.',
+        'note' => '部署画面へのアクセスを許可します。',
     ],
     'departmentsview' => [
-        'name' => 'View Departments',
+        'name' => '部署を表示',
     ],
     'departmentscreate' => [
-        'name' => 'Create New Departments',
+        'name' => '部署を作成',
     ],
     'departmentsedit' => [
-        'name' => 'Edit Departments',
+        'name' => '部署を編集',
     ],
     'departmentsdelete' => [
-        'name' => 'Delete Departments',
+        'name' => '部署を削除',
     ],
     'locations' => [
-        'name' => 'ロケーション',
-        'note' => 'Grants access to the Locations section of the application.',
+        'name' => '場所',
+        'note' => '場所画面へのアクセスを許可します。',
     ],
     'locationsview' => [
-        'name' => 'View Locations',
+        'name' => '場所を表示',
     ],
     'locationscreate' => [
-        'name' => 'Create New Locations',
+        'name' => '場所を作成',
     ],
     'locationsedit' => [
-        'name' => 'Edit Locations',
+        'name' => '場所を編集',
     ],
     'locationsdelete' => [
-        'name' => 'Delete Locations',
+        'name' => '場所を削除',
     ],
     'status-labels' => [
         'name' => 'ステータスラベル',
-        'note' => 'Grants access to the Status Labels section of the application used by Assets.',
+        'note' => '資産で使用するステータスラベル画面へのアクセスを許可します。',
     ],
     'statuslabelsview' => [
-        'name' => 'View Status Labels',
+        'name' => 'ステータスラベルを表示',
     ],
     'statuslabelscreate' => [
-        'name' => 'Create New Status Labels',
+        'name' => 'ステータスラベルを作成',
     ],
     'statuslabelsedit' => [
-        'name' => 'Edit Status Labels',
+        'name' => 'ステータスラベルを編集',
     ],
     'statuslabelsdelete' => [
-        'name' => 'Delete Status Labels',
+        'name' => 'ステータスラベルを削除',
     ],
     'custom-fields' => [
         'name' => 'カスタムフィールド',
-        'note' => 'Grants access to the Custom Fields section of the application used by Assets.',
+        'note' => '資産で使用するカスタムフィールド画面へのアクセスを許可します。',
     ],
     'customfieldsview' => [
-        'name' => 'View Custom Fields',
+        'name' => 'カスタムフィールドを表示',
     ],
     'customfieldscreate' => [
-        'name' => 'Create New Custom Fields',
+        'name' => 'カスタムフィールドを作成',
     ],
     'customfieldsedit' => [
-        'name' => 'Edit Custom Fields',
+        'name' => 'カスタムフィールドを編集',
     ],
     'customfieldsdelete' => [
-        'name' => 'Delete Custom Fields',
+        'name' => 'カスタムフィールドを削除',
     ],
     'suppliers' => [
         'name' => '仕入先',
-        'note' => 'Grants access to the Suppliers section of the application.',
+        'note' => '仕入先画面へのアクセスを許可します。',
     ],
     'suppliersview' => [
-        'name' => 'View Suppliers',
+        'name' => '仕入先を表示',
     ],
     'supplierscreate' => [
-        'name' => 'Create New Suppliers',
+        'name' => '仕入先を作成',
     ],
     'suppliersedit' => [
-        'name' => 'Edit Suppliers',
+        'name' => '仕入先を編集',
     ],
     'suppliersdelete' => [
-        'name' => 'Delete Suppliers',
+        'name' => '仕入先を削除',
     ],
     'manufacturers' => [
-        'name' => '製造元の数',
-        'note' => 'Grants access to the Manufacturers section of the application.',
+        'name' => '製造元',
+        'note' => '製造元画面へのアクセスを許可します。',
     ],
     'manufacturersview' => [
-        'name' => 'View Manufacturers',
+        'name' => '製造元を表示',
     ],
     'manufacturerscreate' => [
-        'name' => 'Create New Manufacturers',
+        'name' => '製造元を作成',
     ],
     'manufacturersedit' => [
-        'name' => 'Edit Manufacturers',
+        'name' => '製造元を編集',
     ],
     'manufacturersdelete' => [
-        'name' => 'Delete Manufacturers',
+        'name' => '製造元を削除',
     ],
     'companies' => [
-        'name' => '所属',
-        'note' => 'Grants access to the Companies section of the application.',
+        'name' => '会社',
+        'note' => '会社画面へのアクセスを許可します。',
     ],
     'companiesview' => [
-        'name' => 'View Companies',
+        'name' => '会社を表示',
     ],
     'companiescreate' => [
-        'name' => 'Create New Companies',
+        'name' => '会社を作成',
     ],
     'companiesedit' => [
-        'name' => 'Edit Companies',
+        'name' => '会社を編集',
     ],
     'companiesdelete' => [
-        'name' => 'Delete Companies',
+        'name' => '会社を削除',
     ],
     'user-self-accounts' => [
-        'name' => 'User Self Accounts',
-        'note' => 'Grants non-admin users the ability to manage certain aspects of their own user accounts.',
+        'name' => 'ユーザー自身のアカウント',
+        'note' => '管理者でないユーザーに、自分のアカウントの一部を管理する権限を付与します。',
     ],
     'selftwo-factor' => [
-        'name' => 'Manage Two-Factor Authentication',
-        'note' => 'Allows users to enable, disable, and manage two-factor authentication for their own accounts.',
+        'name' => '二要素認証を管理',
+        'note' => 'ユーザー自身のアカウントで、二要素認証の有効化、無効化、管理を許可します。',
     ],
     'selfapi' => [
-        'name' => 'Manage API Tokens',
-        'note' => 'Allows users to create, view, and revoke their own API tokens. User tokens will have the same permissions as the user who created them.',
+        'name' => 'APIトークンを管理',
+        'note' => 'ユーザー自身のAPIトークンの作成、表示、失効を許可します。トークンには、作成したユーザーと同じ権限が適用されます。',
     ],
     'selfedit-location' => [
-        'name' => 'Edit Location',
-        'note' => 'Allows users to edit the location associated with their own user account.',
+        'name' => '自分の場所を編集',
+        'note' => 'ユーザー自身のアカウントに関連付けられた場所の編集を許可します。',
     ],
     'selfcheckout-assets' => [
-        'name' => 'Self Check Out Assets',
-        'note' => 'Allows users to check out assets to themselves without admin intervention.',
+        'name' => '資産を自分にチェックアウト',
+        'note' => '管理者の操作なしで、ユーザーが資産を自分自身へチェックアウトすることを許可します。',
     ],
     'selfview-purchase-cost' => [
-        'name' => 'View Purchase Cost',
-        'note' => 'Allows users to view the purchase cost of items in their account view.',
+        'name' => '購入費用を表示',
+        'note' => 'アカウント画面で、割り当てられたアイテムの購入費用を表示することを許可します。',
     ],
 
     'depreciations' => [
-        'name' => 'Depreciation Management',
-        'note' => 'Allows users to manage and view asset depreciation details.',
+        'name' => '減価償却の管理',
+        'note' => '資産の減価償却情報の管理と表示を許可します。',
     ],
     'depreciationsview' => [
-        'name' => 'View Depreciation Details',
+        'name' => '減価償却の詳細を表示',
     ],
     'depreciationsedit' => [
-        'name' => 'Edit Depreciation Settings',
+        'name' => '減価償却設定を編集',
     ],
     'depreciationsdelete' => [
-        'name' => 'Delete Depreciation Records',
+        'name' => '減価償却レコードを削除',
     ],
     'depreciationscreate' => [
-        'name' => 'Create Depreciation Records',
+        'name' => '減価償却レコードを作成',
     ],
 
-    'grant_all' => 'Grant all permissions for :area',
-    'deny_all' => 'Deny all permissions for :area',
-    'inherit_all' => 'Inherit all permissions for :area from permission groups',
-    'grant' => 'Grant Permission for :area',
-    'deny' => 'Deny Permission for :area',
-    'inherit' => 'Inherit Permission for :area from permission groups',
-    'use_groups' => 'We strongly suggest using Permission Groups instead of assigning individual permissions for easier management.',
+    'grant_all' => ':areaの全権限を許可',
+    'deny_all' => ':areaの全権限を拒否',
+    'inherit_all' => ':areaの全権限を権限グループから継承',
+    'grant' => ':areaの権限を許可',
+    'deny' => ':areaの権限を拒否',
+    'inherit' => ':areaの権限を権限グループから継承',
+    'use_groups' => '管理しやすくするため、個別に権限を割り当てる代わりに権限グループの使用を強く推奨します。',
 
 ];

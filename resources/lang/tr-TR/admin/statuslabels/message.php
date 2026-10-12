@@ -20,8 +20,8 @@ return [
         'confirm' => 'Bu durum etiketi silmek istediğinizden emin misiniz?',
         'error' => 'Durum etiketi silerken bir sorun oluştu. Lütfen yeniden deneyin.',
         'success' => 'Durum etiketi başarıyla silindi.',
-        'bulk_success' => 'Status Label deleted successfully.|:count status labels were deleted successfully.',
-        'partial_success' => 'Status Label deleted successfully. See additional information below. | :count status labels were deleted successfully. See additional information below.',
+        'bulk_success' => 'Durum etiketi başarıyla silindi.|:count durum etiketi başarıyla silindi.',
+        'partial_success' => 'Durum etiketi başarıyla silindi. Aşağıda ek bilgiler verilmiştir.|:count durum etiketi başarıyla silindi. Aşağıda ek bilgiler verilmiştir.',
     ],
 
     'help' => [

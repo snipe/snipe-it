@@ -203,6 +203,7 @@ return [
     'email_array' => 'អាសយដ្ឋានអ៊ីមែលមួយ ឬច្រើនមិនត្រឹមត្រូវទេ។',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'វាល :attribute មានតួអក្សរដែលមិនត្រូវបានអនុញ្ញាត។',

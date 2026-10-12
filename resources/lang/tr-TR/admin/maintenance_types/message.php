@@ -14,8 +14,8 @@ return [
         'confirm' => 'Bu bakım türünü silmek istediğinize emin misiniz?',
         'error' => 'Bu bakım türünü silerken bir sorun oluştu. Lütfen tekrar deneyin.',
         'success' => 'Bakım türü başarıyla silindi.',
-        'bulk_success' => 'Maintenance type deleted successfully.|:count maintenance types were deleted successfully.',
-        'partial_success' => 'Maintenance type deleted successfully. See additional information below. | :count maintenance types were deleted successfully. See additional information below.',
+        'bulk_success' => 'Bakım türü başarıyla silindi.|:count bakım türü başarıyla silindi.',
+        'partial_success' => 'Bakım türü başarıyla silindi. Aşağıda ek bilgiler verilmiştir.|:count bakım türü başarıyla silindi. Aşağıda ek bilgiler verilmiştir.',
     ],
     'complete' => [
         'success' => 'Bakım tamamlandı olarak işaretlendi.',

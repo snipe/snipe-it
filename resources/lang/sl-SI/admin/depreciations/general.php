@@ -7,13 +7,15 @@ return [
     'create' => 'Ustvari amortizacijo',
     'depreciation_name' => 'Ime amortizacije',
     'number_of_months' => 'Število mesecev',
+    'rate_multiplier' => 'Rate Multiplier',
     'update' => 'Posodobi amortizacijo',
-    'depreciation_min' => 'Minimalna vrednost po amortizaciji',
+    'fiscal_year_start_month' => 'Fiscal Year Start Month',
     'no_depreciations_warning' => '<strong>Opozorilo: </strong>
                       Trenutno nimate nastavljenih nobenih amortizacij.
                       Za ogled poročila o amortizaciji nastavite vsaj eno amortizacijo.',
     'depreciation_method' => 'Poročilo o amortizaciji',
     'linear_depreciation' => 'Linearno (privzeto)',
+    'diminishing_depreciation' => 'Diminishing Value Depreciation',
     'half_1' => 'Half-year convention, always applied',
     'half_2' => 'Half-year convention, applied with condition',
 ];

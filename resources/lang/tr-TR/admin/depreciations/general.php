@@ -7,13 +7,15 @@ return [
     'create' => 'Değer Kaybı Oluştur',
     'depreciation_name' => 'Amortisman Adı',
     'number_of_months' => 'Ay Sayısı',
+    'rate_multiplier' => 'Oran Çarpanı',
     'update' => 'Değer Kaybını Güncelle',
-    'depreciation_min' => 'Değişiklik sonrası minumum değer',
+    'fiscal_year_start_month' => 'Mali Yılın Başlangıç Ayı',
     'no_depreciations_warning' => '<strong>Uyarı: </strong>
                       Şu anda ayarlanmış herhangi bir amortismanınız yok.
                       Amortisman raporunu görüntülemek için lütfen en az bir amortisman ayarlayın.',
     'depreciation_method' => 'Amortisman Raporu',
     'linear_depreciation' => 'Doğrusal (Varsayılan)',
+    'diminishing_depreciation' => 'Azalan Bakiye Amortismanı',
     'half_1' => 'Yarıyıl yöntemi, her zaman uygulanır',
     'half_2' => 'Yarıyıl yöntemi, koşullu olarak uygulanır',
 ];

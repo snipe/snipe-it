@@ -203,6 +203,7 @@ return [
     'email_array' => 'Một hoặc nhiều địa chỉ email không hợp lệ.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Trường: attribute chứa một ký tự không được phép.',

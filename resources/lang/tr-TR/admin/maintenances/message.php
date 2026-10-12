@@ -23,6 +23,6 @@ return [
         'success' => 'Bakım tamamlandı olarak işaretlendi.',
         'error' => 'Bu bakımı tamamlandı olarak işaretlerken bir sorun oluştu. Lütfen tekrar deneyin.',
     ],
-    'bulk_delete' => 'No maintenance records were deleted (:skipped skipped).|Deleted :count maintenance record. (:skipped skipped)|Deleted :count maintenance records. (:skipped skipped)',
-    'bulk_complete' => 'No maintenance records were marked complete (:skipped skipped or already complete).|Marked :count maintenance record complete. (:skipped skipped or already complete)|Marked :count maintenance records complete. (:skipped skipped or already complete)',
+    'bulk_delete' => 'Hiçbir bakım kaydı silinmedi (:skipped atlandı).|:count bakım kaydı silindi. (:skipped atlandı)|:count bakım kaydı silindi. (:skipped atlandı)',
+    'bulk_complete' => 'Hiçbir bakım kaydı tamamlandı olarak işaretlenmedi (:skipped atlandı veya zaten tamamlanmıştı).|:count bakım kaydı tamamlandı olarak işaretlendi. (:skipped atlandı veya zaten tamamlanmıştı)|:count bakım kaydı tamamlandı olarak işaretlendi. (:skipped atlandı veya zaten tamamlanmıştı)',
 ];

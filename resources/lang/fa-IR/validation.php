@@ -203,6 +203,7 @@ return [
     'email_array' => 'یک یا بیش از یک آدرس ایمیل نامعتبر است.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'فیلد attribute شامل یک شخصیت است که مجاز نیست.',

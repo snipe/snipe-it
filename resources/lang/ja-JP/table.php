@@ -6,11 +6,11 @@ return [
     'action' => 'アクション',
     'by' => '実行者',
     'item' => '品目',
-    'no_matching_records' => 'No matching records found',
-    'load_error_title' => 'Could not load results',
-    'load_error_body' => 'The server returned an error. Please try again in a moment. If this keeps happening, check the application log.',
-    'load_error_http_status' => 'HTTP status',
-    'load_error_session_expired' => 'Your session has expired. Reloading the page.',
-    'shift_select' => 'Click on a checkbox and hold <code>shift</code> and click another checkbox in the table to select/de-select a range.'
+    'no_matching_records' => '該当するデータがありません',
+    'load_error_title' => 'データを読み込めませんでした',
+    'load_error_body' => 'サーバーでエラーが発生しました。しばらく待ってからもう一度お試しください。繰り返し発生する場合は、アプリケーションログをご確認ください。',
+    'load_error_http_status' => 'HTTPステータス',
+    'load_error_session_expired' => 'セッションの有効期限が切れました。ページを再読み込みします。',
+    'shift_select' => '表内のチェックボックスをクリックし、<code>Shift</code>キーを押しながら別のチェックボックスをクリックすると、範囲をまとめて選択／解除できます。'
 
 ];

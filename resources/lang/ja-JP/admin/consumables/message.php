@@ -2,7 +2,7 @@
 
 return [
 
-    'invalid_category_type' => 'The category must be a consumable category.',
+    'invalid_category_type' => '消耗品カテゴリを選択してください。',
     'does_not_exist' => '消耗品は存在しません。',
 
     'create' => [

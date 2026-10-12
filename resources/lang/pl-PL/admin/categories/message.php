@@ -27,7 +27,7 @@ return [
 
     'bulkedit' => [
         'warn' => 'You are about to edit the properties of the following category:|You are about to edit the properties of the following :count categories:',
-        'no_selection' => 'You must select at least one category to edit.',
+        'no_selection' => 'Wybierz co najmniej jedną kategorię do edycji.',
         'no_changes' => 'Żadne pole nie zostało zmodyfikowane, więc nic nie zostało zaktualizowane.',
         'success' => 'Category successfully updated.|:count categories successfully updated.',
     ],

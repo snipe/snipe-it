@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Masseopdater Aktiver',
     'bulk_update_help' => 'Denne form tillader dig at opdatere flere aktiver på en gang. Udfyld kun de felter der skal ændres. Ikke udfyldte feltet forbilver uændret.',
     'bulk_update_warn' => 'Du er ved at redigere egenskaberne for et enkelt aktiv, og du er ved at redigere egenskaberne for :asset_count aktiver.',
-    'bulk_update_with_custom_field' => 'Bemærk at aktiverne er :asset_model_count forskellige typer af modeller.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Til Modeller',
     'bulk_update_custom_field_unique' => 'Dette er et unikt felt og kan ikke masseredigeres.',
     'checkedout_to' => 'Tjekket Ud Til',

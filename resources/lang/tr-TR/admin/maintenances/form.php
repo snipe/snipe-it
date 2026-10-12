@@ -15,7 +15,7 @@ return [
     'responsible_party' => 'Sorumlu Taraf',
     'checked_out_to_at_creation' => 'Çıkış Yapılmış Olan Kişi',
     'completed_at' => 'Tamamlanma Tarihi',
-    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_at_help' => 'Bu bakımın fiilen tamamlandığı tarih. Henüz tamamlanmadıysa boş bırakın. Buraya tarih girmek, Tamamlandı Olarak İşaretle\'ye tıklamakla aynı işlemi yapar; ancak geçerli saat yerine geçmiş bir tarih girmenizi sağlar.',
     'completed_by' => 'Tamamlayan Kişi',
     'mark_complete' => 'Tamamlandı Olarak İşaretle',
     'already_complete' => 'Zaten Tamamlanmış',

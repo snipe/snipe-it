@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Масовно ажурирање на основни средства',
     'bulk_update_help' => 'Оваа форма ви овозможува да ажурирате повеќе основни средства одеднаш. Пополнете ги полињата што треба да ги промените. Сите полиња што остануваат празни ќе останат непроменети. ',
     'bulk_update_warn' => 'Ќе ги уредувате својствата на едно средство.|Ќе ги уредувате својствата на :asset_count средства.',
-    'bulk_update_with_custom_field' => 'Забележете дека средствата се :asset_model_count различни типови на модели.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'На модели',
     'bulk_update_custom_field_unique' => 'Ова е уникатно поле и не може да биде изменето во група.',
     'checkedout_to' => 'Задолжен на',

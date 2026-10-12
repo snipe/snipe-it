@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Massuppdatera tillgångar',
     'bulk_update_help' => 'I det här formuläret kan du uppdatera flera tillgångar på en gång. Fyll bara i de fält du behöver ändra. Alla fält som lämnas tomma kommer att förbli oförändrade.',
     'bulk_update_warn' => 'Du håller på att redigera egenskaperna för en tillgång.|Du håller på att redigera egenskaperna för :asset_count tillgångar.',
-    'bulk_update_with_custom_field' => 'Notera att tillgångarna är :asset_model_count olika typer av modeller.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'På modeller',
     'bulk_update_custom_field_unique' => 'Detta är ett unikt fält och kan inte massredigeras.',
     'checkedout_to' => 'Utcheckad till',

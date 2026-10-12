@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Actualización masiva de activos',
     'bulk_update_help' => 'Este formulario le permite actualizar varios activos a la vez. Complete solo los campos que necesite modificar. Los campos que se dejen en blanco no se modificarán. ',
     'bulk_update_warn' => 'Está a punto de editar las propiedades de un solo activo.|Está a punto de editar las propiedades de :asset_count activos.',
-    'bulk_update_with_custom_field' => 'Tenga en cuenta que los activos corresponden a :asset_model_count tipos diferentes de modelos.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'En modelos',
     'bulk_update_custom_field_unique' => 'Este es un campo único y no puede ser editado de forma masiva.',
     'checkedout_to' => 'Asignado a',

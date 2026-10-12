@@ -203,6 +203,7 @@ return [
     'email_array' => 'ஒன்று அல்லது அதற்கு மேற்பட்ட மின்னஞ்சல் முகவரிகள் தவறானவை.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'பண்புக்கூறு துறையில் அனுமதிக்கப்படாத ஒரு பாத்திரம் உள்ளது.',

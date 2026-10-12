@@ -203,6 +203,7 @@ return [
     'email_array' => 'Yksi tai useampi sähköpostiosoite on virheellinen.',
     'checkboxes' => ':attribute sisältää virheellisiä vaihtoehtoja.',
     'radio_buttons' => ':attribute on virheellinen.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => ':attribute -kenttä sisältää merkin, jota ei sallita.',

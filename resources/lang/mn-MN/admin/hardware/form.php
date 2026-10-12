@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Бөөнөөр шинэчлэх актив',
     'bulk_update_help' => 'Энэ маягтыг олон дахин нэг зэрэг олон актив шинэчлэх боломжтой. Зөвхөн өөрчлөх шаардлагатай талбаруудыг бөглөөрэй. Хоосон үлдсэн талбарууд өөрчлөгдөхгүй хэвээр үлдэнэ.',
     'bulk_update_warn' => 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
-    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'On Models',
     'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to' => 'Үүнийг шалгах',

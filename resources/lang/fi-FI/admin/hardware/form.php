@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Massapäivitä laitteita',
     'bulk_update_help' => 'Tämän lomakkeen avulla voit päivittää useita laitteita kerralla. Täytä vain ne kentät joita haluat muuttaa. Tyhjäksi jätettyjä kenttiä ei päivitetä. ',
     'bulk_update_warn' => 'Olet muokkaamassa yhden laitteen ominaisuuksia.- Olet muokkaamassa :asset_count laitteen ominaisuuksia.',
-    'bulk_update_with_custom_field' => 'Huomaa, että assetit ovat :asset_model_count erilaisia malleja.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Malleissa',
     'bulk_update_custom_field_unique' => 'Tämä on ainutlaatuinen kenttä eikä sitä voi muokata.',
     'checkedout_to' => 'Luovutettuna',

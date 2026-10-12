@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'تحديث للأصول المحددة',
     'bulk_update_help' => 'يتيح لك هذا النموذج تحديث عدة أصول دفعة واحدة. قم بملء الحقول التي تحتاج إلى تغييرها. ستظل أية حقول فارغة بدون تغيير. ',
     'bulk_update_warn' => 'أنت على وشك تعديل خصائص أصل واحد.<unk> أنت على وشك تعديل خصائص :asset_count الأصول.',
-    'bulk_update_with_custom_field' => 'لاحظ أن الأصول هي :asset_model_count أنواع مختلفة من النماذج.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'على النماذج',
     'bulk_update_custom_field_unique' => 'هذا حقل فريد ولا يمكن تحريره بشكل عام.',
     'checkedout_to' => 'تم الاخراج إلى',

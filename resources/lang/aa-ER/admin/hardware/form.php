@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'crwdns1183:0crwdne1183:0',
     'bulk_update_help' => 'crwdns1184:0crwdne1184:0',
     'bulk_update_warn' => 'crwdns10558:0crwdne10558:0',
-    'bulk_update_with_custom_field' => 'crwdns11773:0crwdne11773:0',
+    'bulk_update_with_custom_field' => 'crwdns17327:0crwdne17327:0',
     'bulk_update_model_prefix' => 'crwdns11775:0crwdne11775:0',
     'bulk_update_custom_field_unique' => 'crwdns11777:0crwdne11777:0',
     'checkedout_to' => 'crwdns695:0crwdne695:0',

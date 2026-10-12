@@ -19,8 +19,8 @@ return [
         'confirm' => '本当に減価償却クラスを削除しますか？',
         'error' => '減価償却クラスを削除する際に問題がおきました。再度実行してください。',
         'success' => '減価償却クラスの削除に成功しました。',
-        'bulk_success' => 'Depreciation class deleted successfully.|:count depreciation classes were deleted successfully.',
-        'partial_success' => 'Depreciation class deleted successfully. See additional information below.|:count depreciation classes were deleted successfully. See additional information below.',
+        'bulk_success' => '減価償却を削除しました。|減価償却を:count件削除しました。',
+        'partial_success' => '減価償却を削除しました。詳しくは以下をご確認ください。|減価償却を:count件削除しました。詳しくは以下をご確認ください。',
     ],
 
 ];

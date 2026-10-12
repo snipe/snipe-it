@@ -43,8 +43,8 @@ return [
     ],
 
     'delete_with_checkin' => [
-        'bulk_success' => ':count licenses were deleted successfully after checking in :seats seats.',
-        'partial_success' => ':count licenses were deleted successfully after checking in :seats seats. See additional information below.',
+        'bulk_success' => ':seats koltuk teslim alındıktan sonra :count lisans başarıyla silindi.',
+        'partial_success' => 'İade alma işleminden sonra :count lisans başarıyla silindi. Aşağıda ek bilgiler verilmiştir.',
     ],
 
     'checkout' => [
@@ -63,7 +63,7 @@ return [
     ],
 
     'import' => [
-        'no_free_seats' => 'License ":license" has no free seats. ":target" was not assigned to a seat.',
+        'no_free_seats' => '":license" lisansında boş koltuk yok. ":target" bir koltuğa atanmadı.',
     ],
 
 ];

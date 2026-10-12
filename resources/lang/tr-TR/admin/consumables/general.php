@@ -9,7 +9,7 @@ return [
     'total' => 'Toplam',
     'update' => 'Sarf malzemesini Güncelle',
     'inventory_warning' => 'Bu tüketilebilir ürünün stoğu, minimum :min_count miktarının altındadır',
-    'exclude_deleted' => 'Exclude Deleted Consumables',
-    'include_deleted' => 'Include Deleted Consumables',
-    'only_deleted' => 'Only Deleted Consumables',
+    'exclude_deleted' => 'Silinmiş Sarf Malzemelerini Hariç Tut',
+    'include_deleted' => 'Silinmiş Sarf Malzemelerini Dahil Et',
+    'only_deleted' => 'Yalnızca Silinmiş Sarf Malzemeleri',
 ];

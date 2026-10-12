@@ -7,10 +7,10 @@ return [
     'by' => 'Przez',
     'item' => 'Przedmiot',
     'no_matching_records' => 'Nie znaleziono pasujących wyników',
-    'load_error_title' => 'Could not load results',
-    'load_error_body' => 'The server returned an error. Please try again in a moment. If this keeps happening, check the application log.',
-    'load_error_http_status' => 'HTTP status',
-    'load_error_session_expired' => 'Your session has expired. Reloading the page.',
-    'shift_select' => 'Click on a checkbox and hold <code>shift</code> and click another checkbox in the table to select/de-select a range.'
+    'load_error_title' => 'Nie udało się załadować wyników',
+    'load_error_body' => 'Serwer zwrócił błąd. Spróbuj ponownie za chwilę. Jeśli problem będzie się powtarzać, sprawdź logi aplikacji.',
+    'load_error_http_status' => 'Status HTTP',
+    'load_error_session_expired' => 'Twoja sesja wygasła. Nastąpi odświeżenie strony.',
+    'shift_select' => 'Kliknij w checkbox i przytrzymaj <code>shift</code>, następnie kliknij inny checkbox w tabeli, aby zaznaczyć/odznaczyć zakres.'
 
 ];

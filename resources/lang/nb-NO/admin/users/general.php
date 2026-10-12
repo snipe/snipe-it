@@ -58,7 +58,7 @@ return [
     'next_save_user' => 'Neste: Lagre bruker',
     'all_assigned_list_generation' => 'Generert på:',
     'email_user_creds_on_create' => 'Send denne brukeren sin påloggingsinformasjon via e-post?',
-    'department_manager' => 'Avdeling leder',
+    'department_manager' => 'Department Manager',
     'generate_password' => 'Generate random password',
     'individual_override' => 'This user has at least one individual permission set, which may override group permissions.',
     'cannot_make_floater' => 'Cannot save this user with no company assignment. Floater mode is enabled on this system, which means users with no company can see every record in the application. Only superusers can grant a user floater status.',

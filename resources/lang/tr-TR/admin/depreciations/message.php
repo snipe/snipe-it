@@ -19,8 +19,8 @@ return [
         'confirm' => 'Amortisman sınıfını silmek istediğinize emin misiniz?',
         'error' => 'Amortisman sınıfını silerken bir hata oluştu. Lütfen tekrar deneyin.',
         'success' => 'Amortisman sınıfı silindi.',
-        'bulk_success' => 'Depreciation class deleted successfully.|:count depreciation classes were deleted successfully.',
-        'partial_success' => 'Depreciation class deleted successfully. See additional information below.|:count depreciation classes were deleted successfully. See additional information below.',
+        'bulk_success' => 'Amortisman sınıfı başarıyla silindi.|:count amortisman sınıfı başarıyla silindi.',
+        'partial_success' => 'Amortisman sınıfı başarıyla silindi. Aşağıda ek bilgiler verilmiştir.|:count amortisman sınıfı başarıyla silindi. Aşağıda ek bilgiler verilmiştir.',
     ],
 
 ];

@@ -12,8 +12,8 @@ return [
     'create' => '所在地を作成',
     'update' => '所在地を更新',
     'print_assigned' => '割り当て先を印刷',
-    'print_inventory' => 'Print Inventory',
-    'print_all_assigned' => 'Print Inventory and Assigned',
+    'print_inventory' => '在庫を印刷',
+    'print_all_assigned' => '在庫と割り当て済みを印刷',
     'name' => 'ロケーション名',
     'address' => '住所',
     'address2' => '住所2',
@@ -40,5 +40,5 @@ return [
     'signed_by_finance_auditor' => '署名済み(会計監査人):',
     'signed_by_location_manager' => '署名済み (ロケーションマネージャー):',
     'signed_by' => '署名:',
-    'clone' => 'Clone Location',
+    'clone' => '場所を複製',
 ];

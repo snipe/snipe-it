@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Grupno ažuriranje imovine',
     'bulk_update_help' => 'Ova forma vam omogućava da ažururate više stavki odjednom. Popunite samo polja koja želite da izmenite. Nepopunjena polja ostaće nepromenjena. ',
     'bulk_update_warn' => 'Sada ćete izmeniti svojstva jedne imovine.|Sada ćete izmeniti svojstva :asset_count imovina.',
-    'bulk_update_with_custom_field' => 'Primetite da su imovine :asset_model_count različite vrste modela.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Na modelima',
     'bulk_update_custom_field_unique' => 'Ovo je jedinstveno polje koje se ne može grupno menjati.',
     'checkedout_to' => 'Checked Out To',

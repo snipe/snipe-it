@@ -203,6 +203,7 @@ return [
     'email_array' => 'Um ou mais e-mails sõ invalidos.',
     'checkboxes' => ':attribute contém opções inválidas.',
     'radio_buttons' => ':attribute é inválido.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'O campo :attribute contém um caractere que não é permitido.',

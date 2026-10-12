@@ -12,6 +12,6 @@ return [
     'parent' => 'Spółka nadrzędna',
     'parent_help' => 'Optional. If set, this company is a child of the selected parent. Users assigned to the parent automatically have access to this company. Only one level of nesting is allowed.',
     'children' => 'Spółki podrzędne',
-    'inherited' => 'Inherited',
+    'inherited' => 'Odziedziczone',
     'inherited_help' => 'Ten przedmiot należy do powiązanej firmy w hierarchii (spółka dominująca lub dziecko), a nie do tej firmy bezpośrednio.',
 ];

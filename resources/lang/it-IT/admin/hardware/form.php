@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Aggiornamento Massivo Beni',
     'bulk_update_help' => 'Questo modulo consente di aggiornare più beni alla volta. Riempi solo i campi da cambiare. Tutti i campi lasciati vuoti rimarranno invariati. ',
     'bulk_update_warn' => 'Stai per modificare le proprietà di un bene.|Stai per modificare le proprietà di :asset_count beni.',
-    'bulk_update_with_custom_field' => 'Nota che i beni sono di :asset_model_count modelli differenti.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Sui Modelli',
     'bulk_update_custom_field_unique' => 'Questo è un campo unico e non può essere modificato massivamente.',
     'checkedout_to' => 'Assegnato a',

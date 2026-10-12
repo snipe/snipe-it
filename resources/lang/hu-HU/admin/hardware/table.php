@@ -2,7 +2,7 @@
 
 return [
 
-    'asset_tag' => 'Eszköz cimke',
+    'asset_tag' => 'Eszköz címke',
     'asset_model' => 'Modell',
     'assigned_to' => 'Felelős',
     'book_value' => 'Jelenlegi érték',

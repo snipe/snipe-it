@@ -40,19 +40,19 @@ return [
 
     'bulkdelete' => [
         'error' => 'Жодного зразка не було вибрано, тому нічого не було вилучено.',
-        'nothing_deletable' => 'None of the selected models can be deleted because they still have assets associated with them.',
+        'nothing_deletable' => 'Жодну з вибраних моделей не можна видалити, оскільки з ними досі пов’язані активи.',
         'success' => 'Модель видалена!|:success_count моделей видалено!',
         'success_partial' => ':success_count моделей було видалено, проте :fail_count не може бути видалено, оскільки вони все ще мають активи, пов\'язані з ними.',
     ],
 
     'merge' => [
-        'min_two' => 'Select at least two models to merge.',
-        'no_target' => 'Select which model to keep before merging.',
-        'not_found' => 'One or more of the selected models could not be loaded. Refresh the models list and try again.',
-        'information' => 'You are about to merge :count models. Pick the model you want to keep. Every asset attached to the other models will be reassigned to the model you pick, then the source models will be deleted.',
-        'warning' => 'This cannot be undone. Reassigned assets will inherit the surviving model\'s category, fieldset, and depreciation settings.',
-        'pick_target' => 'Which model do you want to keep?',
-        'success' => 'Merged :source_count model(s) into ":target". :asset_count asset(s) were reassigned.',
+        'min_two' => 'Виберіть принаймні дві моделі для об’єднання.',
+        'no_target' => 'Перед об’єднанням виберіть модель, яку потрібно зберегти.',
+        'not_found' => 'Не вдалося завантажити одну або кілька вибраних моделей. Оновіть список моделей і повторіть спробу.',
+        'information' => 'Ви збираєтеся об’єднати :count моделей. Виберіть модель, яку потрібно зберегти. Усі активи, пов’язані з іншими моделями, буде перепризначено вибраній моделі, після чого вихідні моделі буде видалено.',
+        'warning' => 'Цю дію неможливо скасувати. Перепризначені активи успадкують категорію, набір полів і налаштування амортизації моделі, яку буде збережено.',
+        'pick_target' => 'Яку модель ви хочете зберегти?',
+        'success' => 'Об’єднано :source_count модель(і) з моделлю «:target». Перепризначено :asset_count актив(и).',
     ],
 
 ];

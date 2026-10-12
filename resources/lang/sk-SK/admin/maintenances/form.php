@@ -15,7 +15,7 @@ return [
     'responsible_party' => 'Responsible Party',
     'checked_out_to_at_creation' => 'Odovzdané',
     'completed_at' => 'Completed At',
-    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_at_help' => 'Kedy bola táto údržba v skutočnosti ukončená. Nevypĺňajte ak ešte ukončená nebola. Vyplnenie dátumu ej ekvivalentné s označením za ukončenú, ale umožňuje vloženie dátumu z minulosti namiesto aktuálneho času.',
     'completed_by' => 'Completed By',
     'mark_complete' => 'Mark Complete',
     'already_complete' => 'Already Completed',

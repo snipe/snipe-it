@@ -29,7 +29,7 @@ return [
         'warn' => 'Sie sind dabei, die Eigenschaften der folgenden Kategorie zu aktualisieren:| Sie sind dabei, die Eigenschaften der folgenden :count Kategorien zu bearbeiten:',
         'no_selection' => 'Sie müssen mindestens eine Kategorie aus der Liste auswählen.',
         'no_changes' => 'Es wurden keine Felder geändert, somit wurde auch nichts aktualisiert.',
-        'success' => 'Category successfully updated.|:count categories successfully updated.',
+        'success' => 'Kategorie erfolgreich aktualisiert. |:count Kategorien erfolgreich aktualisiert.',
     ],
 
 ];

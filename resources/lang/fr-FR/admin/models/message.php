@@ -7,7 +7,7 @@ return [
     'no_association' => 'ATTENTION ! Le modèle d\'actif pour cet objet est invalide ou manquant !',
     'no_association_fix' => 'Cela va casser les choses de manière bizarre et horrible. Modifiez cette ressource maintenant pour lui assigner un modèle.',
     'assoc_users' => 'Ce modèle est actuellement associé à au moins un actif et ne peut pas être supprimé. Veuillez supprimer les actifs associés et essayer à nouveau. ',
-    'invalid_category_type' => 'This category must be an asset category.',
+    'invalid_category_type' => 'La catégorie doit être une catégorie d\'actifs.',
 
     'create' => [
         'error' => 'Le modèle n\'a pas été créé, veuillez essayer à nouveau.',
@@ -40,19 +40,19 @@ return [
 
     'bulkdelete' => [
         'error' => 'Aucun modèle n\'a été sélectionné, donc rien n\'a été supprimé.',
-        'nothing_deletable' => 'None of the selected models can be deleted because they still have assets associated with them.',
+        'nothing_deletable' => 'Aucun des modèles sélectionnés ne peut être supprimé car ils ont encore des actifs associés.',
         'success' => 'Modèle supprimé !|:success_count modèles supprimés !',
         'success_partial' => ': les modèles success_count ont été supprimés, cependant : fail_count n\'a pas pu être supprimé car ils ont toujours des ressources associées.',
     ],
 
     'merge' => [
-        'min_two' => 'Select at least two models to merge.',
-        'no_target' => 'Select which model to keep before merging.',
-        'not_found' => 'One or more of the selected models could not be loaded. Refresh the models list and try again.',
-        'information' => 'You are about to merge :count models. Pick the model you want to keep. Every asset attached to the other models will be reassigned to the model you pick, then the source models will be deleted.',
-        'warning' => 'This cannot be undone. Reassigned assets will inherit the surviving model\'s category, fieldset, and depreciation settings.',
-        'pick_target' => 'Which model do you want to keep?',
-        'success' => 'Merged :source_count model(s) into ":target". :asset_count asset(s) were reassigned.',
+        'min_two' => 'Sélectionnez au moins deux modèles à fusionner.',
+        'no_target' => 'Sélectionnez le modèle à conserver avant de fusionner.',
+        'not_found' => 'Un ou plusieurs modèles sélectionnés n\'ont pas pu être chargés. Rafraîchissez la liste des modèles et réessayez.',
+        'information' => 'Vous êtes sur le point de fusionner les modèles :count. Choisissez le modèle que vous voulez garder. Chaque ressource attachée aux autres modèles sera réaffectée au modèle que vous choisissez, puis les modèles source seront supprimés.',
+        'warning' => 'Cette opération ne peut pas être annulée. Les actifs réassignés hériteront de la catégorie, du jeu de champs et des paramètres d\'amortissements du modèle survivant.',
+        'pick_target' => 'Quel modèle voulez-vous conserver ?',
+        'success' => 'Fusionné :source_count modèle(s) dans ":target". :asset_count asset(s) ont été réaffectés.',
     ],
 
 ];

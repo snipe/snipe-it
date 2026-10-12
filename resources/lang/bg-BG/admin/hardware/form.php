@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Масово обновяване на активи',
     'bulk_update_help' => 'Тук можете да обновите множество активи едновременно. Попълнете единствено полетата, които желаете да промените. Всички празни полета няма да бъдат променени.',
     'bulk_update_warn' => 'Ще редактирате настройките на един актив.|Ще редактирате настройките на :asset_count актива.',
-    'bulk_update_with_custom_field' => 'Въпросните :asset_model_count актива са от различен тип модели.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'От Модели',
     'bulk_update_custom_field_unique' => 'Това е уникално поле и не може да бъде редактирано едновременно.',
     'checkedout_to' => 'Изписано на',

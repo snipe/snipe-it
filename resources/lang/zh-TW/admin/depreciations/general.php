@@ -7,13 +7,15 @@ return [
     'create' => '新建折舊',
     'depreciation_name' => '折舊名稱',
     'number_of_months' => '月數',
+    'rate_multiplier' => 'Rate Multiplier',
     'update' => '更新折舊',
-    'depreciation_min' => '折舊後的最低價值',
+    'fiscal_year_start_month' => 'Fiscal Year Start Month',
     'no_depreciations_warning' => '<strong>警告:</strong>
                       你目前沒有設定任何折舊。
                       請至少設定一次折舊，以查看折舊報告。',
     'depreciation_method' => '折舊報告',
     'linear_depreciation' => '線性 (預設)',
+    'diminishing_depreciation' => 'Diminishing Value Depreciation',
     'half_1' => '半年慣例，始終適用',
     'half_2' => '半年慣例，條件性適用',
 ];

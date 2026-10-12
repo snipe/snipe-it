@@ -203,6 +203,7 @@ return [
     'email_array' => 'Viena vai vairākas e-pasta adreses nav derīgas.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Laukā: atribūta lauks ir rakstzīme, kas nav atļauta.',

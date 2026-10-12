@@ -25,7 +25,7 @@ return [
     'image' => 'Slika uređaja',
     'days_without_acceptance' => 'Dani bez prihvaćanja',
     'monthly_depreciation' => 'Mjesečna amortizacija',
-    'requesting_user' => 'Requested By',
+    'requesting_user' => 'Podnositelj zahtjeva',
     'pending_requesters' => 'Also Requested By',
     'requested_date' => 'Datum zahtjeva',
     'changed' => 'Promijenjeno',

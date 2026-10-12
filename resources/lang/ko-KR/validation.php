@@ -203,6 +203,7 @@ return [
     'email_array' => '하나 이상의 이메일 주소가 유효하지 않습니다.',
     'checkboxes' => ':attribute에 잘못된 옵션이 포함되어 있습니다.',
     'radio_buttons' => ':attribute이(가) 잘못되었습니다.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => ':attribute 항목에는 문자를 입력할 수 없습니다.',

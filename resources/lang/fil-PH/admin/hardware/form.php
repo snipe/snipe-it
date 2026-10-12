@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Ang Maramihang Asset na Nai-update',
     'bulk_update_help' => 'Ang form na ito ay nagbibigay sa iyo ng pahintulot para mag-update ng maramihang asset nang sabay-sabay. Lagyan lamang ang mga field na gusto mong baguhin. Anumang mga field na blangko ay mananatiling walang pagbabago. ',
     'bulk_update_warn' => 'You are about to edit the properties of a single asset.|You are about to edit the properties of :asset_count assets.',
-    'bulk_update_with_custom_field' => 'Note the assets are :asset_model_count different types of models.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'On Models',
     'bulk_update_custom_field_unique' => 'This is a unique field and can not be bulk edited.',
     'checkedout_to' => 'I-check Out Sa',

@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Massenaktualisierung von Assets',
     'bulk_update_help' => 'Diese Eingabemaske erlaubt Ihnen die Aktualisierung von mehreren Assets zugleich. Füllen Sie die Felder aus welche Sie ändern möchten. Alle leeren Felder bleiben unverändert. ',
     'bulk_update_warn' => 'Sie sind dabei, die Eigenschaften eines einzelnen Assets zu bearbeiten. |Sie sind dabei, die Eigenschaften von :asset_count Assets zu bearbeiten.',
-    'bulk_update_with_custom_field' => 'Beachten Sie, dass die Assets :asset_model_count verschiedene Arten von Modellen sind.',
+    'bulk_update_with_custom_field' => 'Ihre Auswahl umfasst :asset_model_count verschiedene Asset Modelle. Benutzerdefinierte Felder sind nach Modell gruppiert.',
     'bulk_update_model_prefix' => 'Auf Modellen',
     'bulk_update_custom_field_unique' => 'Dies ist ein einzigartiges Feld und kann nicht in Bulk bearbeitet werden.',
     'checkedout_to' => 'Herausgegeben an',

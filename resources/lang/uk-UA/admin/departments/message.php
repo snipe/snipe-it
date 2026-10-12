@@ -17,8 +17,8 @@ return [
         'confirm' => 'Ви впевнені, що хочете видалити цей відділ?',
         'error' => 'Виникла проблема при видаленні відділу. Будь ласка, спробуйте ще раз.',
         'success' => 'Відділ був успішно видалений.',
-        'bulk_success' => 'Department deleted successfully.|:count departments were deleted successfully.',
-        'partial_success' => 'Department deleted successfully. See additional information below. | :count departments were deleted successfully. See additional information below.',
+        'bulk_success' => 'Відділ успішно видалено.|:count відділів успішно видалено.',
+        'partial_success' => 'Відділ успішно видалено. Докладніше див. нижче.|Успішно видалено :count відділів. Докладніше див. нижче.',
     ],
 
 ];
