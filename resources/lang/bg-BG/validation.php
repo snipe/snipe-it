@@ -203,6 +203,7 @@ return [
     'email_array' => 'Един или повече email адреси е невалиден.',
     'checkboxes' => ':attribute съдържа невалидни опции.',
     'radio_buttons' => ':attribute е невалиден.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Полето атрибут: съдържа знак, който не е разрешен.',

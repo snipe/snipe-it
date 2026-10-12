@@ -203,6 +203,7 @@ return [
     'email_array' => 'Tá seoltaí ríomhphoist amháin nó níos mó neamhbhailí.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'An: sa réimse tréith tá carachtar nach bhfuil ceadaithe.',

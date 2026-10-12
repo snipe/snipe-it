@@ -6,11 +6,11 @@ return [
     'action' => 'Akcijski',
     'by' => 'Po',
     'item' => 'Artikal',
-    'no_matching_records' => 'No matching records found',
+    'no_matching_records' => 'Nema opreme dostupne za zaduženje',
     'load_error_title' => 'Could not load results',
     'load_error_body' => 'The server returned an error. Please try again in a moment. If this keeps happening, check the application log.',
     'load_error_http_status' => 'HTTP status',
     'load_error_session_expired' => 'Your session has expired. Reloading the page.',
-    'shift_select' => 'Click on a checkbox and hold <code>shift</code> and click another checkbox in the table to select/de-select a range.'
+    'shift_select' => 'Kliknite na potvrdni okvir, držite <code>shift</code> i kliknite na drugi potvrdni okvir u tablici kako biste odabrali ili poništili odabir raspona.'
 
 ];

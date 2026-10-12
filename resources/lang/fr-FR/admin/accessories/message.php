@@ -20,8 +20,8 @@ return [
         'confirm' => 'Etes-vous sûr de vouloir supprimer cet accessoire ?',
         'error' => 'Un problème est survenu durant la suppression de l\'accessoire. Merci d\'essayer à nouveau.',
         'success' => 'L\'accessoire a bien été supprimé.',
-        'bulk_success' => 'Accessory deleted successfully.|:count accessories were deleted successfully.',
-        'partial_success' => ':count accessory was deleted successfully, but others could not be deleted. See below for details.|:count accessories were deleted successfully, but others could not be deleted. See below for details.',
+        'bulk_success' => 'Accessoire supprimée avec succès.|Les accessoires :count ont été supprimées avec succès.',
+        'partial_success' => 'L\'accessoire :count a été supprimé avec succès, mais d\'autres n\'ont pas pu être supprimés. Voir ci-dessous pour plus de détails. :count accessoires ont été supprimés avec succès, mais d\'autres n\'ont pas pu être supprimés. Voir ci-dessous pour plus de détails.',
     ],
 
     'checkout' => [

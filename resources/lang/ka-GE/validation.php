@@ -203,6 +203,7 @@ return [
     'email_array' => 'ერთზე მეტი ელ.ფოსტის მისამართი არის არავალიდური.',
     'checkboxes' => ':attribute ველი შეიცავს არასწორ არჩევანს.',
     'radio_buttons' => ':attribute არ არის ვალიდური.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => ':attribute ველი შეიცავს დაუშვებელ სიმბოლოს.',

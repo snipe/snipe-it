@@ -203,6 +203,7 @@ return [
     'email_array' => 'Μία ή περισσότερες διευθύνσεις ηλεκτρονικού ταχυδρομείου δεν είναι έγκυρες.',
     'checkboxes' => ':attribute περιέχει μη έγκυρες επιλογές.',
     'radio_buttons' => ':attribute δεν είναι έγκυρο.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Το πεδίο ιδιοτήτων: περιέχει ένα χαρακτήρα που δεν επιτρέπεται.',

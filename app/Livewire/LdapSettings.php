@@ -242,11 +242,42 @@ class LdapSettings extends Component
         // Clamp against total step count in case a session pointer
         // was seeded when the wizard had a different step layout.
         $this->highestStepReached = min($this->highestStepReached, 5);
+        
+        if (!$this->ldap_enabled && !$this->isReadOnly) {
+            $this->highestStepReached = min($this->highestStepReached, $this->highestReachableByPersistedData());
+        }
 
         // Clamp URL-restored step to [1, highestStepReached]. Blocks
         // both direct URL tampering (?step=99) and stale bookmarks
         // pointing at a step the user hasn't unlocked yet.
         $this->currentStep = max(1, min($this->currentStep, $this->highestStepReached));
+    }
+
+    /**
+     * Highest step whose required persisted fields are populated.
+     * Used by mount() to cap highestStepReached when the session
+     * pointer is ahead of what the current data actually supports.
+     */
+    protected function highestReachableByPersistedData(): int
+    {
+        // Step 1: requires an LDAP server URL. Without it the
+        // network-test and bind paths have nothing to connect to.
+        if (trim($this->ldap_server) === '') {
+            return 1;
+        }
+
+        // Step 2: requires base DN. Bind credentials themselves can be
+        // blank under SASL EXTERNAL, but a search needs a base DN.
+        if (trim($this->ldap_basedn) === '') {
+            return 2;
+        }
+
+        // Step 3: requires the two always-required mapping fields.
+        if (trim($this->ldap_username_field) === '' || trim($this->ldap_fname_field) === '') {
+            return 3;
+        }
+
+        return 5;
     }
 
     protected function progressSessionKey(): string

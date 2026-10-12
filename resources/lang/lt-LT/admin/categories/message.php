@@ -26,10 +26,10 @@ return [
     ],
 
     'bulkedit' => [
-        'warn' => 'You are about to edit the properties of the following category:|You are about to edit the properties of the following :count categories:',
-        'no_selection' => 'You must select at least one category to edit.',
+        'warn' => 'Ketinate redaguoti šios kategorijos ypatybes:|Ketinate redaguoti šių :count kategorijų ypatybes:',
+        'no_selection' => 'Turite pasirinkti bent vieną kategoriją, kurią norite redaguoti.',
         'no_changes' => 'Jokie laukai nebuvo pakeisti, todėl niekas nebuvo atnaujinta.',
-        'success' => 'Category successfully updated.|:count categories successfully updated.',
+        'success' => 'Kategorija sėkmingai atnaujinta. |Kategorijos (:count) sėkmingai atnaujintos.',
     ],
 
 ];

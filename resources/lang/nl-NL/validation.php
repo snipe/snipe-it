@@ -203,6 +203,7 @@ return [
     'email_array' => 'één of meer e-mail adressen kloppen niet.',
     'checkboxes' => ':attribute bevat ongeldige opties.',
     'radio_buttons' => ':attribute is ongeldig.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => ':attribute veld bevat een karakter wat niet is toegestaan.',

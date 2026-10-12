@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Masinis turto atnaujinimas',
     'bulk_update_help' => 'Ši forma suteikia galimybę atnaujinti iškart kelis turto vienetus. Užpildykite tik tuos laukus, kuriuos norite pakeisti. Laukai, kuriuos paliksite tuščius, liks nepakeisti. ',
     'bulk_update_warn' => 'Ketinate redaguoti vieno turto vieneto ypatybes.|Ketinate redaguoti :asset_count turto vienetų ypatybes.',
-    'bulk_update_with_custom_field' => 'Atminkite, kad turtas yra :asset_model_count skirtingų modelių tipų.',
+    'bulk_update_with_custom_field' => 'Jūsų pasirinkimas apima :asset_model_count skirtingus turto modelius. Žemiau pateikti pritaikyti laukai yra sugrupuoti pagal modelį.',
     'bulk_update_model_prefix' => 'Modeliams',
     'bulk_update_custom_field_unique' => 'Tai unikalus laukas, todėl jo negalima redaguoti masinio redagavimo būdu.',
     'checkedout_to' => 'Kam išduota',

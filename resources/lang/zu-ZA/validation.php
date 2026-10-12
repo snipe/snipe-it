@@ -203,6 +203,7 @@ return [
     'email_array' => 'Ikheli elilodwa noma ngaphezulu le-imeyili alivumelekile.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'I: Insimu yemfanelo iqukethe umlingiswa ongavunyelwe.',

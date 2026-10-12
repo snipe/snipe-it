@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Masseoppdater eiendeler',
     'bulk_update_help' => 'Dette skjemaet lar deg oppdatere flere eiendeler på en gang. Fyll kun ut feltene du ønsker å endre. Tomme felter forblir uendret. ',
     'bulk_update_warn' => 'Du er i ferd med å endre egenskapene til en ressurs. Du er i ferd med å endre egenskapene til :asset_count enheter.',
-    'bulk_update_with_custom_field' => 'Merk at ressursene er av :asset_model_count ulike modeller.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'På modeller',
     'bulk_update_custom_field_unique' => 'Dette er et unikt felt og kan ikke masseredigeres.',
     'checkedout_to' => 'Utsjekket til',

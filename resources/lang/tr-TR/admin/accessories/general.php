@@ -13,7 +13,7 @@ return [
     'no_default_eula' => 'Varsayılan sözleşme bulunamadı. Lütfen Ayarlar\'dan ekleyiniz.',
     'total' => 'Toplam',
     'remaining' => 'Fayda',
-    'requestable' => 'Users may request this accessory',
+    'requestable' => 'Kullanıcılar bu aksesuarı talep edebilir',
     'update' => 'Aksesuar Güncelleştirme',
     'use_default_eula' => '<a href="#" data-toggle="modal" data-target="#eulaModal">\'yı Varsayılan Sözleşme</a> yerine kullan.',
     'use_default_eula_disabled' => '<del>Varsayılan sözleşmeyi kullan</del> Varsayılan sözleşme tanımlı değil. Lütfen Ayarlar\'dan ekleyiniz.',

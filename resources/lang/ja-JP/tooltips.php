@@ -3,22 +3,22 @@
 return [
 
     'disabled_assoc' => [
-        'accessory' => 'This accessory cannot be deleted because it still has items, users, or locations associated with it',
-        'asset' => 'This asset cannot be deleted because it still has items associated with it',
-        'category' => 'This category cannot be deleted because it still has items associated with it',
-        'company' => 'This company cannot be deleted because it still has items or users associated with it',
-        'component' => 'This component cannot be deleted because it still has items associated with it',
-        'custom_field' => 'This custom field cannot be deleted because it is still associated with at least one fieldset',
-        'department' => 'This department cannot be deleted because it still has users associated with it',
-        'location' => 'This location cannot be deleted because it still has items or users associated with it',
-        'manufacturer' => 'This manufacturer cannot be deleted because it still has items associated with it',
-        'supplier' => 'This supplier cannot be deleted because it still has items associated with it',
-        'user' => 'This user cannot be deleted because it still has items associated with it',
-        'user_self' => 'You cannot delete yourself',
+        'accessory' => 'アイテム、ユーザー、または場所との関連付けが残っているため、この付属品は削除できません。',
+        'asset' => '関連付けられたアイテムが残っているため、この資産は削除できません。',
+        'category' => '関連付けられたアイテムが残っているため、このカテゴリは削除できません。',
+        'company' => 'アイテムまたはユーザーとの関連付けが残っているため、この会社は削除できません。',
+        'component' => '関連付けられたアイテムが残っているため、このコンポーネントは削除できません。',
+        'custom_field' => '1件以上のフィールドセットで使用されているため、このカスタムフィールドは削除できません。',
+        'department' => '関連付けられたユーザーが残っているため、この部署は削除できません。',
+        'location' => 'アイテムまたはユーザーとの関連付けが残っているため、この場所は削除できません。',
+        'manufacturer' => '関連付けられたアイテムが残っているため、この製造元は削除できません。',
+        'supplier' => '関連付けられたアイテムが残っているため、この仕入先は削除できません。',
+        'user' => '割り当てられたアイテムが残っているため、このユーザーは削除できません。',
+        'user_self' => '自分自身のアカウントは削除できません。',
     ],
 
     'checkin_all' => [
-        'user' => 'Checkin all items for this user and optionally delete them. You will be able to confirm this on the next page.',
+        'user' => 'このユーザーの全アイテムをチェックインし、必要に応じてユーザーを削除します。次の画面で実行内容を確認できます。',
     ],
 
 ];

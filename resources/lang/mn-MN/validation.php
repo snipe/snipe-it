@@ -203,6 +203,7 @@ return [
     'email_array' => 'Нэг буюу хэд хэдэн имэйл хаяг буруу байна.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Үүнд: аттрибут талбар нь зөвшөөрөгдөөгүй тэмдэгт агуулна.',

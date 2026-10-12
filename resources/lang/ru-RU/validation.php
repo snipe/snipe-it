@@ -203,6 +203,7 @@ return [
     'email_array' => 'Один или несколько адресов эл. почты являются недействительным.',
     'checkboxes' => ':attribute содержит недопустимые параметры.',
     'radio_buttons' => ':attribute не верно.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Поле атрибута: содержит символ, который не разрешен.',

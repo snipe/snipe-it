@@ -17,7 +17,7 @@ return [
     'name' => 'Kategorijos pavadinimas',
     'require_acceptance' => 'Reikalauti, kad naudotojai patvirtintų šios kategorijos turto gavimą.',
     'required_acceptance' => 'Šiam naudotojui bus išsiųstas el. laiškas su nuoroda šio daikto gavimo patvirtinimui.',
-    'global_signature_required_notice' => 'The global "Require Signature" setting is on. Signatures only apply when this category also has "Require acceptance" turned on: enable both to require users to sign when accepting items from this category.',
+    'global_signature_required_notice' => 'Įjungtas visuotinis nustatymas „Reikalauti parašo“. Parašai naudojami tik tada, kai šiai kategorijai taip pat yra įjungta parinktis „Reikalauti patvirtinimo“. Įjunkite abi parinktis, kad naudotojai turėtų pasirašyti priimdami šios kategorijos daiktus.',
     'required_eula' => 'Šiam naudotojui bus išsiųsta licencinio sutikimo (EULA) kopija',
     'required_acceptance_component' => 'Jei tikslinis turtas šiuo metu yra išduotas naudotojui, tam naudotojui elektroniniu paštu bus išsiųsta nuoroda, kuria jis galės patvirtinti, kad priima šį komponentą.',
     'required_eula_component' => 'Jei tikslinis turtas šiuo metu yra išduotas naudotojui, tam naudotojui elektroniniu paštu bus išsiųsta EULA kopija.',

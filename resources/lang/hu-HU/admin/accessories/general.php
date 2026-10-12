@@ -4,7 +4,7 @@ return [
     'accessory_category' => 'Tartozék kategória',
     'accessory_name' => 'Tartozék neve',
     'checkout' => 'Kiadott tartozék',
-    'checkin' => 'Visszavett tartozék',
+    'checkin' => 'Tartozék visszavétele',
     'create' => 'Tartozék létrehozása',
     'edit' => 'Tartozék szerkesztése',
     'eula_text' => 'Kategória EULA',

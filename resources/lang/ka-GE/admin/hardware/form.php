@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'ინვენტარის მასობრივად განახლება',
     'bulk_update_help' => 'ეს ფორმა გაძლევთ შესაძლებლობას მასობრივად განაახლოთ რამდენიმე ინვენტარის ერთეული. შეავსეთ მხოლოდ ის ველები, რომლებიც უნდა შეიცვალოს. ცარიელი ველები უცვლელი დარჩება.',
     'bulk_update_warn' => 'თქვენ აპირებთ კონკრეტული ინვენტარის მახასიათებლის რედაქტირებას.|თქვენ აპირებთ :asset_count ერთეული ინვენტარის მახასიათებლების რედაქტირებას.',
-    'bulk_update_with_custom_field' => 'შენიშვნა: შერჩეული ინვენტარი არის :asset_model_count სხვადასხვა მოდელის.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'მოდელებზე',
     'bulk_update_custom_field_unique' => 'ეს ველი უნიკალურია და მასობრივად ვერ რედაქტირდება.',
     'checkedout_to' => 'გაცემულია მომხმარებელზე',

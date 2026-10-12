@@ -41,7 +41,7 @@ return [
 
     'assetsview' => [
         'name' => 'Peržiūrėti turtą',
-        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the asset model as well. This is to make it easier to share common documents like user manuals across assets without having to upload them to every asset, and to avoid having to grant the user permission to modify asset files. Users with this permission will also be able to view edit and checkin history.',
+        'note' => 'Atkreipkite dėmesį, kad naudotojai, turintys šią teisę, taip pat galės peržiūrėti (bet ne keisti ar ištrinti) į turto modelį įkeltus failus. Tai daroma siekiant palengvinti bendrų dokumentų, pvz., naudotojo vadovų, dalijimąsi tarp turto vienetų, nereikalaujant jų įkelti į kiekvieną turto vienetą, ir siekiant išvengti būtinybės suteikti naudotojui teisę redaguoti turto failus. Naudotojai, turintys šią teisę, taip pat galės peržiūrėti redagavimo ir išdavimo istoriją.',
     ],
 
     'assetscreate' => [
@@ -256,7 +256,7 @@ return [
     ],
     'usersview' => [
         'name' => 'Peržiūrėti naudotojus',
-        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the user as well. Users with this permission will also be able to view edit and checkin history.',
+        'note' => 'Atkreipkite dėmesį, kad naudotojai, turintys šią teisę, taip pat galės peržiūrėti (bet nekeisti ar ištrinti) į naudotojo profilį įkeltus failus. Naudotojai, turintys šią teisę, taip pat galės peržiūrėti redagavimo ir išdavimo istoriją.',
     ],
     'userscreate' => [
         'name' => 'Sukurti naudotojus',

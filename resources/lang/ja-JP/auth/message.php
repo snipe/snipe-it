@@ -12,8 +12,8 @@ return [
         'success' => 'ログインに成功しました。',
         'code_required' => '二段階認証コードが必要です。',
         'invalid_code' => '二段階認証コードが無効です。',
-        'enter_two_factor_code' => 'Please enter your two-factor authentication code.',
-        'please_enroll' => 'Please enroll a device in two-factor authentication.',
+        'enter_two_factor_code' => '二要素認証コードを入力してください。',
+        'please_enroll' => '二要素認証に使用するデバイスを登録してください。',
     ],
 
     'signin' => [

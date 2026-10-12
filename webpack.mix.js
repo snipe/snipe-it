@@ -1,6 +1,29 @@
 const mix = require("laravel-mix");
 const fs = require("node:fs");
 
+// Mix 6 generates css-loader 5 options. Keep its URL filtering and CSS
+// module exports compatible with the css-loader 7 dependency override.
+mix.override(config => {
+    const rules = config.module.rules.flatMap(rule => rule.oneOf || [rule]);
+
+    for (const rule of rules) {
+        for (const loader of rule.use || []) {
+            if (typeof loader !== 'object' || loader.loader !== require.resolve('css-loader')) {
+                continue;
+            }
+
+            if (typeof loader.options.url === 'function') {
+                loader.options.url = { filter: loader.options.url };
+            }
+
+            if (loader.options.modules) {
+                loader.options.modules.namedExport = false;
+                loader.options.modules.exportLocalsConvention = 'as-is';
+            }
+        }
+    }
+});
+
 // This generates a file called app.css, which we use
 // later on to build all.css
 mix

@@ -38,6 +38,6 @@ return [
     'display_name' => 'Megjeleítendő név',
     'user_deleted_text' => 'Ezt a felhasználót törölték.',
     'username_note' => '(Ez csak az Active Directory-kötéshez használható, nem pedig a bejelentkezéshez.)',
-    'cloneuser' => 'Klón felhasználó',
+    'cloneuser' => 'Felhasználó klónozása',
     'viewusers' => 'Felhasználók megtekintése',
 ];

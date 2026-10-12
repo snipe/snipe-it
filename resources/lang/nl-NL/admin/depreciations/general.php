@@ -7,13 +7,15 @@ return [
     'create' => 'Afschrijving aanmaken',
     'depreciation_name' => 'Afschrijvingsnaam',
     'number_of_months' => 'Aantal maanden',
+    'rate_multiplier' => 'Rate Multiplier',
     'update' => 'Afschrijving bijwerken',
-    'depreciation_min' => 'Minimale waarde na afschrijving',
+    'fiscal_year_start_month' => 'Fiscal Year Start Month',
     'no_depreciations_warning' => '<strong>Waarschuwing: </strong>
                       U heeft momenteel geen afschrijvingen ingesteld.
                       Stel ten minste één afschrijving in om het afschrijvingsrapport te bekijken.',
     'depreciation_method' => 'Afschrijvingsrapport',
     'linear_depreciation' => 'Linear (Default)',
+    'diminishing_depreciation' => 'Diminishing Value Depreciation',
     'half_1' => 'Half-year convention, always applied',
     'half_2' => 'Half-year convention, applied with condition',
 ];

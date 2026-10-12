@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Μαζική ενημέρωση παγίων',
     'bulk_update_help' => 'Αυτή η φόρμα επιτρέπει την ενημέρωση πολλαπλών παγίων ταυτόχρονα. Μόνο συμπληρώστε τα πεδία που θέλετε να αλλάξετε. Οποιαδήποτε πεδίο αριστερά μείνει κενό θα παραμείνει ως αμετάβλητο. ',
     'bulk_update_warn' => 'Πρόκειται να επεξεργαστείτε τις ιδιότητες ενός ενιαίου περιουσιακού στοιχείου."Πρόκειται να επεξεργαστείτε τις ιδιότητες του:asset_count περιουσιακών στοιχείων.',
-    'bulk_update_with_custom_field' => 'Σημειώστε ότι τα περιουσιακά στοιχεία είναι: asset_model_count διαφορετικοί τύποι μοντέλων.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Σε Μοντέλα',
     'bulk_update_custom_field_unique' => 'Αυτό είναι ένα μοναδικό πεδίο και δεν μπορεί να επεξεργαστεί μαζικά.',
     'checkedout_to' => 'Ανάθεση σε',

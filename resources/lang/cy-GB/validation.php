@@ -203,6 +203,7 @@ return [
     'email_array' => 'Mae un neu fwy o gyfeiriadau e-bost yn annilys.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Mae\'r maes :attribute yn cynnwys cymeriad na chaniateir.',

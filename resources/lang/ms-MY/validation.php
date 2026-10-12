@@ -203,6 +203,7 @@ return [
     'email_array' => 'Satu atau lebih alamat e-mel tidak sah.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Bidang: atribut mengandungi aksara yang tidak dibenarkan.',

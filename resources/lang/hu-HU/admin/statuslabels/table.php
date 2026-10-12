@@ -7,7 +7,7 @@ return [
     'color' => 'Grafikon színe',
     'default_label' => 'Alapértelmezett címke',
     'default_label_help' => 'Ez annak biztosítására szolgál, hogy a leggyakrabban használt állapotcímkék a kiválasztott mező tetején jelenjenek meg az eszközök létrehozásakor / szerkesztésekor.',
-    'deployable' => 'Telepíthető',
+    'deployable' => 'Kiadható',
     'info' => 'A státuszcímkék az eszközök állapotát jelzik (pl. javításra kiküldve, elveszett, lopott). Új címkéket hozhat létre a telepíthető, függőben lévő és archivált eszközeihez. További info a <a href="https://snipe-it.readme.io/docs/overview#status-labels" target="_blank">dokumentációban<i class="fa fa-external-link"></i></a>.',
     'name' => 'Státusz elnevezése',
     'pending' => 'Függőben',
@@ -15,6 +15,6 @@ return [
     'show_in_nav' => 'Mutassa az oldalsó navigációt',
     'status_label' => 'Státusz címke',
     'title' => 'Státusz címkék',
-    'undeployable' => 'Nem telepíthető',
+    'undeployable' => 'Nem kiadható',
     'update' => 'Státusz címke frissítése',
 ];

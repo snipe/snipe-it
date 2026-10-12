@@ -41,7 +41,7 @@ return [
 
     'assetsview' => [
         'name' => 'Varlıkları Görüntüle',
-        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the asset model as well. This is to make it easier to share common documents like user manuals across assets without having to upload them to every asset, and to avoid having to grant the user permission to modify asset files. Users with this permission will also be able to view edit and checkin history.',
+        'note' => 'Bu izne sahip kullanıcıların varlık modeline yüklenen dosyaları da görebileceğini unutmayın (değiştiremez veya silemezler). Bu, kullanım kılavuzları gibi ortak belgeleri her varlığa ayrı ayrı yüklemeden paylaşmayı ve kullanıcıya varlık dosyalarını değiştirme izni vermek zorunda kalmamayı sağlar. Bu izne sahip kullanıcılar düzenleme ve teslim alma geçmişini de görüntüleyebilir.',
     ],
 
     'assetscreate' => [
@@ -72,8 +72,8 @@ return [
     ],
 
     'assetsviewrequestable' => [
-        'name' => 'View Requestable Items',
-        'note' => 'Allows the user to view items that are marked as requestable.',
+        'name' => 'Talep Edilebilir Öğeleri Görüntüle',
+        'note' => 'Kullanıcının talep edilebilir olarak işaretlenmiş öğeleri görüntülemesini sağlar.',
     ],
 
     'assetsviewencrypted-custom-fields' => [
@@ -256,7 +256,7 @@ return [
     ],
     'usersview' => [
         'name' => 'Kullanıcıları Görüntüle',
-        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the user as well. Users with this permission will also be able to view edit and checkin history.',
+        'note' => 'Bu izne sahip kullanıcıların kullanıcı profiline yüklenen dosyaları da görebileceğini unutmayın (değiştiremez veya silemezler). Bu kullanıcılar düzenleme ve teslim alma geçmişini de görüntüleyebilir.',
     ],
     'userscreate' => [
         'name' => 'Yeni Kullanıcılar Oluştur',

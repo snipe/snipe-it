@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Perbarui aset jumlah besar',
     'bulk_update_help' => 'Formulir ini mengizinkan anda untuk memperbarui kelipatan aset dalam sekali proses. Cukup isi di field yang hendak di rubah. Jika ada yang kosong tidak akan dirubah. ',
     'bulk_update_warn' => 'Anda akan mengedit properti dari satu aset.|Anda akan mengedit properti dari :asset_count aset.',
-    'bulk_update_with_custom_field' => 'Perhatikan bahwa aset tersebut terdiri dari :asset_model_count tipe model yang berbeda.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Pada Model',
     'bulk_update_custom_field_unique' => 'Kolom ini bersifat unik dan tidak dapat diedit secara massal.',
     'checkedout_to' => 'Diberikan kepada',

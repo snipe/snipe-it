@@ -26,10 +26,10 @@ return [
     ],
 
     'bulkedit' => [
-        'warn' => 'You are about to edit the properties of the following category:|You are about to edit the properties of the following :count categories:',
-        'no_selection' => 'You must select at least one category to edit.',
+        'warn' => 'Aşağıdaki kategorinin özelliklerini düzenlemek üzeresiniz:|Aşağıdaki :count kategorinin özelliklerini düzenlemek üzeresiniz:',
+        'no_selection' => 'Düzenlenecek en az bir kategori seçmelisiniz.',
         'no_changes' => 'Hiçbir alan değiştirilmedi, dolayısıyla hiç bir alan güncellenmedi.',
-        'success' => 'Category successfully updated.|:count categories successfully updated.',
+        'success' => 'Kategori başarıyla güncellendi.|:count kategori başarıyla güncellendi.',
     ],
 
 ];

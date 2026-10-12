@@ -13,7 +13,7 @@ return [
     ],
     'edit' => [
         'error' => 'Az Eszközkarbantartást nem szerkesztették, próbálkozzon újra.',
-        'success' => 'Az Eszközkarbantartás sikeresen szerkesztett.',
+        'success' => 'Eszközkarbantartás sikeresen szerkesztve.',
     ],
     'asset_maintenance_incomplete' => 'Nincs kitöltve teljesen',
     'warranty' => 'Garancia',

@@ -203,6 +203,7 @@ return [
     'email_array' => 'Kotahi, neke atu ranei nga wahitau īmēra he muhu.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Ko te: kei roto i te waahi tohu he momo e kore e whakaaetia.',

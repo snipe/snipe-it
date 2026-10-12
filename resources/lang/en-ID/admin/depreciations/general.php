@@ -7,13 +7,15 @@ return [
     'create' => 'Buat Pengurangan',
     'depreciation_name' => 'Nama Penyusutan',
     'number_of_months' => 'Jumlah Bulan',
+    'rate_multiplier' => 'Rate Multiplier',
     'update' => 'Perbarui pengurangan',
-    'depreciation_min' => 'Minimum Value after Depreciation',
+    'fiscal_year_start_month' => 'Fiscal Year Start Month',
     'no_depreciations_warning' => '<strong>Warning: </strong>
                       You do not currently have any depreciations set up.
                       Please set up at least one depreciation to view the depreciation report.',
     'depreciation_method' => 'Laporan Penurunan',
     'linear_depreciation' => 'Linear (Default)',
+    'diminishing_depreciation' => 'Diminishing Value Depreciation',
     'half_1' => 'Half-year convention, always applied',
     'half_2' => 'Half-year convention, applied with condition',
 ];

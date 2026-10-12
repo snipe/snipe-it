@@ -20,8 +20,8 @@ return [
         'confirm' => 'Ви впевнені, що хочете видалити цей аксесуар?',
         'error' => 'Виникла проблема при видаленні аксесуару. Будь ласка, спробуйте ще раз.',
         'success' => 'Аксесуар успішно видалено.',
-        'bulk_success' => 'Accessory deleted successfully.|:count accessories were deleted successfully.',
-        'partial_success' => ':count accessory was deleted successfully, but others could not be deleted. See below for details.|:count accessories were deleted successfully, but others could not be deleted. See below for details.',
+        'bulk_success' => 'Аксесуар успішно видалено.|:count аксесуарів успішно видалено.',
+        'partial_success' => ':count аксесуар успішно видалено, але інші не вдалося видалити. Детальніше див. нижче.|:count аксесуари успішно видалено, але інші не вдалося видалити. Детальніше див. нижче.',
     ],
 
     'checkout' => [

@@ -10,7 +10,7 @@ return [
     'bulk_update' => '대량 자산 갱신',
     'bulk_update_help' => '이 양식은 한번에 여러개의 자산들을 갱신하게 해줍니다. 변경하고 싶은 항목만 채워 넣으세요. 빈란으로 남겨둔 항목들은 변경되지 않을 것입니다. ',
     'bulk_update_warn' => '단일 자산의 속성을 편집하려고 합니다.|:asset_count개 자산의 속성을 편집하려고 합니다.',
-    'bulk_update_with_custom_field' => '이 자산은 :asset_model_count개의 서로 다른 모델 유형입니다.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => '모델별',
     'bulk_update_custom_field_unique' => '고유 필드이므로 일괄 편집할 수 없음.',
     'checkedout_to' => '반출 대상',
