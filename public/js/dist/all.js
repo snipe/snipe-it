@@ -1006,6 +1006,577 @@ $(function () {
       //templateSelection: formatDataSelection
     });
   });
+
+  // Always-open scrolling checkbox list, backed by the
+  // same selectlist endpoints the select2 pickers use. Submits as a
+  // single hidden CSV via the ?all=1 helper so very large selections
+  // sidestep PHP's max_input_vars. See the x-input.select2-checkboxes-scrollbox
+  // blade component for consumer-side wiring.
+  $('.js-select2-checkboxes-scrollbox').each(function (i, item) {
+    var $root = $(item);
+    var endpoint = $root.data('endpoint');
+    var name = $root.data('name');
+    var compactSubmit = String($root.data('compact-submit')) === '1';
+    var $search = $root.find('.js-select2-checkboxes-scrollbox-search');
+    var $searchWrap = $root.find('.js-select2-checkboxes-scrollbox-search-wrap');
+    var $searchClear = $root.find('.js-select2-checkboxes-scrollbox-search-clear');
+    var $scroll = $root.find('.js-select2-checkboxes-scrollbox-scroll');
+    var $count = $root.find('.js-select2-checkboxes-scrollbox-count');
+    var $hidden = compactSubmit ? $('#' + $root.data('hidden')) : $();
+    var $arrayInputs = $root.find('.js-select2-checkboxes-scrollbox-array-inputs');
+    var $selectAllBtn = $root.find('.js-select2-checkboxes-scrollbox-selectall');
+    var $clearBtn = $root.find('.js-select2-checkboxes-scrollbox-clear');
+
+    // Set is the source of truth for the current selection. The
+    // visible rows are only presentation; a row that scrolls out
+    // of view (or is filtered out by a search) still contributes
+    // its id if it's in the set.
+    var initialIds;
+    if (compactSubmit) {
+      initialIds = ($hidden.val() || '').split(',');
+    } else {
+      initialIds = $arrayInputs.find('input').map(function () {
+        return this.value;
+      }).get();
+    }
+    var selected = new Set(initialIds.filter(function (v) {
+      return v;
+    }));
+    var page = 1;
+    var hasMore = true;
+    var searchTerm = '';
+    var loading = false;
+    function syncHiddenAndCount() {
+      if (compactSubmit) {
+        $hidden.val(Array.from(selected).join(','));
+      } else {
+        // Rebuild per-id hidden inputs so form submit posts
+        // name="X[]" entries. Cheaper than tracking adds/removes
+        // and the count is bounded by the scroll view.
+        $arrayInputs.empty();
+        selected.forEach(function (id) {
+          var $input = $('<input type="hidden">');
+          $input.attr('name', name + '[]');
+          $input.attr('value', id);
+          $arrayInputs.append($input);
+        });
+      }
+      // The template lives on data-template so repeat calls don't
+      // lose the {n} placeholder (which would freeze the count
+      // after the first update).
+      var countTemplate = $count.data('template') || '{n}';
+      $count.text(countTemplate.replace('{n}', selected.size).replace(':n', selected.size));
+    }
+    function renderRow(item) {
+      var isDisabled = !!item.disabled;
+      var $row = $('<label class="js-select2-checkboxes-scrollbox-row" role="option">' + '<input type="checkbox" class="js-select2-checkboxes-scrollbox-tick">' + '<span class="js-select2-checkboxes-scrollbox-image"></span>' + '<span class="js-select2-checkboxes-scrollbox-label"></span>' + '</label>');
+      $row.attr('data-item-id', item.id);
+      $row.attr('aria-selected', selected.has(String(item.id)) ? 'true' : 'false');
+      if (isDisabled) {
+        $row.addClass('js-select2-checkboxes-scrollbox-row-disabled');
+      }
+      var $tick = $row.find('.js-select2-checkboxes-scrollbox-tick');
+      $tick.prop('checked', selected.has(String(item.id)));
+      $tick.prop('disabled', isDisabled);
+      if (item.image) {
+        var $img = $('<img alt="">');
+        $img.attr('src', item.image);
+        $row.find('.js-select2-checkboxes-scrollbox-image').append($img);
+      } else if (item.tag_color) {
+        var $sq = $('<i class="fa-solid fa-square" aria-hidden="true"></i>');
+        $sq.css('color', item.tag_color);
+        $row.find('.js-select2-checkboxes-scrollbox-image').append($sq);
+      }
+      $row.find('.js-select2-checkboxes-scrollbox-label').text(item.text);
+      return $row;
+    }
+    function fetchPage() {
+      if (loading || !hasMore) {
+        return;
+      }
+      loading = true;
+      $.ajax({
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+        data: {
+          page: page,
+          search: searchTerm
+        },
+        dataType: 'json',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      }).done(function (response) {
+        (response.results || []).forEach(function (item) {
+          $scroll.append(renderRow(item));
+        });
+        hasMore = !!(response.pagination && response.pagination.more);
+        page += 1;
+      }).always(function () {
+        loading = false;
+      });
+    }
+    function resetAndRefetch() {
+      page = 1;
+      hasMore = true;
+      $scroll.empty();
+      fetchPage();
+    }
+    $scroll.on('scroll', function () {
+      // Trigger the next page when we're within one screen of the
+      // bottom. Checking scrollHeight - scrollTop - clientHeight
+      // keeps the user from catching a blank patch during the
+      // request.
+      if (this.scrollHeight - this.scrollTop - this.clientHeight < this.clientHeight) {
+        fetchPage();
+      }
+    });
+    $scroll.on('change', '.js-select2-checkboxes-scrollbox-tick', function () {
+      var $row = $(this).closest('.js-select2-checkboxes-scrollbox-row');
+      if ($row.hasClass('js-select2-checkboxes-scrollbox-row-disabled')) {
+        $(this).prop('checked', false);
+        return;
+      }
+      var id = String($row.data('item-id'));
+      if (this.checked) {
+        selected.add(id);
+        $row.attr('aria-selected', 'true');
+      } else {
+        selected["delete"](id);
+        $row.attr('aria-selected', 'false');
+      }
+      syncHiddenAndCount();
+    });
+    var searchTimer;
+    function toggleSearchClear() {
+      $searchWrap.toggleClass('has-content', ($search.val() || '').length > 0);
+    }
+    toggleSearchClear();
+    $search.on('input', function () {
+      var self = this;
+      toggleSearchClear();
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function () {
+        searchTerm = self.value || '';
+        resetAndRefetch();
+      }, 250);
+    });
+    $searchClear.on('click', function (e) {
+      e.preventDefault();
+      $search.val('').trigger('input');
+      $search.focus();
+    });
+    $selectAllBtn.on('click', function (e) {
+      e.preventDefault();
+      var payload = {
+        all: 1,
+        search: searchTerm
+      };
+      var widgetCap = parseInt($root.data('max-select-all'), 10);
+      if (!isNaN(widgetCap) && widgetCap > 0) {
+        payload.cap = widgetCap;
+      }
+      $.ajax({
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+        data: payload,
+        dataType: 'json',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      }).done(function (response) {
+        (response.results || []).forEach(function (item) {
+          if (item.disabled) {
+            return;
+          }
+          selected.add(String(item.id));
+        });
+        $scroll.find('.js-select2-checkboxes-scrollbox-tick').each(function () {
+          var $tick = $(this);
+          var $row = $tick.closest('.js-select2-checkboxes-scrollbox-row');
+          if ($row.hasClass('js-select2-checkboxes-scrollbox-row-disabled')) {
+            return;
+          }
+          var id = String($row.data('item-id'));
+          if (selected.has(id)) {
+            $tick.prop('checked', true);
+            $row.attr('aria-selected', 'true');
+          }
+        });
+        syncHiddenAndCount();
+      });
+    });
+    $clearBtn.on('click', function (e) {
+      e.preventDefault();
+      selected.clear();
+      $scroll.find('.js-select2-checkboxes-scrollbox-tick').prop('checked', false);
+      $scroll.find('.js-select2-checkboxes-scrollbox-row').attr('aria-selected', 'false');
+      syncHiddenAndCount();
+    });
+
+    // Seed initial render.
+    syncHiddenAndCount();
+    fetchPage();
+  });
+
+  // Prototype: AJAX-paginated select2, multi-select, with a checkbox
+  // beside each result in the dropdown. The dropdown stays open on
+  // selection so admins can tick multiple items without the panel
+  // snapping shut after each click. Showing a plain count in the
+  // input area ("N selected") instead of the default tag pills to
+  // match the UX of davidstutz/bootstrap-multiselect.
+  //
+  // Opt in with class="js-select2-checkboxes" plus the same
+  // data-endpoint / data-company-id attributes the .js-data-ajax
+  // pickers use.
+  $('.js-select2-checkboxes').each(function (i, item) {
+    var link = $(item);
+    var endpoint = link.data('endpoint');
+    var $modal = link.closest('.modal');
+    var placeholder = link.data('placeholder') || '';
+    var countLabel = link.data('count-label') || '{n} selected';
+    link.select2({
+      placeholder: placeholder,
+      allowClear: false,
+      closeOnSelect: false,
+      dropdownParent: $modal.length ? $modal : $(document.body),
+      language: $('meta[name="language"]').attr('content'),
+      dir: $('meta[name="language-direction"]').attr('content'),
+      ajax: {
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+        dataType: 'json',
+        delay: 250,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: function data(params) {
+          return {
+            search: params.term,
+            page: params.page || 1,
+            companyId: link.data('company-ids') || link.data('company-id'),
+            statusType: link.data('asset-status-type'),
+            excludeId: link.data('exclude-id'),
+            excludeIds: link.data('exclude-ids'),
+            assignedTo: link.data('assigned-to'),
+            onlyTopLevel: link.data('only-top-level')
+          };
+        },
+        cache: true
+      },
+      templateResult: function templateResult(data) {
+        // "Searching..." / "Loading..." rows have no id and must
+        // render as plain text so select2's placeholder states
+        // keep working.
+        if (!data.id) {
+          return data.text;
+        }
+        var isSelected = link.find('option[value="' + $.escapeSelector(String(data.id)) + '"]').prop('selected');
+        // formatDatalistSafe builds the image / tag-color + text
+        // markup every other picker uses. Wrap it with a leading
+        // checkbox. data-item-id lets later select2:select /
+        // select2:unselect handlers find this row by option id.
+        var $inner = formatDatalistSafe(data);
+        var $row = $('<span class="js-select2-checkboxes-row">' + '<input type="checkbox" class="js-select2-checkboxes-tick" tabindex="-1" aria-hidden="true">' + '</span>');
+        $row.attr('data-item-id', data.id);
+        $row.find('.js-select2-checkboxes-tick').prop('checked', !!isSelected);
+        // Server-side disabled rows (e.g. parent-company picker
+        // blocking child companies) get the matching disabled
+        // affordance here. select2's native click-blocking
+        // handles the actual interaction via aria-disabled on
+        // its own wrapper. This just makes the row LOOK right.
+        if (data.disabled) {
+          $row.addClass('js-select2-checkboxes-row-disabled');
+          $row.find('.js-select2-checkboxes-tick').prop('disabled', true);
+        }
+        $row.append($inner);
+        return $row;
+      },
+      templateSelection: function templateSelection() {
+        var count = (link.val() || []).length;
+        if (count === 0) {
+          return placeholder;
+        }
+        return countLabel.replace('{n}', count);
+      }
+    });
+
+    // Checkbox-multiselect looks weird with select2's default tag
+    // pills under the input: the collapsed "N selected" label is
+    // the whole point. Collapse the pill container so templateSelection
+    // sits on its own baseline.
+    link.data('select2').$selection.addClass('js-select2-checkboxes-selection');
+
+    // Safari form-serialization quirk: with select2 multi-select +
+    // AJAX, the hidden <select>'s pre-rendered <option selected>
+    // elements can get dropped from the serialized payload (only
+    // the first entry comes through as an empty value), even though
+    // select2's internal data store has the correct ids. Force a
+    // re-sync right before submit: for every id select2 thinks is
+    // selected, make sure there's a matching <option> in the DOM
+    // with both the attribute AND the property set. Belt-and-
+    // suspenders, Safari-only in practice but harmless elsewhere.
+    var $form = link.closest('form');
+    if ($form.length && !$form.data('cbMultiSyncBound')) {
+      $form.data('cbMultiSyncBound', true);
+      $form.on('submit', function () {
+        $form.find('.js-select2-checkboxes').each(function () {
+          var $select = $(this);
+          var ids = $select.val() || [];
+          ids.forEach(function (id) {
+            var $opt = $select.find('option[value="' + $.escapeSelector(String(id)) + '"]');
+            if ($opt.length === 0) {
+              $select.append(new Option(String(id), id, true, true));
+            } else {
+              $opt.attr('selected', 'selected');
+              $opt.prop('selected', true);
+            }
+          });
+        });
+      });
+    }
+
+    // Badge strip rendered under the control. The input area only
+    // shows a count ("3 selected") so without this the user can't
+    // see WHICH items are selected without opening the dropdown.
+    // Each badge carries an X button that unselects the matching
+    // option in-place.
+    var $badges = $('<div class="js-select2-checkboxes-badges" aria-live="polite"></div>');
+    link.after($badges);
+
+    // Cap the badge strip so a Select-All against hundreds of
+    // options doesn't fill the viewport. First N render in full,
+    // the remainder collapse into a single "+K more" chip that
+    // opens the dropdown for review / editing.
+    var badgeCap = parseInt(link.data('badge-cap'), 10);
+    if (isNaN(badgeCap) || badgeCap <= 0) {
+      badgeCap = 10;
+    }
+    function renderBadges() {
+      $badges.empty();
+      var $options = link.find('option:selected').filter(function () {
+        return $(this).val();
+      });
+      var total = $options.length;
+      $options.slice(0, badgeCap).each(function () {
+        var $opt = $(this);
+        var text = $opt.text();
+        var tagColor = $opt.attr('data-tag-color');
+        var $badge = $('<span class="label label-light js-select2-checkboxes-badge"></span>');
+        // Tag color mirrors CompanyPresenter::formattedNameLink
+        // and the other presenter outputs: a fa-solid fa-square
+        // icon with inline `color` set to the item's tag_color.
+        // Matching the presenter's shape means any site-wide
+        // restyle of tag squares applies to the badges automatically.
+        if (tagColor) {
+          var $swatch = $('<i class="fa-solid fa-fw fa-square" aria-hidden="true"></i>');
+          $swatch.css('color', tagColor);
+          $badge.append($swatch);
+          $badge.append(' ');
+        }
+        $badge.append(document.createTextNode(text + ' '));
+        var $x = $('<button type="button" class="js-select2-checkboxes-badge-remove" aria-label=""><span aria-hidden="true">&times;</span></button>');
+        $x.attr('aria-label', 'Remove ' + text);
+        $x.attr('data-item-id', $opt.val());
+        $badge.append($x);
+        $badges.append($badge);
+        $badges.append(' ');
+      });
+      if (total > badgeCap) {
+        var remainder = total - badgeCap;
+        var moreLabel = (link.data('more-label') || '+{n} more').replace('{n}', remainder);
+        var $more = $('<button type="button" class="label label-primary js-select2-checkboxes-more"></button>');
+        $more.text(moreLabel);
+        $badges.append($more);
+      }
+    }
+    $badges.on('click', '.js-select2-checkboxes-more', function (e) {
+      e.preventDefault();
+      link.select2('open');
+    });
+    $badges.on('click', '.js-select2-checkboxes-badge-remove', function (e) {
+      e.preventDefault();
+      var id = $(this).data('item-id');
+      link.find('option[value="' + $.escapeSelector(String(id)) + '"]').prop('selected', false);
+      link.trigger('change');
+    });
+    renderBadges();
+    link.on('change', renderBadges);
+
+    // Keep the dropdown's checkbox DOM in sync with the actual
+    // selection state. templateResult only runs when a row first
+    // renders, so a subsequent click (which updates the underlying
+    // <option> but not the already-rendered row) would otherwise
+    // leave the checkbox stale.
+    function flipTickFor(id, checked) {
+      var $row = $('.select2-dropdown .js-select2-checkboxes-row[data-item-id="' + $.escapeSelector(String(id)) + '"]');
+      $row.find('.js-select2-checkboxes-tick').prop('checked', checked);
+    }
+    link.on('select2:select', function (e) {
+      if (e.params && e.params.data) {
+        flipTickFor(e.params.data.id, true);
+        // Stash tag_color on the <option> so the badge strip
+        // under the input can render a matching swatch without
+        // re-querying the API. Re-render after stashing because
+        // select2 fires `change` BEFORE `select2:select`, so
+        // the first badge pass ran without this attribute.
+        if (e.params.data.tag_color) {
+          link.find('option[value="' + $.escapeSelector(String(e.params.data.id)) + '"]').attr('data-tag-color', e.params.data.tag_color);
+          renderBadges();
+        }
+      }
+    });
+    link.on('select2:unselect', function (e) {
+      if (e.params && e.params.data) {
+        flipTickFor(e.params.data.id, false);
+      }
+    });
+
+    // Opt-in Select All. Fires a single AJAX call with ?all=1 and
+    // the current search term so the server returns every matching
+    // row in one shot (bounded by the server-side cap in
+    // Helper::paginateCollectionOrAll). Clear All fires locally.
+    //
+    // The endpoint for the picker has to opt in on its side by
+    // switching paginateCollection -> paginateCollectionOrAll.
+    // Endpoints that have not opted in simply ignore ?all=1 and
+    // return the first paginated page, which the button still
+    // handles gracefully (just adds that page's results).
+    if (!link.data('select-all')) {
+      return;
+    }
+    link.on('select2:open', function () {
+      var $dropdown = $('.select2-dropdown').last();
+
+      // Capture-phase mousedown so already-selected rows toggle
+      // off on click. select2's own result handler fires in the
+      // bubble phase; stopping propagation here keeps it from
+      // re-processing a row we just deselected. Scoped to the
+      // currently-open dropdown so one component's listener
+      // can't intercept clicks on another.
+      var dropdownEl = $dropdown[0];
+      if (dropdownEl && !dropdownEl.__cbMultiToggleBound) {
+        dropdownEl.__cbMultiToggleBound = true;
+        dropdownEl.addEventListener('mousedown', function (nativeEvent) {
+          var row = nativeEvent.target.closest('.js-select2-checkboxes-row');
+          if (!row) {
+            return;
+          }
+          if (row.classList.contains('js-select2-checkboxes-row-disabled')) {
+            return;
+          }
+          var id = row.getAttribute('data-item-id');
+          var $opt = link.find('option[value="' + $.escapeSelector(String(id)) + '"]');
+          if ($opt.prop('selected')) {
+            nativeEvent.preventDefault();
+            nativeEvent.stopPropagation();
+            $opt.prop('selected', false);
+            flipTickFor(id, false);
+            link.trigger('change');
+          }
+        }, true);
+      }
+
+      // select2's dropdown search ships without a placeholder or
+      // clear button. Add both: inject the Search placeholder,
+      // and append a × as a sibling of the input (not wrapping
+      // it, so select2's own layout stays intact).
+      var $search = $dropdown.find('.select2-search__field');
+      var $searchContainer = $search.parent();
+      if ($search.length) {
+        $search.attr('placeholder', $search.attr('placeholder') || link.data('search-placeholder') || 'Search');
+      }
+      if ($search.length && !$searchContainer.find('.js-select2-checkboxes-search-clear').length) {
+        var toggleClearSearch = function toggleClearSearch() {
+          var value = $search.val();
+          $searchContainer.toggleClass('has-content', typeof value === 'string' && value.length > 0);
+        };
+        $searchContainer.addClass('js-select2-checkboxes-search-container');
+        var $clearSearch = $('<button type="button" class="js-select2-checkboxes-search-clear" aria-label="Clear search">&times;</button>');
+        $search.after($clearSearch);
+        toggleClearSearch();
+        $search.on('input', toggleClearSearch);
+        $clearSearch.on('mousedown', function (e) {
+          // mousedown rather than click so this fires before
+          // select2's own result-click handling swallows the
+          // event.
+          e.preventDefault();
+          e.stopPropagation();
+          $search.val('').trigger('input').trigger('keyup');
+          $search.focus();
+        });
+      }
+      if ($dropdown.find('.js-select2-checkboxes-actions').length) {
+        return;
+      }
+      var $actions = $('<div class="js-select2-checkboxes-actions">' + '<button type="button" class="btn btn-xs btn-default js-select2-checkboxes-selectall"></button> ' + '<button type="button" class="btn btn-xs btn-default js-select2-checkboxes-clear"></button>' + '</div>');
+      $actions.find('.js-select2-checkboxes-selectall').text(link.data('select-all-label') || 'Select all');
+      $actions.find('.js-select2-checkboxes-clear').text(link.data('clear-all-label') || 'Clear');
+      $dropdown.prepend($actions);
+      $actions.on('click', '.js-select2-checkboxes-selectall', function (e) {
+        e.preventDefault();
+        var $search = $dropdown.find('.select2-search__field');
+        var searchTerm = $search.val() || '';
+        var payload = {
+          all: 1,
+          search: searchTerm,
+          companyId: link.data('company-ids') || link.data('company-id')
+        };
+        // Per-widget ceiling via data-max-select-all. The server
+        // treats this as a suggestion that can only LOWER the
+        // effective cap, never raise it (see
+        // Helper::paginateCollectionOrAll), so a tampered DOM
+        // can't blow past MAX_UNPAGINATED.
+        var widgetCap = parseInt(link.data('max-select-all'), 10);
+        if (!isNaN(widgetCap) && widgetCap > 0) {
+          payload.cap = widgetCap;
+        }
+        $.ajax({
+          url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+          data: payload,
+          dataType: 'json',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        }).done(function (response) {
+          (response.results || []).forEach(function (item) {
+            // Honor server-side disabled rows. The parent-
+            // company picker returns child companies with
+            // disabled: true and we must NOT silently flip
+            // them selected via Select All just because they
+            // appeared in the result set.
+            if (item.disabled) {
+              return;
+            }
+            if (link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').length === 0) {
+              link.append(new Option(item.text, item.id, true, true));
+            } else {
+              link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').prop('selected', true);
+            }
+            if (item.tag_color) {
+              link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').attr('data-tag-color', item.tag_color);
+            }
+            // Flip any already-rendered row's checkbox so the
+            // open dropdown reflects the new selection state
+            // without the user having to scroll past it to
+            // retrigger a templateResult render.
+            flipTickFor(item.id, true);
+          });
+          link.trigger('change');
+          // change already re-rendered the badges; this second
+          // pass picks up the tag_color attrs set in the loop
+          // above since change-time didn't see them yet.
+          renderBadges();
+        });
+      });
+      $actions.on('click', '.js-select2-checkboxes-clear', function (e) {
+        e.preventDefault();
+        link.val(null).trigger('change');
+        $dropdown.find('.js-select2-checkboxes-tick').prop('checked', false);
+      });
+    });
+  });
   function getSelect2Value(element) {
     // if the passed object is not a jquery object, assuming 'element' is a selector
     if (!(element instanceof jQuery)) element = $(element);

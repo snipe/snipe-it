@@ -367,6 +367,7 @@ return [
     'select_statuslabel' => 'Select Status',
     'select_company' => 'Select Company',
     'select_asset' => 'Select Asset',
+    'checkbox_multiselect_count' => '{n} selected',
     'settings' => 'Settings',
     'show_deleted' => 'Show Deleted',
     'show_current' => 'Show Current',

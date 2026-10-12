@@ -1826,6 +1826,7 @@ h2 small {
 input[type="date"],
 input[type="number"],
 input[type="text"],
+input[type="search"],
 input[type="url"],
 input[type="email"],
 input[type="password"],
@@ -3997,5 +3998,264 @@ dl.table-display {
   .sync-adapters-tabs .adapter-tab-content {
     padding: 15px 10px;
   }
+}
+
+.label-normal {
+  font-weight: normal;
+  font-size: 11px !important;
+  line-height: 21px !important;
+  padding-left: 3px;
+}
+
+.label-normal-bold {
+  font-weight: bold !important;
+  font-size: 11px !important;
+  line-height: 34px !important;
+  padding-left: 3px;
+  border: 1px solid var(--main-footer-top-border-color);
+}
+
+
+/* Checkbox-multiselect skin for select2. See the
+   .js-select2-checkboxes init in snipeit.js. The dropdown rows get
+   a leading checkbox so the UX reads as "check what you want" rather
+   than select2's tag-pill multi-select, and the input area shows a
+   plain "N selected" count instead of pills. */
+.js-select2-checkboxes-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.js-select2-checkboxes-row > .clearfix {
+  flex: 1;
+}
+
+.js-select2-checkboxes-row .js-select2-checkboxes-tick {
+  margin: 0;
+  pointer-events: none; // the row itself handles the click via select2.
+}
+
+.js-select2-checkboxes-row.js-select2-checkboxes-row-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.js-select2-checkboxes-selection .select2-selection__rendered {
+  color: var(--color-fg);
+  padding-left: 8px;
+}
+
+.js-select2-checkboxes-selection .select2-selection__choice {
+  display: none; // suppress the per-item pill container.
+}
+
+.js-select2-checkboxes-actions {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--box-header-top-border-color, #f4f4f4);
+  background-color: var(--table-stripe-bg, transparent);
+}
+
+/* Clear × overlay on select2's dropdown search field + placeholder.
+   select2 doesn't ship either. Position relative on the select2-search
+   parent so our absolutely-positioned × sits inside the input visually. */
+.js-select2-checkboxes-search-container {
+  position: relative;
+}
+
+.js-select2-checkboxes-search-container .select2-search__field {
+  padding-right: 28px;
+}
+
+.js-select2-checkboxes-search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  padding: 0 4px;
+  cursor: pointer;
+  color: var(--text-help);
+  line-height: 1;
+  font-size: 1.3em;
+  opacity: 0.6;
+  display: none;
+  z-index: 2;
+}
+
+.js-select2-checkboxes-search-container.has-content .js-select2-checkboxes-search-clear {
+  display: block;
+}
+
+.js-select2-checkboxes-search-clear:hover,
+.js-select2-checkboxes-search-clear:focus {
+  opacity: 1;
+  color: #a94442;
+  outline: none;
+}
+
+/* Strip of selected-item badges rendered below the control. Users can
+   see WHAT is selected without having to open the dropdown, and each
+   badge's x removes that item. */
+.js-select2-checkboxes-badges {
+  margin-top: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.js-select2-checkboxes-badges:empty {
+  display: none;
+}
+
+/* Chips in the editable company picker + the read-only groups strip.
+   .label-light's global line-height is 25px, which looks tall when
+   chips sit in a form row next to compact inputs. Compact the chip
+   shape (line-height + padding) just inside these scoped containers
+   so other places that use .label-light keep their current sizing. */
+.js-select2-checkboxes-badge,
+.js-user-groups-readonly .label {
+  line-height: 21px !important;
+  padding: 2px 8px !important;
+  margin-right: 2px !important;
+  font-weight: normal;
+  font-size: 12px !important;
+}
+
+.js-user-groups-readonly {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+
+.js-select2-checkboxes-badge-remove {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin-left: 4px;
+  color: inherit;
+  opacity: 0.6;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.js-select2-checkboxes-badge-remove:hover,
+.js-select2-checkboxes-badge-remove:focus {
+  opacity: 1;
+  color: #a94442;
+  outline: none;
+}
+
+.js-select2-checkboxes-more {
+  border: 0;
+  cursor: pointer;
+  padding: 2px 8px;
+}
+
+/* Scrolling select2-checkboxes-scrollbox variant: an always-open panel with search +
+   select-all + a scrolling body of checkbox rows. See the
+   .js-select2-checkboxes-scrollbox init in snipeit.js for behavior. */
+.js-select2-checkboxes-scrollbox-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+}
+
+.js-select2-checkboxes-scrollbox-controls .js-select2-checkboxes-scrollbox-search-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.js-select2-checkboxes-scrollbox-search-wrap .js-select2-checkboxes-scrollbox-search {
+  padding-right: 28px;
+}
+
+.js-select2-checkboxes-scrollbox-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  padding: 0 4px;
+  cursor: pointer;
+  color: var(--text-help);
+  line-height: 1;
+  font-size: 1.3em;
+  opacity: 0.6;
+  display: none;
+}
+
+.js-select2-checkboxes-scrollbox-search-wrap.has-content .js-select2-checkboxes-scrollbox-search-clear {
+  display: block;
+}
+
+.js-select2-checkboxes-scrollbox-search-clear:hover,
+.js-select2-checkboxes-scrollbox-search-clear:focus {
+  opacity: 1;
+  color: #a94442;
+  outline: none;
+}
+
+.js-select2-checkboxes-scrollbox-count {
+  margin-left: auto;
+  font-size: 0.9em;
+  color: var(--text-help);
+}
+
+.js-select2-checkboxes-scrollbox-scroll {
+  border: 1px solid var(--box-header-top-border-color, #d2d6de);
+  border-radius: 3px;
+  overflow-y: auto;
+  background-color: var(--box-bg, #fff);
+}
+
+.js-select2-checkboxes-scrollbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  margin: 0;
+  cursor: pointer;
+  font-weight: normal;
+  border-bottom: 1px solid var(--table-border-row-color, #f4f4f4);
+}
+
+.js-select2-checkboxes-scrollbox-row:last-child {
+  border-bottom: 0;
+}
+
+.js-select2-checkboxes-scrollbox-row:hover {
+  background-color: var(--table-stripe-bg, #f5f5f5);
+}
+
+.js-select2-checkboxes-scrollbox-row .js-select2-checkboxes-scrollbox-tick {
+  margin: 0;
+}
+
+.js-select2-checkboxes-scrollbox-image {
+  display: inline-flex;
+  justify-content: center;
+  width: 20px;
+}
+
+.js-select2-checkboxes-scrollbox-image img {
+  max-height: 20px;
+  max-width: 20px;
+}
+
+.js-select2-checkboxes-scrollbox-image i {
+  font-size: 18px;
+}
+
+.js-select2-checkboxes-scrollbox-row-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
