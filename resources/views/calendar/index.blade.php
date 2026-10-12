@@ -95,6 +95,10 @@
                     @endcan
                     @can('view', \App\Models\User::class)
                         {
+                            name: 'user.start_date',
+                            text: '{{ trans('general.calendar_event_user_start_date') }}'
+                        },
+                        {
                             name: 'user.end_date',
                             text: '{{ trans('general.calendar_event_user_end_date') }}'
                         },
