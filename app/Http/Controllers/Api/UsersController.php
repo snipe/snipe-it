@@ -445,8 +445,8 @@ class UsersController extends Controller
 
         $users = $users->orderBy('display_name', 'asc')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
 
-        // ?all=1 opts into the single-page response the checkbox-list /
-        // checkbox-multiselect pickers use for Select All. Capped by
+        // ?all=1 opts into the single-page response the select2-checkboxes-scrollbox /
+        // select2-checkboxes pickers use for Select All. Capped by
         // config('app.max_unpaginated_records'), bounded further by any
         // ?cap=N the client sends (never higher than the config value).
         if (request()->boolean('all')) {
