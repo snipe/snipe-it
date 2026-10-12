@@ -18,15 +18,15 @@
     },
     "devDependencies": {
         "all-contributors-cli": "^6.26.1",
-        "axios": "^1.11.0",
+        "axios": "^1.20.0",
         "eonasdan-bootstrap-datetimepicker": "^4.17.49",
         "jquery": "^3.7.1",
         "laravel-mix": "^6.0.49",
         "lodash": "^4.17.24",
-        "moment": "^2.30.1",
+        "moment": "^2.31.0",
         "playwright": "^1.61.1",
         "postcss": "^8.5.12",
-        "webpack": "^5.98.0"
+        "webpack": "5.105.0"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.7.2",
@@ -54,7 +54,7 @@
         "jquery-ui": "^1.14.1",
         "jquery-validation": "^1.21.0",
         "jquery.iframe-transport": "^1.0.0",
-        "jspdf": "4.2.1",
+        "jspdf": "^4.2.1",
         "jspdf-autotable": "^5.0.2",
         "less": "^4.2.2",
         "less-loader": "^9.1.0",
@@ -83,6 +83,8 @@
             "moment-timezone": "^0.6.2"
         },
         "lodash": "^4.17.24",
-        "postcss": "^8.5.12"
+        "postcss": "^8.5.12",
+        "shell-quote": "^1.10.0",
+        "jspdf": "^4.2.1"
     }
 }
