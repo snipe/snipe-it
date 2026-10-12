@@ -708,8 +708,7 @@ $(function () {
     // beside each result in the dropdown. The dropdown stays open on
     // selection so admins can tick multiple items without the panel
     // snapping shut after each click. Showing a plain count in the
-    // input area ("N selected") instead of the default tag pills to
-    // match the UX of davidstutz/bootstrap-multiselect.
+    // input area ("N selected") instead of the default tag pills.
     //
     // Opt in with class="js-select2-checkboxes" plus the same
     // data-endpoint / data-company-id attributes the .js-data-ajax
