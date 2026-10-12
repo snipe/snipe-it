@@ -56,7 +56,11 @@ class MoveUploadsToNewDisk extends Command
 
         $publicSources = $this->collectPublicSources();
         $privateSources = $this->collectPrivateSources();
-        $logoSources = glob('public/uploads/setting*.*') ?: [];
+        $logoSources = array_merge(
+            glob('public/uploads/setting*.*') ?: [],
+            file_exists('public/uploads/default.png') ? ['public/uploads/default.png'] : [],
+            file_exists('public/uploads/snipe-logo.png') ? ['public/uploads/snipe-logo.png'] : [],
+        );
 
         $this->copyPublic($publicSources);
         $this->copyLogos($logoSources);

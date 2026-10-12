@@ -9451,6 +9451,18 @@ parameters:
 			path: app/Presenters/DepreciationReportPresenter.php
 
 		-
+			message: '#^Access to an undefined property App\\Presenters\\GroupPresenter\:\:\$display_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Presenters/GroupPresenter.php
+
+		-
+			message: '#^Access to an undefined property App\\Presenters\\GroupPresenter\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Presenters/GroupPresenter.php
+
+		-
 			message: '#^Access to an undefined property App\\Presenters\\LicensePresenter\:\:\$display_name\.$#'
 			identifier: property.notFound
 			count: 2

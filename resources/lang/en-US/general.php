@@ -351,6 +351,7 @@ return [
     'select_var' => 'Select :thing... ', // this will eventually replace all of our other selects
     'select' => 'Select',
     'select_all' => 'Select All',
+    'deselect_all' => 'Deselect All',
     'selected' => 'selected',
     'search' => 'Search',
     'select_category' => 'Select a Category',
@@ -367,6 +368,7 @@ return [
     'select_statuslabel' => 'Select Status',
     'select_company' => 'Select Company',
     'select_asset' => 'Select Asset',
+    'checkbox_multiselect_count' => '{n} selected',
     'settings' => 'Settings',
     'show_deleted' => 'Show Deleted',
     'show_current' => 'Show Current',

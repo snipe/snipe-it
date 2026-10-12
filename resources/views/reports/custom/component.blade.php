@@ -2,9 +2,7 @@
 
 {{-- Page Title --}}
 @section('title')
-    @if (request()->routeIs('report-templates.edit'))
-        {{ trans('general.update') }} {{ $template->name }}
-    @elseif(request()->routeIs('report-templates.show'))
+    @if ($template->exists)
         {{ trans('general.custom_component_report') }}: {{ $template->name }}
     @else
         {{ trans('general.custom_component_report') }}
@@ -13,11 +11,7 @@
 @stop
 
 @section('header_right')
-    @if (request()->routeIs('report-templates.edit'))
-        <a href="{{ route('report-templates.show', $template) }}" class="btn btn-primary pull-right">
-            {{ trans('general.back') }}
-        </a>
-    @elseif (request()->routeIs('report-templates.show'))
+    @if ($template->exists)
         <a href="{{ route('reports/custom') }}" class="btn btn-primary pull-right">
             {{ trans('general.back') }}
         </a>
@@ -35,9 +29,12 @@
     <div class="row">
         <div class="col-md-9">
 
+            {{-- Form action is always custom.component.run (download). The
+                 sidebar Save button overrides this via formaction so it
+                 POSTs to report-templates.update instead. --}}
             <form
                 method="POST"
-                action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : route('reports.custom.component.run') }}"
+                action="{{ route('reports.custom.component.run') }}"
                 accept-charset="UTF-8"
                 class="form-horizontal"
                 id="custom-report-form"
@@ -48,7 +45,7 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <h2 class="box-title" style="padding-top: 7px;">
-                            @if (request()->routeIs('report-templates.edit'))
+                            @if ($template->exists)
                                 {{ trans('general.customize_report') }}: {{ $template->name }}
                             @else
                                 {{ trans('general.customize_report') }}
@@ -182,47 +179,41 @@
 
                             <br>
 
-                            @include ('partials.forms.edit.company-select', [
-                                    'translated_name' => trans('general.company'),
-                                    'fieldname' =>
-                                    'by_company_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'selected' => $template->selectValues('by_company_id', \App\Models\Company::class),
-                            ])
-
-                            @include ('partials.forms.edit.category-select', [
-                                    'translated_name' => trans('general.category'),
-                                    'fieldname' => 'by_category_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'category_type' => 'component',
-                                    'selected' => $template->selectValues('by_category_id', \App\Models\Category::class),
-                            ])
-
-                            @include ('partials.forms.edit.manufacturer-select', [
-                                    'translated_name' => trans('general.manufacturer'),
-                                    'fieldname' => 'by_manufacturer_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'selected' => $template->selectValues('by_manufacturer_id', \App\Models\Manufacturer::class),
-                            ])
-
-                            @include ('partials.forms.edit.supplier-select', [
-                                    'translated_name' => trans('general.supplier'),
-                                    'fieldname' => 'by_supplier_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'selected' => $template->selectValues('by_supplier_id', \App\Models\Supplier::class),
-                            ])
-
-                            @include ('partials.forms.edit.location-select', [
-                                    'translated_name' => trans('general.location'),
-                                    'fieldname' => 'by_location_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'selected' => $template->selectValues('by_location_id', \App\Models\Location::class),
-                            ])
+                            <x-input.select2-checkboxes
+                                name="by_company_id"
+                                :label="trans('general.company')"
+                                endpoint="companies"
+                                :selected="$template->selectValues('by_company_id', \App\Models\Company::class)"
+                                :modelClass="\App\Models\Company::class"
+                            />
+                            <x-input.select2-checkboxes
+                                name="by_category_id"
+                                :label="trans('general.category')"
+                                endpoint="categories/component"
+                                :selected="$template->selectValues('by_category_id', \App\Models\Category::class)"
+                                :modelClass="\App\Models\Category::class"
+                            />
+                            <x-input.select2-checkboxes
+                                name="by_manufacturer_id"
+                                :label="trans('general.manufacturer')"
+                                endpoint="manufacturers"
+                                :selected="$template->selectValues('by_manufacturer_id', \App\Models\Manufacturer::class)"
+                                :modelClass="\App\Models\Manufacturer::class"
+                            />
+                            <x-input.select2-checkboxes
+                                name="by_supplier_id"
+                                :label="trans('general.supplier')"
+                                endpoint="suppliers"
+                                :selected="$template->selectValues('by_supplier_id', \App\Models\Supplier::class)"
+                                :modelClass="\App\Models\Supplier::class"
+                            />
+                            <x-input.select2-checkboxes
+                                name="by_location_id"
+                                :label="trans('general.location')"
+                                endpoint="locations"
+                                :selected="$template->selectValues('by_location_id', \App\Models\Location::class)"
+                                :modelClass="\App\Models\Location::class"
+                            />
 
                             <!-- Name -->
                             <div class="form-group">
@@ -417,17 +408,12 @@
                         </div>
 
                     </div> <!-- /.box-body-->
-                    @unless (request()->routeIs('report-templates.edit'))
-                        {{-- See consumable blade for the edit-mode footer
-                             rationale (sidebar Save is the affordance
-                             there; download button belongs to preview). --}}
-                        <div class="box-footer text-right">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-download icon-white" aria-hidden="true"></i>
-                                {{ trans('general.download') }}
-                            </button>
-                        </div>
-                    @endunless
+                    <div class="box-footer text-right">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-download icon-white" aria-hidden="true"></i>
+                            {{ trans('general.download') }}
+                        </button>
+                    </div>
                 </div> <!--/.box.box-default-->
             </form>
         </div>
