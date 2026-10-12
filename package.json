@@ -43,7 +43,6 @@
         "bootstrap": "^3.4.1",
         "bootstrap-colorpicker": "^2.5.3",
         "bootstrap-less": "^3.3.8",
-        "bootstrap-multiselect": "^1.1.2",
         "bootstrap-table": "^1.24.2",
         "canvas-confetti": "^1.9.3",
         "chart.js": "^2.9.4",

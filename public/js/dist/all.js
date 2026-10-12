@@ -1223,8 +1223,7 @@ $(function () {
   // beside each result in the dropdown. The dropdown stays open on
   // selection so admins can tick multiple items without the panel
   // snapping shut after each click. Showing a plain count in the
-  // input area ("N selected") instead of the default tag pills to
-  // match the UX of davidstutz/bootstrap-multiselect.
+  // input area ("N selected") instead of the default tag pills.
   //
   // Opt in with class="js-select2-checkboxes" plus the same
   // data-endpoint / data-company-id attributes the .js-data-ajax
@@ -1306,35 +1305,6 @@ $(function () {
     // the whole point. Collapse the pill container so templateSelection
     // sits on its own baseline.
     link.data('select2').$selection.addClass('js-select2-checkboxes-selection');
-
-    // Safari form-serialization quirk: with select2 multi-select +
-    // AJAX, the hidden <select>'s pre-rendered <option selected>
-    // elements can get dropped from the serialized payload (only
-    // the first entry comes through as an empty value), even though
-    // select2's internal data store has the correct ids. Force a
-    // re-sync right before submit: for every id select2 thinks is
-    // selected, make sure there's a matching <option> in the DOM
-    // with both the attribute AND the property set. Belt-and-
-    // suspenders, Safari-only in practice but harmless elsewhere.
-    var $form = link.closest('form');
-    if ($form.length && !$form.data('cbMultiSyncBound')) {
-      $form.data('cbMultiSyncBound', true);
-      $form.on('submit', function () {
-        $form.find('.js-select2-checkboxes').each(function () {
-          var $select = $(this);
-          var ids = $select.val() || [];
-          ids.forEach(function (id) {
-            var $opt = $select.find('option[value="' + $.escapeSelector(String(id)) + '"]');
-            if ($opt.length === 0) {
-              $select.append(new Option(String(id), id, true, true));
-            } else {
-              $opt.attr('selected', 'selected');
-              $opt.prop('selected', true);
-            }
-          });
-        });
-      });
-    }
 
     // Badge strip rendered under the control. The input area only
     // shows a count ("3 selected") so without this the user can't
