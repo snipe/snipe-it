@@ -2,9 +2,7 @@
 
 {{-- Page Title --}}
 @section('title')
-    @if (request()->routeIs('report-templates.edit'))
-        {{ trans('general.update') }} {{ $template->name }}
-    @elseif(request()->routeIs('report-templates.show'))
+    @if ($template->exists)
         {{ trans('general.custom_component_report') }}: {{ $template->name }}
     @else
         {{ trans('general.custom_component_report') }}
@@ -13,11 +11,7 @@
 @stop
 
 @section('header_right')
-    @if (request()->routeIs('report-templates.edit'))
-        <a href="{{ route('report-templates.show', $template) }}" class="btn btn-primary pull-right">
-            {{ trans('general.back') }}
-        </a>
-    @elseif (request()->routeIs('report-templates.show'))
+    @if ($template->exists)
         <a href="{{ route('reports/custom') }}" class="btn btn-primary pull-right">
             {{ trans('general.back') }}
         </a>
@@ -35,9 +29,12 @@
     <div class="row">
         <div class="col-md-9">
 
+            {{-- Form action is always custom.component.run (download). The
+                 sidebar Save button overrides this via formaction so it
+                 POSTs to report-templates.update instead. --}}
             <form
                 method="POST"
-                action="{{ request()->routeIs('report-templates.edit') ? route('report-templates.update', $template) : route('reports.custom.component.run') }}"
+                action="{{ route('reports.custom.component.run') }}"
                 accept-charset="UTF-8"
                 class="form-horizontal"
                 id="custom-report-form"
@@ -48,7 +45,7 @@
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <h2 class="box-title" style="padding-top: 7px;">
-                            @if (request()->routeIs('report-templates.edit'))
+                            @if ($template->exists)
                                 {{ trans('general.customize_report') }}: {{ $template->name }}
                             @else
                                 {{ trans('general.customize_report') }}
@@ -417,17 +414,12 @@
                         </div>
 
                     </div> <!-- /.box-body-->
-                    @unless (request()->routeIs('report-templates.edit'))
-                        {{-- See consumable blade for the edit-mode footer
-                             rationale (sidebar Save is the affordance
-                             there; download button belongs to preview). --}}
-                        <div class="box-footer text-right">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fas fa-download icon-white" aria-hidden="true"></i>
-                                {{ trans('general.download') }}
-                            </button>
-                        </div>
-                    @endunless
+                    <div class="box-footer text-right">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-download icon-white" aria-hidden="true"></i>
+                            {{ trans('general.download') }}
+                        </button>
+                    </div>
                 </div> <!--/.box.box-default-->
             </form>
         </div>
