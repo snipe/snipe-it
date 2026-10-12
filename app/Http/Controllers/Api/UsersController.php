@@ -444,7 +444,20 @@ class UsersController extends Controller
         }
 
         $users = $users->orderBy('display_name', 'asc')->orderBy('last_name', 'asc')->orderBy('first_name', 'asc');
-        $users = $users->paginate(50);
+
+        // ?all=1 opts into the single-page response the checkbox-list /
+        // checkbox-multiselect pickers use for Select All. Capped by
+        // config('app.max_unpaginated_records'), bounded further by any
+        // ?cap=N the client sends (never higher than the config value).
+        if (request()->boolean('all')) {
+            $serverCap = (int) config('app.max_unpaginated_records', 5000);
+            $clientCap = (int) request()->integer('cap', PHP_INT_MAX);
+            $cap = $clientCap > 0 ? min($serverCap, $clientCap) : $serverCap;
+            $perPage = max($cap, 1);
+            $users = $users->paginate($perPage);
+        } else {
+            $users = $users->paginate(50);
+        }
 
         foreach ($users as $user) {
             $name_str = $user->display_name;

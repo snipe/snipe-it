@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Actions\Permissions\NormalizePermissionsPayloadAction;
 use App\Helpers\Helper;
 use App\Models\Group;
-use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -47,24 +46,10 @@ class GroupsController extends Controller
         $permissions = config('permissions');
         $groupPermissions = Helper::selectedPermissionsArray($permissions, $permissions);
         $selectedPermissions = $request->old('permissions', $groupPermissions);
-        $users_query = User::query()
-            ->select(['users.id', 'users.first_name', 'users.last_name', 'users.username'])
-            ->where('show_in_list', 1)
-            ->whereNull('deleted_at');
 
-        $users_count = $users_query->count();
-
-        $users = collect();
-        if ($users_count <= config('app.max_unpaginated_records')) {
-            $users = $users_query->orderBy('first_name', 'asc')->orderBy('last_name', 'asc')->get();
-        }
-
-        // Show the page
         return view('groups/edit', compact('permissions', 'selectedPermissions', 'groupPermissions'))
             ->with('group', $group)
-            ->with('associated_users', collect())
-            ->with('unselected_users', $users)
-            ->with('all_users_count', $users_count);
+            ->with('associated_user_ids', []);
     }
 
     /**
@@ -124,32 +109,12 @@ class GroupsController extends Controller
 
         $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
 
-        $users_query = User::query()
-            ->select(['users.id', 'users.first_name', 'users.last_name', 'users.username'])
-            ->where('show_in_list', 1)
-            ->whereNull('deleted_at');
+        // Only the ids are needed. The checkbox-list component seeds its
+        // hidden CSV from this and loads the row text/image from the
+        // selectlist endpoint as the user scrolls.
+        $associated_user_ids = $group->users()->where('show_in_list', 1)->pluck('users.id')->all();
 
-        $users_count = $users_query->count();
-
-        $associated_users = collect();
-        $unselected_users = collect();
-
-        if ($users_count <= config('app.max_unpaginated_records')) {
-            $associated_users = $group->users()->where('show_in_list', 1)->orderBy('first_name', 'asc')->orderBy('last_name', 'asc')->get();
-            // Get the unselected users
-            $unselected_users = User::query()
-                ->select(['users.id', 'users.first_name', 'users.last_name', 'users.username'])
-                ->where('show_in_list', 1)
-                ->whereNotIn('id', $associated_users->pluck('id')->toArray())
-                ->orderBy('first_name', 'asc')
-                ->orderBy('last_name', 'asc')
-                ->get();
-        }
-
-        return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions'))
-            ->with('associated_users', $associated_users)
-            ->with('unselected_users', $unselected_users)
-            ->with('all_users_count', $users_count);
+        return view('groups.edit', compact('group', 'permissions', 'selected_array', 'groupPermissions', 'associated_user_ids'));
     }
 
     /**

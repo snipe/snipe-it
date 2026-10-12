@@ -178,7 +178,7 @@ class UsersController extends Controller
             }
 
             if (auth()->user()->isSuperUser() && auth()->user()->can('editableOnDemo')) {
-                $user->syncGroupsWithLogging((array) $request->input('groups'));
+                $user->syncGroupsWithLogging(self::normalizeGroupsInput($request->input('groups')));
             }
 
             return Helper::getRedirectOption($request, $user->id, 'Users')
@@ -198,6 +198,33 @@ class UsersController extends Controller
         }
 
         return $output;
+    }
+
+    /**
+     * Normalize the groups form input to an int array of group ids.
+     * The legacy user form posted groups[] as separate inputs (one per
+     * selected group). The scrolling checkbox-list on the new form
+     * posts a single hidden CSV, matching the groups-edit pattern.
+     * Accept both shapes so other callers (API, cloning, legacy
+     * clients) keep working.
+     */
+    private static function normalizeGroupsInput(mixed $input): array
+    {
+        if (is_array($input)) {
+            return array_values(array_filter(
+                array_map('intval', $input),
+                fn (int $id) => $id > 0,
+            ));
+        }
+
+        if (is_string($input) && $input !== '') {
+            return array_values(array_filter(
+                array_map('intval', explode(',', $input)),
+                fn (int $id) => $id > 0,
+            ));
+        }
+
+        return [];
     }
 
     /**
@@ -354,7 +381,7 @@ class UsersController extends Controller
             if (auth()->user()->isSuperUser()
                 && auth()->user()->can('canEditAuthFields', $user)
                 && auth()->user()->can('editableOnDemo')) {
-                $user->syncGroupsWithLogging((array) $request->input('groups'));
+                $user->syncGroupsWithLogging(self::normalizeGroupsInput($request->input('groups')));
             }
 
             // Redirect to the user page

@@ -7,6 +7,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FilterRequest;
 use App\Http\Transformers\GroupsTransformer;
+use App\Http\Transformers\SelectlistTransformer;
 use App\Models\Group;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -168,5 +169,20 @@ class GroupsController extends Controller
         $group->delete();
 
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/groups/message.delete.success')));
+    }
+
+    public function selectlist(Request $request): array
+    {
+        $this->authorize('superadmin');
+
+        $groups = Group::select(['id', 'name']);
+
+        if ($request->filled('search')) {
+            $groups->where('name', 'LIKE', '%' . $request->input('search') . '%');
+        }
+
+        $sorted = $groups->orderBy('name', 'asc')->get();
+
+        return (new SelectlistTransformer)->transformSelectlist(Helper::paginateCollectionOrAll($sorted));
     }
 }

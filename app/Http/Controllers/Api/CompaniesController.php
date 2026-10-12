@@ -321,6 +321,6 @@ class CompaniesController extends Controller
             $sorted = new Collection(Company::indenter($companies_by_parent));
         }
 
-        return (new SelectlistTransformer)->transformSelectlist(Helper::paginateCollection($sorted));
+        return (new SelectlistTransformer)->transformSelectlist(Helper::paginateCollectionOrAll($sorted));
     }
 }
