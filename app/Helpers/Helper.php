@@ -128,7 +128,7 @@ class Helper
 
     /**
      * Return every item on a single page when the API call passes
-     * `?all=true` on the request. Used by the checkbox-multiselect
+     * `?all=true` on the request. Used by the select2-checkboxes
      * "Select all" button so it can pull the full filtered result set
      * in one call instead of walking paginated pages.
      *
