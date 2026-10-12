@@ -2,6 +2,8 @@
 
 namespace App\Enums;
 
+use App\Models\Traits\HasUploads;
+
 /**
  * Single source of truth for file-storage directory names across the app.
  *
@@ -91,28 +93,39 @@ enum FileStorage: string
         };
     }
 
+    /**
+     * Private cases without a parent model. Everything model-backed is
+     * resolved by reflecting on HasUploads so adding the trait to a new
+     * model is the only step needed to light up its file-upload path.
+     */
+    private const NON_MODEL_PRIVATE_CASES = [
+        'audits',
+        'backups',
+        'eula-pdfs',
+        'imports',
+        'signatures',
+    ];
+
     public function hasPrivateScope(): bool
     {
-        return match ($this) {
-            self::Accessories,
-            self::Assets,
-            self::Audits,
-            self::Backups,
-            self::Companies,
-            self::Components,
-            self::Consumables,
-            self::Departments,
-            self::EulaPdfs,
-            self::Imports,
-            self::Licenses,
-            self::Locations,
-            self::Maintenances,
-            self::Models,
-            self::Signatures,
-            self::Suppliers,
-            self::Users => true,
-            default => false,
-        };
+        if (in_array($this->value, self::NON_MODEL_PRIVATE_CASES, true)) {
+            return true;
+        }
+
+        // Avatars is a public-only image alias for User. The private
+        // attachment bucket for User lives in self::Users, so skip
+        // Avatars before the trait check (which would otherwise mark
+        // it private via User's HasUploads use).
+        if ($this === self::Avatars) {
+            return false;
+        }
+
+        $model = $this->modelClass();
+        if ($model === null) {
+            return false;
+        }
+
+        return in_array(HasUploads::class, class_uses_recursive($model), true);
     }
 
     /**

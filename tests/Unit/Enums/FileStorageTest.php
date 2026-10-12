@@ -172,8 +172,33 @@ class FileStorageTest extends TestCase
         // crashed with a TypeError when uploading. Pin the invariant
         // that every entry in the controller map produces a usable path.
         foreach (Controller::getMapStoragePath() as $resource => $path) {
-            $this->assertIsString($path, "No private storage key for '$resource'. Add the matching case to FileStorage::hasPrivateScope().");
+            $this->assertIsString($path, "No private storage key for '$resource'. Add HasUploads to the model, or add the case to FileStorage::NON_MODEL_PRIVATE_CASES.");
             $this->assertNotSame('', $path);
+        }
+    }
+
+    public function test_every_has_uploads_model_resolves_to_a_private_file_storage_case(): void
+    {
+        // Walk every HasUploads model and confirm its FileStorage case is marked private.
+        $hasUploadsModels = [];
+        foreach (FileStorage::cases() as $case) {
+            $model = $case->modelClass();
+            if ($model === null) {
+                continue;
+            }
+            if (in_array(\App\Models\Traits\HasUploads::class, class_uses_recursive($model), true)) {
+                $hasUploadsModels[$model] = $case;
+            }
+        }
+
+        $this->assertNotEmpty($hasUploadsModels, 'No HasUploads models mapped through FileStorage::modelClass(). Did the mapping drift?');
+
+        foreach ($hasUploadsModels as $model => $case) {
+            $this->assertTrue(
+                $case->hasPrivateScope(),
+                "Model $model uses HasUploads but FileStorage::{$case->name}->hasPrivateScope() returned false.",
+            );
+            $this->assertIsString($case->privateStorageKey());
         }
     }
 
