@@ -38,13 +38,17 @@ class EditReportTemplateTest extends TestCase implements TestsPermissionsRequire
             ->assertRedirectToRoute('report-templates.show', $reportTemplate->id);
     }
 
-    public function test_can_load_edit_report_template_page()
+    public function test_edit_route_redirects_to_show_which_renders_for_owner()
     {
         $user = User::factory()->canViewReports()->create();
         $reportTemplate = ReportTemplate::factory()->for($user, 'creator')->create();
 
         $this->actingAs($user)
             ->get(route('report-templates.edit', $reportTemplate))
+            ->assertRedirectToRoute('report-templates.show', $reportTemplate->id);
+
+        $this->actingAs($user)
+            ->get(route('report-templates.show', $reportTemplate))
             ->assertOk();
     }
 }
