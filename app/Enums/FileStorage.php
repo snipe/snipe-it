@@ -98,8 +98,10 @@ enum FileStorage: string
             self::Assets,
             self::Audits,
             self::Backups,
+            self::Companies,
             self::Components,
             self::Consumables,
+            self::Departments,
             self::EulaPdfs,
             self::Imports,
             self::Licenses,
@@ -107,6 +109,7 @@ enum FileStorage: string
             self::Maintenances,
             self::Models,
             self::Signatures,
+            self::Suppliers,
             self::Users => true,
             default => false,
         };
