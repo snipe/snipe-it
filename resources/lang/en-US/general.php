@@ -94,6 +94,7 @@ return [
     'calendar_event_asset_warranty_expiration' => 'Warranty expires',
     'calendar_event_license_expiration' => 'License expires',
     'calendar_event_license_termination' => 'License terminates',
+    'calendar_event_user_start_date' => 'Employment start',
     'calendar_event_user_end_date' => 'Employment end',
     'calendar_event_request_reservation' => 'Reservation',
     'calendar_truncation_banner' => 'Showing :returned of :total events in this range. Narrow the date range or use the filter buttons to see the rest.',

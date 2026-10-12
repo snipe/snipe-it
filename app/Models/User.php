@@ -683,6 +683,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return [
             [
+                'field' => 'start_date',
+                'event_type' => 'user.start_date',
+                'all_day' => true,
+            ],
+            [
                 'field' => 'end_date',
                 'event_type' => 'user.end_date',
                 'all_day' => true,
