@@ -109,7 +109,7 @@ class GroupsController extends Controller
 
         $selected_array = Helper::selectedPermissionsArray($permissions, $groupPermissions);
 
-        // Only the ids are needed. The checkbox-list component seeds its
+        // Only the ids are needed. The select2-checkboxes-scrollbox component seeds its
         // hidden CSV from this and loads the row text/image from the
         // selectlist endpoint as the user scrolls.
         $associated_user_ids = $group->users()->where('show_in_list', 1)->pluck('users.id')->all();

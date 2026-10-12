@@ -203,7 +203,7 @@ class UsersController extends Controller
     /**
      * Normalize the groups form input to an int array of group ids.
      * The legacy user form posted groups[] as separate inputs (one per
-     * selected group). The scrolling checkbox-list on the new form
+     * selected group). The scrolling select2-checkboxes-scrollbox on the new form
      * posts a single hidden CSV, matching the groups-edit pattern.
      * Accept both shapes so other callers (API, cloning, legacy
      * clients) keep working.
