@@ -328,14 +328,49 @@
                               <x-form.row :label="trans('general.company')" name="company_ids" id="company_ids">
                                   <x-slot:input>
                                       @if ((Gate::allows('canEditAuthFields', $user)) && (\App\Models\Company::canManageUsersCompanies()))
-                                          <select class="js-data-ajax" data-endpoint="companies" data-placeholder="{{ trans('general.select_company') }}" name="company_ids[]" style="width: 100%" multiple='multiple'>
+                                          {{-- Prototype swap: select2-checkboxes skin for select2.
+                                               Behavior lives in the .js-select2-checkboxes init in
+                                               snipeit.js. data-select-all=1 lights up the "Select all /
+                                               Clear" row at the top of the dropdown; the companies
+                                               selectlist endpoint already opted in via
+                                               Helper::paginateCollectionOrAll. --}}
+                                          <select
+                                              class="js-select2-checkboxes"
+                                              data-endpoint="companies"
+                                              data-placeholder="{{ trans('general.select_company') }}"
+                                              data-count-label="{{ trans('general.checkbox_multiselect_count') }}"
+                                              data-select-all="1"
+                                              data-select-all-label="{{ trans('general.select_all') }}"
+                                              data-clear-all-label="{{ trans('admin/hardware/general.clear') }}"
+                                              name="company_ids[]"
+                                              style="width: 100%"
+                                              multiple='multiple'
+                                          >
                                               {{-- selected reads from the company_user pivot only. The
                                                    legacy users.company_id scalar can lag behind (LDAP
                                                    sync, pre-observer rows, etc.) so we never fall
-                                                   back to it. --}}
-                                              @foreach (old('company_ids', $user->companies->pluck('id')->toArray()) as $selectedCompanyId)
-                                                  <option value="{{ $selectedCompanyId }}" selected="selected" role="option" aria-selected="true">
-                                                      {{ \App\Models\Company::find($selectedCompanyId)?->name }}
+                                                   back to it.
+
+                                                   Pre-fetch the selected companies in one query (name +
+                                                   tag_color) and emit data-tag-color on each option so
+                                                   the chip-strip renders colored swatches on initial
+                                                   page load without waiting for the user to interact. --}}
+                                              @php
+                                                  $selectedCompanyIds = old('company_ids', $user->companies->pluck('id')->toArray());
+                                                  $selectedCompanies = \App\Models\Company::whereIn('id', $selectedCompanyIds)
+                                                      ->get(['id', 'name', 'tag_color'])
+                                                      ->keyBy('id');
+                                              @endphp
+                                              @foreach ($selectedCompanyIds as $selectedCompanyId)
+                                                  @php $company = $selectedCompanies->get($selectedCompanyId); @endphp
+                                                  <option
+                                                      value="{{ $selectedCompanyId }}"
+                                                      selected="selected"
+                                                      role="option"
+                                                      aria-selected="true"
+                                                      @if ($company?->tag_color) data-tag-color="{{ $company->tag_color }}" @endif
+                                                  >
+                                                      {{ $company?->name }}
                                                   </option>
                                               @endforeach
                                           </select>
@@ -578,42 +613,47 @@
                               @endif
 
                               <!-- Groups -->
-                              <x-form.row :label="trans('general.groups')" name="groups">
-                                  <x-slot:input>
-                                      @if ($groups->count())
-                                          @if ((!Gate::allows('editableOnDemo') || (!Auth::user()->isSuperUser())))
+                              @if ($groups->count())
+                                  @if ((!Gate::allows('editableOnDemo') || (!Auth::user()->isSuperUser())))
+                                      <x-form.row :label="trans('general.groups')" name="groups">
+                                          <x-slot:input>
                                               @if (count($userGroups->keys()) > 0)
-                                                  <ul>
-                                                      @foreach ($groups as $id => $group)
-                                                          {!! ($userGroups->keys()->contains($id) ? '<li>'.e($group).'</li>' : '') !!}
+                                                  {{-- Read-only chip strip. Same label-light pill
+                                                       shape as the editable chips, no × button so
+                                                       the user can see group memberships without
+                                                       being able to change them. --}}
+                                                  <div class="js-user-groups-readonly">
+                                                      @foreach ($userGroups as $id => $groupName)
+                                                          <span class="label label-light">{{ $groupName }}</span>
                                                       @endforeach
-                                                  </ul>
+                                                  </div>
                                               @endif
-                                                  <x-form.help name="groups-locked" icon="locked">
+                                              <x-form.help name="groups-locked" icon="locked">
                                                   {{ trans('admin/users/general.group_memberships_helpblock') }}
-                                                  </x-form.help>
-                                          @else
-                                              <select
-                                                  name="groups[]"
-                                                  size="{{ ($groups->count() > 25) ? '25' : '10' }}"
-                                                  aria-label="groups[]"
-                                                  id="groups[]"
-                                                  multiple="multiple"
-                                                  class="form-control">
-                                                  @foreach ($groups as $id => $group)
-                                                      <option value="{{ $id }}"
-                                                          {{ ($userGroups->keys()->contains($id) ? ' selected' : '') }}>
-                                                          {{ $group }}
-                                                      </option>
-                                                  @endforeach
-                                              </select>
-                                              <x-form.help name="groups-notes">{{ trans('admin/users/table.groupnotes') }}</x-form.help>
-                                          @endif
-                                      @else
+                                              </x-form.help>
+                                          </x-slot:input>
+                                      </x-form.row>
+                                  @else
+                                      {{-- Freestanding select2-checkboxes-scrollbox rather than
+                                           nested inside x-form.row: the component
+                                           renders its own col-md-3 label + col-md-8
+                                           input grid, which x-form.row's col-md-7
+                                           wrapper would collide with. --}}
+                                      <x-input.select2-checkboxes-scrollbox
+                                          name="groups"
+                                          :label="trans('general.groups')"
+                                          endpoint="groups"
+                                          :selected="$userGroups->keys()->all()"
+                                          :height="300"
+                                      />
+                                  @endif
+                              @else
+                                  <x-form.row :label="trans('general.groups')" name="groups">
+                                      <x-slot:input>
                                           <p>{{ trans('admin/users/table.nogroup') }} <code>{{ trans('admin/settings/general.admin_settings') }} <i class="fa fa-cogs"></i> > {{ trans('general.groups') }} <i class="fas fa-user-friends"></i></code> </p>
-                                      @endif
-                                  </x-slot:input>
-                              </x-form.row>
+                                      </x-slot:input>
+                                  </x-form.row>
+                              @endif
                           </div>
 
                     </fieldset>

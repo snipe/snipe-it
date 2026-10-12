@@ -296,7 +296,7 @@
                 var colMap = {};
                 this.columns.forEach(c => colMap[c.field] = c.title);
                 var op = this.getAdvancedSearchOperator();
-                var html = '<span class="label label-warning" style="font-size: 11px; margin-right:6px;display:inline-block;margin-bottom:6px;">' +
+                var html = '<span class="label label-warning" style="font-size: 12px; margin-right:6px;display:inline-block;margin-bottom:6px; padding: 4px;">' +
                     advancedSearchOperatorLabel + ': ' + (op === 'or' ? advancedSearchOrText : advancedSearchAndText) + '</span>';
 
                 Object.keys(filters).forEach(f => {
@@ -310,10 +310,10 @@
                     // jQuery.html() would then parse and execute).
                     var safeLabel = escapeAdvancedSearchValue(colMap[f] || f);
                     var safeField = escapeAdvancedSearchAttr(f);
-                    html += '<span class="label label-primary" style="font-size: 11px; margin-right:6px;display:inline-block;margin-bottom:6px;"><b>' +
+                    html += '<span class="label label-primary" style="font-size: 12px; margin-right:6px;display:inline-block;margin-bottom:6px; padding: 4px;"><b>' +
                         safeLabel + ':</b> ' + escapeAdvancedSearchValue(filters[f]) +
                         ' <a href="javascript:void(0)" class="snipe-advanced-search-tag-remove" data-field="' + safeField +
-                        '" style="color:#fff;margin-left:6px;text-decoration:none;">&times;</a></span>';
+                        '" style="font-size: 12px; margin-right:6px;display:inline-block;color:#fff;text-decoration:none;">&times;</a></span>';
                 });
 
                 // "Clear all" pill: same shortcut as opening the modal and hitting
@@ -323,7 +323,7 @@
                 html += '<a href="javascript:void(0)" class="label label-danger snipe-advanced-search-tags-clear-all"' +
                     ' title="' + safeClearAllLabel + '"' +
                     ' aria-label="' + safeClearAllLabel + '"' +
-                    ' style="font-size: 11px; margin-right:6px; display:inline-block; margin-bottom:6px; color:#fff; text-decoration:none; cursor:pointer;">' +
+                    ' style="font-size: 12px; margin-right:6px; display:inline-block; margin-bottom:6px; color:#fff; text-decoration:none; cursor:pointer; padding: 4px;">' +
                     '<i class="fas fa-trash" aria-hidden="true" style="margin-right:4px;"></i>' + safeClearAllLabel +
                     '</a>';
 
