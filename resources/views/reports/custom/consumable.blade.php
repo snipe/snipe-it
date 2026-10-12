@@ -173,45 +173,40 @@
 
                             <br>
 
-                            <x-input.company-select
+                            <x-input.select2-checkboxes
+                                name="by_company_id"
                                 :label="trans('general.company')"
-                                name="by_company_id[]"
-                                multiple
-                                hideNewButton
-                                :selected="collect($template->selectValues('by_company_id', \App\Models\Company::class))->all()"
+                                endpoint="companies"
+                                :selected="$template->selectValues('by_company_id', \App\Models\Company::class)"
+                                :modelClass="\App\Models\Company::class"
                             />
-
-                            <x-input.category-select
+                            <x-input.select2-checkboxes
+                                name="by_category_id"
                                 :label="trans('general.category')"
-                                name="by_category_id[]"
-                                multiple
-                                hideNewButton
-                                categoryType="consumable"
-                                :selected="collect($template->selectValues('by_category_id', \App\Models\Category::class))->all()"
+                                endpoint="categories/consumable"
+                                :selected="$template->selectValues('by_category_id', \App\Models\Category::class)"
+                                :modelClass="\App\Models\Category::class"
                             />
-
-                            <x-input.manufacturer-select
+                            <x-input.select2-checkboxes
+                                name="by_manufacturer_id"
                                 :label="trans('general.manufacturer')"
-                                name="by_manufacturer_id[]"
-                                multiple
-                                hideNewButton
-                                :selected="collect($template->selectValues('by_manufacturer_id', \App\Models\Manufacturer::class))->all()"
+                                endpoint="manufacturers"
+                                :selected="$template->selectValues('by_manufacturer_id', \App\Models\Manufacturer::class)"
+                                :modelClass="\App\Models\Manufacturer::class"
                             />
-
-                            <x-input.supplier-select
+                            <x-input.select2-checkboxes
+                                name="by_supplier_id"
                                 :label="trans('general.supplier')"
-                                name="by_supplier_id[]"
-                                multiple
-                                hideNewButton
-                                :selected="collect($template->selectValues('by_supplier_id', \App\Models\Supplier::class))->all()"
+                                endpoint="suppliers"
+                                :selected="$template->selectValues('by_supplier_id', \App\Models\Supplier::class)"
+                                :modelClass="\App\Models\Supplier::class"
                             />
-
-                            <x-input.location-select
+                            <x-input.select2-checkboxes
+                                name="by_location_id"
                                 :label="trans('general.location')"
-                                name="by_location_id[]"
-                                multiple
-                                hideNewButton
-                                :selected="collect($template->selectValues('by_location_id', \App\Models\Location::class))->all()"
+                                endpoint="locations"
+                                :selected="$template->selectValues('by_location_id', \App\Models\Location::class)"
+                                :modelClass="\App\Models\Location::class"
                             />
 
                             <!-- Name -->

@@ -179,47 +179,41 @@
 
                             <br>
 
-                            @include ('partials.forms.edit.company-select', [
-                                    'translated_name' => trans('general.company'),
-                                    'fieldname' =>
-                                    'by_company_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'selected' => $template->selectValues('by_company_id', \App\Models\Company::class),
-                            ])
-
-                            @include ('partials.forms.edit.category-select', [
-                                    'translated_name' => trans('general.category'),
-                                    'fieldname' => 'by_category_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'category_type' => 'component',
-                                    'selected' => $template->selectValues('by_category_id', \App\Models\Category::class),
-                            ])
-
-                            @include ('partials.forms.edit.manufacturer-select', [
-                                    'translated_name' => trans('general.manufacturer'),
-                                    'fieldname' => 'by_manufacturer_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'selected' => $template->selectValues('by_manufacturer_id', \App\Models\Manufacturer::class),
-                            ])
-
-                            @include ('partials.forms.edit.supplier-select', [
-                                    'translated_name' => trans('general.supplier'),
-                                    'fieldname' => 'by_supplier_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'selected' => $template->selectValues('by_supplier_id', \App\Models\Supplier::class),
-                            ])
-
-                            @include ('partials.forms.edit.location-select', [
-                                    'translated_name' => trans('general.location'),
-                                    'fieldname' => 'by_location_id[]',
-                                    'multiple' => 'true',
-                                    'hide_new' => 'true',
-                                    'selected' => $template->selectValues('by_location_id', \App\Models\Location::class),
-                            ])
+                            <x-input.select2-checkboxes
+                                name="by_company_id"
+                                :label="trans('general.company')"
+                                endpoint="companies"
+                                :selected="$template->selectValues('by_company_id', \App\Models\Company::class)"
+                                :modelClass="\App\Models\Company::class"
+                            />
+                            <x-input.select2-checkboxes
+                                name="by_category_id"
+                                :label="trans('general.category')"
+                                endpoint="categories/component"
+                                :selected="$template->selectValues('by_category_id', \App\Models\Category::class)"
+                                :modelClass="\App\Models\Category::class"
+                            />
+                            <x-input.select2-checkboxes
+                                name="by_manufacturer_id"
+                                :label="trans('general.manufacturer')"
+                                endpoint="manufacturers"
+                                :selected="$template->selectValues('by_manufacturer_id', \App\Models\Manufacturer::class)"
+                                :modelClass="\App\Models\Manufacturer::class"
+                            />
+                            <x-input.select2-checkboxes
+                                name="by_supplier_id"
+                                :label="trans('general.supplier')"
+                                endpoint="suppliers"
+                                :selected="$template->selectValues('by_supplier_id', \App\Models\Supplier::class)"
+                                :modelClass="\App\Models\Supplier::class"
+                            />
+                            <x-input.select2-checkboxes
+                                name="by_location_id"
+                                :label="trans('general.location')"
+                                endpoint="locations"
+                                :selected="$template->selectValues('by_location_id', \App\Models\Location::class)"
+                                :modelClass="\App\Models\Location::class"
+                            />
 
                             <!-- Name -->
                             <div class="form-group">
