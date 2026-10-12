@@ -3,6 +3,7 @@
 namespace Tests\Unit\Enums;
 
 use App\Enums\FileStorage;
+use App\Http\Controllers\Controller;
 use Tests\TestCase;
 
 class FileStorageTest extends TestCase
@@ -160,6 +161,20 @@ class FileStorageTest extends TestCase
 
         // Models is the public case for the AssetModel model's image.
         $this->assertSame(\App\Models\AssetModel::class, FileStorage::Models->modelClass());
+    }
+
+    public function test_every_mapped_storage_path_resolves_to_a_private_key(): void
+    {
+        // Regression test for #19808. Suppliers / Companies / Departments
+        // appear in Controller::getMapStoragePath() for file attachments
+        // but were missing from FileStorage::hasPrivateScope(), so
+        // privateStorageKey() returned null and UploadedFilesController
+        // crashed with a TypeError when uploading. Pin the invariant
+        // that every entry in the controller map produces a usable path.
+        foreach (Controller::getMapStoragePath() as $resource => $path) {
+            $this->assertIsString($path, "No private storage key for '$resource'. Add the matching case to FileStorage::hasPrivateScope().");
+            $this->assertNotSame('', $path);
+        }
     }
 
     public function test_model_class_is_null_for_non_model_owned_cases(): void
