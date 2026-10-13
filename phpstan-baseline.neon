@@ -3711,7 +3711,7 @@ parameters:
 		-
 			message: '#^Loose comparison using \!\= between int and '''' will always evaluate to true\.$#'
 			identifier: notEqual.alwaysTrue
-			count: 1
+			count: 2
 			path: app/Http/Transformers/ComponentsTransformer.php
 
 		-

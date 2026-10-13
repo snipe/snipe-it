@@ -169,6 +169,111 @@ class SyncCompaniesPreservingInvisibleTest extends TestCase
     }
 
     #[Test]
+    public function editor_submitting_child_company_of_their_own_parent_lands_in_the_child_not_empty(): void
+    {
+        // Regression for GHSA-35hv-26vj-9445. Before the fix, the
+        // editor's "visible" set was computed from direct pivot rows
+        // only, while every upstream gate (parent_within_scope, the
+        // SaveUserRequest floater gate, getIdsForCurrentUser) accepts
+        // child-company ids as reachable. A scoped editor in [Parent]
+        // could submit [Child], pass all gates, then this helper would
+        // filter Child out as "invisible" and the sync would leave the
+        // target with no company pivot at all. Under
+        // null_company_is_floater that promoted the account to
+        // system-wide floater (cross-tenant read + takeover). The fix
+        // expands the editor-visible set to direct + their children,
+        // matching the gates.
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $parent = Company::factory()->create();
+        $child = Company::factory()->create(['parent_id' => $parent->id]);
+
+        $editor = User::factory()->create();
+        $editor->companies()->sync([$parent->id]);
+
+        $target = User::factory()->create();
+        $target->companies()->sync([$parent->id]);
+
+        $target->syncCompaniesPreservingInvisibleTo($editor, [$child->id]);
+
+        $pivotRows = \DB::table('company_user')
+            ->where('user_id', $target->id)
+            ->pluck('company_id')
+            ->map(fn ($id) => (int) $id)
+            ->all();
+
+        $this->assertSame(
+            [$child->id],
+            $pivotRows,
+            'A scoped editor assigning a target to a child of their own parent must leave the target in that child, not with an empty pivot (which would promote the account to a cross-tenant floater under null_company_is_floater).'
+        );
+    }
+
+    #[Test]
+    public function editor_moving_target_back_from_child_to_parent_lands_in_the_parent_not_both(): void
+    {
+        // Mirror of the attack test on the legitimate path. Editor is
+        // in [Parent], target is in [Child], editor submits [Parent].
+        // Expected: pivot = [Parent]. The invisible-preserved set must
+        // NOT re-insert Child, because the editor can see Child
+        // (direct + children) and the submission dropped it.
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $parent = Company::factory()->create();
+        $child = Company::factory()->create(['parent_id' => $parent->id]);
+
+        $editor = User::factory()->create();
+        $editor->companies()->sync([$parent->id]);
+
+        $target = User::factory()->create();
+        $target->companies()->sync([$child->id]);
+
+        $target->syncCompaniesPreservingInvisibleTo($editor, [$parent->id]);
+
+        $pivotRows = \DB::table('company_user')
+            ->where('user_id', $target->id)
+            ->pluck('company_id')
+            ->map(fn ($id) => (int) $id)
+            ->all();
+
+        $this->assertSame([$parent->id], $pivotRows);
+    }
+
+    #[Test]
+    public function invisible_memberships_outside_parent_subtree_are_still_preserved(): void
+    {
+        // Belt-and-suspenders for #19569. The parent + children
+        // expansion must NOT accidentally re-include companies that
+        // are outside the editor's parent subtree. Editor is in
+        // [Parent], target is in [Child, OutsideCompany], editor
+        // submits [Parent]. Expected: final pivot = [Parent,
+        // OutsideCompany]. Child is dropped because the editor can see
+        // it and left it out of the submission. OutsideCompany is
+        // preserved because the editor cannot see it.
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $parent = Company::factory()->create();
+        $child = Company::factory()->create(['parent_id' => $parent->id]);
+        $outside = Company::factory()->create();
+
+        $editor = User::factory()->create();
+        $editor->companies()->sync([$parent->id]);
+
+        $target = User::factory()->create();
+        $target->companies()->sync([$child->id, $outside->id]);
+
+        $target->syncCompaniesPreservingInvisibleTo($editor, [$parent->id]);
+
+        $pivotRows = \DB::table('company_user')
+            ->where('user_id', $target->id)
+            ->pluck('company_id')
+            ->map(fn ($id) => (int) $id)
+            ->all();
+
+        $this->assertEqualsCanonicalizing([$parent->id, $outside->id], $pivotRows);
+    }
+
+    #[Test]
     public function empty_submission_still_preserves_invisible_memberships(): void
     {
         // Editor is in A, target in A + B. Editor unchecks A and
