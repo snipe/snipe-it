@@ -110,6 +110,8 @@ return [
     'default_category_help' => 'When a device from this adapter reports a hardware model that doesn\'t exist in Snipe-IT yet, a new asset model is created and placed in this category. Leave blank to use the "Discovered Hardware" category.',
     'default_status' => 'Default Status Label',
     'default_status_help' => 'When a device from this adapter is created in Snipe-IT for the first time, its status label is set to this value. Leave blank to use the first deployable status label (or the first status label if none are marked deployable).',
+    'default_fieldset' => 'Model Fieldset',
+    'default_fieldset_help' => 'When this adapter has to create a new asset model (because the vendor reported a hardware model Snipe-IT doesn\'t know about), the new model is linked to this fieldset so your custom fields show on devices the adapter discovers. Leave blank to leave the fieldset unset on new models.',
     'user_match_strategy' => 'Assign to Snipe-IT user',
     'user_match_strategy_help' => 'When a match is found, the asset checks out to that user. Missing or unmatched users are skipped and written to <code>storage/logs/sync-adapters.log</code> as warnings. Existing assignments are never cleared by a payload that omits the user field.',
     'user_match_none' => 'Do not assign users',
