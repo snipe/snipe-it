@@ -22,7 +22,7 @@
     <div class="col-md-1 col-sm-1 text-left">
         @can('create', \App\Models\Supplier::class)
             @if ((!isset($hide_new)) || ($hide_new!='true'))
-                <a href='{{ route('modal.show', 'supplier') }}' data-toggle="modal"  data-target="#createModal" data-select='supplier_select' class="btn btn-sm btn-theme">{{ trans('button.new') }}</a>
+                <x-button.modal-add type="supplier" target="supplier_select"/>
             @endif
         @endcan
     </div>

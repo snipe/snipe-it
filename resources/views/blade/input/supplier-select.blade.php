@@ -55,7 +55,7 @@
     @unless($hideNewButton)
         <div class="col-md-1 col-sm-1 text-left">
             @can('create', Supplier::class)
-                <a href="{{ route('modal.show', 'supplier') }}" data-toggle="modal" data-target="#createModal" data-select="{{ $selectId }}" class="btn btn-sm btn-theme">{{ trans('button.new') }}</a>
+                <x-button.modal-add type="supplier" :target="$selectId"/>
             @endcan
         </div>
     @endunless

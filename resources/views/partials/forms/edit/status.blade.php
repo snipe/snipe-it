@@ -17,7 +17,7 @@
     <div class="col-md-2 col-sm-2 text-left">
 
         @can('create', \App\Models\Statuslabel::class)
-            <a href='{{ route('modal.show', 'statuslabel') }}' data-toggle="modal"  data-target="#createModal" data-select='status_select_id' class="btn btn-sm btn-theme">{{ trans('button.new') }}</a>
+            <x-button.modal-add type="statuslabel" target="status_select_id"/>
         @endcan
 
         <span class="status_spinner" style="padding-left: 10px; color: green; display:none; width: 30px;"><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> </span>
