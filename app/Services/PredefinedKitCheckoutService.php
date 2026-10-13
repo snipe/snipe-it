@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Events\CheckoutableCheckedOut;
 use App\Models\Accessory;
+use App\Models\AccessoryCheckout;
 use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
@@ -188,7 +189,13 @@ class PredefinedKitCheckoutService
 
     protected function getAccessoriesToAdd($kit, $user, &$errors)
     {
-        $accessories = $kit->accessories()->with('users')->get();
+        // Accessory::users() is belongsToMany(AccessoryCheckout, 'accessories_checkout'),
+        // so the pivot and the destination model's table are both
+        // accessories_checkout. Eager-loading it joins the same table
+        // twice without an alias and MariaDB rejects with error 1066.
+        // Nothing downstream of this method actually reads the users
+        // relation anyway (for now), so we don't need to eager-load them.
+        $accessories = $kit->accessories()->get();
         $eligible = [];
         foreach ($accessories as $accessory) {
             // FMCS tenant isolation, see comment in getAssetsToAdd.
@@ -289,7 +296,7 @@ class PredefinedKitCheckoutService
                     }
                     $locked->users()->attach($locked->id, [
                         'consumable_id' => $locked->id,
-                        'user_id' => $admin->id,
+                        'created_by' => $admin->id,
                         'assigned_to' => $user->id,
                     ]);
                     event(new CheckoutableCheckedOut($locked, $user, $admin, $note));
@@ -307,11 +314,19 @@ class PredefinedKitCheckoutService
 
                         continue;
                     }
-                    $locked->users()->attach($locked->id, [
+                    // Accessory::users() is belongsToMany(AccessoryCheckout,
+                    // 'accessories_checkout'), so attach() would try to
+                    // insert an accessory_checkout_id column that does
+                    // not exist on the pivot. Write the checkout row
+                    // directly, matching the non-kit accessory checkout
+                    // path in AccessoriesController::checkout.
+                    $checkout = new AccessoryCheckout([
                         'accessory_id' => $locked->id,
-                        'user_id' => $admin->id,
                         'assigned_to' => $user->id,
+                        'assigned_type' => User::class,
                     ]);
+                    $checkout->created_by = $admin->id;
+                    $checkout->save();
                     event(new CheckoutableCheckedOut($locked, $user, $admin, $note));
                 }
 
