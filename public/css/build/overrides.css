@@ -3668,6 +3668,10 @@ dl.table-display {
   opacity: 0.55;
   cursor: not-allowed;
 }
+mark {
+  background-color: #fcf8e3;
+  padding: 0 !important;
+}
 
 
 /*# sourceMappingURL=overrides.css.map*/

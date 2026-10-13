@@ -25294,6 +25294,10 @@ dl.table-display {
   opacity: 0.55;
   cursor: not-allowed;
 }
+mark {
+  background-color: #fcf8e3;
+  padding: 0 !important;
+}
 
 
 /*# sourceMappingURL=app.css.map*/
@@ -29448,6 +29452,10 @@ dl.table-display {
 .js-select2-checkboxes-scrollbox-row-disabled {
   opacity: 0.55;
   cursor: not-allowed;
+}
+mark {
+  background-color: #fcf8e3;
+  padding: 0 !important;
 }
 
 
