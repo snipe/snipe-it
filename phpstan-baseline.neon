@@ -199,24 +199,6 @@ parameters:
 			path: app/Console/Commands/BulkDelete.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$avatar\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Console/Commands/CheckOrphanUploads.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Console/Commands/CheckOrphanUploads.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$image\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Console/Commands/CheckOrphanUploads.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>asset_tag" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 3
@@ -899,12 +881,6 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
-
-		-
-			message: '#^Static method Illuminate\\Contracts\\Filesystem\\Filesystem\:\:makeDirectory\(\) invoked with 2 parameters, 1 required\.$#'
-			identifier: arguments.count
-			count: 2
-			path: app/Http/Controllers/Account/AcceptanceController.php
 
 		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
@@ -1849,12 +1825,6 @@ parameters:
 			path: app/Http/Controllers/Api/UploadedFilesController.php
 
 		-
-			message: '#^Static method Illuminate\\Contracts\\Filesystem\\Filesystem\:\:makeDirectory\(\) invoked with 2 parameters, 1 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: app/Http/Controllers/Api/UploadedFilesController.php
-
-		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:withoutTrashed\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -2091,12 +2061,6 @@ parameters:
 		-
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
-			count: 1
-			path: app/Http/Controllers/Assets/AssetsController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Assets\\AssetsController\:\:getBarCode\(\) should return Illuminate\\Http\\Response but returns Symfony\\Component\\HttpFoundation\\StreamedResponse\.$#'
-			identifier: return.type
 			count: 1
 			path: app/Http/Controllers/Assets/AssetsController.php
 
@@ -2959,12 +2923,6 @@ parameters:
 			path: app/Http/Controllers/MaintenancesController.php
 
 		-
-			message: '#^Static method Illuminate\\Contracts\\Filesystem\\Filesystem\:\:makeDirectory\(\) invoked with 2 parameters, 1 required\.$#'
-			identifier: arguments.count
-			count: 1
-			path: app/Http/Controllers/MaintenancesController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
@@ -3187,12 +3145,6 @@ parameters:
 			path: app/Http/Controllers/SettingsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SettingsController.php
-
-		-
 			message: '#^Loose comparison using \=\= between false and ''1'' will always evaluate to false\.$#'
 			identifier: equal.alwaysFalse
 			count: 1
@@ -3367,6 +3319,12 @@ parameters:
 			path: app/Http/Controllers/SuppliersController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/SyncAdapterController.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\Import\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
@@ -3382,12 +3340,6 @@ parameters:
 			message: '#^PHPDoc tag @param references unknown parameter\: \$request$#'
 			identifier: parameter.notFound
 			count: 2
-			path: app/Http/Controllers/UploadedFilesController.php
-
-		-
-			message: '#^Static method Illuminate\\Contracts\\Filesystem\\Filesystem\:\:makeDirectory\(\) invoked with 2 parameters, 1 required\.$#'
-			identifier: arguments.count
-			count: 1
 			path: app/Http/Controllers/UploadedFilesController.php
 
 		-
@@ -9763,6 +9715,12 @@ parameters:
 			path: app/Providers/ValidationServiceProvider.php
 
 		-
+			message: '#^Access to an undefined property App\\Models\\AccessoryCheckout\:\:\$created_by\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Services/PredefinedKitCheckoutService.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\LicenseSeat\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
@@ -9771,7 +9729,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
 			identifier: method.notFound
-			count: 2
+			count: 1
 			path: app/Services/PredefinedKitCheckoutService.php
 
 		-
