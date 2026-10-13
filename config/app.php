@@ -264,12 +264,6 @@ return [
    | sitting on the same private network as Snipe-IT, which the default
    | ExternalUrl validator would otherwise reject.
    |
-   | Kept separate from the webhook knob on purpose. The SSRF threat model
-   | is different: webhook events auto-fire on each item change, while a
-   | sync adapter's base URL is only used for admin-triggered authenticated
-   | pulls. Mixing the two switches would force operators to loosen the
-   | webhook validator in order to enable an internal sync adapter.
-   |
    | Scheme restrictions (http/https only) still apply. Leave this off
    | unless you know you need it.
    |
