@@ -360,13 +360,13 @@ class LicensesController extends Controller
             // GHSA-r25g-f428-466r: reject occupied seats on explicit-id
             // checkout by default.
             if ($licenseSeat->assigned_to !== null || $licenseSeat->asset_id !== null) {
-                if (!($validated['reassign'] ?? false)) {
+                if (! ($validated['reassign'] ?? false)) {
                     $errorResponse = response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.checkout.unavailable')));
 
                     return;
                 }
 
-                if (!$licenseSeat->license->reassignable) {
+                if (! $licenseSeat->license->reassignable) {
                     $errorResponse = response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/licenses/message.checkout.unavailable')));
 
                     return;
@@ -384,7 +384,7 @@ class LicensesController extends Controller
                         ->where('checkoutable_id', $licenseSeat->id)
                         ->where('assigned_to_id', $displaced->id)
                         ->get()
-                        ->each(fn($a) => $a->delete());
+                        ->each(fn ($a) => $a->delete());
                 }
 
                 $licenseSeat->assigned_to = null;
@@ -565,6 +565,6 @@ class LicensesController extends Controller
 
         $rows = $query->orderBy($sort, $order)->skip($offset)->take($limit)->get();
 
-        return (new LicensesTransformer)->transformLicenses($rows, $total);
+        return (new LicensesTransformer)->transformRequestedLicenses($rows, $total);
     }
 }

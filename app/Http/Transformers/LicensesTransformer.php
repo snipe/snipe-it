@@ -109,4 +109,41 @@ class LicensesTransformer
     {
         return (new DatatablesTransformer)->transformDatatables($licenses);
     }
+
+    public function transformRequestedLicenses(Collection $licenses, $total)
+    {
+        $array = [];
+        foreach ($licenses as $license) {
+            $array[] = self::transformRequestedLicense($license);
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformRequestedLicense(License $license)
+    {
+        $unreassignable = $license->reassignable ? 0 : (int) ($license->unreassignable_seats_count ?? License::unReassignableCount($license));
+        $userHasOpenRequest = auth()->check() && $license->relationLoaded('requests') && $license->requests->contains(
+            fn (\App\Models\CheckoutRequest $request) => $request->user_id === auth()->id() && $request->canceled_at === null
+        );
+
+        return [
+            'id' => (int) $license->id,
+            'name' => e($license->name),
+            'category' => ($license->category) ? [
+                'id' => (int) $license->category->id,
+                'name' => e($license->category->name),
+                'tag_color' => ($license->category->tag_color) ? e($license->category->tag_color) : null,
+            ] : null,
+            'seats' => (int) $license->seats,
+            'free_seats_count' => (int) $license->free_seats_count - $unreassignable,
+            'remaining' => (int) $license->free_seats_count,
+            'requestable' => (bool) $license->requestable,
+            'assigned_to_self' => $userHasOpenRequest,
+            'available_actions' => [
+                'request' => (bool) $license->requestable && ! $userHasOpenRequest,
+                'cancel' => (bool) $license->requestable && $userHasOpenRequest,
+            ],
+        ];
+    }
 }

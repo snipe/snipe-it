@@ -114,6 +114,43 @@ class ConsumablesTransformer
         return $array;
     }
 
+    public function transformRequestedConsumables(Collection $consumables, $total)
+    {
+        $array = [];
+        foreach ($consumables as $consumable) {
+            $array[] = self::transformRequestedConsumable($consumable);
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformRequestedConsumable(Consumable $consumable)
+    {
+        $userHasOpenRequest = auth()->check() && $consumable->relationLoaded('requests') && $consumable->requests->contains(
+            fn (\App\Models\CheckoutRequest $request) => $request->user_id === auth()->id() && $request->canceled_at === null
+        );
+
+        return [
+            'id' => (int) $consumable->id,
+            'name' => e($consumable->name),
+            'image' => ($consumable->getImageUrl()) ? ($consumable->getImageUrl()) : null,
+            'model_number' => ($consumable->model_number != '') ? e($consumable->model_number) : null,
+            'location' => ($consumable->location) ? [
+                'id' => (int) $consumable->location->id,
+                'name' => e($consumable->location->name),
+                'tag_color' => $consumable->location->tag_color ? e($consumable->location->tag_color) : null,
+            ] : null,
+            'qty' => (int) $consumable->qty,
+            'remaining' => $consumable->numRemaining(),
+            'requestable' => (bool) $consumable->requestable,
+            'assigned_to_self' => $userHasOpenRequest,
+            'available_actions' => [
+                'request' => (bool) $consumable->requestable && ! $userHasOpenRequest,
+                'cancel' => (bool) $consumable->requestable && $userHasOpenRequest,
+            ],
+        ];
+    }
+
     public function transformCheckedoutConsumables(Collection $consumables_users, $total)
     {
         $array = [];

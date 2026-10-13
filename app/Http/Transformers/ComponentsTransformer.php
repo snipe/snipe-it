@@ -111,6 +111,44 @@ class ComponentsTransformer
         return $array;
     }
 
+    public function transformRequestedComponents(Collection $components, $total)
+    {
+        $array = [];
+        foreach ($components as $component) {
+            $array[] = self::transformRequestedComponent($component);
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformRequestedComponent(Component $component)
+    {
+        $userHasOpenRequest = auth()->check() && $component->relationLoaded('requests') && $component->requests->contains(
+            fn (\App\Models\CheckoutRequest $request) => $request->user_id === auth()->id() && $request->canceled_at === null
+        );
+
+        return [
+            'id' => (int) $component->id,
+            'name' => e($component->name),
+            'image' => ($component->image) ? Storage::disk('public')->url(FileStorage::Components->publicPath().e($component->image)) : null,
+            'serial' => ($component->serial) ? e($component->serial) : null,
+            'model_number' => ($component->model_number) ? e($component->model_number) : null,
+            'location' => ($component->location) ? [
+                'id' => (int) $component->location->id,
+                'name' => e($component->location->name),
+                'tag_color' => $component->location->tag_color ? e($component->location->tag_color) : null,
+            ] : null,
+            'qty' => ($component->qty != '') ? (int) $component->qty : null,
+            'remaining' => (int) $component->numRemaining(),
+            'requestable' => (bool) $component->requestable,
+            'assigned_to_self' => $userHasOpenRequest,
+            'available_actions' => [
+                'request' => (bool) $component->requestable && ! $userHasOpenRequest,
+                'cancel' => (bool) $component->requestable && $userHasOpenRequest,
+            ],
+        ];
+    }
+
     public function transformCheckedoutComponents(Collection $components_assets, $total)
     {
         $array = [];
