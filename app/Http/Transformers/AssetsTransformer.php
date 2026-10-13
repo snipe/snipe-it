@@ -51,12 +51,14 @@ class AssetsTransformer
                 'name' => e($asset->status->name),
                 'status_type' => e($asset->status->getStatuslabelType()),
                 'status_meta' => e($asset->present()->statusMeta),
+                'tag_color' => ($asset->status->color) ? e($asset->status->color) : null,
             ] : null, // <-- legacy - will be removed
             'status' => ($asset->status) ? [
                 'id' => (int) $asset->status->id,
                 'name' => e($asset->status->name),
                 'status_type' => e($asset->status->getStatuslabelType()),
                 'status_meta' => e($asset->present()->statusMeta),
+                'tag_color' => ($asset->status->color) ? e($asset->status->color) : null,
             ] : null,
             'category' => (($asset->model) && ($asset->model->category)) ? [
                 'id' => (int) $asset->model->category->id,

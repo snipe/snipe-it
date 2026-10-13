@@ -160,6 +160,47 @@ class AssetTest extends TestCase
         $this->assertEquals(Setting::getSettings()->next_auto_tag_base, $matches[0] + 1, "Next auto increment number should be the last normally-saved one plus one, but isn't");
     }
 
+    public function test_concurrent_asset_create_does_not_regress_next_auto_tag_base()
+    {
+        // Regression test for issue #19744. Two parallel asset-create
+        // requests both read next_auto_tag_base, then both try to write
+        // their own catch-up value. If the second writer naively saves,
+        // it clobbers the first writer's higher value. The fix (and
+        // this test) uses a conditional UPDATE that leaves the higher
+        // value alone.
+        $this->settings->enableAutoIncrement();
+
+        // Prime the in-process Setting cache so the observer later reads
+        // this stale object instead of refetching from the DB.
+        $settings = Setting::getSettings();
+        $staleBase = $settings->next_auto_tag_base;
+
+        // Simulate a concurrent writer that already won the race and
+        // bumped next_auto_tag_base past our stale read. Direct DB
+        // update bypasses the Setting-save cache invalidation, which
+        // is exactly what a sibling PHP process on the same DB would
+        // do from this process's point of view.
+        $winnerBase = $staleBase + 500;
+        DB::table('settings')->where('id', $settings->id)->update([
+            'next_auto_tag_base' => $winnerBase,
+        ]);
+
+        // Create an asset at the stale value. The observer will see
+        // the cached $settings (which still thinks the base is
+        // $staleBase) and try to catch next_auto_tag_base up to
+        // $staleBase + 1.
+        $asset = Asset::factory()->create([
+            'asset_tag' => 'ABCD'.$staleBase,
+        ]);
+        $this->assertModelExists($asset);
+
+        // The DB value must still be the higher value from the
+        // simulated concurrent writer, not clobbered down to our
+        // smaller catch-up.
+        $actual = DB::table('settings')->where('id', $settings->id)->value('next_auto_tag_base');
+        $this->assertEquals($winnerBase, $actual, 'next_auto_tag_base was regressed by a stale catch-up write');
+    }
+
     public function test_auto_increment_almost_big()
     {
         // TODO: this looks pretty close to the one above, could we maybe squish them together?
