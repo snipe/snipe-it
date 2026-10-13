@@ -1426,6 +1426,82 @@ $(function () {
     });
 
     /*
+     * Inline refresh for sync-adapter remote-sourced selects.
+     *
+     * A select field whose schema declares refresh_route_name +
+     * depends_on gets a .js-sync-adapter-refresh-select button
+     * next to it. The admin fills the dependent fields (URL + API key
+     * for UniFi, etc.), clicks the button, and the vendor's list of
+     * valid values populates the select without a page save/reload.
+     * Lets a brand-new adapter discover its tenant / site / workspace
+     * before anything is persisted.
+     *
+     * Button attributes:
+     *   data-refresh-endpoint — POST URL that returns JSON
+     *   data-target-field     — name attribute of the select to repopulate
+     *   data-depends-on       — JSON {payloadKey: siblingFieldName} map
+     *   data-response-key     — JSON key under which the server returns
+     *                           the array of {id, label} entries
+     */
+    document.querySelectorAll('.js-sync-adapter-refresh-select').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            var endpoint = btn.getAttribute('data-refresh-endpoint');
+            var targetField = btn.getAttribute('data-target-field');
+            var responseKey = btn.getAttribute('data-response-key') || 'items';
+            var dependsOn = {};
+            try {
+                dependsOn = JSON.parse(btn.getAttribute('data-depends-on') || '{}');
+            } catch (err) {
+                dependsOn = {};
+            }
+
+            var payload = {};
+            Object.keys(dependsOn).forEach(function (payloadKey) {
+                var siblingName = dependsOn[payloadKey];
+                var $el = $('[name="' + siblingName + '"]');
+                if ($el.length) {
+                    payload[payloadKey] = $el.val();
+                }
+            });
+
+            var $icon = $(btn).find('i');
+            var originalClass = $icon.attr('class');
+            $icon.attr('class', 'fa-solid fa-spinner fa-spin');
+            btn.disabled = true;
+
+            $.ajax({
+                url: endpoint,
+                method: 'POST',
+                data: payload,
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            }).done(function (response) {
+                var $select = $('[name="' + targetField + '"]');
+                var currentVal = $select.val();
+                var items = (response && response[responseKey]) || [];
+                $select.find('option').remove();
+                items.forEach(function (item) {
+                    $select.append(new Option(item.label, item.id));
+                });
+                if (currentVal && $select.find('option[value="' + currentVal + '"]').length) {
+                    $select.val(currentVal);
+                }
+                $select.trigger('change');
+            }).fail(function (xhr) {
+                var msg = (xhr && xhr.responseJSON && xhr.responseJSON.error) || 'Refresh failed';
+                window.alert(msg);
+            }).always(function () {
+                $icon.attr('class', originalClass);
+                btn.disabled = false;
+            });
+        });
+    });
+
+    /*
      * Pull Now / Push Now submit spinner + double-click guard.
      *
      * Any <form class="js-sync-action-form"> gets a submit handler

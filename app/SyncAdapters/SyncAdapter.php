@@ -582,7 +582,7 @@ abstract class SyncAdapter
         }
 
         if ($this->usesConfigurableUrl()) {
-            $rules[$slug.'_url'] = ['required', new ExternalUrl];
+            $rules[$slug.'_url'] = ['required', new ExternalUrl('app.sync_adapter_allow_internal_targets')];
         }
 
         foreach ($this->settingsSchema() as $field) {
@@ -1783,6 +1783,66 @@ abstract class SyncAdapter
     public function cachedGroups(): array
     {
         $stored = SyncAdapterConfig::get($this->instance->id, 'cached_groups');
+        if ($stored === null || $stored === '') {
+            return [];
+        }
+        $decoded = json_decode($stored, true);
+
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    /**
+     * Whether the adapter's vendor exposes a tenant / site / workspace
+     * concept that scopes the pull to one chosen entry. UniFi
+     * Network's Site, Jamf School's Location, Microsoft Entra Tenant,
+     * etc. Different from supportsGroupScoping(): sites choose ONE
+     * entry to pull from, groups map many vendor groups to Snipe-IT
+     * companies. Adapters that opt in render Site ID as a select
+     * backed by cachedSites() and implement fetchSites().
+     */
+    public function supportsSiteScoping(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Vendor's own terminology for the site concept. Mirrors
+     * vendorGroupLabel() so admins see wording they recognize in the
+     * refresh button and empty-state copy.
+     */
+    public function vendorSiteLabel(): string
+    {
+        return 'Site';
+    }
+
+    /**
+     * Live-fetch the current list of sites from the vendor. Returns
+     * an array of ['id' => '...', 'label' => '...']. Called from the
+     * settings page's "refresh sites" button. $overrides lets the
+     * caller supply the base URL and credentials from the pending
+     * form so a brand-new adapter can discover its sites before the
+     * admin saves anything. Keys match the schema field keys the
+     * adapter declares (e.g. 'url', 'api_key'). Default throws so
+     * adapters that opt into supportsSiteScoping have to implement it.
+     *
+     * @param  array<string, string|null>  $overrides
+     * @return array<int, array{id: string, label: string}>
+     */
+    public function fetchSites(array $overrides = []): array
+    {
+        throw new \RuntimeException(static::class.' declared site scoping support but did not implement fetchSites().');
+    }
+
+    /**
+     * Cached copy of the last fetchSites() result, so the settings
+     * page renders the Site ID select without hitting the vendor on
+     * every page load.
+     *
+     * @return array<int, array{id: string, label: string}>
+     */
+    public function cachedSites(): array
+    {
+        $stored = SyncAdapterConfig::get($this->instance->id, 'cached_sites');
         if ($stored === null || $stored === '') {
             return [];
         }

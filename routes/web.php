@@ -37,6 +37,7 @@ use App\Http\Controllers\SetupController;
 use App\Http\Controllers\StatuslabelsController;
 use App\Http\Controllers\StorageProxyController;
 use App\Http\Controllers\SuppliersController;
+use App\Http\Controllers\SyncAdapterController;
 use App\Http\Controllers\UploadedFilesController;
 use App\Http\Controllers\ViewAssetsController;
 use App\Livewire\Importer;
@@ -328,39 +329,43 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
         ->breadcrumbs(fn (Trail $trail) => $trail->parent('settings.index')
             ->push(trans('admin/settings/general.webhook_title'), route('settings.integrations.index')));
 
-    Route::get('adapters', [SettingsController::class, 'getAdapters'])
+    Route::get('adapters', [SyncAdapterController::class, 'getAdapters'])
         ->name('settings.adapters.index')
         ->breadcrumbs(fn (Trail $trail) => $trail->parent('settings.index')
             ->push(trans('admin/settings/sync_adapters.title'), route('settings.adapters.index')));
 
-    Route::post('adapters', [SettingsController::class, 'postCreateAdapterInstance'])
+    Route::post('adapters', [SyncAdapterController::class, 'postCreateAdapterInstance'])
         ->name('settings.adapters.create');
 
-    Route::post('adapters/{instance}', [SettingsController::class, 'postAdapterConfig'])
+    Route::post('adapters/{instance}', [SyncAdapterController::class, 'postAdapterConfig'])
         ->name('settings.adapters.save')
         ->missing(fn () => abort(404));
 
-    Route::post('adapters/{instance}/sync', [SettingsController::class, 'postAdapterSync'])
+    Route::post('adapters/{instance}/sync', [SyncAdapterController::class, 'postAdapterSync'])
         ->name('settings.adapters.sync')
         ->missing(fn () => abort(404));
 
-    Route::post('adapters/{instance}/push', [SettingsController::class, 'postAdapterPush'])
+    Route::post('adapters/{instance}/push', [SyncAdapterController::class, 'postAdapterPush'])
         ->name('settings.adapters.push')
         ->missing(fn () => abort(404));
 
-    Route::post('adapters/{instance}/refresh-groups', [SettingsController::class, 'postAdapterRefreshGroups'])
+    Route::post('adapters/{instance}/refresh-groups', [SyncAdapterController::class, 'postAdapterRefreshGroups'])
         ->name('settings.adapters.refresh_groups')
         ->missing(fn () => abort(404));
 
-    Route::post('adapters/{instance}/refresh-custom-fields', [SettingsController::class, 'postAdapterRefreshCustomFields'])
+    Route::post('adapters/{instance}/refresh-sites', [SyncAdapterController::class, 'postAdapterRefreshSites'])
+        ->name('settings.adapters.refresh_sites')
+        ->missing(fn () => abort(404));
+
+    Route::post('adapters/{instance}/refresh-custom-fields', [SyncAdapterController::class, 'postAdapterRefreshCustomFields'])
         ->name('settings.adapters.refresh_custom_fields')
         ->missing(fn () => abort(404));
 
-    Route::post('adapters/{instance}/clone', [SettingsController::class, 'postCloneAdapterInstance'])
+    Route::post('adapters/{instance}/clone', [SyncAdapterController::class, 'postCloneAdapterInstance'])
         ->name('settings.adapters.clone')
         ->missing(fn () => abort(404));
 
-    Route::delete('adapters/{instance}', [SettingsController::class, 'deleteAdapterInstance'])
+    Route::delete('adapters/{instance}', [SyncAdapterController::class, 'deleteAdapterInstance'])
         ->name('settings.adapters.destroy')
         ->missing(fn () => abort(404));
 
