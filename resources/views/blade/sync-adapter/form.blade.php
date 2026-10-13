@@ -184,13 +184,7 @@
         </x-slot:input>
         <x-slot:after_input>
             @can('create', \App\Models\Statuslabel::class)
-                <a
-                    href="{{ route('modal.show', ['type' => 'statuslabel']) }}"
-                    data-toggle="modal"
-                    data-target="#createModal"
-                    data-select="{{ $slug . '_default_status_id' }}"
-                    class="btn btn-sm btn-theme"
-                >{{ trans('button.new') }}</a>
+                <x-button.modal-add type="statuslabel" :target="$slug.'_default_status_id'"/>
             @endcan
         </x-slot:after_input>
     </x-form.row>

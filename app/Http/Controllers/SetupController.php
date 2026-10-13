@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Http\Requests\SetupUserRequest;
 use App\Models\Setting;
 use App\Models\User;
@@ -187,7 +188,8 @@ class SetupController extends Controller
         $settings->zerofill_count = $request->input('zerofill_count') ?: 0;
 
         if ((! $user->isValid()) || (! $settings->isValid())) {
-            return redirect()->back()->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
+            return redirect()->to(Helper::sameOriginUrl(url()->previous()) ?? route('setup.user'))
+                ->withInput()->withErrors($user->getErrors())->withErrors($settings->getErrors());
         } else {
             $user->save();
             Auth::login($user, true);

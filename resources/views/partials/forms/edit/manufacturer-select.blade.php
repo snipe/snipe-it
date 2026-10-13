@@ -31,7 +31,7 @@
     <div class="col-md-1 col-sm-1 text-left">
         @can('create', \App\Models\Manufacturer::class)
             @if ((!isset($hide_new)) || ($hide_new!='true'))
-                <a href='{{ route('modal.show', 'manufacturer') }}' data-toggle="modal"  data-target="#createModal" data-select='manufacturer_select_id' class="btn btn-sm btn-theme">{{ trans('button.new') }}</a>
+                <x-button.modal-add type="manufacturer" target="manufacturer_select_id"/>
             @endif
         @endcan
     </div>

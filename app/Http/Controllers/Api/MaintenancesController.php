@@ -337,7 +337,7 @@ class MaintenancesController extends Controller
                 }
             }
 
-            $maintenance->fill($request->except(['asset_id', 'item_id', 'item_type']));
+            $maintenance->fill($request->except(['asset_id', 'item_id', 'item_type', 'completed_by']));
 
             if ($newAsset !== null) {
                 $maintenance->asset_id = $newAsset->id;
