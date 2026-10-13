@@ -36,7 +36,7 @@ class MosyleClient
     // Mosyle Manager splits devices by OS, which is a required option
     // on /listdevices. A full-tenant pull iterates each OS.
     private const DEVICE_OSES = [
-        'macos',
+        'mac',
         'ios',
         'tvos',
         'visionos',

@@ -39,7 +39,7 @@ class ProfileTransformer
 
         return $array;
     }
-    
+
     public function transformAssets(Collection $assets, int $total): array
     {
         $rows = [];
