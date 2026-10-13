@@ -274,7 +274,7 @@
                             data-tooltip="true"
                             title="{{ trans('admin/settings/sync_adapters.refresh_sites', ['label' => $adapter->vendorSiteLabel()]) }}"
                         >
-                            <x-icon type="sync" />
+                            <x-icon type="sync" class="fa-fw"/>
                         </button>
                     </x-slot:after_input>
                 @endif
