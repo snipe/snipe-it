@@ -171,10 +171,13 @@
                              of getting lost among the credential inputs. Nothing
                              to render here. --}}
         @else
+                        @php
+                            $inputDivClass = ($fieldType === 'select' && $refreshRoute && ! $locked) ? 'col-md-7' : 'col-md-8';
+                        @endphp
             <x-form.row
                 :label="$field['label']"
                 :name="$fieldName"
-                input_div_class="col-md-8"
+                :input_div_class="$inputDivClass"
                 help_html="{!! $field['help'] ?? '' !!}"
                 :required="$isRequired"
             >
