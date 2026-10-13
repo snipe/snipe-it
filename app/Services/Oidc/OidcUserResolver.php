@@ -29,9 +29,11 @@ class OidcUserResolver
             ->whereNull('deleted_at')
             ->where('activated', '=', '1')
             ->first();
+        
+        $verified = User::verifyExactUsernameMatch($user, $username);
 
-        if ($user) {
-            return $user;
+        if ($verified !== null) {
+            return $verified;
         }
 
         Log::warning('[OIDC] No active Snipe-IT user for token', ['username' => $username]);
