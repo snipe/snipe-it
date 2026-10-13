@@ -6,15 +6,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Cache;
 use Tests\TestCase;
 
-/**
- * On a failed login POST, LoginController previously called
- * redirect()->back(), which emits a 302 to whatever Referer the browser
- * sent. A crafted link to the login page could land the victim's failed
- * submission on an attacker-controlled host for a phishing hand-off.
- * The fix routes the fallback target through Helper::sameOriginUrl, so
- * only in-origin Referers survive and anything else lands back on the
- * login page (where the withInput + withErrors flash still renders).
- */
 class LoginFailureRedirectTest extends TestCase
 {
     protected function setUp(): void
@@ -56,7 +47,7 @@ class LoginFailureRedirectTest extends TestCase
     {
         User::factory()->create();
 
-        $safeReferer = config('app.url').'/login';
+        $safeReferer = config('app.url') . '/login';
 
         $this->from($safeReferer)
             ->post('/login', [
