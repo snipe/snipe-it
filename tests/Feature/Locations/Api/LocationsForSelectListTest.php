@@ -68,7 +68,7 @@ class LocationsForSelectListTest extends TestCase
 
     public function test_exclude_ids_also_accepts_a_native_array(): void
     {
-        // Belt-and-braces: js-data-ajax forwards data-exclude-ids as a
+        // Belt-and-suspenders: js-data-ajax forwards data-exclude-ids as a
         // comma-separated string, but a caller building the URL by hand
         // (Postman, cURL, etc.) could pass excludeIds[] as an array.
         [$locationA, $locationB, $locationC] = Location::factory()->count(3)->create();
@@ -83,12 +83,42 @@ class LocationsForSelectListTest extends TestCase
         $this->assertContains($locationC->id, $ids);
     }
 
-    public function test_locations_are_returned_when_user_is_updating_their_profile_and_has_permission_to_update_location()
+    public function test_self_edit_location_user_can_fetch_selectlist_for_profile_picker()
     {
         $this->actingAsForApi(User::factory()->canEditOwnLocation()->create())
-            ->withHeader('referer', route('profile'))
             ->getJson(route('api.locations.selectlist'))
             ->assertOk();
+    }
+
+    public function test_referer_header_cannot_be_used_to_bypass_the_view_selectlists_gate()
+    {
+        $this->actingAsForApi(User::factory()->create())
+            ->withHeader('referer', route('profile'))
+            ->getJson(route('api.locations.selectlist'))
+            ->assertForbidden();
+    }
+
+    public function test_self_edit_location_user_sees_only_own_company_locations_under_fmcs_location_scoping()
+    {
+        // Under FMCS + scope_locations_fmcs, Location's CompanyableTrait +
+        // global CompanyableScope filters the query by the caller's company
+        // pivot. A self.edit_location-only caller from company A must not
+        // see company B's locations through the profile picker.
+        $this->settings->enableScopedLocationsWithFullMultipleCompanySupport();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+        $ownLocation = Location::factory()->create(['name' => 'ScopedOwn', 'company_id' => $companyA->id]);
+        $otherLocation = Location::factory()->create(['name' => 'ScopedOther', 'company_id' => $companyB->id]);
+
+        $actor = User::factory()->canEditOwnLocation()->forCompany($companyA->id)->create();
+
+        $response = $this->actingAsForApi($actor)
+            ->getJson(route('api.locations.selectlist'))
+            ->assertOk();
+
+        $ids = collect($response->json('results'))->pluck('id')->all();
+        $this->assertContains($ownLocation->id, $ids, 'Own-company location must be visible to a self.edit_location-only caller.');
+        $this->assertNotContains($otherLocation->id, $ids, 'Other-company location must not leak under FMCS + location-scoping.');
     }
 
     public function test_search_result_shows_plain_names_without_parent_chain(): void
