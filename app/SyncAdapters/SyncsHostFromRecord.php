@@ -1091,6 +1091,10 @@ trait SyncsHostFromRecord
         $model->name = $modelName;
         $model->category_id = self::categoryIdFor($instance, $record);
         $model->manufacturer_id = self::manufacturerIdFor($record);
+        $adapter = $instance?->adapter();
+        if ($adapter instanceof SyncAdapter) {
+            $model->fieldset_id = $adapter->defaultFieldsetId();
+        }
         $model->save();
 
         return $model->id;

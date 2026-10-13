@@ -563,6 +563,7 @@ abstract class SyncAdapter
             $slug.'_asset_tag_pattern' => ['nullable', 'string', 'max:191', new \App\Rules\AssetTagPatternRule],
             $slug.'_default_category_id' => ['nullable', 'integer', 'exists:categories,id'],
             $slug.'_default_status_id' => ['required', 'integer', 'exists:status_labels,id'],
+            $slug.'_default_fieldset_id' => ['nullable', 'integer', 'exists:custom_fieldsets,id'],
             $slug.'_user_match_strategy' => ['nullable', 'string', 'in:none,email,username,username_then_email'],
             $slug.'_adopt_by_serial' => ['nullable', 'boolean'],
             $slug.'_create_snipeit_assets_on_pull' => ['nullable', 'boolean'],
@@ -834,6 +835,17 @@ abstract class SyncAdapter
             $this->instance->id,
             'default_status_id',
             (string) $request->input($slug.'_default_status_id', ''),
+        );
+
+        // Default fieldset for AssetModels auto-created from this
+        // adapter. Empty leaves fieldset_id null on new models (today's
+        // behavior). Admins pick a fieldset here so custom fields show
+        // on devices discovered by the adapter without having to
+        // revisit each new model by hand.
+        SyncAdapterConfig::put(
+            $this->instance->id,
+            'default_fieldset_id',
+            (string) $request->input($slug.'_default_fieldset_id', ''),
         );
 
         // User match strategy for sync-driven assignments. 'none'
@@ -1593,6 +1605,21 @@ abstract class SyncAdapter
     public function defaultStatusId(): ?int
     {
         $stored = SyncAdapterConfig::get($this->instance->id, 'default_status_id');
+
+        return $stored === null || $stored === '' ? null : (int) $stored;
+    }
+
+    /**
+     * Default fieldset for AssetModels auto-created from this adapter.
+     * When set, resolveModelIdByName stamps this id on the new model's
+     * fieldset_id so custom fields show on synced devices without the
+     * admin revisiting each new model after a pull. Null leaves
+     * fieldset_id unset (today's behavior for installs that haven't
+     * configured this).
+     */
+    public function defaultFieldsetId(): ?int
+    {
+        $stored = SyncAdapterConfig::get($this->instance->id, 'default_fieldset_id');
 
         return $stored === null || $stored === '' ? null : (int) $stored;
     }
