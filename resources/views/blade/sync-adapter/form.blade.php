@@ -159,10 +159,27 @@
         :help_text="trans('admin/settings/sync_adapters.default_category_help')"
     />
 
-    {{-- Default status label for auto-created assets. Required so
-         admins have to consciously pick a workflow bucket for
-         discovered devices instead of Snipe-IT defaulting to
-         something surprising. --}}
+        {{-- Default fieldset for AssetModels auto-created --}}
+        <x-form.row
+            :label="trans('admin/settings/sync_adapters.default_fieldset')"
+            :name="$slug . '_default_fieldset_id'"
+            input_div_class="col-md-7"
+            :help_text="trans('admin/settings/sync_adapters.default_fieldset_help')"
+        >
+            <x-slot:input>
+                <x-input.select
+                    :name="$slug . '_default_fieldset_id'"
+                    :id="$slug . '_default_fieldset_id'"
+                    :options="\App\Models\CustomFieldset::orderBy('name')->pluck('name', 'id')->all()"
+                    :selected="old($slug . '_default_fieldset_id', $adapter->defaultFieldsetId())"
+                    :includeEmpty="true"
+                    style="width: 100%"
+                    :disabled="$locked"
+                />
+            </x-slot:input>
+        </x-form.row>
+
+        {{-- Default status label for auto-created assets --}}
     <x-form.row
         :label="trans('admin/settings/sync_adapters.default_status')"
         :name="$slug . '_default_status_id'"
