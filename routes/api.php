@@ -72,6 +72,13 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'api-throttle:api']], fu
      */
     Route::group(['prefix' => 'account'], function () {
 
+        Route::get('assets',
+            [
+                Api\ProfileController::class,
+                'assets',
+            ]
+        )->name('api.account.assets');
+
         Route::get('requests',
             [
                 Api\ProfileController::class,
