@@ -2507,12 +2507,13 @@
         if (destination == 'maintenanceTypes') {
             destination = 'maintenance-types';
         }
-        return function (value,row) {
+        return function (value) {
             if ((value) && (value.status_meta)) {
 
-                var text_color;
+                var color_style;
                 var icon_style;
                 var text_help;
+                var square_tag;
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
@@ -2523,27 +2524,37 @@
 
                 switch (value.status_meta) {
                     case 'deployed':
-                        text_color = 'blue';
+                        color_style = 'text-blue';
                         icon_style = 'fa-circle';
                         text_help = '<label class="label label-default">{{ trans('general.deployed') }}</label>';
                     break;
                     case 'deployable':
-                        text_color = 'green';
+                        color_style = 'text-green';
                         icon_style = 'fa-circle';
                         text_help = '';
                     break;
                     case 'pending':
-                        text_color = 'orange';
+                        color_style = 'text-orange';
                         icon_style = 'fa-circle';
                         text_help = '';
                         break;
                     default:
-                        text_color = 'red';
+                        color_style = 'text-red';
                         icon_style = 'fa-times';
                         text_help = '';
                 }
 
-                return '<nobr><a href="{{ config('app.url') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ status_meta[value.status_meta] + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + ' ' + text_help + ' </a> </nobr>';
+                if (value.tag_color) {
+                    square_tag = "<i class='fa-solid fa-fw fa-square' style='color: " + value.tag_color + "' aria-hidden='true'></i> ";
+                }
+
+                return '<nobr><a href="{{ config('app.url') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="' + status_meta[value.status_meta] + '">'
+                    + '<i class="fa ' + icon_style + ' ' + color_style + '"></i>' + square_tag
+                    + value.name
+                    + ' '
+                    + text_help
+                    + ' '
+                    + '</a> </nobr> ';
             } else if ((value) && (value.name)) {
 
                 // Add some overrides for any funny urls we have
