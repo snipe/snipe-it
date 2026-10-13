@@ -525,7 +525,14 @@ class LoginController extends Controller
 
         if ($saml->isEnabled()) {
             $auth = $saml->getAuth();
-            $sloRedirectUrl = $request->session()->get('saml_slo_redirect_url');
+            // Defense-in-depth: SamlController::sls sanitizes the SLO
+            // RelayState through sameOriginUrl at write time, but any
+            // future writer that skips that gate (or any parser-
+            // differential bypass of sameOriginUrl at write time) would
+            // leave the away() emission below unprotected. Re-check at
+            // read time so the Location header never carries an off-
+            // origin URL that reached session('saml_slo_redirect_url').
+            $sloRedirectUrl = Helper::sameOriginUrl($request->session()->get('saml_slo_redirect_url'));
 
             if (! empty($auth->getSLOurl()) && $settings->saml_slo == '1' && $saml->isAuthenticated() && empty($sloRedirectUrl)) {
                 $sloRequestUrl = $auth->logout(null, [], $saml->getNameId(), $saml->getSessionIndex(), true, $saml->getNameIdFormat(), $saml->getNameIdNameQualifier(), $saml->getNameIdSPNameQualifier());
