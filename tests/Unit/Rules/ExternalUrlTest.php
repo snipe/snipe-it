@@ -13,7 +13,7 @@ class ExternalUrlTest extends TestCase
     {
         return Validator::make(
             ['url' => $url],
-            ['url' => [new ExternalUrl]],
+            ['url' => [new ExternalUrl('app.webhook_allow_internal_targets')]],
         )->passes();
     }
 
@@ -109,5 +109,41 @@ class ExternalUrlTest extends TestCase
         $this->assertFalse($this->passes('irc://example.com/'));
         $this->assertFalse($this->passes('javascript:alert(1)'));
         $this->assertFalse($this->passes('file:///etc/passwd'));
+    }
+
+    public function test_sync_adapter_escape_hatch_is_independent_of_the_webhook_escape_hatch()
+    {
+        // Flipping only the sync-adapter knob must not loosen webhook
+        // validation. Rule instances pointed at the webhook key stay
+        // strict about internal targets.
+        config([
+            'app.webhook_allow_internal_targets' => false,
+            'app.sync_adapter_allow_internal_targets' => true,
+        ]);
+
+        $webhookRule = new ExternalUrl('app.webhook_allow_internal_targets');
+        $syncAdapterRule = new ExternalUrl('app.sync_adapter_allow_internal_targets');
+
+        $this->assertFalse($this->passesWithRule($webhookRule, 'http://10.0.0.1/'));
+        $this->assertTrue($this->passesWithRule($syncAdapterRule, 'http://10.0.0.1/'));
+
+        // And vice versa.
+        config([
+            'app.webhook_allow_internal_targets' => true,
+            'app.sync_adapter_allow_internal_targets' => false,
+        ]);
+
+        $this->assertTrue($this->passesWithRule($webhookRule, 'http://10.0.0.1/'));
+        $this->assertFalse($this->passesWithRule($syncAdapterRule, 'http://10.0.0.1/'));
+    }
+
+    private function passesWithRule(ExternalUrl $rule, string $value): bool
+    {
+        $failed = false;
+        $rule->validate('url', $value, function () use (&$failed) {
+            $failed = true;
+        });
+
+        return ! $failed;
     }
 }

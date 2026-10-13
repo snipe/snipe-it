@@ -92,3 +92,4 @@ storage/ldap_client_tls.key
 /.zed
 boost.json
 opencode.json
+/.ai/mcp

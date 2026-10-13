@@ -23,6 +23,15 @@ use Illuminate\Contracts\Validation\ValidationRule;
  */
 class ExternalUrl implements ValidationRule
 {
+    /**
+     * Each caller specifies which config flag disables the IP-range
+     * check for its context. Webhooks and sync adapters have separate
+     * SSRF threat models (event-driven push vs admin-triggered pull),
+     * so operators can opt into internal targets for one without
+     * loosening the other.
+     */
+    public function __construct(private string $allowInternalConfigKey) {}
+
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if (! is_string($value) || $value === '') {
@@ -45,10 +54,10 @@ class ExternalUrl implements ValidationRule
             return;
         }
 
-        // Operators who legitimately need to point at an on-LAN webhook
-        // receiver flip WEBHOOK_ALLOW_INTERNAL_TARGETS in .env. Scheme
-        // restrictions above still apply; only the IP-range check is skipped.
-        if (config('app.webhook_allow_internal_targets')) {
+        // Operators who legitimately need to point at an on-LAN target
+        // flip the context-specific env in .env. Scheme restrictions
+        // above still apply, only the IP-range check is skipped.
+        if (config($this->allowInternalConfigKey)) {
             return;
         }
 
