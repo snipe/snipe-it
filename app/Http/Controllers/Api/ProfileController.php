@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Middleware\CheckForTwoFactor;
 use App\Http\Transformers\ActionlogsTransformer;
 use App\Http\Transformers\ProfileTransformer;
+use App\Models\Asset;
 use App\Models\CheckoutRequest;
 use App\Models\CustomField;
 use App\Models\Setting;
@@ -110,6 +111,62 @@ class ProfileController extends Controller
         }
 
         return $results;
+    }
+
+    /**
+     * Paginated listing of the authenticated user's own assigned assets.
+     * Powers the /account/view-assets#assets table and offers the same
+     * server-side search, sort, and column selection as the admin asset
+     * table, scoped to the caller via the assigned_to + assigned_type
+     * pair.
+     *
+     * @author [A. Gianotto] [<snipe@snipe.net>]
+     */
+    public function assets(Request $request, ProfileTransformer $transformer): array
+    {
+        $allowed_columns = [
+            'id',
+            'name',
+            'asset_tag',
+            'serial',
+            'model_number',
+            'last_checkout',
+            'last_checkin',
+            'expected_checkin',
+            'created_at',
+            'updated_at',
+            'purchase_date',
+            'last_audit_date',
+            'next_audit_date',
+            'asset_eol_date',
+        ];
+
+        $assets = Asset::where('assigned_to', auth()->id())
+            ->where('assigned_type', User::class)
+            ->AssetsForShow()
+            ->with(
+                'model.category',
+                'model.manufacturer',
+                'location',
+                'defaultLoc',
+                'status',
+                'company',
+                'supplier',
+            );
+
+        if ($request->filled('search')) {
+            $assets->TextSearch($request->input('search'));
+        }
+
+        $offset = ($request->filled('offset') && $request->input('offset') >= 0) ? (int) $request->input('offset') : 0;
+        $limit = $request->filled('limit') ? (int) $request->input('limit') : 50;
+        $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
+        $sort = in_array($request->input('sort'), $allowed_columns, true) ? $request->input('sort') : 'asset_tag';
+
+        $total = $assets->count();
+        $assets = $assets->orderBy($sort, $order)->skip($offset)->take($limit)->get();
+
+        return $transformer->transformAssets($assets, $total);
     }
 
     /**
