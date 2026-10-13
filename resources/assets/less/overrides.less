@@ -3142,6 +3142,16 @@ th,
   color: var(--color-fg) !important;
 }
 
+// Bootstrap 3 hardcodes @modal-header-border-color: #e5e5e5, which reads
+// as a stark near-white line between header/body and body/footer in dark
+// mode. Switch both separators to the theme-aware variable the box
+// borders use so the modal matches the rest of the surface in light AND
+// dark themes.
+.modal-header,
+.modal-footer {
+  border-color: var(--table-border-row-color);
+}
+
 .treeview-menu > li {
   background-color: #2c3b41;
   color: var(--sidenav-text-nohover-color) !important;

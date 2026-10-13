@@ -24547,6 +24547,10 @@ th,
   /*color: var(--color-fg) !important;*/
   color: var(--color-fg) !important;
 }
+.modal-header,
+.modal-footer {
+  border-color: var(--table-border-row-color);
+}
 .treeview-menu > li {
   background-color: #2c3b41;
   color: var(--sidenav-text-nohover-color) !important;
@@ -28708,6 +28712,10 @@ th,
   background-color: var(--box-bg) !important;
   /*color: var(--color-fg) !important;*/
   color: var(--color-fg) !important;
+}
+.modal-header,
+.modal-footer {
+  border-color: var(--table-border-row-color);
 }
 .treeview-menu > li {
   background-color: #2c3b41;
