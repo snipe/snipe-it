@@ -319,7 +319,8 @@ class LoginController extends Controller
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
+            return redirect()->to(Helper::sameOriginUrl(url()->previous()) ?? route('login'))
+                ->withInput()->withErrors($validator);
         }
 
         // Read the local login-form throttle ceiling and lockout window
@@ -367,7 +368,10 @@ class LoginController extends Controller
 
                 Log::debug('Local authentication failed.');
 
-                return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
+                // Same open-redirect guard as the validation-failure
+                // path above. See comment there.
+                return redirect()->to(Helper::sameOriginUrl(url()->previous()) ?? route('login'))
+                    ->withInput()->with('error', trans('auth/message.account_not_found'));
             } else {
                 $this->clearLoginAttempts($request);
             }
