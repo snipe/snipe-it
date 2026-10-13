@@ -1484,8 +1484,92 @@ class AssetsController extends Controller
         $asset = Asset::with('model')->findOrFail($asset_id);
         $this->authorize('checkin', $asset);
 
-        $target = $asset->assignedTo;
-        if (is_null($target)) {
+        // Concurrency guard.
+        $outcome = DB::transaction(function () use ($asset, $request): array {
+            $locked = Asset::with(['model', 'licenseseats'])
+                ->whereKey($asset->id)
+                ->lockForUpdate()
+                ->first();
+
+            if (!$locked) {
+                return ['status' => 'already_checked_in', 'asset' => $asset];
+            }
+
+            $target = $locked->assignedTo;
+            if (is_null($target)) {
+                return ['status' => 'already_checked_in', 'asset' => $locked];
+            }
+
+            $locked->expected_checkin = null;
+            // $locked->last_checkout = null;
+            $locked->last_checkin = now();
+            $locked->assignedTo()->disassociate($locked);
+            $locked->accepted = null;
+
+            if ($request->input('clear_name') == '1') {
+                $locked->name = null;
+            } elseif ($request->has('name')) {
+                $locked->name = $request->input('name');
+            }
+
+            $this->migrateLegacyLocations($locked);
+
+            $locked->location_id = $locked->rtd_location_id;
+
+            if ($request->filled('location_id')) {
+                $locked->location_id = $request->input('location_id');
+
+                if ($request->input('update_default_location')) {
+                    $locked->rtd_location_id = $request->input('location_id');
+                }
+            }
+
+            if ($request->filled('status_id')) {
+                $locked->status_id = $request->input('status_id');
+            }
+
+            $checkin_at = $request->filled('checkin_at') ? $request->input('checkin_at') . ' ' . date('H:i:s') : date('Y-m-d H:i:s');
+            $originalValues = $locked->getRawOriginal();
+
+            if (($request->filled('checkin_at')) && ($request->input('checkin_at') != date('Y-m-d'))) {
+                $originalValues['action_date'] = $checkin_at;
+            }
+
+            $locked->licenseseats->each(function (LicenseSeat $seat) {
+                $seat->update(['assigned_to' => null]);
+            });
+
+            // Get all pending Acceptances for this asset and delete them
+            CheckoutAcceptance::pending()
+                ->whereHasMorph(
+                    'checkoutable',
+                    [Asset::class],
+                    function (Builder $query) use ($locked) {
+                        $query->where('id', $locked->id);
+                    }
+                )
+                ->get()
+                ->map(function ($acceptance) {
+                    $acceptance->delete();
+                });
+
+            if (!$locked->save()) {
+                return ['status' => 'save_failed', 'asset' => $locked];
+            }
+
+            // Update the location of any child assets
+            Asset::where('assigned_type', Asset::class)
+                ->where('assigned_to', $locked->id)
+                ->update(['location_id' => $locked->location_id]);
+
+            event(new CheckoutableCheckedIn($locked, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
+
+            return ['status' => 'success', 'asset' => $locked];
+        });
+
+        $asset = $outcome['asset'];
+
+        if ($outcome['status'] === 'already_checked_in') {
             return response()->json(Helper::formatStandardApiResponse('error', [
                 'asset_tag' => e($asset->asset_tag),
                 'model' => e($asset->model->name),
@@ -1493,68 +1577,7 @@ class AssetsController extends Controller
             ], trans('admin/hardware/message.checkin.already_checked_in')));
         }
 
-        $asset->expected_checkin = null;
-        // $asset->last_checkout = null;
-        $asset->last_checkin = now();
-        $asset->assignedTo()->disassociate($asset);
-        $asset->accepted = null;
-
-        if ($request->input('clear_name') == '1') {
-            $asset->name = null;
-        } elseif ($request->has('name')) {
-            $asset->name = $request->input('name');
-        }
-
-        $this->migrateLegacyLocations($asset);
-
-        $asset->location_id = $asset->rtd_location_id;
-
-        if ($request->filled('location_id')) {
-            $asset->location_id = $request->input('location_id');
-
-            if ($request->input('update_default_location')) {
-                $asset->rtd_location_id = $request->input('location_id');
-            }
-        }
-
-        if ($request->filled('status_id')) {
-            $asset->status_id = $request->input('status_id');
-        }
-
-        $checkin_at = $request->filled('checkin_at') ? $request->input('checkin_at').' '.date('H:i:s') : date('Y-m-d H:i:s');
-        $originalValues = $asset->getRawOriginal();
-
-        if (($request->filled('checkin_at')) && ($request->input('checkin_at') != date('Y-m-d'))) {
-            $originalValues['action_date'] = $checkin_at;
-        }
-
-        $asset->licenseseats->each(function (LicenseSeat $seat) {
-            $seat->update(['assigned_to' => null]);
-        });
-
-        // Get all pending Acceptances for this asset and delete them
-        CheckoutAcceptance::pending()
-            ->whereHasMorph(
-                'checkoutable',
-                [Asset::class],
-                function (Builder $query) use ($asset) {
-                    $query->where('id', $asset->id);
-                }
-            )
-            ->get()
-            ->map(function ($acceptance) {
-                $acceptance->delete();
-            });
-
-        if ($asset->save()) {
-
-            // Update the location of any child assets
-            Asset::where('assigned_type', Asset::class)
-                ->where('assigned_to', $asset->id)
-                ->update(['location_id' => $asset->location_id]);
-
-            event(new CheckoutableCheckedIn($asset, $target, auth()->user(), $request->input('note'), $checkin_at, $originalValues));
-
+        if ($outcome['status'] === 'success') {
             return response()->json(Helper::formatStandardApiResponse('success', [
                 'asset_tag' => e($asset->asset_tag),
                 'model' => e($asset->model->name),
