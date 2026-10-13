@@ -212,6 +212,7 @@ return [
     'addigy_key_secret_help' => 'Paired with Client ID above. Displayed once in the Addigy admin console at creation time. Needs read access to Devices.',
     'unifi_api_key_help' => 'Generate under Settings -> Admins & Users -> API Keys in your UniFi Network application (UniFi OS 4.0.6+ / Network 9.0.108+ required). Older controllers use session cookies and are not supported.',
     'unifi_site_id_help' => 'The UniFi site to sync from. Click Refresh Sites above after saving the API key to populate this list from your controller.',
+    'unifi_access_api_token_help' => 'Sign in to the UniFi Portal, open the console where Access is installed, and go to Access -> Settings -> General -> Advanced -> API Token to generate one. UniFi Access 1.9.1 or later is required, and the API is not available on consoles that have upgraded to Identity Enterprise. This is a different credential from the UniFi Network API key, so running both requires one adapter instance of each.',
     'intune_tenant_id_help' => 'Copy your Azure AD tenant\'s Directory (tenant) ID from Microsoft Entra admin center -> Overview.',
     'intune_client_id_help' => 'Register an application in Microsoft Entra ID -> App registrations, then copy the Application (client) ID. Grant it the DeviceManagementManagedDevices.Read.All Microsoft Graph application permission (admin consent required).',
     'intune_client_secret_help' => 'Generate under your app registration -> Certificates & secrets -> New client secret. Copy the value immediately (Azure only shows it once).',
