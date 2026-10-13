@@ -1889,7 +1889,7 @@ $(function () {
    * Inline refresh for sync-adapter remote-sourced selects.
    *
    * A select field whose schema declares refresh_route_name +
-   * depends_on gets a sibling .js-sync-adapter-refresh-select button
+   * depends_on gets a .js-sync-adapter-refresh-select button
    * next to it. The admin fills the dependent fields (URL + API key
    * for UniFi, etc.), clicks the button, and the vendor's list of
    * valid values populates the select without a page save/reload.

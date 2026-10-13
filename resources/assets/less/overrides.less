@@ -3934,18 +3934,20 @@ dl.table-display {
 }
 
 /*
- * Vertical side-tabs inside a box, used by the Settings → Sync Adapters
- * page. Negative margin cancels .box-body's 10px padding on the sides
- * we want flush against the box edges. Active-tab left border uses the
- * same accent color and font-weight bump that .nav-tabs-custom uses
- * for horizontal tabs, so the two visually match.
+ * Vertical side-tabs inside a box. First used on the Settings -> Sync
+ * Adapters page but kept generic so other admin screens that need a
+ * tall list of tabs can reuse the markup + styles. Negative margin
+ * cancels .box-body's 10px padding on the sides we want flush against
+ * the box edges. Active-tab left border uses the same accent color
+ * and font-weight bump that .nav-tabs-custom uses for horizontal
+ * tabs, so the two visually match.
  */
-.sync-adapters-tabs {
+.side-tabs {
   margin: -10px 0 -10px -10px;
   display: flex;
 }
 
-.sync-adapters-tabs .adapter-tab-list {
+.side-tabs .side-tabs-list {
   flex: 0 0 300px;
   padding: 0;
   border-right: var(--table-border-row);
@@ -3955,11 +3957,11 @@ dl.table-display {
    nav-stacked items via `.box .nav-stacked > li`, which reads as white
    against the dark box background. Override with the theme-aware
    variable to match the box's internal borders in both modes. */
-.sync-adapters-tabs .adapter-tab-list .nav-stacked > li {
+.side-tabs .side-tabs-list .nav-stacked > li {
   border-bottom-color: var(--table-border-row-color);
 }
 
-.sync-adapters-tabs .adapter-tab-list .nav-pills > li > a {
+.side-tabs .side-tabs-list .nav-pills > li > a {
   color: var(--color-fg);
   padding: 10px 16px;
   padding-left: 10px;
@@ -3968,34 +3970,35 @@ dl.table-display {
   background-color: transparent;
 }
 
-.sync-adapters-tabs .adapter-tab-list .nav-pills > li.active > a,
-.sync-adapters-tabs .adapter-tab-list .nav-pills > li.active > a:hover,
-.sync-adapters-tabs .adapter-tab-list .nav-pills > li.active > a:focus {
+.side-tabs .side-tabs-list .nav-pills > li.active > a,
+.side-tabs .side-tabs-list .nav-pills > li.active > a:hover,
+.side-tabs .side-tabs-list .nav-pills > li.active > a:focus {
   color: var(--color-fg);
   background-color: transparent;
   border-left-color: var(--main-theme-color);
   font-weight: bold;
 }
 
-.sync-adapters-tabs .adapter-tab-content {
+.side-tabs .side-tabs-content {
   flex: 1;
   padding: 15px 20px;
   min-width: 0; // let long labels + tables shrink inside a flex row instead of stretching the whole panel past its box.
 }
 
-/* Small shim for side-tab min-width on mobile or smaller screens. */
+/* Collapse the side-tabs to a stacked column on narrow viewports so
+   the tab list sits above the content pane instead of squeezing it. */
 @media (max-width: 991px) {
-  .sync-adapters-tabs {
+  .side-tabs {
     flex-direction: column;
   }
 
-  .sync-adapters-tabs .adapter-tab-list {
+  .side-tabs .side-tabs-list {
     flex: 0 0 auto;
     border-right: 0;
     border-bottom: var(--table-border-row);
   }
 
-  .sync-adapters-tabs .adapter-tab-content {
+  .side-tabs .side-tabs-content {
     padding: 15px 10px;
   }
 }
