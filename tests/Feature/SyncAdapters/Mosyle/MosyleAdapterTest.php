@@ -127,7 +127,7 @@ class MosyleAdapterTest extends TestCase
             return true;
         });
 
-        $this->assertSame(['macos', 'ios', 'tvos', 'visionos'], $osesRequested);
+        $this->assertSame(['mac', 'ios', 'tvos', 'visionos'], $osesRequested);
     }
 
     public function test_normalized_record_populates_extra_fields_from_manager_v2_payload(): void
