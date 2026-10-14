@@ -2513,7 +2513,7 @@
                 var color_style;
                 var icon_style;
                 var text_help;
-                var square_tag;
+                var square_tag = '';
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
