@@ -7,7 +7,7 @@ use App\Models\Traits\Searchable;
 use App\Presenters\PredefinedKitPresenter;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Validation\Rule;
 use Watson\Validating\ValidatingTrait;
 
@@ -15,7 +15,9 @@ use Watson\Validating\ValidatingTrait;
  * Model for predefined kits.
  *
  * @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]
+ *
  * @version v1.0
+ *
  * @mixin IdeHelperPredefinedKit
  */
 class PredefinedKit extends SnipeModel
@@ -150,10 +152,8 @@ class PredefinedKit extends SnipeModel
 
     /**
      * Establishes the kits -> models relationship
-     *
-     * @return Relation
      */
-    public function models()
+    public function models(): BelongsToMany
     {
         return $this->belongsToMany(AssetModel::class, 'kits_models', 'kit_id', 'model_id')->withPivot('id', 'quantity');
     }
@@ -165,30 +165,24 @@ class PredefinedKit extends SnipeModel
 
     /**
      * Establishes the kits -> licenses relationship
-     *
-     * @return Relation
      */
-    public function licenses()
+    public function licenses(): BelongsToMany
     {
         return $this->belongsToMany(License::class, 'kits_licenses', 'kit_id', 'license_id')->withPivot('id', 'quantity');
     }
 
     /**
-     * Establishes the kits -> licenses relationship
-     *
-     * @return Relation
+     * Establishes the kits -> consumables relationship
      */
-    public function consumables()
+    public function consumables(): BelongsToMany
     {
         return $this->belongsToMany(Consumable::class, 'kits_consumables', 'kit_id', 'consumable_id')->withPivot('id', 'quantity');
     }
 
     /**
-     * Establishes the kits -> licenses relationship
-     *
-     * @return Relation
+     * Establishes the kits -> accessories relationship
      */
-    public function accessories()
+    public function accessories(): BelongsToMany
     {
         return $this->belongsToMany(Accessory::class, 'kits_accessories', 'kit_id', 'accessory_id')->withPivot('id', 'quantity');
     }

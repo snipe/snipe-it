@@ -2,11 +2,17 @@
 
 namespace App\Models\Builders;
 
+use App\Models\PredefinedKit;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @template TModel of PredefinedKit
+ *
+ * @extends Builder<TModel>
+ */
 class PredefinedKitQueryBuilder extends Builder
 {
-    public function orderByCreatedBy(string $order): static
+    public function orderByCreatedBy(string $order): self
     {
         return $this
             ->leftJoin('users as admin_sort', 'kits.created_by', '=', 'admin_sort.id')
