@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\PredefinedKitQueryBuilder;
 use App\Models\Traits\Searchable;
 use App\Presenters\PredefinedKitPresenter;
 use App\Presenters\Presentable;
@@ -192,13 +193,8 @@ class PredefinedKit extends SnipeModel
         return $this->belongsToMany(Accessory::class, 'kits_accessories', 'kit_id', 'accessory_id')->withPivot('id', 'quantity');
     }
 
-    /**
-     * -----------------------------------------------
-     * BEGIN QUERY SCOPES
-     * -----------------------------------------------
-     **/
-    public function scopeOrderByCreatedBy($query, $order)
+    public function newEloquentBuilder($query): PredefinedKitQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'kits.created_by', '=', 'admin_sort.id')->addSelect('kits.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new PredefinedKitQueryBuilder($query);
     }
 }

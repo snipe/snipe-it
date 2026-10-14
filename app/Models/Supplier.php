@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\FileStorage;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Builders\SupplierQueryBuilder;
 use App\Models\Traits\HasUploads;
 use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
@@ -288,11 +289,8 @@ class Supplier extends SnipeModel
         return $url;
     }
 
-    /**
-     * Query builder scope to order on the user that created it
-     */
-    public function scopeOrderByCreatedByName($query, $order)
+    public function newEloquentBuilder($query): SupplierQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'suppliers.created_by', '=', 'admin_sort.id')->addSelect('suppliers.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new SupplierQueryBuilder($query);
     }
 }

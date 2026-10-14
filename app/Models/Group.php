@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\GroupQueryBuilder;
 use App\Models\Traits\Searchable;
 use App\Presenters\GroupPresenter;
 use App\Presenters\Presentable;
@@ -134,13 +135,8 @@ class Group extends SnipeModel
 
     }
 
-    /**
-     * -----------------------------------------------
-     * BEGIN QUERY SCOPES
-     * -----------------------------------------------
-     **/
-    public function scopeOrderByCreatedBy($query, $order)
+    public function newEloquentBuilder($query): GroupQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'permission_groups.created_by', '=', 'admin_sort.id')->addSelect('permission_groups.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new GroupQueryBuilder($query);
     }
 }
