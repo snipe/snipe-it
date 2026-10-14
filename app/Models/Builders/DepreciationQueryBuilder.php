@@ -2,11 +2,17 @@
 
 namespace App\Models\Builders;
 
+use App\Models\Depreciation;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @template TModel of Depreciation
+ *
+ * @extends Builder<TModel>
+ */
 class DepreciationQueryBuilder extends Builder
 {
-    public function orderByCreatedBy(string $order): static
+    public function orderByCreatedBy(string $order): self
     {
         return $this
             ->leftJoin('users as admin_sort', 'depreciations.created_by', '=', 'admin_sort.id')

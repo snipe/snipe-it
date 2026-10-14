@@ -2,24 +2,30 @@
 
 namespace App\Models\Builders;
 
+use App\Models\AssetModel;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @template TModel of AssetModel
+ *
+ * @extends Builder<TModel>
+ */
 class AssetModelQueryBuilder extends Builder
 {
     /**
      * @param  array<int, int>  $categoryIdListing
      */
-    public function inCategory(array $categoryIdListing): static
+    public function inCategory(array $categoryIdListing): self
     {
         return $this->whereIn('category_id', $categoryIdListing);
     }
 
-    public function requestable(): static
+    public function requestable(): self
     {
         return $this->where('requestable', '1');
     }
 
-    public function searchByManufacturerOrCat(string $search): static
+    public function searchByManufacturerOrCat(string $search): self
     {
         return $this->where('models.name', 'LIKE', "%$search%")
             ->orWhere('model_number', 'LIKE', "%$search%")
@@ -35,28 +41,28 @@ class AssetModelQueryBuilder extends Builder
             });
     }
 
-    public function orderManufacturer(string $order): static
+    public function orderManufacturer(string $order): self
     {
         return $this
             ->leftJoin('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')
             ->orderBy('manufacturers.name', $order);
     }
 
-    public function orderCategory(string $order): static
+    public function orderCategory(string $order): self
     {
         return $this
             ->leftJoin('categories', 'models.category_id', '=', 'categories.id')
             ->orderBy('categories.name', $order);
     }
 
-    public function orderFieldset(string $order): static
+    public function orderFieldset(string $order): self
     {
         return $this
             ->leftJoin('custom_fieldsets', 'models.fieldset_id', '=', 'custom_fieldsets.id')
             ->orderBy('custom_fieldsets.name', $order);
     }
 
-    public function orderByCreatedByName(string $order): static
+    public function orderByCreatedByName(string $order): self
     {
         return $this
             ->leftJoin('users as admin_sort', 'models.created_by', '=', 'admin_sort.id')
@@ -82,7 +88,7 @@ class AssetModelQueryBuilder extends Builder
      * require inlining the subqueries or wrapping the query in an
      * outer SELECT.
      */
-    public function orderPercentRemaining(string $order): static
+    public function orderPercentRemaining(string $order): self
     {
         $order = strtolower($order) === 'asc' ? 'asc' : 'desc';
 
