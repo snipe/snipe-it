@@ -48,6 +48,7 @@ return [
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
     'link_template' => 'Link Template',
+    'link_template_preview' => 'Displayed as a link:',
     'link_template_help' => 'Optional. Displays the value as a clickable link built from this template, where {VALUE} is replaced with the field value. Useful for URL handlers such as remote access tools, for example <code>anydesk:{VALUE}</code> or <code>rustdesk://{VALUE}</code>.',
     'about_custom_fields_title' => 'About Custom Fields',
     'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',

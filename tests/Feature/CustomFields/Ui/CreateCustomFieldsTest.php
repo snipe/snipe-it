@@ -69,6 +69,35 @@ class CreateCustomFieldsTest extends TestCase
         ]);
     }
 
+    public function test_preview_shows_link_built_from_template()
+    {
+        $this->actingAs(User::factory()->superuser()->create());
+
+        Livewire::test(CustomFieldEditor::class)
+            ->set('link_template', 'rustdesk://{VALUE}')
+            ->assertSee('rustdesk://123456789');
+    }
+
+    public function test_preview_uses_first_field_value_for_listbox()
+    {
+        $this->actingAs(User::factory()->superuser()->create());
+
+        Livewire::test(CustomFieldEditor::class)
+            ->set('element', 'listbox')
+            ->set('field_values', "pc-01@ad\npc-02@ad")
+            ->set('link_template', 'anydesk:{VALUE}')
+            ->assertSee('anydesk:pc-01@ad');
+    }
+
+    public function test_preview_flags_invalid_link_template()
+    {
+        $this->actingAs(User::factory()->superuser()->create());
+
+        Livewire::test(CustomFieldEditor::class)
+            ->set('link_template', 'anydesk:')
+            ->assertSee(trans('admin/custom_fields/general.validation.link_template_invalid'));
+    }
+
     public function test_invalid_link_template_shows_error()
     {
         $this->actingAs(User::factory()->superuser()->create());

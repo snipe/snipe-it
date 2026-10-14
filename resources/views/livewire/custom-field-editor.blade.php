@@ -306,6 +306,7 @@
                         :format="$format"
                         :help-text="$help_text"
                         :field-values="$field_values"
+                        :link-template="$link_template"
                     />
                 </x-box>
 

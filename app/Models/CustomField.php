@@ -252,13 +252,23 @@ class CustomField extends Model
     }
 
     /**
+     * Fills a link template with a value. The value is URL-encoded so it
+     * can't break out of the template (e.g. into another path of the
+     * handler's URL); "@" is kept because remote-access IDs and aliases
+     * commonly contain it. Whitespace is stripped, since IDs are often
+     * copied with grouping spaces (e.g. "123 456 789") that URL handlers
+     * don't accept.
+     */
+    public static function buildLink(string $template, string $value): string
+    {
+        $encoded = str_replace('%40', '@', rawurlencode(preg_replace('/\s+/u', '', $value)));
+
+        return str_replace('{VALUE}', $encoded, $template);
+    }
+
+    /**
      * Builds the link for a stored value from this field's link template,
-     * or returns null when there is nothing to link. The value is
-     * URL-encoded so it can't break out of the template (e.g. into another
-     * path of the handler's URL); "@" is kept because remote-access IDs and
-     * aliases commonly contain it. Whitespace is stripped, since IDs are
-     * often copied with grouping spaces (e.g. "123 456 789") that URL
-     * handlers don't accept.
+     * or returns null when there is nothing to link.
      */
     public function linkForValue(?string $value): ?string
     {
@@ -269,9 +279,7 @@ class CustomField extends Model
             return null;
         }
 
-        $encoded = str_replace('%40', '@', rawurlencode(preg_replace('/\s+/u', '', $value)));
-
-        return str_replace('{VALUE}', $encoded, $this->link_template);
+        return self::buildLink($this->link_template, $value);
     }
 
     /**
