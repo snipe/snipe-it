@@ -317,7 +317,7 @@ class AssetsTransformer
             'model_number' => (($asset->model) && ($asset->model->model_number)) ? e($asset->model->model_number) : null,
             'expected_checkin' => Helper::getFormattedDateObject($asset->expected_checkin, 'datetime'),
             'location' => ($asset->location) ? e($asset->location->name) : null,
-            'status' => ($asset->status) ? $asset->present()->statusMeta : null,
+            'status' => ($asset->status) ? e($asset->status->name) : null,
             // Category is nested through model. Emit the standard
             // {id, name, tag_color} object so the requestable-tab
             // categoriesLinkObjFormatter can render the tag_color
