@@ -33,6 +33,7 @@
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Http/Traits/UniqueUndeletedTrait.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Http/Transformers/DepreciationReportTransformer.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Importer/ItemImporter.php"/>
+  <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Listeners/RegenerateIdeHelperAfterMigrate.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Livewire/Importer.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Livewire/LdapSettings.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/Accessory.php"/>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\GroupQueryBuilder;
 use App\Models\Traits\Searchable;
 use App\Presenters\GroupPresenter;
 use App\Presenters\Presentable;
@@ -10,6 +11,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperGroup
+ */
 class Group extends SnipeModel
 {
     use HasFactory;
@@ -134,13 +138,8 @@ class Group extends SnipeModel
 
     }
 
-    /**
-     * -----------------------------------------------
-     * BEGIN QUERY SCOPES
-     * -----------------------------------------------
-     **/
-    public function scopeOrderByCreatedBy($query, $order)
+    public function newEloquentBuilder($query): GroupQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'permission_groups.created_by', '=', 'admin_sort.id')->select('permission_groups.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new GroupQueryBuilder($query);
     }
 }

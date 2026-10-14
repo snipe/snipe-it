@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rule;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperCustomField
+ */
 class CustomField extends Model
 {
     use HasFactory;

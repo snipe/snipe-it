@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @mixin IdeHelperSCIMUser
+ */
 class SCIMUser extends User
 {
     protected $table = 'users';

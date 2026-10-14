@@ -141,8 +141,8 @@ class ProfileController extends Controller
             'asset_eol_date',
         ];
 
-        $assets = Asset::where('assigned_to', auth()->id())
-            ->where('assigned_type', User::class)
+        $assets = Asset::where('assets.assigned_to', auth()->id())
+            ->where('assets.assigned_type', User::class)
             ->AssetsForShow()
             ->with(
                 'model.category',
@@ -164,7 +164,7 @@ class ProfileController extends Controller
         $sort = in_array($request->input('sort'), $allowed_columns, true) ? $request->input('sort') : 'asset_tag';
 
         $total = $assets->count();
-        $assets = $assets->orderBy($sort, $order)->skip($offset)->take($limit)->get();
+        $assets = $assets->orderBy('assets.' . $sort, $order)->skip($offset)->take($limit)->get();
 
         return $transformer->transformAssets($assets, $total);
     }

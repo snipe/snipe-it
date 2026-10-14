@@ -1,106 +1,58 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Actions/AssetModels/MergeAssetModelsAction.php
+			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperAsset\:\:\$asset_eol_date contains unknown class App\\Models\\Carbon\.$#'
+			identifier: class.notFound
+			count: 1
+			path: _ide_helper_models.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
+			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperAsset\:\:\$last_audit_date contains unknown class App\\Models\\Carbon\.$#'
+			identifier: class.notFound
+			count: 1
+			path: _ide_helper_models.php
+
+		-
+			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperAsset\:\:\$last_checkin contains unknown class App\\Models\\Carbon\.$#'
+			identifier: class.notFound
+			count: 1
+			path: _ide_helper_models.php
+
+		-
+			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperAsset\:\:\$next_audit_date contains unknown class App\\Models\\Carbon\.$#'
+			identifier: class.notFound
+			count: 1
+			path: _ide_helper_models.php
+
+		-
+			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperCheckoutRequest\:\:\$state contains unknown class App\\Models\\CheckoutRequestState\.$#'
+			identifier: class.notFound
+			count: 1
+			path: _ide_helper_models.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$pivot\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Actions/Acceptances/RegenerateAcceptancesAction.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Category\>\:\:requiresAcceptance\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Actions/Acceptances/RegenerateAcceptancesAction.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Actions/CheckoutRequests/CancelCheckoutRequestAction.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Actions/CheckoutRequests/CreateCheckoutRequestAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$accessories_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Companies/DestroyCompanyAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$assets_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Companies/DestroyCompanyAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$children_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Companies/DestroyCompanyAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Companies/DestroyCompanyAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$consumables_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Companies/DestroyCompanyAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$licenses_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Companies/DestroyCompanyAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$users_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Companies/DestroyCompanyAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$accessories_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Manufacturers/DestroyManufacturerAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$assets_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Manufacturers/DestroyManufacturerAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Manufacturers/DestroyManufacturerAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$consumables_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Manufacturers/DestroyManufacturerAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$licenses_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Manufacturers/DestroyManufacturerAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$accessories_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Suppliers/DestroySupplierAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Suppliers/DestroySupplierAction.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$consumables_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Actions/Suppliers/DestroySupplierAction.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$asset_tag\.$#'
@@ -135,7 +87,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
-			count: 26
+			count: 29
 			path: app/Console/Commands/BulkDelete.php
 
 		-
@@ -199,6 +151,18 @@ parameters:
 			path: app/Console/Commands/BulkDelete.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$asset_tag\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/CheckinAndDeleteItems.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Console/Commands/CheckinAndDeleteItems.php
+
+		-
 			message: '#^Using nullsafe property access "\?\-\>asset_tag" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 3
@@ -211,8 +175,26 @@ parameters:
 			path: app/Console/Commands/CheckinAndDeleteItems.php
 
 		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:assetlog\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Console/Commands/CleanIncorrectCheckoutAcceptances.php
+
+		-
+			message: '#^Call to function is_null\(\) with Illuminate\\Database\\Eloquent\\Model will always evaluate to false\.$#'
+			identifier: function.impossibleType
+			count: 1
+			path: app/Console/Commands/CleanIncorrectCheckoutAcceptances.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:trashed\(\)\.$#'
 			identifier: method.notFound
+			count: 1
+			path: app/Console/Commands/CleanOldCheckoutRequests.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
 			count: 1
 			path: app/Console/Commands/CleanOldCheckoutRequests.php
 
@@ -227,30 +209,6 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: app/Console/Commands/CreateAdmin.php
-
-		-
-			message: '#^Property App\\Models\\User\:\:\$activated \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Console/Commands/CreateAdmin.php
-
-		-
-			message: '#^Property App\\Models\\User\:\:\$autoassign_licenses \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Console/Commands/CreateAdmin.php
-
-		-
-			message: '#^Property App\\Models\\User\:\:\$show_in_list \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Console/Commands/CreateAdmin.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Console/Commands/FixBulkAccessoryCheckinActionLogEntries.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$first_name\.$#'
@@ -325,26 +283,8 @@ parameters:
 			path: app/Console/Commands/LdapSync.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$activated \(bool\) does not accept int\.$#'
+			message: '#^Property App\\Models\\IdeHelperUser\:\:\$activated \(int\) does not accept bool\.$#'
 			identifier: assign.propertyType
-			count: 2
-			path: app/Console/Commands/LdapSync.php
-
-		-
-			message: '#^Property App\\Models\\User\:\:\$ldap_import \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Console/Commands/LdapSync.php
-
-		-
-			message: '#^Result of && is always false\.$#'
-			identifier: booleanAnd.alwaysFalse
-			count: 1
-			path: app/Console/Commands/LdapSync.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between bool and 1 will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
 			count: 2
 			path: app/Console/Commands/LdapSync.php
 
@@ -385,15 +325,9 @@ parameters:
 			path: app/Console/Commands/LdapTroubleshooter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\User\:\:\$uploads\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperUser\:\:\$deleted_at \(Illuminate\\Support\\Carbon\|null\) does not accept float\|int\|string\.$#'
+			identifier: assign.propertyType
 			count: 1
-			path: app/Console/Commands/MergeUsersByUsername.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:updateExistingPivot\(\)\.$#'
-			identifier: method.notFound
-			count: 3
 			path: app/Console/Commands/MergeUsersByUsername.php
 
 		-
@@ -403,15 +337,9 @@ parameters:
 			path: app/Console/Commands/NormalizeUserNames.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
-			identifier: property.notFound
+			message: '#^Call to an undefined static method App\\Models\\CheckoutAcceptance\:\:HasFiles\(\)\.$#'
+			identifier: staticMethod.notFound
 			count: 1
-			path: app/Console/Commands/PurgeEulaPDFs.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:withTrashed\(\)\.$#'
-			identifier: method.notFound
-			count: 2
 			path: app/Console/Commands/PurgeEulaPDFs.php
 
 		-
@@ -425,12 +353,6 @@ parameters:
 			identifier: method.void
 			count: 1
 			path: app/Console/Commands/PurgeEulaPDFs.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Console/Commands/PushInventory.php
 
 		-
 			message: '#^Offset int does not exist on array\<string, string\>\.$#'
@@ -451,16 +373,22 @@ parameters:
 			path: app/Console/Commands/RegenerateAssetTags.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$enable_confetti \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$asset_tag\.$#'
+			identifier: property.notFound
 			count: 1
-			path: app/Console/Commands/ResetDemoSettings.php
+			path: app/Console/Commands/RestoreDeletedUsers.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$enable_sounds \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Console/Commands/ResetDemoSettings.php
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Console/Commands/RestoreDeletedUsers.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Console/Commands/RestoreDeletedUsers.php
 
 		-
 			message: '#^Instantiated class App\\Console\\Commands\\Exception not found\.$#'
@@ -505,6 +433,12 @@ parameters:
 			path: app/Console/Commands/RotateAppKey.php
 
 		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:notify\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Console/Commands/SendExpectedCheckinAlerts.php
+
+		-
 			message: '#^Left side of && is always true\.$#'
 			identifier: booleanAnd.leftAlwaysTrue
 			count: 2
@@ -517,9 +451,33 @@ parameters:
 			path: app/Console/Commands/SendInventoryAlerts.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/SendUpcomingAuditReport.php
+
+		-
 			message: '#^Access to an undefined property ArrayObject\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 4
+			path: app/Console/Commands/SyncAssetLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Console/Commands/SyncAssetLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/SyncAssetLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$userLoc\.$#'
+			identifier: property.notFound
+			count: 1
 			path: app/Console/Commands/SyncAssetLocations.php
 
 		-
@@ -538,12 +496,6 @@ parameters:
 			message: '#^Method App\\Console\\Commands\\ToggleCustomfieldEncryption\:\:handle\(\) should return int but return statement is missing\.$#'
 			identifier: return.missing
 			count: 2
-			path: app/Console/Commands/ToggleCustomfieldEncryption.php
-
-		-
-			message: '#^Property App\\Models\\CustomField\:\:\$field_encrypted \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
 			path: app/Console/Commands/ToggleCustomfieldEncryption.php
 
 		-
@@ -569,12 +521,6 @@ parameters:
 			identifier: variable.undefined
 			count: 3
 			path: app/Console/Commands/Version.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between bool\|null and 1 will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Console/Kernel.php
 
 		-
 			message: '#^Access to an undefined property App\\Events\\CheckoutAccepted\:\:\$acceptance\.$#'
@@ -665,12 +611,6 @@ parameters:
 			identifier: isset.variable
 			count: 1
 			path: app/Exceptions/Handler.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$available_assets_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Helpers/Helper.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$consumables_users_count\.$#'
@@ -787,18 +727,6 @@ parameters:
 			path: app/Helpers/Helper.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Accessories/AccessoriesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$default_supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Accessories/AccessoriesController.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -835,31 +763,19 @@ parameters:
 			path: app/Http/Controllers/Accessories/AccessoriesController.php
 
 		-
-			message: '#^Property App\\Models\\Accessory\:\:\$id \(int\) does not accept null\.$#'
+			message: '#^Property App\\Models\\IdeHelperAccessory\:\:\$deleted_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/Accessories/AccessoriesController.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperAccessory\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Accessories/AccessoriesController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$checkout_qty\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\AccessoryCheckout\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$location_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$rtd_location_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
@@ -877,6 +793,18 @@ parameters:
 			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
 
 		-
+			message: '#^Property App\\Models\\SnipeModel\:\:\$location_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 3
+			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
+
+		-
+			message: '#^Property App\\Models\\SnipeModel\:\:\$rtd_location_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 1
+			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
+
+		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -890,30 +818,6 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$checkout_qty\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/AccessoriesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$default_supplier_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/AccessoriesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\AccessoryCheckout\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/AccessoriesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$location_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Api/AccessoriesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$rtd_location_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/Api/AccessoriesController.php
@@ -979,6 +883,18 @@ parameters:
 			path: app/Http/Controllers/Api/AccessoriesController.php
 
 		-
+			message: '#^Property App\\Models\\SnipeModel\:\:\$location_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 3
+			path: app/Http/Controllers/Api/AccessoriesController.php
+
+		-
+			message: '#^Property App\\Models\\SnipeModel\:\:\$rtd_location_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 1
+			path: app/Http/Controllers/Api/AccessoriesController.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$use_image\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1013,12 +929,6 @@ parameters:
 			identifier: return.phpDocType
 			count: 1
 			path: app/Http/Controllers/Api/AssetModelsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/AssetsController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$image\.$#'
@@ -1069,12 +979,6 @@ parameters:
 			path: app/Http/Controllers/Api/AssetsController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:disassociate\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/AssetsController.php
-
-		-
 			message: '#^Left side of && is always true\.$#'
 			identifier: booleanAnd.leftAlwaysTrue
 			count: 2
@@ -1094,6 +998,12 @@ parameters:
 
 		-
 			message: '#^Method App\\Http\\Transformers\\AssetsTransformer\:\:transformAssets\(\) invoked with 3 parameters, 2 required\.$#'
+			identifier: arguments.count
+			count: 1
+			path: app/Http/Controllers/Api/AssetsController.php
+
+		-
+			message: '#^Method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<Illuminate\\Database\\Eloquent\\Model,Illuminate\\Database\\Eloquent\\Model\>\:\:disassociate\(\) invoked with 1 parameter, 0 required\.$#'
 			identifier: arguments.count
 			count: 1
 			path: app/Http/Controllers/Api/AssetsController.php
@@ -1123,10 +1033,10 @@ parameters:
 			path: app/Http/Controllers/Api/AssetsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Category\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/CategoriesController.php
+			message: '#^Property App\\Models\\Asset\|App\\Models\\Location\|App\\Models\\User\:\:\$location_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 3
+			path: app/Http/Controllers/Api/AssetsController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Category\:\:\$use_image\.$#'
@@ -1171,10 +1081,10 @@ parameters:
 			path: app/Http/Controllers/Api/CategoriesController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
 			count: 1
-			path: app/Http/Controllers/Api/CompaniesController.php
+			path: app/Http/Controllers/Api/CheckoutRequest.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Company\:\:\$use_disabled\.$#'
@@ -1196,12 +1106,6 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Component\:\:\$assigned_to\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/ComponentsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Component\:\:\$default_supplier_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/Api/ComponentsController.php
@@ -1232,12 +1136,6 @@ parameters:
 
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:orderItems\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/ComponentsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/Api/ComponentsController.php
@@ -1291,12 +1189,6 @@ parameters:
 			path: app/Http/Controllers/Api/ConsumablesController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$default_supplier_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/ConsumablesController.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -1327,12 +1219,6 @@ parameters:
 			path: app/Http/Controllers/Api/ConsumablesController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/ConsumablesController.php
-
-		-
 			message: '#^Comparison operation "\<\=" between int\<1, max\> and 0 is always false\.$#'
 			identifier: smallerOrEqual.alwaysFalse
 			count: 1
@@ -1345,7 +1231,19 @@ parameters:
 			path: app/Http/Controllers/Api/ConsumablesController.php
 
 		-
+			message: '#^Access to an undefined property App\\Models\\CustomField\:\:\$pivot\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/CustomFieldsController.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/CustomFieldsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:detach\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/Api/CustomFieldsController.php
@@ -1399,12 +1297,6 @@ parameters:
 			path: app/Http/Controllers/Api/DepartmentsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$manager_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/DepartmentsController.php
-
-		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:getErrors\(\)\.$#'
 			identifier: method.notFound
 			count: 2
@@ -1427,12 +1319,6 @@ parameters:
 			identifier: parameter.notFound
 			count: 1
 			path: app/Http/Controllers/Api/DepartmentsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Import\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Http/Controllers/Api/ImportController.php
 
 		-
 			message: '#^Dead catch \- Illuminate\\Database\\Eloquent\\JsonEncodingException is never thrown in the try block\.$#'
@@ -1471,18 +1357,6 @@ parameters:
 			path: app/Http/Controllers/Api/LicenseSeatsController.php
 
 		-
-			message: '#^Negated boolean expression is always false\.$#'
-			identifier: booleanNot.alwaysFalse
-			count: 1
-			path: app/Http/Controllers/Api/LicenseSeatsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\License\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/LicensesController.php
-
-		-
 			message: '#^Call to an undefined method App\\Models\\LicenseSeat\:\:getErrors\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -1495,13 +1369,13 @@ parameters:
 			path: app/Http/Controllers/Api/LocationsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$company_id\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Location\>\:\:\$company_id\.$#'
 			identifier: property.notFound
-			count: 5
+			count: 2
 			path: app/Http/Controllers/Api/LocationsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$parent_id\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Location\>\:\:\$name\.$#'
 			identifier: property.notFound
 			count: 2
 			path: app/Http/Controllers/Api/LocationsController.php
@@ -1531,46 +1405,22 @@ parameters:
 			path: app/Http/Controllers/Api/LocationsController.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
+			message: '#^Property App\\Models\\SnipeModel\:\:\$company_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 3
+			path: app/Http/Controllers/Api/LocationsController.php
+
+		-
+			message: '#^Property App\\Models\\SnipeModel\:\:\$parent_id is not readable\.$#'
+			identifier: property.writeOnly
 			count: 4
 			path: app/Http/Controllers/Api/LocationsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Http/Controllers/Api/MaintenancesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Maintenance\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/MaintenancesController.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$asset\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Api/MaintenancesController.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$asset_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Api/MaintenancesController.php
-
-		-
-			message: '#^Call to an undefined method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:TextSearch\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/MaintenancesController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/MaintenancesController.php
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 4
+			path: app/Http/Controllers/Api/LocationsController.php
 
 		-
 			message: '#^Call to method Illuminate\\Support\\Collection\<\*NEVER\*,\*NEVER\*\>\:\:isEmpty\(\) will always evaluate to true\.$#'
@@ -1589,12 +1439,6 @@ parameters:
 			identifier: parameter.phpDocType
 			count: 1
 			path: app/Http/Controllers/Api/MaintenancesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/ManufacturersController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$use_image\.$#'
@@ -1633,34 +1477,16 @@ parameters:
 			path: app/Http/Controllers/Api/ManufacturersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Api/NotesController.php
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/Api/ManufacturersController.php
 
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$request$#'
 			identifier: parameter.notFound
 			count: 1
 			path: app/Http/Controllers/Api/NotesController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: app/Http/Controllers/Api/PredefinedKitsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:detach\(\)\.$#'
-			identifier: method.notFound
-			count: 8
-			path: app/Http/Controllers/Api/PredefinedKitsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:syncWithoutDetaching\(\)\.$#'
-			identifier: method.notFound
-			count: 4
-			path: app/Http/Controllers/Api/PredefinedKitsController.php
 
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
@@ -1717,12 +1543,6 @@ parameters:
 			path: app/Http/Controllers/Api/ProfileController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Statuslabel\:\:\$color\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Http/Controllers/Api/StatuslabelsController.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Pagination\\LengthAwarePaginator\<int, App\\Models\\Statuslabel\>\:\:\$use_text\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1747,25 +1567,19 @@ parameters:
 			path: app/Http/Controllers/Api/StatuslabelsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$accessories_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/SuppliersController.php
+			message: '#^Property App\\Models\\IdeHelperStatuslabel\:\:\$default_label \(int\|null\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperStatuslabel\:\:\$show_in_nav \(int\|null\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: app/Http/Controllers/Api/StatuslabelsController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$asset_maintenances_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/SuppliersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/SuppliersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$consumables_count\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/Api/SuppliersController.php
@@ -1849,24 +1663,6 @@ parameters:
 			path: app/Http/Controllers/Api/UsersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/AssetModelsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$category_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/AssetModelsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$depreciation_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/AssetModelsController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$eol\.$#'
 			identifier: property.notFound
 			count: 2
@@ -1874,18 +1670,6 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$fieldset_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/AssetModelsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$manufacturer_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/AssetModelsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$min_amt\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/AssetModelsController.php
@@ -1951,20 +1735,26 @@ parameters:
 			path: app/Http/Controllers/AssetModelsController.php
 
 		-
-			message: '#^Property App\\Models\\AssetModel\:\:\$id \(int\) does not accept null\.$#'
+			message: '#^Property App\\Models\\IdeHelperAssetModel\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/AssetModelsController.php
 
 		-
-			message: '#^Property App\\Models\\AssetModel\:\:\$requestable \(int\) does not accept bool\.$#'
+			message: '#^Property App\\Models\\IdeHelperAssetModel\:\:\$requestable \(int\) does not accept bool\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/AssetModelsController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:disassociate\(\)\.$#'
-			identifier: method.notFound
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Assets/AssetCheckinController.php
+
+		-
+			message: '#^Method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<Illuminate\\Database\\Eloquent\\Model,Illuminate\\Database\\Eloquent\\Model\>\:\:disassociate\(\) invoked with 1 parameter, 0 required\.$#'
+			identifier: arguments.count
 			count: 1
 			path: app/Http/Controllers/Assets/AssetCheckinController.php
 
@@ -1975,22 +1765,10 @@ parameters:
 			path: app/Http/Controllers/Assets/AssetCheckinController.php
 
 		-
-			message: '#^Property App\\Models\\Asset\:\:\$status_id \(int\|null\) does not accept string\.$#'
+			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$status_id \(int\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Assets/AssetCheckinController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$location_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Assets/AssetCheckoutController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$rtd_location_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Assets/AssetCheckoutController.php
 
 		-
 			message: '#^Method App\\Http\\Controllers\\Assets\\AssetCheckoutController\:\:create\(\) should return Illuminate\\Contracts\\View\\View but returns Illuminate\\Http\\RedirectResponse\.$#'
@@ -2005,16 +1783,22 @@ parameters:
 			path: app/Http/Controllers/Assets/AssetCheckoutController.php
 
 		-
-			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
-			identifier: nullsafe.neverNull
+			message: '#^Property App\\Models\\SnipeModel\:\:\$location_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 3
+			path: app/Http/Controllers/Assets/AssetCheckoutController.php
+
+		-
+			message: '#^Property App\\Models\\SnipeModel\:\:\$rtd_location_id is not readable\.$#'
+			identifier: property.writeOnly
 			count: 1
 			path: app/Http/Controllers/Assets/AssetCheckoutController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
 			count: 1
-			path: app/Http/Controllers/Assets/AssetsController.php
+			path: app/Http/Controllers/Assets/AssetCheckoutController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$asset_tag\.$#'
@@ -2095,27 +1879,33 @@ parameters:
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
-			message: '#^Property App\\Models\\Asset\:\:\$assigned_to \(int\|null\) does not accept string\.$#'
+			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$assigned_to \(int\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
-			message: '#^Property App\\Models\\Asset\:\:\$id \(int\) does not accept null\.$#'
+			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$deleted_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
-			message: '#^Result of && is always false\.$#'
-			identifier: booleanAnd.alwaysFalse
-			count: 4
+			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$id \(int\) does not accept null\.$#'
+			identifier: assign.propertyType
+			count: 1
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
-			message: '#^Strict comparison using \=\=\= between bool and 1 will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
+			message: '#^Ternary operator condition is always true\.$#'
+			identifier: ternary.alwaysTrue
 			count: 2
+			path: app/Http/Controllers/Assets/AssetsController.php
+
+		-
+			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Maintenance\>\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
@@ -2125,38 +1915,20 @@ parameters:
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
-			message: '#^Variable \$serial_errors in empty\(\) always exists and is always falsy\.$#'
-			identifier: empty.variable
+			message: '#^Method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<Illuminate\\Database\\Eloquent\\Model,Illuminate\\Database\\Eloquent\\Model\>\:\:disassociate\(\) invoked with 1 parameter, 0 required\.$#'
+			identifier: arguments.count
 			count: 1
-			path: app/Http/Controllers/Assets/AssetsController.php
+			path: app/Http/Controllers/Assets/BulkAssetsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$location_id\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\SnipeModel\:\:\$location_id is not readable\.$#'
+			identifier: property.writeOnly
 			count: 3
 			path: app/Http/Controllers/Assets/BulkAssetsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$rtd_location_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Assets/BulkAssetsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:disassociate\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Assets/BulkAssetsController.php
-
-		-
-			message: '#^Right side of \|\| is always false\.$#'
-			identifier: booleanOr.rightAlwaysFalse
-			count: 1
-			path: app/Http/Controllers/Assets/BulkAssetsController.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between bool and 1 will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
+			message: '#^Property App\\Models\\SnipeModel\:\:\$rtd_location_id is not readable\.$#'
+			identifier: property.writeOnly
 			count: 1
 			path: app/Http/Controllers/Assets/BulkAssetsController.php
 
@@ -2251,12 +2023,6 @@ parameters:
 			path: app/Http/Controllers/Auth/LoginController.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$activated \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Http/Controllers/Auth/LoginController.php
-
-		-
 			message: '#^Call to method getErrors\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
 			identifier: class.notFound
 			count: 2
@@ -2311,40 +2077,10 @@ parameters:
 			path: app/Http/Controllers/Auth/SamlController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/BulkMaintenancesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Supplier\>\:\:\$accessories_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/BulkSuppliersController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Supplier\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Supplier\>\:\:\$asset_maintenances_count\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/BulkSuppliersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Supplier\>\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/BulkSuppliersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Supplier\>\:\:\$consumables_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/BulkSuppliersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Category\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/CategoriesController.php
 
 		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:getErrors\(\)\.$#'
@@ -2357,12 +2093,6 @@ parameters:
 			identifier: parameter.notFound
 			count: 3
 			path: app/Http/Controllers/CategoriesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/CompaniesController.php
 
 		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:getErrors\(\)\.$#'
@@ -2381,12 +2111,6 @@ parameters:
 			identifier: parameter.notFound
 			count: 2
 			path: app/Http/Controllers/CompaniesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\ComponentAssignment\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\ComponentAssignment\>\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Components/ComponentCheckinController.php
 
 		-
 			message: '#^Cannot access property \$asset_id on array\<mixed\>\|object\.$#'
@@ -2425,12 +2149,6 @@ parameters:
 			path: app/Http/Controllers/Components/ComponentCheckoutController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: app/Http/Controllers/Components/ComponentCheckoutController.php
-
-		-
 			message: '#^Method App\\Http\\Controllers\\Components\\ComponentCheckoutController\:\:create\(\) should return Illuminate\\Contracts\\View\\View but returns Illuminate\\Http\\RedirectResponse\.$#'
 			identifier: return.type
 			count: 3
@@ -2441,18 +2159,6 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Http/Controllers/Components/ComponentCheckoutController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Component\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Components/ComponentsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Component\:\:\$default_supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Components/ComponentsController.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
@@ -2485,7 +2191,7 @@ parameters:
 			path: app/Http/Controllers/Components/ComponentsController.php
 
 		-
-			message: '#^Property App\\Models\\Component\:\:\$id \(int\) does not accept null\.$#'
+			message: '#^Property App\\Models\\IdeHelperComponent\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Components/ComponentsController.php
@@ -2503,28 +2209,10 @@ parameters:
 			path: app/Http/Controllers/Consumables/ConsumableCheckoutController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: app/Http/Controllers/Consumables/ConsumableCheckoutController.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Http/Controllers/Consumables/ConsumableCheckoutController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Consumables/ConsumablesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$default_supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Consumables/ConsumablesController.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
@@ -2563,7 +2251,7 @@ parameters:
 			path: app/Http/Controllers/Consumables/ConsumablesController.php
 
 		-
-			message: '#^Property App\\Models\\Consumable\:\:\$id \(int\) does not accept null\.$#'
+			message: '#^Property App\\Models\\IdeHelperConsumable\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Consumables/ConsumablesController.php
@@ -2573,6 +2261,18 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/CustomFieldsController.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: app/Http/Controllers/CustomFieldsController.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CustomField\:\:\$pivot\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/CustomFieldsetsController.php
 
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
@@ -2629,12 +2329,6 @@ parameters:
 			path: app/Http/Controllers/DepartmentsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Depreciation\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/DepreciationsController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Depreciation\:\:\$depreciation_method\.$#'
 			identifier: property.notFound
 			count: 2
@@ -2665,39 +2359,45 @@ parameters:
 			path: app/Http/Controllers/GroupsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$location_id\.$#'
-			identifier: property.notFound
-			count: 2
+			message: '#^Property App\\Models\\SnipeModel\:\:\$location_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 3
 			path: app/Http/Controllers/Kits/CheckoutKitController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$rtd_location_id\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\SnipeModel\:\:\$rtd_location_id is not readable\.$#'
+			identifier: property.writeOnly
 			count: 1
 			path: app/Http/Controllers/Kits/CheckoutKitController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\PredefinedKit\:\:\$created_by\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Relations\\Pivot\:\:\$accessory_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$pivot\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Relations\\Pivot\:\:\$consumable_id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$pivot\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Relations\\Pivot\:\:\$license_id\.$#'
 			identifier: property.notFound
-			count: 6
+			count: 1
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:detach\(\)\.$#'
-			identifier: method.notFound
-			count: 8
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Relations\\Pivot\:\:\$model_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Relations\\Pivot\:\:\$quantity\.$#'
+			identifier: property.notFound
+			count: 4
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
@@ -2809,12 +2509,6 @@ parameters:
 			path: app/Http/Controllers/Licenses/LicenseCheckoutController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\License\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Licenses/LicensesController.php
-
-		-
 			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Relations\\Relation to int\.$#'
 			identifier: cast.int
 			count: 1
@@ -2827,28 +2521,16 @@ parameters:
 			path: app/Http/Controllers/Licenses/LicensesController.php
 
 		-
-			message: '#^Property App\\Models\\License\:\:\$id \(int\) does not accept null\.$#'
+			message: '#^Property App\\Models\\IdeHelperLicense\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Licenses/LicensesController.php
 
 		-
-			message: '#^Property App\\Models\\License\:\:\$seats \(int\) does not accept string\.$#'
+			message: '#^Property App\\Models\\IdeHelperLicense\:\:\$seats \(int\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Licenses/LicensesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/LocationsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Location\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/LocationsController.php
 
 		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:getErrors\(\)\.$#'
@@ -2869,7 +2551,13 @@ parameters:
 			path: app/Http/Controllers/LocationsController.php
 
 		-
-			message: '#^Property App\\Models\\Location\:\:\$id \(int\) does not accept null\.$#'
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/LocationsController.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperLocation\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/LocationsController.php
@@ -2881,19 +2569,7 @@ parameters:
 			path: app/Http/Controllers/LocationsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/MaintenancesController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Asset\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Asset\>\:\:\$asset_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/MaintenancesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Maintenance\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/MaintenancesController.php
@@ -2917,22 +2593,10 @@ parameters:
 			path: app/Http/Controllers/MaintenancesController.php
 
 		-
-			message: '#^Property App\\Models\\Maintenance\:\:\$completed_at \(Carbon\\Carbon\|null\) does not accept string\.$#'
+			message: '#^Property App\\Models\\IdeHelperMaintenance\:\:\$completed_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/MaintenancesController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/ManufacturersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/ManufacturersController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$tag_color\.$#'
@@ -2965,22 +2629,10 @@ parameters:
 			path: app/Http/Controllers/ManufacturersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
-			path: app/Http/Controllers/NotesController.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Asset\>\|Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/NotesController.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$asset\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/NotesController.php
+			path: app/Http/Controllers/ManufacturersController.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
@@ -3013,61 +2665,67 @@ parameters:
 			path: app/Http/Controllers/Reports/CustomConsumableReportController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$assigned\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/ReportsController.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$asset\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/ReportsController.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$asset_maintenance_time\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$address\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$completedByUser\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$city\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$completed_at\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$companies\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$cost\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$country\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$expected_completion_date\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$department\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$is_warranty\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/ReportsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$maintenanceType\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$employee_num\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$jobtitle\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/ReportsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$manager\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/ReportsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$model\.$#'
 			identifier: property.notFound
 			count: 2
 			path: app/Http/Controllers/ReportsController.php
@@ -3079,13 +2737,31 @@ parameters:
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$start_date\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$phone\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$supplier\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$serial\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/ReportsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$state\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/ReportsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$username\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/ReportsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$zip\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
@@ -3094,6 +2770,18 @@ parameters:
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:checkouts\(\)\.$#'
 			identifier: method.notFound
 			count: 1
+			path: app/Http/Controllers/ReportsController.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Http/Controllers/ReportsController.php
+
+		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 3
 			path: app/Http/Controllers/ReportsController.php
 
 		-
@@ -3127,12 +2815,6 @@ parameters:
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/SettingsController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Setting\:\:\$label2_template_name\.$#'
 			identifier: property.notFound
 			count: 1
@@ -3145,50 +2827,14 @@ parameters:
 			path: app/Http/Controllers/SettingsController.php
 
 		-
-			message: '#^Loose comparison using \=\= between false and ''1'' will always evaluate to false\.$#'
-			identifier: equal.alwaysFalse
-			count: 1
-			path: app/Http/Controllers/SettingsController.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$labels_display_model \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 2
-			path: app/Http/Controllers/SettingsController.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$login_common_disabled \(bool\) does not accept int\.$#'
+			message: '#^Property App\\Models\\IdeHelperSetting\:\:\$null_company_is_floater \(int\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/SettingsController.php
 
 		-
-			message: '#^Property App\\Models\\Setting\:\:\$login_remote_user_enabled \(bool\) does not accept int\.$#'
+			message: '#^Property App\\Models\\IdeHelperSetting\:\:\$scope_locations_fmcs \(int\) does not accept string\.$#'
 			identifier: assign.propertyType
-			count: 1
-			path: app/Http/Controllers/SettingsController.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$null_company_is_floater \(bool\) does not accept string\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Http/Controllers/SettingsController.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$pwd_secure_uncommon \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Http/Controllers/SettingsController.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$scope_locations_fmcs \(bool\) does not accept string\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Http/Controllers/SettingsController.php
-
-		-
-			message: '#^Result of && is always false\.$#'
-			identifier: booleanAnd.alwaysFalse
 			count: 1
 			path: app/Http/Controllers/SettingsController.php
 
@@ -3205,12 +2851,6 @@ parameters:
 			path: app/Http/Controllers/SettingsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Setting\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SetupController.php
-
-		-
 			message: '#^Method App\\Http\\Controllers\\SetupController\:\:getSetupIndex\(\) should return Illuminate\\Contracts\\View\\View but returns Illuminate\\Http\\Response\.$#'
 			identifier: return.type
 			count: 1
@@ -3221,30 +2861,6 @@ parameters:
 			identifier: return.phpDocType
 			count: 1
 			path: app/Http/Controllers/SetupController.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$alerts_enabled \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Http/Controllers/SetupController.php
-
-		-
-			message: '#^Property App\\Models\\User\:\:\$activated \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Http/Controllers/SetupController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Statuslabel\:\:\$color\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/StatuslabelsController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Statuslabel\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/StatuslabelsController.php
 
 		-
 			message: '#^Offset ''archived'' does not exist on string\.$#'
@@ -3271,31 +2887,7 @@ parameters:
 			path: app/Http/Controllers/StatuslabelsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$accessories_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SuppliersController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$asset_maintenances_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SuppliersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SuppliersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$consumables_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SuppliersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/SuppliersController.php
@@ -3313,22 +2905,10 @@ parameters:
 			path: app/Http/Controllers/SuppliersController.php
 
 		-
-			message: '#^Property App\\Models\\Supplier\:\:\$url \(string\|null\) does not accept Illuminate\\Database\\Eloquent\\Relations\\Relation\.$#'
+			message: '#^Property App\\Models\\IdeHelperSupplier\:\:\$url \(string\|null\) does not accept Illuminate\\Database\\Eloquent\\Relations\\Relation\.$#'
 			identifier: assign.propertyType
 			count: 2
 			path: app/Http/Controllers/SuppliersController.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/SyncAdapterController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Import\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/UploadedFilesController.php
 
 		-
 			message: '#^If condition is always true\.$#'
@@ -3349,24 +2929,6 @@ parameters:
 			path: app/Http/Controllers/UploadedFilesController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/Users/BulkUsersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\User\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Users/BulkUsersController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:updateExistingPivot\(\)\.$#'
-			identifier: method.notFound
-			count: 3
-			path: app/Http/Controllers/Users/BulkUsersController.php
-
-		-
 			message: '#^Left side of && is always true\.$#'
 			identifier: booleanAnd.leftAlwaysTrue
 			count: 1
@@ -3379,28 +2941,10 @@ parameters:
 			path: app/Http/Controllers/Users/BulkUsersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 2
 			path: app/Http/Controllers/Users/ImpersonateController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\AccessoryCheckout\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Users/UserItemTransferController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:dissociate\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Users/UserItemTransferController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Users/UsersController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\User\:\:\$manages_locations_count\.$#'
@@ -3433,32 +2977,32 @@ parameters:
 			path: app/Http/Controllers/Users/UsersController.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$id \(int\) does not accept null\.$#'
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Users/UsersController.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$permissions \(string\|null\) does not accept array\|stdClass\.$#'
+			message: '#^Property App\\Models\\IdeHelperUser\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Users/UsersController.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$two_factor_enrolled \(bool\) does not accept int\.$#'
+			message: '#^Property App\\Models\\IdeHelperUser\:\:\$permissions \(string\|null\) does not accept array\|stdClass\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Users/UsersController.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/ViewAssetsController.php
 
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$assetId$#'
 			identifier: parameter.notFound
+			count: 1
+			path: app/Http/Controllers/ViewAssetsController.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/ViewAssetsController.php
 
@@ -3523,19 +3067,25 @@ parameters:
 			path: app/Http/Requests/CreateMultipleAssetRequest.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Import\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Requests/ItemImportRequest.php
-
-		-
 			message: '#^Call to static method flash\(\) on an unknown class Input\.$#'
 			identifier: class.notFound
 			count: 1
 			path: app/Http/Requests/SettingsLdapRequest.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$orderItem\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Transformers/ActionlogsTransformer.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Transformers/ActionlogsTransformer.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$serial\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Transformers/ActionlogsTransformer.php
@@ -3547,8 +3097,20 @@ parameters:
 			path: app/Http/Transformers/ActionlogsTransformer.php
 
 		-
+			message: '#^Left side of && is always true\.$#'
+			identifier: booleanAnd.leftAlwaysTrue
+			count: 1
+			path: app/Http/Transformers/ActionlogsTransformer.php
+
+		-
 			message: '#^Loose comparison using \!\= between non\-falsy\-string and '''' will always evaluate to true\.$#'
 			identifier: notEqual.alwaysTrue
+			count: 1
+			path: app/Http/Transformers/ActionlogsTransformer.php
+
+		-
+			message: '#^Ternary operator condition is always true\.$#'
+			identifier: ternary.alwaysTrue
 			count: 1
 			path: app/Http/Transformers/ActionlogsTransformer.php
 
@@ -3571,6 +3133,12 @@ parameters:
 			path: app/Http/Transformers/AssetModelsTransformer.php
 
 		-
+			message: '#^Access to an undefined property App\\Models\\CustomField\:\:\$pivot\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Transformers/AssetModelsTransformer.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\AccessoryCheckout\:\:\$deleted_at\.$#'
 			identifier: property.notFound
 			count: 1
@@ -3583,9 +3151,15 @@ parameters:
 			path: app/Http/Transformers/AssetsTransformer.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$externalSource\.$#'
+			message: '#^Access to an undefined property App\\Models\\Component\:\:\$pivot\.$#'
 			identifier: property.notFound
-			count: 5
+			count: 3
+			path: app/Http/Transformers/AssetsTransformer.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\License\:\:\$note\.$#'
+			identifier: property.notFound
+			count: 1
 			path: app/Http/Transformers/AssetsTransformer.php
 
 		-
@@ -3631,13 +3205,19 @@ parameters:
 			path: app/Http/Transformers/AssetsTransformer.php
 
 		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Http/Transformers/AssetsTransformer.php
+
+		-
 			message: '#^Loose comparison using \=\= between null and '''' will always evaluate to true\.$#'
 			identifier: equal.alwaysTrue
 			count: 1
 			path: app/Http/Transformers/AssetsTransformer.php
 
 		-
-			message: '#^Using nullsafe property access on non\-nullable type mixed\. Use \-\> instead\.$#'
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\License\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 2
 			path: app/Http/Transformers/AssetsTransformer.php
@@ -3647,54 +3227,6 @@ parameters:
 			identifier: property.notFound
 			count: 6
 			path: app/Http/Transformers/CategoriesTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$accessories_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/CompaniesTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$assets_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/CompaniesTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/CompaniesTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$consumables_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/CompaniesTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$licenses_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/CompaniesTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$users_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/CompaniesTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/CompaniesTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/CompaniesTransformer.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$note\.$#'
@@ -3721,12 +3253,6 @@ parameters:
 			path: app/Http/Transformers/CustomFieldsTransformer.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$assigned\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/DepreciationReportTransformer.php
-
-		-
 			message: '#^Cannot access property \$display_name on string\.$#'
 			identifier: property.nonObject
 			count: 1
@@ -3745,16 +3271,22 @@ parameters:
 			path: app/Http/Transformers/LicenseSeatsTransformer.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Transformers/LocationsTransformer.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Http/Transformers/LicensesTransformer.php
+			path: app/Http/Transformers/LocationsTransformer.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
-			identifier: property.notFound
+			message: '#^Call to function is_null\(\) with Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Location\> will always evaluate to false\.$#'
+			identifier: function.impossibleType
 			count: 1
-			path: app/Http/Transformers/LicensesTransformer.php
+			path: app/Http/Transformers/LocationsTransformer.php
 
 		-
 			message: '#^Method App\\Http\\Transformers\\LocationsTransformer\:\:transformLocationCompact\(\) should return array but return statement is missing\.$#'
@@ -3769,106 +3301,16 @@ parameters:
 			path: app/Http/Transformers/LocationsTransformer.php
 
 		-
-			message: '#^Using nullsafe property access on non\-nullable type mixed\. Use \-\> instead\.$#'
+			message: '#^Using nullsafe property access on non\-nullable type Illuminate\\Database\\Eloquent\\Model\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 2
 			path: app/Http/Transformers/LocationsTransformer.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Maintenance\:\:\$checkedOutTo\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
 			identifier: property.notFound
-			count: 1
+			count: 2
 			path: app/Http/Transformers/MaintenancesTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$accessories_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/ManufacturersTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$assets_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/ManufacturersTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/ManufacturersTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$consumables_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/ManufacturersTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$licenses_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/ManufacturersTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$admin\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$currency\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$filename\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$item_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$item_type\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$notes\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order_number\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$purchase_date\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$supplier\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/OrderItemsTransformer.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$name\.$#'
@@ -3883,28 +3325,16 @@ parameters:
 			path: app/Http/Transformers/PredefinedKitsTransformer.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Statuslabel\:\:\$color\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Http/Transformers/StatuslabelsTransformer.php
+			path: app/Http/Transformers/ProfileTransformer.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$accessories_count\.$#'
-			identifier: property.notFound
+			message: '#^Ternary operator condition is always true\.$#'
+			identifier: ternary.alwaysTrue
 			count: 1
-			path: app/Http/Transformers/SuppliersTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$components_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/SuppliersTransformer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$consumables_count\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Transformers/SuppliersTransformer.php
+			path: app/Http/Transformers/ProfileTransformer.php
 
 		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
@@ -3937,24 +3367,6 @@ parameters:
 			path: app/Http/Transformers/UsersTransformer.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Http/Transformers/UsersTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Http/Transformers/UsersTransformer.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$tag_color\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Http/Transformers/UsersTransformer.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Relations\\Pivot\:\:\$created_at\.$#'
 			identifier: property.notFound
 			count: 2
@@ -3973,18 +3385,6 @@ parameters:
 			path: app/Http/Transformers/UsersTransformer.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/AccessoryImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\AccessoryCheckout\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/AccessoryImporter.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -4001,18 +3401,6 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 2
 			path: app/Importer/AssetHistoryImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$assigned\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/AssetImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/AssetImporter.php
 
 		-
 			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
@@ -4039,52 +3427,16 @@ parameters:
 			path: app/Importer/AssetImporter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/AssetModelImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Category\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/CategoryImporter.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Category\:\:\$errors\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Importer/CategoryImporter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Component\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ComponentImporter.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Importer/ComponentImporter.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Importer/ComponentImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ConsumableImporter.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Importer/ConsumableImporter.php
 
 		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
@@ -4171,58 +3523,10 @@ parameters:
 			path: app/Importer/Importer.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$activated \(bool\) does not accept int\.$#'
+			message: '#^Property App\\Models\\IdeHelperUser\:\:\$manager_id \(int\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Importer/Importer.php
-
-		-
-			message: '#^Property App\\Models\\User\:\:\$manager_id \(int\|null\) does not accept string\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Importer/Importer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Category\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Location\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Statuslabel\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ItemImporter.php
 
 		-
 			message: '#^Method App\\Importer\\ItemImporter\:\:createOrFetchAssetModel\(\) should return int but empty return statement found\.$#'
@@ -4315,24 +3619,6 @@ parameters:
 			path: app/Importer/ItemImporter.php
 
 		-
-			message: '#^Property App\\Models\\Statuslabel\:\:\$archived \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
-			message: '#^Property App\\Models\\Statuslabel\:\:\$deployable \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
-			message: '#^Property App\\Models\\Statuslabel\:\:\$pending \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
 			message: '#^Result of && is always false\.$#'
 			identifier: booleanAnd.alwaysFalse
 			count: 1
@@ -4345,22 +3631,10 @@ parameters:
 			path: app/Importer/ItemImporter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\License\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/LicenseImporter.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Importer/LicenseImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Location\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/LocationImporter.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Location\:\:\$errors\.$#'
@@ -4375,22 +3649,10 @@ parameters:
 			path: app/Importer/LocationImporter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/ManufacturerImporter.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$errors\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Importer/ManufacturerImporter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Importer/SupplierImporter.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$errors\.$#'
@@ -4501,12 +3763,6 @@ parameters:
 			path: app/Listeners/CheckoutableListener.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$assigned\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Listeners/CheckoutablesCheckedOutInBulkListener.php
-
-		-
 			message: '#^Method App\\Listeners\\CheckoutablesCheckedOutInBulkListener\:\:getNotifiableUser\(\) should return App\\Models\\User\|null but returns Illuminate\\Database\\Eloquent\\Model\.$#'
 			identifier: return.type
 			count: 1
@@ -4534,12 +3790,6 @@ parameters:
 			message: '#^Access to an undefined property App\\Events\\UserMerged\:\:\$merged_to\.$#'
 			identifier: property.notFound
 			count: 6
-			path: app/Listeners/LogListener.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 4
 			path: app/Listeners/LogListener.php
 
 		-
@@ -4615,14 +3865,56 @@ parameters:
 			path: app/Livewire/CustomFieldEditor.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\CustomField\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Livewire/CustomFieldEditor.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
-			identifier: method.notFound
+			message: '#^Property App\\Models\\IdeHelperCustomField\:\:\$auto_add_to_fieldsets \(int\|null\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Livewire/CustomFieldEditor.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperCustomField\:\:\$display_audit \(int\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Livewire/CustomFieldEditor.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperCustomField\:\:\$display_checkin \(int\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Livewire/CustomFieldEditor.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperCustomField\:\:\$display_checkout \(int\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Livewire/CustomFieldEditor.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperCustomField\:\:\$display_in_user_view \(int\|null\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Livewire/CustomFieldEditor.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperCustomField\:\:\$is_unique \(int\|null\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Livewire/CustomFieldEditor.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperCustomField\:\:\$show_in_email \(int\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Livewire/CustomFieldEditor.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperCustomField\:\:\$show_in_listview \(int\|null\) does not accept bool\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Livewire/CustomFieldEditor.php
 
@@ -4658,18 +3950,6 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Livewire\\Importer\:\:\$files\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Livewire/Importer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Import\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Livewire/Importer.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Import\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Import\>\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Livewire/Importer.php
@@ -4841,6 +4121,18 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: app/Mail/CheckoutAccessoryMail.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Mail/CheckoutAccessoryMail.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Mail/CheckoutAssetMail.php
 
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
@@ -5041,24 +4333,6 @@ parameters:
 			path: app/Mail/UnacceptedAssetReminderMail.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$default_purchase_cost\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$default_supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Models/Accessory.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$license\.$#'
 			identifier: property.notFound
 			count: 1
@@ -5077,57 +4351,21 @@ parameters:
 			path: app/Models/Accessory.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 6
-			path: app/Models/Accessory.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
 			path: app/Models/Accessory.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$currency\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order\.$#'
 			identifier: property.notFound
-			count: 6
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order_number\.$#'
-			identifier: property.notFound
-			count: 1
+			count: 4
 			path: app/Models/Accessory.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$price\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$purchase_date\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
 			path: app/Models/Accessory.php
 
 		-
@@ -5155,13 +4393,13 @@ parameters:
 			path: app/Models/Accessory.php
 
 		-
-			message: '#^Method App\\Models\\Accessory\:\:getImageUrl\(\) should return string but returns false\.$#'
+			message: '#^Method App\\Models\\Accessory\:\:checkin_email\(\) should return bool but returns int\|null\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/Accessory.php
 
 		-
-			message: '#^Method App\\Models\\Accessory\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			message: '#^Method App\\Models\\Accessory\:\:getImageUrl\(\) should return string but returns false\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/Accessory.php
@@ -5191,36 +4429,6 @@ parameters:
 			path: app/Models/Accessory.php
 
 		-
-			message: '#^Parameter \$order of method App\\Models\\Accessory\:\:scopeOrderCategory\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Accessory\:\:scopeOrderCompany\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Accessory\:\:scopeOrderLocation\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Accessory\:\:scopeOrderManufacturer\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Accessory\:\:scopeOrderSupplier\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
 			message: '#^Property App\\Models\\Accessory\:\:\$searchableAttributes \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
@@ -5230,6 +4438,12 @@ parameters:
 			message: '#^Property App\\Models\\Accessory\:\:\$searchableRelations \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
+			path: app/Models/Accessory.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 2
 			path: app/Models/Accessory.php
 
 		-
@@ -5299,12 +4513,6 @@ parameters:
 			path: app/Models/AccessoryCheckout.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Actionlog.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -5359,22 +4567,16 @@ parameters:
 			path: app/Models/Actionlog.php
 
 		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Models/Actionlog.php
+
+		-
 			message: '#^Unsafe access to private property App\\Models\\Actionlog\:\:\$customFieldFilterMapCache through static\:\:\.$#'
 			identifier: staticClassAccess.privateProperty
 			count: 4
 			path: app/Models/Actionlog.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 5
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Asset.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$default_purchase_cost\.$#'
@@ -5401,33 +4603,15 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
 			path: app/Models/Asset.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$currency\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order\.$#'
 			identifier: property.notFound
-			count: 6
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order_number\.$#'
-			identifier: property.notFound
-			count: 1
+			count: 4
 			path: app/Models/Asset.php
 
 		-
@@ -5437,19 +4621,13 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$purchase_date\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$userLoc\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Models/Asset.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:associate\(\)\.$#'
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:present\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Models/Asset.php
@@ -5458,18 +4636,6 @@ parameters:
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:withTrashed\(\)\.$#'
 			identifier: method.notFound
 			count: 5
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Query\\Builder\:\:getModel\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Query\\Builder\:\:withTrashed\(\)\.$#'
-			identifier: method.notFound
-			count: 1
 			path: app/Models/Asset.php
 
 		-
@@ -5497,9 +4663,15 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
-			message: '#^Expression on left side of \?\? is not nullable\.$#'
-			identifier: nullCoalesce.expr
+			message: '#^Method App\\Models\\Asset\:\:assetLoc\(\) should return ArrayObject but returns App\\Models\\Location\|null\.$#'
+			identifier: return.type
 			count: 2
+			path: app/Models/Asset.php
+
+		-
+			message: '#^Method App\\Models\\Asset\:\:assetLoc\(\) should return ArrayObject but returns Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
 			path: app/Models/Asset.php
 
 		-
@@ -5509,7 +4681,7 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
-			message: '#^Method App\\Models\\Asset\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			message: '#^Method App\\Models\\Asset\:\:checkin_email\(\) should return bool but returns int\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/Asset.php
@@ -5521,8 +4693,20 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
+			message: '#^Method App\\Models\\Asset\:\:get_depreciation\(\) should return Illuminate\\Database\\Eloquent\\Relations\\Relation but returns App\\Models\\Depreciation\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Asset.php
+
+		-
 			message: '#^Method App\\Models\\Asset\:\:nextAutoIncrement\(\) should return int but return statement is missing\.$#'
 			identifier: return.missing
+			count: 1
+			path: app/Models/Asset.php
+
+		-
+			message: '#^Method App\\Models\\Asset\:\:requireAcceptance\(\) should return bool but returns int\.$#'
+			identifier: return.type
 			count: 1
 			path: app/Models/Asset.php
 
@@ -5539,26 +4723,8 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$order$#'
-			identifier: parameter.notFound
-			count: 2
-			path: app/Models/Asset.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$settings$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$user$#'
 			identifier: parameter.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^PHPDoc tag @return with type Illuminate\\Database\\Query\\Builder is incompatible with native type Illuminate\\Database\\Eloquent\\Builder\.$#'
-			identifier: return.phpDocType
 			count: 1
 			path: app/Models/Asset.php
 
@@ -5571,96 +4737,6 @@ parameters:
 		-
 			message: '#^PHPDoc type array of property App\\Models\\Asset\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderAssigned\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderByCreatedByName\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderByJobTitle\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderCategory\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderCompany\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderLocation\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderManufacturer\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderModelNumber\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderModels\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderRtdLocation\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderStatus\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Asset\:\:scopeOrderSupplier\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$search of method App\\Models\\Asset\:\:scopeAssignedSearch\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$search of method App\\Models\\Asset\:\:scopeByDepreciationId\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^Parameter \$search of method App\\Models\\Asset\:\:scopeByLocationId\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/Asset.php
 
@@ -5683,9 +4759,21 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 2
+			path: app/Models/Asset.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$expected_checkin \(Illuminate\\Support\\Carbon\|null\) does not accept Carbon\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Models/Asset.php
+
+		-
 			message: '#^Right side of && is always true\.$#'
 			identifier: booleanAnd.rightAlwaysTrue
-			count: 1
+			count: 2
 			path: app/Models/Asset.php
 
 		-
@@ -5755,12 +4843,6 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 4
-			path: app/Models/AssetModel.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$license\.$#'
 			identifier: property.notFound
 			count: 1
@@ -5779,12 +4861,6 @@ parameters:
 			path: app/Models/AssetModel.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:fields\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -5793,12 +4869,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
-			message: '#^Call to method where\(\) on an unknown class App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/AssetModel.php
 
@@ -5815,18 +4885,6 @@ parameters:
 			path: app/Models/AssetModel.php
 
 		-
-			message: '#^Method App\\Models\\AssetModel\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
-			message: '#^Method App\\Models\\AssetModel\:\:scopeSearchByManufacturerOrCat\(\) has invalid return type App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
 			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
 			identifier: phpDoc.parseError
 			count: 1
@@ -5839,8 +4897,8 @@ parameters:
 			path: app/Models/AssetModel.php
 
 		-
-			message: '#^PHPDoc tag @return has invalid value \(\$query\)\: Unexpected token "\$query", expected type at offset 111 on line 6$#'
-			identifier: phpDoc.parseError
+			message: '#^PHPDoc tag @return with type mixed is not subtype of native type App\\Models\\Builders\\AssetModelQueryBuilder\.$#'
+			identifier: return.phpDocType
 			count: 1
 			path: app/Models/AssetModel.php
 
@@ -5851,27 +4909,9 @@ parameters:
 			path: app/Models/AssetModel.php
 
 		-
-			message: '#^Parameter \$order of method App\\Models\\AssetModel\:\:scopeOrderCategory\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\AssetModel\:\:scopeOrderManufacturer\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
-			message: '#^Parameter \$query of method App\\Models\\AssetModel\:\:scopeSearchByManufacturerOrCat\(\) has invalid type App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
-			message: '#^Parameter \$search of method App\\Models\\AssetModel\:\:scopeSearchByManufacturerOrCat\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
+			message: '#^Property \$this\(App\\Models\\AssetModel\)\:\:\$company_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 2
 			path: app/Models/AssetModel.php
 
 		-
@@ -5889,6 +4929,12 @@ parameters:
 		-
 			message: '#^Property App\\Models\\AssetModel\:\:\$searchableRelations \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
+			count: 1
+			path: app/Models/AssetModel.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Models/AssetModel.php
 
@@ -5923,94 +4969,10 @@ parameters:
 			path: app/Models/AssetModel.php
 
 		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:active\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:completed\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:dueForCompletion\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderByAssetModelName\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderByAssetModelNumber\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderByAssetName\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderByAssetSerial\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderByCompletedAt\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderByCreatedBy\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderByMaintenanceType\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderBySupplier\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderByTag\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderLocationName\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:orderStatusName\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
-
-		-
-			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:overdueForCompletion\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Builders/MaintenanceQueryBuilder.php
+			message: '#^Expression on left side of \?\? is not nullable\.$#'
+			identifier: nullCoalesce.expr
+			count: 2
+			path: app/Models/Builders/AssetQueryBuilder.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
@@ -6033,6 +4995,12 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$field$#'
 			identifier: parameter.notFound
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^PHPDoc tag @return with type Illuminate\\Database\\Query\\Builder is incompatible with native type App\\Models\\Builders\\CategoryQueryBuilder\.$#'
+			identifier: return.phpDocType
 			count: 1
 			path: app/Models/Category.php
 
@@ -6151,16 +5119,10 @@ parameters:
 			path: app/Models/Checkoutable.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 4
-			path: app/Models/Company.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$company_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Models/Company.php
+			message: '#^Using nullsafe property access on non\-nullable type Illuminate\\Database\\Eloquent\\Model\. Use \-\> instead\.$#'
+			identifier: nullsafe.neverNull
+			count: 1
+			path: app/Models/Checkoutable.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Company\:\:\$license\.$#'
@@ -6176,12 +5138,6 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Company\:\:\$model\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Company.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Company\:\:\$uploads\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Models/Company.php
@@ -6229,12 +5185,6 @@ parameters:
 			path: app/Models/Company.php
 
 		-
-			message: '#^Method App\\Models\\Company\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Company.php
-
-		-
 			message: '#^Method App\\Models\\Company\:\:isCurrentUserHasAccess\(\) never returns void so it can be removed from the return type\.$#'
 			identifier: return.unusedType
 			count: 1
@@ -6253,6 +5203,12 @@ parameters:
 			path: app/Models/Company.php
 
 		-
+			message: '#^Property \$this\(App\\Models\\Company\)\:\:\$company_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 7
+			path: app/Models/Company.php
+
+		-
 			message: '#^Property App\\Models\\Company\:\:\$searchableAttributes \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
@@ -6265,6 +5221,12 @@ parameters:
 			path: app/Models/Company.php
 
 		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Models/Company.php
+
+		-
 			message: '#^Result of && is always false\.$#'
 			identifier: booleanAnd.alwaysFalse
 			count: 2
@@ -6272,6 +5234,12 @@ parameters:
 
 		-
 			message: '#^Strict comparison using \=\=\= between ''App\\\\Models\\\\Company'' and ''App\\\\Models\\\\LicenseSeat'' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/Company.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between mixed and \*NEVER\* will always evaluate to false\.$#'
 			identifier: identical.alwaysFalse
 			count: 1
 			path: app/Models/Company.php
@@ -6319,30 +5287,6 @@ parameters:
 			path: app/Models/CompanyableScope.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 6
-			path: app/Models/Component.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Component\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Component.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Component\:\:\$default_purchase_cost\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Models/Component.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Component\:\:\$default_supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Models/Component.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Component\:\:\$license\.$#'
 			identifier: property.notFound
 			count: 1
@@ -6373,51 +5317,21 @@ parameters:
 			path: app/Models/Component.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Component\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Component.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
 			path: app/Models/Component.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$currency\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Component.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order\.$#'
 			identifier: property.notFound
-			count: 6
-			path: app/Models/Component.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order_number\.$#'
-			identifier: property.notFound
-			count: 1
+			count: 4
 			path: app/Models/Component.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$price\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Models/Component.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$purchase_date\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Component.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
 			path: app/Models/Component.php
 
 		-
@@ -6451,7 +5365,7 @@ parameters:
 			path: app/Models/Component.php
 
 		-
-			message: '#^Method App\\Models\\Component\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			message: '#^Method App\\Models\\Component\:\:checkin_email\(\) should return bool but returns int\|null\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/Component.php
@@ -6463,20 +5377,20 @@ parameters:
 			path: app/Models/Component.php
 
 		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$order$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Models/Component.php
+
+		-
+			message: '#^PHPDoc tag @return with type Illuminate\\Database\\Query\\Builder is incompatible with native type App\\Models\\Builders\\ComponentQueryBuilder\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: app/Models/Component.php
+
+		-
 			message: '#^PHPDoc type array of property App\\Models\\Component\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
-			count: 1
-			path: app/Models/Component.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Component\:\:scopeOrderManufacturer\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Component.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Component\:\:scopeOrderSupplier\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/Component.php
 
@@ -6490,6 +5404,12 @@ parameters:
 			message: '#^Property App\\Models\\Component\:\:\$searchableRelations \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
+			path: app/Models/Component.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 2
 			path: app/Models/Component.php
 
 		-
@@ -6565,33 +5485,9 @@ parameters:
 			path: app/Models/ComponentAssignment.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 6
-			path: app/Models/Consumable.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$consumables_users_count\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$default_purchase_cost\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$default_supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
 			path: app/Models/Consumable.php
 
 		-
@@ -6613,51 +5509,21 @@ parameters:
 			path: app/Models/Consumable.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
 			path: app/Models/Consumable.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$currency\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order\.$#'
 			identifier: property.notFound
-			count: 6
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order_number\.$#'
-			identifier: property.notFound
-			count: 1
+			count: 4
 			path: app/Models/Consumable.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$price\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$purchase_date\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$supplier_id\.$#'
-			identifier: property.notFound
-			count: 2
 			path: app/Models/Consumable.php
 
 		-
@@ -6691,7 +5557,7 @@ parameters:
 			path: app/Models/Consumable.php
 
 		-
-			message: '#^Method App\\Models\\Consumable\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			message: '#^Method App\\Models\\Consumable\:\:checkin_email\(\) should return bool but returns int\|null\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/Consumable.php
@@ -6703,20 +5569,20 @@ parameters:
 			path: app/Models/Consumable.php
 
 		-
+			message: '#^PHPDoc tag @param references unknown parameter\: \$order$#'
+			identifier: parameter.notFound
+			count: 1
+			path: app/Models/Consumable.php
+
+		-
+			message: '#^PHPDoc tag @return with type Illuminate\\Database\\Query\\Builder is incompatible with native type App\\Models\\Builders\\ConsumableQueryBuilder\.$#'
+			identifier: return.phpDocType
+			count: 1
+			path: app/Models/Consumable.php
+
+		-
 			message: '#^PHPDoc type array of property App\\Models\\Consumable\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Consumable\:\:scopeOrderLocation\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Consumable\:\:scopeOrderSupplier\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/Consumable.php
 
@@ -6730,6 +5596,12 @@ parameters:
 			message: '#^Property App\\Models\\Consumable\:\:\$searchableRelations \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
+			path: app/Models/Consumable.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 2
 			path: app/Models/Consumable.php
 
 		-
@@ -6799,6 +5671,12 @@ parameters:
 			path: app/Models/ConsumableAssignment.php
 
 		-
+			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$pivot\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Models/CustomField.php
+
+		-
 			message: '#^Method App\\Models\\CustomField\:\:boot\(\) should return bool but return statement is missing\.$#'
 			identifier: return.missing
 			count: 1
@@ -6829,10 +5707,22 @@ parameters:
 			path: app/Models/CustomField.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
+			message: '#^Access to an undefined property App\\Models\\CustomField\:\:\$pivot\.$#'
 			identifier: property.notFound
-			count: 4
-			path: app/Models/Department.php
+			count: 1
+			path: app/Models/CustomFieldset.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: app/Models/CustomFieldset.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: app/Models/CustomFieldset.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Department\:\:\$license\.$#'
@@ -6853,12 +5743,6 @@ parameters:
 			path: app/Models/Department.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Department\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Department.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -6867,12 +5751,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/Department.php
-
-		-
-			message: '#^Method App\\Models\\Department\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
-			identifier: return.type
 			count: 1
 			path: app/Models/Department.php
 
@@ -6889,24 +5767,6 @@ parameters:
 			path: app/Models/Department.php
 
 		-
-			message: '#^Parameter \$order of method App\\Models\\Department\:\:scopeOrderCompany\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Department.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Department\:\:scopeOrderLocation\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Department.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Department\:\:scopeOrderManager\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Department.php
-
-		-
 			message: '#^Property App\\Models\\Department\:\:\$searchableAttributes \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
@@ -6915,6 +5775,12 @@ parameters:
 		-
 			message: '#^Property App\\Models\\Department\:\:\$searchableRelations \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
+			count: 1
+			path: app/Models/Department.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Models/Department.php
 
@@ -6943,21 +5809,9 @@ parameters:
 			path: app/Models/Department.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Depreciable\:\:\$depreciation\.$#'
-			identifier: property.notFound
+			message: '#^Comparison operation "\>" between \*NEVER\* and 0 results in an error\.$#'
+			identifier: greater.invalid
 			count: 1
-			path: app/Models/Depreciable.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Depreciable\:\:\$purchase_cost\.$#'
-			identifier: property.notFound
-			count: 11
-			path: app/Models/Depreciable.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Depreciable\:\:\$purchase_date\.$#'
-			identifier: property.notFound
-			count: 5
 			path: app/Models/Depreciable.php
 
 		-
@@ -6970,6 +5824,18 @@ parameters:
 			message: '#^PHPDoc tag @param has invalid value \(onlyHalfFirstYear Boolean always applied only second half of the first year\)\: Unexpected token "Boolean", expected variable at offset 37 on line 2$#'
 			identifier: phpDoc.parseError
 			count: 1
+			path: app/Models/Depreciable.php
+
+		-
+			message: '#^Property \$this\(App\\Models\\Depreciable\)\:\:\$purchase_cost is not readable\.$#'
+			identifier: property.writeOnly
+			count: 11
+			path: app/Models/Depreciable.php
+
+		-
+			message: '#^Property \$this\(App\\Models\\Depreciable\)\:\:\$purchase_date is not readable\.$#'
+			identifier: property.writeOnly
+			count: 10
 			path: app/Models/Depreciable.php
 
 		-
@@ -7219,7 +6085,7 @@ parameters:
 			path: app/Models/Labels/CustomLabels/CustomTapeLabel.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$assigned\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Models/Labels/FieldOption.php
@@ -7357,6 +6223,12 @@ parameters:
 			path: app/Models/Labels/LabelPreviewAsset.php
 
 		-
+			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$purchase_date \(Illuminate\\Support\\Carbon\|null\) does not accept Carbon\\Carbon\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Models/Labels/LabelPreviewAsset.php
+
+		-
 			message: '#^Call to method AddPage\(\) on an unknown class App\\Models\\Labels\\TCPDF\.$#'
 			identifier: class.notFound
 			count: 1
@@ -7465,18 +6337,6 @@ parameters:
 			path: app/Models/Ldap.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$activated \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Models/Ldap.php
-
-		-
-			message: '#^Property App\\Models\\User\:\:\$ldap_import \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Models/Ldap.php
-
-		-
 			message: '#^Strict comparison using \!\=\= between mixed and null will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1
@@ -7487,12 +6347,6 @@ parameters:
 			identifier: ternary.alwaysFalse
 			count: 1
 			path: app/Models/Ldap.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 6
-			path: app/Models/License.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\License\:\:\$license\.$#'
@@ -7508,6 +6362,12 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Models\\License\:\:\$model\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/License.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\LicenseSeat\:\:\$count\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Models/License.php
@@ -7549,7 +6409,13 @@ parameters:
 			path: app/Models/License.php
 
 		-
-			message: '#^Method App\\Models\\License\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			message: '#^Method App\\Models\\License\:\:checkin_email\(\) should return bool but returns int\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/License.php
+
+		-
+			message: '#^Method App\\Models\\License\:\:requireAcceptance\(\) should return bool but returns int\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/License.php
@@ -7573,8 +6439,8 @@ parameters:
 			path: app/Models/License.php
 
 		-
-			message: '#^Parameter \$order of method App\\Models\\License\:\:scopeOrderCompany\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Models/License.php
 
@@ -7627,12 +6493,6 @@ parameters:
 			path: app/Models/License.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 4
-			path: app/Models/LicenseSeat.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\LicenseSeat\:\:\$model\.$#'
 			identifier: property.notFound
 			count: 1
@@ -7651,13 +6511,13 @@ parameters:
 			path: app/Models/LicenseSeat.php
 
 		-
-			message: '#^Method App\\Models\\LicenseSeat\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			message: '#^Method App\\Models\\LicenseSeat\:\:location\(\) should return string but returns false\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/LicenseSeat.php
 
 		-
-			message: '#^Method App\\Models\\LicenseSeat\:\:location\(\) should return string but returns false\.$#'
+			message: '#^Method App\\Models\\LicenseSeat\:\:requireAcceptance\(\) should return bool but returns int\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/LicenseSeat.php
@@ -7675,8 +6535,14 @@ parameters:
 			path: app/Models/LicenseSeat.php
 
 		-
-			message: '#^Parameter \$order of method App\\Models\\LicenseSeat\:\:scopeOrderDepartments\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
+			message: '#^Property \$this\(App\\Models\\LicenseSeat\)\:\:\$company_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 2
+			path: app/Models/LicenseSeat.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Models/LicenseSeat.php
 
@@ -7717,12 +6583,6 @@ parameters:
 			path: app/Models/LicenseSeat.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 4
-			path: app/Models/Location.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Location\:\:\$license\.$#'
 			identifier: property.notFound
 			count: 1
@@ -7741,12 +6601,6 @@ parameters:
 			path: app/Models/Location.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Location\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -7755,24 +6609,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Call to method leftJoin\(\) on an unknown class App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Method App\\Models\\Location\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Method App\\Models\\Location\:\:scopeOrderParent\(\) has invalid return type App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/Location.php
 
@@ -7789,26 +6625,8 @@ parameters:
 			path: app/Models/Location.php
 
 		-
-			message: '#^Parameter \$order of method App\\Models\\Location\:\:scopeOrderCompany\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Location\:\:scopeOrderManager\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Location\:\:scopeOrderParent\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Parameter \$query of method App\\Models\\Location\:\:scopeOrderParent\(\) has invalid type App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Models/Location.php
 
@@ -7849,12 +6667,6 @@ parameters:
 			path: app/Models/Location.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 4
-			path: app/Models/Maintenance.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Maintenance\:\:\$license\.$#'
 			identifier: property.notFound
 			count: 1
@@ -7879,12 +6691,6 @@ parameters:
 			path: app/Models/Maintenance.php
 
 		-
-			message: '#^Method App\\Models\\Maintenance\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Maintenance.php
-
-		-
 			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
 			identifier: phpDoc.parseError
 			count: 1
@@ -7893,6 +6699,18 @@ parameters:
 		-
 			message: '#^PHPDoc type array of property App\\Models\\Maintenance\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
+			count: 1
+			path: app/Models/Maintenance.php
+
+		-
+			message: '#^Property \$this\(App\\Models\\Maintenance\)\:\:\$company_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 2
+			path: app/Models/Maintenance.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Models/Maintenance.php
 
@@ -8113,30 +6931,6 @@ parameters:
 			path: app/Models/Statuslabel.php
 
 		-
-			message: '#^Method App\\Models\\Statuslabel\:\:scopeArchived\(\) should return Illuminate\\Database\\Query\\Builder but returns Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Statuslabel\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
-			message: '#^Method App\\Models\\Statuslabel\:\:scopeDeployable\(\) should return Illuminate\\Database\\Query\\Builder but returns Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Statuslabel\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
-			message: '#^Method App\\Models\\Statuslabel\:\:scopePending\(\) should return Illuminate\\Database\\Query\\Builder but returns Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Statuslabel\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
-			message: '#^Method App\\Models\\Statuslabel\:\:scopeUndeployable\(\) should return Illuminate\\Database\\Query\\Builder but returns Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Statuslabel\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
 			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
 			identifier: phpDoc.parseError
 			count: 1
@@ -8161,9 +6955,9 @@ parameters:
 			path: app/Models/Statuslabel.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
+			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$count\.$#'
 			identifier: property.notFound
-			count: 4
+			count: 1
 			path: app/Models/Supplier.php
 
 		-
@@ -8185,20 +6979,8 @@ parameters:
 			path: app/Models/Supplier.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Models/Supplier.php
-
-		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/Supplier.php
-
-		-
-			message: '#^Method App\\Models\\Supplier\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
-			identifier: return.type
 			count: 1
 			path: app/Models/Supplier.php
 
@@ -8211,6 +6993,18 @@ parameters:
 		-
 			message: '#^PHPDoc type array of property App\\Models\\Supplier\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
+			count: 1
+			path: app/Models/Supplier.php
+
+		-
+			message: '#^Property \$this\(App\\Models\\Supplier\)\:\:\$company_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 2
+			path: app/Models/Supplier.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 1
 			path: app/Models/Supplier.php
 
@@ -8257,12 +7051,6 @@ parameters:
 			path: app/Models/SyncAdapterConfig.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 6
-			path: app/Models/User.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\User\:\:\$accessory_cost\.$#'
 			identifier: property.notFound
 			count: 1
@@ -8272,12 +7060,6 @@ parameters:
 			message: '#^Access to an undefined property App\\Models\\User\:\:\$asset_cost\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\User\:\:\$company_id\.$#'
-			identifier: property.notFound
-			count: 2
 			path: app/Models/User.php
 
 		-
@@ -8341,18 +7123,6 @@ parameters:
 			path: app/Models/User.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\HasMany\<App\\Models\\Maintenance, \$this\(App\\Models\\User\)\>\:\:withTrashed\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\MorphMany\<App\\Models\\Maintenance, \$this\(App\\Models\\User\)\>\:\:withTrashed\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Models/User.php
-
-		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:detach\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -8360,24 +7130,6 @@ parameters:
 
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Query\\Builder\:\:orWhereHas\(\)\.$#'
-			identifier: method.notFound
-			count: 2
-			path: app/Models/User.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Query\\Builder\:\:orWhereMultipleColumns\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Query\\Builder\:\:whereHas\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Models/User.php
@@ -8401,38 +7153,8 @@ parameters:
 			path: app/Models/User.php
 
 		-
-			message: '#^Call to method leftJoinSub\(\) on an unknown class App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Cannot call method where\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Cannot call method whereNull\(\) on string\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: app/Models/User.php
-
-		-
 			message: '#^Method App\\Models\\User\:\:allAssignedCount\(\) should return Illuminate\\Database\\Eloquent\\Relations\\Relation but returns int\<0, max\>\.$#'
 			identifier: return.type
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Method App\\Models\\User\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Method App\\Models\\User\:\:scopeOrderCompany\(\) has invalid return type App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/User.php
 
@@ -8443,21 +7165,15 @@ parameters:
 			path: app/Models/User.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$terms$#'
-			identifier: parameter.notFound
-			count: 1
+			message: '#^Property \$this\(App\\Models\\User\)\:\:\$company_id is not readable\.$#'
+			identifier: property.writeOnly
+			count: 7
 			path: app/Models/User.php
 
 		-
-			message: '#^Parameter \$order of method App\\Models\\User\:\:scopeOrderCompany\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/User.php
-
-		-
-			message: '#^Parameter \$query of method App\\Models\\User\:\:scopeOrderCompany\(\) has invalid type App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
-			count: 1
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 3
 			path: app/Models/User.php
 
 		-
@@ -8492,6 +7208,12 @@ parameters:
 
 		-
 			message: '#^Strict comparison using \=\=\= between class\-string\<static\(App\\Models\\User\)\> and ''App\\\\Models\\\\LicenseSeat'' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Models/User.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between mixed and \*NEVER\* will always evaluate to false\.$#'
 			identifier: identical.alwaysFalse
 			count: 1
 			path: app/Models/User.php
@@ -8767,86 +7489,62 @@ parameters:
 			path: app/Notifications/RequestAssetNotification.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 2
 			path: app/Observers/AccessoryObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 4
 			path: app/Observers/AssetModelObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\AssetModel\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Observers/AssetModelObserver.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 4
 			path: app/Observers/AssetObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 3
-			path: app/Observers/AssetObserver.php
-
-		-
-			message: '#^Using nullsafe property access on non\-nullable type mixed\. Use \-\> instead\.$#'
+			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\AssetModel\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Observers/AssetObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 2
 			path: app/Observers/ComponentObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 2
 			path: app/Observers/ConsumableObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$uploads\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Observers/ConsumableObserver.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:detach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Observers/ConsumableObserver.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 3
 			path: app/Observers/LicenseObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 4
 			path: app/Observers/LocationObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 3
 			path: app/Observers/MaintenanceObserver.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
-			identifier: property.notFound
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
 			count: 4
 			path: app/Observers/UserObserver.php
 
@@ -8873,6 +7571,12 @@ parameters:
 			identifier: return.type
 			count: 1
 			path: app/Policies/CategoryPolicy.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between Illuminate\\Database\\Eloquent\\Model and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: app/Policies/CheckoutRequestPolicy.php
 
 		-
 			message: '#^PHPDoc tag @param for parameter \$user with type App\\User is not subtype of native type App\\Models\\User\.$#'
@@ -9106,12 +7810,6 @@ parameters:
 			message: '#^Access to an undefined property \$this\(App\\Presenters\\AssetPresenter\)\:\:\$name\.$#'
 			identifier: property.notFound
 			count: 1
-			path: app/Presenters/AssetPresenter.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$assigned\.$#'
-			identifier: property.notFound
-			count: 2
 			path: app/Presenters/AssetPresenter.php
 
 		-
@@ -9613,7 +8311,7 @@ parameters:
 			path: app/Presenters/SupplierPresenter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\User\:\:\$company\.$#'
+			message: '#^Access to an undefined property App\\Models\\Company\:\:\$color\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Presenters/UserPresenter.php
@@ -9685,12 +8383,6 @@ parameters:
 			path: app/Providers/AuthServiceProvider.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Providers/BreadcrumbsServiceProvider.php
-
-		-
 			message: '#^Cannot access property \$component_id on array\<mixed\>\|object\.$#'
 			identifier: property.nonObject
 			count: 1
@@ -9713,24 +8405,6 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 5
 			path: app/Providers/ValidationServiceProvider.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\AccessoryCheckout\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Services/PredefinedKitCheckoutService.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\LicenseSeat\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Services/PredefinedKitCheckoutService.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Services/PredefinedKitCheckoutService.php
 
 		-
 			message: '#^Call to function is_null\(\) with App\\Models\\User will always evaluate to false\.$#'
@@ -9871,13 +8545,31 @@ parameters:
 			path: app/SyncAdapters/MerakiSystemsManager/MerakiClient.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$email\.$#'
 			identifier: property.notFound
-			count: 3
+			count: 1
 			path: app/SyncAdapters/SyncAdapter.php
 
 		-
-			message: '#^Property App\\Models\\Asset\:\:\$purchase_date \(Carbon\\Carbon\|null\) does not accept string\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$username\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/SyncAdapters/SyncAdapter.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:present\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/SyncAdapters/SyncAdapter.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$byod \(int\|null\) does not accept bool\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/SyncAdapters/SyncAdapter.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$purchase_date \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/SyncAdapters/SyncAdapter.php
@@ -10057,12 +8749,6 @@ parameters:
 			path: database/factories/ComponentFactory.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: database/factories/ComponentFactory.php
-
-		-
 			message: '#^PHPDoc type string of property Database\\Factories\\ComponentFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
 			identifier: property.phpDocType
 			count: 1
@@ -10078,12 +8764,6 @@ parameters:
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$price\.$#'
 			identifier: property.notFound
 			count: 1
-			path: database/factories/ConsumableFactory.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 2
 			path: database/factories/ConsumableFactory.php
 
 		-
@@ -10297,10 +8977,22 @@ parameters:
 			path: database/migrations/2015_09_22_003413_migrate_mac_address.php
 
 		-
-			message: '#^Property App\\Models\\Setting\:\:\$ldap_enabled \(string\|null\) does not accept int\.$#'
+			message: '#^Property App\\Models\\IdeHelperSetting\:\:\$ldap_enabled \(string\|null\) does not accept int\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: database/migrations/2015_11_26_195528_import_ldap_settings.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: database/migrations/2016_09_28_231359_add_company_to_logs.php
+
+		-
+			message: '#^If condition is always true\.$#'
+			identifier: if.alwaysTrue
+			count: 1
+			path: database/migrations/2016_09_28_231359_add_company_to_logs.php
 
 		-
 			message: '#^Method MakeAssetAssignedToPolymorphic\:\:down\(\) has invalid return type voidatom\.$#'
@@ -10343,12 +9035,6 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: database/migrations/2018_03_29_070121_add_drop_unique_requests.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$ad_append_domain \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: database/migrations/2020_02_04_172100_add_ad_append_domain_settings.php
 
 		-
 			message: '#^Method Illuminate\\Database\\Schema\\Blueprint\:\:text\(\) invoked with 2 parameters, 1 required\.$#'
@@ -10405,28 +9091,10 @@ parameters:
 			path: database/seeders/AssetSeeder.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: database/seeders/ComponentSeeder.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: database/seeders/ConsumableSeeder.php
-
-		-
 			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: database/seeders/DatabaseSeeder.php
-
-		-
-			message: '#^Access to an undefined property App\\Models\\Import\:\:\$created_by\.$#'
-			identifier: property.notFound
-			count: 1
-			path: database/seeders/ImportSeeder.php
 
 		-
 			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
@@ -10435,31 +9103,31 @@ parameters:
 			path: database/seeders/ImportSeeder.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\User\:\:\$enable_sound\.$#'
-			identifier: property.notFound
-			count: 1
-			path: database/seeders/SettingsSeeder.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$full_multiple_companies_support \(bool\) does not accept int\.$#'
+			message: '#^Property App\\Models\\IdeHelperSetting\:\:\$is_ad \(int\) does not accept false\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: database/seeders/SettingsSeeder.php
 
 		-
-			message: '#^Property App\\Models\\Setting\:\:\$pwd_secure_min \(int\) does not accept string\.$#'
+			message: '#^Property App\\Models\\IdeHelperSetting\:\:\$ldap_server_cert_ignore \(int\) does not accept false\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: database/seeders/SettingsSeeder.php
 
 		-
-			message: '#^Property App\\Models\\Setting\:\:\$thumbnail_max_h \(int\|null\) does not accept string\.$#'
+			message: '#^Property App\\Models\\IdeHelperSetting\:\:\$ldap_tls \(int\) does not accept false\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: database/seeders/SettingsSeeder.php
 
 		-
-			message: '#^Property App\\Models\\User\:\:\$enable_confetti \(bool\) does not accept int\.$#'
+			message: '#^Property App\\Models\\IdeHelperSetting\:\:\$pwd_secure_min \(int\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: database/seeders/SettingsSeeder.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperSetting\:\:\$thumbnail_max_h \(int\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: database/seeders/SettingsSeeder.php
@@ -10469,9 +9137,3 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 1
 			path: database/seeders/UserSeeder.php
-
-		-
-			message: '#^Property App\\Models\\Setting\:\:\$alerts_enabled \(bool\) does not accept int\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: routes/console.php

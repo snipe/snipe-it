@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\FileStorage;
+use App\Models\Builders\ComponentQueryBuilder;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\AdjustsQuantity;
 use App\Models\Traits\CompanyableTrait;
@@ -29,6 +30,8 @@ use Watson\Validating\ValidatingTrait;
  * Model for Components.
  *
  * @version v1.0
+ *
+ * @mixin IdeHelperComponent
  */
 class Component extends SnipeModel
 {
@@ -206,10 +209,6 @@ class Component extends SnipeModel
      * applies without any additional wrapping here (matches the
      * Accessory scope's shape and rationale).
      */
-    public function scopeRequestable($query)
-    {
-        return $query->where('components.requestable', '1');
-    }
 
     /**
      * Establishes the component -> location relationship
@@ -231,10 +230,8 @@ class Component extends SnipeModel
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since  [v3.0]
-     *
-     * @return Relation
      */
-    public function assets()
+    public function assets(): BelongsToMany
     {
         return $this->belongsToMany(Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'created_by', 'note');
     }
@@ -517,97 +514,8 @@ class Component extends SnipeModel
      * @param  string  $order  Order
      * @return Builder Modified query builder
      */
-    public function scopeOrderCategory($query, $order)
+    public function newEloquentBuilder($query): ComponentQueryBuilder
     {
-        return $query->join('categories', 'components.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on company
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderLocation($query, $order)
-    {
-        return $query->leftJoin('locations', 'components.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on company
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderCompany($query, $order)
-    {
-        return $query->leftJoin('companies', 'components.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on supplier
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  text  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderSupplier($query, $order)
-    {
-        return $query->leftJoin('suppliers', 'components.default_supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on manufacturer
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  text  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderManufacturer($query, $order)
-    {
-        return $query->leftJoin('manufacturers', 'components.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
-    }
-
-    public function scopeOrderByCreatedBy($query, $order)
-    {
-        return $query->leftJoin('users as admin_sort', 'components.created_by', '=', 'admin_sort.id')->select('components.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
-    }
-
-    /**
-     * Query builder scope to sort by the calculated `% remaining` column.
-     *
-     * Mirrors Component::percentRemaining(): (qty - numCheckedOut) / qty * 100.
-     * sum_unconstrained_assets is added by withSum() in the API index()
-     * as the total checked-out quantity. Guards against division by zero
-     * for components with qty of 0.
-     *
-     * PostgreSQL note: references a SELECT-list alias inside a compound
-     * ORDER BY expression, which PostgreSQL rejects per SQL standard.
-     * Snipe-IT officially supports MySQL/MariaDB and tests on SQLite
-     * (both allow this); moving to PostgreSQL would require inlining
-     * the subquery or wrapping the query in an outer SELECT.
-     */
-    public function scopeOrderPercentRemaining($query, $order)
-    {
-        $order = strtolower($order) === 'asc' ? 'asc' : 'desc';
-
-        return $query->orderByRaw('CASE WHEN components.qty = 0 THEN 0 ELSE ((components.qty - COALESCE(sum_unconstrained_assets, 0)) * 100.0 / components.qty) END '.$order);
-    }
-
-    /**
-     * Query builder scope to sort by the raw `remaining` column
-     * (qty minus current checkouts). Same sum_unconstrained_assets
-     * alias as scopeOrderPercentRemaining above; the difference is
-     * that this one sorts by absolute count rather than percentage,
-     * so items with the same absolute stock left group together
-     * regardless of their total qty.
-     */
-    public function scopeOrderRemaining($query, $order)
-    {
-        $order = strtolower($order) === 'asc' ? 'asc' : 'desc';
-
-        return $query->orderByRaw('(components.qty - COALESCE(sum_unconstrained_assets, 0)) '.$order);
+        return new ComponentQueryBuilder($query);
     }
 }

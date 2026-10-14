@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\FileStorage;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Builders\CompanyQueryBuilder;
 use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\HasUploads;
 use App\Models\Traits\Loggable;
@@ -26,6 +27,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for Companies.
  *
  * @version v1.8
+ * @mixin IdeHelperCompany
  */
 final class Company extends SnipeModel
 {
@@ -551,22 +553,6 @@ final class Company extends SnipeModel
         return $this->hasMany(self::class, 'parent_id')->withoutGlobalScopes([CompanyableScope::class]);
     }
 
-    /**
-     * Sort the company list by the parent company's name. Left join so that
-     * top-level companies (parent_id IS NULL) still appear in the results.
-     *
-     * Use addSelect (not select) so prior withCount subqueries on the query
-     * survive — select() replaces the whole columns list and would strip the
-     * eager *_count columns, forcing isDeletable() and the transformer into a
-     * 7-query-per-row N+1.
-     */
-    public function scopeOrderParent($query, $order)
-    {
-        return $query->leftJoin('companies as parent_co', 'companies.parent_id', '=', 'parent_co.id')
-            ->addSelect('companies.*')
-            ->orderBy('parent_co.name', $order);
-    }
-
     public function assets()
     {
         return $this->hasMany(Asset::class, 'company_id');
@@ -836,11 +822,8 @@ final class Company extends SnipeModel
      * Use addSelect (not select) so prior withCount subqueries on the query
      * survive — see scopeOrderParent() for the same rationale.
      */
-    public function scopeOrderByCreatedBy($query, $order)
+    public function newEloquentBuilder($query): CompanyQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'companies.created_by', '=', 'admin_sort.id')
-            ->addSelect('companies.*')
-            ->orderBy('admin_sort.first_name', $order)
-            ->orderBy('admin_sort.last_name', $order);
+        return new CompanyQueryBuilder($query);
     }
 }
