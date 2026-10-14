@@ -225,6 +225,69 @@ class SnipeRootComplex extends Complex
         }
     }
 
+    // Complex::patch's value-path branch (branch A: path like
+    // `employeeNumber[value eq "123"]`) calls getSubNode($attr) on root,
+    // falls back to getSchemaNode() (always the FIRST schema, core) when
+    // that misses, and throws "Unknown path" because employeeNumber
+    // lives on the enterprise schema. Entra ID sends exactly this shape
+    // when it de-provisions a user whose employeeNumber also changed:
+    // one PATCH with ops for `active=false` and `employeeNumber[value eq
+    // "..."]`. See #19347 and $19819.
+    //
+    // Before deferring to the vendor, scan every AttributeSchema
+    // sub-node for the attribute by name. If any schema has it, dispatch
+    // the operation directly (add/replace/clear-via-null) on that
+    // attribute. Dropping the leftover `[value eq "X"]` filter is
+    // deliberate: Entra attaches it as "the one whose current value is
+    // X" context, but for a single-valued attribute like employeeNumber
+    // there's nothing to filter against and the Eloquent attribute's
+    // patch throws when it sees any non-empty path anyway.
+    public function patch($operation, $value, Model &$object, ?Path $path = null, $removeIfNotSet = false)
+    {
+        if ($path !== null && $path->isNotEmpty()) {
+            $valuePathAttributes = $path->getValuePathAttributes();
+            if (!empty($valuePathAttributes) && $this->parent === null) {
+                $attrName = $valuePathAttributes[0];
+                $attribute = $this->getSubNode($attrName);
+
+                if ($attribute === null) {
+                    foreach ($this->subAttributes as $sub) {
+                        if ($sub instanceof AttributeSchema) {
+                            $candidate = $sub->getSubNode($attrName);
+                            if ($candidate !== null) {
+                                $attribute = $candidate;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if ($attribute !== null) {
+                    switch ($operation) {
+                        case 'add':
+                            $attribute->add($value, $object);
+
+                            return;
+                        case 'replace':
+                            $attribute->replace($value, $object);
+
+                            return;
+                        case 'remove':
+                            // Eloquent::patch treats remove as "set to
+                            // null". No public remove() on the Eloquent
+                            // attribute, so emulate it via replace(null)
+                            // which hits the same underlying write.
+                            $attribute->replace(null, $object);
+
+                            return;
+                    }
+                }
+            }
+        }
+
+        parent::patch($operation, $value, $object, $path, $removeIfNotSet);
+    }
+
     // #19347: Complex::applyComparison ignores the schema URN on the
     // filter path and always falls back to the FIRST schema node (core).
     // A filter like:
@@ -236,7 +299,7 @@ class SnipeRootComplex extends Complex
     // Same shape of bug as the URN-blind add()/replace() routing above.
     // If the path carries a schema URN and we have a schema node for it,
     // dispatch the whole path there so its own applyComparison finds the
-    // attribute; otherwise defer to the library.
+    // attribute. Otherwise defer to the library.
     public function applyComparison(Builder &$query, Path $path, $parentAttribute = null)
     {
         $schemaUrn = $path->getAttributePath()?->path?->schema;
