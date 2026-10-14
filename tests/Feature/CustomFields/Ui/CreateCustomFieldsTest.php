@@ -2,7 +2,9 @@
 
 namespace Tests\Feature\CustomFields\Ui;
 
+use App\Livewire\CustomFieldEditor;
 use App\Models\User;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class CreateCustomFieldsTest extends TestCase
@@ -31,5 +33,52 @@ class CreateCustomFieldsTest extends TestCase
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('fields.create'))
             ->assertOk();
+    }
+
+    public function test_link_template_is_saved()
+    {
+        $this->actingAs(User::factory()->superuser()->create());
+
+        Livewire::test(CustomFieldEditor::class)
+            ->set('name', 'AnyDesk ID')
+            ->set('link_template', 'anydesk:{VALUE}')
+            ->call('save')
+            ->assertHasNoErrors();
+
+        $this->assertDatabaseHas('custom_fields', [
+            'name' => 'AnyDesk ID',
+            'link_template' => 'anydesk:{VALUE}',
+        ]);
+    }
+
+    public function test_link_template_is_not_saved_for_unsupported_element()
+    {
+        $this->actingAs(User::factory()->superuser()->create());
+
+        Livewire::test(CustomFieldEditor::class)
+            ->set('name', 'Notes')
+            ->set('link_template', 'anydesk:{VALUE}')
+            ->set('element', 'textarea')
+            ->assertSet('showLinkTemplate', false)
+            ->call('save')
+            ->assertHasNoErrors();
+
+        $this->assertDatabaseHas('custom_fields', [
+            'name' => 'Notes',
+            'link_template' => null,
+        ]);
+    }
+
+    public function test_invalid_link_template_shows_error()
+    {
+        $this->actingAs(User::factory()->superuser()->create());
+
+        Livewire::test(CustomFieldEditor::class)
+            ->set('name', 'AnyDesk ID')
+            ->set('link_template', 'javascript:alert({VALUE})')
+            ->call('save')
+            ->assertHasErrors('link_template');
+
+        $this->assertDatabaseMissing('custom_fields', ['name' => 'AnyDesk ID']);
     }
 }
