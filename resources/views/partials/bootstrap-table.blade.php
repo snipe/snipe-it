@@ -2513,7 +2513,7 @@
                 var color_style;
                 var icon_style;
                 var text_help;
-                var square_tag;
+                var square_tag = '';
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
@@ -2549,7 +2549,7 @@
                 }
 
                 return '<nobr><a href="{{ config('app.url') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="' + status_meta[value.status_meta] + '">'
-                    + '<i class="fa ' + icon_style + ' ' + color_style + '"></i>' + square_tag
+                    + '<i class="fa ' + icon_style + ' ' + color_style + '"></i> ' + square_tag
                     + value.name
                     + ' '
                     + text_help
