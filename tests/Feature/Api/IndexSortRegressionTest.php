@@ -6,6 +6,7 @@ use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\Department;
@@ -64,6 +65,8 @@ class IndexSortRegressionTest extends TestCase
             'consumables by manufacturer' => ['api.consumables.index', 'manufacturer'],
             'consumables by company' => ['api.consumables.index', 'company'],
             'consumables by supplier' => ['api.consumables.index', 'supplier'],
+            'companies by created_by' => ['api.companies.index', 'created_by'],
+            'companies by parent' => ['api.companies.index', 'parent'],
             'departments by created_by' => ['api.departments.index', 'created_by'],
             'departments by location' => ['api.departments.index', 'location'],
             'departments by manager' => ['api.departments.index', 'manager'],
@@ -115,6 +118,7 @@ class IndexSortRegressionTest extends TestCase
             'api.categories.index' => Category::factory()->forAssets()->create(),
             'api.components.index' => Component::factory()->create(),
             'api.consumables.index' => Consumable::factory()->create(),
+            'api.companies.index' => Company::factory()->create(),
             'api.departments.index' => Department::factory()->create(),
             'api.depreciations.index' => Depreciation::factory()->create(),
             'api.groups.index' => Group::factory()->create(),

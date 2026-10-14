@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\CheckoutRequestState;
 use App\Exceptions\InvalidCheckoutRequestTransition;
+use App\Models\Builders\CheckoutRequestQueryBuilder;
 use App\Models\Traits\HasCalendarEvents;
 use App\Models\Traits\Searchable;
 use Illuminate\Database\Eloquent\Builder;
@@ -273,7 +274,7 @@ class CheckoutRequest extends Model
     {
         $item = $this->itemRequested();
 
-        if (!$item) {
+        if (! $item) {
             return '';
         }
 
@@ -315,24 +316,9 @@ class CheckoutRequest extends Model
      * Requestable::isRequestedBy() gate. Terminal-state rows (
      * fulfilled, canceled) are excluded.
      */
-    public function scopeOpen(Builder $query): Builder
+    public function newEloquentBuilder($query): CheckoutRequestQueryBuilder
     {
-        return $query->where('state', CheckoutRequestState::Pending->value);
-    }
-
-    public function scopePending(Builder $query): Builder
-    {
-        return $query->where('state', CheckoutRequestState::Pending->value);
-    }
-
-    public function scopeFulfilled(Builder $query): Builder
-    {
-        return $query->where('state', CheckoutRequestState::Fulfilled->value);
-    }
-
-    public function scopeCanceled(Builder $query): Builder
-    {
-        return $query->where('state', CheckoutRequestState::Canceled->value);
+        return new CheckoutRequestQueryBuilder($query);
     }
 
     public function isReservation(): bool

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\ActionType;
 use App\Enums\FileStorage;
+use App\Models\Builders\ActionlogQueryBuilder;
 use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\Searchable;
 use App\Presenters\ActionlogPresenter;
@@ -12,7 +13,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Schema;
@@ -502,27 +502,6 @@ class Actionlog extends SnipeModel
     }
 
     /**
-     * Eager load history relations used by the API transformer to avoid N+1 queries.
-     */
-    public function scopeForApiHistory($query)
-    {
-        return $query->with([
-            'adminuser',
-            'location',
-            'item' => function (MorphTo $morphTo) {
-                $morphTo->morphWith([
-                    Asset::class => ['model'],
-                ]);
-            },
-            'target' => function (MorphTo $morphTo) {
-                $morphTo->morphWith([
-                    Asset::class => ['model'],
-                ]);
-            },
-        ]);
-    }
-
-    /**
      * Establishes the actionlog -> location relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -772,52 +751,8 @@ class Actionlog extends SnipeModel
         $this->source = $source;
     }
 
-    public function scopeOrderByCreatedBy($query, $order)
+    public function newEloquentBuilder($query): ActionlogQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'action_logs.created_by', '=', 'admin_sort.id')->addSelect('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
-    }
-
-    // Audit report (issue #9430): the frontend has advertised location
-    // as sortable for a while but the API whitelist didn't include it,
-    // so clicks silently fell back to created_at. action_logs stores
-    // its own location_id snapshot (see the belongsTo above) so this
-    // is a plain leftJoin on locations, no polymorphic asset walk.
-    public function scopeOrderByLocation($query, $order)
-    {
-        return $query->leftJoin('locations as location_sort', 'action_logs.location_id', '=', 'location_sort.id')
-            ->addSelect('action_logs.*')
-            ->orderBy('location_sort.name', $order);
-    }
-
-    // Also for the audit report: next_audit_date lives on the asset
-    // (the log doesn't snapshot it), so we join to assets on the
-    // polymorphic item_id + item_type pair. Non-Asset item_types get
-    // NULL from the leftJoin and sort naturally at the end.
-    public function scopeOrderByAssetNextAuditDate($query, $order)
-    {
-        return $query->leftJoin('assets as asset_sort', function ($join) {
-            $join->on('action_logs.item_id', '=', 'asset_sort.id')
-                ->where('action_logs.item_type', '=', Asset::class);
-        })
-            ->addSelect('action_logs.*')
-            ->orderBy('asset_sort.next_audit_date', $order);
-    }
-
-    // Item name sort for the audit report (#9430). Only Assets get
-    // audited, so the action_type=audit filter upstream guarantees
-    // item_type=Asset here and a straight Asset join is correct.
-    // Sibling activity reports that sort by item on other action_types
-    // (checkout/checkin/etc.) will get NULL names for non-Asset rows
-    // and sort them at the ends; that matches the pre-refactor state
-    // where item sort silently fell back to created_at, and fixing
-    // truly-polymorphic item sort is a bigger separate change.
-    public function scopeOrderByItemName($query, $order)
-    {
-        return $query->leftJoin('assets as asset_item_sort', function ($join) {
-            $join->on('action_logs.item_id', '=', 'asset_item_sort.id')
-                ->where('action_logs.item_type', '=', Asset::class);
-        })
-            ->addSelect('action_logs.*')
-            ->orderBy('asset_item_sort.name', $order);
+        return new ActionlogQueryBuilder($query);
     }
 }
