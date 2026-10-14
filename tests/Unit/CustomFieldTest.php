@@ -25,6 +25,20 @@ class CustomFieldTest extends TestCase
         $this->assertEquals('anydesk:123456789', $customfield->linkForValue('123456789'));
     }
 
+    public function test_link_for_value_strips_whitespace_from_value()
+    {
+        $customfield = CustomField::factory()->make(['link_template' => 'anydesk:{VALUE}']);
+
+        $this->assertEquals('anydesk:1234567890', $customfield->linkForValue(' 1 234 567 890 '));
+    }
+
+    public function test_link_for_value_returns_null_for_whitespace_only_value()
+    {
+        $customfield = CustomField::factory()->make(['link_template' => 'anydesk:{VALUE}']);
+
+        $this->assertNull($customfield->linkForValue('   '));
+    }
+
     public function test_link_for_value_url_encodes_value_but_keeps_at_sign()
     {
         $customfield = CustomField::factory()->make(['link_template' => 'rustdesk://{VALUE}']);

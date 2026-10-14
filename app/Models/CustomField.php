@@ -256,7 +256,9 @@ class CustomField extends Model
      * or returns null when there is nothing to link. The value is
      * URL-encoded so it can't break out of the template (e.g. into another
      * path of the handler's URL); "@" is kept because remote-access IDs and
-     * aliases commonly contain it.
+     * aliases commonly contain it. Whitespace is stripped, since IDs are
+     * often copied with grouping spaces (e.g. "123 456 789") that URL
+     * handlers don't accept.
      */
     public function linkForValue(?string $value): ?string
     {
@@ -267,7 +269,7 @@ class CustomField extends Model
             return null;
         }
 
-        $encoded = str_replace('%40', '@', rawurlencode(trim($value)));
+        $encoded = str_replace('%40', '@', rawurlencode(preg_replace('/\s+/u', '', $value)));
 
         return str_replace('{VALUE}', $encoded, $this->link_template);
     }
