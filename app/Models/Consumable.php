@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\FileStorage;
+use App\Models\Builders\ConsumableQueryBuilder;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\AdjustsQuantity;
 use App\Models\Traits\CompanyableTrait;
@@ -189,11 +190,6 @@ class Consumable extends SnipeModel
      * applies without any additional wrapping here (matches the
      * Accessory scope's shape and rationale).
      */
-    public function scopeRequestable($query)
-    {
-        return $query->where('consumables.requestable', '1');
-    }
-
     public function isDeletable()
     {
         return Gate::allows('delete', $this)
@@ -486,96 +482,8 @@ class Consumable extends SnipeModel
      * @param  string  $order  Order
      * @return Builder Modified query builder
      */
-    public function scopeOrderCategory($query, $order)
+    public function newEloquentBuilder($query): ConsumableQueryBuilder
     {
-        return $query->join('categories', 'consumables.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on location
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  text  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderLocation($query, $order)
-    {
-        return $query->leftJoin('locations', 'consumables.location_id', '=', 'locations.id')->orderBy('locations.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on manufacturer
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderManufacturer($query, $order)
-    {
-        return $query->leftJoin('manufacturers', 'consumables.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on company
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderCompany($query, $order)
-    {
-        return $query->leftJoin('companies', 'consumables.company_id', '=', 'companies.id')->orderBy('companies.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on remaining
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderRemaining($query, $order)
-    {
-        $order = strtolower($order) === 'asc' ? 'asc' : 'desc';
-
-        return $query->orderByRaw('consumables.qty - consumables_users_count '.$order);
-    }
-
-    /**
-     * Query builder scope to order on supplier
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  text  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderSupplier($query, $order)
-    {
-        return $query->leftJoin('suppliers', 'consumables.default_supplier_id', '=', 'suppliers.id')->orderBy('suppliers.name', $order);
-    }
-
-    public function scopeOrderByCreatedBy($query, $order)
-    {
-        return $query->leftJoin('users as users_sort', 'consumables.created_by', '=', 'users_sort.id')->addSelect('consumables.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
-    }
-
-    /**
-     * Query builder scope to sort by the calculated `% remaining` column.
-     *
-     * Mirrors Consumable::percentRemaining(): (qty - consumables_users_count) / qty * 100.
-     * consumables_users_count is added by withCount() in the API index()
-     * before this scope runs. Guards against division by zero for
-     * consumables with qty of 0.
-     *
-     * PostgreSQL note: references a SELECT-list alias inside a compound
-     * ORDER BY expression, which PostgreSQL rejects per SQL standard.
-     * Snipe-IT officially supports MySQL/MariaDB and tests on SQLite
-     * (both allow this); moving to PostgreSQL would require inlining
-     * the subquery or wrapping the query in an outer SELECT.
-     */
-    public function scopeOrderPercentRemaining($query, $order)
-    {
-        $order = strtolower($order) === 'asc' ? 'asc' : 'desc';
-
-        return $query->orderByRaw('CASE WHEN consumables.qty = 0 THEN 0 ELSE ((consumables.qty - consumables_users_count) * 100.0 / consumables.qty) END '.$order);
+        return new ConsumableQueryBuilder($query);
     }
 }
