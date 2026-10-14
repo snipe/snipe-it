@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\FileStorage;
 use App\Http\Traits\TwoColumnUniqueUndeletedTrait;
+use App\Models\Builders\CategoryQueryBuilder;
 use App\Models\Traits\Searchable;
 use App\Presenters\CategoryPresenter;
 use App\Presenters\Presentable;
@@ -363,13 +364,8 @@ class Category extends SnipeModel
      * @param  Builder  $query  Query builder instance
      * @return Builder Modified query builder
      */
-    public function scopeRequiresAcceptance($query)
+    public function newEloquentBuilder($query): CategoryQueryBuilder
     {
-        return $query->where('require_acceptance', '=', true);
-    }
-
-    public function scopeOrderByCreatedBy($query, $order)
-    {
-        return $query->leftJoin('users as admin_sort', 'categories.created_by', '=', 'admin_sort.id')->addSelect('categories.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new CategoryQueryBuilder($query);
     }
 }

@@ -1,6 +1,12 @@
 parameters:
 	ignoreErrors:
 		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Category\>\:\:requiresAcceptance\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Actions/Acceptances/RegenerateAcceptancesAction.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 2
@@ -301,6 +307,84 @@ parameters:
 			path: app/Console/Commands/GeneratePersonalAccessToken.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$address\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$address2\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$currency\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$ldap_ou\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$parent_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$state\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$zip\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isValid\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Console/Commands/ImportLocations.php
+
+		-
 			message: '#^Result of method Illuminate\\Console\\Command\:\:error\(\) \(void\) is used\.$#'
 			identifier: method.void
 			count: 1
@@ -313,13 +397,25 @@ parameters:
 			path: app/Console/Commands/LdapSync.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Console/Commands/LdapSync.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Console/Commands/LdapSync.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Console/Commands/LdapSync.php
 
 		-
-			message: '#^Call to function is_array\(\) with App\\Models\\Location will always evaluate to false\.$#'
+			message: '#^Call to function is_array\(\) with Illuminate\\Database\\Eloquent\\Model will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
 			path: app/Console/Commands/LdapSync.php
@@ -685,6 +781,78 @@ parameters:
 			path: app/Helpers/Helper.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$accessories\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$assets\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$assignedAccessories\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$assignedAssets\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$children\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$components\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$consumables\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$manager\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$parent\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$rtd_assets\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Helpers/Helper.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$users\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Helpers/Helper.php
+
+		-
 			message: '#^Call to function array_change_key_case\(\) on a separate line has no effect\.$#'
 			identifier: function.resultUnused
 			count: 1
@@ -865,6 +1033,12 @@ parameters:
 			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
 
 		-
+			message: '#^Method App\\Http\\Controllers\\Accessories\\AccessoryCheckoutController\:\:determineCheckoutTarget\(\) should return App\\Models\\SnipeModel\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
+
+		-
 			message: '#^PHPDoc tag @param for parameter \$request with type Illuminate\\Http\\Request is not subtype of native type App\\Http\\Requests\\AccessoryCheckoutRequest\.$#'
 			identifier: parameter.phpDocType
 			count: 1
@@ -955,6 +1129,12 @@ parameters:
 			path: app/Http/Controllers/Api/AccessoriesController.php
 
 		-
+			message: '#^Method App\\Http\\Controllers\\Api\\AccessoriesController\:\:determineCheckoutTarget\(\) should return App\\Models\\SnipeModel\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/AccessoriesController.php
+
+		-
 			message: '#^PHPDoc tag @param for parameter \$request with type App\\Http\\Requests\\ImageUploadRequest is not subtype of native type App\\Http\\Requests\\StoreAccessoryRequest\.$#'
 			identifier: parameter.phpDocType
 			count: 1
@@ -1039,6 +1219,12 @@ parameters:
 			path: app/Http/Controllers/Api/AssetsController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/AssetsController.php
+
+		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:availableForCheckout\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -1087,6 +1273,12 @@ parameters:
 			path: app/Http/Controllers/Api/AssetsController.php
 
 		-
+			message: '#^Method App\\Http\\Controllers\\Api\\AssetsController\:\:resolveCheckoutTargetForAssetMutation\(\) should return App\\Models\\Asset\|App\\Models\\Location\|App\\Models\\User\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Api/AssetsController.php
+
+		-
 			message: '#^Method App\\Http\\Transformers\\AssetsTransformer\:\:transformAsset\(\) invoked with 2 parameters, 1 required\.$#'
 			identifier: arguments.count
 			count: 1
@@ -1129,8 +1321,26 @@ parameters:
 			path: app/Http/Controllers/Api/CategoriesController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Category\:\:\$use_image\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$category_type\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/CategoriesController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/CategoriesController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$use_image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/CategoriesController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\CategoryQueryBuilder\:\:TextSearch\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/Api/CategoriesController.php
 
@@ -1387,12 +1597,6 @@ parameters:
 			path: app/Http/Controllers/Api/CustomFieldsetsController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Department\:\:\$use_image\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/DepartmentsController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1401,6 +1605,36 @@ parameters:
 		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$manager_id\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/DepartmentsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$users\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/DepartmentsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/DepartmentsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/DepartmentsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$use_image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/DepartmentsController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\DepartmentQueryBuilder\:\:TextSearch\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/Api/DepartmentsController.php
 
@@ -1427,6 +1661,48 @@ parameters:
 			identifier: parameter.notFound
 			count: 1
 			path: app/Http/Controllers/Api/DepartmentsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$models_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/DepreciationsController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\DepreciationQueryBuilder\:\:TextSearch\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/DepreciationsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/DepreciationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$permissions\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/GroupsController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\GroupQueryBuilder\:\:TextSearch\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/GroupsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/GroupsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isDeletable\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/GroupsController.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Import\:\:\$created_by\.$#'
@@ -1489,12 +1765,6 @@ parameters:
 			path: app/Http/Controllers/Api/LicensesController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Location\:\:\$use_text\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Http/Controllers/Api/LocationsController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\SnipeModel\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 5
@@ -1507,6 +1777,36 @@ parameters:
 			path: app/Http/Controllers/Api/LocationsController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/LocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/LocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/LocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$parent_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/LocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$use_text\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/LocationsController.php
+
+		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:getErrors\(\)\.$#'
 			identifier: method.notFound
 			count: 2
@@ -1514,6 +1814,12 @@ parameters:
 
 		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:isValid\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/LocationsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isDeletable\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/Api/LocationsController.php
@@ -1597,15 +1903,39 @@ parameters:
 			path: app/Http/Controllers/Api/ManufacturersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$use_image\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$image\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/Api/ManufacturersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$use_text\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
 			count: 1
+			path: app/Http/Controllers/Api/ManufacturersController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$use_image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/ManufacturersController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$use_text\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/ManufacturersController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\ManufacturerQueryBuilder\:\:TextSearch\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/ManufacturersController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\ManufacturerQueryBuilder\:\:onlyTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 2
 			path: app/Http/Controllers/Api/ManufacturersController.php
 
 		-
@@ -1645,21 +1975,81 @@ parameters:
 			path: app/Http/Controllers/Api/NotesController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$licenses\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$accessories\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$consumables\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$models\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\PredefinedKitQueryBuilder\<App\\Models\\PredefinedKit\>\:\:TextSearch\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:consumables\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:licenses\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:models\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:accessories\(\)\.$#'
 			identifier: method.notFound
 			count: 4
 			path: app/Http/Controllers/Api/PredefinedKitsController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:detach\(\)\.$#'
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:consumables\(\)\.$#'
 			identifier: method.notFound
-			count: 8
+			count: 3
 			path: app/Http/Controllers/Api/PredefinedKitsController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:syncWithoutDetaching\(\)\.$#'
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
 			identifier: method.notFound
-			count: 4
+			count: 1
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:licenses\(\)\.$#'
+			identifier: method.notFound
+			count: 3
+			path: app/Http/Controllers/Api/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:models\(\)\.$#'
+			identifier: method.notFound
+			count: 3
 			path: app/Http/Controllers/Api/PredefinedKitsController.php
 
 		-
@@ -1719,12 +2109,84 @@ parameters:
 		-
 			message: '#^Access to an undefined property App\\Models\\Statuslabel\:\:\$color\.$#'
 			identifier: property.notFound
-			count: 3
+			count: 1
 			path: app/Http/Controllers/Api/StatuslabelsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Pagination\\LengthAwarePaginator\<int, App\\Models\\Statuslabel\>\:\:\$use_text\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$archived\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$assets_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$color\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$default_label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$deployable\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$pending\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$show_in_nav\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Pagination\\LengthAwarePaginator\<int, Illuminate\\Database\\Eloquent\\Model\>\:\:\$use_text\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\StatuslabelQueryBuilder\<App\\Models\\Statuslabel\>\:\:TextSearch\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:getStatuslabelType\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:assets\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Api/StatuslabelsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/Api/StatuslabelsController.php
 
@@ -1771,14 +2233,32 @@ parameters:
 			path: app/Http/Controllers/Api/SuppliersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$use_image\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$image\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/Api/SuppliersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$use_text\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/SuppliersController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$use_image\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/SuppliersController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$use_text\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Api/SuppliersController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\SupplierQueryBuilder\:\:TextSearch\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/Api/SuppliersController.php
 
@@ -1963,6 +2443,12 @@ parameters:
 			path: app/Http/Controllers/AssetModelsController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Assets/AssetCheckinController.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:disassociate\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -1999,6 +2485,12 @@ parameters:
 			path: app/Http/Controllers/Assets/AssetCheckoutController.php
 
 		-
+			message: '#^Method App\\Http\\Controllers\\Assets\\AssetCheckoutController\:\:determineCheckoutTarget\(\) should return App\\Models\\SnipeModel\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Assets/AssetCheckoutController.php
+
+		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$assetId$#'
 			identifier: parameter.notFound
 			count: 1
@@ -2023,6 +2515,12 @@ parameters:
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Assets/AssetsController.php
+
+		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:checkOut\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -2044,6 +2542,12 @@ parameters:
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:throwValidationException\(\)\.$#'
 			identifier: method.notFound
 			count: 1
+			path: app/Http/Controllers/Assets/AssetsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:getStatuslabelType\(\)\.$#'
+			identifier: method.notFound
+			count: 3
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
@@ -2143,20 +2647,32 @@ parameters:
 			path: app/Http/Controllers/Assets/BulkAssetsController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$deployable\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Assets/BulkAssetsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/Assets/BulkAssetsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$pending\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/Assets/BulkAssetsController.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:disassociate\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: app/Http/Controllers/Assets/BulkAssetsController.php
 
 		-
-			message: '#^Right side of \|\| is always false\.$#'
-			identifier: booleanOr.rightAlwaysFalse
-			count: 1
-			path: app/Http/Controllers/Assets/BulkAssetsController.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between bool and 1 will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
+			message: '#^Method App\\Http\\Controllers\\Assets\\BulkAssetsController\:\:determineCheckoutTarget\(\) should return App\\Models\\SnipeModel\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
 			count: 1
 			path: app/Http/Controllers/Assets/BulkAssetsController.php
 
@@ -2311,33 +2827,111 @@ parameters:
 			path: app/Http/Controllers/Auth/SamlController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 6
+			path: app/Http/Controllers/BulkCategoriesController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/BulkDepartmentsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Http/Controllers/BulkDepreciationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/BulkLocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/BulkLocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/BulkLocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$parent_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/BulkLocationsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isDeletable\(\)\.$#'
+			identifier: method.notFound
+			count: 2
+			path: app/Http/Controllers/BulkLocationsController.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/BulkMaintenancesController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Supplier\>\:\:\$accessories_count\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Http/Controllers/BulkManufacturersController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/BulkStatuslabelsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$accessories_count\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/BulkSuppliersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Supplier\>\:\:\$asset_maintenances_count\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$asset_maintenances_count\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/BulkSuppliersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Supplier\>\:\:\$components_count\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$assets_count\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/BulkSuppliersController.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Supplier\>\:\:\$consumables_count\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$components_count\.$#'
 			identifier: property.notFound
 			count: 1
+			path: app/Http/Controllers/BulkSuppliersController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$consumables_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/BulkSuppliersController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$licenses_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/BulkSuppliersController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 6
 			path: app/Http/Controllers/BulkSuppliersController.php
 
 		-
@@ -2641,6 +3235,12 @@ parameters:
 			path: app/Http/Controllers/DepreciationsController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$models_count\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/DepreciationsController.php
+
+		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$depreciationId$#'
 			identifier: parameter.notFound
 			count: 3
@@ -2651,6 +3251,12 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/GoogleAuthController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isDeletable\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/GroupsController.php
 
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
@@ -2677,27 +3283,81 @@ parameters:
 			path: app/Http/Controllers/Kits/CheckoutKitController.php
 
 		-
+			message: '#^Method App\\Http\\Controllers\\Kits\\CheckoutKitController\:\:determineCheckoutTarget\(\) should return App\\Models\\SnipeModel\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Kits/CheckoutKitController.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\PredefinedKit\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$pivot\.$#'
-			identifier: property.notFound
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:accessories\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:consumables\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:makeModelRules\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:models\(\)\.$#'
+			identifier: method.notFound
 			count: 2
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
-			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$pivot\.$#'
-			identifier: property.notFound
-			count: 6
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:accessories\(\)\.$#'
+			identifier: method.notFound
+			count: 3
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:detach\(\)\.$#'
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:consumables\(\)\.$#'
 			identifier: method.notFound
-			count: 8
+			count: 3
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:licenses\(\)\.$#'
+			identifier: method.notFound
+			count: 4
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:makeAccessoryRules\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:makeConsumableRules\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:makeLicenseRules\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Kits/PredefinedKitsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:models\(\)\.$#'
+			identifier: method.notFound
+			count: 2
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
@@ -2851,9 +3511,45 @@ parameters:
 			path: app/Http/Controllers/LocationsController.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$image\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/LocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/LocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Controllers/LocationsController.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Http/Controllers/LocationsController.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\LocationQueryBuilder\<App\\Models\\Location\>\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/LocationsController.php
+
+		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:getErrors\(\)\.$#'
 			identifier: method.notFound
 			count: 2
+			path: app/Http/Controllers/LocationsController.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:isDeletable\(\)\.$#'
+			identifier: method.notFound
+			count: 1
 			path: app/Http/Controllers/LocationsController.php
 
 		-
@@ -2866,12 +3562,6 @@ parameters:
 			message: '#^PHPDoc tag @param references unknown parameter\: \$locationId$#'
 			identifier: parameter.notFound
 			count: 2
-			path: app/Http/Controllers/LocationsController.php
-
-		-
-			message: '#^Property App\\Models\\Location\:\:\$id \(int\) does not accept null\.$#'
-			identifier: assign.propertyType
-			count: 1
 			path: app/Http/Controllers/LocationsController.php
 
 		-
@@ -3247,6 +3937,12 @@ parameters:
 			path: app/Http/Controllers/StatuslabelsController.php
 
 		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:assets\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/StatuslabelsController.php
+
+		-
 			message: '#^Offset ''archived'' does not exist on string\.$#'
 			identifier: offsetAccess.notFound
 			count: 2
@@ -3537,6 +4233,24 @@ parameters:
 		-
 			message: '#^Access to an undefined property App\\Models\\Actionlog\:\:\$orderItem\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Http/Transformers/ActionlogsTransformer.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\LocationQueryBuilder\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Transformers/ActionlogsTransformer.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\StatuslabelQueryBuilder\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Transformers/ActionlogsTransformer.php
+
+		-
+			message: '#^Call to an undefined method App\\Models\\Builders\\SupplierQueryBuilder\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Http/Transformers/ActionlogsTransformer.php
 
@@ -3991,6 +4705,12 @@ parameters:
 			path: app/Importer/AccessoryImporter.php
 
 		-
+			message: '#^Method App\\Importer\\AssetHistoryImporter\:\:resolveTargetLocation\(\) should return App\\Models\\Location\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Importer/AssetHistoryImporter.php
+
+		-
 			message: '#^Negated boolean expression is always false\.$#'
 			identifier: booleanNot.alwaysFalse
 			count: 1
@@ -4015,6 +4735,12 @@ parameters:
 			path: app/Importer/AssetImporter.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/Importer/AssetImporter.php
+
+		-
 			message: '#^Call to function is_null\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
@@ -4033,7 +4759,7 @@ parameters:
 			path: app/Importer/AssetImporter.php
 
 		-
-			message: '#^Using nullsafe property access on non\-nullable type App\\Models\\Statuslabel\. Use \-\> instead\.$#'
+			message: '#^Using nullsafe property access on non\-nullable type Illuminate\\Database\\Eloquent\\Model\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Importer/AssetImporter.php
@@ -4045,14 +4771,32 @@ parameters:
 			path: app/Importer/AssetModelImporter.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Importer/AssetModelImporter.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\Category\:\:\$created_by\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Importer/CategoryImporter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Category\:\:\$errors\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$errors\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Importer/CategoryImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Importer/CategoryImporter.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Importer/CategoryImporter.php
 
@@ -4096,6 +4840,12 @@ parameters:
 			message: '#^Access to an undefined property App\\Importer\\Importer\:\:\$item\.$#'
 			identifier: property.notFound
 			count: 2
+			path: app/Importer/Importer.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
 			path: app/Importer/Importer.php
 
 		-
@@ -4225,6 +4975,24 @@ parameters:
 			path: app/Importer/ItemImporter.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Importer/ItemImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 5
+			path: app/Importer/ItemImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Importer/ItemImporter.php
+
+		-
 			message: '#^Method App\\Importer\\ItemImporter\:\:createOrFetchAssetModel\(\) should return int but empty return statement found\.$#'
 			identifier: return.empty
 			count: 1
@@ -4245,13 +5013,13 @@ parameters:
 		-
 			message: '#^Method App\\Importer\\ItemImporter\:\:createOrFetchLocation\(\) should return App\\Models\\Location\|null but returns int\.$#'
 			identifier: return.type
-			count: 2
+			count: 1
 			path: app/Importer/ItemImporter.php
 
 		-
 			message: '#^Method App\\Importer\\ItemImporter\:\:createOrFetchManufacturer\(\) should return App\\Models\\Manufacturer but returns int\.$#'
 			identifier: return.type
-			count: 2
+			count: 1
 			path: app/Importer/ItemImporter.php
 
 		-
@@ -4263,13 +5031,13 @@ parameters:
 		-
 			message: '#^Method App\\Importer\\ItemImporter\:\:createOrFetchStatusLabel\(\) should return App\\Models\\Statuslabel\|null but returns int\.$#'
 			identifier: return.type
-			count: 2
+			count: 1
 			path: app/Importer/ItemImporter.php
 
 		-
 			message: '#^Method App\\Importer\\ItemImporter\:\:createOrFetchSupplier\(\) should return App\\Models\\Supplier but returns int\.$#'
 			identifier: return.type
-			count: 2
+			count: 1
 			path: app/Importer/ItemImporter.php
 
 		-
@@ -4291,13 +5059,13 @@ parameters:
 			path: app/Importer/ItemImporter.php
 
 		-
-			message: '#^Method App\\Importer\\ItemImporter\:\:determineCheckout\(\) should return App\\Importer\\SnipeModel\|null but returns App\\Models\\Location\|Illuminate\\Database\\Eloquent\\Collection\<int, App\\Models\\Location\>\.$#'
+			message: '#^Method App\\Importer\\ItemImporter\:\:determineCheckout\(\) should return App\\Importer\\SnipeModel\|null but returns App\\Models\\User\.$#'
 			identifier: return.type
 			count: 2
 			path: app/Importer/ItemImporter.php
 
 		-
-			message: '#^Method App\\Importer\\ItemImporter\:\:determineCheckout\(\) should return App\\Importer\\SnipeModel\|null but returns App\\Models\\User\.$#'
+			message: '#^Method App\\Importer\\ItemImporter\:\:determineCheckout\(\) should return App\\Importer\\SnipeModel\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\.$#'
 			identifier: return.type
 			count: 2
 			path: app/Importer/ItemImporter.php
@@ -4363,8 +5131,20 @@ parameters:
 			path: app/Importer/LocationImporter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Location\:\:\$errors\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$errors\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Importer/LocationImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Importer/LocationImporter.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Importer/LocationImporter.php
 
@@ -4381,8 +5161,20 @@ parameters:
 			path: app/Importer/ManufacturerImporter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Manufacturer\:\:\$errors\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$errors\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Importer/ManufacturerImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Importer/ManufacturerImporter.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Importer/ManufacturerImporter.php
 
@@ -4393,10 +5185,40 @@ parameters:
 			path: app/Importer/SupplierImporter.php
 
 		-
-			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$errors\.$#'
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$errors\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Importer/SupplierImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Importer/SupplierImporter.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getErrors\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Importer/SupplierImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$company\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Importer/UserImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: app/Importer/UserImporter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Importer/UserImporter.php
 
 		-
 			message: '#^Expression on left side of \?\? is not nullable\.$#'
@@ -5089,6 +5911,12 @@ parameters:
 			path: app/Models/Accessory.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Accessory.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -5162,6 +5990,12 @@ parameters:
 
 		-
 			message: '#^Method App\\Models\\Accessory\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Accessory.php
+
+		-
+			message: '#^Method App\\Models\\Accessory\:\:lastAcquisitionSupplier\(\) should return App\\Models\\Supplier\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\|null\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/Accessory.php
@@ -5311,6 +6145,12 @@ parameters:
 			path: app/Models/Actionlog.php
 
 		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Location, \$this\(App\\Models\\Actionlog\)\>\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Models/Actionlog.php
+
+		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
@@ -5402,6 +6242,12 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$uploads\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Asset.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Models/Asset.php
@@ -5517,6 +6363,12 @@ parameters:
 		-
 			message: '#^Method App\\Models\\Asset\:\:get_depreciation\(\) should return Illuminate\\Database\\Eloquent\\Relations\\Relation but return statement is missing\.$#'
 			identifier: return.missing
+			count: 1
+			path: app/Models/Asset.php
+
+		-
+			message: '#^Method App\\Models\\Asset\:\:lastAcquisitionSupplier\(\) should return App\\Models\\Supplier\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
 			count: 1
 			path: app/Models/Asset.php
 
@@ -5785,6 +6637,12 @@ parameters:
 			path: app/Models/AssetModel.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/AssetModel.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:fields\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -5923,6 +6781,72 @@ parameters:
 			path: app/Models/AssetModel.php
 
 		-
+			message: '#^Method App\\Models\\Builders\\CategoryQueryBuilder\:\:orderByCreatedBy\(\) should return static\(App\\Models\\Builders\\CategoryQueryBuilder\) but returns App\\Models\\Builders\\CategoryQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/CategoryQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\DepartmentQueryBuilder\:\:orderByCreatedBy\(\) should return static\(App\\Models\\Builders\\DepartmentQueryBuilder\) but returns App\\Models\\Builders\\DepartmentQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/DepartmentQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\DepartmentQueryBuilder\:\:orderCompany\(\) should return static\(App\\Models\\Builders\\DepartmentQueryBuilder\) but returns App\\Models\\Builders\\DepartmentQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/DepartmentQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\DepartmentQueryBuilder\:\:orderLocation\(\) should return static\(App\\Models\\Builders\\DepartmentQueryBuilder\) but returns App\\Models\\Builders\\DepartmentQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/DepartmentQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\DepartmentQueryBuilder\:\:orderManager\(\) should return static\(App\\Models\\Builders\\DepartmentQueryBuilder\) but returns App\\Models\\Builders\\DepartmentQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/DepartmentQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\DepreciationQueryBuilder\:\:orderByCreatedBy\(\) should return static\(App\\Models\\Builders\\DepreciationQueryBuilder\) but returns App\\Models\\Builders\\DepreciationQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/DepreciationQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\GroupQueryBuilder\:\:orderByCreatedBy\(\) should return static\(App\\Models\\Builders\\GroupQueryBuilder\) but returns App\\Models\\Builders\\GroupQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/GroupQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\LocationQueryBuilder\:\:orderByCreatedByName\(\) should return static\(App\\Models\\Builders\\LocationQueryBuilder\) but returns App\\Models\\Builders\\LocationQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/LocationQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\LocationQueryBuilder\:\:orderCompany\(\) should return static\(App\\Models\\Builders\\LocationQueryBuilder\) but returns App\\Models\\Builders\\LocationQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/LocationQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\LocationQueryBuilder\:\:orderManager\(\) should return static\(App\\Models\\Builders\\LocationQueryBuilder\) but returns App\\Models\\Builders\\LocationQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/LocationQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\LocationQueryBuilder\:\:orderParent\(\) should return static\(App\\Models\\Builders\\LocationQueryBuilder\) but returns App\\Models\\Builders\\LocationQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/LocationQueryBuilder.php
+
+		-
 			message: '#^Method App\\Models\\Builders\\MaintenanceQueryBuilder\:\:active\(\) should return static\(App\\Models\\Builders\\MaintenanceQueryBuilder\) but returns App\\Models\\Builders\\MaintenanceQueryBuilder\.$#'
 			identifier: return.type
 			count: 1
@@ -6013,6 +6937,30 @@ parameters:
 			path: app/Models/Builders/MaintenanceQueryBuilder.php
 
 		-
+			message: '#^Method App\\Models\\Builders\\ManufacturerQueryBuilder\:\:orderByCreatedBy\(\) should return static\(App\\Models\\Builders\\ManufacturerQueryBuilder\) but returns App\\Models\\Builders\\ManufacturerQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/ManufacturerQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\PredefinedKitQueryBuilder\:\:orderByCreatedBy\(\) should return static\(App\\Models\\Builders\\PredefinedKitQueryBuilder\) but returns App\\Models\\Builders\\PredefinedKitQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/PredefinedKitQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\StatuslabelQueryBuilder\:\:orderByCreatedBy\(\) should return static\(App\\Models\\Builders\\StatuslabelQueryBuilder\) but returns App\\Models\\Builders\\StatuslabelQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/StatuslabelQueryBuilder.php
+
+		-
+			message: '#^Method App\\Models\\Builders\\SupplierQueryBuilder\:\:orderByCreatedByName\(\) should return static\(App\\Models\\Builders\\SupplierQueryBuilder\) but returns App\\Models\\Builders\\SupplierQueryBuilder\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Builders/SupplierQueryBuilder.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -6033,6 +6981,12 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param references unknown parameter\: \$field$#'
 			identifier: parameter.notFound
+			count: 1
+			path: app/Models/Category.php
+
+		-
+			message: '#^PHPDoc tag @return with type Illuminate\\Database\\Query\\Builder is incompatible with native type App\\Models\\Builders\\CategoryQueryBuilder\.$#'
+			identifier: return.phpDocType
 			count: 1
 			path: app/Models/Category.php
 
@@ -6182,6 +7136,12 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Company\:\:\$uploads\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Company.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Models/Company.php
@@ -6379,6 +7339,12 @@ parameters:
 			path: app/Models/Component.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Component.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -6452,6 +7418,12 @@ parameters:
 
 		-
 			message: '#^Method App\\Models\\Component\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Component.php
+
+		-
+			message: '#^Method App\\Models\\Component\:\:lastAcquisitionSupplier\(\) should return App\\Models\\Supplier\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\|null\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/Component.php
@@ -6619,6 +7591,12 @@ parameters:
 			path: app/Models/Consumable.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Consumable.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -6692,6 +7670,12 @@ parameters:
 
 		-
 			message: '#^Method App\\Models\\Consumable\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
+			identifier: return.type
+			count: 1
+			path: app/Models/Consumable.php
+
+		-
+			message: '#^Method App\\Models\\Consumable\:\:lastAcquisitionSupplier\(\) should return App\\Models\\Supplier\|null but returns Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\|null\.$#'
 			identifier: return.type
 			count: 1
 			path: app/Models/Consumable.php
@@ -6859,6 +7843,12 @@ parameters:
 			path: app/Models/Department.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Department.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -6885,24 +7875,6 @@ parameters:
 		-
 			message: '#^PHPDoc type array of property App\\Models\\Department\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
-			count: 1
-			path: app/Models/Department.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Department\:\:scopeOrderCompany\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Department.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Department\:\:scopeOrderLocation\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Department.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Department\:\:scopeOrderManager\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/Department.php
 
@@ -7453,6 +8425,12 @@ parameters:
 			path: app/Models/Labels/Tapes/Generic/Tape_53mm.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: app/Models/Ldap.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -7513,9 +8491,27 @@ parameters:
 			path: app/Models/License.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/License.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
+			path: app/Models/License.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Category, \$this\(App\\Models\\License\)\>\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Models/License.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Manufacturer, \$this\(App\\Models\\License\)\>\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 1
 			path: app/Models/License.php
 
 		-
@@ -7639,6 +8635,12 @@ parameters:
 			path: app/Models/LicenseSeat.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/LicenseSeat.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:withTrashed\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -7747,6 +8749,12 @@ parameters:
 			path: app/Models/Location.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Location.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -7759,20 +8767,8 @@ parameters:
 			path: app/Models/Location.php
 
 		-
-			message: '#^Call to method leftJoin\(\) on an unknown class App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
 			message: '#^Method App\\Models\\Location\:\:getLatestSignedAcceptance\(\) should return App\\Models\\Actionlog\|null but returns Illuminate\\Database\\Eloquent\\Model\|null\.$#'
 			identifier: return.type
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Method App\\Models\\Location\:\:scopeOrderParent\(\) has invalid return type App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/Location.php
 
@@ -7785,30 +8781,6 @@ parameters:
 		-
 			message: '#^PHPDoc type array of property App\\Models\\Location\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Location\:\:scopeOrderCompany\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Location\:\:scopeOrderManager\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Parameter \$order of method App\\Models\\Location\:\:scopeOrderParent\(\) has invalid type App\\Models\\text\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^Parameter \$query of method App\\Models\\Location\:\:scopeOrderParent\(\) has invalid type App\\Models\\Illuminate\\Database\\Query\\Builder\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/Location.php
 
@@ -7869,6 +8841,18 @@ parameters:
 		-
 			message: '#^Access to an undefined property App\\Models\\Maintenance\:\:\$model\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Models/Maintenance.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Maintenance.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Supplier, \$this\(App\\Models\\Maintenance\)\>\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Models/Maintenance.php
 
@@ -8113,30 +9097,6 @@ parameters:
 			path: app/Models/Statuslabel.php
 
 		-
-			message: '#^Method App\\Models\\Statuslabel\:\:scopeArchived\(\) should return Illuminate\\Database\\Query\\Builder but returns Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Statuslabel\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
-			message: '#^Method App\\Models\\Statuslabel\:\:scopeDeployable\(\) should return Illuminate\\Database\\Query\\Builder but returns Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Statuslabel\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
-			message: '#^Method App\\Models\\Statuslabel\:\:scopePending\(\) should return Illuminate\\Database\\Query\\Builder but returns Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Statuslabel\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
-			message: '#^Method App\\Models\\Statuslabel\:\:scopeUndeployable\(\) should return Illuminate\\Database\\Query\\Builder but returns Illuminate\\Database\\Eloquent\\Builder\<App\\Models\\Statuslabel\>\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
 			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
 			identifier: phpDoc.parseError
 			count: 1
@@ -8186,6 +9146,12 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$uploads\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/Supplier.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
 			count: 1
 			path: app/Models/Supplier.php
@@ -8323,6 +9289,12 @@ parameters:
 			path: app/Models/User.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Models/User.php
+
+		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 2
@@ -8337,7 +9309,13 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
 			identifier: property.notFound
-			count: 1
+			count: 2
+			path: app/Models/User.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo\<App\\Models\\Location, \$this\(App\\Models\\User\)\>\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 2
 			path: app/Models/User.php
 
 		-
@@ -9703,6 +10681,42 @@ parameters:
 			path: app/Providers/EventServiceProvider.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$company\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Providers/ValidationServiceProvider.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Providers/ValidationServiceProvider.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Providers/ValidationServiceProvider.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$company_id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Providers/ValidationServiceProvider.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Providers/ValidationServiceProvider.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:effectiveFmcsCompanyId\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Providers/ValidationServiceProvider.php
+
+		-
 			message: '#^Call to function is_array\(\) with mixed will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
@@ -9713,6 +10727,12 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 5
 			path: app/Providers/ValidationServiceProvider.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:getStatuslabelType\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Rules/AssetCannotBeCheckedOutToNondeployableStatus.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\AccessoryCheckout\:\:\$created_by\.$#'
@@ -9877,6 +10897,18 @@ parameters:
 			path: app/SyncAdapters/SyncAdapter.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 3
+			path: app/SyncAdapters/SyncAdapter.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/SyncAdapters/SyncAdapter.php
+
+		-
 			message: '#^Property App\\Models\\Asset\:\:\$purchase_date \(Carbon\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -9969,7 +11001,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
-			count: 2
+			count: 5
 			path: database/factories/ActionlogFactory.php
 
 		-
@@ -10381,6 +11413,12 @@ parameters:
 			path: database/migrations/2024_09_17_204302_change_user_id_to_created_by.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: database/seeders/AccessorySeeder.php
+
+		-
 			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Console\\Command\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -10405,10 +11443,22 @@ parameters:
 			path: database/seeders/AssetSeeder.php
 
 		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: database/seeders/ComponentSeeder.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: database/seeders/ComponentSeeder.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Collection\<int, Illuminate\\Database\\Eloquent\\Model\>\|Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 2
+			path: database/seeders/ConsumableSeeder.php
 
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
@@ -10433,6 +11483,18 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 2
 			path: database/seeders/ImportSeeder.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 4
+			path: database/seeders/LicenseSeeder.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 2
+			path: database/seeders/LicenseSeeder.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\User\:\:\$enable_sound\.$#'

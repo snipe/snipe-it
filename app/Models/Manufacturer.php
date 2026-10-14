@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\FileStorage;
+use App\Models\Builders\ManufacturerQueryBuilder;
 use App\Models\Traits\Searchable;
 use App\Presenters\ManufacturerPresenter;
 use App\Presenters\Presentable;
@@ -143,11 +144,8 @@ class Manufacturer extends SnipeModel
         return $this->hasMany(Component::class, 'manufacturer_id');
     }
 
-    /**
-     * Query builder scope to order on the user that created it
-     */
-    public function scopeOrderByCreatedBy($query, $order)
+    public function newEloquentBuilder($query): ManufacturerQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'manufacturers.created_by', '=', 'admin_sort.id')->addSelect('manufacturers.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new ManufacturerQueryBuilder($query);
     }
 }
