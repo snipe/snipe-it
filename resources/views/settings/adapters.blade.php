@@ -52,8 +52,8 @@
                 {{ trans('admin/settings/sync_adapters.title') }} <span class="label label-warning">beta</span>
             </x-slot:header>
 
-            <div class="sync-adapters-tabs">
-                <div class="adapter-tab-list">
+            <div class="side-tabs">
+                <div class="side-tabs-list">
                     <ul class="nav nav-pills nav-stacked" role="tablist">
                         @foreach ($adapters as $adapter)
                             @php
@@ -133,7 +133,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="adapter-tab-content">
+                <div class="side-tabs-content">
                     <div class="tab-content">
                         @foreach ($adapters as $adapter)
                             <div
@@ -385,7 +385,7 @@
             // handled globally in snipeit.js off the data-breadcrumb-label
             // attribute on each tab link.
 
-            document.querySelectorAll('.sync-adapters-tabs a[data-toggle="tab"]').forEach(function (tabLink) {
+            document.querySelectorAll('.side-tabs a[data-toggle="tab"]').forEach(function (tabLink) {
                 $(tabLink).on('shown.bs.tab', function (e) {
                     var name = e.target.getAttribute('data-adapter-name');
                     var destroyUrl = e.target.getAttribute('data-adapter-destroy-url');

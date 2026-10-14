@@ -6,128 +6,164 @@ use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
 /**
- * Thin wrapper around the Mosyle API. Owns auth + pagination for the
- * endpoints the sync adapter uses. Yields raw decoded JSON, no
+ * Thin wrapper around the Mosyle Manager v2 API. Owns auth + pagination
+ * for the endpoints the sync adapter uses. Yields raw decoded JSON, no
  * normalization (that's the adapter's job).
  *
- * Auth model: bearer access token generated in the Mosyle admin console
- * (Account -> API). The same token works for both Mosyle Manager v2
- * (https://managerapi.mosyle.com/v2) and Mosyle Business v1
- * (https://businessapi.mosyle.com/v1). the base URL configured on the
- * adapter determines which product this instance talks to.
+ * Auth model (Mosyle Manager v2):
+ *   1. POST /login with { accessToken, email, password } returns a JWT
+ *      bearer token in the Authorization response header, valid 24h.
+ *   2. Every subsequent request carries BOTH the accessToken in the
+ *      request body AND the JWT in the Authorization: Bearer header.
+ *      Dropping either returns a 401 "accessToken Required".
  *
- * Mosyle's devices endpoint takes POST with a JSON body (not GET with
- * query params like the other vendors here), which is unusual but
- * documented and stable.
+ * JWT is cached on this instance for the life of the sync run (same
+ * pattern IntuneClient uses for its OAuth 2.0 token). No cross-run
+ * persistence. A single sync spawns a single client so one login
+ * services every /listdevices page call.
  *
- * Mosyle API reference: https://school.mosyle.com/api/docs
+ * Reads use POST (/listdevices with options), writes use POST
+ * (/devices with elements). Both carry accessToken in the body.
+ *
+ * The Mosyle API is not publicly documented. The endpoint and payload
+ * shapes here match the Manager v2 doc transcription from issue #19790.
+ * Business v1 (businessapi.mosyle.com/v1) is not covered by this
+ * client. If an admin points the base URL at Business the login flow
+ * may still succeed but device endpoints are expected to differ.
  */
 class MosyleClient
 {
+    // Mosyle Manager splits devices by OS, which is a required option
+    // on /listdevices. A full-tenant pull iterates each OS.
+    private const DEVICE_OSES = [
+        'mac',
+        'ios',
+        'tvos',
+        'visionos',
+    ];
+
+    private ?string $jwt = null;
+
     public function __construct(
         private readonly string $baseUrl,
-        private readonly string $token,
+        private readonly string $accessToken,
+        private readonly string $email,
+        private readonly string $password,
     ) {}
 
     /**
-     * Iterate every managed device in the Mosyle tenant, one page at a
-     * time. Returns a generator so callers stream through large fleets
-     * without holding the whole list in memory.
+     * Iterate every managed device in the Mosyle tenant across every
+     * supported OS, one page at a time. Returns a generator so callers
+     * stream through large fleets without holding the whole list in
+     * memory.
      *
      * @return iterable<array<string, mixed>>
      */
-    public function devices(int $perPage = 200): iterable
+    public function devices(int $pageSize = 200): iterable
+    {
+        foreach (self::DEVICE_OSES as $os) {
+            yield from $this->devicesForOs($os, $pageSize);
+        }
+    }
+
+    /**
+     * Paginate /listdevices for a single OS. Terminates when a page
+     * comes back shorter than page_size.
+     *
+     * @return iterable<array<string, mixed>>
+     */
+    private function devicesForOs(string $os, int $pageSize): iterable
     {
         $page = 1;
 
         do {
             $response = $this->request()
-                ->post('/devices', [
+                ->post('/listdevices', [
+                    'accessToken' => $this->accessToken,
                     'options' => [
+                        'os' => $os,
+                        'page_size' => $pageSize,
                         'page' => $page,
-                        'per_page' => $perPage,
                     ],
                 ])
                 ->throw()
                 ->json();
 
-            // Mosyle's response nests devices under
-            // response[0].response.rows on Manager v2 and under
-            // response.devices on Business v1. Try both shapes so this
-            // client works against either product.
-            $rows = $response['response'][0]['response']['rows']
-                ?? $response['response']['devices']
-                ?? [];
+            $rows = $response['response']['devices'] ?? [];
 
             foreach ($rows as $device) {
                 yield $device;
             }
 
-            $done = count($rows) < $perPage;
+            $done = count($rows) < $pageSize;
             $page++;
         } while (! $done);
     }
 
     /**
-     * List every Location in the Mosyle tenant. Used by the
-     * adapter's fetchGroups() so admins can map Locations to
-     * Snipe-IT companies. Mosyle uses POST for reads (same shape
-     * as devices()).
-     *
-     * @return array<int, array<string, mixed>>
-     */
-    public function locations(): array
-    {
-        $response = $this->request()
-            ->post('/locations', [])
-            ->throw()
-            ->json();
-
-        return $response['response'][0]['response']['rows']
-            ?? $response['response']['locations']
-            ?? [];
-    }
-
-    /**
      * Update writable per-device metadata by serial number. Mosyle's
-     * write API is a single POST endpoint dispatched by the
-     * `operation` field. `set_asset_tag_by_serial_number` sets the
-     * device's asset_tag field per Mosyle's Manager v2 API. Fields
-     * the caller doesn't include stay untouched.
+     * push API is POST /devices with an `elements` array keyed by
+     * `serialnumber`. Each element may carry asset_tag and the other
+     * documented writable fields. Fields the caller doesn't include
+     * stay untouched.
+     *
+     * Mosyle Manager v2 does not expose a notes field for push, so the
+     * adapter never calls this for notes.
      */
     public function updateDeviceAssetTagBySerial(string $serial, string $assetTag): void
     {
         $this->request()
             ->post('/devices', [
-                'operation' => 'set_asset_tag_by_serial_number',
-                'serial_number' => $serial,
-                'asset_tag' => $assetTag,
+                'accessToken' => $this->accessToken,
+                'elements' => [
+                    [
+                        'serialnumber' => $serial,
+                        'asset_tag' => $assetTag,
+                    ],
+                ],
             ])
             ->throw();
     }
 
     /**
-     * Set the device's notes field. Same operation-dispatch shape
-     * as asset_tag. Mosyle Manager v2 exposes `set_notes_by_serial_number`
-     * for admin freeform notes. On tenants where the operation
-     * doesn't exist Mosyle returns a 4xx that surfaces in the log.
+     * Fetch (or reuse) the JWT bearer token. First call POSTs to
+     * /login. Subsequent calls reuse the cached value for the life of
+     * this client instance.
+     *
+     * Mosyle returns the JWT in the Authorization response header, not
+     * the body (unusual but documented).
      */
-    public function updateDeviceNotesBySerial(string $serial, string $notes): void
+    private function bearer(): string
     {
-        $this->request()
-            ->post('/devices', [
-                'operation' => 'set_notes_by_serial_number',
-                'serial_number' => $serial,
-                'notes' => $notes,
+        if ($this->jwt !== null) {
+            return $this->jwt;
+        }
+
+        $response = Http::baseUrl(rtrim($this->baseUrl, '/'))
+            ->withOptions(['allow_redirects' => false])
+            ->acceptJson()
+            ->asJson()
+            ->timeout(30)
+            ->post('/login', [
+                'accessToken' => $this->accessToken,
+                'email' => $this->email,
+                'password' => $this->password,
             ])
             ->throw();
+
+        $header = $response->header('Authorization');
+        if ($header === '' || ! str_starts_with($header, 'Bearer ')) {
+            throw new \RuntimeException('Mosyle /login did not return a Bearer token in the Authorization response header. Check the access token, email, and password.');
+        }
+
+        return $this->jwt = substr($header, 7);
     }
 
     private function request(): PendingRequest
     {
         return Http::baseUrl(rtrim($this->baseUrl, '/'))
             ->withOptions(['allow_redirects' => false])
-            ->withToken($this->token)
+            ->withToken($this->bearer())
             ->acceptJson()
             ->asJson()
             ->timeout(30);

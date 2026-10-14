@@ -203,6 +203,7 @@ return [
     'email_array' => 'En eller flera e-postadresser är ogiltiga.',
     'checkboxes' => ':attribute innehåller ogiltiga alternativ.',
     'radio_buttons' => ':attribute är ogiltigt.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Fältet :attribute innehåller ett tecken som inte är tillåtet.',

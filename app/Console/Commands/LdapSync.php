@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Group;
 use App\Models\Ldap;
@@ -51,6 +52,15 @@ class LdapSync extends Command
             exit();
         }
 
+        // Tag every action_log written during this run (direct writes
+        // and the observer-driven writes User saves trigger) as `ldap`
+        // so the activity report distinguishes LDAP-created entries
+        // from gui / api / sync-adapter origins.
+        return Actionlog::withActionSource('ldap', fn () => $this->runSync());
+    }
+
+    private function runSync()
+    {
         ini_set('max_execution_time', config('app.ldap_time_limit')); // 600 seconds = 10 minutes
         ini_set('memory_limit', config('app.ldap_memory_limit'));
 
@@ -117,7 +127,11 @@ class LdapSync extends Command
              */
             $attributes = array_values(array_filter($ldap_map));
 
-            if (Setting::getSettings()->is_ad === 1 && is_null($ldap_map['activated'])) {
+            // empty() rather than is_null() because the LDAP wizard
+            // (App\Livewire\LdapSettings) persists an unset mapping as ''
+            // whereas the legacy form path routes through
+            // ConvertEmptyStringsToNull and persists it as null.
+            if (Setting::getSettings()->is_ad === 1 && empty($ldap_map['activated'])) {
                 $attributes[] = 'useraccountcontrol';
             }
 

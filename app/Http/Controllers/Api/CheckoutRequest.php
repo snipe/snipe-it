@@ -79,21 +79,34 @@ class CheckoutRequest extends Controller
             $query->TextSearch($request->input('search'));
         }
 
-        // Pull the (search-narrowed) set; sort happens in PHP after
+        // Pull the (search-narrowed) set. The sort happens in PHP after
         // the FMCS filter below since the controller loads all-then-
         // slice anyway. This also lets `remaining` sort work
         // uniformly across the polymorphic requestable types (each
         // computes numRemaining() differently, so a single DB
         // orderBy wouldn't cover them). Default sort: most recent
-        // first, matches the pre-change behavior when no client-side
+        // first, which matches the previous behavior when no client-side
         // header is chosen.
         $requests = $query->get();
 
         if (Company::isFullMultipleCompanySupportEnabled() && ! auth()->user()->isSuperUser()) {
-            $requests = $requests->filter(
-                fn (CheckoutRequestModel $r) => $r->requestable
-                    && Company::isCurrentUserHasAccess($r->requestable)
-            )->values();
+            $requests = $requests->filter(function (CheckoutRequestModel $r): bool {
+                if (!$r->requestable || !Company::isCurrentUserHasAccess($r->requestable)) {
+                    return false;
+                }
+
+                // AssetModel is a global object with no
+                // company_id column, so Company::isCurrentUserHasAccess
+                // short-circuits to true for every actor. Fall back to
+                // the requesting user's tenant visibility, which
+                // routes through User's CompanyableScope and correctly
+                // rejects cross-company users.
+                if ($r->requestable_type === AssetModel::class) {
+                    return $r->user !== null && Company::isCurrentUserHasAccess($r->user);
+                }
+
+                return true;
+            })->values();
         }
 
         // Per-row checkout-permission filter. A caller who can

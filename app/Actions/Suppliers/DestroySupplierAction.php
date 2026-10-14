@@ -9,8 +9,6 @@ use App\Exceptions\ItemStillHasConsumables;
 use App\Exceptions\ItemStillHasLicenses;
 use App\Exceptions\ItemStillHasMaintenances;
 use App\Models\Supplier;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class DestroySupplierAction
 {
@@ -56,14 +54,8 @@ class DestroySupplierAction
             throw new ItemStillHasComponents($supplier);
         }
 
-        if ($supplier->image) {
-            try {
-                Storage::disk('public')->delete('suppliers/'.$supplier->image);
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-            }
-        }
-
+        // Image file cleanup lives on the model's forceDeleted hook so
+        // soft-delete + restore preserves the image reference.
         $supplier->delete();
 
         return true;

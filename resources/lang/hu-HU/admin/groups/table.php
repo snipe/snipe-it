@@ -4,6 +4,6 @@ return [
 
     'id' => 'Id',
     'name' => 'Név',
-    'users' => '# -i felhasználó',
+    'users' => 'Felhasználók száma',
 
 ];

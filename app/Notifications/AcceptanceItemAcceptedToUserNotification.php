@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Enums\FileStorage;
 use App\Models\Setting;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -84,7 +85,7 @@ class AcceptanceItemAcceptedToUserNotification extends Notification implements S
      */
     public function toMail()
     {
-        $pdf_path = storage_path('private_uploads/eula-pdfs/'.$this->file);
+        $pdf_path = storage_path(FileStorage::EulaPdfs->privateStorageKey().$this->file);
         $message = (new MailMessage)->markdown('notifications.markdown.asset-acceptance',
             [
                 'item_tag' => $this->item_tag,
@@ -101,7 +102,7 @@ class AcceptanceItemAcceptedToUserNotification extends Notification implements S
                 'intro_text' => trans_choice('mail.acceptance_asset_accepted_to_user', $this->qty, ['qty' => $this->qty, 'site_name' => Setting::getSettings()->site_name]),
             ])
             ->attach($pdf_path)
-            ->subject('✅ ' . trans_choice('mail.acceptance_asset_accepted_to_user', $this->qty, ['qty' => $this->qty, 'site_name' => Setting::getSettings()->site_name]))
+            ->subject('✅ '.trans_choice('mail.acceptance_asset_accepted_to_user', $this->qty, ['qty' => $this->qty, 'site_name' => Setting::getSettings()->site_name]))
             ->withSymfonyMessage(function (Email $message) {
                 $message->getHeaders()->addTextHeader(
                     'X-System-Sender', 'Snipe-IT'

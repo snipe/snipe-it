@@ -41,6 +41,7 @@ class CalendarEventsTransformer
         'asset.warranty_expiration' => 'general.calendar_event_asset_warranty_expiration',
         'license.expiration' => 'general.calendar_event_license_expiration',
         'license.termination' => 'general.calendar_event_license_termination',
+        'user.start_date' => 'general.calendar_event_user_start_date',
         'user.end_date' => 'general.calendar_event_user_end_date',
         'request.reservation' => 'general.calendar_event_request_reservation',
     ];

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\FileStorage;
 use App\Models\CheckoutAcceptance;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
@@ -42,8 +43,8 @@ class PurgeEulaPDFs extends Command
         }
 
         $interval_date = Carbon::now()->subDays($before);
-        $signature_path = 'private_uploads/signatures/';
-        $eula_path = 'private_uploads/eula-pdfs/';
+        $signature_path = FileStorage::Signatures->privateStorageKey();
+        $eula_path = FileStorage::EulaPdfs->privateStorageKey();
 
         if (! Storage::exists($eula_path)) {
             $this->fail('The storage directory "'.$eula_path.'" does not exist. No EULA files will be deleted.');

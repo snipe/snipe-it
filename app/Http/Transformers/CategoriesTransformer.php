@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
@@ -49,7 +50,7 @@ class CategoriesTransformer
             $array = [
                 'id' => (int) $category->id,
                 'name' => e($category->name),
-                'image' => ($category->image) ? Storage::disk('public')->url('categories/'.e($category->image)) : null,
+                'image' => ($category->image) ? Storage::disk('public')->url(FileStorage::Categories->publicPath().e($category->image)) : null,
                 'category_type' => Helper::categoryTypeList($category->category_type),
                 'has_eula' => ($category->eula_text) ? true : false,
                 'use_default_eula' => ($category->use_default_eula == '1' ? true : false),

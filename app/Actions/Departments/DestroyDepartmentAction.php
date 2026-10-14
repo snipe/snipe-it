@@ -4,8 +4,6 @@ namespace App\Actions\Departments;
 
 use App\Exceptions\ItemStillHasUsers;
 use App\Models\Department;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 
 class DestroyDepartmentAction
 {
@@ -20,14 +18,8 @@ class DestroyDepartmentAction
             throw new ItemStillHasUsers($department);
         }
 
-        if ($department->image) {
-            try {
-                Storage::disk('public')->delete('departments/'.$department->image);
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-            }
-        }
-
+        // Image file cleanup lives on the model's forceDeleted hook so
+        // soft-delete + restore preserves the image reference.
         $department->delete();
 
         return true;

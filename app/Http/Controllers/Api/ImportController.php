@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemImportRequest;
@@ -53,7 +54,7 @@ class ImportController extends Controller
             $files = Request::file('files');
             // Path inside the private disk. Under PRIVATE_FILESYSTEM_DISK=local this resolves to
             // storage/private_uploads/imports, and under s3_private it lands at <bucket>/private_uploads/imports
-            $diskPath = 'private_uploads/imports';
+            $diskPath = rtrim(FileStorage::Imports->privateStorageKey(), '/');
             $results = [];
             $detector = new EncodingDetector;
 
@@ -478,7 +479,7 @@ class ImportController extends Controller
                 // the default (private) disk. The pre-fix path 'imports/'
                 // missed the 'private_uploads/' prefix and silently
                 // no-op'd on both drivers.
-                Storage::delete('private_uploads/imports/'.$import->file_path);
+                Storage::delete(FileStorage::Imports->privateStorageKey().$import->file_path);
                 $import->delete();
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));

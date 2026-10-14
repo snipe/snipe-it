@@ -203,6 +203,7 @@ return [
     'email_array' => 'En eller flere email-adresser er ugyldige.',
     'checkboxes' => ':attribute indeholder ugyldige indstillinger.',
     'radio_buttons' => ':attribute er ugyldig.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Attributfeltet indeholder et tegn, der ikke er tilladt.',

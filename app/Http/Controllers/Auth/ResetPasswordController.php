@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\User;
@@ -128,7 +129,8 @@ class ResetPasswordController extends Controller
 
                 Log::debug('Password reset for '.$user->username.' FAILED - this user exists but the token is not valid');
 
-                return redirect()->back()->withInput($request->only('email'))->with('success', trans('passwords.reset'));
+                return redirect()->to(Helper::sameOriginUrl(url()->previous()) ?? route('login'))
+                    ->withInput($request->only('email'))->with('success', trans('passwords.reset'));
             }
 
         }

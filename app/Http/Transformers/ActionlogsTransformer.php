@@ -3,6 +3,7 @@
 namespace App\Http\Transformers;
 
 use App\Enums\ActionType;
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Helpers\StorageHelper;
 use App\Models\Actionlog;
@@ -265,7 +266,7 @@ class ActionlogsTransformer
                 ? e($actionlog->orderItem->order->order_number)
                 : null,
             'note' => ($actionlog->note) ? Helper::parseEscapedMarkedownInline($actionlog->note) : null,
-            'signature_file' => (($actionlog->accept_signature) && Storage::exists('private_uploads/signatures/'.$actionlog->accept_signature)) ? route('log.signature.view', ['filename' => $actionlog->accept_signature]) : null,
+            'signature_file' => (($actionlog->accept_signature) && Storage::exists(FileStorage::Signatures->privateStorageKey().$actionlog->accept_signature)) ? route('log.signature.view', ['filename' => $actionlog->accept_signature]) : null,
             'log_meta' => $clean_meta ?? null,
             'remote_ip' => e($actionlog->remote_ip) ?? null,
             'user_agent' => e($actionlog->user_agent) ?? null,

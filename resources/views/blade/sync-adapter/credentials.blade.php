@@ -94,6 +94,21 @@
             // JS below the loop wires the show/hide logic.
             $visibleWhen = $field['visible_when'] ?? null;
             $section = $field['section'] ?? null;
+            // Opt-in inline refresh for select fields: adapters that
+            // pair their select with a vendor-side list declare
+            // refresh_route_name + depends_on, and the row renders a
+            // sibling action button (via after_input, like the "New"
+            // button on the Default Status row) that reloads the
+            // options via AJAX. Keys of depends_on map
+            // {payload_key: field_key_on_adapter} so the JS can pack
+            // the right values out of the sibling form controls
+            // without touching the submit flow.
+            $refreshRoute = $field['refresh_route_name'] ?? null;
+            $refreshDependsOn = [];
+            foreach (($field['depends_on'] ?? []) as $payloadKey => $fieldKey) {
+                $refreshDependsOn[$payloadKey] = $slug.'_'.$fieldKey;
+            }
+            $refreshResponseKey = $field['refresh_response_key'] ?? 'items';
         @endphp
         @if ($section !== $currentSection)
             @if ($currentSection !== null)
@@ -156,10 +171,13 @@
                              of getting lost among the credential inputs. Nothing
                              to render here. --}}
         @else
+                        @php
+                            $inputDivClass = ($fieldType === 'select' && $refreshRoute && ! $locked) ? 'col-md-7' : 'col-md-8';
+                        @endphp
             <x-form.row
                 :label="$field['label']"
                 :name="$fieldName"
-                input_div_class="col-md-8"
+                :input_div_class="$inputDivClass"
                 help_html="{!! $field['help'] ?? '' !!}"
                 :required="$isRequired"
             >
@@ -244,6 +262,22 @@
                         />
                     @endif
                 </x-slot:input>
+                @if (! $locked && $fieldType === 'select' && $refreshRoute)
+                    <x-slot:after_input>
+                        <button
+                            type="button"
+                            class="btn btn-sm btn-theme js-sync-adapter-refresh-select"
+                            data-refresh-endpoint="{{ route($refreshRoute, $adapter->name()) }}"
+                            data-target-field="{{ $fieldName }}"
+                            data-depends-on='{{ json_encode($refreshDependsOn) }}'
+                            data-response-key="{{ $refreshResponseKey }}"
+                            data-tooltip="true"
+                            title="{{ trans('admin/settings/sync_adapters.refresh_sites', ['label' => $adapter->vendorSiteLabel()]) }}"
+                        >
+                            <x-icon type="sync" class="fa-fw"/>
+                        </button>
+                    </x-slot:after_input>
+                @endif
             </x-form.row>
                     @endif
                     @if (is_array($visibleWhen))

@@ -203,6 +203,7 @@ return [
     'email_array' => 'Neplatná jedna alebo viacero emailových adries.',
     'checkboxes' => ':attribute obsahuje neplatné možnosti.',
     'radio_buttons' => ':attribute je neplatný.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Pole :attribute obsahuje nepovolený znak.',

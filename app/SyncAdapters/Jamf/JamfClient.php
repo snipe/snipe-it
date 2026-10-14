@@ -58,11 +58,11 @@ class JamfClient
                 'page-size' => $pageSize,
             ]);
             foreach ($sections as $section) {
-                $query .= '&section=' . urlencode($section);
+                $query .= '&section='.urlencode($section);
             }
 
             $response = $this->request()
-                ->get('/api/v1/computers-inventory?' . $query)
+                ->get('/api/v1/computers-inventory?'.$query)
                 ->throw()
                 ->json();
 
@@ -73,6 +73,45 @@ class JamfClient
 
             // Jamf returns totalCount on this endpoint. Stop when we've
             // seen enough results or when a short page comes back.
+            $total = $response['totalCount'] ?? null;
+            $seenSoFar = ($page + 1) * $pageSize;
+            $done = count($results) < $pageSize
+                || ($total !== null && $seenSoFar >= $total);
+            $page++;
+        } while (! $done);
+    }
+
+    /**
+     * Iterate every mobile device (iOS, iPadOS, tvOS) in the Jamf
+     * tenant, one page at a time. Hits /api/v2/mobile-devices which,
+     * unlike /api/v1/computers-inventory, already returns most of the
+     * fields we need at the top level without a per-device detail
+     * fetch. Separate pager from computers() because the pagination
+     * terminator shape matches but the URL + fields differ enough that
+     * sharing the loop would obscure both.
+     *
+     * @return iterable<array<string, mixed>>
+     */
+    public function mobileDevices(int $pageSize = 100): iterable
+    {
+        $page = 0;
+
+        do {
+            $query = http_build_query([
+                'page' => $page,
+                'page-size' => $pageSize,
+            ]);
+
+            $response = $this->request()
+                ->get('/api/v2/mobile-devices?'.$query)
+                ->throw()
+                ->json();
+
+            $results = $response['results'] ?? [];
+            foreach ($results as $device) {
+                yield $device;
+            }
+
             $total = $response['totalCount'] ?? null;
             $seenSoFar = ($page + 1) * $pageSize;
             $done = count($results) < $pageSize
@@ -141,7 +180,7 @@ class JamfClient
         $response = Http::asForm()
             ->withOptions(['allow_redirects' => false])
             ->timeout(30)
-            ->post(rtrim($this->baseUrl, '/') . '/api/oauth/token', [
+            ->post(rtrim($this->baseUrl, '/').'/api/oauth/token', [
                 'grant_type' => 'client_credentials',
                 'client_id' => $this->clientId,
                 'client_secret' => $this->clientSecret,

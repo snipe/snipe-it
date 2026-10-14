@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Enums\FileStorage;
 use App\Http\Traits\TwoColumnUniqueUndeletedTrait;
+use App\Models\Builders\AssetModelQueryBuilder;
+use App\Models\Traits\HasImageUpload;
 use App\Models\Traits\HasUploads;
 use App\Models\Traits\Loggable;
 use App\Models\Traits\Requestable;
@@ -12,8 +15,8 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
@@ -22,14 +25,21 @@ use Watson\Validating\ValidatingTrait;
  * attributes that are common among the same type of asset.
  *
  * @version v1.0
+ * @mixin IdeHelperAssetModel
  */
 class AssetModel extends SnipeModel
 {
     use HasFactory;
+    use HasImageUpload;
     use HasUploads;
     use Loggable, Presentable, Requestable;
     use SoftDeletes;
     use TwoColumnUniqueUndeletedTrait;
+
+    public static function fileStorage(): FileStorage
+    {
+        return FileStorage::Models;
+    }
 
     /**
      * Whether the model should inject its identifier to the unique
@@ -122,6 +132,30 @@ class AssetModel extends SnipeModel
     {
         static::forceDeleted(function (AssetModel $assetModel) {
             $assetModel->requests()->forceDelete();
+
+            // Image + Files-tab attachments wipe on hard-delete only, so
+            // a restored soft-deleted model keeps its image and files.
+            // Attachment action_log rows get soft-deleted (not
+            // hard-deleted) so the audit trail of what was attached-
+            // and-when survives even after the parent is gone.
+            if ($assetModel->image) {
+                try {
+                    Storage::disk('public')->delete(FileStorage::Models->publicPath().$assetModel->image);
+                } catch (\Exception $e) {
+                    Log::info($e->getMessage());
+                }
+            }
+
+            foreach ($assetModel->uploads as $upload) {
+                if (($path = $upload->uploads_file_path()) !== null) {
+                    try {
+                        Storage::delete($path);
+                    } catch (\Exception $e) {
+                        Log::info($e->getMessage());
+                    }
+                }
+                $upload->delete();
+            }
         });
 
         static::softDeleted(function (AssetModel $assetModel) {
@@ -318,7 +352,7 @@ class AssetModel extends SnipeModel
     public function getImageUrl($path = null)
     {
         if ($this->image) {
-            return Storage::disk('public')->url(app('models_upload_path').$this->image);
+            return Storage::disk('public')->url(FileStorage::Models->publicPath().$this->image);
         }
 
         return false;
@@ -357,117 +391,8 @@ class AssetModel extends SnipeModel
      *
      * @version v1.0
      */
-    public function scopeInCategory($query, array $categoryIdListing)
+    public function newEloquentBuilder($query): AssetModelQueryBuilder
     {
-        return $query->whereIn('category_id', $categoryIdListing);
-    }
-
-    /**
-     * scopeRequestable
-     * Get all models that are requestable by a user.
-     *
-     *
-     * @return $query
-     *
-     * @author  Daniel Meltzer <dmeltzer.devel@gmail.com>
-     *
-     * @version v3.5
-     */
-    public function scopeRequestable($query)
-    {
-        return $query->where('requestable', '1');
-    }
-
-    /**
-     * Query builder scope to search on text, including catgeory and manufacturer name
-     *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text  $search  Search term
-     * @return Illuminate\Database\Query\Builder Modified query builder
-     */
-    public function scopeSearchByManufacturerOrCat($query, $search)
-    {
-        return $query->where('models.name', 'LIKE', "%$search%")
-            ->orWhere('model_number', 'LIKE', "%$search%")
-            ->orWhere(
-                function ($query) use ($search) {
-                    $query->whereHas(
-                        'category', function ($query) use ($search) {
-                            $query->where('categories.name', 'LIKE', '%'.$search.'%');
-                        }
-                    );
-                }
-            )
-            ->orWhere(
-                function ($query) use ($search) {
-                    $query->whereHas(
-                        'manufacturer', function ($query) use ($search) {
-                            $query->where('manufacturers.name', 'LIKE', '%'.$search.'%');
-                        }
-                    );
-                }
-            );
-    }
-
-    /**
-     * Query builder scope to order on manufacturer
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  text  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderManufacturer($query, $order)
-    {
-        return $query->leftJoin('manufacturers', 'models.manufacturer_id', '=', 'manufacturers.id')->orderBy('manufacturers.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on category name
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  text  $order  Order
-     * @return Builder Modified query builder
-     */
-    public function scopeOrderCategory($query, $order)
-    {
-        return $query->leftJoin('categories', 'models.category_id', '=', 'categories.id')->orderBy('categories.name', $order);
-    }
-
-    public function scopeOrderFieldset($query, $order)
-    {
-        return $query->leftJoin('custom_fieldsets', 'models.fieldset_id', '=', 'custom_fieldsets.id')->orderBy('custom_fieldsets.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on created_by name
-     */
-    public function scopeOrderByCreatedByName($query, $order)
-    {
-        return $query->leftJoin('users as admin_sort', 'models.created_by', '=', 'admin_sort.id')->select('models.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
-    }
-
-    /**
-     * Query builder scope to sort by the calculated `% remaining` column.
-     *
-     * `% remaining` is (available / total) * 100 — see percentRemaining().
-     * The caller (Api\AssetModelsController::index) already adds the
-     * `remaining` and `assets_count` withCount aliases before applying
-     * this scope, so we reference them directly in ORDER BY. Guarded
-     * against division by zero for models with no assets. Uses
-     * orderByRaw because Laravel's query builder has no arithmetic API
-     * for ORDER BY expressions.
-     *
-     * PostgreSQL note: this expression references SELECT-list aliases
-     * inside a compound ORDER BY expression, which PostgreSQL rejects
-     * per SQL standard. Snipe-IT officially supports MySQL/MariaDB and
-     * tests on SQLite (both allow this); moving to PostgreSQL would
-     * require inlining the subqueries or wrapping the query in an
-     * outer SELECT.
-     */
-    public function scopeOrderPercentRemaining($query, $order)
-    {
-        $order = strtolower($order) === 'asc' ? 'asc' : 'desc';
-
-        return $query->orderByRaw('CASE WHEN assets_count = 0 THEN 0 ELSE (remaining * 100.0 / assets_count) END '.$order);
+        return new AssetModelQueryBuilder($query);
     }
 }

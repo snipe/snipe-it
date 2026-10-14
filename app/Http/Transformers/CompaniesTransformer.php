@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Models\Company;
 use Illuminate\Database\Eloquent\Collection;
@@ -29,7 +30,7 @@ class CompaniesTransformer
                 'phone' => ($company->phone != '') ? e($company->phone) : null,
                 'fax' => ($company->fax != '') ? e($company->fax) : null,
                 'email' => ($company->email != '') ? e($company->email) : null,
-                'image' => ($company->image) ? Storage::disk('public')->url('companies/'.e($company->image)) : null,
+                'image' => ($company->image) ? Storage::disk('public')->url(FileStorage::Companies->publicPath().e($company->image)) : null,
                 'qr_code_url' => route('qr_code/common', ['object_type' => 'companies', 'id' => $company->id]),
                 'parent' => ($company->parent) ? [
                     'id' => (int) $company->parent->id,

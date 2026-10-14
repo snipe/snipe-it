@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Actions\Categories\DestroyCategoryAction;
+use App\Enums\FileStorage;
 use App\Exceptions\Handler;
 use App\Exceptions\ItemStillHasChildren;
 use App\Helpers\Helper;
@@ -52,19 +53,19 @@ class CategoriesController extends Controller
         ];
 
         $categories = Category::select([
-            'category_type',
-            'checkin_email',
-            'created_at',
-            'created_by',
-            'eula_text',
-            'id',
-            'image',
-            'name',
-            'notes',
-            'require_acceptance',
-            'tag_color',
-            'updated_at',
-            'use_default_eula',
+            'categories.category_type',
+            'categories.checkin_email',
+            'categories.created_at',
+            'categories.created_by',
+            'categories.eula_text',
+            'categories.id',
+            'categories.image',
+            'categories.name',
+            'categories.notes',
+            'categories.require_acceptance',
+            'categories.tag_color',
+            'categories.updated_at',
+            'categories.use_default_eula',
         ])
             ->with('adminuser')
             ->withCount('accessories as accessories_count', 'consumables as consumables_count', 'components as components_count', 'licenses as licenses_count', 'models as models_count');
@@ -279,7 +280,7 @@ class CategoriesController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($categories as $category) {
-            $category->use_image = ($category->image) ? Storage::disk('public')->url('categories/'.$category->image, $category->image) : null;
+            $category->use_image = ($category->image) ? Storage::disk('public')->url(FileStorage::Categories->publicPath().$category->image, $category->image) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($categories);

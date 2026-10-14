@@ -7,13 +7,15 @@ return [
     'create' => 'தேய்மானத்தை உருவாக்குங்கள்',
     'depreciation_name' => 'தேய்மானி பெயர்',
     'number_of_months' => 'மாதங்களின் எண்ணிக்கை',
+    'rate_multiplier' => 'Rate Multiplier',
     'update' => 'தேய்மானம் புதுப்பிக்கவும்',
-    'depreciation_min' => 'Minimum Value after Depreciation',
+    'fiscal_year_start_month' => 'Fiscal Year Start Month',
     'no_depreciations_warning' => '<strong>Warning: </strong>
                       You do not currently have any depreciations set up.
                       Please set up at least one depreciation to view the depreciation report.',
     'depreciation_method' => 'தேய்மானம் அறிக்கை',
     'linear_depreciation' => 'Linear (Default)',
+    'diminishing_depreciation' => 'Diminishing Value Depreciation',
     'half_1' => 'Half-year convention, always applied',
     'half_2' => 'Half-year convention, applied with condition',
 ];

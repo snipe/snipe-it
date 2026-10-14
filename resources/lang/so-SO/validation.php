@@ -203,6 +203,7 @@ return [
     'email_array' => 'Hal ama ka badan ciwaanka iimaylka waa mid aan shaqayn.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Goobta :attribute waxay ka kooban tahay xarfo aan la oggolayn.',

@@ -3,10 +3,9 @@
 namespace App\Livewire;
 
 use App\Helpers\Helper;
-use App\Models\Setting;
 use App\Models\Company;
+use App\Models\Setting;
 use App\Rules\ExternalUrl;
-use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\RateLimiter;
@@ -42,6 +41,7 @@ class IntegrationSettingsForm extends Component
     public ?Company $company = null;
 
     public $save_button;
+
     public array $savedWebhook = [];
 
     public $webhook_endpoint_rules;
@@ -59,7 +59,7 @@ class IntegrationSettingsForm extends Component
                 'nullable',
                 'required_with:webhook_channel',
                 'url',
-                new ExternalUrl,
+                new ExternalUrl('app.webhook_allow_internal_targets'),
             ],
             'webhook_channel' => 'required_with:webhook_endpoint|starts_with:#|nullable',
             'webhook_botname' => 'string|nullable',
@@ -119,20 +119,19 @@ class IntegrationSettingsForm extends Component
 
         $this->save_button = trans('general.save');
 
-
-        $this->teams_webhook_deprecated = !Str::contains($this->webhook_endpoint, 'workflows'); // consider moving this to webhook_link updated? (updatedWebhookLink?)
+        $this->teams_webhook_deprecated = ! Str::contains($this->webhook_endpoint, 'workflows'); // consider moving this to webhook_link updated? (updatedWebhookLink?)
 
         if ($this->webhook_endpoint != null && $this->webhook_channel != null) {
             $this->isDisabled = '';
         }
-        if ($this->webhook_selected === 'microsoft' && $this->teams_webhook_deprecated) { //since this is URL-aware, maybe also move this?
+        if ($this->webhook_selected === 'microsoft' && $this->teams_webhook_deprecated) { // since this is URL-aware, maybe also move this?
             $this->warning = trans('admin/settings/message.webhook.ms_teams_deprecation');
         }
     }
 
     public function updated($field)
     {
-        //anything changes; then clear the success message (and error message)
+        // anything changes; then clear the success message (and error message)
         $this->success = null;
         $this->error = null;
         $this->validateOnly($field);
@@ -170,11 +169,12 @@ class IntegrationSettingsForm extends Component
         if ($this->webhook_selected !== 'microsoft') {
             $this->teams_webhook_deprecated = false;
             $this->warning = null;
+
             return;
         }
 
         $this->teams_webhook_deprecated = filled($this->webhook_endpoint)
-            && !Str::contains($this->webhook_endpoint, 'workflows');
+            && ! Str::contains($this->webhook_endpoint, 'workflows');
 
         $this->warning = $this->teams_webhook_deprecated
             ? trans('admin/settings/message.webhook.ms_teams_deprecation')
@@ -243,13 +243,13 @@ class IntegrationSettingsForm extends Component
     public function universalWebhookTest()
     {
         $executed = RateLimiter::attempt(
-            key: 'test-connection:' . auth()->id(),
+            key: 'test-connection:'.auth()->id(),
             maxAttempts: 5,
             decaySeconds: 60,
             callback: function () {
                 $validator = Validator::make(
                     ['webhook_endpoint' => $this->webhook_endpoint],
-                    ['webhook_endpoint' => ['required', 'url', new ExternalUrl]],
+                    ['webhook_endpoint' => ['required', 'url', new ExternalUrl('app.webhook_allow_internal_targets')]],
                 );
 
                 if ($validator->fails()) {
@@ -257,6 +257,7 @@ class IntegrationSettingsForm extends Component
                     $this->save_button = trans('admin/settings/general.webhook_presave');
 
                     $this->error = $validator->errors()->first('webhook_endpoint');
+
                     return;
                 }
                 $this->error = '';
@@ -279,14 +280,14 @@ class IntegrationSettingsForm extends Component
                         'title' => trans('mail.snipe_webhook_test'),
                         'text' => trans('general.webhook_test_msg', ['app' => $this->webhook_name]),
                     ],
-                    default => throw new \Exception("Unknown provider")
+                    default => throw new \Exception('Unknown provider')
                 };
 
                 $status_code = null;
 
                 try {
-                    if ($this->webhook_selected == "microsoft" && !$this->teams_webhook_deprecated) {
-                        //new-fangled webhook - use package
+                    if ($this->webhook_selected == 'microsoft' && ! $this->teams_webhook_deprecated) {
+                        // new-fangled webhook - use package
                         $notification = new TeamsNotification($this->webhook_endpoint);
                         $message = trans('general.webhook_test_msg', ['app' => $this->webhook_name]);
                         $status_code = $notification->success()->sendMessage($message);
@@ -294,26 +295,26 @@ class IntegrationSettingsForm extends Component
                         $response = Http::withHeaders([
                             'content-type' => 'application/json',
                         ])->withOptions(['allow_redirects' => false])
-                            ->post($this->webhook_endpoint, $payload)/*->throw()*/
-                        ;
+                            ->post($this->webhook_endpoint, $payload); /* ->throw() */
                         $status_code = $response->status();
                     }
 
                     if ($status_code >= 300 && $status_code < 400) {
-                        //these, still, might happen. It seems like allow_redirects being false just doesn't follow them, it doesn't cause an Exception on them.
+                        // these, still, might happen. It seems like allow_redirects being false just doesn't follow them, it doesn't cause an Exception on them.
                         $this->error = trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]);
-                        //TODO: one possibliity here is to re-throw so that everything goes back through the exception handler?
+                        // TODO: one possibliity here is to re-throw so that everything goes back through the exception handler?
                     } elseif ($status_code >= 400 && $status_code < 500) {
-                        //this _shouldn't_ happen because the "->throw()" should catch it
+                        // this _shouldn't_ happen because the "->throw()" should catch it
                         $this->error = trans('admin/settings/message.webhook.error_redirect', ['endpoint' => $this->webhook_endpoint]);
                     } elseif ($status_code >= 500) {
-                        //this _shouldn't_ happen because the "->throw()" should catch it
+                        // this _shouldn't_ happen because the "->throw()" should catch it
                         $this->error = trans('admin/settings/message.webhook.error_server');
                     } elseif ($status_code >= 200 && $status_code < 300) {
                         $this->isDisabled = '';
                         $this->save_button = trans('general.save');
 
                         $this->success = trans('admin/settings/message.webhook.success', ['webhook_name' => $this->webhook_name]);
+
                         return true; // This is just for EqualTiming to use; this method on this controller doesn't actually return anything
                     } else {
                         throw new \Exception(trans('admin/settings/message.webhook.error_misc'));
@@ -336,12 +337,13 @@ class IntegrationSettingsForm extends Component
                         'error_message' => $e->getMessage(),
                         'app' => $this->webhook_name,
                     ]);
+
                     return false;
                 }
             },
         );
 
-        if (!$executed) {
+        if (! $executed) {
             $this->addError('connection', trans('admin/settings/general.rate_limited'));
         }
     }
@@ -354,7 +356,7 @@ class IntegrationSettingsForm extends Component
     protected function loadWebhookSettings(): void
     {
         $source = $this->webhookSource();
-     
+
         $this->webhook_selected = $source->webhook_selected ?: 'slack';
         $this->webhook_endpoint = $source->webhook_endpoint;
         $this->webhook_channel = $source->webhook_channel;

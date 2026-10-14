@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FileStorage;
 use App\Http\Requests\ImageUploadRequest;
 use App\Models\Actionlog;
 use App\Models\Asset;
@@ -292,10 +293,10 @@ class ProfileController extends Controller
         }
 
         if (config('filesystems.default') == 's3_private') {
-            return redirect()->away(Storage::disk('s3_private')->temporaryUrl('private_uploads/eula-pdfs/'.$filename, now()->addMinutes(5)));
+            return redirect()->away(Storage::disk('s3_private')->temporaryUrl(FileStorage::EulaPdfs->privateStorageKey().$filename, now()->addMinutes(5)));
         }
 
-        if (Storage::exists('private_uploads/eula-pdfs/'.$filename)) {
+        if (Storage::exists(FileStorage::EulaPdfs->privateStorageKey().$filename)) {
             return response()->download(config('app.private_uploads').'/eula-pdfs/'.$filename);
         }
 

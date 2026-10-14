@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\FileStorage;
 use App\Events\CheckoutableCheckedIn;
 use App\Mail\BulkDeleteReportMail;
 use App\Models\Accessory;
@@ -548,10 +549,10 @@ class BulkDelete extends Command
 
                 if ($deleteFiles) {
                     if ($asset->image) {
-                        $this->deleteStorageFile('public', app('assets_upload_path').$asset->image);
+                        $this->deleteStorageFile('public', FileStorage::Assets->publicPath().$asset->image);
                     }
                     foreach ($maintenanceImages as $img) {
-                        $this->deleteStorageFile('public', app('maintenances_upload_path').$img);
+                        $this->deleteStorageFile('public', FileStorage::Maintenances->publicPath().$img);
                     }
                     foreach ($actionLogPaths as $path) {
                         $this->deleteStorageFile('local', $path);
@@ -740,7 +741,7 @@ class BulkDelete extends Command
 
                 if ($deleteFiles) {
                     if ($accessory->image) {
-                        $this->deleteStorageFile('public', app('accessories_upload_path').$accessory->image);
+                        $this->deleteStorageFile('public', FileStorage::Accessories->publicPath().$accessory->image);
                     }
                     foreach ($actionLogPaths as $path) {
                         $this->deleteStorageFile('local', $path);
@@ -827,7 +828,7 @@ class BulkDelete extends Command
 
                 if ($deleteFiles) {
                     if ($component->image) {
-                        $this->deleteStorageFile('public', app('components_upload_path').$component->image);
+                        $this->deleteStorageFile('public', FileStorage::Components->publicPath().$component->image);
                     }
                     foreach ($actionLogPaths as $path) {
                         $this->deleteStorageFile('local', $path);
@@ -897,7 +898,7 @@ class BulkDelete extends Command
 
                 if ($deleteFiles) {
                     if ($consumable->image) {
-                        $this->deleteStorageFile('public', app('consumables_upload_path').$consumable->image);
+                        $this->deleteStorageFile('public', FileStorage::Consumables->publicPath().$consumable->image);
                     }
                     foreach ($actionLogPaths as $path) {
                         $this->deleteStorageFile('local', $path);
@@ -1018,7 +1019,7 @@ class BulkDelete extends Command
 
                 if ($deleteFiles) {
                     if ($user->avatar) {
-                        $this->deleteStorageFile('public', app('users_upload_path').$user->avatar);
+                        $this->deleteStorageFile('public', FileStorage::Avatars->publicPath().$user->avatar);
                     }
                     $acceptancesToDelete->each(fn (CheckoutAcceptance $ca) => $this->deleteAcceptanceFiles($ca));
                     foreach ($actionLogPaths as $path) {
@@ -1054,10 +1055,10 @@ class BulkDelete extends Command
     private function deleteAcceptanceFiles(CheckoutAcceptance $acceptance): void
     {
         if ($acceptance->signature_filename) {
-            $this->deleteStorageFile('local', 'private_uploads/signatures/'.$acceptance->signature_filename);
+            $this->deleteStorageFile('local', FileStorage::Signatures->privateStorageKey().$acceptance->signature_filename);
         }
         if ($acceptance->stored_eula_file) {
-            $this->deleteStorageFile('local', 'private_uploads/eula-pdfs/'.$acceptance->stored_eula_file);
+            $this->deleteStorageFile('local', FileStorage::EulaPdfs->privateStorageKey().$acceptance->stored_eula_file);
         }
     }
 

@@ -203,6 +203,7 @@ return [
     'email_array' => 'Una o più email sono invalidi.',
     'checkboxes' => ':attribute contiene opzioni non valide.',
     'radio_buttons' => ':attribute non è valido.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Il campo :attribute contiene un carattere non consentito.',

@@ -25,7 +25,7 @@ return [
         'confirm' => 'Üreticiyi silmek istediğinize emin misiniz?',
         'error' => 'Üretici silinirken bir hata oluştu. Lütfen tekrar deneyin.',
         'success' => 'Üretici başarıyla silindi.',
-        'bulk_success' => 'Manufacturer deleted successfully.|:count manufacturers were deleted successfully.',
+        'bulk_success' => 'Üretici başarıyla silindi.|:count üretici başarıyla silindi.',
         'partial_success' => 'Üretici başarıyla silindi. Aşağıda ek bilgileri görebilirsiniz. | :count üretici başarıyla silindi. Aşağıda ek bilgileri görebilirsiniz.',
     ],
 

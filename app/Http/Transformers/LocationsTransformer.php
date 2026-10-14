@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Models\Accessory;
 use App\Models\AccessoryCheckout;
@@ -38,7 +39,7 @@ class LocationsTransformer
             $array = [
                 'id' => (int) $location->id,
                 'name' => e($location->name),
-                'image' => ($location->image) ? Storage::disk('public')->url('locations/'.e($location->image)) : null,
+                'image' => ($location->image) ? Storage::disk('public')->url(FileStorage::Locations->publicPath().e($location->image)) : null,
                 'qr_code_url' => route('qr_code/common', ['object_type' => 'locations', 'id' => $location->id]),
                 'address' => ($location->address) ? e($location->address) : null,
                 'address2' => ($location->address2) ? e($location->address2) : null,
@@ -122,7 +123,7 @@ class LocationsTransformer
                 'type' => strtolower($accessory_checkout->assignedType()),
             ] : null,
             'accessory' => $this->transformAccessory($accessory_checkout->accessory),
-            'image' => ($accessory_checkout?->accessory?->image) ? Storage::disk('public')->url('accessories/'.e($accessory_checkout->accessory->image)) : null,
+            'image' => ($accessory_checkout?->accessory?->image) ? Storage::disk('public')->url(FileStorage::Accessories->publicPath().e($accessory_checkout->accessory->image)) : null,
             'note' => $accessory_checkout->note ? e($accessory_checkout->note) : null,
             'created_by' => $accessory_checkout->adminuser ? [
                 'id' => (int) $accessory_checkout->adminuser->id,
@@ -156,7 +157,7 @@ class LocationsTransformer
 
             $array = [
                 'id' => (int) $location->id,
-                'image' => ($location->image) ? Storage::disk('public')->url('locations/'.e($location->image)) : null,
+                'image' => ($location->image) ? Storage::disk('public')->url(FileStorage::Locations->publicPath().e($location->image)) : null,
                 'type' => 'location',
                 'name' => e($location->name),
                 'created_by' => $location->adminuser ? [

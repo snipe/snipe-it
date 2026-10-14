@@ -7,13 +7,15 @@ return [
     'create' => 'Skep waardevermindering',
     'depreciation_name' => 'Waardevermindering Naam',
     'number_of_months' => 'Aantal maande',
+    'rate_multiplier' => 'Rate Multiplier',
     'update' => 'Werk waardevermindering op',
-    'depreciation_min' => 'Minimum Value after Depreciation',
+    'fiscal_year_start_month' => 'Fiscal Year Start Month',
     'no_depreciations_warning' => '<strong>Warning: </strong>
                       You do not currently have any depreciations set up.
                       Please set up at least one depreciation to view the depreciation report.',
     'depreciation_method' => 'Waardeverminderingsverslag',
     'linear_depreciation' => 'Linear (Default)',
+    'diminishing_depreciation' => 'Diminishing Value Depreciation',
     'half_1' => 'Half-year convention, always applied',
     'half_2' => 'Half-year convention, applied with condition',
 ];

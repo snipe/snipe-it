@@ -26,10 +26,10 @@ return [
     ],
 
     'bulkedit' => [
-        'warn' => 'You are about to edit the properties of the following category:|You are about to edit the properties of the following :count categories:',
-        'no_selection' => 'You must select at least one category to edit.',
+        'warn' => 'A következő kategória tulajdonságainak szerkesztésére készül:|A következő :count kategória tulajdonságainak szerkesztésére készül:',
+        'no_selection' => 'Válasszon ki legalább egy kategóriát a szerkesztéshez.',
         'no_changes' => 'Nincsenek mezők megváltoztak, így semmi sem frissült.',
-        'success' => 'Category successfully updated.|:count categories successfully updated.',
+        'success' => 'A kategória sikeresen frissítve.|:count kategória sikeresen frissítve.',
     ],
 
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\FileStorage;
 use enshrined\svgSanitize\Sanitizer;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -93,10 +94,9 @@ class SQLStreamer
         return '';
     }
 
-    // this is used in exactly *TWO* places, and in both cases should return a prefix I think?
-    // first - if you do the --sanitize-only one (which is mostly for testing/development)
-    // next - when you run *without* a guessed prefix, this is run first to figure out the prefix
-    // I think we have to *duplicate* the call to be able to run it again?
+    // Used in exactly *TWO* places. Both return a prefix:
+    //   1. --sanitize-only (mostly for testing/development).
+    //   2. When running *without* a guessed prefix, this runs first to figure out the prefix.
     public static function guess_prefix($input): string
     {
         $parser = new self($input, null);
@@ -176,8 +176,7 @@ class RestoreFromBackup extends Command
      *
      * @var string
      */
-    // FIXME - , stripping prefixes and nonstandard SQL statements. Without --prefix, guess and return the correct prefix to strip
-    protected $signature = 'snipeit:restore 
+    protected $signature = 'snipeit:restore
                                             {--force : Skip the danger prompt; assuming you enter "y"} 
                                             {filename : The zip file to be migrated}
                                             {--no-progress : Don\'t show a progress bar}
@@ -294,43 +293,18 @@ class RestoreFromBackup extends Command
             return $this->error('Could not access file: '.$filename.' - '.$error_msg);
         }
 
-        $private_dirs = [
-            'storage/private_uploads/accessories',
-            'storage/private_uploads/assetmodels' => 'storage/private_uploads/models', // this was changed from assetmodels => models Aug 10 2025
-            'storage/private_uploads/asset_maintenances' => 'storage/private_uploads/maintenances', // this was changed from asset_maintenances => maintenances Aug 10 2025
-            'storage/private_uploads/maintenances', // but let 'maintenances' take precedence
-            'storage/private_uploads/models', // and let 'models' take precedence
-            'storage/private_uploads/assets', // these are asset _files_, not the pictures.
-            'storage/private_uploads/audits',
-            'storage/private_uploads/components',
-            'storage/private_uploads/consumables',
-            'storage/private_uploads/eula-pdfs',
-            'storage/private_uploads/imports',
-            'storage/private_uploads/locations',
-            'storage/private_uploads/licenses',
-            'storage/private_uploads/signatures',
-            'storage/private_uploads/users',
-        ];
+        // Upload directory enumeration lives in App\Enums\FileStorage
+        // as the single source of truth. The *ForRestore variants omit
+        // directories in FileStorage::SKIP_IN_RESTORE_PRUNE, so Spatie's
+        // backup archive directory (which may contain the archive we're
+        // currently reading from, plus the user's other rollback points)
+        // is left untouched by the pruning passes below.
+        $private_dirs = FileStorage::privateDirsForRestore();
         $private_files = [
             'storage/oauth-private.key',
             'storage/oauth-public.key',
         ];
-        $public_dirs = [
-            'public/uploads/accessories',
-            // 'public/uploads/assetmodels' => 'public/uploads/models', //according to git, this was _never_ a thing... (see below)
-            'public/uploads/maintenances',
-            'public/uploads/assets', // these are asset _pictures_, not asset files
-            'public/uploads/avatars',
-            'public/uploads/categories',
-            'public/uploads/companies',
-            'public/uploads/components',
-            'public/uploads/consumables',
-            'public/uploads/departments',
-            'public/uploads/locations',
-            'public/uploads/manufacturers',
-            'public/uploads/models', // ...it's been this way for 9 years (as of late 2025)
-            'public/uploads/suppliers',
-        ];
+        $public_dirs = FileStorage::publicDirsForRestore();
 
         $public_files = self::PUBLIC_FILES;
 
@@ -403,7 +377,7 @@ class RestoreFromBackup extends Command
                         // print("INTERESTING - last_pos is $last_pos when searching $raw_path for $dir - last_pos+strlen(\$dir) is: ".($last_pos+strlen($dir))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
                         // print("We would copy $raw_path to $dir.\n"); //FIXME append to a path?
                         // the CSV bit, below, is because we store CSV files as "blahcsv" - without an extension
-                        if (! in_array($extension, $allowed_extensions) && ! ($dir == 'storage/private_uploads/imports' && substr($raw_path, -3) == 'csv' && $extension == '')) {
+                        if (! in_array($extension, $allowed_extensions) && ! ($dir == FileStorage::Imports->privateDir() && substr($raw_path, -3) == 'csv' && $extension == '')) {
                             $unsafe_files[] = $raw_path;
                             Log::debug($raw_path.' from directory '.$dir.' is being skipped');
                         } else {
@@ -465,7 +439,7 @@ class RestoreFromBackup extends Command
 
         $sql_stat = $za->statIndex($sqlfile_indices[0]);
         // $this->info("SQL Stat is: ".print_r($sql_stat,true));
-        $sql_contents = $za->getStream($sql_stat['name']); // maybe copy *THIS* thing?
+        $sql_contents = $za->getStream($sql_stat['name']);
 
         if ($sql_contents === false) {
             $this->error('Unable to open SQL file: '.$sql_stat['name']);
@@ -473,7 +447,7 @@ class RestoreFromBackup extends Command
             return -1;
         }
 
-        // OKAY, now that we *found* the sql file if we're doing just the guess-prefix thing, we can do that *HERE* I think?
+        // Now that we *found* the sql file, if we're doing just the guess-prefix thing we can do that *HERE*.
         if ($this->option('sanitize-guess-prefix')) {
             $prefix = SQLStreamer::guess_prefix($sql_contents);
             $this->line($prefix);
@@ -486,9 +460,12 @@ class RestoreFromBackup extends Command
             $sql_importer = new SQLStreamer($sql_contents, STDOUT, $this->option('sanitize-with-prefix'));
             $bytes_read = $sql_importer->line_aware_piping();
 
-            return $this->warn("$bytes_read total bytes read");
-            // TODO - it'd be nice to dump this message to STDERR so that STDOUT is just pure SQL,
-            // which would be good for redirecting to a file, and not having to trim the last line off of it
+            // STDERR so stdout stays pure SQL for `--sql-stdout-only >
+            // out.sql` redirection and the operator does not have to
+            // trim the trailing status line off the dump.
+            $this->getOutput()->getErrorStyle()->writeln('<comment>'.$bytes_read.' total bytes read</comment>');
+
+            return 0;
         }
 
         // how to invoke the restore?
@@ -512,7 +489,7 @@ class RestoreFromBackup extends Command
             ' -u '.escapeshellarg($connectionConfig['username']).' '.
             (empty($connectionConfig['unix_socket'])
                 ? ' -P '.escapeshellarg($connectionConfig['port'])
-                : ' -S '.escapeshellarg($connectionConfig['unix_socket'])). ' '.
+                : ' -S '.escapeshellarg($connectionConfig['unix_socket'])).' '.
             escapeshellarg($connectionConfig['database']), // yanked -p since we pass via ENV
             [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
             $pipes,
@@ -543,7 +520,7 @@ class RestoreFromBackup extends Command
             Log::error('Error during restore!!!! '.$e->getMessage());
             // Drain both pipes fully so the DB client's own diagnostic ends up in
             // the log instead of just the downstream "broken pipe". Then include
-            // the process exit code so root-cause is visible without strace.
+            // the process exit code so the cause is visible without strace.
             // The deprecation warning about maria-db is a red herring, and not the actual problem.
             // "Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead"
             // was drowning out the actual problem.
@@ -578,14 +555,19 @@ class RestoreFromBackup extends Command
         $this->error(stream_get_contents($pipes[2]));
         fclose($pipes[2]);
 
-        // wait, have to do fclose() on all pipes first?
         $close_results = proc_close($proc_results);
         if ($close_results != 0) {
             return $this->error('There may have been a problem with the database import: Error number '.$close_results);
         }
 
+        // Prune the upload directories before extracting the backup's
+        // files on top. A restore replaces the entire install (the DB
+        // was wiped before this command ran), so any image or file that
+        // the backup does not carry should not survive the restore.
+        self::pruneUploadDirectories($public_dirs, $private_dirs);
+        self::pruneUploadFiles(self::PUBLIC_FILES);
+
         // and now copy the files over too (right?)
-        // FIXME - we don't prune the filesystem space yet!!!!
         if ($this->option('no-progress')) {
             $bar = null;
         } else {
@@ -600,7 +582,6 @@ class RestoreFromBackup extends Command
                 file_put_contents($migrated_file_name, $cleaned_svg);
             } else {
                 $fp = $za->getStream($ugly_file_name);
-                // $this->info("Weird problem, here are file details? ".print_r($file_details,true));
                 if (! is_dir($file_details['dest'])) {
                     mkdir($file_details['dest'], 0755, true); // 0755 is what Laravel uses, so we do that
                 }
@@ -610,7 +591,6 @@ class RestoreFromBackup extends Command
                 }
                 fclose($migrated_file);
                 fclose($fp);
-                // $this->info("Wrote $ugly_file_name to $pretty_file_name");
             }
             if ($bar) {
                 $bar->advance();
@@ -629,6 +609,67 @@ class RestoreFromBackup extends Command
         }
         foreach ($boring_files as $boring_file) {
             $this->warn($boring_file.' was skipped.');
+        }
+    }
+
+    /**
+     * Clear every file out of each upload directory the restore is
+     * about to extract into. `.gitkeep` is preserved so the empty
+     * directory still exists post-restore. Nested subdirectories are
+     * left alone (Snipe-IT's upload dirs are flat per-resource today,
+     * but this is defensive against future directory/subdir structures).
+     *
+     * Accepts the directory lists as parameters rather than reading
+     * them from UploadDirectories directly so a test can hand in a
+     * fake sandbox dir instead of touching the real repo tree.
+     *
+     * @param  array<int|string, string>  $publicDirs
+     * @param  array<int|string, string>  $privateDirs
+     */
+    protected static function pruneUploadDirectories(array $publicDirs, array $privateDirs): void
+    {
+        $all = [];
+        foreach ([$publicDirs, $privateDirs] as $set) {
+            foreach ($set as $src => $dst) {
+                $all[] = is_int($src) ? $dst : $dst;
+            }
+        }
+
+        foreach (array_unique($all) as $dir) {
+            if (! is_dir($dir)) {
+                continue;
+            }
+            foreach (scandir($dir) ?: [] as $entry) {
+                // Preserve both .gitkeep and .gitignore so the directory
+                // still exists after a restore AND still carries its
+                // ignore rules for git-installed deployments.
+                if ($entry === '.' || $entry === '..' || $entry === '.gitkeep' || $entry === '.gitignore') {
+                    continue;
+                }
+                $path = $dir.'/'.$entry;
+                if (is_file($path)) {
+                    @unlink($path);
+                }
+            }
+        }
+    }
+
+    /**
+     * Delete every file matching the given glob patterns before the
+     * restore extracts its own copies on top. Covers the root-level
+     * Settings branding files (Setting-*, logo.*, favicon.*, etc.)
+     * that live outside the enumerated upload subdirectories.
+     *
+     * @param  list<string>  $patterns
+     */
+    protected static function pruneUploadFiles(array $patterns): void
+    {
+        foreach ($patterns as $pattern) {
+            foreach (glob($pattern) ?: [] as $match) {
+                if (is_file($match)) {
+                    @unlink($match);
+                }
+            }
         }
     }
 }

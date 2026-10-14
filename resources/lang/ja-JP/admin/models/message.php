@@ -40,19 +40,19 @@ return [
 
     'bulkdelete' => [
         'error' => 'モデルが選択されていないため、何も削除されませんでした。',
-        'nothing_deletable' => 'None of the selected models can be deleted because they still have assets associated with them.',
+        'nothing_deletable' => '選択したモデルには資産が関連付けられているため、削除できるものがありません。',
         'success' => ':success_count モデルを削除しました!',
         'success_partial' => ':success_count モデルが削除されましたが、:fail_count 個はアセットが関連付けられているため、削除できませんでした。',
     ],
 
     'merge' => [
-        'min_two' => 'Select at least two models to merge.',
-        'no_target' => 'Select which model to keep before merging.',
-        'not_found' => 'One or more of the selected models could not be loaded. Refresh the models list and try again.',
-        'information' => 'You are about to merge :count models. Pick the model you want to keep. Every asset attached to the other models will be reassigned to the model you pick, then the source models will be deleted.',
-        'warning' => 'This cannot be undone. Reassigned assets will inherit the surviving model\'s category, fieldset, and depreciation settings.',
-        'pick_target' => 'Which model do you want to keep?',
-        'success' => 'Merged :source_count model(s) into ":target". :asset_count asset(s) were reassigned.',
+        'min_two' => '統合するモデルを2つ以上選択してください。',
+        'no_target' => '統合する前に、残すモデルを選択してください。',
+        'not_found' => '選択したモデルの一部を読み込めませんでした。モデルの一覧を更新してから、もう一度お試しください。',
+        'information' => ':count件のモデルを統合しようとしています。残すモデルを選んでください。ほかのモデルに紐付いているすべての資産が選んだモデルに付け替えられ、その後、元のモデルは削除されます。',
+        'warning' => 'この操作は元に戻せません。付け替えられた資産には、残したモデルのカテゴリ、フィールドセット、減価償却の設定が適用されます。',
+        'pick_target' => 'どのモデルを残しますか？',
+        'success' => ':source_count件のモデルを「:target」に統合しました。資産:asset_count件を付け替えました。',
     ],
 
 ];

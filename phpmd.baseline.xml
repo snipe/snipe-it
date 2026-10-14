@@ -10,13 +10,6 @@
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Exceptions/Handler.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Http/Controllers/Accessories/AccessoryCheckinController.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Http/Controllers/Api/AssetsController.php"/>
-  <!-- Api\DashboardController coordinates every dashboard-widget endpoint
-       (activity + categories + companies + locations), each of which
-       needs its own model set. Splitting the file into per-widget
-       controllers to satisfy CBO would fragment one view's backing
-       code across four files without a real payoff. -->
-  <violation rule="PHPMD\Rule\Design\CouplingBetweenObjects" file="app/Http/Controllers/Api/DashboardController.php"/>
-  <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Http/Controllers/Api/LabelsController.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Http/Controllers/Api/LicenseSeatsController.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Http/Controllers/Api/SettingsController.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Http/Controllers/Api/UsersController.php"/>
@@ -40,6 +33,7 @@
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Http/Traits/UniqueUndeletedTrait.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Http/Transformers/DepreciationReportTransformer.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Importer/ItemImporter.php"/>
+  <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Listeners/RegenerateIdeHelperAfterMigrate.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Livewire/Importer.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Livewire/LdapSettings.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/Accessory.php"/>
@@ -50,13 +44,14 @@
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/Component.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/CustomField.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/CustomFieldset.php"/>
+  <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/Labels/CustomLabels/Concerns/RenderCustomLabelContent.php"/>
+  <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/Labels/CustomLabels/CustomTapeLabel.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Models/Labels/DefaultLabel.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/Labels/Label.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Models/Labels/Sheet.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Models/Labels/Sheets/Avery/L7162_A.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Models/Labels/Sheets/Avery/_5520_B.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Models/Labels/Tapes/Generic/Continuous_53mm.php"/>
-  <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Models/Ldap.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/License.php"/>
   <violation rule="PHPMD\Rule\UnusedLocalVariable" file="app/Models/License.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Models/LicenseSeat.php"/>
@@ -99,7 +94,6 @@
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Rules/AssetCannotBeCheckedOutToNondeployableStatus.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Rules/AssetTagPatternRule.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Rules/CssColor.php"/>
-  <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Rules/CustomHttpExtrasJsonRule.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Rules/ExternalUrl.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Rules/UniqueUndeleted.php"/>
   <violation rule="PHPMD\Rule\UnusedFormalParameter" file="app/Rules/UserCannotSwitchCompaniesIfItemsAssigned.php"/>

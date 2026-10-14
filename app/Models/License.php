@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperLicense
+ */
 class License extends Depreciable
 {
     use HasFactory;
@@ -1013,7 +1016,7 @@ class License extends Depreciable
      */
     public function scopeOrderManufacturer($query, $order)
     {
-        return $query->leftJoin('manufacturers', 'licenses.manufacturer_id', '=', 'manufacturers.id')->select('licenses.*')
+        return $query->leftJoin('manufacturers', 'licenses.manufacturer_id', '=', 'manufacturers.id')->addSelect('licenses.*')
             ->orderBy('manufacturers.name', $order);
     }
 
@@ -1026,7 +1029,7 @@ class License extends Depreciable
      */
     public function scopeOrderSupplier($query, $order)
     {
-        return $query->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->select('licenses.*')
+        return $query->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')->addSelect('licenses.*')
             ->orderBy('suppliers.name', $order);
     }
 
@@ -1039,7 +1042,7 @@ class License extends Depreciable
      */
     public function scopeOrderCompany($query, $order)
     {
-        return $query->leftJoin('companies as companies', 'licenses.company_id', '=', 'companies.id')->select('licenses.*')
+        return $query->leftJoin('companies as companies', 'licenses.company_id', '=', 'companies.id')->addSelect('licenses.*')
             ->orderBy('companies.name', $order);
     }
 
@@ -1048,7 +1051,7 @@ class License extends Depreciable
      */
     public function scopeOrderByCreatedBy($query, $order)
     {
-        return $query->leftJoin('users as admin_sort', 'licenses.created_by', '=', 'admin_sort.id')->select('licenses.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return $query->leftJoin('users as admin_sort', 'licenses.created_by', '=', 'admin_sort.id')->addSelect('licenses.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 
     /**

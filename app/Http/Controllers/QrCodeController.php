@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Models\Setting;
 use Com\Tecnick\Barcode\Barcode;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class QrCodeController extends Controller
@@ -31,8 +33,8 @@ class QrCodeController extends Controller
         if ($settings->label2_2d_type === 'none') {
             return false;
         }
-        
-        $unavailable = fn() => abort(404, trans('general.generic_model_not_found', ['model' => trans('general.item')]));
+
+        $unavailable = fn () => abort(404, trans('general.generic_model_not_found', ['model' => trans('general.item')]));
 
         if (! array_key_exists($object_type, self::$map_show_route)) {
             $unavailable();
@@ -40,28 +42,34 @@ class QrCodeController extends Controller
 
         $object = parent::getMapObjectType()[$object_type]::withTrashed()->find($id);
 
-        if (!$object || !Gate::allows('view', $object)) {
+        if (! $object || ! Gate::allows('view', $object)) {
             $unavailable();
         }
 
         $size = Helper::barcodeDimensions($settings->label2_2d_type);
-        $qr_file = public_path().'/uploads/barcodes/qr-'.str_slug($object_type).'-'.str_slug($id).'.png';
+        $qr_key = FileStorage::Barcodes->publicPath().'qr-'.str_slug($object_type).'-'.str_slug($id).'.png';
 
-        if (file_exists($qr_file)) {
-            return response()->file($qr_file, ['Content-type' => 'image/png']);
+        if (! Storage::disk('public')->exists($qr_key)) {
+            $barcode = new Barcode;
+            $barcode_obj = $barcode->getBarcodeObj(
+                $settings->label2_2d_type,
+                route(self::$map_show_route[$object_type], $id),
+                $size['height'],
+                $size['width'],
+                'black',
+                [-2, -2, -2, -2]
+            );
+            Storage::disk('public')->put($qr_key, $barcode_obj->getPngData());
         }
 
-        $barcode = new Barcode;
-        $barcode_obj = $barcode->getBarcodeObj(
-            $settings->label2_2d_type,
-            route(self::$map_show_route[$object_type], $id),
-            $size['height'],
-            $size['width'],
-            'black',
-            [-2, -2, -2, -2]
-        );
-        file_put_contents($qr_file, $barcode_obj->getPngData());
-
-        return response($barcode_obj->getPngData())->header('Content-type', 'image/png');
+        // Buffered rather than StreamedResponse or a redirect to the
+        // storage URL. StreamedResponse was truncating bodies on S3
+        // somewhere in the readStream pipeline, and a 302 to the
+        // storage URL leaves the browser with a text/html 302 body on
+        // the img fetch, which Safari refuses to render as an image.
+        // QR PNGs are a few KB, in-memory is fine.
+        return response(Storage::disk('public')->get($qr_key), 200, [
+            'Content-type' => 'image/png',
+        ]);
     }
 }

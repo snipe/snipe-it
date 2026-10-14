@@ -428,6 +428,36 @@ class IndexCheckoutRequestsTest extends TestCase
         $this->assertNotContains($requestForB->id, $ids);
     }
 
+    public function test_fmcs_hides_assetmodel_parent_requests_filed_by_other_tenants(): void
+    {
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+
+        $adminInA = $companyA->users()->save(User::factory()->checkoutAssets()->make());
+        $requesterInB = $companyB->users()->save(User::factory()->make());
+
+        $sharedModel = AssetModel::factory()->create();
+
+        $foreignRequest = CheckoutRequest::factory()->create([
+            'user_id' => $requesterInB->id,
+            'requestable_id' => $sharedModel->id,
+            'requestable_type' => AssetModel::class,
+            'notes' => 'CAND15-CROSS-TENANT-NOTE',
+        ]);
+
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $response = $this->actingAsForApi($adminInA)
+            ->getJson(route('api.requests.index'))
+            ->assertOk();
+
+        $ids = collect($response->json('rows'))->pluck('id')->all();
+        $this->assertNotContains($foreignRequest->id, $ids, 'Company A admin must not see Company B user\'s AssetModel request.');
+
+        // Confirm the attacker-visible note never leaks into the
+        // response body either, independent of the id check.
+        $this->assertStringNotContainsString('CAND15-CROSS-TENANT-NOTE', $response->getContent());
+    }
+
     public function test_fmcs_floater_mode_surfaces_null_company_items_to_scoped_admins(): void
     {
         // Floater mode intentionally makes company_id=null items

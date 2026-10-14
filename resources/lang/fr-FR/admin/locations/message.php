@@ -3,12 +3,12 @@
 return [
 
     'does_not_exist' => 'Le lieu n\'existe pas.',
-    'assoc_users' => 'This location is not currently deletable because it is the location of record for at least one item or user, has assets assigned to it, or is the parent location of another location. Please update your records to no longer reference this location and try again ',
+    'assoc_users' => 'Cet emplacement n\'est pas actuellement supprimable car il s\'agit de l\'emplacement de l\'enregistrement pour au moins un actif ou un utilisateur, a des actifs qui lui sont assignés, ou est l\'emplacement parent d\'un autre emplacement. Veuillez mettre à jour vos modèles pour ne plus référencer cette entreprise et réessayez. ',
     'assoc_assets' => 'Cet emplacement est actuellement associé à au moins un actif et ne peut pas être supprimé. Veuillez mettre à jour vos actifs pour ne plus faire référence à cet emplacement et réessayez. ',
     'assoc_child_loc' => 'Cet emplacement est actuellement le parent d\'au moins un sous emplacement et ne peut pas être supprimé . S\'il vous plaît mettre à jour vos emplacement pour ne plus le référencer et réessayez. ',
     'assigned_assets' => 'Actifs assignés',
     'current_location' => 'Emplacement actuel',
-    'deleted_warning' => 'This location has been deleted. Please restore it before attempting to make any changes.',
+    'deleted_warning' => 'Cet emplacement a été supprimé. Veuillez le restaurer avant de tenter d\'apporter des modifications.',
 
     'create' => [
         'error' => 'Le lieu n\'a pas été créé, veuillez essayer à nouveau.',
@@ -21,8 +21,8 @@ return [
     ],
 
     'restore' => [
-        'error' => 'Location was not restored, please try again',
-        'success' => 'Location restored successfully.',
+        'error' => 'L\'emplacement n\'a pas été restauré, veuillez réessayer',
+        'success' => 'Emplacement restauré avec succès.',
     ],
 
     'delete' => [
@@ -33,13 +33,13 @@ return [
 
     'bulkedit' => [
         'error' => 'Aucun champ n\'a été changé, donc rien n\'a été mis à jour.',
-        'success' => 'Location successfully updated.|:count locations successfully updated.',
-        'warn' => 'Edit the fields below to update this location. Fields you leave blank will not change on the location.|Edit the fields below to update all :count selected locations. Fields you leave blank will not change on any of them.',
-        'show_selected' => '1 selected location|:count selected locations',
-        'company_scope_mismatch_partial' => 'The company was not changed on 1 location because items or users at that location belong to different companies. Update or move those first.|The company was not changed on :count locations because items or users at those locations belong to different companies. Update or move those first.',
-        'company_scope_mismatch_all' => 'No locations were reassigned. The requested company does not match items or users at the selected location.|No locations were reassigned. The requested company does not match items or users at any of the :count selected locations.',
-        'parent_company_mismatch_partial' => 'The parent or company was not changed on 1 location because it would leave the location in a different company than its parent.|The parent or company was not changed on :count locations because it would leave those locations in a different company than their parent.',
-        'parent_company_mismatch_all' => 'No changes were saved. The requested parent or company would leave the location in a different company than its parent.|No changes were saved. The requested parent or company would leave every one of the :count selected locations in a different company than their parent.',
+        'success' => 'Emplacement mis à jour avec succès. |:count emplacements mis à jour avec succès.',
+        'warn' => 'Modifiez les champs ci-dessous pour mettre à jour cet emplacement. Les champs que vous laissez vide ne changeront pas à l\'emplacement. Modifier les champs ci-dessous pour mettre à jour tous les :count emplacements sélectionnés. Les champs que vous laissez vide ne changeront sur aucun d\'entre eux.',
+        'show_selected' => ':count emplacements sélectionnés|:count emplacements sélectionnés',
+        'company_scope_mismatch_partial' => 'L\'entreprise n\'a pas été modifiée sur 1 emplacement parce que les éléments ou les utilisateurs de cet emplacement appartiennent à différentes sociétés. Mettez à jour ou déplacez ceux-ci en premier. L\'entreprise n\'a pas été modifiée sur :count emplacements parce que les éléments ou les utilisateurs de ces emplacements appartiennent à différentes sociétés. Mettez à jour ou déplacez-les en premier.',
+        'company_scope_mismatch_all' => 'Aucun emplacement n\'a été réaffecté. La société demandée ne correspond pas aux articles ou aux utilisateurs à l\'emplacement sélectionné. Aucun emplacement n\'a été réaffecté. La société demandée ne correspond pas aux articles ou aux utilisateurs dans l\'un des :count emplacements sélectionnés.',
+        'parent_company_mismatch_partial' => 'La société mère ou la société n\'a pas été changée sur 1 emplacement car elle laisserait l\'emplacement dans une entreprise différente de son père. Le parent ou la société n\'a pas été changé sur :count emplacements car cela laisserait ces emplacements dans une société différente de leur parent.',
+        'parent_company_mismatch_all' => 'Aucune modification n\'a été enregistrée. La société mère ou la société demandée laisserait l\'emplacement dans une entreprise différente de son parent.|Aucune modification n\'a été enregistrée. La mère ou la société demandée quitterait chacun des emplacements sélectionnés :count dans une entreprise différente de leur parent.',
     ],
 
 ];

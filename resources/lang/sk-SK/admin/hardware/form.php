@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Hromadná úprava položiek majetku',
     'bulk_update_help' => 'Tento formulár umožňuje hromadnú úpravu majetku. Vyplňte iba položky, ktoré chcete zmeniť. Akékoľvek prázdne položky zostanú nezmenené. ',
     'bulk_update_warn' => 'Chystáte sa upraviť vlastnosti jedného majetku.|Chystáte sa obnoviť vlastnosti :asset_count majetkov.',
-    'bulk_update_with_custom_field' => 'Upozorňujeme, že majetky sú :asset_mode_count rôznych typov modelov.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Na modeloch',
     'bulk_update_custom_field_unique' => 'Toto je unikátne pole, preto nemôže byť hromadne upravené.',
     'checkedout_to' => 'Odovzdané',

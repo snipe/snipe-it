@@ -860,7 +860,24 @@ class CustomHttpAdapter extends SyncAdapter implements PushableAdapter
 
                 return null;
             }
-            $endpoint = $origin.($parsed['path'] ?? '/').(isset($parsed['query']) ? '?'.$parsed['query'] : '');
+
+            // Reject path-relative cursors with no leading slash
+            // ("page2" rather than "/page2"). Rebasing those produced
+            // an unparseable "https://hostpage2" that aborted the sync
+            // on the next iteration. Fails safe but we'd rather be
+            // explicit (reported post-fix by Zer0Gate as a robustness
+            // note). Only path+query is kept from the supplied cursor
+            // on purpose, so any path prefix on the configured base
+            // URL is dropped. Absolute cursors are the standard shape
+            // and this matches that.
+            $path = $parsed['path'] ?? '/';
+            if (! str_starts_with($path, '/')) {
+                Log::channel('sync-adapters')->warning($this->name().' pull aborted: next-page URL is path-relative with no leading slash');
+
+                return null;
+            }
+
+            $endpoint = $origin.$path.(isset($parsed['query']) ? '?'.$parsed['query'] : '');
         } else {
             $pullPath = $this->safeCredential('pull_path');
             if ($pullPath !== '' && ! str_starts_with($pullPath, '/')) {

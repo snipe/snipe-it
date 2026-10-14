@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Meerdere activa bijwerken',
     'bulk_update_help' => 'Met dit formulier kun je meerdere assets tegelijk bijwerken. Vul alleen de velden in die je moet wijzigen. Alle lege velden blijven ongewijzigd. ',
     'bulk_update_warn' => 'Je staat op het punt om de eigenschappen van één bezitting te bewerken. Je staat op het punt om de eigenschappen van :asset_count bezittingen te bewerken.',
-    'bulk_update_with_custom_field' => 'Let op: de assets hebben :asset_model_count verschillende soorten modellen.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Op modellen',
     'bulk_update_custom_field_unique' => 'Dit is een uniek veld en kan niet in bulk worden bewerkt.',
     'checkedout_to' => 'Uitgecheckt aan',

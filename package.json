@@ -14,19 +14,19 @@
         "screenshotter": "node .screenshotter/src/screenshotter.mjs"
     },
     "engines": {
-        "node": ">=0.12"
+        "node": ">=18.12.0"
     },
     "devDependencies": {
         "all-contributors-cli": "^6.26.1",
-        "axios": "^1.11.0",
+        "axios": "^1.20.0",
         "eonasdan-bootstrap-datetimepicker": "^4.17.49",
         "jquery": "^3.7.1",
         "laravel-mix": "^6.0.49",
         "lodash": "^4.17.24",
-        "moment": "^2.30.1",
+        "moment": "^2.31.0",
         "playwright": "^1.61.1",
         "postcss": "^8.5.12",
-        "webpack": "^5.98.0"
+        "webpack": "5.105.0"
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^6.7.2",
@@ -38,7 +38,7 @@
         "acorn": "^8.14.1",
         "acorn-import-assertions": "^1.9.0",
         "admin-lte": "^2.4.18",
-        "ajv": "^6.12.6",
+        "ajv": "8.18.0",
         "blueimp-file-upload": "^9.34.0",
         "bootstrap": "^3.4.1",
         "bootstrap-colorpicker": "^2.5.3",
@@ -47,19 +47,18 @@
         "canvas-confetti": "^1.9.3",
         "chart.js": "^2.9.4",
         "clipboard": "^2.0.11",
-        "css-loader": "^6.7.1",
+        "css-loader": "^7.1.5",
         "ekko-lightbox": "^5.1.1",
         "imagemin": "^9.0.1",
         "jquery-slimscroll": "^1.3.8",
         "jquery-ui": "^1.14.1",
         "jquery-validation": "^1.21.0",
         "jquery.iframe-transport": "^1.0.0",
-        "jspdf": ">=4.0.0",
+        "jspdf": "^4.2.1",
         "jspdf-autotable": "^5.0.2",
         "less": "^4.2.2",
         "less-loader": "^9.1.0",
         "list.js": "^1.5.0",
-        "morris.js": "github:morrisjs/morris.js",
         "papaparse": "5.5.2",
         "select2": "4.0.13",
         "sheetjs": "^2.0.0",
@@ -68,6 +67,9 @@
         "tether": "^1.4.0"
     },
     "overrides": {
+        "laravel-mix": {
+            "css-loader": "$css-loader"
+        },
         "pbkdf2": {
             "sha.js": ">=2.4.12"
         },
@@ -81,6 +83,8 @@
             "moment-timezone": "^0.6.2"
         },
         "lodash": "^4.17.24",
-        "postcss": "^8.5.12"
+        "postcss": "^8.5.12",
+        "shell-quote": "^1.10.0",
+        "jspdf": "^4.2.1"
     }
 }

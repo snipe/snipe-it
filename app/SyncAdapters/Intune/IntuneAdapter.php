@@ -69,6 +69,12 @@ class IntuneAdapter extends SyncAdapter implements PushableAdapter
                 'secret' => true,
                 'help' => trans('admin/settings/sync_adapters.intune_client_secret_help'),
             ],
+            [
+                'key' => 'scope_tag_filter',
+                'label' => trans('admin/settings/sync_adapters.intune_scope_tag_filter_label'),
+                'required' => false,
+                'help' => trans('admin/settings/sync_adapters.intune_scope_tag_filter_help'),
+            ],
         ];
     }
 
@@ -118,6 +124,11 @@ class IntuneAdapter extends SyncAdapter implements PushableAdapter
             'intune_management_certificate_expiration' => ['label_key' => 'admin/settings/sync_adapters.intune_extra_management_certificate_expiration'],
             'intune_compliance_grace_period_expiration' => ['label_key' => 'admin/settings/sync_adapters.intune_extra_compliance_grace_period_expiration'],
             'intune_device_registration_state' => ['label_key' => 'admin/settings/sync_adapters.intune_extra_device_registration_state'],
+            // Comma-joined roleScopeTagIds the device belongs to in
+            // Intune. Admins who use scope tags for RBAC separation
+            // can route this to a custom field to see which slice of
+            // IT owns each asset.
+            'intune_role_scope_tag_ids' => ['label_key' => 'admin/settings/sync_adapters.intune_extra_role_scope_tag_ids'],
             // Per-device enrichment fields. Populated only when the
             // "Fetch per-device details" opt-in is on - Graph's LIST
             // endpoint returns null for these regardless of $select.
@@ -152,13 +163,73 @@ class IntuneAdapter extends SyncAdapter implements PushableAdapter
         );
 
         $fetchPerDeviceDetails = $this->fetchesPerDeviceDetails();
+        $scopeTagIds = $this->resolveScopeTagFilter($client);
 
-        foreach ($client->managedDevices() as $device) {
+        foreach ($client->managedDevices($scopeTagIds) as $device) {
             if ($fetchPerDeviceDetails) {
                 $this->fillPerDeviceEnrichment($client, $device);
             }
             yield $this->normalize($device);
         }
+    }
+
+    /**
+     * Resolve the admin-entered scope_tag_filter into the Graph tag ID
+     * list the managedDevices filter wants. Entries can be either tag
+     * displayNames (friendly) or raw IDs (short-circuit). We hit
+     * roleScopeTags() once per sync, build a name -> id map, resolve
+     * names, and pass through anything that looks like an id already.
+     * Unresolvable names are logged and skipped so one bad entry does
+     * not kill the whole pull.
+     *
+     * Returns null when no filter is configured so the client can skip
+     * the $filter query param entirely.
+     *
+     * @return array<int, string>|null
+     */
+    private function resolveScopeTagFilter(IntuneClient $client): ?array
+    {
+        $raw = '';
+        try {
+            $raw = (string) $this->credential('scope_tag_filter');
+        } catch (\Throwable) {
+            // Credential not set yet. Treat as unconfigured.
+        }
+
+        $entries = array_values(array_filter(array_map('trim', explode(',', $raw))));
+        if ($entries === []) {
+            return null;
+        }
+
+        $tags = $client->roleScopeTags();
+        $nameToId = [];
+        $idSet = [];
+        foreach ($tags as $tag) {
+            $nameToId[strtolower($tag['displayName'])] = $tag['id'];
+            $idSet[$tag['id']] = true;
+        }
+
+        $resolved = [];
+        foreach ($entries as $entry) {
+            $lower = strtolower($entry);
+            if (isset($nameToId[$lower])) {
+                $resolved[] = $nameToId[$lower];
+
+                continue;
+            }
+            if (isset($idSet[$entry])) {
+                $resolved[] = $entry;
+
+                continue;
+            }
+            Log::channel('sync-adapters')->warning(sprintf(
+                '%s: scope_tag_filter entry "%s" did not match any Intune role scope tag name or id. Skipping.',
+                $this->name(),
+                $entry,
+            ));
+        }
+
+        return $resolved === [] ? null : array_values(array_unique($resolved));
     }
 
     /**
@@ -280,6 +351,10 @@ class IntuneAdapter extends SyncAdapter implements PushableAdapter
             'intune_management_certificate_expiration' => Arr::get($device, 'managementCertificateExpirationDate'),
             'intune_compliance_grace_period_expiration' => Arr::get($device, 'complianceGracePeriodExpirationDateTime'),
             'intune_device_registration_state' => Arr::get($device, 'deviceRegistrationState'),
+            // Scope tags live on the device as an array of ID strings.
+            // Comma-join for custom-field display convenience. See
+            // scope_tag_filter in settingsSchema() for the usage hook.
+            'intune_role_scope_tag_ids' => self::joinScopeTagIds(Arr::get($device, 'roleScopeTagIds')),
         ];
         $extra = $this->applyAdminExtras($extra, $device);
 
@@ -315,6 +390,26 @@ class IntuneAdapter extends SyncAdapter implements PushableAdapter
         }
 
         return $value;
+    }
+
+    /**
+     * Flatten Graph's roleScopeTagIds array into a comma-joined string
+     * for the extras bag so admins can route it to a text custom field
+     * without juggling array types. Returns null when the device has
+     * no scope tags.
+     */
+    private static function joinScopeTagIds(mixed $value): ?string
+    {
+        if (! is_array($value) || $value === []) {
+            return null;
+        }
+
+        $parts = array_values(array_filter(array_map(
+            fn ($v) => is_scalar($v) ? (string) $v : null,
+            $value,
+        )));
+
+        return $parts === [] ? null : implode(',', $parts);
     }
 
     private function parseTimestamp(mixed $value): ?Carbon

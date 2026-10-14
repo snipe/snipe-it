@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Enums\FileStorage;
 use App\Models\CustomField;
 use Carbon\CarbonImmutable;
 use DateTime;
@@ -192,6 +193,15 @@ class AssetPresenter extends Presenter
             //                'title' => trans('general.first_checkout'),
             //                'formatter' => 'dateDisplayFormatter',
             //            ],
+            [
+                'field' => 'last_checkout',
+                'scope' => 'col',
+                'searchable' => true,
+                'sortable' => true,
+                'visible' => false,
+                'title' => trans('general.last_checkout'),
+                'formatter' => 'dateDisplayFormatter',
+            ],
             [
                 'field' => 'age',
                 'scope' => 'col',
@@ -633,7 +643,7 @@ class AssetPresenter extends Presenter
             $imageAlt = $this->model->name;
         }
         if (! empty($imagePath)) {
-            $url = Storage::disk('public')->url(app('assets_upload_path').e($imagePath));
+            $url = Storage::disk('public')->url(FileStorage::Assets->publicPath().e($imagePath));
             $imagePath = '<img src="'.$url.'" height="50" width="50" alt="'.e($imageAlt).'">';
         }
 
@@ -654,7 +664,7 @@ class AssetPresenter extends Presenter
             $imagePath = $this->model->image;
         }
         if (! empty($imagePath)) {
-            return Storage::disk('public')->url(app('assets_upload_path').e($imagePath));
+            return Storage::disk('public')->url(FileStorage::Assets->publicPath().e($imagePath));
         }
 
         return $imagePath;

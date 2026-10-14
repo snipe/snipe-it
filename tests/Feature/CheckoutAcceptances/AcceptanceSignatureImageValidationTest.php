@@ -50,10 +50,10 @@ class AcceptanceSignatureImageValidationTest extends TestCase
     {
         $signature = "\x89PNG\r\n\x1a\n";
         $ihdrData = pack('NNCCCCC', $width, $height, 8, 2, 0, 0, 0);
-        $ihdrChunk = pack('N', 13) . 'IHDR' . $ihdrData . pack('N', crc32('IHDR' . $ihdrData));
-        $iendChunk = pack('N', 0) . 'IEND' . pack('N', crc32('IEND'));
+        $ihdrChunk = pack('N', 13).'IHDR'.$ihdrData.pack('N', crc32('IHDR'.$ihdrData));
+        $iendChunk = pack('N', 0).'IEND'.pack('N', crc32('IEND'));
 
-        return $signature . $ihdrChunk . $iendChunk;
+        return $signature.$ihdrChunk.$iendChunk;
     }
 
     public function test_signature_output_with_non_image_bytes_is_rejected_and_nothing_is_written(): void
@@ -67,7 +67,7 @@ class AcceptanceSignatureImageValidationTest extends TestCase
         $marker = 'SNIPE-CAND-11-NOT-A-PNG';
         $payload = [
             'asset_acceptance' => 'accepted',
-            'signature_output' => 'data:image/png;base64,' . base64_encode($marker),
+            'signature_output' => 'data:image/png;base64,'.base64_encode($marker),
         ];
 
         $this->actingAs($target)
@@ -96,7 +96,7 @@ class AcceptanceSignatureImageValidationTest extends TestCase
         $bombHeader = $this->pngWithIhdrDimensions(10000, 10000);
         $payload = [
             'asset_acceptance' => 'accepted',
-            'signature_output' => 'data:image/png;base64,' . base64_encode($bombHeader),
+            'signature_output' => 'data:image/png;base64,'.base64_encode($bombHeader),
         ];
 
         $this->actingAs($target)
@@ -118,7 +118,7 @@ class AcceptanceSignatureImageValidationTest extends TestCase
 
         $payload = [
             'asset_acceptance' => 'accepted',
-            'signature_output' => 'data:image/png;base64,' . str_repeat('A', 2_100_000),
+            'signature_output' => 'data:image/png;base64,'.str_repeat('A', 2_100_000),
         ];
 
         $this->actingAs($target)
@@ -127,6 +127,77 @@ class AcceptanceSignatureImageValidationTest extends TestCase
 
         $acceptance->refresh();
         $this->assertNull($acceptance->accepted_at);
+    }
+
+    /**
+     * Reporter-identified residual (Wojciech Ciemski post-fd61abe
+     * patch): a header-only PNG (valid signature + IHDR + IEND, no
+     * IDAT) passes getimagesizefromstring's shallow check,
+     * imagecreatefromstring fails on it, and the earlier shape then
+     * kept the original attacker bytes and wrote them under a .png
+     * filename. Verify the submission is now rejected and no file is
+     * written.
+     */
+    public function test_signature_output_with_valid_header_but_no_idat_is_rejected(): void
+    {
+        Storage::fake();
+        $this->enableRequiredSignatures();
+
+        $target = User::factory()->create();
+        $acceptance = $this->pendingAcceptance($target);
+
+        // Valid signature + IHDR + IEND. No IDAT, so the decoder can't
+        // reconstruct a raster even though getimagesizefromstring is
+        // satisfied by the IHDR alone. Attacker could tack arbitrary
+        // bytes on the end up to the size cap.
+        $headerOnlyPng = $this->pngWithIhdrDimensions(2, 2).'ATTACKER-CONTROLLED-TRAILING-BYTES';
+
+        $this->actingAs($target)
+            ->post(route('account.store-acceptance', $acceptance), [
+                'asset_acceptance' => 'accepted',
+                'signature_output' => 'data:image/png;base64,'.base64_encode($headerOnlyPng),
+            ])
+            ->assertSessionHas('error');
+
+        $acceptance->refresh();
+        $this->assertNull($acceptance->accepted_at, 'A header-only PNG must not finalize the acceptance.');
+        $this->assertEmpty(Storage::disk()->files('private_uploads/signatures'), 'A header-only PNG must not land any file under signatures/.');
+    }
+
+    /**
+     * Reporter-identified residual (Wojciech Ciemski post-fd61abe
+     * patch): the IMAGETYPE check used to accept any image type
+     * getimagesizefromstring recognized, including JPEG / GIF / BMP /
+     * WEBP. A valid JPEG then landed under a .png filename.
+     */
+    public function test_signature_output_with_non_png_image_type_is_rejected(): void
+    {
+        Storage::fake();
+        $this->enableRequiredSignatures();
+
+        $target = User::factory()->create();
+        $acceptance = $this->pendingAcceptance($target);
+
+        // Real JPEG (not a PNG with lying MIME, actual JPEG bytes).
+        // getimagesizefromstring returns IMAGETYPE_JPEG, the strict
+        // IMAGETYPE_PNG check now fires, and the request is rejected
+        // before flattening.
+        $canvas = imagecreatetruecolor(16, 16);
+        ob_start();
+        imagejpeg($canvas);
+        $jpegBytes = (string) ob_get_clean();
+        imagedestroy($canvas);
+
+        $this->actingAs($target)
+            ->post(route('account.store-acceptance', $acceptance), [
+                'asset_acceptance' => 'accepted',
+                'signature_output' => 'data:image/png;base64,'.base64_encode($jpegBytes),
+            ])
+            ->assertSessionHas('error');
+
+        $acceptance->refresh();
+        $this->assertNull($acceptance->accepted_at, 'A JPEG masquerading as a PNG must not finalize the acceptance.');
+        $this->assertEmpty(Storage::disk()->files('private_uploads/signatures'), 'A non-PNG image type must not land any file under signatures/.');
     }
 
     public function test_legitimate_tiny_png_signature_still_finalizes_acceptance(): void
@@ -142,7 +213,7 @@ class AcceptanceSignatureImageValidationTest extends TestCase
 
         $payload = [
             'asset_acceptance' => 'accepted',
-            'signature_output' => 'data:image/png;base64,' . base64_encode($this->tinyPng()),
+            'signature_output' => 'data:image/png;base64,'.base64_encode($this->tinyPng()),
         ];
 
         $this->actingAs($target)

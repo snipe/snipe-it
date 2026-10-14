@@ -23,6 +23,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FileStorage;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -64,23 +65,6 @@ abstract class Controller extends BaseController
         'models' => AssetModel::class,
         'suppliers' => Supplier::class,
         'users' => User::class,
-    ];
-
-    public static $map_storage_path = [
-        'accessories' => 'private_uploads/accessories/',
-        'maintenances' => 'private_uploads/maintenances/',
-        'assets' => 'private_uploads/assets/',
-        'audits' => 'private_uploads/audits/',
-        'departments' => 'private_uploads/departments/',
-        'companies' => 'private_uploads/companies/',
-        'components' => 'private_uploads/components/',
-        'consumables' => 'private_uploads/consumables/',
-        'hardware' => 'private_uploads/assets/',
-        'licenses' => 'private_uploads/licenses/',
-        'locations' => 'private_uploads/locations/',
-        'models' => 'private_uploads/models/',
-        'suppliers' => 'private_uploads/suppliers/',
-        'users' => 'private_uploads/users/',
     ];
 
     public static $map_file_prefix = [
@@ -173,7 +157,22 @@ abstract class Controller extends BaseController
      */
     public static function getMapStoragePath(): array
     {
-        return static::$map_storage_path;
+        return [
+            'accessories' => FileStorage::Accessories->privateStorageKey(),
+            'maintenances' => FileStorage::Maintenances->privateStorageKey(),
+            'assets' => FileStorage::Assets->privateStorageKey(),
+            'audits' => FileStorage::Audits->privateStorageKey(),
+            'departments' => FileStorage::Departments->privateStorageKey(),
+            'companies' => FileStorage::Companies->privateStorageKey(),
+            'components' => FileStorage::Components->privateStorageKey(),
+            'consumables' => FileStorage::Consumables->privateStorageKey(),
+            'hardware' => FileStorage::Assets->privateStorageKey(),
+            'licenses' => FileStorage::Licenses->privateStorageKey(),
+            'locations' => FileStorage::Locations->privateStorageKey(),
+            'models' => FileStorage::Models->privateStorageKey(),
+            'suppliers' => FileStorage::Suppliers->privateStorageKey(),
+            'users' => FileStorage::Users->privateStorageKey(),
+        ];
     }
 
     /**

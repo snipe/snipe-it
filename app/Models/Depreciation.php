@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Builders\DepreciationQueryBuilder;
 use App\Models\Traits\Searchable;
 use App\Presenters\DepreciationPresenter;
 use App\Presenters\Presentable;
@@ -10,6 +11,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperDepreciation
+ */
 class Depreciation extends SnipeModel
 {
     use HasFactory;
@@ -131,13 +135,8 @@ class Depreciation extends SnipeModel
         return $this->belongsTo(User::class, 'created_by')->withTrashed();
     }
 
-    /**
-     * -----------------------------------------------
-     * BEGIN QUERY SCOPES
-     * -----------------------------------------------
-     **/
-    public function scopeOrderByCreatedBy($query, $order)
+    public function newEloquentBuilder($query): DepreciationQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'depreciations.created_by', '=', 'admin_sort.id')->select('depreciations.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new DepreciationQueryBuilder($query);
     }
 }

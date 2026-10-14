@@ -203,6 +203,7 @@ return [
     'email_array' => 'Una sau mai multe adrese de e-mail este nevalidă.',
     'checkboxes' => ':attribute conține opțiuni invalide.',
     'radio_buttons' => ':attribute nu este valid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Câmpul atributului: conține un caracter care nu este permis.',

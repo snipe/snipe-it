@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FilterRequest;
@@ -224,7 +225,7 @@ class DepartmentsController extends Controller
         // This lets us have more flexibility in special cases like assets, where
         // they may not have a ->name value but we want to display something anyway
         foreach ($departments as $department) {
-            $department->use_image = ($department->image) ? Storage::disk('public')->url('departments/'.$department->image, $department->image) : null;
+            $department->use_image = ($department->image) ? Storage::disk('public')->url(FileStorage::Departments->publicPath().$department->image, $department->image) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($departments);

@@ -58,7 +58,7 @@
               </td>
               <td>
                 @foreach($fieldset->models as $model)
-                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
+                  <a href="{{ route('models.show', $model->id) }}" class="label label-light label-normal-bold">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
 
                 @endforeach
               </td>
@@ -217,7 +217,7 @@
               <td>{{ $field->element }}</td>
               <td>
                 @foreach($field->fieldset as $fieldset)
-                  <a href="{{ route('fieldsets.show', $fieldset->id) }}" class="label label-default">{{ $fieldset->name }}</a>
+                  <a href="{{ route('fieldsets.show', $fieldset->id) }}" class="label label-light label-normal-bold">{{ $fieldset->name }}</a>
                 @endforeach
               </td>
               <td>

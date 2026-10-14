@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ImageUploadRequest;
@@ -218,7 +219,7 @@ class AssetModelsController extends Controller
      */
     public function assets(Request $request, $id): JsonResponse|array
     {
-        
+
         $this->authorize('view', AssetModel::class);
         $this->authorize('view', Asset::class);
         $model = AssetModel::findOrFail($id);
@@ -391,7 +392,7 @@ class AssetModelsController extends Controller
                 $assetmodel->use_text .= ' (#'.$assetmodel->model_number.')';
             }
 
-            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? Storage::disk('public')->url('models/'.e($assetmodel->image)) : null;
+            $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? Storage::disk('public')->url(FileStorage::Models->publicPath().e($assetmodel->image)) : null;
         }
 
         return (new SelectlistTransformer)->transformSelectlist($assetmodels);

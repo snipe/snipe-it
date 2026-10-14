@@ -296,7 +296,7 @@
                 var colMap = {};
                 this.columns.forEach(c => colMap[c.field] = c.title);
                 var op = this.getAdvancedSearchOperator();
-                var html = '<span class="label label-warning" style="font-size: 11px; margin-right:6px;display:inline-block;margin-bottom:6px;">' +
+                var html = '<span class="label label-warning" style="font-size: 12px; margin-right:6px;display:inline-block;margin-bottom:6px; padding: 4px;">' +
                     advancedSearchOperatorLabel + ': ' + (op === 'or' ? advancedSearchOrText : advancedSearchAndText) + '</span>';
 
                 Object.keys(filters).forEach(f => {
@@ -310,10 +310,10 @@
                     // jQuery.html() would then parse and execute).
                     var safeLabel = escapeAdvancedSearchValue(colMap[f] || f);
                     var safeField = escapeAdvancedSearchAttr(f);
-                    html += '<span class="label label-primary" style="font-size: 11px; margin-right:6px;display:inline-block;margin-bottom:6px;"><b>' +
+                    html += '<span class="label label-primary" style="font-size: 12px; margin-right:6px;display:inline-block;margin-bottom:6px; padding: 4px;"><b>' +
                         safeLabel + ':</b> ' + escapeAdvancedSearchValue(filters[f]) +
                         ' <a href="javascript:void(0)" class="snipe-advanced-search-tag-remove" data-field="' + safeField +
-                        '" style="color:#fff;margin-left:6px;text-decoration:none;">&times;</a></span>';
+                        '" style="font-size: 12px; margin-right:6px;display:inline-block;color:#fff;text-decoration:none;">&times;</a></span>';
                 });
 
                 // "Clear all" pill: same shortcut as opening the modal and hitting
@@ -323,7 +323,7 @@
                 html += '<a href="javascript:void(0)" class="label label-danger snipe-advanced-search-tags-clear-all"' +
                     ' title="' + safeClearAllLabel + '"' +
                     ' aria-label="' + safeClearAllLabel + '"' +
-                    ' style="font-size: 11px; margin-right:6px; display:inline-block; margin-bottom:6px; color:#fff; text-decoration:none; cursor:pointer;">' +
+                    ' style="font-size: 12px; margin-right:6px; display:inline-block; margin-bottom:6px; color:#fff; text-decoration:none; cursor:pointer; padding: 4px;">' +
                     '<i class="fas fa-trash" aria-hidden="true" style="margin-right:4px;"></i>' + safeClearAllLabel +
                     '</a>';
 
@@ -1906,6 +1906,32 @@
         },
     });
     @endcan
+        window.labelButtons = () => ({
+        btnAdd: {
+            icon: 'fa fa-plus',
+            text: 'Create New Label',
+            title: 'Create New Label',
+            event() {
+                $('#new-label-modal').modal('show');
+            },
+            attributes: {
+                class: 'btn-info',
+                title: 'Create New Label'
+            }
+        },
+        btnImport: {
+            icon: 'fa-solid fa-file-import',
+            text: 'Import Label',
+            title: 'Import Label',
+            event() {
+                $('#import-label-modal').modal('show');
+            },
+            attributes: {
+                class: 'btn-info',
+                title: 'Import Label'
+            }
+        }
+    });
 
     @can('create', \App\Models\Statuslabel::class)
     // Status label table buttons
@@ -2481,12 +2507,13 @@
         if (destination == 'maintenanceTypes') {
             destination = 'maintenance-types';
         }
-        return function (value,row) {
+        return function (value) {
             if ((value) && (value.status_meta)) {
 
-                var text_color;
+                var color_style;
                 var icon_style;
                 var text_help;
+                var square_tag = '';
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
@@ -2497,27 +2524,37 @@
 
                 switch (value.status_meta) {
                     case 'deployed':
-                        text_color = 'blue';
+                        color_style = 'text-blue';
                         icon_style = 'fa-circle';
                         text_help = '<label class="label label-default">{{ trans('general.deployed') }}</label>';
                     break;
                     case 'deployable':
-                        text_color = 'green';
+                        color_style = 'text-green';
                         icon_style = 'fa-circle';
                         text_help = '';
                     break;
                     case 'pending':
-                        text_color = 'orange';
+                        color_style = 'text-orange';
                         icon_style = 'fa-circle';
                         text_help = '';
                         break;
                     default:
-                        text_color = 'red';
+                        color_style = 'text-red';
                         icon_style = 'fa-times';
                         text_help = '';
                 }
 
-                return '<nobr><a href="{{ config('app.url') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="'+ status_meta[value.status_meta] + '"> <i class="fa ' + icon_style + ' text-' + text_color + '"></i> ' + value.name + ' ' + text_help + ' </a> </nobr>';
+                if (value.tag_color) {
+                    square_tag = "<i class='fa-solid fa-fw fa-square' style='color: " + value.tag_color + "' aria-hidden='true'></i> ";
+                }
+
+                return '<nobr><a href="{{ config('app.url') }}/' + destination + '/' + value.id + '" data-tooltip="true" title="' + status_meta[value.status_meta] + '">'
+                    + '<i class="fa ' + icon_style + ' ' + color_style + '"></i> ' + square_tag
+                    + value.name
+                    + ' '
+                    + text_help
+                    + ' '
+                    + '</a> </nobr> ';
             } else if ((value) && (value.name)) {
 
                 // Add some overrides for any funny urls we have
@@ -2638,18 +2675,14 @@
                 }) + '&nbsp;';
             }
 
-            if ((row.available_actions) && (row.available_actions.delete === true)) {
-
+            if ((row.available_actions) && (row.available_actions.update === true)) {
                 // use the asset tag if no name is provided
-
                 if (row.name) {
                     var name_for_box = row.name
                 } else if (row.asset_tag) {
                     var name_for_box = row.asset_tag
                 }
 
-
-                
                 actions += '<a href="{{ config('app.url') }}/' + dest + '/' + row.id + '" '
                     + ' class="actions btn btn-danger btn-sm delete-asset hidden-print" data-tooltip="true"  '
                     + ' data-toggle="modal" data-icon="fa-trash"'
@@ -3942,16 +3975,21 @@
     }
 
 
-    function filePreviewFormatter(row, value) {
+    // bootstrap-table formatter signature is (value, row, index, field).
+    // The `image` column backing this formatter is a placeholder: no
+    // `image` key is emitted by UploadedFilesTransformer, so `value` is
+    // always undefined. The preview data (url, mediatype, inlineable)
+    // lives at the row root, so the formatter drives off `row` directly.
+    function filePreviewFormatter(value, row) {
 
-        if ((value) && (value.url) && (value.inlineable)) {
+        if ((row) && (row.url) && (row.inlineable)) {
 
-            if (value.mediatype == 'image') {
-                return '<a href="' + value.url + '?inline=true" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt=""></a>';
-            } else if (value.mediatype == 'video') {
-                return '<a href="' + value.url + '?inline=true" data-toggle="lightbox" data-type="video"><video style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"><source src="' + value.url + '?inline=true"></video></a>';
-            } else if (value.mediatype == 'audio') {
-                return '<audio controls><source src="' + value.url + '?inline=true" type="audio/mp3">Your browser does not support the audio element.</audio>';
+            if (row.mediatype == 'image') {
+                return '<a href="' + row.url + '?inline=true" data-toggle="lightbox" data-type="image"><img src="' + row.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt=""></a>';
+            } else if (row.mediatype == 'video') {
+                return '<a href="' + row.url + '?inline=true" data-toggle="lightbox" data-type="video"><video style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"><source src="' + row.url + '?inline=true"></video></a>';
+            } else if (row.mediatype == 'audio') {
+                return '<audio controls><source src="' + row.url + '?inline=true" type="audio/mp3">Your browser does not support the audio element.</audio>';
             }
             return '{{ trans('general.preview_not_available') }}';
         }
@@ -4093,6 +4131,76 @@
 
     function linkNumberToUserAssignedMaintenancesFormatter(value, row) {
         return linkToUserSectionBasedOnCount(value, row.id, 'maintenances');
+    }
+
+    function labelActionsFormatter(value, row) {
+        if (!row.name) return '';
+
+        const createUrl = '{{ route('settings.labels.create') }}';
+        // Clone Button
+        let cloneHref;
+
+        if (row.source === 'custom') {
+            cloneHref = createUrl + '?custom_label_id=' + row.custom_label_id;
+        } else {
+            cloneHref = createUrl + '?label=' + encodeURIComponent(row.name);
+        }
+
+        let actions = '<a href="' + cloneHref + '" '
+            + 'class="actions btn btn-sm btn-primary hidden-print" '
+            + 'data-tooltip="true" '
+            + 'title="{{ trans('general.clone') }}">'
+            + '<i class="fa-regular fa-clone"></i>'
+            + '<span class="sr-only">{{ trans('general.clone') }}</span>'
+            + '</a>&nbsp;';
+        // Only allow delete, share or edit for custom labels
+        if (row.source === 'custom') {
+            // Update Button
+            var editUrl = editLabelUrlTemplate.replace('label_id', row.custom_label_id);
+
+            actions += '<a href="' + editUrl + '" '
+                + 'class="actions btn btn-sm btn-warning hidden-print" '
+                + 'data-tooltip="true" '
+                + 'title="{{ trans('general.update') }}">'
+                + '<x-icon type="edit" class="fa-fw" />'
+                + '<span class="sr-only">{{ trans('general.update') }}</span>'
+                + '</a>&nbsp;';
+            // Share button
+            var encodedJson = encodeURIComponent(JSON.stringify(row.config_snapshot || {}, null, 2));
+
+            actions += '<button type="button" '
+                + 'class="btn btn-primary btn-sm export-label-json hidden-print" '
+                + 'data-json="' + encodedJson + '" '
+                + 'data-name="' + encodeURIComponent(row.name || "label") + '" '
+                + 'title="Export Label" '
+                + 'data-tooltip="true">'
+                + '<i class="fa-solid fa-file-export"></i>'
+                + '<span class="sr-only">Export Label</span>'
+                + '</button>&nbsp;';
+
+            // Delete button
+            var safeName = $('<div>').text(row.name || 'this label').html().replace(/"/g, '&quot;');
+            var deleteUrl = deleteLabelUrlTemplate.replace('label_id', row.custom_label_id);
+
+            actions += '<a href="' + deleteUrl + '" '
+                + 'class="actions btn btn-danger btn-sm delete-custom-label hidden-print" '
+                + 'data-tooltip="true" '
+                + 'data-icon="fa-trash" '
+                + 'data-content="{{ trans('general.sure_to_delete') }}: ' + safeName + '?" '
+                + 'data-title="{{ trans('general.delete') }}">'
+                + '<x-icon type="delete" class="fa-fw" />'
+                + '<span class="sr-only">{{ trans('general.delete') }}</span>'
+                + '</a>&nbsp;';
+        }
+
+
+        return actions;
+    }
+
+    function labelNameFormatter(value) {
+        if (!value) return '';
+        value = String(value).replace(/\//g, '\\').replace(/^(Sheets|Tapes)\\/, '');
+        return $('<div/>').text(value).html();
     }
 
     function labelPerPageFormatter(value, row, index, field) {

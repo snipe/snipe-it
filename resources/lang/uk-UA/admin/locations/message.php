@@ -33,13 +33,13 @@ return [
 
     'bulkedit' => [
         'error' => 'Немає змінених полів, тому нічого не було оновлено.',
-        'success' => 'Location successfully updated.|:count locations successfully updated.',
-        'warn' => 'Edit the fields below to update this location. Fields you leave blank will not change on the location.|Edit the fields below to update all :count selected locations. Fields you leave blank will not change on any of them.',
-        'show_selected' => '1 selected location|:count selected locations',
-        'company_scope_mismatch_partial' => 'The company was not changed on 1 location because items or users at that location belong to different companies. Update or move those first.|The company was not changed on :count locations because items or users at those locations belong to different companies. Update or move those first.',
-        'company_scope_mismatch_all' => 'No locations were reassigned. The requested company does not match items or users at the selected location.|No locations were reassigned. The requested company does not match items or users at any of the :count selected locations.',
-        'parent_company_mismatch_partial' => 'The parent or company was not changed on 1 location because it would leave the location in a different company than its parent.|The parent or company was not changed on :count locations because it would leave those locations in a different company than their parent.',
-        'parent_company_mismatch_all' => 'No changes were saved. The requested parent or company would leave the location in a different company than its parent.|No changes were saved. The requested parent or company would leave every one of the :count selected locations in a different company than their parent.',
+        'success' => 'Розташування успішно оновлено.|:count розташувань успішно оновлено.',
+        'warn' => 'Відредагуйте наведені нижче поля, щоб оновити це розташування. Поля, які ви залишите порожніми, для цього розташування не зміняться.|Відредагуйте наведені нижче поля, щоб оновити всі вибрані розташування в кількості :count. Поля, які ви залишите порожніми, для жодного з них не зміняться.',
+        'show_selected' => '1 вибране розташування|:count вибраних розташувань',
+        'company_scope_mismatch_partial' => 'Компанію не змінено для 1 розташування, оскільки об’єкти або користувачі в цьому розташуванні належать іншим компаніям. Спочатку оновіть або перемістіть їх.|Компанію не змінено для :count розташувань, оскільки об’єкти або користувачі в цих розташуваннях належать іншим компаніям. Спочатку оновіть або перемістіть їх.',
+        'company_scope_mismatch_all' => 'Жодне розташування не було перепризначено. Запитана компанія не відповідає компанії об’єктів або користувачів у вибраному розташуванні.|Жодне розташування не було перепризначено. Запитана компанія не відповідає компаніям об’єктів або користувачів у жодному з вибраних розташувань :count.',
+        'parent_company_mismatch_partial' => 'Батьківське розташування або компанію не змінено для 1 розташування, оскільки внаслідок цього розташування належало б до іншої компанії, ніж його батьківське розташування.|Батьківське розташування або компанію не змінено для :count розташувань, оскільки внаслідок цього вони належали б до іншої компанії, ніж їхнє батьківське розташування.',
+        'parent_company_mismatch_all' => 'Жодних змін не збережено. Запитане батьківське розташування або компанія призвели б до того, що розташування належало б до іншої компанії, ніж його батьківське розташування.|Жодних змін не збережено. Запитане батьківське розташування або компанія призвели б до того, що кожне з :count вибраних розташувань належало б до іншої компанії, ніж його батьківське розташування.',
     ],
 
 ];

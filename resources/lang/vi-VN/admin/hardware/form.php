@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Cập nhật tài sản số lượng lớn',
     'bulk_update_help' => 'Form này cho phép bạn cập nhật nhiều tài sản cùng lúc. Chỉ điền vào ô bạn cần thay đổi. Bất kỳ ô nào để trống sẽ thông báo là chưa thay đổi. ',
     'bulk_update_warn' => 'Bạn sắp chỉnh sửa thuộc tính của một tài sản.|Bạn sắp chỉnh sửa thuộc tính của :asset_count tài sản.',
-    'bulk_update_with_custom_field' => 'Lưu ý tài sản là :asset_model_count các loại model khác nhau.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Trên những model',
     'bulk_update_custom_field_unique' => 'Đây là trường thông tin duy nhất và không thể chỉnh sửa hàng loạt.',
     'checkedout_to' => 'Checkout đến',

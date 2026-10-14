@@ -7,13 +7,15 @@ return [
     'create' => 'Ստեղծել ամորտիզացիա',
     'depreciation_name' => 'Ամորտիզացիայի անուն',
     'number_of_months' => 'Ամիսների քանակ',
+    'rate_multiplier' => 'Rate Multiplier',
     'update' => 'Թարմացնել ամորտիզացիան',
-    'depreciation_min' => 'Ամորտիզացիայից հետո նվազագույն արժեք',
+    'fiscal_year_start_month' => 'Fiscal Year Start Month',
     'no_depreciations_warning' => '<strong>Զգուշացում․ </strong>
 Դուք ներկայումս որևէ ամորտիզացիա չեք սահմանել։
 Խնդրում ենք սահմանել առնվազն մեկ ամորտիզացիա՝ ամորտիզացիայի հաշվետվությունը դիտելու համար։',
     'depreciation_method' => 'Ամորտիզացիայի հաշվետվություն',
     'linear_depreciation' => 'Գծային (լռելյայն)',
+    'diminishing_depreciation' => 'Diminishing Value Depreciation',
     'half_1' => 'Կես տարվա կանոն, միշտ կիրառվում է',
     'half_2' => 'Կես տարվա կանոն, կիրառվում է պայմանով',
 ];

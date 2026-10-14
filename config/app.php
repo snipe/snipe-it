@@ -255,6 +255,23 @@ return [
 
     /*
    |--------------------------------------------------------------------------
+   | ALLOW INTERNAL SYNC ADAPTER TARGETS
+   |--------------------------------------------------------------------------
+   |
+   | Same guard as WEBHOOK_ALLOW_INTERNAL_TARGETS above, but scoped to the
+   | base URL of an HTTP sync adapter (NetBox, Zabbix, in-house MDMs, etc).
+   | Many admins legitimately point sync adapters at on-prem infrastructure
+   | sitting on the same private network as Snipe-IT, which the default
+   | ExternalUrl validator would otherwise reject.
+   |
+   | Scheme restrictions (http/https only) still apply. Leave this off
+   | unless you know you need it.
+   |
+   */
+    'sync_adapter_allow_internal_targets' => env('SYNC_ADAPTER_ALLOW_INTERNAL_TARGETS', false),
+
+    /*
+   |--------------------------------------------------------------------------
    | LOG AUTHED USER HEADER
    |--------------------------------------------------------------------------
    |
@@ -613,7 +630,7 @@ return [
   | viewed without pagination. This is to prevent server timeouts.
   */
 
-    'max_unpaginated_records' => env('MAX_UNPAGINATED', '5000'),
+    'max_unpaginated_records' => env('MAX_UNPAGINATED', '10000'),
 
     /*
     |--------------------------------------------------------------------------

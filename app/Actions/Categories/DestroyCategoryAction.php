@@ -9,7 +9,6 @@ use App\Exceptions\ItemStillHasComponents;
 use App\Exceptions\ItemStillHasConsumables;
 use App\Exceptions\ItemStillHasLicenses;
 use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
 
 class DestroyCategoryAction
 {
@@ -51,7 +50,8 @@ class DestroyCategoryAction
             throw new ItemStillHasAssetModels($category);
         }
 
-        Storage::disk('public')->delete('categories'.'/'.$category->image);
+        // Image file cleanup lives on the model's forceDeleted hook so
+        // soft-delete + restore preserves the image reference.
         $category->delete();
 
         return true;

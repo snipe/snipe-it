@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\FileStorage;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Builders\SupplierQueryBuilder;
 use App\Models\Traits\HasUploads;
 use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
@@ -12,8 +14,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperSupplier
+ */
 class Supplier extends SnipeModel
 {
     use HasFactory;
@@ -105,6 +112,32 @@ class Supplier extends SnipeModel
             Accessory::where('default_supplier_id', $supplier->id)->update(['default_supplier_id' => null]);
             Consumable::where('default_supplier_id', $supplier->id)->update(['default_supplier_id' => null]);
             Component::where('default_supplier_id', $supplier->id)->update(['default_supplier_id' => null]);
+        });
+
+        // On hard-delete, wipe the image file and Files-tab attachments.
+        // Soft-delete leaves everything alone so a restore comes back
+        // with the image + files intact. The attachment action_log rows
+        // get soft-deleted (not hard-deleted) so the audit trail of what
+        // was attached-and-when survives even after the parent is gone.
+        static::forceDeleted(function (self $supplier) {
+            if ($supplier->image) {
+                try {
+                    Storage::disk('public')->delete(FileStorage::Suppliers->publicPath().$supplier->image);
+                } catch (\Exception $e) {
+                    Log::info($e->getMessage());
+                }
+            }
+
+            foreach ($supplier->uploads as $upload) {
+                if (($path = $upload->uploads_file_path()) !== null) {
+                    try {
+                        Storage::delete($path);
+                    } catch (\Exception $e) {
+                        Log::info($e->getMessage());
+                    }
+                }
+                $upload->delete();
+            }
         });
     }
 
@@ -259,11 +292,8 @@ class Supplier extends SnipeModel
         return $url;
     }
 
-    /**
-     * Query builder scope to order on the user that created it
-     */
-    public function scopeOrderByCreatedByName($query, $order)
+    public function newEloquentBuilder($query): SupplierQueryBuilder
     {
-        return $query->leftJoin('users as admin_sort', 'suppliers.created_by', '=', 'admin_sort.id')->select('suppliers.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new SupplierQueryBuilder($query);
     }
 }

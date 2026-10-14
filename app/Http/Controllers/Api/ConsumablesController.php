@@ -523,6 +523,6 @@ class ConsumablesController extends Controller
 
         $rows = $query->orderBy($sort, $order)->skip($offset)->take($limit)->get();
 
-        return (new ConsumablesTransformer)->transformConsumables($rows, $total);
+        return (new ConsumablesTransformer)->transformRequestedConsumables($rows, $total);
     }
 }

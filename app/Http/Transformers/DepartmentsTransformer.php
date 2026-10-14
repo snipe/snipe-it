@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Models\Department;
 use Illuminate\Database\Eloquent\Collection;
@@ -28,7 +29,7 @@ class DepartmentsTransformer
                 'name' => e($department->name),
                 'phone' => ($department->phone != '') ? e($department->phone) : null,
                 'fax' => ($department->fax != '') ? e($department->fax) : null,
-                'image' => ($department->image) ? Storage::disk('public')->url(app('departments_upload_url').e($department->image)) : null,
+                'image' => ($department->image) ? Storage::disk('public')->url(FileStorage::Departments->publicPath().e($department->image)) : null,
                 'company' => ($department->company) ? [
                     'id' => (int) $department->company->id,
                     'name' => e($department->company->name),

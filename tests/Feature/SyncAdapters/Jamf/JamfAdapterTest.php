@@ -55,7 +55,7 @@ class JamfAdapterTest extends TestCase
         // no hardware section (and no model id). The client hand-builds
         // the query string to force the API shape Jamf actually reads.
         Http::assertSent(function ($request) {
-            if (!str_contains($request->url(), '/api/v1/computers-inventory')) {
+            if (! str_contains($request->url(), '/api/v1/computers-inventory')) {
                 return false;
             }
             $url = $request->url();
@@ -64,8 +64,8 @@ class JamfAdapterTest extends TestCase
                 && str_contains($url, 'section=HARDWARE')
                 && str_contains($url, 'section=OPERATING_SYSTEM')
                 && str_contains($url, 'section=USER_AND_LOCATION')
-                && !str_contains($url, 'section%5B')
-                && !str_contains($url, 'section[');
+                && ! str_contains($url, 'section%5B')
+                && ! str_contains($url, 'section[');
         });
     }
 
@@ -108,12 +108,132 @@ class JamfAdapterTest extends TestCase
         $this->assertNotNull($record->lastSeen);
     }
 
-    private function configuredJamfAdapter(): JamfAdapter
+    public function test_mobile_devices_pulled_when_toggle_is_on()
+    {
+        $adapter = $this->configuredJamfAdapter(includeMobile: true);
+
+        Http::fake([
+            '*/api/oauth/token' => $this->jamfTokenResponse(),
+            '*/api/v1/computers-inventory*' => Http::response([
+                'totalCount' => 1,
+                'results' => [$this->jamfComputer(id: 42, name: 'lab-mac-01', model: 'iMac')],
+            ]),
+            '*/api/v2/mobile-devices*' => Http::response([
+                'totalCount' => 2,
+                'results' => [
+                    $this->jamfMobileDevice(id: 10, name: 'kiosk-ipad-01', model: 'iPad Pro', serialNumber: 'DMPXYZ', osType: 'iOS', osVersion: '17.4'),
+                    $this->jamfMobileDevice(id: 11, name: 'conf-apple-tv', model: 'Apple TV 4K', serialNumber: 'C07ABC', osType: 'tvOS', osVersion: '17.1', deviceType: 'tvos'),
+                ],
+            ]),
+        ]);
+
+        foreach ($adapter->pull() as $record) {
+            SyncAdapter::syncFromRecord($record);
+        }
+
+        // Three distinct external_sources rows: one bare-numeric for the
+        // computer, two `mobile:`-prefixed for the devices. Prefix on
+        // mobile keeps the two Jamf id namespaces from colliding on
+        // the (source, external_id) uniqueness constraint.
+        $this->assertDatabaseCount('asset_external_sources', 3);
+        $this->assertDatabaseHas('asset_external_sources', ['source' => 'jamf', 'external_id' => '42']);
+        $this->assertDatabaseHas('asset_external_sources', ['source' => 'jamf', 'external_id' => 'mobile:10']);
+        $this->assertDatabaseHas('asset_external_sources', ['source' => 'jamf', 'external_id' => 'mobile:11']);
+
+        $this->assertDatabaseHas('assets', ['name' => 'kiosk-ipad-01']);
+        $this->assertDatabaseHas('assets', ['name' => 'conf-apple-tv']);
+    }
+
+    public function test_mobile_devices_skipped_when_toggle_is_off()
+    {
+        $adapter = $this->configuredJamfAdapter();
+
+        Http::fake([
+            '*/api/oauth/token' => $this->jamfTokenResponse(),
+            '*/api/v1/computers-inventory*' => Http::response([
+                'totalCount' => 1,
+                'results' => [$this->jamfComputer(id: 42, name: 'lab-mac-01', model: 'iMac')],
+            ]),
+            '*/api/v2/mobile-devices*' => Http::response([
+                'totalCount' => 1,
+                'results' => [$this->jamfMobileDevice(id: 10, name: 'should-not-sync')],
+            ]),
+        ]);
+
+        foreach ($adapter->pull() as $record) {
+            SyncAdapter::syncFromRecord($record);
+        }
+
+        $this->assertDatabaseCount('asset_external_sources', 1);
+        $this->assertDatabaseHas('asset_external_sources', ['source' => 'jamf', 'external_id' => '42']);
+        $this->assertDatabaseMissing('assets', ['name' => 'should-not-sync']);
+
+        // Toggle off means we don't bill Jamf for a mobile pull at all.
+        Http::assertNotSent(fn ($request) => str_contains($request->url(), '/api/v2/mobile-devices'));
+    }
+
+    public function test_mobile_record_carries_expected_fields()
+    {
+        $adapter = $this->configuredJamfAdapter(includeMobile: true);
+
+        Http::fake([
+            '*/api/oauth/token' => $this->jamfTokenResponse(),
+            '*/api/v1/computers-inventory*' => Http::response([
+                'totalCount' => 0,
+                'results' => [],
+            ]),
+            '*/api/v2/mobile-devices*' => Http::response([
+                'totalCount' => 1,
+                'results' => [
+                    $this->jamfMobileDevice(
+                        id: 55,
+                        name: 'ipad-55',
+                        model: 'iPad Air',
+                        serialNumber: 'C02ABC',
+                        osType: 'iOS',
+                        osVersion: '17.5',
+                        wifiMacAddress: 'aa:bb:cc:dd:ee:ff',
+                        ipAddress: '10.0.0.55',
+                        lastInventoryUpdateTimestamp: '2026-02-15T10:00:00.000Z',
+                        locationUsername: 'jdoe',
+                        locationEmail: 'jdoe@example.com',
+                        deviceType: 'ios',
+                        managed: true,
+                        supervised: true,
+                    ),
+                ],
+            ]),
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+        $this->assertCount(1, $records);
+
+        $record = $records[0];
+        $this->assertSame('jamf', $record->sourceKey);
+        $this->assertSame('mobile:55', $record->sourceId);
+        $this->assertSame('ipad-55', $record->hostname);
+        $this->assertSame('iPad Air', $record->hardwareModel);
+        $this->assertSame('C02ABC', $record->hardwareSerial);
+        $this->assertSame('Apple', $record->manufacturer);
+        $this->assertSame('aa:bb:cc:dd:ee:ff', $record->primaryMac);
+        $this->assertSame('10.0.0.55', $record->primaryIp);
+        $this->assertSame('iOS', $record->os);
+        $this->assertSame('17.5', $record->osVersion);
+        $this->assertSame('jdoe', $record->assignedUserName);
+        $this->assertSame('jdoe@example.com', $record->assignedUserEmail);
+        $this->assertNotNull($record->lastSeen);
+        $this->assertSame('ios', $record->extra['jamf_mobile_device_type']);
+        $this->assertTrue($record->extra['jamf_mobile_managed']);
+        $this->assertTrue($record->extra['jamf_mobile_supervised']);
+    }
+
+    private function configuredJamfAdapter(bool $includeMobile = false): JamfAdapter
     {
         $instance = SyncAdapterInstance::where('slug', 'jamf')->firstOrFail();
         SyncAdapterConfig::put($instance->id, 'url', 'https://example.jamfcloud.com');
         SyncAdapterConfig::put($instance->id, 'client_id', Crypt::encrypt('fake-jamf-client-id'));
         SyncAdapterConfig::put($instance->id, 'client_secret', Crypt::encrypt('fake-jamf-client-secret'));
+        SyncAdapterConfig::put($instance->id, 'include_mobile_devices', $includeMobile ? '1' : '0');
 
         return new JamfAdapter($instance->fresh());
     }
@@ -132,6 +252,52 @@ class JamfAdapterTest extends TestCase
             'token_type' => 'Bearer',
             'expires_in' => 3600,
         ]);
+    }
+
+    /**
+     * Shape of a /api/v2/mobile-devices list entry Jamf Pro returns.
+     * Mobile responses are flatter than computer ones: no section
+     * nesting, just a top-level field set per device.
+     *
+     * @return array<string, mixed>
+     */
+    private function jamfMobileDevice(
+        int $id,
+        string $name = 'ipad',
+        string $model = 'iPad',
+        ?string $serialNumber = null,
+        ?string $osType = 'iOS',
+        ?string $osVersion = null,
+        ?string $wifiMacAddress = null,
+        ?string $ipAddress = null,
+        ?string $lastInventoryUpdateTimestamp = null,
+        ?string $locationUsername = null,
+        ?string $locationEmail = null,
+        string $deviceType = 'ios',
+        bool $managed = true,
+        bool $supervised = false,
+    ): array {
+        return [
+            'id' => (string) $id,
+            'name' => $name,
+            'udid' => 'jamf-mobile-udid-'.$id,
+            'serialNumber' => $serialNumber,
+            'assetTag' => null,
+            'model' => $model,
+            'modelIdentifier' => 'iPad'.$id,
+            'deviceType' => $deviceType,
+            'osType' => $osType,
+            'osVersion' => $osVersion,
+            'wifiMacAddress' => $wifiMacAddress,
+            'ipAddress' => $ipAddress,
+            'lastInventoryUpdateTimestamp' => $lastInventoryUpdateTimestamp,
+            'managed' => $managed,
+            'supervised' => $supervised,
+            'location' => [
+                'username' => $locationUsername,
+                'emailAddress' => $locationEmail,
+            ],
+        ];
     }
 
     /**

@@ -126,6 +126,50 @@ class Helper
         );
     }
 
+    /**
+     * Return every item on a single page when the API call passes
+     * `?all=true` on the request. Used by the select2-checkboxes
+     * "Select all" button so it can pull the full filtered result set
+     * in one call instead of walking paginated pages.
+     *
+     * Caps the response at $cap items as a guardrail against runaway
+     * reads. The explicit $cap argument lets a controller pin a lower
+     * ceiling it knows is appropriate for its shape. Omitted, the
+     * default is `config('app.max_unpaginated_records')` (operator
+     * knob via MAX_UNPAGINATED, same lever the Groups bulk-user
+     * picker respects).
+     *
+     * A client-provided `?cap=` on the request is honored only as a
+     * CEILING SUGGESTION: it can lower the effective cap but never
+     * raise it. A malicious `?cap=99999999` is silently limited to
+     * the server-side value above. This is what lets per-widget
+     * data-max-select-all attributes work without opening a runaway
+     * surface.
+     *
+     * Falls through to paginateCollection() for everything else so
+     * existing callers keep working.
+     */
+    public static function paginateCollectionOrAll(Collection $items, ?int $cap = null): LengthAwarePaginator
+    {
+        if (!request()->boolean('all')) {
+            return self::paginateCollection($items);
+        }
+
+        $cap ??= (int) config('app.max_unpaginated_records', 5000);
+        $clientCap = (int) request()->integer('cap', PHP_INT_MAX);
+        if ($clientCap > 0) {
+            $cap = min($cap, $clientCap);
+        }
+        $capped = $items->take($cap)->values();
+
+        return new LengthAwarePaginator(
+            $capped,
+            $capped->count(),
+            max($capped->count(), 1),
+            1,
+        );
+    }
+
     public static function parseEscapedMarkedownInline($str = null)
     {
         $Parsedown = new \Parsedown;
@@ -824,7 +868,8 @@ class Helper
         $deprecations = [
             'ms_teams_deprecated' => [
                 'check' => ! Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows') && (Setting::getSettings()->webhook_selected === 'microsoft'),
-                'message' => 'The Microsoft Teams webhook URL being used will be deprecated Dec 31st, 2025. <a class="btn btn-primary" href="' . route('settings.integrations.index') . '">Change webhook endpoint</a>'],
+                'message' => 'The Microsoft Teams webhook URL being used will be deprecated Dec 31st, 2025. <a class="btn btn-primary" href="' . route('settings.integrations.index') . '">Change webhook endpoint</a>',
+            ],
         ];
 
         // if item of concern is being used and its being used with the deprecated values return the notification array.

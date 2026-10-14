@@ -16,7 +16,7 @@ return [
     'no_custom_field' => 'カスタム フィールドなし',
     'add_default_values' => 'デフォルト値を追加する',
     'importer' => [
-        'require_serial' => 'Require Serial',
-        'serial_required' => 'Serial Required',
+        'require_serial' => 'シリアル必須',
+        'serial_required' => 'シリアル番号必須',
     ],
 ];

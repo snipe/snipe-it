@@ -203,6 +203,7 @@ return [
     'email_array' => 'ที่อยู่อีเมลไม่ถูกต้อง',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'ฟิลด์แอ็ตทริบิวต์: มีอักขระที่ไม่ได้รับอนุญาต',

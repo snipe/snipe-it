@@ -578,6 +578,39 @@ class CustomHttpAdapterTest extends TestCase
             && $request->hasHeader('Authorization', 'Bearer leak-canary'));
     }
 
+    /**
+     * Reporter-identified robustness note (Zer0Gate post-fix for
+     * GHSA-cf4m-f928-928g): if upstream emits a path-relative cursor
+     * with no leading slash (e.g. `"next": "page2"`), parse_url returns
+     * `path => "page2"` and the earlier concatenation produced
+     * `https://hostpage2` which was unparseable. Pagination aborted on
+     * the next iteration (fail-safe) but we'd rather be explicit. The
+     * adapter now rejects the cursor and logs the abort when the path
+     * lacks a leading slash.
+     */
+    public function test_next_url_pagination_rejects_relative_cursor_without_leading_slash()
+    {
+        $adapter = $this->configuredAdapter([
+            'records_path' => 'rows',
+            'field_source_id' => 'id',
+            'pagination_style' => 'next_url',
+            'pagination_next_path' => 'links.next',
+        ]);
+
+        Http::fake([
+            'vendor.example/api' => Http::response([
+                'rows' => [['id' => 'first']],
+                'links' => ['next' => 'page2'],
+            ]),
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertCount(1, $records, 'First page processes, pagination stops at malformed cursor.');
+        Http::assertNotSent(fn ($request) => str_contains($request->url(), 'vendor.examplepage2')
+            || str_contains($request->url(), 'vendor.example/page2'));
+    }
+
     public function test_pull_path_query_string_survives_pagination_style_none()
     {
         // Regression test for #19755. The admin configures a filtered
@@ -597,7 +630,7 @@ class CustomHttpAdapterTest extends TestCase
 
         iterator_to_array($adapter->pull());
 
-        Http::assertSent(fn($request) => str_contains($request->url(), 'ancestor_group_id=42')
+        Http::assertSent(fn ($request) => str_contains($request->url(), 'ancestor_group_id=42')
             && str_contains($request->url(), 'limit=100'));
     }
 
@@ -618,7 +651,7 @@ class CustomHttpAdapterTest extends TestCase
 
         iterator_to_array($adapter->pull());
 
-        Http::assertSent(fn($request) => str_contains($request->url(), 'ancestor_group_id=42')
+        Http::assertSent(fn ($request) => str_contains($request->url(), 'ancestor_group_id=42')
             && str_contains($request->url(), 'limit=50')
             && str_contains($request->url(), 'offset=0'));
     }
@@ -646,8 +679,8 @@ class CustomHttpAdapterTest extends TestCase
 
         $records = iterator_to_array($adapter->pull());
 
-        $this->assertSame(['a', 'b'], array_map(fn($r) => $r->sourceId, $records));
-        Http::assertSent(fn($request) => str_contains($request->url(), 'skiptoken=next-page-cursor'));
+        $this->assertSame(['a', 'b'], array_map(fn ($r) => $r->sourceId, $records));
+        Http::assertSent(fn ($request) => str_contains($request->url(), 'skiptoken=next-page-cursor'));
     }
 
     public function test_pagination_style_none_yields_one_page_and_stops()

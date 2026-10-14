@@ -218,9 +218,16 @@ class AppleBusinessManagerClient
     }
 
     /**
-     * Base HTTP client with resolved bearer token. Retries on 429 with
-     * exponential backoff. Apple's rate limit is generous but bursts
-     * during a full org pull can trip it briefly.
+     * Base HTTP client with resolved bearer token. On 429 the sleep
+     * callback honors Apple's `Retry-After` header (capped at 2
+     * minutes so a very long server-side cooldown doesn't stall the
+     * sync beyond user patience). Falls back to exponential backoff
+     * when Retry-After is missing from the API response.
+     *
+     * The N+1 per-device enrichment calls (AppleCare, Activation Lock,
+     * MDM details) are still the biggest cost on large pulls - admins
+     * who hit 429 even with this retry logic can trim mappings that
+     * drive those extra per-device fetches.
      */
     private function request(): PendingRequest
     {
@@ -229,8 +236,24 @@ class AppleBusinessManagerClient
             ->withToken($this->bearer())
             ->acceptJson()
             ->timeout(30)
-            ->retry(3, 500, fn (\Exception $e) => $e instanceof \Illuminate\Http\Client\ConnectionException
-                || ($e instanceof \Illuminate\Http\Client\RequestException && $e->response->status() === 429));
+            ->retry(
+                times: 8,
+                sleepMilliseconds: function (int $attempt, \Exception $e): int {
+                    if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response->status() === 429) {
+                        $retryAfter = (int) ($e->response->header('Retry-After') ?: 0);
+                        if ($retryAfter > 0) {
+                            return min($retryAfter, 120) * 1000;
+                        }
+                    }
+
+                    // Exponential: 500ms, 1s, 2s, 4s, 8s, 16s, 32s, 60s
+                    // plus up to 250ms jitter so parallel runs don't
+                    // retry in lockstep.
+                    return min(60_000, 500 * (2 ** ($attempt - 1))) + random_int(0, 250);
+                },
+                when: fn(\Exception $e) => $e instanceof \Illuminate\Http\Client\ConnectionException
+                    || ($e instanceof \Illuminate\Http\Client\RequestException && $e->response->status() === 429),
+            );
     }
 
     /**

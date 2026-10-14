@@ -9,7 +9,7 @@ return [
     'total' => 'Загалом',
     'update' => 'Оновити витратний матеріал',
     'inventory_warning' => 'Запас цього витратного матеріалу нижчий за мінімальну кількість :min_count',
-    'exclude_deleted' => 'Exclude Deleted Consumables',
-    'include_deleted' => 'Include Deleted Consumables',
-    'only_deleted' => 'Only Deleted Consumables',
+    'exclude_deleted' => 'Не включати видалені витратні матеріали',
+    'include_deleted' => 'Включати видалені витратні матеріали',
+    'only_deleted' => 'Лише видалені витратні матеріали',
 ];

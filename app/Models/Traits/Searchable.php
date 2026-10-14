@@ -371,6 +371,22 @@ trait Searchable
             }
         }
 
+        // Columns that live on a related table but surface as a
+        // top-level filter key (e.g. the "Title" column on the hardware
+        // list renders users.jobtitle but admins expect to filter it
+        // like a native asset attribute). Falls through to the normal
+        // relation-key path if no mapping is defined.
+        $relationColumnMap = $this->getSearchableRelationColumns();
+        if (array_key_exists($filterKey, $relationColumnMap)) {
+            return $this->applyRelationColumnFilter(
+                query: $query,
+                mapping: $relationColumnMap[$filterKey],
+                value: $value,
+                boolean: $boolean,
+                operator: $operator,
+            );
+        }
+
         $resolvedRelationKey = $this->resolveSearchableRelationKey($filterKey, $searchableRelations);
 
         if ($resolvedRelationKey === null) {
@@ -777,6 +793,20 @@ trait Searchable
             return $query;
         }
 
+        // Relation column: filter key is a column on a related table
+        // surfaced as a top-level filter (e.g. jobtitle = users.jobtitle
+        // via assignedTo on assets). Dispatched the same way as regular
+        // relation-column filtering above (#19708).
+        $relationColumnMap = $this->getSearchableRelationColumns();
+        if (array_key_exists($filterKey, $relationColumnMap)) {
+            return $this->applyRelationColumnNullFilter(
+                query: $query,
+                mapping: $relationColumnMap[$filterKey],
+                isNull: $isNull,
+                boolean: $boolean,
+            );
+        }
+
         // Relation key: no related record = "null", has a related record = "not null".
         $searchableRelations = $this->getSearchableRelations();
         $resolvedRelationKey = $this->resolveSearchableRelationKey($filterKey, $searchableRelations);
@@ -1106,6 +1136,144 @@ trait Searchable
     protected function getSearchableRelationAliases(): array
     {
         return $this->searchableRelationAliases ?? [];
+    }
+
+    /**
+     * Columns that live on a related table but surface as a top-level
+     * filter key on the current model's advanced-search UI. The hardware
+     * list's "Title" column (= users.jobtitle via the assignedTo
+     * polymorphic morph) is the first case: admins filter it like a
+     * native attribute, but it isn't in $searchableAttributes and
+     * doesn't match the $searchableRelations key dispatch. Define it
+     * here and both the LIKE / exact filter path and the is:null /
+     * is:not_null null-check path will route through whereHas /
+     * whereHasMorph on the right table (#19708).
+     *
+     * Shape: `[filter_key => ['relation' => string, 'column' => string, 'types' => ?array<class-string>]]`.
+     * `types` is only required for polymorphic morphs so the trait
+     * knows which concrete morph classes host the column. For plain
+     * belongsTo / hasOne relations, leave it unset.
+     *
+     * @return array<string, array{relation: string, column: string, types?: array<int, class-string>}>
+     */
+    protected function getSearchableRelationColumns(): array
+    {
+        return $this->searchableRelationColumns ?? [];
+    }
+
+    /**
+     * @param  array{relation: string, column: string, types?: array<int, class-string>}  $mapping
+     */
+    private function applyRelationColumnFilter(Builder $query, array $mapping, string $value, string $boolean, string $operator): Builder
+    {
+        $isExact = in_array($operator, ['exact', 'exact_not'], true);
+        $isNegate = in_array($operator, ['not_like', 'exact_not'], true);
+        $comparison = match (true) {
+            $operator === 'exact' => '=',
+            $operator === 'exact_not' => '!=',
+            $isNegate => 'NOT LIKE',
+            default => 'LIKE',
+        };
+        $compareValue = $isExact ? $value : '%'.$value.'%';
+
+        $apply = function (Builder $relationQuery) use ($mapping, $comparison, $compareValue): void {
+            $relationQuery->where($mapping['column'], $comparison, $compareValue);
+        };
+
+        if (! empty($mapping['types'])) {
+            // Polymorphic morph: constrain to the listed concrete
+            // classes so the inner where runs against the right table.
+            // Negated filters additionally include records whose morph
+            // target is a different class (or no target at all), so
+            // "jobtitle NOT LIKE X" doesn't silently drop every
+            // asset assigned to a non-user.
+            if ($isNegate) {
+                $compoundMethod = $boolean === 'or' ? 'orWhere' : 'where';
+                $query->{$compoundMethod}(function (Builder $compound) use ($mapping, $apply): void {
+                    $compound->doesntHaveMorph($mapping['relation'], $mapping['types'])
+                        ->orWhereHasMorph($mapping['relation'], $mapping['types'], $apply);
+                });
+            } else {
+                $method = $boolean === 'or' ? 'orWhereHasMorph' : 'whereHasMorph';
+                $query->{$method}($mapping['relation'], $mapping['types'], $apply);
+            }
+
+            return $query;
+        }
+
+        if ($isNegate) {
+            $compoundMethod = $boolean === 'or' ? 'orWhere' : 'where';
+            $query->{$compoundMethod}(function (Builder $compound) use ($mapping, $apply): void {
+                $compound->doesntHave($mapping['relation'])
+                    ->orWhereHas($mapping['relation'], $apply);
+            });
+        } else {
+            $method = $boolean === 'or' ? 'orWhereHas' : 'whereHas';
+            $query->{$method}($mapping['relation'], $apply);
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param  array{relation: string, column: string, types?: array<int, class-string>}  $mapping
+     */
+    private function applyRelationColumnNullFilter(Builder $query, array $mapping, bool $isNull, string $boolean): Builder
+    {
+        // is:not_null = "a related record exists whose column is
+        //                 non-null and (for text columns) non-empty".
+        // is:null     = exactly the complement: unassigned, assigned to
+        //                 a different morph type, or related record
+        //                 with a null / empty column. The UI column
+        //                 renders those identically, so admins expect
+        //                 them to filter identically too.
+        //
+        // Using whereDoesntHaveMorph with the "non-empty" constraint
+        // expresses "null" without having to enumerate the three
+        // sub-cases by hand, and the empty-string flip matches the
+        // isTextTypeColumn fix on attribute columns (#19708).
+        $visiblyPresent = function (Builder $relationQuery) use ($mapping): void {
+            $table = $relationQuery->getModel()->getTable();
+            $column = $mapping['column'];
+            $qualified = $table.'.'.$column;
+
+            $relationQuery->whereNotNull($qualified);
+            if ($this->isTextTypeColumn($table, $column)) {
+                $relationQuery->where($qualified, '!=', '');
+            }
+        };
+
+        if (! empty($mapping['types'])) {
+            if ($isNull) {
+                // whereDoesntHaveMorph adds `assigned_type = <Type>`
+                // to the outer WHERE, which excludes unassigned rows
+                // (assigned_type IS NULL) and rows whose morph type
+                // isn't in the list. Wrap it with an explicit
+                // null-or-mismatched-type branch so the three ways
+                // the UI column reads as "empty" all match.
+                $table = $query->getModel()->getTable();
+                $compoundMethod = $boolean === 'or' ? 'orWhere' : 'where';
+                $query->{$compoundMethod}(function (Builder $compound) use ($table, $mapping, $visiblyPresent): void {
+                    $compound->whereNull($table.'.assigned_type')
+                        ->orWhereNotIn($table.'.assigned_type', $mapping['types'])
+                        ->orWhereDoesntHaveMorph($mapping['relation'], $mapping['types'], $visiblyPresent);
+                });
+            } else {
+                $method = $boolean === 'or' ? 'orWhereHasMorph' : 'whereHasMorph';
+                $query->{$method}($mapping['relation'], $mapping['types'], $visiblyPresent);
+            }
+
+            return $query;
+        }
+
+        if ($isNull) {
+            $method = $boolean === 'or' ? 'orWhereDoesntHave' : 'whereDoesntHave';
+        } else {
+            $method = $boolean === 'or' ? 'orWhereHas' : 'whereHas';
+        }
+        $query->{$method}($mapping['relation'], $visiblyPresent);
+
+        return $query;
     }
 
     /**

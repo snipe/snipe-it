@@ -110,9 +110,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
     <?php $count++; ?>
     <div class="label">
 
-        @if ($settings->qr_code=='1')
+        @if ($settings->qr_code=='1' && isset($barcode_urls[$asset->id]['qr']))
             <div class="qr_img">
-                <img src="{{ route('qr_code/common', ['object_type' => 'hardware', 'id' => $asset->id]) }}" class="qr_img" alt="">
+                <img src="{{ $barcode_urls[$asset->id]['qr'] }}" class="qr_img" alt="">
             </div>
         @endif
 
@@ -156,9 +156,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->label2_1d_type!=
 
         </div>
 
-        @if ((($settings->alt_barcode_enabled=='1') && $settings->label2_1d_type!=''))
+        @if ((($settings->alt_barcode_enabled=='1') && $settings->label2_1d_type!='') && isset($barcode_urls[$asset->id]['barcode']))
             <div class="barcode_container">
-                <img src="{{ config('app.url') }}/hardware/{{ $asset->id }}/barcode" class="barcode" alt="">
+                <img src="{{ $barcode_urls[$asset->id]['barcode'] }}" class="barcode" alt="">
             </div>
         @endif
 

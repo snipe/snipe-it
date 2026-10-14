@@ -2,6 +2,7 @@
 
 namespace App\SyncAdapters\AppleBusinessManager;
 
+use App\Enums\FileStorage;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
@@ -155,7 +156,7 @@ class AppleDBImageFetcher
     private static function downloadAndStore(string $productType, string $imageKey, string $colorKey): ?string
     {
         $filename = self::filenameFor($productType, $colorKey);
-        $relativePath = app('models_upload_path').$filename;
+        $relativePath = FileStorage::Models->publicPath().$filename;
 
         // Idempotent: if a prior pull already stored this image,
         // return the cached filename without re-downloading.

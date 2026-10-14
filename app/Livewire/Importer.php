@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\FileStorage;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
@@ -869,7 +870,7 @@ class Importer extends Component
         // Existence via Storage so the check routes to whichever
         // driver PRIVATE_FILESYSTEM_DISK resolves to, instead of only
         // looking at the local filesystem.
-        $storedPath = 'private_uploads/imports/'.$this->activeFile->file_path;
+        $storedPath = FileStorage::Imports->privateStorageKey().$this->activeFile->file_path;
         if (! Storage::exists($storedPath)) {
             $this->message = trans('admin/hardware/message.import.file_missing_on_disk');
             $this->message_type = 'danger';
@@ -1128,7 +1129,7 @@ class Importer extends Component
         // as the old createFromPath. On s3_private the stream pulls
         // bytes directly from S3 via the SDK so we never need the
         // file to touch local disk.
-        $storedPath = 'private_uploads/imports/'.$this->activeFile->file_path;
+        $storedPath = FileStorage::Imports->privateStorageKey().$this->activeFile->file_path;
         $stream = Storage::readStream($storedPath);
         if ($stream === null) {
             return [];
@@ -1173,7 +1174,7 @@ class Importer extends Component
         }
 
         // Same disk-aware read path as loadPreviewRows.
-        $storedPath = 'private_uploads/imports/'.$this->activeFile->file_path;
+        $storedPath = FileStorage::Imports->privateStorageKey().$this->activeFile->file_path;
         $stream = Storage::readStream($storedPath);
         if ($stream === null) {
             return 0;
@@ -1248,7 +1249,7 @@ class Importer extends Component
             return;
         }
 
-        if (Storage::delete('private_uploads/imports/'.$import->file_path)) {
+        if (Storage::delete(FileStorage::Imports->privateStorageKey().$import->file_path)) {
             $import->delete();
             $this->message = trans('admin/hardware/message.import.file_delete_success');
             $this->message_type = 'success';
@@ -1457,7 +1458,7 @@ class Importer extends Component
     public function refreshExistingImportFiles(): void
     {
         $set = [];
-        foreach (Storage::files('private_uploads/imports') as $path) {
+        foreach (Storage::files(rtrim(FileStorage::Imports->privateStorageKey(), '/')) as $path) {
             $set[basename($path)] = true;
         }
         $this->existingImportFiles = $set;
@@ -1535,7 +1536,7 @@ class Importer extends Component
                 continue;
             }
 
-            Storage::delete('private_uploads/imports/'.$import->file_path);
+            Storage::delete(FileStorage::Imports->privateStorageKey().$import->file_path);
             $import->delete();
             unset($this->existingImportFiles[$import->file_path]);
             $deleted++;

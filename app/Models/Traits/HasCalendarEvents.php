@@ -104,13 +104,19 @@ trait HasCalendarEvents
                 // additional model events fires here - the source's
                 // own save() during restore() already ran through the
                 // saved observer for anything date-related that
-                // changed. Corner case where dates changed between
-                // delete and restore is handled by the reconcile
-                // command.
+                // changed.
                 CalendarEvent::withTrashed()
                     ->where('source_type', $model::class)
                     ->where('source_id', $model->getKey())
                     ->restore();
+
+                // Also force a full re-sync so dates that drifted
+                // between delete and restore get corrected, and so
+                // the one-shot cleanup migration's force-deleted
+                // calendar_events (see issue #19760) get rebuilt
+                // from scratch on restore instead of coming back
+                // empty.
+                $model->forceSyncCalendarEvents();
             });
         }
     }
@@ -131,6 +137,16 @@ trait HasCalendarEvents
     {
         $definitions = $this->calendarEventDefinitions();
         if (empty($definitions)) {
+            return;
+        }
+
+        // Short-circuit for trashed sources so backfills, reconciles,
+        // and stray saves on soft-deleted rows never create or revive
+        // calendar_events. The deleted observer already soft-deleted
+        // the matching rows when the source was soft-deleted, and the
+        // restored observer re-syncs on restore, so leaving this
+        // branch dark on trashed() is safe. See issue #19760.
+        if (in_array(SoftDeletes::class, class_uses_recursive($this), true) && $this->trashed()) {
             return;
         }
 

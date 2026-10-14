@@ -175,7 +175,7 @@ return [
     'uppercase' => ':attribute lauke turi būti tik didžiosios raidės.',
     'url' => ':attribute lauke turi būti galiojantis URL adresas.',
     'external_url' => 'Laukas :attribute turi būti galiojantis išorinis URL (http:// arba https://), kuris nenukreipia į privatų ar vietinį adresą.',
-    'asset_tag_pattern_placeholder' => 'The asset tag pattern must include at least one placeholder from :placeholders, otherwise every synced asset would receive the same tag and only the first would save.',
+    'asset_tag_pattern_placeholder' => 'Inventorinio numerio šablone turi būti bent vienas vietaženklis iš :placeholders; priešingu atveju kiekvienas sinchronizuotas turto vienetas gautų tą patį numerį ir būtų išsaugotas tik pirmasis.',
     'custom_http_extras_json' => [
         'not_json' => 'Custom Extras must be valid JSON. Parser error: :error',
         'not_array' => 'Custom Extras must be a JSON array (starting with [ and ending with ]).',
@@ -203,6 +203,7 @@ return [
     'email_array' => 'Vienas ar keli el. pašto adresai yra neteisingi.',
     'checkboxes' => ':attribute yra neteisingų parinkčių.',
     'radio_buttons' => ':atributas yra neteisingas.',
+    'image_file_too_large' => ':attribute negali būti didesnis nei :max.',
 
     'custom' => [
         'alpha_space' => 'Lauke :attribute yra simbolis, kurio negalima naudoti.',

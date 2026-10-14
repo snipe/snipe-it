@@ -203,6 +203,7 @@ return [
     'email_array' => 'Egy vagy több email cím érvénytelen.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'A: attribútum mező olyan karaktert tartalmaz, amely nem megengedett.',

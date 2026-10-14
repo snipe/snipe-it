@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\FileStorage;
 use App\Models\Location;
 use Illuminate\Console\Command;
 use League\Csv\Reader;
@@ -44,8 +45,8 @@ class ImportLocations extends Command
         }
 
         $filename = $this->argument('filename');
-        $csv = Reader::createFromPath(storage_path('private_uploads/imports/').$filename, 'r');
-        $this->info('Attempting to process: '.storage_path('private_uploads/imports/').$filename);
+        $csv = Reader::createFromPath(storage_path(FileStorage::Imports->privateStorageKey()).$filename, 'r');
+        $this->info('Attempting to process: '.storage_path(FileStorage::Imports->privateStorageKey()).$filename);
         $csv->setHeaderOffset(0); // because we don't want to insert the header
         $results = $csv->getRecords();
 

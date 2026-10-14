@@ -53,7 +53,7 @@
     @unless($hideNewButton)
         <div class="col-md-1 col-sm-1 text-left">
             @can('create', License::class)
-                <a href="{{ route('modal.show', 'license') }}" data-toggle="modal" data-target="#createModal" data-select="{{ $selectId }}" class="btn btn-sm btn-theme">{{ trans('button.new') }}</a>
+                <x-button.modal-add type="license" :target="$selectId"/>
             @endcan
         </div>
     @endunless

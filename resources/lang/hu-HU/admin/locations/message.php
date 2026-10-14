@@ -27,19 +27,19 @@ return [
 
     'delete' => [
         'confirm' => 'Biztosan törölni szeretné ezt a helyet?',
-        'error' => 'Hiba történt a helyszín törlése közben. Kérlek próbáld újra.',
+        'error' => 'Hiba történt a helyszín törlése közben. Próbálja újra.',
         'success' => 'A helyszínt sikeresen törölték.',
     ],
 
     'bulkedit' => [
         'error' => 'Nincsenek mezők megváltoztak, így semmi sem frissült.',
-        'success' => 'Location successfully updated.|:count locations successfully updated.',
-        'warn' => 'Edit the fields below to update this location. Fields you leave blank will not change on the location.|Edit the fields below to update all :count selected locations. Fields you leave blank will not change on any of them.',
-        'show_selected' => '1 selected location|:count selected locations',
-        'company_scope_mismatch_partial' => 'The company was not changed on 1 location because items or users at that location belong to different companies. Update or move those first.|The company was not changed on :count locations because items or users at those locations belong to different companies. Update or move those first.',
-        'company_scope_mismatch_all' => 'No locations were reassigned. The requested company does not match items or users at the selected location.|No locations were reassigned. The requested company does not match items or users at any of the :count selected locations.',
-        'parent_company_mismatch_partial' => 'The parent or company was not changed on 1 location because it would leave the location in a different company than its parent.|The parent or company was not changed on :count locations because it would leave those locations in a different company than their parent.',
-        'parent_company_mismatch_all' => 'No changes were saved. The requested parent or company would leave the location in a different company than its parent.|No changes were saved. The requested parent or company would leave every one of the :count selected locations in a different company than their parent.',
+        'success' => 'A hely sikeresen frissítve.|:count hely sikeresen frissítve.',
+        'warn' => 'Az alábbi mezők szerkesztésével frissítheti ezt a helyet. Az üresen hagyott mezők nem változnak.|Az alábbi mezők szerkesztésével frissítheti mind a(z) :count kiválasztott helyet. Az üresen hagyott mezők egyik helyen sem változnak.',
+        'show_selected' => '1 kiválasztott hely|:count kiválasztott hely',
+        'company_scope_mismatch_partial' => '1 hely cége nem változott, mert az ottani tételek vagy felhasználók más cégekhez tartoznak. Először módosítsa vagy helyezze át őket.|:count hely cége nem változott, mert az ottani tételek vagy felhasználók más cégekhez tartoznak. Először módosítsa vagy helyezze át őket.',
+        'company_scope_mismatch_all' => 'Egyetlen hely cége sem változott. A kért cég nem egyezik a kiválasztott hely tételeinek vagy felhasználóinak cégével.|Egyetlen hely cége sem változott. A kért cég egyik kiválasztott hely tételeinek vagy felhasználóinak cégével sem egyezik a(z) :count hely közül.',
+        'parent_company_mismatch_partial' => '1 hely szülőhelye vagy cége nem változott, mert a hely így a szülőhelyétől eltérő céghez tartozna.|:count hely szülőhelye vagy cége nem változott, mert a helyek így a szülőhelyüktől eltérő céghez tartoznának.',
+        'parent_company_mismatch_all' => 'Nem lett mentve módosítás. A kért szülőhely vagy cég miatt a hely a szülőhelyétől eltérő céghez tartozna.|Nem lett mentve módosítás. A kért szülőhely vagy cég miatt mind a(z) :count kiválasztott hely a szülőhelyétől eltérő céghez tartozna.',
     ],
 
 ];

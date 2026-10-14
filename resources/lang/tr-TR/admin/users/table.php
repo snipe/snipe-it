@@ -17,7 +17,7 @@ return [
     'last_login' => 'Son oturum açma',
     'last_name' => 'Soyad',
     'location' => 'Konum',
-    'lock_passwords' => 'Some user details cannot be changed on the demo. Try creating a new user instead.',
+    'lock_passwords' => 'Demo ortamında bazı kullanıcı ayrıntıları değiştirilemez. Bunun yerine yeni bir kullanıcı oluşturmayı deneyin.',
     'manager' => 'Yönetici',
     'managed_locations' => 'Yönetilen Mekanlar',
     'managed_users' => 'Yönetilen Kullanıcılar',

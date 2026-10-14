@@ -10,7 +10,7 @@ return [
     ],
     'update' => [
         'error' => 'A vállalat nem frissült, próbálkozz újra',
-        'success' => 'A vállalat sikereresen frissítve.',
+        'success' => 'Vállalat sikereresen frissítve.',
     ],
     'delete' => [
         'confirm' => 'Biztosan törölni szeretnéd a vállalatot?',

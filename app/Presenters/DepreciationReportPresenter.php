@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Enums\FileStorage;
 use DateTime;
 use Illuminate\Support\Facades\Storage;
 
@@ -258,7 +259,7 @@ class DepreciationReportPresenter extends Presenter
             $imagePath = $this->model->image;
         }
         if (! empty($imagePath)) {
-            return Storage::disk('public')->url(app('assets_upload_path').e($imagePath));
+            return Storage::disk('public')->url(FileStorage::Assets->publicPath().e($imagePath));
         }
 
         return $imagePath;

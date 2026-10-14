@@ -1,24 +1,24 @@
 <?php
 
 return [
-    'not_found' => 'Maintenance type not found.',
+    'not_found' => 'Тип технічного обслуговування не знайдено.',
     'create' => [
-        'error' => 'Maintenance type was not created, please try again.',
-        'success' => 'Maintenance type created successfully.',
+        'error' => 'Тип технічного обслуговування не створено. Спробуйте ще раз.',
+        'success' => 'Тип технічного обслуговування успішно створено.',
     ],
     'update' => [
-        'error' => 'Maintenance type was not updated, please try again.',
-        'success' => 'Maintenance type updated successfully.',
+        'error' => 'Тип технічного обслуговування не оновлено. Спробуйте ще раз.',
+        'success' => 'Тип технічного обслуговування успішно оновлено.',
     ],
     'delete' => [
-        'confirm' => 'Are you sure you wish to delete this maintenance type?',
-        'error' => 'There was an issue deleting this maintenance type. Please try again.',
-        'success' => 'The maintenance type was deleted successfully.',
-        'bulk_success' => 'Maintenance type deleted successfully.|:count maintenance types were deleted successfully.',
-        'partial_success' => 'Maintenance type deleted successfully. See additional information below. | :count maintenance types were deleted successfully. See additional information below.',
+        'confirm' => 'Ви впевнені, що хочете видалити цей тип технічного обслуговування?',
+        'error' => 'Під час видалення цього типу технічного обслуговування сталася помилка. Спробуйте ще раз.',
+        'success' => 'Тип технічного обслуговування успішно видалено.',
+        'bulk_success' => 'Тип технічного обслуговування успішно видалено.|:count типів технічного обслуговування успішно видалено.',
+        'partial_success' => 'Тип технічного обслуговування успішно видалено. Докладніше див. нижче.|:count типів технічного обслуговування успішно видалено. Докладніше див. нижче.',
     ],
     'complete' => [
-        'success' => 'Maintenance marked as complete.',
-        'error' => 'There was an issue marking this maintenance as complete. Please try again.',
+        'success' => 'Технічне обслуговування позначено як завершене.',
+        'error' => 'Під час позначення цього технічного обслуговування як завершеного сталася помилка. Спробуйте ще раз.',
     ],
 ];

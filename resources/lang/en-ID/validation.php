@@ -203,6 +203,7 @@ return [
     'email_array' => 'Satu atau lebih alamat surel tidak valid.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Kolom :attribute mengandung karakter yang dilarang.',

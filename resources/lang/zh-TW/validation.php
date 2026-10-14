@@ -203,6 +203,7 @@ return [
     'email_array' => '一個或多個郵件地址不正確',
     'checkboxes' => ':attribute 包含無效選項。',
     'radio_buttons' => ':attribute 無效。',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => ':attribute 含有無效字元',

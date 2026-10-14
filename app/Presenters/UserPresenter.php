@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Enums\FileStorage;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 
@@ -547,7 +548,7 @@ class UserPresenter extends Presenter
             }
 
             // Otherwise assume it's an uploaded image
-            return Storage::disk('public')->url('avatars/'.e($this->avatar));
+            return Storage::disk('public')->url(FileStorage::Avatars->publicPath().e($this->avatar));
         }
 
         // If the default is system default
@@ -557,7 +558,7 @@ class UserPresenter extends Presenter
 
         // If there is a custom default avatar
         if (Setting::getSettings()->default_avatar != '') {
-            return Storage::disk('public')->url('avatars/'.e(Setting::getSettings()->default_avatar));
+            return Storage::disk('public')->url(FileStorage::Avatars->publicPath().e(Setting::getSettings()->default_avatar));
         }
 
         // If there is no default and no custom avatar, check for gravatar

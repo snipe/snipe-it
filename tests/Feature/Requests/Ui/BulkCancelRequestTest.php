@@ -95,6 +95,42 @@ class BulkCancelRequestTest extends TestCase
         );
     }
 
+    public function test_fmcs_prevents_bulk_cancel_of_assetmodel_parent_requests_filed_by_other_tenants(): void
+    {
+        // Regression for CAND-15 (Wojciech Ciemski). AssetModel has no
+        // company_id, so Company::isCurrentUserHasAccess on the
+        // requestable short-circuits to true for every actor. A
+        // non-superuser in Company A could bulk-cancel a Company B
+        // user's pending AssetModel-parent request. Fix adds a second
+        // isCurrentUserHasAccess check on the requesting user, which
+        // routes through User's CompanyableScope.
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+
+        $adminInA = $companyA->users()->save(User::factory()->checkoutAssets()->make());
+        $requesterInB = $companyB->users()->save(User::factory()->make());
+
+        $sharedModel = \App\Models\AssetModel::factory()->create();
+
+        $foreignRequest = CheckoutRequest::factory()->create([
+            'user_id' => $requesterInB->id,
+            'requestable_id' => $sharedModel->id,
+            'requestable_type' => \App\Models\AssetModel::class,
+        ]);
+
+        $this->actingAs($adminInA)
+            ->post(route('requests.bulk-cancel'), [
+                'ids' => [$foreignRequest->id],
+            ])
+            ->assertRedirectToRoute('requests.index');
+
+        $this->assertNull(
+            $foreignRequest->fresh()->canceled_at,
+            'Cross-tenant AssetModel-parent request must not be canceled by Company A admin.'
+        );
+    }
+
     public function test_superuser_can_cancel_across_companies(): void
     {
         $this->settings->enableMultipleFullCompanySupport();

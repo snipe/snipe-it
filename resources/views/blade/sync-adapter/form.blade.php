@@ -159,10 +159,27 @@
         :help_text="trans('admin/settings/sync_adapters.default_category_help')"
     />
 
-    {{-- Default status label for auto-created assets. Required so
-         admins have to consciously pick a workflow bucket for
-         discovered devices instead of Snipe-IT defaulting to
-         something surprising. --}}
+        {{-- Default fieldset for AssetModels auto-created --}}
+        <x-form.row
+            :label="trans('admin/settings/sync_adapters.default_fieldset')"
+            :name="$slug . '_default_fieldset_id'"
+            input_div_class="col-md-7"
+            :help_text="trans('admin/settings/sync_adapters.default_fieldset_help')"
+        >
+            <x-slot:input>
+                <x-input.select
+                    :name="$slug . '_default_fieldset_id'"
+                    :id="$slug . '_default_fieldset_id'"
+                    :options="\App\Models\CustomFieldset::orderBy('name')->pluck('name', 'id')->all()"
+                    :selected="old($slug . '_default_fieldset_id', $adapter->defaultFieldsetId())"
+                    :includeEmpty="true"
+                    style="width: 100%"
+                    :disabled="$locked"
+                />
+            </x-slot:input>
+        </x-form.row>
+
+        {{-- Default status label for auto-created assets --}}
     <x-form.row
         :label="trans('admin/settings/sync_adapters.default_status')"
         :name="$slug . '_default_status_id'"
@@ -184,13 +201,7 @@
         </x-slot:input>
         <x-slot:after_input>
             @can('create', \App\Models\Statuslabel::class)
-                <a
-                    href="{{ route('modal.show', ['type' => 'statuslabel']) }}"
-                    data-toggle="modal"
-                    data-target="#createModal"
-                    data-select="{{ $slug . '_default_status_id' }}"
-                    class="btn btn-sm btn-theme"
-                >{{ trans('button.new') }}</a>
+                <x-button.modal-add type="statuslabel" :target="$slug.'_default_status_id'"/>
             @endcan
         </x-slot:after_input>
     </x-form.row>
@@ -540,7 +551,7 @@
          multiple candidates. Positioned after the standard + extras
          mapping so admins finish configuring the per-field targets
          before deciding what goes into the composed notes blob. --}}
-    @if ($adapter instanceof \App\SyncAdapters\PushableAdapter && $adapter->canPush())
+    @if ($adapter instanceof \App\SyncAdapters\PushableAdapter && $adapter->canPush() && $adapter->supportsComposedNotesPush())
         <fieldset>
             <x-form.legend icon="tip" help_text="{{ trans('admin/settings/sync_adapters.push_notes_section_intro') }}">
                 {{ trans('admin/settings/sync_adapters.push_notes_section_title') }}

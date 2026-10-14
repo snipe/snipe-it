@@ -21,15 +21,15 @@ return [
         'confirm' => 'Ви впевнені що бажаєте видалити цю категорію?',
         'error' => 'Виникла проблема з видаленням категорії. Будь ласка, спробуйте ще раз.',
         'success' => 'Категорія успішно видалена.',
-        'bulk_success' => 'Category deleted successfully.|:count categories were deleted successfully.',
+        'bulk_success' => 'Категорію успішно видалено.|:count категорій успішно видалено.',
         'partial_success' => 'Категорію успішно видалено. Дивіться додаткову інформацію нижче. | Успішно видалено :count категорій. Дивіться додаткову інформацію нижче.',
     ],
 
     'bulkedit' => [
-        'warn' => 'You are about to edit the properties of the following category:|You are about to edit the properties of the following :count categories:',
-        'no_selection' => 'You must select at least one category to edit.',
+        'warn' => 'Ви збираєтеся змінити властивості такої категорії:|Ви збираєтеся змінити властивості таких :count категорій:',
+        'no_selection' => 'Виберіть принаймні одну категорію для редагування.',
         'no_changes' => 'Немає змінених полів, тому нічого не було оновлено.',
-        'success' => 'Category successfully updated.|:count categories successfully updated.',
+        'success' => 'Категорію успішно оновлено.|Успішно оновлено.|:count категорій.',
     ],
 
 ];

@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'Hantida Cusbooneysii Badan',
     'bulk_update_help' => 'Foomkan wuxuu kuu ogolaanayaa inaad hal mar cusboonaysiiso hanti badan. Kaliya buuxi meelaha aad u baahan tahay inaad bedesho. Goob kasta oo bannaan ayaa ahaan doonta mid aan isbeddelin. ',
     'bulk_update_warn' => 'Waxaad ku dhowdahay inaad wax ka beddesho sifooyinka hanti keli ah.|Waxaad ku dhowdahay inaad wax ka beddesho guryaha :asset_count hantida.',
-    'bulk_update_with_custom_field' => 'Ogow hantidu waa :asset_model_count noocyo noocyo kala duwan ah.',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'Qaababka',
     'bulk_update_custom_field_unique' => 'Tani waa goob gaar ah oo aan la tafatirin karin.',
     'checkedout_to' => 'La Hubiyay',

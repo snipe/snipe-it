@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\CalendarEvent;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Migrations\Migration;
 
 /**
@@ -52,11 +51,10 @@ return new class extends Migration
         $instance = new $sourceClass;
         $keyName = $instance->getKeyName();
 
+        // Live rows only. Backfilling trashed sources created calendar
+        // events for soft-deleted records that users could neither
+        // open nor remove (see issue #19760).
         $sourceClass::query()
-            ->when(
-                in_array(SoftDeletes::class, class_uses_recursive($sourceClass), true),
-                fn ($q) => $q->withTrashed(),
-            )
             ->orderByDesc($keyName)
             ->limit(2000)
             ->get()

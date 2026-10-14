@@ -87,12 +87,11 @@ class ReconcileCalendarEvents extends Command
         // Sync path: walk every live source row and force-sync its
         // calendar_events. force=true bypasses the observer's
         // "did any declared field change" gate so drifted-in-place
-        // date values get corrected.
+        // date values get corrected. Live rows only - trashed
+        // sources should not publish calendar_events (see issue
+        // #19760 and the matching gate in
+        // HasCalendarEvents::syncCalendarEvents).
         $sourceClass::query()
-            ->when(
-                in_array(\Illuminate\Database\Eloquent\SoftDeletes::class, class_uses_recursive($sourceClass), true),
-                fn ($q) => $q->withTrashed(),
-            )
             ->chunkById(500, function ($rows) use (&$upserts, $dryRun) {
                 foreach ($rows as $row) {
                     if (! $dryRun) {

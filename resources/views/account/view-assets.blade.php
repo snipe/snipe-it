@@ -198,234 +198,107 @@
 
               <!-- End button column -->
 
-                <div class="col-md-9 col-xs-12 col-sm-pull-3 info-stack">
+                <x-page-column class="col-md-9 col-xs-12 col-sm-pull-3 info-stack">
+                    <x-page-data>
+                        <x-data-row :label="trans('admin/users/table.name')">
+                            {{ $user->display_name }}
+                        </x-data-row>
 
-                <div class="row-new-striped">
-
-                  <div class="row">
-                    <!-- name -->
-
-                    <div class="col-md-3 col-sm-2">
-                      {{ trans('admin/users/table.name') }}
-                    </div>
-                    <div class="col-md-9 col-sm-2">
-                      {{ $user->display_name }}
-                    </div>
-
-                  </div>
-
-
-
-                  <!-- company -->
-                    @if ($user->companies->isNotEmpty())
-                    <div class="row">
-
-                      <div class="col-md-3">
-                          {{ trans_choice('general.companies_var', $user->companies->count()) }}
-                      </div>
-                      <div class="col-md-9">
-                          @foreach ($user->companies as $userCompany)
-                              <span class="label label-light">{!! $userCompany->present()->formattedNameLink !!}</span>
-                              @if (!$loop->last)
-                                  &nbsp;
-                              @endif
-                          @endforeach
-                      </div>
-
-                    </div>
-
-                  @endif
-
-                  <!-- username -->
-                  <div class="row">
-
-                    <div class="col-md-3">
-                      {{ trans('admin/users/table.username') }}
-                    </div>
-                    <div class="col-md-9">
-
-                      @if ($user->isSuperUser())
-                        <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label>&nbsp;
-                      @elseif ($user->hasAccess('admin'))
-                        <label class="label label-warning"><i class="fas fa-crown" title="admin"></i></label>&nbsp;
-                      @endif
-                      {{ $user->username }}
-
-                    </div>
-
-                  </div>
-
-                  <!-- address -->
-                  @if (($user->address) || ($user->city) || ($user->state) || ($user->country))
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('general.address') }}
-                      </div>
-                      <div class="col-md-9">
-
-                        @if ($user->address)
-                          {{ $user->address }} <br>
-                        @endif
-                        @if ($user->city)
-                          {{ $user->city }}
-                        @endif
-                        @if ($user->state)
-                          {{ $user->state }}
-                        @endif
-                        @if ($user->country)
-                          {{ $user->country }}
-                        @endif
-                        @if ($user->zip)
-                          {{ $user->zip }}
+                        @if ($user->companies->isNotEmpty())
+                            <x-data-row :label="trans_choice('general.companies_var', $user->companies->count())">
+                                @foreach ($user->companies as $userCompany)
+                                    <span class="label label-light">{!! $userCompany->present()->formattedNameLink !!}</span>
+                                @endforeach
+                            </x-data-row>
                         @endif
 
-                      </div>
-                    </div>
-                  @endif
+                        <x-data-row :label="trans('admin/users/table.username')">
+                            @if ($user->isSuperUser())
+                                <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label>&nbsp;
+                            @elseif ($user->hasAccess('admin'))
+                                <label class="label label-warning"><i class="fas fa-crown" title="admin"></i></label>&nbsp;
+                            @endif
+                            {{ $user->username }}
+                        </x-data-row>
 
-                  @if ($user->jobtitle)
-                    <!-- jobtitle -->
-                    <div class="row">
+                        @if ($user->address || $user->city || $user->state || $user->country)
+                            <x-data-row :label="trans('general.address')">
+                                @if ($user->address) {{ $user->address }} <br> @endif
+                                @if ($user->city) {{ $user->city }} @endif
+                                @if ($user->state) {{ $user->state }} @endif
+                                @if ($user->country) {{ $user->country }} @endif
+                                @if ($user->zip) {{ $user->zip }} @endif
+                            </x-data-row>
+                        @endif
 
-                      <div class="col-md-3">
-                        {{ trans('admin/users/table.job') }}
-                      </div>
-                      <div class="col-md-9">
-                        {{ $user->jobtitle }}
-                      </div>
+                        @if ($user->jobtitle)
+                            <x-data-row :label="trans('admin/users/table.job')">
+                                {{ $user->jobtitle }}
+                            </x-data-row>
+                        @endif
 
-                    </div>
-                  @endif
+                        @if ($user->employee_num)
+                            <x-data-row :label="trans('admin/users/table.employee_num')">
+                                {{ $user->employee_num }}
+                            </x-data-row>
+                        @endif
 
-                  @if ($user->employee_num)
-                    <!-- employee_num -->
-                    <div class="row">
+                        @if ($user->manager)
+                            <x-data-row :label="trans('admin/users/table.manager')">
+                                {!! $user->manager?->present()->formattedNameLink !!}
+                            </x-data-row>
+                        @endif
 
-                      <div class="col-md-3">
-                        {{ trans('admin/users/table.employee_num') }}
-                      </div>
-                      <div class="col-md-9">
-                        {{ $user->employee_num }}
-                      </div>
+                        @if ($user->email)
+                            <x-data-row :label="trans('admin/users/table.email')">
+                                <a href="mailto:{{ $user->email }}"><x-icon type="email" /> {{ $user->email }}</a>
+                            </x-data-row>
+                        @endif
 
-                    </div>
-                  @endif
+                        @if ($user->website)
+                            <x-data-row :label="trans('general.website')">
+                                <a href="{{ $user->website }}" target="_blank"><x-icon type="external-link" /> {{ $user->website }}</a>
+                            </x-data-row>
+                        @endif
 
-                  @if ($user->manager)
-                    <!-- manager -->
-                    <div class="row">
+                        @if ($user->phone)
+                            <x-data-row :label="trans('admin/users/table.phone')">
+                                <a href="tel:{{ $user->phone }}"><x-icon type="phone" /> {{ $user->phone }}</a>
+                            </x-data-row>
+                        @endif
 
-                      <div class="col-md-3">
-                        {{ trans('admin/users/table.manager') }}
-                      </div>
-                      <div class="col-md-9">
-                          {!!  $user->manager?->present()->formattedNameLink !!}
-                      </div>
+                        @if ($user->mobile)
+                            <x-data-row :label="trans('admin/users/table.mobile')">
+                                <a href="tel:{{ $user->mobile }}" data-tooltip="true" title="{{ trans('general.call') }}">
+                                    <x-icon type="mobile" />
+                                    {{ $user->mobile }}
+                                </a>
+                            </x-data-row>
+                        @endif
 
-                    </div>
+                        @if ($user->userloc)
+                            <x-data-row :label="trans('admin/users/table.location')">
+                                {!! $user->userloc->present()->formattedNameLink !!}
+                            </x-data-row>
+                        @endif
 
-                  @endif
+                        <x-data-row :label="trans('general.last_login')">
+                            {{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}
+                        </x-data-row>
 
+                        @if ($user->department)
+                            <x-data-row :label="trans('general.department')">
+                                {!! $user->department->present()->formattedNameLink !!}
+                            </x-data-row>
+                        @endif
 
-                  @if ($user->email)
-                    <!-- email -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('admin/users/table.email') }}
-                      </div>
-                      <div class="col-md-9">
-                        <a href="mailto:{{ $user->email }}"><x-icon type="email" /> {{ $user->email }}</a>
-                      </div>
-                    </div>
-                  @endif
-
-                  @if ($user->website)
-                    <!-- website -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('general.website') }}
-                      </div>
-                      <div class="col-md-9">
-                        <a href="{{ $user->website }}" target="_blank"><x-icon type="external-link" /> {{ $user->website }}</a>
-                      </div>
-                    </div>
-                  @endif
-
-                  @if ($user->phone)
-                    <!-- phone -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('admin/users/table.phone') }}
-                      </div>
-                      <div class="col-md-9">
-                        <a href="tel:{{ $user->phone }}"><x-icon type="phone" /> {{ $user->phone }}</a>
-                      </div>
-                    </div>
-                  @endif
-
-                @if ($user->mobile)
-                    <!-- phone -->
-                    <div class="row">
-                        <div class="col-md-3">
-                            {{ trans('admin/users/table.mobile') }}
-                        </div>
-                        <div class="col-md-9">
-                            <a href="tel:{{ $user->mobile }}" data-tooltip="true" title="{{ trans('general.call') }}">
-                                <x-icon type="mobile" />
-                                {{ $user->mobile }}</a>
-                        </div>
-                    </div>
-                @endif
-
-                  @if ($user->userloc)
-                    <!-- location -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('admin/users/table.location') }}
-                      </div>
-                      <div class="col-md-9">
-                          {!!  $user->userloc->present()->formattedNameLink !!}
-                      </div>
-                    </div>
-                  @endif
-
-                  <!-- last login -->
-                  <div class="row">
-                    <div class="col-md-3">
-                      {{ trans('general.last_login') }}
-                    </div>
-                    <div class="col-md-9">
-                      {{ \App\Helpers\Helper::getFormattedDateObject($user->last_login, 'datetime', false) }}
-                    </div>
-                  </div>
-
-
-                  @if ($user->department)
-                    <!-- empty -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('general.department') }}
-                      </div>
-                      <div class="col-md-9">
-                          {!!  $user->department->present()->formattedNameLink !!}
-                      </div>
-                    </div>
-                  @endif
-
-                  @if ($user->created_at)
-                    <!-- created at -->
-                    <div class="row">
-                      <div class="col-md-3">
-                        {{ trans('general.created_at') }}
-                      </div>
-                      <div class="col-md-9">
-                        {{ \App\Helpers\Helper::getFormattedDateObject($user->created_at, 'datetime')['formatted']}}
-                      </div>
-                    </div>
-                  @endif
-
-                </div> <!--/end striped container-->
-              </div> <!-- end col-md-9 -->
+                        @if ($user->created_at)
+                            <x-data-row :label="trans('general.created_at')">
+                                {{ \App\Helpers\Helper::getFormattedDateObject($user->created_at, 'datetime')['formatted'] }}
+                            </x-data-row>
+                        @endif
+                    </x-page-data>
+                </x-page-column>
 
 
 
@@ -433,181 +306,54 @@
           </div><!-- /.tab-pane -->
 
           <div class="tab-pane" id="assets">
-            <!-- checked out assets table -->
-
             <table
-                  data-cookie-id-table="userAssignedAssets"
-                  data-toolbar="#userAssetToolbar"
-                  data-id-table="userAssets"
-                  data-side-pagination="client"
-                  data-show-footer="true"
-                  data-sort-order="asc"
-                  id="userAssets"
-                  class="table table-striped snipe-table"
-                  data-export-options='{
-                  "fileName": "my-assets-{{ date('Y-m-d') }}",
-                  "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                  }'>
+                data-cookie-id-table="userAssignedAssets"
+                data-toolbar="#userAssetToolbar"
+                data-id-table="userAssets"
+                data-side-pagination="server"
+                data-sort-order="asc"
+                data-sort-name="asset_tag"
+                id="userAssets"
+                class="table table-striped snipe-table"
+                data-url="{{ route('api.account.assets') }}"
+                data-export-options='{
+                "fileName": "my-assets-{{ date('Y-m-d') }}",
+                "ignoreColumn": ["image"]
+                }'>
 
-                    <caption id="userAssetToolbar" class="tableCaption">
-                      {{ trans('general.assets') }}
-                    </caption>
+                <caption id="userAssetToolbar" class="tableCaption">
+                    {{ trans('general.assets') }}
+                </caption>
 
-                    <thead>
-                    <tr>
-                      <th scope="col" class="col-md-1">
-                        #
-                      </th>
-                      <th scope="col">
-                        {{ trans('general.image') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="true">
-                        {{ trans('general.category') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="true">
-                        {{ trans('admin/hardware/table.asset_tag') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="false">
-                        {{ trans('general.name') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="false">
-                        {{ trans('general.status') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="true">
-                        {{ trans('admin/hardware/table.asset_model') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="false">
-                        {{ trans('general.model_no') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="true">
-                        {{ trans('admin/hardware/table.serial') }}
-                      </th>
-                        <th scope="col" data-switchable="true" data-visible="true">
-                            {{ trans('general.manufacturer') }}
-                        </th>
-                      <th scope="col" data-switchable="true" data-visible="false">
-                        {{ trans('admin/hardware/form.default_location') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="false">
-                        {{ trans('general.location') }}
-                      </th>
-                      <th scope="col"  data-switchable="true" data-visible="true">
-                        {{ trans('admin/hardware/form.expected_checkin') }}
-                      </th>
-                      @can('self.view_purchase_cost')
-                        <th scope="col" data-footer-formatter="sumFormatter" data-fieldname="purchase_cost">
-                          {{ trans('general.purchase_cost') }}
-                        </th>
-                      @endcan
-                      <th scope="col" data-switchable="true" data-visible="true">
-                        {{ trans('admin/hardware/form.eol_date') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="false">
-                        {{ trans('general.last_audit') }}
-                      </th>
-                      <th scope="col" data-switchable="true" data-visible="false">
-                        {{ trans('general.next_audit_date') }}
-                      </th>
-                    <th scope="col" data-switchable="true" data-visible="false" data-formatter="trueFalseFormatter">
-                        {{ trans('general.byod') }}
-                    </th>
+                <thead>
+                <tr>
+                    <th scope="col" data-field="image" data-formatter="imageFormatter" data-sortable="false">{{ trans('general.image') }}</th>
+                    <th scope="col" data-field="category" data-sortable="true" data-visible="true">{{ trans('general.category') }}</th>
+                    <th scope="col" data-field="asset_tag" data-sortable="true" data-visible="true">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                    <th scope="col" data-field="name" data-sortable="true" data-visible="false">{{ trans('general.name') }}</th>
+                    <th scope="col" data-field="status_label" data-sortable="false" data-visible="false">{{ trans('general.status') }}</th>
+                    <th scope="col" data-field="model" data-sortable="true" data-visible="true">{{ trans('admin/hardware/table.asset_model') }}</th>
+                    <th scope="col" data-field="model_number" data-sortable="true" data-visible="false">{{ trans('general.model_no') }}</th>
+                    <th scope="col" data-field="serial" data-sortable="true" data-visible="true">{{ trans('admin/hardware/table.serial') }}</th>
+                    <th scope="col" data-field="manufacturer" data-sortable="true" data-visible="true">{{ trans('general.manufacturer') }}</th>
+                    <th scope="col" data-field="rtd_location" data-sortable="true" data-visible="false">{{ trans('admin/hardware/form.default_location') }}</th>
+                    <th scope="col" data-field="location" data-sortable="true" data-visible="false">{{ trans('general.location') }}</th>
+                    <th scope="col" data-field="last_checkout" data-formatter="dateDisplayFormatter" data-sortable="true" data-visible="false">{{ trans('general.last_checkout') }}</th>
+                    <th scope="col" data-field="expected_checkin" data-formatter="dateDisplayFormatter" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.expected_checkin') }}</th>
+                    @can('self.view_purchase_cost')
+                        <th scope="col" data-field="purchase_cost" data-sortable="true">{{ trans('general.purchase_cost') }}</th>
+                    @endcan
+                    <th scope="col" data-field="asset_eol_date" data-formatter="dateDisplayFormatter" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.eol_date') }}</th>
+                    <th scope="col" data-field="last_audit_date" data-formatter="dateDisplayFormatter" data-sortable="true" data-visible="false">{{ trans('general.last_audit') }}</th>
+                    <th scope="col" data-field="next_audit_date" data-formatter="dateDisplayFormatter" data-sortable="true" data-visible="false">{{ trans('general.next_audit_date') }}</th>
+                    <th scope="col" data-field="byod" data-formatter="trueFalseFormatter" data-sortable="true" data-visible="false">{{ trans('general.byod') }}</th>
 
-                      @foreach ($field_array as $db_column => $field_name)
-                        <th scope="col" data-switchable="true" data-visible="true">{{ $field_name }}</th>
-                      @endforeach
-
-                    </tr>
-
-                    </thead>
-                    <tbody>
-                    @php
-                      $counter = 1
-                    @endphp
-                    @foreach ($user->assets as $asset)
-                      <tr>
-                        <td>{{ $counter }}</td>
-                        <td>
-                          @if (($asset->image) && ($asset->image!=''))
-                            <img src="{{ Storage::disk('public')->url(app('assets_upload_path').e($asset->image)) }}" style="max-height: 30px; width: auto" class="img-responsive" alt="">
-                          @elseif (($asset->model) && ($asset->model->image!=''))
-                            <img src="{{ Storage::disk('public')->url(app('models_upload_path').e($asset->model->image)) }}" style="max-height: 30px; width: auto" class="img-responsive" alt="">
-                          @endif
-                        </td>
-                        <td>
-                          @if (($asset->model) && ($asset->model->category))
-                         {!! $asset->model->category->present()->formattedNameLink  !!}
-                          @endif
-                        </td>
-                        <td>
-                          {{ $asset->asset_tag }}
-                        </td>
-                        <td>
-                          {{ $asset->name }}
-                        </td>
-                        <td>
-                          <x-icon type="circle-solid" class="text-blue" />
-                            {{ $asset->status?->name }}
-                          <label class="label label-default">{{ trans('general.deployed') }}</label>
-                        </td>
-                        <td>
-                            {!!  ($asset->model) ? $asset->model->present()->formattedNameLink : trans('general.deleted') !!}
-                        </td>
-                        <td>
-                          {{ $asset->model->model_number }}
-                        </td>
-                        <td>
-                          {{ $asset->serial }}
-                        </td>
-                          <td>
-                              @if (($asset->model) && ($asset->model->manufacturer))
-                                  {!! $asset->model->manufacturer->present()->formattedNameLink  !!}
-                              @endif
-                          </td>
-                        <td>
-                            {!!  ($asset->defaultLoc) ? $asset->defaultLoc->present()->formattedNameLink : '' !!}
-
-                        </td>
-                        <td>
-                            {!!  ($asset->location) ? $asset->location->present()->formattedNameLink : '' !!}
-                        </td>
-                        <td>
-                          {{ ($asset->expected_checkin) ? $asset->expected_checkin_formatted_date : '' }}
-                        </td>
-                        @can('self.view_purchase_cost')
-                        <td>
-                          {!! Helper::formatCurrencyOutput($asset->purchase_cost) !!}
-                        </td>
-                        @endcan
-
-                        <td>
-                          {{ ($asset->asset_eol_date != '') ? Helper::getFormattedDateObject($asset->asset_eol_date, 'date', false) : null }}
-                        </td>
-
-                        <td>
-                          {{ Helper::getFormattedDateObject($asset->last_audit_date, 'datetime', false) }}
-                        </td>
-                        <td>
-                          {{ Helper::getFormattedDateObject($asset->next_audit_date, 'date', false) }}
-                        </td>
-
-                          <td>
-                              {{ $asset->byod }}
-                          </td>
-
-                        @foreach ($field_array as $db_column => $field_value)
-                          <td>
-                            {{ $asset->{$db_column} }}
-                          </td>
-                        @endforeach
-
-                      </tr>
-
-                      @php
-                        $counter++
-                      @endphp
+                    @foreach ($field_array as $db_column => $field_name)
+                        <th scope="col" data-field="custom_fields.{{ $db_column }}" data-formatter="customFieldsFormatter" data-sortable="true" data-visible="true">{{ $field_name }}</th>
                     @endforeach
-                    </tbody>
-                  </table>
+                </tr>
+                </thead>
+            </table>
           </div><!-- /asset -->
 
 

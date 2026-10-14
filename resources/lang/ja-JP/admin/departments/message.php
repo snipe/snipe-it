@@ -17,8 +17,8 @@ return [
         'confirm' => '本当にこの部署を削除してもよろしいですか?',
         'error' => '部署を削除する際に問題が発生しました。もう一度やり直して下さい。',
         'success' => '部署は削除されました。',
-        'bulk_success' => 'Department deleted successfully.|:count departments were deleted successfully.',
-        'partial_success' => 'Department deleted successfully. See additional information below. | :count departments were deleted successfully. See additional information below.',
+        'bulk_success' => '部署を削除しました。|部署を:count件削除しました。',
+        'partial_success' => '部署を削除しました。詳しくは以下をご確認ください。|部署を:count件削除しました。詳しくは以下をご確認ください。',
     ],
 
 ];

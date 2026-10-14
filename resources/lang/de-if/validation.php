@@ -203,6 +203,7 @@ return [
     'email_array' => 'Eine oder mehrere Email Adressen sind ungültig.',
     'checkboxes' => ':attribute enthält ungültige Optionen.',
     'radio_buttons' => ':attribute ist ungültig.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Das :attribute Feld enthält ein nicht erlaubtes Zeichen.',

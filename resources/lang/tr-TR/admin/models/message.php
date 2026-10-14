@@ -40,19 +40,19 @@ return [
 
     'bulkdelete' => [
         'error' => 'Hiçbir model seçilmedi, bu nedenle hiçbir şey silinmedi.',
-        'nothing_deletable' => 'None of the selected models can be deleted because they still have assets associated with them.',
+        'nothing_deletable' => 'Seçilen modellerin hiçbiri silinemiyor; çünkü bu modellerle ilişkili varlıklar hâlâ mevcut.',
         'success' => 'Model silindi!|:success_count modelleri silindi!',
         'success_partial' => ':success_count adet model(ler) silindi, ancak :fail_count adet için silme işlemini tamamlayamadık, çünkü bunlar halâ varlıklarla ilişkilendirilmiş durumda.',
     ],
 
     'merge' => [
-        'min_two' => 'Select at least two models to merge.',
-        'no_target' => 'Select which model to keep before merging.',
-        'not_found' => 'One or more of the selected models could not be loaded. Refresh the models list and try again.',
-        'information' => 'You are about to merge :count models. Pick the model you want to keep. Every asset attached to the other models will be reassigned to the model you pick, then the source models will be deleted.',
-        'warning' => 'This cannot be undone. Reassigned assets will inherit the surviving model\'s category, fieldset, and depreciation settings.',
-        'pick_target' => 'Which model do you want to keep?',
-        'success' => 'Merged :source_count model(s) into ":target". :asset_count asset(s) were reassigned.',
+        'min_two' => 'Birleştirmek için en az iki model seçin.',
+        'no_target' => 'Birleştirme işleminden önce tutulacak modeli seçin.',
+        'not_found' => 'Seçilen modellerden biri veya birkaçı yüklenemedi. Model listesini yenileyip tekrar deneyin.',
+        'information' => ':count modeli birleştirmek üzeresiniz. Tutmak istediğiniz modeli seçin. Diğer modellere bağlı tüm varlıklar seçtiğiniz modele aktarılacak, ardından kaynak modeller silinecektir.',
+        'warning' => 'Bu işlem geri alınamaz. Yeniden atanan varlıklar, kalan modelin kategorisini, alan kümesini ve amortisman ayarlarını devralır.',
+        'pick_target' => 'Hangi model tutulsun?',
+        'success' => '":target" modelinde :source_count model birleştirildi. :asset_count varlık yeniden atandı.',
     ],
 
 ];

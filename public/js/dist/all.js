@@ -1,24 +1,11 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/admin-lte/build/less/AdminLTE.less":
-/*!*********************************************************!*\
-  !*** ./node_modules/admin-lte/build/less/AdminLTE.less ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./node_modules/admin-lte/dist/js/adminlte.min.js":
+/***/ "./node_modules/admin-lte/dist/js/adminlte.min.js"
 /*!********************************************************!*\
   !*** ./node_modules/admin-lte/dist/js/adminlte.min.js ***!
   \********************************************************/
-/***/ (() => {
+() {
 
 /*! AdminLTE app.js
 * ================
@@ -34,13 +21,3392 @@ __webpack_require__.r(__webpack_exports__);
 */
 if("undefined"==typeof jQuery)throw new Error("AdminLTE requires jQuery");!function(i){"use strict";function s(t,e){if(this.element=t,this.options=e,this.$overlay=i(e.overlayTemplate),""===e.source)throw new Error("Source url was not defined. Please specify a url in your BoxRefresh source option.");this._setUpListeners(),this.load()}var r="lte.boxrefresh",a={source:"",params:{},trigger:".refresh-btn",content:".box-body",loadInContent:!0,responseType:"",overlayTemplate:'<div class="overlay"><div class="fa fa-refresh fa-spin"></div></div>',onLoadStart:function(){},onLoadDone:function(t){return t}},t='[data-widget="box-refresh"]';function e(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(t,o))}if("string"==typeof e){if(void 0===e[n])throw new Error("No method named "+n);e[n]()}})}s.prototype.load=function(){this._addOverlay(),this.options.onLoadStart.call(i(this)),i.get(this.options.source,this.options.params,function(t){this.options.loadInContent&&i(this.element).find(this.options.content).html(t),this.options.onLoadDone.call(i(this),t),this._removeOverlay()}.bind(this),""!==this.options.responseType&&this.options.responseType)},s.prototype._setUpListeners=function(){i(this.element).on("click",this.options.trigger,function(t){t&&t.preventDefault(),this.load()}.bind(this))},s.prototype._addOverlay=function(){i(this.element).append(this.$overlay)},s.prototype._removeOverlay=function(){i(this.$overlay).remove()};var o=i.fn.boxRefresh;i.fn.boxRefresh=e,i.fn.boxRefresh.Constructor=s,i.fn.boxRefresh.noConflict=function(){return i.fn.boxRefresh=o,this},i(window).on("load",function(){i(t).each(function(){e.call(i(this))})})}(jQuery),function(i){"use strict";function s(t,e){this.element=t,this.options=e,this._setUpListeners()}var r="lte.boxwidget",a={animationSpeed:500,collapseTrigger:'[data-widget="collapse"]',removeTrigger:'[data-widget="remove"]',collapseIcon:"fa-minus",expandIcon:"fa-plus",removeIcon:"fa-times"},t=".box",e=".collapsed-box",d=".box-header",l=".box-body",c=".box-footer",h=".box-tools",f="collapsed-box",p="collapsing.boxwidget",u="collapsed.boxwidget",g="expanding.boxwidget",v="expanded.boxwidget",o="removing.boxwidget",n="removed.boxwidget";function b(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(t,o))}if("string"==typeof n){if(void 0===e[n])throw new Error("No method named "+n);e[n]()}})}s.prototype.toggle=function(){!i(this.element).is(e)?this.collapse():this.expand()},s.prototype.expand=function(){var t=i.Event(v),e=i.Event(g),o=this.options.collapseIcon,n=this.options.expandIcon;i(this.element).removeClass(f),i(this.element).children(d+", "+l+", "+c).children(h).find("."+n).removeClass(n).addClass(o),i(this.element).children(l+", "+c).slideDown(this.options.animationSpeed,function(){i(this.element).trigger(t)}.bind(this)).trigger(e)},s.prototype.collapse=function(){var t=i.Event(u),e=i.Event(p),o=this.options.collapseIcon,n=this.options.expandIcon;i(this.element).children(d+", "+l+", "+c).children(h).find("."+o).removeClass(o).addClass(n),i(this.element).children(l+", "+c).slideUp(this.options.animationSpeed,function(){i(this.element).addClass(f),i(this.element).trigger(t)}.bind(this)).trigger(e)},s.prototype.remove=function(){var t=i.Event(n),e=i.Event(o);i(this.element).slideUp(this.options.animationSpeed,function(){i(this.element).trigger(t),i(this.element).remove()}.bind(this)).trigger(e)},s.prototype._setUpListeners=function(){var e=this;i(this.element).on("click",this.options.collapseTrigger,function(t){return t&&t.preventDefault(),e.toggle(i(this)),!1}),i(this.element).on("click",this.options.removeTrigger,function(t){return t&&t.preventDefault(),e.remove(i(this)),!1})};var m=i.fn.boxWidget;i.fn.boxWidget=b,i.fn.boxWidget.Constructor=s,i.fn.boxWidget.noConflict=function(){return i.fn.boxWidget=m,this},i(window).on("load",function(){i(t).each(function(){b.call(i(this))})})}(jQuery),function(i){"use strict";function s(t,e){this.element=t,this.options=e,this.hasBindedResize=!1,this.init()}var r="lte.controlsidebar",a={controlsidebarSlide:!0},e=".control-sidebar",t='[data-toggle="control-sidebar"]',o=".control-sidebar-open",n=".control-sidebar-bg",d=".wrapper",l=".layout-boxed",c="control-sidebar-open",h="control-sidebar-hold-transition",f="collapsed.controlsidebar",p="expanded.controlsidebar";function u(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(t,o))}"string"==typeof n&&e.toggle()})}s.prototype.init=function(){i(this.element).is(t)||i(this).on("click",this.toggle),this.fix(),i(window).resize(function(){this.fix()}.bind(this))},s.prototype.toggle=function(t){t&&t.preventDefault(),this.fix(),i(e).is(o)||i("body").is(o)?this.collapse():this.expand()},s.prototype.expand=function(){i(e).show(),this.options.controlsidebarSlide?i(e).addClass(c):i("body").addClass(h).addClass(c).delay(50).queue(function(){i("body").removeClass(h),i(this).dequeue()}),i(this.element).trigger(i.Event(p))},s.prototype.collapse=function(){this.options.controlsidebarSlide?i(e).removeClass(c):i("body").addClass(h).removeClass(c).delay(50).queue(function(){i("body").removeClass(h),i(this).dequeue()}),i(e).fadeOut(),i(this.element).trigger(i.Event(f))},s.prototype.fix=function(){i("body").is(l)&&this._fixForBoxed(i(n))},s.prototype._fixForBoxed=function(t){t.css({position:"absolute",height:i(d).height()})};var g=i.fn.controlSidebar;i.fn.controlSidebar=u,i.fn.controlSidebar.Constructor=s,i.fn.controlSidebar.noConflict=function(){return i.fn.controlSidebar=g,this},i(document).on("click",t,function(t){t&&t.preventDefault(),u.call(i(this),"toggle")})}(jQuery),function(n){"use strict";function i(t){this.element=t}var s="lte.directchat",t='[data-widget="chat-pane-toggle"]',e=".direct-chat",o="direct-chat-contacts-open";function r(o){return this.each(function(){var t=n(this),e=t.data(s);e||t.data(s,e=new i(t)),"string"==typeof o&&e.toggle(t)})}i.prototype.toggle=function(t){t.parents(e).first().toggleClass(o)};var a=n.fn.directChat;n.fn.directChat=r,n.fn.directChat.Constructor=i,n.fn.directChat.noConflict=function(){return n.fn.directChat=a,this},n(document).on("click",t,function(t){t&&t.preventDefault(),r.call(n(this),"toggle")})}(jQuery),function(i){"use strict";function s(t){this.options=t,this.init()}var r="lte.pushmenu",a={collapseScreenSize:767,expandOnHover:!1,expandTransitionDelay:200},t=".sidebar-collapse",e=".main-sidebar",o=".content-wrapper",n=".sidebar-form .form-control",d='[data-toggle="push-menu"]',l=".sidebar-mini",c=".sidebar-expanded-on-hover",h=".fixed",f="sidebar-collapse",p="sidebar-open",u="sidebar-expanded-on-hover",g="sidebar-mini-expand-feature",v="expanded.pushMenu",b="collapsed.pushMenu";function m(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(o))}"toggle"===n&&e.toggle()})}s.prototype.init=function(){(this.options.expandOnHover||i("body").is(l+h))&&(this.expandOnHover(),i("body").addClass(g)),i(o).click(function(){i(window).width()<=this.options.collapseScreenSize&&i("body").hasClass(p)&&this.close()}.bind(this)),i(n).click(function(t){t.stopPropagation()})},s.prototype.toggle=function(){var t=i(window).width(),e=!i("body").hasClass(f);t<=this.options.collapseScreenSize&&(e=i("body").hasClass(p)),e?this.close():this.open()},s.prototype.open=function(){i(window).width()>this.options.collapseScreenSize?i("body").removeClass(f).trigger(i.Event(v)):i("body").addClass(p).trigger(i.Event(v))},s.prototype.close=function(){i(window).width()>this.options.collapseScreenSize?i("body").addClass(f).trigger(i.Event(b)):i("body").removeClass(p+" "+f).trigger(i.Event(b))},s.prototype.expandOnHover=function(){i(e).hover(function(){i("body").is(l+t)&&i(window).width()>this.options.collapseScreenSize&&this.expand()}.bind(this),function(){i("body").is(c)&&this.collapse()}.bind(this))},s.prototype.expand=function(){setTimeout(function(){i("body").removeClass(f).addClass(u)},this.options.expandTransitionDelay)},s.prototype.collapse=function(){setTimeout(function(){i("body").removeClass(u).addClass(f)},this.options.expandTransitionDelay)};var y=i.fn.pushMenu;i.fn.pushMenu=m,i.fn.pushMenu.Constructor=s,i.fn.pushMenu.noConflict=function(){return i.fn.pushMenu=y,this},i(document).on("click",d,function(t){t.preventDefault(),m.call(i(this),"toggle")}),i(window).on("load",function(){m.call(i(d))})}(jQuery),function(i){"use strict";function s(t,e){this.element=t,this.options=e,this._setUpListeners()}var r="lte.todolist",a={onCheck:function(t){return t},onUnCheck:function(t){return t}},e={data:'[data-widget="todo-list"]'},o="done";function t(n){return this.each(function(){var t=i(this),e=t.data(r);if(!e){var o=i.extend({},a,t.data(),"object"==typeof n&&n);t.data(r,e=new s(t,o))}if("string"==typeof e){if(void 0===e[n])throw new Error("No method named "+n);e[n]()}})}s.prototype.toggle=function(t){t.parents(e.li).first().toggleClass(o),t.prop("checked")?this.check(t):this.unCheck(t)},s.prototype.check=function(t){this.options.onCheck.call(t)},s.prototype.unCheck=function(t){this.options.onUnCheck.call(t)},s.prototype._setUpListeners=function(){var t=this;i(this.element).on("change ifChanged","input:checkbox",function(){t.toggle(i(this))})};var n=i.fn.todoList;i.fn.todoList=t,i.fn.todoList.Constructor=s,i.fn.todoList.noConflict=function(){return i.fn.todoList=n,this},i(window).on("load",function(){i(e.data).each(function(){t.call(i(this))})})}(jQuery),function(s){"use strict";function n(t,e){this.element=t,this.options=e,s(this.element).addClass(h),s(a+o,this.element).addClass(c),this._setUpListeners()}var i="lte.tree",r={animationSpeed:500,accordion:!0,followLink:!1,trigger:".treeview a"},a=".treeview",d=".treeview-menu",l=".menu-open, .active",t='[data-widget="tree"]',o=".active",c="menu-open",h="tree",f="collapsed.tree",p="expanded.tree";function e(o){return this.each(function(){var t=s(this);if(!t.data(i)){var e=s.extend({},r,t.data(),"object"==typeof o&&o);t.data(i,new n(t,e))}})}n.prototype.toggle=function(t,e){var o=t.next(d),n=t.parent(),i=n.hasClass(c);n.is(a)&&(this.options.followLink&&"#"!==t.attr("href")||e.preventDefault(),i?this.collapse(o,n):this.expand(o,n))},n.prototype.expand=function(t,e){var o=s.Event(p);if(this.options.accordion){var n=e.siblings(l),i=n.children(d);this.collapse(i,n)}e.addClass(c),t.stop().slideDown(this.options.animationSpeed,function(){s(this.element).trigger(o),e.height("auto")}.bind(this))},n.prototype.collapse=function(t,e){var o=s.Event(f);e.removeClass(c),t.stop().slideUp(this.options.animationSpeed,function(){s(this.element).trigger(o),e.find(a).removeClass(c).find(d).hide()}.bind(this))},n.prototype._setUpListeners=function(){var e=this;s(this.element).on("click",this.options.trigger,function(t){e.toggle(s(this),t)})};var u=s.fn.tree;s.fn.tree=e,s.fn.tree.Constructor=n,s.fn.tree.noConflict=function(){return s.fn.tree=u,this},s(window).on("load",function(){s(t).each(function(){e.call(s(this))})})}(jQuery),function(a){"use strict";function i(t){this.options=t,this.bindedResize=!1,this.activate()}var s="lte.layout",r={slimscroll:!0,resetHeight:!0},d=".wrapper",l=".content-wrapper",c=".layout-boxed",h=".main-footer",f=".main-header",t=".main-sidebar",e="slimScrollDiv",p=".sidebar",u=".control-sidebar",o=".sidebar-menu",n=".main-header .logo",g="fixed",v="hold-transition";function b(n){return this.each(function(){var t=a(this),e=t.data(s);if(!e){var o=a.extend({},r,t.data(),"object"==typeof n&&n);t.data(s,e=new i(o))}if("string"==typeof n){if(void 0===e[n])throw new Error("No method named "+n);e[n]()}})}i.prototype.activate=function(){this.fix(),this.fixSidebar(),a("body").removeClass(v),this.options.resetHeight&&a("body, html, "+d).css({height:"auto","min-height":"100%"}),this.bindedResize||(a(window).resize(function(){this.fix(),this.fixSidebar(),a(n+", "+p).one("webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend",function(){this.fix(),this.fixSidebar()}.bind(this))}.bind(this)),this.bindedResize=!0),a(o).on("expanded.tree",function(){this.fix(),this.fixSidebar()}.bind(this)),a(o).on("collapsed.tree",function(){this.fix(),this.fixSidebar()}.bind(this))},i.prototype.fix=function(){a(c+" > "+d).css("overflow","hidden");var t=a(h).outerHeight()||0,e=a(f).outerHeight()||0,o=e+t,n=a(window).height(),i=a(p).outerHeight()||0;if(a("body").hasClass(g))a(l).css("min-height",n-t);else{var s;s=i+e<=n?(a(l).css("min-height",n-o),n-o):(a(l).css("min-height",i),i);var r=a(u);void 0!==r&&r.height()>s&&a(l).css("min-height",r.height())}},i.prototype.fixSidebar=function(){a("body").hasClass(g)?this.options.slimscroll&&void 0!==a.fn.slimScroll&&0===a(t).find(e).length&&a(p).slimScroll({height:a(window).height()-a(f).height()+"px"}):void 0!==a.fn.slimScroll&&a(p).slimScroll({destroy:!0}).height("auto")};var m=a.fn.layout;a.fn.layout=b,a.fn.layout.Constuctor=i,a.fn.layout.noConflict=function(){return a.fn.layout=m,this},a(window).on("load",function(){b.call(a("body"))})}(jQuery);
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/blueimp-file-upload/js/jquery.fileupload.js":
+/***/ "./resources/assets/js/extensions/pGenerator.jquery.js"
+/*!*************************************************************!*\
+  !*** ./resources/assets/js/extensions/pGenerator.jquery.js ***!
+  \*************************************************************/
+() {
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+/*!
+ * pGenerator jQuery Plugin v1.0.5
+ * https://github.com/M1Sh0u/pGenerator
+ *
+ * Created by Mihai MATEI <mihai.matei@outlook.com>
+ * Released under the MIT License (Feel free to copy, modify or redistribute this plugin.)
+ */
+
+(function ($) {
+  var numbers_array = [],
+    upper_letters_array = [],
+    lower_letters_array = [],
+    special_chars_array = [],
+    $pGeneratorElement = null;
+
+  /**
+   * Plugin methods.
+   *
+   * @type {{init: init, generatePassword: generatePassword}}
+   */
+  var methods = {
+    /**
+     * Initialize the object.
+     *
+     * @param options
+     * @param callbacks
+     *
+     * @returns {*}
+     */
+    init: function init(options, callbacks) {
+      var settings = $.extend({
+        'bind': 'click',
+        'passwordElement': null,
+        'displayElement': null,
+        'passwordLength': 16,
+        'uppercase': true,
+        'lowercase': true,
+        'numbers': true,
+        'specialChars': true,
+        'additionalSpecialChars': [],
+        'onPasswordGenerated': function onPasswordGenerated(generatedPassword) {}
+      }, options);
+      for (var i = 48; i < 58; i++) {
+        numbers_array.push(i);
+      }
+      for (i = 65; i < 91; i++) {
+        upper_letters_array.push(i);
+      }
+      for (i = 97; i < 123; i++) {
+        lower_letters_array.push(i);
+      }
+      special_chars_array = [33, 35, 64, 36, 38, 42, 91, 93, 123, 125, 92, 47, 63, 58, 59, 95, 45].concat(settings.additionalSpecialChars);
+      return this.each(function () {
+        $pGeneratorElement = $(this);
+        $pGeneratorElement.bind(settings.bind, function (e) {
+          e.preventDefault();
+          methods.generatePassword(settings);
+        });
+      });
+    },
+    /**
+     * Generate the password.
+     *
+     * @param {object} settings
+     */
+    generatePassword: function generatePassword(settings) {
+      var password = new Array(),
+        selOptions = settings.uppercase + settings.lowercase + settings.numbers + settings.specialChars,
+        selected = 0,
+        no_lower_letters = new Array();
+      var optionLength = Math.floor(settings.passwordLength / selOptions);
+      if (settings.uppercase) {
+        // uppercase letters
+        for (var i = 0; i < optionLength; i++) {
+          password.push(String.fromCharCode(upper_letters_array[randomFromInterval(0, upper_letters_array.length - 1)]));
+        }
+        no_lower_letters = no_lower_letters.concat(upper_letters_array);
+        selected++;
+      }
+      if (settings.numbers) {
+        // numbers letters
+        for (var i = 0; i < optionLength; i++) {
+          password.push(String.fromCharCode(numbers_array[randomFromInterval(0, numbers_array.length - 1)]));
+        }
+        no_lower_letters = no_lower_letters.concat(numbers_array);
+        selected++;
+      }
+      if (settings.specialChars) {
+        // numbers letters
+        for (var i = 0; i < optionLength; i++) {
+          password.push(String.fromCharCode(special_chars_array[randomFromInterval(0, special_chars_array.length - 1)]));
+        }
+        no_lower_letters = no_lower_letters.concat(special_chars_array);
+        selected++;
+      }
+      var remained = settings.passwordLength - selected * optionLength;
+      if (settings.lowercase) {
+        for (var i = 0; i < remained; i++) {
+          password.push(String.fromCharCode(lower_letters_array[randomFromInterval(0, lower_letters_array.length - 1)]));
+        }
+      } else {
+        for (var i = 0; i < remained; i++) {
+          password.push(String.fromCharCode(no_lower_letters[randomFromInterval(0, no_lower_letters.length - 1)]));
+        }
+      }
+      password = shuffle(password).join('');
+      if (settings.passwordElement !== null) {
+        $(settings.passwordElement).val(password);
+      }
+      if (settings.displayElement !== null) {
+        if ($(settings.displayElement).is("input")) {
+          $(settings.displayElement).val(password);
+        } else {
+          $(settings.displayElement).text(password);
+        }
+      }
+      settings.onPasswordGenerated(password);
+    }
+  };
+
+  /**
+   * Shuffle the password.
+   *
+   * @param {Array} o
+   *
+   * @returns {Array}
+   */
+  function shuffle(o) {
+    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
+  }
+
+  /**
+   * Get a random number in the given interval.
+   *
+   * @param {number} from
+   * @param {number} to
+   *
+   * @returns {number}
+   */
+  function randomFromInterval(from, to) {
+    return Math.floor(Math.random() * (to - from + 1) + from);
+  }
+
+  /**
+   * Define the pGenerator jQuery plugin.
+   *
+   * @param method
+   * @returns {*}
+   */
+  $.fn.pGenerator = function (method) {
+    if (methods[method]) {
+      return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+    } else if (_typeof(method) === 'object' || !method) {
+      return methods.init.apply(this, arguments);
+    } else {
+      $.error('Method ' + method + ' does not exist on jQuery.pGenerator');
+    }
+  };
+})(jQuery);
+
+/***/ },
+
+/***/ "./resources/assets/js/signature_pad.js"
+/*!**********************************************!*\
+  !*** ./resources/assets/js/signature_pad.js ***!
+  \**********************************************/
+(module, exports) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+(function (root, factory) {
+  if (true) {
+    // AMD. Register as an anonymous module unless amdModuleId is set
+    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+      return root['SignaturePad'] = factory();
+    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+  } else // removed by dead control flow
+{}
+})(this, function () {
+  /*!
+   * Signature Pad v1.5.3
+   * https://github.com/szimek/signature_pad
+   *
+   * Copyright 2016 Szymon Nowak
+   * Released under the MIT license
+   *
+   * The main idea and some parts of the code (e.g. drawing variable width Bézier curve) are taken from:
+   * http://corner.squareup.com/2012/07/smoother-signatures.html
+   *
+   * Implementation of interpolation using cubic Bézier curves is taken from:
+   * http://benknowscode.wordpress.com/2012/09/14/path-interpolation-using-cubic-bezier-and-control-point-estimation-in-javascript
+   *
+   * Algorithm for approximated length of a Bézier curve is taken from:
+   * http://www.lemoda.net/maths/bezier-length/index.html
+   *
+   */
+  var SignaturePad = function (document) {
+    "use strict";
+
+    var SignaturePad = function SignaturePad(canvas, options) {
+      var self = this,
+        opts = options || {};
+      this.velocityFilterWeight = opts.velocityFilterWeight || 0.7;
+      this.minWidth = opts.minWidth || 0.5;
+      this.maxWidth = opts.maxWidth || 2.5;
+      this.dotSize = opts.dotSize || function () {
+        return (this.minWidth + this.maxWidth) / 2;
+      };
+      this.penColor = opts.penColor || "black";
+      this.backgroundColor = opts.backgroundColor || "rgba(0,0,0,0)";
+      this.onEnd = opts.onEnd;
+      this.onBegin = opts.onBegin;
+      this._canvas = canvas;
+      this._ctx = canvas.getContext("2d");
+      this.clear();
+
+      // we need add these inline so they are available to unbind while still having
+      //  access to 'self' we could use _.bind but it's not worth adding a dependency
+      this._handleMouseDown = function (event) {
+        if (event.which === 1) {
+          self._mouseButtonDown = true;
+          self._strokeBegin(event);
+        }
+      };
+      this._handleMouseMove = function (event) {
+        if (self._mouseButtonDown) {
+          self._strokeUpdate(event);
+        }
+      };
+      this._handleMouseUp = function (event) {
+        if (event.which === 1 && self._mouseButtonDown) {
+          self._mouseButtonDown = false;
+          self._strokeEnd(event);
+        }
+      };
+      this._handleTouchStart = function (event) {
+        if (event.targetTouches.length == 1) {
+          var touch = event.changedTouches[0];
+          self._strokeBegin(touch);
+        }
+      };
+      this._handleTouchMove = function (event) {
+        // Prevent scrolling.
+        event.preventDefault();
+        var touch = event.targetTouches[0];
+        self._strokeUpdate(touch);
+      };
+      this._handleTouchEnd = function (event) {
+        var wasCanvasTouched = event.target === self._canvas;
+        if (wasCanvasTouched) {
+          event.preventDefault();
+          self._strokeEnd(event);
+        }
+      };
+      this._handleMouseEvents();
+      this._handleTouchEvents();
+    };
+    SignaturePad.prototype.clear = function () {
+      var ctx = this._ctx,
+        canvas = this._canvas;
+      ctx.fillStyle = this.backgroundColor;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      this._reset();
+    };
+    SignaturePad.prototype.toDataURL = function (imageType, quality) {
+      var canvas = this._canvas;
+      return canvas.toDataURL.apply(canvas, arguments);
+    };
+    SignaturePad.prototype.fromDataURL = function (dataUrl) {
+      var self = this,
+        image = new Image(),
+        ratio = window.devicePixelRatio || 1,
+        width = this._canvas.width / ratio,
+        height = this._canvas.height / ratio;
+      this._reset();
+      image.src = dataUrl;
+      image.onload = function () {
+        self._ctx.drawImage(image, 0, 0, width, height);
+      };
+      this._isEmpty = false;
+    };
+    SignaturePad.prototype._strokeUpdate = function (event) {
+      var point = this._createPoint(event);
+      this._addPoint(point);
+    };
+    SignaturePad.prototype._strokeBegin = function (event) {
+      this._reset();
+      this._strokeUpdate(event);
+      if (typeof this.onBegin === 'function') {
+        this.onBegin(event);
+      }
+    };
+    SignaturePad.prototype._strokeDraw = function (point) {
+      var ctx = this._ctx,
+        dotSize = typeof this.dotSize === 'function' ? this.dotSize() : this.dotSize;
+      ctx.beginPath();
+      this._drawPoint(point.x, point.y, dotSize);
+      ctx.closePath();
+      ctx.fill();
+    };
+    SignaturePad.prototype._strokeEnd = function (event) {
+      var canDrawCurve = this.points.length > 2,
+        point = this.points[0];
+      if (!canDrawCurve && point) {
+        this._strokeDraw(point);
+      }
+      if (typeof this.onEnd === 'function') {
+        this.onEnd(event);
+      }
+    };
+    SignaturePad.prototype._handleMouseEvents = function () {
+      this._mouseButtonDown = false;
+      this._canvas.addEventListener("mousedown", this._handleMouseDown);
+      this._canvas.addEventListener("mousemove", this._handleMouseMove);
+      document.addEventListener("mouseup", this._handleMouseUp);
+    };
+    SignaturePad.prototype._handleTouchEvents = function () {
+      // Pass touch events to canvas element on mobile IE11 and Edge.
+      this._canvas.style.msTouchAction = 'none';
+      this._canvas.style.touchAction = 'none';
+      this._canvas.addEventListener("touchstart", this._handleTouchStart);
+      this._canvas.addEventListener("touchmove", this._handleTouchMove);
+      this._canvas.addEventListener("touchend", this._handleTouchEnd);
+    };
+    SignaturePad.prototype.on = function () {
+      this._handleMouseEvents();
+      this._handleTouchEvents();
+    };
+    SignaturePad.prototype.off = function () {
+      this._canvas.removeEventListener("mousedown", this._handleMouseDown);
+      this._canvas.removeEventListener("mousemove", this._handleMouseMove);
+      document.removeEventListener("mouseup", this._handleMouseUp);
+      this._canvas.removeEventListener("touchstart", this._handleTouchStart);
+      this._canvas.removeEventListener("touchmove", this._handleTouchMove);
+      this._canvas.removeEventListener("touchend", this._handleTouchEnd);
+    };
+    SignaturePad.prototype.isEmpty = function () {
+      return this._isEmpty;
+    };
+    SignaturePad.prototype._reset = function () {
+      this.points = [];
+      this._lastVelocity = 0;
+      this._lastWidth = (this.minWidth + this.maxWidth) / 2;
+      this._isEmpty = true;
+      this._ctx.fillStyle = this.penColor;
+    };
+    SignaturePad.prototype._createPoint = function (event) {
+      var rect = this._canvas.getBoundingClientRect();
+      return new Point(event.clientX - rect.left, event.clientY - rect.top);
+    };
+    SignaturePad.prototype._addPoint = function (point) {
+      var points = this.points,
+        c2,
+        c3,
+        curve,
+        tmp;
+      points.push(point);
+      if (points.length > 2) {
+        // To reduce the initial lag make it work with 3 points
+        // by copying the first point to the beginning.
+        if (points.length === 3) points.unshift(points[0]);
+        tmp = this._calculateCurveControlPoints(points[0], points[1], points[2]);
+        c2 = tmp.c2;
+        tmp = this._calculateCurveControlPoints(points[1], points[2], points[3]);
+        c3 = tmp.c1;
+        curve = new Bezier(points[1], c2, c3, points[2]);
+        this._addCurve(curve);
+
+        // Remove the first element from the list,
+        // so that we always have no more than 4 points in points array.
+        points.shift();
+      }
+    };
+    SignaturePad.prototype._calculateCurveControlPoints = function (s1, s2, s3) {
+      var dx1 = s1.x - s2.x,
+        dy1 = s1.y - s2.y,
+        dx2 = s2.x - s3.x,
+        dy2 = s2.y - s3.y,
+        m1 = {
+          x: (s1.x + s2.x) / 2.0,
+          y: (s1.y + s2.y) / 2.0
+        },
+        m2 = {
+          x: (s2.x + s3.x) / 2.0,
+          y: (s2.y + s3.y) / 2.0
+        },
+        l1 = Math.sqrt(dx1 * dx1 + dy1 * dy1),
+        l2 = Math.sqrt(dx2 * dx2 + dy2 * dy2),
+        dxm = m1.x - m2.x,
+        dym = m1.y - m2.y,
+        k = l2 / (l1 + l2),
+        cm = {
+          x: m2.x + dxm * k,
+          y: m2.y + dym * k
+        },
+        tx = s2.x - cm.x,
+        ty = s2.y - cm.y;
+      return {
+        c1: new Point(m1.x + tx, m1.y + ty),
+        c2: new Point(m2.x + tx, m2.y + ty)
+      };
+    };
+    SignaturePad.prototype._addCurve = function (curve) {
+      var startPoint = curve.startPoint,
+        endPoint = curve.endPoint,
+        velocity,
+        newWidth;
+      velocity = endPoint.velocityFrom(startPoint);
+      velocity = this.velocityFilterWeight * velocity + (1 - this.velocityFilterWeight) * this._lastVelocity;
+      newWidth = this._strokeWidth(velocity);
+      this._drawCurve(curve, this._lastWidth, newWidth);
+      this._lastVelocity = velocity;
+      this._lastWidth = newWidth;
+    };
+    SignaturePad.prototype._drawPoint = function (x, y, size) {
+      var ctx = this._ctx;
+      ctx.moveTo(x, y);
+      ctx.arc(x, y, size, 0, 2 * Math.PI, false);
+      this._isEmpty = false;
+    };
+    SignaturePad.prototype._drawCurve = function (curve, startWidth, endWidth) {
+      var ctx = this._ctx,
+        widthDelta = endWidth - startWidth,
+        drawSteps,
+        width,
+        i,
+        t,
+        tt,
+        ttt,
+        u,
+        uu,
+        uuu,
+        x,
+        y;
+      drawSteps = Math.floor(curve.length());
+      ctx.beginPath();
+      for (i = 0; i < drawSteps; i++) {
+        // Calculate the Bezier (x, y) coordinate for this step.
+        t = i / drawSteps;
+        tt = t * t;
+        ttt = tt * t;
+        u = 1 - t;
+        uu = u * u;
+        uuu = uu * u;
+        x = uuu * curve.startPoint.x;
+        x += 3 * uu * t * curve.control1.x;
+        x += 3 * u * tt * curve.control2.x;
+        x += ttt * curve.endPoint.x;
+        y = uuu * curve.startPoint.y;
+        y += 3 * uu * t * curve.control1.y;
+        y += 3 * u * tt * curve.control2.y;
+        y += ttt * curve.endPoint.y;
+        width = startWidth + ttt * widthDelta;
+        this._drawPoint(x, y, width);
+      }
+      ctx.closePath();
+      ctx.fill();
+    };
+    SignaturePad.prototype._strokeWidth = function (velocity) {
+      return Math.max(this.maxWidth / (velocity + 1), this.minWidth);
+    };
+    var Point = function Point(x, y, time) {
+      this.x = x;
+      this.y = y;
+      this.time = time || new Date().getTime();
+    };
+    Point.prototype.velocityFrom = function (start) {
+      return this.time !== start.time ? this.distanceTo(start) / (this.time - start.time) : 1;
+    };
+    Point.prototype.distanceTo = function (start) {
+      return Math.sqrt(Math.pow(this.x - start.x, 2) + Math.pow(this.y - start.y, 2));
+    };
+    var Bezier = function Bezier(startPoint, control1, control2, endPoint) {
+      this.startPoint = startPoint;
+      this.control1 = control1;
+      this.control2 = control2;
+      this.endPoint = endPoint;
+    };
+
+    // Returns approximated length.
+    Bezier.prototype.length = function () {
+      var steps = 10,
+        length = 0,
+        i,
+        t,
+        cx,
+        cy,
+        px,
+        py,
+        xdiff,
+        ydiff;
+      for (i = 0; i <= steps; i++) {
+        t = i / steps;
+        cx = this._point(t, this.startPoint.x, this.control1.x, this.control2.x, this.endPoint.x);
+        cy = this._point(t, this.startPoint.y, this.control1.y, this.control2.y, this.endPoint.y);
+        if (i > 0) {
+          xdiff = cx - px;
+          ydiff = cy - py;
+          length += Math.sqrt(xdiff * xdiff + ydiff * ydiff);
+        }
+        px = cx;
+        py = cy;
+      }
+      return length;
+    };
+    Bezier.prototype._point = function (t, start, c1, c2, end) {
+      return start * (1.0 - t) * (1.0 - t) * (1.0 - t) + 3.0 * c1 * (1.0 - t) * (1.0 - t) * t + 3.0 * c2 * (1.0 - t) * t * t + end * t * t * t;
+    };
+    return SignaturePad;
+  }(document);
+  return SignaturePad;
+});
+
+/***/ },
+
+/***/ "./resources/assets/js/snipeit.js"
+/*!****************************************!*\
+  !*** ./resources/assets/js/snipeit.js ***!
+  \****************************************/
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+var jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+window.jQuery = jQuery;
+window.$ = jQuery;
+
+// window._ = require('lodash'); //the only place I saw this used was vue.js, and we don't use that anymore
+
+/****************************************
+ Much of what you'll see below is just plain require()'ed, this is because
+ it is mostly jQuery stuff, which attaches itself to the $() function/object
+ So we don't have to assign it to anything, it will just automagically attach
+ itself
+ *****************************************/
+
+__webpack_require__(/*! jquery-ui/dist/jquery-ui */ "./node_modules/jquery-ui/dist/jquery-ui.js");
+jQuery.fn.uitooltip = jQuery.fn.tooltip;
+__webpack_require__(/*! bootstrap-less */ "./node_modules/bootstrap-less/js/bootstrap.js");
+__webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
+__webpack_require__(/*! admin-lte */ "./node_modules/admin-lte/dist/js/adminlte.min.js");
+__webpack_require__(/*! tether */ "./node_modules/tether/dist/js/tether.js");
+__webpack_require__(/*! jquery-slimscroll */ "./node_modules/jquery-slimscroll/jquery.slimscroll.js");
+__webpack_require__(/*! jquery.iframe-transport */ "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js"); //probably not needed anymore, if I'm honest
+__webpack_require__(/*! blueimp-file-upload */ "./node_modules/blueimp-file-upload/js/jquery.fileupload.js");
+__webpack_require__(/*! bootstrap-colorpicker */ "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js");
+// eonasdan-bootstrap-datetimepicker (BS3) needs moment on window before it loads
+window.moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+__webpack_require__(/*! eonasdan-bootstrap-datetimepicker */ "./node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js");
+__webpack_require__(/*! ekko-lightbox */ "./node_modules/ekko-lightbox/dist/ekko-lightbox.min.js"); //TODO - this doesn't seem jquery-ish, we might need to do something weird here
+// it *does* require Bootstrap, which requires jquery, so maybe that's OK
+// it seems to work...
+__webpack_require__(/*! ./extensions/pGenerator.jquery */ "./resources/assets/js/extensions/pGenerator.jquery.js"); //WEIRD, but works
+//require('chart.js') // Weirdly, this seems to "just work." Without this line, the dashboard blows up
+// but it's *HUGE* - and we only use it one place. So we're taking it out of the bundle
+window.SignaturePad = __webpack_require__(/*! ./signature_pad */ "./resources/assets/js/signature_pad.js"); //ALSO WEIRD - but works
+__webpack_require__(/*! jquery-validation */ "./node_modules/jquery-validation/dist/jquery.validate.js");
+window.List = __webpack_require__(/*! list.js */ "./node_modules/list.js/src/index.js");
+window.ClipboardJS = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
+// TODO - find everything using moment.js and kill it or upgrade it? It's huge
+// - adminLTE (UGH)
+// - bootstrap-daterangepicker
+// - fullcalendar (what's that? it's used by AdminLTE)
+
+/**
+ * Module containing core application logic.
+ * @param  {jQuery} $        Insulated jQuery object
+ * @param  {JSON} settings Insulated `window.snipeit.settings` object.
+ * @return {IIFE}          Immediately invoked. Returns self.
+ */
+
+lineOptions = {
+  legend: {
+    position: "bottom"
+  },
+  scales: {
+    yAxes: [{
+      ticks: {
+        fontColor: "rgba(0,0,0,0.5)",
+        fontStyle: "bold",
+        beginAtZero: true,
+        maxTicksLimit: 5,
+        padding: 20
+      },
+      gridLines: {
+        drawTicks: false,
+        display: false
+      }
+    }],
+    xAxes: [{
+      gridLines: {
+        zeroLineColor: "transparent"
+      },
+      ticks: {
+        padding: 20,
+        fontColor: "rgba(0,0,0,0.5)",
+        fontStyle: "bold"
+      }
+    }]
+  }
+};
+pieOptions = {
+  //Boolean - Whether we should show a stroke on each segment
+  segmentShowStroke: true,
+  //String - The colour of each segment stroke
+  segmentStrokeColor: "#fff",
+  //Number - The width of each segment stroke
+  segmentStrokeWidth: 1,
+  //Number - The percentage of the chart that we cut out of the middle
+  percentageInnerCutout: 50,
+  // This is 0 for Pie charts
+  //Number - Amount of animation steps
+  animationSteps: 100,
+  //String - Animation easing effect
+  animationEasing: "easeOutBounce",
+  //Boolean - Whether we animate the rotation of the Doughnut
+  animateRotate: true,
+  //Boolean - Whether we animate scaling the Doughnut from the centre
+  animateScale: false,
+  //Boolean - whether to make the chart responsive to window resizing
+  responsive: true,
+  // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+  maintainAspectRatio: false,
+  //String - A legend template
+  legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" + "<i class='fas fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" + "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
+  //String - A tooltip template
+  tooltipTemplate: "<%=value %> <%=label%> "
+};
+
+//-----------------
+//- END PIE CHART -
+//-----------------
+
+var baseUrl = $('meta[name="baseUrl"]').attr('content');
+$(function () {
+  var $el = $('body');
+
+  // Publish the live header height as a CSS custom property so
+  // .main-sidebar's padding-top can track it at narrow widths. The
+  // AdminLTE 2 base pads the mobile sidebar by a static 100px, which
+  // is too small whenever the header wraps to a taller stack (common
+  // on FMCS + location-scoped installs at ~750px). Static breakpoint
+  // margins used to compensate for this and were removed under the
+  // assumption this rule already existed. See #19826.
+  (function () {
+    var header = document.querySelector('.main-header');
+    if (header === null) {
+      return;
+    }
+    var sync = function sync() {
+      document.documentElement.style.setProperty('--main-header-height', header.getBoundingClientRect().height + 'px');
+    };
+    sync();
+    window.addEventListener('resize', sync);
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(sync).observe(header);
+    }
+  })();
+
+  // confirm restore modal
+
+  $el.on('click', '.restore-asset', function (evnt) {
+    var $context = $(this);
+    var $restoreConfirmModal = $('#restoreConfirmModal');
+    var href = $context.attr('href');
+    var message = $context.attr('data-content');
+    var title = $context.attr('data-title');
+    $('#confirmModalLabel').text(title);
+    $restoreConfirmModal.find('.modal-body').text(message);
+    $('#restoreForm').attr('action', href);
+    $restoreConfirmModal.modal({
+      show: true
+    });
+    return false;
+  });
+
+  // Mark-a-maintenance-complete modal (green checkmark button in the
+  // maintenances table actions column). Sets the modal form's action to
+  // the row's completion URL and opens it.
+  $el.on('click', '.complete-maintenance', function () {
+    var url = $(this).data('url');
+    $('#completeMaintenanceForm').attr('action', url);
+    $('#completionNote').val('');
+    $('#completeMaintenanceModal').modal('show');
+  });
+
+  // Adjust-quantity modal (plus-minus button on accessory/consumable/
+  // component list and view pages). Sets the modal form's action from
+  // the trigger's data-adjust-url and populates the header + current
+  // quantity display from the trigger's data attributes. Clears the
+  // signed amount + note + order every open so nothing bleeds between
+  // clicks.
+  $el.on('click', '.adjust-quantity', function () {
+    var $btn = $(this);
+    var $modal = $('#adjustQuantityModal');
+    var $amount = $modal.find('#adjustQuantityAmount');
+
+    // data-available is the trigger's authoritative floor for a decrement
+    // (available = qty - currentlyInUseCount). A delta smaller than
+    // -available would decrement the on-hand qty below what's already
+    // checked out, and AdjustsQuantity::adjustQuantity throws
+    // DomainException. Mirror that server-side floor on the input's min
+    // attribute so the browser stepper refuses to go below and the
+    // constraint-validation message surfaces before submit.
+    var available = parseInt($btn.data('available'), 10);
+    $('#adjustQuantityForm').attr('action', $btn.data('adjust-url'));
+    $modal.find('.adjust-quantity-item-name').text($btn.data('item-name') || '');
+    $modal.find('.adjust-quantity-available').text(!isNaN(available) ? available : '');
+    if (!isNaN(available)) {
+      $amount.attr('min', -available);
+    } else {
+      $amount.removeAttr('min');
+    }
+    $amount.val('');
+    $modal.find('#adjustQuantityOrder').val('');
+    // Reset the acquisition-metadata fields between opens so an
+    // order left half-filled by one operator doesn't bleed into the
+    // next click. Supplier is a select2, so use .val('').trigger('change')
+    // rather than setting the raw <select>; currency reverts to
+    // whatever the modal was originally rendered with (its DOM value
+    // attribute, i.e. the system default_currency).
+    $modal.find('#adjustQuantitySupplier').val('').trigger('change');
+    // Reset purchase_date to today on every open (server-rendered
+    // default is today too). Prevents an operator's earlier
+    // backdate from bleeding into the next event.
+    var todayIso = new Date().toISOString().slice(0, 10);
+    $modal.find('#adjustQuantityPurchaseDate').val(todayIso);
+
+    // Pre-populate unit_cost + currency from the trigger's data-last-*
+    // attrs (server-rendered from the item's most recent OrderItem).
+    // When both are present the "pre-populated from last order" hint
+    // shows underneath the row; the hint gets hidden as soon as the
+    // operator edits either field so it disappears the moment they
+    // override the pre-fill.
+    var lastUnitCost = $btn.data('last-unit-cost');
+    var lastCurrency = $btn.data('last-currency');
+    var $unitCost = $modal.find('#adjustQuantityUnitCost');
+    var $currency = $modal.find('#adjustQuantityCurrency');
+    var $costHint = $modal.find('#adjustQuantityCostHint');
+    $unitCost.val(lastUnitCost !== undefined && lastUnitCost !== '' ? lastUnitCost : '');
+    $currency.val(lastCurrency !== undefined && lastCurrency !== '' ? lastCurrency : $currency.prop('defaultValue') || '');
+    if (lastUnitCost !== undefined && lastUnitCost !== '' || lastCurrency !== undefined && lastCurrency !== '') {
+      $costHint.show();
+    } else {
+      $costHint.hide();
+    }
+
+    // Rebind on every open so multiple modal opens don't stack listeners.
+    $unitCost.off('input.adjustCostHint').on('input.adjustCostHint', function () {
+      $costHint.hide();
+    });
+    $currency.off('input.adjustCostHint').on('input.adjustCostHint', function () {
+      $costHint.hide();
+    });
+    $modal.find('#adjustQuantityNote').val('');
+    $modal.find('#adjustQuantityFile').val('');
+    // js-uploadFile paints selected filenames into #{id}-info; clear it too
+    // so stale filenames from a previous open don't linger in the new modal.
+    $modal.find('#adjustQuantityFile-info').empty();
+
+    // Acquisition-metadata fields (order number, supplier, unit cost,
+    // currency) only make sense when the qty change is a positive
+    // addition (a purchase). Zero or negative amounts represent
+    // corrections / consumption / losses, not acquisitions, so hide
+    // those fields — and blank their values so a submit from that
+    // state doesn't ship stale purchase metadata alongside the log
+    // entry. Show them again the moment the operator types a
+    // positive number. The date label swaps to a generic "Date"
+    // when the event isn't a purchase.
+    //
+    // On modal open the amount is empty ("we don't know yet"), so
+    // stay in the default acquisition-visible state — prefilled
+    // supplier / cost / currency from the last order are preserved
+    // and the hint stays visible if it was shown. We only clear
+    // when the operator actually commits to a 0/negative value.
+    var $acquisitionFields = $modal.find('#adjustQuantityAcquisitionFields');
+    var $costRow = $modal.find('#adjustQuantityCostRow');
+    var $dateLabel = $modal.find('#adjustQuantityPurchaseDateLabel');
+    var purchaseLabel = $dateLabel.data('label-purchase');
+    var genericLabel = $dateLabel.data('label-generic');
+    var syncAcquisitionFieldsVisibility = function syncAcquisitionFieldsVisibility() {
+      var raw = $amount.val();
+      // Treat "no value yet" as still-a-purchase for the visibility
+      // toggle: prefilled acquisition metadata stays intact until
+      // the operator explicitly types a non-positive number.
+      if (raw === '' || raw === null || raw === undefined) {
+        $acquisitionFields.show();
+        $costRow.show();
+        $dateLabel.text(purchaseLabel);
+        return;
+      }
+      var num = parseFloat(raw);
+      var isPurchase = !isNaN(num) && num > 0;
+      $acquisitionFields.toggle(isPurchase);
+      $costRow.toggle(isPurchase);
+      $costHint.toggle(isPurchase && $costHint.data('has-prefill') === true);
+      $dateLabel.text(isPurchase ? purchaseLabel : genericLabel);
+      if (!isPurchase) {
+        $modal.find('#adjustQuantityOrder').val('');
+        $modal.find('#adjustQuantitySupplier').val('').trigger('change');
+        $modal.find('#adjustQuantityUnitCost').val('');
+        $modal.find('#adjustQuantityCurrency').val('');
+      }
+    };
+    // Track the prefill state on the hint so the visibility toggle
+    // can restore it correctly when qty flips positive again.
+    $costHint.data('has-prefill', $costHint.is(':visible'));
+    $amount.off('input.adjustAcquisition').on('input.adjustAcquisition', syncAcquisitionFieldsVisibility);
+    // Initial call keeps everything in the default "purchase" state
+    // (empty amount) so the prefill logic above stays authoritative.
+    syncAcquisitionFieldsVisibility();
+    $modal.modal('show');
+  });
+
+  // Request-item modal (on /account/requestable-assets). Trigger
+  // buttons carry data-request-url + data-item-name + data-current-qty
+  // so the modal can post to the correct endpoint and reset its
+  // qty/date fields between opens. Cancel case (the item is already
+  // requested by this user) POSTs synchronously via a small inline
+  // form on the row instead of routing through this modal, so a
+  // requested row never opens it.
+  $el.on('click', '.request-item', function () {
+    var $btn = $(this);
+    var $modal = $('#requestItemModal');
+    var $form = $('#requestItemForm');
+    $form.attr('action', $btn.data('request-url'));
+    $modal.find('.request-item-name').text($btn.data('item-name') || '');
+    var currentQty = parseInt($btn.data('current-qty'), 10);
+    $modal.find('#requestItemQuantity').val(!isNaN(currentQty) && currentQty > 0 ? currentQty : 1);
+
+    // Hide the qty row for types where qty is meaningless.
+    // Assets are 1:1 (you request THE asset, not N of it).
+    // Licenses are one-seat-per-request by convention (nobody
+    // realistically asks for 3 seats of Photoshop for
+    // themselves). The input stays in the DOM with value=1 so
+    // the POST shape stays uniform across every requestable
+    // type. Only the row is display:none.
+    //
+    // The required attribute is toggled in step with visibility
+    // per HTML5 specs
+    var itemType = ($btn.data('item-type') || '').toString().toLowerCase();
+    var hidesQty = itemType === 'asset' || itemType === 'license';
+    var $qtyInput = $modal.find('#requestItemQuantity');
+    $modal.find('#requestItemQuantityRow').toggle(!hidesQty);
+    $qtyInput.prop('required', !hidesQty);
+    if (hidesQty) {
+      $qtyInput.val(1);
+    }
+
+    // Reset dates + notes every open so state left in the modal
+    // by an earlier click can't leak into the next request.
+    $modal.find('#requestItemStartDate').val('');
+    $modal.find('#requestItemEndDate').val('');
+    $modal.find('#requestItemNotes').val('');
+
+    // Snapshot the tab the requester is on so the controller can
+    // restore it on the post-submit redirect. Walks up to the
+    // enclosing .tab-pane and reads its id; the assets tab uses
+    // an API-backed row-formatter that emits the same
+    // data-active-tab attr on its request button (see
+    // assetRequestActionsFormatter) so this handler works there
+    // too without needing the DOM parent.
+    var explicitTab = $btn.data('active-tab');
+    var $tabPane = $btn.closest('.tab-pane');
+    var activeTab = explicitTab || ($tabPane.length ? $tabPane.attr('id') : '');
+    $modal.find('#requestItemActiveTab').val(activeTab || '');
+    $modal.modal('show');
+  });
+
+  // confirm delete modal
+  $el.on('click', '.delete-asset, .delete-custom-label', function (evnt) {
+    var $context = $(this);
+    var $dataConfirmModal = $('#dataConfirmModal');
+    // Anchors keep the URL in href; buttons keep it in data-href
+    // (buttons don't semantically support href per HTML5).
+    var href = $context.attr('data-href') || $context.attr('href');
+    var message = $context.attr('data-content');
+    var headericon = $context.attr('data-icon');
+    var title = $context.attr('data-title');
+
+    // deleteForm is the ID of the modal form itself
+    $('#deleteForm').attr('action', href);
+    $dataConfirmModal.find('.modal-header-icon').addClass(headericon);
+    $dataConfirmModal.find('.modal-title').text('').text(title).prepend('<i class="fa ' + headericon + '"></i> ');
+    $dataConfirmModal.find('.modal-body').text('').text(message);
+    $dataConfirmModal.attr('action', href);
+
+    // Fire the modal
+    $dataConfirmModal.modal({
+      show: true
+    });
+    return false;
+  });
+
+  /*
+  * Select2
+  */
+
+  $('select.select2:not(".select2-hidden-accessible")').each(function (i, obj) {
+    var $obj = $(obj);
+    var options = {};
+    // Opt-out for fields where the built-in search box adds no value. Pass
+    // data-minimum-results-for-search="Infinity" (or a numeric
+    // threshold) on the <select> to hide it.
+    var minResults = $obj.data('minimum-results-for-search');
+    if (minResults !== undefined) {
+      options.minimumResultsForSearch = minResults === 'Infinity' ? Infinity : minResults;
+    }
+    // Any select2 that lives inside a Bootstrap 3 modal has to be
+    // initialized with dropdownParent set to the modal, or the
+    // search input gets appended to <body> where Bootstrap 3's
+    // modal enforceFocus handler steals focus away from it. See
+    // the same fix on initLivewireSelect2 below for the full
+    // failure-mode explanation.
+    var $modal = $obj.closest('.modal');
+    if ($modal.length) {
+      options.dropdownParent = $modal;
+    }
+    $obj.select2(options);
+  });
+
+  // Crazy select2 rich dropdowns with images!
+  $('.js-data-ajax').each(function (i, item) {
+    var link = $(item);
+    var endpoint = link.data("endpoint");
+    var select = link.data("select");
+    // Same modal-detection as the plain select2 init above: scope the
+    // dropdown panel to any enclosing Bootstrap 3 modal so its search
+    // input doesn't get its focus stolen by the modal's enforceFocus.
+    var $modal = link.closest('.modal');
+    link.select2({
+      /**
+       * Adds an empty placeholder, allowing every select2 instance to be cleared.
+       * This placeholder can be overridden with the "data-placeholder" attribute.
+       */
+      placeholder: '',
+      allowClear: true,
+      dropdownParent: $modal.length ? $modal : $(document.body),
+      language: $('meta[name="language"]').attr('content'),
+      dir: $('meta[name="language-direction"]').attr('content'),
+      ajax: {
+        // the baseUrl includes a trailing slash
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+        dataType: 'json',
+        delay: 250,
+        headers: {
+          "X-Requested-With": 'XMLHttpRequest',
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        },
+        data: function data(params) {
+          var data = {
+            search: params.term,
+            page: params.page || 1,
+            statusType: link.data("asset-status-type"),
+            companyId: link.data("company-ids") || link.data("company-id"),
+            excludeId: link.data("exclude-id"),
+            excludeIds: link.data("exclude-ids"),
+            // Pre-scope the hardware picker to a user's
+            // assigned assets. Currently used by the
+            // components-checkout screen when reached via
+            // a /requests row (see the requesting_user
+            // wiring in ComponentsController + the checkout
+            // blade). The API endpoint gracefully falls
+            // back to the unfiltered list when the target
+            // user has no assigned assets, so an empty
+            // pre-filter doesn't lock the admin out.
+            assignedTo: link.data("assigned-to"),
+            // When true, the companies selectlist marks child companies
+            // (those with a parent of their own) as disabled — used by
+            // the parent-company picker so users can't choose options
+            // that would fail the parent_must_be_top_level validator.
+            onlyTopLevel: link.data("only-top-level")
+          };
+          return data;
+        },
+        /* processResults: function (data, params) {
+             params.page = params.page || 1;
+             var answer =  {
+                results: data.items,
+                pagination: {
+                    more: data.pagination.more
+                }
+            };
+             return answer;
+        }, */
+        cache: true
+      },
+      //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+      templateResult: formatDatalistSafe
+      //templateSelection: formatDataSelection
+    });
+  });
+
+  // Always-open scrolling checkbox list, backed by the
+  // same selectlist endpoints the select2 pickers use. Submits as a
+  // single hidden CSV via the ?all=1 helper so very large selections
+  // sidestep PHP's max_input_vars. See the x-input.select2-checkboxes-scrollbox
+  // blade component for consumer-side wiring.
+  $('.js-select2-checkboxes-scrollbox').each(function (i, item) {
+    var $root = $(item);
+    var endpoint = $root.data('endpoint');
+    var name = $root.data('name');
+    var compactSubmit = String($root.data('compact-submit')) === '1';
+    var $search = $root.find('.js-select2-checkboxes-scrollbox-search');
+    var $searchWrap = $root.find('.js-select2-checkboxes-scrollbox-search-wrap');
+    var $searchClear = $root.find('.js-select2-checkboxes-scrollbox-search-clear');
+    var $scroll = $root.find('.js-select2-checkboxes-scrollbox-scroll');
+    var $count = $root.find('.js-select2-checkboxes-scrollbox-count');
+    var $hidden = compactSubmit ? $('#' + $root.data('hidden')) : $();
+    var $arrayInputs = $root.find('.js-select2-checkboxes-scrollbox-array-inputs');
+    var $selectAllBtn = $root.find('.js-select2-checkboxes-scrollbox-selectall');
+    var $clearBtn = $root.find('.js-select2-checkboxes-scrollbox-clear');
+
+    // Set is the source of truth for the current selection. The
+    // visible rows are only presentation; a row that scrolls out
+    // of view (or is filtered out by a search) still contributes
+    // its id if it's in the set.
+    var initialIds;
+    if (compactSubmit) {
+      initialIds = ($hidden.val() || '').split(',');
+    } else {
+      initialIds = $arrayInputs.find('input').map(function () {
+        return this.value;
+      }).get();
+    }
+    var selected = new Set(initialIds.filter(function (v) {
+      return v;
+    }));
+    var page = 1;
+    var hasMore = true;
+    var searchTerm = '';
+    var loading = false;
+    function syncHiddenAndCount() {
+      if (compactSubmit) {
+        $hidden.val(Array.from(selected).join(','));
+      } else {
+        // Rebuild per-id hidden inputs so form submit posts
+        // name="X[]" entries. Cheaper than tracking adds/removes
+        // and the count is bounded by the scroll view.
+        $arrayInputs.empty();
+        selected.forEach(function (id) {
+          var $input = $('<input type="hidden">');
+          $input.attr('name', name + '[]');
+          $input.attr('value', id);
+          $arrayInputs.append($input);
+        });
+      }
+      // The template lives on data-template so repeat calls don't
+      // lose the {n} placeholder (which would freeze the count
+      // after the first update).
+      var countTemplate = $count.data('template') || '{n}';
+      $count.text(countTemplate.replace('{n}', selected.size).replace(':n', selected.size));
+    }
+    function renderRow(item) {
+      var isDisabled = !!item.disabled;
+      var $row = $('<label class="js-select2-checkboxes-scrollbox-row" role="option">' + '<input type="checkbox" class="js-select2-checkboxes-scrollbox-tick">' + '<span class="js-select2-checkboxes-scrollbox-image"></span>' + '<span class="js-select2-checkboxes-scrollbox-label"></span>' + '</label>');
+      $row.attr('data-item-id', item.id);
+      $row.attr('aria-selected', selected.has(String(item.id)) ? 'true' : 'false');
+      if (isDisabled) {
+        $row.addClass('js-select2-checkboxes-scrollbox-row-disabled');
+      }
+      var $tick = $row.find('.js-select2-checkboxes-scrollbox-tick');
+      $tick.prop('checked', selected.has(String(item.id)));
+      $tick.prop('disabled', isDisabled);
+      if (item.image) {
+        var $img = $('<img alt="">');
+        $img.attr('src', item.image);
+        $row.find('.js-select2-checkboxes-scrollbox-image').append($img);
+      } else if (item.tag_color) {
+        var $sq = $('<i class="fa-solid fa-square" aria-hidden="true"></i>');
+        $sq.css('color', item.tag_color);
+        $row.find('.js-select2-checkboxes-scrollbox-image').append($sq);
+      }
+      $row.find('.js-select2-checkboxes-scrollbox-label').text(item.text);
+      return $row;
+    }
+    function fetchPage() {
+      if (loading || !hasMore) {
+        return;
+      }
+      loading = true;
+      $.ajax({
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+        data: {
+          page: page,
+          search: searchTerm
+        },
+        dataType: 'json',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      }).done(function (response) {
+        (response.results || []).forEach(function (item) {
+          $scroll.append(renderRow(item));
+        });
+        hasMore = !!(response.pagination && response.pagination.more);
+        page += 1;
+      }).always(function () {
+        loading = false;
+      });
+    }
+    function resetAndRefetch() {
+      page = 1;
+      hasMore = true;
+      $scroll.empty();
+      fetchPage();
+    }
+    $scroll.on('scroll', function () {
+      // Trigger the next page when we're within one screen of the
+      // bottom. Checking scrollHeight - scrollTop - clientHeight
+      // keeps the user from catching a blank patch during the
+      // request.
+      if (this.scrollHeight - this.scrollTop - this.clientHeight < this.clientHeight) {
+        fetchPage();
+      }
+    });
+    $scroll.on('change', '.js-select2-checkboxes-scrollbox-tick', function () {
+      var $row = $(this).closest('.js-select2-checkboxes-scrollbox-row');
+      if ($row.hasClass('js-select2-checkboxes-scrollbox-row-disabled')) {
+        $(this).prop('checked', false);
+        return;
+      }
+      var id = String($row.data('item-id'));
+      if (this.checked) {
+        selected.add(id);
+        $row.attr('aria-selected', 'true');
+      } else {
+        selected["delete"](id);
+        $row.attr('aria-selected', 'false');
+      }
+      syncHiddenAndCount();
+    });
+    var searchTimer;
+    function toggleSearchClear() {
+      $searchWrap.toggleClass('has-content', ($search.val() || '').length > 0);
+    }
+    toggleSearchClear();
+    $search.on('input', function () {
+      var self = this;
+      toggleSearchClear();
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(function () {
+        searchTerm = self.value || '';
+        resetAndRefetch();
+      }, 250);
+    });
+    $searchClear.on('click', function (e) {
+      e.preventDefault();
+      $search.val('').trigger('input');
+      $search.focus();
+    });
+    $selectAllBtn.on('click', function (e) {
+      e.preventDefault();
+      var payload = {
+        all: 1,
+        search: searchTerm
+      };
+      var widgetCap = parseInt($root.data('max-select-all'), 10);
+      if (!isNaN(widgetCap) && widgetCap > 0) {
+        payload.cap = widgetCap;
+      }
+      $.ajax({
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+        data: payload,
+        dataType: 'json',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      }).done(function (response) {
+        (response.results || []).forEach(function (item) {
+          if (item.disabled) {
+            return;
+          }
+          selected.add(String(item.id));
+        });
+        $scroll.find('.js-select2-checkboxes-scrollbox-tick').each(function () {
+          var $tick = $(this);
+          var $row = $tick.closest('.js-select2-checkboxes-scrollbox-row');
+          if ($row.hasClass('js-select2-checkboxes-scrollbox-row-disabled')) {
+            return;
+          }
+          var id = String($row.data('item-id'));
+          if (selected.has(id)) {
+            $tick.prop('checked', true);
+            $row.attr('aria-selected', 'true');
+          }
+        });
+        syncHiddenAndCount();
+      });
+    });
+    $clearBtn.on('click', function (e) {
+      e.preventDefault();
+      selected.clear();
+      $scroll.find('.js-select2-checkboxes-scrollbox-tick').prop('checked', false);
+      $scroll.find('.js-select2-checkboxes-scrollbox-row').attr('aria-selected', 'false');
+      syncHiddenAndCount();
+    });
+
+    // Seed initial render.
+    syncHiddenAndCount();
+    fetchPage();
+  });
+
+  // Prototype: AJAX-paginated select2, multi-select, with a checkbox
+  // beside each result in the dropdown. The dropdown stays open on
+  // selection so admins can tick multiple items without the panel
+  // snapping shut after each click. Showing a plain count in the
+  // input area ("N selected") instead of the default tag pills.
+  //
+  // Opt in with class="js-select2-checkboxes" plus the same
+  // data-endpoint / data-company-id attributes the .js-data-ajax
+  // pickers use.
+  $('.js-select2-checkboxes').each(function (i, item) {
+    var link = $(item);
+    var endpoint = link.data('endpoint');
+    var $modal = link.closest('.modal');
+    var placeholder = link.data('placeholder') || '';
+    var countLabel = link.data('count-label') || '{n} selected';
+    link.select2({
+      placeholder: placeholder,
+      allowClear: false,
+      closeOnSelect: false,
+      dropdownParent: $modal.length ? $modal : $(document.body),
+      language: $('meta[name="language"]').attr('content'),
+      dir: $('meta[name="language-direction"]').attr('content'),
+      ajax: {
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+        dataType: 'json',
+        delay: 250,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: function data(params) {
+          return {
+            search: params.term,
+            page: params.page || 1,
+            companyId: link.data('company-ids') || link.data('company-id'),
+            statusType: link.data('asset-status-type'),
+            excludeId: link.data('exclude-id'),
+            excludeIds: link.data('exclude-ids'),
+            assignedTo: link.data('assigned-to'),
+            onlyTopLevel: link.data('only-top-level')
+          };
+        },
+        cache: true
+      },
+      templateResult: function templateResult(data) {
+        // "Searching..." / "Loading..." rows have no id and must
+        // render as plain text so select2's placeholder states
+        // keep working.
+        if (!data.id) {
+          return data.text;
+        }
+        var isSelected = link.find('option[value="' + $.escapeSelector(String(data.id)) + '"]').prop('selected');
+        // formatDatalistSafe builds the image / tag-color + text
+        // markup every other picker uses. Wrap it with a leading
+        // checkbox. data-item-id lets later select2:select /
+        // select2:unselect handlers find this row by option id.
+        var $inner = formatDatalistSafe(data);
+        var $row = $('<span class="js-select2-checkboxes-row">' + '<input type="checkbox" class="js-select2-checkboxes-tick" tabindex="-1" aria-hidden="true">' + '</span>');
+        $row.attr('data-item-id', data.id);
+        $row.find('.js-select2-checkboxes-tick').prop('checked', !!isSelected);
+        // Server-side disabled rows (e.g. parent-company picker
+        // blocking child companies) get the matching disabled
+        // affordance here. select2's native click-blocking
+        // handles the actual interaction via aria-disabled on
+        // its own wrapper. This just makes the row LOOK right.
+        if (data.disabled) {
+          $row.addClass('js-select2-checkboxes-row-disabled');
+          $row.find('.js-select2-checkboxes-tick').prop('disabled', true);
+        }
+        $row.append($inner);
+        return $row;
+      },
+      templateSelection: function templateSelection() {
+        var count = (link.val() || []).length;
+        if (count === 0) {
+          return placeholder;
+        }
+        return countLabel.replace('{n}', count);
+      }
+    });
+
+    // Checkbox-multiselect looks weird with select2's default tag
+    // pills under the input: the collapsed "N selected" label is
+    // the whole point. Collapse the pill container so templateSelection
+    // sits on its own baseline.
+    link.data('select2').$selection.addClass('js-select2-checkboxes-selection');
+
+    // Badge strip rendered under the control. The input area only
+    // shows a count ("3 selected") so without this the user can't
+    // see WHICH items are selected without opening the dropdown.
+    // Each badge carries an X button that unselects the matching
+    // option in-place.
+    var $badges = $('<div class="js-select2-checkboxes-badges" aria-live="polite"></div>');
+    link.after($badges);
+
+    // Cap the badge strip so a Select-All against hundreds of
+    // options doesn't fill the viewport. First N render in full,
+    // the remainder collapse into a single "+K more" chip that
+    // opens the dropdown for review / editing.
+    var badgeCap = parseInt(link.data('badge-cap'), 10);
+    if (isNaN(badgeCap) || badgeCap <= 0) {
+      badgeCap = 10;
+    }
+    function renderBadges() {
+      $badges.empty();
+      var $options = link.find('option:selected').filter(function () {
+        return $(this).val();
+      });
+      var total = $options.length;
+      $options.slice(0, badgeCap).each(function () {
+        var $opt = $(this);
+        var text = $opt.text();
+        var tagColor = $opt.attr('data-tag-color');
+        var $badge = $('<span class="label label-light js-select2-checkboxes-badge"></span>');
+        // Tag color mirrors CompanyPresenter::formattedNameLink
+        // and the other presenter outputs: a fa-solid fa-square
+        // icon with inline `color` set to the item's tag_color.
+        // Matching the presenter's shape means any site-wide
+        // restyle of tag squares applies to the badges automatically.
+        if (tagColor) {
+          var $swatch = $('<i class="fa-solid fa-fw fa-square" aria-hidden="true"></i>');
+          $swatch.css('color', tagColor);
+          $badge.append($swatch);
+          $badge.append(' ');
+        }
+        $badge.append(document.createTextNode(text + ' '));
+        var $x = $('<button type="button" class="js-select2-checkboxes-badge-remove" aria-label=""><span aria-hidden="true">&times;</span></button>');
+        $x.attr('aria-label', 'Remove ' + text);
+        $x.attr('data-item-id', $opt.val());
+        $badge.append($x);
+        $badges.append($badge);
+        $badges.append(' ');
+      });
+      if (total > badgeCap) {
+        var remainder = total - badgeCap;
+        var moreLabel = (link.data('more-label') || '+{n} more').replace('{n}', remainder);
+        var $more = $('<button type="button" class="label label-primary js-select2-checkboxes-more"></button>');
+        $more.text(moreLabel);
+        $badges.append($more);
+      }
+    }
+    $badges.on('click', '.js-select2-checkboxes-more', function (e) {
+      e.preventDefault();
+      link.select2('open');
+    });
+    $badges.on('click', '.js-select2-checkboxes-badge-remove', function (e) {
+      e.preventDefault();
+      var id = $(this).data('item-id');
+      link.find('option[value="' + $.escapeSelector(String(id)) + '"]').prop('selected', false);
+      link.trigger('change');
+    });
+    renderBadges();
+    link.on('change', renderBadges);
+
+    // Keep the dropdown's checkbox DOM in sync with the actual
+    // selection state. templateResult only runs when a row first
+    // renders, so a subsequent click (which updates the underlying
+    // <option> but not the already-rendered row) would otherwise
+    // leave the checkbox stale.
+    function flipTickFor(id, checked) {
+      var $row = $('.select2-dropdown .js-select2-checkboxes-row[data-item-id="' + $.escapeSelector(String(id)) + '"]');
+      $row.find('.js-select2-checkboxes-tick').prop('checked', checked);
+    }
+    link.on('select2:select', function (e) {
+      if (e.params && e.params.data) {
+        flipTickFor(e.params.data.id, true);
+        // Stash tag_color on the <option> so the badge strip
+        // under the input can render a matching swatch without
+        // re-querying the API. Re-render after stashing because
+        // select2 fires `change` BEFORE `select2:select`, so
+        // the first badge pass ran without this attribute.
+        if (e.params.data.tag_color) {
+          link.find('option[value="' + $.escapeSelector(String(e.params.data.id)) + '"]').attr('data-tag-color', e.params.data.tag_color);
+          renderBadges();
+        }
+      }
+    });
+    link.on('select2:unselect', function (e) {
+      if (e.params && e.params.data) {
+        flipTickFor(e.params.data.id, false);
+      }
+    });
+
+    // Opt-in Select All. Fires a single AJAX call with ?all=1 and
+    // the current search term so the server returns every matching
+    // row in one shot (bounded by the server-side cap in
+    // Helper::paginateCollectionOrAll). Clear All fires locally.
+    //
+    // The endpoint for the picker has to opt in on its side by
+    // switching paginateCollection -> paginateCollectionOrAll.
+    // Endpoints that have not opted in simply ignore ?all=1 and
+    // return the first paginated page, which the button still
+    // handles gracefully (just adds that page's results).
+    if (!link.data('select-all')) {
+      return;
+    }
+    link.on('select2:open', function () {
+      var $dropdown = $('.select2-dropdown').last();
+
+      // Capture-phase mousedown so already-selected rows toggle
+      // off on click. select2's own result handler fires in the
+      // bubble phase; stopping propagation here keeps it from
+      // re-processing a row we just deselected. Scoped to the
+      // currently-open dropdown so one component's listener
+      // can't intercept clicks on another.
+      var dropdownEl = $dropdown[0];
+      if (dropdownEl && !dropdownEl.__cbMultiToggleBound) {
+        dropdownEl.__cbMultiToggleBound = true;
+        dropdownEl.addEventListener('mousedown', function (nativeEvent) {
+          var row = nativeEvent.target.closest('.js-select2-checkboxes-row');
+          if (!row) {
+            return;
+          }
+          if (row.classList.contains('js-select2-checkboxes-row-disabled')) {
+            return;
+          }
+          var id = row.getAttribute('data-item-id');
+          var $opt = link.find('option[value="' + $.escapeSelector(String(id)) + '"]');
+          if ($opt.prop('selected')) {
+            nativeEvent.preventDefault();
+            nativeEvent.stopPropagation();
+            $opt.prop('selected', false);
+            flipTickFor(id, false);
+            link.trigger('change');
+          }
+        }, true);
+      }
+
+      // select2's search field lives in different places depending
+      // on single vs multi: single puts it in the dropdown, multi
+      // puts it inline in the selection control. Look in both
+      // (prefer the dropdown copy when both exist, since that's the
+      // one the user types in when the panel is open).
+      var $search = $dropdown.find('.select2-search__field');
+      var $searchContainer;
+      if ($search.length) {
+        $searchContainer = $search.parent();
+      } else {
+        // Multi-select inline case. The literal parent is
+        // .select2-search--inline whose width tracks the typed
+        // text, so an absolutely-positioned clear × anchored to
+        // it slides left as the input shrinks. Anchor to the
+        // outer control instead (stable full-width box).
+        var $selection = link.data('select2').$selection;
+        $search = $selection.find('.select2-search__field');
+        $searchContainer = $selection.find('.select2-selection--multiple').first();
+        if (!$searchContainer.length) {
+          $searchContainer = $selection;
+        }
+      }
+      if ($search.length) {
+        $search.attr('placeholder', $search.attr('placeholder') || link.data('search-placeholder') || 'Search');
+      }
+      if ($search.length && !$searchContainer.find('.js-select2-checkboxes-search-clear').length) {
+        var toggleClearSearch = function toggleClearSearch() {
+          var value = $search.val();
+          $searchContainer.toggleClass('has-content', typeof value === 'string' && value.length > 0);
+        };
+        $searchContainer.addClass('js-select2-checkboxes-search-container');
+        var $clearSearch = $('<button type="button" class="js-select2-checkboxes-search-clear" aria-label="Clear search">&times;</button>');
+        $search.after($clearSearch);
+        toggleClearSearch();
+        $search.on('input', toggleClearSearch);
+        $clearSearch.on('mousedown', function (e) {
+          // mousedown rather than click so this fires before
+          // select2's own result-click handling swallows the
+          // event.
+          e.preventDefault();
+          e.stopPropagation();
+          $search.val('').trigger('input').trigger('keyup');
+          $search.focus();
+        });
+      }
+      if ($dropdown.find('.js-select2-checkboxes-actions').length) {
+        return;
+      }
+      var $actions = $('<div class="js-select2-checkboxes-actions">' + '<button type="button" class="btn btn-xs btn-default js-select2-checkboxes-selectall"></button> ' + '<button type="button" class="btn btn-xs btn-default js-select2-checkboxes-clear"></button>' + '</div>');
+      $actions.find('.js-select2-checkboxes-selectall').text(link.data('select-all-label') || 'Select all');
+      $actions.find('.js-select2-checkboxes-clear').text(link.data('clear-all-label') || 'Clear');
+      $dropdown.prepend($actions);
+      $actions.on('click', '.js-select2-checkboxes-selectall', function (e) {
+        e.preventDefault();
+        var $search = $dropdown.find('.select2-search__field');
+        var searchTerm = $search.val() || '';
+        var payload = {
+          all: 1,
+          search: searchTerm,
+          companyId: link.data('company-ids') || link.data('company-id')
+        };
+        // Per-widget ceiling via data-max-select-all. The server
+        // treats this as a suggestion that can only LOWER the
+        // effective cap, never raise it (see
+        // Helper::paginateCollectionOrAll), so a tampered DOM
+        // can't blow past MAX_UNPAGINATED.
+        var widgetCap = parseInt(link.data('max-select-all'), 10);
+        if (!isNaN(widgetCap) && widgetCap > 0) {
+          payload.cap = widgetCap;
+        }
+        $.ajax({
+          url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+          data: payload,
+          dataType: 'json',
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        }).done(function (response) {
+          (response.results || []).forEach(function (item) {
+            // Honor server-side disabled rows. The parent-
+            // company picker returns child companies with
+            // disabled: true and we must NOT silently flip
+            // them selected via Select All just because they
+            // appeared in the result set.
+            if (item.disabled) {
+              return;
+            }
+            if (link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').length === 0) {
+              link.append(new Option(item.text, item.id, true, true));
+            } else {
+              link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').prop('selected', true);
+            }
+            if (item.tag_color) {
+              link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').attr('data-tag-color', item.tag_color);
+            }
+            // Flip any already-rendered row's checkbox so the
+            // open dropdown reflects the new selection state
+            // without the user having to scroll past it to
+            // retrigger a templateResult render.
+            flipTickFor(item.id, true);
+          });
+          link.trigger('change');
+          // change already re-rendered the badges; this second
+          // pass picks up the tag_color attrs set in the loop
+          // above since change-time didn't see them yet.
+          renderBadges();
+        });
+      });
+      $actions.on('click', '.js-select2-checkboxes-clear', function (e) {
+        e.preventDefault();
+        link.val(null).trigger('change');
+        $dropdown.find('.js-select2-checkboxes-tick').prop('checked', false);
+      });
+    });
+  });
+  function getSelect2Value(element) {
+    // if the passed object is not a jquery object, assuming 'element' is a selector
+    if (!(element instanceof jQuery)) element = $(element);
+    var select = element.data("select2");
+
+    // There's two different locations where the select2-generated input element can be. 
+    searchElement = select.dropdown.$search || select.$container.find(".select2-search__field");
+    var value = searchElement.val();
+    return value;
+  }
+  $(".select2-hidden-accessible").on('select2:selecting', function (e) {
+    var data = e.params.args.data;
+    var isMouseUp = false;
+    var element = $(this);
+    var value = getSelect2Value(element);
+    if (e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
+
+    // if selected item does not match typed text, do not allow it to pass - force close for ajax.
+    if (!isMouseUp) {
+      if (value.toLowerCase() && data.text.toLowerCase().indexOf(value) < 0) {
+        e.preventDefault();
+        element.select2('close');
+
+        // if it does match, we set a flag in the event (which gets passed to subsequent events), telling it not to worry about the ajax
+      } else if (value.toLowerCase() && data.text.toLowerCase().indexOf(value) > -1) {
+        e.params.args.noForceAjax = true;
+      }
+    }
+  });
+  $(".select2-hidden-accessible").on('select2:closing', function (e) {
+    var element = $(this);
+    var value = getSelect2Value(element);
+    var noForceAjax = false;
+    var isMouseUp = false;
+    if (e.params.args.originalSelect2Event) noForceAjax = e.params.args.originalSelect2Event.noForceAjax;
+    if (e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
+    if (value && !noForceAjax && !isMouseUp) {
+      var endpoint = element.data("endpoint");
+      var statusType = element.data("asset-status-type");
+      $.ajax({
+        url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search=' + value + '&page=1' + (statusType ? '&statusType=' + statusType : ''),
+        dataType: 'json',
+        headers: {
+          "X-Requested-With": 'XMLHttpRequest',
+          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        }
+      }).done(function (response) {
+        var currentlySelected = element.select2('data').map(function (x) {
+          return +x.id;
+        }).filter(function (x) {
+          return x !== 0;
+        });
+
+        // makes sure we're not selecting the same thing twice for multiples
+        var filteredResponse = response.results.filter(function (item) {
+          return currentlySelected.indexOf(+item.id) < 0;
+        });
+        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.results[0];
+        if (first && first.id) {
+          first.selected = true;
+          if ($("option[value='" + first.id + "']", element).length < 1) {
+            var option = new Option(first.text, first.id, true, true);
+            element.append(option);
+          } else {
+            var isMultiple = element.attr("multiple") == "multiple";
+            element.val(isMultiple ? element.val().concat(first.id) : element.val(first.id));
+          }
+          element.trigger('change');
+          element.trigger({
+            type: 'select2:select',
+            params: {
+              data: first
+            }
+          });
+        }
+      });
+    }
+  });
+  function formatDatalist(datalist) {
+    var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+    if (datalist.loading) {
+      return loading_markup;
+    }
+    var markup = '<div class="clearfix">';
+    markup += '<div class="pull-left" style="padding-right: 10px;">';
+    if (datalist.image) {
+      markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;' alt='" + datalist.text + "'></div>";
+    } else {
+      markup += '<div style="height: 20px; width: 30px;"></div>';
+    }
+    markup += "</div><div>" + datalist.text + "</div>";
+    markup += "</div>";
+    return markup;
+  }
+  function formatDatalistSafe(datalist) {
+    if (datalist.loading) {
+      return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+    }
+    var root_div = $("<div class='clearfix'>");
+    var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
+    if (datalist.image) {
+      var inner_div = $("<div style='width: 20px;'>");
+      /******************************************************************
+       *
+       * We are specifically chosing empty alt-text below, because this
+       * image conveys no additional information, relative to the text
+       * that will *always* be there in any select2 list that is in use
+       * in Snipe-IT. If that changes, we would probably want to change
+       * some signatures of some functions, but right now, we don't want
+       * screen readers to say "HP SuperJet 5000, .... picture of HP
+       * SuperJet 5000..." and so on, for every single row in a list of
+       * assets or models or whatever.
+       *
+       *******************************************************************/
+      var img = $("<img src='' style='max-height: 20px; max-width: 20px;' alt=''>");
+      img.attr("src", datalist.image);
+      inner_div.append(img);
+    } else if (datalist.tag_color) {
+      var inner_div = $("<div style='width: 20px;'>");
+      var icon = $('<i class="fa-solid fa-square" style="font-size: 20px;" aria-hidden="true"></i>');
+      icon.css("color", datalist.tag_color);
+      inner_div.append(icon);
+    } else {
+      var inner_div = $("<div style='height: 20px; width: 20px;'></div>");
+    }
+    left_pull.append(inner_div);
+    root_div.append(left_pull);
+    var name_div = $("<div>");
+    name_div.text(datalist.text);
+    root_div.append(name_div);
+    var safe_html = root_div.get(0).outerHTML;
+    var old_html = formatDatalist(datalist);
+    if (safe_html != old_html) {
+      //console.log("HTML MISMATCH: ");
+      //console.log("FormatDatalistSafe: ");
+      // console.dir(root_div.get(0));
+      //console.log(safe_html);
+      //console.log("FormatDataList: ");
+      //console.log(old_html);
+    }
+    return root_div;
+  }
+  function formatDataSelection(datalist) {
+    // This a heinous workaround for a known bug in Select2.
+    // Without this, the rich selectlists are vulnerable to XSS.
+    // Many thanks to @uberbrady for this fix. It ain't pretty,
+    // but it resolves the issue until Select2 addresses it on their end.
+    //
+    // Bug was reported in 2016 :{
+    // https://github.com/select2/select2/issues/4587
+
+    return datalist.text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+
+  // This handles the radio button selectors for the checkout-to-foo options
+  // on asset checkout and also on asset edit
+  $(function () {
+    var checkoutToTypeInputs = $('input[name=checkout_to_type]');
+    if (!checkoutToTypeInputs.length) {
+      return;
+    }
+    function syncCheckoutToTypeUi(resetSelections) {
+      var assignto_type = $('input[name=checkout_to_type]:checked').val();
+      var userid = $('#assigned_user option:selected').val();
+      if (assignto_type == 'asset') {
+        $('#current_assets_box').fadeOut();
+        $('#assigned_asset').show();
+        $('#assigned_user').hide();
+        $('#assigned_location').hide();
+        $('.notification-callout').fadeOut();
+        if (resetSelections) {
+          $('[name="assigned_location"]').val('').trigger('change.select2');
+          $('[name="assigned_user"]').val('').trigger('change.select2');
+        }
+      } else if (assignto_type == 'location') {
+        $('#current_assets_box').fadeOut();
+        $('#assigned_asset').hide();
+        $('#assigned_user').hide();
+        $('#assigned_location').show();
+        $('.notification-callout').fadeOut();
+        if (resetSelections) {
+          $('[name="assigned_asset"]').val('').trigger('change.select2');
+          $('[name="assigned_user"]').val('').trigger('change.select2');
+        }
+      } else {
+        $('#assigned_asset').hide();
+        $('#assigned_user').show();
+        $('#assigned_location').hide();
+        if (userid) {
+          $('#current_assets_box').fadeIn();
+        }
+        $('.notification-callout').fadeIn();
+        if (resetSelections) {
+          $('[name="assigned_asset"]').val('').trigger('change.select2');
+          $('[name="assigned_location"]').val('').trigger('change.select2');
+        }
+      }
+    }
+    checkoutToTypeInputs.on('change', function () {
+      syncCheckoutToTypeUi(true);
+    });
+
+    // Expose so pages that reveal #assignto_selector later (asset edit's
+    // user_add() flow, etc.) can trigger the sync once the selector is
+    // visible. Standalone checkout pages don't need to call this — the
+    // initial-render block below handles them.
+    window.snipeitSyncCheckoutToTypeUi = syncCheckoutToTypeUi;
+
+    // Apply the current radio selection on initial render unless the page
+    // has explicitly hidden the selector via an inline style="display:none"
+    // (asset create/edit start that way and reveal it from user_add() after
+    // a deployability AJAX call). Using getAttribute('style') instead of
+    // jQuery's :visible avoids false negatives on pages like the standalone
+    // /hardware/{id}/checkout, where the selector is visible from the start
+    // but :visible can transiently return false during select2 boot — that
+    // was what hid the acceptance-options callout until a radio was toggled.
+    var selectorStyle = ($('#assignto_selector').attr('style') || '').toLowerCase();
+    if (selectorStyle.indexOf('display:none') === -1 && selectorStyle.indexOf('display: none') === -1) {
+      syncCheckoutToTypeUi(false);
+    }
+  });
+
+  // ------------------------------------------------
+  // Deep linking for Bootstrap tabs
+  // ------------------------------------------------
+  var taburl = document.location.toString();
+
+  // Allow full page URL to activate a tab's ID
+  // ------------------------------------------------
+  // This allows linking to a tab on page load via the address bar.
+  // So a URL such as, http://snipe-it.local/hardware/2/#my_tab will
+  // cause the tab on that page with an ID of “my_tab” to be active.
+  if (taburl.match('#')) {
+    $('.nav-tabs a[href="#' + taburl.split('#')[1] + '"]').tab('show');
+  }
+
+  // Allow internal page links to activate a tab's ID.
+  // ------------------------------------------------
+  // This allows you to link to a tab from anywhere on the page
+  // including from within another tab. Also note that internal page
+  // links either inside or out of the tabs need to include data-toggle="tab"
+  // Ex: <a href="#my_tab" data-toggle="tab">Click me</a>
+  $('a[data-toggle="tab"]').click(function (e) {
+    var href = $(this).attr("href");
+    history.pushState(null, null, href);
+    e.preventDefault();
+    $('a[href="' + $(this).attr('href') + '"]').tab('show');
+  });
+
+  // Tables inside a hidden tab pane initialize with a zero-width
+  // container, so their column widths and any sticky-column offsets
+  // computed from those widths never recover on their own once the
+  // pane becomes visible. Force a resetView on any snipe-tables
+  // inside the newly-shown pane so column widths + sticky offsets
+  // re-measure against the now-visible container.
+  $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+    var pane = $(e.target).attr('href');
+    if (!pane) return;
+    $(pane).find('.snipe-table').each(function () {
+      if ($(this).data('bootstrap.table')) {
+        $(this).bootstrapTable('resetView');
+      }
+    });
+  });
+
+  /*
+   * Conditional field visibility for schema-driven forms.
+   *
+   * Any element carrying data-visible-when-field and data-visible-when-value
+   * (comma-separated for multi-value) is shown when the source field's
+   * current value matches, hidden otherwise. Powers the auth-method
+   * show/hide on the sync-adapter credentials pages so the Basic Auth
+   * inputs don't render when the admin picked Bearer, etc. Fully
+   * data-attribute driven, no per-partial JS required.
+   */
+  function applyAdapterConditionalVisibility() {
+    document.querySelectorAll('[data-visible-when-field]').forEach(function (target) {
+      var sourceName = target.getAttribute('data-visible-when-field');
+      var acceptedValues = String(target.getAttribute('data-visible-when-value') || '').split(',');
+      var source = document.querySelector('[name="' + sourceName + '"]');
+      if (!source) return;
+      target.style.display = acceptedValues.indexOf(source.value) !== -1 ? '' : 'none';
+    });
+  }
+
+  // Bind change listeners against the unique set of source-field names
+  // referenced by any conditional target on the page. jQuery here
+  // because select2 forwards change events through jQuery, so plain
+  // addEventListener would miss the auth-method dropdown's own picks.
+  var __adapterConditionalSources = {};
+  document.querySelectorAll('[data-visible-when-field]').forEach(function (target) {
+    __adapterConditionalSources[target.getAttribute('data-visible-when-field')] = true;
+  });
+  Object.keys(__adapterConditionalSources).forEach(function (name) {
+    $('[name="' + name + '"]').on('change', applyAdapterConditionalVisibility);
+  });
+  applyAdapterConditionalVisibility();
+  // Re-apply after a tab becomes visible. select2 sizing and hidden-
+  // tab state can leave the initial pass stale on tabs the admin
+  // hadn't clicked yet.
+  $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', applyAdapterConditionalVisibility);
+
+  /*
+   * Live-update the "Base URL:" prefix addon on any pull_path /
+   * push_path input for custom sync adapters as the admin types into the
+   * Base URL input.
+   * Each addon carries data-adapter-slug so multiple adapter tabs
+   * update independently, and data-placeholder holds the "Base URL:"
+   * fallback text the server rendered when the URL was blank on
+   * first load (so localizers only touch a lang file, not this JS).
+   */
+  document.querySelectorAll('.js-adapter-url-prefix').forEach(function (addon) {
+    var slug = addon.getAttribute('data-adapter-slug');
+    if (!slug) return;
+    var input = document.querySelector('input[name="' + slug + '_url"]');
+    if (!input) return;
+    var placeholder = addon.getAttribute('data-placeholder') || '';
+    input.addEventListener('input', function () {
+      addon.textContent = input.value || placeholder;
+    });
+  });
+
+  /*
+   * Inline refresh for sync-adapter remote-sourced selects.
+   *
+   * A select field whose schema declares refresh_route_name +
+   * depends_on gets a .js-sync-adapter-refresh-select button
+   * next to it. The admin fills the dependent fields (URL + API key
+   * for UniFi, etc.), clicks the button, and the vendor's list of
+   * valid values populates the select without a page save/reload.
+   * Lets a brand-new adapter discover its tenant / site / workspace
+   * before anything is persisted.
+   *
+   * Button attributes:
+   *   data-refresh-endpoint — POST URL that returns JSON
+   *   data-target-field     — name attribute of the select to repopulate
+   *   data-depends-on       — JSON {payloadKey: siblingFieldName} map
+   *   data-response-key     — JSON key under which the server returns
+   *                           the array of {id, label} entries
+   */
+  document.querySelectorAll('.js-sync-adapter-refresh-select').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      var endpoint = btn.getAttribute('data-refresh-endpoint');
+      var targetField = btn.getAttribute('data-target-field');
+      var responseKey = btn.getAttribute('data-response-key') || 'items';
+      var dependsOn = {};
+      try {
+        dependsOn = JSON.parse(btn.getAttribute('data-depends-on') || '{}');
+      } catch (err) {
+        dependsOn = {};
+      }
+      var payload = {};
+      Object.keys(dependsOn).forEach(function (payloadKey) {
+        var siblingName = dependsOn[payloadKey];
+        var $el = $('[name="' + siblingName + '"]');
+        if ($el.length) {
+          payload[payloadKey] = $el.val();
+        }
+      });
+      var $icon = $(btn).find('i');
+      var originalClass = $icon.attr('class');
+      $icon.attr('class', 'fa-solid fa-spinner fa-spin');
+      btn.disabled = true;
+      $.ajax({
+        url: endpoint,
+        method: 'POST',
+        data: payload,
+        dataType: 'json',
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      }).done(function (response) {
+        var $select = $('[name="' + targetField + '"]');
+        var currentVal = $select.val();
+        var items = response && response[responseKey] || [];
+        $select.find('option').remove();
+        items.forEach(function (item) {
+          $select.append(new Option(item.label, item.id));
+        });
+        if (currentVal && $select.find('option[value="' + currentVal + '"]').length) {
+          $select.val(currentVal);
+        }
+        $select.trigger('change');
+      }).fail(function (xhr) {
+        var msg = xhr && xhr.responseJSON && xhr.responseJSON.error || 'Refresh failed';
+        window.alert(msg);
+      }).always(function () {
+        $icon.attr('class', originalClass);
+        btn.disabled = false;
+      });
+    });
+  });
+
+  /*
+   * Pull Now / Push Now submit spinner + double-click guard.
+   *
+   * Any <form class="js-sync-action-form"> gets a submit handler
+   * that swaps the cloud icon on its <button.js-sync-action-button>
+   * for a spinner and disables every sync-action button on the
+   * page. Admins with slower fleets don't panic-click while the
+   * request is in flight, and they can't fire Push while Pull is
+   * running on the same instance.
+   */
+  document.querySelectorAll('form.js-sync-action-form').forEach(function (form) {
+    form.addEventListener('submit', function () {
+      var btn = form.querySelector('button.js-sync-action-button');
+      if (!btn || btn.disabled) return;
+      var icon = btn.querySelector('.js-sync-action-icon');
+      if (icon) {
+        icon.className = 'fa-solid fa-spinner fa-spin js-sync-action-icon';
+      }
+      btn.disabled = true;
+      document.querySelectorAll('button.js-sync-action-button').forEach(function (other) {
+        other.disabled = true;
+      });
+    });
+  });
+
+  /*
+   * Generic dirty-form guard.
+   *
+   * Any <form data-dirty-guard id="my-form"> is watched for changes.
+   * Any element (usually a button) elsewhere on the page carrying
+   * data-dirty-guarded-by="my-form" gets disabled while the form is
+   * dirty and re-enabled when the values revert to the initial
+   * snapshot. Useful anywhere the page has an "act on saved state"
+   * control that would silently run against the OLD state if
+   * clicked with pending edits (sync-adapter Pull/Push, etc)
+   *
+   * Attributes:
+   *   - data-dirty-guard              (form) opt-in marker
+   *   - data-dirty-guard-warning      (form, optional) tooltip text
+   *                                   set on guarded buttons when
+   *                                   they are disabled by this
+   *                                   guard. Defaults to a generic
+   *                                   "Save your changes first"
+   *                                   English fallback so a caller
+   *                                   that forgets to localize still
+   *                                   gets a usable hint.
+   *   - data-dirty-guarded-by="{id}"  (button/element) declares
+   *                                   which form it's guarded by,
+   *                                   matched against the form's id.
+   *
+   * The guard only touches buttons that were enabled server-side.
+   * A data-dirty-guard-disabled marker on the button records OUR
+   * override so a revert re-enables only what we disabled, leaving
+   * server-side `disabled` attributes intact.
+   */
+  document.querySelectorAll('form[data-dirty-guard]').forEach(function (form) {
+    var formId = form.id;
+    if (!formId) return;
+    var warning = form.getAttribute('data-dirty-guard-warning') || 'Save your changes first.';
+    function findGuardedElements() {
+      return document.querySelectorAll('[data-dirty-guarded-by="' + formId + '"]');
+    }
+    function serialize() {
+      // FormData enumerates named inputs as they currently sit,
+      // so this catches select changes, textarea edits, and any
+      // input-event that fires. Sort by key for stability across
+      // browsers that iterate FormData in insertion order vs
+      // document order.
+      var entries = [];
+      new FormData(form).forEach(function (v, k) {
+        entries.push(k + '\0' + v);
+      });
+      entries.sort();
+      return entries.join('\n');
+    }
+
+    // Defer the initial snapshot to next tick so any init-time
+    // form mutations (select2 syncing hidden values, custom
+    // widgets, dynamic show/hide picking initial visibility) have
+    // settled before we lock in the baseline.
+    var initialState = null;
+    setTimeout(function () {
+      initialState = serialize();
+    }, 0);
+    var currentlyDirty = false;
+    function reevaluate() {
+      if (initialState === null) return;
+      var nowDirty = serialize() !== initialState;
+      if (nowDirty === currentlyDirty) return;
+      currentlyDirty = nowDirty;
+      findGuardedElements().forEach(function (el) {
+        if (nowDirty) {
+          if (!el.disabled) {
+            el.disabled = true;
+            el.setAttribute('data-dirty-guard-disabled', '1');
+            el.setAttribute('title', warning);
+          }
+        } else if (el.getAttribute('data-dirty-guard-disabled') === '1') {
+          el.disabled = false;
+          el.removeAttribute('data-dirty-guard-disabled');
+          el.removeAttribute('title');
+        }
+      });
+    }
+    form.addEventListener('input', reevaluate);
+    form.addEventListener('change', reevaluate);
+  });
+
+  /*
+   * Breadcrumb tab-label append.
+   *
+   * Any <a data-toggle="tab" data-breadcrumb-label="Fleet"> extends
+   * the page's breadcrumb trail with its label as a leaf crumb when
+   * that tab is active. The first time a label is appended, the
+   * previously-active leaf gets converted to a link back to the
+   * current pathname (no query string) so admins can click back to
+   * the "no tab selected" default. Non-labeled tabs restore the
+   * server-rendered leaf.
+   *
+   * Opt in on any page by adding the attribute to individual tab
+   * links. Pages with no labeled tabs skip the handler entirely.
+   */
+  if (document.querySelector('[data-toggle="tab"][data-breadcrumb-label]')) {
+    var breadcrumbLeaf = document.querySelector('.content-header .breadcrumb-item.active');
+    if (breadcrumbLeaf) {
+      var breadcrumbBaseText = breadcrumbLeaf.textContent.trim();
+      var breadcrumbBasePath = window.location.pathname;
+      var breadcrumbAppendedLeaf = null;
+      var setBreadcrumbTabLeaf = function setBreadcrumbTabLeaf(label) {
+        if (!label) {
+          if (breadcrumbAppendedLeaf) {
+            breadcrumbAppendedLeaf.remove();
+            breadcrumbAppendedLeaf = null;
+            breadcrumbLeaf.innerHTML = '';
+            breadcrumbLeaf.textContent = breadcrumbBaseText;
+            breadcrumbLeaf.classList.add('active');
+          }
+          return;
+        }
+        if (!breadcrumbAppendedLeaf) {
+          breadcrumbLeaf.classList.remove('active');
+          breadcrumbLeaf.innerHTML = '';
+          var link = document.createElement('a');
+          link.href = breadcrumbBasePath;
+          link.textContent = breadcrumbBaseText;
+          var chevron = document.createElement('i');
+          chevron.className = 'fa fa-angle-right';
+          breadcrumbLeaf.append(link, ' ', chevron);
+          breadcrumbAppendedLeaf = document.createElement('li');
+          breadcrumbAppendedLeaf.className = 'breadcrumb-item active';
+          breadcrumbLeaf.parentNode.appendChild(breadcrumbAppendedLeaf);
+        }
+        breadcrumbAppendedLeaf.textContent = label;
+      };
+      var initialLabeledActive = document.querySelector('li.active > [data-toggle="tab"][data-breadcrumb-label]');
+      if (initialLabeledActive) {
+        setBreadcrumbTabLeaf(initialLabeledActive.getAttribute('data-breadcrumb-label'));
+      }
+      document.querySelectorAll('[data-toggle="tab"]').forEach(function (tab) {
+        $(tab).on('shown.bs.tab', function (e) {
+          setBreadcrumbTabLeaf(e.target.getAttribute('data-breadcrumb-label'));
+        });
+      });
+    }
+  }
+
+  // Same story for viewport resizes: bootstrap-table caches column
+  // widths from the initial layout and doesn't recompute when the
+  // window width changes. Debounce so a drag-resize doesn't fire
+  // resetView on every intermediate pixel.
+  var snipeTableResizeTimer;
+  $(window).on('resize', function () {
+    clearTimeout(snipeTableResizeTimer);
+    snipeTableResizeTimer = setTimeout(function () {
+      $('.snipe-table').each(function () {
+        if ($(this).data('bootstrap.table')) {
+          $(this).bootstrapTable('resetView');
+        }
+      });
+    }, 150);
+  });
+
+  // ------------------------------------------------
+  // End Deep Linking for Bootstrap tabs
+  // ------------------------------------------------
+
+  // Image preview
+  function readURL(input, $preview) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $preview.attr('src', e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + " Bytes";else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + " KB";else if (bytes < 1073741824) return (bytes / 1048576).toFixed(2) + " MB";else return (bytes / 1073741824).toFixed(2) + " GB";
+  }
+
+  // File size validation
+  $('.js-uploadFile').bind('change', function () {
+    var $this = $(this);
+    var id = '#' + $this.attr('id');
+    var status = id + '-status';
+    var $status = $(status);
+    var delete_id = $(id + '-deleteCheckbox');
+    var preview_container = $(id + '-previewContainer');
+    $status.removeClass('text-success').removeClass('text-danger');
+    $(status + ' .goodfile').remove();
+    $(status + ' .badfile').remove();
+    $(status + ' .previewSize').hide();
+    preview_container.hide();
+    $(id + '-info').html('');
+    var max_size = $this.data('maxsize');
+    var total_size = 0;
+    for (var i = 0; i < this.files.length; i++) {
+      total_size += this.files[i].size;
+      $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
+    }
+    if (total_size > max_size) {
+      $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
+    } else {
+      $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
+      var $preview = $(id + '-imagePreview');
+      readURL(this, $preview);
+      $preview.fadeIn();
+      preview_container.fadeIn();
+      delete_id.hide();
+    }
+  });
+});
+function htmlEntities(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+/**
+ * Toggle disabled
+ */
+(function ($) {
+  $.fn.toggleDisabled = function (callback) {
+    return this.each(function () {
+      var disabled,
+        $this = $(this);
+      if ($this.attr('disabled')) {
+        $this.removeAttr('disabled');
+        disabled = false;
+      } else {
+        $this.attr('disabled', 'disabled');
+        disabled = true;
+      }
+      if (callback && typeof callback === 'function') {
+        callback(this, disabled);
+      }
+    });
+  };
+})(jQuery);
+$(document).ready(function () {
+  // Password-reveal eye. data-toggle is a jQuery selector — usually one
+  // input id, but a multi-selector like "#password, #password_confirm"
+  // lets a single click flip every matched input at once (the confirm
+  // field on the user create/edit form uses this so revealing the
+  // password reveals its confirmation too). Every .toggle-password
+  // sharing the same data-toggle string flips its icon together so the
+  // eye state doesn't visually drift between the two addons.
+  $(document).on('click', '.toggle-password', function () {
+    var toggleTarget = $(this).attr('data-toggle');
+    var $inputs = $(toggleTarget);
+    var reveal = $inputs.first().attr('type') === 'password';
+    $inputs.attr('type', reveal ? 'text' : 'password');
+    var $eyes = $('.toggle-password[data-toggle="' + toggleTarget + '"]');
+    $eyes.toggleClass('fa-eye', !reveal);
+    $eyes.toggleClass('fa-eye-slash', reveal);
+  });
+
+  // Auto-init eonasdan datetimepickers. bootstrap-datepicker has a native
+  // data-provide auto-init. eonasdan does not, so we do it ourselves.
+  // Options are read from data-attributes on the wrapper so blade components
+  // can tune format/side-by-side without touching this JS.
+  //
+  // Icon set is overridden to Font Awesome — the picker defaults to
+  // Glyphicon classes, which we do not ship, so up/down arrows and clock
+  // glyphs would otherwise render as empty boxes.
+  // Exposed so callers who insert new [data-provide="datetimepicker"]
+  // wrappers into the DOM post-load (e.g., AJAX-loaded custom fields on
+  // asset create/edit when the model changes) can re-run the init on the
+  // freshly-inserted elements. Pass a jQuery scope to narrow the search;
+  // omit to init every uninitialised picker on the page.
+  window.snipeitInitDatetimepickers = function (scope) {
+    var $targets = scope ? $(scope).find('[data-provide="datetimepicker"]') : $('[data-provide="datetimepicker"]');
+    $targets.each(initDatetimepicker);
+  };
+  function initDatetimepicker() {
+    var $wrapper = $(this);
+    // Skip if this wrapper already has an eonasdan instance attached
+    // (data('DateTimePicker') is set by the library on init).
+    if ($wrapper.data('DateTimePicker')) {
+      return;
+    }
+    var $input = $wrapper.find('input');
+    var existingValue = ($input.val() || '').trim();
+    var options = {
+      format: $wrapper.data('format') || 'YYYY-MM-DD HH:mm:ss',
+      // Default to the compact (collapsed) view — calendar shows first
+      // and a small clock icon toggles the time view. Callers that want
+      // date + time visible side by side can set data-side-by-side="true".
+      sideBySide: $wrapper.data('side-by-side') === true,
+      showClear: true,
+      showClose: true,
+      showTodayButton: true,
+      // In sideBySide mode the toolbar row (Today/Clear/Close) is only
+      // rendered when placement is explicitly 'top' or 'bottom'; the
+      // library drops it entirely on the default 'default' placement.
+      toolbarPlacement: 'bottom',
+      // Open the popup on any focus/click of the input (not just the
+      // calendar addon icon), matching the behavior of the bootstrap
+      // datepicker used elsewhere in the app.
+      allowInputToggle: true,
+      locale: $wrapper.data('locale') || 'en',
+      icons: {
+        time: 'fa-regular fa-clock',
+        date: 'fa-regular fa-calendar',
+        up: 'fa-solid fa-chevron-up',
+        down: 'fa-solid fa-chevron-down',
+        previous: 'fa-solid fa-chevron-left',
+        next: 'fa-solid fa-chevron-right',
+        today: 'fa-solid fa-calendar-day',
+        clear: 'fa-solid fa-trash',
+        close: 'fa-solid fa-xmark'
+      }
+    };
+
+    // Pre-fill empty inputs with the user's current local datetime by
+    // default. Callers that render a picker where "now" is NOT a safe
+    // default (e.g., user-defined custom fields) can opt out by setting
+    // data-default-now="false" on the wrapper.
+    var wantsDefaultNow = $wrapper.data('default-now') !== false;
+    if (existingValue === '' && wantsDefaultNow) {
+      options.defaultDate = moment();
+    }
+
+    // data-max-date="today" caps the picker at today (replaces the
+    // bootstrap-datepicker era's data-date-end-date="0d"); any other
+    // value is parsed as a moment-compatible date string.
+    var maxDate = $wrapper.data('max-date');
+    if (maxDate) {
+      options.maxDate = maxDate === 'today' ? moment().endOf('day') : moment(maxDate);
+    }
+    $wrapper.datetimepicker(options);
+  }
+
+  // Wires up the linked-pickers pattern for <x-input.date-range>. Each
+  // .js-date-range wrapper holds a .js-date-range-start and .js-date-range-end
+  // datetimepicker; changing one bounds the other so a user can't pick an
+  // end date before the start (or vice versa). Runs after the plain
+  // datetimepicker init above so both instances already exist.
+  function initDateRangeLinking() {
+    $('.js-date-range').each(function () {
+      var $start = $(this).find('.js-date-range-start');
+      var $end = $(this).find('.js-date-range-end');
+      if (!$start.length || !$end.length) {
+        return;
+      }
+      $start.off('dp.change.snipeitDateRange').on('dp.change.snipeitDateRange', function (e) {
+        var picker = $end.data('DateTimePicker');
+        if (picker) {
+          picker.minDate(e.date);
+        }
+      });
+      $end.off('dp.change.snipeitDateRange').on('dp.change.snipeitDateRange', function (e) {
+        var picker = $start.data('DateTimePicker');
+        if (picker) {
+          picker.maxDate(e.date);
+        }
+      });
+    });
+  }
+
+  // Push the app's "week starts on" setting into moment's active locale so
+  // the eonasdan datetimepicker (which reads firstDayOfWeek from moment
+  // locale data, not from its own options) opens with the calendar column
+  // order the admin picked in Localization settings. Runs once before any
+  // picker is initialized; downstream code that formats using moment's w/W
+  // tokens will pick up the same value.
+  if (window.snipeit && window.snipeit.settings && typeof window.snipeit.settings.first_day_of_week === 'number') {
+    moment.updateLocale(moment.locale(), {
+      week: {
+        dow: window.snipeit.settings.first_day_of_week
+      }
+    });
+  }
+
+  // MAC-address input mask. Custom fields with format=MAC render as
+  // plain text inputs; without a mask the user only discovers the
+  // required colon-separated shape (see \App\Rules\MacEncrypted)
+  // after a failed submit. The mask strips every non-hex character
+  // on input, uppercases A-F, and re-inserts a colon after every
+  // second character, so common paste shapes (hyphen-separated from
+  // Windows ipconfig, Cisco-dotted aabb.ccdd.eeff, bare hex,
+  // space-separated) all normalize to the canonical AA:BB:CC:DD:EE:FF
+  // form the backend expects.
+  //
+  // Exposed on window (matching snipeitInitDatetimepickers above) so
+  // the asset edit form's AJAX custom-fields-reload handler can
+  // re-init the mask on inputs that only exist after the model
+  // changes and a fresh custom_fields_form.blade.php partial is
+  // swapped into place. Pass a jQuery selector or DOM node to narrow
+  // the scope; omit to init every .mac-address-input on the page.
+  //
+  // The .mac-address-input class is applied in resources/views/models/
+  // custom_fields_form.blade.php on both text-input branches
+  // (format-icon wrapper AND bare input) when $field->format === 'MAC'.
+  window.snipeitInitMacAddressMask = function (scope) {
+    var $targets = scope ? $(scope).find('.mac-address-input') : $('.mac-address-input');
+    $targets.off('input.snipeitMacMask').on('input.snipeitMacMask', function () {
+      var _hex$match;
+      // Trim leading/trailing whitespace first so a paste like
+      // "  AA:BB:CC:DD:EE:FF\n" from a spreadsheet cell doesn't
+      // eat one of the trailing hex chars into the substring cap.
+      var hex = this.value.trim().toUpperCase().replace(/[^0-9A-F]/g, '').substring(0, 12);
+      this.value = ((_hex$match = hex.match(/.{1,2}/g)) === null || _hex$match === void 0 ? void 0 : _hex$match.join(':')) || '';
+    });
+  };
+  window.snipeitInitDatetimepickers();
+  initDateRangeLinking();
+  window.snipeitInitMacAddressMask();
+});
+
+/**
+ * Universal Livewire Select2 integration
+ *
+ * How to use:
+ *
+ * 1. Set the class of your select2 elements to 'livewire-select2').
+ * 2. Name your element to match a property in your Livewire component
+ * 3. Add an attribute called 'data-livewire-component' that points to $this->getId() (via `{{ }}` if you're in a blade,
+ *    or just $this->getId() if not).
+ */
+// Any livewire-select2 that lives inside a Bootstrap 3 modal has to be
+// initialized with dropdownParent set to the modal, or the search input
+// gets appended to <body> where Bootstrap 3's modal enforceFocus handler
+// immediately steals focus away from it - the dropdown opens, the search
+// field renders, but typing does nothing because focus keeps snapping
+// back into the modal on every keydown. Elements not in a modal get a
+// plain init. Callers with fussier requirements (custom width, template,
+// etc.) can still init select2 manually; this handler only touches
+// elements that don't already have select2 wired up (guarded by the
+// .select2-hidden-accessible class select2 adds after init).
+function initLivewireSelect2($scope) {
+  var $root = $scope && $scope.length ? $scope : $(document);
+  $root.find('.livewire-select2').each(function () {
+    var $el = $(this);
+    if ($el.hasClass('select2-hidden-accessible')) {
+      return;
+    }
+    var opts = {};
+    var $modal = $el.closest('.modal');
+    if ($modal.length) {
+      opts.dropdownParent = $modal;
+    }
+    $el.select2(opts);
+  });
+}
+document.addEventListener('livewire:init', function () {
+  initLivewireSelect2();
+  $(document).on('select2:select', '.livewire-select2', function (event) {
+    var target = $(event.target);
+    if (!event.target.name || !target.data('livewire-component')) {
+      console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your Livewire-ed select2 elements!");
+      console.error("For data-livewire-component, you probably want to use $this->getId() or {{ $this->getId() }}, as appropriate");
+      return false;
+    }
+    // PHP property names cannot start with a digit — skip bare numeric names (e.g. "0") that would cause a 500
+    if (/^\d+$/.test(event.target.name)) {
+      console.error("Livewire select2: name attribute '" + event.target.name + "' is not a valid Livewire property name — skipping");
+      return false;
+    }
+    Livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value);
+  });
+  Livewire.interceptMessage(function (_ref) {
+    var onFinish = _ref.onFinish;
+    onFinish(function () {
+      // Runs after DOM morph completes (or on error/cancel). Livewire
+      // replaces the plain <select> nodes on morph, so a re-init picks
+      // up any that lost their select2 wrapper in the swap. The
+      // already-init guard inside initLivewireSelect2 keeps unchanged
+      // elements untouched.
+      queueMicrotask(function () {
+        initLivewireSelect2();
+      });
+    });
+  });
+});
+
+// Check/Uncheck all radio buttons in the permissions group
+$('.header-row input:radio').change(function () {
+  value = $(this).attr('value');
+  area = $(this).data('checker-group');
+  $('.radiochecker-' + area + '[value=' + value + ']').prop('checked', true);
+});
+
+// Generic toggleable callouts with remember state
+$(".remember-toggle").on("click", function () {
+  var toggleable_callout_id = $(this).attr('id');
+  var toggle_content_class = 'toggle-content-' + $(this).attr('id');
+  var toggle_arrow = '#toggle-arrow-' + toggleable_callout_id;
+  var toggle_cookie_name = 'toggle_state_' + toggleable_callout_id;
+  $('.' + toggle_content_class).fadeToggle(100);
+  $(toggle_arrow).toggleClass('fa-caret-right fa-caret-down');
+  var toggle_open = $(toggle_arrow).hasClass('fa-caret-down');
+  document.cookie = toggle_cookie_name + "=" + toggle_open + ';path=/';
+});
+var all_cookies = document.cookie.split(';');
+for (var i in all_cookies) {
+  var trimmed_cookie = all_cookies[i].trim(' ');
+  elems = trimmed_cookie.split('=', 2);
+
+  // We have to do more here since we don't know the name of the selector
+  if (trimmed_cookie.startsWith('toggle_state_')) {
+    var toggle_selector_name = elems[0].replace('toggle_state_', '');
+    if (elems[1] != "true") {
+      $('#' + toggle_selector_name + '.remember-toggle').trigger('click');
+    }
+  }
+}
+
+/**
+ * This handles the show/hide of superuser and admin specific permissions
+ * on the group edit and user edit pages
+ */
+if ($("#superuser_allow").is(':checked')) {
+  // Hide here instead of fadeout on pageload to prevent what looks like Flash Of Unstyled Content (FOUC)
+  $(".nonsuperuser").hide();
+  $(".nonsuperuser").attr('display', 'none');
+}
+$(".superuser").change(function () {
+  if ($(this).val() == '1') {
+    $(".nonsuperuser").fadeOut();
+    $(".nonsuperuser").attr('display', 'none');
+    $(".nonadmin").fadeOut();
+    $(".nonadmin").attr('display', 'none');
+  } else if ($(this).val() != '1') {
+    $(".nonsuperuser").fadeIn();
+    $(".nonsuperuser").attr('display', 'block');
+
+    // If the superuser button has been set to deny, we need to
+    // check that the admin button isn't set to allow, before we show non-admin stuff
+    if ($("#admin_allow").is(':checked')) {
+      // Hide here instead of fadeout on pageload to prevent what looks like Flash Of Unstyled Content (FOUC)
+      $(".nonadmin").hide();
+      $(".nonadmin").attr('display', 'none');
+    }
+  }
+});
+if ($("#admin_allow").is(':checked')) {
+  // Hide here instead of fadeout on pageload to prevent what looks like Flash Of Unstyled Content (FOUC)
+  $(".nonadmin").hide();
+  $(".nonadmin").attr('display', 'none');
+}
+$(".admin").change(function () {
+  if ($(this).val() == '1') {
+    $(".nonadmin").fadeOut();
+    $(".nonadmin").attr('display', 'none');
+  } else if ($(this).val() != '1') {
+    $(".nonadmin").fadeIn();
+    $(".nonadmin").attr('display', 'block');
+  }
+});
+
+// Handle the select/deselect of the select boxes with the button from right to left
+
+$(function () {
+  function moveItems(origin, dest) {
+    $(origin).find(':selected').appendTo(dest);
+    $(dest).attr('selected', true);
+    $(dest).sort_select_box();
+  }
+  function moveAllItems(origin, dest) {
+    $(origin).children("option:visible").appendTo(dest);
+    $(dest).attr('selected', true);
+    $(dest).sort_select_box();
+  }
+  $('.left').on('click', function () {
+    var container = $(this).closest('.addremove-multiselect');
+    moveItems($(container).find('select.multiselect.selected'), $(container).find('select.multiselect.available'));
+  });
+  $('.right').on('click', function () {
+    var container = $(this).closest('.addremove-multiselect');
+    moveItems($(container).find('select.multiselect.available'), $(container).find('select.multiselect.selected'));
+  });
+  $('.leftall').on('click', function () {
+    var container = $(this).closest('.addremove-multiselect');
+    moveAllItems($(container).find('select.multiselect.selected'), $(container).find('select.multiselect.available'));
+  });
+  $('.rightall').on('click', function () {
+    var container = $(this).closest('.addremove-multiselect');
+    moveAllItems($(container).find('select.multiselect.available'), $(container).find('select.multiselect.selected'));
+  });
+  $('select.multiselect.selected').on('dblclick keyup', function (e) {
+    if (e.which == 13 || e.type == 'dblclick') {
+      var container = $(this).closest('.addremove-multiselect');
+      moveItems($(container).find('select.multiselect.selected'), $(container).find('select.multiselect.available'));
+    }
+  });
+  $('select.multiselect.available').on('dblclick keyup', function (e) {
+    if (e.which == 13 || e.type == 'dblclick') {
+      var container = $(this).closest('.addremove-multiselect');
+      moveItems($(container).find('select.multiselect.available'), $(container).find('select.multiselect.selected'));
+      $('#hidden_ids_box').val($('#selected-select').val());
+    }
+  });
+});
+$.fn.sort_select_box = function () {
+  // Get options from select box
+  var selected_options = $(this).children('option');
+  // sort alphabetically
+  selected_options.sort(function (a, b) {
+    if (a.text > b.text) return 1;else if (a.text < b.text) return -1;else return 0;
+  });
+  //replace with sorted my_options;
+  $(this).empty().append(selected_options);
+  var selected_in_box = $('#selected-select option').toArray().map(function (item) {
+    return item.value;
+  }).join();
+  $('#hidden_ids_box').empty().val(selected_in_box);
+  $('#count_selected_box').html($('#selected-select option').length);
+  $('#count_unselected_box').html($('#available-select option').length);
+
+  // clearing any selections
+  $("#" + this.attr('id') + " option").attr('selected', true);
+};
+
+/*
+ * Data-attribute driven initializers. Blades attach behavior by adding
+ * `data-toggle="..."` (plus supporting data-* attributes) to elements
+ * instead of shipping an inline <script> block. Add new handlers here
+ * as inline scripts get migrated out of blades.
+ */
+$(function () {
+  // Sound preview on account/profile. Fires the URL in data-sound-url
+  // when the user toggles the checkbox on.
+  $(document).on('click', '[data-toggle="sound-test"]', function () {
+    if (!$(this).is(':checked')) return;
+    var url = $(this).data('sound-url');
+    if (!url) return;
+    new Audio(url).play();
+  });
+
+  // Confetti preview on account/profile. Same shape as sound-test.
+  $(document).on('click', '[data-toggle="confetti-test"]', function () {
+    if (!$(this).is(':checked')) return;
+    var duration = 1500;
+    var animationEnd = Date.now() + duration;
+    var defaults = {
+      startVelocity: 30,
+      spread: 360,
+      ticks: 60,
+      zIndex: 0
+    };
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    var interval = setInterval(function () {
+      var timeLeft = animationEnd - Date.now();
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+      var particleCount = 50 * (timeLeft / duration);
+      confetti(_objectSpread(_objectSpread({}, defaults), {}, {
+        particleCount: particleCount,
+        origin: {
+          x: randomInRange(0.1, 0.3),
+          y: Math.random() - 0.2
+        }
+      }));
+      confetti(_objectSpread(_objectSpread({}, defaults), {}, {
+        particleCount: particleCount,
+        origin: {
+          x: randomInRange(0.7, 0.9),
+          y: Math.random() - 0.2
+        }
+      }));
+    }, 250);
+  });
+
+  // Live color preview for the nav-link colorpicker on account/profile.
+  // The colorpicker widget itself is initialized by $(".color").colorpicker()
+  // in the default layout; this just wires the changeColor listener.
+  if ($('#nav-link-color').length) {
+    $('#nav-link-color').on('changeColor', function (e) {
+      var color = e.color.toString('rgba');
+      $('.navbar-nav > li > a:link').attr('style', 'color: ' + color + ' !important');
+      $('.btn-theme').attr('style', 'color: ' + color + ' !important');
+    });
+  }
+
+  // Branding settings page: live preview + reset for the four tenant
+  // colorpickers. The pickers themselves are initialized by the global
+  // $(".color").colorpicker() call in the default layout; this only wires
+  // the changeColor listeners and the reset button. Guarded on the reset
+  // button ID so it only runs on Settings > Branding, not on every page
+  // that happens to have a #header-color or #nav-link-color widget.
+  //
+  // Only header + nav-link get live preview. Link light/dark previews are
+  // deliberately skipped: they would recolor the buttons and other UI on
+  // this form itself, which can make it unreadable if the operator picks
+  // a low-contrast color. Those two settings just save and take effect on
+  // reload.
+  if (document.getElementById('branding-colors-reset')) {
+    var BRANDING_DEFAULTS = {
+      header_color: '#3c8dbc',
+      nav_link_color: '#ffffff',
+      link_light_color: '#296282',
+      link_dark_color: '#5fa4cc'
+    };
+
+    // Live preview works by writing the tenant CSS variables inline on
+    // <html>. Inline element style beats the :root and [data-theme]
+    // declarations in overrides.less on specificity, so this works even
+    // for the many rules those declarations lock in with !important.
+    var applyBrandingHeader = function applyBrandingHeader(color) {
+      document.documentElement.style.setProperty('--main-theme-color', color);
+    };
+    var applyBrandingNavLink = function applyBrandingNavLink(color) {
+      document.documentElement.style.setProperty('--btn-theme-text-color', color);
+      document.documentElement.style.setProperty('--nav-hover-text-color', color);
+      document.documentElement.style.setProperty('--nav-primary-text-color', color);
+    };
+    $('#header-color').on('changeColor', function (e) {
+      applyBrandingHeader(e.color.toString('rgba'));
+    });
+    $('#nav-link-color').on('changeColor', function (e) {
+      applyBrandingNavLink(e.color.toString('rgba'));
+    });
+
+    // Reset: restore each picker's swatch and input to the stock
+    // defaults. Using setValue on the plugin (not just .val() on the
+    // input) fires the plugin's internal changeColor event, which
+    // re-runs applyBrandingHeader / applyBrandingNavLink automatically.
+    $('#branding-colors-reset').on('click', function () {
+      $('#header-color').colorpicker('setValue', BRANDING_DEFAULTS.header_color);
+      $('#nav-link-color').colorpicker('setValue', BRANDING_DEFAULTS.nav_link_color);
+      $('#link-light-color').colorpicker('setValue', BRANDING_DEFAULTS.link_light_color);
+      $('#link-dark-color').colorpicker('setValue', BRANDING_DEFAULTS.link_dark_color);
+    });
+  }
+
+  // Reset the localStorage theme override when the user clicks the
+  // "system default" link (any element carrying data-theme-toggle-clear).
+  document.querySelectorAll('[data-theme-toggle-clear]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      localStorage.removeItem('theme');
+    });
+  });
+
+  // Master checkbox → target field disabled state. Callers pair a
+  // <input type="checkbox" data-toggle="disable-when-unchecked"
+  // data-disable-target="#some-field"> with a target rendered
+  // server-side with the matching @disabled state (avoids FOUC).
+  // Handler keeps them in sync on change.
+  $(document).on('change', '[data-toggle="disable-when-unchecked"]', function () {
+    var target = $(this).data('disable-target');
+    if (target) {
+      $(target).prop('disabled', !$(this).is(':checked'));
+    }
+  });
+
+  // Disable empty REQUIRED inputs on submit so browser HTML5 validation
+  // doesn't block the request before Laravel's form-request validator
+  // gets a chance to return a nicer error. Non-required empties (like a
+  // "Do not change" select with an explicit value="" option) are left
+  // enabled so they submit their intentional empty value. Opt in per
+  // form with data-disable-empty-on-submit.
+  $(document).on('submit', 'form[data-disable-empty-on-submit]', function () {
+    $(this).find(':input[required]').filter(function () {
+      return !this.value;
+    }).attr('disabled', 'disabled');
+  });
+
+  // Master checkbox → toggle every non-disabled checkbox in the closest
+  // form or table (or a caller-specified selector via data-check-scope).
+  // Used by bulk-delete confirmation pages to select or deselect the
+  // whole list of rows at once.
+  $(document).on('change', '[data-toggle="check-all"]', function () {
+    var $master = $(this);
+    var scope = $master.data('check-scope');
+    var $container = scope ? $(scope) : $master.closest('form, table');
+    $container.find('input[type="checkbox"]').not($master).not(':disabled').prop('checked', $master.prop('checked'));
+  });
+
+  // Shift-click a row checkbox to apply its new state to every visible,
+  // enabled checkbox between it and the last checkbox clicked in the same
+  // table and checkbox group.
+  var lastListCheckbox = null;
+  var updatingCheckboxRange = false;
+  document.addEventListener('click', function (event) {
+    var $checkbox = $(event.target);
+    if (updatingCheckboxRange || !$checkbox.is('table tbody input[type="checkbox"]') || $checkbox.is('[data-toggle="check-all"]')) {
+      return;
+    }
+    var checkbox = $checkbox[0];
+    var $table = $checkbox.closest('table');
+    var $checkboxes = $table.find('tbody input[type="checkbox"]').not(':disabled').not('[data-toggle="check-all"]').filter(':visible').filter(function () {
+      return !checkbox.name || this.name === checkbox.name;
+    });
+    var start = $checkboxes.index(lastListCheckbox);
+    var end = $checkboxes.index(checkbox);
+    if (event.shiftKey && start !== -1 && end !== -1 && start !== end) {
+      updatingCheckboxRange = true;
+      try {
+        $checkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).each(function () {
+          if (this !== checkbox && this.checked !== checkbox.checked) {
+            var rowIndex = $(this).data('index');
+            if ($table.data('bootstrap.table') && rowIndex !== undefined) {
+              $table.bootstrapTable(checkbox.checked ? 'check' : 'uncheck', rowIndex);
+            } else {
+              $(this).trigger('click');
+            }
+          }
+        });
+      } finally {
+        updatingCheckboxRange = false;
+      }
+    }
+    lastListCheckbox = checkbox;
+  }, true);
+
+  // Custom-report "save template" flow. The three custom reports
+  // (asset / component / consumable) each have a small side-panel
+  // form that captures a template name and posts to the templates
+  // store endpoint carrying the current field selections of the
+  // report configuration form. This handler forwards the template
+  // name + report type into the main report form as hidden inputs,
+  // then submits the main form to templates.store. Report type comes
+  // from the save form's data-report-type attribute so a single JS
+  // path covers all three pages.
+  $(document).on('submit', 'form[data-report-save-template]', function (event) {
+    event.preventDefault();
+    var $saveForm = $(this);
+    var reportType = $saveForm.data('report-type');
+    var targetSelector = $saveForm.data('report-form') || '#custom-report-form';
+    var storeUrl = $saveForm.data('store-url') || $saveForm.attr('action');
+    var $targetForm = $(targetSelector);
+    var nameValue = $saveForm.find('[name="name"]').val();
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'name',
+      value: nameValue
+    }).appendTo($targetForm);
+    $('<input>').attr({
+      type: 'hidden',
+      name: 'type',
+      value: reportType
+    }).appendTo($targetForm);
+    $targetForm.attr('action', storeUrl).submit();
+  });
+
+  // Custom-report saved-template select2: navigate to the route stored
+  // on the selected <option>'s data-route attribute. Shared by all
+  // three custom report pages.
+  $(document).on('select2:select', '#saved_report_select', function (event) {
+    window.location.href = event.params.data.element.dataset.route;
+  });
+
+  // When the "This user can login" (activated) checkbox is off, the
+  // password + confirmation fields are functionally useless because
+  // login is gated by the activated flag. Hide the whole form-group
+  // (or dynamic-form-row in the modal) so the form doesn't show
+  // fields the user can't meaningfully fill in, and also drop the
+  // HTML `required` attribute so the browser doesn't block submission.
+  // The server side already skips the password rule for this case
+  // via SaveUserRequest::rules(), and the controller stores
+  // User::noPassword() raw so no Hash::check can ever match.
+  // Applies to both the main users/edit create form and the
+  // users/modal form since they share the input names.
+  //
+  // Required-state preservation: the server renders password/password_
+  // confirmation with `required` only on create (see users/edit.blade.php
+  // and modals/user.blade.php). We cache that server-rendered state on
+  // the first call so subsequent activated-toggles only ever re-apply
+  // the ORIGINAL server intent — otherwise editing an existing
+  // (activated) user would silently flip password to required on page
+  // load and jQuery Validate would block Save with the password empty.
+  var syncPasswordFields = function syncPasswordFields($checkbox) {
+    var $form = $checkbox.closest('form');
+    var $passwords = $form.find('input[name="password"], input[name="password_confirmation"]');
+    var activated = $checkbox.is(':checked');
+    $passwords.each(function () {
+      if (this.dataset.serverRequired === undefined) {
+        this.dataset.serverRequired = this.required ? '1' : '0';
+      }
+      this.required = activated && this.dataset.serverRequired === '1';
+      var $wrap = $(this).closest('.form-group, .dynamic-form-row');
+      if (activated) {
+        $wrap.show();
+      } else {
+        $wrap.hide();
+      }
+    });
+  };
+
+  // Sensitive fields (username, email, password) ship with a
+  // `readonly` + onfocus-removes-readonly anti-autofill trick to
+  // stop password managers from prefilling or overwriting the
+  // operator's own login credentials on user-create forms. The
+  // side-effect is that HTML5 `required` constraint validation is
+  // SILENTLY skipped for readonly inputs, so hitting submit without
+  // ever focusing a required field lets the empty form through the
+  // browser check entirely.
+  //
+  // On submit-button click we strip `readonly` from any
+  // required+readonly input inside the form. The browser then runs
+  // its normal constraint check (all fields participating) and
+  // shows the "please fill in this field" popup on empties. Autofill
+  // was already prevented at page load, so removing readonly at
+  // click time doesn't reopen that hole.
+  $(document).on('click', 'button[type="submit"], input[type="submit"]', function () {
+    var $form = $(this).closest('form');
+    if (!$form.length) {
+      return;
+    }
+    $form.find('input[required][readonly]').each(function () {
+      this.removeAttribute('readonly');
+    });
+  });
+  $('input[name="activated"][type="checkbox"]').each(function () {
+    syncPasswordFields($(this));
+  });
+  $(document).on('change', 'input[name="activated"][type="checkbox"]', function () {
+    syncPasswordFields($(this));
+  });
+
+  // Generic "typing into input A enables checkbox B" pattern. Server
+  // marks the input with data-toggles-checkbox="{selector-of-target}".
+  // Threshold is 6 chars, which matches the legacy user-create
+  // behaviour of only enabling the send-welcome checkbox once the
+  // email is plausibly valid. Server omits the data-attribute when
+  // the enable-side should never fire (e.g. app.lock_passwords is on)
+  // so the target stays permanently disabled.
+  $(document).on('keyup', 'input[data-toggles-checkbox]', function () {
+    var $target = $($(this).data('toggles-checkbox'));
+    if (!$target.length) {
+      return;
+    }
+    if (this.value.length > 5) {
+      $target.prop('disabled', false);
+      $target.closest('.form-control').removeClass('form-control--disabled');
+    } else {
+      $target.prop('disabled', true).prop('checked', false);
+      $target.closest('.form-control').addClass('form-control--disabled');
+    }
+  });
+
+  // Bootstrap tooltips on any element carrying .tooltip-base.
+  // Attaching to body avoids clipping inside overflow-hidden panels.
+  $('.tooltip-base').tooltip({
+    container: 'body'
+  });
+
+  // Password generator button. Server puts the desired length on the
+  // button as data-password-length (typically pwd_secure_min + 9) so
+  // this JS doesn't have to know about app settings. Falls back to 16
+  // if the attribute is missing.
+  $('a[id="genPassword"], button[id="genPassword"]').each(function () {
+    var $btn = $(this);
+    if (typeof $btn.pGenerator !== 'function' || !$('#password').length) {
+      return;
+    }
+    $btn.pGenerator({
+      bind: 'click',
+      passwordElement: '#password',
+      passwordLength: parseInt($btn.data('password-length') || '16', 10),
+      uppercase: true,
+      lowercase: true,
+      numbers: true,
+      specialChars: true,
+      onPasswordGenerated: function onPasswordGenerated() {
+        $('#password_confirm').val($('#password').val());
+      }
+    });
+  });
+
+  // A <select data-gates-submit> disables the submit button(s) in its
+  // form until a value is chosen. Used by users/confirm-bulk-delete
+  // where the operator must pick a status for the deleted users' assets
+  // before the form can be submitted. Runs once on load to reflect
+  // whatever value was pre-selected (old input after a validation
+  // redirect) and re-syncs on change and on select2's own event.
+  $('select[data-gates-submit]').each(function () {
+    var $select = $(this);
+    var $submits = $select.closest('form').find(':submit');
+    var sync = function sync() {
+      $submits.prop('disabled', !$select.val());
+    };
+    sync();
+    $select.on('change select2:select', sync);
+  });
+
+  // Auto-focus the first select2 search input on pages that ask for it.
+  // Bulk-checkout uses this so the operator lands directly on the
+  // assets-to-checkout picker and can start typing immediately. Results
+  // are hidden until the first keystroke so the operator doesn't see a
+  // full-list flash on open.
+  if ($('[data-autofocus-select2-search]').length) {
+    setTimeout(function () {
+      var $searchField = $('.select2-search__field');
+      var $results = $('.select2-results');
+      $searchField.focus();
+      $results.hide();
+      $searchField.on('input', function () {
+        $results.show();
+      });
+    }, 0);
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' || !e.target.classList.contains('select2-search__field')) {
+      return;
+    }
+    var $select = $('#assigned_assets_select');
+    var select2 = $select.data('select2');
+    if (!select2) {
+      return;
+    }
+
+    // Select2 already has a result ready.
+    // Let its normal Enter handler handle it.
+    if (select2.results.getHighlightedResults().length) {
+      return;
+    }
+
+    // Scanner's Enter arrived before the AJAX result.
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var attempts = 0;
+    var waitForResult = setInterval(function () {
+      attempts++;
+      var $highlighted = select2.results.getHighlightedResults();
+      if ($highlighted.length) {
+        clearInterval(waitForResult);
+        console.log('RESULT READY:', $highlighted.data('data'));
+        select2.trigger('results:select');
+        return;
+      }
+
+      // Give up after ~2 seconds.
+      if (attempts >= 20) {
+        clearInterval(waitForResult);
+      }
+    }, 100);
+  }, true);
+
+  // Hardware bulk edit: clear-radio buttons blank every input of a
+  // named radio group so the caller can back out of a picked value.
+  // The .clear-radio button carries a data-target-name matching the
+  // radio group's name attribute.
+  document.querySelectorAll('.clear-radio').forEach(function (button) {
+    button.addEventListener('click', function () {
+      var name = this.dataset.targetName;
+      var radios = document.querySelectorAll('input[type="radio"][name="' + name + '"]');
+      radios.forEach(function (radio) {
+        radio.checked = false;
+      });
+    });
+  });
+
+  // Hardware bulk edit: live status-deployable check. When the user
+  // picks a status, hit the deployable API and update the inline
+  // status indicator so the operator knows whether that status will
+  // pull an asset out of active service. Translated labels ride on
+  // the element's data attributes so this handler doesn't need to be
+  // a Blade-compiled inline script. Guarded on the data-deployable-
+  // label attribute (not just the id) because #selected_status_status
+  // also appears in partials/forms/edit/status.blade.php — used by
+  // hardware/edit — which has its own inline user_add() handler and
+  // doesn't render the labels, so we'd otherwise double-fire and
+  // overwrite that handler's output with an icon-only string.
+  var statusStatusEl = document.getElementById('selected_status_status');
+  if (statusStatusEl && statusStatusEl.dataset.deployableLabel) {
+    var deployableLabel = statusStatusEl.dataset.deployableLabel || '';
+    var notDeployableLabel = statusStatusEl.dataset.notDeployableLabel || '';
+    var runStatusDeployableCheck = function runStatusDeployableCheck() {
+      var statusId = $('select[name="status_id"]').val();
+      if (statusId === '') {
+        return;
+      }
+      $('.status_spinner').css('display', 'inline');
+      $.ajax({
+        url: '/api/v1/statuslabels/' + statusId + '/deployable',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function success(data) {
+          $('.status_spinner').css('display', 'none');
+          $('#selected_status_status').fadeIn();
+          if (data == true) {
+            $('#selected_status_status').removeClass('text-danger').addClass('text-success').html('<i class="fa-solid fa-check" aria-hidden="true"></i> ' + deployableLabel);
+          } else {
+            $('#assignto_selector').hide();
+            $('#selected_status_status').removeClass('text-success').addClass('text-danger').html('<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> ' + notDeployableLabel);
+          }
+        }
+      });
+    };
+    $('select[name="status_id"]').on('change', runStatusDeployableCheck);
+  }
+
+  // Hardware checkin: requestable-toggle wrapper. Show or hide the
+  // "make this asset requestable after checkin" checkbox depending on
+  // whether the currently-selected status is deployable. Preserve the
+  // checkbox state when hiding so a status bounce doesn't blow it
+  // away — the server only applies the value when the status is
+  // deployable anyway.
+  var requestableWrapper = document.getElementById('requestable-wrapper');
+  if (requestableWrapper) {
+    var deployableStatusIds = [];
+    try {
+      deployableStatusIds = JSON.parse(requestableWrapper.dataset.deployableStatusIds || '[]');
+    } catch (e) {
+      // Malformed data — leave the wrapper in its server-rendered state.
+    }
+    var statusSelect = document.getElementById('modal-statuslabel_types') || document.querySelector('select[name="status_id"]');
+    if (statusSelect) {
+      var toggleRequestableWrapper = function toggleRequestableWrapper() {
+        var value = statusSelect.value;
+        var statusId = Number.parseInt(value, 10);
+        var isDeployable = value !== '' && Number.isInteger(statusId) && deployableStatusIds.indexOf(statusId) !== -1;
+        requestableWrapper.style.display = isDeployable ? '' : 'none';
+      };
+      statusSelect.addEventListener('change', toggleRequestableWrapper);
+      if (window.jQuery) {
+        window.jQuery(statusSelect).on('select2:select select2:clear', toggleRequestableWrapper);
+      }
+      toggleRequestableWrapper();
+    }
+  }
+
+  // Hardware checkin: per-user localStorage preference for the
+  // requestable-checkbox default. Namespaced by user id so a shared
+  // browser doesn't leak one user's habit to another. Bypassed when
+  // the checkbox was repopulated from a validation-error redirect —
+  // old() beats the stored preference. On submit, save whatever the
+  // user actually chose so the preference tracks their real habit.
+  var requestableCheckbox = document.getElementById('requestable');
+  if (requestableCheckbox && requestableCheckbox.dataset.userPreferenceKey) {
+    var storageKey = requestableCheckbox.dataset.userPreferenceKey;
+    var hadOldInput = requestableCheckbox.dataset.hadOldInput === '1';
+    var form = requestableCheckbox.closest('form');
+    if (form) {
+      if (!hadOldInput) {
+        var stored = null;
+        try {
+          stored = window.localStorage.getItem(storageKey);
+        } catch (e) {
+          // localStorage may be unavailable (private mode, disabled).
+        }
+        if (stored === '1' || stored === '0') {
+          requestableCheckbox.checked = stored === '1';
+        }
+      }
+      form.addEventListener('submit', function () {
+        try {
+          window.localStorage.setItem(storageKey, requestableCheckbox.checked ? '1' : '0');
+        } catch (e) {
+          // Non-fatal: preference just won't persist this time.
+        }
+      });
+    }
+  }
+});
+
+/***/ },
+
+/***/ "./resources/assets/js/snipeit_modals.js"
+/*!***********************************************!*\
+  !*** ./resources/assets/js/snipeit_modals.js ***!
+  \***********************************************/
+() {
+
+/* 
+ * 
+ * Snipe-IT Universal Modal support
+ * 
+ * Enables modal dialogs to create sub-resources throughout Snipe-IT
+ * 
+ */
+
+/* 
+HOW TO USE
+ Create a Button looking like this:
+ <a href='{{ route('modal.show', 'user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-theme">New</a>
+ If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
+ data-toggle="modal" - required for Bootstrap Modals
+data-target="#createModal" - fixed ID for the modal, do not change
+data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a success? Be on the lookout for duplicate ID's, it will confuse this library!
+class="btn btn-sm btn-theme" - makes it look button-ey, feel free to change :)
+
+If you want to pass additional variables to the modal (In the Category Create one, for example, you can pass category_id), you can encode them as URL variables in the href
+
+*/
+
+$(function () {
+  var baseUrl = $('meta[name="baseUrl"]').attr('content');
+  //handle modal-add-interstitial calls
+  var model, select, refreshSelector;
+  if ($('#createModal').length == 0) {
+    $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
+  }
+  $('#createModal').on("show.bs.modal", function (event) {
+    var link = $(event.relatedTarget);
+    model = link.data("dependency");
+    select = link.data("select");
+    refreshSelector = link.data("refresh");
+    $('#createModal').load(link.attr('href'), function () {
+      // Focus the first visible, non-hidden input regardless of
+      // which modal partial was loaded (user, company, category,
+      // etc. all differ on which id the "first" field has). The
+      // legacy `#modal-name` selector worked for some modals and
+      // silently missed for others. A generic first-input selector
+      // covers every partial without per-modal code.
+      $('#createModal').find('input:visible:not([type=hidden])').first().focus();
+
+      // Wire up the password generator button when the loaded
+      // modal is one that includes it (user create). Relocated here
+      // from an inline <script> block in modals/user.blade.php as
+      // part of the Vite migration prep to remove per-partial
+      // inline JS. The setTimeout the inline version used to defer
+      // this is no longer needed because we're inside .load()'s
+      // completion callback, which fires AFTER the DOM is ready.
+      if ($('#modal-genPassword').length && $('#modal-password').length) {
+        $('#modal-genPassword').pGenerator({
+          'bind': 'click',
+          'passwordElement': '#modal-password',
+          'passwordLength': 16,
+          'uppercase': true,
+          'lowercase': true,
+          'numbers': true,
+          'specialChars': true,
+          'onPasswordGenerated': function onPasswordGenerated() {
+            $('#modal-password_confirmation').val($('#modal-password').val());
+          }
+        });
+      }
+
+      //do we need to re-select2 this, after load? Probably.
+      $('#createModal').find('select.select2').select2();
+      // Initialize the ajaxy select2 with images.
+      // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
+
+      // Scoped to #createModal so re-initialization only touches newly-loaded
+      // modal selects, not every js-data-ajax on the host page. Unscoped
+      // .each() clobbers the trigger page's existing select2 state (e.g. the
+      // Location picker whose "New" button opened this modal).
+      $('#createModal .js-data-ajax').each(function (i, item) {
+        var link = $(item);
+        var endpoint = link.data("endpoint");
+        var select = link.data("select");
+        link.select2({
+          // Explicit width because the modal is mid-animation when
+          // this runs, so measuring the parent's computed width
+          // returns 0 and the widget renders zero-pixels wide.
+          width: '100%',
+          ajax: {
+            // the baseUrl includes a trailing slash
+            url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+            //WARNING - we're hoping that's defined on the page somewhere...
+            dataType: 'json',
+            delay: 250,
+            headers: {
+              "X-Requested-With": 'XMLHttpRequest',
+              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+            },
+            data: function data(params) {
+              var data = {
+                search: params.term,
+                page: params.page || 1,
+                statusType: link.data("asset-status-type")
+              };
+              return data;
+            },
+            /*processResults: function (data, params) {
+                 params.page = params.page || 1;
+                 var answer =  {
+                    results: data.items,
+                    pagination: {
+                        more: data.pagination.more
+                    }
+                };
+                 return answer;
+            },*/
+            cache: true
+          },
+          //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+          templateResult: formatDatalistSafe
+          //templateSelection: formatDataSelection
+        });
+      });
+    });
+  });
+  $('#createModal').on('click', '#modal-save', function () {
+    $.ajax({
+      type: 'POST',
+      url: $('.modal-body form').attr('action'),
+      headers: {
+        "X-Requested-With": 'XMLHttpRequest',
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+      },
+      data: $('.modal-body form').serialize(),
+      success: function success(result) {
+        if (result.status == "error") {
+          var error_message = "";
+          for (var field in result.messages) {
+            error_message += "<li>Problem(s) with field <i><strong>" + field + "</strong></i>: " + result.messages[field];
+          }
+          $('#modal_error_msg').html(error_message).show();
+          return false;
+        }
+        var id = result.payload.id;
+        var name = result.payload.name || result.payload.first_name + " " + result.payload.last_name;
+        if (!id || !name) {
+          console.error("Could not find resulting name or ID from modal-create. Name: " + name + ", id: " + id);
+          return false;
+        }
+        $('#createModal').modal('hide');
+        $('#createModal').html("");
+        var refreshTable = $('#' + refreshSelector);
+        if (refreshTable.length > 0) {
+          refreshTable.bootstrapTable('refresh');
+        }
+
+        // "select" is the original drop-down menu that someone
+        // clicked 'add' on to add a new 'thing'
+        // this code adds the newly created object to that select
+        var selector = document.getElementById(select);
+        if (!selector) {
+          return false;
+        }
+        selector.options[selector.length] = new Option(name, id);
+        selector.selectedIndex = selector.length - 1;
+        $(selector).trigger("change");
+        if (window.fetchCustomFields) {
+          fetchCustomFields();
+        }
+      },
+      error: function error(result) {
+        msg = result.responseJSON.messages || result.responseJSON.error;
+        $('#modal_error_msg').html("Server Error: " + msg).show();
+      }
+    });
+  });
+});
+function formatDatalistSafe(datalist) {
+  // console.warn("What in the hell is going on with Select2?!?!!?!?");
+  // console.warn($.select2);
+  if (datalist.loading) {
+    return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
+  }
+  var root_div = $("<div class='clearfix'>");
+  var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
+  if (datalist.image) {
+    var inner_div = $("<div style='width: 30px;'>");
+    /******************************************************************
+     * 
+     * We are specifically chosing empty alt-text below, because this 
+     * image conveys no additional information, relative to the text
+     * that will *always* be there in any select2 list that is in use
+     * in Snipe-IT. If that changes, we would probably want to change
+     * some signatures of some functions, but right now, we don't want
+     * screen readers to say "HP SuperJet 5000, .... picture of HP 
+     * SuperJet 5000..." and so on, for every single row in a list of
+     * assets or models or whatever.
+     * 
+     *******************************************************************/
+    var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
+    // console.warn("Img is: ");
+    // console.dir(img);
+    // console.warn("Strigularly, that's: ");
+    // console.log(img);
+    img.attr("src", datalist.image);
+    inner_div.append(img);
+  } else {
+    var inner_div = $("<div style='height: 20px; width: 30px;'></div>");
+  }
+  left_pull.append(inner_div);
+  root_div.append(left_pull);
+  var name_div = $("<div>");
+  name_div.text(datalist.text);
+  root_div.append(name_div);
+  var safe_html = root_div.get(0).outerHTML;
+  var old_html = formatDatalist(datalist);
+  if (safe_html != old_html) {
+    // console.log("HTML MISMATCH: ");
+    // console.log("FormatDatalistSafe: ");
+    // console.dir(root_div.get(0));
+    // console.log(safe_html);
+    // console.log("FormatDataList: ");
+    // console.log(old_html);
+  }
+  return root_div;
+}
+function formatDatalist(datalist) {
+  var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
+  if (datalist.loading) {
+    return loading_markup;
+  }
+  var markup = "<div class='clearfix'>";
+  markup += "<div class='pull-left' style='padding-right: 10px;'>";
+  if (datalist.image) {
+    markup += "<div style='width: 30px;'><img src='" + datalist.image + "' alt='" + datalist.tex + "' style='max-height: 20px; max-width: 30px;'></div>";
+  } else {
+    markup += "<div style='height: 20px; width: 30px;'></div>";
+  }
+  markup += "</div><div>" + datalist.text + "</div>";
+  markup += "</div>";
+  return markup;
+}
+function formatDataSelection(datalist) {
+  return datalist.text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+}
+
+/***/ },
+
+/***/ "./node_modules/blueimp-file-upload/js/jquery.fileupload.js"
 /*!******************************************************************!*\
   !*** ./node_modules/blueimp-file-upload/js/jquery.fileupload.js ***!
   \******************************************************************/
-/***/ ((module, exports, __webpack_require__) => {
+(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
  * jQuery File Upload Plugin
@@ -67,7 +3433,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    } else {}
+    } else // removed by dead control flow
+{}
 }(function ($) {
     'use strict';
 
@@ -1573,13 +4940,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js":
+/***/ "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js"
 /*!*****************************************************************************!*\
   !*** ./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js ***!
   \*****************************************************************************/
-/***/ (function(module, exports, __webpack_require__) {
+(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Bootstrap Colorpicker v2.5.2
@@ -1598,7 +4965,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
       return (factory(jq));
     }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
+  } else // removed by dead control flow
+{}
 }(this, function($) {
   'use strict';
   /**
@@ -2123,30 +5491,35 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
             }
             return 'rgb(' + c.r + ',' + c.g + ',' + c.b + ')';
           }
-          break;
+          // removed by dead control flow
+
         case 'rgba':
           {
             c = this.toRGB();
             return 'rgba(' + c.r + ',' + c.g + ',' + c.b + ',' + c.a + ')';
           }
-          break;
+          // removed by dead control flow
+
         case 'hsl':
           {
             c = this.toHSL();
             return 'hsl(' + Math.round(c.h * 360) + ',' + Math.round(c.s * 100) + '%,' + Math.round(c.l * 100) + '%)';
           }
-          break;
+          // removed by dead control flow
+
         case 'hsla':
           {
             c = this.toHSL();
             return 'hsla(' + Math.round(c.h * 360) + ',' + Math.round(c.s * 100) + '%,' + Math.round(c.l * 100) + '%,' + c.a + ')';
           }
-          break;
+          // removed by dead control flow
+
         case 'hex':
           {
             return this.toHex(forceRawValue);
           }
-          break;
+          // removed by dead control flow
+
         case 'alias':
           {
             c = this.toAlias();
@@ -2165,7 +5538,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
           {
             return c;
           }
-          break;
+          // removed by dead control flow
+
       }
     },
     // a set of RE's that can match strings and generate color tuples.
@@ -2904,13 +6278,13 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 }));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/bootstrap-less/js/bootstrap.js":
+/***/ "./node_modules/bootstrap-less/js/bootstrap.js"
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap-less/js/bootstrap.js ***!
   \*****************************************************/
-/***/ (() => {
+() {
 
 /* */ 
 "format global";
@@ -5235,13 +8609,13 @@ if (typeof jQuery === 'undefined') {
 }(jQuery);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/canvas-confetti/dist/confetti.browser.js":
+/***/ "./node_modules/canvas-confetti/dist/confetti.browser.js"
 /*!***************************************************************!*\
   !*** ./node_modules/canvas-confetti/dist/confetti.browser.js ***!
   \***************************************************************/
-/***/ (() => {
+() {
 
 // canvas-confetti v1.9.3 built on 2024-04-30T22:19:17.794Z
 !(function (window, module) {
@@ -6132,13 +9506,13 @@ if (typeof jQuery === 'undefined') {
 }(window, {}));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/clipboard/dist/clipboard.js":
+/***/ "./node_modules/clipboard/dist/clipboard.js"
 /*!**************************************************!*\
   !*** ./node_modules/clipboard/dist/clipboard.js ***!
   \**************************************************/
-/***/ (function(module) {
+(module) {
 
 /*!
  * clipboard.js v2.0.11
@@ -6149,7 +9523,8 @@ if (typeof jQuery === 'undefined') {
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(true)
 		module.exports = factory();
-	else {}
+	else // removed by dead control flow
+{}
 })(this, function() {
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
@@ -7026,24 +10401,24 @@ module.exports.TinyEmitter = E;
 .default;
 });
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/ekko-lightbox/dist/ekko-lightbox.min.js":
+/***/ "./node_modules/ekko-lightbox/dist/ekko-lightbox.min.js"
 /*!**************************************************************!*\
   !*** ./node_modules/ekko-lightbox/dist/ekko-lightbox.min.js ***!
   \**************************************************************/
-/***/ (() => {
+() {
 
 +function(a){"use strict";function b(a,b){if(!(a instanceof b))throw new TypeError("Cannot call a class as a function")}var c=function(){function a(a,b){for(var c=0;c<b.length;c++){var d=b[c];d.enumerable=d.enumerable||!1,d.configurable=!0,"value"in d&&(d.writable=!0),Object.defineProperty(a,d.key,d)}}return function(b,c,d){return c&&a(b.prototype,c),d&&a(b,d),b}}();(function(a){var d="ekkoLightbox",e=a.fn[d],f={title:"",footer:"",maxWidth:9999,maxHeight:9999,showArrows:!0,wrapping:!0,type:null,alwaysShowClose:!1,loadingMessage:'<div class="ekko-lightbox-loader"><div><div></div><div></div></div></div>',leftArrow:"<span>&#10094;</span>",rightArrow:"<span>&#10095;</span>",strings:{close:"Close",fail:"Failed to load image:",type:"Could not detect remote target type. Force the type using data-type"},doc:document,onShow:function(){},onShown:function(){},onHide:function(){},onHidden:function(){},onNavigate:function(){},onContentLoaded:function(){}},g=function(){function d(c,e){var g=this;b(this,d),this._config=a.extend({},f,e),this._$modalArrows=null,this._galleryIndex=0,this._galleryName=null,this._padding=null,this._border=null,this._titleIsShown=!1,this._footerIsShown=!1,this._wantedWidth=0,this._wantedHeight=0,this._touchstartX=0,this._touchendX=0,this._modalId="ekkoLightbox-"+Math.floor(1e3*Math.random()+1),this._$element=c instanceof jQuery?c:a(c),this._isBootstrap3=3==a.fn.modal.Constructor.VERSION[0];var h='<h4 class="modal-title">'+(this._config.title||"&nbsp;")+"</h4>",i='<button type="button" class="close" data-dismiss="modal" aria-label="'+this._config.strings.close+'"><span aria-hidden="true">&times;</span></button>',j='<div class="modal-header'+(this._config.title||this._config.alwaysShowClose?"":" hide")+'">'+(this._isBootstrap3?i+h:h+i)+"</div>",k='<div class="modal-footer'+(this._config.footer?"":" hide")+'">'+(this._config.footer||"&nbsp;")+"</div>",l='<div class="modal-body"><div class="ekko-lightbox-container"><div class="ekko-lightbox-item fade in show"></div><div class="ekko-lightbox-item fade"></div></div></div>',m='<div class="modal-dialog" role="document"><div class="modal-content">'+j+l+k+"</div></div>";a(this._config.doc.body).append('<div id="'+this._modalId+'" class="ekko-lightbox modal fade" tabindex="-1" tabindex="-1" role="dialog" aria-hidden="true">'+m+"</div>"),this._$modal=a("#"+this._modalId,this._config.doc),this._$modalDialog=this._$modal.find(".modal-dialog").first(),this._$modalContent=this._$modal.find(".modal-content").first(),this._$modalBody=this._$modal.find(".modal-body").first(),this._$modalHeader=this._$modal.find(".modal-header").first(),this._$modalFooter=this._$modal.find(".modal-footer").first(),this._$lightboxContainer=this._$modalBody.find(".ekko-lightbox-container").first(),this._$lightboxBodyOne=this._$lightboxContainer.find("> div:first-child").first(),this._$lightboxBodyTwo=this._$lightboxContainer.find("> div:last-child").first(),this._border=this._calculateBorders(),this._padding=this._calculatePadding(),this._galleryName=this._$element.data("gallery"),this._galleryName&&(this._$galleryItems=a(document.body).find('*[data-gallery="'+this._galleryName+'"]'),this._galleryIndex=this._$galleryItems.index(this._$element),a(document).on("keydown.ekkoLightbox",this._navigationalBinder.bind(this)),this._config.showArrows&&this._$galleryItems.length>1&&(this._$lightboxContainer.append('<div class="ekko-lightbox-nav-overlay"><a href="#">'+this._config.leftArrow+'</a><a href="#">'+this._config.rightArrow+"</a></div>"),this._$modalArrows=this._$lightboxContainer.find("div.ekko-lightbox-nav-overlay").first(),this._$lightboxContainer.on("click","a:first-child",function(a){return a.preventDefault(),g.navigateLeft()}),this._$lightboxContainer.on("click","a:last-child",function(a){return a.preventDefault(),g.navigateRight()}),this.updateNavigation())),this._$modal.on("show.bs.modal",this._config.onShow.bind(this)).on("shown.bs.modal",function(){return g._toggleLoading(!0),g._handle(),g._config.onShown.call(g)}).on("hide.bs.modal",this._config.onHide.bind(this)).on("hidden.bs.modal",function(){return g._galleryName&&(a(document).off("keydown.ekkoLightbox"),a(window).off("resize.ekkoLightbox")),g._$modal.remove(),g._config.onHidden.call(g)}).modal(this._config),a(window).on("resize.ekkoLightbox",function(){g._resize(g._wantedWidth,g._wantedHeight)}),this._$lightboxContainer.on("touchstart",function(){g._touchstartX=event.changedTouches[0].screenX}).on("touchend",function(){g._touchendX=event.changedTouches[0].screenX,g._swipeGesure()})}return c(d,null,[{key:"Default",get:function(){return f}}]),c(d,[{key:"element",value:function(){return this._$element}},{key:"modal",value:function(){return this._$modal}},{key:"navigateTo",value:function(b){return b<0||b>this._$galleryItems.length-1?this:(this._galleryIndex=b,this.updateNavigation(),this._$element=a(this._$galleryItems.get(this._galleryIndex)),void this._handle())}},{key:"navigateLeft",value:function(){if(this._$galleryItems&&1!==this._$galleryItems.length){if(0===this._galleryIndex){if(!this._config.wrapping)return;this._galleryIndex=this._$galleryItems.length-1}else this._galleryIndex--;return this._config.onNavigate.call(this,"left",this._galleryIndex),this.navigateTo(this._galleryIndex)}}},{key:"navigateRight",value:function(){if(this._$galleryItems&&1!==this._$galleryItems.length){if(this._galleryIndex===this._$galleryItems.length-1){if(!this._config.wrapping)return;this._galleryIndex=0}else this._galleryIndex++;return this._config.onNavigate.call(this,"right",this._galleryIndex),this.navigateTo(this._galleryIndex)}}},{key:"updateNavigation",value:function(){if(!this._config.wrapping){var a=this._$lightboxContainer.find("div.ekko-lightbox-nav-overlay");0===this._galleryIndex?a.find("a:first-child").addClass("disabled"):a.find("a:first-child").removeClass("disabled"),this._galleryIndex===this._$galleryItems.length-1?a.find("a:last-child").addClass("disabled"):a.find("a:last-child").removeClass("disabled")}}},{key:"close",value:function(){return this._$modal.modal("hide")}},{key:"_navigationalBinder",value:function(a){return a=a||window.event,39===a.keyCode?this.navigateRight():37===a.keyCode?this.navigateLeft():void 0}},{key:"_detectRemoteType",value:function(a,b){return b=b||!1,!b&&this._isImage(a)&&(b="image"),!b&&this._getYoutubeId(a)&&(b="youtube"),!b&&this._getVimeoId(a)&&(b="vimeo"),!b&&this._getInstagramId(a)&&(b="instagram"),(!b||["image","youtube","vimeo","instagram","video","url"].indexOf(b)<0)&&(b="url"),b}},{key:"_isImage",value:function(a){return a&&a.match(/(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp|svg)((\?|#).*)?$)/i)}},{key:"_containerToUse",value:function(){var a=this,b=this._$lightboxBodyTwo,c=this._$lightboxBodyOne;return this._$lightboxBodyTwo.hasClass("in")&&(b=this._$lightboxBodyOne,c=this._$lightboxBodyTwo),c.removeClass("in show"),setTimeout(function(){a._$lightboxBodyTwo.hasClass("in")||a._$lightboxBodyTwo.empty(),a._$lightboxBodyOne.hasClass("in")||a._$lightboxBodyOne.empty()},500),b.addClass("in show"),b}},{key:"_handle",value:function(){var a=this._containerToUse();this._updateTitleAndFooter();var b=this._$element.attr("data-remote")||this._$element.attr("href"),c=this._detectRemoteType(b,this._$element.attr("data-type")||!1);if(["image","youtube","vimeo","instagram","video","url"].indexOf(c)<0)return this._error(this._config.strings.type);switch(c){case"image":this._preloadImage(b,a),this._preloadImageByIndex(this._galleryIndex,3);break;case"youtube":this._showYoutubeVideo(b,a);break;case"vimeo":this._showVimeoVideo(this._getVimeoId(b),a);break;case"instagram":this._showInstagramVideo(this._getInstagramId(b),a);break;case"video":this._showHtml5Video(b,a);break;default:this._loadRemoteContent(b,a)}return this}},{key:"_getYoutubeId",value:function(a){if(!a)return!1;var b=a.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/);return!(!b||11!==b[2].length)&&b[2]}},{key:"_getVimeoId",value:function(a){return!!(a&&a.indexOf("vimeo")>0)&&a}},{key:"_getInstagramId",value:function(a){return!!(a&&a.indexOf("instagram")>0)&&a}},{key:"_toggleLoading",value:function(b){return b=b||!1,b?(this._$modalDialog.css("display","none"),this._$modal.removeClass("in show"),a(".modal-backdrop").append(this._config.loadingMessage)):(this._$modalDialog.css("display","block"),this._$modal.addClass("in show"),a(".modal-backdrop").find(".ekko-lightbox-loader").remove()),this}},{key:"_calculateBorders",value:function(){return{top:this._totalCssByAttribute("border-top-width"),right:this._totalCssByAttribute("border-right-width"),bottom:this._totalCssByAttribute("border-bottom-width"),left:this._totalCssByAttribute("border-left-width")}}},{key:"_calculatePadding",value:function(){return{top:this._totalCssByAttribute("padding-top"),right:this._totalCssByAttribute("padding-right"),bottom:this._totalCssByAttribute("padding-bottom"),left:this._totalCssByAttribute("padding-left")}}},{key:"_totalCssByAttribute",value:function(a){return parseInt(this._$modalDialog.css(a),10)+parseInt(this._$modalContent.css(a),10)+parseInt(this._$modalBody.css(a),10)}},{key:"_updateTitleAndFooter",value:function(){var a=this._$element.data("title")||"",b=this._$element.data("footer")||"";return this._titleIsShown=!1,a||this._config.alwaysShowClose?(this._titleIsShown=!0,this._$modalHeader.css("display","").find(".modal-title").html(a||"&nbsp;")):this._$modalHeader.css("display","none"),this._footerIsShown=!1,b?(this._footerIsShown=!0,this._$modalFooter.css("display","").html(b)):this._$modalFooter.css("display","none"),this}},{key:"_showYoutubeVideo",value:function(a,b){var c=this._getYoutubeId(a),d=a.indexOf("&")>0?a.substr(a.indexOf("&")):"",e=this._$element.data("width")||560,f=this._$element.data("height")||e/(560/315);return this._showVideoIframe("//www.youtube.com/embed/"+c+"?badge=0&autoplay=1&html5=1"+d,e,f,b)}},{key:"_showVimeoVideo",value:function(a,b){var c=this._$element.data("width")||500,d=this._$element.data("height")||c/(560/315);return this._showVideoIframe(a+"?autoplay=1",c,d,b)}},{key:"_showInstagramVideo",value:function(a,b){var c=this._$element.data("width")||612,d=c+80;return a="/"!==a.substr(-1)?a+"/":a,b.html('<iframe width="'+c+'" height="'+d+'" src="'+a+'embed/" frameborder="0" allowfullscreen></iframe>'),this._resize(c,d),this._config.onContentLoaded.call(this),this._$modalArrows&&this._$modalArrows.css("display","none"),this._toggleLoading(!1),this}},{key:"_showVideoIframe",value:function(a,b,c,d){return c=c||b,d.html('<div class="embed-responsive embed-responsive-16by9"><iframe width="'+b+'" height="'+c+'" src="'+a+'" frameborder="0" allowfullscreen class="embed-responsive-item"></iframe></div>'),this._resize(b,c),this._config.onContentLoaded.call(this),this._$modalArrows&&this._$modalArrows.css("display","none"),this._toggleLoading(!1),this}},{key:"_showHtml5Video",value:function(a,b){var c=this._$element.data("width")||560,d=this._$element.data("height")||c/(560/315);return b.html('<div class="embed-responsive embed-responsive-16by9"><video width="'+c+'" height="'+d+'" src="'+a+'" preload="auto" autoplay controls class="embed-responsive-item"></video></div>'),this._resize(c,d),this._config.onContentLoaded.call(this),this._$modalArrows&&this._$modalArrows.css("display","none"),this._toggleLoading(!1),this}},{key:"_loadRemoteContent",value:function(b,c){var d=this,e=this._$element.data("width")||560,f=this._$element.data("height")||560,g=this._$element.data("disableExternalCheck")||!1;return this._toggleLoading(!1),g||this._isExternal(b)?(c.html('<iframe src="'+b+'" frameborder="0" allowfullscreen></iframe>'),this._config.onContentLoaded.call(this)):c.load(b,a.proxy(function(){return d._$element.trigger("loaded.bs.modal")})),this._$modalArrows&&this._$modalArrows.css("display","none"),this._resize(e,f),this}},{key:"_isExternal",value:function(a){var b=a.match(/^([^:\/?#]+:)?(?:\/\/([^\/?#]*))?([^?#]+)?(\?[^#]*)?(#.*)?/);return"string"==typeof b[1]&&b[1].length>0&&b[1].toLowerCase()!==location.protocol||"string"==typeof b[2]&&b[2].length>0&&b[2].replace(new RegExp(":("+{"http:":80,"https:":443}[location.protocol]+")?$"),"")!==location.host}},{key:"_error",value:function(a){return console.error(a),this._containerToUse().html(a),this._resize(300,300),this}},{key:"_preloadImageByIndex",value:function(b,c){if(this._$galleryItems){var d=a(this._$galleryItems.get(b),!1);if("undefined"!=typeof d){var e=d.attr("data-remote")||d.attr("href");return("image"===d.attr("data-type")||this._isImage(e))&&this._preloadImage(e,!1),c>0?this._preloadImageByIndex(b+1,c-1):void 0}}}},{key:"_preloadImage",value:function(b,c){var d=this;c=c||!1;var e=new Image;return c&&!function(){var f=setTimeout(function(){c.append(d._config.loadingMessage)},200);e.onload=function(){f&&clearTimeout(f),f=null;var b=a("<img />");return b.attr("src",e.src),b.addClass("img-fluid"),b.css("width","100%"),c.html(b),d._$modalArrows&&d._$modalArrows.css("display",""),d._resize(e.width,e.height),d._toggleLoading(!1),d._config.onContentLoaded.call(d)},e.onerror=function(){return d._toggleLoading(!1),d._error(d._config.strings.fail+("  "+b))}}(),e.src=b,e}},{key:"_swipeGesure",value:function(){return this._touchendX<this._touchstartX?this.navigateRight():this._touchendX>this._touchstartX?this.navigateLeft():void 0}},{key:"_resize",value:function(b,c){c=c||b,this._wantedWidth=b,this._wantedHeight=c;var d=b/c,e=this._padding.left+this._padding.right+this._border.left+this._border.right,f=this._config.doc.body.clientWidth>575?20:0,g=this._config.doc.body.clientWidth>575?0:20,h=Math.min(b+e,this._config.doc.body.clientWidth-f,this._config.maxWidth);b+e>h?(c=(h-e-g)/d,b=h):b+=e;var i=0,j=0;this._footerIsShown&&(j=this._$modalFooter.outerHeight(!0)||55),this._titleIsShown&&(i=this._$modalHeader.outerHeight(!0)||67);var k=this._padding.top+this._padding.bottom+this._border.bottom+this._border.top,l=parseFloat(this._$modalDialog.css("margin-top"))+parseFloat(this._$modalDialog.css("margin-bottom")),m=Math.min(c,a(window).height()-k-l-i-j,this._config.maxHeight-k-i-j);c>m&&(b=Math.ceil(m*d)+e),this._$lightboxContainer.css("height",m),this._$modalDialog.css("flex",1).css("maxWidth",b);var n=this._$modal.data("bs.modal");if(n)try{n._handleUpdate()}catch(o){n.handleUpdate()}return this}}],[{key:"_jQueryInterface",value:function(b){var c=this;return b=b||{},this.each(function(){var e=a(c),f=a.extend({},d.Default,e.data(),"object"==typeof b&&b);new d(c,f)})}}]),d}();return a.fn[d]=g._jQueryInterface,a.fn[d].Constructor=g,a.fn[d].noConflict=function(){return a.fn[d]=e,g._jQueryInterface},g})(jQuery)}(jQuery);
 //# sourceMappingURL=ekko-lightbox.min.js.map
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js":
+/***/ "./node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"
 /*!*******************************************************************************************!*\
   !*** ./node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js ***!
   \*******************************************************************************************/
-/***/ ((module, exports, __webpack_require__) => {
+(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   * Bootstrap Datetime Picker v4.17.49
@@ -7063,7 +10438,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    } else {}
+    } else // removed by dead control flow
+{}
 }(function ($, moment) {
     'use strict';
     if (!moment) {
@@ -9650,13 +13026,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 }));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/jquery-slimscroll/jquery.slimscroll.js":
+/***/ "./node_modules/jquery-slimscroll/jquery.slimscroll.js"
 /*!*************************************************************!*\
   !*** ./node_modules/jquery-slimscroll/jquery.slimscroll.js ***!
   \*************************************************************/
-/***/ (() => {
+() {
 
 /*! Copyright (c) 2011 Piotr Rochala (http://rocha.la)
  * Dual licensed under the MIT (http://www.opensource.org/licenses/mit-license.php)
@@ -10134,13 +13510,13 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 })(jQuery);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/jquery-ui/dist/jquery-ui.js":
+/***/ "./node_modules/jquery-ui/dist/jquery-ui.js"
 /*!**************************************************!*\
   !*** ./node_modules/jquery-ui/dist/jquery-ui.js ***!
   \**************************************************/
-/***/ ((module, exports, __webpack_require__) => {
+(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! jQuery UI - v1.14.1 - 2024-10-30
 * https://jqueryui.com
@@ -10157,7 +13533,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
+	} else // removed by dead control flow
+{}
 } )( function( $ ) {
 "use strict";
 
@@ -28951,13 +32328,13 @@ var widgetsTooltip = $.ui.tooltip;
 
 } );
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/jquery-ui/ui/version.js":
+/***/ "./node_modules/jquery-ui/ui/version.js"
 /*!**********************************************!*\
   !*** ./node_modules/jquery-ui/ui/version.js ***!
   \**********************************************/
-/***/ ((module, exports, __webpack_require__) => {
+(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;( function( factory ) {
 	"use strict";
@@ -28969,7 +32346,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
+	} else // removed by dead control flow
+{}
 } )( function( $ ) {
 "use strict";
 
@@ -28980,13 +32358,13 @@ return $.ui.version = "1.14.1";
 } );
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/jquery-ui/ui/widget.js":
+/***/ "./node_modules/jquery-ui/ui/widget.js"
 /*!*********************************************!*\
   !*** ./node_modules/jquery-ui/ui/widget.js ***!
   \*********************************************/
-/***/ ((module, exports, __webpack_require__) => {
+(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery UI Widget 1.14.1
@@ -29013,7 +32391,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
+	} else // removed by dead control flow
+{}
 } )( function( $ ) {
 "use strict";
 
@@ -29748,13 +33127,13 @@ return $.widget;
 } );
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/jquery-validation/dist/jquery.validate.js":
+/***/ "./node_modules/jquery-validation/dist/jquery.validate.js"
 /*!****************************************************************!*\
   !*** ./node_modules/jquery-validation/dist/jquery.validate.js ***!
   \****************************************************************/
-/***/ ((module, exports, __webpack_require__) => {
+(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery Validation Plugin v1.21.0
@@ -29770,7 +33149,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	} else {}
+	} else // removed by dead control flow
+{}
 }(function( $ ) {
 
 $.extend( $.fn, {
@@ -31459,13 +34839,13 @@ $.ajaxAbort = function( port ) {
 return $;
 }));
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js":
+/***/ "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js"
 /*!*************************************************************************!*\
   !*** ./node_modules/jquery.iframe-transport/jquery.iframe-transport.js ***!
   \*************************************************************************/
-/***/ (() => {
+() {
 
 // This [jQuery](https://jquery.com/) plugin implements an `<iframe>`
 // [transport](https://api.jquery.com/jQuery.ajax/#extending-ajax) so that
@@ -31716,13 +35096,13 @@ return $;
 })(jQuery);
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/jquery/dist/jquery.js":
+/***/ "./node_modules/jquery/dist/jquery.js"
 /*!********************************************!*\
   !*** ./node_modules/jquery/dist/jquery.js ***!
   \********************************************/
-/***/ (function(module, exports) {
+(module, exports) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery JavaScript Library v3.7.1
@@ -42443,13 +45823,13 @@ return jQuery;
 } );
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/add-async.js":
+/***/ "./node_modules/list.js/src/add-async.js"
 /*!***********************************************!*\
   !*** ./node_modules/list.js/src/add-async.js ***!
   \***********************************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = function(list) {
   var addAsync = function(values, callback, items) {
@@ -42469,13 +45849,13 @@ module.exports = function(list) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/filter.js":
+/***/ "./node_modules/list.js/src/filter.js"
 /*!********************************************!*\
   !*** ./node_modules/list.js/src/filter.js ***!
   \********************************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = function(list) {
 
@@ -42508,13 +45888,13 @@ module.exports = function(list) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/fuzzy-search.js":
+/***/ "./node_modules/list.js/src/fuzzy-search.js"
 /*!**************************************************!*\
   !*** ./node_modules/list.js/src/fuzzy-search.js ***!
   \**************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+(module, __unused_webpack_exports, __webpack_require__) {
 
 
 var classes = __webpack_require__(/*! ./utils/classes */ "./node_modules/list.js/src/utils/classes.js"),
@@ -42585,13 +45965,13 @@ module.exports = function(list, options) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/index.js":
+/***/ "./node_modules/list.js/src/index.js"
 /*!*******************************************!*\
   !*** ./node_modules/list.js/src/index.js ***!
   \*******************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+(module, __unused_webpack_exports, __webpack_require__) {
 
 var naturalSort = __webpack_require__(/*! string-natural-compare */ "./node_modules/string-natural-compare/natural-compare.js"),
   getByClass = __webpack_require__(/*! ./utils/get-by-class */ "./node_modules/list.js/src/utils/get-by-class.js"),
@@ -42857,13 +46237,13 @@ module.exports = function(id, options, values) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/item.js":
+/***/ "./node_modules/list.js/src/item.js"
 /*!******************************************!*\
   !*** ./node_modules/list.js/src/item.js ***!
   \******************************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = function(list) {
   return function(initValues, element, notCreate) {
@@ -42927,13 +46307,13 @@ module.exports = function(list) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/pagination.js":
+/***/ "./node_modules/list.js/src/pagination.js"
 /*!************************************************!*\
   !*** ./node_modules/list.js/src/pagination.js ***!
   \************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+(module, __unused_webpack_exports, __webpack_require__) {
 
 var classes = __webpack_require__(/*! ./utils/classes */ "./node_modules/list.js/src/utils/classes.js"),
   events = __webpack_require__(/*! ./utils/events */ "./node_modules/list.js/src/utils/events.js"),
@@ -43030,13 +46410,13 @@ module.exports = function(list) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/parse.js":
+/***/ "./node_modules/list.js/src/parse.js"
 /*!*******************************************!*\
   !*** ./node_modules/list.js/src/parse.js ***!
   \*******************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+(module, __unused_webpack_exports, __webpack_require__) {
 
 module.exports = function(list) {
 
@@ -43087,13 +46467,13 @@ module.exports = function(list) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/search.js":
+/***/ "./node_modules/list.js/src/search.js"
 /*!********************************************!*\
   !*** ./node_modules/list.js/src/search.js ***!
   \********************************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = function(list) {
   var item,
@@ -43217,13 +46597,13 @@ module.exports = function(list) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/sort.js":
+/***/ "./node_modules/list.js/src/sort.js"
 /*!******************************************!*\
   !*** ./node_modules/list.js/src/sort.js ***!
   \******************************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = function(list) {
 
@@ -43333,13 +46713,13 @@ module.exports = function(list) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/templater.js":
+/***/ "./node_modules/list.js/src/templater.js"
 /*!***********************************************!*\
   !*** ./node_modules/list.js/src/templater.js ***!
   \***********************************************/
-/***/ ((module) => {
+(module) {
 
 var Templater = function(list) {
   var itemSource,
@@ -43517,13 +46897,13 @@ module.exports = function(list) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/classes.js":
+/***/ "./node_modules/list.js/src/utils/classes.js"
 /*!***************************************************!*\
   !*** ./node_modules/list.js/src/utils/classes.js ***!
   \***************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+(module, __unused_webpack_exports, __webpack_require__) {
 
 /**
  * Module dependencies.
@@ -43691,13 +47071,13 @@ ClassList.prototype.contains = function(name){
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/events.js":
+/***/ "./node_modules/list.js/src/utils/events.js"
 /*!**************************************************!*\
   !*** ./node_modules/list.js/src/utils/events.js ***!
   \**************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+(__unused_webpack_module, exports, __webpack_require__) {
 
 var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
     unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
@@ -43739,13 +47119,13 @@ exports.unbind = function(el, type, fn, capture){
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/extend.js":
+/***/ "./node_modules/list.js/src/utils/extend.js"
 /*!**************************************************!*\
   !*** ./node_modules/list.js/src/utils/extend.js ***!
   \**************************************************/
-/***/ ((module) => {
+(module) {
 
 /*
  * Source: https://github.com/segmentio/extend
@@ -43767,13 +47147,13 @@ module.exports = function extend (object) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/fuzzy.js":
+/***/ "./node_modules/list.js/src/utils/fuzzy.js"
 /*!*************************************************!*\
   !*** ./node_modules/list.js/src/utils/fuzzy.js ***!
   \*************************************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = function(text, pattern, options) {
     // Aproximately where in the text is the pattern expected to be found?
@@ -43900,13 +47280,13 @@ module.exports = function(text, pattern, options) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/get-attribute.js":
+/***/ "./node_modules/list.js/src/utils/get-attribute.js"
 /*!*********************************************************!*\
   !*** ./node_modules/list.js/src/utils/get-attribute.js ***!
   \*********************************************************/
-/***/ ((module) => {
+(module) {
 
 /**
  * A cross-browser implementation of getAttribute.
@@ -43936,13 +47316,13 @@ module.exports = function(el, attr) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/get-by-class.js":
+/***/ "./node_modules/list.js/src/utils/get-by-class.js"
 /*!********************************************************!*\
   !*** ./node_modules/list.js/src/utils/get-by-class.js ***!
   \********************************************************/
-/***/ ((module) => {
+(module) {
 
 /**
  * A cross-browser implementation of getElementsByClass.
@@ -44009,13 +47389,13 @@ module.exports = (function() {
 })();
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/index-of.js":
+/***/ "./node_modules/list.js/src/utils/index-of.js"
 /*!****************************************************!*\
   !*** ./node_modules/list.js/src/utils/index-of.js ***!
   \****************************************************/
-/***/ ((module) => {
+(module) {
 
 var indexOf = [].indexOf;
 
@@ -44028,13 +47408,13 @@ module.exports = function(arr, obj){
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/to-array.js":
+/***/ "./node_modules/list.js/src/utils/to-array.js"
 /*!****************************************************!*\
   !*** ./node_modules/list.js/src/utils/to-array.js ***!
   \****************************************************/
-/***/ ((module) => {
+(module) {
 
 /**
  * Source: https://github.com/timoxley/to-array
@@ -44071,13 +47451,13 @@ function isArray(arr) {
 }
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/list.js/src/utils/to-string.js":
+/***/ "./node_modules/list.js/src/utils/to-string.js"
 /*!*****************************************************!*\
   !*** ./node_modules/list.js/src/utils/to-string.js ***!
   \*****************************************************/
-/***/ ((module) => {
+(module) {
 
 module.exports = function(s) {
   s = (s === undefined) ? "" : s;
@@ -44087,318 +47467,52 @@ module.exports = function(s) {
 };
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
-/*!***************************************************!*\
-  !*** ./node_modules/moment/locale/ sync ^\.\/.*$ ***!
-  \***************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ "./node_modules/admin-lte/build/less/AdminLTE.less"
+/*!*********************************************************!*\
+  !*** ./node_modules/admin-lte/build/less/AdminLTE.less ***!
+  \*********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-var map = {
-	"./af": "./node_modules/moment/locale/af.js",
-	"./af.js": "./node_modules/moment/locale/af.js",
-	"./ar": "./node_modules/moment/locale/ar.js",
-	"./ar-dz": "./node_modules/moment/locale/ar-dz.js",
-	"./ar-dz.js": "./node_modules/moment/locale/ar-dz.js",
-	"./ar-kw": "./node_modules/moment/locale/ar-kw.js",
-	"./ar-kw.js": "./node_modules/moment/locale/ar-kw.js",
-	"./ar-ly": "./node_modules/moment/locale/ar-ly.js",
-	"./ar-ly.js": "./node_modules/moment/locale/ar-ly.js",
-	"./ar-ma": "./node_modules/moment/locale/ar-ma.js",
-	"./ar-ma.js": "./node_modules/moment/locale/ar-ma.js",
-	"./ar-ps": "./node_modules/moment/locale/ar-ps.js",
-	"./ar-ps.js": "./node_modules/moment/locale/ar-ps.js",
-	"./ar-sa": "./node_modules/moment/locale/ar-sa.js",
-	"./ar-sa.js": "./node_modules/moment/locale/ar-sa.js",
-	"./ar-tn": "./node_modules/moment/locale/ar-tn.js",
-	"./ar-tn.js": "./node_modules/moment/locale/ar-tn.js",
-	"./ar.js": "./node_modules/moment/locale/ar.js",
-	"./az": "./node_modules/moment/locale/az.js",
-	"./az.js": "./node_modules/moment/locale/az.js",
-	"./be": "./node_modules/moment/locale/be.js",
-	"./be.js": "./node_modules/moment/locale/be.js",
-	"./bg": "./node_modules/moment/locale/bg.js",
-	"./bg.js": "./node_modules/moment/locale/bg.js",
-	"./bm": "./node_modules/moment/locale/bm.js",
-	"./bm.js": "./node_modules/moment/locale/bm.js",
-	"./bn": "./node_modules/moment/locale/bn.js",
-	"./bn-bd": "./node_modules/moment/locale/bn-bd.js",
-	"./bn-bd.js": "./node_modules/moment/locale/bn-bd.js",
-	"./bn.js": "./node_modules/moment/locale/bn.js",
-	"./bo": "./node_modules/moment/locale/bo.js",
-	"./bo.js": "./node_modules/moment/locale/bo.js",
-	"./br": "./node_modules/moment/locale/br.js",
-	"./br.js": "./node_modules/moment/locale/br.js",
-	"./bs": "./node_modules/moment/locale/bs.js",
-	"./bs.js": "./node_modules/moment/locale/bs.js",
-	"./ca": "./node_modules/moment/locale/ca.js",
-	"./ca.js": "./node_modules/moment/locale/ca.js",
-	"./cs": "./node_modules/moment/locale/cs.js",
-	"./cs.js": "./node_modules/moment/locale/cs.js",
-	"./cv": "./node_modules/moment/locale/cv.js",
-	"./cv.js": "./node_modules/moment/locale/cv.js",
-	"./cy": "./node_modules/moment/locale/cy.js",
-	"./cy.js": "./node_modules/moment/locale/cy.js",
-	"./da": "./node_modules/moment/locale/da.js",
-	"./da.js": "./node_modules/moment/locale/da.js",
-	"./de": "./node_modules/moment/locale/de.js",
-	"./de-at": "./node_modules/moment/locale/de-at.js",
-	"./de-at.js": "./node_modules/moment/locale/de-at.js",
-	"./de-ch": "./node_modules/moment/locale/de-ch.js",
-	"./de-ch.js": "./node_modules/moment/locale/de-ch.js",
-	"./de.js": "./node_modules/moment/locale/de.js",
-	"./dv": "./node_modules/moment/locale/dv.js",
-	"./dv.js": "./node_modules/moment/locale/dv.js",
-	"./el": "./node_modules/moment/locale/el.js",
-	"./el.js": "./node_modules/moment/locale/el.js",
-	"./en-au": "./node_modules/moment/locale/en-au.js",
-	"./en-au.js": "./node_modules/moment/locale/en-au.js",
-	"./en-ca": "./node_modules/moment/locale/en-ca.js",
-	"./en-ca.js": "./node_modules/moment/locale/en-ca.js",
-	"./en-gb": "./node_modules/moment/locale/en-gb.js",
-	"./en-gb.js": "./node_modules/moment/locale/en-gb.js",
-	"./en-ie": "./node_modules/moment/locale/en-ie.js",
-	"./en-ie.js": "./node_modules/moment/locale/en-ie.js",
-	"./en-il": "./node_modules/moment/locale/en-il.js",
-	"./en-il.js": "./node_modules/moment/locale/en-il.js",
-	"./en-in": "./node_modules/moment/locale/en-in.js",
-	"./en-in.js": "./node_modules/moment/locale/en-in.js",
-	"./en-nz": "./node_modules/moment/locale/en-nz.js",
-	"./en-nz.js": "./node_modules/moment/locale/en-nz.js",
-	"./en-sg": "./node_modules/moment/locale/en-sg.js",
-	"./en-sg.js": "./node_modules/moment/locale/en-sg.js",
-	"./eo": "./node_modules/moment/locale/eo.js",
-	"./eo.js": "./node_modules/moment/locale/eo.js",
-	"./es": "./node_modules/moment/locale/es.js",
-	"./es-do": "./node_modules/moment/locale/es-do.js",
-	"./es-do.js": "./node_modules/moment/locale/es-do.js",
-	"./es-mx": "./node_modules/moment/locale/es-mx.js",
-	"./es-mx.js": "./node_modules/moment/locale/es-mx.js",
-	"./es-us": "./node_modules/moment/locale/es-us.js",
-	"./es-us.js": "./node_modules/moment/locale/es-us.js",
-	"./es.js": "./node_modules/moment/locale/es.js",
-	"./et": "./node_modules/moment/locale/et.js",
-	"./et.js": "./node_modules/moment/locale/et.js",
-	"./eu": "./node_modules/moment/locale/eu.js",
-	"./eu.js": "./node_modules/moment/locale/eu.js",
-	"./fa": "./node_modules/moment/locale/fa.js",
-	"./fa.js": "./node_modules/moment/locale/fa.js",
-	"./fi": "./node_modules/moment/locale/fi.js",
-	"./fi.js": "./node_modules/moment/locale/fi.js",
-	"./fil": "./node_modules/moment/locale/fil.js",
-	"./fil.js": "./node_modules/moment/locale/fil.js",
-	"./fo": "./node_modules/moment/locale/fo.js",
-	"./fo.js": "./node_modules/moment/locale/fo.js",
-	"./fr": "./node_modules/moment/locale/fr.js",
-	"./fr-ca": "./node_modules/moment/locale/fr-ca.js",
-	"./fr-ca.js": "./node_modules/moment/locale/fr-ca.js",
-	"./fr-ch": "./node_modules/moment/locale/fr-ch.js",
-	"./fr-ch.js": "./node_modules/moment/locale/fr-ch.js",
-	"./fr.js": "./node_modules/moment/locale/fr.js",
-	"./fy": "./node_modules/moment/locale/fy.js",
-	"./fy.js": "./node_modules/moment/locale/fy.js",
-	"./ga": "./node_modules/moment/locale/ga.js",
-	"./ga.js": "./node_modules/moment/locale/ga.js",
-	"./gd": "./node_modules/moment/locale/gd.js",
-	"./gd.js": "./node_modules/moment/locale/gd.js",
-	"./gl": "./node_modules/moment/locale/gl.js",
-	"./gl.js": "./node_modules/moment/locale/gl.js",
-	"./gom-deva": "./node_modules/moment/locale/gom-deva.js",
-	"./gom-deva.js": "./node_modules/moment/locale/gom-deva.js",
-	"./gom-latn": "./node_modules/moment/locale/gom-latn.js",
-	"./gom-latn.js": "./node_modules/moment/locale/gom-latn.js",
-	"./gu": "./node_modules/moment/locale/gu.js",
-	"./gu.js": "./node_modules/moment/locale/gu.js",
-	"./he": "./node_modules/moment/locale/he.js",
-	"./he.js": "./node_modules/moment/locale/he.js",
-	"./hi": "./node_modules/moment/locale/hi.js",
-	"./hi.js": "./node_modules/moment/locale/hi.js",
-	"./hr": "./node_modules/moment/locale/hr.js",
-	"./hr.js": "./node_modules/moment/locale/hr.js",
-	"./hu": "./node_modules/moment/locale/hu.js",
-	"./hu.js": "./node_modules/moment/locale/hu.js",
-	"./hy-am": "./node_modules/moment/locale/hy-am.js",
-	"./hy-am.js": "./node_modules/moment/locale/hy-am.js",
-	"./id": "./node_modules/moment/locale/id.js",
-	"./id.js": "./node_modules/moment/locale/id.js",
-	"./is": "./node_modules/moment/locale/is.js",
-	"./is.js": "./node_modules/moment/locale/is.js",
-	"./it": "./node_modules/moment/locale/it.js",
-	"./it-ch": "./node_modules/moment/locale/it-ch.js",
-	"./it-ch.js": "./node_modules/moment/locale/it-ch.js",
-	"./it.js": "./node_modules/moment/locale/it.js",
-	"./ja": "./node_modules/moment/locale/ja.js",
-	"./ja.js": "./node_modules/moment/locale/ja.js",
-	"./jv": "./node_modules/moment/locale/jv.js",
-	"./jv.js": "./node_modules/moment/locale/jv.js",
-	"./ka": "./node_modules/moment/locale/ka.js",
-	"./ka.js": "./node_modules/moment/locale/ka.js",
-	"./kk": "./node_modules/moment/locale/kk.js",
-	"./kk.js": "./node_modules/moment/locale/kk.js",
-	"./km": "./node_modules/moment/locale/km.js",
-	"./km.js": "./node_modules/moment/locale/km.js",
-	"./kn": "./node_modules/moment/locale/kn.js",
-	"./kn.js": "./node_modules/moment/locale/kn.js",
-	"./ko": "./node_modules/moment/locale/ko.js",
-	"./ko.js": "./node_modules/moment/locale/ko.js",
-	"./ku": "./node_modules/moment/locale/ku.js",
-	"./ku-kmr": "./node_modules/moment/locale/ku-kmr.js",
-	"./ku-kmr.js": "./node_modules/moment/locale/ku-kmr.js",
-	"./ku.js": "./node_modules/moment/locale/ku.js",
-	"./ky": "./node_modules/moment/locale/ky.js",
-	"./ky.js": "./node_modules/moment/locale/ky.js",
-	"./lb": "./node_modules/moment/locale/lb.js",
-	"./lb.js": "./node_modules/moment/locale/lb.js",
-	"./lo": "./node_modules/moment/locale/lo.js",
-	"./lo.js": "./node_modules/moment/locale/lo.js",
-	"./lt": "./node_modules/moment/locale/lt.js",
-	"./lt.js": "./node_modules/moment/locale/lt.js",
-	"./lv": "./node_modules/moment/locale/lv.js",
-	"./lv.js": "./node_modules/moment/locale/lv.js",
-	"./me": "./node_modules/moment/locale/me.js",
-	"./me.js": "./node_modules/moment/locale/me.js",
-	"./mi": "./node_modules/moment/locale/mi.js",
-	"./mi.js": "./node_modules/moment/locale/mi.js",
-	"./mk": "./node_modules/moment/locale/mk.js",
-	"./mk.js": "./node_modules/moment/locale/mk.js",
-	"./ml": "./node_modules/moment/locale/ml.js",
-	"./ml.js": "./node_modules/moment/locale/ml.js",
-	"./mn": "./node_modules/moment/locale/mn.js",
-	"./mn.js": "./node_modules/moment/locale/mn.js",
-	"./mr": "./node_modules/moment/locale/mr.js",
-	"./mr.js": "./node_modules/moment/locale/mr.js",
-	"./ms": "./node_modules/moment/locale/ms.js",
-	"./ms-my": "./node_modules/moment/locale/ms-my.js",
-	"./ms-my.js": "./node_modules/moment/locale/ms-my.js",
-	"./ms.js": "./node_modules/moment/locale/ms.js",
-	"./mt": "./node_modules/moment/locale/mt.js",
-	"./mt.js": "./node_modules/moment/locale/mt.js",
-	"./my": "./node_modules/moment/locale/my.js",
-	"./my.js": "./node_modules/moment/locale/my.js",
-	"./nb": "./node_modules/moment/locale/nb.js",
-	"./nb.js": "./node_modules/moment/locale/nb.js",
-	"./ne": "./node_modules/moment/locale/ne.js",
-	"./ne.js": "./node_modules/moment/locale/ne.js",
-	"./nl": "./node_modules/moment/locale/nl.js",
-	"./nl-be": "./node_modules/moment/locale/nl-be.js",
-	"./nl-be.js": "./node_modules/moment/locale/nl-be.js",
-	"./nl.js": "./node_modules/moment/locale/nl.js",
-	"./nn": "./node_modules/moment/locale/nn.js",
-	"./nn.js": "./node_modules/moment/locale/nn.js",
-	"./oc-lnc": "./node_modules/moment/locale/oc-lnc.js",
-	"./oc-lnc.js": "./node_modules/moment/locale/oc-lnc.js",
-	"./pa-in": "./node_modules/moment/locale/pa-in.js",
-	"./pa-in.js": "./node_modules/moment/locale/pa-in.js",
-	"./pl": "./node_modules/moment/locale/pl.js",
-	"./pl.js": "./node_modules/moment/locale/pl.js",
-	"./pt": "./node_modules/moment/locale/pt.js",
-	"./pt-br": "./node_modules/moment/locale/pt-br.js",
-	"./pt-br.js": "./node_modules/moment/locale/pt-br.js",
-	"./pt.js": "./node_modules/moment/locale/pt.js",
-	"./ro": "./node_modules/moment/locale/ro.js",
-	"./ro.js": "./node_modules/moment/locale/ro.js",
-	"./ru": "./node_modules/moment/locale/ru.js",
-	"./ru.js": "./node_modules/moment/locale/ru.js",
-	"./sd": "./node_modules/moment/locale/sd.js",
-	"./sd.js": "./node_modules/moment/locale/sd.js",
-	"./se": "./node_modules/moment/locale/se.js",
-	"./se.js": "./node_modules/moment/locale/se.js",
-	"./si": "./node_modules/moment/locale/si.js",
-	"./si.js": "./node_modules/moment/locale/si.js",
-	"./sk": "./node_modules/moment/locale/sk.js",
-	"./sk.js": "./node_modules/moment/locale/sk.js",
-	"./sl": "./node_modules/moment/locale/sl.js",
-	"./sl.js": "./node_modules/moment/locale/sl.js",
-	"./sq": "./node_modules/moment/locale/sq.js",
-	"./sq.js": "./node_modules/moment/locale/sq.js",
-	"./sr": "./node_modules/moment/locale/sr.js",
-	"./sr-cyrl": "./node_modules/moment/locale/sr-cyrl.js",
-	"./sr-cyrl.js": "./node_modules/moment/locale/sr-cyrl.js",
-	"./sr.js": "./node_modules/moment/locale/sr.js",
-	"./ss": "./node_modules/moment/locale/ss.js",
-	"./ss.js": "./node_modules/moment/locale/ss.js",
-	"./sv": "./node_modules/moment/locale/sv.js",
-	"./sv.js": "./node_modules/moment/locale/sv.js",
-	"./sw": "./node_modules/moment/locale/sw.js",
-	"./sw.js": "./node_modules/moment/locale/sw.js",
-	"./ta": "./node_modules/moment/locale/ta.js",
-	"./ta.js": "./node_modules/moment/locale/ta.js",
-	"./te": "./node_modules/moment/locale/te.js",
-	"./te.js": "./node_modules/moment/locale/te.js",
-	"./tet": "./node_modules/moment/locale/tet.js",
-	"./tet.js": "./node_modules/moment/locale/tet.js",
-	"./tg": "./node_modules/moment/locale/tg.js",
-	"./tg.js": "./node_modules/moment/locale/tg.js",
-	"./th": "./node_modules/moment/locale/th.js",
-	"./th.js": "./node_modules/moment/locale/th.js",
-	"./tk": "./node_modules/moment/locale/tk.js",
-	"./tk.js": "./node_modules/moment/locale/tk.js",
-	"./tl-ph": "./node_modules/moment/locale/tl-ph.js",
-	"./tl-ph.js": "./node_modules/moment/locale/tl-ph.js",
-	"./tlh": "./node_modules/moment/locale/tlh.js",
-	"./tlh.js": "./node_modules/moment/locale/tlh.js",
-	"./tr": "./node_modules/moment/locale/tr.js",
-	"./tr.js": "./node_modules/moment/locale/tr.js",
-	"./tzl": "./node_modules/moment/locale/tzl.js",
-	"./tzl.js": "./node_modules/moment/locale/tzl.js",
-	"./tzm": "./node_modules/moment/locale/tzm.js",
-	"./tzm-latn": "./node_modules/moment/locale/tzm-latn.js",
-	"./tzm-latn.js": "./node_modules/moment/locale/tzm-latn.js",
-	"./tzm.js": "./node_modules/moment/locale/tzm.js",
-	"./ug-cn": "./node_modules/moment/locale/ug-cn.js",
-	"./ug-cn.js": "./node_modules/moment/locale/ug-cn.js",
-	"./uk": "./node_modules/moment/locale/uk.js",
-	"./uk.js": "./node_modules/moment/locale/uk.js",
-	"./ur": "./node_modules/moment/locale/ur.js",
-	"./ur.js": "./node_modules/moment/locale/ur.js",
-	"./uz": "./node_modules/moment/locale/uz.js",
-	"./uz-latn": "./node_modules/moment/locale/uz-latn.js",
-	"./uz-latn.js": "./node_modules/moment/locale/uz-latn.js",
-	"./uz.js": "./node_modules/moment/locale/uz.js",
-	"./vi": "./node_modules/moment/locale/vi.js",
-	"./vi.js": "./node_modules/moment/locale/vi.js",
-	"./x-pseudo": "./node_modules/moment/locale/x-pseudo.js",
-	"./x-pseudo.js": "./node_modules/moment/locale/x-pseudo.js",
-	"./yo": "./node_modules/moment/locale/yo.js",
-	"./yo.js": "./node_modules/moment/locale/yo.js",
-	"./zh-cn": "./node_modules/moment/locale/zh-cn.js",
-	"./zh-cn.js": "./node_modules/moment/locale/zh-cn.js",
-	"./zh-hk": "./node_modules/moment/locale/zh-hk.js",
-	"./zh-hk.js": "./node_modules/moment/locale/zh-hk.js",
-	"./zh-mo": "./node_modules/moment/locale/zh-mo.js",
-	"./zh-mo.js": "./node_modules/moment/locale/zh-mo.js",
-	"./zh-tw": "./node_modules/moment/locale/zh-tw.js",
-	"./zh-tw.js": "./node_modules/moment/locale/zh-tw.js"
-};
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
 
 
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
+/***/ },
 
-/***/ }),
+/***/ "./resources/assets/less/app.less"
+/*!****************************************!*\
+  !*** ./resources/assets/less/app.less ***!
+  \****************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-/***/ "./node_modules/moment/locale/af.js":
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
+/***/ "./resources/assets/less/overrides.less"
+/*!**********************************************!*\
+  !*** ./resources/assets/less/overrides.less ***!
+  \**********************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ },
+
+/***/ "./node_modules/moment/locale/af.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/af.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Afrikaans [af]
@@ -44482,13 +47596,94 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ar-dz.js":
+/***/ "./node_modules/moment/locale/am-et.js"
+/*!*********************************************!*\
+  !*** ./node_modules/moment/locale/am-et.js ***!
+  \*********************************************/
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Amharic (Ethiopia) [am-et]
+//! author : Tekle Ayele : https://github.com/tekleayele
+
+;(function (global, factory) {
+    true ? factory(__webpack_require__(/*! ../moment */ "./node_modules/moment/moment.js")) :
+   0
+}(this, (function (moment) { 'use strict';
+
+    //! moment.js locale configuration
+
+    var amEt = moment.defineLocale('am-et', {
+        months: 'ጃንዩወሪ_ፌብሩወሪ_ማርች_ኤፕሪል_ሜይ_ጁን_ጁላይ_ኦገስት_ሴፕቴምበር_ኦክቶበር_ኖቬምበር_ዲሴምበር'.split(
+            '_'
+        ),
+        monthsShort: 'ጃን_ፌብ_ማር_ኤፕር_ሜይ_ጁን_ጁላይ_ኦገ_ሴፕ_ኦክቶ_ኖቬ_ዲሴ'.split('_'),
+        weekdays: 'እሑድ_ሰኞ_ማክሰኞ_እሮብ_ሀሙስ_ዓርብ_ቅዳሜ'.split('_'),
+        weekdaysShort: 'እሑ_ሰኞ_ማክ_እሮ_ሀሙ_ዓር_ቅዳ'.split('_'),
+        weekdaysMin: 'እሁ_ሰ_ማ_እ_ሀ_ዓ_ቅ'.split('_'),
+        meridiemParse: /ጥዋት|ከሰዓት/,
+        isPM: function (input) {
+            return input === 'ከሰዓት';
+        },
+        meridiem: function (hours) {
+            return hours < 12 ? 'ጥዋት' : 'ከሰዓት';
+        },
+        longDateFormat: {
+            LT: 'h:mm A',
+            LTS: 'h:mm:ss A',
+            L: 'DD/MM/YYYY',
+            LL: 'D MMMM YYYY',
+            LLL: 'D MMMM YYYY h:mm A',
+            LLLL: 'dddd, D MMMM YYYY h:mm A',
+        },
+        calendar: {
+            sameDay: '[ዛሬ በ] LT',
+            nextDay: '[ነገ በ] LT',
+            nextWeek: 'dddd [በ] LT',
+            lastDay: '[ትናንትና በ] LT',
+            lastWeek: '[ያለፈው ሳምንት] dddd [በ] LT',
+            sameElse: 'L',
+        },
+        relativeTime: {
+            future: '%s ውስጥ',
+            past: '%s በፊት',
+            s: 'ጥቂት ሰከንዶች',
+            ss: '%d ሰከንዶች',
+            m: 'አንድ ደቂቃ',
+            mm: '%d ደቂቃዎች',
+            h: 'አንድ ሰአት',
+            hh: '%d ሰአታት',
+            d: 'አንድ ቀን',
+            dd: '%d ቀናት',
+            M: 'አንድ ወር',
+            MM: '%d ወራት',
+            y: 'አንድ ዓመት',
+            yy: '%d ዓመታት',
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}(ኛ)/,
+        ordinal: function (number) {
+            return number + 'ኛ';
+        },
+        week: {
+            dow: 0, // Sunday is the first day of the week.
+            doy: 6, // The week that contains Jan 1st is the first week of the year.
+        },
+    });
+
+    return amEt;
+
+})));
+
+
+/***/ },
+
+/***/ "./node_modules/moment/locale/ar-dz.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ar-dz.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Arabic (Algeria) [ar-dz]
@@ -44657,13 +47852,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ar-kw.js":
+/***/ "./node_modules/moment/locale/ar-kw.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ar-kw.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Arabic (Kuwait) [ar-kw]
@@ -44731,13 +47926,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ar-ly.js":
+/***/ "./node_modules/moment/locale/ar-ly.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ar-ly.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Arabic (Libya) [ar-ly]
@@ -44921,13 +48116,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ar-ma.js":
+/***/ "./node_modules/moment/locale/ar-ma.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ar-ma.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Arabic (Morocco) [ar-ma]
@@ -44996,13 +48191,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ar-ps.js":
+/***/ "./node_modules/moment/locale/ar-ps.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ar-ps.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Arabic (Palestine) [ar-ps]
@@ -45127,13 +48322,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ar-sa.js":
+/***/ "./node_modules/moment/locale/ar-sa.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ar-sa.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Arabic (Saudi Arabia) [ar-sa]
@@ -45251,13 +48446,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ar-tn.js":
+/***/ "./node_modules/moment/locale/ar-tn.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ar-tn.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale  :  Arabic (Tunisia) [ar-tn]
@@ -45325,13 +48520,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ar.js":
+/***/ "./node_modules/moment/locale/ar.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ar.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Arabic [ar]
@@ -45533,13 +48728,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/az.js":
+/***/ "./node_modules/moment/locale/az.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/az.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Azerbaijani [az]
@@ -45654,13 +48849,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/be.js":
+/***/ "./node_modules/moment/locale/be.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/be.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Belarusian [be]
@@ -45815,13 +49010,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/bg.js":
+/***/ "./node_modules/moment/locale/bg.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/bg.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Bulgarian [bg]
@@ -45921,13 +49116,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/bm.js":
+/***/ "./node_modules/moment/locale/bm.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/bm.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Bambara [bm]
@@ -45939,6 +49134,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 }(this, (function (moment) { 'use strict';
 
     //! moment.js locale configuration
+    // Language contact person : Abdoufata Kane : https://github.com/abdoufata
+
 
     var bm = moment.defineLocale('bm', {
         months: 'Zanwuyekalo_Fewuruyekalo_Marisikalo_Awirilikalo_Mɛkalo_Zuwɛnkalo_Zuluyekalo_Utikalo_Sɛtanburukalo_ɔkutɔburukalo_Nowanburukalo_Desanburukalo'.split(
@@ -45991,13 +49188,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/bn-bd.js":
+/***/ "./node_modules/moment/locale/bn-bd.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/bn-bd.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Bengali (Bangladesh) [bn-bd]
@@ -46139,13 +49336,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/bn.js":
+/***/ "./node_modules/moment/locale/bn.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/bn.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Bengali [bn]
@@ -46277,13 +49474,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/bo.js":
+/***/ "./node_modules/moment/locale/bo.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/bo.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Tibetan [bo]
@@ -46420,13 +49617,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/br.js":
+/***/ "./node_modules/moment/locale/br.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/br.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Breton [br]
@@ -46607,13 +49804,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/bs.js":
+/***/ "./node_modules/moment/locale/bs.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/bs.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Bosnian [bs]
@@ -46786,13 +49983,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ca.js":
+/***/ "./node_modules/moment/locale/ca.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ca.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Catalan [ca]
@@ -46811,7 +50008,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'.split(
                     '_'
                 ),
-            format: "de gener_de febrer_de març_d'abril_de maig_de juny_de juliol_d'agost_de setembre_d'octubre_de novembre_de desembre".split(
+            format: 'de gener_de febrer_de març_d’abril_de maig_de juny_de juliol_d’agost_de setembre_d’octubre_de novembre_de desembre'.split(
                 '_'
             ),
             isFormat: /D[oD]?(\s)+MMMM/,
@@ -46905,13 +50102,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/cs.js":
+/***/ "./node_modules/moment/locale/cs.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/cs.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Czech [cs]
@@ -47105,13 +50302,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/cv.js":
+/***/ "./node_modules/moment/locale/cv.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/cv.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Chuvash [cv]
@@ -47187,13 +50384,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/cy.js":
+/***/ "./node_modules/moment/locale/cy.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/cy.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Welsh [cy]
@@ -47304,13 +50501,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/da.js":
+/***/ "./node_modules/moment/locale/da.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/da.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Danish [da]
@@ -47376,13 +50573,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/de-at.js":
+/***/ "./node_modules/moment/locale/de-at.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/de-at.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : German (Austria) [de-at]
@@ -47397,6 +50594,23 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 }(this, (function (moment) { 'use strict';
 
     //! moment.js locale configuration
+
+    var monthsParse = [
+            /^jän/i,
+            /^feb/i,
+            /^mär/i,
+            /^apr/i,
+            /^mai/i,
+            /^jun/i,
+            /^jul/i,
+            /^aug/i,
+            /^sep/i,
+            /^okt/i,
+            /^nov/i,
+            /^dez/i,
+        ],
+        monthsRegex =
+            /^(Jänner|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember|Jän\.?|Feb\.?|Mär\.?|Apr\.?|Jun\.?|Jul\.?|Aug\.?|Sep\.?|Okt\.?|Nov\.?|Dez\.?)/i;
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
         var format = {
@@ -47419,7 +50633,18 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         ),
         monthsShort:
             'Jän._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split('_'),
-        monthsParseExact: true,
+
+        monthsRegex: monthsRegex,
+        monthsShortRegex: monthsRegex,
+        monthsStrictRegex:
+            /^(Jänner|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)/i,
+        monthsShortStrictRegex:
+            /^(Jän\.?|Feb\.?|März|Mär\.?|Apr\.?|Mai|Juni|Jun\.?|Juli|Jul\.?|Aug\.?|Sep\.?|Okt\.?|Nov\.?|Dez\.?)/i,
+
+        monthsParse: monthsParse,
+        longMonthsParse: monthsParse,
+        shortMonthsParse: monthsParse,
+
         weekdays:
             'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
                 '_'
@@ -47474,13 +50699,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/de-ch.js":
+/***/ "./node_modules/moment/locale/de-ch.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/de-ch.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : German (Switzerland) [de-ch]
@@ -47492,6 +50717,23 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 }(this, (function (moment) { 'use strict';
 
     //! moment.js locale configuration
+
+    var monthsParse = [
+            /^jan/i,
+            /^feb/i,
+            /^mär/i,
+            /^apr/i,
+            /^mai/i,
+            /^jun/i,
+            /^jul/i,
+            /^aug/i,
+            /^sep/i,
+            /^okt/i,
+            /^nov/i,
+            /^dez/i,
+        ],
+        monthsRegex =
+            /^(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember|Jan\.?|Feb\.?|Mär\.?|Apr\.?|Jun\.?|Jul\.?|Aug\.?|Sep\.?|Okt\.?|Nov\.?|Dez\.?)/i;
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
         var format = {
@@ -47514,7 +50756,18 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         ),
         monthsShort:
             'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split('_'),
-        monthsParseExact: true,
+
+        monthsRegex: monthsRegex,
+        monthsShortRegex: monthsRegex,
+        monthsStrictRegex:
+            /^(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)/i,
+        monthsShortStrictRegex:
+            /^(Jan\.?|Feb\.?|März|Mär\.?|Apr\.?|Mai|Juni|Jun\.?|Juli|Jul\.?|Aug\.?|Sep\.?|Okt\.?|Nov\.?|Dez\.?)/i,
+
+        monthsParse: monthsParse,
+        longMonthsParse: monthsParse,
+        shortMonthsParse: monthsParse,
+
         weekdays:
             'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
                 '_'
@@ -47569,13 +50822,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/de.js":
+/***/ "./node_modules/moment/locale/de.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/de.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : German [de]
@@ -47589,6 +50842,23 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 }(this, (function (moment) { 'use strict';
 
     //! moment.js locale configuration
+
+    var monthsParse = [
+            /^jan/i,
+            /^feb/i,
+            /^mär/i,
+            /^apr/i,
+            /^mai/i,
+            /^jun/i,
+            /^jul/i,
+            /^aug/i,
+            /^sep/i,
+            /^okt/i,
+            /^nov/i,
+            /^dez/i,
+        ],
+        monthsRegex =
+            /^(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember|Jan\.?|Feb\.?|Mär\.?|Apr\.?|Jun\.?|Jul\.?|Aug\.?|Sep\.?|Okt\.?|Nov\.?|Dez\.?)/i;
 
     function processRelativeTime(number, withoutSuffix, key, isFuture) {
         var format = {
@@ -47611,7 +50881,18 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         ),
         monthsShort:
             'Jan._Feb._März_Apr._Mai_Juni_Juli_Aug._Sep._Okt._Nov._Dez.'.split('_'),
-        monthsParseExact: true,
+
+        monthsRegex: monthsRegex,
+        monthsShortRegex: monthsRegex,
+        monthsStrictRegex:
+            /^(Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)/i,
+        monthsShortStrictRegex:
+            /^(Jan\.?|Feb\.?|März|Mär\.?|Apr\.?|Mai|Juni|Jun\.?|Juli|Jul\.?|Aug\.?|Sep\.?|Okt\.?|Nov\.?|Dez\.?)/i,
+
+        monthsParse: monthsParse,
+        longMonthsParse: monthsParse,
+        shortMonthsParse: monthsParse,
+
         weekdays:
             'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'.split(
                 '_'
@@ -47666,13 +50947,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/dv.js":
+/***/ "./node_modules/moment/locale/dv.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/dv.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Maldivian [dv]
@@ -47775,13 +51056,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/el.js":
+/***/ "./node_modules/moment/locale/el.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/el.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Greek [el]
@@ -47900,13 +51181,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/en-au.js":
+/***/ "./node_modules/moment/locale/en-au.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/en-au.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : English (Australia) [en-au]
@@ -47987,13 +51268,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/en-ca.js":
+/***/ "./node_modules/moment/locale/en-ca.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/en-ca.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : English (Canada) [en-ca]
@@ -48070,13 +51351,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/en-gb.js":
+/***/ "./node_modules/moment/locale/en-gb.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/en-gb.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : English (United Kingdom) [en-gb]
@@ -48157,13 +51438,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/en-ie.js":
+/***/ "./node_modules/moment/locale/en-ie.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/en-ie.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : English (Ireland) [en-ie]
@@ -48244,13 +51525,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/en-il.js":
+/***/ "./node_modules/moment/locale/en-il.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/en-il.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : English (Israel) [en-il]
@@ -48327,13 +51608,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/en-in.js":
+/***/ "./node_modules/moment/locale/en-in.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/en-in.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : English (India) [en-in]
@@ -48414,13 +51695,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/en-nz.js":
+/***/ "./node_modules/moment/locale/en-nz.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/en-nz.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : English (New Zealand) [en-nz]
@@ -48501,13 +51782,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/en-sg.js":
+/***/ "./node_modules/moment/locale/en-sg.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/en-sg.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : English (Singapore) [en-sg]
@@ -48588,13 +51869,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/eo.js":
+/***/ "./node_modules/moment/locale/eo.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/eo.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Esperanto [eo]
@@ -48675,13 +51956,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/es-do.js":
+/***/ "./node_modules/moment/locale/es-do.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/es-do.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Spanish (Dominican Republic) [es-do]
@@ -48802,13 +52083,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/es-mx.js":
+/***/ "./node_modules/moment/locale/es-mx.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/es-mx.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Spanish (Mexico) [es-mx]
@@ -48931,13 +52212,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/es-us.js":
+/***/ "./node_modules/moment/locale/es-us.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/es-us.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Spanish (United States) [es-us]
@@ -49060,13 +52341,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/es.js":
+/***/ "./node_modules/moment/locale/es.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/es.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Spanish [es]
@@ -49189,13 +52470,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/et.js":
+/***/ "./node_modules/moment/locale/et.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/et.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Estonian [et]
@@ -49286,13 +52567,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/eu.js":
+/***/ "./node_modules/moment/locale/eu.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/eu.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Basque [eu]
@@ -49370,13 +52651,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/fa.js":
+/***/ "./node_modules/moment/locale/fa.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/fa.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Persian [fa]
@@ -49502,13 +52783,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/fi.js":
+/***/ "./node_modules/moment/locale/fi.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/fi.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Finnish [fi]
@@ -49645,13 +52926,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/fil.js":
+/***/ "./node_modules/moment/locale/fil.js"
 /*!*******************************************!*\
   !*** ./node_modules/moment/locale/fil.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Filipino [fil]
@@ -49722,13 +53003,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/fo.js":
+/***/ "./node_modules/moment/locale/fo.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/fo.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Faroese [fo]
@@ -49798,13 +53079,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/fr-ca.js":
+/***/ "./node_modules/moment/locale/fr-ca.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/fr-ca.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : French (Canada) [fr-ca]
@@ -49887,13 +53168,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/fr-ch.js":
+/***/ "./node_modules/moment/locale/fr-ch.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/fr-ch.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : French (Switzerland) [fr-ch]
@@ -49980,13 +53261,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/fr.js":
+/***/ "./node_modules/moment/locale/fr.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/fr.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : French [fr]
@@ -50107,13 +53388,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/fy.js":
+/***/ "./node_modules/moment/locale/fy.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/fy.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Frisian [fy]
@@ -50201,13 +53482,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ga.js":
+/***/ "./node_modules/moment/locale/ga.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ga.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Irish or Irish Gaelic [ga]
@@ -50315,13 +53596,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/gd.js":
+/***/ "./node_modules/moment/locale/gd.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/gd.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Scottish Gaelic [gd]
@@ -50429,13 +53710,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/gl.js":
+/***/ "./node_modules/moment/locale/gl.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/gl.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Galician [gl]
@@ -50523,13 +53804,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/gom-deva.js":
+/***/ "./node_modules/moment/locale/gom-deva.js"
 /*!************************************************!*\
   !*** ./node_modules/moment/locale/gom-deva.js ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Konkani Devanagari script [gom-deva]
@@ -50668,13 +53949,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/gom-latn.js":
+/***/ "./node_modules/moment/locale/gom-latn.js"
 /*!************************************************!*\
   !*** ./node_modules/moment/locale/gom-latn.js ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Konkani Latin script [gom-latn]
@@ -50811,13 +54092,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/gu.js":
+/***/ "./node_modules/moment/locale/gu.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/gu.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Gujarati [gu]
@@ -50952,13 +54233,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/he.js":
+/***/ "./node_modules/moment/locale/he.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/he.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Hebrew [he]
@@ -51065,13 +54346,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/hi.js":
+/***/ "./node_modules/moment/locale/hi.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/hi.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Hindi [hi]
@@ -51252,13 +54533,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/hr.js":
+/***/ "./node_modules/moment/locale/hr.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/hr.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Croatian [hr]
@@ -51427,13 +54708,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/hu.js":
+/***/ "./node_modules/moment/locale/hu.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/hu.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Hungarian [hu]
@@ -51457,9 +54738,9 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                     ? 'néhány másodperc'
                     : 'néhány másodperce';
             case 'ss':
-                return num + (isFuture || withoutSuffix)
-                    ? ' másodperc'
-                    : ' másodperce';
+                return (
+                    num + (isFuture || withoutSuffix ? ' másodperc' : ' másodperce')
+                );
             case 'm':
                 return 'egy' + (isFuture || withoutSuffix ? ' perc' : ' perce');
             case 'mm':
@@ -51564,13 +54845,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/hy-am.js":
+/***/ "./node_modules/moment/locale/hy-am.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/hy-am.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Armenian [hy-am]
@@ -51677,13 +54958,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/id.js":
+/***/ "./node_modules/moment/locale/id.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/id.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Indonesian [id]
@@ -51697,11 +54978,22 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     //! moment.js locale configuration
 
+    var monthsParse = [],
+        longMonthsParse = [],
+        shortMonthsParse = [];
+
+    monthsParse[7] = /^agustus|^agu|^agt/i;
+    longMonthsParse[7] = /^agustus$/i;
+    shortMonthsParse[7] = /^agu$|^agt$/i;
+
     var id = moment.defineLocale('id', {
         months: 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_November_Desember'.split(
             '_'
         ),
-        monthsShort: 'Jan_Feb_Mar_Apr_Mei_Jun_Jul_Agt_Sep_Okt_Nov_Des'.split('_'),
+        monthsShort: 'Jan_Feb_Mar_Apr_Mei_Jun_Jul_Agu_Sep_Okt_Nov_Des'.split('_'),
+        monthsParse: monthsParse,
+        longMonthsParse: longMonthsParse,
+        shortMonthsParse: shortMonthsParse,
         weekdays: 'Minggu_Senin_Selasa_Rabu_Kamis_Jumat_Sabtu'.split('_'),
         weekdaysShort: 'Min_Sen_Sel_Rab_Kam_Jum_Sab'.split('_'),
         weekdaysMin: 'Mg_Sn_Sl_Rb_Km_Jm_Sb'.split('_'),
@@ -51772,13 +55064,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/is.js":
+/***/ "./node_modules/moment/locale/is.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/is.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Icelandic [is]
@@ -51931,13 +55223,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/it-ch.js":
+/***/ "./node_modules/moment/locale/it-ch.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/it-ch.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Italian (Switzerland) [it-ch]
@@ -52014,13 +55306,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/it.js":
+/***/ "./node_modules/moment/locale/it.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/it.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Italian [it]
@@ -52139,13 +55431,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ja.js":
+/***/ "./node_modules/moment/locale/ja.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ja.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Japanese [ja]
@@ -52306,13 +55598,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/jv.js":
+/***/ "./node_modules/moment/locale/jv.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/jv.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Javanese [jv]
@@ -52401,13 +55693,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ka.js":
+/***/ "./node_modules/moment/locale/ka.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ka.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Georgian [ka]
@@ -52440,7 +55732,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         longDateFormat: {
             LT: 'HH:mm',
             LTS: 'HH:mm:ss',
-            L: 'DD/MM/YYYY',
+            L: 'DD.MM.YYYY',
             LL: 'D MMMM YYYY',
             LLL: 'D MMMM YYYY HH:mm',
             LLLL: 'dddd, D MMMM YYYY HH:mm',
@@ -52512,13 +55804,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/kk.js":
+/***/ "./node_modules/moment/locale/kk.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/kk.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Kazakh [kk]
@@ -52613,13 +55905,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/km.js":
+/***/ "./node_modules/moment/locale/km.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/km.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Cambodian [km]
@@ -52735,13 +56027,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/kn.js":
+/***/ "./node_modules/moment/locale/kn.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/kn.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Kannada [kn]
@@ -52878,13 +56170,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ko.js":
+/***/ "./node_modules/moment/locale/ko.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ko.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Korean [ko]
@@ -52972,13 +56264,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ku-kmr.js":
+/***/ "./node_modules/moment/locale/ku-kmr.js"
 /*!**********************************************!*\
   !*** ./node_modules/moment/locale/ku-kmr.js ***!
   \**********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Northern Kurdish [ku-kmr]
@@ -53105,13 +56397,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ku.js":
+/***/ "./node_modules/moment/locale/ku.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ku.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Kurdish [ku]
@@ -53242,13 +56534,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ky.js":
+/***/ "./node_modules/moment/locale/ky.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ky.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Kyrgyz [ky]
@@ -53345,13 +56637,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/lb.js":
+/***/ "./node_modules/moment/locale/lb.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/lb.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Luxembourgish [lb]
@@ -53501,13 +56793,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/lo.js":
+/***/ "./node_modules/moment/locale/lo.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/lo.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Lao [lo]
@@ -53586,13 +56878,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/lt.js":
+/***/ "./node_modules/moment/locale/lt.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/lt.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Lithuanian [lt]
@@ -53730,13 +57022,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/lv.js":
+/***/ "./node_modules/moment/locale/lv.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/lv.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Latvian [lv]
@@ -53843,13 +57135,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/me.js":
+/***/ "./node_modules/moment/locale/me.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/me.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Montenegrin [me]
@@ -53979,13 +57271,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/mi.js":
+/***/ "./node_modules/moment/locale/mi.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/mi.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Maori [mi]
@@ -54058,13 +57350,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/mk.js":
+/***/ "./node_modules/moment/locale/mk.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/mk.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Macedonian [mk]
@@ -54077,7 +57369,6 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 }(this, (function (moment) { 'use strict';
 
     //! moment.js locale configuration
-
     var mk = moment.defineLocale('mk', {
         months: 'јануари_февруари_март_април_мај_јуни_јули_август_септември_октомври_ноември_декември'.split(
             '_'
@@ -54163,13 +57454,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ml.js":
+/***/ "./node_modules/moment/locale/ml.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ml.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Malayalam [ml]
@@ -54264,13 +57555,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/mn.js":
+/***/ "./node_modules/moment/locale/mn.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/mn.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Mongolian [mn]
@@ -54383,13 +57674,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/mr.js":
+/***/ "./node_modules/moment/locale/mr.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/mr.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Marathi [mr]
@@ -54605,13 +57896,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ms-my.js":
+/***/ "./node_modules/moment/locale/ms-my.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ms-my.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Malay [ms-my]
@@ -54700,13 +57991,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ms.js":
+/***/ "./node_modules/moment/locale/ms.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ms.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Malay [ms]
@@ -54794,13 +58085,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/mt.js":
+/***/ "./node_modules/moment/locale/mt.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/mt.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Maltese (Malta) [mt]
@@ -54869,13 +58160,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/my.js":
+/***/ "./node_modules/moment/locale/my.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/my.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Burmese [my]
@@ -54979,13 +58270,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/nb.js":
+/***/ "./node_modules/moment/locale/nb.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/nb.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Norwegian Bokmål [nb]
@@ -55058,13 +58349,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ne.js":
+/***/ "./node_modules/moment/locale/ne.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ne.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Nepalese [ne]
@@ -55198,13 +58489,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/nl-be.js":
+/***/ "./node_modules/moment/locale/nl-be.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/nl-be.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Dutch (Belgium) [nl-be]
@@ -55272,7 +58563,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         longDateFormat: {
             LT: 'HH:mm',
             LTS: 'HH:mm:ss',
-            L: 'DD/MM/YYYY',
+            L: 'D/MM/YYYY',
             LL: 'D MMMM YYYY',
             LLL: 'D MMMM YYYY HH:mm',
             LLLL: 'dddd D MMMM YYYY HH:mm',
@@ -55319,13 +58610,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/nl.js":
+/***/ "./node_modules/moment/locale/nl.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/nl.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Dutch [nl]
@@ -55442,13 +58733,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/nn.js":
+/***/ "./node_modules/moment/locale/nn.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/nn.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Nynorsk [nn]
@@ -55520,13 +58811,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/oc-lnc.js":
+/***/ "./node_modules/moment/locale/oc-lnc.js"
 /*!**********************************************!*\
   !*** ./node_modules/moment/locale/oc-lnc.js ***!
   \**********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Occitan, lengadocian dialecte [oc-lnc]
@@ -55624,13 +58915,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/pa-in.js":
+/***/ "./node_modules/moment/locale/pa-in.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/pa-in.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Punjabi (India) [pa-in]
@@ -55765,13 +59056,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/pl.js":
+/***/ "./node_modules/moment/locale/pl.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/pl.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Polish [pl]
@@ -55835,7 +59126,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         months: function (momentToFormat, format) {
             if (!momentToFormat) {
                 return monthsNominative;
-            } else if (/D MMMM/.test(format)) {
+            } else if (/D\.? MMMM/.test(format)) {
                 return monthsSubjective[momentToFormat.month()];
             } else {
                 return monthsNominative[momentToFormat.month()];
@@ -55924,13 +59215,209 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/pt-br.js":
+/***/ "./node_modules/moment/locale/ps.js"
+/*!******************************************!*\
+  !*** ./node_modules/moment/locale/ps.js ***!
+  \******************************************/
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Pashto [ps]
+//! author : Hanif Hefaz : https://github.com/hanifhefaz
+
+;(function (global, factory) {
+    true ? factory(__webpack_require__(/*! ../moment */ "./node_modules/moment/moment.js")) :
+   0
+}(this, (function (moment) { 'use strict';
+
+    //! moment.js locale configuration
+
+    var symbolMap = {
+            1: '۱',
+            2: '۲',
+            3: '۳',
+            4: '۴',
+            5: '۵',
+            6: '۶',
+            7: '۷',
+            8: '۸',
+            9: '۹',
+            0: '۰',
+        },
+        numberMap = {
+            '۱': '1',
+            '۲': '2',
+            '۳': '3',
+            '۴': '4',
+            '۵': '5',
+            '۶': '6',
+            '۷': '7',
+            '۸': '8',
+            '۹': '9',
+            '۰': '0',
+        },
+        months = {
+            format: 'جنوري_فبروري_مارچ_اپریل_مۍ_جون_جولای_اګست_سېپتمبر_اکتوبر_نومبر_دسمبر'.split(
+                '_'
+            ),
+            standalone:
+                'جنوري_فېبروري_مارچ_اپریل_مۍ_جون_جولای_اګست_سپتمبر_اکتوبر_نومبر_دسمبر'.split(
+                    '_'
+                ),
+            isFormat: /D[oD]?(\[[^\[\]]*\]|\s|,)+MMMM?/,
+        },
+        monthsShort = {
+            format: 'جنوري_فبروري_مارچ_اپریل_مۍ_جون_جولای_اګست_سېپتمبر_اکتوبر_نومبر_دسمبر'.split(
+                '_'
+            ),
+            standalone:
+                'جنوري_فبروري_مارچ_اپریل_مۍ_جون_جولای_اګست_سپتمبر_اکتوبر_نومبر_دسمبر'.split(
+                    '_'
+                ),
+        },
+        monthsParse = [
+            /^جنوري$/i,
+            /^(فبروري|فېبروري)$/i,
+            /^مارچ$/i,
+            /^اپریل$/i,
+            /^مۍ$/i,
+            /^جون$/i,
+            /^جولای$/i,
+            /^اګست$/i,
+            /^(سپتمبر|سېپتمبر)$/i,
+            /^اکتوبر$/i,
+            /^نومبر$/i,
+            /^دسمبر$/i,
+        ],
+        monthsRegex =
+            /^(جنوري|فبروري|فېبروري|مارچ|اپریل|مۍ|جون|جولای|اګست|سپتمبر|سېپتمبر|اکتوبر|نومبر|دسمبر)/i;
+
+    function relativeTime(number, withoutSuffix, key, isFuture) {
+        var format =
+            isFuture && !withoutSuffix
+                ? {
+                      s: 'څو ثانيو',
+                      ss: '%d ثانيو',
+                      m: 'يوه دقيقه',
+                      mm: '%d دقيقو',
+                      h: 'يو ساعت',
+                      hh: '%d ساعتو',
+                      d: 'يوه ورځ',
+                      dd: '%d ورځو',
+                      M: 'يوه مياشت',
+                      MM: '%d مياشتو',
+                      y: 'يو کال',
+                      yy: '%d کالونو',
+                  }
+                : {
+                      s: 'څو ثانيې',
+                      ss: '%d ثانيې',
+                      m: 'يوه دقيقه',
+                      mm: '%d دقيقې',
+                      h: 'يو ساعت',
+                      hh: '%d ساعتونه',
+                      d: 'يوه ورځ',
+                      dd: '%d ورځې',
+                      M: 'يوه مياشت',
+                      MM: '%d مياشتې',
+                      y: 'يو کال',
+                      yy: '%d کاله',
+                  };
+
+        return format[key].replace('%d', number);
+    }
+
+    var ps = moment.defineLocale('ps', {
+        months: months,
+        monthsShort: monthsShort,
+        monthsParse: monthsParse,
+        longMonthsParse: monthsParse,
+        shortMonthsParse: monthsParse,
+        monthsRegex: monthsRegex,
+        monthsShortRegex: monthsRegex,
+        monthsStrictRegex: monthsRegex,
+        monthsShortStrictRegex: monthsRegex,
+        weekdays: 'یکشنبه_دوشنبه_سه شنبه_چهارشنبه_پنج شنبه_جمعه_شنبه'.split('_'),
+        weekdaysShort: 'یکشنبه_دوشنبه_سه شنبه_چهارشنبه_پنج شنبه_جمعه_شنبه'.split(
+            '_'
+        ),
+        weekdaysMin: 'ی_د_س_چ_پ_ج_ش'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+            LT: 'H:mm',
+            LTS: 'H:mm:ss',
+            L: 'YYYY/M/D',
+            LL: 'D MMMM YYYY',
+            LLL: 'D MMMM YYYY H:mm',
+            LLLL: 'dddd D, MMMM, YYYY [په] H:mm',
+        },
+        meridiemParse: /غ\.م|غ\.و\./,
+        isPM: function (input) {
+            return input === 'غ.و.';
+        },
+        meridiem: function (hour) {
+            return hour < 12 ? 'غ.م' : 'غ.و.';
+        },
+        calendar: {
+            sameDay: '[نن په] LT',
+            nextDay: '[سبا په] LT',
+            nextWeek: 'dddd [په] LT',
+            lastDay: '[پرون په] LT',
+            lastWeek: 'dddd [په] LT',
+            sameElse: 'L',
+        },
+        relativeTime: {
+            future: 'په %s کې',
+            past: '%s مخکې',
+            s: relativeTime,
+            ss: relativeTime,
+            m: relativeTime,
+            mm: relativeTime,
+            h: relativeTime,
+            hh: relativeTime,
+            d: relativeTime,
+            dd: relativeTime,
+            M: relativeTime,
+            MM: relativeTime,
+            y: relativeTime,
+            yy: relativeTime,
+        },
+        preparse: function (string) {
+            return string
+                .replace(/[۰-۹]/g, function (match) {
+                    return numberMap[match];
+                })
+                .replace(/،/g, ',');
+        },
+        postformat: function (string) {
+            return string
+                .replace(/\d/g, function (match) {
+                    return symbolMap[match];
+                })
+                .replace(/,/g, '،');
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}/,
+        ordinal: '%d',
+        week: {
+            dow: 6, // Saturday is the first day of the week.
+            doy: 12, // The week that contains Jan 12th is the first week of the year.
+        },
+    });
+
+    return ps;
+
+})));
+
+
+/***/ },
+
+/***/ "./node_modules/moment/locale/pt-br.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/pt-br.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Portuguese (Brazil) [pt-br]
@@ -55964,14 +59451,22 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             LLLL: 'dddd, D [de] MMMM [de] YYYY [às] HH:mm',
         },
         calendar: {
-            sameDay: '[Hoje às] LT',
-            nextDay: '[Amanhã às] LT',
-            nextWeek: 'dddd [às] LT',
-            lastDay: '[Ontem às] LT',
+            sameDay: function () {
+                return '[Hoje ' + (this.hours() >= 2 ? 'às' : 'à') + '] LT';
+            },
+            nextDay: function () {
+                return '[Amanhã ' + (this.hours() >= 2 ? 'às' : 'à') + '] LT';
+            },
+            nextWeek: function () {
+                return 'dddd [' + (this.hours() >= 2 ? 'às' : 'à') + '] LT';
+            },
+            lastDay: function () {
+                return '[Ontem ' + (this.hours() >= 2 ? 'às' : 'à') + '] LT';
+            },
             lastWeek: function () {
                 return this.day() === 0 || this.day() === 6
-                    ? '[Último] dddd [às] LT' // Saturday + Sunday
-                    : '[Última] dddd [às] LT'; // Monday - Friday
+                    ? '[Último] dddd [' + (this.hours() >= 2 ? 'às' : 'à') + '] LT' // Saturday + Sunday
+                    : '[Última] dddd [' + (this.hours() >= 2 ? 'às' : 'à') + '] LT'; // Monday - Friday
             },
             sameElse: 'L',
         },
@@ -56001,13 +59496,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/pt.js":
+/***/ "./node_modules/moment/locale/pt.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/pt.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Portuguese [pt]
@@ -56083,13 +59578,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ro.js":
+/***/ "./node_modules/moment/locale/ro.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ro.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Romanian [ro]
@@ -56178,13 +59673,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ru.js":
+/***/ "./node_modules/moment/locale/ru.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ru.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Russian [ru]
@@ -56410,13 +59905,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/sd.js":
+/***/ "./node_modules/moment/locale/sd.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/sd.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Sindhi [sd]
@@ -56510,13 +60005,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/se.js":
+/***/ "./node_modules/moment/locale/se.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/se.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Northern Sami [se]
@@ -56586,13 +60081,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/si.js":
+/***/ "./node_modules/moment/locale/si.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/si.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Sinhalese [si]
@@ -56674,13 +60169,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/sk.js":
+/***/ "./node_modules/moment/locale/sk.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/sk.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Slovak [sk]
@@ -56838,13 +60333,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/sl.js":
+/***/ "./node_modules/moment/locale/sl.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/sl.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Slovenian [sl]
@@ -57028,13 +60523,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/sq.js":
+/***/ "./node_modules/moment/locale/sq.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/sq.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Albanian [sq]
@@ -57112,13 +60607,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/sr-cyrl.js":
+/***/ "./node_modules/moment/locale/sr-cyrl.js"
 /*!***********************************************!*\
   !*** ./node_modules/moment/locale/sr-cyrl.js ***!
   \***********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Serbian Cyrillic [sr-cyrl]
@@ -57258,13 +60753,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/sr.js":
+/***/ "./node_modules/moment/locale/sr.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/sr.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Serbian [sr]
@@ -57406,13 +60901,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ss.js":
+/***/ "./node_modules/moment/locale/ss.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ss.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : siSwati [ss]
@@ -57509,13 +61004,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/sv.js":
+/***/ "./node_modules/moment/locale/sv.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/sv.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Swedish [sv]
@@ -57534,7 +61029,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         ),
         monthsShort: 'jan_feb_mar_apr_maj_jun_jul_aug_sep_okt_nov_dec'.split('_'),
         weekdays: 'söndag_måndag_tisdag_onsdag_torsdag_fredag_lördag'.split('_'),
-        weekdaysShort: 'sön_mån_tis_ons_tor_fre_lör'.split('_'),
+        weekdaysShort: 'sön_mån_tis_ons_tors_fre_lör'.split('_'),
         weekdaysMin: 'sö_må_ti_on_to_fr_lö'.split('_'),
         longDateFormat: {
             LT: 'HH:mm',
@@ -57596,13 +61091,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/sw.js":
+/***/ "./node_modules/moment/locale/sw.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/sw.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Swahili [sw]
@@ -57614,6 +61109,46 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 }(this, (function (moment) { 'use strict';
 
     //! moment.js locale configuration
+
+    var relativeTime = {
+        ss: 'sekunde %d',
+        m: 'dakika moja',
+        mm: 'dakika %d',
+        h: 'saa moja',
+        hh: 'saa %d',
+        d: 'siku moja',
+        dd: 'siku %d',
+        M: 'mwezi mmoja',
+        MM: 'miezi %d',
+        y: 'mwaka mmoja',
+        yy: 'miaka %d',
+    };
+
+    function relativeTimeWithSuffix(number, withoutSuffix, key, isFuture) {
+        var output = relativeTime[key].replace(/%d/i, number);
+
+        if (withoutSuffix || isFuture) {
+            return output;
+        }
+
+        switch (key) {
+            case 'ss':
+            case 'mm':
+            case 'hh':
+            case 'dd':
+                return output + (number === 1 ? ' iliyopita' : ' zilizopita');
+            case 'm':
+            case 'h':
+            case 'd':
+                return output + ' iliyopita';
+            case 'M':
+            case 'y':
+                return output + ' uliopita';
+            case 'MM':
+            case 'yy':
+                return output + ' iliyopita';
+        }
+    }
 
     var sw = moment.defineLocale('sw', {
         months: 'Januari_Februari_Machi_Aprili_Mei_Juni_Julai_Agosti_Septemba_Oktoba_Novemba_Desemba'.split(
@@ -57638,26 +61173,28 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         calendar: {
             sameDay: '[leo saa] LT',
             nextDay: '[kesho saa] LT',
-            nextWeek: '[wiki ijayo] dddd [saat] LT',
+            nextWeek: 'dddd [ijayo saa] LT',
             lastDay: '[jana] LT',
-            lastWeek: '[wiki iliyopita] dddd [saat] LT',
+            lastWeek: 'dddd [iliyopita saa] LT',
             sameElse: 'L',
         },
         relativeTime: {
             future: '%s baadaye',
-            past: 'tokea %s',
+            past: function (output) {
+                return output === 'hivi punde' ? 'tokea ' + output : output;
+            },
             s: 'hivi punde',
-            ss: 'sekunde %d',
-            m: 'dakika moja',
-            mm: 'dakika %d',
-            h: 'saa limoja',
-            hh: 'masaa %d',
-            d: 'siku moja',
-            dd: 'siku %d',
-            M: 'mwezi mmoja',
-            MM: 'miezi %d',
-            y: 'mwaka mmoja',
-            yy: 'miaka %d',
+            ss: relativeTimeWithSuffix,
+            m: relativeTimeWithSuffix,
+            mm: relativeTimeWithSuffix,
+            h: relativeTimeWithSuffix,
+            hh: relativeTimeWithSuffix,
+            d: relativeTimeWithSuffix,
+            dd: relativeTimeWithSuffix,
+            M: relativeTimeWithSuffix,
+            MM: relativeTimeWithSuffix,
+            y: relativeTimeWithSuffix,
+            yy: relativeTimeWithSuffix,
         },
         week: {
             dow: 1, // Monday is the first day of the week.
@@ -57670,13 +61207,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ta.js":
+/***/ "./node_modules/moment/locale/ta.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ta.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Tamil [ta]
@@ -57820,13 +61357,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/te.js":
+/***/ "./node_modules/moment/locale/te.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/te.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Telugu [te]
@@ -57927,13 +61464,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tet.js":
+/***/ "./node_modules/moment/locale/tet.js"
 /*!*******************************************!*\
   !*** ./node_modules/moment/locale/tet.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Tetun Dili (East Timor) [tet]
@@ -58014,13 +61551,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tg.js":
+/***/ "./node_modules/moment/locale/tg.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/tg.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Tajik [tg]
@@ -58150,13 +61687,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/th.js":
+/***/ "./node_modules/moment/locale/th.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/th.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Thai [th]
@@ -58234,13 +61771,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tk.js":
+/***/ "./node_modules/moment/locale/tk.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/tk.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Turkmen [tk]
@@ -58344,13 +61881,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tl-ph.js":
+/***/ "./node_modules/moment/locale/tl-ph.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/tl-ph.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Tagalog (Philippines) [tl-ph]
@@ -58420,13 +61957,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tlh.js":
+/***/ "./node_modules/moment/locale/tlh.js"
 /*!*******************************************!*\
   !*** ./node_modules/moment/locale/tlh.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Klingon [tlh]
@@ -58563,13 +62100,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tr.js":
+/***/ "./node_modules/moment/locale/tr.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/tr.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Turkish [tr]
@@ -58688,13 +62225,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tzl.js":
+/***/ "./node_modules/moment/locale/tzl.js"
 /*!*******************************************!*\
   !*** ./node_modules/moment/locale/tzl.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Talossan [tzl]
@@ -58796,13 +62333,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tzm-latn.js":
+/***/ "./node_modules/moment/locale/tzm-latn.js"
 /*!************************************************!*\
   !*** ./node_modules/moment/locale/tzm-latn.js ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Central Atlas Tamazight Latin [tzm-latn]
@@ -58869,13 +62406,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/tzm.js":
+/***/ "./node_modules/moment/locale/tzm.js"
 /*!*******************************************!*\
   !*** ./node_modules/moment/locale/tzm.js ***!
   \*******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Central Atlas Tamazight [tzm]
@@ -58942,13 +62479,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ug-cn.js":
+/***/ "./node_modules/moment/locale/ug-cn.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ug-cn.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Uyghur (China) [ug-cn]
@@ -59072,18 +62609,19 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/uk.js":
+/***/ "./node_modules/moment/locale/uk.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/uk.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Ukrainian [uk]
 //! author : zemlanin : https://github.com/zemlanin
 //! Author : Menelion Elensúle : https://github.com/Oire
+//! Author : Oleksandr Trukhnii : https://github.com/JohnJunior
 
 ;(function (global, factory) {
     true ? factory(__webpack_require__(/*! ../moment */ "./node_modules/moment/moment.js")) :
@@ -59120,15 +62658,15 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     function weekdaysCaseReplace(m, format) {
         var weekdays = {
                 nominative:
-                    'неділя_понеділок_вівторок_середа_четвер_п’ятниця_субота'.split(
+                    'неділя_понеділок_вівторок_середа_четвер_пʼятниця_субота'.split(
                         '_'
                     ),
                 accusative:
-                    'неділю_понеділок_вівторок_середу_четвер_п’ятницю_суботу'.split(
+                    'неділю_понеділок_вівторок_середу_четвер_пʼятницю_суботу'.split(
                         '_'
                     ),
                 genitive:
-                    'неділі_понеділка_вівторка_середи_четверга_п’ятниці_суботи'.split(
+                    'неділі_понеділка_вівторка_середи_четверга_пʼятниці_суботи'.split(
                         '_'
                     ),
             },
@@ -59249,7 +62787,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         },
         week: {
             dow: 1, // Monday is the first day of the week.
-            doy: 7, // The week that contains Jan 7th is the first week of the year.
+            doy: 4, // The week that contains Jan 4th is the first week of the year.
         },
     });
 
@@ -59258,13 +62796,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/ur.js":
+/***/ "./node_modules/moment/locale/ur.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ur.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Urdu [ur]
@@ -59359,13 +62897,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/uz-latn.js":
+/***/ "./node_modules/moment/locale/uz-latn.js"
 /*!***********************************************!*\
   !*** ./node_modules/moment/locale/uz-latn.js ***!
   \***********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Uzbek Latin [uz-latn]
@@ -59407,7 +62945,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         },
         relativeTime: {
             future: 'Yaqin %s ichida',
-            past: 'Bir necha %s oldin',
+            past: '%s oldin',
             s: 'soniya',
             ss: '%d soniya',
             m: 'bir daqiqa',
@@ -59432,13 +62970,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/uz.js":
+/***/ "./node_modules/moment/locale/uz.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/uz.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Uzbek [uz]
@@ -59477,7 +63015,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         },
         relativeTime: {
             future: 'Якин %s ичида',
-            past: 'Бир неча %s олдин',
+            past: '%s олдин',
             s: 'фурсат',
             ss: '%d фурсат',
             m: 'бир дакика',
@@ -59502,13 +63040,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/vi.js":
+/***/ "./node_modules/moment/locale/vi.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/vi.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Vietnamese [vi]
@@ -59601,13 +63139,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/x-pseudo.js":
+/***/ "./node_modules/moment/locale/x-pseudo.js"
 /*!************************************************!*\
   !*** ./node_modules/moment/locale/x-pseudo.js ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Pseudo [x-pseudo]
@@ -59693,13 +63231,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/yo.js":
+/***/ "./node_modules/moment/locale/yo.js"
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/yo.js ***!
   \******************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Yoruba Nigeria [yo]
@@ -59765,13 +63303,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/zh-cn.js":
+/***/ "./node_modules/moment/locale/zh-cn.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/zh-cn.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Chinese (China) [zh-cn]
@@ -59904,13 +63442,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/zh-hk.js":
+/***/ "./node_modules/moment/locale/zh-hk.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/zh-hk.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Chinese (Hong Kong) [zh-hk]
@@ -60024,13 +63562,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/zh-mo.js":
+/***/ "./node_modules/moment/locale/zh-mo.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/zh-mo.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Chinese (Macau) [zh-mo]
@@ -60143,13 +63681,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/locale/zh-tw.js":
+/***/ "./node_modules/moment/locale/zh-tw.js"
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/zh-tw.js ***!
   \*********************************************/
-/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 //! moment.js locale configuration
 //! locale : Chinese (Taiwan) [zh-tw]
@@ -60261,17 +63799,326 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/moment/moment.js":
+/***/ "./node_modules/moment/locale sync recursive ^\\.\\/.*$"
+/*!***************************************************!*\
+  !*** ./node_modules/moment/locale/ sync ^\.\/.*$ ***!
+  \***************************************************/
+(module, __unused_webpack_exports, __webpack_require__) {
+
+var map = {
+	"./af": "./node_modules/moment/locale/af.js",
+	"./af.js": "./node_modules/moment/locale/af.js",
+	"./am-et": "./node_modules/moment/locale/am-et.js",
+	"./am-et.js": "./node_modules/moment/locale/am-et.js",
+	"./ar": "./node_modules/moment/locale/ar.js",
+	"./ar-dz": "./node_modules/moment/locale/ar-dz.js",
+	"./ar-dz.js": "./node_modules/moment/locale/ar-dz.js",
+	"./ar-kw": "./node_modules/moment/locale/ar-kw.js",
+	"./ar-kw.js": "./node_modules/moment/locale/ar-kw.js",
+	"./ar-ly": "./node_modules/moment/locale/ar-ly.js",
+	"./ar-ly.js": "./node_modules/moment/locale/ar-ly.js",
+	"./ar-ma": "./node_modules/moment/locale/ar-ma.js",
+	"./ar-ma.js": "./node_modules/moment/locale/ar-ma.js",
+	"./ar-ps": "./node_modules/moment/locale/ar-ps.js",
+	"./ar-ps.js": "./node_modules/moment/locale/ar-ps.js",
+	"./ar-sa": "./node_modules/moment/locale/ar-sa.js",
+	"./ar-sa.js": "./node_modules/moment/locale/ar-sa.js",
+	"./ar-tn": "./node_modules/moment/locale/ar-tn.js",
+	"./ar-tn.js": "./node_modules/moment/locale/ar-tn.js",
+	"./ar.js": "./node_modules/moment/locale/ar.js",
+	"./az": "./node_modules/moment/locale/az.js",
+	"./az.js": "./node_modules/moment/locale/az.js",
+	"./be": "./node_modules/moment/locale/be.js",
+	"./be.js": "./node_modules/moment/locale/be.js",
+	"./bg": "./node_modules/moment/locale/bg.js",
+	"./bg.js": "./node_modules/moment/locale/bg.js",
+	"./bm": "./node_modules/moment/locale/bm.js",
+	"./bm.js": "./node_modules/moment/locale/bm.js",
+	"./bn": "./node_modules/moment/locale/bn.js",
+	"./bn-bd": "./node_modules/moment/locale/bn-bd.js",
+	"./bn-bd.js": "./node_modules/moment/locale/bn-bd.js",
+	"./bn.js": "./node_modules/moment/locale/bn.js",
+	"./bo": "./node_modules/moment/locale/bo.js",
+	"./bo.js": "./node_modules/moment/locale/bo.js",
+	"./br": "./node_modules/moment/locale/br.js",
+	"./br.js": "./node_modules/moment/locale/br.js",
+	"./bs": "./node_modules/moment/locale/bs.js",
+	"./bs.js": "./node_modules/moment/locale/bs.js",
+	"./ca": "./node_modules/moment/locale/ca.js",
+	"./ca.js": "./node_modules/moment/locale/ca.js",
+	"./cs": "./node_modules/moment/locale/cs.js",
+	"./cs.js": "./node_modules/moment/locale/cs.js",
+	"./cv": "./node_modules/moment/locale/cv.js",
+	"./cv.js": "./node_modules/moment/locale/cv.js",
+	"./cy": "./node_modules/moment/locale/cy.js",
+	"./cy.js": "./node_modules/moment/locale/cy.js",
+	"./da": "./node_modules/moment/locale/da.js",
+	"./da.js": "./node_modules/moment/locale/da.js",
+	"./de": "./node_modules/moment/locale/de.js",
+	"./de-at": "./node_modules/moment/locale/de-at.js",
+	"./de-at.js": "./node_modules/moment/locale/de-at.js",
+	"./de-ch": "./node_modules/moment/locale/de-ch.js",
+	"./de-ch.js": "./node_modules/moment/locale/de-ch.js",
+	"./de.js": "./node_modules/moment/locale/de.js",
+	"./dv": "./node_modules/moment/locale/dv.js",
+	"./dv.js": "./node_modules/moment/locale/dv.js",
+	"./el": "./node_modules/moment/locale/el.js",
+	"./el.js": "./node_modules/moment/locale/el.js",
+	"./en-au": "./node_modules/moment/locale/en-au.js",
+	"./en-au.js": "./node_modules/moment/locale/en-au.js",
+	"./en-ca": "./node_modules/moment/locale/en-ca.js",
+	"./en-ca.js": "./node_modules/moment/locale/en-ca.js",
+	"./en-gb": "./node_modules/moment/locale/en-gb.js",
+	"./en-gb.js": "./node_modules/moment/locale/en-gb.js",
+	"./en-ie": "./node_modules/moment/locale/en-ie.js",
+	"./en-ie.js": "./node_modules/moment/locale/en-ie.js",
+	"./en-il": "./node_modules/moment/locale/en-il.js",
+	"./en-il.js": "./node_modules/moment/locale/en-il.js",
+	"./en-in": "./node_modules/moment/locale/en-in.js",
+	"./en-in.js": "./node_modules/moment/locale/en-in.js",
+	"./en-nz": "./node_modules/moment/locale/en-nz.js",
+	"./en-nz.js": "./node_modules/moment/locale/en-nz.js",
+	"./en-sg": "./node_modules/moment/locale/en-sg.js",
+	"./en-sg.js": "./node_modules/moment/locale/en-sg.js",
+	"./eo": "./node_modules/moment/locale/eo.js",
+	"./eo.js": "./node_modules/moment/locale/eo.js",
+	"./es": "./node_modules/moment/locale/es.js",
+	"./es-do": "./node_modules/moment/locale/es-do.js",
+	"./es-do.js": "./node_modules/moment/locale/es-do.js",
+	"./es-mx": "./node_modules/moment/locale/es-mx.js",
+	"./es-mx.js": "./node_modules/moment/locale/es-mx.js",
+	"./es-us": "./node_modules/moment/locale/es-us.js",
+	"./es-us.js": "./node_modules/moment/locale/es-us.js",
+	"./es.js": "./node_modules/moment/locale/es.js",
+	"./et": "./node_modules/moment/locale/et.js",
+	"./et.js": "./node_modules/moment/locale/et.js",
+	"./eu": "./node_modules/moment/locale/eu.js",
+	"./eu.js": "./node_modules/moment/locale/eu.js",
+	"./fa": "./node_modules/moment/locale/fa.js",
+	"./fa.js": "./node_modules/moment/locale/fa.js",
+	"./fi": "./node_modules/moment/locale/fi.js",
+	"./fi.js": "./node_modules/moment/locale/fi.js",
+	"./fil": "./node_modules/moment/locale/fil.js",
+	"./fil.js": "./node_modules/moment/locale/fil.js",
+	"./fo": "./node_modules/moment/locale/fo.js",
+	"./fo.js": "./node_modules/moment/locale/fo.js",
+	"./fr": "./node_modules/moment/locale/fr.js",
+	"./fr-ca": "./node_modules/moment/locale/fr-ca.js",
+	"./fr-ca.js": "./node_modules/moment/locale/fr-ca.js",
+	"./fr-ch": "./node_modules/moment/locale/fr-ch.js",
+	"./fr-ch.js": "./node_modules/moment/locale/fr-ch.js",
+	"./fr.js": "./node_modules/moment/locale/fr.js",
+	"./fy": "./node_modules/moment/locale/fy.js",
+	"./fy.js": "./node_modules/moment/locale/fy.js",
+	"./ga": "./node_modules/moment/locale/ga.js",
+	"./ga.js": "./node_modules/moment/locale/ga.js",
+	"./gd": "./node_modules/moment/locale/gd.js",
+	"./gd.js": "./node_modules/moment/locale/gd.js",
+	"./gl": "./node_modules/moment/locale/gl.js",
+	"./gl.js": "./node_modules/moment/locale/gl.js",
+	"./gom-deva": "./node_modules/moment/locale/gom-deva.js",
+	"./gom-deva.js": "./node_modules/moment/locale/gom-deva.js",
+	"./gom-latn": "./node_modules/moment/locale/gom-latn.js",
+	"./gom-latn.js": "./node_modules/moment/locale/gom-latn.js",
+	"./gu": "./node_modules/moment/locale/gu.js",
+	"./gu.js": "./node_modules/moment/locale/gu.js",
+	"./he": "./node_modules/moment/locale/he.js",
+	"./he.js": "./node_modules/moment/locale/he.js",
+	"./hi": "./node_modules/moment/locale/hi.js",
+	"./hi.js": "./node_modules/moment/locale/hi.js",
+	"./hr": "./node_modules/moment/locale/hr.js",
+	"./hr.js": "./node_modules/moment/locale/hr.js",
+	"./hu": "./node_modules/moment/locale/hu.js",
+	"./hu.js": "./node_modules/moment/locale/hu.js",
+	"./hy-am": "./node_modules/moment/locale/hy-am.js",
+	"./hy-am.js": "./node_modules/moment/locale/hy-am.js",
+	"./id": "./node_modules/moment/locale/id.js",
+	"./id.js": "./node_modules/moment/locale/id.js",
+	"./is": "./node_modules/moment/locale/is.js",
+	"./is.js": "./node_modules/moment/locale/is.js",
+	"./it": "./node_modules/moment/locale/it.js",
+	"./it-ch": "./node_modules/moment/locale/it-ch.js",
+	"./it-ch.js": "./node_modules/moment/locale/it-ch.js",
+	"./it.js": "./node_modules/moment/locale/it.js",
+	"./ja": "./node_modules/moment/locale/ja.js",
+	"./ja.js": "./node_modules/moment/locale/ja.js",
+	"./jv": "./node_modules/moment/locale/jv.js",
+	"./jv.js": "./node_modules/moment/locale/jv.js",
+	"./ka": "./node_modules/moment/locale/ka.js",
+	"./ka.js": "./node_modules/moment/locale/ka.js",
+	"./kk": "./node_modules/moment/locale/kk.js",
+	"./kk.js": "./node_modules/moment/locale/kk.js",
+	"./km": "./node_modules/moment/locale/km.js",
+	"./km.js": "./node_modules/moment/locale/km.js",
+	"./kn": "./node_modules/moment/locale/kn.js",
+	"./kn.js": "./node_modules/moment/locale/kn.js",
+	"./ko": "./node_modules/moment/locale/ko.js",
+	"./ko.js": "./node_modules/moment/locale/ko.js",
+	"./ku": "./node_modules/moment/locale/ku.js",
+	"./ku-kmr": "./node_modules/moment/locale/ku-kmr.js",
+	"./ku-kmr.js": "./node_modules/moment/locale/ku-kmr.js",
+	"./ku.js": "./node_modules/moment/locale/ku.js",
+	"./ky": "./node_modules/moment/locale/ky.js",
+	"./ky.js": "./node_modules/moment/locale/ky.js",
+	"./lb": "./node_modules/moment/locale/lb.js",
+	"./lb.js": "./node_modules/moment/locale/lb.js",
+	"./lo": "./node_modules/moment/locale/lo.js",
+	"./lo.js": "./node_modules/moment/locale/lo.js",
+	"./lt": "./node_modules/moment/locale/lt.js",
+	"./lt.js": "./node_modules/moment/locale/lt.js",
+	"./lv": "./node_modules/moment/locale/lv.js",
+	"./lv.js": "./node_modules/moment/locale/lv.js",
+	"./me": "./node_modules/moment/locale/me.js",
+	"./me.js": "./node_modules/moment/locale/me.js",
+	"./mi": "./node_modules/moment/locale/mi.js",
+	"./mi.js": "./node_modules/moment/locale/mi.js",
+	"./mk": "./node_modules/moment/locale/mk.js",
+	"./mk.js": "./node_modules/moment/locale/mk.js",
+	"./ml": "./node_modules/moment/locale/ml.js",
+	"./ml.js": "./node_modules/moment/locale/ml.js",
+	"./mn": "./node_modules/moment/locale/mn.js",
+	"./mn.js": "./node_modules/moment/locale/mn.js",
+	"./mr": "./node_modules/moment/locale/mr.js",
+	"./mr.js": "./node_modules/moment/locale/mr.js",
+	"./ms": "./node_modules/moment/locale/ms.js",
+	"./ms-my": "./node_modules/moment/locale/ms-my.js",
+	"./ms-my.js": "./node_modules/moment/locale/ms-my.js",
+	"./ms.js": "./node_modules/moment/locale/ms.js",
+	"./mt": "./node_modules/moment/locale/mt.js",
+	"./mt.js": "./node_modules/moment/locale/mt.js",
+	"./my": "./node_modules/moment/locale/my.js",
+	"./my.js": "./node_modules/moment/locale/my.js",
+	"./nb": "./node_modules/moment/locale/nb.js",
+	"./nb.js": "./node_modules/moment/locale/nb.js",
+	"./ne": "./node_modules/moment/locale/ne.js",
+	"./ne.js": "./node_modules/moment/locale/ne.js",
+	"./nl": "./node_modules/moment/locale/nl.js",
+	"./nl-be": "./node_modules/moment/locale/nl-be.js",
+	"./nl-be.js": "./node_modules/moment/locale/nl-be.js",
+	"./nl.js": "./node_modules/moment/locale/nl.js",
+	"./nn": "./node_modules/moment/locale/nn.js",
+	"./nn.js": "./node_modules/moment/locale/nn.js",
+	"./oc-lnc": "./node_modules/moment/locale/oc-lnc.js",
+	"./oc-lnc.js": "./node_modules/moment/locale/oc-lnc.js",
+	"./pa-in": "./node_modules/moment/locale/pa-in.js",
+	"./pa-in.js": "./node_modules/moment/locale/pa-in.js",
+	"./pl": "./node_modules/moment/locale/pl.js",
+	"./pl.js": "./node_modules/moment/locale/pl.js",
+	"./ps": "./node_modules/moment/locale/ps.js",
+	"./ps.js": "./node_modules/moment/locale/ps.js",
+	"./pt": "./node_modules/moment/locale/pt.js",
+	"./pt-br": "./node_modules/moment/locale/pt-br.js",
+	"./pt-br.js": "./node_modules/moment/locale/pt-br.js",
+	"./pt.js": "./node_modules/moment/locale/pt.js",
+	"./ro": "./node_modules/moment/locale/ro.js",
+	"./ro.js": "./node_modules/moment/locale/ro.js",
+	"./ru": "./node_modules/moment/locale/ru.js",
+	"./ru.js": "./node_modules/moment/locale/ru.js",
+	"./sd": "./node_modules/moment/locale/sd.js",
+	"./sd.js": "./node_modules/moment/locale/sd.js",
+	"./se": "./node_modules/moment/locale/se.js",
+	"./se.js": "./node_modules/moment/locale/se.js",
+	"./si": "./node_modules/moment/locale/si.js",
+	"./si.js": "./node_modules/moment/locale/si.js",
+	"./sk": "./node_modules/moment/locale/sk.js",
+	"./sk.js": "./node_modules/moment/locale/sk.js",
+	"./sl": "./node_modules/moment/locale/sl.js",
+	"./sl.js": "./node_modules/moment/locale/sl.js",
+	"./sq": "./node_modules/moment/locale/sq.js",
+	"./sq.js": "./node_modules/moment/locale/sq.js",
+	"./sr": "./node_modules/moment/locale/sr.js",
+	"./sr-cyrl": "./node_modules/moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "./node_modules/moment/locale/sr-cyrl.js",
+	"./sr.js": "./node_modules/moment/locale/sr.js",
+	"./ss": "./node_modules/moment/locale/ss.js",
+	"./ss.js": "./node_modules/moment/locale/ss.js",
+	"./sv": "./node_modules/moment/locale/sv.js",
+	"./sv.js": "./node_modules/moment/locale/sv.js",
+	"./sw": "./node_modules/moment/locale/sw.js",
+	"./sw.js": "./node_modules/moment/locale/sw.js",
+	"./ta": "./node_modules/moment/locale/ta.js",
+	"./ta.js": "./node_modules/moment/locale/ta.js",
+	"./te": "./node_modules/moment/locale/te.js",
+	"./te.js": "./node_modules/moment/locale/te.js",
+	"./tet": "./node_modules/moment/locale/tet.js",
+	"./tet.js": "./node_modules/moment/locale/tet.js",
+	"./tg": "./node_modules/moment/locale/tg.js",
+	"./tg.js": "./node_modules/moment/locale/tg.js",
+	"./th": "./node_modules/moment/locale/th.js",
+	"./th.js": "./node_modules/moment/locale/th.js",
+	"./tk": "./node_modules/moment/locale/tk.js",
+	"./tk.js": "./node_modules/moment/locale/tk.js",
+	"./tl-ph": "./node_modules/moment/locale/tl-ph.js",
+	"./tl-ph.js": "./node_modules/moment/locale/tl-ph.js",
+	"./tlh": "./node_modules/moment/locale/tlh.js",
+	"./tlh.js": "./node_modules/moment/locale/tlh.js",
+	"./tr": "./node_modules/moment/locale/tr.js",
+	"./tr.js": "./node_modules/moment/locale/tr.js",
+	"./tzl": "./node_modules/moment/locale/tzl.js",
+	"./tzl.js": "./node_modules/moment/locale/tzl.js",
+	"./tzm": "./node_modules/moment/locale/tzm.js",
+	"./tzm-latn": "./node_modules/moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "./node_modules/moment/locale/tzm-latn.js",
+	"./tzm.js": "./node_modules/moment/locale/tzm.js",
+	"./ug-cn": "./node_modules/moment/locale/ug-cn.js",
+	"./ug-cn.js": "./node_modules/moment/locale/ug-cn.js",
+	"./uk": "./node_modules/moment/locale/uk.js",
+	"./uk.js": "./node_modules/moment/locale/uk.js",
+	"./ur": "./node_modules/moment/locale/ur.js",
+	"./ur.js": "./node_modules/moment/locale/ur.js",
+	"./uz": "./node_modules/moment/locale/uz.js",
+	"./uz-latn": "./node_modules/moment/locale/uz-latn.js",
+	"./uz-latn.js": "./node_modules/moment/locale/uz-latn.js",
+	"./uz.js": "./node_modules/moment/locale/uz.js",
+	"./vi": "./node_modules/moment/locale/vi.js",
+	"./vi.js": "./node_modules/moment/locale/vi.js",
+	"./x-pseudo": "./node_modules/moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "./node_modules/moment/locale/x-pseudo.js",
+	"./yo": "./node_modules/moment/locale/yo.js",
+	"./yo.js": "./node_modules/moment/locale/yo.js",
+	"./zh-cn": "./node_modules/moment/locale/zh-cn.js",
+	"./zh-cn.js": "./node_modules/moment/locale/zh-cn.js",
+	"./zh-hk": "./node_modules/moment/locale/zh-hk.js",
+	"./zh-hk.js": "./node_modules/moment/locale/zh-hk.js",
+	"./zh-mo": "./node_modules/moment/locale/zh-mo.js",
+	"./zh-mo.js": "./node_modules/moment/locale/zh-mo.js",
+	"./zh-tw": "./node_modules/moment/locale/zh-tw.js",
+	"./zh-tw.js": "./node_modules/moment/locale/zh-tw.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
+
+/***/ },
+
+/***/ "./node_modules/moment/moment.js"
 /*!***************************************!*\
   !*** ./node_modules/moment/moment.js ***!
   \***************************************/
-/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+(module, __unused_webpack_exports, __webpack_require__) {
 
 /* module decorator */ module = __webpack_require__.nmd(module);
 //! moment.js
-//! version : 2.30.1
+//! version : 2.31.0
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -60388,6 +64235,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             nullInput: false,
             invalidEra: null,
             invalidMonth: null,
+            invalidOffset: null,
             invalidFormat: false,
             userInvalidated: false,
             iso: false,
@@ -60425,7 +64273,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         };
     }
 
-    function isValid(m) {
+    function isValid$2(m) {
         var flags = null,
             parsedParts = false,
             isNowValid = m._d && !isNaN(m._d.getTime());
@@ -60439,6 +64287,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 !flags.empty &&
                 !flags.invalidEra &&
                 !flags.invalidMonth &&
+                !flags.invalidOffset &&
                 !flags.invalidWeekday &&
                 !flags.weekdayMismatch &&
                 !flags.nullInput &&
@@ -60461,7 +64310,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return m._isValid;
     }
 
-    function createInvalid(flags) {
+    function createInvalid$1(flags) {
         var m = createUTC(NaN);
         if (flags != null) {
             extend(getParsingFlags(m), flags);
@@ -60607,7 +64456,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             hooks.deprecationHandler(name, msg);
         }
         if (!deprecations[name]) {
-            warn(msg);
+            warn(msg + '\n' + new Error().stack);
             deprecations[name] = true;
         }
     }
@@ -60620,285 +64469,6 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             (typeof Function !== 'undefined' && input instanceof Function) ||
             Object.prototype.toString.call(input) === '[object Function]'
         );
-    }
-
-    function set(config) {
-        var prop, i;
-        for (i in config) {
-            if (hasOwnProp(config, i)) {
-                prop = config[i];
-                if (isFunction(prop)) {
-                    this[i] = prop;
-                } else {
-                    this['_' + i] = prop;
-                }
-            }
-        }
-        this._config = config;
-        // Lenient ordinal parsing accepts just a number in addition to
-        // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
-        // TODO: Remove "ordinalParse" fallback in next major release.
-        this._dayOfMonthOrdinalParseLenient = new RegExp(
-            (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
-                '|' +
-                /\d{1,2}/.source
-        );
-    }
-
-    function mergeConfigs(parentConfig, childConfig) {
-        var res = extend({}, parentConfig),
-            prop;
-        for (prop in childConfig) {
-            if (hasOwnProp(childConfig, prop)) {
-                if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
-                    res[prop] = {};
-                    extend(res[prop], parentConfig[prop]);
-                    extend(res[prop], childConfig[prop]);
-                } else if (childConfig[prop] != null) {
-                    res[prop] = childConfig[prop];
-                } else {
-                    delete res[prop];
-                }
-            }
-        }
-        for (prop in parentConfig) {
-            if (
-                hasOwnProp(parentConfig, prop) &&
-                !hasOwnProp(childConfig, prop) &&
-                isObject(parentConfig[prop])
-            ) {
-                // make sure changes to properties don't modify parent config
-                res[prop] = extend({}, res[prop]);
-            }
-        }
-        return res;
-    }
-
-    function Locale(config) {
-        if (config != null) {
-            this.set(config);
-        }
-    }
-
-    var keys;
-
-    if (Object.keys) {
-        keys = Object.keys;
-    } else {
-        keys = function (obj) {
-            var i,
-                res = [];
-            for (i in obj) {
-                if (hasOwnProp(obj, i)) {
-                    res.push(i);
-                }
-            }
-            return res;
-        };
-    }
-
-    var defaultCalendar = {
-        sameDay: '[Today at] LT',
-        nextDay: '[Tomorrow at] LT',
-        nextWeek: 'dddd [at] LT',
-        lastDay: '[Yesterday at] LT',
-        lastWeek: '[Last] dddd [at] LT',
-        sameElse: 'L',
-    };
-
-    function calendar(key, mom, now) {
-        var output = this._calendar[key] || this._calendar['sameElse'];
-        return isFunction(output) ? output.call(mom, now) : output;
-    }
-
-    function zeroFill(number, targetLength, forceSign) {
-        var absNumber = '' + Math.abs(number),
-            zerosToFill = targetLength - absNumber.length,
-            sign = number >= 0;
-        return (
-            (sign ? (forceSign ? '+' : '') : '-') +
-            Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) +
-            absNumber
-        );
-    }
-
-    var formattingTokens =
-            /(\[[^\[]*\])|(\\)?([Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
-        localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
-        formatFunctions = {},
-        formatTokenFunctions = {};
-
-    // token:    'M'
-    // padded:   ['MM', 2]
-    // ordinal:  'Mo'
-    // callback: function () { this.month() + 1 }
-    function addFormatToken(token, padded, ordinal, callback) {
-        var func = callback;
-        if (typeof callback === 'string') {
-            func = function () {
-                return this[callback]();
-            };
-        }
-        if (token) {
-            formatTokenFunctions[token] = func;
-        }
-        if (padded) {
-            formatTokenFunctions[padded[0]] = function () {
-                return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
-            };
-        }
-        if (ordinal) {
-            formatTokenFunctions[ordinal] = function () {
-                return this.localeData().ordinal(
-                    func.apply(this, arguments),
-                    token
-                );
-            };
-        }
-    }
-
-    function removeFormattingTokens(input) {
-        if (input.match(/\[[\s\S]/)) {
-            return input.replace(/^\[|\]$/g, '');
-        }
-        return input.replace(/\\/g, '');
-    }
-
-    function makeFormatFunction(format) {
-        var array = format.match(formattingTokens),
-            i,
-            length;
-
-        for (i = 0, length = array.length; i < length; i++) {
-            if (formatTokenFunctions[array[i]]) {
-                array[i] = formatTokenFunctions[array[i]];
-            } else {
-                array[i] = removeFormattingTokens(array[i]);
-            }
-        }
-
-        return function (mom) {
-            var output = '',
-                i;
-            for (i = 0; i < length; i++) {
-                output += isFunction(array[i])
-                    ? array[i].call(mom, format)
-                    : array[i];
-            }
-            return output;
-        };
-    }
-
-    // format date using native date object
-    function formatMoment(m, format) {
-        if (!m.isValid()) {
-            return m.localeData().invalidDate();
-        }
-
-        format = expandFormat(format, m.localeData());
-        formatFunctions[format] =
-            formatFunctions[format] || makeFormatFunction(format);
-
-        return formatFunctions[format](m);
-    }
-
-    function expandFormat(format, locale) {
-        var i = 5;
-
-        function replaceLongDateFormatTokens(input) {
-            return locale.longDateFormat(input) || input;
-        }
-
-        localFormattingTokens.lastIndex = 0;
-        while (i >= 0 && localFormattingTokens.test(format)) {
-            format = format.replace(
-                localFormattingTokens,
-                replaceLongDateFormatTokens
-            );
-            localFormattingTokens.lastIndex = 0;
-            i -= 1;
-        }
-
-        return format;
-    }
-
-    var defaultLongDateFormat = {
-        LTS: 'h:mm:ss A',
-        LT: 'h:mm A',
-        L: 'MM/DD/YYYY',
-        LL: 'MMMM D, YYYY',
-        LLL: 'MMMM D, YYYY h:mm A',
-        LLLL: 'dddd, MMMM D, YYYY h:mm A',
-    };
-
-    function longDateFormat(key) {
-        var format = this._longDateFormat[key],
-            formatUpper = this._longDateFormat[key.toUpperCase()];
-
-        if (format || !formatUpper) {
-            return format;
-        }
-
-        this._longDateFormat[key] = formatUpper
-            .match(formattingTokens)
-            .map(function (tok) {
-                if (
-                    tok === 'MMMM' ||
-                    tok === 'MM' ||
-                    tok === 'DD' ||
-                    tok === 'dddd'
-                ) {
-                    return tok.slice(1);
-                }
-                return tok;
-            })
-            .join('');
-
-        return this._longDateFormat[key];
-    }
-
-    var defaultInvalidDate = 'Invalid date';
-
-    function invalidDate() {
-        return this._invalidDate;
-    }
-
-    var defaultOrdinal = '%d',
-        defaultDayOfMonthOrdinalParse = /\d{1,2}/;
-
-    function ordinal(number) {
-        return this._ordinal.replace('%d', number);
-    }
-
-    var defaultRelativeTime = {
-        future: 'in %s',
-        past: '%s ago',
-        s: 'a few seconds',
-        ss: '%d seconds',
-        m: 'a minute',
-        mm: '%d minutes',
-        h: 'an hour',
-        hh: '%d hours',
-        d: 'a day',
-        dd: '%d days',
-        w: 'a week',
-        ww: '%d weeks',
-        M: 'a month',
-        MM: '%d months',
-        y: 'a year',
-        yy: '%d years',
-    };
-
-    function relativeTime(number, withoutSuffix, string, isFuture) {
-        var output = this._relativeTime[string];
-        return isFunction(output)
-            ? output(number, withoutSuffix, string, isFuture)
-            : output.replace(/%d/i, number);
-    }
-
-    function pastFuture(diff, output) {
-        var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
-        return isFunction(format) ? format(output) : format.replace(/%s/i, output);
     }
 
     var aliases = {
@@ -61006,6 +64576,119 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return a.priority - b.priority;
         });
         return units;
+    }
+
+    function zeroFill(number, targetLength, forceSign) {
+        var absNumber = '' + Math.abs(number),
+            zerosToFill = targetLength - absNumber.length,
+            sign = number >= 0;
+        return (
+            (sign ? (forceSign ? '+' : '') : '-') +
+            Math.pow(10, Math.max(0, zerosToFill)).toString().substr(1) +
+            absNumber
+        );
+    }
+
+    var formattingTokens =
+            /(\[[^\[]*\])|(\\e)|(\\)?(eHHmm|[Hh]mm(ss)?|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|Qo?|N{1,5}|YYYYYY|YYYYY|YYYY|YY|y{2,4}|yo?|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|kk?|mm?|ss?|S{1,9}|x|X|zz?|ZZ?|.)/g,
+        localFormattingTokens = /(\[[^\[]*\])|(\\)?(LTS|LT|LL?L?L?|l{1,4})/g,
+        formatFunctions = {},
+        formatTokenFunctions = {};
+
+    // token:    'M'
+    // padded:   ['MM', 2]
+    // ordinal:  'Mo'
+    // callback: function () { this.month() + 1 }
+    function addFormatToken(token, padded, ordinal, callback) {
+        var func = callback;
+        if (typeof callback === 'string') {
+            func = function () {
+                return this[callback]();
+            };
+        }
+        if (token) {
+            formatTokenFunctions[token] = func;
+        }
+        if (padded) {
+            formatTokenFunctions[padded[0]] = function () {
+                return zeroFill(func.apply(this, arguments), padded[1], padded[2]);
+            };
+        }
+        if (ordinal) {
+            formatTokenFunctions[ordinal] = function () {
+                return this.localeData().ordinal(
+                    func.apply(this, arguments),
+                    token
+                );
+            };
+        }
+    }
+
+    function removeFormattingTokens(input) {
+        if (input.match(/\[[\s\S]/)) {
+            return input.replace(/^\[|\]$/g, '');
+        }
+        return input.replace(/\\/g, '');
+    }
+
+    function makeFormatFunction(format) {
+        var array = format.match(formattingTokens),
+            i,
+            length;
+
+        for (i = 0, length = array.length; i < length; i++) {
+            if (formatTokenFunctions[array[i]]) {
+                array[i] = formatTokenFunctions[array[i]];
+            } else {
+                array[i] = removeFormattingTokens(array[i]);
+            }
+        }
+
+        return function (mom) {
+            var output = '',
+                i;
+            for (i = 0; i < length; i++) {
+                output += isFunction(array[i])
+                    ? array[i].call(mom, format)
+                    : array[i];
+            }
+            return output;
+        };
+    }
+
+    // format date using native date object
+    function formatMoment(m, format) {
+        if (!m.isValid()) {
+            return m.localeData().invalidDate();
+        }
+
+        format = expandFormat(format, m.localeData());
+        var cacheKey = '$' + format;
+        if (!hasOwnProp(formatFunctions, cacheKey)) {
+            formatFunctions[cacheKey] = makeFormatFunction(format);
+        }
+
+        return formatFunctions[cacheKey](m);
+    }
+
+    function expandFormat(format, locale) {
+        var i = 5;
+
+        function replaceLongDateFormatTokens(input) {
+            return locale.longDateFormat(input) || input;
+        }
+
+        localFormattingTokens.lastIndex = 0;
+        while (i >= 0 && localFormattingTokens.test(format)) {
+            format = format.replace(
+                localFormattingTokens,
+                replaceLongDateFormatTokens
+            );
+            localFormattingTokens.lastIndex = 0;
+            i -= 1;
+        }
+
+        return format;
     }
 
     var match1 = /\d/, //       0 - 9
@@ -61197,12 +64880,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 hooks.updateOffset(this, keepTime);
                 return this;
             } else {
-                return get(this, unit);
+                return get$2(this, unit);
             }
         };
     }
 
-    function get(mom, unit) {
+    function get$2(mom, unit) {
         if (!mom.isValid()) {
             return NaN;
         }
@@ -61302,7 +64985,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this;
     }
 
-    function mod(n, x) {
+    function mod$1(n, x) {
         return ((n % x) + x) % x;
     }
 
@@ -61327,7 +65010,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (isNaN(year) || isNaN(month)) {
             return NaN;
         }
-        var modMonth = mod(month, 12);
+        var modMonth = mod$1(month, 12);
         year += (month - modMonth) / 12;
         return modMonth === 1
             ? isLeapYear(year)
@@ -61385,7 +65068,26 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'),
         MONTHS_IN_FORMAT = /D[oD]?(\[[^\[\]]*\]|\s)+MMMM?/,
         defaultMonthsShortRegex = matchWord,
-        defaultMonthsRegex = matchWord;
+        defaultMonthsRegex = matchWord,
+        monthsParseProperties = [
+            'monthsParse',
+            'longMonthsParse',
+            'shortMonthsParse',
+            'monthsRegex',
+            'monthsShortRegex',
+            'monthsStrictRegex',
+            'monthsShortStrictRegex',
+        ];
+
+    function clearMonthsParseCache(locale, config) {
+        var i, prop;
+        for (i = 0; i < monthsParseProperties.length; i++) {
+            prop = monthsParseProperties[i];
+            if (!hasOwnProp(config, prop)) {
+                delete locale['_' + prop];
+            }
+        }
+    }
 
     function localeMonths(m, format) {
         if (!m) {
@@ -61415,7 +65117,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
               ][m.month()];
     }
 
-    function handleStrictParse(monthName, format, strict) {
+    function handleStrictParse$1(monthName, format, strict) {
         var i,
             ii,
             mom,
@@ -61466,7 +65168,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         var i, mom, regex;
 
         if (this._monthsParseExact) {
-            return handleStrictParse.call(this, monthName, format, strict);
+            return handleStrictParse$1.call(this, monthName, format, strict);
         }
 
         if (!this._monthsParse) {
@@ -61551,7 +65253,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             hooks.updateOffset(this, true);
             return this;
         } else {
-            return get(this, 'Month');
+            return get$2(this, 'Month');
         }
     }
 
@@ -61639,158 +65341,6 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         );
     }
 
-    function createDate(y, m, d, h, M, s, ms) {
-        // can't just apply() to create a date:
-        // https://stackoverflow.com/q/181348
-        var date;
-        // the date constructor remaps years 0-99 to 1900-1999
-        if (y < 100 && y >= 0) {
-            // preserve leap years using a full 400 year cycle, then reset
-            date = new Date(y + 400, m, d, h, M, s, ms);
-            if (isFinite(date.getFullYear())) {
-                date.setFullYear(y);
-            }
-        } else {
-            date = new Date(y, m, d, h, M, s, ms);
-        }
-
-        return date;
-    }
-
-    function createUTCDate(y) {
-        var date, args;
-        // the Date.UTC function remaps years 0-99 to 1900-1999
-        if (y < 100 && y >= 0) {
-            args = Array.prototype.slice.call(arguments);
-            // preserve leap years using a full 400 year cycle, then reset
-            args[0] = y + 400;
-            date = new Date(Date.UTC.apply(null, args));
-            if (isFinite(date.getUTCFullYear())) {
-                date.setUTCFullYear(y);
-            }
-        } else {
-            date = new Date(Date.UTC.apply(null, arguments));
-        }
-
-        return date;
-    }
-
-    // start-of-first-week - start-of-year
-    function firstWeekOffset(year, dow, doy) {
-        var // first-week day -- which january is always in the first week (4 for iso, 1 for other)
-            fwd = 7 + dow - doy,
-            // first-week day local weekday -- which local weekday is fwd
-            fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
-
-        return -fwdlw + fwd - 1;
-    }
-
-    // https://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
-    function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
-        var localWeekday = (7 + weekday - dow) % 7,
-            weekOffset = firstWeekOffset(year, dow, doy),
-            dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
-            resYear,
-            resDayOfYear;
-
-        if (dayOfYear <= 0) {
-            resYear = year - 1;
-            resDayOfYear = daysInYear(resYear) + dayOfYear;
-        } else if (dayOfYear > daysInYear(year)) {
-            resYear = year + 1;
-            resDayOfYear = dayOfYear - daysInYear(year);
-        } else {
-            resYear = year;
-            resDayOfYear = dayOfYear;
-        }
-
-        return {
-            year: resYear,
-            dayOfYear: resDayOfYear,
-        };
-    }
-
-    function weekOfYear(mom, dow, doy) {
-        var weekOffset = firstWeekOffset(mom.year(), dow, doy),
-            week = Math.floor((mom.dayOfYear() - weekOffset - 1) / 7) + 1,
-            resWeek,
-            resYear;
-
-        if (week < 1) {
-            resYear = mom.year() - 1;
-            resWeek = week + weeksInYear(resYear, dow, doy);
-        } else if (week > weeksInYear(mom.year(), dow, doy)) {
-            resWeek = week - weeksInYear(mom.year(), dow, doy);
-            resYear = mom.year() + 1;
-        } else {
-            resYear = mom.year();
-            resWeek = week;
-        }
-
-        return {
-            week: resWeek,
-            year: resYear,
-        };
-    }
-
-    function weeksInYear(year, dow, doy) {
-        var weekOffset = firstWeekOffset(year, dow, doy),
-            weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
-        return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
-    }
-
-    // FORMATTING
-
-    addFormatToken('w', ['ww', 2], 'wo', 'week');
-    addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
-
-    // PARSING
-
-    addRegexToken('w', match1to2, match1to2NoLeadingZero);
-    addRegexToken('ww', match1to2, match2);
-    addRegexToken('W', match1to2, match1to2NoLeadingZero);
-    addRegexToken('WW', match1to2, match2);
-
-    addWeekParseToken(
-        ['w', 'ww', 'W', 'WW'],
-        function (input, week, config, token) {
-            week[token.substr(0, 1)] = toInt(input);
-        }
-    );
-
-    // HELPERS
-
-    // LOCALES
-
-    function localeWeek(mom) {
-        return weekOfYear(mom, this._week.dow, this._week.doy).week;
-    }
-
-    var defaultLocaleWeek = {
-        dow: 0, // Sunday is the first day of the week.
-        doy: 6, // The week that contains Jan 6th is the first week of the year.
-    };
-
-    function localeFirstDayOfWeek() {
-        return this._week.dow;
-    }
-
-    function localeFirstDayOfYear() {
-        return this._week.doy;
-    }
-
-    // MOMENTS
-
-    function getSetWeek(input) {
-        var week = this.localeData().week(this);
-        return input == null ? week : this.add((input - week) * 7, 'd');
-    }
-
-    function getSetISOWeek(input) {
-        var week = weekOfYear(this, 1, 4).week;
-        return input == null ? week : this.add((input - week) * 7, 'd');
-    }
-
     // FORMATTING
 
     addFormatToken('d', 0, 'do', 'day');
@@ -61809,12 +65359,21 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addFormatToken('e', 0, 0, 'weekday');
     addFormatToken('E', 0, 0, 'isoWeekday');
+    addFormatToken('eHHmm', 0, 0, function () {
+        return (
+            '' +
+            this.weekday() +
+            zeroFill(this.hours(), 2) +
+            zeroFill(this.minutes(), 2)
+        );
+    });
 
     // PARSING
 
     addRegexToken('d', match1to2);
     addRegexToken('e', match1to2);
     addRegexToken('E', match1to2);
+    addRegexToken('eHHmm', match5to6);
     addRegexToken('dd', function (isStrict, locale) {
         return locale.weekdaysMinRegex(isStrict);
     });
@@ -61837,6 +65396,14 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addWeekParseToken(['d', 'e', 'E'], function (input, week, config, token) {
         week[token] = toInt(input);
+    });
+
+    addWeekParseToken('eHHmm', function (input, week, config) {
+        var weekdayEnd = input.length - 4;
+
+        week.e = toInt(input.substr(0, weekdayEnd));
+        config._a[HOUR] = toInt(input.substr(weekdayEnd, 2));
+        config._a[MINUTE] = toInt(input.substr(weekdayEnd + 2));
     });
 
     // HELPERS
@@ -61876,7 +65443,29 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         defaultLocaleWeekdaysMin = 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),
         defaultWeekdaysRegex = matchWord,
         defaultWeekdaysShortRegex = matchWord,
-        defaultWeekdaysMinRegex = matchWord;
+        defaultWeekdaysMinRegex = matchWord,
+        weekdaysParseProperties = [
+            'weekdaysParse',
+            'fullWeekdaysParse',
+            'shortWeekdaysParse',
+            'minWeekdaysParse',
+            'weekdaysRegex',
+            'weekdaysShortRegex',
+            'weekdaysMinRegex',
+            'weekdaysStrictRegex',
+            'weekdaysShortStrictRegex',
+            'weekdaysMinStrictRegex',
+        ];
+
+    function clearWeekdaysParseCache(locale, config) {
+        var i, prop;
+        for (i = 0; i < weekdaysParseProperties.length; i++) {
+            prop = weekdaysParseProperties[i];
+            if (!hasOwnProp(config, prop)) {
+                delete locale['_' + prop];
+            }
+        }
+    }
 
     function localeWeekdays(m, format) {
         var weekdays = isArray(this._weekdays)
@@ -61909,7 +65498,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
               : this._weekdaysMin;
     }
 
-    function handleStrictParse$1(weekdayName, format, strict) {
+    function handleStrictParse(weekdayName, format, strict) {
         var i,
             ii,
             mom,
@@ -61986,7 +65575,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         var i, mom, regex;
 
         if (this._weekdaysParseExact) {
-            return handleStrictParse$1.call(this, weekdayName, format, strict);
+            return handleStrictParse.call(this, weekdayName, format, strict);
         }
 
         if (!this._weekdaysParse) {
@@ -62056,7 +65645,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return input != null ? this : NaN;
         }
 
-        var day = get(this, 'Day');
+        var day = get$2(this, 'Day');
         if (input != null) {
             input = parseWeekday(input, this.localeData());
             return this.add(input - day, 'd');
@@ -62200,6 +65789,381 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             '^(' + minPieces.join('|') + ')',
             'i'
         );
+    }
+
+    function set(config) {
+        var prop, i;
+        clearMonthsParseCache(this, config);
+        clearWeekdaysParseCache(this, config);
+        for (i in config) {
+            if (hasOwnProp(config, i)) {
+                prop = config[i];
+                if (isFunction(prop)) {
+                    this[i] = prop;
+                } else {
+                    this['_' + i] = prop;
+                }
+            }
+        }
+        this._config = config;
+        // Lenient ordinal parsing accepts just a number in addition to
+        // number + (possibly) stuff coming from _dayOfMonthOrdinalParse.
+        // TODO: Remove "ordinalParse" fallback in next major release.
+        this._dayOfMonthOrdinalParseLenient = new RegExp(
+            (this._dayOfMonthOrdinalParse.source || this._ordinalParse.source) +
+                '|' +
+                /\d{1,2}/.source
+        );
+    }
+
+    function mergeConfigs(parentConfig, childConfig) {
+        var res = extend({}, parentConfig),
+            prop;
+        for (prop in childConfig) {
+            if (hasOwnProp(childConfig, prop)) {
+                if (isObject(parentConfig[prop]) && isObject(childConfig[prop])) {
+                    res[prop] = {};
+                    extend(res[prop], parentConfig[prop]);
+                    extend(res[prop], childConfig[prop]);
+                } else if (childConfig[prop] != null) {
+                    res[prop] = childConfig[prop];
+                } else {
+                    delete res[prop];
+                }
+            }
+        }
+        for (prop in parentConfig) {
+            if (
+                hasOwnProp(parentConfig, prop) &&
+                !hasOwnProp(childConfig, prop) &&
+                isObject(parentConfig[prop])
+            ) {
+                // make sure changes to properties don't modify parent config
+                res[prop] = extend({}, res[prop]);
+            }
+        }
+        return res;
+    }
+
+    function Locale(config) {
+        if (config != null) {
+            this.set(config);
+        }
+    }
+
+    var keys;
+
+    if (Object.keys) {
+        keys = Object.keys;
+    } else {
+        keys = function (obj) {
+            var i,
+                res = [];
+            for (i in obj) {
+                if (hasOwnProp(obj, i)) {
+                    res.push(i);
+                }
+            }
+            return res;
+        };
+    }
+
+    var defaultCalendar = {
+        sameDay: '[Today at] LT',
+        nextDay: '[Tomorrow at] LT',
+        nextWeek: 'dddd [at] LT',
+        lastDay: '[Yesterday at] LT',
+        lastWeek: '[Last] dddd [at] LT',
+        sameElse: 'L',
+    };
+
+    function calendar$1(key, mom, now) {
+        var output = this._calendar[key] || this._calendar['sameElse'];
+        return isFunction(output) ? output.call(mom, now) : output;
+    }
+
+    var defaultLongDateFormat = {
+        LTS: 'h:mm:ss A',
+        LT: 'h:mm A',
+        L: 'MM/DD/YYYY',
+        LL: 'MMMM D, YYYY',
+        LLL: 'MMMM D, YYYY h:mm A',
+        LLLL: 'dddd, MMMM D, YYYY h:mm A',
+    };
+
+    function longDateFormat(key) {
+        var format = this._longDateFormat[key],
+            formatUpper = this._longDateFormat[key.toUpperCase()],
+            formatCache = this._longDateFormatCache;
+
+        if (format || !formatUpper) {
+            return format;
+        }
+
+        if (
+            formatCache &&
+            formatCache[key] &&
+            formatCache[key].formatUpper === formatUpper
+        ) {
+            return formatCache[key].format;
+        }
+
+        format = formatUpper
+            .match(formattingTokens)
+            .map(function (tok) {
+                if (
+                    tok === 'MMMM' ||
+                    tok === 'MM' ||
+                    tok === 'DD' ||
+                    tok === 'dddd'
+                ) {
+                    return tok.slice(1);
+                }
+                return tok;
+            })
+            .join('');
+
+        if (!formatCache) {
+            formatCache = this._longDateFormatCache = {};
+        }
+        formatCache[key] = {
+            formatUpper: formatUpper,
+            format: format,
+        };
+        return format;
+    }
+
+    var defaultInvalidDate = 'Invalid date';
+
+    function invalidDate() {
+        return this._invalidDate;
+    }
+
+    var defaultOrdinal = '%d',
+        defaultDayOfMonthOrdinalParse = /\d{1,2}/;
+
+    function ordinal(number) {
+        return this._ordinal.replace('%d', number);
+    }
+
+    var defaultRelativeTime = {
+        future: 'in %s',
+        past: '%s ago',
+        s: 'a few seconds',
+        ss: '%d seconds',
+        m: 'a minute',
+        mm: '%d minutes',
+        h: 'an hour',
+        hh: '%d hours',
+        d: 'a day',
+        dd: '%d days',
+        w: 'a week',
+        ww: '%d weeks',
+        M: 'a month',
+        MM: '%d months',
+        y: 'a year',
+        yy: '%d years',
+    };
+
+    function relativeTimeWithoutPostformat(
+        number,
+        withoutSuffix,
+        string,
+        isFuture
+    ) {
+        var output = this._relativeTime[string];
+        return isFunction(output)
+            ? output(number, withoutSuffix, string, isFuture)
+            : output.replace(/%d/i, number);
+    }
+
+    function relativeTime$1(number, withoutSuffix, string, isFuture) {
+        return this.postformat(
+            relativeTimeWithoutPostformat.call(
+                this,
+                number,
+                withoutSuffix,
+                string,
+                isFuture
+            )
+        );
+    }
+
+    function pastFutureWithoutPostformat(diff, output) {
+        var format = this._relativeTime[diff > 0 ? 'future' : 'past'];
+        return isFunction(format) ? format(output) : format.replace(/%s/i, output);
+    }
+
+    function pastFuture(diff, output) {
+        return this.postformat(
+            pastFutureWithoutPostformat.call(this, diff, output)
+        );
+    }
+
+    function createDate(y, m, d, h, M, s, ms) {
+        // can't just apply() to create a date:
+        // https://stackoverflow.com/q/181348
+        var date;
+        // the date constructor remaps years 0-99 to 1900-1999
+        if (y < 100 && y >= 0) {
+            // preserve leap years using a full 400 year cycle, then reset
+            date = new Date(y + 400, m, d, h, M, s, ms);
+            if (isFinite(date.getFullYear())) {
+                date.setFullYear(y);
+            }
+        } else {
+            date = new Date(y, m, d, h, M, s, ms);
+        }
+
+        return date;
+    }
+
+    function createUTCDate(y) {
+        var date, args;
+        // the Date.UTC function remaps years 0-99 to 1900-1999
+        if (y < 100 && y >= 0) {
+            args = Array.prototype.slice.call(arguments);
+            // preserve leap years using a full 400 year cycle, then reset
+            args[0] = y + 400;
+            date = new Date(Date.UTC.apply(null, args));
+            if (isFinite(date.getUTCFullYear())) {
+                date.setUTCFullYear(y);
+            }
+        } else {
+            date = new Date(Date.UTC.apply(null, arguments));
+        }
+
+        return date;
+    }
+
+    // start-of-first-week - start-of-year
+    function firstWeekOffset(year, dow, doy) {
+        var // first-week day -- which january is always in the first week (4 for iso, 1 for other)
+            fwd = 7 + dow - doy,
+            // first-week day local weekday -- which local weekday is fwd
+            fwdlw = (7 + createUTCDate(year, 0, fwd).getUTCDay() - dow) % 7;
+
+        return -fwdlw + fwd - 1;
+    }
+
+    // https://en.wikipedia.org/wiki/ISO_week_date#Calculating_a_date_given_the_year.2C_week_number_and_weekday
+    function dayOfYearFromWeeks(year, week, weekday, dow, doy) {
+        var localWeekday = (7 + weekday - dow) % 7,
+            weekOffset = firstWeekOffset(year, dow, doy),
+            dayOfYear = 1 + 7 * (week - 1) + localWeekday + weekOffset,
+            resYear,
+            resDayOfYear;
+
+        if (dayOfYear <= 0) {
+            resYear = year - 1;
+            resDayOfYear = daysInYear(resYear) + dayOfYear;
+        } else if (dayOfYear > daysInYear(year)) {
+            resYear = year + 1;
+            resDayOfYear = dayOfYear - daysInYear(year);
+        } else {
+            resYear = year;
+            resDayOfYear = dayOfYear;
+        }
+
+        return {
+            year: resYear,
+            dayOfYear: resDayOfYear,
+        };
+    }
+
+    function weekOfYearFromDayOfYear(year, dayOfYear, dow, doy) {
+        var weekOffset = firstWeekOffset(year, dow, doy),
+            week = Math.floor((dayOfYear - weekOffset - 1) / 7) + 1,
+            resWeek,
+            resYear;
+
+        if (week < 1) {
+            resYear = year - 1;
+            resWeek = week + weeksInYear(resYear, dow, doy);
+        } else if (week > weeksInYear(year, dow, doy)) {
+            resWeek = week - weeksInYear(year, dow, doy);
+            resYear = year + 1;
+        } else {
+            resYear = year;
+            resWeek = week;
+        }
+
+        return {
+            week: resWeek,
+            year: resYear,
+        };
+    }
+
+    function weekOfYear(mom, dow, doy) {
+        return weekOfYearFromDayOfYear(mom.year(), mom.dayOfYear(), dow, doy);
+    }
+
+    function weekOfYearFromDate(year, month, date, dow, doy) {
+        var dayOfYear =
+            Math.round(
+                (createUTCDate(year, month, date) - createUTCDate(year, 0, 1)) /
+                    864e5
+            ) + 1;
+
+        return weekOfYearFromDayOfYear(year, dayOfYear, dow, doy);
+    }
+
+    function weeksInYear(year, dow, doy) {
+        var weekOffset = firstWeekOffset(year, dow, doy),
+            weekOffsetNext = firstWeekOffset(year + 1, dow, doy);
+        return (daysInYear(year) - weekOffset + weekOffsetNext) / 7;
+    }
+
+    // FORMATTING
+
+    addFormatToken('w', ['ww', 2], 'wo', 'week');
+    addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
+
+    // PARSING
+
+    addRegexToken('w', match1to2, match1to2NoLeadingZero);
+    addRegexToken('ww', match1to2, match2);
+    addRegexToken('W', match1to2, match1to2NoLeadingZero);
+    addRegexToken('WW', match1to2, match2);
+
+    addWeekParseToken(
+        ['w', 'ww', 'W', 'WW'],
+        function (input, week, config, token) {
+            week[token.substr(0, 1)] = toInt(input);
+        }
+    );
+
+    // HELPERS
+
+    // LOCALES
+
+    function localeWeek(mom) {
+        return weekOfYear(mom, this._week.dow, this._week.doy).week;
+    }
+
+    var defaultLocaleWeek = {
+        dow: 0, // Sunday is the first day of the week.
+        doy: 6, // The week that contains Jan 6th is the first week of the year.
+    };
+
+    function localeFirstDayOfWeek() {
+        return this._week.dow;
+    }
+
+    function localeFirstDayOfYear() {
+        return this._week.doy;
+    }
+
+    // MOMENTS
+
+    function getSetWeek(input) {
+        var week = this.localeData().week(this);
+        return input == null ? week : this.add((input - week) * 7, 'd');
+    }
+
+    function getSetISOWeek(input) {
+        var week = weekOfYear(this, 1, 4).week;
+        return input == null ? week : this.add((input - week) * 7, 'd');
     }
 
     // FORMATTING
@@ -62414,34 +66378,49 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isLocaleNameSane(name) {
-        // Prevent names that look like filesystem paths, i.e contain '/' or '\'
-        // Ensure name is available and function returns boolean
-        return !!(name && name.match('^[^/\\\\]*$'));
+        // Only canonical locale module names are safe to append to the require path.
+        return typeof name === 'string' && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(name);
     }
 
     function loadLocale(name) {
         var oldLocale = null,
-            aliasedRequire;
+            aliasedRequire,
+            normalizedName;
+
+        // Preserve exact custom locale names before trying the canonical built-in name.
+        // Use hasOwnProp rather than a plain lookup so that names like "__proto__",
+        // "constructor", or "prototype" can't resolve to an inherited Object.prototype
+        // property instead of a real (or missing) locale entry.
+        if (hasOwnProp(locales, name)) {
+            return locales[name];
+        }
+
+        normalizedName = normalizeLocale(name);
+        if (hasOwnProp(locales, normalizedName)) {
+            return locales[normalizedName];
+        }
+
         // TODO: Find a better way to register and load all the locales in Node
         if (
-            locales[name] === undefined &&
-            "object" !== 'undefined' &&
+             true &&
             module &&
             module.exports &&
-            isLocaleNameSane(name)
+            isLocaleNameSane(normalizedName)
         ) {
             try {
                 oldLocale = globalLocale._abbr;
                 aliasedRequire = undefined;
-                __webpack_require__("./node_modules/moment/locale sync recursive ^\\.\\/.*$")("./" + name);
+                __webpack_require__("./node_modules/moment/locale sync recursive ^\\.\\/.*$")("./" + normalizedName);
                 getSetGlobalLocale(oldLocale);
             } catch (e) {
                 // mark as not found to avoid repeating expensive file require call causing high CPU
                 // when trying to find en-US, en_US, en-us for every format call
-                locales[name] = null; // null means not found
+                locales[normalizedName] = null; // null means not found
             }
         }
-        return locales[name];
+        if (hasOwnProp(locales, normalizedName)) {
+            return locales[normalizedName];
+        }
     }
 
     // This function will load locale and then set the global locale.  If
@@ -62527,17 +66506,20 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function updateLocale(name, config) {
-        if (config != null) {
-            var locale,
-                tmpLocale,
-                parentConfig = baseConfig;
+        var locale,
+            tmpLocale = loadLocale(name),
+            parentConfig = baseConfig;
 
+        if (tmpLocale != null) {
+            name = tmpLocale._abbr;
+        }
+
+        if (config != null) {
             if (locales[name] != null && locales[name].parentLocale != null) {
                 // Update existing child locale in-place to avoid memory-leaks
                 locales[name].set(mergeConfigs(locales[name]._config, config));
             } else {
                 // MERGE
-                tmpLocale = loadLocale(name);
                 if (tmpLocale != null) {
                     parentConfig = tmpLocale._config;
                 }
@@ -62905,9 +66887,46 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return c;
     }
 
-    function currentDateArray(config) {
+    function currentDateArray(config, now, forWeek) {
+        var hadWeekContext = Object.prototype.hasOwnProperty.call(
+                config,
+                '_isDefaultDatePartsForWeek'
+            ),
+            weekContext = config._isDefaultDatePartsForWeek;
+
         // hooks is actually the exported moment object
-        var nowValue = new Date(hooks.now());
+        config._isDefaultDatePartsForWeek = !!forWeek;
+        try {
+            return hooks._getDefaultDateParts(config, now, forWeek);
+        } finally {
+            if (hadWeekContext) {
+                config._isDefaultDatePartsForWeek = weekContext;
+            } else {
+                delete config._isDefaultDatePartsForWeek;
+            }
+        }
+    }
+
+    function currentDateNow(config) {
+        var now = config._defaultDatePartsNow;
+
+        if (!now) {
+            return hooks.now();
+        }
+        if (!now.hasValue) {
+            now.value = hooks.now();
+            now.hasValue = true;
+        }
+        return now.value;
+    }
+
+    // Internal hook for extensions that supply omitted calendar fields.
+    function getDefaultDateParts(config, now, forWeek) {
+        var useWeekDefaults = forWeek || config._isDefaultDatePartsForWeek,
+            nowValue = useWeekDefaults ? createLocal(now) : new Date(now);
+        if (useWeekDefaults) {
+            return [nowValue.year(), nowValue.month(), nowValue.date()];
+        }
         if (config._useUTC) {
             return [
                 nowValue.getUTCFullYear(),
@@ -62918,6 +66937,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return [nowValue.getFullYear(), nowValue.getMonth(), nowValue.getDate()];
     }
 
+    hooks._getDefaultDateParts = getDefaultDateParts;
+
     // convert an array to a date.
     // the array should mirror the parameters below
     // note: all values past the year are optional and will default to the lowest possible value.
@@ -62926,24 +66947,34 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         var i,
             date,
             input = [],
+            now,
             currentDate,
             expectedWeekday,
-            yearToUse;
+            yearToUse,
+            dateIsDefaulted;
 
         if (config._d) {
             return;
         }
 
-        currentDate = currentDateArray(config);
+        if (
+            config._a[YEAR] == null ||
+            config._a[MONTH] == null ||
+            config._a[DATE] == null
+        ) {
+            now = currentDateNow(config);
+            currentDate = currentDateArray(config, now);
+        }
 
         //compute day of the year from weeks and weekdays
         if (config._w && config._a[DATE] == null && config._a[MONTH] == null) {
-            dayOfYearFromWeekInfo(config);
+            dayOfYearFromWeekInfo(config, currentDateArray(config, now, true));
         }
 
         //if the day of the year is set, figure out what it is
         if (config._dayOfYear != null) {
-            yearToUse = defaults(config._a[YEAR], currentDate[YEAR]);
+            yearToUse =
+                config._a[YEAR] != null ? config._a[YEAR] : currentDate[YEAR];
 
             if (
                 config._dayOfYear > daysInYear(yearToUse) ||
@@ -62956,6 +66987,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             config._a[MONTH] = date.getUTCMonth();
             config._a[DATE] = date.getUTCDate();
         }
+
+        dateIsDefaulted =
+            config._a[YEAR] == null ||
+            config._a[MONTH] == null ||
+            config._a[DATE] == null;
 
         // Default to current date.
         // * if no year, month, day of month are given, default to today
@@ -63005,13 +67041,14 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (
             config._w &&
             typeof config._w.d !== 'undefined' &&
+            !dateIsDefaulted &&
             config._w.d !== expectedWeekday
         ) {
             getParsingFlags(config).weekdayMismatch = true;
         }
     }
 
-    function dayOfYearFromWeekInfo(config) {
+    function dayOfYearFromWeekInfo(config, currentDate) {
         var w, weekYear, week, weekday, dow, doy, temp, weekdayOverflow, curWeek;
 
         w = config._w;
@@ -63026,7 +67063,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             weekYear = defaults(
                 w.GG,
                 config._a[YEAR],
-                weekOfYear(createLocal(), 1, 4).year
+                weekOfYearFromDate(
+                    currentDate[YEAR],
+                    currentDate[MONTH],
+                    currentDate[DATE],
+                    1,
+                    4
+                ).year
             );
             week = defaults(w.W, 1);
             weekday = defaults(w.E, 1);
@@ -63037,7 +67080,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             dow = config._locale._week.dow;
             doy = config._locale._week.doy;
 
-            curWeek = weekOfYear(createLocal(), dow, doy);
+            curWeek = weekOfYearFromDate(
+                currentDate[YEAR],
+                currentDate[MONTH],
+                currentDate[DATE],
+                dow,
+                doy
+            );
 
             weekYear = defaults(w.gg, config._a[YEAR], curWeek.year);
 
@@ -63203,6 +67252,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             currentScore,
             validFormatFound,
             bestFormatIsValid = false,
+            defaultDatePartsNow = {},
             configfLen = config._f.length;
 
         if (configfLen === 0) {
@@ -63218,10 +67268,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             if (config._useUTC != null) {
                 tempConfig._useUTC = config._useUTC;
             }
+            tempConfig._defaultDatePartsNow = defaultDatePartsNow;
             tempConfig._f = config._f[i];
             configFromStringAndFormat(tempConfig);
 
-            if (isValid(tempConfig)) {
+            if (isValid$2(tempConfig)) {
                 validFormatFound = true;
             }
 
@@ -63291,7 +67342,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         config._locale = config._locale || getLocale(config._l);
 
         if (input === null || (format === undefined && input === '')) {
-            return createInvalid({ nullInput: true });
+            return createInvalid$1({ nullInput: true });
         }
 
         if (typeof input === 'string') {
@@ -63310,7 +67361,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             configFromInput(config);
         }
 
-        if (!isValid(config)) {
+        if (!isValid$2(config)) {
             config._d = null;
         }
 
@@ -63382,7 +67433,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 if (this.isValid() && other.isValid()) {
                     return other < this ? this : other;
                 } else {
-                    return createInvalid();
+                    return createInvalid$1();
                 }
             }
         ),
@@ -63393,7 +67444,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 if (this.isValid() && other.isValid()) {
                     return other > this ? this : other;
                 } else {
-                    return createInvalid();
+                    return createInvalid$1();
                 }
             }
         );
@@ -63411,9 +67462,20 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (!moments.length) {
             return createLocal();
         }
-        res = moments[0];
-        for (i = 1; i < moments.length; ++i) {
-            if (!moments[i].isValid() || moments[i][fn](res)) {
+        for (i = 0; i < moments.length; ++i) {
+            if (isMoment(moments[i])) {
+                res = moments[i];
+                break;
+            }
+        }
+        if (!res) {
+            return createInvalid$1();
+        }
+        for (++i; i < moments.length; ++i) {
+            if (
+                isMoment(moments[i]) &&
+                (!moments[i].isValid() || moments[i][fn](res))
+            ) {
                 res = moments[i];
             }
         }
@@ -63484,7 +67546,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this._isValid;
     }
 
-    function createInvalid$1() {
+    function createInvalid() {
         return createDuration(NaN);
     }
 
@@ -63543,8 +67605,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             i;
         for (i = 0; i < len; i++) {
             if (
-                (dontConvert && array1[i] !== array2[i]) ||
-                (!dontConvert && toInt(array1[i]) !== toInt(array2[i]))
+                (toInt(array1[i]) !== toInt(array2[i]))
             ) {
                 diffs++;
             }
@@ -63579,8 +67640,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addRegexToken('Z', matchShortOffset);
     addRegexToken('ZZ', matchShortOffset);
     addParseToken(['Z', 'ZZ'], function (input, array, config) {
+        var offset = offsetFromString(matchShortOffset, input);
         config._useUTC = true;
-        config._tzm = offsetFromString(matchShortOffset, input);
+        config._tzm = offset;
+        if (offset === null) {
+            getParsingFlags(config).invalidOffset = input;
+        }
     });
 
     // HELPERS
@@ -63603,6 +67668,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         chunk = matches[matches.length - 1] || [];
         parts = (chunk + '').match(chunkOffset) || ['-', 0, 0];
         minutes = +(parts[1] * 60) + toInt(parts[2]);
+
+        if (
+            toInt(parts[2]) > 59 ||
+            (parts[0] === '+' ? minutes > 14 * 60 : minutes > 12 * 60)
+        ) {
+            return null;
+        }
 
         return minutes === 0 ? 0 : parts[0] === '+' ? minutes : -minutes;
     }
@@ -63674,7 +67746,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             }
             if (offset !== input) {
                 if (!keepLocalTime || this._changeInProgress) {
-                    addSubtract(
+                    addSubtract$1(
                         this,
                         createDuration(input - offset, 'm'),
                         1,
@@ -63867,7 +67939,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     createDuration.fn = Duration.prototype;
-    createDuration.invalid = createInvalid$1;
+    createDuration.invalid = createInvalid;
 
     function parseIso(inp, sign) {
         // We'd normally use ~~inp for this, but unfortunately it also
@@ -63931,12 +68003,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             }
 
             dur = createDuration(val, period);
-            addSubtract(this, dur, direction);
+            addSubtract$1(this, dur, direction);
             return this;
         };
     }
 
-    function addSubtract(mom, duration, isAdding, updateOffset) {
+    function addSubtract$1(mom, duration, isAdding, updateOffset) {
         var milliseconds = duration._milliseconds,
             days = absRound(duration._days),
             months = absRound(duration._months);
@@ -63949,10 +68021,10 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         updateOffset = updateOffset == null ? true : updateOffset;
 
         if (months) {
-            setMonth(mom, get(mom, 'Month') + months * isAdding);
+            setMonth(mom, get$2(mom, 'Month') + months * isAdding);
         }
         if (days) {
-            set$1(mom, 'Date', get(mom, 'Date') + days * isAdding);
+            set$1(mom, 'Date', get$2(mom, 'Date') + days * isAdding);
         }
         if (milliseconds) {
             mom._d.setTime(mom._d.valueOf() + milliseconds * isAdding);
@@ -63962,8 +68034,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
     }
 
-    var add = createAdder(1, 'add'),
-        subtract = createAdder(-1, 'subtract');
+    var add$1 = createAdder(1, 'add'),
+        subtract$1 = createAdder(-1, 'subtract');
 
     function isString(input) {
         return typeof input === 'string' || input instanceof String;
@@ -64075,7 +68147,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                       : 'sameElse';
     }
 
-    function calendar$1(time, formats) {
+    function calendar(time, formats) {
         // Support for single parameter, formats only overload to the calendar function
         if (arguments.length === 1) {
             if (!arguments[0]) {
@@ -64105,7 +68177,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         );
     }
 
-    function clone() {
+    function clone$1() {
         return new Moment(this);
     }
 
@@ -64261,7 +68333,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this.clone().locale('en').format('ddd MMM DD YYYY HH:mm:ss [GMT]ZZ');
     }
 
-    function toISOString(keepOffset) {
+    function toISOString$1(keepOffset) {
         if (!this.isValid()) {
             return null;
         }
@@ -64401,7 +68473,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         MS_PER_400_YEARS = (365 * 400 + 97) * 24 * MS_PER_HOUR;
 
     // actual modulo - handles negative numbers (for dates before 1970):
-    function mod$1(dividend, divisor) {
+    function mod(dividend, divisor) {
         return ((dividend % divisor) + divisor) % divisor;
     }
 
@@ -64468,18 +68540,18 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 break;
             case 'hour':
                 time = this._d.valueOf();
-                time -= mod$1(
+                time -= mod(
                     time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE),
                     MS_PER_HOUR
                 );
                 break;
             case 'minute':
                 time = this._d.valueOf();
-                time -= mod$1(time, MS_PER_MINUTE);
+                time -= mod(time, MS_PER_MINUTE);
                 break;
             case 'second':
                 time = this._d.valueOf();
-                time -= mod$1(time, MS_PER_SECOND);
+                time -= mod(time, MS_PER_SECOND);
                 break;
         }
 
@@ -64536,7 +68608,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 time = this._d.valueOf();
                 time +=
                     MS_PER_HOUR -
-                    mod$1(
+                    mod(
                         time + (this._isUTC ? 0 : this.utcOffset() * MS_PER_MINUTE),
                         MS_PER_HOUR
                     ) -
@@ -64544,11 +68616,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 break;
             case 'minute':
                 time = this._d.valueOf();
-                time += MS_PER_MINUTE - mod$1(time, MS_PER_MINUTE) - 1;
+                time += MS_PER_MINUTE - mod(time, MS_PER_MINUTE) - 1;
                 break;
             case 'second':
                 time = this._d.valueOf();
-                time += MS_PER_SECOND - mod$1(time, MS_PER_SECOND) - 1;
+                time += MS_PER_SECOND - mod(time, MS_PER_SECOND) - 1;
                 break;
         }
 
@@ -64557,7 +68629,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this;
     }
 
-    function valueOf() {
+    function valueOf$1() {
         return this._d.valueOf() - (this._offset || 0) * 60000;
     }
 
@@ -64600,8 +68672,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this.isValid() ? this.toISOString() : null;
     }
 
-    function isValid$2() {
-        return isValid(this);
+    function isValid() {
+        return isValid$2(this);
     }
 
     function parsingFlags() {
@@ -64742,7 +68814,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function localeErasConvertYear(era, year) {
-        var dir = era.since <= era.until ? +1 : -1;
+        var dir = era.since <= era.until ? 1 : -1;
         if (year === undefined) {
             return hooks(era.since).year();
         } else {
@@ -64817,7 +68889,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             val,
             eras = this.localeData().eras();
         for (i = 0, l = eras.length; i < l; ++i) {
-            dir = eras[i].since <= eras[i].until ? +1 : -1;
+            dir = eras[i].since <= eras[i].until ? 1 : -1;
 
             // truncate time
             val = this.clone().startOf('day').valueOf();
@@ -65176,106 +69248,106 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this._isUTC ? 'Coordinated Universal Time' : '';
     }
 
-    var proto = Moment.prototype;
+    var proto$2 = Moment.prototype;
 
-    proto.add = add;
-    proto.calendar = calendar$1;
-    proto.clone = clone;
-    proto.diff = diff;
-    proto.endOf = endOf;
-    proto.format = format;
-    proto.from = from;
-    proto.fromNow = fromNow;
-    proto.to = to;
-    proto.toNow = toNow;
-    proto.get = stringGet;
-    proto.invalidAt = invalidAt;
-    proto.isAfter = isAfter;
-    proto.isBefore = isBefore;
-    proto.isBetween = isBetween;
-    proto.isSame = isSame;
-    proto.isSameOrAfter = isSameOrAfter;
-    proto.isSameOrBefore = isSameOrBefore;
-    proto.isValid = isValid$2;
-    proto.lang = lang;
-    proto.locale = locale;
-    proto.localeData = localeData;
-    proto.max = prototypeMax;
-    proto.min = prototypeMin;
-    proto.parsingFlags = parsingFlags;
-    proto.set = stringSet;
-    proto.startOf = startOf;
-    proto.subtract = subtract;
-    proto.toArray = toArray;
-    proto.toObject = toObject;
-    proto.toDate = toDate;
-    proto.toISOString = toISOString;
-    proto.inspect = inspect;
+    proto$2.add = add$1;
+    proto$2.calendar = calendar;
+    proto$2.clone = clone$1;
+    proto$2.diff = diff;
+    proto$2.endOf = endOf;
+    proto$2.format = format;
+    proto$2.from = from;
+    proto$2.fromNow = fromNow;
+    proto$2.to = to;
+    proto$2.toNow = toNow;
+    proto$2.get = stringGet;
+    proto$2.invalidAt = invalidAt;
+    proto$2.isAfter = isAfter;
+    proto$2.isBefore = isBefore;
+    proto$2.isBetween = isBetween;
+    proto$2.isSame = isSame;
+    proto$2.isSameOrAfter = isSameOrAfter;
+    proto$2.isSameOrBefore = isSameOrBefore;
+    proto$2.isValid = isValid;
+    proto$2.lang = lang;
+    proto$2.locale = locale;
+    proto$2.localeData = localeData;
+    proto$2.max = prototypeMax;
+    proto$2.min = prototypeMin;
+    proto$2.parsingFlags = parsingFlags;
+    proto$2.set = stringSet;
+    proto$2.startOf = startOf;
+    proto$2.subtract = subtract$1;
+    proto$2.toArray = toArray;
+    proto$2.toObject = toObject;
+    proto$2.toDate = toDate;
+    proto$2.toISOString = toISOString$1;
+    proto$2.inspect = inspect;
     if (typeof Symbol !== 'undefined' && Symbol.for != null) {
-        proto[Symbol.for('nodejs.util.inspect.custom')] = function () {
+        proto$2[Symbol.for('nodejs.util.inspect.custom')] = function () {
             return 'Moment<' + this.format() + '>';
         };
     }
-    proto.toJSON = toJSON;
-    proto.toString = toString;
-    proto.unix = unix;
-    proto.valueOf = valueOf;
-    proto.creationData = creationData;
-    proto.eraName = getEraName;
-    proto.eraNarrow = getEraNarrow;
-    proto.eraAbbr = getEraAbbr;
-    proto.eraYear = getEraYear;
-    proto.year = getSetYear;
-    proto.isLeapYear = getIsLeapYear;
-    proto.weekYear = getSetWeekYear;
-    proto.isoWeekYear = getSetISOWeekYear;
-    proto.quarter = proto.quarters = getSetQuarter;
-    proto.month = getSetMonth;
-    proto.daysInMonth = getDaysInMonth;
-    proto.week = proto.weeks = getSetWeek;
-    proto.isoWeek = proto.isoWeeks = getSetISOWeek;
-    proto.weeksInYear = getWeeksInYear;
-    proto.weeksInWeekYear = getWeeksInWeekYear;
-    proto.isoWeeksInYear = getISOWeeksInYear;
-    proto.isoWeeksInISOWeekYear = getISOWeeksInISOWeekYear;
-    proto.date = getSetDayOfMonth;
-    proto.day = proto.days = getSetDayOfWeek;
-    proto.weekday = getSetLocaleDayOfWeek;
-    proto.isoWeekday = getSetISODayOfWeek;
-    proto.dayOfYear = getSetDayOfYear;
-    proto.hour = proto.hours = getSetHour;
-    proto.minute = proto.minutes = getSetMinute;
-    proto.second = proto.seconds = getSetSecond;
-    proto.millisecond = proto.milliseconds = getSetMillisecond;
-    proto.utcOffset = getSetOffset;
-    proto.utc = setOffsetToUTC;
-    proto.local = setOffsetToLocal;
-    proto.parseZone = setOffsetToParsedOffset;
-    proto.hasAlignedHourOffset = hasAlignedHourOffset;
-    proto.isDST = isDaylightSavingTime;
-    proto.isLocal = isLocal;
-    proto.isUtcOffset = isUtcOffset;
-    proto.isUtc = isUtc;
-    proto.isUTC = isUtc;
-    proto.zoneAbbr = getZoneAbbr;
-    proto.zoneName = getZoneName;
-    proto.dates = deprecate(
+    proto$2.toJSON = toJSON;
+    proto$2.toString = toString;
+    proto$2.unix = unix;
+    proto$2.valueOf = valueOf$1;
+    proto$2.creationData = creationData;
+    proto$2.eraName = getEraName;
+    proto$2.eraNarrow = getEraNarrow;
+    proto$2.eraAbbr = getEraAbbr;
+    proto$2.eraYear = getEraYear;
+    proto$2.year = getSetYear;
+    proto$2.isLeapYear = getIsLeapYear;
+    proto$2.weekYear = getSetWeekYear;
+    proto$2.isoWeekYear = getSetISOWeekYear;
+    proto$2.quarter = proto$2.quarters = getSetQuarter;
+    proto$2.month = getSetMonth;
+    proto$2.daysInMonth = getDaysInMonth;
+    proto$2.week = proto$2.weeks = getSetWeek;
+    proto$2.isoWeek = proto$2.isoWeeks = getSetISOWeek;
+    proto$2.weeksInYear = getWeeksInYear;
+    proto$2.weeksInWeekYear = getWeeksInWeekYear;
+    proto$2.isoWeeksInYear = getISOWeeksInYear;
+    proto$2.isoWeeksInISOWeekYear = getISOWeeksInISOWeekYear;
+    proto$2.date = getSetDayOfMonth;
+    proto$2.day = proto$2.days = getSetDayOfWeek;
+    proto$2.weekday = getSetLocaleDayOfWeek;
+    proto$2.isoWeekday = getSetISODayOfWeek;
+    proto$2.dayOfYear = getSetDayOfYear;
+    proto$2.hour = proto$2.hours = getSetHour;
+    proto$2.minute = proto$2.minutes = getSetMinute;
+    proto$2.second = proto$2.seconds = getSetSecond;
+    proto$2.millisecond = proto$2.milliseconds = getSetMillisecond;
+    proto$2.utcOffset = getSetOffset;
+    proto$2.utc = setOffsetToUTC;
+    proto$2.local = setOffsetToLocal;
+    proto$2.parseZone = setOffsetToParsedOffset;
+    proto$2.hasAlignedHourOffset = hasAlignedHourOffset;
+    proto$2.isDST = isDaylightSavingTime;
+    proto$2.isLocal = isLocal;
+    proto$2.isUtcOffset = isUtcOffset;
+    proto$2.isUtc = isUtc;
+    proto$2.isUTC = isUtc;
+    proto$2.zoneAbbr = getZoneAbbr;
+    proto$2.zoneName = getZoneName;
+    proto$2.dates = deprecate(
         'dates accessor is deprecated. Use date instead.',
         getSetDayOfMonth
     );
-    proto.months = deprecate(
+    proto$2.months = deprecate(
         'months accessor is deprecated. Use month instead',
         getSetMonth
     );
-    proto.years = deprecate(
+    proto$2.years = deprecate(
         'years accessor is deprecated. Use year instead',
         getSetYear
     );
-    proto.zone = deprecate(
+    proto$2.zone = deprecate(
         'moment().zone is deprecated, use moment().utcOffset instead. http://momentjs.com/guides/#/warnings/zone/',
         getSetZone
     );
-    proto.isDSTShifted = deprecate(
+    proto$2.isDSTShifted = deprecate(
         'isDSTShifted is deprecated. See http://momentjs.com/guides/#/warnings/dst-shifted/ for more information',
         isDaylightSavingTimeShifted
     );
@@ -65294,13 +69366,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     var proto$1 = Locale.prototype;
 
-    proto$1.calendar = calendar;
+    proto$1.calendar = calendar$1;
     proto$1.longDateFormat = longDateFormat;
     proto$1.invalidDate = invalidDate;
     proto$1.ordinal = ordinal;
     proto$1.preparse = preParsePostFormat;
     proto$1.postformat = preParsePostFormat;
-    proto$1.relativeTime = relativeTime;
+    proto$1.relativeTime = relativeTime$1;
     proto$1.pastFuture = pastFuture;
     proto$1.set = set;
     proto$1.eras = localeEras;
@@ -65470,7 +69542,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     var mathAbs = Math.abs;
 
-    function abs() {
+    function abs$1() {
         var data = this._data;
 
         this._milliseconds = mathAbs(this._milliseconds);
@@ -65487,7 +69559,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this;
     }
 
-    function addSubtract$1(duration, input, value, direction) {
+    function addSubtract(duration, input, value, direction) {
         var other = createDuration(input, value);
 
         duration._milliseconds += direction * other._milliseconds;
@@ -65498,13 +69570,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     // supports only 2.0-style add(1, 's') or add(duration)
-    function add$1(input, value) {
-        return addSubtract$1(this, input, value, 1);
+    function add(input, value) {
+        return addSubtract(this, input, value, 1);
     }
 
     // supports only 2.0-style subtract(1, 's') or subtract(duration)
-    function subtract$1(input, value) {
-        return addSubtract$1(this, input, value, -1);
+    function subtract(input, value) {
+        return addSubtract(this, input, value, -1);
     }
 
     function absCeil(number) {
@@ -65528,12 +69600,10 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
         // if we have a mix of positive and negative values, bubble down first
         // check: https://github.com/moment/moment/issues/2166
-        if (
-            !(
-                (milliseconds >= 0 && days >= 0 && months >= 0) ||
-                (milliseconds <= 0 && days <= 0 && months <= 0)
-            )
-        ) {
+        if (!(
+            (milliseconds >= 0 && days >= 0 && months >= 0) ||
+            (milliseconds <= 0 && days <= 0 && months <= 0)
+        )) {
             milliseconds += absCeil(monthsToDays(months) + days) * 864e5;
             days = 0;
             months = 0;
@@ -65640,13 +69710,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         asMonths = makeAs('M'),
         asQuarters = makeAs('Q'),
         asYears = makeAs('y'),
-        valueOf$1 = asMilliseconds;
+        valueOf = asMilliseconds;
 
-    function clone$1() {
+    function clone() {
         return createDuration(this);
     }
 
-    function get$2(units) {
+    function get(units) {
         units = normalizeUnits(units);
         return this.isValid() ? this[units + 's']() : NaN;
     }
@@ -65682,10 +69752,16 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // helper function for moment.fn.from, moment.fn.fromNow, and moment.duration.fn.humanize
     function substituteTimeAgo(string, number, withoutSuffix, isFuture, locale) {
-        return locale.relativeTime(number || 1, !!withoutSuffix, string, isFuture);
+        return relativeTimeWithoutPostformat.call(
+            locale,
+            number || 1,
+            !!withoutSuffix,
+            string,
+            isFuture
+        );
     }
 
-    function relativeTime$1(posNegDuration, withoutSuffix, thresholds, locale) {
+    function relativeTime(posNegDuration, withoutSuffix, thresholds, locale) {
         var duration = createDuration(posNegDuration).abs(),
             seconds = round(duration.as('s')),
             minutes = round(duration.as('m')),
@@ -65766,29 +69842,29 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             withSuffix = argWithSuffix;
         }
         if (typeof argThresholds === 'object') {
-            th = Object.assign({}, thresholds, argThresholds);
+            th = extend(extend({}, thresholds), argThresholds || {});
             if (argThresholds.s != null && argThresholds.ss == null) {
                 th.ss = argThresholds.s - 1;
             }
         }
 
         locale = this.localeData();
-        output = relativeTime$1(this, !withSuffix, th, locale);
+        output = relativeTime(this, !withSuffix, th, locale);
 
         if (withSuffix) {
-            output = locale.pastFuture(+this, output);
+            output = pastFutureWithoutPostformat.call(locale, +this, output);
         }
 
         return locale.postformat(output);
     }
 
-    var abs$1 = Math.abs;
+    var abs = Math.abs;
 
     function sign(x) {
         return (x > 0) - (x < 0) || +x;
     }
 
-    function toISOString$1() {
+    function toISOString() {
         // for ISO strings we do not use the normal bubbling rules:
         //  * milliseconds bubble up until they become hours
         //  * days do not bubble at all
@@ -65800,9 +69876,9 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             return this.localeData().invalidDate();
         }
 
-        var seconds = abs$1(this._milliseconds) / 1000,
-            days = abs$1(this._days),
-            months = abs$1(this._months),
+        var seconds = abs(this._milliseconds) / 1000,
+            days = abs(this._days),
+            months = abs(this._months),
             minutes,
             hours,
             years,
@@ -65850,46 +69926,46 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         );
     }
 
-    var proto$2 = Duration.prototype;
+    var proto = Duration.prototype;
 
-    proto$2.isValid = isValid$1;
-    proto$2.abs = abs;
-    proto$2.add = add$1;
-    proto$2.subtract = subtract$1;
-    proto$2.as = as;
-    proto$2.asMilliseconds = asMilliseconds;
-    proto$2.asSeconds = asSeconds;
-    proto$2.asMinutes = asMinutes;
-    proto$2.asHours = asHours;
-    proto$2.asDays = asDays;
-    proto$2.asWeeks = asWeeks;
-    proto$2.asMonths = asMonths;
-    proto$2.asQuarters = asQuarters;
-    proto$2.asYears = asYears;
-    proto$2.valueOf = valueOf$1;
-    proto$2._bubble = bubble;
-    proto$2.clone = clone$1;
-    proto$2.get = get$2;
-    proto$2.milliseconds = milliseconds;
-    proto$2.seconds = seconds;
-    proto$2.minutes = minutes;
-    proto$2.hours = hours;
-    proto$2.days = days;
-    proto$2.weeks = weeks;
-    proto$2.months = months;
-    proto$2.years = years;
-    proto$2.humanize = humanize;
-    proto$2.toISOString = toISOString$1;
-    proto$2.toString = toISOString$1;
-    proto$2.toJSON = toISOString$1;
-    proto$2.locale = locale;
-    proto$2.localeData = localeData;
+    proto.isValid = isValid$1;
+    proto.abs = abs$1;
+    proto.add = add;
+    proto.subtract = subtract;
+    proto.as = as;
+    proto.asMilliseconds = asMilliseconds;
+    proto.asSeconds = asSeconds;
+    proto.asMinutes = asMinutes;
+    proto.asHours = asHours;
+    proto.asDays = asDays;
+    proto.asWeeks = asWeeks;
+    proto.asMonths = asMonths;
+    proto.asQuarters = asQuarters;
+    proto.asYears = asYears;
+    proto.valueOf = valueOf;
+    proto._bubble = bubble;
+    proto.clone = clone;
+    proto.get = get;
+    proto.milliseconds = milliseconds;
+    proto.seconds = seconds;
+    proto.minutes = minutes;
+    proto.hours = hours;
+    proto.days = days;
+    proto.weeks = weeks;
+    proto.months = months;
+    proto.years = years;
+    proto.humanize = humanize;
+    proto.toISOString = toISOString;
+    proto.toString = toISOString;
+    proto.toJSON = toISOString;
+    proto.locale = locale;
+    proto.localeData = localeData;
 
-    proto$2.toIsoString = deprecate(
+    proto.toIsoString = deprecate(
         'toIsoString() is deprecated. Please use toISOString() instead (notice the capitals)',
-        toISOString$1
+        toISOString
     );
-    proto$2.lang = lang;
+    proto.lang = lang;
 
     // FORMATTING
 
@@ -65909,11 +69985,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     //! moment.js
 
-    hooks.version = '2.30.1';
+    hooks.version = '2.31.0';
 
     setHookCallback(createLocal);
 
-    hooks.fn = proto;
+    hooks.fn = proto$2;
     hooks.min = min;
     hooks.max = max;
     hooks.now = now;
@@ -65922,7 +69998,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     hooks.months = listMonths;
     hooks.isDate = isDate;
     hooks.locale = getSetGlobalLocale;
-    hooks.invalid = createInvalid;
+    hooks.invalid = createInvalid$1;
     hooks.duration = createDuration;
     hooks.isMoment = isMoment;
     hooks.weekdays = listWeekdays;
@@ -65939,7 +70015,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     hooks.relativeTimeRounding = getSetRelativeTimeRounding;
     hooks.relativeTimeThreshold = getSetRelativeTimeThreshold;
     hooks.calendarFormat = getCalendarFormat;
-    hooks.prototype = proto;
+    hooks.prototype = proto$2;
 
     // currently HTML5 input type only supports 24-hour formats
     hooks.HTML5_FMT = {
@@ -65959,13 +70035,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 })));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/select2/dist/js/select2.js":
+/***/ "./node_modules/select2/dist/js/select2.js"
 /*!*************************************************!*\
   !*** ./node_modules/select2/dist/js/select2.js ***!
   \*************************************************/
-/***/ ((module, exports, __webpack_require__) => {
+(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Select2 4.0.13
@@ -65981,7 +70057,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
+  } else // removed by dead control flow
+{}
 } (function (jQuery) {
   // This is needed so we can catch the AMD loader configuration and use it
   // The inner file should be wrapped (by `banner.start.js`) in a function that
@@ -72059,13 +76136,13 @@ S2.define('jquery.select2',[
 }));
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/string-natural-compare/natural-compare.js":
+/***/ "./node_modules/string-natural-compare/natural-compare.js"
 /*!****************************************************************!*\
   !*** ./node_modules/string-natural-compare/natural-compare.js ***!
   \****************************************************************/
-/***/ ((module) => {
+(module) {
 
 "use strict";
 
@@ -72194,13 +76271,13 @@ Object.defineProperties(naturalCompare, {
 module.exports = naturalCompare;
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/tether/dist/js/tether.js":
+/***/ "./node_modules/tether/dist/js/tether.js"
 /*!***********************************************!*\
   !*** ./node_modules/tether/dist/js/tether.js ***!
   \***********************************************/
-/***/ (function(module, exports) {
+(module, exports) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! tether 1.4.7 */
 
@@ -72210,7 +76287,8 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 		__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 		(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
+  } else // removed by dead control flow
+{}
 }(this, function() {
 
 'use strict';
@@ -74023,2759 +78101,7 @@ return Tether;
 }));
 
 
-/***/ }),
-
-/***/ "./resources/assets/js/extensions/pGenerator.jquery.js":
-/*!*************************************************************!*\
-  !*** ./resources/assets/js/extensions/pGenerator.jquery.js ***!
-  \*************************************************************/
-/***/ (() => {
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-/*!
- * pGenerator jQuery Plugin v1.0.5
- * https://github.com/M1Sh0u/pGenerator
- *
- * Created by Mihai MATEI <mihai.matei@outlook.com>
- * Released under the MIT License (Feel free to copy, modify or redistribute this plugin.)
- */
-
-(function ($) {
-  var numbers_array = [],
-    upper_letters_array = [],
-    lower_letters_array = [],
-    special_chars_array = [],
-    $pGeneratorElement = null;
-
-  /**
-   * Plugin methods.
-   *
-   * @type {{init: init, generatePassword: generatePassword}}
-   */
-  var methods = {
-    /**
-     * Initialize the object.
-     *
-     * @param options
-     * @param callbacks
-     *
-     * @returns {*}
-     */
-    init: function init(options, callbacks) {
-      var settings = $.extend({
-        'bind': 'click',
-        'passwordElement': null,
-        'displayElement': null,
-        'passwordLength': 16,
-        'uppercase': true,
-        'lowercase': true,
-        'numbers': true,
-        'specialChars': true,
-        'additionalSpecialChars': [],
-        'onPasswordGenerated': function onPasswordGenerated(generatedPassword) {}
-      }, options);
-      for (var i = 48; i < 58; i++) {
-        numbers_array.push(i);
-      }
-      for (i = 65; i < 91; i++) {
-        upper_letters_array.push(i);
-      }
-      for (i = 97; i < 123; i++) {
-        lower_letters_array.push(i);
-      }
-      special_chars_array = [33, 35, 64, 36, 38, 42, 91, 93, 123, 125, 92, 47, 63, 58, 59, 95, 45].concat(settings.additionalSpecialChars);
-      return this.each(function () {
-        $pGeneratorElement = $(this);
-        $pGeneratorElement.bind(settings.bind, function (e) {
-          e.preventDefault();
-          methods.generatePassword(settings);
-        });
-      });
-    },
-    /**
-     * Generate the password.
-     *
-     * @param {object} settings
-     */
-    generatePassword: function generatePassword(settings) {
-      var password = new Array(),
-        selOptions = settings.uppercase + settings.lowercase + settings.numbers + settings.specialChars,
-        selected = 0,
-        no_lower_letters = new Array();
-      var optionLength = Math.floor(settings.passwordLength / selOptions);
-      if (settings.uppercase) {
-        // uppercase letters
-        for (var i = 0; i < optionLength; i++) {
-          password.push(String.fromCharCode(upper_letters_array[randomFromInterval(0, upper_letters_array.length - 1)]));
-        }
-        no_lower_letters = no_lower_letters.concat(upper_letters_array);
-        selected++;
-      }
-      if (settings.numbers) {
-        // numbers letters
-        for (var i = 0; i < optionLength; i++) {
-          password.push(String.fromCharCode(numbers_array[randomFromInterval(0, numbers_array.length - 1)]));
-        }
-        no_lower_letters = no_lower_letters.concat(numbers_array);
-        selected++;
-      }
-      if (settings.specialChars) {
-        // numbers letters
-        for (var i = 0; i < optionLength; i++) {
-          password.push(String.fromCharCode(special_chars_array[randomFromInterval(0, special_chars_array.length - 1)]));
-        }
-        no_lower_letters = no_lower_letters.concat(special_chars_array);
-        selected++;
-      }
-      var remained = settings.passwordLength - selected * optionLength;
-      if (settings.lowercase) {
-        for (var i = 0; i < remained; i++) {
-          password.push(String.fromCharCode(lower_letters_array[randomFromInterval(0, lower_letters_array.length - 1)]));
-        }
-      } else {
-        for (var i = 0; i < remained; i++) {
-          password.push(String.fromCharCode(no_lower_letters[randomFromInterval(0, no_lower_letters.length - 1)]));
-        }
-      }
-      password = shuffle(password).join('');
-      if (settings.passwordElement !== null) {
-        $(settings.passwordElement).val(password);
-      }
-      if (settings.displayElement !== null) {
-        if ($(settings.displayElement).is("input")) {
-          $(settings.displayElement).val(password);
-        } else {
-          $(settings.displayElement).text(password);
-        }
-      }
-      settings.onPasswordGenerated(password);
-    }
-  };
-
-  /**
-   * Shuffle the password.
-   *
-   * @param {Array} o
-   *
-   * @returns {Array}
-   */
-  function shuffle(o) {
-    for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-  }
-
-  /**
-   * Get a random number in the given interval.
-   *
-   * @param {number} from
-   * @param {number} to
-   *
-   * @returns {number}
-   */
-  function randomFromInterval(from, to) {
-    return Math.floor(Math.random() * (to - from + 1) + from);
-  }
-
-  /**
-   * Define the pGenerator jQuery plugin.
-   *
-   * @param method
-   * @returns {*}
-   */
-  $.fn.pGenerator = function (method) {
-    if (methods[method]) {
-      return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-    } else if (_typeof(method) === 'object' || !method) {
-      return methods.init.apply(this, arguments);
-    } else {
-      $.error('Method ' + method + ' does not exist on jQuery.pGenerator');
-    }
-  };
-})(jQuery);
-
-/***/ }),
-
-/***/ "./resources/assets/js/signature_pad.js":
-/*!**********************************************!*\
-  !*** ./resources/assets/js/signature_pad.js ***!
-  \**********************************************/
-/***/ (function(module, exports) {
-
-var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-(function (root, factory) {
-  if (true) {
-    // AMD. Register as an anonymous module unless amdModuleId is set
-    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
-      return root['SignaturePad'] = factory();
-    }).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
-		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-  } else {}
-})(this, function () {
-  /*!
-   * Signature Pad v1.5.3
-   * https://github.com/szimek/signature_pad
-   *
-   * Copyright 2016 Szymon Nowak
-   * Released under the MIT license
-   *
-   * The main idea and some parts of the code (e.g. drawing variable width Bézier curve) are taken from:
-   * http://corner.squareup.com/2012/07/smoother-signatures.html
-   *
-   * Implementation of interpolation using cubic Bézier curves is taken from:
-   * http://benknowscode.wordpress.com/2012/09/14/path-interpolation-using-cubic-bezier-and-control-point-estimation-in-javascript
-   *
-   * Algorithm for approximated length of a Bézier curve is taken from:
-   * http://www.lemoda.net/maths/bezier-length/index.html
-   *
-   */
-  var SignaturePad = function (document) {
-    "use strict";
-
-    var SignaturePad = function SignaturePad(canvas, options) {
-      var self = this,
-        opts = options || {};
-      this.velocityFilterWeight = opts.velocityFilterWeight || 0.7;
-      this.minWidth = opts.minWidth || 0.5;
-      this.maxWidth = opts.maxWidth || 2.5;
-      this.dotSize = opts.dotSize || function () {
-        return (this.minWidth + this.maxWidth) / 2;
-      };
-      this.penColor = opts.penColor || "black";
-      this.backgroundColor = opts.backgroundColor || "rgba(0,0,0,0)";
-      this.onEnd = opts.onEnd;
-      this.onBegin = opts.onBegin;
-      this._canvas = canvas;
-      this._ctx = canvas.getContext("2d");
-      this.clear();
-
-      // we need add these inline so they are available to unbind while still having
-      //  access to 'self' we could use _.bind but it's not worth adding a dependency
-      this._handleMouseDown = function (event) {
-        if (event.which === 1) {
-          self._mouseButtonDown = true;
-          self._strokeBegin(event);
-        }
-      };
-      this._handleMouseMove = function (event) {
-        if (self._mouseButtonDown) {
-          self._strokeUpdate(event);
-        }
-      };
-      this._handleMouseUp = function (event) {
-        if (event.which === 1 && self._mouseButtonDown) {
-          self._mouseButtonDown = false;
-          self._strokeEnd(event);
-        }
-      };
-      this._handleTouchStart = function (event) {
-        if (event.targetTouches.length == 1) {
-          var touch = event.changedTouches[0];
-          self._strokeBegin(touch);
-        }
-      };
-      this._handleTouchMove = function (event) {
-        // Prevent scrolling.
-        event.preventDefault();
-        var touch = event.targetTouches[0];
-        self._strokeUpdate(touch);
-      };
-      this._handleTouchEnd = function (event) {
-        var wasCanvasTouched = event.target === self._canvas;
-        if (wasCanvasTouched) {
-          event.preventDefault();
-          self._strokeEnd(event);
-        }
-      };
-      this._handleMouseEvents();
-      this._handleTouchEvents();
-    };
-    SignaturePad.prototype.clear = function () {
-      var ctx = this._ctx,
-        canvas = this._canvas;
-      ctx.fillStyle = this.backgroundColor;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      this._reset();
-    };
-    SignaturePad.prototype.toDataURL = function (imageType, quality) {
-      var canvas = this._canvas;
-      return canvas.toDataURL.apply(canvas, arguments);
-    };
-    SignaturePad.prototype.fromDataURL = function (dataUrl) {
-      var self = this,
-        image = new Image(),
-        ratio = window.devicePixelRatio || 1,
-        width = this._canvas.width / ratio,
-        height = this._canvas.height / ratio;
-      this._reset();
-      image.src = dataUrl;
-      image.onload = function () {
-        self._ctx.drawImage(image, 0, 0, width, height);
-      };
-      this._isEmpty = false;
-    };
-    SignaturePad.prototype._strokeUpdate = function (event) {
-      var point = this._createPoint(event);
-      this._addPoint(point);
-    };
-    SignaturePad.prototype._strokeBegin = function (event) {
-      this._reset();
-      this._strokeUpdate(event);
-      if (typeof this.onBegin === 'function') {
-        this.onBegin(event);
-      }
-    };
-    SignaturePad.prototype._strokeDraw = function (point) {
-      var ctx = this._ctx,
-        dotSize = typeof this.dotSize === 'function' ? this.dotSize() : this.dotSize;
-      ctx.beginPath();
-      this._drawPoint(point.x, point.y, dotSize);
-      ctx.closePath();
-      ctx.fill();
-    };
-    SignaturePad.prototype._strokeEnd = function (event) {
-      var canDrawCurve = this.points.length > 2,
-        point = this.points[0];
-      if (!canDrawCurve && point) {
-        this._strokeDraw(point);
-      }
-      if (typeof this.onEnd === 'function') {
-        this.onEnd(event);
-      }
-    };
-    SignaturePad.prototype._handleMouseEvents = function () {
-      this._mouseButtonDown = false;
-      this._canvas.addEventListener("mousedown", this._handleMouseDown);
-      this._canvas.addEventListener("mousemove", this._handleMouseMove);
-      document.addEventListener("mouseup", this._handleMouseUp);
-    };
-    SignaturePad.prototype._handleTouchEvents = function () {
-      // Pass touch events to canvas element on mobile IE11 and Edge.
-      this._canvas.style.msTouchAction = 'none';
-      this._canvas.style.touchAction = 'none';
-      this._canvas.addEventListener("touchstart", this._handleTouchStart);
-      this._canvas.addEventListener("touchmove", this._handleTouchMove);
-      this._canvas.addEventListener("touchend", this._handleTouchEnd);
-    };
-    SignaturePad.prototype.on = function () {
-      this._handleMouseEvents();
-      this._handleTouchEvents();
-    };
-    SignaturePad.prototype.off = function () {
-      this._canvas.removeEventListener("mousedown", this._handleMouseDown);
-      this._canvas.removeEventListener("mousemove", this._handleMouseMove);
-      document.removeEventListener("mouseup", this._handleMouseUp);
-      this._canvas.removeEventListener("touchstart", this._handleTouchStart);
-      this._canvas.removeEventListener("touchmove", this._handleTouchMove);
-      this._canvas.removeEventListener("touchend", this._handleTouchEnd);
-    };
-    SignaturePad.prototype.isEmpty = function () {
-      return this._isEmpty;
-    };
-    SignaturePad.prototype._reset = function () {
-      this.points = [];
-      this._lastVelocity = 0;
-      this._lastWidth = (this.minWidth + this.maxWidth) / 2;
-      this._isEmpty = true;
-      this._ctx.fillStyle = this.penColor;
-    };
-    SignaturePad.prototype._createPoint = function (event) {
-      var rect = this._canvas.getBoundingClientRect();
-      return new Point(event.clientX - rect.left, event.clientY - rect.top);
-    };
-    SignaturePad.prototype._addPoint = function (point) {
-      var points = this.points,
-        c2,
-        c3,
-        curve,
-        tmp;
-      points.push(point);
-      if (points.length > 2) {
-        // To reduce the initial lag make it work with 3 points
-        // by copying the first point to the beginning.
-        if (points.length === 3) points.unshift(points[0]);
-        tmp = this._calculateCurveControlPoints(points[0], points[1], points[2]);
-        c2 = tmp.c2;
-        tmp = this._calculateCurveControlPoints(points[1], points[2], points[3]);
-        c3 = tmp.c1;
-        curve = new Bezier(points[1], c2, c3, points[2]);
-        this._addCurve(curve);
-
-        // Remove the first element from the list,
-        // so that we always have no more than 4 points in points array.
-        points.shift();
-      }
-    };
-    SignaturePad.prototype._calculateCurveControlPoints = function (s1, s2, s3) {
-      var dx1 = s1.x - s2.x,
-        dy1 = s1.y - s2.y,
-        dx2 = s2.x - s3.x,
-        dy2 = s2.y - s3.y,
-        m1 = {
-          x: (s1.x + s2.x) / 2.0,
-          y: (s1.y + s2.y) / 2.0
-        },
-        m2 = {
-          x: (s2.x + s3.x) / 2.0,
-          y: (s2.y + s3.y) / 2.0
-        },
-        l1 = Math.sqrt(dx1 * dx1 + dy1 * dy1),
-        l2 = Math.sqrt(dx2 * dx2 + dy2 * dy2),
-        dxm = m1.x - m2.x,
-        dym = m1.y - m2.y,
-        k = l2 / (l1 + l2),
-        cm = {
-          x: m2.x + dxm * k,
-          y: m2.y + dym * k
-        },
-        tx = s2.x - cm.x,
-        ty = s2.y - cm.y;
-      return {
-        c1: new Point(m1.x + tx, m1.y + ty),
-        c2: new Point(m2.x + tx, m2.y + ty)
-      };
-    };
-    SignaturePad.prototype._addCurve = function (curve) {
-      var startPoint = curve.startPoint,
-        endPoint = curve.endPoint,
-        velocity,
-        newWidth;
-      velocity = endPoint.velocityFrom(startPoint);
-      velocity = this.velocityFilterWeight * velocity + (1 - this.velocityFilterWeight) * this._lastVelocity;
-      newWidth = this._strokeWidth(velocity);
-      this._drawCurve(curve, this._lastWidth, newWidth);
-      this._lastVelocity = velocity;
-      this._lastWidth = newWidth;
-    };
-    SignaturePad.prototype._drawPoint = function (x, y, size) {
-      var ctx = this._ctx;
-      ctx.moveTo(x, y);
-      ctx.arc(x, y, size, 0, 2 * Math.PI, false);
-      this._isEmpty = false;
-    };
-    SignaturePad.prototype._drawCurve = function (curve, startWidth, endWidth) {
-      var ctx = this._ctx,
-        widthDelta = endWidth - startWidth,
-        drawSteps,
-        width,
-        i,
-        t,
-        tt,
-        ttt,
-        u,
-        uu,
-        uuu,
-        x,
-        y;
-      drawSteps = Math.floor(curve.length());
-      ctx.beginPath();
-      for (i = 0; i < drawSteps; i++) {
-        // Calculate the Bezier (x, y) coordinate for this step.
-        t = i / drawSteps;
-        tt = t * t;
-        ttt = tt * t;
-        u = 1 - t;
-        uu = u * u;
-        uuu = uu * u;
-        x = uuu * curve.startPoint.x;
-        x += 3 * uu * t * curve.control1.x;
-        x += 3 * u * tt * curve.control2.x;
-        x += ttt * curve.endPoint.x;
-        y = uuu * curve.startPoint.y;
-        y += 3 * uu * t * curve.control1.y;
-        y += 3 * u * tt * curve.control2.y;
-        y += ttt * curve.endPoint.y;
-        width = startWidth + ttt * widthDelta;
-        this._drawPoint(x, y, width);
-      }
-      ctx.closePath();
-      ctx.fill();
-    };
-    SignaturePad.prototype._strokeWidth = function (velocity) {
-      return Math.max(this.maxWidth / (velocity + 1), this.minWidth);
-    };
-    var Point = function Point(x, y, time) {
-      this.x = x;
-      this.y = y;
-      this.time = time || new Date().getTime();
-    };
-    Point.prototype.velocityFrom = function (start) {
-      return this.time !== start.time ? this.distanceTo(start) / (this.time - start.time) : 1;
-    };
-    Point.prototype.distanceTo = function (start) {
-      return Math.sqrt(Math.pow(this.x - start.x, 2) + Math.pow(this.y - start.y, 2));
-    };
-    var Bezier = function Bezier(startPoint, control1, control2, endPoint) {
-      this.startPoint = startPoint;
-      this.control1 = control1;
-      this.control2 = control2;
-      this.endPoint = endPoint;
-    };
-
-    // Returns approximated length.
-    Bezier.prototype.length = function () {
-      var steps = 10,
-        length = 0,
-        i,
-        t,
-        cx,
-        cy,
-        px,
-        py,
-        xdiff,
-        ydiff;
-      for (i = 0; i <= steps; i++) {
-        t = i / steps;
-        cx = this._point(t, this.startPoint.x, this.control1.x, this.control2.x, this.endPoint.x);
-        cy = this._point(t, this.startPoint.y, this.control1.y, this.control2.y, this.endPoint.y);
-        if (i > 0) {
-          xdiff = cx - px;
-          ydiff = cy - py;
-          length += Math.sqrt(xdiff * xdiff + ydiff * ydiff);
-        }
-        px = cx;
-        py = cy;
-      }
-      return length;
-    };
-    Bezier.prototype._point = function (t, start, c1, c2, end) {
-      return start * (1.0 - t) * (1.0 - t) * (1.0 - t) + 3.0 * c1 * (1.0 - t) * (1.0 - t) * t + 3.0 * c2 * (1.0 - t) * t * t + end * t * t * t;
-    };
-    return SignaturePad;
-  }(document);
-  return SignaturePad;
-});
-
-/***/ }),
-
-/***/ "./resources/assets/js/snipeit.js":
-/*!****************************************!*\
-  !*** ./resources/assets/js/snipeit.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-
-function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
-function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
-function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
-function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
-function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
-var jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
-window.jQuery = jQuery;
-window.$ = jQuery;
-
-// window._ = require('lodash'); //the only place I saw this used was vue.js, and we don't use that anymore
-
-/****************************************
- Much of what you'll see below is just plain require()'ed, this is because
- it is mostly jQuery stuff, which attaches itself to the $() function/object
- So we don't have to assign it to anything, it will just automagically attach
- itself
- *****************************************/
-
-__webpack_require__(/*! jquery-ui/dist/jquery-ui */ "./node_modules/jquery-ui/dist/jquery-ui.js");
-jQuery.fn.uitooltip = jQuery.fn.tooltip;
-__webpack_require__(/*! bootstrap-less */ "./node_modules/bootstrap-less/js/bootstrap.js");
-__webpack_require__(/*! select2 */ "./node_modules/select2/dist/js/select2.js");
-__webpack_require__(/*! admin-lte */ "./node_modules/admin-lte/dist/js/adminlte.min.js");
-__webpack_require__(/*! tether */ "./node_modules/tether/dist/js/tether.js");
-__webpack_require__(/*! jquery-slimscroll */ "./node_modules/jquery-slimscroll/jquery.slimscroll.js");
-__webpack_require__(/*! jquery.iframe-transport */ "./node_modules/jquery.iframe-transport/jquery.iframe-transport.js"); //probably not needed anymore, if I'm honest
-__webpack_require__(/*! blueimp-file-upload */ "./node_modules/blueimp-file-upload/js/jquery.fileupload.js");
-__webpack_require__(/*! bootstrap-colorpicker */ "./node_modules/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js");
-// eonasdan-bootstrap-datetimepicker (BS3) needs moment on window before it loads
-window.moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-__webpack_require__(/*! eonasdan-bootstrap-datetimepicker */ "./node_modules/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js");
-__webpack_require__(/*! ekko-lightbox */ "./node_modules/ekko-lightbox/dist/ekko-lightbox.min.js"); //TODO - this doesn't seem jquery-ish, we might need to do something weird here
-// it *does* require Bootstrap, which requires jquery, so maybe that's OK
-// it seems to work...
-__webpack_require__(/*! ./extensions/pGenerator.jquery */ "./resources/assets/js/extensions/pGenerator.jquery.js"); //WEIRD, but works
-//require('chart.js') // Weirdly, this seems to "just work." Without this line, the dashboard blows up
-// but it's *HUGE* - and we only use it one place. So we're taking it out of the bundle
-window.SignaturePad = __webpack_require__(/*! ./signature_pad */ "./resources/assets/js/signature_pad.js"); //ALSO WEIRD - but works
-__webpack_require__(/*! jquery-validation */ "./node_modules/jquery-validation/dist/jquery.validate.js");
-window.List = __webpack_require__(/*! list.js */ "./node_modules/list.js/src/index.js");
-window.ClipboardJS = __webpack_require__(/*! clipboard */ "./node_modules/clipboard/dist/clipboard.js");
-// TODO - find everything using moment.js and kill it or upgrade it? It's huge
-// - adminLTE (UGH)
-// - bootstrap-daterangepicker
-// - fullcalendar (what's that? it's used by AdminLTE)
-
-/**
- * Module containing core application logic.
- * @param  {jQuery} $        Insulated jQuery object
- * @param  {JSON} settings Insulated `window.snipeit.settings` object.
- * @return {IIFE}          Immediately invoked. Returns self.
- */
-
-lineOptions = {
-  legend: {
-    position: "bottom"
-  },
-  scales: {
-    yAxes: [{
-      ticks: {
-        fontColor: "rgba(0,0,0,0.5)",
-        fontStyle: "bold",
-        beginAtZero: true,
-        maxTicksLimit: 5,
-        padding: 20
-      },
-      gridLines: {
-        drawTicks: false,
-        display: false
-      }
-    }],
-    xAxes: [{
-      gridLines: {
-        zeroLineColor: "transparent"
-      },
-      ticks: {
-        padding: 20,
-        fontColor: "rgba(0,0,0,0.5)",
-        fontStyle: "bold"
-      }
-    }]
-  }
-};
-pieOptions = {
-  //Boolean - Whether we should show a stroke on each segment
-  segmentShowStroke: true,
-  //String - The colour of each segment stroke
-  segmentStrokeColor: "#fff",
-  //Number - The width of each segment stroke
-  segmentStrokeWidth: 1,
-  //Number - The percentage of the chart that we cut out of the middle
-  percentageInnerCutout: 50,
-  // This is 0 for Pie charts
-  //Number - Amount of animation steps
-  animationSteps: 100,
-  //String - Animation easing effect
-  animationEasing: "easeOutBounce",
-  //Boolean - Whether we animate the rotation of the Doughnut
-  animateRotate: true,
-  //Boolean - Whether we animate scaling the Doughnut from the centre
-  animateScale: false,
-  //Boolean - whether to make the chart responsive to window resizing
-  responsive: true,
-  // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
-  maintainAspectRatio: false,
-  //String - A legend template
-  legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li>" + "<i class='fas fa-circle-o' style='color: <%=segments[i].fillColor%>'></i>" + "<%if(segments[i].label){%><%=segments[i].label%><%}%> foo</li><%}%></ul>",
-  //String - A tooltip template
-  tooltipTemplate: "<%=value %> <%=label%> "
-};
-
-//-----------------
-//- END PIE CHART -
-//-----------------
-
-var baseUrl = $('meta[name="baseUrl"]').attr('content');
-$(function () {
-  var $el = $('body');
-
-  // confirm restore modal
-
-  $el.on('click', '.restore-asset', function (evnt) {
-    var $context = $(this);
-    var $restoreConfirmModal = $('#restoreConfirmModal');
-    var href = $context.attr('href');
-    var message = $context.attr('data-content');
-    var title = $context.attr('data-title');
-    $('#confirmModalLabel').text(title);
-    $restoreConfirmModal.find('.modal-body').text(message);
-    $('#restoreForm').attr('action', href);
-    $restoreConfirmModal.modal({
-      show: true
-    });
-    return false;
-  });
-
-  // Mark-a-maintenance-complete modal (green checkmark button in the
-  // maintenances table actions column). Sets the modal form's action to
-  // the row's completion URL and opens it.
-  $el.on('click', '.complete-maintenance', function () {
-    var url = $(this).data('url');
-    $('#completeMaintenanceForm').attr('action', url);
-    $('#completionNote').val('');
-    $('#completeMaintenanceModal').modal('show');
-  });
-
-  // Adjust-quantity modal (plus-minus button on accessory/consumable/
-  // component list and view pages). Sets the modal form's action from
-  // the trigger's data-adjust-url and populates the header + current
-  // quantity display from the trigger's data attributes. Clears the
-  // signed amount + note + order every open so nothing bleeds between
-  // clicks.
-  $el.on('click', '.adjust-quantity', function () {
-    var $btn = $(this);
-    var $modal = $('#adjustQuantityModal');
-    var $amount = $modal.find('#adjustQuantityAmount');
-
-    // data-available is the trigger's authoritative floor for a decrement
-    // (available = qty - currentlyInUseCount). A delta smaller than
-    // -available would decrement the on-hand qty below what's already
-    // checked out, and AdjustsQuantity::adjustQuantity throws
-    // DomainException. Mirror that server-side floor on the input's min
-    // attribute so the browser stepper refuses to go below and the
-    // constraint-validation message surfaces before submit.
-    var available = parseInt($btn.data('available'), 10);
-    $('#adjustQuantityForm').attr('action', $btn.data('adjust-url'));
-    $modal.find('.adjust-quantity-item-name').text($btn.data('item-name') || '');
-    $modal.find('.adjust-quantity-available').text(!isNaN(available) ? available : '');
-    if (!isNaN(available)) {
-      $amount.attr('min', -available);
-    } else {
-      $amount.removeAttr('min');
-    }
-    $amount.val('');
-    $modal.find('#adjustQuantityOrder').val('');
-    // Reset the acquisition-metadata fields between opens so an
-    // order left half-filled by one operator doesn't bleed into the
-    // next click. Supplier is a select2, so use .val('').trigger('change')
-    // rather than setting the raw <select>; currency reverts to
-    // whatever the modal was originally rendered with (its DOM value
-    // attribute, i.e. the system default_currency).
-    $modal.find('#adjustQuantitySupplier').val('').trigger('change');
-    // Reset purchase_date to today on every open (server-rendered
-    // default is today too). Prevents an operator's earlier
-    // backdate from bleeding into the next event.
-    var todayIso = new Date().toISOString().slice(0, 10);
-    $modal.find('#adjustQuantityPurchaseDate').val(todayIso);
-
-    // Pre-populate unit_cost + currency from the trigger's data-last-*
-    // attrs (server-rendered from the item's most recent OrderItem).
-    // When both are present the "pre-populated from last order" hint
-    // shows underneath the row; the hint gets hidden as soon as the
-    // operator edits either field so it disappears the moment they
-    // override the pre-fill.
-    var lastUnitCost = $btn.data('last-unit-cost');
-    var lastCurrency = $btn.data('last-currency');
-    var $unitCost = $modal.find('#adjustQuantityUnitCost');
-    var $currency = $modal.find('#adjustQuantityCurrency');
-    var $costHint = $modal.find('#adjustQuantityCostHint');
-    $unitCost.val(lastUnitCost !== undefined && lastUnitCost !== '' ? lastUnitCost : '');
-    $currency.val(lastCurrency !== undefined && lastCurrency !== '' ? lastCurrency : $currency.prop('defaultValue') || '');
-    if (lastUnitCost !== undefined && lastUnitCost !== '' || lastCurrency !== undefined && lastCurrency !== '') {
-      $costHint.show();
-    } else {
-      $costHint.hide();
-    }
-
-    // Rebind on every open so multiple modal opens don't stack listeners.
-    $unitCost.off('input.adjustCostHint').on('input.adjustCostHint', function () {
-      $costHint.hide();
-    });
-    $currency.off('input.adjustCostHint').on('input.adjustCostHint', function () {
-      $costHint.hide();
-    });
-    $modal.find('#adjustQuantityNote').val('');
-    $modal.find('#adjustQuantityFile').val('');
-    // js-uploadFile paints selected filenames into #{id}-info; clear it too
-    // so stale filenames from a previous open don't linger in the new modal.
-    $modal.find('#adjustQuantityFile-info').empty();
-
-    // Acquisition-metadata fields (order number, supplier, unit cost,
-    // currency) only make sense when the qty change is a positive
-    // addition (a purchase). Zero or negative amounts represent
-    // corrections / consumption / losses, not acquisitions, so hide
-    // those fields — and blank their values so a submit from that
-    // state doesn't ship stale purchase metadata alongside the log
-    // entry. Show them again the moment the operator types a
-    // positive number. The date label swaps to a generic "Date"
-    // when the event isn't a purchase.
-    //
-    // On modal open the amount is empty ("we don't know yet"), so
-    // stay in the default acquisition-visible state — prefilled
-    // supplier / cost / currency from the last order are preserved
-    // and the hint stays visible if it was shown. We only clear
-    // when the operator actually commits to a 0/negative value.
-    var $acquisitionFields = $modal.find('#adjustQuantityAcquisitionFields');
-    var $costRow = $modal.find('#adjustQuantityCostRow');
-    var $dateLabel = $modal.find('#adjustQuantityPurchaseDateLabel');
-    var purchaseLabel = $dateLabel.data('label-purchase');
-    var genericLabel = $dateLabel.data('label-generic');
-    var syncAcquisitionFieldsVisibility = function syncAcquisitionFieldsVisibility() {
-      var raw = $amount.val();
-      // Treat "no value yet" as still-a-purchase for the visibility
-      // toggle: prefilled acquisition metadata stays intact until
-      // the operator explicitly types a non-positive number.
-      if (raw === '' || raw === null || raw === undefined) {
-        $acquisitionFields.show();
-        $costRow.show();
-        $dateLabel.text(purchaseLabel);
-        return;
-      }
-      var num = parseFloat(raw);
-      var isPurchase = !isNaN(num) && num > 0;
-      $acquisitionFields.toggle(isPurchase);
-      $costRow.toggle(isPurchase);
-      $costHint.toggle(isPurchase && $costHint.data('has-prefill') === true);
-      $dateLabel.text(isPurchase ? purchaseLabel : genericLabel);
-      if (!isPurchase) {
-        $modal.find('#adjustQuantityOrder').val('');
-        $modal.find('#adjustQuantitySupplier').val('').trigger('change');
-        $modal.find('#adjustQuantityUnitCost').val('');
-        $modal.find('#adjustQuantityCurrency').val('');
-      }
-    };
-    // Track the prefill state on the hint so the visibility toggle
-    // can restore it correctly when qty flips positive again.
-    $costHint.data('has-prefill', $costHint.is(':visible'));
-    $amount.off('input.adjustAcquisition').on('input.adjustAcquisition', syncAcquisitionFieldsVisibility);
-    // Initial call keeps everything in the default "purchase" state
-    // (empty amount) so the prefill logic above stays authoritative.
-    syncAcquisitionFieldsVisibility();
-    $modal.modal('show');
-  });
-
-  // Request-item modal (on /account/requestable-assets). Trigger
-  // buttons carry data-request-url + data-item-name + data-current-qty
-  // so the modal can post to the correct endpoint and reset its
-  // qty/date fields between opens. Cancel case (the item is already
-  // requested by this user) POSTs synchronously via a small inline
-  // form on the row instead of routing through this modal, so a
-  // requested row never opens it.
-  $el.on('click', '.request-item', function () {
-    var $btn = $(this);
-    var $modal = $('#requestItemModal');
-    var $form = $('#requestItemForm');
-    $form.attr('action', $btn.data('request-url'));
-    $modal.find('.request-item-name').text($btn.data('item-name') || '');
-    var currentQty = parseInt($btn.data('current-qty'), 10);
-    $modal.find('#requestItemQuantity').val(!isNaN(currentQty) && currentQty > 0 ? currentQty : 1);
-
-    // Hide the qty row for types where qty is meaningless.
-    // Assets are 1:1 (you request THE asset, not N of it).
-    // Licenses are one-seat-per-request by convention (nobody
-    // realistically asks for 3 seats of Photoshop for
-    // themselves). The input stays in the DOM with value=1 so
-    // the POST shape stays uniform across every requestable
-    // type. Only the row is display:none.
-    //
-    // The required attribute is toggled in step with visibility
-    // per HTML5 specs
-    var itemType = ($btn.data('item-type') || '').toString().toLowerCase();
-    var hidesQty = itemType === 'asset' || itemType === 'license';
-    var $qtyInput = $modal.find('#requestItemQuantity');
-    $modal.find('#requestItemQuantityRow').toggle(!hidesQty);
-    $qtyInput.prop('required', !hidesQty);
-    if (hidesQty) {
-      $qtyInput.val(1);
-    }
-
-    // Reset dates + notes every open so state left in the modal
-    // by an earlier click can't leak into the next request.
-    $modal.find('#requestItemStartDate').val('');
-    $modal.find('#requestItemEndDate').val('');
-    $modal.find('#requestItemNotes').val('');
-
-    // Snapshot the tab the requester is on so the controller can
-    // restore it on the post-submit redirect. Walks up to the
-    // enclosing .tab-pane and reads its id; the assets tab uses
-    // an API-backed row-formatter that emits the same
-    // data-active-tab attr on its request button (see
-    // assetRequestActionsFormatter) so this handler works there
-    // too without needing the DOM parent.
-    var explicitTab = $btn.data('active-tab');
-    var $tabPane = $btn.closest('.tab-pane');
-    var activeTab = explicitTab || ($tabPane.length ? $tabPane.attr('id') : '');
-    $modal.find('#requestItemActiveTab').val(activeTab || '');
-    $modal.modal('show');
-  });
-
-  // confirm delete modal
-  $el.on('click', '.delete-asset', function (evnt) {
-    var $context = $(this);
-    var $dataConfirmModal = $('#dataConfirmModal');
-    // Anchors keep the URL in href; buttons keep it in data-href
-    // (buttons don't semantically support href per HTML5).
-    var href = $context.attr('data-href') || $context.attr('href');
-    var message = $context.attr('data-content');
-    var headericon = $context.attr('data-icon');
-    var title = $context.attr('data-title');
-
-    // deleteForm is the ID of the modal form itself
-    $('#deleteForm').attr('action', href);
-    $dataConfirmModal.find('.modal-header-icon').addClass(headericon);
-    $dataConfirmModal.find('.modal-title').text('').text(title).prepend('<i class="fa ' + headericon + '"></i> ');
-    $dataConfirmModal.find('.modal-body').text('').text(message);
-    $dataConfirmModal.attr('action', href);
-
-    // Fire the modal
-    $dataConfirmModal.modal({
-      show: true
-    });
-    return false;
-  });
-
-  /*
-  * Select2
-  */
-
-  $('select.select2:not(".select2-hidden-accessible")').each(function (i, obj) {
-    var $obj = $(obj);
-    var options = {};
-    // Opt-out for fields where the built-in search box adds no value. Pass
-    // data-minimum-results-for-search="Infinity" (or a numeric
-    // threshold) on the <select> to hide it.
-    var minResults = $obj.data('minimum-results-for-search');
-    if (minResults !== undefined) {
-      options.minimumResultsForSearch = minResults === 'Infinity' ? Infinity : minResults;
-    }
-    // Any select2 that lives inside a Bootstrap 3 modal has to be
-    // initialized with dropdownParent set to the modal, or the
-    // search input gets appended to <body> where Bootstrap 3's
-    // modal enforceFocus handler steals focus away from it. See
-    // the same fix on initLivewireSelect2 below for the full
-    // failure-mode explanation.
-    var $modal = $obj.closest('.modal');
-    if ($modal.length) {
-      options.dropdownParent = $modal;
-    }
-    $obj.select2(options);
-  });
-
-  // Crazy select2 rich dropdowns with images!
-  $('.js-data-ajax').each(function (i, item) {
-    var link = $(item);
-    var endpoint = link.data("endpoint");
-    var select = link.data("select");
-    // Same modal-detection as the plain select2 init above: scope the
-    // dropdown panel to any enclosing Bootstrap 3 modal so its search
-    // input doesn't get its focus stolen by the modal's enforceFocus.
-    var $modal = link.closest('.modal');
-    link.select2({
-      /**
-       * Adds an empty placeholder, allowing every select2 instance to be cleared.
-       * This placeholder can be overridden with the "data-placeholder" attribute.
-       */
-      placeholder: '',
-      allowClear: true,
-      dropdownParent: $modal.length ? $modal : $(document.body),
-      language: $('meta[name="language"]').attr('content'),
-      dir: $('meta[name="language-direction"]').attr('content'),
-      ajax: {
-        // the baseUrl includes a trailing slash
-        url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
-        dataType: 'json',
-        delay: 250,
-        headers: {
-          "X-Requested-With": 'XMLHttpRequest',
-          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        },
-        data: function data(params) {
-          var data = {
-            search: params.term,
-            page: params.page || 1,
-            statusType: link.data("asset-status-type"),
-            companyId: link.data("company-ids") || link.data("company-id"),
-            excludeId: link.data("exclude-id"),
-            excludeIds: link.data("exclude-ids"),
-            // Pre-scope the hardware picker to a user's
-            // assigned assets. Currently used by the
-            // components-checkout screen when reached via
-            // a /requests row (see the requesting_user
-            // wiring in ComponentsController + the checkout
-            // blade). The API endpoint gracefully falls
-            // back to the unfiltered list when the target
-            // user has no assigned assets, so an empty
-            // pre-filter doesn't lock the admin out.
-            assignedTo: link.data("assigned-to"),
-            // When true, the companies selectlist marks child companies
-            // (those with a parent of their own) as disabled — used by
-            // the parent-company picker so users can't choose options
-            // that would fail the parent_must_be_top_level validator.
-            onlyTopLevel: link.data("only-top-level")
-          };
-          return data;
-        },
-        /* processResults: function (data, params) {
-             params.page = params.page || 1;
-             var answer =  {
-                results: data.items,
-                pagination: {
-                    more: data.pagination.more
-                }
-            };
-             return answer;
-        }, */
-        cache: true
-      },
-      //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-      templateResult: formatDatalistSafe
-      //templateSelection: formatDataSelection
-    });
-  });
-  function getSelect2Value(element) {
-    // if the passed object is not a jquery object, assuming 'element' is a selector
-    if (!(element instanceof jQuery)) element = $(element);
-    var select = element.data("select2");
-
-    // There's two different locations where the select2-generated input element can be. 
-    searchElement = select.dropdown.$search || select.$container.find(".select2-search__field");
-    var value = searchElement.val();
-    return value;
-  }
-  $(".select2-hidden-accessible").on('select2:selecting', function (e) {
-    var data = e.params.args.data;
-    var isMouseUp = false;
-    var element = $(this);
-    var value = getSelect2Value(element);
-    if (e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
-
-    // if selected item does not match typed text, do not allow it to pass - force close for ajax.
-    if (!isMouseUp) {
-      if (value.toLowerCase() && data.text.toLowerCase().indexOf(value) < 0) {
-        e.preventDefault();
-        element.select2('close');
-
-        // if it does match, we set a flag in the event (which gets passed to subsequent events), telling it not to worry about the ajax
-      } else if (value.toLowerCase() && data.text.toLowerCase().indexOf(value) > -1) {
-        e.params.args.noForceAjax = true;
-      }
-    }
-  });
-  $(".select2-hidden-accessible").on('select2:closing', function (e) {
-    var element = $(this);
-    var value = getSelect2Value(element);
-    var noForceAjax = false;
-    var isMouseUp = false;
-    if (e.params.args.originalSelect2Event) noForceAjax = e.params.args.originalSelect2Event.noForceAjax;
-    if (e.params.args.originalEvent) isMouseUp = e.params.args.originalEvent.type == "mouseup";
-    if (value && !noForceAjax && !isMouseUp) {
-      var endpoint = element.data("endpoint");
-      var statusType = element.data("asset-status-type");
-      $.ajax({
-        url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search=' + value + '&page=1' + (statusType ? '&statusType=' + statusType : ''),
-        dataType: 'json',
-        headers: {
-          "X-Requested-With": 'XMLHttpRequest',
-          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        }
-      }).done(function (response) {
-        var currentlySelected = element.select2('data').map(function (x) {
-          return +x.id;
-        }).filter(function (x) {
-          return x !== 0;
-        });
-
-        // makes sure we're not selecting the same thing twice for multiples
-        var filteredResponse = response.results.filter(function (item) {
-          return currentlySelected.indexOf(+item.id) < 0;
-        });
-        var first = currentlySelected.length > 0 ? filteredResponse[0] : response.results[0];
-        if (first && first.id) {
-          first.selected = true;
-          if ($("option[value='" + first.id + "']", element).length < 1) {
-            var option = new Option(first.text, first.id, true, true);
-            element.append(option);
-          } else {
-            var isMultiple = element.attr("multiple") == "multiple";
-            element.val(isMultiple ? element.val().concat(first.id) : element.val(first.id));
-          }
-          element.trigger('change');
-          element.trigger({
-            type: 'select2:select',
-            params: {
-              data: first
-            }
-          });
-        }
-      });
-    }
-  });
-  function formatDatalist(datalist) {
-    var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
-    if (datalist.loading) {
-      return loading_markup;
-    }
-    var markup = '<div class="clearfix">';
-    markup += '<div class="pull-left" style="padding-right: 10px;">';
-    if (datalist.image) {
-      markup += "<div style='width: 30px;'><img src='" + datalist.image + "' style='max-height: 20px; max-width: 30px;' alt='" + datalist.text + "'></div>";
-    } else {
-      markup += '<div style="height: 20px; width: 30px;"></div>';
-    }
-    markup += "</div><div>" + datalist.text + "</div>";
-    markup += "</div>";
-    return markup;
-  }
-  function formatDatalistSafe(datalist) {
-    if (datalist.loading) {
-      return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
-    }
-    var root_div = $("<div class='clearfix'>");
-    var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
-    if (datalist.image) {
-      var inner_div = $("<div style='width: 20px;'>");
-      /******************************************************************
-       *
-       * We are specifically chosing empty alt-text below, because this
-       * image conveys no additional information, relative to the text
-       * that will *always* be there in any select2 list that is in use
-       * in Snipe-IT. If that changes, we would probably want to change
-       * some signatures of some functions, but right now, we don't want
-       * screen readers to say "HP SuperJet 5000, .... picture of HP
-       * SuperJet 5000..." and so on, for every single row in a list of
-       * assets or models or whatever.
-       *
-       *******************************************************************/
-      var img = $("<img src='' style='max-height: 20px; max-width: 20px;' alt=''>");
-      img.attr("src", datalist.image);
-      inner_div.append(img);
-    } else if (datalist.tag_color) {
-      var inner_div = $("<div style='width: 20px;'>");
-      var icon = $('<i class="fa-solid fa-square" style="font-size: 20px;" aria-hidden="true"></i>');
-      icon.css("color", datalist.tag_color);
-      inner_div.append(icon);
-    } else {
-      var inner_div = $("<div style='height: 20px; width: 20px;'></div>");
-    }
-    left_pull.append(inner_div);
-    root_div.append(left_pull);
-    var name_div = $("<div>");
-    name_div.text(datalist.text);
-    root_div.append(name_div);
-    var safe_html = root_div.get(0).outerHTML;
-    var old_html = formatDatalist(datalist);
-    if (safe_html != old_html) {
-      //console.log("HTML MISMATCH: ");
-      //console.log("FormatDatalistSafe: ");
-      // console.dir(root_div.get(0));
-      //console.log(safe_html);
-      //console.log("FormatDataList: ");
-      //console.log(old_html);
-    }
-    return root_div;
-  }
-  function formatDataSelection(datalist) {
-    // This a heinous workaround for a known bug in Select2.
-    // Without this, the rich selectlists are vulnerable to XSS.
-    // Many thanks to @uberbrady for this fix. It ain't pretty,
-    // but it resolves the issue until Select2 addresses it on their end.
-    //
-    // Bug was reported in 2016 :{
-    // https://github.com/select2/select2/issues/4587
-
-    return datalist.text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-  }
-
-  // This handles the radio button selectors for the checkout-to-foo options
-  // on asset checkout and also on asset edit
-  $(function () {
-    var checkoutToTypeInputs = $('input[name=checkout_to_type]');
-    if (!checkoutToTypeInputs.length) {
-      return;
-    }
-    function syncCheckoutToTypeUi(resetSelections) {
-      var assignto_type = $('input[name=checkout_to_type]:checked').val();
-      var userid = $('#assigned_user option:selected').val();
-      if (assignto_type == 'asset') {
-        $('#current_assets_box').fadeOut();
-        $('#assigned_asset').show();
-        $('#assigned_user').hide();
-        $('#assigned_location').hide();
-        $('.notification-callout').fadeOut();
-        if (resetSelections) {
-          $('[name="assigned_location"]').val('').trigger('change.select2');
-          $('[name="assigned_user"]').val('').trigger('change.select2');
-        }
-      } else if (assignto_type == 'location') {
-        $('#current_assets_box').fadeOut();
-        $('#assigned_asset').hide();
-        $('#assigned_user').hide();
-        $('#assigned_location').show();
-        $('.notification-callout').fadeOut();
-        if (resetSelections) {
-          $('[name="assigned_asset"]').val('').trigger('change.select2');
-          $('[name="assigned_user"]').val('').trigger('change.select2');
-        }
-      } else {
-        $('#assigned_asset').hide();
-        $('#assigned_user').show();
-        $('#assigned_location').hide();
-        if (userid) {
-          $('#current_assets_box').fadeIn();
-        }
-        $('.notification-callout').fadeIn();
-        if (resetSelections) {
-          $('[name="assigned_asset"]').val('').trigger('change.select2');
-          $('[name="assigned_location"]').val('').trigger('change.select2');
-        }
-      }
-    }
-    checkoutToTypeInputs.on('change', function () {
-      syncCheckoutToTypeUi(true);
-    });
-
-    // Expose so pages that reveal #assignto_selector later (asset edit's
-    // user_add() flow, etc.) can trigger the sync once the selector is
-    // visible. Standalone checkout pages don't need to call this — the
-    // initial-render block below handles them.
-    window.snipeitSyncCheckoutToTypeUi = syncCheckoutToTypeUi;
-
-    // Apply the current radio selection on initial render unless the page
-    // has explicitly hidden the selector via an inline style="display:none"
-    // (asset create/edit start that way and reveal it from user_add() after
-    // a deployability AJAX call). Using getAttribute('style') instead of
-    // jQuery's :visible avoids false negatives on pages like the standalone
-    // /hardware/{id}/checkout, where the selector is visible from the start
-    // but :visible can transiently return false during select2 boot — that
-    // was what hid the acceptance-options callout until a radio was toggled.
-    var selectorStyle = ($('#assignto_selector').attr('style') || '').toLowerCase();
-    if (selectorStyle.indexOf('display:none') === -1 && selectorStyle.indexOf('display: none') === -1) {
-      syncCheckoutToTypeUi(false);
-    }
-  });
-
-  // ------------------------------------------------
-  // Deep linking for Bootstrap tabs
-  // ------------------------------------------------
-  var taburl = document.location.toString();
-
-  // Allow full page URL to activate a tab's ID
-  // ------------------------------------------------
-  // This allows linking to a tab on page load via the address bar.
-  // So a URL such as, http://snipe-it.local/hardware/2/#my_tab will
-  // cause the tab on that page with an ID of “my_tab” to be active.
-  if (taburl.match('#')) {
-    $('.nav-tabs a[href="#' + taburl.split('#')[1] + '"]').tab('show');
-  }
-
-  // Allow internal page links to activate a tab's ID.
-  // ------------------------------------------------
-  // This allows you to link to a tab from anywhere on the page
-  // including from within another tab. Also note that internal page
-  // links either inside or out of the tabs need to include data-toggle="tab"
-  // Ex: <a href="#my_tab" data-toggle="tab">Click me</a>
-  $('a[data-toggle="tab"]').click(function (e) {
-    var href = $(this).attr("href");
-    history.pushState(null, null, href);
-    e.preventDefault();
-    $('a[href="' + $(this).attr('href') + '"]').tab('show');
-  });
-
-  // Tables inside a hidden tab pane initialize with a zero-width
-  // container, so their column widths and any sticky-column offsets
-  // computed from those widths never recover on their own once the
-  // pane becomes visible. Force a resetView on any snipe-tables
-  // inside the newly-shown pane so column widths + sticky offsets
-  // re-measure against the now-visible container.
-  $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-    var pane = $(e.target).attr('href');
-    if (!pane) return;
-    $(pane).find('.snipe-table').each(function () {
-      if ($(this).data('bootstrap.table')) {
-        $(this).bootstrapTable('resetView');
-      }
-    });
-  });
-
-  /*
-   * Conditional field visibility for schema-driven forms.
-   *
-   * Any element carrying data-visible-when-field and data-visible-when-value
-   * (comma-separated for multi-value) is shown when the source field's
-   * current value matches, hidden otherwise. Powers the auth-method
-   * show/hide on the sync-adapter credentials pages so the Basic Auth
-   * inputs don't render when the admin picked Bearer, etc. Fully
-   * data-attribute driven, no per-partial JS required.
-   */
-  function applyAdapterConditionalVisibility() {
-    document.querySelectorAll('[data-visible-when-field]').forEach(function (target) {
-      var sourceName = target.getAttribute('data-visible-when-field');
-      var acceptedValues = String(target.getAttribute('data-visible-when-value') || '').split(',');
-      var source = document.querySelector('[name="' + sourceName + '"]');
-      if (!source) return;
-      target.style.display = acceptedValues.indexOf(source.value) !== -1 ? '' : 'none';
-    });
-  }
-
-  // Bind change listeners against the unique set of source-field names
-  // referenced by any conditional target on the page. jQuery here
-  // because select2 forwards change events through jQuery, so plain
-  // addEventListener would miss the auth-method dropdown's own picks.
-  var __adapterConditionalSources = {};
-  document.querySelectorAll('[data-visible-when-field]').forEach(function (target) {
-    __adapterConditionalSources[target.getAttribute('data-visible-when-field')] = true;
-  });
-  Object.keys(__adapterConditionalSources).forEach(function (name) {
-    $('[name="' + name + '"]').on('change', applyAdapterConditionalVisibility);
-  });
-  applyAdapterConditionalVisibility();
-  // Re-apply after a tab becomes visible. select2 sizing and hidden-
-  // tab state can leave the initial pass stale on tabs the admin
-  // hadn't clicked yet.
-  $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', applyAdapterConditionalVisibility);
-
-  /*
-   * Live-update the "Base URL:" prefix addon on any pull_path /
-   * push_path input for custom sync adapters as the admin types into the
-   * Base URL input.
-   * Each addon carries data-adapter-slug so multiple adapter tabs
-   * update independently, and data-placeholder holds the "Base URL:"
-   * fallback text the server rendered when the URL was blank on
-   * first load (so localizers only touch a lang file, not this JS).
-   */
-  document.querySelectorAll('.js-adapter-url-prefix').forEach(function (addon) {
-    var slug = addon.getAttribute('data-adapter-slug');
-    if (!slug) return;
-    var input = document.querySelector('input[name="' + slug + '_url"]');
-    if (!input) return;
-    var placeholder = addon.getAttribute('data-placeholder') || '';
-    input.addEventListener('input', function () {
-      addon.textContent = input.value || placeholder;
-    });
-  });
-
-  /*
-   * Pull Now / Push Now submit spinner + double-click guard.
-   *
-   * Any <form class="js-sync-action-form"> gets a submit handler
-   * that swaps the cloud icon on its <button.js-sync-action-button>
-   * for a spinner and disables every sync-action button on the
-   * page. Admins with slower fleets don't panic-click while the
-   * request is in flight, and they can't fire Push while Pull is
-   * running on the same instance.
-   */
-  document.querySelectorAll('form.js-sync-action-form').forEach(function (form) {
-    form.addEventListener('submit', function () {
-      var btn = form.querySelector('button.js-sync-action-button');
-      if (!btn || btn.disabled) return;
-      var icon = btn.querySelector('.js-sync-action-icon');
-      if (icon) {
-        icon.className = 'fa-solid fa-spinner fa-spin js-sync-action-icon';
-      }
-      btn.disabled = true;
-      document.querySelectorAll('button.js-sync-action-button').forEach(function (other) {
-        other.disabled = true;
-      });
-    });
-  });
-
-  /*
-   * Generic dirty-form guard.
-   *
-   * Any <form data-dirty-guard id="my-form"> is watched for changes.
-   * Any element (usually a button) elsewhere on the page carrying
-   * data-dirty-guarded-by="my-form" gets disabled while the form is
-   * dirty and re-enabled when the values revert to the initial
-   * snapshot. Useful anywhere the page has an "act on saved state"
-   * control that would silently run against the OLD state if
-   * clicked with pending edits (sync-adapter Pull/Push, etc)
-   *
-   * Attributes:
-   *   - data-dirty-guard              (form) opt-in marker
-   *   - data-dirty-guard-warning      (form, optional) tooltip text
-   *                                   set on guarded buttons when
-   *                                   they are disabled by this
-   *                                   guard. Defaults to a generic
-   *                                   "Save your changes first"
-   *                                   English fallback so a caller
-   *                                   that forgets to localize still
-   *                                   gets a usable hint.
-   *   - data-dirty-guarded-by="{id}"  (button/element) declares
-   *                                   which form it's guarded by,
-   *                                   matched against the form's id.
-   *
-   * The guard only touches buttons that were enabled server-side.
-   * A data-dirty-guard-disabled marker on the button records OUR
-   * override so a revert re-enables only what we disabled, leaving
-   * server-side `disabled` attributes intact.
-   */
-  document.querySelectorAll('form[data-dirty-guard]').forEach(function (form) {
-    var formId = form.id;
-    if (!formId) return;
-    var warning = form.getAttribute('data-dirty-guard-warning') || 'Save your changes first.';
-    function findGuardedElements() {
-      return document.querySelectorAll('[data-dirty-guarded-by="' + formId + '"]');
-    }
-    function serialize() {
-      // FormData enumerates named inputs as they currently sit,
-      // so this catches select changes, textarea edits, and any
-      // input-event that fires. Sort by key for stability across
-      // browsers that iterate FormData in insertion order vs
-      // document order.
-      var entries = [];
-      new FormData(form).forEach(function (v, k) {
-        entries.push(k + '\0' + v);
-      });
-      entries.sort();
-      return entries.join('\n');
-    }
-
-    // Defer the initial snapshot to next tick so any init-time
-    // form mutations (select2 syncing hidden values, custom
-    // widgets, dynamic show/hide picking initial visibility) have
-    // settled before we lock in the baseline.
-    var initialState = null;
-    setTimeout(function () {
-      initialState = serialize();
-    }, 0);
-    var currentlyDirty = false;
-    function reevaluate() {
-      if (initialState === null) return;
-      var nowDirty = serialize() !== initialState;
-      if (nowDirty === currentlyDirty) return;
-      currentlyDirty = nowDirty;
-      findGuardedElements().forEach(function (el) {
-        if (nowDirty) {
-          if (!el.disabled) {
-            el.disabled = true;
-            el.setAttribute('data-dirty-guard-disabled', '1');
-            el.setAttribute('title', warning);
-          }
-        } else if (el.getAttribute('data-dirty-guard-disabled') === '1') {
-          el.disabled = false;
-          el.removeAttribute('data-dirty-guard-disabled');
-          el.removeAttribute('title');
-        }
-      });
-    }
-    form.addEventListener('input', reevaluate);
-    form.addEventListener('change', reevaluate);
-  });
-
-  /*
-   * Breadcrumb tab-label append.
-   *
-   * Any <a data-toggle="tab" data-breadcrumb-label="Fleet"> extends
-   * the page's breadcrumb trail with its label as a leaf crumb when
-   * that tab is active. The first time a label is appended, the
-   * previously-active leaf gets converted to a link back to the
-   * current pathname (no query string) so admins can click back to
-   * the "no tab selected" default. Non-labeled tabs restore the
-   * server-rendered leaf.
-   *
-   * Opt in on any page by adding the attribute to individual tab
-   * links. Pages with no labeled tabs skip the handler entirely.
-   */
-  if (document.querySelector('[data-toggle="tab"][data-breadcrumb-label]')) {
-    var breadcrumbLeaf = document.querySelector('.content-header .breadcrumb-item.active');
-    if (breadcrumbLeaf) {
-      var breadcrumbBaseText = breadcrumbLeaf.textContent.trim();
-      var breadcrumbBasePath = window.location.pathname;
-      var breadcrumbAppendedLeaf = null;
-      var setBreadcrumbTabLeaf = function setBreadcrumbTabLeaf(label) {
-        if (!label) {
-          if (breadcrumbAppendedLeaf) {
-            breadcrumbAppendedLeaf.remove();
-            breadcrumbAppendedLeaf = null;
-            breadcrumbLeaf.innerHTML = '';
-            breadcrumbLeaf.textContent = breadcrumbBaseText;
-            breadcrumbLeaf.classList.add('active');
-          }
-          return;
-        }
-        if (!breadcrumbAppendedLeaf) {
-          breadcrumbLeaf.classList.remove('active');
-          breadcrumbLeaf.innerHTML = '';
-          var link = document.createElement('a');
-          link.href = breadcrumbBasePath;
-          link.textContent = breadcrumbBaseText;
-          var chevron = document.createElement('i');
-          chevron.className = 'fa fa-angle-right';
-          breadcrumbLeaf.append(link, ' ', chevron);
-          breadcrumbAppendedLeaf = document.createElement('li');
-          breadcrumbAppendedLeaf.className = 'breadcrumb-item active';
-          breadcrumbLeaf.parentNode.appendChild(breadcrumbAppendedLeaf);
-        }
-        breadcrumbAppendedLeaf.textContent = label;
-      };
-      var initialLabeledActive = document.querySelector('li.active > [data-toggle="tab"][data-breadcrumb-label]');
-      if (initialLabeledActive) {
-        setBreadcrumbTabLeaf(initialLabeledActive.getAttribute('data-breadcrumb-label'));
-      }
-      document.querySelectorAll('[data-toggle="tab"]').forEach(function (tab) {
-        $(tab).on('shown.bs.tab', function (e) {
-          setBreadcrumbTabLeaf(e.target.getAttribute('data-breadcrumb-label'));
-        });
-      });
-    }
-  }
-
-  // Same story for viewport resizes: bootstrap-table caches column
-  // widths from the initial layout and doesn't recompute when the
-  // window width changes. Debounce so a drag-resize doesn't fire
-  // resetView on every intermediate pixel.
-  var snipeTableResizeTimer;
-  $(window).on('resize', function () {
-    clearTimeout(snipeTableResizeTimer);
-    snipeTableResizeTimer = setTimeout(function () {
-      $('.snipe-table').each(function () {
-        if ($(this).data('bootstrap.table')) {
-          $(this).bootstrapTable('resetView');
-        }
-      });
-    }, 150);
-  });
-
-  // ------------------------------------------------
-  // End Deep Linking for Bootstrap tabs
-  // ------------------------------------------------
-
-  // Image preview
-  function readURL(input, $preview) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        $preview.attr('src', e.target.result);
-      };
-      reader.readAsDataURL(input.files[0]);
-    }
-  }
-  function formatBytes(bytes) {
-    if (bytes < 1024) return bytes + " Bytes";else if (bytes < 1048576) return (bytes / 1024).toFixed(2) + " KB";else if (bytes < 1073741824) return (bytes / 1048576).toFixed(2) + " MB";else return (bytes / 1073741824).toFixed(2) + " GB";
-  }
-
-  // File size validation
-  $('.js-uploadFile').bind('change', function () {
-    var $this = $(this);
-    var id = '#' + $this.attr('id');
-    var status = id + '-status';
-    var $status = $(status);
-    var delete_id = $(id + '-deleteCheckbox');
-    var preview_container = $(id + '-previewContainer');
-    $status.removeClass('text-success').removeClass('text-danger');
-    $(status + ' .goodfile').remove();
-    $(status + ' .badfile').remove();
-    $(status + ' .previewSize').hide();
-    preview_container.hide();
-    $(id + '-info').html('');
-    var max_size = $this.data('maxsize');
-    var total_size = 0;
-    for (var i = 0; i < this.files.length; i++) {
-      total_size += this.files[i].size;
-      $(id + '-info').append('<span class="label label-default">' + htmlEntities(this.files[i].name) + ' (' + formatBytes(this.files[i].size) + ')</span> ');
-    }
-    if (total_size > max_size) {
-      $status.addClass('text-danger').removeClass('help-block').prepend('<i class="badfile fas fa-times"></i> ').append('<span class="previewSize"> Upload is ' + formatBytes(total_size) + '.</span>');
-    } else {
-      $status.addClass('text-success').removeClass('help-block').prepend('<i class="goodfile fas fa-check"></i> ');
-      var $preview = $(id + '-imagePreview');
-      readURL(this, $preview);
-      $preview.fadeIn();
-      preview_container.fadeIn();
-      delete_id.hide();
-    }
-  });
-});
-function htmlEntities(str) {
-  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-}
-
-/**
- * Toggle disabled
- */
-(function ($) {
-  $.fn.toggleDisabled = function (callback) {
-    return this.each(function () {
-      var disabled,
-        $this = $(this);
-      if ($this.attr('disabled')) {
-        $this.removeAttr('disabled');
-        disabled = false;
-      } else {
-        $this.attr('disabled', 'disabled');
-        disabled = true;
-      }
-      if (callback && typeof callback === 'function') {
-        callback(this, disabled);
-      }
-    });
-  };
-})(jQuery);
-$(document).ready(function () {
-  // Password-reveal eye. data-toggle is a jQuery selector — usually one
-  // input id, but a multi-selector like "#password, #password_confirm"
-  // lets a single click flip every matched input at once (the confirm
-  // field on the user create/edit form uses this so revealing the
-  // password reveals its confirmation too). Every .toggle-password
-  // sharing the same data-toggle string flips its icon together so the
-  // eye state doesn't visually drift between the two addons.
-  $(document).on('click', '.toggle-password', function () {
-    var toggleTarget = $(this).attr('data-toggle');
-    var $inputs = $(toggleTarget);
-    var reveal = $inputs.first().attr('type') === 'password';
-    $inputs.attr('type', reveal ? 'text' : 'password');
-    var $eyes = $('.toggle-password[data-toggle="' + toggleTarget + '"]');
-    $eyes.toggleClass('fa-eye', !reveal);
-    $eyes.toggleClass('fa-eye-slash', reveal);
-  });
-
-  // Auto-init eonasdan datetimepickers. bootstrap-datepicker has a native
-  // data-provide auto-init. eonasdan does not, so we do it ourselves.
-  // Options are read from data-attributes on the wrapper so blade components
-  // can tune format/side-by-side without touching this JS.
-  //
-  // Icon set is overridden to Font Awesome — the picker defaults to
-  // Glyphicon classes, which we do not ship, so up/down arrows and clock
-  // glyphs would otherwise render as empty boxes.
-  // Exposed so callers who insert new [data-provide="datetimepicker"]
-  // wrappers into the DOM post-load (e.g., AJAX-loaded custom fields on
-  // asset create/edit when the model changes) can re-run the init on the
-  // freshly-inserted elements. Pass a jQuery scope to narrow the search;
-  // omit to init every uninitialised picker on the page.
-  window.snipeitInitDatetimepickers = function (scope) {
-    var $targets = scope ? $(scope).find('[data-provide="datetimepicker"]') : $('[data-provide="datetimepicker"]');
-    $targets.each(initDatetimepicker);
-  };
-  function initDatetimepicker() {
-    var $wrapper = $(this);
-    // Skip if this wrapper already has an eonasdan instance attached
-    // (data('DateTimePicker') is set by the library on init).
-    if ($wrapper.data('DateTimePicker')) {
-      return;
-    }
-    var $input = $wrapper.find('input');
-    var existingValue = ($input.val() || '').trim();
-    var options = {
-      format: $wrapper.data('format') || 'YYYY-MM-DD HH:mm:ss',
-      // Default to the compact (collapsed) view — calendar shows first
-      // and a small clock icon toggles the time view. Callers that want
-      // date + time visible side by side can set data-side-by-side="true".
-      sideBySide: $wrapper.data('side-by-side') === true,
-      showClear: true,
-      showClose: true,
-      showTodayButton: true,
-      // In sideBySide mode the toolbar row (Today/Clear/Close) is only
-      // rendered when placement is explicitly 'top' or 'bottom'; the
-      // library drops it entirely on the default 'default' placement.
-      toolbarPlacement: 'bottom',
-      // Open the popup on any focus/click of the input (not just the
-      // calendar addon icon), matching the behavior of the bootstrap
-      // datepicker used elsewhere in the app.
-      allowInputToggle: true,
-      locale: $wrapper.data('locale') || 'en',
-      icons: {
-        time: 'fa-regular fa-clock',
-        date: 'fa-regular fa-calendar',
-        up: 'fa-solid fa-chevron-up',
-        down: 'fa-solid fa-chevron-down',
-        previous: 'fa-solid fa-chevron-left',
-        next: 'fa-solid fa-chevron-right',
-        today: 'fa-solid fa-calendar-day',
-        clear: 'fa-solid fa-trash',
-        close: 'fa-solid fa-xmark'
-      }
-    };
-
-    // Pre-fill empty inputs with the user's current local datetime by
-    // default. Callers that render a picker where "now" is NOT a safe
-    // default (e.g., user-defined custom fields) can opt out by setting
-    // data-default-now="false" on the wrapper.
-    var wantsDefaultNow = $wrapper.data('default-now') !== false;
-    if (existingValue === '' && wantsDefaultNow) {
-      options.defaultDate = moment();
-    }
-
-    // data-max-date="today" caps the picker at today (replaces the
-    // bootstrap-datepicker era's data-date-end-date="0d"); any other
-    // value is parsed as a moment-compatible date string.
-    var maxDate = $wrapper.data('max-date');
-    if (maxDate) {
-      options.maxDate = maxDate === 'today' ? moment().endOf('day') : moment(maxDate);
-    }
-    $wrapper.datetimepicker(options);
-  }
-
-  // Wires up the linked-pickers pattern for <x-input.date-range>. Each
-  // .js-date-range wrapper holds a .js-date-range-start and .js-date-range-end
-  // datetimepicker; changing one bounds the other so a user can't pick an
-  // end date before the start (or vice versa). Runs after the plain
-  // datetimepicker init above so both instances already exist.
-  function initDateRangeLinking() {
-    $('.js-date-range').each(function () {
-      var $start = $(this).find('.js-date-range-start');
-      var $end = $(this).find('.js-date-range-end');
-      if (!$start.length || !$end.length) {
-        return;
-      }
-      $start.off('dp.change.snipeitDateRange').on('dp.change.snipeitDateRange', function (e) {
-        var picker = $end.data('DateTimePicker');
-        if (picker) {
-          picker.minDate(e.date);
-        }
-      });
-      $end.off('dp.change.snipeitDateRange').on('dp.change.snipeitDateRange', function (e) {
-        var picker = $start.data('DateTimePicker');
-        if (picker) {
-          picker.maxDate(e.date);
-        }
-      });
-    });
-  }
-
-  // Push the app's "week starts on" setting into moment's active locale so
-  // the eonasdan datetimepicker (which reads firstDayOfWeek from moment
-  // locale data, not from its own options) opens with the calendar column
-  // order the admin picked in Localization settings. Runs once before any
-  // picker is initialized; downstream code that formats using moment's w/W
-  // tokens will pick up the same value.
-  if (window.snipeit && window.snipeit.settings && typeof window.snipeit.settings.first_day_of_week === 'number') {
-    moment.updateLocale(moment.locale(), {
-      week: {
-        dow: window.snipeit.settings.first_day_of_week
-      }
-    });
-  }
-
-  // MAC-address input mask. Custom fields with format=MAC render as
-  // plain text inputs; without a mask the user only discovers the
-  // required colon-separated shape (see \App\Rules\MacEncrypted)
-  // after a failed submit. The mask strips every non-hex character
-  // on input, uppercases A-F, and re-inserts a colon after every
-  // second character, so common paste shapes (hyphen-separated from
-  // Windows ipconfig, Cisco-dotted aabb.ccdd.eeff, bare hex,
-  // space-separated) all normalize to the canonical AA:BB:CC:DD:EE:FF
-  // form the backend expects.
-  //
-  // Exposed on window (matching snipeitInitDatetimepickers above) so
-  // the asset edit form's AJAX custom-fields-reload handler can
-  // re-init the mask on inputs that only exist after the model
-  // changes and a fresh custom_fields_form.blade.php partial is
-  // swapped into place. Pass a jQuery selector or DOM node to narrow
-  // the scope; omit to init every .mac-address-input on the page.
-  //
-  // The .mac-address-input class is applied in resources/views/models/
-  // custom_fields_form.blade.php on both text-input branches
-  // (format-icon wrapper AND bare input) when $field->format === 'MAC'.
-  window.snipeitInitMacAddressMask = function (scope) {
-    var $targets = scope ? $(scope).find('.mac-address-input') : $('.mac-address-input');
-    $targets.off('input.snipeitMacMask').on('input.snipeitMacMask', function () {
-      var _hex$match;
-      // Trim leading/trailing whitespace first so a paste like
-      // "  AA:BB:CC:DD:EE:FF\n" from a spreadsheet cell doesn't
-      // eat one of the trailing hex chars into the substring cap.
-      var hex = this.value.trim().toUpperCase().replace(/[^0-9A-F]/g, '').substring(0, 12);
-      this.value = ((_hex$match = hex.match(/.{1,2}/g)) === null || _hex$match === void 0 ? void 0 : _hex$match.join(':')) || '';
-    });
-  };
-  window.snipeitInitDatetimepickers();
-  initDateRangeLinking();
-  window.snipeitInitMacAddressMask();
-});
-
-/**
- * Universal Livewire Select2 integration
- *
- * How to use:
- *
- * 1. Set the class of your select2 elements to 'livewire-select2').
- * 2. Name your element to match a property in your Livewire component
- * 3. Add an attribute called 'data-livewire-component' that points to $this->getId() (via `{{ }}` if you're in a blade,
- *    or just $this->getId() if not).
- */
-// Any livewire-select2 that lives inside a Bootstrap 3 modal has to be
-// initialized with dropdownParent set to the modal, or the search input
-// gets appended to <body> where Bootstrap 3's modal enforceFocus handler
-// immediately steals focus away from it - the dropdown opens, the search
-// field renders, but typing does nothing because focus keeps snapping
-// back into the modal on every keydown. Elements not in a modal get a
-// plain init. Callers with fussier requirements (custom width, template,
-// etc.) can still init select2 manually; this handler only touches
-// elements that don't already have select2 wired up (guarded by the
-// .select2-hidden-accessible class select2 adds after init).
-function initLivewireSelect2($scope) {
-  var $root = $scope && $scope.length ? $scope : $(document);
-  $root.find('.livewire-select2').each(function () {
-    var $el = $(this);
-    if ($el.hasClass('select2-hidden-accessible')) {
-      return;
-    }
-    var opts = {};
-    var $modal = $el.closest('.modal');
-    if ($modal.length) {
-      opts.dropdownParent = $modal;
-    }
-    $el.select2(opts);
-  });
-}
-document.addEventListener('livewire:init', function () {
-  initLivewireSelect2();
-  $(document).on('select2:select', '.livewire-select2', function (event) {
-    var target = $(event.target);
-    if (!event.target.name || !target.data('livewire-component')) {
-      console.error("You need to set both name (which should match a Livewire property) and data-livewire-component on your Livewire-ed select2 elements!");
-      console.error("For data-livewire-component, you probably want to use $this->getId() or {{ $this->getId() }}, as appropriate");
-      return false;
-    }
-    // PHP property names cannot start with a digit — skip bare numeric names (e.g. "0") that would cause a 500
-    if (/^\d+$/.test(event.target.name)) {
-      console.error("Livewire select2: name attribute '" + event.target.name + "' is not a valid Livewire property name — skipping");
-      return false;
-    }
-    Livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value);
-  });
-  Livewire.interceptMessage(function (_ref) {
-    var onFinish = _ref.onFinish;
-    onFinish(function () {
-      // Runs after DOM morph completes (or on error/cancel). Livewire
-      // replaces the plain <select> nodes on morph, so a re-init picks
-      // up any that lost their select2 wrapper in the swap. The
-      // already-init guard inside initLivewireSelect2 keeps unchanged
-      // elements untouched.
-      queueMicrotask(function () {
-        initLivewireSelect2();
-      });
-    });
-  });
-});
-
-// Check/Uncheck all radio buttons in the permissions group
-$('.header-row input:radio').change(function () {
-  value = $(this).attr('value');
-  area = $(this).data('checker-group');
-  $('.radiochecker-' + area + '[value=' + value + ']').prop('checked', true);
-});
-
-// Generic toggleable callouts with remember state
-$(".remember-toggle").on("click", function () {
-  var toggleable_callout_id = $(this).attr('id');
-  var toggle_content_class = 'toggle-content-' + $(this).attr('id');
-  var toggle_arrow = '#toggle-arrow-' + toggleable_callout_id;
-  var toggle_cookie_name = 'toggle_state_' + toggleable_callout_id;
-  $('.' + toggle_content_class).fadeToggle(100);
-  $(toggle_arrow).toggleClass('fa-caret-right fa-caret-down');
-  var toggle_open = $(toggle_arrow).hasClass('fa-caret-down');
-  document.cookie = toggle_cookie_name + "=" + toggle_open + ';path=/';
-});
-var all_cookies = document.cookie.split(';');
-for (var i in all_cookies) {
-  var trimmed_cookie = all_cookies[i].trim(' ');
-  elems = trimmed_cookie.split('=', 2);
-
-  // We have to do more here since we don't know the name of the selector
-  if (trimmed_cookie.startsWith('toggle_state_')) {
-    var toggle_selector_name = elems[0].replace('toggle_state_', '');
-    if (elems[1] != "true") {
-      $('#' + toggle_selector_name + '.remember-toggle').trigger('click');
-    }
-  }
-}
-
-/**
- * This handles the show/hide of superuser and admin specific permissions
- * on the group edit and user edit pages
- */
-if ($("#superuser_allow").is(':checked')) {
-  // Hide here instead of fadeout on pageload to prevent what looks like Flash Of Unstyled Content (FOUC)
-  $(".nonsuperuser").hide();
-  $(".nonsuperuser").attr('display', 'none');
-}
-$(".superuser").change(function () {
-  if ($(this).val() == '1') {
-    $(".nonsuperuser").fadeOut();
-    $(".nonsuperuser").attr('display', 'none');
-    $(".nonadmin").fadeOut();
-    $(".nonadmin").attr('display', 'none');
-  } else if ($(this).val() != '1') {
-    $(".nonsuperuser").fadeIn();
-    $(".nonsuperuser").attr('display', 'block');
-
-    // If the superuser button has been set to deny, we need to
-    // check that the admin button isn't set to allow, before we show non-admin stuff
-    if ($("#admin_allow").is(':checked')) {
-      // Hide here instead of fadeout on pageload to prevent what looks like Flash Of Unstyled Content (FOUC)
-      $(".nonadmin").hide();
-      $(".nonadmin").attr('display', 'none');
-    }
-  }
-});
-if ($("#admin_allow").is(':checked')) {
-  // Hide here instead of fadeout on pageload to prevent what looks like Flash Of Unstyled Content (FOUC)
-  $(".nonadmin").hide();
-  $(".nonadmin").attr('display', 'none');
-}
-$(".admin").change(function () {
-  if ($(this).val() == '1') {
-    $(".nonadmin").fadeOut();
-    $(".nonadmin").attr('display', 'none');
-  } else if ($(this).val() != '1') {
-    $(".nonadmin").fadeIn();
-    $(".nonadmin").attr('display', 'block');
-  }
-});
-
-// Handle the select/deselect of the select boxes with the button from right to left
-
-$(function () {
-  function moveItems(origin, dest) {
-    $(origin).find(':selected').appendTo(dest);
-    $(dest).attr('selected', true);
-    $(dest).sort_select_box();
-  }
-  function moveAllItems(origin, dest) {
-    $(origin).children("option:visible").appendTo(dest);
-    $(dest).attr('selected', true);
-    $(dest).sort_select_box();
-  }
-  $('.left').on('click', function () {
-    var container = $(this).closest('.addremove-multiselect');
-    moveItems($(container).find('select.multiselect.selected'), $(container).find('select.multiselect.available'));
-  });
-  $('.right').on('click', function () {
-    var container = $(this).closest('.addremove-multiselect');
-    moveItems($(container).find('select.multiselect.available'), $(container).find('select.multiselect.selected'));
-  });
-  $('.leftall').on('click', function () {
-    var container = $(this).closest('.addremove-multiselect');
-    moveAllItems($(container).find('select.multiselect.selected'), $(container).find('select.multiselect.available'));
-  });
-  $('.rightall').on('click', function () {
-    var container = $(this).closest('.addremove-multiselect');
-    moveAllItems($(container).find('select.multiselect.available'), $(container).find('select.multiselect.selected'));
-  });
-  $('select.multiselect.selected').on('dblclick keyup', function (e) {
-    if (e.which == 13 || e.type == 'dblclick') {
-      var container = $(this).closest('.addremove-multiselect');
-      moveItems($(container).find('select.multiselect.selected'), $(container).find('select.multiselect.available'));
-    }
-  });
-  $('select.multiselect.available').on('dblclick keyup', function (e) {
-    if (e.which == 13 || e.type == 'dblclick') {
-      var container = $(this).closest('.addremove-multiselect');
-      moveItems($(container).find('select.multiselect.available'), $(container).find('select.multiselect.selected'));
-      $('#hidden_ids_box').val($('#selected-select').val());
-    }
-  });
-});
-$.fn.sort_select_box = function () {
-  // Get options from select box
-  var selected_options = $(this).children('option');
-  // sort alphabetically
-  selected_options.sort(function (a, b) {
-    if (a.text > b.text) return 1;else if (a.text < b.text) return -1;else return 0;
-  });
-  //replace with sorted my_options;
-  $(this).empty().append(selected_options);
-  var selected_in_box = $('#selected-select option').toArray().map(function (item) {
-    return item.value;
-  }).join();
-  $('#hidden_ids_box').empty().val(selected_in_box);
-  $('#count_selected_box').html($('#selected-select option').length);
-  $('#count_unselected_box').html($('#available-select option').length);
-
-  // clearing any selections
-  $("#" + this.attr('id') + " option").attr('selected', true);
-};
-
-/*
- * Data-attribute driven initializers. Blades attach behavior by adding
- * `data-toggle="..."` (plus supporting data-* attributes) to elements
- * instead of shipping an inline <script> block. Add new handlers here
- * as inline scripts get migrated out of blades.
- */
-$(function () {
-  // Sound preview on account/profile. Fires the URL in data-sound-url
-  // when the user toggles the checkbox on.
-  $(document).on('click', '[data-toggle="sound-test"]', function () {
-    if (!$(this).is(':checked')) return;
-    var url = $(this).data('sound-url');
-    if (!url) return;
-    new Audio(url).play();
-  });
-
-  // Confetti preview on account/profile. Same shape as sound-test.
-  $(document).on('click', '[data-toggle="confetti-test"]', function () {
-    if (!$(this).is(':checked')) return;
-    var duration = 1500;
-    var animationEnd = Date.now() + duration;
-    var defaults = {
-      startVelocity: 30,
-      spread: 360,
-      ticks: 60,
-      zIndex: 0
-    };
-    function randomInRange(min, max) {
-      return Math.random() * (max - min) + min;
-    }
-    var interval = setInterval(function () {
-      var timeLeft = animationEnd - Date.now();
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
-      var particleCount = 50 * (timeLeft / duration);
-      confetti(_objectSpread(_objectSpread({}, defaults), {}, {
-        particleCount: particleCount,
-        origin: {
-          x: randomInRange(0.1, 0.3),
-          y: Math.random() - 0.2
-        }
-      }));
-      confetti(_objectSpread(_objectSpread({}, defaults), {}, {
-        particleCount: particleCount,
-        origin: {
-          x: randomInRange(0.7, 0.9),
-          y: Math.random() - 0.2
-        }
-      }));
-    }, 250);
-  });
-
-  // Live color preview for the nav-link colorpicker on account/profile.
-  // The colorpicker widget itself is initialized by $(".color").colorpicker()
-  // in the default layout; this just wires the changeColor listener.
-  if ($('#nav-link-color').length) {
-    $('#nav-link-color').on('changeColor', function (e) {
-      var color = e.color.toString('rgba');
-      $('.navbar-nav > li > a:link').attr('style', 'color: ' + color + ' !important');
-      $('.btn-theme').attr('style', 'color: ' + color + ' !important');
-    });
-  }
-
-  // Branding settings page: live preview + reset for the four tenant
-  // colorpickers. The pickers themselves are initialized by the global
-  // $(".color").colorpicker() call in the default layout; this only wires
-  // the changeColor listeners and the reset button. Guarded on the reset
-  // button ID so it only runs on Settings > Branding, not on every page
-  // that happens to have a #header-color or #nav-link-color widget.
-  //
-  // Only header + nav-link get live preview. Link light/dark previews are
-  // deliberately skipped: they would recolor the buttons and other UI on
-  // this form itself, which can make it unreadable if the operator picks
-  // a low-contrast color. Those two settings just save and take effect on
-  // reload.
-  if (document.getElementById('branding-colors-reset')) {
-    var BRANDING_DEFAULTS = {
-      header_color: '#3c8dbc',
-      nav_link_color: '#ffffff',
-      link_light_color: '#296282',
-      link_dark_color: '#5fa4cc'
-    };
-
-    // Live preview works by writing the tenant CSS variables inline on
-    // <html>. Inline element style beats the :root and [data-theme]
-    // declarations in overrides.less on specificity, so this works even
-    // for the many rules those declarations lock in with !important.
-    var applyBrandingHeader = function applyBrandingHeader(color) {
-      document.documentElement.style.setProperty('--main-theme-color', color);
-    };
-    var applyBrandingNavLink = function applyBrandingNavLink(color) {
-      document.documentElement.style.setProperty('--btn-theme-text-color', color);
-      document.documentElement.style.setProperty('--nav-hover-text-color', color);
-      document.documentElement.style.setProperty('--nav-primary-text-color', color);
-    };
-    $('#header-color').on('changeColor', function (e) {
-      applyBrandingHeader(e.color.toString('rgba'));
-    });
-    $('#nav-link-color').on('changeColor', function (e) {
-      applyBrandingNavLink(e.color.toString('rgba'));
-    });
-
-    // Reset: restore each picker's swatch and input to the stock
-    // defaults. Using setValue on the plugin (not just .val() on the
-    // input) fires the plugin's internal changeColor event, which
-    // re-runs applyBrandingHeader / applyBrandingNavLink automatically.
-    $('#branding-colors-reset').on('click', function () {
-      $('#header-color').colorpicker('setValue', BRANDING_DEFAULTS.header_color);
-      $('#nav-link-color').colorpicker('setValue', BRANDING_DEFAULTS.nav_link_color);
-      $('#link-light-color').colorpicker('setValue', BRANDING_DEFAULTS.link_light_color);
-      $('#link-dark-color').colorpicker('setValue', BRANDING_DEFAULTS.link_dark_color);
-    });
-  }
-
-  // Reset the localStorage theme override when the user clicks the
-  // "system default" link (any element carrying data-theme-toggle-clear).
-  document.querySelectorAll('[data-theme-toggle-clear]').forEach(function (el) {
-    el.addEventListener('click', function () {
-      localStorage.removeItem('theme');
-    });
-  });
-
-  // Master checkbox → target field disabled state. Callers pair a
-  // <input type="checkbox" data-toggle="disable-when-unchecked"
-  // data-disable-target="#some-field"> with a target rendered
-  // server-side with the matching @disabled state (avoids FOUC).
-  // Handler keeps them in sync on change.
-  $(document).on('change', '[data-toggle="disable-when-unchecked"]', function () {
-    var target = $(this).data('disable-target');
-    if (target) {
-      $(target).prop('disabled', !$(this).is(':checked'));
-    }
-  });
-
-  // Disable empty REQUIRED inputs on submit so browser HTML5 validation
-  // doesn't block the request before Laravel's form-request validator
-  // gets a chance to return a nicer error. Non-required empties (like a
-  // "Do not change" select with an explicit value="" option) are left
-  // enabled so they submit their intentional empty value. Opt in per
-  // form with data-disable-empty-on-submit.
-  $(document).on('submit', 'form[data-disable-empty-on-submit]', function () {
-    $(this).find(':input[required]').filter(function () {
-      return !this.value;
-    }).attr('disabled', 'disabled');
-  });
-
-  // Master checkbox → toggle every non-disabled checkbox in the closest
-  // form or table (or a caller-specified selector via data-check-scope).
-  // Used by bulk-delete confirmation pages to select or deselect the
-  // whole list of rows at once.
-  $(document).on('change', '[data-toggle="check-all"]', function () {
-    var $master = $(this);
-    var scope = $master.data('check-scope');
-    var $container = scope ? $(scope) : $master.closest('form, table');
-    $container.find('input[type="checkbox"]').not($master).not(':disabled').prop('checked', $master.prop('checked'));
-  });
-
-  // Shift-click a row checkbox to apply its new state to every visible,
-  // enabled checkbox between it and the last checkbox clicked in the same
-  // table and checkbox group.
-  var lastListCheckbox = null;
-  var updatingCheckboxRange = false;
-  document.addEventListener('click', function (event) {
-    var $checkbox = $(event.target);
-    if (updatingCheckboxRange || !$checkbox.is('table tbody input[type="checkbox"]') || $checkbox.is('[data-toggle="check-all"]')) {
-      return;
-    }
-    var checkbox = $checkbox[0];
-    var $table = $checkbox.closest('table');
-    var $checkboxes = $table.find('tbody input[type="checkbox"]').not(':disabled').not('[data-toggle="check-all"]').filter(':visible').filter(function () {
-      return !checkbox.name || this.name === checkbox.name;
-    });
-    var start = $checkboxes.index(lastListCheckbox);
-    var end = $checkboxes.index(checkbox);
-    if (event.shiftKey && start !== -1 && end !== -1 && start !== end) {
-      updatingCheckboxRange = true;
-      try {
-        $checkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).each(function () {
-          if (this !== checkbox && this.checked !== checkbox.checked) {
-            var rowIndex = $(this).data('index');
-            if ($table.data('bootstrap.table') && rowIndex !== undefined) {
-              $table.bootstrapTable(checkbox.checked ? 'check' : 'uncheck', rowIndex);
-            } else {
-              $(this).trigger('click');
-            }
-          }
-        });
-      } finally {
-        updatingCheckboxRange = false;
-      }
-    }
-    lastListCheckbox = checkbox;
-  }, true);
-
-  // Custom-report "save template" flow. The three custom reports
-  // (asset / component / consumable) each have a small side-panel
-  // form that captures a template name and posts to the templates
-  // store endpoint carrying the current field selections of the
-  // report configuration form. This handler forwards the template
-  // name + report type into the main report form as hidden inputs,
-  // then submits the main form to templates.store. Report type comes
-  // from the save form's data-report-type attribute so a single JS
-  // path covers all three pages.
-  $(document).on('submit', 'form[data-report-save-template]', function (event) {
-    event.preventDefault();
-    var $saveForm = $(this);
-    var reportType = $saveForm.data('report-type');
-    var targetSelector = $saveForm.data('report-form') || '#custom-report-form';
-    var storeUrl = $saveForm.data('store-url') || $saveForm.attr('action');
-    var $targetForm = $(targetSelector);
-    var nameValue = $saveForm.find('[name="name"]').val();
-    $('<input>').attr({
-      type: 'hidden',
-      name: 'name',
-      value: nameValue
-    }).appendTo($targetForm);
-    $('<input>').attr({
-      type: 'hidden',
-      name: 'type',
-      value: reportType
-    }).appendTo($targetForm);
-    $targetForm.attr('action', storeUrl).submit();
-  });
-
-  // Custom-report saved-template select2: navigate to the route stored
-  // on the selected <option>'s data-route attribute. Shared by all
-  // three custom report pages.
-  $(document).on('select2:select', '#saved_report_select', function (event) {
-    window.location.href = event.params.data.element.dataset.route;
-  });
-
-  // When the "This user can login" (activated) checkbox is off, the
-  // password + confirmation fields are functionally useless because
-  // login is gated by the activated flag. Hide the whole form-group
-  // (or dynamic-form-row in the modal) so the form doesn't show
-  // fields the user can't meaningfully fill in, and also drop the
-  // HTML `required` attribute so the browser doesn't block submission.
-  // The server side already skips the password rule for this case
-  // via SaveUserRequest::rules(), and the controller stores
-  // User::noPassword() raw so no Hash::check can ever match.
-  // Applies to both the main users/edit create form and the
-  // users/modal form since they share the input names.
-  //
-  // Required-state preservation: the server renders password/password_
-  // confirmation with `required` only on create (see users/edit.blade.php
-  // and modals/user.blade.php). We cache that server-rendered state on
-  // the first call so subsequent activated-toggles only ever re-apply
-  // the ORIGINAL server intent — otherwise editing an existing
-  // (activated) user would silently flip password to required on page
-  // load and jQuery Validate would block Save with the password empty.
-  var syncPasswordFields = function syncPasswordFields($checkbox) {
-    var $form = $checkbox.closest('form');
-    var $passwords = $form.find('input[name="password"], input[name="password_confirmation"]');
-    var activated = $checkbox.is(':checked');
-    $passwords.each(function () {
-      if (this.dataset.serverRequired === undefined) {
-        this.dataset.serverRequired = this.required ? '1' : '0';
-      }
-      this.required = activated && this.dataset.serverRequired === '1';
-      var $wrap = $(this).closest('.form-group, .dynamic-form-row');
-      if (activated) {
-        $wrap.show();
-      } else {
-        $wrap.hide();
-      }
-    });
-  };
-
-  // Sensitive fields (username, email, password) ship with a
-  // `readonly` + onfocus-removes-readonly anti-autofill trick to
-  // stop password managers from prefilling or overwriting the
-  // operator's own login credentials on user-create forms. The
-  // side-effect is that HTML5 `required` constraint validation is
-  // SILENTLY skipped for readonly inputs, so hitting submit without
-  // ever focusing a required field lets the empty form through the
-  // browser check entirely.
-  //
-  // On submit-button click we strip `readonly` from any
-  // required+readonly input inside the form. The browser then runs
-  // its normal constraint check (all fields participating) and
-  // shows the "please fill in this field" popup on empties. Autofill
-  // was already prevented at page load, so removing readonly at
-  // click time doesn't reopen that hole.
-  $(document).on('click', 'button[type="submit"], input[type="submit"]', function () {
-    var $form = $(this).closest('form');
-    if (!$form.length) {
-      return;
-    }
-    $form.find('input[required][readonly]').each(function () {
-      this.removeAttribute('readonly');
-    });
-  });
-  $('input[name="activated"][type="checkbox"]').each(function () {
-    syncPasswordFields($(this));
-  });
-  $(document).on('change', 'input[name="activated"][type="checkbox"]', function () {
-    syncPasswordFields($(this));
-  });
-
-  // Generic "typing into input A enables checkbox B" pattern. Server
-  // marks the input with data-toggles-checkbox="{selector-of-target}".
-  // Threshold is 6 chars, which matches the legacy user-create
-  // behaviour of only enabling the send-welcome checkbox once the
-  // email is plausibly valid. Server omits the data-attribute when
-  // the enable-side should never fire (e.g. app.lock_passwords is on)
-  // so the target stays permanently disabled.
-  $(document).on('keyup', 'input[data-toggles-checkbox]', function () {
-    var $target = $($(this).data('toggles-checkbox'));
-    if (!$target.length) {
-      return;
-    }
-    if (this.value.length > 5) {
-      $target.prop('disabled', false);
-      $target.closest('.form-control').removeClass('form-control--disabled');
-    } else {
-      $target.prop('disabled', true).prop('checked', false);
-      $target.closest('.form-control').addClass('form-control--disabled');
-    }
-  });
-
-  // Bootstrap tooltips on any element carrying .tooltip-base.
-  // Attaching to body avoids clipping inside overflow-hidden panels.
-  $('.tooltip-base').tooltip({
-    container: 'body'
-  });
-
-  // Password generator button. Server puts the desired length on the
-  // button as data-password-length (typically pwd_secure_min + 9) so
-  // this JS doesn't have to know about app settings. Falls back to 16
-  // if the attribute is missing.
-  $('a[id="genPassword"], button[id="genPassword"]').each(function () {
-    var $btn = $(this);
-    if (typeof $btn.pGenerator !== 'function' || !$('#password').length) {
-      return;
-    }
-    $btn.pGenerator({
-      bind: 'click',
-      passwordElement: '#password',
-      passwordLength: parseInt($btn.data('password-length') || '16', 10),
-      uppercase: true,
-      lowercase: true,
-      numbers: true,
-      specialChars: true,
-      onPasswordGenerated: function onPasswordGenerated() {
-        $('#password_confirm').val($('#password').val());
-      }
-    });
-  });
-
-  // A <select data-gates-submit> disables the submit button(s) in its
-  // form until a value is chosen. Used by users/confirm-bulk-delete
-  // where the operator must pick a status for the deleted users' assets
-  // before the form can be submitted. Runs once on load to reflect
-  // whatever value was pre-selected (old input after a validation
-  // redirect) and re-syncs on change and on select2's own event.
-  $('select[data-gates-submit]').each(function () {
-    var $select = $(this);
-    var $submits = $select.closest('form').find(':submit');
-    var sync = function sync() {
-      $submits.prop('disabled', !$select.val());
-    };
-    sync();
-    $select.on('change select2:select', sync);
-  });
-
-  // Auto-focus the first select2 search input on pages that ask for it.
-  // Bulk-checkout uses this so the operator lands directly on the
-  // assets-to-checkout picker and can start typing immediately. Results
-  // are hidden until the first keystroke so the operator doesn't see a
-  // full-list flash on open.
-  if ($('[data-autofocus-select2-search]').length) {
-    setTimeout(function () {
-      var $searchField = $('.select2-search__field');
-      var $results = $('.select2-results');
-      $searchField.focus();
-      $results.hide();
-      $searchField.on('input', function () {
-        $results.show();
-      });
-    }, 0);
-  }
-  document.addEventListener('keydown', function (e) {
-    if (e.key !== 'Enter' || !e.target.classList.contains('select2-search__field')) {
-      return;
-    }
-    var $select = $('#assigned_assets_select');
-    var select2 = $select.data('select2');
-    if (!select2) {
-      return;
-    }
-
-    // Select2 already has a result ready.
-    // Let its normal Enter handler handle it.
-    if (select2.results.getHighlightedResults().length) {
-      return;
-    }
-
-    // Scanner's Enter arrived before the AJAX result.
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    var attempts = 0;
-    var waitForResult = setInterval(function () {
-      attempts++;
-      var $highlighted = select2.results.getHighlightedResults();
-      if ($highlighted.length) {
-        clearInterval(waitForResult);
-        console.log('RESULT READY:', $highlighted.data('data'));
-        select2.trigger('results:select');
-        return;
-      }
-
-      // Give up after ~2 seconds.
-      if (attempts >= 20) {
-        clearInterval(waitForResult);
-      }
-    }, 100);
-  }, true);
-
-  // Hardware bulk edit: clear-radio buttons blank every input of a
-  // named radio group so the caller can back out of a picked value.
-  // The .clear-radio button carries a data-target-name matching the
-  // radio group's name attribute.
-  document.querySelectorAll('.clear-radio').forEach(function (button) {
-    button.addEventListener('click', function () {
-      var name = this.dataset.targetName;
-      var radios = document.querySelectorAll('input[type="radio"][name="' + name + '"]');
-      radios.forEach(function (radio) {
-        radio.checked = false;
-      });
-    });
-  });
-
-  // Hardware bulk edit: live status-deployable check. When the user
-  // picks a status, hit the deployable API and update the inline
-  // status indicator so the operator knows whether that status will
-  // pull an asset out of active service. Translated labels ride on
-  // the element's data attributes so this handler doesn't need to be
-  // a Blade-compiled inline script. Guarded on the data-deployable-
-  // label attribute (not just the id) because #selected_status_status
-  // also appears in partials/forms/edit/status.blade.php — used by
-  // hardware/edit — which has its own inline user_add() handler and
-  // doesn't render the labels, so we'd otherwise double-fire and
-  // overwrite that handler's output with an icon-only string.
-  var statusStatusEl = document.getElementById('selected_status_status');
-  if (statusStatusEl && statusStatusEl.dataset.deployableLabel) {
-    var deployableLabel = statusStatusEl.dataset.deployableLabel || '';
-    var notDeployableLabel = statusStatusEl.dataset.notDeployableLabel || '';
-    var runStatusDeployableCheck = function runStatusDeployableCheck() {
-      var statusId = $('select[name="status_id"]').val();
-      if (statusId === '') {
-        return;
-      }
-      $('.status_spinner').css('display', 'inline');
-      $.ajax({
-        url: '/api/v1/statuslabels/' + statusId + '/deployable',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function success(data) {
-          $('.status_spinner').css('display', 'none');
-          $('#selected_status_status').fadeIn();
-          if (data == true) {
-            $('#selected_status_status').removeClass('text-danger').addClass('text-success').html('<i class="fa-solid fa-check" aria-hidden="true"></i> ' + deployableLabel);
-          } else {
-            $('#assignto_selector').hide();
-            $('#selected_status_status').removeClass('text-success').addClass('text-danger').html('<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> ' + notDeployableLabel);
-          }
-        }
-      });
-    };
-    $('select[name="status_id"]').on('change', runStatusDeployableCheck);
-  }
-
-  // Hardware checkin: requestable-toggle wrapper. Show or hide the
-  // "make this asset requestable after checkin" checkbox depending on
-  // whether the currently-selected status is deployable. Preserve the
-  // checkbox state when hiding so a status bounce doesn't blow it
-  // away — the server only applies the value when the status is
-  // deployable anyway.
-  var requestableWrapper = document.getElementById('requestable-wrapper');
-  if (requestableWrapper) {
-    var deployableStatusIds = [];
-    try {
-      deployableStatusIds = JSON.parse(requestableWrapper.dataset.deployableStatusIds || '[]');
-    } catch (e) {
-      // Malformed data — leave the wrapper in its server-rendered state.
-    }
-    var statusSelect = document.getElementById('modal-statuslabel_types') || document.querySelector('select[name="status_id"]');
-    if (statusSelect) {
-      var toggleRequestableWrapper = function toggleRequestableWrapper() {
-        var value = statusSelect.value;
-        var statusId = Number.parseInt(value, 10);
-        var isDeployable = value !== '' && Number.isInteger(statusId) && deployableStatusIds.indexOf(statusId) !== -1;
-        requestableWrapper.style.display = isDeployable ? '' : 'none';
-      };
-      statusSelect.addEventListener('change', toggleRequestableWrapper);
-      if (window.jQuery) {
-        window.jQuery(statusSelect).on('select2:select select2:clear', toggleRequestableWrapper);
-      }
-      toggleRequestableWrapper();
-    }
-  }
-
-  // Hardware checkin: per-user localStorage preference for the
-  // requestable-checkbox default. Namespaced by user id so a shared
-  // browser doesn't leak one user's habit to another. Bypassed when
-  // the checkbox was repopulated from a validation-error redirect —
-  // old() beats the stored preference. On submit, save whatever the
-  // user actually chose so the preference tracks their real habit.
-  var requestableCheckbox = document.getElementById('requestable');
-  if (requestableCheckbox && requestableCheckbox.dataset.userPreferenceKey) {
-    var storageKey = requestableCheckbox.dataset.userPreferenceKey;
-    var hadOldInput = requestableCheckbox.dataset.hadOldInput === '1';
-    var form = requestableCheckbox.closest('form');
-    if (form) {
-      if (!hadOldInput) {
-        var stored = null;
-        try {
-          stored = window.localStorage.getItem(storageKey);
-        } catch (e) {
-          // localStorage may be unavailable (private mode, disabled).
-        }
-        if (stored === '1' || stored === '0') {
-          requestableCheckbox.checked = stored === '1';
-        }
-      }
-      form.addEventListener('submit', function () {
-        try {
-          window.localStorage.setItem(storageKey, requestableCheckbox.checked ? '1' : '0');
-        } catch (e) {
-          // Non-fatal: preference just won't persist this time.
-        }
-      });
-    }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/assets/js/snipeit_modals.js":
-/*!***********************************************!*\
-  !*** ./resources/assets/js/snipeit_modals.js ***!
-  \***********************************************/
-/***/ (() => {
-
-/* 
- * 
- * Snipe-IT Universal Modal support
- * 
- * Enables modal dialogs to create sub-resources throughout Snipe-IT
- * 
- */
-
-/* 
-HOW TO USE
- Create a Button looking like this:
- <a href='{{ route('modal.show', 'user') }}' data-toggle="modal"  data-target="#createModal" data-select='assigned_to' class="btn btn-sm btn-theme">New</a>
- If you don't have access to Blade commands (like {{ and }}, etc), you can hard-code a URL as the 'href'
- data-toggle="modal" - required for Bootstrap Modals
-data-target="#createModal" - fixed ID for the modal, do not change
-data-select="assigned_to" - What is the *ID* of the select-dropdown that you're going to be adding to, if the modal-create was a success? Be on the lookout for duplicate ID's, it will confuse this library!
-class="btn btn-sm btn-theme" - makes it look button-ey, feel free to change :)
-
-If you want to pass additional variables to the modal (In the Category Create one, for example, you can pass category_id), you can encode them as URL variables in the href
-
-*/
-
-$(function () {
-  var baseUrl = $('meta[name="baseUrl"]').attr('content');
-  //handle modal-add-interstitial calls
-  var model, select, refreshSelector;
-  if ($('#createModal').length == 0) {
-    $('body').append('<div class="modal fade" id="createModal"></div><!-- /.modal -->');
-  }
-  $('#createModal').on("show.bs.modal", function (event) {
-    var link = $(event.relatedTarget);
-    model = link.data("dependency");
-    select = link.data("select");
-    refreshSelector = link.data("refresh");
-    $('#createModal').load(link.attr('href'), function () {
-      // Focus the first visible, non-hidden input regardless of
-      // which modal partial was loaded (user, company, category,
-      // etc. all differ on which id the "first" field has). The
-      // legacy `#modal-name` selector worked for some modals and
-      // silently missed for others. A generic first-input selector
-      // covers every partial without per-modal code.
-      $('#createModal').find('input:visible:not([type=hidden])').first().focus();
-
-      // Wire up the password generator button when the loaded
-      // modal is one that includes it (user create). Relocated here
-      // from an inline <script> block in modals/user.blade.php as
-      // part of the Vite migration prep to remove per-partial
-      // inline JS. The setTimeout the inline version used to defer
-      // this is no longer needed because we're inside .load()'s
-      // completion callback, which fires AFTER the DOM is ready.
-      if ($('#modal-genPassword').length && $('#modal-password').length) {
-        $('#modal-genPassword').pGenerator({
-          'bind': 'click',
-          'passwordElement': '#modal-password',
-          'passwordLength': 16,
-          'uppercase': true,
-          'lowercase': true,
-          'numbers': true,
-          'specialChars': true,
-          'onPasswordGenerated': function onPasswordGenerated() {
-            $('#modal-password_confirmation').val($('#modal-password').val());
-          }
-        });
-      }
-
-      //do we need to re-select2 this, after load? Probably.
-      $('#createModal').find('select.select2').select2();
-      // Initialize the ajaxy select2 with images.
-      // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
-
-      // Scoped to #createModal so re-initialization only touches newly-loaded
-      // modal selects, not every js-data-ajax on the host page. Unscoped
-      // .each() clobbers the trigger page's existing select2 state (e.g. the
-      // Location picker whose "New" button opened this modal).
-      $('#createModal .js-data-ajax').each(function (i, item) {
-        var link = $(item);
-        var endpoint = link.data("endpoint");
-        var select = link.data("select");
-        link.select2({
-          // Explicit width because the modal is mid-animation when
-          // this runs, so measuring the parent's computed width
-          // returns 0 and the widget renders zero-pixels wide.
-          width: '100%',
-          ajax: {
-            // the baseUrl includes a trailing slash
-            url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
-            //WARNING - we're hoping that's defined on the page somewhere...
-            dataType: 'json',
-            delay: 250,
-            headers: {
-              "X-Requested-With": 'XMLHttpRequest',
-              "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },
-            data: function data(params) {
-              var data = {
-                search: params.term,
-                page: params.page || 1,
-                statusType: link.data("asset-status-type")
-              };
-              return data;
-            },
-            /*processResults: function (data, params) {
-                 params.page = params.page || 1;
-                 var answer =  {
-                    results: data.items,
-                    pagination: {
-                        more: data.pagination.more
-                    }
-                };
-                 return answer;
-            },*/
-            cache: true
-          },
-          //escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-          templateResult: formatDatalistSafe
-          //templateSelection: formatDataSelection
-        });
-      });
-    });
-  });
-  $('#createModal').on('click', '#modal-save', function () {
-    $.ajax({
-      type: 'POST',
-      url: $('.modal-body form').attr('action'),
-      headers: {
-        "X-Requested-With": 'XMLHttpRequest',
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-      },
-      data: $('.modal-body form').serialize(),
-      success: function success(result) {
-        if (result.status == "error") {
-          var error_message = "";
-          for (var field in result.messages) {
-            error_message += "<li>Problem(s) with field <i><strong>" + field + "</strong></i>: " + result.messages[field];
-          }
-          $('#modal_error_msg').html(error_message).show();
-          return false;
-        }
-        var id = result.payload.id;
-        var name = result.payload.name || result.payload.first_name + " " + result.payload.last_name;
-        if (!id || !name) {
-          console.error("Could not find resulting name or ID from modal-create. Name: " + name + ", id: " + id);
-          return false;
-        }
-        $('#createModal').modal('hide');
-        $('#createModal').html("");
-        var refreshTable = $('#' + refreshSelector);
-        if (refreshTable.length > 0) {
-          refreshTable.bootstrapTable('refresh');
-        }
-
-        // "select" is the original drop-down menu that someone
-        // clicked 'add' on to add a new 'thing'
-        // this code adds the newly created object to that select
-        var selector = document.getElementById(select);
-        if (!selector) {
-          return false;
-        }
-        selector.options[selector.length] = new Option(name, id);
-        selector.selectedIndex = selector.length - 1;
-        $(selector).trigger("change");
-        if (window.fetchCustomFields) {
-          fetchCustomFields();
-        }
-      },
-      error: function error(result) {
-        msg = result.responseJSON.messages || result.responseJSON.error;
-        $('#modal_error_msg').html("Server Error: " + msg).show();
-      }
-    });
-  });
-});
-function formatDatalistSafe(datalist) {
-  // console.warn("What in the hell is going on with Select2?!?!!?!?");
-  // console.warn($.select2);
-  if (datalist.loading) {
-    return $('<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...');
-  }
-  var root_div = $("<div class='clearfix'>");
-  var left_pull = $("<div class='pull-left' style='padding-right: 10px;'>");
-  if (datalist.image) {
-    var inner_div = $("<div style='width: 30px;'>");
-    /******************************************************************
-     * 
-     * We are specifically chosing empty alt-text below, because this 
-     * image conveys no additional information, relative to the text
-     * that will *always* be there in any select2 list that is in use
-     * in Snipe-IT. If that changes, we would probably want to change
-     * some signatures of some functions, but right now, we don't want
-     * screen readers to say "HP SuperJet 5000, .... picture of HP 
-     * SuperJet 5000..." and so on, for every single row in a list of
-     * assets or models or whatever.
-     * 
-     *******************************************************************/
-    var img = $("<img src='' style='max-height: 20px; max-width: 30px;' alt=''>");
-    // console.warn("Img is: ");
-    // console.dir(img);
-    // console.warn("Strigularly, that's: ");
-    // console.log(img);
-    img.attr("src", datalist.image);
-    inner_div.append(img);
-  } else {
-    var inner_div = $("<div style='height: 20px; width: 30px;'></div>");
-  }
-  left_pull.append(inner_div);
-  root_div.append(left_pull);
-  var name_div = $("<div>");
-  name_div.text(datalist.text);
-  root_div.append(name_div);
-  var safe_html = root_div.get(0).outerHTML;
-  var old_html = formatDatalist(datalist);
-  if (safe_html != old_html) {
-    // console.log("HTML MISMATCH: ");
-    // console.log("FormatDatalistSafe: ");
-    // console.dir(root_div.get(0));
-    // console.log(safe_html);
-    // console.log("FormatDataList: ");
-    // console.log(old_html);
-  }
-  return root_div;
-}
-function formatDatalist(datalist) {
-  var loading_markup = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i> Loading...';
-  if (datalist.loading) {
-    return loading_markup;
-  }
-  var markup = "<div class='clearfix'>";
-  markup += "<div class='pull-left' style='padding-right: 10px;'>";
-  if (datalist.image) {
-    markup += "<div style='width: 30px;'><img src='" + datalist.image + "' alt='" + datalist.tex + "' style='max-height: 20px; max-width: 30px;'></div>";
-  } else {
-    markup += "<div style='height: 20px; width: 30px;'></div>";
-  }
-  markup += "</div><div>" + datalist.text + "</div>";
-  markup += "</div>";
-  return markup;
-}
-function formatDataSelection(datalist) {
-  return datalist.text.replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-}
-
-/***/ }),
-
-/***/ "./resources/assets/less/app.less":
-/*!****************************************!*\
-  !*** ./resources/assets/less/app.less ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./resources/assets/less/overrides.less":
-/*!**********************************************!*\
-  !*** ./resources/assets/less/overrides.less ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
@@ -76788,6 +78114,12 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Check if module exists (development only)
+/******/ 		if (__webpack_modules__[moduleId] === undefined) {
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {

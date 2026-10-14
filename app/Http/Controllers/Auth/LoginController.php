@@ -230,6 +230,28 @@ class LoginController extends Controller
     private function loginViaRemoteUser(Request $request)
     {
         $header_name = Setting::getSettings()->login_remote_user_header_name ?: 'REMOTE_USER';
+
+        // Defensive runtime guard against HTTP_-prefixed server variable
+        // names, which PHP populates directly from inbound request headers.
+        // Honoring one would let any unauthenticated caller spoof the
+        // header and get logged in as any active user (pre-auth takeover).
+        // Settings-side validation blocks this at save time now, but a
+        // pre-fix install may already have an HTTP_-prefixed value
+        // persisted, so refuse to use it at runtime regardless. Reported
+        // by Brayden Arnold. See advisory for details.
+        if (preg_match('/^HTTP_/i', $header_name)) {
+            Log::warning(sprintf(
+                'Refusing to honor HTTP_-prefixed login_remote_user_header_name "%s". '.
+                'PHP populates $_SERVER[HTTP_*] from inbound request headers, so this value '.
+                'would allow any client to forge the auth header. Change the setting to '.
+                'REMOTE_USER (default) or to a server variable your upstream sets from a '.
+                'vetted source.',
+                $header_name,
+            ));
+
+            return;
+        }
+
         $remote_user = $request->server($header_name);
         if (! isset($remote_user)) {
             $remote_user = $request->server('REDIRECT_'.$header_name);
@@ -297,7 +319,8 @@ class LoginController extends Controller
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
-            return redirect()->back()->withInput()->withErrors($validator);
+            return redirect()->to(Helper::sameOriginUrl(url()->previous()) ?? route('login'))
+                ->withInput()->withErrors($validator);
         }
 
         // Read the local login-form throttle ceiling and lockout window
@@ -345,7 +368,10 @@ class LoginController extends Controller
 
                 Log::debug('Local authentication failed.');
 
-                return redirect()->back()->withInput()->with('error', trans('auth/message.account_not_found'));
+                // Same open-redirect guard as the validation-failure
+                // path above. See comment there.
+                return redirect()->to(Helper::sameOriginUrl(url()->previous()) ?? route('login'))
+                    ->withInput()->with('error', trans('auth/message.account_not_found'));
             } else {
                 $this->clearLoginAttempts($request);
             }
@@ -452,6 +478,17 @@ class LoginController extends Controller
         }
 
         $user = auth()->user();
+
+        // Short-circuit if the stored secret is missing or too short to
+        // be a valid base32 TOTP seed. We cannot gate on two_factor_enrolled
+        // here because the first-time enrollment confirmation POSTs through this method
+        // too, with enrolled still at 0.
+        if (strlen((string) $user->two_factor_secret) < 16) {
+            \Log::debug('two_factor_secret is too short to be valid, redirecting to enrollment page');
+
+            return redirect()->route('two-factor-enroll');
+        }
+
         $secret = $request->input('two_factor_secret');
 
         if (Google2FA::verifyKey($user->two_factor_secret, $secret)) {
@@ -488,7 +525,14 @@ class LoginController extends Controller
 
         if ($saml->isEnabled()) {
             $auth = $saml->getAuth();
-            $sloRedirectUrl = $request->session()->get('saml_slo_redirect_url');
+            // Defense-in-depth: SamlController::sls sanitizes the SLO
+            // RelayState through sameOriginUrl at write time, but any
+            // future writer that skips that gate (or any parser-
+            // differential bypass of sameOriginUrl at write time) would
+            // leave the away() emission below unprotected. Re-check at
+            // read time so the Location header never carries an off-
+            // origin URL that reached session('saml_slo_redirect_url').
+            $sloRedirectUrl = Helper::sameOriginUrl($request->session()->get('saml_slo_redirect_url'));
 
             if (! empty($auth->getSLOurl()) && $settings->saml_slo == '1' && $saml->isAuthenticated() && empty($sloRedirectUrl)) {
                 $sloRequestUrl = $auth->logout(null, [], $saml->getNameId(), $saml->getSessionIndex(), true, $saml->getNameIdFormat(), $saml->getNameIdNameQualifier(), $saml->getNameIdSPNameQualifier());

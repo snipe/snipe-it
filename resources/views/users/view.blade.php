@@ -115,9 +115,9 @@
 
                                 <x-data-row :label="trans('general.username')" copy_what="username">
                                     @if ($user->isSuperUser())
-                                        <span class="label label-danger" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}"><x-icon type="superadmin" style="padding-right: 5px;"/>{{ $user->username }}</span>
+                                        <span class="label label-danger label-normal" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}"><x-icon type="superadmin" style="padding-right: 5px;"/>{{ $user->username }}</span>
                                     @elseif ($user->hasAccess('admin'))
-                                        <span class="label label-warning" data-tooltip="true" title="{{ trans('general.admin_tooltip') }}"><x-icon type="superadmin" style="padding-right: 5px;"/>{{ $user->username }}</span>
+                                        <span class="label label-warning label-normal" data-tooltip="true" title="{{ trans('general.admin_tooltip') }}"><x-icon type="superadmin" style="padding-right: 5px;"/>{{ $user->username }}</span>
                                     @else
                                         {{ $user->username }}
                                     @endif
@@ -134,11 +134,7 @@
                                 <x-data-row :label="trans('general.groups')" copy_what="groups">
                                     @if ($user->groups->count() > 0)
                                         @foreach ($user->groups as $group)
-                                            @can('superadmin')
-                                                <a href="{{ route('groups.show', $group->id) }}" class="label label-default">{{ $group->name }}</a>
-                                            @else
-                                                <span class="label label-default">{{ $group->name }}</span>
-                                            @endcan
+                                            {!! $group->present()->formattedNameLink() !!}
                                         @endforeach
                                     @endif
 
@@ -149,11 +145,11 @@
 
                                 <x-data-row :label="trans('general.permissions')">
                                     @if ($user->isSuperUser())
-                                        <span class="label label-danger" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}">
+                                        <span class="label label-danger label-normal" data-tooltip="true" title="{{ trans('general.superuser_tooltip') }}">
                                             <x-icon type="superadmin" style="padding-right: 5px;"/>{{ trans('general.superuser') }}
                                         </span>
                                     @elseif ($user->hasAccess('admin'))
-                                        <span class="label label-warning" data-tooltip="true" title="{{ trans('general.admin_tooltip') }}">
+                                        <span class="label label-warning label-normal" data-tooltip="true" title="{{ trans('general.admin_tooltip') }}">
                                             <x-icon type="superadmin" style="padding-right: 5px;"/>{{ trans('general.admin_user') }}
                                         </span>
                                     @elseif (!empty($effectivePermissionsBySection))

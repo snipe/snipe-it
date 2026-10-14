@@ -2,11 +2,126 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/@fullcalendar/core/index.js":
+/***/ "./node_modules/preact/compat/dist/compat.module.js"
+/*!**********************************************************!*\
+  !*** ./node_modules/preact/compat/dist/compat.module.js ***!
+  \**********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Children: () => (/* binding */ O),
+/* harmony export */   Component: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.Component),
+/* harmony export */   Fragment: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.Fragment),
+/* harmony export */   PureComponent: () => (/* binding */ w),
+/* harmony export */   StrictMode: () => (/* binding */ vn),
+/* harmony export */   Suspense: () => (/* binding */ D),
+/* harmony export */   SuspenseList: () => (/* binding */ V),
+/* harmony export */   __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: () => (/* binding */ rn),
+/* harmony export */   cloneElement: () => (/* binding */ cn),
+/* harmony export */   createContext: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.createContext),
+/* harmony export */   createElement: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.createElement),
+/* harmony export */   createFactory: () => (/* binding */ on),
+/* harmony export */   createPortal: () => (/* binding */ j),
+/* harmony export */   createRef: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.createRef),
+/* harmony export */   "default": () => (/* binding */ bn),
+/* harmony export */   findDOMNode: () => (/* binding */ an),
+/* harmony export */   flushSync: () => (/* binding */ hn),
+/* harmony export */   forwardRef: () => (/* binding */ k),
+/* harmony export */   hydrate: () => (/* binding */ q),
+/* harmony export */   isValidElement: () => (/* binding */ ln),
+/* harmony export */   lazy: () => (/* binding */ M),
+/* harmony export */   memo: () => (/* binding */ R),
+/* harmony export */   render: () => (/* binding */ Y),
+/* harmony export */   startTransition: () => (/* binding */ dn),
+/* harmony export */   unmountComponentAtNode: () => (/* binding */ fn),
+/* harmony export */   unstable_batchedUpdates: () => (/* binding */ sn),
+/* harmony export */   useCallback: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useCallback),
+/* harmony export */   useContext: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useContext),
+/* harmony export */   useDebugValue: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useDebugValue),
+/* harmony export */   useDeferredValue: () => (/* binding */ pn),
+/* harmony export */   useEffect: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useEffect),
+/* harmony export */   useErrorBoundary: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useErrorBoundary),
+/* harmony export */   useId: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useId),
+/* harmony export */   useImperativeHandle: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle),
+/* harmony export */   useInsertionEffect: () => (/* binding */ yn),
+/* harmony export */   useLayoutEffect: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect),
+/* harmony export */   useMemo: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useMemo),
+/* harmony export */   useReducer: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useReducer),
+/* harmony export */   useRef: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useRef),
+/* harmony export */   useState: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useState),
+/* harmony export */   useSyncExternalStore: () => (/* binding */ _n),
+/* harmony export */   useTransition: () => (/* binding */ mn),
+/* harmony export */   version: () => (/* binding */ un)
+/* harmony export */ });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact/hooks */ "./node_modules/preact/hooks/dist/hooks.module.js");
+function g(n,t){for(var e in t)n[e]=t[e];return n}function C(n,t){for(var e in n)if("__source"!==e&&!(e in t))return!0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return!0;return!1}function E(n,t){return n===t&&(0!==n||1/n==1/t)||n!=n&&t!=t}function w(n){this.props=n}function R(n,e){function r(n){var t=this.props.ref,r=t==n.ref;return!r&&t&&(t.call?t(null):t.current=null),e?!e(this.props,n)||!r:C(this.props,n)}function u(e){return this.shouldComponentUpdate=r,(0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(n,e)}return u.displayName="Memo("+(n.displayName||n.name)+")",u.prototype.isReactComponent=!0,u.__f=!0,u}(w.prototype=new preact__WEBPACK_IMPORTED_MODULE_0__.Component).isPureReactComponent=!0,w.prototype.shouldComponentUpdate=function(n,t){return C(this.props,n)||C(this.state,t)};var x=preact__WEBPACK_IMPORTED_MODULE_0__.options.__b;preact__WEBPACK_IMPORTED_MODULE_0__.options.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),x&&x(n)};var N="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function k(n){function t(t){var e=g({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=N,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var A=function(n,t){return null==n?null:(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)((0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n).map(t))},O={map:A,forEach:A,count:function(n){return n?(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n).length:0},only:function(n){var t=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n);if(1!==t.length)throw"Children.only";return t[0]},toArray:preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray},T=preact__WEBPACK_IMPORTED_MODULE_0__.options.__e;preact__WEBPACK_IMPORTED_MODULE_0__.options.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);T(n,t,e,r)};var I=preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount;function L(n,t,e){return n&&(n.__c&&n.__c.__H&&(n.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c()}),n.__c.__H=null),null!=(n=g({},n)).__c&&(n.__c.__P===e&&(n.__c.__P=t),n.__c=null),n.__k=n.__k&&n.__k.map(function(n){return L(n,t,e)})),n}function U(n,t,e){return n&&(n.__v=null,n.__k=n.__k&&n.__k.map(function(n){return U(n,t,e)}),n.__c&&n.__c.__P===t&&(n.__e&&e.insertBefore(n.__e,n.__d),n.__c.__e=!0,n.__c.__P=e)),n}function D(){this.__u=0,this.t=null,this.__b=null}function F(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function M(n){var e,r,u;function o(o){if(e||(e=n()).then(function(n){r=n.default||n},function(n){u=n}),u)throw u;if(!r)throw e;return (0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(r,o)}return o.displayName="Lazy",o.__f=!0,o}function V(){this.u=null,this.o=null}preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),I&&I(n)},(D.prototype=new preact__WEBPACK_IMPORTED_MODULE_0__.Component).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=F(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l())};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=U(n,n.__c.__P,n.__c.__O)}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate()}},c=!0===t.__h;r.__u++||c||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i)},D.prototype.componentWillUnmount=function(){this.t=[]},D.prototype.render=function(n,e){if(this.__b){if(this.__v.__k){var r=document.createElement("div"),o=this.__v.__k[0].__c;this.__v.__k[0]=L(this.__b,r,o.__O=o.__P)}this.__b=null}var i=e.__a&&(0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(preact__WEBPACK_IMPORTED_MODULE_0__.Fragment,null,n.fallback);return i&&(i.__h=null),[(0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(preact__WEBPACK_IMPORTED_MODULE_0__.Fragment,null,e.__a?null:n.children),i]};var W=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2]}};function P(n){return this.getChildContext=function(){return n.context},n.children}function $(n){var e=this,r=n.i;e.componentWillUnmount=function(){(0,preact__WEBPACK_IMPORTED_MODULE_0__.render)(null,e.l),e.l=null,e.i=null},e.i&&e.i!==r&&e.componentWillUnmount(),n.__v?(e.l||(e.i=r,e.l={nodeType:1,parentNode:r,childNodes:[],appendChild:function(n){this.childNodes.push(n),e.i.appendChild(n)},insertBefore:function(n,t){this.childNodes.push(n),e.i.appendChild(n)},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),e.i.removeChild(n)}}),(0,preact__WEBPACK_IMPORTED_MODULE_0__.render)((0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(P,{context:e.context},n.__v),e.l)):e.l&&e.componentWillUnmount()}function j(n,e){var r=(0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)($,{__v:n,i:e});return r.containerInfo=e,r}(V.prototype=new preact__WEBPACK_IMPORTED_MODULE_0__.Component).__a=function(n){var t=this,e=F(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),W(t,n,r)):u()};e?e(o):o()}},V.prototype.render=function(n){this.u=null,this.o=new Map;var t=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},V.prototype.componentDidUpdate=V.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){W(n,e,t)})};var z="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,B=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,H="undefined"!=typeof document,Z=function(n){return("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/i:/fil|che|ra/i).test(n)};function Y(n,t,e){return null==t.__k&&(t.textContent=""),(0,preact__WEBPACK_IMPORTED_MODULE_0__.render)(n,t),"function"==typeof e&&e(),n?n.__c:null}function q(n,t,e){return (0,preact__WEBPACK_IMPORTED_MODULE_0__.hydrate)(n,t),"function"==typeof e&&e(),n?n.__c:null}preact__WEBPACK_IMPORTED_MODULE_0__.Component.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(t){Object.defineProperty(preact__WEBPACK_IMPORTED_MODULE_0__.Component.prototype,t,{configurable:!0,get:function(){return this["UNSAFE_"+t]},set:function(n){Object.defineProperty(this,t,{configurable:!0,writable:!0,value:n})}})});var G=preact__WEBPACK_IMPORTED_MODULE_0__.options.event;function J(){}function K(){return this.cancelBubble}function Q(){return this.defaultPrevented}preact__WEBPACK_IMPORTED_MODULE_0__.options.event=function(n){return G&&(n=G(n)),n.persist=J,n.isPropagationStopped=K,n.isDefaultPrevented=Q,n.nativeEvent=n};var X,nn={configurable:!0,get:function(){return this.class}},tn=preact__WEBPACK_IMPORTED_MODULE_0__.options.vnode;preact__WEBPACK_IMPORTED_MODULE_0__.options.vnode=function(n){var t=n.type,e=n.props,u=e;if("string"==typeof t){var o=-1===t.indexOf("-");for(var i in u={},e){var l=e[i];H&&"children"===i&&"noscript"===t||"value"===i&&"defaultValue"in e&&null==l||("defaultValue"===i&&"value"in e&&null==e.value?i="value":"download"===i&&!0===l?l="":/ondoubleclick/i.test(i)?i="ondblclick":/^onchange(textarea|input)/i.test(i+t)&&!Z(e.type)?i="oninput":/^onfocus$/i.test(i)?i="onfocusin":/^onblur$/i.test(i)?i="onfocusout":/^on(Ani|Tra|Tou|BeforeInp|Compo)/.test(i)?i=i.toLowerCase():o&&B.test(i)?i=i.replace(/[A-Z0-9]/g,"-$&").toLowerCase():null===l&&(l=void 0),/^oninput$/i.test(i)&&(i=i.toLowerCase(),u[i]&&(i="oninputCapture")),u[i]=l)}"select"==t&&u.multiple&&Array.isArray(u.value)&&(u.value=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(e.children).forEach(function(n){n.props.selected=-1!=u.value.indexOf(n.props.value)})),"select"==t&&null!=u.defaultValue&&(u.value=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(e.children).forEach(function(n){n.props.selected=u.multiple?-1!=u.defaultValue.indexOf(n.props.value):u.defaultValue==n.props.value})),n.props=u,e.class!=e.className&&(nn.enumerable="className"in e,null!=e.className&&(u.class=e.className),Object.defineProperty(u,"className",nn))}n.$$typeof=z,tn&&tn(n)};var en=preact__WEBPACK_IMPORTED_MODULE_0__.options.__r;preact__WEBPACK_IMPORTED_MODULE_0__.options.__r=function(n){en&&en(n),X=n.__c};var rn={ReactCurrentDispatcher:{current:{readContext:function(n){return X.__n[n.__c].props.value}}}},un="17.0.2";function on(n){return preact__WEBPACK_IMPORTED_MODULE_0__.createElement.bind(null,n)}function ln(n){return!!n&&n.$$typeof===z}function cn(n){return ln(n)?preact__WEBPACK_IMPORTED_MODULE_0__.cloneElement.apply(null,arguments):n}function fn(n){return!!n.__k&&((0,preact__WEBPACK_IMPORTED_MODULE_0__.render)(null,n),!0)}function an(n){return n&&(n.base||1===n.nodeType&&n)||null}var sn=function(n,t){return n(t)},hn=function(n,t){return n(t)},vn=preact__WEBPACK_IMPORTED_MODULE_0__.Fragment;function dn(n){n()}function pn(n){return n}function mn(){return[!1,dn]}var yn=preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect;function _n(n,t){var e=t(),r=(0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useState)({h:{__:e,v:t}}),u=r[0].h,o=r[1];return (0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function(){u.__=e,u.v=t,E(u.__,t())||o({h:u})},[n,e,t]),(0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function(){return E(u.__,u.v())||o({h:u}),n(function(){E(u.__,u.v())||o({h:u})})},[n]),e}var bn={useState:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useState,useId:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useId,useReducer:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useReducer,useEffect:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useEffect,useLayoutEffect:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect,useInsertionEffect:yn,useTransition:mn,useDeferredValue:pn,useSyncExternalStore:_n,startTransition:dn,useRef:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useRef,useImperativeHandle:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle,useMemo:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useMemo,useCallback:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useCallback,useContext:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useContext,useDebugValue:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useDebugValue,version:"17.0.2",Children:O,render:Y,hydrate:q,unmountComponentAtNode:fn,createPortal:j,createElement:preact__WEBPACK_IMPORTED_MODULE_0__.createElement,createContext:preact__WEBPACK_IMPORTED_MODULE_0__.createContext,createFactory:on,cloneElement:cn,createRef:preact__WEBPACK_IMPORTED_MODULE_0__.createRef,Fragment:preact__WEBPACK_IMPORTED_MODULE_0__.Fragment,isValidElement:ln,findDOMNode:an,Component:preact__WEBPACK_IMPORTED_MODULE_0__.Component,PureComponent:w,memo:R,forwardRef:k,flushSync:hn,unstable_batchedUpdates:sn,StrictMode:vn,Suspense:D,SuspenseList:V,lazy:M,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:rn};
+//# sourceMappingURL=compat.module.js.map
+
+
+/***/ },
+
+/***/ "./node_modules/preact/dist/preact.module.js"
+/*!***************************************************!*\
+  !*** ./node_modules/preact/dist/preact.module.js ***!
+  \***************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Component: () => (/* binding */ x),
+/* harmony export */   Fragment: () => (/* binding */ _),
+/* harmony export */   cloneElement: () => (/* binding */ F),
+/* harmony export */   createContext: () => (/* binding */ G),
+/* harmony export */   createElement: () => (/* binding */ y),
+/* harmony export */   createRef: () => (/* binding */ d),
+/* harmony export */   h: () => (/* binding */ y),
+/* harmony export */   hydrate: () => (/* binding */ E),
+/* harmony export */   isValidElement: () => (/* binding */ i),
+/* harmony export */   options: () => (/* binding */ l),
+/* harmony export */   render: () => (/* binding */ D),
+/* harmony export */   toChildArray: () => (/* binding */ j)
+/* harmony export */ });
+var n,l,u,i,t,r,o,f,e,c={},s=[],a=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function h(n,l){for(var u in l)n[u]=l[u];return n}function v(n){var l=n.parentNode;l&&l.removeChild(n)}function y(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return p(l,f,t,r,null)}function p(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u:o};return null==o&&null!=l.vnode&&l.vnode(f),f}function d(){return{current:null}}function _(n){return n.children}function k(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||g(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||g(n,r,l[r],u[r],i)}function b(n,l,u){"-"===l[0]?n.setProperty(l,null==u?"":u):n[l]=null==u?"":"number"!=typeof u||a.test(l)?u:u+"px"}function g(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else{if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||b(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||b(n.style,l,u[l])}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?w:m,r):n.removeEventListener(l,r?w:m,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!==l&&"height"!==l&&"href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null==u||!1===u&&-1==l.indexOf("-")?n.removeAttribute(l):n.setAttribute(l,u))}}function m(n){t=!0;try{return this.l[n.type+!1](l.event?l.event(n):n)}finally{t=!1}}function w(n){t=!0;try{return this.l[n.type+!0](l.event?l.event(n):n)}finally{t=!1}}function x(n,l){this.props=n,this.context=l}function A(n,l){if(null==l)return n.__?A(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return"function"==typeof n.type?A(n):null}function P(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return P(n)}}function C(n){t?setTimeout(n):f(n)}function T(n){(!n.__d&&(n.__d=!0)&&r.push(n)&&!$.__r++||o!==l.debounceRendering)&&((o=l.debounceRendering)||C)($)}function $(){var n,l,u,i,t,o,f,e;for(r.sort(function(n,l){return n.__v.__b-l.__v.__b});n=r.shift();)n.__d&&(l=r.length,i=void 0,t=void 0,f=(o=(u=n).__v).__e,(e=u.__P)&&(i=[],(t=h({},o)).__v=o.__v+1,M(e,o,t,u.__n,void 0!==e.ownerSVGElement,null!=o.__h?[f]:null,i,null==f?A(o):f,o.__h),N(i,o),o.__e!=f&&P(o)),r.length>l&&r.sort(function(n,l){return n.__v.__b-l.__v.__b}));$.__r=0}function H(n,l,u,i,t,r,o,f,e,a){var h,v,y,d,k,b,g,m=i&&i.__k||s,w=m.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(d=u.__k[h]=null==(d=l[h])||"boolean"==typeof d?null:"string"==typeof d||"number"==typeof d||"bigint"==typeof d?p(null,d,null,null,d):Array.isArray(d)?p(_,{children:d},null,null,null):d.__b>0?p(d.type,d.props,d.key,d.ref?d.ref:null,d.__v):d)){if(d.__=u,d.__b=u.__b+1,null===(y=m[h])||y&&d.key==y.key&&d.type===y.type)m[h]=void 0;else for(v=0;v<w;v++){if((y=m[v])&&d.key==y.key&&d.type===y.type){m[v]=void 0;break}y=null}M(n,d,y=y||c,t,r,o,f,e,a),k=d.__e,(v=d.ref)&&y.ref!=v&&(g||(g=[]),y.ref&&g.push(y.ref,null,d),g.push(v,d.__c||k,d)),null!=k?(null==b&&(b=k),"function"==typeof d.type&&d.__k===y.__k?d.__d=e=I(d,e,n):e=z(n,d,y,m,k,e),"function"==typeof u.type&&(u.__d=e)):e&&y.__e==e&&e.parentNode!=n&&(e=A(y))}for(u.__e=b,h=w;h--;)null!=m[h]&&("function"==typeof u.type&&null!=m[h].__e&&m[h].__e==u.__d&&(u.__d=L(i).nextSibling),q(m[h],m[h]));if(g)for(h=0;h<g.length;h++)S(g[h],g[++h],g[++h])}function I(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?I(i,l,u):z(u,i,i,t,i.__e,l));return l}function j(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){j(n,l)}):l.push(n)),l}function z(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else{for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r}return void 0!==o?o:t.nextSibling}function L(n){var l,u,i;if(null==n.type||"string"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=L(u)))return i;return null}function M(n,u,i,t,r,o,f,e,c){var s,a,v,y,p,d,k,b,g,m,w,A,P,C,T,$=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l.__b)&&s(u);try{n:if("function"==typeof $){if(b=u.props,g=(s=$.contextType)&&t[s.__c],m=s?g?g.props.value:s.__:t,i.__c?k=(a=u.__c=i.__c).__=a.__E:("prototype"in $&&$.prototype.render?u.__c=a=new $(b,m):(u.__c=a=new x(b,m),a.constructor=$,a.render=B),g&&g.sub(a),a.props=b,a.state||(a.state={}),a.context=m,a.__n=t,v=a.__d=!0,a.__h=[],a._sb=[]),null==a.__s&&(a.__s=a.state),null!=$.getDerivedStateFromProps&&(a.__s==a.state&&(a.__s=h({},a.__s)),h(a.__s,$.getDerivedStateFromProps(b,a.__s))),y=a.props,p=a.state,a.__v=u,v)null==$.getDerivedStateFromProps&&null!=a.componentWillMount&&a.componentWillMount(),null!=a.componentDidMount&&a.__h.push(a.componentDidMount);else{if(null==$.getDerivedStateFromProps&&b!==y&&null!=a.componentWillReceiveProps&&a.componentWillReceiveProps(b,m),!a.__e&&null!=a.shouldComponentUpdate&&!1===a.shouldComponentUpdate(b,a.__s,m)||u.__v===i.__v){for(u.__v!==i.__v&&(a.props=b,a.state=a.__s,a.__d=!1),u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u)}),w=0;w<a._sb.length;w++)a.__h.push(a._sb[w]);a._sb=[],a.__h.length&&f.push(a);break n}null!=a.componentWillUpdate&&a.componentWillUpdate(b,a.__s,m),null!=a.componentDidUpdate&&a.__h.push(function(){a.componentDidUpdate(y,p,d)})}if(a.context=m,a.props=b,a.__P=n,A=l.__r,P=0,"prototype"in $&&$.prototype.render){for(a.state=a.__s,a.__d=!1,A&&A(u),s=a.render(a.props,a.state,a.context),C=0;C<a._sb.length;C++)a.__h.push(a._sb[C]);a._sb=[]}else do{a.__d=!1,A&&A(u),s=a.render(a.props,a.state,a.context),a.state=a.__s}while(a.__d&&++P<25);a.state=a.__s,null!=a.getChildContext&&(t=h(h({},t),a.getChildContext())),v||null==a.getSnapshotBeforeUpdate||(d=a.getSnapshotBeforeUpdate(y,p)),T=null!=s&&s.type===_&&null==s.key?s.props.children:s,H(n,Array.isArray(T)?T:[T],u,i,t,r,o,f,e,c),a.base=u.__e,u.__h=null,a.__h.length&&f.push(a),k&&(a.__E=a.__=null),a.__e=!1}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=O(i.__e,u,i,t,r,o,f,c);(s=l.diffed)&&s(u)}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l.__e(n,u,i)}}function N(n,u){l.__c&&l.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u)})}catch(n){l.__e(n,u.__v)}})}function O(l,u,i,t,r,o,f,e){var s,a,h,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,e=!1}if(null===d)y===p||e&&l.data===p||(l.data=p);else{if(o=o&&n.call(l.childNodes),a=(y=i.props||c).dangerouslySetInnerHTML,h=p.dangerouslySetInnerHTML,!e){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(h||a)&&(h&&(a&&h.__html==a.__html||h.__html===l.innerHTML)||(l.innerHTML=h&&h.__html||""))}if(k(l,p,y,r,e),h)u.__k=[];else if(_=u.props.children,H(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&A(i,0),e),null!=o)for(_=o.length;_--;)null!=o[_]&&v(o[_]);e||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&g(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&g(l,"checked",_,y.checked,!1))}return l}function S(n,u,i){try{"function"==typeof n?n(u):n.current=u}catch(n){l.__e(n,i)}}function q(n,u,i){var t,r;if(l.unmount&&l.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||S(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount()}catch(n){l.__e(n,u)}t.base=t.__P=null,n.__c=void 0}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&q(t[r],u,i||"function"!=typeof n.type);i||null==n.__e||v(n.__e),n.__=n.__e=n.__d=void 0}function B(n,l,u){return this.constructor(n,u)}function D(u,i,t){var r,o,f;l.__&&l.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],M(i,u=(!r&&t||i).__k=y(_,null,[u]),o||c,c,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),N(f,u)}function E(n,l){D(n,l,E)}function F(l,u,i){var t,r,o,f=h({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):i),p(l.type,f,t||l.key,r||l.ref,null)}function G(n,l){var u={__c:l="__cC"+e++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,T(n)})},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n)}}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n=s.slice,l={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l}throw n}},u=0,i=function(n){return null!=n&&void 0===n.constructor},t=!1,x.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=h({},this.state),"function"==typeof n&&(n=n(h({},u),this.props)),n&&h(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),T(this))},x.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),T(this))},x.prototype.render=_,r=[],f="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,$.__r=0,e=0;
+//# sourceMappingURL=preact.module.js.map
+
+
+/***/ },
+
+/***/ "./node_modules/preact/hooks/dist/hooks.module.js"
+/*!********************************************************!*\
+  !*** ./node_modules/preact/hooks/dist/hooks.module.js ***!
+  \********************************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   useCallback: () => (/* binding */ T),
+/* harmony export */   useContext: () => (/* binding */ q),
+/* harmony export */   useDebugValue: () => (/* binding */ x),
+/* harmony export */   useEffect: () => (/* binding */ h),
+/* harmony export */   useErrorBoundary: () => (/* binding */ P),
+/* harmony export */   useId: () => (/* binding */ V),
+/* harmony export */   useImperativeHandle: () => (/* binding */ A),
+/* harmony export */   useLayoutEffect: () => (/* binding */ s),
+/* harmony export */   useMemo: () => (/* binding */ F),
+/* harmony export */   useReducer: () => (/* binding */ y),
+/* harmony export */   useRef: () => (/* binding */ _),
+/* harmony export */   useState: () => (/* binding */ p)
+/* harmony export */ });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+var t,r,u,i,o=0,f=[],c=[],e=preact__WEBPACK_IMPORTED_MODULE_0__.options.__b,a=preact__WEBPACK_IMPORTED_MODULE_0__.options.__r,v=preact__WEBPACK_IMPORTED_MODULE_0__.options.diffed,l=preact__WEBPACK_IMPORTED_MODULE_0__.options.__c,m=preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount;function d(t,u){preact__WEBPACK_IMPORTED_MODULE_0__.options.__h&&preact__WEBPACK_IMPORTED_MODULE_0__.options.__h(r,t,o||u),o=0;var i=r.__H||(r.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c}),i.__[t]}function p(n){return o=1,y(B,n)}function y(n,u,i){var o=d(t++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}))}],o.__c=r,!r.u)){r.u=!0;var f=r.shouldComponentUpdate;r.shouldComponentUpdate=function(n,t,r){if(!o.__c.__H)return!0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return!n.__N}))return!f||f.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0)}}),!(!i&&o.__c.props===n)&&(!f||f.call(this,n,t,r))}}return o.__N||o.__}function h(u,i){var o=d(t++,3);!preact__WEBPACK_IMPORTED_MODULE_0__.options.__s&&z(o.__H,i)&&(o.__=u,o.i=i,r.__H.__h.push(o))}function s(u,i){var o=d(t++,4);!preact__WEBPACK_IMPORTED_MODULE_0__.options.__s&&z(o.__H,i)&&(o.__=u,o.i=i,r.__h.push(o))}function _(n){return o=5,F(function(){return{current:n}},[])}function A(n,t,r){o=6,s(function(){return"function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n))}function F(n,r){var u=d(t++,7);return z(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T(n,t){return o=8,F(function(){return n},t)}function q(n){var u=r.context[n.__c],i=d(t++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r)),u.props.value):n.__}function x(t,r){preact__WEBPACK_IMPORTED_MODULE_0__.options.useDebugValue&&preact__WEBPACK_IMPORTED_MODULE_0__.options.useDebugValue(r?r(t):t)}function P(n){var u=d(t++,10),i=p();return u.__=n,r.componentDidCatch||(r.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n)}),[i[0],function(){i[1](void 0)}]}function V(){var n=d(t++,11);if(!n.__){for(var u=r.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__="P"+i[0]+"-"+i[1]++}return n.__}function b(){for(var t;t=f.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k),t.__H.__h.forEach(w),t.__H.__h=[]}catch(r){t.__H.__h=[],preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(r,t.__v)}}preact__WEBPACK_IMPORTED_MODULE_0__.options.__b=function(n){r=null,e&&e(n)},preact__WEBPACK_IMPORTED_MODULE_0__.options.__r=function(n){a&&a(n),t=0;var i=(r=n.__c).__H;i&&(u===r?(i.__h=[],r.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c,n.__N=n.i=void 0})):(i.__h.forEach(k),i.__h.forEach(w),i.__h=[])),u=r},preact__WEBPACK_IMPORTED_MODULE_0__.options.diffed=function(t){v&&v(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f.push(o)&&i===preact__WEBPACK_IMPORTED_MODULE_0__.options.requestAnimationFrame||((i=preact__WEBPACK_IMPORTED_MODULE_0__.options.requestAnimationFrame)||j)(b)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c&&(n.__=n.__V),n.i=void 0,n.__V=c})),u=r=null},preact__WEBPACK_IMPORTED_MODULE_0__.options.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k),t.__h=t.__h.filter(function(n){return!n.__||w(n)})}catch(u){r.some(function(n){n.__h&&(n.__h=[])}),r=[],preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(u,t.__v)}}),l&&l(t,r)},preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount=function(t){m&&m(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k(n)}catch(n){r=n}}),u.__H=void 0,r&&preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(r,u.__v))};var g="function"==typeof requestAnimationFrame;function j(n){var t,r=function(){clearTimeout(u),g&&cancelAnimationFrame(t),setTimeout(n)},u=setTimeout(r,100);g&&(t=requestAnimationFrame(r))}function k(n){var t=r,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r=t}function w(n){var t=r;n.__c=n.__(),r=t}function z(n,t){return!n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B(n,t){return"function"==typeof t?t(n):t}
+//# sourceMappingURL=hooks.module.js.map
+
+
+/***/ },
+
+/***/ "./node_modules/@fullcalendar/core/index.js"
 /*!**************************************************!*\
   !*** ./node_modules/@fullcalendar/core/index.js ***!
   \**************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -2247,13 +2362,13 @@ const version = '6.1.21';
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/@fullcalendar/core/internal-common.js":
+/***/ "./node_modules/@fullcalendar/core/internal-common.js"
 /*!************************************************************!*\
   !*** ./node_modules/@fullcalendar/core/internal-common.js ***!
   \************************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -10010,13 +10125,13 @@ class CustomRenderingStore extends Store {
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/@fullcalendar/daygrid/index.js":
+/***/ "./node_modules/@fullcalendar/daygrid/index.js"
 /*!*****************************************************!*\
   !*** ./node_modules/@fullcalendar/daygrid/index.js ***!
   \*****************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -10060,13 +10175,13 @@ var index = (0,_fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_0__.createPl
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/@fullcalendar/daygrid/internal.js":
+/***/ "./node_modules/@fullcalendar/daygrid/internal.js"
 /*!********************************************************!*\
   !*** ./node_modules/@fullcalendar/daygrid/internal.js ***!
   \********************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -11072,13 +11187,13 @@ var css_248z = ":root{--fc-daygrid-event-dot-width:8px}.fc-daygrid-day-events:af
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/@fullcalendar/interaction/index.js":
+/***/ "./node_modules/@fullcalendar/interaction/index.js"
 /*!*********************************************************!*\
   !*** ./node_modules/@fullcalendar/interaction/index.js ***!
   \*********************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -11086,12 +11201,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   ThirdPartyDraggable: () => (/* binding */ ThirdPartyDraggable),
 /* harmony export */   "default": () => (/* binding */ index)
 /* harmony export */ });
-/* harmony import */ var _fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/core/index.js */ "./node_modules/@fullcalendar/core/index.js");
-/* harmony import */ var _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/core/internal.js */ "./node_modules/@fullcalendar/core/internal-common.js");
+/* harmony import */ var _fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/core/index.js */ "./node_modules/@fullcalendar/core/index.js");
+/* harmony import */ var _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/core/internal.js */ "./node_modules/@fullcalendar/core/internal-common.js");
 
 
 
-_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bG.touchMouseIgnoreWait = 500;
+_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bG.touchMouseIgnoreWait = 500;
 let ignoreMouseDepth = 0;
 let listenerCnt = 0;
 let isWindowTouchMoveCancelled = false;
@@ -11205,7 +11320,7 @@ class PointerDragging {
             }
         };
         this.containerEl = containerEl;
-        this.emitter = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.F();
+        this.emitter = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.F();
         containerEl.addEventListener('mousedown', this.handleMouseDown);
         containerEl.addEventListener('touchstart', this.handleTouchStart, { passive: true });
         listenerCreated();
@@ -11219,7 +11334,7 @@ class PointerDragging {
         let subjectEl = this.querySubjectEl(ev);
         let downEl = ev.target;
         if (subjectEl &&
-            (!this.handleSelector || (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Z)(downEl, this.handleSelector))) {
+            (!this.handleSelector || (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Z)(downEl, this.handleSelector))) {
             this.subjectEl = subjectEl;
             this.isDragging = true; // do this first so cancelTouchScroll will work
             this.wasTouchScroll = false;
@@ -11236,7 +11351,7 @@ class PointerDragging {
     }
     querySubjectEl(ev) {
         if (this.selector) {
-            return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Z)(ev.target, this.selector);
+            return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Z)(ev.target, this.selector);
         }
         return this.containerEl;
     }
@@ -11340,7 +11455,7 @@ function startIgnoringMouse() {
     ignoreMouseDepth += 1;
     setTimeout(() => {
         ignoreMouseDepth -= 1;
-    }, _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bG.touchMouseIgnoreWait);
+    }, _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bG.touchMouseIgnoreWait);
 }
 // We want to attach touchmove as early as possible for Safari
 // ----------------------------------------------------------------------------------------------------
@@ -11434,25 +11549,25 @@ class ElementMirror {
         mirrorEl.style.transition =
             'top ' + revertDuration + 'ms,' +
                 'left ' + revertDuration + 'ms';
-        (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aN)(mirrorEl, {
+        (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aN)(mirrorEl, {
             left: finalSourceElRect.left,
             top: finalSourceElRect.top,
         });
-        (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.b0)(mirrorEl, () => {
+        (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.b0)(mirrorEl, () => {
             mirrorEl.style.transition = '';
             callback();
         });
     }
     cleanup() {
         if (this.mirrorEl) {
-            (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aM)(this.mirrorEl);
+            (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aM)(this.mirrorEl);
             this.mirrorEl = null;
         }
         this.sourceEl = null;
     }
     updateElPosition() {
         if (this.sourceEl && this.isVisible) {
-            (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aN)(this.getMirrorEl(), {
+            (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aN)(this.getMirrorEl(), {
                 left: this.sourceElRect.left + this.deltaX,
                 top: this.sourceElRect.top + this.deltaY,
             });
@@ -11469,7 +11584,7 @@ class ElementMirror {
             mirrorEl.style.webkitUserSelect = 'none';
             mirrorEl.style.pointerEvents = 'none';
             mirrorEl.classList.add('fc-event-dragging');
-            (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aN)(mirrorEl, {
+            (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aN)(mirrorEl, {
                 position: 'fixed',
                 zIndex: this.zIndex,
                 visibility: '',
@@ -11494,7 +11609,7 @@ The cache can be in one of two modes:
 - doesListening:false - ignores when the container is scrolled by someone else
 - doesListening:true - watch for scrolling and update the cache
 */
-class ScrollGeomCache extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.b9 {
+class ScrollGeomCache extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.b9 {
     constructor(scrollController, doesListening) {
         super();
         this.handleScroll = () => {
@@ -11562,19 +11677,19 @@ class ScrollGeomCache extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_M
 
 class ElementScrollGeomCache extends ScrollGeomCache {
     constructor(el, doesListening) {
-        super(new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.ba(el), doesListening);
+        super(new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.ba(el), doesListening);
     }
     getEventTarget() {
         return this.scrollController.el;
     }
     computeClientRect() {
-        return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.b1)(this.scrollController.el);
+        return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.b1)(this.scrollController.el);
     }
 }
 
 class WindowScrollGeomCache extends ScrollGeomCache {
     constructor(doesListening) {
-        super(new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bb(), doesListening);
+        super(new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bb(), doesListening);
     }
     getEventTarget() {
         return window;
@@ -11778,7 +11893,7 @@ Monitors dragging on an element. Has a number of high-level features:
 - minimum wait time ("delay") before dragging
 - a mirror element that follows the pointer
 */
-class FeaturefulElementDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bF {
+class FeaturefulElementDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bF {
     constructor(containerEl, selector) {
         super(containerEl);
         this.containerEl = containerEl;
@@ -11798,8 +11913,8 @@ class FeaturefulElementDragging extends _fullcalendar_core_internal_js__WEBPACK_
                 this.isInteracting = true;
                 this.isDelayEnded = false;
                 this.isDistanceSurpassed = false;
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.ap)(document.body);
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.ar)(document.body);
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.ap)(document.body);
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.ar)(document.body);
                 // prevent links from being visited if there's an eventual drag.
                 // also prevents selection in older browsers (maybe?).
                 // not necessary for touch, besides, browser would complain about passiveness.
@@ -11844,8 +11959,8 @@ class FeaturefulElementDragging extends _fullcalendar_core_internal_js__WEBPACK_
         this.onPointerUp = (ev) => {
             if (this.isInteracting) {
                 this.isInteracting = false;
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aq)(document.body);
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.as)(document.body);
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aq)(document.body);
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.as)(document.body);
                 this.emitter.trigger('pointerup', ev); // can potentially set mirrorNeedsRevert
                 if (this.isDragging) {
                     this.autoScroller.stop();
@@ -11940,9 +12055,9 @@ and an determine if a given point is inside the combined clipping rectangle.
 class OffsetTracker {
     constructor(el) {
         this.el = el;
-        this.origRect = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.b4)(el);
+        this.origRect = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.b4)(el);
         // will work fine for divs that have overflow:hidden
-        this.scrollCaches = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.b3)(el).map((scrollEl) => new ElementScrollGeomCache(scrollEl, true));
+        this.scrollCaches = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.b3)(el).map((scrollEl) => new ElementScrollGeomCache(scrollEl, true));
     }
     destroy() {
         for (let scrollCache of this.scrollCaches) {
@@ -11967,7 +12082,7 @@ class OffsetTracker {
         let point = { left: pageX, top: pageY };
         for (let scrollCache of this.scrollCaches) {
             if (!isIgnoredClipping(scrollCache.getEventTarget()) &&
-                !(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aD)(point, scrollCache.clientRect)) {
+                !(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aD)(point, scrollCache.clientRect)) {
                 return false;
             }
         }
@@ -12046,7 +12161,7 @@ class HitDragging {
         dragging.emitter.on('pointerup', this.handlePointerUp);
         dragging.emitter.on('dragend', this.handleDragEnd);
         this.dragging = dragging;
-        this.emitter = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.F();
+        this.emitter = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.F();
     }
     // sets initialHit
     // sets coordAdjust
@@ -12056,18 +12171,18 @@ class HitDragging {
         let subjectEl = ev.subjectEl;
         let subjectRect;
         if (subjectEl instanceof HTMLElement) { // i.e. not a Document/ShadowRoot
-            subjectRect = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.b4)(subjectEl);
-            adjustedPoint = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aE)(adjustedPoint, subjectRect);
+            subjectRect = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.b4)(subjectEl);
+            adjustedPoint = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aE)(adjustedPoint, subjectRect);
         }
         let initialHit = this.initialHit = this.queryHitForOffset(adjustedPoint.left, adjustedPoint.top);
         if (initialHit) {
             if (this.useSubjectCenter && subjectRect) {
-                let slicedSubjectRect = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aC)(subjectRect, initialHit.rect);
+                let slicedSubjectRect = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aC)(subjectRect, initialHit.rect);
                 if (slicedSubjectRect) {
-                    adjustedPoint = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aF)(slicedSubjectRect);
+                    adjustedPoint = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aF)(slicedSubjectRect);
                 }
             }
-            this.coordAdjust = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aG)(adjustedPoint, origPoint);
+            this.coordAdjust = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aG)(adjustedPoint, origPoint);
         }
         else {
             this.coordAdjust = { left: 0, top: 0 };
@@ -12081,7 +12196,7 @@ class HitDragging {
         }
     }
     prepareHits() {
-        this.offsetTrackers = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.a)(this.droppableStore, (interactionSettings) => {
+        this.offsetTrackers = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.a)(this.droppableStore, (interactionSettings) => {
             interactionSettings.component.prepareHits();
             return new OffsetTracker(interactionSettings.el);
         });
@@ -12115,7 +12230,7 @@ class HitDragging {
                     let hit = component.queryHit(positionLeft, positionTop, width, height);
                     if (hit && (
                     // make sure the hit is within activeRange, meaning it's not a dead cell
-                    (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.b7)(hit.dateProfile.activeRange, hit.dateSpan.range)) &&
+                    (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.b7)(hit.dateProfile.activeRange, hit.dateSpan.range)) &&
                         // Ensure the component we are querying for the hit is accessibly my the pointer
                         // Prevents obscured calendars (ex: under a modal dialog) from accepting hit
                         // https://github.com/fullcalendar/fullcalendar/issues/5026
@@ -12146,7 +12261,7 @@ function isHitsEqual(hit0, hit1) {
     if (Boolean(hit0) !== Boolean(hit1)) {
         return false;
     }
-    return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bd)(hit0.dateSpan, hit1.dateSpan);
+    return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bd)(hit0.dateSpan, hit1.dateSpan);
 }
 
 function buildDatePointApiWithContext(dateSpan, context) {
@@ -12169,7 +12284,7 @@ function buildDatePointApi(span, dateEnv) {
 Monitors when the user clicks on a specific date/time of a component.
 A pointerdown+pointerup on the same "hit" constitutes a click.
 */
-class DateClicking extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.X {
+class DateClicking extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.X {
     constructor(settings) {
         super(settings);
         this.handlePointerDown = (pev) => {
@@ -12194,7 +12309,7 @@ class DateClicking extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODU
         // we DO want to watch pointer moves because otherwise finalHit won't get populated
         this.dragging = new FeaturefulElementDragging(settings.el);
         this.dragging.autoScroller.isEnabled = false;
-        let hitDragging = this.hitDragging = new HitDragging(this.dragging, (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bE)(settings));
+        let hitDragging = this.hitDragging = new HitDragging(this.dragging, (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bE)(settings));
         hitDragging.emitter.on('pointerdown', this.handlePointerDown);
         hitDragging.emitter.on('dragend', this.handleDragEnd);
     }
@@ -12207,7 +12322,7 @@ class DateClicking extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODU
 Tracks when the user selects a portion of time of a component,
 constituted by a drag over date cells, with a possible delay at the beginning of the drag.
 */
-class DateSelecting extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.X {
+class DateSelecting extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.X {
     constructor(settings) {
         super(settings);
         this.dragSelection = null;
@@ -12236,7 +12351,7 @@ class DateSelecting extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 if (!disallowed) {
                     dragSelection = joinHitsIntoSelection(initialHit, hit, context.pluginHooks.dateSelectionTransformers);
                 }
-                if (!dragSelection || !(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bY)(dragSelection, hit.dateProfile, context)) {
+                if (!dragSelection || !(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bY)(dragSelection, hit.dateProfile, context)) {
                     isInvalid = true;
                     dragSelection = null;
                 }
@@ -12248,10 +12363,10 @@ class DateSelecting extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 context.dispatch({ type: 'UNSELECT_DATES' });
             }
             if (!isInvalid) {
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.au)();
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.au)();
             }
             else {
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.av)();
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.av)();
             }
             if (!isFinal) {
                 this.dragSelection = dragSelection; // only clear if moved away from all hits while dragging
@@ -12260,7 +12375,7 @@ class DateSelecting extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
         this.handlePointerUp = (pev) => {
             if (this.dragSelection) {
                 // selection is already rendered, so just need to report selection
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.cr)(this.dragSelection, pev, this.component.context);
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.cr)(this.dragSelection, pev, this.component.context);
                 this.dragSelection = null;
             }
         };
@@ -12270,7 +12385,7 @@ class DateSelecting extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
         dragging.touchScrollAllowed = false;
         dragging.minDistance = options.selectMinDistance || 0;
         dragging.autoScroller.isEnabled = options.dragScroll;
-        let hitDragging = this.hitDragging = new HitDragging(this.dragging, (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bE)(settings));
+        let hitDragging = this.hitDragging = new HitDragging(this.dragging, (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bE)(settings));
         hitDragging.emitter.on('pointerdown', this.handlePointerDown);
         hitDragging.emitter.on('dragstart', this.handleDragStart);
         hitDragging.emitter.on('hitupdate', this.handleHitUpdate);
@@ -12297,7 +12412,7 @@ function joinHitsIntoSelection(hit0, hit1, dateSelectionTransformers) {
         dateSpan1.range.start,
         dateSpan1.range.end,
     ];
-    ms.sort(_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.at);
+    ms.sort(_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.at);
     let props = {};
     for (let transformer of dateSelectionTransformers) {
         let res = transformer(hit0, hit1);
@@ -12313,7 +12428,7 @@ function joinHitsIntoSelection(hit0, hit1, dateSelectionTransformers) {
     return props;
 }
 
-class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.X {
+class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.X {
     constructor(settings) {
         super(settings);
         // internal state
@@ -12332,10 +12447,10 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
             let { options } = component.context;
             let initialContext = component.context;
             this.subjectEl = ev.subjectEl;
-            let subjectSeg = this.subjectSeg = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Y)(ev.subjectEl);
+            let subjectSeg = this.subjectSeg = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Y)(ev.subjectEl);
             let eventRange = this.eventRange = subjectSeg.eventRange;
             let eventInstanceId = eventRange.instance.instanceId;
-            this.relevantEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aT)(initialContext.getCurrentData().eventStore, eventInstanceId);
+            this.relevantEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aT)(initialContext.getCurrentData().eventStore, eventInstanceId);
             dragging.minDistance = ev.isTouch ? 0 : options.eventDragMinDistance;
             dragging.delay =
                 // only do a touch delay if touch and this event hasn't been selected yet
@@ -12346,11 +12461,11 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 mirror.parentNode = options.fixedMirrorParent;
             }
             else {
-                mirror.parentNode = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Z)(origTarget, '.fc');
+                mirror.parentNode = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Z)(origTarget, '.fc');
             }
             mirror.revertDuration = options.dragRevertDuration;
             let isValid = component.isValidSegDownEl(origTarget) &&
-                !(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Z)(origTarget, '.fc-event-resizer'); // NOT on a resizer
+                !(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Z)(origTarget, '.fc-event-resizer'); // NOT on a resizer
             dragging.setIgnoreMove(!isValid);
             // disable dragging for elements that are resizable (ie, selectable)
             // but are not draggable
@@ -12375,7 +12490,7 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 initialContext.calendarApi.unselect(ev); // unselect *date* selection
                 initialContext.emitter.trigger('eventDragStart', {
                     el: this.subjectEl,
-                    event: new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__._(initialContext, eventRange.def, eventRange.instance),
+                    event: new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__._(initialContext, eventRange.def, eventRange.instance),
                     jsEvent: ev.origEvent,
                     view: initialContext.viewApi,
                 });
@@ -12395,7 +12510,7 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
             let isInvalid = false;
             let interaction = {
                 affectedEvents: relevantEvents,
-                mutatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.H)(),
+                mutatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.H)(),
                 isEvent: true,
             };
             if (hit) {
@@ -12405,13 +12520,13 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                     (receivingOptions.editable && receivingOptions.droppable)) {
                     mutation = computeEventMutation(initialHit, hit, this.eventRange.instance.range.start, receivingContext.getCurrentData().pluginHooks.eventDragMutationMassagers);
                     if (mutation) {
-                        mutatedRelevantEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bV)(relevantEvents, receivingContext.getCurrentData().eventUiBases, mutation, receivingContext);
+                        mutatedRelevantEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bV)(relevantEvents, receivingContext.getCurrentData().eventUiBases, mutation, receivingContext);
                         interaction.mutatedEvents = mutatedRelevantEvents;
-                        if (!(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bX)(interaction, hit.dateProfile, receivingContext)) {
+                        if (!(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bX)(interaction, hit.dateProfile, receivingContext)) {
                             isInvalid = true;
                             mutation = null;
                             mutatedRelevantEvents = null;
-                            interaction.mutatedEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.H)();
+                            interaction.mutatedEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.H)();
                         }
                     }
                 }
@@ -12421,10 +12536,10 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
             }
             this.displayDrag(receivingContext, interaction);
             if (!isInvalid) {
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.au)();
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.au)();
             }
             else {
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.av)();
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.av)();
             }
             if (!isFinal) {
                 if (initialContext === receivingContext && // TODO: write test for this
@@ -12453,7 +12568,7 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 let { receivingContext, validMutation } = this;
                 let eventDef = this.eventRange.def;
                 let eventInstance = this.eventRange.instance;
-                let eventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__._(initialContext, eventDef, eventInstance);
+                let eventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__._(initialContext, eventDef, eventInstance);
                 let relevantEvents = this.relevantEvents;
                 let mutatedRelevantEvents = this.mutatedRelevantEvents;
                 let { finalHit } = this.hitDragging;
@@ -12467,7 +12582,7 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 if (validMutation) {
                     // dropped within same calendar
                     if (receivingContext === initialContext) {
-                        let updatedEventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__._(initialContext, mutatedRelevantEvents.defs[eventDef.defId], eventInstance ? mutatedRelevantEvents.instances[eventInstance.instanceId] : null);
+                        let updatedEventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__._(initialContext, mutatedRelevantEvents.defs[eventDef.defId], eventInstance ? mutatedRelevantEvents.instances[eventInstance.instanceId] : null);
                         initialContext.dispatch({
                             type: 'MERGE_EVENTS',
                             eventStore: mutatedRelevantEvents,
@@ -12475,7 +12590,7 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                         let eventChangeArg = {
                             oldEvent: eventApi,
                             event: updatedEventApi,
-                            relatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.w)(mutatedRelevantEvents, initialContext, eventInstance),
+                            relatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.w)(mutatedRelevantEvents, initialContext, eventInstance),
                             revert() {
                                 initialContext.dispatch({
                                     type: 'MERGE_EVENTS',
@@ -12494,7 +12609,7 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                     else if (receivingContext) {
                         let eventRemoveArg = {
                             event: eventApi,
-                            relatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.w)(relevantEvents, initialContext, eventInstance),
+                            relatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.w)(relevantEvents, initialContext, eventInstance),
                             revert() {
                                 initialContext.dispatch({
                                     type: 'MERGE_EVENTS',
@@ -12510,14 +12625,14 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                         initialContext.emitter.trigger('eventRemove', eventRemoveArg);
                         let addedEventDef = mutatedRelevantEvents.defs[eventDef.defId];
                         let addedEventInstance = mutatedRelevantEvents.instances[eventInstance.instanceId];
-                        let addedEventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__._(receivingContext, addedEventDef, addedEventInstance);
+                        let addedEventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__._(receivingContext, addedEventDef, addedEventInstance);
                         receivingContext.dispatch({
                             type: 'MERGE_EVENTS',
                             eventStore: mutatedRelevantEvents,
                         });
                         let eventAddArg = {
                             event: addedEventApi,
-                            relatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.w)(mutatedRelevantEvents, receivingContext, addedEventInstance),
+                            relatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.w)(mutatedRelevantEvents, receivingContext, addedEventInstance),
                             revert() {
                                 receivingContext.dispatch({
                                     type: 'REMOVE_EVENTS',
@@ -12548,7 +12663,7 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
         dragging.pointer.selector = EventDragging.SELECTOR;
         dragging.touchScrollAllowed = false;
         dragging.autoScroller.isEnabled = options.dragScroll;
-        let hitDragging = this.hitDragging = new HitDragging(this.dragging, _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.a5);
+        let hitDragging = this.hitDragging = new HitDragging(this.dragging, _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.a5);
         hitDragging.useSubjectCenter = settings.useEventCenter;
         hitDragging.emitter.on('pointerdown', this.handlePointerDown);
         hitDragging.emitter.on('dragstart', this.handleDragStart);
@@ -12572,7 +12687,7 @@ class EventDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                     type: 'SET_EVENT_DRAG',
                     state: {
                         affectedEvents: state.affectedEvents,
-                        mutatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.H)(),
+                        mutatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.H)(),
                         isEvent: true,
                     },
                 });
@@ -12622,7 +12737,7 @@ function computeEventMutation(hit0, hit1, eventInstanceStart, massagers) {
         if (dateSpan1.allDay) {
             // means date1 is already start-of-day,
             // but date0 needs to be converted
-            date0 = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.q)(eventInstanceStart);
+            date0 = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.q)(eventInstanceStart);
         }
         else {
             // Moving from allDate->timed
@@ -12630,7 +12745,7 @@ function computeEventMutation(hit0, hit1, eventInstanceStart, massagers) {
             date0 = eventInstanceStart;
         }
     }
-    let delta = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.ay)(date0, date1, hit0.context.dateEnv, hit0.componentId === hit1.componentId ?
+    let delta = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.ay)(date0, date1, hit0.context.dateEnv, hit0.componentId === hit1.componentId ?
         hit0.largeUnit :
         null);
     if (delta.milliseconds) { // has hours/minutes/seconds
@@ -12654,7 +12769,7 @@ function getComponentTouchDelay(component) {
     return delay;
 }
 
-class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.X {
+class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.X {
     constructor(settings) {
         super(settings);
         // internal state
@@ -12667,7 +12782,7 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
         this.handlePointerDown = (ev) => {
             let { component } = this;
             let segEl = this.querySegEl(ev);
-            let seg = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Y)(segEl);
+            let seg = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Y)(segEl);
             let eventRange = this.eventRange = seg.eventRange;
             this.dragging.minDistance = component.context.options.eventDragMinDistance;
             // if touch, need to be working with a selected event
@@ -12677,14 +12792,14 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
         this.handleDragStart = (ev) => {
             let { context } = this.component;
             let eventRange = this.eventRange;
-            this.relevantEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aT)(context.getCurrentData().eventStore, this.eventRange.instance.instanceId);
+            this.relevantEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aT)(context.getCurrentData().eventStore, this.eventRange.instance.instanceId);
             let segEl = this.querySegEl(ev);
             this.draggingSegEl = segEl;
-            this.draggingSeg = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Y)(segEl);
+            this.draggingSeg = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Y)(segEl);
             context.calendarApi.unselect();
             context.emitter.trigger('eventResizeStart', {
                 el: segEl,
-                event: new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__._(context, eventRange.def, eventRange.instance),
+                event: new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__._(context, eventRange.def, eventRange.instance),
                 jsEvent: ev.origEvent,
                 view: context.viewApi,
             });
@@ -12699,7 +12814,7 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
             let isInvalid = false;
             let interaction = {
                 affectedEvents: relevantEvents,
-                mutatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.H)(),
+                mutatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.H)(),
                 isEvent: true,
             };
             if (hit) {
@@ -12711,9 +12826,9 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 }
             }
             if (mutation) {
-                mutatedRelevantEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bV)(relevantEvents, context.getCurrentData().eventUiBases, mutation, context);
+                mutatedRelevantEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bV)(relevantEvents, context.getCurrentData().eventUiBases, mutation, context);
                 interaction.mutatedEvents = mutatedRelevantEvents;
-                if (!(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bX)(interaction, hit.dateProfile, context)) {
+                if (!(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bX)(interaction, hit.dateProfile, context)) {
                     isInvalid = true;
                     mutation = null;
                     mutatedRelevantEvents = null;
@@ -12730,10 +12845,10 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 context.dispatch({ type: 'UNSET_EVENT_RESIZE' });
             }
             if (!isInvalid) {
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.au)();
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.au)();
             }
             else {
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.av)();
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.av)();
             }
             if (!isFinal) {
                 if (mutation && isHitsEqual(initialHit, hit)) {
@@ -12747,7 +12862,7 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
             let { context } = this.component;
             let eventDef = this.eventRange.def;
             let eventInstance = this.eventRange.instance;
-            let eventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__._(context, eventDef, eventInstance);
+            let eventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__._(context, eventDef, eventInstance);
             let relevantEvents = this.relevantEvents;
             let mutatedRelevantEvents = this.mutatedRelevantEvents;
             context.emitter.trigger('eventResizeStop', {
@@ -12757,7 +12872,7 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 view: context.viewApi,
             });
             if (this.validMutation) {
-                let updatedEventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__._(context, mutatedRelevantEvents.defs[eventDef.defId], eventInstance ? mutatedRelevantEvents.instances[eventInstance.instanceId] : null);
+                let updatedEventApi = new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__._(context, mutatedRelevantEvents.defs[eventDef.defId], eventInstance ? mutatedRelevantEvents.instances[eventInstance.instanceId] : null);
                 context.dispatch({
                     type: 'MERGE_EVENTS',
                     eventStore: mutatedRelevantEvents,
@@ -12765,7 +12880,7 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                 let eventChangeArg = {
                     oldEvent: eventApi,
                     event: updatedEventApi,
-                    relatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.w)(mutatedRelevantEvents, context, eventInstance),
+                    relatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.w)(mutatedRelevantEvents, context, eventInstance),
                     revert() {
                         context.dispatch({
                             type: 'MERGE_EVENTS',
@@ -12773,7 +12888,7 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
                         });
                     },
                 };
-                context.emitter.trigger('eventResize', Object.assign(Object.assign({}, eventChangeArg), { el: this.draggingSegEl, startDelta: this.validMutation.startDelta || (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.d)(0), endDelta: this.validMutation.endDelta || (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.d)(0), jsEvent: ev.origEvent, view: context.viewApi }));
+                context.emitter.trigger('eventResize', Object.assign(Object.assign({}, eventChangeArg), { el: this.draggingSegEl, startDelta: this.validMutation.startDelta || (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.d)(0), endDelta: this.validMutation.endDelta || (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.d)(0), jsEvent: ev.origEvent, view: context.viewApi }));
                 context.emitter.trigger('eventChange', eventChangeArg);
             }
             else {
@@ -12790,7 +12905,7 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
         dragging.pointer.selector = '.fc-event-resizer';
         dragging.touchScrollAllowed = false;
         dragging.autoScroller.isEnabled = component.context.options.dragScroll;
-        let hitDragging = this.hitDragging = new HitDragging(this.dragging, (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bE)(settings));
+        let hitDragging = this.hitDragging = new HitDragging(this.dragging, (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bE)(settings));
         hitDragging.emitter.on('pointerdown', this.handlePointerDown);
         hitDragging.emitter.on('dragstart', this.handleDragStart);
         hitDragging.emitter.on('hitupdate', this.handleHitUpdate);
@@ -12800,14 +12915,14 @@ class EventResizing extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MOD
         this.dragging.destroy();
     }
     querySegEl(ev) {
-        return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Z)(ev.subjectEl, '.fc-event');
+        return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Z)(ev.subjectEl, '.fc-event');
     }
 }
 function computeMutation(hit0, hit1, isFromStart, instanceRange) {
     let dateEnv = hit0.context.dateEnv;
     let date0 = hit0.dateSpan.range.start;
     let date1 = hit1.dateSpan.range.start;
-    let delta = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.ay)(date0, date1, dateEnv, hit0.largeUnit);
+    let delta = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.ay)(date0, date1, dateEnv, hit0.largeUnit);
     if (isFromStart) {
         if (dateEnv.add(instanceRange.start, delta) < instanceRange.end) {
             return { startDelta: delta };
@@ -12832,9 +12947,9 @@ class UnselectAuto {
         };
         this.onDocumentPointerDown = (pev) => {
             let unselectCancel = this.context.options.unselectCancel;
-            let downEl = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aP)(pev.origEvent);
-            this.matchesCancel = !!(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Z)(downEl, unselectCancel);
-            this.matchesEvent = !!(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.Z)(downEl, EventDragging.SELECTOR); // interaction started on an event?
+            let downEl = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aP)(pev.origEvent);
+            this.matchesCancel = !!(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Z)(downEl, unselectCancel);
+            this.matchesEvent = !!(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.Z)(downEl, EventDragging.SELECTOR); // interaction started on an event?
         };
         this.onDocumentPointerUp = (pev) => {
             let { context } = this;
@@ -12875,19 +12990,19 @@ class UnselectAuto {
 }
 
 const OPTION_REFINERS = {
-    fixedMirrorParent: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
+    fixedMirrorParent: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
 };
 const LISTENER_REFINERS = {
-    dateClick: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    eventDragStart: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    eventDragStop: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    eventDrop: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    eventResizeStart: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    eventResizeStop: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    eventResize: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    drop: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    eventReceive: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    eventLeave: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
+    dateClick: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    eventDragStart: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    eventDragStop: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    eventDrop: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    eventResizeStart: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    eventResizeStop: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    eventResize: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    drop: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    eventReceive: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
+    eventLeave: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.n,
 };
 
 /*
@@ -12910,18 +13025,18 @@ class ExternalElementDragging {
             let droppableEvent = null;
             let isInvalid = false;
             let interaction = {
-                affectedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.H)(),
-                mutatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.H)(),
+                affectedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.H)(),
+                mutatedEvents: (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.H)(),
                 isEvent: this.dragMeta.create,
             };
             if (hit) {
                 receivingContext = hit.context;
                 if (this.canDropElOnCalendar(ev.subjectEl, receivingContext)) {
                     droppableEvent = computeEventForDateSpan(hit.dateSpan, this.dragMeta, receivingContext);
-                    interaction.mutatedEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aU)(droppableEvent);
-                    isInvalid = !(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bX)(interaction, hit.dateProfile, receivingContext);
+                    interaction.mutatedEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aU)(droppableEvent);
+                    isInvalid = !(0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bX)(interaction, hit.dateProfile, receivingContext);
                     if (isInvalid) {
-                        interaction.mutatedEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.H)();
+                        interaction.mutatedEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.H)();
                         droppableEvent = null;
                     }
                 }
@@ -12931,10 +13046,10 @@ class ExternalElementDragging {
             // TODO: wish we could somehow wait for dispatch to guarantee render
             dragging.setMirrorIsVisible(isFinal || !droppableEvent || !document.querySelector('.fc-event-mirror'));
             if (!isInvalid) {
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.au)();
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.au)();
             }
             else {
-                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.av)();
+                (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.av)();
             }
             if (!isFinal) {
                 dragging.setMirrorNeedsRevert(!droppableEvent);
@@ -12951,7 +13066,7 @@ class ExternalElementDragging {
                 let dragMeta = this.dragMeta;
                 receivingContext.emitter.trigger('drop', Object.assign(Object.assign({}, buildDatePointApiWithContext(finalHit.dateSpan, receivingContext)), { draggedEl: pev.subjectEl, jsEvent: pev.origEvent, view: finalView }));
                 if (dragMeta.create) {
-                    let addingEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aU)(droppableEvent);
+                    let addingEvents = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aU)(droppableEvent);
                     receivingContext.dispatch({
                         type: 'MERGE_EVENTS',
                         eventStore: addingEvents,
@@ -12964,7 +13079,7 @@ class ExternalElementDragging {
                     }
                     // signal that an external event landed
                     receivingContext.emitter.trigger('eventReceive', {
-                        event: new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__._(receivingContext, droppableEvent.def, droppableEvent.instance),
+                        event: new _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__._(receivingContext, droppableEvent.def, droppableEvent.instance),
                         relatedEvents: [],
                         revert() {
                             receivingContext.dispatch({
@@ -12980,7 +13095,7 @@ class ExternalElementDragging {
             this.receivingContext = null;
             this.droppableEvent = null;
         };
-        let hitDragging = this.hitDragging = new HitDragging(dragging, _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.a5);
+        let hitDragging = this.hitDragging = new HitDragging(dragging, _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.a5);
         hitDragging.requireInitial = false; // will start outside of a component
         hitDragging.emitter.on('dragstart', this.handleDragStart);
         hitDragging.emitter.on('hitupdate', this.handleHitUpdate);
@@ -12989,10 +13104,10 @@ class ExternalElementDragging {
     }
     buildDragMeta(subjectEl) {
         if (typeof this.suppliedDragMeta === 'object') {
-            return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bH)(this.suppliedDragMeta);
+            return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bH)(this.suppliedDragMeta);
         }
         if (typeof this.suppliedDragMeta === 'function') {
-            return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bH)(this.suppliedDragMeta(subjectEl));
+            return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bH)(this.suppliedDragMeta(subjectEl));
         }
         return getDragMetaFromEl(subjectEl);
     }
@@ -13016,7 +13131,7 @@ class ExternalElementDragging {
             return dropAccept.call(receivingContext.calendarApi, el);
         }
         if (typeof dropAccept === 'string' && dropAccept) {
-            return Boolean((0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aO)(el, dropAccept));
+            return Boolean((0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aO)(el, dropAccept));
         }
         return true;
     }
@@ -13028,8 +13143,8 @@ function computeEventForDateSpan(dateSpan, dragMeta, context) {
     for (let transform of context.pluginHooks.externalDefTransforms) {
         Object.assign(defProps, transform(dateSpan, dragMeta));
     }
-    let { refined, extra } = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.aj)(defProps, context);
-    let def = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.ai)(refined, extra, dragMeta.sourceId, dateSpan.allDay, context.options.forceEventDuration || Boolean(dragMeta.duration), // hasEnd
+    let { refined, extra } = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.aj)(defProps, context);
+    let def = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.ai)(refined, extra, dragMeta.sourceId, dateSpan.allDay, context.options.forceEventDuration || Boolean(dragMeta.duration), // hasEnd
     context);
     let start = dateSpan.range.start;
     // only rely on time info if drop zone is all-day,
@@ -13039,8 +13154,8 @@ function computeEventForDateSpan(dateSpan, dragMeta, context) {
     }
     let end = dragMeta.duration ?
         context.dateEnv.add(start, dragMeta.duration) :
-        (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.cs)(dateSpan.allDay, start, context);
-    let instance = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.ah)(def.defId, { start, end });
+        (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.cs)(dateSpan.allDay, start, context);
+    let instance = (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.ah)(def.defId, { start, end });
     return { def, instance };
 }
 // Utils for extracting data from element
@@ -13050,11 +13165,11 @@ function getDragMetaFromEl(el) {
     let obj = str ?
         JSON.parse(str) :
         { create: false }; // if no embedded data, assume no event creation
-    return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bH)(obj);
+    return (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bH)(obj);
 }
-_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bG.dataAttrPrefix = '';
+_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bG.dataAttrPrefix = '';
 function getEmbeddedElData(el, name) {
-    let prefix = _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bG.dataAttrPrefix;
+    let prefix = _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bG.dataAttrPrefix;
     let prefixedName = (prefix ? prefix + '-' : '') + name;
     return el.getAttribute('data-' + prefixedName) || '';
 }
@@ -13072,10 +13187,10 @@ class ExternalDraggable {
             dragging.minDistance =
                 minDistance != null ?
                     minDistance :
-                    (ev.isTouch ? 0 : _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.e.eventDragMinDistance);
+                    (ev.isTouch ? 0 : _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.e.eventDragMinDistance);
             dragging.delay =
                 ev.isTouch ? // TODO: eventually read eventLongPressDelay instead vvv
-                    (longPressDelay != null ? longPressDelay : _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.e.longPressDelay) :
+                    (longPressDelay != null ? longPressDelay : _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.e.longPressDelay) :
                     0;
         };
         this.handleDragStart = (ev) => {
@@ -13109,7 +13224,7 @@ The third-party system is responsible for drawing the visuals effects of the dra
 This class simply monitors for pointer movements and fires events.
 It also has the ability to hide the moving element (the "mirror") during the drag.
 */
-class InferredElementDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.bF {
+class InferredElementDragging extends _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_1__.bF {
     constructor(containerEl) {
         super(containerEl);
         this.shouldIgnoreMove = false;
@@ -13204,7 +13319,7 @@ class ThirdPartyDraggable {
     }
 }
 
-var index = (0,_fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_1__.createPlugin)({
+var index = (0,_fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_0__.createPlugin)({
     name: '@fullcalendar/interaction',
     componentInteractions: [DateClicking, DateSelecting, EventDragging, EventResizing],
     calendarInteractions: [UnselectAuto],
@@ -13216,21 +13331,21 @@ var index = (0,_fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_1__.createPl
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/@fullcalendar/list/index.js":
+/***/ "./node_modules/@fullcalendar/list/index.js"
 /*!**************************************************!*\
   !*** ./node_modules/@fullcalendar/list/index.js ***!
   \**************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ index)
 /* harmony export */ });
-/* harmony import */ var _fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/core/index.js */ "./node_modules/@fullcalendar/core/index.js");
-/* harmony import */ var _internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./internal.js */ "./node_modules/@fullcalendar/list/internal.js");
-/* harmony import */ var _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/core/internal.js */ "./node_modules/@fullcalendar/core/internal-common.js");
+/* harmony import */ var _fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/core/index.js */ "./node_modules/@fullcalendar/core/index.js");
+/* harmony import */ var _internal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./internal.js */ "./node_modules/@fullcalendar/list/internal.js");
+/* harmony import */ var _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fullcalendar/core/internal.js */ "./node_modules/@fullcalendar/core/internal-common.js");
 
 
 
@@ -13239,22 +13354,22 @@ __webpack_require__.r(__webpack_exports__);
 const OPTION_REFINERS = {
     listDayFormat: createFalsableFormatter,
     listDaySideFormat: createFalsableFormatter,
-    noEventsClassNames: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    noEventsContent: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    noEventsDidMount: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
-    noEventsWillUnmount: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.n,
+    noEventsClassNames: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_2__.n,
+    noEventsContent: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_2__.n,
+    noEventsDidMount: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_2__.n,
+    noEventsWillUnmount: _fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_2__.n,
     // noEventsText is defined in base options
 };
 function createFalsableFormatter(input) {
-    return input === false ? null : (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_0__.x)(input);
+    return input === false ? null : (0,_fullcalendar_core_internal_js__WEBPACK_IMPORTED_MODULE_2__.x)(input);
 }
 
-var index = (0,_fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_1__.createPlugin)({
+var index = (0,_fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_0__.createPlugin)({
     name: '@fullcalendar/list',
     optionRefiners: OPTION_REFINERS,
     views: {
         list: {
-            component: _internal_js__WEBPACK_IMPORTED_MODULE_2__.ListView,
+            component: _internal_js__WEBPACK_IMPORTED_MODULE_1__.ListView,
             buttonTextKey: 'list',
             listDayFormat: { month: 'long', day: 'numeric', year: 'numeric' }, // like "January 1, 2016"
         },
@@ -13285,13 +13400,13 @@ var index = (0,_fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_1__.createPl
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/@fullcalendar/list/internal.js":
+/***/ "./node_modules/@fullcalendar/list/internal.js"
 /*!*****************************************************!*\
   !*** ./node_modules/@fullcalendar/list/internal.js ***!
   \*****************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -13568,13 +13683,13 @@ var css_248z = ":root{--fc-list-event-dot-width:10px;--fc-list-event-hover-bg-co
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/@fullcalendar/timegrid/index.js":
+/***/ "./node_modules/@fullcalendar/timegrid/index.js"
 /*!******************************************************!*\
   !*** ./node_modules/@fullcalendar/timegrid/index.js ***!
   \******************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -13618,13 +13733,13 @@ var index = (0,_fullcalendar_core_index_js__WEBPACK_IMPORTED_MODULE_0__.createPl
 
 
 
-/***/ }),
+/***/ },
 
-/***/ "./node_modules/@fullcalendar/timegrid/internal.js":
+/***/ "./node_modules/@fullcalendar/timegrid/internal.js"
 /*!*********************************************************!*\
   !*** ./node_modules/@fullcalendar/timegrid/internal.js ***!
   \*********************************************************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+(__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
@@ -14788,122 +14903,7 @@ var css_248z = ".fc-v-event{background-color:var(--fc-event-bg-color);border:1px
 
 
 
-/***/ }),
-
-/***/ "./node_modules/preact/compat/dist/compat.module.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/preact/compat/dist/compat.module.js ***!
-  \**********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Children: () => (/* binding */ O),
-/* harmony export */   Component: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.Component),
-/* harmony export */   Fragment: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.Fragment),
-/* harmony export */   PureComponent: () => (/* binding */ w),
-/* harmony export */   StrictMode: () => (/* binding */ vn),
-/* harmony export */   Suspense: () => (/* binding */ D),
-/* harmony export */   SuspenseList: () => (/* binding */ V),
-/* harmony export */   __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: () => (/* binding */ rn),
-/* harmony export */   cloneElement: () => (/* binding */ cn),
-/* harmony export */   createContext: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.createContext),
-/* harmony export */   createElement: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.createElement),
-/* harmony export */   createFactory: () => (/* binding */ on),
-/* harmony export */   createPortal: () => (/* binding */ j),
-/* harmony export */   createRef: () => (/* reexport safe */ preact__WEBPACK_IMPORTED_MODULE_0__.createRef),
-/* harmony export */   "default": () => (/* binding */ bn),
-/* harmony export */   findDOMNode: () => (/* binding */ an),
-/* harmony export */   flushSync: () => (/* binding */ hn),
-/* harmony export */   forwardRef: () => (/* binding */ k),
-/* harmony export */   hydrate: () => (/* binding */ q),
-/* harmony export */   isValidElement: () => (/* binding */ ln),
-/* harmony export */   lazy: () => (/* binding */ M),
-/* harmony export */   memo: () => (/* binding */ R),
-/* harmony export */   render: () => (/* binding */ Y),
-/* harmony export */   startTransition: () => (/* binding */ dn),
-/* harmony export */   unmountComponentAtNode: () => (/* binding */ fn),
-/* harmony export */   unstable_batchedUpdates: () => (/* binding */ sn),
-/* harmony export */   useCallback: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useCallback),
-/* harmony export */   useContext: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useContext),
-/* harmony export */   useDebugValue: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useDebugValue),
-/* harmony export */   useDeferredValue: () => (/* binding */ pn),
-/* harmony export */   useEffect: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useEffect),
-/* harmony export */   useErrorBoundary: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useErrorBoundary),
-/* harmony export */   useId: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useId),
-/* harmony export */   useImperativeHandle: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle),
-/* harmony export */   useInsertionEffect: () => (/* binding */ yn),
-/* harmony export */   useLayoutEffect: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect),
-/* harmony export */   useMemo: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useMemo),
-/* harmony export */   useReducer: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useReducer),
-/* harmony export */   useRef: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useRef),
-/* harmony export */   useState: () => (/* reexport safe */ preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useState),
-/* harmony export */   useSyncExternalStore: () => (/* binding */ _n),
-/* harmony export */   useTransition: () => (/* binding */ mn),
-/* harmony export */   version: () => (/* binding */ un)
-/* harmony export */ });
-/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
-/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact/hooks */ "./node_modules/preact/hooks/dist/hooks.module.js");
-function g(n,t){for(var e in t)n[e]=t[e];return n}function C(n,t){for(var e in n)if("__source"!==e&&!(e in t))return!0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return!0;return!1}function E(n,t){return n===t&&(0!==n||1/n==1/t)||n!=n&&t!=t}function w(n){this.props=n}function R(n,e){function r(n){var t=this.props.ref,r=t==n.ref;return!r&&t&&(t.call?t(null):t.current=null),e?!e(this.props,n)||!r:C(this.props,n)}function u(e){return this.shouldComponentUpdate=r,(0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(n,e)}return u.displayName="Memo("+(n.displayName||n.name)+")",u.prototype.isReactComponent=!0,u.__f=!0,u}(w.prototype=new preact__WEBPACK_IMPORTED_MODULE_0__.Component).isPureReactComponent=!0,w.prototype.shouldComponentUpdate=function(n,t){return C(this.props,n)||C(this.state,t)};var x=preact__WEBPACK_IMPORTED_MODULE_0__.options.__b;preact__WEBPACK_IMPORTED_MODULE_0__.options.__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),x&&x(n)};var N="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function k(n){function t(t){var e=g({},t);return delete e.ref,n(e,t.ref||null)}return t.$$typeof=N,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var A=function(n,t){return null==n?null:(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)((0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n).map(t))},O={map:A,forEach:A,count:function(n){return n?(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n).length:0},only:function(n){var t=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n);if(1!==t.length)throw"Children.only";return t[0]},toArray:preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray},T=preact__WEBPACK_IMPORTED_MODULE_0__.options.__e;preact__WEBPACK_IMPORTED_MODULE_0__.options.__e=function(n,t,e,r){if(n.then)for(var u,o=t;o=o.__;)if((u=o.__c)&&u.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),u.__c(n,t);T(n,t,e,r)};var I=preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount;function L(n,t,e){return n&&(n.__c&&n.__c.__H&&(n.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c()}),n.__c.__H=null),null!=(n=g({},n)).__c&&(n.__c.__P===e&&(n.__c.__P=t),n.__c=null),n.__k=n.__k&&n.__k.map(function(n){return L(n,t,e)})),n}function U(n,t,e){return n&&(n.__v=null,n.__k=n.__k&&n.__k.map(function(n){return U(n,t,e)}),n.__c&&n.__c.__P===t&&(n.__e&&e.insertBefore(n.__e,n.__d),n.__c.__e=!0,n.__c.__P=e)),n}function D(){this.__u=0,this.t=null,this.__b=null}function F(n){var t=n.__.__c;return t&&t.__a&&t.__a(n)}function M(n){var e,r,u;function o(o){if(e||(e=n()).then(function(n){r=n.default||n},function(n){u=n}),u)throw u;if(!r)throw e;return (0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(r,o)}return o.displayName="Lazy",o.__f=!0,o}function V(){this.u=null,this.o=null}preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),I&&I(n)},(D.prototype=new preact__WEBPACK_IMPORTED_MODULE_0__.Component).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=F(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l())};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__a){var n=r.state.__a;r.__v.__k[0]=U(n,n.__c.__P,n.__c.__O)}var t;for(r.setState({__a:r.__b=null});t=r.t.pop();)t.forceUpdate()}},c=!0===t.__h;r.__u++||c||r.setState({__a:r.__b=r.__v.__k[0]}),n.then(i,i)},D.prototype.componentWillUnmount=function(){this.t=[]},D.prototype.render=function(n,e){if(this.__b){if(this.__v.__k){var r=document.createElement("div"),o=this.__v.__k[0].__c;this.__v.__k[0]=L(this.__b,r,o.__O=o.__P)}this.__b=null}var i=e.__a&&(0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(preact__WEBPACK_IMPORTED_MODULE_0__.Fragment,null,n.fallback);return i&&(i.__h=null),[(0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(preact__WEBPACK_IMPORTED_MODULE_0__.Fragment,null,e.__a?null:n.children),i]};var W=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2]}};function P(n){return this.getChildContext=function(){return n.context},n.children}function $(n){var e=this,r=n.i;e.componentWillUnmount=function(){(0,preact__WEBPACK_IMPORTED_MODULE_0__.render)(null,e.l),e.l=null,e.i=null},e.i&&e.i!==r&&e.componentWillUnmount(),n.__v?(e.l||(e.i=r,e.l={nodeType:1,parentNode:r,childNodes:[],appendChild:function(n){this.childNodes.push(n),e.i.appendChild(n)},insertBefore:function(n,t){this.childNodes.push(n),e.i.appendChild(n)},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),e.i.removeChild(n)}}),(0,preact__WEBPACK_IMPORTED_MODULE_0__.render)((0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)(P,{context:e.context},n.__v),e.l)):e.l&&e.componentWillUnmount()}function j(n,e){var r=(0,preact__WEBPACK_IMPORTED_MODULE_0__.createElement)($,{__v:n,i:e});return r.containerInfo=e,r}(V.prototype=new preact__WEBPACK_IMPORTED_MODULE_0__.Component).__a=function(n){var t=this,e=F(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),W(t,n,r)):u()};e?e(o):o()}},V.prototype.render=function(n){this.u=null,this.o=new Map;var t=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},V.prototype.componentDidUpdate=V.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){W(n,e,t)})};var z="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,B=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|image|letter|lighting|marker(?!H|W|U)|overline|paint|pointer|shape|stop|strikethrough|stroke|text(?!L)|transform|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,H="undefined"!=typeof document,Z=function(n){return("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/i:/fil|che|ra/i).test(n)};function Y(n,t,e){return null==t.__k&&(t.textContent=""),(0,preact__WEBPACK_IMPORTED_MODULE_0__.render)(n,t),"function"==typeof e&&e(),n?n.__c:null}function q(n,t,e){return (0,preact__WEBPACK_IMPORTED_MODULE_0__.hydrate)(n,t),"function"==typeof e&&e(),n?n.__c:null}preact__WEBPACK_IMPORTED_MODULE_0__.Component.prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(t){Object.defineProperty(preact__WEBPACK_IMPORTED_MODULE_0__.Component.prototype,t,{configurable:!0,get:function(){return this["UNSAFE_"+t]},set:function(n){Object.defineProperty(this,t,{configurable:!0,writable:!0,value:n})}})});var G=preact__WEBPACK_IMPORTED_MODULE_0__.options.event;function J(){}function K(){return this.cancelBubble}function Q(){return this.defaultPrevented}preact__WEBPACK_IMPORTED_MODULE_0__.options.event=function(n){return G&&(n=G(n)),n.persist=J,n.isPropagationStopped=K,n.isDefaultPrevented=Q,n.nativeEvent=n};var X,nn={configurable:!0,get:function(){return this.class}},tn=preact__WEBPACK_IMPORTED_MODULE_0__.options.vnode;preact__WEBPACK_IMPORTED_MODULE_0__.options.vnode=function(n){var t=n.type,e=n.props,u=e;if("string"==typeof t){var o=-1===t.indexOf("-");for(var i in u={},e){var l=e[i];H&&"children"===i&&"noscript"===t||"value"===i&&"defaultValue"in e&&null==l||("defaultValue"===i&&"value"in e&&null==e.value?i="value":"download"===i&&!0===l?l="":/ondoubleclick/i.test(i)?i="ondblclick":/^onchange(textarea|input)/i.test(i+t)&&!Z(e.type)?i="oninput":/^onfocus$/i.test(i)?i="onfocusin":/^onblur$/i.test(i)?i="onfocusout":/^on(Ani|Tra|Tou|BeforeInp|Compo)/.test(i)?i=i.toLowerCase():o&&B.test(i)?i=i.replace(/[A-Z0-9]/g,"-$&").toLowerCase():null===l&&(l=void 0),/^oninput$/i.test(i)&&(i=i.toLowerCase(),u[i]&&(i="oninputCapture")),u[i]=l)}"select"==t&&u.multiple&&Array.isArray(u.value)&&(u.value=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(e.children).forEach(function(n){n.props.selected=-1!=u.value.indexOf(n.props.value)})),"select"==t&&null!=u.defaultValue&&(u.value=(0,preact__WEBPACK_IMPORTED_MODULE_0__.toChildArray)(e.children).forEach(function(n){n.props.selected=u.multiple?-1!=u.defaultValue.indexOf(n.props.value):u.defaultValue==n.props.value})),n.props=u,e.class!=e.className&&(nn.enumerable="className"in e,null!=e.className&&(u.class=e.className),Object.defineProperty(u,"className",nn))}n.$$typeof=z,tn&&tn(n)};var en=preact__WEBPACK_IMPORTED_MODULE_0__.options.__r;preact__WEBPACK_IMPORTED_MODULE_0__.options.__r=function(n){en&&en(n),X=n.__c};var rn={ReactCurrentDispatcher:{current:{readContext:function(n){return X.__n[n.__c].props.value}}}},un="17.0.2";function on(n){return preact__WEBPACK_IMPORTED_MODULE_0__.createElement.bind(null,n)}function ln(n){return!!n&&n.$$typeof===z}function cn(n){return ln(n)?preact__WEBPACK_IMPORTED_MODULE_0__.cloneElement.apply(null,arguments):n}function fn(n){return!!n.__k&&((0,preact__WEBPACK_IMPORTED_MODULE_0__.render)(null,n),!0)}function an(n){return n&&(n.base||1===n.nodeType&&n)||null}var sn=function(n,t){return n(t)},hn=function(n,t){return n(t)},vn=preact__WEBPACK_IMPORTED_MODULE_0__.Fragment;function dn(n){n()}function pn(n){return n}function mn(){return[!1,dn]}var yn=preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect;function _n(n,t){var e=t(),r=(0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useState)({h:{__:e,v:t}}),u=r[0].h,o=r[1];return (0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect)(function(){u.__=e,u.v=t,E(u.__,t())||o({h:u})},[n,e,t]),(0,preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function(){return E(u.__,u.v())||o({h:u}),n(function(){E(u.__,u.v())||o({h:u})})},[n]),e}var bn={useState:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useState,useId:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useId,useReducer:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useReducer,useEffect:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useEffect,useLayoutEffect:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect,useInsertionEffect:yn,useTransition:mn,useDeferredValue:pn,useSyncExternalStore:_n,startTransition:dn,useRef:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useRef,useImperativeHandle:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useImperativeHandle,useMemo:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useMemo,useCallback:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useCallback,useContext:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useContext,useDebugValue:preact_hooks__WEBPACK_IMPORTED_MODULE_1__.useDebugValue,version:"17.0.2",Children:O,render:Y,hydrate:q,unmountComponentAtNode:fn,createPortal:j,createElement:preact__WEBPACK_IMPORTED_MODULE_0__.createElement,createContext:preact__WEBPACK_IMPORTED_MODULE_0__.createContext,createFactory:on,cloneElement:cn,createRef:preact__WEBPACK_IMPORTED_MODULE_0__.createRef,Fragment:preact__WEBPACK_IMPORTED_MODULE_0__.Fragment,isValidElement:ln,findDOMNode:an,Component:preact__WEBPACK_IMPORTED_MODULE_0__.Component,PureComponent:w,memo:R,forwardRef:k,flushSync:hn,unstable_batchedUpdates:sn,StrictMode:vn,Suspense:D,SuspenseList:V,lazy:M,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:rn};
-//# sourceMappingURL=compat.module.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/preact/dist/preact.module.js":
-/*!***************************************************!*\
-  !*** ./node_modules/preact/dist/preact.module.js ***!
-  \***************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   Component: () => (/* binding */ x),
-/* harmony export */   Fragment: () => (/* binding */ _),
-/* harmony export */   cloneElement: () => (/* binding */ F),
-/* harmony export */   createContext: () => (/* binding */ G),
-/* harmony export */   createElement: () => (/* binding */ y),
-/* harmony export */   createRef: () => (/* binding */ d),
-/* harmony export */   h: () => (/* binding */ y),
-/* harmony export */   hydrate: () => (/* binding */ E),
-/* harmony export */   isValidElement: () => (/* binding */ i),
-/* harmony export */   options: () => (/* binding */ l),
-/* harmony export */   render: () => (/* binding */ D),
-/* harmony export */   toChildArray: () => (/* binding */ j)
-/* harmony export */ });
-var n,l,u,i,t,r,o,f,e,c={},s=[],a=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function h(n,l){for(var u in l)n[u]=l[u];return n}function v(n){var l=n.parentNode;l&&l.removeChild(n)}function y(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return p(l,f,t,r,null)}function p(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u:o};return null==o&&null!=l.vnode&&l.vnode(f),f}function d(){return{current:null}}function _(n){return n.children}function k(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||g(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||g(n,r,l[r],u[r],i)}function b(n,l,u){"-"===l[0]?n.setProperty(l,null==u?"":u):n[l]=null==u?"":"number"!=typeof u||a.test(l)?u:u+"px"}function g(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else{if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||b(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||b(n.style,l,u[l])}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?w:m,r):n.removeEventListener(l,r?w:m,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink(H|:h)/,"h").replace(/sName$/,"s");else if("width"!==l&&"height"!==l&&"href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null==u||!1===u&&-1==l.indexOf("-")?n.removeAttribute(l):n.setAttribute(l,u))}}function m(n){t=!0;try{return this.l[n.type+!1](l.event?l.event(n):n)}finally{t=!1}}function w(n){t=!0;try{return this.l[n.type+!0](l.event?l.event(n):n)}finally{t=!1}}function x(n,l){this.props=n,this.context=l}function A(n,l){if(null==l)return n.__?A(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return"function"==typeof n.type?A(n):null}function P(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return P(n)}}function C(n){t?setTimeout(n):f(n)}function T(n){(!n.__d&&(n.__d=!0)&&r.push(n)&&!$.__r++||o!==l.debounceRendering)&&((o=l.debounceRendering)||C)($)}function $(){var n,l,u,i,t,o,f,e;for(r.sort(function(n,l){return n.__v.__b-l.__v.__b});n=r.shift();)n.__d&&(l=r.length,i=void 0,t=void 0,f=(o=(u=n).__v).__e,(e=u.__P)&&(i=[],(t=h({},o)).__v=o.__v+1,M(e,o,t,u.__n,void 0!==e.ownerSVGElement,null!=o.__h?[f]:null,i,null==f?A(o):f,o.__h),N(i,o),o.__e!=f&&P(o)),r.length>l&&r.sort(function(n,l){return n.__v.__b-l.__v.__b}));$.__r=0}function H(n,l,u,i,t,r,o,f,e,a){var h,v,y,d,k,b,g,m=i&&i.__k||s,w=m.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(d=u.__k[h]=null==(d=l[h])||"boolean"==typeof d?null:"string"==typeof d||"number"==typeof d||"bigint"==typeof d?p(null,d,null,null,d):Array.isArray(d)?p(_,{children:d},null,null,null):d.__b>0?p(d.type,d.props,d.key,d.ref?d.ref:null,d.__v):d)){if(d.__=u,d.__b=u.__b+1,null===(y=m[h])||y&&d.key==y.key&&d.type===y.type)m[h]=void 0;else for(v=0;v<w;v++){if((y=m[v])&&d.key==y.key&&d.type===y.type){m[v]=void 0;break}y=null}M(n,d,y=y||c,t,r,o,f,e,a),k=d.__e,(v=d.ref)&&y.ref!=v&&(g||(g=[]),y.ref&&g.push(y.ref,null,d),g.push(v,d.__c||k,d)),null!=k?(null==b&&(b=k),"function"==typeof d.type&&d.__k===y.__k?d.__d=e=I(d,e,n):e=z(n,d,y,m,k,e),"function"==typeof u.type&&(u.__d=e)):e&&y.__e==e&&e.parentNode!=n&&(e=A(y))}for(u.__e=b,h=w;h--;)null!=m[h]&&("function"==typeof u.type&&null!=m[h].__e&&m[h].__e==u.__d&&(u.__d=L(i).nextSibling),q(m[h],m[h]));if(g)for(h=0;h<g.length;h++)S(g[h],g[++h],g[++h])}function I(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?I(i,l,u):z(u,i,i,t,i.__e,l));return l}function j(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){j(n,l)}):l.push(n)),l}function z(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else{for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=1)if(f==t)break n;n.insertBefore(t,r),o=r}return void 0!==o?o:t.nextSibling}function L(n){var l,u,i;if(null==n.type||"string"==typeof n.type)return n.__e;if(n.__k)for(l=n.__k.length-1;l>=0;l--)if((u=n.__k[l])&&(i=L(u)))return i;return null}function M(n,u,i,t,r,o,f,e,c){var s,a,v,y,p,d,k,b,g,m,w,A,P,C,T,$=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l.__b)&&s(u);try{n:if("function"==typeof $){if(b=u.props,g=(s=$.contextType)&&t[s.__c],m=s?g?g.props.value:s.__:t,i.__c?k=(a=u.__c=i.__c).__=a.__E:("prototype"in $&&$.prototype.render?u.__c=a=new $(b,m):(u.__c=a=new x(b,m),a.constructor=$,a.render=B),g&&g.sub(a),a.props=b,a.state||(a.state={}),a.context=m,a.__n=t,v=a.__d=!0,a.__h=[],a._sb=[]),null==a.__s&&(a.__s=a.state),null!=$.getDerivedStateFromProps&&(a.__s==a.state&&(a.__s=h({},a.__s)),h(a.__s,$.getDerivedStateFromProps(b,a.__s))),y=a.props,p=a.state,a.__v=u,v)null==$.getDerivedStateFromProps&&null!=a.componentWillMount&&a.componentWillMount(),null!=a.componentDidMount&&a.__h.push(a.componentDidMount);else{if(null==$.getDerivedStateFromProps&&b!==y&&null!=a.componentWillReceiveProps&&a.componentWillReceiveProps(b,m),!a.__e&&null!=a.shouldComponentUpdate&&!1===a.shouldComponentUpdate(b,a.__s,m)||u.__v===i.__v){for(u.__v!==i.__v&&(a.props=b,a.state=a.__s,a.__d=!1),u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u)}),w=0;w<a._sb.length;w++)a.__h.push(a._sb[w]);a._sb=[],a.__h.length&&f.push(a);break n}null!=a.componentWillUpdate&&a.componentWillUpdate(b,a.__s,m),null!=a.componentDidUpdate&&a.__h.push(function(){a.componentDidUpdate(y,p,d)})}if(a.context=m,a.props=b,a.__P=n,A=l.__r,P=0,"prototype"in $&&$.prototype.render){for(a.state=a.__s,a.__d=!1,A&&A(u),s=a.render(a.props,a.state,a.context),C=0;C<a._sb.length;C++)a.__h.push(a._sb[C]);a._sb=[]}else do{a.__d=!1,A&&A(u),s=a.render(a.props,a.state,a.context),a.state=a.__s}while(a.__d&&++P<25);a.state=a.__s,null!=a.getChildContext&&(t=h(h({},t),a.getChildContext())),v||null==a.getSnapshotBeforeUpdate||(d=a.getSnapshotBeforeUpdate(y,p)),T=null!=s&&s.type===_&&null==s.key?s.props.children:s,H(n,Array.isArray(T)?T:[T],u,i,t,r,o,f,e,c),a.base=u.__e,u.__h=null,a.__h.length&&f.push(a),k&&(a.__E=a.__=null),a.__e=!1}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=O(i.__e,u,i,t,r,o,f,c);(s=l.diffed)&&s(u)}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l.__e(n,u,i)}}function N(n,u){l.__c&&l.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u)})}catch(n){l.__e(n,u.__v)}})}function O(l,u,i,t,r,o,f,e){var s,a,h,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&"setAttribute"in s==!!d&&(d?s.localName===d:3===s.nodeType)){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,e=!1}if(null===d)y===p||e&&l.data===p||(l.data=p);else{if(o=o&&n.call(l.childNodes),a=(y=i.props||c).dangerouslySetInnerHTML,h=p.dangerouslySetInnerHTML,!e){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(h||a)&&(h&&(a&&h.__html==a.__html||h.__html===l.innerHTML)||(l.innerHTML=h&&h.__html||""))}if(k(l,p,y,r,e),h)u.__k=[];else if(_=u.props.children,H(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&A(i,0),e),null!=o)for(_=o.length;_--;)null!=o[_]&&v(o[_]);e||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_||"option"===d&&_!==y.value)&&g(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&g(l,"checked",_,y.checked,!1))}return l}function S(n,u,i){try{"function"==typeof n?n(u):n.current=u}catch(n){l.__e(n,i)}}function q(n,u,i){var t,r;if(l.unmount&&l.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||S(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount()}catch(n){l.__e(n,u)}t.base=t.__P=null,n.__c=void 0}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&q(t[r],u,i||"function"!=typeof n.type);i||null==n.__e||v(n.__e),n.__=n.__e=n.__d=void 0}function B(n,l,u){return this.constructor(n,u)}function D(u,i,t){var r,o,f;l.__&&l.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],M(i,u=(!r&&t||i).__k=y(_,null,[u]),o||c,c,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),N(f,u)}function E(n,l){D(n,l,E)}function F(l,u,i){var t,r,o,f=h({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):i),p(l.type,f,t||l.key,r||l.ref,null)}function G(n,l){var u={__c:l="__cC"+e++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(function(n){n.__e=!0,T(n)})},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n)}}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n=s.slice,l={__e:function(n,l,u,i){for(var t,r,o;l=l.__;)if((t=l.__c)&&!t.__)try{if((r=t.constructor)&&null!=r.getDerivedStateFromError&&(t.setState(r.getDerivedStateFromError(n)),o=t.__d),null!=t.componentDidCatch&&(t.componentDidCatch(n,i||{}),o=t.__d),o)return t.__E=t}catch(l){n=l}throw n}},u=0,i=function(n){return null!=n&&void 0===n.constructor},t=!1,x.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=h({},this.state),"function"==typeof n&&(n=n(h({},u),this.props)),n&&h(u,n),null!=n&&this.__v&&(l&&this._sb.push(l),T(this))},x.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),T(this))},x.prototype.render=_,r=[],f="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,$.__r=0,e=0;
-//# sourceMappingURL=preact.module.js.map
-
-
-/***/ }),
-
-/***/ "./node_modules/preact/hooks/dist/hooks.module.js":
-/*!********************************************************!*\
-  !*** ./node_modules/preact/hooks/dist/hooks.module.js ***!
-  \********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   useCallback: () => (/* binding */ T),
-/* harmony export */   useContext: () => (/* binding */ q),
-/* harmony export */   useDebugValue: () => (/* binding */ x),
-/* harmony export */   useEffect: () => (/* binding */ h),
-/* harmony export */   useErrorBoundary: () => (/* binding */ P),
-/* harmony export */   useId: () => (/* binding */ V),
-/* harmony export */   useImperativeHandle: () => (/* binding */ A),
-/* harmony export */   useLayoutEffect: () => (/* binding */ s),
-/* harmony export */   useMemo: () => (/* binding */ F),
-/* harmony export */   useReducer: () => (/* binding */ y),
-/* harmony export */   useRef: () => (/* binding */ _),
-/* harmony export */   useState: () => (/* binding */ p)
-/* harmony export */ });
-/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
-var t,r,u,i,o=0,f=[],c=[],e=preact__WEBPACK_IMPORTED_MODULE_0__.options.__b,a=preact__WEBPACK_IMPORTED_MODULE_0__.options.__r,v=preact__WEBPACK_IMPORTED_MODULE_0__.options.diffed,l=preact__WEBPACK_IMPORTED_MODULE_0__.options.__c,m=preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount;function d(t,u){preact__WEBPACK_IMPORTED_MODULE_0__.options.__h&&preact__WEBPACK_IMPORTED_MODULE_0__.options.__h(r,t,o||u),o=0;var i=r.__H||(r.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({__V:c}),i.__[t]}function p(n){return o=1,y(B,n)}function y(n,u,i){var o=d(t++,2);if(o.t=n,!o.__c&&(o.__=[i?i(u):B(void 0,u),function(n){var t=o.__N?o.__N[0]:o.__[0],r=o.t(t,n);t!==r&&(o.__N=[r,o.__[1]],o.__c.setState({}))}],o.__c=r,!r.u)){r.u=!0;var f=r.shouldComponentUpdate;r.shouldComponentUpdate=function(n,t,r){if(!o.__c.__H)return!0;var u=o.__c.__H.__.filter(function(n){return n.__c});if(u.every(function(n){return!n.__N}))return!f||f.call(this,n,t,r);var i=!1;return u.forEach(function(n){if(n.__N){var t=n.__[0];n.__=n.__N,n.__N=void 0,t!==n.__[0]&&(i=!0)}}),!(!i&&o.__c.props===n)&&(!f||f.call(this,n,t,r))}}return o.__N||o.__}function h(u,i){var o=d(t++,3);!preact__WEBPACK_IMPORTED_MODULE_0__.options.__s&&z(o.__H,i)&&(o.__=u,o.i=i,r.__H.__h.push(o))}function s(u,i){var o=d(t++,4);!preact__WEBPACK_IMPORTED_MODULE_0__.options.__s&&z(o.__H,i)&&(o.__=u,o.i=i,r.__h.push(o))}function _(n){return o=5,F(function(){return{current:n}},[])}function A(n,t,r){o=6,s(function(){return"function"==typeof n?(n(t()),function(){return n(null)}):n?(n.current=t(),function(){return n.current=null}):void 0},null==r?r:r.concat(n))}function F(n,r){var u=d(t++,7);return z(u.__H,r)?(u.__V=n(),u.i=r,u.__h=n,u.__V):u.__}function T(n,t){return o=8,F(function(){return n},t)}function q(n){var u=r.context[n.__c],i=d(t++,9);return i.c=n,u?(null==i.__&&(i.__=!0,u.sub(r)),u.props.value):n.__}function x(t,r){preact__WEBPACK_IMPORTED_MODULE_0__.options.useDebugValue&&preact__WEBPACK_IMPORTED_MODULE_0__.options.useDebugValue(r?r(t):t)}function P(n){var u=d(t++,10),i=p();return u.__=n,r.componentDidCatch||(r.componentDidCatch=function(n,t){u.__&&u.__(n,t),i[1](n)}),[i[0],function(){i[1](void 0)}]}function V(){var n=d(t++,11);if(!n.__){for(var u=r.__v;null!==u&&!u.__m&&null!==u.__;)u=u.__;var i=u.__m||(u.__m=[0,0]);n.__="P"+i[0]+"-"+i[1]++}return n.__}function b(){for(var t;t=f.shift();)if(t.__P&&t.__H)try{t.__H.__h.forEach(k),t.__H.__h.forEach(w),t.__H.__h=[]}catch(r){t.__H.__h=[],preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(r,t.__v)}}preact__WEBPACK_IMPORTED_MODULE_0__.options.__b=function(n){r=null,e&&e(n)},preact__WEBPACK_IMPORTED_MODULE_0__.options.__r=function(n){a&&a(n),t=0;var i=(r=n.__c).__H;i&&(u===r?(i.__h=[],r.__h=[],i.__.forEach(function(n){n.__N&&(n.__=n.__N),n.__V=c,n.__N=n.i=void 0})):(i.__h.forEach(k),i.__h.forEach(w),i.__h=[])),u=r},preact__WEBPACK_IMPORTED_MODULE_0__.options.diffed=function(t){v&&v(t);var o=t.__c;o&&o.__H&&(o.__H.__h.length&&(1!==f.push(o)&&i===preact__WEBPACK_IMPORTED_MODULE_0__.options.requestAnimationFrame||((i=preact__WEBPACK_IMPORTED_MODULE_0__.options.requestAnimationFrame)||j)(b)),o.__H.__.forEach(function(n){n.i&&(n.__H=n.i),n.__V!==c&&(n.__=n.__V),n.i=void 0,n.__V=c})),u=r=null},preact__WEBPACK_IMPORTED_MODULE_0__.options.__c=function(t,r){r.some(function(t){try{t.__h.forEach(k),t.__h=t.__h.filter(function(n){return!n.__||w(n)})}catch(u){r.some(function(n){n.__h&&(n.__h=[])}),r=[],preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(u,t.__v)}}),l&&l(t,r)},preact__WEBPACK_IMPORTED_MODULE_0__.options.unmount=function(t){m&&m(t);var r,u=t.__c;u&&u.__H&&(u.__H.__.forEach(function(n){try{k(n)}catch(n){r=n}}),u.__H=void 0,r&&preact__WEBPACK_IMPORTED_MODULE_0__.options.__e(r,u.__v))};var g="function"==typeof requestAnimationFrame;function j(n){var t,r=function(){clearTimeout(u),g&&cancelAnimationFrame(t),setTimeout(n)},u=setTimeout(r,100);g&&(t=requestAnimationFrame(r))}function k(n){var t=r,u=n.__c;"function"==typeof u&&(n.__c=void 0,u()),r=t}function w(n){var t=r;n.__c=n.__(),r=t}function z(n,t){return!n||n.length!==t.length||t.some(function(t,r){return t!==n[r]})}function B(n,t){return"function"==typeof t?t(n):t}
-//# sourceMappingURL=hooks.module.js.map
-
-
-/***/ })
+/***/ }
 
 /******/ 	});
 /************************************************************************/
@@ -14916,6 +14916,12 @@ var t,r,u,i,o=0,f=[],c=[],e=preact__WEBPACK_IMPORTED_MODULE_0__.options.__b,a=pr
 /******/ 		var cachedModule = __webpack_module_cache__[moduleId];
 /******/ 		if (cachedModule !== undefined) {
 /******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Check if module exists (development only)
+/******/ 		if (__webpack_modules__[moduleId] === undefined) {
+/******/ 			var e = new Error("Cannot find module '" + moduleId + "'");
+/******/ 			e.code = 'MODULE_NOT_FOUND';
+/******/ 			throw e;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
@@ -14968,11 +14974,11 @@ var __webpack_exports__ = {};
   !*** ./resources/assets/js/snipeit-calendar.js ***!
   \*************************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _fullcalendar_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fullcalendar/core */ "./node_modules/@fullcalendar/core/index.js");
-/* harmony import */ var _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/daygrid */ "./node_modules/@fullcalendar/daygrid/index.js");
-/* harmony import */ var _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fullcalendar/interaction */ "./node_modules/@fullcalendar/interaction/index.js");
-/* harmony import */ var _fullcalendar_list__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fullcalendar/list */ "./node_modules/@fullcalendar/list/index.js");
-/* harmony import */ var _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/timegrid */ "./node_modules/@fullcalendar/timegrid/index.js");
+/* harmony import */ var _fullcalendar_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/core */ "./node_modules/@fullcalendar/core/index.js");
+/* harmony import */ var _fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/daygrid */ "./node_modules/@fullcalendar/daygrid/index.js");
+/* harmony import */ var _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fullcalendar/interaction */ "./node_modules/@fullcalendar/interaction/index.js");
+/* harmony import */ var _fullcalendar_list__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @fullcalendar/list */ "./node_modules/@fullcalendar/list/index.js");
+/* harmony import */ var _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @fullcalendar/timegrid */ "./node_modules/@fullcalendar/timegrid/index.js");
 function _createForOfIteratorHelper(r, e) { var t = "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (!t) { if (Array.isArray(r) || (t = _unsupportedIterableToArray(r)) || e && r && "number" == typeof r.length) { t && (r = t); var _n = 0, F = function F() {}; return { s: F, n: function n() { return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] }; }, e: function e(r) { throw r; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var o, a = !0, u = !1; return { s: function s() { t = t.call(r); }, n: function n() { var r = t.next(); return a = r.done, r; }, e: function e(r) { u = !0, o = r; }, f: function f() { try { a || null == t["return"] || t["return"](); } finally { if (u) throw o; } } }; }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
@@ -15416,7 +15422,7 @@ function init(elementId, config) {
   // list: agenda-style list view used by dashboard/today widgets
   //   and as a text-first alternative for a11y users.
   // interaction: click / drag / select handlers - always required.
-  options.plugins = [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_0__["default"], _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_1__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_2__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_3__["default"]];
+  options.plugins = [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_1__["default"], _fullcalendar_timegrid__WEBPACK_IMPORTED_MODULE_4__["default"], _fullcalendar_list__WEBPACK_IMPORTED_MODULE_3__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_2__["default"]];
   options.events = eventsSource;
 
   // dayPopoverFormat controls the header of the "+N more" popover
@@ -15429,7 +15435,7 @@ function init(elementId, config) {
   if (config.phpDateFormat && !options.dayPopoverFormat) {
     options.dayPopoverFormat = phpDateFormatToFullCalendar(config.phpDateFormat);
   }
-  calendarInstance = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_4__.Calendar(el, options);
+  calendarInstance = new _fullcalendar_core__WEBPACK_IMPORTED_MODULE_0__.Calendar(el, options);
   calendarInstance.render();
 
   // Prime the "active" visual state on the initially-selected

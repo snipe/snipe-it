@@ -2,6 +2,7 @@
 
 namespace App\Http\Transformers;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Models\Accessory;
 use Illuminate\Database\Eloquent\Collection;
@@ -32,7 +33,7 @@ class AccessoriesTransformer
         $array = [
             'id' => $accessory->id,
             'name' => e($accessory->name),
-            'image' => ($accessory->image) ? Storage::disk('public')->url('accessories/'.e($accessory->image)) : null,
+            'image' => ($accessory->image) ? Storage::disk('public')->url(FileStorage::Accessories->publicPath().e($accessory->image)) : null,
             'qr_code_url' => route('qr_code/common', ['object_type' => 'accessories', 'id' => $accessory->id]),
             'company' => ($accessory->company) ? [
                 'id' => $accessory->company->id,
@@ -129,6 +130,44 @@ class AccessoriesTransformer
         $array += $permissions_array;
 
         return $array;
+    }
+
+    public function transformRequestedAccessories(Collection $accessories, $total)
+    {
+        $array = [];
+        foreach ($accessories as $accessory) {
+            $array[] = self::transformRequestedAccessory($accessory);
+        }
+
+        return (new DatatablesTransformer)->transformDatatables($array, $total);
+    }
+
+    public function transformRequestedAccessory(Accessory $accessory)
+    {
+        $userHasOpenRequest = auth()->check() && $accessory->relationLoaded('requests') && $accessory->requests->contains(
+            fn (\App\Models\CheckoutRequest $request) => $request->user_id === auth()->id() && $request->canceled_at === null
+        );
+
+        return [
+            'id' => (int) $accessory->id,
+            'name' => e($accessory->name),
+            'image' => ($accessory->image) ? Storage::disk('public')->url(FileStorage::Accessories->publicPath().e($accessory->image)) : null,
+            'model_number' => ($accessory->model_number) ? e($accessory->model_number) : null,
+            'location' => ($accessory->location) ? [
+                'id' => (int) $accessory->location->id,
+                'name' => e($accessory->location->name),
+                'tag_color' => ($accessory->location->tag_color) ? e($accessory->location->tag_color) : null,
+            ] : null,
+            'qty' => ($accessory->qty) ? (int) $accessory->qty : null,
+            'remaining' => (int) ($accessory->qty - $accessory->checkouts_count),
+            'remaining_qty' => (int) ($accessory->qty - $accessory->checkouts_count),
+            'requestable' => (bool) $accessory->requestable,
+            'assigned_to_self' => $userHasOpenRequest,
+            'available_actions' => [
+                'request' => (bool) $accessory->requestable && ! $userHasOpenRequest,
+                'cancel' => (bool) $accessory->requestable && $userHasOpenRequest,
+            ],
+        ];
     }
 
     public function transformCheckedoutAccessory($accessory_checkouts, $total)

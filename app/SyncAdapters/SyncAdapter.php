@@ -563,6 +563,7 @@ abstract class SyncAdapter
             $slug.'_asset_tag_pattern' => ['nullable', 'string', 'max:191', new \App\Rules\AssetTagPatternRule],
             $slug.'_default_category_id' => ['nullable', 'integer', 'exists:categories,id'],
             $slug.'_default_status_id' => ['required', 'integer', 'exists:status_labels,id'],
+            $slug.'_default_fieldset_id' => ['nullable', 'integer', 'exists:custom_fieldsets,id'],
             $slug.'_user_match_strategy' => ['nullable', 'string', 'in:none,email,username,username_then_email'],
             $slug.'_adopt_by_serial' => ['nullable', 'boolean'],
             $slug.'_create_snipeit_assets_on_pull' => ['nullable', 'boolean'],
@@ -582,7 +583,7 @@ abstract class SyncAdapter
         }
 
         if ($this->usesConfigurableUrl()) {
-            $rules[$slug.'_url'] = ['required', new ExternalUrl];
+            $rules[$slug.'_url'] = ['required', new ExternalUrl('app.sync_adapter_allow_internal_targets')];
         }
 
         foreach ($this->settingsSchema() as $field) {
@@ -834,6 +835,17 @@ abstract class SyncAdapter
             $this->instance->id,
             'default_status_id',
             (string) $request->input($slug.'_default_status_id', ''),
+        );
+
+        // Default fieldset for AssetModels auto-created from this
+        // adapter. Empty leaves fieldset_id null on new models (today's
+        // behavior). Admins pick a fieldset here so custom fields show
+        // on devices discovered by the adapter without having to
+        // revisit each new model by hand.
+        SyncAdapterConfig::put(
+            $this->instance->id,
+            'default_fieldset_id',
+            (string) $request->input($slug.'_default_fieldset_id', ''),
         );
 
         // User match strategy for sync-driven assignments. 'none'
@@ -1493,6 +1505,22 @@ abstract class SyncAdapter
     }
 
     /**
+     * Whether the composed-notes push UI should appear on this
+     * adapter's settings page. Default is "yes if the adapter is
+     * pushable at all" so existing adapters stay unchanged. Adapters
+     * targeting APIs that have no notes-like field anywhere in their
+     * push payload (Mosyle Manager v2's push elements, for example)
+     * override this to false so admins don't fill in a template that
+     * can never land. notesFieldTarget() returning null doesn't carry
+     * this meaning (Workspace ONE / NinjaOne return null legitimately
+     * because the admin picks the target).
+     */
+    public function supportsComposedNotesPush(): bool
+    {
+        return $this instanceof PushableAdapter && $this->canPush();
+    }
+
+    /**
      * Currently-selected target for a field, or the shipped default
      * when no per-instance override exists. Standard fields fall back
      * to MappingTargets::defaultTarget(). extras fall back to skip.
@@ -1577,6 +1605,21 @@ abstract class SyncAdapter
     public function defaultStatusId(): ?int
     {
         $stored = SyncAdapterConfig::get($this->instance->id, 'default_status_id');
+
+        return $stored === null || $stored === '' ? null : (int) $stored;
+    }
+
+    /**
+     * Default fieldset for AssetModels auto-created from this adapter.
+     * When set, resolveModelIdByName stamps this id on the new model's
+     * fieldset_id so custom fields show on synced devices without the
+     * admin revisiting each new model after a pull. Null leaves
+     * fieldset_id unset (today's behavior for installs that haven't
+     * configured this).
+     */
+    public function defaultFieldsetId(): ?int
+    {
+        $stored = SyncAdapterConfig::get($this->instance->id, 'default_fieldset_id');
 
         return $stored === null || $stored === '' ? null : (int) $stored;
     }
@@ -1767,6 +1810,66 @@ abstract class SyncAdapter
     public function cachedGroups(): array
     {
         $stored = SyncAdapterConfig::get($this->instance->id, 'cached_groups');
+        if ($stored === null || $stored === '') {
+            return [];
+        }
+        $decoded = json_decode($stored, true);
+
+        return is_array($decoded) ? $decoded : [];
+    }
+
+    /**
+     * Whether the adapter's vendor exposes a tenant / site / workspace
+     * concept that scopes the pull to one chosen entry. UniFi
+     * Network's Site, Jamf School's Location, Microsoft Entra Tenant,
+     * etc. Different from supportsGroupScoping(): sites choose ONE
+     * entry to pull from, groups map many vendor groups to Snipe-IT
+     * companies. Adapters that opt in render Site ID as a select
+     * backed by cachedSites() and implement fetchSites().
+     */
+    public function supportsSiteScoping(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Vendor's own terminology for the site concept. Mirrors
+     * vendorGroupLabel() so admins see wording they recognize in the
+     * refresh button and empty-state copy.
+     */
+    public function vendorSiteLabel(): string
+    {
+        return 'Site';
+    }
+
+    /**
+     * Live-fetch the current list of sites from the vendor. Returns
+     * an array of ['id' => '...', 'label' => '...']. Called from the
+     * settings page's "refresh sites" button. $overrides lets the
+     * caller supply the base URL and credentials from the pending
+     * form so a brand-new adapter can discover its sites before the
+     * admin saves anything. Keys match the schema field keys the
+     * adapter declares (e.g. 'url', 'api_key'). Default throws so
+     * adapters that opt into supportsSiteScoping have to implement it.
+     *
+     * @param  array<string, string|null>  $overrides
+     * @return array<int, array{id: string, label: string}>
+     */
+    public function fetchSites(array $overrides = []): array
+    {
+        throw new \RuntimeException(static::class.' declared site scoping support but did not implement fetchSites().');
+    }
+
+    /**
+     * Cached copy of the last fetchSites() result, so the settings
+     * page renders the Site ID select without hitting the vendor on
+     * every page load.
+     *
+     * @return array<int, array{id: string, label: string}>
+     */
+    public function cachedSites(): array
+    {
+        $stored = SyncAdapterConfig::get($this->instance->id, 'cached_sites');
         if ($stored === null || $stored === '') {
             return [];
         }

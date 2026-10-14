@@ -5,7 +5,7 @@ return [
     'field' => [
         'invalid' => 'フィールドがありません。',
         'already_added' => 'フィールドはすでに追加されています',
-        'none_selected' => 'No field selected',
+        'none_selected' => 'フィールドが選択されていません。',
 
         'create' => [
             'error' => 'フォルダーは作成されませんでした。もう一度やり直してください。',

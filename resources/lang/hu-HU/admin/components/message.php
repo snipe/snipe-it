@@ -16,7 +16,7 @@ return [
 
     'delete' => [
         'confirm' => 'Biztosan törölni szeretnéd az alkatrészt?',
-        'error' => 'Probléma támadt a vállalat törlésével. Próbálkozz újra.',
+        'error' => 'Probléma támadt a alkatrész törlésével. Próbálkozzon újra.',
         'success' => 'Az alkatrész sikeresen törlődött.',
         'error_qty' => 'Néhány ilyen típusú alkatrész még ki van adva. Kérjük, előbb végezze el azok visszavételét, majd próbálja újra.',
     ],

@@ -203,6 +203,7 @@ return [
     'email_array' => 'Imbalido ang isa o higit pang mga email address.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Ang :field ng katangian ay naglalaman ng karakter na hindi pinapayagan.',

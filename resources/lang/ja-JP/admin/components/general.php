@@ -13,7 +13,7 @@ return [
     'total' => '合計',
     'update' => '構成部品の更新',
     'checkin_limit' => 'チェックイン金額は :assigned_qty 以下にして下さい',
-    'exclude_deleted' => 'Exclude Deleted Components',
-    'include_deleted' => 'Include Deleted Components',
-    'only_deleted' => 'Only Deleted Components',
+    'exclude_deleted' => '削除済みコンポーネントを除外',
+    'include_deleted' => '削除済みコンポーネントを含める',
+    'only_deleted' => '削除済みコンポーネントのみ',
 ];

@@ -10,7 +10,7 @@ return [
     'bulk_update' => '批次更新資產',
     'bulk_update_help' => '此表格允許您同時修改多項資產。請僅填寫需要修改的欄位，留空的欄位不會做任何修改。',
     'bulk_update_warn' => '您即將編輯單一資產的屬性。|您即將編輯 :asset_count 項資產的屬性。',
-    'bulk_update_with_custom_field' => '注意：資產共有 :asset_model_count 種不同的型號。',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => '依型號',
     'bulk_update_custom_field_unique' => '這是唯一欄位，無法進行批次編輯。',
     'checkedout_to' => '借出至',

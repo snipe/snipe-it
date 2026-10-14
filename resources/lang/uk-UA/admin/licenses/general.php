@@ -32,8 +32,8 @@ return [
         ],
 
         'checkin_selected' => [
-            'success' => ':count seat checked in successfully. | :count seats checked in successfully.',
-            'no_seats_selected' => 'No seats were selected.',
+            'success' => ':count ліцензійне місце успішно повернено.|:count ліцензійних місць успішно повернено.',
+            'no_seats_selected' => 'Не вибрано жодного ліцензійного місця.',
         ],
 
         'checkout_all' => [
@@ -50,8 +50,8 @@ return [
         ],
 
         'delete_with_checkin' => [
-            'label' => 'Check in seats and delete',
-            'log_msg' => 'Checked in via bulk delete-with-checkin in license index',
+            'label' => 'Повернути ліцензійні місця та видалити',
+            'log_msg' => 'Повернено під час масового видалення з поверненням у списку ліцензій',
         ],
     ],
 

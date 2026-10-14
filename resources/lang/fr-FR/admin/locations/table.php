@@ -12,8 +12,8 @@ return [
     'create' => 'Créer un lieu',
     'update' => 'Mettre à jour le lieu',
     'print_assigned' => 'Imprimer les actifs attribués',
-    'print_inventory' => 'Print Inventory',
-    'print_all_assigned' => 'Print Inventory and Assigned',
+    'print_inventory' => 'Imprimer l\'inventaire',
+    'print_all_assigned' => 'Imprimer l\'inventaire et le matériel assigner',
     'name' => 'Nom du lieu',
     'address' => 'Adresse',
     'address2' => 'Adresse Ligne 2',
@@ -40,5 +40,5 @@ return [
     'signed_by_finance_auditor' => 'Signé par (auditeur financier):',
     'signed_by_location_manager' => 'Signé par (Gestionnaire d\'emplacements):',
     'signed_by' => 'Signé par :',
-    'clone' => 'Clone Location',
+    'clone' => 'Emplacement du clone',
 ];

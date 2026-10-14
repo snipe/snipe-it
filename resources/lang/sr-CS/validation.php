@@ -203,6 +203,7 @@ return [
     'email_array' => 'Jedna ili više adresa e-pošte nisu ispravne.',
     'checkboxes' => ':attribute sadrži neispravne opcije.',
     'radio_buttons' => ':attribute je neispravan.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => ':attribute polje sadrži znak koji nije dozvoljen.',

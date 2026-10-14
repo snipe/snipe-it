@@ -206,4 +206,46 @@ class OidcApiAuthTest extends TestCase
             ->assertOk()
             ->assertJson(['username' => $user->username]);
     }
+
+    /**
+     * Regression against the OIDC-API sibling of GHSA-w3vv-5wxh-xg4h.
+     * MySQL/MariaDB's default utf8mb4_unicode_ci collation treats
+     * `admin` and `admín` as equal, so a token whose preferred_username
+     * claim is the accented variant could route through `WHERE username = ?`
+     * to the real admin row. The resolver re-runs byte-exact match via
+     * User::verifyExactUsernameMatch before trusting the row. Byte-level
+     * guard behavior is already exercised in
+     * VerifyExactUsernameMatchTest. This case documents the resolver-side
+     * intent and prevents a regression on installs where SQLite is
+     * replaced by MySQL in a CI matrix.
+     *
+     * SQLite's BINARY collation does not reproduce the DB-side collision,
+     * so this test ends up with User::where() returning null and the
+     * resolver rejecting on that branch. It still pins the end-to-end
+     * expectation (401 for a byte-mismatched claim) so a future refactor
+     * that drops the guard but swaps the SQL to use a case/accent-folding
+     * form would be caught by VerifyExactUsernameMatchTest or by a
+     * MySQL-backed CI run.
+     */
+    public function test_token_whose_claim_bytes_differ_from_matched_user_username_is_rejected()
+    {
+        User::factory()->create(['username' => 'admin', 'activated' => 1]);
+
+        $this->withHeaders($this->bearer($this->token(['preferred_username' => 'admín'])))
+            ->getJson('/_test/oidc-whoami')
+            ->assertUnauthorized();
+    }
+
+    public function test_cyrillic_lookalike_claim_cannot_authenticate_as_latin_user()
+    {
+        User::factory()->create(['username' => 'admin', 'activated' => 1]);
+
+        // First `а` is Cyrillic U+0430, not Latin U+0061. Same shape as
+        // the accent case above: a database with a lookalike-folding
+        // configuration might match on the WHERE, and the byte-exact
+        // guard still rejects.
+        $this->withHeaders($this->bearer($this->token(['preferred_username' => 'аdmin'])))
+            ->getJson('/_test/oidc-whoami')
+            ->assertUnauthorized();
+    }
 }

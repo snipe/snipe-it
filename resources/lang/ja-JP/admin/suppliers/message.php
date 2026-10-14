@@ -19,9 +19,9 @@ return [
         'confirm' => '本当にこの仕入先を削除してよいですか？',
         'error' => '仕入先を削除する際に問題が発生しました。もう一度試して下さい。',
         'success' => '仕入先が削除されました。',
-        'not_found' => 'Supplier not found.',
-        'bulk_success' => 'Supplier deleted successfully.|:count suppliers were deleted successfully.',
-        'partial_success' => '.',
+        'not_found' => '仕入先が見つかりません。',
+        'bulk_success' => '仕入先を削除しました。|仕入先を:count件削除しました。',
+        'partial_success' => '一部の仕入先を削除しました。詳しくは以下をご確認ください。',
     ],
 
 ];

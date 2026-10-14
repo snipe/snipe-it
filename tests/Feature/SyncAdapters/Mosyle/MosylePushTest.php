@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 /**
- * End-to-end coverage for the Mosyle push path. Mosyle's write API
- * is a single POST endpoint dispatched by an `operation` field, so
- * tests verify the payload carries the right operation + serial +
- * value.
+ * End-to-end coverage for the Mosyle push path. Mosyle Manager v2's
+ * write API is POST /devices with an `elements` array keyed by
+ * `serialnumber`, carrying accessToken in the body and the JWT bearer
+ * in the Authorization header. Issue #19790.
  */
 class MosylePushTest extends TestCase
 {
@@ -27,12 +27,12 @@ class MosylePushTest extends TestCase
         Statuslabel::factory()->rtd()->create();
     }
 
-    public function test_mosyle_adapter_implements_pushable_interface()
+    public function test_mosyle_adapter_implements_pushable_interface(): void
     {
         $this->assertInstanceOf(PushableAdapter::class, $this->configuredMosyle());
     }
 
-    public function test_push_asset_tag_sends_operation_scoped_by_serial()
+    public function test_push_asset_tag_sends_elements_array_keyed_by_serial(): void
     {
         $adapter = $this->configuredMosyle();
         $instance = SyncAdapterInstance::where('slug', 'mosyle')->firstOrFail();
@@ -49,29 +49,30 @@ class MosylePushTest extends TestCase
         ]);
 
         Http::fake([
-            '*/devices' => Http::response(['status' => 'ok']),
+            '*/login' => Http::response(null, 200, ['Authorization' => 'Bearer fake-jwt']),
+            '*/devices' => Http::response(['status' => 'OK']),
         ]);
 
-        $adapter->push($asset);
+        $this->assertTrue($adapter->push($asset));
 
         Http::assertSent(function ($request) {
+            if (! str_ends_with($request->url(), '/devices')) {
+                return true;
+            }
             if ($request->method() !== 'POST') {
                 return false;
             }
             $body = $request->data();
 
-            return ($body['operation'] ?? null) === 'set_asset_tag_by_serial_number'
-                && ($body['serial_number'] ?? null) === 'MOS-SN-777'
-                && ($body['asset_tag'] ?? null) === 'SNIPE-MOS-77';
+            return ($body['accessToken'] ?? null) === 'fake-access-token'
+                && ($body['elements'][0]['serialnumber'] ?? null) === 'MOS-SN-777'
+                && ($body['elements'][0]['asset_tag'] ?? null) === 'SNIPE-MOS-77'
+                && ($request->header('Authorization')[0] ?? null) === 'Bearer fake-jwt';
         });
     }
 
-    public function test_push_falls_back_to_external_id_when_serial_missing()
+    public function test_push_falls_back_to_external_id_when_serial_missing(): void
     {
-        // Mosyle Business uses the device serial as external_id for
-        // some device types, so pushes still work for assets that
-        // never populated the serial column but do have an
-        // asset_external_sources row.
         $adapter = $this->configuredMosyle();
         $instance = SyncAdapterInstance::where('slug', 'mosyle')->firstOrFail();
         SyncAdapterConfig::put($instance->id, 'direction.asset_tag', 'push');
@@ -87,21 +88,48 @@ class MosylePushTest extends TestCase
         ]);
 
         Http::fake([
-            '*/devices' => Http::response(['status' => 'ok']),
+            '*/login' => Http::response(null, 200, ['Authorization' => 'Bearer fake-jwt']),
+            '*/devices' => Http::response(['status' => 'OK']),
         ]);
 
-        $adapter->push($asset);
+        $this->assertTrue($adapter->push($asset));
 
         Http::assertSent(function ($request) {
-            return ($request->data()['serial_number'] ?? null) === 'MOS-SN-888';
+            if (! str_ends_with($request->url(), '/devices')) {
+                return true;
+            }
+
+            return ($request->data()['elements'][0]['serialnumber'] ?? null) === 'MOS-SN-888';
         });
+    }
+
+    public function test_notes_field_target_is_null_because_manager_v2_push_has_no_notes(): void
+    {
+        // Mosyle Manager v2's push payload exposes asset_tag,
+        // device_name, lock-screen message, and custom tags. There is
+        // no notes field, so the composed-notes framework must skip
+        // Mosyle. Regression test for the pre-fix adapter claiming to
+        // support notes push via a non-existent operation.
+        $this->assertNull($this->configuredMosyle()->notesFieldTarget());
+    }
+
+    public function test_mosyle_opts_out_of_composed_notes_push_ui(): void
+    {
+        // Manager v2 has no field that admin-composed notes could land
+        // in, so the settings-page UI section is hidden. notesFieldTarget
+        // returning null is not enough on its own because other adapters
+        // (Workspace ONE, NinjaOne) legitimately return null and still
+        // expect the UI to appear so the admin can pick a target.
+        $this->assertFalse($this->configuredMosyle()->supportsComposedNotesPush());
     }
 
     private function configuredMosyle(): MosyleAdapter
     {
         $instance = SyncAdapterInstance::where('slug', 'mosyle')->firstOrFail();
         SyncAdapterConfig::put($instance->id, 'url', 'https://example.com/mosyle');
-        SyncAdapterConfig::put($instance->id, 'token', Crypt::encrypt('fake-mosyle-token'));
+        SyncAdapterConfig::put($instance->id, 'access_token', Crypt::encrypt('fake-access-token'));
+        SyncAdapterConfig::put($instance->id, 'email', 'sync-service@example.com');
+        SyncAdapterConfig::put($instance->id, 'password', Crypt::encrypt('fake-password'));
 
         return new MosyleAdapter($instance->fresh());
     }

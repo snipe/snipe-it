@@ -141,8 +141,10 @@ class JamfSchoolAdapterTest extends TestCase
                 'name' => $modelName,
                 'identifier' => 'iPad12,1',
             ],
-            'os' => $os,
-            'osVersion' => $osVersion,
+            'os' => [
+                'prefix' => $os,
+                'version' => $osVersion,
+            ],
             'wifiMacAddress' => $wifiMac,
             'lastCheckin' => $lastCheckin,
             'isSupervised' => true,

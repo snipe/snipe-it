@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FileStorage;
 use App\Helpers\StorageHelper;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\Actionlog;
@@ -44,11 +45,6 @@ class UploadedFilesController extends Controller
 
         if (! $object) {
             return redirect()->back()->withFragment('files')->with('error', trans('general.file_upload_status.invalid_object'));
-        }
-
-        // If the file storage directory doesn't exist, create it
-        if (! Storage::exists(parent::getMapStoragePath()[$object_type])) {
-            Storage::makeDirectory(parent::getMapStoragePath()[$object_type], 775);
         }
 
         if ($request->hasFile('file')) {
@@ -188,7 +184,7 @@ class UploadedFilesController extends Controller
                 return redirect()->back()->with('error', trans('general.file_upload_status.file_not_found'));
             }
 
-            $storedPath = 'private_uploads/imports/'.$import->file_path;
+            $storedPath = FileStorage::Imports->privateStorageKey().$import->file_path;
             if (! Storage::exists($storedPath)) {
                 return redirect()->back()->with('error', trans('general.file_upload_status.file_not_found'));
             }

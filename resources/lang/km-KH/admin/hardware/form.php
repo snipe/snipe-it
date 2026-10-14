@@ -10,7 +10,7 @@ return [
     'bulk_update' => 'ទ្រព្យសម្បត្តិអាប់ដេតភាគច្រើន',
     'bulk_update_help' => 'ទម្រង់បែបបទនេះអនុញ្ញាតឱ្យអ្នកធ្វើបច្ចុប្បន្នភាពទ្រព្យសម្បត្តិច្រើនក្នុងពេលតែមួយ។ បំពេញតែក្នុងវាលដែលអ្នកត្រូវការផ្លាស់ប្តូរ។ វាល​ណា​មួយ​ដែល​ទុក​នៅ​ទទេ​នឹង​នៅ​តែ​មិន​ផ្លាស់​ប្តូរ។ ',
     'bulk_update_warn' => 'អ្នក​រៀប​នឹង​កែ​សម្រួល​លក្ខណៈ​សម្បត្តិ​នៃ​ទ្រព្យ​សកម្ម​តែ​មួយ។|អ្នក​រៀប​នឹង​កែ​សម្រួល​លក្ខណៈ​សម្បត្តិ​របស់ :asset_count assets។',
-    'bulk_update_with_custom_field' => 'ចំណាំទ្រព្យសកម្មគឺ :asset_model_count ប្រភេទផ្សេងគ្នានៃគំរូ។',
+    'bulk_update_with_custom_field' => 'Your selection spans :asset_model_count different asset models. Custom fields below are grouped by model.',
     'bulk_update_model_prefix' => 'នៅលើម៉ូដែល',
     'bulk_update_custom_field_unique' => 'នេះ​គឺ​ជា​វាល​ពិសេស​មួយ ហើយ​មិន​អាច​ត្រូវ​បាន​កែ​សម្រួល​ច្រើន​ទេ។',
     'checkedout_to' => 'ប្រគល់ទៅអោយ',

@@ -24,7 +24,7 @@
 
             <x-box>
                 <x-form.row
-                    :label="trans('admin/depreciations/general.depreciation_name')"
+                    :label="trans('general.name')"
                     :$item
                     name="name"
                 />
@@ -78,10 +78,10 @@
                 {{-- Depreciation minimum: an input plus an "amount / percent" select
                      on the same row. Uses <x-form.row>'s <x-slot:input> so the
                      label, error placement, and grid still come from the row
-                     wrapper; only the input area itself is hand-authored. --}}
+                     wrapper. Only the input area itself is hand-authored. --}}
                 @if($depreciation_method !== 'diminish')
                     <x-form.row
-                            :label="trans('admin/depreciations/general.depreciation_min')"
+                        :label="trans('admin/depreciations/table.depreciation_min')"
                             name="depreciation_min"
                             input_div_class="col-md-9"
                     >
@@ -89,7 +89,7 @@
                             <div style="display: flex;">
                                 <input class="form-control" name="depreciation_min" id="depreciation_min" required
                                        type="number" value="{{ old('depreciation_min', $item->depreciation_min) }}"
-                                       style="width: 90px; margin-right: 15px; display: inline-block;"/>
+                                       style="width: 188px; margin-right: 15px; display: inline-block;"/>
                                 <select class="form-control select2" name="depreciation_type" id="depreciation_type"
                                         data-minimum-results-for-search="Infinity"
                                         style="width: 150px; display: inline-block;">

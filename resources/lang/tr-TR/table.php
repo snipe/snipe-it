@@ -7,10 +7,10 @@ return [
     'by' => 'Tarafından',
     'item' => 'Ürün',
     'no_matching_records' => 'Eşleşen kayıt bulunamadı',
-    'load_error_title' => 'Could not load results',
-    'load_error_body' => 'The server returned an error. Please try again in a moment. If this keeps happening, check the application log.',
-    'load_error_http_status' => 'HTTP status',
-    'load_error_session_expired' => 'Your session has expired. Reloading the page.',
-    'shift_select' => 'Click on a checkbox and hold <code>shift</code> and click another checkbox in the table to select/de-select a range.'
+    'load_error_title' => 'Sonuçlar yüklenemedi',
+    'load_error_body' => 'Sunucu bir hata döndürdü. Lütfen biraz sonra yeniden deneyin. Sorun devam ederse uygulama günlüğünü kontrol edin.',
+    'load_error_http_status' => 'HTTP durumu',
+    'load_error_session_expired' => 'Oturumunuzun süresi doldu. Sayfa yeniden yükleniyor.',
+    'shift_select' => 'Bir aralığı seçmek/seçimden çıkarmak için bir onay kutusuna tıklayın, ardından <code>shift</code> tuşunu basılı tutarak tablodaki başka bir onay kutusuna tıklayın.'
 
 ];

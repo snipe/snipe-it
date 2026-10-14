@@ -448,6 +448,7 @@ class LicensePresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('admin/licenses/form.expiration'),
                 'visible' => true,
+                'formatter' => 'dateDisplayFormatter',
             ],
             [
                 'field' => 'notes',

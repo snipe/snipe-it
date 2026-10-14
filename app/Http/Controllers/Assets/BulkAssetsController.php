@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Enums\FileStorage;
 use App\Events\CheckoutableCheckedIn;
 use App\Events\CheckoutablesCheckedOutInBulk;
 use App\Helpers\Helper;
@@ -1168,7 +1169,7 @@ class BulkAssetsController extends Controller
 
         $file_name = null;
         if ($request->hasFile('file.0')) {
-            $file_name = $request->handleFile('private_uploads/audits/', 'audit-'.$asset->id, $request->file('file.0'));
+            $file_name = $request->handleFile(FileStorage::Audits->privateStorageKey(), 'audit-'.$asset->id, $request->file('file.0'));
         }
 
         $asset->logAudit(

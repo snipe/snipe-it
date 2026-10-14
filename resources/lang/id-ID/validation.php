@@ -203,6 +203,7 @@ return [
     'email_array' => 'Satu atau lebih alamat email tidak benar.',
     'checkboxes' => ':attribute berisi opsi yang tidak valid.',
     'radio_buttons' => ':attribute tidak valid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Bidang atribut: berisi karakter yang tidak diizinkan.',

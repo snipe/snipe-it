@@ -88,11 +88,8 @@ class SecurityHeaders
             $csp_policy[] = "connect-src 'self'";
             $csp_policy[] = "object-src 'none'";
             $csp_policy[] = "font-src 'self' data:";
-            $csp_policy[] = "img-src 'self' data: ".config('app.url').' '.config('app.additional_csp_urls').' '.config('filesystems.disks.public_aws.url').' https://secure.gravatar.com http://gravatar.com maps.google.com maps.gstatic.com *.googleapis.com';
+            $csp_policy[] = "img-src 'self' data: ".config('app.url').' '.config('app.additional_csp_urls').' '.config('filesystems.disks.public.url').' https://secure.gravatar.com http://gravatar.com maps.google.com maps.gstatic.com *.googleapis.com';
 
-            if (config('filesystems.disks.public.driver') == 's3') {
-                $csp_policy[] = "img-src 'self' data:  ".config('filesystems.disks.public.url');
-            }
             $csp_policy = implode(';', $csp_policy);
 
             $response->headers->set('Content-Security-Policy', $csp_policy);

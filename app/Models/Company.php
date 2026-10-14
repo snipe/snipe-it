@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\FileStorage;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\HasUploads;
@@ -25,6 +26,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for Companies.
  *
  * @version v1.8
+ * @mixin IdeHelperCompany
  */
 final class Company extends SnipeModel
 {
@@ -254,7 +256,7 @@ final class Company extends SnipeModel
 
             $company->use_text = $breadcrumb;
             $company->use_image = ($company->image)
-                ? Storage::disk('public')->url('companies/'.$company->image)
+                ? Storage::disk('public')->url(FileStorage::Companies->publicPath().$company->image)
                 : null;
             $results[] = $company;
 
@@ -458,6 +460,34 @@ final class Company extends SnipeModel
         return ! self::isFullMultipleCompanySupportEnabled()
             || auth()->user()->isSuperUser()
             || ! empty(self::getCurrentUserCompanyIds());
+    }
+
+    /**
+     * On hard-delete, wipe the image file. Soft-delete leaves it alone so a
+     * subsequent restore comes back with its image intact.
+     */
+    protected static function booted(): void
+    {
+        self::forceDeleted(function (self $company) {
+            if ($company->image) {
+                try {
+                    Storage::disk('public')->delete(FileStorage::Companies->publicPath().$company->image);
+                } catch (\Exception $e) {
+                    Log::info($e->getMessage());
+                }
+            }
+
+            foreach ($company->uploads as $upload) {
+                if (($path = $upload->uploads_file_path()) !== null) {
+                    try {
+                        Storage::delete($path);
+                    } catch (\Exception $e) {
+                        Log::info($e->getMessage());
+                    }
+                }
+                $upload->delete();
+            }
+        });
     }
 
     /**

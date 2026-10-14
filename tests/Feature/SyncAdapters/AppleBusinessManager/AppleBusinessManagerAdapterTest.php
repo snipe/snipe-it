@@ -369,6 +369,39 @@ class AppleBusinessManagerAdapterTest extends TestCase
         $this->assertSame(1, \App\Models\Asset::query()->count());
     }
 
+
+    public function test_retries_on_429_and_honors_retry_after_header()
+    {
+        $adapter = $this->configuredAdapter();
+
+        // Serve 429 once, then 200 on the retry. Http::sequence replays
+        // responses in order per matching URL.
+        Http::fake([
+            'account.apple.com/*' => Http::response(['access_token' => 'stub-bearer']),
+            'api-business.apple.com/v1/mdmServers' => Http::sequence()
+                ->push(['detail' => 'rate limited'], 429, ['Retry-After' => '1'])
+                ->push(['data' => []], 200),
+            'api-business.apple.com/v1/orgDevices*' => Http::response(['data' => []]),
+        ]);
+
+        // The pull run completes without the 429 surfacing. Second call
+        // to /v1/mdmServers (the retry) returned 200. Total of 2 sends
+        // to that endpoint proves the retry actually fired.
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertSame([], $records);
+
+        $mdmServerHits = 0;
+        Http::assertSent(function ($request) use (&$mdmServerHits) {
+            if (str_contains($request->url(), '/v1/mdmServers') && !str_contains($request->url(), 'relationships')) {
+                $mdmServerHits++;
+            }
+
+            return true;
+        });
+        $this->assertSame(2, $mdmServerHits, 'Client should have retried the 429 once.');
+    }
+
     /**
      * @param  array<int, string>|null  $productFamilies  null = leave the stored filter alone; [] = force to empty
      */

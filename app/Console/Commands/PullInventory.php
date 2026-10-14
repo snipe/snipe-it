@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Actionlog;
 use App\Models\SyncAdapterInstance;
 use App\SyncAdapters\SyncAdapter;
+use App\SyncAdapters\SyncErrorFormatter;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -116,36 +118,41 @@ class PullInventory extends Command
         Log::channel('sync-adapters')->info("{$slug} sync starting (CLI)");
 
         try {
-            foreach ($adapter->pull() as $record) {
-                try {
-                    $result = SyncAdapter::syncFromRecord($record);
-                    if ($result === null) {
-                        $skipped++;
-                    } else {
-                        $seen++;
+            Actionlog::withActionSource('sync:'.$slug, function () use ($adapter, $slug, &$seen, &$skipped, &$errors) {
+                foreach ($adapter->pull() as $record) {
+                    try {
+                        $result = SyncAdapter::syncFromRecord($record);
+                        if ($result === null) {
+                            $skipped++;
+                        } else {
+                            $seen++;
+                        }
+                    } catch (Throwable $e) {
+                        $errors++;
+                        $sourceId = $record->sourceId;
+                        $message = $e->getMessage();
+                        // A single bad record shouldn't take down the run.
+                        // Log the offending host and keep going.
+                        $this->warn("Failed to sync host {$sourceId}: {$message}");
+                        Log::channel('sync-adapters')->warning("{$slug} sync: failed to upsert host {$sourceId}: {$message}");
                     }
-                } catch (Throwable $e) {
-                    $errors++;
-                    $sourceId = $record->sourceId;
-                    $message = $e->getMessage();
-                    // A single bad record shouldn't take down the run.
-                    // Log the offending host and keep going.
-                    $this->warn("Failed to sync host {$sourceId}: {$message}");
-                    Log::channel('sync-adapters')->warning("{$slug} sync: failed to upsert host {$sourceId}: {$message}");
                 }
-            }
+            });
         } catch (Throwable $e) {
-            $message = $e->getMessage();
-            $abortSummary = "Sync aborted: {$message}";
+            // Brief summary for the UI "Last Synced" field and the
+            // console error output.
+            $summary = SyncErrorFormatter::summary($e);
+            $abortSummary = "Sync aborted: {$summary}";
             $instance->last_synced_at = now();
             $instance->last_sync_result = $abortSummary;
             $instance->save();
 
             $elapsed = self::formatElapsed($startedAt);
             $this->error("{$slug} {$abortSummary} ({$elapsed})");
-            Log::channel('sync-adapters')->warning("{$slug} sync aborted after {$seen} record(s), {$skipped} skipped, {$errors} error(s), elapsed {$elapsed}: {$message}", [
-                'exception' => $e,
-            ]);
+            Log::channel('sync-adapters')->warning(
+                "{$slug} sync aborted after {$seen} record(s), {$skipped} skipped, {$errors} error(s), elapsed {$elapsed}: {$summary}",
+                SyncErrorFormatter::logContext($e),
+            );
             $rows[] = [$slug, 'Aborted', $seen, $skipped, $errors, $elapsed];
 
             return self::FAILURE;

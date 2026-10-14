@@ -15,7 +15,7 @@ return [
     'filetype_info' => 'Dozwolone typy plików: png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar.',
     'history_user' => 'Historia',
     'info' => 'Informacje',
-    'send_acceptance_reminder' => 'Send Reminder',
+    'send_acceptance_reminder' => 'Wyślij przypomnienie',
     'unaccepted_items' => ':count Unaccepted Items',
     'restore_user' => 'Kliknij tutaj, aby je przywrócić.',
     'last_login' => 'Ostatnie logowanie',

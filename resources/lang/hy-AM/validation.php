@@ -206,6 +206,7 @@ Match / Size / Format',
     'email_array' => 'Մեկ կամ մի քանի էլ․ հասցե սխալ է։',
     'checkboxes' => ':attribute-ը պարունակում է սխալ տարբերակներ։',
     'radio_buttons' => ':attribute-ը սխալ է։',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => ':attribute դաշտը պարունակում է չթույլատրված նիշ։',

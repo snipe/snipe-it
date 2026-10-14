@@ -203,6 +203,7 @@ return [
     'email_array' => 'Een of meer e-posadresse is ongeldig.',
     'checkboxes' => ':attribute contains invalid options.',
     'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
 
     'custom' => [
         'alpha_space' => 'Die: attribuut veld bevat \'n karakter wat nie toegelaat word nie.',

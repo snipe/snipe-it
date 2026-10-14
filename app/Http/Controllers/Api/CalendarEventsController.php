@@ -246,7 +246,21 @@ class CalendarEventsController extends Controller
         return $rows->filter(function (CalendarEvent $row) use ($sourcesByType, $viewer) {
             $source = $sourcesByType[$row->source_type][$row->source_id] ?? null;
 
-            return $source && $viewer?->can('view', $source);
+            if (! $source) {
+                return false;
+            }
+
+            // Belt and suspenders against issue #19760: hide events
+            // whose source has been soft-deleted. The display is the
+            // user-visible symptom. The sync-path gate in
+            // HasCalendarEvents::syncCalendarEvents prevents new ones
+            // from being written in the first place, and the cleanup
+            // migration soft-deletes any already written.
+            if (method_exists($source, 'trashed') && $source->trashed()) {
+                return false;
+            }
+
+            return $viewer?->can('view', $source);
         })->values();
     }
 }

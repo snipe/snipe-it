@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\FileStorage;
 use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\HasCalendarEvents;
+use App\Models\Traits\HasImageUpload;
 use App\Models\Traits\HasUploads;
 use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
@@ -34,12 +36,21 @@ use Illuminate\Support\Str;
 use Laravel\Passport\HasApiTokens;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperUser
+ */
 class User extends SnipeModel implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, HasLocalePreference
 {
     use CompanyableTrait;
     use HasCalendarEvents;
     use HasFactory;
+    use HasImageUpload;
     use HasUploads;
+
+    public static function fileStorage(): FileStorage
+    {
+        return FileStorage::Avatars;
+    }
 
     protected $presenter = UserPresenter::class;
 
@@ -675,6 +686,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     {
         return [
             [
+                'field' => 'start_date',
+                'event_type' => 'user.start_date',
+                'all_day' => true,
+            ],
+            [
                 'field' => 'end_date',
                 'event_type' => 'user.end_date',
                 'all_day' => true,
@@ -1031,11 +1047,27 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         // companies from the Companies side of the join, which turns
         // the whereNotIn below into an empty result and drops every
         // preserved company. See GH #19569.
-        $editorVisible = DB::table('company_user')
+        $editorDirect = DB::table('company_user')
             ->where('user_id', $editor->id)
             ->pluck('company_id')
             ->map(fn ($id) => (int) $id)
             ->all();
+
+        // The editor's reach must match what every gate upstream of this
+        // helper enforces (Company::getIdsForCurrentUser(), the
+        // SaveUserRequest floater gate, parent_within_scope): direct
+        // memberships PLUS their child companies. Using only the direct
+        // rows silently drops a permitted child-company submission after
+        // the gates have accepted it. Under null_company_is_floater that
+        // left the target with no company at all, promoting them to a
+        // system-wide floater and escaping tenant isolation. See
+        // GHSA-35hv-26vj-9445.
+        $editorChildren = empty($editorDirect) ? [] : DB::table('companies')
+            ->whereIn('parent_id', $editorDirect)
+            ->pluck('id')
+            ->map(fn($id) => (int) $id)
+            ->all();
+        $editorVisible = array_values(array_unique(array_merge($editorDirect, $editorChildren)));
 
         $submittedVisible = array_values(array_intersect($submitted, $editorVisible));
 

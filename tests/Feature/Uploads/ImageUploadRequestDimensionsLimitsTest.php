@@ -65,8 +65,67 @@ class ImageUploadRequestDimensionsLimitsTest extends TestCase
 
         $errors = $validator->errors();
         $this->assertTrue($errors->has('favicon'), 'A 2048x2048 image must fail the favicon dimensions cap (1024).');
-        $this->assertFalse($errors->has('image'), 'A 2048x2048 image must pass the image dimensions cap (10000).');
-        $this->assertFalse($errors->has('avatar'), 'A 2048x2048 image must pass the avatar dimensions cap (10000).');
+        $this->assertFalse($errors->has('image'), 'A 2048x2048 image must pass the image dimensions cap (4096).');
+        $this->assertFalse($errors->has('avatar'), 'A 2048x2048 image must pass the avatar dimensions cap (4096).');
+    }
+
+    /**
+     * Reporter-identified boundary (post-ed43b8bdcc fix, Wojciech
+     * Ciemski): a 10000x10000 PNG compressed well under the file-size
+     * cap passed the earlier 10000x10000 dimension cap, decoded to
+     * 100MP (~400MB raw RGBA) and overran worker memory. Current cap
+     * is 4096x4096 (~64MB raw RGBA). Verify a 4097-high image is
+     * rejected on the dimension validator before any decoder sees it.
+     */
+    public function test_image_above_pixel_cap_is_rejected_at_the_boundary(): void
+    {
+        Storage::fake('public');
+
+        $path = tempnam(sys_get_temp_dir(), 'png');
+        file_put_contents($path, $this->craftPngWithIhdrDimensions(4097, 4097));
+        $upload = new UploadedFile($path, 'just-over.png', 'image/png', null, true);
+
+        $request = new \App\Http\Requests\ImageUploadRequest;
+        $validator = \Illuminate\Support\Facades\Validator::make(
+            ['avatar' => $upload, 'image' => $upload],
+            $request->rules(),
+        );
+
+        $this->assertTrue($validator->errors()->has('avatar'), '4097x4097 must fail the avatar dimension cap.');
+        $this->assertTrue($validator->errors()->has('image'), '4097x4097 must fail the image dimension cap.');
+    }
+
+    /**
+     * Reporter-identified unit mismatch (post-ed43b8bdcc fix, Wojciech
+     * Ciemski): Laravel's `max:` rule on file validators treats its
+     * argument as KIBIBYTES, not bytes. The earlier rule interpolated
+     * Helper::file_upload_max_size()'s byte value directly, so with
+     * upload_max_filesize=2M the rule read `max:2097152` and silently
+     * permitted ~2 GiB uploads at the application layer. Verify that a
+     * file over the real PHP upload limit now trips the `max:` rule.
+     */
+    public function test_file_size_max_rule_uses_kibibytes_not_bytes(): void
+    {
+        Storage::fake('public');
+
+        // Craft a legitimate-dimension PNG padded to just over the PHP
+        // upload limit so dimensions + mime pass, and only the `max:`
+        // rule can be the one that rejects it.
+        $path = tempnam(sys_get_temp_dir(), 'png');
+        $header = $this->craftPngWithIhdrDimensions(400, 400);
+        file_put_contents($path, $header.str_repeat("\0", \App\Helpers\Helper::file_upload_max_size() + 1024 - strlen($header)));
+        $upload = new UploadedFile($path, 'oversized.png', 'image/png', null, true);
+
+        $request = new \App\Http\Requests\ImageUploadRequest;
+        $validator = \Illuminate\Support\Facades\Validator::make(
+            ['avatar' => $upload],
+            $request->rules(),
+        );
+
+        $this->assertTrue(
+            $validator->errors()->has('avatar'),
+            'A file larger than file_upload_max_size() must fail the `max:` rule. If this fails, the rule is interpreting bytes as kilobytes and permitting ~1024x the intended cap.',
+        );
     }
 
     public function test_normal_sized_avatar_still_passes_validation(): void

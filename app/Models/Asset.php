@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\FileStorage;
 use App\Events\CheckoutableCheckedOut;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
@@ -9,6 +10,7 @@ use App\Http\Traits\UniqueUndeletedTrait;
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\HasCalendarEvents;
+use App\Models\Traits\HasImageUpload;
 use App\Models\Traits\HasOrders;
 use App\Models\Traits\HasUploads;
 use App\Models\Traits\Loggable;
@@ -24,6 +26,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
@@ -31,7 +34,6 @@ use Watson\Validating\ValidatingTrait;
  * Model for Assets.
  *
  * @version v1.0
- *
  * @property ?int $location_id
  * @property Carbon|string|null $next_audit_date
  * @property Carbon|string|null $last_audit_date
@@ -39,6 +41,7 @@ use Watson\Validating\ValidatingTrait;
  * @property ?int $company_id
  * @property Carbon|string|null $last_checkin
  * @property bool $requestable
+ * @mixin IdeHelperAsset
  */
 class Asset extends Depreciable
 {
@@ -49,6 +52,7 @@ class Asset extends Depreciable
     use CompanyableTrait;
     use HasCalendarEvents;
     use HasFactory;
+    use HasImageUpload;
     use HasOrders;
     use HasUploads;
     use Loggable;
@@ -65,6 +69,11 @@ class Asset extends Depreciable
     public const USER = 'user';
 
     use Acceptable;
+
+    public static function fileStorage(): FileStorage
+    {
+        return FileStorage::Assets;
+    }
 
     /**
      * Run after the checkout acceptance was declined by the user
@@ -273,10 +282,39 @@ class Asset extends Depreciable
         'rtd_location' => 'defaultLoc',
     ];
 
+    protected $searchableRelationColumns = [
+        'jobtitle' => ['relation' => 'assignedTo', 'column' => 'jobtitle', 'types' => [\App\Models\User::class]],
+        'employee_num' => ['relation' => 'assignedTo', 'column' => 'employee_num', 'types' => [\App\Models\User::class]],
+    ];
+
     protected static function booted(): void
     {
         static::forceDeleted(function (Asset $asset) {
             $asset->requests()->forceDelete();
+
+            // Image + Files-tab attachments wipe on hard-delete only, so
+            // a restored soft-deleted asset keeps its image and files.
+            // Attachment action_log rows get soft-deleted (not
+            // hard-deleted) so the audit trail of what was attached-
+            // and-when survives even after the parent is gone.
+            if ($asset->image) {
+                try {
+                    Storage::disk('public')->delete(FileStorage::Assets->publicPath().$asset->image);
+                } catch (\Exception $e) {
+                    Log::info($e->getMessage());
+                }
+            }
+
+            foreach ($asset->uploads as $upload) {
+                if (($path = $upload->uploads_file_path()) !== null) {
+                    try {
+                        Storage::delete($path);
+                    } catch (\Exception $e) {
+                        Log::info($e->getMessage());
+                    }
+                }
+                $upload->delete();
+            }
         });
 
         static::softDeleted(function (Asset $asset) {
@@ -355,7 +393,7 @@ class Asset extends Depreciable
 
         if ($this->model_id && $this->model && (string) $this->model->require_serial === '1') {
             $this->rules['serial'] = array_merge(
-                array_filter($this->rules['serial'] ?? [], fn($r) => $r !== 'nullable'),
+                array_filter($this->rules['serial'] ?? [], fn ($r) => $r !== 'nullable'),
                 ['required'],
             );
         }
@@ -1023,11 +1061,11 @@ class Asset extends Depreciable
     public function getImageUrl($path = null)
     {
         if ($this->image && ! empty($this->image)) {
-            return Storage::disk('public')->url(app('assets_upload_path').e($this->image));
+            return Storage::disk('public')->url(FileStorage::Assets->publicPath().e($this->image));
         } elseif ($this->model && ! empty($this->model->image)) {
-            return Storage::disk('public')->url(app('models_upload_path').e($this->model->image));
+            return Storage::disk('public')->url(FileStorage::Models->publicPath().e($this->model->image));
         } elseif ($this->model?->category && ! empty($this->model->category->image)) {
-            return Storage::disk('public')->url(app('categories_upload_path').e($this->model->category->image));
+            return Storage::disk('public')->url(FileStorage::Categories->publicPath().e($this->model->category->image));
         }
 
         return false;
@@ -2195,7 +2233,15 @@ class Asset extends Depreciable
      */
     public function scopeOrderByCreatedByName($query, $order)
     {
-        return $query->leftJoin('users as admin_sort', 'assets.created_by', '=', 'admin_sort.id')->select('assets.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        // addSelect rather than select, so prior withCount subqueries
+        // (which append their count-expressions to the select list)
+        // don't get wiped by the join and trigger an N+1 on the
+        // reload.
+        return $query
+            ->leftJoin('users as admin_sort', 'assets.created_by', '=', 'admin_sort.id')
+            ->addSelect('assets.*')
+            ->orderBy('admin_sort.first_name', $order)
+            ->orderBy('admin_sort.last_name', $order);
     }
 
     /**
@@ -2207,7 +2253,14 @@ class Asset extends Depreciable
      */
     public function scopeOrderAssigned($query, $order)
     {
-        return $query->leftJoin('users as users_sort', 'assets.assigned_to', '=', 'users_sort.id')->select('assets.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
+        return $query
+            ->leftJoin('users as users_sort', function ($join) {
+                $join->on('assets.assigned_to', '=', 'users_sort.id')
+                    ->where('assets.assigned_type', '=', User::class);
+            })
+            ->addSelect('assets.*')
+            ->orderBy('users_sort.first_name', $order)
+            ->orderBy('users_sort.last_name', $order);
     }
 
     /**
@@ -2361,7 +2414,13 @@ class Asset extends Depreciable
      */
     public function scopeOrderByJobTitle($query, $order)
     {
-        return $query->leftJoin('users as users_sort', 'assets.assigned_to', '=', 'users_sort.id')->select('assets.*')->orderBy('users_sort.jobtitle', $order);
+        return $query
+            ->leftJoin('users as users_sort', function ($join) {
+                $join->on('assets.assigned_to', '=', 'users_sort.id')
+                    ->where('assets.assigned_type', '=', User::class);
+            })
+            ->addSelect('assets.*')
+            ->orderBy('users_sort.jobtitle', $order);
     }
 
     /**
