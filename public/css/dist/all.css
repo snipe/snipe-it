@@ -21704,7 +21704,7 @@ a.accordion-header {
   font-size: 13px;
 }
 .main-header {
-  max-height: 150px;
+  max-height: none;
 }
 .navbar-nav > .user-menu > .dropdown-menu {
   width: inherit;
@@ -22497,6 +22497,11 @@ thead th.css-history > .th-inner::before {
   }
   .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
     margin-right: -39px;
+  }
+}
+@media (max-width: 767px) {
+  .main-sidebar {
+    padding-top: var(--main-header-height, 100px);
   }
 }
 @media screen and (max-width: 992px) {
@@ -25870,7 +25875,7 @@ a.accordion-header {
   font-size: 13px;
 }
 .main-header {
-  max-height: 150px;
+  max-height: none;
 }
 .navbar-nav > .user-menu > .dropdown-menu {
   width: inherit;
@@ -26663,6 +26668,11 @@ thead th.css-history > .th-inner::before {
   }
   .navbar-custom-menu > .navbar-nav > li > .dropdown-menu {
     margin-right: -39px;
+  }
+}
+@media (max-width: 767px) {
+  .main-sidebar {
+    padding-top: var(--main-header-height, 100px);
   }
 }
 @media screen and (max-width: 992px) {

@@ -673,6 +673,28 @@ var baseUrl = $('meta[name="baseUrl"]').attr('content');
 $(function () {
   var $el = $('body');
 
+  // Publish the live header height as a CSS custom property so
+  // .main-sidebar's padding-top can track it at narrow widths. The
+  // AdminLTE 2 base pads the mobile sidebar by a static 100px, which
+  // is too small whenever the header wraps to a taller stack (common
+  // on FMCS + location-scoped installs at ~750px). Static breakpoint
+  // margins used to compensate for this and were removed under the
+  // assumption this rule already existed. See #19826.
+  (function () {
+    var header = document.querySelector('.main-header');
+    if (header === null) {
+      return;
+    }
+    var sync = function sync() {
+      document.documentElement.style.setProperty('--main-header-height', header.getBoundingClientRect().height + 'px');
+    };
+    sync();
+    window.addEventListener('resize', sync);
+    if (typeof ResizeObserver !== 'undefined') {
+      new ResizeObserver(sync).observe(header);
+    }
+  })();
+
   // confirm restore modal
 
   $el.on('click', '.restore-asset', function (evnt) {
