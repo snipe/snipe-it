@@ -282,6 +282,12 @@ class Asset extends Depreciable
         'rtd_location' => 'defaultLoc',
     ];
 
+
+    protected $searchableRelationColumns = [
+        'jobtitle' => ['relation' => 'assignedTo', 'column' => 'jobtitle', 'types' => [\App\Models\User::class]],
+        'employee_num' => ['relation' => 'assignedTo', 'column' => 'employee_num', 'types' => [\App\Models\User::class]],
+    ];
+
     protected static function booted(): void
     {
         static::forceDeleted(function (Asset $asset) {
@@ -2240,7 +2246,14 @@ class Asset extends Depreciable
      */
     public function scopeOrderAssigned($query, $order)
     {
-        return $query->leftJoin('users as users_sort', 'assets.assigned_to', '=', 'users_sort.id')->select('assets.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
+        return $query
+            ->leftJoin('users as users_sort', function ($join) {
+                $join->on('assets.assigned_to', '=', 'users_sort.id')
+                    ->where('assets.assigned_type', '=', User::class);
+            })
+            ->addSelect('assets.*')
+            ->orderBy('users_sort.first_name', $order)
+            ->orderBy('users_sort.last_name', $order);
     }
 
     /**
@@ -2394,7 +2407,13 @@ class Asset extends Depreciable
      */
     public function scopeOrderByJobTitle($query, $order)
     {
-        return $query->leftJoin('users as users_sort', 'assets.assigned_to', '=', 'users_sort.id')->select('assets.*')->orderBy('users_sort.jobtitle', $order);
+        return $query
+            ->leftJoin('users as users_sort', function ($join) {
+                $join->on('assets.assigned_to', '=', 'users_sort.id')
+                    ->where('assets.assigned_type', '=', User::class);
+            })
+            ->addSelect('assets.*')
+            ->orderBy('users_sort.jobtitle', $order);
     }
 
     /**
