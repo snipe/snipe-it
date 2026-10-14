@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
  * Slugs auto-generate from the label at create time and are immutable
  * after, because asset_external_sources.source references them and reassigning
  * slugs later would orphan assets.
+ *
+ * @mixin IdeHelperSyncAdapterInstance
  */
 class SyncAdapterInstance extends Model
 {

@@ -19,6 +19,8 @@ use Watson\Validating\ValidatingTrait;
 
 /**
  * Settings model.
+ *
+ * @mixin IdeHelperSetting
  */
 class Setting extends Model
 {

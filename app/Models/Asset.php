@@ -34,7 +34,6 @@ use Watson\Validating\ValidatingTrait;
  * Model for Assets.
  *
  * @version v1.0
- *
  * @property ?int $location_id
  * @property Carbon|string|null $next_audit_date
  * @property Carbon|string|null $last_audit_date
@@ -42,6 +41,7 @@ use Watson\Validating\ValidatingTrait;
  * @property ?int $company_id
  * @property Carbon|string|null $last_checkin
  * @property bool $requestable
+ * @mixin IdeHelperAsset
  */
 class Asset extends Depreciable
 {

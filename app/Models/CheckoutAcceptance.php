@@ -12,6 +12,9 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use TCPDF;
+/**
+ * @mixin IdeHelperCheckoutAcceptance
+ */
 class CheckoutAcceptance extends Model
 {
     use HasFactory, Notifiable, SoftDeletes;

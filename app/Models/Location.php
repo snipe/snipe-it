@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperLocation
+ */
 class Location extends SnipeModel
 {
     use CompanyableTrait;
