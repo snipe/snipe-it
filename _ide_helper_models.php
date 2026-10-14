@@ -86,49 +86,49 @@ namespace App\Models{
  * @property-read int|null $uploads_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AccessoryCheckout> $users
  * @property-read int|null $users_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory applyOffsetAndLimit(int $total)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory applyOffsetAndLimit(int $total)
  * @method static \Database\Factories\AccessoryFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory newQuery()
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory newModelQuery()
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orWhereMultipleColumns(array $columns, $term)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderByCreatedByName($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderByLastPurchaseCost(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderByLastPurchaseDate(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderByOrderNumber(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderByTotalOrderCost(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderCategory($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderCompany($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderLocation($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderManufacturer($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderPercentRemaining($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderRemaining($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory orderSupplier($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory requestable()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory requestedBy(\App\Models\User $user)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory textSearch($search)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereCompanyId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereDefaultPurchaseCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereDefaultSupplierId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereLegacyOrderNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereLegacyPurchaseDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereLegacyQty($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereLocationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereManufacturerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereMinAmt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereModelNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereQty($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereRequestable($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory whereUpdatedAt($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orWhereMultipleColumns(array $columns, $term)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderByCreatedByName(string $order)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderByLastPurchaseCost(string $direction = 'asc')
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderByLastPurchaseDate(string $direction = 'asc')
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderByOrderNumber(string $direction = 'asc')
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderByTotalOrderCost(string $direction = 'asc')
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderCategory(string $order)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderCompany(string $order)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderLocation(string $order)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderManufacturer(string $order)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderPercentRemaining(string $order)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderRemaining(string $order)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderSupplier(string $order)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory query()
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory requestable()
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory requestedBy(\App\Models\User $user)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory textSearch($search)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereCategoryId($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereCompanyId($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereCreatedAt($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereCreatedBy($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereDefaultPurchaseCost($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereDefaultSupplierId($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereDeletedAt($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereId($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereImage($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereLegacyOrderNumber($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereLegacyPurchaseDate($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereLegacyQty($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereLocationId($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereManufacturerId($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereMinAmt($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereModelNumber($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereName($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereNotes($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereQty($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereRequestable($value)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory withoutTrashed()
  * @mixin \Eloquent
@@ -195,8 +195,6 @@ namespace App\Models{
  * @property string $item_type
  * @property int $item_id
  * @property string|null $expected_checkin
- * @property int $quantity
- * @property int|null $order_item_id
  * @property int|null $accepted_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -210,6 +208,8 @@ namespace App\Models{
  * @property string|null $action_source
  * @property string|null $remote_ip
  * @property string|null $user_agent
+ * @property int $quantity
+ * @property int|null $order_item_id
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
  * @property-read int|null $accessories_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Actionlog> $actionlog
@@ -315,12 +315,10 @@ namespace App\Models{
  * @property int|null $model_id
  * @property string|null $serial
  * @property \Illuminate\Support\Carbon|null $purchase_date
- * @property bool $eol_explicit
  * @property numeric|null $purchase_cost
  * @property string|null $order_number
  * @property int|null $assigned_to
  * @property string|null $notes
- * @property string|null $image
  * @property int|null $created_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -332,29 +330,17 @@ namespace App\Models{
  * @property int|null $depreciate
  * @property int|null $supplier_id
  * @property int|null $rtd_location_id
+ * @property string|null $_snipeit_mac_address_1
  * @property string|null $accepted
  * @property \Illuminate\Support\Carbon|null $last_checkout
  * @property \Illuminate\Support\Carbon|null $expected_checkin
+ * @property string|null $image
  * @property string|null $assigned_type
  * @property int $checkin_counter
- * @property int $requests_counter
  * @property int $checkout_counter
+ * @property int $requests_counter
  * @property int|null $byod
- * @property string|null $_snipeit_imei_1
- * @property string|null $_snipeit_phone_number_2
- * @property string|null $_snipeit_ram_3
- * @property string|null $_snipeit_cpu_4
- * @property string|null $_snipeit_mac_address_5
- * @property string|null $_snipeit_test_encrypted_6
- * @property string|null $_snipeit_test_checkbox_7
- * @property string|null $_snipeit_test_radio_8
- * @property string|null $_snipeit_notes_9
- * @property string|null $_snipeit_sample_date_10
- * @property string|null $_snipeit_sample_datetime_11
- * @property string|null $_snipeit__12
- * @property string|null $_snipeit_dscsdaffds_13
- * @property string|null $_snipeit_last_seen_network_heartbeat_14
- * @property string|null $_snipeit_disk_encryption_15
+ * @property bool $eol_explicit
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
  * @property-read int|null $accessories_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
@@ -518,21 +504,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereRequestsCounter($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereRtdLocationId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSerial($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeit12($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitCpu4($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitDiskEncryption15($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitDscsdaffds13($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitImei1($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitLastSeenNetworkHeartbeat14($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitMacAddress5($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitNotes9($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitPhoneNumber2($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitRam3($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitSampleDate10($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitSampleDatetime11($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitTestCheckbox7($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitTestEncrypted6($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitTestRadio8($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSnipeitMacAddress1($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereStatusId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereSupplierId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Asset whereUpdatedAt($value)
@@ -600,13 +572,9 @@ namespace App\Models{
  * @version v1.0
  * @property int $id
  * @property string $name
- * @property string|null $tag_slug
  * @property string|null $model_number
- * @property string|null $hardware_identifier
- * @property int|null $min_amt
  * @property int|null $manufacturer_id
  * @property int|null $category_id
- * @property int $require_serial
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $depreciation_id
@@ -618,6 +586,8 @@ namespace App\Models{
  * @property int|null $fieldset_id
  * @property string|null $notes
  * @property int $requestable
+ * @property int|null $min_amt
+ * @property int $require_serial
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
  * @property-read \App\Models\User|null $adminuser
@@ -663,43 +633,41 @@ namespace App\Models{
  * @property-write mixed $warranty_months
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $uploads
  * @property-read int|null $uploads_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel applyOffsetAndLimit(int $total)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel applyOffsetAndLimit(int $total)
  * @method static \Database\Factories\AssetModelFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel inCategory(array $categoryIdListing)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel newQuery()
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel inCategory(array $categoryIdListing)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel newModelQuery()
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel orWhereMultipleColumns(array $columns, $term)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel orderByCreatedByName($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel orderCategory($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel orderFieldset($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel orderManufacturer($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel orderPercentRemaining($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel requestable()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel requestedBy(\App\Models\User $user)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel searchByManufacturerOrCat($search)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel textSearch($search)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereDeprecatedMacAddress($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereDepreciationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereEol($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereFieldsetId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereHardwareIdentifier($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereManufacturerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereMinAmt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereModelNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereRequestable($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereRequireSerial($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereTagSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel whereUpdatedAt($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel orWhereMultipleColumns(array $columns, $term)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel orderByCreatedByName(string $order)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel orderCategory(string $order)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel orderFieldset(string $order)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel orderManufacturer(string $order)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel orderPercentRemaining(string $order)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel query()
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel requestable()
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel requestedBy(\App\Models\User $user)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel searchByManufacturerOrCat(string $search)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel textSearch($search)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereCategoryId($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereCreatedAt($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereCreatedBy($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereDeletedAt($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereDeprecatedMacAddress($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereDepreciationId($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereEol($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereFieldsetId($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereId($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereImage($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereManufacturerId($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereMinAmt($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereModelNumber($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereName($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereNotes($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereRequestable($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereRequireSerial($value)
+ * @method static \App\Models\Builders\AssetModelQueryBuilder<static>|AssetModel whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|AssetModel withoutTrashed()
  * @mixin \Eloquent
@@ -765,8 +733,6 @@ namespace App\Models{
  * @version v1.0
  * @property int $id
  * @property string $name
- * @property string|null $tag_slug
- * @property string|null $tag_color
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $created_by
@@ -774,11 +740,12 @@ namespace App\Models{
  * @property string|null $eula_text
  * @property int $use_default_eula
  * @property int $require_acceptance
- * @property bool $alert_on_response
  * @property string|null $category_type
  * @property int $checkin_email
  * @property string|null $image
  * @property string|null $notes
+ * @property bool $alert_on_response
+ * @property string|null $tag_color
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
  * @property-read int|null $accessories_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
@@ -816,8 +783,6 @@ namespace App\Models{
  * @property-write mixed $status_id
  * @property-write mixed $supplier_id
  * @property-write mixed $warranty_months
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Asset> $showableAssets
- * @property-read int|null $showable_assets_count
  * @method static \App\Models\Builders\CategoryQueryBuilder<static>|Category applyOffsetAndLimit(int $total)
  * @method static \Database\Factories\CategoryFactory factory($count = null, $state = [])
  * @method static \App\Models\Builders\CategoryQueryBuilder<static>|Category newModelQuery()
@@ -841,7 +806,6 @@ namespace App\Models{
  * @method static \App\Models\Builders\CategoryQueryBuilder<static>|Category whereNotes($value)
  * @method static \App\Models\Builders\CategoryQueryBuilder<static>|Category whereRequireAcceptance($value)
  * @method static \App\Models\Builders\CategoryQueryBuilder<static>|Category whereTagColor($value)
- * @method static \App\Models\Builders\CategoryQueryBuilder<static>|Category whereTagSlug($value)
  * @method static \App\Models\Builders\CategoryQueryBuilder<static>|Category whereUpdatedAt($value)
  * @method static \App\Models\Builders\CategoryQueryBuilder<static>|Category whereUseDefaultEula($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Category withTrashed(bool $withTrashed = true)
@@ -858,10 +822,7 @@ namespace App\Models{
  * @property string $checkoutable_type
  * @property int $checkoutable_id
  * @property int|null $assigned_to_id
- * @property int|null $qty
  * @property string|null $signature_filename
- * @property string|null $note
- * @property int|null $alert_on_response_id
  * @property \Illuminate\Support\Carbon|null $accepted_at
  * @property \Illuminate\Support\Carbon|null $declined_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -869,6 +830,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $stored_eula
  * @property string|null $stored_eula_file
+ * @property string|null $note
+ * @property int|null $alert_on_response_id
+ * @property int|null $qty
  * @property-read \App\Models\User|null $assignedTo
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $checkoutable
  * @property-read mixed $checkoutable_category_name
@@ -916,17 +880,17 @@ namespace App\Models{
  * @property int $requestable_id
  * @property string $requestable_type
  * @property int $quantity
- * @property int $fulfilled_quantity
- * @property \Illuminate\Support\Carbon|null $start_date
- * @property \Illuminate\Support\Carbon|null $end_date
- * @property string|null $notes
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $canceled_at
  * @property \Illuminate\Support\Carbon|null $fulfilled_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $start_date
+ * @property \Illuminate\Support\Carbon|null $end_date
+ * @property string|null $notes
  * @property int|null $fulfilled_by
  * @property int|null $checkout_actionlog_id
- * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property int $fulfilled_quantity
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\CalendarEvent> $calendarEvents
  * @property-read int|null $calendar_events_count
  * @property-read \App\Models\Actionlog|null $checkoutActionlog
@@ -980,18 +944,17 @@ namespace App\Models{
  * @version v1.8
  * @property int $id
  * @property string $name
- * @property string|null $tag_slug
- * @property int|null $parent_id
- * @property string|null $tag_color
- * @property string|null $fax
- * @property string|null $email
- * @property string|null $phone
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $image
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string|null $phone
+ * @property string|null $fax
+ * @property string|null $email
  * @property int|null $created_by
  * @property string|null $notes
+ * @property string|null $tag_color
+ * @property int|null $parent_id
  * @property string|null $webhook_selected
  * @property string|null $webhook_endpoint
  * @property string|null $webhook_channel
@@ -1066,7 +1029,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereParentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereTagColor($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereTagSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereWebhookBotname($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereWebhookChannel($value)
@@ -1091,13 +1053,10 @@ namespace App\Models{
  * @property int|null $location_id
  * @property int|null $company_id
  * @property int|null $created_by
- * @property int|null $default_supplier_id
  * @property int $qty
  * @property string|null $legacy_order_number
  * @property string|null $legacy_purchase_date
  * @property numeric|null $default_purchase_cost
- * @property string|null $model_number
- * @property int|null $manufacturer_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -1105,6 +1064,9 @@ namespace App\Models{
  * @property string|null $serial
  * @property string|null $image
  * @property string|null $notes
+ * @property int|null $default_supplier_id
+ * @property int|null $manufacturer_id
+ * @property string|null $model_number
  * @property int|null $legacy_qty
  * @property bool $requestable
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
@@ -1155,50 +1117,50 @@ namespace App\Models{
  * @property-read int|null $unconstrained_assets_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $uploads
  * @property-read int|null $uploads_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component applyOffsetAndLimit(int $total)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component applyOffsetAndLimit(int $total)
  * @method static \Database\Factories\ComponentFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component newQuery()
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component newModelQuery()
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Component onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orWhereMultipleColumns(array $columns, $term)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderByCreatedBy($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderByLastPurchaseCost(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderByLastPurchaseDate(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderByOrderNumber(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderByTotalOrderCost(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderCategory($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderCompany($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderLocation($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderManufacturer($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderPercentRemaining($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderRemaining($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component orderSupplier($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component requestable()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component requestedBy(\App\Models\User $user)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component textSearch($search)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereCompanyId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereDefaultPurchaseCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereDefaultSupplierId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereLegacyOrderNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereLegacyPurchaseDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereLegacyQty($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereLocationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereManufacturerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereMinAmt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereModelNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereQty($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereRequestable($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereSerial($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Component whereUpdatedAt($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orWhereMultipleColumns(array $columns, $term)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderByCreatedBy(string $order)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderByLastPurchaseCost(string $direction = 'asc')
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderByLastPurchaseDate(string $direction = 'asc')
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderByOrderNumber(string $direction = 'asc')
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderByTotalOrderCost(string $direction = 'asc')
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderCategory(string $order)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderCompany(string $order)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderLocation(string $order)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderManufacturer(string $order)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderPercentRemaining(string $order)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderRemaining(string $order)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderSupplier(string $order)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component query()
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component requestable()
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component requestedBy(\App\Models\User $user)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component textSearch($search)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereCategoryId($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereCompanyId($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereCreatedAt($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereCreatedBy($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereDefaultPurchaseCost($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereDefaultSupplierId($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereDeletedAt($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereId($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereImage($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereLegacyOrderNumber($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereLegacyPurchaseDate($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereLegacyQty($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereLocationId($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereManufacturerId($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereMinAmt($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereModelNumber($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereName($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereNotes($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereQty($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereRequestable($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereSerial($value)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Component withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Component withoutTrashed()
  * @mixin \Eloquent
@@ -1254,7 +1216,6 @@ namespace App\Models{
  * @property int|null $category_id
  * @property int|null $location_id
  * @property int|null $created_by
- * @property int|null $default_supplier_id
  * @property int $qty
  * @property bool $requestable
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -1270,6 +1231,7 @@ namespace App\Models{
  * @property string|null $item_no
  * @property string|null $image
  * @property string|null $notes
+ * @property int|null $default_supplier_id
  * @property int|null $legacy_qty
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
@@ -1318,50 +1280,50 @@ namespace App\Models{
  * @property-read int|null $uploads_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable applyOffsetAndLimit(int $total)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable applyOffsetAndLimit(int $total)
  * @method static \Database\Factories\ConsumableFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable newQuery()
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable newModelQuery()
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orWhereMultipleColumns(array $columns, $term)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderByCreatedBy($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderByLastPurchaseCost(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderByLastPurchaseDate(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderByOrderNumber(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderByTotalOrderCost(string $direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderCategory($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderCompany($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderLocation($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderManufacturer($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderPercentRemaining($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderRemaining($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable orderSupplier($order)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable requestable()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable requestedBy(\App\Models\User $user)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable textSearch($search)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereCategoryId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereCompanyId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereCreatedBy($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereDefaultPurchaseCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereDefaultSupplierId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereImage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereItemNo($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereLegacyOrderNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereLegacyPurchaseDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereLegacyQty($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereLocationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereManufacturerId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereMinAmt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereModelNumber($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereNotes($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereQty($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereRequestable($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable whereUpdatedAt($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orWhereMultipleColumns(array $columns, $term)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderByCreatedBy(string $order)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderByLastPurchaseCost(string $direction = 'asc')
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderByLastPurchaseDate(string $direction = 'asc')
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderByOrderNumber(string $direction = 'asc')
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderByTotalOrderCost(string $direction = 'asc')
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderCategory(string $order)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderCompany(string $order)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderLocation(string $order)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderManufacturer(string $order)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderPercentRemaining(string $order)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderRemaining(string $order)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderSupplier(string $order)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable query()
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable requestable()
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable requestedBy(\App\Models\User $user)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable textSearch($search)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereCategoryId($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereCompanyId($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereCreatedAt($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereCreatedBy($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereDefaultPurchaseCost($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereDefaultSupplierId($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereDeletedAt($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereId($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereImage($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereItemNo($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereLegacyOrderNumber($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereLegacyPurchaseDate($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereLegacyQty($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereLocationId($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereManufacturerId($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereMinAmt($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereModelNumber($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereName($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereNotes($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereQty($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereRequestable($value)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable withoutTrashed()
  * @mixin \Eloquent
@@ -1412,11 +1374,11 @@ namespace App\Models{
  * @property string|null $db_column
  * @property string|null $help_text
  * @property int $show_in_email
- * @property bool|null $show_in_requestable_list
  * @property int|null $is_unique
  * @property int|null $display_in_user_view
  * @property int|null $auto_add_to_fieldsets
  * @property int|null $show_in_listview
+ * @property bool|null $show_in_requestable_list
  * @property int $display_checkin
  * @property int $display_checkout
  * @property int $display_audit
@@ -1512,9 +1474,6 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
- * @property string|null $tag_color
- * @property string|null $fax
- * @property string|null $phone
  * @property int|null $created_by
  * @property int|null $company_id
  * @property int|null $location_id
@@ -1524,6 +1483,9 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $image
+ * @property string|null $phone
+ * @property string|null $fax
+ * @property string|null $tag_color
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
  * @property-read \App\Models\User|null $adminuser
@@ -1634,13 +1596,13 @@ namespace App\Models{
  * @property int $id
  * @property string $name
  * @property int $months
- * @property numeric|null $depreciation_min
- * @property string|null $fiscal_year_start_month
- * @property float|null $rate_multiplier
- * @property string $depreciation_type
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $created_by
+ * @property numeric|null $depreciation_min
+ * @property string $depreciation_type
+ * @property string|null $fiscal_year_start_month
+ * @property float|null $rate_multiplier
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
  * @property-read \App\Models\User|null $adminuser
@@ -1978,13 +1940,13 @@ namespace App\Models{
  * @property int $id
  * @property int|null $license_id
  * @property int|null $assigned_to
- * @property bool $unreassignable_seat
  * @property string|null $notes
  * @property int|null $created_by
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property int|null $asset_id
+ * @property bool $unreassignable_seat
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
  * @property-read \App\Models\User|null $adminuser
@@ -2053,7 +2015,6 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string|null $name
- * @property string|null $tag_color
  * @property string|null $city
  * @property string|null $state
  * @property string|null $country
@@ -2063,8 +2024,6 @@ namespace App\Models{
  * @property string|null $address
  * @property string|null $address2
  * @property string|null $zip
- * @property string|null $fax
- * @property string|null $phone
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property int|null $parent_id
  * @property string|null $currency
@@ -2072,7 +2031,10 @@ namespace App\Models{
  * @property int|null $manager_id
  * @property string|null $image
  * @property int|null $company_id
+ * @property string|null $phone
+ * @property string|null $fax
  * @property string|null $notes
+ * @property string|null $tag_color
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
  * @property-read int|null $accessories_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
@@ -2082,8 +2044,6 @@ namespace App\Models{
  * @property-read int|null $assets_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AccessoryCheckout> $assignedAccessories
  * @property-read int|null $assigned_accessories_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Asset> $assignedAssets
- * @property-read int|null $assigned_assets_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Location> $children
  * @property-read int|null $children_count
  * @property-read \App\Models\Company|null $company
@@ -2179,28 +2139,28 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Model|null $item Polymorphic parent (usually Asset). See item() below.
  * @property int $id
  * @property int $item_id
- * @property string|null $item_type
  * @property int|null $supplier_id
  * @property string $asset_maintenance_type
  * @property string $name
- * @property string|null $url
  * @property int $is_warranty
  * @property \Illuminate\Support\Carbon $start_date
  * @property \Illuminate\Support\Carbon|null $expected_completion_date
  * @property int|null $asset_maintenance_time
  * @property string|null $notes
- * @property string|null $image
  * @property numeric|null $cost
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $created_by
+ * @property string|null $image
+ * @property string|null $url
  * @property int|null $maintenance_type_id
  * @property int|null $checked_out_to_id
  * @property string|null $checked_out_to_type
  * @property int|null $responsible_party_id
  * @property \Illuminate\Support\Carbon|null $completed_at
  * @property int|null $completed_by
+ * @property string|null $item_type
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
  * @property-read int|null $assetlog_count
@@ -2296,11 +2256,11 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
- * @property string|null $tag_color
  * @property int|null $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $tag_color
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
  * @property-read \App\Models\User|null $adminuser
@@ -2353,19 +2313,18 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
- * @property string|null $tag_slug
- * @property string|null $tag_color
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int|null $created_by
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property string|null $url
  * @property string|null $support_url
- * @property string|null $warranty_lookup_url
  * @property string|null $support_phone
  * @property string|null $support_email
  * @property string|null $image
+ * @property string|null $warranty_lookup_url
  * @property string|null $notes
+ * @property string|null $tag_color
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
  * @property-read int|null $accessories_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
@@ -2423,7 +2382,6 @@ namespace App\Models{
  * @method static \App\Models\Builders\ManufacturerQueryBuilder<static>|Manufacturer whereSupportPhone($value)
  * @method static \App\Models\Builders\ManufacturerQueryBuilder<static>|Manufacturer whereSupportUrl($value)
  * @method static \App\Models\Builders\ManufacturerQueryBuilder<static>|Manufacturer whereTagColor($value)
- * @method static \App\Models\Builders\ManufacturerQueryBuilder<static>|Manufacturer whereTagSlug($value)
  * @method static \App\Models\Builders\ManufacturerQueryBuilder<static>|Manufacturer whereUpdatedAt($value)
  * @method static \App\Models\Builders\ManufacturerQueryBuilder<static>|Manufacturer whereUrl($value)
  * @method static \App\Models\Builders\ManufacturerQueryBuilder<static>|Manufacturer whereWarrantyLookupUrl($value)
@@ -2626,13 +2584,13 @@ namespace App\Models{
 /**
  * @property int $id
  * @property int|null $created_by
- * @property string $type
  * @property string $name
  * @property array<array-key, mixed> $options
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property bool|null $is_shared
+ * @property string $type
  * @property-read \App\Models\User|null $creator
  * @property-read mixed $display_name
  * @method static \Database\Factories\ReportTemplateFactory factory($count = null, $state = [])
@@ -2722,7 +2680,6 @@ namespace App\Models{
  * @property string $password
  * @property string|null $permissions
  * @property int $activated
- * @property int|null $created_by
  * @property string|null $activation_code
  * @property string|null $activated_at
  * @property string|null $last_login
@@ -2730,7 +2687,6 @@ namespace App\Models{
  * @property string|null $reset_password_code
  * @property string|null $first_name
  * @property string|null $last_name
- * @property string|null $display_name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -2739,7 +2695,6 @@ namespace App\Models{
  * @property string|null $gravatar
  * @property int|null $location_id
  * @property string|null $phone
- * @property string|null $mobile
  * @property string|null $jobtitle
  * @property int|null $manager_id
  * @property string|null $employee_num
@@ -2760,10 +2715,8 @@ namespace App\Models{
  * @property string|null $state
  * @property string|null $zip
  * @property string|null $skin
- * @property string|null $nav_link_color
- * @property string|null $link_light_color
- * @property string|null $link_dark_color
  * @property int|null $remote
+ * @property int|null $created_by
  * @property string|null $start_date
  * @property string|null $end_date
  * @property string|null $scim_externalid
@@ -2771,6 +2724,11 @@ namespace App\Models{
  * @property int|null $vip
  * @property int $enable_sounds
  * @property int $enable_confetti
+ * @property string|null $mobile
+ * @property string|null $display_name
+ * @property string|null $link_dark_color
+ * @property string|null $link_light_color
+ * @property string|null $nav_link_color
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $acceptances
  * @property-read int|null $acceptances_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
@@ -2963,20 +2921,15 @@ namespace App\Models{
  * @property int|null $display_eol
  * @property int $auto_increment_assets
  * @property string|null $auto_increment_prefix
- * @property int $scope_counters_by_company
  * @property int $load_remote
  * @property string|null $logo
  * @property string|null $header_color
- * @property string|null $nav_link_color
- * @property string|null $link_light_color
- * @property string|null $link_dark_color
  * @property string|null $alert_email
  * @property int $alerts_enabled
  * @property string|null $default_eula_text
  * @property string|null $webhook_endpoint
  * @property string|null $webhook_channel
  * @property string|null $webhook_botname
- * @property string|null $webhook_selected
  * @property string|null $default_currency
  * @property string|null $custom_css
  * @property int $brand
@@ -2985,37 +2938,18 @@ namespace App\Models{
  * @property string|null $ldap_uname
  * @property string|null $ldap_pword
  * @property string|null $ldap_basedn
- * @property string|null $ldap_default_group
  * @property string|null $ldap_filter
  * @property string|null $ldap_username_field
  * @property string|null $ldap_lname_field
  * @property string|null $ldap_fname_field
- * @property string|null $ldap_display_name
  * @property string|null $ldap_auth_filter_query
  * @property int|null $ldap_version
  * @property string|null $ldap_active_flag
- * @property string|null $ldap_dept
  * @property string|null $ldap_emp_num
  * @property string|null $ldap_email
- * @property string|null $ldap_phone_field
- * @property string|null $ldap_mobile
- * @property string|null $ldap_jobtitle
- * @property string|null $ldap_manager
- * @property string|null $ldap_address
- * @property string|null $ldap_city
- * @property string|null $ldap_state
- * @property string|null $ldap_zip
- * @property string|null $ldap_country
- * @property string|null $ldap_location
  * @property int $full_multiple_companies_support
- * @property int $scope_locations_fmcs
- * @property int $null_company_is_floater
- * @property bool $block_api_user_agents
- * @property string|null $blocked_api_user_agents
- * @property bool $block_blank_api_user_agents
  * @property int $ldap_server_cert_ignore
  * @property string|null $locale
- * @property int|null $week_start
  * @property int $labels_per_page
  * @property numeric $labels_width
  * @property numeric $labels_height
@@ -3034,7 +2968,6 @@ namespace App\Models{
  * @property int|null $alt_barcode_enabled
  * @property int|null $alert_interval
  * @property int|null $alert_threshold
- * @property string|null $name_display_format
  * @property string|null $email_domain
  * @property string|null $email_format
  * @property string|null $username_format
@@ -3071,7 +3004,6 @@ namespace App\Models{
  * @property string|null $skin
  * @property int $show_images_in_email
  * @property string|null $admin_cc_email
- * @property int $admin_cc_always
  * @property int $labels_display_model
  * @property string|null $privacy_policy_link
  * @property string|null $version_footer
@@ -3079,10 +3011,8 @@ namespace App\Models{
  * @property int $logo_print_assets
  * @property string|null $depreciation_method
  * @property string|null $favicon
- * @property string|null $default_avatar
  * @property string|null $email_logo
  * @property string|null $label_logo
- * @property string|null $acceptance_pdf_logo
  * @property int $allow_user_skin
  * @property int $show_assigned_assets
  * @property string $login_remote_user_header_name
@@ -3097,9 +3027,14 @@ namespace App\Models{
  * @property string|null $saml_custom_settings
  * @property string|null $saml_sp_x509certNew
  * @property string|null $digit_separator
+ * @property string|null $ldap_phone_field
+ * @property string|null $ldap_jobtitle
+ * @property string|null $ldap_country
+ * @property string|null $ldap_dept
  * @property string|null $ldap_client_tls_cert
- * @property int $ldap_use_sasl_external_bind
  * @property string|null $ldap_client_tls_key
+ * @property string|null $ldap_manager
+ * @property string|null $ldap_default_group
  * @property string|null $dash_chart_type
  * @property int $label2_enable
  * @property string|null $label2_template
@@ -3107,21 +3042,40 @@ namespace App\Models{
  * @property bool $label2_asset_logo
  * @property string $label2_1d_type
  * @property string $label2_2d_type
- * @property string|null $label2_2d_prefix
  * @property string $label2_2d_target
  * @property string $label2_fields
- * @property int $label2_empty_row_count
+ * @property int $scope_locations_fmcs
+ * @property string|null $webhook_selected
+ * @property string|null $ldap_location
  * @property int|null $google_login
  * @property string|null $google_client_id
  * @property string|null $google_client_secret
+ * @property string|null $name_display_format
  * @property int|null $profile_edit
+ * @property string|null $default_avatar
  * @property bool|null $require_checkinout_notes
  * @property int $shortcuts_enabled
  * @property int|null $due_checkin_days
  * @property int $ldap_invert_active_flag
- * @property bool $manager_view_enabled Allow managers to view assets assigned to their subordinates
- * @property string|null $fleet_url
- * @property string|null $fleet_token
+ * @property string|null $acceptance_pdf_logo
+ * @property int $label2_empty_row_count
+ * @property int $admin_cc_always
+ * @property bool $manager_view_enabled
+ * @property string|null $ldap_display_name
+ * @property string|null $ldap_zip
+ * @property string|null $ldap_state
+ * @property string|null $ldap_city
+ * @property string|null $ldap_address
+ * @property string|null $ldap_mobile
+ * @property string|null $label2_2d_prefix
+ * @property int|null $week_start
+ * @property string|null $link_dark_color
+ * @property string|null $link_light_color
+ * @property string|null $nav_link_color
+ * @property int $null_company_is_floater
+ * @property bool $block_api_user_agents
+ * @property string|null $blocked_api_user_agents
+ * @property bool $block_blank_api_user_agents
  * @property-read string $label2_template_display
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
@@ -3168,8 +3122,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereEmailFormat($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereEmailLogo($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereFavicon($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereFleetToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereFleetUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereFooterText($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereFullMultipleCompaniesSupport($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereGoogleClientId($value)
@@ -3237,7 +3189,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereLdapState($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereLdapTls($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereLdapUname($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereLdapUseSaslExternalBind($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereLdapUsernameField($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereLdapVersion($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereLdapZip($value)
@@ -3277,7 +3228,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereSamlSpPrivatekey($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereSamlSpX509cert($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereSamlSpX509certNew($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereScopeCountersByCompany($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereScopeLocationsFmcs($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereShortcutsEnabled($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Setting whereShowAlertsInMenu($value)
@@ -3424,7 +3374,6 @@ namespace App\Models{
 /**
  * @property int $id
  * @property string $name
- * @property string|null $tag_color
  * @property string|null $address
  * @property string|null $address2
  * @property string|null $city
@@ -3442,6 +3391,7 @@ namespace App\Models{
  * @property string|null $zip
  * @property string|null $url
  * @property string|null $image
+ * @property string|null $tag_color
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
  * @property-read int|null $accessories_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
@@ -3575,7 +3525,6 @@ namespace App\Models{
  * @property string $password
  * @property string|null $permissions
  * @property int $activated
- * @property int|null $created_by
  * @property string|null $activation_code
  * @property string|null $activated_at
  * @property string|null $last_login
@@ -3583,7 +3532,6 @@ namespace App\Models{
  * @property string|null $reset_password_code
  * @property string|null $first_name
  * @property string|null $last_name
- * @property string|null $display_name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -3592,7 +3540,6 @@ namespace App\Models{
  * @property string|null $gravatar
  * @property int|null $location_id
  * @property string|null $phone
- * @property string|null $mobile
  * @property string|null $jobtitle
  * @property int|null $manager_id
  * @property string|null $employee_num
@@ -3613,10 +3560,8 @@ namespace App\Models{
  * @property string|null $state
  * @property string|null $zip
  * @property string|null $skin
- * @property string|null $nav_link_color
- * @property string|null $link_light_color
- * @property string|null $link_dark_color
  * @property int|null $remote
+ * @property int|null $created_by
  * @property string|null $start_date
  * @property string|null $end_date
  * @property string|null $scim_externalid
@@ -3624,6 +3569,11 @@ namespace App\Models{
  * @property int|null $vip
  * @property int $enable_sounds
  * @property int $enable_confetti
+ * @property string|null $mobile
+ * @property string|null $display_name
+ * @property string|null $link_dark_color
+ * @property string|null $link_light_color
+ * @property string|null $nav_link_color
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $acceptances
  * @property-read int|null $acceptances_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
