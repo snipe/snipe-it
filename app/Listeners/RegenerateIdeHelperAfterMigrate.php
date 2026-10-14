@@ -21,6 +21,17 @@ class RegenerateIdeHelperAfterMigrate
             return;
         }
 
+        // Skip during the test suite. CI runs `migrate --force` as
+        // part of test setup, and regenerating the stub here is both
+        // unnecessary (tests use the committed snapshot) and
+        // problematic. The dev-tooling pass has been observed to
+        // break PHP 8.2 autoload on CI in ways that didn't reproduce
+        // locally. The migrate listener is a developer-ergonomics
+        // feature for local work.
+        if (app()->environment('testing')) {
+            return;
+        }
+
         try {
             Artisan::call('ide-helper:models', [
                 '--write-mixin' => true,
