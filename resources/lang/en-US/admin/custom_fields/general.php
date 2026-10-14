@@ -47,6 +47,8 @@ return [
     'show_in_email_short' => 'Include in emails',
     'help_text' => 'Help Text',
     'help_text_description' => 'This is optional text that will appear below the form elements while editing an asset to provide context on the field.',
+    'link_template' => 'Link Template',
+    'link_template_help' => 'Optional. Displays the value as a clickable link built from this template, where {VALUE} is replaced with the field value. Useful for URL handlers such as remote access tools, for example <code>anydesk:{VALUE}</code> or <code>rustdesk://{VALUE}</code>.',
     'about_custom_fields_title' => 'About Custom Fields',
     'about_custom_fields_text' => 'Custom fields allow you to add arbitrary attributes to assets.',
     'add_field_to_fieldset' => 'Add Field to Fieldset',
@@ -78,6 +80,8 @@ return [
         'field_values_required' => 'Field values are required for :element elements.',
         'cannot_encrypt_format' => ':format custom fields cannot be encrypted; the underlying database column only accepts valid date values.',
         'cannot_encrypt_element' => ':element custom fields cannot be encrypted.',
+        'link_template_invalid' => 'The link template must start with a URL scheme (such as anydesk: or https://), contain {VALUE}, and cannot use the javascript:, data: or vbscript: schemes.',
+        'link_template_not_supported' => 'A link template cannot be used with the :element element and :format format.',
     ],
     'types' => [
         'text' => 'Text Box',
