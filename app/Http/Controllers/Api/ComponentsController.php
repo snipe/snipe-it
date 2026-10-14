@@ -584,6 +584,6 @@ class ComponentsController extends Controller
 
         $rows = $query->orderBy($sort, $order)->skip($offset)->take($limit)->get();
 
-        return (new ComponentsTransformer)->transformComponents($rows, $total);
+        return (new ComponentsTransformer)->transformRequestedComponents($rows, $total);
     }
 }

@@ -1044,11 +1044,27 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         // companies from the Companies side of the join, which turns
         // the whereNotIn below into an empty result and drops every
         // preserved company. See GH #19569.
-        $editorVisible = DB::table('company_user')
+        $editorDirect = DB::table('company_user')
             ->where('user_id', $editor->id)
             ->pluck('company_id')
             ->map(fn ($id) => (int) $id)
             ->all();
+
+        // The editor's reach must match what every gate upstream of this
+        // helper enforces (Company::getIdsForCurrentUser(), the
+        // SaveUserRequest floater gate, parent_within_scope): direct
+        // memberships PLUS their child companies. Using only the direct
+        // rows silently drops a permitted child-company submission after
+        // the gates have accepted it. Under null_company_is_floater that
+        // left the target with no company at all, promoting them to a
+        // system-wide floater and escaping tenant isolation. See
+        // GHSA-35hv-26vj-9445.
+        $editorChildren = empty($editorDirect) ? [] : DB::table('companies')
+            ->whereIn('parent_id', $editorDirect)
+            ->pluck('id')
+            ->map(fn($id) => (int) $id)
+            ->all();
+        $editorVisible = array_values(array_unique(array_merge($editorDirect, $editorChildren)));
 
         $submittedVisible = array_values(array_intersect($submitted, $editorVisible));
 

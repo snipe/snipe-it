@@ -583,6 +583,6 @@ class AccessoriesController extends Controller
 
         $rows = $query->orderBy($sort, $order)->skip($offset)->take($limit)->get();
 
-        return (new AccessoriesTransformer)->transformAccessories($rows, $total);
+        return (new AccessoriesTransformer)->transformRequestedAccessories($rows, $total);
     }
 }
