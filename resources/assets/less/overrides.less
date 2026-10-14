@@ -96,7 +96,7 @@ a.accordion-header {
   font-size: 13px;
 }
 .main-header {
-  max-height: 150px;
+  max-height: none;
 }
 
 
@@ -967,10 +967,27 @@ thead th.css-history > .th-inner::before {
 // .firstnav { padding-top: 120px !important } that used to be inside
 // the max-width: 520px block below. All three were double-counted on
 // top of the dynamic .main-sidebar padding-top: var(--main-header-height)
-// rule further down that measures the actual header height at runtime,
+// rule just below that measures the actual header height at runtime,
 // producing 200px+ visual gaps above Dashboard at those breakpoints.
 // The dynamic measurement covers all these cases correctly, so the
 // static compensation is deleted.
+
+// Dynamic sidebar compensation for the mobile breakpoint (#19826 et
+// al.). AdminLTE 2 pads the mobile sidebar with a static 100px to
+// clear its own 100px header, but on narrow viewports Snipe-IT's
+// navbar wraps the logo, hamburger, search, nav icons and user menu
+// to several rows and the real header runs taller than the static
+// pad. snipeit.js measures .main-header's live height on load /
+// resize / mutation and publishes it as --main-header-height, so the
+// sidebar padding can track it instead of guessing at a static
+// number. The 100px fallback matches AdminLTE's base so pre-JS
+// renders are no worse than they were before.
+@media (max-width: 767px) {
+  .main-sidebar {
+    padding-top: var(--main-header-height, 100px);
+  }
+}
+
 @media screen and (max-width: 992px){
   .info-stack-container {
     flex-direction: column;
