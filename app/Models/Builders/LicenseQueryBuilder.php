@@ -2,17 +2,23 @@
 
 namespace App\Models\Builders;
 
+use App\Models\License;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @template TModel of License
+ *
+ * @extends Builder<TModel>
+ */
 class LicenseQueryBuilder extends Builder
 {
-    public function requestable(): static
+    public function requestable(): self
     {
         return $this->where('licenses.requestable', '1');
     }
 
-    public function activeLicenses(): static
+    public function activeLicenses(): self
     {
         return $this->whereNull('licenses.deleted_at')
             // The termination date is null or within range
@@ -26,7 +32,7 @@ class LicenseQueryBuilder extends Builder
             });
     }
 
-    public function expiredLicenses(): static
+    public function expiredLicenses(): self
     {
         return $this->whereDate('termination_date', '<=', Carbon::now())
             ->orWhere(function ($query) {
@@ -45,7 +51,7 @@ class LicenseQueryBuilder extends Builder
      *
      * @see SendExpiringLicenseNotifications
      */
-    public function expiringLicenses(int $days = 60, bool $includeExpired = false): static
+    public function expiringLicenses(int $days = 60, bool $includeExpired = false): self
     {
         return $this
             // The termination date is null or within range
@@ -71,7 +77,7 @@ class LicenseQueryBuilder extends Builder
             });
     }
 
-    public function orderManufacturer(string $order): static
+    public function orderManufacturer(string $order): self
     {
         return $this
             ->leftJoin('manufacturers', 'licenses.manufacturer_id', '=', 'manufacturers.id')
@@ -79,7 +85,7 @@ class LicenseQueryBuilder extends Builder
             ->orderBy('manufacturers.name', $order);
     }
 
-    public function orderSupplier(string $order): static
+    public function orderSupplier(string $order): self
     {
         return $this
             ->leftJoin('suppliers', 'licenses.supplier_id', '=', 'suppliers.id')
@@ -87,7 +93,7 @@ class LicenseQueryBuilder extends Builder
             ->orderBy('suppliers.name', $order);
     }
 
-    public function orderCompany(string $order): static
+    public function orderCompany(string $order): self
     {
         return $this
             ->leftJoin('companies as companies', 'licenses.company_id', '=', 'companies.id')
@@ -95,7 +101,7 @@ class LicenseQueryBuilder extends Builder
             ->orderBy('companies.name', $order);
     }
 
-    public function orderByCreatedBy(string $order): static
+    public function orderByCreatedBy(string $order): self
     {
         return $this
             ->leftJoin('users as admin_sort', 'licenses.created_by', '=', 'admin_sort.id')
@@ -117,7 +123,7 @@ class LicenseQueryBuilder extends Builder
      * on SQLite (both allow this). Moving to PostgreSQL would require
      * inlining the subquery or wrapping the query in an outer SELECT.
      */
-    public function orderPercentRemaining(string $order): static
+    public function orderPercentRemaining(string $order): self
     {
         $order = strtolower($order) === 'asc' ? 'asc' : 'desc';
 

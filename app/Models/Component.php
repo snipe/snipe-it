@@ -30,6 +30,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for Components.
  *
  * @version v1.0
+ *
  * @mixin IdeHelperComponent
  */
 class Component extends SnipeModel
@@ -229,10 +230,8 @@ class Component extends SnipeModel
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since  [v3.0]
-     *
-     * @return Relation
      */
-    public function assets()
+    public function assets(): BelongsToMany
     {
         return $this->belongsToMany(Asset::class, 'components_assets')->withPivot('id', 'assigned_qty', 'created_at', 'created_by', 'note');
     }

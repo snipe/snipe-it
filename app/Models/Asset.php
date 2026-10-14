@@ -23,6 +23,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Crypt;
@@ -35,6 +36,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for Assets.
  *
  * @version v1.0
+ *
  * @property ?int $location_id
  * @property Carbon|string|null $next_audit_date
  * @property Carbon|string|null $last_audit_date
@@ -42,6 +44,8 @@ use Watson\Validating\ValidatingTrait;
  * @property ?int $company_id
  * @property Carbon|string|null $last_checkin
  * @property bool $requestable
+ * @property Asset|Location|User|null $assigned Current checkout target. morphTo relation named `assigned` (declared on method `assignedTo()`). Eloquent resolves the dynamic property by the morphTo name arg, not the method name, so this `@property` is distinct from `@property ... $assignedTo` written by ide-helper.
+ *
  * @mixin IdeHelperAsset
  */
 class Asset extends Depreciable
@@ -896,10 +900,8 @@ class Asset extends Depreciable
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since  [v4.0]
-     *
-     * @return Relation
      */
-    public function assignedTo()
+    public function assignedTo(): MorphTo
     {
         return $this->morphTo('assigned', 'assigned_type', 'assigned_to')->withTrashed();
     }

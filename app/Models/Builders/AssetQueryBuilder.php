@@ -11,14 +11,19 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @template TModel of Asset
+ *
+ * @extends Builder<TModel>
+ */
 class AssetQueryBuilder extends Builder
 {
-    public function hardware(): static
+    public function hardware(): self
     {
         return $this->where('physical', '=', '1');
     }
 
-    public function pending(): static
+    public function pending(): self
     {
         // Pluck IDs then whereIn. Do NOT replace with whereHas. whereHas
         // generates a correlated EXISTS per row and causes severe
@@ -28,7 +33,7 @@ class AssetQueryBuilder extends Builder
         return $this->whereIn('assets.status_id', $ids->isEmpty() ? [0] : $ids);
     }
 
-    public function assetsByLocation(Location $location): static
+    public function assetsByLocation(Location $location): self
     {
         return $this->where(function ($query) use ($location) {
             $query->whereHas('assignedTo', function ($query) use ($location) {
@@ -49,7 +54,7 @@ class AssetQueryBuilder extends Builder
         });
     }
 
-    public function rtd(): static
+    public function rtd(): self
     {
         $ids = Statuslabel::idsFor('deployable');
 
@@ -57,21 +62,21 @@ class AssetQueryBuilder extends Builder
             ->whereIn('assets.status_id', $ids->isEmpty() ? [0] : $ids);
     }
 
-    public function undeployable(): static
+    public function undeployable(): self
     {
         $ids = Statuslabel::idsFor('undeployable');
 
         return $this->whereIn('assets.status_id', $ids->isEmpty() ? [0] : $ids);
     }
 
-    public function notArchived(): static
+    public function notArchived(): self
     {
         $ids = Statuslabel::idsFor('not_archived');
 
         return $this->whereIn('assets.status_id', $ids->isEmpty() ? [0] : $ids);
     }
 
-    public function dueForAudit(Setting $settings): static
+    public function dueForAudit(Setting $settings): self
     {
         $interval = (int) $settings->audit_warning_days ?? 0;
         $today = Carbon::now();
@@ -83,7 +88,7 @@ class AssetQueryBuilder extends Builder
             ->notArchived();
     }
 
-    public function overdueForAudit(): static
+    public function overdueForAudit(): self
     {
         return $this->whereNotNull('assets.next_audit_date')
             ->where('assets.next_audit_date', '<', Carbon::now()->format('Y-m-d'))
@@ -91,14 +96,14 @@ class AssetQueryBuilder extends Builder
             ->notArchived();
     }
 
-    public function pastEol(): static
+    public function pastEol(): self
     {
         return $this->whereNotNull('assets.asset_eol_date')
             ->where('assets.asset_eol_date', '<', Carbon::now()->format('Y-m-d'))
             ->notArchived();
     }
 
-    public function dueOrOverdueForAudit(Setting $settings): static
+    public function dueOrOverdueForAudit(Setting $settings): self
     {
         return $this->where(function ($query) {
             $query->overdueForAudit();
@@ -107,7 +112,7 @@ class AssetQueryBuilder extends Builder
         });
     }
 
-    public function dueForCheckin(Setting $settings): static
+    public function dueForCheckin(Setting $settings): self
     {
         $interval = (int) $settings->due_checkin_days ?? 0;
         // expected_checkin is a DATETIME. Use startOfDay / endOfDay
@@ -125,7 +130,7 @@ class AssetQueryBuilder extends Builder
             ->notArchived();
     }
 
-    public function overdueForCheckin(): static
+    public function overdueForCheckin(): self
     {
         // expected_checkin is a DATETIME, so "overdue" is time-aware: an
         // asset due back this morning at 09:00 is overdue by 09:01.
@@ -139,7 +144,7 @@ class AssetQueryBuilder extends Builder
             ->notArchived();
     }
 
-    public function dueOrOverdueForCheckin(Setting $settings): static
+    public function dueOrOverdueForCheckin(Setting $settings): self
     {
         return $this->where(function ($query) {
             $query->overdueForCheckin();
@@ -148,7 +153,7 @@ class AssetQueryBuilder extends Builder
         });
     }
 
-    public function assetsForShow(): static
+    public function assetsForShow(): self
     {
         // Pluck IDs then whereIn. Do NOT replace with whereHas.
         if (Setting::getSettings()->show_archived_in_list != 1) {
@@ -160,19 +165,19 @@ class AssetQueryBuilder extends Builder
         return $this;
     }
 
-    public function archived(): static
+    public function archived(): self
     {
         $ids = Statuslabel::idsFor('archived');
 
         return $this->whereIn('assets.status_id', $ids->isEmpty() ? [0] : $ids);
     }
 
-    public function deployed(): static
+    public function deployed(): self
     {
         return $this->where('assigned_to', '>', '0');
     }
 
-    public function requestable(): static
+    public function requestable(): self
     {
         $table = $this->getModel()->getTable();
 
@@ -188,27 +193,27 @@ class AssetQueryBuilder extends Builder
     /**
      * @param  array<int, int>  $modelIdListing
      */
-    public function inModelList(array $modelIdListing): static
+    public function inModelList(array $modelIdListing): self
     {
         return $this->whereIn('assets.model_id', $modelIdListing);
     }
 
-    public function notYetAccepted(): static
+    public function notYetAccepted(): self
     {
         return $this->where('accepted', '=', 'pending');
     }
 
-    public function rejected(): static
+    public function rejected(): self
     {
         return $this->where('accepted', '=', 'rejected');
     }
 
-    public function accepted(): static
+    public function accepted(): self
     {
         return $this->where('accepted', '=', 'accepted');
     }
 
-    public function assignedSearch(string $search): static
+    public function assignedSearch(string $search): self
     {
         $search = explode(' OR ', $search);
 
@@ -266,7 +271,7 @@ class AssetQueryBuilder extends Builder
      *
      * @param  array<int, int>  $search
      */
-    public function checkedOutToTargetInDepartment(array $search): static
+    public function checkedOutToTargetInDepartment(array $search): self
     {
         return $this->leftJoin('users as assets_dept_users', function ($leftJoin) {
             $leftJoin->on('assets_dept_users.id', '=', 'assets.assigned_to')
@@ -276,21 +281,21 @@ class AssetQueryBuilder extends Builder
         })->withTrashed()->whereNull('assets.deleted_at'); // workaround for laravel bug
     }
 
-    public function orderModels(string $order): static
+    public function orderModels(string $order): self
     {
         return $this
             ->join('models as asset_models', 'assets.model_id', '=', 'asset_models.id')
             ->orderBy('asset_models.name', $order);
     }
 
-    public function orderModelNumber(string $order): static
+    public function orderModelNumber(string $order): self
     {
         return $this
             ->leftJoin('models as model_number_sort', 'assets.model_id', '=', 'model_number_sort.id')
             ->orderBy('model_number_sort.model_number', $order);
     }
 
-    public function orderByCreatedByName(string $order): static
+    public function orderByCreatedByName(string $order): self
     {
         // addSelect rather than select, so prior withCount subqueries
         // (which append their count-expressions to the select list)
@@ -303,7 +308,7 @@ class AssetQueryBuilder extends Builder
             ->orderBy('admin_sort.last_name', $order);
     }
 
-    public function orderAssigned(string $order): static
+    public function orderAssigned(string $order): self
     {
         return $this
             ->leftJoin('users as users_sort', function ($join) {
@@ -315,14 +320,14 @@ class AssetQueryBuilder extends Builder
             ->orderBy('users_sort.last_name', $order);
     }
 
-    public function orderStatus(string $order): static
+    public function orderStatus(string $order): self
     {
         return $this
             ->join('status_labels as status_sort', 'assets.status_id', '=', 'status_sort.id')
             ->orderBy('status_sort.name', $order);
     }
 
-    public function orderCompany(string $order): static
+    public function orderCompany(string $order): self
     {
         return $this
             ->leftJoin('companies as company_sort', 'assets.company_id', '=', 'company_sort.id')
@@ -341,7 +346,7 @@ class AssetQueryBuilder extends Builder
      * at this layer, but we still validate against the known column
      * set as defense-in-depth against a caller regression.
      */
-    public function orderExternalSource(string $order, string $column): static
+    public function orderExternalSource(string $order, string $column): self
     {
         if (! in_array($column, ['primary_mac', 'primary_ip', 'os', 'os_version', 'last_seen'], true)) {
             return $this;
@@ -352,7 +357,7 @@ class AssetQueryBuilder extends Builder
             ->orderBy('ext_src_sort.'.$column, $order);
     }
 
-    public function inCategory(string|array $category_id): static
+    public function inCategory(string|array $category_id): self
     {
         return $this
             ->join('models as category_models', 'assets.model_id', '=', 'category_models.id')
@@ -360,7 +365,7 @@ class AssetQueryBuilder extends Builder
             ->whereIn('category_models.category_id', (! is_array($category_id) ? explode(',', $category_id) : $category_id));
     }
 
-    public function byManufacturer(string|array $manufacturer_id): static
+    public function byManufacturer(string|array $manufacturer_id): self
     {
         return $this
             ->join('models', 'assets.model_id', '=', 'models.id')
@@ -368,7 +373,7 @@ class AssetQueryBuilder extends Builder
             ->whereIn('models.manufacturer_id', (! is_array($manufacturer_id) ? explode(',', $manufacturer_id) : $manufacturer_id));
     }
 
-    public function orderCategory(string $order): static
+    public function orderCategory(string $order): self
     {
         return $this
             ->join('models as order_model_category', 'assets.model_id', '=', 'order_model_category.id')
@@ -376,7 +381,7 @@ class AssetQueryBuilder extends Builder
             ->orderBy('category_order.name', $order);
     }
 
-    public function orderManufacturer(string $order): static
+    public function orderManufacturer(string $order): self
     {
         return $this
             ->join('models as order_asset_model', 'assets.model_id', '=', 'order_asset_model.id')
@@ -384,28 +389,28 @@ class AssetQueryBuilder extends Builder
             ->orderBy('manufacturer_order.name', $order);
     }
 
-    public function orderLocation(string $order): static
+    public function orderLocation(string $order): self
     {
         return $this
             ->leftJoin('locations as asset_locations', 'asset_locations.id', '=', 'assets.location_id')
             ->orderBy('asset_locations.name', $order);
     }
 
-    public function orderRtdLocation(string $order): static
+    public function orderRtdLocation(string $order): self
     {
         return $this
             ->leftJoin('locations as rtd_asset_locations', 'rtd_asset_locations.id', '=', 'assets.rtd_location_id')
             ->orderBy('rtd_asset_locations.name', $order);
     }
 
-    public function orderSupplier(string $order): static
+    public function orderSupplier(string $order): self
     {
         return $this
             ->leftJoin('suppliers as suppliers_assets', 'assets.supplier_id', '=', 'suppliers_assets.id')
             ->orderBy('suppliers_assets.name', $order);
     }
 
-    public function orderByJobTitle(string $order): static
+    public function orderByJobTitle(string $order): self
     {
         return $this
             ->leftJoin('users as users_sort', function ($join) {
@@ -416,7 +421,7 @@ class AssetQueryBuilder extends Builder
             ->orderBy('users_sort.jobtitle', $order);
     }
 
-    public function byLocationId(int $search): static
+    public function byLocationId(int $search): self
     {
         return $this->where(function ($query) use ($search) {
             $query->whereHas('location', function ($query) use ($search) {
@@ -425,7 +430,7 @@ class AssetQueryBuilder extends Builder
         });
     }
 
-    public function byDepreciationId(int $search): static
+    public function byDepreciationId(int $search): self
     {
         return $this
             ->join('models', 'assets.model_id', '=', 'models.id')

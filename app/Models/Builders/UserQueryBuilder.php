@@ -6,21 +6,26 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * @template TModel of User
+ *
+ * @extends Builder<TModel>
+ */
 class UserQueryBuilder extends Builder
 {
-    public function getNotDeleted(): static
+    public function getNotDeleted(): self
     {
         return $this->whereNull('deleted_at');
     }
 
-    public function matchEmailOrUsername(string $user_username, string $user_email): static
+    public function matchEmailOrUsername(string $user_username, string $user_email): self
     {
         return $this->where('email', '=', $user_email)
             ->orWhere('username', '=', $user_username)
             ->orWhere('username', '=', $user_email);
     }
 
-    public function simpleNameSearch(string $search): static
+    public function simpleNameSearch(string $search): self
     {
         return $this->where('first_name', 'LIKE', '%'.$search.'%')
             ->orWhere('last_name', 'LIKE', '%'.$search.'%')
@@ -33,14 +38,14 @@ class UserQueryBuilder extends Builder
             );
     }
 
-    public function byGroup(int $id): static
+    public function byGroup(int $id): self
     {
         return $this->whereHas('groups', function ($query) use ($id) {
             $query->where('permission_groups.id', '=', $id);
         });
     }
 
-    public function onlySuperAdmins(): static
+    public function onlySuperAdmins(): self
     {
         return $this->where('users.permissions', 'LIKE', '%"superuser":"1"%')
             ->orWhere('users.permissions', 'LIKE', '%"superuser":1%')
@@ -50,7 +55,7 @@ class UserQueryBuilder extends Builder
             });
     }
 
-    public function onlyAdminsAndSuperAdmins(): static
+    public function onlyAdminsAndSuperAdmins(): self
     {
         return $this->where('users.permissions', 'LIKE', '%"superuser":"1"%')
             ->orWhere('users.permissions', 'LIKE', '%"superuser":1%')
@@ -64,7 +69,7 @@ class UserQueryBuilder extends Builder
             });
     }
 
-    public function orderManager(string $order): static
+    public function orderManager(string $order): self
     {
         // Left join here, or it will only return results with parents
         return $this
@@ -73,21 +78,21 @@ class UserQueryBuilder extends Builder
             ->orderBy('users_manager.last_name', $order);
     }
 
-    public function orderLocation(string $order): static
+    public function orderLocation(string $order): self
     {
         return $this
             ->leftJoin('locations as locations_users', 'users.location_id', '=', 'locations_users.id')
             ->orderBy('locations_users.name', $order);
     }
 
-    public function orderDepartment(string $order): static
+    public function orderDepartment(string $order): self
     {
         return $this
             ->leftJoin('departments as departments_users', 'users.department_id', '=', 'departments_users.id')
             ->orderBy('departments_users.name', $order);
     }
 
-    public function orderByCreatedBy(string $order): static
+    public function orderByCreatedBy(string $order): self
     {
         // Left join here, or it will only return results with parents
         return $this
@@ -96,7 +101,7 @@ class UserQueryBuilder extends Builder
             ->orderBy('admin_user.last_name', $order);
     }
 
-    public function orderCompany(string $order): static
+    public function orderCompany(string $order): self
     {
         // The MIN(...) aggregate has to go through DB::raw, which
         // bypasses Laravel's grammar, so the `companies` table
@@ -114,7 +119,7 @@ class UserQueryBuilder extends Builder
             ->orderBy('companies_sort.min_company_name', $order);
     }
 
-    public function userLocation(int $location, string $search): static
+    public function userLocation(int $location, string $search): self
     {
         return $this->where('location_id', '=', $location)
             ->where('users.first_name', 'LIKE', '%'.$search.'%')
@@ -137,7 +142,7 @@ class UserQueryBuilder extends Builder
         bool $withAccessories = true,
         bool $withConsumables = true,
         bool $withComponents = true,
-    ): static {
+    ): self {
         $with = [];
 
         if ($withAssets) {

@@ -1287,10 +1287,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @author A. Gianotto <snipe@snipe.net>
      *
      * @since  [v2.0]
-     *
-     * @return Relation
      */
-    public function accessories()
+    public function accessories(): BelongsToMany
     {
         return $this->belongsToMany(Accessory::class, 'accessories_checkout', 'assigned_to', 'accessory_id')
             ->where('assigned_type', '=', 'App\Models\User')
@@ -1303,10 +1301,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @author A. Gianotto <snipe@snipe.net>
      *
      * @since  [v3.0]
-     *
-     * @return Relation
      */
-    public function consumables()
+    public function consumables(): BelongsToMany
     {
         return $this->belongsToMany(Consumable::class, 'consumables_users', 'assigned_to', 'consumable_id')->withPivot('id', 'created_at', 'note')->withTrashed();
     }
@@ -1317,10 +1313,8 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
      * @author A. Gianotto <snipe@snipe.net>
      *
      * @since  [v1.0]
-     *
-     * @return Relation
      */
-    public function licenses()
+    public function licenses(): BelongsToMany
     {
         return $this->belongsToMany(License::class, 'license_seats', 'assigned_to', 'license_id')->withPivot('id', 'created_at', 'updated_at');
     }

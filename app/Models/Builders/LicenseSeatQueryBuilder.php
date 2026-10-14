@@ -2,11 +2,17 @@
 
 namespace App\Models\Builders;
 
+use App\Models\LicenseSeat;
 use Illuminate\Database\Eloquent\Builder;
 
+/**
+ * @template TModel of LicenseSeat
+ *
+ * @extends Builder<TModel>
+ */
 class LicenseSeatQueryBuilder extends Builder
 {
-    public function orderDepartments(string $order): static
+    public function orderDepartments(string $order): self
     {
         return $this
             ->leftJoin('users as license_seat_users', 'license_seats.assigned_to', '=', 'license_seat_users.id')
@@ -15,7 +21,7 @@ class LicenseSeatQueryBuilder extends Builder
             ->orderBy('license_user_dept.name', $order);
     }
 
-    public function orderCompany(string $order): static
+    public function orderCompany(string $order): self
     {
         return $this
             ->leftJoin('users as license_seat_users', 'license_seats.assigned_to', '=', 'license_seat_users.id')
@@ -24,7 +30,7 @@ class LicenseSeatQueryBuilder extends Builder
             ->orderBy('license_user_company.name', $order);
     }
 
-    public function byAssigned(): static
+    public function byAssigned(): self
     {
         return $this->where(function ($query) {
             $query->whereNotNull('assigned_to')
