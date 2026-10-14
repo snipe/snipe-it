@@ -4,11 +4,14 @@ namespace App\Livewire;
 
 use App\Models\CustomFieldset;
 use Illuminate\Support\Facades\DB;
+use Livewire\Attributes\Computed;
 use Livewire\Attributes\Locked;
 use Livewire\Component;
 
 class CloneFieldset extends Component
 {
+    public bool $iconOnly = false;
+
     #[Locked]
     public int $id;
 
@@ -17,6 +20,20 @@ class CloneFieldset extends Component
     public function render()
     {
         return view('livewire.clone-fieldset');
+    }
+
+    #[Computed]
+    public function title(): string
+    {
+        if (! $this->id) {
+            return '';
+        }
+
+        return sprintf(
+            '%s: %s',
+            trans('admin/custom_fields/general.clone_fieldset'),
+            CustomFieldset::find($this->id)->name
+        );
     }
 
     public function submit()
