@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperDepartment
+ */
 class Department extends SnipeModel
 {
     use CompanyableTrait;

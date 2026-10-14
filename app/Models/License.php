@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperLicense
+ */
 class License extends Depreciable
 {
     use HasFactory;

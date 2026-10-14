@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Carbon\Carbon;
 
+/**
+ * @mixin IdeHelperDepreciable
+ */
 class Depreciable extends SnipeModel
 {
     /**

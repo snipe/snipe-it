@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperConsumable
+ */
 class Consumable extends SnipeModel
 {
     use HasFactory;

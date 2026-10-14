@@ -16,6 +16,9 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperStatuslabel
+ */
 class Statuslabel extends SnipeModel
 {
     use HasFactory;

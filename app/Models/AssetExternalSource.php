@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * One row per asset today. SyncAdapter upserts on the
  * (source, external_id) unique index and updates the inventory
  * columns on every sync run.
+ *
+ * @mixin IdeHelperAssetExternalSource
  */
 class AssetExternalSource extends Model
 {

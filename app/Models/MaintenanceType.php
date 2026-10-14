@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperMaintenanceType
+ */
 class MaintenanceType extends SnipeModel
 {
     use HasFactory;

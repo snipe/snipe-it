@@ -8,6 +8,14 @@ parameters:
         - config
         - database
         - routes
+        # Larastan reads @property / @method / @mixin annotations from
+        # the ide-helper-generated model stub so magic Eloquent column
+        # access and scope dispatch resolve to concrete types instead
+        # of the base Model (which was most of the baseline). Keep this
+        # file regenerated via `php artisan ide-helper:models
+        # --write-mixin` after any migration that adds, removes, or
+        # retypes a column.
+        - _ide_helper_models.php
 
     # Level 4 catches dead code branches, always-false instanceof,
     # unreachable code after return, and most type-mismatch classes

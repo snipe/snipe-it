@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder;
 
+/**
+ * @mixin IdeHelperLicenseSeat
+ */
 class LicenseSeat extends SnipeModel implements ICompanyableChild
 {
     use Acceptable;

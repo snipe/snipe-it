@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Log;
  * and having this as a more instance-oriented class will be a step in the right direction.
  ***********************************************/
 
+/**
+ * @mixin IdeHelperLdap
+ */
 class Ldap extends Model
 {
     public static function ignoreCertificates(bool $ignore_cert = true)

@@ -21,6 +21,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperCustomFieldset
+ */
 class CustomFieldset extends SnipeModel
 {
     use HasFactory;

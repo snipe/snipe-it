@@ -25,6 +25,7 @@ use Watson\Validating\ValidatingTrait;
  * attributes that are common among the same type of asset.
  *
  * @version v1.0
+ * @mixin IdeHelperAssetModel
  */
 class AssetModel extends SnipeModel
 {

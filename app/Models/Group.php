@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Gate;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperGroup
+ */
 class Group extends SnipeModel
 {
     use HasFactory;
