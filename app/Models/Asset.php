@@ -282,7 +282,6 @@ class Asset extends Depreciable
         'rtd_location' => 'defaultLoc',
     ];
 
-
     protected $searchableRelationColumns = [
         'jobtitle' => ['relation' => 'assignedTo', 'column' => 'jobtitle', 'types' => [\App\Models\User::class]],
         'employee_num' => ['relation' => 'assignedTo', 'column' => 'employee_num', 'types' => [\App\Models\User::class]],
@@ -2234,7 +2233,15 @@ class Asset extends Depreciable
      */
     public function scopeOrderByCreatedByName($query, $order)
     {
-        return $query->leftJoin('users as admin_sort', 'assets.created_by', '=', 'admin_sort.id')->select('assets.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        // addSelect rather than select, so prior withCount subqueries
+        // (which append their count-expressions to the select list)
+        // don't get wiped by the join and trigger an N+1 on the
+        // reload.
+        return $query
+            ->leftJoin('users as admin_sort', 'assets.created_by', '=', 'admin_sort.id')
+            ->addSelect('assets.*')
+            ->orderBy('admin_sort.first_name', $order)
+            ->orderBy('admin_sort.last_name', $order);
     }
 
     /**

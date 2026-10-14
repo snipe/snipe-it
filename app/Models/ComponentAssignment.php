@@ -69,11 +69,11 @@ class ComponentAssignment extends Model
 
     public function scopeOrderByCreatedByName($query, $order)
     {
-        return $query->leftJoin('users as checkout_users_sort', 'components_assets.created_by', '=', 'checkout_users_sort.id')->select('components_assets.*')->orderBy('checkout_users_sort.first_name', $order)->orderBy('checkout_users_sort.last_name', $order);
+        return $query->leftJoin('users as checkout_users_sort', 'components_assets.created_by', '=', 'checkout_users_sort.id')->addSelect('components_assets.*')->orderBy('checkout_users_sort.first_name', $order)->orderBy('checkout_users_sort.last_name', $order);
     }
 
     public function scopeOrderByComponentName($query, $order)
     {
-        return $query->leftJoin('components as component_sort', 'components_assets.id', '=', 'component_sort.id')->select('components_assets.*')->orderBy('component_sort.name', $order);
+        return $query->leftJoin('components as component_sort', 'components_assets.id', '=', 'component_sort.id')->addSelect('components_assets.*')->orderBy('component_sort.name', $order);
     }
 }

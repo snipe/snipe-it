@@ -773,7 +773,7 @@ class Actionlog extends SnipeModel
 
     public function scopeOrderByCreatedBy($query, $order)
     {
-        return $query->leftJoin('users as admin_sort', 'action_logs.created_by', '=', 'admin_sort.id')->select('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return $query->leftJoin('users as admin_sort', 'action_logs.created_by', '=', 'admin_sort.id')->addSelect('action_logs.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 
     // Audit report (issue #9430): the frontend has advertised location
@@ -784,7 +784,7 @@ class Actionlog extends SnipeModel
     public function scopeOrderByLocation($query, $order)
     {
         return $query->leftJoin('locations as location_sort', 'action_logs.location_id', '=', 'location_sort.id')
-            ->select('action_logs.*')
+            ->addSelect('action_logs.*')
             ->orderBy('location_sort.name', $order);
     }
 
@@ -798,7 +798,7 @@ class Actionlog extends SnipeModel
             $join->on('action_logs.item_id', '=', 'asset_sort.id')
                 ->where('action_logs.item_type', '=', Asset::class);
         })
-            ->select('action_logs.*')
+            ->addSelect('action_logs.*')
             ->orderBy('asset_sort.next_audit_date', $order);
     }
 
@@ -816,7 +816,7 @@ class Actionlog extends SnipeModel
             $join->on('action_logs.item_id', '=', 'asset_item_sort.id')
                 ->where('action_logs.item_type', '=', Asset::class);
         })
-            ->select('action_logs.*')
+            ->addSelect('action_logs.*')
             ->orderBy('asset_item_sort.name', $order);
     }
 }

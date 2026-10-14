@@ -552,7 +552,7 @@ class Consumable extends SnipeModel
 
     public function scopeOrderByCreatedBy($query, $order)
     {
-        return $query->leftJoin('users as users_sort', 'consumables.created_by', '=', 'users_sort.id')->select('consumables.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
+        return $query->leftJoin('users as users_sort', 'consumables.created_by', '=', 'users_sort.id')->addSelect('consumables.*')->orderBy('users_sort.first_name', $order)->orderBy('users_sort.last_name', $order);
     }
 
     /**

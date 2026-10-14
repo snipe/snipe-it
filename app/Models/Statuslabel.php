@@ -56,7 +56,7 @@ class Statuslabel extends SnipeModel
     protected function color(): Attribute
     {
         return Attribute::make(
-            get: fn(?string $value) => CssColor::sanitize($value, ''),
+            get: fn (?string $value) => CssColor::sanitize($value, ''),
         );
     }
 
@@ -249,6 +249,6 @@ class Statuslabel extends SnipeModel
 
     public function scopeOrderByCreatedBy($query, $order)
     {
-        return $query->leftJoin('users as admin_sort', 'status_labels.created_by', '=', 'admin_sort.id')->select('status_labels.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return $query->leftJoin('users as admin_sort', 'status_labels.created_by', '=', 'admin_sort.id')->addSelect('status_labels.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
     }
 }
