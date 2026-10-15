@@ -512,7 +512,7 @@
 
         @if (($infoPanelObj->present()->displayAddress) && (config('services.google.maps_api_key')))
 
-                <x-info-element>
+                <x-info-element class="hidden-print">
                     <div class="text-center">
                         <img src="https://maps.googleapis.com/maps/api/staticmap?markers={{ urlencode($infoPanelObj->address.','.$infoPanelObj->city.' '.$infoPanelObj->state.' '.$infoPanelObj->country.' '.$infoPanelObj->zip) }}&size=500x300&maptype=roadmap&key={{ config('services.google.maps_api_key') }}" class="img-thumbnail img-responsive" style="width: 100%" alt="Map">
                     </div>
