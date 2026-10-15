@@ -25,14 +25,10 @@ class CloneFieldset extends Component
     #[Computed]
     public function title(): string
     {
-        if (! $this->id) {
-            return '';
-        }
-
         return sprintf(
             '%s: %s',
             trans('admin/custom_fields/general.clone_fieldset'),
-            CustomFieldset::find($this->id)->name
+            CustomFieldset::find($this->id)?->name
         );
     }
 
