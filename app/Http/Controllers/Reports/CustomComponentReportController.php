@@ -246,6 +246,10 @@ class CustomComponentReportController extends Controller
                 'headers' => [trans('general.deleted')],
                 'values' => fn ($component, $i) => [$component->deleted_at ?? ''],
             ],
+            'archived' => [
+                'headers' => [trans('general.archived')],
+                'values' => fn ($component, $i) => [$component->archived ? trans('general.yes') : trans('general.no')],
+            ],
             'notes' => [
                 'headers' => [trans('general.notes')],
                 'values' => fn ($component, $i) => [$component->notes],
@@ -376,6 +380,10 @@ class CustomComponentReportController extends Controller
                 ->pluck('item_id');
 
             $query->whereIn('components.id', $componentIdsWithinCheckoutRange);
+        }
+
+        if ($request->filled('exclude_archived')) {
+            $query->notArchived();
         }
 
         if ($request->input('deleted_components') === 'include_deleted') {
