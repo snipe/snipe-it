@@ -29,11 +29,10 @@ class ComponentCheckoutController extends Controller
      * @since [v3.0]
      *
      * @param  int  $id
-     * @return View
      *
      * @throws AuthorizationException
      */
-    public function create(Request $request, $id)
+    public function create(Request $request, $id): View|RedirectResponse
     {
 
         if ($component = Component::find($id)) {

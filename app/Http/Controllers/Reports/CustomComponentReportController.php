@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Reports;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomComponentReportRequest;
 use App\Models\Actionlog;
+use App\Models\Builders\ComponentQueryBuilder;
 use App\Models\Component;
 use App\Models\ReportTemplate;
 use Carbon\Carbon;
@@ -270,7 +271,7 @@ class CustomComponentReportController extends Controller
         return $headers;
     }
 
-    private function buildQuery(Request $request): Builder
+    private function buildQuery(Request $request): ComponentQueryBuilder
     {
         $query = Component::select('components.*')
             ->with([
