@@ -140,6 +140,16 @@
                 name="requestable"
                 :label="trans('admin/hardware/general.requestable')"
                 :item="$item"
+                data-mutex-with="archived"
+            />
+
+            <x-form.checkbox-row
+                name="archived"
+                :label="trans('general.archived')"
+                :help_text="($item->exists && $item->numCheckedOut() > 0) ? trans('admin/components/message.archived_blocked_by_checkouts') : trans('admin/components/general.archived_help')"
+                :item="$item"
+                :disabled="$item->exists && $item->numCheckedOut() > 0"
+                data-mutex-with="requestable"
             />
 
             <x-slot:customfooter>
