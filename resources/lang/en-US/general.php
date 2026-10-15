@@ -338,6 +338,7 @@ return [
     'requestable_models' => 'Requestable Models',
     'requestable_items' => 'Requestable Items',
     'requestable' => 'Requestable',
+    'requestable_archived_conflict' => 'This item cannot be both requestable and archived. Clear one before saving.',
     'requested' => 'requested',
     'pending_requests' => 'Pending Requests',
     'rtd' => 'Ready to Deploy',
