@@ -91,6 +91,8 @@ class AppServiceProvider extends ServiceProvider
         License::observe(LicenseObserver::class);
         Location::observe(LocationObserver::class);
         Maintenance::observe(MaintenanceObserver::class);
+        //tambahan email notif Maintenance
+		Maintenance::observe(\App\Observers\MaintenanceResponsibleObserver::class);
         Setting::observe(SettingObserver::class);
         User::observe(UserObserver::class);
 
