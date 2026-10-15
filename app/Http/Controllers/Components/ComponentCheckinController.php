@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class ComponentCheckinController extends Controller
@@ -117,5 +118,63 @@ class ComponentCheckinController extends Controller
         }
 
         return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
+    }
+
+    /**
+     * Bulk check-in a list of component pivot rows. The caller
+     * ticks rows on the component show page's "Assigned" table and
+     * posts their components_assets ids here. Each pivot row is
+     * fully checked back in (not partial-qty like the single-row
+     * form).
+     */
+    public function bulkCheckinSelected(Request $request): RedirectResponse
+    {
+        $pivotIds = array_filter((array) $request->input('ids', []));
+
+        if (empty($pivotIds)) {
+            return redirect()->back()
+                ->with('warning', trans('admin/components/message.bulk.checkin_selected.no_rows_selected'));
+        }
+
+        // Defense in depth for FMCS / floater. ComponentAssignment
+        // doesn't carry CompanyableTrait, so a cross-company pivot id
+        // POSTed by hand would reach the loop and rely purely on the
+        // per-row Gate::allows('checkin') result. Narrow the lookup to
+        // pivots whose parent Component is reachable by this caller,
+        // via a subquery against the Component model's auto-applied
+        // CompanyableScope. The eager-loaded `component` relation is
+        // still used for the auth check and event payload below.
+        $assignments = ComponentAssignment::with('component')
+            ->whereIn('id', $pivotIds)
+            ->whereIn('component_id', Component::query()->select('id'))
+            ->get();
+
+        $count = 0;
+        foreach ($assignments as $assignment) {
+            $component = $assignment->component;
+            if (!$component || !Gate::allows('checkin', $component)) {
+                continue;
+            }
+
+            // ComponentAssignment has no belongsTo asset relation
+            // (only a quirky `assets()` hasMany), so fetch the
+            // Asset directly by its pivot column. withTrashed so a
+            // soft-deleted asset doesn't break the checkin event.
+            $asset = Asset::withTrashed()->find($assignment->asset_id);
+
+            if ($assignment->delete()) {
+                event(new CheckoutableCheckedIn(
+                    $component,
+                    $asset,
+                    auth()->user(),
+                    null,
+                    Carbon::now(),
+                ));
+                $count++;
+            }
+        }
+
+        return redirect()->back()
+            ->with('success', trans_choice('admin/components/message.bulk.checkin_selected.success', $count, ['count' => $count]));
     }
 }

@@ -40,6 +40,11 @@ class ComponentCheckoutController extends Controller
 
             $this->authorize('checkout', $component);
 
+            if ($component->archived) {
+                return redirect()->route('components.index')
+                    ->with('error', trans('admin/components/message.checkout.archived'));
+            }
+
             // Make sure the category is valid
             if ($component->category) {
 
@@ -106,6 +111,11 @@ class ComponentCheckoutController extends Controller
         }
 
         $this->authorize('checkout', $component);
+
+        if ($component->archived) {
+            return redirect()->route('components.index')
+                ->with('error', trans('admin/components/message.checkout.archived'));
+        }
 
         $max_to_checkout = $component->numRemaining();
 

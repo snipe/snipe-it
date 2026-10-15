@@ -97,6 +97,7 @@ class ComponentsController extends Controller
         // absence to false so the flag really flips off. The setter
         // normalizes the truthy branch.
         $component->requestable = $request->input('requestable', false);
+        $component->archived = $request->input('archived', false);
         // Seed the template supplier from the initial-acquisition
         // supplier on the create form; editable afterwards.
         $component->default_supplier_id = $request->input('default_supplier_id', $request->input('supplier_id'));
@@ -182,6 +183,7 @@ class ComponentsController extends Controller
         // Unchecked checkbox is omitted from the POST body; coerce
         // absence to false so unchecking really turns the flag off.
         $component->requestable = $request->input('requestable', false);
+        $component->archived = $request->input('archived', false);
 
         $component = $request->handleImages($component);
 
