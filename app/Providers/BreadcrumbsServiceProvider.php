@@ -49,7 +49,7 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         if (request()->is('hardware*') && is_string($statusType) && $statusType !== '') {
             Breadcrumbs::for('hardware.index', fn (Trail $trail) => $trail->parent('home', route('home'))
                 ->push(trans('general.assets'), route('hardware.index'))
-                ->push(trans('general.' . strtolower(e($statusType))), route('hardware.index', ['status_type' => $statusType]))
+                ->push(trans('general.'.strtolower(e($statusType))), route('hardware.index', ['status_type' => $statusType]))
             );
 
         } else {
@@ -185,9 +185,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         /**
          * Components Breadcrumbs
          */
-        Breadcrumbs::for('components.index', fn (Trail $trail) => $trail->parent('home', route('home'))
-            ->push(trans('general.components'), route('components.index'))
-        );
+        $componentsStatus = request()->status;
+        if (request()->is('components*') && in_array($componentsStatus, ['Archived', 'Deleted'], true)) {
+            Breadcrumbs::for('components.index', fn (Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.components'), route('components.index'))
+                ->push(trans('general.'.strtolower($componentsStatus)), route('components.index', ['status' => $componentsStatus]))
+            );
+        } else {
+            Breadcrumbs::for('components.index', fn (Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.components'), route('components.index'))
+            );
+        }
 
         Breadcrumbs::for('components.create', fn (Trail $trail) => $trail->parent('components.index', route('components.index'))
             ->push(trans('general.create'), route('components.create'))
