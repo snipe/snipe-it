@@ -35,7 +35,7 @@ RUN  apk add --no-cache \
         wget \
         vim \
         git \
-        mysql-client \
+        mariadb-client \
         tini
 
 COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
