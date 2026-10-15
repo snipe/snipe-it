@@ -83,7 +83,7 @@ class ComponentArchiveValidationTest extends TestCase
         // Pending requests for a just-archived component would otherwise
         // sit in /requests as un-fulfillable rows and in the user's
         // /account/requested list with a dead link. Observer closes them
-        // out and stamps the cancellation note so the user knows why.
+        // out so neither surface shows the orphaned row.
         $component = Component::factory()->create();
         $pending = CheckoutRequest::factory()->create([
             'user_id' => User::factory()->create()->id,
@@ -97,28 +97,24 @@ class ComponentArchiveValidationTest extends TestCase
         $pending->refresh();
         $this->assertNotNull($pending->canceled_at);
         $this->assertSame(CheckoutRequestState::Canceled, $pending->state);
-        $this->assertStringContainsString(
-            trans('admin/components/message.checkout.archived'),
-            $pending->notes,
-        );
     }
 
-    public function test_archiving_does_not_cancel_already_canceled_requests(): void
+    public function test_archiving_does_not_touch_already_canceled_requests(): void
     {
         $component = Component::factory()->create();
+        $previousCancelAt = now()->subDay();
         $alreadyCanceled = CheckoutRequest::factory()->create([
             'user_id' => User::factory()->create()->id,
             'requestable_id' => $component->id,
             'requestable_type' => Component::class,
-            'canceled_at' => now()->subDay(),
-            'notes' => 'original note',
+            'canceled_at' => $previousCancelAt,
         ]);
 
         $component->archived = 1;
         $component->save();
 
         $alreadyCanceled->refresh();
-        $this->assertSame('original note', $alreadyCanceled->notes);
+        $this->assertEquals($previousCancelAt->toDateTimeString(), $alreadyCanceled->canceled_at->toDateTimeString());
     }
 
     public function test_un_archiving_does_not_touch_requests(): void
@@ -128,14 +124,12 @@ class ComponentArchiveValidationTest extends TestCase
             'user_id' => User::factory()->create()->id,
             'requestable_id' => $component->id,
             'requestable_type' => Component::class,
-            'notes' => 'untouched',
         ]);
 
         $component->archived = 0;
         $component->save();
 
         $request->refresh();
-        $this->assertSame('untouched', $request->notes);
         $this->assertNull($request->canceled_at);
     }
 
