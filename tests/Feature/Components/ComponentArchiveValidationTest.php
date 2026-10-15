@@ -2,9 +2,12 @@
 
 namespace Tests\Feature\Components;
 
+use App\Enums\CheckoutRequestState;
 use App\Models\Asset;
 use App\Models\Category;
+use App\Models\CheckoutRequest;
 use App\Models\Component;
+use App\Models\User;
 use Tests\TestCase;
 
 /**
@@ -73,6 +76,67 @@ class ComponentArchiveValidationTest extends TestCase
         $component->archived = 1;
 
         $this->assertTrue($component->save());
+    }
+
+    public function test_archiving_component_auto_cancels_pending_requests(): void
+    {
+        // Pending requests for a just-archived component would otherwise
+        // sit in /requests as un-fulfillable rows and in the user's
+        // /account/requested list with a dead link. Observer closes them
+        // out and stamps the cancellation note so the user knows why.
+        $component = Component::factory()->create();
+        $pending = CheckoutRequest::factory()->create([
+            'user_id' => User::factory()->create()->id,
+            'requestable_id' => $component->id,
+            'requestable_type' => Component::class,
+        ]);
+
+        $component->archived = 1;
+        $component->save();
+
+        $pending->refresh();
+        $this->assertNotNull($pending->canceled_at);
+        $this->assertSame(CheckoutRequestState::Canceled, $pending->state);
+        $this->assertStringContainsString(
+            trans('admin/components/message.checkout.archived'),
+            $pending->notes,
+        );
+    }
+
+    public function test_archiving_does_not_cancel_already_canceled_requests(): void
+    {
+        $component = Component::factory()->create();
+        $alreadyCanceled = CheckoutRequest::factory()->create([
+            'user_id' => User::factory()->create()->id,
+            'requestable_id' => $component->id,
+            'requestable_type' => Component::class,
+            'canceled_at' => now()->subDay(),
+            'notes' => 'original note',
+        ]);
+
+        $component->archived = 1;
+        $component->save();
+
+        $alreadyCanceled->refresh();
+        $this->assertSame('original note', $alreadyCanceled->notes);
+    }
+
+    public function test_un_archiving_does_not_touch_requests(): void
+    {
+        $component = Component::factory()->archived()->create();
+        $request = CheckoutRequest::factory()->create([
+            'user_id' => User::factory()->create()->id,
+            'requestable_id' => $component->id,
+            'requestable_type' => Component::class,
+            'notes' => 'untouched',
+        ]);
+
+        $component->archived = 0;
+        $component->save();
+
+        $request->refresh();
+        $this->assertSame('untouched', $request->notes);
+        $this->assertNull($request->canceled_at);
     }
 
     public function test_new_component_can_be_created_as_archived(): void
