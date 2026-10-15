@@ -29,7 +29,7 @@ return [
         'archived' => 'That component has been archived and cannot be checked out. Un-archive it first on the component edit screen.',
     ],
 
-    'archived_blocked_by_checkouts' => 'This component still has active checkouts. Check it back in before archiving.',
+    'archived_blocked_by_checkouts' => 'This component still has active checkouts. Check them back in before archiving.',
 
     'bulk' => [
         'no_components_selected' => 'No components were selected.',
