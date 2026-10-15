@@ -112,6 +112,7 @@ abstract class Importer
         'qty' => 'quantity',
         'reassignable' => 'reassignable',
         'requestable' => 'requestable',
+        'archived' => 'archived',
         'seats' => 'seats',
         'serial' => 'serial number',
         'status' => 'status',

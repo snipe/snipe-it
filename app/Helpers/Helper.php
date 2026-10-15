@@ -936,9 +936,13 @@ class Helper
         // stock the same way the model method does. coalesce() maps
         // "no assignments" (SUM returns NULL) back to 0 so the
         // havingRaw comparison stays numeric.
+        // Archived components are retired from active inventory and
+        // should not drive low-stock alerts even when they fall below
+        // their min_amt threshold.
         $components = Component::select('id', 'name', 'qty', 'min_amt')
             ->withSum('unconstrainedAssets as sum_unconstrained_assets', 'components_assets.assigned_qty')
             ->whereNotNull('min_amt')
+            ->notArchived()
             ->groupBy('components.id', 'components.name', 'components.qty', 'components.min_amt')
             ->havingRaw('(qty - COALESCE(sum_unconstrained_assets, 0)) < (min_amt + ?)', [$alert_threshold])
             ->get();

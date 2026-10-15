@@ -74,6 +74,19 @@ class ComponentsController extends Controller
             ->with('company', 'location', 'category', 'defaultSupplier', 'adminuser', 'manufacturer', 'orderItems.order.supplier')
             ->withSum('unconstrainedAssets as sum_unconstrained_assets', 'components_assets.assigned_qty');
 
+        // Archived / soft-deleted scope.
+        switch ($request->input('status')) {
+            case 'Archived':
+                $components->archived();
+                break;
+            case 'Deleted':
+                $components->onlyTrashed();
+                break;
+            default:
+                $components->componentsForShow();
+                break;
+        }
+
         $filter = [];
 
         if ($request->filled('filter')) {

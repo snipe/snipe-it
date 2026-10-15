@@ -1843,12 +1843,6 @@ parameters:
 			path: app/Http/Controllers/Components/ComponentCheckoutController.php
 
 		-
-			message: '#^Method App\\Http\\Controllers\\Components\\ComponentCheckoutController\:\:create\(\) should return Illuminate\\Contracts\\View\\View but returns Illuminate\\Http\\RedirectResponse\.$#'
-			identifier: return.type
-			count: 3
-			path: app/Http/Controllers/Components/ComponentCheckoutController.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -2221,6 +2215,12 @@ parameters:
 			path: app/Http/Controllers/ReportTemplatesController.php
 
 		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:notArchived\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Reports/CustomComponentReportController.php
+
+		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:onlyTrashed\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -2229,6 +2229,12 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\:\:withTrashed\(\)\.$#'
 			identifier: method.notFound
+			count: 1
+			path: app/Http/Controllers/Reports/CustomComponentReportController.php
+
+		-
+			message: '#^Method App\\Http\\Controllers\\Reports\\CustomComponentReportController\:\:buildQuery\(\) should return App\\Models\\Builders\\ComponentQueryBuilder but returns Illuminate\\Database\\Eloquent\\Builder\.$#'
+			identifier: return.type
 			count: 1
 			path: app/Http/Controllers/Reports/CustomComponentReportController.php
 
@@ -2739,7 +2745,7 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$pivot\.$#'
 			identifier: property.notFound
-			count: 6
+			count: 7
 			path: app/Http/Transformers/ComponentsTransformer.php
 
 		-

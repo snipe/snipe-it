@@ -3,6 +3,7 @@
 namespace App\Models\Builders;
 
 use App\Models\Component;
+use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -14,7 +15,31 @@ class ComponentQueryBuilder extends Builder
 {
     public function requestable(): self
     {
-        return $this->where('components.requestable', '1');
+        return $this->where('components.requestable', '1')
+            ->notArchived();
+    }
+
+    public function archived(): self
+    {
+        return $this->where('components.archived', '=', 1);
+    }
+
+    public function notArchived(): self
+    {
+        return $this->where('components.archived', '=', 0);
+    }
+
+    /**
+     * Default list-page scope. Hides archived rows unless the
+     * `show_archived_in_list` setting is on.
+     */
+    public function componentsForShow(): self
+    {
+        if (Setting::getSettings()->show_archived_in_list != 1) {
+            return $this->notArchived();
+        }
+
+        return $this;
     }
 
     public function orderCategory(string $order): self

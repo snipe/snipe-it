@@ -230,7 +230,10 @@ $(function () {
         var $costHint = $modal.find('#adjustQuantityCostHint');
 
         $unitCost.val(lastUnitCost !== undefined && lastUnitCost !== '' ? lastUnitCost : '');
-        $currency.val(lastCurrency !== undefined && lastCurrency !== '' ? lastCurrency : ($currency.prop('defaultValue') || ''));
+        // $currency is a select2-backed <select>. Trigger('change') is
+        // required to repaint select2's rendered selection after setting the
+        // underlying value.
+        $currency.val(lastCurrency !== undefined && lastCurrency !== '' ? lastCurrency : '').trigger('change');
 
         if ((lastUnitCost !== undefined && lastUnitCost !== '') || (lastCurrency !== undefined && lastCurrency !== '')) {
             $costHint.show();
@@ -239,8 +242,11 @@ $(function () {
         }
 
         // Rebind on every open so multiple modal opens don't stack listeners.
+        // $currency is a select, so listen for change rather than input.
         $unitCost.off('input.adjustCostHint').on('input.adjustCostHint', function () { $costHint.hide(); });
-        $currency.off('input.adjustCostHint').on('input.adjustCostHint', function () { $costHint.hide(); });
+        $currency.off('change.adjustCostHint').on('change.adjustCostHint', function () {
+            $costHint.hide();
+        });
 
         $modal.find('#adjustQuantityNote').val('');
         $modal.find('#adjustQuantityFile').val('');
@@ -289,7 +295,7 @@ $(function () {
                 $modal.find('#adjustQuantityOrder').val('');
                 $modal.find('#adjustQuantitySupplier').val('').trigger('change');
                 $modal.find('#adjustQuantityUnitCost').val('');
-                $modal.find('#adjustQuantityCurrency').val('');
+                $modal.find('#adjustQuantityCurrency').val('').trigger('change');
             }
         };
         // Track the prefill state on the hint so the visibility toggle
@@ -2797,4 +2803,31 @@ $(function () {
             });
         }
     }
+});
+
+// Mutually-exclusive checkbox pairs. Opt in with
+//   data-mutex-with="otherFieldName"
+// on BOTH checkboxes. Checking one disables (and clears) the other
+// so the user can't post a conflict the server would reject. Used
+// for the archived/requestable pair on checkoutable item edit forms.
+$(function () {
+    var $pair = $('input[type="checkbox"][data-mutex-with]');
+    if (!$pair.length) {
+        return;
+    }
+
+    function syncMutexState() {
+        $pair.each(function () {
+            var siblingName = $(this).data('mutex-with');
+            var $sibling = $pair.filter('[name="' + siblingName + '"]');
+            if ($(this).is(':checked')) {
+                $sibling.prop('checked', false).prop('disabled', true);
+            } else {
+                $sibling.prop('disabled', false);
+            }
+        });
+    }
+
+    $pair.on('change', syncMutexState);
+    syncMutexState();
 });

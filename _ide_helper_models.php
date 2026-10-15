@@ -1108,6 +1108,7 @@ namespace App\Models{
  * @property string|null $notes
  * @property int|null $legacy_qty
  * @property bool $requestable
+ * @property int $archived
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
  * @property-read \App\Models\User|null $adminuser
@@ -1178,6 +1179,7 @@ namespace App\Models{
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component requestable()
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component requestedBy(\App\Models\User $user)
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component textSearch($search)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereArchived($value)
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereCategoryId($value)
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereCompanyId($value)
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component whereCreatedAt($value)
