@@ -61,7 +61,8 @@ class ComponentsController extends Controller
         $this->authorize('create', Component::class);
 
         return view('components/edit')->with('category_type', 'component')
-            ->with('item', new Component);
+            ->with('item', new Component)
+            ->with('pendingRequestCount', 0);
     }
 
     /**
@@ -142,7 +143,8 @@ class ComponentsController extends Controller
 
         return view('components/edit')
             ->with('item', $component)
-            ->with('category_type', 'component');
+            ->with('category_type', 'component')
+            ->with('pendingRequestCount', $component->openRequests()->count());
     }
 
     /**
@@ -269,7 +271,8 @@ class ComponentsController extends Controller
         // Show the page
         return view('components/edit')
             ->with('item', $cloned_component)
-            ->with('component', $cloned_component);
+            ->with('component', $cloned_component)
+            ->with('pendingRequestCount', 0);
     }
 
     /**
