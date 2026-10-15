@@ -11,7 +11,6 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -25,6 +24,7 @@ use Watson\Validating\ValidatingTrait;
  * send a EULA to the user, etc.
  *
  * @version v1.0
+ *
  * @mixin IdeHelperCategory
  */
 class Category extends SnipeModel
@@ -71,7 +71,7 @@ class Category extends SnipeModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'category_type',
@@ -351,20 +351,6 @@ class Category extends SnipeModel
         $this->attributes['checkin_email'] = (int) filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
-    /**
-     * -----------------------------------------------
-     * BEGIN QUERY SCOPES
-     * -----------------------------------------------
-     **/
-
-    /**
-     * Query builder scope for whether or not the category requires acceptance
-     *
-     * @author Vincent Sposato <vincent.sposato@gmail.com>
-     *
-     * @param  Builder  $query  Query builder instance
-     * @return Builder Modified query builder
-     */
     public function newEloquentBuilder($query): CategoryQueryBuilder
     {
         return new CategoryQueryBuilder($query);

@@ -822,7 +822,6 @@ abstract class Importer
     /**
      * Defines mappings of csv fields
      *
-     * @param  bool  $updating  the updating
      * @return self
      */
     public function setFieldMappings($fields)

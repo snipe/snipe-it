@@ -120,8 +120,6 @@ class AccessoriesController extends Controller
      * Return view for the Accessory update form, prepopulated with existing data
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $accessoryId
      */
     public function edit(Accessory $accessory): View|RedirectResponse
     {
@@ -137,8 +135,6 @@ class AccessoriesController extends Controller
      * Returns a view that presents a form to clone an accessory.
      *
      * @author [J. Vinsmoke]
-     *
-     * @param  int  $accessoryId
      *
      * @since [v6.0]
      */
@@ -179,8 +175,6 @@ class AccessoriesController extends Controller
      * Save edited Accessory from form post
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $accessoryId
      */
     public function update(ImageUploadRequest $request, Accessory $accessory): RedirectResponse
     {
@@ -238,8 +232,6 @@ class AccessoriesController extends Controller
      * Delete the given accessory.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $accessoryId
      */
     public function destroy(Accessory $accessory): RedirectResponse
     {
@@ -265,8 +257,6 @@ class AccessoriesController extends Controller
      * the content for the accessory detail view, which is generated in getDataView.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $accessoryID
      *
      * @see AccessoriesController::getDataView() method that generates the JSON response
      * @since [v1.0]

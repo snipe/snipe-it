@@ -38,11 +38,11 @@ use Watson\Validating\ValidatingTrait;
  * @version v1.0
  *
  * @property ?int $location_id
- * @property Carbon|string|null $next_audit_date
- * @property Carbon|string|null $last_audit_date
- * @property Carbon|string|null $asset_eol_date
+ * @property \Carbon\Carbon|string|null $next_audit_date
+ * @property \Carbon\Carbon|string|null $last_audit_date
+ * @property \Carbon\Carbon|string|null $asset_eol_date
  * @property ?int $company_id
- * @property Carbon|string|null $last_checkin
+ * @property \Carbon\Carbon|string|null $last_checkin
  * @property bool $requestable
  * @property Asset|Location|User|null $assigned Current checkout target. morphTo relation named `assigned` (declared on method `assignedTo()`). Eloquent resolves the dynamic property by the morphTo name arg, not the method name, so this `@property` is distinct from `@property ... $assignedTo` written by ide-helper.
  *
@@ -83,7 +83,6 @@ class Asset extends Depreciable
     /**
      * Run after the checkout acceptance was declined by the user
      *
-     * @param  User  $acceptedBy
      * @param  string  $signature
      */
     public function declinedCheckout(User $declinedBy, $signature)
@@ -198,7 +197,7 @@ class Asset extends Depreciable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'asset_tag',
@@ -678,7 +677,6 @@ class Asset extends Depreciable
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @param  User  $user
      * @param  User  $admin
      * @param  Carbon  $checkout_at
      * @param  Carbon  $expected_checkin
@@ -1585,17 +1583,11 @@ class Asset extends Depreciable
     }
 
     /**
-     * -----------------------------------------------
-     * BEGIN QUERY SCOPES
-     * -----------------------------------------------
-     **/
-
-    /**
-     * Run additional, advanced searches.
-     * This overrides the advancedTextSearch method on the Searchable model trait to add searching of assigned user, location, and assets.
+     * Run additional, advanced searches. Overrides advancedTextSearch
+     * on the Searchable trait to also search assigned user, location,
+     * and asset-to-asset checkouts.
      *
-     * @param  array  $terms  The search terms
-     * @return Builder
+     * @param  array<int, string>  $terms  The search terms
      */
     public function advancedTextSearch(Builder $query, array $terms)
     {

@@ -1,36 +1,6 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperAsset\:\:\$asset_eol_date contains unknown class App\\Models\\Carbon\.$#'
-			identifier: class.notFound
-			count: 1
-			path: _ide_helper_models.php
-
-		-
-			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperAsset\:\:\$last_audit_date contains unknown class App\\Models\\Carbon\.$#'
-			identifier: class.notFound
-			count: 1
-			path: _ide_helper_models.php
-
-		-
-			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperAsset\:\:\$last_checkin contains unknown class App\\Models\\Carbon\.$#'
-			identifier: class.notFound
-			count: 1
-			path: _ide_helper_models.php
-
-		-
-			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperAsset\:\:\$next_audit_date contains unknown class App\\Models\\Carbon\.$#'
-			identifier: class.notFound
-			count: 1
-			path: _ide_helper_models.php
-
-		-
-			message: '#^PHPDoc tag @property for property App\\Models\\IdeHelperCheckoutRequest\:\:\$state contains unknown class App\\Models\\CheckoutRequestState\.$#'
-			identifier: class.notFound
-			count: 1
-			path: _ide_helper_models.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Asset\:\:\$pivot\.$#'
 			identifier: property.notFound
 			count: 1
@@ -199,12 +169,6 @@ parameters:
 			path: app/Console/Commands/CleanOldCheckoutRequests.php
 
 		-
-			message: '#^PHPDoc tag @var has invalid value \(\\Illuminate\\Database\\Eloquent\\Model&object\{trashed\(\)\: bool\} \$requestable\)\: Unexpected token "\(", expected ''\:'' at offset 59 on line 1$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Console/Commands/CleanOldCheckoutRequests.php
-
-		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -337,9 +301,9 @@ parameters:
 			path: app/Console/Commands/NormalizeUserNames.php
 
 		-
-			message: '#^Call to an undefined static method App\\Models\\CheckoutAcceptance\:\:HasFiles\(\)\.$#'
-			identifier: staticMethod.notFound
-			count: 1
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Builder\<Illuminate\\Database\\Eloquent\\Model\>\:\:withTrashed\(\)\.$#'
+			identifier: method.notFound
+			count: 2
 			path: app/Console/Commands/PurgeEulaPDFs.php
 
 		-
@@ -391,12 +355,6 @@ parameters:
 			path: app/Console/Commands/RestoreDeletedUsers.php
 
 		-
-			message: '#^Instantiated class App\\Console\\Commands\\Exception not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Console/Commands/RestoreFromBackup.php
-
-		-
 			message: '#^Result of method Illuminate\\Console\\Command\:\:error\(\) \(void\) is used\.$#'
 			identifier: method.void
 			count: 8
@@ -405,12 +363,6 @@ parameters:
 		-
 			message: '#^Result of method Illuminate\\Console\\Command\:\:info\(\) \(void\) is used\.$#'
 			identifier: method.void
-			count: 1
-			path: app/Console/Commands/RestoreFromBackup.php
-
-		-
-			message: '#^Throwing object of an unknown class App\\Console\\Commands\\Exception\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Console/Commands/RestoreFromBackup.php
 
@@ -577,18 +529,6 @@ parameters:
 			path: app/Exceptions/Handler.php
 
 		-
-			message: '#^PHPDoc type array of property App\\Exceptions\\Handler\:\:\$dontFlash is not covariant with PHPDoc type array\<int, string\> of overridden property Illuminate\\Foundation\\Exceptions\\Handler\:\:\$dontFlash\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Exceptions/Handler.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Exceptions\\Handler\:\:\$dontReport is not covariant with PHPDoc type array\<int, class\-string\<Throwable\>\> of overridden property Illuminate\\Foundation\\Exceptions\\Handler\:\:\$dontReport\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Exceptions/Handler.php
-
-		-
 			message: '#^Result of && is always false\.$#'
 			identifier: booleanAnd.alwaysFalse
 			count: 2
@@ -697,24 +637,6 @@ parameters:
 			path: app/Helpers/Helper.php
 
 		-
-			message: '#^Parameter \$file of method App\\Helpers\\Helper\:\:checkUploadIsAudio\(\) has invalid type App\\Helpers\\File\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Helpers/Helper.php
-
-		-
-			message: '#^Parameter \$file of method App\\Helpers\\Helper\:\:checkUploadIsImage\(\) has invalid type App\\Helpers\\File\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Helpers/Helper.php
-
-		-
-			message: '#^Parameter \$file of method App\\Helpers\\Helper\:\:checkUploadIsVideo\(\) has invalid type App\\Helpers\\File\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Helpers/Helper.php
-
-		-
 			message: '#^Strict comparison using \!\=\= between int and false will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1
@@ -751,18 +673,6 @@ parameters:
 			path: app/Http/Controllers/Accessories/AccessoriesController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$accessoryID$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Accessories/AccessoriesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$accessoryId$#'
-			identifier: parameter.notFound
-			count: 4
-			path: app/Http/Controllers/Accessories/AccessoriesController.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperAccessory\:\:\$deleted_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -783,12 +693,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param for parameter \$request with type Illuminate\\Http\\Request is not subtype of native type App\\Http\\Requests\\AccessoryCheckoutRequest\.$#'
 			identifier: parameter.phpDocType
-			count: 1
-			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
 			count: 1
 			path: app/Http/Controllers/Accessories/AccessoryCheckoutController.php
 
@@ -861,24 +765,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param for parameter \$request with type App\\Http\\Requests\\ImageUploadRequest is not subtype of native type App\\Http\\Requests\\StoreAccessoryRequest\.$#'
 			identifier: parameter.phpDocType
-			count: 1
-			path: app/Http/Controllers/Api/AccessoriesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$accessoryId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/AccessoriesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$backto$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/AccessoriesController.php
-
-		-
-			message: '#^PHPDoc tag @return has invalid value \(\| array\)\: Unexpected token "\|", expected type at offset 192 on line 9$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: app/Http/Controllers/Api/AccessoriesController.php
 
@@ -1021,18 +907,6 @@ parameters:
 			path: app/Http/Controllers/Api/AssetsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$assetId$#'
-			identifier: parameter.notFound
-			count: 5
-			path: app/Http/Controllers/Api/AssetsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/AssetsController.php
-
-		-
 			message: '#^Property App\\Models\\Asset\|App\\Models\\Location\|App\\Models\\User\:\:\$location_id is not readable\.$#'
 			identifier: property.writeOnly
 			count: 3
@@ -1053,12 +927,6 @@ parameters:
 		-
 			message: '#^Method Illuminate\\Filesystem\\FilesystemAdapter\:\:url\(\) invoked with 2 parameters, 1 required\.$#'
 			identifier: arguments.count
-			count: 1
-			path: app/Http/Controllers/Api/CategoriesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
 			count: 1
 			path: app/Http/Controllers/Api/CategoriesController.php
 
@@ -1171,12 +1039,6 @@ parameters:
 			path: app/Http/Controllers/Api/ComponentsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/ComponentsController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$assigned_to\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1255,20 +1117,8 @@ parameters:
 			path: app/Http/Controllers/Api/CustomFieldsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/CustomFieldsController.php
-
-		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/CustomFieldsetsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
 			count: 1
 			path: app/Http/Controllers/Api/CustomFieldsetsController.php
 
@@ -1315,12 +1165,6 @@ parameters:
 			path: app/Http/Controllers/Api/DepartmentsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$locationId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/DepartmentsController.php
-
-		-
 			message: '#^Dead catch \- Illuminate\\Database\\Eloquent\\JsonEncodingException is never thrown in the try block\.$#'
 			identifier: catch.neverThrown
 			count: 2
@@ -1329,12 +1173,6 @@ parameters:
 		-
 			message: '#^Instanceof between Illuminate\\Http\\UploadedFile and Illuminate\\Http\\UploadedFile will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
-			count: 1
-			path: app/Http/Controllers/Api/ImportController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$request$#'
-			identifier: parameter.notFound
 			count: 1
 			path: app/Http/Controllers/Api/ImportController.php
 
@@ -1465,12 +1303,6 @@ parameters:
 			path: app/Http/Controllers/Api/ManufacturersController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/ManufacturersController.php
-
-		-
 			message: '#^PHPDoc tag @return with type Illuminate\\Http\\Response is incompatible with native type array\|Illuminate\\Http\\JsonResponse\.$#'
 			identifier: return.phpDocType
 			count: 1
@@ -1481,18 +1313,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/Api/ManufacturersController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$request$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/NotesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 4
-			path: app/Http/Controllers/Api/PredefinedKitsController.php
 
 		-
 			message: '#^PHPDoc tag @return with type Illuminate\\Http\\Response is incompatible with native type Illuminate\\Http\\JsonResponse\.$#'
@@ -1609,12 +1429,6 @@ parameters:
 			path: app/Http/Controllers/Api/SuppliersController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Api/SuppliersController.php
-
-		-
 			message: '#^PHPDoc tag @return with type Illuminate\\Http\\Response is incompatible with native type array\.$#'
 			identifier: return.phpDocType
 			count: 1
@@ -1624,12 +1438,6 @@ parameters:
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
 			count: 1
-			path: app/Http/Controllers/Api/UploadedFilesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$request$#'
-			identifier: parameter.notFound
-			count: 2
 			path: app/Http/Controllers/Api/UploadedFilesController.php
 
 		-
@@ -1654,12 +1462,6 @@ parameters:
 			message: '#^PHPDoc tag @param for parameter \$request with type Illuminate\\Http\\Request is not subtype of native type App\\Http\\Requests\\SaveUserRequest\.$#'
 			identifier: parameter.phpDocType
 			count: 2
-			path: app/Http/Controllers/Api/UsersController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 1
 			path: app/Http/Controllers/Api/UsersController.php
 
 		-
@@ -1759,12 +1561,6 @@ parameters:
 			path: app/Http/Controllers/Assets/AssetCheckinController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$assetId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Assets/AssetCheckinController.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$status_id \(int\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -1774,12 +1570,6 @@ parameters:
 			message: '#^Method App\\Http\\Controllers\\Assets\\AssetCheckoutController\:\:create\(\) should return Illuminate\\Contracts\\View\\View but returns Illuminate\\Http\\RedirectResponse\.$#'
 			identifier: return.type
 			count: 3
-			path: app/Http/Controllers/Assets/AssetCheckoutController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$assetId$#'
-			identifier: parameter.notFound
-			count: 1
 			path: app/Http/Controllers/Assets/AssetCheckoutController.php
 
 		-
@@ -1873,12 +1663,6 @@ parameters:
 			path: app/Http/Controllers/Assets/AssetsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$assetId$#'
-			identifier: parameter.notFound
-			count: 5
-			path: app/Http/Controllers/Assets/AssetsController.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperAsset\:\:\$assigned_to \(int\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -1951,30 +1735,6 @@ parameters:
 			path: app/Http/Controllers/Auth/LoginController.php
 
 		-
-			message: '#^Call to method getMessage\(\) on an unknown class App\\Http\\Controllers\\Auth\\Exception\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/LoginController.php
-
-		-
-			message: '#^Call to method getSLOurl\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/LoginController.php
-
-		-
-			message: '#^Call to method logout\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/LoginController.php
-
-		-
-			message: '#^Caught class App\\Http\\Controllers\\Auth\\Exception not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/LoginController.php
-
-		-
 			message: '#^Method App\\Http\\Controllers\\Auth\\LoginController\:\:getTwoFactorAuth\(\) should return Illuminate\\Http\\RedirectResponse but returns Illuminate\\View\\View\.$#'
 			identifier: return.type
 			count: 1
@@ -2005,74 +1765,20 @@ parameters:
 			path: app/Http/Controllers/Auth/LoginController.php
 
 		-
-			message: '#^Method App\\Http\\Controllers\\Auth\\LoginController\:\:logout\(\) has invalid return type App\\Http\\Controllers\\Auth\\Illuminate\\Http\\RedirectResponse\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/LoginController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Auth\\LoginController\:\:logout\(\) should return App\\Http\\Controllers\\Auth\\Illuminate\\Http\\RedirectResponse but returns Illuminate\\Http\\RedirectResponse\.$#'
-			identifier: return.type
-			count: 4
-			path: app/Http/Controllers/Auth/LoginController.php
-
-		-
 			message: '#^Negated boolean expression is always true\.$#'
 			identifier: booleanNot.alwaysTrue
 			count: 1
 			path: app/Http/Controllers/Auth/LoginController.php
 
 		-
-			message: '#^Call to method getErrors\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 2
-			path: app/Http/Controllers/Auth/SamlController.php
-
-		-
-			message: '#^Call to method getLastErrorReason\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 2
-			path: app/Http/Controllers/Auth/SamlController.php
-
-		-
-			message: '#^Call to method login\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/SamlController.php
-
-		-
-			message: '#^Call to method processResponse\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/SamlController.php
-
-		-
-			message: '#^Call to method processSLO\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/SamlController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Auth\\SamlController\:\:metadata\(\) has invalid return type App\\Http\\Controllers\\Auth\\Response\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Http/Controllers/Auth/SamlController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Auth\\SamlController\:\:metadata\(\) should return App\\Http\\Controllers\\Auth\\Response but returns Illuminate\\Http\\Response\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Http/Controllers/Auth/SamlController.php
-
-		-
-			message: '#^Method App\\Http\\Controllers\\Auth\\SamlController\:\:metadata\(\) should return App\\Http\\Controllers\\Auth\\Response but returns Symfony\\Component\\HttpFoundation\\StreamedResponse\.$#'
-			identifier: return.type
-			count: 1
-			path: app/Http/Controllers/Auth/SamlController.php
-
-		-
 			message: '#^Method App\\Http\\Controllers\\Auth\\SamlController\:\:sls\(\) should return Illuminate\\Http\\RedirectResponse but returns Illuminate\\View\\View\.$#'
 			identifier: return.type
+			count: 1
+			path: app/Http/Controllers/Auth/SamlController.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
 			count: 1
 			path: app/Http/Controllers/Auth/SamlController.php
 
@@ -2089,12 +1795,6 @@ parameters:
 			path: app/Http/Controllers/CategoriesController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$categoryId$#'
-			identifier: parameter.notFound
-			count: 3
-			path: app/Http/Controllers/CategoriesController.php
-
-		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:getErrors\(\)\.$#'
 			identifier: method.notFound
 			count: 2
@@ -2104,12 +1804,6 @@ parameters:
 			message: '#^PHPDoc tag @param for parameter \$request with type Illuminate\\Http\\Request is not subtype of native type App\\Http\\Requests\\ImageUploadRequest\.$#'
 			identifier: parameter.phpDocType
 			count: 1
-			path: app/Http/Controllers/CompaniesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$companyId$#'
-			identifier: parameter.notFound
-			count: 2
 			path: app/Http/Controllers/CompaniesController.php
 
 		-
@@ -2185,12 +1879,6 @@ parameters:
 			path: app/Http/Controllers/Components/ComponentsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$componentId$#'
-			identifier: parameter.notFound
-			count: 3
-			path: app/Http/Controllers/Components/ComponentsController.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperComponent\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -2245,12 +1933,6 @@ parameters:
 			path: app/Http/Controllers/Consumables/ConsumablesController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$consumableId$#'
-			identifier: parameter.notFound
-			count: 3
-			path: app/Http/Controllers/Consumables/ConsumablesController.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperConsumable\:\:\$id \(int\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -2293,12 +1975,6 @@ parameters:
 			path: app/Http/Controllers/CustomFieldsetsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 3
-			path: app/Http/Controllers/CustomFieldsetsController.php
-
-		-
 			message: '#^Variable \$field_ids might not be defined\.$#'
 			identifier: variable.undefined
 			count: 1
@@ -2311,33 +1987,9 @@ parameters:
 			path: app/Http/Controllers/DepartmentsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$departmentId$#'
-			identifier: parameter.notFound
-			count: 2
-			path: app/Http/Controllers/DepartmentsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/DepartmentsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$locationId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/DepartmentsController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Depreciation\:\:\$depreciation_method\.$#'
 			identifier: property.notFound
 			count: 2
-			path: app/Http/Controllers/DepreciationsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$depreciationId$#'
-			identifier: parameter.notFound
-			count: 3
 			path: app/Http/Controllers/DepreciationsController.php
 
 		-
@@ -2349,12 +2001,6 @@ parameters:
 		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
 			identifier: method.notFound
-			count: 2
-			path: app/Http/Controllers/GroupsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
 			count: 2
 			path: app/Http/Controllers/GroupsController.php
 
@@ -2455,30 +2101,6 @@ parameters:
 			path: app/Http/Controllers/Kits/PredefinedKitsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$accessoryId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Kits/PredefinedKitsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$consumableId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Kits/PredefinedKitsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$kit_id$#'
-			identifier: parameter.notFound
-			count: 2
-			path: app/Http/Controllers/Kits/PredefinedKitsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$modelId$#'
-			identifier: parameter.notFound
-			count: 3
-			path: app/Http/Controllers/Kits/PredefinedKitsController.php
-
-		-
 			message: '#^Offset 0 on non\-empty\-list\<string\> in isset\(\) always exists and is not nullable\.$#'
 			identifier: isset.offset
 			count: 1
@@ -2497,12 +2119,6 @@ parameters:
 			path: app/Http/Controllers/Licenses/LicenseCheckinController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$seatId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Licenses/LicenseCheckinController.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 2
@@ -2512,12 +2128,6 @@ parameters:
 			message: '#^Cannot cast Illuminate\\Database\\Eloquent\\Relations\\Relation to int\.$#'
 			identifier: cast.int
 			count: 1
-			path: app/Http/Controllers/Licenses/LicensesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$licenseId$#'
-			identifier: parameter.notFound
-			count: 4
 			path: app/Http/Controllers/Licenses/LicensesController.php
 
 		-
@@ -2535,18 +2145,6 @@ parameters:
 		-
 			message: '#^Call to an undefined method App\\Models\\SnipeModel\:\:getErrors\(\)\.$#'
 			identifier: method.notFound
-			count: 2
-			path: app/Http/Controllers/LocationsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 2
-			path: app/Http/Controllers/LocationsController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$locationId$#'
-			identifier: parameter.notFound
 			count: 2
 			path: app/Http/Controllers/LocationsController.php
 
@@ -2581,12 +2179,6 @@ parameters:
 			path: app/Http/Controllers/MaintenancesController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$maintenanceId$#'
-			identifier: parameter.notFound
-			count: 3
-			path: app/Http/Controllers/MaintenancesController.php
-
-		-
 			message: '#^PHPDoc tag @return with type mixed is not subtype of native type Illuminate\\Contracts\\View\\View\.$#'
 			identifier: return.phpDocType
 			count: 1
@@ -2613,18 +2205,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @param for parameter \$request with type Illuminate\\Http\\Request is not subtype of native type App\\Http\\Requests\\ImageUploadRequest\.$#'
 			identifier: parameter.phpDocType
-			count: 1
-			path: app/Http/Controllers/ManufacturersController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$manufacturerId$#'
-			identifier: parameter.notFound
-			count: 4
-			path: app/Http/Controllers/ManufacturersController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$manufacturers_id$#'
-			identifier: parameter.notFound
 			count: 1
 			path: app/Http/Controllers/ManufacturersController.php
 
@@ -2797,12 +2377,6 @@ parameters:
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$acceptanceId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/ReportsController.php
-
-		-
 			message: '#^PHPDoc tag @return with type array is incompatible with native type Illuminate\\Contracts\\View\\View\.$#'
 			identifier: return.phpDocType
 			count: 1
@@ -2881,12 +2455,6 @@ parameters:
 			path: app/Http/Controllers/StatuslabelsController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$statuslabelId$#'
-			identifier: parameter.notFound
-			count: 2
-			path: app/Http/Controllers/StatuslabelsController.php
-
-		-
 			message: '#^Access to an undefined property App\\Models\\Supplier\:\:\$asset_maintenances_count\.$#'
 			identifier: property.notFound
 			count: 1
@@ -2899,12 +2467,6 @@ parameters:
 			path: app/Http/Controllers/SuppliersController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$supplierId$#'
-			identifier: parameter.notFound
-			count: 4
-			path: app/Http/Controllers/SuppliersController.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperSupplier\:\:\$url \(string\|null\) does not accept Illuminate\\Database\\Eloquent\\Relations\\Relation\.$#'
 			identifier: assign.propertyType
 			count: 2
@@ -2914,12 +2476,6 @@ parameters:
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
 			count: 1
-			path: app/Http/Controllers/UploadedFilesController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$request$#'
-			identifier: parameter.notFound
-			count: 2
 			path: app/Http/Controllers/UploadedFilesController.php
 
 		-
@@ -2965,18 +2521,6 @@ parameters:
 			path: app/Http/Controllers/Users/UsersController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 3
-			path: app/Http/Controllers/Users/UsersController.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$userId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/Users/UsersController.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -2995,28 +2539,10 @@ parameters:
 			path: app/Http/Controllers/Users/UsersController.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$assetId$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Http/Controllers/ViewAssetsController.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: app/Http/Controllers/ViewAssetsController.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Http\\Kernel\:\:\$middleware is not covariant with PHPDoc type array\<int, string\> of overridden property Illuminate\\Foundation\\Http\\Kernel\:\:\$middleware\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Http/Kernel.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Http\\Kernel\:\:\$middlewareGroups is not covariant with PHPDoc type array\<string, array\<int, string\>\> of overridden property Illuminate\\Foundation\\Http\\Kernel\:\:\$middlewareGroups\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Http/Kernel.php
 
 		-
 			message: '#^PHPDoc type array of property App\\Http\\Kernel\:\:\$routeMiddleware is not covariant with PHPDoc type array\<string, string\> of overridden property Illuminate\\Foundation\\Http\\Kernel\:\:\$routeMiddleware\.$#'
@@ -3031,34 +2557,10 @@ parameters:
 			path: app/Http/Middleware/CheckLocale.php
 
 		-
-			message: '#^PHPDoc type array of property App\\Http\\Middleware\\EncryptCookies\:\:\$except is not covariant with PHPDoc type array\<int, string\> of overridden property Illuminate\\Cookie\\Middleware\\EncryptCookies\:\:\$except\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Http/Middleware/EncryptCookies.php
-
-		-
 			message: '#^Using nullsafe method call on non\-nullable type Illuminate\\Auth\\AuthManager\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Http/Middleware/LogAuthedUserHeader.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Http\\Middleware\\PreventRequestsDuringMaintenance\:\:\$except is not covariant with PHPDoc type array\<int, string\> of overridden property Illuminate\\Foundation\\Http\\Middleware\\PreventRequestsDuringMaintenance\:\:\$except\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Http/Middleware/PreventRequestsDuringMaintenance.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Http\\Middleware\\TrimStrings\:\:\$except is not covariant with PHPDoc type array\<int, string\> of overridden property Illuminate\\Foundation\\Http\\Middleware\\TrimStrings\:\:\$except\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Http/Middleware/TrimStrings.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Http\\Middleware\\VerifyCsrfToken\:\:\$except is not covariant with PHPDoc type array\<int, string\> of overridden property Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken\:\:\$except\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Http/Middleware/VerifyCsrfToken.php
 
 		-
 			message: '#^Using nullsafe property access on non\-nullable type \$this\(App\\Http\\Requests\\CreateMultipleAssetRequest\)\. Use \-\> instead\.$#'
@@ -3511,12 +3013,6 @@ parameters:
 			path: app/Importer/Importer.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$updating$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Importer/Importer.php
-
-		-
 			message: '#^Property App\\Importer\\Importer\:\:\$usernameFormat \(null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -3613,12 +3109,6 @@ parameters:
 			path: app/Importer/ItemImporter.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(array\)\: Unexpected token "\\n     \* ", expected variable at offset 157 on line 8$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Importer/ItemImporter.php
-
-		-
 			message: '#^Result of && is always false\.$#'
 			identifier: booleanAnd.alwaysFalse
 			count: 1
@@ -3673,42 +3163,6 @@ parameters:
 			path: app/Importer/UserImporter.php
 
 		-
-			message: '#^Access to property \$checkedInBy on an unknown class App\\Listeners\\CheckoutableCheckedIn\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Listeners/CheckoutableListener.php
-
-		-
-			message: '#^Access to property \$checkedOutTo on an unknown class App\\Listeners\\CheckoutableCheckedIn\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Listeners/CheckoutableListener.php
-
-		-
-			message: '#^Access to property \$checkedOutTo on an unknown class App\\Listeners\\Event\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Listeners/CheckoutableListener.php
-
-		-
-			message: '#^Access to property \$checkoutable on an unknown class App\\Listeners\\CheckoutableCheckedIn\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Listeners/CheckoutableListener.php
-
-		-
-			message: '#^Access to property \$checkoutable on an unknown class App\\Listeners\\Event\.$#'
-			identifier: class.notFound
-			count: 4
-			path: app/Listeners/CheckoutableListener.php
-
-		-
-			message: '#^Access to property \$note on an unknown class App\\Listeners\\CheckoutableCheckedIn\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Listeners/CheckoutableListener.php
-
-		-
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:getEula\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -3727,33 +3181,9 @@ parameters:
 			path: app/Listeners/CheckoutableListener.php
 
 		-
-			message: '#^Call to method listen\(\) on an unknown class App\\Listeners\\Illuminate\\Events\\Dispatcher\.$#'
-			identifier: class.notFound
-			count: 2
-			path: app/Listeners/CheckoutableListener.php
-
-		-
 			message: '#^PHPDoc tag @return with type Illuminate\\Support\\Facades\\Notification is incompatible with native type Illuminate\\Notifications\\Notification\.$#'
 			identifier: return.phpDocType
 			count: 2
-			path: app/Listeners/CheckoutableListener.php
-
-		-
-			message: '#^Parameter \$event of method App\\Listeners\\CheckoutableListener\:\:getCheckinNotification\(\) has invalid type App\\Listeners\\CheckoutableCheckedIn\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Listeners/CheckoutableListener.php
-
-		-
-			message: '#^Parameter \$event of method App\\Listeners\\CheckoutableListener\:\:getCheckoutAcceptance\(\) has invalid type App\\Listeners\\Event\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Listeners/CheckoutableListener.php
-
-		-
-			message: '#^Parameter \$events of method App\\Listeners\\CheckoutableListener\:\:subscribe\(\) has invalid type App\\Listeners\\Illuminate\\Events\\Dispatcher\.$#'
-			identifier: class.notFound
-			count: 1
 			path: app/Listeners/CheckoutableListener.php
 
 		-
@@ -3796,18 +3226,6 @@ parameters:
 			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:associate\(\)\.$#'
 			identifier: method.notFound
 			count: 6
-			path: app/Listeners/LogListener.php
-
-		-
-			message: '#^Call to method listen\(\) on an unknown class App\\Listeners\\Illuminate\\Events\\Dispatcher\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Listeners/LogListener.php
-
-		-
-			message: '#^Parameter \$events of method App\\Listeners\\LogListener\:\:subscribe\(\) has invalid type App\\Listeners\\Illuminate\\Events\\Dispatcher\.$#'
-			identifier: class.notFound
-			count: 1
 			path: app/Listeners/LogListener.php
 
 		-
@@ -4051,12 +3469,6 @@ parameters:
 			path: app/Mail/CheckinAssetMail.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Mail/CheckinAssetMail.php
-
-		-
 			message: '#^Access to an undefined property App\\Mail\\CheckinComponentMail\:\:\$admin\.$#'
 			identifier: property.notFound
 			count: 2
@@ -4131,12 +3543,6 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Mail/CheckoutAssetMail.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
-			identifier: parameter.notFound
 			count: 1
 			path: app/Mail/CheckoutAssetMail.php
 
@@ -4407,18 +3813,6 @@ parameters:
 		-
 			message: '#^Method App\\Models\\Accessory\:\:lastCheckout\(\) should return Illuminate\\Database\\Eloquent\\Relations\\HasMany but returns Illuminate\\Database\\Eloquent\\Relations\\Relation\.$#'
 			identifier: return.type
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Accessory.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$acceptedBy$#'
-			identifier: parameter.notFound
 			count: 1
 			path: app/Models/Accessory.php
 
@@ -4717,26 +4111,8 @@ parameters:
 			path: app/Models/Asset.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$acceptedBy$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$user$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/Asset.php
-
-		-
 			message: '#^PHPDoc tag @var above a method has no effect\.$#'
 			identifier: varTag.misplaced
-			count: 1
-			path: app/Models/Asset.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Asset\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: app/Models/Asset.php
 
@@ -4885,30 +4261,6 @@ parameters:
 			path: app/Models/AssetModel.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$field$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
-			message: '#^PHPDoc tag @return with type mixed is not subtype of native type App\\Models\\Builders\\AssetModelQueryBuilder\.$#'
-			identifier: return.phpDocType
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\AssetModel\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Models/AssetModel.php
-
-		-
 			message: '#^Property \$this\(App\\Models\\AssetModel\)\:\:\$company_id is not readable\.$#'
 			identifier: property.writeOnly
 			count: 2
@@ -4983,30 +4335,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/Category.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Category.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$field$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/Category.php
-
-		-
-			message: '#^PHPDoc tag @return with type Illuminate\\Database\\Query\\Builder is incompatible with native type App\\Models\\Builders\\CategoryQueryBuilder\.$#'
-			identifier: return.phpDocType
-			count: 1
-			path: app/Models/Category.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Category\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: app/Models/Category.php
 
@@ -5167,12 +4495,6 @@ parameters:
 			path: app/Models/Company.php
 
 		-
-			message: '#^Instantiated class App\\Models\\Exception not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Company.php
-
-		-
 			message: '#^Loose comparison using \=\= between ''App\\\\Models\\\\Company'' and ''App\\\\Models\\\\Asset'' will always evaluate to false\.$#'
 			identifier: equal.alwaysFalse
 			count: 3
@@ -5187,18 +4509,6 @@ parameters:
 		-
 			message: '#^Method App\\Models\\Company\:\:isCurrentUserHasAccess\(\) never returns void so it can be removed from the return type\.$#'
 			identifier: return.unusedType
-			count: 1
-			path: app/Models/Company.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Company.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Company\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: app/Models/Company.php
 
@@ -5241,12 +4551,6 @@ parameters:
 		-
 			message: '#^Strict comparison using \=\=\= between mixed and \*NEVER\* will always evaluate to false\.$#'
 			identifier: identical.alwaysFalse
-			count: 1
-			path: app/Models/Company.php
-
-		-
-			message: '#^Throwing object of an unknown class App\\Models\\Exception\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Models/Company.php
 
@@ -5371,24 +4675,6 @@ parameters:
 			path: app/Models/Component.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Component.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$order$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/Component.php
-
-		-
-			message: '#^PHPDoc tag @return with type Illuminate\\Database\\Query\\Builder is incompatible with native type App\\Models\\Builders\\ComponentQueryBuilder\.$#'
-			identifier: return.phpDocType
-			count: 1
-			path: app/Models/Component.php
-
-		-
 			message: '#^PHPDoc type array of property App\\Models\\Component\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
 			identifier: property.phpDocType
 			count: 1
@@ -5473,12 +4759,6 @@ parameters:
 			path: app/Models/ComponentAssignment.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/ComponentAssignment.php
-
-		-
 			message: '#^Unsafe access to private property App\\Models\\ComponentAssignment\:\:\$customFieldFilterMapCache through static\:\:\.$#'
 			identifier: staticClassAccess.privateProperty
 			count: 4
@@ -5559,24 +4839,6 @@ parameters:
 		-
 			message: '#^Method App\\Models\\Consumable\:\:checkin_email\(\) should return bool but returns int\|null\.$#'
 			identifier: return.type
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$order$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/Consumable.php
-
-		-
-			message: '#^PHPDoc tag @return with type Illuminate\\Database\\Query\\Builder is incompatible with native type App\\Models\\Builders\\ConsumableQueryBuilder\.$#'
-			identifier: return.phpDocType
 			count: 1
 			path: app/Models/Consumable.php
 
@@ -5689,18 +4951,6 @@ parameters:
 			path: app/Models/CustomField.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$id$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/CustomField.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\CustomField\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Models/CustomField.php
-
-		-
 			message: '#^Result of static method Illuminate\\Support\\Facades\\Schema\:\:table\(\) \(void\) is used\.$#'
 			identifier: staticMethod.void
 			count: 1
@@ -5751,18 +5001,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/Department.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Department.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Department\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: app/Models/Department.php
 
@@ -5821,12 +5059,6 @@ parameters:
 			path: app/Models/Depreciable.php
 
 		-
-			message: '#^PHPDoc tag @param has invalid value \(onlyHalfFirstYear Boolean always applied only second half of the first year\)\: Unexpected token "Boolean", expected variable at offset 37 on line 2$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Depreciable.php
-
-		-
 			message: '#^Property \$this\(App\\Models\\Depreciable\)\:\:\$purchase_cost is not readable\.$#'
 			identifier: property.writeOnly
 			count: 11
@@ -5847,18 +5079,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/Depreciation.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Depreciation.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Depreciation\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: app/Models/Depreciation.php
 
@@ -5895,12 +5115,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string\|null will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/Group.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
 			count: 1
 			path: app/Models/Group.php
 
@@ -6205,12 +5419,6 @@ parameters:
 			path: app/Models/Labels/Label.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$path$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/Labels/Label.php
-
-		-
 			message: '#^Result of \|\| is always false\.$#'
 			identifier: booleanOr.alwaysFalse
 			count: 6
@@ -6227,72 +5435,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: app/Models/Labels/LabelPreviewAsset.php
-
-		-
-			message: '#^Call to method AddPage\(\) on an unknown class App\\Models\\Labels\\TCPDF\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Call to method EndTemplate\(\) on an unknown class App\\Models\\Labels\\TCPDF\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Call to method GetLineWidth\(\) on an unknown class App\\Models\\Labels\\TCPDF\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Call to method Rect\(\) on an unknown class App\\Models\\Labels\\TCPDF\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Call to method StartTemplate\(\) on an unknown class App\\Models\\Labels\\TCPDF\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Call to method get\(\) on an unknown class App\\Models\\Labels\\Collection\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Call to method printTemplate\(\) on an unknown class App\\Models\\Labels\\TCPDF\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Call to method setLineWidth\(\) on an unknown class App\\Models\\Labels\\TCPDF\.$#'
-			identifier: class.notFound
-			count: 2
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Call to method toArray\(\) on an unknown class App\\Models\\Labels\\Collection\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Parameter \$data of method App\\Models\\Labels\\Sheet\:\:writeAll\(\) has invalid type App\\Models\\Labels\\Collection\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
-
-		-
-			message: '#^Parameter \$pdf of method App\\Models\\Labels\\Sheet\:\:writeAll\(\) has invalid type App\\Models\\Labels\\TCPDF\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Models/Labels/Sheet.php
 
 		-
 			message: '#^Constant App\\Models\\Labels\\Sheets\\Avery\\_5267\:\:ROW2_Y is unused\.$#'
@@ -6427,18 +5569,6 @@ parameters:
 			path: app/Models/License.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/License.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\License\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Models/License.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -6523,18 +5653,6 @@ parameters:
 			path: app/Models/LicenseSeat.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/LicenseSeat.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\LicenseSeat\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Models/LicenseSeat.php
-
-		-
 			message: '#^Property \$this\(App\\Models\\LicenseSeat\)\:\:\$company_id is not readable\.$#'
 			identifier: property.writeOnly
 			count: 2
@@ -6613,18 +5731,6 @@ parameters:
 			path: app/Models/Location.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Location.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Location\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Models/Location.php
-
-		-
 			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
 			identifier: assign.propertyType
 			count: 1
@@ -6691,18 +5797,6 @@ parameters:
 			path: app/Models/Maintenance.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Maintenance.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Maintenance\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Models/Maintenance.php
-
-		-
 			message: '#^Property \$this\(App\\Models\\Maintenance\)\:\:\$company_id is not readable\.$#'
 			identifier: property.writeOnly
 			count: 2
@@ -6757,18 +5851,6 @@ parameters:
 			path: app/Models/Manufacturer.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Manufacturer.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Manufacturer\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Models/Manufacturer.php
-
-		-
 			message: '#^Property App\\Models\\Manufacturer\:\:\$searchableAttributes \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
@@ -6789,24 +5871,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/PredefinedKit.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/PredefinedKit.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$accessoriy_id$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Models/PredefinedKit.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\PredefinedKit\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: app/Models/PredefinedKit.php
 
@@ -6931,12 +5995,6 @@ parameters:
 			path: app/Models/Statuslabel.php
 
 		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Statuslabel.php
-
-		-
 			message: '#^Property App\\Models\\Statuslabel\:\:\$searchableAttributes \(array\) on left side of \?\? is not nullable\.$#'
 			identifier: nullCoalesce.property
 			count: 1
@@ -6981,18 +6039,6 @@ parameters:
 		-
 			message: '#^Call to function is_array\(\) with string will always evaluate to false\.$#'
 			identifier: function.impossibleType
-			count: 1
-			path: app/Models/Supplier.php
-
-		-
-			message: '#^PHPDoc tag @SuppressWarnings has invalid value \(\(PHPMD\.UnusedFormalParameter\)\)\: Unexpected token "\.UnusedFormalParameter\)", expected ''\)'' at offset 351 on line 10$#'
-			identifier: phpDoc.parseError
-			count: 1
-			path: app/Models/Supplier.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Models\\Supplier\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: app/Models/Supplier.php
 
@@ -7159,12 +6205,6 @@ parameters:
 			path: app/Models/User.php
 
 		-
-			message: '#^PHPDoc tag @param for parameter \$query with type Illuminate\\Database\\Query\\Builder is incompatible with native type Illuminate\\Database\\Eloquent\\Builder\.$#'
-			identifier: parameter.phpDocType
-			count: 1
-			path: app/Models/User.php
-
-		-
 			message: '#^Property \$this\(App\\Models\\User\)\:\:\$company_id is not readable\.$#'
 			identifier: property.writeOnly
 			count: 7
@@ -7235,18 +6275,6 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 1
 			path: app/Models/User.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
-			identifier: parameter.notFound
-			count: 2
-			path: app/Notifications/AcceptanceItemAcceptedNotification.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
-			identifier: parameter.notFound
-			count: 2
-			path: app/Notifications/AcceptanceItemAcceptedToUserNotification.php
 
 		-
 			message: '#^Using nullsafe property access "\?\-\>display_name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
@@ -7441,20 +6469,8 @@ parameters:
 			path: app/Notifications/CheckoutLicenseSeatNotification.php
 
 		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Notifications/CurrentInventory.php
-
-		-
 			message: '#^Access to an undefined property App\\Notifications\\ExpiringAssetsNotification\:\:\$assets\.$#'
 			identifier: property.notFound
-			count: 1
-			path: app/Notifications/ExpiringAssetsNotification.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$asset$#'
-			identifier: parameter.notFound
 			count: 1
 			path: app/Notifications/ExpiringAssetsNotification.php
 
@@ -7463,30 +6479,6 @@ parameters:
 			identifier: property.notFound
 			count: 1
 			path: app/Notifications/ExpiringLicenseNotification.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$asset$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Notifications/ExpiringLicenseNotification.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Notifications/ExpiringLicenseNotification.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
-			identifier: parameter.notFound
-			count: 2
-			path: app/Notifications/RequestAssetCancelation.php
-
-		-
-			message: '#^PHPDoc tag @param references unknown parameter\: \$notifiable$#'
-			identifier: parameter.notFound
-			count: 1
-			path: app/Notifications/RequestAssetNotification.php
 
 		-
 			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
@@ -7577,30 +6569,6 @@ parameters:
 			identifier: identical.alwaysFalse
 			count: 1
 			path: app/Policies/CheckoutRequestPolicy.php
-
-		-
-			message: '#^PHPDoc tag @param for parameter \$user with type App\\User is not subtype of native type App\\Models\\User\.$#'
-			identifier: parameter.phpDocType
-			count: 3
-			path: app/Policies/CheckoutablePermissionsPolicy.php
-
-		-
-			message: '#^Parameter \$user of method App\\Policies\\CheckoutablePermissionsPolicy\:\:checkin\(\) has invalid type App\\User\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Policies/CheckoutablePermissionsPolicy.php
-
-		-
-			message: '#^Parameter \$user of method App\\Policies\\CheckoutablePermissionsPolicy\:\:checkout\(\) has invalid type App\\User\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Policies/CheckoutablePermissionsPolicy.php
-
-		-
-			message: '#^Parameter \$user of method App\\Policies\\CheckoutablePermissionsPolicy\:\:manage\(\) has invalid type App\\User\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Policies/CheckoutablePermissionsPolicy.php
 
 		-
 			message: '#^Method App\\Policies\\CompanyPolicy\:\:columnName\(\) should return bool but returns string\.$#'
@@ -8371,12 +7339,6 @@ parameters:
 			path: app/Presenters/UserPresenter.php
 
 		-
-			message: '#^PHPDoc type array of property App\\Providers\\AuthServiceProvider\:\:\$policies is not covariant with PHPDoc type array\<class\-string, class\-string\> of overridden property Illuminate\\Foundation\\Support\\Providers\\AuthServiceProvider\:\:\$policies\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Providers/AuthServiceProvider.php
-
-		-
 			message: '#^Right side of \|\| is always false\.$#'
 			identifier: booleanOr.rightAlwaysFalse
 			count: 1
@@ -8387,12 +7349,6 @@ parameters:
 			identifier: property.nonObject
 			count: 1
 			path: app/Providers/BreadcrumbsServiceProvider.php
-
-		-
-			message: '#^PHPDoc type array of property App\\Providers\\EventServiceProvider\:\:\$listen is not covariant with PHPDoc type array\<string, array\<int, string\>\> of overridden property Illuminate\\Foundation\\Support\\Providers\\EventServiceProvider\:\:\$listen\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: app/Providers/EventServiceProvider.php
 
 		-
 			message: '#^Call to function is_array\(\) with mixed will always evaluate to false\.$#'
@@ -8413,100 +7369,10 @@ parameters:
 			path: app/Services/PredefinedKitCheckoutService.php
 
 		-
-			message: '#^Call to method getMessage\(\) on an unknown class App\\Services\\CheckoutNotAllowed\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/PredefinedKitCheckoutService.php
-
-		-
-			message: '#^Call to method getMessage\(\) on an unknown class App\\Services\\ModelNotFoundException\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/PredefinedKitCheckoutService.php
-
-		-
-			message: '#^Caught class App\\Services\\CheckoutNotAllowed not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/PredefinedKitCheckoutService.php
-
-		-
-			message: '#^Caught class App\\Services\\ModelNotFoundException not found\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/PredefinedKitCheckoutService.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>name" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 4
 			path: app/Services/PredefinedKitCheckoutService.php
-
-		-
-			message: '#^Call to method getAttributes\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getAttributesWithFriendlyName\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getLastAssertionId\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getLastAssertionNotOnOrAfter\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getNameId\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getNameIdFormat\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getNameIdNameQualifier\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getNameIdSPNameQualifier\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getSessionExpiration\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Call to method getSessionIndex\(\) on an unknown class App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Method App\\Services\\Saml\:\:getAuth\(\) has invalid return type App\\Services\\OneLogin\\Saml2\\Auth\.$#'
-			identifier: class.notFound
-			count: 1
-			path: app/Services/Saml.php
 
 		-
 			message: '#^Method App\\Services\\Saml\:\:saveDataToSession\(\) with return type void returns null but should not return anything\.$#'
@@ -8517,18 +7383,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @throws with type App\\Services\\Error\|Exception is not subtype of Throwable$#'
 			identifier: throws.notThrowable
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Property App\\Services\\Saml\:\:\$_auth \(App\\Services\\OneLogin\\Saml2\\Auth\) does not accept OneLogin\\Saml2\\Auth\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: app/Services/Saml.php
-
-		-
-			message: '#^Property App\\Services\\Saml\:\:\$_auth has unknown class App\\Services\\OneLogin\\Saml2\\Auth as its type\.$#'
-			identifier: class.notFound
 			count: 1
 			path: app/Services/Saml.php
 
@@ -8653,21 +7507,9 @@ parameters:
 			path: database/factories/AccessoryFactory.php
 
 		-
-			message: '#^PHPDoc type string of property Database\\Factories\\AccessoryFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/AccessoryFactory.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 2
-			path: database/factories/ActionlogFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\ActionlogFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
 			path: database/factories/ActionlogFactory.php
 
 		-
@@ -8683,12 +7525,6 @@ parameters:
 			path: database/factories/AssetFactory.php
 
 		-
-			message: '#^PHPDoc type string of property Database\\Factories\\AssetFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/AssetFactory.php
-
-		-
 			message: '#^Using nullsafe property access "\?\-\>eol" on left side of \?\? is unnecessary\. Use \-\> instead\.$#'
 			identifier: nullsafe.neverNull
 			count: 1
@@ -8701,20 +7537,8 @@ parameters:
 			path: database/factories/AssetModelFactory.php
 
 		-
-			message: '#^PHPDoc type string of property Database\\Factories\\AssetModelFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/AssetModelFactory.php
-
-		-
 			message: '#^Call to an undefined method Faker\\Generator\:\:catchPhrase\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: database/factories/CategoryFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\CategoryFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: database/factories/CategoryFactory.php
 
@@ -8723,12 +7547,6 @@ parameters:
 			identifier: method.notFound
 			count: 1
 			path: database/factories/CheckoutAcceptanceFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\CompanyFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/CompanyFactory.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
@@ -8749,12 +7567,6 @@ parameters:
 			path: database/factories/ComponentFactory.php
 
 		-
-			message: '#^PHPDoc type string of property Database\\Factories\\ComponentFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/ComponentFactory.php
-
-		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$order\.$#'
 			identifier: property.notFound
 			count: 1
@@ -8767,20 +7579,8 @@ parameters:
 			path: database/factories/ConsumableFactory.php
 
 		-
-			message: '#^PHPDoc type string of property Database\\Factories\\ConsumableFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/ConsumableFactory.php
-
-		-
 			message: '#^Call to an undefined method Faker\\Generator\:\:catchPhrase\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: database/factories/CustomFieldFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\CustomFieldFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: database/factories/CustomFieldFactory.php
 
@@ -8797,40 +7597,10 @@ parameters:
 			path: database/factories/CustomFieldsetFactory.php
 
 		-
-			message: '#^PHPDoc type string of property Database\\Factories\\CustomFieldsetFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/CustomFieldsetFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\DepartmentFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/DepartmentFactory.php
-
-		-
 			message: '#^Call to an undefined method Faker\\Generator\:\:catchPhrase\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: database/factories/DepreciationFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\DepreciationFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/DepreciationFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\GroupFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/GroupFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\LicenseFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/LicenseFactory.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$license\.$#'
@@ -8863,30 +7633,6 @@ parameters:
 			path: database/factories/MaintenanceFactory.php
 
 		-
-			message: '#^PHPDoc type string of property Database\\Factories\\MaintenanceFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/MaintenanceFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\ManufacturerFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/ManufacturerFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\SettingFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/SettingFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\StatuslabelFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
-			count: 1
-			path: database/factories/StatuslabelFactory.php
-
-		-
 			message: '#^Call to an undefined method Faker\\Generator\:\:postCode\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -8901,12 +7647,6 @@ parameters:
 		-
 			message: '#^Call to an undefined method Faker\\Generator\:\:stateAbbr\(\)\.$#'
 			identifier: method.notFound
-			count: 1
-			path: database/factories/SupplierFactory.php
-
-		-
-			message: '#^PHPDoc type string of property Database\\Factories\\SupplierFactory\:\:\$model is not covariant with PHPDoc type class\-string\<Illuminate\\Database\\Eloquent\\Model\> of overridden property Illuminate\\Database\\Eloquent\\Factories\\Factory\<Illuminate\\Database\\Eloquent\\Model\>\:\:\$model\.$#'
-			identifier: property.phpDocType
 			count: 1
 			path: database/factories/SupplierFactory.php
 

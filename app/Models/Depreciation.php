@@ -42,7 +42,7 @@ class Depreciation extends SnipeModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'name',

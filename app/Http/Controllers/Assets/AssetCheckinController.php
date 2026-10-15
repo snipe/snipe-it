@@ -25,7 +25,6 @@ class AssetCheckinController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @param  int  $assetId
      * @param  string  $backto
      *
      * @since [v1.0]

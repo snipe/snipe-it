@@ -151,7 +151,7 @@ class Helper
      */
     public static function paginateCollectionOrAll(Collection $items, ?int $cap = null): LengthAwarePaginator
     {
-        if (!request()->boolean('all')) {
+        if (! request()->boolean('all')) {
             return self::paginateCollection($items);
         }
 
@@ -868,7 +868,7 @@ class Helper
         $deprecations = [
             'ms_teams_deprecated' => [
                 'check' => ! Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows') && (Setting::getSettings()->webhook_selected === 'microsoft'),
-                'message' => 'The Microsoft Teams webhook URL being used will be deprecated Dec 31st, 2025. <a class="btn btn-primary" href="' . route('settings.integrations.index') . '">Change webhook endpoint</a>',
+                'message' => 'The Microsoft Teams webhook URL being used will be deprecated Dec 31st, 2025. <a class="btn btn-primary" href="'.route('settings.integrations.index').'">Change webhook endpoint</a>',
             ],
         ];
 
@@ -1053,7 +1053,7 @@ class Helper
      *
      * @since [v3.0]
      *
-     * @param  File  $file
+     * @param  string  $file
      * @return string | bool
      */
     public static function checkUploadIsImage($file)
@@ -1072,7 +1072,7 @@ class Helper
     /**
      * Check if the file is a video, so we can show a preview
      *
-     * @param  File  $file
+     * @param  string  $file
      * @return string | bool
      *
      * @author [B. Wetherington] [<bwetherington@grokability.com>]
@@ -1095,7 +1095,7 @@ class Helper
     /**
      * Check if the file is audio, so we can show a preview
      *
-     * @param  File  $file
+     * @param  string  $file
      * @return string | bool
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -1875,7 +1875,7 @@ class Helper
 
         // Reject scheme-only URLs with no authority (e.g. "https:evil.com",
         // "https:/evil.com", "http:@evil.com").
-        if (isset($parts['scheme']) && !isset($parts['host'])) {
+        if (isset($parts['scheme']) && ! isset($parts['host'])) {
             return null;
         }
 

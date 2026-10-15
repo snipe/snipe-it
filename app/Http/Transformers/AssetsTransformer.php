@@ -132,11 +132,11 @@ class AssetsTransformer
             // nested object) so bs-table can bind columns to them
             // directly without a subfield formatter. Null when the
             // asset has never been synced.
-            'primary_mac' => e($asset->externalSource?->primary_mac),
-            'primary_ip' => e($asset->externalSource?->primary_ip),
-            'external_os' => e($asset->externalSource?->os),
-            'external_os_version' => e($asset->externalSource?->os_version),
-            'last_seen' => Helper::getFormattedDateObject($asset->externalSource?->last_seen, 'datetime'),
+            'primary_mac' => ($asset->externalSource?->primary_mac) ? e($asset->externalSource->primary_mac) : null,
+            'primary_ip' => ($asset->externalSource?->primary_ip) ? e($asset->externalSource->primary_ip) : null,
+            'external_os' => ($asset->externalSource?->os) ? e($asset->externalSource->os) : null,
+            'external_os_version' => ($asset->externalSource?->os_version) ? e($asset->externalSource->os_version) : null,
+            'last_seen' => ($asset->externalSource?->last_seen) ? Helper::getFormattedDateObject($asset->externalSource->last_seen, 'datetime') : null,
         ];
 
         if (($asset->model) && ($asset->model->fieldset) && ($asset->model->fieldset->fields->count() > 0)) {

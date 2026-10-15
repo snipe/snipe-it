@@ -10,6 +10,7 @@ use App\Models\Setting;
 use App\Models\User;
 use App\Services\Saml;
 use Com\Tecnick\Barcode\Barcode;
+use Exception;
 use Google2FA;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Http\RedirectResponse;
@@ -506,8 +507,7 @@ class LoginController extends Controller
     /**
      * Logout page.
      *
-     *
-     * @return Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function logout(Request $request)
     {

@@ -14,7 +14,6 @@ use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -70,7 +69,7 @@ class Location extends SnipeModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -399,13 +398,6 @@ class Location extends SnipeModel
         return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
     }
 
-    /**
-     * Query builder scope to order on parent
-     *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text  $order  Order
-     * @return Illuminate\Database\Query\Builder Modified query builder
-     */
     /**
      * The map's keys are parent_id values, with `0` used for "no parent / top-
      * level". Using 0 (not null) avoids PHP 8.4's deprecation of null array

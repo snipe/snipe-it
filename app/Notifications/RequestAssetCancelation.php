@@ -17,11 +17,17 @@ class RequestAssetCancelation extends Notification implements ShouldQueue
     use Queueable;
 
     public $target;
+
     public $item;
+
     public $note;
+
     public $last_checkout;
+
     public $item_quantity;
+
     public $expected_checkin;
+
     public $requested_date;
 
     public $start_date;
@@ -72,7 +78,6 @@ class RequestAssetCancelation extends Notification implements ShouldQueue
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
     public function via()
@@ -127,7 +132,6 @@ class RequestAssetCancelation extends Notification implements ShouldQueue
     /**
      * Get the mail representation of the notification.
      *
-     * @param  mixed  $notifiable
      * @return MailMessage
      */
     public function toMail()

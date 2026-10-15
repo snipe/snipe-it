@@ -86,7 +86,7 @@ class License extends Depreciable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'company_id',
@@ -223,14 +223,6 @@ class License extends Depreciable
         }
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
-
-    /**
-     * Scope query to only requestable licenses. FMCS + location
-     * scoping falls out of the CompanyableTrait global scope, so the
-     * usual "user only sees rows in their reachable companies" rule
-     * applies without any additional wrapping here (matches the
-     * Accessory / Consumable / Component scope shape).
-     */
 
     /**
      * @return Attribute<string|null, never>

@@ -26,7 +26,6 @@ class LicenseCheckinController extends Controller
      *
      * @since [v1.0]
      *
-     * @param  int  $seatId
      * @param  string  $backTo
      * @return View
      *
