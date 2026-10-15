@@ -19,7 +19,7 @@ return [
     'archived_help' => 'Archived components are hidden from the default component list, excluded from low-inventory reports, and cannot be checked out. Historical checkouts and reports still reference them.',
     'archived_component' => 'Archived Component',
     'bulk_delete_help' => 'Review the components you are about to delete. Components with checkouts are unselected and cannot be removed until their checkouts are returned.',
-    'bulk_delete_warn' => 'You are about to delete :component_count components.',
+    'bulk_delete_warn' => 'You are about to delete :component_count component.|You are about to delete :component_count components.',
     'bulk_edit_warn' => 'You are editing :component_count component.|You are editing :component_count components.',
     'bulk_edit_help' => 'Only fields you fill below are written to the selected components. Leave a field blank to leave it as-is.',
 ];

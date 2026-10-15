@@ -373,6 +373,7 @@ return [
     'checkbox_multiselect_count' => '{n} selected',
     'settings' => 'Settings',
     'show_deleted' => 'Show Deleted',
+    'show_archived' => 'Show Archived',
     'show_current' => 'Show Current',
     'sign_in' => 'Sign in',
     'signature' => 'Signature',

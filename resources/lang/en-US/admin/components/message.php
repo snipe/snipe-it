@@ -45,6 +45,11 @@ return [
             'success' => ':count component was deleted.|:count components were deleted.',
             'partial_success' => ':count component was deleted. See errors below for the rest.|:count components were deleted. See errors below for the rest.',
         ],
+
+        'checkin_selected' => [
+            'no_rows_selected' => 'No checked-out components were selected.',
+            'success' => ':count checked-out component was returned.|:count checked-out components were returned.',
+        ],
     ],
 
     'checkin' => [
