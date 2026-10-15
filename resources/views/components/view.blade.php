@@ -40,7 +40,7 @@
                         </x-slot:table_header>
 
                         <x-table
-                            :presenter="\App\Presenters\ComponentPresenter::checkedOut()"
+                            name="componentCheckedOut" :presenter="\App\Presenters\ComponentPresenter::checkedOut()"
                             :api_url="route('api.components.assets', $snipe_component)"
                         />
 
@@ -53,12 +53,12 @@
 
                     <!-- start orders tab pane -->
                     <x-tabs.pane name="orders">
-                        <x-table.orders :route="route('api.order-items.index', ['item_type' => \App\Models\Component::class, 'item_id' => $snipe_component->id])"/>
+                        <x-table.orders name="componentOrders" :route="route('api.order-items.index', ['item_type' => \App\Models\Component::class, 'item_id' => $snipe_component->id])"/>
                     </x-tabs.pane>
 
                     <!-- start history tab pane -->
                     <x-tabs.pane name="history">
-                        <x-table.history :model="$snipe_component" :route="route('api.components.history', $snipe_component)"/>
+                        <x-table.history name="componentHistory" :model="$snipe_component" :route="route('api.components.history', $snipe_component)"/>
                     </x-tabs.pane>
 
                 </x-slot:tabpanes>
