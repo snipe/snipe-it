@@ -146,7 +146,11 @@
             <x-form.checkbox-row
                 name="archived"
                 :label="trans('general.archived')"
-                :help_text="($item->exists && $item->numCheckedOut() > 0) ? trans('admin/components/message.archived_blocked_by_checkouts') : trans('admin/components/general.archived_help')"
+                :help_text="($item->exists && $item->numCheckedOut() > 0)
+                    ? trans('admin/components/message.archived_blocked_by_checkouts')
+                    : (($pendingRequestCount > 0)
+                        ? trans_choice('admin/components/general.archived_cancels_pending_requests', $pendingRequestCount, ['count' => $pendingRequestCount])
+                        : trans('admin/components/general.archived_help'))"
                 :item="$item"
                 :disabled="$item->exists && $item->numCheckedOut() > 0"
                 data-mutex-with="requestable"
