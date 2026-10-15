@@ -463,6 +463,7 @@ class Importer extends Component
         ];
 
         $this->components_fields = [
+            'archived' => trans('general.archived'),
             'category' => trans('general.category'),
             'company' => trans('general.company'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.component')]),
@@ -476,6 +477,7 @@ class Importer extends Component
             'purchase_date' => trans('general.purchase_date'),
             // Internal key MUST be 'quantity' (see consumables_fields note above).
             'quantity' => trans('general.qty'),
+            'requestable' => trans('general.requestable'),
             'serial' => trans('general.serial_number'),
             'supplier' => trans('general.supplier'),
         ];

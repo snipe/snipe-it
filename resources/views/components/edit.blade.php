@@ -42,6 +42,10 @@
                 categoryType="component"
             />
 
+                @if (! $item->id)
+                    <x-input.quantity :item="$item"/>
+                @endif
+
             <x-input.minimum-quantity :item="$item" />
 
             <x-form.row
@@ -100,25 +104,19 @@
                 />
 
                 <x-form.row
-                    :label="trans('general.currency')"
+                    :label="trans('general.currency_text')"
                     name="currency"
                     input_div_class="col-md-3"
-                    :help_text="trans('general.currency_prefilled_hint')"
+                    help_class="col-md-7 col-md-offset-3"
+                    :help_text="trans('general.currency_prefilled_hint').' '.trans('general.currency_manually_entered_help')"
                 >
                     <x-slot:input>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="currency"
+                        <x-input.currency-select
                             name="currency"
-                            maxlength="10"
-                            value="{{ old('currency', $item->location->currency ?? $snipeSettings->default_currency) }}"
-                            aria-label="{{ trans('general.currency') }}"
+                            :selected="old('currency', $item->location->currency ?? $snipeSettings->default_currency)"
                         />
                     </x-slot:input>
                 </x-form.row>
-
-                <x-input.quantity :item="$item" />
             @endif
 
             <x-input.supplier-select
@@ -140,6 +138,22 @@
                 name="requestable"
                 :label="trans('admin/hardware/general.requestable')"
                 :item="$item"
+                data-mutex-with="archived"
+            />
+
+            <x-form.checkbox-row
+                name="archived"
+                :label="trans('general.archived')"
+                :help_text="($item->exists && $item->numCheckedOut() > 0)
+                    ? trans('admin/components/message.archived_blocked_by_checkouts')
+                    : (($pendingRequestCount > 0)
+                        ? trans_choice('admin/components/general.archived_cancels_pending_requests', $pendingRequestCount, ['count' => $pendingRequestCount])
+                        : trans('admin/components/general.archived_help'))"
+                :help_icon="$pendingRequestCount > 0 ? 'warning' : null"
+                :help_class="$pendingRequestCount > 0 ? 'text-warning' : null"
+                :item="$item"
+                :disabled="$item->exists && $item->numCheckedOut() > 0"
+                data-mutex-with="requestable"
             />
 
             <x-slot:customfooter>

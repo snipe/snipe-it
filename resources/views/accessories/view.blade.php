@@ -26,7 +26,7 @@
                 <x-slot:tabnav>
                     <x-tabs.checkedout-tab :item="$accessory" count="{{ $accessory->checkouts_count }}" />
                     <x-tabs.files-tab :item="$accessory" count="{{ $accessory->uploads()->count() }}"/>
-                    <x-tabs.orders-tab count="{{ $accessory->ordersCount() }}"/>
+                    <x-tabs.orders-tab count="{{ $accessory->orderItemsCount() }}"/>
                     <x-tabs.history-tab count="{{ $accessory->history()->count() }}" :model="$accessory"/>
                     <x-tabs.upload-tab :item="$accessory"/>
                 </x-slot:tabnav>

@@ -25,6 +25,9 @@ class IconHelper
             case 'delete':
             case 'upload deleted':
                 return 'fas fa-trash';
+            case 'archived':
+            case 'archive':
+                return 'fa-solid fa-ban';
             case 'create':
                 return 'fa-solid fa-plus';
             case 'audit':

@@ -219,10 +219,10 @@
                 <x-info-element>
                     <x-icon type="cost" class="fa-fw" title="{{ trans('general.total_cost') }}"/>
                     {{ trans('general.total_cost') }}
-                    <span class="pull-right">
-                        {{ $currency !== '' ? $currency : $snipeSettings->default_currency }}
+                    {{ $currency !== '' ? $currency : $snipeSettings->default_currency }}
+                    <x-copy-to-clipboard copy_what="total_cost" class="pull-right">
                         {{ Helper::formatCurrencyOutput($totalsByCurrency[$currency]) }}
-                    </span>
+                    </x-copy-to-clipboard>
                 </x-info-element>
             @elseif (count($totalsByCurrency) > 1)
                 <x-info-element>
