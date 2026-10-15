@@ -151,6 +151,8 @@
                     : (($pendingRequestCount > 0)
                         ? trans_choice('admin/components/general.archived_cancels_pending_requests', $pendingRequestCount, ['count' => $pendingRequestCount])
                         : trans('admin/components/general.archived_help'))"
+                :help_icon="$pendingRequestCount > 0 ? 'warning' : null"
+                :help_class="$pendingRequestCount > 0 ? 'text-warning' : null"
                 :item="$item"
                 :disabled="$item->exists && $item->numCheckedOut() > 0"
                 data-mutex-with="requestable"
