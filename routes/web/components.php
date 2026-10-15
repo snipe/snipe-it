@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BulkComponentsController;
 use App\Http\Controllers\Components;
 use App\Models\Component;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +68,28 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
         [Components\ComponentCheckoutController::class, 'bulkFulfillStore']
     )->where('component', '[0-9]+')
         ->name('components.fulfill-requests.store');
+
+    // Bulk-select
+    Route::post('bulkedit',
+        [BulkComponentsController::class, 'edit']
+    )->name('components.bulkedit.show')
+        ->breadcrumbs(function (Trail $trail) {
+            $label = match (request()->input('bulk_actions')) {
+                'edit' => trans('general.bulk_edit'),
+                'delete' => trans('general.bulk_delete'),
+                default => trans('general.bulk_actions'),
+            };
+
+            return $trail->parent('components.index')->push($label, route('components.index'));
+        });
+
+    Route::post('bulksave',
+        [BulkComponentsController::class, 'update']
+    )->name('components.bulkedit.store');
+
+    Route::post('bulkdelete',
+        [BulkComponentsController::class, 'destroy']
+    )->name('components.bulkdelete.store');
 
 });
 
