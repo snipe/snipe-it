@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\CheckoutRequestState;
 use App\Enums\FileStorage;
 use App\Models\Builders\ComponentQueryBuilder;
 use App\Models\Traits\Acceptable;
@@ -179,6 +180,20 @@ class Component extends SnipeModel
             unset($model->sum_unconstrained_assets);
         });
 
+        // Archive-time request cleanup. SaveQuietly so the component update doesn't trigger a cascade of
+        // request updates and emails. The component is already archived, so the requests are now invalid.
+        static::updated(function (self $component): void {
+            if (!$component->wasChanged('archived') || !$component->archived) {
+                return;
+            }
+
+            $component->openRequests()->get()->each(function (CheckoutRequest $request): void {
+                $request->canceled_at = now();
+                $request->state = CheckoutRequestState::Canceled;
+                $request->saveQuietly();
+            });
+        });
+
         // On hard-delete, wipe the image file and Files-tab attachments.
         // Soft-delete leaves everything alone so a restore comes back
         // with the image + files intact. The attachment action_log rows
@@ -216,7 +231,15 @@ class Component extends SnipeModel
     /**
      * Normalize the requestable form input so an empty string from an
      * unchecked checkbox lands as false rather than a truthy "0" cast
-     * (matches Accessory / Consumable setRequestableAttribute).
+     * (matches Accessory / Consumable).
+     *
+     * Kept as the legacy magic-method form rather than the Attribute
+     * accessor used by `archived()` below: Requestable() is also a
+     * query scope on the ComponentQueryBuilder, and callers like
+     * `Component::Requestable()->count()` resolve to this method via
+     * Model::__callStatic. An `Attribute`-returning method shadows
+     * that forwarder and crashes with "Call to undefined method
+     * Attribute::count()".
      */
     public function setRequestableAttribute($value)
     {
@@ -224,6 +247,16 @@ class Component extends SnipeModel
             $value = null;
         }
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * @return Attribute<bool, mixed>
+     */
+    protected function archived(): Attribute
+    {
+        return Attribute::make(
+            set: fn($value) => filter_var($value === '' ? null : $value, FILTER_VALIDATE_BOOLEAN),
+        );
     }
 
     /**
