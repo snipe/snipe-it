@@ -42,15 +42,7 @@
             @endif
 
                 <a href="{{ $infoPanelObj->getImageUrl($img_path) }}" data-toggle="lightbox" data-type="image">
-                    {{-- width:100% + max-width:300px = "scale down with the
-                         container up to a 300px cap". Without the explicit
-                         width:100%, the !important max-width overrides
-                         img-responsive's max-width:100% and the image
-                         renders at its intrinsic (or 300px cap) width
-                         regardless of container. At md and smaller, the
-                         info-panel column is narrower than 300px and the
-                         image overflows into the whitespace to its right. --}}
-                    <img src="{{ $infoPanelObj->getImageUrl($img_path) }}" class="img-responsive img-thumbnail" alt="{{ $infoPanelObj->name }}" style="width: 100%; max-width: 300px !important; max-height: 300px !important; height: auto; margin-bottom: 10px;">
+                    <img src="{{ $infoPanelObj->getImageUrl($img_path) }}" class="img-responsive img-thumbnail" alt="{{ $infoPanelObj->name }}" style="max-width: min(100%, 300px); max-height: 300px; margin-bottom: 10px;">
             </a>
         </div>
         <br>
