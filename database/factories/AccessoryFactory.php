@@ -17,7 +17,7 @@ class AccessoryFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<Accessory>
      */
     protected $model = Accessory::class;
 

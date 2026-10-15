@@ -365,8 +365,6 @@ class ViewAssetsController extends Controller
 
     /**
      * Process a specific requested asset
-     *
-     * @param  null  $assetId
      */
     public function store(Request $request, Asset $asset): RedirectResponse
     {

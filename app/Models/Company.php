@@ -11,6 +11,7 @@ use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
 use App\Presenters\CompanyPresenter;
 use App\Presenters\Presentable;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,6 +28,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for Companies.
  *
  * @version v1.8
+ *
  * @mixin IdeHelperCompany
  */
 final class Company extends SnipeModel
@@ -109,7 +111,7 @@ final class Company extends SnipeModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -816,12 +818,6 @@ final class Company extends SnipeModel
         }
     }
 
-    /**
-     * Query builder scope to order on the user that created it.
-     *
-     * Use addSelect (not select) so prior withCount subqueries on the query
-     * survive — see scopeOrderParent() for the same rationale.
-     */
     public function newEloquentBuilder($query): CompanyQueryBuilder
     {
         return new CompanyQueryBuilder($query);

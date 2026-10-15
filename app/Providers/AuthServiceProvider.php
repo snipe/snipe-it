@@ -61,7 +61,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * See SnipePermissionsPolicy for additional information.
      *
-     * @var array
+     * @var array<class-string, class-string>
      */
     protected $policies = [
         Accessory::class => AccessoryPolicy::class,

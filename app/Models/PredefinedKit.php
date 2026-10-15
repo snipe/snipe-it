@@ -72,7 +72,6 @@ class PredefinedKit extends SnipeModel
      * this rules use in edit an attached accessory form
      * see PredefinedKit::_makeRuleHelper function for details
      *
-     * @param  int  $accessoriy_id
      * @param  bool  $new  = true if append a new element to kit
      */
     public function makeAccessoryRules($accessory_id, $new = false)
@@ -126,7 +125,7 @@ class PredefinedKit extends SnipeModel
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'name',

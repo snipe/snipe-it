@@ -28,8 +28,6 @@ class AccessoryCheckoutController extends Controller
      * Return the form to checkout an Accessory to a user.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $id
      */
     public function create(Request $request, Accessory $accessory): View|RedirectResponse
     {

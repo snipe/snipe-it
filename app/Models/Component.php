@@ -20,7 +20,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -201,14 +200,6 @@ class Component extends SnipeModel
         }
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
-
-    /**
-     * Scope query to only requestable components. FMCS + location
-     * scoping falls out of the CompanyableTrait global scope, so the
-     * usual "user only sees rows in their reachable companies" rule
-     * applies without any additional wrapping here (matches the
-     * Accessory scope's shape and rationale).
-     */
 
     /**
      * Establishes the component -> location relationship
@@ -501,19 +492,6 @@ class Component extends SnipeModel
         $this->attributes['qty'] = (! $value) ? 0 : intval($value);
     }
 
-    /**
-     * -----------------------------------------------
-     * BEGIN QUERY SCOPES
-     * -----------------------------------------------
-     **/
-
-    /**
-     * Query builder scope to order on company
-     *
-     * @param  Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return Builder Modified query builder
-     */
     public function newEloquentBuilder($query): ComponentQueryBuilder
     {
         return new ComponentQueryBuilder($query);

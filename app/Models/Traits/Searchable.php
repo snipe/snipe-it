@@ -1062,17 +1062,15 @@ trait Searchable
     }
 
     /**
-     * Run additional, advanced searches that can't be done using the attributes or relations.
+     * Run additional, advanced searches that can't be done using the
+     * attributes or relations. No-op in this trait. Override in the
+     * implementing model to add relation-aware search terms.
      *
-     * This is a noop in this trait, but can be overridden in the implementing model, to allow more advanced searches
+     * @param  array<int, string>  $terms
      *
-     * @param  $query  Builder
-     * @param  $terms  array
-     * @return Builder
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
      */
-    public function advancedTextSearch(Builder $query, array $terms)
+    public function advancedTextSearch(Builder $query, array $terms): Builder
     {
         return $query;
     }

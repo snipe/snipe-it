@@ -338,8 +338,6 @@ class ComponentsController extends Controller
      * @author [A. Bergamasco] [@vjandrea]
      *
      * @since [v4.0]
-     *
-     * @param  int  $id
      */
     public function getAssets(Component $component, Request $request): array
     {

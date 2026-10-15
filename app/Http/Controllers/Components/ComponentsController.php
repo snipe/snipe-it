@@ -127,7 +127,6 @@ class ComponentsController extends Controller
      * @see ComponentsController::postEdit() method that stores the data.
      * @since [v3.0]
      *
-     * @param  int  $componentId
      * @return View
      *
      * @throws AuthorizationException
@@ -152,7 +151,6 @@ class ComponentsController extends Controller
      *
      * @see ComponentsController::getEdit() method presents the form.
      *
-     * @param  int  $componentId
      * @return RedirectResponse
      *
      * @throws AuthorizationException
@@ -239,7 +237,6 @@ class ComponentsController extends Controller
      * @see ComponentsController::getDataView() method that generates the JSON response
      * @since [v3.0]
      *
-     * @param  int  $componentId
      * @return View
      *
      * @throws AuthorizationException

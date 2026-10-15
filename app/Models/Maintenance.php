@@ -22,6 +22,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for Asset Maintenances.
  *
  * @version v1.0
+ *
  * @property-read \App\Models\Asset|null $asset
  * @property-read \App\Models\Actionlog|null $assetlog
  * @property-read \App\Models\Supplier|null $supplier
@@ -30,6 +31,7 @@ use Watson\Validating\ValidatingTrait;
  * @property-read \App\Models\User|null $responsibleParty
  * @property-read \App\Models\User|null $completedByUser
  * @property-read \Illuminate\Database\Eloquent\Model|null $item Polymorphic parent (usually Asset). See item() below.
+ *
  * @mixin IdeHelperMaintenance
  */
 class Maintenance extends SnipeModel implements ICompanyableChild
@@ -77,7 +79,7 @@ class Maintenance extends SnipeModel implements ICompanyableChild
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'name',

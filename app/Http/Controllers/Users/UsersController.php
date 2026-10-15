@@ -276,7 +276,6 @@ class UsersController extends Controller
      *
      * @since [v1.0]
      *
-     * @param  int  $id
      * @return RedirectResponse
      *
      * @throws AuthorizationException
@@ -432,7 +431,6 @@ class UsersController extends Controller
      *
      * @since [v1.0]
      *
-     * @param  int  $id
      * @return RedirectResponse
      *
      * @throws AuthorizationException
@@ -472,7 +470,6 @@ class UsersController extends Controller
      *
      * @since [v1.0]
      *
-     * @param  int  $userId
      * @return View
      *
      * @throws AuthorizationException
@@ -505,7 +502,6 @@ class UsersController extends Controller
      *
      * @since [v1.0]
      *
-     * @param  int  $id
      * @return View
      *
      * @throws AuthorizationException

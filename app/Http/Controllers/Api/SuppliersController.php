@@ -205,8 +205,6 @@ class SuppliersController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v4.0]
-     *
-     * @param  int  $id
      */
     public function destroy(Supplier $supplier): JsonResponse
     {

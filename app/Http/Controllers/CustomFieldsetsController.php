@@ -35,8 +35,6 @@ class CustomFieldsetsController extends Controller
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      *
-     * @param  int  $id
-     *
      * @since [v1.8]
      */
     public function show(CustomFieldset $fieldset): View|RedirectResponse
@@ -127,8 +125,6 @@ class CustomFieldsetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @param  int  $id
-     *
      * @since [v6.0.14]
      */
     public function edit(CustomFieldset $fieldset): View|RedirectResponse
@@ -142,8 +138,6 @@ class CustomFieldsetsController extends Controller
      * Saves updated fieldset data
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $id
      *
      * @since [v6.0.14]
      */

@@ -303,12 +303,13 @@ namespace App\Models{
  *
  * @version v1.0
  * @property ?int $location_id
- * @property Carbon|string|null $next_audit_date
- * @property Carbon|string|null $last_audit_date
- * @property Carbon|string|null $asset_eol_date
+ * @property \Carbon\Carbon|string|null $next_audit_date
+ * @property \Carbon\Carbon|string|null $last_audit_date
+ * @property \Carbon\Carbon|string|null $asset_eol_date
  * @property ?int $company_id
- * @property Carbon|string|null $last_checkin
+ * @property \Carbon\Carbon|string|null $last_checkin
  * @property bool $requestable
+ * @property Asset|Location|User|null $assigned Current checkout target. morphTo relation named `assigned` (declared on method `assignedTo()`). Eloquent resolves the dynamic property by the morphTo name arg, not the method name, so this `@property` is distinct from `@property ... $assignedTo` written by ide-helper.
  * @property int $id
  * @property string|null $name
  * @property string|null $asset_tag
@@ -910,7 +911,7 @@ namespace App\Models{
 
 namespace App\Models{
 /**
- * @property CheckoutRequestState $state
+ * @property \App\Enums\CheckoutRequestState $state
  * @property int $id
  * @property int $user_id
  * @property int $requestable_id
