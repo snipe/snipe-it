@@ -651,10 +651,13 @@ class BulkUsersController extends Controller
 
             // Carry over company pivot memberships from the merged
             // user into the target.
-            $mergedCompanyIds = DB::table('company_user')
-                ->where('user_id', $user_to_merge->id)
-                ->pluck('company_id')
-                ->all();
+            $mergedCompanyIds = Company::getIdsForCurrentUser(
+                DB::table('company_user')
+                    ->where('user_id', $user_to_merge->id)
+                    ->pluck('company_id')
+                    ->map(fn($id) => (int) $id)
+                    ->all()
+            );
             if (! empty($mergedCompanyIds)) {
                 $now = now();
                 DB::table('company_user')->insertOrIgnore(
