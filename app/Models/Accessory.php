@@ -28,6 +28,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for Accessories.
  *
  * @version v1.0
+ *
  * @mixin IdeHelperAccessory
  */
 class Accessory extends SnipeModel
@@ -478,7 +479,6 @@ class Accessory extends SnipeModel
     /**
      * Run after the checkout acceptance was declined by the user
      *
-     * @param  User  $acceptedBy
      * @param  string  $signature
      */
     public function declinedCheckout(User $declinedBy, $signature)
@@ -526,11 +526,6 @@ class Accessory extends SnipeModel
         $this->attributes['qty'] = (! $value) ? 0 : intval($value);
     }
 
-    /**
-     * -----------------------------------------------
-     * BEGIN QUERY SCOPES
-     * -----------------------------------------------
-     **/
     public function newEloquentBuilder($query): AccessoryQueryBuilder
     {
         return new AccessoryQueryBuilder($query);

@@ -16,7 +16,7 @@ class ConsumableFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<Consumable>
      */
     protected $model = Consumable::class;
 

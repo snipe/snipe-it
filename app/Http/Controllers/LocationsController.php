@@ -142,9 +142,6 @@ class LocationsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @see LocationsController::postCreate() method that validates and stores
-     *
-     * @param  int  $locationId
-     *
      * @since [v1.0]
      */
     public function edit(Location $location): View|RedirectResponse
@@ -160,9 +157,6 @@ class LocationsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @see LocationsController::getEdit() method that makes the form view
-     *
-     * @param  int  $locationId
-     *
      * @since [v1.0]
      */
     public function update(ImageUploadRequest $request, Location $location): RedirectResponse
@@ -276,8 +270,6 @@ class LocationsController extends Controller
      * the content for the locations detail page.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $id
      *
      * @since [v1.0]
      */
@@ -393,8 +385,6 @@ class LocationsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since [v1.0]
-     *
-     * @param  int  $id
      */
     public function postRestore(Location $location): RedirectResponse
     {

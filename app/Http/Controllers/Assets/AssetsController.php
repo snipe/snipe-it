@@ -364,8 +364,6 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @param  int  $assetId
-     *
      * @since [v1.0]
      *
      * @return View
@@ -441,7 +439,6 @@ class AssetsController extends Controller
     /**
      * Validate and process asset edit form.
      *
-     * @param  int  $assetId
      *
      * @since [v1.0]
      *
@@ -593,8 +590,6 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @param  int  $assetId
-     *
      * @since [v1.0]
      */
     public function destroy(Request $request, Asset $asset): RedirectResponse
@@ -672,8 +667,6 @@ class AssetsController extends Controller
      * Return a QR code for the asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $assetId
      *
      * @since [v1.0]
      */
@@ -792,8 +785,6 @@ class AssetsController extends Controller
      * Returns a view that presents a form to clone an asset.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $assetId
      *
      * @since [v1.0]
      *
@@ -1062,7 +1053,7 @@ class AssetsController extends Controller
             // company_id column. Fall back to the requesting user's
             // tenant visibility.
             if ($checkoutRequest->requestable_type === AssetModel::class
-                && (!$checkoutRequest->user || !Company::isCurrentUserHasAccess($checkoutRequest->user))
+                && (! $checkoutRequest->user || ! Company::isCurrentUserHasAccess($checkoutRequest->user))
             ) {
                 continue;
             }

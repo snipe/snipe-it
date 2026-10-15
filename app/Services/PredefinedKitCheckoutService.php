@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Events\CheckoutableCheckedOut;
+use App\Exceptions\CheckoutNotAllowed;
 use App\Models\Accessory;
 use App\Models\AccessoryCheckout;
 use App\Models\Asset;
@@ -10,6 +11,7 @@ use App\Models\Consumable;
 use App\Models\LicenseSeat;
 use App\Models\PredefinedKit;
 use App\Models\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

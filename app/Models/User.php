@@ -1569,30 +1569,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
-     * Query builder scope to return NOT-deleted users
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     *
-     * @since  [v2.0]
-     *
-     * @param  string  $query
-     * @return \Illuminate\Database\Query\Builder
-     */
-
-    /**
-     * Query builder scope to return users by email or username
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     *
-     * @since  [v2.0]
-     *
-     * @param  string  $query
-     * @param  string  $user_username
-     * @param  string  $user_email
-     * @return \Illuminate\Database\Query\Builder
-     */
-
-    /**
      * Generate email from full name
      *
      * @author A. Gianotto <snipe@snipe.net>
@@ -1791,21 +1767,11 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
     }
 
     /**
-     * Query builder scope to search user by name with spaces in it.
-     * We don't use the advancedTextSearch() scope because that searches
-     * all of the relations as well, which is more than what we need.
+     * Run additional, advanced searches. Overrides advancedTextSearch
+     * on the Searchable trait to also search user name with spaces in
+     * it via orWhereMultipleColumns.
      *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  array  $terms  The search terms
-     * @return \Illuminate\Database\Query\Builder
-     */
-
-    /**
-     * Run additional, advanced searches.
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  array  $terms  The search terms
-     * @return Builder
+     * @param  array<int, string>  $terms  The search terms
      */
     public function advancedTextSearch(Builder $query, array $terms)
     {
@@ -1820,66 +1786,6 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
 
         return $query;
     }
-
-    /**
-     * Query builder scope to return users by group
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  int  $id
-     * @return \Illuminate\Database\Query\Builder
-     */
-
-    /**
-     * Return only admins and superusers
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     */
-
-    /**
-     * Return only admins and superusers
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     */
-
-    /**
-     * Query builder scope to order on manager
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return \Illuminate\Database\Query\Builder Modified query builder
-     */
-
-    /**
-     * Query builder scope to order on company
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return \Illuminate\Database\Query\Builder Modified query builder
-     */
-
-    /**
-     * Query builder scope to order on department
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return \Illuminate\Database\Query\Builder Modified query builder
-     */
-
-    /**
-     * Query builder scope to order on admin user
-     *
-     * @param  \Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  string  $order  Order
-     * @return \Illuminate\Database\Query\Builder Modified query builder
-     */
-
-    /**
-     * Query builder scope to order on company
-     *
-     * @param  Illuminate\Database\Query\Builder  $query  Query builder instance
-     * @param  text  $order  Order
-     * @return Illuminate\Database\Query\Builder Modified query builder
-     */
 
     /**
      * Get the preferred locale for the user.

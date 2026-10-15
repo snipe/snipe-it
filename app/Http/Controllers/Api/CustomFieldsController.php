@@ -18,8 +18,6 @@ class CustomFieldsController extends Controller
      *
      * @author [Brady Wetherington] [<uberbrady@gmail.com>]
      *
-     * @param  int  $id
-     *
      * @since [v3.0]
      */
     public function index(): array

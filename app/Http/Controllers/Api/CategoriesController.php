@@ -230,7 +230,6 @@ class CategoriesController extends Controller
      *
      * @since [v4.0]
      *
-     * @param  int  $id
      * @return Response
      */
     public function destroy(Category $category): JsonResponse

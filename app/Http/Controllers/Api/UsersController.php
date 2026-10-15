@@ -616,7 +616,6 @@ class UsersController extends Controller
      * @since [v4.0]
      *
      * @param  Request  $request
-     * @param  int  $id
      */
     public function update(SaveUserRequest $request, User $user): JsonResponse
     {

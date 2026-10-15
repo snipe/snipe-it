@@ -1472,7 +1472,6 @@ class ReportsController extends Controller
     /**
      * sentAssetAcceptanceReminder
      *
-     * @param  int|null  $acceptanceId
      *
      * @version v1.0
      */

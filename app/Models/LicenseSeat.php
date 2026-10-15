@@ -40,7 +40,7 @@ class LicenseSeat extends SnipeModel implements ICompanyableChild
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'assigned_to',

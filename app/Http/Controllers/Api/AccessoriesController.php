@@ -265,7 +265,7 @@ class AccessoriesController extends Controller
      * @since [v4.0]
      *
      * @param  int  $id
-     * @return | array
+     * @return array<string, mixed>
      */
     public function checkedout(Request $request, $id)
     {
@@ -404,7 +404,6 @@ class AccessoriesController extends Controller
      * If Slack is enabled and/or asset acceptance is enabled, it will also
      * trigger a Slack message and send an email.
      *
-     * @param  int  $accessoryId
      * @return JsonResponse
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -485,7 +484,6 @@ class AccessoriesController extends Controller
      * Check in the item so that it can be checked out again to someone else
      *
      * @param  int  $accessoryUserId
-     * @param  string  $backto
      * @return JsonResponse
      *
      * @uses Accessory::checkin_email() to determine if an email can and should be sent

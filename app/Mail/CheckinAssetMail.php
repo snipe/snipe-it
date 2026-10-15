@@ -51,8 +51,6 @@ class CheckinAssetMail extends BaseMailable
 
     /**
      * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
      */
     public function content(): Content
     {

@@ -85,8 +85,6 @@ class StatuslabelsController extends Controller
 
     /**
      * Statuslabel update.
-     *
-     * @param  int  $statuslabelId
      */
     public function edit(Statuslabel $statuslabel): View|RedirectResponse
     {
@@ -101,8 +99,6 @@ class StatuslabelsController extends Controller
 
     /**
      * Statuslabel update form processing page.
-     *
-     * @param  int  $statuslabelId
      */
     public function update(Request $request, Statuslabel $statuslabel): RedirectResponse
     {

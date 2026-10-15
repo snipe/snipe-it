@@ -15,7 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 
 /**
- * @property CheckoutRequestState $state
+ * @property \App\Enums\CheckoutRequestState $state
+ *
  * @mixin IdeHelperCheckoutRequest
  */
 class CheckoutRequest extends Model

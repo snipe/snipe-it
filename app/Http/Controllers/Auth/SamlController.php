@@ -43,8 +43,6 @@ class SamlController extends Controller
      * @author Johnson Yi <jyi.dev@outlook.com>
      *
      * @since 5.0.0
-     *
-     * @return Response
      */
     public function metadata(Request $request)
     {

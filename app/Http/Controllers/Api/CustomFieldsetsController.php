@@ -31,8 +31,6 @@ class CustomFieldsetsController extends Controller
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @author [Josh Gibson]
      *
-     * @param  int  $id
-     *
      * @since [v1.8]
      */
     public function index(): array

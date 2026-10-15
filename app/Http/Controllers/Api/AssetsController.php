@@ -60,8 +60,6 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @param  int  $assetId
-     *
      * @since [v4.0]
      */
     public function index(FilterRequest $request, $action = null, $upcoming_status = null): JsonResponse|array
@@ -622,8 +620,6 @@ class AssetsController extends Controller
      * Returns JSON with information about an asset for detail view.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $assetId
      *
      * @since [v4.0]
      *
@@ -1275,8 +1271,6 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @param  int  $assetId
-     *
      * @since [v4.0]
      */
     public function destroy($id): JsonResponse
@@ -1358,8 +1352,6 @@ class AssetsController extends Controller
      * Checkout an asset
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $assetId
      *
      * @since [v4.0]
      */
@@ -1475,8 +1467,6 @@ class AssetsController extends Controller
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
-     * @param  int  $assetId
-     *
      * @since [v4.0]
      */
     public function checkin(Request $request, $asset_id): JsonResponse
@@ -1491,7 +1481,7 @@ class AssetsController extends Controller
                 ->lockForUpdate()
                 ->first();
 
-            if (!$locked) {
+            if (! $locked) {
                 return ['status' => 'already_checked_in', 'asset' => $asset];
             }
 
@@ -1528,7 +1518,7 @@ class AssetsController extends Controller
                 $locked->status_id = $request->input('status_id');
             }
 
-            $checkin_at = $request->filled('checkin_at') ? $request->input('checkin_at') . ' ' . date('H:i:s') : date('Y-m-d H:i:s');
+            $checkin_at = $request->filled('checkin_at') ? $request->input('checkin_at').' '.date('H:i:s') : date('Y-m-d H:i:s');
             $originalValues = $locked->getRawOriginal();
 
             if (($request->filled('checkin_at')) && ($request->input('checkin_at') != date('Y-m-d'))) {
@@ -1553,7 +1543,7 @@ class AssetsController extends Controller
                     $acceptance->delete();
                 });
 
-            if (!$locked->save()) {
+            if (! $locked->save()) {
                 return ['status' => 'save_failed', 'asset' => $locked];
             }
 
@@ -1654,8 +1644,6 @@ class AssetsController extends Controller
      * Mark an asset as audited
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     *
-     * @param  int  $id
      *
      * @since [v4.0]
      */
