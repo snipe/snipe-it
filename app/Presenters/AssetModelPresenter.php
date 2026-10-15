@@ -133,6 +133,16 @@ class AssetModelPresenter extends Presenter
                 'footerFormatter' => 'qtySumFormatter',
             ],
             [
+                'field' => 'undeployable',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'title' => trans('general.undeployable'),
+                'visible' => true,
+                'class' => 'text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
+            ],
+            [
                 'field' => 'assets_archived_count',
                 'scope' => 'col',
                 'searchable' => true,

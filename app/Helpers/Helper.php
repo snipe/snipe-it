@@ -1016,20 +1016,11 @@ class Helper
         foreach ($asset_models as $asset_model) {
             $total_owned = $asset_model->assets_count;
             $avail = $asset_model->available_assets_count;
+
             $percent = $avail > 0
                 ? number_format((($avail / $total_owned) * 100), 0)
                 : 100;
 
-            $asset = new Asset();
-            $total_owned = $asset->where('model_id', '=', $asset_model->id)->count();
-            $avail = $asset->where('model_id', '=', $asset_model->id)->rtd()->count();
-
-            if ($avail <= ($asset_model->min_amt) + $alert_threshold) {
-                if ($avail > 0) {
-                    $percent = number_format((($avail / $total_owned) * 100), 0);
-                } else {
-                    $percent = 100;
-                }
                 $items_array[$all_count]['id'] = $asset_model->id;
                 $items_array[$all_count]['name'] = $asset_model->name;
                 $items_array[$all_count]['type'] = 'models';
@@ -1037,7 +1028,7 @@ class Helper
                 $items_array[$all_count]['remaining'] = $avail;
                 $items_array[$all_count]['min_amt'] = $asset_model->min_amt;
                 $all_count++;
-            }
+
         }
 
         foreach ($licenses as $license) {

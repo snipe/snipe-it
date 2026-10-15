@@ -65,6 +65,7 @@ class AssetModelsTransformer
                 : (int) ($assetmodel->assets_count - (int) $assetmodel->assets_assigned_count) - (int) $assetmodel->assets_archived_count,
             'percent_remaining' => round($assetmodel->percentRemaining()),
             'pending' => (int)$assetmodel->getAttribute('assets_pending_count'),
+            'undeployable' => (int)$assetmodel->getAttribute('assets_undeployable_count'),
             'category' => ($assetmodel->category) ? [
                 'id' => (int) $assetmodel->category->id,
                 'name' => e($assetmodel->category->name),

@@ -93,6 +93,7 @@ class AssetModelsController extends Controller
             ->withCount('archivedAssets as assets_archived_count')
             ->withCount([
                 'assets as assets_pending_count' => fn($q) => $q->whereNull('assets.assigned_to')->pending(),
+                'assets as assets_undeployable_count' => fn($q) => $q->whereNull('assets.assigned_to')->undeployable(),
                 'assets as remaining' => fn($q) => $q->rtd(),
             ]);
 
