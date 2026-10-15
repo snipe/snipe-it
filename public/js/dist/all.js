@@ -776,7 +776,10 @@ $(function () {
     var $currency = $modal.find('#adjustQuantityCurrency');
     var $costHint = $modal.find('#adjustQuantityCostHint');
     $unitCost.val(lastUnitCost !== undefined && lastUnitCost !== '' ? lastUnitCost : '');
-    $currency.val(lastCurrency !== undefined && lastCurrency !== '' ? lastCurrency : $currency.prop('defaultValue') || '');
+    // $currency is a select2-backed <select>. Trigger('change') is
+    // required to repaint select2's rendered selection after setting the
+    // underlying value.
+    $currency.val(lastCurrency !== undefined && lastCurrency !== '' ? lastCurrency : '').trigger('change');
     if (lastUnitCost !== undefined && lastUnitCost !== '' || lastCurrency !== undefined && lastCurrency !== '') {
       $costHint.show();
     } else {
@@ -784,10 +787,11 @@ $(function () {
     }
 
     // Rebind on every open so multiple modal opens don't stack listeners.
+    // $currency is a select, so listen for change rather than input.
     $unitCost.off('input.adjustCostHint').on('input.adjustCostHint', function () {
       $costHint.hide();
     });
-    $currency.off('input.adjustCostHint').on('input.adjustCostHint', function () {
+    $currency.off('change.adjustCostHint').on('change.adjustCostHint', function () {
       $costHint.hide();
     });
     $modal.find('#adjustQuantityNote').val('');
@@ -837,7 +841,7 @@ $(function () {
         $modal.find('#adjustQuantityOrder').val('');
         $modal.find('#adjustQuantitySupplier').val('').trigger('change');
         $modal.find('#adjustQuantityUnitCost').val('');
-        $modal.find('#adjustQuantityCurrency').val('');
+        $modal.find('#adjustQuantityCurrency').val('').trigger('change');
       }
     };
     // Track the prefill state on the hint so the visibility toggle
