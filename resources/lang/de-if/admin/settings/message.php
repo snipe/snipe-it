@@ -3,30 +3,35 @@
 return [
 
     'update' => [
-        'error'                 => 'Während der Aktualisierung ist ein Fehler aufgetreten. ',
-        'success'               => 'Die Einstellungen wurden erfolgreich aktualisiert.',
+        'error' => 'Während der Aktualisierung ist ein Fehler aufgetreten. ',
+        'success' => 'Die Einstellungen wurden erfolgreich aktualisiert.',
     ],
     'backup' => [
-        'delete_confirm'        => 'Backup Datei wirklich löschen? Aktion kann nicht rückgängig gemacht werden. ',
-        'file_deleted'          => 'Backup Datei erfolgreich gelöscht. ',
-        'generated'             => 'Neue Backup Datei erfolgreich erstellt.',
-        'file_not_found'        => 'Backup Datei konnte nicht gefunden werden.',
-        'restore_warning'       => 'Ja, wiederherstellen. Ich bestätige, dass dies alle vorhandenen Daten überschreibt, die derzeit in der Datenbank vorhanden sind. Diese Aktion wird auch alle bestehenden Benutzer abmelden (einschließlich Dir).',
-        'restore_confirm'       => 'Bist du sicher, dass du deine Datenbank aus :filename wiederherstellen möchten?'
+        'delete_confirm' => 'Backup Datei wirklich löschen? Aktion kann nicht rückgängig gemacht werden. ',
+        'file_deleted' => 'Backup Datei erfolgreich gelöscht. ',
+        'generated' => 'Neue Backup Datei erfolgreich erstellt.',
+        'file_not_found' => 'Backup Datei konnte nicht gefunden werden.',
+        'restore_warning' => 'Ja, wiederherstellen. Ich bestätige, dass dies alle vorhandenen Daten überschreibt, die derzeit in der Datenbank vorhanden sind. Diese Aktion wird auch alle bestehenden Benutzer abmelden (einschließlich Dir).',
+        'restore_confirm' => 'Bist du sicher, dass du deine Datenbank aus :filename wiederherstellen möchten?',
+        'delete_disabled_help' => 'Das Löschen von Backups ist deaktiviert. Kontaktieren Sie Ihren Administrator, wenn Sie das Löschen von Sicherungen aktivieren möchten.',
     ],
     'restore' => [
-        'success'               => 'Ihr Systembackup wurde wiederhergestellt. Bitte melde dich erneut an.'
+        'success' => 'Ihr Systembackup wurde wiederhergestellt. Bitte melde dich erneut an.',
+        'archive_invalid' => 'Die ausgewählte Sicherungsdatei (:filename) ist kein gültiges ZIP-Archiv. Wiederherstellung abgebrochen, Datenbank wurde nicht bearbeitet.',
+        'zip_extension_missing' => 'PHP ZIP Erweiterung ist nicht auf diesem Server geladen. Backup-Archiv kann nicht validiert werden, Wiederherstellung wurde abgebrochen, um Datenverlust zu verhindern. Bitten Sie Ihren Server Administrator um Installation von ext-zip.',
+        'pre_backup_failed' => 'Es konnte keine Sicherheitskopie vor der Wiederherstellung erstellt werden. Wiederherstellung abgebrochen, sodass die vorhandene Datenbank nicht ohne eine Wiederherstellungsmöglichkeit zerstört wird.',
+        'failed_with_backup' => 'Wiederherstellung fehlgeschlagen. Die bereits existierende Datenbank wurde als Teil des Wiederherstellungsversuchs gelöscht, aber ein Backup vor der Wiederherstellung wurde in :backup gespeichert und kann zum Wiederherstellen verwendet werden.',
     ],
     'purge' => [
-        'error'     => 'Beim Bereinigen ist ein Fehler augetreten. ',
-        'validation_failed'     => 'Falsche Bereinigungsbestätigung. Bitte gib das Wort "DELETE" im Bestätigungsfeld ein.',
-        'success'               => 'Gelöschte Einträge erfolgreich bereinigt.',
+        'error' => 'Beim Bereinigen ist ein Fehler augetreten. ',
+        'validation_failed' => 'Falsche Bereinigungsbestätigung. Bitte gib das Wort "DELETE" im Bestätigungsfeld ein.',
+        'success' => 'Gelöschte Einträge erfolgreich bereinigt.',
     ],
     'mail' => [
         'sending' => 'Test E-Mail wird gesendet...',
         'success' => 'Mail gesendet!',
         'error' => 'E-Mail konnte nicht gesendet werden.',
-        'additional' => 'Keine zusätzliche Fehlermeldung vorhanden. Überprüfe deine E-Mail-Einstellungen und dein App-Protokoll.'
+        'additional' => 'Keine zusätzliche Fehlermeldung vorhanden. Überprüfe deine E-Mail-Einstellungen und dein App-Protokoll.',
     ],
     'ldap' => [
         'testing' => 'Teste LDAP Verbindung, Binding & Abfrage ...',
@@ -34,11 +39,11 @@ return [
         'error' => 'Etwas ist schiefgelaufen :(',
         'sync_success' => 'Ein Beispiel von 10 Benutzern, die vom LDAP-Server basierend auf Deinen Einstellungen zurückgegeben wurden:',
         'testing_authentication' => 'LDAP-Authentifizierung wird getestet...',
-        'authentication_success' => 'Benutzer wurde erfolgreich gegen LDAP authentifiziert!'
+        'authentication_success' => 'Benutzer wurde erfolgreich gegen LDAP authentifiziert!',
     ],
     'labels' => [
         'null_template' => 'Etikettenvorlage nicht gefunden. Bitte wähle eine Vorlage aus.',
-        ],
+    ],
     'webhook' => [
         'sending' => ':app Testnachricht wird gesendet ...',
         'success' => 'Deine :webhook_name Integration funktioniert!',
@@ -55,5 +60,22 @@ return [
     'location_scoping' => [
         'not_saved' => 'Deine Einstellungen wurden nicht gespeichert.',
         'mismatch' => 'Es gibt 1 Element in der Datenbank, das Deine Aufmerksamkeit benötigt, bevor Du die Standortbereicherung aktivieren kannst. Es gibt :count Elemente in der Datenbank, die Deine Aufmerksamkeit benötigen, bevor Du die Standortbereicherung aktivieren kannst.',
+    ],
+    'oauth' => [
+        'token_revoked' => 'Persönlicher Zugangs-Token erfolgreich widerrufen.',
+        'token_unrevoked' => 'Persönlicher Zugangs-Token erfolgreich wiederhergestellt.',
+        'token_not_found' => 'Dieser persönliche Zugangs-Token konnte nicht gefunden werden.',
+        'token_revoke_error' => 'Beim Widerrufen des Tokens ist ein Fehler aufgetreten.',
+        'token_unrevoke_error' => 'Bei der Wiederherstellung des Token ist ein Fehler aufgetreten.',
+        'client_created' => 'OAuth-Client erfolgreich erstellt.',
+        'client_updated' => 'OAuth-Client erfolgreich aktualisiert.',
+        'client_deleted' => 'OAuth-Client erfolgreich gelöscht.',
+        'client_revoked' => 'OAuth Client wurde erfolgreich widerrufen.',
+        'client_unrevoked' => 'OAuth-Client erfolgreich wiederhergestellt.',
+        'client_not_found' => 'Der OAuth-Client konnte nicht gefunden werden.',
+        'token_deleted' => 'Token erfolgreich widerrufen.',
+        'client_delete_denied' => 'Sie sind nicht berechtigt, diesen OAuth-Client zu löschen.',
+        'client_edit_denied' => 'Sie sind nicht berechtigt, diesen OAuth-Client zu bearbeiten.',
+        'token_delete_denied' => 'Sie sind nicht berechtigt, diesen Token zu widerrufen.',
     ],
 ];

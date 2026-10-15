@@ -3,30 +3,35 @@
 return [
 
     'update' => [
-        'error'                 => 'Ett fel har uppstått vid uppdatering. ',
-        'success'               => 'Inställningarna uppdaterades.',
+        'error' => 'Ett fel har uppstått vid uppdatering. ',
+        'success' => 'Inställningarna uppdaterades.',
     ],
     'backup' => [
-        'delete_confirm'        => 'Är du säker på att du vill ta bort den här säkerhetskopian? Den här åtgärden kan inte ångras. ',
-        'file_deleted'          => 'Säkerhetskopian har tagits bort. ',
-        'generated'             => 'En ny säkerhetskopia skapades.',
-        'file_not_found'        => 'Säkerhetskopian kunde inte hittas på servern.',
-        'restore_warning'       => 'Ja, återställ den. Jag är medveten att detta kommer att skriva över befintlig data som redan finns i databasen. Detta kommer också att logga ut alla befintliga användare (inklusive dig själv).',
-        'restore_confirm'       => 'Är du säker på att du vill återställa din databas från :filename?'
+        'delete_confirm' => 'Är du säker på att du vill ta bort den här säkerhetskopian? Den här åtgärden kan inte ångras. ',
+        'file_deleted' => 'Säkerhetskopian har tagits bort. ',
+        'generated' => 'En ny säkerhetskopia skapades.',
+        'file_not_found' => 'Säkerhetskopian kunde inte hittas på servern.',
+        'restore_warning' => 'Ja, återställ den. Jag är medveten att detta kommer att skriva över befintlig data som redan finns i databasen. Detta kommer också att logga ut alla befintliga användare (inklusive dig själv).',
+        'restore_confirm' => 'Är du säker på att du vill återställa din databas från :filename?',
+        'delete_disabled_help' => 'Radering av säkerhetskopior är inaktiverat. Kontakta din administratör om du vill aktivera radering av säkerhetskopior.',
     ],
     'restore' => [
-        'success'               => 'Din säkerhetskopia har återställts. Vänligen logga in igen.'
+        'success' => 'Din säkerhetskopia har återställts. Vänligen logga in igen.',
+        'archive_invalid' => 'Den valda säkerhetskopian (:filename) är inte ett giltigt zip-arkiv. Återställningen avbröts innan databasen påverkades.',
+        'zip_extension_missing' => 'PHP-zip-tillägget är inte laddat på denna server. Det går inte att validera säkerhetskopian och återställningen har avbrutits för att förhindra dataförlust. Be din serveradministratör installera ext-zip.',
+        'pre_backup_failed' => 'Det gick inte att skapa en säkerhetskopia före återställning. Återställningen avbröts så att den befintliga databasen inte förstörs utan möjlighet till återhämtning.',
+        'failed_with_backup' => 'Återställningen misslyckades. Den befintliga databasen rensades som en del av återställningsförsöket, men en säkerhetskopia före återställning sparades till :backup och kan användas för återhämtning.',
     ],
     'purge' => [
-        'error'     => 'Ett fel har uppstått vid radering. ',
-        'validation_failed'     => 'Raderingsbekräftelsekoden är felaktig. Vänligen skriv ordet "DELETE" i bekräftelserutan.',
-        'success'               => 'Tidigare raderade poster har raderats för gott.',
+        'error' => 'Ett fel har uppstått vid radering. ',
+        'validation_failed' => 'Raderingsbekräftelsekoden är felaktig. Vänligen skriv ordet "DELETE" i bekräftelserutan.',
+        'success' => 'Tidigare raderade poster har raderats för gott.',
     ],
     'mail' => [
         'sending' => 'Skickar testmeddelande...',
         'success' => 'E-post skickat!',
         'error' => 'E-postmeddelandet kunde inte skickas.',
-        'additional' => 'Inga ytterligare felmeddelanden. Kontrollera dina e-postinställningar och din app-logg.'
+        'additional' => 'Inga ytterligare felmeddelanden. Kontrollera dina e-postinställningar och din app-logg.',
     ],
     'ldap' => [
         'testing' => 'Testar LDAP-anslutning, Bindning och Query...',
@@ -34,11 +39,11 @@ return [
         'error' => 'Något gick snett :(',
         'sync_success' => 'Ett urval av 10 användare som returneras från LDAP-servern baserat på dina inställningar:',
         'testing_authentication' => 'Testar LDAP-autentisering...',
-        'authentication_success' => 'Användaren har autentiserats via LDAP!'
+        'authentication_success' => 'Användaren har autentiserats via LDAP!',
     ],
     'labels' => [
-        'null_template' => 'Label template not found. Please select a template.',
-        ],
+        'null_template' => 'Etikettmall hittades inte. Välj en mall.',
+    ],
     'webhook' => [
         'sending' => 'Skickar :app testmeddelande...',
         'success' => 'Din :webhook_name-integration fungerar!',
@@ -49,11 +54,28 @@ return [
         'error_redirect' => 'FEL: 301/302 :endpoint returnerar en redirect. Av säkerhetsskäl följer vi inte redirects. Använd den faktiska endpointen.',
         'error_misc' => 'Någonting gick snett :( ',
         'webhook_fail' => 'webhook-notis misslyckades. Kontrollera att URL\'en fortfarande är giltig.',
-        'webhook_channel_not_found' => ' webhook channel not found.',
-        'ms_teams_deprecation' => 'The selected Microsoft Teams webhook URL will be deprecated Dec 31st, 2025. Please use a workflow URL. Microsoft\'s documentation on creating a workflow can be found <a href="https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498" target="_blank"> here.</a>',
+        'webhook_channel_not_found' => ' webhook-kanal hittades inte.',
+        'ms_teams_deprecation' => 'Den valda Microsoft Teams webhook-URL:en kommer att fasas ut den 31 december 2025. Använd en arbetsflödes-URL. Microsofts dokumentation om hur man skapar ett arbetsflöde finns <a href="https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498" target="_blank"> här.</a>',
     ],
     'location_scoping' => [
-        'not_saved' => 'Your settings were not saved.',
-        'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+        'not_saved' => 'Dina inställningar sparades inte.',
+        'mismatch' => 'Det finns 1 objekt i databasen som behöver din uppmärksamhet innan du kan aktivera platsbegränsning.|Det finns :count objekt i databasen som behöver din uppmärksamhet innan du kan aktivera platsbegränsning.',
+    ],
+    'oauth' => [
+        'token_revoked' => 'Personlig åtkomsttoken har återkallats.',
+        'token_unrevoked' => 'Personlig åtkomsttoken har återaktiverats.',
+        'token_not_found' => 'Den personliga åtkomsttoken hittades inte.',
+        'token_revoke_error' => 'Ett fel inträffade vid återkallandet av token.',
+        'token_unrevoke_error' => 'Ett fel inträffade när token återaktiverades.',
+        'client_created' => 'OAuth-klienten har skapats.',
+        'client_updated' => 'OAuth-klienten har uppdaterats.',
+        'client_deleted' => 'OAuth-klienten har raderats.',
+        'client_revoked' => 'OAuth-klienten har återkallats.',
+        'client_unrevoked' => 'OAuth-klienten har återaktiverats.',
+        'client_not_found' => 'Den OAuth-klienten kunde inte hittas.',
+        'token_deleted' => 'Token har återkallats.',
+        'client_delete_denied' => 'Du har inte behörighet att radera den här klienten.',
+        'client_edit_denied' => 'Du har inte behörighet att redigera den här klienten.',
+        'token_delete_denied' => 'Du har inte behörighet att återkalla den här token.',
     ],
 ];

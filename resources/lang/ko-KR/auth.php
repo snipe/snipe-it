@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,8 +13,8 @@ return array(
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :minutes minute(s).',
+    'failed' => '입력하신 정보가 일치하지 않습니다.',
+    'password' => '입력하신 비밀번호가 올바르지 않습니다.',
+    'throttle' => '로그인 시도 횟수를 초과했습니다. :minutes분 후 다시 시도해 주세요.',
 
-);
+];

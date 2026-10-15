@@ -1,16 +1,19 @@
 <?php
 
-return array(
-    'component_name'                  => 'Όνομα στοιχείου',
-    'checkin'                             => 'Ελέγξτε το στοιχείο',
-    'checkout'                             => 'Συστατικό ελέγχου',
-    'cost'				=> 'Κόστος αγοράς',
-    'create'                             => 'Δημιουργία στοιχείου',
-    'edit'                             => 'Επεξεργασία εξαρτήματος',
-    'date'					=> 'Ημερομηνία αγοράς',
-    'order'					=> 'Αριθμός παραγγελίας',
-    'remaining' 			             => 'Απομένουν',
-    'total' 			                 => 'Σύνολο',
-    'update'                            => 'Αναβάθμιση εξαρτήματος',
-    'checkin_limit'            => 'Το ποσό που έχει επιλεγεί πρέπει να είναι ίσο ή μικρότερο από :assigned_qty'
-);
+return [
+    'component_name' => 'Όνομα στοιχείου',
+    'checkin' => 'Ελέγξτε το στοιχείο',
+    'checkout' => 'Συστατικό ελέγχου',
+    'cost' => 'Κόστος αγοράς',
+    'create' => 'Δημιουργία στοιχείου',
+    'edit' => 'Επεξεργασία εξαρτήματος',
+    'date' => 'Ημερομηνία αγοράς',
+    'order' => 'Αριθμός παραγγελίας',
+    'remaining' => 'Απομένουν',
+    'total' => 'Σύνολο',
+    'update' => 'Αναβάθμιση εξαρτήματος',
+    'checkin_limit' => 'Το ποσό που έχει επιλεγεί πρέπει να είναι ίσο ή μικρότερο από :assigned_qty',
+    'exclude_deleted' => 'Exclude Deleted Components',
+    'include_deleted' => 'Include Deleted Components',
+    'only_deleted' => 'Only Deleted Components',
+];

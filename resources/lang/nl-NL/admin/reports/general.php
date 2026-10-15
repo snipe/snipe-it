@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'info'   => 'Selecteer de opties die je wilt voor je assetrapport.',
+    'info' => 'Selecteer de opties die je wilt voor je assetrapport.',
     'deleted_user' => 'Verwijderde gebruiker',
     'send_reminder' => 'Stuur herinnering',
     'cannot_send_reminder' => 'User has been deleted or does not have an email address so cannot receive a reminder',
@@ -9,15 +9,24 @@ return [
     'acceptance_deleted' => 'Aanvaardingsverzoek verwijderd',
     'acceptance_request' => 'Aanvaarding verzoek',
     'custom_export' => [
+        'asset_company' => 'Asset Company',
+        'asset_serial' => 'Asset Serial',
+        'assigned_asset_tag' => 'Checked Out Asset Tag',
         'user_address' => 'Gebruiker adres',
+        'user_company' => 'User Company',
         'user_city' => 'Gebruiker Stad',
         'user_state' => 'Gebruiker Provincie',
         'user_country' => 'Gebruiker Land',
-        'user_zip' => 'Gebruiker Postcode'
+        'user_zip' => 'Gebruiker Postcode',
+        'target_notes' => 'Opmerkingen',
     ],
     'open_saved_template' => 'Opgeslagen sjabloon openen',
-    'save_template' =>  'Sjabloon opslaan',
+    'save_template' => 'Sjabloon opslaan',
     'select_a_template' => 'Kies een sjabloon',
     'template_name' => 'Sjabloonnaam',
     'update_template' => 'Sjabloon bijwerken',
+    'share_template' => 'Share This Template',
+    'template_shared' => 'Template shared with you',
+    'template_shared_with_others' => 'Template shared with others',
+    'template_not_shared' => 'Template not shared with others',
 ];

@@ -1,17 +1,24 @@
 <?php
 
-    return [
-        'asset_maintenances' => 'Vedligeholdelse af aktiv', // not used anymore
-        'maintenances'       => 'Vedligeholdelse',
-        'edit'               => 'Redigere aktiv vedligeholdelse',
-        'delete'             => 'Slette aktiv vedligeholdelse',
-        'view'               => 'Se aktiv vedligeholdelse detaljer',
-        'repair'             => 'Reparér',
-        'maintenance'        => 'Vedligeholdelse',
-        'upgrade'            => 'Opgradér',
-        'calibration'        => 'Kalibrering',
-        'software_support'   => 'Software Support',
-        'hardware_support'   => 'Hardware support',
-        'configuration_change'   => 'Konfigurationsændring',
-        'pat_test'           => 'PAT-test',
-    ];
+return [
+    'asset_maintenances' => 'Vedligeholdelse af aktiv', // not used anymore
+    'maintenances' => 'Vedligeholdelse',
+    'create' => 'Opret aktiv-vedligeholdelse',
+    'edit' => 'Redigere aktiv vedligeholdelse',
+    'delete' => 'Slette aktiv vedligeholdelse',
+    'view' => 'Se aktiv vedligeholdelse detaljer',
+    'repair' => 'Reparér',
+    'maintenance' => 'Vedligeholdelse',
+    'upgrade' => 'Opgradér',
+    'calibration' => 'Kalibrering',
+    'software_support' => 'Software Support',
+    'hardware_support' => 'Hardware support',
+    'configuration_change' => 'Konfigurationsændring',
+    'pat_test' => 'PAT-test',
+    'checked_out_to_help' => 'The user, etc that the asset was checked out to at the time of maintenance creation. This is for historical reference and does not affect the current checkout status of the asset.',
+    'show_completed' => 'Show Completed',
+    'show_active' => 'Show Active',
+    'due' => 'Due',
+    'overdue' => 'Overdue',
+    'completed' => 'Gennemført',
+];

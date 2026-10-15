@@ -4,45 +4,77 @@ namespace App\Models\Labels\Tapes\Brother;
 
 class TZe_18mm_A extends TZe_18mm
 {
-    private const BARCODE_SIZE   = 3.20;
-    private const BARCODE_MARGIN = 0.30;
-    private const TEXT_SIZE_MOD  = 1.00;
+    private const BARCODE_SIZE = 3.20;
 
+    private const BARCODE_MARGIN = 0.30;
+
+    private const TEXT_SIZE_MOD = 1.00;
+
+    public function getBarcodeSize(): float
+    {
+        return self::BARCODE_SIZE;
+    }
+
+    public function getBarcodeMargin(): float
+    {
+        return self::BARCODE_MARGIN;
+    }
+
+    public function getTextSizeMod(): float
+    {
+        return self::TEXT_SIZE_MOD;
+    }
     public function getUnit()
     {
-        return 'mm'; 
-    }
-    public function getWidth()
-    {
-        return 50.0; 
-    }
-    public function getSupportAssetTag()
-    {
-        return true; 
-    }
-    public function getSupport1DBarcode()
-    {
-        return true; 
-    }
-    public function getSupport2DBarcode()
-    {
-        return false; 
-    }
-    public function getSupportFields()
-    {
-        return 1; 
-    }
-    public function getSupportLogo()
-    {
-        return false; 
-    }
-    public function getSupportTitle()
-    {
-        return false; 
+        return 'mm';
     }
 
-    public function preparePDF($pdf)
+    public function getWidth()
     {
+        return 50.0;
+    }
+
+    public function getSupportAssetTag()
+    {
+        return true;
+    }
+
+    public function getSupport1DBarcode()
+    {
+        return true;
+    }
+
+    public function getSupport2DBarcode()
+    {
+        return false;
+    }
+
+    public function getSupportFields()
+    {
+        return 1;
+    }
+
+    public function getSupportLogo()
+    {
+        return false;
+    }
+
+    public function getSupportTitle()
+    {
+        return false;
+    }
+
+    protected function getContentEditorConfig(): array
+    {
+        return [
+            'barcode_size' => $this->getBarcodeSize(),
+            'barcode_margin' => $this->getBarcodeMargin(),
+            'text_size_mod' => $this->getTextSizeMod(),
+            'tag_font_size' => 5.5,
+            'field_value_font_size' => 5.5,
+            'field_label_font_size' => 0.1,
+            'tag_offset_y' => -3,
+        ];
     }
 
     public function write($pdf, $record)

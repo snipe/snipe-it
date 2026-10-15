@@ -3,8 +3,8 @@
 namespace App\Importer;
 
 use App\Models\AssetModel;
-use App\Models\Depreciation;
 use App\Models\CustomFieldset;
+use App\Models\Depreciation;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -24,22 +24,62 @@ class AssetModelImporter extends ItemImporter
 
     protected function handle($row)
     {
-        parent::handle($row);
+        // AssetModelImporter deliberately does NOT call parent::handle(). See
+        // the other subclass migrations for the same pattern: absent CSV
+        // columns stay out of $this->item so update mode preserves the DB
+        // value, and present-but-empty cells land as null so update mode
+        // clears the DB value. The base sanitize's reject-empty pass is
+        // disabled by $rejectEmptyOnUpdate on ItemImporter.
+        $this->item = [];
+
+        $this->setItemFromCsvIfPresent($row, 'name');
+        $this->setItemFromCsvIfPresent($row, 'model_number');
+        $this->setItemFromCsvIfPresent($row, 'min_amt');
+        $this->setItemFromCsvIfPresent($row, 'eol');
+        $this->setItemFromCsvIfPresent($row, 'notes');
+
+        // Lookup fields resolve a name to an id. Present-and-empty clears
+        // the FK; absent preserves it. category_id is required per model
+        // validation; clearing it will surface a clear validation error.
+        foreach ([
+            ['category_id', 'category', fn ($v) => $this->createOrFetchCategory($v)],
+            ['manufacturer_id', 'manufacturer', fn ($v) => $this->createOrFetchManufacturer($v)],
+            ['depreciation_id', 'depreciation', fn ($v) => $this->fetchDepreciation($v)],
+            ['fieldset_id', 'fieldset', fn ($v) => $this->createOrFetchCustomFieldset($v)],
+        ] as [$itemKey, $csvKey, $resolver]) {
+            if ($this->csvRowHas($row, $csvKey)) {
+                $value = $this->findCsvMatch($row, $csvKey);
+                $this->item[$itemKey] = ($value !== '') ? $resolver($value) : null;
+            }
+        }
+
+        // Boolean flags. Present-empty maps to 0; present-with-value uses
+        // fetchHumanBoolean; absent leaves the DB value alone on update.
+        foreach (['requestable', 'require_serial'] as $flag) {
+            if ($this->csvRowHas($row, $flag)) {
+                $raw = $this->findCsvMatch($row, $flag);
+                $this->item[$flag] = ($this->fetchHumanBoolean($raw) == 1) ? 1 : 0;
+            }
+        }
+
         $this->createAssetModelIfNotExists($row);
     }
 
     /**
      * Create a model if a duplicate does not exist.
+     *
      * @todo Investigate how this should interact with Importer::createModelIfNotExists
      *
      * @author A. Gianotto
+     *
      * @since 6.1.0
-     * @param array $row
      */
     public function createAssetModelIfNotExists(array $row)
     {
 
         $editingAssetModel = false;
+        $name = $this->item['name'] ?? '';
+        $modelNumber = $this->item['model_number'] ?? '';
 
         /**
          * This part gets a little confusing, since folks might be importing multiple models with the same name and different model numbers for the first time
@@ -48,24 +88,25 @@ class AssetModelImporter extends ItemImporter
 
         // They are not trying to update existing models, so we'll check for duplicates with model name *and* number
         if (! $this->updating) {
-            $this->log('Finding model by name and model number: '.$this->findCsvMatch($row, 'name').' / '.$this->findCsvMatch($row, 'model_number'));
-            $assetModel = AssetModel::where('name', '=', $this->findCsvMatch($row, 'name'))->where('model_number', '=', $this->findCsvMatch($row, 'model_number'))->first();
+            $this->log('Finding model by name and model number: '.$name.' / '.$modelNumber);
+            $assetModel = AssetModel::where('name', '=', $name)->where('model_number', '=', $modelNumber)->first();
         } else {
 
-            if ($this->findCsvMatch($row, 'id')!='') {
+            if ($this->findCsvMatch($row, 'id') != '') {
                 // Override model if an ID was given
                 $this->log('Finding model by ID: '.$this->findCsvMatch($row, 'id'));
                 $assetModel = AssetModel::find($this->findCsvMatch($row, 'id'));
             } else {
-                $this->log('Finding model by name: '.$this->findCsvMatch($row, 'name'));
-                $assetModel = AssetModel::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
+                $this->log('Finding model by name: '.$name);
+                $assetModel = AssetModel::where('name', '=', $name)->first();
             }
         }
 
-
         if ($assetModel) {
             if (! $this->updating) {
-                $this->log('A matching Model '.$this->item['name'].' already exists and we are not updating. Skipping.');
+                $this->log('A matching Model '.$name.' already exists and we are not updating. Skipping.');
+                $this->recordSkipped();
+
                 return;
             }
 
@@ -73,48 +114,11 @@ class AssetModelImporter extends ItemImporter
             $editingAssetModel = true;
         } else {
             $this->log('No Matching Model, Create a new one');
-            $assetModel = new AssetModel();
-        }
-
-        // Pull the records from the CSV to determine their values
-        $this->item['name'] = trim($this->findCsvMatch($row, 'name'));
-        $this->item['category'] = trim($this->findCsvMatch($row, 'category'));
-        $this->item['manufacturer'] = trim($this->findCsvMatch($row, 'manufacturer'));
-        $this->item['min_amt'] = trim($this->findCsvMatch($row, 'min_amt'));
-        $this->item['model_number'] = trim($this->findCsvMatch($row, 'model_number'));
-        $this->item['eol'] = trim($this->findCsvMatch($row, 'eol'));
-        $this->item['notes'] = trim($this->findCsvMatch($row, 'notes'));
-        $this->item['fieldset'] = trim($this->findCsvMatch($row, 'fieldset'));
-        $this->item['depreciation'] = trim($this->findCsvMatch($row, 'depreciation'));
-        $this->item['requestable'] = trim(($this->fetchHumanBoolean($this->findCsvMatch($row, 'requestable'))) == 1) ? 1 : 0;
-        $this->item['require_serial'] = trim(($this->fetchHumanBoolean($this->findCsvMatch($row, 'require_serial'))) == 1) ? 1 : 0;
-
-        if (!empty($this->item['category'])) {
-            if ($category = $this->createOrFetchCategory($this->item['category'])) {
-                $this->item['category_id'] = $category;
-            }
-        }
-        if (!empty($this->item['manufacturer'])) {
-            if ($manufacturer = $this->createOrFetchManufacturer($this->item['manufacturer'])) {
-                $this->item['manufacturer_id'] = $manufacturer;
-            }
-        }
-
-        if (!empty($this->item['depreciation'])) {
-            if ($depreciation = $this->fetchDepreciation($this->item['depreciation'])) {
-                $this->item['depreciation_id'] = $depreciation;
-            }
-        }
-
-        if (!empty($this->item['fieldset'])) {
-            if ($fieldset = $this->createOrFetchCustomFieldset($this->item['fieldset'])) {
-                $this->item['fieldset_id'] = $fieldset;
-            }
+            $assetModel = new AssetModel;
         }
 
         Log::debug('Item array is: ');
         Log::debug(print_r($this->item, true));
-
 
         if ($editingAssetModel) {
             Log::debug('Updating existing model');
@@ -122,21 +126,28 @@ class AssetModelImporter extends ItemImporter
         } else {
             Log::debug('Creating model');
             $assetModel->fill($this->sanitizeItemForStoring($assetModel));
-            $assetModel->created_by = auth()->id();
+            $assetModel->created_by = $this->created_by;
         }
 
         if ($assetModel->save()) {
             $this->log('AssetModel '.$assetModel->name.' created or updated from CSV import');
+            if ($editingAssetModel) {
+                $this->recordUpdated();
+            } else {
+                $this->recordCreated();
+            }
+
             return $assetModel;
 
         } else {
+            $this->recordErrored();
             $this->log($assetModel->getErrors()->first());
-            $this->addErrorToBag($assetModel,  $assetModel->getErrors()->keys()[0], $assetModel->getErrors()->first());
+            $this->addErrorToBag($assetModel, $assetModel->getErrors()->keys()[0], $assetModel->getErrors()->first());
+
             return $assetModel->getErrors();
         }
 
     }
-
 
     /**
      * Fetch an existing depreciation, or create new if it doesn't exist.
@@ -145,16 +156,19 @@ class AssetModelImporter extends ItemImporter
      * and cannot be created without them (months, for example.))
      *
      * @author A. Gianotto
+     *
      * @since 7.1.3
-     * @param $depreciation_name string
+     *
+     * @param  $depreciation_name  string
      * @return int id of depreciation created/found
      */
-    public function fetchDepreciation($depreciation_name) : ?int
+    public function fetchDepreciation($depreciation_name): ?int
     {
         if ($depreciation_name != '') {
 
             if ($depreciation = Depreciation::where('name', '=', $depreciation_name)->first()) {
                 $this->log('A matching Depreciation '.$depreciation_name.' already exists');
+
                 return $depreciation->id;
             }
         }
@@ -166,21 +180,24 @@ class AssetModelImporter extends ItemImporter
      * Fetch an existing fieldset, or create new if it doesn't exist
      *
      * @author A. Gianotto
+     *
      * @since 7.1.3
-     * @param $fieldset_name string
+     *
+     * @param  $fieldset_name  string
      * @return int id of fieldset created/found
      */
-    public function createOrFetchCustomFieldset($fieldset_name) : ?int
+    public function createOrFetchCustomFieldset($fieldset_name): ?int
     {
         if ($fieldset_name != '') {
             $fieldset = CustomFieldset::where('name', '=', $fieldset_name)->first();
 
             if ($fieldset) {
                 $this->log('A matching fieldset '.$fieldset_name.' already exists');
+
                 return $fieldset->id;
             }
 
-            $fieldset = new CustomFieldset();
+            $fieldset = new CustomFieldset;
             $fieldset->name = $fieldset_name;
 
             if ($fieldset->save()) {

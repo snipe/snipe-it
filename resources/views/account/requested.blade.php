@@ -29,19 +29,20 @@
                 }'>
                         <thead>
                         <tr>
-                            <th data-field="image" data-formatter="imageFormatter">{{ trans('general.image') }}</th>
-                            <th data-field="name">{{ trans('general.item_name') }}</th>
-                            <th data-field="type">{{ trans('general.type') }}</th>
-                            <th data-field="qty">{{ trans('general.qty') }}</th>
-                            <th data-field="location">{{ trans('admin/hardware/table.location') }}</th>
-                            <th data-field="expected_checkin" data-formatter="dateDisplayFormatter"> {{ trans('admin/hardware/form.expected_checkin') }}</th>
-                            <th data-field="request_date" data-formatter="dateDisplayFormatter"> {{ trans('general.requested_date') }}</th>
+                            <th scope="col" data-field="image" data-formatter="imageFormatter">{{ trans('general.image') }}</th>
+                            <th scope="col" data-field="name">{{ trans('general.item_name') }}</th>
+                            <th scope="col" data-field="type">{{ trans('general.type') }}</th>
+                            <th scope="col" data-field="qty">{{ trans('general.qty') }}</th>
+                            <th scope="col" data-field="location">{{ trans('admin/hardware/table.location') }}</th>
+                            <th scope="col" data-field="expected_checkin" data-formatter="dateDisplayFormatter"> {{ trans('admin/hardware/form.expected_checkin') }}</th>
+                            <th scope="col" data-field="request_date" data-formatter="dateDisplayFormatter"> {{ trans('general.requested_date') }}</th>
 
                             @foreach(\App\Models\CustomField::get() as $field)
                                 @if (($field->field_encrypted=='0') && ($field->show_in_requestable_list=='1'))
-                                    <th data-field="custom_fields.{{ $field->db_column }}">{{ $field->name }}</th>
+                                    <th scope="col" data-field="custom_fields.{{ $field->db_column }}">{{ $field->name }}</th>
                                 @endif
                             @endforeach
+                            <th scope="col" data-field="cancel_url" data-formatter="userRequestCancelFormatter" class="hidden-print">{{ trans('table.actions') }}</th>
                         </tr>
                         </thead>
                     </table>

@@ -162,7 +162,7 @@
           <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
-                <a href="{{ route('settings.slack.index') }}" class="settings_button">
+                <a href="{{ route('settings.integrations.index') }}" class="settings_button">
                   <x-icon type="hashtag" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.integrations') }}</span>
@@ -209,7 +209,7 @@
           <div class="admin box box-default">
             <div class="box-body text-center">
               <h5>
-                <a href="{{ route('settings.ldap.index') }}" class="settings_button">
+                  <a href="{{ route('settings.ldap.wizard') }}" class="settings_button">
                   <x-icon type="ldap" class="fa-4x"/>
                   <br><br>
                   <span class="name">{{ trans('admin/settings/general.ldap') }}</span>
@@ -234,6 +234,22 @@
           </div>
         </div>
       </div>
+
+        <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
+            <div class="admin box box-default">
+                <div class="box-body text-center">
+                    <h5>
+                        <a href="{{ route('settings.adapters.index') }}" class="settings_button">
+                            <i class="fa-solid fa-network-wired fa-4x" aria-hidden="true"></i>
+                            <br><br>
+                            <span class="name">{{ trans('admin/settings/sync_adapters.title') }} <span class="label label-warning">beta</span></span>
+                            <span class="keywords" aria-hidden="true" style="display:none"> {{ $adapterKeywords }}</span>
+                        </a>
+                    </h5>
+                    <p class="index-block">{{ trans('admin/settings/sync_adapters.help') }}</p>
+                </div>
+            </div>
+        </div>
 
       <div class="col-md-4 col-lg-3 col-sm-6 col-xl-1">
         <div class="admin box box-default">
@@ -292,6 +308,8 @@
               </a>
               </h5>
               <p class="index-block">{{  trans('admin/settings/general.oauth_help') }}</p>
+                <span class="keywords" aria-hidden="true" style="display:none">{{ trans('admin/settings/general.keywords.oauth') }}</span>
+
             </div>
           </div>
         </div>
@@ -453,6 +471,43 @@
             <div class="col-md-4">
             </div>
           </div>
+
+            <!-- row -->
+            <div class="row">
+                <div class="col-md-2">
+                    <strong>{{ trans('admin/settings/general.user_impersonation') }}:</strong>
+                </div>
+                <div class="col-md-10">
+                    @if ($impersonators->isEmpty() && empty($missingImpersonationUsernames))
+                        <em class="text-muted">{{ trans('admin/settings/general.user_impersonation_disabled') }}</em>
+                    @else
+                        <ul>
+                            @foreach ($impersonators as $impersonator)
+                                <li>
+                                    <a href="{{ route('users.show', $impersonator->id) }}">{{ $impersonator->display_name }}</a>
+                                    <code>{{ $impersonator->username }}</code>
+                                    @if (! $impersonator->isSuperUser())
+                                        <span class="label label-warning" data-tooltip="true" title="{{ trans('admin/settings/general.user_impersonation_not_superuser_help') }}">
+                          {{ trans('admin/settings/general.user_impersonation_not_superuser') }}
+                        </span>
+                                    @endif
+                                    @if ($impersonator->deleted_at !== null)
+                                        <span class="label label-danger">{{ trans('general.deleted') }}</span>
+                                    @elseif ($impersonator->activated != 1)
+                                        <span class="label label-default">{{ trans('admin/settings/general.user_impersonation_deactivated') }}</span>
+                                    @endif
+                                </li>
+                            @endforeach
+                            @foreach ($missingImpersonationUsernames as $missingUsername)
+                                <li>
+                                    <code>{{ $missingUsername }}</code>
+                                    <span class="label label-danger">{{ trans('admin/settings/general.user_impersonation_missing') }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+            </div>
         </div>
         </div>
           </div>

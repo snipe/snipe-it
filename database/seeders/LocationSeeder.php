@@ -15,14 +15,24 @@ class LocationSeeder extends Seeder
         Location::factory()->count(10)->create();
 
         $src = public_path('/img/demo/locations/');
-        $dst = 'locations'.'/';
-        $del_files = Storage::files($dst);
+        $dst = 'locations/';
 
-        foreach ($del_files as $del_file) { // iterate files
-            $file_to_delete = str_replace($src, '', $del_file);
-            Log::debug('Deleting: '.$file_to_delete);
+        // Wipe every item file in the public uploads dir.
+        $disk = Storage::disk('public');
+        foreach ($disk->files(rtrim($dst, '/')) as $del_file) {
+            Log::debug('Deleting: ' . $del_file);
             try {
-                Storage::disk('public')->delete($dst.$del_file);
+                $disk->delete($del_file);
+            } catch (\Exception $e) {
+                Log::debug($e);
+            }
+        }
+
+        // Attached files on the private (default) disk.
+        foreach (Storage::files('private_uploads/locations') as $del_file) {
+            Log::debug('Deleting: ' . $del_file);
+            try {
+                Storage::delete($del_file);
             } catch (\Exception $e) {
                 Log::debug($e);
             }

@@ -29,11 +29,11 @@
 
                             <thead>
                             <tr>
-                                <th class="col-sm-1" data-field="company.name">{{ trans('admin/companies/table.title') }}</th>
-                                <th class="col-sm-1" data-field="name">{{ trans('admin/accessories/table.title') }}</th>
-                                <th class="col-sm-1" data-field="model_number">{{ trans('general.model_no') }}</th>
-                                <th class="col-sm-1" data-field="qty">{{ trans('admin/accessories/general.total') }}</th>
-                                <th class="col-sm-1" data-field="remaining_qty">{{ trans('admin/accessories/general.remaining') }}</th>
+                                <th scope="col" class="col-sm-1" data-field="company.name">{{ trans('admin/companies/table.title') }}</th>
+                                <th scope="col" class="col-sm-1" data-field="name">{{ trans('admin/accessories/table.title') }}</th>
+                                <th scope="col" class="col-sm-1" data-field="model_number">{{ trans('general.model_no') }}</th>
+                                <th scope="col" class="col-sm-1" data-field="qty">{{ trans('admin/accessories/general.total') }}</th>
+                                <th scope="col" class="col-sm-1" data-field="remaining_qty">{{ trans('admin/accessories/general.remaining') }}</th>
                             </tr>
                             </thead>
                             <tbody>

@@ -4,6 +4,7 @@ namespace Tests\Feature\Users\Ui\BulkActions;
 
 use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\LicenseSeat;
@@ -80,7 +81,7 @@ class BulkDeleteUsersTest extends TestCase
                 'delete_user' => '1',
             ])
             ->assertRedirect(route('users.index'))
-            ->assertSessionHas('success', trans('general.bulk_checkin_delete_success'));
+            ->assertSessionHas('error', trans('general.insufficient_permissions'));
 
         $this->assertNotSoftDeleted($admin);
     }
@@ -112,7 +113,7 @@ class BulkDeleteUsersTest extends TestCase
         $this->attachAccessoryToUsers($accessoryA, [$userA, $userB, $userC]);
         $this->attachAccessoryToUsers($accessoryB, [$userA, $userB]);
 
-        $this->actingAs(User::factory()->editUsers()->create())
+        $this->actingAs(User::factory()->editUsers()->checkinAccessories()->create())
             ->post(route('users/bulksave'), [
                 'ids' => [
                     $userA->id,
@@ -141,7 +142,7 @@ class BulkDeleteUsersTest extends TestCase
         $lonelyAsset = $this->assignAssetToUser($userB);
         $assetForUserC = $this->assignAssetToUser($userC);
 
-        $this->actingAs(User::factory()->editUsers()->create())
+        $this->actingAs(User::factory()->editUsers()->checkinAssets()->create())
             ->post(route('users/bulksave'), [
                 'ids' => [
                     $userA->id,
@@ -196,7 +197,7 @@ class BulkDeleteUsersTest extends TestCase
         $lonelyLicenseSeat = LicenseSeat::factory()->assignedToUser($userB)->create();
         $licenseSeatForUserC = LicenseSeat::factory()->assignedToUser($userC)->create();
 
-        $this->actingAs(User::factory()->editUsers()->create())
+        $this->actingAs(User::factory()->editUsers()->checkinLicenses()->create())
             ->post(route('users/bulksave'), [
                 'ids' => [
                     $userA->id,
@@ -222,7 +223,7 @@ class BulkDeleteUsersTest extends TestCase
             'action_type' => 'checkin from',
             'target_id' => $userA->id,
             'target_type' => User::class,
-            'note' => 'Bulk checkin items',
+            'note' => 'Bulk checkin items on user bulk edit/delete',
             'item_type' => License::class,
             'item_id' => $licenseSeatForUserA->license->id,
         ]);
@@ -231,10 +232,102 @@ class BulkDeleteUsersTest extends TestCase
             'action_type' => 'checkin from',
             'target_id' => $userC->id,
             'target_type' => User::class,
-            'note' => 'Bulk checkin items',
+            'note' => 'Bulk checkin items on user bulk edit/delete',
             'item_type' => License::class,
             'item_id' => $licenseSeatForUserC->license->id,
         ]);
+    }
+
+    public function test_bulk_checkin_clears_pending_acceptances_for_the_selected_users()
+    {
+        $user = User::factory()->create();
+
+        $asset = $this->assignAssetToUser($user);
+        $licenseSeat = LicenseSeat::factory()->assignedToUser($user)->create();
+        $accessory = Accessory::factory()->create();
+        $consumable = Consumable::factory()->create();
+
+        $this->attachAccessoryToUsers($accessory, [$user]);
+        $this->attachConsumableToUsers($consumable, [$user]);
+
+        $acceptances = [
+            $this->pendingAcceptanceFor(Asset::class, $asset->id, $user),
+            $this->pendingAcceptanceFor(LicenseSeat::class, $licenseSeat->id, $user),
+            $this->pendingAcceptanceFor(Accessory::class, $accessory->id, $user),
+            $this->pendingAcceptanceFor(Consumable::class, $consumable->id, $user),
+        ];
+
+        $this->actingAs(User::factory()->editUsers()->checkinAssets()->checkinAccessories()->checkinLicenses()->create())
+            ->post(route('users/bulksave'), [
+                'ids' => [
+                    $user->id,
+                ],
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertRedirect(route('users.index'));
+
+        // Confirm the checkin actually happened, or the assertions below
+        // would pass against a request that bailed out early.
+        $this->assertTrue($user->fresh()->assets->isEmpty());
+        $this->assertTrue($user->fresh()->accessories->isEmpty());
+        $this->assertTrue($user->fresh()->consumables->isEmpty());
+
+        foreach ($acceptances as $acceptance) {
+            $this->assertAcceptanceWasSoftDeleted($acceptance);
+        }
+    }
+
+    public function test_bulk_checkin_leaves_untargeted_users_pending_acceptances_alone()
+    {
+        [$targeted, $untargeted] = User::factory()->count(2)->create();
+
+        $accessory = Accessory::factory()->create();
+        $this->attachAccessoryToUsers($accessory, [$targeted, $untargeted]);
+
+        $targetedAcceptance = $this->pendingAcceptanceFor(Accessory::class, $accessory->id, $targeted);
+        $untargetedAcceptance = $this->pendingAcceptanceFor(Accessory::class, $accessory->id, $untargeted);
+
+        $this->actingAs(User::factory()->editUsers()->checkinAccessories()->create())
+            ->post(route('users/bulksave'), [
+                'ids' => [
+                    $targeted->id,
+                ],
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertRedirect(route('users.index'));
+
+        $this->assertAcceptanceWasSoftDeleted($targetedAcceptance);
+        $this->assertAcceptanceSurvived($untargetedAcceptance);
+    }
+
+    public function test_bulk_checkin_leaves_answered_acceptances_alone()
+    {
+        $user = User::factory()->create();
+        $asset = $this->assignAssetToUser($user);
+
+        $accepted = CheckoutAcceptance::factory()->withoutActionLog()->accepted()->create([
+            'checkoutable_type' => Asset::class,
+            'checkoutable_id' => $asset->id,
+            'assigned_to_id' => $user->id,
+        ]);
+
+        $declined = CheckoutAcceptance::factory()->withoutActionLog()->declined()->create([
+            'checkoutable_type' => Asset::class,
+            'checkoutable_id' => $asset->id,
+            'assigned_to_id' => $user->id,
+        ]);
+
+        $this->actingAs(User::factory()->editUsers()->checkinAssets()->create())
+            ->post(route('users/bulksave'), [
+                'ids' => [
+                    $user->id,
+                ],
+                'status_id' => Statuslabel::factory()->create()->id,
+            ])
+            ->assertRedirect(route('users.index'));
+
+        $this->assertAcceptanceSurvived($accepted);
+        $this->assertAcceptanceSurvived($declined);
     }
 
     public function test_users_can_be_deleted_in_bulk()
@@ -281,13 +374,42 @@ class BulkDeleteUsersTest extends TestCase
         }
     }
 
+    private function pendingAcceptanceFor(string $checkoutableType, int $checkoutableId, User $user): CheckoutAcceptance
+    {
+        return CheckoutAcceptance::factory()->withoutActionLog()->pending()->create([
+            'checkoutable_type' => $checkoutableType,
+            'checkoutable_id' => $checkoutableId,
+            'assigned_to_id' => $user->id,
+        ]);
+    }
+
+    private function assertAcceptanceWasSoftDeleted(CheckoutAcceptance $acceptance): void
+    {
+        $this->assertNotNull(
+            CheckoutAcceptance::withTrashed()->find($acceptance->id)?->deleted_at,
+            'Expected the pending acceptance to be soft-deleted by the bulk checkin.'
+        );
+    }
+
+    private function assertAcceptanceSurvived(CheckoutAcceptance $acceptance): void
+    {
+        $this->assertNull(
+            CheckoutAcceptance::withTrashed()->find($acceptance->id)?->deleted_at,
+            'Expected this acceptance to be left alone by the bulk checkin.'
+        );
+    }
+
     private function assertActionLogCheckInEntryFor(User $user, Model $model): void
     {
+        $note = $model instanceof Accessory
+            ? 'Bulk checkin accessory on user bulk edit/delete'
+            : 'Bulk checkin items on user bulk edit/delete';
+
         $this->assertDatabaseHas('action_logs', [
             'action_type' => 'checkin from',
             'target_id' => $user->id,
             'target_type' => User::class,
-            'note' => 'Bulk checkin items',
+            'note' => $note,
             'item_type' => get_class($model),
             'item_id' => $model->id,
         ]);
@@ -299,7 +421,7 @@ class BulkDeleteUsersTest extends TestCase
             'action_type' => 'checkin from',
             'target_id' => $user->id,
             'target_type' => User::class,
-            'note' => 'Bulk checkin items',
+            'note' => 'Bulk checkin items on user bulk edit/delete',
             'item_type' => get_class($model),
             'item_id' => $model->id,
         ]);

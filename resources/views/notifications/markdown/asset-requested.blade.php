@@ -22,10 +22,10 @@
 | **{{ trans('general.category') }}** | {{ $item->model->category->name }} |
 @endif
 @if ((isset($item->name)) && ($item->name!=''))
-| **{{ trans('mail.asset_name') }}** | {{ $item->name }} |
+| **{{ trans('general.item_name') }}** | {{ $item->name }} |
 @endif
-@if (isset($item->assetstatus))
-| **{{ trans('general.status') }}** | {{ $item->assetstatus->name }}
+@if (isset($item->status))
+    | **{{ trans('general.status') }}** | {{ $item->status->name }}
 @endif
 @if ($item->assignedTo)
 | **{{ trans('general.checked_out_to') }}** | {!! $item->assignedTo->present()->nameUrl() !!} ({{ $item->present()->statusMeta }})
@@ -47,6 +47,12 @@
 @endif
 @if ((isset($expected_checkin)) && ($expected_checkin!=''))
 | **{{ trans('mail.expecting_checkin_date') }}** | {{ $expected_checkin }} |
+@endif
+@if ((isset($start_date)) && ($start_date!=''))
+| **{{ trans('general.start_date') }}** | {{ $start_date }} |
+@endif
+@if ((isset($end_date)) && ($end_date!=''))
+| **{{ trans('general.end_date') }}** | {{ $end_date }} |
 @endif
 @foreach($fields as $field)
 @if (($item->{ $field->db_column_name() }!='') && ($field->show_in_email) && ($field->field_encrypted=='0'))

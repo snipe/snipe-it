@@ -2,19 +2,21 @@
 
 return [
     'does_not_exist' => 'الشركة غير موجودة.',
-    'deleted'        => 'الشركة المحذوفة',
-    'assoc_users'    => 'هذه الشركة مرتبطة حاليا مع موديل ولا يمكن حذفها. رجاءً قم بتحديث الموديلات بحيث لا تكون مرتبطة بهذه الشركة ثم حاول مرة اُخرى. ',
+    'deleted' => 'الشركة المحذوفة',
+    'assoc_users' => 'هذه الشركة مرتبطة حاليا مع موديل ولا يمكن حذفها. رجاءً قم بتحديث الموديلات بحيث لا تكون مرتبطة بهذه الشركة ثم حاول مرة اُخرى. ',
     'create' => [
-        'error'   => 'لم يتم انشاء الشركة، الرجاء المحاولة مرة اُخرى.',
+        'error' => 'لم يتم انشاء الشركة، الرجاء المحاولة مرة اُخرى.',
         'success' => 'تم إنشاء الشركة بنجاح.',
     ],
     'update' => [
-        'error'   => 'لم يتم انشاء الشركة، الرجاء المحاولة مرة اُخرى',
+        'error' => 'لم يتم انشاء الشركة، الرجاء المحاولة مرة اُخرى',
         'success' => 'تم تحديث الشركة بنجاح.',
     ],
     'delete' => [
         'confirm' => 'هل أنت متأكد من رغبتك في حذف هذه الشركة؟',
-        'error'   => 'حدثت مشكلة اثناء عملية حذف الشركة. الرجاء المحاولة مرة اُخرى.',
+        'error' => 'حدثت مشكلة اثناء عملية حذف الشركة. الرجاء المحاولة مرة اُخرى.',
         'success' => 'تم حذف الشركة بنجاح.',
+        'bulk_success' => 'Company deleted successfully.|:count companies were deleted successfully.',
+        'partial_success' => 'Company deleted successfully. See additional information below. | :count companies were deleted successfully. See additional information below.',
     ],
 ];

@@ -3,16 +3,16 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Symfony\Component\Mime\Email;
 
-#[AllowDynamicProperties]
-class FirstAdminNotification extends Notification
+class FirstAdminNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private $_data = [];
+    public array $_data = [];
 
     /**
      * Create a new notification instance.
@@ -42,7 +42,7 @@ class FirstAdminNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail()
     {

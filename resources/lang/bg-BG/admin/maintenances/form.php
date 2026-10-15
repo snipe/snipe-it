@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Select Maintenance Type',
-        'asset_maintenance_type' => 'Тип на поддръжка на актив',
-        'title'                  => 'Титла',
-        'start_date'             => 'Начална дата',
-        'completion_date'        => 'Крайна дата',
-        'cost'                   => 'Стойност',
-        'is_warranty'            => 'Подобрение на гаранцията',
-        'asset_maintenance_time' => 'Време за поддръжка на актив (в дни)',
-        'notes'                  => 'Бележки',
-        'update'                 => 'Обнови поддръжката на актив',
-        'create'                 => 'Създаване на поддръжка на актив'
-    ];
+return [
+    'select_type' => 'Изберете тип поддръжка',
+    'asset_maintenance_type' => 'Тип',
+    'title' => 'Титла',
+    'start_date' => 'Начална дата',
+    'completion_date' => 'Expected Completion',
+    'cost' => 'Стойност',
+    'is_warranty' => 'Подобрение на гаранцията',
+    'asset_maintenance_time' => 'Duration',
+    'notes' => 'Бележки',
+    'update' => 'Обнови поддръжката на актив',
+    'create' => 'Създаване на поддръжка на актив',
+    'responsible_party' => 'Responsible Party',
+    'checked_out_to_at_creation' => 'Изписано на',
+    'completed_at' => 'Completed At',
+    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_by' => 'Completed By',
+    'mark_complete' => 'Mark Complete',
+    'already_complete' => 'Already Completed',
+    'completion_notes' => 'Completion Notes',
+];

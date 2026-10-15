@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Models\Import;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class ItemImportRequest extends FormRequest
@@ -33,8 +32,8 @@ class ItemImportRequest extends FormRequest
 
     public function import(Import $import)
     {
-        ini_set('max_execution_time', env('IMPORT_TIME_LIMIT', 600)); //600 seconds = 10 minutes
-        ini_set('memory_limit', env('IMPORT_MEMORY_LIMIT', '500M'));
+        ini_set('max_execution_time', config('importer.time_limit')); // 600 seconds = 10 minutes
+        ini_set('memory_limit', config('importer.memory_limit'));
 
         $filename = config('app.private_uploads').'/imports/'.$import->file_path;
         $import->import_type = $this->input('import-type');
@@ -42,7 +41,7 @@ class ItemImportRequest extends FormRequest
         $classString = "App\\Importer\\{$class}Importer";
         $importer = new $classString($filename);
         $import->field_map = request('column-mappings');
-        $import->created_by = auth()->id();
+        $import->created_by = $import->created_by ?? auth()->id();
         $import->save();
         $fieldMappings = [];
 
@@ -52,7 +51,7 @@ class ItemImportRequest extends FormRequest
 
                 if (is_null($fieldValue)) {
                     $errorMessage = trans('validation.import_field_empty', ['fieldname' => $field]);
-                    $this->errorCallback($import, $field, $errorMessage);
+                    $this->errorCallback($import, $field, [$field => [$errorMessage]]);
 
                     return $this->errors;
                 }
@@ -61,14 +60,49 @@ class ItemImportRequest extends FormRequest
             $fieldMappings = array_change_key_case(array_flip($import->field_map), CASE_LOWER);
         }
         $importer->setCallbacks([$this, 'log'], [$this, 'progress'], [$this, 'errorCallback'])
-                 ->setCreatedBy(auth()->id())
-                 ->setUpdating($this->input('import-update'))
-                 ->setShouldNotify($this->input('send-welcome'))
-                 ->setUsernameFormat('firstname.lastname')
-                 ->setFieldMappings($fieldMappings);
-        $importer->import();
+            ->setCreatedBy(auth()->id())
+            ->setUpdating($this->input('import-update'))
+            ->setShouldNotify($this->input('send-welcome'))
+            ->setUsernameFormat('firstname.lastname')
+            ->setFieldMappings($fieldMappings);
+
+        // "Skip updating fields with blank cells" opts out of the default
+        // clear-DB-on-blank behavior so an empty cell in the CSV keeps
+        // whatever value is already in the DB column. Only the update path
+        // is affected. New-row inserts ignore the flag entirely. See
+        // ItemImporter::$rejectEmptyOnUpdate.
+        if ($importer instanceof \App\Importer\ItemImporter) {
+            $importer->setRejectEmptyOnUpdate((bool) $this->input('import-preserve-blanks'));
+        }
+
+        // Matcher options only apply to the asset history importer, which
+        // resolves rows to existing users by name (not by creating new
+        // users). Any other importer ignores these switches.
+        if ($importer instanceof \App\Importer\AssetHistoryImporter) {
+            $importer->setMatchUsername((bool) $this->input('match_username'))
+                ->setMatchEmail((bool) $this->input('match_email'))
+                ->setMatchFirstnameLastname((bool) $this->input('match_firstnamelastname'))
+                ->setMatchFlastname((bool) $this->input('match_flastname'))
+                ->setMatchFirstname((bool) $this->input('match_firstname'));
+        }
+
+        // Sliced import: caller passes offset+limit for chunked
+        // processing (large-CSV timeout workaround). Each slice is its
+        // own Importer::import() call and therefore its own DB
+        // transaction, so a failure in one slice rolls back only that
+        // slice. Both params null = original all-at-once behavior.
+        $offset = $this->filled('offset') ? (int) $this->input('offset') : null;
+        $limit = $this->filled('limit') ? (int) $this->input('limit') : null;
+
+        $importer->import($offset, $limit);
+        $this->tally = $importer->getTally();
 
         return $this->errors;
+    }
+
+    public function getTally(): array
+    {
+        return $this->tally ?? ['created' => 0, 'updated' => 0, 'skipped' => 0, 'errored' => 0];
     }
 
     public function log($string)
@@ -87,4 +121,6 @@ class ItemImportRequest extends FormRequest
     }
 
     private $errors;
+
+    private array $tally;
 }

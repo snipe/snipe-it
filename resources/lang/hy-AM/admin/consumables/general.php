@@ -1,0 +1,15 @@
+<?php
+
+return [
+    'checkout' => 'Տրամադրել սպառվող նյութը օգտագործման համար',
+    'consumable_name' => 'Սպառվող նյութի անվանումը',
+    'create' => 'Ստեղծել նոր սպառվող նյութ',
+    'item_no' => 'Տարր համար։',
+    'remaining' => 'Մնացած',
+    'total' => 'Ընդհանուր',
+    'update' => 'Թարմացնել սպառվող նյութ',
+    'inventory_warning' => 'Այս սպառվող նյութի պաշարը նվազ է նվազագույն՝ :min_count քանակից։',
+    'exclude_deleted' => 'Exclude Deleted Consumables',
+    'include_deleted' => 'Include Deleted Consumables',
+    'only_deleted' => 'Only Deleted Consumables',
+];

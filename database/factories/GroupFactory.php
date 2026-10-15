@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class GroupFactory extends Factory
@@ -10,7 +11,7 @@ class GroupFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<Group>
      */
     protected $model = Group::class;
 
@@ -22,9 +23,10 @@ class GroupFactory extends Factory
     public function definition()
     {
         return [
+            'created_by' => User::factory()->superuser(),
             'name' => $this->faker->name(),
+            'notes' => 'Created by DB seeder',
             'permissions' => json_encode([]),
-            'notes'   => 'Created by DB seeder',
         ];
     }
 }

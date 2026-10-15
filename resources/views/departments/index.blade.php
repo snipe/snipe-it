@@ -8,33 +8,29 @@
 
 {{-- Page content --}}
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-body">
-                        <table
-                                data-columns="{{ \App\Presenters\DepartmentPresenter::dataTableLayout() }}"
-                                data-cookie-id-table="departmentsTable"
-                                data-id-table="departmentsTable"
-                                data-side-pagination="server"
-                                data-sort-order="asc"
-                                id="departmentsTable"
-                                data-advanced-search="false"
-                                data-buttons="departmentButtons"
-                                class="table table-striped snipe-table"
-                                data-url="{{ route('api.departments.index') }}"
-                                data-export-options='{
-                              "fileName": "export-departments-{{ date('Y-m-d') }}",
-                              "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                              }'>
+    <x-container>
+        <x-box name="department" sr_only_title>
 
-                        </table>
-                </div>
-            </div>
-        </div>
-    </div>
+            <x-slot:table_header>{{ trans('general.departments') }}</x-slot:table_header>
 
+            <x-slot:bulkactions>
+                <x-table.bulk-departments />
+            </x-slot:bulkactions>
+
+            <x-table
+                    name="department"
+                    show_column_search="false"
+                    buttons="departmentButtons"
+                    fixed_right_number="1"
+                    fixed_number="1"
+                    api_url="{{ route('api.departments.index') }}"
+                    :presenter="\App\Presenters\DepartmentPresenter::dataTableLayout()"
+                    export_filename="export-departments-{{ date('Y-m-d') }}"
+            />
+        </x-box>
+    </x-container>
 @stop
+
 
 @section('moar_scripts')
     @include ('partials.bootstrap-table')

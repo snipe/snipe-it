@@ -11,7 +11,7 @@ class DepreciationFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<Depreciation>
      */
     protected $model = Depreciation::class;
 
@@ -23,9 +23,9 @@ class DepreciationFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->catchPhrase(),
             'created_by' => User::factory()->superuser(),
             'months' => 36,
+            'name' => $this->faker->unique()->catchPhrase(),
         ];
     }
 

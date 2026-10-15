@@ -3,30 +3,35 @@
 return [
 
     'update' => [
-        'error'                 => 'Terdapat kesalahan ketika proses pembaharuan. ',
-        'success'               => 'Sukses perbarui pengaturan.',
+        'error' => 'Terdapat kesalahan ketika proses pembaharuan. ',
+        'success' => 'Sukses perbarui pengaturan.',
     ],
     'backup' => [
-        'delete_confirm'        => 'Apakah anda yakin menghapus berkas cadangan ini? Tindakan ini tidak dapat di batalkan. ',
-        'file_deleted'          => 'Sukses menghapus Berkas cadangan. ',
-        'generated'             => 'Sukses membuat cadangan baru.',
-        'file_not_found'        => 'Berkas cadangan tidak ditemukan di server.',
-        'restore_warning'       => 'Ya, pulihkan. Saya mengerti bahwa ini akan menimpa data yang ada saat ini di database. Ini juga akan mengeluarkan semua pengguna yang ada (termasuk Anda).',
-        'restore_confirm'       => 'Apakah Anda yakin ingin memulihkan database Anda dari :filename?'
+        'delete_confirm' => 'Apakah anda yakin menghapus berkas cadangan ini? Tindakan ini tidak dapat di batalkan. ',
+        'file_deleted' => 'Sukses menghapus Berkas cadangan. ',
+        'generated' => 'Sukses membuat cadangan baru.',
+        'file_not_found' => 'Berkas cadangan tidak ditemukan di server.',
+        'restore_warning' => 'Ya, pulihkan. Saya mengerti bahwa ini akan menimpa data yang ada saat ini di database. Ini juga akan mengeluarkan semua pengguna yang ada (termasuk Anda).',
+        'restore_confirm' => 'Apakah Anda yakin ingin memulihkan database Anda dari :filename?',
+        'delete_disabled_help' => 'Deleting backups is disabled. Contact your administrator if you wish to enable deleting backups.',
     ],
     'restore' => [
-        'success'               => 'Cadangan sistem Anda telah dipulihkan. Silakan masuk kembali.'
+        'success' => 'Cadangan sistem Anda telah dipulihkan. Silakan masuk kembali.',
+        'archive_invalid' => 'The selected backup file (:filename) is not a valid zip archive. Restore aborted before touching the database.',
+        'zip_extension_missing' => 'PHP zip extension is not loaded on this server. Cannot validate the backup archive, and restore has been aborted to prevent data loss. Ask your server administrator to install ext-zip.',
+        'pre_backup_failed' => 'Could not create a pre-restore safety backup. Restore aborted so that the existing database is not destroyed without a recovery path.',
+        'failed_with_backup' => 'Restore failed. The pre-existing database was wiped as part of the restore attempt, but a pre-restore backup was saved to :backup and can be used to recover.',
     ],
     'purge' => [
-        'error'     => 'Terdapat kesalahan ketika proses pembersihan. ',
-        'validation_failed'     => 'Konfirmasi pembersihan anda tidak tepat. Silahkan ketikan kata "DELETE" di kotak konfirmasi.',
-        'success'               => 'Sukses melakukan pembersihan data yang terhapus.',
+        'error' => 'Terdapat kesalahan ketika proses pembersihan. ',
+        'validation_failed' => 'Konfirmasi pembersihan anda tidak tepat. Silahkan ketikan kata "DELETE" di kotak konfirmasi.',
+        'success' => 'Sukses melakukan pembersihan data yang terhapus.',
     ],
     'mail' => [
         'sending' => 'Mengirim Email Uji...',
         'success' => 'Email terkirim!',
         'error' => 'Email gagal dikirim.',
-        'additional' => 'Tidak ada pesan kesalahan tambahan yang diberikan. Periksa pengaturan email dan log aplikasi Anda.'
+        'additional' => 'Tidak ada pesan kesalahan tambahan yang diberikan. Periksa pengaturan email dan log aplikasi Anda.',
     ],
     'ldap' => [
         'testing' => 'Menguji Koneksi, Pengikatan & Kueri LDAP...',
@@ -34,11 +39,11 @@ return [
         'error' => 'Terjadi kesalahan :(',
         'sync_success' => 'Contoh 10 pengguna yang dikembalikan dari server LDAP berdasarkan pengaturan Anda:',
         'testing_authentication' => 'Menguji Autentikasi LDAP...',
-        'authentication_success' => 'Pengguna berhasil diautentikasi terhadap LDAP!'
+        'authentication_success' => 'Pengguna berhasil diautentikasi terhadap LDAP!',
     ],
     'labels' => [
         'null_template' => 'Label template not found. Please select a template.',
-        ],
+    ],
     'webhook' => [
         'sending' => 'Mengirim pesan uji :app...',
         'success' => 'Integrasi :webhook_name Anda berfungsi!',
@@ -55,5 +60,22 @@ return [
     'location_scoping' => [
         'not_saved' => 'Your settings were not saved.',
         'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+    'oauth' => [
+        'token_revoked' => 'Personal access token revoked successfully.',
+        'token_unrevoked' => 'Personal access token reinstated successfully.',
+        'token_not_found' => 'That personal access token could not be found.',
+        'token_revoke_error' => 'An error occurred while revoking the token.',
+        'token_unrevoke_error' => 'An error occurred while reinstating the token.',
+        'client_created' => 'OAuth client created successfully.',
+        'client_updated' => 'OAuth client updated successfully.',
+        'client_deleted' => 'OAuth client deleted successfully.',
+        'client_revoked' => 'OAuth client revoked successfully.',
+        'client_unrevoked' => 'OAuth client reinstated successfully.',
+        'client_not_found' => 'That OAuth client could not be found.',
+        'token_deleted' => 'Token revoked successfully.',
+        'client_delete_denied' => 'You are not authorized to delete this client.',
+        'client_edit_denied' => 'You are not authorized to edit this client.',
+        'token_delete_denied' => 'You are not authorized to revoke this token.',
     ],
 ];

@@ -3,22 +3,77 @@
 namespace App\Http\Middleware;
 
 use App\Models\Setting;
-use Illuminate\Support\Facades\Auth;
 use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckForTwoFactor
 {
     /**
-     * Routes to ignore for Two Factor Auth
+     * Routes to ignore for Two Factor Auth.
+     *
+     * `storage-proxy` is on the list because the /storage-proxy/{path}
+     * route serves the "public" filesystem disk (branding logos, user
+     * avatars, model images) which pages like /two-factor-enroll
+     * reference via `<img src="…">`. Without the exemption, the
+     * browser's image fetches on those pre-2FA-complete pages get
+     * redirected here to /two-factor-enroll (broken images) AND
+     * clobber redirect()->setIntendedUrl() with the storage-proxy URL,
+     * so redirect()->intended() after MFA sends the user to the logo
+     * URL instead of the dashboard. Content on the public disk is
+     * public by design, so bypassing 2FA on this route is safe. See
+     * issue #19457.
      */
-    public const IGNORE_ROUTES = ['two-factor', 'two-factor-enroll', 'setup', 'logout'];
+    public const IGNORE_ROUTES = ['two-factor', 'two-factor-enroll', 'setup', 'logout', 'storage-proxy'];
+
+    /**
+     * Whether the *session* attached to this request has cleared 2FA — i.e.
+     * the user is allowed to act beyond the password+2FA-prompt screens.
+     *
+     * Sharing this check lets other middleware (the Passport cookie issuer)
+     * and the API-token endpoints refuse to mint or expose tokens for a
+     * password-only session that never entered a 2FA code. Without it a
+     * session that landed on /two-factor (which is in IGNORE_ROUTES) could
+     * pick up the Passport cookie, hit POST /api/v1/account/personal-access-
+     * tokens and walk away with a long-lived bearer token.
+     */
+    public static function isComplete(Request $request): bool
+    {
+        if (! Auth::check()) {
+            return true;
+        }
+
+        $settings = Setting::getSettings();
+        if (! $settings) {
+            return true;
+        }
+
+        // Normalize to the only two "on" values (optional/required). Anything
+        // else — '', '0', null, the integer 0 SQLite occasionally hands back
+        // for an empty tinyInteger column — counts as disabled. Loose `== ''`
+        // would miscount '0' as enabled under PHP 8's stricter comparison
+        // rules and trigger spurious 403s, which is how this manifested on
+        // CI's SQLite even though local SQLite stored the value as ''.
+        $mode = (string) $settings->two_factor_enabled;
+        if ($mode !== '1' && $mode !== '2') {
+            return true;
+        }
+
+        // 2FA is optional and this user has not opted in.
+        if ($mode === '1' && auth()->user()->two_factor_optin != '1') {
+            return true;
+        }
+
+        // 2FA required (or opted in): session must carry the authed marker
+        // set by Auth\TwoFactorAuthController after a valid code is entered.
+        return $request->hasSession()
+            && $request->session()->get('2fa_authed') == auth()->id();
+    }
 
     /**
      * Handle an incoming request.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure                 $next
-     *
+     * @param  Request  $request
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -38,7 +93,7 @@ class CheckForTwoFactor
         if ($settings = Setting::getSettings()) {
             if (Auth::check() && ($settings->two_factor_enabled != '')) {
                 // This user is already 2fa-authed
-                if ($request->session()->get('2fa_authed')==auth()->id()) {
+                if ($request->session()->get('2fa_authed') == auth()->id()) {
                     return $next($request);
                 }
 
@@ -47,6 +102,7 @@ class CheckForTwoFactor
                     return $next($request);
                 }
 
+                redirect()->setIntendedUrl(url()->full()); // save the 'current' URL so we can send the user back to it?
                 // Otherwise make sure they're enrolled and show them the 2FA code screen
                 if ((auth()->user()->two_factor_secret != '') && (auth()->user()->two_factor_enrolled == '1')) {
                     return redirect()->route('two-factor')->with('info', trans('auth/message.two_factor.enter_two_factor_code'));

@@ -1,0 +1,68 @@
+<?php
+
+namespace Tests\Feature\QrCode;
+
+use App\Models\Asset;
+use App\Models\Setting;
+use App\Models\User;
+use Tests\TestCase;
+
+
+class QrCodeExistenceOracleTest extends TestCase
+{
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // QR generation is a no-op when label2_2d_type === 'none'.
+        // Force a real value so the controller reaches the auth check
+        // (rather than short-circuiting with `return false` on the
+        // settings guard). The test never actually renders a barcode
+        // because the auth / policy branches all abort before then.
+        Setting::factory()->create(['label2_2d_type' => 'QRCODE']);
+    }
+
+    public function test_anonymous_request_redirects_to_login_for_both_existing_and_missing_ids(): void
+    {
+        $asset = Asset::factory()->create();
+
+        // No differential possible if both requests are absorbed by
+        // the `auth` middleware and produce identical redirects.
+        $existing = $this->get(route('qr_code/common', ['object_type' => 'assets', 'id' => $asset->id]));
+        $missing = $this->get(route('qr_code/common', ['object_type' => 'assets', 'id' => $asset->id + 999_999]));
+
+        $existing->assertRedirect(route('login'));
+        $missing->assertRedirect(route('login'));
+        $this->assertSame($existing->status(), $missing->status(), 'Anonymous responses must not vary by whether the id exists.');
+    }
+
+    public function test_authenticated_but_unauthorized_user_gets_uniform_404_regardless_of_id_existence(): void
+    {
+        // Viewer with a fully empty permission blob, so the `view`
+        // policy denies for every asset regardless of ownership.
+        $viewer = User::factory()->create();
+        $asset = Asset::factory()->create();
+
+        $existing = $this->actingAs($viewer)->get(route('qr_code/common', ['object_type' => 'assets', 'id' => $asset->id]));
+        $missing = $this->actingAs($viewer)->get(route('qr_code/common', ['object_type' => 'assets', 'id' => $asset->id + 999_999]));
+
+        $existing->assertStatus(404);
+        $missing->assertStatus(404);
+        $this->assertSame(
+            $existing->getContent(),
+            $missing->getContent(),
+            'Existing-but-denied and missing responses must be byte-identical so no oracle exists.',
+        );
+    }
+
+    public function test_unknown_object_type_returns_the_same_uniform_404(): void
+    {
+        // The route's regex-constrained `object_type` param would
+        // normally 404 at the router for a garbage type. Pin the
+        // behavior explicitly so a future route-regex loosening does
+        // not silently re-expose an oracle via "unknown type" branch.
+        $viewer = User::factory()->create();
+
+        $bogus = $this->actingAs($viewer)->get('/nonsense/1/qr_code');
+        $bogus->assertStatus(404);
+    }
+}

@@ -13,29 +13,41 @@
                 {{ ((isset($multiple)) && ($multiple === true)) ? ' multiple' : '' }}
                 {!! (!empty($asset_status_type)) ? ' data-asset-status-type="' . $asset_status_type . '"' : '' !!}
                 {!! (!empty($company_id)) ? ' data-company-id="' .$company_id.'"'  : '' !!}
+                {!! (!empty($exclude_id)) ? ' data-exclude-id="'.e($exclude_id).'"' : '' !!}
                 {{  ((isset($required) && ($required =='true'))) ?  ' required' : '' }}
         >
 
             @if ((!isset($unselect)) && ($asset_id = old($fieldname, (isset($asset) ? $asset->id  : (isset($item) ? $item->{$fieldname} : '')))))
-                <option value="{{ $asset_id }}" selected="selected" role="option" aria-selected="true"  role="option">
-                    {{ (\App\Models\Asset::find($asset_id)) ? \App\Models\Asset::find($asset_id)->present()->fullName : '' }}
-                </option>
+                @if ($asset = \App\Models\Asset::with('model')->find($asset_id))
+                    <option value="{{ $asset->id }}" selected="selected" role="option" aria-selected="true">
+                        {{ $asset->present()->fullName }}
+                    </option>
+                @endif
             @else
                 @if(!isset($multiple))
                     <option value=""  role="option">{{ trans('general.select_asset') }}</option>
                 @else
                     @if(isset($asset_ids))
                         @foreach($asset_ids as $asset_id)
-                            <option value="{{ $asset_id }}" selected="selected" role="option" aria-selected="true"
-                                    role="option">
-                                {{ (\App\Models\Asset::find($asset_id)) ? \App\Models\Asset::find($asset_id)->present()->fullName : '' }}
-                            </option>
+                            @if ($asset = \App\Models\Asset::with('model')->find($asset_id))
+                                <option value="{{ $asset->id }}" selected="selected" role="option" aria-selected="true">
+                                    {{ $asset->present()->fullName }}
+                                </option>
+                            @endif
                         @endforeach
                     @endif
                 @endif
             @endif
         </select>
     </div>
-    {!! $errors->first($fieldname, '<div class="col-md-8 col-md-offset-3"><span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span></div>') !!}
+    @if ($snipeSettings->full_multiple_companies_support == '1')
+        @cannot('superadmin')
+            <div class="col-md-7 col-md-offset-3">
+                <p class="help-block"><x-icon type="tip" /> {{ trans('general.fmcs_select_note') }}</p>
+            </div>
+        @endcannot
+    @endif
+
+    <div class="col-md-8 col-md-offset-3"><x-form.error :name="$fieldname" /></div>
 
 </div>

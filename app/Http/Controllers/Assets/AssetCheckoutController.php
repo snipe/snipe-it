@@ -2,37 +2,42 @@
 
 namespace App\Http\Controllers\Assets;
 
+use App\Actions\Acceptances\CreateCheckoutAcceptanceAction;
 use App\Exceptions\CheckoutNotAllowed;
 use App\Helpers\Helper;
-use App\Http\Controllers\CheckInOutRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetCheckoutRequest;
+use App\Http\Traits\CheckInOutTrait;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
+use App\Models\CheckoutRequest;
+use App\Models\User;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\Session;
-use \Illuminate\Contracts\View\View;
-use \Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AssetCheckoutController extends Controller
 {
-    use CheckInOutRequest;
+    use CheckInOutTrait;
 
     /**
      * Returns a view that presents a form to check an asset out to a
      * user.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $assetId
+     *
      * @since [v1.0]
-     * @return \Illuminate\Contracts\View\View
+     *
+     * @return View
      */
-    public function create(Asset $asset) : View | RedirectResponse
+    public function create(Request $request, Asset $asset): View|RedirectResponse
     {
 
         $this->authorize('checkout', $asset);
 
-        if (!$asset->model) {
+        if (! $asset->model) {
             return redirect()->route('hardware.show', $asset)
                 ->with('error', trans('admin/hardware/general.model_invalid_fix'));
         }
@@ -41,15 +46,34 @@ class AssetCheckoutController extends Controller
         $asset->setRules($asset->getRules() + $asset->customFieldValidationRules());
 
         if ($asset->isInvalid()) {
-            return redirect()->route('hardware.edit', $asset)->withErrors($asset->getErrors());
+            // Also flash the specific validation messages via
+            // multi_error_messages so they surface in the top alert
+            // on the edit page. See the matching block in
+            // AssetCheckinController::create() for the reasoning.
+            return redirect()->route('hardware.edit', $asset)
+                ->withErrors($asset->getErrors())
+                ->with('multi_error_messages', $asset->getErrors()->all());
         }
 
-        
         if ($asset->availableForCheckout()) {
+            // Optional ?request_id hint. Present when the admin
+            // reached this screen from a /requests row. Drives the
+            // side-panel context box (who asked + waiting list).
+            // CheckoutRequest::contextForCheckout handles the URL-
+            // twiddle guards; a miss returns nulls / empty so the
+            // panel renders nothing.
+            $context = CheckoutRequest::contextForCheckout(
+                $request->integer('request_id') ?: null,
+                Asset::class,
+                $asset->id,
+            );
+
             return view('hardware/checkout', compact('asset'))
                 ->with('statusLabel_list', Helper::deployableStatusLabelList())
                 ->with('table_name', 'Assets')
-                ->with('item', $asset);
+                ->with('item', $asset)
+                ->with('checkoutRequest', $context['checkoutRequest'])
+                ->with('otherPendingRequests', $context['otherPendingRequests']);
         }
 
         return redirect()->route('hardware.index')
@@ -60,12 +84,11 @@ class AssetCheckoutController extends Controller
      * Validate and process the form data to check out an asset to a user.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param AssetCheckoutRequest $request
+     *
      * @since [v1.0]
      */
-    public function store(AssetCheckoutRequest $request, $assetId) : RedirectResponse
+    public function store(AssetCheckoutRequest $request, $assetId): RedirectResponse
     {
-
 
         try {
             // Check if the asset exists
@@ -76,14 +99,33 @@ class AssetCheckoutController extends Controller
             }
             $this->authorize('checkout', $asset);
 
-            if (!$asset->model) {
+            if (! $asset->model) {
                 return redirect()->route('hardware.show', $asset)->with('error', trans('admin/hardware/general.model_invalid_fix'));
             }
 
             $admin = auth()->user();
 
             $target = $this->determineCheckoutTarget();
-            session()->put(['checkout_to_type' => $target]);
+
+            // Company-boundary gate has to fire before any DB write. The
+            // updateAssetLocation() helper mass-updates child assets'
+            // location_id when the target is a location, and the license-seat
+            // loop below persists $seat->assigned_to = $target->id. Both are
+            // real writes with nothing to roll them back if canCheckoutTo
+            // subsequently rejects a cross-company target.
+            if (! $asset->canCheckoutTo($target)) {
+                $targetType = match (class_basename($target)) {
+                    'User' => trans('general.user'),
+                    'Location' => trans('general.location'),
+                    default => trans('general.asset'),
+                };
+
+                return redirect()->route('hardware.checkout.create', $asset)->with('error', trans('general.error_checkout_company_mismatch', [
+                    'item' => trans('general.asset').' "'.$asset->display_name.'"',
+                    'item_company' => $asset->company?->name ?? trans('general.unassigned'),
+                    'target' => $targetType.' "'.($target->name ?? $target->username ?? $target->id).'"',
+                ]));
+            }
 
             $asset = $this->updateAssetLocation($asset, $target);
 
@@ -101,10 +143,15 @@ class AssetCheckoutController extends Controller
                 $asset->status_id = $request->input('status_id');
             }
 
+            // Two-way toggle: checked = requestable, unchecked (or absent) =
+            // not. The form pre-populates the checkbox with the asset's current
+            // state so users can flip either direction (e.g. mark "no longer
+            // requestable" during checkout because the item is now assigned).
+            $asset->requestable = $request->boolean('requestable');
 
-            if(!empty($asset->licenseseats->all())){
-                if(request('checkout_to_type') == 'user') {
-                    foreach ($asset->licenseseats as $seat){
+            if (! empty($asset->licenseseats->all())) {
+                if (request('checkout_to_type') == 'user') {
+                    foreach ($asset->licenseseats as $seat) {
                         $seat->assigned_to = $target->id;
                         $seat->save();
                     }
@@ -114,25 +161,75 @@ class AssetCheckoutController extends Controller
             // Add any custom fields that should be included in the checkout
             $asset->customFieldsForCheckinCheckout('display_checkout');
 
-            $settings = \App\Models\Setting::getSettings();
+            session()->put([
+                'redirect_option' => $request->input('redirect_option'),
+                'checkout_to_type' => $request->input('checkout_to_type'),
+                'sign_in_place' => $request->boolean('sign_in_place'),
+            ]);
 
-            // We have to check whether $target->company_id is null here since locations don't have a company yet
-            if (($settings->full_multiple_companies_support) && ((!is_null($target->company_id)) &&  (!is_null($asset->company_id)))) {
-                if ($target->company_id != $asset->company_id){
-                    return redirect()->route('hardware.checkout.create', $asset)->with('error', trans('general.error_user_company'));
+            // Concurrency guard. availableForCheckout() above ran on an
+            // unlocked read, so two simultaneous form submits can both
+            // observe the asset as available and both proceed through
+            // checkOut(), producing duplicate checkout-history rows and
+            // double-incrementing checkout_counter on a single-assignment
+            // asset. Re-fetch the row under lockForUpdate INSIDE a
+            // transaction and re-check availability against the locked
+            // snapshot; the second request blocks until the first commits
+            // and then sees the asset as no longer available. Mirrors the
+            // pattern in Api\AssetsController::checkout and
+            // ConsumablesController::store (GHSA-x4g2-87xc-m5jm).
+            $checkedOut = DB::transaction(function () use ($asset, $target, $admin, $checkout_at, $expected_checkin, $request): bool {
+                $locked = Asset::whereKey($asset->id)->lockForUpdate()->first();
+                if (! $locked || ! $locked->availableForCheckout()) {
+                    return false;
                 }
-            }
 
-            session()->put(['redirect_option' => $request->input('redirect_option'), 'checkout_to_type' => $request->input('checkout_to_type')]);
+                return (bool) $asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->input('note'), $request->input('name'), null, $request->boolean('sign_in_place'));
+            });
 
-            if ($asset->checkOut($target, $admin, $checkout_at, $expected_checkin, $request->input('note'), $request->input('name'))) {
+            if ($checkedOut) {
+
+                // When sign_in_place is requested and the target is a user, redirect to the
+                // acceptance/signature page so the user can sign in person. The signature is
+                // attributed to the target user, not the admin.
+                if ($request->boolean('sign_in_place') && $target instanceof User) {
+                    $acceptance = CheckoutAcceptance::where('checkoutable_type', Asset::class)
+                        ->where('checkoutable_id', $asset->id)
+                        ->where('assigned_to_id', $target->id)
+                        ->pending()
+                        ->latest()
+                        ->first();
+
+                    // If requireAcceptance() is false the listener won't have created one; create it now.
+                    if (! $acceptance) {
+                        $acceptance = CreateCheckoutAcceptanceAction::run($asset, $target);
+                    }
+
+                    session([
+                        'sign_in_place_acceptance_id' => $acceptance->id,
+                        'sign_in_place_item_id' => $asset->id,
+                        'sign_in_place_resource_type' => 'Assets',
+                    ]);
+
+                    return redirect()->route('account.accept.item', $acceptance->id)
+                        ->with('success', trans('admin/hardware/message.checkout.success'));
+                }
+
                 return Helper::getRedirectOption($request, $asset->id, 'Assets')
                     ->with('success', trans('admin/hardware/message.checkout.success'));
             }
-            // Redirect to the asset management page with error
-            return redirect()->route("hardware.checkout.create", $asset)->with('error', trans('admin/hardware/message.checkout.error').$asset->getErrors());
+
+            // Redirect back to the checkout form with the specific
+            // validation messages surfaced via multi_error_messages
+            // (replaces the previous stringified MessageBag concat).
+            return redirect()->route('hardware.checkout.create', $asset)
+                ->with('error', trans('admin/hardware/message.checkout.error'))
+                ->with('multi_error_messages', $asset->getErrors()->all());
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', trans('admin/hardware/message.checkout.error'))->withErrors($asset->getErrors());
+            return redirect()->back()
+                ->with('error', trans('admin/hardware/message.checkout.error'))
+                ->withErrors($asset->getErrors())
+                ->with('multi_error_messages', $asset->getErrors()->all());
         } catch (CheckoutNotAllowed $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

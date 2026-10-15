@@ -23,7 +23,7 @@
                             <div class="row">
 
                                 <!-- Notifications -->
-                                @include('notifications')
+                                <x-notifications />
 
 
 
@@ -34,7 +34,7 @@
 
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="username" value="{{ old('username', $username) }}">
-                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+                                            <x-form.error name="username" />
 
                             </div>
                         </div>
@@ -47,7 +47,7 @@
 
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password" aria-label="password">
-                                {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                <x-form.error name="password" />
                             </div>
                         </div>
 
@@ -57,7 +57,7 @@
                                 {{ trans('admin/users/table.password_confirm')  }}</label>
                             <div class="col-md-6">
                                 <input type="password" class="form-control" name="password_confirmation" aria-label="password_confirmation">
-                                {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                <x-form.error name="password_confirmation" />
 
                             </div>
                         </div>

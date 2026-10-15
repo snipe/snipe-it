@@ -42,20 +42,55 @@ $(function () {
 
       $('#createModal').load(link.attr('href'),function () {
 
-          // this sets the focus to be the name field
-          $('#modal-name').focus();
-          
+          // Focus the first visible, non-hidden input regardless of
+          // which modal partial was loaded (user, company, category,
+          // etc. all differ on which id the "first" field has). The
+          // legacy `#modal-name` selector worked for some modals and
+          // silently missed for others. A generic first-input selector
+          // covers every partial without per-modal code.
+          $('#createModal').find('input:visible:not([type=hidden])').first().focus();
+
+          // Wire up the password generator button when the loaded
+          // modal is one that includes it (user create). Relocated here
+          // from an inline <script> block in modals/user.blade.php as
+          // part of the Vite migration prep to remove per-partial
+          // inline JS. The setTimeout the inline version used to defer
+          // this is no longer needed because we're inside .load()'s
+          // completion callback, which fires AFTER the DOM is ready.
+          if ($('#modal-genPassword').length && $('#modal-password').length) {
+              $('#modal-genPassword').pGenerator({
+                  'bind': 'click',
+                  'passwordElement': '#modal-password',
+                  'passwordLength': 16,
+                  'uppercase': true,
+                  'lowercase': true,
+                  'numbers': true,
+                  'specialChars': true,
+                  'onPasswordGenerated': function () {
+                      $('#modal-password_confirmation').val($('#modal-password').val());
+                  }
+              });
+          }
+
         //do we need to re-select2 this, after load? Probably.
         $('#createModal').find('select.select2').select2();
         // Initialize the ajaxy select2 with images.
         // This is a copy/paste of the code from snipeit.js, would be great to only have this in one place.
 
-        $('.js-data-ajax').each( function (i,item) {
+        // Scoped to #createModal so re-initialization only touches newly-loaded
+        // modal selects, not every js-data-ajax on the host page. Unscoped
+        // .each() clobbers the trigger page's existing select2 state (e.g. the
+        // Location picker whose "New" button opened this modal).
+        $('#createModal .js-data-ajax').each( function (i,item) {
             var link = $(item);
             var endpoint = link.data("endpoint");
             var select = link.data("select");
 
             link.select2({
+                // Explicit width because the modal is mid-animation when
+                // this runs, so measuring the parent's computed width
+                // returns 0 and the widget renders zero-pixels wide.
+                width: '100%',
                 ajax: {
 
                     // the baseUrl includes a trailing slash
@@ -70,7 +105,7 @@ $(function () {
                         var data = {
                             search: params.term,
                             page: params.page || 1,
-                            assetStatusType: link.data("asset-status-type"),
+                            statusType: link.data("asset-status-type"),
                         };
                         return data;
                     },
@@ -98,9 +133,7 @@ $(function () {
 
   });
 
- 
-
-  $('#createModal').on('click','#modal-save', function () {
+    $('#createModal').on('click','#modal-save', function () {
     $.ajax({
         type: 'POST',
         url: $('.modal-body form').attr('action'),

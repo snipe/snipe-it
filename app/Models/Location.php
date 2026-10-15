@@ -2,48 +2,60 @@
 
 namespace App\Models;
 
+use App\Enums\FileStorage;
 use App\Http\Traits\UniqueUndeletedTrait;
+use App\Models\Builders\LocationQueryBuilder;
 use App\Models\Traits\CompanyableTrait;
 use App\Models\Traits\HasUploads;
 use App\Models\Traits\Loggable;
 use App\Models\Traits\Searchable;
+use App\Presenters\LocationPresenter;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperLocation
+ */
 class Location extends SnipeModel
 {
-    use HasFactory;
     use CompanyableTrait;
-    use Loggable;
-
-    protected $presenter = \App\Presenters\LocationPresenter::class;
-    use Presentable;
-    use SoftDeletes;
+    use HasFactory;
     use HasUploads;
+    use Loggable;
+    use Presentable;
+    use Searchable;
+    use SoftDeletes;
+    use UniqueUndeletedTrait;
+    use ValidatingTrait;
+
+    protected $presenter = LocationPresenter::class;
 
     protected $table = 'locations';
+
     protected $rules = [
-        'name'          => 'required|max:255|unique_undeleted',
-        'address'       => 'max:191|nullable',
-        'address2'      => 'max:191|nullable',
-        'city'          => 'max:191|nullable',
-        'state'         => 'min:2|max:191|nullable',
-        'country'       => 'min:2|max:191|nullable',
-        'zip'           => 'max:10|nullable',
-        'manager_id'    => 'exists:users,id|nullable',
-        'parent_id'     => 'nullable|exists:locations,id|non_circular:locations,id',
-        'company_id'    => 'integer|nullable|exists:companies,id',
+        'name' => 'required|max:255|unique_undeleted_in_scope:parent_id,company_id',
+        'address' => 'max:191|nullable',
+        'address2' => 'max:191|nullable',
+        'city' => 'max:191|nullable',
+        'state' => 'min:2|max:191|nullable',
+        'country' => 'min:2|max:191|nullable',
+        'zip' => 'max:10|nullable',
+        'manager_id' => 'exists:users,id|nullable',
+        'parent_id' => 'nullable|exists:locations,id|non_circular:locations,id|parent_matches_location_company',
+        'company_id' => 'integer|nullable|exists:companies,id|fmcs_company',
     ];
 
     protected $casts = [
-        'parent_id'     => 'integer',
-        'manager_id'    => 'integer',
-        'company_id'    => 'integer',
+        'parent_id' => 'integer',
+        'manager_id' => 'integer',
+        'company_id' => 'integer',
     ];
-
 
     /**
      * Whether the model should inject its identifier to the unique
@@ -53,13 +65,11 @@ class Location extends SnipeModel
      * @var bool
      */
     protected $injectUniqueIdentifier = true;
-    use ValidatingTrait;
-    use UniqueUndeletedTrait;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -80,16 +90,27 @@ class Location extends SnipeModel
         'tag_color',
         'notes',
     ];
-    protected $hidden = ['user_id'];
 
-    use Searchable;
+    protected $hidden = ['user_id'];
 
     /**
      * The attributes that should be included when searching the model.
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'address', 'city', 'state', 'zip', 'created_at', 'ldap_ou', 'phone', 'fax', 'notes'];
+    protected $searchableAttributes =
+        [
+            'name',
+            'address',
+            'city',
+            'state',
+            'zip',
+            'created_at',
+            'ldap_ou',
+            'phone',
+            'fax',
+            'notes',
+        ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
@@ -97,10 +118,42 @@ class Location extends SnipeModel
      * @var array
      */
     protected $searchableRelations = [
-      'parent'  => ['name'],
-      'company' => ['name']
+        'parent' => ['name'],
+        'company' => ['name'],
+        'manager' => ['first_name', 'last_name', 'display_name'],
+        'adminuser' => ['first_name', 'last_name', 'display_name'],
     ];
 
+    /**
+     * On hard-delete, wipe the image file and Files-tab attachments.
+     * Soft-delete leaves everything alone so a restore comes back with
+     * the image + files intact. The attachment action_log rows get
+     * soft-deleted (not hard-deleted) so the audit trail of what was
+     * attached-and-when survives even after the parent is gone.
+     */
+    protected static function booted(): void
+    {
+        static::forceDeleted(function (self $location) {
+            if ($location->image) {
+                try {
+                    Storage::disk('public')->delete(FileStorage::Locations->publicPath().$location->image);
+                } catch (\Exception $e) {
+                    Log::info($e->getMessage());
+                }
+            }
+
+            foreach ($location->uploads as $upload) {
+                if (($path = $upload->uploads_file_path()) !== null) {
+                    try {
+                        Storage::delete($path);
+                    } catch (\Exception $e) {
+                        Log::info($e->getMessage());
+                    }
+                }
+                $upload->delete();
+            }
+        });
+    }
 
     /**
      * Determine whether or not this location can be deleted.
@@ -109,12 +162,13 @@ class Location extends SnipeModel
      * it can be deleted. It's tempting to load those here, but that increases the query load considerably.
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
+     *
      * @return bool
      */
     public function isDeletable()
     {
-
         return Gate::allows('delete', $this)
             && ($this->deleted_at == '')
             && (($this->assets_count ?? $this->assets()->count()) === 0)
@@ -128,56 +182,53 @@ class Location extends SnipeModel
             && (($this->users_count ?? $this->users()->count()) === 0);
     }
 
-
     /**
      * Establishes the user -> location relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function users()
     {
-        return $this->hasMany(\App\Models\User::class, 'location_id');
-    }
-
-    /**
-     * Establishes the location -> admin user relationship
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
-     */
-    public function adminuser()
-    {
-        return $this->belongsTo(\App\Models\User::class, 'created_by');
+        return $this->hasMany(User::class, 'location_id');
     }
 
     /**
      * Find assets with this location as their location_id
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function assets()
     {
-        return $this->hasMany(\App\Models\Asset::class, 'location_id')
-            ->whereHas(
-                'assetstatus', function ($query) {
-                    $query->where('status_labels.deployable', '=', 1)
-                        ->orWhere('status_labels.pending', '=', 1)
-                        ->orWhere('status_labels.archived', '=', 0);
-                }
-            );
+        // Pluck IDs then whereIn — do NOT replace with whereHas. whereHas generates a correlated EXISTS per row and causes severe slowdowns in withCount contexts.
+        $ids = Statuslabel::where(function ($q) {
+            $q->where('deployable', 1)->orWhere('pending', 1)->orWhere('archived', 0);
+        })->whereNull('deleted_at')->pluck('id');
+
+        return $this->hasMany(Asset::class, 'location_id')
+            ->whereIn('assets.status_id', $ids->isEmpty() ? [0] : $ids);
     }
 
+    public function countAllTheThings()
+    {
+        return $this->assets()->count() + $this->consumables()->count() + $this->components()->count() + $this->users()->count() + $this->assignedAccessories()->count() + $this->assignedAssets()->count() + $this->accessories()->count();
+    }
 
     /**
      * Establishes the  asset -> rtd_location relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function rtd_assets()
     {
@@ -189,51 +240,59 @@ class Location extends SnipeModel
            bit in there, but that isn't always correct either (in the case
            where a user has no location, for example).
         */
-        return $this->hasMany(\App\Models\Asset::class, 'rtd_location_id');
+        return $this->hasMany(Asset::class, 'rtd_location_id');
     }
 
     /**
      * Establishes the consumable -> location relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function consumables()
     {
-        return $this->hasMany(\App\Models\Consumable::class, 'location_id');
+        return $this->hasMany(Consumable::class, 'location_id');
     }
 
     /**
      * Establishes the component -> location relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function components()
     {
-        return $this->hasMany(\App\Models\Component::class, 'location_id');
+        return $this->hasMany(Component::class, 'location_id');
     }
 
     /**
      * Establishes the component -> accessory relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function accessories()
     {
-        return $this->hasMany(\App\Models\Accessory::class, 'location_id');
+        return $this->hasMany(Accessory::class, 'location_id');
     }
 
     /**
      * Find the parent of a location
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v2.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function parent()
     {
@@ -242,36 +301,63 @@ class Location extends SnipeModel
     }
 
     /**
+     * Walk up the parent chain to find the nearest ancestor with a company_id.
+     * Used by FMCS checkout validation so that assets can be checked out to
+     * child locations whose company is only set on a parent location.
+     */
+    public function effectiveFmcsCompanyId(): ?int
+    {
+        if ($this->company_id) {
+            return (int) $this->company_id;
+        }
+
+        $ancestor = $this->parent()->withoutGlobalScopes()->first();
+        while ($ancestor) {
+            if ($ancestor->company_id) {
+                return (int) $ancestor->company_id;
+            }
+            $ancestor = $ancestor->parent()->withoutGlobalScopes()->first();
+        }
+
+        return null;
+    }
+
+    /**
      * Establishes the locations -> company relationship
      *
      * @author [T. Regnery] [<tobias.regnery@gmail.com>]
+     *
      * @since  [v7.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function company()
     {
-        return $this->belongsTo(\App\Models\Company::class, 'company_id');
+        return $this->belongsTo(Company::class, 'company_id');
     }
 
     /**
      * Find the manager of a location
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v2.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function manager()
     {
-        return $this->belongsTo(\App\Models\User::class, 'manager_id');
+        return $this->belongsTo(User::class, 'manager_id');
     }
-
 
     /**
      * Find children of a location
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v2.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function children()
     {
@@ -283,24 +369,28 @@ class Location extends SnipeModel
      * Establishes the asset -> location assignment relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function assignedAssets()
     {
-        return $this->morphMany(\App\Models\Asset::class, 'assigned', 'assigned_type', 'assigned_to')->withTrashed();
+        return $this->morphMany(Asset::class, 'assigned', 'assigned_type', 'assigned_to')->AssetsForShow()->withTrashed();
     }
 
     /**
      * Establishes the accessory -> location assignment relationship
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v3.0]
-     * @return \Illuminate\Database\Eloquent\Relations\Relation
+     *
+     * @return Relation
      */
     public function assignedAccessories()
     {
-        return $this->morphMany(\App\Models\AccessoryCheckout::class, 'assigned', 'assigned_type', 'assigned_to');
+        return $this->morphMany(AccessoryCheckout::class, 'assigned', 'assigned_type', 'assigned_to');
     }
 
     public function setLdapOuAttribute($ldap_ou)
@@ -308,16 +398,20 @@ class Location extends SnipeModel
         return $this->attributes['ldap_ou'] = empty($ldap_ou) ? null : $ldap_ou;
     }
 
-
     /**
-     * Query builder scope to order on parent
+     * The map's keys are parent_id values, with `0` used for "no parent / top-
+     * level". Using 0 (not null) avoids PHP 8.4's deprecation of null array
+     * offsets when callers build the map from `$location->parent_id`.
      *
-     * @param Illuminate\Database\Query\Builder $query Query builder instance
-     * @param text                              $order Order
-     *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
+     * `$prefix` is the accumulated indent marker for the current recursion
+     * depth (two dashes per level), so `use_text` reads e.g.
+     * `-- Rack 1` or `---- Rack 1a` in the dropdown. Locations can nest
+     * arbitrarily deep and the previous `A › B › C` breadcrumb form produced
+     * unreadable long strings for even modestly nested hierarchies
+     * (see #19398). Company::indenter keeps the breadcrumb form because its
+     * hierarchy is capped at one parent level and reads cleanly there.
      */
-    public static function indenter($locations_with_children, $parent_id = null, $prefix = '')
+    public static function indenter($locations_with_children, int $parent_id = 0, $prefix = '')
     {
         $results = [];
 
@@ -326,10 +420,11 @@ class Location extends SnipeModel
         }
 
         foreach ($locations_with_children[$parent_id] as $location) {
-            $location->use_text = $prefix.' '.$location->name;
-            $location->use_image = ($location->image) ? config('app.url').'/uploads/locations/'.$location->image : null;
+            $location->use_text = $prefix === ''
+                ? $location->name
+                : $prefix.' '.$location->name;
+            $location->use_image = ($location->image) ? Storage::disk('public')->url(FileStorage::Locations->publicPath().$location->image) : null;
             $results[] = $location;
-            //now append the children. (if we have any)
             if (array_key_exists($location->id, $locations_with_children)) {
                 $results = array_merge($results, self::indenter($locations_with_children, $location->id, $prefix.'--'));
             }
@@ -338,52 +433,8 @@ class Location extends SnipeModel
         return $results;
     }
 
-    /**
-     * Query builder scope to order on parent
-     *
-     * @param Illuminate\Database\Query\Builder $query Query builder instance
-     * @param text                              $order Order
-     *
-     * @return Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeOrderParent($query, $order)
+    public function newEloquentBuilder($query): LocationQueryBuilder
     {
-        // Left join here, or it will only return results with parents
-        return $query->leftJoin('locations as parent_loc', 'locations.parent_id', '=', 'parent_loc.id')->orderBy('parent_loc.name', $order);
+        return new LocationQueryBuilder($query);
     }
-
-    /**
-     * Query builder scope to order on manager name
-     *
-     * @param \Illuminate\Database\Query\Builder $query Query builder instance
-     * @param text                               $order Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeOrderManager($query, $order)
-    {
-        return $query->leftJoin('users as location_user', 'locations.manager_id', '=', 'location_user.id')->orderBy('location_user.first_name', $order)->orderBy('location_user.last_name', $order);
-    }
-
-    /**
-     * Query builder scope to order on company
-     *
-     * @param \Illuminate\Database\Query\Builder $query Query builder instance
-     * @param text                               $order Order
-     *
-     * @return \Illuminate\Database\Query\Builder          Modified query builder
-     */
-    public function scopeOrderCompany($query, $order)
-    {
-        return $query->leftJoin('companies as company_sort', 'locations.company_id', '=', 'company_sort.id')->orderBy('company_sort.name', $order);
-    }
-
-    /**
-     * Query builder scope to order on the user that created it
-     */
-    public function scopeOrderByCreatedByName($query, $order)
-    {
-        return $query->leftJoin('users as admin_sort', 'locations.created_by', '=', 'admin_sort.id')->select('locations.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
-    }
-
 }

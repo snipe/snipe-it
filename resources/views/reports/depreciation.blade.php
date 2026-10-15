@@ -37,10 +37,9 @@
           </table>
               @else
               <div class="col-md-12">
-                  <div class="alert alert-warning fade in">
-                      <i class="fas fa-exclamation-triangle faa-pulse animated"></i>
+                  <x-alert type="warning" icon="warning">
                       {!! trans('admin/depreciations/general.no_depreciations_warning') !!}
-                  </div>
+                  </x-alert>
               </div>
           @endif
       </div> <!-- /.box-body-->

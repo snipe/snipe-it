@@ -1,210 +1,183 @@
 <div>
-    <div class="box box-default">
+    @if ($authorizationError)
+        <x-alert type="danger">
+            <p>
+                {{ trans('admin/users/message.insufficient_permissions') }}
+                <br>
+                {{ $authorizationError }}
+            </p>
+        </x-alert>
+    @endif
 
-        <div class="box-header">
-                <h2 class="box-title">
-                    <x-icon type="oauth"/>
-                    {{ trans('admin/settings/general.oauth_clients') }}
-                </h2>
-                @if ($authorizationError)
-                    <div class="alert alert-danger">
-                        <p>{{ trans('admin/users/message.insufficient_permissions') }}
-                        <br>
-                        {{ $authorizationError }}
-                        </p>
-                    </div>
-                @endif
-
-                <div class="box-tools pull-right">
-                        <a class="btn btn-primary"
-                           wire:click="$dispatch('openModal')"
-                           onclick="$('#modal-create-client').modal('show');">
-                            {{ trans('general.create') }}
-                        </a>
-                </div>
-            </div>
-
-            <div class="box-body">
-                <!-- Current Clients -->
-                @if($clients->count() === 0)
-                    <p>
-                        {{ trans('admin/settings/general.oauth_no_clients') }}
-                    </p>
-                @endif
-
-            @if ($clients->count() > 0)
-                    <table data-cookie-id-table="OAuthClientsTable"
-                           data-id-table="OAuthClientsTable"
-                           data-side-pagination="client"
-                           data-sort-order="desc"
-                           data-sort-name="created_at"
-                           id="OAuthClientsTable"
-                           class="table table-striped snipe-table">
-                    <thead>
+    @if ($this->showOauthClients())
+        @if($clients->count() === 0)
+            <p>{{ trans('admin/settings/general.oauth_no_clients') }}</p>
+        @else
+            <div id="OAuthClientsToolbar" class="pull-left" style="min-width: 280px; padding-top: 10px;"></div>
+            <table
+                data-cookie-id-table="OAuthClientsTable"
+                data-id-table="OAuthClientsTable"
+                data-toolbar="#OAuthClientsToolbar"
+                data-side-pagination="client"
+                data-sort-order="desc"
+                data-buttons="oauthButtons"
+                data-sort-name="created_at"
+                id="OAuthClientsTable"
+                class="table table-striped snipe-table"
+            >
+                <thead>
+                    <tr>
+                        <th scope="col" data-field="id" data-sortable="true">{{ trans('general.id') }}</th>
+                        <th scope="col" data-field="name" data-sortable="true">{{ trans('general.name') }}</th>
+                        <th scope="col" data-field="client_type" data-sortable="true">{{ trans('admin/settings/general.oauth_client_type') }}</th>
+                        <th scope="col" data-field="revoked" data-sortable="true">{{ trans('general.status') }}</th>
+                        <th scope="col" data-field="redirect" data-sortable="true">{{ trans('admin/settings/general.oauth_redirect_url') }}</th>
+                        <th scope="col" data-field="secret" data-sortable="true">{{ trans('admin/settings/general.oauth_secret') }}</th>
+                        <th scope="col" data-field="associated_token_count" data-sortable="true">{{ trans('admin/settings/general.oauth_associated_token_count') }}</th>
+                        <th scope="col" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
+                        <th scope="col" data-field="updated_at" data-sortable="true">{{ trans('general.updated_at') }}</th>
+                        <th scope="col">
+                            <span class="sr-only">{{ trans('general.actions') }}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($clients as $client)
+                        @php
+                            $isPersonalAccessClient = (int) $client->personal_access_client === 1;
+                            $isPasswordGrantClient = (int) $client->password_client === 1;
+                            $isRevokedClient = (int) $client->revoked === 1;
+                            $clientTypeLabel = $isPersonalAccessClient
+                                ? trans('admin/settings/general.oauth_client_type_personal_access')
+                                : ($isPasswordGrantClient
+                                    ? trans('admin/settings/general.oauth_client_type_password_grant')
+                                    : trans('admin/settings/general.oauth_client_type_oauth'));
+                        @endphp
                         <tr>
-                            <th>{{ trans('general.id') }}</th>
-                            <th data-sortable="true">{{ trans('general.name') }}</th>
-                            <th data-sortable="true">{{ trans('admin/settings/general.oauth_redirect_url') }}</th>
-                            <th data-sortable="true">{{ trans('admin/settings/general.oauth_secret') }}</th>
-                            <th data-sortable="true">{{ trans('general.created_at')  }}</th>
-                            <th data-sortable="true">{{ trans('general.updated_at')  }}</th>
-                            <th>
-                                <span class="sr-only">
-                                    {{ trans('general.actions') }}
-                                </span>
-                            </th>
+                            <td>{{ $client->id }}</td>
+                            <td>{{ $client->name }}</td>
+                            <td>
+                                <span class="label label-info">{{ $clientTypeLabel }}</span>
+                            </td>
+                            <td>
+                                @if($isRevokedClient)
+                                    <span class="label label-danger">
+                                        <x-icon type="x"/> {{ trans('admin/settings/general.oauth_token_status_revoked') }}
+                                    </span>
+                                @else
+                                    <span class="label label-success">
+                                        <x-icon type="checkmark"/> {{ trans('admin/settings/general.oauth_token_status_active') }}
+                                    </span>
+                                @endif
+                            </td>
+                            <td><code>{{ $client->redirect }}</code></td>
+                            <td><code>{{ $client->secret }}</code></td>
+                            <td>{{ $client->associated_token_count ?? 0 }}</td>
+                            <td>{{ $client->created_at ? Helper::getFormattedDateObject($client->created_at, 'datetime', false) : '' }}</td>
+                            <td>
+                                @if ($client->created_at != $client->updated_at)
+                                    {{ $client->updated_at ? Helper::getFormattedDateObject($client->updated_at, 'datetime', false) : '' }}
+                                @endif
+                            </td>
+                            <td class="text-right" style="white-space: nowrap;">
+                                @if($isRevokedClient)
+                                    <form method="POST" action="{{ route('settings.oauth.clients.unrevoke', ['client' => $client->id]) }}" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-default text-success" data-tooltip="true" title="{{ trans('admin/settings/general.oauth_unrevoke') }}">
+                                            <i class="fa-solid fa-toggle-off"></i>
+                                        </button>
+                                    </form>
+                                @else
+                                    <form method="POST" action="{{ route('settings.oauth.clients.revoke', ['client' => $client->id]) }}" style="display: inline;">
+                                        @csrf
+                                        <button type="submit" class="btn btn-sm btn-default text-danger" data-tooltip="true" title="{{ trans('admin/settings/general.oauth_revoke') }}">
+                                            <i class="fa-solid fa-toggle-on"></i>
+                                        </button>
+                                    </form>
+                                @endif
+                                <a class="action-link btn btn-sm btn-warning" wire:click="editClient('{{ $client->id }}')" onclick="$('#modal-edit-client').modal('show');" data-tooltip="true" title="{{ trans('general.update') }}">
+                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                </a>
+                                <a class="action-link btn btn-sm btn-danger" wire:click="deleteClient('{{ $client->id }}')" data-tooltip="true" title="{{ trans('general.delete') }}">
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($clients as $client)
-                            <tr>
-                                <!-- ID -->
-                                <td>
-                                    {{ $client->id }}
-                                </td>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    @endif
 
-                                <!-- Name -->
-                                <td>
-                                    {{ $client->name }}
-                                </td>
-
-                                <!-- Redirect -->
-                                <td>
-                                    <code>{{ $client->redirect }}</code>
-                                </td>
-
-                                <!-- Secret -->
-                                <td>
-                                    <code>{{ $client->secret }}</code>
-                                </td>
-
-                                <td>
-                                    {{ $client->created_at ? Helper::getFormattedDateObject($client->created_at, 'datetime', false) : '' }}
-                                </td>
-
-                                <td>
-                                    @if ($client->created_at != $client->updated_at)
-                                        {{ $client->updated_at ? Helper::getFormattedDateObject($client->updated_at, 'datetime', false) : '' }}
-                                    @endif
-                                </td>
-
-                                <!-- Edit / Delete Button -->
-                                <td class="text-right">
-
-                                    <a class="action-link btn btn-sm btn-warning"
-                                       wire:click="editClient('{{ $client->id }}')"
-                                       onclick="$('#modal-edit-client').modal('show');">
-                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-                                        <span class="sr-only">
-                                            {{ trans('general.update') }}
-                                        </span>
+    @if ($this->showAuthorizedApplications())
+        @if($authorizedApplications->count() === 0)
+            <p>{{ trans('admin/settings/general.oauth_no_clients') }}</p>
+        @else
+            <div id="AuthorizedAppsToolbar" class="pull-left" style="min-width: 280px; padding-top: 10px;"></div>
+            <table
+                data-cookie-id-table="AuthorizedAppsTable"
+                data-id-table="AuthorizedAppsTable"
+                data-toolbar="#AuthorizedAppsToolbar"
+                data-side-pagination="client"
+                data-sort-order="desc"
+                data-sort-name="created_at"
+                id="AuthorizedAppsTable"
+                class="table table-striped snipe-table"
+            >
+                <thead>
+                    <tr>
+                        <th scope="col" data-field="name" data-sortable="true">{{ trans('general.name') }}</th>
+                        <th scope="col" data-field="client_owner" data-sortable="true">{{ trans('general.created_by') }}</th>
+                        <th scope="col" data-field="oauth_scopes" data-sortable="true">{{ trans('admin/settings/general.oauth_scopes') }}</th>
+                        <th scope="col" data-field="created_at" data-sortable="true">{{ trans('general.created_at') }}</th>
+                        <th scope="col" data-field="expires" data-sortable="true">{{ trans('general.expires') }}</th>
+                        <th scope="col">
+                            <span class="sr-only">{{ trans('general.actions') }}</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($authorizedApplications as $application)
+                        <tr>
+                            <td>{{ $application->client_name }}</td>
+                            <td>
+                                @php
+                                    $ownerLabel = $application->client_owner_display_name ?: $application->client_owner_username;
+                                    $ownerSoftDeleted = $application->client_owner_deleted_at !== null;
+                                @endphp
+                                @if($application->client_owner_id && $ownerLabel)
+                                    <a href="{{ route('users.show', $application->client_owner_id) }}">
+                                        @if($ownerSoftDeleted)
+                                            <del>{{ $ownerLabel }}</del>
+                                        @else
+                                            {{ $ownerLabel }}
+                                        @endif
                                     </a>
+                                @else
+                                    {{ trans('general.na') }}
+                                @endif
+                            </td>
+                            <td>
+                                @if(!$application->scopes)
+                                    <span class="label label-default">{{ trans('admin/settings/general.no_scopes') }}</span>
+                                @endif
+                            </td>
+                            <td>{{ $application->created_at ? Helper::getFormattedDateObject($application->created_at, 'datetime', false) : '' }}</td>
+                            <td>{{ $application->expires_at ? Helper::getFormattedDateObject($application->expires_at, 'datetime', false) : '' }}</td>
+                            <td>
+                                <a class="btn btn-sm btn-danger pull-right" wire:click="deleteAuthorizedApplication('{{ $application->client_id }}')">
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                    <span class="sr-only">{{ trans('general.delete') }}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        @endif
+    @endif
 
-                                    <a class="action-link btn btn-danger btn-sm" wire:click="deleteClient('{{ $client->id }}')">
-                                        <i class="fas fa-trash" aria-hidden="true"></i>
-                                        <span class="sr-only">
-                                            {{ trans('general.delete') }}
-                                        </span>
-                                    </a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @endif
-        </div>
-    </div>
-
-
-
-        <div>
-            @if ($authorized_tokens->count() > 0)
-                <div>
-                    <div class="box box-default">
-                        <div class="box-header">
-                            <h2 class="box-title">
-                                {{ trans('admin/settings/general.oauth_authorized_apps') }}
-                            </h2>
-                        </div>
-
-                        <div class="box-body">
-                            <!-- Authorized Tokens -->
-                            <table data-cookie-id-table="AuthorizedAppsTable"
-                                   data-id-table="AuthorizedAppsTable"
-                                   data-toolbar="#AuthorizedAppsToolbar"
-                                   data-side-pagination="client"
-                                   data-sort-order="desc"
-                                   data-sort-name="created_at"
-                                   id="AuthorizedAppsTable"
-                                   class="table table-striped snipe-table">
-                                <thead>
-                                <tr>
-                                    <th data-sortable="true">{{ trans('general.name') }}</th>
-                                    <th data-sortable="true"> {{ trans('account/general.personal_access_token') }}</th>
-                                    <th data-sortable="true">{{ trans('admin/settings/general.oauth_scopes')  }}</th>
-                                    <th data-sortable="true">{{ trans('general.created_at')  }}</th>
-                                    <th data-sortable="true">{{ trans('general.expires') }}</th>
-                                    <th>
-                                        <span class="sr-only">
-                                            {{ trans('general.actions') }}
-                                        </span>
-                                    </th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                @foreach($authorized_tokens as $token)
-                                    <tr>
-                                        <!-- Client Name -->
-                                        <td>
-                                            {{ $token->client->name }}
-                                        </td>
-
-                                        <td>
-                                            {{ $token->name }}
-                                        </td>
-
-                                        <!-- Scopes -->
-                                        <td>
-                                            @if(!$token->scopes)
-                                                <span class="label label-default">
-                                                    {{ trans('admin/settings/general.no_scopes') }}
-                                                </span>
-                                            @endif
-                                        </td>
-
-                                        <td>
-                                            {{ $token->created_at ? Helper::getFormattedDateObject($token->created_at, 'datetime', false) : '' }}
-                                        </td>
-
-                                        <td>
-                                            {{ $token->expires_at ? Helper::getFormattedDateObject($token->expires_at, 'datetime', false) : '' }}
-                                        </td>
-                                        <!-- Revoke Button -->
-                                        <td>
-                                            <a class="btn btn-sm btn-danger pull-right"
-                                                wire:click="deleteToken('{{ $token->id }}')"
-                                            >
-                                                <i class="fas fa-trash" aria-hidden="true"></i>
-                                                <span class="sr-only">
-                                                    {{ trans('general.delete') }}
-                                                </span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            @endif
-
-
-
-
-
-    <!-- Create Client Modal -->
+    @if ($this->showOauthClients())
     <div class="modal fade" id="modal-create-client" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
@@ -219,7 +192,7 @@
                 <div class="modal-body">
                     <!-- Form Errors -->
                     @if($errors->has('name') || $errors->has('redirect'))
-                        <div class="alert alert-danger">
+                        <x-alert type="danger">
                             <p><strong>Whoops!</strong> Something went wrong!</p>
                             <br>
                             <ul>
@@ -230,7 +203,7 @@
                                     <li>{{ $errors->first('redirect') }}</li>
                                 @endif
                             </ul>
-                        </div>
+                        </x-alert>
                     @endif
 
                     <!-- Create Client Form -->
@@ -292,10 +265,7 @@
             </div>
         </div>
     </div>
-</div>
 
-
-    <!-- Edit Client Modal -->
     <div class="modal fade" id="modal-edit-client" tabindex="-1" role="dialog" wire:ignore.self>
         <div class="modal-dialog">
             <div class="modal-content">
@@ -309,7 +279,7 @@
 
                 <div class="modal-body">
                     @if($errors->has('newName') || $errors->has('newRedirect'))
-                        <div class="alert alert-danger">
+                        <x-alert type="danger">
                             <p><strong>Whoops!</strong> Something went wrong!</p>
                             <br>
                             <ul>
@@ -323,7 +293,7 @@
                                     <li>{{ $authorizationError }}</li>
                                 @endif
                             </ul>
-                        </div>
+                        </x-alert>
                     @endif
 
                     <!-- Edit Client Form -->
@@ -384,6 +354,7 @@
             </div>
         </div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             Livewire.on('openModal', () => {
@@ -401,14 +372,6 @@
         window.addEventListener('clientUpdated', function() {
             $('#modal-edit-client').modal('hide');
         });
-
-
-
     </script>
+    @endif
 </div>
-
-@section('moar_scripts')
-    @include ('partials.bootstrap-table')
-@endsection
-
-

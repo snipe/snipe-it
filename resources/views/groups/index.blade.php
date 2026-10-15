@@ -6,51 +6,28 @@
 @parent
 @stop
 
-@section('header_right')
-<a href="{{ route('groups.create') }}" class="btn btn-primary text-right"> {{ trans('general.create') }}</a>
-<a href="{{ route('settings.index') }}" class="btn btn-default text-right">{{ trans('general.back') }}</a>
-@stop
 
 
-{{-- Content --}}
+
+{{-- Page content --}}
 @section('content')
-<div class="row">
-  <div class="col-md-12">
-    <div class="box box-default">
-      <div class="box-body">
-            <table
-                data-cookie-id-table="groupsTable"
-                data-side-pagination="server"
-                data-sort-order="asc"
-                data-sort-name="name"
-                id="groupsTable"
-                data-buttons="groupButtons"
-                class="table table-striped snipe-table"
-                data-url="{{ route('api.groups.index') }}"
-                data-export-options='{
-        "fileName": "export-groups-{{ date('Y-m-d') }}",
-            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-            }'>
+    <x-container>
+        <x-box name="groups" sr_only_title>
 
-            <thead>
-              <tr>
-               <th data-switchable="true" data-sortable="true" data-field="id" data-visible="false">{{ trans('general.id') }}</th>
-               <th data-switchable="true" data-sortable="true" data-field="name" data-formatter="groupsAdminLinkFormatter" data-visible="true">{{ trans('admin/groups/table.name') }}</th>
-                  <th data-switchable="true" data-sortable="true" data-field="users_count" data-visible="true"><x-icon type="user" /><span class="sr-only">{{ trans('admin/groups/table.users') }}</span></th>
-                  <th data-switchable="true" data-sortable="true" data-field="notes" data-visible="true">{{ trans('general.notes') }}</th>
-                  <th data-switchable="true" data-sortable="true" data-field="created_at" data-visible="true" data-formatter="dateDisplayFormatter">{{ trans('general.created_at') }}</th>
-               <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="created_by"  data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="created_at"  data-formatter="dateDisplayFormatter">{{ trans('general.created_at') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="true" data-field="updated_at"  data-formatter="dateDisplayFormatter">{{ trans('general.updated_at') }}</th>
-                  <th data-switchable="false" data-searchable="false" data-sortable="false" data-field="actions"   data-formatter="groupsActionsFormatter">{{ trans('table.actions') }}</th>
+            <x-slot:table_header>{{ trans('general.groups') }}</x-slot:table_header>
 
-              </tr>
-            </thead>
-          </table>
-      </div> <!--.box-body-->
-    </div> <!-- /.box.box-default-->
-  </div> <!-- .col-md-12-->
-</div>
+            <x-table
+                    name="groups"
+                    buttons="groupButtons"
+                    fixed_right_number="1"
+                    fixed_number="1"
+                    api_url="{{ route('api.groups.index') }}"
+                    :presenter="\App\Presenters\GroupPresenter::dataTableLayout()"
+                    export_filename="export-groups-{{ date('Y-m-d') }}"
+            />
+            
+        </x-box>
+    </x-container>
 @stop
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'groups-export', 'search' => true])

@@ -33,14 +33,14 @@ class ManufacturerSeeder extends Seeder
         Manufacturer::factory()->count(1)->sony()->create(['created_by' => $admin->id]);
 
         $src = public_path('/img/demo/manufacturers/');
-        $dst = 'manufacturers'.'/';
-        $del_files = Storage::files($dst);
+        $dst = 'manufacturers/';
 
-        foreach ($del_files as $del_file) { // iterate files
-            $file_to_delete = str_replace($src, '', $del_file);
-            Log::debug('Deleting: '.$file_to_delete);
+        // Wipe every item file in the public uploads dir.
+        $disk = Storage::disk('public');
+        foreach ($disk->files(rtrim($dst, '/')) as $del_file) {
+            Log::debug('Deleting: ' . $del_file);
             try {
-                Storage::disk('public')->delete($dst.$del_file);
+                $disk->delete($del_file);
             } catch (\Exception $e) {
                 Log::debug($e);
             }

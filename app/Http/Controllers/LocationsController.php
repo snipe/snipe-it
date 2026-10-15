@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Http\Requests\ImageUploadRequest;
+use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
+use App\Models\Component;
+use App\Models\Consumable;
 use App\Models\Location;
 use App\Models\Setting;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use \Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
+
 /**
  * This controller handles all actions related to Locations for
  * the Snipe-IT Asset Management application.
@@ -28,13 +33,15 @@ class LocationsController extends Controller
      * the content for the locations listing, which is generated in getDatatable.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @see LocationsController::getDatatable() method that generates the JSON response
      * @since [v1.0]
      */
-    public function index() : View
+    public function index(): View
     {
         // Grab all the locations
         $this->authorize('view', Location::class);
+
         // Show the page
         return view('locations/index');
     }
@@ -43,10 +50,11 @@ class LocationsController extends Controller
      * Returns a form view used to create a new location.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @see LocationsController::postCreate() method that validates and stores the data
      * @since [v1.0]
      */
-    public function create() : View
+    public function create(): View
     {
         $this->authorize('create', Location::class);
 
@@ -58,16 +66,17 @@ class LocationsController extends Controller
      * Validates and stores a new location.
      *
      * @todo Check if a Form Request would work better here.
+     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @see LocationsController::getCreate() method that makes the form
      * @since [v1.0]
-     * @param ImageUploadRequest $request
      */
-    public function store(ImageUploadRequest $request) : RedirectResponse
+    public function store(ImageUploadRequest $request): RedirectResponse
     {
         $this->authorize('create', Location::class);
-        
-        $location = new Location();
+
+        $location = new Location;
         $location->name = $request->input('name');
         $location->parent_id = $request->input('parent_id', null);
         $location->currency = $request->input('currency', '$');
@@ -82,19 +91,29 @@ class LocationsController extends Controller
         $location->created_by = auth()->id();
         $location->phone = request('phone');
         $location->fax = request('fax');
-        $location->tag_color  = $request->input('tag_color');
+        $location->tag_color = $request->input('tag_color');
         $location->notes = $request->input('notes');
-        $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-
-        // Only scope the location if the setting is enabled
         if (Setting::getSettings()->scope_locations_fmcs) {
             $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
-            // check if parent is set and has a different company
-            if ($location->parent_id && Location::find($location->parent_id)->company_id != $location->company_id) {
-                return redirect()->back()->withInput()->withInput()->with('error', 'different company than parent');
-            }                
         } else {
             $location->company_id = $request->input('company_id');
+        }
+
+        // Parent company check applies whenever FMCS is on, independent of scope_locations_fmcs.
+        if (Setting::getSettings()->full_multiple_companies_support) {
+            // withoutGlobalScopes: Location::CompanyableScope would filter a
+            // cross-tenant parent out for a scoped non-superuser, so find()
+            // would return null and the null check below would short-circuit
+            // the reject branch, letting the parent_id save through. See
+            // ValidationServiceProvider::fmcs_location for the sibling fix.
+            $parent = $location->parent_id ? Location::withoutGlobalScopes()->find($location->parent_id) : null;
+            if ($parent && $parent->company_id != $location->company_id) {
+                return redirect()->back()->withInput()->with('error', trans('general.error_location_parent_company', [
+                    'parent' => $parent->name,
+                    'parent_company' => $parent->company?->name ?? trans('general.unassigned'),
+                    'location_company' => $location->company?->name ?? trans('general.unassigned'),
+                ]));
+            }
         }
 
         if ($request->has('use_cloned_image')) {
@@ -121,13 +140,14 @@ class LocationsController extends Controller
      * Makes a form view to edit location information.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @see LocationsController::postCreate() method that validates and stores
-     * @param int $locationId
      * @since [v1.0]
      */
-    public function edit(Location $location) : View | RedirectResponse
+    public function edit(Location $location): View|RedirectResponse
     {
         $this->authorize('update', Location::class);
+
         return view('locations/edit')->with('item', $location);
     }
 
@@ -135,12 +155,11 @@ class LocationsController extends Controller
      * Validates and stores updated location data from edit form.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @see LocationsController::getEdit() method that makes the form view
-     * @param ImageUploadRequest $request
-     * @param int $locationId
      * @since [v1.0]
      */
-    public function update(ImageUploadRequest $request, Location $location) : RedirectResponse
+    public function update(ImageUploadRequest $request, Location $location): RedirectResponse
     {
         $this->authorize('update', Location::class);
 
@@ -157,18 +176,40 @@ class LocationsController extends Controller
         $location->fax = request('fax');
         $location->ldap_ou = $request->input('ldap_ou');
         $location->manager_id = $request->input('manager_id');
-        $location->tag_color  = $request->input('tag_color');
+        $location->tag_color = $request->input('tag_color');
         $location->notes = $request->input('notes');
 
-        // Only scope the location if the setting is enabled
         if (Setting::getSettings()->scope_locations_fmcs) {
             $location->company_id = Company::getIdForCurrentUser($request->input('company_id'));
             // check if there are related objects with different company
-            if (Helper::test_locations_fmcs(false, $location->id, $location->company_id)) {
-                return redirect()->back()->withInput()->withInput()->with('error', 'error scoped locations');
-            }            
+            if ($mismatched = Helper::test_locations_fmcs(false, $location->id, $location->company_id)) {
+                $first = $mismatched[0];
+
+                return redirect()->back()->withInput()->with('error', trans('general.error_location_scoped_items', [
+                    'item_type' => trans('general.'.strtolower($first[0])),
+                    'item_name' => $first[2],
+                    'item_company' => $first[5] ?? trans('general.unassigned'),
+                ]));
+            }
         } else {
             $location->company_id = $request->input('company_id');
+        }
+
+        // Parent company check applies whenever FMCS is on, independent of scope_locations_fmcs.
+        if (Setting::getSettings()->full_multiple_companies_support) {
+            // withoutGlobalScopes: Location::CompanyableScope would filter a
+            // cross-tenant parent out for a scoped non-superuser, so find()
+            // would return null and the null check below would short-circuit
+            // the reject branch, letting the parent_id save through. See
+            // ValidationServiceProvider::fmcs_location for the sibling fix.
+            $parent = $location->parent_id ? Location::withoutGlobalScopes()->find($location->parent_id) : null;
+            if ($parent && $parent->company_id != $location->company_id) {
+                return redirect()->back()->withInput()->with('error', trans('general.error_location_parent_company', [
+                    'parent' => $parent->name,
+                    'parent_company' => $parent->company?->name ?? trans('general.unassigned'),
+                    'location_company' => $location->company?->name ?? trans('general.unassigned'),
+                ]));
+            }
         }
 
         $location = $request->handleImages($location);
@@ -184,38 +225,39 @@ class LocationsController extends Controller
      * Validates and deletes selected location.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $locationId
+     *
+     * @param  int  $locationId
+     *
      * @since [v1.0]
      */
-    public function destroy($locationId) : RedirectResponse
+    public function destroy($locationId): RedirectResponse
     {
         $this->authorize('delete', Location::class);
 
         $location = Location::withCount('assignedAssets as assigned_assets_count')
-        ->withCount('assets as assets_count')
-        ->withCount('assignedAccessories as assigned_accessories_count')
-        ->withCount('accessories as accessories_count')
-        ->withCount('rtd_assets as rtd_assets_count')
-        ->withCount('children as children_count')
-        ->withCount('users as users_count')
-        ->withCount('consumables as consumables_count')
-        ->withCount('components as components_count')
-        ->find($locationId);
+            ->withCount('assets as assets_count')
+            ->withCount('assignedAccessories as assigned_accessories_count')
+            ->withCount('accessories as accessories_count')
+            ->withCount('rtd_assets as rtd_assets_count')
+            ->withCount('children as children_count')
+            ->withCount('users as users_count')
+            ->withCount('consumables as consumables_count')
+            ->withCount('components as components_count')
+            ->find($locationId);
 
-        if (!$location) {
+        if (! $location) {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.does_not_exist'));
         }
 
         if ($location->isDeletable()) {
 
-            if ($location->image) {
-                try {
-                    Storage::disk('public')->delete('locations/'.$location->image);
-                } catch (\Exception $e) {
-                    Log::error($e);
-                }
-            }
+            // Note: the image file is deliberately preserved across this
+            // soft-delete. Snipe-IT's `snipeit:purge` command permanently
+            // removes it later when the row is force-deleted. Keeping
+            // the file here means a restored soft-deleted row still has
+            // its image.
             $location->delete();
+
             return redirect()->to(route('locations.index'))->with('success', trans('admin/locations/message.delete.success'));
         } else {
             return redirect()->to(route('locations.index'))->with('error', trans('admin/locations/message.assoc_users'));
@@ -228,10 +270,10 @@ class LocationsController extends Controller
      * the content for the locations detail page.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $id
+     *
      * @since [v1.0]
      */
-    public function show(Location $location) : View | RedirectResponse
+    public function show(Location $location): View|RedirectResponse
     {
         $this->authorize('view', Location::class);
 
@@ -250,63 +292,82 @@ class LocationsController extends Controller
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
     }
 
-    public function print_assigned($id) : View | RedirectResponse
+    public function print_assigned($id): View|RedirectResponse
     {
         $this->authorize('view', Location::class);
 
         if ($location = Location::where('id', $id)->first()) {
-            return view('locations/print')
-                ->with('assigned', false)
-                ->with('assets', $location->assets)
-                ->with('assignedAssets', $location->assignedAssets)
-                ->with('accessories', $location->accessories)
-                ->with('assignedAccessories', $location->assignedAccessories)
-                ->with('users',$location->users)
-                ->with('location', $location)
-                ->with('consumables', $location->consumables)
-                ->with('components', $location->components)
-                ->with('children', $location->children);
+            return view('locations/print', $this->printPayload($location, assigned: false));
         }
 
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
     }
 
-    public function print_all_assigned($id) : View | RedirectResponse
+    public function print_all_assigned($id): View|RedirectResponse
     {
         $this->authorize('view', Location::class);
+
         if ($location = Location::where('id', $id)->first()) {
-            return view('locations/print')
-                ->with('assigned', true)
-                ->with('assets', $location->assets)
-                ->with('assignedAssets', $location->assignedAssets)
-                ->with('accessories', $location->accessories)
-                ->with('assignedAccessories', $location->assignedAccessories)
-                ->with('users',$location->users)
-                ->with('location', $location)
-                ->with('consumables', $location->consumables)
-                ->with('components', $location->components)
-                ->with('children', $location->children);
+            return view('locations/print', $this->printPayload($location, assigned: true));
         }
+
         return redirect()->route('locations.index')->with('error', trans('admin/locations/message.does_not_exist'));
     }
 
+    /**
+     * Build the per-model related collections the print sheet renders.
+     * The route only gates on `view` for Location, but the view rendered
+     * the assigned users / assets / accessories / consumables /
+     * components inline without matching per-model permission checks -
+     * so a caller with locations.view but not users.view could read
+     * assigned users' identity through the printassigned URL, even
+     * though /users/{id} would 403 for them.
+     *
+     * Substitute an empty Collection for each relation the caller can't
+     * view. The existing `@if ($users->count() > 0)` guards in
+     * locations/print.blade.php then naturally skip the entire block,
+     * matching the per-model @can guards used by the standard
+     * locations/view.blade.php page. Instance-context gate checks pass
+     * the model class so FMCS scoping still applies.
+     */
+    private function printPayload(Location $location, bool $assigned): array
+    {
+        $empty = new Collection;
+
+        return [
+            'assigned' => $assigned,
+            'location' => $location,
+            'assets' => Gate::allows('view', Asset::class) ? $location->assets : $empty,
+            'assignedAssets' => Gate::allows('view', Asset::class) ? $location->assignedAssets : $empty,
+            'accessories' => Gate::allows('view', Accessory::class) ? $location->accessories : $empty,
+            'assignedAccessories' => Gate::allows('view', Accessory::class) ? $location->assignedAccessories : $empty,
+            'users' => Gate::allows('view', User::class) ? $location->users()->with('companies')->get() : $empty,
+            'consumables' => Gate::allows('view', Consumable::class) ? $location->consumables : $empty,
+            'components' => Gate::allows('view', Component::class) ? $location->components : $empty,
+            // Child locations key off the same locations.view permission the
+            // outer authorize() already required, so no further gate here.
+            'children' => $location->children,
+        ];
+    }
 
     /**
      * Returns a view that presents a form to clone a location.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @param int $locationId
+     *
+     * @param  int  $locationId
+     *
      * @since [v6.0.14]
      */
-    public function getClone($locationId = null) : View | RedirectResponse
+    public function getClone($locationId = null): View|RedirectResponse
     {
-        $this->authorize('create', Location::class);
-
         // Check if the asset exists
         if (is_null($location_to_clone = Location::find($locationId))) {
             // Redirect to the asset management page
             return redirect()->route('licenses.index')->with('error', trans('admin/locations/message.does_not_exist'));
         }
+
+        $this->authorize('clone', $location_to_clone);
 
         $location = clone $location_to_clone;
 
@@ -318,147 +379,33 @@ class LocationsController extends Controller
             ->with('item', $location);
     }
 
-
     /**
      * Restore a given Asset Model (mark as un-deleted)
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v1.0]
-     * @param int $id
      */
-    public function postRestore($id) : RedirectResponse
+    public function postRestore(Location $location): RedirectResponse
     {
-        $this->authorize('create', Location::class);
+        $this->authorize('delete', $location);
 
-        if ($location = Location::withTrashed()->find($id)) {
-
-            if ($location->deleted_at == '') {
-                return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.location')]));
-            }
-
-            if ($location->restore()) {
-                $logaction = new Actionlog();
-                $logaction->item_type = Location::class;
-                $logaction->item_id = $location->id;
-                $logaction->created_at = date('Y-m-d H:i:s');
-                $logaction->created_by = auth()->id();
-                $logaction->logaction('restore');
-
-                return redirect()->route('locations.index')->with('success', trans('admin/locations/message.restore.success'));
-            }
-
-            return redirect()->back()->with('error', trans('general.could_not_restore', ['item_type' => trans('general.location'), 'error' => $location->getErrors()->first()]));
+        if ($location->deleted_at == '') {
+            return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.location')]));
         }
 
-        return redirect()->back()->with('error', trans('admin/models/message.does_not_exist'));
+        if ($location->restore()) {
+            $logaction = new Actionlog;
+            $logaction->item_type = Location::class;
+            $logaction->item_id = $location->id;
+            $logaction->created_at = date('Y-m-d H:i:s');
+            $logaction->created_by = auth()->id();
+            $logaction->logaction('restore');
 
-    }
-
-    /**
-     * Returns a view that allows the user to bulk delete locations
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v6.3.1]
-     */
-    public function postBulkDelete(Request $request) : View | RedirectResponse
-    {
-        $this->authorize('update', Location::class);
-
-        $locations_raw_array = $request->input('ids');
-
-        // Make sure some IDs have been selected
-        if ((is_array($locations_raw_array)) && (count($locations_raw_array) > 0)) {
-            $locations = Location::whereIn('id', $locations_raw_array)
-                ->withCount('assignedAssets as assigned_assets_count')
-                ->withCount('assets as assets_count')
-                ->withCount('assignedAccessories as assigned_accessories_count')
-                ->withCount('accessories as accessories_count')
-                ->withCount('rtd_assets as rtd_assets_count')
-                ->withCount('children as children_count')
-                ->withCount('consumables as consumables_count')
-                ->withCount('components as components_count')
-                ->withCount('users as users_count')->get();
-
-                $valid_count = 0;
-                foreach ($locations as $location) {
-                    if ($location->isDeletable()) {
-                        $valid_count++;
-                    }
-                }
-                return view('locations/bulk-delete', compact('locations'))->with('valid_count', $valid_count);
+            return redirect()->route('locations.index')->with('success', trans('admin/locations/message.restore.success'));
         }
 
-        return redirect()->route('models.index')
-            ->with('error', 'You must select at least one model to edit.');
-    }
-
-    /**
-     * Checks that locations can be deleted and deletes them if they can
-     *
-     * @author [A. Gianotto] [<snipe@snipe.net>]
-     * @since [v6.3.1]
-
-     */
-    public function postBulkDeleteStore(Request $request) : RedirectResponse
-    {
-        $this->authorize('delete', Location::class);
-
-        $locations_raw_array = $request->input('ids');
-
-        if ((is_array($locations_raw_array)) && (count($locations_raw_array) > 0)) {
-            $locations = Location::whereIn('id', $locations_raw_array)
-                ->withCount('assignedAssets as assigned_assets_count')
-                ->withCount('assets as assets_count')
-                ->withCount('assignedAccessories as assigned_accessories_count')
-                ->withCount('accessories as accessories_count')
-                ->withCount('rtd_assets as rtd_assets_count')
-                ->withCount('children as children_count')
-                ->withCount('users as users_count')
-                ->withCount('consumables as consumables_count')
-                ->withCount('components as components_count')->get();
-
-            $success_count = 0;
-            $error_count = 0;
-
-            foreach ($locations as $location) {
-
-                // Can we delete this location?
-                if ($location->isDeletable()) {
-                    $location->delete();
-                    $success_count++;
-                } else {
-                    $error_count++;
-                }
-            }
-
-            Log::debug('Success count: '.$success_count);
-            Log::debug('Error count: '.$error_count);
-            // Complete success
-            if ($success_count == count($locations_raw_array)) {
-                return redirect()
-                    ->route('locations.index')
-                    ->with('success', trans_choice('general.bulk.delete.success', $success_count,
-                        ['object_type' => trans_choice('general.location_plural', $success_count), 'count' => $success_count]
-                    ));
-            }
-
-            // Partial success
-            if ($error_count > 0) {
-                return redirect()
-                    ->route('locations.index')
-                    ->with('warning', trans('general.bulk.delete.partial',
-                        ['success' => $success_count, 'error' => $error_count, 'object_type' => trans('general.locations')]
-                    ));
-                }
-            }
-
-
-        // Nothing was selected - return to the index
-        return redirect()
-            ->route('locations.index')
-            ->with('error', trans('general.bulk.nothing_selected',
-                ['object_type' => trans('general.locations')]
-            ));
+        return redirect()->back()->with('error', trans('general.could_not_restore', ['item_type' => trans('general.location'), 'error' => $location->getErrors()->first()]));
 
     }
 }

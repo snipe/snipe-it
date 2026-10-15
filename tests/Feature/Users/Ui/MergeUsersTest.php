@@ -3,17 +3,16 @@
 namespace Tests\Feature\Users\Ui;
 
 use App\Models\Accessory;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
 use App\Models\User;
-use App\Models\Actionlog;
 use Tests\TestCase;
-
 
 class MergeUsersTest extends TestCase
 {
-    public function testAssetsAreTransferredOnUserMerge()
+    public function test_assets_are_transferred_on_user_merge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -23,11 +22,11 @@ class MergeUsersTest extends TestCase
         Asset::factory()->count(3)->assignedToUser($user2)->create();
         Asset::factory()->count(3)->assignedToUser($user_to_merge_into)->create();
 
-        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->post(route('users.merge.save', $user1->id),
                 [
                     'ids_to_merge' => [$user1->id, $user2->id],
-                    'merge_into_id' => $user_to_merge_into->id
+                    'merge_into_id' => $user_to_merge_into->id,
                 ])
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
@@ -39,7 +38,7 @@ class MergeUsersTest extends TestCase
 
     }
 
-    public function testLicensesAreTransferredOnUserMerge()
+    public function test_licenses_are_transferred_on_user_merge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -51,11 +50,11 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(3, $user_to_merge_into->refresh()->licenses->count());
 
-        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->post(route('users.merge.save', $user1->id),
                 [
                     'ids_to_merge' => [$user1->id, $user2->id],
-                    'merge_into_id' => $user_to_merge_into->id
+                    'merge_into_id' => $user_to_merge_into->id,
                 ])
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
@@ -67,7 +66,7 @@ class MergeUsersTest extends TestCase
 
     }
 
-    public function testAccessoriesTransferredOnUserMerge()
+    public function test_accessories_transferred_on_user_merge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -79,11 +78,11 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(3, $user_to_merge_into->refresh()->accessories->count());
 
-        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->post(route('users.merge.save', $user1->id),
                 [
                     'ids_to_merge' => [$user1->id, $user2->id],
-                    'merge_into_id' => $user_to_merge_into->id
+                    'merge_into_id' => $user_to_merge_into->id,
                 ])
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
@@ -95,7 +94,7 @@ class MergeUsersTest extends TestCase
 
     }
 
-    public function testConsumablesTransferredOnUserMerge()
+    public function test_consumables_transferred_on_user_merge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -107,11 +106,11 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(3, $user_to_merge_into->refresh()->consumables->count());
 
-        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->post(route('users.merge.save', $user1->id),
                 [
                     'ids_to_merge' => [$user1->id, $user2->id],
-                    'merge_into_id' => $user_to_merge_into->id
+                    'merge_into_id' => $user_to_merge_into->id,
                 ])
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
@@ -123,7 +122,7 @@ class MergeUsersTest extends TestCase
 
     }
 
-    public function testFilesAreTransferredOnUserMerge()
+    public function test_files_are_transferred_on_user_merge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -135,11 +134,11 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(3, $user_to_merge_into->refresh()->uploads->count());
 
-        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->post(route('users.merge.save', $user1->id),
                 [
                     'ids_to_merge' => [$user1->id, $user2->id],
-                    'merge_into_id' => $user_to_merge_into->id
+                    'merge_into_id' => $user_to_merge_into->id,
                 ])
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
@@ -151,7 +150,7 @@ class MergeUsersTest extends TestCase
 
     }
 
-    public function testAcceptancesAreTransferredOnUserMerge()
+    public function test_acceptances_are_transferred_on_user_merge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -163,11 +162,11 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(3, $user_to_merge_into->refresh()->acceptances->count());
 
-        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->post(route('users.merge.save', $user1->id),
                 [
                     'ids_to_merge' => [$user1->id, $user2->id],
-                    'merge_into_id' => $user_to_merge_into->id
+                    'merge_into_id' => $user_to_merge_into->id,
                 ])
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
@@ -179,7 +178,7 @@ class MergeUsersTest extends TestCase
 
     }
 
-    public function testUserUpdateHistoryIsTransferredOnUserMerge()
+    public function test_user_update_history_is_transferred_on_user_merge()
     {
         $user1 = User::factory()->create();
         $user2 = User::factory()->create();
@@ -191,11 +190,11 @@ class MergeUsersTest extends TestCase
 
         $this->assertEquals(3, $user_to_merge_into->refresh()->userlog->count());
 
-        $response = $this->actingAs(User::factory()->editUsers()->viewUsers()->create())
+        $response = $this->actingAs(User::factory()->deleteUsers()->viewUsers()->create())
             ->post(route('users.merge.save', $user1->id),
                 [
                     'ids_to_merge' => [$user1->id, $user2->id],
-                    'merge_into_id' => $user_to_merge_into->id
+                    'merge_into_id' => $user_to_merge_into->id,
                 ])
             ->assertStatus(302)
             ->assertRedirect(route('users.index'));
@@ -208,6 +207,4 @@ class MergeUsersTest extends TestCase
         $this->assertEquals(2, $user2->refresh()->userlog->count());
 
     }
-
-
 }

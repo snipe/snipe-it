@@ -1,28 +1,35 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'A categoria não existe.',
-    'assoc_models'	 => 'Esta categoria está no momento associada a pelo menos um modelo e não pode ser excluída. Atualize seus modelos para não referenciarem mais esta categoria e tente novamente. ',
-    'assoc_items'	 => 'Esta categoria está no momento associada a pelo menos um modelo e não pode ser excluída. Atualize seus :asset_type para não referenciarem mais esta categoria e tente novamente. ',
+    'assoc_models' => 'Esta categoria está no momento associada a pelo menos um modelo e não pode ser excluída. Atualize seus modelos para não referenciarem mais esta categoria e tente novamente. ',
+    'assoc_items' => 'Esta categoria está no momento associada a pelo menos um modelo e não pode ser excluída. Atualize seus :asset_type para não referenciarem mais esta categoria e tente novamente. ',
 
-    'create' => array(
-        'error'   => 'A categoria não foi criada. Tente novamente.',
-        'success' => 'Categoria criada com sucesso.'
-    ),
+    'create' => [
+        'error' => 'A categoria não foi criada. Tente novamente.',
+        'success' => 'Categoria criada com sucesso.',
+    ],
 
-    'update' => array(
-        'error'   => 'A categoria não foi atualizada, tente novamente',
+    'update' => [
+        'error' => 'A categoria não foi atualizada, tente novamente',
         'success' => 'Categoria atualizada com sucesso.',
-        'cannot_change_category_type'   => 'Você não pode alterar o tipo de categoria uma vez que ele foi criado',
-    ),
+        'cannot_change_category_type' => 'Você não pode alterar o tipo de categoria uma vez que ele foi criado',
+    ],
 
-    'delete' => array(
-        'confirm'                => 'Tem certeza de que deseja excluir esta categoria?',
-        'error'                  => 'Houve um problema ao excluir a categoria. Tente novamente.',
-        'success'                => 'Category was deleted successfully.',
-        'bulk_success'           => 'Categories were deleted successfully.',
-        'partial_success'        => 'Category deleted successfully. See additional information below. | :count categories were deleted successfully. See additional information below.',
-    )
+    'delete' => [
+        'confirm' => 'Tem certeza de que deseja excluir esta categoria?',
+        'error' => 'Houve um problema ao excluir a categoria. Tente novamente.',
+        'success' => 'A categoria foi excluída com sucesso.',
+        'bulk_success' => 'Category deleted successfully.|:count categories were deleted successfully.',
+        'partial_success' => 'Categorias excluídas com sucesso. Veja as informações adicionais abaixo. :count categorias foram excluídas com sucesso. Veja as informações adicionais abaixo.',
+    ],
 
-);
+    'bulkedit' => [
+        'warn' => 'You are about to edit the properties of the following category:|You are about to edit the properties of the following :count categories:',
+        'no_selection' => 'You must select at least one category to edit.',
+        'no_changes' => 'Nenhum campo foi alterado, então nada foi atualizado.',
+        'success' => 'Category successfully updated.|:count categories successfully updated.',
+    ],
+
+];

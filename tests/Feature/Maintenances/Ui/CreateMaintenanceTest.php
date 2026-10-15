@@ -2,8 +2,10 @@
 
 namespace Tests\Feature\Maintenances\Ui;
 
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Maintenance;
+use App\Models\MaintenanceType;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
@@ -12,39 +14,41 @@ use Tests\TestCase;
 
 class CreateMaintenanceTest extends TestCase
 {
-    public function testPageRequiresPermission()
+    public function test_page_requires_permission()
     {
         $this->actingAs(User::factory()->create())
             ->get(route('maintenances.create'))
             ->assertForbidden();
     }
 
-    public function testPageRenders()
+    public function test_page_renders()
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('maintenances.create'))
             ->assertOk();
     }
 
-
-    public function testCanCreateMaintenance()
+    public function test_can_create_maintenance()
     {
         Storage::fake('public');
+        Storage::fake('local');
         $actor = User::factory()->superuser()->create();
         $asset = Asset::factory()->create();
         $supplier = Supplier::factory()->create();
+        $type = MaintenanceType::factory()->create();
 
         $this->actingAs($actor)
             ->post(route('maintenances.store'), [
                 'name' => 'Test Maintenance',
                 'selected_assets' => [$asset->id],
                 'supplier_id' => $supplier->id,
-                'asset_maintenance_type' => 'Maintenance',
-                'start_date' => '2021-01-01',
-                'completion_date' => '2021-01-10',
+                'maintenance_type_id' => $type->id,
+                'start_date' => '2021-01-01 00:00:00',
+                'completion_date' => '2021-01-10 00:00:00',
                 'is_warranty' => '1',
                 'cost' => '100.00',
                 'image' => UploadedFile::fake()->image('test_image.png'),
+                'file' => [UploadedFile::fake()->create('maintenance.pdf', 64, 'application/pdf')],
                 'notes' => 'A note',
                 'url' => 'https://snipeitapp.com',
             ])
@@ -57,16 +61,26 @@ class CreateMaintenanceTest extends TestCase
         // Assert file was stored...
         Storage::disk('public')->assertExists(app('maintenances_path').$maintenance->image);
 
+        $uploadedLog = Actionlog::query()
+            ->where('action_type', 'uploaded')
+            ->where('item_type', Maintenance::class)
+            ->where('item_id', $maintenance->id)
+            ->latest('id')
+            ->first();
+
+        $this->assertNotNull($uploadedLog);
+        Storage::disk('local')->assertExists('private_uploads/maintenances/'.$uploadedLog->filename);
 
         $this->assertDatabaseHas('maintenances', [
-            'asset_id' => $asset->id,
+            'item_id' => $asset->id,
+            'item_type' => \App\Models\Asset::class,
             'supplier_id' => $supplier->id,
-            'asset_maintenance_type' => 'Maintenance',
+            'maintenance_type_id' => $type->id,
+            'asset_maintenance_type' => $type->name,
             'name' => 'Test Maintenance',
             'is_warranty' => 1,
-            'start_date' => '2021-01-01',
-            'completion_date' => '2021-01-10',
-            'asset_maintenance_time' => '9',
+            'start_date' => '2021-01-01 00:00:00',
+            'expected_completion_date' => '2021-01-10 00:00:00',
             'notes' => 'A note',
             'url' => 'https://snipeitapp.com',
             'cost' => '100.00',
@@ -74,6 +88,131 @@ class CreateMaintenanceTest extends TestCase
             'created_by' => $actor->id,
         ]);
 
-        $this->assertHasTheseActionLogs($maintenance, ['create']);
+        $this->assertHasTheseActionLogs($maintenance, ['create', 'uploaded']);
+    }
+
+    public function test_cleared_responsible_party_persists_as_null()
+    {
+        // Regression for issue #19452: the create form pre-populates
+        // responsible_party_id with the acting user as a UX default,
+        // but if the user clears the picker before submitting, the
+        // server used to fall back to the acting user via a `?:`
+        // shortcut, nullifying the user's clear. The submission is a
+        // deliberate deselection and must persist as null, matching
+        // update()'s behavior.
+        $actor = User::factory()->superuser()->create();
+        $asset = Asset::factory()->create();
+        $type = MaintenanceType::factory()->create();
+
+        $this->actingAs($actor)
+            ->post(route('maintenances.store'), [
+                'name' => 'Cleared Party Maintenance',
+                'selected_assets' => [$asset->id],
+                'maintenance_type_id' => $type->id,
+                'start_date' => '2021-01-01 00:00:00',
+                'is_warranty' => '0',
+                'responsible_party_id' => '',
+            ])
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('maintenances.index'));
+
+        $this->assertDatabaseHas('maintenances', [
+            'name' => 'Cleared Party Maintenance',
+            'responsible_party_id' => null,
+        ]);
+    }
+
+    public function test_explicitly_picked_responsible_party_persists()
+    {
+        $actor = User::factory()->superuser()->create();
+        $party = User::factory()->create();
+        $asset = Asset::factory()->create();
+        $type = MaintenanceType::factory()->create();
+
+        $this->actingAs($actor)
+            ->post(route('maintenances.store'), [
+                'name' => 'Picked Party Maintenance',
+                'selected_assets' => [$asset->id],
+                'maintenance_type_id' => $type->id,
+                'start_date' => '2021-01-01 00:00:00',
+                'is_warranty' => '0',
+                'responsible_party_id' => $party->id,
+            ])
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('maintenances.index'));
+
+        $this->assertDatabaseHas('maintenances', [
+            'name' => 'Picked Party Maintenance',
+            'responsible_party_id' => $party->id,
+        ]);
+    }
+
+    public function test_can_backfill_a_completed_maintenance_via_create()
+    {
+        // Users record maintenances that were already finished (backfill).
+        // Setting completed_at on create should: (a) persist the value,
+        // (b) stamp completed_by, (c) compute asset_maintenance_time from
+        // start_date → completed_at, and (d) fire the MaintenanceComplete
+        // action log alongside the create log.
+        $actor = User::factory()->superuser()->create();
+        $asset = Asset::factory()->create();
+        $type = MaintenanceType::factory()->create();
+
+        $this->actingAs($actor)
+            ->post(route('maintenances.store'), [
+                'name' => 'Backfilled Maintenance',
+                'selected_assets' => [$asset->id],
+                'maintenance_type_id' => $type->id,
+                'start_date' => '2021-01-01 00:00:00',
+                'completed_at' => '2021-01-08 00:00:00',
+                'cost' => '0.00',
+                'notes' => 'Backfilled after the fact',
+            ])
+            ->assertSessionHasNoErrors()
+            ->assertRedirect(route('maintenances.index'));
+
+        $maintenance = Maintenance::where('name', 'Backfilled Maintenance')->firstOrFail();
+
+        $this->assertEquals('2021-01-08 00:00:00', $maintenance->completed_at->format('Y-m-d H:i:s'));
+        $this->assertEquals($actor->id, $maintenance->completed_by);
+        $this->assertEquals(7, $maintenance->asset_maintenance_time, 'Duration should be start_date → completed_at, not created_at → completed_at (created_at is now, not the historical timeline)');
+
+        $this->assertDatabaseHas('action_logs', [
+            'item_type' => Maintenance::class,
+            'item_id' => $maintenance->id,
+            'action_type' => 'completed',
+            'created_by' => $actor->id,
+        ]);
+    }
+
+    public function test_creating_without_completed_at_leaves_maintenance_active()
+    {
+        // Sanity guard: the default create flow (no completed_at) must
+        // not accidentally stamp anything. Snipe called this out — a
+        // datetimepicker that defaults to now() would silently mark
+        // freshly-created maintenances complete.
+        $actor = User::factory()->superuser()->create();
+        $asset = Asset::factory()->create();
+        $type = MaintenanceType::factory()->create();
+
+        $this->actingAs($actor)
+            ->post(route('maintenances.store'), [
+                'name' => 'Active Maintenance',
+                'selected_assets' => [$asset->id],
+                'maintenance_type_id' => $type->id,
+                'start_date' => '2021-01-01 00:00:00',
+            ])
+            ->assertSessionHasNoErrors();
+
+        $maintenance = Maintenance::where('name', 'Active Maintenance')->firstOrFail();
+
+        $this->assertNull($maintenance->completed_at);
+        $this->assertNull($maintenance->completed_by);
+        $this->assertNull($maintenance->asset_maintenance_time);
+        $this->assertDatabaseMissing('action_logs', [
+            'item_type' => Maintenance::class,
+            'item_id' => $maintenance->id,
+            'action_type' => 'completed',
+        ]);
     }
 }

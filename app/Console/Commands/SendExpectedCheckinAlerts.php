@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\Recipients\AlertRecipient;
 use App\Models\Setting;
@@ -9,8 +10,9 @@ use App\Notifications\ExpectedCheckinAdminNotification;
 use App\Notifications\ExpectedCheckinNotification;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
-use App\Helpers\Helper;
+use Symfony\Component\Mailer\Exception\TransportException;
 
 class SendExpectedCheckinAlerts extends Command
 {
@@ -49,7 +51,7 @@ class SendExpectedCheckinAlerts extends Command
         $interval_date = $today->copy()->addDays($interval);
         $count = 0;
 
-        if (!$this->option('with-output')) {
+        if (! $this->option('with-output')) {
             $this->info('Run this command with the --with-output option to see the full list in the console.');
         }
 
@@ -57,11 +59,20 @@ class SendExpectedCheckinAlerts extends Command
 
         $this->info($assets->count().' assets must be checked on or before '.Helper::getFormattedDateObject($interval_date, 'date', false));
 
-
+        $failed = 0;
         foreach ($assets as $asset) {
-            if ($asset->assignedTo && (isset($asset->assignedTo->email)) && ($asset->assignedTo->email!='') && $asset->checkedOutToUser()) {
-                $asset->assignedTo->notify((new ExpectedCheckinNotification($asset)));
-                $count++;
+            if ($asset->assignedTo && (isset($asset->assignedTo->email)) && ($asset->assignedTo->email != '') && $asset->checkedOutToUser()) {
+                try {
+                    $asset->assignedTo->notify((new ExpectedCheckinNotification($asset)));
+                    $count++;
+                } catch (TransportException $e) {
+                    // Mail transport failed (bad SMTP creds, DNS, connection refused).
+                    // Log and keep going so one broken send doesn't strand every remaining user.
+                    $failed++;
+                    $message = 'Failed to send expected-checkin notification to '.$asset->assignedTo->email.' for asset '.$asset->id.': '.$e->getMessage();
+                    Log::warning($message);
+                    $this->error($message);
+                }
             }
         }
 
@@ -76,13 +87,13 @@ class SendExpectedCheckinAlerts extends Command
                         trans('general.purchase_date'),
                         trans('admin/hardware/form.expected_checkin'),
                     ],
-                    $assets->map(fn($assets) => [
+                    $assets->map(fn ($assets) => [
                         trans('general.id') => $assets->id,
                         trans('admin/hardware/form.tag') => $assets->asset_tag,
                         trans('admin/hardware/form.model') => $assets->model->name,
                         trans('general.model_no') => $assets->model->model_number,
                         trans('general.purchase_date') => $assets->purchase_date_formatted,
-                        trans('admin/hardware/form.eol_date') => $assets->expected_checkin_formattedDate ? $assets->expected_checkin_formattedDate . ' (' . $assets->expected_checkin_diff_for_humans . ')' : '',
+                        trans('admin/hardware/form.eol_date') => $assets->expected_checkin_formattedDate ? $assets->expected_checkin_formattedDate.' ('.$assets->expected_checkin_diff_for_humans.')' : '',
                     ])
                 );
             }
@@ -93,11 +104,19 @@ class SendExpectedCheckinAlerts extends Command
             $recipients = collect(explode(',', $settings->alert_email))->map(function ($item) {
                 return new AlertRecipient($item);
             });
-            Notification::send($recipients, new ExpectedCheckinAdminNotification($assets));
-
+            try {
+                Notification::send($recipients, new ExpectedCheckinAdminNotification($assets));
+            } catch (TransportException $e) {
+                $message = 'Failed to send expected-checkin admin rollup: '.$e->getMessage();
+                Log::warning($message);
+                $this->error($message);
+            }
         }
-        
-        $this->info('Sent checkin reminders to to '.$count.' users.');
+
+        $this->info('Sent checkin reminders to '.$count.' users.');
+        if ($failed > 0) {
+            $this->warn($failed.' notification(s) failed to send due to mail transport errors. See log for details.');
+        }
 
     }
 }

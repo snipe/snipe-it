@@ -4,6 +4,7 @@ namespace Tests\Feature\Licenses\Api;
 
 use App\Models\Company;
 use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\User;
 use Tests\Concerns\TestsFullMultipleCompaniesSupport;
 use Tests\Concerns\TestsPermissionsRequirement;
@@ -11,7 +12,7 @@ use Tests\TestCase;
 
 class DeleteLicensesTest extends TestCase implements TestsFullMultipleCompaniesSupport, TestsPermissionsRequirement
 {
-    public function testRequiresPermission()
+    public function test_requires_permission()
     {
         $license = License::factory()->create();
 
@@ -22,7 +23,7 @@ class DeleteLicensesTest extends TestCase implements TestsFullMultipleCompaniesS
         $this->assertNotSoftDeleted($license);
     }
 
-    public function testAdheresToFullMultipleCompaniesSupportScoping()
+    public function test_adheres_to_full_multiple_companies_support_scoping()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
@@ -53,7 +54,7 @@ class DeleteLicensesTest extends TestCase implements TestsFullMultipleCompaniesS
         $this->assertSoftDeleted($licenseC);
     }
 
-    public function testLicenseCannotBeDeletedIfStillAssigned()
+    public function test_license_cannot_be_deleted_if_still_assigned()
     {
         $license = License::factory()->create(['seats' => 2]);
         $license->freeSeat()->update(['assigned_to' => User::factory()->create()->id]);
@@ -65,7 +66,7 @@ class DeleteLicensesTest extends TestCase implements TestsFullMultipleCompaniesS
         $this->assertNotSoftDeleted($license);
     }
 
-    public function testCanDeleteLicense()
+    public function test_can_delete_license()
     {
         $license = License::factory()->create();
 
@@ -76,7 +77,7 @@ class DeleteLicensesTest extends TestCase implements TestsFullMultipleCompaniesS
         $this->assertSoftDeleted($license);
     }
 
-    public function testLicenseSeatsAreDeletedWhenLicenseIsDeleted()
+    public function test_license_seats_are_deleted_when_license_is_deleted()
     {
         $license = License::factory()->create(['seats' => 2]);
 
@@ -86,5 +87,37 @@ class DeleteLicensesTest extends TestCase implements TestsFullMultipleCompaniesS
             ->deleteJson(route('api.licenses.destroy', $license));
 
         $this->assertTrue($license->fresh()->licenseseats->isEmpty());
+    }
+
+    public function test_all_seats_for_deleted_license_are_soft_deleted()
+    {
+        $license = License::factory()->create(['seats' => 5]);
+
+        $this->actingAsForApi(User::factory()->deleteLicenses()->create())
+            ->deleteJson(route('api.licenses.destroy', $license))
+            ->assertStatusMessageIs('success');
+
+        $this->assertEquals(5, LicenseSeat::onlyTrashed()->where('license_id', $license->id)->count());
+    }
+
+    public function test_deleting_license_does_not_affect_seats_of_other_licenses()
+    {
+        $licenseToDelete = License::factory()->create(['seats' => 3]);
+        $otherLicense = License::factory()->create(['seats' => 2]);
+
+        $assignedUser = User::factory()->create();
+        $otherLicense->freeSeat()->update(['assigned_to' => $assignedUser->id]);
+
+        $this->actingAsForApi(User::factory()->deleteLicenses()->create())
+            ->deleteJson(route('api.licenses.destroy', $licenseToDelete))
+            ->assertStatusMessageIs('success');
+
+        $this->assertSoftDeleted($licenseToDelete);
+        $this->assertNotSoftDeleted($otherLicense);
+        $this->assertEquals(
+            $assignedUser->id,
+            LicenseSeat::where('license_id', $otherLicense->id)->whereNotNull('assigned_to')->value('assigned_to'),
+            'Seat on another license had its assignment incorrectly cleared'
+        );
     }
 }

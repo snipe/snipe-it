@@ -5,97 +5,210 @@ namespace Tests\Unit;
 use PDO;
 use Tests\TestCase;
 
+/**
+ * Coverage for the PDO SSL options block in config/database.php. Loads the
+ * real config file under different env combinations rather than a hand-rolled
+ * simulator, so the tests would actually catch a regression in the file
+ * itself (which the earlier simulator-based version could not, see #19411).
+ */
 class DatabaseSslConfigurationTest extends TestCase
 {
-    public function testMysqlSslConfigurationWithPaasMode(): void
+    /**
+     * Every DB_SSL_* key this test manipulates. The snapshot/restore in
+     * setUp and the reset in loadDatabaseConfig must cover the exact same
+     * set: any key mutated but not restored would bake into the *next*
+     * test's setUp config boot and break its mysql connection with "Cannot
+     * connect to MySQL using SSL". A single source of truth keeps them in sync.
+     */
+    private const SSL_KEYS = [
+        'DB_SSL',
+        'DB_SSL_IS_PAAS',
+        'DB_SSL_KEY_PATH',
+        'DB_SSL_CERT_PATH',
+        'DB_SSL_CA_PATH',
+        'DB_SSL_CIPHER',
+        'DB_SSL_VERIFY_SERVER',
+    ];
+
+    private array $originalSslEnv = [];
+
+    protected function setUp(): void
     {
-        config([
-            'database.connections.mysql.options' => null
+        parent::setUp();
+
+        $this->snapshotSslEnv();
+
+        $this->beforeApplicationDestroyed(fn () => $this->restoreSslEnv());
+    }
+
+    /**
+     * Record every SSL env key as it stands before this test mutates it.
+     */
+    private function snapshotSslEnv(): void
+    {
+        foreach (self::SSL_KEYS as $key) {
+            $this->originalSslEnv[$key] = [
+                'env' => $_ENV[$key] ?? false,
+                'server' => $_SERVER[$key] ?? false,
+                'getenv' => getenv($key),
+            ];
+        }
+    }
+
+    /**
+     * Put every SSL env key back exactly as it was before this test ran, so
+     * a mutated value can't bake into the next test's config boot.
+     */
+    private function restoreSslEnv(): void
+    {
+        foreach ($this->originalSslEnv as $key => $original) {
+            unset($_ENV[$key], $_SERVER[$key]);
+            putenv($key);
+
+            if ($original['env'] !== false) {
+                $_ENV[$key] = $original['env'];
+            }
+            if ($original['server'] !== false) {
+                $_SERVER[$key] = $original['server'];
+            }
+            if ($original['getenv'] !== false) {
+                putenv("$key={$original['getenv']}");
+            }
+        }
+    }
+
+    /**
+     * Set the env vars this test needs, re-require the config file, and
+     * return the fully-built connections array. Any env key not passed is
+     * unset so it doesn't leak in from the surrounding test env.
+     *
+     * @param  array<string, string|null>  $env
+     * @return array<string, mixed>
+     */
+    private function loadDatabaseConfig(array $env): array
+    {
+        foreach (self::SSL_KEYS as $key) {
+            unset($_ENV[$key], $_SERVER[$key]);
+            putenv($key);
+        }
+
+        foreach ($env as $key => $value) {
+            if ($value === null) {
+                $_ENV[$key] = 'null';
+                $_SERVER[$key] = 'null';
+                putenv("$key=null");
+            } else {
+                $_ENV[$key] = $value;
+                $_SERVER[$key] = $value;
+                putenv("$key=$value");
+            }
+        }
+
+        return require base_path('config/database.php');
+    }
+
+    public function test_ssl_disabled_yields_no_pdo_options(): void
+    {
+        $config = $this->loadDatabaseConfig(['DB_SSL' => 'false']);
+
+        $this->assertSame([], $config['connections']['mysql']['options']);
+        $this->assertSame([], $config['connections']['mariadb']['options']);
+    }
+
+    public function test_ssl_enabled_paas_mode_includes_ca_and_verify_only(): void
+    {
+        $config = $this->loadDatabaseConfig([
+            'DB_SSL' => 'true',
+            'DB_SSL_IS_PAAS' => 'true',
+            'DB_SSL_CA_PATH' => '/path/to/ca.pem',
+            'DB_SSL_VERIFY_SERVER' => 'true',
         ]);
 
-        // Test PAAS mode SSL configuration
-        config([
-            'database.connections.mysql.options' => $this->getSslOptions(true, false, true) // isPaas=true, verifyServer=false, sslEnabled=true
-        ]);
+        $options = $config['connections']['mysql']['options'];
 
-        $options = config('database.connections.mysql.options');
-
-        $this->assertArrayHasKey(PDO::MYSQL_ATTR_SSL_CA, $options);
-        $this->assertArrayHasKey(PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT, $options);
-
-        // PAAS mode should not include client certificate attributes
+        $this->assertSame('/path/to/ca.pem', $options[PDO::MYSQL_ATTR_SSL_CA]);
+        $this->assertTrue($options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT]);
         $this->assertArrayNotHasKey(PDO::MYSQL_ATTR_SSL_KEY, $options);
         $this->assertArrayNotHasKey(PDO::MYSQL_ATTR_SSL_CERT, $options);
         $this->assertArrayNotHasKey(PDO::MYSQL_ATTR_SSL_CIPHER, $options);
     }
 
-    public function testMysqlSslConfigurationWithNonPaasMode(): void
+    public function test_ssl_enabled_self_hosted_mode_includes_full_client_cert_set(): void
     {
-        config([
-            'database.connections.mysql.options' => null
+        $config = $this->loadDatabaseConfig([
+            'DB_SSL' => 'true',
+            'DB_SSL_KEY_PATH' => '/path/to/key.pem',
+            'DB_SSL_CERT_PATH' => '/path/to/cert.pem',
+            'DB_SSL_CA_PATH' => '/path/to/ca.pem',
+            'DB_SSL_CIPHER' => 'ECDHE-RSA-AES256-GCM-SHA384',
         ]);
 
-        // Test non-PAAS mode SSL configuration
-        config([
-            'database.connections.mysql.options' => $this->getSslOptions(false, false, true) // isPaas=false, verifyServer=false, sslEnabled=true
-        ]);
+        $options = $config['connections']['mysql']['options'];
 
-        $options = config('database.connections.mysql.options');
-
-        // Non-PAAS mode should include all SSL attributes
-        $this->assertArrayHasKey(PDO::MYSQL_ATTR_SSL_CA, $options);
-        $this->assertArrayHasKey(PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT, $options);
-        $this->assertArrayHasKey(PDO::MYSQL_ATTR_SSL_KEY, $options);
-        $this->assertArrayHasKey(PDO::MYSQL_ATTR_SSL_CERT, $options);
-        $this->assertArrayHasKey(PDO::MYSQL_ATTR_SSL_CIPHER, $options);
+        $this->assertSame('/path/to/key.pem', $options[PDO::MYSQL_ATTR_SSL_KEY]);
+        $this->assertSame('/path/to/cert.pem', $options[PDO::MYSQL_ATTR_SSL_CERT]);
+        $this->assertSame('/path/to/ca.pem', $options[PDO::MYSQL_ATTR_SSL_CA]);
+        $this->assertSame('ECDHE-RSA-AES256-GCM-SHA384', $options[PDO::MYSQL_ATTR_SSL_CIPHER]);
     }
 
-    public function testMysqlSslConfigurationWithoutSsl(): void
+    public function test_null_cipher_is_omitted_not_passed_as_null(): void
     {
-        config([
-            'database.connections.mysql.options' => null
+        // Regression for #19411. .env.example ships DB_SSL_CIPHER=null and
+        // the old code passed that through as PDO::MYSQL_ATTR_SSL_CIPHER =>
+        // null, which made libmysql / libmariadb fail with "Cannot connect
+        // to MySQL using SSL". A null cipher MUST be omitted so the driver
+        // negotiates a default.
+        $config = $this->loadDatabaseConfig([
+            'DB_SSL' => 'true',
+            'DB_SSL_KEY_PATH' => '/path/to/key.pem',
+            'DB_SSL_CERT_PATH' => '/path/to/cert.pem',
+            'DB_SSL_CA_PATH' => '/path/to/ca.pem',
+            'DB_SSL_CIPHER' => null,
         ]);
 
-        // Test SSL disabled configuration
-        config([
-            'database.connections.mysql.options' => $this->getSslOptions(true, false, false) // isPaas=true, verifyServer=false, sslEnabled=false
-        ]);
+        $options = $config['connections']['mysql']['options'];
 
-        $options = config('database.connections.mysql.options');
-
-        // When SSL is disabled, options should be empty
-        $this->assertEmpty($options);
+        $this->assertArrayNotHasKey(PDO::MYSQL_ATTR_SSL_CIPHER, $options);
     }
 
-    public function testSslVerifyServerDefaultsToFalse(): void
+    public function test_null_paths_are_omitted_across_every_ssl_key(): void
     {
-        // Test that SSL_VERIFY_SERVER defaults to false when not explicitly set
-        $options = $this->getSslOptions(true, null, true); // isPaas=true, verifyServer=null, sslEnabled=true
+        // Same shape trap as CIPHER: any of the path envs left at the
+        // .env.example default of `null` would land as PDO::MYSQL_ATTR_SSL_*
+        // => null and break the SSL handshake. Every path key gets the
+        // omit-when-null treatment.
+        $config = $this->loadDatabaseConfig([
+            'DB_SSL' => 'true',
+            'DB_SSL_KEY_PATH' => null,
+            'DB_SSL_CERT_PATH' => null,
+            'DB_SSL_CA_PATH' => null,
+            'DB_SSL_CIPHER' => null,
+        ]);
 
+        $options = $config['connections']['mysql']['options'];
+
+        $this->assertArrayNotHasKey(PDO::MYSQL_ATTR_SSL_KEY, $options);
+        $this->assertArrayNotHasKey(PDO::MYSQL_ATTR_SSL_CERT, $options);
+        $this->assertArrayNotHasKey(PDO::MYSQL_ATTR_SSL_CA, $options);
+        $this->assertArrayNotHasKey(PDO::MYSQL_ATTR_SSL_CIPHER, $options);
+        // VERIFY_SERVER_CERT is always included with a bool cast because
+        // both true and false are valid values.
         $this->assertArrayHasKey(PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT, $options);
         $this->assertFalse($options[PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT]);
     }
 
-    private function getSslOptions(bool $isPaas, ?bool $verifyServer=false, bool $sslEnabled=true): array
+    public function test_mariadb_connection_shares_the_same_ssl_options(): void
     {
-        // simulates the SSL options logic from database.php
-        if (!$sslEnabled) {
-            return [];
-        }
+        $config = $this->loadDatabaseConfig([
+            'DB_SSL' => 'true',
+            'DB_SSL_KEY_PATH' => '/path/to/key.pem',
+            'DB_SSL_CERT_PATH' => '/path/to/cert.pem',
+            'DB_SSL_CA_PATH' => '/path/to/ca.pem',
+        ]);
 
-        if ($isPaas) {
-            return [
-                PDO::MYSQL_ATTR_SSL_CA => '/path/to/ca.pem',
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => $verifyServer ?? false,
-            ];
-        }
-
-        return [
-            PDO::MYSQL_ATTR_SSL_KEY => '/path/to/key.pem',
-            PDO::MYSQL_ATTR_SSL_CERT => '/path/to/cert.pem',
-            PDO::MYSQL_ATTR_SSL_CA => '/path/to/ca.pem',
-            PDO::MYSQL_ATTR_SSL_CIPHER => null,
-            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => $verifyServer ?? false,
-        ];
+        $this->assertSame(
+            $config['connections']['mysql']['options'],
+            $config['connections']['mariadb']['options']
+        );
     }
 }

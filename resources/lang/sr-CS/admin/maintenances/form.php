@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Izaberite vrstu održavanja',
-        'asset_maintenance_type' => 'Tip održavanja imovine',
-        'title'                  => 'Title',
-        'start_date'             => 'Datum početka',
-        'completion_date'        => 'Datum završetka',
-        'cost'                   => 'Cena',
-        'is_warranty'            => 'Poboljšanje garancije',
-        'asset_maintenance_time' => 'Vreme trajanja održavanja opreme (koliko dana)',
-        'notes'                  => 'Zabeleške',
-        'update'                 => 'Dopuna održavanja opreme',
-        'create'                 => 'Napravite zahtev za održavanje opreme'
-    ];
+return [
+    'select_type' => 'Izaberite vrstu održavanja',
+    'asset_maintenance_type' => 'Tip',
+    'title' => 'Title',
+    'start_date' => 'Datum početka',
+    'completion_date' => 'Očekivani završetak',
+    'cost' => 'Cena',
+    'is_warranty' => 'Poboljšanje garancije',
+    'asset_maintenance_time' => 'Trajanje',
+    'notes' => 'Zabeleške',
+    'update' => 'Dopuna održavanja opreme',
+    'create' => 'Napravite zahtev za održavanje opreme',
+    'responsible_party' => 'Odgovorna strana',
+    'checked_out_to_at_creation' => 'Checked Out To',
+    'completed_at' => 'Završeno u',
+    'completed_at_help' => 'Kada je ovo održavanje zapravo završeno. Ostavite prazno ako još uvek nije. Postavljanje datuma ovde je jednako klikom na Označi kao završeno ali vam omogućava da unesete datum u prošlosti umesto sadašnjeg.',
+    'completed_by' => 'Završio',
+    'mark_complete' => 'Označi kao završeno',
+    'already_complete' => 'Već je završeno',
+    'completion_notes' => 'Beleška pri završetku',
+];

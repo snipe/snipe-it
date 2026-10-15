@@ -4,20 +4,18 @@ namespace Tests\Feature\Companies\Api;
 
 use App\Models\Company;
 use App\Models\User;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Tests\TestCase;
 
 class IndexCompaniesTest extends TestCase
 {
-
-    public function testViewingCompanyIndexRequiresPermission()
+    public function test_viewing_company_index_requires_permission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->getJson(route('api.companies.index'))
             ->assertForbidden();
     }
 
-    public function testCompanyIndexReturnsExpectedSearchResults()
+    public function test_company_index_returns_expected_search_results()
     {
         Company::factory()->count(10)->create();
         Company::factory()->create(['name' => 'My Test Company']);
@@ -42,7 +40,30 @@ class IndexCompaniesTest extends TestCase
 
     }
 
-    public function testAdheresToFullMultipleCompaniesSupportScoping()
+    public function test_search_matches_parent_company_name()
+    {
+        // Companies table shows parent as a column. Before adding parent
+        // to Company's $searchableRelations the search silently returned
+        // nothing when typing a parent company's name.
+        $actor = User::factory()->superuser()->create();
+
+        $parent = Company::factory()->create(['name' => 'Umbrella Holdings LLC']);
+        $child = Company::factory()->create(['parent_id' => $parent->id]);
+        $standalone = Company::factory()->create();
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.companies.index', ['search' => 'Umbrella Holdings']))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->all();
+
+        $this->assertContains($child->id, $ids, 'Child should match on parent-company name');
+        $this->assertContains($parent->id, $ids, 'Parent should still match on its own name');
+        $this->assertNotContains($standalone->id, $ids);
+    }
+
+    public function test_adheres_to_full_multiple_companies_support_scoping()
     {
 
         $this->settings->enableMultipleFullCompanySupport();
@@ -71,6 +92,4 @@ class IndexCompaniesTest extends TestCase
             ->assertResponseContainsInRows($companyA)
             ->assertResponseContainsInRows($companyB);
     }
-
-
 }

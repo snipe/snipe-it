@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Pilih tipe pemeliharaan',
-        'asset_maintenance_type' => 'Pemeliharan Jenis Aset',
-        'title'                  => 'Judul',
-        'start_date'             => 'Tanggal Mulai',
-        'completion_date'        => 'Tanggal Penyelesaian',
-        'cost'                   => 'Biaya',
-        'is_warranty'            => 'Pengembangan Garansi',
-        'asset_maintenance_time' => 'Waktu Pemeliharaan Aset (dalam hari)',
-        'notes'                  => 'Catatan',
-        'update'                 => 'Pembaharuan Pemeliharan Aset',
-        'create'                 => 'Membuat Pemeliharan Aset'
-    ];
+return [
+    'select_type' => 'Pilih tipe pemeliharaan',
+    'asset_maintenance_type' => 'Tipe',
+    'title' => 'Judul',
+    'start_date' => 'Tanggal Mulai',
+    'completion_date' => 'Expected Completion',
+    'cost' => 'Biaya',
+    'is_warranty' => 'Pengembangan Garansi',
+    'asset_maintenance_time' => 'Duration',
+    'notes' => 'Catatan',
+    'update' => 'Pembaharuan Pemeliharan Aset',
+    'create' => 'Membuat Pemeliharan Aset',
+    'responsible_party' => 'Responsible Party',
+    'checked_out_to_at_creation' => 'Diberikan kepada',
+    'completed_at' => 'Completed At',
+    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_by' => 'Completed By',
+    'mark_complete' => 'Mark Complete',
+    'already_complete' => 'Already Completed',
+    'completion_notes' => 'Completion Notes',
+];

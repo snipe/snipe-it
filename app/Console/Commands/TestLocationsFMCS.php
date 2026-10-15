@@ -36,7 +36,10 @@ class TestLocationsFMCS extends Command
             $location_id = $this->option('location_id');
         }
 
+        $start = microtime(true);
         $mismatched = Helper::test_locations_fmcs(true, $location_id);
+        $elapsed = microtime(true) - $start;
+
         $this->warn(trans_choice('admin/settings/message.location_scoping.mismatch', count($mismatched)));
         $this->newLine();
         $this->info('Edit your locations to associate them with the correct company.');
@@ -46,6 +49,7 @@ class TestLocationsFMCS extends Command
 
         $this->table($header, $mismatched);
 
+        $this->newLine();
+        $this->info(sprintf('Completed in %.2f seconds.', $elapsed));
     }
-
 }

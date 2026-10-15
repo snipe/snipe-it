@@ -5,11 +5,23 @@ namespace Tests\Feature\Accessories\Api;
 use App\Models\Accessory;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class AccessoryFilesTest extends TestCase
 {
-    public function testAccessoryApiAcceptsFileUpload()
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Swap the private and public disks for in-memory fakes so
+        // uploaded files don't accumulate under storage/private_uploads
+        // and public/uploads across test runs. Was missing here, so
+        // every run of this file left real bytes on disk.
+        Storage::fake('local');
+        Storage::fake('public');
+    }
+
+    public function test_accessory_api_accepts_file_upload()
     {
         // Upload a file to a model
 
@@ -19,17 +31,17 @@ class AccessoryFilesTest extends TestCase
         // Create a superuser to run this as
         $user = User::factory()->superuser()->create();
 
-        //Upload a file
+        // Upload a file
         $this->actingAsForApi($user)
             ->post(
                 route('api.files.store', ['object_type' => 'accessories', 'id' => $accessory->id]), [
-                'file' => [UploadedFile::fake()->create("test.jpg", 100)]
+                    'file' => [UploadedFile::fake()->create('test.jpg', 100)],
                 ]
             )
             ->assertOk();
     }
 
-    public function testAccessoryApiListsFiles()
+    public function test_accessory_api_lists_files()
     {
         // List all files on a model
 
@@ -47,13 +59,13 @@ class AccessoryFilesTest extends TestCase
             ->assertOk()
             ->assertJsonStructure(
                 [
-                'rows',
-                'total',
+                    'rows',
+                    'total',
                 ]
             );
     }
 
-    public function testAccessoryFailsIfInvalidTypePassedInUrl()
+    public function test_accessory_fails_if_invalid_type_passed_in_url()
     {
         // List all files on a model
 
@@ -71,7 +83,7 @@ class AccessoryFilesTest extends TestCase
             ->assertStatus(404);
     }
 
-    public function testAccessoryFailsIfInvalidIdPassedInUrl()
+    public function test_accessory_fails_if_invalid_id_passed_in_url()
     {
         // List all files on a model
 
@@ -90,7 +102,7 @@ class AccessoryFilesTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testAccessoryApiDownloadsFile()
+    public function test_accessory_api_downloads_file()
     {
         // Download a file from a model
 
@@ -104,14 +116,14 @@ class AccessoryFilesTest extends TestCase
         $this->actingAsForApi($user)
             ->post(
                 route('api.files.store', ['object_type' => 'accessories', 'id' => $accessory->id]), [
-                'file' => [UploadedFile::fake()->create("test.jpg", 100)],
+                    'file' => [UploadedFile::fake()->create('test.jpg', 100)],
                 ]
             )
             ->assertOk()
             ->assertJsonStructure(
                 [
-                'status',
-                'messages',
+                    'status',
+                    'messages',
                 ]
             );
 
@@ -119,15 +131,15 @@ class AccessoryFilesTest extends TestCase
         $this->actingAsForApi($user)
             ->post(
                 route('api.files.store', ['object_type' => 'accessories', 'id' => $accessory->id]), [
-                'file' => [UploadedFile::fake()->create("test.jpg", 100)],
-                'notes' => 'manual'
+                    'file' => [UploadedFile::fake()->create('test.jpg', 100)],
+                    'notes' => 'manual',
                 ]
             )
             ->assertOk()
             ->assertJsonStructure(
                 [
-                'status',
-                'messages',
+                    'status',
+                    'messages',
                 ]
             );
 
@@ -139,19 +151,19 @@ class AccessoryFilesTest extends TestCase
             ->assertOk()
             ->assertJsonStructure(
                 [
-                'total',
-                'rows'=>[
-                    '*' => [
-                        'id',
-                        'filename',
-                        'url',
-                        'created_by',
-                        'created_at',
-                        'deleted_at',
-                        'note',
-                        'available_actions'
-                    ]
-                ]
+                    'total',
+                    'rows' => [
+                        '*' => [
+                            'id',
+                            'filename',
+                            'url',
+                            'created_by',
+                            'created_at',
+                            'deleted_at',
+                            'note',
+                            'available_actions',
+                        ],
+                    ],
                 ]
             )
             ->assertJsonPath('rows.0.note', null)
@@ -162,16 +174,16 @@ class AccessoryFilesTest extends TestCase
             ->get(
                 route(
                     'api.files.show', [
-                    'object_type' => 'accessories',
-                    'id' => $accessory->id,
-                    'file_id' => $result->decodeResponseJson()->json()["rows"][0]["id"],
+                        'object_type' => 'accessories',
+                        'id' => $accessory->id,
+                        'file_id' => $result->decodeResponseJson()->json()['rows'][0]['id'],
                     ]
                 )
             )
             ->assertOk();
     }
 
-    public function testAccessoryApiDeletesFile()
+    public function test_accessory_api_deletes_file()
     {
         // Delete a file from a model
 
@@ -181,11 +193,11 @@ class AccessoryFilesTest extends TestCase
         // Create a superuser to run this as
         $user = User::factory()->superuser()->create();
 
-        //Upload a file
+        // Upload a file
         $this->actingAsForApi($user)
             ->post(
                 route('api.files.store', ['object_type' => 'accessories', 'id' => $accessory->id]), [
-                'file' => [UploadedFile::fake()->create("test.jpg", 100)]
+                    'file' => [UploadedFile::fake()->create('test.jpg', 100)],
                 ]
             )
             ->assertOk();
@@ -202,17 +214,17 @@ class AccessoryFilesTest extends TestCase
             ->delete(
                 route(
                     'api.files.destroy', [
-                    'object_type' => 'accessories',
-                    'id' => $accessory->id,
-                    'file_id' => $result->decodeResponseJson()->json()["rows"][0]["id"],
+                        'object_type' => 'accessories',
+                        'id' => $accessory->id,
+                        'file_id' => $result->decodeResponseJson()->json()['rows'][0]['id'],
                     ]
                 )
             )
             ->assertOk()
             ->assertJsonStructure(
                 [
-                'status',
-                'messages',
+                    'status',
+                    'messages',
                 ]
             );
     }

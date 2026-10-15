@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Hash;
 
 class ResetDemoSettings extends Command
 {
@@ -48,14 +48,20 @@ class ResetDemoSettings extends Command
         $settings->auto_increment_assets = 1;
         $settings->logo = 'snipe-logo.png';
         $settings->alert_email = 'service@snipe-it.io';
-        $settings->login_note = 'Use `admin` / `password` to login to the demo.';
+        $settings->login_note = "Use any of the following credentials to login to the demo:\n\n- `admin` / `password`\n- `assets` / `password`\n- `testuser` / `password`";
         $settings->header_color = '#3c8dbc';
-        $settings->link_dark_color = '#86cbf2';
-        $settings->link_light_color = '#084d73;';
+        $settings->link_dark_color = '#5fa4cc';
+        $settings->link_light_color = '#296282;';
+        $settings->nav_link_color = '#FFFFFF';
         $settings->label2_2d_type = 'QRCODE';
         $settings->default_currency = 'USD';
         $settings->brand = 2;
-        $settings->ldap_enabled = 0;
+        // Enabled so the wizard's return-visitor branch unlocks all 5
+        // steps for demo visitors and they can jump straight to the
+        // step-3 Test Find User preview against the seeded Forumsys
+        // config. Safe on the demo because LoginController skips the
+        // LDAP auth branch when config('app.lock_passwords') is on.
+        $settings->ldap_enabled = '1';
         $settings->full_multiple_companies_support = 0;
         $settings->label2_1d_type = 'C128';
         $settings->email_domain = 'snipeitapp.com';
@@ -76,7 +82,6 @@ class ResetDemoSettings extends Command
         $settings->saml_custom_settings = null;
         $settings->default_avatar = 'default.png';
 
-
         $settings->save();
 
         if ($user = User::where('username', '=', 'admin')->first()) {
@@ -86,9 +91,46 @@ class ResetDemoSettings extends Command
             $user->save();
         }
 
+        $assetsUser = User::updateOrCreate(
+            ['username' => 'assets'],
+            [
+                'first_name' => 'Assets',
+                'last_name' => 'User',
+                'password' => Hash::make('password'),
+                'activated' => 1,
+            ]
+        );
+        $assetsUser->permissions = json_encode([
+            'assets.view' => 1,
+            'assets.create' => 1,
+            'assets.edit' => 1,
+            'assets.delete' => 1,
+            'assets.checkout' => 1,
+            'assets.checkin' => 1,
+            'assets.audit' => 1,
+            'assets.files' => 1,
+            'assets.view.requestable' => 1,
+            'assets.view.encrypted_custom_fields' => 1,
+        ]);
+        $assetsUser->save();
+
+        $testUser = User::updateOrCreate(
+            ['username' => 'testuser'],
+            [
+                'first_name' => 'Test',
+                'last_name' => 'User',
+                'password' => Hash::make('password'),
+                'activated' => 1,
+            ]
+        );
+        $testUser->permissions = json_encode([
+            'self.checkout_assets' => 1,
+            'assets.view.requestable' => 1,
+        ]);
+        $testUser->save();
+
         \Storage::disk('public')->put('snipe-logo.png', file_get_contents(public_path('img/demo/snipe-logo.png')));
         \Storage::disk('public')->put('snipe-logo-lg.png', file_get_contents(public_path('img/demo/snipe-logo-lg.png')));
 
     }
-
 }

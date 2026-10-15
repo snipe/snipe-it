@@ -7,7 +7,9 @@ use App\Models\Recipients\AlertRecipient;
 use App\Models\Setting;
 use App\Notifications\InventoryAlert;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
+use Symfony\Component\Mailer\Exception\TransportException;
 
 class SendInventoryAlerts extends Command
 {
@@ -52,14 +54,20 @@ class SendInventoryAlerts extends Command
                     return new AlertRecipient($item);
                 });
 
-                Notification::send($recipients, new InventoryAlert($items, $settings->alert_threshold));
+                try {
+                    Notification::send($recipients, new InventoryAlert($items, $settings->alert_threshold));
+                } catch (TransportException $e) {
+                    $message = 'Failed to send inventory alert: '.$e->getMessage();
+                    Log::warning($message);
+                    $this->error($message);
+                }
             } else {
                 $this->info('No low inventory items found. No mail sent.');
             }
         } else {
             if ($settings->alert_email == '') {
                 $this->error('Could not send email. No alert email configured in settings');
-            } elseif (1 != $settings->alerts_enabled) {
+            } elseif ($settings->alerts_enabled != 1) {
                 $this->info('Alerts are disabled in the settings. No mail will be sent');
             }
         }

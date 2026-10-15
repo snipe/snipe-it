@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,38 +13,38 @@ return array(
     |
     */
 
-    'week_start_select' => 'Select Day of Week',
-    'week_start' => 'Day the Week Starts On',
+    'week_start_select' => 'Válassza ki a hét napját',
+    'week_start' => 'Hét első napja',
     'today' => 'Ma',
     'clear' => 'Kiürítés',
     'days' => [
         'sunday' => 'Vasárnap',
         'monday' => 'Hétfő',
         'tuesday' => 'Kedd',
-        'wednesday' =>  'Szerda',
-        'thursday' =>  'Csütörtök',
-        'friday' =>  'Péntek',
-        'saturday' =>  'Szombat',
-        ],
+        'wednesday' => 'Szerda',
+        'thursday' => 'Csütörtök',
+        'friday' => 'Péntek',
+        'saturday' => 'Szombat',
+    ],
 
     'short_days' => [
         'sunday' => 'Vas',
         'monday' => 'H',
         'tuesday' => 'K',
-        'wednesday' =>  'Sze',
-        'thursday' =>  'Csüt',
-        'friday' =>  'P',
-        'saturday' =>  'Szo',
+        'wednesday' => 'Sze',
+        'thursday' => 'Csüt',
+        'friday' => 'P',
+        'saturday' => 'Szo',
     ],
 
     'min_days' => [
         'sunday' => 'V',
         'monday' => 'H',
         'tuesday' => 'K',
-        'wednesday' =>  'Sze',
-        'thursday' =>  'Cs',
-        'friday' =>  'P',
-        'saturday' =>  'Szo',
+        'wednesday' => 'Sze',
+        'thursday' => 'Cs',
+        'friday' => 'P',
+        'saturday' => 'Szo',
     ],
 
     'months' => [
@@ -77,4 +77,4 @@ return array(
         'december' => 'Dec',
     ],
 
-);
+];

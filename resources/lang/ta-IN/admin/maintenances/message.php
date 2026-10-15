@@ -1,21 +1,28 @@
 <?php
 
-    return [
-        'not_found'                    => 'நீங்கள் தேடிக்கொண்டிருக்கும் சொத்து பராமரிப்பு இல்லை!',
-        'delete'                       => [
-            'confirm' => 'நிச்சயமாக இந்த சொத்து பராமரிப்பு நீக்க வேண்டுமா?',
-            'error'   => 'சொத்து பராமரிப்பு நீக்கப்பட்ட ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
-            'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக நீக்கப்பட்டது.',
-        ],
-        'create'                       => [
-            'error'   => 'சொத்து பராமரிப்பு உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
-            'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக உருவாக்கப்பட்டது.',
-        ],
-        'edit'                       => [
-            'error'   => 'சொத்து பராமரிப்பு திருத்தப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
-            'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக திருத்தப்பட்டது.',
-        ],
-        'asset_maintenance_incomplete' => 'இதுவரையிலும் முடிக்கப்படவில்லை',
-        'warranty'                     => 'உத்தரவாதத்தை',
-        'not_warranty'                 => 'உத்தரவாதம் இல்லை',
-    ];
+return [
+    'not_found' => 'நீங்கள் தேடிக்கொண்டிருக்கும் சொத்து பராமரிப்பு இல்லை!',
+    'delete' => [
+        'confirm' => 'நிச்சயமாக இந்த சொத்து பராமரிப்பு நீக்க வேண்டுமா?',
+        'error' => 'சொத்து பராமரிப்பு நீக்கப்பட்ட ஒரு சிக்கல் இருந்தது. தயவு செய்து மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக நீக்கப்பட்டது.',
+    ],
+    'create' => [
+        'error' => 'சொத்து பராமரிப்பு உருவாக்கப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக உருவாக்கப்பட்டது.',
+    ],
+    'edit' => [
+        'error' => 'சொத்து பராமரிப்பு திருத்தப்படவில்லை, மீண்டும் முயற்சிக்கவும்.',
+        'success' => 'சொத்து பராமரிப்பு வெற்றிகரமாக திருத்தப்பட்டது.',
+    ],
+    'asset_maintenance_incomplete' => 'இதுவரையிலும் முடிக்கப்படவில்லை',
+    'warranty' => 'உத்தரவாதத்தை',
+    'not_warranty' => 'உத்தரவாதம் இல்லை',
+    'complete' => [
+        'confirm' => 'Are you sure you want to mark this maintenance as complete? This cannot be undone.',
+        'success' => 'Maintenance marked as complete.',
+        'error' => 'There was an issue marking this maintenance as complete. Please try again.',
+    ],
+    'bulk_delete' => 'No maintenance records were deleted (:skipped skipped).|Deleted :count maintenance record. (:skipped skipped)|Deleted :count maintenance records. (:skipped skipped)',
+    'bulk_complete' => 'No maintenance records were marked complete (:skipped skipped or already complete).|Marked :count maintenance record complete. (:skipped skipped or already complete)|Marked :count maintenance records complete. (:skipped skipped or already complete)',
+];

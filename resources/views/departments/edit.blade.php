@@ -1,63 +1,99 @@
-@extends('layouts/edit-form', [
-    'createText' => trans('admin/departments/table.create') ,
-    'updateText' => trans('admin/departments/table.update'),
-    'formAction' => (isset($item->id)) ? route('departments.update', ['department' => $item->id]) : route('departments.store'),
-])
+@extends('layouts/default')
 
-{{-- Page content --}}
-@section('inputFields')
-
-    @include ('partials.forms.edit.name', ['translated_name' => trans('admin/departments/table.name')])
-
-    <!-- Company -->
-    @if (\App\Models\Company::canManageUsersCompanies())
-        @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
+{{-- Page title --}}
+@section('title')
+    @if ($item->id)
+        {{ trans('admin/departments/table.update') }}
     @else
-        <input id="hidden_company_id" type="hidden" name="company_id" value="{{ Auth::user()->company_id }}">
+        {{ trans('admin/departments/table.create') }}
     @endif
-
-    @include ('partials.forms.edit.phone')
-    @include ('partials.forms.edit.fax')
-
-    <!-- Manager -->
-    @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/users/table.manager'), 'fieldname' => 'manager_id'])
-
-    <!-- Location -->
-    @include ('partials.forms.edit.location-select', ['translated_name' => trans('general.location'), 'fieldname' => 'location_id'])
-    @include ('partials.forms.edit.image-upload', ['image_path' => app('departments_upload_path')])
-
-
-    <div class="form-group{!! $errors->has('notes') ? ' has-error' : '' !!}">
-        <label for="notes" class="col-md-3 control-label">{{ trans('general.notes') }}</label>
-        <div class="col-md-8">
-            <x-input.textarea
-                    name="notes"
-                    id="notes"
-                    :value="old('notes', $item->notes)"
-                    placeholder="{{ trans('general.placeholders.notes') }}"
-                    aria-label="notes"
-                    rows="5"
-            />
-            {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-        </div>
-    </div>
-
-    <fieldset name="color-preferences">
-        <x-form-legend help_text="{{ trans('general.tag_color_help') }}">
-            {{ trans('general.tag_color') }}
-        </x-form-legend>
-        <!--  color -->
-        <div class="form-group {{ $errors->has('tag_color') ? 'error' : '' }}">
-            <label for="tag_color" class="col-md-3 control-label">
-                {{ trans('general.tag_color') }}
-            </label>
-            <div class="col-md-9">
-                <x-input.colorpicker :item="$item" id="color" :value="old('color', ($item->color ?? '#f4f4f4'))" name="tag_color" id="tag_color" />
-                {!! $errors->first('tag_color', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
-            </div>
-        </div>
-    </fieldset>
-
-
+    @parent
 @stop
 
+{{-- Page content --}}
+@section('content')
+
+    <x-container class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0">
+
+        <x-form :$item route="{{ ($item->id) ? route('departments.update', ['department' => $item->id]) : route('departments.store') }}">
+
+            <x-box top_submit>
+                @if ($item->id)
+                    <x-slot:header>{{ $item->name }}</x-slot:header>
+                @endif
+
+                @if (\App\Models\Company::canManageUsersCompanies())
+                    <x-input.company-select
+                        :label="trans('general.company')"
+                        name="company_id"
+                        :selected="old('company_id', $item->company_id)"
+                    />
+                @endif
+
+                <x-form.row
+                    :label="trans('admin/departments/table.name')"
+                    :$item
+                    name="name"
+                />
+
+                <x-form.row
+                    :label="trans('admin/suppliers/table.phone')"
+                    :$item
+                    name="phone"
+                    type="tel"
+                    input_icon="phone"
+                    input_group_addon="left"
+                />
+
+                <x-form.row
+                    :label="trans('admin/suppliers/table.fax')"
+                    :$item
+                    name="fax"
+                    type="tel"
+                    input_icon="fax"
+                    input_group_addon="left"
+                    :maxlength="34"
+                />
+
+                <x-input.user-select
+                    :label="trans('admin/users/table.manager')"
+                    name="manager_id"
+                    :selected="old('manager_id', $item->manager_id)"
+                />
+
+                <x-input.location-select
+                    :label="trans('general.location')"
+                    name="location_id"
+                    :selected="old('location_id', $item->location_id)"
+                />
+
+                <x-input.image-upload :item="$item" :imagePath="app('departments_upload_path')" />
+
+                <x-form.row
+                    :label="trans('general.notes')"
+                    :$item
+                    name="notes"
+                    type="textarea"
+                    :rows="5"
+                    :placeholder="trans('general.placeholders.notes')"
+                />
+
+                <fieldset name="color-preferences">
+                    <x-form.legend help_text="{{ trans('general.tag_color_help') }}">
+                        {{ trans('general.tag_color') }}
+                    </x-form.legend>
+                    <x-form.row
+                        :label="trans('general.tag_color')"
+                        :$item
+                        name="tag_color"
+                        type="colorpicker"
+                    />
+                </fieldset>
+
+            </x-box>
+
+        </x-form>
+
+    </x-container>
+
+@stop

@@ -24,28 +24,36 @@ jobs:
           - "8.2"
           - "8.3"
           - "8.4"
+          - "8.5"
 
 
     name: PHP ${{ matrix.php-version }}
 
     steps:
-      - uses: shivammathur/setup-php@v2
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # v2.40.0
         with:
           php-version: "${{ matrix.php-version }}"
           coverage: none
+          # ParaTest spawns a worker per core as a separate PHP process
+          # and forwards ini flags only via --passthru-php, so bump the
+          # memory limit here when setting up PHP rather than
+          # on the test command.
+          ini-values: memory_limit=1G
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Get Composer Cache Directory
         id: composer-cache
         run: |
           echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      - uses: actions/cache@v5
+      - uses: actions/cache@v6
         with:
           path: ${{ steps.composer-cache.outputs.dir }}
           key: ${{ runner.os }}-${{ matrix.php-version }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
-            ${{ runner.os }}-composer-
+            ${{ runner.os }}-${{ matrix.php-version }}-composer-
 
       - name: Copy .env
         run: |
@@ -77,11 +85,11 @@ jobs:
           DB_PASSWORD: password
           LOG_CHANNEL: single
           LOG_LEVEL: debug
-        run: php artisan test
+        run: php artisan test --parallel
 
       - name: Upload Laravel logs as artifacts
         if: always()
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: laravel-logs-php-${{ matrix.php-version }}-run-${{ github.run_attempt }}
           path: |

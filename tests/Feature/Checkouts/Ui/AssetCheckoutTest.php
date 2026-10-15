@@ -2,10 +2,10 @@
 
 namespace Tests\Feature\Checkouts\Ui;
 
-use PHPUnit\Framework\Attributes\DataProvider;
 use App\Events\CheckoutableCheckedOut;
-use App\Models\Accessory;
+use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\LicenseSeat;
 use App\Models\Location;
@@ -13,6 +13,7 @@ use App\Models\Statuslabel;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Event;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class AssetCheckoutTest extends TestCase
@@ -24,7 +25,7 @@ class AssetCheckoutTest extends TestCase
         Event::fake([CheckoutableCheckedOut::class]);
     }
 
-    public function testCheckingOutAssetRequiresCorrectPermission()
+    public function test_checking_out_asset_requires_correct_permission()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('hardware.checkout.store', Asset::factory()->create()), [
@@ -34,7 +35,7 @@ class AssetCheckoutTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testNonExistentAssetCannotBeCheckedOut()
+    public function test_non_existent_asset_cannot_be_checked_out()
     {
         $this->actingAs(User::factory()->checkoutAssets()->create())
             ->post(route('hardware.checkout.store', 1000), [
@@ -48,7 +49,7 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
-    public function testAssetNotAvailableForCheckoutCannotBeCheckedOut()
+    public function test_asset_not_available_for_checkout_cannot_be_checked_out()
     {
         $assetAlreadyCheckedOut = Asset::factory()->assignedToUser()->create();
 
@@ -63,7 +64,7 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
-    public function testAssetCannotBeCheckedOutToItself()
+    public function test_asset_cannot_be_checked_out_to_itself()
     {
         $asset = Asset::factory()->create();
 
@@ -77,7 +78,7 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
-    public function testValidationWhenCheckingOutAsset()
+    public function test_validation_when_checking_out_asset()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('hardware.checkout.store', Asset::factory()->create()), [
@@ -98,14 +99,14 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
-    public function testCannotCheckoutAcrossCompaniesWhenFullCompanySupportEnabled()
+    public function test_cannot_checkout_across_companies_when_full_company_support_enabled()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
         $assetCompany = Company::factory()->create();
         $userCompany = Company::factory()->create();
 
-        $user = User::factory()->for($userCompany)->create();
+        $user = User::factory()->forCompany($userCompany)->create();
         $asset = Asset::factory()->for($assetCompany)->create();
 
         $this->actingAs(User::factory()->superuser()->create())
@@ -118,12 +119,98 @@ class AssetCheckoutTest extends TestCase
         Event::assertNotDispatched(CheckoutableCheckedOut::class);
     }
 
-    public function testPageRenders()
+    public function test_can_checkout_to_user_with_multiple_companies_via_pivot_when_fmcs_enabled()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $companyA = Company::factory()->create();
+        $companyB = Company::factory()->create();
+
+        // User's primary company is A but is also assigned to B via pivot
+        $user = User::factory()->forCompany($companyA)->create();
+        $user->companies()->sync([$companyA->id, $companyB->id]);
+
+        // Asset belongs to company B
+        $asset = Asset::factory()->for($companyB)->create();
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $user->id,
+            ])
+            ->assertRedirect();
+
+        Event::assertDispatched(CheckoutableCheckedOut::class);
+    }
+
+    public function test_can_checkout_to_uncompanied_location_when_fmcs_enabled_without_location_scoping()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $company = Company::factory()->create();
+        $location = Location::factory()->create(['company_id' => null]);
+        $asset = Asset::factory()->for($company)->create();
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'location',
+                'assigned_location' => $location->id,
+                'redirect_option' => 'index',
+            ])
+            ->assertSessionMissing('error')
+            ->assertRedirect();
+
+        Event::assertDispatched(CheckoutableCheckedOut::class);
+    }
+
+    public function test_can_checkout_to_child_location_whose_parent_has_matching_company_when_location_scoping_enabled()
+    {
+        $this->settings->enableScopedLocationsWithFullMultipleCompanySupport();
+
+        $company = Company::factory()->create();
+        $parentLocation = Location::factory()->for($company)->create();
+        $childLocation = Location::factory()->create(['parent_id' => $parentLocation->id, 'company_id' => null]);
+        $asset = Asset::factory()->for($company)->create(['rtd_location_id' => $parentLocation->id]);
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'location',
+                'assigned_location' => $childLocation->id,
+                'redirect_option' => 'index',
+            ])
+            ->assertSessionMissing('error')
+            ->assertRedirect();
+
+        Event::assertDispatched(CheckoutableCheckedOut::class);
+    }
+
+    public function test_cannot_checkout_to_child_location_whose_parent_has_different_company_when_location_scoping_enabled()
+    {
+        $this->settings->enableScopedLocationsWithFullMultipleCompanySupport();
+
+        $assetCompany = Company::factory()->create();
+        $otherCompany = Company::factory()->create();
+        $parentLocation = Location::factory()->for($otherCompany)->create();
+        $childLocation = Location::factory()->create(['parent_id' => $parentLocation->id, 'company_id' => null]);
+        $asset = Asset::factory()->for($assetCompany)->create(['rtd_location_id' => null]);
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'location',
+                'assigned_location' => $childLocation->id,
+            ])
+            ->assertSessionHas('error');
+
+        Event::assertNotDispatched(CheckoutableCheckedOut::class);
+    }
+
+    public function test_page_renders()
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('hardware.checkout.create', Asset::factory()->create()))
             ->assertOk();
     }
+
     /**
      * This data provider contains checkout targets along with the
      * asset's expected location after the checkout process.
@@ -175,7 +262,7 @@ class AssetCheckoutTest extends TestCase
     }
 
     #[DataProvider('checkoutTargets')]
-    public function testAssetCanBeCheckedOut($data)
+    public function test_asset_can_be_checked_out($data)
     {
         ['checkout_type' => $type, 'target' => $target, 'expected_location' => $expectedLocation] = $data();
 
@@ -193,7 +280,7 @@ class AssetCheckoutTest extends TestCase
             ->post(route('hardware.checkout.store', $asset), array_merge($defaultFieldsAlwaysIncludedInUIFormSubmission, [
                 'checkout_to_type' => $type,
                 // overwrite the value from the default fields set above
-                'assigned_' . $type => (string) $target->id,
+                'assigned_'.$type => (string) $target->id,
                 'name' => 'Changed Name',
                 'status_id' => (string) $newStatus->id,
                 'checkout_at' => '2024-03-18',
@@ -205,9 +292,9 @@ class AssetCheckoutTest extends TestCase
         $this->assertTrue($asset->assignedTo()->is($target));
         $this->assertTrue($asset->location->is($expectedLocation));
         $this->assertEquals('Changed Name', $asset->name);
-        $this->assertTrue($asset->assetstatus->is($newStatus));
+        $this->assertTrue($asset->status->is($newStatus));
         $this->assertEquals('2024-03-18 00:00:00', $asset->last_checkout);
-        $this->assertEquals('2024-03-28 00:00:00', (string)$asset->expected_checkin);
+        $this->assertEquals('2024-03-28 00:00:00', (string) $asset->expected_checkin);
 
         Event::assertDispatched(CheckoutableCheckedOut::class, 1);
         Event::assertDispatched(function (CheckoutableCheckedOut $event) use ($admin, $asset, $target) {
@@ -218,10 +305,10 @@ class AssetCheckoutTest extends TestCase
 
             return true;
         });
-        $this->assertHasTheseActionLogs($asset, ['create'/*, 'checkout'*/]); //TODO - only getting one?
+        $this->assertHasTheseActionLogs($asset, ['create'/* , 'checkout' */]); // TODO - only getting one?
     }
 
-    public function testLicenseSeatsAreAssignedToUserUponCheckout()
+    public function test_license_seats_are_assigned_to_user_upon_checkout()
     {
         $asset = Asset::factory()->create();
         $seat = LicenseSeat::factory()->assignedToAsset($asset)->create();
@@ -238,7 +325,40 @@ class AssetCheckoutTest extends TestCase
         $this->assertTrue($user->fresh()->licenses->contains($seat->license));
     }
 
-    public function testLastCheckoutUsesCurrentDateIfNotProvided()
+    public function test_checkout_can_set_asset_to_not_requestable()
+    {
+        Event::fakeExcept([CheckoutableCheckedOut::class]);
+
+        $asset = Asset::factory()->create(['requestable' => 1]);
+        $targetUser = User::factory()->create();
+
+        $this->actingAs(User::factory()->checkoutAssets()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $targetUser->id,
+                // Unchecked checkbox on the form → key absent → boolean()
+                // returns false → asset flipped to not-requestable.
+            ]);
+
+        $this->assertFalse((bool) $asset->fresh()->requestable);
+
+        $log = Actionlog::query()
+            ->where('item_type', Asset::class)
+            ->where('item_id', $asset->id)
+            ->where('action_type', 'checkout')
+            ->latest('id')
+            ->first();
+
+        $this->assertNotNull($log);
+        $this->assertNotNull($log->log_meta);
+
+        $logMeta = json_decode($log->log_meta, true);
+        $this->assertArrayHasKey('requestable', $logMeta);
+        $this->assertEquals(1, (int) $logMeta['requestable']['old']);
+        $this->assertEquals(0, (int) $logMeta['requestable']['new']);
+    }
+
+    public function test_last_checkout_uses_current_date_if_not_provided()
     {
         $asset = Asset::factory()->create(['last_checkout' => now()->subMonth()]);
 
@@ -253,7 +373,7 @@ class AssetCheckoutTest extends TestCase
         $this->assertTrue((int) Carbon::parse($asset->last_checkout)->diffInSeconds(now(), true) < 2);
     }
 
-    public function testAssetCheckoutPageIsRedirectedIfModelIsInvalid()
+    public function test_asset_checkout_page_is_redirected_if_model_is_invalid()
     {
 
         $asset = Asset::factory()->create();
@@ -267,7 +387,7 @@ class AssetCheckoutTest extends TestCase
             ->assertRedirect(route('hardware.show', $asset));
     }
 
-    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    public function test_asset_checkout_page_post_is_redirected_if_redirect_selection_is_index()
     {
         $asset = Asset::factory()->create();
 
@@ -275,22 +395,22 @@ class AssetCheckoutTest extends TestCase
             ->from(route('hardware.checkout.create', $asset))
             ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'user',
-                'assigned_user' =>  User::factory()->create()->id,
+                'assigned_user' => User::factory()->create()->id,
                 'redirect_option' => 'index',
             ])
             ->assertStatus(302)
             ->assertRedirect(route('hardware.index'));
     }
 
-    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
+    public function test_asset_checkout_page_post_is_redirected_if_redirect_selection_is_item()
     {
         $asset = Asset::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('hardware.checkout.create', $asset))
-            ->post(route('hardware.checkout.store' , $asset), [
+            ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'user',
-                'assigned_user' =>  User::factory()->create()->id,
+                'assigned_user' => User::factory()->create()->id,
                 'redirect_option' => 'item',
             ])
             ->assertStatus(302)
@@ -298,16 +418,16 @@ class AssetCheckoutTest extends TestCase
             ->assertRedirect(route('hardware.show', $asset));
     }
 
-    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsUserTarget()
+    public function test_asset_checkout_page_post_is_redirected_if_redirect_selection_is_user_target()
     {
         $user = User::factory()->create();
         $asset = Asset::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('hardware.checkout.create', $asset))
-            ->post(route('hardware.checkout.store' , $asset), [
+            ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'user',
-                'assigned_user' =>  $user->id,
+                'assigned_user' => $user->id,
                 'redirect_option' => 'target',
                 'assigned_qty' => 1,
             ])
@@ -315,16 +435,16 @@ class AssetCheckoutTest extends TestCase
             ->assertRedirect(route('users.show', ['user' => $user]));
     }
 
-    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsAssetTarget()
+    public function test_asset_checkout_page_post_is_redirected_if_redirect_selection_is_asset_target()
     {
         $target = Asset::factory()->create();
         $asset = Asset::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('hardware.checkout.create', $asset))
-            ->post(route('hardware.checkout.store' , $asset), [
+            ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'asset',
-                'assigned_asset' =>  $target->id,
+                'assigned_asset' => $target->id,
                 'redirect_option' => 'target',
                 'assigned_qty' => 1,
             ])
@@ -332,20 +452,143 @@ class AssetCheckoutTest extends TestCase
             ->assertRedirect(route('hardware.show', $target));
     }
 
-    public function testAssetCheckoutPagePostIsRedirectedIfRedirectSelectionIsLocationTarget()
+    public function test_asset_checkout_page_post_is_redirected_if_redirect_selection_is_location_target()
     {
         $target = Location::factory()->create();
         $asset = Asset::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('hardware.checkout.create', $asset))
-            ->post(route('hardware.checkout.store' , $asset), [
+            ->post(route('hardware.checkout.store', $asset), [
                 'checkout_to_type' => 'location',
-                'assigned_location' =>  $target->id,
+                'assigned_location' => $target->id,
                 'redirect_option' => 'target',
                 'assigned_qty' => 1,
             ])
             ->assertStatus(302)
             ->assertRedirect(route('locations.show', ['location' => $target]));
+    }
+
+    public function test_asset_checkout_page_post_redirects_to_signature_page_when_sign_in_place_is_checked()
+    {
+        $targetUser = User::factory()->create();
+        $asset = Asset::factory()->create();
+
+        $response = $this->actingAs(User::factory()->admin()->create())
+            ->from(route('hardware.checkout.create', $asset))
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $targetUser->id,
+                'redirect_option' => 'index',
+                'sign_in_place' => 1,
+            ]);
+
+        $acceptance = CheckoutAcceptance::query()
+            ->where('checkoutable_type', Asset::class)
+            ->where('checkoutable_id', $asset->id)
+            ->where('assigned_to_id', $targetUser->id)
+            ->pending()
+            ->latest()
+            ->first();
+
+        $this->assertNotNull($acceptance);
+        $this->assertNull($acceptance->qty);
+        $this->assertDatabaseCount('checkout_acceptances', 1);
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('account.accept.item', $acceptance));
+    }
+
+    public function test_asset_checkout_stores_sign_in_place_preference_in_session()
+    {
+        $targetUser = User::factory()->create();
+        $asset = Asset::factory()->create();
+
+        $response = $this->actingAs(User::factory()->admin()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $targetUser->id,
+                'redirect_option' => 'index',
+                'sign_in_place' => 1,
+            ]);
+
+        $response->assertSessionHas('sign_in_place', true);
+    }
+
+    /**
+     * Regression: AssetCheckoutController::store used to call
+     *   session()->put(['checkout_to_type' => $target]);
+     * with $target being the resolved Eloquent model (User/Asset/Location),
+     * not the string 'user'/'asset'/'location'. Every subsequent read of
+     * session('checkout_to_type') then compared an Eloquent instance to a
+     * string literal in the checkout-selector partial, which silently
+     * failed — no radio was rendered `checked`, no target select got
+     * `required`, and jQuery Validate had nothing to block on.
+     *
+     * @see \App\Http\Controllers\Assets\AssetCheckoutController::store
+     */
+    #[DataProvider('checkoutTargetTypesProvider')]
+    public function test_asset_checkout_stores_target_type_as_string_in_session(string $type)
+    {
+        [$field, $target] = match ($type) {
+            'user' => ['assigned_user', User::factory()->create()->id],
+            'asset' => ['assigned_asset', Asset::factory()->create()->id],
+            'location' => ['assigned_location', Location::factory()->create()->id],
+        };
+        $asset = Asset::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => $type,
+                $field => $target,
+            ])
+            ->assertSessionHasNoErrors();
+
+        $stored = session('checkout_to_type');
+        $this->assertIsString($stored, 'checkout_to_type must be a string, not an Eloquent model');
+        $this->assertSame($type, $stored);
+    }
+
+    public static function checkoutTargetTypesProvider(): array
+    {
+        return [
+            'user target' => ['user'],
+            'asset target' => ['asset'],
+            'location target' => ['location'],
+        ];
+    }
+
+    public function test_license_seats_are_not_reassigned_when_cross_company_checkout_is_rejected()
+    {
+        // The company-boundary gate has to fire before the license-seat
+        // loop persists $seat->assigned_to = $target->id. Prior to the
+        // ordering fix the seat writes ran first, so a cross-company
+        // checkout attempt would leave the seat reassigned to a user in
+        // a different company even though the checkout itself was
+        // refused.
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$assetCompany, $userCompany] = Company::factory()->count(2)->create();
+
+        $asset = Asset::factory()->for($assetCompany)->create();
+        $seat = LicenseSeat::factory()->assignedToAsset($asset)->create();
+        $originalSeatAssignedTo = $seat->assigned_to;
+
+        $user = User::factory()->forCompany($userCompany)->create();
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('hardware.checkout.store', $asset), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $user->id,
+            ])
+            ->assertRedirect(route('hardware.checkout.store', $asset));
+
+        Event::assertNotDispatched(CheckoutableCheckedOut::class);
+
+        $this->assertSame(
+            $originalSeatAssignedTo,
+            $seat->fresh()->assigned_to,
+            'License seat must not be reassigned when the parent checkout is refused for a cross-company target.',
+        );
     }
 }

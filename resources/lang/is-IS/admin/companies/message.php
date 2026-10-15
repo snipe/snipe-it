@@ -2,19 +2,21 @@
 
 return [
     'does_not_exist' => 'Fyrirtæki er ekki til.',
-    'deleted'        => 'Fyrirtæki eytt',
-    'assoc_users'    => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
+    'deleted' => 'Fyrirtæki eytt',
+    'assoc_users' => 'This company is currently associated with at least one model and cannot be deleted. Please update your models to no longer reference this company and try again. ',
     'create' => [
-        'error'   => 'Company was not created, please try again.',
+        'error' => 'Company was not created, please try again.',
         'success' => 'Company created successfully.',
     ],
     'update' => [
-        'error'   => 'Company was not updated, please try again',
+        'error' => 'Company was not updated, please try again',
         'success' => 'Company updated successfully.',
     ],
     'delete' => [
         'confirm' => 'Ertu viss um að þú viljir afskrá þetta fyrirtæki?',
-        'error'   => 'There was an issue deleting the company. Please try again.',
+        'error' => 'There was an issue deleting the company. Please try again.',
         'success' => 'The Company was deleted successfully.',
+        'bulk_success' => 'Company deleted successfully.|:count companies were deleted successfully.',
+        'partial_success' => 'Company deleted successfully. See additional information below. | :count companies were deleted successfully. See additional information below.',
     ],
 ];

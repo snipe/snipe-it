@@ -36,10 +36,9 @@
                         <div class="login-box-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="alert alert-info">
-                                        <x-icon type="info-circle" />
+                                    <x-alert type="info" icon="info-circle">
                                         {!! trans('auth/general.username_help_top') !!}
-                                    </div>
+                                    </x-alert>
                                 </div>
 
 
@@ -48,7 +47,7 @@
 
 
                                 <!-- Notifications -->
-                                @include('notifications')
+                                <x-notifications />
 
 
 
@@ -57,7 +56,7 @@
                                         <div class="col-md-12">
                                             <label for="username"><x-icon type="user" /> {{ trans('admin/users/table.username') }} </label>
                                             <input type="text" class="form-control" name="username" value="{{ old('username') }}" placeholder="{{ trans('admin/users/table.username') }}" aria-label="username">
-                                            {!! $errors->first('username', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+                                            <x-form.error name="username" />
                                         </div>
                                     </div>
                             </div>

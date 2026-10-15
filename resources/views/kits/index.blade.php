@@ -10,29 +10,21 @@
 
 {{-- Content --}}
 @section('content')
-<div class="row">
-  <div class="col-md-12">
-    <div class="box box-default">
-      <div class="box-body">
-            <table
-                data-cookie-id-table="kitsTable"
-                data-columns="{{ \App\Presenters\PredefinedKitPresenter::dataTableLayout() }}"
-                data-side-pagination="server"
-                data-sort-order="asc"
-                data-sort-name="name"
-                id="kitsTable"
-                class="table table-striped snipe-table"
-                data-buttons="kitButtons"
-                data-url="{{ route('api.kits.index') }}"
-                data-export-options='{
-        "fileName": "export-kits-{{ date('Y-m-d') }}",
-            "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-            }'>
-          </table>
-      </div> <!--.box-body-->
-    </div> <!-- /.box.box-default-->
-  </div> <!-- .col-md-12-->
-</div>
+    <x-container>
+        <x-box name="kits" sr_only_title>
+
+            <x-slot:table_header>{{ trans('general.kits') }}</x-slot:table_header>
+
+            <x-table
+                :presenter="\App\Presenters\PredefinedKitPresenter::dataTableLayout()"
+                :fixed_number="1"
+                :fixed_right_number="2"
+                buttons="kitButtons"
+                api_url="{{ route('api.kits.index') }}"
+                export_filename="export-kits-{{ date('Y-m-d') }}"
+            />
+        </x-box>
+    </x-container>
 @stop
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['exportFile' => 'kits-export', 'search' => true])

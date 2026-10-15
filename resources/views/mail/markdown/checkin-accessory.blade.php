@@ -10,12 +10,15 @@
 @component('mail::table')
 |        |          |
 | ------------- | ------------- |
-| **{{ trans('mail.asset_name') }}** | {{ $item->name }} |
+| **{{ trans('mail.accessory_name') }}** | {{ $item->name }} |
 @if (isset($item->manufacturer))
 | **{{ trans('general.manufacturer') }}** | {{ $item->manufacturer->name }} |
 @endif
 @if (isset($item->model_no))
 | **{{ trans('general.model_no') }}** | {{ $item->model_no }} |
+@endif
+@if ($item->location)
+| **{{ trans('general.location') }}** | {{ $item->location->name }} |
 @endif
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->display_name }} |

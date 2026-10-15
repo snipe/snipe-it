@@ -12,7 +12,7 @@ use Tests\TestCase;
 
 class DeleteComponentTest extends TestCase implements TestsFullMultipleCompaniesSupport, TestsPermissionsRequirement
 {
-    public function testRequiresPermission()
+    public function test_requires_permission()
     {
         $component = Component::factory()->create();
 
@@ -21,14 +21,14 @@ class DeleteComponentTest extends TestCase implements TestsFullMultipleCompanies
             ->assertForbidden();
     }
 
-    public function testHandlesNonExistentComponent()
+    public function test_handles_non_existent_component()
     {
         $this->actingAs(User::factory()->deleteComponents()->create())
             ->delete(route('components.destroy', 10000))
             ->assertSessionHas('error');
     }
 
-    public function testCanDeleteComponent()
+    public function test_can_delete_component()
     {
         $component = Component::factory()->create();
 
@@ -40,7 +40,7 @@ class DeleteComponentTest extends TestCase implements TestsFullMultipleCompanies
         $this->assertSoftDeleted($component);
     }
 
-    public function testCannotDeleteComponentIfCheckedOut()
+    public function test_cannot_delete_component_if_checked_out()
     {
         $component = Component::factory()->checkedOutToAsset()->create();
 
@@ -50,8 +50,13 @@ class DeleteComponentTest extends TestCase implements TestsFullMultipleCompanies
             ->assertRedirect(route('components.index'));
     }
 
-    public function testDeletingComponentRemovesComponentImage()
+    public function test_deleting_component_preserves_component_image()
     {
+        // Soft-deleting a component preserves its image on disk so a
+        // restored component still has one. The image is only removed
+        // for good by `snipeit:purge` when the row is force-deleted.
+        // Coverage for that permanent-removal path lives in
+        // `tests/Feature/Console/Commands/PurgeTest.php`.
         Storage::fake('public');
 
         $component = Component::factory()->create(['image' => 'component-image.jpg']);
@@ -62,10 +67,10 @@ class DeleteComponentTest extends TestCase implements TestsFullMultipleCompanies
 
         $this->actingAs(User::factory()->deleteComponents()->create())->delete(route('components.destroy', $component->id));
 
-        Storage::disk('public')->assertMissing('components/component-image.jpg');
+        Storage::disk('public')->assertExists('components/component-image.jpg');
     }
 
-    public function testDeletingComponentIsLogged()
+    public function test_deleting_component_is_logged()
     {
         $user = User::factory()->deleteComponents()->create();
         $component = Component::factory()->create();
@@ -80,13 +85,13 @@ class DeleteComponentTest extends TestCase implements TestsFullMultipleCompanies
         ]);
     }
 
-    public function testAdheresToFullMultipleCompaniesSupportScoping()
+    public function test_adheres_to_full_multiple_companies_support_scoping()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
-        $userInCompanyA = User::factory()->for($companyA)->create();
+        $userInCompanyA = User::factory()->forCompany($companyA)->create();
         $componentForCompanyB = Component::factory()->for($companyB)->create();
 
         $this->actingAs($userInCompanyA)

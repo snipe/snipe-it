@@ -2,6 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
+/**
+ * @mixin IdeHelperSCIMUser
+ */
 class SCIMUser extends User
 {
     protected $table = 'users';
@@ -13,4 +18,17 @@ class SCIMUser extends User
         $attributes['password'] = $this->noPassword();
         parent::__construct($attributes);
     }
+
+    // Have to re-define this here because Eloquent will try to 'guess' a foreign key of s_c_i_m_user_id
+    // from SCIMUser
+    public function groups()
+    {
+        return $this->belongsToMany(\App\Models\Group::class, 'users_groups', 'user_id', 'group_id');
+    }
+
+    public function companies(): BelongsToMany
+    {
+        return $this->belongsToMany(Company::class, 'company_user', 'user_id', 'company_id');
+    }
+
 }

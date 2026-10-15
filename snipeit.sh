@@ -34,6 +34,7 @@
 # * Moved OS check to start of script                #
 # * Fixed timezone awk                               #
 # * Minor display and logging improvements           #
+# * Add Redhat 10.x support                          #
 ######################################################
 
 # Parse arguments
@@ -266,6 +267,7 @@ install_snipeit () {
   done
 
   chown -R "$APP_USER":"$apache_group" "$APP_PATH"
+  chmod 640 "$APP_PATH/.env"
 
   echo "* Running composer."
   # We specify the path to composer because CentOS lacks /usr/local/bin in $PATH when using sudo
@@ -320,19 +322,31 @@ rename_default_vhost () {
 }
 
 
-if [[ -f /etc/debian_version || -f /etc/lsb-release ]]; then
-  distro="$(lsb_release -is)"
-  version="$(lsb_release -rs)"
-  codename="$(lsb_release -cs)"
-elif [ -f /etc/os-release ]; then
+# Prefer /etc/os-release because it is the modern cross-distro standard and
+# is always present on every distro this installer supports. Debian 13
+# stopped shipping lsb_release by default (issue #19469), so the old path
+# that shelled out to `lsb_release` produced empty distro/version/codename
+# on a fresh Debian 13 install and broke everything downstream.
+#
+# lsb_release stays as a fallback for very old systems that predate the
+# os-release standard.
+#
+# Order is important below. If /etc/os-release and /etc/centos-release both
+# exist, we are on CentOS 7 and os-release handles it. If only
+# /etc/centos-release exists, we are on CentOS 6 or earlier, which is not
+# parsable, so we assume version 6. /etc/os-release also properly detects
+# Fedora.
+if [ -f /etc/os-release ]; then
   # shellcheck disable=SC1091
   distro="$(source /etc/os-release && echo "$ID")"
   # shellcheck disable=SC1091
   version="$(source /etc/os-release && echo "$VERSION_ID")"
-  #Order is important here.  If /etc/os-release and /etc/centos-release exist, we're on centos 7.
-  #If only /etc/centos-release exist, we're on centos6(or earlier).  Centos-release is less parsable,
-  #so lets assume that it's version 6 (Plus, who would be doing a new install of anything on centos5 at this point..)
-  #/etc/os-release properly detects fedora
+  # shellcheck disable=SC1091
+  codename="$(source /etc/os-release && echo "$VERSION_CODENAME")"
+elif [[ -f /etc/debian_version || -f /etc/lsb-release ]]; then
+  distro="$(lsb_release -is)"
+  version="$(lsb_release -rs)"
+  codename="$(lsb_release -cs)"
 elif [ -f /etc/centos-release ]; then
   distro="centos"
   version="6"
@@ -434,7 +448,44 @@ set_dbpass () {
 
 case $distro in
   Debian)
-    if [[ "$version" =~ ^12 ]]; then
+    if [[ "$version" =~ ^13 ]]; then
+        # Install for Debian 13.x
+        set_fqdn
+        set_dbpass
+        tzone=$(timedatectl show --property=Timezone --value)
+
+        echo "* Adding PHP repository."
+        log "apt-get install -y apt-transport-https lsb-release ca-certificates"
+        log "wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg"
+        echo "deb https://packages.sury.org/php/ $codename main" > /etc/apt/sources.list.d/php.list
+
+        echo -n "* Updating installed packages."
+        log "apt-get update && apt-get -y upgrade" & pid=$!
+        progress
+
+        echo "* Installing Apache httpd, PHP, MariaDB and other requirements."
+        PACKAGES="mariadb-server mariadb-client apache2 libapache2-mod-php8.4 php8.4  php8.4-curl php8.4-mysql php8.4-gd php8.4-ldap php8.4-zip php8.4-mbstring php8.4-xml php8.4-bcmath curl git unzip"
+        install_packages
+
+        echo "* Configuring Apache."
+        create_virtualhost
+        /usr/sbin/a2enmod rewrite
+        /usr/sbin/a2ensite $APP_NAME.conf
+        rename_default_vhost
+
+        set_hosts
+
+        install_snipeit
+
+        echo "* Restarting Apache httpd."
+        /usr/sbin/service apache2 restart
+
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        run_as_app_user php $APP_PATH/artisan cache:clear
+        chmod 775 -R $APP_PATH/storage/
+
+    elif [[ "$version" =~ ^12 ]]; then
         # Install for Debian 12.x
         set_fqdn
         set_dbpass
@@ -924,6 +975,53 @@ EOL
         progress
         log "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el9"
         log "dnf -y module enable php:remi-8.2" & pid=$!
+        progress
+
+        echo "* Installing Apache httpd, PHP, MariaDB, and other requirements."
+        PACKAGES="httpd mariadb-server git unzip php-mysqlnd php-bcmath php-cli php-embedded php-gd php-mbstring php-ldap php-simplexml php-process php-sodium php-pecl-zip php-fpm"
+        install_packages
+
+        echo "* Configuring Apache."
+        create_virtualhost
+
+        set_hosts
+
+        echo "* Setting MariaDB to start on boot and starting MariaDB."
+        log "systemctl enable mariadb.service"
+        log "systemctl start mariadb.service"
+
+        install_snipeit
+
+        set_firewall & pid=$!
+        progress
+
+        echo "* Setting Apache httpd to start on boot and starting service."
+        log "systemctl enable httpd.service"
+        log "systemctl restart httpd.service"
+
+        echo "* Setting php-fpm to start on boot and starting service."
+        log "systemctl enable php-fpm.service"
+        log "systemctl restart php-fpm.service"
+
+        echo "* Clearing cache and setting final permissions."
+        chmod 777 -R $APP_PATH/storage/framework/cache/
+        log "run_as_app_user php $APP_PATH/artisan cache:clear"
+        chmod 775 -R $APP_PATH/storage/
+
+        set_selinux
+      elif [[ "$version" =~ ^10 ]]; then
+        # Install for CentOS/Alma/Redhat 10
+        set_fqdn
+        set_dbpass
+        tzone=$(timedatectl | grep "Time zone" | awk 'BEGIN { FS"("}; {print $3}');
+
+        echo "* Adding EPEL-release repository."
+        log "dnf -y install wget epel-release" & pid=$!
+        progress
+        log "yum -y install https://rpms.remirepo.net/enterprise/remi-release-10.rpm" & pid=$!
+        progress
+        log "rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-remi.el10"
+        log "dnf -y module enable php:remi-10" & pid=$!
         progress
 
         echo "* Installing Apache httpd, PHP, MariaDB, and other requirements."

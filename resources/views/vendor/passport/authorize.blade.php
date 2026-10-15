@@ -64,7 +64,7 @@
 
                         <div class="buttons">
                             <!-- Authorize Button -->
-                            <form method="post" action="/oauth/authorize">
+                            <form method="post" action="{{ url('/oauth/authorize') }}">
                                 {{ csrf_field() }}
 
                                 <input type="hidden" name="state" value="{{ $request->state }}">
@@ -73,7 +73,7 @@
                             </form>
 
                             <!-- Cancel Button -->
-                            <form method="post" action="/oauth/authorize">
+                            <form method="post" action="{{ url('/oauth/authorize') }}">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
 

@@ -4,23 +4,22 @@ namespace Tests\Feature\Checkouts\Api;
 
 use App\Mail\CheckoutConsumableMail;
 use App\Models\Actionlog;
+use App\Models\Company;
 use App\Models\Consumable;
 use App\Models\User;
-use App\Notifications\CheckoutConsumableNotification;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class ConsumableCheckoutTest extends TestCase
 {
-    public function testCheckingOutConsumableRequiresCorrectPermission()
+    public function test_checking_out_consumable_requires_correct_permission()
     {
         $this->actingAsForApi(User::factory()->create())
             ->postJson(route('api.consumables.checkout', Consumable::factory()->create()))
             ->assertForbidden();
     }
 
-    public function testValidationWhenCheckingOutConsumable()
+    public function test_validation_when_checking_out_consumable()
     {
         $this->actingAsForApi(User::factory()->checkoutConsumables()->create())
             ->postJson(route('api.consumables.checkout', Consumable::factory()->create()), [
@@ -29,7 +28,7 @@ class ConsumableCheckoutTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testConsumableMustBeAvailableWhenCheckingOut()
+    public function test_consumable_must_be_available_when_checking_out()
     {
         $this->actingAsForApi(User::factory()->checkoutConsumables()->create())
             ->postJson(route('api.consumables.checkout', Consumable::factory()->withoutItemsRemaining()->create()), [
@@ -38,7 +37,7 @@ class ConsumableCheckoutTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
-    public function testConsumableCanBeCheckedOut()
+    public function test_consumable_can_be_checked_out()
     {
         $consumable = Consumable::factory()->create();
         $user = User::factory()->create();
@@ -52,7 +51,7 @@ class ConsumableCheckoutTest extends TestCase
         $this->assertHasTheseActionLogs($consumable, ['create', 'checkout']);
     }
 
-    public function testConsumableCanBeCheckedOutWithQuantity()
+    public function test_consumable_can_be_checked_out_with_quantity()
     {
         $consumable = Consumable::factory()->create();
         $user = User::factory()->create();
@@ -73,7 +72,7 @@ class ConsumableCheckoutTest extends TestCase
         ]);
     }
 
-    public function testUserSentNotificationUponCheckout()
+    public function test_user_sent_notification_upon_checkout()
     {
         Mail::fake();
 
@@ -86,13 +85,44 @@ class ConsumableCheckoutTest extends TestCase
                 'assigned_to' => $user->id,
             ]);
 
-        Mail::assertSent(CheckoutConsumableMail::class, function ($mail) use ($consumable, $user) {
+        Mail::assertSent(CheckoutConsumableMail::class, function ($mail) use ($user) {
             return $mail->hasTo($user->email);
         });
     }
 
-    public function testActionLogCreatedUponCheckout()
-    {$consumable = Consumable::factory()->create();
+    public function test_pivot_row_created_by_is_the_actor_not_the_target()
+    {
+        // Regression: previously the pivot's created_by was set to $user->id
+        // (the checkout target), so audit surfaces that read consumables_users
+        // (e.g. "who checked this consumable out to me") would show the target
+        // as their own creator. The action_logs stream separately recorded the
+        // correct actor, which is why the pivot bug survived.
+        $consumable = Consumable::factory()->create();
+        $actor = User::factory()->checkoutConsumables()->create();
+        $target = User::factory()->create();
+
+        $this->actingAsForApi($actor)
+            ->postJson(route('api.consumables.checkout', $consumable), [
+                'assigned_to' => $target->id,
+                'note' => 'created_by attribution regression',
+            ]);
+
+        $this->assertDatabaseHas('consumables_users', [
+            'consumable_id' => $consumable->id,
+            'assigned_to' => $target->id,
+            'created_by' => $actor->id,
+        ]);
+
+        $this->assertDatabaseMissing('consumables_users', [
+            'consumable_id' => $consumable->id,
+            'assigned_to' => $target->id,
+            'created_by' => $target->id,
+        ]);
+    }
+
+    public function test_action_log_created_upon_checkout()
+    {
+        $consumable = Consumable::factory()->create();
         $actor = User::factory()->checkoutConsumables()->create();
         $user = User::factory()->create();
 
@@ -115,5 +145,125 @@ class ConsumableCheckoutTest extends TestCase
             ])->count(),
             'Log entry either does not exist or there are more than expected'
         );
+    }
+
+    public function test_superuser_cannot_checkout_consumable_to_a_user_in_another_company_when_full_company_support_is_enabled()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+
+        $superuser = User::factory()->superuser()->withoutCompany()->create();
+        $consumableInCompanyA = Consumable::factory()->for($companyA)->create(['qty' => 1]);
+        $userInCompanyB = User::factory()->forCompany($companyB)->create();
+
+        $this->actingAsForApi($superuser)
+            ->postJson(route('api.consumables.checkout', $consumableInCompanyA), [
+                'assigned_to' => $userInCompanyB->id,
+                'checkout_qty' => 1,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error')
+            ->assertMessagesAre(trans('general.error_user_company'));
+
+        $this->assertDatabaseMissing('consumables_users', [
+            'consumable_id' => $consumableInCompanyA->id,
+            'assigned_to' => $userInCompanyB->id,
+        ]);
+
+        $this->assertDatabaseMissing('action_logs', [
+            'created_by' => $superuser->id,
+            'action_type' => 'checkout',
+            'target_type' => User::class,
+            'target_id' => $userInCompanyB->id,
+            'item_type' => Consumable::class,
+            'item_id' => $consumableInCompanyA->id,
+        ]);
+
+        $this->assertEquals(1, $consumableInCompanyA->fresh()->numRemaining());
+    }
+
+    public function test_user_in_same_company_can_checkout_consumable_when_full_company_support_is_enabled()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        $company = Company::factory()->create();
+        $consumable = Consumable::factory()->for($company)->create(['qty' => 5]);
+        $target = $company->users()->save(User::factory()->make());
+        $actor = User::factory()->superuser()->create();
+
+        $this->actingAsForApi($actor)
+            ->postJson(route('api.consumables.checkout', $consumable), [
+                'assigned_to' => $target->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+    }
+
+    public function test_user_in_multiple_companies_can_checkout_consumable_from_any_of_their_companies_when_full_company_support_is_enabled()
+    {
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+        $target = User::factory()->create();
+        $target->companies()->sync([$companyA->id, $companyB->id]);
+
+        $consumableInA = Consumable::factory()->for($companyA)->create(['qty' => 5]);
+        $consumableInB = Consumable::factory()->for($companyB)->create(['qty' => 5]);
+        $actor = User::factory()->superuser()->create();
+
+        $this->actingAsForApi($actor)
+            ->postJson(route('api.consumables.checkout', $consumableInA), [
+                'assigned_to' => $target->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+
+        $this->actingAsForApi($actor)
+            ->postJson(route('api.consumables.checkout', $consumableInB), [
+                'assigned_to' => $target->id,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('success');
+    }
+
+    /**
+     * Security regression pin: the checkout endpoint used to read
+     * numRemaining() outside any transaction/lock. Two racing requests
+     * for a qty=1 consumable both saw "1 available", both attached
+     * pivot rows, and the register landed at -1. The fix wraps the
+     * pivot writes in a DB::transaction that begins with a
+     * lockForUpdate re-fetch + re-check of numRemaining. This test
+     * simulates the "someone else already grabbed the last one"
+     * moment by pre-attaching pivot rows to drain the consumable to
+     * zero before the checkout request runs, and asserts the endpoint
+     * refuses instead of over-allocating.
+     */
+    public function test_checkout_refuses_when_inventory_is_already_exhausted(): void
+    {
+        $target = User::factory()->create();
+        $consumable = Consumable::factory()->create(['qty' => 1]);
+
+        // Drain the consumable via a direct pivot insert. Same state a
+        // concurrent request would have left mid-transaction.
+        $consumable->users()->attach($consumable->id, [
+            'consumable_id' => $consumable->id,
+            'assigned_to' => $target->id,
+            'created_by' => User::factory()->superuser()->create()->id,
+        ]);
+
+        $this->assertSame(0, $consumable->fresh()->numRemaining());
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.consumables.checkout', $consumable), [
+                'assigned_to' => $target->id,
+                'checkout_qty' => 1,
+            ])
+            ->assertOk()
+            ->assertStatusMessageIs('error');
+
+        // The pre-drained row is the only pivot; no second row got added.
+        $this->assertSame(1, $consumable->users()->count(), 'A second pivot row would mean the register went negative');
+        $this->assertSame(0, $consumable->fresh()->numRemaining());
     }
 }

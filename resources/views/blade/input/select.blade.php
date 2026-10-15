@@ -1,14 +1,16 @@
+{{-- options: either an array of key => value pairs, or omit and pass
+     the option markup via the default slot. --}}
 @props([
-    // <options> can either be provided as key => value pairs
-    // or passed in via the default $slot
     'options',
     'selected' => null,
     'includeEmpty' => false,
     'forLivewire' => false,
+    'required' => false,
 ])
 
 <select
     {{ $attributes->class(['select2', 'livewire-select2' => $forLivewire]) }}
+    @required($required)
     @if($forLivewire) data-livewire-component="{{ $this->getId() }}" @endif
 >
     @if($includeEmpty)
@@ -17,7 +19,7 @@
     {{-- map the simple key => value pairs when nothing is passed in via the slot --}}
     @if($slot->isEmpty())
         @foreach($options as $key => $value)
-            <option value="{{ $key }}" @selected($selected == $key)>{{ $value }}</option>
+            <option value="{{ $key }}" @selected(is_array($selected) ? in_array($key, $selected) : $selected == $key)>{{ $value }}</option>
         @endforeach
     @else
         {{ $slot }}

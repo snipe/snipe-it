@@ -1,38 +1,53 @@
 <?php
 
-return array(
+return [
 
-    'accepted'                  => 'You have successfully accepted this item.',
-    'declined'                  => 'You have successfully declined this item.',
-    'bulk_manager_warn'	        => 'Vos utilisateurs ont été mis à jour avec succès, mais votre entrée de gestionnaire n\'a pas été enregistrée, car le gestionnaire que vous avez sélectionné était également dans la liste d\'utilisateurs à éditer, et les utilisateurs peuvent ne pas être leur propre gestionnaire. Sélectionnez à nouveau vos utilisateurs, à l\'exclusion du gestionnaire.',
-    'user_exists'               => 'L\'utilisateur existe déjà !',
-    'user_not_found'            => 'User does not exist or you do not have permission view them.',
-    'user_login_required'       => 'Le champ identifiant est obligatoire',
+    'accepted' => 'Vous avez accepté cet élément avec succès.',
+    'declined' => 'Vous avez refusé cet élément avec succès.',
+    'accept_signature_write_failed' => 'Votre signature d\'acceptation n\'a pas pu être enregistrée dans le stockage. L\'acceptation n\'a pas été enregistrée. Veuillez contacter votre administrateur.',
+    'accept_pdf_write_failed' => 'Le PDF d\'acceptation n\'a pas pu être enregistré dans le stockage. L\'acceptation n\'a pas été enregistrée. Veuillez contacter votre administrateur.',
+    'bulk_manager_warn' => 'Vos utilisateurs ont été mis à jour avec succès, mais votre entrée de gestionnaire n\'a pas été enregistrée, car le gestionnaire que vous avez sélectionné était également dans la liste d\'utilisateurs à éditer, et les utilisateurs peuvent ne pas être leur propre gestionnaire. Sélectionnez à nouveau vos utilisateurs, à l\'exclusion du gestionnaire.',
+    'user_exists' => 'L\'utilisateur existe déjà !',
+    'cannot_delete' => 'L\'utilisateur n\'existe pas ou vous n\'avez pas la permission de les supprimer.',
+    'user_not_found' => 'L\'utilisateur n\'existe pas ou vous n\'avez pas la permission de les voir.',
+    'user_login_required' => 'Le champ identifiant est obligatoire',
     'user_has_no_assets_assigned' => 'Aucun actif actuellement assigné à l\'utilisateur·trice.',
-    'user_password_required'    => 'Le mot de passe est obligatoire.',
-    'insufficient_permissions'  => 'Droits insuffisants.',
-    'user_deleted_warning'      => 'Cet utilisateur a été supprimé. Vous devez le restaurer pour pouvoir l\'éditer ou lui assigner de nouveaux actifs.',
-    'ldap_not_configured'        => 'L\'intégration LDAP n\'a pas été configuré pour cette installation .',
-    'password_resets_sent'      => 'Les utilisateurs sélectionnés qui sont activés et ont une adresse e-mail valide ont reçu un lien de réinitialisation du mot de passe.',
-    'password_reset_sent'       => 'Un lien de réinitialisation du mot de passe a été envoyé à :email!',
-    'user_has_no_email'         => 'Cet utilisateur n\'a pas renseigné d\'adresse e-mail dans son profil.',
-    'log_record_not_found'        => 'Impossible de trouver un enregistrement de log correspondant à cet utilisateur.',
+    'nothing_currently_assigned' => 'Rien n\'est actuellement attribué.',
+    'user_password_required' => 'Le mot de passe est obligatoire.',
+    'insufficient_permissions' => 'Droits insuffisants.',
+    'auth_fields_denied' => 'Vous n\'avez pas la permission de modifier les identifiants ou les champs d\'activation sur cet utilisateur. Les champs demandés ne sont pas mis à jour: :fields',
+    'user_deleted_warning' => 'Cet utilisateur a été supprimé. Vous devez le restaurer pour pouvoir l\'éditer ou lui assigner de nouveaux actifs.',
+    'ldap_not_configured' => 'L\'intégration LDAP n\'a pas été configuré pour cette installation .',
+    'password_resets_sent' => 'Les utilisateurs sélectionnés qui sont activés et ont une adresse e-mail valide ont reçu un lien de réinitialisation du mot de passe.',
+    'not_activated' => 'Cet utilisateur ne peut pas se connecter, il ne peut donc pas accepter d\'actifs par e-mail.',
+    'password_reset_sent' => 'Un lien de réinitialisation du mot de passe a été envoyé à :email!',
+    'user_has_no_email' => 'Cet utilisateur n\'a pas renseigné d\'adresse e-mail dans son profil.',
+    'log_record_not_found' => 'Impossible de trouver un enregistrement de log correspondant à cet utilisateur.',
 
+    'impersonate' => [
+        'started' => 'Vous êtes maintenant connecté en tant que :name.',
+        'stopped' => 'Vous êtes de retour sur votre propre compte.',
+        'cannot_impersonate_self' => 'Vous ne pouvez pas vous connecter vous-même.',
+        'cannot_impersonate_superuser' => 'Vous ne pouvez pas vous connecter en tant qu\'un autre super-utilisateur.',
+        'target_not_active' => 'Cet utilisateur est désactivé ou supprimé et ne peut pas être connecté.',
+        'impersonator_missing' => 'Le compte original pour cette session d\'usurpation d\'identité n\'existe plus. Veuillez vous reconnecter.',
+    ],
 
-    'success' => array(
-        'create'    => 'L’utilisateur a été créé avec succès.',
-        'update'    => 'L’utilisateur a été mis à jour avec succès.',
-        'update_bulk'    => 'Utilisateurs mis à jour avec succès !',
-        'delete'    => 'L’utilisateur a été supprimé avec succès.',
-        'ban'       => 'L’utilisateur a été banni avec succès.',
-        'unban'     => 'L’utilisateur a été réhabilité avec succès.',
-        'suspend'   => 'L’utilisateur a été suspendu avec succès.',
+    'success' => [
+        'create' => 'L’utilisateur a été créé avec succès.',
+        'update' => 'L’utilisateur a été mis à jour avec succès.',
+        'update_bulk' => 'Utilisateurs mis à jour avec succès !',
+        'delete' => 'L’utilisateur a été supprimé avec succès.',
+        'ban' => 'L’utilisateur a été banni avec succès.',
+        'unban' => 'L’utilisateur a été réhabilité avec succès.',
+        'suspend' => 'L’utilisateur a été suspendu avec succès.',
         'unsuspend' => 'L’utilisateur a été activé avec succès.',
-        'restored'  => 'L’utilisateur a été restauré avec succès.',
-        'import'    => 'Les utilisateurs ont été importés correctement.',
-    ),
+        'restored' => 'L’utilisateur a été restauré avec succès.',
+        'import' => 'Les utilisateurs ont été importés correctement.',
+        'acceptance_reminder_sent' => 'Rappel d\'acceptation envoyé pour :count élément en attente.|Rappel d\'acceptation envoyé pour :count éléments en attente.',
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Un problème a eu lieu pendant la création de l\'utilisateur. Veuillez essayer à nouveau.',
         'update' => 'Un problème a eu lieu pendant la mise à jour de l\'utilisateur. Veuillez essayer à nouveau.',
         'delete' => 'Un problème a eu lieu pendant la suppression de l\'utilisateur. Veuillez essayer à nouveau.',
@@ -43,7 +58,7 @@ return array(
         'delete_has_locations_var' => 'Cet utilisateur gère toujours un emplacement. Veuillez d\'abord sélectionner un autre gestionnaire.|Cet utilisateur gère toujours :count emplacements. Veuillez d\'abord sélectionner un autre gestionnaire.',
         'delete_has_users_var' => 'Cet utilisateur gère toujours un autre utilisateur. Veuillez d\'abord sélectionner un autre gestionnaire pour cet utilisateur. Cet utilisateur gère toujours :count utilisateurs. Veuillez d\'abord sélectionner un autre gestionnaire.',
         'unsuspend' => 'Un problème a eu lieu pendant la réhabilitation de l\'utilisateur. Veuillez essayer à nouveau.',
-        'import'    => 'Il y a eu un problème lors de l\'importation des utilisateurs. Veuillez réessayer.',
+        'import' => 'Il y a eu un problème lors de l\'importation des utilisateurs. Veuillez réessayer.',
         'asset_already_accepted' => 'Cet actif a déjà été accepté.',
         'accept_or_decline' => 'Vous devez accepter ou refuser cet actif.',
         'cannot_delete_yourself' => 'Nous nous sentirions vraiment mal si vous vous supprimiez vous-même, s\'il vous plaît reconsidérer.',
@@ -53,23 +68,25 @@ return array(
         'ldap_could_not_search' => 'Impossible de rechercher le serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP :',
         'ldap_could_not_get_entries' => 'Impossible d\'obtenir les entrées du serveur LDAP . S\'il vous plaît vérifier la configuration de votre serveur LDAP dans le fichier de configuration LDAP . <br> Erreur de serveur LDAP :',
         'password_ldap' => 'Le mot de passe de ce compte est géré par LDAP / Active Directory. Veuillez contacter votre service informatique pour changer votre mot de passe.',
-        'multi_company_items_assigned' => 'This user has items assigned that belong to a different company. Please check them in or edit their company.'
-    ),
+        'multi_company_items_assigned' => 'Cet utilisateur a des actifs assignés qui appartiennent à une autre société. Veuillez les vérifier ou modifier leur société.',
+        'no_pending_acceptances' => 'Cet utilisateur n\'a pas d\'approbation en attente pour le rappeler.',
+        'company_not_permitted' => 'Une ou plusieurs affectations de la société sont en dehors de la portée de votre entreprise autorisée.',
+    ],
 
-    'deletefile' => array(
-        'error'   => 'Le fichier n\'a pas pu être supprimé. Veuillez réessayer.',
+    'deletefile' => [
+        'error' => 'Le fichier n\'a pas pu être supprimé. Veuillez réessayer.',
         'success' => 'Le fichier a été supprimé correctement.',
-    ),
+    ],
 
-    'upload' => array(
-        'error'   => 'Le(s) fichier(s) n\'ont pas pu être téléversé. Veuillez réessayer.',
+    'upload' => [
+        'error' => 'Le(s) fichier(s) n\'ont pas pu être téléversé. Veuillez réessayer.',
         'success' => 'Le(s) fichier(s) ont été téléversé correctement.',
         'nofiles' => 'Vous n\'avez pas sélectionné de fichier pour le téléversement',
         'invalidfiles' => 'Un ou plusieurs de vos fichiers sont trop gros, ou sont d\'un type non autorisé. Les types de fichiers autorisés sont png, gif, jpg, doc, docx, pdf et txt.',
-    ),
+    ],
 
-    'inventorynotification' => array(
-        'error'   => 'Cet utilisateur n\'a pas d\'e-mail défini.',
-        'success' => 'L\'utilisateur a été informé de son inventaire actuel.'
-    )
-);
+    'inventorynotification' => [
+        'error' => 'Cet utilisateur n\'a pas d\'e-mail défini.',
+        'success' => 'L\'utilisateur a été informé de son inventaire actuel.',
+    ],
+];

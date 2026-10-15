@@ -2,59 +2,150 @@
 
 namespace App\Models\Labels\Tapes\Dymo;
 
+use App\Helpers\Helper;
 
 class LabelWriter_11354 extends LabelWriter
 {
-    private const BARCODE1D_HEIGHT =   3.00;
-    private const BARCODE_MARGIN   =   1.80;
-    private const TAG_SIZE         =   2.80;
-    private const TITLE_SIZE       =   2.80;
-    private const TITLE_MARGIN     =   0.50;
-    private const FIELD_SIZE       =   2.80;
-    private const FIELD_MARGIN     =   0.15;
-    private const LABEL_SIZE       = 2.8;
-    private const LABEL_MARGIN     = 0.6;
+    private const BARCODE1D_HEIGHT = 3.00;
+
+    private const BARCODE_MARGIN = 1.80;
+
+    private const TAG_SIZE = 2.80;
+
+    private const TITLE_SIZE = 2.80;
+
+    private const TITLE_MARGIN = 0.50;
+
+    private const FIELD_SIZE = 2.80;
+
+    private const FIELD_MARGIN = 0.15;
+
+    private const LABEL_SIZE = 2.8;
+
+    private const LABEL_MARGIN = 0.6;
 
     public function getUnit()
     {
-        return 'mm'; 
+        return 'mm';
     }
+
     public function getWidth()
     {
-        return 57; 
+        return 57;
     }
+
     public function getHeight()
     {
-        return 32; 
+        return 32;
     }
+
     public function getSupportAssetTag()
     {
-        return true; 
+        return true;
     }
+
     public function getSupport1DBarcode()
     {
-        return true; 
+        return true;
     }
+
     public function getSupport2DBarcode()
     {
-        return true; 
+        return true;
     }
+
     public function getSupportFields()
     {
-        return 5; 
+        return 5;
     }
+
     public function getSupportLogo()
     {
-        return false; 
+        return false;
     }
+
     public function getSupportTitle()
     {
-        return true; 
+        return true;
     }
-    public function preparePDF($pdf)
+
+    public function getBarcodeSize(): float
     {
+        return self::BARCODE1D_HEIGHT;
     }
-	
+
+    public function getBarcodeMargin(): float
+    {
+        return self::BARCODE_MARGIN;
+    }
+
+    public function getTagSize(): float
+    {
+        return self::TAG_SIZE;
+    }
+
+    public function getTitleSize(): float
+    {
+        return self::TITLE_SIZE;
+    }
+
+    public function getTitleMargin(): float
+    {
+        return self::TITLE_MARGIN;
+    }
+
+    public function getLabelSize(): float
+    {
+        return self::LABEL_SIZE;
+    }
+
+    public function getLabelMargin(): float
+    {
+        return self::LABEL_MARGIN;
+    }
+
+    public function getFieldSize(): float
+    {
+        return self::FIELD_SIZE;
+    }
+
+    public function getFieldMargin(): float
+    {
+        return self::FIELD_MARGIN;
+    }
+
+    protected function getContentEditorConfig(): array
+    {
+        return [
+            'barcode_size' => $this->getBarcodeSize(),
+            'barcode_margin' => $this->getBarcodeMargin(),
+            'barcode1D_v_align' => 'T',
+
+            'barcode_2d_size' => 19.0,
+            'barcode2D_h_align' => 'L',
+            'barcode2D_v_align' => 'T',
+
+            'tag_font_size' => $this->getTagSize(),
+            'tag_alignment' => 'C',
+            'tag_position_mode' => 'under_barcode',
+            'tag_font' => 'freesans',
+
+            'title_font_size' => 3.8,
+            'title_margin' => $this->getTitleMargin(),
+            'title_font' => 'freesans',
+
+            'field_label_font_size' => $this->getLabelSize(),
+            'field_label_margin' => $this->getLabelMargin(),
+            'field_label_font' => 'freesans',
+
+            'field_value_font_size' => $this->getFieldSize(),
+            'field_value_margin' => $this->getFieldMargin(),
+            'field_value_font' => 'freemono',
+
+            'text_render_mode' => 'block',
+        ];
+    }
+
     public function write($pdf, $record)
     {
         $pa = $this->getPrintableArea();
@@ -63,7 +154,7 @@ class LabelWriter_11354 extends LabelWriter
         $currentY = $pa->y1;
         $usableWidth = $pa->w;
         $usableHeight = $pa->h;
-        
+
         // Wide 1D barcode on top
         if ($record->has('barcode1d')) {
             static::write1DBarcode(
@@ -77,7 +168,7 @@ class LabelWriter_11354 extends LabelWriter
         // 2D Barcode in left column
         if ($record->has('barcode2d')) {
             $barcodeSize = $usableHeight - self::TAG_SIZE;
-            
+
             static::writeText(
                 $pdf, $record->get('tag'),
                 $currentX, $pa->y2 - self::TAG_SIZE,
@@ -94,58 +185,81 @@ class LabelWriter_11354 extends LabelWriter
         }
 
         // Right column
-        if ($record->has('title')) {
-            static::writeText(
-                $pdf, $record->get('title'),
-                $currentX, $currentY,
-                'freesans', 'b', self::TITLE_SIZE, 'L',
-                $usableWidth, self::TITLE_SIZE, true, 0
-            );
-            $currentY += self::TITLE_SIZE + self::TITLE_MARGIN;
-        }
-
+        $title = $record->has('title') ? $record->get('title') : null;
         $fields = $record->get('fields');
-        // Below rescales the size of the field box to fit, it feels like it could/should be abstracted one class above
-        // to be usable on other labels but im unsure of how to implement that, since it uses a lot of private
-        // constants.
-
-        // Figure out how tall the label fields wants to be
-        $fieldCount = count($fields);
-        $perFieldHeight = (self::LABEL_SIZE + self::LABEL_MARGIN)
-            + (self::FIELD_SIZE + self::FIELD_MARGIN);
-        $usableHeight = $pa->h
-            - self::TAG_SIZE
-            - self::BARCODE_MARGIN;
-
-        $baseHeight = $fieldCount * $perFieldHeight;
-        // If it doesn't fit in the available height, scale everything down
-        $scale = 1.0;
-        if ($baseHeight > $usableHeight && $baseHeight > 0) {
-            $scale = $usableHeight / $baseHeight;
+        $maxFields = $this->getSupportFields();
+        $fields = collect($fields);
+        if ($title) {
+            $maxFields = max(0, $maxFields - 1); // title consumes one row’s worth of space
         }
 
-        $labelSize   = self::LABEL_SIZE   * $scale;
-        $labelMargin = self::LABEL_MARGIN * $scale;
-        $fieldSize   = self::FIELD_SIZE   * $scale;
-        $fieldMargin = self::FIELD_MARGIN * $scale;
+        $fields = $fields->take($maxFields)->values();
 
-        foreach ($fields as $field) {
+        $usableHeight = $pa->h
+            - self::TAG_SIZE           // bottom tag text
+            - self::BARCODE_MARGIN;    // gap between fields and 1D
+
+        $field_layout = Helper::labelFieldLayoutScaling(
+            pdf: $pdf,
+            fields: $fields,
+            currentX: $currentX,
+            usableWidth: $usableWidth,
+            usableHeight: $usableHeight,
+            baseLabelSize: self::LABEL_SIZE,
+            baseFieldSize: self::FIELD_SIZE,
+            baseFieldMargin: self::FIELD_MARGIN,
+            title: $title,
+            baseTitleSize: self::TITLE_SIZE,
+            baseTitleMargin: self::TITLE_MARGIN,
+            baseLabelPadding: 1.5,
+            baseGap: 1.5,
+            maxScale: 1.8,
+            labelFont: 'freesans',
+        );
+
+        if ($field_layout['hasTitle']) {
             static::writeText(
-                $pdf, $field['label'],
+                $pdf, $title,
                 $currentX, $currentY,
-                'freesans', '', $labelSize, 'L',
-                $usableWidth, $labelSize, true, 0
+                'freesans', 'b', $field_layout['titleSize'], 'L',
+                $usableWidth, $field_layout['titleSize'], true, 0
             );
-            $currentY += $labelSize + $labelMargin;
+            $currentY += $field_layout['titleAdvance'];
+        }
+        foreach ($fields as $field) {
+            $rawLabel = $field['label'] ?? null;
+            $value = (string) ($field['value'] ?? '');
+
+            // No label: value takes the whole row
+            if (! is_string($rawLabel) || trim($rawLabel) === '') {
+                static::writeText(
+                    $pdf, $value,
+                    $currentX, $currentY,
+                    'freemono', 'B', $field_layout['fieldSize'], 'L',
+                    $usableWidth, $field_layout['rowAdvance'], true, 0, 0.01
+                );
+
+                $currentY += $field_layout['rowAdvance'];
+
+                continue;
+            }
+
+            $labelText = rtrim($field['label'], ':').':';
+
+            static::writeText(
+                $pdf, $labelText,
+                $currentX, $currentY,
+                'freesans', '', $field_layout['labelSize'], 'L',
+                $field_layout['labelWidth'], $field_layout['rowAdvance'], true,
+            );
 
             static::writeText(
                 $pdf, $field['value'],
-                $currentX, $currentY,
-                'freemono', 'B', $fieldSize, 'L',
-                $usableWidth, $fieldSize, true, 0, 0.01
+                $field_layout['valueX'], $currentY,
+                'freemono', 'B', $field_layout['fieldSize'], 'L',
+                $field_layout['valueWidth'], $field_layout['rowAdvance'], true, 0, 0.01
             );
-            $currentY += $fieldSize + $fieldMargin;
+            $currentY += $field_layout['rowAdvance'];
         }
     }
-
 }

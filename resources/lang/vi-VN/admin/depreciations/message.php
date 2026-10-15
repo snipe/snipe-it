@@ -1,25 +1,26 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Loại khấu hao không tồn tại.',
-    'assoc_users'	 => 'Khấu hao này hiện đang liên kết với một hoặc nhiều kiểu tài sản và không thể xóa. Xin vui lòng xóa kiểu tài sản có liên kết, và kế đến thử xóa lại lần nữa. ',
+    'assoc_users' => 'Khấu hao này hiện đang liên kết với một hoặc nhiều kiểu tài sản và không thể xóa. Xin vui lòng xóa kiểu tài sản có liên kết, và kế đến thử xóa lại lần nữa. ',
 
+    'create' => [
+        'error' => 'Loại khấu hao này chưa tạo, vui lòng thử lại. :(',
+        'success' => 'Loại khấu hao đã tạo thành công. :)',
+    ],
 
-    'create' => array(
-        'error'   => 'Loại khấu hao này chưa tạo, vui lòng thử lại. :(',
-        'success' => 'Loại khấu hao đã tạo thành công. :)'
-    ),
+    'update' => [
+        'error' => 'Loại khấu hao chưa được cập nhật, xin thử lại',
+        'success' => 'Loại khấu hao đã cập nhật thành công.',
+    ],
 
-    'update' => array(
-        'error'   => 'Loại khấu hao chưa được cập nhật, xin thử lại',
-        'success' => 'Loại khấu hao đã cập nhật thành công.'
-    ),
+    'delete' => [
+        'confirm' => 'Bạn có chắc muốn xóa loại khấu hao này?',
+        'error' => 'Có vấn đề xảy ra khi xóa loại khấu nao. Xin thử lại.',
+        'success' => 'Loại khấu hao này đã xóa thành công.',
+        'bulk_success' => 'Depreciation class deleted successfully.|:count depreciation classes were deleted successfully.',
+        'partial_success' => 'Depreciation class deleted successfully. See additional information below.|:count depreciation classes were deleted successfully. See additional information below.',
+    ],
 
-    'delete' => array(
-        'confirm'   => 'Bạn có chắc muốn xóa loại khấu hao này?',
-        'error'   => 'Có vấn đề xảy ra khi xóa loại khấu nao. Xin thử lại.',
-        'success' => 'Loại khấu hao này đã xóa thành công.'
-    )
-
-);
+];

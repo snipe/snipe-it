@@ -2,53 +2,68 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Artisan;
+use App\Helpers\Helper;
+use App\Models\Accessory;
+use App\Models\Asset;
+use App\Models\Company;
+use App\Models\Component;
+use App\Models\Consumable;
+use App\Models\License;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use \Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
-
 
 /**
  * This controller handles all actions related to the Admin Dashboard
  * for the Snipe-IT Asset Management application.
  *
  * @author A. Gianotto <snipe@snipe.net>
+ *
  * @version v1.0
  */
 class DashboardController extends Controller
 {
     /**
-     * Check authorization and display admin dashboard, otherwise display
+     * Check authorization and display the dashboard, otherwise display
      * the user's checked-out assets.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v1.0]
      */
-    public function index() : View | RedirectResponse
+    public function index(): View|RedirectResponse
     {
-        // Show the page
-        if (auth()->user()->hasAccess('admin')) {
-            $asset_stats = null;
-
-            $counts['asset'] = \App\Models\Asset::count();
-            $counts['accessory'] = \App\Models\Accessory::count();
-            $counts['license'] = \App\Models\License::assetcount();
-            $counts['consumable'] = \App\Models\Consumable::count();
-            $counts['component'] = \App\Models\Component::count();
-            $counts['user'] = \App\Models\Company::scopeCompanyables(auth()->user())->count();
-            $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
-
-            if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {
-                Artisan::call('migrate', ['--force' => true]);
-                Artisan::call('passport:install', ['--no-interaction' => true]);
-            }
-
-            return view('dashboard')->with('asset_stats', $asset_stats)->with('counts', $counts);
-        } else {
+        if (! Gate::allows('canViewUsersAndCheckoutables')) {
             Session::reflash();
 
-            // Redirect to the profile page
-            return redirect()->intended('account/view-assets');
+            return Helper::safeIntended('account/view-assets');
         }
+
+        // Top-boxes + empty-inventory shortcut are admin-only in the
+        // dashboard blade, so the six count queries only need to run
+        // for admins. Non-admins get an empty array and the view's
+        // hasAccess('admin') gates short-circuit before touching any
+        // $counts key.
+        $counts = [];
+        if (auth()->user()->hasAccess('admin')) {
+            $counts['asset'] = Asset::count();
+            $counts['accessory'] = Accessory::count();
+            $counts['license'] = License::assetcount();
+            $counts['consumable'] = Consumable::count();
+            $counts['component'] = Component::count();
+            $counts['user'] = Company::scopeCompanyables(auth()->user())->count();
+            $counts['grand_total'] = $counts['asset'] + $counts['accessory'] + $counts['license'] + $counts['consumable'];
+        }
+
+        if ((! file_exists(storage_path().'/oauth-private.key')) || (! file_exists(storage_path().'/oauth-public.key'))) {
+            Artisan::call('migrate', ['--force' => true]);
+            Artisan::call('passport:install', ['--no-interaction' => true]);
+        }
+
+        return view('dashboard')
+            ->with('asset_stats', null)
+            ->with('counts', $counts);
     }
 }

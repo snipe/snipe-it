@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Models\User;
@@ -63,10 +64,19 @@ class ResetPasswordController extends Controller
     public function showResetForm(Request $request, $token = null)
     {
 
-        $credentials =  $request->only('email', 'token');
+        $credentials = $request->only('email', 'token');
 
-        if (is_null($this->broker()->getUser($credentials))) {
+        // Password::broker() is typed to return the interface
+        // Illuminate\Contracts\Auth\PasswordBroker, which doesn't
+        // declare getUser(). The concrete Illuminate\Auth\Passwords\
+        // PasswordBroker does. Narrow the type locally so PHPStan can
+        // resolve the method against the concrete class.
+        /** @var \Illuminate\Auth\Passwords\PasswordBroker $broker */
+        $broker = $this->broker();
+
+        if (is_null($broker->getUser($credentials))) {
             Log::debug('Password reset form FAILED - this token is not valid.');
+
             return redirect()->route('password.request')->with('error', trans('passwords.token'));
         }
 
@@ -94,7 +104,6 @@ class ResetPasswordController extends Controller
         if ($user = User::where('username', '=', $request->input('username'))->where('activated', '1')->whereNotNull('email')->first()) {
             Log::debug($user->username.' exists');
 
-
             // handle the password validation rules set by the admin settings
             if (strpos(Setting::passwordComplexityRulesSaving('store'), 'disallow_same_pwd_as_user_fields') !== false) {
                 $request->validate(
@@ -105,30 +114,30 @@ class ResetPasswordController extends Controller
 
             if ($user->ldap_import != '1') {
 
-                    // set the response
-                    $response = $broker->reset(
-                        $this->credentials($request), function ($user, $password) {
+                // set the response
+                $response = $broker->reset(
+                    $this->credentials($request), function ($user, $password) {
                         $this->resetPassword($user, $password);
                     });
 
-                    // Check if the password reset above actually worked
-                    if ($response == \Password::PASSWORD_RESET) {
-                        Log::debug('Password reset for ' . $user->username . ' worked');
-                        return redirect()->guest('login')->with('success', trans('passwords.reset'));
-                    }
+                // Check if the password reset above actually worked
+                if ($response == \Password::PASSWORD_RESET) {
+                    Log::debug('Password reset for '.$user->username.' worked');
 
-                    Log::debug('Password reset for ' . $user->username . ' FAILED - this user exists but the token is not valid');
-                    return redirect()->back()->withInput($request->only('email'))->with('success', trans('passwords.reset'));
+                    return redirect()->guest('login')->with('success', trans('passwords.reset'));
+                }
+
+                Log::debug('Password reset for '.$user->username.' FAILED - this user exists but the token is not valid');
+
+                return redirect()->to(Helper::sameOriginUrl(url()->previous()) ?? route('login'))
+                    ->withInput($request->only('email'))->with('success', trans('passwords.reset'));
             }
 
         }
 
-
         Log::debug('Password reset for '.$request->input('username').' FAILED - user does not exist or does not have an email address - but make it look like it succeeded');
+
         return redirect()->guest('login')->with('success', trans('passwords.reset'));
 
     }
-
-
-
 }

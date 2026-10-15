@@ -6,13 +6,13 @@ use App\Models\Setting;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
 use OneLogin\Saml2\Auth as OneLogin_Saml2_Auth;
 use OneLogin\Saml2\IdPMetadataParser as OneLogin_Saml2_IdPMetadataParser;
 use OneLogin\Saml2\Settings as OneLogin_Saml2_Settings;
 use OneLogin\Saml2\Utils as OneLogin_Saml2_Utils;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Illuminate\Support\Facades\Log;
 
 /**
  * SAML Singleton that builds the settings and loads the onelogin/php-saml library.
@@ -28,7 +28,7 @@ class Saml
     /**
      * OneLogin_Saml2_Auth instance.
      *
-     * @var OneLogin\Saml2\Auth
+     * @var \OneLogin\Saml2\Auth
      */
     private $_auth;
 
@@ -134,8 +134,8 @@ class Saml
         try {
             $this->_auth = new OneLogin_Saml2_Auth($this->_settings);
         } catch (Exception $e) {
-            if ( $this->isEnabled() ) { // $this->loadSettings() initializes this to true if SAML is enabled by settings.
-                Log::warning('Trying OneLogin_Saml2_Auth failed. Setting SAML enabled to false. OneLogin_Saml2_Auth error message is: '.  $e->getMessage());
+            if ($this->isEnabled()) { // $this->loadSettings() initializes this to true if SAML is enabled by settings.
+                Log::warning('Trying OneLogin_Saml2_Auth failed. Setting SAML enabled to false. OneLogin_Saml2_Auth error message is: '.$e->getMessage());
             }
             $this->_enabled = false;
         }
@@ -159,11 +159,11 @@ class Saml
         $this->_enabled = $setting->saml_enabled == '1';
 
         if ($this->isEnabled()) {
-            //Let onelogin/php-saml know to use 'X-Forwarded-*' headers if it is from a trusted proxy
+            // Let onelogin/php-saml know to use 'X-Forwarded-*' headers if it is from a trusted proxy
             OneLogin_Saml2_Utils::setProxyVars(request()->isFromTrustedProxy());
 
             data_set($settings, 'sp.entityId', config('app.url'));
-            data_set($settings, 'baseurl', config('app.url') . '/saml');
+            data_set($settings, 'baseurl', config('app.url').'/saml');
             data_set($settings, 'sp.assertionConsumerService.url', route('saml.acs'));
             data_set($settings, 'sp.singleLogoutService.url', route('saml.sls'));
             data_set($settings, 'sp.x509cert', $setting->saml_sp_x509cert);
@@ -259,8 +259,7 @@ class Saml
      *
      * @since 5.0.0
      *
-     * @param string $data
-     *
+     * @param  string  $data
      * @return void
      */
     private function saveDataToSession($data)
@@ -304,16 +303,21 @@ class Saml
      *
      * @since 5.0.0
      *
-     * @param string $data
-     *
-     * @return \App\Models\User
+     * @param  string  $data
+     * @return User
      */
     public function samlLogin($data)
     {
         $this->saveDataToSession($data);
         $this->loadDataFromSession();
         $username = $this->getUsername();
-        return User::where('username', '=', $username)->whereNull('deleted_at')->where('activated', '=', '1')->first();
+
+        $user = User::where('username', '=', $username)
+            ->whereNull('deleted_at')
+            ->where('activated', '=', '1')
+            ->first();
+
+        return User::verifyExactUsernameMatch($user, (string) $username);
     }
 
     /**
@@ -323,7 +327,7 @@ class Saml
      *
      * @since 5.0.0
      *
-     * @return OneLogin\Saml2\Auth
+     * @return \OneLogin\Saml2\Auth
      */
     public function getAuth()
     {
@@ -337,12 +341,11 @@ class Saml
     /**
      * Get a setting.
      *
-     * @param string|array|int $key
-     * @param mixed $default
-     *
+     * @param  string|array|int  $key
+     * @param  mixed  $default
      * @return mixed
-     * @author Johnson Yi <jyi.dev@outlook.com>
      *
+     * @author Johnson Yi <jyi.dev@outlook.com>
      */
     public function getSetting($key, $default = null)
     {
@@ -352,15 +355,14 @@ class Saml
     /**
      * Gets the SP metadata. The XML representation.
      *
-     * @param bool $alwaysPublishEncryptionCert When 'true', the returned
-     * metadata will always include an 'encryption' KeyDescriptor. Otherwise,
-     * the 'encryption' KeyDescriptor will only be included if
-     * $advancedSettings['security']['wantNameIdEncrypted'] or
-     * $advancedSettings['security']['wantAssertionsEncrypted'] are enabled.
-     * @param int|null      $validUntil    Metadata's valid time
-     * @param int|null      $cacheDuration Duration of the cache in seconds
-     *
-     * @return string  SP metadata (xml)
+     * @param  bool  $alwaysPublishEncryptionCert  When 'true', the returned
+     *                                             metadata will always include an 'encryption' KeyDescriptor. Otherwise,
+     *                                             the 'encryption' KeyDescriptor will only be included if
+     *                                             $advancedSettings['security']['wantNameIdEncrypted'] or
+     *                                             $advancedSettings['security']['wantAssertionsEncrypted'] are enabled.
+     * @param  int|null  $validUntil  Metadata's valid time
+     * @param  int|null  $cacheDuration  Duration of the cache in seconds
+     * @return string SP metadata (xml)
      */
     public function getSPMetadata($alwaysPublishEncryptionCert = false, $validUntil = null, $cacheDuration = null)
     {
@@ -404,7 +406,7 @@ class Saml
     /**
      * Checks if the user is authenticated or not.
      *
-     * @return bool  True if the user is authenticated
+     * @return bool True if the user is authenticated
      */
     public function isAuthenticated()
     {
@@ -414,7 +416,7 @@ class Saml
     /**
      * Returns the set of SAML attributes.
      *
-     * @return array  Attributes of the user.
+     * @return array Attributes of the user.
      */
     public function getAttributes()
     {
@@ -424,7 +426,7 @@ class Saml
     /**
      * Returns the set of SAML attributes indexed by FriendlyName
      *
-     * @return array  Attributes of the user.
+     * @return array Attributes of the user.
      */
     public function getAttributesWithFriendlyName()
     {
@@ -434,7 +436,7 @@ class Saml
     /**
      * Returns the nameID
      *
-     * @return string  The nameID of the assertion
+     * @return string The nameID of the assertion
      */
     public function getNameId()
     {
@@ -444,7 +446,7 @@ class Saml
     /**
      * Returns the nameID Format
      *
-     * @return string  The nameID Format of the assertion
+     * @return string The nameID Format of the assertion
      */
     public function getNameIdFormat()
     {
@@ -454,7 +456,7 @@ class Saml
     /**
      * Returns the nameID NameQualifier
      *
-     * @return string  The nameID NameQualifier of the assertion
+     * @return string The nameID NameQualifier of the assertion
      */
     public function getNameIdNameQualifier()
     {
@@ -464,7 +466,7 @@ class Saml
     /**
      * Returns the nameID SP NameQualifier
      *
-     * @return string  The nameID SP NameQualifier of the assertion
+     * @return string The nameID SP NameQualifier of the assertion
      */
     public function getNameIdSPNameQualifier()
     {
@@ -474,7 +476,7 @@ class Saml
     /**
      * Returns the SessionIndex
      *
-     * @return string|null  The SessionIndex of the assertion
+     * @return string|null The SessionIndex of the assertion
      */
     public function getSessionIndex()
     {
@@ -484,7 +486,7 @@ class Saml
     /**
      * Returns the SessionNotOnOrAfter
      *
-     * @return int|null  The SessionNotOnOrAfter of the assertion
+     * @return int|null The SessionNotOnOrAfter of the assertion
      */
     public function getSessionExpiration()
     {

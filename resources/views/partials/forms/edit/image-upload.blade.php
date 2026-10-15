@@ -15,13 +15,13 @@
                         {{ trans('general.use_cloned_image_help') }}
                     </p>
 
-                    {!! $errors->first('use_cloned_image', '<span class="alert-msg">:message</span>') !!}
+                    <x-form.error name="use_cloned_image" />
                 @else
                     <!-- Image Delete -->
                     <label class="form-control">
                         <input type="checkbox" name="image_delete" value="1" @checked(old('image_delete')) aria-label="image_delete" id="image_delete">
                         {{ trans('general.image_delete') }}
-                        {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+                        <x-form.error name="image_delete" />
                     </label>
                 @endif
 
@@ -31,8 +31,8 @@
     <!-- existing image -->
     <div class="form-group" id="existing-image">
         <div class="col-md-8 col-md-offset-3">
-            <img src="{{ Storage::disk('public')->url($image_path.e($item->{($fieldname ?? 'image')})) }}" class="img-responsive">
-            {!! $errors->first('image_delete', '<span class="alert-msg">:message</span>') !!}
+            <img src="{{ Storage::disk('public')->url($image_path.e($item->{($fieldname ?? 'image')})) }}" class="img-responsive" alt="">
+            <x-form.error name="image_delete" />
         </div>
     </div>
    @elseif (isset($item) && (isset($item->model)) && ($item->model->image != ''))
@@ -62,7 +62,7 @@
 
         <p class="help-block" id="uploadFile-status">{{ trans('general.image_filetypes_help', ['size' => Helper::file_upload_max_size_readable()]) }} {{ $help_text ?? '' }}</p>
 
-        {!! $errors->first('image', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+        <x-form.error name="image" />
     </div>
 <div class="col-md-4 col-md-offset-3" aria-hidden="true">
     <img id="uploadFile-imagePreview" style="max-width: 300px; display: none;" alt="{{ trans('general.alt_uploaded_image_thumbnail') }}">

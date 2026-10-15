@@ -3,17 +3,22 @@
 namespace App\Models;
 
 use App\Helpers\Helper;
+use App\Models\Builders\CheckoutAcceptanceQueryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use TCPDF;
-
+/**
+ * @mixin IdeHelperCheckoutAcceptance
+ */
 class CheckoutAcceptance extends Model
 {
-    use HasFactory, SoftDeletes, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $casts = [
         'accepted_at' => 'datetime',
@@ -28,30 +33,31 @@ class CheckoutAcceptance extends Model
      */
     public function routeNotificationForMail()
     {
-        // At this point the endpoint is the same for everything.
-        //  In the future this may want to be adapted for individual notifications.
-        $recipients_string = explode(',', Setting::getSettings()->alert_email);
-        $recipients = array_map('trim', $recipients_string);
+        $settings = Setting::getSettings();
 
-        return array_filter($recipients);
+        $recipients = array_map('trim', explode(',', $settings->admin_cc_email ?? ''));
+
+        return array_values(array_unique(array_filter($recipients)));
     }
+
     public function getCheckoutableItemTypeAttribute(): string
     {
         $type = $this->checkoutable_type;
 
         return match ($type) {
-            Asset::class       => trans('general.asset'),
+            Asset::class => trans('general.asset'),
             LicenseSeat::class => trans('general.license'),
-            Accessory::class   => trans('general.accessory'),
-            Component::class   => trans('general.component'),
-            Consumable::class  => trans('general.consumable'),
-            default            => class_basename($type),
+            Accessory::class => trans('general.accessory'),
+            Component::class => trans('general.component'),
+            Consumable::class => trans('general.consumable'),
+            default => class_basename($type),
         };
     }
+
     /**
      * Accessor for the checkoutable item's category name.
      *
-     * @return Attribute
+     * @return Attribute<string|null, never>
      */
     protected function checkoutableCategoryName(): Attribute
     {
@@ -72,10 +78,11 @@ class CheckoutAcceptance extends Model
             },
         );
     }
+
     /**
      * The resource that was is out
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @return MorphTo
      */
     public function checkoutable()
     {
@@ -85,7 +92,7 @@ class CheckoutAcceptance extends Model
     /**
      * The user that the checkoutable was checked out to
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function assignedTo()
     {
@@ -105,7 +112,6 @@ class CheckoutAcceptance extends Model
     /**
      * Was the checkoutable checked out to this user?
      *
-     * @param  User $user
      * @return bool
      */
     public function isCheckedOutTo(User $user)
@@ -114,86 +120,103 @@ class CheckoutAcceptance extends Model
     }
 
     /**
-     * Add a record to the checkout_acceptance table ONLY.
-     * Do not add stuff here that doesn't have a corresponding column in the
-     * checkout_acceptances table or you'll get an error.
+     * Finalize this acceptance as accepted. Returns false when another
+     * request already finalized the row (accepted or declined). The state
+     * transition is a compare-and-set UPDATE scoped by whereNull on both
+     * timestamps, so overlapping requests cannot both run the side effects.
      *
-     * @param string $signature_filename
+     * @param  string  $signature_filename
      */
-    public function accept($signature_filename, $eula = null, $filename = null, $note = null)
+    public function accept($signature_filename, $eula = null, $filename = null, $note = null): bool
     {
-        $this->accepted_at = now();
-        $this->signature_filename = $signature_filename;
-        $this->stored_eula = $eula;
-        $this->stored_eula_file = $filename;
-        $this->note = $note;
-        $this->save();
+        $now = now();
 
-        /**
-         * Update state for the checked out item
-         */
+        $claimed = static::query()
+            ->where('id', $this->id)
+            ->whereNull('accepted_at')
+            ->whereNull('declined_at')
+            ->update([
+                'accepted_at' => $now,
+                'signature_filename' => $signature_filename,
+                'stored_eula' => $eula,
+                'stored_eula_file' => $filename,
+                'note' => $note,
+                'updated_at' => $now,
+            ]);
+
+        if ($claimed === 0) {
+            return false;
+        }
+
+        $this->refresh();
+
         $this->checkoutable->acceptedCheckout($this->assignedTo, $signature_filename, $filename);
+
+        return true;
     }
 
     /**
-     * Decline the checkout acceptance
+     * Finalize this acceptance as declined. Returns false when another
+     * request already finalized the row. The qty loop lives here (not in
+     * the controller) so the per-unit side effects are tied to a winning
+     * state transition.
      *
-     * @param string $signature_filename
+     * @param  string  $signature_filename
      */
-    public function decline($signature_filename, $note = null)
+    public function decline($signature_filename, $note = null): bool
     {
-        $this->declined_at = now();
-        $this->note = $note;
-        $this->signature_filename = $signature_filename;
-        $this->save();
+        $now = now();
 
-        /**
-         * Update state for the checked out item
-         */
-        $this->checkoutable->declinedCheckout($this->assignedTo, $signature_filename);
+        $claimed = static::query()
+            ->where('id', $this->id)
+            ->whereNull('accepted_at')
+            ->whereNull('declined_at')
+            ->update([
+                'declined_at' => $now,
+                'signature_filename' => $signature_filename,
+                'note' => $note,
+                'updated_at' => $now,
+            ]);
+
+        if ($claimed === 0) {
+            return false;
+        }
+
+        $this->refresh();
+
+        $qty = max((int) ($this->qty ?? 1), 1);
+        for ($i = 0; $i < $qty; $i++) {
+            $this->checkoutable->declinedCheckout($this->assignedTo, $signature_filename);
+        }
+
+        return true;
+    }
+
+    public function newEloquentBuilder($query): CheckoutAcceptanceQueryBuilder
+    {
+        return new CheckoutAcceptanceQueryBuilder($query);
     }
 
     /**
-     * Filter checkout acceptences by the user
-     *
-     * @param  User  $user
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return Attribute<string, never>
      */
-    public function scopeForUser(Builder $query, User $user)
-    {
-        return $query->where('assigned_to_id', $user->id);
-    }
-
-    /**
-     * Filter to only get pending acceptances
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopePending(Builder $query)
-    {
-        return $query->whereNull('accepted_at')->whereNull('declined_at');
-    }
-
-    public function scopeDeclined(Builder $query)
-    {
-        return $query->whereNull('accepted_at')->whereNotNull('declined_at');
-    }
-
     protected function displayCheckoutableType(): Attribute
     {
-        return Attribute:: make(
-            get: fn(mixed $value) => strtolower(str_replace('App\Models\\', '', $this->checkoutable_type)),
+        return Attribute::make(
+            get: fn (mixed $value) => strtolower(str_replace('App\Models\\', '', $this->checkoutable_type)),
         );
     }
 
-    protected function scopeHasFiles(Builder $query) {
+    protected function scopeHasFiles(Builder $query)
+    {
         return $query->whereNotNull('signature_filename')->orWhereNotNull('stored_eula_file');
     }
 
-    public function generateAcceptancePdf($data, $pdf_filename) {
+    public function generateAcceptancePdf($data, $pdf_filename)
+    {
 
         // set some language dependent data:
-        $lg = Array();
+        $lg = [];
         $lg['a_meta_charset'] = 'UTF-8';
         $lg['w_page'] = 'page';
 
@@ -214,7 +237,7 @@ class CheckoutAcceptance extends Model
         if ($data['logo'] != null) {
             $pdf->writeHTML('<img src="@'.$data['logo'].'">', true, 0, true, 0, '');
         } else {
-            $pdf->writeHTML('<h3>'.$data['site_name'].'</h3><br /><br />', true, 0, true, 0, 'C');
+            $pdf->writeHTML('<h3>'.e($data['site_name']).'</h3><br /><br />', true, 0, true, 0, 'C');
         }
 
         $pdf->Ln();
@@ -223,42 +246,70 @@ class CheckoutAcceptance extends Model
         Helper::hasRtl(trans('general.date')) ? $pdf->setRTL(true) : $pdf->setRTL(false);
         Helper::isCjk(trans('general.date')) ? $pdf->SetFont('cid0cs', '', 9) : $pdf->SetFont('dejavusans', '', 8, '', true);
 
-        $pdf->writeHTML(trans('general.date') . ': ' . Helper::getFormattedDateObject(now(), 'datetime', false), true, 0, true, 0, '');
+        $pdf->writeHTML(trans('general.date').': '.Helper::getFormattedDateObject(now(), 'datetime', false), true, 0, true, 0, '');
 
         if ($data['company_name'] != null) {
-            $pdf->writeHTML(trans('general.company') . ': ' . e($data['company_name']), true, 0, true, 0, '');
+            $pdf->writeHTML(trans('general.company').': '.e($data['company_name']), true, 0, true, 0, '');
         }
         if ($data['item_tag'] != null) {
-            $pdf->writeHTML(trans('general.asset_tag') . ': ' . e($data['item_tag']), true, 0, true, 0, '');
+            $pdf->writeHTML(trans('general.asset_tag').': '.e($data['item_tag']), true, 0, true, 0, '');
         }
         if ($data['item_name'] != null) {
-            $pdf->writeHTML(trans('general.name') . ': ' . e($data['item_name']), true, 0, true, 0, '');
+            $pdf->writeHTML(trans('general.name').': '.e($data['item_name']), true, 0, true, 0, '');
         }
         if ($data['item_model'] != null) {
-            $pdf->writeHTML(trans('general.asset_model') . ': ' . e($data['item_model']), true, 0, true, 0, '');
+            $pdf->writeHTML(trans('general.asset_model').': '.e($data['item_model']), true, 0, true, 0, '');
         }
         if ($data['item_serial'] != null) {
             $pdf->writeHTML(trans('admin/hardware/form.serial').': '.e($data['item_serial']), true, 0, true, 0, '');
         }
+        if (! empty($data['custom_fields']) && is_iterable($data['custom_fields'])) {
+            foreach ($data['custom_fields'] as $customField) {
+                $label = $customField['label'] ?? null;
+                $value = $customField['value'] ?? null;
+
+                if (($label !== null) && ($value !== null) && ($value !== '')) {
+                    $pdf->writeHTML(e((string) $label).': '.e((string) $value), true, 0, true, 0, '');
+                }
+            }
+        }
+
         if (($data['qty'] != null) && ($data['qty'] > 1)) {
             $pdf->writeHTML(trans('general.qty').': '.e($data['qty']), true, 0, true, 0, '');
         }
-        $pdf->writeHTML(trans('general.assignee').': '.e($data['assigned_to']) . ($data['employee_num'] ? ' ('.$data['employee_num'].')' : ''), true, 0, true, 0, '');
+        $pdf->Ln();
+        $pdf->writeHTML('<hr>', true, 0, true, 0, '');
+        $pdf->writeHTML(trans('general.assignee').': '.e($data['assigned_to']).($data['employee_num'] ? ' ('.e($data['employee_num']).')' : ''), true, 0, true, 0, '');
         if ($data['email'] != null) {
             $pdf->writeHTML(trans('general.email').': '.e($data['email']), true, 0, true, 0, '');
         }
+
         $pdf->Ln();
         $pdf->writeHTML('<hr>', true, 0, true, 0, '');
 
-
-        // Break the EULA into lines based on newlines, and check each line for RTL or CJK characters
-        $eula_lines = preg_split("/\r\n|\n|\r/", $data['eula']);
-
-        foreach ($eula_lines as $eula_line) {
-            Helper::hasRtl($eula_line) ? $pdf->setRTL(true) : $pdf->setRTL(false);
-            Helper::isCjk($eula_line) ? $pdf->SetFont('cid0cs', '', 9) : $pdf->SetFont('dejavusans', '', 8, '', true);
-            $pdf->writeHTML(Helper::parseEscapedMarkedown($eula_line), true, 0, true, 0, '');
-        }
+        // $data['eula'] arrives here as pre-rendered, sanitized HTML
+        // (SnipeModel::getEula routes through sanitizeEulaForRender which
+        // runs parseEscapedMarkedown + strips img tags before returning).
+        // The old block-split + parseEscapedMarkedown-per-block path only
+        // made sense when the input was raw markdown with blank-line block
+        // boundaries. Running parseEscapedMarkedown on already-rendered
+        // HTML double-parses: Parsedown sees the block-level tags as text,
+        // strips them, and re-parses the remaining plaintext, which is why
+        // #19544 reports the PDF EULA rendering as flat text with lists /
+        // headings / bold lost. Regression from a434253a94 which added the
+        // sanitize-at-getEula step in v8.7.0 but did not update this PDF
+        // path.
+        //
+        // The whole EULA gets one RTL/CJK detection pass (looking at the
+        // rendered HTML is fine for the heuristic - the RTL/CJK codepoints
+        // aren't affected by the HTML tags around them). Mixed-script EULAs
+        // pick the whole-document dominant script rather than the per-block
+        // one, which is a small edge-case regression on installs that had
+        // an all-Arabic EULA with a Latin heading, but WAY less broken than
+        // the current double-parse behavior.
+        Helper::hasRtl($data['eula']) ? $pdf->setRTL(true) : $pdf->setRTL(false);
+        Helper::isCjk($data['eula']) ? $pdf->SetFont('cid0cs', '', 9) : $pdf->SetFont('dejavusans', '', 8, '', true);
+        $pdf->writeHTML($data['eula'], true, 0, true, 0, '');
         $pdf->Ln();
         $pdf->Ln();
         $pdf->setRTL(false);
@@ -276,16 +327,13 @@ class CheckoutAcceptance extends Model
 
         if ($data['note'] != null) {
             Helper::isCjk(trans('general.notes')) ? $pdf->SetFont('cid0cs', '', 9) : $pdf->SetFont('dejavusans', '', 8, '', true);
-            $pdf->writeHTML(trans('general.notes') . ': ' . e($data['note']), true, 0, true, 0, '');
+            $pdf->writeHTML(trans('general.notes').': '.e($data['note']), true, 0, true, 0, '');
             $pdf->Ln();
         }
-
 
         $pdf->writeHTML(trans('general.assigned_date').': '.e($data['check_out_date']), true, 0, true, 0, '');
         $pdf->writeHTML(trans('general.accepted_date').': '.e($data['accepted_date']), true, 0, true, 0, '');
 
         return $pdf->Output($pdf_filename, 'S');
-
-
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -15,410 +15,451 @@ return array(
     |---------------------------------------------------------------------------
     */
 
-    "superuser" => [
-        'name' => 'Super User',
-        'note'       => 'Determines whether the user has full access to all aspects of the admin. This setting overrides ALL more specific and restrictive permissions throughout the system. ',
+    'superuser' => [
+        'name' => '슈퍼 유저',
+        'note' => '관리자의 모든 측면에 대한 전체 액세스 권한을 사용자에게 부여할지 결정합니다. 이 설정은 시스템 전체의 더 구체적이고 제한적인 모든 권한보다 우선합니다. ',
     ],
     'admin' => [
-        'name' => 'Admin Access',
-        'note'       => 'Determines whether the user has access to most aspects of the system EXCEPT the System Admin Settings. These users will be able to manage users, locations, categories, etc, but ARE constrained by Full Multiple Company Support if it is enabled.',
+        'name' => '관리자 액세스',
+        'note' => '시스템 관리자 설정을 제외한 시스템 대부분의 측면에 대한 액세스 권한을 사용자에게 부여할지 결정합니다. 이 사용자는 사용자, 위치, 카테고리 등을 관리할 수 있지만, 다중 회사 전체 지원이 활성화된 경우 이에 제한됩니다.',
     ],
 
     'import' => [
-        'name' => 'CSV Import',
-        'note'       => 'This will allow users to import even if access to users, assets, etc is denied elsewhere.',
+        'name' => 'CSV 가져오기',
+        'note' => '다른 곳에서 사용자, 자산 등에 대한 액세스가 거부되더라도 사용자가 가져오기를 할 수 있도록 허용합니다.',
     ],
 
     'reports' => [
-        'name' => 'Reports Access',
-        'note'       => 'Determines whether the user has access to the Reports section of the application.',
+        'name' => '보고서 액세스',
+        'note' => '애플리케이션의 보고서 섹션에 대한 액세스 권한을 사용자에게 부여할지 결정합니다.',
     ],
 
-    'assets' =>
-        [
-            'name' => '자산',
-            'note' => 'Grants access to the Assets section of the application.',
+    'assets' => [
+        'name' => '자산',
+        'note' => '애플리케이션의 자산 섹션에 대한 액세스 권한을 부여합니다. ',
     ],
 
     'assetsview' => [
-        'name' => 'View Assets',
+        'name' => '자산 보기',
+        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the asset model as well. This is to make it easier to share common documents like user manuals across assets without having to upload them to every asset, and to avoid having to grant the user permission to modify asset files. Users with this permission will also be able to view edit and checkin history.',
     ],
 
     'assetscreate' => [
-        'name' => 'Create New Assets',
+        'name' => '새 자산 생성',
     ],
 
     'assetsedit' => [
-        'name' => 'Edit Assets',
+        'name' => '자산 편집',
     ],
 
     'assetsdelete' => [
-        'name' => 'Delete Assets',
+        'name' => '자산 삭제',
     ],
 
     'assetscheckin' => [
-        'name' => 'Check In',
-        'note' => 'Check assets back into inventory that are currently checked out.',
+        'name' => '반입',
+        'note' => '현재 반출된 자산을 재고로 다시 반입합니다.',
     ],
 
     'assetscheckout' => [
-        'name' => 'Check Out',
-        'note' => 'Assign assets in inventory by checking them out.',
+        'name' => '반출',
+        'note' => '재고 자산을 반출하여 할당',
     ],
 
     'assetsaudit' => [
-        'name' => 'Audit Assets',
-        'note' => 'Allows the user to mark an asset as physically inventoried.',
+        'name' => '자산 감사',
+        'note' => '사용자가 자산을 실물 재고로 표시할 수 있도록 허용',
     ],
 
     'assetsviewrequestable' => [
-        'name' => 'View Requestable Assets',
-        'note' => 'Allows the user to view assets that are marked as requestable.',
+        'name' => 'View Requestable Items',
+        'note' => 'Allows the user to view items that are marked as requestable.',
     ],
 
     'assetsviewencrypted-custom-fields' => [
-        'name' => 'View Encrypted Custom Fields',
-        'note' => 'Allows the user to view and modify encrypted custom fields on assets.',
+        'name' => '암호화된 사용자 정의 필드 보기',
+        'note' => '사용자가 자산의 암호화된 사용자 정의 필드를 보고 수정할 수 있도록 허용',
     ],
 
-    'accessories'   => [
+    'accessories' => [
         'name' => '부속품들',
-        'note'       => 'Grants access to the Accessories section of the application.',
+        'note' => '애플리케이션의 액세서리 섹션에 대한 접근 권한 부여',
     ],
 
     'accessoriesview' => [
-        'name' => 'View Accessories',
+        'name' => '액세서리 보기',
     ],
     'accessoriescreate' => [
-        'name' => 'Create New Accessories',
+        'name' => '새 액세서리 생성',
     ],
     'accessoriesedit' => [
-        'name' => 'Edit Accessories',
+        'name' => '액세서리 편집',
     ],
     'accessoriesdelete' => [
-        'name' => 'Delete Accessories',
+        'name' => '액세서리 삭제',
     ],
     'accessoriescheckout' => [
-        'name' => 'Check Out Accessories',
-        'note' => 'Assign accessories in inventory by checking them out.',
+        'name' => '액세서리 반출',
+        'note' => '재고 액세서리를 반출하여 할당',
     ],
     'accessoriescheckin' => [
-        'name' => 'Check In Accessories',
-        'note' => 'Check accessories back into inventory that are currently checked out.',
+        'name' => '액세서리 반입',
+        'note' => '현재 반출된 액세서리를 재고로 다시 반입.',
     ],
     'accessoriesfiles' => [
-        'name' => 'Manage Accessory Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with accessories.',
+        'name' => '액세서리 파일 관리',
+        'note' => '사용자가 액세서리와 연결된 파일을 업로드, 다운로드, 삭제할 수 있도록 허용 (보기 권한 이상에서만 유효)',
     ],
-    'consumables'   => [
+
+    'assetsfiles' => [
+        'name' => '자산 파일 관리',
+        'note' => '사용자가 자산과 연결된 파일을 업로드, 다운로드, 삭제할 수 있도록 허용 (보기 권한 이상에서만 유효)',
+    ],
+
+    'usersfiles' => [
+        'name' => '사용자 파일 관리',
+        'note' => '사용자가 사용자와 연결된 파일을 업로드, 다운로드, 삭제할 수 있도록 허용 (보기 권한 이상에서만 유효)',
+    ],
+
+    'modelsfiles' => [
+        'name' => '모델 파일 관리',
+        'note' => '사용자가 모델 보기 화면과 자산 보기 화면 모두에서 자산 모델과 연결된 파일을 업로드, 다운로드, 삭제할 수 있음. (보기 권한 이상에서만 의미 있음.)',
+    ],
+
+    'departmentsfiles' => [
+        'name' => '부서 파일 관리',
+        'note' => '사용자가 부서와 연결된 파일을 업로드, 다운로드, 삭제할 수 있음. (보기 권한 이상에서만 의미 있음.)',
+    ],
+
+    'suppliersfiles' => [
+        'name' => '공급업체 파일 관리',
+        'note' => '사용자가 공급업체와 연결된 파일을 업로드, 다운로드, 삭제할 수 있음. (보기 권한 이상에서만 의미 있음.)',
+    ],
+
+    'locationsfiles' => [
+        'name' => '위치 파일 관리',
+        'note' => '사용자가 위치와 연결된 파일을 업로드, 다운로드, 삭제할 수 있음. (보기 권한 이상에서만 의미 있음.)',
+    ],
+
+    'companiesfiles' => [
+        'name' => '회사 파일 관리',
+        'note' => '사용자가 회사와 연결된 파일을 업로드, 다운로드, 삭제할 수 있음. (보기 권한 이상에서만 의미 있음.)',
+    ],
+
+    'consumablesfiles' => [
+        'name' => '소모품 파일 관리',
+        'note' => '사용자가 소모품과 연결된 파일을 업로드, 다운로드, 삭제할 수 있음. (보기 권한 이상에서만 의미 있음.)',
+    ],
+
+    'consumables' => [
         'name' => '소모품',
-        'note'       => 'Grants access to the Consumables section of the application.',
+        'note' => '애플리케이션의 소모품 섹션에 접근 권한 부여.',
     ],
     'consumablesview' => [
-        'name' => 'View Consumables',
+        'name' => '소모품 보기',
     ],
     'consumablescreate' => [
-        'name' => 'Create New Consumables',
+        'name' => '새 소모품 생성',
     ],
     'consumablesedit' => [
-        'name' => 'Edit Consumables',
+        'name' => '소모품 편집',
     ],
     'consumablesdelete' => [
-        'name' => 'Delete Consumables',
+        'name' => '소모품 삭제',
     ],
     'consumablescheckout' => [
-        'name' => 'Check Out Consumables',
-        'note' => 'Assign consumables in inventory by checking them out.',
+        'name' => '소모품 반출',
+        'note' => '재고의 소모품을 반출하여 할당.',
     ],
-    'consumablesfiles' => [
-        'name' => 'Manage Consumable Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with consumables.',
-    ],
-    'licenses'   => [
+
+    'licenses' => [
         'name' => '라이선스',
-        'note'       => 'Grants access to the Licenses section of the application.',
+        'note' => '애플리케이션의 라이선스 섹션에 접근 권한 부여.',
     ],
     'licensesview' => [
-        'name' => 'View Licenses',
+        'name' => '라이선스 보기',
     ],
     'licensescreate' => [
-        'name' => 'Create New Licenses',
+        'name' => '새 라이선스 생성',
     ],
     'licensesedit' => [
-        'name' => 'Edit Licenses',
+        'name' => '라이선스 편집',
     ],
     'licensesdelete' => [
-        'name' => 'Delete Licenses',
+        'name' => '라이선스 삭제',
     ],
     'licensescheckout' => [
-        'name' => 'Assign Licenses',
-        'note' => 'Allows the user to assign licenses to assets or users.',
-        ],
+        'name' => '라이선스 할당',
+        'note' => '사용자가 자산 또는 사용자에게 라이선스를 할당할 수 있도록 허용',
+    ],
     'licensescheckin' => [
-        'name' => 'Unassign Licenses',
-        'note' => 'Allows the user to unassign licenses from assets or users.',
+        'name' => '라이선스 할당 해제',
+        'note' => '사용자가 자산 또는 사용자로부터 라이선스 할당을 해제할 수 있도록 허용',
     ],
     'licensesfiles' => [
-        'name' => 'Manage License Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with licenses.',
-    ],
-    'licenseskeys' => [
-        'name' => 'Manage License Keys',
-        'note' => 'Allows the user to view product keys associated with licenses.',
-    ],
-    'components'   => [
-        'name' => '구성 요소',
-        'note'       => 'Grants access to the Components section of the application.',
-    ],
-    'componentsview' => [
-        'name' => 'View Components',
-    ],
-    'componentscreate' => [
-        'name' => 'Create New Components',
-    ],
-    'componentsedit' => [
-        'name' => 'Edit Components',
-    ],
-    'componentsdelete' => [
-        'name' => 'Delete Components',
+        'name' => '라이선스 파일 관리',
+        'note' => '사용자가 라이선스와 연결된 파일을 업로드, 다운로드 및 삭제할 수 있도록 허용',
     ],
     'componentsfiles' => [
-        'name' => 'Manage Component Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with components.',
+        'name' => '부품 파일 관리',
+        'note' => '부품에 연결된 파일의 업로드, 다운로드, 삭제를 허용',
     ],
+
+    'licenseskeys' => [
+        'name' => '라이선스 키 관리',
+        'note' => '사용자가 라이선스와 연결된 제품 키를 볼 수 있도록 허용',
+    ],
+    'components' => [
+        'name' => '구성 요소',
+        'note' => '애플리케이션의 부품 섹션에 대한 접근 권한 부여',
+    ],
+    'componentsview' => [
+        'name' => '부품 보기',
+    ],
+    'componentscreate' => [
+        'name' => '새 부품 생성',
+    ],
+    'componentsedit' => [
+        'name' => '부품 편집',
+    ],
+    'componentsdelete' => [
+        'name' => '부품 삭제',
+    ],
+
     'componentscheckout' => [
-        'name' => 'Check Out Components',
-        'note' => 'Assign components in inventory by checking them out.',
+        'name' => '부품 반출',
+        'note' => '재고 부품을 반출하여 할당',
     ],
     'componentscheckin' => [
-        'name' => 'Check In Components',
-        'note' => 'Check components back into inventory that are currently checked out.',
+        'name' => '부품 반입',
+        'note' => '현재 반출된 부품을 재고로 반입',
     ],
-    'kits'   => [
+    'kits' => [
         'name' => '사전 정의된 키트',
-        'note'       => 'Grants access to the Predefined Kits section of the application.',
+        'note' => '애플리케이션의 사전 정의 키트 섹션 접근 권한 부여',
     ],
     'kitsview' => [
-        'name' => 'View Predefined Kits',
+        'name' => '사전 정의 키트 보기',
     ],
     'kitscreate' => [
-        'name' => 'Create New Predefined Kits',
+        'name' => '새 사전 정의 키트 생성',
     ],
     'kitsedit' => [
-        'name' => 'Edit Predefined Kits',
+        'name' => '사전 정의 키트 편집',
     ],
     'kitsdelete' => [
-        'name' => 'Delete Predefined Kits',
+        'name' => '사전 정의 키트 삭제',
     ],
-    'users'   => [
+    'users' => [
         'name' => '사용자',
-        'note'       => 'Grants access to the Users section of the application.',
+        'note' => '애플리케이션의 사용자 섹션 접근 권한 부여',
     ],
     'usersview' => [
         'name' => '사용자 보기',
+        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the user as well. Users with this permission will also be able to view edit and checkin history.',
     ],
     'userscreate' => [
-        'name' => 'Create New Users',
+        'name' => '새 사용자 생성',
     ],
     'usersedit' => [
-        'name' => 'Edit Users',
+        'name' => '사용자 편집',
     ],
     'usersdelete' => [
-        'name' => 'Delete Users',
+        'name' => '사용자 삭제',
     ],
-    'models'   => [
-        'name' => 'Models',
-        'note'       => 'Grants access to the Models section of the application.',
+    'models' => [
+        'name' => '모델',
+        'note' => '애플리케이션의 모델 섹션에 대한 접근 권한 부여.',
     ],
     'modelsview' => [
         'name' => '모델 보기',
     ],
 
     'modelscreate' => [
-        'name' => 'Create New Models',
+        'name' => '새 모델 생성',
     ],
     'modelsedit' => [
-        'name' => 'Edit Models',
+        'name' => '모델 편집',
     ],
     'modelsdelete' => [
-        'name' => 'Delete Models',
+        'name' => '모델 삭제',
     ],
-    'categories'   => [
+    'categories' => [
         'name' => '분류',
-        'note'       => 'Grants access to the Categories section of the application.',
+        'note' => '애플리케이션의 카테고리 섹션에 대한 접근 권한 부여.',
     ],
     'categoriesview' => [
-        'name' => 'View Categories',
+        'name' => '카테고리 보기',
     ],
     'categoriescreate' => [
-        'name' => 'Create New Categories',
+        'name' => '새 카테고리 생성',
     ],
     'categoriesedit' => [
-        'name' => 'Edit Categories',
+        'name' => '카테고리 편집',
     ],
     'categoriesdelete' => [
-        'name' => 'Delete Categories',
+        'name' => '카테고리 삭제',
     ],
-    'departments'   => [
+    'departments' => [
         'name' => '부서',
-        'note'       => 'Grants access to the Departments section of the application.',
+        'note' => '애플리케이션의 부서 섹션에 대한 접근 권한 부여.',
     ],
     'departmentsview' => [
-        'name' => 'View Departments',
+        'name' => '부서 보기',
     ],
     'departmentscreate' => [
-        'name' => 'Create New Departments',
+        'name' => '새 부서 생성',
     ],
     'departmentsedit' => [
-        'name' => 'Edit Departments',
+        'name' => '부서 편집',
     ],
     'departmentsdelete' => [
-        'name' => 'Delete Departments',
+        'name' => '부서 삭제',
     ],
-    'locations'   => [
+    'locations' => [
         'name' => '위치',
-        'note'       => 'Grants access to the Locations section of the application.',
+        'note' => '애플리케이션의 위치 섹션에 대한 접근 권한 부여.',
     ],
     'locationsview' => [
-        'name' => 'View Locations',
+        'name' => '위치 보기',
     ],
     'locationscreate' => [
-        'name' => 'Create New Locations',
+        'name' => '새 위치 생성',
     ],
     'locationsedit' => [
-        'name' => 'Edit Locations',
+        'name' => '위치 편집',
     ],
     'locationsdelete' => [
-        'name' => 'Delete Locations',
+        'name' => '위치 삭제',
     ],
-    'status-labels'   => [
+    'status-labels' => [
         'name' => '상태 꼬리표',
-        'note'       => 'Grants access to the Status Labels section of the application used by Assets.',
+        'note' => '자산에서 사용하는 애플리케이션의 상태 라벨 섹션에 대한 접근 권한을 부여',
     ],
     'statuslabelsview' => [
-        'name' => 'View Status Labels',
+        'name' => '상태 라벨 보기',
     ],
     'statuslabelscreate' => [
-        'name' => 'Create New Status Labels',
+        'name' => '새 상태 라벨 생성',
     ],
     'statuslabelsedit' => [
-        'name' => 'Edit Status Labels',
+        'name' => '상태 라벨 편집',
     ],
     'statuslabelsdelete' => [
-        'name' => 'Delete Status Labels',
+        'name' => '상태 라벨 삭제',
     ],
-    'custom-fields'   => [
+    'custom-fields' => [
         'name' => '사용자 정의 항목들',
-        'note'       => 'Grants access to the Custom Fields section of the application used by Assets.',
+        'note' => '자산에서 사용하는 애플리케이션의 사용자 정의 필드 섹션에 대한 접근 권한을 부여',
     ],
     'customfieldsview' => [
-        'name' => 'View Custom Fields',
+        'name' => '사용자 정의 필드 보기',
     ],
     'customfieldscreate' => [
-        'name' => 'Create New Custom Fields',
+        'name' => '새 사용자 정의 필드 생성',
     ],
     'customfieldsedit' => [
-        'name' => 'Edit Custom Fields',
+        'name' => '사용자 정의 필드 편집',
     ],
     'customfieldsdelete' => [
-        'name' => 'Delete Custom Fields',
+        'name' => '사용자 정의 필드 삭제',
     ],
-    'suppliers'   => [
+    'suppliers' => [
         'name' => '공급자',
-        'note'       => 'Grants access to the Suppliers section of the application.',
+        'note' => '애플리케이션의 공급업체 섹션에 대한 접근 권한을 부여',
     ],
     'suppliersview' => [
-        'name' => 'View Suppliers',
+        'name' => '공급업체 보기',
     ],
     'supplierscreate' => [
-        'name' => 'Create New Suppliers',
+        'name' => '새 공급업체 생성',
     ],
     'suppliersedit' => [
-        'name' => 'Edit Suppliers',
+        'name' => '공급업체 편집',
     ],
     'suppliersdelete' => [
-        'name' => 'Delete Suppliers',
+        'name' => '공급업체 삭제',
     ],
-    'manufacturers'   => [
+    'manufacturers' => [
         'name' => '제조업체',
-        'note'       => 'Grants access to the Manufacturers section of the application.',
+        'note' => '애플리케이션의 제조사 섹션에 대한 접근 권한을 부여합니다.',
     ],
     'manufacturersview' => [
-        'name' => 'View Manufacturers',
+        'name' => '제조사 보기',
     ],
     'manufacturerscreate' => [
-        'name' => 'Create New Manufacturers',
+        'name' => '새 제조사 생성',
     ],
     'manufacturersedit' => [
-        'name' => 'Edit Manufacturers',
+        'name' => '제조사 편집',
     ],
     'manufacturersdelete' => [
-        'name' => 'Delete Manufacturers',
+        'name' => '제조사 삭제',
     ],
-    'companies'   => [
+    'companies' => [
         'name' => '회사들',
-        'note'       => 'Grants access to the Companies section of the application.',
+        'note' => '애플리케이션의 회사 섹션에 대한 접근 권한을 부여합니다.',
     ],
     'companiesview' => [
-        'name' => 'View Companies',
+        'name' => '회사 보기',
     ],
     'companiescreate' => [
-        'name' => 'Create New Companies',
+        'name' => '새 회사 생성',
     ],
     'companiesedit' => [
-        'name' => 'Edit Companies',
+        'name' => '회사 편집',
     ],
     'companiesdelete' => [
-        'name' => 'Delete Companies',
+        'name' => '회사 삭제',
     ],
     'user-self-accounts' => [
-        'name' => 'User Self Accounts',
-        'note'       => 'Grants non-admin users the ability to manage certain aspects of their own user accounts.',
+        'name' => '사용자 본인 계정',
+        'note' => '관리자가 아닌 사용자에게 자신의 사용자 계정 일부를 관리할 수 있는 권한 부여',
     ],
     'selftwo-factor' => [
-        'name' => 'Manage Two-Factor Authentication',
-        'note'       => 'Allows users to enable, disable, and manage two-factor authentication for their own accounts.',
+        'name' => '2단계 인증 관리',
+        'note' => '사용자가 자신의 계정에 대해 2단계 인증을 활성화, 비활성화 및 관리할 수 있도록 허용',
     ],
     'selfapi' => [
-        'name' => 'Manage API Tokens',
-        'note'       => 'Allows users to create, view, and revoke their own API tokens. User tokens will have the same permissions as the user who created them.',
+        'name' => 'API 토큰 관리',
+        'note' => '사용자가 자신의 API 토큰을 생성, 조회 및 취소할 수 있도록 허용. 사용자 토큰은 이를 생성한 사용자와 동일한 권한을 가짐',
     ],
     'selfedit-location' => [
-        'name' => 'Edit Location',
-        'note'       => 'Allows users to edit the location associated with their own user account.',
+        'name' => '위치 편집',
+        'note' => '사용자가 자신의 사용자 계정에 연결된 위치를 편집할 수 있도록 허용',
     ],
     'selfcheckout-assets' => [
-        'name' => 'Self Check Out Assets',
-        'note'       => 'Allows users to check out assets to themselves without admin intervention.',
+        'name' => '자산 셀프 반출',
+        'note' => '사용자가 관리자 개입 없이 자신에게 자산을 반출할 수 있도록 허용',
     ],
     'selfview-purchase-cost' => [
-        'name' => 'View Purchase Cost',
-        'note'       => 'Allows users to view the purchase cost of items in their account view.',
+        'name' => '구매 비용 조회',
+        'note' => '사용자가 계정 화면에서 항목의 구매 비용을 조회할 수 있도록 허용',
     ],
 
     'depreciations' => [
-        'name' => 'Depreciation Management',
-        'note'       => 'Allows users to manage and view asset depreciation details.',
+        'name' => '감가상각 관리',
+        'note' => '사용자가 자산 감가상각 세부 정보를 관리하고 조회할 수 있도록 허용',
     ],
     'depreciationsview' => [
-        'name' => 'View Depreciation Details',
+        'name' => '감가상각 세부 정보 조회',
     ],
     'depreciationsedit' => [
-        'name' => 'Edit Depreciation Settings',
+        'name' => '감가상각 설정 편집',
     ],
     'depreciationsdelete' => [
-        'name' => 'Delete Depreciation Records',
+        'name' => '감가상각 기록 삭제',
     ],
     'depreciationscreate' => [
-        'name' => 'Create Depreciation Records',
+        'name' => '감가상각 기록 생성',
     ],
 
-    'grant_all' => 'Grant all permissions for :area',
-    'deny_all' => 'Deny all permissions for :area',
-    'inherit_all' => 'Inherit all permissions for :area from permission groups',
-    'grant' => 'Grant Permission for :area',
-    'deny' => 'Deny Permission for :area',
-    'inherit' => 'Inherit Permission for :area from permission groups',
-    'use_groups' => 'We strongly suggest using Permission Groups instead of assigning individual permissions for easier management.'
+    'grant_all' => ':area에 대한 모든 권한 부여',
+    'deny_all' => ':area에 대한 모든 권한 거부',
+    'inherit_all' => '권한 그룹에서 :area에 대한 모든 권한 상속',
+    'grant' => ':area에 대한 권한 부여',
+    'deny' => ':area에 대한 권한 거부',
+    'inherit' => '권한 그룹에서 :area에 대한 권한 상속',
+    'use_groups' => '손쉬운 관리를 위해 개별 권한을 할당하는 대신 권한 그룹 사용을 강력히 권장합니다.',
 
-);
+];

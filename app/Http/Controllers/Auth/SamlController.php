@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Services\Saml;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -41,10 +43,6 @@ class SamlController extends Controller
      * @author Johnson Yi <jyi.dev@outlook.com>
      *
      * @since 5.0.0
-     *
-     * @param Request $request
-     *
-     * @return Response
      */
     public function metadata(Request $request)
     {
@@ -52,6 +50,7 @@ class SamlController extends Controller
 
         if (empty($metadata)) {
             Log::debug('SAML metadata is empty - return a 403');
+
             return response()->view('errors.403', [], 403);
         }
 
@@ -69,14 +68,12 @@ class SamlController extends Controller
      *
      * @since 5.0.0
      *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function login(Request $request)
     {
         $auth = $this->saml->getAuth();
-        $ssoUrl = $auth->login(null, [], false, false, false, false);
+        $ssoUrl = $auth->login(session()->get('url.intended'), [], false, false, false, false);
 
         return redirect()->away($ssoUrl);
     }
@@ -91,26 +88,38 @@ class SamlController extends Controller
      *
      * @since 5.0.0
      *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function acs(Request $request)
     {
+        // RelayState is attacker-controllable via a hostile IdP or a
+        // crafted SAML POST binding. Sanitize before storing so any
+        // downstream consumer that skips Helper::getRedirectOption
+        // (LoginController::authenticated, RedirectIfAuthenticated,
+        // DashboardController, etc. all call redirect()->intended()
+        // directly, which does no host validation) can't be steered
+        // off-site. sameOriginUrl() also strips CR/LF and rejects
+        // non-http(s) schemes. Runs before getAuth() so the sanitize
+        // step is unconditional even if SAML happens to be disabled at
+        // request time.
+        if ($relayState = Helper::sameOriginUrl($request->post('RelayState'))) {
+            session()->put('url.intended', $relayState);
+        }
+
         $saml = $this->saml;
         $auth = $saml->getAuth();
         $saml_exception = false;
         try {
             $auth->processResponse();
         } catch (\Exception $e) {
-            Log::warning("Exception caught in SAML login: " . $e->getMessage());
+            Log::warning('Exception caught in SAML login: '.$e->getMessage());
             $saml_exception = true;
         }
         $errors = $auth->getErrors();
 
-        if (!empty($errors) || $saml_exception) {
-            Log::warning('There was an error with SAML ACS: ' . implode(', ', $errors));
-            Log::warning('Reason: ' . $auth->getLastErrorReason());
+        if (! empty($errors) || $saml_exception) {
+            Log::warning('There was an error with SAML ACS: '.implode(', ', $errors));
+            Log::warning('Reason: '.$auth->getLastErrorReason());
 
             return redirect()->route('login')->with('error', trans('auth/message.signin.error'));
         }
@@ -130,9 +139,7 @@ class SamlController extends Controller
      *
      * @since 5.0.0
      *
-     * @param Request $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function sls(Request $request)
     {
@@ -142,18 +149,30 @@ class SamlController extends Controller
         try {
             $sloUrl = $auth->processSLO(true, null, $retrieveParametersFromServer, null, true);
         } catch (\Exception $e) {
-            Log::warning("Exception caught in SAML single-logout: " . $e->getMessage());
+            Log::warning('Exception caught in SAML single-logout: '.$e->getMessage());
             $saml_exception = true;
         }
         $errors = $auth->getErrors();
 
-        if (!empty($errors) || $saml_exception) {
-            Log::warning('There was an error with SAML SLS: ' . implode(', ', $errors));
-            Log::warning('Reason: ' . $auth->getLastErrorReason());
+        if (! empty($errors) || $saml_exception) {
+            Log::warning('There was an error with SAML SLS: '.implode(', ', $errors));
+            Log::warning('Reason: '.$auth->getLastErrorReason());
 
             return view('errors.403');
         }
 
-        return redirect()->route('logout.get')->with(['saml_logout' => true,'saml_slo_redirect_url' => $sloUrl]);
+        // SLO RelayState sanitize. $sloUrl is whatever onelogin/saml2's
+        // processSLO returned as the RelayState from the IdP's
+        // LogoutResponse. In the legitimate flow Snipe-IT sets its own
+        // RelayState at SLO initiation, so the value here is same-origin.
+        // A hostile IdP (or an IdP that reflects an attacker-chosen
+        // RelayState) can inject an external URL that LoginController's
+        // SLO-response branch would later feed to redirect()->away().
+        // Sanitize at the write path, mirror of the ACS RelayState guard
+        // closed under GHSA-579m-9gf4-28jp. Null survives as null and the
+        // read side falls back to the usual logout destination.
+        $safeSloUrl = Helper::sameOriginUrl($sloUrl);
+
+        return redirect()->route('logout.get')->with(['saml_logout' => true, 'saml_slo_redirect_url' => $safeSloUrl]);
     }
 }

@@ -71,7 +71,7 @@ return [
     ],
     'hex_color' => 'វាល :attribute ត្រូវតែជាពណ៌គោលដប់ប្រាំមួយត្រឹមត្រូវ។',
     'image' => 'The :attribute field must be an image.',
-    'import_field_empty'    => 'The value for :fieldname cannot be null.',
+    'import_field_empty' => 'The value for :fieldname cannot be null.',
     'in' => 'គុណលក្ខណៈដែលបានជ្រើសរើសគឺមិនត្រឹមត្រូវទេ។',
     'in_array' => 'The :attribute field must exist in :other.',
     'integer' => 'The :attribute field must be an integer.',
@@ -126,7 +126,7 @@ return [
         'symbols' => 'The :attribute field must contain at least one symbol.',
         'uncompromised' => 'The given :attribute has appeared in a data leak. Please choose a different :attribute.',
     ],
-    'percent'       => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
+    'percent' => 'The depreciation minimum must be between 0 and 100 when depreciation type is percentage.',
 
     'present' => 'The :attribute field must be present.',
     'present_if' => 'The :attribute field must be present when :other is :value.',
@@ -156,24 +156,37 @@ return [
         'string' => 'វាល :attribute ត្រូវតែជា :size តួអក្សរ។',
     ],
     'starts_with' => 'វាល :attribute ត្រូវតែចាប់ផ្តើមដោយមួយក្នុងចំណោមខាងក្រោម: :values ​​។',
-    'string'               => 'គុណលក្ខណៈ : ត្រូវតែជាខ្សែអក្សរ។',
+    'string' => 'គុណលក្ខណៈ : ត្រូវតែជាខ្សែអក្សរ។',
     'two_column_unique_undeleted' => ':attribute ត្រូវតែមានតែមួយគត់នៅទូទាំង :table1 និង :table2។ ',
-    'unique_undeleted'     => 'គុណលក្ខណៈ : ត្រូវតែមានតែមួយគត់។',
-    'non_circular'         => ':attribute មិនត្រូវបង្កើតសេចក្តីយោងរាងជារង្វង់ទេ។',
-    'not_array'            => ':attribute មិនអាចជាអារេបានទេ។',
+    'unique_undeleted' => 'គុណលក្ខណៈ : ត្រូវតែមានតែមួយគត់។',
+    'non_circular' => ':attribute មិនត្រូវបង្កើតសេចក្តីយោងរាងជារង្វង់ទេ។',
+    'parent_must_be_top_level' => 'The selected :attribute must itself be a top-level item. Only one level of nesting is allowed.',
+    'must_have_no_children' => 'This item already has children of its own, so it cannot be assigned a parent.',
+    'parent_within_scope' => 'The selected :attribute is outside your assigned scope.',
+    'not_array' => ':attribute មិនអាចជាអារេបានទេ។',
     'disallow_same_pwd_as_user_fields' => 'ពាក្យ​សម្ងាត់​មិន​អាច​ដូច​គ្នា​នឹង​ឈ្មោះ​អ្នក​ប្រើ​ទេ។',
-    'letters'              => 'ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់មួយអក្សរ។',
-    'numbers'              => 'ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់មួយលេខ។',
-    'case_diff'            => 'ពាក្យសម្ងាត់ត្រូវតែប្រើករណីចម្រុះ។',
-    'symbols'              => 'ពាក្យសម្ងាត់ត្រូវតែមាននិមិត្តសញ្ញា។',
+    'letters' => 'ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់មួយអក្សរ។',
+    'numbers' => 'ពាក្យសម្ងាត់ត្រូវតែមានយ៉ាងហោចណាស់មួយលេខ។',
+    'case_diff' => 'ពាក្យសម្ងាត់ត្រូវតែប្រើករណីចម្រុះ។',
+    'symbols' => 'ពាក្យសម្ងាត់ត្រូវតែមាននិមិត្តសញ្ញា។',
     'timezone' => 'វាល :attribute ត្រូវតែជាតំបន់ពេលវេលាត្រឹមត្រូវ។',
     'unique' => 'គុណលក្ខណៈ : ត្រូវបានគេយករួចហើយ។',
     'uploaded' => ':attribute បរាជ័យក្នុងការបង្ហោះ។',
     'uppercase' => 'វាល :attribute ត្រូវតែជាអក្សរធំ។',
     'url' => 'វាល :attribute ត្រូវតែជា URL ត្រឹមត្រូវ។',
+    'external_url' => 'The :attribute field must be a valid external URL (http:// or https://) that does not point at a private or local address.',
+    'asset_tag_pattern_placeholder' => 'The asset tag pattern must include at least one placeholder from :placeholders, otherwise every synced asset would receive the same tag and only the first would save.',
+    'custom_http_extras_json' => [
+        'not_json' => 'Custom Extras must be valid JSON. Parser error: :error',
+        'not_array' => 'Custom Extras must be a JSON array (starting with [ and ending with ]).',
+        'entry_not_object' => 'Custom Extras entry #:index must be a JSON object with key, label, and path fields.',
+        'missing_field' => 'Custom Extras entry #:index is missing the required ":field" field.',
+    ],
     'ulid' => 'វាល :attribute ត្រូវតែជា ULID ត្រឹមត្រូវ។',
     'uuid' => 'វាល :attribute ត្រូវតែជា UUID ត្រឹមត្រូវ។',
-    'fmcs_location' => 'Full multiple company support and location scoping is enabled in the Admin Settings, and the selected location and selected company are not compatible.',
+    'valid_css_color' => 'The :attribute field must be a valid CSS color (hex, rgb, rgba, hsl, or hsla).',
+    'fmcs_company' => 'The :attribute field is required because full multiple companies support is enabled and floaters are not allowed.',
+    'fmcs_location' => 'Location ":location" belongs to :location_company, which does not match the selected company.',
     'is_unique_across_company_and_location' => 'The :attribute must be unique within the selected company and location.',
 
     /*
@@ -187,38 +200,39 @@ return [
     |
     */
 
-    'email_array'      => 'អាសយដ្ឋានអ៊ីមែលមួយ ឬច្រើនមិនត្រឹមត្រូវទេ។',
-    'checkboxes'           => ':attribute contains invalid options.',
-    'radio_buttons'        => ':attribute is invalid.',
-    
+    'email_array' => 'អាសយដ្ឋានអ៊ីមែលមួយ ឬច្រើនមិនត្រឹមត្រូវទេ។',
+    'checkboxes' => ':attribute contains invalid options.',
+    'radio_buttons' => ':attribute is invalid.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
+
     'custom' => [
         'alpha_space' => 'វាល :attribute មានតួអក្សរដែលមិនត្រូវបានអនុញ្ញាត។',
 
-        'hashed_pass'      => 'ពាក្យសម្ងាត់បច្ចុប្បន្នរបស់អ្នកមិនត្រឹមត្រូវទេ។',
-        'dumbpwd'          => 'ពាក្យសម្ងាត់នោះជារឿងធម្មតាពេកហើយ។',
+        'hashed_pass' => 'ពាក្យសម្ងាត់បច្ចុប្បន្នរបស់អ្នកមិនត្រឹមត្រូវទេ។',
+        'dumbpwd' => 'ពាក្យសម្ងាត់នោះជារឿងធម្មតាពេកហើយ។',
         'statuslabel_type' => 'អ្នកត្រូវតែជ្រើសរើសប្រភេទស្លាកស្ថានភាពត្រឹមត្រូវ។',
-        'custom_field_not_found'          => 'វាលនេះហាក់ដូចជាមិនមានទេ សូមពិនិត្យមើលឈ្មោះវាលផ្ទាល់ខ្លួនរបស់អ្នកពីរដង។',
+        'custom_field_not_found' => 'វាលនេះហាក់ដូចជាមិនមានទេ សូមពិនិត្យមើលឈ្មោះវាលផ្ទាល់ខ្លួនរបស់អ្នកពីរដង។',
         'custom_field_not_found_on_model' => 'វាលនេះហាក់ដូចជាមាន ប៉ុន្តែមិនមាននៅលើសំណុំវាលរបស់ Asset Model នេះទេ។',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
-        'purchase_date.date_format'     => ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
-        'last_audit_date.date_format'   =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD hh:mm:ss',
-        'expiration_date.date_format'   =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
-        'termination_date.date_format'  =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
-        'expected_checkin.date_format'  =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
-        'start_date.date_format'        =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
-        'end_date.date_format'          =>  ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
+        'purchase_date.date_format' => ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
+        'last_audit_date.date_format' => ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD hh:mm:ss',
+        'expiration_date.date_format' => ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
+        'termination_date.date_format' => ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
+        'expected_checkin.date_format' => ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
+        'start_date.date_format' => ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
+        'end_date.date_format' => ':attribute ត្រូវតែជាកាលបរិច្ឆេទត្រឹមត្រូវក្នុងទម្រង់ YYYY-MM-DD',
         'invalid_value_in_field' => 'Invalid value included in this field',
 
         'ldap_username_field' => [
-            'not_in' =>         '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.'
+            'not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.',
         ],
         'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> '],
         'ldap_filter' => ['regex' => 'This value should probably not be wrapped in parentheses.'],
 
-        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -230,7 +244,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'serials.*' => 'លេខស៊េរី',
+        'asset_tags.*' => 'ទ្រព្យសម្បត្តិ',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -244,6 +261,5 @@ return [
         'required' => 'This field is required',
         'email' => 'Please enter a valid email address',
     ],
-
 
 ];

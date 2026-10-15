@@ -1,37 +1,39 @@
 <?php
 
 namespace App\Helpers;
+
 use App\Models\Accessory;
-use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\CustomField;
 use App\Models\CustomFieldset;
 use App\Models\Depreciation;
-use App\Models\Setting;
-use App\Models\Statuslabel;
 use App\Models\License;
 use App\Models\Location;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Crypt;
-use Illuminate\Contracts\Encryption\DecryptException;
+use App\Models\Setting;
+use App\Models\Statuslabel;
+use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Contracts\Encryption\DecryptException;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManagerStatic as Image;
-use Illuminate\Support\Facades\Session;
 
 class Helper
 {
-
-
     /**
      * This is only used for reversing the migration that updates the locale to the 5-6 letter codes from two
      * letter codes. The normal dropdowns use the autoglossonyms in the language files located
      * in resources/en-US/localizations.php.
      */
-    public static $language_map =  [
+    public static $language_map = [
         'af' => 'af-ZA', // Afrikaans
         'am' => 'am-ET', // Amharic
         'ar' => 'ar-SA', // Arabic
@@ -86,12 +88,14 @@ class Helper
      * Simple helper to invoke the markdown parser
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v2.0]
+     *
      * @return string
      */
     public static function parseEscapedMarkedown($str = null)
     {
-        $Parsedown = new \Parsedown();
+        $Parsedown = new \Parsedown;
         $Parsedown->setSafeMode(true);
 
         if ($str) {
@@ -99,9 +103,76 @@ class Helper
         }
     }
 
+    /**
+     * Slice an in-memory Collection into a LengthAwarePaginator using the
+     * page + perPage values normalized by SetPaginationDefaults middleware.
+     *
+     * Selectlist endpoints that fetch the full set up-front (so they can
+     * post-process — e.g. hierarchy indenting in Companies / Locations) need
+     * to wrap the result in a paginator before handing it to SelectlistTransformer.
+     * This helper avoids re-deriving the page math at every call site, and
+     * inherits the middleware's bounds check against config('app.max_results').
+     */
+    public static function paginateCollection(Collection $items): LengthAwarePaginator
+    {
+        $page = app('api_current_page');
+        $perPage = app('api_limit_value');
+
+        return new LengthAwarePaginator(
+            $items->forPage($page, $perPage)->values(),
+            $items->count(),
+            $perPage,
+            $page,
+        );
+    }
+
+    /**
+     * Return every item on a single page when the API call passes
+     * `?all=true` on the request. Used by the select2-checkboxes
+     * "Select all" button so it can pull the full filtered result set
+     * in one call instead of walking paginated pages.
+     *
+     * Caps the response at $cap items as a guardrail against runaway
+     * reads. The explicit $cap argument lets a controller pin a lower
+     * ceiling it knows is appropriate for its shape. Omitted, the
+     * default is `config('app.max_unpaginated_records')` (operator
+     * knob via MAX_UNPAGINATED, same lever the Groups bulk-user
+     * picker respects).
+     *
+     * A client-provided `?cap=` on the request is honored only as a
+     * CEILING SUGGESTION: it can lower the effective cap but never
+     * raise it. A malicious `?cap=99999999` is silently limited to
+     * the server-side value above. This is what lets per-widget
+     * data-max-select-all attributes work without opening a runaway
+     * surface.
+     *
+     * Falls through to paginateCollection() for everything else so
+     * existing callers keep working.
+     */
+    public static function paginateCollectionOrAll(Collection $items, ?int $cap = null): LengthAwarePaginator
+    {
+        if (! request()->boolean('all')) {
+            return self::paginateCollection($items);
+        }
+
+        $cap ??= (int) config('app.max_unpaginated_records', 5000);
+        $clientCap = (int) request()->integer('cap', PHP_INT_MAX);
+        if ($clientCap > 0) {
+            $cap = min($cap, $clientCap);
+        }
+        $capped = $items->take($cap)->values();
+
+        return new LengthAwarePaginator(
+            $capped,
+            $capped->count(),
+            max($capped->count(), 1),
+            1,
+        );
+    }
+
     public static function parseEscapedMarkedownInline($str = null)
     {
-        $Parsedown = new \Parsedown();
+        $Parsedown = new \Parsedown;
         $Parsedown->setSafeMode(true);
 
         if ($str) {
@@ -115,28 +186,33 @@ class Helper
      * If it's a number, format it as a string.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v2.0]
+     *
      * @return string
      */
     public static function formatCurrencyOutput($cost)
     {
         if (is_numeric($cost)) {
 
-            if (Setting::getSettings()->digit_separator=='1.234,56') {
+            if (Setting::getSettings()->digit_separator == '1.234,56') {
                 return number_format($cost, 2, ',', '.');
             }
+
             return number_format($cost, 2, '.', ',');
         }
+
         // It's already been parsed.
         return $cost;
     }
-
 
     /**
      * Static colors for pie charts.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.3]
+     *
      * @return string
      */
     public static function defaultChartColors(int $index = 0)
@@ -419,15 +495,14 @@ class Helper
         if ($index >= $total_colors) {
 
             Log::info('Status label count is '.$index.' and exceeds the allowed count of 266.');
-            //patch fix for array key overflow (color count starts at 1, array starts at 0)
+            // patch fix for array key overflow (color count starts at 1, array starts at 0)
             $index = $index - $total_colors - 1;
 
-            //constraints to keep result in 0-265 range. This should never be needed, but if something happens
-            //to create this many status labels and it DOES happen, this will keep it from failing at least.
-            if($index < 0) {
+            // constraints to keep result in 0-265 range. This should never be needed, but if something happens
+            // to create this many status labels and it DOES happen, this will keep it from failing at least.
+            if ($index < 0) {
                 $index = 0;
-            }
-            elseif($index >($total_colors - 1)) {
+            } elseif ($index > ($total_colors - 1)) {
                 $index = $total_colors - 1;
             }
         }
@@ -437,39 +512,44 @@ class Helper
 
     /**
      * Check if a string has any RTL characters
-     * @param $value
+     *
+     * @param  $value
      * @return bool
      */
-    public static function hasRtl($string) {
+    public static function hasRtl($string)
+    {
         $rtlChar = '/[\x{0590}-\x{083F}]|[\x{08A0}-\x{08FF}]|[\x{FB1D}-\x{FDFF}]|[\x{FE70}-\x{FEFF}]/u';
+
         return preg_match($rtlChar, $string) != 0;
     }
 
     // is chinese, japanese or korean language
-    public static function isCjk($string) {
+    public static function isCjk($string)
+    {
         return Helper::isChinese($string) || Helper::isJapanese($string) || Helper::isKorean($string);
     }
 
-    public static function isChinese($string) {
+    public static function isChinese($string)
+    {
         return preg_match("/\p{Han}+/u", $string);
     }
 
-    public static function isJapanese($string) {
+    public static function isJapanese($string)
+    {
         return preg_match('/[\x{4E00}-\x{9FBF}\x{3040}-\x{309F}\x{30A0}-\x{30FF}]/u', $string);
     }
 
-    public static function isKorean($string) {
+    public static function isKorean($string)
+    {
         return preg_match('/[\x{3130}-\x{318F}\x{AC00}-\x{D7AF}]/u', $string);
     }
-
 
     /**
      * Increases or decreases the brightness of a color by a percentage of the current brightness.
      *
-     * @param   string  $hexCode        Supported formats: `#FFF`, `#FFFFFF`, `FFF`, `FFFFFF`
-     * @param   float   $adjustPercent  A number between -1 and 1. E.g. 0.3 = 30% lighter; -0.4 = 40% darker.
-     *
-     * @return  string
+     * @param  string  $hexCode  Supported formats: `#FFF`, `#FFFFFF`, `FFF`, `FFFFFF`
+     * @param  float  $adjustPercent  A number between -1 and 1. E.g. 0.3 = 30% lighter; -0.4 = 40% darker.
+     * @return string
      */
     public static function adjustBrightness($hexCode, $adjustPercent)
     {
@@ -496,7 +576,9 @@ class Helper
      * This is inelegant, and could be refactored later.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.2]
+     *
      * @return array
      */
     public static function chartBackgroundColors()
@@ -517,28 +599,29 @@ class Helper
         return $colors;
     }
 
-
     /**
      * Format currency using comma for thousands until local info is property used.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v2.7]
+     *
      * @return string
      */
     public static function ParseFloat($floatString)
     {
         /*******
-         * 
+         *
          * WARNING: This does conversions based on *locale* - a Unix-ey-like thing.
-         * 
+         *
          * Everything else in the system tends to convert based on the Snipe-IT settings
-         * 
+         *
          * So it's very likely this is *not* what you want - instead look for the new
-         * 
+         *
          * ParseCurrency($currencyString)
-         * 
+         *
          * Which should be directly below here
-         * 
+         *
          */
         $LocaleInfo = localeconv();
         $floatString = str_replace(',', '', $floatString);
@@ -554,24 +637,28 @@ class Helper
 
         return floatval($floatString);
     }
-    
+
     /**
      * Format currency using comma or period for thousands, and period or comma for decimal, based on settings.
-     * 
+     *
      * @author [B. Wetherington] [<bwetherington@grokability.com>]
+     *
      * @since [v5.2]
-     * @return Float
+     *
+     * @return float
      */
-    public static function ParseCurrency($currencyString) {
-        $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
-        if(Setting::getSettings()->digit_separator=='1.234,56') {
-            //EU format
+    public static function ParseCurrency($currencyString)
+    {
+        $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); // generally shouldn't come up, since we don't do this in fields, but just in case it does...
+        if (Setting::getSettings()->digit_separator == '1.234,56') {
+            // EU format
             $without_thousands = str_replace('.', '', $without_currency);
             $corrected_decimal = str_replace(',', '.', $without_thousands);
         } else {
             $without_thousands = str_replace(',', '', $without_currency);
             $corrected_decimal = $without_thousands;  // decimal is already OK
         }
+
         return floatval($corrected_decimal);
     }
 
@@ -579,13 +666,15 @@ class Helper
      * Get the list of status labels in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v2.5]
+     *
      * @return array
      */
     public static function statusLabelList()
     {
         $statuslabel_list = ['' => trans('general.select_statuslabel')] + Statuslabel::orderBy('default_label', 'desc')->orderBy('name', 'asc')->orderBy('deployable', 'desc')
-                ->pluck('name', 'id')->toArray();
+            ->pluck('name', 'id')->toArray();
 
         return $statuslabel_list;
     }
@@ -598,15 +687,17 @@ class Helper
      * the status_id submitted is actually really deployable.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v5.1.0]
+     *
      * @return array
      */
     public static function deployableStatusLabelList()
     {
         $statuslabel_list = Statuslabel::where('deployable', '=', '1')->orderBy('default_label', 'desc')
-                ->orderBy('name', 'asc')
-                ->orderBy('deployable', 'desc')
-                ->pluck('name', 'id')->toArray();
+            ->orderBy('name', 'asc')
+            ->orderBy('deployable', 'desc')
+            ->pluck('name', 'id')->toArray();
 
         return $statuslabel_list;
     }
@@ -615,7 +706,9 @@ class Helper
      * Get the list of status label types in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v2.5]
+     *
      * @return array
      */
     public static function statusTypeList()
@@ -634,13 +727,15 @@ class Helper
      * Get the list of depreciations in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v2.5]
+     *
      * @return array
      */
     public static function depreciationList()
     {
-        $depreciation_list = ['' => 'Do Not Depreciate'] + Depreciation::orderBy('name', 'asc')
-                ->pluck('name', 'id')->toArray();
+        $depreciation_list = ['' => trans('admin/licenses/form.no_depreciation')] + Depreciation::orderBy('name', 'asc')
+            ->pluck('name', 'id')->toArray();
 
         return $depreciation_list;
     }
@@ -649,10 +744,12 @@ class Helper
      * Get the list of category types in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v2.5]
+     *
      * @return array
      */
-    public static function categoryTypeList($selection=null)
+    public static function categoryTypeList($selection = null)
     {
         $category_types = [
             '' => '',
@@ -663,37 +760,50 @@ class Helper
             'license' => trans('general.license'),
         ];
 
-        if ($selection != null){
+        if ($selection != null) {
             return $category_types[strtolower($selection)];
+        } else {
+            return $category_types;
         }
-        else
-        return $category_types;
     }
+
     /**
      * Get the list of custom fields in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v2.5]
+     *
      * @return array
      */
     public static function customFieldsetList()
     {
         $customfields = ['' => trans('admin/models/general.no_custom_field')] + CustomFieldset::pluck('name', 'id')->toArray();
 
-        return  $customfields;
+        return $customfields;
     }
 
     /**
      * Get the list of custom field formats in an array to make a dropdown menu
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.4]
+     *
      * @return array
      */
     public static function predefined_formats()
     {
         $keys = array_keys(CustomField::PREDEFINED_FORMATS);
         $stuff = array_combine($keys, $keys);
+
+        // Display-only label swap. 'ANY' as a label reads like the format
+        // requires something; 'ANY/NONE' makes it clear that no validation
+        // is applied. The KEY stays 'ANY' so submitted form values,
+        // JS lookups, and stored/compared values all keep working.
+        if (isset($stuff['ANY'])) {
+            $stuff['ANY'] = 'ANY/NONE';
+        }
 
         return $stuff;
     }
@@ -702,7 +812,9 @@ class Helper
      * Get the list of barcode dimensions
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.3]
+     *
      * @return array
      */
     public static function barcodeDimensions($barcode_type = 'QRCODE')
@@ -725,7 +837,9 @@ class Helper
      * Generates a random string
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.0]
+     *
      * @return array
      */
     public static function generateRandomString($length = 10)
@@ -739,27 +853,31 @@ class Helper
 
         return $randomString;
     }
+
     /**
      * A method to be used to handle deprecations notifications, currently handling MS Teams. more can be added when needed.
      *
      *
      * @author [Godfrey Martinez]
+     *
      * @since [v7.0.14]
-     * @return array
      */
-    public static function deprecationCheck()  : array {
+    public static function deprecationCheck(): array
+    {
         // The check and message that the user is still using the deprecated version
         $deprecations = [
-            'ms_teams_deprecated' => array(
-            'check' => !Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows') && (Setting::getSettings()->webhook_selected === 'microsoft'),
-            'message' => 'The Microsoft Teams webhook URL being used will be deprecated Dec 31st, 2025. <a class="btn btn-primary" href="' . route('settings.slack.index') . '">Change webhook endpoint</a>'),
+            'ms_teams_deprecated' => [
+                'check' => ! Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows') && (Setting::getSettings()->webhook_selected === 'microsoft'),
+                'message' => 'The Microsoft Teams webhook URL being used will be deprecated Dec 31st, 2025. <a class="btn btn-primary" href="'.route('settings.integrations.index').'">Change webhook endpoint</a>',
+            ],
         ];
 
         // if item of concern is being used and its being used with the deprecated values return the notification array.
-        if(Setting::getSettings()->webhook_selected === 'microsoft' && $deprecations['ms_teams_deprecated']['check']) {
+        if (Setting::getSettings()->webhook_selected === 'microsoft' && $deprecations['ms_teams_deprecated']['check']) {
             return $deprecations;
         }
-            return [];
+
+        return [];
     }
 
     /**
@@ -767,79 +885,139 @@ class Helper
      * alert dropdown
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.0]
+     *
      * @return array
      */
     public static function checkLowInventory()
     {
-        $alert_threshold = \App\Models\Setting::getSettings()->alert_threshold;
-        $consumables = Consumable::withCount('consumableAssignments as consumable_assignments_count')->whereNotNull('min_amt')->get();
-        $accessories = Accessory::withCount('checkouts as checkouts_count')->whereNotNull('min_amt')->get();
-        $components = Component::whereNotNull('min_amt')->get();
-        $asset_models = AssetModel::where('min_amt', '>', 0)->get();
-        $licenses = License::where('min_amt', '>', 0)->get();
+        $alert_threshold = (int) Setting::getSettings()->alert_threshold;
+
+        // Push the "below threshold" filter into SQL via havingRaw on the
+        // withCount alias, so only rows that will actually alert get
+        // hydrated. Previous shape loaded every row with min_amt set and
+        // filtered in PHP. On a 1000-item deployment with 5 low-inventory
+        // items that meant 200x more rows than needed. Also select only
+        // the columns the foreach uses (id / name / qty / min_amt),
+        // avoiding hydration of long text columns like License::serial.
+        // select() must come BEFORE withCount(): withCount uses addSelect
+        // under the hood, so a select() after would wipe the count alias.
+        //
+        // GROUP BY every selected column, not just the primary key. Under
+        // ONLY_FULL_GROUP_BY, MySQL and MariaDB are supposed to accept
+        // "GROUP BY <PK>, SELECT <other cols>" via functional-dependency
+        // detection, but that detection fails on some MariaDB versions
+        // when a correlated subquery is in the SELECT list (withCount
+        // generates one). Since id is unique, adding the other columns
+        // is a cardinality no-op and works on every engine + sql_mode.
+        $consumables = Consumable::select('id', 'name', 'qty', 'min_amt')
+            ->withCount('consumableAssignments as consumables_users_count')
+            ->whereNotNull('min_amt')
+            ->groupBy('consumables.id', 'consumables.name', 'consumables.qty', 'consumables.min_amt')
+            ->havingRaw('(qty - consumables_users_count) < (min_amt + ?)', [$alert_threshold])
+            ->get();
+
+        $accessories = Accessory::select('id', 'name', 'qty', 'min_amt')
+            ->withCount('checkouts as checkouts_count')
+            ->whereNotNull('min_amt')
+            ->groupBy('accessories.id', 'accessories.name', 'accessories.qty', 'accessories.min_amt')
+            ->havingRaw('(qty - checkouts_count) < (min_amt + ?)', [$alert_threshold])
+            ->get();
+
+        // Components are checked out with a per-assignment quantity
+        // stored on the components_assets pivot (assigned_qty), NOT
+        // one row per unit. withCount() would count assignment rows
+        // and produce a wrong "remaining" ("qty - 1" instead of "qty
+        // - N" for a single pivot row that shipped N units). Match
+        // Component::numCheckedOut() by summing pivot.assigned_qty
+        // through the unconstrainedAssets relation, which also drops
+        // CompanyableScope so cross-company checkouts count against
+        // stock the same way the model method does. coalesce() maps
+        // "no assignments" (SUM returns NULL) back to 0 so the
+        // havingRaw comparison stays numeric.
+        $components = Component::select('id', 'name', 'qty', 'min_amt')
+            ->withSum('unconstrainedAssets as sum_unconstrained_assets', 'components_assets.assigned_qty')
+            ->whereNotNull('min_amt')
+            ->groupBy('components.id', 'components.name', 'components.qty', 'components.min_amt')
+            ->havingRaw('(qty - COALESCE(sum_unconstrained_assets, 0)) < (min_amt + ?)', [$alert_threshold])
+            ->get();
+
+        $asset_models = AssetModel::select('id', 'name', 'min_amt')
+            ->where('min_amt', '>', 0)
+            ->withCount(['availableAssets', 'assets'])
+            ->groupBy('models.id', 'models.name', 'models.min_amt')
+            ->havingRaw('available_assets_count < (min_amt + ?)', [$alert_threshold])
+            ->get();
+
+        // Use the licenses_available withCount alias directly in the
+        // foreach below rather than $license->remaincount(). remaincount()
+        // fires two extra queries per row (licenseSeatsCount via
+        // getLicenseSeatsCountAttribute() and assigned_seats_count via
+        // getAssignedSeatsCountAttribute()), plus a third
+        // unReassignableCount() query for non-reassignable licenses —
+        // classic N+1 on a licenses-with-min_amt list.
+        $licenses = License::select('id', 'name', 'min_amt')
+            ->withCount('availCount as licenses_available')
+            ->where('min_amt', '>', 0)
+            ->groupBy('licenses.id', 'licenses.name', 'licenses.min_amt')
+            ->havingRaw('licenses_available < (min_amt + ?)', [$alert_threshold])
+            ->get();
 
         $items_array = [];
         $all_count = 0;
 
         foreach ($consumables as $consumable) {
-            $avail = $consumable->numRemaining();
-            if ($avail <= ($consumable->min_amt) + $alert_threshold) {
-                if ($consumable->qty > 0) {
-                    $percent = number_format((($avail / $consumable->qty) * 100), 0);
-                } else {
-                    $percent = 100;
-                }
+            $avail = $consumable->qty - $consumable->consumables_users_count;
+            $percent = $consumable->qty > 0
+                ? number_format((($avail / $consumable->qty) * 100), 0)
+                : 100;
 
-                $items_array[$all_count]['id'] = $consumable->id;
-                $items_array[$all_count]['name'] = $consumable->name;
-                $items_array[$all_count]['type'] = 'consumables';
-                $items_array[$all_count]['percent'] = $percent;
-                $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $consumable->min_amt;
-                $all_count++;
-            }
+            $items_array[$all_count]['id'] = $consumable->id;
+            $items_array[$all_count]['name'] = $consumable->name;
+            $items_array[$all_count]['type'] = 'consumables';
+            $items_array[$all_count]['percent'] = $percent;
+            $items_array[$all_count]['remaining'] = $avail;
+            $items_array[$all_count]['min_amt'] = $consumable->min_amt;
+            $all_count++;
         }
 
         foreach ($accessories as $accessory) {
             $avail = $accessory->qty - $accessory->checkouts_count;
-            if ($avail <= ($accessory->min_amt) + $alert_threshold) {
-                if ($accessory->qty > 0) {
-                    $percent = number_format((($avail / $accessory->qty) * 100), 0);
-                } else {
-                    $percent = 100;
-                }
+            $percent = $accessory->qty > 0
+                ? number_format((($avail / $accessory->qty) * 100), 0)
+                : 100;
 
-                $items_array[$all_count]['id'] = $accessory->id;
-                $items_array[$all_count]['name'] = $accessory->name;
-                $items_array[$all_count]['type'] = 'accessories';
-                $items_array[$all_count]['percent'] = $percent;
-                $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $accessory->min_amt;
-                $all_count++;
-            }
+            $items_array[$all_count]['id'] = $accessory->id;
+            $items_array[$all_count]['name'] = $accessory->name;
+            $items_array[$all_count]['type'] = 'accessories';
+            $items_array[$all_count]['percent'] = $percent;
+            $items_array[$all_count]['remaining'] = $avail;
+            $items_array[$all_count]['min_amt'] = $accessory->min_amt;
+            $all_count++;
         }
 
         foreach ($components as $component) {
-            $avail = $component->numRemaining();
-            if ($avail <= ($component->min_amt) + $alert_threshold) {
-                if ($component->qty > 0) {
-                    $percent = number_format((($avail / $component->qty) * 100), 0);
-                } else {
-                    $percent = 100;
-                }
+            $avail = $component->qty - ($component->sum_unconstrained_assets ?? 0);
+            $percent = $component->qty > 0
+                ? number_format((($avail / $component->qty) * 100), 0)
+                : 100;
 
-                $items_array[$all_count]['id'] = $component->id;
-                $items_array[$all_count]['name'] = $component->name;
-                $items_array[$all_count]['type'] = 'components';
-                $items_array[$all_count]['percent'] = $percent;
-                $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $component->min_amt;
-                $all_count++;
-            }
+            $items_array[$all_count]['id'] = $component->id;
+            $items_array[$all_count]['name'] = $component->name;
+            $items_array[$all_count]['type'] = 'components';
+            $items_array[$all_count]['percent'] = $percent;
+            $items_array[$all_count]['remaining'] = $avail;
+            $items_array[$all_count]['min_amt'] = $component->min_amt;
+            $all_count++;
         }
 
-        foreach ($asset_models as $asset_model){
+        foreach ($asset_models as $asset_model) {
+            $total_owned = $asset_model->assets_count;
+            $avail = $asset_model->available_assets_count;
+            $percent = $avail > 0
+                ? number_format((($avail / $total_owned) * 100), 0)
+                : 100;
 
             $asset = new Asset();
             $total_owned = $asset->where('model_id', '=', $asset_model->id)->count();
@@ -865,24 +1043,19 @@ class Helper
             }
         }
 
-        foreach ($licenses as $license){
-            $avail = $license->remaincount();
-            if ($avail <= ($license->min_amt) + $alert_threshold) {
-                if ($avail > 0) {
-                    $percent = number_format((($avail / $license->min_amt) * 100), 0);
-                } else {
-                    $percent = 100;
-                }
+        foreach ($licenses as $license) {
+            $avail = $license->licenses_available;
+            $percent = $avail > 0
+                ? number_format((($avail / $license->min_amt) * 100), 0)
+                : 100;
 
-                $items_array[$all_count]['id'] = $license->id;
-                $items_array[$all_count]['name'] = $license->name;
-                $items_array[$all_count]['type'] = 'licenses';
-                $items_array[$all_count]['percent'] = $percent;
-                $items_array[$all_count]['remaining'] = $avail;
-                $items_array[$all_count]['min_amt'] = $license->min_amt;
-                $all_count++;
-            }
-
+            $items_array[$all_count]['id'] = $license->id;
+            $items_array[$all_count]['name'] = $license->name;
+            $items_array[$all_count]['type'] = 'licenses';
+            $items_array[$all_count]['percent'] = $percent;
+            $items_array[$all_count]['remaining'] = $avail;
+            $items_array[$all_count]['min_amt'] = $license->min_amt;
+            $all_count++;
         }
 
         return $items_array;
@@ -892,9 +1065,11 @@ class Helper
      * Check if the file is an image, so we can show a preview
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.0]
-     * @param File $file
-     * @return string | Boolean
+     *
+     * @param  string  $file
+     * @return string | bool
      */
     public static function checkUploadIsImage($file)
     {
@@ -912,9 +1087,11 @@ class Helper
     /**
      * Check if the file is a video, so we can show a preview
      *
-     * @param File $file
-     * @return string | Boolean
+     * @param  string  $file
+     * @return string | bool
+     *
      * @author [B. Wetherington] [<bwetherington@grokability.com>]
+     *
      * @since [v8.1.18]
      */
     public static function checkUploadIsVideo($file)
@@ -933,9 +1110,11 @@ class Helper
     /**
      * Check if the file is audio, so we can show a preview
      *
-     * @param File $file
-     * @return string | Boolean
+     * @param  string  $file
+     * @return string | bool
+     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.0]
      */
     public static function checkUploadIsAudio($file)
@@ -963,9 +1142,12 @@ class Helper
      * if that group/user has been granted that permission.
      *
      * @author [A. Gianotto] [<snipe@snipe.net]
-     * @param array $permissions
-     * @param array $selected_arr
+     *
+     * @param  array  $permissions
+     * @param  array  $selected_arr
+     *
      * @since [v1.0]
+     *
      * @return array
      */
     public static function selectedPermissionsArray($permissions, $selected_arr = [])
@@ -1011,40 +1193,115 @@ class Helper
      * This does not currently handle form request validation requiredness :(
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.0]
+     *
      * @return bool
      */
     public static function checkIfRequired($class, $field)
     {
+        // Transient forms with no bound model (e.g. bulk-checkout) can't be
+        // introspected for required-ness; treat the field as not required
+        // rather than crashing on `null::rules()`. Callers that need the
+        // real required flag will pass an $item.
+        if (! $class) {
+            return false;
+        }
+
         $rules = $class::rules();
         foreach ($rules as $rule_name => $rule) {
             if ($rule_name == $field) {
                 if (is_array($rule)) {
                     if (in_array('required', $rule)) {
-                       return true;
-                    } else {
-                        return false;
+                        return true;
                     }
+                    if (in_array('fmcs_company', $rule) && self::fmcsCompanyIsCurrentlyRequired()) {
+                        return true;
+                    }
+
+                    return false;
                 } else {
-                    if (strpos($rule, 'required') === false) {
-                            return false;
-                        } else {
-                            return true;
-                        }
+                    if (strpos($rule, 'required') !== false) {
+                        return true;
                     }
+                    if (strpos($rule, 'fmcs_company') !== false && self::fmcsCompanyIsCurrentlyRequired()) {
+                        return true;
+                    }
+
+                    return false;
+                }
             }
         }
+
         return false;
+    }
+
+    /**
+     * Mirror of the fmcs_company validator's runtime condition, used by
+     * checkIfRequired() so Blade fields render the "required" indicator
+     * (asterisk / aria-required) in the same conditions the backend will
+     * reject a blank submission. See ValidationServiceProvider.
+     */
+    protected static function fmcsCompanyIsCurrentlyRequired(): bool
+    {
+        $settings = \App\Models\Setting::getSettings();
+        if (! $settings->full_multiple_companies_support) {
+            return false;
+        }
+        if ((bool) $settings->null_company_is_floater) {
+            return false;
+        }
+        if (! auth()->check()) {
+            return false;
+        }
+        $actor = auth()->user();
+        if ($actor->isSuperUser()) {
+            return false;
+        }
+
+        // Uncompanied users work in the null pseudo-company namespace
+        // under strict mode; null IS a valid company id for them, so
+        // don't render the field as required.
+        return $actor->companies()->exists();
+    }
+
+    /**
+     * Return the numeric max length declared for a field in the model's
+     * validation rules (looks for `max:N`). Returns null when the model, field,
+     * or `max:` rule can't be found — callers should fall back to whatever
+     * default they want. Used by `<x-form.row>` to auto-cap text inputs to
+     * the DB column width without every callsite having to pass maxlength.
+     */
+    public static function fieldMaxLength($class, string $field): ?int
+    {
+        if (! $class) {
+            return null;
+        }
+
+        $rules = $class::rules();
+        $rule = $rules[$field] ?? null;
+        if ($rule === null) {
+            return null;
+        }
+
+        $rule_string = is_array($rule) ? implode('|', $rule) : $rule;
+        if (preg_match('/(?:^|\|)max:(\d+)/', $rule_string, $matches)) {
+            return (int) $matches[1];
+        }
+
+        return null;
     }
 
     /**
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
      * @author Daniel Melzter
+     *
      * @since 3.0
-     * @param $array array
-     * @param $key string
-     * @param $default string
+     *
+     * @param  $array  array
+     * @param  $key  string
+     * @param  $default  string
      * @return string
      */
     public static function array_smart_fetch(array $array, $key, $default = '')
@@ -1060,9 +1317,10 @@ class Helper
      * @todo allow this to handle more than just strings (arrays, etc)
      *
      * @author A. Gianotto
+     *
      * @since 3.6
-     * @param CustomField $field
-     * @param string $string
+     *
+     * @param  string  $string
      * @return string
      */
     public static function gracefulDecrypt(CustomField $field, $string)
@@ -1075,12 +1333,58 @@ class Helper
             } catch (DecryptException $e) {
                 return 'Error Decrypting: '.$e->getMessage();
             }
-            }
+        }
 
         return $string;
     }
-    public static function formatStandardApiResponse($status, $payload = null, $messages = null)
 
+    /**
+     * Resolves the value to render in a custom-field form input for the current
+     * request. Encapsulates the "encrypted + no view.encrypted_custom_fields
+     * gate" branch so every element type in custom_fields_form.blade.php
+     * consults the same rule, and any future form template can call one method
+     * rather than reconstructing the ternary inline.
+     *
+     * Returns the shared masked-value string when the field is encrypted and
+     * the caller cannot view encrypted custom fields. Otherwise returns the
+     * decrypted stored value for the given $item, or the model-scoped default
+     * value when no $item is present (create form path).
+     */
+    public static function customFieldFormValue(CustomField $field, $item, $model)
+    {
+        if ($field->field_encrypted && ! Gate::allows('assets.view.encrypted_custom_fields')) {
+            return strtoupper(trans('admin/custom_fields/general.encrypted'));
+        }
+
+        $value = isset($item)
+            ? self::gracefulDecrypt($field, $item->{$field->db_column_name()})
+            : $field->defaultValue($model->id);
+
+        // DATE / DATETIME custom fields can hold non-YYYY-MM-DD strings
+        // in the DB (e.g. `3/28/2025` from a historic CSV import that
+        // shoved raw cell values into the column). The datepicker
+        // widgets expect `Y-m-d` / `Y-m-d H:i:s` and blank or mangle
+        // anything else. AssetsTransformer already normalizes on the
+        // view / API read path via getFormattedDateObject; do the
+        // same here so the edit form renders a value the picker can
+        // hydrate. Save cycle rewrites the column to YYYY-MM-DD via
+        // the picker's own output, so the DB heals per-edit. Any
+        // value Carbon cannot parse falls through unchanged so the
+        // user sees the raw string and can correct it.
+        if (in_array($field->format, ['DATE', 'DATETIME'], true) && ! empty($value)) {
+            try {
+                $value = $field->format === 'DATETIME'
+                    ? Carbon::parse($value)->format('Y-m-d H:i:s')
+                    : Carbon::parse($value)->format('Y-m-d');
+            } catch (\Exception $e) {
+                // Unparseable value stays as-is.
+            }
+        }
+
+        return $value;
+    }
+
+    public static function formatStandardApiResponse($status, $payload = null, $messages = null)
     {
         $array['status'] = $status;
         $array['messages'] = $messages;
@@ -1104,12 +1408,8 @@ class Helper
      * Return an array (or null) of the the raw and formatted date object for easy use in
      * the API and the bootstrap table listings.
      *
-     * @param $date
-     * @param $type
-     * @param $array
      * @return array|string|null
      */
-
     public static function getFormattedDateObject($date, $type = 'datetime', $array = true)
     {
         if ($date == '') {
@@ -1127,10 +1427,7 @@ class Helper
          * it is a possible scenario that a custom field could be created as an "ANY" field, data gets
          * added, and then the custom field format gets edited later. If someone put bad data in the
          * database before then - or if they manually edited the field's value - it will crash.
-         *
          */
-
-
         try {
             $tmp_date = new Carbon($date);
 
@@ -1150,6 +1447,7 @@ class Helper
 
         } catch (\Exception $e) {
             Log::warning($e);
+
             return $date.' (Invalid '.$type.' value.)';
         }
 
@@ -1222,49 +1520,54 @@ class Helper
 
         $allowedExtensionMap = [
             // Images
-            'jpg'   => 'far fa-image',
-            'jpeg'   => 'far fa-image',
-            'gif'   => 'far fa-image',
-            'png'   => 'far fa-image',
-            'webp'   => 'far fa-image',
-            'avif'   => 'far fa-image',
+            'jpg' => 'far fa-image',
+            'jfif' => 'far fa-image',
+            'jpeg' => 'far fa-image',
+            'gif' => 'far fa-image',
+            'png' => 'far fa-image',
+            'webp' => 'far fa-image',
+            'avif' => 'far fa-image',
+            'ico' => 'far fa-image',
             'svg' => 'fas fa-vector-square',
 
             // word
-            'doc'   => 'far fa-file-word',
-            'docx'   => 'far fa-file-word',
+            'doc' => 'far fa-file-word',
+            'docx' => 'far fa-file-word',
 
             // Excel
-            'xls'   => 'far fa-file-excel',
-            'xlsx'   => 'far fa-file-excel',
-            'ods'   => 'far fa-file-excel',
+            'xls' => 'far fa-file-excel',
+            'xlsx' => 'far fa-file-excel',
+            'ods' => 'far fa-file-excel',
 
             // Presentation
-            'ppt'   => 'far fa-file-powerpoint',
-            'odp'   => 'far fa-file-powerpoint',
+            'ppt' => 'far fa-file-powerpoint',
+            'odp' => 'far fa-file-powerpoint',
 
             // archive
-            'zip'   => 'fas fa-file-archive',
-            'rar'   => 'fas fa-file-archive',
+            'zip' => 'fas fa-file-archive',
+            'rar' => 'fas fa-file-archive',
 
-            //Text
-            'odt'   => 'far fa-file-alt',
-            'txt'   => 'far fa-file-alt',
-            'rtf'   => 'far fa-file-alt',
-            'xml'   => 'fas fa-code',
+            // Text
+            'odt' => 'far fa-file-alt',
+            'txt' => 'far fa-file-alt',
+            'rtf' => 'far fa-file-alt',
+            'xml' => 'fas fa-code',
+            'json' => 'fas fa-code',
 
             // Misc
-            'pdf'   => 'far fa-file-pdf',
-            'lic'   => 'far fa-save',
+            'pdf' => 'far fa-file-pdf',
+            'lic' => 'far fa-save',
+            'key' => 'fas fa-key',
 
             // video
-            'mov'   => 'fa-solid fa-video',
-            'mp4'   => 'fa-solid fa-video',
+            'mov' => 'fa-solid fa-video',
+            'mp4' => 'fa-solid fa-video',
+            'webm' => 'fa-solid fa-video',
 
             // audio
-            'ogg'   => 'fa-solid fa-file-audio',
-            'mp3'   => 'fa-solid fa-file-audio',
-            'wav'   => 'fa-solid fa-file-audio',
+            'ogg' => 'fa-solid fa-file-audio',
+            'mp3' => 'fa-solid fa-file-audio',
+            'wav' => 'fa-solid fa-file-audio',
         ];
 
         if ($extension && array_key_exists($extension, $allowedExtensionMap)) {
@@ -1274,16 +1577,12 @@ class Helper
         return 'far fa-file';
     }
 
-
-
     /**
      * Get a random unencrypted password.
      *
      * @author Steffen Buehl <sb@sbuehl.com>
      *
      * @since 5.0.0
-     *
-     * @return string
      */
     public static function generateUnencryptedPassword(): string
     {
@@ -1300,11 +1599,11 @@ class Helper
     /**
      * Process base64 encoded image data and save it on supplied path
      *
-     * @param string $image_data base64 encoded image data with mime type
-     * @param string $save_path path to a folder where the image should be saved
+     * @param  string  $image_data  base64 encoded image data with mime type
+     * @param  string  $save_path  path to a folder where the image should be saved
      * @return string path to uploaded image or false if something went wrong
      */
-    public static function processUploadedImage(String $image_data, String $save_path)
+    public static function processUploadedImage(string $image_data, string $save_path)
     {
         if ($image_data == null || $save_path == null) {
             return false;
@@ -1340,39 +1639,28 @@ class Helper
         return $file_name;
     }
 
-
     /**
      * Universal helper to show file size in human-readable formats
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since 5.0
      *
      * @return string[]
      */
     public static function formatFilesizeUnits($bytes)
     {
-        if ($bytes >= 1073741824)
-        {
-            $bytes = number_format($bytes / 1073741824, 2) . ' GB';
-        }
-        elseif ($bytes >= 1048576)
-        {
-            $bytes = number_format($bytes / 1048576, 2) . ' MB';
-        }
-        elseif ($bytes >= 1024)
-        {
-            $bytes = number_format($bytes / 1024, 2) . ' KB';
-        }
-        elseif ($bytes > 1)
-        {
-            $bytes = $bytes . ' bytes';
-        }
-        elseif ($bytes == 1)
-        {
-            $bytes = $bytes . ' byte';
-        }
-        else
-        {
+        if ($bytes >= 1073741824) {
+            $bytes = number_format($bytes / 1073741824, 2).' GB';
+        } elseif ($bytes >= 1048576) {
+            $bytes = number_format($bytes / 1048576, 2).' MB';
+        } elseif ($bytes >= 1024) {
+            $bytes = number_format($bytes / 1024, 2).' KB';
+        } elseif ($bytes > 1) {
+            $bytes = $bytes.' bytes';
+        } elseif ($bytes == 1) {
+            $bytes = $bytes.' byte';
+        } else {
             $bytes = '0 bytes';
         }
 
@@ -1383,105 +1671,87 @@ class Helper
      * This is weird but used by the side nav to determine which URL to point the user to
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since 5.0
      *
      * @return string[]
      */
-    public static function SettingUrls(){
-        $settings=['#','fields.index', 'statuslabels.index', 'models.index', 'categories.index', 'manufacturers.index', 'suppliers.index', 'departments.index', 'locations.index', 'companies.index', 'depreciations.index'];
+    public static function SettingUrls()
+    {
+        $settings = [
+            '#',
+            'fields*',
+            'statuslabels*',
+            'models*',
+            'categories*',
+            'manufacturers*',
+            'suppliers*',
+            'departments*',
+            'locations*',
+            'companies*',
+            'depreciations*',
+        ];
 
         return $settings;
-        }
-
-
-    /**
-     * Generic helper (largely used by livewire right now) that returns the font-awesome icon
-     * for the object type.
-     *
-     * @author A. Gianotto <snipe@snipe.net>
-     * @since 6.1.0
-     *
-     * @return string
-     */
-    public static function iconTypeByItem($item) {
-
-        switch ($item) {
-            case 'asset':
-                return 'fas fa-barcode';
-            case 'accessory':
-                return 'fas fa-keyboard';
-            case 'component':
-                return 'fas fa-hdd';
-            case 'consumable':
-                return 'fas fa-tint';
-            case 'license':
-                return 'far fa-save';
-            case 'location':
-                return 'fas fa-map-marker-alt';
-            case 'user':
-                return 'fas fa-user';
-            case 'supplier':
-                return 'fa-solid fa-store';
-            case 'manufacturer':
-                return 'fa-solid fa-building';
-            case 'category':
-                return 'fa-solid fa-table-columns';
-        }
-
     }
 
-
-     /*
-     * This is a shorter way to see if the app is in demo mode.
-     *
-     * This makes it cleanly available in blades and in controllers, e.g.
-     *
-     * Blade:
-     * {{ Helper::isDemoMode() ? ' disabled' : ''}} for form blades where we need to disable a form
-     *
-     * Controller:
-     * if (Helper::isDemoMode()) {
-     *      // don't allow the thing
-     * }
-     * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff
-     */
-    public static function isDemoMode() {
+    /*
+    * This is a shorter way to see if the app is in demo mode.
+    *
+    * This makes it cleanly available in blades and in controllers, e.g.
+    *
+    * Blade:
+    * {{ Helper::isDemoMode() ? ' disabled' : ''}} for form blades where we need to disable a form
+    *
+    * Controller:
+    * if (Helper::isDemoMode()) {
+    *      // don't allow the thing
+    * }
+    * @todo - use this everywhere else in the app where we have very long if/else config('app.lock_passwords') stuff
+    */
+    public static function isDemoMode()
+    {
         if (config('app.lock_passwords') === true) {
             return true;
-            Log::debug('app locked!');
         }
-        
+
         return false;
     }
 
-  
     /**
      * Conversion between units of measurement
      *
      * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
+     *
      * @since 5.0
-     * @param float  $value    Measurement value to convert
-     * @param string $srcUnit  Source unit of measurement
-     * @param string $dstUnit  Destination unit of measurement
-     * @param int    $round    Round the result to decimals (Default false - No rounding)
+     *
+     * @param  float  $value  Measurement value to convert
+     * @param  string  $srcUnit  Source unit of measurement
+     * @param  string  $dstUnit  Destination unit of measurement
+     * @param  int  $round  Round the result to decimals (Default false - No rounding)
      * @return float
      */
-    public static function convertUnit($value, $srcUnit, $dstUnit, $round=false) {
+    public static function convertUnit($value, $srcUnit, $dstUnit, $round = false)
+    {
         $srcFactor = static::getUnitConversionFactor($srcUnit);
         $dstFactor = static::getUnitConversionFactor($dstUnit);
         $output = $value * $srcFactor / $dstFactor;
+
         return ($round !== false) ? round($output, $round) : $output;
     }
-  
+
     /**
      * Get conversion factor from unit of measurement to mm
      *
      * @author Grant Le Roux <grant.leroux+snipe-it@gmail.com>
+     *
      * @since 5.0
-     * @param string $unit  Unit of measurement
+     *
+     * @param  string  $unit  Unit of measurement
      * @return float
      */
-    public static function getUnitConversionFactor($unit) {
+    public static function getUnitConversionFactor($unit)
+    {
         switch (strtolower($unit)) {
             case 'mm':
                 return 1.0;
@@ -1498,23 +1768,20 @@ class Helper
             case 'pt':
                 return (1 / 72) * static::getUnitConversionFactor('in');
             default:
-                throw new \InvalidArgumentException('Unit: \'' . $unit . '\' is not supported');
-
-                return false;
+                throw new \InvalidArgumentException('Unit: '.e($unit).' is not supported');
         }
     }
-
 
     /*
      * I know it's gauche to return a shitty HTML string, but this is just a helper and since it will be the same every single time,
      * it seemed pretty safe to do here. Don't you judge me.
      */
-    public static function showDemoModeFieldWarning() {
+    public static function showDemoModeFieldWarning()
+    {
         if (Helper::isDemoMode()) {
-            return "<p class=\"text-warning\"><i class=\"fas fa-lock\"></i>" . trans('general.feature_disabled') . "</p>";
+            return '<p class="text-warning"><i class="fas fa-lock"></i>'.trans('general.feature_disabled').'</p>';
         }
     }
-
 
     /**
      * Ah, legacy code.
@@ -1526,10 +1793,11 @@ class Helper
      * In this array, we ONLY include the older languages where we weren't using the correct locale codes.
      *
      * @see public static $language_map in this file
+     *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since 6.3.0
      *
-     * @param $language_code
      * @return string []
      */
     public static function mapLegacyLocale($language_code = null)
@@ -1553,7 +1821,7 @@ class Helper
     {
 
         if (strlen($new_locale) <= 4) {
-            return $new_locale; //"new locale" apparently wasn't quite so new
+            return $new_locale; // "new locale" apparently wasn't quite so new
         }
 
         // This does a *reverse* search against our new language map array - given the value, find the *key* for it
@@ -1562,63 +1830,180 @@ class Helper
         if ($legacy_locale !== false) {
             return $legacy_locale;
         }
+
         return $new_locale; // better that you have some weird locale that doesn't fit into our mappings anywhere than 'void'
     }
 
-    public static function determineLanguageDirection() {
+    public static function determineLanguageDirection()
+    {
         return in_array(app()->getLocale(),
             [
                 'ar-SA',
                 'fa-IR',
-                'he-IL'
+                'he-IL',
             ]) ? 'rtl' : 'ltr';
     }
 
+    /**
+     * Return $url if it points at the same origin as config('app.url'),
+     * otherwise null. Callers should coalesce with a safe default:
+     *
+     *   $target = Helper::sameOriginUrl($input) ?? route('home');
+     *
+     * Any user-controllable redirect target (hidden form field, Referer
+     * header, SAML RelayState, url.intended session value, etc.) MUST
+     * pass through this before reaching redirect(...) or we hand attackers
+     * an open-redirect / phishing hand-off primitive. Relative URLs are
+     * treated as same-origin; javascript:/data: and other non-http(s)
+     * schemes are rejected. CR/LF are stripped to prevent response-splitting
+     * via a crafted Location header.
+     */
+    public static function sameOriginUrl(?string $url): ?string
+    {
+        if (! $url) {
+            return null;
+        }
 
-    static public function getRedirectOption($request, $id, $table, $item_id = null) : RedirectResponse
+        $url = str_replace(["\r", "\n"], '', $url);
+
+        // Normalize backslashes to forward slashes before parsing, so that a malicious input like
+        // https:\\evil.com\@example.com\@evil.com\@example.com
+        // doesn't get parsed as a same-origin URL.
+        $normalized = str_replace('\\', '/', $url);
+
+        $parts = parse_url($normalized);
+        if ($parts === false) {
+            return null;
+        }
+
+        if (isset($parts['scheme']) && ! in_array(strtolower($parts['scheme']), ['http', 'https'], true)) {
+            return null;
+        }
+
+        // Same-origin redirects never legitimately carry credentials.
+        // Reject any input where parse_url extracted a userinfo component,
+        // closing further parser-differential variants that hide the real
+        // authority behind an `@`.
+        if (isset($parts['user']) || isset($parts['pass'])) {
+            return null;
+        }
+
+        // Reject scheme-only URLs with no authority (e.g. "https:evil.com",
+        // "https:/evil.com", "http:@evil.com").
+        if (isset($parts['scheme']) && ! isset($parts['host'])) {
+            return null;
+        }
+
+        $host = $parts['host'] ?? null;
+        $appHost = parse_url(config('app.url'), PHP_URL_HOST);
+
+        if ($host !== null && strcasecmp($host, (string) $appHost) !== 0) {
+            return null;
+        }
+
+        return $url;
+    }
+
+    /**
+     * Emission-side replacement for Laravel's redirect()->intended().
+     *
+     * Laravel's redirect()->intended() pulls session('url.intended') and
+     * hands it straight to redirect()->to() with no host validation. The
+     * write-side sanitize we perform in SamlController::acs and similar
+     * places is defense-in-depth, but any writer that skips it (or any
+     * parser-differential bypass of Helper::sameOriginUrl at write time)
+     * leaves an open-redirect surface. This helper reads url.intended,
+     * runs it through sameOriginUrl at emission, and falls back to the
+     * caller-supplied default whenever the stored value is missing or
+     * fails the guard. Every controller that previously called
+     * redirect()->intended(...) directly should call this instead.
+     */
+    public static function safeIntended(?string $default = null): RedirectResponse
+    {
+        $default ??= '/';
+
+        $intended = session()->pull('url.intended');
+        $target = self::sameOriginUrl($intended) ?? $default;
+
+        return redirect()->to($target);
+    }
+
+    public static function getRedirectOption($request, $id, $table, $item_id = null): RedirectResponse
     {
 
-        $redirect_option = Session::get('redirect_option') ?? $request->redirect_option;
-        $checkout_to_type = Session::get('checkout_to_type') ?? null;
-        $checkedInFrom = Session::get('checkedInFrom');
-        $other_redirect = Session::get('other_redirect');
-        $backUrl = Session::pull('back_url', route('home'));
+        $redirect_option = session('redirect_option') ?? $request->redirect_option;
+        $checkout_to_type = session('checkout_to_type') ?? null;
+        $checkedInFrom = session('checkedInFrom');
+        $other_redirect = session('other_redirect');
 
-       // return to previous page
-        if ($redirect_option === 'back') {
-            return redirect()->to($backUrl);
+        // Defense-in-depth: url.intended can be written by any writer
+        // in the app (SamlController::acs sanitizes its RelayState
+        // input up-front, but future writers may not), and Laravel's
+        // redirect()->intended() performs no host validation on read.
+        $backUrl = self::sameOriginUrl(session()->pull('url.intended', 'home')) ?? route('home');
+
+        // return to previous page
+        if ($redirect_option == 'back') {
+            return redirect()->intended($backUrl);
         }
 
         // return to index
         if ($redirect_option == 'index') {
-            return match ($table) {
-                'Assets' => redirect()->route('hardware.index'),
-                'Users' => redirect()->route('users.index'),
-                'Licenses' => redirect()->route('licenses.index'),
-                'Accessories' => redirect()->route('accessories.index'),
-                'Components' => redirect()->route('components.index'),
-                'Consumables' => redirect()->route('consumables.index'),
+            $indexUrl = match ($table) {
+                'Assets' => route('hardware.index'),
+                'Users' => route('users.index'),
+                'Licenses' => route('licenses.index'),
+                'Accessories' => route('accessories.index'),
+                'Components' => route('components.index'),
+                'Consumables' => route('consumables.index'),
+                'Maintenances' => route('maintenances.index'),
+                default => route('home'),
             };
+
+            // #15214: preserve query-string filters when the user came
+            // from a filtered view of the same index they're being sent
+            // back to (side-nav status filter, category filter, etc.).
+            // Without this the plain index route drops the caller's
+            // context and the user has to re-select their side-nav
+            // filter after every edit. $backUrl was already vetted for
+            // off-site hosts above.
+            if ($backUrl && parse_url($backUrl, PHP_URL_PATH) === parse_url($indexUrl, PHP_URL_PATH)) {
+                return redirect($backUrl);
+            }
+
+            return redirect($indexUrl);
         }
 
         // return to thing being assigned
         if ($redirect_option == 'item') {
             return match ($table) {
-                'Assets'      => redirect()->route('hardware.show', $id ?? $item_id),
-                'Users'       => redirect()->route('users.show', $id ?? $item_id),
-                'Licenses'    => redirect()->route('licenses.show', $id ?? $item_id),
+                'Assets' => redirect()->route('hardware.show', $id ?? $item_id),
+                'Users' => redirect()->route('users.show', $id ?? $item_id),
+                'Licenses' => redirect()->route('licenses.show', $id ?? $item_id),
                 'Accessories' => redirect()->route('accessories.show', $id ?? $item_id),
-                'Components'  => redirect()->route('components.show', $id ?? $item_id),
+                'Components' => redirect()->route('components.show', $id ?? $item_id),
                 'Consumables' => redirect()->route('consumables.show', $id ?? $item_id),
+                default => redirect()->route('home'),
             };
         }
 
         // return to assignment target
         if ($redirect_option == 'target') {
+            $userId = $request->assigned_user ?? $checkedInFrom;
+            $locationId = $request->assigned_location ?? $checkedInFrom;
+            $assetId = $request->assigned_asset ?? $checkedInFrom;
+
             return match ($checkout_to_type) {
-                'user'     => redirect()->route('users.show', $request->assigned_user ?? $checkedInFrom),
-                'location' => redirect()->route('locations.show', $request->assigned_location ?? $checkedInFrom),
-                'asset'    => redirect()->route('hardware.show', $request->assigned_asset ?? $checkedInFrom),
+                'user' => $userId
+                    ? redirect()->route('users.show', $userId)
+                    : redirect()->route('users.index'),
+                'location' => $locationId
+                    ? redirect()->route('locations.show', $locationId)
+                    : redirect()->route('locations.index'),
+                'asset' => $assetId
+                    ? redirect()->route('hardware.show', $assetId)
+                    : redirect()->route('hardware.index'),
+                default => redirect()->route('home'),
             };
         }
 
@@ -1627,6 +2012,7 @@ class Helper
             return match ($other_redirect) {
                 'audit' => redirect()->route('assets.audit.due'),
                 'model' => redirect()->route('models.show', $request->model_id),
+                default => redirect()->route('home'),
             };
 
         }
@@ -1639,23 +2025,45 @@ class Helper
      * If there are locations with different companies than related objects unforseen problems could arise
      *
      * @author T. Regnery <tobias.regnery@gmail.com>
+     *
      * @since 7.0
      *
-     * @param $artisan          when false, bail out on first inconsistent entry
-     * @param $location_id      when set, only test this specific location
-     * @param $new_company_id   in case of updating a location, this is the newly requested company_id
+     * @param  $artisan  when false, bail out on first inconsistent entry
+     * @param  $location_id  when set, only test this specific location
+     * @param  $new_company_id  in case of updating a location, this is the newly requested company_id
      * @return string []
      */
-    static public function test_locations_fmcs($artisan, $location_id = null, $new_company_id = null) {
+    public static function test_locations_fmcs($artisan, $location_id = null, $new_company_id = null)
+    {
         $mismatched = [];
 
+        // Eager-load every relation the loop below walks, plus each item's own
+        // company/location for the mismatch-detail lookups. Previously each
+        // per-relation `$location->{$keyword}` fired one query per location and
+        // each per-item `$item->location->company->name` fired two more per
+        // mismatch, which blew up on installs with lots of locations
+        // (customer with 100+ locations timed out the settings-page enable
+        // check). Adding `.company` on each many-relation also removes the
+        // per-mismatch company query on the artisan report path.
+        $manyRelations = [
+            'accessories.company',
+            'assets.company',
+            'assignedAccessories.accessory.company',
+            'assignedAssets.company',
+            'components.company',
+            'consumables.company',
+            'rtd_assets.company',
+            'users.companies',
+        ];
+        $oneRelations = ['manager.companies', 'parent.company'];
+        $childrenRelation = $location_id ? ['children.company'] : [];
+        $eagerLoads = array_merge($manyRelations, $oneRelations, $childrenRelation);
+
         if ($location_id) {
-            $location = Location::find($location_id);
-            if ($location) {
-                $locations = collect([])->push(Location::find($location_id));
-            }
+            $location = Location::with($eagerLoads)->find($location_id);
+            $locations = $location ? collect([$location]) : collect();
         } else {
-            $locations = Location::all();
+            $locations = Location::with($eagerLoads)->get();
         }
 
         // Bail out early if there are no locations
@@ -1663,7 +2071,61 @@ class Helper
             return [];
         }
 
-        foreach($locations as $location) {
+        $floater = (bool) Setting::getSettings()->null_company_is_floater;
+
+        // Preload every user's pivot company memberships in one query so the
+        // canReceiveFromCompany check below is a pure in-memory lookup instead
+        // of a per-user pivot query. We hit the pivot table directly (rather
+        // than reading `$user->companies`) to match canReceiveFromCompany's
+        // FMCS-scope-bypassing behavior on the User model.
+        $userIds = collect();
+        foreach ($locations as $location) {
+            $userIds = $userIds->concat($location->users->pluck('id'));
+            if ($location->manager) {
+                $userIds->push($location->manager->id);
+            }
+        }
+        $userIds = $userIds->filter()->unique()->values();
+        $userCompanyMap = $userIds->isEmpty()
+            ? collect()
+            : DB::table('company_user')
+                ->whereIn('user_id', $userIds)
+                ->get()
+                ->groupBy('user_id')
+                ->map(fn ($rows) => $rows->pluck('company_id')->map(fn ($id) => (int) $id)->all());
+
+        // Preload the (child_id -> parent_id) map once so the parent-company
+        // branch of canReceiveFromCompany doesn't fire a per-user query. The
+        // hierarchy is one level deep so this stays small.
+        $parentByChild = DB::table('companies')
+            ->whereNotNull('parent_id')
+            ->pluck('parent_id', 'id')
+            ->map(fn ($p) => (int) $p);
+
+        // In-memory equivalent of User::canReceiveFromCompany that uses the
+        // preloaded pivot and parent maps. Kept as a closure so a future
+        // change to the on-model logic is easy to mirror here.
+        $canUserReceive = function (int $userId, ?int $companyId) use ($userCompanyMap, $parentByChild, $floater) {
+            $userCompanyIds = $userCompanyMap->get($userId, []);
+            if ($companyId === null) {
+                if ($floater) {
+                    return true;
+                }
+
+                return empty($userCompanyIds);
+            }
+            if (empty($userCompanyIds)) {
+                return $floater;
+            }
+            if (in_array($companyId, $userCompanyIds, true)) {
+                return true;
+            }
+            $parentOfItemCompany = $parentByChild->get($companyId);
+
+            return $parentOfItemCompany !== null && in_array($parentOfItemCompany, $userCompanyIds, true);
+        };
+
+        foreach ($locations as $location) {
             // in case of an update of a single location, use the newly requested company_id
             if ($new_company_id) {
                 $location_company = $new_company_id;
@@ -1674,19 +2136,19 @@ class Helper
             // Depending on the relationship, we must use different operations to retrieve the objects
             $keywords_relation = [
                 'many' => [
-                            'accessories',
-                            'assets',
-                            'assignedAccessories',
-                            'assignedAssets',
-                            'components',
-                            'consumables',
-                            'rtd_assets',
-                            'users',
-                        ],
-                    'one'  => [
-                        'manager',
-                        'parent',
-                    ]];
+                    'accessories',
+                    'assets',
+                    'assignedAccessories',
+                    'assignedAssets',
+                    'components',
+                    'consumables',
+                    'rtd_assets',
+                    'users',
+                ],
+                'one' => [
+                    'manager',
+                    'parent',
+                ]];
 
             // In case of a single location, the children must be checked as well, because we don't walk every location
             if ($location_id) {
@@ -1694,49 +2156,242 @@ class Helper
             }
 
             foreach ($keywords_relation as $relation => $keywords) {
-                foreach($keywords as $keyword) {
+                foreach ($keywords as $keyword) {
                     if ($relation == 'many') {
                         $items = $location->{$keyword}->all();
+                        // assignedAccessories returns AccessoryCheckout records (no company_id);
+                        // resolve each to its parent Accessory so the comparison is valid.
+                        if ($keyword === 'assignedAccessories') {
+                            $items = collect($items)->map(fn ($checkout) => $checkout->accessory)->filter()->values()->all();
+                        }
                     } else {
                         $items = collect([])->push($location->$keyword);
                     }
 
                     $count = 0;
                     foreach ($items as $item) {
+                        if (! $item) {
+                            continue;
+                        }
 
+                        // Users belong to companies via the many-to-many pivot (company_user).
+                        // Use the preloaded closure instead of $item->canReceiveFromCompany
+                        // so this stays in-memory (avoids one pivot query + one parent
+                        // hierarchy query per user).
+                        if ($item instanceof User) {
+                            $isMismatch = ! $canUserReceive((int) $item->id, $location_company === null ? null : (int) $location_company);
+                        } elseif ($item->company_id == $location_company) {
+                            $isMismatch = false;
+                        } elseif (is_null($item->company_id) || is_null($location_company)) {
+                            $isMismatch = ! $floater;
+                        } else {
+                            $isMismatch = true;
+                        }
 
-                        if ($item && $item->company_id != $location_company) {
+                        if ($isMismatch) {
+                            if ($item instanceof User) {
+                                $itemCompanyIds = $item->companies->pluck('id')->implode(', ');
+                                $itemCompanyNames = $item->companies->pluck('name')->implode(', ');
+                            } else {
+                                $itemCompanyIds = $item->company_id ?? null;
+                                $itemCompanyNames = $item->company->name ?? null;
+                            }
 
                             $mismatched[] = [
-                                    class_basename(get_class($item)),
-                                    $item->id,
-                                    $item->name ?? $item->asset_tag ?? $item->serial ?? $item->username,
-                                    $item->assigned_type ? str_replace('App\\Models\\', '', $item->assigned_type) : null,
-                                    $item->company_id ?? null,
-                                    $item->company->name ?? null,
-//                                    $item->defaultLoc->id ?? null,
-//                                    $item->defaultLoc->name ?? null,
-//                                    $item->defaultLoc->company->id ?? null,
-//                                    $item->defaultLoc->company->name ?? null,
-                                    $item->location->name ?? null,
-                                    $item->location->company->name ?? null,
-                                    $location_company ?? null,
-                                ];
+                                class_basename(get_class($item)),
+                                $item->id,
+                                $item->name ?? $item->asset_tag ?? $item->serial ?? $item->username,
+                                $item->assigned_type ? str_replace('App\\Models\\', '', $item->assigned_type) : null,
+                                $itemCompanyIds,
+                                $itemCompanyNames,
+                                $item->location->name ?? null,
+                                $item->location->company->name ?? null,
+                                $location_company ?? null,
+                            ];
 
                             $count++;
 
                             // Bail early if this is not being run via artisan
-                            if ((!$artisan) && ($count > 0)) {
+                            if ((! $artisan) && ($count > 0)) {
                                 return $mismatched;
                             }
-
-
 
                         }
                     }
                 }
             }
         }
+
         return $mismatched;
+    }
+
+    public static function labelFieldLayoutScaling(
+        $pdf,
+        iterable|\Closure $fields,
+        float $currentX,
+        float $usableWidth,
+        float $usableHeight,
+        float $baseLabelSize,
+        float $baseFieldSize,
+        float $baseFieldMargin,
+        ?string $title = null,
+        float $baseTitleSize = 0.0,
+        float $baseTitleMargin = 0.0,
+        float $baseLabelPadding = 1.5,
+        float $baseGap = 1.5,
+        float $maxScale = 1.8,
+        string $labelFont = 'freesans',
+
+    ): array {
+        $fieldCount = count($fields);
+        $perFieldHeight = max($baseLabelSize, $baseFieldSize) + $baseFieldMargin;
+        $baseFieldsHeight = $fieldCount * $perFieldHeight;
+
+        $hasTitle = is_string($title) && trim($title) !== '';
+        $baseTitleHeight = $hasTitle ? ($baseTitleSize + $baseTitleMargin) : 0.0;
+        $baseTotalHeight = $baseTitleHeight + $baseFieldsHeight;
+        $scale = 1.0;
+        if ($baseTotalHeight > 0 && $usableHeight > 0) {
+            $scale = $usableHeight / $baseTotalHeight;
+        }
+
+        $scale = min($scale, $maxScale);
+
+        $labelSize = $baseLabelSize;
+        $fieldSize = $baseFieldSize * $scale;
+        $fieldMargin = $baseFieldMargin * $scale;
+
+        $rowAdvance = max($labelSize, $fieldSize) + $fieldMargin;
+        $titleSize = $hasTitle ? ($baseTitleSize * $scale) : 0.0;
+        $titleMargin = $hasTitle ? ($baseTitleMargin * $scale) : 0.0;
+        $titleAdvance = $hasTitle ? ($titleSize + $titleMargin) : 0.0;
+
+        $pdf->SetFont($labelFont, '', $baseLabelSize);
+
+        $maxLabelWidthPerUnit = 0;
+        foreach ($fields as $field) {
+            $rawLabel = $field['label'] ?? null;
+
+            // If no label, do not include it in label-column sizing
+            if (! is_string($rawLabel) || trim($rawLabel) === '') {
+                continue;
+            }
+            $label = rtrim($field['label'], ':').':';
+            $width = $pdf->GetStringWidth($label);
+            $maxLabelWidthPerUnit = max($maxLabelWidthPerUnit, $width / $baseLabelSize);
+        }
+
+        $labelPadding = $baseLabelPadding * $scale;
+        $gap = $baseGap * $scale;
+
+        $labelWidth = ($maxLabelWidthPerUnit * $labelSize) + $labelPadding;
+        $valueX = $currentX + $labelWidth + $gap;
+        $valueWidth = $usableWidth - $labelWidth - $gap;
+        $fullValueX = $currentX;
+        $fullValueWidth = $usableWidth;
+
+        return compact(
+            'scale',
+            'hasTitle',
+            'titleSize',
+            'titleMargin',
+            'titleAdvance',
+            'labelSize',
+            'fieldSize',
+            'fieldMargin',
+            'rowAdvance',
+            'labelWidth',
+            'valueX',
+            'valueWidth',
+            'fullValueX',
+            'fullValueWidth',
+        );
+    }
+
+    public static function normalizeFullModelName($model): string
+    {
+        if (str_contains($model, 'App\\Models\\')) {
+            return $model;
+        }
+
+        return 'App\\Models\\'.ucwords($model);
+
+    }
+
+    /**
+     * Render a markdown-textarea value as HTML.
+     *
+     * Soft line breaks (single newlines) are rendered as <br> so that line
+     * breaks typed in the textarea are preserved in the output.
+     *
+     * When $inline is true, block-level elements are suppressed and hard
+     * breaks are pre-processed manually — used for the encrypted reveal span
+     * where block HTML cannot be placed inside a font-size-toggled <span>.
+     */
+    public static function renderMarkdown(?string $text, bool $inline = false): string
+    {
+        if (empty($text)) {
+            return '';
+        }
+
+        if ($inline) {
+            // Convert newlines to CommonMark hard breaks for inline rendering
+            $text = preg_replace('/(?<! {2})\n/', "  \n", $text);
+
+            return Str::inlineMarkdown($text, ['html_input' => 'escape', 'allow_unsafe_links' => false]);
+        }
+
+        $html = trim(Str::markdown($text, [
+            'html_input' => 'escape',
+            'allow_unsafe_links' => false,
+            'renderer' => ['soft_break' => "<br>\n"],
+        ]));
+
+        // If the entire output is a single <p> block, unwrap it so the content
+        // renders inline-ish without the <p> adding unwanted top spacing in the
+        // compact detail-view layout.
+        if (str_starts_with($html, '<p>') && str_ends_with($html, '</p>') && substr_count($html, '<p>') === 1) {
+            return substr($html, 3, -4);
+        }
+
+        return $html;
+    }
+
+    /**
+     * Force equal timing between 'success' and 'failure' to not expose open ports
+     */
+    public static function EqualTiming(int $seconds, callable $function)
+    {
+        $start = microtime(true);
+        $thrown_exception = null;
+        $result = null;
+        try {
+            $result = $function();
+            if (is_bool($result)) {
+                if ($result) {
+                    return; // instant return on success
+                }
+            } // Fall-through on failure - $result is false so the next 'if' will not fire
+            if ($result && $result->getStatusCode() == 200) {
+                // succesful responses should return 'fast'
+                return $result;
+            }
+        } catch (\Throwable $exception) {
+            $thrown_exception = $exception;
+        }
+        // on *any* transaction(?), make sure we don't do a 'fast fail' -
+        // it needs to take $seconds seconds.
+        $end = microtime(true);
+        $duration = $end - $start;
+        $remaining = $seconds - $duration;
+        if ($remaining > 0) {
+            sleep((int) $remaining);
+        }
+        if ($thrown_exception) {
+            throw $thrown_exception;
+        }
+
+        return $result;
+
     }
 }

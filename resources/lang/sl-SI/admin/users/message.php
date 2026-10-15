@@ -1,38 +1,53 @@
 <?php
 
-return array(
+return [
 
-    'accepted'                  => 'You have successfully accepted this item.',
-    'declined'                  => 'You have successfully declined this item.',
-    'bulk_manager_warn'	        => 'Vaši uporabniki so bili uspešno posodobljeni, vendar vnos v upravitelju ni bil shranjen, ker je bil izbran upravitelj tudi na seznamu uporabnikov, ki ga je treba urediti, uporabniki pa morda niso njihovi lastniki. Prosimo, izberite svoje uporabnike, razen upravitelja.',
-    'user_exists'               => 'Uporabnik že obstaja!',
-    'user_not_found'            => 'Uporabnik ne obstaja ali pa nimate dovoljenja za ogled.',
-    'user_login_required'       => 'Polje za prijavo je obvezno',
+    'accepted' => 'You have successfully accepted this item.',
+    'declined' => 'You have successfully declined this item.',
+    'accept_signature_write_failed' => 'Your acceptance signature could not be saved to storage. Acceptance was not recorded. Please contact your administrator.',
+    'accept_pdf_write_failed' => 'The acceptance PDF could not be saved to storage. Acceptance was not recorded. Please contact your administrator.',
+    'bulk_manager_warn' => 'Vaši uporabniki so bili uspešno posodobljeni, vendar vnos v upravitelju ni bil shranjen, ker je bil izbran upravitelj tudi na seznamu uporabnikov, ki ga je treba urediti, uporabniki pa morda niso njihovi lastniki. Prosimo, izberite svoje uporabnike, razen upravitelja.',
+    'user_exists' => 'Uporabnik že obstaja!',
+    'cannot_delete' => 'User does not exist or you do not have permission to delete them.',
+    'user_not_found' => 'Uporabnik ne obstaja ali pa nimate dovoljenja za njegov ogled.',
+    'user_login_required' => 'Polje za prijavo je obvezno',
     'user_has_no_assets_assigned' => 'Brez sredstev dodeljenih uporabniku.',
-    'user_password_required'    => 'Geslo je obvezno.',
-    'insufficient_permissions'  => 'Nezadostna dovoljenja.',
-    'user_deleted_warning'      => 'Ta uporabnik je bil izbrisan. Tega uporabnika boste morali obnoviti, da ga uredite ali dodelite nova sredstva.',
-    'ldap_not_configured'        => 'Integracija LDAP za to namestitev ni bila konfigurirana.',
-    'password_resets_sent'      => 'Izbranim aktiviranim uporabnikom z veljavnim e-poštnim računom je bila poslana povezava za ponastavitev gesla.',
-    'password_reset_sent'       => 'Povezava za ponastavitev gesla je bila poslana na :email!',
-    'user_has_no_email'         => 'Ta uporabnik nima e-poštnega naslova v svojem profilu.',
-    'log_record_not_found'        => 'Ujemajočega se zapisa dnevnika za tega uporabnika ni bilo mogoče najti.',
+    'nothing_currently_assigned' => 'Nothing currently assigned.',
+    'user_password_required' => 'Geslo je obvezno.',
+    'insufficient_permissions' => 'Nezadostna dovoljenja.',
+    'auth_fields_denied' => 'You do not have permission to modify credential or activation fields on this user. Requested fields not updated: :fields',
+    'user_deleted_warning' => 'Ta uporabnik je bil izbrisan. Tega uporabnika boste morali obnoviti, da ga uredite ali dodelite nova sredstva.',
+    'ldap_not_configured' => 'Integracija LDAP za to namestitev ni bila konfigurirana.',
+    'password_resets_sent' => 'Izbranim aktiviranim uporabnikom z veljavnim e-poštnim računom je bila poslana povezava za ponastavitev gesla.',
+    'not_activated' => 'This user cannot login, so they cannot accept assets via email.',
+    'password_reset_sent' => 'Povezava za ponastavitev gesla je bila poslana na :email!',
+    'user_has_no_email' => 'Ta uporabnik nima e-poštnega naslova v svojem profilu.',
+    'log_record_not_found' => 'Ujemajočega se zapisa dnevnika za tega uporabnika ni bilo mogoče najti.',
 
+    'impersonate' => [
+        'started' => 'You are now logged in as :name.',
+        'stopped' => 'You are back to your own account.',
+        'cannot_impersonate_self' => 'You cannot log in as yourself.',
+        'cannot_impersonate_superuser' => 'You cannot log in as another superuser.',
+        'target_not_active' => 'That user is deactivated or deleted and cannot be logged in as.',
+        'impersonator_missing' => 'The original account for this impersonation session no longer exists. Please log in again.',
+    ],
 
-    'success' => array(
-        'create'    => 'Uporabnik je bil uspešno ustvarjen.',
-        'update'    => 'Uporabnik je bil uspešno posodobljen.',
-        'update_bulk'    => 'Uporabniki so bili uspešno posodobljeni!',
-        'delete'    => 'Uporabnik je bil uspešno izbrisan.',
-        'ban'       => 'Uporabnik je bil prepovedan.',
-        'unban'     => 'Uporabnik je bil uspešno od-prepovedan.',
-        'suspend'   => 'Uporabnik je bil uspešno suspendiran.',
+    'success' => [
+        'create' => 'Uporabnik je bil uspešno ustvarjen.',
+        'update' => 'Uporabnik je bil uspešno posodobljen.',
+        'update_bulk' => 'Uporabniki so bili uspešno posodobljeni!',
+        'delete' => 'Uporabnik je bil uspešno izbrisan.',
+        'ban' => 'Uporabnik je bil prepovedan.',
+        'unban' => 'Uporabnik je bil uspešno od-prepovedan.',
+        'suspend' => 'Uporabnik je bil uspešno suspendiran.',
         'unsuspend' => 'Uporabnik je bil uspešno od-suspendiran.',
-        'restored'  => 'Uporabnik je bil uspešno obnovljen.',
-        'import'    => 'Uporabniki so bili uvoženi uspešno.',
-    ),
+        'restored' => 'Uporabnik je bil uspešno obnovljen.',
+        'import' => 'Uporabniki so bili uvoženi uspešno.',
+        'acceptance_reminder_sent' => 'Acceptance reminder sent for :count pending item.|Acceptance reminder sent for :count pending items.',
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Pri ustvarjanju uporabnika je prišlo do težave. Prosim poskusite ponovno.',
         'update' => 'Prišlo je do težave pri posodabljanju uporabnika. Prosim poskusite ponovno.',
         'delete' => 'Pri brisanju uporabnika je prišlo do težave. Prosim poskusite ponovno.',
@@ -43,8 +58,8 @@ return array(
         'delete_has_locations_var' => 'Ta uporabnik še vedno upravlja lokacijo. Najprej izberite drugega upravitelja.|Ta uporabnik še vedno upravlja :count lokacij. Najprej izberite drugega upravitelja.',
         'delete_has_users_var' => 'Ta uporabnik še vedno upravlja drugega uporabnika. Prosimo, da najprej izberete drugega upravitelja za tega uporabnika.|Ta uporabnik še vedno upravlja :seštevek uporabnikov. Prosimo, da najprej izberete drugega menedžerja zanje.',
         'unsuspend' => 'Prišlo je do težave pri od-suspendiranju uporabnika. Prosim poskusite ponovno.',
-        'import'    => 'Pri uvozu uporabnikov je prišlo do težave. Prosim poskusite ponovno.',
-        'asset_already_accepted' => 'To sredstvo je bilo že sprejeto.',
+        'import' => 'Pri uvozu uporabnikov je prišlo do težave. Prosim poskusite ponovno.',
+        'asset_already_accepted' => 'This item has already been accepted.',
         'accept_or_decline' => 'To sredstev morate sprejeti ali zavrniti.',
         'cannot_delete_yourself' => 'Počutili bi se zelo slabo, če bi se izbrisali, zato razmislite o tem.',
         'incorrect_user_accepted' => 'Sredstev, ki ste ga poskušali sprejeti, ni bilo izdano za vas.',
@@ -53,23 +68,25 @@ return array(
         'ldap_could_not_search' => 'Strežnika LDAP ni bilo mogoče najti. Preverite konfiguracijo strežnika LDAP v konfiguracijski datoteki LDAP. <br>Napaka strežnika LDAP:',
         'ldap_could_not_get_entries' => 'Vnose iz strežnika LDAP ni bilo mogoče pridobiti. Preverite konfiguracijo strežnika LDAP v konfiguracijski datoteki LDAP. <br>Napaka strežnika LDAP:',
         'password_ldap' => 'Geslo za ta račun upravlja LDAP / Active Directory. Za spremembo gesla se obrnite na oddelek IT. ',
-        'multi_company_items_assigned' => 'Ta uporabnik ima dodeljene elemente, ki pripadajo drugemu podjetju. Prosimo, da jih shranite ali uredite njihovo podjetje.'
-    ),
+        'multi_company_items_assigned' => 'Ta uporabnik ima dodeljene elemente, ki pripadajo drugemu podjetju. Prosimo, da jih shranite ali uredite njihovo podjetje.',
+        'no_pending_acceptances' => 'This user has no pending acceptances to remind them about.',
+        'company_not_permitted' => 'One or more requested company assignments are outside your permitted company scope.',
+    ],
 
-    'deletefile' => array(
-        'error'   => 'Datoteka ni izbrisana. Prosim poskusite ponovno.',
+    'deletefile' => [
+        'error' => 'Datoteka ni izbrisana. Prosim poskusite ponovno.',
         'success' => 'Datoteka je uspešno izbrisana.',
-    ),
+    ],
 
-    'upload' => array(
-        'error'   => 'Datoteka(e) niso naložene. Prosim poskusite ponovno.',
+    'upload' => [
+        'error' => 'Datoteka(e) niso naložene. Prosim poskusite ponovno.',
         'success' => 'Datoteka(e) so bile uspešno naložene.',
         'nofiles' => 'Niste izbrali nobenih datotek za nalaganje',
         'invalidfiles' => 'Ena ali več vaših datotek je prevelika ali pa je tip datoteke, ki ni dovoljen. Dovoljeni tipi datotek so png, gif, jpg, doc, docx, pdf in txt.',
-    ),
+    ],
 
-    'inventorynotification' => array(
-        'error'   => 'Ta uporabnik ima nastavljene E pošte.',
-        'success' => 'Uporabnik je bil obveščen o trenutnem inventarju.'
-    )
-);
+    'inventorynotification' => [
+        'error' => 'Ta uporabnik ima nastavljene E pošte.',
+        'success' => 'Uporabnik je bil obveščen o trenutnem inventarju.',
+    ],
+];

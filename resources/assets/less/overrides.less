@@ -53,9 +53,23 @@ a.accordion-header {
   color: #333;
 }
 
+// Mirror BS3's .form-group spacing — same margin-bottom, no padding —
+// plus a clearfix so floated col-md-* children don't leak past the
+// wrapper. Without the clearfix, a row whose floats don't fill the full
+// 12 cols (e.g. password_confirmation at 3 + 8) leaves a gap on the
+// right edge that pulls the next row's first child up alongside it,
+// visually offsetting that row's label/input.
 .dynamic-form-row {
-  padding: 10px;
-  margin: 20px;
+  margin-bottom: 15px;
+
+  &::before,
+  &::after {
+    content: " ";
+    display: table;
+  }
+  &::after {
+    clear: both;
+  }
 }
 
 
@@ -82,7 +96,7 @@ a.accordion-header {
   font-size: 13px;
 }
 .main-header {
-  max-height: 150px;
+  max-height: none;
 }
 
 
@@ -289,6 +303,21 @@ a.accordion-header {
 .bs-wizard > .bs-wizard-step:first-child  > .progress {left: 50%; width: 50%;}
 .bs-wizard > .bs-wizard-step:last-child  > .progress {width: 50%;}
 .bs-wizard > .bs-wizard-step.disabled a.bs-wizard-dot{ pointer-events: none; }
+
+/**
+Prevent step titles from wrapping to a second line at intermediate
+widths (QA reported ~1265px). The .bs-wizard-dot is absolutely
+positioned at top:45px per step, so any step whose stepnum grows
+taller than one line pushes its progress bar down while its neighbours
+stay high — the connecting line looks broken. Nowrap + ellipsis keeps
+every stepnum a consistent single-line height so the line stays
+level and threads through the dot centers as designed.
+ */
+.bs-wizard > .bs-wizard-step .bs-wizard-stepnum {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /*END Form Wizard*/
 
 .left-navblock {
@@ -332,12 +361,47 @@ body {
   white-space: normal;
 }
 
-.modal-warning .modal-help {
-  color: #fff8af;
-}
-
 .bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading {
   z-index: 0 !important;
+}
+
+// Clip the absolutely-positioned fixed-column overlays so they cannot
+// bleed past the container's bottom edge into the pagination area.
+.bootstrap-table .fixed-table-container {
+  overflow: hidden;
+}
+
+// Bs-table ships several 1px #dee2e6 hairlines on the fixed-height
+// container (border-bottom on the plain no-footer variant, top+bottom
+// on has-card-view, left+right on .fixed-table-border). #dee2e6 is a
+// pale gray that blends into white on light mode but reads as a stark
+// bright edge on dark mode against --box-bg. Rather than kill the
+// borders (they're the visual seam between the table body and the
+// box wrapper) we re-color them to the same theme-aware token the
+// box's own edges use so the seam reads consistently on both themes.
+// !important is needed because bs-table's shipped stylesheet is
+// pushed via @stack('css') and can load AFTER overrides.less depending
+// on Mix bundling order; same selector + same specificity means load
+// order determines the winner without it.
+.bootstrap-table .fixed-table-container.fixed-height,
+.bootstrap-table .fixed-table-container.fixed-height:not(.has-footer),
+.bootstrap-table .fixed-table-container.fixed-height.has-card-view {
+  border-color: var(--box-bg) !important;
+}
+
+.bootstrap-table .fixed-table-container.fixed-height .fixed-table-border {
+  border-color: var(--box-bg) !important;
+}
+
+// Bs-table's loading overlay is `position: absolute; bottom: 0;
+// width: 100%; background: #fff`. Hidden via opacity:0 / visibility:
+// hidden by default, but the hardcoded white bg reads through on dark
+// mode as a stark bright strip along the container's bottom edge in
+// some browsers' compositing paths (especially when a transition is
+// in-flight or the element sits behind a translucent layer). Rebind
+// the bg to the box color so any bleed-through matches the surround.
+.bootstrap-table .fixed-table-container .fixed-table-body .fixed-table-loading {
+  background: var(--box-bg) !important;
 }
 
 @media print {
@@ -363,10 +427,6 @@ body {
 
   body {
     margin: 0 auto;
-    line-height: 1em;
-    word-spacing:1px;
-    letter-spacing:0.2px;
-    font: 15px "Times New Roman", Times, serif;
     width: 100%;
     float: none;
   }
@@ -374,18 +434,6 @@ body {
   /* avoid page-breaks inside a listingContainer*/
   .listingContainer {
     page-break-inside: avoid;
-  }
-
-  h1 {
-    font: 28px "Times New Roman", Times, serif;
-  }
-
-  h2 {
-    font: 24px "Times New Roman", Times, serif;
-  }
-
-  h3 {
-    font: 20px "Times New Roman", Times, serif;
   }
 
   /* Improve colour contrast of links */
@@ -398,10 +446,6 @@ body {
     background: transparent;
     color:#333;
     text-decoration:none;
-  }
-
-  a[href]:after {
-    content: "" !important;
   }
 
   a[href^="http://"] {
@@ -499,6 +543,10 @@ img.navbar-brand-img, .navbar-brand>img {
   max-height: 50px;
 }
 
+.asset-qr-img img {
+  image-rendering: pixelated;
+}
+
 .input-daterange, .input-daterange input:first-child, .input-daterange input:last-child {
   border-radius: 0px !important;
 }
@@ -528,8 +576,9 @@ img.navbar-brand-img, .navbar-brand>img {
 }
 
 #login-logo {
-  padding-top: 20px;
-  padding-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 15px;
   max-width: 200px
 }
 
@@ -657,9 +706,11 @@ h4 {
     padding-bottom: 15px;
   }
 
-  .firstnav {
-    padding-top: 120px !important;
-  }
+  // .firstnav { padding-top: 120px !important } used to live here as
+  // another static compensation for the wrapped-header-covers-first-item
+  // bug at narrow widths. Superseded by the dynamic
+  // .main-sidebar padding-top: var(--main-header-height) rule; leaving
+  // it would double-count on top of the runtime-measured header height.
 
   .product {
     width: 400px;
@@ -695,21 +746,22 @@ h4 {
 
  See https://github.com/grokability/snipe-it/issues/7989
  */
-th.css-accessory > .th-inner,
-th.css-accessory-alt > .th-inner,
-th.css-barcode > .th-inner,
-th.css-component > .th-inner,
-th.css-consumable > .th-inner,
-th.css-envelope > .th-inner,
-th.css-house-flag > .th-inner,
-th.css-house-laptop > .th-inner,
-th.css-house-user > .th-inner,
-th.css-license > .th-inner,
-th.css-location > .th-inner,
-th.css-users > .th-inner,
-th.css-currency > .th-inner,
-th.css-child-locations > .th-inner,
-th.css-history > .th-inner
+thead th.css-accessory > .th-inner,
+thead th.css-accessory-alt > .th-inner,
+thead th.css-barcode > .th-inner,
+thead th.css-component > .th-inner,
+thead th.css-consumable > .th-inner,
+thead th.css-envelope > .th-inner,
+thead th.css-house-flag > .th-inner,
+thead th.css-house-laptop > .th-inner,
+thead th.css-house-user > .th-inner,
+thead th.css-license > .th-inner,
+thead th.css-location > .th-inner,
+thead th.css-maintenances > .th-inner,
+thead th.css-users > .th-inner,
+thead th.css-currency > .th-inner,
+thead th.css-child-locations > .th-inner,
+thead th.css-history > .th-inner
 {
   font-size: 0px;
   line-height: 0.75 !important;
@@ -720,22 +772,23 @@ th.css-history > .th-inner
 }
 
 
-th.css-location > .th-inner::before,
-th.css-accessory > .th-inner::before,
-th.css-accessory-alt > .th-inner::before,
-th.css-barcode > .th-inner::before,
-th.css-component > .th-inner::before,
-th.css-consumable > .th-inner::before,
-th.css-envelope > .th-inner::before,
-th.css-house-flag > .th-inner::before,
-th.css-house-laptop > .th-inner::before,
-th.css-house-user > .th-inner::before,
-th.css-license > .th-inner::before,
-th.css-location > .th-inner::before,
-th.css-users > .th-inner::before,
-th.css-currency > .th-inner::before,
-th.css-child-locations > .th-inner::before,
-th.css-history > .th-inner::before
+thead th.css-location > .th-inner::before,
+thead th.css-accessory > .th-inner::before,
+thead th.css-accessory-alt > .th-inner::before,
+thead th.css-barcode > .th-inner::before,
+thead th.css-component > .th-inner::before,
+thead th.css-consumable > .th-inner::before,
+thead th.css-envelope > .th-inner::before,
+thead th.css-house-flag > .th-inner::before,
+thead th.css-house-laptop > .th-inner::before,
+thead th.css-house-user > .th-inner::before,
+thead th.css-license > .th-inner::before,
+thead th.css-location > .th-inner::before,
+thead th.css-maintenances > .th-inner::before,
+thead th.css-users > .th-inner::before,
+thead th.css-currency > .th-inner::before,
+thead th.css-child-locations > .th-inner::before,
+thead th.css-history > .th-inner::before
 {
   display: inline-block;
   font-size: 20px;
@@ -747,91 +800,98 @@ th.css-history > .th-inner::before
 BEGIN ICON TABLE HEADERS
 Set the font-weight css property as 900 (For Solid), 400 (Regular or Brands), 300 (Light for pro icons).
 **/
-th.css-barcode > .th-inner::before
+thead th.css-barcode > .th-inner::before
 {
   content: "\f02a"; font-family: "Font Awesome 5 Free"; font-weight: 900;
 }
 
-th.css-license > .th-inner::before
+thead th.css-license > .th-inner::before
 {
   content: "\f0c7"; font-family: "Font Awesome 5 Free"; font-weight: 400;
 }
 
-th.css-consumable > .th-inner::before
+thead th.css-consumable > .th-inner::before
 {
   content: "\f043"; font-family: "Font Awesome 5 Free"; font-weight: 900;
 }
 
-th.css-envelope > .th-inner::before
+thead th.css-envelope > .th-inner::before
 {
   content: "\f0e0"; font-family: "Font Awesome 5 Free"; font-weight: 400;
 }
 
-th.css-accessory > .th-inner::before
+thead th.css-accessory > .th-inner::before
 {
   content: "\f11c"; font-family: "Font Awesome 5 Free"; font-weight: 400;
 }
 
-th.css-users > .th-inner::before {
+thead th.css-users > .th-inner::before {
   content: "\f0c0"; font-family: "Font Awesome 5 Free"; font-size: 15px;
 }
 
-th.css-location > .th-inner::before {
+thead th.css-location > .th-inner::before {
   content: "\f3c5"; font-family: "Font Awesome 5 Free"; font-size: 19px; margin-bottom: 0px;
 }
 
-th.css-component > .th-inner::before
+// fa-screwdriver-wrench — matches the icon used by the maintenance tab and
+// the user-well maintenance-cost row, so the users-index column header
+// stays visually consistent with the rest of the maintenance surface.
+thead th.css-maintenances > .th-inner::before {
+  content: "\f7d9"; font-family: "Font Awesome 5 Free"; font-size: 18px; margin-bottom: 0px;
+}
+
+thead th.css-component > .th-inner::before
 {
   content: "\f0a0"; font-family: "Font Awesome 5 Free"; font-weight: 500;
 }
 
-th.css-padlock > .th-inner::before
+thead th.css-padlock > .th-inner::before
 {
   content: "\f023"; font-family: "Font Awesome 5 Free";
   font-weight: 800;
   padding-right: 3px;
 }
 
-th.css-house-user > .th-inner::before {
+thead th.css-house-user > .th-inner::before {
   content: "\e1b0";
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
   margin-bottom: 0px;
 }
-th.css-house-flag > .th-inner::before {
+thead th.css-house-flag > .th-inner::before {
   content: "\e50d";
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
   margin-bottom: 0px;
 }
-th.css-house-laptop > .th-inner::before {
+thead th.css-house-laptop > .th-inner::before {
   content: "\e066";
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
   margin-bottom: 0px;
 }
-th.css-accessory-alt > .th-inner::before {
+thead th.css-accessory-alt > .th-inner::before {
   content: "\f11c";
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
   margin-bottom: 0px;
 }
 
-th.css-child-locations > .th-inner::before {
+thead th.css-child-locations > .th-inner::before {
   content: "\f64f"; // change this to f51e for coins
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
   margin-bottom: 0px;
 }
 
-th.css-currency > .th-inner::before {
+thead th.css-currency > .th-inner::before {
   content: "\24"; // change this to f51e for coins
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
   margin-bottom: 0px;
 }
 
-th.css-history > .th-inner::before {
+thead th.css-history > .th-inner::before {
   content: "\f1da"; // change this to f51e for coins
   font-family: "Font Awesome 5 Free";
   font-size: 19px;
@@ -859,7 +919,7 @@ th.css-history > .th-inner::before {
 }
 
 .form-group.has-error label, .form-group.has-error .help-block {
-  color: #a94442;
+  color: var(--text-danger);
 }
 
 .select2-container--default .select2-selection--multiple {
@@ -870,14 +930,8 @@ th.css-history > .th-inner::before {
   .tab-content .tab-pane .alert-block {
     margin-top: 120px
   }
-  .sidebar-menu{
-    margin-top:160px;
-  }
 }
 @media screen and (max-width: 912px) and (min-width: 512px){
-  .sidebar-menu {
-    margin-top:100px
-  }
   .navbar-custom-menu > .navbar-nav > li.dropdown.user.user-menu {
     float:right;
   }
@@ -886,11 +940,34 @@ th.css-history > .th-inner::before {
   }
 }
 
-@media screen and (max-width: 1268px) and (min-width: 912px){
-  .sidebar-menu {
-    margin-top:50px
+// Legacy .sidebar-menu { margin-top: Npx } rules at 912-1268px,
+// 512-912px, and <=511px used to live here as hardcoded compensation
+// for the "header wraps at intermediate widths and covers the first
+// sidebar item" bug (#5085, #11868, #19482). Same story for the
+// .firstnav { padding-top: 120px !important } that used to be inside
+// the max-width: 520px block below. All three were double-counted on
+// top of the dynamic .main-sidebar padding-top: var(--main-header-height)
+// rule just below that measures the actual header height at runtime,
+// producing 200px+ visual gaps above Dashboard at those breakpoints.
+// The dynamic measurement covers all these cases correctly, so the
+// static compensation is deleted.
+
+// Dynamic sidebar compensation for the mobile breakpoint (#19826 et
+// al.). AdminLTE 2 pads the mobile sidebar with a static 100px to
+// clear its own 100px header, but on narrow viewports Snipe-IT's
+// navbar wraps the logo, hamburger, search, nav icons and user menu
+// to several rows and the real header runs taller than the static
+// pad. snipeit.js measures .main-header's live height on load /
+// resize / mutation and publishes it as --main-header-height, so the
+// sidebar padding can track it instead of guessing at a static
+// number. The 100px fallback matches AdminLTE's base so pre-JS
+// renders are no worse than they were before.
+@media (max-width: 767px) {
+  .main-sidebar {
+    padding-top: var(--main-header-height, 100px);
   }
 }
+
 @media screen and (max-width: 992px){
   .info-stack-container {
     flex-direction: column;
@@ -946,6 +1023,58 @@ label.form-control {
 label.form-control--disabled {
   color: #959495;
   cursor: not-allowed;
+}
+
+/** Bootstrap's normalize.less sets `html input[disabled] { cursor: default }`
+    at load-order line 139, and its own `.form-control[disabled] { cursor: not-allowed }`
+    rule (line 2705) has higher specificity so it should win — but on some browser +
+    input-group combinations the resolved cursor still ends up as `text` because the
+    input-group parent's implicit text-cursor bleeds through. Explicit element-scoped
+    override to lock in the "no-entry" cursor on any disabled form control. **/
+input.form-control[disabled],
+select.form-control[disabled],
+textarea.form-control[disabled] {
+  cursor: not-allowed;
+}
+
+/** Anti-autofill masking for the readonly-plus-onfocus-strip trick used on
+    sensitive form fields (user create/edit username, password, email, etc.).
+    The field ships with `readonly` so password managers won't prefill or
+    overwrite it, then strips readonly on focus so the operator can type.
+    Bootstrap's `.form-control[readonly]` styles that field with a gray
+    disabled-looking background, which confuses the operator into thinking
+    the field is uneditable. Override to make it visually indistinguishable
+    from a regular editable input.
+    Scoped to `.js-antifill-readonly` so legitimately-readonly fields
+    (SAML SP entity ID, ACS/SLS URLs, generated cert, metadata URL, etc.)
+    keep the gray-out styling from the readonly rule further down in this
+    file. Adding `readonly` alone should look readonly; opt in to the
+    autofill-masking override by adding the class explicitly.
+    Deliberately does NOT match `[disabled]` — actually-disabled fields
+    (demo mode locks, permission gates) must keep their grayed appearance
+    and not-allowed cursor. **/
+input.js-antifill-readonly[readonly],
+textarea.js-antifill-readonly[readonly],
+.form-control.js-antifill-readonly[readonly] {
+  cursor: text !important;
+  background-color: var(--table-stripe-bg) !important;
+  color: var(--color-fg) !important;
+}
+
+/** Inline "this field is locked because the app is in demo mode" callout.
+    Rendered by the <x-demo-lock> anonymous component in resources/views/blade/demo-lock.blade.php.
+    Kept as a small inline-block box so it hugs its text width regardless
+    of the column it lands in (input rows use col-md-7, activated row
+    uses col-md-9, so a block-level notice would stretch inconsistently). **/
+.demo-lock-notice {
+  display: inline-block;
+  background-color: #fcf8e3;
+  border: 1px solid #faebcc;
+  color: #8a6d3b;
+  padding: 6px 10px;
+  margin-top: 6px;
+  border-radius: 3px;
+  font-size: 0.9em;
 }
 
 
@@ -1186,6 +1315,19 @@ caption.tableCaption {
   padding-left: 8px;
 }
 
+
+.markdown-field-content {
+  h1 { font-size: 22px; font-weight: 700; margin: 6px 0 4px; }
+  h2 { font-size: 20px; font-weight: 700; margin: 6px 0 4px; }
+  h3 { font-size: 18px; font-weight: 700; margin: 6px 0 4px; }
+  h4 { font-size: 16px; font-weight: 700; margin: 4px 0 4px; }
+  h5, h6 { font-size: 14px; font-weight: 700; margin: 4px 0 4px; }
+  p { margin: 0 0 4px; }
+  p:last-child { margin-bottom: 0; }
+  ul, ol { margin: 0 0 4px; padding-left: 20px; }
+  > *:first-child { margin-top: 0; }
+}
+
 // via https://github.com/grokability/snipe-it/issues/11754
 .sidebar-toggle.btn {
   border-radius: 3px;
@@ -1307,9 +1449,2940 @@ Radio toggle styles for permission settings and check/uncheck all
 }
 
 .js-copy-link {
+  float: left;
   color: grey;
 }
 
 .deleted {
   text-decoration: line-through;
 }
+
+
+//css to add hamburger and create dropdown on small screens
+@nav-link-hover-bg: #eeeeee;
+@border-radius-base: 5px;
+@screen-xs-max: 767px;
+
+.nav-tabs.nav-tabs-dropdown,
+.nav-tabs-dropdown {
+  @media (max-width: @screen-xs-max) {
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+      content: "☰";
+      position: absolute;
+      font-size: 35px;
+      top: 0;
+      right: 15px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    &.open {
+      a {
+        position: relative;
+        display: block;
+      }
+
+      > li.active > a {
+        background-color: @nav-link-hover-bg;
+
+      }
+    }
+
+    li.snipetab {
+      margin-right: 0 !important;
+    }
+
+    li {
+      display: block;
+      padding: 0;
+      vertical-align: bottom;
+      white-space: nowrap !important;
+    }
+
+    > li > a {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      border-color: transparent;
+
+      &:focus,
+      &:hover,
+      &:active {
+        border-color: transparent;
+        border-right: 0 !important;
+      }
+    }
+
+    > li.active > a {
+      display: block;
+      border-color: transparent !important;
+      position: relative;
+      z-index: 1;
+
+      &:focus,
+      &:hover,
+      &:active {
+        border-color: transparent !important;
+      }
+
+    }
+  }
+
+// Advanced-search "Clear all" pill. AdminLTE's default anchor styles pull the
+// color toward the theme's link tint on :hover / :focus, which reads black on
+// the red pill background. Pin white in every interactive state so the pill
+// stays legible.
+.snipe-advanced-search-tags-clear-all,
+.snipe-advanced-search-tags-clear-all:link,
+.snipe-advanced-search-tags-clear-all:visited,
+.snipe-advanced-search-tags-clear-all:hover,
+.snipe-advanced-search-tags-clear-all:focus,
+.snipe-advanced-search-tags-clear-all:active {
+  color: #fff !important;
+  text-decoration: none;
+}
+}
+
+// Spin the help-icon (life-ring) on hover/focus of the info tooltip anchor.
+// Uses Font Awesome's built-in fa-spin animation. Gated by the
+// prefers-reduced-motion rule below.
+.tooltip-spin-hover:hover i,
+.tooltip-spin-hover:focus i {
+  animation: fa-spin 2s infinite linear;
+}
+
+// Bootstrap 3 tops out at .modal-lg (900px). The wizard-style modals
+// (e.g. the CSV importer) need more horizontal room for their mapping
+// grid + preview table, so add a .modal-xl above modal-lg. Follows the
+// same @media breakpoint BS3 uses for .modal-lg (>= 992px) and caps at
+// 1400px so it doesn't stretch obnoxiously on ultra-wide monitors.
+@media (min-width: 992px) {
+  .modal-xl {
+    width: 90%;
+    max-width: 1400px;
+  }
+}
+
+// Long wizard content (dozens of mapping rows) can push the modal past
+// the viewport. Bootstrap 3 doesn't scroll the modal-body by default, so
+// the footer buttons (Back / Next / Preview / Process) end up below the
+// fold with no way to reach them. Cap the modal-body height and let it
+// scroll internally instead. Scoped to .modal-xl so smaller confirm-
+// action modals aren't affected. 200px leaves room for header (~60),
+// footer (~60), and the modal's own top/bottom margins. overflow-x is
+// hidden so a stray col-* with negative row margins doesn't produce a
+// horizontal scrollbar on the type-selection and mapping steps; the
+// preview step's wide sample table has its own .table-responsive
+// wrapper for horizontal scrolling.
+.modal-xl .modal-body {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+// Bootstrap 3's .form-horizontal .form-group carries -15px left/right
+// margins that cancel a modal-body's default 15px padding, leaving all
+// form content pinned flush to the modal edges. Zero it out inside the
+// wizard modal so labels + inputs stay inset from the modal chrome. The
+// inner .col-* children retain their own 15px padding, so the standard
+// horizontal-form gutter still lands correctly.
+.modal-xl .modal-body.form-horizontal > .form-group,
+.modal-xl .modal-body.form-horizontal > .row > .form-group {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+// bs-wizard-stepnum ships hardcoded #595959 in bootstrap-less, which is
+// near-invisible against the dark-theme background. Override to the
+// theme's own body text color so "Choose type" / "Map fields" / "Preview"
+// stay readable in dark mode.
+[data-theme="dark"] .bs-wizard > .bs-wizard-step .bs-wizard-stepnum,
+[data-theme="dark"] .bs-wizard > .bs-wizard-step .bs-wizard-info {
+  color: #d0d0d0;
+}
+
+// Respect the user's OS-level "reduce motion" preference. The Font Awesome
+// spinners (.fa-spin) and Font Awesome Animation pulses (.faa-pulse, .animated)
+// loop indefinitely, which can trigger vestibular symptoms. One-shot animations
+// (like the confetti burst on save) are left alone since they don't loop.
+@media (prefers-reduced-motion: reduce) {
+  // Catch-all for any Font Awesome Animation utility (faa-pulse, faa-spin,
+  // faa-tada, faa-shake, faa-bounce, faa-burst, faa-flash, faa-float,
+  // faa-horizontal, faa-vertical, faa-passing, faa-ring, faa-slide, etc.)
+  // regardless of whether the animation is always-on (.animated) or hover-
+  // triggered (.animated-hover:hover). Attribute selector keeps this rule
+  // safe against future FA-Animation class additions.
+  [class*="faa-"].animated,
+  [class*="faa-"].animated-hover:hover,
+  .tooltip-spin-hover:hover i,
+  .tooltip-spin-hover:focus i,
+  .fa-spin,
+  .fa-pulse {
+    animation: none !important;
+  }
+}
+
+// ============================================================================
+// Theme mode CSS custom properties.
+//
+// Originally lived as an inline <style> block in layouts/default.blade.php,
+// migrated here so the layout stops carrying ~1200 lines of raw CSS and so
+// layouts/basic.blade.php (login, error pages) can inherit the same theming
+// by loading all.css alone.
+//
+// CSS Colors 5 expressions (hsl(from ...), light-dark(...)) are wrapped in
+// Less's ~"..." escape so the compiler emits them verbatim instead of trying
+// to parse `l - 10` as its own variable arithmetic.
+//
+// Per-tenant color overrides (header_color, nav_link_color, link_light_color,
+// link_dark_color) are NOT moved here — they still live in the tiny inline
+// <style> block in default.blade.php and win on cascade order. The defaults
+// baked in below match what the blade fallbacks currently emit when a tenant
+// has not customized their colors.
+// ============================================================================
+
+:root {
+  color-scheme: light dark;
+  --color-bg: ~"light-dark(#ecf0f5, #222222)";
+  --btn-theme-hover-text-color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l - 10)),hsl(from var(--main-theme-color) h s calc(l - 10)))";
+  --btn-theme-hover: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l - 10)),hsl(from var(--main-theme-color) h s calc(l - 10)))";
+  --btn-theme-text-color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l + 10)),hsl(from var(--main-theme-color) h s calc(l - 10)))";
+  --color-fg: ~"light-dark(#373636, #ffffff)";
+  --main-footer-bg-color: ~"light-dark(#ffffff,#3d4144)";
+  --main-footer-text-color: ~"light-dark(#605e5e, #d2d6de)";
+  --main-footer-top-border-color: ~"light-dark(#d2d6de,#605e5e)";
+  --main-theme-color: #3c8dbc;
+  --nav-hover-text-color: ~"hsl(from var(--main-theme-color) h s calc(l - 10))";
+  --nav-primary-text-color: #ffffff;
+  --search-highlight: #e9d15b;
+  --sidenav-hover-color-bg: #4c4b4b;
+  --sidenav-text-hover-color: #fff;
+  --sidenav-text-nohover-color: #b8c7ce;
+  --table-border-row-color: ~"light-dark(#ecf0f5, #656464)";
+  --table-border-row-top: 1px solid #ecf0f5;
+  --table-border-row: 1px solid var(--table-border-row-color);
+  --table-stripe-bg-alt: ~"light-dark(rgba(211, 211, 211, 0.25), #323131)";
+  --table-stripe-bg: ~"light-dark(#ffffff, #494747)";
+  --text-danger: ~"light-dark(#a94442, #fa5b48)";
+  --text-help: ~"light-dark(#777676,#a6a4a4)";
+  --text-info: ~"light-dark(#31708f,#2baae6)";
+  --text-success: ~"light-dark(#039516,#4ced61)";
+  --text-warning: ~"light-dark(#da9113,#f3a51f)";
+  --input-border-color: ~"light-dark(#d2d6de,#656464)";
+  --default-label-link-bg: var(--color-bg);
+  --default-label-link-text: ~"light-dark(#296282, #5fa4cc)";
+  --default-label-link-border: ~"1px solid light-dark(#b8c7ce, #494747)";
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --box-bg: #ffffff;
+  --box-header-bottom-border-color: #f4f4f4;
+  --box-header-bottom-border: 1px solid var(--box-header-bottom-border-color);
+  --box-header-top-border-color: #d2d6de;
+  --box-header-top-border: 3px solid var(--box-header-top-border-color);
+  --btn-theme-base: ~"hsl(from var(--main-theme-color) h s calc(l + 5))";
+  --btn-theme-border: ~"hsl(from var(--btn-theme-base) h s calc(l + 20))";
+  --btn-theme-hover-text-color: var(--nav-primary-text-color);
+  --btn-theme-hover: var(--main-theme-hover);
+  --callout-bg-color: var(--box-header-bottom-border-color);
+  --callout-left-border: var(--box-header-top-border-color);
+  --header-color: #000000;
+  --input-group-bg: ~"hsl(from var(--box-bg) h s calc(l - 5))";
+  --input-group-fg: ~"hsl(from var(--input-group-bg) h s calc(l - 50))";
+  --link-color: #296282;
+  --link-hover: ~"hsl(from var(--link-color) h s calc(l - 10))";
+  --main-theme-hover: ~"hsl(from var(--main-theme-color) h s calc(l - 10))";
+  --tab-bottom-border: 1px solid var(--box-header-top-border-color);
+  --text-legend-help: var(--text-help);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --box-bg: #3d4144;
+  --box-header-bottom-border-color: #605e5e;
+  --box-header-bottom-border: 1px solid var(--box-header-bottom-border-color);
+  --box-header-top-border-color: #605e5e;
+  --box-header-top-border: 3px solid var(--box-header-top-border-color);
+  --btn-theme-base: ~"hsl(from var(--main-theme-color) h s calc(l + 5))";
+  --btn-theme-border: ~"hsl(from var(--btn-theme-base) h s calc(l + 20))";
+  --btn-theme-hover-text-color: var(--nav-primary-text-color);
+  --btn-theme-hover: var(--main-theme-hover);
+  --callout-bg-color: var(--box-header-top-border-color);
+  --callout-left-border: #323131;
+  --header-color: #ffffff;
+  --input-group-bg: ~"hsl(from var(--box-bg) h s calc(l + 10))";
+  --input-group-fg: ~"hsl(from var(--input-group-bg) h s calc(l + 50))";
+  --link-color: #5fa4cc;
+  --link-hover: ~"hsl(from var(--link-color) h s calc(l + 15))";
+  --main-theme-hover: ~"hsl(from var(--main-theme-color) h s calc(l - 10))";
+  --tab-bottom-border: 1px solid var(--box-header-top-border-color);
+  --text-legend-help: #d6d6d6;
+}
+
+
+// ============================================================================
+// Theme-mode SELECTOR rules (paired with the variable definitions above).
+//
+// All ~1170 lines of ".selector { background-color: var(--foo); }" style
+// rules that used to live in layouts/default.blade.php's inline <style>
+// block. Every line reads from a CSS custom property defined earlier in
+// this file — no per-tenant Blade interpolation lives here.
+//
+// CSS Colors 5 expressions (hsl(from ...), light-dark(...)) are wrapped in
+// Less's ~"..." escape so the compiler emits them verbatim.
+// ============================================================================
+
+.label2_fields,
+.l2fd-main,
+.l2fd-listitem,
+.fixed-table-loading,
+.list-group-item {
+  background-color: var(--box-bg) !important;
+  color: var(--color-fg) !important;
+}
+
+.list-group-item {
+  border: var(--tab-bottom-border);
+}
+
+footer.main-footer {
+  color: var(--main-footer-text-color) !important;
+  background-color: var(--main-footer-bg-color) !important;
+  border-top: 1px solid var(--main-footer-top-border-color) !important;
+}
+
+a,
+a:link,
+a:visited {
+  color: var(--link-color);
+}
+
+a:hover,
+a:focus {
+  color: var(--link-hover) !important;
+}
+
+label.form-control {
+  color: var(--color-fg) !important;
+}
+
+.footer-links a {
+  color: var(--link-color) !important;
+}
+
+h2 small {
+  color: var(--color-fg) !important;
+}
+
+.btn-theme {
+  background-color: var(--btn-theme-base);
+  /*color: var(--btn-theme-hover-text-color) !important;*/
+  color: var(--nav-primary-text-color) !important;
+  border: ~"1px solid hsl(from var(--btn-theme-base) h s calc(l - 15))" !important;
+}
+
+.btn-theme:hover {
+  background-color: var(--btn-theme-hover);
+  /*color: var(--btn-theme-hover-text-color) !important;*/
+  color: var(--nav-primary-text-color) !important;
+  border: ~"1px solid hsl(from var(--btn-theme-base) h s calc(l - 15))" !important;
+}
+
+.btn-theme.active {
+  background-color: var(--btn-theme-hover) !important;
+}
+
+.btn-theme:focus {
+  color: var(--nav-primary-text-color) !important;
+}
+
+
+.dropdown-wrapper,
+.js-data-ajax,
+.option,
+.select2 .select2-container .select2-container--default,
+.select2,
+.select2-choice,
+.select2-container,
+.select2-results__option,
+.select2-search input,
+.select2-search--dropdown,
+.select2-search__field,
+.select2-selection .select2-selection--single,
+.select2-selection,
+.select2-selection--single,
+.select2-selection__rendered,
+input[type="date"],
+input[type="number"],
+input[type="text"],
+input[type="search"],
+input[type="url"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+option:active,
+option[active],
+option[selected],
+select option,
+select,
+textarea {
+  background-color: var(--table-stripe-bg) !important;
+  color: var(--color-fg) !important;
+  border-color: var(--input-border-color) !important;
+
+}
+
+.select2-container--default.select2-container--focus .select2-selection--multiple,
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 5))" !important;
+}
+
+/**
+Safari ignores option[selected] styling on plain <select multiple> until
+the user interacts with the list, so pre-selected options render with
+the browser's default light highlight. Force a lighter background on the
+whole select in dark mode so pre-selected items stay readable.
+ */
+[data-theme="dark"] select[multiple],
+[data-theme="dark"] select[multiple] option {
+  background-color: #d2d6de !important;
+  color: #373636 !important;
+}
+
+/*
+Bootstrap's `.img-thumbnail` hard-codes `background-color: #fff`,
+which gives transparent PNG uploads (asset / model / company logos)
+a white backing in dark mode. Theme the colors through the panel
+custom properties so the thumbnail matches the surface it sits in.
+Not gated by `[data-theme="dark"]` because Bootstrap's
+`transition: all 0.2s ease-in-out` on this class interacts badly
+with selector-change-plus-var() on theme toggle, and leaves the
+previous computed color stuck until the next page load. The vars
+already carry the per-theme value so this one rule works in both.
+See #19837.
+ */
+.img-thumbnail {
+  background-color: var(--box-bg);
+  // Use the top-border custom property so the thumbnail border reads
+  // at roughly the same visual weight as Bootstrap's default `#ddd`
+  // (`--box-header-top-border-color` is `#d2d6de` in light mode and
+  // `#605e5e` in dark). The bottom-border variant is near-white in
+  // light mode which made the thumbnail look like it had no border.
+  border-color: var(--box-header-top-border-color);
+  // Bootstrap applies `transition: all 0.2s ease-in-out` on this
+  // class. Combined with a `var()`-based color and the theme toggle
+  // flipping `--box-bg` on <html>, Chrome's transition engine can
+  // leave the previous computed color stuck until the next full
+  // repaint. Narrow the transition to geometry-only so theme flips
+  // repaint the thumbnail color immediately.
+  transition-property: padding, border-radius, border-width;
+}
+
+/*
+QR codes need a white backing in both themes so phone scanners pick
+up the high-contrast pattern. Both QR img sites sit inside a wrapping
+div with class `asset-qr-img`, so restore the Bootstrap defaults for
+.img-thumbnail inside that context only.
+ */
+.asset-qr-img .img-thumbnail {
+  background-color: #fff;
+  border-color: #ddd;
+}
+
+/**
+Site-logo preview swatch on Settings > Branding. Uses the tenant header
+color as its background so the logo shows against the same color it will
+have in the top nav. The header-color picker on the branding page writes
+--main-theme-color inline on <html> for live preview, so this rule picks
+up that update automatically.
+ */
+.header-preview {
+  background-color: var(--main-theme-color);
+}
+
+/**
+Multiselect maybe?
+ */
+.select2-results__option[aria-selected=true] {
+  background-color: var(--main-theme-color) !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+.select2-results__option[aria-selected=false] {
+  background-color: var(--table-stripe-bg) !important;
+  /*background-color: hsl(from var(--main-theme-color) h s calc(l - 15)) !important;*/
+  /*color: var(--nav-primary-text-color) !important;*/
+  color: var(--color-fg) !important;
+}
+
+/**
+Highlight the select2 on hover when NOT the selected option
+ */
+.select2-results__option--highlighted[aria-selected=false] {
+  background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 10))" !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+/**
+Highlight the select2 on hover when the selected option
+ */
+.select2-results__option--highlighted[aria-selected=true],
+.select2-results__option--highlighted[aria-selected=true]:hover,
+.select2-results__option--highlighted[aria-selected=true]:link,
+.select2-results__option--highlighted[aria-selected=true]:focus,
+.select2-results__option--highlighted[aria-selected=true]:visited {
+  background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 15))" !important;
+  /*color: var(--color-fg) !important;*/
+  color: var(--nav-primary-text-color) !important;
+}
+
+.select2-selection__choice,
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: var(--main-theme-color) !important;
+  border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 15))" !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+.select2-selection__choice__remove {
+  color: var(--nav-primary-text-color) !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 5))" !important;
+  color: var(--nav-primary-text-color) !important;
+  overflow-y: auto;
+}
+
+/*
+eonasdan bootstrap-datetimepicker widget: match the app's theme color
+for selected/today cells and follow light/dark mode for the popup
+chrome. Ships with Bootstrap's stock #337ab7 which looks off next to
+AdminLTE.
+
+- All toolbar buttons: .bootstrap-datetimepicker-widget li.picker-switch a[data-action]
+- Individual buttons: a[data-action="today"], a[data-action="clear"], a[data-action="close"]                                                                                                                       - -
+- The <td> cell each button sits in: .bootstrap-datetimepicker-widget li.picker-switch td
+- The icon <span> inside the anchor: .bootstrap-datetimepicker-widget li.picker-switch a[data-action] > span
+*/
+.bootstrap-datetimepicker-widget {
+  z-index: 1030 !important;
+  background-color: var(--box-bg) !important;
+  color: var(--color-fg) !important;
+}
+
+/* Widget border in the theme color so the popup edge visually
+   matches other themed boxes in the app. */
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  border: 1px solid var(--main-theme-color) !important;
+}
+
+/* The connecting caret between the input and the popup is drawn
+   with two triangles: :before is the outer border outline (7px),
+   :after is the inner fill (6px, sits inside the :before). Match
+   the widget's own theme-color border on the outer triangle, and
+   the widget's background on the inner. */
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:before {
+  border-bottom-color: var(--main-theme-color) !important;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu.bottom:after {
+  border-bottom-color: var(--box-bg) !important;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu.top:before {
+  border-top-color: var(--main-theme-color) !important;
+}
+
+.bootstrap-datetimepicker-widget.dropdown-menu.top:after {
+  border-top-color: var(--box-bg) !important;
+}
+
+/* Side-by-side (date + time) mode ships at 38em, not wide enough
+   once the format includes seconds. Bump up to give the time cells
+   room. */
+.bootstrap-datetimepicker-widget.dropdown-menu.timepicker-sbs {
+  width: 42em !important;
+}
+
+/* Compact (non-sideBySide) mode. Library default is 19em, which is
+   too narrow for the time-picker view — hour/minute/second cells
+   are 54px each and the increment/decrement arrow buttons add width
+   on top of that, so under ~300px the time view gets clipped. Sizing
+   to fit the widest child (the time view) also gives the calendar
+   view plenty of room. */
+.bootstrap-datetimepicker-widget.dropdown-menu:not(.timepicker-sbs) {
+  min-width: 320px;
+}
+
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover,
+.bootstrap-datetimepicker-widget table td span.active,
+.bootstrap-datetimepicker-widget table td span.active:hover {
+  background-color: var(--main-theme-color) !important;
+  color: var(--nav-primary-text-color) !important;
+  text-shadow: none !important;
+}
+
+.bootstrap-datetimepicker-widget table td.today:before {
+  border-bottom-color: var(--main-theme-color) !important;
+}
+
+/* Cell hover: theme color background + white text — same shape as
+   "active" so contrast is guaranteed in both light and dark mode. */
+.bootstrap-datetimepicker-widget table td:hover,
+.bootstrap-datetimepicker-widget table td span:hover,
+.bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+  background-color: var(--main-theme-color) !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+/* Time-picker text (compact mode). Bootstrap's .btn base color is
+   #333 which is invisible on the dark box-bg in dark mode; force
+   these text elements to inherit the widget's --color-fg instead
+   so they read in both themes.
+     - .timepicker-hour / -minute / -second : the big clickable digits
+     - .separator                            : the colon between them
+     - .timepicker-picker .btn               : the up/down arrow buttons
+     - .timepicker-picker .btn span          : the FA icon inside those
+     - .timepicker-hours / -minutes / -seconds .btn : the expanded grid
+       of pickable hour/minute/second numbers when you click a digit  */
+.bootstrap-datetimepicker-widget .timepicker-hour,
+.bootstrap-datetimepicker-widget .timepicker-minute,
+.bootstrap-datetimepicker-widget .timepicker-second,
+.bootstrap-datetimepicker-widget .separator,
+.bootstrap-datetimepicker-widget .timepicker-picker .btn,
+.bootstrap-datetimepicker-widget .timepicker-picker .btn span,
+.bootstrap-datetimepicker-widget .timepicker-hours td,
+.bootstrap-datetimepicker-widget .timepicker-minutes td,
+.bootstrap-datetimepicker-widget .timepicker-seconds td {
+  color: var(--color-fg) !important;
+}
+
+/* The empty <td class="separator"> cells above and below the ":"
+   are pure spacers, but were rendering visible "lines" around the
+   colon. Force their background to match the popup so they blend
+   into the widget in both light and dark mode.
+
+   Also kill the ::before / ::after pseudo-elements — the app's own
+   .separator class elsewhere in the codebase draws horizontal grey
+   border-bottom lines via those pseudos (for section dividers), and
+   class-name collides with the library's timepicker separator td. */
+.bootstrap-datetimepicker-widget .separator {
+  background-color: var(--box-bg) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.bootstrap-datetimepicker-widget .separator::before,
+.bootstrap-datetimepicker-widget .separator::after {
+  display: none !important;
+  content: none !important;
+  border: none !important;
+}
+
+/* Same treatment for the increment/decrement arrow buttons — no
+   border/box-shadow/focus outline so the time-picker column doesn't
+   get sub-lines between each button. */
+.bootstrap-datetimepicker-widget .timepicker-picker .btn {
+  background-color: var(--box-bg) !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.bootstrap-datetimepicker-widget .timepicker-picker .btn:focus,
+.bootstrap-datetimepicker-widget .timepicker-picker .btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+/* Button hover — matches the whole <a> element */
+.bootstrap-datetimepicker-widget li.picker-switch a[data-action]:hover,
+.bootstrap-datetimepicker-widget li.picker-switch td:hover {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+
+}
+
+
+.input-group-addon {
+  background-color: var(--input-group-bg) !important;
+  color: var(--input-group-fg) !important;
+  border-color: var(--input-border-color) !important;
+}
+
+input:disabled,
+input[type="checkbox"]:disabled,
+input[type="radio"]:disabled,
+input[readonly],
+textarea[readonly],
+textarea:disabled,
+.select2-container--default.select2-container--disabled .select2-selection--single,
+.select2-container--default.select2-container--disabled .select2-selection--multiple,
+.select2-container--default.select2-container--disabled .select2-selection__rendered,
+.select2-results__option[aria-disabled=true],
+.select2-container--default.select2-container--disabled .select2-selection--multiple .select2-search--inline {
+  background-color: ~"light-dark(rgb(234, 232, 232), rgb(117, 116, 117))" !important;
+  cursor: not-allowed !important;
+}
+
+.select2-container--default.select2-container--disabled .select2-search__field::placeholder {
+  color: var(--text-help) !important;
+  opacity: 1 !important;
+}
+
+input[type="search"].search-highlight {
+  background-color: var(--search-highlight);
+  border: ~"1px solid hsl(from var(--search-highlight) h s calc(l - 20))" !important;
+}
+
+.content-wrapper {
+  background-color: var(--color-bg);
+}
+
+.btn-anchor {
+  outline: none !important;
+  padding: 0;
+  border: 0;
+  padding-left: 20px;
+  vertical-align: baseline;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+.modal-title,
+.modal-header h2 {
+  color: var(--color-fg) !important;
+}
+
+.btn-danger,
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-warning,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus,
+.modal-danger,
+.modal-warning,
+.modal-danger h2,
+.modal-warning h2,
+.modal-danger h4,
+.modal-warning h4,
+.modal-warning .help-block,
+.modal-warning .modal-help,
+.box-solid.box-danger > .box-header,
+.box-solid.box-danger > .box-header .box-title,
+.bg-maroon,
+.bg-maroon:hover,
+.bg-maroon:focus,
+.bg-purple,
+.bg-purple:hover,
+.bg-purple:focus {
+  color: white !important;
+}
+
+
+.btn-selected,
+.btn-selected a,
+.btn-selected:hover,
+.btn-selected:focus {
+  color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l + 30)), hsl(from var(--main-theme-color) h s calc(l + 30)))" !important;
+  background-color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l - 20)), hsl(from var(--main-theme-color) h s calc(l - 20)))" !important;
+  border-color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l - 25)), hsl(from var(--main-theme-color) h s calc(l - 25)))" !important;
+
+}
+
+.btn-default,
+.btn-default:hover {
+  color: #3d4144 !important;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
+
+label,
+.icon-med,
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li.active > a:link {
+  color: var(--color-fg);
+}
+
+/**
+Generic popover: Bootstrap 3 hardcodes body bg to #fff and text to #333,
+which reads as white-on-white in dark mode. Route background, text, and
+border through the theme variables so both modes render legibly and the
+help-popover variant keeps its more specific styling further down.
+ */
+.popover {
+  background-color: var(--box-bg) !important;
+  color: var(--color-fg) !important;
+  border-color: var(--box-header-top-border-color) !important;
+}
+
+.popover-title,
+.popover-content {
+  background-color: var(--box-bg) !important;
+  color: var(--color-fg) !important;
+}
+
+/**
+Popover arrows: Bootstrap 3 defaults the inner arrow to #fff and the
+outer to rgba(0,0,0,.25). In dark mode the outer disappears entirely
+(no contrast against the darker surroundings) and the inner reads as a
+white notch. Bind both to theme vars so every position (top / right /
+bottom / left) shows a visible connector between the popover body and
+its trigger in both modes.
+ */
+.popover.top .arrow { border-top-color: var(--box-header-top-border-color) !important; }
+.popover.top .arrow:after { border-top-color: var(--box-bg) !important; }
+
+.popover.right .arrow { border-right-color: var(--box-header-top-border-color) !important; }
+.popover.right .arrow:after { border-right-color: var(--box-bg) !important; }
+
+.popover.bottom .arrow { border-bottom-color: var(--box-header-top-border-color) !important; }
+.popover.bottom .arrow:after { border-bottom-color: var(--box-bg) !important; }
+
+.popover.left .arrow { border-left-color: var(--box-header-top-border-color) !important; }
+.popover.left .arrow:after { border-left-color: var(--box-bg) !important; }
+
+.table-bordered > tbody > tr > td,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > td,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > thead > tr > td,
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > th,
+.table-bordered,
+.well {
+  border: 1px solid var(--box-header-top-border-color) !important;
+  border-left-color: var(--box-header-top-border-color) !important;
+  border-right-color: var(--box-header-top-border-color) !important;
+}
+
+.box {
+  border-top: 3px solid;
+}
+
+/* .bs-wizard's connecting line background (.progress = #f5f5f5) and
+   inactive-step dots (#f5f5f5) both wash out against the dark-mode
+   body. Bump to the theme's mid-gray so wizard steps stay visible
+   on setup, importer modal, and the LDAP settings wizard. Selector
+   uses [data-theme="dark"] — the actual attribute Snipe-IT toggles
+   for dark mode. Disabled variant is called out explicitly because
+   .bs-wizard-step.disabled > .bs-wizard-dot is a same-specificity
+   rule from AdminLTE — the extra .disabled class ensures we win. */
+[data-theme="dark"] .bs-wizard-step .progress,
+[data-theme="dark"] .bs-wizard-step > .bs-wizard-dot,
+[data-theme="dark"] .bs-wizard-step.disabled > .bs-wizard-dot {
+  background-color: #605e5e;
+}
+
+.box.box-default {
+  border-top: var(--box-header-top-border);
+}
+
+
+.box-header.with-border {
+  border-bottom: var(--box-header-bottom-border);
+}
+
+.box-footer {
+  border-top: var(--box-header-bottom-border);
+}
+
+
+.nav-tabs-custom > .nav-tabs {
+  border-bottom: var(--tab-bottom-border);
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+  padding-bottom: 0;
+
+}
+
+.nav-tabs > li > a {
+  margin-right: 0;
+  border: 0;
+}
+
+.box,
+.box-footer,
+.tab-content,
+.nav-tabs-custom,
+.nav-tabs-custom > .nav-tabs > li,
+.nav-tabs-custom > .nav-tabs > li:first-of-type,
+.nav-tabs-custom > .nav-tabs > li.active > a:link,
+.nav-tabs-custom > .nav-tabs > li.active > a:visited,
+.nav-tabs-custom > .nav-tabs > li.active > a:hover,
+.bootstrap-table.fullscreen,
+.well {
+
+  color: var(--color-fg);
+  background-color: var(--box-bg) !important;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+
+}
+
+.panel {
+  border-color: var(--box-header-top-border-color);
+}
+
+.panel-body {
+  background-color: var(--box-bg) !important;
+}
+
+.panel-heading,
+.panel-default > .panel-heading {
+  color: var(--color-fg) !important;
+  background-color: var(--table-stripe-bg-alt) !important;
+  border-color: var(--box-header-top-border-color);
+}
+
+.panel-footer {
+  background-color: var(--box-bg) !important;
+  border-color: var(--box-header-top-border-color);
+}
+
+// Bootstrap 3's .table-hover hardcodes #f5f5f5 in _tables.scss which
+// reads as near-white on the dark theme and hides row text against
+// the hover background. Route it through the same theme-aware custom
+// property Snipe-IT uses for its striped-table alt row color so hover
+// flips correctly in both modes for every table across the app.
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+  background-color: var(--table-stripe-bg-alt) !important;
+}
+
+// Adapter catalog on the sync-adapters help pane. Semantic list (not
+// a table) with a per-item action row rendered via flexbox. Uses the
+// same theme-aware custom properties as the striped-table styles so
+// dividers and hover work correctly in both light and dark themes.
+.adapter-catalog {
+  margin: 0;
+
+  .adapter-catalog-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--table-border-row-color);
+  }
+
+  .adapter-catalog-item:last-child {
+    border-bottom: 0;
+  }
+
+  .adapter-catalog-item:hover {
+    background-color: var(--table-stripe-bg-alt);
+  }
+
+  .adapter-catalog-docs {
+    // Fixed column on the left so the adapter names line up regardless
+    // of which rows have a docs link and which fall back to an sr-only
+    // placeholder.
+    width: 28px;
+    text-align: center;
+    margin-right: 8px;
+  }
+
+  .adapter-catalog-name {
+    flex: 1;
+  }
+
+  .adapter-catalog-add {
+    margin-left: 8px;
+  }
+}
+
+.nav-tabs-custom > .nav-tabs > li.active {
+  border-top-color: var(--main-theme-color) !important;
+  background-color: var(--box-header-top-border-color) !important;
+  border-bottom: 2px solid var(--box-bg) !important;
+  border-right: 1px solid var(--box-header-top-border-color);
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.nav-tabs-custom > .nav-tabs > li:first-of-type {
+  border-left: 0;
+}
+
+
+/**
+This fixes the weird spacing in the nav tabs if there is a badge count on the tab
+ */
+.badge {
+  font-size: 11px;
+}
+
+/**
+table rows
+ */
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  border-top: var(--table-border-row) !important;
+}
+
+
+.table-striped > tbody > tr:nth-of-type(even),
+.row-new-striped > .row:nth-of-type(even),
+.row-new-striped > .div:nth-of-type(odd),
+.cansort {
+  background-color: var(--table-stripe-bg) !important;
+  border-top: var(--table-border-row-top) !important;
+  color: var(--color-fg) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd),
+.row-new-striped > .row:nth-of-type(even),
+.row-new-striped > .div:nth-of-type(odd),
+.cansort {
+  background-color: var(--table-stripe-bg-alt) !important;
+  border-top: var(--table-border-row-top) !important;
+  color: var(--color-fg) !important;
+}
+
+
+// -----------------------------------------------------------------------------
+// CSS sticky columns. Bootstrap-table's fixed-columns feature was pulled
+// from the bundle in favor of this — the old feature cloned the table
+// body into an absolutely-positioned overlay, which drifted in height
+// with long-content rows (#19197, #19458) and misplaced tooltips when
+// the container reflowed without a window resize (asset show + info
+// panel toggle). CSS position:sticky on the actual <td> cells can't
+// drift because the cells ARE the pinned cells.
+//
+// Tables that want pinned columns get the snipe-table--sticky-right-N
+// or snipe-table--sticky-left-N class (via <x-table>'s fixed_number /
+// fixed_right_number props, or applied directly on a raw table).
+//
+// Body cells match the zebra background so the sticky column keeps the
+// alternating pattern. Header cells use --box-bg so scrolling body rows
+// don't show through above the header stripe transition. Header z-index
+// sits above body sticky so a scrolled row can't render over the header.
+// -----------------------------------------------------------------------------
+
+// --table-stripe-bg-alt is intentionally translucent (rgba .25) so the
+// zebra stripe composites on top of the row's --box-bg. That works for
+// normal rows but leaves sticky cells see-through because scrolled
+// content passes UNDER them with no opaque backer. For sticky cells we
+// paint --box-bg as an opaque base and layer the (still-translucent)
+// stripe on top via linear-gradient, replicating the composited color.
+
+// Per-position offset variables (--sticky-right-offset-P, --sticky-left-offset-P)
+// are set by the JS block in partials/bootstrap-table.blade.php after every
+// render. Position 1 is the outermost pinned column and gets offset 0; each
+// subsequent position adds the outerWidth of the previous columns so pinned
+// cells sit flush against each other instead of stacking at the edge.
+
+// Position-specific sticky rules. Recurses from @pos=1 up to @maxN.
+.gen-sticky-right(@maxN, @pos: 1) when (@pos <= @maxN) {
+    .snipe-table--sticky-right-@{maxN} > thead > tr > th:nth-last-child(@{pos}),
+    .snipe-table--sticky-right-@{maxN} > tbody > tr > td:nth-last-child(@{pos}) {
+        position: sticky;
+        right: var(~"--sticky-right-offset-@{pos}", 0);
+        z-index: 2;
+        background-color: var(--box-bg);
+    }
+    .gen-sticky-right(@maxN, (@pos + 1));
+}
+.gen-sticky-right(1);
+.gen-sticky-right(2);
+.gen-sticky-right(3);
+.gen-sticky-right(4);
+.gen-sticky-right(5);
+
+.gen-sticky-left(@maxN, @pos: 1) when (@pos <= @maxN) {
+    .snipe-table--sticky-left-@{maxN} > thead > tr > th:nth-child(@{pos}),
+    .snipe-table--sticky-left-@{maxN} > tbody > tr > td:nth-child(@{pos}) {
+        position: sticky;
+        left: var(~"--sticky-left-offset-@{pos}", 0);
+        z-index: 2;
+        background-color: var(--box-bg);
+    }
+    .gen-sticky-left(@maxN, (@pos + 1));
+}
+.gen-sticky-left(1);
+.gen-sticky-left(2);
+.gen-sticky-left(3);
+.gen-sticky-left(4);
+.gen-sticky-left(5);
+
+// Shared: header z-index bump and zebra-stripe overlay for all pinned columns.
+.gen-sticky-right-shared(@maxN) {
+    .snipe-table--sticky-right-@{maxN} > thead > tr > th:nth-last-child(-n+@{maxN}) {
+        z-index: 3;
+    }
+    .snipe-table--sticky-right-@{maxN}.table-striped > tbody > tr:nth-of-type(even) > td:nth-last-child(-n+@{maxN}) {
+        background-image: linear-gradient(var(--table-stripe-bg), var(--table-stripe-bg));
+    }
+    .snipe-table--sticky-right-@{maxN}.table-striped > tbody > tr:nth-of-type(odd) > td:nth-last-child(-n+@{maxN}) {
+        background-image: linear-gradient(var(--table-stripe-bg-alt), var(--table-stripe-bg-alt));
+    }
+}
+.gen-sticky-right-shared(1);
+.gen-sticky-right-shared(2);
+.gen-sticky-right-shared(3);
+.gen-sticky-right-shared(4);
+.gen-sticky-right-shared(5);
+
+.gen-sticky-left-shared(@maxN) {
+    .snipe-table--sticky-left-@{maxN} > thead > tr > th:nth-child(-n+@{maxN}) {
+        z-index: 3;
+    }
+    .snipe-table--sticky-left-@{maxN}.table-striped > tbody > tr:nth-of-type(even) > td:nth-child(-n+@{maxN}) {
+        background-image: linear-gradient(var(--table-stripe-bg), var(--table-stripe-bg));
+    }
+    .snipe-table--sticky-left-@{maxN}.table-striped > tbody > tr:nth-of-type(odd) > td:nth-child(-n+@{maxN}) {
+        background-image: linear-gradient(var(--table-stripe-bg-alt), var(--table-stripe-bg-alt));
+    }
+}
+.gen-sticky-left-shared(1);
+.gen-sticky-left-shared(2);
+.gen-sticky-left-shared(3);
+.gen-sticky-left-shared(4);
+.gen-sticky-left-shared(5);
+
+// Row-state overrides. Bootstrap-table adds `.selected` on click / checkbox
+// tick (see line ~2889 for the base rule), and Snipe-IT paints `.success`
+// and `.danger` rows for the audit / restore flows. Without these
+// overrides, the sticky columns keep their zebra background painted on top
+// of the row-selected color and read as unselected even when the rest of
+// the row is highlighted. Overriding both background-color AND
+// background-image (to clear the linear-gradient stripe overlay from the
+// -shared mixins) so the sticky cells pick up the row's highlight state.
+.gen-sticky-right-row-state(@maxN) {
+    .snipe-table--sticky-right-@{maxN} > tbody > tr.selected > td:nth-last-child(-n+@{maxN}) {
+        background-color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l + 40)),hsl(from var(--main-theme-color) h s calc(l - 40)))" !important;
+        background-image: none !important;
+    }
+    .snipe-table--sticky-right-@{maxN} > tbody > tr.success > td:nth-last-child(-n+@{maxN}) {
+        background-color: #00a65a !important;
+        background-image: none !important;
+        color: white !important;
+    }
+    .snipe-table--sticky-right-@{maxN} > tbody > tr.danger > td:nth-last-child(-n+@{maxN}) {
+        background-color: var(--text-danger) !important;
+        background-image: none !important;
+        color: white !important;
+    }
+}
+.gen-sticky-right-row-state(1);
+.gen-sticky-right-row-state(2);
+.gen-sticky-right-row-state(3);
+.gen-sticky-right-row-state(4);
+.gen-sticky-right-row-state(5);
+
+.gen-sticky-left-row-state(@maxN) {
+    .snipe-table--sticky-left-@{maxN} > tbody > tr.selected > td:nth-child(-n+@{maxN}) {
+        background-color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l + 40)),hsl(from var(--main-theme-color) h s calc(l - 40)))" !important;
+        background-image: none !important;
+    }
+    .snipe-table--sticky-left-@{maxN} > tbody > tr.success > td:nth-child(-n+@{maxN}) {
+        background-color: #00a65a !important;
+        background-image: none !important;
+        color: white !important;
+    }
+    .snipe-table--sticky-left-@{maxN} > tbody > tr.danger > td:nth-child(-n+@{maxN}) {
+        background-color: var(--text-danger) !important;
+        background-image: none !important;
+        color: white !important;
+    }
+}
+.gen-sticky-left-row-state(1);
+.gen-sticky-left-row-state(2);
+.gen-sticky-left-row-state(3);
+.gen-sticky-left-row-state(4);
+.gen-sticky-left-row-state(5);
+
+
+// -----------------------------------------------------------------------------
+// Checkbox column: bootstrap-table adds .bs-checkbox to the header and body
+// cells of any checkbox column. It should always be pinned to the left edge
+// regardless of what fixed_number the table sets, because the row-selection
+// affordance is expected to stay visible while the user scrolls horizontally
+// to review other columns before deciding what to check.
+// -----------------------------------------------------------------------------
+
+.snipe-table > thead > tr > th.bs-checkbox,
+.snipe-table > tbody > tr > td.bs-checkbox {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background-color: var(--box-bg);
+}
+
+.snipe-table.table-striped > tbody > tr:nth-of-type(even) > td.bs-checkbox {
+    background-image: linear-gradient(var(--table-stripe-bg), var(--table-stripe-bg));
+}
+.snipe-table.table-striped > tbody > tr:nth-of-type(odd) > td.bs-checkbox {
+    background-image: linear-gradient(var(--table-stripe-bg-alt), var(--table-stripe-bg-alt));
+}
+
+.snipe-table > thead > tr > th.bs-checkbox {
+    z-index: 3;
+}
+
+// Row-state overrides for the pinned checkbox column. Same reasoning as
+// the .gen-sticky-*-row-state mixins above: the opaque background baked
+// into the sticky cell would otherwise mask row-selected / .success /
+// .danger highlights on the checkbox column, which is exactly the column
+// users click to toggle the selection state, so the mismatch is most
+// visible there.
+.snipe-table > tbody > tr.selected > td.bs-checkbox {
+    background-color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l + 40)),hsl(from var(--main-theme-color) h s calc(l - 40)))" !important;
+    background-image: none !important;
+}
+.snipe-table > tbody > tr.success > td.bs-checkbox {
+    background-color: #00a65a !important;
+    background-image: none !important;
+    color: white !important;
+}
+.snipe-table > tbody > tr.danger > td.bs-checkbox {
+    background-color: var(--text-danger) !important;
+    background-image: none !important;
+    color: white !important;
+}
+
+
+// -----------------------------------------------------------------------------
+// Top scrollbar: mirrored above the bootstrap-table body so users on wide
+// tables don't have to scroll to the bottom to find the horizontal
+// scrollbar. Managed by updateTopScrollbar() in partials/bootstrap-table.
+// The wrapper node only exists when the table actually overflows
+// horizontally, so tables that fit in their container don't get any
+// extra chrome.
+// -----------------------------------------------------------------------------
+
+.snipe-top-scrollbar {
+    // scroll (not auto) so the scrollbar thumb stays visible whenever
+    // the container is displayed. auto lets macOS's trackpad-scrollbar
+    // auto-hide take over on trackpad users even with the WebKit
+    // pseudo-element styling below, which read as "top scrollbar fades
+    // faster than the bottom one" (#19484 follow-up). Whole container
+    // gets display: none from updateTopScrollbar() when the underlying
+    // table doesn't actually overflow, so persistent scroll doesn't
+    // produce a floating stub on tables that fit in the viewport.
+    overflow-x: scroll;
+    overflow-y: hidden;
+    // 14px scrollbar sized to match the WebKit thumb below so it
+    // reads as a deliberate chrome element rather than an OS-native
+    // accident. Bumped from 10px so the thumb is easier to grab and
+    // drag on trackpads / small screens.
+    //
+    // Outer height is 18px (border-box) = 14px scrollbar content +
+    // 4px padding-bottom acting as a visual spacer between the
+    // scrollbar thumb and the thead below it. Total 18px matches
+    // the stickyHeaderOffsetY: 18 in bootstrap-table.blade.php so
+    // the pinned scrollbar band + the sticky-clone thead just below
+    // it stack seamlessly with no bleed-through gap between them
+    // (#19484 follow-up: 4px gap of tbody rows visible between the
+    // scrollbar and the sticky thead).
+    box-sizing: border-box;
+    height: 18px;
+    padding-bottom: 4px;
+    background-color: var(--box-bg);
+    // Firefox scrollbar styling — spec-standard. `auto` uses the
+    // OS-default thickness (matches the bumped-up 14px WebKit height
+    // below so the thumb is easy to grab on trackpads / small screens).
+    scrollbar-width: auto;
+    scrollbar-color: rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.06);
+
+    // Stay visible while the user scrolls the page down past the
+    // natural table header. Bootstrap-table's own stickyHeader
+    // (position: fixed via the .fix-sticky class) floats the thead
+    // clone at viewport top; we mirror that positioning via JS
+    // (updateTopScrollbarSticky in bootstrap-table.blade.php) so
+    // the scrollbar sits ABOVE the sticky-clone thead - matching
+    // the natural (unscrolled) order where the scrollbar reads
+    // immediately above the thead. Bootstrap-table config pushes
+    // .fix-sticky down by (this mirror's height + padding-bottom)
+    // via stickyHeaderOffsetY so the two don't overlap. Sticky
+    // positioning would have been simpler than the JS toggle but
+    // didn't engage reliably against page scroll from inside the
+    // .bootstrap-table nesting depth; falling back to position:
+    // fixed set by the scroll listener. Reported in #19484 as
+    // "none of scrollbars are visible when list is scrolled to
+    // the point where header starts floating" plus follow-up
+    // "top scrollbar used to be above the table headers, which
+    // seems a little better".
+    z-index: 101;
+
+    // When the scroll listener detects the natural position has
+    // gone above viewport top, this class flips the element to
+    // position: fixed via inline style. The class itself just
+    // marks "currently pinned" so callers can style pinned vs
+    // unpinned states differently if needed.
+    &.is-pinned {
+        // Inline top/left/width comes from JS. Keeping the box
+        // shadow drop off here so pinned state visually separates
+        // the mirror from the sticky-clone thead below it.
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+    }
+
+    // WebKit / Blink scrollbar pseudo-elements. Both the track and the
+    // thumb get border-radius so the container reads as rounded even
+    // when the thumb is at the edge of the track (the previous
+    // container-level border-radius was invisible because the container
+    // had no visible background to round). Track carries a subtle tint
+    // so the rounded shape is actually visible rather than shape-of-nothing.
+    &::-webkit-scrollbar {
+        height: 14px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.06);
+        border-radius: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.35);
+        border-radius: 7px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.snipe-top-scrollbar-inner {
+    // Height just enough to make the parent scrollable; width is set by
+    // JS to match the underlying table's scrollWidth.
+    height: 1px;
+}
+
+// Match the native bottom scrollbar on the table body to the styled
+// top mirror above so the two horizontal scroll handles read as a
+// consistent pair. Without this, the top uses our thin-with-rounded-
+// thumb chrome while the bottom uses the OS default and the two look
+// mismatched when both are visible on wide tables. scrollbar-width
+// bumped from `thin` to `auto` and the WebKit height matched to the
+// top mirror's 14px so the two scrollbars are the same easy-to-grab
+// size on trackpads / small screens (#19484 follow-up).
+.bootstrap-table .fixed-table-body {
+    scrollbar-width: auto;
+    scrollbar-color: rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.06);
+
+    &::-webkit-scrollbar {
+        height: 14px;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: rgba(0, 0, 0, 0.06);
+        border-radius: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.35);
+        border-radius: 7px;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+
+/**
+main header nav
+ */
+
+
+.dropdown-menu {
+  background-color: var(--main-theme-color);
+  border-color: var(--main-theme-color);
+}
+
+
+.dropdown-menu > li,
+.navbar,
+.navbar-nav,
+.label-default,
+.label-default:hover {
+  background-color: var(--main-theme-color);
+  color: var(--nav-primary-text-color) !important;
+}
+
+.label-light {
+  background-color: var(--default-label-link-bg) !important;
+  color: var(--color-fg) !important;
+  font-size: 12px !important;
+  font-weight: normal !important;
+  line-height: 25px;
+  margin-left: 0px;
+  padding-left: 3px;
+
+}
+
+a.label-light,
+a.label-light:hover {
+  color: var(--link-color) !important;
+}
+
+.dropdown-menu > li > a,
+.dropdown-menu > li > a:link,
+.dropdown-menu > li > a:visited,
+.dropdown-menu > .active > a:link,
+.dropdown-menu > .active > a:visited,
+.navbar-nav .open > a:link,
+.navbar-nav .open > a:visited,
+.navbar-nav > li > a:link,
+.navbar-nav > li > a:visited {
+  background-color: var(--main-theme-color) !important;
+  /*background-color: rgba(0,0,0,.15);*/
+  color: var(--nav-primary-text-color) !important;
+  /*color: var(--nav-primary-text-color) !important;*/
+
+}
+
+.btn-tableButton.active.focus,
+.btn-tableButton.active:focus,
+.btn-tableButton.active:hover,
+.dropdown-menu > .active > a:focus,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:link,
+.dropdown-menu > .active > a:visited,
+.dropdown-menu > li > a:focus,
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li:focus,
+.dropdown-menu > li:hover,
+.navbar-nav .open li.active > a:focus,
+.navbar-nav .open li.active > a:hover,
+.navbar-nav .open > a:focus,
+.navbar-nav .open > a:hover,
+.navbar-nav > li > a:focus,
+.navbar-nav > li > a:hover,
+.open > .dropdown-toggle.btn-tableButton:focus,
+.open > .dropdown-toggle.btn-tableButton:hover,
+.page-next a,
+.pagination > .active > a:hover,
+.page-item.active,
+.pagination > .active > a,
+.pagination > li > .active > a,
+.pagination > li > .active > a:hover,
+.pagination > li > a:hover {
+  background-color: var(--main-theme-hover) !important;
+  border-color: var(--btn-theme-hover) !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+.pagination > li > a {
+  background-color: var(--main-theme-color) !important;
+  border-color: var(--btn-theme-hover) !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+
+.bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label {
+  color: var(--nav-primary-text-color) !important;
+}
+
+.bootstrap-table .fixed-table-toolbar li.dropdown-item-marker label:hover {
+  background-color: var(--main-theme-hover) !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+
+.dropdown-menu,
+.dropdown-menu > li {
+  background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 5))";
+  border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 10))";
+  color: var(--nav-primary-text-color) !important;
+}
+
+.main-header .navbar .nav > .active > a {
+  background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 5))" !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li.header,
+.navbar-nav > .messages-menu > .dropdown-menu > li.header,
+.navbar-nav > .tasks-menu > .dropdown-menu > li.header,
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu a:hover,
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu, .navbar-nav > .tasks-menu > .dropdown-menu > li:hover,
+.navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li:hover > a,
+.task_menu {
+  background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 5))" !important;
+  color: var(--nav-primary-text-color) !important;
+  margin-bottom: 0;
+}
+
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a, .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a, .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li > a {
+  border-bottom: ~"1px solid hsl(from var(--main-theme-color) h s calc(l - 10))";
+}
+
+
+/**
+Active and hover for top tier sidenav items
+ */
+
+.main-sidebar {
+  background-color: #1e282c;
+}
+
+// Shift .main-header's BOX (not just its inner .navbar) so the header
+// occupies only the horizontal space past the sidebar's column. Base
+// AdminLTE 2 leaves .main-header full-width and only offsets the
+// .navbar's contents via margin-left: 230px, which fixes visual
+// alignment but not click alignment: the header's own <div> (z-index
+// 1030) still extends across the sidebar column above the sidebar
+// (z-index 810), so at intermediate widths where the navbar wraps to
+// two or three rows the header's empty second/third-row area sits on
+// top of the first sidebar item and eats clicks. Reported repeatedly
+// on the tracker (#19482, #11868, #5085) and previously papered over
+// with hardcoded .sidebar-menu { margin-top: Npx } offsets at
+// specific breakpoints - since removed above in favor of this
+// structural fix.
+//
+// Shift values track the sidebar's rendered width per body class:
+//  - default (.sidebar-mini, sidebar open): 230px
+//  - .sidebar-mini.sidebar-collapse (menu closed, mini icons): 50px
+//  - mobile (<=767px): 0 (sidebar is translated off-screen)
+//
+// The navbar's own margin-left is zeroed at each state so the navbar
+// content doesn't get double-shifted after the header itself moves.
+// Transition on .main-header matches the navbar's existing 0.3s
+// margin-left transition so the header and its content animate
+// together when the sidebar toggles.
+@media (min-width: 768px) {
+  .main-header {
+    margin-left: 230px;
+    transition: margin-left 0.3s ease-in-out;
+  }
+  .main-header .navbar {
+    margin-left: 0;
+  }
+  .sidebar-mini.sidebar-collapse .main-header {
+    margin-left: 50px;
+  }
+  // AdminLTE has a higher-specificity rule at min-width: 768px:
+  //   .sidebar-mini.sidebar-collapse .main-header .navbar { margin-left: 50px }
+  // that overrides our plain .main-header .navbar reset above. Without
+  // matching its specificity here, the mini-collapsed state ends up
+  // double-shifting the navbar (header shifted 50px + navbar shifted
+  // 50px = navbar starts at x=100). That pushed the .sidebar-toggle
+  // hamburger past the sidebar column and into the header instead of
+  // sitting over the mini-icon column at the top-left (where its
+  // -48px margin-left is designed to place it).
+  .sidebar-mini.sidebar-collapse .main-header .navbar {
+    margin-left: 0;
+  }
+}
+
+
+.sidebar-menu > li.active > a,
+.sidebar-menu > li:hover > a,
+.treeview-menu > li > a {
+  color: var(--sidenav-text-hover-color) !important;
+  border-left-color: var(--main-theme-color);
+}
+
+.sidebar-menu > li:hover > a,
+.sidebar-menu > li.active > a {
+  border-left-color: var(--main-theme-color);
+  padding-left: 12px;
+}
+
+
+.sidebar-menu > li:hover {
+  background-color: #2c3b41;
+}
+
+.sidebar-menu > li > .treeview-menu {
+  background-color: #1e282c;
+}
+
+
+.list-group-item:first-child {
+  border-top: 0 !important;
+}
+
+.sidebar-menu > li > a:link,
+.sidebar-menu > li > a:visited,
+.treeview-menu > li > a {
+  color: var(--sidenav-text-nohover-color) !important;
+}
+
+.sidebar-menu > li.active > a,
+.sidebar-menu > li:hover > a {
+  background-color: #1e282c;
+  border-left-color: var(--main-theme-color);
+  border-left-style: solid;
+  border-left-width: 3px;
+  color: var(--sidenav-text-hover-color) !important;
+}
+
+thead,
+tbody,
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  border-top-color: var(--box-bg) !important;
+  border-bottom-color: var(--box-header-bottom-border-color) !important;
+  color: var(--color-fg);
+}
+
+
+.help-block {
+  color: var(--text-help) !important;
+}
+
+.alert-msg,
+.has-error {
+  color: var(--text-danger) !important;
+}
+
+.has-error .form-control {
+  border-color: var(--text-danger);
+}
+
+.alert a,
+.callout.callout-warning,
+.callout.callout-danger,
+.callout.callout-success,
+.callout.callout-info,
+.alert.alert-warning,
+.alert.alert-danger,
+.alert.alert-info,
+.alert.alert-success,
+.alert.alert-warning {
+  color: white !important;
+}
+
+// The colored alerts have fixed-color backgrounds (red / blue / green
+// / orange) that read well against white text regardless of theme
+// mode. However the global "h1..h4, p { color: var(--color-fg) }" rule
+// further down this file has enough specificity to override the
+// alert's own color on any heading or paragraph inside, flipping the
+// text to black in light mode and white in dark mode — illegible
+// against the colored bg in light. Force inheritance so headings and
+// paragraphs inside these alerts always pick up the alert's white.
+.alert.alert-danger,
+.alert.alert-info,
+.alert.alert-success,
+.alert.alert-warning {
+  h1, h2, h3, h4, p {
+    color: inherit !important;
+  }
+}
+
+
+.text-dark-gray a:link,
+.text-dark-gray a:hover,
+.text-dark-gray a:visited,
+.text-dark-gray a:focus {
+  color: ~"hsl(from var(--main-theme-color) h s calc(l - 5))";
+}
+
+.text-warning {
+  color: var(--text-warning) !important;
+}
+
+.text-info {
+  color: var(--text-info) !important;
+}
+
+.text-primary {
+  color: var(--main-theme-color) !important;
+}
+
+.text-danger {
+  color: var(--text-danger) !important;
+}
+
+.text-success {
+  color: var(--text-success) !important;
+}
+
+.dropdown-menu > .divider {
+  background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 10))";
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 1px;
+
+}
+
+input[type="radio"]::before {
+  box-shadow: ~"inset 1em 1em hsl(from var(--main-theme-color) h s calc(l - 20))" !important;
+}
+
+
+input[type="checkbox"]::before {
+  box-shadow: ~"inset 1em 1em hsl(from var(--main-theme-color) h s calc(l - 20))" !important;
+}
+
+
+.callout.callout-legend {
+  background-color: var(--callout-bg-color);
+  border-left: 5px solid var(--callout-left-border);
+
+}
+
+.callout-legend h4 a,
+.callout-legend h4 a:hover {
+  color: var(--color-fg) !important;
+}
+
+
+p.callout-subtext, p.callout-subtext a:hover, p.callout-subtext a:visited, p.callout-subtext a:link {
+  color: var(--text-legend-help) !important;
+  text-decoration: none;
+}
+
+
+legend {
+  border-bottom: 1px solid var(--callout-left-border);
+}
+
+th,
+.fix-sticky table thead {
+  background-color: var(--box-bg);
+  color: var(--color-fg) !important;
+}
+
+
+.logo:hover {
+  background-color: var(--main-theme-color) !important;
+  color: var(--nav-primary-text-color) !important;
+}
+
+.modal-content,
+.popover.help-popover,
+.popover.help-popover .popover-content,
+.popover.help-popover .popover-body,
+.popover.help-popover .popover-title,
+.popover.help-popover .popover-header {
+  background-color: var(--box-bg) !important;
+  /*color: var(--color-fg) !important;*/
+  color: var(--color-fg) !important;
+}
+
+// Bootstrap 3 hardcodes @modal-header-border-color: #e5e5e5, which reads
+// as a stark near-white line between header/body and body/footer in dark
+// mode. Switch both separators to the theme-aware variable the box
+// borders use so the modal matches the rest of the surface in light AND
+// dark themes.
+.modal-header,
+.modal-footer {
+  border-color: var(--table-border-row-color);
+}
+
+.treeview-menu > li {
+  background-color: #2c3b41;
+  color: var(--sidenav-text-nohover-color) !important;
+}
+
+.treeview-menu > li > a:hover,
+.treeview-menu > li:hover,
+.treeview-menu > li.active > a {
+  color: white !important;
+  background-color: var(--sidenav-hover-color-bg) !important;
+}
+
+.sidebar-toggle.btn,
+.sidebar-toggle.btn:hover {
+  color: white !important;
+}
+
+.chart-responsive {
+  color: var(--color-fg) !important;
+}
+
+.table > tbody + tbody {
+  border-top: 0 !important;
+}
+
+h4#progress-text {
+  color: white !important;
+}
+
+.small-box h3, .small-box p {
+  color: white !important;
+}
+
+.box.box-theme {
+  border-top: var(--main-theme-color) !important;
+}
+
+input[type="date"]:focus,
+input[type="number"]:focus,
+input[type="text"]:focus,
+input[type="url"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+textarea:focus {
+  border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 5))" !important;
+}
+
+input[type="date"]:required,
+input[type="number"]:required,
+input[type="text"]:required,
+input[type="url"]:required,
+input[type="email"]:required,
+input[type="password"]:required,
+input[type="tel"]:required,
+select:required,
+input:required,
+textarea:required {
+  border-right: 5px solid orange !important;
+}
+
+.bootstrap-table .fixed-table-container .table tbody tr.selected td {
+  background-color: ~"light-dark(hsl(from var(--main-theme-color) h s calc(l + 40)),hsl(from var(--main-theme-color) h s calc(l - 40)))" !important;
+}
+
+tr.success > td {
+  background-color: #00a65a !important;
+  color: white !important;
+}
+
+tr.danger > td {
+  background-color: var(--text-danger) !important;
+  color: white !important;
+}
+
+@media print {
+
+  body,
+  div.content-wrapper,
+  section.content,
+  .webui,
+  .main-panel,
+  .nav-tabs-custom,
+  .box,
+  .box-body,
+  .list-group,
+  .list-group-unbordered,
+  .list-group-item,
+  .row,
+  .tab-content {
+    background: white !important;
+    color: black !important;
+  }
+
+  .fixed-table-toolbar,
+  .fixed-table-pagination,
+  #assetsToolBar,
+  .fixed-table-pagination {
+    display: none !important;
+  }
+
+  .tab-pane.hidden-print {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  h2, h3, h4 {
+    color: black !important;
+  }
+
+  // Stack the detail-page columns so each uses the full page width in
+  // print instead of being pinned to the 9/12 + 3/12 grid. Fixes the
+  // ~20% empty right margin on the main panel and the narrow
+  // left-column strip the info-panel renders into on paper
+  .col-md-9,
+  .col-md-3,
+  .main-panel {
+    float: none !important;
+    width: 100% !important;
+  }
+
+  // Nav-tab headers are redundant on paper because the existing rule
+  // above forces every `.tab-pane` visible, so the whole tab content
+  // prints in sequence. Hide the clickable header strip since it
+  // can't do anything on paper.
+  .nav-tabs {
+    display: none !important;
+  }
+
+  // Avoid awkward page breaks mid-row and mid-item on the info-panel
+  // list, section boxes, and table rows. The existing rule covers
+  // `.listingContainer` only.
+  .list-group-item,
+  .box,
+  tr {
+    page-break-inside: avoid;
+  }
+
+  // Show the destination for every real inline link so a printed
+  // audit copy stays navigable. In-page anchors (`#foo`) and
+  // javascript: hrefs don't carry useful info on paper, so they're
+  // excluded.
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 85%;
+    color: #666;
+  }
+
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+
+  // Hide tab panes whose only content is a bootstrap-table empty
+  // state. The pane wrapper carries the heading, bulk-actions
+  // toolbar, table, and footer, so dropping the whole pane removes
+  // the "Licenses / No matching records found / 0.00" placeholder
+  // stack without leaving the heading orphaned. Narrow enough that
+  // the Details pane (no bs-tables) is unaffected.
+  .tab-pane:has(.no-records-found) {
+    display: none !important;
+  }
+
+  // Give every table a visible outer border and cell gridlines on
+  // paper. Bootstrap's default `.table` renders only inter-row
+  // horizontal lines, which prints as an unframed stack of text once
+  // column spacing lands at paper widths. Mirrors the `table-bordered`
+  // look so columns are readable in both color and B&W.
+  .table,
+  .table > thead > tr > th,
+  .table > tbody > tr > td,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > td,
+  .table > tfoot > tr > th {
+    border: 1px solid #999 !important;
+  }
+
+  .table {
+    border-collapse: collapse !important;
+  }
+
+  // Hide empty `<x-data-row>` pairs in print. The component tags both
+  // the <dt> label and the <dd> value with .hidden-print-empty-row when
+  // the slot is empty, so we drop both sides together and avoid a
+  // stripe of "Field: No value" lines on paper.
+  .hidden-print-empty-row {
+    display: none !important;
+  }
+}
+
+.list-group-item.subitem {
+  padding-left: 20px !important;
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+.list-group-item.subitem:first-child {
+  border: var(--tab-bottom-border);
+}
+
+.list-group-item.subitem:last-child {
+  border: 0 !important;
+}
+
+.main-panel-content {
+  line-height: 20px;
+  border-bottom: var(--tab-bottom-border);
+  padding: 10px 15px;
+}
+
+
+/* table */
+
+dl.table-display {
+  float: left;
+  width: 100%;
+  margin: 1em 0;
+  padding: 0;
+}
+
+.table-display dt {
+  line-height: 25px;
+  clear: left;
+  float: left;
+  /*text-align: right;*/
+  width: 20%;
+  margin: 0;
+  padding: 8px;
+  border-top: var(--tab-bottom-border);
+  font-weight: bold;
+}
+
+.table-display dd {
+  line-height: 20px;
+  float: left;
+  width: 80%;
+  margin: 0;
+  padding: 10px;
+  border-top: var(--tab-bottom-border);
+}
+
+.well-display dt {
+  clear: left;
+  float: left;
+  width: 70%;
+  margin: 0;
+  padding: 6px;
+  border-top: 0;
+  font-weight: bold;
+}
+
+.well-display dd {
+  float: left;
+  width: 30%;
+  margin: 0;
+  padding: 6px;
+  border-top: 0;
+}
+
+.well-sm {
+  line-height: 30px;
+}
+
+.table-display dd:first-of-type, .table-display dt:first-of-type {
+  border-top: 0 !important;
+}
+
+
+@media (max-width: 750px) {
+  .table-display dd {
+    width: 100% !important;
+  }
+
+  .table-display dt {
+    width: 100% !important;
+  }
+}
+
+@media print {
+  /* All your print styles go here */
+  .box-profile {
+    display: block !important;
+    width: 100% !important;
+  }
+}
+
+
+// Login / register page theme awareness.
+//
+// AdminLTE 2 hardcodes light-mode colors on the login page containers
+// (#d2d6de body bg, #fff box bg, #444 logo text) which ignore our
+// [data-theme="dark"] CSS variables. Override with the same variables
+// the rest of the app uses so login and password-reset screens carry
+// the tenant's chosen theme mode instead of a permanent light-mode
+// look. Also styles the .register-* classes since AdminLTE ships them
+// paired and future Snipe-IT signup flows may use them.
+.login-page,
+.register-page {
+  background: var(--color-bg);
+}
+
+.login-box-body,
+.register-box-body {
+  background: var(--box-bg);
+  color: var(--color-fg);
+}
+
+.login-logo a,
+.register-logo a {
+  color: var(--color-fg);
+}
+
+// The .login-box wraps the header + body. Its header (.box-header) picks
+// up theme colors from the general .box rules already in this file, but
+// its bottom-border (from AdminLTE's default .login-box-body) is a
+// hardcoded light color that reads as a bright line against a dark
+// panel. Clear it and let the box's own borders do the visual work.
+.login-box-body,
+.register-box-body {
+  border-top: 0;
+}
+
+// .login-box and .register-box are .box variants but do NOT get the
+// .box-default class, so they miss the themed border-top treatment
+// every other card in the app has. Give them the tenant's main theme
+// color as a top accent so the login card visually ties in with the
+// header bar above it (also styled with --main-theme-color) rather
+// than using the neutral grey that .box.box-default uses elsewhere.
+.login-box,
+.register-box {
+  border-top: 3px solid var(--main-theme-color);
+}
+
+// Themed header bar for login / error pages (layouts/basic.blade.php).
+// Gives the tenant's uploaded logo the same colored background it lives
+// against in the logged-in app's top-nav so logos designed for that
+// context read the way they were meant to. Falls back to a text
+// treatment of the site name when there is no logo.
+.basic-page-header {
+  background-color: var(--main-theme-color);
+  // Match .main-header .navbar exactly (50px min-height) so the
+  // login and error page header reads the same height as the
+  // logged-in top-nav. Overflow: hidden clips the logo the same
+  // way AdminLTE's .main-header .logo container does, so a padded
+  // brand image renders at 50px even though its own box is taller.
+  position: relative;
+  min-height: 50px;
+  overflow: hidden;
+  padding: 0 20px;
+  margin-bottom: 30px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.basic-page-header__link {
+  display: inline-block;
+  // Kill link underline / hover-color so the logo and site-name
+  // fallback render cleanly on the theme-color background.
+  color: var(--nav-primary-text-color);
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:visited {
+    color: var(--nav-primary-text-color);
+    text-decoration: none;
+  }
+
+  img {
+    // Match img.navbar-brand-img / .navbar-brand>img exactly (the
+    // rule near the top of this file that sizes the logged-in
+    // top-nav brand logo). Combined with overflow: hidden on the
+    // parent .basic-page-header, the padded img renders at 50px
+    // clipped, giving the same visual as the logged-in header.
+    max-height: 65px;
+    max-width: 100%;
+    width: auto;
+  }
+}
+
+.basic-page-header__site-name {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--nav-primary-text-color);
+}
+
+// Absolute-positioned in the top-right of the bar so the logo stays
+// visually centered. Icon-only presentation so it reads like the
+// compact icon controls (bell, user avatar) in the logged-in top-nav
+// rather than a full-text toggle. The aria-label carries the full
+// "Dark mode" / "Light mode" text for screen readers.
+.basic-page-header__toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  padding: 4px 8px;
+  color: var(--nav-primary-text-color);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: var(--nav-primary-text-color);
+    opacity: 0.85;
+  }
+
+  // Hide the injected .theme-toggle-label span. Text is still in the
+  // DOM and read by screen readers via the button's aria-label, but
+  // visually only the sun/moon icon shows.
+  .theme-toggle-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+}
+
+// Issue #19443: on narrower viewports (sidebar open, small laptops)
+// the bs-table search input ends up wedged between the box's
+// bulk-actions area (pulled left, ~500px min-width) and the button
+// toolbar (pulled right), which strands it visually in the middle.
+// Force the search onto its own row below the toolbar, right-aligned,
+// when the viewport isn't wide enough to fit all three inline. Wide
+// layouts stay unchanged.
+//
+// The outer `.search` is bootstrap's `.input-group` (display: table)
+// wrapping a nested `.input-group` with the input + clear button.
+// Just adding `clear: both` to the still-floated element left it
+// stranded mid-container. Turning the outer into a plain block with
+// `text-align: right`, and forcing the nested input-group to
+// `inline-flex` so it respects the parent's text alignment, lets it
+// sit flush against the box's right edge on its own row.
+@media (max-width: 1400px) {
+  .box-body .fixed-table-toolbar > .search.pull-right {
+    clear: both !important;
+    margin-top: 8px;
+  }
+}
+
+// Info-panel action button row. Every asset / user / license detail
+// page renders a horizontal strip of icon buttons (edit, clone, note,
+// audit, delete, ...) above the info panel. Was a plain .row with no
+// wrap strategy, so on narrow viewports the last one or two buttons
+// would drop to their own line with no spacing from the row above.
+// Flex + wrap + gap gives a predictable break point and consistent
+// spacing between buttons in either axis. Also fixed #19443.
+//
+// Destructive buttons (delete, and by convention checkin) still need
+// to sit visually apart from the non-destructive ones on the right
+// edge, which they got via `pull-right` (float: right) before this
+// container went flex. Floats are ignored by flex, so the first
+// pull-right child gets margin-left: auto to consume the remaining
+// space and shove itself right. Anything after it clusters next to
+// it.
+//
+// pull-right children also get order:1 so they visually move to the
+// end of the row regardless of their DOM position. Without this,
+// pull-right buttons that appear BEFORE non-pull-right buttons in
+// markup (checkin is emitted before edit/clone/audit on the asset
+// view, and only when the asset is currently checked out - which is
+// why the misalignment only showed up on checked-out assets) end up
+// dragging every subsequent sibling right along with them via the
+// auto margin, leaving only the first non-pull-right button alone on
+// the left. order:1 corrects the visual grouping so pull-right ends
+// up on the right and the non-pull-right stack stays left, matching
+// the behavior the old floats used to give.
+.info-panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  // Bleed out through the parent .box-header's 10px horizontal
+  // padding so the button row hits the box's actual edges. Matches
+  // how a bootstrap .row offsets its container's gutters.
+  margin: 0 -10px;
+
+  > .pull-right {
+    order: 1;
+    margin-left: auto;
+  }
+
+  > .pull-right ~ .pull-right {
+    margin-left: 0;
+  }
+}
+
+// ============================================================================
+// FullCalendar v6 dark-mode overrides.
+//
+// FullCalendar's stock CSS reads from a fixed palette of light neutrals for
+// header cells, gridlines, and hour-axis text. In light mode that reads fine
+// against the AdminLTE box background; in dark mode the light-neutral rules
+// produce a wash of near-white cells and pale grid strokes that lack
+// contrast against the dark box. Rebind them to the same tokens the rest of
+// the app already uses.
+// ============================================================================
+
+[data-theme="dark"] {
+  .fc {
+    --fc-border-color: var(--box-header-top-border-color);
+    --fc-page-bg-color: var(--box-bg);
+    --fc-neutral-bg-color: ~"hsl(from var(--box-bg) h s calc(l + 5))";
+    --fc-neutral-text-color: var(--color-fg);
+    --fc-list-event-hover-bg-color: ~"hsl(from var(--box-bg) h s calc(l + 8))";
+    --fc-today-bg-color: ~"hsl(from var(--main-theme-color) h s calc(l - 25) / 0.25)";
+
+    .fc-col-header-cell,
+    .fc-list-day-cushion {
+      background-color: ~"hsl(from var(--box-bg) h s calc(l + 5))";
+      color: var(--color-fg);
+    }
+
+    .fc-col-header-cell-cushion,
+    .fc-daygrid-day-number,
+    .fc-timegrid-axis-cushion,
+    .fc-timegrid-slot-label-cushion,
+    .fc-list-day-text,
+    .fc-list-day-side-text,
+    .fc-list-event-title,
+    .fc-list-event-time {
+      color: var(--color-fg);
+    }
+
+    .fc-scrollgrid,
+    .fc-scrollgrid td,
+    .fc-scrollgrid th,
+    .fc-timegrid-slot,
+    .fc-daygrid-day {
+      border-color: var(--box-header-top-border-color);
+    }
+  }
+}
+
+// ============================================================================
+// Dashboard equal-height rows.
+//
+// AdminLTE 2 / Bootstrap 3 don't stretch sibling .box heights within a row,
+// so a col-md-8 + col-md-4 pair looks lopsided any time the wider box has
+// more content than the narrower one. This wrapper turns the row into a
+// flex container and forces every child .box to fill its column's height.
+// Applied only on rows opted-in via `dashboard-row-eq` so the rule doesn't
+// leak into other admin pages that happen to use .row + .box.
+// ============================================================================
+
+// Row-wrapper margin lives outside the media query so successive rows stay
+// gutter-separated at every breakpoint, mobile included.
+.dashboard-row-eq {
+  margin-bottom: 20px;
+}
+
+// Equal-height flex layout ONLY on md and up. Below md, Bootstrap 3 collapses
+// .col-md-* to full-width stacked blocks; forcing flex there causes every
+// widget in the row to stretch to the tallest sibling in the flow, which
+// leaves the small widgets with huge whitespace gaps on a phone. Falling
+// back to BS3's stock block layout below md keeps mobile clean.
+@media (min-width: 992px) {
+  .dashboard-row-eq {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    // Vertical gap between wrapped flex lines. When the row holds
+    // more than 12 cols worth of widgets and BS3 wraps them onto
+    // successive lines, `row-gap` inserts a consistent gutter
+    // between those lines. Without it, each wrap-line abuts the
+    // one above with no visual separation. Horizontal gaps between
+    // sibling cols are still handled by Bootstrap's built-in
+    // 15px column padding, so no `column-gap` is set here.
+    row-gap: 20px;
+  }
+
+  .dashboard-row-eq > [class*="col-"] {
+    display: flex;
+    flex-direction: column;
+    float: none; // BS3 gives cols float:left, which suppresses flex behavior
+  }
+
+  // Let cols grow proportionally to fill any leftover space on a
+  // partial wrap-line. Full lines (cols summing to col-md-12) have
+  // no remaining space so nothing grows. Partial lines (e.g.
+  // col-md-4 + col-md-6 when the third widget is gated off for
+  // this viewer) expand both cols so the visual line reads as a
+  // complete row instead of a truncated one with dead space on
+  // the right. Grow factor mirrors the col number so a col-md-8
+  // still visually outweighs a col-md-4 on the same wrapped line.
+  .dashboard-row-eq > .col-md-4 { flex-grow: 4; }
+  .dashboard-row-eq > .col-md-6 { flex-grow: 6; }
+  .dashboard-row-eq > .col-md-8 { flex-grow: 8; }
+
+  .dashboard-row-eq > [class*="col-"] > .box {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  // Ensure the box-body absorbs slack inside a stretched box, so header stays
+  // pinned to the top and any footer/link stays at the bottom instead of the
+  // body content leaving whitespace beneath itself.
+  .dashboard-row-eq > [class*="col-"] > .box > .box-body {
+    flex: 1 1 auto;
+  }
+
+  // AdminLTE flips a .collapsed-box class on the .box when the header
+  // +/- toggle collapses the body. Without this override, the box would
+  // stay stretched to the col's full height and the collapse would have
+  // no visible effect. Let the collapsed box shrink to its own content
+  // (just the header) so the toggle behaves like it does on non-flex
+  // dashboards. Neighboring boxes stay stretched to their previous
+  // heights.
+  .dashboard-row-eq > [class*="col-"] > .box.collapsed-box {
+    flex: 0 0 auto;
+    min-height: 0;
+  }
+}
+
+// ============================================================================
+// FullCalendar built-in toolbar buttons (today / prev / next / month /
+// week / day / list) use the shipped `.fc-button-primary` gray palette
+// out of the box, which looks unrelated to the rest of the app. Rebind
+// them to Snipe-IT's --main-theme-color palette so the whole calendar
+// header reads as part of the same UI. `.fc-button-active` for the
+// currently-selected view gets a darker fill so it stays distinct.
+// ============================================================================
+
+.fc {
+  .fc-button-primary {
+    background-color: var(--main-theme-color) !important;
+    background-image: none !important;
+    border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 15))" !important;
+    color: var(--nav-primary-text-color) !important;
+  }
+
+  .fc-button-primary:hover,
+  .fc-button-primary:focus {
+    background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 8))" !important;
+    border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 20))" !important;
+    color: var(--nav-primary-text-color) !important;
+  }
+
+  .fc-button-primary:not(:disabled).fc-button-active,
+  .fc-button-primary:not(:disabled):active {
+    background-color: ~"hsl(from var(--main-theme-color) h s calc(l - 18))" !important;
+    border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 25))" !important;
+    color: var(--nav-primary-text-color) !important;
+    box-shadow: inset 0 0 0 2px ~"hsl(from var(--main-theme-color) h s calc(l - 30))" !important;
+  }
+
+  .fc-button-primary:disabled {
+    background-color: ~"hsl(from var(--main-theme-color) h s calc(l + 10) / 0.5)" !important;
+    border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 5) / 0.5)" !important;
+    color: var(--nav-primary-text-color) !important;
+    opacity: 0.6;
+  }
+}
+
+// ============================================================================
+// Dashboard row-height cap (large screens only).
+//
+// Rows opted in via `dashboard-row-compact` get a max-height on each
+// box's body so a long list (Needs Attention) or a long low-stock
+// scroll doesn't drag the whole row taller than the rest of the
+// dashboard reads comfortably. Gated on min-width: 1200px because on
+// smaller screens the boxes stack (single column) and clipping
+// content there would hide useful rows behind a scrollbar the user
+// didn't ask for.
+// ============================================================================
+
+@media (min-width: 1200px) {
+  .dashboard-row-compact > [class*="col-"] > .box > .box-body {
+    max-height: 400px;
+    overflow-y: auto;
+    // Suppress bs-table's horizontal scrollbar on widget tables.
+    // The bootstrap-table plugin wraps every table in a
+    // .fixed-table-container that defaults to overflow-x: auto, so
+    // when column widths sum to even 1px over the container the
+    // widget grows a spurious horizontal scrollbar. Cells wrap or
+    // clip cleanly at this width, so hiding the overflow is
+    // preferable to letting the scrollbar eat vertical space.
+    overflow-x: hidden;
+  }
+
+  // .dashboard-chart-body opts a box-body out of the compact scroll
+  // cap. Charts (Chart.js pie in particular) render a single canvas
+  // per box; capping + scrolling makes the pie clip inside a
+  // scrollable viewport instead of filling the box like a chart
+  // should. Keep the flex-stretch to match sibling row heights, but
+  // let the chart's own responsive resize fill the vertical space
+  // instead of forcing a scrollbar.
+  .dashboard-row-compact > [class*="col-"] > .box > .box-body.dashboard-chart-body {
+    max-height: none;
+    overflow: visible;
+  }
+
+  // bs-table generates a .fixed-table-container inside each widget
+  // that also carries overflow-x: auto by default. Belt-and-braces
+  // with the parent box-body rule above so a compact widget never
+  // grows a horizontal scrollbar regardless of which layer bs-table
+  // decides to overflow at.
+  .dashboard-row-compact .fixed-table-container,
+  .dashboard-row-compact .fixed-table-body {
+    overflow-x: hidden;
+  }
+}
+
+// ============================================================================
+// Needs-attention widget: two-column row layout so badge counts of
+// wildly different widths ("1" vs "1,247") share a right-aligned column
+// and the labels below each other line up on a shared left spine. The
+// stock Bootstrap 3 .badge inside .list-group-item floats right, which
+// looks fine per-row in isolation but produces jagged label indents
+// once the counts span more than one digit.
+// ============================================================================
+
+.dashboard-attention-list > .list-group-item > a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dashboard-attention-list .dashboard-attention-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.dashboard-attention-list .dashboard-attention-count {
+  flex: 0 0 auto;
+  min-width: 3.5em;
+  text-align: center;
+  // Overrides Bootstrap 3's .list-group-item .badge float-right so
+  // the flex layout above actually controls positioning; otherwise
+  // the badge escapes the flex row and stacks weirdly.
+  float: none;
+  margin-left: 0;
+}
+
+// ============================================================================
+// bs-table's stock "no matching records found" cell reads as a dim
+// afterthought at default font size / weight. On dashboard widgets
+// where empty is often a happy state ("nothing below threshold"),
+// the unstyled row makes the panel look broken. Give empty-state
+// text a centered, padded, muted-but-legible presence via a wrapper
+// span that formatNoMatches emits when a data-empty-message is set.
+// ============================================================================
+
+.snipe-table-empty-state {
+  display: block;
+  padding: 24px 12px;
+  color: var(--text-legend-help, #888);
+  font-style: italic;
+  text-align: center;
+}
+
+// ============================================================================
+// FullCalendar list-view day-group headers render as <a> elements
+// regardless of the navLinks setting (v6 emits anchors and only
+// wires the click handler when navLinks is on). Browser default
+// styling paints them with underline + link color, so they look
+// clickable when they aren't. Neutralize the anchor look so the day
+// headers read as headings, not links.
+// ============================================================================
+
+.fc .fc-list-day-cushion a,
+.fc .fc-list-day-text,
+.fc .fc-list-day-side-text {
+  color: inherit;
+  text-decoration: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+// ============================================================================
+// FullCalendar filter buttons render as a native DOM row above the
+// calendar element (see buildFilterButtons in snipeit-calendar.js).
+// Kept out of FullCalendar's headerToolbar so the calendar's own
+// prev/next/today/title/views row isn't pushed off-center by an
+// inline row of filter chips.
+// ============================================================================
+
+.snipeit-calendar-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--box-header-top-border-color, #ddd);
+}
+
+.snipeit-calendar-filter-button {
+  // Reserve horizontal space for the checkmark glyph up-front via a
+  // transparent placeholder so the button doesn't grow when its
+  // .active class is added. Without this the ::before content on
+  // `.active` shifts every other button in the row when a filter is
+  // toggled and makes the whole row jump.
+  padding: 4px 10px;
+  font-size: 13px;
+
+  &::before {
+    content: "\2713\00a0";
+    font-weight: bold;
+    visibility: hidden;
+  }
+}
+
+// ============================================================================
+// Calendar filter-button active-state styling (both themes).
+//
+// buildFilterButtons flips `.active` on selected filters. Bootstrap 3's
+// stock `.btn-default.active` only nudges the background a few shades
+// darker, which reads as "hovered" not "selected" and Snipe reported she
+// couldn't tell which filters were on. Force the active state to the
+// app's primary theme color with an inset border ring and a leading
+// checkmark glyph so a viewer can spot which filters are active without
+// squinting. Kept a11y-friendly with a real ::before content marker
+// rather than color alone (aria-pressed is toggled in JS on top of it).
+// ============================================================================
+
+.snipeit-calendar-filter-button.active,
+.snipeit-calendar-filter-button.active:hover,
+.snipeit-calendar-filter-button.active:focus,
+.snipeit-calendar-filter-button.active:active {
+  background-color: var(--main-theme-color) !important;
+  background-image: none !important;
+  border-color: ~"hsl(from var(--main-theme-color) h s calc(l - 15))" !important;
+  color: var(--nav-primary-text-color) !important;
+  box-shadow: inset 0 0 0 2px ~"hsl(from var(--main-theme-color) h s calc(l - 25))" !important;
+}
+
+.snipeit-calendar-filter-button.active::before {
+  visibility: visible;
+}
+
+.snipeit-calendar-filter-button.active:focus {
+  box-shadow: inset 0 0 0 2px ~"hsl(from var(--main-theme-color) h s calc(l - 25))",
+              0 0 0 3px ~"hsl(from var(--main-theme-color) h s calc(l + 20) / 0.5)" !important;
+}
+
+// Social login buttons on layouts/basic (login page).
+.btn-social.btn-google,
+.btn-social.btn-google:link,
+.btn-social.btn-google:visited {
+  background-color: var(--main-theme-color) !important;
+  color: var(--nav-primary-text-color) !important;
+  border-color: var(--main-theme-color) !important;
+}
+
+.btn-social.btn-google:hover,
+.btn-social.btn-google:focus,
+.btn-social.btn-google:active {
+  background-color: var(--main-theme-hover) !important;
+  color: var(--nav-primary-text-color) !important;
+  border-color: var(--main-theme-hover) !important;
+}
+
+/*
+ * Vertical side-tabs inside a box. First used on the Settings -> Sync
+ * Adapters page but kept generic so other admin screens that need a
+ * tall list of tabs can reuse the markup + styles. Negative margin
+ * cancels .box-body's 10px padding on the sides we want flush against
+ * the box edges. Active-tab left border uses the same accent color
+ * and font-weight bump that .nav-tabs-custom uses for horizontal
+ * tabs, so the two visually match.
+ */
+.side-tabs {
+  margin: -10px 0 -10px -10px;
+  display: flex;
+}
+
+.side-tabs .side-tabs-list {
+  flex: 0 0 300px;
+  padding: 0;
+  border-right: var(--table-border-row);
+}
+
+/* AdminLTE ships a hardcoded #f4f4f4 border-bottom between vertical
+   nav-stacked items via `.box .nav-stacked > li`, which reads as white
+   against the dark box background. Override with the theme-aware
+   variable to match the box's internal borders in both modes. */
+.side-tabs .side-tabs-list .nav-stacked > li {
+  border-bottom-color: var(--table-border-row-color);
+}
+
+.side-tabs .side-tabs-list .nav-pills > li > a {
+  color: var(--color-fg);
+  padding: 10px 16px;
+  padding-left: 10px;
+  border-left: 3px solid transparent;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+.side-tabs .side-tabs-list .nav-pills > li.active > a,
+.side-tabs .side-tabs-list .nav-pills > li.active > a:hover,
+.side-tabs .side-tabs-list .nav-pills > li.active > a:focus {
+  color: var(--color-fg);
+  background-color: transparent;
+  border-left-color: var(--main-theme-color);
+  font-weight: bold;
+}
+
+.side-tabs .side-tabs-content {
+  flex: 1;
+  padding: 15px 20px;
+  min-width: 0; // let long labels + tables shrink inside a flex row instead of stretching the whole panel past its box.
+}
+
+/* Collapse the side-tabs to a stacked column on narrow viewports so
+   the tab list sits above the content pane instead of squeezing it. */
+@media (max-width: 991px) {
+  .side-tabs {
+    flex-direction: column;
+  }
+
+  .side-tabs .side-tabs-list {
+    flex: 0 0 auto;
+    border-right: 0;
+    border-bottom: var(--table-border-row);
+  }
+
+  .side-tabs .side-tabs-content {
+    padding: 15px 10px;
+  }
+}
+
+.label-normal {
+  font-weight: normal;
+  font-size: 11px !important;
+  line-height: 21px !important;
+  padding-left: 3px;
+}
+
+.label-normal-bold {
+  font-weight: bold !important;
+  font-size: 11px !important;
+  line-height: 34px !important;
+  padding-left: 3px;
+  border: 1px solid var(--main-footer-top-border-color);
+}
+
+
+/* Checkbox-multiselect skin for select2. See the
+   .js-select2-checkboxes init in snipeit.js. The dropdown rows get
+   a leading checkbox so the UX reads as "check what you want" rather
+   than select2's tag-pill multi-select, and the input area shows a
+   plain "N selected" count instead of pills. */
+.js-select2-checkboxes-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.js-select2-checkboxes-row > .clearfix {
+  flex: 1;
+}
+
+.js-select2-checkboxes-row .js-select2-checkboxes-tick {
+  margin: 0;
+  pointer-events: none; // the row itself handles the click via select2.
+}
+
+.js-select2-checkboxes-row.js-select2-checkboxes-row-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.js-select2-checkboxes-selection .select2-selection__rendered {
+  color: var(--color-fg);
+  padding-left: 8px;
+}
+
+.js-select2-checkboxes-selection .select2-selection__choice {
+  display: none; // suppress the per-item pill container.
+}
+
+.js-select2-checkboxes-actions {
+  display: flex;
+  gap: 6px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--box-header-top-border-color, #f4f4f4);
+  background-color: var(--table-stripe-bg, transparent);
+}
+
+/* Clear × overlay on select2's dropdown search field + placeholder.
+   select2 doesn't ship either. Position relative on the select2-search
+   parent so our absolutely-positioned × sits inside the input visually. */
+.js-select2-checkboxes-search-container {
+  position: relative;
+}
+
+.js-select2-checkboxes-search-container .select2-search__field {
+  padding-right: 28px;
+}
+
+.js-select2-checkboxes-search-clear {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  padding: 0 4px;
+  cursor: pointer;
+  color: var(--text-help);
+  line-height: 1;
+  font-size: 1.3em;
+  opacity: 0.6;
+  display: none;
+  z-index: 2;
+}
+
+.js-select2-checkboxes-search-container.has-content .js-select2-checkboxes-search-clear {
+  display: block;
+}
+
+.js-select2-checkboxes-search-clear:hover,
+.js-select2-checkboxes-search-clear:focus {
+  opacity: 1;
+  color: #a94442;
+  outline: none;
+}
+
+/* Strip of selected-item badges rendered below the control. Users can
+   see WHAT is selected without having to open the dropdown, and each
+   badge's x removes that item. */
+.js-select2-checkboxes-badges {
+  margin-top: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.js-select2-checkboxes-badges:empty {
+  display: none;
+}
+
+/* Chips in the editable company picker + the read-only groups strip.
+   .label-light's global line-height is 25px, which looks tall when
+   chips sit in a form row next to compact inputs. Compact the chip
+   shape (line-height + padding) just inside these scoped containers
+   so other places that use .label-light keep their current sizing. */
+.js-select2-checkboxes-badge,
+.js-user-groups-readonly .label {
+  line-height: 21px !important;
+  padding: 2px 8px !important;
+  margin-right: 2px !important;
+  font-weight: normal;
+  font-size: 12px !important;
+}
+
+.js-user-groups-readonly {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+
+.js-select2-checkboxes-badge-remove {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin-left: 4px;
+  color: inherit;
+  opacity: 0.6;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.js-select2-checkboxes-badge-remove:hover,
+.js-select2-checkboxes-badge-remove:focus {
+  opacity: 1;
+  color: #a94442;
+  outline: none;
+}
+
+.js-select2-checkboxes-more {
+  border: 0;
+  cursor: pointer;
+  padding: 2px 8px;
+}
+
+/* Scrolling select2-checkboxes-scrollbox variant: an always-open panel with search +
+   select-all + a scrolling body of checkbox rows. See the
+   .js-select2-checkboxes-scrollbox init in snipeit.js for behavior. */
+.js-select2-checkboxes-scrollbox-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+}
+
+.js-select2-checkboxes-scrollbox-controls .js-select2-checkboxes-scrollbox-search-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.js-select2-checkboxes-scrollbox-search-wrap .js-select2-checkboxes-scrollbox-search {
+  padding-right: 28px;
+}
+
+.js-select2-checkboxes-scrollbox-search-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  padding: 0 4px;
+  cursor: pointer;
+  color: var(--text-help);
+  line-height: 1;
+  font-size: 1.3em;
+  opacity: 0.6;
+  display: none;
+}
+
+.js-select2-checkboxes-scrollbox-search-wrap.has-content .js-select2-checkboxes-scrollbox-search-clear {
+  display: block;
+}
+
+.js-select2-checkboxes-scrollbox-search-clear:hover,
+.js-select2-checkboxes-scrollbox-search-clear:focus {
+  opacity: 1;
+  color: #a94442;
+  outline: none;
+}
+
+.js-select2-checkboxes-scrollbox-count {
+  margin-left: auto;
+  font-size: 0.9em;
+  color: var(--text-help);
+}
+
+.js-select2-checkboxes-scrollbox-scroll {
+  border: 1px solid var(--box-header-top-border-color, #d2d6de);
+  border-radius: 3px;
+  overflow-y: auto;
+  background-color: var(--box-bg, #fff);
+}
+
+.js-select2-checkboxes-scrollbox-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  margin: 0;
+  cursor: pointer;
+  font-weight: normal;
+  border-bottom: 1px solid var(--table-border-row-color, #f4f4f4);
+}
+
+.js-select2-checkboxes-scrollbox-row:last-child {
+  border-bottom: 0;
+}
+
+.js-select2-checkboxes-scrollbox-row:hover {
+  background-color: var(--table-stripe-bg, #f5f5f5);
+}
+
+.js-select2-checkboxes-scrollbox-row .js-select2-checkboxes-scrollbox-tick {
+  margin: 0;
+}
+
+.js-select2-checkboxes-scrollbox-image {
+  display: inline-flex;
+  justify-content: center;
+  width: 20px;
+}
+
+.js-select2-checkboxes-scrollbox-image img {
+  max-height: 20px;
+  max-width: 20px;
+}
+
+.js-select2-checkboxes-scrollbox-image i {
+  font-size: 18px;
+}
+
+.js-select2-checkboxes-scrollbox-row-disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+mark {
+  background-color: #fcf8e3;
+  padding: 0 !important;
+}
+

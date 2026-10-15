@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::group([
             'middleware' => 'web',
-//            'namespace' => $this->namespace, //okay, I don't know what this means, but somehow this might be a problem for us?
+            //            'namespace' => $this->namespace, //okay, I don't know what this means, but somehow this might be a problem for us?
         ], function ($router) {
             require base_path('routes/web/hardware.php');
             require base_path('routes/web/models.php');
@@ -65,8 +65,10 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiRoutes()
     {
         Route::group([
-            'middleware' => 'auth:api',
-//            'namespace' => $this->namespace, // this might also be a problem? I don't really know :/
+            // oidc before api: Passport clears the Authorization header on
+            // failure, so it must run after the OIDC guard. See Http/Kernel.
+            'middleware' => 'auth:oidc,api',
+            //            'namespace' => $this->namespace, // this might also be a problem? I don't really know :/
             'prefix' => 'api',
         ], function ($router) {
             require base_path('routes/api.php');
@@ -101,6 +103,12 @@ class RouteServiceProvider extends ServiceProvider
         // Rate limiter for forgotten password requests
         RateLimiter::for('forgotten_password', function (Request $request) {
             return Limit::perMinute(config('auth.password_reset.max_attempts_per_min'))->by(optional($request->user())->id ?: $request->ip());
+        });
+
+        // Rate limiter for two-factor authentication — keyed on user ID since the user is already
+        // password-authenticated at this stage, preventing distributed brute force across IPs.
+        RateLimiter::for('two_factor', function (Request $request) {
+            return Limit::perMinute(config('auth.two_factor.max_attempts_per_min'))->by(optional($request->user())->id ?: $request->ip());
         });
 
     }

@@ -6,23 +6,28 @@ use App\Events\UserMerged;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\Accessory;
-use App\Models\License;
+use App\Models\AccessoryCheckout;
 use App\Models\Actionlog;
 use App\Models\Asset;
-use App\Models\Group;
-use App\Models\LicenseSeat;
-use App\Models\ConsumableAssignment;
+use App\Models\CheckoutAcceptance;
+use App\Models\Company;
+use App\Models\Component;
 use App\Models\Consumable;
+use App\Models\ConsumableAssignment;
+use App\Models\Group;
+use App\Models\License;
+use App\Models\LicenseSeat;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
-use Carbon\Carbon;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Password;
 
 class BulkUsersController extends Controller
 {
@@ -30,10 +35,12 @@ class BulkUsersController extends Controller
      * Returns a view that confirms the user's a bulk action will be applied to.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v1.7]
-     * @param Request $request
-     * @return \Illuminate\Contracts\View\View | \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return View | RedirectResponse
+     *
+     * @throws AuthorizationException
      */
     public function edit(Request $request)
     {
@@ -45,17 +52,18 @@ class BulkUsersController extends Controller
             // Get the list of affected users
             $user_raw_array = request('ids');
             $users = User::whereIn('id', $user_raw_array)
-                ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')->get();
+                ->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations', 'uploads', 'acceptances')->get();
 
             // bulk edit, display the bulk edit form
             if ($request->input('bulk_actions') == 'edit') {
                 $this->authorize('update', User::class);
+
                 return view('users/bulk-edit', compact('users'))
                     ->with('groups', Group::pluck('name', 'id'));
 
-            // bulk send assigned inventory
+                // bulk send assigned inventory
             } elseif ($request->input('bulk_actions') == 'send_assigned') {
-                    $this->authorize('update', User::class);
+                $this->authorize('update', User::class);
 
                 $users_without_email = 0;
                 foreach ($users as $user) {
@@ -72,63 +80,64 @@ class BulkUsersController extends Controller
                     return redirect()->back()->with('warning', trans_choice('admin/users/general.users_notified_warning', $users->count(), ['no_email' => $users_without_email]));
                 }
 
-
-
-
-            // bulk delete, display the bulk delete confirmation form
+                // bulk delete, display the bulk delete confirmation form
             } elseif ($request->input('bulk_actions') == 'delete') {
                 $this->authorize('delete', User::class);
+
                 return view('users/confirm-bulk-delete')->with('users', $users)->with('statuslabel_list', Helper::statusLabelList());
 
-            // merge, confirm they have at least 2 users selected and display the merge screen
+                // merge, confirm they have at least 2 users selected and display the merge screen
             } elseif ($request->input('bulk_actions') == 'merge') {
                 $this->authorize('delete', User::class);
                 if (($request->filled('ids')) && (count($request->input('ids')) > 1)) {
                     return view('users/confirm-merge')->with('users', $users);
-                // Not enough users selected, send them back
+                    // Not enough users selected, send them back
                 } else {
                     return redirect()->back()->with('error', trans('general.not_enough_users_selected', ['count' => 2]));
                 }
 
-            // bulk password reset, just do the thing
+                // bulk password reset, just do the thing
             } elseif ($request->input('bulk_actions') == 'bulkpasswordreset') {
                 foreach ($users as $user) {
                     if (($user->activated == '1') && ($user->email != '') && ($user->ldap_import != '1')) {
                         $credentials = ['email' => $user->email];
                         Password::sendResetLink($credentials/* , function (Message $message) {
                         $message->subject($this->getEmailSubject()); // TODO - I'm not sure if we still need this, but this second parameter is no longer accepted in later Laravel versions.
-                        } */ );                                      // TODO - so hopefully this doesn't give us generic password reset messages? But it at least _works_
+                        } */);                                      // TODO - so hopefully this doesn't give us generic password reset messages? But it at least _works_
                     }
                 }
+
                 return redirect()->back()->with('success', trans('admin/users/message.password_resets_sent'));
 
             } elseif ($request->input('bulk_actions') == 'print') {
-                $users = User::query()
-                    ->with([
-                        'assets.assetlog',
-                        'assets.assignedAssets.assetlog',
-                        'assets.assignedAssets.defaultLoc',
-                        'assets.assignedAssets.location',
-                        'assets.assignedAssets.model.category',
-                        'assets.defaultLoc',
-                        'assets.location',
-                        'assets.model.category',
-                        'accessories.assetlog',
-                        'accessories.category',
-                        'accessories.manufacturer',
-                        'consumables.assetlog',
-                        'consumables.category',
-                        'consumables.manufacturer',
-                        'licenses.category',
-                    ])
-                    ->withTrashed()
-                    ->findMany($request->input('ids'));
+                $actor = auth()->user();
+                $canViewAssets = $actor->can('view', Asset::class);
+                $canViewLicenses = $actor->can('view', License::class);
+                $canViewAccessories = $actor->can('view', Accessory::class);
+                $canViewConsumables = $actor->can('view', Consumable::class);
+                $canViewComponents = $actor->can('view', Component::class);
 
-                $users->each(fn($user) => $this->authorize('view', $user));
+                $users = collect($request->input('ids'))
+                    ->map(fn ($id) => User::withInventoryRelations(
+                        (int) $id,
+                        $canViewAssets,
+                        $canViewLicenses,
+                        $canViewAccessories,
+                        $canViewConsumables,
+                        $canViewComponents,
+                    )->first())
+                    ->filter();
+
+                $users->each(fn ($user) => $this->authorize('view', $user));
 
                 return view('users.print')
                     ->with('users', $users)
-                    ->with('settings', Setting::getSettings());
+                    ->with('settings', Setting::getSettings())
+                    ->with('canViewAssets', $canViewAssets)
+                    ->with('canViewLicenses', $canViewLicenses)
+                    ->with('canViewAccessories', $canViewAccessories)
+                    ->with('canViewConsumables', $canViewConsumables)
+                    ->with('canViewComponents', $canViewComponents);
             }
         }
 
@@ -139,10 +148,12 @@ class BulkUsersController extends Controller
      * Save bulk-edited users
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v1.0]
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return RedirectResponse
+     *
+     * @throws AuthorizationException
      */
     public function update(Request $request)
     {
@@ -164,17 +175,21 @@ class BulkUsersController extends Controller
 
         $this->conditionallyAddItem('location_id')
             ->conditionallyAddItem('department_id')
-            ->conditionallyAddItem('company_id')
             ->conditionallyAddItem('locale')
             ->conditionallyAddItem('remote')
-            ->conditionallyAddItem('ldap_import')
-            ->conditionallyAddItem('activated')
             ->conditionallyAddItem('display_name')
             ->conditionallyAddItem('start_date')
             ->conditionallyAddItem('end_date')
             ->conditionallyAddItem('city')
-            ->conditionallyAddItem('autoassign_licenses');
-
+            ->conditionallyAddItem('autoassign_licenses')
+            ->conditionallyAddItem('phone')
+            ->conditionallyAddItem('jobtitle')
+            ->conditionallyAddItem('address')
+            ->conditionallyAddItem('state')
+            ->conditionallyAddItem('country')
+            ->conditionallyAddItem('zip')
+            ->conditionallyAddItem('website')
+            ->conditionallyAddItem('notes');
 
         // If the manager_id is one of the users being updated, generate a warning.
         if (array_search($request->input('manager_id'), $user_raw_array)) {
@@ -187,58 +202,162 @@ class BulkUsersController extends Controller
         /**
          * Check to see if the user wants to actually blank out the values vs skip them
          */
-        if ($request->input('null_location_id')=='1') {
+        if ($request->input('null_location_id') == '1') {
             $this->update_array['location_id'] = null;
         }
 
-        if ($request->input('null_department_id')=='1') {
+        if ($request->input('null_department_id') == '1') {
             $this->update_array['department_id'] = null;
         }
 
-        if ($request->input('null_manager_id')=='1') {
+        if ($request->input('null_manager_id') == '1') {
             $this->update_array['manager_id'] = null;
         }
 
-        if ($request->input('null_company_id')=='1') {
-            $this->update_array['company_id'] = null;
-        }
-
-        if ($request->input('null_start_date')=='1') {
+        if ($request->input('null_start_date') == '1') {
             $this->update_array['start_date'] = null;
         }
 
-        if ($request->input('null_end_date')=='1') {
+        if ($request->input('null_end_date') == '1') {
             $this->update_array['end_date'] = null;
         }
 
-        if ($request->input('null_locale')=='1') {
+        if ($request->input('null_locale') == '1') {
             $this->update_array['locale'] = null;
         }
 
-        if ($request->input('null_display_name')=='1') {
+        if ($request->input('null_display_name') == '1') {
             $this->update_array['display_name'] = null;
+        }
+
+        if ($request->input('null_city') == '1') {
+            $this->update_array['city'] = null;
+        }
+
+        if ($request->input('null_phone') == '1') {
+            $this->update_array['phone'] = null;
+        }
+
+        if ($request->input('null_jobtitle') == '1') {
+            $this->update_array['jobtitle'] = null;
+        }
+
+        if ($request->input('null_employee_num') == '1') {
+            $this->update_array['employee_num'] = null;
+        }
+
+        if ($request->input('null_address') == '1') {
+            $this->update_array['address'] = null;
+        }
+
+        if ($request->input('null_state') == '1') {
+            $this->update_array['state'] = null;
+        }
+
+        if ($request->input('null_country') == '1') {
+            $this->update_array['country'] = null;
+        }
+
+        if ($request->input('null_zip') == '1') {
+            $this->update_array['zip'] = null;
+        }
+
+        if ($request->input('null_website') == '1') {
+            $this->update_array['website'] = null;
+        }
+
+        if ($request->input('null_notes') == '1') {
+            $this->update_array['notes'] = null;
         }
 
         if (! $manager_conflict) {
             $this->conditionallyAddItem('manager_id');
         }
-        // Save the updated info
-        User::whereIn('id', $user_raw_array)
-            ->where('id', '!=', auth()->id())->update($this->update_array);
+        $bulkCompanyIds = array_filter(array_map('intval', (array) $request->input('company_ids', [])));
+        $clearCompanies = $request->input('null_company_ids') == '1';
+        $allowedIds = [];
 
-        if (array_key_exists('location_id', $this->update_array)){
-            Asset::where('assigned_type', User::class)
-                ->whereIn('assigned_to', $user_raw_array)
-                ->update(['location_id' => $this->update_array['location_id']]);
+        if ($bulkCompanyIds || $clearCompanies) {
+            $allowedIds = Company::getIdsForCurrentUser($bulkCompanyIds);
         }
 
-        // Only sync groups if groups were selected
-        if ($request->filled('groups')) {
+        $wouldClear = $clearCompanies || ($bulkCompanyIds && empty($allowedIds));
 
-            foreach ($users as $user) {
-                if (auth()->user()->can('canEditAuthFields', $user) && auth()->user()->can('editableOnDemo')) {
-                    $user->groups()->sync($request->input('groups'));
+        // Strict-FMCS #19192 gate — mirrors the branch in SaveUserRequest
+        // so bulk-editing a batch to clear all company memberships in
+        // strict mode is blocked for companied non-superusers. Fires
+        // before the older floater-mode gate so its more specific error
+        // wins when both apply. Skips uncompanied actors because they
+        // legitimately operate in the null pseudo-company namespace in
+        // strict mode; nulling pivots there is their normal workflow,
+        // not a self-escalation attempt.
+        $settings = Setting::getSettings();
+        $strictFmcs = $settings->full_multiple_companies_support && ! $settings->null_company_is_floater;
+        $actor = auth()->user();
+        if ($wouldClear && $strictFmcs && ! $actor->isSuperUser() && $actor->companies()->exists()) {
+            return redirect()->route('users.index')
+                ->with('error', trans('validation.fmcs_company', ['attribute' => trans('general.company')]));
+        }
+
+        // Floater-mode self-elevation guard (#19200). See User::canGrantFloaterStatus.
+        if ($wouldClear && ! auth()->user()->canGrantFloaterStatus()) {
+            return redirect()->route('users.index')
+                ->with('error', trans('admin/users/general.cannot_make_floater'));
+        }
+
+        // Save per-user so UserObserver::updating() fires and all field changes are written
+        // to the Activity Report. A mass update() bypasses model observers entirely.
+        foreach ($users as $user) {
+            $canEditAuth = auth()->user()->can('canEditAuthFields', $user) && auth()->user()->can('editableOnDemo');
+            $userUpdate = $this->update_array;
+
+            if ($canEditAuth) {
+                if ($request->filled('activated')) {
+                    $userUpdate['activated'] = $request->input('activated');
                 }
+                if ($request->filled('ldap_import')) {
+                    $userUpdate['ldap_import'] = $request->input('ldap_import');
+                }
+                if ($request->filled('email')) {
+                    $userUpdate['email'] = $request->input('email');
+                } elseif ($request->input('null_email') == '1') {
+                    $userUpdate['email'] = null;
+                }
+            }
+
+            if (! empty($userUpdate)) {
+                $user->fill($userUpdate)->save();
+            }
+
+            if (array_key_exists('location_id', $this->update_array)) {
+                Asset::where('assigned_type', User::class)
+                    ->where('assigned_to', $user->id)
+                    ->update(['location_id' => $this->update_array['location_id']]);
+            }
+
+            if ($bulkCompanyIds || $clearCompanies) {
+                if ($clearCompanies && ! auth()->user()->isSuperUser() && Company::isFullMultipleCompanySupportEnabled()) {
+                    // Non-superusers can only detach companies they belong to. A raw
+                    // sync([]) would also wipe memberships for companies outside their
+                    // scope.
+                    $user->companies()->detach(Company::getIdsForCurrentUser(
+                        $user->companies()->pluck('companies.id')->toArray()
+                    ));
+                    $user->syncLegacyCompanyIdMirror();
+                } else {
+                    // GHSA-wwp4-qx8p-62g8: route through the FMCS-safe helper so a
+                    // scoped editor cannot strip the target's memberships in
+                    // companies the editor cannot see. Raw sync() treats its
+                    // argument as the full new pivot set and deletes anything
+                    // else. The helper reads the target's current pivot
+                    // unscoped, splits into visible + invisible-to-editor,
+                    // and merges the invisible slice back before syncing.
+                    $user->syncCompaniesPreservingInvisibleTo(auth()->user(), $bulkCompanyIds);
+                }
+            }
+
+            if ($canEditAuth && $request->filled('groups') && auth()->user()->isSuperUser()) {
+                $user->syncGroupsWithLogging((array) $request->input('groups'));
             }
         }
 
@@ -248,13 +367,15 @@ class BulkUsersController extends Controller
 
     /**
      * Array to store update data per item
+     *
      * @var array
      */
     private $update_array = [];
 
     /**
      * Adds parameter to update array for an item if it exists in request
-     * @param  string $field field name
+     *
+     * @param  string  $field  field name
      * @return BulkUsersController Model for Chaining
      */
     protected function conditionallyAddItem($field)
@@ -270,10 +391,12 @@ class BulkUsersController extends Controller
      * Soft-delete bulk users
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v1.0]
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return RedirectResponse
+     *
+     * @throws AuthorizationException
      */
     public function destroy(Request $request)
     {
@@ -299,27 +422,91 @@ class BulkUsersController extends Controller
         $licenses = DB::table('license_seats')->whereIn('assigned_to', $user_raw_array)->get();
         $consumableUserRows = DB::table('consumables_users')->whereIn('assigned_to', $user_raw_array)->get();
 
-        if ((($assets->count() > 0) && ((!$request->filled('status_id')) || ($request->input('status_id') == '')))) {
+        if ((($assets->count() > 0) && ((! $request->filled('status_id')) || ($request->input('status_id') == '')))) {
             return redirect()->route('users.index')->with('error', 'No status selected');
         }
 
+        // Enforce per-item checkin permissions before touching anything (catches FMCS company scoping).
+        foreach ($assets as $asset) {
+            if (auth()->user()->cannot('checkin', $asset)) {
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
+            }
+        }
+
+        $licenseModels = License::whereIn('id', $licenses->pluck('license_id')->unique())->get();
+        foreach ($licenseModels as $license) {
+            if (auth()->user()->cannot('checkin', $license)) {
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
+            }
+        }
+
+        $accessoryModels = Accessory::whereIn('id', $accessoryUserRows->pluck('accessory_id')->unique())->get();
+        foreach ($accessoryModels as $accessory) {
+            if (auth()->user()->cannot('checkin', $accessory)) {
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
+            }
+        }
+
+        // Company-scoped consumable set: the CompanyableTrait's global
+        // scope filters this to consumables the caller can actually
+        // see. Used to fence the ConsumableAssignment delete below to
+        // the caller's tenant, closing the FMCS bypass reported in
+        // GHSA-m647-5cjf-gf92 while leaving the existing permission
+        // model (editUsers alone can bulk-remove consumable pivots)
+        // intact for same-company operations.
+        $scopedConsumableIds = Consumable::whereIn('id', $consumableUserRows->pluck('consumable_id')->unique())->pluck('id');
+
+        // Filter the raw pivot rows down to the scoped-parent id sets
+        // computed above.
+        $scopedAccessoryUserRows = $accessoryUserRows->whereIn('accessory_id', $accessoryModels->pluck('id'));
+        $scopedLicenseSeats = $licenses->whereIn('license_id', $licenseModels->pluck('id'));
+
+        if ($request->input('delete_user') == '1' && $users->isNotEmpty() && auth()->user()->cannot('delete', User::class)) {
+            return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
+        }
+
         $this->logItemCheckinAndDelete($assets, Asset::class);
-        $this->logAccessoriesCheckin($accessoryUserRows);
-        $this->logItemCheckinAndDelete($licenses, License::class);
+        $this->logAccessoriesCheckin($scopedAccessoryUserRows);
+        $this->logItemCheckinAndDelete($scopedLicenseSeats, License::class);
 
         Asset::whereIn('id', $assets->pluck('id'))->update([
-            'status_id'     => e(request('status_id')),
-            'assigned_to'   => null,
+            'status_id' => e(request('status_id')),
+            'assigned_to' => null,
             'assigned_type' => null,
             'expected_checkin' => null,
         ]);
 
-        LicenseSeat::whereIn('id', $licenses->pluck('id'))->update(['assigned_to' => null]);
-        ConsumableAssignment::whereIn('id', $consumableUserRows->pluck('id'))->delete();
+        LicenseSeat::whereIn('id', $scopedLicenseSeats->pluck('id'))->update(['assigned_to' => null]);
+
+        $scopedConsumableRowIds = $consumableUserRows
+            ->whereIn('consumable_id', $scopedConsumableIds)
+            ->pluck('id');
+        ConsumableAssignment::whereIn('id', $scopedConsumableRowIds)->delete();
+
+        // Delete only the pivot rows we already permission-checked and
+        // audit-logged.
+        AccessoryCheckout::whereIn('id', $scopedAccessoryUserRows->pluck('id'))->delete();
+
+        // Delete only pending acceptances whose underlying checkoutable is in scope.
+        $scopedAcceptanceIds = CheckoutAcceptance::pending()
+            ->whereIn('assigned_to_id', $user_raw_array)
+            ->get(['id', 'checkoutable_type', 'checkoutable_id'])
+            ->filter(fn($acceptance) => match ($acceptance->checkoutable_type) {
+                Asset::class => $assets->pluck('id')->contains($acceptance->checkoutable_id),
+                Accessory::class => $scopedAccessoryUserRows->pluck('accessory_id')->contains($acceptance->checkoutable_id),
+                LicenseSeat::class => $scopedLicenseSeats->pluck('id')->contains($acceptance->checkoutable_id),
+                Consumable::class => $scopedConsumableIds->contains($acceptance->checkoutable_id),
+                default => false,
+            })
+            ->pluck('id');
+
+        CheckoutAcceptance::whereIn('id', $scopedAcceptanceIds)->delete();
 
         foreach ($users as $user) {
-            $user->accessories()->sync([]);
-            if ($request->input('delete_user')=='1') {
+            if ($request->input('delete_user') == '1') {
+                if (auth()->user()->cannot('delete', $user)) {
+                    return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
+                }
                 if (auth()->user()->can('canEditAuthFields', $user) && auth()->user()->can('editableOnDemo')) {
                     $user->delete();
                 }
@@ -327,26 +514,25 @@ class BulkUsersController extends Controller
         }
 
         $msg = trans('general.bulk_checkin_success');
-        if ($request->input('delete_user')=='1') {
+        if ($request->input('delete_user') == '1') {
             $msg = trans('general.bulk_checkin_delete_success');
         }
-
 
         return redirect()->route('users.index')->with('success', $msg);
     }
 
     /**
      * Generate an action log entry for each of a group of items.
-     * @param $items
-     * @param $itemType string name of items being passed.
+     *
+     * @param  $itemType  string name of items being passed.
      */
     protected function logItemCheckinAndDelete($items, $itemType)
     {
         foreach ($items as $item) {
             $item_id = $item->id;
-            $logAction = new Actionlog();
+            $logAction = new Actionlog;
 
-            if ($itemType == License::class){
+            if ($itemType == License::class) {
                 $item_id = $item->license_id;
             }
 
@@ -356,7 +542,9 @@ class BulkUsersController extends Controller
             $logAction->target_id = $item->assigned_to;
             $logAction->target_type = User::class;
             $logAction->created_by = auth()->id();
-            $logAction->note = 'Bulk checkin items';
+            $logAction->action_date = now();
+            $logAction->created_at = now();
+            $logAction->note = 'Bulk checkin items on user bulk edit/delete';
             $logAction->logaction('checkin from');
         }
     }
@@ -364,13 +552,15 @@ class BulkUsersController extends Controller
     private function logAccessoriesCheckin(Collection $accessoryUserRows): void
     {
         foreach ($accessoryUserRows as $accessoryUserRow) {
-            $logAction = new Actionlog();
+            $logAction = new Actionlog;
             $logAction->item_id = $accessoryUserRow->accessory_id;
             $logAction->item_type = Accessory::class;
             $logAction->target_id = $accessoryUserRow->assigned_to;
             $logAction->target_type = User::class;
             $logAction->created_by = auth()->id();
-            $logAction->note = 'Bulk checkin items';
+            $logAction->created_at = now();
+            $logAction->action_date = now();
+            $logAction->note = 'Bulk checkin accessory on user bulk edit/delete';
             $logAction->logaction('checkin from');
         }
     }
@@ -379,47 +569,57 @@ class BulkUsersController extends Controller
      * Save bulk-edited users
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v1.0]
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     *
+     * @return RedirectResponse
+     *
+     * @throws AuthorizationException
      */
     public function merge(Request $request)
     {
-        $this->authorize('update', User::class);
+        $this->authorize('delete', User::class);
 
         if (config('app.lock_passwords')) {
             return redirect()->route('users.index')->with('error', trans('general.feature_disabled'));
         }
 
         $user_ids_to_merge = $request->input('ids_to_merge');
-        $user_ids_to_merge = array_diff($user_ids_to_merge, array($request->input('merge_into_id')));
+        $user_ids_to_merge = array_diff($user_ids_to_merge, [$request->input('merge_into_id')]);
 
-        if ((!$request->filled('merge_into_id')) || (count($user_ids_to_merge) < 1)) {
+        if ((! $request->filled('merge_into_id')) || (count($user_ids_to_merge) < 1)) {
             return redirect()->back()->with('error', trans('general.no_users_selected'));
         }
 
         // Get the users
         $merge_into_user = User::find($request->input('merge_into_id'));
-        $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations','uploads', 'acceptances')->get();
+        $users_to_merge = User::whereIn('id', $user_ids_to_merge)->with('assets', 'manager', 'userlog', 'licenses', 'consumables', 'accessories', 'managedLocations', 'uploads', 'acceptances')->get();
         $admin = User::find(auth()->id());
+
+        if (! auth()->user()->can('canEditAuthFields', $merge_into_user) || ! auth()->user()->can('editableOnDemo')) {
+            return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
+        }
 
         // Walk users
         foreach ($users_to_merge as $user_to_merge) {
 
+            if (! auth()->user()->can('canEditAuthFields', $user_to_merge) || ! auth()->user()->can('editableOnDemo')) {
+                return redirect()->route('users.index')->with('error', trans('general.insufficient_permissions'));
+            }
+
             foreach ($user_to_merge->assets as $asset) {
-                Log::debug('Updating asset: '.$asset->asset_tag . ' to '.$merge_into_user->id);
+                Log::debug('Updating asset: '.$asset->asset_tag.' to '.$merge_into_user->id);
                 $asset->assigned_to = $request->input('merge_into_id');
                 $asset->save();
             }
 
             foreach ($user_to_merge->licenses as $license) {
-                Log::debug('Updating license pivot: '.$license->id . ' to '.$merge_into_user->id);
+                Log::debug('Updating license pivot: '.$license->id.' to '.$merge_into_user->id);
                 $user_to_merge->licenses()->updateExistingPivot($license->id, ['assigned_to' => $merge_into_user->id]);
             }
 
             foreach ($user_to_merge->consumables as $consumable) {
-                Log::debug('Updating consumable pivot: '.$consumable->id . ' to '.$merge_into_user->id);
+                Log::debug('Updating consumable pivot: '.$consumable->id.' to '.$merge_into_user->id);
                 $user_to_merge->consumables()->updateExistingPivot($consumable->id, ['assigned_to' => $merge_into_user->id]);
             }
 
@@ -449,6 +649,28 @@ class BulkUsersController extends Controller
                 $managedLocation->save();
             }
 
+            // Carry over company pivot memberships from the merged
+            // user into the target.
+            $mergedCompanyIds = Company::getIdsForCurrentUser(
+                DB::table('company_user')
+                    ->where('user_id', $user_to_merge->id)
+                    ->pluck('company_id')
+                    ->map(fn($id) => (int) $id)
+                    ->all()
+            );
+            if (! empty($mergedCompanyIds)) {
+                $now = now();
+                DB::table('company_user')->insertOrIgnore(
+                    array_map(fn($companyId) => [
+                        'company_id' => $companyId,
+                        'user_id' => $merge_into_user->id,
+                        'created_at' => $now,
+                        'updated_at' => $now,
+                    ], $mergedCompanyIds)
+                );
+                $merge_into_user->syncLegacyCompanyIdMirror();
+            }
+
             $user_to_merge->delete();
 
             event(new UserMerged($user_to_merge, $merge_into_user, $admin));
@@ -456,7 +678,6 @@ class BulkUsersController extends Controller
         }
 
         return redirect()->route('users.index')->with('success', trans('general.merge_success', ['count' => $users_to_merge->count(), 'into_username' => $merge_into_user->username]));
-
 
     }
 }

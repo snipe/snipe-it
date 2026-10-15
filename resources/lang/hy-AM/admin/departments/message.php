@@ -1,0 +1,24 @@
+<?php
+
+return [
+
+    'does_not_exist' => 'Բաժինը գոյություն չունի։',
+    'department_already_exists' => 'Այս կազմակերպության տվյալ տեղակայման համար այդ անունով բաժին արդեն գոյություն ունի։ Կամ ընտրեք ավելի հստակ անուն այս բաժնի համար։',
+    'assoc_users' => 'Այս բաժինը ներկայումս կապված է առնվազն մեկ օգտատիրոջ հետ և չի կարող ջնջվել։ Խնդրում ենք թարմացնել օգտատերերի տվյալները, որպեսզի նրանք այլևս չհղվեն այս բաժնին, ապա կրկին փորձել։',
+    'create' => [
+        'error' => 'Բաժինը չի ստեղծվել։ Խնդրում ենք կրկին փորձել։',
+        'success' => 'Բաժինը հաջողությամբ ստեղծվել է։',
+    ],
+    'update' => [
+        'error' => 'Բաժինը չի թարմացվել։ Խնդրում ենք կրկին փորձել։',
+        'success' => 'Բաժինը հաջողությամբ թարմացվել է։',
+    ],
+    'delete' => [
+        'confirm' => 'Վստա՞հ եք, որ ցանկանում եք ջնջել այս բաժինը։',
+        'error' => 'Բաժինը ջնջելիս խնդիր առաջացավ։ Խնդրում ենք կրկին փորձել։',
+        'success' => 'Բաժինը հաջողությամբ ջնջվել է։',
+        'bulk_success' => 'Department deleted successfully.|:count departments were deleted successfully.',
+        'partial_success' => 'Department deleted successfully. See additional information below. | :count departments were deleted successfully. See additional information below.',
+    ],
+
+];

@@ -4,23 +4,39 @@ namespace App\Notifications;
 
 use App\Helpers\Helper;
 use App\Models\Setting;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\SlackMessage;
 use Illuminate\Notifications\Notification;
 use Symfony\Component\Mime\Email;
 
-#[AllowDynamicProperties]
-class RequestAssetNotification extends Notification
+class RequestAssetNotification extends Notification implements ShouldQueue
 {
-    /**
-     * @var
-     */
-    private $params;
+    use Queueable;
+
+    public $target;
+
+    public $item;
+
+    public $item_type;
+
+    public $item_quantity;
+
+    public $note = '';
+
+    public $last_checkout = '';
+
+    public $expected_checkin = '';
+
+    public $requested_date;
+
+    public $start_date;
+
+    public $end_date;
 
     /**
      * Create a new notification instance.
-     *
-     * @param $params
      */
     public function __construct($params)
     {
@@ -28,12 +44,8 @@ class RequestAssetNotification extends Notification
         $this->item = $params['item'];
         $this->item_type = $params['item_type'];
         $this->item_quantity = $params['item_quantity'];
-        $this->note = '';
-        $this->last_checkout = '';
-        $this->expected_checkin = '';
         $this->requested_date = Helper::getFormattedDateObject($params['requested_date'], 'datetime',
             false);
-        $this->settings = Setting::getSettings();
 
         if (array_key_exists('note', $params)) {
             $this->note = $params['note'];
@@ -48,12 +60,23 @@ class RequestAssetNotification extends Notification
             $this->expected_checkin = Helper::getFormattedDateObject($this->item->expected_checkin, 'date',
                 false);
         }
+
+        // Optional reservation window. Passed in from callers that
+        // capture the requester's date-range picker input (see
+        // ViewAssetsController::getRequestItem). Rendered by the
+        // markdown template only when set, so unspecified stays out
+        // of the mail entirely.
+        $this->start_date = ! empty($params['start_date'])
+            ? Helper::getFormattedDateObject($params['start_date'], 'date', false)
+            : '';
+        $this->end_date = ! empty($params['end_date'])
+            ? Helper::getFormattedDateObject($params['end_date'], 'date', false)
+            : '';
     }
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
     public function via()
@@ -75,13 +98,20 @@ class RequestAssetNotification extends Notification
         $qty = $this->item_quantity;
         $item = $this->item;
         $note = $this->note;
-        $botname = ($this->settings->webhook_botname) ? $this->settings->webhook_botname : 'Snipe-Bot';
-        $channel = ($this->settings->webhook_channel) ? $this->settings->webhook_channel : '';
+        $botname = (Setting::getSettings()->webhook_botname) ? Setting::getSettings()->webhook_botname : 'Snipe-Bot';
+        $channel = (Setting::getSettings()->webhook_channel) ? Setting::getSettings()->webhook_channel : '';
 
         $fields = [
             'QTY' => $qty,
             'Requested By' => '<'.$target->present()->viewUrl().'|'.$target->display_name.'>',
         ];
+
+        if ($this->start_date) {
+            $fields['Start Date'] = $this->start_date;
+        }
+        if ($this->end_date) {
+            $fields['End Date'] = $this->end_date;
+        }
 
         return (new SlackMessage)
             ->content(trans('mail.Item_Requested'))
@@ -97,7 +127,7 @@ class RequestAssetNotification extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail()
     {
@@ -110,15 +140,17 @@ class RequestAssetNotification extends Notification
 
         $message = (new MailMessage)->markdown('notifications.markdown.asset-requested',
             [
-                'item'          => $this->item,
-                'note'          => $this->note,
-                'requested_by'  => $this->target,
+                'item' => $this->item,
+                'note' => $this->note,
+                'requested_by' => $this->target,
                 'requested_date' => $this->requested_date,
-                'fields'        => $fields,
+                'fields' => $fields,
                 'last_checkout' => $this->last_checkout,
-                'expected_checkin'  => $this->expected_checkin,
-                'intro_text'        => trans('mail.a_user_requested'),
-                'qty'           => $this->item_quantity,
+                'expected_checkin' => $this->expected_checkin,
+                'start_date' => $this->start_date,
+                'end_date' => $this->end_date,
+                'intro_text' => trans('mail.a_user_requested'),
+                'qty' => $this->item_quantity,
             ])
             ->subject('👀 '.trans('mail.Item_Requested'))
             ->withSymfonyMessage(function (Email $message) {

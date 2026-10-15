@@ -18,62 +18,37 @@
 
 @section('header_right')
 
-    @can('create', \App\Models\User::class)
-        @if ($snipeSettings->ldap_enabled == 1)
-            <a href="{{ route('ldap/user') }}" class="btn btn-theme pull-right"><i class="fas fa-sitemap"></i> {{trans('general.ldap_sync')}}</a>
-        @endif
-    @endcan
+    {{-- LDAP sync surfaces users from across the entire directory
+         regardless of company scoping, so the button is superuser-only
+         to match LDAPImportController's authorization. --}}
+    @if (auth()->user()?->isSuperUser() && $snipeSettings->ldap_enabled == 1)
+        <a href="{{ route('ldap/user') }}" class="btn btn-theme pull-right"><i class="fas fa-sitemap"></i> {{trans('general.ldap_sync')}}</a>
+    @endif
 @stop
 
 {{-- Page content --}}
 @section('content')
-
-<div class="row">
-  <div class="col-md-12">
-    <div class="box box-default">
-        <div class="box-body">
-
-            @include('partials.users-bulk-actions')
-
-            <table
-                    data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
-                    data-cookie-id-table="usersTable"
-                    data-id-table="usersTable"
-                    data-side-pagination="server"
-                    data-toolbar="#userBulkEditToolbar"
-                    data-bulk-button-id="#bulkUserEditButton"
-                    data-bulk-form-id="#usersBulkForm"
-                    data-show-columns-search="true"
-                    id="usersTable"
-                    data-buttons="userButtons"
-                    class="table table-striped snipe-table"
-                    data-url="{{ route('api.users.index',
-                        [
-                            'status' => e(request('status')),
-                            'deleted'=> (request('status')=='deleted') ? 'true' : 'false',
-                            'company_id' => e(request('company_id')),
-                            'manager_id' => e(request('manager_id')),
-                            'admins' => e(request('admins')),
-                            'superadmins' => e(request('superadmins')),
-                            'activated' => e(request('activated')),
-                       ]) }}"
-                    data-export-options='{
-                "fileName": "export-users-{{ date('Y-m-d') }}",
-                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                }'>
-                    </table>
-                </div><!-- /.box-body -->
-            </div><!-- /.box -->
-        </div>
-    </div>
+    <x-container>
+        <x-box name="users" sr_only_title>
+            <x-table.users :route="route('api.users.index',
+                [
+                    'status' => is_scalar(request('status')) ? request('status') : null,
+                    'deleted'=> (request('status')=='deleted') ? 'true' : 'false',
+                    'company_id' => is_scalar(request('company_id')) ? request('company_id') : null,
+                    'manager_id' => is_scalar(request('manager_id')) ? request('manager_id') : null,
+                    'admins' => is_scalar(request('admins')) ? request('admins') : null,
+                    'superadmins' => is_scalar(request('superadmins')) ? request('superadmins') : null,
+                    'activated' => is_scalar(request('activated')) ? request('activated') : null,
+               ])"/>
+        </x-box>
+        <x-shiftclick/>
+    </x-container>
 
 
 @stop
 
 @section('moar_scripts')
 
-
-@include ('partials.bootstrap-table')
-
+    @include ('partials.bootstrap-table')
 
 @stop

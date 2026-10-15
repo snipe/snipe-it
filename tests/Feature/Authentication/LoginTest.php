@@ -3,11 +3,29 @@
 namespace Tests\Feature\Authentication;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
-    public function testLogsFailedLoginAttempt()
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Every test in this class exercises Laravel's ThrottlesLogins
+        // trait, which reads and writes counters through the RateLimiter
+        // cache. The array cache driver used in tests persists for the
+        // lifetime of the process, so counters left over from a prior
+        // test (either in this file or another one that also POSTs to
+        // /login) can push the current test past its lockout threshold
+        // before its first assertion. Flush the whole cache so every
+        // test starts from a zeroed counter.
+        Cache::flush();
+    }
+
+    public function test_logs_failed_login_attempt()
     {
 
         User::factory()->create(['username' => 'username_here']);
@@ -28,25 +46,35 @@ class LoginTest extends TestCase
         ]);
     }
 
-
-    public function testLoginThrottleConfigIsRespected()
+    public function test_login_throttle_config_is_respected()
     {
+        // Regression coverage for the Laravel 12 upgrade regression where
+        // config/auth.php collapsed the nested throttle array back to a
+        // scalar, causing LoginController's config reads to return null
+        // and the ThrottlesLogins trait to silently no-op.
+        //
+        // A user has to exist for the login POST to reach the controller.
+        // With an empty users table Snipe-IT's setup middleware short-
+        // circuits every POST /login to /setup, so the throttle path
+        // never runs.
+        User::factory()->create();
 
-       $this->markTestIncomplete("This test is flaky and needs to be fixed. Passes and fails seemingly at random.");
-       User::factory()->create(['username' => 'username_here']);
+        config(['auth.login_throttle.max_attempts' => 1]);
+        config(['auth.login_throttle.lockout_duration' => 60]);
 
-       config(['auth.passwords.users.throttle.max_attempts' => 1]);
-       config(['auth.passwords.users.throttle.lockout_duration' => 1]);
+        // Belt-and-suspenders: explicitly clear the exact key Laravel
+        // will use for this attempt (username|ip, transliterated /
+        // lowercased) in case anything survived Cache::flush().
+        RateLimiter::clear(Str::transliterate(Str::lower('invalid username').'|127.0.0.100'));
 
-        for ($i = 0; $i < 2; ++$i) {
-            $this->from('/login')
-                ->withServerVariables(['REMOTE_ADDR' => '127.0.0.100'])
-                ->post('/login', [
-                    'username' => 'invalid username',
-                    'password' => 'invalid password',
-                ]);
-        }
-
+        // First failed login registers one attempt. max_attempts is 1,
+        // so the second POST must be blocked.
+        $this->from('/login')
+            ->withServerVariables(['REMOTE_ADDR' => '127.0.0.100'])
+            ->post('/login', [
+                'username' => 'invalid username',
+                'password' => 'invalid password',
+            ]);
 
         $response = $this->from('/login')
             ->withServerVariables(['REMOTE_ADDR' => '127.0.0.100'])
@@ -61,9 +89,8 @@ class LoginTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('auth.throttle', ['minutes' => 1]));
     }
 
-    public function testLogsSuccessfulLogin()
+    public function test_logs_successful_login()
     {
-        $this->markTestIncomplete("This test is flaky and needs to be fixed. Passes and fails seemingly at random.");
         User::factory()->create(['username' => 'username_here']);
 
         $this->withServerVariables(['REMOTE_ADDR' => '127.0.0.100'])

@@ -398,6 +398,13 @@ $writable_dirs_array =
         'storage/app/backup-temp',
         'storage/private_uploads',
         'public/uploads',
+        // Livewire's composer post-install script publishes its dist assets
+        // to public/vendor/livewire. If this directory exists but isn't
+        // writable by the upgrade user, composer install fails mid-upgrade
+        // with a Flysystem UnableToWriteFile error and the install ends
+        // up half-upgraded.
+        'public/vendor',
+        'public/vendor/livewire',
     ];
 
 $dirs_writable = '';
@@ -405,6 +412,13 @@ $dirs_not_writable = '';
 
 // Loop through the directories that need to be writable
 foreach ($writable_dirs_array as $writable_dir) {
+    // Skip directories that don't exist yet. A fresh install won't have
+    // public/vendor/livewire until the first composer install creates
+    // it, and is_writable returns false for non-existent paths, which
+    // would produce a misleading "not writable" error.
+    if (!file_exists($writable_dir)) {
+        continue;
+    }
     if (is_writable($writable_dir)) {
         $dirs_writable .= $success_icon.' '.getcwd().'/'.$writable_dir." is writable \n";
     } else {

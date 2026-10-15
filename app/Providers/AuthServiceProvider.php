@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Models\Accessory;
 use App\Models\Asset;
 use App\Models\AssetModel;
+use App\Models\CalendarEvent;
 use App\Models\Category;
+use App\Models\CheckoutRequest;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\Consumable;
@@ -15,6 +17,8 @@ use App\Models\Department;
 use App\Models\Depreciation;
 use App\Models\License;
 use App\Models\Location;
+use App\Models\Maintenance;
+use App\Models\MaintenanceType;
 use App\Models\Manufacturer;
 use App\Models\PredefinedKit;
 use App\Models\Statuslabel;
@@ -24,6 +28,7 @@ use App\Policies\AccessoryPolicy;
 use App\Policies\AssetModelPolicy;
 use App\Policies\AssetPolicy;
 use App\Policies\CategoryPolicy;
+use App\Policies\CheckoutRequestPolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\ComponentPolicy;
 use App\Policies\ConsumablePolicy;
@@ -33,14 +38,20 @@ use App\Policies\DepartmentPolicy;
 use App\Policies\DepreciationPolicy;
 use App\Policies\LicensePolicy;
 use App\Policies\LocationPolicy;
+use App\Policies\MaintenancePolicy;
+use App\Policies\MaintenanceTypePolicy;
 use App\Policies\ManufacturerPolicy;
 use App\Policies\PredefinedKitPolicy;
 use App\Policies\StatuslabelPolicy;
 use App\Policies\SupplierPolicy;
 use App\Policies\UserPolicy;
-use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Laravel\Passport\Console\ClientCommand;
+use Laravel\Passport\Console\InstallCommand;
+use Laravel\Passport\Console\KeysCommand;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
@@ -50,13 +61,14 @@ class AuthServiceProvider extends ServiceProvider
      *
      * See SnipePermissionsPolicy for additional information.
      *
-     * @var array
+     * @var array<class-string, class-string>
      */
     protected $policies = [
         Accessory::class => AccessoryPolicy::class,
         Asset::class => AssetPolicy::class,
         AssetModel::class => AssetModelPolicy::class,
         Category::class => CategoryPolicy::class,
+        CheckoutRequest::class => CheckoutRequestPolicy::class,
         Component::class => ComponentPolicy::class,
         Consumable::class => ConsumablePolicy::class,
         CustomField::class => CustomFieldPolicy::class,
@@ -65,6 +77,8 @@ class AuthServiceProvider extends ServiceProvider
         Depreciation::class => DepreciationPolicy::class,
         License::class => LicensePolicy::class,
         Location::class => LocationPolicy::class,
+        Maintenance::class => MaintenancePolicy::class,
+        MaintenanceType::class => MaintenanceTypePolicy::class,
         PredefinedKit::class => PredefinedKitPolicy::class,
         Statuslabel::class => StatuslabelPolicy::class,
         Supplier::class => SupplierPolicy::class,
@@ -77,29 +91,44 @@ class AuthServiceProvider extends ServiceProvider
      * Register any authentication / authorization services.
      *
      * @return void
+     *
+     * @SuppressWarnings("PHPMD.UnusedFormalParameter")
      */
     public function boot()
     {
         $this->commands([
-            \Laravel\Passport\Console\InstallCommand::class,
-            \Laravel\Passport\Console\ClientCommand::class,
-            \Laravel\Passport\Console\KeysCommand::class,
+            InstallCommand::class,
+            ClientCommand::class,
+            KeysCommand::class,
         ]);
 
         $this->registerPolicies();
-        Passport::tokensExpireIn(Carbon::now()->addYears((int)config('passport.expiration_years')));
-        Passport::refreshTokensExpireIn(Carbon::now()->addYears((int)config('passport.expiration_years')));
-        Passport::personalAccessTokensExpireIn(Carbon::now()->addYears((int)config('passport.expiration_years')));
+        $expirationYears = (int) config('passport.expiration_years');
+        Passport::tokensExpireIn(CarbonInterval::years($expirationYears));
+        Passport::refreshTokensExpireIn(CarbonInterval::years($expirationYears));
+        Passport::personalAccessTokensExpireIn(CarbonInterval::years($expirationYears));
 
         Passport::cookie(config('passport.cookie_name'));
 
+        // Federated identity: a provider-agnostic OIDC bearer guard, layered
+        // alongside Passport via the `auth:oidc,api` multi-guard. Inert until
+        // config('oidc.enabled') is true, so this is purely additive.
+        // `$name` is unused: Laravel fixes the driver-closure signature as
+        // ($app, $name, $config), and the guard is named by config/auth.php.
+        Auth::extend('oidc', function ($app, $name, array $config) {
+            return new \App\Auth\OidcGuard(
+                Auth::createUserProvider($config['provider']),
+                $app['request'],
+                $app->make(\App\Services\Oidc\OidcTokenValidator::class),
+                $app->make(\App\Services\Oidc\OidcUserResolver::class),
+            );
+        });
 
         /**
          * BEFORE ANYTHING ELSE
          *
          * If this condition is true, ANYTHING else below will be assumed to be true.
          * This is where we set the superadmin permission to allow superadmins to be able to do everything within the system.
-         *
          */
         Gate::before(function ($user, $ability) {
 
@@ -113,26 +142,23 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
-
-
-
         /**
          * GENERAL GATES
          *
          * These control general sections of the admin. These definitions are used in our blades via @can('blah) and also
          * use in our controllers to determine if a user has access to a certain area.
          */
-
         Gate::define('canEditAuthFields', function ($user, $item) {
 
             if ($item instanceof User) {
 
                 // if they can only edit users, deny them if the user is admin or superadmin
-                if (!$user->isAdmin()) {
+                if (! $user->isAdmin()) {
 
                     if ($item->isAdmin() || $item->isSuperUser()) {
                         return false;
                     }
+
                     return true;
                 }
 
@@ -151,7 +177,6 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
-
         /**
          * Define the demo mode gate so we have an easy way to use @can and Gate::allows()
          */
@@ -159,29 +184,12 @@ class AuthServiceProvider extends ServiceProvider
             if (config('app.lock_passwords')) {
                 return false;
             }
+
             return true;
         });
 
         Gate::define('admin', function ($user) {
             if ($user->hasAccess('admin')) {
-                return true;
-            }
-        });
-
-        Gate::define('accessories.files', function ($user) {
-            if ($user->hasAccess('accessories.files')) {
-                return true;
-            }
-        });
-
-        Gate::define('components.files', function ($user) {
-            if ($user->hasAccess('components.files')) {
-                return true;
-            }
-        });
-
-        Gate::define('consumables.files', function ($user) {
-            if ($user->hasAccess('consumables.files')) {
                 return true;
             }
         });
@@ -193,15 +201,62 @@ class AuthServiceProvider extends ServiceProvider
             }
         });
 
+        // True when the user has checkout permission on at least
+        // one of the five checkoutable types. Named for the
+        // underlying question ("can this user check out anything
+        // at all?") rather than a specific consumer surface, so
+        // it reads sensibly at every callsite:
+        //   - /requests page + API endpoint + nav link + bulk-
+        //     cancel bulk-actions widget: gate on this
+        //   - future consumers (any per-type checkout screen that
+        //     wants a "can this admin fulfill anything?" check)
+        //     inherit the same shape
+        // AssetModel isn't in the list because it has no
+        // models.checkout permission - model requests fulfill via
+        // checking out an Asset, so admins with assets.checkout
+        // implicitly cover both.
+        Gate::define('canCheckoutAtLeastOneItemType', function ($user) {
+            return $user->can('checkout', Asset::class)
+                || $user->can('checkout', Accessory::class)
+                || $user->can('checkout', Consumable::class)
+                || $user->can('checkout', Component::class)
+                || $user->can('checkout', License::class);
+        });
 
-        Gate::define('licenses.files', function ($user) {
-            if ($user->hasAccess('licenses.files')) {
-                return true;
+        // True when the user has any read access to a "fleet item or
+        // person" the app treats as first-class inventory. Powers the
+        // calendar sidenav gate, the dashboard's coarse admission
+        // gate, and the widened lookup-endpoint gates on Companies /
+        // Locations / Categories / Recent Activity.
+        //
+        // Two source lists are combined: HasCalendarEvents adopters
+        // (Asset, License, Maintenance, User, CheckoutRequest) so a
+        // new adopter of the trait is picked up automatically for
+        // calendar surfaces. Plus the three primary checkoutables
+        // (Accessory, Consumable, Component) that are NOT
+        // HasCalendarEvents adopters today but are still first-class
+        // inventory types. Without the second list, an accessory-only
+        // viewer would fail this gate despite the name implying they
+        // shouldn't, and the calendar sidebar would still render an
+        // empty calendar for them safely since those three don't (yet)
+        // publish calendar events.
+        Gate::define('canViewUsersAndCheckoutables', function ($user) {
+            foreach (CalendarEvent::sourceModels() as $sourceClass) {
+                if ($user->can('view', $sourceClass)) {
+                    return true;
+                }
             }
+            foreach ([Accessory::class, Consumable::class, Component::class] as $sourceClass) {
+                if ($user->can('view', $sourceClass)) {
+                    return true;
+                }
+            }
+
+            return false;
         });
 
         Gate::define('assets.view.encrypted_custom_fields', function ($user) {
-            if($user->hasAccess('assets.view.encrypted_custom_fields')){
+            if ($user->hasAccess('assets.view.encrypted_custom_fields')) {
                 return true;
             }
         });
@@ -249,7 +304,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasAccess('self.view_purchase_cost');
         });
 
-        // This is largely used to determine whether to display the gear icon sidenav 
+        // This is largely used to determine whether to display the gear icon sidenav
         // in the left-side navigation
         Gate::define('backend.interact', function ($user) {
             return $user->can('view', Statuslabel::class)
@@ -266,36 +321,69 @@ class AuthServiceProvider extends ServiceProvider
                 || $user->can('view', Depreciation::class);
         });
 
-
-        // This  determines whether or not an API user should be able to get the selectlists.
+        // This  determines whether or not a user should be able to get the selectlists.
         // This can seem a little confusing, since view properties may not have been granted
-        // to the logged in API user, but creating assets, licenses, etc won't work 
+        // to the logged in user, but creating assets, licenses, etc won't work
         // if the user can't view and interact with the select lists.
+        // Selectlists back form dropdowns across the app. A caller who
+        // can update, create, or check out any resource needs the
+        // dropdowns those forms depend on. A pure view-only caller
+        // does not: they browse tables via the index endpoints, not
+        // the selectlist endpoints. The pre-existing gate covered
+        // Asset / License / Component / Consumable / Accessory / User
+        // but silently 403'd anyone whose only permission was on one
+        // of the other admin resources (locations.edit ran into this on
+        // the parent + manager pickers). Extending the same
+        // update-or-create shape to every listable resource fixes
+        // that without granting view-only callers dropdowns they'd
+        // never have to use.
         Gate::define('view.selectlists', function ($user) {
-            return $user->can('update', Asset::class) 
-                || $user->can('create', Asset::class)    
-                || $user->can('checkout', Asset::class)
-                || $user->can('checkin', Asset::class)
-                || $user->can('audit', Asset::class)       
-                || $user->can('update', License::class)   
-                || $user->can('create', License::class)   
-                || $user->can('update', Component::class)
-                || $user->can('create', Component::class)   
-                || $user->can('update', Consumable::class)   
-                || $user->can('create', Consumable::class)   
-                || $user->can('update', Accessory::class)
-                || $user->can('create', Accessory::class)   
-                || $user->can('update', User::class)
-                || $user->can('create', User::class)
-                || ($user->hasAccess('reports.view'));
-        });
+            $resources = [
+                Asset::class,
+                License::class,
+                Component::class,
+                Consumable::class,
+                Accessory::class,
+                User::class,
+                Location::class,
+                Category::class,
+                Manufacturer::class,
+                Supplier::class,
+                Company::class,
+                Department::class,
+                Statuslabel::class,
+                Depreciation::class,
+                AssetModel::class,
+            ];
 
+            foreach ($resources as $resource) {
+                if ($user->can('update', $resource) || $user->can('create', $resource)) {
+                    return true;
+                }
+            }
+
+            $checkoutables = [
+                Asset::class,
+                Accessory::class,
+                Consumable::class,
+                Component::class,
+                License::class,
+            ];
+
+            foreach ($checkoutables as $checkoutable) {
+                if ($user->can('checkout', $checkoutable) || $user->can('checkin', $checkoutable)) {
+                    return true;
+                }
+            }
+
+            return $user->can('audit', Asset::class)
+                || $user->hasAccess('reports.view');
+        });
 
         // This determines whether the user can edit their profile based on the setting in Admin > General
         Gate::define('self.profile', function ($user) {
             return $user->canEditProfile();
         });
-
 
     }
 }

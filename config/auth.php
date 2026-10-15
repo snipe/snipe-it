@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+
 return [
 
     /*
@@ -46,6 +48,13 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        // Federated OIDC bearer guard (see config/oidc.php). Layered with
+        // Passport via `auth:oidc,api`; inert until OIDC is configured.
+        'oidc' => [
+            'driver' => 'oidc',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -68,7 +77,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => User::class,
         ],
 
         // 'users' => [
@@ -98,21 +107,14 @@ return [
             'email' => 'auth.emails.password',
             'table' => 'password_resets',
             'expire' => env('RESET_PASSWORD_LINK_EXPIRES', 900),
-            'throttle' => [
-                'max_attempts' => env('LOGIN_MAX_ATTEMPTS', 5),
-                'lockout_duration' => env('LOGIN_LOCKOUT_DURATION', 60),
-            ]
-
+            'throttle' => env('LOGIN_MAX_ATTEMPTS', 5),
         ],
 
         'invites' => [
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => env('INVITE_PASSWORD_LINK_EXPIRES', 2880),
-            'throttle' => [
-                'max_attempts' => env('LOGIN_MAX_ATTEMPTS', 5),
-                'lockout_duration' => env('LOGIN_LOCKOUT_DURATION', 60),
-            ]
+            'throttle' => env('LOGIN_MAX_ATTEMPTS', 5),
         ],
     ],
 
@@ -124,10 +126,30 @@ return [
     |
     */
     'password_reset' => [
-       'max_attempts_per_min' => env('PASSWORD_RESET_MAX_ATTEMPTS_PER_MIN', 50),
+        'max_attempts_per_min' => env('PASSWORD_RESET_MAX_ATTEMPTS_PER_MIN', 50),
     ],
 
+    'two_factor' => [
+        'max_attempts_per_min' => env('TWO_FACTOR_MAX_ATTEMPTS_PER_MIN', 5),
+    ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Login Form Throttle
+    |--------------------------------------------------------------------------
+    | Attempt / lockout ceiling for the local login form. Consumed by
+    | LoginController via Illuminate\Foundation\Auth\ThrottlesLogins.
+    |
+    | Kept as a dedicated top-level key rather than nested under
+    | `passwords.users` because Laravel 12 types
+    | DatabaseTokenRepository::$throttle as `int`, so an array value on
+    | that key TypeErrors password-reset construction.
+    |
+    */
+    'login_throttle' => [
+        'max_attempts' => env('LOGIN_MAX_ATTEMPTS', 5),
+        'lockout_duration' => env('LOGIN_LOCKOUT_DURATION', 60),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -140,8 +162,7 @@ return [
     |
     */
 
-    'password_timeout' =>  env('PASSWORD_CONFIRM_TIMEOUT', 10800),
-
+    'password_timeout' => env('PASSWORD_CONFIRM_TIMEOUT', 10800),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,38 +1,37 @@
 <?php
 
-return array(
+return [
 
     'invalid_category_type' => 'A kategóriának fogyóeszköz típusúnak kell lennie.',
     'does_not_exist' => 'A fogyóeszköz nem létezik.',
 
-    'create' => array(
-        'error'   => 'A kellék nem jött létre, kérlek próbáld meg újra.',
-        'success' => 'A Kellékek sikeresen létrejött.'
-    ),
+    'create' => [
+        'error' => 'Fogyóeszköz létrehozása sikertelen, próbálja újra.',
+        'success' => 'Fogyóeszköz sikeresen létrehozva.',
+    ],
 
-    'update' => array(
-        'error'   => 'A kellék nem frissült, kérlek próbáld meg újra',
-        'success' => 'A Kellékek sikeresen frissítve.'
-    ),
+    'update' => [
+        'error' => 'A fogyóeszközt nem sikerült frissíteni, próbálja újra',
+        'success' => 'Fogyóeszköz sikeresen frissítve.',
+    ],
 
-    'delete' => array(
-        'confirm'   => 'Biztosan törli ezt a kelléket?',
-        'error'   => 'Probléma támadt a kellék törlésével. Próbálkozz újra.',
-        'success' => 'A kellék sikeresen törölve lett.'
-    ),
+    'delete' => [
+        'confirm' => 'Biztosan törli ezt a fogyóeszközt?',
+        'error' => 'Hiba történt a fogyóeszköz törlése során. Próbálja újra.',
+        'success' => 'A kellék sikeresen törölve lett.',
+    ],
 
-     'checkout' => array(
-        'error'   		=> 'A kellék nem lett kiadva, próbálkozz újra',
-        'success' 		=> 'A kellék sikeresen kiadva.',
+    'checkout' => [
+        'error' => 'A fogyóeszköz nem lett kiadva, próbálkozzon újra',
+        'success' => 'Fogyóeszköz sikeresen kiadva.',
         'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.',
-         'unavailable'      => 'Nincs elegendő fogyóeszköz amit ki lehetne adni. Ellenőrizd a kiadható mennyiséget. ',
-    ),
+        'unavailable' => 'Nincs elegendő fogyóeszköz amit ki lehetne adni. Ellenőrizd a kiadható mennyiséget. ',
+    ],
 
-    'checkin' => array(
-        'error'   		=> 'A kellék nem lett visszavéve, próbálkozz újra',
-        'success' 		=> 'A kellék sikeresen visszavéve.',
-        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.'
-    )
+    'checkin' => [
+        'error' => 'A fogyóeszköz nem lett visszavéve, próbálkozzon újra',
+        'success' => 'A kellék sikeresen visszavéve.',
+        'user_does_not_exist' => 'Érvénytelen felhasználó. Kérem, próbálja újra.',
+    ],
 
-
-);
+];

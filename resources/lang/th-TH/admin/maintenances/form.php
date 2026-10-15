@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Select Maintenance Type',
-        'asset_maintenance_type' => 'ประเภทการซ่อมบำรุงสินทรัพย์',
-        'title'                  => 'ชื่อเรื่อง',
-        'start_date'             => 'วันที่เริ่มต้น',
-        'completion_date'        => 'วันที่แล้วเสร็จ',
-        'cost'                   => 'ราคา',
-        'is_warranty'            => 'การปรับปรุงการรับประกัน',
-        'asset_maintenance_time' => 'ระยะเวลาการซ่อมบำรุงสินทรัพย์ (หน่วยเป็น วัน)',
-        'notes'                  => 'หมายเหตุ',
-        'update'                 => 'แก้ไขการซ่อมบำรุงสินทรัพย์',
-        'create'                 => 'สร้างการซ่อมบำรุงสินทรัพย์'
-    ];
+return [
+    'select_type' => 'เลือกประเภทการซ่อมบำรุง',
+    'asset_maintenance_type' => 'ประเภท',
+    'title' => 'ชื่อเรื่อง',
+    'start_date' => 'วันที่เริ่มต้น',
+    'completion_date' => 'Expected Completion',
+    'cost' => 'ราคา',
+    'is_warranty' => 'การปรับปรุงการรับประกัน',
+    'asset_maintenance_time' => 'Duration',
+    'notes' => 'หมายเหตุ',
+    'update' => 'แก้ไขการซ่อมบำรุงสินทรัพย์',
+    'create' => 'สร้างการซ่อมบำรุงสินทรัพย์',
+    'responsible_party' => 'Responsible Party',
+    'checked_out_to_at_creation' => 'เช็คเอ้าท์ให้กับ',
+    'completed_at' => 'Completed At',
+    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_by' => 'Completed By',
+    'mark_complete' => 'Mark Complete',
+    'already_complete' => 'Already Completed',
+    'completion_notes' => 'Completion Notes',
+];

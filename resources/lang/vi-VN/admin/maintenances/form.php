@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Select Maintenance Type',
-        'asset_maintenance_type' => 'Lại duy trì tài sản',
-        'title'                  => 'Tiêu đề',
-        'start_date'             => 'Ngày Bắt Đầu',
-        'completion_date'        => 'Ngày hoàn thành',
-        'cost'                   => 'Chi phí',
-        'is_warranty'            => 'Tăng bảo hành',
-        'asset_maintenance_time' => 'Thời gian bảo trì tài sản (ngày)',
-        'notes'                  => 'Ghi chú',
-        'update'                 => 'Cập nhật tài sản đang bảo trì',
-        'create'                 => 'Tạo Bảo hành Tài sản'
-    ];
+return [
+    'select_type' => 'Select Maintenance Type',
+    'asset_maintenance_type' => 'Loại',
+    'title' => 'Tiêu đề',
+    'start_date' => 'Ngày Bắt Đầu',
+    'completion_date' => 'Expected Completion',
+    'cost' => 'Chi phí',
+    'is_warranty' => 'Tăng bảo hành',
+    'asset_maintenance_time' => 'Duration',
+    'notes' => 'Ghi chú',
+    'update' => 'Cập nhật tài sản đang bảo trì',
+    'create' => 'Tạo Bảo hành Tài sản',
+    'responsible_party' => 'Responsible Party',
+    'checked_out_to_at_creation' => 'Checkout đến',
+    'completed_at' => 'Completed At',
+    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_by' => 'Completed By',
+    'mark_complete' => 'Mark Complete',
+    'already_complete' => 'Already Completed',
+    'completion_notes' => 'Completion Notes',
+];

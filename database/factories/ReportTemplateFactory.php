@@ -15,11 +15,27 @@ class ReportTemplateFactory extends Factory
     public function definition()
     {
         return [
+            'type' => 'asset',
             'name' => $this->faker->word(),
             'options' => [
                 'id' => '1',
             ],
             'created_by' => User::factory(),
+            'is_shared' => 0,
         ];
+    }
+
+    public function shared()
+    {
+        return $this->state(function () {
+            return ['is_shared' => 1];
+        });
+    }
+
+    public function notShared()
+    {
+        return $this->state(function () {
+            return ['is_shared' => 0];
+        });
     }
 }

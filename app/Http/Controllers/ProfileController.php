@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FileStorage;
 use App\Http\Requests\ImageUploadRequest;
-use App\Http\Transformers\ProfileTransformer;
 use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
+use App\Rules\CssColor;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\RedirectResponse;
-use \Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -31,12 +32,14 @@ class ProfileController extends Controller
      * Returns a view with the user's profile form for editing
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v1.0]
      */
-    public function getIndex() : View
+    public function getIndex(): View
     {
 
         $user = auth()->user();
+
         return view('account/profile', compact('user'));
     }
 
@@ -44,9 +47,10 @@ class ProfileController extends Controller
      * Validates and stores the user's update data.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v1.0]
      */
-    public function postIndex(ImageUploadRequest $request) : RedirectResponse
+    public function postIndex(ImageUploadRequest $request): RedirectResponse
     {
 
         $user = auth()->user();
@@ -59,14 +63,18 @@ class ProfileController extends Controller
             $user->phone = $request->input('phone');
         }
 
-
         $user->enable_sounds = $request->input('enable_sounds', false);
         $user->enable_confetti = $request->input('enable_confetti', false);
+        $request->validate([
+            'link_light_color' => ['nullable', new CssColor],
+            'link_dark_color' => ['nullable', new CssColor],
+            'nav_link_color' => ['nullable', new CssColor],
+        ]);
+
         $user->link_light_color = $request->input('link_light_color', '#296282');
         $user->link_dark_color = $request->input('link_dark_color', '#296282');
         $user->nav_link_color = $request->input('nav_link_color', '#FFFFFF');
         $user->locale = $request->input('locale');
-
 
         if ((Gate::allows('self.two_factor')) && ((Setting::getSettings()->two_factor_enabled == '1') && (! config('app.lock_passwords')))) {
             $user->two_factor_optin = $request->input('two_factor_optin', '0');
@@ -79,14 +87,12 @@ class ProfileController extends Controller
         // Handle the avatar upload and/or delete if necessary
         app('\App\Http\Requests\ImageUploadRequest')->handleImages($user, 600, 'avatar', 'avatars', 'avatar');
 
-
         if ($user->save()) {
             return redirect()->route('profile')->with('success', trans('account/general.profile_updated'));
         }
 
         return redirect()->back()->withInput()->withErrors($user->getErrors());
     }
-
 
     /**
      * Returns a page with the API token generation interface.
@@ -95,12 +101,13 @@ class ProfileController extends Controller
      * in the routes file if you want to be able to cache the routes.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
      */
     public function api(): View
     {
         // Make sure the self.api permission has been granted
-        if (!Gate::allows('self.api')) {
+        if (! Gate::allows('self.api')) {
             abort(403);
         }
 
@@ -109,22 +116,22 @@ class ProfileController extends Controller
 
     /**
      * User change email page.
-     *
      */
-    public function password() : View | RedirectResponse
+    public function password(): View|RedirectResponse
     {
 
         $user = auth()->user();
-        if ($user->ldap_import=='1') {
+        if ($user->ldap_import == '1') {
             return redirect()->route('account')->with('error', trans('admin/users/message.error.password_ldap'));
         }
+
         return view('account/change-password', compact('user'));
     }
 
     /**
      * Users change password form processing page.
      */
-    public function passwordSave(Request $request) : RedirectResponse
+    public function passwordSave(Request $request): RedirectResponse
     {
         if (config('app.lock_passwords')) {
             return redirect()->route('account.password.index')->with('error', trans('admin/users/table.lock_passwords'));
@@ -136,8 +143,8 @@ class ProfileController extends Controller
         }
 
         $rules = [
-            'current_password'     => 'required',
-            'password'         => Setting::passwordComplexityRulesSaving('store').'|confirmed',
+            'current_password' => 'required',
+            'password' => Setting::passwordComplexityRulesSaving('store').'|confirmed',
         ];
 
         $validator = \Validator::make($request->all(), $rules);
@@ -171,14 +178,15 @@ class ProfileController extends Controller
             $user->password = Hash::make($request->input('password'));
             // We have to use saveQuietly here because for some reason this method was calling the User Oserver twice :(
             $user->saveQuietly();
-            
+
             // Log the user out of other devices
             Auth::logoutOtherDevices($request->input('password'));
+
             return redirect()->route('account')->with('success', trans('passwords.password_change'));
 
         }
-        return redirect()->back()->withInput()->withErrors($validator);
 
+        return redirect()->back()->withInput()->withErrors($validator);
 
     }
 
@@ -190,9 +198,10 @@ class ProfileController extends Controller
      * resources/views/layouts/default.blade.php
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
      */
-    public function getMenuState(Request $request) : void
+    public function getMenuState(Request $request): void
     {
         if ($request->input('state') == 'open') {
             $request->session()->put('menu_state', 'open');
@@ -201,36 +210,49 @@ class ProfileController extends Controller
         }
     }
 
-
     /**
      * Print inventory
      *
      * @author A. Gianotto
+     *
      * @since [v6.0.12]
      */
-    public function printInventory() : View
+    public function printInventory(): View
     {
-        $show_users = User::where('id',auth()->user()->id)->get();
+        $userId = auth()->id();
 
-        return view('users/print')
-            ->with('assets', auth()->user()->assets())
-            ->with('licenses', auth()->user()->licenses()->get())
-            ->with('accessories', auth()->user()->accessories()->get())
-            ->with('consumables', auth()->user()->consumables()->get())
-            ->with('users', $show_users)
-            ->with('settings', Setting::getSettings());
+        $show_user = User::withInventoryRelations($userId)->first();
+
+        $indirectItemsCount =
+            $show_user->assets->flatMap->assignedAssets->count()
+            + $show_user->assets->flatMap->components->count()
+            + $show_user->assets->flatMap->licenses->count()
+            + $show_user->assets->flatMap->assignedAccessories->count();
+
+        // Users printing their own inventory always see their own items,
+        // regardless of the class-level view permission for each resource.
+        return view('users.print')
+            ->with('users', [$show_user])
+            ->with('indirectItemsCount', $indirectItemsCount)
+            ->with('settings', Setting::getSettings())
+            ->with('canViewAssets', true)
+            ->with('canViewLicenses', true)
+            ->with('canViewAccessories', true)
+            ->with('canViewConsumables', true)
+            ->with('canViewComponents', true);
     }
 
     /**
      * Emails user a list of assigned assets
      *
      * @author A. Gianotto
+     *
      * @since [v6.0.12]
      */
-    public function emailAssetList() : RedirectResponse
+    public function emailAssetList(): RedirectResponse
     {
 
-        if (!$user = User::find(auth()->id())) {
+        if (! $user = User::find(auth()->id())) {
             return redirect()->back()
                 ->with('error', trans('admin/users/message.user_not_found', ['id' => auth()->id()]));
         }
@@ -247,30 +269,38 @@ class ProfileController extends Controller
         return redirect()->back()->with('success', trans('admin/users/general.user_notified'));
     }
 
-
-
-    public function getStoredEula($filename) : Response | BinaryFileResponse | RedirectResponse
+    public function getStoredEula($filename): Response|BinaryFileResponse|RedirectResponse
     {
+        $filename = basename((string) $filename);
 
-        $logentry = Actionlog::where('filename', $filename)->first();
+        $logentry = Actionlog::where('filename', $filename)
+            ->where('action_type', 'accepted')
+            ->with('target')
+            ->first();
 
-        // Make sure the user has permission to view this file
-        // Also allow if the user (manager) able to view both users and assets
-        $allowed_to_view_users_assets = Gate::allows('view', User::class) && Gate::allows('view', Asset::class);
+        if (! $logentry) {
+            return redirect()->back()->with('error', trans('general.record_not_found'));
+        }
 
-        if (auth()->id() != $logentry->target_id && !$allowed_to_view_users_assets) {
-            return redirect()->route('account')->with('error', trans('general.generic_model_not_found', ['model' => 'file']));
+        // #19344: end users need to be able to download their own accepted
+        // EULA without holding users.view. Anyone else falls back to the
+        // regular view-user permission check.
+        $isOwnAcceptance = $logentry->target_type === User::class
+            && (int) $logentry->target_id === (int) auth()->id();
+
+        if (! $isOwnAcceptance) {
+            $this->authorize('view', $logentry->target);
         }
 
         if (config('filesystems.default') == 's3_private') {
-            return redirect()->away(Storage::disk('s3_private')->temporaryUrl('private_uploads/eula-pdfs/'.$filename, now()->addMinutes(5)));
+            return redirect()->away(Storage::disk('s3_private')->temporaryUrl(FileStorage::EulaPdfs->privateStorageKey().$filename, now()->addMinutes(5)));
         }
 
-        if (Storage::exists('private_uploads/eula-pdfs/'.$filename)) {
+        if (Storage::exists(FileStorage::EulaPdfs->privateStorageKey().$filename)) {
             return response()->download(config('app.private_uploads').'/eula-pdfs/'.$filename);
         }
 
-        return redirect()->back()->with('error',  trans('general.file_does_not_exist'));
+        return redirect()->back()->with('error', trans('general.file_does_not_exist'));
 
     }
 }

@@ -2,8 +2,11 @@
 
 namespace App\Models\Traits;
 
+use App\Exceptions\MissingLogTarget;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\CompanyableScope;
+use App\Models\ICompanyableChild;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Location;
@@ -14,7 +17,8 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Osama\LaravelTeamsNotification\TeamsNotification;
@@ -26,13 +30,95 @@ trait Loggable
     public ?bool $imported = false;
 
     /**
-     * @author Daniel Meltzer <dmeltzer.devel@gmail.com>
+     * @return MorphMany
+     *
      * @since  [v3.4]
-     * @return \App\Models\Actionlog
+     *
+     * @author Daniel Meltzer <dmeltzer.devel@gmail.com>
      */
     public function log()
     {
         return $this->morphMany(Actionlog::class, 'item');
+    }
+
+    public function history()
+    {
+        // Bypass FMCS company scoping: access is already gated by the policy on the
+        // parent object. Objects like AssetModel and Company have no company_id, so
+        // their history logs always have company_id = null, which the scope would hide.
+        return $this->morphMany(Actionlog::class, 'item')
+            ->withoutGlobalScope(CompanyableScope::class)
+            ->orWhere(function ($query) {
+                $query->where('target_type', '=', static::class)
+                    ->where('target_id', '=', $this->getKey());
+            });
+    }
+
+    public function getHistory(Request $request)
+    {
+        $allowed_columns = [
+            'id',
+            'created_at',
+            'target_id',
+            'created_by',
+            'accept_signature',
+            'action_type',
+            'note',
+            'remote_ip',
+            'user_agent',
+            'target_type',
+            'item_type',
+            'action_source',
+            'action_date',
+        ];
+
+        // Start with the polymorphic history relation so all filters and
+        // ordering are applied to the same query instance.
+        //
+        // 'orderItem.order' eager-loaded because ActionlogsTransformer
+        // renders order_number / purchase_order via the OrderItem line
+        // to its parent Order. Without this the transformer fires an
+        // N+1 subquery per row in the history tab.
+        $history = $this->history()->with('orderItem.order');
+
+        if ($request->filled('search')) {
+            $history = $history->TextSearch(e($request->input('search')));
+        }
+
+        if ($request->filled('action_type')) {
+            $history = $history->where('action_type', '=', $request->input('action_type'));
+        }
+
+        if ($request->filled('created_by')) {
+            $history = $history->where('created_by', '=', $request->input('created_by'));
+        }
+
+        if ($request->filled('action_source')) {
+            $history = $history->where('action_source', '=', $request->input('action_source'));
+        }
+
+        if ($request->filled('remote_ip')) {
+            $history = $history->where('remote_ip', '=', $request->input('remote_ip'));
+        }
+
+        if ($request->filled('uploads')) {
+            $history = $history->whereNotNull('filename');
+        }
+
+        $order = ($request->input('order') == 'asc') ? 'asc' : 'desc';
+
+        switch ($request->input('sort')) {
+            case 'created_by':
+                $history = $history->OrderByCreatedBy($order);
+                break;
+            default:
+                $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'action_logs.created_at';
+                $history = $history->orderBy($sort, $order);
+                break;
+        }
+
+        return $history->forApiHistory();
+
     }
 
     public function setImported(bool $bool): void
@@ -42,8 +128,17 @@ trait Loggable
 
     /**
      * @author Daniel Meltzer <dmeltzer.devel@gmail.com>
+     *
      * @since  [v3.4]
-     * @return \App\Models\Actionlog
+     *
+     * @return Actionlog
+     *
+     * @throws MissingLogTarget When the caller couldn't hand us a valid
+     *                          target. Deliberately typed so callers wrapping
+     *                          their work in a DB::transaction can catch it
+     *                          specifically, roll the transaction back, and
+     *                          return a proper 4xx response body instead of
+     *                          letting an unhandled 500 leak into the caller.
      */
     public function logCheckout($note, $target, $action_date = null, $originalValues = [], $quantity = 1)
     {
@@ -58,20 +153,15 @@ trait Loggable
         }
 
         if (! isset($target)) {
-            throw new \Exception('All checkout logs require a target.');
-
-            return;
+            throw new MissingLogTarget('All checkout logs require a target.');
         }
 
         if (! isset($target->id)) {
-            throw new \Exception('That target seems invalid (no target ID available).');
-
-            return;
+            throw new MissingLogTarget('That target seems invalid (no target ID available).');
         }
 
         $log->target_type = get_class($target);
         $log->target_id = $target->id;
-
 
         // Figure out what the target is
         if ($log->target_type == Location::class) {
@@ -100,12 +190,12 @@ trait Loggable
         $log->note = $note;
         $log->action_date = $action_date;
         $log->quantity = $quantity;
+        $log->company_id = $this->resolveLoggableCompanyId();
 
         $changed = [];
         $array_to_flip = array_keys($fields_array);
-        $array_to_flip = array_merge($array_to_flip, ['name','status_id','location_id','expected_checkin']);
+        $array_to_flip = array_merge($array_to_flip, ['name', 'status_id', 'location_id', 'expected_checkin', 'requestable']);
         $originalValues = array_intersect_key($originalValues, array_flip($array_to_flip));
-
 
         foreach ($originalValues as $key => $value) {
             // TODO - action_date isn't a valid attribute of any first-class object, so we might want to remove this?
@@ -119,7 +209,7 @@ trait Loggable
             // NOTE - if the attribute exists in $originalValues, but *not* in ->getAttributes(), it isn't added to $changed
         }
 
-        if (!empty($changed)) {
+        if (! empty($changed)) {
             $log->log_meta = json_encode($changed);
         }
 
@@ -146,9 +236,42 @@ trait Loggable
     }
 
     /**
+     * Resolve the company_id that should be stamped on an action log entry.
+     *
+     * LicenseSeat does not carry a company_id directly — it belongs to a License,
+     * so we fetch the parent license's company_id in that case.  All other models
+     * that use the Loggable trait have a company_id column directly.
+     */
+    private function resolveLoggableCompanyId(): ?int
+    {
+        if (static::class === LicenseSeat::class) {
+            return $this->license?->company_id;
+        }
+
+        if (isset($this->company_id)) {
+            return $this->company_id;
+        }
+
+        // Companyable children (like Maintenance) inherit company visibility from parents.
+        if ($this instanceof ICompanyableChild) {
+            foreach ((array) $this->getCompanyableParents() as $parentRelation) {
+                $parent = $this->{$parentRelation} ?? null;
+
+                if (isset($parent?->company_id)) {
+                    return $parent->company_id;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * @author Daniel Meltzer <dmeltzer.devel@gmail.com>
+     *
      * @since  [v3.4]
-     * @return \App\Models\Actionlog
+     *
+     * @return Actionlog
      */
     public function logCheckin($target, $note, $action_date = null, $originalValues = [])
     {
@@ -156,7 +279,7 @@ trait Loggable
 
         $fields_array = [];
 
-        if($target != null) {
+        if ($target != null) {
             $log->target_type = get_class($target);
             $log->target_id = $target->id;
 
@@ -189,8 +312,9 @@ trait Loggable
         $log->location_id = null;
         $log->note = $note;
         $log->action_date = $action_date;
+        $log->company_id = $this->resolveLoggableCompanyId();
 
-        if (!$action_date) {
+        if (! $action_date) {
             $log->action_date = date('Y-m-d H:i:s');
         }
 
@@ -201,7 +325,7 @@ trait Loggable
         $changed = [];
 
         $array_to_flip = array_keys($fields_array);
-        $array_to_flip = array_merge($array_to_flip, ['name','status_id','location_id','expected_checkin']);
+        $array_to_flip = array_merge($array_to_flip, ['name', 'status_id', 'location_id', 'expected_checkin', 'requestable']);
 
         $originalValues = array_intersect_key($originalValues, array_flip($array_to_flip));
 
@@ -216,7 +340,7 @@ trait Loggable
             }
         }
 
-        if (!empty($changed)) {
+        if (! empty($changed)) {
             $log->log_meta = json_encode($changed);
         }
 
@@ -226,25 +350,48 @@ trait Loggable
     }
 
     /**
+     * Logs a force checkin action for orphaned assignments.
+     *
+     * Force checkin only records an explicit action log entry and intentionally
+     * skips checkin counters and changed-field metadata.
+     *
+     * @return Actionlog
+     */
+    public function logForceCheckin($note = null)
+    {
+        $log = new Actionlog;
+
+        $log = $this->determineLogItemType($log);
+        $log->location_id = null;
+        $log->note = $note;
+        $log->action_date = date('Y-m-d H:i:s');
+
+        if (auth()->user()) {
+            $log->created_by = auth()->id();
+        }
+
+        $log->logaction('force checkin');
+
+        return $log;
+    }
+
+    /**
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since  [v4.0]
-     * @return \App\Models\Actionlog
+     *
+     * @return Actionlog
      */
     public function logAudit($note, $location_id, $filename = null, $originalValues = [])
     {
 
         $log = new Actionlog;
 
-        if (static::class == Asset::class) {
-            if ($asset = Asset::find($log->item_id)) {
-                // add the custom fields that were changed
-                if ($asset->model->fieldset) {
-                    $fields_array = [];
-                    foreach ($asset->model->fieldset->fields as $field) {
-                        if ($field->display_audit == 1) {
-                            $fields_array[$field->db_column] = $asset->{$field->db_column};
-                        }
-                    }
+        $fields_array = [];
+        if (static::class == Asset::class && $this->model && $this->model->fieldset) {
+            foreach ($this->model->fieldset->fields as $field) {
+                if ($field->display_audit == 1) {
+                    $fields_array[$field->db_column] = $this->{$field->db_column};
                 }
             }
         }
@@ -260,10 +407,13 @@ trait Loggable
             }
         }
 
-        if (!empty($changed)) {
-            $log->log_meta = json_encode($changed);
+        if (! empty($fields_array)) {
+            $changed['_audit_snapshot'] = $fields_array;
         }
 
+        if (! empty($changed)) {
+            $log->log_meta = json_encode($changed);
+        }
 
         $location = Location::find($location_id);
         if (static::class == LicenseSeat::class) {
@@ -278,6 +428,8 @@ trait Loggable
         $log->created_by = auth()->id();
         $log->filename = $filename;
         $log->action_date = date('Y-m-d H:i:s');
+        // Explicitly stamp company_id from the item being audited so FMCS scoping works correctly.
+        $log->company_id = $this->resolveLoggableCompanyId();
         $log->logaction('audit');
 
         $params = [
@@ -288,7 +440,7 @@ trait Loggable
             'note' => $note,
         ];
 
-        if(Setting::getSettings()->webhook_selected === 'microsoft' && Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {
+        if (Setting::getSettings()->webhook_selected === 'microsoft' && Str::contains(Setting::getSettings()->webhook_endpoint, 'workflows')) {
 
             $endpoint = Setting::getSettings()->webhook_endpoint;
 
@@ -300,12 +452,12 @@ trait Loggable
             } catch (ConnectException $e) {
                 Log::warning('Teams webhook connection failed', [
                     'endpoint' => $endpoint,
-                    'error' => $e->getMessage()
+                    'error' => $e->getMessage(),
                 ]);
 
             } catch (ServerException $e) {
 
-                Log::error('Teams webhook server error', [
+                Log::warning('Teams webhook server error', [
                     'endpoint' => $endpoint,
                     'status' => $e->getResponse()?->getStatusCode(),
                     'error' => $e->getMessage(),
@@ -320,20 +472,28 @@ trait Loggable
                 ]);
             } catch (RequestException $e) {
 
-                Log::error('Teams webhook request failure', [
+                Log::warning('Teams webhook request failure', [
                     'endpoint' => $endpoint,
                     'error' => $e->getMessage(),
                 ]);
-            }catch (Throwable $e) {
-                Log::error('Teams webhook failed unexpectedly', [
+            } catch (Throwable $e) {
+                Log::warning('Teams webhook failed unexpectedly', [
                     'endpoint' => $endpoint,
                     'exception' => get_class($e),
                     'error' => $e->getMessage(),
                 ]);
             }
-        }
-        else {
-            Setting::getSettings()->notify(new AuditNotification($params));
+        } else {
+            try {
+                Setting::getSettings()->notify(new AuditNotification($params));
+            } catch (Throwable $e) {
+                Log::warning('Audit webhook notification failed', [
+                    'endpoint' => Setting::getSettings()->webhook_endpoint,
+                    'channel' => Setting::getSettings()->webhook_selected,
+                    'exception' => get_class($e),
+                    'error' => $e->getMessage(),
+                ]);
+            }
         }
 
         return $log;
@@ -341,8 +501,10 @@ trait Loggable
 
     /**
      * @author Daniel Meltzer <dmeltzer.devel@gmail.com>
+     *
      * @since  [v3.5]
-     * @return \App\Models\Actionlog
+     *
+     * @return Actionlog
      */
     public function logCreate($note = null)
     {
@@ -362,6 +524,7 @@ trait Loggable
         $log->action_date = date('Y-m-d H:i:s');
         $log->note = $note;
         $log->created_by = $created_by;
+        $log->company_id = $this->resolveLoggableCompanyId();
         $log->logaction('create');
         $log->save();
 
@@ -370,8 +533,10 @@ trait Loggable
 
     /**
      * @author Daniel Meltzer <dmeltzer.devel@gmail.com>
+     *
      * @since  [v3.4]
-     * @return \App\Models\Actionlog
+     *
+     * @return Actionlog
      */
     public function logUpload($filename, $note)
     {
@@ -386,6 +551,7 @@ trait Loggable
         $log->created_by = auth()->id();
         $log->note = $note;
         $log->target_id = null;
+        $log->company_id = $this->resolveLoggableCompanyId();
         $log->created_at = date('Y-m-d H:i:s');
         $log->action_date = date('Y-m-d H:i:s');
         $log->filename = $filename;
@@ -401,7 +567,6 @@ trait Loggable
      * Returns the latest acceptance ActionLog that contains a signature
      * from $user or null if there is none
      *
-     * @param  User $user
      * @return null|Actionlog
      **/
     public function getLatestSignedAcceptance(User $user)

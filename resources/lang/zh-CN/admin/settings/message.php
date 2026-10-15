@@ -3,30 +3,35 @@
 return [
 
     'update' => [
-        'error'                 => '更新过程中出现了问题。',
-        'success'               => '设置配置信息更新成功。',
+        'error' => '更新过程中出现了问题。',
+        'success' => '设置配置信息更新成功。',
     ],
     'backup' => [
-        'delete_confirm'        => '你确定你想要删除该备份文件? 此操作无法撤消。 ',
-        'file_deleted'          => '备份文件已成功删除。 ',
-        'generated'             => '成功地创建了一个新的备份文件。',
-        'file_not_found'        => '在服务器上找不到备份文件。',
-        'restore_warning'       => '是的，还原它。我确认这将覆盖当前数据库中的所有数据。 这也将注销所有现有用户 (包括您)。',
-        'restore_confirm'       => '您确定要从 :filename还原您的数据库吗？'
+        'delete_confirm' => '你确定你想要删除该备份文件? 此操作无法撤消。 ',
+        'file_deleted' => '备份文件已成功删除。 ',
+        'generated' => '成功地创建了一个新的备份文件。',
+        'file_not_found' => '在服务器上找不到备份文件。',
+        'restore_warning' => '是的，还原它。我确认这将覆盖当前数据库中的所有数据。 这也将注销所有现有用户 (包括您)。',
+        'restore_confirm' => '您确定要从 :filename还原您的数据库吗？',
+        'delete_disabled_help' => 'Deleting backups is disabled. Contact your administrator if you wish to enable deleting backups.',
     ],
     'restore' => [
-        'success'               => '您的系统备份已恢复。请重新登录。'
+        'success' => '您的系统备份已恢复。请重新登录。',
+        'archive_invalid' => 'The selected backup file (:filename) is not a valid zip archive. Restore aborted before touching the database.',
+        'zip_extension_missing' => 'PHP zip extension is not loaded on this server. Cannot validate the backup archive, and restore has been aborted to prevent data loss. Ask your server administrator to install ext-zip.',
+        'pre_backup_failed' => 'Could not create a pre-restore safety backup. Restore aborted so that the existing database is not destroyed without a recovery path.',
+        'failed_with_backup' => 'Restore failed. The pre-existing database was wiped as part of the restore attempt, but a pre-restore backup was saved to :backup and can be used to recover.',
     ],
     'purge' => [
-        'error'     => '清除过程中出现了错误。 ',
-        'validation_failed'     => '你的清除确认信息不正确，请在输入框中输入“DELETE”。',
-        'success'               => '删除记录已被成功的清除。',
+        'error' => '清除过程中出现了错误。 ',
+        'validation_failed' => '你的清除确认信息不正确，请在输入框中输入“DELETE”。',
+        'success' => '删除记录已被成功的清除。',
     ],
     'mail' => [
         'sending' => '正在发送测试邮件...',
         'success' => '邮件已发送！',
         'error' => '邮件无法发送。',
-        'additional' => '没有提供额外的错误信息。请检查您的邮件设置和应用日志。'
+        'additional' => '没有提供额外的错误信息。请检查您的邮件设置和应用日志。',
     ],
     'ldap' => [
         'testing' => '测试 LDAP 连接，绑定和查询 ...',
@@ -34,11 +39,11 @@ return [
         'error' => '出错了:(',
         'sync_success' => '基于您的设置，从LDAP服务器返回的10个用户样本：',
         'testing_authentication' => '测试 LDAP 身份验证...',
-        'authentication_success' => '用户已成功通过LDAP认证！'
+        'authentication_success' => '用户已成功通过LDAP认证！',
     ],
     'labels' => [
         'null_template' => '未找到标签模板。请选择一个模板。',
-        ],
+    ],
     'webhook' => [
         'sending' => '正在发送 :app 测试消息...',
         'success' => '您的 :webhook_name 集成工作正常！',
@@ -55,5 +60,22 @@ return [
     'location_scoping' => [
         'not_saved' => '您的设置未保存。',
         'mismatch' => '在启用位置范围限定功能之前，数据库中有1个待处理项目需要您关注。|在启用位置范围限定功能之前，数据库中有:count个待处理项目需要您关注。',
+    ],
+    'oauth' => [
+        'token_revoked' => 'Personal access token revoked successfully.',
+        'token_unrevoked' => 'Personal access token reinstated successfully.',
+        'token_not_found' => 'That personal access token could not be found.',
+        'token_revoke_error' => 'An error occurred while revoking the token.',
+        'token_unrevoke_error' => 'An error occurred while reinstating the token.',
+        'client_created' => 'OAuth client created successfully.',
+        'client_updated' => 'OAuth client updated successfully.',
+        'client_deleted' => 'OAuth client deleted successfully.',
+        'client_revoked' => 'OAuth client revoked successfully.',
+        'client_unrevoked' => 'OAuth client reinstated successfully.',
+        'client_not_found' => 'That OAuth client could not be found.',
+        'token_deleted' => 'Token revoked successfully.',
+        'client_delete_denied' => 'You are not authorized to delete this client.',
+        'client_edit_denied' => 'You are not authorized to edit this client.',
+        'token_delete_denied' => 'You are not authorized to revoke this token.',
     ],
 ];

@@ -19,11 +19,6 @@
 
       <div class="box-header with-border">
         <h2 class="box-title">{{ trans('admin/custom_fields/general.fieldsets') }}</h2>
-        <div class="box-tools pull-right">
-          @can('create', \App\Models\CustomFieldset::class)
-          <a href="{{ route('fieldsets.create') }}" class="btn btn-sm btn-theme" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_fieldset_title') }}">{{ trans('admin/custom_fields/general.create_fieldset') }}</a>
-          @endcan
-        </div>
       </div><!-- /.box-header -->
 
       <div class="box-body">
@@ -37,17 +32,17 @@
                 data-advanced-search="false"
                 id="customFieldsetTable"
                 data-buttons="customFieldsetButtons"
-                class="table table-striped snipe-table"
+                class="table table-striped snipe-table snipe-table--sticky-right-1"
                 data-export-options='{
                 "fileName": "export-fieldsets-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
           <thead>
             <tr>
-              <th>{{ trans('general.name') }}</th>
-              <th>{{ trans('admin/custom_fields/general.qty_fields') }}</th>
-              <th>{{ trans('admin/custom_fields/general.used_by_models') }}</th>
-              <th>{{ trans('table.actions') }}</th>
+              <th scope="col">{{ trans('general.name') }}</th>
+              <th scope="col">{{ trans('admin/custom_fields/general.qty_fields') }}</th>
+              <th scope="col">{{ trans('admin/custom_fields/general.used_by_models') }}</th>
+              <th scope="col">{{ trans('table.actions') }}</th>
             </tr>
           </thead>
 
@@ -56,14 +51,14 @@
             @foreach($custom_fieldsets AS $fieldset)
             <tr>
               <td>
-                {{ link_to_route("fieldsets.show",$fieldset->name,['fieldset' => $fieldset->id]) }}
+                <a href="{{ route('fieldsets.show', ['fieldset' => $fieldset->id]) }}">{{ $fieldset->name }}</a>
               </td>
               <td>
                 {{ $fieldset->fields->count() }}
               </td>
               <td>
                 @foreach($fieldset->models as $model)
-                  <a href="{{ route('models.show', $model->id) }}" class="label label-default">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
+                  <a href="{{ route('models.show', $model->id) }}" class="label label-light label-normal-bold">{{ $model->name }}{{ ($model->model_number) ? ' ('.$model->model_number.')' : '' }}</a>
 
                 @endforeach
               </td>
@@ -73,13 +68,8 @@
 
                 @can('update', $fieldset)
 
-                  <a href="{{ route('fieldsets.show', ['fieldset' => $fieldset->id]) }}" data-tooltip="true" title="{{ trans('general.edit_fieldset') }}">
-                    <button type="submit" class="btn btn-info btn-sm">
-                      <i class="fa-regular fa-rectangle-list"></i>
-                    </button>
-                  </a>
 
-                  <a href="{{ route('fieldsets.edit', $fieldset->id) }}" class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
+                  <a href="{{ route('fieldsets.show', $fieldset->id) }}" class="btn btn-warning btn-sm" data-tooltip="true" title="{{ trans('general.update') }}">
                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                     <span class="sr-only">{{ trans('button.edit') }}</span>
                   </a>
@@ -114,12 +104,6 @@
     <div class="box box-default">
       <div class="box-header with-border">
         <h2 class="box-title">{{ trans('admin/custom_fields/general.custom_fields') }}</h2>
-        <div class="box-tools pull-right">
-          @can('create', \App\Models\CustomField::class)
-          <a href="{{ route('fields.create') }}" class="btn btn-sm btn-theme" data-tooltip="true" title="{{ trans('admin/custom_fields/general.create_field_title') }}">{{ trans('admin/custom_fields/general.create_field') }}</a>
-          @endcan
-        </div>
-
       </div><!-- /.box-header -->
       <div class="box-body">
 
@@ -133,50 +117,50 @@
                 id="customFieldsTable"
                 data-advanced-search="false"
                 data-buttons="customFieldButtons"
-                class="table table-striped snipe-table"
+                class="table table-striped snipe-table snipe-table--sticky-right-1"
                 data-export-options='{
                 "fileName": "export-fields-{{ date('Y-m-d') }}",
                 "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
                 }'>
           <thead>
             <tr>
-              <th data-sortable="true" data-searchable="true">{{ trans('general.name') }}</th>
-              <th data-sortable="true" data-searchable="true">{{ trans('admin/custom_fields/general.help_text')}}</th>
-              <th data-sortable="true" data-visible="false">{{ trans('admin/custom_fields/general.db_field') }}</th>
-              <th data-sortable="true" data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
-              <th data-sortable="true" data-tooltip="{{ trans('admin/custom_fields/general.encrypted') }}"><i
+              <th scope="col" data-sortable="true" data-searchable="true">{{ trans('general.name') }}</th>
+              <th scope="col" data-sortable="true" data-searchable="true">{{ trans('admin/custom_fields/general.help_text')}}</th>
+              <th scope="col" data-sortable="true" data-visible="false">{{ trans('admin/custom_fields/general.db_field') }}</th>
+              <th scope="col" data-sortable="true" data-searchable="true">{{ trans('admin/custom_fields/general.field_format') }}</th>
+              <th scope="col" data-sortable="true" data-tooltip="{{ trans('admin/custom_fields/general.encrypted') }}"><i
                         class="fa fa-lock" aria-hidden="true"></i>
                 <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.encrypted') }}</span>
               </th>
-              <th data-sortable="true" class="text-center"
+              <th scope="col" data-sortable="true" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.show_in_listview_short') }}"><i class="fa fa-list"
                                                                                                       aria-hidden="true"></i>
                 <span class="hidden-xs hidden-sm hidden-md hidden-lg">{{ trans('admin/custom_fields/general.show_in_listview_short') }}</span>
               </th>
-              <th data-visible="false" data-sortable="true" class="text-center"
+              <th scope="col" data-visible="false" data-sortable="true" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.display_in_user_view_table') }}"><i
                         class="fa fa-eye"
                         aria-hidden="true"><span
                           class="sr-only">{{ trans('admin/custom_fields/general.display_in_user_view_table') }}</span></i>
               </th>
-              <th data-sortable="true" data-searchable="false" class="text-center"
+              <th scope="col" data-sortable="true" data-searchable="false" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.show_in_email_short') }}"><i
                         class="fa fa-envelope" aria-hidden="true"><span
                           class="sr-only">{{ trans('admin/custom_fields/general.show_in_email_short') }}</span></i></th>
 
-              <th data-sortable="true" data-searchable="false" class="text-center"
+              <th scope="col" data-sortable="true" data-searchable="false" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.show_in_requestable_list_short') }}"><i
                         class="fa fa-laptop fa-fw" aria-hidden="true"><span
                           class="sr-only">{{ trans('admin/custom_fields/general.show_in_requestable_list_short') }}</span></i>
               </th>
 
-              <th data-sortable="true" data-searchable="false" class="text-center"
+              <th scope="col" data-sortable="true" data-searchable="false" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.unique') }}"><i
                         class="fa-solid fa-fingerprint"><span
                           class="sr-only">{{ trans('admin/custom_fields/general.unique') }}</span></i></th>
 
 
-              <th data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
+              <th scope="col" data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.display_checkin') }}">
                 <x-icon type="checkin" />
                 <span class="sr-only">
@@ -184,7 +168,7 @@
                   </span>
               </th>
 
-              <th data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
+              <th scope="col" data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.display_checkout') }}">
                 <x-icon type="checkout" />
                 <span class="sr-only">
@@ -192,7 +176,7 @@
                   </span>
               </th>
 
-              <th data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
+              <th scope="col" data-sortable="true" data-visible="false" data-searchable="false" class="text-center"
                   data-tooltip="{{ trans('admin/custom_fields/general.display_audit') }}">
                 <x-icon type="audit" />
                 <span class="sr-only">
@@ -201,11 +185,11 @@
               </th>
 
 
-              <th data-sortable="true" data-searchable="true" class="text-center">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
+              <th scope="col" data-sortable="true" data-searchable="true" class="text-center">{{ trans('admin/custom_fields/general.field_element_short') }}</th>
 
 
-              <th data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
-              <th>{{ trans('button.actions') }}</th>
+              <th scope="col" data-searchable="true">{{ trans('admin/custom_fields/general.fieldsets') }}</th>
+              <th scope="col">{{ trans('button.actions') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -233,7 +217,7 @@
               <td>{{ $field->element }}</td>
               <td>
                 @foreach($field->fieldset as $fieldset)
-                  <a href="{{ route('fieldsets.show', $fieldset->id) }}" class="label label-default">{{ $fieldset->name }}</a>
+                  <a href="{{ route('fieldsets.show', $fieldset->id) }}" class="label label-light label-normal-bold">{{ $fieldset->name }}</a>
                 @endforeach
               </td>
               <td>

@@ -6,30 +6,30 @@ use App\Mail\CheckoutAccessoryMail;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\CheckoutAcceptance;
 use App\Models\Location;
 use App\Models\User;
-use App\Notifications\CheckoutAccessoryNotification;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Notification;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class AccessoryCheckoutTest extends TestCase
 {
-    public function testCheckingOutAccessoryRequiresCorrectPermission()
+    public function test_checking_out_accessory_requires_correct_permission()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('accessories.checkout.store', Accessory::factory()->create()))
             ->assertForbidden();
     }
 
-    public function testPageRenders()
+    public function test_page_renders()
     {
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('accessories.checkout.show', Accessory::factory()->create()))
             ->assertOk();
     }
 
-    public function testValidationWhenCheckingOutAccessory()
+    public function test_validation_when_checking_out_accessory()
     {
         $accessory = Accessory::factory()->create();
         $response = $this->actingAs(User::factory()->superuser()->create())
@@ -44,7 +44,7 @@ class AccessoryCheckoutTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('general.error'));
     }
 
-    public function testAccessoryMustHaveAvailableItemsForCheckoutWhenCheckingOut()
+    public function test_accessory_must_have_available_items_for_checkout_when_checking_out()
     {
 
         $accessory = Accessory::factory()->withoutItemsRemaining()->create();
@@ -61,7 +61,7 @@ class AccessoryCheckoutTest extends TestCase
         $this->followRedirects($response)->assertSee(trans('general.error'));
     }
 
-    public function testAccessoryCanBeCheckedOutWithoutQuantity()
+    public function test_accessory_can_be_checked_out_without_quantity()
     {
         $accessory = Accessory::factory()->create();
         $user = User::factory()->create();
@@ -87,9 +87,9 @@ class AccessoryCheckoutTest extends TestCase
         $this->assertHasTheseActionLogs($accessory, ['create', 'checkout']);
     }
 
-    public function testAccessoryCanBeCheckedOutWithQuantity()
+    public function test_accessory_can_be_checked_out_with_quantity()
     {
-        $accessory = Accessory::factory()->create(['qty'=>5]);
+        $accessory = Accessory::factory()->create(['qty' => 5]);
         $user = User::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
@@ -115,9 +115,9 @@ class AccessoryCheckoutTest extends TestCase
         $this->assertHasTheseActionLogs($accessory, ['create', 'checkout']);
     }
 
-    public function testAccessoryCanBeCheckedOutToLocationWithQuantity()
+    public function test_accessory_can_be_checked_out_to_location_with_quantity()
     {
-        $accessory = Accessory::factory()->create(['qty'=>5]);
+        $accessory = Accessory::factory()->create(['qty' => 5]);
         $location = Location::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
@@ -143,9 +143,9 @@ class AccessoryCheckoutTest extends TestCase
         $this->assertHasTheseActionLogs($accessory, ['create', 'checkout']);
     }
 
-    public function testAccessoryCanBeCheckedOutToAssetWithQuantity()
+    public function test_accessory_can_be_checked_out_to_asset_with_quantity()
     {
-        $accessory = Accessory::factory()->create(['qty'=>5]);
+        $accessory = Accessory::factory()->create(['qty' => 5]);
         $asset = Asset::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
@@ -171,11 +171,11 @@ class AccessoryCheckoutTest extends TestCase
         $this->assertHasTheseActionLogs($accessory, ['create', 'checkout']);
     }
 
-    public function testUserSentNotificationUponCheckout()
+    public function test_user_sent_notification_upon_checkout()
     {
         Mail::fake();
 
-        $accessory = Accessory::factory()->requiringAcceptance()->create();
+        $accessory = Accessory::factory()->requiringAcceptance()->create(['qty' => 5]);
         $user = User::factory()->create();
 
         $this->actingAs(User::factory()->checkoutAccessories()->create())
@@ -190,7 +190,7 @@ class AccessoryCheckoutTest extends TestCase
         });
     }
 
-    public function testActionLogCreatedUponCheckout()
+    public function test_action_log_created_upon_checkout()
     {
         $accessory = Accessory::factory()->create();
         $actor = User::factory()->checkoutAccessories()->create();
@@ -220,7 +220,7 @@ class AccessoryCheckoutTest extends TestCase
         $this->assertHasTheseActionLogs($accessory, ['create', 'checkout']);
     }
 
-    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsIndex()
+    public function test_accessory_checkout_page_post_is_redirected_if_redirect_selection_is_index()
     {
         $accessory = Accessory::factory()->create();
 
@@ -236,13 +236,13 @@ class AccessoryCheckoutTest extends TestCase
             ->assertRedirect(route('accessories.index'));
     }
 
-    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsItem()
+    public function test_accessory_checkout_page_post_is_redirected_if_redirect_selection_is_item()
     {
         $accessory = Accessory::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('accessories.index'))
-            ->post(route('accessories.checkout.store' , $accessory), [
+            ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_user' => User::factory()->create()->id,
                 'checkout_to_type' => 'user',
                 'redirect_option' => 'item',
@@ -253,14 +253,14 @@ class AccessoryCheckoutTest extends TestCase
             ->assertRedirect(route('accessories.show', $accessory));
     }
 
-    public function testAccessoryCheckoutPagePostIsRedirectedIfRedirectSelectionIsTarget()
+    public function test_accessory_checkout_page_post_is_redirected_if_redirect_selection_is_target()
     {
         $user = User::factory()->create();
         $accessory = Accessory::factory()->create();
 
         $this->actingAs(User::factory()->admin()->create())
             ->from(route('accessories.index'))
-            ->post(route('accessories.checkout.store' , $accessory), [
+            ->post(route('accessories.checkout.store', $accessory), [
                 'assigned_user' => $user->id,
                 'checkout_to_type' => 'user',
                 'redirect_option' => 'target',
@@ -268,5 +268,124 @@ class AccessoryCheckoutTest extends TestCase
             ])
             ->assertStatus(302)
             ->assertRedirect(route('users.show', $user));
+    }
+
+    public function test_accessory_checkout_page_post_redirects_to_signature_page_when_sign_in_place_is_checked()
+    {
+        $targetUser = User::factory()->create();
+        $accessory = Accessory::factory()->requiringAcceptance()->create(['qty' => 5]);
+
+        $response = $this->actingAs(User::factory()->admin()->create())
+            ->from(route('accessories.checkout.show', $accessory))
+            ->post(route('accessories.checkout.store', $accessory), [
+                'assigned_user' => $targetUser->id,
+                'checkout_to_type' => 'user',
+                'redirect_option' => 'index',
+                'checkout_qty' => 2,
+                'sign_in_place' => 1,
+            ]);
+
+        $acceptance = CheckoutAcceptance::query()
+            ->where('checkoutable_type', Accessory::class)
+            ->where('checkoutable_id', $accessory->id)
+            ->where('assigned_to_id', $targetUser->id)
+            ->pending()
+            ->latest()
+            ->first();
+
+        $this->assertNotNull($acceptance);
+        $this->assertEquals(2, $acceptance->qty);
+        $this->assertDatabaseCount('checkout_acceptances', 1);
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('account.accept.item', $acceptance));
+    }
+
+    public function test_accessory_sign_in_place_creates_acceptance_when_acceptance_not_required()
+    {
+        $targetUser = User::factory()->create();
+        $accessory = Accessory::factory()->notRequiringAcceptance()->create(['qty' => 5]);
+
+        $response = $this->actingAs(User::factory()->admin()->create())
+            ->from(route('accessories.checkout.show', $accessory))
+            ->post(route('accessories.checkout.store', $accessory), [
+                'assigned_user' => $targetUser->id,
+                'checkout_to_type' => 'user',
+                'redirect_option' => 'index',
+                'checkout_qty' => 2,
+                'sign_in_place' => 1,
+            ]);
+
+        $acceptance = CheckoutAcceptance::query()
+            ->where('checkoutable_type', Accessory::class)
+            ->where('checkoutable_id', $accessory->id)
+            ->where('assigned_to_id', $targetUser->id)
+            ->pending()
+            ->latest()
+            ->first();
+
+        $this->assertNotNull($acceptance);
+        $this->assertEquals(2, $acceptance->qty);
+        $this->assertDatabaseCount('checkout_acceptances', 1);
+
+        $response->assertStatus(302)
+            ->assertRedirect(route('account.accept.item', $acceptance));
+    }
+
+    public function test_accessory_checkout_stores_sign_in_place_preference_in_session()
+    {
+        $targetUser = User::factory()->create();
+        $accessory = Accessory::factory()->create();
+
+        $response = $this->actingAs(User::factory()->admin()->create())
+            ->post(route('accessories.checkout.store', $accessory), [
+                'assigned_user' => $targetUser->id,
+                'checkout_to_type' => 'user',
+                'redirect_option' => 'index',
+                'sign_in_place' => 1,
+            ]);
+
+        $response->assertSessionHas('sign_in_place', true);
+    }
+
+    /**
+     * Regression: AccessoryCheckoutController::store used to call
+     *   session()->put(['checkout_to_type' => $target]);
+     * with $target being the resolved Eloquent model, not the string kind.
+     * The checkout-selector partial compares against 'user'/'asset'/'location'
+     * literals, so an object silently mismatched and no radio was rendered
+     * `checked`.
+     *
+     * @see \App\Http\Controllers\Accessories\AccessoryCheckoutController::store
+     */
+    #[DataProvider('accessoryCheckoutTargetTypesProvider')]
+    public function test_accessory_checkout_stores_target_type_as_string_in_session(string $type)
+    {
+        [$field, $target] = match ($type) {
+            'user' => ['assigned_user', User::factory()->create()->id],
+            'asset' => ['assigned_asset', Asset::factory()->create()->id],
+            'location' => ['assigned_location', Location::factory()->create()->id],
+        };
+        $accessory = Accessory::factory()->create();
+
+        $this->actingAs(User::factory()->admin()->create())
+            ->post(route('accessories.checkout.store', $accessory), [
+                'checkout_to_type' => $type,
+                $field => $target,
+            ])
+            ->assertSessionHasNoErrors();
+
+        $stored = session('checkout_to_type');
+        $this->assertIsString($stored, 'checkout_to_type must be a string, not an Eloquent model');
+        $this->assertSame($type, $stored);
+    }
+
+    public static function accessoryCheckoutTargetTypesProvider(): array
+    {
+        return [
+            'user target' => ['user'],
+            'asset target' => ['asset'],
+            'location target' => ['location'],
+        ];
     }
 }

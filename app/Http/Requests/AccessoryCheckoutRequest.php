@@ -2,31 +2,37 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Requests\Traits\InfersCheckoutToType;
 use App\Models\Accessory;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Gate;
 
 class AccessoryCheckoutRequest extends ImageUploadRequest
 {
+    use InfersCheckoutToType;
 
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return Gate::allows('checkout', new Accessory);
+        return Gate::allows('checkout', Accessory::class);
     }
 
     public function prepareForValidation(): void
     {
+        parent::prepareForValidation();
+
+        $this->inferCheckoutToType();
 
         if ($this->accessory) {
 
             $this->diff = ($this->accessory->numRemaining() - $this->checkout_qty);
             $this->merge([
                 'checkout_qty' => $this->checkout_qty ?? 1,
-                'number_remaining_after_checkout' =>  (int) ($this->accessory->numRemaining() - $this->checkout_qty),
-                'number_currently_remaining' =>  (int) $this->accessory->numRemaining(),
-                'checkout_difference' =>  (int) $this->diff,
+                'number_remaining_after_checkout' => (int) ($this->accessory->numRemaining() - $this->checkout_qty),
+                'number_currently_remaining' => (int) $this->accessory->numRemaining(),
+                'checkout_difference' => (int) $this->diff,
             ]);
 
             \Log::debug('---------------------------------------------');
@@ -37,17 +43,17 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
 
         return array_merge(
             [
-                'assigned_user'         => 'required_without_all:assigned_asset,assigned_location',
-                'assigned_asset'        => 'required_without_all:assigned_user,assigned_location',
-                'assigned_location'     => 'required_without_all:assigned_user,assigned_asset',
-                
+                'assigned_user' => 'required_without_all:assigned_asset,assigned_location|prohibits:assigned_asset,assigned_location|nullable|exists_undeleted:users,id',
+                'assigned_asset' => 'required_without_all:assigned_user,assigned_location|prohibits:assigned_user,assigned_location|nullable|exists_undeleted:assets,id',
+                'assigned_location' => 'required_without_all:assigned_user,assigned_asset|prohibits:assigned_user,assigned_asset|nullable|exists_undeleted:locations,id',
+
                 'number_remaining_after_checkout' => [
                     'min:0',
                     'required',
@@ -71,6 +77,7 @@ class AccessoryCheckoutRequest extends ImageUploadRequest
                 'checkout_qty' => $this->checkout_qty,
             ]),
         ];
+
         return $messages;
     }
 }

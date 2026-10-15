@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Select Maintenance Type',
-        'asset_maintenance_type' => 'Nooca Dayactirka Hantida',
-        'title'                  => 'Ciwaanka',
-        'start_date'             => 'Taariikhda billowga',
-        'completion_date'        => 'Taariikhda Dhamaystirka',
-        'cost'                   => 'Qiimaha',
-        'is_warranty'            => 'Hagaajinta dammaanadda',
-        'asset_maintenance_time' => 'Waqtiga Dayactirka Hantida (maalmo gudaheed)',
-        'notes'                  => 'Xusuusin',
-        'update'                 => 'Cusbooneysii Dayactirka Hantida',
-        'create'                 => 'Abuur Dayactirka Hantida'
-    ];
+return [
+    'select_type' => 'Select Maintenance Type',
+    'asset_maintenance_type' => 'Nooca',
+    'title' => 'Ciwaanka',
+    'start_date' => 'Taariikhda billowga',
+    'completion_date' => 'Expected Completion',
+    'cost' => 'Qiimaha',
+    'is_warranty' => 'Hagaajinta dammaanadda',
+    'asset_maintenance_time' => 'Duration',
+    'notes' => 'Xusuusin',
+    'update' => 'Cusbooneysii Dayactirka Hantida',
+    'create' => 'Abuur Dayactirka Hantida',
+    'responsible_party' => 'Responsible Party',
+    'checked_out_to_at_creation' => 'La Hubiyay',
+    'completed_at' => 'Completed At',
+    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_by' => 'Completed By',
+    'mark_complete' => 'Mark Complete',
+    'already_complete' => 'Already Completed',
+    'completion_notes' => 'Completion Notes',
+];

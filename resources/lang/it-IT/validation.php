@@ -71,7 +71,7 @@ return [
     ],
     'hex_color' => 'Il campo :attribute deve essere un colore esadecimale valido.',
     'image' => 'Il campo :attribute deve essere un\'immagine.',
-    'import_field_empty'    => ':fieldname non può essere vuoto.',
+    'import_field_empty' => ':fieldname non può essere vuoto.',
     'in' => ':attribute selezionato non è valido.',
     'in_array' => 'Il campo :attribute deve esistere in :other.',
     'integer' => 'Il campo :attribute deve essere un numero intero.',
@@ -126,7 +126,7 @@ return [
         'symbols' => 'Il campo :attribute deve contenere almeno un simbolo.',
         'uncompromised' => 'Il valore :attribute fornito è comparso in un data leak. Si prega di scegliere un :attribute differente.',
     ],
-    'percent'       => 'Il deprezzamento minimo deve essere tra 0 e 100 quando il tipo di deprezzamento è Percentuale.',
+    'percent' => 'Il deprezzamento minimo deve essere tra 0 e 100 quando il tipo di deprezzamento è Percentuale.',
 
     'present' => 'Il campo :attribute deve essere presente.',
     'present_if' => 'Il campo :attribute deve essere presente quando :other è :value.',
@@ -156,24 +156,37 @@ return [
         'string' => 'Il campo :attribute deve avere :size caratteri.',
     ],
     'starts_with' => 'Il campo :attribute deve iniziare con uno dei seguenti: :values.',
-    'string'               => ':attribute deve essere una stringa.',
+    'string' => ':attribute deve essere una stringa.',
     'two_column_unique_undeleted' => ':attribute deve essere univoco tra :table1 e :table2 . ',
-    'unique_undeleted'     => ':attribute deve essere unico.',
-    'non_circular'         => ':attribute non deve creare un riferimento circolare.',
-    'not_array'            => ':attribute non può essere un array.',
+    'unique_undeleted' => ':attribute deve essere unico.',
+    'non_circular' => ':attribute non deve creare un riferimento circolare.',
+    'parent_must_be_top_level' => 'Il :attribute selezionato deve essere un elemento di primo livello. Consentito solo un livello di nidificazione.',
+    'must_have_no_children' => 'Questo elemento ha già elementi figli propri, quindi non può essere assegnato un elemento genitore.',
+    'parent_within_scope' => 'L\'attributo :attribute selezionato è al di fuori del tuo ambito.',
+    'not_array' => ':attribute non può essere un array.',
     'disallow_same_pwd_as_user_fields' => 'La password non può essere uguale al nome utente.',
-    'letters'              => 'La password deve contenere almeno una lettera.',
-    'numbers'              => 'La password deve contenere almeno un numero.',
-    'case_diff'            => 'La password deve utilizzare maiuscole e minuscole.',
-    'symbols'              => 'La password deve contenere simboli.',
+    'letters' => 'La password deve contenere almeno una lettera.',
+    'numbers' => 'La password deve contenere almeno un numero.',
+    'case_diff' => 'La password deve utilizzare maiuscole e minuscole.',
+    'symbols' => 'La password deve contenere simboli.',
     'timezone' => 'Il campo :attribute deve essere un fuso orario valido.',
     'unique' => ':attribute è già stato preso.',
     'uploaded' => 'Non è stato possibile caricare :attribute.',
     'uppercase' => 'Il campo :attribute deve essere maiuscolo.',
     'url' => 'Il campo :attribute deve essere un URL valido.',
+    'external_url' => 'Il campo :attribute deve essere un URL esterno valido (http:// o https://) che non punti a un indirizzo privato o locale.',
+    'asset_tag_pattern_placeholder' => 'The asset tag pattern must include at least one placeholder from :placeholders, otherwise every synced asset would receive the same tag and only the first would save.',
+    'custom_http_extras_json' => [
+        'not_json' => 'Custom Extras must be valid JSON. Parser error: :error',
+        'not_array' => 'Custom Extras must be a JSON array (starting with [ and ending with ]).',
+        'entry_not_object' => 'Custom Extras entry #:index must be a JSON object with key, label, and path fields.',
+        'missing_field' => 'Custom Extras entry #:index is missing the required ":field" field.',
+    ],
     'ulid' => 'Il campo :attribute deve essere un ULID valido.',
     'uuid' => 'Il campo :attribute deve essere un UUID valido.',
-    'fmcs_location' => 'Nelle Impostazioni Admin è abilitato il supporto completo multi aziendale con restrizione per le Sedi, e la Sede selezionata non è compatibile con l\'Azienda scelta.',
+    'valid_css_color' => 'Il campo :attribute deve essere un colore CSS valido (hex, rgb, rgba, hsl o hsla).',
+    'fmcs_company' => 'Il campo :attribute è obbligatorio perché è attivato il supporto completo per aziende multiple e gli elementi "fluttuanti" non sono ammessi.',
+    'fmcs_location' => 'La sede ":location" appartiene a :location_company, che non corrisponde all\'azienda selezionata.',
     'is_unique_across_company_and_location' => 'L\' :attributo deve essere univoco all\'interno dell\'azienda e della sede selezionata.',
 
     /*
@@ -187,38 +200,39 @@ return [
     |
     */
 
-    'email_array'      => 'Una o più email sono invalidi.',
-    'checkboxes'           => ':attribute contiene opzioni non valide.',
-    'radio_buttons'        => ':attribute non è valido.',
-    
+    'email_array' => 'Una o più email sono invalidi.',
+    'checkboxes' => ':attribute contiene opzioni non valide.',
+    'radio_buttons' => ':attribute non è valido.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
+
     'custom' => [
         'alpha_space' => 'Il campo :attribute contiene un carattere non consentito.',
 
-        'hashed_pass'      => 'La tua attuale password non è corretta',
-        'dumbpwd'          => 'Questa password è troppo comune.',
+        'hashed_pass' => 'La tua attuale password non è corretta',
+        'dumbpwd' => 'Questa password è troppo comune.',
         'statuslabel_type' => 'È necessario selezionare un tipo di etichetta di stato valido',
-        'custom_field_not_found'          => 'Questo campo non sembra esistere, si prega di ricontrollare i nomi dei campi personalizzati.',
+        'custom_field_not_found' => 'Questo campo non sembra esistere, si prega di ricontrollare i nomi dei campi personalizzati.',
         'custom_field_not_found_on_model' => 'Sembra che questo campo esista, ma non è disponibile tra i campi di questo Modello di Bene.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
-        'purchase_date.date_format'     => ':attribute deve essere in formato AAAA-MM-GG',
-        'last_audit_date.date_format'   =>  ':attribute deve essere in formato AAAA-MM-GG hh:mm:ss',
-        'expiration_date.date_format'   =>  ':attribute deve essere in formato AAAA-MM-GG',
-        'termination_date.date_format'  =>  ':attribute deve essere in formato AAAA-MM-GG',
-        'expected_checkin.date_format'  =>  ':attribute deve essere in formato AAAA-MM-GG',
-        'start_date.date_format'        =>  ':attribute deve essere in formato AAAA-MM-GG',
-        'end_date.date_format'          =>  ':attribute deve essere in formato AAAA-MM-GG',
+        'purchase_date.date_format' => ':attribute deve essere in formato AAAA-MM-GG',
+        'last_audit_date.date_format' => ':attribute deve essere in formato AAAA-MM-GG hh:mm:ss',
+        'expiration_date.date_format' => ':attribute deve essere in formato AAAA-MM-GG',
+        'termination_date.date_format' => ':attribute deve essere in formato AAAA-MM-GG',
+        'expected_checkin.date_format' => ':attribute deve essere in formato AAAA-MM-GG',
+        'start_date.date_format' => ':attribute deve essere in formato AAAA-MM-GG',
+        'end_date.date_format' => ':attribute deve essere in formato AAAA-MM-GG',
         'invalid_value_in_field' => 'Valore non valido incluso in questo campo',
 
         'ldap_username_field' => [
-            'not_in' =>         '<code>sAMAccountName</code> (grafìa mista) non va bene. Dovresti piuttosto usare <code>samaccountname</code> (minuscolo).'
+            'not_in' => '<code>sAMAccountName</code> (grafìa mista) non va bene. Dovresti piuttosto usare <code>samaccountname</code> (minuscolo).',
         ],
         'ldap_auth_filter_query' => ['not_in' => 'Probabilmente <code>uid=samaccountname</code> non è un filtro di l\'autenticazione valido. Forse è meglio <code>uid=</code> '],
         'ldap_filter' => ['regex' => 'Questo valore probabilmente non dovrebbe stare tra parentesi.'],
 
-        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -230,7 +244,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'serials.*' => 'Numero Seriale',
+        'asset_tags.*' => 'Etichetta Bene',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -244,6 +261,5 @@ return [
         'required' => 'Questo campo è obbligatorio',
         'email' => 'Inserire un indirizzo e-mail valido',
     ],
-
 
 ];

@@ -7,6 +7,7 @@ use App\Models\ReportTemplate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use UnhandledMatchError;
 
 class ReportTemplatesController extends Controller
 {
@@ -18,8 +19,10 @@ class ReportTemplatesController extends Controller
         $validated = $request->validate(Arr::except((new ReportTemplate)->getRules(), 'options'));
 
         $report = $request->user()->reportTemplates()->create([
+            'type' => $validated['type'],
             'name' => $validated['name'],
-            'options' => $request->except(['_token', 'name']),
+            'options' => $request->except(['_token', 'name', 'is_shared']),
+            'is_shared' => $request->has('is_shared'),
         ]);
 
         session()->flash('success', trans('admin/reports/message.create.success'));
@@ -31,37 +34,58 @@ class ReportTemplatesController extends Controller
     {
         $this->authorize('reports.view');
 
-        $customfields = CustomField::get();
-        $report_templates = ReportTemplate::orderBy('name')->get();
+        if ($reportTemplate->created_by !== auth()->id() && ! $reportTemplate->is_shared) {
+            abort(404, trans('general.generic_model_not_found', ['model' => trans('general.report_template')]));
+        }
 
-        return view('reports/custom', [
+        $customfields = CustomField::get();
+
+        try {
+            $view = $reportTemplate->getViewPath();
+        } catch (UnhandledMatchError $e) {
+            return redirect()
+                ->route('reports.index')
+                ->with('error', 'Saved template type is not valid.');
+        }
+
+        return view($view, [
             'customfields' => $customfields,
-            'report_templates' => $report_templates,
             'template' => $reportTemplate,
         ]);
     }
 
     public function edit(ReportTemplate $reportTemplate)
     {
-        $this->authorize('reports.view');
-
-        return view('reports/custom', [
-            'customfields' => CustomField::get(),
-            'template' => $reportTemplate,
-        ]);
+        return redirect()->route('report-templates.show', $reportTemplate);
     }
 
     public function update(Request $request, ReportTemplate $reportTemplate): RedirectResponse
     {
         $this->authorize('reports.view');
 
-        // Ignore "options" rules since data does not come in under that key...
-        $validated = $request->validate(Arr::except((new ReportTemplate)->getRules(), 'options'));
+        if ($reportTemplate->created_by != auth()->id()) {
+            return redirect()
+                ->route('report-templates.show', $reportTemplate)
+                ->withError(trans('general.report_not_editable'));
+        }
 
-        $reportTemplate->update([
-            'name' => $validated['name'],
-            'options' => $request->except(['_token', 'name']),
-        ]);
+        $properties = [
+            'name' => $request->input('name'),
+            'options' => Arr::except($request->all(), ['_token', 'id', 'name', 'is_shared']),
+            'is_shared' => $reportTemplate->is_shared,
+        ];
+
+        if ($reportTemplate->created_by == $request->user()->id) {
+            $properties['is_shared'] = $request->boolean('is_shared');
+        }
+
+        $reportTemplate->fill($properties);
+
+        if ($reportTemplate->isInvalid()) {
+            return redirect()->back()->withInput()->withErrors($reportTemplate->getErrors());
+        }
+
+        $reportTemplate->save();
 
         session()->flash('success', trans('admin/reports/message.update.success'));
 
@@ -71,6 +95,12 @@ class ReportTemplatesController extends Controller
     public function destroy(ReportTemplate $reportTemplate): RedirectResponse
     {
         $this->authorize('reports.view');
+
+        if ($reportTemplate->creator()->isNot(auth()->user())) {
+            return redirect()
+                ->route('report-templates.show', $reportTemplate)
+                ->withError(trans('general.generic_model_not_found', ['model' => 'report template']));
+        }
 
         $reportTemplate->delete();
 

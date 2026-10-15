@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Select Maintenance Type',
-        'asset_maintenance_type' => 'Aktiv-vedligeholdelsestype',
-        'title'                  => 'Titel',
-        'start_date'             => 'Startdato',
-        'completion_date'        => 'Afslutningsdato',
-        'cost'                   => 'Koste',
-        'is_warranty'            => 'Garantiforbedring',
-        'asset_maintenance_time' => 'Aktiv-vedligeholdelsestid (i dage)',
-        'notes'                  => 'Noter',
-        'update'                 => 'Opdater aktiv-vedligeholdelse',
-        'create'                 => 'Opret aktiv-vedligeholdelse'
-    ];
+return [
+    'select_type' => 'Vælg vedligeholdelsestype',
+    'asset_maintenance_type' => 'Type',
+    'title' => 'Titel',
+    'start_date' => 'Startdato',
+    'completion_date' => 'Expected Completion',
+    'cost' => 'Koste',
+    'is_warranty' => 'Garantiforbedring',
+    'asset_maintenance_time' => 'Duration',
+    'notes' => 'Noter',
+    'update' => 'Opdater aktiv-vedligeholdelse',
+    'create' => 'Opret aktiv-vedligeholdelse',
+    'responsible_party' => 'Responsible Party',
+    'checked_out_to_at_creation' => 'Tjekket Ud Til',
+    'completed_at' => 'Completed At',
+    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_by' => 'Completed By',
+    'mark_complete' => 'Mark Complete',
+    'already_complete' => 'Already Completed',
+    'completion_notes' => 'Completion Notes',
+];

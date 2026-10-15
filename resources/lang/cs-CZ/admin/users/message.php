@@ -1,38 +1,53 @@
 <?php
 
-return array(
+return [
 
-    'accepted'                  => 'You have successfully accepted this item.',
-    'declined'                  => 'You have successfully declined this item.',
-    'bulk_manager_warn'	        => 'Uživatelé byli úspěšně aktualizováni, položka správce však nebyla uložena, protože správce, který jste si vybrali, byl také v seznamu uživatelů, který má být upraven, a uživatelé nemusí být jejich vlastní správce. Zvolte své uživatele znovu, kromě správce.',
-    'user_exists'               => 'Uživatel již existuje!',
-    'user_not_found'            => 'Uživatel neexistuje nebo nemáte oprávnění k jeho zobrazení.',
-    'user_login_required'       => 'Přihlašovací pole je povinné',
+    'accepted' => 'Tuto položku jste úspěšně přijali.',
+    'declined' => 'Tuto položku jste úspěšně odmítli.',
+    'accept_signature_write_failed' => 'Your acceptance signature could not be saved to storage. Acceptance was not recorded. Please contact your administrator.',
+    'accept_pdf_write_failed' => 'The acceptance PDF could not be saved to storage. Acceptance was not recorded. Please contact your administrator.',
+    'bulk_manager_warn' => 'Uživatelé byli úspěšně aktualizováni, položka správce však nebyla uložena, protože správce, který jste si vybrali, byl také v seznamu uživatelů, který má být upraven, a uživatelé nemusí být jejich vlastní správce. Zvolte své uživatele znovu, kromě správce.',
+    'user_exists' => 'Uživatel již existuje!',
+    'cannot_delete' => 'Uživatel neexistuje nebo nemáte oprávnění k jeho odstranění.',
+    'user_not_found' => 'Uživatel neexistuje nebo nemáte oprávnění k jeho zobrazení.',
+    'user_login_required' => 'Přihlašovací pole je povinné',
     'user_has_no_assets_assigned' => 'Momentálně nejsou uživateli přiřazeny žádné položky.',
-    'user_password_required'    => 'Je vyžadováno heslo.',
-    'insufficient_permissions'  => 'Nedostatečná oprávnění.',
-    'user_deleted_warning'      => 'Tento uživatel byl smazán. Budete muset uživatele obnovit, aby jste ho mohli upravil nebo přidělil nové majetky.',
-    'ldap_not_configured'        => 'Integrace LDAP nebyla pro tuto instalaci nakonfigurována.',
-    'password_resets_sent'      => 'Vybraným uživatelům, kteří jsou aktivováni a mají platné e-mailové adresy, byl zaslán odkaz pro obnovení hesla.',
-    'password_reset_sent'       => 'Odkaz pro obnovení hesla byl odeslán na :email!',
-    'user_has_no_email'         => 'Tento uživatel nemá e-mailovou adresu ve svém profilu.',
-    'log_record_not_found'        => 'Pro tohoto uživatele se nepodařilo nalézt odpovídající záznam z logu.',
+    'nothing_currently_assigned' => 'Nothing currently assigned.',
+    'user_password_required' => 'Je vyžadováno heslo.',
+    'insufficient_permissions' => 'Nedostatečná oprávnění.',
+    'auth_fields_denied' => 'You do not have permission to modify credential or activation fields on this user. Requested fields not updated: :fields',
+    'user_deleted_warning' => 'Tento uživatel byl smazán. Budete muset uživatele obnovit, aby jste ho mohli upravil nebo přidělil nové majetky.',
+    'ldap_not_configured' => 'Integrace LDAP nebyla pro tuto instalaci nakonfigurována.',
+    'password_resets_sent' => 'Vybraným uživatelům, kteří jsou aktivováni a mají platné e-mailové adresy, byl zaslán odkaz pro obnovení hesla.',
+    'not_activated' => 'This user cannot login, so they cannot accept assets via email.',
+    'password_reset_sent' => 'Odkaz pro obnovení hesla byl odeslán na :email!',
+    'user_has_no_email' => 'Tento uživatel nemá e-mailovou adresu ve svém profilu.',
+    'log_record_not_found' => 'Pro tohoto uživatele se nepodařilo nalézt odpovídající záznam z logu.',
 
+    'impersonate' => [
+        'started' => 'You are now logged in as :name.',
+        'stopped' => 'You are back to your own account.',
+        'cannot_impersonate_self' => 'You cannot log in as yourself.',
+        'cannot_impersonate_superuser' => 'You cannot log in as another superuser.',
+        'target_not_active' => 'That user is deactivated or deleted and cannot be logged in as.',
+        'impersonator_missing' => 'The original account for this impersonation session no longer exists. Please log in again.',
+    ],
 
-    'success' => array(
-        'create'    => 'Uživatel byl úspěšně vytvořen.',
-        'update'    => 'Uživatel byl úspěšně aktualizován.',
-        'update_bulk'    => 'Uživatelé byli úspěšně aktualizováni!',
-        'delete'    => 'Uživatel byl úspěšně smazán.',
-        'ban'       => 'Uživatel byl úspěšně zakázán.',
-        'unban'     => 'Uživatel byl úspěšně povolen.',
-        'suspend'   => 'Uživatel byl úspěšně pozastaven.',
+    'success' => [
+        'create' => 'Uživatel byl úspěšně vytvořen.',
+        'update' => 'Uživatel byl úspěšně aktualizován.',
+        'update_bulk' => 'Uživatelé byli úspěšně aktualizováni!',
+        'delete' => 'Uživatel byl úspěšně smazán.',
+        'ban' => 'Uživatel byl úspěšně zakázán.',
+        'unban' => 'Uživatel byl úspěšně povolen.',
+        'suspend' => 'Uživatel byl úspěšně pozastaven.',
         'unsuspend' => 'Uživatel byl úspěšně zrušen.',
-        'restored'  => 'Uživatel byl úspěšně obnoven.',
-        'import'    => 'Uživatelé úspěšně naimportování.',
-    ),
+        'restored' => 'Uživatel byl úspěšně obnoven.',
+        'import' => 'Uživatelé úspěšně naimportování.',
+        'acceptance_reminder_sent' => 'Acceptance reminder sent for :count pending item.|Acceptance reminder sent for :count pending items.',
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Vyskytl se problém při vytvářením uživatele. Zkuste to znovu.',
         'update' => 'Vyskytl se problém při aktualizování uživatele. Zkuste to znovu.',
         'delete' => 'Vyskytl se problém při mazání uživatele. Zkuste to znovu.',
@@ -43,8 +58,8 @@ return array(
         'delete_has_locations_var' => 'Tento uživatel stále spravuje jedno umístění. Nejprve prosím vyberte jiného správce.|Tento uživatel stále spravuje :count umístění. Nejprve prosím vyberte jiného správce.',
         'delete_has_users_var' => 'Tento uživatel stále spravuje jiného uživatele. Nejprve prosím vyberte jiného správce pro tohoto uživatele.|Tento uživatel stále spravuje :count uživatelů. Nejprve prosím vyberte jiné správce pro tyto uživatele.',
         'unsuspend' => 'Vyskytl se problém při rušení uživatele. Zkuste to znovu.',
-        'import'    => 'Vyskytl se problém při importu uživatelů. Zkuste to znovu.',
-        'asset_already_accepted' => 'Tento majetek již byl odsouhlasen.',
+        'import' => 'Vyskytl se problém při importu uživatelů. Zkuste to znovu.',
+        'asset_already_accepted' => 'This item has already been accepted.',
         'accept_or_decline' => 'Musíte přijmout nebo odmítnout tento majetek.',
         'cannot_delete_yourself' => 'Bylo by nám to opravdu líto, kdybyste smazal sám sebe. Zvažte to ještě jednou. ',
         'incorrect_user_accepted' => 'Majetek, který jste se pokoušeli přijmout, nebyl vydán pro vás.',
@@ -53,23 +68,25 @@ return array(
         'ldap_could_not_search' => 'Nelze vyhledat server LDAP. Zkontrolujte prosím konfiguraci serveru LDAP v konfiguračním souboru LDAP. <br>Chyba serveru LDAP:',
         'ldap_could_not_get_entries' => 'Nelze získat záznamy ze serveru LDAP. Zkontrolujte prosím konfiguraci serveru LDAP v konfiguračním souboru LDAP. <br>Chyba serveru LDAP:',
         'password_ldap' => 'Heslo pro tento účet je spravováno serverem LDAP / Active Directory. Obraťte se na oddělení IT a změňte heslo.',
-        'multi_company_items_assigned' => 'Tento uživatel má přiřazené položky, které patří jiné společnosti. Zkontrolujte je nebo upravte jejich společnost.'
-    ),
+        'multi_company_items_assigned' => 'Tento uživatel má přiřazené položky, které patří jiné společnosti. Zkontrolujte je nebo upravte jejich společnost.',
+        'no_pending_acceptances' => 'This user has no pending acceptances to remind them about.',
+        'company_not_permitted' => 'One or more requested company assignments are outside your permitted company scope.',
+    ],
 
-    'deletefile' => array(
-        'error'   => 'Soubor se nepodařilo smazat. Prosím zkuste to znovu.',
+    'deletefile' => [
+        'error' => 'Soubor se nepodařilo smazat. Prosím zkuste to znovu.',
         'success' => 'Soubor byl úspěšně smazán.',
-    ),
+    ],
 
-    'upload' => array(
-        'error'   => 'Soubor(y) se nepodařilo nahrát. Prosím zkuste to znovu.',
+    'upload' => [
+        'error' => 'Soubor(y) se nepodařilo nahrát. Prosím zkuste to znovu.',
         'success' => 'Soubor(y) byly v pořádku nahrány.',
         'nofiles' => 'Nevybrali jste žádné soubory pro nahrávání',
         'invalidfiles' => 'Jeden nebo více označených souborů je příliš velkých nebo nejsou podporované. Povolenými příponami jsou png, gif, jpg, doc, docx, pdf a txt.',
-    ),
+    ],
 
-    'inventorynotification' => array(
-        'error'   => 'Tento uživatel nemá nastaven žádný e-mail.',
-        'success' => 'Uživatel byl informován o svém aktuálním majetku.'
-    )
-);
+    'inventorynotification' => [
+        'error' => 'Tento uživatel nemá nastaven žádný e-mail.',
+        'success' => 'Uživatel byl informován o svém aktuálním majetku.',
+    ],
+];

@@ -29,12 +29,12 @@
                   }'>
             <thead>
               <tr>
-                <th>{{ trans('general.name')}}</th>
-                  <th>{{ trans('general.type')}}</th>
-                  <th>{{ trans('general.category')}}</th>
-                  <th>{{ trans('general.qty') }}</th>
-                <th>{{ trans('general.serial_number')}}</th>
-                <th>{{ trans('table.actions')}}</th>
+                <th scope="col">{{ trans('general.name')}}</th>
+                  <th scope="col">{{ trans('general.type')}}</th>
+                  <th scope="col">{{ trans('general.category')}}</th>
+                  <th scope="col">{{ trans('general.qty') }}</th>
+                <th scope="col">{{ trans('general.serial_number')}}</th>
+                <th scope="col">{{ trans('table.actions')}}</th>
               </tr>
             </thead>
             <tbody>

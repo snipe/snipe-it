@@ -12,14 +12,14 @@ use Tests\TestCase;
 
 class CreateAccessoriesTest extends TestCase
 {
-    public function testRequiresPermissionToViewCreateAccessoryPage()
+    public function test_requires_permission_to_view_create_accessory_page()
     {
         $this->actingAs(User::factory()->create())
             ->get(route('accessories.create'))
             ->assertForbidden();
     }
 
-    public function testCreateAccessoryPageRenders()
+    public function test_create_accessory_page_renders()
     {
         $this->actingAs(User::factory()->createAccessories()->create())
             ->get(route('accessories.create'))
@@ -27,14 +27,14 @@ class CreateAccessoriesTest extends TestCase
             ->assertViewIs('accessories.edit');
     }
 
-    public function testRequiresPermissionToCreateAccessory()
+    public function test_requires_permission_to_create_accessory()
     {
         $this->actingAs(User::factory()->create())
             ->post(route('accessories.store'))
             ->assertForbidden();
     }
 
-    public function testValidDataRequiredToCreateAccessory()
+    public function test_valid_data_required_to_create_accessory()
     {
         $this->actingAs(User::factory()->createAccessories()->create())
             ->post(route('accessories.store'), [
@@ -42,12 +42,11 @@ class CreateAccessoriesTest extends TestCase
             ])
             ->assertSessionHasErrors([
                 'name',
-                'qty',
                 'category_id',
             ]);
     }
 
-    public function testCanCreateAccessory()
+    public function test_can_create_accessory()
     {
         $category = Category::factory()->create();
         $company = Company::factory()->create();
@@ -55,6 +54,10 @@ class CreateAccessoriesTest extends TestCase
         $manufacturer = Manufacturer::factory()->create();
         $supplier = Supplier::factory()->create();
 
+        // order_number, supplier_id, purchase_date, purchase_cost are
+        // valid inputs on create — they flow to the observer-written
+        // Order + OrderItem. supplier_id ALSO seeds the parent's
+        // default_supplier_id template for future orders.
         $data = [
             'category_id' => $category->id,
             'company_id' => $company->id,
@@ -64,7 +67,6 @@ class CreateAccessoriesTest extends TestCase
             'model_number' => '12345',
             'name' => 'My Accessory Name',
             'notes' => 'Some notes here',
-            'order_number' => '9876',
             'purchase_cost' => '99.98',
             'purchase_date' => '2024-09-04',
             'qty' => '3',
@@ -77,6 +79,18 @@ class CreateAccessoriesTest extends TestCase
             ->post(route('accessories.store'), array_merge($data, ['redirect_option' => 'index']))
             ->assertRedirect(route('accessories.index'));
 
-        $this->assertDatabaseHas('accessories', array_merge($data, ['created_by' => $user->id]));
+        $this->assertDatabaseHas('accessories', [
+            'category_id' => $category->id,
+            'company_id' => $company->id,
+            'location_id' => $location->id,
+            'manufacturer_id' => $manufacturer->id,
+            'min_amt' => '1',
+            'model_number' => '12345',
+            'name' => 'My Accessory Name',
+            'notes' => 'Some notes here',
+            'qty' => '3',
+            'default_supplier_id' => $supplier->id,
+            'created_by' => $user->id,
+        ]);
     }
 }

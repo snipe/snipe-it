@@ -11,7 +11,11 @@ class SystemBackup extends Command
      *
      * @var string
      */
-    protected $signature = 'snipeit:backup {--filename=}';
+    // --force is accepted for parity with other Laravel commands that require
+    // it (migrate, db:seed, etc.); it doesn't gate anything here but external
+    // automations were passing it and crashing on the "option does not exist"
+    // error.
+    protected $signature = 'snipeit:backup {--filename=} {--force}';
 
     /**
      * The console command description.
@@ -37,13 +41,13 @@ class SystemBackup extends Command
      */
     public function handle()
     {
-        ini_set('max_execution_time', env('BACKUP_TIME_LIMIT', 600)); //600 seconds = 10 minutes
+        ini_set('max_execution_time', config('backup.time_limit')); // 600 seconds = 10 minutes
 
         if ($this->option('filename')) {
             $filename = $this->option('filename');
 
             // Make sure the filename ends in .zip
-            if (!ends_with($filename, '.zip')) {
+            if (! ends_with($filename, '.zip')) {
                 $filename = $filename.'.zip';
             }
 

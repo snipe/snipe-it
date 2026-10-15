@@ -14,7 +14,7 @@
         <div class="col-md-2" style="padding-left:0px">
             <input class="form-control" type="text" name="quantity" id="quantity" value="{{ old('quantity', $item->quantity) }}" />
         </div>
-        {!! $errors->first('quantity', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
+        <x-form.error name="quantity" />
     </div>
 </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,38 +13,38 @@ return array(
     |
     */
 
-    'week_start_select' => 'Select Day of Week',
-    'week_start' => 'Day the Week Starts On',
+    'week_start_select' => 'Sélectionnez le jour de la semaine',
+    'week_start' => 'Le jour de la semaine commence',
     'today' => 'Aujourd\'hui',
-    'clear' => 'Clear',
+    'clear' => 'Effacer',
     'days' => [
         'sunday' => 'Dimanche',
         'monday' => 'Lundi',
         'tuesday' => 'Mardi',
-        'wednesday' =>  'Mercredi',
-        'thursday' =>  'Thursday',
-        'friday' =>  'Friday',
-        'saturday' =>  'Saturday',
-        ],
+        'wednesday' => 'Mercredi',
+        'thursday' => 'Jeudi',
+        'friday' => 'Vendredi',
+        'saturday' => 'Samedi',
+    ],
 
     'short_days' => [
-        'sunday' => 'Sun',
-        'monday' => 'Mon',
-        'tuesday' => 'Tue',
-        'wednesday' =>  'Mer.',
-        'thursday' =>  'Jeu.',
-        'friday' =>  'Ven.',
-        'saturday' =>  'Sam.',
+        'sunday' => 'Dim',
+        'monday' => 'Lun',
+        'tuesday' => 'Mar',
+        'wednesday' => 'Mer.',
+        'thursday' => 'Jeu.',
+        'friday' => 'Ven.',
+        'saturday' => 'Sam.',
     ],
 
     'min_days' => [
-        'sunday' => 'Su',
-        'monday' => 'Mo',
-        'tuesday' => 'Tu',
-        'wednesday' =>  'We',
-        'thursday' =>  'Th',
-        'friday' =>  'Fr',
-        'saturday' =>  'Sa',
+        'sunday' => 'Di',
+        'monday' => 'Lu',
+        'tuesday' => 'Ma',
+        'wednesday' => 'Me',
+        'thursday' => 'Je',
+        'friday' => 'Ve',
+        'saturday' => 'Sa',
     ],
 
     'months' => [
@@ -77,4 +77,4 @@ return array(
         'december' => 'Déc',
     ],
 
-);
+];

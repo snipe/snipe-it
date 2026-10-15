@@ -1,25 +1,26 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Klasa amortizacije ne postoji.',
-    'assoc_users'	 => 'Ta je amortizacija trenutno povezana s jednim ili više modela i ne može se izbrisati. Izbrišite modele i pokušajte ponovno izbrisati.',
+    'assoc_users' => 'Ta je amortizacija trenutno povezana s jednim ili više modela i ne može se izbrisati. Izbrišite modele i pokušajte ponovno izbrisati.',
 
+    'create' => [
+        'error' => 'Klasa amortizacije nije izrađena, pokušajte ponovo. :(',
+        'success' => 'Klasa amortizacije uspješno je stvorena. :)',
+    ],
 
-    'create' => array(
-        'error'   => 'Klasa amortizacije nije izrađena, pokušajte ponovo. :(',
-        'success' => 'Klasa amortizacije uspješno je stvorena. :)'
-    ),
+    'update' => [
+        'error' => 'Klasa amortizacije nije ažurirana, pokušajte ponovo',
+        'success' => 'Klasa amortizacije uspješno je ažurirana.',
+    ],
 
-    'update' => array(
-        'error'   => 'Klasa amortizacije nije ažurirana, pokušajte ponovo',
-        'success' => 'Klasa amortizacije uspješno je ažurirana.'
-    ),
+    'delete' => [
+        'confirm' => 'Jeste li sigurni da želite izbrisati ovu klasu amortizacije?',
+        'error' => 'Došlo je do problema s brisanjem klase amortizacije. Molim te pokušaj ponovno.',
+        'success' => 'Klasa amortizacije uspješno je izbrisana.',
+        'bulk_success' => 'Depreciation class deleted successfully.|:count depreciation classes were deleted successfully.',
+        'partial_success' => 'Depreciation class deleted successfully. See additional information below.|:count depreciation classes were deleted successfully. See additional information below.',
+    ],
 
-    'delete' => array(
-        'confirm'   => 'Jeste li sigurni da želite izbrisati ovu klasu amortizacije?',
-        'error'   => 'Došlo je do problema s brisanjem klase amortizacije. Molim te pokušaj ponovno.',
-        'success' => 'Klasa amortizacije uspješno je izbrisana.'
-    )
-
-);
+];

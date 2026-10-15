@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FilterRequest;
 use App\Http\Transformers\AssetsTransformer;
+use App\Http\Transformers\PieChartTransformer;
 use App\Http\Transformers\SelectlistTransformer;
 use App\Http\Transformers\StatuslabelsTransformer;
 use App\Models\Asset;
 use App\Models\Setting;
 use App\Models\Statuslabel;
-use Illuminate\Http\Request;
-use App\Http\Transformers\PieChartTransformer;
+use App\Rules\CssColor;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class StatuslabelsController extends Controller
 {
@@ -20,9 +23,10 @@ class StatuslabelsController extends Controller
      * Display a listing of the resource.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
      */
-    public function index(Request $request) : array
+    public function index(FilterRequest $request): array
     {
         $this->authorize('view', Statuslabel::class);
         $allowed_columns = [
@@ -32,19 +36,20 @@ class StatuslabelsController extends Controller
             'assets_count',
             'color',
             'notes',
-            'default_label'
+            'default_label',
+            'show_in_nav',
         ];
 
         $statuslabels = Statuslabel::with('adminuser')->withCount('assets as assets_count');
 
-        if ($request->filled('search')) {
-            $statuslabels = $statuslabels->TextSearch($request->input('search'));
+        // This invokes the Searchable model trait scopeTextSearch and will handle input by search or by advanced search filter
+        if ($request->filled('filter') || $request->filled('search')) {
+            $statuslabels->TextSearch($request->input('filter') ? $request->input('filter') : $request->input('search'));
         }
 
         if ($request->filled('name')) {
             $statuslabels->where('name', '=', $request->input('name'));
         }
-
 
         // if a status_type is passed, filter by that
         if ($request->filled('status_type')) {
@@ -60,10 +65,11 @@ class StatuslabelsController extends Controller
         }
 
         // Make sure the offset and limit are actually integers and do not exceed system limits
-        $offset = ($request->input('offset') > $statuslabels->count()) ? $statuslabels->count() : app('api_offset_value');
+        $total = $statuslabels->count();
+        $offset = ($request->input('offset') > $total) ? $total : app('api_offset_value');
         $limit = app('api_limit_value');
         $order = $request->input('order') === 'asc' ? 'asc' : 'desc';
-        $sort_override =  $request->input('sort');
+        $sort_override = $request->input('sort');
         $column_sort = in_array($sort_override, $allowed_columns) ? $sort_override : 'created_at';
 
         switch ($sort_override) {
@@ -75,21 +81,19 @@ class StatuslabelsController extends Controller
                 break;
         }
 
-        $total = $statuslabels->count();
         $statuslabels = $statuslabels->skip($offset)->take($limit)->get();
 
         return (new StatuslabelsTransformer)->transformStatuslabels($statuslabels, $total);
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
      */
-    public function store(Request $request) : JsonResponse
+    public function store(Request $request): JsonResponse
     {
         $this->authorize('create', Statuslabel::class);
         $request->except('deployable', 'pending', 'archived');
@@ -99,6 +103,8 @@ class StatuslabelsController extends Controller
             return response()->json(Helper::formatStandardApiResponse('error', null, ['type' => ['Status label type is required.']]));
         }
 
+        $request->validate(['color' => ['nullable', new CssColor]]);
+
         $statuslabel = new Statuslabel;
         $statuslabel->fill($request->all());
 
@@ -106,14 +112,19 @@ class StatuslabelsController extends Controller
         $statuslabel->deployable = $statusType['deployable'];
         $statuslabel->pending = $statusType['pending'];
         $statuslabel->archived = $statusType['archived'];
-        $statuslabel->color             =  $request->input('color');
-        $statuslabel->show_in_nav       =  $request->input('show_in_nav', 0);
-        $statuslabel->default_label     =  $request->input('default_label', 0);
-
+        // Coerce boolean-shaped columns through $request->boolean()
+        // so a malformed payload (nested object / array) can't slam
+        // an object into a tinyint column and blow up at save() with
+        // a 500. Non-scalar payloads land as false, which the caller
+        // can correct on retry with a proper boolean value.
+        $statuslabel->color = is_scalar($request->input('color')) ? $request->input('color') : null;
+        $statuslabel->show_in_nav = $request->boolean('show_in_nav');
+        $statuslabel->default_label = $request->boolean('default_label');
 
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.create.success')));
         }
+
         return response()->json(Helper::formatStandardApiResponse('error', null, $statuslabel->getErrors()));
 
     }
@@ -122,37 +133,44 @@ class StatuslabelsController extends Controller
      * Display the specified resource.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
+     *
      * @param  int  $id
      */
-    public function show($id) : array
+    public function show($id): array
     {
         $this->authorize('view', Statuslabel::class);
-        $statuslabel = Statuslabel::findOrFail($id);
+        // Match index()'s eager load so isDeletable() (via available_actions.delete
+        // and bulk_selectable.delete) reads the preloaded count instead of firing
+        // a fallback assets()->count() query.
+        $statuslabel = Statuslabel::withCount('assets as assets_count')->findOrFail($id);
 
         return (new StatuslabelsTransformer)->transformStatuslabel($statuslabel);
     }
-
 
     /**
      * Update the specified resource in storage.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
-     * @param  \Illuminate\Http\Request  $request
+     *
      * @param  int  $id
      */
-    public function update(Request $request, $id) : JsonResponse
+    public function update(Request $request, $id): JsonResponse
     {
         $this->authorize('update', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
-        
-        $request->except('deployable', 'pending', 'archived');
 
+        $request->except('deployable', 'pending', 'archived');
 
         if (! $request->filled('type')) {
             return response()->json(Helper::formatStandardApiResponse('error', null, 'Status label type is required.'));
         }
+
+        // See color-validation comment in store() above.
+        $request->validate(['color' => ['nullable', new CssColor]]);
 
         $statuslabel->fill($request->all());
 
@@ -160,9 +178,14 @@ class StatuslabelsController extends Controller
         $statuslabel->deployable = $statusType['deployable'];
         $statuslabel->pending = $statusType['pending'];
         $statuslabel->archived = $statusType['archived'];
-        $statuslabel->color             =  $request->input('color');
-        $statuslabel->show_in_nav       =  $request->input('show_in_nav', 0);
-        $statuslabel->default_label     =  $request->input('default_label', 0);
+        // Coerce boolean-shaped columns through $request->boolean()
+        // so a malformed payload (nested object / array) can't slam
+        // an object into a tinyint column and blow up at save() with
+        // a 500. Non-scalar payloads land as false, which the caller
+        // can correct on retry with a proper boolean value.
+        $statuslabel->color = is_scalar($request->input('color')) ? $request->input('color') : null;
+        $statuslabel->show_in_nav = $request->boolean('show_in_nav');
+        $statuslabel->default_label = $request->boolean('default_label');
 
         if ($statuslabel->save()) {
             return response()->json(Helper::formatStandardApiResponse('success', $statuslabel, trans('admin/statuslabels/message.update.success')));
@@ -175,10 +198,12 @@ class StatuslabelsController extends Controller
      * Remove the specified resource from storage.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
+     *
      * @param  int  $id
      */
-    public function destroy($id) : JsonResponse
+    public function destroy($id): JsonResponse
     {
         $this->authorize('delete', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
@@ -194,20 +219,20 @@ class StatuslabelsController extends Controller
         return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/statuslabels/message.assoc_assets')));
     }
 
-
-
-     /**
+    /**
      * Show a count of assets by status label for pie chart
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v3.0]
      */
-    public function getAssetCountByStatuslabel() : array
+    public function getAssetCountByStatuslabel(): array
     {
-        $this->authorize('view', Statuslabel::class);
+        
+        abort_unless(Gate::allows('view', Statuslabel::class) || Gate::allows('view', Asset::class), 403);
 
-        if (Setting::getSettings()->show_archived_in_list == 0 ) {
-            $statuslabels = Statuslabel::withCount('assets')->where('archived','0')->get();
+        if (Setting::getSettings()->show_archived_in_list == 0) {
+            $statuslabels = Statuslabel::withCount('assets')->where('archived', '0')->get();
         } else {
             $statuslabels = Statuslabel::withCount('assets')->get();
         }
@@ -224,7 +249,7 @@ class StatuslabelsController extends Controller
             }
         }
 
-        return (new PieChartTransformer())->transformPieChartDate($total);
+        return (new PieChartTransformer)->transformPieChartDate($total);
 
     }
 
@@ -232,11 +257,16 @@ class StatuslabelsController extends Controller
      * Show a count of assets by meta status type for pie chart
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v6.0.11]
      */
-    public function getAssetCountByMetaStatus() : array
+    public function getAssetCountByMetaStatus(): array
     {
-        $this->authorize('view', Statuslabel::class);
+        // Dashboard pie-chart data: asset counts bucketed by meta
+        // status type (RTD / deployed / archived / pending /
+        // undeployable). Same widening rationale as
+        // getAssetCountByStatuslabel() above.
+        abort_unless(Gate::allows('view', Statuslabel::class) || Gate::allows('view', Asset::class), 403);
 
         $total['rtd']['label'] = trans('general.ready_to_deploy');
         $total['rtd']['count'] = Asset::RTD()->count();
@@ -253,17 +283,19 @@ class StatuslabelsController extends Controller
         $total['undeployable']['label'] = trans('general.undeployable');
         $total['undeployable']['count'] = Asset::Undeployable()->count();
 
-        return (new PieChartTransformer())->transformPieChartDate($total);
+        return (new PieChartTransformer)->transformPieChartDate($total);
     }
 
     /**
      * Display the specified resource.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
+     *
      * @param  int  $id
      */
-    public function assets(Request $request, $id) : array
+    public function assets(Request $request, $id): array
     {
         $this->authorize('view', Statuslabel::class);
         $this->authorize('index', Asset::class);
@@ -283,10 +315,8 @@ class StatuslabelsController extends Controller
         $total = $assets->count();
         $assets = $assets->skip($offset)->take($limit)->get();
 
-
         return (new AssetsTransformer)->transformAssets($assets, $total);
     }
-
 
     /**
      * Returns a boolean response based on whether the status label
@@ -298,10 +328,12 @@ class StatuslabelsController extends Controller
      * assigned but the status is changed to one that isn't pending or deployable
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v4.0]
      */
-    public function checkIfDeployable($id) : string
+    public function checkIfDeployable($id): string
     {
+        $this->authorize('view', Statuslabel::class);
         $statuslabel = Statuslabel::findOrFail($id);
         if (($statuslabel->getStatuslabelType() == 'pending') || ($statuslabel->getStatuslabelType() == 'deployable')) {
             return '1';
@@ -314,10 +346,11 @@ class StatuslabelsController extends Controller
      * Gets a paginated collection for the select2 menus
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
+     *
      * @since [v6.1.1]
-     * @see \App\Http\Transformers\SelectlistTransformer
+     * @see SelectlistTransformer
      */
-    public function selectlist(Request $request) : array
+    public function selectlist(Request $request): array
     {
 
         $this->authorize('view.selectlists');

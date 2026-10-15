@@ -110,6 +110,47 @@ then
     done
 fi
 
+# Fix Apache request header limits
+# (defaults live in /etc/apache2/conf-available/limits.conf; override here)
+if [ -v "APACHE_LIMIT_REQUEST_FIELD_SIZE" ]
+then
+    echo "Changing LimitRequestFieldSize to ${APACHE_LIMIT_REQUEST_FIELD_SIZE}"
+    sed -i "s/^LimitRequestFieldSize.*/LimitRequestFieldSize ${APACHE_LIMIT_REQUEST_FIELD_SIZE}/" /etc/apache2/conf-available/limits.conf
+fi
+
+if [ -v "APACHE_LIMIT_REQUEST_LINE" ]
+then
+    echo "Changing LimitRequestLine to ${APACHE_LIMIT_REQUEST_LINE}"
+    sed -i "s/^LimitRequestLine.*/LimitRequestLine ${APACHE_LIMIT_REQUEST_LINE}/" /etc/apache2/conf-available/limits.conf
+fi
+
+if [ -v "APACHE_LIMIT_REQUEST_FIELDS" ]
+then
+    echo "Changing LimitRequestFields to ${APACHE_LIMIT_REQUEST_FIELDS}"
+    sed -i "s/^LimitRequestFields.*/LimitRequestFields ${APACHE_LIMIT_REQUEST_FIELDS}/" /etc/apache2/conf-available/limits.conf
+fi
+
+# Apache listening ports. Rootless container runtimes can't bind
+# privileged ports (<1024) even inside the container, so expose both
+# ports as env vars. Defaults preserve the historical 80/443
+# Port substitution happens in both ports.conf (Listen directive)
+# and the VirtualHost conf so Apache's module-side bind and the vhost match.
+# sed with --follow-symlinks because a2ensite symlinks 001-default-ssl.conf
+# from sites-available into sites-enabled.
+if [ -v "APACHE_HTTP_PORT" ] && [ "$APACHE_HTTP_PORT" != "80" ]
+then
+    echo "Changing Apache HTTP port to ${APACHE_HTTP_PORT}"
+    sed -i --follow-symlinks -E "s/^Listen\s+80\b/Listen ${APACHE_HTTP_PORT}/" /etc/apache2/ports.conf
+    sed -i --follow-symlinks -E "s/<VirtualHost\s+\*:80>/<VirtualHost *:${APACHE_HTTP_PORT}>/" /etc/apache2/sites-enabled/000-default.conf
+fi
+
+if [ -v "APACHE_HTTPS_PORT" ] && [ "$APACHE_HTTPS_PORT" != "443" ]
+then
+    echo "Changing Apache HTTPS port to ${APACHE_HTTPS_PORT}"
+    sed -i --follow-symlinks -E "s/^(\s*)Listen\s+443\b/\1Listen ${APACHE_HTTPS_PORT}/" /etc/apache2/ports.conf
+    sed -i --follow-symlinks -E "s/<VirtualHost\s+_default_:443>/<VirtualHost _default_:${APACHE_HTTPS_PORT}>/" /etc/apache2/sites-available/001-default-ssl.conf
+fi
+
 # If the Oauth DB files are not present copy the vendor files over to the db migrations
 if [ ! -f "/var/www/html/database/migrations/*create_oauth*" ]
 then
@@ -124,6 +165,7 @@ fi
 php artisan migrate --force
 php artisan config:clear
 php artisan config:cache
+php artisan view:clear
 
 # we do this after the artisan commands to ensure that if the laravel
 # log got created by root, we set the permissions back

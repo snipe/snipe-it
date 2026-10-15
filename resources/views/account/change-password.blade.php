@@ -2,68 +2,74 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('general.changepassword') }}
+    {{ trans('general.changepassword') }}
 @stop
 
 {{-- Account page content --}}
 @section('content')
 
+    <x-container class="col-md-6 col-md-offset-3">
+        <x-form route="{{ route('account.password.update') }}">
+            <x-box>
 
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
-    <form method="POST" action="{{ route('account.password.update') }}" accept-charset="UTF-8" class="form-horizontal" autocomplete="off">
-    <!-- CSRF Token -->
-        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-        <div class="box box-default">
-            <div class="box-body">
+                <x-form.row
+                    :label="trans('general.current_password')"
+                    name="current_password"
+                    input_div_class="col-md-5"
+                >
+                    <x-slot:input>
+                        <input
+                            class="form-control"
+                            type="password"
+                            id="current_password"
+                            name="current_password"
+                            aria-label="current_password"
+                            required
+                            @disabled(config('app.lock_passwords'))
+                        />
+                        <x-demo-lock>{{ trans('general.feature_disabled') }}</x-demo-lock>
+                    </x-slot:input>
+                </x-form.row>
 
+                <x-form.row
+                    :label="trans('general.new_password')"
+                    name="password"
+                    input_div_class="col-md-5"
+                >
+                    <x-slot:input>
+                        <input
+                            class="form-control"
+                            type="password"
+                            id="password"
+                            name="password"
+                            aria-label="password"
+                            required
+                            @disabled(config('app.lock_passwords'))
+                        />
+                        <x-demo-lock>{{ trans('general.feature_disabled') }}</x-demo-lock>
+                    </x-slot:input>
+                </x-form.row>
 
-    <!-- Old Password -->
-    <div class="form-group {{ $errors->has('current_password') ? ' has-error' : '' }}">
-        <label for="current_password" class="col-md-3 control-label"> {{ trans('general.current_password') }} </label>
-        </label>
-        <div class="col-md-5 required">
-            <input class="form-control" type="password" name="current_password" id="current_password" required {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
-            {!! $errors->first('current_password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            @if (config('app.lock_passwords')===true)
-                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
-            @endif
-        </div>
-    </div>
+                <x-form.row
+                    :label="trans('general.new_password')"
+                    name="password_confirmation"
+                    input_div_class="col-md-5"
+                >
+                    <x-slot:input>
+                        <input
+                            class="form-control"
+                            type="password"
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            aria-label="password_confirmation"
+                            @disabled(config('app.lock_passwords'))
+                        />
+                        <x-demo-lock>{{ trans('general.feature_disabled') }}</x-demo-lock>
+                    </x-slot:input>
+                </x-form.row>
 
-    <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
-        <label for="password" class="col-md-3 control-label">{{ trans('general.new_password') }}</label>
-        <div class="col-md-5 required">
-            <input class="form-control" type="password" name="password" id="password" required {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
-            {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            @if (config('app.lock_passwords')===true)
-                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
-            @endif
-        </div>
-    </div>
+            </x-box>
+        </x-form>
+    </x-container>
 
-
-    <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-        <label for="password_confirmation" class="col-md-3 control-label">{{ trans('general.new_password') }}</label>
-        <div class="col-md-5 required">
-            <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"  {{ (config('app.lock_passwords') ? ' disabled' : '') }} aria-label="password_confirmation">
-            {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            @if (config('app.lock_passwords')===true)
-                <p class="text-warning"><i class="fas fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
-            @endif
-        </div>
-    </div>
-
-
-
-            </div> <!-- .box-body -->
-            <div class="box-footer text-right">
-                <a class="btn btn-link" href="{{ URL::previous() }}">{{ trans('button.cancel') }}</a>
-                <button type="submit" class="btn btn-primary"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
-            </div>
-
-        </div> <!-- .box-default -->
-        </form>
-    </div> <!-- .col-md-9 -->
-</div> <!-- .row-->
 @stop

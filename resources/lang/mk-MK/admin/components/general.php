@@ -1,16 +1,19 @@
 <?php
 
-return array(
-    'component_name'                  => 'Име на компонента',
-    'checkin'                             => 'Раздолжи компонента',
-    'checkout'                             => 'Задолжи компонента',
-    'cost'				=> 'Набавна цена',
-    'create'                             => 'Креирај компонента',
-    'edit'                             => 'Уреди компонента',
-    'date'					=> 'Датум на набавка',
-    'order'					=> 'Број на нарачка',
-    'remaining' 			             => 'Останува',
-    'total' 			                 => 'Вкупно',
-    'update'                            => 'Уреди компонента',
-    'checkin_limit'            => 'Количината што е вратена мора да биде еднаква или помала од :assigned_qty'
-);
+return [
+    'component_name' => 'Име на компонента',
+    'checkin' => 'Раздолжи компонента',
+    'checkout' => 'Задолжи компонента',
+    'cost' => 'Набавна цена',
+    'create' => 'Креирај компонента',
+    'edit' => 'Уреди компонента',
+    'date' => 'Датум на набавка',
+    'order' => 'Број на нарачка',
+    'remaining' => 'Останува',
+    'total' => 'Вкупно',
+    'update' => 'Уреди компонента',
+    'checkin_limit' => 'Количината што е вратена мора да биде еднаква или помала од :assigned_qty',
+    'exclude_deleted' => 'Exclude Deleted Components',
+    'include_deleted' => 'Include Deleted Components',
+    'only_deleted' => 'Only Deleted Components',
+];

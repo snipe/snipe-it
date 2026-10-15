@@ -9,7 +9,6 @@ use App\Exceptions\ItemStillHasComponents;
 use App\Exceptions\ItemStillHasConsumables;
 use App\Exceptions\ItemStillHasLicenses;
 use App\Models\Category;
-use Illuminate\Support\Facades\Storage;
 
 class DestroyCategoryAction
 {
@@ -21,7 +20,7 @@ class DestroyCategoryAction
      * @throws ItemStillHasLicenses
      * @throws ItemStillHasConsumables
      */
-    static function run(Category $category): bool
+    public static function run(Category $category): bool
     {
         $category->loadCount([
             'assets as assets_count',
@@ -29,7 +28,7 @@ class DestroyCategoryAction
             'consumables as consumables_count',
             'components as components_count',
             'licenses as licenses_count',
-            'models as models_count'
+            'models as models_count',
         ]);
 
         if ($category->assets_count > 0) {
@@ -51,7 +50,8 @@ class DestroyCategoryAction
             throw new ItemStillHasAssetModels($category);
         }
 
-        Storage::disk('public')->delete('categories'.'/'.$category->image);
+        // Image file cleanup lives on the model's forceDeleted hook so
+        // soft-delete + restore preserves the image reference.
         $category->delete();
 
         return true;

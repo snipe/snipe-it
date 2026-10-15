@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -13,68 +13,68 @@ return array(
     |
     */
 
-    'week_start_select' => 'Select Day of Week',
-    'week_start' => 'Day the Week Starts On',
-    'today' => 'Today',
-    'clear' => 'Clear',
+    'week_start_select' => 'Selecciona día de la semana',
+    'week_start' => 'Los dias de la semana empieza el',
+    'today' => 'Hoy',
+    'clear' => 'Limpiar',
     'days' => [
-        'sunday' => 'Sunday',
-        'monday' => 'Monday',
-        'tuesday' => 'Tuesday',
-        'wednesday' =>  'Wednesday',
-        'thursday' =>  'Thursday',
-        'friday' =>  'Friday',
-        'saturday' =>  'Saturday',
-        ],
+        'sunday' => 'Domingo',
+        'monday' => 'Lunes',
+        'tuesday' => 'Martes',
+        'wednesday' => 'Miércoles',
+        'thursday' => 'Jueves',
+        'friday' => 'Viernes',
+        'saturday' => 'Sábado',
+    ],
 
     'short_days' => [
-        'sunday' => 'Sun',
-        'monday' => 'Mon',
-        'tuesday' => 'Tue',
-        'wednesday' =>  'Wed',
-        'thursday' =>  'Thu',
-        'friday' =>  'Fri',
-        'saturday' =>  'Sat',
+        'sunday' => 'Dom',
+        'monday' => 'Lun',
+        'tuesday' => 'Mar',
+        'wednesday' => 'Mie',
+        'thursday' => 'Jue',
+        'friday' => 'Vie',
+        'saturday' => 'Sab',
     ],
 
     'min_days' => [
-        'sunday' => 'Su',
-        'monday' => 'Mo',
-        'tuesday' => 'Tu',
-        'wednesday' =>  'We',
-        'thursday' =>  'Th',
-        'friday' =>  'Fr',
-        'saturday' =>  'Sa',
+        'sunday' => 'Do',
+        'monday' => 'Lu',
+        'tuesday' => 'Ma',
+        'wednesday' => 'Mi',
+        'thursday' => 'Ju',
+        'friday' => 'Vi',
+        'saturday' => 'Sa',
     ],
 
     'months' => [
-        'january' => 'January',
-        'february' => 'February',
-        'march' => 'March',
-        'april' => 'April',
-        'may' => 'May',
-        'june' => 'June',
-        'july' => 'July',
-        'august' => 'August',
-        'september' => 'September',
-        'october' => 'October',
-        'november' => 'November',
-        'december' => 'December',
+        'january' => 'Enero',
+        'february' => 'Febrero',
+        'march' => 'Marzo',
+        'april' => 'Abril',
+        'may' => 'Mayo',
+        'june' => 'Junio',
+        'july' => 'Julio',
+        'august' => 'Agosto',
+        'september' => 'Septiembre',
+        'october' => 'Octubre',
+        'november' => 'Noviembre',
+        'december' => 'Diciembre',
     ],
 
     'months_short' => [
-        'january' => 'Jan',
+        'january' => 'Ene',
         'february' => 'Feb',
         'march' => 'Mar',
-        'april' => 'Apr',
+        'april' => 'Abr',
         'may' => 'May',
         'june' => 'Jun',
         'july' => 'Jul',
-        'august' => 'Aug',
+        'august' => 'Ago',
         'september' => 'Sep',
         'october' => 'Oct',
         'november' => 'Nov',
-        'december' => 'Dec',
+        'december' => 'Dic',
     ],
 
-);
+];

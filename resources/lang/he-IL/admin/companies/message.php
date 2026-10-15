@@ -2,19 +2,21 @@
 
 return [
     'does_not_exist' => 'החברה לא קיימת.',
-    'deleted'        => 'Deleted company',
-    'assoc_users'    => 'חברה זו קשורה כרגע עם דגם אחד לפחות ואינה ניתנת למחיקה. אנא עדכן את המודלים שלך כדי לא להפנות עוד לחברה זו ונסה שוב.',
+    'deleted' => 'Deleted company',
+    'assoc_users' => 'חברה זו קשורה כרגע עם דגם אחד לפחות ואינה ניתנת למחיקה. אנא עדכן את המודלים שלך כדי לא להפנות עוד לחברה זו ונסה שוב.',
     'create' => [
-        'error'   => 'החברה לא נוצרה, נסה שוב.',
+        'error' => 'החברה לא נוצרה, נסה שוב.',
         'success' => 'החברה יצרה בהצלחה.',
     ],
     'update' => [
-        'error'   => 'החברה לא עודכנה, נסה שוב',
+        'error' => 'החברה לא עודכנה, נסה שוב',
         'success' => 'החברה עודכנה בהצלחה.',
     ],
     'delete' => [
         'confirm' => 'האם אתה בטוח שברצונך למחוק חברה זו?',
-        'error'   => 'היתה בעיה במחיקת החברה. בבקשה נסה שוב.',
+        'error' => 'היתה בעיה במחיקת החברה. בבקשה נסה שוב.',
         'success' => 'החברה נמחקה בהצלחה.',
+        'bulk_success' => 'Company deleted successfully.|:count companies were deleted successfully.',
+        'partial_success' => 'Company deleted successfully. See additional information below. | :count companies were deleted successfully. See additional information below.',
     ],
 ];

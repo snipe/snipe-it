@@ -1,4 +1,5 @@
 <?php
+
 namespace Tests\Unit;
 
 use App\Models\User;
@@ -6,7 +7,7 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
-    public function testFirstNameSplit()
+    public function test_first_name_split()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_firstname = 'Natalia';
@@ -16,7 +17,7 @@ class UserTest extends TestCase
         $this->assertEquals($expected_lastname, $user['last_name']);
     }
 
-    public function testFirstName()
+    public function test_first_name()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'natalia';
@@ -24,15 +25,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstNameEmail()
+    public function test_first_name_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'natalia@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstname');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testLastName()
+    public function test_last_name()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'allanovna-romanova-oshostakova';
@@ -40,15 +41,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testLastNameEmail()
+    public function test_last_name_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'allanovna-romanova-oshostakova@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'lastname');
-        $this->assertEquals($expected_username, $user['username'] . '@example.com');
+        $this->assertEquals($expected_username, $user['username'].'@example.com');
     }
 
-    public function testFirstNameDotLastName()
+    public function test_first_name_dot_last_name()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'natalia.allanovna-romanova-oshostakova';
@@ -56,15 +57,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstNameDotLastNameEmail()
+    public function test_first_name_dot_last_name_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'natalia.allanovna-romanova-oshostakova@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstname.lastname');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testLastNameFirstInitial()
+    public function test_last_name_first_initial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'allanovna-romanova-oshostakovan';
@@ -72,15 +73,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testLastNameFirstInitialEmail()
+    public function test_last_name_first_initial_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'allanovna-romanova-oshostakovan@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'lastnamefirstinitial');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testFirstInitialLastName()
+    public function test_first_initial_last_name()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nallanovna-romanova-oshostakova';
@@ -88,15 +89,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstInitialLastNameEmail()
+    public function test_first_initial_last_name_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'nallanovna-romanova-oshostakova@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'filastname');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testFirstInitialUnderscoreLastName()
+    public function test_first_initial_underscore_last_name()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nallanovna-romanova-oshostakova';
@@ -104,31 +105,31 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstInitialUnderscoreLastNameEmail()
+    public function test_first_initial_underscore_last_name_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'nallanovna-romanova-oshostakova@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstinitial_lastname');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testSingleName()
+    public function test_single_name()
     {
         $fullname = 'Natalia';
         $expected_username = 'natalia';
-        $user = User::generateFormattedNameFromFullName($fullname, 'firstname_lastname',);
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstname_lastname');
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testSingleNameEmail()
+    public function test_single_name_email()
     {
         $fullname = 'Natalia';
         $expected_email = 'natalia@example.com';
-        $user = User::generateFormattedNameFromFullName($fullname, 'firstname_lastname',);
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $user = User::generateFormattedNameFromFullName($fullname, 'firstname_lastname');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testFirstInitialDotLastname()
+    public function test_first_initial_dot_lastname()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nallanovna-romanova-oshostakova';
@@ -136,15 +137,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstInitialDotLastnameEmail()
+    public function test_first_initial_dot_lastname_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'nallanovna-romanova-oshostakova@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstinitial.lastname');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testLastNameDotFirstInitial()
+    public function test_last_name_dot_first_initial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'allanovna-romanova-oshostakova.n';
@@ -152,15 +153,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testLastNameDotFirstInitialEmail()
+    public function test_last_name_dot_first_initial_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'allanovna-romanova-oshostakova.n@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'lastname.firstinitial');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testLastNameUnderscoreFirstInitial()
+    public function test_last_name_underscore_first_initial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'allanovna-romanova-oshostakova_n';
@@ -168,15 +169,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testLastNameUnderscoreFirstInitialEmail()
+    public function test_last_name_underscore_first_initial_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'allanovna-romanova-oshostakova_n@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'lastname_firstinitial');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testFirstNameLastName()
+    public function test_first_name_last_name()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nataliaallanovna-romanova-oshostakova';
@@ -184,15 +185,15 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstNameLastNameEmail()
+    public function test_first_name_last_name_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'nataliaallanovna-romanova-oshostakova@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastname');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
     }
 
-    public function testFirstNameLastInitial()
+    public function test_first_name_last_initial()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_username = 'nataliaa';
@@ -200,11 +201,83 @@ class UserTest extends TestCase
         $this->assertEquals($expected_username, $user['username']);
     }
 
-    public function testFirstNameLastInitialEmail()
+    public function test_first_name_last_initial_email()
     {
         $fullname = "Natalia Allanovna Romanova-O'Shostakova";
         $expected_email = 'nataliaa@example.com';
         $user = User::generateFormattedNameFromFullName($fullname, 'firstnamelastinitial');
-        $this->assertEquals($expected_email, $user['username'] . '@example.com');
+        $this->assertEquals($expected_email, $user['username'].'@example.com');
+    }
+
+    public function test_link_light_color_attribute()
+    {
+        // if global branding and user are not set we use the app default defined in the accessor:
+        $this->settings->set(['link_light_color' => null]);
+        $this->assertEquals(
+            '#296282',
+            User::factory()->create()->link_light_color
+        );
+
+        // nothing set on user we use global branding:
+        $this->settings->set(['link_light_color' => '#ff6700']);
+        $this->assertEquals(
+            '#ff6700',
+            User::factory()->create()->link_light_color
+        );
+
+        // user has it set we use it:
+        $user = User::factory()->create(['link_light_color' => '#61b329']);
+        $this->assertEquals(
+            '#61b329',
+            $user->link_light_color
+        );
+    }
+
+    public function test_link_dark_color_attribute()
+    {
+        // if global branding and user are not set we use the app default defined in the accessor:
+        $this->settings->set(['link_dark_color' => null]);
+        $this->assertEquals(
+            '#5fa4cc',
+            User::factory()->create()->link_dark_color
+        );
+
+        // nothing set on user we use global branding:
+        $this->settings->set(['link_dark_color' => '#ff6700']);
+        $this->assertEquals(
+            '#ff6700',
+            User::factory()->create()->link_dark_color
+        );
+
+        // user has it set we use it:
+        $user = User::factory()->create(['link_dark_color' => '#61b329']);
+        $this->assertEquals(
+            '#61b329',
+            $user->link_dark_color
+        );
+    }
+
+    public function test_nav_link_color_attribute()
+    {
+        // if global branding and user are not set we use the app default defined in the accessor:
+        $this->settings->set(['nav_link_color' => null]);
+        $this->assertEquals(
+            '#ffffff',
+            User::factory()->create()->nav_link_color
+        );
+
+        // nothing set on user we use global branding:
+        $this->settings->set(['nav_link_color' => '#ff6700']);
+        $this->assertEquals(
+            '#ff6700',
+            User::factory()->create()->nav_link_color
+        );
+
+        // user has it set we use it:
+        $user = User::factory()->create(['nav_link_color' => '#61b329']);
+        $this->assertEquals(
+            '#61b329',
+            $user->nav_link_color
+        );
     }
 }

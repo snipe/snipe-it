@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -15,410 +15,451 @@ return array(
     |---------------------------------------------------------------------------
     */
 
-    "superuser" => [
-        'name' => 'Super User',
-        'note'       => 'Determines whether the user has full access to all aspects of the admin. This setting overrides ALL more specific and restrictive permissions throughout the system. ',
+    'superuser' => [
+        'name' => 'Superanvändare',
+        'note' => 'Avgör om användaren har full tillgång till alla aspekter av administrationen. Den här inställningen åsidosätter ALLA mer specifika och begränsande behörigheter i hela systemet. ',
     ],
     'admin' => [
-        'name' => 'Admin Access',
-        'note'       => 'Determines whether the user has access to most aspects of the system EXCEPT the System Admin Settings. These users will be able to manage users, locations, categories, etc, but ARE constrained by Full Multiple Company Support if it is enabled.',
+        'name' => 'Admin-tillgång',
+        'note' => 'Avgör om användaren har tillgång till de flesta aspekter av systemet UTOM Systemadmininställningarna. Dessa användare kan hantera användare, platser, kategorier etc., men ÄR begränsade av Full Multiple Company Support om det är aktiverat.',
     ],
 
     'import' => [
-        'name' => 'CSV Import',
-        'note'       => 'This will allow users to import even if access to users, assets, etc is denied elsewhere.',
+        'name' => 'CSV-import',
+        'note' => 'Detta kommer att tillåta användare att importera även om åtkomst till användare, tillgångar etc. nekas någon annanstans.',
     ],
 
     'reports' => [
-        'name' => 'Reports Access',
-        'note'       => 'Determines whether the user has access to the Reports section of the application.',
+        'name' => 'Rapportåtkomst',
+        'note' => 'Avgör om användaren har åtkomst till rapportavsnittet i applikationen.',
     ],
 
-    'assets' =>
-        [
-            'name' => 'Tillgångar',
-            'note' => 'Grants access to the Assets section of the application.',
+    'assets' => [
+        'name' => 'Tillgångar',
+        'note' => 'Beviljar åtkomst till avsnittet Tillgångar i applikationen. ',
     ],
 
     'assetsview' => [
-        'name' => 'View Assets',
+        'name' => 'Visa tillgångar',
+        'note' => 'Användare med den här behörigheten kan även visa, men inte ändra eller ta bort, filer som laddats upp till tillgångsmodellen. Det gör det lättare att dela gemensamma dokument, som användarhandböcker, mellan tillgångar utan att ladda upp dem till varje tillgång eller ge användaren rätt att ändra tillgångsfiler. Användarna kan även se redigerings- och incheckningshistorik.',
     ],
 
     'assetscreate' => [
-        'name' => 'Create New Assets',
+        'name' => 'Skapa nya tillgångar',
     ],
 
     'assetsedit' => [
-        'name' => 'Edit Assets',
+        'name' => 'Redigera tillgångar',
     ],
 
     'assetsdelete' => [
-        'name' => 'Delete Assets',
+        'name' => 'Ta bort tillgångar',
     ],
 
     'assetscheckin' => [
-        'name' => 'Check In',
-        'note' => 'Check assets back into inventory that are currently checked out.',
+        'name' => 'Checka in',
+        'note' => 'Checka in tillgångar som för närvarande är utcheckade.',
     ],
 
     'assetscheckout' => [
-        'name' => 'Check Out',
-        'note' => 'Assign assets in inventory by checking them out.',
+        'name' => 'Checka ut',
+        'note' => 'Tilldela tillgångar genom att checka ut dem.',
     ],
 
     'assetsaudit' => [
-        'name' => 'Audit Assets',
-        'note' => 'Allows the user to mark an asset as physically inventoried.',
+        'name' => 'Inventera tillgångar',
+        'note' => 'Gör det möjligt för användaren att markera en tillgång som fysiskt inventerad.',
     ],
 
     'assetsviewrequestable' => [
-        'name' => 'View Requestable Assets',
-        'note' => 'Allows the user to view assets that are marked as requestable.',
+        'name' => 'Visa begärbara objekt',
+        'note' => 'Gör det möjligt för användaren att visa objekt som är markerade som begärbara.',
     ],
 
     'assetsviewencrypted-custom-fields' => [
-        'name' => 'View Encrypted Custom Fields',
-        'note' => 'Allows the user to view and modify encrypted custom fields on assets.',
+        'name' => 'Visa krypterade anpassade fält',
+        'note' => 'Gör det möjligt för användaren att visa och ändra krypterade anpassade fält på tillgångar.',
     ],
 
-    'accessories'   => [
+    'accessories' => [
         'name' => 'Tillbehör',
-        'note'       => 'Grants access to the Accessories section of the application.',
+        'note' => 'Beviljar åtkomst till avsnittet Tillbehör i applikationen.',
     ],
 
     'accessoriesview' => [
-        'name' => 'View Accessories',
+        'name' => 'Visa tillbehör',
     ],
     'accessoriescreate' => [
-        'name' => 'Create New Accessories',
+        'name' => 'Skapa nya tillbehör',
     ],
     'accessoriesedit' => [
-        'name' => 'Edit Accessories',
+        'name' => 'Redigera tillbehör',
     ],
     'accessoriesdelete' => [
-        'name' => 'Delete Accessories',
+        'name' => 'Ta bort tillbehör',
     ],
     'accessoriescheckout' => [
-        'name' => 'Check Out Accessories',
-        'note' => 'Assign accessories in inventory by checking them out.',
+        'name' => 'Checka ut tillbehör',
+        'note' => 'Tilldela tillbehör i inventeringen genom att checka ut dem.',
     ],
     'accessoriescheckin' => [
-        'name' => 'Check In Accessories',
-        'note' => 'Check accessories back into inventory that are currently checked out.',
+        'name' => 'Checka in tillbehör',
+        'note' => 'Checka in tillbehör som för närvarande är utcheckade tillbaka i inventeringen.',
     ],
     'accessoriesfiles' => [
-        'name' => 'Manage Accessory Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with accessories.',
+        'name' => 'Hantera tillbehörsfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer kopplade till tillbehör. (Detta ger bara mening med visningsrättigheter eller högre.)',
     ],
-    'consumables'   => [
+
+    'assetsfiles' => [
+        'name' => 'Hantera tillgångsfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer kopplade till tillgångar. (Detta ger bara mening med visningsrättigheter eller högre.)',
+    ],
+
+    'usersfiles' => [
+        'name' => 'Hantera användarfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer kopplade till användare. (Detta ger bara mening med visningsrättigheter eller högre.)',
+    ],
+
+    'modelsfiles' => [
+        'name' => 'Hantera modellfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer kopplade till tillgångsmodeller på både modellvy- och tillgångsvyskärmar. (Detta ger bara mening med visningsrättigheter eller högre.)',
+    ],
+
+    'departmentsfiles' => [
+        'name' => 'Hantera avdelningsfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer kopplade till avdelningar. (Detta ger bara mening med visningsrättigheter eller högre.)',
+    ],
+
+    'suppliersfiles' => [
+        'name' => 'Hantera leverantörsfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer kopplade till leverantörer. (Detta ger bara mening med visningsrättigheter eller högre.)',
+    ],
+
+    'locationsfiles' => [
+        'name' => 'Hantera platsfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer som är kopplade till platser. (Detta ger bara mening med visningsrättigheter eller högre.)',
+    ],
+
+    'companiesfiles' => [
+        'name' => 'Hantera företagsfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer som är kopplade till företag. (Detta ger bara mening med visningsrättigheter eller högre.)',
+    ],
+
+    'consumablesfiles' => [
+        'name' => 'Hantera förbrukningsmaterialfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer som är kopplade till förbrukningsmaterial. (Detta ger bara mening med visningsrättigheter eller högre.)',
+    ],
+
+    'consumables' => [
         'name' => 'Förbrukningsmaterial',
-        'note'       => 'Grants access to the Consumables section of the application.',
+        'note' => 'Ger åtkomst till avsnittet för förbrukningsmaterial i applikationen.',
     ],
     'consumablesview' => [
-        'name' => 'View Consumables',
+        'name' => 'Visa förbrukningsmaterial',
     ],
     'consumablescreate' => [
-        'name' => 'Create New Consumables',
+        'name' => 'Skapa nytt förbrukningsmaterial',
     ],
     'consumablesedit' => [
-        'name' => 'Edit Consumables',
+        'name' => 'Redigera förbrukningsmaterial',
     ],
     'consumablesdelete' => [
-        'name' => 'Delete Consumables',
+        'name' => 'Ta bort förbrukningsmaterial',
     ],
     'consumablescheckout' => [
-        'name' => 'Check Out Consumables',
-        'note' => 'Assign consumables in inventory by checking them out.',
+        'name' => 'Checka ut förbrukningsmaterial',
+        'note' => 'Tilldela förbrukningsmaterial i inventeringen genom att checka ut dem.',
     ],
-    'consumablesfiles' => [
-        'name' => 'Manage Consumable Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with consumables.',
-    ],
-    'licenses'   => [
+
+    'licenses' => [
         'name' => 'Licenser',
-        'note'       => 'Grants access to the Licenses section of the application.',
+        'note' => 'Ger åtkomst till avsnittet för licenser i applikationen.',
     ],
     'licensesview' => [
-        'name' => 'View Licenses',
+        'name' => 'Visa licenser',
     ],
     'licensescreate' => [
-        'name' => 'Create New Licenses',
+        'name' => 'Skapa ny licens',
     ],
     'licensesedit' => [
-        'name' => 'Edit Licenses',
+        'name' => 'Redigera licenser',
     ],
     'licensesdelete' => [
-        'name' => 'Delete Licenses',
+        'name' => 'Ta bort licenser',
     ],
     'licensescheckout' => [
-        'name' => 'Assign Licenses',
-        'note' => 'Allows the user to assign licenses to assets or users.',
-        ],
+        'name' => 'Tilldela licenser',
+        'note' => 'Tillåter användaren att tilldela licenser till tillgångar eller användare.',
+    ],
     'licensescheckin' => [
-        'name' => 'Unassign Licenses',
-        'note' => 'Allows the user to unassign licenses from assets or users.',
+        'name' => 'Avsluta tilldelning av licenser',
+        'note' => 'Tillåter användaren att ta bort tilldelning av licenser från tillgångar eller användare.',
     ],
     'licensesfiles' => [
-        'name' => 'Manage License Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with licenses.',
-    ],
-    'licenseskeys' => [
-        'name' => 'Manage License Keys',
-        'note' => 'Allows the user to view product keys associated with licenses.',
-    ],
-    'components'   => [
-        'name' => 'Komponenter',
-        'note'       => 'Grants access to the Components section of the application.',
-    ],
-    'componentsview' => [
-        'name' => 'View Components',
-    ],
-    'componentscreate' => [
-        'name' => 'Create New Components',
-    ],
-    'componentsedit' => [
-        'name' => 'Edit Components',
-    ],
-    'componentsdelete' => [
-        'name' => 'Delete Components',
+        'name' => 'Hantera licensfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer som är kopplade till licenser.',
     ],
     'componentsfiles' => [
-        'name' => 'Manage Component Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with components.',
+        'name' => 'Hantera komponentfiler',
+        'note' => 'Tillåter användaren att ladda upp, ladda ner och ta bort filer som är kopplade till komponenter.',
     ],
+
+    'licenseskeys' => [
+        'name' => 'Hantera licensnycklar',
+        'note' => 'Tillåter användaren att visa produkt nycklar som är kopplade till licenser.',
+    ],
+    'components' => [
+        'name' => 'Komponenter',
+        'note' => 'Ger åtkomst till avsnittet Komponenter i applikationen.',
+    ],
+    'componentsview' => [
+        'name' => 'Visa komponenter',
+    ],
+    'componentscreate' => [
+        'name' => 'Skapa nya komponenter',
+    ],
+    'componentsedit' => [
+        'name' => 'Redigera komponenter',
+    ],
+    'componentsdelete' => [
+        'name' => 'Ta bort komponenter',
+    ],
+
     'componentscheckout' => [
-        'name' => 'Check Out Components',
-        'note' => 'Assign components in inventory by checking them out.',
+        'name' => 'Checka ut komponenter',
+        'note' => 'Tilldela komponenter i inventeringen genom att checka ut dem.',
     ],
     'componentscheckin' => [
-        'name' => 'Check In Components',
-        'note' => 'Check components back into inventory that are currently checked out.',
+        'name' => 'Checka in komponenter',
+        'note' => 'Checka in komponenter som för närvarande är utcheckade tillbaka till inventeringen.',
     ],
-    'kits'   => [
+    'kits' => [
         'name' => 'Fördefinierade paket',
-        'note'       => 'Grants access to the Predefined Kits section of the application.',
+        'note' => 'Ger åtkomst till avsnittet Fördefinierade kit i applikationen.',
     ],
     'kitsview' => [
-        'name' => 'View Predefined Kits',
+        'name' => 'Visa fördefinierade kit',
     ],
     'kitscreate' => [
-        'name' => 'Create New Predefined Kits',
+        'name' => 'Skapa nya fördefinierade kit',
     ],
     'kitsedit' => [
-        'name' => 'Edit Predefined Kits',
+        'name' => 'Redigera fördefinierade kit',
     ],
     'kitsdelete' => [
-        'name' => 'Delete Predefined Kits',
+        'name' => 'Ta bort fördefinierade kit',
     ],
-    'users'   => [
+    'users' => [
         'name' => 'Användare',
-        'note'       => 'Grants access to the Users section of the application.',
+        'note' => 'Ger åtkomst till användarsektionen i applikationen.',
     ],
     'usersview' => [
         'name' => 'Visa användare',
+        'note' => 'Användare med den här behörigheten kan även visa, men inte ändra eller ta bort, filer som laddats upp till användaren. De kan också se redigerings- och incheckningshistorik.',
     ],
     'userscreate' => [
-        'name' => 'Create New Users',
+        'name' => 'Skapa nya användare',
     ],
     'usersedit' => [
-        'name' => 'Edit Users',
+        'name' => 'Redigera användare',
     ],
     'usersdelete' => [
-        'name' => 'Delete Users',
+        'name' => 'Ta bort användare',
     ],
-    'models'   => [
-        'name' => 'Models',
-        'note'       => 'Grants access to the Models section of the application.',
+    'models' => [
+        'name' => 'Modeller',
+        'note' => 'Ger åtkomst till modellsektionen i applikationen.',
     ],
     'modelsview' => [
         'name' => 'Visa modeller',
     ],
 
     'modelscreate' => [
-        'name' => 'Create New Models',
+        'name' => 'Skapa nya modeller',
     ],
     'modelsedit' => [
-        'name' => 'Edit Models',
+        'name' => 'Redigera modeller',
     ],
     'modelsdelete' => [
-        'name' => 'Delete Models',
+        'name' => 'Ta bort modeller',
     ],
-    'categories'   => [
+    'categories' => [
         'name' => 'Kategorier',
-        'note'       => 'Grants access to the Categories section of the application.',
+        'note' => 'Ger åtkomst till kategorisektionen i applikationen.',
     ],
     'categoriesview' => [
-        'name' => 'View Categories',
+        'name' => 'Visa kategorier',
     ],
     'categoriescreate' => [
-        'name' => 'Create New Categories',
+        'name' => 'Skapa nya kategorier',
     ],
     'categoriesedit' => [
-        'name' => 'Edit Categories',
+        'name' => 'Redigera kategorier',
     ],
     'categoriesdelete' => [
-        'name' => 'Delete Categories',
+        'name' => 'Ta bort kategorier',
     ],
-    'departments'   => [
+    'departments' => [
         'name' => 'Avdelningar',
-        'note'       => 'Grants access to the Departments section of the application.',
+        'note' => 'Ger åtkomst till avdelningssektionen i applikationen.',
     ],
     'departmentsview' => [
-        'name' => 'View Departments',
+        'name' => 'Visa avdelningar',
     ],
     'departmentscreate' => [
-        'name' => 'Create New Departments',
+        'name' => 'Skapa nya avdelningar',
     ],
     'departmentsedit' => [
-        'name' => 'Edit Departments',
+        'name' => 'Redigera avdelningar',
     ],
     'departmentsdelete' => [
-        'name' => 'Delete Departments',
+        'name' => 'Ta bort avdelningar',
     ],
-    'locations'   => [
+    'locations' => [
         'name' => 'Platser',
-        'note'       => 'Grants access to the Locations section of the application.',
+        'note' => 'Ger åtkomst till avsnittet Platser i applikationen.',
     ],
     'locationsview' => [
-        'name' => 'View Locations',
+        'name' => 'Visa platser',
     ],
     'locationscreate' => [
-        'name' => 'Create New Locations',
+        'name' => 'Skapa nya platser',
     ],
     'locationsedit' => [
-        'name' => 'Edit Locations',
+        'name' => 'Redigera platser',
     ],
     'locationsdelete' => [
-        'name' => 'Delete Locations',
+        'name' => 'Ta bort platser',
     ],
-    'status-labels'   => [
+    'status-labels' => [
         'name' => 'Statusetiketter',
-        'note'       => 'Grants access to the Status Labels section of the application used by Assets.',
+        'note' => 'Ger åtkomst till avsnittet Statusetiketter i applikationen som används av Tillgångar.',
     ],
     'statuslabelsview' => [
-        'name' => 'View Status Labels',
+        'name' => 'Visa statusetiketter',
     ],
     'statuslabelscreate' => [
-        'name' => 'Create New Status Labels',
+        'name' => 'Skapa nya statusetiketter',
     ],
     'statuslabelsedit' => [
-        'name' => 'Edit Status Labels',
+        'name' => 'Redigera statusetiketter',
     ],
     'statuslabelsdelete' => [
-        'name' => 'Delete Status Labels',
+        'name' => 'Ta bort statusetiketter',
     ],
-    'custom-fields'   => [
+    'custom-fields' => [
         'name' => 'Anpassade fält',
-        'note'       => 'Grants access to the Custom Fields section of the application used by Assets.',
+        'note' => 'Ger åtkomst till avsnittet Anpassade fält i applikationen som används av Tillgångar.',
     ],
     'customfieldsview' => [
-        'name' => 'View Custom Fields',
+        'name' => 'Visa anpassade fält',
     ],
     'customfieldscreate' => [
-        'name' => 'Create New Custom Fields',
+        'name' => 'Skapa nya anpassade fält',
     ],
     'customfieldsedit' => [
-        'name' => 'Edit Custom Fields',
+        'name' => 'Redigera anpassade fält',
     ],
     'customfieldsdelete' => [
-        'name' => 'Delete Custom Fields',
+        'name' => 'Ta bort anpassade fält',
     ],
-    'suppliers'   => [
+    'suppliers' => [
         'name' => 'Leverantörer',
-        'note'       => 'Grants access to the Suppliers section of the application.',
+        'note' => 'Ger åtkomst till avsnittet Leverantörer i applikationen.',
     ],
     'suppliersview' => [
-        'name' => 'View Suppliers',
+        'name' => 'Visa leverantörer',
     ],
     'supplierscreate' => [
-        'name' => 'Create New Suppliers',
+        'name' => 'Skapa nya leverantörer',
     ],
     'suppliersedit' => [
-        'name' => 'Edit Suppliers',
+        'name' => 'Redigera leverantörer',
     ],
     'suppliersdelete' => [
-        'name' => 'Delete Suppliers',
+        'name' => 'Ta bort leverantörer',
     ],
-    'manufacturers'   => [
+    'manufacturers' => [
         'name' => 'Tillverkare',
-        'note'       => 'Grants access to the Manufacturers section of the application.',
+        'note' => 'Ger åtkomst till avsnittet Tillverkare i applikationen.',
     ],
     'manufacturersview' => [
-        'name' => 'View Manufacturers',
+        'name' => 'Visa tillverkare',
     ],
     'manufacturerscreate' => [
-        'name' => 'Create New Manufacturers',
+        'name' => 'Skapa ny tillverkare',
     ],
     'manufacturersedit' => [
-        'name' => 'Edit Manufacturers',
+        'name' => 'Redigera tillverkare',
     ],
     'manufacturersdelete' => [
-        'name' => 'Delete Manufacturers',
+        'name' => 'Ta bort tillverkare',
     ],
-    'companies'   => [
+    'companies' => [
         'name' => 'Företag',
-        'note'       => 'Grants access to the Companies section of the application.',
+        'note' => 'Ger åtkomst till avsnittet Företag i applikationen.',
     ],
     'companiesview' => [
-        'name' => 'View Companies',
+        'name' => 'Visa företag',
     ],
     'companiescreate' => [
-        'name' => 'Create New Companies',
+        'name' => 'Skapa nytt företag',
     ],
     'companiesedit' => [
-        'name' => 'Edit Companies',
+        'name' => 'Redigera företag',
     ],
     'companiesdelete' => [
-        'name' => 'Delete Companies',
+        'name' => 'Ta bort företag',
     ],
     'user-self-accounts' => [
-        'name' => 'User Self Accounts',
-        'note'       => 'Grants non-admin users the ability to manage certain aspects of their own user accounts.',
+        'name' => 'Användarens egna konton',
+        'note' => 'Ger icke-administratörer möjlighet att hantera vissa delar av sina egna användarkonton.',
     ],
     'selftwo-factor' => [
-        'name' => 'Manage Two-Factor Authentication',
-        'note'       => 'Allows users to enable, disable, and manage two-factor authentication for their own accounts.',
+        'name' => 'Hantera tvåfaktorsautentisering',
+        'note' => 'Tillåter användare att aktivera, inaktivera och hantera tvåfaktorsautentisering för sina egna konton.',
     ],
     'selfapi' => [
-        'name' => 'Manage API Tokens',
-        'note'       => 'Allows users to create, view, and revoke their own API tokens. User tokens will have the same permissions as the user who created them.',
+        'name' => 'Hantera API-nycklar',
+        'note' => 'Tillåter användare att skapa, visa och återkalla sina egna API-nycklar. Användarnycklar har samma behörigheter som den användare som skapade dem.',
     ],
     'selfedit-location' => [
-        'name' => 'Edit Location',
-        'note'       => 'Allows users to edit the location associated with their own user account.',
+        'name' => 'Redigera plats',
+        'note' => 'Tillåter användare att redigera platsen kopplad till deras eget användarkonto.',
     ],
     'selfcheckout-assets' => [
-        'name' => 'Self Check Out Assets',
-        'note'       => 'Allows users to check out assets to themselves without admin intervention.',
+        'name' => 'Självchecka ut tillgångar',
+        'note' => 'Tillåter användare att checka ut tillgångar till sig själva utan administratörsinblandning.',
     ],
     'selfview-purchase-cost' => [
-        'name' => 'View Purchase Cost',
-        'note'       => 'Allows users to view the purchase cost of items in their account view.',
+        'name' => 'Visa inköpskostnad',
+        'note' => 'Tillåter användare att visa inköpskostnaden för objekt i deras kontovisning.',
     ],
 
     'depreciations' => [
-        'name' => 'Depreciation Management',
-        'note'       => 'Allows users to manage and view asset depreciation details.',
+        'name' => 'Värdeminskningshantering',
+        'note' => 'Tillåter användare att hantera och visa detaljer om tillgångars värdeminskning.',
     ],
     'depreciationsview' => [
-        'name' => 'View Depreciation Details',
+        'name' => 'Visa värdeminskningsdetaljer',
     ],
     'depreciationsedit' => [
-        'name' => 'Edit Depreciation Settings',
+        'name' => 'Redigera inställningar för värdeminskning',
     ],
     'depreciationsdelete' => [
-        'name' => 'Delete Depreciation Records',
+        'name' => 'Ta bort värdeminskningsposter',
     ],
     'depreciationscreate' => [
-        'name' => 'Create Depreciation Records',
+        'name' => 'Skapa värdeminskningsposter',
     ],
 
-    'grant_all' => 'Grant all permissions for :area',
-    'deny_all' => 'Deny all permissions for :area',
-    'inherit_all' => 'Inherit all permissions for :area from permission groups',
-    'grant' => 'Grant Permission for :area',
-    'deny' => 'Deny Permission for :area',
-    'inherit' => 'Inherit Permission for :area from permission groups',
-    'use_groups' => 'We strongly suggest using Permission Groups instead of assigning individual permissions for easier management.'
+    'grant_all' => 'Bevilja alla behörigheter för :area',
+    'deny_all' => 'Neka alla behörigheter för :area',
+    'inherit_all' => 'Ärv alla behörigheter för :area från behörighetsgrupper',
+    'grant' => 'Bevilja behörighet för :area',
+    'deny' => 'Neka behörighet för :area',
+    'inherit' => 'Ärv behörighet för :area från behörighetsgrupper',
+    'use_groups' => 'Vi rekommenderar starkt att använda behörighetsgrupper istället för att tilldela individuella behörigheter för enklare hantering.',
 
-);
+];

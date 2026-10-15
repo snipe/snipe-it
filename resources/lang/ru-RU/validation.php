@@ -71,7 +71,7 @@ return [
     ],
     'hex_color' => 'Поле :attribute должно быть допустимым шестнадцатеричным цветом.',
     'image' => 'Поле :attribute должно быть изображением.',
-    'import_field_empty'    => 'Значение :fieldname не может быть пустым.',
+    'import_field_empty' => 'Значение :fieldname не может быть пустым.',
     'in' => 'Выбранный :attribute неправильный.',
     'in_array' => 'Поле :attribute должно существовать в :other.',
     'integer' => 'Поле :attribute должно быть целым числом.',
@@ -126,7 +126,7 @@ return [
         'symbols' => 'Поле :attribute должно содержать хотя бы один символ.',
         'uncompromised' => 'Данный :attribute появился при утечке данных. Пожалуйста, выберите другой :attribute.',
     ],
-    'percent'       => 'Минимальная амортизация должна быть в пределах от 0 до 100, если тип амортизации — процентный.',
+    'percent' => 'Минимальная амортизация должна быть в пределах от 0 до 100, если тип амортизации — процентный.',
 
     'present' => 'Поле атрибута: должно присутствовать.',
     'present_if' => 'Поле :attribute должно присутствовать, когда :other равно :value.',
@@ -156,24 +156,37 @@ return [
         'string' => 'Поле :attribute должно содержать :size символов.',
     ],
     'starts_with' => 'Поле :attribute должно начинаться с одного из следующих значений: :values.',
-    'string'               => 'Атрибут: должен быть строкой.',
+    'string' => 'Атрибут: должен быть строкой.',
     'two_column_unique_undeleted' => 'Поле :attribute должно быть уникальным для :table1 и :table2. ',
-    'unique_undeleted'     => 'Свойство :attribute должно быть уникальным.',
-    'non_circular'         => ':attribute не должен создавать циклическую ссылку.',
-    'not_array'            => ':attribute не может быть массивом.',
+    'unique_undeleted' => 'Свойство :attribute должно быть уникальным.',
+    'non_circular' => ':attribute не должен создавать циклическую ссылку.',
+    'parent_must_be_top_level' => 'The selected :attribute must itself be a top-level item. Only one level of nesting is allowed.',
+    'must_have_no_children' => 'This item already has children of its own, so it cannot be assigned a parent.',
+    'parent_within_scope' => 'The selected :attribute is outside your assigned scope.',
+    'not_array' => ':attribute не может быть массивом.',
     'disallow_same_pwd_as_user_fields' => 'Пароль не может совпадать с именем пользователя.',
-    'letters'              => 'Пароль должен содержать хотя бы одну букву.',
-    'numbers'              => 'Пароль должен содержать хотя бы одну цифру.',
-    'case_diff'            => 'Пароль должен использовать смешанный регистр.',
-    'symbols'              => 'Пароль должен содержать символы.',
+    'letters' => 'Пароль должен содержать хотя бы одну букву.',
+    'numbers' => 'Пароль должен содержать хотя бы одну цифру.',
+    'case_diff' => 'Пароль должен использовать смешанный регистр.',
+    'symbols' => 'Пароль должен содержать символы.',
     'timezone' => 'Поле :attribute должно содержать действительный часовой пояс.',
     'unique' => ':attribute уже занят.',
     'uploaded' => 'Атрибут: не удалось загрузить.',
     'uppercase' => 'Поле :attribute должно быть указано заглавными буквами.',
     'url' => 'Поле :attribute должно быть действительным URL-адресом.',
+    'external_url' => 'The :attribute field must be a valid external URL (http:// or https://) that does not point at a private or local address.',
+    'asset_tag_pattern_placeholder' => 'The asset tag pattern must include at least one placeholder from :placeholders, otherwise every synced asset would receive the same tag and only the first would save.',
+    'custom_http_extras_json' => [
+        'not_json' => 'Custom Extras must be valid JSON. Parser error: :error',
+        'not_array' => 'Custom Extras must be a JSON array (starting with [ and ending with ]).',
+        'entry_not_object' => 'Custom Extras entry #:index must be a JSON object with key, label, and path fields.',
+        'missing_field' => 'Custom Extras entry #:index is missing the required ":field" field.',
+    ],
     'ulid' => 'Поле :attribute должно быть корректным значением UUID.',
     'uuid' => 'Поле :attribute должно быть корректным значением UUID.',
-    'fmcs_location' => 'Полная поддержка и определение местоположения нескольких компаний включены в настройках администратора, а выбранное местоположение и выбранная компания не совместимы.',
+    'valid_css_color' => 'The :attribute field must be a valid CSS color (hex, rgb, rgba, hsl, or hsla).',
+    'fmcs_company' => 'The :attribute field is required because full multiple companies support is enabled and floaters are not allowed.',
+    'fmcs_location' => 'Location ":location" belongs to :location_company, which does not match the selected company.',
     'is_unique_across_company_and_location' => 'The :attribute must be unique within the selected company and location.',
 
     /*
@@ -187,38 +200,39 @@ return [
     |
     */
 
-    'email_array'      => 'Один или несколько адресов эл. почты являются недействительным.',
-    'checkboxes'           => ':attribute содержит недопустимые параметры.',
-    'radio_buttons'        => ':attribute не верно.',
-    
+    'email_array' => 'Один или несколько адресов эл. почты являются недействительным.',
+    'checkboxes' => ':attribute содержит недопустимые параметры.',
+    'radio_buttons' => ':attribute не верно.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
+
     'custom' => [
         'alpha_space' => 'Поле атрибута: содержит символ, который не разрешен.',
 
-        'hashed_pass'      => 'Ваш текущий пароль неверен',
-        'dumbpwd'          => 'Этот пароль слишком распространен.',
+        'hashed_pass' => 'Ваш текущий пароль неверен',
+        'dumbpwd' => 'Этот пароль слишком распространен.',
         'statuslabel_type' => 'Вы должны выбрать допустимый тип метки статуса',
-        'custom_field_not_found'          => 'Похоже, это поле не существует. Пожалуйста, проверьте еще раз имена ваших пользовательских полей.',
+        'custom_field_not_found' => 'Похоже, это поле не существует. Пожалуйста, проверьте еще раз имена ваших пользовательских полей.',
         'custom_field_not_found_on_model' => 'Это поле существует, но недоступно в наборе полей этой модели актива.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
-        'purchase_date.date_format'     => ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
-        'last_audit_date.date_format'   =>  ':attribute должен быть допустимой датой в формате YYYY-MM-DD hh:mm:ss',
-        'expiration_date.date_format'   =>  ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
-        'termination_date.date_format'  =>  ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
-        'expected_checkin.date_format'  =>  ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
-        'start_date.date_format'        =>  ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
-        'end_date.date_format'          =>  ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
+        'purchase_date.date_format' => ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
+        'last_audit_date.date_format' => ':attribute должен быть допустимой датой в формате YYYY-MM-DD hh:mm:ss',
+        'expiration_date.date_format' => ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
+        'termination_date.date_format' => ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
+        'expected_checkin.date_format' => ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
+        'start_date.date_format' => ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
+        'end_date.date_format' => ':attribute должен быть допустимой датой в формате YYYY-MM-DD',
         'invalid_value_in_field' => 'Недопустимое значение в этом поле',
 
         'ldap_username_field' => [
-            'not_in' =>         '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.'
+            'not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead.',
         ],
         'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> '],
         'ldap_filter' => ['regex' => 'Это значение, вероятно, не должно быть заключено в скобки.'],
 
-        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -230,7 +244,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'serials.*' => 'Серийный номер',
+        'asset_tags.*' => 'Тег актива',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -244,6 +261,5 @@ return [
         'required' => 'Это поле является обязательным',
         'email' => 'Пожалуйста, введите действительный адрес электронной почты',
     ],
-
 
 ];

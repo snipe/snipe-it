@@ -26,18 +26,18 @@
                         }'>
                         <thead>
                             <tr role="row">
-                                <th class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
-                                <th class="col-sm-1">{{ trans('admin/licenses/table.title') }}</th>
-                                <th class="col-sm-1">{{ trans('admin/licenses/form.license_key') }}</th>
-                                <th class="col-sm-1">{{ trans('admin/licenses/form.seats') }}</th>
-                                <th class="col-sm-1">{{ trans('admin/licenses/form.remaining_seats') }}</th>
-                                <th class="col-sm-1">{{ trans('admin/licenses/form.expiration') }}</th>
-                                <th class="col-sm-1">{{ trans('admin/licenses/form.termination_date') }}</th>
-                                <th class="col-sm-1">{{ trans('general.purchase_date') }}</th>
-                                <th class="col-sm-1 text-right" class="col-sm-1">{{ trans('general.purchase_cost') }}</th>
-                                <th class="col-sm-1">{{ trans('general.depreciation') }}</th>
-                                <th class="col-sm-1 text-right">{{ trans('admin/hardware/table.book_value') }}</th>
-                                <th class="col-sm-1 text-right">{{ trans('admin/hardware/table.diff') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('admin/companies/table.title') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('admin/licenses/table.title') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('admin/licenses/form.license_key') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('admin/licenses/form.seats') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('admin/licenses/form.remaining_seats') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('admin/licenses/form.expiration') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('admin/licenses/form.termination_date') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('general.purchase_date') }}</th>
+                                <th scope="col" class="col-sm-1 text-right" class="col-sm-1">{{ trans('general.purchase_cost') }}</th>
+                                <th scope="col" class="col-sm-1">{{ trans('general.depreciation') }}</th>
+                                <th scope="col" class="col-sm-1 text-right">{{ trans('admin/hardware/table.book_value') }}</th>
+                                <th scope="col" class="col-sm-1 text-right">{{ trans('admin/hardware/table.diff') }}</th>
                             </tr>
                         </thead>
 
@@ -67,7 +67,7 @@
                                     {{ $snipeSettings->default_currency }}{{ Helper::formatCurrencyOutput($license->purchase_cost) }}
                                 </td>
                                 <td>
-                                    {{ ($license->depreciation) ? e($license->depreciation->name).' ('.$license->depreciation->months.' '.trans('general.months').')' : ''  }}
+                                    {{ ($license->depreciation) ? e($license->depreciation->name).' ('.trans_choice('general.months_plural', $license->depreciation->months).')' : ''  }}
                                 </td>
                                 <td class="text-right">
                                     {{ $snipeSettings->default_currency }}{{ Helper::formatCurrencyOutput($license->getDepreciatedValue()) }}

@@ -2,55 +2,96 @@
 
 namespace App\Models\Labels\Tapes\Dymo;
 
-
 class LabelWriter_30252 extends LabelWriter
 {
-    private const BARCODE_MARGIN =   1.80;
-    private const TAG_SIZE       =   2.80;
-    private const TITLE_SIZE     =   2.80;
-    private const TITLE_MARGIN   =   0.50;
-    private const LABEL_SIZE     =   2.00;
-    private const LABEL_MARGIN   = - 0.35;
-    private const FIELD_SIZE     =   3.20;
-    private const FIELD_MARGIN   =   0.15;
+    private const BARCODE_MARGIN = 1.80;
 
+    private const TAG_SIZE = 2.80;
 
+    private const TITLE_SIZE = 2.80;
+
+    private const TITLE_MARGIN = 0.50;
+
+    private const LABEL_SIZE = 2.00;
+
+    private const LABEL_MARGIN = -0.35;
+
+    private const FIELD_SIZE = 3.20;
+
+    private const FIELD_MARGIN = 0.15;
 
     public function getUnit()
     {
-        return 'mm'; 
-    }
-    public function getWidth()
-    {
-        return 96.52; 
-    }
-    public function getSupportAssetTag()
-    {
-        return true; 
-    }
-    public function getSupport1DBarcode()
-    {
-        return true; 
-    }
-    public function getSupport2DBarcode()
-    {
-        return true; 
-    }
-    public function getSupportFields()
-    {
-        return 3; 
-    }
-    public function getSupportLogo()
-    {
-        return false; 
-    }
-    public function getSupportTitle()
-    {
-        return true; 
+        return 'mm';
     }
 
-    public function preparePDF($pdf)
+    public function getWidth()
     {
+        return 96.52;
+    }
+
+    public function getSupportAssetTag()
+    {
+        return true;
+    }
+
+    public function getSupport1DBarcode()
+    {
+        return true;
+    }
+
+    public function getSupport2DBarcode()
+    {
+        return true;
+    }
+
+    public function getSupportFields()
+    {
+        return 3;
+    }
+
+    public function getSupportLogo()
+    {
+        return false;
+    }
+
+    public function getSupportTitle()
+    {
+        return true;
+    }
+
+    protected function getContentEditorConfig(): array
+    {
+        return [
+            'barcode_size' => self::TAG_SIZE,
+            'barcode_margin' => self::BARCODE_MARGIN,
+
+            'barcode1D_v_align' => 'B',
+            'barcode1D_placement' => 'text_column',
+
+            'barcode_2d_size' => $this->getPrintableArea()->h - self::TAG_SIZE,
+            'barcode2D_h_align' => 'L',
+            'barcode2D_v_align' => 'T',
+
+            'tag_font_size' => self::TAG_SIZE,
+            'tag_alignment' => 'C',
+            'tag_position_mode' => 'under_barcode',
+            'tag_font' => 'freemono',
+
+            'title_font_size' => self::TITLE_SIZE,
+            'title_margin' => self::TITLE_MARGIN,
+            'title_font' => 'freesans',
+
+            'field_label_font_size' => self::LABEL_SIZE,
+            'field_label_margin' => self::LABEL_MARGIN,
+            'field_label_font' => 'freesans',
+
+            'field_value_font_size' => self::FIELD_SIZE,
+            'field_value_margin' => self::FIELD_MARGIN,
+            'field_value_font' => 'freemono',
+
+            'text_render_mode' => 'vertical_stack',
+        ];
     }
 
     public function write($pdf, $record)
@@ -114,5 +155,4 @@ class LabelWriter_30252 extends LabelWriter
             );
         }
     }
-
 }

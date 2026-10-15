@@ -1,4 +1,10 @@
 /*!
+  * Bootstrap Datetime Picker v4.17.49
+  * Copyright 2015-2020 Jonathan Peterson
+  * Licensed under MIT (https://github.com/Eonasdan/bootstrap-datetimepicker/blob/master/LICENSE)
+  */
+
+/*!
  * Bootstrap Colorpicker v2.5.2
  * https://itsjavi.com/bootstrap-colorpicker/
  *
@@ -15,28 +21,11 @@
  */
 
 /*!
- * Datepicker for Bootstrap v1.10.0 (https://github.com/uxsolutions/bootstrap-datepicker)
- *
- * Licensed under the Apache License v2.0 (https://www.apache.org/licenses/LICENSE-2.0)
- */
-
-/*!
  * Select2 4.0.13
  * https://select2.github.io
  *
  * Released under the MIT license
  * https://github.com/select2/select2/blob/master/LICENSE.md
- */
-
-/*!
- * Sizzle CSS Selector Engine v2.3.5
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
- * Released under the MIT license
- * https://js.foundation/
- *
- * Date: 2020-03-14
  */
 
 /*!
@@ -47,17 +36,14 @@
  */
 
 /*!
- * jQuery JavaScript Library v3.5.1
+ * jQuery JavaScript Library v3.7.1
  * https://jquery.com/
  *
- * Includes Sizzle.js
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
+ * Copyright OpenJS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-05-04T22:49Z
+ * Date: 2023-08-28T13:37Z
  */
 
 /*!
@@ -323,3 +309,7 @@
 * Copyright OpenJS Foundation and other contributors; Licensed MIT */
 
 /*! tether 1.4.7 */
+
+//! moment.js
+
+//! moment.js locale configuration

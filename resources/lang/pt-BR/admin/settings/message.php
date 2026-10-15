@@ -3,30 +3,35 @@
 return [
 
     'update' => [
-        'error'                 => 'Ocorreu um erro ao atualizar. ',
-        'success'               => 'Configurações atualizadas com sucesso.',
+        'error' => 'Ocorreu um erro ao atualizar. ',
+        'success' => 'Configurações atualizadas com sucesso.',
     ],
     'backup' => [
-        'delete_confirm'        => 'Você tem certeza que quer apagar este arquivo de backup? Esta ação não pode ser desfeita. ',
-        'file_deleted'          => 'O arquivo de backup foi apagado com sucesso. ',
-        'generated'             => 'Um novo arquivo de backup foi criado com sucesso.',
-        'file_not_found'        => 'Arquivo de backup não foi encontrado no servidor.',
-        'restore_warning'       => 'Sim, restaurar. Eu reconheço que isso irá sobrescrever quaisquer dados existentes atualmente no banco de dados. Isto também desconectará todos os usuários existentes (incluindo você).',
-        'restore_confirm'       => 'Tem certeza que deseja restaurar seu banco de dados a partir de :filename?'
+        'delete_confirm' => 'Você tem certeza que quer apagar este arquivo de backup? Esta ação não pode ser desfeita. ',
+        'file_deleted' => 'O arquivo de backup foi apagado com sucesso. ',
+        'generated' => 'Um novo arquivo de backup foi criado com sucesso.',
+        'file_not_found' => 'Arquivo de backup não foi encontrado no servidor.',
+        'restore_warning' => 'Sim, restaurar. Eu reconheço que isso irá sobrescrever quaisquer dados existentes atualmente no banco de dados. Isto também desconectará todos os usuários existentes (incluindo você).',
+        'restore_confirm' => 'Tem certeza que deseja restaurar seu banco de dados a partir de :filename?',
+        'delete_disabled_help' => 'Deleting backups is disabled. Contact your administrator if you wish to enable deleting backups.',
     ],
     'restore' => [
-        'success'               => 'Seu backup do sistema foi restaurado. Por favor, faça login novamente.'
+        'success' => 'Seu backup do sistema foi restaurado. Por favor, faça login novamente.',
+        'archive_invalid' => 'The selected backup file (:filename) is not a valid zip archive. Restore aborted before touching the database.',
+        'zip_extension_missing' => 'PHP zip extension is not loaded on this server. Cannot validate the backup archive, and restore has been aborted to prevent data loss. Ask your server administrator to install ext-zip.',
+        'pre_backup_failed' => 'Could not create a pre-restore safety backup. Restore aborted so that the existing database is not destroyed without a recovery path.',
+        'failed_with_backup' => 'Restore failed. The pre-existing database was wiped as part of the restore attempt, but a pre-restore backup was saved to :backup and can be used to recover.',
     ],
     'purge' => [
-        'error'     => 'Ocorreu um erro ao excluir os registros. ',
-        'validation_failed'     => 'Sua confirmação de exclusão está incorreta. Por favor, digite a palavra "DELETE" na caixa de confirmação.',
-        'success'               => 'Registros excluídos com sucesso.',
+        'error' => 'Ocorreu um erro ao excluir os registros. ',
+        'validation_failed' => 'Sua confirmação de exclusão está incorreta. Por favor, digite a palavra "DELETE" na caixa de confirmação.',
+        'success' => 'Registros excluídos com sucesso.',
     ],
     'mail' => [
         'sending' => 'Enviando e-mail de teste...',
         'success' => 'Email enviado!',
         'error' => 'E-mail não pode ser enviado.',
-        'additional' => 'Nenhuma mensagem de erro adicional foi fornecida. Verifique suas configurações de e-mail e o log do aplicativo.'
+        'additional' => 'Nenhuma mensagem de erro adicional foi fornecida. Verifique suas configurações de e-mail e o log do aplicativo.',
     ],
     'ldap' => [
         'testing' => 'Testando conexão LDAP, Binding & Query ...',
@@ -34,11 +39,11 @@ return [
         'error' => 'Algo deu errado :(',
         'sync_success' => 'Uma amostra de 10 usuários retornaram do servidor LDAP com base em suas configurações:',
         'testing_authentication' => 'Testando Autenticação LDAP...',
-        'authentication_success' => 'Usuário autenticado no LDAP com sucesso!'
+        'authentication_success' => 'Usuário autenticado no LDAP com sucesso!',
     ],
     'labels' => [
         'null_template' => 'Label template not found. Please select a template.',
-        ],
+    ],
     'webhook' => [
         'sending' => 'Enviando mensagem :app de teste...',
         'success' => 'Sua integração com :webhook_name funciona!',
@@ -55,5 +60,22 @@ return [
     'location_scoping' => [
         'not_saved' => 'Your settings were not saved.',
         'mismatch' => 'There is 1 item in the database that need your attention before you can enable location scoping.|There are :count items in the database that need your attention before you can enable location scoping.',
+    ],
+    'oauth' => [
+        'token_revoked' => 'Personal access token revoked successfully.',
+        'token_unrevoked' => 'Personal access token reinstated successfully.',
+        'token_not_found' => 'That personal access token could not be found.',
+        'token_revoke_error' => 'An error occurred while revoking the token.',
+        'token_unrevoke_error' => 'An error occurred while reinstating the token.',
+        'client_created' => 'OAuth client created successfully.',
+        'client_updated' => 'OAuth client updated successfully.',
+        'client_deleted' => 'OAuth client deleted successfully.',
+        'client_revoked' => 'OAuth client revoked successfully.',
+        'client_unrevoked' => 'OAuth client reinstated successfully.',
+        'client_not_found' => 'That OAuth client could not be found.',
+        'token_deleted' => 'Token revoked successfully.',
+        'client_delete_denied' => 'You are not authorized to delete this client.',
+        'client_edit_denied' => 'You are not authorized to edit this client.',
+        'token_delete_denied' => 'You are not authorized to revoke this token.',
     ],
 ];

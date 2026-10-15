@@ -1,11 +1,16 @@
 <?php
 
-return array(
+return [
 
-    'actions'	 	        => '操作',
-    'action' 		        => '操作',
-    'by'      		        => '經由',
-    'item' 			        => '項目',
-    'no_matching_records'   => 'No matching records found',
+    'actions' => '操作',
+    'action' => '操作',
+    'by' => '經由',
+    'item' => '項目',
+    'no_matching_records' => 'No matching records found',
+    'load_error_title' => 'Could not load results',
+    'load_error_body' => 'The server returned an error. Please try again in a moment. If this keeps happening, check the application log.',
+    'load_error_http_status' => 'HTTP status',
+    'load_error_session_expired' => 'Your session has expired. Reloading the page.',
+    'shift_select' => 'Click on a checkbox and hold <code>shift</code> and click another checkbox in the table to select/de-select a range.'
 
-);
+];

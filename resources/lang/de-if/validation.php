@@ -71,7 +71,7 @@ return [
     ],
     'hex_color' => 'Das Feld :attribute muss eine gültige hexadezimale Farbe sein.',
     'image' => 'Das Feld :attribute muss ein Bild sein.',
-    'import_field_empty'    => ':fieldname darf nicht leer sein.',
+    'import_field_empty' => ':fieldname darf nicht leer sein.',
     'in' => 'Auswahl :attribute ist ungültig.',
     'in_array' => 'Das Feld :attribute muss in :other existieren.',
     'integer' => 'Das Feld :attribute muss eine Ganzzahl sein.',
@@ -126,7 +126,7 @@ return [
         'symbols' => 'Das Feld :attribute muss mindestens ein Symbol enthalten.',
         'uncompromised' => 'Das angegebene :attribute ist in einem Datenleck aufgetaucht. Bitte wählen Sie ein anderes :attribute.',
     ],
-    'percent'       => 'Bei einer prozentualen Abschreibung muss der Mindestabschreibungswert zwischen 0 und 100 liegen.',
+    'percent' => 'Bei einer prozentualen Abschreibung muss der Mindestabschreibungswert zwischen 0 und 100 liegen.',
 
     'present' => ':attribute muss vorhanden sein.',
     'present_if' => 'Das Feld :attribute muss vorhanden sein, wenn :other :value ist.',
@@ -156,24 +156,37 @@ return [
         'string' => 'Das Feld :attribute muss :size Zeichen enthalten.',
     ],
     'starts_with' => 'Das Feld :attribute muss mit einem der folgenden Werte beginnen: :values.',
-    'string'               => 'Das Attribut muss eine Zeichenfolge sein.',
+    'string' => 'Das Attribut muss eine Zeichenfolge sein.',
     'two_column_unique_undeleted' => ':attribute muss in :table1 und :table2 einzigartig sein. ',
-    'unique_undeleted'     => 'Die Variable :attribute muss eindeutig sein.',
-    'non_circular'         => 'Das :attribute darf keinen Zirkelbezug ergeben.',
-    'not_array'            => ':attribute darf kein Array sein.',
+    'unique_undeleted' => 'Die Variable :attribute muss eindeutig sein.',
+    'non_circular' => 'Das :attribute darf keinen Zirkelbezug ergeben.',
+    'parent_must_be_top_level' => 'The selected :attribute must itself be a top-level item. Only one level of nesting is allowed.',
+    'must_have_no_children' => 'This item already has children of its own, so it cannot be assigned a parent.',
+    'parent_within_scope' => 'Das ausgewählte :attribute liegt außerhalb des Ihnen zugewiesenen Bereichs.',
+    'not_array' => ':attribute darf kein Array sein.',
     'disallow_same_pwd_as_user_fields' => 'Das Passwort muss sich vom Nutzernamen unterscheiden.',
-    'letters'              => 'Das Passwort muss mindestens einen Buchstaben beinhalten.',
-    'numbers'              => 'Das Passwort muss mindestens eine Zahl beinhalten.',
-    'case_diff'            => 'Das Passwort muss Groß- und Kleinschreibung beinhalten.',
-    'symbols'              => 'Das Passwort muss Sonderzeichen beinhalten.',
+    'letters' => 'Das Passwort muss mindestens einen Buchstaben beinhalten.',
+    'numbers' => 'Das Passwort muss mindestens eine Zahl beinhalten.',
+    'case_diff' => 'Das Passwort muss Groß- und Kleinschreibung beinhalten.',
+    'symbols' => 'Das Passwort muss Sonderzeichen beinhalten.',
     'timezone' => 'Das Feld :attribute muss eine gültige Zeitzone sein.',
     'unique' => ':attribute ist bereits vergeben.',
     'uploaded' => ':attribute konnte nicht hochgeladen werden.',
     'uppercase' => 'Das Feld :attribute muss in Großbuchstaben sein.',
     'url' => 'Das Feld :attribute muss eine gültige URL sein.',
+    'external_url' => 'The :attribute field must be a valid external URL (http:// or https://) that does not point at a private or local address.',
+    'asset_tag_pattern_placeholder' => 'The asset tag pattern must include at least one placeholder from :placeholders, otherwise every synced asset would receive the same tag and only the first would save.',
+    'custom_http_extras_json' => [
+        'not_json' => 'Custom Extras must be valid JSON. Parser error: :error',
+        'not_array' => 'Custom Extras must be a JSON array (starting with [ and ending with ]).',
+        'entry_not_object' => 'Custom Extras entry #:index must be a JSON object with key, label, and path fields.',
+        'missing_field' => 'Custom Extras entry #:index is missing the required ":field" field.',
+    ],
     'ulid' => 'Das Feld :attribute muss eine gültige ULID sein.',
     'uuid' => 'Das Feld :attribute muss eine gültige UUID sein.',
-    'fmcs_location' => 'In den Admin-Einstellungen ist eine vollständige Mehrfachunterstützung für Unternehmen und Standortbereicherung aktiviert und der ausgewählte Standort und die ausgewählte Firma sind nicht kompatibel.',
+    'valid_css_color' => 'The :attribute field must be a valid CSS color (hex, rgb, rgba, hsl, or hsla).',
+    'fmcs_company' => 'The :attribute field is required because full multiple companies support is enabled and floaters are not allowed.',
+    'fmcs_location' => 'Location ":location" belongs to :location_company, which does not match the selected company.',
     'is_unique_across_company_and_location' => 'Das :Attribut muss innerhalb der ausgewählten Firma und dem ausgewählten Standort einzigartig sein.',
 
     /*
@@ -187,38 +200,39 @@ return [
     |
     */
 
-    'email_array'      => 'Eine oder mehrere Email Adressen sind ungültig.',
-    'checkboxes'           => ':attribute enthält ungültige Optionen.',
-    'radio_buttons'        => ':attribute ist ungültig.',
-    
+    'email_array' => 'Eine oder mehrere Email Adressen sind ungültig.',
+    'checkboxes' => ':attribute enthält ungültige Optionen.',
+    'radio_buttons' => ':attribute ist ungültig.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
+
     'custom' => [
         'alpha_space' => 'Das :attribute Feld enthält ein nicht erlaubtes Zeichen.',
 
-        'hashed_pass'      => 'Ihr derzeitiges Passwort ist nicht korrekt',
-        'dumbpwd'          => 'Das Passwort ist zu gebräuchlich.',
+        'hashed_pass' => 'Ihr derzeitiges Passwort ist nicht korrekt',
+        'dumbpwd' => 'Das Passwort ist zu gebräuchlich.',
         'statuslabel_type' => 'Du musst einen gültigen Statuslabel-Typ auswählen',
-        'custom_field_not_found'          => 'Dieses Feld scheint nicht zu existieren. Bitte überprüfe deine benutzerdefinierten Feldnamen noch einmal.',
+        'custom_field_not_found' => 'Dieses Feld scheint nicht zu existieren. Bitte überprüfe deine benutzerdefinierten Feldnamen noch einmal.',
         'custom_field_not_found_on_model' => 'Dieses Feld scheint vorhanden zu sein, ist aber im Feldsatz dieses Asset-Modells nicht verfügbar.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
-        'purchase_date.date_format'     => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
-        'last_audit_date.date_format'   =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT hh:mm:ss sein',
-        'expiration_date.date_format'   =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
-        'termination_date.date_format'  =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
-        'expected_checkin.date_format'  =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
-        'start_date.date_format'        =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
-        'end_date.date_format'          =>  ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'purchase_date.date_format' => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'last_audit_date.date_format' => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT hh:mm:ss sein',
+        'expiration_date.date_format' => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'termination_date.date_format' => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'expected_checkin.date_format' => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'start_date.date_format' => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
+        'end_date.date_format' => ':attribute muss ein gültiges Datum im Format JJJJ-MM-TT sein',
         'invalid_value_in_field' => 'Ungültiger Wert in diesem Feld enthalten',
 
         'ldap_username_field' => [
-            'not_in' =>         '<code>sAMAccountName</code> (Groß- und Kleinschreibung) funktioniert wahrscheinlich nicht. Du solltest stattdessen <code>samaccountname</code> (Kleinschreibung) verwenden.'
+            'not_in' => '<code>sAMAccountName</code> (Groß- und Kleinschreibung) funktioniert wahrscheinlich nicht. Du solltest stattdessen <code>samaccountname</code> (Kleinschreibung) verwenden.',
         ],
         'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> ist wahrscheinlich kein gültiger Authentifizierungsfilter. Du möchtest wahrscheinlich <code>uid=</code> '],
         'ldap_filter' => ['regex' => 'Dieser Wert sollte wahrscheinlich nicht in Klammern gesetzt werden.'],
 
-        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -230,7 +244,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'serials.*' => 'Seriennummer',
+        'asset_tags.*' => 'Asset Tag',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -244,6 +261,5 @@ return [
         'required' => 'Dieses Feld ist erforderlich',
         'email' => 'Bitte geben Sie eine gültige E-Mail-Adresse ein',
     ],
-
 
 ];

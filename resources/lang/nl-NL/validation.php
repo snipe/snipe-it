@@ -71,7 +71,7 @@ return [
     ],
     'hex_color' => ':attribute veld moet een geldige hexadecimale kleur hebben.',
     'image' => ':attribute veld moet een afbeelding zijn.',
-    'import_field_empty'    => 'De waarde voor :fieldname kan niet leeg zijn.',
+    'import_field_empty' => 'De waarde voor :fieldname kan niet leeg zijn.',
     'in' => 'Het geselecteerde kenmerk :attribute is ongeldig.',
     'in_array' => ':attribute veld moet bestaan in :other.',
     'integer' => ':attribute veld moet een geheel getal zijn.',
@@ -126,7 +126,7 @@ return [
         'symbols' => ':attribute veld moet minstens één teken bevatten.',
         'uncompromised' => 'Het gegeven :attribute is weergegeven in een gegevenslek. Kies een ander :attribuut.',
     ],
-    'percent'       => 'Het afschrijvingsminimum moet tussen 0 en 100 liggen wanneer het afschrijvingstype procentueel is.',
+    'percent' => 'Het afschrijvingsminimum moet tussen 0 en 100 liggen wanneer het afschrijvingstype procentueel is.',
 
     'present' => ':attribute veld moet aanwezig zijn.',
     'present_if' => ':attribute veld moet aanwezig zijn als :other :value is.',
@@ -156,24 +156,37 @@ return [
         'string' => ':attribute veld moet :size karakters bevatten.',
     ],
     'starts_with' => ':attribute veld moet beginnen met één van de volgende: :values.',
-    'string'               => ':attribute moet een string zijn.',
+    'string' => ':attribute moet een string zijn.',
     'two_column_unique_undeleted' => ':attribute moet uniek zijn in :table1 en :table2. ',
-    'unique_undeleted'     => 'De :attribute moet uniek zijn. ',
-    'non_circular'         => ':attribute mag geen circulaire referentie aanmaken.',
-    'not_array'            => ':attribute kan geen array zijn.',
+    'unique_undeleted' => 'De :attribute moet uniek zijn. ',
+    'non_circular' => ':attribute mag geen circulaire referentie aanmaken.',
+    'parent_must_be_top_level' => 'The selected :attribute must itself be a top-level item. Only one level of nesting is allowed.',
+    'must_have_no_children' => 'This item already has children of its own, so it cannot be assigned a parent.',
+    'parent_within_scope' => 'The selected :attribute is outside your assigned scope.',
+    'not_array' => ':attribute kan geen array zijn.',
     'disallow_same_pwd_as_user_fields' => 'Wachtwoord kan niet hetzelfde zijn als de gebruikersnaam.',
-    'letters'              => 'Wachtwoord moet ten minste één letter bevatten.',
-    'numbers'              => 'Wachtwoord moet ten minste één cijfer bevatten.',
-    'case_diff'            => 'Wachtwoord moet kleine letters en hoofdletters bevatten.',
-    'symbols'              => 'Wachtwoord moet symbolen bevatten.',
+    'letters' => 'Wachtwoord moet ten minste één letter bevatten.',
+    'numbers' => 'Wachtwoord moet ten minste één cijfer bevatten.',
+    'case_diff' => 'Wachtwoord moet kleine letters en hoofdletters bevatten.',
+    'symbols' => 'Wachtwoord moet symbolen bevatten.',
     'timezone' => ':attribute moet een geldige tijdzone zijn.',
     'unique' => 'Het veld :attribute is reeds in gebruik.',
     'uploaded' => 'Uploaden van :attribute is mislukt.',
     'uppercase' => ':attribute veld moet met hoofdletter zijn.',
     'url' => ':attribute veld moet een geldige URL zijn.',
+    'external_url' => 'The :attribute field must be a valid external URL (http:// or https://) that does not point at a private or local address.',
+    'asset_tag_pattern_placeholder' => 'The asset tag pattern must include at least one placeholder from :placeholders, otherwise every synced asset would receive the same tag and only the first would save.',
+    'custom_http_extras_json' => [
+        'not_json' => 'Custom Extras must be valid JSON. Parser error: :error',
+        'not_array' => 'Custom Extras must be a JSON array (starting with [ and ending with ]).',
+        'entry_not_object' => 'Custom Extras entry #:index must be a JSON object with key, label, and path fields.',
+        'missing_field' => 'Custom Extras entry #:index is missing the required ":field" field.',
+    ],
     'ulid' => ':attribute veld moet een geldige ULID zijn.',
     'uuid' => ':attribute veld moet een geldige UUID zijn.',
-    'fmcs_location' => 'Full multiple company support and location scoping is enabled in the Admin Settings, and the selected location and selected company are not compatible.',
+    'valid_css_color' => 'The :attribute field must be a valid CSS color (hex, rgb, rgba, hsl, or hsla).',
+    'fmcs_company' => 'The :attribute field is required because full multiple companies support is enabled and floaters are not allowed.',
+    'fmcs_location' => 'Location ":location" belongs to :location_company, which does not match the selected company.',
     'is_unique_across_company_and_location' => 'The :attribute must be unique within the selected company and location.',
 
     /*
@@ -187,38 +200,39 @@ return [
     |
     */
 
-    'email_array'      => 'één of meer e-mail adressen kloppen niet.',
-    'checkboxes'           => ':attribute bevat ongeldige opties.',
-    'radio_buttons'        => ':attribute is ongeldig.',
-    
+    'email_array' => 'één of meer e-mail adressen kloppen niet.',
+    'checkboxes' => ':attribute bevat ongeldige opties.',
+    'radio_buttons' => ':attribute is ongeldig.',
+    'image_file_too_large' => 'The :attribute may not be larger than :max.',
+
     'custom' => [
         'alpha_space' => ':attribute veld bevat een karakter wat niet is toegestaan.',
 
-        'hashed_pass'      => 'Je huidige wachtwoord is incorrect',
-        'dumbpwd'          => 'Dat wachtwoord is te veelvoorkomend.',
+        'hashed_pass' => 'Je huidige wachtwoord is incorrect',
+        'dumbpwd' => 'Dat wachtwoord is te veelvoorkomend.',
         'statuslabel_type' => 'Selecteer een valide status label',
-        'custom_field_not_found'          => 'Dit veld lijkt niet te bestaan, controleer uw aangepaste veldnamen.',
+        'custom_field_not_found' => 'Dit veld lijkt niet te bestaan, controleer uw aangepaste veldnamen.',
         'custom_field_not_found_on_model' => 'Dit veld lijkt te bestaan, maar is niet beschikbaar in de veldset van dit Asset Model.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
-        'purchase_date.date_format'     => ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
-        'last_audit_date.date_format'   =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD uu:mm:ss formaat',
-        'expiration_date.date_format'   =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
-        'termination_date.date_format'  =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
-        'expected_checkin.date_format'  =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
-        'start_date.date_format'        =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
-        'end_date.date_format'          =>  ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'purchase_date.date_format' => ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'last_audit_date.date_format' => ':attribute moet een geldige datum zijn in JJJJ-MM-DD uu:mm:ss formaat',
+        'expiration_date.date_format' => ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'termination_date.date_format' => ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'expected_checkin.date_format' => ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'start_date.date_format' => ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
+        'end_date.date_format' => ':attribute moet een geldige datum zijn in JJJJ-MM-DD formaat',
         'invalid_value_in_field' => 'Ongeldige waarde ingevoerd in dit veld',
 
         'ldap_username_field' => [
-            'not_in' =>         '<code>sAMAccountName</code> (Hoofd- en kleine letters) zal waarschijnlijk niet werken. Je zou in plaats hiervan <code>samaccountname</code> (kleine letters) kunnen gebruiken.'
+            'not_in' => '<code>sAMAccountName</code> (Hoofd- en kleine letters) zal waarschijnlijk niet werken. Je zou in plaats hiervan <code>samaccountname</code> (kleine letters) kunnen gebruiken.',
         ],
         'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> is waarschijnlijk geen geldig authenticatiefilter. Je wilt waarschijnlijk <code>uid=</code> gebruiken.'],
         'ldap_filter' => ['regex' => 'Deze waarde hoeft waarschijnlijk niet verpakt te worden in haakjes.'],
 
-        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -230,7 +244,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'serials.*' => 'Serienummer',
+        'asset_tags.*' => 'Assettag',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -244,6 +261,5 @@ return [
         'required' => 'Dit veld is verplicht',
         'email' => 'Vul een geldig e-mailadres in',
     ],
-
 
 ];

@@ -3,30 +3,35 @@
 return [
 
     'update' => [
-        'error'                 => 'Vyskytla se chyba při aktualizaci. ',
-        'success'               => 'Nastavení úspěšně uloženo.',
+        'error' => 'Vyskytla se chyba při aktualizaci. ',
+        'success' => 'Nastavení úspěšně uloženo.',
     ],
     'backup' => [
-        'delete_confirm'        => 'Opravdu chcete vymazat tento záložní soubor? Tuto akci nelze vrátit zpět. ',
-        'file_deleted'          => 'Záložní soubor byl úspěšně smazán. ',
-        'generated'             => 'Byla úspěšně vytvořena nová záloha.',
-        'file_not_found'        => 'Tento záložní soubor nebyl na serveru nalezen.',
-        'restore_warning'       => 'Ano, obnovit. Potvrzuji, že toto přepíše existující data v databázi. Tato akce taky odhlásí všechny uživatele (včetně vás).',
-        'restore_confirm'       => 'Jste si jisti, že chcete obnovit databázi z :filename?'
+        'delete_confirm' => 'Opravdu chcete vymazat tento záložní soubor? Tuto akci nelze vrátit zpět. ',
+        'file_deleted' => 'Záložní soubor byl úspěšně smazán. ',
+        'generated' => 'Byla úspěšně vytvořena nová záloha.',
+        'file_not_found' => 'Tento záložní soubor nebyl na serveru nalezen.',
+        'restore_warning' => 'Ano, obnovit. Potvrzuji, že toto přepíše existující data v databázi. Tato akce taky odhlásí všechny uživatele (včetně vás).',
+        'restore_confirm' => 'Jste si jisti, že chcete obnovit databázi z :filename?',
+        'delete_disabled_help' => 'Deleting backups is disabled. Contact your administrator if you wish to enable deleting backups.',
     ],
     'restore' => [
-        'success'               => 'Vaše záloha systému byla obnovena. Přihlaste se prosím znovu.'
+        'success' => 'Vaše záloha systému byla obnovena. Přihlaste se prosím znovu.',
+        'archive_invalid' => 'The selected backup file (:filename) is not a valid zip archive. Restore aborted before touching the database.',
+        'zip_extension_missing' => 'PHP zip extension is not loaded on this server. Cannot validate the backup archive, and restore has been aborted to prevent data loss. Ask your server administrator to install ext-zip.',
+        'pre_backup_failed' => 'Could not create a pre-restore safety backup. Restore aborted so that the existing database is not destroyed without a recovery path.',
+        'failed_with_backup' => 'Restore failed. The pre-existing database was wiped as part of the restore attempt, but a pre-restore backup was saved to :backup and can be used to recover.',
     ],
     'purge' => [
-        'error'     => 'Během čištění došlo k chybě. ',
-        'validation_failed'     => 'Vaše potvrzení o čištění je nesprávné. Zadejte prosím slovo "DELETE" do potvrzovacího rámečku.',
-        'success'               => 'Vymazané záznamy byly úspěšně vyčištěny.',
+        'error' => 'Během čištění došlo k chybě. ',
+        'validation_failed' => 'Vaše potvrzení o čištění je nesprávné. Zadejte prosím slovo "DELETE" do potvrzovacího rámečku.',
+        'success' => 'Vymazané záznamy byly úspěšně vyčištěny.',
     ],
     'mail' => [
         'sending' => 'Odesílání testovacího e-mailu...',
         'success' => 'E-mail odeslán!',
         'error' => 'E-mail se nepodařilo odeslat.',
-        'additional' => 'Porobná zpárva o chybě není dostupná. Zkontrolujte nastavení pošty a log.'
+        'additional' => 'Porobná zpárva o chybě není dostupná. Zkontrolujte nastavení pošty a log.',
     ],
     'ldap' => [
         'testing' => 'Testování LDAP připojení, vazby a dotazu ...',
@@ -34,11 +39,11 @@ return [
         'error' => 'Něco se pokazilo :(',
         'sync_success' => '10 příkladových uživatelů z LDAP serveru podle vašeho nastavení:',
         'testing_authentication' => 'Testování LDAP ověření...',
-        'authentication_success' => 'Uživatel byl úspěšně ověřen přes LDAP!'
+        'authentication_success' => 'Uživatel byl úspěšně ověřen přes LDAP!',
     ],
     'labels' => [
         'null_template' => 'Šablona štítku nebyla nalezena. Vyberte prosím šablonu.',
-        ],
+    ],
     'webhook' => [
         'sending' => 'Odesílání testovací zprávy :app...',
         'success' => 'Vaše integrace :webhook_name funguje!',
@@ -56,5 +61,22 @@ return [
     'location_scoping' => [
         'not_saved' => 'Vaše nastavení nebylo uloženo.',
         'mismatch' => 'V databázi je 1 položka, která potřebuje vaši pozornost, než budete moci povolit zjišťování polohy. V databázi jsou :count položky, které potřebují vaši pozornost, než budete moci povolit zjišťování polohy.',
+    ],
+    'oauth' => [
+        'token_revoked' => 'Personal access token revoked successfully.',
+        'token_unrevoked' => 'Personal access token reinstated successfully.',
+        'token_not_found' => 'That personal access token could not be found.',
+        'token_revoke_error' => 'An error occurred while revoking the token.',
+        'token_unrevoke_error' => 'An error occurred while reinstating the token.',
+        'client_created' => 'OAuth client created successfully.',
+        'client_updated' => 'OAuth client updated successfully.',
+        'client_deleted' => 'OAuth client deleted successfully.',
+        'client_revoked' => 'OAuth client revoked successfully.',
+        'client_unrevoked' => 'OAuth client reinstated successfully.',
+        'client_not_found' => 'That OAuth client could not be found.',
+        'token_deleted' => 'Token revoked successfully.',
+        'client_delete_denied' => 'You are not authorized to delete this client.',
+        'client_edit_denied' => 'You are not authorized to edit this client.',
+        'token_delete_denied' => 'You are not authorized to revoke this token.',
     ],
 ];

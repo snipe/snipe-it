@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -15,88 +15,88 @@ return array(
     |---------------------------------------------------------------------------
     */
 
-    "superuser" => [
-        'name' => 'Super User',
-        'note'       => 'Determines whether the user has full access to all aspects of the admin. This setting overrides ALL more specific and restrictive permissions throughout the system. ',
+    'superuser' => [
+        'name' => 'Super user',
+        'note' => 'Meghatározza, hogy a felhasználó teljes hozzáféréssel rendelkezik-e az adminisztráció minden területéhez. Ez a beállítás felülír minden egyéb, a rendszerben megadott specifikusabb és korlátozóbb jogosultságot ',
     ],
     'admin' => [
-        'name' => 'Admin Access',
-        'note'       => 'Determines whether the user has access to most aspects of the system EXCEPT the System Admin Settings. These users will be able to manage users, locations, categories, etc, but ARE constrained by Full Multiple Company Support if it is enabled.',
+        'name' => 'Adminisztrátori hozzáférés',
+        'note' => 'Meghatározza, hogy a felhasználó hozzáfér-e a rendszer legtöbb területéhez, KIVÉVE a Rendszeradminisztrátori beállításokat. Ezek a felhasználók kezelhetik a felhasználókat, helyszíneket, kategóriákat stb., de a Teljes többvállalatos támogatás beállításai korlátozzák őket, amennyiben az engedélyezve van.',
     ],
 
     'import' => [
-        'name' => 'CSV Import',
-        'note'       => 'This will allow users to import even if access to users, assets, etc is denied elsewhere.',
+        'name' => 'CSV betöltés',
+        'note' => 'Ez lehetővé teszi a felhasználók számára az importálást akkor is, ha máshol a rendszerben nincs hozzáférésük a felhasználókhoz, eszközökhöz stb.',
     ],
 
     'reports' => [
-        'name' => 'Reports Access',
-        'note'       => 'Determines whether the user has access to the Reports section of the application.',
+        'name' => 'Hozzáférés a jelentésekhez',
+        'note' => 'Meghatározza, hogy a felhasználó hozzáfér-e az alkalmazás Jelentések menüpontjához.',
     ],
 
-    'assets' =>
-        [
-            'name' => 'Eszközök',
-            'note' => 'Grants access to the Assets section of the application.',
+    'assets' => [
+        'name' => 'Eszközök',
+        'note' => 'Hozzáférést biztosít az alkalmazás Eszközök menüpontjához. ',
     ],
 
     'assetsview' => [
-        'name' => 'View Assets',
+        'name' => 'Eszközök megtekintése',
+        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the asset model as well. This is to make it easier to share common documents like user manuals across assets without having to upload them to every asset, and to avoid having to grant the user permission to modify asset files. Users with this permission will also be able to view edit and checkin history.',
     ],
 
     'assetscreate' => [
-        'name' => 'Create New Assets',
+        'name' => 'Új eszközök létrehozása',
     ],
 
     'assetsedit' => [
-        'name' => 'Edit Assets',
+        'name' => 'Eszközök szerkesztése',
     ],
 
     'assetsdelete' => [
-        'name' => 'Delete Assets',
+        'name' => 'Eszközök törlése',
     ],
 
     'assetscheckin' => [
-        'name' => 'Check In',
-        'note' => 'Check assets back into inventory that are currently checked out.',
+        'name' => 'Visszavételezés',
+        'note' => 'A jelenleg kiadott eszközök visszavételezése a készletbe.',
     ],
 
     'assetscheckout' => [
-        'name' => 'Check Out',
-        'note' => 'Assign assets in inventory by checking them out.',
+        'name' => 'Kiadás',
+        'note' => 'Eszközök hozzárendelése a készletből kiadással.',
     ],
 
     'assetsaudit' => [
-        'name' => 'Audit Assets',
-        'note' => 'Allows the user to mark an asset as physically inventoried.',
+        'name' => 'Eszközök auditálása',
+        'note' => 'Lehetővé teszi a felhasználó számára, hogy egy eszközt fizikailag leltározottként jelöljön meg.',
     ],
 
     'assetsviewrequestable' => [
-        'name' => 'View Requestable Assets',
-        'note' => 'Allows the user to view assets that are marked as requestable.',
+        'name' => 'Igényelhető eszközök megtekintése',
+        'note' => 'Allows the user to view items that are marked as requestable.',
     ],
 
     'assetsviewencrypted-custom-fields' => [
-        'name' => 'View Encrypted Custom Fields',
+        'name' => 'Titkosított mezők megtekintése',
         'note' => 'Allows the user to view and modify encrypted custom fields on assets.',
     ],
 
-    'accessories'   => [
+    'accessories' => [
         'name' => 'Tartozékok',
-        'note'       => 'Grants access to the Accessories section of the application.',
+        'note' => 'Grants access to the Accessories section of the application.',
     ],
 
     'accessoriesview' => [
-        'name' => 'View Accessories',
+        'name' => 'Kiegészítők megtekintése',
     ],
     'accessoriescreate' => [
-        'name' => 'Create New Accessories',
+        'name' => 'Új kiegészítők létrehozása',
     ],
     'accessoriesedit' => [
-        'name' => 'Edit Accessories',
+        'name' => 'Kiegészítők szerkesztése',
     ],
     'accessoriesdelete' => [
-        'name' => 'Delete Accessories',
+        'name' => 'Kiegészítők törlése',
     ],
     'accessoriescheckout' => [
         'name' => 'Check Out Accessories',
@@ -107,68 +107,111 @@ return array(
         'note' => 'Check accessories back into inventory that are currently checked out.',
     ],
     'accessoriesfiles' => [
-        'name' => 'Manage Accessory Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with accessories.',
+        'name' => 'Kiegészítő fileok kezelése',
+        'note' => 'Allows the user to upload, download, and delete files associated with accessories. (This only makes sense with view privileges or higher.)',
     ],
-    'consumables'   => [
+
+    'assetsfiles' => [
+        'name' => 'Eszköz fileok kezelése',
+        'note' => 'Allows the user to upload, download, and delete files associated with assets. (This only makes sense with view privileges or higher.)',
+    ],
+
+    'usersfiles' => [
+        'name' => 'Felhasználói fileok kezelése',
+        'note' => 'Allows the user to upload, download, and delete files associated with users. (This only makes sense with view privileges or higher.)',
+    ],
+
+    'modelsfiles' => [
+        'name' => 'Modell fileok kezelése',
+        'note' => 'Allows the user to upload, download, and delete files associated with asset models on both the model view and the asset view screens. (This only makes sense with view privileges or higher.)',
+    ],
+
+    'departmentsfiles' => [
+        'name' => 'Manage Department Files',
+        'note' => 'Allows the user to upload, download, and delete files associated with departments. (This only makes sense with view privileges or higher.)',
+    ],
+
+    'suppliersfiles' => [
+        'name' => 'Manage Supplier Files',
+        'note' => 'Allows the user to upload, download, and delete files associated with suppliers. (This only makes sense with view privileges or higher.)',
+    ],
+
+    'locationsfiles' => [
+        'name' => 'Manage Location Files',
+        'note' => 'Allows the user to upload, download, and delete files associated with locations.(This only makes sense with view privileges or higher.)',
+    ],
+
+    'companiesfiles' => [
+        'name' => 'Manage Company Files',
+        'note' => 'Allows the user to upload, download, and delete files associated with companies. (This only makes sense with view privileges or higher.)',
+    ],
+
+    'consumablesfiles' => [
+        'name' => 'Manage Consumable Files',
+        'note' => 'Allows the user to upload, download, and delete files associated with consumables. (This only makes sense with view privileges or higher.)',
+    ],
+
+    'consumables' => [
         'name' => 'Fogyóeszközök',
-        'note'       => 'Grants access to the Consumables section of the application.',
+        'note' => 'Grants access to the Consumables section of the application.',
     ],
     'consumablesview' => [
-        'name' => 'View Consumables',
+        'name' => 'Fogyóeszközök megtekintése',
     ],
     'consumablescreate' => [
-        'name' => 'Create New Consumables',
+        'name' => 'Új fogyóeszközök létrehozása',
     ],
     'consumablesedit' => [
-        'name' => 'Edit Consumables',
+        'name' => 'Fogyóeszközök szerkesztése',
     ],
     'consumablesdelete' => [
-        'name' => 'Delete Consumables',
+        'name' => 'Fogyóeszközök törlése',
     ],
     'consumablescheckout' => [
         'name' => 'Check Out Consumables',
         'note' => 'Assign consumables in inventory by checking them out.',
     ],
-    'consumablesfiles' => [
-        'name' => 'Manage Consumable Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with consumables.',
-    ],
-    'licenses'   => [
+
+    'licenses' => [
         'name' => 'Licencek',
-        'note'       => 'Grants access to the Licenses section of the application.',
+        'note' => 'Grants access to the Licenses section of the application.',
     ],
     'licensesview' => [
-        'name' => 'View Licenses',
+        'name' => 'Licenszek megtekintése',
     ],
     'licensescreate' => [
-        'name' => 'Create New Licenses',
+        'name' => 'Új licenszek létrehozása',
     ],
     'licensesedit' => [
-        'name' => 'Edit Licenses',
+        'name' => 'Licenszek szerkesztése',
     ],
     'licensesdelete' => [
-        'name' => 'Delete Licenses',
+        'name' => 'Licenszek törlése',
     ],
     'licensescheckout' => [
-        'name' => 'Assign Licenses',
+        'name' => 'Licenszek hozzárendelése',
         'note' => 'Allows the user to assign licenses to assets or users.',
-        ],
+    ],
     'licensescheckin' => [
-        'name' => 'Unassign Licenses',
+        'name' => 'Licensz hozzárendelések eltávolítása',
         'note' => 'Allows the user to unassign licenses from assets or users.',
     ],
     'licensesfiles' => [
-        'name' => 'Manage License Files',
+        'name' => 'Licensz fileok kezelése',
         'note' => 'Allows the user to upload, download, and delete files associated with licenses.',
     ],
+    'componentsfiles' => [
+        'name' => 'Manage Component Files',
+        'note' => 'Allows the user to upload, download, and delete files associated with components.',
+    ],
+
     'licenseskeys' => [
         'name' => 'Manage License Keys',
         'note' => 'Allows the user to view product keys associated with licenses.',
     ],
-    'components'   => [
+    'components' => [
         'name' => 'Alkatrészek',
-        'note'       => 'Grants access to the Components section of the application.',
+        'note' => 'Grants access to the Components section of the application.',
     ],
     'componentsview' => [
         'name' => 'View Components',
@@ -182,10 +225,7 @@ return array(
     'componentsdelete' => [
         'name' => 'Delete Components',
     ],
-    'componentsfiles' => [
-        'name' => 'Manage Component Files',
-        'note' => 'Allows the user to upload, download, and delete files associated with components.',
-    ],
+
     'componentscheckout' => [
         'name' => 'Check Out Components',
         'note' => 'Assign components in inventory by checking them out.',
@@ -194,9 +234,9 @@ return array(
         'name' => 'Check In Components',
         'note' => 'Check components back into inventory that are currently checked out.',
     ],
-    'kits'   => [
+    'kits' => [
         'name' => 'Előre definiált csomagok',
-        'note'       => 'Grants access to the Predefined Kits section of the application.',
+        'note' => 'Grants access to the Predefined Kits section of the application.',
     ],
     'kitsview' => [
         'name' => 'View Predefined Kits',
@@ -210,12 +250,13 @@ return array(
     'kitsdelete' => [
         'name' => 'Delete Predefined Kits',
     ],
-    'users'   => [
+    'users' => [
         'name' => 'Felhasználók',
-        'note'       => 'Grants access to the Users section of the application.',
+        'note' => 'Grants access to the Users section of the application.',
     ],
     'usersview' => [
         'name' => 'Felhasználók megtekintése',
+        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the user as well. Users with this permission will also be able to view edit and checkin history.',
     ],
     'userscreate' => [
         'name' => 'Create New Users',
@@ -224,44 +265,44 @@ return array(
         'name' => 'Edit Users',
     ],
     'usersdelete' => [
-        'name' => 'Delete Users',
+        'name' => 'Felhasználók törlése',
     ],
-    'models'   => [
-        'name' => 'Models',
-        'note'       => 'Grants access to the Models section of the application.',
+    'models' => [
+        'name' => 'Modellek',
+        'note' => 'Grants access to the Models section of the application.',
     ],
     'modelsview' => [
         'name' => 'Modellek megtekintése',
     ],
 
     'modelscreate' => [
-        'name' => 'Create New Models',
+        'name' => 'Új modellek létrehozása',
     ],
     'modelsedit' => [
-        'name' => 'Edit Models',
+        'name' => 'Modellek szerkesztése',
     ],
     'modelsdelete' => [
-        'name' => 'Delete Models',
+        'name' => 'Modellek törlése',
     ],
-    'categories'   => [
+    'categories' => [
         'name' => 'Kategóriák',
-        'note'       => 'Grants access to the Categories section of the application.',
+        'note' => 'Hozzáférése biztosítása az alkalmazás "Kategóriák" részéhez.',
     ],
     'categoriesview' => [
-        'name' => 'View Categories',
+        'name' => 'Kategóriák megtekintése',
     ],
     'categoriescreate' => [
-        'name' => 'Create New Categories',
+        'name' => 'Új kategóriák létrehozása',
     ],
     'categoriesedit' => [
-        'name' => 'Edit Categories',
+        'name' => 'Kategóriák szerkesztése',
     ],
     'categoriesdelete' => [
-        'name' => 'Delete Categories',
+        'name' => 'Kategóriák törlése',
     ],
-    'departments'   => [
+    'departments' => [
         'name' => 'Osztályok',
-        'note'       => 'Grants access to the Departments section of the application.',
+        'note' => 'Grants access to the Departments section of the application.',
     ],
     'departmentsview' => [
         'name' => 'View Departments',
@@ -275,9 +316,9 @@ return array(
     'departmentsdelete' => [
         'name' => 'Delete Departments',
     ],
-    'locations'   => [
+    'locations' => [
         'name' => 'Helyek',
-        'note'       => 'Grants access to the Locations section of the application.',
+        'note' => 'Grants access to the Locations section of the application.',
     ],
     'locationsview' => [
         'name' => 'View Locations',
@@ -291,9 +332,9 @@ return array(
     'locationsdelete' => [
         'name' => 'Delete Locations',
     ],
-    'status-labels'   => [
+    'status-labels' => [
         'name' => 'Státusz címkék',
-        'note'       => 'Grants access to the Status Labels section of the application used by Assets.',
+        'note' => 'Grants access to the Status Labels section of the application used by Assets.',
     ],
     'statuslabelsview' => [
         'name' => 'View Status Labels',
@@ -307,57 +348,57 @@ return array(
     'statuslabelsdelete' => [
         'name' => 'Delete Status Labels',
     ],
-    'custom-fields'   => [
+    'custom-fields' => [
         'name' => 'Egyéni mezők',
-        'note'       => 'Grants access to the Custom Fields section of the application used by Assets.',
+        'note' => 'Hozzáférése biztosítása az alkalmazásben az Eszközök által használt "Egyéni mezők" részhez.',
     ],
     'customfieldsview' => [
-        'name' => 'View Custom Fields',
+        'name' => 'Egyéni mezők megtekintése',
     ],
     'customfieldscreate' => [
-        'name' => 'Create New Custom Fields',
+        'name' => 'Új egyéni mezők létrehozása',
     ],
     'customfieldsedit' => [
-        'name' => 'Edit Custom Fields',
+        'name' => 'Egyéni mezők szerkesztése',
     ],
     'customfieldsdelete' => [
-        'name' => 'Delete Custom Fields',
+        'name' => 'Egyéni mezők törlése',
     ],
-    'suppliers'   => [
+    'suppliers' => [
         'name' => 'Beszállítók',
-        'note'       => 'Grants access to the Suppliers section of the application.',
+        'note' => 'Hozzáférése biztosítása az alkalmazás "Beszállítók" részéhez.',
     ],
     'suppliersview' => [
-        'name' => 'View Suppliers',
+        'name' => 'Beszállítók megtekintése',
     ],
     'supplierscreate' => [
-        'name' => 'Create New Suppliers',
+        'name' => 'Új beszállítók létrehozása',
     ],
     'suppliersedit' => [
-        'name' => 'Edit Suppliers',
+        'name' => 'Beszállítók szerkesztése',
     ],
     'suppliersdelete' => [
-        'name' => 'Delete Suppliers',
+        'name' => 'Beszállítók törlése',
     ],
-    'manufacturers'   => [
+    'manufacturers' => [
         'name' => 'Gyártók',
-        'note'       => 'Grants access to the Manufacturers section of the application.',
+        'note' => 'Hozzáférése biztosítása az alkalmazás "Gyártók" részéhez.',
     ],
     'manufacturersview' => [
-        'name' => 'View Manufacturers',
+        'name' => 'Gyártók megtekintése',
     ],
     'manufacturerscreate' => [
-        'name' => 'Create New Manufacturers',
+        'name' => 'Új gyártók létrehozása',
     ],
     'manufacturersedit' => [
-        'name' => 'Edit Manufacturers',
+        'name' => 'Gyártók szerkesztése',
     ],
     'manufacturersdelete' => [
-        'name' => 'Delete Manufacturers',
+        'name' => 'Gyártók törlése',
     ],
-    'companies'   => [
+    'companies' => [
         'name' => 'Cégek',
-        'note'       => 'Grants access to the Companies section of the application.',
+        'note' => 'Grants access to the Companies section of the application.',
     ],
     'companiesview' => [
         'name' => 'View Companies',
@@ -373,32 +414,32 @@ return array(
     ],
     'user-self-accounts' => [
         'name' => 'User Self Accounts',
-        'note'       => 'Grants non-admin users the ability to manage certain aspects of their own user accounts.',
+        'note' => 'Grants non-admin users the ability to manage certain aspects of their own user accounts.',
     ],
     'selftwo-factor' => [
-        'name' => 'Manage Two-Factor Authentication',
-        'note'       => 'Allows users to enable, disable, and manage two-factor authentication for their own accounts.',
+        'name' => 'Kétfaktoros azonosítás kezelése',
+        'note' => 'Allows users to enable, disable, and manage two-factor authentication for their own accounts.',
     ],
     'selfapi' => [
-        'name' => 'Manage API Tokens',
-        'note'       => 'Allows users to create, view, and revoke their own API tokens. User tokens will have the same permissions as the user who created them.',
+        'name' => 'API Tokenek kezelése',
+        'note' => 'Allows users to create, view, and revoke their own API tokens. User tokens will have the same permissions as the user who created them.',
     ],
     'selfedit-location' => [
         'name' => 'Edit Location',
-        'note'       => 'Allows users to edit the location associated with their own user account.',
+        'note' => 'Allows users to edit the location associated with their own user account.',
     ],
     'selfcheckout-assets' => [
         'name' => 'Self Check Out Assets',
-        'note'       => 'Allows users to check out assets to themselves without admin intervention.',
+        'note' => 'Allows users to check out assets to themselves without admin intervention.',
     ],
     'selfview-purchase-cost' => [
         'name' => 'View Purchase Cost',
-        'note'       => 'Allows users to view the purchase cost of items in their account view.',
+        'note' => 'Allows users to view the purchase cost of items in their account view.',
     ],
 
     'depreciations' => [
         'name' => 'Depreciation Management',
-        'note'       => 'Allows users to manage and view asset depreciation details.',
+        'note' => 'Allows users to manage and view asset depreciation details.',
     ],
     'depreciationsview' => [
         'name' => 'View Depreciation Details',
@@ -419,6 +460,6 @@ return array(
     'grant' => 'Grant Permission for :area',
     'deny' => 'Deny Permission for :area',
     'inherit' => 'Inherit Permission for :area from permission groups',
-    'use_groups' => 'We strongly suggest using Permission Groups instead of assigning individual permissions for easier management.'
+    'use_groups' => 'We strongly suggest using Permission Groups instead of assigning individual permissions for easier management.',
 
-);
+];

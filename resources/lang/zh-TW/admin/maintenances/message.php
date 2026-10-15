@@ -1,21 +1,28 @@
 <?php
 
-    return [
-        'not_found'                    => '未找到您查詢的資產維護訊息！',
-        'delete'                       => [
-            'confirm' => '您確定要刪除此筆資產維護訊息嗎？',
-            'error'   => '資產維護訊息刪除失敗。請再試一次',
-            'success' => '資產維護訊息已刪除。',
-        ],
-        'create'                       => [
-            'error'   => '資產維護訊息新增失敗。請再試一次',
-            'success' => '資產維護訊息已新增。',
-        ],
-        'edit'                       => [
-            'error'   => '資產維護訊息修改失敗。請再試一次',
-            'success' => '資產維護訊息已修改。',
-        ],
-        'asset_maintenance_incomplete' => '尚未完成',
-        'warranty'                     => '保固',
-        'not_warranty'                 => '無保固',
-    ];
+return [
+    'not_found' => '未找到您查詢的資產維護訊息！',
+    'delete' => [
+        'confirm' => '您確定要刪除此筆資產維護訊息嗎？',
+        'error' => '資產維護訊息刪除失敗。請再試一次',
+        'success' => '資產維護訊息已刪除。',
+    ],
+    'create' => [
+        'error' => '資產維護訊息新增失敗。請再試一次',
+        'success' => '資產維護訊息已新增。',
+    ],
+    'edit' => [
+        'error' => '資產維護訊息修改失敗。請再試一次',
+        'success' => '資產維護訊息已修改。',
+    ],
+    'asset_maintenance_incomplete' => '尚未完成',
+    'warranty' => '保固',
+    'not_warranty' => '無保固',
+    'complete' => [
+        'confirm' => '您確定要將此維護標記為已完成嗎？此操作無法撤銷。',
+        'success' => '維護已標記為完成。',
+        'error' => '將此維護標記為完成時發生問題，請重試。',
+    ],
+    'bulk_delete' => 'No maintenance records were deleted (:skipped skipped).|Deleted :count maintenance record. (:skipped skipped)|Deleted :count maintenance records. (:skipped skipped)',
+    'bulk_complete' => 'No maintenance records were marked complete (:skipped skipped or already complete).|Marked :count maintenance record complete. (:skipped skipped or already complete)|Marked :count maintenance records complete. (:skipped skipped or already complete)',
+];

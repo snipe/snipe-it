@@ -3,7 +3,7 @@
 namespace App\Presenters;
 
 /**
- * Class LocationPresenter
+ * Class SupplierPresenter
  */
 class SupplierPresenter extends Presenter
 {
@@ -14,12 +14,17 @@ class SupplierPresenter extends Presenter
     {
         $layout = [
             [
-                'field'        => 'checkbox',
-                'checkbox'     => true,
+                'field' => 'checkbox',
+                'scope' => 'col',
+                'checkbox' => true,
+                'formatter' => 'checkboxEnabledFormatter',
                 'titleTooltip' => trans('general.select_all_none'),
+                'printIgnore' => true,
+                'class' => 'hidden-print',
             ],
-             [
+            [
                 'field' => 'id',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
@@ -28,6 +33,7 @@ class SupplierPresenter extends Presenter
             ],
             [
                 'field' => 'name',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => false,
@@ -36,6 +42,7 @@ class SupplierPresenter extends Presenter
                 'formatter' => 'suppliersLinkFormatter',
             ], [
                 'field' => 'image',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
@@ -45,52 +52,63 @@ class SupplierPresenter extends Presenter
             ],
             [
                 'field' => 'assets_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('general.assets'),
-                'titleTooltip' =>  trans('general.assets'),
+                'title' => trans('general.assets'),
+                'titleTooltip' => trans('general.assets'),
                 'visible' => true,
-                'class' => 'css-barcode',
+                'class' => 'css-barcode text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ],  [
                 'field' => 'accessories_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('general.accessories'),
-                'titleTooltip' =>  trans('general.accessories'),
+                'title' => trans('general.accessories'),
+                'titleTooltip' => trans('general.accessories'),
                 'visible' => true,
-                'class' => 'css-accessory',
+                'class' => 'css-accessory text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ],
             [
                 'field' => 'licenses_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('general.licenses'),
-                'titleTooltip' =>  trans('general.licenses'),
+                'title' => trans('general.licenses'),
+                'titleTooltip' => trans('general.licenses'),
                 'visible' => true,
-                'class' => 'css-license',
+                'class' => 'css-license text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'components_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('general.components'),
-                'titleTooltip' =>  trans('general.components'),
+                'title' => trans('general.components'),
+                'titleTooltip' => trans('general.components'),
                 'visible' => true,
-                'class' => 'css-component',
+                'class' => 'css-component text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'consumables_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('general.consumables'),
-                'titleTooltip' =>  trans('general.consumables'),
+                'title' => trans('general.consumables'),
+                'titleTooltip' => trans('general.consumables'),
                 'visible' => true,
-                'class' => 'css-consumable',
+                'class' => 'css-consumable text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'url',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
@@ -99,78 +117,89 @@ class SupplierPresenter extends Presenter
                 'formatter' => 'externalLinkFormatter',
             ], [
                 'field' => 'address',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.address'),
+                'title' => trans('admin/locations/table.address'),
                 'visible' => true,
             ], [
                 'field' => 'address2',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.address2'),
+                'title' => trans('admin/locations/table.address2'),
                 'visible' => false,
             ], [
                 'field' => 'city',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.city'),
+                'title' => trans('admin/locations/table.city'),
                 'visible' => true,
             ], [
                 'field' => 'state',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.state'),
+                'title' => trans('admin/locations/table.state'),
                 'visible' => true,
             ], [
                 'field' => 'zip',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.zip'),
+                'title' => trans('admin/locations/table.zip'),
                 'visible' => false,
             ], [
                 'field' => 'country',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
-                'title' =>  trans('admin/locations/table.country'),
+                'title' => trans('admin/locations/table.country'),
                 'visible' => false,
             ], [
                 'field' => 'phone',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('admin/users/table.phone'),
                 'visible' => false,
-                'formatter'    => 'phoneFormatter',
+                'formatter' => 'phoneFormatter',
             ], [
                 'field' => 'fax',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('admin/suppliers/table.fax'),
                 'visible' => false,
-                'formatter'    => 'phoneFormatter',
+                'formatter' => 'phoneFormatter',
             ], [
                 'field' => 'tag_color',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.tag_color'),
                 'visible' => false,
                 'formatter' => 'colorTagFormatter',
-            ],[
+            ], [
                 'field' => 'notes',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.notes'),
             ], [
                 'field' => 'created_at',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -179,6 +208,7 @@ class SupplierPresenter extends Presenter
                 'formatter' => 'dateDisplayFormatter',
             ],  [
                 'field' => 'created_by',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -187,6 +217,7 @@ class SupplierPresenter extends Presenter
                 'formatter' => 'usersLinkObjFormatter',
             ], [
                 'field' => 'actions',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => false,
@@ -199,19 +230,24 @@ class SupplierPresenter extends Presenter
 
         return json_encode($layout);
     }
-    
 
     /**
      * Link to this supplier name
+     *
      * @return string
      */
     public function nameUrl()
     {
-        return (string) link_to_route('suppliers.show', $this->name, $this->id);
+        if (auth()->user()->can('view', ['\App\Models\Supplier', $this])) {
+            return '<a href="'.route('suppliers.show', $this->id).'">'.e($this->display_name).'</a>';
+        } else {
+            return e($this->display_name);
+        }
     }
 
     /**
      * Getter for Polymorphism.
+     *
      * @return mixed
      */
     public function name()
@@ -221,11 +257,16 @@ class SupplierPresenter extends Presenter
 
     /**
      * Url to view this item.
+     *
      * @return string
      */
     public function viewUrl()
     {
-        return route('suppliers.show', $this->id);
+        if (auth()->user()->can('view', ['\App\Models\Supplier', $this])) {
+            return '<a href="'.route('suppliers.show', $this->id).'">'.e($this->display_name).'</a>';
+        } else {
+            return e($this->display_name);
+        }
     }
 
     public function glyph()
@@ -238,12 +279,13 @@ class SupplierPresenter extends Presenter
         return $this->name;
     }
 
-    public function formattedNameLink() {
+    public function formattedNameLink()
+    {
 
         if (auth()->user()->can('view', ['\App\Models\Supplier', $this])) {
-            return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i>" : '').'<a href="'.route('suppliers.show', e($this->id)).'">'.e($this->name).'</a>';
+            return ($this->tag_color ? "<i class='fa-solid fa-square fa-fw' style='color: ".e($this->tag_color)."' aria-hidden='true'></i> " : '').'<a href="'.route('suppliers.show', e($this->id)).'">'.e($this->name).'</a>';
         }
 
-        return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i> " : '').$this->name;
+        return ($this->tag_color ? "<i class='fa-solid fa-square fa-fw' style='color: ".e($this->tag_color)."' aria-hidden='true'></i> " : '').e($this->name);
     }
 }

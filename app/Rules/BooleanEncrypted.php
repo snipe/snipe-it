@@ -22,7 +22,7 @@ class BooleanEncrypted implements ValidationRule
             $attributeName = trim(preg_replace('/_+|snipeit|\d+/', ' ', $attribute));
             $decrypted = Crypt::decrypt($value);
 
-            if (!$this->validateBoolean($attributeName, $decrypted) && !is_null($decrypted)) {
+            if (!$this->validateBoolean($attributeName, $decrypted, []) && !is_null($decrypted)) {
                 $fail(trans('validation.ipv6', ['attribute' => $attributeName]));
             }
         } catch (\Exception $e) {

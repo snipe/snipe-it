@@ -1,21 +1,28 @@
 <?php
 
-    return [
-        'not_found'                    => 'Bate-instandhouding waarna jy gesoek is, is nie gevind nie!',
-        'delete'                       => [
-            'confirm' => 'Is jy seker jy wil hierdie bate instandhouding uitvee?',
-            'error'   => 'Daar was \'n probleem met die verwydering van die bate-instandhouding. Probeer asseblief weer.',
-            'success' => 'Die bate-instandhouding is suksesvol verwyder.',
-        ],
-        'create'                       => [
-            'error'   => 'Asset Maintenance is nie geskep nie, probeer asseblief weer.',
-            'success' => 'Bate Onderhoud geskep suksesvol.',
-        ],
-        'edit'                       => [
-            'error'   => 'Bateonderhoud is nie geredigeer nie, probeer asseblief weer.',
-            'success' => 'Bate Onderhoud suksesvol geredigeer.',
-        ],
-        'asset_maintenance_incomplete' => 'Nog nie voltooi nie',
-        'warranty'                     => 'waarborg',
-        'not_warranty'                 => 'Nie waarborg nie',
-    ];
+return [
+    'not_found' => 'Bate-instandhouding waarna jy gesoek is, is nie gevind nie!',
+    'delete' => [
+        'confirm' => 'Is jy seker jy wil hierdie bate instandhouding uitvee?',
+        'error' => 'Daar was \'n probleem met die verwydering van die bate-instandhouding. Probeer asseblief weer.',
+        'success' => 'Die bate-instandhouding is suksesvol verwyder.',
+    ],
+    'create' => [
+        'error' => 'Asset Maintenance is nie geskep nie, probeer asseblief weer.',
+        'success' => 'Bate Onderhoud geskep suksesvol.',
+    ],
+    'edit' => [
+        'error' => 'Bateonderhoud is nie geredigeer nie, probeer asseblief weer.',
+        'success' => 'Bate Onderhoud suksesvol geredigeer.',
+    ],
+    'asset_maintenance_incomplete' => 'Nog nie voltooi nie',
+    'warranty' => 'waarborg',
+    'not_warranty' => 'Nie waarborg nie',
+    'complete' => [
+        'confirm' => 'Are you sure you want to mark this maintenance as complete? This cannot be undone.',
+        'success' => 'Maintenance marked as complete.',
+        'error' => 'There was an issue marking this maintenance as complete. Please try again.',
+    ],
+    'bulk_delete' => 'No maintenance records were deleted (:skipped skipped).|Deleted :count maintenance record. (:skipped skipped)|Deleted :count maintenance records. (:skipped skipped)',
+    'bulk_complete' => 'No maintenance records were marked complete (:skipped skipped or already complete).|Marked :count maintenance record complete. (:skipped skipped or already complete)|Marked :count maintenance records complete. (:skipped skipped or already complete)',
+];

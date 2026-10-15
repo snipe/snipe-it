@@ -3,19 +3,16 @@
 namespace App\Actions\Suppliers;
 
 use App\Exceptions\ItemStillHasAccessories;
+use App\Exceptions\ItemStillHasAssets;
 use App\Exceptions\ItemStillHasComponents;
 use App\Exceptions\ItemStillHasConsumables;
-use App\Models\Supplier;
-use App\Exceptions\ItemStillHasAssets;
-use App\Exceptions\ItemStillHasMaintenances;
 use App\Exceptions\ItemStillHasLicenses;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+use App\Exceptions\ItemStillHasMaintenances;
+use App\Models\Supplier;
 
 class DestroySupplierAction
 {
     /**
-     *
      * @throws ItemStillHasLicenses
      * @throws ItemStillHasAssets
      * @throws ItemStillHasMaintenances
@@ -23,7 +20,7 @@ class DestroySupplierAction
      * @throws ItemStillHasConsumables
      * @throws ItemStillHasComponents
      */
-    static function run(Supplier $supplier): bool
+    public static function run(Supplier $supplier): bool
     {
         $supplier->loadCount([
             'maintenances as maintenances_count',
@@ -57,14 +54,8 @@ class DestroySupplierAction
             throw new ItemStillHasComponents($supplier);
         }
 
-        if ($supplier->image) {
-            try {
-                Storage::disk('public')->delete('suppliers/'.$supplier->image);
-            } catch (\Exception $e) {
-                Log::info($e->getMessage());
-            }
-        }
-
+        // Image file cleanup lives on the model's forceDeleted hook so
+        // soft-delete + restore preserves the image reference.
         $supplier->delete();
 
         return true;

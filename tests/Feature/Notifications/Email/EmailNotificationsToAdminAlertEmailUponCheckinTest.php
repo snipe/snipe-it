@@ -7,17 +7,22 @@ use App\Mail\CheckinAssetMail;
 use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Category;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use PHPUnit\Framework\Attributes\Group;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 #[Group('notifications')]
 class EmailNotificationsToAdminAlertEmailUponCheckinTest extends TestCase
 {
     private Asset $asset;
+
     private AssetModel $assetModel;
+
     private Category $category;
+
     private User $user;
 
     protected function setUp(): void
@@ -56,7 +61,7 @@ class EmailNotificationsToAdminAlertEmailUponCheckinTest extends TestCase
             return $mail->hasTo($this->user->email);
         });
         Mail::assertSent(CheckinAssetMail::class, function ($mail) {
-            return $mail->hasTo('cc@example.com');
+            return $mail->hasCc('cc@example.com');
         });
     }
 
@@ -115,6 +120,34 @@ class EmailNotificationsToAdminAlertEmailUponCheckinTest extends TestCase
 
         Mail::assertNotSent(CheckinAssetMail::class, function ($mail) {
             return $mail->hasTo('cc@example.com') || $mail->hasCc('cc@example.com');
+        });
+    }
+
+    #[Test]
+    public function admin_alert_email_sent_when_checked_in_from_an_asset_with_no_assigned_user()
+    {
+        $this->settings
+            ->enableAdminCC('cc@example.com')
+            ->enableAdminCCAlways();
+
+        $this->fireCheckInEvent($this->asset, Asset::factory()->create());
+
+        Mail::assertSent(CheckinAssetMail::class, function ($mail) {
+            return $mail->hasTo('cc@example.com');
+        });
+    }
+
+    #[Test]
+    public function admin_alert_email_sent_when_checked_in_from_a_location_with_no_manager()
+    {
+        $this->settings
+            ->enableAdminCC('cc@example.com')
+            ->enableAdminCCAlways();
+
+        $this->fireCheckInEvent($this->asset, Location::factory()->create(['manager_id' => null]));
+
+        Mail::assertSent(CheckinAssetMail::class, function ($mail) {
+            return $mail->hasTo('cc@example.com');
         });
     }
 

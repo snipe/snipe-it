@@ -9,48 +9,59 @@
 @stop
 
 @section('header_right')
-    <a href="{{ route('departments.edit', ['department' => $department->id]) }}" class="btn btn-sm btn-theme pull-right">{{ trans('admin/departments/table.update') }} </a>
-@stop
+    <x-button.info-panel-toggle/>
+@endsection
 
 {{-- Page content --}}
 @section('content')
+    <x-container columns="2">
+        <x-page-column class="col-md-9 main-panel">
+            <x-tabs>
+                <x-slot:tabnav>
+                    <x-tabs.user-tab count="{{ $department->users->count() }}"/>
+                    <x-tabs.files-tab :item="$department" count="{{ $department->uploads()->count() }}"/>
+                    <x-tabs.upload-tab :item="$department"/>
+                </x-slot:tabnav>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table
-                                    data-columns="{{ \App\Presenters\UserPresenter::dataTableLayout() }}"
-                                    data-cookie-id-table="departmentsUsersTable"
-                                    data-id-table="departmentsUsersTable"
-                                    data-show-footer="true"
-                                    data-side-pagination="server"
-                                    data-sort-order="asc"
-                                    id="departmentsUsersTable"
-                                    class="table table-striped snipe-table"
-                                    data-url="{{ route('api.users.index',['department_id'=> $department->id]) }}"
-                                    data-export-options='{
-                          "fileName": "export-departments-{{ str_slug($department->name) }}-{{ date('Y-m-d') }}",
-                          "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                          }'>
+                <x-slot:tabpanes>
+                    <!-- start users tab pane -->
+                    <x-tabs.pane name="users">
+                        <x-table.users name="departmentUsers" :route="route('api.users.index', ['department_id' => $department->id])"/>
+                    </x-tabs.pane>
+                    <!-- end users tab pane -->
 
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <!-- start files tab pane -->
+                    <x-tabs.pane name="files">
+                        <x-table.files object_type="departments" :object="$department"/>
+                    </x-tabs.pane>
+                    <!-- end files tab pane -->
 
-@stop
+                </x-slot:tabpanes>
+
+            </x-tabs>
+
+        </x-page-column>
+        <x-page-column class="col-md-3">
+            <x-box class="side-box expanded">
+                <x-info-panel :infoPanelObj="$department" img_path="{{ app('departments_upload_url') }}">
+
+                    <x-slot:buttons>
+                        <x-button.edit :item="$department" :route="route('departments.edit', $department->id)"/>
+                        <x-button.delete :item="$department"/>
+                    </x-slot:buttons>
+
+                </x-info-panel>
+            </x-box>
+        </x-page-column>
+    </x-container>
+
+@endsection
 
 @section('moar_scripts')
-    @include ('partials.bootstrap-table',
-    ['exportFile' => 'departments-users-export',
-    'search' => true,
-    'columns' => \App\Presenters\UserPresenter::dataTableLayout()
-])
+    @can('files', $department)
+        <x-modals.upload-file item-type="departments" :item-id="$department->id" />
+    @endcan
 
-@stop
+    @include ('partials.bootstrap-table', ['exportFile' => 'department-' . $department->name . '-export', 'search' => false])
+@endsection
+

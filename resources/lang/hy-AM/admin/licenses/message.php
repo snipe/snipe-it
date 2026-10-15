@@ -1,0 +1,69 @@
+<?php
+
+return [
+
+    'does_not_exist' => 'Լիցենզիան գոյություն չունի կամ դուք թույլտվություն չունեք այն դիտելու։',
+    'user_does_not_exist' => 'Օգտատերը գոյություն չունի կամ դուք թույլտվություն չունեք նրան դիտելու։',
+    'asset_does_not_exist' => 'Ակտիվը, որը դուք փորձում եք կապել այս լիցենզիայի հետ, գոյություն չունի։',
+    'owner_doesnt_match_asset' => 'Ակտիվը, որը դուք փորձում եք կապել այս լիցենզիայի հետ, պատկանում է «Հատկացված» ցանկում ընտրված անձից տարբեր անձի։',
+    'assoc_users' => 'Այս լիցենզիան ներկայումս տրամադրված է օգտատիրոջը և հնարավոր չէ ջնջել։ Խնդրում ենք նախ վերադարձնել լիցենզիան, ապա կրկին փորձել ջնջել։',
+    'select_asset_or_person' => 'Դուք պետք է ընտրեք ակտիվ կամ օգտատեր, բայց ոչ երկուսն էլ։',
+    'not_found' => 'Լիցենզիան չի գտնվել',
+    'seats_available' => 'Հասանելի է :seat_count տեղ',
+
+    'create' => [
+        'error' => 'Լիցենզիան չի ստեղծվել, խնդրում ենք կրկին փորձել։',
+        'success' => 'Լիցենզիան հաջողությամբ ստեղծվեց։',
+    ],
+
+    'deletefile' => [
+        'error' => 'Ֆայլը չի ջնջվել։ Խնդրում ենք կրկին փորձել։',
+        'success' => 'Ֆայլը հաջողությամբ ջնջվեց։',
+    ],
+
+    'upload' => [
+        'error' => 'Ֆայլ(եր)ը չեն վերբեռնվել։ Խնդրում ենք կրկին փորձել։',
+        'success' => 'Ֆայլ(եր)ը հաջողությամբ վերբեռնվեցին։',
+        'nofiles' => 'Դուք չեք ընտրել որևէ ֆայլ վերբեռնելու համար, կամ վերբեռնել փորձող ֆայլը չափազանց մեծ է',
+        'invalidfiles' => 'Ձեր ֆայլերից մեկը կամ մի քանիսը չափազանց մեծ են կամ թույլատրված տեսակի չեն։ Թույլատրված տեսակներն են՝ png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml և lic։',
+    ],
+
+    'update' => [
+        'error' => 'Լիցենզիան չի թարմացվել, խնդրում ենք կրկին փորձել։',
+        'success' => 'Լիցենզիան հաջողությամբ թարմացվեց։',
+    ],
+
+    'delete' => [
+        'confirm' => 'Վստա՞հ եք, որ ցանկանում եք ջնջել այս լիցենզիան։',
+        'error' => 'Լիցենզիան ջնջելիս սխալ առաջացավ։ Խնդրում ենք կրկին փորձել։',
+        'success' => 'Լիցենզիան հաջողությամբ ջնջվեց։',
+        'bulk_success' => 'The selected licenses were deleted successfully.',
+        'partial_success' => 'License deleted successfully. See additional information below. | :count licenses were deleted successfully. See additional information below.',
+        'bulk_checkout_warning' => ':license_name has seats that are currently checked out and cannot be deleted. Please check in all seats before deleting.',
+    ],
+
+    'delete_with_checkin' => [
+        'bulk_success' => ':count licenses were deleted successfully after checking in :seats seats.',
+        'partial_success' => ':count licenses were deleted successfully after checking in :seats seats. See additional information below.',
+    ],
+
+    'checkout' => [
+        'error' => 'Լիցենզիան տրամադրելիս սխալ առաջացավ։ Խնդրում ենք կրկին փորձել։',
+        'success' => 'Լիցենզիան հաջողությամբ տրամադրվեց։',
+        'not_enough_seats' => 'Տրամադրման համար բավարար լիցենզիայի տեղեր չկան։',
+        'mismatch' => 'Տրամադրված լիցենզիայի տեղը չի համապատասխանում լիցենզիային։',
+        'unavailable' => 'Այս տեղը հասանելի չէ տրամադրման համար։',
+        'license_is_inactive' => 'Այս լիցենզիան սպառված է կամ դադարեցված։',
+    ],
+
+    'checkin' => [
+        'error' => 'Լիցենզիան վերադարձնելիս սխալ առաջացավ։ Խնդրում ենք կրկին փորձել։',
+        'not_reassignable' => 'Տեղն արդեն օգտագործվել է։',
+        'success' => 'Լիցենզիան հաջողությամբ վերադարձվեց։',
+    ],
+
+    'import' => [
+        'no_free_seats' => 'License ":license" has no free seats. ":target" was not assigned to a seat.',
+    ],
+
+];

@@ -5,7 +5,20 @@ use App\Models\PredefinedKit;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
 
-Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
+// All numeric-PK params inside this group get constrained via the group's
+// `where` array so garbage-input requests 404 at the router before hitting
+// controllers or breadcrumbs.
+Route::group([
+    'prefix' => 'kits/{kit}',
+    'middleware' => ['auth'],
+    'where' => [
+        'kit' => '[0-9]+',
+        'license_id' => '[0-9]+',
+        'model_id' => '[0-9]+',
+        'consumable_id' => '[0-9]+',
+        'accessory_id' => '[0-9]+',
+    ],
+], function () {
 
     // Route::get('licenses',
     //     [Kits\PredefinedKitsController::class, 'indexLicenses']
@@ -21,8 +34,7 @@ Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
 
     Route::get('licenses/{license_id}/edit', [Kits\PredefinedKitsController::class, 'editLicense'])
         ->name('kits.licenses.edit')
-        ->breadcrumbs(fn (Trail $trail) =>
-        $trail->parent('settings.index')
+        ->breadcrumbs(fn (Trail $trail) => $trail->parent('settings.index')
             ->push(trans('admin/settings/general.backups'), route('kits.licenses.edit')));
 
     Route::delete('licenses/{license_id}',
@@ -46,7 +58,7 @@ Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
     // Consumables
     Route::put('consumables/{consumable_id}',
         [Kits\PredefinedKitsController::class, 'updateConsumable']
-    )/*->parameters([2 => 'kit_id', 1 => 'consumable_id'])*/->name('kits.consumables.update');
+    )/* ->parameters([2 => 'kit_id', 1 => 'consumable_id']) */ ->name('kits.consumables.update');
 
     Route::get('consumables/{consumable_id}/edit',
         [Kits\PredefinedKitsController::class, 'editConsumable']
@@ -59,7 +71,7 @@ Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
     // Accessories
     Route::put('accessories/{accessory_id}',
         [Kits\PredefinedKitsController::class, 'updateAccessory']
-    )/*->parameters([2 => 'kit_id', 1 => 'accessory_id'])*/->name('kits.accessories.update');
+    )/* ->parameters([2 => 'kit_id', 1 => 'accessory_id']) */ ->name('kits.accessories.update');
 
     Route::get('accessories/{accessory_id}/edit', [Kits\PredefinedKitsController::class, 'editAccessory'])
         ->name('kits.accessories.edit');
@@ -69,8 +81,7 @@ Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
 
     Route::get('checkout', [Kits\CheckoutKitController::class, 'showCheckout'])
         ->name('kits.checkout.show')
-        ->breadcrumbs(fn (Trail $trail, PredefinedKit $kit) =>
-        $trail->parent('kits.show', $kit)
+        ->breadcrumbs(fn (Trail $trail, PredefinedKit $kit) => $trail->parent('kits.show', $kit)
             ->push(trans('general.checkout'), route('kits.checkout.show', $kit)));
 
     Route::post('checkout', [Kits\CheckoutKitController::class, 'store'])
@@ -81,4 +92,3 @@ Route::group(['prefix' => 'kits/{kit}', 'middleware' => ['auth']], function () {
 Route::resource('kits', Kits\PredefinedKitsController::class, [
     'middleware' => ['auth'],
 ]);
-

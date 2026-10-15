@@ -9,13 +9,12 @@ use App\Models\CheckoutAcceptance;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\LicenseSeat;
-use App\Models\Setting;
 use App\Models\User;
-use App\Notifications\CheckoutAssetNotification;
-use App\Notifications\CurrentInventory;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\Mailer\Exception\TransportException;
 
 class SendAcceptanceReminder extends Command
 {
@@ -54,11 +53,11 @@ class SendAcceptanceReminder extends Command
             ->with([
                 'checkoutable' => function (MorphTo $morph) {
                     $morph->morphWith([
-                        Asset::class       => ['model.category', 'assignedTo', 'adminuser', 'company', 'checkouts'],
-                        Accessory::class   => ['category', 'company', 'checkouts'],
+                        Asset::class => ['model.category', 'assignedTo', 'adminuser', 'company', 'checkouts'],
+                        Accessory::class => ['category', 'company', 'checkouts'],
                         LicenseSeat::class => ['user', 'license', 'checkouts'],
-                        Component::class   => ['assignedTo', 'company', 'checkouts'],
-                        Consumable::class  => ['company', 'checkouts'],
+                        Component::class => ['assignedTo', 'company', 'checkouts'],
+                        Consumable::class => ['company', 'checkouts'],
                     ]);
                 },
                 'assignedTo',
@@ -73,16 +72,17 @@ class SendAcceptanceReminder extends Command
             ->get();
 
         $count = 0;
+        $failed = 0;
         $unacceptedAssetGroups = $pending
-            ->map(function($acceptance) {
+            ->map(function ($acceptance) {
                 return ['assetItem' => $acceptance->checkoutable, 'acceptance' => $acceptance];
             })
-            ->groupBy(function($item) {
+            ->groupBy(function ($item) {
                 return $item['acceptance']->assignedTo ? $item['acceptance']->assignedTo->id : '';
             });
-            $no_email_list= [];
+        $no_email_list = [];
 
-        foreach($unacceptedAssetGroups as $unacceptedAssetGroup) {
+        foreach ($unacceptedAssetGroups as $unacceptedAssetGroup) {
             // The [0] is weird, but it allows for the item_count to work and grabs the appropriate info for each user.
             // Collapsing and flattening the collection doesn't work above.
             $acceptance = $unacceptedAssetGroup[0]['acceptance'];
@@ -90,25 +90,36 @@ class SendAcceptanceReminder extends Command
             $locale = $acceptance->assignedTo?->locale;
             $email = $acceptance->assignedTo?->email;
 
-            if(!$email){
+            if (! $email) {
                 $no_email_list[] = [
                     'id' => $acceptance->assignedTo?->id,
                     'name' => $acceptance->assignedTo?->display_name,
                 ];
-            } else {
-                $count++;
+
+                continue;
             }
+
             $item_count = $unacceptedAssetGroup->count();
 
-            if ($locale && $email) {
-                Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count))->locale($locale));
-            } elseif ($email) {
-                Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count)));
+            try {
+                if ($locale) {
+                    Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count))->locale($locale));
+                } else {
+                    Mail::to($email)->send((new UnacceptedAssetReminderMail($acceptance, $item_count)));
+                }
+                $count++;
+            } catch (TransportException $e) {
+                $failed++;
+                $message = 'Failed to send acceptance reminder to '.$email.': '.$e->getMessage();
+                Log::warning($message);
+                $this->error($message);
             }
-
         }
 
         $this->info($count.' users notified.');
+        if ($failed > 0) {
+            $this->warn($failed.' reminder(s) failed to send due to mail transport errors. See log for details.');
+        }
         $headers = ['ID', 'Name'];
         $rows = [];
 
@@ -116,12 +127,11 @@ class SendAcceptanceReminder extends Command
             $rows[] = [$user['id'], $user['name']];
         }
 
-        if (!empty($rows)) {
-            $this->info("The following users do not have an email address:");
+        if (! empty($rows)) {
+            $this->info('The following users do not have an email address:');
             $this->table($headers, $rows);
         }
 
         return 0;
     }
-
 }

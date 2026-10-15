@@ -2,14 +2,19 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use ZipArchive;
-use Illuminate\Support\Facades\Log;
+use App\Enums\FileStorage;
 use enshrined\svgSanitize\Sanitizer;
+use Exception;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
+use ZipArchive;
 
-class SQLStreamer {
+class SQLStreamer
+{
     private $input;
+
     private $output;
+
     // embed the prefix here?
     public ?string $prefix;
 
@@ -18,106 +23,111 @@ class SQLStreamer {
     public static $buffer_size = 1024 * 1024;  // use a 1MB buffer, ought to work fine for most cases?
 
     public array $tablenames = [];
+
     private bool $should_guess = false;
+
     private bool $statement_is_permitted = false;
 
-    public function __construct($input, $output, string $prefix = null)
+    public function __construct($input, $output, ?string $prefix = null)
     {
         $this->input = $input;
         $this->output = $output;
         $this->prefix = $prefix;
     }
 
-    public function parse_sql(string $line): string {
+    public function parse_sql(string $line): string
+    {
         // take into account the 'start of line or not' setting as an instance variable?
         // 'continuation' lines for a permitted statement are PERMITTED.
         // remove *only* line-feeds & carriage-returns; helpful for regexes against lines from
         // Windows dumps
         $line = trim($line, "\r\n");
-        if($this->statement_is_permitted && $line[0] === ' ') {
-            return $line . "\n"; //re-add the newline
+        if ($this->statement_is_permitted && $line[0] === ' ') {
+            return $line."\n"; // re-add the newline
         }
 
         $table_regex = '`?([a-zA-Z0-9_]+)`?';
         $allowed_statements = [
             "/^(DROP TABLE (?:IF EXISTS )?)`$table_regex(.*)$/" => false,
-            "/^(CREATE TABLE )$table_regex(.*)$/" => true, //sets up 'continuation'
+            "/^(CREATE TABLE )$table_regex(.*)$/" => true, // sets up 'continuation'
             "/^(LOCK TABLES )$table_regex(.*)$/" => false,
             "/^(INSERT INTO )$table_regex(.*)$/" => false,
-            "/^UNLOCK TABLES/" => false,
+            '/^UNLOCK TABLES/' => false,
             // "/^\\) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;/" => false, // FIXME not sure what to do here?
-            "/^\\)[a-zA-Z0-9_= ]*;$/" => false,
+            '/^\\)[a-zA-Z0-9_= ]*;$/' => false,
             // ^^^^^^ that bit should *exit* the 'permitted' block
-            "/^\\(.*\\)[,;]$/" => false, //older MySQL dump style with one set of values per line
+            '/^\\(.*\\)[,;]$/' => false, // older MySQL dump style with one set of values per line
             /* we *could* have made the ^INSERT INTO blah VALUES$ turn on the capturing state, and closed it with
                a ^(blahblah);$ but it's cleaner to not have to manage the state machine. We're just going to
                assume that (blahblah), or (blahblah); are values for INSERT and are always acceptable. */
-            "<^/\*![0-9]{5} SET NAMES '?[a-zA-Z0-9_-]+'? \*/;$>" => false, //using weird delimiters (<,>) for readability. allow quoted or unquoted charsets
-            "<^/\*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' \*/;$>" => false, //same, now handle zero-values
+            "<^/\*![0-9]{5} SET NAMES '?[a-zA-Z0-9_-]+'? \*/;$>" => false, // using weird delimiters (<,>) for readability. allow quoted or unquoted charsets
+            "<^/\*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' \*/;$>" => false, // same, now handle zero-values
         ];
 
-        foreach($allowed_statements as $statement => $statechange) {
-//            $this->info("Checking regex: $statement...\n");
+        foreach ($allowed_statements as $statement => $statechange) {
+            //            $this->info("Checking regex: $statement...\n");
             $matches = [];
-            if (preg_match($statement,$line,$matches)) {
+            if (preg_match($statement, $line, $matches)) {
                 $this->statement_is_permitted = $statechange;
                 // matches are: 1 => first part of the statement, 2 => tablename, 3 => rest of statement
                 // (with of course 0 being "the whole match")
                 if (@$matches[2]) {
-//                    print "Found a tablename! It's: ".$matches[2]."\n";
+                    //                    print "Found a tablename! It's: ".$matches[2]."\n";
                     if ($this->should_guess) {
                         @$this->tablenames[$matches[2]] += 1;
-                        continue; //oh? FIXME
+
+                        continue; // oh? FIXME
                     } else {
-                        $cleaned_tablename = \DB::getTablePrefix().preg_replace('/^'.$this->prefix.'/','',$matches[2]);
-                        $line = preg_replace($statement,'$1`'.$cleaned_tablename.'`$3' , $line);
+                        $cleaned_tablename = \DB::getTablePrefix().preg_replace('/^'.$this->prefix.'/', '', $matches[2]);
+                        $line = preg_replace($statement, '$1`'.$cleaned_tablename.'`$3', $line);
                     }
                 } else {
                     // no explicit tablename in this one, leave the line alone
                 }
-                //how do we *replace* the tablename?
-//                print "RETURNING LINE: $line";
-                return $line . "\n"; //re-add newline
+
+                // how do we *replace* the tablename?
+                //                print "RETURNING LINE: $line";
+                return $line."\n"; // re-add newline
             }
         }
+
         // all that is not allowed is denied.
-        return "";
+        return '';
     }
 
-    //this is used in exactly *TWO* places, and in both cases should return a prefix I think?
-    // first - if you do the --sanitize-only one (which is mostly for testing/development)
-    // next - when you run *without* a guessed prefix, this is run first to figure out the prefix
-    // I think we have to *duplicate* the call to be able to run it again?
-    public static function guess_prefix($input):string
+    // Used in exactly *TWO* places. Both return a prefix:
+    //   1. --sanitize-only (mostly for testing/development).
+    //   2. When running *without* a guessed prefix, this runs first to figure out the prefix.
+    public static function guess_prefix($input): string
     {
         $parser = new self($input, null);
         $parser->should_guess = true;
         $parser->line_aware_piping(); // <----- THIS is doing the heavy lifting!
 
-        $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */]; //TODO - move to statics?
-        //can't use 'users' because the 'accessories_checkout' table?
+        $check_tables = ['settings' => null, 'migrations' => null /* 'assets' => null */]; // TODO - move to statics?
+        // can't use 'users' because the 'accessories_checkout' table?
         // can't use 'assets' because 'ver1_components_assets'
-        foreach($check_tables as $check_table => $_ignore) {
+        foreach ($check_tables as $check_table => $_ignore) {
             foreach ($parser->tablenames as $tablename => $_count) {
-//                print "Comparing $tablename to $check_table\n";
-                if (str_ends_with($tablename,$check_table)) {
-//                    print "Found one!\n";
-                    $check_tables[$check_table] = substr($tablename,0,-strlen($check_table));
+                //                print "Comparing $tablename to $check_table\n";
+                if (str_ends_with($tablename, $check_table)) {
+                    //                    print "Found one!\n";
+                    $check_tables[$check_table] = substr($tablename, 0, -strlen($check_table));
                 }
             }
         }
         $guessed_prefix = null;
         foreach ($check_tables as $clean_table => $prefix_guess) {
-            if(is_null($prefix_guess)) {
-                print("Couldn't find table $clean_table\n");
-                die();
+            if (is_null($prefix_guess)) {
+                echo "Couldn't find table $clean_table\n";
+                exit();
             }
-            if(is_null($guessed_prefix)) {
+            if (is_null($guessed_prefix)) {
                 $guessed_prefix = $prefix_guess;
             } else {
                 if ($guessed_prefix != $prefix_guess) {
-                    print("Prefix mismatch! Had guessed $guessed_prefix but got $prefix_guess\n");
-                    die();
+                    echo "Prefix mismatch! Had guessed $guessed_prefix but got $prefix_guess\n";
+                    exit();
                 }
             }
         }
@@ -130,7 +140,7 @@ class SQLStreamer {
     {
         $bytes_read = 0;
         if (! $this->input) {
-            throw new \Exception("No Input available for line_aware_piping");
+            throw new Exception('No Input available for line_aware_piping');
         }
 
         while (($buffer = fgets($this->input, SQLStreamer::$buffer_size)) !== false) {
@@ -142,24 +152,23 @@ class SQLStreamer {
                     $bytes_written = fwrite($this->output, $cleaned_buffer);
 
                     if ($bytes_written === false) {
-                        throw new \Exception("Unable to write to pipe");
+                        throw new Exception('Unable to write to pipe');
                     }
                 }
             }
             // if we got a newline at the end of this, then the _next_ read is the beginning of a line
-            if($buffer[strlen($buffer)-1] === "\n") {
+            if ($buffer[strlen($buffer) - 1] === "\n") {
                 $this->reading_beginning_of_line = true;
             } else {
                 $this->reading_beginning_of_line = false;
             }
 
         }
+
         return $bytes_read;
 
     }
 }
-
-
 
 class RestoreFromBackup extends Command
 {
@@ -168,8 +177,7 @@ class RestoreFromBackup extends Command
      *
      * @var string
      */
-    // FIXME - , stripping prefixes and nonstandard SQL statements. Without --prefix, guess and return the correct prefix to strip
-    protected $signature = 'snipeit:restore 
+    protected $signature = 'snipeit:restore
                                             {--force : Skip the danger prompt; assuming you enter "y"} 
                                             {filename : The zip file to be migrated}
                                             {--no-progress : Don\'t show a progress bar}
@@ -185,6 +193,25 @@ class RestoreFromBackup extends Command
     protected $description = 'Restore from a previously created Snipe-IT backup file';
 
     /**
+     * File-path patterns under public/uploads that the restore should extract
+     * back to disk. Wildcard entries end in `*`; the classifier trims the
+     * wildcard and matches via strrpos. The Setting- and setting- entries
+     * catch the branding filename shape produced by ImageUploadRequest
+     * (Setting-<field><id>-<random>.<ext>). Both cases are listed because
+     * the classifier is case-sensitive and either case can appear depending
+     * on when the backup was created and which filesystem it came from.
+     * The default_avatar file lives in avatars/ and is caught by the
+     * public_dirs list, not here.
+     */
+    public const PUBLIC_FILES = [
+        'public/uploads/Setting-*',
+        'public/uploads/setting-*',
+        'public/uploads/logo.*',
+        'public/uploads/favicon.*',
+        'public/uploads/favicon-uploaded.*',
+    ];
+
+    /**
      * Create a new command instance.
      *
      * @return void
@@ -195,6 +222,28 @@ class RestoreFromBackup extends Command
     }
 
     /**
+     * Pick the DB client binary to invoke for a given driver. Prefers the
+     * driver-native name (mariadb for the mariadb driver, mysql otherwise),
+     * falls back to the other name if the preferred binary is missing.
+     * Returns null if neither exists in the given path.
+     */
+    public static function pickDbClientBinary(string $driver, string $binaryPath): ?string
+    {
+        $ext = \DIRECTORY_SEPARATOR === '\\' ? '.exe' : '';
+        $preferred = $driver === 'mariadb' ? 'mariadb' : 'mysql';
+        $fallback = $preferred === 'mariadb' ? 'mysql' : 'mariadb';
+
+        foreach ([$preferred, $fallback] as $name) {
+            $candidate = rtrim($binaryPath, \DIRECTORY_SEPARATOR).\DIRECTORY_SEPARATOR.$name.$ext;
+            if (file_exists($candidate)) {
+                return $candidate;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Execute the console command.
      *
      * @return mixed
@@ -202,7 +251,7 @@ class RestoreFromBackup extends Command
     public function handle()
     {
         $dir = getcwd();
-        if( $dir != base_path() ) { // usually only the case when running via webserver, not via command-line
+        if ($dir != base_path()) { // usually only the case when running via webserver, not via command-line
             Log::debug("Current working directory is: $dir, changing directory to: ".base_path());
             chdir(base_path()); // TODO - is this *safe* to change on a running script?!
         }
@@ -217,15 +266,19 @@ class RestoreFromBackup extends Command
             return $this->error('Data loss not confirmed');
         }
 
-        if (config('database.default') != 'mysql') {
-            return $this->error('DB_CONNECTION must be MySQL in order to perform a restore. Detected: '.config('database.default'));
+        $connectionName = config('database.default');
+        $connectionConfig = config("database.connections.$connectionName");
+        $driver = $connectionConfig['driver'] ?? null;
+
+        if (! in_array($driver, ['mysql', 'mariadb'], true)) {
+            return $this->error('DB_CONNECTION must be MySQL or MariaDB in order to perform a restore. Detected driver: '.($driver ?? 'unknown')." (connection: $connectionName)");
         }
 
-        $za = new ZipArchive();
+        $za = new ZipArchive;
 
         $errcode = $za->open($filename/* , ZipArchive::RDONLY */); // that constant only exists in PHP 7.4 and higher
         if ($errcode !== true) {
-            $errors = [
+            $error_msg = match ($errcode) {
                 ZipArchive::ER_EXISTS => 'File already exists.',
                 ZipArchive::ER_INCONS => 'Zip archive inconsistent.',
                 ZipArchive::ER_INVAL => 'Invalid argument.',
@@ -235,58 +288,26 @@ class RestoreFromBackup extends Command
                 ZipArchive::ER_OPEN => "Can't open file.",
                 ZipArchive::ER_READ => 'Read error.',
                 ZipArchive::ER_SEEK => 'Seek error.',
-            ];
+                default => "Unknown reason: $errcode",
+            };
 
-            return $this->error('Could not access file: '.$filename.' - '.array_key_exists($errcode, $errors) ? $errors[$errcode] : " Unknown reason: $errcode");
+            return $this->error('Could not access file: '.$filename.' - '.$error_msg);
         }
 
-
-        $private_dirs = [
-            'storage/private_uploads/accessories',
-            'storage/private_uploads/assetmodels' => 'storage/private_uploads/models', //this was changed from assetmodels => models Aug 10 2025
-            'storage/private_uploads/asset_maintenances' => 'storage/private_uploads/maintenances', //this was changed from asset_maintenances => maintenances Aug 10 2025
-            'storage/private_uploads/maintenances', //but let 'maintenances' take precedence
-            'storage/private_uploads/models', //and let 'models' take precedence
-            'storage/private_uploads/assets', // these are asset _files_, not the pictures.
-            'storage/private_uploads/audits',
-            'storage/private_uploads/components',
-            'storage/private_uploads/consumables',
-            'storage/private_uploads/eula-pdfs',
-            'storage/private_uploads/imports',
-            'storage/private_uploads/locations',
-            'storage/private_uploads/licenses',
-            'storage/private_uploads/signatures',
-            'storage/private_uploads/users',
-        ];
+        // Upload directory enumeration lives in App\Enums\FileStorage
+        // as the single source of truth. The *ForRestore variants omit
+        // directories in FileStorage::SKIP_IN_RESTORE_PRUNE, so Spatie's
+        // backup archive directory (which may contain the archive we're
+        // currently reading from, plus the user's other rollback points)
+        // is left untouched by the pruning passes below.
+        $private_dirs = FileStorage::privateDirsForRestore();
         $private_files = [
             'storage/oauth-private.key',
             'storage/oauth-public.key',
         ];
-        $public_dirs = [
-            'public/uploads/accessories',
-            // 'public/uploads/assetmodels' => 'public/uploads/models', //according to git, this was _never_ a thing... (see below)
-            'public/uploads/maintenances',
-            'public/uploads/assets', // these are asset _pictures_, not asset files
-            'public/uploads/avatars',
-            'public/uploads/categories',
-            'public/uploads/companies',
-            'public/uploads/components',
-            'public/uploads/consumables',
-            'public/uploads/departments',
-            'public/uploads/locations',
-            'public/uploads/manufacturers',
-            'public/uploads/models', // ...it's been this way for 9 years (as of late 2025)
-            'public/uploads/suppliers',
-        ];
+        $public_dirs = FileStorage::publicDirsForRestore();
 
-        $public_files = [
-            'public/uploads/logo.*',
-            'public/uploads/setting-email_logo*',
-            'public/uploads/setting-label_logo*',
-            'public/uploads/setting-logo*',
-            'public/uploads/favicon.*',
-            'public/uploads/favicon-uploaded.*',
-        ];
+        $public_files = self::PUBLIC_FILES;
 
         $sqlfiles = [];
         $sqlfile_indices = [];
@@ -297,10 +318,10 @@ class RestoreFromBackup extends Command
 
         $good_extensions = config('filesystems.allowed_upload_extensions_array');
 
-        $private_extensions = array_merge($good_extensions, ["csv", "key"]); //add csv, and 'key'
-        $public_extensions = array_diff($good_extensions, ["xml"]); //remove xml
+        $private_extensions = array_merge($good_extensions, ['csv', 'key']); // add csv, and 'key'
+        $public_extensions = array_diff($good_extensions, ['xml']); // remove xml
 
-        $sanitizer = new Sanitizer();
+        $sanitizer = new Sanitizer;
 
         /**
          * TODO: I _hate_ the "continue 3" thing we keep doing here
@@ -315,29 +336,30 @@ class RestoreFromBackup extends Command
             // print_r($stat_results);
 
             $raw_path = $stat_results['name'];
-            if (strpos($raw_path, '\\') !== false) { //found a backslash, swap it to forward-slash
+            if (strpos($raw_path, '\\') !== false) { // found a backslash, swap it to forward-slash
                 $raw_path = strtr($raw_path, '\\', '/');
-                //print "Translating file: ".$stat_results['name']." to: ".$raw_path."\n";
+                // print "Translating file: ".$stat_results['name']." to: ".$raw_path."\n";
             }
 
             // skip macOS resource fork files (?!?!?!)
             if (strpos($raw_path, '__MACOSX') !== false && strpos($raw_path, '._') !== false) {
-                //print "SKIPPING macOS Resource fork file: $raw_path\n";
+                // print "SKIPPING macOS Resource fork file: $raw_path\n";
                 // $boring_files[] = $raw_path; //stop adding this to the boring files list; it's just confusing
                 continue;
             }
             if (@pathinfo($raw_path, PATHINFO_EXTENSION) == 'sql') {
-                Log::debug("Found a sql file!");
+                Log::debug('Found a sql file!');
                 $sqlfiles[] = $raw_path;
                 $sqlfile_indices[] = $i;
+
                 continue;
             }
             if ($raw_path[-1] == '/') {
-                //last character is '/' - this is a directory, and we don't need it, and we don't need to warn about it
+                // last character is '/' - this is a directory, and we don't need it, and we don't need to warn about it
                 continue;
             }
-            if (in_array(basename($raw_path), [".gitkeep", ".gitignore", ".DS_Store"])) {
-                //skip these boring files silently without reporting on them; they're stupid
+            if (in_array(basename($raw_path), ['.gitkeep', '.gitignore', '.DS_Store'])) {
+                // skip these boring files silently without reporting on them; they're stupid
                 continue;
             }
             $extension = strtolower(pathinfo($raw_path, PATHINFO_EXTENSION));
@@ -351,20 +373,21 @@ class RestoreFromBackup extends Command
                     if (is_int($dir)) {
                         $dir = $destdir;
                     }
-                    $last_pos = strrpos($raw_path, $dir . '/');
+                    $last_pos = strrpos($raw_path, $dir.'/');
                     if ($last_pos !== false) {
-                        //print("INTERESTING - last_pos is $last_pos when searching $raw_path for $dir - last_pos+strlen(\$dir) is: ".($last_pos+strlen($dir))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
-                        //print("We would copy $raw_path to $dir.\n"); //FIXME append to a path?
-                        //the CSV bit, below, is because we store CSV files as "blahcsv" - without an extension
-                        if (!in_array($extension, $allowed_extensions) && !($dir == "storage/private_uploads/imports" && substr($raw_path, -3) == "csv" && $extension == "")) {
+                        // print("INTERESTING - last_pos is $last_pos when searching $raw_path for $dir - last_pos+strlen(\$dir) is: ".($last_pos+strlen($dir))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
+                        // print("We would copy $raw_path to $dir.\n"); //FIXME append to a path?
+                        // the CSV bit, below, is because we store CSV files as "blahcsv" - without an extension
+                        if (! in_array($extension, $allowed_extensions) && ! ($dir == FileStorage::Imports->privateDir() && substr($raw_path, -3) == 'csv' && $extension == '')) {
                             $unsafe_files[] = $raw_path;
-                            Log::debug($raw_path . ' from directory ' . $dir . ' is being skipped');
+                            Log::debug($raw_path.' from directory '.$dir.' is being skipped');
                         } else {
                             if ($dir != $destdir) {
                                 Log::debug("Getting ready to save file $raw_path to new directory $destdir");
                             }
                             $interesting_files[$raw_path] = ['dest' => $destdir, 'index' => $i];
                         }
+
                         continue 3;
                     }
                 }
@@ -378,28 +401,30 @@ class RestoreFromBackup extends Command
                 foreach ($files as $file) {
                     $has_wildcard = (strpos($file, '*') !== false);
                     if ($has_wildcard) {
-                        $file = substr($file, 0, -1); //trim last character (which should be the wildcard)
+                        $file = substr($file, 0, -1); // trim last character (which should be the wildcard)
                     }
                     $last_pos = strrpos($raw_path, $file); // no trailing slash!
                     if ($last_pos !== false) {
-                        if (!in_array($extension, $allowed_extensions)) {
+                        if (! in_array($extension, $allowed_extensions)) {
                             // gathering potentially unsafe files here to return at exit
                             $unsafe_files[] = $raw_path;
-                            Log::debug('Potentially unsafe file ' . $raw_path . ' is being skipped');
+                            Log::debug('Potentially unsafe file '.$raw_path.' is being skipped');
                             $boring_files[] = $raw_path;
+
                             continue 3;
                         }
-                        //print("INTERESTING - last_pos is $last_pos when searching $raw_path for $file - last_pos+strlen(\$file) is: ".($last_pos+strlen($file))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
-                        //no wildcards found in $file, process 'normally'
-                        if ($last_pos + strlen($file) == strlen($raw_path) || $has_wildcard) { //again, no trailing slash. or this is a wildcard and we just take it.
+                        // print("INTERESTING - last_pos is $last_pos when searching $raw_path for $file - last_pos+strlen(\$file) is: ".($last_pos+strlen($file))." and strlen(\$rawpath) is: ".strlen($raw_path)."\n");
+                        // no wildcards found in $file, process 'normally'
+                        if ($last_pos + strlen($file) == strlen($raw_path) || $has_wildcard) { // again, no trailing slash. or this is a wildcard and we just take it.
                             // print("FOUND THE EXACT FILE: $file AT: $raw_path!!!\n"); //we *do* care about this, though.
                             $interesting_files[$raw_path] = ['dest' => dirname($file), 'index' => $i];
+
                             continue 3;
                         }
                     }
                 }
             }
-            $boring_files[] = $raw_path; //if we've gotten to here and haven't continue'ed our way into the next iteration, we don't want this file
+            $boring_files[] = $raw_path; // if we've gotten to here and haven't continue'ed our way into the next iteration, we don't want this file
         } // end of pre-processing the ZIP file for-loop
         // print_r($interesting_files);exit(-1);
 
@@ -408,15 +433,22 @@ class RestoreFromBackup extends Command
         }
 
         if (strpos($sqlfiles[0], 'db-dumps') === false) {
-            //return $this->error("SQL backup file is missing 'db-dumps' component of full pathname: ".$sqlfiles[0]);
-            //older Snipe-IT installs don't have the db-dumps subdirectory component
+            // return $this->error("SQL backup file is missing 'db-dumps' component of full pathname: ".$sqlfiles[0]);
+            // older Snipe-IT installs don't have the db-dumps subdirectory component
+            $this->warn("Did not find the 'db-dumps' directory - is this really a Snipe-IT backup file? Continuing anyways...");
         }
 
         $sql_stat = $za->statIndex($sqlfile_indices[0]);
-        //$this->info("SQL Stat is: ".print_r($sql_stat,true));
-        $sql_contents = $za->getStream($sql_stat['name']); // maybe copy *THIS* thing?
+        // $this->info("SQL Stat is: ".print_r($sql_stat,true));
+        $sql_contents = $za->getStream($sql_stat['name']);
 
-        // OKAY, now that we *found* the sql file if we're doing just the guess-prefix thing, we can do that *HERE* I think?
+        if ($sql_contents === false) {
+            $this->error('Unable to open SQL file: '.$sql_stat['name']);
+
+            return -1;
+        }
+
+        // Now that we *found* the sql file, if we're doing just the guess-prefix thing we can do that *HERE*.
         if ($this->option('sanitize-guess-prefix')) {
             $prefix = SQLStreamer::guess_prefix($sql_contents);
             $this->line($prefix);
@@ -428,56 +460,48 @@ class RestoreFromBackup extends Command
         if ($this->option('sql-stdout-only')) {
             $sql_importer = new SQLStreamer($sql_contents, STDOUT, $this->option('sanitize-with-prefix'));
             $bytes_read = $sql_importer->line_aware_piping();
-            return $this->warn("$bytes_read total bytes read");
-            //TODO - it'd be nice to dump this message to STDERR so that STDOUT is just pure SQL,
-            // which would be good for redirecting to a file, and not having to trim the last line off of it
+
+            // STDERR so stdout stays pure SQL for `--sql-stdout-only >
+            // out.sql` redirection and the operator does not have to
+            // trim the trailing status line off the dump.
+            $this->getOutput()->getErrorStyle()->writeln('<comment>'.$bytes_read.' total bytes read</comment>');
+
+            return 0;
         }
 
-        //how to invoke the restore?
+        // how to invoke the restore?
         $pipes = [];
 
         $env_vars = getenv();
-        $env_vars['MYSQL_PWD'] = config('database.connections.mysql.password');
-        // TODO notes: we are stealing the dump_binary_path (which *probably* also has your copy of the mysql binary in it. But it might not, so we might need to extend this)
-        //             we unilaterally prepend a slash to the `mysql` command. This might mean your path could look like /blah/blah/blah//mysql - which should be fine. But maybe in some environments it isn't?
-        $mysql_binary = config('database.connections.mysql.dump.dump_binary_path').\DIRECTORY_SEPARATOR.'mysql'.(\DIRECTORY_SEPARATOR == '\\' ? ".exe" : "");
-        if( ! file_exists($mysql_binary) ) {
-            return $this->error("mysql tool at: '$mysql_binary' does not exist, cannot restore. Please edit DB_DUMP_PATH in your .env to point to a directory that contains the mysqldump and mysql binary");
+        $env_vars['MYSQL_PWD'] = $connectionConfig['password'];
+
+        $binaryPath = $connectionConfig['dump']['dump_binary_path'] ?? '';
+        $client_binary = static::pickDbClientBinary($driver, $binaryPath);
+        if ($client_binary === null) {
+            $preferred = $driver === 'mariadb' ? 'mariadb' : 'mysql';
+
+            return $this->error("DB client binary '$preferred' not found in DB_DUMP_PATH ('$binaryPath'). Please edit DB_DUMP_PATH in your .env to point to a directory that contains the mysql/mariadb client binary.");
         }
-        $proc_results = proc_open("$mysql_binary -h ".escapeshellarg(config('database.connections.mysql.host')).' -u '.escapeshellarg(config('database.connections.mysql.username')).' '.escapeshellarg(config('database.connections.mysql.database')), // yanked -p since we pass via ENV
-                                  [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
-                                  $pipes,
-                                  null,
-                                  $env_vars); // this is not super-duper awesome-secure, but definitely more secure than showing it on the CLI, or dropping temporary files with passwords in them.
+
+        $proc_results = proc_open(escapeshellarg($client_binary).' -h '.
+            escapeshellarg($connectionConfig['host']).
+            ' --batch '.
+            ' --binary-mode '.
+            ' -u '.escapeshellarg($connectionConfig['username']).' '.
+            (empty($connectionConfig['unix_socket'])
+                ? ' -P '.escapeshellarg($connectionConfig['port'])
+                : ' -S '.escapeshellarg($connectionConfig['unix_socket'])).' '.
+            escapeshellarg($connectionConfig['database']), // yanked -p since we pass via ENV
+            [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
+            $pipes,
+            null,
+            $env_vars); // this is not super-duper awesome-secure, but definitely more secure than showing it on the CLI, or dropping temporary files with passwords in them.
         if ($proc_results === false) {
-            return $this->error('Unable to invoke mysql via CLI');
-        }
-
-        // I'm not sure about these?
-        stream_set_blocking($pipes[1], false); // use non-blocking reads for stdout
-        stream_set_blocking($pipes[2], false); // use non-blocking reads for stderr
-
-        // $this->info("Stdout says? ".fgets($pipes[1])); //FIXME: I think we might need to set non-blocking mode to use this properly?
-        // $this->info("Stderr says? ".fgets($pipes[2])); //FIXME: ditto, same.
-        // should we read stdout?
-        // fwrite($pipes[0],config("database.connections.mysql.password")."\n"); //this doesn't work :(
-
-        //$sql_contents = fopen($sqlfiles[0], "r"); //NOPE! This isn't a real file yet, silly-billy!
-
-        // FIXME - this feels like it wants to go somewhere else?
-        // and it doesn't seem 'right' - if you can't get a stream to the .sql file,
-        // why do we care what's happening with pipes and stdout and stderr?!
-        if ($sql_contents === false) {
-            $stdout = fgets($pipes[1]);
-            $this->info($stdout);
-            $stderr = fgets($pipes[2]);
-            $this->info($stderr);
-
-            return false;
+            return $this->error('Unable to invoke DB client via CLI');
         }
 
         try {
-            if ( $this->option('sanitize-with-prefix') === null) {
+            if ($this->option('sanitize-with-prefix') === null) {
                 // "Legacy" direct-piping
                 $bytes_read = 0;
                 while (($buffer = fgets($sql_contents, SQLStreamer::$buffer_size)) !== false) {
@@ -486,7 +510,7 @@ class RestoreFromBackup extends Command
                     $bytes_written = fwrite($pipes[0], $buffer);
 
                     if ($bytes_written === false) {
-                        throw new Exception("Unable to write to pipe");
+                        throw new Exception('Unable to write to pipe');
                     }
                 }
             } else {
@@ -494,37 +518,57 @@ class RestoreFromBackup extends Command
                 $bytes_read = $sql_importer->line_aware_piping();
             }
         } catch (\Exception $e) {
-            Log::error("Error during restore!!!! ".$e->getMessage());
-            // FIXME - put these back and/or put them in the right places?!
-            $err_out = fgets($pipes[1]);
-            $err_err = fgets($pipes[2]);
-            Log::error("Error OUTPUT: ".$err_out);
+            Log::error('Error during restore!!!! '.$e->getMessage());
+            // Drain both pipes fully so the DB client's own diagnostic ends up in
+            // the log instead of just the downstream "broken pipe". Then include
+            // the process exit code so the cause is visible without strace.
+            // The deprecation warning about maria-db is a red herring, and not the actual problem.
+            // "Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead"
+            // was drowning out the actual problem.
+            stream_set_blocking($pipes[1], false);
+            stream_set_blocking($pipes[2], false);
+            $err_out = stream_get_contents($pipes[1]) ?: '';
+            $err_err = stream_get_contents($pipes[2]) ?: '';
+            fclose($pipes[0]);
+            fclose($pipes[1]);
+            fclose($pipes[2]);
+            $exit_code = proc_close($proc_results);
+            Log::error('Error OUTPUT: '.$err_out);
             $this->info($err_out);
-            Log::error("Error ERROR : ".$err_err);
+            Log::error('Error ERROR : '.$err_err);
             $this->error($err_err);
+            Log::error("DB client exited with code $exit_code");
+            $this->error("DB client exited with code $exit_code");
             throw $e;
         }
-        if (!feof($sql_contents) || $bytes_read == 0) {
-            return $this->error("Not at end of file for sql file, or zero bytes read. aborting!");
+        if (! feof($sql_contents) || $bytes_read == 0) {
+            $this->error('Not at end of file for sql file, or zero bytes read. aborting!');
+
+            return -1;
         }
-    
+
         fclose($pipes[0]);
         fclose($sql_contents);
-        
+
         $this->line(stream_get_contents($pipes[1]));
         fclose($pipes[1]);
 
         $this->error(stream_get_contents($pipes[2]));
         fclose($pipes[2]);
 
-        //wait, have to do fclose() on all pipes first?
         $close_results = proc_close($proc_results);
         if ($close_results != 0) {
             return $this->error('There may have been a problem with the database import: Error number '.$close_results);
         }
 
-        //and now copy the files over too (right?)
-        //FIXME - we don't prune the filesystem space yet!!!!
+        // Prune the upload directories before extracting the backup's
+        // files on top. A restore replaces the entire install (the DB
+        // was wiped before this command ran), so any image or file that
+        // the backup does not carry should not survive the restore.
+        self::pruneUploadDirectories($public_dirs, $private_dirs);
+        self::pruneUploadFiles(self::PUBLIC_FILES);
+
+        // and now copy the files over too (right?)
         if ($this->option('no-progress')) {
             $bar = null;
         } else {
@@ -532,16 +576,15 @@ class RestoreFromBackup extends Command
         }
         foreach ($interesting_files as $pretty_file_name => $file_details) {
             $ugly_file_name = $za->statIndex($file_details['index'])['name'];
-            $migrated_file_name = $file_details['dest'] . '/' . basename($pretty_file_name);
-            if (strcasecmp(substr($pretty_file_name, -4), ".svg") === 0) {
+            $migrated_file_name = $file_details['dest'].'/'.basename($pretty_file_name);
+            if (strcasecmp(substr($pretty_file_name, -4), '.svg') === 0) {
                 $svg_contents = $za->getFromIndex($file_details['index']);
                 $cleaned_svg = $sanitizer->sanitize($svg_contents);
                 file_put_contents($migrated_file_name, $cleaned_svg);
             } else {
                 $fp = $za->getStream($ugly_file_name);
-                //$this->info("Weird problem, here are file details? ".print_r($file_details,true));
-                if (!is_dir($file_details['dest'])) {
-                    mkdir($file_details['dest'], 0755, true); //0755 is what Laravel uses, so we do that
+                if (! is_dir($file_details['dest'])) {
+                    mkdir($file_details['dest'], 0755, true); // 0755 is what Laravel uses, so we do that
                 }
                 $migrated_file = fopen($migrated_file_name, 'w');
                 while (($buffer = fgets($fp, SQLStreamer::$buffer_size)) !== false) {
@@ -549,7 +592,6 @@ class RestoreFromBackup extends Command
                 }
                 fclose($migrated_file);
                 fclose($fp);
-                //$this->info("Wrote $ugly_file_name to $pretty_file_name");
             }
             if ($bar) {
                 $bar->advance();
@@ -568,6 +610,67 @@ class RestoreFromBackup extends Command
         }
         foreach ($boring_files as $boring_file) {
             $this->warn($boring_file.' was skipped.');
+        }
+    }
+
+    /**
+     * Clear every file out of each upload directory the restore is
+     * about to extract into. `.gitkeep` is preserved so the empty
+     * directory still exists post-restore. Nested subdirectories are
+     * left alone (Snipe-IT's upload dirs are flat per-resource today,
+     * but this is defensive against future directory/subdir structures).
+     *
+     * Accepts the directory lists as parameters rather than reading
+     * them from UploadDirectories directly so a test can hand in a
+     * fake sandbox dir instead of touching the real repo tree.
+     *
+     * @param  array<int|string, string>  $publicDirs
+     * @param  array<int|string, string>  $privateDirs
+     */
+    protected static function pruneUploadDirectories(array $publicDirs, array $privateDirs): void
+    {
+        $all = [];
+        foreach ([$publicDirs, $privateDirs] as $set) {
+            foreach ($set as $src => $dst) {
+                $all[] = is_int($src) ? $dst : $dst;
+            }
+        }
+
+        foreach (array_unique($all) as $dir) {
+            if (! is_dir($dir)) {
+                continue;
+            }
+            foreach (scandir($dir) ?: [] as $entry) {
+                // Preserve both .gitkeep and .gitignore so the directory
+                // still exists after a restore AND still carries its
+                // ignore rules for git-installed deployments.
+                if ($entry === '.' || $entry === '..' || $entry === '.gitkeep' || $entry === '.gitignore') {
+                    continue;
+                }
+                $path = $dir.'/'.$entry;
+                if (is_file($path)) {
+                    @unlink($path);
+                }
+            }
+        }
+    }
+
+    /**
+     * Delete every file matching the given glob patterns before the
+     * restore extracts its own copies on top. Covers the root-level
+     * Settings branding files (Setting-*, logo.*, favicon.*, etc.)
+     * that live outside the enumerated upload subdirectories.
+     *
+     * @param  list<string>  $patterns
+     */
+    protected static function pruneUploadFiles(array $patterns): void
+    {
+        foreach ($patterns as $pattern) {
+            foreach (glob($pattern) ?: [] as $match) {
+                if (is_file($match)) {
+                    @unlink($match);
+                }
+            }
         }
     }
 }

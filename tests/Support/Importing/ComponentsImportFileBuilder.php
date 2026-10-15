@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
  *  companyName?: string,
  *  itemName?: string,
  *  location?: string,
+ *  notes?: string,
  *  orderNumber?: string,
  *  purchaseCost?: int,
  *  purchaseDate?: string,
@@ -26,40 +27,46 @@ use Illuminate\Support\Str;
 class ComponentsImportFileBuilder extends FileBuilder
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getDictionary(): array
     {
         return [
-            'category'     => 'Category',
-            'companyName'  => 'Company',
-            'itemName'     => 'item Name',
-            'location'     => 'Location',
-            'orderNumber'  => 'Order Number',
+            'assetTag' => 'Asset Tag',
+            'category' => 'Category',
+            'companyName' => 'Company',
+            'itemName' => 'item Name',
+            'location' => 'Location',
+            'notes' => 'Notes',
+            'orderNumber' => 'Order Number',
             'purchaseCost' => 'Purchase Cost',
             'purchaseDate' => 'Purchase Date',
-            'quantity'     => 'Quantity',
+            'quantity' => 'Quantity',
             'serialNumber' => 'Serial number',
+            'requestable' => 'Requestable',
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function definition(): array
     {
         $faker = fake();
 
         return [
-            'category'     => Str::random(),
-            'companyName'  => Str::random() . " {$faker->companySuffix}",
-            'itemName'     => Str::random(),
-            'location'     => "{$faker->city}, {$faker->country}",
-            'orderNumber'  => "ON:COM:{$faker->uuid}",
+            'assetTag' => '',
+            'category' => Str::random(),
+            'companyName' => Str::random()." {$faker->companySuffix}",
+            'itemName' => Str::random(),
+            'location' => "{$faker->city}, {$faker->country}",
+            'notes' => $faker->sentence(),
+            'orderNumber' => "ON:COM:{$faker->uuid}",
             'purchaseCost' => rand(1, 100_000),
             'purchaseDate' => $faker->date,
-            'quantity'     => rand(1, 100_000),
-            'serialNumber' => 'SN:COM:' . Str::random(),
+            'quantity' => rand(1, 100_000),
+            'serialNumber' => 'SN:COM:'.Str::random(),
+            'requestable' => '',
         ];
     }
 }

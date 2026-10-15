@@ -31,7 +31,7 @@ return [
         'numeric' => 'Поле :attribute має бути в межах від :min до :max.',
         'string' => 'Поле :attribute має містити від :min до :max символів.',
     ],
-    'valid_regex' => 'The regular expression is invalid.',
+    'valid_regex' => 'Неправильний регулярний вираз.',
     'boolean' => 'Поле :attribute повинне містити логічний тип.',
     'can' => 'Поле :attribute містить недозволене значення.',
     'confirmed' => 'Поле підтвердження :attribute не збігається.',
@@ -71,7 +71,7 @@ return [
     ],
     'hex_color' => 'Поле :attribute має бути коректним hexadecimal кольором.',
     'image' => 'Поле :attribute має бути зображенням.',
-    'import_field_empty'    => 'Значення для :fieldname не може бути null.',
+    'import_field_empty' => 'Значення для :fieldname не може бути null.',
     'in' => 'Обрана валюта недійсна.',
     'in_array' => 'Поле :attribute повинне існувати в :other.',
     'integer' => 'Поле :attribute має бути цілим числом.',
@@ -126,7 +126,7 @@ return [
         'symbols' => 'Поле :attribute має містити принаймні один символ.',
         'uncompromised' => 'Даний :attribute з\'явився в витоку даних. Будь ласка, виберіть інший :attribute.',
     ],
-    'percent'       => 'Мінімальна амортизація повинна бути від 0 до 100, коли тип амортизації є відсотковим.',
+    'percent' => 'Мінімальна амортизація повинна бути від 0 до 100, коли тип амортизації є відсотковим.',
 
     'present' => 'Поле :attribute повинне бути присутнім.',
     'present_if' => 'Поле :attribute має бути присутнім коли :other є рівним :value.',
@@ -156,25 +156,38 @@ return [
         'string' => 'Поле :attribute має містити :size символів.',
     ],
     'starts_with' => 'Поле :attribute повинне починатися з одного з наступних :values.',
-    'string'               => 'Поле :attribute повинне містити текст.',
+    'string' => 'Поле :attribute повинне містити текст.',
     'two_column_unique_undeleted' => 'Поле :attribute має бути унікальним для :table1 і :table2. ',
-    'unique_undeleted'     => 'Поле :attribute має бути унікальним.',
-    'non_circular'         => 'Поле :attribute не повинне створювати круглие посилання.',
-    'not_array'            => ':attribute не може бути масивом.',
+    'unique_undeleted' => 'Поле :attribute має бути унікальним.',
+    'non_circular' => 'Поле :attribute не повинне створювати круглие посилання.',
+    'parent_must_be_top_level' => 'Вибраний елемент «:attribute» має бути елементом верхнього рівня. Допускається лише один рівень вкладеності.',
+    'must_have_no_children' => 'Цей елемент уже має дочірні елементи, тому йому не можна призначити батьківський елемент.',
+    'parent_within_scope' => 'Вибраний елемент «:attribute» перебуває поза межами призначеної вам області.',
+    'not_array' => ':attribute не може бути масивом.',
     'disallow_same_pwd_as_user_fields' => 'Пароль не може бути таким же, як ім\'я користувача.',
-    'letters'              => 'Пароль має містити принаймні одну букву.',
-    'numbers'              => 'Пароль має містити принаймні одну цифру.',
-    'case_diff'            => 'Пароль повинен використовувати змішаний випадок.',
-    'symbols'              => 'Пароль має містити символи.',
+    'letters' => 'Пароль має містити принаймні одну букву.',
+    'numbers' => 'Пароль має містити принаймні одну цифру.',
+    'case_diff' => 'Пароль повинен використовувати змішаний випадок.',
+    'symbols' => 'Пароль має містити символи.',
     'timezone' => 'Поле :attribute має містити коректну часову зону.',
     'unique' => ':attribute вже зайнятий.',
     'uploaded' => 'Завантаження поля :attribute не вдалося.',
     'uppercase' => 'Поле :attribute має бути з верхнім регістром.',
     'url' => 'Поле :attribute має бути коректним URL.',
+    'external_url' => 'Поле :attribute має містити дійсну зовнішню URL-адресу (http:// або https://), яка не вказує на приватну чи локальну адресу.',
+    'asset_tag_pattern_placeholder' => 'Шаблон тегу активу має містити принаймні один заповнювач із :placeholders, інакше кожен синхронізований актив отримає однаковий тег і буде збережено лише перший.',
+    'custom_http_extras_json' => [
+        'not_json' => 'Додаткові параметри мають бути коректними даними у форматі JSON. Помилка синтаксичного аналізу: :error',
+        'not_array' => 'Додаткові параметри мають бути масивом JSON (починатися з [ і закінчуватися ]).',
+        'entry_not_object' => 'Запис «Додаткові параметри» №:index має бути об’єктом JSON із полями key, label і path.',
+        'missing_field' => 'У записі «Додаткові параметри» №:index відсутнє обов’язкове поле ":field".',
+    ],
     'ulid' => 'Поле :attribute має бути дійсним ULID.',
     'uuid' => 'Поле :attribute має бути коректним UUID.',
-    'fmcs_location' => 'Full multiple company support and location scoping is enabled in the Admin Settings, and the selected location and selected company are not compatible.',
-    'is_unique_across_company_and_location' => 'The :attribute must be unique within the selected company and location.',
+    'valid_css_color' => 'Поле :attribute має містити коректне значення кольору CSS (hex, rgb, rgba, hsl або hsla).',
+    'fmcs_company' => 'Поле :attribute є обов’язковим, оскільки ввімкнено повну підтримку кількох компаній, а активи без прив’язки до компанії не дозволені.',
+    'fmcs_location' => 'Розташування «:location» належить компанії :location_company, яка не відповідає вибраній компанії.',
+    'is_unique_across_company_and_location' => 'Поле :attribute має бути унікальним у межах вибраної компанії та локації.',
 
     /*
     |--------------------------------------------------------------------------
@@ -187,38 +200,39 @@ return [
     |
     */
 
-    'email_array'      => 'Одна або кілька адрес електронної пошти не правильні.',
-    'checkboxes'           => ':attribute містить неприпустимі параметри.',
-    'radio_buttons'        => ':attribute є неприпустимим.',
-    
+    'email_array' => 'Одна або кілька адрес електронної пошти не правильні.',
+    'checkboxes' => ':attribute містить неприпустимі параметри.',
+    'radio_buttons' => ':attribute є неприпустимим.',
+    'image_file_too_large' => 'Значення поля :attribute не може перевищувати :max.',
+
     'custom' => [
         'alpha_space' => 'Поле :attribute містить символ, який не допускається.',
 
-        'hashed_pass'      => 'Поточний пароль неправильний',
-        'dumbpwd'          => 'Цей пароль занадто вживаний.',
+        'hashed_pass' => 'Поточний пароль неправильний',
+        'dumbpwd' => 'Цей пароль занадто вживаний.',
         'statuslabel_type' => 'Ви повинні вибрати правильний тип статуса',
-        'custom_field_not_found'          => 'Це поле не існує, будь ласка, перевірте ваші власні імена полів.',
+        'custom_field_not_found' => 'Це поле не існує, будь ласка, перевірте ваші власні імена полів.',
         'custom_field_not_found_on_model' => 'Це поле існує, але воно не доступне в цьому наборі поля даної моделі Активу.',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
-        'purchase_date.date_format'     => 'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
-        'last_audit_date.date_format'   =>  'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD hh:mm:ss',
-        'expiration_date.date_format'   =>  'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
-        'termination_date.date_format'  =>  'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
-        'expected_checkin.date_format'  =>  'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
-        'start_date.date_format'        =>  'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
-        'end_date.date_format'          =>  'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
+        'purchase_date.date_format' => 'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
+        'last_audit_date.date_format' => 'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD hh:mm:ss',
+        'expiration_date.date_format' => 'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
+        'termination_date.date_format' => 'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
+        'expected_checkin.date_format' => 'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
+        'start_date.date_format' => 'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
+        'end_date.date_format' => 'Поле :attribute має містити коректну дату в форматі YYYY-MM-DD',
         'invalid_value_in_field' => 'Невірне значення включене в це поле',
 
         'ldap_username_field' => [
-            'not_in' =>         '<code>sAMAccountName</code> (змішаний регістр), ймовірно, не працює. Замість цього ви повинні використовувати <code>samaccountname</code> (нижній регістр).'
+            'not_in' => '<code>sAMAccountName</code> (змішаний регістр), ймовірно, не працює. Замість цього ви повинні використовувати <code>samaccountname</code> (нижній регістр).',
         ],
         'ldap_auth_filter_query' => ['not_in' => '<code>uid=samaccountname</code> , можливо, не є коректним фільтром авторизації. Ви мабуть хочете, <code>uid=</code> '],
         'ldap_filter' => ['regex' => 'Це значення, мабуть, не повинно бути в дужках.'],
 
-        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -230,7 +244,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'serials.*' => 'Серійний номер',
+        'asset_tags.*' => 'Тег активу',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -244,6 +261,5 @@ return [
         'required' => 'Це поле обов\'язкове для заповнення',
         'email' => 'Будь ласка, введіть коректну адресу електронної пошти',
     ],
-
 
 ];

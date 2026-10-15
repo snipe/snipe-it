@@ -2,47 +2,70 @@
 
 namespace App\Models;
 
+use App\Http\Traits\UniqueUndeletedTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use UnhandledMatchError;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperReportTemplate
+ */
 class ReportTemplate extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use UniqueUndeletedTrait;
     use ValidatingTrait;
+
+    protected $table = 'report_templates';
 
     protected $casts = [
         'options' => 'array',
+        'is_shared' => 'boolean',
     ];
 
     protected $fillable = [
         'created_by',
+        'type',
         'name',
         'options',
+        'is_shared',
     ];
 
     protected $rules = [
+        'type' => [
+            'required',
+            'in:asset,component,consumable',
+        ],
         'name' => [
             'required',
             'string',
+            'unique_undeleted:report_templates,name',
         ],
         'options' => [
             'required',
             'array',
         ],
+        'is_shared' => [
+            'boolean',
+        ],
     ];
 
     protected static function booted()
     {
-        // Scope to current user
+        // Scope to templates the current user owns OR that are marked
+        // shared.
         static::addGlobalScope(
             'current_user', function (Builder $builder) {
                 if (auth()->check()) {
-                    $builder->where('created_by', auth()->id());
+                    $builder->where(function (Builder $inner) {
+                        $inner->where('created_by', auth()->id())
+                            ->orWhere('is_shared', 1);
+                    });
                 }
             }
         );
@@ -59,8 +82,7 @@ class ReportTemplate extends Model
     /**
      * Get the value of a checkbox field for the given field name.
      *
-     * @param string $fieldName
-     * @param string $fallbackValue The value to return if the report template is not saved yet.
+     * @param  string  $fallbackValue  The value to return if the report template is not saved yet.
      */
     public function checkmarkValue(string $fieldName, string $fallbackValue = '1'): string
     {
@@ -82,9 +104,8 @@ class ReportTemplate extends Model
     /**
      * Get the value of a radio field for the given field name.
      *
-     * @param string $fieldName
-     * @param string $value     The value to check against.
-     * @param bool   $isDefault Whether the radio input being checked is the default.
+     * @param  string  $value  The value to check against.
+     * @param  bool  $isDefault  Whether the radio input being checked is the default.
      */
     public function radioValue(string $fieldName, string $value, bool $isDefault = false): bool
     {
@@ -92,7 +113,7 @@ class ReportTemplate extends Model
 
         // If the field doesn't exist but the radio input
         // being checked is the default then return true.
-        if (!$fieldExists && $isDefault) {
+        if (! $fieldExists && $isDefault) {
             return true;
         }
 
@@ -108,15 +129,13 @@ class ReportTemplate extends Model
     /**
      * Get the value of a select field for the given field name.
      *
-     * @param string      $fieldName
-     * @param string|null $model     The Eloquent model to check against.
-     *
+     * @param  string|null  $model  The Eloquent model to check against.
      * @return mixed|null
      */
-    public function selectValue(string $fieldName, string $model = null)
+    public function selectValue(string $fieldName, ?string $model = null)
     {
         // If the field does not exist then return null.
-        if (!isset($this->options[$fieldName])) {
+        if (! isset($this->options[$fieldName])) {
             return null;
         }
 
@@ -144,15 +163,12 @@ class ReportTemplate extends Model
     /**
      * Get the values of a multi-select field for the given field name.
      *
-     * @param string      $fieldName
-     * @param string|null $model     The Eloquent model to check against.
-     *
-     * @return iterable
+     * @param  string|null  $model  The Eloquent model to check against.
      */
-    public function selectValues(string $fieldName, string $model = null): iterable
+    public function selectValues(string $fieldName, ?string $model = null): iterable
     {
         // If the field does not exist then return an empty array.
-        if (!isset($this->options[$fieldName])) {
+        if (! isset($this->options[$fieldName])) {
             return [];
         }
 
@@ -165,7 +181,7 @@ class ReportTemplate extends Model
         // Wrap the value in an array if needed. This is to ensure
         // values previously stored as a single value,
         // most likely from a single select, are returned as an array.
-        if (!is_array($this->options[$fieldName])) {
+        if (! is_array($this->options[$fieldName])) {
             return [$this->options[$fieldName]];
         }
 
@@ -174,13 +190,8 @@ class ReportTemplate extends Model
 
     /**
      * Get the value of a text field for the given field name.
-     *
-     * @param string      $fieldName
-     * @param string|null $fallbackValue
-     *
-     * @return string
      */
-    public function textValue(string $fieldName, string|null $fallbackValue = ''): string
+    public function textValue(string $fieldName, ?string $fallbackValue = ''): string
     {
         // Assuming we're using the null object pattern,
         // return the default value if the object is not saved yet.
@@ -196,5 +207,17 @@ class ReportTemplate extends Model
     public function getDisplayNameAttribute()
     {
         return $this->name;
+    }
+
+    /**
+     * @throws UnhandledMatchError
+     */
+    public function getViewPath(): string
+    {
+        return match ($this->type) {
+            'asset' => 'reports.custom.asset',
+            'component' => 'reports.custom.component',
+            'consumable' => 'reports.custom.consumable',
+        };
     }
 }

@@ -4,11 +4,12 @@ namespace Tests\Unit\Models\Company;
 
 use App\Models\Company;
 use App\Models\User;
+use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
 
 class GetIdForCurrentUserTest extends TestCase
 {
-    public function testReturnsProvidedValueWhenFullCompanySupportDisabled()
+    public function test_returns_provided_value_when_full_company_support_disabled()
     {
         $this->settings->disableMultipleFullCompanySupport();
 
@@ -16,7 +17,7 @@ class GetIdForCurrentUserTest extends TestCase
         $this->assertEquals(1000, Company::getIdForCurrentUser(1000));
     }
 
-    public function testReturnsProvidedValueForSuperUsersWhenFullCompanySupportEnabled()
+    public function test_returns_provided_value_for_super_users_when_full_company_support_enabled()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
@@ -24,19 +25,21 @@ class GetIdForCurrentUserTest extends TestCase
         $this->assertEquals(2000, Company::getIdForCurrentUser(2000));
     }
 
-    public function testReturnsNonSuperUsersCompanyIdWhenFullCompanySupportEnabled()
+    public function test_throws_when_non_super_user_submits_company_they_do_not_belong_to()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
-        $this->actingAs(User::factory()->forCompany(['id' => 2000])->create());
-        $this->assertEquals(2000, Company::getIdForCurrentUser(1000));
+        $company = Company::factory()->create(['id' => 2000]);
+        $this->actingAs(User::factory()->forCompany($company)->create());
+        $this->expectException(ValidationException::class);
+        Company::getIdForCurrentUser(1000);
     }
 
-    public function testReturnsNullForNonSuperUserWithoutCompanyIdWhenFullCompanySupportEnabled()
+    public function test_returns_null_for_non_super_user_without_company_id_when_full_company_support_enabled()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
-        $this->actingAs(User::factory()->create(['company_id' => null]));
+        $this->actingAs(User::factory()->withoutCompany()->create());
         $this->assertNull(Company::getIdForCurrentUser(1000));
     }
 }

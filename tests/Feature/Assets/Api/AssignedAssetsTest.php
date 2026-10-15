@@ -25,7 +25,7 @@ class AssignedAssetsTest extends TestCase
 
         $asset = Asset::factory()->for($companyA)->create();
 
-        $user = User::factory()->for($companyB)->viewAssets()->create();
+        $user = User::factory()->forCompany($companyB)->viewAssets()->create();
 
         $this->actingAsForApi($user)
             ->getJson(route('api.assets.assigned_assets', $asset))

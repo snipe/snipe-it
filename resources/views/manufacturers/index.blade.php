@@ -8,67 +8,46 @@
 
 {{-- Page content --}}
 @section('content')
+    <x-container>
+        <x-box name="manufacturer" sr_only_title>
 
-  <div class="row">
-    <div class="col-md-12">
+            @if ($manufacturer_count == 0)
 
-      <div class="box box-default">
-        <div class="box-body">
+                    <form action="{{ route('manufacturers.seed') }}" method="POST">
+                      {{ csrf_field() }}
+                    <x-callout type="info" role="status">
+                        {{ trans('general.seeding.manufacturers.prompt') }}
+                        <button class="btn btn-sm btn-theme hidden-print" rel="noopener">
+                          {{ trans('general.seeding.manufacturers.button') }}
+                        </button>
+                    </x-callout>
+                    </form>
 
-    @if ($manufacturer_count == 0)
+              @else
+                <x-slot:table_header>{{ trans('admin/manufacturers/table.asset_manufacturers') }}</x-slot:table_header>
 
-            <form action="{{ route('manufacturers.seed') }}" method="POST">
-              {{ csrf_field() }}
-            <div class="callout callout-info">
-              <p>
-                  {{ trans('general.seeding.manufacturers.prompt') }}
-                <button class="btn btn-sm btn-theme hidden-print" rel="noopener">
-                  {{ trans('general.seeding.manufacturers.button') }}
-                </button>
-              </p>
-            </div>
-            </form>
+                <x-slot:bulkactions>
+                    <x-table.bulk-manufacturers />
+                </x-slot:bulkactions>
 
-      @else
-                <x-tables.bulk-actions
-                        id_divname='manufacturersBulkEditToolbar'
-                        action_route="{{route('manufacturers.bulk.delete')}}"
-                        id_formname="manufacturersBulkForm"
-                        id_button="bulkManufacturerEditButton"
-                        model_name="manufacturer"
-                >
-                    @can('delete', App\Models\Manufacturer::class)
-                        <option>{{trans('general.delete')}}</option>
-                    @endcan
-                </x-tables.bulk-actions>
 
-            <table
-              data-columns="{{ \App\Presenters\ManufacturerPresenter::dataTableLayout() }}"
-              data-cookie-id-table="manufacturersTable"
-              data-id-table="manufacturersTable"
-              data-advanced-search="false"
-              data-side-pagination="server"
-              data-sort-order="asc"
-              id="manufacturersTable"
-              {{-- begin stuff for bulk dropdown --}}
-              data-toolbar="#manufacturersBulkEditToolbar"
-              data-bulk-button-id="#bulkManufacturerEditButton"
-              data-bulk-form-id="#manufacturersBulkForm"
-              {{-- end stuff for bulk dropdown --}}
-              data-buttons="manufacturerButtons"
-              class="table table-striped snipe-table"
-              data-url="{{route('api.manufacturers.index', ['status' => e(request()->input('status')) ]) }}"
-              data-export-options='{
-                "fileName": "export-manufacturers-{{ date('Y-m-d') }}",
-                "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
-                }'>
-            </table>
+                <x-table
+                        name="manufacturer"
+                        buttons="manufacturerButtons"
+                        fixed_right_number="1"
+                        fixed_number="1"
+                        api_url="{{ route('api.manufacturers.index') }}"
+                        :presenter="\App\Presenters\ManufacturerPresenter::dataTableLayout()"
+                        export_filename="export-manufacturers-{{ date('Y-m-d') }}"
+                />
+
+
+
 
             @endif
-        </div><!-- /.box-body -->
-      </div><!-- /.box -->
-    </div>
-  </div>
+        </x-box>
+        <x-shiftclick/>
+    </x-container>
 @stop
 
 @section('moar_scripts')

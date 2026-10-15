@@ -36,13 +36,13 @@
 
         <h3>
         @if ($snipeSettings->acceptance_pdf_logo!='')
-            <img class="print-logo" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->acceptance_pdf_logo }}">
+            <img class="print-logo" src="{{ Storage::disk('public')->url($snipeSettings->acceptance_pdf_logo) }}" alt="">
         @endif
         {{ $snipeSettings->site_name }}
         </h3>
     @elseif ($snipeSettings->brand == '2')
         @if ($snipeSettings->acceptance_pdf_logo!='')
-            <img class="print-logo" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->acceptance_pdf_logo }}">
+            <img class="print-logo" src="{{ Storage::disk('public')->url($snipeSettings->acceptance_pdf_logo) }}" alt="">
         @endif
     @else
       <h3>{{ $snipeSettings->site_name }}</h3>
@@ -76,24 +76,24 @@
 <table class="inventory">
     <thead>
     <tr>
-        <th colspan="6">{{ trans('general.users') }}</th>
+        <th scope="col" colspan="6">{{ trans('general.users') }}</th>
     </tr>
     </thead>
     <thead>
         <tr>
-        <th style="width: 5px;"></th>
-        <th style="width: 25%;">{{ trans('general.company') }}</th>
-        <th style="width: 25%;">{{ trans('admin/locations/table.user_name') }}</th>
-        <th style="width: 10%;">{{ trans('general.employee_number') }}</th>
-        <th style="width: 20%;">{{ trans('admin/locations/table.department') }}</th>
-        <th style="width: 20%;">{{ trans('admin/locations/table.location') }}</th>
+        <th scope="col" style="width: 5px;"></th>
+        <th scope="col" style="width: 25%;">{{ trans('general.company') }}</th>
+        <th scope="col" style="width: 25%;">{{ trans('admin/locations/table.user_name') }}</th>
+        <th scope="col" style="width: 10%;">{{ trans('general.employee_number') }}</th>
+        <th scope="col" style="width: 20%;">{{ trans('admin/locations/table.department') }}</th>
+        <th scope="col" style="width: 20%;">{{ trans('admin/locations/table.location') }}</th>
         </tr>
     </thead>
 @foreach ($users as $user)
 
     <tr>
     <td>{{ $counter }}</td>
-    <td>{{ (($user) && ($user->company)) ? $user->company->name : '' }}</td>
+    <td>{{ ($user) ? $user->companies->pluck('name')->implode(', ') : '' }}</td>
     <td>{{ ($user)  ? $user->first_name .' '. $user->last_name : '' }}</td>
     <td>{{ ($user)  ? $user->employee_num : '' }}</td>
     <td>{{ (($user) && ($user->department)) ? $user->department->name : '' }}</td>
@@ -111,18 +111,18 @@
     <table class="inventory">
         <thead>
         <tr>
-            <th colspan="10">{{ trans('general.child_locations') }}</th>
+            <th scope="col" colspan="10">{{ trans('general.child_locations') }}</th>
         </tr>
         </thead>
         <thead>
         <tr>
-            <th style="width: 20px;"></th>
-            <th>{{ trans('general.name') }}</th>
-            <th>{{ trans('general.address') }}</th>
-            <th>{{ trans('general.city') }}</th>
-            <th>{{ trans('general.state') }}</th>
-            <th>{{ trans('general.country') }}</th>
-            <th>{{ trans('general.zip') }}</th>
+            <th scope="col" style="width: 20px;"></th>
+            <th scope="col">{{ trans('general.name') }}</th>
+            <th scope="col">{{ trans('general.address') }}</th>
+            <th scope="col">{{ trans('general.city') }}</th>
+            <th scope="col">{{ trans('general.state') }}</th>
+            <th scope="col">{{ trans('general.country') }}</th>
+            <th scope="col">{{ trans('general.zip') }}</th>
 
         </tr>
         </thead>
@@ -152,21 +152,21 @@
 <table class="inventory">
     <thead>
     <tr>
-        <th colspan="10">{{ trans('general.assets') }}</th>
+        <th scope="col" colspan="10">{{ trans('general.assets') }}</th>
     </tr>
     </thead>
     <thead>
         <tr>
-        <th style="width: 20px;"></th>
-        <th style="width: 10%;">{{ trans('admin/locations/table.asset_tag') }}</th>
-        <th style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
-        <th style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
-        <th style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
-        <th style="width: 15%;">{{ trans('admin/locations/table.asset_model') }}</th>
-        <th style="width: 15%;">{{ trans('admin/locations/table.asset_serial') }}</th>
-        <th style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
-        <th style="width: 10%;">{{ trans('admin/locations/table.asset_checked_out') }}</th>
-        <th style="width: 10%;">{{ trans('admin/locations/table.asset_expected_checkin') }}</th>
+        <th scope="col" style="width: 20px;"></th>
+        <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_tag') }}</th>
+        <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
+        <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
+        <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
+        <th scope="col" style="width: 15%;">{{ trans('admin/locations/table.asset_model') }}</th>
+        <th scope="col" style="width: 15%;">{{ trans('admin/locations/table.asset_serial') }}</th>
+        <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
+        <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_checked_out') }}</th>
+        <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_expected_checkin') }}</th>
         </tr>
     </thead>
     @php
@@ -175,7 +175,7 @@
 
     @foreach ($assets as $asset)
         @php
-            if($snipeSettings->show_archived_in_list != 1 && $asset->assetstatus?->archived == 1){
+            if($snipeSettings->show_archived_in_list != 1 && $asset->status?->archived == 1){
                 continue;
             }
         @endphp
@@ -204,21 +204,21 @@
         <table class="inventory">
             <thead>
             <tr>
-                <th colspan="10">{{ trans('admin/locations/message.assigned_assets') }}</th>
+                <th scope="col" colspan="10">{{ trans('admin/locations/message.assigned_assets') }}</th>
             </tr>
             </thead>
             <thead>
             <tr>
-                <th style="width: 20px;"></th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_tag') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
-                <th style="width: 15%;">{{ trans('admin/locations/table.asset_model') }}</th>
-                <th style="width: 15%;">{{ trans('admin/locations/table.asset_serial') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_checked_out') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_expected_checkin') }}</th>
+                <th scope="col" style="width: 20px;"></th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_tag') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
+                <th scope="col" style="width: 15%;">{{ trans('admin/locations/table.asset_model') }}</th>
+                <th scope="col" style="width: 15%;">{{ trans('admin/locations/table.asset_serial') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_checked_out') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_expected_checkin') }}</th>
             </tr>
             </thead>
             @php
@@ -227,7 +227,7 @@
 
             @foreach ($assignedAssets as $asset)
                 @php
-                    if($snipeSettings->show_archived_in_list != 1 && $asset->assetstatus?->archived == 1){
+                    if($snipeSettings->show_archived_in_list != 1 && $asset->status?->archived == 1){
                         continue;
                     }
                 @endphp
@@ -256,17 +256,17 @@
     <table class="inventory">
         <thead>
         <tr>
-            <th colspan="10">{{ trans('general.accessories') }}</th>
+            <th scope="col" colspan="10">{{ trans('general.accessories') }}</th>
         </tr>
         </thead>
         <thead>
         <tr>
-            <th style="width: 20px;"></th>
-            <th style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
-            <th style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
-            <th style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
-            <th>{{ trans('admin/models/table.modelnumber') }}</th>
-            <th style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
+            <th scope="col" style="width: 20px;"></th>
+            <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
+            <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
+            <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
+            <th scope="col">{{ trans('admin/models/table.modelnumber') }}</th>
+            <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
         </tr>
         </thead>
         @php
@@ -295,31 +295,39 @@
         <table class="inventory">
             <thead>
             <tr>
-                <th colspan="10">{{ trans('general.accessories_assigned') }}</th>
+                <th scope="col" colspan="10">{{ trans('general.accessories_assigned') }}</th>
             </tr>
             </thead>
             <thead>
             <tr>
-                <th style="width: 20px;"></th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
-                <th>{{ trans('admin/models/table.modelnumber') }}</th>
-                <th style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
+                <th scope="col" style="width: 20px;"></th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_name') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_category') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
+                <th scope="col">{{ trans('admin/models/table.modelnumber') }}</th>
+                <th scope="col" style="width: 10%;">{{ trans('admin/locations/table.asset_location') }}</th>
             </tr>
             </thead>
             @php
                 $counter = 1;
             @endphp
 
-            @foreach ($assignedAccessories as $accessory)
+            {{-- $assignedAccessories is a collection of AccessoryCheckout
+                 rows (Location::assignedAccessories() is a morphMany onto
+                 accessories_checkout, keyed by assigned_type / assigned_to).
+                 Fix for #19093: reach through ->accessory to render the
+                 underlying Accessory attributes. Prior code addressed
+                 $checkout->name / ->category / etc. directly and produced
+                 blank cells because AccessoryCheckout has none of those
+                 attributes. --}}
+            @foreach ($assignedAccessories as $checkout)
                 <tr>
                     <td>{{ $counter }}</td>
-                    <td>{{ $accessory->name }}</td>
-                    <td>{{ ($accessory->category) ? $accessory->category->name : '' }}</td>
-                    <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }}</td>
-                    <td>{{ $accessory->model_number }}</td>
-                    <td>{{ ($accessory->location) ? $accessory->location->name : '' }}</td>
+                    <td>{{ $checkout->accessory?->name }}</td>
+                    <td>{{ $checkout->accessory?->category?->name }}</td>
+                    <td>{{ $checkout->accessory?->manufacturer?->name }}</td>
+                    <td>{{ $checkout->accessory?->model_number }}</td>
+                    <td>{{ $checkout->accessory?->location?->name }}</td>
                 </tr>
                 @php
                     $counter++
@@ -334,17 +342,17 @@
     <table class="inventory">
         <thead>
         <tr>
-            <th colspan="10">{{ trans('general.accessories') }}</th>
+            <th scope="col" colspan="10">{{ trans('general.accessories') }}</th>
         </tr>
         </thead>
         <thead>
         <tr>
-            <th style="width: 20px;"></th>
-            <th>{{ trans('admin/locations/table.asset_name') }}</th>
-            <th>{{ trans('general.qty') }}</th>
-            <th>{{ trans('admin/locations/table.asset_category') }}</th>
-            <th>{{ trans('admin/locations/table.asset_manufacturer') }}</th>
-            <th>{{ trans('admin/models/table.modelnumber') }}</th>
+            <th scope="col" style="width: 20px;"></th>
+            <th scope="col">{{ trans('admin/locations/table.asset_name') }}</th>
+            <th scope="col">{{ trans('general.qty') }}</th>
+            <th scope="col">{{ trans('admin/locations/table.asset_category') }}</th>
+            <th scope="col">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
+            <th scope="col">{{ trans('admin/models/table.modelnumber') }}</th>
         </tr>
         </thead>
         @php
@@ -372,17 +380,17 @@
     <table class="inventory">
         <thead>
         <tr>
-            <th colspan="10">{{ trans('general.components') }}</th>
+            <th scope="col" colspan="10">{{ trans('general.components') }}</th>
         </tr>
         </thead>
         <thead>
         <tr>
-            <th style="width: 20px;"></th>
-            <th>{{ trans('admin/locations/table.asset_name') }}</th>
-            <th>{{ trans('general.qty') }}</th>
-            <th>{{ trans('admin/locations/table.asset_category') }}</th>
-            <th>{{ trans('admin/locations/table.asset_manufacturer') }}</th>
-            <th>{{ trans('admin/models/table.modelnumber') }}</th>
+            <th scope="col" style="width: 20px;"></th>
+            <th scope="col">{{ trans('admin/locations/table.asset_name') }}</th>
+            <th scope="col">{{ trans('general.qty') }}</th>
+            <th scope="col">{{ trans('admin/locations/table.asset_category') }}</th>
+            <th scope="col">{{ trans('admin/locations/table.asset_manufacturer') }}</th>
+            <th scope="col">{{ trans('admin/models/table.modelnumber') }}</th>
         </tr>
         </thead>
         @php

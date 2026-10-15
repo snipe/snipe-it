@@ -4,8 +4,8 @@ namespace App\Http\Transformers;
 
 use App\Helpers\Helper;
 use App\Models\Statuslabel;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Gate;
 
 class StatuslabelsTransformer
 {
@@ -32,15 +32,18 @@ class StatuslabelsTransformer
             'notes' => e($statuslabel->notes),
             'created_by' => ($statuslabel->adminuser) ? [
                 'id' => (int) $statuslabel->adminuser->id,
-                'name'=> e($statuslabel->adminuser->display_name),
+                'name' => e($statuslabel->adminuser->display_name),
             ] : null,
             'created_at' => Helper::getFormattedDateObject($statuslabel->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($statuslabel->updated_at, 'datetime'),
         ];
 
         $permissions_array['available_actions'] = [
-            'update' => Gate::allows('update', Statuslabel::class) ? true : false,
-            'delete' => (Gate::allows('delete', Statuslabel::class) && ($statuslabel->assets_count == 0)) ? true : false,
+            'update' => Gate::allows('update', $statuslabel) ? true : false,
+            'delete' => (Gate::allows('delete', $statuslabel) && ($statuslabel->isDeletable())) ? true : false,
+            'bulk_selectable' => [
+                'delete' => $statuslabel->isDeletable(),
+            ],
         ];
         $array += $permissions_array;
 

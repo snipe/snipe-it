@@ -27,7 +27,7 @@
         </label>
         <input class="form-control" placeholder="Snipe-IT Asset Management" required="" name="site_name" type="text" value="{{ old('site_name') }}">
 
-        {!! $errors->first('site_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+        <x-form.error name="site_name" />
       </div>
     </div>
 
@@ -37,14 +37,14 @@
           <div class="form-group col-lg-6">
               <label for="first_name">{{ trans('general.first_name') }}</label>
               <input class="form-control" placeholder="Jane" required="" name="first_name" type="text" id="first_name" value="{{ old('first_name') }}">
-              {!! $errors->first('first_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+              <x-form.error name="first_name" />
           </div>
 
           <!-- last name -->
           <div class="form-group col-lg-6 required {{ $errors->has('last_name') ? 'error' : '' }}">
               <label for="last_name">{{ trans('general.last_name') }}</label>
               <input class="form-control" placeholder="Smith" required="" name="last_name" type="text" id="last_name" value="{{ old('last_name') }}">
-              {!! $errors->first('last_name', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+              <x-form.error name="last_name" />
           </div>
       </div>
 
@@ -53,14 +53,14 @@
           <div class="form-group col-lg-6{{ $errors->has('email') ? ' error' : '' }}">
               <label for="email">{{ trans('admin/users/table.email') }}</label>
               <input class="form-control" type="email" name="email" id="email" value="{{ old('email', config('mail.from.address')) }}" placeholder="you@example.com" required>
-              {!! $errors->first('email', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+              <x-form.error name="email" />
           </div>
 
           <!-- username -->
           <div class="form-group col-lg-6 {{ $errors->has('username') ? 'error' : '' }}">
               <label for="username">{{ trans('admin/users/table.username') }}</label>
               <input class="form-control" placeholder="jsmith" required="" name="username" type="text" id="username" value="{{ old('username') }}" required>
-              {!! $errors->first('username', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+              <x-form.error name="username" />
           </div>
 
       </div>
@@ -70,14 +70,14 @@
           <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'password')) ? ' required' : '' }} {{ $errors->has('password') ? 'error' : '' }}">
               <label for="password">{{ trans('admin/users/table.password') }}</label>
               <input class="form-control" type="password" name="password" id="password" value="" required>
-              {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+              <x-form.error name="password" />
           </div>
 
           <!-- password confirm -->
           <div class="form-group col-lg-6{{  (Helper::checkIfRequired(\App\Models\User::class, 'password')) ? ' required' : '' }} {{ $errors->has('password_confirm') ? 'error' : '' }}">
               <label for="password_confirmation">{{ trans('admin/users/table.password_confirm') }}</label>
               <input class="form-control" type="password" name="password_confirmation" id="password_confirmation" value="" required>
-              {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+              <x-form.error name="password_confirmation" />
           </div>
 
           <!-- Email credentials -->
@@ -96,14 +96,14 @@
               <label for="auto_increment_prefix">{{ trans('admin/settings/general.auto_increment_prefix') }}</label>
               <input class="form-control" name="auto_increment_prefix" type="text" id="auto_increment_prefix" value="{{ old('auto_increment_prefix') }}">
 
-              {!! $errors->first('auto_increment_prefix', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+              <x-form.error name="auto_increment_prefix" />
           </div>
 
           <div class="form-group col-lg-6{{ $errors->has('zerofill_count') ? ' error' : '' }}">
               <label for="zerofill_count">{{ trans('admin/settings/general.zerofill_count') }}</label>
               <input class="form-control" name="zerofill_count" type="text" value="{{ old('zerofill_count', 5) }}" id="zerofill_count">
 
-              {!! $errors->first('zerofill_count', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+              <x-form.error name="zerofill_count" />
           </div>
       </div>
 
@@ -135,7 +135,7 @@
         {{ trans('admin/settings/general.default_language') }}
       </label>
       <x-input.locale-select name="locale" :selected="old('locale', 'en-US')" />
-      {!! $errors->first('locale', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+      <x-form.error name="locale" />
     </div>
 
     <!-- Currency -->
@@ -143,7 +143,7 @@
       <label for="default_currency">{{ trans('admin/settings/general.default_currency') }}</label>
       <input class="form-control" placeholder="USD" maxlength="3" style="width: 60px;" name="default_currency" type="text" id="default_currency" value="{{ old('default_currency') }}">
 
-      {!! $errors->first('default_currency', '<span class="alert-msg" aria-hidden="true">:message</span>') !!}
+      <x-form.error name="default_currency" />
     </div>
 
   </div>

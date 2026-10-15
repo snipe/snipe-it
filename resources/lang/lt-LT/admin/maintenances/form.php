@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Pasirinkite aptarnavimo tipą',
-        'asset_maintenance_type' => 'Turto aptarnavimo tipas',
-        'title'                  => 'Pareigos',
-        'start_date'             => 'Pradžios data',
-        'completion_date'        => 'Pabaigos data',
-        'cost'                   => 'Kaina',
-        'is_warranty'            => 'Išplėstinė garantija',
-        'asset_maintenance_time' => 'Turto aptarnavimo trukmė (dienomis)',
-        'notes'                  => 'Pastabos',
-        'update'                 => 'Atnaujinti turto aptarnavimo informaciją',
-        'create'                 => 'Registruoti turto aptarnavimą'
-    ];
+return [
+    'select_type' => 'Pasirinkite aptarnavimo tipą',
+    'asset_maintenance_type' => 'Tipas',
+    'title' => 'Pareigos',
+    'start_date' => 'Pradžios data',
+    'completion_date' => 'Numatomas užbaigimas',
+    'cost' => 'Kaina',
+    'is_warranty' => 'Išplėstinė garantija',
+    'asset_maintenance_time' => 'Trukmė',
+    'notes' => 'Pastabos',
+    'update' => 'Atnaujinti turto aptarnavimo informaciją',
+    'create' => 'Registruoti turto aptarnavimą',
+    'responsible_party' => 'Atsakinga pusė',
+    'checked_out_to_at_creation' => 'Kam išduota',
+    'completed_at' => 'Užbaigta',
+    'completed_at_help' => 'Kada šis aptarnavimas buvo faktiškai baigtas. Palikite tuščią, jei dar nebaigta. Datos nustatymas čia yra tas pats, kas spustelėti „Pažymėti kaip atliktą“, bet leidžia įvesti ankstesnę datą, o ne naudoti dabartinį laiką.',
+    'completed_by' => 'Užbaigė',
+    'mark_complete' => 'Žymėti kaip užbaigtą',
+    'already_complete' => 'Jau užbaigta',
+    'completion_notes' => 'Užbaigimo pastabos',
+];

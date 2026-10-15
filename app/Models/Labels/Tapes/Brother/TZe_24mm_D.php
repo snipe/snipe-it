@@ -4,51 +4,135 @@ namespace App\Models\Labels\Tapes\Brother;
 
 class TZe_24mm_D extends TZe_24mm
 {
-    private const BARCODE_MARGIN =   1.40;
-    private const TAG_SIZE       =   2.80;
-    private const TITLE_SIZE     =   2.80;
-    private const TITLE_MARGIN   =   0.50;
-    private const LABEL_SIZE     =   2.50;
-    private const LABEL_MARGIN   = - 0.35;
-    private const FIELD_SIZE     =   2.50;
-    private const FIELD_MARGIN   =   0.35;
-    private const BARCODE1D_SIZE =   3.00;  // Size for the C128 barcode at bottom
+    private const BARCODE_MARGIN = 1.40;
 
+    private const TAG_SIZE = 2.80;
+
+    private const TITLE_SIZE = 2.80;
+
+    private const TITLE_MARGIN = 0.50;
+
+    private const LABEL_SIZE = 2.50;
+
+    private const LABEL_MARGIN = -0.35;
+
+    private const FIELD_SIZE = 2.50;
+
+    private const FIELD_MARGIN = 0.35;
+
+    private const BARCODE1D_SIZE = 3.00;  // Size for the C128 barcode at bottom
+    private string $barcode1DVAlign = 'B';
+
+    public function getBarcodeMargin(): float
+    {
+        return self::BARCODE_MARGIN;
+    }
+
+    public function getTagSize(): float
+    {
+        return self::TAG_SIZE;
+    }
+
+    public function getTitleSize(): float
+    {
+        return self::TITLE_SIZE;
+    }
+
+    public function getTitleMargin(): float
+    {
+        return self::TITLE_MARGIN;
+    }
+
+    public function getLabelSize(): float
+    {
+        return self::LABEL_SIZE;
+    }
+
+    public function getLabelMargin(): float
+    {
+        return self::LABEL_MARGIN;
+    }
+
+    public function getFieldSize(): float
+    {
+        return self::FIELD_SIZE;
+    }
+
+    public function getFieldMargin(): float
+    {
+        return self::FIELD_MARGIN;
+    }
+
+    public function getBarcode1DVAlign(): string
+    {
+        return $this->barcode1DVAlign;
+    }
     public function getUnit()
     {
-        return 'mm'; 
-    }
-    public function getWidth()
-    {
-        return 65.0; 
-    }
-    public function getSupportAssetTag()
-    {
-        return true; 
-    }
-    public function getSupport1DBarcode()
-    {
-        return true; 
-    }
-    public function getSupport2DBarcode()
-    {
-        return true; 
-    }
-    public function getSupportFields()
-    {
-        return 3; 
-    }
-    public function getSupportLogo()
-    {
-        return false; 
-    }
-    public function getSupportTitle()
-    {
-        return true; 
+        return 'mm';
     }
 
-    public function preparePDF($pdf)
+    public function getWidth()
     {
+        return 65.0;
+    }
+
+    public function getSupportAssetTag()
+    {
+        return true;
+    }
+
+    public function getSupport1DBarcode()
+    {
+        return true;
+    }
+
+    public function getSupport2DBarcode()
+    {
+        return true;
+    }
+
+    public function getSupportFields()
+    {
+        return 3;
+    }
+
+    public function getSupportLogo()
+    {
+        return false;
+    }
+
+    public function getSupportTitle()
+    {
+        return true;
+    }
+
+    protected function getContentEditorConfig(): array
+    {
+        return [
+            'barcode_size' => 3,
+            'barcode_2d_size' => 11,
+            'barcode_margin' => .4,
+            'barcode1D_v_align' => $this->getBarcode1DVAlign(),
+            'tag_font_size' => $this->getTagSize(),
+            'tag_font' => 'freemono',
+
+            'title_font_size' => $this->getTitleSize(),
+            'title_margin' => $this->getTitleMargin(),
+            'title_font' => 'freemono',
+
+            'field_label_font_size' => $this->getLabelSize(),
+            'field_label_margin' => $this->getLabelMargin(),
+            'field_label_font' => 'freemono',
+
+            'field_value_font_size' => $this->getFieldSize(),
+            'field_value_margin' => $this->getFieldMargin(),
+            'field_value_font' => 'freemono',
+
+            'tag_alignment' => 'L',
+            'logo_h_align' => 'R',
+            'text_render_mode' => 'block',
+        ];
     }
 
     public function write($pdf, $record)
@@ -97,7 +181,7 @@ class TZe_24mm_D extends TZe_24mm
         }
 
         foreach ($record->get('fields') as $field) {
-            if (!empty($field['label']) && $field['label'] !== "\u{200B}") {
+            if (! empty($field['label']) && $field['label'] !== "\u{200B}") {
                 // Write label and value on the same line
                 // Calculate label width with proportional character spacing
                 $labelWidth = $pdf->GetStringWidth($field['label'], 'freemono', '', self::LABEL_SIZE);

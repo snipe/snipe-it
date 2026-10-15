@@ -1,0 +1,22 @@
+<?php
+
+return [
+    'does_not_exist' => 'Կազմակերպությունը բացակաում է ',
+    'deleted' => 'Ջնջել կազմակերպությունը',
+    'assoc_users' => 'Այս կազմակերպությունը ներկայում կապված է առնվազն մեկ մոդելի հետ և չի կարող ջնջվել։ Խնդրում ենք թարմացնել ձեր մոդելները, որպեսզի այլևս չհղվեն այս կազմակերպությանը, և փորձեք կրկին ',
+    'create' => [
+        'error' => 'Կազմակերպությունը չի ստեղծվել, խնդրում ենք փորձեք կրկին:',
+        'success' => 'Կազմակերպությունը հաջողությամբ ստեղծվել է։',
+    ],
+    'update' => [
+        'error' => 'Կազմակերպությունը չի թարմացվել, խնդրում ենք փորձեք կրկին:',
+        'success' => 'Կազմակերպությունը հաջողությամբ թարմացվելէ :',
+    ],
+    'delete' => [
+        'confirm' => 'Վստա՞հ եք, որ ցանկանում եք ջնջել այս կազմակերպությունը ։',
+        'error' => 'Կազմակերպությունը ջնջելիս խնդիր է առաջացել։ Խնդրում ենք փորձել կրկին։',
+        'success' => 'Ընկերությունը հաջողությամբ ջնջվել է։',
+        'bulk_success' => 'Company deleted successfully.|:count companies were deleted successfully.',
+        'partial_success' => 'Company deleted successfully. See additional information below. | :count companies were deleted successfully. See additional information below.',
+    ],
+];

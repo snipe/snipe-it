@@ -77,7 +77,7 @@
 
     </head>
     <body>
-          <div class="container">
+          <main id="main" class="container">
               <div class="row">
                   <div class="col-lg-10 col-lg-offset-1">
                     <h1 class="page-header"><img src="../img/logo.png" style="height: 65px;" alt="Snipe-IT logo"> {{ trans('general.pre_flight') }}</h1>
@@ -126,7 +126,7 @@
                         </div>
                         <div class="box-body">
 
-                            @include('notifications')
+                            <x-notifications />
 
 
                           <!-- Content -->
@@ -143,8 +143,8 @@
 
                   </div>
               </div>
-          </div>
-          
+          </main>
+
         {{-- Javascript files --}}
           <script src="{{ url('js/dist/all.js') }}" nonce="{{ csrf_token() }}"></script>
 

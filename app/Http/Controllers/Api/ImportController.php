@@ -2,87 +2,168 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\FileStorage;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ItemImportRequest;
 use App\Http\Transformers\ImportsTransformer;
-use App\Models\Asset;
-use App\Models\Company;
 use App\Models\Import;
+use Illuminate\Database\Eloquent\JsonEncodingException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Database\Eloquent\JsonEncodingException;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use League\Csv\Reader;
 use Onnov\DetectEncoding\EncodingDetector;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\JsonResponse;
 
 class ImportController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
      */
-    public function index() : JsonResponse | array
+    public function index(): JsonResponse|array
     {
         $this->authorize('import');
-        $imports = Import::with('adminuser')->latest()->get();
-        return (new ImportsTransformer)->transformImports($imports);
+
+        // Silently scope to the caller's own imports unless they're a superuser.
+        // The `import` permission is grantable to any user, but a stored import
+        // file (and the first CSV row exposed by the transformer) is only meant
+        // for whoever uploaded it. Superusers keep the full view.
+        $query = Import::with('adminuser')->latest();
+        if (! auth()->user()->isSuperUser()) {
+            $query->where('created_by', auth()->id());
+        }
+
+        return (new ImportsTransformer)->transformImports($query->get());
     }
 
     /**
      * Process and store a CSV upload file.
-     *
-     * @param  \Illuminate\Http\Request  $request
      */
-    public function store() : JsonResponse
+    public function store(): JsonResponse
     {
         $this->authorize('import');
         if (! config('app.lock_passwords')) {
             $files = Request::file('files');
-            $path = config('app.private_uploads').'/imports';
+            // Path inside the private disk. Under PRIVATE_FILESYSTEM_DISK=local this resolves to
+            // storage/private_uploads/imports, and under s3_private it lands at <bucket>/private_uploads/imports
+            $diskPath = rtrim(FileStorage::Imports->privateStorageKey(), '/');
             $results = [];
-            $import = new Import;
-            $detector = new EncodingDetector();
+            $detector = new EncodingDetector;
+
+            // No file uploaded
+            if (empty($files)) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.nofiles')), 422);
+            }
 
             foreach ($files as $file) {
-                if (! in_array($file->getMimeType(), [
+                // Fresh model per file.
+                $import = new Import;
+                // Reject phantoms and fail early if the file is invalid (e.g. exceeds the server upload limit).
+                // The CSV reader below will reject anything that isn't actually parseable with a more precise error.
+                if (! $file instanceof UploadedFile || ! $file->isValid()) {
+                    return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.nofiles')), 422);
+                }
+                $allowedMimes = [
                     'application/vnd.ms-excel',
                     'text/csv',
                     'application/csv',
                     'text/x-Algol68', // because wtf CSV files?
                     'text/plain',
                     'text/comma-separated-values',
-                    'text/tsv', ])) {
+                    'text/tsv',
+                ];
+                $allowedExtensions = ['csv', 'tsv', 'txt'];
+                $clientExtension = strtolower(trim($file->getClientOriginalExtension()));
+
+                // The MIME allowlist is the primary check. When it fails,
+                // fall back to the client extension because finfo returns
+                // `application/octet-stream` for CSVs on Windows/IIS and
+                // for various perfectly-valid CSVs whose first row happens
+                // to match another magic signature. Callers reach this
+                // endpoint only with the `import` permission, and the CSV
+                // reader below will reject anything that isn't actually
+                // parseable with a more precise error than a MIME veto.
+                // See issue #10387.
+                if (! in_array($file->getMimeType(), $allowedMimes) && ! in_array($clientExtension, $allowedExtensions, true)) {
                     $results['error'] = 'File type must be CSV. Uploaded file is '.$file->getMimeType();
+
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 422);
                 }
 
-                //TODO: is there a lighter way to do this?
+                // TODO: is there a lighter way to do this?
                 if (! ini_get('auto_detect_line_endings')) {
                     ini_set('auto_detect_line_endings', '1');
                 }
-                if (function_exists('iconv')) {
-                    $file_contents = $file->getContent(); //TODO - this *does* load the whole file in RAM, but we need that to be able to 'iconv' it?
+                if (function_exists('iconv') || function_exists('mb_convert_encoding')) {
+                    $file_contents = $file->getContent(); // TODO - this *does* load the whole file in RAM, but we need that to be able to 'iconv' it?
                     $encoding = $detector->getEncoding($file_contents);
                     \Log::debug("Discovered encoding: $encoding in uploaded CSV");
+
+                    // Only fall back to mb_detect_encoding if the Onnov detector
+                    // gave us nothing useful. Overriding a correct Onnov result
+                    // (Windows-1251 for Cyrillic bytes, for example) with a
+                    // permissive mb_detect guess re-labels the file as one of
+                    // the CJK encodings early in the fallback list and produces
+                    // mojibake on iconv.
+                    if (! mb_check_encoding($file_contents, 'UTF-8')
+                        && (! $encoding || strcasecmp($encoding, 'UTF-8') === 0)) {
+                        $detected = mb_detect_encoding($file_contents, ['UTF-8', 'GBK', 'GB2312', 'GB18030', 'BIG5', 'SJIS', 'EUC-JP', 'EUC-KR', 'Windows-1252', 'Windows-1251', 'ISO-8859-1'], true);
+                        if ($detected && strcasecmp($detected, 'UTF-8') !== 0) {
+                            $encoding = $detected;
+                            \Log::debug("Fallback detected encoding: $encoding in uploaded CSV");
+                        }
+                    }
+
                     $reader = null;
-                    if (strcasecmp($encoding, 'UTF-8') != 0) {
+                    if ($encoding && strcasecmp($encoding, 'UTF-8') != 0) {
                         $transliterated = false;
                         try {
-                            $transliterated = iconv(strtoupper($encoding), 'UTF-8', $file_contents);
+                            if (function_exists('iconv')) {
+                                $transliterated = @iconv(strtoupper($encoding), 'UTF-8//IGNORE', $file_contents);
+                            } elseif (function_exists('mb_convert_encoding')) {
+                                $transliterated = mb_convert_encoding($file_contents, 'UTF-8', $encoding);
+                            }
                         } catch (\Exception $e) {
-                            $transliterated = false; //blank out the partially-decoded string
+                            $transliterated = false; // blank out the partially-decoded string
+
                             return response()->json(
                                 Helper::formatStandardApiResponse(
                                     'error',
                                     null,
-                                    trans('admin/hardware/message.import.transliterate_failure', ["encoding" => $encoding])
+                                    trans('admin/hardware/message.import.transliterate_failure', ['encoding' => $encoding])
+                                ),
+                                422
+                            );
+                        }
+                        // Loss-ratio safety net. iconv's //IGNORE flag lets a
+                        // mostly-valid file with a stray invalid byte still
+                        // import successfully, but a truly-corrupt file (random
+                        // binary, wrong-encoding guess) can silently //IGNORE
+                        // away most of its bytes and land a nearly-empty CSV
+                        // downstream. If more than half the source was dropped,
+                        // treat it the same as an iconv exception and 422 out
+                        // with the existing transliterate_failure message so
+                        // the caller sees a real error instead of an eerily-
+                        // empty import.
+                        if ($transliterated !== false && strlen($transliterated) < intdiv(strlen($file_contents), 2)) {
+                            \Log::warning(sprintf(
+                                'CSV import: refusing lossy encoding conversion (%s -> UTF-8) that kept %d/%d bytes',
+                                $encoding,
+                                strlen($transliterated),
+                                strlen($file_contents),
+                            ));
+
+                            return response()->json(
+                                Helper::formatStandardApiResponse(
+                                    'error',
+                                    null,
+                                    trans('admin/hardware/message.import.transliterate_failure', ['encoding' => $encoding])
                                 ),
                                 422
                             );
@@ -90,18 +171,27 @@ class ImportController extends Controller
                         if ($transliterated !== false) {
                             $tmpname = tempnam(sys_get_temp_dir(), '');
                             $tmpresults = file_put_contents($tmpname, $transliterated);
-                            $transliterated = null; //save on memory?
+                            $transliterated = null; // save on memory?
+
+                            // Clean up the UTF-8 copy at request end so we don't
+                            // leave the transliterated bytes sitting in sys_get_temp_dir()
+                            register_shutdown_function(static function () use ($tmpname) {
+                                if (is_file($tmpname)) {
+                                    @unlink($tmpname);
+                                }
+                            });
+
                             if ($tmpresults !== false) {
-                                $newfile = new UploadedFile($tmpname, $file->getClientOriginalName(), null, null, true); //WARNING: this is enabling 'test mode' - which is gross, but otherwise the file won't be treated as 'uploaded'
+                                $newfile = new UploadedFile($tmpname, $file->getClientOriginalName(), null, null, true); // WARNING: this is enabling 'test mode' - which is gross, but otherwise the file won't be treated as 'uploaded'
                                 if ($newfile->isValid()) {
                                     $file = $newfile;
                                 }
                             }
                         }
                     }
-                    $file_contents = null; //try to save on memory, I guess?
+                    $file_contents = null; // try to save on memory, I guess?
                 }
-                $reader = Reader::createFromFileObject($file->openFile('r')); //file pointer leak?
+                $reader = Reader::createFromFileObject($file->openFile('r')); // file pointer leak?
 
                 try {
                     $import->header_row = $reader->nth(0);
@@ -116,23 +206,24 @@ class ImportController extends Controller
                     );
                 }
 
-                //duplicate headers check
+                // duplicate headers check: single-pass seen-map keyed by
+                // header name recording the first-seen column index. The
+                // previous shape ran in_array + array_search for every
+                // header, and each of those scans the full array of
+                // values on every call. For N headers that was roughly
+                // N x N comparisons even when no duplicates existed.
                 $duplicate_headers = [];
+                $seen = [];
+                foreach ($import->header_row as $i => $header) {
+                    if (array_key_exists($header, $seen)) {
+                        $duplicate_headers[] = "Duplicate header '$header' detected, first at column: ".($seen[$header] + 1).', repeats at column: '.($i + 1);
 
-                for ($i = 0; $i < count($import->header_row); $i++) {
-                    $header = $import->header_row[$i];
-                    if (in_array($header, $import->header_row)) {
-                        $found_at = array_search($header, $import->header_row);
-                        if ($i > $found_at) {
-                            //avoid reporting duplicates twice, e.g. "1 is same as 17! 17 is same as 1!!!"
-                            //as well as "1 is same as 1!!!" (which is always true)
-                            //has to be > because otherwise the first result of array_search will always be $i itself(!)
-                            array_push($duplicate_headers, "Duplicate header '$header' detected, first at column: ".($found_at + 1).', repeats at column: '.($i + 1));
-                        }
+                        continue;
                     }
+                    $seen[$header] = $i;
                 }
                 if (count($duplicate_headers) > 0) {
-                    return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)),422);
+                    return response()->json(Helper::formatStandardApiResponse('error', null, implode('; ', $duplicate_headers)), 422);
                 }
 
                 try {
@@ -149,29 +240,23 @@ class ImportController extends Controller
                     );
                 }
 
-                $date = date('Y-m-d-his');
-
+                // Namespace the storage key by the uploader so two users
+                // posting the same filename in the same second can never clobber
+                // each other's bytes on disk. H is 24-hour so AM/PM do not
+                // alias to the same timestamp either.
+                $date = now()->format('Y-m-d-His');
                 $fixed_filename = Str::of($file->getClientOriginalName())->basename('.csv').'.csv';
+                $file_name = auth()->id().'-'.$date.'-'.$fixed_filename;
 
-                try {
-                    $file->move($path, $date.'-'.$fixed_filename);
-                } catch (FileException $exception) {
+                // Storage::putFileAs routes through the Filesystem abstraction so it works
+                // uniformly against local and s3_private drivers.
+                if (! Storage::putFileAs($diskPath, $file, $file_name)) {
                     $results['error'] = trans('admin/hardware/message.upload.error');
-                    if (config('app.debug')) {
-                        $results['error'] .= ' '.$exception->getMessage();
-                    }
 
                     return response()->json(Helper::formatStandardApiResponse('error', null, $results['error']), 500);
                 }
-                $file_name = date('Y-m-d-his').'-'.$fixed_filename;
                 $import->file_path = $file_name;
-                $import->filesize = null;
-
-                if (!file_exists($path.'/'.$file_name)) {
-                    return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.file_not_found')), 500);
-                }
-
-                $import->filesize = filesize($path.'/'.$file_name);
+                $import->filesize = $file->getSize();
                 $import->created_by = auth()->id();
                 $import->save();
                 $results[] = $import;
@@ -191,9 +276,16 @@ class ImportController extends Controller
      *
      * @param  int  $import_id
      */
-    public function process(ItemImportRequest $request, $import_id) : JsonResponse
+    public function process(ItemImportRequest $request, $import_id): JsonResponse
     {
         $this->authorize('import');
+
+        // Demo mode: uploads stay blocked at store(), but superadmins can
+        // still process the seeded sample imports so the demo shows off
+        // the flow end to end.
+        if (config('app.lock_passwords') && ! auth()->user()->isSuperUser()) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 422);
+        }
 
         // Run a backup immediately before processing
         if ($request->input('run-backup')) {
@@ -205,71 +297,159 @@ class ImportController extends Controller
 
         $import = Import::find($import_id);
 
-        if(is_null($import)){
-            $error[0][0] = trans("validation.exists", ["attribute" => "file"]);
+        // Non-owners get the same "not found" branch as a missing record so we
+        // don't leak existence of another user's uploaded import file, and so
+        // an attacker with the `import` permission can't replay a stored file
+        // by guessing its (sequential) ID. Superusers can process any import.
+        if (is_null($import) || ($import->created_by !== auth()->id() && ! auth()->user()->isSuperUser())) {
+            $error[0][0] = trans('validation.exists', ['attribute' => 'file']);
+
             return response()->json(Helper::formatStandardApiResponse('import-errors', null, $error), 500);
         }
 
-        $errors = $request->import($import);
-        $redirectTo = 'hardware.index';
-        switch ($request->input('import-type')) {
-            case 'asset':
-                $model_perms = 'App\Models\Asset';
-                $redirectTo = 'hardware.index';
-                break;
-            case 'assetModel':
-                $model_perms = 'App\Models\AssetModel';
-                $redirectTo = 'models.index';
-                break;
-            case 'accessory':
-                $model_perms = 'App\Models\Accessory';
-                $redirectTo = 'accessories.index';
-                break;
-            case 'consumable':
-                $model_perms = 'App\Models\Consumable';
-                $redirectTo = 'consumables.index';
-                break;
-            case 'component':
-                $model_perms = 'App\Models\Component';
-                $redirectTo = 'components.index';
-                break;
-            case 'license':
-                $model_perms = 'App\Models\License';
-                $redirectTo = 'licenses.index';
-                break;
-            case 'user':
-                $model_perms = 'App\Models\User';
-                $redirectTo = 'users.index';
-                break;
-            case 'location':
-                $model_perms = 'App\Models\Location';
-                $redirectTo = 'locations.index';
-                break;
-            case 'supplier':
-                $model_perms = 'App\Models\Supplier';
-                $redirectTo = 'suppliers.index';
-                break;
-            case 'manufacturer':
-                $model_perms = 'App\Models\Manufacturer';
-                $redirectTo = 'manufacturers.index';
-                break;
-            case 'category':
-                $model_perms = 'App\Models\Category';
-                $redirectTo = 'categories.index';
-                break;
+        // Per-import processing mutex. Two calls into process() for the
+        // same import (two admins clicking at once, a double-fire from the
+        // wizard, a browser retry, an intermediate proxy retry) would each
+        // run their own snapshot of the app-layer unique-validation
+        // checks, both find no live duplicates, and both insert - producing
+        // duplicate rows that the downstream unique_undeleted rule can't
+        // retroactively resolve. This UPDATE is an atomic compare-and-set:
+        // only one caller wins per Import row for the duration of that
+        // request. The lock is released at the end of the request (both
+        // success and error paths, see the finally-shaped block below) so
+        // legitimate sequential slices from the SAME caller can fire the
+        // next slice against a released lock. A stale lock from a crashed
+        // slice self-heals after 5 minutes (timeout branch). See
+        // ImportConcurrencyTest for the acquire / release / stale-takeover
+        // assertions.
+        $now = now();
+        $acquired = DB::table('imports')
+            ->where('id', $import_id)
+            ->where(function ($q) use ($now) {
+                $q->whereNull('processing_by')
+                    ->orWhere('processing_started_at', '<', $now->copy()->subMinutes(5));
+            })
+            ->update([
+                'processing_by' => auth()->id(),
+                'processing_started_at' => $now,
+            ]);
+
+        if ($acquired === 0) {
+            // No extra SELECT here to fetch the current holder: this
+            // path fires exactly when the DB is under pressure (that's
+            // why the slice is blocked in the first place), and adding
+            // a query would compound the problem for the reporter.
+            // Log::debug() also evaluates its arguments even when debug
+            // logging is off, so any extra work here would fire in
+            // every prod install regardless of LOG_LEVEL. The current
+            // holder can be read straight from the imports row during
+            // triage.
+            Log::debug('Import mutex reject', [
+                'import_id' => $import_id,
+                'requesting_user_id' => auth()->id(),
+            ]);
+
+            return response()->json(Helper::formatStandardApiResponse(
+                'error',
+                null,
+                trans('admin/hardware/message.import.already_processing')
+            ), 409);
         }
 
-        if ($errors) { //Failure
-            return response()->json(Helper::formatStandardApiResponse('import-errors', null, $errors), 500);
-        }
-        //Flash message before the redirect
-        Session::flash('success', trans('admin/hardware/message.import.success'));
+        Log::debug('Import mutex acquired', [
+            'import_id' => $import_id,
+            'user_id' => auth()->id(),
+            'acquired_at' => $now->toDateTimeString(),
+        ]);
 
-        if (auth()->user()->can('view', $model_perms)) {
-            return response()->json(Helper::formatStandardApiResponse('success', null, ['redirect_url' => route($redirectTo)]));
-        }
+        try {
+            $errors = $request->import($import);
+            $redirectTo = 'hardware.index';
+            switch ($request->input('import-type')) {
+                case 'asset':
+                case 'assetHistory':
+                    $model_perms = 'App\Models\Asset';
+                    $redirectTo = 'hardware.index';
+                    break;
+                case 'assetModel':
+                    $model_perms = 'App\Models\AssetModel';
+                    $redirectTo = 'models.index';
+                    break;
+                case 'accessory':
+                    $model_perms = 'App\Models\Accessory';
+                    $redirectTo = 'accessories.index';
+                    break;
+                case 'consumable':
+                    $model_perms = 'App\Models\Consumable';
+                    $redirectTo = 'consumables.index';
+                    break;
+                case 'component':
+                    $model_perms = 'App\Models\Component';
+                    $redirectTo = 'components.index';
+                    break;
+                case 'license':
+                    $model_perms = 'App\Models\License';
+                    $redirectTo = 'licenses.index';
+                    break;
+                case 'user':
+                    $model_perms = 'App\Models\User';
+                    $redirectTo = 'users.index';
+                    break;
+                case 'location':
+                    $model_perms = 'App\Models\Location';
+                    $redirectTo = 'locations.index';
+                    break;
+                case 'supplier':
+                    $model_perms = 'App\Models\Supplier';
+                    $redirectTo = 'suppliers.index';
+                    break;
+                case 'manufacturer':
+                    $model_perms = 'App\Models\Manufacturer';
+                    $redirectTo = 'manufacturers.index';
+                    break;
+                case 'category':
+                    $model_perms = 'App\Models\Category';
+                    $redirectTo = 'categories.index';
+                    break;
+            }
 
-        return response()->json(Helper::formatStandardApiResponse('success', null, ['redirect_url' => route('imports.index')]));
+            $tally = $request->getTally();
+            // Payload only carries the tally when at least one importer for this
+            // type has been wired up to record it. Un-instrumented importers
+            // leave every count at zero; suppress the block in that case so we
+            // don't surface a misleading all-zero summary in the wizard.
+            $tallyPayload = array_sum($tally) > 0 ? ['tally' => $tally] : null;
+
+            if ($errors) { // Failure
+                return response()->json(Helper::formatStandardApiResponse('import-errors', $tallyPayload, $errors), 500);
+            }
+            // Flash message before the redirect
+            Session::flash('success', trans('admin/hardware/message.import.success'));
+
+            $redirect_url = auth()->user()->can('view', $model_perms) ? route($redirectTo) : route('imports.index');
+
+            return response()->json(Helper::formatStandardApiResponse('success', $tallyPayload, ['redirect_url' => $redirect_url]));
+        } finally {
+            // Release the mutex so the next legitimate slice from the same
+            // caller (or a subsequent process attempt after this one has
+            // finished, including the error path above) can acquire. The
+            // 5-minute stale-timeout branch of the acquire WHERE remains as
+            // a safety net for the case where this release never runs
+            // (fatal error, request killed mid-flight).
+            $released = DB::table('imports')
+                ->where('id', $import_id)
+                ->where('processing_by', auth()->id())
+                ->update([
+                    'processing_by' => null,
+                    'processing_started_at' => null,
+                ]);
+
+            Log::debug('Import mutex released', [
+                'import_id' => $import_id,
+                'user_id' => auth()->id(),
+                'rows_updated' => $released,
+            ]);
+        }
     }
 
     /**
@@ -277,21 +457,27 @@ class ImportController extends Controller
      *
      * @param  int  $import_id
      */
-    public function destroy($import_id) : JsonResponse
+    public function destroy($import_id): JsonResponse
     {
         $this->authorize('import');
 
+        if (config('app.lock_passwords')) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('general.feature_disabled')), 422);
+        }
+
         if ($import = Import::find($import_id)) {
 
-
-            if ((auth()->user()->id != $import->created_by) && (!auth()->user()->isSuperUser())) {
+            if ((auth()->user()->id != $import->created_by) && (! auth()->user()->isSuperUser())) {
                 return response()->json(Helper::formatStandardApiResponse('warning', null, trans('admin/hardware/message.import.file_not_deleted_warning')));
             }
 
-
             try {
-                // Try to delete the file
-                Storage::delete('imports/'.$import->file_path);
+                // Try to delete the file. Path shape matches the write
+                // path in store(): 'private_uploads/imports/<name>' on
+                // the default (private) disk. The pre-fix path 'imports/'
+                // missed the 'private_uploads/' prefix and silently
+                // no-op'd on both drivers.
+                Storage::delete(FileStorage::Imports->privateStorageKey().$import->file_path);
                 $import->delete();
 
                 return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/hardware/message.import.file_delete_success')));
@@ -303,8 +489,7 @@ class ImportController extends Controller
             }
 
         }
+
         return response()->json(Helper::formatStandardApiResponse('warning', null, trans('admin/hardware/message.import.file_not_deleted_warning')));
     }
-
-
 }

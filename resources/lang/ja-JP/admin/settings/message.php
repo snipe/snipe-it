@@ -3,30 +3,35 @@
 return [
 
     'update' => [
-        'error'                 => '更新時にエラーが発生しました。 ',
-        'success'               => '更新に成功しました。',
+        'error' => '更新時にエラーが発生しました。 ',
+        'success' => '更新に成功しました。',
     ],
     'backup' => [
-        'delete_confirm'        => 'このバックアップファイルを削除してもよろしいですか？この操作は、もとに戻すことは出来ません。 ',
-        'file_deleted'          => 'バックアップファイルの削除に成功しました。 ',
-        'generated'             => '新しいバックアップファイルが作成されました。',
-        'file_not_found'        => 'そのバックアップファイルをサーバー上に見つけることが出来ませんでした。',
-        'restore_warning'       => '復元を行います。現在データベースにある既存のデータを上書きします。 これにより、既存のすべてのユーザー(あなたを含む) もログアウトします。',
-        'restore_confirm'       => ':filename からデータベースを復元してもよろしいですか？'
+        'delete_confirm' => 'このバックアップファイルを削除してもよろしいですか？この操作は、もとに戻すことは出来ません。 ',
+        'file_deleted' => 'バックアップファイルの削除に成功しました。 ',
+        'generated' => '新しいバックアップファイルが作成されました。',
+        'file_not_found' => 'そのバックアップファイルをサーバー上に見つけることが出来ませんでした。',
+        'restore_warning' => '復元を行います。現在データベースにある既存のデータを上書きします。 これにより、既存のすべてのユーザー(あなたを含む) もログアウトします。',
+        'restore_confirm' => ':filename からデータベースを復元してもよろしいですか？',
+        'delete_disabled_help' => 'バックアップの削除は無効になっています。有効にする場合は管理者へお問い合わせください。',
     ],
     'restore' => [
-        'success'               => 'システムバックアップが復元されました。もう一度ログインしてください。'
+        'success' => 'システムバックアップが復元されました。もう一度ログインしてください。',
+        'archive_invalid' => '選択したバックアップファイル（:filename）は有効なZIPアーカイブではありません。データベースを変更する前に復元を中止しました。',
+        'zip_extension_missing' => 'このサーバーにPHPのzip拡張機能が読み込まれていません。バックアップを検証できないため、データ損失を防ぐ目的で復元を中止しました。サーバー管理者へext-zipのインストールを依頼してください。',
+        'pre_backup_failed' => '復元前の安全バックアップを作成できませんでした。復旧手段がない状態で既存データベースが失われることを防ぐため、復元を中止しました。',
+        'failed_with_backup' => '復元に失敗しました。復元処理の途中で既存データベースは消去されましたが、復元前のバックアップを:backupに保存しています。このバックアップから復旧できます。',
     ],
     'purge' => [
-        'error'     => 'パージ中にエラーが発生しました。 ',
-        'validation_failed'     => 'パージの確定方法が正しくありません。入力してください、単語「削除」確認ボックス。',
-        'success'               => 'パージによりレコードは削除されました',
+        'error' => 'パージ中にエラーが発生しました。 ',
+        'validation_failed' => 'パージの確定方法が正しくありません。入力してください、単語「削除」確認ボックス。',
+        'success' => 'パージによりレコードは削除されました',
     ],
     'mail' => [
         'sending' => 'テストメールを送信しています...',
         'success' => 'メール送信完了',
         'error' => 'メールが送信できません',
-        'additional' => '追加のエラーメッセージはありません。メール設定とアプリのログを確認してください。'
+        'additional' => '追加のエラーメッセージはありません。メール設定とアプリのログを確認してください。',
     ],
     'ldap' => [
         'testing' => 'LDAP接続のテスト中…バインディングとクエリを行っています…',
@@ -34,11 +39,11 @@ return [
         'error' => '問題が発生しました。',
         'sync_success' => '設定に基づいてLDAPサーバーから返された10人のユーザーのサンプル:',
         'testing_authentication' => 'LDAP認証のテスト中...',
-        'authentication_success' => 'LDAPによるユーザー認証に成功しました！'
+        'authentication_success' => 'LDAPによるユーザー認証に成功しました！',
     ],
     'labels' => [
-        'null_template' => 'Label template not found. Please select a template.',
-        ],
+        'null_template' => 'ラベルテンプレートが見つかりません。テンプレートを選択してください。',
+    ],
     'webhook' => [
         'sending' => ':app テストメッセージを送信しています...',
         'success' => 'あなたの:webhook_name連携は動作します！',
@@ -48,12 +53,29 @@ return [
         'error' => '問題が発生しました。:app 応答: :error_message',
         'error_redirect' => 'エラー: 301/302 :endpoint はリダイレクトを返します。セキュリティ上の理由から、リダイレクトには従いません。実際のエンドポイントを使用してください。',
         'error_misc' => '問題が発生しました。:( ',
-        'webhook_fail' => ' webhook notification failed: Check to make sure the URL is still valid.',
-        'webhook_channel_not_found' => ' webhook channel not found.',
-        'ms_teams_deprecation' => 'The selected Microsoft Teams webhook URL will be deprecated Dec 31st, 2025. Please use a workflow URL. Microsoft\'s documentation on creating a workflow can be found <a href="https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498" target="_blank"> here.</a>',
+        'webhook_fail' => 'Webhook通知に失敗しました。URLが現在も有効か確認してください。',
+        'webhook_channel_not_found' => 'Webhookのチャンネルが見つかりません。',
+        'ms_teams_deprecation' => '選択したMicrosoft TeamsのWebhook URLは、2025年12月31日をもって廃止されます。ワークフローURLを使用してください。作成方法は、<a href="https://support.microsoft.com/en-us/office/create-incoming-webhooks-with-workflows-for-microsoft-teams-8ae491c7-0394-4861-ba59-055e33f75498" target="_blank">Microsoftのドキュメント</a>をご覧ください。',
     ],
     'location_scoping' => [
         'not_saved' => '設定は保存されませんでした。',
         'mismatch' => '位置情報を有効にする前に対応が必要な項目が、データベースに 1 件あります。|位置情報を有効にする前に対応が必要な項目が、データベースに :count 件あります。',
+    ],
+    'oauth' => [
+        'token_revoked' => '個人アクセストークンを失効しました。',
+        'token_unrevoked' => '個人アクセストークンを再有効化しました。',
+        'token_not_found' => '個人アクセストークンが見つかりません。',
+        'token_revoke_error' => 'トークンを失効できませんでした。',
+        'token_unrevoke_error' => 'トークンを再有効化できませんでした。',
+        'client_created' => 'OAuthクライアントを作成しました。',
+        'client_updated' => 'OAuthクライアントを更新しました。',
+        'client_deleted' => 'OAuthクライアントを削除しました。',
+        'client_revoked' => 'OAuthクライアントを失効しました。',
+        'client_unrevoked' => 'OAuthクライアントを再有効化しました。',
+        'client_not_found' => 'OAuthクライアントが見つかりません。',
+        'token_deleted' => 'トークンを失効しました。',
+        'client_delete_denied' => 'このクライアントを削除する権限がありません。',
+        'client_edit_denied' => 'このクライアントを編集する権限がありません。',
+        'token_delete_denied' => 'このトークンを失効する権限がありません。',
     ],
 ];

@@ -1,4 +1,5 @@
 @extends('layouts/default')
+
 {{-- Page title --}}
 @section('title')
 {{ trans('general.dashboard') }}
@@ -9,490 +10,141 @@
 {{-- Page content --}}
 @section('content')
 
-@if ($snipeSettings->dashboard_message!='')
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-default">
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        {!!  Helper::parseEscapedMarkedown($snipeSettings->dashboard_message)  !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endif
+<x-container>
 
-<div class="row">
-
-    <!-- panel -->
-    <div class="col-lg-2 col-xs-6">
-        <a href="{{ route('hardware.index') }}">
-            <!-- small hardware box -->
-            <div class="dashboard small-box bg-teal">
-                <div class="inner">
-                    <h3>{{ number_format(\App\Models\Asset::AssetsForShow()->count()) }}</h3>
-                    <p>{{ trans('general.assets') }}</p>
-                </div>
-                <div class="icon" aria-hidden="true">
-                    <x-icon type="assets" />
-                </div>
-                <span class="small-box-footer">
-                    {{ trans('general.view_all') }}
-                    <x-icon type="arrow-circle-right" />
-                </span>
-            </div>
-        </a>
-    </div><!-- ./col -->
-
-    <div class="col-lg-2 col-xs-6">
-        <a href="{{ route('licenses.index') }}" aria-hidden="true">
-            <!-- small license box -->
-            <div class="dashboard small-box bg-maroon">
-                <div class="inner">
-                    <h3>{{ number_format($counts['license']) }}</h3>
-                    <p>{{ trans('general.licenses') }}</p>
-                </div>
-                <div class="icon" aria-hidden="true">
-                    <x-icon type="licenses" />
-                </div>
-                <span class="small-box-footer">
-                    {{ trans('general.view_all') }}
-                    <x-icon type="arrow-circle-right" />
-                </span>
-            </div>
-        </a>
-    </div><!-- ./col -->
-
-
-    <div class="col-lg-2 col-xs-6">
-    <!-- small accessories box -->
-        <a href="{{ route('accessories.index') }}">
-            <div class="dashboard small-box bg-orange">
-                <div class="inner">
-                    <h3> {{ number_format($counts['accessory']) }}</h3>
-                    <p>{{ trans('general.accessories') }}</p>
-                </div>
-                <div class="icon" aria-hidden="true">
-                    <x-icon type="accessories" />
-                </div>
-                <span class="small-box-footer">
-                    {{ trans('general.view_all') }}
-                <x-icon type="arrow-circle-right" />
-                </span>
-            </div>
-        </a>
-    </div><!-- ./col -->
-
-    <div class="col-lg-2 col-xs-6">
-    <!-- small consumables box -->
-        <a href="{{ route('consumables.index') }}">
-            <div class="dashboard small-box bg-purple">
-                <div class="inner">
-                    <h3> {{ number_format($counts['consumable']) }}</h3>
-                    <p>{{ trans('general.consumables') }}</p>
-                </div>
-                <div class="icon" aria-hidden="true">
-                    <x-icon type="consumables" />
-                </div>
-                <span class="small-box-footer">
-                    {{ trans('general.view_all') }}
-                    <x-icon type="arrow-circle-right" />
-                </span>
-            </div>
-        </a>
-    </div><!-- ./col -->
-
-    <div class="col-lg-2 col-xs-6">
-        <!-- small components box -->
-        <a href="{{ route('components.index') }}">
-            <div class="dashboard small-box bg-yellow">
-                <div class="inner">
-                    <h3>{{ number_format($counts['component']) }}</h3>
-                    <p>{{ trans('general.components') }}</p>
-                </div>
-                <div class="icon" aria-hidden="true">
-                    <x-icon type="components" />
-                </div>
-                <span class="small-box-footer">
-                    {{ trans('general.view_all') }}
-                    <x-icon type="arrow-circle-right" />
-                </span>
-            </div>
-        </a>
-    </div><!-- ./col -->
-
-    <div class="col-lg-2 col-xs-6">
-        <!-- small users box -->
-        <a href="{{ route('users.index') }}">
-            <div class="dashboard small-box bg-light-blue">
-                <div class="inner">
-                    <h3>{{ number_format($counts['user']) }}</h3>
-                    <p>{{ trans('general.people') }}</p>
-                </div>
-                <div class="icon" aria-hidden="true">
-                    <x-icon type="users" />
-                </div>
-                <span class="small-box-footer">
-                    {{ trans('general.view_all') }}
-                    <x-icon type="arrow-circle-right" />
-                </span>
-            </div>
-        </a>
-    </div><!-- ./col -->
-
-</div>
-</div>
-
-@if ($counts['grand_total'] == 0)
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h2 class="box-title">{{ trans('general.dashboard_info') }}</h2>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-yellow" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                    <span class="sr-only">{{ trans('general.60_percent_warning') }}</span>
-                                </div>
-                            </div>
-
-
-                            <p><strong>{{ trans('general.dashboard_empty') }}</strong></p>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            @can('create', \App\Models\Asset::class)
-                            <a class="btn bg-teal" style="width: 100%" href="{{ route('hardware.create') }}">{{ trans('general.new_asset') }}</a>
-                            @endcan
-                        </div>
-                        <div class="col-md-2">
-                            @can('create', \App\Models\License::class)
-                                <a class="btn bg-maroon" style="width: 100%" href="{{ route('licenses.create') }}">{{ trans('general.new_license') }}</a>
-                            @endcan
-                        </div>
-                        <div class="col-md-2">
-                            @can('create', \App\Models\Accessory::class)
-                                <a class="btn bg-orange" style="width: 100%" href="{{ route('accessories.create') }}">{{ trans('general.new_accessory') }}</a>
-                            @endcan
-                        </div>
-                        <div class="col-md-2">
-                            @can('create', \App\Models\Consumable::class)
-                                <a class="btn bg-purple" style="width: 100%" href="{{ route('consumables.create') }}">{{ trans('general.new_consumable') }}</a>
-                            @endcan
-                        </div>
-                        <div class="col-md-2">
-                            @can('create', \App\Models\Component::class)
-                                <a class="btn bg-yellow" style="width: 100%" href="{{ route('components.create') }}">{{ trans('general.new_component') }}</a>
-                            @endcan
-                        </div>
-                        <div class="col-md-2">
-                            @can('create', \App\Models\User::class)
-                                <a class="btn bg-light-blue" style="width: 100%" href="{{ route('users.create') }}">{{ trans('general.new_user') }}</a>
-                            @endcan
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-@else
-
-<!-- recent activity -->
-<div class="row">
-  <div class="col-md-8">
-    <div class="box box-default">
-      <div class="box-header with-border">
-        <h2 class="box-title">{{ trans('general.recent_activity') }}</h2>
-        <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
-                <x-icon type="minus" />
-                <span class="sr-only">{{ trans('general.collapse') }}</span>
-            </button>
-        </div>
-      </div><!-- /.box-header -->
-      <div class="box-body">
+    @if ($snipeSettings->dashboard_message != '')
         <div class="row">
-          <div class="col-md-12">
-
-                <table
-                    data-cookie-id-table="dashActivityReport"
-                    data-height="500"
-                    data-pagination="false"
-                    data-side-pagination="server"
-                    data-id-table="dashActivityReport"
-                    data-sort-order="desc"
-                    data-show-columns="false"
-                    data-sort-name="created_at"
-                    id="dashActivityReport"
-                    class="table table-striped snipe-table"
-                    data-url="{{ route('api.activity.index', ['limit' => 25]) }}">
-                    <thead>
-                    <tr>
-                        <th data-field="icon" data-visible="true" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter"><span  class="sr-only">{{ trans('admin/hardware/table.icon') }}</span></th>
-                        <th class="col-sm-3" data-visible="true" data-field="created_at" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
-                        <th class="col-sm-2" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.created_by') }}</th>
-                        <th class="col-sm-2" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
-                        <th class="col-sm-3" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                        <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
-                    </tr>
-                    </thead>
-                </table>
-          </div><!-- /.col -->
-          <div class="text-center col-md-12" style="padding-top: 10px;">
-            <a href="{{ route('reports.activity') }}" class="btn btn-theme btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
-          </div>
-        </div><!-- /.row -->
-      </div><!-- ./box-body -->
-    </div><!-- /.box -->
-  </div>
-  <div class="col-md-4">
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <h2 class="box-title">
-                    {{ (\App\Models\Setting::getSettings()->dash_chart_type == 'name') ? trans('general.assets_by_status') : trans('general.assets_by_status_type') }}
-                </h2>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" aria-hidden="true">
-                        <x-icon type="minus" />
-                        <span class="sr-only">{{ trans('general.collapse') }}</span>
-                    </button>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="chart-responsive">
-                            <canvas id="statusPieChart" height="260"></canvas>
-                        </div> <!-- ./chart-responsive -->
-                    </div> <!-- /.col -->
-                </div> <!-- /.row -->
-            </div><!-- /.box-body -->
-        </div> <!-- /.box -->
-  </div>
-
-</div> <!--/row-->
-<div class="row">
-    <div class="col-md-6">
-
-		@if ((($snipeSettings->scope_locations_fmcs!='1') && ($snipeSettings->full_multiple_companies_support=='1')))
-			 <!-- Companies -->	
-			<div class="box box-default">
-				<div class="box-header with-border">
-					<h2 class="box-title">{{ trans('general.companies') }}</h2>
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse">
-                            <x-icon type="minus" />
-							<span class="sr-only">{{ trans('general.collapse') }}</span>
-						</button>
-					</div>
-				</div>
-				<!-- /.box-header -->
-				<div class="box-body">
-					<div class="row">
-						<div class="col-md-12">
-							<table
-									data-cookie-id-table="dashCompanySummary"
-									data-height="400"
-                                    data-pagination="false"
-									data-side-pagination="server"
-									data-sort-order="desc"
-                                    data-show-columns="false"
-									data-sort-field="assets_count"
-									id="dashCompanySummary"
-									class="table table-striped snipe-table"
-									data-url="{{ route('api.companies.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
-
-								<thead>
-								<tr>
-									<th class="col-sm-3" data-visible="true" data-field="name" data-formatter="companiesLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
-									<th class="col-sm-1" data-visible="true" data-field="users_count" data-sortable="true">
-                                        <x-icon type="users" />
-										<span class="sr-only">{{ trans('general.people') }}</span>
-									</th>
-									<th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
-                                        <x-icon type="assets" />
-										<span class="sr-only">{{ trans('general.asset_count') }}</span>
-									</th>
-									<th class="col-sm-1" data-visible="true" data-field="accessories_count" data-sortable="true">
-                                        <x-icon type="accessories" />
-										<span class="sr-only">{{ trans('general.accessories_count') }}</span>
-									</th>
-									<th class="col-sm-1" data-visible="true" data-field="consumables_count" data-sortable="true">
-                                        <x-icon type="consumables" />
-										<span class="sr-only">{{ trans('general.consumables_count') }}</span>
-									</th>
-									<th class="col-sm-1" data-visible="true" data-field="components_count" data-sortable="true">
-                                        <x-icon type="components" />
-										<span class="sr-only">{{ trans('general.components_count') }}</span>
-									</th>
-									<th class="col-sm-1" data-visible="true" data-field="licenses_count" data-sortable="true">
-                                        <x-icon type="licenses" />
-										<span class="sr-only">{{ trans('general.licenses_count') }}</span>
-									</th>
-								</tr>
-								</thead>
-							</table>
-						</div> <!-- /.col -->
-						<div class="text-center col-md-12" style="padding-top: 10px;">
-							<a href="{{ route('companies.index') }}" class="btn btn-theme btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
-						</div>
-					</div> <!-- /.row -->
-
-				</div><!-- /.box-body -->
-			</div> <!-- /.box -->
-		
-		@else
-			 <!-- Locations -->
-			 <div class="box box-default">
-				<div class="box-header with-border">
-					<h2 class="box-title">{{ trans('general.locations') }}</h2>
-					<div class="box-tools pull-right">
-						<button type="button" class="btn btn-box-tool" data-widget="collapse">
-                            <x-icon type="minus" />
-							<span class="sr-only">{{ trans('general.collapse') }}</span>
-						</button>
-					</div>
-				</div>
-				<!-- /.box-header -->
-				<div class="box-body">
-					<div class="row">
-						<div class="col-md-12">
-
-							<table
-									data-cookie-id-table="dashLocationSummary"
-									data-height="400"
-									data-side-pagination="server"
-                                    data-pagination="false"
-									data-sort-order="desc"
-									data-sort-field="assets_count"
-									id="dashLocationSummary"
-                                    data-show-columns="false"
-									class="table table-striped snipe-table"
-									data-url="{{ route('api.locations.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
-								<thead>
-								<tr>
-									<th class="col-sm-3" data-visible="true" data-field="name" data-formatter="locationsLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
-									
-									<th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
-                                        <x-icon type="assets" />
-										<span class="sr-only">{{ trans('general.asset_count') }}</span>
-									</th>
-									<th class="col-sm-1" data-visible="true" data-field="assigned_assets_count" data-sortable="true">
-										
-										{{ trans('general.assigned') }}
-									</th>
-									<th class="col-sm-1" data-visible="true" data-field="users_count" data-sortable="true">
-                                        <x-icon type="users" />
-										<span class="sr-only">{{ trans('general.people') }}</span>
-										
-									</th>
-									
-								</tr>
-								</thead>
-							</table>
-						</div> <!-- /.col -->
-						<div class="text-center col-md-12" style="padding-top: 10px;">
-							<a href="{{ route('locations.index') }}" class="btn btn-theme btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
-						</div>
-					</div> <!-- /.row -->
-
-				</div><!-- /.box-body -->
-			</div> <!-- /.box -->
-
-		@endif
-			
-    </div>
-    <div class="col-md-6">
-
-        <!-- Categories -->
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <h2 class="box-title">{{ trans('general.asset') }} {{ trans('general.categories') }}</h2>
-                <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                        <x-icon type="minus" />
-                        <span class="sr-only">{{ trans('general.collapse') }}</span>
-                    </button>
-                </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <table
-                                data-cookie-id-table="dashCategorySummary"
-                                data-height="400"
-                                data-pagination="false"
-                                data-side-pagination="server"
-                                data-show-columns="false"
-                                data-sort-order="desc"
-                                data-sort-field="assets_count"
-                                id="dashCategorySummary"
-                                class="table table-striped snipe-table"
-                                data-url="{{ route('api.categories.index', ['sort' => 'assets_count', 'order' => 'asc']) }}">
-                            <thead>
-                            <tr>
-                                <th class="col-sm-3" data-visible="true" data-field="name" data-formatter="categoriesLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
-                                <th class="col-sm-3" data-visible="true" data-field="category_type" data-sortable="true">
-                                    {{ trans('general.type') }}
-                                </th>
-                                <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
-                                    <x-icon type="assets" />
-                                    <span class="sr-only">{{ trans('general.asset_count') }}</span>
-                                </th>
-                                <th class="col-sm-1" data-visible="true" data-field="accessories_count" data-sortable="true">
-                                    <x-icon type="licenses" />
-                                    <span class="sr-only">{{ trans('general.accessories_count') }}</span>
-                                </th>
-                                <th class="col-sm-1" data-visible="true" data-field="consumables_count" data-sortable="true">
-                                    <x-icon type="consumables" />
-                                    <span class="sr-only">{{ trans('general.consumables_count') }}</span>
-                                </th>
-                                <th class="col-sm-1" data-visible="true" data-field="components_count" data-sortable="true">
-                                    <x-icon type="components" />
-                                    <span class="sr-only">{{ trans('general.components_count') }}</span>
-                                </th>
-                                <th class="col-sm-1" data-visible="true" data-field="licenses_count" data-sortable="true">
-                                    <x-icon type="licenses" />
-                                    <span class="sr-only">{{ trans('general.licenses_count') }}</span>
-                                </th>
-                            </tr>
-                            </thead>
-                        </table>
-
-                    </div> <!-- /.col -->
-                    <div class="text-center col-md-12" style="padding-top: 10px;">
-                        <a href="{{ route('categories.index') }}" class="btn btn-theme btn-sm" style="width: 100%">{{ trans('general.viewall') }}</a>
+            <div class="col-md-12">
+                <div class="box box-default">
+                    <div class="box-body">
+                        {!! Helper::parseEscapedMarkedown($snipeSettings->dashboard_message) !!}
                     </div>
-                </div> <!-- /.row -->
+                </div>
+            </div>
+        </div>
+    @endif
 
-            </div><!-- /.box-body -->
-        </div> <!-- /.box -->
-    </div>
+    {{-- Top-boxes summary + empty-inventory shortcut are admin-only.
+         Non-admins with view access to at least one HasCalendarEvents
+         adopter reach this dashboard (see DashboardController::index),
+         but the count boxes read as global inventory and the create-
+         first-thing shortcuts assume admin-shaped permissions. The
+         widget section below stays visible for everyone since each
+         widget component already gates itself with @can and Companyable-
+         scopes its queries. --}}
+    @if (auth()->user()->hasAccess('admin'))
+        <x-dashboard.top-boxes :counts="$counts" />
+    @endif
 
+    {{-- Empty-inventory shortcut is also admin-only. Non-admins take
+         the @else branch below and see the widget section, whose
+         queries Companyable-scope to what the caller can see. --}}
+    @if (auth()->user()->hasAccess('admin') && $counts['grand_total'] == 0)
+        <x-dashboard.empty-inventory-shortcut />
+    @else
+        <x-dashboard.index />
+    @endif
 
-@endif
+    {{-- Adjust-quantity modal wiring for the low-stock widget's
+         inline replenish button. Same shared modal used on the
+         accessories / consumables / components index and view pages.
+         Included whenever the viewer can update any of the three item
+         types (one of those grants is what makes the button actually
+         appear in the widget). --}}
+    @if (Gate::allows('update', \App\Models\Consumable::class)
+         || Gate::allows('update', \App\Models\Accessory::class)
+         || Gate::allows('update', \App\Models\Component::class))
+        <x-modals.adjust-quantity/>
+    @endif
 
+</x-container>
 
 @stop
 
 @section('moar_scripts')
 @include ('partials.bootstrap-table', ['simple_view' => true, 'nopages' => true])
+
+        @can('canViewUsersAndCheckoutables')
+            {{-- Today widget for the dashboard. Reuses the main calendar
+                 bundle. Initializes into listUpcoming view (rolling 7
+                 days from today). No URL sync (widgets don't own the
+                 page URL), no filter buttons (too tight for the
+                 dashboard column), no toolbar (title suffices). Users
+                 who want to filter head over to the full /calendar
+                 page. Gate matches the widget component's own gate so
+                 the JS bundle loads for every viewer the component
+                 renders for, otherwise the widget div stays empty.
+                 See resources/views/blade/dashboard/today-calendar.blade.php. --}}
+            <script src="{{ url(mix('js/dist/snipeit-calendar.js')) }}" nonce="{{ csrf_token() }}"></script>
+            <script nonce="{{ csrf_token() }}">
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Format list-view day-group labels. Compares the
+                    // group's date to today's local Y-M-D so the
+                    // "Today" / "Tomorrow" swap survives a browser
+                    // timezone that's east/west of UTC. Anything beyond
+                    // tomorrow falls back to FC's own locale-aware
+                    // default via arg.text.
+                    var upcomingDayFormat = function (arg) {
+                        var d = arg.date;
+                        var localYmd = d.year + '-' + String(d.month + 1).padStart(2, '0') + '-' + String(d.day).padStart(2, '0');
+                        var today = new Date();
+                        var todayYmd = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+                        var tomorrow = new Date(today.getTime() + 86400000);
+                        var tomorrowYmd = tomorrow.getFullYear() + '-' + String(tomorrow.getMonth() + 1).padStart(2, '0') + '-' + String(tomorrow.getDate()).padStart(2, '0');
+                        if (localYmd === todayYmd) return '{{ trans('general.calendar_today') }}';
+                        if (localYmd === tomorrowYmd) return '{{ trans('general.calendar_tomorrow') }}';
+                        return arg.text;
+                    };
+
+                    window.snipeitCalendar.init('dashboard-today-calendar', {
+                        events: '{{ route('api.calendar.events') }}',
+                        // Rolling 7-day list starting today (not listWeek,
+                        // which starts on the week's Sunday/Monday and
+                        // would show yesterday on a Tuesday). Keeps the
+                        // widget useful when today itself is empty by
+                        // pulling in tomorrow through 6 days out.
+                        initialView: 'listUpcoming',
+                        views: {
+                            listUpcoming: {
+                                type: 'list',
+                                duration: {days: 7},
+                            },
+                        },
+                        // Left side gets the "Today" / "Tomorrow" /
+                        // weekday-default swap. Right side stays a full
+                        // human-readable date ("August 14, 2026") so
+                        // the viewer can see the actual calendar day
+                        // even when the left label is relative.
+                        listDayFormat: upcomingDayFormat,
+                        listDaySideFormat: {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric',
+                        },
+                        headerToolbar: false,
+                        direction: '{{ \App\Helpers\Helper::determineLanguageDirection() }}',
+                        locale: '{{ str_replace('_', '-', app()->getLocale()) }}',
+                        urlState: false,
+                        limit: 10,
+                        onFetchMeta: function (meta) {
+                            var more = document.getElementById('dashboard-today-more');
+                            var link = document.getElementById('dashboard-today-more-link');
+                            if (!more || !link) {
+                                return;
+                            }
+                            if (meta.truncated) {
+                                var remaining = Math.max(0, meta.total - meta.returned);
+                                link.textContent = '{{ trans('general.calendar_upcoming_more') }}'.replace(':count', String(remaining));
+                                more.style.display = '';
+                            }
+                            else {
+                                more.style.display = 'none';
+                            }
+                        },
+                    });
+                });
+            </script>
+        @endcan
 @stop
 
 @push('js')
@@ -500,6 +152,15 @@
 
         <script src="{{ url(mix('js/dist/Chart.min.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
+    // Theme-aware default text color for every Chart.js instance on
+    // this page. Without this the shipped Chart.js default (#666)
+    // reads as illegible on the dark-theme box background. Same
+    // isDark() + defaultFontColor pattern the reports page uses.
+    function isDark() {
+        return document.documentElement.getAttribute('data-theme') === 'dark';
+    }
+    Chart.defaults.global.defaultFontColor = isDark() ? '#cccccc' : '#666666';
+
     // ---------------------------
     // - ASSET STATUS CHART -
     // ---------------------------
@@ -507,10 +168,18 @@
       var pieChart = new Chart(pieChartCanvas);
       var ctx = document.getElementById("statusPieChart");
       var pieOptions = {
+              // `responsive` + `maintainAspectRatio` are top-level
+              // chart options in Chart.js, not legend options. Before
+              // this fix they were nested under `legend`, which
+              // Chart.js silently ignored, so the pie stayed at its
+              // canvas height="260" attribute and didn't fill its
+              // container. Setting maintainAspectRatio: false lets the
+              // pie fill both dimensions of the .chart-responsive
+              // wrapper the dashboard puts it in.
+              responsive: true,
+              maintainAspectRatio: false,
               legend: {
                   position: 'top',
-                  responsive: true,
-                  maintainAspectRatio: true,
               },
               tooltips: {
                 callbacks: {

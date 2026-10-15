@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Actionlog;
 use App\Models\Asset;
+use App\Models\Maintenance;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
 class NotesController extends Controller
 {
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $this->authorize('update', Asset::class);
 
@@ -19,13 +21,19 @@ class NotesController extends Controller
             'note' => 'required|string|max:50000',
             'type' => [
                 'required',
-                Rule::in(['asset']),
+                Rule::in(['asset', 'maintenance']),
             ],
         ]);
 
-        $item = Asset::findOrFail($validated['id']);
-
-        $this->authorize('update', $item);
+        if ($validated['type'] === 'maintenance') {
+            $item = Maintenance::findOrFail($validated['id']);
+            $this->authorize('update', $item->asset);
+            $redirect = redirect()->route('maintenances.show', $validated['id']);
+        } else {
+            $item = Asset::findOrFail($validated['id']);
+            $this->authorize('update', $item);
+            $redirect = redirect()->route('hardware.show', $validated['id']);
+        }
 
         $logaction = new Actionlog;
         $logaction->item_id = $item->id;
@@ -34,9 +42,6 @@ class NotesController extends Controller
         $logaction->created_by = Auth::id();
         $logaction->logaction('note added');
 
-        return redirect()
-            ->route('hardware.show', $validated['id'])
-            ->withFragment('history')
-            ->with('success', trans('general.note_added'));
+        return $redirect->withFragment('notes')->with('success', trans('general.note_added'));
     }
 }

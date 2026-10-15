@@ -1,38 +1,53 @@
 <?php
 
-return array(
+return [
 
-    'accepted'                  => 'You have successfully accepted this item.',
-    'declined'                  => 'You have successfully declined this item.',
-    'bulk_manager_warn'	        => 'អ្នកប្រើប្រាស់របស់អ្នកត្រូវបានអាប់ដេតដោយជោគជ័យ ទោះជាយ៉ាងណាក៏ដោយ ធាតុគ្រប់គ្រងរបស់អ្នកមិនត្រូវបានរក្សាទុកទេ ដោយសារអ្នកគ្រប់គ្រងដែលអ្នកបានជ្រើសរើសក៏ស្ថិតនៅក្នុងបញ្ជីអ្នកប្រើប្រាស់ដែលត្រូវកែសម្រួលដែរ ហើយអ្នកប្រើប្រាស់ប្រហែលជាមិនមែនជាអ្នកគ្រប់គ្រងផ្ទាល់របស់ពួកគេទេ។ សូមជ្រើសរើសអ្នកប្រើប្រាស់របស់អ្នកម្តងទៀត ដោយមិនរាប់បញ្ចូលអ្នកគ្រប់គ្រង។',
-    'user_exists'               => 'អ្នកប្រើប្រាស់មានហើយ!',
-    'user_not_found'            => 'អ្នកប្រើប្រាស់មិនមានទេ ឬអ្នកមិនមានសិទ្ធិមើលពួកវា។',
-    'user_login_required'       => 'វាលចូលត្រូវបានទាមទារ',
+    'accepted' => 'You have successfully accepted this item.',
+    'declined' => 'You have successfully declined this item.',
+    'accept_signature_write_failed' => 'Your acceptance signature could not be saved to storage. Acceptance was not recorded. Please contact your administrator.',
+    'accept_pdf_write_failed' => 'The acceptance PDF could not be saved to storage. Acceptance was not recorded. Please contact your administrator.',
+    'bulk_manager_warn' => 'អ្នកប្រើប្រាស់របស់អ្នកត្រូវបានអាប់ដេតដោយជោគជ័យ ទោះជាយ៉ាងណាក៏ដោយ ធាតុគ្រប់គ្រងរបស់អ្នកមិនត្រូវបានរក្សាទុកទេ ដោយសារអ្នកគ្រប់គ្រងដែលអ្នកបានជ្រើសរើសក៏ស្ថិតនៅក្នុងបញ្ជីអ្នកប្រើប្រាស់ដែលត្រូវកែសម្រួលដែរ ហើយអ្នកប្រើប្រាស់ប្រហែលជាមិនមែនជាអ្នកគ្រប់គ្រងផ្ទាល់របស់ពួកគេទេ។ សូមជ្រើសរើសអ្នកប្រើប្រាស់របស់អ្នកម្តងទៀត ដោយមិនរាប់បញ្ចូលអ្នកគ្រប់គ្រង។',
+    'user_exists' => 'អ្នកប្រើប្រាស់មានហើយ!',
+    'cannot_delete' => 'User does not exist or you do not have permission to delete them.',
+    'user_not_found' => 'User does not exist or you do not have permission to view them.',
+    'user_login_required' => 'វាលចូលត្រូវបានទាមទារ',
     'user_has_no_assets_assigned' => 'មិន​មាន​ទ្រព្យ​សកម្ម​ដែល​ត្រូវ​បាន​ផ្ដល់​ឱ្យ​អ្នក​ប្រើ​នា​ពេល​បច្ចុប្បន្ន​នេះ​។',
-    'user_password_required'    => 'ពាក្យសម្ងាត់គឺត្រូវបានទាមទារ។',
-    'insufficient_permissions'  => 'ការអនុញ្ញាតមិនគ្រប់គ្រាន់។',
-    'user_deleted_warning'      => 'អ្នក​ប្រើ​នេះ​ត្រូវ​បាន​លុប។ អ្នកនឹងត្រូវស្តារអ្នកប្រើប្រាស់នេះឡើងវិញ ដើម្បីកែសម្រួលពួកគេ ឬផ្តល់ទ្រព្យសម្បត្តិថ្មី។',
-    'ldap_not_configured'        => 'ការរួមបញ្ចូល LDAP មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធសម្រាប់ការដំឡើងនេះទេ។',
-    'password_resets_sent'      => 'អ្នកប្រើប្រាស់ដែលបានជ្រើសរើសដែលត្រូវបានធ្វើឱ្យសកម្ម និងមានអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវត្រូវបានផ្ញើតំណកំណត់ពាក្យសម្ងាត់ឡើងវិញ។',
-    'password_reset_sent'       => 'តំណ​កំណត់​ពាក្យ​សម្ងាត់​ឡើងវិញ​ត្រូវ​បាន​ផ្ញើ​ទៅ៖ អ៊ីមែល!',
-    'user_has_no_email'         => 'អ្នកប្រើប្រាស់នេះមិនមានអាសយដ្ឋានអ៊ីមែលនៅក្នុងកម្រងព័ត៌មានរបស់ពួកគេទេ។',
-    'log_record_not_found'        => 'រកមិនឃើញកំណត់ហេតុដែលត្រូវគ្នាសម្រាប់អ្នកប្រើប្រាស់នេះទេ។',
+    'nothing_currently_assigned' => 'Nothing currently assigned.',
+    'user_password_required' => 'ពាក្យសម្ងាត់គឺត្រូវបានទាមទារ។',
+    'insufficient_permissions' => 'ការអនុញ្ញាតមិនគ្រប់គ្រាន់។',
+    'auth_fields_denied' => 'You do not have permission to modify credential or activation fields on this user. Requested fields not updated: :fields',
+    'user_deleted_warning' => 'អ្នក​ប្រើ​នេះ​ត្រូវ​បាន​លុប។ អ្នកនឹងត្រូវស្តារអ្នកប្រើប្រាស់នេះឡើងវិញ ដើម្បីកែសម្រួលពួកគេ ឬផ្តល់ទ្រព្យសម្បត្តិថ្មី។',
+    'ldap_not_configured' => 'ការរួមបញ្ចូល LDAP មិនត្រូវបានកំណត់រចនាសម្ព័ន្ធសម្រាប់ការដំឡើងនេះទេ។',
+    'password_resets_sent' => 'អ្នកប្រើប្រាស់ដែលបានជ្រើសរើសដែលត្រូវបានធ្វើឱ្យសកម្ម និងមានអាសយដ្ឋានអ៊ីមែលត្រឹមត្រូវត្រូវបានផ្ញើតំណកំណត់ពាក្យសម្ងាត់ឡើងវិញ។',
+    'not_activated' => 'This user cannot login, so they cannot accept assets via email.',
+    'password_reset_sent' => 'តំណ​កំណត់​ពាក្យ​សម្ងាត់​ឡើងវិញ​ត្រូវ​បាន​ផ្ញើ​ទៅ៖ អ៊ីមែល!',
+    'user_has_no_email' => 'អ្នកប្រើប្រាស់នេះមិនមានអាសយដ្ឋានអ៊ីមែលនៅក្នុងកម្រងព័ត៌មានរបស់ពួកគេទេ។',
+    'log_record_not_found' => 'រកមិនឃើញកំណត់ហេតុដែលត្រូវគ្នាសម្រាប់អ្នកប្រើប្រាស់នេះទេ។',
 
+    'impersonate' => [
+        'started' => 'You are now logged in as :name.',
+        'stopped' => 'You are back to your own account.',
+        'cannot_impersonate_self' => 'You cannot log in as yourself.',
+        'cannot_impersonate_superuser' => 'You cannot log in as another superuser.',
+        'target_not_active' => 'That user is deactivated or deleted and cannot be logged in as.',
+        'impersonator_missing' => 'The original account for this impersonation session no longer exists. Please log in again.',
+    ],
 
-    'success' => array(
-        'create'    => 'អ្នកប្រើប្រាស់ត្រូវបានបង្កើតដោយជោគជ័យ។',
-        'update'    => 'អ្នកប្រើប្រាស់ត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។',
-        'update_bulk'    => 'អ្នកប្រើប្រាស់ត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ!',
-        'delete'    => 'អ្នកប្រើប្រាស់ត្រូវបានលុបដោយជោគជ័យ។',
-        'ban'       => 'អ្នកប្រើប្រាស់ត្រូវបានហាមឃាត់ដោយជោគជ័យ។',
-        'unban'     => 'អ្នកប្រើប្រាស់ត្រូវបានលុបចោលដោយជោគជ័យ។',
-        'suspend'   => 'អ្នកប្រើប្រាស់ត្រូវបានផ្អាកដោយជោគជ័យ។',
+    'success' => [
+        'create' => 'អ្នកប្រើប្រាស់ត្រូវបានបង្កើតដោយជោគជ័យ។',
+        'update' => 'អ្នកប្រើប្រាស់ត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។',
+        'update_bulk' => 'អ្នកប្រើប្រាស់ត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ!',
+        'delete' => 'អ្នកប្រើប្រាស់ត្រូវបានលុបដោយជោគជ័យ។',
+        'ban' => 'អ្នកប្រើប្រាស់ត្រូវបានហាមឃាត់ដោយជោគជ័យ។',
+        'unban' => 'អ្នកប្រើប្រាស់ត្រូវបានលុបចោលដោយជោគជ័យ។',
+        'suspend' => 'អ្នកប្រើប្រាស់ត្រូវបានផ្អាកដោយជោគជ័យ។',
         'unsuspend' => 'អ្នកប្រើប្រាស់ត្រូវបានបញ្ឈប់ដោយជោគជ័យ។',
-        'restored'  => 'អ្នកប្រើប្រាស់ត្រូវបានស្ដារឡើងវិញដោយជោគជ័យ។',
-        'import'    => 'អ្នកប្រើប្រាស់បាននាំចូលដោយជោគជ័យ។',
-    ),
+        'restored' => 'អ្នកប្រើប្រាស់ត្រូវបានស្ដារឡើងវិញដោយជោគជ័យ។',
+        'import' => 'អ្នកប្រើប្រាស់បាននាំចូលដោយជោគជ័យ។',
+        'acceptance_reminder_sent' => 'Acceptance reminder sent for :count pending item.|Acceptance reminder sent for :count pending items.',
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'មាន​បញ្ហា​ក្នុង​ការ​បង្កើត​អ្នក​ប្រើ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
         'update' => 'មានបញ្ហាក្នុងការអាប់ដេតអ្នកប្រើប្រាស់។ សូម​ព្យាយាម​ម្តង​ទៀត។',
         'delete' => 'មានបញ្ហាក្នុងការលុបអ្នកប្រើប្រាស់។ សូម​ព្យាយាម​ម្តង​ទៀត។',
@@ -43,8 +58,8 @@ return array(
         'delete_has_locations_var' => 'អ្នកប្រើប្រាស់នេះនៅតែគ្រប់គ្រងទីតាំង។ សូមជ្រើសរើសអ្នកគ្រប់គ្រងផ្សេងទៀតជាមុនសិន។|អ្នកប្រើប្រាស់នេះនៅតែគ្រប់គ្រង៖ រាប់ទីតាំង។ សូមជ្រើសរើសអ្នកគ្រប់គ្រងផ្សេងទៀតជាមុនសិន។',
         'delete_has_users_var' => 'អ្នកប្រើប្រាស់នេះនៅតែគ្រប់គ្រងអ្នកប្រើប្រាស់ផ្សេងទៀត។ សូមជ្រើសរើសអ្នកគ្រប់គ្រងផ្សេងទៀតសម្រាប់អ្នកប្រើប្រាស់នោះជាមុនសិន។|អ្នកប្រើប្រាស់នេះនៅតែគ្រប់គ្រង៖ រាប់អ្នកប្រើប្រាស់។ សូមជ្រើសរើសអ្នកគ្រប់គ្រងផ្សេងទៀតសម្រាប់ពួកគេជាមុនសិន។',
         'unsuspend' => 'មានបញ្ហាក្នុងការឈប់ផ្អាកអ្នកប្រើប្រាស់។ សូម​ព្យាយាម​ម្តង​ទៀត។',
-        'import'    => 'មានបញ្ហាក្នុងការនាំចូលអ្នកប្រើប្រាស់។ សូម​ព្យាយាម​ម្តង​ទៀត។',
-        'asset_already_accepted' => 'ទ្រព្យសកម្មនេះត្រូវបានទទួលរួចហើយ។',
+        'import' => 'មានបញ្ហាក្នុងការនាំចូលអ្នកប្រើប្រាស់។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+        'asset_already_accepted' => 'This item has already been accepted.',
         'accept_or_decline' => 'អ្នក​ត្រូវតែ​ទទួល​យក ឬ​បដិសេធ​ទ្រព្យសកម្ម​នេះ។',
         'cannot_delete_yourself' => 'យើងពិតជាមានអារម្មណ៍មិនល្អ ប្រសិនបើអ្នកលុបខ្លួនឯង សូមពិចារណាឡើងវិញ។',
         'incorrect_user_accepted' => 'ទ្រព្យសកម្មដែលអ្នកបានព្យាយាមទទួលយកមិនត្រូវបានពិនិត្យចេញសម្រាប់អ្នកទេ។',
@@ -53,23 +68,25 @@ return array(
         'ldap_could_not_search' => 'មិនអាចស្វែងរកម៉ាស៊ីនមេ LDAP បានទេ។ សូមពិនិត្យមើលការកំណត់រចនាសម្ព័ន្ធម៉ាស៊ីនមេ LDAP របស់អ្នកនៅក្នុងឯកសារកំណត់រចនាសម្ព័ន្ធ LDAP ។ <br>កំហុសពីម៉ាស៊ីនមេ LDAP៖',
         'ldap_could_not_get_entries' => 'មិនអាចទទួលបានធាតុពីម៉ាស៊ីនមេ LDAP ទេ។ សូមពិនិត្យមើលការកំណត់រចនាសម្ព័ន្ធម៉ាស៊ីនមេ LDAP របស់អ្នកនៅក្នុងឯកសារកំណត់រចនាសម្ព័ន្ធ LDAP ។ <br>កំហុសពីម៉ាស៊ីនមេ LDAP៖',
         'password_ldap' => 'ពាក្យសម្ងាត់សម្រាប់គណនីនេះត្រូវបានគ្រប់គ្រងដោយ LDAP/Active Directory។ សូមទាក់ទងផ្នែក IT របស់អ្នក ដើម្បីផ្លាស់ប្តូរពាក្យសម្ងាត់របស់អ្នក។ ',
-        'multi_company_items_assigned' => 'អ្នក​ប្រើ​នេះ​មាន​ធាតុ​ដែល​ត្រូវ​បាន​កំណត់​ជា​របស់​ក្រុមហ៊ុន​ផ្សេង។ សូមពិនិត្យមើលពួកគេនៅក្នុង ឬកែសម្រួលក្រុមហ៊ុនរបស់ពួកគេ។'
-    ),
+        'multi_company_items_assigned' => 'អ្នក​ប្រើ​នេះ​មាន​ធាតុ​ដែល​ត្រូវ​បាន​កំណត់​ជា​របស់​ក្រុមហ៊ុន​ផ្សេង។ សូមពិនិត្យមើលពួកគេនៅក្នុង ឬកែសម្រួលក្រុមហ៊ុនរបស់ពួកគេ។',
+        'no_pending_acceptances' => 'This user has no pending acceptances to remind them about.',
+        'company_not_permitted' => 'One or more requested company assignments are outside your permitted company scope.',
+    ],
 
-    'deletefile' => array(
-        'error'   => 'ឯកសារមិនត្រូវបានលុបទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+    'deletefile' => [
+        'error' => 'ឯកសារមិនត្រូវបានលុបទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
         'success' => 'ឯកសារត្រូវបានលុបដោយជោគជ័យ។',
-    ),
+    ],
 
-    'upload' => array(
-        'error'   => 'ឯកសារ (ច្រើន) មិនត្រូវបានផ្ទុកឡើងទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
+    'upload' => [
+        'error' => 'ឯកសារ (ច្រើន) មិនត្រូវបានផ្ទុកឡើងទេ។ សូម​ព្យាយាម​ម្តង​ទៀត។',
         'success' => 'ឯកសារ (ច្រើន) ដែលបានបង្ហោះដោយជោគជ័យ។',
         'nofiles' => 'អ្នកមិនបានជ្រើសរើសឯកសារណាមួយសម្រាប់ផ្ទុកឡើងទេ។',
         'invalidfiles' => 'ឯកសារមួយ ឬច្រើនរបស់អ្នកមានទំហំធំពេក ឬជាប្រភេទឯកសារដែលមិនត្រូវបានអនុញ្ញាត។ ប្រភេទឯកសារដែលបានអនុញ្ញាតគឺ png, gif, jpg, doc, docx, pdf, និង txt ។',
-    ),
+    ],
 
-    'inventorynotification' => array(
-        'error'   => 'អ្នក​ប្រើ​នេះ​មិន​បាន​កំណត់​អ៊ីមែល​ទេ។',
-        'success' => 'អ្នកប្រើប្រាស់ត្រូវបានជូនដំណឹងអំពីសារពើភ័ណ្ឌបច្ចុប្បន្នរបស់ពួកគេ។'
-    )
-);
+    'inventorynotification' => [
+        'error' => 'អ្នក​ប្រើ​នេះ​មិន​បាន​កំណត់​អ៊ីមែល​ទេ។',
+        'success' => 'អ្នកប្រើប្រាស់ត្រូវបានជូនដំណឹងអំពីសារពើភ័ណ្ឌបច្ចុប្បន្នរបស់ពួកគេ។',
+    ],
+];

@@ -1,21 +1,28 @@
 <?php
 
-    return [
-        'not_found'                    => '¡El mantenimiento del activo que estaba buscando no se encontró!',
-        'delete'                       => [
-            'confirm' => '¿Está seguro de que desea eliminar el mantenimiento de este activo?',
-            'error'   => 'Hubo un problema al eliminar el mantenimiento del activo. Por favor inténtelo nuevamente.',
-            'success' => 'El mantenimiento del activo fue eliminado de manera exitosa.',
-        ],
-        'create'                       => [
-            'error'   => 'El Mantenimiento de Equipo no fue creado, por favor intente nuevamente.',
-            'success' => 'El mantenimiento del activo fue creado de manera exitosa.',
-        ],
-        'edit'                       => [
-            'error'   => 'El mantenimiento del activo no fue editado. Por favor, inténtelo de nuevo.',
-            'success' => 'Mantenimiento del activo editado con éxito.',
-        ],
-        'asset_maintenance_incomplete' => 'Aún no se ha completado',
-        'warranty'                     => 'Garantía',
-        'not_warranty'                 => 'Sin garantía',
-    ];
+return [
+    'not_found' => '¡El mantenimiento del activo que estaba buscando no se encontró!',
+    'delete' => [
+        'confirm' => '¿Está seguro de que desea eliminar el mantenimiento de este activo?',
+        'error' => 'Hubo un problema al eliminar el mantenimiento del activo. Por favor inténtelo nuevamente.',
+        'success' => 'El mantenimiento del activo fue eliminado de manera exitosa.',
+    ],
+    'create' => [
+        'error' => 'El Mantenimiento de Equipo no fue creado, por favor intente nuevamente.',
+        'success' => 'El mantenimiento del activo fue creado de manera exitosa.',
+    ],
+    'edit' => [
+        'error' => 'El mantenimiento del activo no fue editado. Por favor, inténtelo de nuevo.',
+        'success' => 'Mantenimiento del activo editado con éxito.',
+    ],
+    'asset_maintenance_incomplete' => 'Aún no se ha completado',
+    'warranty' => 'Garantía',
+    'not_warranty' => 'Sin garantía',
+    'complete' => [
+        'confirm' => '¿Está seguro de que desea marcar este mantenimiento como completado? Esto no se puede deshacer.',
+        'success' => 'Mantenimiento marcado como completado.',
+        'error' => 'Hubo un problema al marcar este mantenimiento como completado. Por favor, inténtalo de nuevo.',
+    ],
+    'bulk_delete' => 'No maintenance records were deleted (:skipped skipped).|Deleted :count maintenance record. (:skipped skipped)|Deleted :count maintenance records. (:skipped skipped)',
+    'bulk_complete' => 'No maintenance records were marked complete (:skipped skipped or already complete).|Marked :count maintenance record complete. (:skipped skipped or already complete)|Marked :count maintenance records complete. (:skipped skipped or already complete)',
+];

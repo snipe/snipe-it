@@ -76,13 +76,13 @@
 
         <h2>
             @if ($snipeSettings->acceptance_pdf_logo!='')
-                <img class="print-logo" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->acceptance_pdf_logo }}">
+                <img class="print-logo" src="{{ Storage::disk('public')->url($snipeSettings->acceptance_pdf_logo) }}" alt="">
             @endif
             {{ $snipeSettings->site_name }}
         </h2>
     @elseif ($snipeSettings->brand == '2')
         @if ($snipeSettings->acceptance_pdf_logo!='')
-            <img class="print-logo" src="{{ config('app.url') }}/uploads/{{ $snipeSettings->acceptance_pdf_logo }}">
+            <img class="print-logo" src="{{ Storage::disk('public')->url($snipeSettings->acceptance_pdf_logo) }}" alt="">
         @endif
     @else
         <h2>{{ $snipeSettings->site_name }}</h2>
@@ -95,8 +95,8 @@
     @endphp
     <div id="start_of_user_section"> {{-- used for page breaks when printing --}}</div>
     <h3>
-        @if ($show_user->company)
-            <b>{{ trans('admin/companies/table.name') }}:</b> {{ $show_user->company->name }}
+        @if ($show_user->companies->isNotEmpty())
+            <b>{{ trans('admin/companies/table.name') }}:</b> {{ $show_user->companies->pluck('name')->join(', ') }}
         <br>
         @endif
         {{ trans('general.assigned_to', ['name' => $show_user->display_name]) }}
@@ -105,6 +105,7 @@
     </h3>
     <p></p>{{ trans('admin/users/general.all_assigned_list_generation')}} {{ Helper::getFormattedDateObject(now(), 'datetime', false) }}
 
+    @if ($canViewAssets)
     @if ($show_user->assets->count() > 0)
         @php
             $counter = 1;
@@ -129,17 +130,17 @@
             data-show-columns="true"
             data-cookie-id-table="AssetsAssigned">
             <thead>
-                <th data-field="asset_id" data-sortable="false" data-visible="true" data-switchable="false">#</th>
-                <th data-field="asset_image" data-sortable="true" data-visible="false" data-switchable="true">{{ trans('general.image') }}</th>
-                <th data-field="asset_tag" data-sortable="true" data-visible="true" data-switchable="false">{{ trans('admin/hardware/table.asset_tag') }}</th>
-                <th data-field="asset_name" data-sortable="true" data-visible="true">{{ trans('general.name') }}</th>
-                <th data-field="asset_category" data-sortable="true" data-visible="true">{{ trans('general.category') }}</th>
-                <th data-field="asset_model" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
-                <th data-field="rtd_location" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.default_location') }}</th>
-                <th data-field="asset_location" data-sortable="true" data-visible="false">{{ trans('general.location') }}</th>
-                <th data-field="asset_serial" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
-                <th data-field="asset_checkout_date" data-sortable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                <th data-field="signature" data-sortable="false" data-visible="true">{{ trans('general.signature') }}</th>
+                <th scope="col" data-field="asset_id" data-sortable="false" data-visible="true" data-switchable="false">#</th>
+                <th scope="col" data-field="asset_image" data-sortable="true" data-visible="false" data-switchable="true">{{ trans('general.image') }}</th>
+                <th scope="col" data-field="asset_tag" data-sortable="true" data-visible="true" data-switchable="false">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                <th scope="col" data-field="asset_name" data-sortable="true" data-visible="true">{{ trans('general.name') }}</th>
+                <th scope="col" data-field="asset_category" data-sortable="true" data-visible="true">{{ trans('general.category') }}</th>
+                <th scope="col" data-field="asset_model" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.model') }}</th>
+                <th scope="col" data-field="rtd_location" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.default_location') }}</th>
+                <th scope="col" data-field="asset_location" data-sortable="true" data-visible="false">{{ trans('general.location') }}</th>
+                <th scope="col" data-field="asset_serial" data-sortable="true" data-visible="true">{{ trans('admin/hardware/form.serial') }}</th>
+                <th scope="col" data-field="asset_checkout_date" data-sortable="true" data-visible="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th scope="col" data-field="signature" data-sortable="false" data-visible="true">{{ trans('general.signature') }}</th>
             </thead>
             <tbody>
             @foreach ($show_user->assets as $asset)
@@ -150,7 +151,7 @@
                     <td>{{ $counter }}</td>
                     <td>
                         @if ($asset->getImageUrl())
-                            <img src="{{ $asset->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
+                            <img src="{{ $asset->getImageUrl() }}" class="thumbnail" style="max-height: 50px;" alt="">
                         @endif
                     </td>
                     <td>{{ $asset->asset_tag }}</td>
@@ -164,43 +165,10 @@
                         {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}</td>
                     <td>
                         @if ($asset->getLatestSignedAcceptance($show_user))
-                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->getLatestSignedAcceptance($show_user)->accept_signature }}">
+                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->getLatestSignedAcceptance($show_user)->accept_signature }}" alt="{{ trans('general.signature') }}">
                         @endif
                     </td>
                 </tr>
-                @if ($settings->show_assigned_assets)
-                    @php
-                        $assignedCounter = 1;
-                    @endphp
-                    @foreach ($asset->assignedAssets as $asset)
-                        <tr>
-                            <td>{{ $counter }}.{{ $assignedCounter }}</td>
-                            <td>
-                                @if ($asset->getImageUrl())
-                                    <img src="{{ $asset->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
-                                @endif
-                            </td>
-                            <td>{{ $asset->asset_tag }}</td>
-                            <td>{{ $asset->name }}</td>
-                            <td>{{ (($asset->model) && ($asset->model->category)) ? $asset->model->category->name : trans('general.invalid_category') }}</td>
-                            <td>{{ ($asset->model) ? $asset->model->name : trans('general.invalid_model') }}</td>
-                            <td>{{ ($asset->defaultLoc) ? $asset->defaultLoc->name : '' }}</td>
-                            <td>{{ ($asset->location) ? $asset->location->name : '' }}</td>
-                            <td>{{ $asset->serial }}</td>
-                            <td>
-                                {{ Helper::getFormattedDateObject($asset->last_checkout, 'datetime', false) }}
-                            </td>
-                            <td>
-                                @if ($asset->getLatestSignedAcceptance($show_user))
-                                    <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->getLatestSignedAcceptance($show_user)->accept_signature }}">
-                                @endif
-                            </td>
-                        </tr>
-                        @php
-                            $assignedCounter++
-                        @endphp
-                    @endforeach
-                @endif
                 @php
                     $counter++
                 @endphp
@@ -208,10 +176,12 @@
             </tbody>
         </table>
     @endif
+    @endif
 
-    @if ($show_user->licenses->count() > 0)
+    @if ($canViewLicenses)
+        @if ($show_user->directlicenses->count() > 0)
         <div id="licenses-toolbar">
-            <h4>{{ trans_choice('general.countable.licenses', $show_user->licenses->count(), ['count' => $show_user->licenses->count()]) }}</h4>
+            <h4>{{ trans_choice('general.countable.licenses', $show_user->directlicenses->count(), ['count' => $show_user->directlicenses->count()]) }}</h4>
         </div>
 
         <table
@@ -229,18 +199,18 @@
             data-cookie-id-table="licensessAssigned">
             <thead>
             <tr>
-                <th data-sortable="false" data-switchable="false">#</th>
-                <th data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
-                <th data-sortable="true">{{ trans('admin/licenses/form.license_key') }}</th>
-                <th data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                <th data-field="signature" data-sortable="false" data-visible="true">{{ trans('general.signature') }}</th>
+                <th scope="col" data-sortable="false" data-switchable="false">#</th>
+                <th scope="col" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
+                <th scope="col" data-sortable="true">{{ trans('admin/licenses/form.license_key') }}</th>
+                <th scope="col" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th scope="col" data-field="signature" data-sortable="false" data-visible="true">{{ trans('general.signature') }}</th>
             </tr>
             </thead>
             @php
                 $lcounter = 1;
             @endphp
 
-            @foreach ($show_user->licenses as $license)
+            @foreach ($show_user->directLicenses as $license)
                 @php
                     if (($license->category) && ($license->category->getEula())) $eulas[] = $license->category->getEula()
                 @endphp
@@ -259,7 +229,7 @@
                     </td>
                     <td>
                         @if ($license->getLatestSignedAcceptance($show_user))
-                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $license->getLatestSignedAcceptance($show_user)->accept_signature }}">
+                            <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $license->getLatestSignedAcceptance($show_user)->accept_signature }}" alt="{{ trans('general.signature') }}">
                         @endif
                     </td>
                 </tr>
@@ -269,8 +239,10 @@
             @endforeach
         </table>
     @endif
+    @endif
 
 
+    @if ($canViewAccessories)
     @if ($show_user->accessories->count() > 0)
         <div id="accessories-toolbar">
             <h4>{{ trans_choice('general.countable.accessories', $show_user->accessories->count(), ['count' => $show_user->accessories->count()]) }}</h4>
@@ -291,12 +263,12 @@
             data-cookie-id-table="accessoriesAssigned">
             <thead>
             <tr>
-                <th style="width: 20px;" data-sortable="false" data-switchable="false">#</th>
-                <th data-field="accessory_image" data-sortable="true"  data-visible="true">{{ trans('general.image') }}</th>
-                <th style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
-                <th style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
-                <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                <th style="width: 10%;" data-sortable="true">{{ trans('general.signature') }}</th>
+                <th scope="col" style="width: 20px;" data-sortable="false" data-switchable="false">#</th>
+                <th scope="col" data-field="accessory_image" data-sortable="true"  data-visible="true">{{ trans('general.image') }}</th>
+                <th scope="col" style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
+                <th scope="col" style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
+                <th scope="col" style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th scope="col" style="width: 10%;" data-sortable="true">{{ trans('general.signature') }}</th>
             </tr>
             </thead>
             @php
@@ -312,7 +284,7 @@
                         <td>{{ $acounter }}</td>
                         <td>
                             @if ($accessory->getImageUrl())
-                                <img src="{{ $accessory->getImageUrl() }}" class="thumbnail" style="max-height: 50px;">
+                                <img src="{{ $accessory->getImageUrl() }}" class="thumbnail" style="max-height: 50px;" alt="">
                             @endif
                         </td>
                         <td>{{ ($accessory->manufacturer) ? $accessory->manufacturer->name : '' }} {{ $accessory->name }} {{ $accessory->model_number }}</td>
@@ -323,7 +295,7 @@
 
                         <td>
                             @if ($accessory->getLatestSignedAcceptance($show_user))
-                                <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $accessory->getLatestSignedAcceptance($show_user)->accept_signature }}">
+                                <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $accessory->getLatestSignedAcceptance($show_user)->accept_signature }}" alt="{{ trans('general.signature') }}">
                             @endif
                         </td>
                     </tr>
@@ -334,7 +306,9 @@
             @endforeach
         </table>
     @endif
+    @endif
 
+    @if ($canViewConsumables)
     @if ($show_user->consumables->count() > 0)
         <div id="consumables-toolbar">
             <h4>{{ trans_choice('general.countable.consumables', $show_user->consumables->count(), ['count' => $show_user->consumables->count()]) }}</h4>
@@ -355,11 +329,11 @@
             data-cookie-id-table="consumablesAssigned">
             <thead>
             <tr>
-                <th style="width: 20px;" data-sortable="false" data-switchable="false"></th>
-                <th style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
-                <th style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
-                <th style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
-                <th style="width: 10%;" data-sortable="true">{{ trans('general.signature') }}</th>
+                <th scope="col" style="width: 20px;" data-sortable="false" data-switchable="false"></th>
+                <th scope="col" style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('general.name') }}</th>
+                <th scope="col" style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
+                <th scope="col" style="width: 10%;" data-sortable="true">{{ trans('admin/hardware/table.checkout_date') }}</th>
+                <th scope="col" style="width: 10%;" data-sortable="true">{{ trans('general.signature') }}</th>
 
             </tr>
             </thead>
@@ -387,7 +361,7 @@
                         </td>
                         <td>
                             @if ($consumable->getLatestSignedAcceptance($show_user))
-                                <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $consumable->getLatestSignedAcceptance($show_user)->accept_signature }}">
+                                <img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $consumable->getLatestSignedAcceptance($show_user)->accept_signature }}" alt="{{ trans('general.signature') }}">
                             @endif
                         </td>
                     </tr>
@@ -398,7 +372,103 @@
             @endforeach
         </table>
     @endif
+    @endif
+    @if(($indirectItemsCount ?? 0) > 0 && $settings->show_assigned_assets)
 
+        <div id="indirect-assignments-toolbar">
+            <h4>{{ $indirectItemsCount.' '.trans('mail.assigned_to_assets') }}</h4>
+        </div>
+        <table
+                class="snipe-table table table-striped inventory"
+                id="indirect-assignments"
+                data-pagination="false"
+                data-toolbar="#indirect-assignments-toolbar"
+                data-id-table="indirect-assignments"
+                data-search="false"
+                data-side-pagination="client"
+                data-sortable="true"
+                data-sort-order="desc"
+                data-sort-name="name"
+                data-show-columns="true"
+                data-cookie-id-table="indirect-assignments">
+            <thead>
+            @php
+                $indirectAssignmentsCounter = 1;
+            @endphp
+                <tr>
+                    <th scope="col" style="width: 20px;" data-sortable="false" data-switchable="false">#</th>
+                    <th scope="col" style="width: 40%;" data-sortable="true" data-switchable="false">{{ trans('mail.assigned_to') }}</th>
+                    <th scope="col" style="width: 50%;" data-sortable="true">{{ trans('general.category') }}</th>
+                    <th scope="col" style="width: 10%;" data-sortable="true">{{ trans('mail.item') }}</th>
+                    <th scope="col" style="width: 10%;" data-sortable="true">{{ trans('general.quantity') }}</th>
+                </tr>
+            </thead>
+
+            @foreach ($show_user->assets as $asset)
+                @foreach ($asset->assignedAssets as $indirectAsset)
+                    <tr>
+                        <td>{{ $indirectAssignmentsCounter }}</td>
+                        <td>{{ $asset->display_name ?? ''}}</td>
+                        <td>{{ (($indirectAsset->model) && ($indirectAsset->model->category)) ? $indirectAsset->model->category->name : trans('general.invalid_category') }}</td>
+                        <td>{{ $indirectAsset->display_name ?? '' }}</td>
+                        <td>1</td>
+
+                    </tr>
+                    @php
+                        $indirectAssignmentsCounter++
+                    @endphp
+                @endforeach
+                    @if ($canViewLicenses)
+                @foreach ($asset->licenses as $indirectLicense)
+                    @if($indirectLicense)
+                        <tr>
+                            <td>{{$indirectAssignmentsCounter}}</td>
+                            <td>{{ $asset->display_name ?? ''}}</td>
+                            <td>{{ $indirectLicense->category?->name ?? '' }}</td>
+                            <td>{{ $indirectLicense->name ?? '' }}</td>
+                            <td>1</td>
+                        </tr>
+                    @endif
+                    @php
+                    $indirectAssignmentsCounter ++
+                    @endphp
+                @endforeach
+                @endif
+                @if ($canViewComponents)
+                @foreach ($asset->components as $component)
+                    @if($component)
+                        <tr>
+                            <td>{{$indirectAssignmentsCounter}}</td>
+                            <td>{{ $asset->display_name ?? ''}}</td>
+                            <td>{{ $component->category?->name ?? '' }}</td>
+                            <td>{{ $component->name ?? '' }}</td>
+                            <td>{{ $component->pivot->assigned_qty }}</td>
+                        </tr>
+                    @endif
+                    @php
+                        $indirectAssignmentsCounter ++
+                    @endphp
+                @endforeach
+                @endif
+                @if ($canViewAccessories)
+                @foreach ($asset->assignedAccessories as $indirectAccessory)
+                    @if($indirectAccessory)
+                        <tr>
+                            <td>{{$indirectAssignmentsCounter}}</td>
+                            <td>{{ $asset->display_name ?? '' }}</td>
+                            <td>{{ $indirectAccessory->accessory->category?->name ?? '' }}</td>
+                            <td>{{ $indirectAccessory->accessory->name ?? '' }}</td>
+                            <td>1</td>
+                        </tr>
+                    @endif
+                    @php
+                        $indirectAssignmentsCounter ++
+                    @endphp
+                @endforeach
+                @endif
+            @endforeach
+        </table>
+    @endif
     @php
         if (!empty($eulas)) $eulas = array_unique($eulas);
     @endphp
@@ -528,7 +598,7 @@
             },
             exportOptions: export_options,
 
-            exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
+            exportTypes: ['xlsx', 'csv', 'pdf', 'json', 'xml', 'txt', 'sql', 'doc'],
             onLoadSuccess: function () {
                 $('[data-tooltip="true"]').tooltip(); // Needed to attach tooltips after ajax call
             }

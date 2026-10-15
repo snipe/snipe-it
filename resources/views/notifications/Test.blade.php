@@ -4,8 +4,8 @@
 
 {{ trans('mail.test_mail_text') }}
 
-Thanks,
-Snipe-IT
+{{ trans('mail.best_regards') }}
+{{ $snipeSettings->site_name }}
 @if ($setupCompleted)
 @endcomponent
 @endif

@@ -18,10 +18,9 @@
                 <div class="box box-default">
                     <div class="box-body">
 
-                        <div class="callout callout-warning">
-                            <i class="fas fa-exclamation-triangle"></i>
+                        <x-callout type="warning" icon="warning" live="assertive">
                             {{ trans_choice('admin/models/message.bulkedit.warn', count($models), ['model_count' => count($models)]) }}
-                        </div>
+                        </x-callout>
 
 
                         <table class="table table-striped">
@@ -63,7 +62,7 @@
                                         class="js-fieldset-field"
                                         style="width:350px"
                                     />
-                                    {!! $errors->first('fieldset_id', '<span class="alert-msg" aria-hidden="true"><br><i class="fas fa-times"></i> :message</span>') !!}
+                                    <x-form.error name="fieldset_id" />
                                 </div>
                             </div>
 
@@ -80,7 +79,7 @@
                                         :selected="old('depreciation_id', 'NC')"
                                         style="width:350px"
                                     />
-                                    {!! $errors->first('depreciation_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+                                    <x-form.error name="depreciation_id" />
                                 </div>
                             </div>
 
@@ -94,33 +93,23 @@
                                 <div class="col-md-9">
                                     <div class="form-inline" style="display: flex; align-items: center; gap: 8px;">
                                         <input type="checkbox" name="require_serial" value="1" id="require_serial" aria-label="require_serial" />
-                                        <x-form-tooltip>
+                                        <x-form.tooltip>
                                             {{ trans('admin/hardware/general.require_serial_help') }}
-                                        </x-form-tooltip>
+                                        </x-form.tooltip>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- requestable -->
-                                <div class="form-group{{ $errors->has('requestable') ? ' has-error' : '' }}">
-                                    <div class="col-md-7 col-md-offset-3">
-
-                                        <label for="requestable_nochange" class="form-control">
-                                            <input type="radio" name="requestable" id="requestable_nochange" value="" aria-label="requestable_nochange" checked>
-                                            {{  trans('admin/hardware/general.requestable_status_warning')}}
-                                        </label>
-                                        <label for="requestable" class="form-control">
-                                            <input type="radio" name="requestable" id="requestable" value="1" aria-label="requestable">
-                                            {{  trans('admin/hardware/general.requestable')}}
-                                        </label>
-                                        <label for="not_requestable" class="form-control">
-                                            <input type="radio" name="requestable" id="not_requestable" value="0" aria-label="not_requestable">
-                                            {{  trans('admin/hardware/general.not_requestable')}}
-                                        </label>
-
-
-                                    </div>
-                                </div>
+                            <x-form.radio-row
+                                name="requestable"
+                                selected=""
+                                :options="[
+                                    '' => trans('admin/hardware/general.requestable_status_warning'),
+                                    '1' => trans('admin/hardware/general.requestable'),
+                                    '0' => trans('admin/hardware/general.not_requestable'),
+                                ]"
+                            />
 
                             @foreach ($models as $model)
                                 <input type="hidden" name="ids[{{ $model->id }}]" value="{{ $model->id }}">

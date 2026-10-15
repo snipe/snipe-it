@@ -1,0 +1,727 @@
+@extends('layouts/default')
+
+{{-- Page Title --}}
+@section('title')
+    @if ($template->exists)
+        {{ trans('general.custom_report') }}: {{ $template->name }}
+    @else
+        {{ trans('general.custom_report') }}
+    @endif
+@parent
+@stop
+
+@section('header_right')
+    @if ($template->exists)
+        <a href="{{ route('reports/custom') }}" class="btn btn-primary pull-right">
+            {{ trans('general.back') }}
+        </a>
+    @else
+        <a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
+            {{ trans('general.back') }}
+        </a>
+    @endif
+@stop
+
+
+{{-- Page content --}}
+@section('content')
+
+<div class="row">
+    <div class="col-md-9">
+
+        {{-- Form action is always post-custom (download the report). The
+             sidebar Save button overrides this via formaction so it POSTs
+             to report-templates.update instead, letting the user save
+             config changes without downloading. --}}
+        <form
+            method="POST"
+            action="{{ route('reports.post-custom') }}"
+            accept-charset="UTF-8"
+            class="form-horizontal"
+            id="custom-report-form"
+        >
+        {{csrf_field()}}
+
+    <!-- Horizontal Form -->
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h2 class="box-title" style="padding-top: 7px;">
+                    @if ($template->exists)
+                        {{ trans('general.customize_report') }}: {{ $template->name }}
+                    @else
+                        {{ trans('general.customize_report') }}
+                    @endif
+                </h2>
+
+        </div><!-- /.box-header -->
+
+        <div class="box-body">
+
+            <div class="col-md-3" id="included_fields_wrapper">
+
+                <label class="form-control">
+                    <input type="checkbox" data-toggle="check-all" data-check-scope="#included_fields_wrapper" checked="checked">
+                    {{ trans('general.select_all') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="id" value="1" @checked($template->checkmarkValue('id')) />
+                    {{ trans('general.id') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="company" value="1" @checked($template->checkmarkValue('company')) />
+                    {{ trans('general.company') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="asset_tag" value="1" @checked($template->checkmarkValue('asset_tag')) />
+                    {{ trans('general.asset_tag') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="asset_name" value="1" @checked($template->checkmarkValue('asset_name')) />
+                    {{ trans('admin/hardware/form.name') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="manufacturer" value="1" @checked($template->checkmarkValue('manufacturer')) />
+                    {{ trans('general.manufacturer') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="model" value="1" @checked($template->checkmarkValue('model')) />
+                    {{ trans('general.asset_model') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="category" value="1" @checked($template->checkmarkValue('category')) />
+                    {{ trans('general.category') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="serial" value="1" @checked($template->checkmarkValue('serial')) />
+                    {{ trans('admin/hardware/table.serial') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="purchase_date" value="1" @checked($template->checkmarkValue('purchase_date')) />
+                    {{ trans('admin/licenses/table.purchase_date') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="purchase_cost" value="1" @checked($template->checkmarkValue('purchase_cost')) />
+                    {{ trans('admin/hardware/form.cost') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="eol" value="1" @checked($template->checkmarkValue('eol')) />
+                    {{ trans('admin/hardware/form.eol_date') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="warranty" value="1" @checked($template->checkmarkValue('warranty')) />
+                    {{ trans('admin/hardware/form.warranty') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="depreciation" value="1" @checked($template->checkmarkValue('depreciation')) />
+                    {{ trans('general.depreciation') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="order" value="1" @checked($template->checkmarkValue('order')) />
+                    {{ trans('admin/hardware/form.order') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="supplier" value="1" @checked($template->checkmarkValue('supplier')) />
+                    {{ trans('general.suppliers') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="location" value="1" @checked($template->checkmarkValue('location')) />
+                    {{ trans('general.location') }}
+                </label>
+
+              <label class="form-control" style="margin-left: 25px;">
+                  <input type="checkbox" name="location_address" value="1" @checked($template->checkmarkValue('location_address')) />
+                  {{ trans('general.address') }}
+              </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="rtd_location" value="1" @checked($template->checkmarkValue('rtd_location')) />
+                    {{ trans('admin/hardware/form.default_location') }}
+                </label>
+
+              <label class="form-control" style="margin-left: 25px;">
+                  <input type="checkbox" name="rtd_location_address" value="1" @checked($template->checkmarkValue('rtd_location_address')) />
+                {{ trans('general.address') }}
+              </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="status" value="1" @checked($template->checkmarkValue('status')) />
+                    {{ trans('general.status') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="checkout_date" value="1" @checked($template->checkmarkValue('checkout_date')) />
+                    {{ trans('admin/hardware/table.checkout_date') }}
+                </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="checkin_date" value="1" @checked($template->checkmarkValue('checkin_date')) />
+                {{ trans('admin/hardware/table.last_checkin_date') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="expected_checkin" value="1" @checked($template->checkmarkValue('expected_checkin')) />
+                {{ trans('admin/hardware/form.expected_checkin') }}
+              </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="created_at" value="1" @checked($template->checkmarkValue('created_at')) />
+                    {{ trans('general.created_at') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="updated_at" value="1" @checked($template->checkmarkValue('updated_at')) />
+                    {{ trans('general.updated_at') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="deleted_at" value="1" @checked($template->checkmarkValue('deleted_at')) />
+                    {{ trans('general.deleted') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="last_audit_date" value="1" @checked($template->checkmarkValue('last_audit_date')) />
+                    {{ trans('general.last_audit') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="next_audit_date" value="1" @checked($template->checkmarkValue('next_audit_date')) />
+                    {{ trans('general.next_audit_date') }}
+                </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="notes" value="1" @checked($template->checkmarkValue('notes')) />
+                    {{ trans('general.notes') }}
+                </label>
+
+              <label class="form-control" style="margin-left: 25px;">
+                  <input type="checkbox" name="url" value="1" @checked($template->checkmarkValue('url')) />
+                {{ trans('general.url') }}
+              </label>
+
+
+            <!-- User fields -->
+
+              <h2>{{ trans('general.checked_out_to_fields') }}: </h2>
+
+              <label class="form-control">
+                  <input type="checkbox" name="assigned_to" value="1" @checked($template->checkmarkValue('assigned_to')) />
+                {{ trans('admin/licenses/table.assigned_to') }}
+              </label>
+
+                <label class="form-control">
+                    <input type="checkbox" name="assigned_asset_tag" value="1" @checked($template->checkmarkValue('assigned_asset_tag', '0')) />
+                    {{ trans('admin/reports/general.custom_export.assigned_asset_tag') }}
+                </label>
+
+
+              <label class="form-control">
+                  <input type="checkbox" name="username" value="1" @checked($template->checkmarkValue('username')) />
+                {{ trans('admin/users/table.username') }}
+              </label>
+
+            <label class="form-control">
+                <input type="checkbox" name="user_company" value="1" @checked($template->checkmarkValue('user_company')) />
+                {{ trans('admin/reports/general.custom_export.user_company') }}
+            </label>
+
+            <label class="form-control">
+                <input type="checkbox" name="email" value="1" @checked($template->checkmarkValue('email')) />
+                {{ trans('admin/users/table.email') }}
+            </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="employee_num" value="1" @checked($template->checkmarkValue('employee_num')) />
+                {{ trans('general.employee_number') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="manager" value="1" @checked($template->checkmarkValue('manager')) />
+                {{ trans('admin/users/table.manager') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="department" value="1" @checked($template->checkmarkValue('department')) />
+                {{ trans('general.department') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="title" value="1" @checked($template->checkmarkValue('title')) />
+                {{ trans('admin/users/table.title') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="phone" value="1" @checked($template->checkmarkValue('phone')) />
+                  {{ trans('admin/users/table.phone') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="user_address" value="1" @checked($template->checkmarkValue('user_address')) />
+                  {{ trans('general.address') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="user_city" value="1" @checked($template->checkmarkValue('user_city')) />
+                  {{ trans('general.city') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="user_state" value="1" @checked($template->checkmarkValue('user_state')) />
+                  {{ trans('general.state') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="user_country" value="1" @checked($template->checkmarkValue('user_country')) />
+                  {{ trans('general.country') }}
+              </label>
+
+              <label class="form-control">
+                  <input type="checkbox" name="user_zip" value="1" @checked($template->checkmarkValue('user_zip')) />
+                  {{ trans('general.zip') }}
+              </label>
+
+            <label class="form-control">
+                <input type="checkbox" name="target_notes" value="1" @checked($template->checkmarkValue('target_notes')) />
+                {{ trans('admin/reports/general.custom_export.target_notes') }}
+            </label>
+
+
+
+            @if ($customfields->count() > 0)
+
+                <h2>{{ trans('admin/custom_fields/general.custom_fields') }}</h2>
+
+              @foreach ($customfields as $customfield)
+
+                  <label class="form-control">
+                      <input type="checkbox" name="{{ $customfield->db_column_name() }}" value="1" @checked($template->checkmarkValue($customfield->db_column_name())) />
+                    {{ $customfield->name }}
+                  </label>
+
+              @endforeach
+            @endif
+          </div> <!-- /.col-md-4-->
+
+            <div class="col-md-9">
+
+            <p>
+                {!! trans('general.report_fields_info') !!}
+            </p>
+
+              <br>
+
+                <x-input.select2-checkboxes
+                    name="by_company_id"
+                    :label="trans('general.company')"
+                    endpoint="companies"
+                    :selected="$template->selectValues('by_company_id', \App\Models\Company::class)"
+                    :modelClass="\App\Models\Company::class"
+                />
+                <x-input.select2-checkboxes
+                    name="by_location_id"
+                    :label="trans('general.location')"
+                    endpoint="locations"
+                    :selected="$template->selectValues('by_location_id', \App\Models\Location::class)"
+                    :modelClass="\App\Models\Location::class"
+                />
+                <x-input.select2-checkboxes
+                    name="by_rtd_location_id"
+                    :label="trans('admin/hardware/form.default_location')"
+                    endpoint="locations"
+                    :selected="$template->selectValues('by_rtd_location_id', \App\Models\Location::class)"
+                    :modelClass="\App\Models\Location::class"
+                />
+                <x-input.select2-checkboxes
+                    name="by_dept_id"
+                    :label="trans('general.department')"
+                    endpoint="departments"
+                    :selected="$template->selectValues('by_dept_id', \App\Models\Department::class)"
+                    :modelClass="\App\Models\Department::class"
+                />
+                <x-input.select2-checkboxes
+                    name="by_supplier_id"
+                    :label="trans('general.supplier')"
+                    endpoint="suppliers"
+                    :selected="$template->selectValues('by_supplier_id', \App\Models\Supplier::class)"
+                    :modelClass="\App\Models\Supplier::class"
+                />
+                <x-input.select2-checkboxes
+                    name="by_model_id"
+                    :label="trans('general.asset_model')"
+                    endpoint="models"
+                    :selected="$template->selectValues('by_model_id', \App\Models\AssetModel::class)"
+                    :modelClass="\App\Models\AssetModel::class"
+                />
+                <x-input.select2-checkboxes
+                    name="by_manufacturer_id"
+                    :label="trans('general.manufacturer')"
+                    endpoint="manufacturers"
+                    :selected="$template->selectValues('by_manufacturer_id', \App\Models\Manufacturer::class)"
+                    :modelClass="\App\Models\Manufacturer::class"
+                />
+                <x-input.select2-checkboxes
+                    name="by_category_id"
+                    :label="trans('general.category')"
+                    endpoint="categories/asset"
+                    :selected="$template->selectValues('by_category_id', \App\Models\Category::class)"
+                    :modelClass="\App\Models\Category::class"
+                />
+                <x-input.select2-checkboxes
+                    name="by_status_id"
+                    :label="trans('admin/hardware/form.status')"
+                    endpoint="statuslabels"
+                    :selected="$template->selectValues('by_status_id', \App\Models\Statuslabel::class)"
+                    :modelClass="\App\Models\Statuslabel::class"
+                />
+
+            <!-- Order Number -->
+            <div class="form-group">
+              <label for="by_order_number" class="col-md-3 control-label">{{ trans('general.order_number') }}</label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" name="by_order_number" value="{{ $template->textValue('by_order_number', old('by_order_number')) }}" aria-label="by_order_number">
+              </div>
+            </div>
+
+
+          <!-- Purchase Cost -->
+            <div class="form-group purchase-range{{ ($errors->has('purchase_cost_start') || $errors->has('purchase_cost_end')) ? ' has-error' : '' }}">
+              <label for="purchase_cost_start" class="col-md-3 control-label">{{ trans('admin/hardware/form.cost') }}</label>
+              <div class="input-group col-md-7">
+                  <input type="number" min="0" step="0.01" class="form-control" name="purchase_cost_start" aria-label="purchase_cost_start" value="{{ $template->textValue('purchase_cost_start', old('purchase_cost_start')) }}">
+                  <span class="input-group-addon"> - </span>
+                  <input type="number" min="0" step="0.01" class="form-control" name="purchase_cost_end" aria-label="purchase_cost_end" value="{{ $template->textValue('purchase_cost_end', old('purchase_cost_end')) }}">
+              </div>
+
+              @if ($errors->has('purchase_cost_start') || $errors->has('purchase_cost_end'))
+                  <div class="col-md-9 col-lg-offset-3">
+                      <x-form.error name="purchase_cost_start" />
+                      <x-form.error name="purchase_cost_end" />
+                  </div>
+              @endif
+
+            </div>
+
+                <!-- Purchase Date -->
+                <div class="form-group purchase-range{{ ($errors->has('purchase_start') || $errors->has('purchase_end')) ? ' has-error' : '' }}">
+                    <label for="purchase_start" class="col-md-3 control-label">{{ trans('general.purchase_date') }}</label>
+                    <x-input.date-range
+                        class="col-md-8"
+                        id="purchase-range-datepicker"
+                        name_start="purchase_start"
+                        name_end="purchase_end"
+                        :value_start="$template->textValue('purchase_start', old('purchase_start'))"
+                        :value_end="$template->textValue('purchase_end', old('purchase_end'))"
+                        max_date="today"
+                    />
+
+                    @if ($errors->has('purchase_start') || $errors->has('purchase_end'))
+                        <div class="col-md-9 col-lg-offset-3">
+                            <x-form.error name="purchase_start"/>
+                            <x-form.error name="purchase_end"/>
+                        </div>
+                    @endif
+
+                </div>
+
+
+                <!-- Created Date -->
+            <div class="form-group created-range{{ ($errors->has('created_start') || $errors->has('created_end')) ? ' has-error' : '' }}">
+              <label for="created_start" class="col-md-3 control-label">{{ trans('general.created_at') }} </label>
+              <x-input.date-range
+                  class="col-md-8"
+                  id="created-range-datepicker"
+                  name_start="created_start"
+                  name_end="created_end"
+                  :value_start="$template->textValue('created_start', old('created_start'))"
+                  :value_end="$template->textValue('created_end', old('created_end'))"
+                  max_date="today"
+              />
+
+                @if ($errors->has('created_start') || $errors->has('created_end'))
+                    <div class="col-md-9 col-lg-offset-3">
+                        <x-form.error name="created_start" />
+                        <x-form.error name="created_end" />
+                    </div>
+                @endif
+            </div>
+
+          <!-- Checkout Date -->
+          <div class="form-group checkout-range{{ ($errors->has('checkout_date_start') || $errors->has('checkout_date_end')) ? ' has-error' : '' }}">
+              <label for="checkout_date" class="col-md-3 control-label">{{ trans('general.checkout') }} </label>
+              <x-input.date-range
+                  class="col-md-8"
+                  id="checkout-range-datepicker"
+                  name_start="checkout_date_start"
+                  name_end="checkout_date_end"
+                  :value_start="$template->textValue('checkout_date_start', old('checkout_date_start'))"
+                  :value_end="$template->textValue('checkout_date_end', old('checkout_date_end'))"
+                  max_date="today"
+              />
+
+              @if ($errors->has('checkout_date_start') || $errors->has('checkout_date_end'))
+                  <div class="col-md-9 col-lg-offset-3">
+                      <x-form.error name="checkout_date_start" />
+                      <x-form.error name="checkout_date_end" />
+                  </div>
+              @endif
+
+          </div>
+
+          <!-- Last Checkin Date -->
+          <div class="form-group checkin-range{{ ($errors->has('checkin_date_start') || $errors->has('checkin_date_end')) ? ' has-error' : '' }}">
+              <label for="checkin_date" class="col-md-3 control-label">{{ trans('admin/hardware/table.last_checkin_date') }}</label>
+              <x-input.date-range
+                  class="col-md-8"
+                  id="checkin-range-datepicker"
+                  name_start="checkin_date_start"
+                  name_end="checkin_date_end"
+                  :value_start="$template->textValue('checkin_date_start', old('checkin_date_start'))"
+                  :value_end="$template->textValue('checkin_date_end', old('checkin_date_end'))"
+                  max_date="today"
+              />
+
+              @if ($errors->has('checkin_date_start') || $errors->has('checkin_date_end'))
+                  <div class="col-md-9 col-lg-offset-3">
+                      <x-form.error name="checkin_date_start" />
+                      <x-form.error name="checkin_date_end" />
+                  </div>
+              @endif
+          </div>
+
+            <!-- Expected Checkin Date -->
+            <div class="form-group expected_checkin-range{{ ($errors->has('expected_checkin_start') || $errors->has('expected_checkin_end')) ? ' has-error' : '' }}">
+              <label for="expected_checkin_start" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
+              <x-input.date-range
+                  class="col-md-8"
+                  id="expected_checkin-range-datepicker"
+                  name_start="expected_checkin_start"
+                  name_end="expected_checkin_end"
+                  :value_start="$template->textValue('expected_checkin_start', old('expected_checkin_start'))"
+                  :value_end="$template->textValue('expected_checkin_end', old('expected_checkin_end'))"
+              />
+
+                @if ($errors->has('expected_checkin_start') || $errors->has('expected_checkin_end'))
+                    <div class="col-md-9 col-lg-offset-3">
+                        <x-form.error name="expected_checkin_start" />
+                        <x-form.error name="expected_checkin_end" />
+                    </div>
+                @endif
+
+            </div>
+
+              <!-- EoL Date -->
+              <div class="form-group asset_eol_date-range {{ ($errors->has('asset_eol_date_start') || $errors->has('asset_eol_date_end')) ? ' has-error' : '' }}">
+                  <label for="asset_eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
+                  <x-input.date-range
+                      class="col-md-8"
+                      id="asset_eol_date-range-datepicker"
+                      name_start="asset_eol_date_start"
+                      name_end="asset_eol_date_end"
+                      :value_start="$template->textValue('asset_eol_date_start', old('asset_eol_date_start'))"
+                      :value_end="$template->textValue('asset_eol_date_end', old('asset_eol_date_end'))"
+                  />
+
+                  @if ($errors->has('asset_eol_date_start') || $errors->has('asset_eol_date_end'))
+                      <div class="col-md-9 col-lg-offset-3">
+                          <x-form.error name="asset_eol_date_start" />
+                          <x-form.error name="asset_eol_date_end" />
+                      </div>
+                  @endif
+              </div>
+
+              <!-- Last Audit Date -->
+              <div class="form-group last_audit-range{{ ($errors->has('last_audit_start') || $errors->has('last_audit_end')) ? ' has-error' : '' }}">
+                  <label for="last_audit_start" class="col-md-3 control-label">{{ trans('general.last_audit') }}</label>
+                  <x-input.date-range
+                      class="col-md-8"
+                      id="last_audit-range-datepicker"
+                      name_start="last_audit_start"
+                      name_end="last_audit_end"
+                      :value_start="$template->textValue('last_audit_start', old('last_audit_start'))"
+                      :value_end="$template->textValue('last_audit_end', old('last_audit_end'))"
+                      max_date="today"
+                  />
+
+                  @if ($errors->has('last_audit_start') || $errors->has('last_audit_end'))
+                      <div class="col-md-9 col-lg-offset-3">
+                          <x-form.error name="last_audit_start" />
+                          <x-form.error name="last_audit_end" />
+                      </div>
+                  @endif
+              </div>
+
+              <!-- Next Audit Date -->
+              <div class="form-group next_audit-range{{ ($errors->has('next_audit_start') || $errors->has('next_audit_end')) ? ' has-error' : '' }}">
+                  <label for="next_audit_start" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
+                  <x-input.date-range
+                      class="col-md-8"
+                      id="next_audit-range-datepicker"
+                      name_start="next_audit_start"
+                      name_end="next_audit_end"
+                      :value_start="$template->textValue('next_audit_start', old('next_audit_start'))"
+                      :value_end="$template->textValue('next_audit_end', old('next_audit_end'))"
+                  />
+
+                  @if ($errors->has('next_audit_start') || $errors->has('next_audit_end'))
+                      <div class="col-md-9 col-lg-offset-3">
+                          <x-form.error name="next_audit_start" />
+                          <x-form.error name="next_audit_end" />
+                      </div>
+                  @endif
+              </div>
+
+              <!-- Last updated Date -->
+              <div class="form-group last_updated-range{{ ($errors->has('last_updated_start') || $errors->has('last_updated_end')) ? ' has-error' : '' }}">
+                  <label for="last_updated_start" class="col-md-3 control-label">{{ trans('general.updated_at') }}</label>
+                  <x-input.date-range
+                      class="col-md-8"
+                      id="last_updated-range-datepicker"
+                      name_start="last_updated_start"
+                      name_end="last_updated_end"
+                      :value_start="$template->textValue('last_updated_start', old('last_updated_start'))"
+                      :value_end="$template->textValue('last_updated_end', old('last_updated_end'))"
+                      max_date="today"
+                  />
+
+                  @if ($errors->has('last_updated_start') || $errors->has('last_updated_end'))
+                      <div class="col-md-9 col-lg-offset-3">
+                          <x-form.error name="last_updated_start" />
+                          <x-form.error name="last_updated_end" />
+                      </div>
+                  @endif
+              </div>
+
+              <!-- Last Updated before -->
+              <div class="form-group">
+                  <label for="last_updated_before" class="col-md-3 control-label">{{ trans('general.updated_before') }}</label>
+                  <div class="input-group col-md-3">
+                      <input class="form-control input-group" type="number" min="0" name="last_updated_before" value="{{ $template->textValue('last_updated_before', old('last_updated_before')) }}" aria-label="last_updated_before">
+                      <span class="input-group-addon">{{ trans('general.days_ago') }}</span>
+                  </div>
+
+                  @if ($errors->has('last_updated_before'))
+                      <div class="col-md-9 col-lg-offset-3">
+                          <x-form.error name="last_updated_before" />
+                      </div>
+                  @endif
+              </div>
+
+            <div class="col-md-9 col-md-offset-3">
+            <label class="form-control">
+                <input type="checkbox" name="exclude_archived" value="1" @checked($template->checkmarkValue('exclude_archived', '0')) />
+              {{ trans('general.exclude_archived') }}
+            </label>
+            </div>
+            <div class="col-md-9 col-md-offset-3">
+              <label class="form-control">
+                  <input type="checkbox" name="use_bom" value="1" @checked($template->checkmarkValue('use_bom', '0')) />
+                {{ trans('general.bom_remark') }}
+              </label>
+            </div>
+
+              <div class="col-md-9 col-md-offset-3">
+                  <label class="form-control">
+                      <input
+                          name="assignment_status"
+                          id="assignment_status_all"
+                          type="radio"
+                          value="all"
+                          @checked($template->radioValue('assignment_status', 'all', true))
+                          aria-label="assignment_status"
+                      >
+                      {{ trans('general.all') }} {{ trans('general.assigned') }} / {{ trans('general.unassigned') }}
+                  </label>
+                  <label class="form-control">
+                      <input
+                          name="assignment_status"
+                          id="assignment_status_assigned"
+                          type="radio"
+                          value="assigned"
+                          @checked($template->radioValue('assignment_status', 'assigned'))
+                          aria-label="assignment_status"
+                      >
+                      {{ trans('general.assigned') }}
+                  </label>
+                  <label class="form-control">
+                      <input
+                          name="assignment_status"
+                          id="assignment_status_unassigned"
+                          type="radio"
+                          value="unassigned"
+                          @checked($template->radioValue('assignment_status', 'unassigned'))
+                          aria-label="assignment_status"
+                      >
+                      {{ trans('general.unassigned') }}
+                  </label>
+              </div>
+
+              <div class="col-md-9 col-md-offset-3">
+                  <label class="form-control">
+                      <input
+                          name="deleted_assets"
+                          id="deleted_assets_exclude_deleted"
+                          type="radio"
+                          value="exclude_deleted"
+                          @checked($template->radioValue('deleted_assets', 'exclude_deleted', true))
+                          aria-label="deleted_assets"
+                      >
+                      {{ trans('general.exclude_deleted') }}
+                  </label>
+                  <label class="form-control">
+                      <input
+                          name="deleted_assets"
+                          id="deleted_assets_include_deleted"
+                          type="radio"
+                          value="include_deleted"
+                          @checked($template->radioValue('deleted_assets', 'include_deleted'))
+                          aria-label="deleted_assets"
+                      >
+                    {{ trans('general.include_deleted') }}
+                  </label>
+                  <label class="form-control">
+                      <input
+                          name="deleted_assets"
+                          type="radio"
+                          id="deleted_assets_only_deleted"
+                          value="only_deleted"
+                          @checked($template->radioValue('deleted_assets', 'only_deleted'))
+                          aria-label="deleted_assets"
+                      >
+                    {{ trans('general.only_deleted') }}
+                  </label>
+              </div>
+          </div>
+
+        </div> <!-- /.box-body-->
+            <div class="box-footer text-right">
+                <button type="submit" class="btn btn-success">
+                    <i class="fas fa-download icon-white" aria-hidden="true"></i>
+                    {{ trans('general.download') }}
+                </button>
+            </div>
+        </div> <!--/.box.box-default-->
+        </form>
+    </div>
+
+    <!-- Saved Reports right column -->
+    <div class="col-md-3">
+        <x-reports.custom-template-panel type="asset" :template="$template"/>
+    </div>
+</div>
+
+@stop

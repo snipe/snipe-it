@@ -2,13 +2,14 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Symfony\Component\Mime\Email;
 
-#[AllowDynamicProperties]
-class CurrentInventory extends Notification
+class CurrentInventory extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -17,15 +18,13 @@ class CurrentInventory extends Notification
      *
      * @return void
      */
-    public function __construct($user)
-    {
-        $this->user = $user;
-    }
+    public function __construct(
+        public User $user
+    ) {}
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
      * @return array
      */
     public function via()
@@ -36,16 +35,16 @@ class CurrentInventory extends Notification
     /**
      * Get the mail representation of the notification.
      *
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @return MailMessage
      */
     public function toMail()
     {
         $message = (new MailMessage)->markdown('notifications.markdown.user-inventory',
             [
-                'assets'  => $this->user->assets,
-                'accessories'  => $this->user->accessories,
-                'licenses'  => $this->user->licenses,
-                'consumables'  => $this->user->consumables,
+                'assets' => $this->user->assets,
+                'accessories' => $this->user->accessories,
+                'licenses' => $this->user->licenses,
+                'consumables' => $this->user->consumables,
             ])
             ->subject(trans('mail.inventory_report'))
             ->withSymfonyMessage(function (Email $message) {

@@ -10,7 +10,7 @@ use Tests\TestCase;
 
 class EmailAssignedToUserTest extends TestCase
 {
-    public function testUserWithoutCompanyPermissionsCannotSendInventory()
+    public function test_user_without_company_permissions_cannot_send_inventory()
     {
         Notification::fake();
 
@@ -19,13 +19,13 @@ class EmailAssignedToUserTest extends TestCase
         [$companyA, $companyB] = Company::factory()->count(2)->create();
 
         $superuser = User::factory()->superuser()->create();
-        $user = User::factory()->for($companyB)->create();
+        $user = User::factory()->forCompany($companyB)->create();
 
-        $this->actingAs(User::factory()->viewUsers()->for($companyA)->create())
+        $this->actingAs(User::factory()->viewUsers()->forCompany($companyA)->create())
             ->post(route('users.email', ['userId' => $user->id]))
             ->assertStatus(403);
 
-        $this->actingAs(User::factory()->viewUsers()->for($companyB)->create())
+        $this->actingAs(User::factory()->viewUsers()->forCompany($companyB)->create())
             ->post(route('users.email', ['userId' => $user->id]))
             ->assertStatus(302);
 

@@ -3,12 +3,26 @@
     'required' => '',
     'end_date' => null,
     'col_size_class' => null,
+    'placeholder' => trans('general.select_date'),
 ])
+@php
+    // Belt-and-suspenders: if a caller (or old() after a validation error)
+    // hands us an array/object rather than a scalar, cast it to empty so
+    // htmlspecialchars() doesn't blow up rendering the value attribute.
+    $value = is_scalar($value) ? (string) $value : '';
+@endphp
 
-<!-- Datepicker -->
 <div class="input-group date {{ $col_size_class }}"
-     data-provide="datepicker" data-date-today-highlight="true" data-date-language="{{ auth()->user()->locale }}" data-date-locale="{{ auth()->user()->locale }}" data-date-format="yyyy-mm-dd" data-date-autoclose="true" data-date-clear-btn="true" data-date-today-btn="true" {{ $end_date ? ' data-date-end-date=' . $end_date : '' }}>
-    <input type="text" placeholder="{{ trans('general.select_date') }}" value="{{ $value }}" maxlength="10" {{ $attributes->merge(['class' => 'form-control']) }} {{ $required=='1' ? 'required' : '' }}>
+     data-provide="datetimepicker"
+     data-format="YYYY-MM-DD"
+     data-locale="{{ auth()->user()?->locale ?? 'en' }}"
+     data-default-now="false"
+     @if ($end_date) data-max-date="{{ $end_date === '0d' ? 'today' : $end_date }}" @endif>
+    <input type="text"
+           placeholder="{{ $placeholder }}"
+           value="{{ $value }}"
+           maxlength="10"
+        {{ $attributes->merge(['class' => 'form-control']) }}
+        {{ $required == '1' ? 'required' : '' }}>
     <span class="input-group-addon"><x-icon type="calendar" /></span>
-
 </div>

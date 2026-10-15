@@ -31,32 +31,48 @@ return [
      * always gets the originating client IP, no matter
      * how many proxies that client's request has
      * subsequently passed through.
+     *
+     * If you're looking for a sensible default for this value,
+     * in many cases that would be 'PRIVATE_SUBNETS' or 'private_ranges'
+     * (They both do the same thing; they 'trust' any private non-routable
+     * IP, which is usually how most load-balancers and proxies are configured).
+     *
+     * This is a comma-separated list of IP addresses, **or** '*', or '**', or
+     * 'PRIVATE_SUBNETS' or 'private_ranges'
      */
-    'proxies' => env('APP_TRUSTED_PROXIES') !== null ?
-        explode(',', env('APP_TRUSTED_PROXIES')) : '*',
+    'proxies' => env('APP_TRUSTED_PROXIES') ?
+        explode(',', env('APP_TRUSTED_PROXIES')) : '',
 
     /*
-     * To trust one or more specific proxies that connect
-     * directly to your server, use an array of IP addresses:
+     * If APP_TRUSTED_HEADERS is left unset, NO forwarded headers are
+     * trusted, regardless of 'proxies' above. There is no fallback to a
+     * default header set - trusting X-Forwarded-* is strictly opt-in, one
+     * header at a time, via the setting below.
+     *
+     * This is a comma-delimited list.
      */
-    // 'proxies' => ['192.168.1.1'],
+
+    'headers' => env('APP_TRUSTED_HEADERS', ''),
 
     /*
-     * Or, to trust all proxies that connect
-     * directly to your server, use a "*"
-     */
-    // 'proxies' => '*',
+     * These are the valid headers you can choose to trust.
+     *
+     * The list of headers should be comma-separated; use as many as you need, but only use those that you actually
+     * _need_ - don't just pick everything at random.
+     *
+     * Generally you should *not* be using a combination of HEADER_X_FORWARDED_AWS_ELB and anything else,
+     * nor HEADER_X_FORWARDED_TRAEFIK and anything else. If you're using HEADER_FORWARDED, you generally won't
+     * need anything else either. the various X_FORWARDED_FOR, X_FORWARDED_HOST, etc are often used together.
+     *
+       HEADER_FORWARDED // When using RFC 7239
+       HEADER_X_FORWARDED_FOR
+       HEADER_X_FORWARDED_HOST
+       HEADER_X_FORWARDED_PROTO
+       HEADER_X_FORWARDED_PORT
+       HEADER_X_FORWARDED_PREFIX
 
-    /*
-     * Which headers to use to detect proxy related data (For, Host, Proto, Port)
-     *
-     * Options include:
-     *
-     * - Illuminate\Http\Request::HEADER_X_FORWARDED_ALL (use all x-forwarded-* headers to establish trust)
-     * - Illuminate\Http\Request::HEADER_FORWARDED (use the FORWARDED header to establish trust)
-     *
-     * @link https://symfony.com/doc/current/deployment/proxies.html
+       HEADER_X_FORWARDED_AWS_ELB // AWS ELB doesn't send X-Forwarded-Host
+       HEADER_X_FORWARDED_TRAEFIK // All "X-Forwarded-*" headers sent by Traefik reverse proxy
      */
-//    'headers' => Illuminate\Http\Request::HEADER_X_FORWARDED_ALL, //this is mostly handled already
 
 ];

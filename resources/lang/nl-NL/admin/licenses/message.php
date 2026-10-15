@@ -1,58 +1,69 @@
 <?php
 
-return array(
+return [
 
     'does_not_exist' => 'Licentie bestaat niet of je hebt geen toestemming om het te bekijken.',
     'user_does_not_exist' => 'Gebruiker bestaat niet of je hebt geen toestemming om deze te bekijken.',
-    'asset_does_not_exist' 	=> 'Het asset dat je probeert te koppelen aan deze licentie bestaat niet.',
+    'asset_does_not_exist' => 'Het asset dat je probeert te koppelen aan deze licentie bestaat niet.',
     'owner_doesnt_match_asset' => 'Het asset dat je probeert te koppelen aan deze licentie is eigendom van iemand anders dan de persoon die is geselecteerd in de toegewezen aan de dropdown.',
-    'assoc_users'	 => 'Deze licentie is momenteel uitgecheckt aan een gebruiker en kan daarom niet worden verwijderd. Controleer je licentie eerst en probeer het later nog eens. ',
+    'assoc_users' => 'Deze licentie is momenteel uitgecheckt aan een gebruiker en kan daarom niet worden verwijderd. Controleer je licentie eerst en probeer het later nog eens. ',
     'select_asset_or_person' => 'U moet een asset of een gebruiker selecteren, maar niet beide.',
     'not_found' => 'Licentie niet gevonden',
     'seats_available' => ':seat_count plaatsen beschikbaar',
 
+    'create' => [
+        'error' => 'Licentie is niet aangemaakt, probeer het opnieuw.',
+        'success' => 'Licentie is met succes aangemaakt.',
+    ],
 
-    'create' => array(
-        'error'   => 'Licentie is niet aangemaakt, probeer het opnieuw.',
-        'success' => 'Licentie is met succes aangemaakt.'
-    ),
-
-    'deletefile' => array(
-        'error'   => 'Bestand is niet verwijderd. Probeer het opnieuw.',
+    'deletefile' => [
+        'error' => 'Bestand is niet verwijderd. Probeer het opnieuw.',
         'success' => 'Bestand is met succes verwijderd.',
-    ),
+    ],
 
-    'upload' => array(
-        'error'   => 'Bestand(en) zijn niet geüpload. Probeer het opnieuw.',
+    'upload' => [
+        'error' => 'Bestand(en) zijn niet geüpload. Probeer het opnieuw.',
         'success' => 'Bestand(en) zijn met succes geüpload.',
         'nofiles' => 'Je hebt geen bestanden geselecteerd om te uploaden, of het bestand wat je probeert te uploaden is te groot',
         'invalidfiles' => 'Een of meer van de bestanden is te groot of het bestandstype is niet toegestaan. Toegestane bestandstypes zijn png, gif, jpg, jpeg, doc, docx, pdf, txt, zip, rar, rtf, xml en lic.',
-    ),
+    ],
 
-    'update' => array(
-        'error'   => 'Licentie is niet gewijzigd, probeer het opnieuw',
-        'success' => 'Licentie is met succes gewijzigd.'
-    ),
+    'update' => [
+        'error' => 'Licentie is niet gewijzigd, probeer het opnieuw',
+        'success' => 'Licentie is met succes gewijzigd.',
+    ],
 
-    'delete' => array(
-        'confirm'   => 'Weet je het zeker dat je deze licentie wilt verwijderen?',
-        'error'   => 'Er was een probleem tijdens het verwijderen van deze licentie, probeer het opnieuw.',
-        'success' => 'De licentie is met succes verwijderd.'
-    ),
+    'delete' => [
+        'confirm' => 'Weet je het zeker dat je deze licentie wilt verwijderen?',
+        'error' => 'Er was een probleem tijdens het verwijderen van deze licentie, probeer het opnieuw.',
+        'success' => 'De licentie is met succes verwijderd.',
+        'bulk_success' => 'The selected licenses were deleted successfully.',
+        'partial_success' => 'License deleted successfully. See additional information below. | :count licenses were deleted successfully. See additional information below.',
+        'bulk_checkout_warning' => ':license_name has seats that are currently checked out and cannot be deleted. Please check in all seats before deleting.',
+    ],
 
-    'checkout' => array(
-        'error'   => 'Er was een probleem met het uitchecken van deze licentie. Probeer het opnieuw.',
+    'delete_with_checkin' => [
+        'bulk_success' => ':count licenses were deleted successfully after checking in :seats seats.',
+        'partial_success' => ':count licenses were deleted successfully after checking in :seats seats. See additional information below.',
+    ],
+
+    'checkout' => [
+        'error' => 'Er was een probleem met het uitchecken van deze licentie. Probeer het opnieuw.',
         'success' => 'De licentie is met succes uitgecheckt',
         'not_enough_seats' => 'Niet genoeg licentieplaatsen beschikbaar voor de kassa',
         'mismatch' => 'De opgegeven licentie werkplek komt niet overeen met de licentie',
         'unavailable' => 'Deze licentie is niet beschikbaar voor uitchecken.',
         'license_is_inactive' => 'This license is expired or terminated.',
-    ),
+    ],
 
-    'checkin' => array(
-        'error'   => 'Er was een probleem met het inchecken van deze licentie. Probeer het opnieuw.',
+    'checkin' => [
+        'error' => 'Er was een probleem met het inchecken van deze licentie. Probeer het opnieuw.',
         'not_reassignable' => 'Seat has been used',
-        'success' => 'De licentie is met succes ingecheckt'
-    ),
+        'success' => 'De licentie is met succes ingecheckt',
+    ],
 
-);
+    'import' => [
+        'no_free_seats' => 'License ":license" has no free seats. ":target" was not assigned to a seat.',
+    ],
+
+];

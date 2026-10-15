@@ -2,18 +2,27 @@
 
 namespace App\Models;
 
+use App\Enums\FileStorage;
+use App\Models\Builders\ManufacturerQueryBuilder;
 use App\Models\Traits\Searchable;
+use App\Presenters\ManufacturerPresenter;
 use App\Presenters\Presentable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
 
+/**
+ * @mixin IdeHelperManufacturer
+ */
 class Manufacturer extends SnipeModel
 {
     use HasFactory;
 
-    protected $presenter = \App\Presenters\ManufacturerPresenter::class;
+    protected $presenter = ManufacturerPresenter::class;
+
     use Presentable;
     use SoftDeletes;
 
@@ -21,11 +30,11 @@ class Manufacturer extends SnipeModel
 
     // Declare the rules for the form validation
     protected $rules = [
-        'name'   => 'required|max:255|unique:manufacturers,name,NULL,id,deleted_at,NULL',
-        'url'   => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
-        'support_email'   => 'email|nullable',
-        'support_url'   => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
-        'warranty_lookup_url' => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://'
+        'name' => 'required|max:255|unique:manufacturers,name,NULL,id,deleted_at,NULL',
+        'url' => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
+        'support_email' => 'email|nullable',
+        'support_url' => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
+        'warranty_lookup_url' => 'nullable|starts_with:http://,https://,afp://,facetime://,file://,irc://',
     ];
 
     protected $hidden = ['user_id'];
@@ -38,12 +47,13 @@ class Manufacturer extends SnipeModel
      * @var bool
      */
     protected $injectUniqueIdentifier = true;
+
     use ValidatingTrait;
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var list<string>
      */
     protected $fillable = [
         'name',
@@ -64,14 +74,37 @@ class Manufacturer extends SnipeModel
      *
      * @var array
      */
-    protected $searchableAttributes = ['name', 'created_at', 'notes'];
+    protected $searchableAttributes = [
+        'name',
+        'created_at',
+        'notes',
+    ];
 
     /**
      * The relations and their attributes that should be included when searching the model.
      *
      * @var array
      */
-    protected $searchableRelations = [];
+    protected $searchableRelations = [
+        'adminuser' => ['first_name', 'last_name', 'display_name'],
+    ];
+
+    /**
+     * On hard-delete, wipe the image file. Soft-delete leaves it alone so a
+     * subsequent restore comes back with its image intact.
+     */
+    protected static function booted(): void
+    {
+        static::forceDeleted(function (self $manufacturer) {
+            if ($manufacturer->image) {
+                try {
+                    Storage::disk('public')->delete(FileStorage::Manufacturers->publicPath().$manufacturer->image);
+                } catch (\Exception $e) {
+                    Log::info($e->getMessage());
+                }
+            }
+        });
+    }
 
     public function isDeletable()
     {
@@ -86,45 +119,36 @@ class Manufacturer extends SnipeModel
 
     public function assets()
     {
-        return $this->hasManyThrough(\App\Models\Asset::class, \App\Models\AssetModel::class, 'manufacturer_id', 'model_id');
+        return $this->hasManyThrough(Asset::class, AssetModel::class, 'manufacturer_id', 'model_id');
     }
 
     public function models()
     {
-        return $this->hasMany(\App\Models\AssetModel::class, 'manufacturer_id');
+        return $this->hasMany(AssetModel::class, 'manufacturer_id');
     }
 
     public function licenses()
     {
-        return $this->hasMany(\App\Models\License::class, 'manufacturer_id');
+        return $this->hasMany(License::class, 'manufacturer_id');
     }
 
     public function accessories()
     {
-        return $this->hasMany(\App\Models\Accessory::class, 'manufacturer_id');
+        return $this->hasMany(Accessory::class, 'manufacturer_id');
     }
 
     public function consumables()
     {
-        return $this->hasMany(\App\Models\Consumable::class, 'manufacturer_id');
+        return $this->hasMany(Consumable::class, 'manufacturer_id');
     }
 
     public function components()
     {
-        return $this->hasMany(\App\Models\Component::class, 'manufacturer_id');
+        return $this->hasMany(Component::class, 'manufacturer_id');
     }
 
-    public function adminuser()
+    public function newEloquentBuilder($query): ManufacturerQueryBuilder
     {
-        return $this->belongsTo(\App\Models\User::class, 'created_by');
-    }
-
-
-    /**
-     * Query builder scope to order on the user that created it
-     */
-    public function scopeOrderByCreatedBy($query, $order)
-    {
-        return $query->leftJoin('users as admin_sort', 'manufacturers.created_by', '=', 'admin_sort.id')->select('manufacturers.*')->orderBy('admin_sort.first_name', $order)->orderBy('admin_sort.last_name', $order);
+        return new ManufacturerQueryBuilder($query);
     }
 }

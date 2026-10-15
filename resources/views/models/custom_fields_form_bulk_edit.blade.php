@@ -14,9 +14,9 @@
 
 @if ($anyModelHasCustomFields > 0)
     <fieldset name="custom-fields"">
-        <x-form-legend>
+        <x-form.legend>
             {{ trans('admin/custom_fields/general.custom_fields') }}
-        </x-form-legend>
+        </x-form.legend>
 @endif
 
 @foreach($models as $model)
@@ -44,7 +44,8 @@
                   <x-input.select
                       :name="$field->db_column_name()"
                       :options="$field->formatFieldValuesAsArray()"
-                      :selected="old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id)))"
+                      :selected="old($field->db_column_name(), (isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : ''))"
+                      :include-empty="true"
                       class="format form-control"
                   />
 
@@ -53,17 +54,16 @@
                     <input type="text" class="form-control" disabled value="{{ trans('/admin/hardware/form.bulk_update_custom_field_unique') }}">
                 @endif
                 @if(!$field->is_unique)
-                    <textarea class="col-md-6 form-control" id="{{ $field->db_column_name() }}" name="{{ $field->db_column_name() }}">{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}</textarea>
+                    <textarea class="col-md-6 form-control" id="{{ $field->db_column_name() }}" name="{{ $field->db_column_name() }}">{{ old($field->db_column_name(), (isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : '')) }}</textarea>
                 @endif
               @elseif ($field->element=='checkbox')
                     <!-- Checkboxes -->
               @php
                   $fieldName = $field->db_column_name();
                   $oldValues = old($fieldName);
-                  $defaultValues = array_map('trim', explode(',', $field->defaultValue($model->id)));
-                  $currentValues = isset($item) ? array_map('trim', explode(',', $item->{$fieldName})) : $defaultValues;
+                  $currentValues = isset($item) ? array_map('trim', explode(',', $item->{$fieldName})) : '';
 
-                  $selectedValues = is_array($oldValues) ? $oldValues : $currentValues;
+                  $selectedValues = is_array($oldValues) ? $oldValues : [];
               @endphp
 
               @foreach ($field->formatFieldValuesAsArray() as $key => $value)
@@ -79,8 +79,7 @@
                   @php
                       $fieldName = $field->db_column_name();
                       $oldValue = old($fieldName);
-                      $default = trim($field->defaultValue($model->id));
-                      $current = isset($item) ? trim($item->{$fieldName}) : $default;
+                      $current = isset($item) ? trim($item->{$fieldName}) : '';
 
                       $selectedValue = $oldValue !== null ? $oldValue : $current;
                   @endphp
@@ -98,6 +97,25 @@
                         data-target-name="{{ $field->db_column_name() }}">
                     {{ trans('/admin/hardware/general.clear') }}
                 </button>
+
+            @elseif ($field->element=='date_picker')
+                <div class="input-group col-md-5" style="padding-left: 0px;">
+                    <x-input.datepicker
+                        id="{{ $field->db_column_name() }}"
+                        name="{{ $field->db_column_name() }}"
+                        :value="old($field->db_column_name(), isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : '')"
+                    />
+                </div>
+
+            @elseif ($field->element=='datetime_picker')
+                <div class="input-group col-md-6" style="padding-left: 0px;">
+                    <x-input.datetimepicker
+                        id="{{ $field->db_column_name() }}"
+                        name="{{ $field->db_column_name() }}"
+                        :value="old($field->db_column_name(), isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : '')"
+                        :default_now="false"
+                    />
+                </div>
             @endif
 
             @else
@@ -106,11 +124,28 @@
             @if ($field->format=='DATE')
 
             <div class="input-group col-md-5" style="padding-left: 0px;">
-                <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd" data-autoclose="true" data-date-clear-btn="true">
-                    <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="{{ $field->db_column_name() }}" id="{{ $field->db_column_name() }}" readonly value="{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}"  style="background-color:inherit">
-                    <span class="input-group-addon"><x-icon type="calendar" /></span>
-                </div>
+                <x-input.datepicker
+                    id="{{ $field->db_column_name() }}"
+                    name="{{ $field->db_column_name() }}"
+                    :value="old($field->db_column_name(), isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : '')"
+                />
             </div>
+
+
+                @elseif ($field->format=='DATETIME')
+
+                    {{-- Outer wrapper with inline padding-left: 0 to match
+                         the DATE case above; conflicting duplicate CSS
+                         rules for .input-group[class*="col-"] otherwise
+                         re-apply the 15px grid padding. --}}
+                  <div class="input-group col-md-6" style="padding-left: 0px;">
+                        <x-input.datetimepicker
+                            id="{{ $field->db_column_name() }}"
+                            name="{{ $field->db_column_name() }}"
+                            :value="old($field->db_column_name(), isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : '')"
+                            :default_now="false"
+                        />
+                    </div>
 
 
                 @else
@@ -118,10 +153,16 @@
                     @if (($field->field_encrypted=='0') || (Gate::allows('admin')))
                         @if ($field->is_unique) 
                                 <input type="text" class="form-control" disabled value="{{trans('/admin/hardware/form.bulk_update_custom_field_unique')}}">
-                            @endif  
-                        @if(!$field->is_unique) 
-                                <input type="text" value="{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : $field->defaultValue($model->id))) }}" id="{{ $field->db_column_name() }}" class="form-control" name="{{ $field->db_column_name() }}" placeholder="Enter {{ strtolower($field->format) }} text">
-                        @endif 
+                            @endif
+                            @if(!$field->is_unique)
+                                <input type="text"
+                                       value="{{ old($field->db_column_name(),(isset($item) ? Helper::gracefulDecrypt($field, $item->{$field->db_column_name()}) : '')) }}"
+                                       id="{{ $field->db_column_name() }}"
+                                       class="form-control{{ strtoupper($field->format) === 'MAC' ? ' mac-address-input' : '' }}"
+                                       name="{{ $field->db_column_name() }}"
+                                       @if (strtoupper($field->format) === 'MAC') inputmode="text" autocomplete="off" @endif
+                                       placeholder="{{ strtoupper($field->format) === 'MAC' ? 'AA:BB:CC:DD:EE:FF' : 'Enter '.strtolower($field->format).' text' }}">
+                        @endif
                             @else
                                 <input type="text" value="{{ strtoupper(trans('admin/custom_fields/general.encrypted')) }}" class="form-control disabled" disabled>
                     @endif
@@ -151,7 +192,7 @@
           $errormessage=$errors->first($field->db_column_name());
           if ($errormessage) {
               $errormessage=preg_replace('/ snipeit /', '', $errormessage);
-              print('<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> '.$errormessage.'</span>');
+              print('<span class="alert-msg" role="alert" aria-live="assertive">'.$errormessage.'</span>');
           }
             ?>
       </div>

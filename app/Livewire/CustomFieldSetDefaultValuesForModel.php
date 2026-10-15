@@ -2,21 +2,36 @@
 
 namespace App\Livewire;
 
+use App\Models\AssetModel;
 use App\Models\CustomField;
+use App\Models\CustomFieldset;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
-
-use App\Models\CustomFieldset;
-use App\Models\AssetModel;
 
 class CustomFieldSetDefaultValuesForModel extends Component
 {
     public $add_default_values;
 
     public $fieldset_id;
+
     public $model_id;
 
     public array $selectedValues = [];
+
+    /**
+     * Route-level middleware on the model create/edit pages requires
+     * AssetModel update permission, but snapshot replay to POST
+     * /livewire/update bypasses that gate. Without this check, a
+     * low-privilege user with a valid snapshot could enumerate custom-field
+     * default values for any asset model by swapping model_id.
+     */
+    public function boot(): void
+    {
+        if (! Gate::allows('update', AssetModel::class)) {
+            abort(403);
+        }
+    }
 
     public function mount($model_id = null)
     {
@@ -24,14 +39,13 @@ class CustomFieldSetDefaultValuesForModel extends Component
         $this->fieldset_id = $this->model?->fieldset_id;
         $this->add_default_values = ($this->model?->defaultValues->count() > 0);
 
-
         $this->initializeSelectedValuesArray();
         if (session()->has('errors')) {
             $errors = session('errors')->keys();
             $selectedValuesKeys = array_keys($this->selectedValues);
             if (count(array_intersect($selectedValuesKeys, $errors)) > 0) {
                 $this->add_default_values = true;
-            };
+            }
         }
         $this->populatedSelectedValuesArray();
     }
@@ -65,8 +79,6 @@ class CustomFieldSetDefaultValuesForModel extends Component
      * dynamically added (this is especially true for checkboxes).
      *
      * Let's go ahead and initialize selectedValues with all the potential keys (custom field db_columns).
-     *
-     * @return void
      */
     private function initializeSelectedValuesArray(): void
     {
@@ -82,8 +94,6 @@ class CustomFieldSetDefaultValuesForModel extends Component
     /**
      * Populate the selectedValues array with the
      * default values or old input for each field.
-     *
-     * @return void
      */
     private function populatedSelectedValuesArray(): void
     {
@@ -107,7 +117,7 @@ class CustomFieldSetDefaultValuesForModel extends Component
         // back with the old input.
         // Let's use what they had previously set.
         if (old('default_values')) {
-            $defaultValue = old('default_values.' . $field->id);
+            $defaultValue = old('default_values.'.$field->id);
         }
 
         // on first load the default value for checkboxes will be

@@ -71,7 +71,7 @@ return [
     ],
     'hex_color' => 'crwdns12420:0crwdne12420:0',
     'image' => 'crwdns12422:0crwdne12422:0',
-    'import_field_empty'    => 'crwdns11191:0crwdne11191:0',
+    'import_field_empty' => 'crwdns11191:0crwdne11191:0',
     'in' => 'crwdns992:0crwdne992:0',
     'in_array' => 'crwdns12424:0crwdne12424:0',
     'integer' => 'crwdns12426:0crwdne12426:0',
@@ -126,7 +126,7 @@ return [
         'symbols' => 'crwdns12504:0crwdne12504:0',
         'uncompromised' => 'crwdns12506:0crwdne12506:0',
     ],
-    'percent'       => 'crwdns12660:0crwdne12660:0',
+    'percent' => 'crwdns12660:0crwdne12660:0',
 
     'present' => 'crwdns1936:0crwdne1936:0',
     'present_if' => 'crwdns12508:0crwdne12508:0',
@@ -156,24 +156,37 @@ return [
         'string' => 'crwdns12542:0crwdne12542:0',
     ],
     'starts_with' => 'crwdns12544:0crwdne12544:0',
-    'string'               => 'crwdns1941:0crwdne1941:0',
+    'string' => 'crwdns1941:0crwdne1941:0',
     'two_column_unique_undeleted' => 'crwdns11892:0crwdne11892:0',
-    'unique_undeleted'     => 'crwdns1964:0crwdne1964:0',
-    'non_circular'         => 'crwdns6070:0crwdne6070:0',
-    'not_array'            => 'crwdns12056:0crwdne12056:0',
+    'unique_undeleted' => 'crwdns1964:0crwdne1964:0',
+    'non_circular' => 'crwdns6070:0crwdne6070:0',
+    'parent_must_be_top_level' => 'crwdns15025:0crwdne15025:0',
+    'must_have_no_children' => 'crwdns15027:0crwdne15027:0',
+    'parent_within_scope' => 'crwdns16337:0crwdne16337:0',
+    'not_array' => 'crwdns12056:0crwdne12056:0',
     'disallow_same_pwd_as_user_fields' => 'crwdns10498:0crwdne10498:0',
-    'letters'              => 'crwdns10500:0crwdne10500:0',
-    'numbers'              => 'crwdns10502:0crwdne10502:0',
-    'case_diff'            => 'crwdns10504:0crwdne10504:0',
-    'symbols'              => 'crwdns10506:0crwdne10506:0',
+    'letters' => 'crwdns10500:0crwdne10500:0',
+    'numbers' => 'crwdns10502:0crwdne10502:0',
+    'case_diff' => 'crwdns10504:0crwdne10504:0',
+    'symbols' => 'crwdns10506:0crwdne10506:0',
     'timezone' => 'crwdns12546:0crwdne12546:0',
     'unique' => 'crwdns1013:0crwdne1013:0',
     'uploaded' => 'crwdns1943:0crwdne1943:0',
     'uppercase' => 'crwdns12548:0crwdne12548:0',
     'url' => 'crwdns12550:0crwdne12550:0',
+    'external_url' => 'crwdns14995:0crwdne14995:0',
+    'asset_tag_pattern_placeholder' => 'crwdns17015:0crwdne17015:0',
+    'custom_http_extras_json' => [
+        'not_json' => 'crwdns17017:0crwdne17017:0',
+        'not_array' => 'crwdns17019:0crwdne17019:0',
+        'entry_not_object' => 'crwdns17021:0crwdne17021:0',
+        'missing_field' => 'crwdns17023:0crwdne17023:0',
+    ],
     'ulid' => 'crwdns12552:0crwdne12552:0',
     'uuid' => 'crwdns12554:0crwdne12554:0',
-    'fmcs_location' => 'crwdns13232:0crwdne13232:0',
+    'valid_css_color' => 'crwdns14917:0crwdne14917:0',
+    'fmcs_company' => 'crwdns15215:0crwdne15215:0',
+    'fmcs_location' => 'crwdns14949:0crwdne14949:0',
     'is_unique_across_company_and_location' => 'crwdns14272:0crwdne14272:0',
 
     /*
@@ -187,38 +200,39 @@ return [
     |
     */
 
-    'email_array'      => 'crwdns13164:0crwdne13164:0',
-    'checkboxes'           => 'crwdns13166:0crwdne13166:0',
-    'radio_buttons'        => 'crwdns13168:0crwdne13168:0',
-    
+    'email_array' => 'crwdns13164:0crwdne13164:0',
+    'checkboxes' => 'crwdns13166:0crwdne13166:0',
+    'radio_buttons' => 'crwdns13168:0crwdne13168:0',
+    'image_file_too_large' => 'crwdns17567:0crwdne17567:0',
+
     'custom' => [
         'alpha_space' => 'crwdns1944:0crwdne1944:0',
 
-        'hashed_pass'      => 'crwdns1946:0crwdne1946:0',
-        'dumbpwd'          => 'crwdns1947:0crwdne1947:0',
+        'hashed_pass' => 'crwdns1946:0crwdne1946:0',
+        'dumbpwd' => 'crwdns1947:0crwdne1947:0',
         'statuslabel_type' => 'crwdns1948:0crwdne1948:0',
-        'custom_field_not_found'          => 'crwdns12650:0crwdne12650:0',
+        'custom_field_not_found' => 'crwdns12650:0crwdne12650:0',
         'custom_field_not_found_on_model' => 'crwdns12652:0crwdne12652:0',
 
         // date_format validation with slightly less stupid messages. It duplicates a lot, but it gets the job done :(
         // We use this because the default error message for date_format reflects php Y-m-d, which non-PHP
         // people won't know how to format.
-        'purchase_date.date_format'     => 'crwdns11247:0crwdne11247:0',
-        'last_audit_date.date_format'   =>  'crwdns11249:0crwdne11249:0',
-        'expiration_date.date_format'   =>  'crwdns11251:0crwdne11251:0',
-        'termination_date.date_format'  =>  'crwdns11253:0crwdne11253:0',
-        'expected_checkin.date_format'  =>  'crwdns11255:0crwdne11255:0',
-        'start_date.date_format'        =>  'crwdns11257:0crwdne11257:0',
-        'end_date.date_format'          =>  'crwdns11259:0crwdne11259:0',
+        'purchase_date.date_format' => 'crwdns11247:0crwdne11247:0',
+        'last_audit_date.date_format' => 'crwdns11249:0crwdne11249:0',
+        'expiration_date.date_format' => 'crwdns11251:0crwdne11251:0',
+        'termination_date.date_format' => 'crwdns11253:0crwdne11253:0',
+        'expected_checkin.date_format' => 'crwdns11255:0crwdne11255:0',
+        'start_date.date_format' => 'crwdns11257:0crwdne11257:0',
+        'end_date.date_format' => 'crwdns11259:0crwdne11259:0',
         'invalid_value_in_field' => 'crwdns12560:0crwdne12560:0',
 
         'ldap_username_field' => [
-            'not_in' =>         'crwdns12762:0crwdne12762:0'
+            'not_in' => 'crwdns12762:0crwdne12762:0',
         ],
         'ldap_auth_filter_query' => ['not_in' => 'crwdns12764:0crwdne12764:0'],
         'ldap_filter' => ['regex' => 'crwdns12766:0crwdne12766:0'],
 
-        ],
+    ],
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -230,7 +244,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'serials.*' => 'crwdns14386:0crwdne14386:0',
+        'asset_tags.*' => 'crwdns14388:0crwdne14388:0',
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -244,6 +261,5 @@ return [
         'required' => 'crwdns12582:0crwdne12582:0',
         'email' => 'crwdns12584:0crwdne12584:0',
     ],
-
 
 ];

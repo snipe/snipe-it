@@ -8,7 +8,7 @@
 | ------------- | ------------- | ------------- |
 @foreach ($assets as $asset)
 @php
-$checkin = Helper::getFormattedDateObject($asset->expected_checkin, 'date');
+$checkin = Helper::getFormattedDateObject($asset->expected_checkin, 'datetime');
 
 $assignedToName = $asset->assignedTo ? $asset->assignedTo->present()->fullName : trans('general.unknown_user');
 $assignedToRoute = $asset->assignedTo ? route($asset->targetShowRoute().'.show', [$asset->assignedTo->id]) : '';

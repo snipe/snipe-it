@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'info'   => 'Wybierz opcje, które chcesz by znalazły się w raporcie aktywów.',
+    'info' => 'Wybierz opcje, które chcesz by znalazły się w raporcie aktywów.',
     'deleted_user' => 'Usuń użytkownika',
     'send_reminder' => 'Wyślij przypomnienie',
     'cannot_send_reminder' => 'Użytkownik został usunięty lub nie posiada przypisanego adresu email przez co nie może otrzymać przypomnienia',
@@ -9,15 +9,24 @@ return [
     'acceptance_deleted' => 'Prośba o akceptację usunięta',
     'acceptance_request' => 'Prośba o akceptację',
     'custom_export' => [
+        'asset_company' => 'Spółka środka',
+        'asset_serial' => 'Numer seryjny środka',
+        'assigned_asset_tag' => 'Checked Out Asset Tag',
         'user_address' => 'Adres użytkownika',
+        'user_company' => 'Spółka użytkownika',
         'user_city' => 'Miasto użytkownika',
         'user_state' => 'Województwo użytkownika',
         'user_country' => 'Kraj użytkownika',
-        'user_zip' => 'Kod pocztowy użytkownika'
+        'user_zip' => 'Kod pocztowy użytkownika',
+        'target_notes' => 'Notatki',
     ],
     'open_saved_template' => 'Otwórz zapisany szablon',
-    'save_template' =>  'Zapisz szablon',
+    'save_template' => 'Zapisz szablon',
     'select_a_template' => 'Wybierz szablon',
     'template_name' => 'Nazwa szablonu',
     'update_template' => 'Aktualizuj szablon',
+    'share_template' => 'Udostępnij ten szablon',
+    'template_shared' => 'Szablony udostępnione Tobie',
+    'template_shared_with_others' => 'Szablony udostępnione innym',
+    'template_not_shared' => 'Szablony nieudostępnione innym',
 ];

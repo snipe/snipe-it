@@ -1,38 +1,53 @@
 <?php
 
-return array(
+return [
 
-    'accepted'                  => 'You have successfully accepted this item.',
-    'declined'                  => 'You have successfully declined this item.',
-    'bulk_manager_warn'	        => 'Dina användare har uppdaterats, men ansvarigfältet sparades inte eftersom den ansvarige du valt även finns i användarlistan varvid en användare inte kan ange sig själv som ansvarig. Vänligen välj dina användare igen, med den ansvarige exkluderad ur valen.',
-    'user_exists'               => 'Användaren existerar redan!',
-    'user_not_found'            => 'Användaren existerar inte eller så har du inte behörighet att se den.',
-    'user_login_required'       => 'Inloggningsfältet krävs',
+    'accepted' => 'Du har godkänt denna artikel.',
+    'declined' => 'Du har avböjt denna artikel.',
+    'accept_signature_write_failed' => 'Din acceptationssignatur kunde inte sparas i lagringen. Acceptationen har inte registrerats. Kontakta din administratör.',
+    'accept_pdf_write_failed' => 'Acceptations-PDF:en kunde inte sparas i lagringen. Acceptationen har inte registrerats. Kontakta din administratör.',
+    'bulk_manager_warn' => 'Dina användare har uppdaterats, men ansvarigfältet sparades inte eftersom den ansvarige du valt även finns i användarlistan varvid en användare inte kan ange sig själv som ansvarig. Vänligen välj dina användare igen, med den ansvarige exkluderad ur valen.',
+    'user_exists' => 'Användaren existerar redan!',
+    'cannot_delete' => 'Användaren finns inte eller så har du inte behörighet att ta bort dem.',
+    'user_not_found' => 'Användaren finns inte eller så har du inte behörighet att se den.',
+    'user_login_required' => 'Inloggningsfältet krävs',
     'user_has_no_assets_assigned' => 'Inga tillgångar har tilldelats denna användare.',
-    'user_password_required'    => 'Lösenordet krävs.',
-    'insufficient_permissions'  => 'Otillräckliga behörigheter.',
-    'user_deleted_warning'      => 'Den här användaren har raderats. Du måste återställa den här användaren för att redigera eller tilldela nya tillgångar.',
-    'ldap_not_configured'        => 'LDAP-integrationen har inte konfigurerats för den här uppsättningen.',
-    'password_resets_sent'      => 'De valda användarna som är aktiverade och har en giltig e-postadress har skickats en länk för lösenordsåterställning.',
-    'password_reset_sent'       => 'En återställningslänk för lösenord har skickats till :email!',
-    'user_has_no_email'         => 'Den här användaren har ingen e-postadress i sin profil.',
-    'log_record_not_found'        => 'Det gick inte att hitta en matchande logg för den här användaren.',
+    'nothing_currently_assigned' => 'Inget tilldelat för närvarande.',
+    'user_password_required' => 'Lösenordet krävs.',
+    'insufficient_permissions' => 'Otillräckliga behörigheter.',
+    'auth_fields_denied' => 'Du har inte behörighet att ändra inloggnings- eller aktiveringsfält för denna användare. Begärda fält uppdaterades inte: :fields',
+    'user_deleted_warning' => 'Den här användaren har raderats. Du måste återställa den här användaren för att redigera eller tilldela nya tillgångar.',
+    'ldap_not_configured' => 'LDAP-integrationen har inte konfigurerats för den här uppsättningen.',
+    'password_resets_sent' => 'De valda användarna som är aktiverade och har en giltig e-postadress har skickats en länk för lösenordsåterställning.',
+    'not_activated' => 'Denna användare kan inte logga in, så de kan inte acceptera tillgångar via e-post.',
+    'password_reset_sent' => 'En återställningslänk för lösenord har skickats till :email!',
+    'user_has_no_email' => 'Den här användaren har ingen e-postadress i sin profil.',
+    'log_record_not_found' => 'Det gick inte att hitta en matchande logg för den här användaren.',
 
+    'impersonate' => [
+        'started' => 'Du är nu inloggad som :name.',
+        'stopped' => 'Du har återgått till ditt eget konto.',
+        'cannot_impersonate_self' => 'Du kan inte logga in som dig själv.',
+        'cannot_impersonate_superuser' => 'Du kan inte logga in som en annan superanvändare.',
+        'target_not_active' => 'Den användaren är avaktiverad eller borttagen och kan inte loggas in som.',
+        'impersonator_missing' => 'Det ursprungliga kontot för denna impersonation-session finns inte längre. Logga in igen.',
+    ],
 
-    'success' => array(
-        'create'    => 'Användare skapad.',
-        'update'    => 'Användare uppdaterad.',
-        'update_bulk'    => 'Användare uppdaterade.',
-        'delete'    => 'Användaren har tagits bort.',
-        'ban'       => 'Användare avstängd.',
-        'unban'     => 'Användare aktiverad.',
-        'suspend'   => 'Användare suspenderad.',
+    'success' => [
+        'create' => 'Användare skapad.',
+        'update' => 'Användare uppdaterad.',
+        'update_bulk' => 'Användare uppdaterade.',
+        'delete' => 'Användaren har tagits bort.',
+        'ban' => 'Användare avstängd.',
+        'unban' => 'Användare aktiverad.',
+        'suspend' => 'Användare suspenderad.',
         'unsuspend' => 'Användare aktiverad.',
-        'restored'  => 'Användare återställd.',
-        'import'    => 'Användare importerades.',
-    ),
+        'restored' => 'Användare återställd.',
+        'import' => 'Användare importerades.',
+        'acceptance_reminder_sent' => 'Påminnelse om acceptation skickad för :count väntande tillgång.|Påminnelser om acceptation skickade för :count väntande tillgångar.',
+    ],
 
-    'error' => array(
+    'error' => [
         'create' => 'Det gick inte att skapa användaren. Var god försök igen.',
         'update' => 'Det gick inte att uppdatera användaren. Var god försök igen.',
         'delete' => 'Det gick inte att ta bort användaren. Var god försök igen.',
@@ -43,8 +58,8 @@ return array(
         'delete_has_locations_var' => 'Den här användaren hanterar fortfarande en plats. Välj en annan ansvarig först.|Den här användaren hanterar fortfarande :count platser. Välj en annan ansvarig först.',
         'delete_has_users_var' => 'Den här användaren hanterar fortfarande en annan användare. Välj en annan ansvarig för den användaren först. Den här användaren hanterar fortfarande :count användare. Välj en annan ansvarig för dem först.',
         'unsuspend' => 'Det gick inte att aktivera användaren. Var god försök igen.',
-        'import'    => 'Det gick inte att importera användare. Var god försök igen.',
-        'asset_already_accepted' => 'Denna tillgång har redan godkänts.',
+        'import' => 'Det gick inte att importera användare. Var god försök igen.',
+        'asset_already_accepted' => 'Denna tillgång har redan accepterats.',
         'accept_or_decline' => 'Du måste antingen godkänna eller avböja den här tillgången.',
         'cannot_delete_yourself' => 'Vi skulle verkligen bli ledsna om du raderade ditt konto. Hoppas att du kan tänka om.',
         'incorrect_user_accepted' => 'Den tillgång du försökte acceptera har inte checkats ut till dig.',
@@ -53,23 +68,25 @@ return array(
         'ldap_could_not_search' => 'Det gick inte att söka på LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'ldap_could_not_get_entries' => 'Det gick inte att erhålla värden från LDAP-servern. Kontrollera din LDAP-serverkonfiguration i LDAP-konfigurationsfilen. <br>Fel från LDAP-servern:',
         'password_ldap' => 'Lösenordet för det här kontot hanteras av LDAP/Active Directory. Vänligen kontakta din IT-ansvarige för att ändra ditt lösenord. ',
-        'multi_company_items_assigned' => 'Denna användare har objekt tilldelade som tillhör ett annat företag. Vänligen checka in dem eller redigera deras företag.'
-    ),
+        'multi_company_items_assigned' => 'Denna användare har objekt tilldelade som tillhör ett annat företag. Vänligen checka in dem eller redigera deras företag.',
+        'no_pending_acceptances' => 'Denna användare har inga väntande acceptationer att påminna dem om.',
+        'company_not_permitted' => 'En eller flera begärda företagskopplingar ligger utanför ditt tillåtna företagsomfång.',
+    ],
 
-    'deletefile' => array(
-        'error'   => 'Filen har inte tagits bort. Var god försök igen.',
+    'deletefile' => [
+        'error' => 'Filen har inte tagits bort. Var god försök igen.',
         'success' => 'Filen har tagits bort.',
-    ),
+    ],
 
-    'upload' => array(
-        'error'   => 'Fil(er) har inte laddats upp. Var god försök igen.',
+    'upload' => [
+        'error' => 'Fil(er) har inte laddats upp. Var god försök igen.',
         'success' => 'Fil(er) uppladdad(e).',
         'nofiles' => 'Inga filer valda för uppladdning.',
         'invalidfiles' => 'En eller flera av dina filer är för stora eller är av en filtyp som inte stöds. Tillåtna filtyper är png, gif, jpg, doc, docx, pdf och txt.',
-    ),
+    ],
 
-    'inventorynotification' => array(
-        'error'   => 'Den här användaren har ingen e-postadress.',
-        'success' => 'Användaren har meddelats om sitt nuvarande inventarie.'
-    )
-);
+    'inventorynotification' => [
+        'error' => 'Den här användaren har ingen e-postadress.',
+        'success' => 'Användaren har meddelats om sitt nuvarande inventarie.',
+    ],
+];

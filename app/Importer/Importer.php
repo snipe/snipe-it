@@ -11,23 +11,67 @@ use ForceUTF8\Encoding;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use League\Csv\Reader;
 use Illuminate\Support\Facades\Log;
+use League\Csv\Reader;
 
 abstract class Importer
 {
     protected $csv;
+
     /**
      * Id of User performing import
-     * @var
      */
     protected $created_by;
+
     /**
      * Are we updating items in the import
+     *
      * @var bool
      */
-
     protected $updating;
+
+    /**
+     * True when the operator ticked the "send welcome email to users"
+     * wizard checkbox. Set by setShouldNotify from ItemImportRequest.
+     * UserImporter overrides this default in its own class body; the
+     * base declaration here means subclasses like AssetImporter can
+     * read the flag without triggering PHPStan property-not-found on
+     * the dynamic assignment.
+     *
+     * @var bool
+     */
+    protected $send_welcome = false;
+
+    /**
+     * Send the "welcome to Snipe-IT" email to a user that was JUST
+     * created as a checkout target in this row, if the operator opted
+     * in on the wizard. wasRecentlyCreated is only true on the model
+     * instance that a save() call minted, so matched existing users
+     * don't retrigger the email on subsequent imports. Guarded on
+     * email + activated for parity with UserImporter's welcome path.
+     * Called from AssetImporter / AccessoryImporter / ConsumableImporter
+     * / LicenseImporter after a successful checkout to a user target.
+     */
+    protected function maybeSendWelcomeEmail($target): void
+    {
+        if (! $this->send_welcome) {
+            return;
+        }
+
+        if (! ($target instanceof User) || ! $target->wasRecentlyCreated) {
+            return;
+        }
+
+        if (! $target->email || $target->activated != '1') {
+            return;
+        }
+
+        try {
+            $target->notify(new \App\Notifications\WelcomeNotification($target));
+        } catch (\Exception $e) {
+            Log::warning('Could not send welcome notification for imported user: '.$e->getMessage());
+        }
+    }
 
     /**
      * Default Map of item fields->csv names
@@ -36,6 +80,7 @@ abstract class Importer
      * This private variable is ONLY used for the cli-importer.
      *
      * @todo - find a way to make this less duplicative
+     *
      * @var array
      */
     private $defaultFieldMap = [
@@ -43,8 +88,10 @@ abstract class Importer
         'asset_tag' => 'asset tag',
         'activated' => 'activated',
         'category' => 'category',
-        'checkout_class' => 'checkout type', // Supports Location or User for assets.  Using checkout_class instead of checkout_type because type exists on asset already.
+        'checkout_class' => 'checkout type', // Supports Location, User, or Asset for assets. Using checkout_class instead of checkout_type because type exists on asset already.
         'checkout_location' => 'checkout location',
+        'checkout_asset' => 'checkout asset',
+        'checkout_user' => 'checkout user',
         'company' => 'company',
         'item_name' => 'item name',
         'item_number' => 'item number',
@@ -95,24 +142,31 @@ abstract class Importer
         'vip' => 'vip',
         'tag_color' => 'tag color',
     ];
+
     /**
      * Map of item fields->csv names
+     *
      * @var array
      */
     protected $fieldMap = [];
+
     /**
      * @var callable
      */
     protected $logCallback;
+
     protected $tempPassword;
+
     /**
      * @var callable
      */
     protected $progressCallback;
+
     /**
      * @var null
      */
     protected $usernameFormat;
+
     /**
      * @var callable
      */
@@ -120,7 +174,8 @@ abstract class Importer
 
     /**
      * ObjectImporter constructor.
-     * @param string $file
+     *
+     * @param  string  $file
      */
     public function __construct($file)
     {
@@ -129,13 +184,162 @@ abstract class Importer
             ini_set('auto_detect_line_endings', '1');
         }
         // By default the importer passes a url to the file.
-        // However, for testing we also support passing a string directly
+        // However, for testing we also support passing a string directly.
+        //
+        // Memory-conscious construction: this constructor runs once per JS-
+        // chunked slice against the same file (see ItemImportRequest::import,
+        // which builds a new Importer per POST from the Livewire importer's
+        // chunk loop). Buffering the whole file into a string here would
+        // multiply peak memory by the chunk count, which defeats the entire
+        // point of the chunked-import rework. Common case: sample the head
+        // of the file, if it's UTF-8 use Reader::createFromPath so the CSV
+        // reader streams from disk. Only fall back to full-file buffering
+        // when encoding conversion is actually needed.
         if (is_file($file)) {
-            $this->csv = Reader::createFromPath($file);
+            $sample = self::readSampleForEncodingProbe($file);
+            if ($sample !== null && ! mb_check_encoding($sample, 'UTF-8')) {
+                $contents = file_get_contents($file);
+                if ($contents !== false) {
+                    $contents = self::convertToUtf8IfNeeded($contents);
+                    $this->csv = Reader::createFromString($contents);
+                } else {
+                    $this->csv = Reader::createFromPath($file);
+                }
+            } else {
+                $this->csv = Reader::createFromPath($file);
+            }
         } else {
-            $this->csv = Reader::createFromString($file);
+            // Raw string input (tests, callers that build a CSV string
+            // in-process). Already in memory, so run the same encoding
+            // guard directly on the string.
+            $contents = mb_check_encoding($file, 'UTF-8') ? $file : self::convertToUtf8IfNeeded($file);
+            $this->csv = Reader::createFromString($contents);
         }
         $this->tempPassword = '*** NO PASSWORD - IMPORTED VIA CSV ***';
+    }
+
+    /**
+     * Read a small head-of-file sample cheaply for encoding detection. 8KB
+     * is enough to tell UTF-8 from GBK / Windows-1252 / Shift-JIS in
+     * practice (CSVs have uniform encoding throughout), and reading a
+     * sample this size stays in a single filesystem block on almost every
+     * modern deployment.
+     *
+     * Returns null if the file can't be opened, which callers should
+     * treat as "assume UTF-8 and let downstream errors surface".
+     */
+    private static function readSampleForEncodingProbe(string $path): ?string
+    {
+        $handle = @fopen($path, 'rb');
+        if ($handle === false) {
+            return null;
+        }
+        $sample = @fread($handle, 8192);
+        fclose($handle);
+
+        return $sample === false ? null : $sample;
+    }
+
+    /**
+     * Detect the source encoding of a non-UTF-8 string and convert it to
+     * UTF-8. Returns the source unchanged if the contents are already
+     * UTF-8, if no source encoding can be determined, or if conversion
+     * would drop more than half the source bytes (see
+     * conversionExceedsLossThreshold).
+     */
+    private static function convertToUtf8IfNeeded(string $contents): string
+    {
+        if (mb_check_encoding($contents, 'UTF-8')) {
+            return $contents;
+        }
+
+        $encoding = self::detectSourceEncoding($contents);
+        if ($encoding === null) {
+            return $contents;
+        }
+
+        $converted = self::runEncodingConversion($contents, $encoding);
+        if ($converted === null) {
+            return $contents;
+        }
+
+        if (self::conversionExceedsLossThreshold($contents, $converted, $encoding)) {
+            return $contents;
+        }
+
+        return $converted;
+    }
+
+    /**
+     * Try the Onnov detector first, falling back to mb_detect only when
+     * Onnov abstains. Onnov is usually more reliable when it commits to
+     * an answer, and overriding it with the CJK-leaning mb_detect list
+     * produces mojibake on short Cyrillic input. Returns null when no
+     * usable non-UTF-8 encoding was found.
+     */
+    private static function detectSourceEncoding(string $contents): ?string
+    {
+        $encoding = null;
+        if (class_exists('\Onnov\DetectEncoding\EncodingDetector')) {
+            $detector = new \Onnov\DetectEncoding\EncodingDetector;
+            $encoding = $detector->getEncoding($contents);
+        }
+
+        if (! $encoding || strcasecmp($encoding, 'UTF-8') === 0) {
+            $detected = mb_detect_encoding($contents, ['UTF-8', 'GBK', 'GB2312', 'GB18030', 'BIG5', 'SJIS', 'EUC-JP', 'EUC-KR', 'Windows-1252', 'Windows-1251', 'ISO-8859-1'], true);
+            if ($detected) {
+                $encoding = $detected;
+            }
+        }
+
+        if (! $encoding || strcasecmp($encoding, 'UTF-8') === 0) {
+            return null;
+        }
+
+        return $encoding;
+    }
+
+    /**
+     * Run the actual byte-level conversion. Prefers iconv with //IGNORE so
+     * real-world CSVs with a stray invalid byte still import successfully,
+     * falling back to mb_convert_encoding on hosts without iconv. Returns
+     * null when no converter is available or the converter refused the
+     * input entirely.
+     */
+    private static function runEncodingConversion(string $contents, string $encoding): ?string
+    {
+        $converted = null;
+        if (function_exists('iconv')) {
+            $result = @iconv(strtoupper($encoding), 'UTF-8//IGNORE', $contents);
+            $converted = $result === false ? null : $result;
+        } elseif (function_exists('mb_convert_encoding')) {
+            $converted = @mb_convert_encoding($contents, 'UTF-8', $encoding);
+        }
+
+        return ($converted === null || $converted === '') ? null : $converted;
+    }
+
+    /**
+     * Loss-ratio safety net for the //IGNORE flag on iconv. If the
+     * converted output is less than half the source size we treat that as
+     * "//IGNORE dropped most of the file", log a warning, and let the
+     * caller fall back to unconverted source so downstream sees the
+     * problem instead of an eerily-empty import.
+     */
+    private static function conversionExceedsLossThreshold(string $source, string $converted, string $encoding): bool
+    {
+        if (strlen($converted) >= intdiv(strlen($source), 2)) {
+            return false;
+        }
+
+        Log::warning(sprintf(
+            'CSV import: refusing lossy encoding conversion (%s -> UTF-8) that kept %d/%d bytes',
+            $encoding,
+            strlen($converted),
+            strlen($source),
+        ));
+
+        return true;
     }
 
     // Cached Values for import lookups
@@ -145,27 +349,61 @@ abstract class Importer
      * Sets up the database transaction and logging for the importer
      *
      * @return void
+     *
      * @author Daniel Meltzer
+     *
      * @since  5.0
      */
-    public function import()
+    public function import(?int $offset = null, ?int $limit = null)
     {
         $headerRow = $this->csv->fetchOne();
-        $this->csv->setHeaderOffset(0); //explicitly sets the CSV document header record
+        $this->csv->setHeaderOffset(0); // explicitly sets the CSV document header record
 
         $this->populateCustomFields($headerRow);
 
-        DB::transaction(function () use ($headerRow) {
+        DB::transaction(function () use ($headerRow, $offset, $limit) {
             $importedItemsCount = 0;
+            $processedInSlice = 0;
             Model::unguard();
 
+            // Sliced imports: when the caller passes offset+limit we only
+            // process rows [offset, offset+limit). Preserves the original
+            // "iterate everything" behavior when neither is provided so
+            // CLI callers (ObjectImportCommand) and any external caller
+            // hitting the API without offset/limit still work unchanged.
             foreach ($this->csv->getRecords($headerRow) as $row) {
-                //Lowercase header values to ensure we're comparing values properly.
+                // Fully blank rows (every cell empty, like ",,,,,,,,") carry
+                // no importable data. Skipping them before both the offset
+                // walk AND handle() means slice math, tallies, and per-row
+                // logging all reflect real work rather than padding rows.
+                if (self::rowIsBlank($row)) {
+                    continue;
+                }
+
+                if ($offset !== null && $importedItemsCount < $offset) {
+                    $importedItemsCount++;
+
+                    continue;
+                }
+
+                if ($limit !== null && $processedInSlice >= $limit) {
+                    break;
+                }
+
+                // Lowercase header values to ensure we're comparing values properly.
                 $row = array_change_key_case($row, CASE_LOWER);
 
-                $this->handle($row);
+                try {
+                    $this->handle($row);
+                } catch (\App\Exceptions\ImportRowRejected $e) {
+                    $this->recordErrored();
+                    $this->log('Row rejected: '.$e->getMessage());
+                    $rowLabel = $row['asset tag'] ?? $row['item name'] ?? $row['name'] ?? 'Row #'.($importedItemsCount + 1);
+                    $this->addErrorToBag((object) ['name' => $rowLabel], $e->field, $e->getMessage());
+                }
 
                 $importedItemsCount++;
+                $processedInSlice++;
 
                 if ($this->progressCallback) {
                     call_user_func($this->progressCallback, $importedItemsCount);
@@ -182,8 +420,11 @@ abstract class Importer
     /**
      * Fetch custom fields from database and translate/parse them into a format
      * appropriate for use in the importer.
+     *
      * @return void
+     *
      * @author Daniel Meltzer
+     *
      * @since  5.0
      */
     protected function populateCustomFields($headerRow)
@@ -210,10 +451,12 @@ abstract class Importer
      * Check to see if the given key exists in the array, and trim excess white space before returning it
      *
      * @author Daniel Melzter
+     *
      * @since 3.0
-     * @param $array array
-     * @param $key string
-     * @param $default string
+     *
+     * @param  $array  array
+     * @param  $key  string
+     * @param  $default  string
      * @return string
      */
     public function findCsvMatch(array $array, $key, $default = null)
@@ -221,20 +464,74 @@ abstract class Importer
         $val = $default;
         $key = $this->lookupCustomKey($key);
 
-       // $this->log("Custom Key: ${key}");
+        // $this->log("Custom Key: ${key}");
         if (array_key_exists($key, $array)) {
-            $val = Encoding::toUTF8(trim($array[$key]));
+            $trimmed = trim($array[$key]);
+            if (mb_check_encoding($trimmed, 'UTF-8')) {
+                $val = $trimmed;
+            } else {
+                $val = Encoding::toUTF8($trimmed);
+            }
         }
-        //$this->log("${key}: ${val}");
+
+        // $this->log("${key}: ${val}");
         return $val;
+    }
+
+    /**
+     * True when the CSV row contains a value for the given logical key
+     * (whether the value is populated or empty). Callers use this to
+     * distinguish "column absent from the CSV" (leave DB alone) from
+     * "column present with an empty value" (clear the DB field on update).
+     */
+    protected function csvRowHas(array $row, string $csvKey): bool
+    {
+        return array_key_exists($this->lookupCustomKey($csvKey), $row);
+    }
+
+    /**
+     * True when every cell in the CSV row is empty after trimming.
+     * Fully blank rows (like ",,,,,,,") get filtered out before handle()
+     * so they do not count toward the tally, appear in the preview,
+     * or trigger per-row logging.
+     */
+    protected static function rowIsBlank(array $row): bool
+    {
+        foreach ($row as $value) {
+            if (trim((string) $value) !== '') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Assign a value from the CSV row into $this->item under the given item
+     * key, only when the CSV row actually contained that column. Empty CSV
+     * cells are assigned as null (not as empty strings) so the DB stores
+     * NULL when the user explicitly clears a nullable field on update.
+     * Columns absent from the CSV row are never touched, so update mode
+     * preserves existing DB values for any field the user did not include
+     * in their file.
+     */
+    protected function setItemFromCsvIfPresent(array $row, string $itemKey, ?string $csvKey = null): void
+    {
+        $csvKey = $csvKey ?? $itemKey;
+        if ($this->csvRowHas($row, $csvKey)) {
+            $value = $this->findCsvMatch($row, $csvKey);
+            $this->item[$itemKey] = ($value === '') ? null : $value;
+        }
     }
 
     /**
      * Looks up A custom key in the custom field map
      *
      * @author Daniel Melzter
+     *
      * @since 4.0
-     * @param $key string
+     *
+     * @param  $key  string
      * @return string|null
      */
     public function lookupCustomKey($key)
@@ -242,6 +539,7 @@ abstract class Importer
         if (array_key_exists($key, $this->fieldMap)) {
             return $this->fieldMap[$key];
         }
+
         // Otherwise no custom key, return original.
         return $key;
     }
@@ -250,8 +548,10 @@ abstract class Importer
      * Figure out the fieldname of the custom field
      *
      * @author A. Gianotto <snipe@snipe.net>
+     *
      * @since 3.0
-     * @param $array array
+     *
+     * @param  $array  array
      * @return string
      */
     public function array_smart_custom_field_fetch(array $array, $key)
@@ -275,11 +575,51 @@ abstract class Importer
         }
     }
 
-    protected function addErrorToBag($item, $field,  $error_message)
+    protected function addErrorToBag($item, $field, $error_message)
     {
         if ($this->errorCallback) {
             call_user_func($this->errorCallback, $item, $field, [$field => [$error_message]]);
         }
+    }
+
+    /**
+     * Per-row tally accumulated across the current slice. The wizard UI adds
+     * these across slices so the user sees a real "N created, M updated,
+     * K skipped as duplicates" summary at the end of an import instead of
+     * a generic success flash. logError() and addErrorToBag() auto-record
+     * errored; subclasses call recordCreated/Updated/Skipped explicitly
+     * from the branches of their handle() method.
+     */
+    protected array $tally = [
+        'created' => 0,
+        'updated' => 0,
+        'skipped' => 0,
+        'errored' => 0,
+    ];
+
+    protected function recordCreated(): void
+    {
+        $this->tally['created']++;
+    }
+
+    protected function recordUpdated(): void
+    {
+        $this->tally['updated']++;
+    }
+
+    protected function recordSkipped(): void
+    {
+        $this->tally['skipped']++;
+    }
+
+    protected function recordErrored(): void
+    {
+        $this->tally['errored']++;
+    }
+
+    public function getTally(): array
+    {
+        return $this->tally;
     }
 
     /**
@@ -289,9 +629,12 @@ abstract class Importer
      * the same time. [ALG]
      *
      * @author Daniel Melzter
+     *
      * @since 3.0
-     * @param $row array
+     *
+     * @param  $row  array
      * @return User Model w/ matching name
+     *
      * @internal param array $user_array User details parsed from csv
      */
     protected function createOrFetchUser($row, $type = 'user')
@@ -302,12 +645,21 @@ abstract class Importer
             'first_name' => $this->findCsvMatch($row, 'first_name'),
             'last_name' => $this->findCsvMatch($row, 'last_name'),
             'display_name' => $this->findCsvMatch($row, 'display_name'),
-            'email'     => $this->findCsvMatch($row, 'email'),
-            'manager_id'=>  '',
-            'department_id' =>  '',
-            'username'  => $this->findCsvMatch($row, 'username'),
-            'activated'  => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
-            'remote'    => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
+            'email' => $this->findCsvMatch($row, 'email'),
+            'manager_id' => '',
+            // ItemImporter::handle() has already created the Department (if
+            // the CSV row had one) and stored its id on $this->item so it
+            // can flow through to the user record. Previously this value
+            // was hard-coded to '' and the Department was orphaned.
+            'department_id' => $this->item['department_id'] ?? '',
+            // Prefer an explicit username column; fall back to checkout_user
+            // (single-column shortcut for asset checkout to an existing or
+            // newly-created user, keyed on username). This preserves the
+            // create-or-fetch path when the operator only maps checkout_user
+            // and does not add a separate username column.
+            'username' => $this->findCsvMatch($row, 'username') ?: $this->findCsvMatch($row, 'checkout_user'),
+            'activated' => $this->fetchHumanBoolean($this->findCsvMatch($row, 'activated')),
+            'remote' => $this->fetchHumanBoolean(($this->findCsvMatch($row, 'remote'))),
         ];
 
         if ($type == 'manager') {
@@ -316,13 +668,13 @@ abstract class Importer
         }
 
         // Maybe we're lucky and the username was passed and it already exists.
-        if (!empty($user_array['username'])) {
+        if (! empty($user_array['username'])) {
             if ($user = User::where('username', $user_array['username'])->first()) {
                 $this->log('User '.$user_array['username'].' already exists');
+
                 return $user;
             }
         }
-
 
         // If the full name and username is empty, bail out--we need this to extract first name (at the very least)
         if ((empty($user_array['username'])) && (empty($user_array['full_name'])) && (empty($user_array['first_name']))) {
@@ -330,9 +682,9 @@ abstract class Importer
             Log::debug('User array: ');
             Log::debug(print_r($user_array, true));
             Log::debug(print_r($row, true));
+
             return false;
         }
-
 
         // Populate email if it does not exist.
         if (empty($user_array['email'])) {
@@ -357,6 +709,7 @@ abstract class Importer
             // Check for a matching username one more time after trying to guess username.
             if ($user = User::where('username', $user_array['username'])->first()) {
                 $this->log('User '.$user_array['username'].' already exists');
+
                 return $user;
             }
         }
@@ -367,6 +720,18 @@ abstract class Importer
         }
 
         // No luck finding a user on username or first name, let's create one.
+
+        // Floater-mode escalation guard (#19200). A side-effect of an asset
+        // import is that referenced users get minted with no company pivot —
+        // under floater mode that promotes them to system-wide visibility.
+        // Refuse to create the user when the importer's actor isn't trusted
+        // to grant floater status. Same guard the User CSV importer uses.
+        if (Auth::check() && ! auth()->user()->canGrantFloaterStatus()) {
+            $this->log('Skipping creation of referenced user "'.($user_array['username'] ?? '').'": cannot create a user with no company assignment while floater mode is enabled (#19200).');
+
+            return false;
+        }
+
         $user = new User;
 
         $user->first_name = $user_array['first_name'];
@@ -378,11 +743,19 @@ abstract class Importer
         $user->department_id = $user_array['department_id'] ?? null;
         $user->activated = 1;
         $user->password = $this->tempPassword;
+        // Use $this->created_by (set by setCreatedBy() from both
+        // ItemImportRequest for web imports and ObjectImportCommand for
+        // CLI imports) rather than auth()->id() so CLI-run imports get
+        // the --user_id option value instead of null. Without this,
+        // users minted as checkout targets during asset import land in
+        // the DB with a null created_by, breaking blame in the user list.
+        $user->created_by = $this->created_by;
 
         Log::debug('Creating a user with the following attributes: '.print_r($user_array, true));
 
         if ($user->save()) {
             $this->log('User '.$user_array['username'].' created');
+
             return $user;
         }
 
@@ -393,8 +766,9 @@ abstract class Importer
 
     /**
      * Matches a user by created_by if user_name provided is a number
-     * @param  string $user_name users full name from csv
-     * @return User           User Matching ID
+     *
+     * @param  string  $user_name  users full name from csv
+     * @return User User Matching ID
      */
     protected function findUserByNumber($user_name)
     {
@@ -409,8 +783,7 @@ abstract class Importer
     /**
      * Sets the Id of User performing import.
      *
-     * @param mixed $created_by the user id
-     *
+     * @param  mixed  $created_by  the user id
      * @return self
      */
     public function setCreatedBy($created_by)
@@ -423,8 +796,7 @@ abstract class Importer
     /**
      * Sets the Are we updating items in the import.
      *
-     * @param bool $updating the updating
-     *
+     * @param  bool  $updating  the updating
      * @return self
      */
     public function setUpdating($updating)
@@ -437,8 +809,7 @@ abstract class Importer
     /**
      * Sets whether or not we should notify the user with a welcome email
      *
-     * @param bool $send_welcome the send-welcome flag
-     *
+     * @param  bool  $send_welcome  the send-welcome flag
      * @return self
      */
     public function setShouldNotify($send_welcome)
@@ -450,8 +821,6 @@ abstract class Importer
 
     /**
      * Defines mappings of csv fields
-     *
-     * @param bool $updating the updating
      *
      * @return self
      */
@@ -468,10 +837,9 @@ abstract class Importer
     /**
      * Sets the callbacks for the import
      *
-     * @param callable $logCallback Function to call when we have data to log
-     * @param callable $progressCallback Function to call to display progress
-     * @param callable $errorCallback Function to call when we have errors
-     *
+     * @param  callable  $logCallback  Function to call when we have data to log
+     * @param  callable  $progressCallback  Function to call to display progress
+     * @param  callable  $errorCallback  Function to call when we have errors
      * @return self
      */
     public function setCallbacks(callable $logCallback, callable $progressCallback, callable $errorCallback)
@@ -486,8 +854,7 @@ abstract class Importer
     /**
      * Sets the value of usernameFormat.
      *
-     * @param string $usernameFormat the username format
-     *
+     * @param  string  $usernameFormat  the username format
      * @return self
      */
     public function setUsernameFormat($usernameFormat)
@@ -516,42 +883,54 @@ abstract class Importer
      * Fetch an existing department, or create new if it doesn't exist
      *
      * @author A. Gianotto
+     *
      * @since 4.6.5
-     * @param $user_department string
+     *
+     * @param  $user_department  string
      * @return int id of company created/found
      */
     public function createOrFetchDepartment($user_department_name)
     {
-        if ($user_department_name != '') {
-            $department = Department::where('name', '=', $user_department_name)->first();
-
-            if ($department) {
-                $this->log('A matching Department '.$user_department_name.' already exists');
-
-                return $department->id;
-            }
-
-            $department = new Department();
-            $department->name = $user_department_name;
-
-            if ($department->save()) {
-                $this->log('Department '.$user_department_name.' was created');
-
-                return $department->id;
-            }
-            $this->logError($department, 'Department');
+        // Explicit is_null check before the loose equality guard so a null
+        // input doesn't trigger PHP 8.x null-to-string deprecation warnings
+        // (the previous form was `!= ''` which coerces null to '' first).
+        if (is_null($user_department_name) || $user_department_name === '') {
+            return null;
         }
+
+        $department = Department::where('name', $user_department_name)->first();
+
+        if ($department) {
+            $this->log('A matching Department '.$user_department_name.' already exists');
+
+            return $department->id;
+        }
+
+        $department = new Department;
+        $department->name = $user_department_name;
+        // $this->created_by, not auth()->id(), so CLI-run imports
+        // attribute created_by to the --user_id option value rather
+        // than null.
+        $department->created_by = $this->created_by;
+
+        if ($department->save()) {
+            $this->log('Department '.$user_department_name.' was created');
+
+            return $department->id;
+        }
+        $this->logError($department, 'Department');
 
         return null;
     }
-
 
     /**
      * Fetch an existing manager
      *
      * @author A. Gianotto
+     *
      * @since 4.6.5
-     * @param $user_manager string
+     *
+     * @param  $user_manager  string
      * @return int id of company created/found
      */
     public function fetchManager($user_manager_first_name, $user_manager_last_name)
@@ -572,13 +951,13 @@ abstract class Importer
      * Parse a date or return null
      *
      * @author A. Gianotto
+     *
      * @since 7.0.0
-     * @param $field
-     * @param $format
+     *
      * @return string|null
-
      */
-    public function parseOrNullDate($field, $format = 'date') {
+    public function parseOrNullDate($field, $format = 'date')
+    {
 
         $date_format = 'Y-m-d';
 
@@ -590,12 +969,15 @@ abstract class Importer
 
             try {
                 $value = CarbonImmutable::parse($this->item[$field])->format($date_format);
+
                 return $value;
             } catch (\Exception $e) {
-                $this->log('Unable to parse date: ' . $this->item[$field]);
+                $this->log('Unable to parse date: '.$this->item[$field]);
+
                 return null;
             }
         }
+
         return null;
     }
 }

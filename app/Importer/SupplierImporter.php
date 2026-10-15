@@ -22,35 +22,63 @@ class SupplierImporter extends ItemImporter
 
     protected function handle($row)
     {
-        parent::handle($row);
+        // SupplierImporter deliberately does NOT call parent::handle(). See
+        // the other subclass migrations for the same pattern: absent CSV
+        // columns stay out of $this->item so update mode preserves the DB
+        // value, and present-but-empty cells land as null so update mode
+        // clears the DB value. The base sanitize's reject-empty pass is
+        // disabled by $rejectEmptyOnUpdate on ItemImporter.
+        $this->item = [];
+
+        foreach ([
+            'name',
+            'address',
+            'address2',
+            'city',
+            'state',
+            'country',
+            'zip',
+            'phone',
+            'fax',
+            'email',
+            'contact',
+            'url',
+            'notes',
+            'tag_color',
+        ] as $field) {
+            $this->setItemFromCsvIfPresent($row, $field);
+        }
+
         $this->createSupplierIfNotExists($row);
     }
 
     /**
      * Create a supplier if a duplicate does not exist.
+     *
      * @todo Investigate how this should interact with Importer::createSupplierIfNotExists
      *
      * @author A. Gianotto
+     *
      * @since 6.1.0
-     * @param array $row
      */
     public function createSupplierIfNotExists(array $row)
     {
-
         $editingSupplier = false;
+        $name = trim($this->item['name'] ?? '');
 
-        $supplier = Supplier::where('name', '=', $this->findCsvMatch($row, 'name'))->first();
+        $supplier = Supplier::where('name', '=', $name)->first();
 
-        if ($this->findCsvMatch($row, 'id')!='') {
+        if ($this->findCsvMatch($row, 'id') != '') {
             // Override supplier if an ID was given
             \Log::debug('Finding supplier by ID: '.$this->findCsvMatch($row, 'id'));
             $supplier = Supplier::find($this->findCsvMatch($row, 'id'));
         }
 
-
         if ($supplier) {
             if (! $this->updating) {
-                $this->log('A matching Supplier '.$this->item['name'].' already exists');
+                $this->log('A matching Supplier '.$name.' already exists');
+                $this->recordSkipped();
+
                 return;
             }
 
@@ -59,28 +87,11 @@ class SupplierImporter extends ItemImporter
         } else {
             $this->log('No Matching Supplier, Create a new one');
             $supplier = new Supplier;
-            $supplier->created_by = auth()->id();
+            $supplier->created_by = $this->created_by;
         }
-
-        // Pull the records from the CSV to determine their values
-        $this->item['name'] = trim($this->findCsvMatch($row, 'name'));
-        $this->item['address'] = trim($this->findCsvMatch($row, 'address'));
-        $this->item['address2'] = trim($this->findCsvMatch($row, 'address2'));
-        $this->item['city'] = trim($this->findCsvMatch($row, 'city'));
-        $this->item['state'] = trim($this->findCsvMatch($row, 'state'));
-        $this->item['country'] = trim($this->findCsvMatch($row, 'country'));
-        $this->item['zip'] = trim($this->findCsvMatch($row, 'zip'));
-        $this->item['phone'] = trim($this->findCsvMatch($row, 'phone'));
-        $this->item['fax'] = trim($this->findCsvMatch($row, 'fax'));
-        $this->item['email'] = trim($this->findCsvMatch($row, 'email'));
-        $this->item['contact'] = trim($this->findCsvMatch($row, 'contact'));
-        $this->item['url'] = trim($this->findCsvMatch($row, 'url'));
-        $this->item['notes'] = trim($this->findCsvMatch($row, 'notes'));
-
 
         Log::debug('Item array is: ');
         Log::debug(print_r($this->item, true));
-
 
         if ($editingSupplier) {
             Log::debug('Updating existing supplier');
@@ -92,14 +103,21 @@ class SupplierImporter extends ItemImporter
 
         if ($supplier->save()) {
             $this->log('Supplier '.$supplier->name.' created or updated from CSV import');
+            if ($editingSupplier) {
+                $this->recordUpdated();
+            } else {
+                $this->recordCreated();
+            }
+
             return $supplier;
 
         } else {
             Log::debug($supplier->getErrors());
-            $this->logError($supplier, 'Supplier "'.$this->item['name'].'"');
+            $this->recordErrored();
+            $this->logError($supplier, 'Supplier "'.$name.'"');
+
             return $supplier->errors;
         }
-
 
     }
 }

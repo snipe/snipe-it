@@ -21,7 +21,9 @@ require('jquery-slimscroll');
 require('jquery.iframe-transport'); //probably not needed anymore, if I'm honest
 require('blueimp-file-upload')
 require('bootstrap-colorpicker')
-require('bootstrap-datepicker')
+// eonasdan-bootstrap-datetimepicker (BS3) needs moment on window before it loads
+window.moment = require('moment')
+require('eonasdan-bootstrap-datetimepicker')
 require('ekko-lightbox') //TODO - this doesn't seem jquery-ish, we might need to do something weird here
                          // it *does* require Bootstrap, which requires jquery, so maybe that's OK
                          // it seems to work...
@@ -119,6 +121,29 @@ $(function () {
 
     var $el = $('body');
 
+    // Publish the live header height as a CSS custom property so
+    // .main-sidebar's padding-top can track it at narrow widths. The
+    // AdminLTE 2 base pads the mobile sidebar by a static 100px, which
+    // is too small whenever the header wraps to a taller stack (common
+    // on FMCS + location-scoped installs at ~750px). Static breakpoint
+    // margins used to compensate for this and were removed under the
+    // assumption this rule already existed. See #19826.
+    (function () {
+        var header = document.querySelector('.main-header');
+        if (header === null) { return; }
+        var sync = function () {
+            document.documentElement.style.setProperty(
+                '--main-header-height',
+                header.getBoundingClientRect().height + 'px'
+            );
+        };
+        sync();
+        window.addEventListener('resize', sync);
+        if (typeof ResizeObserver !== 'undefined') {
+            new ResizeObserver(sync).observe(header);
+        }
+    })();
+
     // confirm restore modal
 
     $el.on('click', '.restore-asset', function (evnt) {
@@ -137,11 +162,212 @@ $(function () {
         return false;
     });
 
+    // Mark-a-maintenance-complete modal (green checkmark button in the
+    // maintenances table actions column). Sets the modal form's action to
+    // the row's completion URL and opens it.
+    $el.on('click', '.complete-maintenance', function () {
+        var url = $(this).data('url');
+        $('#completeMaintenanceForm').attr('action', url);
+        $('#completionNote').val('');
+        $('#completeMaintenanceModal').modal('show');
+    });
+
+    // Adjust-quantity modal (plus-minus button on accessory/consumable/
+    // component list and view pages). Sets the modal form's action from
+    // the trigger's data-adjust-url and populates the header + current
+    // quantity display from the trigger's data attributes. Clears the
+    // signed amount + note + order every open so nothing bleeds between
+    // clicks.
+    $el.on('click', '.adjust-quantity', function () {
+        var $btn = $(this);
+        var $modal = $('#adjustQuantityModal');
+        var $amount = $modal.find('#adjustQuantityAmount');
+
+        // data-available is the trigger's authoritative floor for a decrement
+        // (available = qty - currentlyInUseCount). A delta smaller than
+        // -available would decrement the on-hand qty below what's already
+        // checked out, and AdjustsQuantity::adjustQuantity throws
+        // DomainException. Mirror that server-side floor on the input's min
+        // attribute so the browser stepper refuses to go below and the
+        // constraint-validation message surfaces before submit.
+        var available = parseInt($btn.data('available'), 10);
+
+        $('#adjustQuantityForm').attr('action', $btn.data('adjust-url'));
+        $modal.find('.adjust-quantity-item-name').text($btn.data('item-name') || '');
+        $modal.find('.adjust-quantity-available').text(!isNaN(available) ? available : '');
+
+        if (!isNaN(available)) {
+            $amount.attr('min', -available);
+        } else {
+            $amount.removeAttr('min');
+        }
+
+        $amount.val('');
+        $modal.find('#adjustQuantityOrder').val('');
+        // Reset the acquisition-metadata fields between opens so an
+        // order left half-filled by one operator doesn't bleed into the
+        // next click. Supplier is a select2, so use .val('').trigger('change')
+        // rather than setting the raw <select>; currency reverts to
+        // whatever the modal was originally rendered with (its DOM value
+        // attribute, i.e. the system default_currency).
+        $modal.find('#adjustQuantitySupplier').val('').trigger('change');
+        // Reset purchase_date to today on every open (server-rendered
+        // default is today too). Prevents an operator's earlier
+        // backdate from bleeding into the next event.
+        var todayIso = new Date().toISOString().slice(0, 10);
+        $modal.find('#adjustQuantityPurchaseDate').val(todayIso);
+
+        // Pre-populate unit_cost + currency from the trigger's data-last-*
+        // attrs (server-rendered from the item's most recent OrderItem).
+        // When both are present the "pre-populated from last order" hint
+        // shows underneath the row; the hint gets hidden as soon as the
+        // operator edits either field so it disappears the moment they
+        // override the pre-fill.
+        var lastUnitCost = $btn.data('last-unit-cost');
+        var lastCurrency = $btn.data('last-currency');
+        var $unitCost = $modal.find('#adjustQuantityUnitCost');
+        var $currency = $modal.find('#adjustQuantityCurrency');
+        var $costHint = $modal.find('#adjustQuantityCostHint');
+
+        $unitCost.val(lastUnitCost !== undefined && lastUnitCost !== '' ? lastUnitCost : '');
+        $currency.val(lastCurrency !== undefined && lastCurrency !== '' ? lastCurrency : ($currency.prop('defaultValue') || ''));
+
+        if ((lastUnitCost !== undefined && lastUnitCost !== '') || (lastCurrency !== undefined && lastCurrency !== '')) {
+            $costHint.show();
+        } else {
+            $costHint.hide();
+        }
+
+        // Rebind on every open so multiple modal opens don't stack listeners.
+        $unitCost.off('input.adjustCostHint').on('input.adjustCostHint', function () { $costHint.hide(); });
+        $currency.off('input.adjustCostHint').on('input.adjustCostHint', function () { $costHint.hide(); });
+
+        $modal.find('#adjustQuantityNote').val('');
+        $modal.find('#adjustQuantityFile').val('');
+        // js-uploadFile paints selected filenames into #{id}-info; clear it too
+        // so stale filenames from a previous open don't linger in the new modal.
+        $modal.find('#adjustQuantityFile-info').empty();
+
+        // Acquisition-metadata fields (order number, supplier, unit cost,
+        // currency) only make sense when the qty change is a positive
+        // addition (a purchase). Zero or negative amounts represent
+        // corrections / consumption / losses, not acquisitions, so hide
+        // those fields — and blank their values so a submit from that
+        // state doesn't ship stale purchase metadata alongside the log
+        // entry. Show them again the moment the operator types a
+        // positive number. The date label swaps to a generic "Date"
+        // when the event isn't a purchase.
+        //
+        // On modal open the amount is empty ("we don't know yet"), so
+        // stay in the default acquisition-visible state — prefilled
+        // supplier / cost / currency from the last order are preserved
+        // and the hint stays visible if it was shown. We only clear
+        // when the operator actually commits to a 0/negative value.
+        var $acquisitionFields = $modal.find('#adjustQuantityAcquisitionFields');
+        var $costRow = $modal.find('#adjustQuantityCostRow');
+        var $dateLabel = $modal.find('#adjustQuantityPurchaseDateLabel');
+        var purchaseLabel = $dateLabel.data('label-purchase');
+        var genericLabel = $dateLabel.data('label-generic');
+        var syncAcquisitionFieldsVisibility = function () {
+            var raw = $amount.val();
+            // Treat "no value yet" as still-a-purchase for the visibility
+            // toggle: prefilled acquisition metadata stays intact until
+            // the operator explicitly types a non-positive number.
+            if (raw === '' || raw === null || raw === undefined) {
+                $acquisitionFields.show();
+                $costRow.show();
+                $dateLabel.text(purchaseLabel);
+                return;
+            }
+            var num = parseFloat(raw);
+            var isPurchase = !isNaN(num) && num > 0;
+            $acquisitionFields.toggle(isPurchase);
+            $costRow.toggle(isPurchase);
+            $costHint.toggle(isPurchase && $costHint.data('has-prefill') === true);
+            $dateLabel.text(isPurchase ? purchaseLabel : genericLabel);
+            if (!isPurchase) {
+                $modal.find('#adjustQuantityOrder').val('');
+                $modal.find('#adjustQuantitySupplier').val('').trigger('change');
+                $modal.find('#adjustQuantityUnitCost').val('');
+                $modal.find('#adjustQuantityCurrency').val('');
+            }
+        };
+        // Track the prefill state on the hint so the visibility toggle
+        // can restore it correctly when qty flips positive again.
+        $costHint.data('has-prefill', $costHint.is(':visible'));
+        $amount.off('input.adjustAcquisition').on('input.adjustAcquisition', syncAcquisitionFieldsVisibility);
+        // Initial call keeps everything in the default "purchase" state
+        // (empty amount) so the prefill logic above stays authoritative.
+        syncAcquisitionFieldsVisibility();
+
+        $modal.modal('show');
+    });
+
+    // Request-item modal (on /account/requestable-assets). Trigger
+    // buttons carry data-request-url + data-item-name + data-current-qty
+    // so the modal can post to the correct endpoint and reset its
+    // qty/date fields between opens. Cancel case (the item is already
+    // requested by this user) POSTs synchronously via a small inline
+    // form on the row instead of routing through this modal, so a
+    // requested row never opens it.
+    $el.on('click', '.request-item', function () {
+        var $btn = $(this);
+        var $modal = $('#requestItemModal');
+        var $form = $('#requestItemForm');
+
+        $form.attr('action', $btn.data('request-url'));
+        $modal.find('.request-item-name').text($btn.data('item-name') || '');
+
+        var currentQty = parseInt($btn.data('current-qty'), 10);
+        $modal.find('#requestItemQuantity').val(!isNaN(currentQty) && currentQty > 0 ? currentQty : 1);
+
+        // Hide the qty row for types where qty is meaningless.
+        // Assets are 1:1 (you request THE asset, not N of it).
+        // Licenses are one-seat-per-request by convention (nobody
+        // realistically asks for 3 seats of Photoshop for
+        // themselves). The input stays in the DOM with value=1 so
+        // the POST shape stays uniform across every requestable
+        // type. Only the row is display:none.
+        //
+        // The required attribute is toggled in step with visibility
+        // per HTML5 specs
+        var itemType = ($btn.data('item-type') || '').toString().toLowerCase();
+        var hidesQty = itemType === 'asset' || itemType === 'license';
+        var $qtyInput = $modal.find('#requestItemQuantity');
+        $modal.find('#requestItemQuantityRow').toggle(!hidesQty);
+        $qtyInput.prop('required', !hidesQty);
+        if (hidesQty) {
+            $qtyInput.val(1);
+        }
+
+        // Reset dates + notes every open so state left in the modal
+        // by an earlier click can't leak into the next request.
+        $modal.find('#requestItemStartDate').val('');
+        $modal.find('#requestItemEndDate').val('');
+        $modal.find('#requestItemNotes').val('');
+
+        // Snapshot the tab the requester is on so the controller can
+        // restore it on the post-submit redirect. Walks up to the
+        // enclosing .tab-pane and reads its id; the assets tab uses
+        // an API-backed row-formatter that emits the same
+        // data-active-tab attr on its request button (see
+        // assetRequestActionsFormatter) so this handler works there
+        // too without needing the DOM parent.
+        var explicitTab = $btn.data('active-tab');
+        var $tabPane = $btn.closest('.tab-pane');
+        var activeTab = explicitTab || ($tabPane.length ? $tabPane.attr('id') : '');
+        $modal.find('#requestItemActiveTab').val(activeTab || '');
+
+        $modal.modal('show');
+    });
+
     // confirm delete modal
-    $el.on('click', '.delete-asset', function (evnt) {
+    $el.on('click', '.delete-asset, .delete-custom-label', function (evnt) {
         var $context = $(this);
         var $dataConfirmModal = $('#dataConfirmModal');
-        var href = $context.attr('href');
+        // Anchors keep the URL in href; buttons keep it in data-href
+        // (buttons don't semantically support href per HTML5).
+        var href = $context.attr('data-href') || $context.attr('href');
         var message = $context.attr('data-content');
         var headericon = $context.attr('data-icon');
         var title = $context.attr('data-title');
@@ -149,8 +375,8 @@ $(function () {
         // deleteForm is the ID of the modal form itself
         $('#deleteForm').attr('action', href);
         $dataConfirmModal.find('.modal-header-icon').addClass(headericon);
-        $dataConfirmModal.find('.modal-title').text(title).prepend('<i class="fa ' + headericon + '"></i> ');
-        $dataConfirmModal.find('.modal-body').text(message);
+        $dataConfirmModal.find('.modal-title').text('').text(title).prepend('<i class="fa ' + headericon + '"></i> ');
+        $dataConfirmModal.find('.modal-body').text('').text(message);
         $dataConfirmModal.attr('action', href);
 
         // Fire the modal
@@ -167,22 +393,38 @@ $(function () {
      */
 
         $('select.select2:not(".select2-hidden-accessible")').each(function (i,obj) {
-            {
-                $(obj).select2();
+            var $obj = $(obj);
+            var options = {};
+            // Opt-out for fields where the built-in search box adds no value. Pass
+            // data-minimum-results-for-search="Infinity" (or a numeric
+            // threshold) on the <select> to hide it.
+            var minResults = $obj.data('minimum-results-for-search');
+            if (minResults !== undefined) {
+                options.minimumResultsForSearch = minResults === 'Infinity' ? Infinity : minResults;
             }
+            // Any select2 that lives inside a Bootstrap 3 modal has to be
+            // initialized with dropdownParent set to the modal, or the
+            // search input gets appended to <body> where Bootstrap 3's
+            // modal enforceFocus handler steals focus away from it. See
+            // the same fix on initLivewireSelect2 below for the full
+            // failure-mode explanation.
+            var $modal = $obj.closest('.modal');
+            if ($modal.length) {
+                options.dropdownParent = $modal;
+            }
+            $obj.select2(options);
         });
 
-
-    // $('.datepicker').datepicker();
-    // var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
-    // $.fn.bootstrapDP = datepicker;
-    // $('.datepicker').datepicker();
 
     // Crazy select2 rich dropdowns with images!
     $('.js-data-ajax').each( function (i,item) {
         var link = $(item);
         var endpoint = link.data("endpoint");
         var select = link.data("select");
+        // Same modal-detection as the plain select2 init above: scope the
+        // dropdown panel to any enclosing Bootstrap 3 modal so its search
+        // input doesn't get its focus stolen by the modal's enforceFocus.
+        var $modal = link.closest('.modal');
 
         link.select2({
 
@@ -192,6 +434,7 @@ $(function () {
              */
             placeholder: '',
             allowClear: true,
+            dropdownParent: $modal.length ? $modal : $(document.body),
             language: $('meta[name="language"]').attr('content'),
             dir: $('meta[name="language-direction"]').attr('content'),
             
@@ -209,8 +452,25 @@ $(function () {
                     var data = {
                         search: params.term,
                         page: params.page || 1,
-                        assetStatusType: link.data("asset-status-type"),
-                        companyId: link.data("company-id"),
+                        statusType: link.data("asset-status-type"),
+                        companyId: link.data("company-ids") || link.data("company-id"),
+                        excludeId: link.data("exclude-id"),
+                        excludeIds: link.data("exclude-ids"),
+                        // Pre-scope the hardware picker to a user's
+                        // assigned assets. Currently used by the
+                        // components-checkout screen when reached via
+                        // a /requests row (see the requesting_user
+                        // wiring in ComponentsController + the checkout
+                        // blade). The API endpoint gracefully falls
+                        // back to the unfiltered list when the target
+                        // user has no assigned assets, so an empty
+                        // pre-filter doesn't lock the admin out.
+                        assignedTo: link.data("assigned-to"),
+                        // When true, the companies selectlist marks child companies
+                        // (those with a parent of their own) as disabled — used by
+                        // the parent-company picker so users can't choose options
+                        // that would fail the parent_must_be_top_level validator.
+                        onlyTopLevel: link.data("only-top-level"),
                     };
                     return data;
                 },
@@ -234,6 +494,605 @@ $(function () {
             //templateSelection: formatDataSelection
         });
 
+    });
+
+    // Always-open scrolling checkbox list, backed by the
+    // same selectlist endpoints the select2 pickers use. Submits as a
+    // single hidden CSV via the ?all=1 helper so very large selections
+    // sidestep PHP's max_input_vars. See the x-input.select2-checkboxes-scrollbox
+    // blade component for consumer-side wiring.
+    $('.js-select2-checkboxes-scrollbox').each(function (i, item) {
+        var $root = $(item);
+        var endpoint = $root.data('endpoint');
+        var name = $root.data('name');
+        var compactSubmit = String($root.data('compact-submit')) === '1';
+        var $search = $root.find('.js-select2-checkboxes-scrollbox-search');
+        var $searchWrap = $root.find('.js-select2-checkboxes-scrollbox-search-wrap');
+        var $searchClear = $root.find('.js-select2-checkboxes-scrollbox-search-clear');
+        var $scroll = $root.find('.js-select2-checkboxes-scrollbox-scroll');
+        var $count = $root.find('.js-select2-checkboxes-scrollbox-count');
+        var $hidden = compactSubmit ? $('#' + $root.data('hidden')) : $();
+        var $arrayInputs = $root.find('.js-select2-checkboxes-scrollbox-array-inputs');
+        var $selectAllBtn = $root.find('.js-select2-checkboxes-scrollbox-selectall');
+        var $clearBtn = $root.find('.js-select2-checkboxes-scrollbox-clear');
+
+        // Set is the source of truth for the current selection. The
+        // visible rows are only presentation; a row that scrolls out
+        // of view (or is filtered out by a search) still contributes
+        // its id if it's in the set.
+        var initialIds;
+        if (compactSubmit) {
+            initialIds = ($hidden.val() || '').split(',');
+        } else {
+            initialIds = $arrayInputs.find('input').map(function () {
+                return this.value;
+            }).get();
+        }
+        var selected = new Set(initialIds.filter(function (v) {
+            return v;
+        }));
+        var page = 1;
+        var hasMore = true;
+        var searchTerm = '';
+        var loading = false;
+
+        function syncHiddenAndCount() {
+            if (compactSubmit) {
+                $hidden.val(Array.from(selected).join(','));
+            } else {
+                // Rebuild per-id hidden inputs so form submit posts
+                // name="X[]" entries. Cheaper than tracking adds/removes
+                // and the count is bounded by the scroll view.
+                $arrayInputs.empty();
+                selected.forEach(function (id) {
+                    var $input = $('<input type="hidden">');
+                    $input.attr('name', name + '[]');
+                    $input.attr('value', id);
+                    $arrayInputs.append($input);
+                });
+            }
+            // The template lives on data-template so repeat calls don't
+            // lose the {n} placeholder (which would freeze the count
+            // after the first update).
+            var countTemplate = $count.data('template') || '{n}';
+            $count.text(countTemplate.replace('{n}', selected.size).replace(':n', selected.size));
+        }
+
+        function renderRow(item) {
+            var isDisabled = !!item.disabled;
+            var $row = $(
+                '<label class="js-select2-checkboxes-scrollbox-row" role="option">' +
+                '<input type="checkbox" class="js-select2-checkboxes-scrollbox-tick">' +
+                '<span class="js-select2-checkboxes-scrollbox-image"></span>' +
+                '<span class="js-select2-checkboxes-scrollbox-label"></span>' +
+                '</label>',
+            );
+            $row.attr('data-item-id', item.id);
+            $row.attr('aria-selected', selected.has(String(item.id)) ? 'true' : 'false');
+            if (isDisabled) {
+                $row.addClass('js-select2-checkboxes-scrollbox-row-disabled');
+            }
+            var $tick = $row.find('.js-select2-checkboxes-scrollbox-tick');
+            $tick.prop('checked', selected.has(String(item.id)));
+            $tick.prop('disabled', isDisabled);
+            if (item.image) {
+                var $img = $('<img alt="">');
+                $img.attr('src', item.image);
+                $row.find('.js-select2-checkboxes-scrollbox-image').append($img);
+            }
+            else if (item.tag_color) {
+                var $sq = $('<i class="fa-solid fa-square" aria-hidden="true"></i>');
+                $sq.css('color', item.tag_color);
+                $row.find('.js-select2-checkboxes-scrollbox-image').append($sq);
+            }
+            $row.find('.js-select2-checkboxes-scrollbox-label').text(item.text);
+            return $row;
+        }
+
+        function fetchPage() {
+            if (loading || !hasMore) {
+                return;
+            }
+            loading = true;
+            $.ajax({
+                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                data: {
+                    page: page,
+                    search: searchTerm,
+                },
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+            }).done(function (response) {
+                (response.results || []).forEach(function (item) {
+                    $scroll.append(renderRow(item));
+                });
+                hasMore = !!(response.pagination && response.pagination.more);
+                page += 1;
+            }).always(function () {
+                loading = false;
+            });
+        }
+
+        function resetAndRefetch() {
+            page = 1;
+            hasMore = true;
+            $scroll.empty();
+            fetchPage();
+        }
+
+        $scroll.on('scroll', function () {
+            // Trigger the next page when we're within one screen of the
+            // bottom. Checking scrollHeight - scrollTop - clientHeight
+            // keeps the user from catching a blank patch during the
+            // request.
+            if (this.scrollHeight - this.scrollTop - this.clientHeight < this.clientHeight) {
+                fetchPage();
+            }
+        });
+
+        $scroll.on('change', '.js-select2-checkboxes-scrollbox-tick', function () {
+            var $row = $(this).closest('.js-select2-checkboxes-scrollbox-row');
+            if ($row.hasClass('js-select2-checkboxes-scrollbox-row-disabled')) {
+                $(this).prop('checked', false);
+                return;
+            }
+            var id = String($row.data('item-id'));
+            if (this.checked) {
+                selected.add(id);
+                $row.attr('aria-selected', 'true');
+            }
+            else {
+                selected.delete(id);
+                $row.attr('aria-selected', 'false');
+            }
+            syncHiddenAndCount();
+        });
+
+        var searchTimer;
+        function toggleSearchClear() {
+            $searchWrap.toggleClass('has-content', ($search.val() || '').length > 0);
+        }
+        toggleSearchClear();
+
+        $search.on('input', function () {
+            var self = this;
+            toggleSearchClear();
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(function () {
+                searchTerm = self.value || '';
+                resetAndRefetch();
+            }, 250);
+        });
+
+        $searchClear.on('click', function (e) {
+            e.preventDefault();
+            $search.val('').trigger('input');
+            $search.focus();
+        });
+
+        $selectAllBtn.on('click', function (e) {
+            e.preventDefault();
+            var payload = {
+                all: 1,
+                search: searchTerm,
+            };
+            var widgetCap = parseInt($root.data('max-select-all'), 10);
+            if (!isNaN(widgetCap) && widgetCap > 0) {
+                payload.cap = widgetCap;
+            }
+            $.ajax({
+                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                data: payload,
+                dataType: 'json',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+            }).done(function (response) {
+                (response.results || []).forEach(function (item) {
+                    if (item.disabled) {
+                        return;
+                    }
+                    selected.add(String(item.id));
+                });
+                $scroll.find('.js-select2-checkboxes-scrollbox-tick').each(function () {
+                    var $tick = $(this);
+                    var $row = $tick.closest('.js-select2-checkboxes-scrollbox-row');
+                    if ($row.hasClass('js-select2-checkboxes-scrollbox-row-disabled')) {
+                        return;
+                    }
+                    var id = String($row.data('item-id'));
+                    if (selected.has(id)) {
+                        $tick.prop('checked', true);
+                        $row.attr('aria-selected', 'true');
+                    }
+                });
+                syncHiddenAndCount();
+            });
+        });
+
+        $clearBtn.on('click', function (e) {
+            e.preventDefault();
+            selected.clear();
+            $scroll.find('.js-select2-checkboxes-scrollbox-tick').prop('checked', false);
+            $scroll.find('.js-select2-checkboxes-scrollbox-row').attr('aria-selected', 'false');
+            syncHiddenAndCount();
+        });
+
+        // Seed initial render.
+        syncHiddenAndCount();
+        fetchPage();
+    });
+
+    // Prototype: AJAX-paginated select2, multi-select, with a checkbox
+    // beside each result in the dropdown. The dropdown stays open on
+    // selection so admins can tick multiple items without the panel
+    // snapping shut after each click. Showing a plain count in the
+    // input area ("N selected") instead of the default tag pills.
+    //
+    // Opt in with class="js-select2-checkboxes" plus the same
+    // data-endpoint / data-company-id attributes the .js-data-ajax
+    // pickers use.
+    $('.js-select2-checkboxes').each(function (i, item) {
+        var link = $(item);
+        var endpoint = link.data('endpoint');
+        var $modal = link.closest('.modal');
+        var placeholder = link.data('placeholder') || '';
+        var countLabel = link.data('count-label') || '{n} selected';
+
+        link.select2({
+            placeholder: placeholder,
+            allowClear: false,
+            closeOnSelect: false,
+            dropdownParent: $modal.length ? $modal : $(document.body),
+            language: $('meta[name="language"]').attr('content'),
+            dir: $('meta[name="language-direction"]').attr('content'),
+            ajax: {
+                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                dataType: 'json',
+                delay: 250,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                data: function (params) {
+                    return {
+                        search: params.term,
+                        page: params.page || 1,
+                        companyId: link.data('company-ids') || link.data('company-id'),
+                        statusType: link.data('asset-status-type'),
+                        excludeId: link.data('exclude-id'),
+                        excludeIds: link.data('exclude-ids'),
+                        assignedTo: link.data('assigned-to'),
+                        onlyTopLevel: link.data('only-top-level'),
+                    };
+                },
+                cache: true,
+            },
+            templateResult: function (data) {
+                // "Searching..." / "Loading..." rows have no id and must
+                // render as plain text so select2's placeholder states
+                // keep working.
+                if (!data.id) {
+                    return data.text;
+                }
+                var isSelected = link.find('option[value="' + $.escapeSelector(String(data.id)) + '"]').prop('selected');
+                // formatDatalistSafe builds the image / tag-color + text
+                // markup every other picker uses. Wrap it with a leading
+                // checkbox. data-item-id lets later select2:select /
+                // select2:unselect handlers find this row by option id.
+                var $inner = formatDatalistSafe(data);
+                var $row = $(
+                    '<span class="js-select2-checkboxes-row">' +
+                    '<input type="checkbox" class="js-select2-checkboxes-tick" tabindex="-1" aria-hidden="true">' +
+                    '</span>',
+                );
+                $row.attr('data-item-id', data.id);
+                $row.find('.js-select2-checkboxes-tick').prop('checked', !!isSelected);
+                // Server-side disabled rows (e.g. parent-company picker
+                // blocking child companies) get the matching disabled
+                // affordance here. select2's native click-blocking
+                // handles the actual interaction via aria-disabled on
+                // its own wrapper. This just makes the row LOOK right.
+                if (data.disabled) {
+                    $row.addClass('js-select2-checkboxes-row-disabled');
+                    $row.find('.js-select2-checkboxes-tick').prop('disabled', true);
+                }
+                $row.append($inner);
+                return $row;
+            },
+            templateSelection: function () {
+                var count = (link.val() || []).length;
+                if (count === 0) {
+                    return placeholder;
+                }
+                return countLabel.replace('{n}', count);
+            },
+        });
+
+        // Checkbox-multiselect looks weird with select2's default tag
+        // pills under the input: the collapsed "N selected" label is
+        // the whole point. Collapse the pill container so templateSelection
+        // sits on its own baseline.
+        link.data('select2').$selection.addClass('js-select2-checkboxes-selection');
+
+        // Badge strip rendered under the control. The input area only
+        // shows a count ("3 selected") so without this the user can't
+        // see WHICH items are selected without opening the dropdown.
+        // Each badge carries an X button that unselects the matching
+        // option in-place.
+        var $badges = $('<div class="js-select2-checkboxes-badges" aria-live="polite"></div>');
+        link.after($badges);
+
+        // Cap the badge strip so a Select-All against hundreds of
+        // options doesn't fill the viewport. First N render in full,
+        // the remainder collapse into a single "+K more" chip that
+        // opens the dropdown for review / editing.
+        var badgeCap = parseInt(link.data('badge-cap'), 10);
+        if (isNaN(badgeCap) || badgeCap <= 0) {
+            badgeCap = 10;
+        }
+
+        function renderBadges() {
+            $badges.empty();
+            var $options = link.find('option:selected').filter(function () {
+                return $(this).val();
+            });
+            var total = $options.length;
+            $options.slice(0, badgeCap).each(function () {
+                var $opt = $(this);
+                var text = $opt.text();
+                var tagColor = $opt.attr('data-tag-color');
+                var $badge = $('<span class="label label-light js-select2-checkboxes-badge"></span>');
+                // Tag color mirrors CompanyPresenter::formattedNameLink
+                // and the other presenter outputs: a fa-solid fa-square
+                // icon with inline `color` set to the item's tag_color.
+                // Matching the presenter's shape means any site-wide
+                // restyle of tag squares applies to the badges automatically.
+                if (tagColor) {
+                    var $swatch = $('<i class="fa-solid fa-fw fa-square" aria-hidden="true"></i>');
+                    $swatch.css('color', tagColor);
+                    $badge.append($swatch);
+                    $badge.append(' ');
+                }
+                $badge.append(document.createTextNode(text + ' '));
+                var $x = $('<button type="button" class="js-select2-checkboxes-badge-remove" aria-label=""><span aria-hidden="true">&times;</span></button>');
+                $x.attr('aria-label', 'Remove ' + text);
+                $x.attr('data-item-id', $opt.val());
+                $badge.append($x);
+                $badges.append($badge);
+                $badges.append(' ');
+            });
+            if (total > badgeCap) {
+                var remainder = total - badgeCap;
+                var moreLabel = (link.data('more-label') || '+{n} more').replace('{n}', remainder);
+                var $more = $('<button type="button" class="label label-primary js-select2-checkboxes-more"></button>');
+                $more.text(moreLabel);
+                $badges.append($more);
+            }
+        }
+
+        $badges.on('click', '.js-select2-checkboxes-more', function (e) {
+            e.preventDefault();
+            link.select2('open');
+        });
+
+        $badges.on('click', '.js-select2-checkboxes-badge-remove', function (e) {
+            e.preventDefault();
+            var id = $(this).data('item-id');
+            link.find('option[value="' + $.escapeSelector(String(id)) + '"]').prop('selected', false);
+            link.trigger('change');
+        });
+
+        renderBadges();
+        link.on('change', renderBadges);
+
+        // Keep the dropdown's checkbox DOM in sync with the actual
+        // selection state. templateResult only runs when a row first
+        // renders, so a subsequent click (which updates the underlying
+        // <option> but not the already-rendered row) would otherwise
+        // leave the checkbox stale.
+        function flipTickFor(id, checked) {
+            var $row = $('.select2-dropdown .js-select2-checkboxes-row[data-item-id="' + $.escapeSelector(String(id)) + '"]');
+            $row.find('.js-select2-checkboxes-tick').prop('checked', checked);
+        }
+
+        link.on('select2:select', function (e) {
+            if (e.params && e.params.data) {
+                flipTickFor(e.params.data.id, true);
+                // Stash tag_color on the <option> so the badge strip
+                // under the input can render a matching swatch without
+                // re-querying the API. Re-render after stashing because
+                // select2 fires `change` BEFORE `select2:select`, so
+                // the first badge pass ran without this attribute.
+                if (e.params.data.tag_color) {
+                    link.find('option[value="' + $.escapeSelector(String(e.params.data.id)) + '"]').attr('data-tag-color', e.params.data.tag_color);
+                    renderBadges();
+                }
+            }
+        });
+
+
+        link.on('select2:unselect', function (e) {
+            if (e.params && e.params.data) {
+                flipTickFor(e.params.data.id, false);
+            }
+        });
+
+        // Opt-in Select All. Fires a single AJAX call with ?all=1 and
+        // the current search term so the server returns every matching
+        // row in one shot (bounded by the server-side cap in
+        // Helper::paginateCollectionOrAll). Clear All fires locally.
+        //
+        // The endpoint for the picker has to opt in on its side by
+        // switching paginateCollection -> paginateCollectionOrAll.
+        // Endpoints that have not opted in simply ignore ?all=1 and
+        // return the first paginated page, which the button still
+        // handles gracefully (just adds that page's results).
+        if (!link.data('select-all')) {
+            return;
+        }
+
+        link.on('select2:open', function () {
+            var $dropdown = $('.select2-dropdown').last();
+
+            // Capture-phase mousedown so already-selected rows toggle
+            // off on click. select2's own result handler fires in the
+            // bubble phase; stopping propagation here keeps it from
+            // re-processing a row we just deselected. Scoped to the
+            // currently-open dropdown so one component's listener
+            // can't intercept clicks on another.
+            var dropdownEl = $dropdown[0];
+            if (dropdownEl && ! dropdownEl.__cbMultiToggleBound) {
+                dropdownEl.__cbMultiToggleBound = true;
+                dropdownEl.addEventListener('mousedown', function (nativeEvent) {
+                    var row = nativeEvent.target.closest('.js-select2-checkboxes-row');
+                    if (! row) {
+                        return;
+                    }
+                    if (row.classList.contains('js-select2-checkboxes-row-disabled')) {
+                        return;
+                    }
+                    var id = row.getAttribute('data-item-id');
+                    var $opt = link.find('option[value="' + $.escapeSelector(String(id)) + '"]');
+                    if ($opt.prop('selected')) {
+                        nativeEvent.preventDefault();
+                        nativeEvent.stopPropagation();
+                        $opt.prop('selected', false);
+                        flipTickFor(id, false);
+                        link.trigger('change');
+                    }
+                }, true);
+            }
+
+            // select2's search field lives in different places depending
+            // on single vs multi: single puts it in the dropdown, multi
+            // puts it inline in the selection control. Look in both
+            // (prefer the dropdown copy when both exist, since that's the
+            // one the user types in when the panel is open).
+            var $search = $dropdown.find('.select2-search__field');
+            var $searchContainer;
+            if ($search.length) {
+                $searchContainer = $search.parent();
+            } else {
+                // Multi-select inline case. The literal parent is
+                // .select2-search--inline whose width tracks the typed
+                // text, so an absolutely-positioned clear × anchored to
+                // it slides left as the input shrinks. Anchor to the
+                // outer control instead (stable full-width box).
+                var $selection = link.data('select2').$selection;
+                $search = $selection.find('.select2-search__field');
+                $searchContainer = $selection.find('.select2-selection--multiple').first();
+                if (! $searchContainer.length) {
+                    $searchContainer = $selection;
+                }
+            }
+            if ($search.length) {
+                $search.attr('placeholder', $search.attr('placeholder') || link.data('search-placeholder') || 'Search');
+            }
+            if ($search.length && ! $searchContainer.find('.js-select2-checkboxes-search-clear').length) {
+                $searchContainer.addClass('js-select2-checkboxes-search-container');
+                var $clearSearch = $('<button type="button" class="js-select2-checkboxes-search-clear" aria-label="Clear search">&times;</button>');
+                $search.after($clearSearch);
+
+                function toggleClearSearch() {
+                    var value = $search.val();
+                    $searchContainer.toggleClass('has-content', typeof value === 'string' && value.length > 0);
+                }
+                toggleClearSearch();
+                $search.on('input', toggleClearSearch);
+                $clearSearch.on('mousedown', function (e) {
+                    // mousedown rather than click so this fires before
+                    // select2's own result-click handling swallows the
+                    // event.
+                    e.preventDefault();
+                    e.stopPropagation();
+                    $search.val('').trigger('input').trigger('keyup');
+                    $search.focus();
+                });
+            }
+
+            if ($dropdown.find('.js-select2-checkboxes-actions').length) {
+                return;
+            }
+            var $actions = $(
+                '<div class="js-select2-checkboxes-actions">' +
+                '<button type="button" class="btn btn-xs btn-default js-select2-checkboxes-selectall"></button> ' +
+                '<button type="button" class="btn btn-xs btn-default js-select2-checkboxes-clear"></button>' +
+                '</div>',
+            );
+            $actions.find('.js-select2-checkboxes-selectall').text(link.data('select-all-label') || 'Select all');
+            $actions.find('.js-select2-checkboxes-clear').text(link.data('clear-all-label') || 'Clear');
+            $dropdown.prepend($actions);
+
+            $actions.on('click', '.js-select2-checkboxes-selectall', function (e) {
+                e.preventDefault();
+                var $search = $dropdown.find('.select2-search__field');
+                var searchTerm = $search.val() || '';
+                var payload = {
+                    all: 1,
+                    search: searchTerm,
+                    companyId: link.data('company-ids') || link.data('company-id'),
+                };
+                // Per-widget ceiling via data-max-select-all. The server
+                // treats this as a suggestion that can only LOWER the
+                // effective cap, never raise it (see
+                // Helper::paginateCollectionOrAll), so a tampered DOM
+                // can't blow past MAX_UNPAGINATED.
+                var widgetCap = parseInt(link.data('max-select-all'), 10);
+                if (!isNaN(widgetCap) && widgetCap > 0) {
+                    payload.cap = widgetCap;
+                }
+                $.ajax({
+                    url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                    data: payload,
+                    dataType: 'json',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    },
+                }).done(function (response) {
+                    (response.results || []).forEach(function (item) {
+                        // Honor server-side disabled rows. The parent-
+                        // company picker returns child companies with
+                        // disabled: true and we must NOT silently flip
+                        // them selected via Select All just because they
+                        // appeared in the result set.
+                        if (item.disabled) {
+                            return;
+                        }
+                        if (link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').length === 0) {
+                            link.append(new Option(item.text, item.id, true, true));
+                        }
+                        else {
+                            link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').prop('selected', true);
+                        }
+                        if (item.tag_color) {
+                            link.find('option[value="' + $.escapeSelector(String(item.id)) + '"]').attr('data-tag-color', item.tag_color);
+                        }
+                        // Flip any already-rendered row's checkbox so the
+                        // open dropdown reflects the new selection state
+                        // without the user having to scroll past it to
+                        // retrigger a templateResult render.
+                        flipTickFor(item.id, true);
+                    });
+                    link.trigger('change');
+                    // change already re-rendered the badges; this second
+                    // pass picks up the tag_color attrs set in the loop
+                    // above since change-time didn't see them yet.
+                    renderBadges();
+                });
+            });
+
+            $actions.on('click', '.js-select2-checkboxes-clear', function (e) {
+                e.preventDefault();
+                link.val(null).trigger('change');
+                $dropdown.find('.js-select2-checkboxes-tick').prop('checked', false);
+            });
+        });
     });
 
 	function getSelect2Value(element) {
@@ -282,9 +1141,9 @@ $(function () {
 		
 		if(value && !noForceAjax && !isMouseUp) {
 			var endpoint = element.data("endpoint");
-			var assetStatusType = element.data("asset-status-type");
+            var statusType = element.data("asset-status-type");
 			$.ajax({
-				url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search='+value+'&page=1' + (assetStatusType ? '&assetStatusType='+assetStatusType : ''),
+                url: baseUrl + 'api/v1/' + endpoint + '/selectlist?search=' + value + '&page=1' + (statusType ? '&statusType=' + statusType : ''),
 				dataType: 'json',
 				headers: {
 					"X-Requested-With": 'XMLHttpRequest',
@@ -416,7 +1275,13 @@ $(function () {
     // This handles the radio button selectors for the checkout-to-foo options
     // on asset checkout and also on asset edit
     $(function() {
-        $('input[name=checkout_to_type]').on("change",function () {
+        var checkoutToTypeInputs = $('input[name=checkout_to_type]');
+
+        if (!checkoutToTypeInputs.length) {
+            return;
+        }
+
+        function syncCheckoutToTypeUi(resetSelections) {
             var assignto_type = $('input[name=checkout_to_type]:checked').val();
             var userid = $('#assigned_user option:selected').val();
 
@@ -427,9 +1292,10 @@ $(function () {
                 $('#assigned_location').hide();
                 $('.notification-callout').fadeOut();
 
-                $('[name="assigned_location"]').val('').trigger('change.select2');
-                $('[name="assigned_user"]').val('').trigger('change.select2');
-
+                if (resetSelections) {
+                    $('[name="assigned_location"]').val('').trigger('change.select2');
+                    $('[name="assigned_user"]').val('').trigger('change.select2');
+                }
             } else if (assignto_type == 'location') {
                 $('#current_assets_box').fadeOut();
                 $('#assigned_asset').hide();
@@ -437,10 +1303,11 @@ $(function () {
                 $('#assigned_location').show();
                 $('.notification-callout').fadeOut();
 
-                $('[name="assigned_asset"]').val('').trigger('change.select2');
-                $('[name="assigned_user"]').val('').trigger('change.select2');
-            } else  {
-
+                if (resetSelections) {
+                    $('[name="assigned_asset"]').val('').trigger('change.select2');
+                    $('[name="assigned_user"]').val('').trigger('change.select2');
+                }
+            } else {
                 $('#assigned_asset').hide();
                 $('#assigned_user').show();
                 $('#assigned_location').hide();
@@ -449,10 +1316,35 @@ $(function () {
                 }
                 $('.notification-callout').fadeIn();
 
-                $('[name="assigned_asset"]').val('').trigger('change.select2');
-                $('[name="assigned_location"]').val('').trigger('change.select2');
+                if (resetSelections) {
+                    $('[name="assigned_asset"]').val('').trigger('change.select2');
+                    $('[name="assigned_location"]').val('').trigger('change.select2');
+                }
             }
+        }
+
+        checkoutToTypeInputs.on('change', function () {
+            syncCheckoutToTypeUi(true);
         });
+
+        // Expose so pages that reveal #assignto_selector later (asset edit's
+        // user_add() flow, etc.) can trigger the sync once the selector is
+        // visible. Standalone checkout pages don't need to call this — the
+        // initial-render block below handles them.
+        window.snipeitSyncCheckoutToTypeUi = syncCheckoutToTypeUi;
+
+        // Apply the current radio selection on initial render unless the page
+        // has explicitly hidden the selector via an inline style="display:none"
+        // (asset create/edit start that way and reveal it from user_add() after
+        // a deployability AJAX call). Using getAttribute('style') instead of
+        // jQuery's :visible avoids false negatives on pages like the standalone
+        // /hardware/{id}/checkout, where the selector is visible from the start
+        // but :visible can transiently return false during select2 boot — that
+        // was what hid the acceptance-options callout until a radio was toggled.
+        var selectorStyle = ($('#assignto_selector').attr('style') || '').toLowerCase();
+        if (selectorStyle.indexOf('display:none') === -1 && selectorStyle.indexOf('display: none') === -1) {
+            syncCheckoutToTypeUi(false);
+        }
     });
 
 
@@ -481,6 +1373,345 @@ $(function () {
         history.pushState(null, null, href);
         e.preventDefault();
         $('a[href="' + $(this).attr('href') + '"]').tab('show');
+    });
+
+    // Tables inside a hidden tab pane initialize with a zero-width
+    // container, so their column widths and any sticky-column offsets
+    // computed from those widths never recover on their own once the
+    // pane becomes visible. Force a resetView on any snipe-tables
+    // inside the newly-shown pane so column widths + sticky offsets
+    // re-measure against the now-visible container.
+    $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+        var pane = $(e.target).attr('href');
+        if (!pane) return;
+        $(pane).find('.snipe-table').each(function () {
+            if ($(this).data('bootstrap.table')) {
+                $(this).bootstrapTable('resetView');
+            }
+        });
+    });
+
+    /*
+     * Conditional field visibility for schema-driven forms.
+     *
+     * Any element carrying data-visible-when-field and data-visible-when-value
+     * (comma-separated for multi-value) is shown when the source field's
+     * current value matches, hidden otherwise. Powers the auth-method
+     * show/hide on the sync-adapter credentials pages so the Basic Auth
+     * inputs don't render when the admin picked Bearer, etc. Fully
+     * data-attribute driven, no per-partial JS required.
+     */
+    function applyAdapterConditionalVisibility() {
+        document.querySelectorAll('[data-visible-when-field]').forEach(function (target) {
+            var sourceName = target.getAttribute('data-visible-when-field');
+            var acceptedValues = String(target.getAttribute('data-visible-when-value') || '').split(',');
+            var source = document.querySelector('[name="' + sourceName + '"]');
+            if (!source) return;
+            target.style.display = acceptedValues.indexOf(source.value) !== -1 ? '' : 'none';
+        });
+    }
+
+    // Bind change listeners against the unique set of source-field names
+    // referenced by any conditional target on the page. jQuery here
+    // because select2 forwards change events through jQuery, so plain
+    // addEventListener would miss the auth-method dropdown's own picks.
+    var __adapterConditionalSources = {};
+    document.querySelectorAll('[data-visible-when-field]').forEach(function (target) {
+        __adapterConditionalSources[target.getAttribute('data-visible-when-field')] = true;
+    });
+    Object.keys(__adapterConditionalSources).forEach(function (name) {
+        $('[name="' + name + '"]').on('change', applyAdapterConditionalVisibility);
+    });
+    applyAdapterConditionalVisibility();
+    // Re-apply after a tab becomes visible. select2 sizing and hidden-
+    // tab state can leave the initial pass stale on tabs the admin
+    // hadn't clicked yet.
+    $('body').on('shown.bs.tab', 'a[data-toggle="tab"]', applyAdapterConditionalVisibility);
+
+    /*
+     * Live-update the "Base URL:" prefix addon on any pull_path /
+     * push_path input for custom sync adapters as the admin types into the
+     * Base URL input.
+     * Each addon carries data-adapter-slug so multiple adapter tabs
+     * update independently, and data-placeholder holds the "Base URL:"
+     * fallback text the server rendered when the URL was blank on
+     * first load (so localizers only touch a lang file, not this JS).
+     */
+    document.querySelectorAll('.js-adapter-url-prefix').forEach(function (addon) {
+        var slug = addon.getAttribute('data-adapter-slug');
+        if (!slug) return;
+        var input = document.querySelector('input[name="' + slug + '_url"]');
+        if (!input) return;
+        var placeholder = addon.getAttribute('data-placeholder') || '';
+        input.addEventListener('input', function () {
+            addon.textContent = input.value || placeholder;
+        });
+    });
+
+    /*
+     * Inline refresh for sync-adapter remote-sourced selects.
+     *
+     * A select field whose schema declares refresh_route_name +
+     * depends_on gets a .js-sync-adapter-refresh-select button
+     * next to it. The admin fills the dependent fields (URL + API key
+     * for UniFi, etc.), clicks the button, and the vendor's list of
+     * valid values populates the select without a page save/reload.
+     * Lets a brand-new adapter discover its tenant / site / workspace
+     * before anything is persisted.
+     *
+     * Button attributes:
+     *   data-refresh-endpoint — POST URL that returns JSON
+     *   data-target-field     — name attribute of the select to repopulate
+     *   data-depends-on       — JSON {payloadKey: siblingFieldName} map
+     *   data-response-key     — JSON key under which the server returns
+     *                           the array of {id, label} entries
+     */
+    document.querySelectorAll('.js-sync-adapter-refresh-select').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            var endpoint = btn.getAttribute('data-refresh-endpoint');
+            var targetField = btn.getAttribute('data-target-field');
+            var responseKey = btn.getAttribute('data-response-key') || 'items';
+            var dependsOn = {};
+            try {
+                dependsOn = JSON.parse(btn.getAttribute('data-depends-on') || '{}');
+            } catch (err) {
+                dependsOn = {};
+            }
+
+            var payload = {};
+            Object.keys(dependsOn).forEach(function (payloadKey) {
+                var siblingName = dependsOn[payloadKey];
+                var $el = $('[name="' + siblingName + '"]');
+                if ($el.length) {
+                    payload[payloadKey] = $el.val();
+                }
+            });
+
+            var $icon = $(btn).find('i');
+            var originalClass = $icon.attr('class');
+            $icon.attr('class', 'fa-solid fa-spinner fa-spin');
+            btn.disabled = true;
+
+            $.ajax({
+                url: endpoint,
+                method: 'POST',
+                data: payload,
+                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+            }).done(function (response) {
+                var $select = $('[name="' + targetField + '"]');
+                var currentVal = $select.val();
+                var items = (response && response[responseKey]) || [];
+                $select.find('option').remove();
+                items.forEach(function (item) {
+                    $select.append(new Option(item.label, item.id));
+                });
+                if (currentVal && $select.find('option[value="' + currentVal + '"]').length) {
+                    $select.val(currentVal);
+                }
+                $select.trigger('change');
+            }).fail(function (xhr) {
+                var msg = (xhr && xhr.responseJSON && xhr.responseJSON.error) || 'Refresh failed';
+                window.alert(msg);
+            }).always(function () {
+                $icon.attr('class', originalClass);
+                btn.disabled = false;
+            });
+        });
+    });
+
+    /*
+     * Pull Now / Push Now submit spinner + double-click guard.
+     *
+     * Any <form class="js-sync-action-form"> gets a submit handler
+     * that swaps the cloud icon on its <button.js-sync-action-button>
+     * for a spinner and disables every sync-action button on the
+     * page. Admins with slower fleets don't panic-click while the
+     * request is in flight, and they can't fire Push while Pull is
+     * running on the same instance.
+     */
+    document.querySelectorAll('form.js-sync-action-form').forEach(function (form) {
+        form.addEventListener('submit', function () {
+            var btn = form.querySelector('button.js-sync-action-button');
+            if (!btn || btn.disabled) return;
+            var icon = btn.querySelector('.js-sync-action-icon');
+            if (icon) {
+                icon.className = 'fa-solid fa-spinner fa-spin js-sync-action-icon';
+            }
+            btn.disabled = true;
+            document.querySelectorAll('button.js-sync-action-button').forEach(function (other) {
+                other.disabled = true;
+            });
+        });
+    });
+
+    /*
+     * Generic dirty-form guard.
+     *
+     * Any <form data-dirty-guard id="my-form"> is watched for changes.
+     * Any element (usually a button) elsewhere on the page carrying
+     * data-dirty-guarded-by="my-form" gets disabled while the form is
+     * dirty and re-enabled when the values revert to the initial
+     * snapshot. Useful anywhere the page has an "act on saved state"
+     * control that would silently run against the OLD state if
+     * clicked with pending edits (sync-adapter Pull/Push, etc)
+     *
+     * Attributes:
+     *   - data-dirty-guard              (form) opt-in marker
+     *   - data-dirty-guard-warning      (form, optional) tooltip text
+     *                                   set on guarded buttons when
+     *                                   they are disabled by this
+     *                                   guard. Defaults to a generic
+     *                                   "Save your changes first"
+     *                                   English fallback so a caller
+     *                                   that forgets to localize still
+     *                                   gets a usable hint.
+     *   - data-dirty-guarded-by="{id}"  (button/element) declares
+     *                                   which form it's guarded by,
+     *                                   matched against the form's id.
+     *
+     * The guard only touches buttons that were enabled server-side.
+     * A data-dirty-guard-disabled marker on the button records OUR
+     * override so a revert re-enables only what we disabled, leaving
+     * server-side `disabled` attributes intact.
+     */
+    document.querySelectorAll('form[data-dirty-guard]').forEach(function (form) {
+        var formId = form.id;
+        if (!formId) return;
+        var warning = form.getAttribute('data-dirty-guard-warning') || 'Save your changes first.';
+
+        function findGuardedElements() {
+            return document.querySelectorAll('[data-dirty-guarded-by="' + formId + '"]');
+        }
+
+        function serialize() {
+            // FormData enumerates named inputs as they currently sit,
+            // so this catches select changes, textarea edits, and any
+            // input-event that fires. Sort by key for stability across
+            // browsers that iterate FormData in insertion order vs
+            // document order.
+            var entries = [];
+            new FormData(form).forEach(function (v, k) {
+                entries.push(k + '\0' + v);
+            });
+            entries.sort();
+            return entries.join('\n');
+        }
+
+        // Defer the initial snapshot to next tick so any init-time
+        // form mutations (select2 syncing hidden values, custom
+        // widgets, dynamic show/hide picking initial visibility) have
+        // settled before we lock in the baseline.
+        var initialState = null;
+        setTimeout(function () {
+            initialState = serialize();
+        }, 0);
+        var currentlyDirty = false;
+
+        function reevaluate() {
+            if (initialState === null) return;
+            var nowDirty = serialize() !== initialState;
+            if (nowDirty === currentlyDirty) return;
+            currentlyDirty = nowDirty;
+            findGuardedElements().forEach(function (el) {
+                if (nowDirty) {
+                    if (!el.disabled) {
+                        el.disabled = true;
+                        el.setAttribute('data-dirty-guard-disabled', '1');
+                        el.setAttribute('title', warning);
+                    }
+                }
+                else if (el.getAttribute('data-dirty-guard-disabled') === '1') {
+                    el.disabled = false;
+                    el.removeAttribute('data-dirty-guard-disabled');
+                    el.removeAttribute('title');
+                }
+            });
+        }
+
+        form.addEventListener('input', reevaluate);
+        form.addEventListener('change', reevaluate);
+    });
+
+    /*
+     * Breadcrumb tab-label append.
+     *
+     * Any <a data-toggle="tab" data-breadcrumb-label="Fleet"> extends
+     * the page's breadcrumb trail with its label as a leaf crumb when
+     * that tab is active. The first time a label is appended, the
+     * previously-active leaf gets converted to a link back to the
+     * current pathname (no query string) so admins can click back to
+     * the "no tab selected" default. Non-labeled tabs restore the
+     * server-rendered leaf.
+     *
+     * Opt in on any page by adding the attribute to individual tab
+     * links. Pages with no labeled tabs skip the handler entirely.
+     */
+    if (document.querySelector('[data-toggle="tab"][data-breadcrumb-label]')) {
+        var breadcrumbLeaf = document.querySelector('.content-header .breadcrumb-item.active');
+        if (breadcrumbLeaf) {
+            var breadcrumbBaseText = breadcrumbLeaf.textContent.trim();
+            var breadcrumbBasePath = window.location.pathname;
+            var breadcrumbAppendedLeaf = null;
+
+            var setBreadcrumbTabLeaf = function (label) {
+                if (!label) {
+                    if (breadcrumbAppendedLeaf) {
+                        breadcrumbAppendedLeaf.remove();
+                        breadcrumbAppendedLeaf = null;
+                        breadcrumbLeaf.innerHTML = '';
+                        breadcrumbLeaf.textContent = breadcrumbBaseText;
+                        breadcrumbLeaf.classList.add('active');
+                    }
+                    return;
+                }
+                if (!breadcrumbAppendedLeaf) {
+                    breadcrumbLeaf.classList.remove('active');
+                    breadcrumbLeaf.innerHTML = '';
+                    var link = document.createElement('a');
+                    link.href = breadcrumbBasePath;
+                    link.textContent = breadcrumbBaseText;
+                    var chevron = document.createElement('i');
+                    chevron.className = 'fa fa-angle-right';
+                    breadcrumbLeaf.append(link, ' ', chevron);
+                    breadcrumbAppendedLeaf = document.createElement('li');
+                    breadcrumbAppendedLeaf.className = 'breadcrumb-item active';
+                    breadcrumbLeaf.parentNode.appendChild(breadcrumbAppendedLeaf);
+                }
+                breadcrumbAppendedLeaf.textContent = label;
+            };
+
+            var initialLabeledActive = document.querySelector('li.active > [data-toggle="tab"][data-breadcrumb-label]');
+            if (initialLabeledActive) {
+                setBreadcrumbTabLeaf(initialLabeledActive.getAttribute('data-breadcrumb-label'));
+            }
+
+            document.querySelectorAll('[data-toggle="tab"]').forEach(function (tab) {
+                $(tab).on('shown.bs.tab', function (e) {
+                    setBreadcrumbTabLeaf(e.target.getAttribute('data-breadcrumb-label'));
+                });
+            });
+        }
+    }
+
+    // Same story for viewport resizes: bootstrap-table caches column
+    // widths from the initial layout and doesn't recompute when the
+    // window width changes. Debounce so a drag-resize doesn't fire
+    // resetView on every intermediate pixel.
+    var snipeTableResizeTimer;
+    $(window).on('resize', function () {
+        clearTimeout(snipeTableResizeTimer);
+        snipeTableResizeTimer = setTimeout(function () {
+            $('.snipe-table').each(function () {
+                if ($(this).data('bootstrap.table')) {
+                    $(this).bootstrapTable('resetView');
+                }
+            });
+        }, 150);
     });
 
     // ------------------------------------------------
@@ -579,6 +1810,182 @@ function htmlEntities(str) {
     
 })(jQuery);
 
+$(document).ready(function () {
+    // Password-reveal eye. data-toggle is a jQuery selector — usually one
+    // input id, but a multi-selector like "#password, #password_confirm"
+    // lets a single click flip every matched input at once (the confirm
+    // field on the user create/edit form uses this so revealing the
+    // password reveals its confirmation too). Every .toggle-password
+    // sharing the same data-toggle string flips its icon together so the
+    // eye state doesn't visually drift between the two addons.
+    $(document).on('click', '.toggle-password', function () {
+        var toggleTarget = $(this).attr('data-toggle');
+        var $inputs = $(toggleTarget);
+        var reveal = $inputs.first().attr('type') === 'password';
+        $inputs.attr('type', reveal ? 'text' : 'password');
+        var $eyes = $('.toggle-password[data-toggle="' + toggleTarget + '"]');
+        $eyes.toggleClass('fa-eye', ! reveal);
+        $eyes.toggleClass('fa-eye-slash', reveal);
+    });
+
+    // Auto-init eonasdan datetimepickers. bootstrap-datepicker has a native
+    // data-provide auto-init. eonasdan does not, so we do it ourselves.
+    // Options are read from data-attributes on the wrapper so blade components
+    // can tune format/side-by-side without touching this JS.
+    //
+    // Icon set is overridden to Font Awesome — the picker defaults to
+    // Glyphicon classes, which we do not ship, so up/down arrows and clock
+    // glyphs would otherwise render as empty boxes.
+    // Exposed so callers who insert new [data-provide="datetimepicker"]
+    // wrappers into the DOM post-load (e.g., AJAX-loaded custom fields on
+    // asset create/edit when the model changes) can re-run the init on the
+    // freshly-inserted elements. Pass a jQuery scope to narrow the search;
+    // omit to init every uninitialised picker on the page.
+    window.snipeitInitDatetimepickers = function (scope) {
+        var $targets = scope ? $(scope).find('[data-provide="datetimepicker"]') : $('[data-provide="datetimepicker"]');
+        $targets.each(initDatetimepicker);
+    };
+
+    function initDatetimepicker() {
+        var $wrapper = $(this);
+        // Skip if this wrapper already has an eonasdan instance attached
+        // (data('DateTimePicker') is set by the library on init).
+        if ($wrapper.data('DateTimePicker')) {
+            return;
+        }
+        var $input = $wrapper.find('input');
+        var existingValue = ($input.val() || '').trim();
+
+        var options = {
+            format: $wrapper.data('format') || 'YYYY-MM-DD HH:mm:ss',
+            // Default to the compact (collapsed) view — calendar shows first
+            // and a small clock icon toggles the time view. Callers that want
+            // date + time visible side by side can set data-side-by-side="true".
+            sideBySide: $wrapper.data('side-by-side') === true,
+            showClear: true,
+            showClose: true,
+            showTodayButton: true,
+            // In sideBySide mode the toolbar row (Today/Clear/Close) is only
+            // rendered when placement is explicitly 'top' or 'bottom'; the
+            // library drops it entirely on the default 'default' placement.
+            toolbarPlacement: 'bottom',
+            // Open the popup on any focus/click of the input (not just the
+            // calendar addon icon), matching the behavior of the bootstrap
+            // datepicker used elsewhere in the app.
+            allowInputToggle: true,
+            locale: $wrapper.data('locale') || 'en',
+            icons: {
+                time: 'fa-regular fa-clock',
+                date: 'fa-regular fa-calendar',
+                up: 'fa-solid fa-chevron-up',
+                down: 'fa-solid fa-chevron-down',
+                previous: 'fa-solid fa-chevron-left',
+                next: 'fa-solid fa-chevron-right',
+                today: 'fa-solid fa-calendar-day',
+                clear: 'fa-solid fa-trash',
+                close: 'fa-solid fa-xmark',
+            },
+        };
+
+        // Pre-fill empty inputs with the user's current local datetime by
+        // default. Callers that render a picker where "now" is NOT a safe
+        // default (e.g., user-defined custom fields) can opt out by setting
+        // data-default-now="false" on the wrapper.
+        var wantsDefaultNow = $wrapper.data('default-now') !== false;
+        if (existingValue === '' && wantsDefaultNow) {
+            options.defaultDate = moment();
+        }
+
+        // data-max-date="today" caps the picker at today (replaces the
+        // bootstrap-datepicker era's data-date-end-date="0d"); any other
+        // value is parsed as a moment-compatible date string.
+        var maxDate = $wrapper.data('max-date');
+        if (maxDate) {
+            options.maxDate = maxDate === 'today' ? moment().endOf('day') : moment(maxDate);
+        }
+
+        $wrapper.datetimepicker(options);
+    }
+
+    // Wires up the linked-pickers pattern for <x-input.date-range>. Each
+    // .js-date-range wrapper holds a .js-date-range-start and .js-date-range-end
+    // datetimepicker; changing one bounds the other so a user can't pick an
+    // end date before the start (or vice versa). Runs after the plain
+    // datetimepicker init above so both instances already exist.
+    function initDateRangeLinking() {
+        $('.js-date-range').each(function () {
+            var $start = $(this).find('.js-date-range-start');
+            var $end = $(this).find('.js-date-range-end');
+            if (!$start.length || !$end.length) {
+                return;
+            }
+            $start.off('dp.change.snipeitDateRange').on('dp.change.snipeitDateRange', function (e) {
+                var picker = $end.data('DateTimePicker');
+                if (picker) {
+                    picker.minDate(e.date);
+                }
+            });
+            $end.off('dp.change.snipeitDateRange').on('dp.change.snipeitDateRange', function (e) {
+                var picker = $start.data('DateTimePicker');
+                if (picker) {
+                    picker.maxDate(e.date);
+                }
+            });
+        });
+    }
+
+    // Push the app's "week starts on" setting into moment's active locale so
+    // the eonasdan datetimepicker (which reads firstDayOfWeek from moment
+    // locale data, not from its own options) opens with the calendar column
+    // order the admin picked in Localization settings. Runs once before any
+    // picker is initialized; downstream code that formats using moment's w/W
+    // tokens will pick up the same value.
+    if (window.snipeit && window.snipeit.settings && typeof window.snipeit.settings.first_day_of_week === 'number') {
+        moment.updateLocale(moment.locale(), { week: { dow: window.snipeit.settings.first_day_of_week } });
+    }
+
+    // MAC-address input mask. Custom fields with format=MAC render as
+    // plain text inputs; without a mask the user only discovers the
+    // required colon-separated shape (see \App\Rules\MacEncrypted)
+    // after a failed submit. The mask strips every non-hex character
+    // on input, uppercases A-F, and re-inserts a colon after every
+    // second character, so common paste shapes (hyphen-separated from
+    // Windows ipconfig, Cisco-dotted aabb.ccdd.eeff, bare hex,
+    // space-separated) all normalize to the canonical AA:BB:CC:DD:EE:FF
+    // form the backend expects.
+    //
+    // Exposed on window (matching snipeitInitDatetimepickers above) so
+    // the asset edit form's AJAX custom-fields-reload handler can
+    // re-init the mask on inputs that only exist after the model
+    // changes and a fresh custom_fields_form.blade.php partial is
+    // swapped into place. Pass a jQuery selector or DOM node to narrow
+    // the scope; omit to init every .mac-address-input on the page.
+    //
+    // The .mac-address-input class is applied in resources/views/models/
+    // custom_fields_form.blade.php on both text-input branches
+    // (format-icon wrapper AND bare input) when $field->format === 'MAC'.
+    window.snipeitInitMacAddressMask = function (scope) {
+        var $targets = scope ? $(scope).find('.mac-address-input') : $('.mac-address-input');
+        $targets
+            .off('input.snipeitMacMask')
+            .on('input.snipeitMacMask', function () {
+                // Trim leading/trailing whitespace first so a paste like
+                // "  AA:BB:CC:DD:EE:FF\n" from a spreadsheet cell doesn't
+                // eat one of the trailing hex chars into the substring cap.
+                var hex = this.value
+                    .trim()
+                    .toUpperCase()
+                    .replace(/[^0-9A-F]/g, '')
+                    .substring(0, 12);
+                this.value = hex.match(/.{1,2}/g)?.join(':') || '';
+            });
+    };
+
+    window.snipeitInitDatetimepickers();
+    initDateRangeLinking();
+    window.snipeitInitMacAddressMask();
+});
+
 
 
 /**
@@ -591,8 +1998,34 @@ function htmlEntities(str) {
  * 3. Add an attribute called 'data-livewire-component' that points to $this->getId() (via `{{ }}` if you're in a blade,
  *    or just $this->getId() if not).
  */
+// Any livewire-select2 that lives inside a Bootstrap 3 modal has to be
+// initialized with dropdownParent set to the modal, or the search input
+// gets appended to <body> where Bootstrap 3's modal enforceFocus handler
+// immediately steals focus away from it - the dropdown opens, the search
+// field renders, but typing does nothing because focus keeps snapping
+// back into the modal on every keydown. Elements not in a modal get a
+// plain init. Callers with fussier requirements (custom width, template,
+// etc.) can still init select2 manually; this handler only touches
+// elements that don't already have select2 wired up (guarded by the
+// .select2-hidden-accessible class select2 adds after init).
+function initLivewireSelect2($scope) {
+    var $root = $scope && $scope.length ? $scope : $(document);
+    $root.find('.livewire-select2').each(function () {
+        var $el = $(this);
+        if ($el.hasClass('select2-hidden-accessible')) {
+            return;
+        }
+        var opts = {};
+        var $modal = $el.closest('.modal');
+        if ($modal.length) {
+            opts.dropdownParent = $modal;
+        }
+        $el.select2(opts);
+    });
+}
+
 document.addEventListener('livewire:init', () => {
-    $('.livewire-select2').select2()
+    initLivewireSelect2();
 
     $(document).on('select2:select', '.livewire-select2', function (event) {
         var target = $(event.target)
@@ -601,16 +2034,27 @@ document.addEventListener('livewire:init', () => {
             console.error("For data-livewire-component, you probably want to use $this->getId() or {{ $this->getId() }}, as appropriate")
             return false
         }
+        // PHP property names cannot start with a digit — skip bare numeric names (e.g. "0") that would cause a 500
+        if (/^\d+$/.test(event.target.name)) {
+            console.error("Livewire select2: name attribute '" + event.target.name + "' is not a valid Livewire property name — skipping")
+            return false
+        }
         Livewire.find(target.data('livewire-component')).set(event.target.name, this.options[this.selectedIndex].value)
     });
 
-    Livewire.hook('request', ({succeed}) => {
-        succeed(() => {
-            queueMicrotask(() => {
-                $('.livewire-select2').select2();
-            });
+  Livewire.interceptMessage(({ onFinish }) => {
+    onFinish(() => {
+      // Runs after DOM morph completes (or on error/cancel). Livewire
+      // replaces the plain <select> nodes on morph, so a re-init picks
+      // up any that lost their select2 wrapper in the swap. The
+      // already-init guard inside initLivewireSelect2 keeps unchanged
+      // elements untouched.
+        queueMicrotask(() => {
+          initLivewireSelect2();
         });
-    });
+      });
+    }
+  );
 });
 
 
@@ -785,3 +2229,572 @@ $.fn.sort_select_box = function(){
     // clearing any selections
     $("#"+this.attr('id')+" option").attr('selected', true);
 }
+
+
+/*
+ * Data-attribute driven initializers. Blades attach behavior by adding
+ * `data-toggle="..."` (plus supporting data-* attributes) to elements
+ * instead of shipping an inline <script> block. Add new handlers here
+ * as inline scripts get migrated out of blades.
+ */
+$(function () {
+
+    // Sound preview on account/profile. Fires the URL in data-sound-url
+    // when the user toggles the checkbox on.
+    $(document).on('click', '[data-toggle="sound-test"]', function () {
+        if (!$(this).is(':checked')) return;
+        var url = $(this).data('sound-url');
+        if (!url) return;
+        new Audio(url).play();
+    });
+
+    // Confetti preview on account/profile. Same shape as sound-test.
+    $(document).on('click', '[data-toggle="confetti-test"]', function () {
+        if (!$(this).is(':checked')) return;
+
+        var duration = 1500;
+        var animationEnd = Date.now() + duration;
+        var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+        function randomInRange(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        var interval = setInterval(function () {
+            var timeLeft = animationEnd - Date.now();
+            if (timeLeft <= 0) {
+                return clearInterval(interval);
+            }
+            var particleCount = 50 * (timeLeft / duration);
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+            });
+            confetti({
+                ...defaults,
+                particleCount,
+                origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+            });
+        }, 250);
+    });
+
+    // Live color preview for the nav-link colorpicker on account/profile.
+    // The colorpicker widget itself is initialized by $(".color").colorpicker()
+    // in the default layout; this just wires the changeColor listener.
+    if ($('#nav-link-color').length) {
+        $('#nav-link-color').on('changeColor', function (e) {
+            var color = e.color.toString('rgba');
+            $('.navbar-nav > li > a:link').attr('style', 'color: ' + color + ' !important');
+            $('.btn-theme').attr('style', 'color: ' + color + ' !important');
+        });
+    }
+
+    // Branding settings page: live preview + reset for the four tenant
+    // colorpickers. The pickers themselves are initialized by the global
+    // $(".color").colorpicker() call in the default layout; this only wires
+    // the changeColor listeners and the reset button. Guarded on the reset
+    // button ID so it only runs on Settings > Branding, not on every page
+    // that happens to have a #header-color or #nav-link-color widget.
+    //
+    // Only header + nav-link get live preview. Link light/dark previews are
+    // deliberately skipped: they would recolor the buttons and other UI on
+    // this form itself, which can make it unreadable if the operator picks
+    // a low-contrast color. Those two settings just save and take effect on
+    // reload.
+    if (document.getElementById('branding-colors-reset')) {
+        var BRANDING_DEFAULTS = {
+            header_color: '#3c8dbc',
+            nav_link_color: '#ffffff',
+            link_light_color: '#296282',
+            link_dark_color: '#5fa4cc',
+        };
+
+        // Live preview works by writing the tenant CSS variables inline on
+        // <html>. Inline element style beats the :root and [data-theme]
+        // declarations in overrides.less on specificity, so this works even
+        // for the many rules those declarations lock in with !important.
+        var applyBrandingHeader = function (color) {
+            document.documentElement.style.setProperty('--main-theme-color', color);
+        };
+
+        var applyBrandingNavLink = function (color) {
+            document.documentElement.style.setProperty('--btn-theme-text-color', color);
+            document.documentElement.style.setProperty('--nav-hover-text-color', color);
+            document.documentElement.style.setProperty('--nav-primary-text-color', color);
+        };
+
+        $('#header-color').on('changeColor', function (e) {
+            applyBrandingHeader(e.color.toString('rgba'));
+        });
+
+        $('#nav-link-color').on('changeColor', function (e) {
+            applyBrandingNavLink(e.color.toString('rgba'));
+        });
+
+        // Reset: restore each picker's swatch and input to the stock
+        // defaults. Using setValue on the plugin (not just .val() on the
+        // input) fires the plugin's internal changeColor event, which
+        // re-runs applyBrandingHeader / applyBrandingNavLink automatically.
+        $('#branding-colors-reset').on('click', function () {
+            $('#header-color').colorpicker('setValue', BRANDING_DEFAULTS.header_color);
+            $('#nav-link-color').colorpicker('setValue', BRANDING_DEFAULTS.nav_link_color);
+            $('#link-light-color').colorpicker('setValue', BRANDING_DEFAULTS.link_light_color);
+            $('#link-dark-color').colorpicker('setValue', BRANDING_DEFAULTS.link_dark_color);
+        });
+    }
+
+    // Reset the localStorage theme override when the user clicks the
+    // "system default" link (any element carrying data-theme-toggle-clear).
+    document.querySelectorAll('[data-theme-toggle-clear]').forEach(function (el) {
+        el.addEventListener('click', function () {
+            localStorage.removeItem('theme');
+        });
+    });
+
+    // Master checkbox → target field disabled state. Callers pair a
+    // <input type="checkbox" data-toggle="disable-when-unchecked"
+    // data-disable-target="#some-field"> with a target rendered
+    // server-side with the matching @disabled state (avoids FOUC).
+    // Handler keeps them in sync on change.
+    $(document).on('change', '[data-toggle="disable-when-unchecked"]', function () {
+        var target = $(this).data('disable-target');
+        if (target) {
+            $(target).prop('disabled', !$(this).is(':checked'));
+        }
+    });
+
+    // Disable empty REQUIRED inputs on submit so browser HTML5 validation
+    // doesn't block the request before Laravel's form-request validator
+    // gets a chance to return a nicer error. Non-required empties (like a
+    // "Do not change" select with an explicit value="" option) are left
+    // enabled so they submit their intentional empty value. Opt in per
+    // form with data-disable-empty-on-submit.
+    $(document).on('submit', 'form[data-disable-empty-on-submit]', function () {
+        $(this).find(':input[required]').filter(function () { return !this.value; }).attr('disabled', 'disabled');
+    });
+
+    // Master checkbox → toggle every non-disabled checkbox in the closest
+    // form or table (or a caller-specified selector via data-check-scope).
+    // Used by bulk-delete confirmation pages to select or deselect the
+    // whole list of rows at once.
+    $(document).on('change', '[data-toggle="check-all"]', function () {
+        var $master = $(this);
+        var scope = $master.data('check-scope');
+        var $container = scope ? $(scope) : $master.closest('form, table');
+        $container.find('input[type="checkbox"]').not($master).not(':disabled').prop('checked', $master.prop('checked'));
+    });
+
+    // Shift-click a row checkbox to apply its new state to every visible,
+    // enabled checkbox between it and the last checkbox clicked in the same
+    // table and checkbox group.
+    var lastListCheckbox = null;
+    var updatingCheckboxRange = false;
+
+    document.addEventListener('click', function (event) {
+        var $checkbox = $(event.target);
+
+        if (updatingCheckboxRange
+            || !$checkbox.is('table tbody input[type="checkbox"]')
+            || $checkbox.is('[data-toggle="check-all"]')) {
+            return;
+        }
+
+        var checkbox = $checkbox[0];
+        var $table = $checkbox.closest('table');
+        var $checkboxes = $table.find('tbody input[type="checkbox"]')
+            .not(':disabled')
+            .not('[data-toggle="check-all"]')
+            .filter(':visible')
+            .filter(function () {
+                return !checkbox.name || this.name === checkbox.name;
+            });
+        var start = $checkboxes.index(lastListCheckbox);
+        var end = $checkboxes.index(checkbox);
+
+        if (event.shiftKey && start !== -1 && end !== -1 && start !== end) {
+            updatingCheckboxRange = true;
+
+            try {
+                $checkboxes.slice(Math.min(start, end), Math.max(start, end) + 1).each(function () {
+                    if (this !== checkbox && this.checked !== checkbox.checked) {
+                        var rowIndex = $(this).data('index');
+
+                        if ($table.data('bootstrap.table') && rowIndex !== undefined) {
+                            $table.bootstrapTable(checkbox.checked ? 'check' : 'uncheck', rowIndex);
+                        } else {
+                            $(this).trigger('click');
+                        }
+                    }
+                });
+            } finally {
+                updatingCheckboxRange = false;
+            }
+        }
+
+        lastListCheckbox = checkbox;
+    }, true);
+
+    // Custom-report "save template" flow. The three custom reports
+    // (asset / component / consumable) each have a small side-panel
+    // form that captures a template name and posts to the templates
+    // store endpoint carrying the current field selections of the
+    // report configuration form. This handler forwards the template
+    // name + report type into the main report form as hidden inputs,
+    // then submits the main form to templates.store. Report type comes
+    // from the save form's data-report-type attribute so a single JS
+    // path covers all three pages.
+    $(document).on('submit', 'form[data-report-save-template]', function (event) {
+        event.preventDefault();
+        var $saveForm = $(this);
+        var reportType = $saveForm.data('report-type');
+        var targetSelector = $saveForm.data('report-form') || '#custom-report-form';
+        var storeUrl = $saveForm.data('store-url') || $saveForm.attr('action');
+        var $targetForm = $(targetSelector);
+        var nameValue = $saveForm.find('[name="name"]').val();
+
+        $('<input>').attr({ type: 'hidden', name: 'name', value: nameValue }).appendTo($targetForm);
+        $('<input>').attr({ type: 'hidden', name: 'type', value: reportType }).appendTo($targetForm);
+
+        $targetForm.attr('action', storeUrl).submit();
+    });
+
+    // Custom-report saved-template select2: navigate to the route stored
+    // on the selected <option>'s data-route attribute. Shared by all
+    // three custom report pages.
+    $(document).on('select2:select', '#saved_report_select', function (event) {
+        window.location.href = event.params.data.element.dataset.route;
+    });
+
+    // When the "This user can login" (activated) checkbox is off, the
+    // password + confirmation fields are functionally useless because
+    // login is gated by the activated flag. Hide the whole form-group
+    // (or dynamic-form-row in the modal) so the form doesn't show
+    // fields the user can't meaningfully fill in, and also drop the
+    // HTML `required` attribute so the browser doesn't block submission.
+    // The server side already skips the password rule for this case
+    // via SaveUserRequest::rules(), and the controller stores
+    // User::noPassword() raw so no Hash::check can ever match.
+    // Applies to both the main users/edit create form and the
+    // users/modal form since they share the input names.
+    //
+    // Required-state preservation: the server renders password/password_
+    // confirmation with `required` only on create (see users/edit.blade.php
+    // and modals/user.blade.php). We cache that server-rendered state on
+    // the first call so subsequent activated-toggles only ever re-apply
+    // the ORIGINAL server intent — otherwise editing an existing
+    // (activated) user would silently flip password to required on page
+    // load and jQuery Validate would block Save with the password empty.
+    var syncPasswordFields = function ($checkbox) {
+        var $form = $checkbox.closest('form');
+        var $passwords = $form.find(
+            'input[name="password"], input[name="password_confirmation"]'
+        );
+        var activated = $checkbox.is(':checked');
+        $passwords.each(function () {
+            if (this.dataset.serverRequired === undefined) {
+                this.dataset.serverRequired = this.required ? '1' : '0';
+            }
+            this.required = activated && this.dataset.serverRequired === '1';
+            var $wrap = $(this).closest('.form-group, .dynamic-form-row');
+            if (activated) {
+                $wrap.show();
+            } else {
+                $wrap.hide();
+            }
+        });
+    };
+
+    // Sensitive fields (username, email, password) ship with a
+    // `readonly` + onfocus-removes-readonly anti-autofill trick to
+    // stop password managers from prefilling or overwriting the
+    // operator's own login credentials on user-create forms. The
+    // side-effect is that HTML5 `required` constraint validation is
+    // SILENTLY skipped for readonly inputs, so hitting submit without
+    // ever focusing a required field lets the empty form through the
+    // browser check entirely.
+    //
+    // On submit-button click we strip `readonly` from any
+    // required+readonly input inside the form. The browser then runs
+    // its normal constraint check (all fields participating) and
+    // shows the "please fill in this field" popup on empties. Autofill
+    // was already prevented at page load, so removing readonly at
+    // click time doesn't reopen that hole.
+    $(document).on('click', 'button[type="submit"], input[type="submit"]', function () {
+        var $form = $(this).closest('form');
+        if (! $form.length) {
+            return;
+        }
+        $form.find('input[required][readonly]').each(function () {
+            this.removeAttribute('readonly');
+        });
+    });
+    $('input[name="activated"][type="checkbox"]').each(function () {
+        syncPasswordFields($(this));
+    });
+    $(document).on('change', 'input[name="activated"][type="checkbox"]', function () {
+        syncPasswordFields($(this));
+    });
+
+    // Generic "typing into input A enables checkbox B" pattern. Server
+    // marks the input with data-toggles-checkbox="{selector-of-target}".
+    // Threshold is 6 chars, which matches the legacy user-create
+    // behaviour of only enabling the send-welcome checkbox once the
+    // email is plausibly valid. Server omits the data-attribute when
+    // the enable-side should never fire (e.g. app.lock_passwords is on)
+    // so the target stays permanently disabled.
+    $(document).on('keyup', 'input[data-toggles-checkbox]', function () {
+        var $target = $($(this).data('toggles-checkbox'));
+        if (! $target.length) {
+            return;
+        }
+        if (this.value.length > 5) {
+            $target.prop('disabled', false);
+            $target.closest('.form-control').removeClass('form-control--disabled');
+        } else {
+            $target.prop('disabled', true).prop('checked', false);
+            $target.closest('.form-control').addClass('form-control--disabled');
+        }
+    });
+
+    // Bootstrap tooltips on any element carrying .tooltip-base.
+    // Attaching to body avoids clipping inside overflow-hidden panels.
+    $('.tooltip-base').tooltip({ container: 'body' });
+
+    // Password generator button. Server puts the desired length on the
+    // button as data-password-length (typically pwd_secure_min + 9) so
+    // this JS doesn't have to know about app settings. Falls back to 16
+    // if the attribute is missing.
+    $('a[id="genPassword"], button[id="genPassword"]').each(function () {
+        var $btn = $(this);
+        if (typeof $btn.pGenerator !== 'function' || ! $('#password').length) {
+            return;
+        }
+        $btn.pGenerator({
+            bind: 'click',
+            passwordElement: '#password',
+            passwordLength: parseInt($btn.data('password-length') || '16', 10),
+            uppercase: true,
+            lowercase: true,
+            numbers: true,
+            specialChars: true,
+            onPasswordGenerated: function () {
+                $('#password_confirm').val($('#password').val());
+            },
+        });
+    });
+
+    // A <select data-gates-submit> disables the submit button(s) in its
+    // form until a value is chosen. Used by users/confirm-bulk-delete
+    // where the operator must pick a status for the deleted users' assets
+    // before the form can be submitted. Runs once on load to reflect
+    // whatever value was pre-selected (old input after a validation
+    // redirect) and re-syncs on change and on select2's own event.
+    $('select[data-gates-submit]').each(function () {
+        var $select = $(this);
+        var $submits = $select.closest('form').find(':submit');
+        var sync = function () {
+            $submits.prop('disabled', ! $select.val());
+        };
+        sync();
+        $select.on('change select2:select', sync);
+    });
+
+    // Auto-focus the first select2 search input on pages that ask for it.
+    // Bulk-checkout uses this so the operator lands directly on the
+    // assets-to-checkout picker and can start typing immediately. Results
+    // are hidden until the first keystroke so the operator doesn't see a
+    // full-list flash on open.
+    if ($('[data-autofocus-select2-search]').length) {
+        setTimeout(function () {
+            var $searchField = $('.select2-search__field');
+            var $results = $('.select2-results');
+            $searchField.focus();
+            $results.hide();
+            $searchField.on('input', function () {
+                $results.show();
+            });
+        }, 0);
+    }
+    document.addEventListener('keydown', function (e) {
+        if (
+            e.key !== 'Enter' ||
+            !e.target.classList.contains('select2-search__field')
+        ) {
+            return;
+        }
+
+        var $select = $('#assigned_assets_select');
+        var select2 = $select.data('select2');
+
+        if (!select2) {
+            return;
+        }
+
+        // Select2 already has a result ready.
+        // Let its normal Enter handler handle it.
+        if (select2.results.getHighlightedResults().length) {
+            return;
+        }
+
+        // Scanner's Enter arrived before the AJAX result.
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        var attempts = 0;
+
+        var waitForResult = setInterval(function () {
+            attempts++;
+
+            var $highlighted = select2.results.getHighlightedResults();
+
+            if ($highlighted.length) {
+                clearInterval(waitForResult);
+
+                console.log('RESULT READY:', $highlighted.data('data'));
+
+                select2.trigger('results:select');
+
+                return;
+            }
+
+            // Give up after ~2 seconds.
+            if (attempts >= 20) {
+                clearInterval(waitForResult);
+            }
+        }, 100);
+    }, true);
+
+    // Hardware bulk edit: clear-radio buttons blank every input of a
+    // named radio group so the caller can back out of a picked value.
+    // The .clear-radio button carries a data-target-name matching the
+    // radio group's name attribute.
+    document.querySelectorAll('.clear-radio').forEach(function (button) {
+        button.addEventListener('click', function () {
+            var name = this.dataset.targetName;
+            var radios = document.querySelectorAll('input[type="radio"][name="' + name + '"]');
+            radios.forEach(function (radio) { radio.checked = false; });
+        });
+    });
+
+    // Hardware bulk edit: live status-deployable check. When the user
+    // picks a status, hit the deployable API and update the inline
+    // status indicator so the operator knows whether that status will
+    // pull an asset out of active service. Translated labels ride on
+    // the element's data attributes so this handler doesn't need to be
+    // a Blade-compiled inline script. Guarded on the data-deployable-
+    // label attribute (not just the id) because #selected_status_status
+    // also appears in partials/forms/edit/status.blade.php — used by
+    // hardware/edit — which has its own inline user_add() handler and
+    // doesn't render the labels, so we'd otherwise double-fire and
+    // overwrite that handler's output with an icon-only string.
+    var statusStatusEl = document.getElementById('selected_status_status');
+    if (statusStatusEl && statusStatusEl.dataset.deployableLabel) {
+        var deployableLabel = statusStatusEl.dataset.deployableLabel || '';
+        var notDeployableLabel = statusStatusEl.dataset.notDeployableLabel || '';
+
+        var runStatusDeployableCheck = function () {
+            var statusId = $('select[name="status_id"]').val();
+            if (statusId === '') {
+                return;
+            }
+            $('.status_spinner').css('display', 'inline');
+            $.ajax({
+                url: '/api/v1/statuslabels/' + statusId + '/deployable',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                success: function (data) {
+                    $('.status_spinner').css('display', 'none');
+                    $('#selected_status_status').fadeIn();
+                    if (data == true) {
+                        $('#selected_status_status')
+                            .removeClass('text-danger')
+                            .addClass('text-success')
+                            .html('<i class="fa-solid fa-check" aria-hidden="true"></i> ' + deployableLabel);
+                    } else {
+                        $('#assignto_selector').hide();
+                        $('#selected_status_status')
+                            .removeClass('text-success')
+                            .addClass('text-danger')
+                            .html('<i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> ' + notDeployableLabel);
+                    }
+                },
+            });
+        };
+
+        $('select[name="status_id"]').on('change', runStatusDeployableCheck);
+    }
+
+    // Hardware checkin: requestable-toggle wrapper. Show or hide the
+    // "make this asset requestable after checkin" checkbox depending on
+    // whether the currently-selected status is deployable. Preserve the
+    // checkbox state when hiding so a status bounce doesn't blow it
+    // away — the server only applies the value when the status is
+    // deployable anyway.
+    var requestableWrapper = document.getElementById('requestable-wrapper');
+    if (requestableWrapper) {
+        var deployableStatusIds = [];
+        try {
+            deployableStatusIds = JSON.parse(requestableWrapper.dataset.deployableStatusIds || '[]');
+        } catch (e) {
+            // Malformed data — leave the wrapper in its server-rendered state.
+        }
+
+        var statusSelect = document.getElementById('modal-statuslabel_types')
+            || document.querySelector('select[name="status_id"]');
+
+        if (statusSelect) {
+            var toggleRequestableWrapper = function () {
+                var value = statusSelect.value;
+                var statusId = Number.parseInt(value, 10);
+                var isDeployable = value !== ''
+                    && Number.isInteger(statusId)
+                    && deployableStatusIds.indexOf(statusId) !== -1;
+                requestableWrapper.style.display = isDeployable ? '' : 'none';
+            };
+
+            statusSelect.addEventListener('change', toggleRequestableWrapper);
+            if (window.jQuery) {
+                window.jQuery(statusSelect).on('select2:select select2:clear', toggleRequestableWrapper);
+            }
+            toggleRequestableWrapper();
+        }
+    }
+
+    // Hardware checkin: per-user localStorage preference for the
+    // requestable-checkbox default. Namespaced by user id so a shared
+    // browser doesn't leak one user's habit to another. Bypassed when
+    // the checkbox was repopulated from a validation-error redirect —
+    // old() beats the stored preference. On submit, save whatever the
+    // user actually chose so the preference tracks their real habit.
+    var requestableCheckbox = document.getElementById('requestable');
+    if (requestableCheckbox && requestableCheckbox.dataset.userPreferenceKey) {
+        var storageKey = requestableCheckbox.dataset.userPreferenceKey;
+        var hadOldInput = requestableCheckbox.dataset.hadOldInput === '1';
+        var form = requestableCheckbox.closest('form');
+
+        if (form) {
+            if (!hadOldInput) {
+                var stored = null;
+                try {
+                    stored = window.localStorage.getItem(storageKey);
+                } catch (e) {
+                    // localStorage may be unavailable (private mode, disabled).
+                }
+                if (stored === '1' || stored === '0') {
+                    requestableCheckbox.checked = stored === '1';
+                }
+            }
+
+            form.addEventListener('submit', function () {
+                try {
+                    window.localStorage.setItem(storageKey, requestableCheckbox.checked ? '1' : '0');
+                } catch (e) {
+                    // Non-fatal: preference just won't persist this time.
+                }
+            });
+        }
+    }
+});

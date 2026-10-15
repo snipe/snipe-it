@@ -4,6 +4,7 @@ namespace Tests\Feature\Checkouts\General;
 
 use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\Consumable;
 use App\Models\License;
 use App\Models\LicenseSeat;
 use App\Models\Statuslabel;
@@ -13,6 +14,7 @@ use Tests\TestCase;
 class SettingAlertOnResponseTest extends TestCase
 {
     private User $actor;
+
     private User $assignedUser;
 
     protected function setUp(): void
@@ -38,6 +40,7 @@ class SettingAlertOnResponseTest extends TestCase
             'checkoutable_id' => $accessory->id,
             'assigned_to_id' => $this->assignedUser->id,
             'alert_on_response_id' => $this->actor->id,
+            'qty' => 1,
         ]);
     }
 
@@ -74,6 +77,7 @@ class SettingAlertOnResponseTest extends TestCase
             'checkoutable_id' => $asset->id,
             'assigned_to_id' => $this->assignedUser->id,
             'alert_on_response_id' => $this->actor->id,
+            'qty' => 1,
         ]);
     }
 
@@ -110,6 +114,7 @@ class SettingAlertOnResponseTest extends TestCase
             'checkoutable_type' => LicenseSeat::class,
             'assigned_to_id' => $this->assignedUser->id,
             'alert_on_response_id' => $this->actor->id,
+            'qty' => 1,
         ]);
     }
 
@@ -126,6 +131,42 @@ class SettingAlertOnResponseTest extends TestCase
 
         $this->assertDatabaseHas('checkout_acceptances', [
             'checkoutable_type' => LicenseSeat::class,
+            'assigned_to_id' => $this->assignedUser->id,
+            'alert_on_response_id' => null,
+        ]);
+    }
+
+    public function test_sets_alert_on_response_if_enabled_by_category_for_consumable()
+    {
+        $consumable = Consumable::factory()->create(['qty' => 5]);
+        $consumable->category->update([
+            'require_acceptance' => true,
+            'alert_on_response' => true,
+        ]);
+
+        $this->postConsumableCheckout($consumable);
+
+        $this->assertDatabaseHas('checkout_acceptances', [
+            'checkoutable_type' => Consumable::class,
+            'checkoutable_id' => $consumable->id,
+            'assigned_to_id' => $this->assignedUser->id,
+            'alert_on_response_id' => $this->actor->id,
+        ]);
+    }
+
+    public function test_does_not_set_alert_on_response_if_disabled_by_category_for_consumable()
+    {
+        $consumable = Consumable::factory()->create(['qty' => 5]);
+        $consumable->category->update([
+            'require_acceptance' => true,
+            'alert_on_response' => false,
+        ]);
+
+        $this->postConsumableCheckout($consumable);
+
+        $this->assertDatabaseHas('checkout_acceptances', [
+            'checkoutable_type' => Consumable::class,
+            'checkoutable_id' => $consumable->id,
             'assigned_to_id' => $this->assignedUser->id,
             'alert_on_response_id' => null,
         ]);
@@ -157,7 +198,17 @@ class SettingAlertOnResponseTest extends TestCase
         $this->actingAs($this->actor)
             ->post("/licenses/{$license->id}/checkout/", [
                 'checkout_to_type' => 'user',
-                'assigned_to' => $this->assignedUser->id,
+                'assigned_user' => $this->assignedUser->id,
+            ]);
+    }
+
+    private function postConsumableCheckout(Consumable $consumable): void
+    {
+        $this->actingAs($this->actor)
+            ->post(route('consumables.checkout.store', $consumable), [
+                'checkout_to_type' => 'user',
+                'assigned_user' => $this->assignedUser->id,
+                'checkout_qty' => 1,
             ]);
     }
 }

@@ -4,7 +4,9 @@
 {{ $introduction_line }}
 
 @if (($snipeSettings->show_images_in_email =='1') && $item->getImageUrl())
-<center><img src="{{ $item->getImageUrl() }}" alt="Asset" style="max-width: 570px;"></center>
+    {{-- @formatter:off --}}
+<img src="{{ $item->getImageUrl() }}" alt="Asset" style="display:block; height:auto; max-width:100%; max-height:400px; margin:0 auto;">
+{{-- @formatter:on --}}
 @endif
 
 @component('mail::table')
@@ -31,6 +33,9 @@
 @if (isset($item->serial))
 | **{{ trans('mail.serial') }}** | {{ $item->serial }} |
 @endif
+@if ($location)
+| **{{ trans('general.location') }}** | {{ $location }} |
+@endif
 @if (isset($last_checkout))
 | **{{ trans('mail.checkout_date') }}** | {{ $last_checkout }} |
 @endif
@@ -40,11 +45,13 @@
 @if ((isset($expected_checkin)) && ($expected_checkin!=''))
 | **{{ trans('mail.expecting_checkin_date') }}** | {{ $expected_checkin }} |
 @endif
-@foreach($fields as $field)
-@if (($item->{ $field->db_column_name() }!='') && ($field->show_in_email) && ($field->field_encrypted=='0'))
-| **{{ $field->name }}** | {{ $item->{ $field->db_column_name() } }} |
+@if (!empty($custom_fields))
+@foreach($custom_fields as $customField)
+@if (!empty($customField['label']) && array_key_exists('value', $customField) && $customField['value'] !== '')
+| **{{ $customField['label'] }}** | {{ $customField['value'] }} |
 @endif
 @endforeach
+@endif
 @if ($admin)
 | **{{ trans('general.administrator') }}** | {{ $admin->display_name }} |
 @endif
@@ -53,9 +60,9 @@
 @endif
 @endcomponent
 
-@if (($req_accept == 1) && ($eula!=''))
+@if (($req_accept == 1) && ($eula!='') && $accept_url)
 {{ trans('mail.read_the_terms_and_click') }}
-@elseif (($req_accept == 1) && ($eula==''))
+@elseif (($req_accept == 1) && ($eula=='') && $accept_url)
 {{ trans('mail.click_on_the_link_asset') }}
 @elseif (($req_accept == 0) && ($eula!=''))
 {{ trans('mail.read_the_terms') }}
@@ -67,10 +74,10 @@
 @endcomponent
 @endif
 
-@if ($req_accept == 1)
+
+@if ($req_accept == 1 && $accept_url)
 **[✔ {{ trans('mail.i_have_read') }}]({{ $accept_url }})**
 @endif
-
 
 {{ trans('mail.best_regards') }}
 

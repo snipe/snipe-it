@@ -9,18 +9,24 @@ class ManufacturerPresenter extends Presenter
 {
     /**
      * Json Column Layout for bootstrap table
+     *
      * @return string
      */
     public static function dataTableLayout()
     {
         $layout = [
             [
-                'field'        => 'checkbox',
-                'checkbox'     => true,
+                'field' => 'checkbox',
+                'scope' => 'col',
+                'checkbox' => true,
+                'formatter' => 'checkboxEnabledFormatter',
                 'titleTooltip' => trans('general.select_all_none'),
+                'printIgnore' => true,
+                'class' => 'hidden-print',
             ],
             [
                 'field' => 'id',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
@@ -29,6 +35,7 @@ class ManufacturerPresenter extends Presenter
             ],
             [
                 'field' => 'name',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => false,
@@ -38,6 +45,7 @@ class ManufacturerPresenter extends Presenter
             ],
             [
                 'field' => 'image',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
@@ -47,6 +55,7 @@ class ManufacturerPresenter extends Presenter
             ],
             [
                 'field' => 'url',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -56,6 +65,7 @@ class ManufacturerPresenter extends Presenter
             ],
             [
                 'field' => 'support_url',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -66,6 +76,7 @@ class ManufacturerPresenter extends Presenter
 
             [
                 'field' => 'support_phone',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -76,6 +87,7 @@ class ManufacturerPresenter extends Presenter
 
             [
                 'field' => 'support_email',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -85,6 +97,7 @@ class ManufacturerPresenter extends Presenter
             ],
             [
                 'field' => 'warranty_lookup_url',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -95,49 +108,60 @@ class ManufacturerPresenter extends Presenter
 
             [
                 'field' => 'assets_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.assets'),
                 'visible' => true,
-                'class' => 'css-barcode',
+                'class' => 'css-barcode text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ],
             [
                 'field' => 'licenses_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.licenses'),
                 'visible' => true,
-                'class' => 'css-license',
+                'class' => 'css-license text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ],
             [
                 'field' => 'consumables_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.consumables'),
                 'visible' => true,
-                'class' => 'css-consumable',
+                'class' => 'css-consumable text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ],
             [
                 'field' => 'accessories_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.accessories'),
                 'visible' => true,
-                'class' => 'css-accessory',
+                'class' => 'css-accessory text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'components_count',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('general.components'),
                 'visible' => true,
-                'class' => 'css-component',
+                'class' => 'css-component text-right text-padding-number-cell',
+                'footerFormatter' => 'qtySumFormatter',
             ], [
                 'field' => 'created_by',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => true,
                 'title' => trans('general.created_by'),
@@ -145,6 +169,7 @@ class ManufacturerPresenter extends Presenter
                 'formatter' => 'usersLinkObjFormatter',
             ], [
                 'field' => 'created_at',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -153,6 +178,7 @@ class ManufacturerPresenter extends Presenter
                 'formatter' => 'dateDisplayFormatter',
             ], [
                 'field' => 'updated_at',
+                'scope' => 'col',
                 'searchable' => true,
                 'sortable' => true,
                 'switchable' => true,
@@ -161,6 +187,7 @@ class ManufacturerPresenter extends Presenter
                 'formatter' => 'dateDisplayFormatter',
             ], [
                 'field' => 'actions',
+                'scope' => 'col',
                 'searchable' => false,
                 'sortable' => false,
                 'switchable' => false,
@@ -168,6 +195,7 @@ class ManufacturerPresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'manufacturersActionsFormatter',
                 'printIgnore' => true,
+                'class' => 'hidden-print',
             ],
         ];
 
@@ -176,15 +204,21 @@ class ManufacturerPresenter extends Presenter
 
     /**
      * Link to this manufacturers name
+     *
      * @return string
      */
     public function nameUrl()
     {
-        return (string) link_to_route('manufacturers.show', $this->name, $this->id);
+        if (auth()->user()->can('view', ['\App\Models\Manufacturer', $this])) {
+            return '<a href="'.route('manufacturers.show', $this->id).'">'.e($this->display_name).'</a>';
+        } else {
+            return e($this->display_name);
+        }
     }
 
     /**
      * Url to view this item.
+     *
      * @return string
      */
     public function viewUrl()
@@ -192,13 +226,13 @@ class ManufacturerPresenter extends Presenter
         return route('manufacturers.show', $this->id);
     }
 
-    public function formattedNameLink() {
+    public function formattedNameLink()
+    {
 
         if (auth()->user()->can('view', ['\App\Models\Manufacturer', $this])) {
-            return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i>" : '').'<a href="'.route('manufacturers.show', e($this->id)).'">'.e($this->name).'</a>';
+            return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i>" : '').'<a href="'.route('manufacturers.show', e($this->id)).'">'.e($this->display_name).'</a>';
         }
 
-        return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i> " : '').$this->name;
+        return ($this->tag_color ? "<i class='fa-solid fa-fw fa-square' style='color: ".e($this->tag_color)."' aria-hidden='true'></i>" : '').e($this->display_name);
     }
-
 }

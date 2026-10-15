@@ -15,7 +15,7 @@ class ActionlogFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<Actionlog>
      */
     protected $model = Actionlog::class;
 
@@ -40,19 +40,23 @@ class ActionlogFactory extends Factory
             $target = User::inRandomOrder()->first();
             $asset = Asset::inRandomOrder()->RTD()->first();
 
+            // Fall back to the asset's default (rtd) location when the target
+            // user has no location set. Mirrors the fallback in
+            // App\Console\Commands\SyncAssetLocations so we don't seed assets
+            // with a null location_id.
             $asset->update(
-                    [
-                        'assigned_to' => $target->id,
-                        'assigned_type' => User::class,
-                        'location_id' => $target->location_id,
-                    ]
-                );
-    
+                [
+                    'assigned_to' => $target->id,
+                    'assigned_type' => User::class,
+                    'location_id' => $target->location_id ?? $asset->rtd_location_id,
+                ]
+            );
+
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'created_at' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'action_type' => 'checkout',
                 'item_id' => $asset->id,
-                'item_type'  => Asset::class,
+                'item_type' => Asset::class,
                 'target_id' => $target->id,
                 'target_type' => User::class,
             ];
@@ -66,18 +70,18 @@ class ActionlogFactory extends Factory
             $asset = Asset::inRandomOrder()->RTD()->first();
 
             $asset->update(
-                    [
-                        'assigned_to' => $target->id,
-                        'assigned_type' => Location::class,
-                        'location_id' => $target->id,
-                    ]
-                );
+                [
+                    'assigned_to' => $target->id,
+                    'assigned_type' => Location::class,
+                    'location_id' => $target->id,
+                ]
+            );
 
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'created_at' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'action_type' => 'checkout',
                 'item_id' => $asset->id,
-                'item_type'  => Asset::class,
+                'item_type' => Asset::class,
                 'target_id' => $target->id,
                 'target_type' => Location::class,
             ];
@@ -88,10 +92,10 @@ class ActionlogFactory extends Factory
      * This sets up an ActionLog representing a manually added note tied to an Asset,
      * with an optional User as the creator. If no User is provided, one is generated.
      *
-     * @param User|null $user Optional user to associate as the creator of the note.
-     * @return \Illuminate\Database\Eloquent\Factories\Factory<ActionLog>
+     * @param  User|null  $user  Optional user to associate as the creator of the note.
+     * @return Factory<Actionlog>
      */
-    public function assetNote(?User $user=null)
+    public function assetNote(?User $user = null)
     {
         return $this
             ->state(function () use ($user) {
@@ -118,10 +122,10 @@ class ActionlogFactory extends Factory
             ]);
 
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'created_at' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'action_type' => 'checkout',
                 'item_id' => $licenseSeat->license->id,
-                'item_type'  => License::class,
+                'item_type' => License::class,
                 'target_id' => $target->id,
                 'target_type' => User::class,
             ];
@@ -133,10 +137,10 @@ class ActionlogFactory extends Factory
         return $this->state(function () {
 
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'created_at' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'action_type' => 'uploaded',
-                'item_type'  => User::class,
-                'filename'  => $this->faker->unixTime('now'),
+                'item_type' => User::class,
+                'filename' => $this->faker->unixTime('now'),
             ];
         });
     }
@@ -148,12 +152,12 @@ class ActionlogFactory extends Factory
             $asset = Asset::factory()->create();
 
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'created_at' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'action_type' => 'accepted',
                 'item_id' => $asset->id,
-                'item_type'  => Asset::class,
-                'target_type'  => User::class,
-                'accept_signature'  => $this->faker->unixTime('now'),
+                'item_type' => Asset::class,
+                'target_type' => User::class,
+                'accept_signature' => $this->faker->unixTime('now'),
             ];
         });
     }
@@ -165,12 +169,12 @@ class ActionlogFactory extends Factory
             $asset = Asset::factory()->create();
 
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'created_at' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'action_type' => 'accepted',
                 'item_id' => $asset->id,
-                'item_type'  => Asset::class,
-                'target_type'  => User::class,
-                'filename'  => $this->faker->unixTime('now'),
+                'item_type' => Asset::class,
+                'target_type' => User::class,
+                'filename' => $this->faker->unixTime('now'),
             ];
         });
     }
@@ -180,10 +184,10 @@ class ActionlogFactory extends Factory
         return $this->state(function () {
 
             return [
-                'created_at'  => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
+                'created_at' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get()),
                 'action_type' => 'update',
-                'target_type'  => User::class,
-                'item_type'  => User::class,
+                'target_type' => User::class,
+                'item_type' => User::class,
             ];
         });
     }

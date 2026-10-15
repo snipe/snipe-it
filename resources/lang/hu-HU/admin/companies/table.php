@@ -1,11 +1,17 @@
 <?php
-return array(
+
+return [
     'companies' => 'Cégek',
-    'create'    => 'Vállalat létrehozása',
-    'email'     => 'A cég email címe',
-    'title'     => 'Társág',
-    'phone'     => 'Vállalat ',
-    'update'    => 'Társaság frissítése',
-    'name'      => 'A cég neve',
-    'id'        => 'ID',
-);
+    'create' => 'Vállalat létrehozása',
+    'email' => 'A cég email címe',
+    'title' => 'Társág',
+    'phone' => 'Vállalat ',
+    'update' => 'Vállalat frissítése',
+    'name' => 'A vállalat neve',
+    'id' => 'ID',
+    'parent' => 'Parent Company',
+    'parent_help' => 'Optional. If set, this company is a child of the selected parent. Users assigned to the parent automatically have access to this company. Only one level of nesting is allowed.',
+    'children' => 'Child Companies',
+    'inherited' => 'Inherited',
+    'inherited_help' => 'This item belongs to a related company in the hierarchy (parent or child), not this company directly.',
+];

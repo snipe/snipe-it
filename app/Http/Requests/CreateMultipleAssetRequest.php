@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Helpers\Helper;
 use App\Http\Requests\Traits\MayContainCustomFields;
 use App\Models\Asset;
-use Illuminate\Foundation\Http\FormRequest;
-use App\Helpers\Helper;
-use App\Models\Setting;
 use App\Models\AssetModel;
+use App\Models\Setting;
 use App\Rules\UniqueUndeleted;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Str;
 
-class CreateMultipleAssetRequest extends ImageUploadRequest //should I extend from StoreAssetRequest? FIXME OR TODO OR THINKME
+class CreateMultipleAssetRequest extends ImageUploadRequest // should I extend from StoreAssetRequest? FIXME OR TODO OR THINKME
 {
     use MayContainCustomFields;
 
@@ -20,17 +20,38 @@ class CreateMultipleAssetRequest extends ImageUploadRequest //should I extend fr
      */
     public function authorize(): bool
     {
-        return true; //TODO - should I do the auth check here?
+        return true; // TODO - should I do the auth check here?
+    }
+
+    protected function prepareForValidation()
+    {
+        parent::prepareForValidation();
+
+        if ($this->filled('purchase_cost') && ! is_float($this->input('purchase_cost')) && preg_match('/^[\d.,]+$/', (string) $this->input('purchase_cost'))) {
+            $this->merge(['purchase_cost' => Helper::ParseCurrency($this->input('purchase_cost'))]);
+        }
+
+        if (Setting::getSettings()->full_multiple_companies_support == '1' && ! $this->user()->isSuperUser()) {
+            // Default the new asset's company to the first company the actor is
+            // pivoted to. The pivot is the source of truth for membership; the
+            // legacy users.company_id scalar is no longer consulted for scoping.
+            $primaryCompanyId = $this->user()->companies()
+                ->orderBy('companies.id')
+                ->value('companies.id');
+            if ($primaryCompanyId) {
+                $this->mergeIfMissing(['company_id' => (int) $primaryCompanyId]);
+            }
+        }
     }
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
-        //grab the rules for serials and asset_tags, and tweak them into an array context for multi-create usage
+        // grab the rules for serials and asset_tags, and tweak them into an array context for multi-create usage
         $modelRules = (new Asset)->getRules();
         unset($modelRules['serial']);
 
@@ -50,7 +71,7 @@ class CreateMultipleAssetRequest extends ImageUploadRequest //should I extend fr
 
         $serial_rules = ['string'];
         if ($serials_unique) {
-//            $serial_rules[] = 'unique_undeleted:assets,serial';
+            //            $serial_rules[] = 'unique_undeleted:assets,serial';
             $serial_rules[] = new UniqueUndeleted('assets', 'serial');
             $serial_rules[] = 'distinct';
         }

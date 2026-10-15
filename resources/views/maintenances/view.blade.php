@@ -1,5 +1,4 @@
 <?php
-use Carbon\Carbon;
 ?>
 @extends('layouts/default')
 
@@ -9,244 +8,272 @@ use Carbon\Carbon;
 @parent
 @stop
 
+@section('header_right')
+    <x-button.info-panel-toggle/>
+@endsection
+
 {{-- Page content --}}
 @section('content')
-  <div class="row">
-    <div class="col-md-9">
 
-      <div class="nav-tabs-custom">
-        <ul class="nav nav-tabs hidden-print">
+    <x-container columns="2">
+        <x-page-column class="col-md-9 main-panel">
+            <x-tabs>
+                <x-slot:tabnav>
+                    <x-tabs.details-tab/>
+                    <x-tabs.note-tab :item="$maintenance" count="{{ $maintenance->journal->count() }}"/>
+                    <x-tabs.files-tab :item="$maintenance" count="{{ $maintenance->uploads()->count() }}"/>
+                    <x-tabs.history-tab count="{{ $maintenance->history()->count() }}" :model="$maintenance"/>
+                    <x-tabs.upload-tab :item="$maintenance"/>
+                </x-slot:tabnav>
 
-          <li class="active">
-            <a href="#info" data-toggle="tab">
-                            <span class="hidden-lg hidden-md">
-                            <x-icon type="info-circle" class="fa-2x" />
+                <x-slot:tabpanes>
+
+                    <!-- start details tab content -->
+                    <x-tabs.pane name="details">
+
+                        <!-- this just adds a little top space -->
+                        <div class="clearfix visible-lg-block" style="padding: 6px;"></div>
+
+                        <!--  well column -->
+                        <x-page-column class="col-md-4">
+                            <x-well>
+                                <x-info-element.status :infoObject="$maintenance->asset"/>
+                            </x-well>
+                        </x-page-column>
+                        <!--  ./ well column -->
+
+                        <!--  well column -->
+                        <x-page-column class="col-md-4">
+                            <x-well style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+                                <x-icon type="asset" class="fa-fw"/>
+                                {!! $maintenance->asset?->present()->nameUrl !!}
+                            </x-well>
+                        </x-page-column>
+                        <!--  ./ well column -->
+
+                        <!--  well column -->
+                        <x-page-column class="col-md-4">
+                            <x-well style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
+                                <x-icon type="maintenances" class="fa-fw"/>
+                                <strong>{{ trans('admin/maintenances/form.asset_maintenance_type') }}</strong>
+                                {{ $maintenance->asset_maintenance_type }}
+                            </x-well>
+                        </x-page-column>
+                        <!--  ./ well column -->
+
+                        <!-- set clearfix for responsive design -->
+                        <div class="clearfix"></div>
+
+                        <!-- definition list column -->
+                        <x-page-column class="col-md-8 col-sm-12">
+
+                            <!-- definition list content -->
+                            <x-page-data>
+                                <x-data-row :label="trans('admin/hardware/form.tag')" copy_what="asset_tag">
+                                    {!!  $maintenance->asset?->present()->formattedTagLink !!}
+                                </x-data-row>
+
+                                <x-data-row :label="trans('general.asset_model')" copy_what="model">
+                                    {!! $maintenance->asset?->model?->present()->nameUrl !!}
+                                </x-data-row>
+
+                                <x-data-row :label="trans('general.model_no')" copy_what="model_number">
+                                    {{ $maintenance->asset?->model?->model_number }}
+                                </x-data-row>
+
+                                <x-data-row :label="trans('general.start_date')" copy_what="start_date">
+                                    {{ Helper::getFormattedDateObject($maintenance->start_date, 'datetime', false) }}
+                                </x-data-row>
+
+                                <x-data-row :label="trans('admin/maintenances/form.completion_date')" copy_what="expected_completion_date">
+                                    @if ($maintenance->expected_completion_date)
+                                        {{ Helper::getFormattedDateObject($maintenance->expected_completion_date, 'datetime', false) }}
+                                    @else
+                                        {{ trans('admin/maintenances/message.asset_maintenance_incomplete') }}
+                                    @endif
+                                </x-data-row>
+
+                                <x-data-row :label="trans('admin/maintenances/form.asset_maintenance_time')" copy_what="time">
+                                    @if ($maintenance->asset_maintenance_time)
+                                        {{ $maintenance->asset_maintenance_time }} {{ trans('general.days') }}
+                                    @endif
+                                </x-data-row>
+
+                                <x-data-row :label="trans('admin/maintenances/form.cost')" copy_what="cost">
+                                    {{ $snipeSettings->default_currency .' '. Helper::formatCurrencyOutput($maintenance->cost) }}
+                                </x-data-row>
+
+                                <x-data-row :label="trans('admin/maintenances/form.is_warranty')">
+                                    @if ($maintenance->is_warranty=='1')
+                                        <x-icon type="checkmark" class="text-success"/>
+                                        {{ trans('general.yes') }}
+                                    @else
+                                        <x-icon type="x" class="text-danger"/>
+                                        {{ trans('general.no') }}
+                                    @endif
+                                </x-data-row>
+
+                                @if ($maintenance->responsibleParty)
+                                    <x-data-row :label="trans('admin/maintenances/form.responsible_party')" copy_what="responsible_party">
+                                        {!! $maintenance->responsibleParty->present()->nameUrl() !!}
+                                    </x-data-row>
+                                @endif
+
+                                @if ($maintenance->checkedOutTo)
+                                    <x-data-row :label="trans('admin/maintenances/form.checked_out_to_at_creation')">
+                                        <x-icon type="{{ strtolower(class_basename($maintenance->checked_out_to_type)) }}" class="fa-fw"/>
+                                        {!! $maintenance->checkedOutTo->present()->formattedNameLink() !!}
+
+                                        <p class="help-block">
+                                            {{ trans('admin/maintenances/general.checked_out_to_help') }}
+                                        </p>
+                                    </x-data-row>
+                                @endif
+
+                                @if ($maintenance->completed_at)
+                                    <x-data-row :label="trans('admin/maintenances/form.completed_at')">
+                                        {{ Helper::getFormattedDateObject($maintenance->completed_at, 'datetime', false) }}
+                                    </x-data-row>
+                                    @if ($maintenance->completedByUser)
+                                        <x-data-row :label="trans('admin/maintenances/form.completed_by')">
+                                            {!! $maintenance->completedByUser->present()->nameUrl() !!}
+                                        </x-data-row>
+                                    @endif
+                                @endif
+
+                            </x-page-data>
+                            <!-- ./ definition list content -->
+                            <div class="clearfix"></div>
+                        </x-page-column>
+                        <!-- ./ definition list column -->
+
+                            <!-- begin side stats well column-->
+                            <x-page-column class="col-md-4 col-sm-12">
+
+                                <x-well class="well-sm" style="padding-left: 15px;">
+                                    @php
+
+                                        $startCarbon = $maintenance->start_date ? Carbon::parse($maintenance->start_date) : null;
+                                        $endCarbon   = $maintenance->expected_completion_date
+                                            ? Carbon::parse($maintenance->expected_completion_date)
+                                            : null;
+
+                                        $maintenancePercent = 0;
+                                        if ($startCarbon) {
+                                             $progressLabel = App\Helpers\Helper::getFormattedDateObject($maintenance->start_date, 'date', false);
+                                            if ($endCarbon) {
+                                                 $progressLabel .= ' - '.App\Helpers\Helper::getFormattedDateObject($maintenance->expected_completion_date, 'date', false);;
+                                                // Completed: show how far through the total duration we are as of today
+                                                $totalDays   = max(1, $startCarbon->diffInDays($endCarbon));
+                                                $elapsedDays = min($totalDays, $startCarbon->diffInDays(Carbon::now()));
+                                                $maintenancePercent = min(100, max(0, ($elapsedDays / $totalDays) * 100));
+                                            } else {
+                                                // In progress: base on days elapsed since start_date relative to 30-day window
+                                                $elapsedDays = $startCarbon->diffInDays(Carbon::now());
+                                                $maintenancePercent = min(100, max(0, ($elapsedDays / 30) * 100));
+                                            }
+                                        }
+                                    @endphp
+
+
+                                    <x-progressbar use_well="false" columns="12" :text="$progressLabel" :percent="$maintenancePercent">
+                                    </x-progressbar>
+
+                                </x-well>
+                            </x-page-column>
+                            <div class="clearfix"></div>
+
+
+                    </x-tabs.pane>
+
+
+                    <x-tabs.pane name="files">
+                        <x-table.files object_type="maintenances" :object="$maintenance"/>
+                    </x-tabs.pane>
+
+                    <x-tabs.pane name="notes">
+                        <x-table.history name="maintenanceNotes"
+                            :table_header="trans('general.notes')"
+                            :model="$maintenance"
+                            :route="route('api.activity.index', ['item_id' => $maintenance->id, 'item_type' => 'maintenance', 'action_type' => 'note added'])"
+                            :hide_fields="['id','action_type', 'item', 'changed', 'target','file','file_download','quantity','changed','serial','signature_file','log_meta','order_number']"
+                        />
+                    </x-tabs.pane>
+
+                    <x-tabs.pane name="history">
+                        <x-table.history name="maintenanceHistory" :model="$maintenance" :route="route('api.maintenances.history', $maintenance)" :hide_fields="['order_number']"/>
+                    </x-tabs.pane>
+
+                </x-slot:tabpanes>
+            </x-tabs>
+
+        </x-page-column>
+
+        <x-page-column class="col-md-3">
+            <x-box class="side-box expanded">
+                <x-info-panel :infoPanelObj="$maintenance" img_path="{{ app('maintenances_upload_url') }}">
+
+                    <x-slot:buttons>
+                        <x-button.edit :item="$maintenance" :route="route('maintenances.edit', $maintenance->id)" />
+                        <x-button.note :item="$maintenance"/>
+                        @if (! $maintenance->completed_at)
+                            @can('update', $maintenance->asset)
+                                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#completeMaintenanceModal" data-tooltip="true" title="{{ trans('admin/maintenances/form.mark_complete') }}">
+                                    <x-icon type="checkmark" class="fa-fw"/>
+                                    <span class="sr-only">{{ trans('admin/maintenances/form.mark_complete') }}</span>
+                                </button>
+                            @endcan
+                        @else
+                            <span class="btn btn-sm btn-default disabled" data-tooltip="true" title="{{ trans('admin/maintenances/form.already_complete') }}: {{ Helper::getFormattedDateObject($maintenance->completed_at, 'datetime', false) }}">
+                                <x-icon type="checkmark" class="fa-fw"/>
+                                <span class="sr-only">{{ trans('admin/maintenances/form.already_complete') }}</span>
                             </span>
-              <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
-            </a>
-          </li>
+                        @endif
+                        <x-button.delete :item="$maintenance" />
+                    </x-slot:buttons>
 
-          <li>
-            <a href="#files" data-toggle="tab">
-                                <span class="hidden-lg hidden-md">
-                                <x-icon type="files" class="fa-2x" />
-                                </span>
-              <span class="hidden-xs hidden-sm">{{ trans('general.file_uploads') }}
-                {!! ($maintenance->uploads->count() > 0 ) ? '<span class="badge badge-secondary">'.number_format($maintenance->uploads->count()).'</span>' : '' !!}
-                                </span>
-            </a>
-          </li>
+                </x-info-panel>
+            </x-box>
+        </x-page-column>
+    </x-container>
 
-          @can('update', $maintenance)
-            <li class="pull-right">
-              <a href="#" data-toggle="modal" data-target="#uploadFileModal">
-                                <span class="hidden-lg hidden-xl hidden-md">
-                                    <x-icon type="paperclip" class="fa-2x" />
-                                </span>
-                <span class="hidden-xs hidden-sm">
-                                    <x-icon type="paperclip" />
-                                    {{ trans('button.upload') }}
-                                </span>
-              </a>
-            </li>
-          @endcan
-        </ul>
-          <div class="tab-content">
-            <div class="tab-pane active" id="info">
-            <div class="row-new-striped">
-              <div class="row">
+@endsection
 
-                  <div class="col-md-3">
-                    {{ trans('admin/maintenances/form.asset_maintenance_type') }}
-                  </div>
-                  <div class="col-md-9">
-                    {{ $maintenance->asset_maintenance_type }}
-                  </div>
-
-              </div> <!-- /row -->
-
-              <div class="row">
-                <div class="col-md-3">
-                  {{ trans('general.asset') }}
-                </div>
-                <div class="col-md-9">
-                  <a href="{{ route('hardware.show', $maintenance->asset_id) }}">
-                    {{ $maintenance->asset->present()->fullName }}
-                  </a>
-                </div>
-              </div> <!-- /row -->
-
-              @if ($maintenance->asset->model)
-                <div class="row">
-                  <div class="col-md-3">
-                    {{ trans('general.asset_model') }}
-                  </div>
-                  <div class="col-md-9">
-                    <a href="{{ route('models.show', $maintenance->asset->model_id) }}">
-                      {{ $maintenance->asset->model->name }}
-                    </a>
-                  </div>
-                </div> <!-- /row -->
-              @endif
-
-              @if ($maintenance->asset->company)
-                <div class="row">
-                  <div class="col-md-3">
-                    {{ trans('general.company') }}
-                  </div>
-                  <div class="col-md-9">
-                    <a href="{{ route('companies.show', $maintenance->asset->company_id) }}">
-                      {{ $maintenance->asset->company->name }}
-                    </a>
-                  </div>
-                </div> <!-- /row -->
-              @endif
-
-
-              @if ($maintenance->supplier)
-              <div class="row">
-                <div class="col-md-3">
-                  {{ trans('general.supplier') }}
-                </div>
-                <div class="col-md-9">
-                  <a href="{{ route('suppliers.show', $maintenance->supplier_id) }}">
-                    {{ $maintenance->supplier->name }}
-                  </a>
-                </div>
-              </div> <!-- /row -->
-              @endif
-
-              <div class="row">
-                <div class="col-md-3">
-                  {{ trans('admin/maintenances/form.start_date') }}
-                </div>
-                <div class="col-md-9">
-                  {{ Helper::getFormattedDateObject($maintenance->start_date, 'date', false) }}
-                </div>
-              </div> <!-- /row -->
-
-              <div class="row">
-                <div class="col-md-3">
-                  {{ trans('admin/maintenances/form.completion_date') }}
-                </div>
-                <div class="col-md-9">
-                  @if ($maintenance->completion_date)
-                    {{ Helper::getFormattedDateObject($maintenance->completion_date, 'date', false) }}
-                  @else
-                    {{ trans('admin/maintenances/message.asset_maintenance_incomplete') }}
-                  @endif
-                </div>
-              </div> <!-- /row -->
-
-              @if ($maintenance->url)
-                <div class="row">
-                  <div class="col-md-3">
-                    {{ trans('general.url') }}
-                  </div>
-                  <div class="col-md-9">
-                    <a href="{{ $maintenance->url }}">
-                      {{ $maintenance->url }}
-                      <x-icon type="external-link" />
-                    </a>
-                  </div>
-                </div> <!-- /row -->
-              @endif
-
-              <div class="row">
-                <div class="col-md-3">
-                  {{ trans('admin/maintenances/form.asset_maintenance_time') }}
-                </div>
-                <div class="col-md-9">
-                  {{ $maintenance->asset_maintenance_time }}
-                </div>
-              </div> <!-- /row -->
-
-              @if ($maintenance->cost > 0)
-              <div class="row">
-                <div class="col-md-3">
-                  {{ trans('admin/maintenances/form.cost') }}
-                </div>
-                <div class="col-md-9">
-                  {{ \App\Models\Setting::getSettings()->default_currency .' '. Helper::formatCurrencyOutput($maintenance->cost) }}
-                </div>
-              </div> <!-- /row -->
-              @endif
-
-              <div class="row">
-                <div class="col-md-3">
-                  {{ trans('admin/maintenances/form.is_warranty') }}
-                </div>
-                <div class="col-md-9">
-                  {{ $maintenance->is_warranty ? trans('admin/maintenances/message.warranty') : trans('admin/maintenances/message.not_warranty') }}
-                </div>
-              </div> <!-- /row -->
-
-              @if ($maintenance->notes)
-              <div class="row">
-                <div class="col-md-3">
-                  {{ trans('admin/maintenances/form.notes') }}
-                </div>
-                <div class="col-md-9">
-                  {!! nl2br(Helper::parseEscapedMarkedownInline($maintenance->notes)) !!}
-                </div>
-              </div> <!-- /row -->
-              @endif
-
-
-            </div>
-            </div><!-- /row-new-striped -->
-            <div class="tab-pane" id="files">
-              <div class="row">
-                <div class="col-md-12">
-                  <x-filestable object_type="maintenances" :object="$maintenance" />
-                </div>
-              </div>
-            </div>
-        </div><!-- /box-body -->
-      </div><!-- /box -->
-
-      </div> <!-- col-md-9  end -->
-      <div class="col-md-3">
-
-        @if ($maintenance->image!='')
-          <div class="col-md-12 text-center" style="padding-bottom: 17px;">
-            <img src="{{ Storage::disk('public')->url(app('maintenances_path').e($maintenance->image)) }}" class="img-responsive img-thumbnail" style="width:100%" alt="{{ $maintenance->name }}">
-          </div>
-        @endif
-
-        <div class="col-md-12">
-
-          <ul class="list-unstyled" style="line-height: 22px; padding-bottom: 20px;">
-
-            @if ($maintenance->notes)
-              <li>
-                <strong>{{ trans('general.notes') }}</strong>:
-                {!! nl2br(Helper::parseEscapedMarkedownInline($maintenance->notes)) !!}
-              </li>
-            @endif
-
-
-          </ul>
-      </div>
-
-      @can('update', $maintenance)
-        <div class="col-md-12">
-          <a href="{{ route('maintenances.edit', [$maintenance->id]) }}" style="width: 100%;" class="btn btn-sm btn-warning btn-social">
-            <x-icon type="edit" />
-            {{ trans('general.update') }}
-          </a>
-        </div>
-      @endcan
-    </div>
-
-    </div> <!-- row  end -->
-
-  @can('assets.files', Asset::class)
-    @include ('modals.upload-file', ['item_type' => 'maintenance', 'item_id' => $maintenance->id])
-  @endcan
-@stop
 
 @section('moar_scripts')
-  @include ('partials.bootstrap-table')
-@stop
+    @can('files', $maintenance)
+        <x-modals.upload-file item-type="maintenances" :item-id="$maintenance->id" />
+    @endcan
+    @can('journal', $maintenance)
+        <x-modals.add-note type="maintenance" :id="$maintenance->id" />
+    @endcan
+
+    <div class="modal fade" id="completeMaintenanceModal" tabindex="-1" role="dialog" aria-labelledby="completeMaintenanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="{{ trans('button.close') }}">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="completeMaintenanceModalLabel">{{ trans('admin/maintenances/form.mark_complete') }}</h4>
+                </div>
+                <form method="POST" action="{{ route('maintenances.complete', $maintenance->id) }}">
+                    @csrf
+                    <div class="modal-body">
+                        <p>{{ trans('admin/maintenances/message.complete.confirm') }}</p>
+                        <div class="form-group">
+                            <label for="completionNote">{{ trans('admin/maintenances/form.completion_notes') }}</label>
+                            <textarea class="form-control" id="completionNote" name="note" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">{{ trans('button.cancel') }}</button>
+                        <button type="submit" class="btn btn-success pull-right">{{ trans('admin/maintenances/form.mark_complete') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @include ('partials.bootstrap-table')
+@endsection
 

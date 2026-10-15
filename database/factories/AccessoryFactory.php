@@ -17,7 +17,7 @@ class AccessoryFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var string
+     * @var class-string<Accessory>
      */
     protected $model = Accessory::class;
 
@@ -38,6 +38,8 @@ class AccessoryFactory extends Factory
             'category_id' => Category::factory()->forAccessories(),
             'model_number' => $this->faker->numberBetween(1000000, 50000000),
             'location_id' => Location::factory(),
+            'default_purchase_cost' => $this->faker->randomFloat(2, 5, 250),
+            'legacy_purchase_date' => $this->faker->dateTimeBetween('-1 years', 'now', date_default_timezone_get())->format('Y-m-d'),
             'qty' => 1,
         ];
     }
@@ -56,7 +58,7 @@ class AccessoryFactory extends Factory
                 },
                 'qty' => 10,
                 'min_amt' => 2,
-                'supplier_id' => Supplier::factory(),
+                'default_supplier_id' => Supplier::factory(),
             ];
         });
     }
@@ -75,7 +77,7 @@ class AccessoryFactory extends Factory
                 },
                 'qty' => 15,
                 'min_amt' => 2,
-                'supplier_id' => Supplier::factory(),
+                'default_supplier_id' => Supplier::factory(),
             ];
         });
     }
@@ -94,7 +96,7 @@ class AccessoryFactory extends Factory
                 },
                 'qty' => 13,
                 'min_amt' => 2,
-                'supplier_id' => Supplier::factory(),
+                'default_supplier_id' => Supplier::factory(),
             ];
         });
     }
@@ -144,7 +146,14 @@ class AccessoryFactory extends Factory
         });
     }
 
-    public function checkedOutToUser(User $user = null)
+    public function notRequiringAcceptance()
+    {
+        return $this->afterCreating(function ($accessory) {
+            $accessory->category->update(['require_acceptance' => 0]);
+        });
+    }
+
+    public function checkedOutToUser(?User $user = null)
     {
         return $this->afterCreating(function (Accessory $accessory) use ($user) {
             $accessory->checkouts()->create([
@@ -172,7 +181,7 @@ class AccessoryFactory extends Factory
         });
     }
 
-    public function checkedOutToAsset(Asset $asset = null)
+    public function checkedOutToAsset(?Asset $asset = null)
     {
         return $this->afterCreating(function (Accessory $accessory) use ($asset) {
             $accessory->checkouts()->create([
@@ -185,7 +194,7 @@ class AccessoryFactory extends Factory
         });
     }
 
-    public function checkedOutToLocation(Location $location = null)
+    public function checkedOutToLocation(?Location $location = null)
     {
         return $this->afterCreating(function (Accessory $accessory) use ($location) {
             $accessory->checkouts()->create([
@@ -195,6 +204,37 @@ class AccessoryFactory extends Factory
                 'assigned_to' => $location->id ?? Location::factory()->create()->id,
                 'assigned_type' => Location::class,
             ]);
+        });
+    }
+
+    /**
+     * See ComponentFactory::withInitialAcquisition for docs.
+     */
+    public function withInitialAcquisition(
+        ?Supplier $supplier = null,
+        ?float $unitCost = null,
+        ?string $purchaseDate = null,
+    ) {
+        return $this->afterCreating(function (Accessory $accessory) use ($supplier, $unitCost, $purchaseDate) {
+            $line = $accessory->orderItems()->latest('id')->first();
+            if (! $line) {
+                return;
+            }
+            if ($unitCost !== null) {
+                $line->price = $unitCost;
+                $line->save();
+            }
+            $order = $line->order;
+            if (! $order) {
+                return;
+            }
+            if ($supplier !== null) {
+                $order->supplier_id = $supplier->id;
+            }
+            if ($purchaseDate !== null) {
+                $order->purchase_date = Carbon::parse($purchaseDate);
+            }
+            $order->save();
         });
     }
 }

@@ -6,27 +6,75 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\User;
 use Error;
-use Tests\TestCase;
 use Illuminate\Support\Facades\Hash;
+use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
-
-    public function testRequiresPermission()
+    public function test_requires_permission()
     {
         $this->actingAs(User::factory()->create())
             ->get(route('users.edit', User::factory()->create()->id))
             ->assertForbidden();
     }
 
-    public function testPageRenders()
+    public function test_page_renders()
     {
         $this->actingAs(User::factory()->editUsers()->create())
             ->get(route('users.edit', User::factory()->create()->id))
             ->assertOk();
     }
 
-    public function testCanViewEditPageForSoftDeletedUser()
+    public function test_edit_form_does_not_leak_company_id_into_location_select()
+    {
+        // Regression: the company_ids <select> looped with `@foreach (... as $company_id)`,
+        // and PHP's foreach doesn't scope the loop variable, so $company_id persisted into
+        // the outer view. The @include of location-select then inherited it and emitted
+        // data-company-id on the location dropdown, which restricted the AJAX call to
+        // only that one company's locations.
+        $companyA = Company::factory()->create();
+        $target = User::factory()->create();
+        $target->companies()->sync([$companyA->id]);
+
+        $this->actingAs(User::factory()->superuser()->create());
+
+        $html = $this->get(route('users.edit', $target))->assertOk()->getContent();
+
+        $this->assertStringNotContainsString(
+            'data-company-id',
+            $this->extractLocationSelect($html),
+            'Location select must not emit data-company-id from a leaked foreach variable.'
+        );
+    }
+
+    private function extractLocationSelect(string $html): string
+    {
+        if (! preg_match('/<select[^>]*id="location_id_location_select"[^>]*>/', $html, $matches)) {
+            $this->fail('Location select element not found in user edit HTML.');
+        }
+
+        return $matches[0];
+    }
+
+    public function test_uncompanied_user_can_edit_their_own_record_with_fmcs_on_and_floater_off()
+    {
+        // Regression: with FMCS on + floater off, the CompanyableScope lets an
+        // uncompanied non-superuser see themselves in the users list, but the
+        // policy used to 403 the edit because the bypass required the legacy
+        // scalar users.company_id column to also be null. Actors are always
+        // allowed to access their own record.
+        $this->settings->enableMultipleFullCompanySupport();
+        $this->settings->disableFloaterMode();
+
+        $self = User::factory()->editUsers()->withoutCompany()->create();
+        $self->companies()->sync([]);
+
+        $this->actingAs($self)
+            ->get(route('users.edit', $self))
+            ->assertOk();
+    }
+
+    public function test_can_view_edit_page_for_soft_deleted_user()
     {
         $user = User::factory()->trashed()->create();
 
@@ -35,7 +83,7 @@ class UpdateUserTest extends TestCase
             ->assertRedirectToRoute('users.show', $user->id);
     }
 
-    public function testUsersCanBeActivatedWithNumber()
+    public function test_users_can_be_activated_with_number()
     {
         $admin = User::factory()->editUsers()->create();
         $user = User::factory()->create(['activated' => 0]);
@@ -50,7 +98,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(1, $user->refresh()->activated);
     }
 
-    public function testUsersCanBeActivatedWithBooleanTrue()
+    public function test_users_can_be_activated_with_boolean_true()
     {
         $admin = User::factory()->editUsers()->create();
         $user = User::factory()->create(['activated' => false]);
@@ -65,7 +113,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(1, $user->refresh()->activated);
     }
 
-    public function testUsersCanBeDeactivatedWithNumber()
+    public function test_users_can_be_deactivated_with_number()
     {
         $admin = User::factory()->editUsers()->create();
         $user = User::factory()->create(['activated' => true]);
@@ -80,7 +128,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(0, $user->refresh()->activated);
     }
 
-    public function testUsersCanBeDeactivatedWithBooleanFalse()
+    public function test_users_can_be_deactivated_with_boolean_false()
     {
         $admin = User::factory()->editUsers()->create();
         $user = User::factory()->create(['activated' => true]);
@@ -95,7 +143,7 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(0, $user->refresh()->activated);
     }
 
-    public function testUsersUpdatingThemselvesDoNotDeactivateTheirAccount()
+    public function test_users_updating_themselves_do_not_deactivate_their_account()
     {
         $admin = User::factory()->editUsers()->create(['activated' => true]);
 
@@ -108,11 +156,50 @@ class UpdateUserTest extends TestCase
         $this->assertEquals(1, $admin->refresh()->activated);
     }
 
-    public function testEditingUsersCannotEditEscalationFieldsForAdmins()
+    /**
+     * Regression for the pre-gate-activated escalation:
+     * UsersController::update used to assign $user->activated from the
+     * request BEFORE the canEditAuthFields gate, with the intent that the
+     * gated branch would overwrite it for authorized callers. Unauthorized
+     * callers had the first assignment stick through to save(), letting
+     * anyone with `users.edit` deactivate any admin by POSTing a full edit
+     * payload.
+     *
+     * The pre-existing test_editing_users_cannot_edit_escalation_fields_for_admins
+     * passed by accident because its payload omitted first_name / last_name,
+     * so SaveUserRequest rejected the request on validation before the
+     * controller wrote to the model. This test sends a complete valid
+     * payload so the controller actually runs to save() and pins the
+     * unauthorized-cannot-touch-activated behavior directly.
+     */
+    public function test_editing_users_cannot_toggle_admin_activated_via_full_valid_payload()
+    {
+        $editing_user = User::factory()->editUsers()->create(['activated' => true]);
+        $admin = User::factory()->admin()->create([
+            'first_name' => 'Admin',
+            'last_name' => 'Target',
+            'username' => 'admin_target',
+            'email' => 'admin-target@example.test',
+            'activated' => true,
+        ]);
+
+        $this->actingAs($editing_user)
+            ->put(route('users.update', $admin), [
+                'first_name' => $admin->first_name,
+                'last_name' => $admin->last_name,
+                'username' => $admin->username,
+                'email' => $admin->email,
+                'activated' => 0,
+            ]);
+
+        $this->assertSame(1, (int) $admin->fresh()->activated, 'Non-admin actor must not be able to deactivate an admin.');
+    }
+
+    public function test_editing_users_cannot_edit_escalation_fields_for_admins()
     {
         $editing_user = User::factory()->editUsers()->create(['activated' => true]);
         $hashed_original = Hash::make('my-awesome-password!!!!!12345');
-        $admin = User::factory()->admin()->create(['username' => 'TestAdminUser', 'email'=> 'admin@example.org', 'password' => $hashed_original, 'activated' => true]);
+        $admin = User::factory()->admin()->create(['username' => 'TestAdminUser', 'email' => 'admin@example.org', 'password' => $hashed_original, 'activated' => true]);
 
         $this->assertDatabaseHas('users', [
             'id' => $admin->id,
@@ -130,7 +217,6 @@ class UpdateUserTest extends TestCase
                 'password' => 'TOTALLY-DIFFERENT-awesome-password!!!!!12345',
             ]);
 
-
         $this->assertEquals('TestAdminUser', $admin->refresh()->username);
         $this->assertEquals('admin@example.org', $admin->refresh()->email);
         $this->assertEquals(1, $admin->refresh()->activated);
@@ -141,11 +227,11 @@ class UpdateUserTest extends TestCase
         $this->assertNotEquals(Hash::check('TOTALLY-DIFFERENT-awesome-password!!!!!12345', $admin->password), $admin->refresh()->password);
     }
 
-    public function testAdminUsersCannotEditFieldsForSuperAdmins()
+    public function test_admin_users_cannot_edit_fields_for_super_admins()
     {
         $admin = User::factory()->admin()->create(['activated' => true]);
         $hashed_original = Hash::make('my-awesome-password!!!!!12345');
-        $superuser = User::factory()->superuser()->create(['username' => 'TestSuperUser', 'email'=> 'superuser@example.org', 'password' => $hashed_original, 'activated' => true]);
+        $superuser = User::factory()->superuser()->create(['username' => 'TestSuperUser', 'email' => 'superuser@example.org', 'password' => $hashed_original, 'activated' => true]);
 
         $this->assertDatabaseHas('users', [
             'id' => $superuser->id,
@@ -180,17 +266,14 @@ class UpdateUserTest extends TestCase
         $this->assertNotTrue(Hash::check('super-secret-new-password', $superuser->password), $superuser->refresh()->password);
     }
 
-
-    public function testMultiCompanyUserCannotBeMovedIfHasAssetInDifferentCompany()
+    public function test_multi_company_user_cannot_be_moved_if_has_asset_in_different_company()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
         $companyA = Company::factory()->create();
         $companyB = Company::factory()->create();
 
-        $user = User::factory()->create([
-            'company_id' => $companyA->id,
-        ]);
+        $user = User::factory()->forCompany($companyA)->create();
         $superUser = User::factory()->superuser()->create();
 
         $asset = Asset::factory()->create([
@@ -199,34 +282,32 @@ class UpdateUserTest extends TestCase
 
         // no assets assigned, therefore success
         $this->actingAs($superUser)->put(route('users.update', $user), [
-            'first_name'      => 'test',
-            'username'        => 'test',
-            'company_id'      => $companyB->id,
-            'redirect_option' => 'index'
+            'first_name' => 'test',
+            'username' => 'test',
+            'company_id' => $companyB->id,
+            'redirect_option' => 'index',
         ])->assertRedirect(route('users.index'));
 
         $asset->checkOut($user, $superUser);
 
         // asset assigned, therefore error
         $response = $this->actingAs($superUser)->patchJson(route('users.update', $user), [
-            'first_name'      => 'test',
-            'username'        => 'test',
-            'company_id'      => $companyB->id,
-            'redirect_option' => 'index'
+            'first_name' => 'test',
+            'username' => 'test',
+            'company_id' => $companyB->id,
+            'redirect_option' => 'index',
         ]);
 
         $this->followRedirects($response)->assertSee('error');
     }
 
-    public function testMultiCompanyUserCanBeUpdatedIfHasAssetInSameCompany()
+    public function test_multi_company_user_can_be_updated_if_has_asset_in_same_company()
     {
         $this->settings->enableMultipleFullCompanySupport();
 
         $companyA = Company::factory()->create();
 
-        $user = User::factory()->create([
-            'company_id' => $companyA->id,
-        ]);
+        $user = User::factory()->forCompany($companyA)->create();
         $superUser = User::factory()->superuser()->create();
 
         $asset = Asset::factory()->create([
@@ -235,34 +316,88 @@ class UpdateUserTest extends TestCase
 
         // no assets assigned, therefore success
         $this->actingAs($superUser)->put(route('users.update', $user), [
-            'first_name'      => 'test',
-            'username'        => 'test',
-            'company_id'      => $companyA->id,
-            'redirect_option' => 'index'
+            'first_name' => 'test',
+            'username' => 'test',
+            'company_id' => $companyA->id,
+            'redirect_option' => 'index',
         ])->assertRedirect(route('users.index'));
 
         $asset->checkOut($user, $superUser);
 
         // asset assigned, therefore error
         $response = $this->actingAs($superUser)->patchJson(route('users.update', $user), [
-            'first_name'      => 'test',
-            'username'        => 'test',
-            'company_id'      => $companyA->id,
-            'redirect_option' => 'index'
+            'first_name' => 'test',
+            'username' => 'test',
+            'company_id' => $companyA->id,
+            'redirect_option' => 'index',
         ]);
 
         $this->followRedirects($response)->assertSee('success');
     }
 
+    public function test_edit_users_permission_cannot_escalate_empty_permissions_user_to_admin_or_superuser_via_ui()
+    {
+        $editingUser = User::factory()->editUsers()->create();
+        $targetUser = User::factory()->create([
+            'permissions' => null,
+        ]);
+
+        $this->actingAs($editingUser)
+            ->put(route('users.update', $targetUser), [
+                'first_name' => $targetUser->first_name,
+                'username' => $targetUser->username,
+                'permission' => [
+                    'admin' => '1',
+                    'superuser' => '1',
+                    'users.view' => '1',
+                ],
+                'redirect_option' => 'index',
+            ])
+            ->assertRedirect(route('users.index'));
+
+        $decoded = (array) $targetUser->refresh()->decodePermissions();
+
+        $this->assertArrayNotHasKey('admin', $decoded, 'Non-admin user should not be able to grant admin');
+        $this->assertArrayNotHasKey('superuser', $decoded, 'Non-admin user should not be able to grant superuser');
+        $this->assertEquals(1, $decoded['users.view'] ?? null, 'Non-privileged permissions should still be updateable');
+    }
+
+    public function test_admin_cannot_escalate_empty_permissions_user_to_superuser_via_ui()
+    {
+        $adminUser = User::factory()->admin()->create();
+        $targetUser = User::factory()->create([
+            'permissions' => null,
+        ]);
+
+        $this->actingAs($adminUser)
+            ->put(route('users.update', $targetUser), [
+                'first_name' => $targetUser->first_name,
+                'username' => $targetUser->username,
+                'permission' => [
+                    'admin' => '1',
+                    'superuser' => '1',
+                ],
+                'redirect_option' => 'index',
+            ])
+            ->assertRedirect(route('users.index'));
+
+        $decoded = (array) $targetUser->refresh()->decodePermissions();
+
+        $this->assertArrayHasKey('admin', $decoded, 'Admin should be able to grant admin');
+        $this->assertSame('1', (string) $decoded['admin']);
+        $this->assertArrayNotHasKey('superuser', $decoded, 'Admin should not be able to grant superuser');
+    }
+
     /**
      * This can occur if the user edit screen is open in one tab and
      * the user is deleted in another before the edit form is submitted.
+     *
      * @link https://app.shortcut.com/grokability/story/29166
      */
-    public function testAttemptingToUpdateDeletedUserIsHandledGracefully()
+    public function test_attempting_to_update_deleted_user_is_handled_gracefully()
     {
         [$companyA, $companyB] = Company::factory()->count(2)->create();
-        $user = User::factory()->for($companyA)->create();
+        $user = User::factory()->forCompany($companyA)->create();
         Asset::factory()->assignedToUser($user)->create();
 
         $id = $user->id;
@@ -286,7 +421,71 @@ class UpdateUserTest extends TestCase
             'id' => $id,
             'first_name' => 'test',
             'username' => 'test',
+        ]);
+
+        $this->assertDatabaseHas('company_user', [
+            'user_id' => $id,
             'company_id' => $companyB->id,
         ]);
+    }
+
+    public function test_admin_updating_another_admin_without_permission_field_preserves_target_permissions()
+    {
+        $editor = User::factory()->admin()->create();
+        $target = User::factory()->admin()->create();
+
+        $originalPermissions = $target->decodePermissions();
+        $this->assertArrayHasKey('admin', $originalPermissions, 'Target should have admin permission set');
+
+        $this->actingAs($editor)
+            ->put(route('users.update', $target), [
+                'first_name' => $target->first_name,
+                'username' => $target->username,
+                // 'permission' intentionally omitted — the vulnerable path
+            ])
+            ->assertRedirect();
+
+        $this->assertEquals(
+            $originalPermissions,
+            $target->fresh()->decodePermissions(),
+            'Target admin permissions should be unchanged when permission field is absent'
+        );
+    }
+
+    public function test_non_admin_updating_regular_user_without_permission_field_preserves_granular_permissions()
+    {
+        $editor = User::factory()->editUsers()->create();
+        $target = User::factory()->create([
+            'permissions' => json_encode(['hardware.view' => '1', 'reports.view' => '1']),
+        ]);
+
+        $this->actingAs($editor)
+            ->put(route('users.update', $target), [
+                'first_name' => $target->first_name,
+                'username' => $target->username,
+                // 'permission' intentionally omitted
+            ])
+            ->assertRedirect();
+
+        $permissions = $target->fresh()->decodePermissions();
+        $this->assertEquals('1', $permissions['hardware.view'], 'hardware.view should be preserved');
+        $this->assertEquals('1', $permissions['reports.view'], 'reports.view should be preserved');
+    }
+
+    public function test_admin_updating_another_admin_with_permission_field_can_change_permissions()
+    {
+        $editor = User::factory()->admin()->create();
+        $target = User::factory()->admin()->create();
+
+        $this->actingAs($editor)
+            ->put(route('users.update', $target), [
+                'first_name' => $target->first_name,
+                'username' => $target->username,
+                'permission' => ['admin' => '1', 'hardware.view' => '1'],
+            ])
+            ->assertRedirect();
+
+        $permissions = $target->fresh()->decodePermissions();
+        $this->assertEquals('1', $permissions['hardware.view'], 'Explicitly submitted permissions should be applied');
     }
 }

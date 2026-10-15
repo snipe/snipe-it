@@ -21,7 +21,7 @@ class CleanIncorrectCheckoutAcceptances extends Command
      *
      * @var string
      */
-    protected $description = "Delete checkout acceptances for checkouts to non-users";
+    protected $description = 'Delete checkout acceptances for checkouts to non-users';
 
     /**
      * Execute the console command.
@@ -30,39 +30,77 @@ class CleanIncorrectCheckoutAcceptances extends Command
     {
         $deletions = 0;
         $skips = 0;
+        $total = CheckoutAcceptance::count();
 
-        // This walks *every* checkoutacceptance. That's gnarly. But necessary
-        $this->withProgressBar(CheckoutAcceptance::all(), function ($checkoutAcceptance) use (&$deletions, &$skips) {
-            $item = $checkoutAcceptance->checkoutable;
-            $checkout_to_id = $checkoutAcceptance->assigned_to_id;
-            if(is_null($item)) {
-                $this->info("'Checkoutable' Item is null, going to next record");
-                return; //'false' allegedly breaks execution entirely, so 'true' maybe doesn't? hrm. just straight return maybe?
-            }
-            if(get_class($item) == LicenseSeat::class) {
-                $item = $item->license;
-            }
-            foreach($item->assetlog()->where('action_type','checkout')->get() as $assetlog) {
-                if ($assetlog->target_id == $checkout_to_id && $assetlog->target_type != User::class) {
-                    //We have a checkout-to an ID for a non-User, which matches to an ID in the checkout_acceptances table
+        $this->info("Processing {$total} checkout acceptances...");
+        $bar = $this->output->createProgressBar($total);
+        $bar->start();
 
-                    //now, let's compare the _times_ - are they close?
-                    //I'm picking `created_at` over `action_date` because I'm more interested in when the actionlogs
-                    //were _created_, not when they were alleged to have happened - those created_at times need to be within 'X' seconds of
-                    //each other (currently 5)
-                    if ($assetlog->created_at->diffInSeconds($checkoutAcceptance->created_at, true) <= 5) { //we're allowing for five _ish_ seconds of slop
-                        $deletions++;
-                        $checkoutAcceptance->forceDelete(); // HARD delete this record; it should have never been
-                        return;
-                    } else {
-                        //$this->info("The two records are too far apart");
+        // Chunk to avoid loading the whole table into memory; eager-load checkoutable
+        // to eliminate the N+1 on that relationship.
+        CheckoutAcceptance::with('checkoutable')
+            ->chunkById(500, function ($chunk) use (&$deletions, &$skips, $bar) {
+                $idsToDelete = [];
+
+                foreach ($chunk as $checkoutAcceptance) {
+                    $item = $checkoutAcceptance->checkoutable;
+                    $checkout_to_id = $checkoutAcceptance->assigned_to_id;
+
+                    if (is_null($item)) {
+                        $skips++;
+                        $bar->advance();
+
+                        continue;
                     }
-                } else {
-                    //$this->info("No match! checkout to id: " . $checkout_to_id." target_id: ".$assetlog->target_id." target_type: ".$assetlog->target_type);
+
+                    if (get_class($item) === LicenseSeat::class) {
+                        $item = $item->license;
+                        if (is_null($item)) {
+                            $skips++;
+                            $bar->advance();
+
+                            continue;
+                        }
+                    }
+
+                    if (is_null($checkoutAcceptance->created_at)) {
+                        $skips++;
+                        $bar->advance();
+
+                        continue;
+                    }
+
+                    // Push all filtering (including the ±5-second window) into the DB;
+                    // exists() returns as soon as one matching row is found rather than
+                    // fetching all checkout logs into PHP.
+                    $shouldDelete = $item->assetlog()
+                        ->where('action_type', 'checkout')
+                        ->where('target_id', $checkout_to_id)
+                        ->where('target_type', '!=', User::class)
+                        ->whereBetween('created_at', [
+                            $checkoutAcceptance->created_at->copy()->subSeconds(5),
+                            $checkoutAcceptance->created_at->copy()->addSeconds(5),
+                        ])
+                        ->exists();
+
+                    if ($shouldDelete) {
+                        $idsToDelete[] = $checkoutAcceptance->id;
+                        $deletions++;
+                    } else {
+                        $skips++;
+                    }
+
+                    $bar->advance();
                 }
-            }
-            $skips++;
-        });
-        $this->error("Final deletion count: $deletions, and skip count: $skips");
+
+                // Bulk-delete the bad records in one query per chunk instead of one per row.
+                if (! empty($idsToDelete)) {
+                    CheckoutAcceptance::whereIn('id', $idsToDelete)->forceDelete();
+                }
+            });
+
+        $bar->finish();
+        $this->newLine();
+        $this->info("Final deletion count: {$deletions}, and skip count: {$skips}");
     }
 }

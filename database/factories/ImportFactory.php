@@ -3,8 +3,9 @@
 namespace Database\Factories;
 
 use App\Models\Import;
-use Illuminate\Support\Str;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use Tests\Support\Importing;
 
 /**
@@ -13,20 +14,27 @@ use Tests\Support\Importing;
 class ImportFactory extends Factory
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected $model = Import::class;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function definition()
     {
         return [
-            'name'     => $this->faker->company,
+            'name' => $this->faker->company,
             'file_path' => Str::random().'.csv',
-            'filesize'  => $this->faker->randomDigitNotNull(),
+            'filesize' => $this->faker->randomDigitNotNull(),
             'field_map' => null,
+            // In production `store()` always sets `created_by = auth()->id()`,
+            // so an import never exists without an owner. Mirror that here:
+            // if the test is already actingAs someone, use them; otherwise
+            // mint a fresh user. This keeps the "actor owns their import"
+            // idiom that existing tests already assume, and lets the API
+            // owner-scope on read/process paths match production behavior.
+            'created_by' => auth()->id() ?? User::factory(),
         ];
     }
 
@@ -106,7 +114,7 @@ class ImportFactory extends Factory
         });
     }
 
-     /**
+    /**
      * Create a license import type.
      *
      * @return static
@@ -143,8 +151,6 @@ class ImportFactory extends Factory
             return $attributes;
         });
     }
-
-
 
     /**
      * Create an asset model import type.
@@ -232,5 +238,16 @@ class ImportFactory extends Factory
         });
     }
 
+    public function assetHistory()
+    {
+        return $this->state(function (array $attributes) {
+            $fileBuilder = Importing\AssetHistoryImportFileBuilder::new();
+            $attributes['name'] = "{$attributes['name']} Asset History";
+            $attributes['import_type'] = 'assetHistory';
+            $attributes['header_row'] = $fileBuilder->toCsv()[0];
+            $attributes['first_row'] = $fileBuilder->firstRow();
 
+            return $attributes;
+        });
+    }
 }

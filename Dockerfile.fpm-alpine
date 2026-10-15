@@ -13,7 +13,7 @@ FROM php:${PHP_VERSION}-fpm-alpine${PHP_ALPINE_VERSION} AS source
 LABEL maintainer="Mateus Villar <mromeravillar@gmail.com>"
 
 ARG PACKAGES="\
-		mysql-client \
+		mariadb-client \
 "
 ARG DEV_PACKAGES="\
 		git \
@@ -27,7 +27,6 @@ ENV SNIPEIT_RELEASE ${SNIPEIT_RELEASE}
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN set -eux; \
-	docker-php-ext-enable opcache; \
 	{ \
 		echo 'opcache.memory_consumption=128'; \
 		echo 'opcache.interned_strings_buffer=8'; \
@@ -56,9 +55,11 @@ COPY --from=mlocati/php-extension-installer:2.1.15 /usr/bin/install-php-extensio
 RUN set -eux; \
     install-php-extensions \
         bcmath \
+        exif \
         gd \
         ldap \
         mysqli \
+        opcache \
         pdo_mysql \
         zip; \
     rm -f /usr/local/bin/install-php-extensions; \

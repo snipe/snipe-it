@@ -3,60 +3,62 @@
 return [
     'activated_help_text' => 'این کاربر می تواند وارد شود
 ',
+    'activated_password_required_help' => 'If you activate this user, you will need to provide a password so they can log in.',
     'activated_disabled_help_text' => 'شما نمی توانید وضعیت فعال سازی را برای حساب خود ویرایش کنید.
 ',
-    'assets_user'       => 'دارایی ها محول شده به :',
-    'bulk_update_warn'	=> 'شما در حال خواندن مشخصات خواص کاربر user_count هستید. لطفا توجه داشته باشید که نمیتوانید ویژگیهای کاربر خود را با استفاده از این فرم تغییر دهید و باید به صورت جداگانه به کاربر خود ویرایش کنید.',
-    'bulk_update_help'	=> 'این فرم به شما امکان می دهد چندین بار در یک بار به روز کنید. فقط فیلمی را که باید تغییر دهید را پر کنید. هر فیلدی که خالی باقی می ماند بدون تغییر باقی خواهد ماند.',
-    'current_assets'    => 'دارایی های اکنون  برای این کاربر بیرون کشیده شد',
-    'clone'             => 'کلون کاربر',
-    'contact_user'      => 'تماس با:',
-    'edit'              => 'ویرایش کاربر',
-    'filetype_info'     => 'پسوند های مجاز:png, gif, jpg, jpeg, doc, docx, pdf, txt, zip,Rar',
-    'history_user'      => 'تاریخچه برای:',
-    'info'				=> 'اطلاعات',
-    'restore_user'		=> 'برای بازسازی آنها اینجا کلیک کنید.',
-    'last_login'        => 'آخرین ورود',
-    'ldap_config_text'  => 'The selected location will be set for ALL imported users. This will overwrite their existing location, and is an unusual use-case, so leaving this blank is typically best.',
-    'ldap_sync_intro'   => 'Click on the button below to manually sync your LDAP users. To learn more about configuring LDAP sync to run automatically, please see the <a href=":link" target="_blank">documentation <i class="fa fa-external-link"></i></a> .',
-    'print_assigned'    => 'چاپ همه موارد واگذار شده',
-    'email_assigned'    => 'لیست ایمیل همه اختصاص داده شده
+    'assets_user' => 'دارایی ها محول شده به :',
+    'bulk_update_warn' => 'شما در حال خواندن مشخصات خواص کاربر user_count هستید. لطفا توجه داشته باشید که نمیتوانید ویژگیهای کاربر خود را با استفاده از این فرم تغییر دهید و باید به صورت جداگانه به کاربر خود ویرایش کنید.',
+    'bulk_update_help' => 'این فرم به شما امکان می دهد چندین بار در یک بار به روز کنید. فقط فیلمی را که باید تغییر دهید را پر کنید. هر فیلدی که خالی باقی می ماند بدون تغییر باقی خواهد ماند.',
+    'current_assets' => 'دارایی های اکنون  برای این کاربر بیرون کشیده شد',
+    'current_items' => ':item currently checked out to this :target',
+    'clone' => 'کلون کاربر',
+    'contact_user' => 'تماس با:',
+    'edit' => 'ویرایش کاربر',
+    'filetype_info' => 'پسوند های مجاز:png, gif, jpg, jpeg, doc, docx, pdf, txt, zip,Rar',
+    'history_user' => 'تاریخچه برای:',
+    'info' => 'اطلاعات',
+    'send_acceptance_reminder' => 'Send Reminder',
+    'unaccepted_items' => ':count Unaccepted Items',
+    'restore_user' => 'برای بازسازی آنها اینجا کلیک کنید.',
+    'last_login' => 'آخرین ورود',
+    'ldap_config_text' => 'The selected location will be set for ALL imported users. This will overwrite their existing location, and is an unusual use-case, so leaving this blank is typically best.',
+    'ldap_sync_intro' => 'Click on the button below to manually sync your LDAP users. To learn more about configuring LDAP sync to run automatically, please see the <a href=":link" target="_blank">documentation <i class="fa fa-external-link"></i></a> .',
+    'print_assigned' => 'چاپ همه موارد واگذار شده',
+    'email_assigned' => 'لیست ایمیل همه اختصاص داده شده
 ',
-    'user_notified'     => 'لیستی از موارد اختصاص داده شده فعلی به کاربر ایمیل شده است.
+    'user_notified' => 'لیستی از موارد اختصاص داده شده فعلی به کاربر ایمیل شده است.
 ',
-    'users_notified'    => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
+    'users_notified' => 'The user has been emailed a list of their currently assigned items.|:count users have been emailed a list of their currently assigned items.',
     'users_notified_warning' => ':count user has been emailed a list of their currently assigned items, however :no_email users did not have an email address so could not be emailed.|:count users have been emailed a list of their currently assigned items, however :no_email user(s) did not have an email address so could not be emailed.',
     'auto_assign_label' => 'Include this user when auto-assigning eligible licenses',
-    'auto_assign_help'  => 'Skip this user in auto assignment of licenses',
-    'software_user'     => 'برنامه چک شد برای:',
-    'view_user'         => 'نمایش کاربر :',
-    'usercsv'           => 'فایل CSV',
+    'auto_assign_help' => 'Skip this user in auto assignment of licenses',
+    'software_user' => 'برنامه چک شد برای:',
+    'view_user' => 'نمایش کاربر :',
+    'usercsv' => 'فایل CSV',
     'two_factor_admin_optin_help' => 'تنظیمات مدیریت فعلی شما اجازه اجرای مجدد احراز هویت دو عامل را می دهد.',
     'two_factor_enrolled' => 'دستگاه 2FA ثبت شده است',
-    'two_factor_active'   => '2FA فعال',
-    'user_deactivated'  => 'کاربر نمی تواند وارد شود
+    'two_factor_active' => '2FA فعال',
+    'user_deactivated' => 'کاربر نمی تواند وارد شود
 ',
-    'user_activated'  => 'کاربر می تواند وارد شود
+    'user_activated' => 'کاربر می تواند وارد شود
 ',
     'activation_status_warning' => 'وضعیت فعال سازی را تغییر ندهید
 ',
     'group_memberships_helpblock' => 'فقط سوپرادمین ها می توانند عضویت های گروه را ویرایش کنند.
 ',
-    'superadmin_permission_warning' => 'فقط superadmin ها می توانند به کاربر اجازه دسترسی superadmin را بدهند.
-',
-    'admin_permission_warning' => 'فقط کاربران با حقوق سرپرست یا بیشتر می توانند به کاربر اجازه دسترسی سرپرست بدهند.
-',
+    'superadmin_permission_warning' => 'Only superadmins may grant or revoke superadmin access.',
+    'self_permission_warning' => 'Only superadmins may edit their own permissions.',
+    'admin_permission_warning' => 'Only users with admins rights or greater may grant or revoke admin access.',
     'remove_group_memberships' => 'حذف عضویت در گروه
 ',
-    'warning_deletion_information' => 'شما در شرف بررسی همه موارد از کاربر(های) :count فهرست شده در زیر هستید. نام های فوق ادمین با رنگ قرمز مشخص شده اند.
-',
+    'warning_deletion_information' => 'You are about to checkin ALL items from the :count user(s) listed below.',
     'update_user_assets_status' => 'همه دارایی های این کاربران را به این وضعیت به روز کنید
 ',
     'checkin_user_properties' => 'تمام ویژگی های مرتبط با این کاربران را بررسی کنید
 ',
-    'remote_label'   => 'این یک کاربر از راه دور است
+    'remote_label' => 'این یک کاربر از راه دور است
 ',
-    'remote'   => 'از دور',
+    'remote' => 'از دور',
     'remote_help' => 'اگر نیاز به فیلتر کردن توسط کاربران راه دوری که هرگز یا به ندرت به مکان های فیزیکی شما نمی آیند، می تواند مفید باشد.
 ',
     'not_remote_label' => 'این یک کاربر راه دور نیست
@@ -73,4 +75,38 @@ return [
     'department_manager' => 'Department Manager',
     'generate_password' => 'Generate random password',
     'individual_override' => 'This user has at least one individual permission set, which may override group permissions.',
+    'cannot_make_floater' => 'Cannot save this user with no company assignment. Floater mode is enabled on this system, which means users with no company can see every record in the application. Only superusers can grant a user floater status.',
+    'floater_mode_warning_help' => 'Floater mode is enabled. A user with no company assignment will be able to see every record in the system. Only superusers can save a user with no company when floater mode is enabled.',
+    'no_companies_assigned' => '(No companies assigned)',
+    'cannot_edit_privileged_user_companies' => 'Only an admin or super admin can modify the company assignments of an admin or super admin user.',
+    'cannot_manage_companies_without_membership' => 'Full multiple company support with floater mode is enabled, so you must be assigned to at least one company before you can manage another user\'s company assignments.',
+    'impersonate_user' => 'Login as :name',
+    'impersonate_confirm_title' => 'Confirm Impersonation',
+    'impersonate_confirm_body' => 'You are about to log in as :name. Any action you take will be recorded as if :name performed it. Continue?',
+    'impersonate_note_label' => 'Note',
+    'impersonate_note_placeholder' => 'e.g. Investigating ticket #12345, verifying user-reported permission issue',
+    'impersonate_note_required' => 'A note is required to impersonate another user.',
+    'impersonating_banner_title' => 'Impersonating:',
+    'impersonating_banner_text' => 'You are currently logged in as :name. Anything you do will be recorded as if :name did it. Your real account is :impersonator.',
+    'impersonating_stop_link' => 'Switch back to :name',
+    'transfer' => [
+        'title' => 'Transfer Items',
+        'button' => 'Transfer Items',
+        'button_tooltip' => 'Check in and re-check out this user\'s items to another user in one step.',
+        'heading' => 'Transfer items from :name',
+        'intro' => 'Pick a destination user and confirm which items to transfer. Each selected item is checked in from the source user and immediately checked out to the destination. Items requiring acceptance will re-fire the acceptance flow for the destination user.',
+        'target_user' => 'Transfer to',
+        'assets' => 'دارایی',
+        'accessories' => 'تجهیزات جانبی',
+        'licenses' => 'گواهی نامه ها',
+        'non_reassignable' => 'Non-reassignable',
+        'note' => 'Reason for transfer',
+        'note_help' => 'A short reason for this transfer, recorded on both the checkin and checkout audit-log entries. Required so future readers can see why the items moved.',
+        'submit' => 'Transfer selected items',
+        'nothing_to_transfer' => 'This user has no assets, accessories, or licenses checked out to transfer.',
+        'nothing_selected' => 'Select at least one item to transfer.',
+        'target_same_as_source' => 'The destination user must be different from the source user.',
+        'success' => 'Transferred :assets asset(s), :accessories accessory checkout(s), and :licenses license seat(s) to :target.',
+        'some_skipped' => ':count item(s) were skipped, likely because they no longer belong to the source user, violate company scoping, or are non-reassignable.',
+    ],
 ];

@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -15,33 +15,33 @@ return array(
     |---------------------------------------------------------------------------
     */
 
-    "superuser" => [
+    'superuser' => [
         'name' => 'Super korisnik',
-        'note'       => 'Određuje da li korisnik ima potpuni pristup svim aspektima administracije. Ovo podešavanje predupređuje SVA specifična i ograničavajuća ovlašćenja u celom sistemu. ',
+        'note' => 'Određuje da li korisnik ima potpuni pristup svim aspektima administracije. Ovo podešavanje predupređuje SVA specifična i ograničavajuća ovlašćenja u celom sistemu. ',
     ],
     'admin' => [
         'name' => 'Administratorski pristup',
-        'note'       => 'Određuje da li korisnik ima pristup većini aspekata sistema OSIM podešavanjima sistemske administracije. Ovi korisnici će moći da upravljaju korisnicima, lokacijama, kategorijama, itd, ali su ograničeni Punom višekompanijskom podrškom ako je omogućena.',
+        'note' => 'Određuje da li korisnik ima pristup većini aspekata sistema OSIM podešavanjima sistemske administracije. Ovi korisnici će moći da upravljaju korisnicima, lokacijama, kategorijama, itd, ali su ograničeni Punom višekompanijskom podrškom ako je omogućena.',
     ],
 
     'import' => [
         'name' => 'Uvoženje CSV-a',
-        'note'       => 'Ovo će dozvoliti korisnicima da uvoze čak i ako pristup korisnicima, imovinom, itd. je onemogućeno negde drugde.',
+        'note' => 'Ovo će dozvoliti korisnicima da uvoze čak i ako pristup korisnicima, imovinom, itd. je onemogućeno negde drugde.',
     ],
 
     'reports' => [
         'name' => 'Pristup izveštajima',
-        'note'       => 'Određuje da li korisnik ima pristup sekciji sa izveštajima aplikacije.',
+        'note' => 'Određuje da li korisnik ima pristup sekciji sa izveštajima aplikacije.',
     ],
 
-    'assets' =>
-        [
-            'name' => 'Imovina',
-            'note' => 'Dozvoljava pristup sekciji sa imovinom aplikacije.',
+    'assets' => [
+        'name' => 'Imovina',
+        'note' => 'Dozvoljava pristup sekciji sa imovinom aplikacije. ',
     ],
 
     'assetsview' => [
         'name' => 'Pregled imovine',
+        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the asset model as well. This is to make it easier to share common documents like user manuals across assets without having to upload them to every asset, and to avoid having to grant the user permission to modify asset files. Users with this permission will also be able to view edit and checkin history.',
     ],
 
     'assetscreate' => [
@@ -72,8 +72,8 @@ return array(
     ],
 
     'assetsviewrequestable' => [
-        'name' => 'Pregled zatražene imovine',
-        'note' => 'Omogućava korisniku pregled imovine koja je označene kao zatraživa.',
+        'name' => 'Pogledaj stavke koje se mogu zatražiti',
+        'note' => 'Omogućava korisniku da pregleda stavke označene kao zatražive.',
     ],
 
     'assetsviewencrypted-custom-fields' => [
@@ -81,9 +81,9 @@ return array(
         'note' => 'Dozvoljava korisniku pregled i izmenu eknriptovanih prilagođenih polja imovine.',
     ],
 
-    'accessories'   => [
+    'accessories' => [
         'name' => 'Dodatna oprema',
-        'note'       => 'Dozvoljava pristup sekciji dodatne opreme aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji dodatne opreme aplikacije.',
     ],
 
     'accessoriesview' => [
@@ -108,11 +108,52 @@ return array(
     ],
     'accessoriesfiles' => [
         'name' => 'Upravljanje datotekama dodatne opreme',
-        'note' => 'Dozvoljava korisniku da postavlja, preuzima i briše datoteke povezane sa dodatnom opremom.',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa dodatnom opremom. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
     ],
-    'consumables'   => [
+
+    'assetsfiles' => [
+        'name' => 'Upravlja datotekama imovine',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa imovinom. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
+    ],
+
+    'usersfiles' => [
+        'name' => 'Upravlja datotekama korisnika',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa korisnicima. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
+    ],
+
+    'modelsfiles' => [
+        'name' => 'Upravlja datotekama modela',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa modelima imovine na ekranima pregleda modela i pregleda imovine. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
+    ],
+
+    'departmentsfiles' => [
+        'name' => 'Upravlja datotekama sektora',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa sektorima. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
+    ],
+
+    'suppliersfiles' => [
+        'name' => 'Upravlja datotekama dobavljača',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa dobavljačima. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
+    ],
+
+    'locationsfiles' => [
+        'name' => 'Upravlja datotekama lokacije',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa lokacijama. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
+    ],
+
+    'companiesfiles' => [
+        'name' => 'Upravlja datotekama kompanije',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa kompanijama. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
+    ],
+
+    'consumablesfiles' => [
+        'name' => 'Upravljanje datotekama potrošne opreme',
+        'note' => 'Omogućava korisniku da šalje, preuzima i briše datoteke povezane sa potrošnom opremom. (Ovo ima smisla sa dozvolama pregledanja ili višim.)',
+    ],
+
+    'consumables' => [
         'name' => 'Potrošni materijal',
-        'note'       => 'Dozvoljava pristup sekciji potrošne opreme aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji potrošne opreme aplikacije.',
     ],
     'consumablesview' => [
         'name' => 'Pregled potrošne opreme',
@@ -130,13 +171,10 @@ return array(
         'name' => 'Zaduživanje potrošne opreme',
         'note' => 'Dodeljivanje potrošne opreme u magacinu zaduživanjem.',
     ],
-    'consumablesfiles' => [
-        'name' => 'Upravljanje datotekama potrošne opreme',
-        'note' => 'Dozvoljava korisniku da postavlja, preuzima i briše datoteke povezane sa potrošnom opremom.',
-    ],
-    'licenses'   => [
+
+    'licenses' => [
         'name' => 'Licence',
-        'note'       => 'Omogućava pristup sekciji sa licencama aplikacije.',
+        'note' => 'Omogućava pristup sekciji sa licencama aplikacije.',
     ],
     'licensesview' => [
         'name' => 'Pregled licenci',
@@ -153,7 +191,7 @@ return array(
     'licensescheckout' => [
         'name' => 'Dodeljivanje licenci',
         'note' => 'Omogućava korisniku da dodeljuje licence imovini ili korisnicima.',
-        ],
+    ],
     'licensescheckin' => [
         'name' => 'Oduzimanje licenci',
         'note' => 'Omogućava korisniku da oduzme licence od imovine ili korisnika.',
@@ -162,13 +200,18 @@ return array(
         'name' => 'Upravljanje datotekama licenci',
         'note' => 'Dozvoljava korisniku da postavlja, preuzima i briše datoteke povezane sa licencama.',
     ],
+    'componentsfiles' => [
+        'name' => 'Upravljanje datotekama komponenti',
+        'note' => 'Dozvoljava korisniku da postavlja, preuzima i briše datoteke povezane sa komponentama.',
+    ],
+
     'licenseskeys' => [
         'name' => 'Upravljanje licencnim ključevima',
         'note' => 'Omogućava korisniku da pregleda ključeve proizvoda povezanih sa licencama.',
     ],
-    'components'   => [
+    'components' => [
         'name' => 'Komponente',
-        'note'       => 'Dozvoljava pristup sekciji komponenti aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji komponenti aplikacije.',
     ],
     'componentsview' => [
         'name' => 'Pregled komponenti',
@@ -182,10 +225,7 @@ return array(
     'componentsdelete' => [
         'name' => 'Brisanje komponenti',
     ],
-    'componentsfiles' => [
-        'name' => 'Upravljanje datotekama komponenti',
-        'note' => 'Dozvoljava korisniku da postavlja, preuzima i briše datoteke povezane sa komponentama.',
-    ],
+
     'componentscheckout' => [
         'name' => 'Zaduživanje komponenti',
         'note' => 'Dodeljivanje komponenti zaduživanjem iz magacina.',
@@ -194,9 +234,9 @@ return array(
         'name' => 'Razduživanje komponenti',
         'note' => 'Vraćanje komponenti koja je zadužena natrag u magacin.',
     ],
-    'kits'   => [
+    'kits' => [
         'name' => 'Kompleti opreme',
-        'note'       => 'Dozvoljava pristup sekciji predefinisanih skupova aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji predefinisanih skupova aplikacije.',
     ],
     'kitsview' => [
         'name' => 'Pregled predefinisanih skupova',
@@ -210,12 +250,13 @@ return array(
     'kitsdelete' => [
         'name' => 'Brisanje predefinisanih skupova',
     ],
-    'users'   => [
+    'users' => [
         'name' => 'Korisnici',
-        'note'       => 'Dozvoljava pristup sekciji korisnika aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji korisnika aplikacije.',
     ],
     'usersview' => [
         'name' => 'Prikaži korisnike',
+        'note' => 'Note that users with this permission will also be able to see (not modify or delete) files uploaded to the user as well. Users with this permission will also be able to view edit and checkin history.',
     ],
     'userscreate' => [
         'name' => 'Kreiranje novih korisnika',
@@ -226,9 +267,9 @@ return array(
     'usersdelete' => [
         'name' => 'Brisanje korisnika',
     ],
-    'models'   => [
+    'models' => [
         'name' => 'Modeli',
-        'note'       => 'Dozvoljava pristup sekciji modela aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji modela aplikacije.',
     ],
     'modelsview' => [
         'name' => 'Pogledajte modele',
@@ -243,9 +284,9 @@ return array(
     'modelsdelete' => [
         'name' => 'Brisanje modela',
     ],
-    'categories'   => [
+    'categories' => [
         'name' => 'Kategorije',
-        'note'       => 'Dozvoljava pristup sekciji kategorija aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji kategorija aplikacije.',
     ],
     'categoriesview' => [
         'name' => 'Pregled kategorija',
@@ -259,9 +300,9 @@ return array(
     'categoriesdelete' => [
         'name' => 'Brisanje kategorija',
     ],
-    'departments'   => [
+    'departments' => [
         'name' => 'Departments',
-        'note'       => 'Dozvoljava pristup sekciji odeljenja aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji odeljenja aplikacije.',
     ],
     'departmentsview' => [
         'name' => 'Pregled odeljenja',
@@ -275,9 +316,9 @@ return array(
     'departmentsdelete' => [
         'name' => 'Brisanje odeljenja',
     ],
-    'locations'   => [
+    'locations' => [
         'name' => 'Lokacije',
-        'note'       => 'Dozvoljava pristup sekciji lokacija aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji lokacija aplikacije.',
     ],
     'locationsview' => [
         'name' => 'Pregled lokacija',
@@ -291,9 +332,9 @@ return array(
     'locationsdelete' => [
         'name' => 'Brisanje lokacija',
     ],
-    'status-labels'   => [
+    'status-labels' => [
         'name' => 'Oznake statusa',
-        'note'       => 'Dozvoljava pristup sekciji oznaka statusa aplikacije koje koriste imovine.',
+        'note' => 'Dozvoljava pristup sekciji oznaka statusa aplikacije koje koriste imovine.',
     ],
     'statuslabelsview' => [
         'name' => 'Pregled oznaka statusa',
@@ -307,9 +348,9 @@ return array(
     'statuslabelsdelete' => [
         'name' => 'Brisanje oznaka statusa',
     ],
-    'custom-fields'   => [
+    'custom-fields' => [
         'name' => 'Dodatna Polja',
-        'note'       => 'Dozvoljava pristup sekciji prilagođenih polja aplikacije koje koriste imovine.',
+        'note' => 'Dozvoljava pristup sekciji prilagođenih polja aplikacije koje koriste imovine.',
     ],
     'customfieldsview' => [
         'name' => 'Pregled prilagođenih polja',
@@ -323,9 +364,9 @@ return array(
     'customfieldsdelete' => [
         'name' => 'Brisanje prilagođenih polja',
     ],
-    'suppliers'   => [
+    'suppliers' => [
         'name' => 'Dobavljači',
-        'note'       => 'Dozvoljava pristup sekciji dobavljača aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji dobavljača aplikacije.',
     ],
     'suppliersview' => [
         'name' => 'Pregled dobavljača',
@@ -339,9 +380,9 @@ return array(
     'suppliersdelete' => [
         'name' => 'Brisanje dobavljača',
     ],
-    'manufacturers'   => [
+    'manufacturers' => [
         'name' => 'Proizvođači',
-        'note'       => 'Dozvoljava pristup sekciji proizvođača aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji proizvođača aplikacije.',
     ],
     'manufacturersview' => [
         'name' => 'Pregled proizvođača',
@@ -355,9 +396,9 @@ return array(
     'manufacturersdelete' => [
         'name' => 'Brisanje proizvođača',
     ],
-    'companies'   => [
+    'companies' => [
         'name' => 'Firme',
-        'note'       => 'Dozvoljava pristup sekciji kompanija aplikacije.',
+        'note' => 'Dozvoljava pristup sekciji kompanija aplikacije.',
     ],
     'companiesview' => [
         'name' => 'Pregled kompanija',
@@ -373,32 +414,32 @@ return array(
     ],
     'user-self-accounts' => [
         'name' => 'Rukovođenje sopstvenim nalozima',
-        'note'       => 'Dozvoljava standardnim korisnicima da upravljaju određenim aspektima njihovih naloga.',
+        'note' => 'Dozvoljava standardnim korisnicima da upravljaju određenim aspektima njihovih naloga.',
     ],
     'selftwo-factor' => [
         'name' => 'Upravljanje autentifikacijom u dva koraka',
-        'note'       => 'Dozvoljava korisnicima da omoguće, onemoguće i upravljaju autentifikacijom u dva koraka za njihove naloge.',
+        'note' => 'Dozvoljava korisnicima da omoguće, onemoguće i upravljaju autentifikacijom u dva koraka za njihove naloge.',
     ],
     'selfapi' => [
         'name' => 'Upravljanje API tokenima',
-        'note'       => 'Dozvoljava korisnicima kreiranje, pregled i poništavanje sopstvenih API tokena. Korisnički tokeni će imati ista ovlašćenja kao i korisnik koji ih je kreirao.',
+        'note' => 'Dozvoljava korisnicima kreiranje, pregled i poništavanje sopstvenih API tokena. Korisnički tokeni će imati ista ovlašćenja kao i korisnik koji ih je kreirao.',
     ],
     'selfedit-location' => [
         'name' => 'Uređivanje lokacije',
-        'note'       => 'Dozvoljava korisnicima da uređuju lokaciju povezanu sa njihovim nalogom.',
+        'note' => 'Dozvoljava korisnicima da uređuju lokaciju povezanu sa njihovim nalogom.',
     ],
     'selfcheckout-assets' => [
         'name' => 'Samostalno zaduživanje imovine',
-        'note'       => 'Dozvoljava korisnicima da zadužuju imovinu sebi bez intervencije administratora.',
+        'note' => 'Dozvoljava korisnicima da zadužuju imovinu sebi bez intervencije administratora.',
     ],
     'selfview-purchase-cost' => [
         'name' => 'Pregled cene koštanja',
-        'note'       => 'Dozvoljava korisnicima da pregledaju cenu kupovine stavki u prikazu njihovog naloga.',
+        'note' => 'Dozvoljava korisnicima da pregledaju cenu kupovine stavki u prikazu njihovog naloga.',
     ],
 
     'depreciations' => [
         'name' => 'Upravljanje amortizacijom',
-        'note'       => 'Dozvoljava korisnicima da upravljaju i pregledaju detalje o amortizaciji imovina.',
+        'note' => 'Dozvoljava korisnicima da upravljaju i pregledaju detalje o amortizaciji imovina.',
     ],
     'depreciationsview' => [
         'name' => 'Pregled detalja amortizacije',
@@ -419,6 +460,6 @@ return array(
     'grant' => 'Dodeli dozvole za :area',
     'deny' => 'Onemogući dozvole za :area',
     'inherit' => 'Nasledi dozvole za :area iz grupe dozvola',
-    'use_groups' => 'Strogo preporučujemo korišćenje Grupa dozvola umesto dodeljivanja pojedinačnih dozvola zbog lakšeg upravljanja.'
+    'use_groups' => 'Strogo preporučujemo korišćenje Grupa dozvola umesto dodeljivanja pojedinačnih dozvola zbog lakšeg upravljanja.',
 
-);
+];

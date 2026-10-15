@@ -1,15 +1,23 @@
 <?php
 
-    return [
-        'select_type'            => 'Zvolte typ údržby',
-        'asset_maintenance_type' => 'Druh údržby majetku',
-        'title'                  => 'Název',
-        'start_date'             => 'Od',
-        'completion_date'        => 'Datum dokončení',
-        'cost'                   => 'Cena',
-        'is_warranty'            => 'Rozšíření záruky',
-        'asset_maintenance_time' => 'Doba údržby majetku (ve dnech)',
-        'notes'                  => 'Poznámky',
-        'update'                 => 'Upravit údržbu zařízení',
-        'create'                 => 'Založit údržbu zařízení'
-    ];
+return [
+    'select_type' => 'Zvolte typ údržby',
+    'asset_maintenance_type' => 'Typ',
+    'title' => 'Název',
+    'start_date' => 'Od',
+    'completion_date' => 'Expected Completion',
+    'cost' => 'Cena',
+    'is_warranty' => 'Rozšíření záruky',
+    'asset_maintenance_time' => 'Duration',
+    'notes' => 'Poznámky',
+    'update' => 'Upravit údržbu zařízení',
+    'create' => 'Založit údržbu zařízení',
+    'responsible_party' => 'Responsible Party',
+    'checked_out_to_at_creation' => 'Vydané komu',
+    'completed_at' => 'Completed At',
+    'completed_at_help' => 'When this maintenance was actually finished. Leave blank if not yet complete. Setting a date here is equivalent to clicking Mark Complete but lets you enter a past date instead of using the current time.',
+    'completed_by' => 'Completed By',
+    'mark_complete' => 'Mark Complete',
+    'already_complete' => 'Already Completed',
+    'completion_notes' => 'Completion Notes',
+];

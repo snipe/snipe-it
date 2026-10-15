@@ -2,134 +2,90 @@
 
 {{-- Page title --}}
 @section('title')
-     {{ trans('admin/licenses/general.checkout') }}
-@parent
+    {{ trans('admin/licenses/general.checkout') }}
+    @parent
 @stop
 
 @section('header_right')
     <a href="{{ URL::previous() }}" class="btn btn-primary pull-right">
-        {{ trans('general.back') }}</a>
+        {{ trans('general.back') }}
+    </a>
 @stop
 
 {{-- Page content --}}
 @section('content')
-<div class="row">
-        <!-- left column -->
-    <div class="col-md-8">
-        <form class="form-horizontal" method="post" action="" autocomplete="off">
-            {{csrf_field()}}
 
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h2 class="box-title"> {{ $license->name }} ({{ trans('admin/licenses/message.seats_available', ['seat_count' => $license->availCount()->count()]) }})</h2>
-                </div>
-                <div class="box-body">
+    <x-container columns="2">
+        <x-page-column class="col-md-7">
 
+            <x-form id="checkout_form" route="{{ url()->current() }}">
 
-                    <!-- License name -->
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">{{ trans('admin/hardware/form.name') }}</label>
-                        <div class="col-md-9">
-                            <p class="form-control-static">{{ $license->name }}</p>
-                        </div>
-                    </div>
+                <x-box header="{{ $license->name }} ({{ trans('admin/licenses/message.seats_available', ['seat_count' => $license->availCount()->count()]) }})">
+
+                    <x-form.static :label="trans('admin/hardware/form.name')">{{ $license->name }}</x-form.static>
 
                     @if ($license->company)
-                        <!-- company name -->
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">{{ trans('general.company') }}</label>
-                            <div class="col-md-6">
-                                <p class="form-control-static">{!! $license->company->present()->formattedNameLink  !!}</p>
-                            </div>
-                        </div>
+                        <x-form.static :label="trans('general.company')">{!! $license->company->present()->formattedNameLink !!}</x-form.static>
                     @endif
-
 
                     @if ($license->category)
-                        <!-- category name -->
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">{{ trans('general.category') }}</label>
-                            <div class="col-md-6">
-                                <p class="form-control-static">{!! $license->category->present()->formattedNameLink  !!}</p>
-                            </div>
-                        </div>
+                        <x-form.static :label="trans('general.category')">{!! $license->category->present()->formattedNameLink !!}</x-form.static>
                     @endif
 
-                    <!-- Serial -->
-                    @can('viewKeys', $license)
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label">{{ trans('admin/licenses/form.license_key') }}
-
-                        </label>
-                        <div class="col-md-9">
-                            <p class="form-control-static">
-                                <x-copy-to-clipboard copy_what="license_key" style="white-space: pre-wrap">
+                    @if ($license->serial)
+                        @can('viewKeys', $license)
+                            <x-form.static :label="trans('admin/licenses/form.license_key')">
+                                <x-copy-to-clipboard copy_what="license_key">
                                     <code>{!! nl2br(e($license->serial)) !!}</code>
                                 </x-copy-to-clipboard>
-                            </p>
-                        </div>
-                    </div>
-                    @endcan
+                            </x-form.static>
+                        @endcan
+                    @endif
 
-                    @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'false'])
-                    @include ('partials.forms.edit.user-select', ['translated_name' => trans('general.user'), 'fieldname' => 'assigned_to', 'style' => (session('checkout_to_type') ?: 'user') == 'user' ? '' : 'display: none;'])
-                    @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.select_asset'), 'fieldname' => 'asset_id', 'style' => session('checkout_to_type') == 'asset' ? '' : 'display: none;'])
+                    @include ('partials.forms.checkout-selector', ['user_select' => 'true', 'asset_select' => 'true', 'location_select' => 'false'])
+                    <x-input.user-select
+                        :label="trans('general.user')"
+                        name="assigned_user"
+                        :selected="old('assigned_user', $checkoutRequest?->user_id)"
+                        :companyId="$license->company_id"
+                        :style="(session('checkout_to_type') ?: 'user') == 'user' ? null : 'display: none;'"
+                    />
+                    @include ('partials.forms.edit.asset-select', ['translated_name' => trans('general.select_asset'), 'fieldname' => 'assigned_asset', 'company_id' => $license->company_id, 'style' => session('checkout_to_type') == 'asset' ? '' : 'display: none;'])
 
-                    <!-- Note -->
-                    <div class="form-group {{ $errors->has('notes') ? 'error' : '' }}">
-                        <label for="note" class="col-md-3 control-label">{{ trans('general.checkout_note') }}</label>
-                        <div class="col-md-8">
-                            <textarea class="col-md-6 form-control" id="notes" name="notes" rows="5">{{ old('note') }}</textarea>
-                            {!! $errors->first('note', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-                        </div>
-                    </div>
-                </div>
+                    <x-form.row
+                        :label="trans('general.checkout_note')"
+                        name="notes"
+                    >
+                        <x-slot:input>
+                            <textarea class="form-control" id="notes" name="notes" rows="5">{{ old('note') }}</textarea>
+                        </x-slot:input>
+                    </x-form.row>
 
+                    <x-checkout.checkout-notification-callout :item="$license" :category="$license->category" />
 
-                @if ($license->requireAcceptance() || $license->getEula() || ($snipeSettings->webhook_endpoint!=''))
-                    <div class="form-group notification-callout">
-                        <div class="col-md-8 col-md-offset-3">
-                            <div class="callout callout-info">
-
-                                @if ($license->requireAcceptance())
-                                    <i class="far fa-envelope"></i>
-                                    {{ trans('admin/categories/general.required_acceptance') }}
-                                    <br>
-                                @endif
-
-                                @if ($license->getEula())
-                                    <i class="far fa-envelope"></i>
-                                    {{ trans('admin/categories/general.required_eula') }}
-                                    <br>
-                                @endif
-
-                                @if (($license->category) && ($license->category->checkin_email))
-                                    <i class="far fa-envelope"></i>
-                                    {{ trans('admin/categories/general.checkin_email_notification') }}
-                                    <br>
-                                @endif
-
-                                @if ($snipeSettings->webhook_endpoint!='')
-                                    <i class="fab fa-slack"></i>
-                                    {{ trans('general.webhook_msg_note') }}
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @endif
-
-                <x-redirect_submit_options
-                        index_route="licenses.index"
-                        :button_label="trans('general.checkout')"
-                        :options="[
+                    <x-slot:customfooter>
+                        <x-redirect_submit_options
+                            index_route="licenses.index"
+                            :button_label="trans('general.checkout')"
+                            :options="[
                                 'index' => trans('admin/hardware/form.redirect_to_all', ['type' => trans('general.licenses')]),
                                 'item' => trans('admin/hardware/form.redirect_to_type', ['type' => trans('general.license')]),
                                 'target' => trans('admin/hardware/form.redirect_to_checked_out_to'),
-                               ]"
-                />
-            </div> <!-- /.box-->
-        </form>
-    </div> <!-- /.col-md-7-->
-</div>
+                            ]"
+                        />
+                    </x-slot:customfooter>
 
+                </x-box>
+
+            </x-form>
+
+        </x-page-column>
+
+        <x-page-column class="col-md-5">
+            <x-checkout-request-context :request="$checkoutRequest ?? null" :requestable="$license" />
+
+            <livewire:checkout-target-panel type="licenses" />
+        </x-page-column>
+
+    </x-container>
 @stop

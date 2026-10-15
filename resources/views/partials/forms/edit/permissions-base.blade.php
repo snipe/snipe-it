@@ -11,13 +11,21 @@
         $section_name =  str_slug($main_section);
     }
   @endphp
+
+  @if (str_slug($main_section) == 'superuser' && !auth()->user()->isSuperUser())
+      @continue
+  @endif
+  @if (str_slug($main_section) == 'admin' && !auth()->user()->hasAccess('admin'))
+      @continue
+  @endif
+
   <div class="form-group {{ ($sectionPermission['permission']!='superuser') ? ' nonsuperuser' : '' }}{{ ( ($sectionPermission['permission']!='superuser') && ($sectionPermission['permission']!='admin')) ? ' nonadmin' : '' }}">
 
       <!-- start callout legend for major sections -->
       <div class="callout callout-legend col-md-12">
           
          <!-- start left column with area name and note -->
-          <div class="col-md-10">
+          <div class="col-md-9">
 
               <h4 id="{{ str_slug($sectionPermission['permission'])}}" class="{{ (count($main_section_permission) > 1) ? 'remember-toggle': '' }}">
                 @if (count($main_section_permission) > 1)
@@ -33,7 +41,7 @@
           <!-- end left column with area name and note -->
 
           <!-- Handle the checkall ALLOW and DENY radios in the right column -->
-          <div class="col-md-2 text-right header-row">
+          <div class="col-md-3 text-right header-row">
             <div class="radio-toggle-wrapper">
 
               <!-- start .radio-slider-inputs allow -->
@@ -46,10 +54,6 @@
                         @checked(array_key_exists($section_name, $groupPermissions) && $groupPermissions[$section_name] == '1')
                         type="radio"
                         value="1"
-                        {{-- Disable the superuser and admin allow if the user is not a superuser --}}
-                        @if (((str_slug($main_section) == 'admin') && (!auth()->user()->hasAccess('admin'))) || ((str_slug($main_section) == 'superuser') && (!auth()->user()->isSuperUser())))
-                          disabled
-                        @endif
                         id="{{ str_slug($main_section) }}_allow"
                 >
 
@@ -66,14 +70,15 @@
                           class="form-control  {{ str_slug($main_section) }} inherit"
                           data-checker-group="{{ str_slug($main_section) }}"
                           aria-label="{{ str_slug($main_section) }}"
-                          name="permission[{{ str_slug($main_section) }}]"
-                          @checked((array_key_exists(str_slug($main_section), $groupPermissions) && $groupPermissions[str_slug($main_section)] == '0') || (!array_key_exists(str_slug($main_section), $groupPermissions)))
+                          {{-- $section_name (not str_slug($main_section)) so this radio joins the same
+                               name group as allow/deny, and so the fallback pre-check for "unset" reads
+                               the correct key. See #18830: reports remaps to `reports.view`, and the
+                               old str_slug('reports') = 'reports' key never exists in $groupPermissions,
+                               which fired the fallback and left inherit checked in the DENY state. --}}
+                          name="permission[{{ $section_name }}]"
+                          @checked((array_key_exists($section_name, $groupPermissions) && $groupPermissions[$section_name] == '0') || (!array_key_exists($section_name, $groupPermissions)))
                           type="radio"
                           value="0"
-                          {{-- Disable the superuser and admin allow if the user is not a superuser --}}
-                          @if (((str_slug($main_section) == 'admin') && (!auth()->user()->hasAccess('admin'))) || ((str_slug($main_section) == 'superuser') && (!auth()->user()->isSuperUser())))
-                            disabled
-                          @endif
                           id="{{ str_slug($main_section) }}_inherit"
                   >
 
@@ -91,13 +96,13 @@
                         data-checker-group="{{ str_slug($main_section) }}"
                         aria-label="{{ str_slug($main_section) }}"
                         name="permission[{{ $section_name }}]"
-                        @checked(array_key_exists(str_slug($main_section), $groupPermissions) && $groupPermissions[str_slug($main_section)] == '-1')
+                        {{-- $section_name (not str_slug($main_section)) to match how allow (line 54)
+                             looks up $groupPermissions. See #18830: for the reports section, the actual
+                             stored key is `reports.view`, and the old lookup on `reports` never matched
+                             so the deny radio never pre-checked when the permission was set to -1. --}}
+                        @checked(array_key_exists($section_name, $groupPermissions) && $groupPermissions[$section_name] == '-1')
                         type="radio"
                         value="-1"
-                        {{-- Disable the superuser and admin allow if the user is not a superuser --}}
-                        @if (((str_slug($main_section) == 'admin') && (!auth()->user()->hasAccess('admin'))) || ((str_slug($main_section) == 'superuser') && (!auth()->user()->isSuperUser())))
-                          disabled
-                        @endif
                         id="{{ str_slug($main_section) }}_deny"
                 >
 
@@ -128,14 +133,14 @@
                     @endphp
 
                       <div class="form-group" style="border-bottom: 1px solid #eee; padding-right: 13px;">
-                        <div class="col-md-10">
+                          <div class="col-md-9">
                           <strong>{{ $section_translation }}</strong>
                           @if (\Lang::has('permissions.'.str_slug($this_permission['permission']).'.note'))
                             <p>{{ trans('permissions.'.str_slug($this_permission['permission']).'.note') }}</p>
                           @endif
                         </div>
 
-                        <div class="form-group col-md-2 text-right">
+                          <div class="form-group col-md-3 text-right">
                           <div class="radio-toggle-wrapper">
 
                                 <div class="radio-slider-inputs" data-tooltip="true" title="{{ trans('permissions.grant', ['area' => $section_translation]) }}">

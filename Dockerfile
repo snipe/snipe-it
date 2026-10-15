@@ -31,7 +31,7 @@ wget  \
 vim \
 git \
 cron \
-mysql-client \
+mariadb-client \
 supervisor \
 cron \
 gcc \
@@ -74,6 +74,10 @@ RUN a2ensite 001-default-ssl.conf
 COPY . /var/www/html
 
 RUN a2enmod rewrite
+
+# Apache Limits Defaults
+COPY docker/apache-limits.conf /etc/apache2/conf-available/limits.conf
+RUN a2enconf limits
 
 COPY docker/column-statistics.cnf /etc/mysql/conf.d/column-statistics.cnf
 

@@ -23,10 +23,10 @@
                 @if($tokens->count() > 0)
                     <thead>
                     <tr>
-                        <th class="col-md-3">{{ trans('general.name') }}</th>
-                        <th class="col-md-2">{{ trans('general.created_at') }}</th>
-                        <th class="col-md-2">{{ trans('general.expires') }}</th>
-                        <th class="col-md-2"><span class="sr-only">{{ trans('general.delete') }}</span></th>
+                        <th scope="col" class="col-md-3">{{ trans('general.name') }}</th>
+                        <th scope="col" class="col-md-2">{{ trans('general.created_at') }}</th>
+                        <th scope="col" class="col-md-2">{{ trans('general.expires') }}</th>
+                        <th scope="col" class="col-md-2"><span class="sr-only">{{ trans('general.delete') }}</span></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -77,7 +77,7 @@
                 <div class="modal-body">
                     <!-- Form Errors -->
                     @if($errors->has('name'))
-                        <div class="alert alert-danger">
+                        <x-alert type="danger">
                             <p><strong>{{ trans('general.whoops') }}</strong> {{ trans('general.something_went_wrong') }}</p>
                             <br>
                             <ul>
@@ -89,7 +89,7 @@
                                     @enderror
                                 </li>
                             </ul>
-                        </div>
+                        </x-alert>
                     @endif
 
                     <!-- Create Token Form -->
@@ -101,7 +101,7 @@
                             <div class="col-md-6">
                                 <input id="create-token-name" type="text" aria-label="name" class="form-control"
                                        name="name"
-                                       wire:keydown.enter="createToken(name)"
+                                       wire:keydown.enter="createToken"
                                        wire:model="name"
                                        autofocus
                                        required
@@ -116,7 +116,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn primary" data-dismiss="modal">{{ trans('general.close') }}</button>
 
-                    <button type="button" class="btn btn-primary" wire:click="createToken(name)">
+                    <button type="button" class="btn btn-primary" wire:click="createToken">
                         {{ trans('general.create') }}
                     </button>
                 </div>

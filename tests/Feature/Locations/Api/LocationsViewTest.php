@@ -2,14 +2,15 @@
 
 namespace Tests\Feature\Locations\Api;
 
-use App\Models\Location;
 use App\Models\Asset;
+use App\Models\Location;
+use App\Models\Statuslabel;
 use App\Models\User;
 use Tests\TestCase;
 
 class LocationsViewTest extends TestCase
 {
-    public function testViewingLocationRequiresPermission()
+    public function test_viewing_location_requires_permission()
     {
         $location = Location::factory()->create();
         $this->actingAsForApi(User::factory()->create())
@@ -17,7 +18,7 @@ class LocationsViewTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testViewingLocationAssetIndexRequiresPermission()
+    public function test_viewing_location_asset_index_requires_permission()
     {
         $location = Location::factory()->create();
         $this->actingAsForApi(User::factory()->create())
@@ -25,7 +26,7 @@ class LocationsViewTest extends TestCase
             ->assertForbidden();
     }
 
-    public function testViewingLocationAssetIndex()
+    public function test_viewing_location_asset_index()
     {
         $location = Location::factory()->create();
         Asset::factory()->count(3)->create(['location_id' => $location->id]);
@@ -42,7 +43,7 @@ class LocationsViewTest extends TestCase
             ]);
     }
 
-    public function testViewingAssignedLocationAssetIndex()
+    public function test_viewing_assigned_location_asset_index()
     {
         $location = Location::factory()->create();
         Asset::factory()->count(3)->assignedToLocation($location)->create();
@@ -57,5 +58,62 @@ class LocationsViewTest extends TestCase
             ->assertJson([
                 'total' => 3,
             ]);
+    }
+
+    /**
+     * Regression for #17565. rtd_assets_count in the API used to ignore
+     * archived assets while the tab count on the location detail view
+     * excluded them, producing mismatched numbers between UI and API.
+     * The show endpoint now threads AssetsForShow into the withCount
+     * closure so both surfaces agree.
+     */
+    public function test_show_rtd_assets_count_excludes_archived_when_setting_off()
+    {
+        $this->settings->set(['show_archived_in_list' => 0]);
+
+        $location = Location::factory()->create();
+        $deployableStatus = Statuslabel::factory()->rtd()->create();
+        $archivedStatus = Statuslabel::factory()->archived()->create();
+
+        Asset::factory()->count(4)->create([
+            'rtd_location_id' => $location->id,
+            'status_id' => $deployableStatus->id,
+        ]);
+        Asset::factory()->count(1)->create([
+            'rtd_location_id' => $location->id,
+            'status_id' => $archivedStatus->id,
+        ]);
+
+        Statuslabel::clearIdCache();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(route('api.locations.show', $location->id))
+            ->assertOk()
+            ->assertJson(['rtd_assets_count' => 4]);
+    }
+
+    public function test_show_rtd_assets_count_includes_archived_when_setting_on()
+    {
+        $this->settings->set(['show_archived_in_list' => 1]);
+
+        $location = Location::factory()->create();
+        $deployableStatus = Statuslabel::factory()->rtd()->create();
+        $archivedStatus = Statuslabel::factory()->archived()->create();
+
+        Asset::factory()->count(4)->create([
+            'rtd_location_id' => $location->id,
+            'status_id' => $deployableStatus->id,
+        ]);
+        Asset::factory()->count(1)->create([
+            'rtd_location_id' => $location->id,
+            'status_id' => $archivedStatus->id,
+        ]);
+
+        Statuslabel::clearIdCache();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->getJson(route('api.locations.show', $location->id))
+            ->assertOk()
+            ->assertJson(['rtd_assets_count' => 5]);
     }
 }

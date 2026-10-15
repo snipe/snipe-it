@@ -2,291 +2,290 @@
 
 {{-- Page title --}}
 @section('title')
-{{ trans('admin/hardware/form.update') }}
-@parent
+    {{ trans('admin/hardware/form.update') }}
+    @parent
 @stop
 
-
 @section('header_right')
-<a href="{{ URL::previous() }}" class="btn btn-sm btn-theme pull-right">
-  {{ trans('general.back') }}</a>
+    <a href="{{ URL::previous() }}" class="btn btn-sm btn-theme pull-right">
+        {{ trans('general.back') }}
+    </a>
 @stop
 
 {{-- Page content --}}
 @section('content')
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
 
-    <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
+    <x-container class="col-md-8 col-md-offset-2">
 
+        <p>{{ trans('admin/hardware/form.bulk_update_help') }}</p>
 
+        <x-form :route="route('hardware/bulksave')">
+            <x-box>
 
-    <form class="form-horizontal" method="post" action="{{ route('hardware/bulksave') }}" autocomplete="off" role="form">
-      {{ csrf_field() }}
+                <x-callout type="warning" icon="warning" live="assertive">
+                    {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
 
-      <div class="box box-default">
-        <div class="box-body">
+                    @if (count($models) > 1)
+                        {{ trans('admin/hardware/form.bulk_update_with_custom_field', ['asset_model_count' => count($models)]) }}
+                    @endif
+                </x-callout>
 
-          <div class="callout callout-warning">
-            <i class="fas fa-exclamation-triangle"></i> {{ trans_choice('admin/hardware/form.bulk_update_warn', count($assets), ['asset_count' => count($assets)]) }}
+                {{-- Name + inline null-toggle. The col-md-5 sibling next
+                     to the input doesn't fit any current x-form.row slot
+                     (after_input is col-md-1), so this stays hand-rolled.
+                     Same pattern for purchase_date / expected_checkin /
+                     asset_eol_date / next_audit_date below. --}}
+                <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
+                    <label for="name" class="col-md-3 control-label">
+                        {{ trans('admin/hardware/form.name') }}
+                    </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" maxlength="191" style="width:100%">
+                        <x-form.error name="name" />
+                    </div>
+                    <div class="col-md-5">
+                        <x-form.checkbox-inline
+                            name="null_name"
+                            :label="trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)])"
+                        />
+                    </div>
+                </div>
 
-            @if (count($models) > 0)
-              {{ trans_choice('admin/hardware/form.bulk_update_with_custom_field', count($models), ['asset_model_count' => count($models)]) }}
-            @endif
-          </div>
+                {{-- Purchase date --}}
+                <div class="form-group{{ $errors->has('purchase_date') ? ' has-error' : '' }}">
+                    <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
+                    <div class="col-md-4">
+                        <x-input.datepicker
+                            name="purchase_date"
+                            value="{{ old('purchase_date') }}"
+                            placeholder="{{ trans('general.select_date') }}"
+                        />
+                        <x-form.error name="purchase_date" />
+                    </div>
+                    <div class="col-md-5">
+                        <x-form.checkbox-inline
+                            name="null_purchase_date"
+                            :label="trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)])"
+                        />
+                    </div>
+                </div>
 
-          <!-- Name -->
-          <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
-            <label for="name" class="col-md-3 control-label">
-              {{ trans('admin/hardware/form.name') }}
-            </label>
-            <div class="col-md-4">
-                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" maxlength="100" style="width:100%">
-              {!! $errors->first('name', '<span class="alert-msg" aria-hidden="true">
-                <i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            </div>
-            <div class="col-md-5">
-              <label class="form-control">
-                <input type="checkbox" name="null_name" value="1">
-                {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
-              </label>
-            </div>
-          </div>
+                {{-- Expected checkin date --}}
+                <div class="form-group{{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
+                    <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
+                    <div class="col-md-4">
+                        <x-input.datetimepicker
+                            name="expected_checkin"
+                            value="{{ old('expected_checkin') }}"
+                            :default_now="false"
+                        />
+                        <x-form.error name="expected_checkin" />
+                    </div>
+                    <div class="col-md-5">
+                        <x-form.checkbox-inline
+                            name="null_expected_checkin_date"
+                            :label="trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)])"
+                        />
+                    </div>
+                </div>
 
+                {{-- EOL date --}}
+                <div class="form-group{{ $errors->has('asset_eol_date') ? ' has-error' : '' }}">
+                    <label for="asset_eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
+                    <div class="col-md-4">
+                        <x-input.datepicker
+                            name="asset_eol_date"
+                            value="{{ old('asset_eol_date') }}"
+                            placeholder="{{ trans('general.select_date') }}"
+                        />
+                        <x-form.error name="asset_eol_date" />
+                    </div>
+                    <div class="col-md-5">
+                        <x-form.checkbox-inline
+                            name="null_asset_eol_date"
+                            :label="trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)])"
+                        />
+                    </div>
+                </div>
 
-          <!-- Purchase Date -->
-          <div class="form-group {{ $errors->has('purchase_date') ? ' has-error' : '' }}">
-            <label for="purchase_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.date') }}</label>
-            <div class="col-md-4">
-              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="purchase_date" id="purchase_date" value="{{ old('purchase_date') }}">
-                <span class="input-group-addon"><x-icon type="calendar" /></span>
-              </div>
-              {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
-            </div>
-            <div class="col-md-5">
-              <label class="form-control">
-                <input type="checkbox" name="null_purchase_date" value="1">
-                {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
-              </label>
-            </div>
-          </div>
+                {{-- Auto-calculate EOL based on purchase date + model EOL rule --}}
+                <x-form.checkbox-row
+                    name="calc_eol"
+                    :label="trans('admin/hardware/form.calc_eol')"
+                />
 
-          <!-- Expected Checkin Date -->
-          <div class="form-group {{ $errors->has('expected_checkin') ? ' has-error' : '' }}">
-             <label for="expected_checkin" class="col-md-3 control-label">{{ trans('admin/hardware/form.expected_checkin') }}</label>
-             <div class="col-md-4">
-                  <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-                      <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="expected_checkin" id="expected_checkin" value="{{ old('expected_checkin') }}">
-                      <span class="input-group-addon"><x-icon type="calendar" /></span>
-                 </div>
+                {{-- Status. Includes a status-compatibility help block and a
+                     live status_check() AJAX result span (populated by the
+                     JS handler in @section('moar_scripts') below). --}}
+                <x-form.row
+                    :label="trans('admin/hardware/form.status')"
+                    name="status_id"
+                    input_div_class="col-md-7"
+                >
+                    <x-slot:input>
+                        <x-input.select
+                            name="status_id"
+                            :options="$statuslabel_list"
+                            :selected="old('status_id')"
+                            style="width: 100%"
+                            aria-label="status_id"
+                        />
+                        <p class="help-block">{{ trans('general.status_compatibility') }}</p>
+                        <p
+                            id="selected_status_status"
+                            role="status"
+                            aria-live="polite"
+                            aria-atomic="true"
+                            style="display:none;"
+                            data-deployable-label="{{ trans_choice('admin/hardware/form.asset_deployable', 2) }}"
+                            data-not-deployable-label="{{ trans_choice('admin/hardware/form.asset_not_deployable_checkin', 2) }}"
+                        ></p>
+                    </x-slot:input>
+                </x-form.row>
 
-                 {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-             </div>
-              <div class="col-md-5">
-                <label class="form-control">
-                  <input type="checkbox" name="null_expected_checkin_date" value="1">
-                  {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
-                </label>
-              </div>
-          </div>
+                <x-input.model-select
+                    :label="trans('admin/hardware/form.model')"
+                    name="model_id"
+                    :selected="old('model_id')"
+                />
 
-          <!-- EOL Date -->
-          <div class="form-group {{ $errors->has('asset_eol_date') ? ' has-error' : '' }}">
-            <label for="eol_date" class="col-md-3 control-label">{{ trans('admin/hardware/form.eol_date') }}</label>
-            <div class="col-md-4">
-              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="asset_eol_date" id="asset_eol_date" value="{{ old('asset_eol_date') }}">
-                <span class="input-group-addon"><x-icon type="calendar" /></span>
-              </div>
-              {!! $errors->first('asset_eol_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
-            </div>
-            <div class="col-md-5">
-              <label class="form-control">
-                <input type="checkbox" name="null_asset_eol_date" value="1">
-                {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
-              </label>
-            </div>
-          </div>
+                <x-input.location-select
+                    :label="trans('admin/hardware/form.default_location')"
+                    name="rtd_location_id"
+                    :selected="old('rtd_location_id')"
+                />
 
-          <div class="form-group">
-            <div class="col-md-9 col-md-offset-3">
-              <label class="form-control">
-                <input type="checkbox" name="calc_eol" value="1">
-                {{ trans('admin/hardware/form.calc_eol') }}
-              </label>
-            </div>
-          </div>
+                {{-- Actual-location update rule (3-way radio) --}}
+                <x-form.radio-row
+                    name="update_real_loc"
+                    :options="[
+                        '1' => trans('admin/hardware/form.asset_location_update_default_current'),
+                        '0' => trans('admin/hardware/form.asset_location_update_default'),
+                        '2' => trans('admin/hardware/form.asset_location_update_actual'),
+                    ]"
+                    selected="1"
+                    input_div_class="col-md-9 col-md-offset-3"
+                />
 
+                {{-- Purchase cost + Order number bulk edits. Assets
+                     have no per-row currency column, so if the
+                     selection contains assets whose original orders
+                     were in different currencies, one numeric value
+                     written here reads as the system default currency
+                     for every row regardless. Behavior is preserved
+                     from the pre-orders-refactor era and callers are
+                     expected to narrow the selection to one currency
+                     before using these fields. --}}
+                <x-form.row
+                    :label="trans('general.order_number')"
+                    name="order_number"
+                    type="text"
+                    :maxlength="191"
+                    input_div_class="col-md-7 col-sm-12"
+                />
 
-          <!-- Status -->
-          <div class="form-group {{ $errors->has('status_id') ? ' has-error' : '' }}">
-            <label for="status_id" class="col-md-3 control-label">
-              {{ trans('admin/hardware/form.status') }}
-            </label>
-            <div class="col-md-7">
-              <x-input.select
-                  name="status_id"
-                  :options="$statuslabel_list"
-                  :selected="old('status_id')"
-                  style="width: 100%"
-                  aria-label="status_id"
-              />
-              <p class="help-block">{{ trans('general.status_compatibility') }}</p>
-              {!! $errors->first('status_id', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            </div>
-          </div>
+                <x-form.row
+                    :label="trans('general.purchase_cost')"
+                    name="purchase_cost"
+                    type="text"
+                    input_div_class="col-md-4 col-sm-12"
+                />
 
-        @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id'])
+                <x-input.supplier-select
+                    :label="trans('general.supplier')"
+                    name="supplier_id"
+                    :selected="old('supplier_id')"
+                />
 
-          <!-- Default Location -->
-        @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
+                <x-input.company-select
+                    :label="trans('general.company')"
+                    name="company_id"
+                    :selected="old('company_id')"
+                />
 
-        <!-- Update actual location  -->
-          <div class="form-group">
-            <div class="col-md-9 col-md-offset-3">
-                <label class="form-control">
-                  <input type="radio" name="update_real_loc" value="1" checked aria-label="update_real_loc">
-                  {{ trans('admin/hardware/form.asset_location_update_default_current') }}
-                </label>
-              <label class="form-control">
-                <input type="radio" name="update_real_loc" value="0" aria-label="update_default_loc">
-                {{ trans('admin/hardware/form.asset_location_update_default') }}
-              </label>
-                <label class="form-control">
-                  <input type="radio" name="update_real_loc" value="2" aria-label="update_default_loc">
-                  {{ trans('admin/hardware/form.asset_location_update_actual') }}
-                </label>
+                {{-- Warranty months with unit-suffix addon. Free-text addon
+                     needs slot:input. --}}
+                <x-form.row
+                    :label="trans('admin/hardware/form.warranty')"
+                    name="warranty_months"
+                    input_div_class="col-md-3 text-right"
+                >
+                    <x-slot:input>
+                        <div class="input-group">
+                            <input class="col-md-3 form-control" maxlength="4" type="text" name="warranty_months" id="warranty_months" value="{{ old('warranty_months') }}" />
+                            <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
+                        </div>
+                    </x-slot:input>
+                </x-form.row>
 
-            </div>
-          </div> <!--/form-group-->
+                {{-- Next audit date + inline null-toggle + extra help
+                     block on its own row. Same inline-null reasoning as
+                     the name/date rows above, plus the trailing help
+                     block that doesn't fit x-form.row's help_text slot
+                     (which renders inside the input column, not below
+                     as its own grid row). --}}
+                <div class="form-group{{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
+                    <label for="next_audit_date" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
+                    <div class="col-md-4">
+                        <x-input.datepicker
+                            name="next_audit_date"
+                            value="{{ old('next_audit_date') }}"
+                            placeholder="{{ trans('general.select_date') }}"
+                        />
+                        <x-form.error name="next_audit_date" />
+                    </div>
+                    <div class="col-md-5">
+                        <x-form.checkbox-inline
+                            name="null_next_audit_date"
+                            :label="trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)])"
+                        />
+                    </div>
+                    <div class="col-md-8 col-md-offset-3">
+                        <p class="help-block">{!! trans('general.next_audit_date_help') !!}</p>
+                    </div>
+                </div>
 
+                {{-- Requestable (3-way radio with a section-header label) --}}
+                <x-form.radio-row
+                    name="requestable"
+                    :label="trans('admin/hardware/form.requestable')"
+                    :options="[
+                        '1' => trans('general.yes'),
+                        '0' => trans('general.no'),
+                        '' => trans('general.do_not_change'),
+                    ]"
+                    selected=""
+                    input_div_class="col-md-7"
+                />
 
+                <x-form.row
+                    :label="trans('general.notes')"
+                    name="notes"
+                    type="textarea"
+                />
 
-          <!-- Purchase Cost -->
-          <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
-            <label for="purchase_cost" class="col-md-3 control-label">
-              {{ trans('admin/hardware/form.cost') }}
-            </label>
-            <div class="input-group col-md-3">
-              <span class="input-group-addon">{{ $snipeSettings->default_currency }}</span>
-                <input type="text" class="form-control"  maxlength="10" placeholder="{{ trans('admin/hardware/form.cost') }}" name="purchase_cost" id="purchase_cost" value="{{ old('purchase_cost') }}">
-                {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            </div>
-          </div>
+                {{-- Set notes to null --}}
+                <x-form.checkbox-row
+                    name="null_notes"
+                    :label="trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)])"
+                />
 
-          <!-- Supplier -->
-           @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
-          <!-- Company -->
-          @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
+                @include('models/custom_fields_form_bulk_edit', ['models' => $models])
 
-          <!-- Order Number -->
-          <div class="form-group {{ $errors->has('order_number') ? ' has-error' : '' }}">
-            <label for="order_number" class="col-md-3 control-label">
-              {{ trans('admin/hardware/form.order') }}
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="order_number" id="order_number" value="{{ old('order_number') }}" />
-              {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-            </div>
-          </div>
+                @foreach ($assets as $asset)
+                    <input type="hidden" name="ids[]" value="{{ $asset }}">
+                @endforeach
 
-          <!-- Warranty -->
-          <div class="form-group {{ $errors->has('warranty_months') ? ' has-error' : '' }}">
-            <label for="warranty_months" class="col-md-3 control-label">
-              {{ trans('admin/hardware/form.warranty') }}
-            </label>
-            <div class="col-md-3 text-right">
-              <div class="input-group">
-                <input class="col-md-3 form-control" maxlength="4" type="text" name="warranty_months" id="warranty_months" value="{{ old('warranty_months') }}" />
-                <span class="input-group-addon">{{ trans('admin/hardware/form.months') }}</span>
-                {!! $errors->first('warranty_months', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
-              </div>
-            </div>
-          </div>
+                <x-slot:customfooter>
+                    <div class="text-right box-footer">
+                        <x-button.submit class="btn-success" />
+                    </div>
+                </x-slot:customfooter>
 
-          <!-- Next audit Date -->
-          <div class="form-group {{ $errors->has('next_audit_date') ? ' has-error' : '' }}">
-            <label for="next_audit_date" class="col-md-3 control-label">{{ trans('general.next_audit_date') }}</label>
-            <div class="col-md-4">
-              <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-                <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="next_audit_date" id="next_audit_date" value="{{ old('next_audit_date') }}">
-                <span class="input-group-addon"><x-icon type="calendar" /></span>
-              </div>
+            </x-box>
+        </x-form>
 
-              {!! $errors->first('next_audit_date', '<span class="alert-msg" aria-hidden="true">
-                <i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
+    </x-container>
 
-
-            </div>
-            <div class="col-md-5">
-              <label class="form-control">
-                <input type="checkbox" name="null_next_audit_date" value="1">
-                {{ trans_choice('general.set_to_null', count($assets), ['selection_count' => count($assets)]) }}
-              </label>
-            </div>
-            <div class="col-md-8 col-md-offset-3">
-              <p class="help-block">{!! trans('general.next_audit_date_help') !!}</p>
-            </div>
-          </div>
-
-          <!-- Requestable -->
-          <div class="form-group {{ $errors->has('requestable') ? ' has-error' : '' }}">
-            <div class="control-label col-md-3">
-              <strong>{{ trans('admin/hardware/form.requestable') }}</strong>
-            </div>
-            <div class="col-md-7">
-              <label class="form-control">
-                <input type="radio" name="requestable" value="1">
-                {{ trans('general.yes')}}
-              </label>
-              <label class="form-control">
-                <input type="radio" name="requestable" value="0">
-                {{ trans('general.no')}}
-              </label>
-              <label class="form-control">
-                <input type="radio" name="requestable" value="" checked>
-                {{ trans('general.do_not_change')}}
-              </label>
-            </div>
-          </div>
-
-          @include ('partials.forms.edit.notes')
-          <div class="form-group {{ $errors->has('null_notes') ? ' has-error' : '' }}">
-            <div class="col-md-8 col-md-offset-3">
-              <label class="form-control">
-                <input type="checkbox" name="null_notes" value="1">
-                {{ trans_choice('general.set_to_null', count($assets),['selection_count' => count($assets)]) }}
-              </label>
-            </div>
-          </div>
-
-
-          @include("models/custom_fields_form_bulk_edit",["models" => $models])
-
-          @foreach($assets as $asset)
-            <input type="hidden" name="ids[]" value="{{ $asset }}">
-          @endforeach
-        </div> <!--/.box-body-->
-
-        <div class="text-right box-footer">
-          <button type="submit" class="btn btn-success"><x-icon type="checkmark" /> {{ trans('general.save') }}</button>
-        </div>
-      </div> <!--/.box.box-default-->
-    </form>
-  </div> <!--/.col-md-8-->
-</div>
 @stop
-@section('moar_scripts')
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      document.querySelectorAll('.clear-radio').forEach(function (button) {
-        button.addEventListener('click', function () {
-          const name = this.dataset.targetName;
-          const radios = document.querySelectorAll('input[type="radio"][name="' + name + '"]');
-          radios.forEach(radio => radio.checked = false);
-        });
-      });
-    });
-  </script>
-@endsection
+

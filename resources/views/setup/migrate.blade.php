@@ -10,10 +10,9 @@
 <div class="col-lg-12" style="padding-top: 20px;">
     @if (trim($output)=='Nothing to migrate.')
     <div class="col-md-12">
-        <div class="alert alert-warning">
-            <i class="fas fa-exclamation-triangle"></i>
+        <x-alert type="warning" icon="warning">
             {{ trans('general.setup_no_migrations') }}
-        </div>
+        </x-alert>
     </div>
 
     @endif
