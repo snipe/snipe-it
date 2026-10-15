@@ -77,6 +77,7 @@ class ComponentsTransformer
             ] : null,
             'notes' => ($component->notes) ? Helper::parseEscapedMarkedownInline($component->notes) : null,
             'requestable' => (bool) $component->requestable,
+            'archived' => (bool) $component->archived,
             'created_by' => ($component->adminuser) ? [
                 'id' => (int) $component->adminuser->id,
                 'name' => e($component->adminuser->display_name),
@@ -96,15 +97,28 @@ class ComponentsTransformer
         $permissions_array = [];
         $permissions_array['assigned_to_self'] = $userHasOpenRequest;
 
+        $canUpdate = Gate::allows('update', $component);
+        $canDelete = $component->isDeletable();
+
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', $component),
             'checkin' => Gate::allows('checkin', $component),
-            'update' => Gate::allows('update', $component),
-            'adjust_quantity' => Gate::allows('update', $component),
+            'update' => $canUpdate,
+            'adjust_quantity' => $canUpdate,
             'clone' => Gate::allows('clone', $component),
-            'delete' => $component->isDeletable(),
+            'delete' => $canDelete,
             'request' => (bool) $component->requestable && ! $userHasOpenRequest,
             'cancel' => (bool) $component->requestable && $userHasOpenRequest,
+            // Dropdown-action gating: the bulk-actions dropdown asks
+            // "can this row take THIS action?" and disables the
+            // checkbox when the answer is no (see
+            // applyActionDependentRowStyling + checkboxEnabledFormatter
+            // in partials/bootstrap-table). Keys must match the
+            // bulk_actions dropdown values on the components index.
+            'bulk_selectable' => [
+                'edit' => $canUpdate,
+                'delete' => $canDelete,
+            ],
         ];
         $array += $permissions_array;
 
@@ -154,13 +168,25 @@ class ComponentsTransformer
         $array = [];
         foreach ($components_assets as $asset) {
             $array[] = [
+                // `id` as the pivot id so bs-table's row-id tracking
+                // populates the ids[] array sent by bulk-select with
+                // the pivot keys the bulk-checkin endpoint expects.
+                // assigned_pivot_id is kept as a legacy duplicate
+                // because the single-row checkin button formatter
+                // reads it by name.
+                'id' => (int) $asset->pivot->id,
                 'assigned_pivot_id' => (int) $asset->pivot->id,
                 'name' => $this->transformAssignedTo($asset),
-                'qty' => $asset->pivot->assigned_qty, // legacy?
+                'qty' => $asset->pivot->assigned_qty,
                 'assigned_qty' => $asset->pivot->assigned_qty,
                 'note' => ($asset->pivot->note) ? e($asset->pivot->note) : null,
                 'created_at' => Helper::getFormattedDateObject($asset->pivot->created_at, 'datetime'),
-                'available_actions' => ['checkin' => true],
+                'available_actions' => [
+                    'checkin' => true,
+                    'bulk_selectable' => [
+                        'checkin' => true,
+                    ],
+                ],
             ];
         }
 
