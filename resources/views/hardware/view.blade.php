@@ -385,6 +385,7 @@
 
                         @can('view', \App\Models\License::class)
                         <x-table
+                            name="assetLicenses"
                             show_search="false"
                             api_url="{{ route('api.assets.licenselist', $asset) }}"
                             :presenter="\App\Presenters\LicensePresenter::dataTableLayoutSeatsCheckedOutToAssets()"
@@ -394,11 +395,11 @@
                     </x-tabs.pane>
 
                     <x-tabs.pane name="components" :count="$asset->components->sum('assigned_qty')">
-                        <x-table.components :table_header="trans('general.components')" :presenter="\App\Presenters\ComponentPresenter::checkedOut()" :route="route('api.assets.assigned_components', $asset)"/>
+                        <x-table.components name="assetComponents" :table_header="trans('general.components')" :presenter="\App\Presenters\ComponentPresenter::checkedOut()" :route="route('api.assets.assigned_components', $asset)"/>
                     </x-tabs.pane>
 
                     <x-tabs.pane name="assets" :count="$asset->assignedAssets()->AssetsForShow()->count()">
-                        <x-table.assets :route="route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset'])"/>
+                        <x-table.assets name="assetChildAssets" :route="route('api.assets.index',['assigned_to' => $asset->id, 'assigned_type' => 'App\Models\Asset'])"/>
                     </x-tabs.pane>
 
                     <x-tabs.pane name="accessories" :count="$asset->assignedAccessories->count()">
@@ -431,7 +432,7 @@
 
                     <!-- start audits tab pane -->
                     <x-tabs.pane name="audits">
-                        <x-table.history
+                        <x-table.history name="assetAudits"
                             :table_header="trans('general.audits')"
                             :model="$asset"
                             :route="route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset', 'action_type' => 'audit'])"
@@ -443,7 +444,7 @@
 
                     <!-- start notes tab pane -->
                     <x-tabs.pane name="notes">
-                        <x-table.history
+                        <x-table.history name="assetNotes"
                             :table_header="trans('general.notes')"
                             :model="$asset" :route="route('api.activity.index', ['item_id' => $asset->id, 'item_type' => 'asset', 'action_type' => 'note added'])"
                             :hide_fields="['id','action_type', 'item', 'changed', 'target','file','file_download','quantity','changed','serial','signature_file','log_meta','order_number']"
@@ -462,7 +463,7 @@
 
                     <!-- start history tab pane -->
                     <x-tabs.pane name="history">
-                        <x-table.history
+                        <x-table.history name="assetHistory"
                             :model="$asset"
                             :route="route('api.assets.history', $asset)"
                             :hide_fields="['order_number']"

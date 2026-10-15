@@ -400,25 +400,12 @@ body {
   }
   body {
     margin: 0 auto;
-    line-height: 1em;
-    word-spacing: 1px;
-    letter-spacing: 0.2px;
-    font: 15px "Times New Roman", Times, serif;
     width: 100%;
     float: none;
   }
   /* avoid page-breaks inside a listingContainer*/
   .listingContainer {
     page-break-inside: avoid;
-  }
-  h1 {
-    font: 28px "Times New Roman", Times, serif;
-  }
-  h2 {
-    font: 24px "Times New Roman", Times, serif;
-  }
-  h3 {
-    font: 20px "Times New Roman", Times, serif;
   }
   /* Improve colour contrast of links */
   a:link,
@@ -431,9 +418,6 @@ body {
     background: transparent;
     color: #333;
     text-decoration: none;
-  }
-  a[href]:after {
-    content: "" !important;
   }
   a[href^="http://"] {
     color: #000;
@@ -3052,10 +3036,45 @@ tr.danger > td {
   h4 {
     color: black !important;
   }
-  .col-sm-9,
+  .col-md-9,
+  .col-md-3,
   .main-panel {
-    float: left;
+    float: none !important;
     width: 100% !important;
+  }
+  .nav-tabs {
+    display: none !important;
+  }
+  .list-group-item,
+  .box,
+  tr {
+    page-break-inside: avoid;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 85%;
+    color: #666;
+  }
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+  .tab-pane:has(.no-records-found) {
+    display: none !important;
+  }
+  .table,
+  .table > thead > tr > th,
+  .table > tbody > tr > td,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > td,
+  .table > tfoot > tr > th {
+    border: 1px solid #999 !important;
+  }
+  .table {
+    border-collapse: collapse !important;
+  }
+  .hidden-print-empty-row {
+    display: none !important;
   }
 }
 .list-group-item.subitem {

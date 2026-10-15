@@ -192,7 +192,7 @@
                     </x-tabs.pane>
 
                     <x-tabs.pane name="notes">
-                        <x-table.history
+                        <x-table.history name="maintenanceNotes"
                             :table_header="trans('general.notes')"
                             :model="$maintenance"
                             :route="route('api.activity.index', ['item_id' => $maintenance->id, 'item_type' => 'maintenance', 'action_type' => 'note added'])"
@@ -201,7 +201,7 @@
                     </x-tabs.pane>
 
                     <x-tabs.pane name="history">
-                        <x-table.history :model="$maintenance" :route="route('api.maintenances.history', $maintenance)" :hide_fields="['order_number']"/>
+                        <x-table.history name="maintenanceHistory" :model="$maintenance" :route="route('api.maintenances.history', $maintenance)" :hide_fields="['order_number']"/>
                     </x-tabs.pane>
 
                 </x-slot:tabpanes>

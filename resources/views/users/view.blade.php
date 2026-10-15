@@ -353,7 +353,7 @@
                     </x-tabs.pane>
 
                     <x-tabs.pane name="assets" :count="$user->assets()->AssetsForShow()->count()">
-                        <x-table.assets :route="route('api.assets.index',['assigned_to' => e($user->id), 'assigned_type' => 'App\Models\User'])"/>
+                        <x-table.assets name="userAssets" :route="route('api.assets.index',['assigned_to' => e($user->id), 'assigned_type' => 'App\Models\User'])"/>
                     </x-tabs.pane>
 
                     <x-tabs.pane name="accessories" :count="$user->accessories()->count()">
@@ -395,7 +395,7 @@
                          closed; the tab badge only counts the open ones
                          (see assignedMaintenances()->active() above). --}}
                     <x-tabs.pane name="maintenances" :count="$user->assignedMaintenances()->count()">
-                        <x-table.maintenances
+                        <x-table.maintenances name="userMaintenances"
                             :route="route('api.maintenances.index', ['checked_out_to_id' => $user->id, 'checked_out_to_type' => \App\Models\User::class])"
                             export_filename="export-maintenances-{{ str_slug($user->username) }}-{{ date('Y-m-d') }}"
                         />
@@ -481,7 +481,7 @@
 
                     <!-- start history tab pane -->
                     <x-tabs.pane name="history">
-                        <x-table.history :model="$user" :route="route('api.users.history', $user)" :hide_fields="['order_number']"/>
+                        <x-table.history name="userHistory" :model="$user" :route="route('api.users.history', $user)" :hide_fields="['order_number']"/>
                     </x-tabs.pane>
                     <!-- end history tab pane -->
                 </x-slot:tabpanes>
