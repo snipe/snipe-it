@@ -773,6 +773,7 @@ return [
     'label' => 'Label',
     'import_asset_tag_exists' => 'An asset with the asset tag :asset_tag already exists and an update was not requested. No change was made.',
     'countries_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 3166 dropdown values',
+    'currency_manually_entered_help' => 'Values with an asterisk (*) were manually entered and do not match existing ISO 4217 dropdown values',
     'accessories_assigned' => 'Assigned Accessories',
     'user_managed_passwords' => 'Password Management',
     'user_managed_passwords_disallow' => 'Disallow users from managing their own passwords',

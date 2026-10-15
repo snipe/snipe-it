@@ -42,6 +42,10 @@
                 categoryType="component"
             />
 
+                @if (! $item->id)
+                    <x-input.quantity :item="$item"/>
+                @endif
+
             <x-input.minimum-quantity :item="$item" />
 
             <x-form.row
@@ -100,25 +104,19 @@
                 />
 
                 <x-form.row
-                    :label="trans('general.currency')"
+                    :label="trans('general.currency_text')"
                     name="currency"
                     input_div_class="col-md-3"
-                    :help_text="trans('general.currency_prefilled_hint')"
+                    help_class="col-md-7 col-md-offset-3"
+                    :help_text="trans('general.currency_prefilled_hint').' '.trans('general.currency_manually_entered_help')"
                 >
                     <x-slot:input>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="currency"
+                        <x-input.currency-select
                             name="currency"
-                            maxlength="10"
-                            value="{{ old('currency', $item->location->currency ?? $snipeSettings->default_currency) }}"
-                            aria-label="{{ trans('general.currency') }}"
+                            :selected="old('currency', $item->location->currency ?? $snipeSettings->default_currency)"
                         />
                     </x-slot:input>
                 </x-form.row>
-
-                <x-input.quantity :item="$item" />
             @endif
 
             <x-input.supplier-select
