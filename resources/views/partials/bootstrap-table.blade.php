@@ -838,6 +838,7 @@
                 buttonsOrder: [
                     'columns',
                     'btnAdd',
+                    'btnShowArchived',
                     'btnShowDeleted',
                     'btnToggleCompleted',
                     'btnDue',
@@ -1639,6 +1640,30 @@
             },
             attributes: {
                 title: '{{ trans('general.custom_component_report') }}',
+            }
+        },
+
+        btnShowArchived: {
+            text: '{{ (request()->input('status') == "Archived") ? trans('general.show_current') : trans('general.show_archived') }}',
+            icon: '{{ \App\Helpers\IconHelper::icon('archived') }}',
+            event () {
+                window.location.href = '{{ (request()->input('status') == "Archived") ? route('components.index') : route('components.index', ['status' => 'Archived']) }}';
+            },
+            attributes: {
+                class: '{{ (request()->input('status') == "Archived") ? 'btn-selected' : '' }}',
+                title: '{{ (request()->input('status') == "Archived") ? trans('general.show_current') : trans('general.show_archived') }}',
+            }
+        },
+
+        btnShowDeleted: {
+            text: '{{ (request()->input('status') == "Deleted") ? trans('general.show_current') : trans('general.show_deleted') }}',
+            icon: 'fa-solid fa-trash',
+            event () {
+                window.location.href = '{{ (request()->input('status') == "Deleted") ? route('components.index') : route('components.index', ['status' => 'Deleted']) }}';
+            },
+            attributes: {
+                class: '{{ (request()->input('status') == "Deleted") ? 'btn-selected' : '' }}',
+                title: '{{ (request()->input('status') == "Deleted") ? trans('general.show_current') : trans('general.show_deleted') }}',
             }
         },
     });
