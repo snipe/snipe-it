@@ -323,11 +323,13 @@ class Purge extends Command
         }
 
         foreach ($imageFiles[$modelClass] as $column => $case) {
-            $filenames = DB::table($table)
-                ->whereIn('id', $ids)
+            // Chunk the IN list so a user with tens of thousands of
+            // trashed rows doesn't blow MySQL's placeholder ceiling
+            // on a single prepared statement.
+            $filenames = $ids->chunk(1000)->flatMap(fn ($chunk) => DB::table($table)
+                ->whereIn('id', $chunk)
                 ->pluck($column)
-                ->filter()
-                ->unique();
+            )->filter()->unique();
 
             foreach ($filenames as $filename) {
                 try {
@@ -383,16 +385,20 @@ class Purge extends Command
             }
         }
 
-        $logs = DB::table('action_logs')
+        // Chunk the IN list so a user with tens of thousands of
+        // trashed rows doesn't blow MySQL's placeholder ceiling
+        // on a single prepared statement. Collected into one $logs
+        // collection so the dedupe + unlink step below stays reasonable.
+        $logs = $ids->chunk(1000)->flatMap(fn ($chunk) => DB::table('action_logs')
             ->select('action_type', 'item_type', 'filename', 'accept_signature')
-            ->where(function ($outer) use ($modelClass, $ids) {
-                $outer->where(function ($s) use ($modelClass, $ids) {
-                    $s->where('item_type', $modelClass)->whereIn('item_id', $ids);
-                })->orWhere(function ($s) use ($modelClass, $ids) {
-                    $s->where('target_type', $modelClass)->whereIn('target_id', $ids);
+            ->where(function ($outer) use ($modelClass, $chunk) {
+                $outer->where(function ($s) use ($modelClass, $chunk) {
+                    $s->where('item_type', $modelClass)->whereIn('item_id', $chunk);
+                })->orWhere(function ($s) use ($modelClass, $chunk) {
+                    $s->where('target_type', $modelClass)->whereIn('target_id', $chunk);
                 });
             })
-            ->get();
+            ->get());
 
         $paths = [];
         foreach ($logs as $log) {
@@ -439,11 +445,11 @@ class Purge extends Command
         }
 
         foreach ($privateFileColumns[$modelClass] as $column => $subpath) {
-            $filenames = DB::table($table)
-                ->whereIn('id', $ids)
+            // Chunk the IN list
+            $filenames = $ids->chunk(1000)->flatMap(fn ($chunk) => DB::table($table)
+                ->whereIn('id', $chunk)
                 ->pluck($column)
-                ->filter()
-                ->unique();
+            )->filter()->unique();
 
             foreach ($filenames as $filename) {
                 $this->tryUnlink(rtrim($subpath, '/').'/'.basename($filename));
