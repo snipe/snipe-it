@@ -1877,6 +1877,46 @@ whole select in dark mode so pre-selected items stay readable.
   color: #373636 !important;
 }
 
+/*
+Bootstrap's `.img-thumbnail` hard-codes `background-color: #fff`,
+which gives transparent PNG uploads (asset / model / company logos)
+a white backing in dark mode. Theme the colors through the panel
+custom properties so the thumbnail matches the surface it sits in.
+Not gated by `[data-theme="dark"]` because Bootstrap's
+`transition: all 0.2s ease-in-out` on this class interacts badly
+with selector-change-plus-var() on theme toggle, and leaves the
+previous computed color stuck until the next page load. The vars
+already carry the per-theme value so this one rule works in both.
+See #19837.
+ */
+.img-thumbnail {
+  background-color: var(--box-bg);
+  // Use the top-border custom property so the thumbnail border reads
+  // at roughly the same visual weight as Bootstrap's default `#ddd`
+  // (`--box-header-top-border-color` is `#d2d6de` in light mode and
+  // `#605e5e` in dark). The bottom-border variant is near-white in
+  // light mode which made the thumbnail look like it had no border.
+  border-color: var(--box-header-top-border-color);
+  // Bootstrap applies `transition: all 0.2s ease-in-out` on this
+  // class. Combined with a `var()`-based color and the theme toggle
+  // flipping `--box-bg` on <html>, Chrome's transition engine can
+  // leave the previous computed color stuck until the next full
+  // repaint. Narrow the transition to geometry-only so theme flips
+  // repaint the thumbnail color immediately.
+  transition-property: padding, border-radius, border-width;
+}
+
+/*
+QR codes need a white backing in both themes so phone scanners pick
+up the high-contrast pattern. Both QR img sites sit inside a wrapping
+div with class `asset-qr-img`, so restore the Bootstrap defaults for
+.img-thumbnail inside that context only.
+ */
+.asset-qr-img .img-thumbnail {
+  background-color: #fff;
+  border-color: #ddd;
+}
+
 /**
 Site-logo preview swatch on Settings > Branding. Uses the tenant header
 color as its background so the logo shows against the same color it will
