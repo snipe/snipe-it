@@ -39,6 +39,12 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     )->where('componentID', '[0-9]+')
         ->name('components.checkin.store');
 
+    // Bulk check-in from the component's assigned tab.
+    Route::post(
+        'bulkcheckin/selected',
+        [Components\ComponentCheckinController::class, 'bulkCheckinSelected']
+    )->name('components.bulkcheckin.selected');
+
     Route::get('{component}/clone',
         [Components\ComponentsController::class, 'getClone']
     )->where('component', '[0-9]+')
