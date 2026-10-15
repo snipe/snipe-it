@@ -4,8 +4,12 @@
         :action_route="route('components.bulkedit.show')"
         model_name="component"
         :actions="array_filter([
-            'edit' => Gate::allows('update', \App\Models\Component::class) ? ['label' => trans('general.bulk_edit')] : null,
-            'delete' => Gate::allows('delete', \App\Models\Component::class) ? ['label' => trans('general.delete')] : null,
+            'edit' => (request('status') !== 'Deleted' && Gate::allows('update', \App\Models\Component::class))
+                ? ['label' => trans('general.bulk_edit')] : null,
+            'delete' => (request('status') !== 'Deleted' && Gate::allows('delete', \App\Models\Component::class))
+                ? ['label' => trans('general.delete')] : null,
+            'restore' => (request('status') === 'Deleted' && Gate::allows('delete', \App\Models\Component::class))
+                ? ['label' => trans('general.restore')] : null,
         ])"
     />
 @endif

@@ -8,11 +8,14 @@ namespace App\Presenters;
 class ComponentPresenter extends Presenter
 {
     /**
-     * Json Column Layout for bootstrap table
+     * JSON column layout for bootstrap-table.
      *
+     * @param  bool  $showDeletedAt  Make the deleted_at column visible
+     *                               by default. Passed from the Deleted-index view so admins
+     *                               see when each row was deleted. Still switchable elsewhere.
      * @return string
      */
-    public static function dataTableLayout()
+    public static function dataTableLayout(bool $showDeletedAt = false)
     {
         $layout = [
             [
@@ -227,6 +230,15 @@ class ComponentPresenter extends Presenter
                 'sortable' => true,
                 'visible' => false,
                 'title' => trans('general.updated_at'),
+                'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'deleted_at',
+                'scope' => 'col',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'visible' => $showDeletedAt,
+                'title' => trans('general.deleted_at'),
                 'formatter' => 'dateDisplayFormatter',
             ],
         ];

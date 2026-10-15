@@ -84,6 +84,7 @@ class ComponentsTransformer
             ] : null,
             'created_at' => Helper::getFormattedDateObject($component->created_at, 'datetime'),
             'updated_at' => Helper::getFormattedDateObject($component->updated_at, 'datetime'),
+            'deleted_at' => Helper::getFormattedDateObject($component->deleted_at, 'datetime'),
             'user_can_checkout' => ($component->numRemaining() > 0) ? 1 : 0,
         ];
 
@@ -97,17 +98,26 @@ class ComponentsTransformer
         $permissions_array = [];
         $permissions_array['assigned_to_self'] = $userHasOpenRequest;
 
+        // Soft-deleted rows surface in the "Deleted" index view with
+        // their write-ish actions rendered disabled, not hidden, by
+        // the per-row formatter. Keep the policy-gated flags true so
+        // the disabled stand-ins render. The formatter inspects
+        // row.deleted_at to flip them to their disabled state.
+        $isDeleted = $component->deleted_at !== null;
         $canUpdate = Gate::allows('update', $component);
         $canDelete = $component->isDeletable();
 
         $permissions_array['available_actions'] = [
             'checkout' => Gate::allows('checkout', $component),
             'checkin' => Gate::allows('checkin', $component),
-            'update' => $canUpdate,
+            'update' => $canUpdate && ! $isDeleted,
             'adjust_quantity' => $canUpdate,
+            // Cloning a deleted component is explicitly allowed. It
+            // produces a brand-new row and leaves the deleted parent
+            // untouched, so it's safe as a restore-and-tweak shortcut.
             'clone' => Gate::allows('clone', $component),
             'delete' => $canDelete,
-            'request' => (bool) $component->requestable && ! $userHasOpenRequest,
+            'request' => (bool) $component->requestable && ! $isDeleted && ! $userHasOpenRequest,
             'cancel' => (bool) $component->requestable && $userHasOpenRequest,
             // Dropdown-action gating: the bulk-actions dropdown asks
             // "can this row take THIS action?" and disables the
@@ -116,8 +126,16 @@ class ComponentsTransformer
             // in partials/bootstrap-table). Keys must match the
             // bulk_actions dropdown values on the components index.
             'bulk_selectable' => [
-                'edit' => $canUpdate,
-                'delete' => $canDelete,
+                // Edit and Delete only make sense for live rows. On
+                // soft-deleted rows the bulk-actions dropdown offers
+                // Restore instead, so flip both off here to keep the
+                // dropdown's auto-uncheck guard honest.
+                'edit' => $canUpdate && ! $isDeleted,
+                'delete' => $canDelete && ! $isDeleted,
+                // Restore is only meaningful on the Deleted index.
+                // Treating it as a delete-tier action (same policy
+                // choice as postRestore / AssetModelsController).
+                'restore' => $isDeleted && Gate::allows('delete', $component),
             ],
         ];
         $array += $permissions_array;

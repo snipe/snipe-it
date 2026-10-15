@@ -34,7 +34,7 @@ class BulkCheckinComponentsTest extends TestCase
 
         $this->actingAs(User::factory()->viewComponents()->create())
             ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivotId]])
-            ->assertRedirect();
+            ->assertForbidden();
 
         $this->assertDatabaseHas('components_assets', ['id' => $pivotId]);
     }
@@ -71,6 +71,46 @@ class BulkCheckinComponentsTest extends TestCase
             ->post(route('components.bulkcheckin.selected'), ['ids' => []])
             ->assertRedirect()
             ->assertSessionHas('warning');
+    }
+
+    public function test_success_message_reports_total_units_not_just_pivot_rows(): void
+    {
+        // Regression: a pivot row can represent many units via
+        // assigned_qty, so "3 rows checked in" might really mean
+        // 25 units returned. The success message must surface the
+        // units total, not just the row count. Pin so a refactor
+        // can't quietly drop the per-row qty sum.
+        $component = Component::factory()->create(['qty' => 50]);
+
+        $pivotA = $this->attachCheckout($component, Asset::factory()->create(), 4);
+        $pivotB = $this->attachCheckout($component, Asset::factory()->create(), 11);
+        $pivotC = $this->attachCheckout($component, Asset::factory()->create(), 7);
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivotA, $pivotB, $pivotC]])
+            ->assertRedirect()
+            ->assertSessionHas('success', trans_choice(
+                'admin/components/message.bulk.checkin_selected.success',
+                3,
+                ['count' => 3, 'unit_count' => 22],
+            ));
+    }
+
+    public function test_success_message_handles_single_unit_single_row(): void
+    {
+        // Covers the singular side of the trans_choice branch for the
+        // simplest checkin: one row, one unit.
+        $component = Component::factory()->create(['qty' => 5]);
+        $pivot = $this->attachCheckout($component, Asset::factory()->create(), 1);
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivot]])
+            ->assertRedirect()
+            ->assertSessionHas('success', trans_choice(
+                'admin/components/message.bulk.checkin_selected.success',
+                1,
+                ['count' => 1, 'unit_count' => 1],
+            ));
     }
 
     public function test_unknown_pivot_ids_are_silently_skipped(): void

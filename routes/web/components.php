@@ -48,12 +48,18 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     Route::get('{component}/clone',
         [Components\ComponentsController::class, 'getClone']
     )->where('component', '[0-9]+')
-        ->name('components.clone.create');
+        ->name('components.clone.create')
+        ->withTrashed();
 
     Route::post('{component}/adjust-quantity',
         [Components\ComponentsController::class, 'adjustQuantity']
     )->where('component', '[0-9]+')
         ->name('components.adjust-quantity');
+
+    Route::post('{componentID}/restore',
+        [Components\ComponentsController::class, 'postRestore']
+    )->where('componentID', '[0-9]+')
+        ->name('components.restore');
 
     // Bulk-fulfill queue for this component. Distinct from the
     // sibling user-target bulk-fulfill routes (accessories/
@@ -102,4 +108,4 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
 Route::resource('components', Components\ComponentsController::class, [
     'middleware' => ['auth'],
     'parameters' => ['component' => 'component_id'],
-]);
+])->withTrashed(['show']);

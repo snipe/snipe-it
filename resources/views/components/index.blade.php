@@ -19,7 +19,10 @@
 @section('content')
     <x-container>
         <x-box name="components" sr_only_title>
-            <x-table.components :route="route('api.components.index', ['status' => e(request('status'))])" />
+            <x-table.components
+                :route="route('api.components.index', ['status' => e(request('status'))])"
+                :presenter="\App\Presenters\ComponentPresenter::dataTableLayout(request('status') === 'Deleted')"
+            />
         </x-box>
     </x-container>
 @can('update', \App\Models\Component::class)

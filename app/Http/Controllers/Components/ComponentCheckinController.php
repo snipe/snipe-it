@@ -129,6 +129,9 @@ class ComponentCheckinController extends Controller
      */
     public function bulkCheckinSelected(Request $request): RedirectResponse
     {
+        
+        $this->authorize('checkin', Component::class);
+
         $pivotIds = array_filter((array) $request->input('ids', []));
 
         if (empty($pivotIds)) {
@@ -149,7 +152,13 @@ class ComponentCheckinController extends Controller
             ->whereIn('component_id', Component::query()->select('id'))
             ->get();
 
-        $count = 0;
+        // Count returned ROWS and total UNITS separately. Each pivot
+        // carries an assigned_qty, so "3 rows checked in" might really
+        // mean "3 rows totaling 25 units back in inventory." The
+        // success message surfaces both so the operator can reconcile
+        // against what they expected to return.
+        $rowCount = 0;
+        $unitCount = 0;
         foreach ($assignments as $assignment) {
             $component = $assignment->component;
             if (!$component || !Gate::allows('checkin', $component)) {
@@ -161,6 +170,7 @@ class ComponentCheckinController extends Controller
             // Asset directly by its pivot column. withTrashed so a
             // soft-deleted asset doesn't break the checkin event.
             $asset = Asset::withTrashed()->find($assignment->asset_id);
+            $qty = (int) $assignment->assigned_qty;
 
             if ($assignment->delete()) {
                 event(new CheckoutableCheckedIn(
@@ -170,11 +180,15 @@ class ComponentCheckinController extends Controller
                     null,
                     Carbon::now(),
                 ));
-                $count++;
+                $rowCount++;
+                $unitCount += $qty;
             }
         }
 
         return redirect()->back()
-            ->with('success', trans_choice('admin/components/message.bulk.checkin_selected.success', $count, ['count' => $count]));
+            ->with('success', trans_choice('admin/components/message.bulk.checkin_selected.success', $rowCount, [
+                'count' => $rowCount,
+                'unit_count' => $unitCount,
+            ]));
     }
 }

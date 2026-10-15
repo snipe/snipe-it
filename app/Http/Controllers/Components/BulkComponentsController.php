@@ -45,7 +45,15 @@ class BulkComponentsController extends Controller
                 ->with('error', trans('admin/components/message.bulk.no_components_selected'));
         }
 
-        $components = Component::whereIn('id', $request->input('ids'))->get();
+        // Restore acts on soft-deleted rows, so widen the lookup with
+        // withTrashed for that branch only. The CompanyableScope still
+        // applies via the auto-scope on Component, so cross-tenant ids
+        // continue to drop.
+        $query = Component::whereIn('id', $request->input('ids'));
+        if ($request->input('bulk_actions') === 'restore') {
+            $query->withTrashed();
+        }
+        $components = $query->get();
 
         if ($components->isEmpty()) {
             return redirect()->route('components.index')
@@ -55,6 +63,7 @@ class BulkComponentsController extends Controller
         return match ($request->input('bulk_actions')) {
             'edit' => $this->showEdit($components),
             'delete' => $this->showDelete($components),
+            'restore' => $this->doRestore($components),
             default => redirect()->route('components.index')
                 ->with('error', trans('admin/components/message.bulk.no_action_selected')),
         };
@@ -229,5 +238,48 @@ class BulkComponentsController extends Controller
             'components' => $components,
             'ids' => $components->pluck('id')->all(),
         ]);
+    }
+
+    /**
+     * Bulk-restore handler. Restore is non-destructive, so there's no
+     * confirm view: iterate the selection, call ->restore(), redirect
+     * back to the Deleted index with a summary. Per-row Gate::allows
+     * `delete` keeps restore on the delete-tier auth bar (matches
+     * postRestore + AssetModelsController).
+     */
+    protected function doRestore($components): RedirectResponse
+    {
+        $this->authorize('delete', Component::class);
+
+        $restored = 0;
+        $errors = [];
+
+        foreach ($components as $component) {
+            if (! Gate::allows('delete', $component)) {
+                $errors[] = trans('general.unauthorized');
+
+                continue;
+            }
+
+            if ($component->deleted_at === null) {
+                // Already live. Skip without erroring so a stale
+                // selection doesn't blow up the whole batch.
+                continue;
+            }
+
+            if ($component->restore()) {
+                $restored++;
+            }
+        }
+
+        $redirect = redirect()->route('components.index', ['status' => 'Deleted']);
+
+        if (count($errors) > 0 && $restored === 0) {
+            return $redirect->with('multi_error_messages', $errors);
+        }
+
+        return $redirect
+            ->with('success', trans_choice('admin/components/message.bulk.restore.success', $restored, ['count' => $restored]))
+            ->with('multi_error_messages', $errors ?: null);
     }
 }

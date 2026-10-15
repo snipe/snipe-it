@@ -75,11 +75,11 @@ trait HasOrders
 
     /**
      * Count of distinct Orders this item has been *purchased* on. Feeds
-     * the info-panel's "Total Orders" row and the Orders-tab badge.
-     * Filters to lines with positive qty so corrections / consumption
-     * events (0- or negative-qty OrderItems) don't inflate the count —
-     * those aren't purchases, and treating them as such was misleading
-     * when a lifecycle had more corrections than actual acquisitions.
+     * the info-panel's "Total Orders" row. Filters to lines with
+     * positive qty so corrections / consumption events (0- or
+     * negative-qty OrderItems) don't inflate the count. Those aren't
+     * purchases, and treating them as such was misleading when a
+     * lifecycle had more corrections than actual acquisitions.
      * DISTINCT because one Order can carry multiple positive lines for
      * the same item under staggered receipts.
      */
@@ -89,6 +89,29 @@ trait HasOrders
             ->where('order_items.qty', '>', 0)
             ->distinct()
             ->count('orders.id');
+    }
+
+    /**
+     * Row count that the Orders-tab API endpoint will return for this
+     * item. Used by the tab badge so the number next to "Orders"
+     * matches the row count of the table underneath. ordersCount
+     * (distinct Orders) is wrong for this specific surface because
+     * one Order can produce multiple table rows via multi-line
+     * acquisitions, and HasManyThrough's inner join + Order's own
+     * SoftDeletes scope can diverge from the API's leftJoin shape.
+     *
+     * Mirrors the filters applied by OrderItemsController::index,
+     * which excludes OrderItems whose parent Order has no order
+     * number. Those are the initial-inventory anchors written by
+     * writeInitialOrderIfStocked and shouldn't surface as "orders"
+     * in the admin UI alongside real acquisition records.
+     */
+    public function orderItemsCount(): int
+    {
+        return (int) $this->orderItems()
+            ->where('qty', '>', 0)
+            ->whereHas('order', fn ($q) => $q->whereNotNull('order_number'))
+            ->count();
     }
 
     /**

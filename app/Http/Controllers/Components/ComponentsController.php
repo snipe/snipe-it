@@ -234,6 +234,30 @@ class ComponentsController extends Controller
     }
 
     /**
+     * Restore a soft-deleted component.
+     */
+    public function postRestore($id): RedirectResponse
+    {
+        if ($component = Component::withTrashed()->find($id)) {
+           
+            $this->authorize('delete', $component);
+
+            if ($component->deleted_at == '') {
+                return redirect()->back()->with('error', trans('general.not_deleted', ['item_type' => trans('general.component')]));
+            }
+
+            if ($component->restore()) {
+                return redirect()->route('components.show', $component)
+                    ->with('success', trans('admin/components/message.restore.success'));
+            }
+
+            return redirect()->back()->with('error', trans('general.could_not_restore', ['item_type' => trans('general.component'), 'error' => $component->getErrors()->first()]));
+        }
+
+        return redirect()->route('components.index')->with('error', trans('admin/components/message.does_not_exist'));
+    }
+
+    /**
      * Return a view to display component information.
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]

@@ -14,6 +14,11 @@ return [
         'success' => 'Component updated successfully.',
     ],
 
+    'restore' => [
+        'error' => 'Component was not restored, please try again',
+        'success' => 'Component restored successfully.',
+    ],
+
     'delete' => [
         'confirm' => 'Are you sure you wish to delete this component?',
         'error' => 'There was an issue deleting the component. Please try again.',
@@ -46,9 +51,13 @@ return [
             'partial_success' => ':count component was deleted. See errors below for the rest.|:count components were deleted. See errors below for the rest.',
         ],
 
+        'restore' => [
+            'success' => ':count component was restored.|:count components were restored.',
+        ],
+
         'checkin_selected' => [
             'no_rows_selected' => 'No checked-out components were selected.',
-            'success' => ':count checked-out component was returned.|:count checked-out components were returned.',
+            'success' => ':unit_count unit returned across :count checkout.|:unit_count units returned across :count checkouts.',
         ],
     ],
 
