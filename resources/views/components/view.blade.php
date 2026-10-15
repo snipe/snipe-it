@@ -89,9 +89,10 @@
                         @can('update', $snipe_component)
                             @php $lastOrder = $snipe_component->lastOrderDefaults(); @endphp
                             <button type="button"
-                                class="btn btn-sm btn-primary adjust-quantity"
+                                class="btn btn-sm btn-primary adjust-quantity {{ $snipe_component->archived ? 'disabled' : '' }}"
                                 data-tooltip="true"
-                                title="{{ trans('general.adjust_quantity') }}"
+                                title="{{ $snipe_component->archived ? trans('admin/components/general.archived_component') : trans('general.adjust_quantity') }}"
+                                @disabled($snipe_component->archived)
                                 data-adjust-url="{{ route('components.adjust-quantity', $snipe_component) }}"
                                 data-item-name="{{ e($snipe_component->name) }}"
                                 data-available="{{ (int) $snipe_component->numRemaining() }}"

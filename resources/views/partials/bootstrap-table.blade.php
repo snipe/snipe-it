@@ -2691,12 +2691,18 @@
             // available_actions.adjust_quantity (accessories, consumables,
             // components). The click handler in snipeit.js reads the
             // data-* attrs and shows blade/modals/adjust-quantity.
+            // Archived components keep the button rendered but
+            // disabled so admins see the control is unavailable
+            // for retired inventory rather than wondering where it
+            // went.
             if ((row.available_actions) && (row.available_actions.adjust_quantity === true)) {
                 actions += window.renderAdjustQuantityButton({
                     dest: dest,
                     id: row.id,
                     name: row.name || '',
                     available: row.remaining,
+                    disabled: row.archived === true,
+                    disabledReason: '{{ trans('admin/components/general.archived_component') }}',
                 }) + '&nbsp;';
             }
 
@@ -3524,7 +3530,13 @@
     // for the modal header, and the available count for the modal help
     // text.
     window.renderAdjustQuantityButton = function (opts) {
-        return '<button type="button" class="actions btn btn-sm btn-primary hidden-print adjust-quantity" data-tooltip="true" title="{{ trans('general.adjust_quantity') }}"'
+        var disabled = opts.disabled === true;
+        var title = disabled && opts.disabledReason
+            ? opts.disabledReason
+            : '{{ trans('general.adjust_quantity') }}';
+        return '<button type="button" class="actions btn btn-sm btn-primary hidden-print adjust-quantity'
+            + (disabled ? ' disabled' : '') + '" data-tooltip="true" title="' + title + '"'
+            + (disabled ? ' disabled' : '')
             + ' data-adjust-url="{{ config('app.url') }}/' + opts.dest + '/' + opts.id + '/adjust-quantity"'
             + ' data-item-name="' + (opts.name || '') + '"'
             + ' data-available="' + (opts.available != null ? opts.available : '') + '">'
