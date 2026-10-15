@@ -3151,6 +3151,31 @@ $(function () {
   }
 });
 
+// Mutually-exclusive checkbox pairs. Opt in with
+//   data-mutex-with="otherFieldName"
+// on BOTH checkboxes. Checking one disables (and clears) the other
+// so the user can't post a conflict the server would reject. Used
+// for the archived/requestable pair on checkoutable item edit forms.
+$(function () {
+  var $pair = $('input[type="checkbox"][data-mutex-with]');
+  if (!$pair.length) {
+    return;
+  }
+  function syncMutexState() {
+    $pair.each(function () {
+      var siblingName = $(this).data('mutex-with');
+      var $sibling = $pair.filter('[name="' + siblingName + '"]');
+      if ($(this).is(':checked')) {
+        $sibling.prop('checked', false).prop('disabled', true);
+      } else {
+        $sibling.prop('disabled', false);
+      }
+    });
+  }
+  $pair.on('change', syncMutexState);
+  syncMutexState();
+});
+
 /***/ },
 
 /***/ "./resources/assets/js/snipeit_modals.js"
