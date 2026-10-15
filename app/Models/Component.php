@@ -14,6 +14,7 @@ use App\Models\Traits\Requestable;
 use App\Models\Traits\Searchable;
 use App\Presenters\ComponentPresenter;
 use App\Presenters\Presentable;
+use App\Rules\RequestableArchivedMutex;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -50,6 +51,7 @@ class Component extends SnipeModel
     protected $casts = [
         'purchase_date' => 'datetime',
         'requestable' => 'boolean',
+        'archived' => 'boolean',
     ];
 
     protected $table = 'components';
@@ -70,8 +72,30 @@ class Component extends SnipeModel
         'manufacturer_id' => 'integer|exists:manufacturers,id|nullable',
         'default_supplier_id' => 'nullable|integer|exists:suppliers,id',
         'default_purchase_cost' => 'numeric|nullable|gte:0|max:99999999999999999.99',
-        'requestable' => 'nullable|boolean',
+        'requestable' => ['nullable', 'boolean'],
+        'archived' => ['nullable', 'boolean'],
     ];
+
+    /**
+     * PHP 8.2 blocks `new X` in property defaults, so the rule object
+     * gets spliced in here rather than in $rules above.
+     */
+    public function getRules(): array
+    {
+        $rules = $this->rules ?? [];
+        $mutex = new RequestableArchivedMutex;
+
+        $noArchivingWithCheckouts = function (string $attribute, mixed $value, \Closure $fail): void {
+            if (filter_var($value, FILTER_VALIDATE_BOOLEAN) && $this->exists && $this->numCheckedOut() > 0) {
+                $fail(trans('admin/components/message.archived_blocked_by_checkouts'));
+            }
+        };
+
+        $rules['requestable'] = array_merge((array) ($rules['requestable'] ?? []), [$mutex]);
+        $rules['archived'] = array_merge((array) ($rules['archived'] ?? []), [$mutex, $noArchivingWithCheckouts]);
+
+        return $rules;
+    }
 
     /**
      * Whether the model should inject it's identifier to the unique
@@ -107,6 +131,7 @@ class Component extends SnipeModel
         'default_supplier_id',
         'default_purchase_cost',
         'requestable',
+        'archived',
     ];
 
     use Searchable;
