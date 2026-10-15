@@ -39,6 +39,19 @@
                             {{ trans('general.assigned') }}
                         </x-slot:table_header>
 
+                        @can('checkin', $snipe_component)
+                            <x-slot:bulkactions>
+                                <x-table.bulk-actions
+                                    name="componentCheckedOut"
+                                    :action_route="route('components.bulkcheckin.selected')"
+                                    model_name="components_asset"
+                                    :actions="[
+                                        'checkin' => ['label' => trans('general.checkin')],
+                                    ]"
+                                />
+                            </x-slot:bulkactions>
+                        @endcan
+
                         <x-table
                             name="componentCheckedOut" :presenter="\App\Presenters\ComponentPresenter::checkedOut()"
                             :api_url="route('api.components.assets', $snipe_component)"
