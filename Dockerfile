@@ -31,7 +31,7 @@ wget  \
 vim \
 git \
 cron \
-mysql-client \
+mariadb-client \
 supervisor \
 cron \
 gcc \
