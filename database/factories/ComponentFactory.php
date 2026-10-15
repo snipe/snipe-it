@@ -47,6 +47,11 @@ class ComponentFactory extends Factory
         ];
     }
 
+    public function archived(): self
+    {
+        return $this->state(fn () => ['archived' => true]);
+    }
+
     public function ramCrucial4()
     {
         $manufacturer = Manufacturer::where('name', 'Crucial')->first() ?? Manufacturer::factory()->create(['name' => 'Crucial']);
