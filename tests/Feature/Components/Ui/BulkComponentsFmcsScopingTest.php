@@ -7,6 +7,7 @@ use App\Models\Asset;
 use App\Models\Company;
 use App\Models\Component;
 use App\Models\ComponentAssignment;
+use App\Models\Location;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
@@ -118,6 +119,55 @@ class BulkComponentsFmcsScopingTest extends TestCase
 
         $this->assertDatabaseHas('components_assets', ['id' => $pivot]);
         Event::assertNothingDispatched();
+    }
+
+    public function test_bulk_edit_rejects_write_to_cross_company_company_id_under_fmcs(): void
+    {
+        // Even if a non-superuser hand-crafted a POST with a company_id
+        // outside their pivot set, the fmcs_company validator + policy
+        // layer should block the write. Pin so the picker-level
+        // filtering can't be the only defense.
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+        $actor = $companyA->users()->save(User::factory()->editComponents()->viewComponents()->make());
+        $target = Component::factory()->for($companyA)->create();
+
+        $this->actingAs($actor)
+            ->post(route('components.bulkedit.store'), [
+                'ids' => [$target->id],
+                'company_id' => (string) $companyB->id,
+            ])
+            ->assertRedirect(route('components.index'));
+
+        $this->assertSame($companyA->id, $target->fresh()->company_id);
+    }
+
+    public function test_bulk_edit_rejects_cross_company_location_under_scope_locations_fmcs(): void
+    {
+        // scope_locations_fmcs=1 means a location "belongs" to the
+        // companies in its parent chain. fmcs_location validator must
+        // reject a bulk-edit that pairs location X with company Y when
+        // X doesn't live in Y.
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+        $actor = $companyA->users()->save(User::factory()->editComponents()->viewComponents()->make());
+        $homeLocation = Location::factory()->for($companyA)->create();
+        $target = Component::factory()->for($companyA)->create(['location_id' => $homeLocation->id]);
+        $foreignLocation = Location::factory()->for($companyB)->create();
+
+        // Flip scope_locations_fmcs AFTER factory setup so cross-company
+        // location-vs-company validation is in force only for the actual
+        // bulk-update request, not during the test's own data seeding.
+        $this->settings->enableScopedLocationsWithFullMultipleCompanySupport();
+
+        $this->actingAs($actor)
+            ->post(route('components.bulkedit.store'), [
+                'ids' => [$target->id],
+                'location_id' => (string) $foreignLocation->id,
+            ])
+            ->assertRedirect(route('components.index'));
+
+        $this->assertSame($homeLocation->id, $target->fresh()->location_id);
     }
 
     public function test_bulk_checkin_floater_can_checkin_null_company_pivot(): void

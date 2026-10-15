@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Components;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Component;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\ValidationException;
 
 class BulkComponentsController extends Controller
 {
@@ -96,6 +98,22 @@ class BulkComponentsController extends Controller
             }
 
             $updateData[$field] = $value;
+        }
+
+        // Route company_id through getIdForCurrentUser so a non-superuser
+        // can't hand-craft a POST that writes a cross-tenant company_id
+        // across the selection. Mirrors the single-component edit path at
+        // ComponentsController::update. Throws ValidationException on a
+        // submitted-but-foreign company, which lets the request fail with
+        // a proper field error rather than a silent nullout.
+        if (array_key_exists('company_id', $updateData)) {
+            try {
+                $updateData['company_id'] = Company::getIdForCurrentUser($updateData['company_id']);
+            } catch (ValidationException $e) {
+                return redirect()->route('components.index')
+                    ->withErrors($e->errors())
+                    ->with('error', trans('general.unauthorized'));
+            }
         }
 
         // Opt-in null-outs. Checkbox named null_{field}=1 clears that
