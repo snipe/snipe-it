@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\BulkComponentsController;
 use App\Http\Controllers\Components;
+use App\Http\Controllers\Components\BulkComponentsController;
 use App\Models\Component;
 use Illuminate\Support\Facades\Route;
 use Tabuna\Breadcrumbs\Trail;
