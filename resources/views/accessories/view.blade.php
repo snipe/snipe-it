@@ -40,7 +40,7 @@
                         </x-slot:table_header>
 
                         <x-table
-                            api_url="{{ route('api.accessories.checkedout', $accessory->id) }}"
+                            name="accessoryCheckedOut" api_url="{{ route('api.accessories.checkedout', $accessory->id) }}"
                             :presenter="\App\Presenters\AccessoryPresenter::assignedDataTableLayout()"
                             export_filename="export-{{ str_slug($accessory->name) }}-assets-{{ date('Y-m-d') }}"
                         />
@@ -50,13 +50,13 @@
 
                     <!-- start orders tab pane -->
                     <x-tabs.pane name="orders">
-                        <x-table.orders :route="route('api.order-items.index', ['item_type' => \App\Models\Accessory::class, 'item_id' => $accessory->id])"/>
+                        <x-table.orders name="accessoryOrders" :route="route('api.order-items.index', ['item_type' => \App\Models\Accessory::class, 'item_id' => $accessory->id])"/>
                     </x-tabs.pane>
                     <!-- end orders tab pane -->
 
                     <!-- start history tab pane -->
                     <x-tabs.pane name="history">
-                        <x-table.history :model="$accessory" :route="route('api.accessories.history', $accessory)" :hide_fields="['serial']"/>
+                        <x-table.history name="accessoryHistory" :model="$accessory" :route="route('api.accessories.history', $accessory)" :hide_fields="['serial']"/>
                     </x-tabs.pane>
                     <!-- end history tab pane -->
 

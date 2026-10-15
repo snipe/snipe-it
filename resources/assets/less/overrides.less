@@ -427,10 +427,6 @@ body {
 
   body {
     margin: 0 auto;
-    line-height: 1em;
-    word-spacing:1px;
-    letter-spacing:0.2px;
-    font: 15px "Times New Roman", Times, serif;
     width: 100%;
     float: none;
   }
@@ -438,18 +434,6 @@ body {
   /* avoid page-breaks inside a listingContainer*/
   .listingContainer {
     page-break-inside: avoid;
-  }
-
-  h1 {
-    font: 28px "Times New Roman", Times, serif;
-  }
-
-  h2 {
-    font: 24px "Times New Roman", Times, serif;
-  }
-
-  h3 {
-    font: 20px "Times New Roman", Times, serif;
   }
 
   /* Improve colour contrast of links */
@@ -462,10 +446,6 @@ body {
     background: transparent;
     color:#333;
     text-decoration:none;
-  }
-
-  a[href]:after {
-    content: "" !important;
   }
 
   a[href^="http://"] {
@@ -3319,12 +3299,84 @@ tr.danger > td {
     color: black !important;
   }
 
-  .col-sm-9,
+  // Stack the detail-page columns so each uses the full page width in
+  // print instead of being pinned to the 9/12 + 3/12 grid. Fixes the
+  // ~20% empty right margin on the main panel and the narrow
+  // left-column strip the info-panel renders into on paper
+  .col-md-9,
+  .col-md-3,
   .main-panel {
-    float: left;
+    float: none !important;
     width: 100% !important;
   }
 
+  // Nav-tab headers are redundant on paper because the existing rule
+  // above forces every `.tab-pane` visible, so the whole tab content
+  // prints in sequence. Hide the clickable header strip since it
+  // can't do anything on paper.
+  .nav-tabs {
+    display: none !important;
+  }
+
+  // Avoid awkward page breaks mid-row and mid-item on the info-panel
+  // list, section boxes, and table rows. The existing rule covers
+  // `.listingContainer` only.
+  .list-group-item,
+  .box,
+  tr {
+    page-break-inside: avoid;
+  }
+
+  // Show the destination for every real inline link so a printed
+  // audit copy stays navigable. In-page anchors (`#foo`) and
+  // javascript: hrefs don't carry useful info on paper, so they're
+  // excluded.
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 85%;
+    color: #666;
+  }
+
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+
+  // Hide tab panes whose only content is a bootstrap-table empty
+  // state. The pane wrapper carries the heading, bulk-actions
+  // toolbar, table, and footer, so dropping the whole pane removes
+  // the "Licenses / No matching records found / 0.00" placeholder
+  // stack without leaving the heading orphaned. Narrow enough that
+  // the Details pane (no bs-tables) is unaffected.
+  .tab-pane:has(.no-records-found) {
+    display: none !important;
+  }
+
+  // Give every table a visible outer border and cell gridlines on
+  // paper. Bootstrap's default `.table` renders only inter-row
+  // horizontal lines, which prints as an unframed stack of text once
+  // column spacing lands at paper widths. Mirrors the `table-bordered`
+  // look so columns are readable in both color and B&W.
+  .table,
+  .table > thead > tr > th,
+  .table > tbody > tr > td,
+  .table > tbody > tr > th,
+  .table > tfoot > tr > td,
+  .table > tfoot > tr > th {
+    border: 1px solid #999 !important;
+  }
+
+  .table {
+    border-collapse: collapse !important;
+  }
+
+  // Hide empty `<x-data-row>` pairs in print. The component tags both
+  // the <dt> label and the <dd> value with .hidden-print-empty-row when
+  // the slot is empty, so we drop both sides together and avoid a
+  // stripe of "Field: No value" lines on paper.
+  .hidden-print-empty-row {
+    display: none !important;
+  }
 }
 
 .list-group-item.subitem {
