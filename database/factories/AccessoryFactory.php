@@ -119,6 +119,11 @@ class AccessoryFactory extends Factory
         });
     }
 
+    public function archived(): self
+    {
+        return $this->state(fn () => ['archived' => true]);
+    }
+
     public function withoutItemsRemaining()
     {
         return $this->state(function () {
