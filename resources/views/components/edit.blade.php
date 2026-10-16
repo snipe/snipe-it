@@ -141,14 +141,20 @@
                 data-mutex-with="archived"
             />
 
+            {{-- Suppress help_text when an archived validation error is
+                 already surfacing. The active-checkouts gate renders
+                 the same copy via both the help block (fresh render)
+                 and the inline x-form.error (post-reject redisplay),
+                 so without this guard the same sentence shows twice
+                 stacked when the server rejects the write. --}}
             <x-form.checkbox-row
                 name="archived"
                 :label="trans('general.archived')"
-                :help_text="($item->exists && $item->numCheckedOut() > 0)
+                :help_text="$errors->has('archived') ? null : (($item->exists && $item->numCheckedOut() > 0)
                     ? trans('admin/components/message.archived_blocked_by_checkouts')
                     : (($pendingRequestCount > 0)
                         ? trans_choice('admin/components/general.archived_cancels_pending_requests', $pendingRequestCount, ['count' => $pendingRequestCount])
-                        : trans('admin/components/general.archived_help'))"
+                        : trans('admin/components/general.archived_help')))"
                 :help_icon="$pendingRequestCount > 0 ? 'warning' : null"
                 :help_class="$pendingRequestCount > 0 ? 'text-warning' : null"
                 :item="$item"
