@@ -36,6 +36,12 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
     )->where('accessoryID', '[0-9]+')
         ->name('accessories.checkin.store');
 
+    // Bulk check-in from the accessory's checked-out tab.
+    Route::post(
+        'bulkcheckin/selected',
+        [Accessories\AccessoryCheckinController::class, 'bulkCheckinSelected']
+    )->name('accessories.bulkcheckin.selected');
+
     Route::get('{accessory}/clone',
         [Accessories\AccessoriesController::class, 'getClone']
     )->name('clone/accessories');
@@ -72,6 +78,11 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
         [Accessories\AccessoriesController::class, 'postRestore']
     )->where('accessoryId', '[0-9]+')
         ->name('accessories.restore');
+
+    Route::post('{accessory}/unarchive',
+        [Accessories\AccessoriesController::class, 'postUnarchive']
+    )->where('accessory', '[0-9]+')
+        ->name('accessories.unarchive');
 
     // Bulk-actions
     Route::post('bulkedit',
