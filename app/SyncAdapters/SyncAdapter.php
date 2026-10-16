@@ -924,6 +924,17 @@ abstract class SyncAdapter
             $request->boolean($slug.'_push_dry_run') ? '1' : '0',
         );
 
+        // Pull dry-run flag. When on, Sync Now still calls pull() so
+        // vendor-side fetch, mapping, and normalization all run - but
+        // the consumer logs each HostInventoryRecord instead of handing
+        // it to syncFromRecord, so no asset is created, updated, or
+        // linked. Mirror of push_dry_run on the other direction.
+        SyncAdapterConfig::put(
+            $this->instance->id,
+            'pull_dry_run',
+            $request->boolean($slug.'_pull_dry_run') ? '1' : '0',
+        );
+
         // Push notes template. Blade-ish {placeholder} string that
         // adapters with a notes-shape vendor field (Intune, Kandji,
         // Jamf, etc.) render + push to that field. Blank = don't push
@@ -1052,12 +1063,26 @@ abstract class SyncAdapter
             }
         }
 
+        // Standard-field pushability gate. Adapters that only know
+        // how to push a subset of fields (CustomHttp) coerce
+        // push/both on non-pushable standard fields down to pull so
+        // we don't persist an unenforceable direction. Extras are
+        // defined by the adapter and assumed pushable.
+        $pushable = $this->pushableFields();
+
         foreach ($posted as $field => $direction) {
             if (! in_array($field, $validFields, true)) {
                 continue;
             }
             if (! in_array($direction, ['pull', 'push', 'skip', 'both'], true)) {
                 continue;
+            }
+            if (
+                in_array($field, MappingTargets::FIELDS, true)
+                && ! in_array($field, $pushable, true)
+                && in_array($direction, ['push', 'both'], true)
+            ) {
+                $direction = 'pull';
             }
             SyncAdapterConfig::put($this->instance->id, 'direction.'.$field, (string) $direction);
         }
@@ -1094,7 +1119,55 @@ abstract class SyncAdapter
      */
     public function isPushDryRun(): bool
     {
+        if ($this->pushDryRunOverride !== null) {
+            return $this->pushDryRunOverride;
+        }
+
         return SyncAdapterConfig::get($this->instance->id, 'push_dry_run') === '1';
+    }
+
+    /**
+     * Dry-run mode for pull: when true, Sync Now still fetches from
+     * the vendor and runs the adapter's normalization, but the pull
+     * consumers (PullInventory CLI + SyncAdapterController UI) log
+     * each HostInventoryRecord instead of handing it to
+     * SyncFromRecord. No asset is created, updated, or linked.
+     * Mirror of isPushDryRun() on the other direction. Off by default.
+     */
+    public function isPullDryRun(): bool
+    {
+        if ($this->pullDryRunOverride !== null) {
+            return $this->pullDryRunOverride;
+        }
+
+        return SyncAdapterConfig::get($this->instance->id, 'pull_dry_run') === '1';
+    }
+
+    /**
+     * Per-request override for the dry-run flags. Set by callers that
+     * want to force a dry run without flipping the persisted config
+     * (CLI --dry-run flag on snipeit:pull-inventory /
+     * snipeit:push-inventory, UI toggle inside a single click, etc.).
+     * Null means "fall back to the persisted config value". Lives on
+     * the adapter instance so it's scoped to one adapter object for
+     * the current request.
+     */
+    protected ?bool $pushDryRunOverride = null;
+
+    protected ?bool $pullDryRunOverride = null;
+
+    public function withPushDryRunOverride(?bool $override): static
+    {
+        $this->pushDryRunOverride = $override;
+
+        return $this;
+    }
+
+    public function withPullDryRunOverride(?bool $override): static
+    {
+        $this->pullDryRunOverride = $override;
+
+        return $this;
     }
 
     /**
@@ -1153,11 +1226,63 @@ abstract class SyncAdapter
      *
      * @return array<int, string>
      */
+    /**
+     * Standard fields this adapter actually knows how to push TO the
+     * vendor. The direction dropdown in the settings UI only offers
+     * push/both for fields in this list - picking push for a field
+     * the adapter can't push would silently drop at buildPushPayload
+     * time, confusing the admin.
+     *
+     * Default: every MappingTargets::FIELDS entry, which matches the
+     * behavior adapters had before this hook existed. CustomHttp
+     * overrides to just its hard-coded PUSHABLE_STANDARD_FIELDS set
+     * (hostname / serial / asset_tag / model - the only four we can
+     * resolve to an Asset-side value). Other adapters that fully
+     * handle every standard field don't need to override.
+     *
+     * @return array<int, string>
+     */
+    /**
+     * Whether this adapter's settings form should render the
+     * "<Adapter>-specific fields" mapping-picker section. True by
+     * default - the picker lets admins route adapter-declared extras
+     * to Snipe-IT slots. CustomHttp returns false because its extras
+     * are admin-defined via the field_paths widget rather than
+     * declared statically by the adapter: the picker there would just
+     * duplicate what Vendor Response Paths already captures.
+     */
+    public function rendersExtrasPicker(): bool
+    {
+        return true;
+    }
+
+    public function pushableFields(): array
+    {
+        return MappingTargets::FIELDS;
+    }
+
     public function pushDirectedFields(): array
     {
         $out = [];
         $candidates = array_merge(MappingTargets::FIELDS, array_keys($this->extraFields()));
         foreach ($candidates as $field) {
+            // Standard-field target "Skip (do not sync)" wins over
+            // whatever the paired direction dropdown says - the field
+            // is explicitly opted out of syncing in either direction.
+            // The direction value may still be 'push' in the stored
+            // config from before the target was flipped to skip, but
+            // we treat the field as excluded from the push set
+            // regardless. Also protects against stale state on
+            // direction=push + mapping=skip combos the UI used to be
+            // able to produce.
+            //
+            // Extras skip this gate because their mapping default is
+            // 'skip' (no stored row = "not configured, not synced")
+            // and their direction toggle is the only control the
+            // admin has to pick push on them.
+            if (in_array($field, MappingTargets::FIELDS, true) && $this->mappingFor($field) === 'skip') {
+                continue;
+            }
             if (in_array($this->directionFor($field), ['push', 'both'], true)) {
                 $out[] = $field;
             }
@@ -1181,15 +1306,64 @@ abstract class SyncAdapter
      */
     protected function assetValueForSourceField(Asset $asset, string $field): mixed
     {
-        return match ($field) {
-            'hostname' => $asset->name,
-            'name' => $asset->name,
+        // Native fast-path: the four fields every adapter can push
+        // without consulting a mapping target. Pre-dates the mapping-
+        // target resolver below so adapters that call this with
+        // non-mapped fields (test harnesses, future callers) still get
+        // a sensible answer.
+        $native = match ($field) {
+            'hostname', 'name' => $asset->name,
             'serial' => $asset->serial,
             'asset_tag' => $asset->asset_tag,
             'model' => $asset->model?->name,
             'notes' => $asset->notes,
             default => null,
         };
+        if ($native !== null) {
+            return $native;
+        }
+
+        // For other source fields (os, os_version, last_seen, mac,
+        // custom:X, etc.) consult the per-field mapping target so the
+        // middleman push scenario (pull from vendor A, push to vendor
+        // B) can actually surface the stored value. The mapping is
+        // the admin's choice of "where in Snipe-IT does this field
+        // live" - we read from that slot.
+        $target = $this->mappingFor($field);
+        if ($target === '' || $target === 'skip') {
+            return null;
+        }
+
+        if (str_starts_with($target, 'custom:')) {
+            $customFieldId = (int) substr($target, 7);
+            $customField = CustomField::find($customFieldId);
+            if ($customField === null || $customField->db_column === null) {
+                return null;
+            }
+
+            return $asset->getAttribute($customField->db_column);
+        }
+
+        if (str_starts_with($target, 'external:')) {
+            $column = substr($target, 9);
+            $row = \Illuminate\Support\Facades\DB::table('asset_external_sources')
+                ->where('asset_id', $asset->id)
+                ->where('source', $this->name())
+                ->first();
+
+            return $row->{$column} ?? null;
+        }
+
+        if (str_starts_with($target, 'native:')) {
+            // Direct read from the asset column named after the
+            // target. The sync writers use the same convention, so
+            // native:foo stored by pull is readable as $asset->foo.
+            $column = substr($target, 7);
+
+            return $asset->getAttribute($column);
+        }
+
+        return null;
     }
 
     /**
@@ -1308,18 +1482,49 @@ abstract class SyncAdapter
         $notesConfigured = $this->hasComposedNotesConfigured();
 
         if ($pushFields === [] && ! $notesConfigured) {
+            // Nothing directed push and no composed-notes template.
+            // Logged at info because this is a config-shape issue
+            // the admin should see in the per-run log + file log
+            // instead of just "0 pushed, N skipped" with no reason.
+            Log::channel('sync-adapters')->info(sprintf(
+                '%s push: skipped asset %d (asset_tag=%s) - no push-directed fields and no composed-notes template configured',
+                $this->name(),
+                $asset->id,
+                $asset->asset_tag ?? '(none)',
+            ));
+
             return null;
         }
 
         if ($pushFields !== [] && $changedFields !== []
             && array_intersect($changedFields, $pushFields) === []) {
+            Log::channel('sync-adapters')->info(sprintf(
+                '%s push: skipped asset %d (asset_tag=%s) - changed fields [%s] do not intersect push-directed fields [%s]',
+                $this->name(),
+                $asset->id,
+                $asset->asset_tag ?? '(none)',
+                implode(', ', $changedFields),
+                implode(', ', $pushFields),
+            ));
+
             return null;
         }
 
-        return \App\Models\AssetExternalSource::query()
+        $externalSource = \App\Models\AssetExternalSource::query()
             ->where('asset_id', $asset->id)
             ->where('source', $this->name())
             ->first();
+
+        if ($externalSource === null) {
+            Log::channel('sync-adapters')->info(sprintf(
+                '%s push: skipped asset %d (asset_tag=%s) - no asset_external_sources row for this adapter instance',
+                $this->name(),
+                $asset->id,
+                $asset->asset_tag ?? '(none)',
+            ));
+        }
+
+        return $externalSource;
     }
 
     /**
@@ -1346,11 +1551,33 @@ abstract class SyncAdapter
     {
         $template = (string) SyncAdapterConfig::get($this->instance->id, 'push_notes_template');
         if (trim($template) === '') {
+            // Blank template is the common "feature not in use" case,
+            // so log at debug - skipping it on every asset push would
+            // just noise up the file log on fleets that haven't set
+            // up composed notes.
+            Log::channel('sync-adapters')->debug(sprintf(
+                '%s push: asset %d (asset_tag=%s) - composed notes not applied: push_notes_template is blank',
+                $this->name(),
+                $asset->id,
+                $asset->asset_tag ?? '(none)',
+            ));
+
             return null;
         }
 
         $target = $this->resolveComposedNotesTarget();
         if ($target === null) {
+            // Template is set but target field path is not. This IS
+            // worth surfacing at info - the admin wrote a template
+            // expecting it to be pushed somewhere and the destination
+            // config is missing.
+            Log::channel('sync-adapters')->info(sprintf(
+                '%s push: asset %d (asset_tag=%s) - composed notes not applied: push_notes_template is set but no target field is configured (push_notes_target)',
+                $this->name(),
+                $asset->id,
+                $asset->asset_tag ?? '(none)',
+            ));
+
             return null;
         }
 

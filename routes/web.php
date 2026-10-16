@@ -369,6 +369,29 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'authorize:superuser
         ->name('settings.adapters.destroy')
         ->missing(fn () => abort(404));
 
+    // One-time download of the per-run log flashed from Sync Now /
+    // Push Now. Token comes from session('sync_run_log_token') and
+    // the cache entry is deleted after a successful download.
+    Route::get('adapters/sync-log/{token}', [SyncAdapterController::class, 'downloadSyncRunLog'])
+        ->name('settings.adapters.sync_log.download')
+        ->where('token', '[A-Za-z0-9]+');
+
+    // AJAX diagnostic endpoints under the composed-notes section of
+    // each adapter's config form. All three return JSON with an
+    // 'output' field containing the captured sync-adapters log text,
+    // plus per-endpoint payload specifics.
+    Route::post('adapters/{instance}/preview-push-payload', [SyncAdapterController::class, 'postPreviewPushPayload'])
+        ->name('settings.adapters.preview_push_payload')
+        ->missing(fn () => abort(404));
+
+    Route::post('adapters/{instance}/test-1-push', [SyncAdapterController::class, 'postTest1Push'])
+        ->name('settings.adapters.test_1_push')
+        ->missing(fn () => abort(404));
+
+    Route::post('adapters/{instance}/test-1-pull', [SyncAdapterController::class, 'postTest1Pull'])
+        ->name('settings.adapters.test_1_pull')
+        ->missing(fn () => abort(404));
+
     Route::get('asset_tags', [SettingsController::class, 'getAssetTags'])
         ->name('settings.asset_tags.index')
         ->breadcrumbs(fn (Trail $trail) => $trail->parent('settings.index')

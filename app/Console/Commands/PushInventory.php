@@ -6,11 +6,15 @@ use App\Models\AssetExternalSource;
 use App\Models\SyncAdapterInstance;
 use App\SyncAdapters\PushableAdapter;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class PushInventory extends Command
 {
-    protected $signature = 'snipeit:push-inventory {adapter? : The adapter instance slug. Omit to push every enabled instance that supports push.}';
+    protected $signature = 'snipeit:push-inventory
+        {adapter? : The adapter instance slug. Omit to push every enabled instance that supports push.}
+        {--dry-run : Build each payload and log it to the sync-adapters log without calling the vendor API. Overrides the per-instance push_dry_run config for this one run.}
+        {--limit= : Stop after processing this many assets per adapter. Useful for sanity-checking a dry run on a large fleet without waiting for the whole push.}';
 
     protected $description = 'Push Snipe-IT-authoritative field values to configured sync-adapter instances that support pushing.';
 
@@ -106,6 +110,24 @@ class PushInventory extends Command
             return self::FAILURE;
         }
 
+        // --dry-run on the CLI overrides the persisted push_dry_run
+        // config so admins can preview a push without saving the
+        // setting through the web UI first.
+        if ($this->option('dry-run') === true) {
+            $adapter->withPushDryRunOverride(true);
+            $this->warn("Push dry-run is on for {$slug}: payloads will be logged, no vendor API calls will be made.");
+        }
+
+        // --limit caps how many assets this adapter pushes before we
+        // break out. Null = no limit. Non-positive values treated as
+        // no-limit so operators don't foot-gun themselves with
+        // --limit=0 and get a silent zero-asset run.
+        $limitInput = $this->option('limit');
+        $limit = ($limitInput !== null && (int) $limitInput > 0) ? (int) $limitInput : null;
+        if ($limit !== null) {
+            $this->warn("Push limit is {$limit} for {$slug}: run stops after that many assets.");
+        }
+
         set_time_limit(0);
 
         $pushed = 0;
@@ -115,8 +137,18 @@ class PushInventory extends Command
             AssetExternalSource::query()
                 ->where('source', $slug)
                 ->with('asset')
-                ->chunkById(200, function ($queryRows) use ($adapter, &$pushed, &$errors) {
+                ->chunkById(200, function ($queryRows) use ($adapter, $slug, $limit, &$pushed, &$errors) {
                     foreach ($queryRows as $row) {
+                        if ($limit !== null && ($pushed + $errors) >= $limit) {
+                            // Returning false from a chunkById callback
+                            // tells Eloquent to stop paging after this
+                            // chunk, which is what we want for an early
+                            // break on --limit.
+                            Log::channel('sync-adapters')->info("{$slug} push: --limit {$limit} reached, stopping early");
+
+                            return false;
+                        }
+
                         $asset = $row->asset;
                         if ($asset === null) {
                             continue;
