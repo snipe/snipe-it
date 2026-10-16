@@ -32,6 +32,15 @@
 >
     <x-demo-callout/>
 
+    {{-- Adapter type is immutable post-create (it keys the class map)
+         so render as a static row rather than an editable control.
+         Lives at the top of the form so admins recognize the vendor
+         they're configuring at a glance without having to read the
+         tab label or the browser URL. --}}
+    <x-form.static :label="trans('admin/settings/sync_adapters.add_type_label')" content_class="col-md-8">
+        {{ $adapter::typeLabel() }}
+    </x-form.static>
+
     {{-- Rename field. Slug is immutable because SyncAdapterConfig
          keys off it, but label is free to change so admins can rename
          after creation (e.g. "Fleet" -> "Production Fleet" once
@@ -320,21 +329,10 @@
         @endif
     </fieldset>
 
-    {{-- Push dry-run only shows for adapters that actually support
-         push. Turning it on makes push() log the payload instead of
-         sending, so admins can verify their config end-to-end against
-         a real Snipe-IT dataset without any real vendor side effect.
-         The composed-notes template + target field live further down
-         in their own fieldset under the vendor-specific mapping. --}}
-    @if ($adapter instanceof \App\SyncAdapters\PushableAdapter && $adapter->canPush())
-        <x-form.checkbox-row
-            :name="$slug . '_push_dry_run'"
-            :checked="$adapter->isPushDryRun()"
-            :label="trans('admin/settings/sync_adapters.push_dry_run_label')"
-            :help_text="trans('admin/settings/sync_adapters.push_dry_run_help')"
-            :disabled="$locked"
-        />
-    @endif
+                {{-- Dry-run checkboxes render inside the panel partial instead of
+                     here, so they sit just above the Pull Now / Push Now buttons.
+                     They still belong to this form's save POST via the HTML `form`
+                     attribute on their inputs (see panel.blade.php). --}}
 
     @if ($adapter->supportsGroupScoping() && $adapter->isEnabled() && $hasCompanies)
         @php
@@ -379,6 +377,24 @@
             'both' => trans('admin/settings/sync_adapters.direction_both'),
             'skip' => trans('admin/settings/sync_adapters.direction_skip'),
         ];
+        // Per-field pushability lookup. For adapters like Custom HTTP
+        // whose push path only resolves values for a subset of
+        // standard fields (hostname/serial/asset_tag/model), hide the
+        // push + both options for the rest. Otherwise the admin picks
+        // push on a field we silently drop at build time.
+        $pushableFieldsList = $supportsPush ? $adapter->pushableFields() : [];
+        $directionOptionsFor = function (string $field) use ($directionOptions, $pushableFieldsList, $supportsPush) {
+            if (! $supportsPush) {
+                return $directionOptions;
+            }
+            if (in_array($field, $pushableFieldsList, true)) {
+                return $directionOptions;
+            }
+
+            // Non-pushable field. Strip push + both so the dropdown
+            // only exposes the directions that actually work for it.
+            return array_diff_key($directionOptions, array_flip(['push', 'both']));
+        };
     @endphp
     <fieldset>
         <x-form.legend icon="tip" help_text="{{ trans('admin/settings/sync_adapters.mapping_section_intro') }}">
@@ -397,22 +413,39 @@
                         {{-- Push-capable adapters get a two-column input:
                              target picker on the left, direction picker
                              on the right. Pull-only adapters render just
-                             the target picker at full width. --}}
-                        <div class="row">
+                             the target picker at full width. The
+                             js-mapping-row / js-mapping-target /
+                             js-mapping-direction hooks let the JS below
+                             hide the direction column when the admin
+                             picks target=Skip (direction is moot in
+                             that state). --}}
+                        <div class="row js-mapping-row">
                             <div class="col-md-8">
                                 <x-input.select
                                     :name="$slug . '_mapping[' . $mappingField . ']'"
                                     :options="\App\SyncAdapters\MappingTargets::options($mappingField)"
                                     :selected="$adapter->mappingFor($mappingField)"
+                                    class="js-mapping-target"
                                     style="width: 100%"
                                     :disabled="$locked"
                                 />
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4 js-mapping-direction">
+                                @php
+                                    // Clamp stored direction to the options
+                                    // we're actually offering: a legacy
+                                    // direction=push on a now-non-pushable
+                                    // field falls back to pull in the UI
+                                    // so the dropdown doesn't render with
+                                    // a value that isn't in its options.
+                                    $fieldDirOptions = $directionOptionsFor($mappingField);
+                                    $storedDir = $adapter->directionFor($mappingField);
+                                    $renderDir = array_key_exists($storedDir, $fieldDirOptions) ? $storedDir : 'pull';
+                                @endphp
                                 <x-input.select
                                     :name="$slug . '_direction[' . $mappingField . ']'"
-                                    :options="$directionOptions"
-                                    :selected="$adapter->directionFor($mappingField)"
+                                    :options="$fieldDirOptions"
+                                    :selected="$renderDir"
                                     style="width: 100%"
                                     data-minimum-results-for-search="Infinity"
                                     :disabled="$locked"
@@ -500,7 +533,7 @@
         @endif
     @endforeach
 
-    @if (! empty($extraFields))
+                @if (! empty($extraFields) && $adapter->rendersExtrasPicker())
         <fieldset>
             <x-form.legend icon="tip" help_text="{{ trans('admin/settings/sync_adapters.extra_fields_section_intro') }}">
                 {{ trans('admin/settings/sync_adapters.extra_fields_section_title', ['type' => $adapter::typeLabel()]) }}
@@ -594,4 +627,66 @@
             </x-form.row>
         </fieldset>
     @endif
+
+                {{-- Diagnostics: Preview push payload + Test 1 Push + Test 1 Pull.
+                     AJAX buttons that pick the first linked (push) or first
+                     vendor-returned (pull) record, run the capture, and dump the
+                     output into the <pre> below. Scoped to this adapter via the
+                     data-adapter-slug attribute on the wrapper. --}}
+                <fieldset class="js-sync-diagnostics" data-adapter-slug="{{ $slug }}">
+                    <x-form.legend icon="tip" help_text="{{ trans('admin/settings/sync_adapters.diagnostics_section_intro') }}">
+                        {{ trans('admin/settings/sync_adapters.diagnostics_section_title') }}
+                    </x-form.legend>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            @if ($adapter instanceof \App\SyncAdapters\PushableAdapter && $adapter->canPush())
+                                <button
+                                    type="button"
+                                    class="btn btn-theme js-sync-diagnostic-button"
+                                    data-url="{{ route('settings.adapters.preview_push_payload', $slug) }}"
+                                    data-dirty-guarded-by="adapter-form-{{ $slug }}"
+                                    title="{{ trans('admin/settings/sync_adapters.preview_payload_help') }}"
+                                    @disabled($locked)
+                                >
+                                    <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                                    {{ trans('admin/settings/sync_adapters.preview_payload_button') }}
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-theme js-sync-diagnostic-button"
+                                    data-url="{{ route('settings.adapters.test_1_push', $slug) }}"
+                                    data-dirty-guarded-by="adapter-form-{{ $slug }}"
+                                    title="{{ trans('admin/settings/sync_adapters.test_1_push_help') }}"
+                                    @disabled($locked)
+                                >
+                                    <i class="fa-solid fa-vial" aria-hidden="true"></i>
+                                    {{ trans('admin/settings/sync_adapters.test_1_push_button') }}
+                                </button>
+                            @endif
+                            <button
+                                type="button"
+                                class="btn btn-theme js-sync-diagnostic-button"
+                                data-url="{{ route('settings.adapters.test_1_pull', $slug) }}"
+                                data-dirty-guarded-by="adapter-form-{{ $slug }}"
+                                title="{{ trans('admin/settings/sync_adapters.test_1_pull_help') }}"
+                                @disabled($locked)
+                            >
+                                <i class="fa-solid fa-vial" aria-hidden="true"></i>
+                                {{ trans('admin/settings/sync_adapters.test_1_pull_button') }}
+                            </button>
+                        </div>
+
+                        <div class="col-md-12">
+                            {{-- Copy-to-clipboard --}}
+                            <div style="float: right; margin-bottom: 4px;">
+                                <x-copy-to-clipboard copy_what="sync-diagnostic-{{ $slug }}"/>
+                            </div>
+                            <pre
+                                class="js-sync-diagnostic-output js-copy-sync-diagnostic-{{ $slug }}"
+                                style="min-height: 60px; max-height: 400px; overflow: auto; margin: 0; clear: both;"
+                            >{{ trans('admin/settings/sync_adapters.diagnostics_output_placeholder') }}</pre>
+                        </div>
+                    </div>
+                </fieldset>
 </x-form>
