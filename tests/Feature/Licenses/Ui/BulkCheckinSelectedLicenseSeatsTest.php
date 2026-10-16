@@ -274,4 +274,81 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
 
         Event::assertNotDispatched(CheckoutableCheckedIn::class);
     }
+
+    public function test_bulk_checkin_show_does_not_expose_cross_company_seat_under_fmcs()
+    {
+        // The interstitial view must filter the same way as .store.
+        // LicenseSeat has no CompanyableTrait, so the controller leans
+        // on the eager-loaded `license` relation (which auto-applies
+        // CompanyableScope) and short-circuits when it comes back null.
+        $this->settings->enableMultipleFullCompanySupport();
+
+        [$myCompany, $otherCompany] = Company::factory()->count(2)->create();
+        $actor = User::factory()->checkinLicenses()->viewLicenses()->forCompany($myCompany->id)->create();
+        $otherLicense = License::factory()->create(['company_id' => $otherCompany->id, 'seats' => 2]);
+        $seat = LicenseSeat::factory()->assignedToUser()->create(['license_id' => $otherLicense->id]);
+
+        $response = $this->actingAs($actor)
+            ->post(route('licenses.bulkcheckin.show'), ['ids' => [$seat->id]]);
+
+        if ($response->status() === 200) {
+            // If the interstitial renders at all, the foreign seat must
+            // be absent from the collection or the license column null.
+            $seats = $response->viewData('seats');
+            $visible = $seats->filter(fn ($row) => $row->license !== null);
+            $this->assertFalse(
+                $visible->contains('id', $seat->id),
+                'bulkCheckinShow must not expose cross-tenant seats with their license visible',
+            );
+        } else {
+            $response->assertRedirect()->assertSessionHas('warning');
+        }
+    }
+
+    public function test_floater_actor_can_bulk_checkin_null_company_license_seat()
+    {
+        // Floater ON: company A actor is allowed to touch null-company
+        // (floater) licenses. Pin so a future refactor that over-tightens
+        // the lookup doesn't block a legitimate flow.
+        Event::fake([CheckoutableCheckedIn::class]);
+
+        $this->settings->enableFloaterMode();
+
+        $companyA = Company::factory()->create();
+        $actor = User::factory()->checkinLicenses()->forCompany($companyA->id)->create();
+
+        $floaterLicense = License::factory()->create(['company_id' => null, 'seats' => 2]);
+        $seat = LicenseSeat::factory()->assignedToUser()->create(['license_id' => $floaterLicense->id]);
+
+        $this->actingAs($actor)
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]])
+            ->assertRedirect()
+            ->assertSessionHas('success');
+
+        $this->assertNull($seat->fresh()->assigned_to);
+        Event::assertDispatched(CheckoutableCheckedIn::class);
+    }
+
+    public function test_scope_locations_fmcs_still_blocks_cross_company_seat_checkin()
+    {
+        // scope_locations_fmcs is orthogonal to seat checkin (licenses
+        // aren't location-scoped on their own), but FMCS strictness must
+        // still hold when the setting is on. Pin so a refactor that
+        // conflates the two modes can't silently loosen either.
+        Event::fake([CheckoutableCheckedIn::class]);
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+        $actor = User::factory()->checkinLicenses()->forCompany($companyA->id)->create();
+        $foreignLicense = License::factory()->create(['company_id' => $companyB->id, 'seats' => 2]);
+        $seat = LicenseSeat::factory()->assignedToUser()->create(['license_id' => $foreignLicense->id]);
+
+        $this->settings->enableScopedLocationsWithFullMultipleCompanySupport();
+
+        $this->actingAs($actor)
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]])
+            ->assertRedirect();
+
+        $this->assertNotNull($seat->fresh()->assigned_to);
+        Event::assertNotDispatched(CheckoutableCheckedIn::class);
+    }
 }

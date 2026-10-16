@@ -121,6 +121,26 @@ class BulkComponentsFmcsScopingTest extends TestCase
         Event::assertNothingDispatched();
     }
 
+    public function test_bulk_checkin_show_does_not_leak_cross_company_pivot_under_fmcs(): void
+    {
+        // The interstitial view must also filter: posting a cross-tenant
+        // id to .show should redirect with warning (empty after scoping)
+        // instead of rendering the foreign pivot in the confirmation UI.
+        $this->settings->enableMultipleFullCompanySupport();
+        $this->settings->disableFloaterMode();
+
+        [$companyA, $companyB] = Company::factory()->count(2)->create();
+        $actor = $companyA->users()->save(User::factory()->viewComponents()->checkinComponents()->make());
+
+        $foreignComponent = Component::factory()->for($companyB)->create(['qty' => 5]);
+        $pivot = $this->pivotId($foreignComponent, Asset::factory()->create());
+
+        $this->actingAs($actor)
+            ->post(route('components.bulkcheckin.show'), ['ids' => [$pivot]])
+            ->assertRedirect()
+            ->assertSessionHas('warning');
+    }
+
     public function test_bulk_edit_rejects_write_to_cross_company_company_id_under_fmcs(): void
     {
         // Even if a non-superuser hand-crafted a POST with a company_id
