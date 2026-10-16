@@ -14,11 +14,11 @@
 @section('content')
 <x-container columns="2">
         @if ($snipe_component->deleted_at != '')
-            <div class="col-md-12">
+            <x-page-column>
                 <x-callout type="warning" icon="warning" live="assertive">
                     {{ trans('general.component_deleted_warning') }}
                 </x-callout>
-            </div>
+            </x-page-column>
         @endif
 
         <x-page-column class="col-md-9 main-panel">
