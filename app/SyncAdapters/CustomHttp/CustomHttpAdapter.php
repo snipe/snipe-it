@@ -429,7 +429,7 @@ class CustomHttpAdapter extends SyncAdapter implements PushableAdapter
         $postedDirections = (array) $request->input($slug.'_direction', []);
         $prunedFromFieldPaths = [];
 
-        foreach ($this->fieldPathMap() as $destination => $path) {
+        foreach (array_keys($this->fieldPathMap()) as $destination) {
             if (! str_starts_with($destination, 'custom:') && ! str_starts_with($destination, 'native:')) {
                 continue;
             }
