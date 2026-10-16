@@ -41,7 +41,7 @@ class ComponentCheckoutController extends Controller
 
             if ($component->archived) {
                 return redirect()->route('components.index')
-                    ->with('error', trans('admin/components/message.checkout.archived'));
+                    ->with('error', trans('general.cannot_checkout_archived', ['item_type' => trans('general.component')]));
             }
 
             // Make sure the category is valid
@@ -113,7 +113,7 @@ class ComponentCheckoutController extends Controller
 
         if ($component->archived) {
             return redirect()->route('components.index')
-                ->with('error', trans('admin/components/message.checkout.archived'));
+                ->with('error', trans('general.cannot_checkout_archived', ['item_type' => trans('general.component')]));
         }
 
         $max_to_checkout = $component->numRemaining();

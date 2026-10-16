@@ -81,6 +81,19 @@ class AccessoriesController extends Controller
             ->with('category', 'company', 'manufacturer', 'checkouts', 'location', 'defaultSupplier', 'adminuser', 'orderItems.order.supplier')
             ->withCount('checkouts as checkouts_count');
 
+        // Archived / soft-deleted scope. 
+        switch ($request->input('status')) {
+            case 'Archived':
+                $accessories->archived();
+                break;
+            case 'Deleted':
+                $accessories->onlyTrashed();
+                break;
+            default:
+                $accessories->accessoriesForShow();
+                break;
+        }
+
         // This invokes the Searchable model trait scopeTextSearch and will handle input by search or by advanced search filter
         if ($request->filled('filter') || $request->filled('search')) {
             $accessories->TextSearch($request->input('filter') ? $request->input('filter') : $request->input('search'));
