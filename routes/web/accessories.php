@@ -36,11 +36,18 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
     )->where('accessoryID', '[0-9]+')
         ->name('accessories.checkin.store');
 
-    // Bulk check-in from the accessory's checked-out tab.
+    // Bulk check-in from the accessory's checked-out tab. The `.show`
+    // route renders the confirmation interstitial where the admin
+    // picks the shared note; `.store` applies the checkin.
     Route::post(
-        'bulkcheckin/selected',
-        [Accessories\AccessoryCheckinController::class, 'bulkCheckinSelected']
-    )->name('accessories.bulkcheckin.selected');
+        'bulkcheckin/show',
+        [Accessories\AccessoryCheckinController::class, 'bulkCheckinShow']
+    )->name('accessories.bulkcheckin.show');
+
+    Route::post(
+        'bulkcheckin/store',
+        [Accessories\AccessoryCheckinController::class, 'bulkCheckinStore']
+    )->name('accessories.bulkcheckin.store');
 
     Route::get('{accessory}/clone',
         [Accessories\AccessoriesController::class, 'getClone']

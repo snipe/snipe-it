@@ -39,11 +39,18 @@ Route::group(['prefix' => 'components', 'middleware' => ['auth']], function () {
     )->where('componentID', '[0-9]+')
         ->name('components.checkin.store');
 
-    // Bulk check-in from the component's assigned tab.
+    // Bulk check-in from the component's assigned tab. The `.show`
+    // route renders the confirmation interstitial where the admin
+    // picks the shared note. `.store` applies the checkin.
     Route::post(
-        'bulkcheckin/selected',
-        [Components\ComponentCheckinController::class, 'bulkCheckinSelected']
-    )->name('components.bulkcheckin.selected');
+        'bulkcheckin/show',
+        [Components\ComponentCheckinController::class, 'bulkCheckinShow']
+    )->name('components.bulkcheckin.show');
+
+    Route::post(
+        'bulkcheckin/store',
+        [Components\ComponentCheckinController::class, 'bulkCheckinStore']
+    )->name('components.bulkcheckin.store');
 
     Route::get('{component}/clone',
         [Components\ComponentsController::class, 'getClone']
