@@ -46,7 +46,7 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     {
         $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = Import::factory()->asset()->create();
+        $import = Import::factory()->asset()->withStubFile()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
@@ -143,8 +143,8 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     #[Test]
     public function csv_import_rejects_asset_row_without_serial_when_model_requires_serial(): void
     {
-        $modelName = 'RequireSerialModel-' . Str::random(6);
-        $modelNumber = 'MN-' . Str::random(6);
+        $modelName = 'RequireSerialModel-'.Str::random(6);
+        $modelNumber = 'MN-'.Str::random(6);
         AssetModel::factory()->create([
             'name' => $modelName,
             'model_number' => $modelNumber,
@@ -177,8 +177,8 @@ class ImportAssetsTest extends ImportDataTestCase implements TestsPermissionsReq
     #[Test]
     public function csv_import_accepts_asset_row_without_serial_when_model_does_not_require_serial(): void
     {
-        $modelName = 'OptionalSerialModel-' . Str::random(6);
-        $modelNumber = 'MN-' . Str::random(6);
+        $modelName = 'OptionalSerialModel-'.Str::random(6);
+        $modelNumber = 'MN-'.Str::random(6);
         AssetModel::factory()->create([
             'name' => $modelName,
             'model_number' => $modelNumber,

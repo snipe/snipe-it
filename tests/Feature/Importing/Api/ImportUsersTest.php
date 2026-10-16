@@ -45,7 +45,7 @@ class ImportUsersTest extends ImportDataTestCase implements TestsPermissionsRequ
     {
         $this->actingAsForApi(User::factory()->canImport()->create());
 
-        $import = Import::factory()->users()->create();
+        $import = Import::factory()->users()->withStubFile()->create();
 
         $this->importFileResponse(['import' => $import->id])->assertOk();
     }
