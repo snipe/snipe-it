@@ -105,20 +105,42 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         /**
          * Accessories Breadcrumbs
          */
-        Breadcrumbs::for('accessories.index', fn (Trail $trail) => $trail->parent('home', route('home'))
-            ->push(trans('general.accessories'), route('accessories.index'))
-        );
+        $accessoriesStatus = request()->status;
+        if (request()->is('accessories*') && in_array($accessoriesStatus, ['Archived', 'Deleted'], true)) {
+            Breadcrumbs::for('accessories.index', fn (Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.accessories'), route('accessories.index'))
+                ->push(trans('general.'.strtolower($accessoriesStatus)), route('accessories.index', ['status' => $accessoriesStatus]))
+            );
+        } else {
+            Breadcrumbs::for('accessories.index', fn (Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.accessories'), route('accessories.index'))
+            );
+        }
 
         Breadcrumbs::for('accessories.create', fn (Trail $trail) => $trail->parent('accessories.index', route('accessories.index'))
             ->push(trans('general.create'), route('accessories.create'))
         );
 
-        Breadcrumbs::for('accessories.show', fn (Trail $trail, Accessory $accessory) => $trail->parent('accessories.index', route('accessories.index'))
-            ->push($accessory->name, route('accessories.show', $accessory))
-        );
+        Breadcrumbs::for('accessories.show', function (Trail $trail, Accessory $accessory) {
+            $trail->parent('accessories.index', route('accessories.index'));
 
-        Breadcrumbs::for('accessories.edit', fn (Trail $trail, Accessory $accessory) => $trail->parent('accessories.index', route('accessories.index'))
-            ->push($accessory->display_name, route('accessories.show', $accessory))
+            // Deleted takes precedence over archived - a soft-deleted
+            // archived item lives in the Deleted bucket, not Archived.
+            // Linking the segment back to the filtered index gives the
+            // operator a way to pop back to peers in the same state.
+            if ($accessory->deleted_at) {
+                $trail->push(trans('general.deleted'), route('accessories.index', ['status' => 'Deleted']));
+            } elseif ($accessory->archived) {
+                $trail->push(trans('general.archived'), route('accessories.index', ['status' => 'Archived']));
+            }
+
+            $trail->push($accessory->name, route('accessories.show', $accessory));
+        });
+
+        // Parent through .show so the Archived/Deleted segment that
+        // show injects carries forward to Edit without duplicating
+        // the state-detection logic here.
+        Breadcrumbs::for('accessories.edit', fn (Trail $trail, Accessory $accessory) => $trail->parent('accessories.show', $accessory)
             ->push(trans('general.update'))
         );
 
@@ -201,12 +223,23 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             ->push(trans('general.create'), route('components.create'))
         );
 
-        Breadcrumbs::for('components.show', fn (Trail $trail, Component $component) => $trail->parent('components.index', route('components.index'))
-            ->push($component->name, route('components.show', $component))
-        );
+        Breadcrumbs::for('components.show', function (Trail $trail, Component $component) {
+            $trail->parent('components.index', route('components.index'));
 
-        Breadcrumbs::for('components.edit', fn (Trail $trail, Component $component) => $trail->parent('components.index', route('components.index'))
-            ->push($component->display_name, route('components.show', $component))
+            // Mirror accessories.show: inject an Archived/Deleted
+            // segment driven by the item's own state so operators
+            // viewing a non-live row can pop back to peers in the
+            // same bucket. Deleted takes precedence.
+            if ($component->deleted_at) {
+                $trail->push(trans('general.deleted'), route('components.index', ['status' => 'Deleted']));
+            } elseif ($component->archived) {
+                $trail->push(trans('general.archived'), route('components.index', ['status' => 'Archived']));
+            }
+
+            $trail->push($component->name, route('components.show', $component));
+        });
+
+        Breadcrumbs::for('components.edit', fn (Trail $trail, Component $component) => $trail->parent('components.show', $component)
             ->push(trans('general.update'))
         );
 
@@ -245,12 +278,19 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             ->push(trans('general.create'), route('consumables.create'))
         );
 
-        Breadcrumbs::for('consumables.show', fn (Trail $trail, Consumable $consumable) => $trail->parent('consumables.index', route('consumables.index'))
-            ->push($consumable->name, route('consumables.show', $consumable))
-        );
+        Breadcrumbs::for('consumables.show', function (Trail $trail, Consumable $consumable) {
+            $trail->parent('consumables.index', route('consumables.index'));
 
-        Breadcrumbs::for('consumables.edit', fn (Trail $trail, Consumable $consumable) => $trail->parent('consumables.index', route('consumables.index'))
-            ->push($consumable->display_name, route('consumables.show', $consumable))
+            // Consumables don't support archived - soft-delete only -
+            // so the inserted segment is just Deleted when applicable.
+            if ($consumable->deleted_at) {
+                $trail->push(trans('general.deleted'), route('consumables.index', ['status' => 'Deleted']));
+            }
+
+            $trail->push($consumable->name, route('consumables.show', $consumable));
+        });
+
+        Breadcrumbs::for('consumables.edit', fn (Trail $trail, Consumable $consumable) => $trail->parent('consumables.show', $consumable)
             ->push(trans('general.update'))
         );
 
@@ -381,12 +421,19 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             ->push(trans('general.create'), route('licenses.create'))
         );
 
-        Breadcrumbs::for('licenses.show', fn (Trail $trail, License $license) => $trail->parent('licenses.index', route('licenses.index'))
-            ->push($license->name, route('licenses.show', $license))
-        );
+        Breadcrumbs::for('licenses.show', function (Trail $trail, License $license) {
+            $trail->parent('licenses.index', route('licenses.index'));
 
-        Breadcrumbs::for('licenses.edit', fn (Trail $trail, License $license) => $trail->parent('licenses.index', route('licenses.index'))
-            ->push($license->display_name, route('licenses.show', $license))
+            // Licenses don't support archived - soft-delete only - so
+            // the inserted segment is just Deleted when applicable.
+            if ($license->deleted_at) {
+                $trail->push(trans('general.deleted'), route('licenses.index', ['status' => 'Deleted']));
+            }
+
+            $trail->push($license->name, route('licenses.show', $license));
+        });
+
+        Breadcrumbs::for('licenses.edit', fn (Trail $trail, License $license) => $trail->parent('licenses.show', $license)
             ->push(trans('general.update'))
         );
 

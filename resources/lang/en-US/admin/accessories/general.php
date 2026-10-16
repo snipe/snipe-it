@@ -19,5 +19,10 @@ return [
     'use_default_eula_disabled' => '<del>Use the primary default EULA instead.</del> No primary default EULA is set. Please add one in Settings.',
     'clone' => 'Clone Accessory',
     'delete_disabled' => 'This accessory cannot be deleted yet because some items are still checked out.',
+    'accessory_deleted_warning' => 'This accessory has been deleted. You must restore it before you can assign it.',
+    'bulk_delete_help' => 'Review the accessories you are about to delete. Accessories with checkouts are unselected and cannot be removed until their checkouts are returned.',
+    'bulk_delete_warn' => 'You are about to delete :accessory_count accessory.|You are about to delete :accessory_count accessories.',
+    'bulk_edit_warn' => 'You are editing :accessory_count accessory.|You are editing :accessory_count accessories.',
+    'bulk_edit_help' => 'Only fields you fill below are written to the selected accessories. Leave a field blank to leave it as-is.',
 
 ];

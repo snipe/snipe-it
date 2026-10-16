@@ -19,7 +19,7 @@
                     {{ trans('admin/components/general.bulk_edit_help') }}
                 </x-callout>
 
-                <table class="table table-striped">
+                <table class="table table-striped" style="margin-bottom: 25px; border-bottom: 1px solid light-dark(#eeeeee, #656464);">
                     <thead>
                         <tr>
                             <th>{{ trans('general.id') }}</th>

@@ -918,9 +918,13 @@ class Helper
             ->havingRaw('(qty - consumables_users_count) < (min_amt + ?)', [$alert_threshold])
             ->get();
 
+        // Archived accessories are retired from active inventory and
+        // should not drive low-stock alerts even when they fall below
+        // their min_amt threshold.
         $accessories = Accessory::select('id', 'name', 'qty', 'min_amt')
             ->withCount('checkouts as checkouts_count')
             ->whereNotNull('min_amt')
+            ->notArchived()
             ->groupBy('accessories.id', 'accessories.name', 'accessories.qty', 'accessories.min_amt')
             ->havingRaw('(qty - checkouts_count) < (min_amt + ?)', [$alert_threshold])
             ->get();
@@ -1210,7 +1214,13 @@ class Helper
 
                     return false;
                 } else {
-                    if (strpos($rule, 'required') !== false) {
+                    // Pipe-delimited rules like "nullable|max:10|required_with:depreciation_id"
+                    // contain the substring "required" even when the only
+                    // required-family rule is conditional. Split on `|` and
+                    // match the bare `required` token so conditional
+                    // variants (required_with, required_if, required_unless, etc.)
+                    // don't flip the UI's unconditional-required indicator.
+                    if (in_array('required', explode('|', $rule), true)) {
                         return true;
                     }
                     if (strpos($rule, 'fmcs_company') !== false && self::fmcsCompanyIsCurrentlyRequired()) {

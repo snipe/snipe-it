@@ -1551,6 +1551,30 @@
                 @endif
             }
         },
+
+        btnShowArchived: {
+            text: '{{ (request()->input('status') == "Archived") ? trans('general.show_current') : trans('general.show_archived') }}',
+            icon: '{{ \App\Helpers\IconHelper::icon('archived') }}',
+            event () {
+                window.location.href = '{{ (request()->input('status') == "Archived") ? route('accessories.index') : route('accessories.index', ['status' => 'Archived']) }}';
+            },
+            attributes: {
+                class: '{{ (request()->input('status') == "Archived") ? 'btn-selected' : '' }}',
+                title: '{{ (request()->input('status') == "Archived") ? trans('general.show_current') : trans('general.show_archived') }}',
+            }
+        },
+
+        btnShowDeleted: {
+            text: '{{ (request()->input('status') == "Deleted") ? trans('general.show_current') : trans('general.show_deleted') }}',
+            icon: 'fa-solid fa-trash',
+            event () {
+                window.location.href = '{{ (request()->input('status') == "Deleted") ? route('accessories.index') : route('accessories.index', ['status' => 'Deleted']) }}';
+            },
+            attributes: {
+                class: '{{ (request()->input('status') == "Deleted") ? 'btn-selected' : '' }}',
+                title: '{{ (request()->input('status') == "Deleted") ? trans('general.show_current') : trans('general.show_deleted') }}',
+            }
+        },
     });
     @endcan
 
@@ -2189,7 +2213,41 @@
         var action = $select.val();
         if (!action) return;
 
-        // Use uncheck(index) instead of uncheckBy(field, values). bs-table's
+        // Track IDs we auto-unchecked so switching back to an action
+        // where they ARE eligible re-checks them automatically. Without
+        // this, a select-all → delete (3 rows auto-unchecked as not
+        // deletable) → edit cycle leaves those 3 rows unchecked even
+        // though edit accepts them. Keyed per-table so sibling bulk
+        // tables don't cross-contaminate.
+        var autoUnchecked = $table.data('mutexAutoUnchecked') || {};
+        var data = $table.bootstrapTable('getData');
+
+        // Mark the batch as in-flight so our own check/uncheck events
+        // short-circuit the per-row handlers below.
+        $table.data('mutexAutoInFlight', true);
+
+        // Styling pass FIRST for the new action: enables any
+        // previously-disabled checkboxes that are now compatible
+        // (e.g. a row disabled under "delete" that supports "edit").
+        // bootstrapTable's internal check/uncheck toggles no-op on
+        // disabled DOM checkboxes, so Phase 1 below would silently
+        // fail to re-check those rows otherwise.
+        applyActionDependentRowStyling($table, action);
+
+        // Phase 1: re-check any previously auto-unchecked rows that
+        // now support this action.
+        for (var r = 0; r < data.length; r++) {
+            var rid = data[r].id;
+            if (!autoUnchecked[rid]) continue;
+            var supportsNow = (data[r].available_actions && data[r].available_actions.bulk_selectable) || {};
+            if (supportsNow[action] === true) {
+                $table.bootstrapTable('check', r);
+                delete autoUnchecked[rid];
+            }
+        }
+
+        // Phase 2: standard incompatible-row auto-uncheck. Use
+        // uncheck(index) instead of uncheckBy(field, values). bs-table's
         // uncheckBy at bootstrap-table.js line 10791 filters on ':enabled',
         // which means once applyActionDependentRowStyling disables the
         // checkbox on an incompatible row (or a prior refresh cycle did),
@@ -2206,14 +2264,69 @@
             }
         }
 
-        var data = $table.bootstrapTable('getData');
         for (var j = 0; j < data.length; j++) {
             if (idsToUncheck[data[j].id]) {
                 $table.bootstrapTable('uncheck', j);
+                autoUnchecked[data[j].id] = true;
             }
         }
 
+        $table.data('mutexAutoUnchecked', autoUnchecked);
+        $table.data('mutexAutoInFlight', false);
+
+        // The per-row check/uncheck handlers short-circuit while
+        // mutexAutoInFlight is true (prevents per-row refresh thrash
+        // and the re-entry bug that would stop phase 1 after one row).
+        // Run the deferred bookkeeping once now that the batch is
+        // done so the hidden ids[] inputs, selected-count readout,
+        // and dropdown eligibility all match the new selection.
+        syncBulkInputsForTable($table);
+        updateSelectedCount($table[0]);
+        refreshDynamicBulkActions($table[0]);
+
         applyActionDependentRowStyling($table, action);
+    }
+
+    // Rebuilds the hidden ids[] inputs after a batch check/uncheck
+    // pass. Mirrors the add + remove logic the per-row check/uncheck
+    // handlers would do, but as a single sweep rather than one event
+    // per row.
+    function syncBulkInputsForTable($table) {
+        var tableId = $table.data('id-table');
+        var buttonId = $table.data('bulk-button-id');
+        var $button = $(buttonId);
+        var $form = $($table.data('bulk-form-id'));
+        if (!tableId || !$button.length || !$form.length) return;
+
+        var selectedIds = {};
+        $table.bootstrapTable('getSelections').forEach(function (row) {
+            selectedIds[row.id] = true;
+        });
+
+        // Remove hidden inputs for rows no longer selected.
+        $form.find('input[name="ids[]"]').each(function () {
+            if (! selectedIds[this.value]) {
+                $(this).remove();
+            }
+        });
+
+        // Add hidden inputs for newly-selected rows that don't have one.
+        Object.keys(selectedIds).forEach(function (id) {
+            if (! document.getElementById(tableId + '_checkbox_' + id)) {
+                $button.after($('<input/>', {
+                    id: tableId + '_checkbox_' + id,
+                    type: 'hidden',
+                    name: 'ids[]',
+                    value: id,
+                }));
+            }
+        });
+
+        if (Object.keys(selectedIds).length > 0) {
+            $button.removeAttr('disabled');
+        } else {
+            $button.attr('disabled', 'disabled');
+        }
     }
 
     // Toggle a visual disabled state on rows that don't support the
@@ -2268,6 +2381,15 @@
     // doesn't sneak past the guard that fired on dropdown pick.
     function reapplyAutoUncheckForTable(table) {
         var $table = $(table);
+        // Guard re-entry while a batch auto-uncheck/re-check pass is
+        // mid-flight. The check/uncheck events fired by our own
+        // bootstrapTable('check'/'uncheck') calls bubble back through
+        // the handlers below and would recursively re-call this,
+        // flipping the in-flight flag off before the outer loop
+        // finishes, which caused only one row to re-check instead of
+        // the whole set.
+        if ($table.data('mutexAutoInFlight')) return;
+
         var formId = $table.data('bulk-form-id');
         if (!formId) return;
 
@@ -2330,6 +2452,29 @@
             name: 'ids[]',
             value: $element.id
         }));
+
+        // Skip the expensive bulk-actions refresh + re-entry when
+        // this check is being fired by our own batch auto-uncheck /
+        // re-check pass. The outer autoUncheckIncompatibleRowsFor
+        // finishes the whole batch and runs refreshDynamicBulkActions /
+        // applyActionDependentRowStyling once at the end. Without this
+        // short-circuit, every row we re-check triggered a full refresh
+        // cycle, which both caused the "only one row re-selects" bug
+        // (re-entry flipped the in-flight flag off mid-loop) and made
+        // the whole interaction visibly laggy.
+        if ($(this).data('mutexAutoInFlight')) {
+            return;
+        }
+
+        // User-initiated check acknowledges this row explicitly. Drop
+        // it from auto-uncheck tracking so an action switch doesn't
+        // treat it as "we unchecked this" when it was them.
+        var auto = $(this).data('mutexAutoUnchecked') || {};
+        if (auto[$element.id]) {
+            delete auto[$element.id];
+            $(this).data('mutexAutoUnchecked', auto);
+        }
+
         updateSelectedCount(this);
         refreshDynamicBulkActions(this);
         reapplyAutoUncheckForTable(this);
@@ -2352,6 +2497,14 @@
             }
         }
 
+        // Check-all is an explicit "take everything" from the user,
+        // so wipe the auto-uncheck tracking set. reapplyAutoUncheckForTable
+        // below will then re-run the gate against the picked action
+        // and populate the set fresh.
+        if (! $(this).data('mutexAutoInFlight')) {
+            $(this).data('mutexAutoUnchecked', {});
+        }
+
         if ($(this).bootstrapTable('getSelections').length > 0) {
             $(buttonName).removeAttr('disabled');
         }
@@ -2365,11 +2518,39 @@
         var tableId =  $(this).data('id-table');
         $( "#" + tableId + "_checkbox_" + $element.id).remove();
         updateSelectedCount(this);
+
+        // Skip the auto-uncheck bookkeeping when our own batch pass
+        // is firing this event. The outer function tracks adds / drops
+        // directly and shouldn't interact with the per-event handler.
+        if ($(this).data('mutexAutoInFlight')) {
+            return;
+        }
+
+        // Drop this id from the auto-uncheck tracking set when the
+        // user is the one unchecking. Without this, a user who
+        // manually unchecks a row after a prior auto-uncheck cycle
+        // would see it resurrected the next time they picked an action
+        // that accepts it.
+        var auto = $(this).data('mutexAutoUnchecked') || {};
+        if (auto[$element.id]) {
+            delete auto[$element.id];
+            $(this).data('mutexAutoUnchecked', auto);
+        }
     });
 
 
     // Handle whether the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
+        // Short-circuit while a batch auto-uncheck/re-check pass is
+        // mid-flight. Same reason as the sibling check/uncheck
+        // handlers above: our own programmatic uncheck calls bubble
+        // through here and would run refreshDynamicBulkActions per
+        // row, both re-entering autoUncheckIncompatibleRowsFor and
+        // thrashing the dropdown.
+        if ($(this).data('mutexAutoInFlight')) {
+            return;
+        }
+
         var buttonName =  $(this).data('bulk-button-id');
 
         if ($(this).bootstrapTable('getSelections').length == 0) {
@@ -2380,6 +2561,13 @@
     });
 
     $('.snipe-table').on('uncheck-all.bs.table', function (event, rowsAfter, rowsBefore) {
+
+        // Uncheck-all is an explicit "clear everything" from the user,
+        // so the auto-uncheck tracking resets too. Otherwise a prior
+        // auto-unchecked set could spring back on the next action switch.
+        if (! $(this).data('mutexAutoInFlight')) {
+            $(this).data('mutexAutoUnchecked', {});
+        }
 
         var buttonName =  $(this).data('bulk-button-id');
         $(buttonName).attr('disabled', 'disabled');
@@ -2700,7 +2888,7 @@
                 var adjustDisabled = adjustDeleted || row.archived === true;
                 var adjustReason = adjustDeleted
                     ? '{{ trans('general.component_deleted_warning') }}'
-                    : '{{ trans('admin/components/general.archived_component') }}';
+                    : '{{ trans('general.archived_item_label', ['item_type' => trans('general.component')]) }}';
                 actions += window.renderAdjustQuantityButton({
                     dest: dest,
                     id: row.id,

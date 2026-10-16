@@ -16,7 +16,7 @@ class ArchivedComponentCheckoutGuardTest extends TestCase
         $this->actingAs(User::factory()->superuser()->create())
             ->get(route('components.checkout.show', ['componentID' => $component->id]))
             ->assertRedirect(route('components.index'))
-            ->assertSessionHas('error', trans('admin/components/message.checkout.archived'));
+            ->assertSessionHas('error', trans('general.cannot_checkout_archived', ['item_type' => trans('general.component')]));
     }
 
     public function test_checkout_store_blocks_archived_component(): void
@@ -30,7 +30,7 @@ class ArchivedComponentCheckoutGuardTest extends TestCase
                 'assigned_qty' => 1,
             ])
             ->assertRedirect(route('components.index'))
-            ->assertSessionHas('error', trans('admin/components/message.checkout.archived'));
+            ->assertSessionHas('error', trans('general.cannot_checkout_archived', ['item_type' => trans('general.component')]));
 
         // No pivot row created.
         $this->assertSame(0, $component->assets()->count());

@@ -3,6 +3,7 @@
 namespace App\Models\Builders;
 
 use App\Models\Accessory;
+use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -14,7 +15,31 @@ class AccessoryQueryBuilder extends Builder
 {
     public function requestable(): self
     {
-        return $this->where('accessories.requestable', '1');
+        return $this->where('accessories.requestable', '1')
+            ->notArchived();
+    }
+
+    public function archived(): self
+    {
+        return $this->where('accessories.archived', '=', 1);
+    }
+
+    public function notArchived(): self
+    {
+        return $this->where('accessories.archived', '=', 0);
+    }
+
+    /**
+     * Default list-page scope. Hides archived rows unless the
+     * `show_archived_in_list` setting is on.
+     */
+    public function accessoriesForShow(): self
+    {
+        if (Setting::getSettings()->show_archived_in_list != 1) {
+            return $this->notArchived();
+        }
+
+        return $this;
     }
 
     public function orderByCreatedByName(string $order): self

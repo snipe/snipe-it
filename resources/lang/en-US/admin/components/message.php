@@ -31,10 +31,7 @@ return [
         'success' => 'Component checked out successfully.',
         'user_does_not_exist' => 'That user is invalid. Please try again.',
         'unavailable' => 'Not enough components remaining: :remaining remaining, :requested requested ',
-        'archived' => 'That component has been archived and cannot be checked out. Un-archive it first on the component edit screen.',
     ],
-
-    'archived_blocked_by_checkouts' => 'This component still has active checkouts. Check them back in before archiving.',
 
     'bulk' => [
         'no_components_selected' => 'No components were selected.',
@@ -44,6 +41,7 @@ return [
 
         'update' => [
             'success' => ':count component was updated.|:count components were updated.',
+            'none_updated' => 'The selected component could not be updated. See errors below for details.|None of the selected components could be updated. See errors below for details.',
         ],
 
         'delete' => [

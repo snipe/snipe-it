@@ -64,7 +64,7 @@ class ComponentArchiveValidationTest extends TestCase
 
         $this->assertFalse($component->save());
         $this->assertSame(
-            trans('admin/components/message.archived_blocked_by_checkouts'),
+            trans('general.archived_blocked_by_checkouts', ['item_type' => trans('general.component')]),
             $component->getErrors()->get('archived')[0],
         );
     }

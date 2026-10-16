@@ -375,7 +375,8 @@
                         @can('checkin', \App\Models\License::class)
                         <x-slot:bulkactions>
                             <x-table.bulk-actions
-                                action_route="{{ route('licenses.bulkcheckin.selected') }}"
+                                name="assetLicenses"
+                                action_route="{{ route('licenses.bulkcheckin.show') }}"
                                 model_name="seat"
                             >
                                 <option value="checkin">{{ trans('general.checkin') }}</option>

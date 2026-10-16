@@ -148,21 +148,42 @@ class BulkComponentsController extends Controller
         $skipped = $components->count() - $authorized->count();
 
         $updated = 0;
+        $failed_rows = [];
         foreach ($authorized as $component) {
             $component->fill($updateData);
             if ($component->save()) {
                 $updated++;
+            } else {
+                $failed_rows[] = $component->name.': '.$component->getErrors()->first();
             }
+        }
+
+        $failed = count($failed_rows);
+        $redirect = redirect()->route('components.index');
+
+        if ($failed > 0) {
+            $redirect->with('multi_error_messages', $failed_rows);
+        }
+
+        // All target rows rejected by validation. Don't dress a zero-row
+        // update up as a success - the model errors tell the real story.
+        if ($updated === 0 && $failed > 0) {
+            return $redirect->with('error', trans_choice(
+                'admin/components/message.bulk.update.none_updated',
+                $failed,
+                ['count' => $failed]
+            ));
         }
 
         $message = trans_choice('admin/components/message.bulk.update.success', $updated, ['count' => $updated]);
 
         if ($skipped > 0) {
-            return redirect()->route('components.index')
-                ->with('warning', $message.' '.trans('admin/components/message.bulk.skipped_unauthorized', ['count' => $skipped]));
+            $message .= ' '.trans('admin/components/message.bulk.skipped_unauthorized', ['count' => $skipped]);
         }
 
-        return redirect()->route('components.index')->with('success', $message);
+        return $failed > 0
+            ? $redirect->with('warning', $message)
+            : $redirect->with('success', $message);
     }
 
     /**
