@@ -3324,32 +3324,19 @@ $(function () {
 // on BOTH checkboxes. Checking one disables (and clears) the other
 // so the user can't post a conflict the server would reject. Used
 // for the archived/requestable pair on checkoutable item edit forms.
-//
-// Preserve server-rendered disabled state: a sibling that the server
-// rendered as disabled (e.g. archived on an item with active checkouts)
-// must stay disabled when the mutex clears, not go back to enabled.
-// Cache the server intent on first pass so later re-renders only ever
-// restore the original state.
 $(function () {
   var $pair = $('input[type="checkbox"][data-mutex-with]');
   if (!$pair.length) {
     return;
   }
-  $pair.each(function () {
-    if (this.dataset.serverDisabled === undefined) {
-      this.dataset.serverDisabled = this.disabled ? '1' : '0';
-    }
-  });
   function syncMutexState() {
     $pair.each(function () {
       var siblingName = $(this).data('mutex-with');
       var $sibling = $pair.filter('[name="' + siblingName + '"]');
-      if (!$sibling.length) return;
-      var siblingServerDisabled = $sibling[0].dataset.serverDisabled === '1';
       if ($(this).is(':checked')) {
         $sibling.prop('checked', false).prop('disabled', true);
       } else {
-        $sibling.prop('disabled', siblingServerDisabled);
+        $sibling.prop('disabled', false);
       }
     });
   }
