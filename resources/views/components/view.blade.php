@@ -53,7 +53,7 @@
                             <x-slot:bulkactions>
                                 <x-table.bulk-actions
                                     name="componentCheckedOut"
-                                    :action_route="route('components.bulkcheckin.selected')"
+                                    :action_route="route('components.bulkcheckin.show')"
                                     model_name="components_asset"
                                     :actions="[
                                         'checkin' => ['label' => trans('general.checkin')],
@@ -130,7 +130,7 @@
                                 @php
                                     $lastOrder = $snipe_component->lastOrderDefaults();
                                     $adjustDisabledReason = $snipe_component->archived
-                                        ? trans('admin/components/general.archived_component')
+                                        ? trans('general.archived_item_label', ['item_type' => trans('general.component')])
                                         : null;
                                 @endphp
                                 <button type="button"

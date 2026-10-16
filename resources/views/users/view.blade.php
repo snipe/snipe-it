@@ -329,7 +329,7 @@
                         <x-slot:bulkactions>
                             <x-table.bulk-actions
                                 name="userLicenseTable"
-                                :action_route="route('licenses.bulkcheckin.selected')"
+                                :action_route="route('licenses.bulkcheckin.show')"
                                 model_name="license_seats"
                                 :actions="[
                                     'checkin' => ['label' => trans('general.checkin')],

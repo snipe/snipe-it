@@ -151,10 +151,10 @@
                 name="archived"
                 :label="trans('general.archived')"
                 :help_text="$errors->has('archived') ? null : (($item->exists && $item->numCheckedOut() > 0)
-                    ? trans('admin/components/message.archived_blocked_by_checkouts')
+                    ? trans('general.archived_blocked_by_checkouts', ['item_type' => trans('general.component')])
                     : (($pendingRequestCount > 0)
-                        ? trans_choice('admin/components/general.archived_cancels_pending_requests', $pendingRequestCount, ['count' => $pendingRequestCount])
-                        : trans('admin/components/general.archived_help')))"
+                        ? trans_choice('general.archived_cancels_pending_requests', $pendingRequestCount, ['count' => $pendingRequestCount, 'item_type' => trans('general.component')])
+                        : trans('general.archived_help', ['item_type_plural' => trans('general.components')])))"
                 :help_icon="$pendingRequestCount > 0 ? 'warning' : null"
                 :help_class="$pendingRequestCount > 0 ? 'text-warning' : null"
                 :item="$item"

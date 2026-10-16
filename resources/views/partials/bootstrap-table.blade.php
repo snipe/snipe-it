@@ -2888,7 +2888,7 @@
                 var adjustDisabled = adjustDeleted || row.archived === true;
                 var adjustReason = adjustDeleted
                     ? '{{ trans('general.component_deleted_warning') }}'
-                    : '{{ trans('admin/components/general.archived_component') }}';
+                    : '{{ trans('general.archived_item_label', ['item_type' => trans('general.component')]) }}';
                 actions += window.renderAdjustQuantityButton({
                     dest: dest,
                     id: row.id,
