@@ -68,11 +68,38 @@ Route::group(['prefix' => 'accessories', 'middleware' => ['auth']], function () 
         [Accessories\AccessoryCheckoutController::class, 'bulkFulfillStore']
     )->name('accessories.fulfill-requests.store');
 
+    Route::post('{accessoryId}/restore',
+        [Accessories\AccessoriesController::class, 'postRestore']
+    )->where('accessoryId', '[0-9]+')
+        ->name('accessories.restore');
+
+    // Bulk-actions
+    Route::post('bulkedit',
+        [BulkAccessoriesController::class, 'edit']
+    )->name('accessories.bulkedit.show')
+        ->breadcrumbs(function (Trail $trail) {
+            $label = match (request()->input('bulk_actions')) {
+                'edit' => trans('general.bulk_edit'),
+                'delete' => trans('general.bulk_delete'),
+                default => trans('general.bulk_actions'),
+            };
+
+            return $trail->parent('accessories.index')->push($label, route('accessories.index'));
+        });
+
+    Route::post('bulksave',
+        [BulkAccessoriesController::class, 'update']
+    )->name('accessories.bulkedit.store');
+
+    Route::post('bulkdelete',
+        [BulkAccessoriesController::class, 'destroy']
+    )->name('accessories.bulkdelete.store');
+
 });
 
 Route::resource('accessories', Accessories\AccessoriesController::class, [
     'middleware' => ['auth'],
-]);
+])->withTrashed(['show']);
 
 Route::post('accessories/bulk/delete', [BulkAccessoriesController::class, 'destroy'])
     ->middleware(['auth'])
