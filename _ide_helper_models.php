@@ -22,6 +22,7 @@ namespace App\Models{
  * @property int|null $created_by
  * @property int $qty
  * @property bool $requestable
+ * @property bool $archived
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -86,10 +87,13 @@ namespace App\Models{
  * @property-read int|null $uploads_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\AccessoryCheckout> $users
  * @property-read int|null $users_count
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory accessoriesForShow()
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory applyOffsetAndLimit(int $total)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory archived()
  * @method static \Database\Factories\AccessoryFactory factory($count = null, $state = [])
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory newModelQuery()
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory newQuery()
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory notArchived()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Accessory onlyTrashed()
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orWhereMultipleColumns(array $columns, $term)
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory orderByCreatedByName(string $order)
@@ -108,6 +112,7 @@ namespace App\Models{
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory requestable()
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory requestedBy(\App\Models\User $user)
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory textSearch($search)
+ * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereArchived($value)
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereCategoryId($value)
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereCompanyId($value)
  * @method static \App\Models\Builders\AccessoryQueryBuilder<static>|Accessory whereCreatedAt($value)
@@ -1108,7 +1113,7 @@ namespace App\Models{
  * @property string|null $notes
  * @property int|null $legacy_qty
  * @property bool $requestable
- * @property int $archived
+ * @property bool $archived
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
  * @property-read int|null $actionlog_count
  * @property-read \App\Models\User|null $adminuser
@@ -1158,9 +1163,12 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $uploads
  * @property-read int|null $uploads_count
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component applyOffsetAndLimit(int $total)
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component archived()
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component componentsForShow()
  * @method static \Database\Factories\ComponentFactory factory($count = null, $state = [])
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component newModelQuery()
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component newQuery()
+ * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component notArchived()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Component onlyTrashed()
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orWhereMultipleColumns(array $columns, $term)
  * @method static \App\Models\Builders\ComponentQueryBuilder<static>|Component orderByCreatedBy(string $order)

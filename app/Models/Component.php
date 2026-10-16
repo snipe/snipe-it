@@ -88,7 +88,7 @@ class Component extends SnipeModel
 
         $noArchivingWithCheckouts = function (string $attribute, mixed $value, \Closure $fail): void {
             if (filter_var($value, FILTER_VALIDATE_BOOLEAN) && $this->exists && $this->numCheckedOut() > 0) {
-                $fail(trans('admin/components/message.archived_blocked_by_checkouts'));
+                $fail(trans('general.archived_blocked_by_checkouts', ['item_type' => trans('general.component')]));
             }
         };
 
@@ -183,7 +183,7 @@ class Component extends SnipeModel
         // Archive-time request cleanup. SaveQuietly so the component update doesn't trigger a cascade of
         // request updates and emails. The component is already archived, so the requests are now invalid.
         static::updated(function (self $component): void {
-            if (!$component->wasChanged('archived') || !$component->archived) {
+            if (! $component->wasChanged('archived') || ! $component->archived) {
                 return;
             }
 
@@ -255,7 +255,7 @@ class Component extends SnipeModel
     protected function archived(): Attribute
     {
         return Attribute::make(
-            set: fn($value) => filter_var($value === '' ? null : $value, FILTER_VALIDATE_BOOLEAN),
+            set: fn ($value) => filter_var($value === '' ? null : $value, FILTER_VALIDATE_BOOLEAN),
         );
     }
 

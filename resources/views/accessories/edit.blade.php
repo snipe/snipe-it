@@ -132,6 +132,24 @@
                 name="requestable"
                 :label="trans('admin/accessories/general.requestable')"
                 :item="$item"
+                data-mutex-with="archived"
+            />
+
+                {{-- Suppress help_text when an archived validation error is
+                     already surfacing. --}}
+                <x-form.checkbox-row
+                    name="archived"
+                    :label="trans('general.archived')"
+                    :help_text="$errors->has('archived') ? null : (($item->exists && $item->checkouts()->count() > 0)
+                    ? trans('general.archived_blocked_by_checkouts', ['item_type' => trans('general.accessory')])
+                    : (($pendingRequestCount > 0)
+                        ? trans_choice('general.archived_cancels_pending_requests', $pendingRequestCount, ['count' => $pendingRequestCount, 'item_type' => trans('general.accessory')])
+                        : trans('general.archived_help', ['item_type_plural' => trans('general.accessories')])))"
+                    :help_icon="$pendingRequestCount > 0 ? 'warning' : null"
+                    :help_class="$pendingRequestCount > 0 ? 'text-warning' : null"
+                    :item="$item"
+                    :disabled="$item->exists && $item->checkouts()->count() > 0"
+                    data-mutex-with="requestable"
             />
 
             <x-slot:customfooter>

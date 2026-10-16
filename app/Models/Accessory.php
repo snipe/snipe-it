@@ -14,6 +14,7 @@ use App\Models\Traits\Requestable;
 use App\Models\Traits\Searchable;
 use App\Presenters\AccessoryPresenter;
 use App\Presenters\Presentable;
+use App\Rules\RequestableArchivedMutex;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -28,7 +29,6 @@ use Watson\Validating\ValidatingTrait;
  * Model for Accessories.
  *
  * @version v1.0
- *
  * @mixin IdeHelperAccessory
  */
 class Accessory extends SnipeModel
@@ -50,7 +50,9 @@ class Accessory extends SnipeModel
 
     protected $casts = [
         'purchase_date' => 'datetime',
-        'requestable' => 'boolean',    ];
+        'requestable' => 'boolean',
+        'archived' => 'boolean',
+    ];
 
     protected $presenter = AccessoryPresenter::class;
 
@@ -106,7 +108,32 @@ class Accessory extends SnipeModel
         'purchase_date' => 'date_format:Y-m-d|nullable',
         'default_supplier_id' => 'nullable|integer|exists:suppliers,id',
         'default_purchase_cost' => 'numeric|nullable|gte:0|max:99999999999999999.99',
+        'requestable' => ['nullable', 'boolean'],
+        'archived' => ['nullable', 'boolean'],
     ];
+
+    /**
+     * PHP 8.2 blocks `new X` in property defaults, so the rule object
+     * gets spliced in here rather than in $rules above. Mirrors
+     * Component::getRules() so the mutex and the no-archive-with-
+     * checkouts guard behave identically across checkoutable items.
+     */
+    public function getRules(): array
+    {
+        $rules = $this->rules ?? [];
+        $mutex = new RequestableArchivedMutex;
+
+        $noArchivingWithCheckouts = function (string $attribute, mixed $value, \Closure $fail): void {
+            if (filter_var($value, FILTER_VALIDATE_BOOLEAN) && $this->exists && $this->checkouts()->count() > 0) {
+                $fail(trans('general.archived_blocked_by_checkouts', ['item_type' => trans('general.accessory')]));
+            }
+        };
+
+        $rules['requestable'] = array_merge((array) ($rules['requestable'] ?? []), [$mutex]);
+        $rules['archived'] = array_merge((array) ($rules['archived'] ?? []), [$mutex, $noArchivingWithCheckouts]);
+
+        return $rules;
+    }
 
     /**
      * Whether the model should inject it's identifier to the unique
@@ -143,6 +170,7 @@ class Accessory extends SnipeModel
         'qty',
         'min_amt',
         'requestable',
+        'archived',
         'notes',
         'default_supplier_id',
         'default_purchase_cost',
@@ -205,18 +233,38 @@ class Accessory extends SnipeModel
     /**
      * Sets the requestable attribute on the accessory
      *
+     * Kept as the legacy magic-method form rather than the modern
+     * Attribute::make accessor. Requestable() is also a query scope on
+     * AccessoryQueryBuilder, and `Accessory::Requestable()` resolves
+     * through Model::__callStatic → __call → forwardCallTo(newQuery(),
+     * ...) only when the method doesn't exist on the model. An
+     * `Attribute`-returning method shadows that forwarder and crashes
+     * with "Call to undefined method Attribute::count()". See
+     * Component::setRequestableAttribute for the same comment.
+     *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      *
      * @since  [v4.0]
-     *
-     * @return void
      */
-    public function setRequestableAttribute($value)
+    public function setRequestableAttribute($value): void
     {
         if ($value == '') {
             $value = null;
         }
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Mirror for the archived flag. Normalizes empty-string / null /
+     * missing-column CSV cells to false so the NOT NULL `archived`
+     * column never receives a literal null.
+     */
+    public function setArchivedAttribute($value): void
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['archived'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
     /**

@@ -119,10 +119,17 @@ $config = [
             'days' => 30,
         ],
 
-        // Sync-adapter log
+        // Sync-adapter log. SYNC_ADAPTERS_LOG_PATH lets the test env
+        // route writes to /dev/null via phpunit.xml so sync-adapter
+        // writes during tests don't pile up in the developer's real
+        // logs/sync-adapters.log file. Still uses the single driver
+        // so Monolog TestHandler capture (used by diagnostic endpoints
+        // + per-run download) still works - swapping to the null
+        // driver would short-circuit the handler stack and defeat
+        // our in-request log captures.
         'sync-adapters' => [
             'driver' => 'single',
-            'path' => storage_path('logs/sync-adapters.log'),
+            'path' => env('SYNC_ADAPTERS_LOG_PATH', storage_path('logs/sync-adapters.log')),
             'level' => env('LOG_LEVEL', 'info'),
         ],
 

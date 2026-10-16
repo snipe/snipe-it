@@ -12,7 +12,10 @@ use Throwable;
 
 class PullInventory extends Command
 {
-    protected $signature = 'snipeit:pull-inventory {adapter? : The adapter instance slug. Omit to pull every enabled instance.}';
+    protected $signature = 'snipeit:pull-inventory
+        {adapter? : The adapter instance slug. Omit to pull every enabled instance.}
+        {--dry-run : Fetch and log each normalized record but do not create, update, or link any Snipe-IT assets. Overrides the per-instance pull_dry_run config for this one run.}
+        {--limit= : Stop after processing this many records per adapter. Useful for sanity-checking a dry run on a large fleet without waiting for a full pull.}';
 
     protected $description = 'Pull host inventory from configured sync-adapter instances and upsert as Snipe-IT assets.';
 
@@ -117,10 +120,57 @@ class PullInventory extends Command
 
         Log::channel('sync-adapters')->info("{$slug} sync starting (CLI)");
 
+        // --dry-run flag on the CLI overrides the per-instance config
+        // for this one run so admins can preview a sync without first
+        // flipping and saving the setting in the web UI. Push the
+        // override onto the adapter so any inner isPullDryRun() check
+        // honors it too.
+        if ($this->option('dry-run') === true) {
+            $adapter->withPullDryRunOverride(true);
+        }
+        $dryRun = $adapter->isPullDryRun();
+        if ($dryRun) {
+            Log::channel('sync-adapters')->info("{$slug} sync [dry-run]: no assets will be created or updated");
+            $this->warn("Pull dry-run is on for {$slug}: records will be logged, no assets will be written.");
+        }
+
+        // --limit caps how many records this adapter processes before
+        // we break out. Null = no limit. Non-positive values are
+        // treated as no-limit so operators don't foot-gun themselves
+        // with --limit=0 and get a silent zero-record run.
+        $limitInput = $this->option('limit');
+        $limit = ($limitInput !== null && (int) $limitInput > 0) ? (int) $limitInput : null;
+        if ($limit !== null) {
+            Log::channel('sync-adapters')->info("{$slug} sync: --limit set to {$limit}, will stop after that many records");
+            $this->warn("Pull limit is {$limit} for {$slug}: run stops after that many records.");
+        }
+
         try {
-            Actionlog::withActionSource('sync:'.$slug, function () use ($adapter, $slug, &$seen, &$skipped, &$errors) {
+            Actionlog::withActionSource('sync:'.$slug, function () use ($adapter, $slug, $dryRun, $limit, &$seen, &$skipped, &$errors) {
                 foreach ($adapter->pull() as $record) {
+                    if ($limit !== null && ($seen + $skipped + $errors) >= $limit) {
+                        Log::channel('sync-adapters')->info("{$slug} sync: --limit {$limit} reached, stopping early");
+                        break;
+                    }
                     try {
+                        if ($dryRun) {
+                            // Mirror of the push dry-run shape: log the
+                            // normalized record, tally it as "seen" so the
+                            // run summary reports useful counts, skip the
+                            // asset-side write entirely.
+                            Log::channel('sync-adapters')->info(sprintf(
+                                '%s sync [dry-run]: would upsert record source=%s id=%s hostname=%s serial=%s',
+                                $slug,
+                                $record->sourceKey,
+                                $record->sourceId,
+                                $record->hostname ?? '(none)',
+                                $record->hardwareSerial ?? '(none)',
+                            ));
+                            $seen++;
+
+                            continue;
+                        }
+
                         $result = SyncAdapter::syncFromRecord($record);
                         if ($result === null) {
                             $skipped++;

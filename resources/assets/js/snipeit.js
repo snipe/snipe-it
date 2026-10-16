@@ -1556,6 +1556,169 @@ $(function () {
     });
 
     /*
+     * Shared Limit input relay.
+     *
+     * The sync-adapter panel renders one <input.js-sync-limit-source>
+     * per adapter. Every action form (Pull Now, Push Now) that opts
+     * in via class="js-sync-reads-limit" injects a hidden
+     * name="limit" input at submit time, pulled from the shared
+     * source for that adapter. Blank limit means "no cap"; we skip
+     * the injection entirely so the server-side default (no limit)
+     * applies.
+     */
+    document.querySelectorAll('form.js-sync-reads-limit').forEach(function (form) {
+        form.addEventListener('submit', function () {
+            var slug = form.getAttribute('data-adapter-slug');
+            if (!slug) return;
+            var source = document.querySelector(
+                '.js-sync-limit-source[data-adapter-slug="' + CSS.escape(slug) + '"]'
+            );
+            if (!source) return;
+            var value = (source.value || '').trim();
+            if (value === '') return;
+
+            // Reuse any existing hidden limit input (left over from a
+            // prior submit under the same browser session) rather than
+            // appending duplicates.
+            var hidden = form.querySelector('input[type="hidden"][name="limit"]');
+            if (!hidden) {
+                hidden = document.createElement('input');
+                hidden.type = 'hidden';
+                hidden.name = 'limit';
+                form.appendChild(hidden);
+            }
+            hidden.value = value;
+        });
+    });
+
+    /*
+     * Dry-run checkbox mirror.
+     *
+     * The dry-run checkboxes in the sync-adapter panel are bound to
+     * the main config form via the HTML `form` attribute. Pull Now /
+     * Push Now submit a DIFFERENT form, so without a mirror the
+     * admin's just-ticked checkbox value never reaches those routes
+     * - the push/pull controller falls back to the persisted config,
+     * which is the OPPOSITE of what the admin saw on screen.
+     *
+     * Each sync-action form includes a hidden input
+     * class="js-sync-dry-run-mirror" data-mirrors="{id-of-checkbox}".
+     * This handler keeps the hidden input's value in sync with its
+     * paired checkbox so the one-click intent is honored even when
+     * the admin hasn't saved yet.
+     */
+    document.querySelectorAll('.js-sync-dry-run-mirror').forEach(function (hidden) {
+        var checkboxId = hidden.getAttribute('data-mirrors');
+        if (!checkboxId) return;
+        var checkbox = document.getElementById(checkboxId);
+        if (!checkbox) return;
+
+        function sync() {
+            hidden.value = checkbox.checked ? '1' : '0';
+        }
+
+        checkbox.addEventListener('change', sync);
+        sync();
+    });
+
+    /*
+     * Sync-adapter diagnostics.
+     *
+     * Each <fieldset.js-sync-diagnostics data-adapter-slug="..."> hosts
+     * a stack of <button.js-sync-diagnostic-button data-url="..."> and
+     * one <pre.js-sync-diagnostic-output>. Clicking a button POSTs to
+     * its data-url (with CSRF token) and renders the response into
+     * the sibling <pre>. Response shape:
+     *   { output: string, ...extras }
+     * `output` is dumped verbatim; other keys are pretty-printed as a
+     * header block above the output so the admin can see e.g.
+     * asset_id, upserted_asset_id, record contents, etc.
+     */
+    document.querySelectorAll('.js-sync-diagnostics').forEach(function (panel) {
+        var output = panel.querySelector('.js-sync-diagnostic-output');
+        if (!output) return;
+        var buttons = panel.querySelectorAll('.js-sync-diagnostic-button');
+
+        buttons.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var url = btn.getAttribute('data-url');
+                if (!url) return;
+
+                btn.disabled = true;
+                btn.setAttribute('data-busy', '1');
+                output.textContent = 'Running...';
+
+                var token = $('meta[name="csrf-token"]').attr('content');
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    dataType: 'json',
+                    headers: { 'X-CSRF-TOKEN': token, 'Accept': 'application/json' },
+                }).done(function (data) {
+                    var pieces = [];
+                    Object.keys(data).forEach(function (key) {
+                        if (key === 'output') return;
+                        var value = data[key];
+                        if (typeof value === 'object' && value !== null) {
+                            pieces.push(key + ':\n' + JSON.stringify(value, null, 2));
+                        } else {
+                            pieces.push(key + ': ' + value);
+                        }
+                    });
+                    if (data.output) {
+                        pieces.push('');
+                        pieces.push(data.output);
+                    }
+                    output.textContent = pieces.join('\n');
+                }).fail(function (jqXHR) {
+                    var body = jqXHR.responseJSON;
+                    if (body && body.error) {
+                        output.textContent = 'Error: ' + body.error;
+                    } else {
+                        output.textContent = 'Error: ' + jqXHR.status + ' ' + jqXHR.statusText;
+                    }
+                }).always(function () {
+                    btn.disabled = false;
+                    btn.removeAttribute('data-busy');
+                });
+            });
+        });
+    });
+
+    /*
+     * Mapping row target/direction coupling.
+     *
+     * In the sync-adapter field-mapping fieldset, each row has a
+     * target picker (left) and a direction picker (right). When the
+     * admin sets the target to "Skip (do not sync)" the direction is
+     * moot - showing it creates the impression that there are two
+     * independent Skip switches. Hide the direction column in that
+     * state. Target picker stays visible regardless of direction
+     * since a direction=skip row still "remembers" its target for
+     * later unpausing.
+     */
+    $('.js-mapping-row').each(function () {
+        var $row = $(this);
+        var $target = $row.find('.js-mapping-target');
+        var $direction = $row.find('.js-mapping-direction');
+        if (!$target.length || !$direction.length) return;
+
+        function sync() {
+            if ($target.val() === 'skip') {
+                $direction.hide();
+            } else {
+                $direction.show();
+            }
+        }
+
+        // jQuery listener because Select2 fires change through
+        // jQuery's event system which doesn't trigger native DOM
+        // listeners.
+        $target.on('change', sync);
+        sync();
+    });
+
+    /*
      * Generic dirty-form guard.
      *
      * Any <form data-dirty-guard id="my-form"> is watched for changes.
@@ -1641,6 +1804,12 @@ $(function () {
 
         form.addEventListener('input', reevaluate);
         form.addEventListener('change', reevaluate);
+        // Select2 and any other jQuery-driven picker trigger `change`
+        // via jQuery's own event system, which never fires native DOM
+        // listeners. Add a jQuery listener so dropdowns like the sync-
+        // adapter field-mapping pickers still mark the form dirty
+        // when their value changes.
+        $(form).on('change', reevaluate);
     });
 
     /*
@@ -2810,20 +2979,34 @@ $(function () {
 // on BOTH checkboxes. Checking one disables (and clears) the other
 // so the user can't post a conflict the server would reject. Used
 // for the archived/requestable pair on checkoutable item edit forms.
+//
+// Preserve server-rendered disabled state: a sibling that the server
+// rendered as disabled (e.g. archived on an item with active checkouts)
+// must stay disabled when the mutex clears, not go back to enabled.
+// Cache the server intent on first pass so later re-renders only ever
+// restore the original state.
 $(function () {
     var $pair = $('input[type="checkbox"][data-mutex-with]');
     if (!$pair.length) {
         return;
     }
 
+    $pair.each(function () {
+        if (this.dataset.serverDisabled === undefined) {
+            this.dataset.serverDisabled = this.disabled ? '1' : '0';
+        }
+    });
+
     function syncMutexState() {
         $pair.each(function () {
             var siblingName = $(this).data('mutex-with');
             var $sibling = $pair.filter('[name="' + siblingName + '"]');
+            if (!$sibling.length) return;
+            var siblingServerDisabled = $sibling[0].dataset.serverDisabled === '1';
             if ($(this).is(':checked')) {
                 $sibling.prop('checked', false).prop('disabled', true);
             } else {
-                $sibling.prop('disabled', false);
+                $sibling.prop('disabled', siblingServerDisabled);
             }
         });
     }

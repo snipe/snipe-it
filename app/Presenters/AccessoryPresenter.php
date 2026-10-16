@@ -12,7 +12,15 @@ class AccessoryPresenter extends Presenter
      *
      * @return string
      */
-    public static function dataTableLayout()
+    /**
+     * JSON column layout for bootstrap-table.
+     *
+     * @param  bool  $showDeletedAt  Make the deleted_at column visible
+     *                               by default. Passed from the Deleted-index view so admins
+     *                               see when each row was deleted. Still switchable elsewhere.
+     * @return string
+     */
+    public static function dataTableLayout(bool $showDeletedAt = false)
     {
         $layout = [
             [
@@ -203,6 +211,15 @@ class AccessoryPresenter extends Presenter
                 'title' => trans('admin/hardware/general.requestable'),
                 'formatter' => 'trueFalseFormatter',
             ], [
+                'field' => 'archived',
+                'scope' => 'col',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'visible' => false,
+                'title' => trans('general.archived'),
+                'formatter' => 'trueFalseFormatter',
+            ], [
                 'field' => 'created_by',
                 'scope' => 'col',
                 'searchable' => false,
@@ -227,6 +244,15 @@ class AccessoryPresenter extends Presenter
                 'switchable' => true,
                 'title' => trans('general.updated_at'),
                 'visible' => false,
+                'formatter' => 'dateDisplayFormatter',
+            ], [
+                'field' => 'deleted_at',
+                'scope' => 'col',
+                'searchable' => false,
+                'sortable' => true,
+                'switchable' => true,
+                'visible' => $showDeletedAt,
+                'title' => trans('general.deleted_at'),
                 'formatter' => 'dateDisplayFormatter',
             ], [
                 'field' => 'change',
@@ -256,6 +282,15 @@ class AccessoryPresenter extends Presenter
     public static function assignedDataTableLayout()
     {
         $layout = [
+            [
+                'field' => 'checkbox',
+                'scope' => 'col',
+                'checkbox' => true,
+                'formatter' => 'checkboxEnabledFormatter',
+                'titleTooltip' => trans('general.select_all_none'),
+                'printIgnore' => true,
+                'class' => 'hidden-print',
+            ],
             [
                 'field' => 'id',
                 'scope' => 'col',

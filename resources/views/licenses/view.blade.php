@@ -49,7 +49,8 @@
                         @can('checkin', $license)
                         <x-slot:bulkactions>
                             <x-table.bulk-actions
-                                action_route="{{ route('licenses.bulkcheckin.selected') }}"
+                                name="licenseAssignedSeats"
+                                action_route="{{ route('licenses.bulkcheckin.show') }}"
                                 model_name="seat"
                             >
                                 <option value="checkin">{{ trans('general.checkin') }}</option>

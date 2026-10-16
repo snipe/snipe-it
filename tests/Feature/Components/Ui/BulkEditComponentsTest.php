@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Components\Ui;
 
+use App\Models\Asset;
 use App\Models\Category;
 use App\Models\Company;
 use App\Models\Component;
@@ -116,6 +117,56 @@ class BulkEditComponentsTest extends TestCase
 
         $this->assertTrue((bool) $one->fresh()->archived);
         $this->assertTrue((bool) $two->fresh()->archived);
+    }
+
+    public function test_update_flashes_error_when_no_rows_updated_due_to_validation(): void
+    {
+        // Regression test: archive-ing components that all have active
+        // checkouts should surface a model-validation error, not a
+        // "0 components were updated" success flash.
+        $one = Component::factory()->create(['qty' => 5]);
+        $two = Component::factory()->create(['qty' => 5]);
+        $assetOne = Asset::factory()->create();
+        $assetTwo = Asset::factory()->create();
+        $one->assets()->attach($assetOne->id, ['assigned_qty' => 1, 'created_at' => now(), 'created_by' => 1]);
+        $two->assets()->attach($assetTwo->id, ['assigned_qty' => 1, 'created_at' => now(), 'created_by' => 1]);
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('components.bulkedit.store'), [
+                'ids' => [$one->id, $two->id],
+                'archived' => '1',
+            ])
+            ->assertRedirect(route('components.index'))
+            ->assertSessionHas('error')
+            ->assertSessionMissing('success')
+            ->assertSessionHas('multi_error_messages');
+
+        $this->assertFalse((bool) $one->fresh()->archived);
+        $this->assertFalse((bool) $two->fresh()->archived);
+    }
+
+    public function test_update_flashes_warning_on_partial_validation_failure(): void
+    {
+        // Regression test: one component saves, one is rejected by
+        // validation. Response should be warning + error details, not
+        // plain success.
+        $saveable = Component::factory()->create(['qty' => 5]);
+        $blocked = Component::factory()->create(['qty' => 5]);
+        $asset = Asset::factory()->create();
+        $blocked->assets()->attach($asset->id, ['assigned_qty' => 1, 'created_at' => now(), 'created_by' => 1]);
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('components.bulkedit.store'), [
+                'ids' => [$saveable->id, $blocked->id],
+                'archived' => '1',
+            ])
+            ->assertRedirect(route('components.index'))
+            ->assertSessionHas('warning')
+            ->assertSessionMissing('success')
+            ->assertSessionHas('multi_error_messages');
+
+        $this->assertTrue((bool) $saveable->fresh()->archived);
+        $this->assertFalse((bool) $blocked->fresh()->archived);
     }
 
     public function test_update_rejects_empty_selection(): void

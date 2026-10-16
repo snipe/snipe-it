@@ -375,6 +375,7 @@ class Importer extends Component
          * These are the item-type specific columns
          */
         $this->accessories_fields = [
+            'archived' => trans('general.archived'),
             'category' => trans('general.category'),
             'company' => trans('general.company'),
             'item_name' => trans('general.item_name_var', ['item' => trans('general.accessory')]),
@@ -387,6 +388,7 @@ class Importer extends Component
             'purchase_cost' => trans('general.purchase_cost'),
             'purchase_date' => trans('general.purchase_date'),
             'quantity' => trans('general.qty'),
+            'requestable' => trans('general.requestable'),
             'supplier' => trans('general.supplier'),
         ];
 
@@ -459,6 +461,7 @@ class Importer extends Component
             // which does findCsvMatch($row, 'quantity'). A previous rename to
             // 'qty' silently broke consumable/component imports (issue #19312).
             'quantity' => trans('general.qty'),
+            'requestable' => trans('general.requestable'),
             'supplier' => trans('general.supplier'),
         ];
 

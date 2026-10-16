@@ -38,7 +38,6 @@ class CustomHttpAdapter extends SyncAdapter implements PushableAdapter
      * last_seen) are vendor-authoritative in Snipe-IT, so
      * they aren't in the push set.
      */
-    private const PUSHABLE_STANDARD_FIELDS = ['hostname', 'serial', 'asset_tag', 'model'];
 
     /**
      * Pickable HostInventoryRecord fields for the field-map repeater
@@ -370,6 +369,20 @@ class CustomHttpAdapter extends SyncAdapter implements PushableAdapter
      * (hostname, serial, etc.) are handled by the base framework, so
      * they don't appear here.
      */
+    /**
+     * CustomHttp defines its extras via the Vendor Response Paths
+     * widget (admin picks custom:X / native:Y destinations and gives
+     * them dot-paths). Mapping targets are self-routed (destination
+     * = target) and direction is set per-row in Vendor Response
+     * Paths, so the base-class "{Adapter}-specific fields" picker
+     * would just duplicate what Vendor Response Paths already
+     * captures. Hide it.
+     */
+    public function rendersExtrasPicker(): bool
+    {
+        return false;
+    }
+
     public function extraFields(): array
     {
         $out = [];
@@ -395,14 +408,46 @@ class CustomHttpAdapter extends SyncAdapter implements PushableAdapter
      */
     public function saveConfig(\Illuminate\Http\Request $request): void
     {
+        $slug = $this->instance->slug;
+
+        // Snapshot the stored field_paths BEFORE parent::saveConfig
+        // overwrites the credential. We need it to tell a pre-existing
+        // extras entry (whose row might have been deleted via the
+        // mapping-picker on this save) from a brand-new one added via
+        // the field_paths widget's pending-row flow (which has no
+        // matching _mapping key either). Without the snapshot, every
+        // new row would look identical to a deletion.
+        $existingPathsBefore = $this->fieldPathMap();
+
+        // The parent's persistFieldMappings forgets any mapping key
+        // the POST omitted - that's how the mapping-picker's delete
+        // button signals removal.
+        $postedMappings = (array) $request->input($slug.'_mapping', []);
+
         parent::saveConfig($request);
 
-        $slug = $this->instance->slug;
         $postedDirections = (array) $request->input($slug.'_direction', []);
+        $prunedFromFieldPaths = [];
+
         foreach (array_keys($this->fieldPathMap()) as $destination) {
             if (! str_starts_with($destination, 'custom:') && ! str_starts_with($destination, 'native:')) {
                 continue;
             }
+
+            // Deletion test: the entry existed before this save AND
+            // the admin's mapping-picker POST omits it. Brand-new
+            // entries (added via the field_paths pending-row flow on
+            // this same save) pass through unchanged - they have no
+            // _mapping key yet, but weren't previously stored either.
+            $existedBefore = array_key_exists($destination, $existingPathsBefore);
+            $omittedFromMappings = ! array_key_exists($destination, $postedMappings);
+            if ($existedBefore && $omittedFromMappings) {
+                SyncAdapterConfig::forget($this->instance->id, 'direction.'.$destination);
+                $prunedFromFieldPaths[] = $destination;
+
+                continue;
+            }
+
             SyncAdapterConfig::put($this->instance->id, 'mapping.'.$destination, $destination);
 
             // Parent's persistFieldDirections dropped these because
@@ -416,6 +461,19 @@ class CustomHttpAdapter extends SyncAdapter implements PushableAdapter
                     SyncAdapterConfig::put($this->instance->id, 'direction.'.$destination, $direction);
                 }
             }
+        }
+
+        // Rewrite the field_paths credential with the pruned entries
+        // removed so the deleted extras don't regenerate on next
+        // render. parent::saveConfig already persisted the raw
+        // credential, so we re-decode / filter / re-encode here.
+        if ($prunedFromFieldPaths !== []) {
+            $raw = (string) $this->safeCredential('field_paths');
+            $decoded = $raw === '' ? [] : (array) (json_decode($raw, true) ?? []);
+            foreach ($prunedFromFieldPaths as $key) {
+                unset($decoded[$key]);
+            }
+            SyncAdapterConfig::put($this->instance->id, 'field_paths', json_encode($decoded, JSON_UNESCAPED_SLASHES));
         }
     }
 
@@ -458,15 +516,68 @@ class CustomHttpAdapter extends SyncAdapter implements PushableAdapter
      *
      * @param  array<int, string>  $changedFields
      */
+    /**
+     * Diagnostic: build the exact HTTP shape push() would send for
+     * the given asset without actually sending it (and without
+     * writing the "would send" log line that dry-run push would).
+     * Returned shape is directly serializable by the Preview Push
+     * Payload AJAX endpoint. Null when the request shape couldn't be
+     * built - the skip reason is already in the sync-adapters log via
+     * the pushPrologue / buildPushPayload calls that fire here.
+     *
+     * TODO/followup: create vs update endpoint shape - POST to
+     * /hardware when the asset isn't linked yet vs PATCH to
+     * /hardware/{id} when it is. Current preview only exercises the
+     * linked-asset path.
+     *
+     * @return array{method: string, endpoint: string, payload: array<string, mixed>}|null
+     */
+    public function peekPushPayload(Asset $asset): ?array
+    {
+        $externalSource = $this->pushPrologue($asset, []);
+        if ($externalSource === null || ! $this->canPush()) {
+            return null;
+        }
+
+        [$payload] = $this->buildPushPayload($asset);
+        if ($payload === []) {
+            return null;
+        }
+
+        return [
+            'method' => $this->resolvedPushMethod(),
+            'endpoint' => rtrim($this->url(), '/').$this->resolvedPushPath($this->safeCredential('push_path'), (string) $externalSource->external_id),
+            'payload' => $payload,
+        ];
+    }
+
     public function push(Asset $asset, array $changedFields = []): bool
     {
         $externalSource = $this->pushPrologue($asset, $changedFields);
-        if ($externalSource === null || ! $this->canPush()) {
+        if ($externalSource === null) {
+            // pushPrologue already logged the specific skip reason.
+            return false;
+        }
+        if (! $this->canPush()) {
+            Log::channel('sync-adapters')->info(sprintf(
+                '%s push: skipped asset %d (asset_tag=%s) - canPush() returned false (missing URL or push endpoint configuration)',
+                $this->name(),
+                $asset->id,
+                $asset->asset_tag ?? '(none)',
+            ));
+
             return false;
         }
 
         [$payload, $touched] = $this->buildPushPayload($asset);
         if ($payload === []) {
+            Log::channel('sync-adapters')->info(sprintf(
+                '%s push: skipped asset %d (asset_tag=%s) - empty payload (no push-directed fields produced a value for this asset)',
+                $this->name(),
+                $asset->id,
+                $asset->asset_tag ?? '(none)',
+            ));
+
             return false;
         }
 
@@ -512,15 +623,32 @@ class CustomHttpAdapter extends SyncAdapter implements PushableAdapter
         $touched = [];
         $fieldPaths = $this->fieldPathMap();
         foreach ($this->pushDirectedFields() as $field) {
-            if (! in_array($field, self::PUSHABLE_STANDARD_FIELDS, true)) {
-                continue;
-            }
             $path = $fieldPaths[$field] ?? '';
             if ($path === '') {
+                // Push direction set but no vendor-side dot-path
+                // configured for this field in the Custom HTTP
+                // "Field paths" widget. Nothing to write to without a
+                // path, so the field is dropped silently otherwise.
+                Log::channel('sync-adapters')->info(sprintf(
+                    '%s push: asset %d (asset_tag=%s) - field "%s" is directed push but has no vendor-side path configured in field_paths',
+                    $this->name(),
+                    $asset->id,
+                    $asset->asset_tag ?? '(none)',
+                    $field,
+                ));
+
                 continue;
             }
             $value = $this->assetValueForSourceField($asset, $field);
             if ($value === null) {
+                Log::channel('sync-adapters')->info(sprintf(
+                    '%s push: asset %d (asset_tag=%s) - field "%s" resolves to null on this asset, nothing to push',
+                    $this->name(),
+                    $asset->id,
+                    $asset->asset_tag ?? '(none)',
+                    $field,
+                ));
+
                 continue;
             }
             Arr::set($payload, $path, $value);

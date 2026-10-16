@@ -14,11 +14,11 @@
 @section('content')
 <x-container columns="2">
         @if ($snipe_component->deleted_at != '')
-            <div class="col-md-12">
+            <x-page-column>
                 <x-callout type="warning" icon="warning" live="assertive">
                     {{ trans('general.component_deleted_warning') }}
                 </x-callout>
-            </div>
+            </x-page-column>
         @endif
 
         <x-page-column class="col-md-9 main-panel">
@@ -53,7 +53,7 @@
                             <x-slot:bulkactions>
                                 <x-table.bulk-actions
                                     name="componentCheckedOut"
-                                    :action_route="route('components.bulkcheckin.selected')"
+                                    :action_route="route('components.bulkcheckin.show')"
                                     model_name="components_asset"
                                     :actions="[
                                         'checkin' => ['label' => trans('general.checkin')],
@@ -130,7 +130,7 @@
                                 @php
                                     $lastOrder = $snipe_component->lastOrderDefaults();
                                     $adjustDisabledReason = $snipe_component->archived
-                                        ? trans('admin/components/general.archived_component')
+                                        ? trans('general.archived_item_label', ['item_type' => trans('general.component')])
                                         : null;
                                 @endphp
                                 <button type="button"
