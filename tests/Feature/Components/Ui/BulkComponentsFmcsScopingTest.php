@@ -114,7 +114,7 @@ class BulkComponentsFmcsScopingTest extends TestCase
         $pivot = $this->pivotId($foreignComponent, Asset::factory()->create());
 
         $this->actingAs($actor)
-            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivot]])
+            ->post(route('components.bulkcheckin.store'), ['ids' => [$pivot]])
             ->assertRedirect();
 
         $this->assertDatabaseHas('components_assets', ['id' => $pivot]);
@@ -186,7 +186,7 @@ class BulkComponentsFmcsScopingTest extends TestCase
         $pivot = $this->pivotId($floater, Asset::factory()->create());
 
         $this->actingAs($actor)
-            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivot]])
+            ->post(route('components.bulkcheckin.store'), ['ids' => [$pivot]])
             ->assertRedirect()
             ->assertSessionHas('success');
 

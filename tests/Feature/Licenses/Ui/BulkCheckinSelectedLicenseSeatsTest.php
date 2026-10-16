@@ -3,6 +3,7 @@
 namespace Tests\Feature\Licenses\Ui;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Company;
 use App\Models\License;
@@ -19,8 +20,43 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat = LicenseSeat::factory()->assignedToUser()->create();
 
         $this->actingAs(User::factory()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]])
             ->assertForbidden();
+    }
+
+    public function test_requires_permission_on_show()
+    {
+        $seat = LicenseSeat::factory()->assignedToUser()->create();
+
+        $this->actingAs(User::factory()->create())
+            ->post(route('licenses.bulkcheckin.show'), ['ids' => [$seat->id]])
+            ->assertForbidden();
+    }
+
+    public function test_show_renders_interstitial_with_selected_seats()
+    {
+        $license = License::factory()->create(['seats' => 3]);
+        $seat1 = LicenseSeat::factory()->assignedToUser()->create(['license_id' => $license->id]);
+        $seat2 = LicenseSeat::factory()->assignedToUser()->create(['license_id' => $license->id]);
+
+        $this->actingAs(User::factory()->checkinLicenses()->create())
+            ->post(route('licenses.bulkcheckin.show'), ['ids' => [$seat1->id, $seat2->id]])
+            ->assertOk()
+            ->assertViewIs('licenses.bulk-checkin')
+            ->assertViewHas('ids', [$seat1->id, $seat2->id]);
+
+        // Nothing is actually checked in until the interstitial posts
+        // to .store.
+        $this->assertNotNull($seat1->fresh()->assigned_to);
+        $this->assertNotNull($seat2->fresh()->assigned_to);
+    }
+
+    public function test_show_warns_when_no_rows_selected()
+    {
+        $this->actingAs(User::factory()->checkinLicenses()->create())
+            ->post(route('licenses.bulkcheckin.show'), ['ids' => []])
+            ->assertRedirect()
+            ->assertSessionHas('warning', trans('admin/licenses/general.bulk.checkin_selected.no_seats_selected'));
     }
 
     public function test_can_bulk_checkin_seats_assigned_to_users()
@@ -34,7 +70,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat2 = LicenseSeat::factory()->assignedToUser($user2)->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat1->id, $seat2->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat1->id, $seat2->id]])
             ->assertRedirect()
             ->assertSessionHas('success');
 
@@ -53,7 +89,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat = LicenseSeat::factory()->assignedToAsset($asset)->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]])
             ->assertRedirect()
             ->assertSessionHas('success');
 
@@ -65,7 +101,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
     public function test_empty_ids_returns_warning()
     {
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => []])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => []])
             ->assertRedirect()
             ->assertSessionHas('warning', trans('admin/licenses/general.bulk.checkin_selected.no_seats_selected'));
     }
@@ -73,7 +109,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
     public function test_missing_ids_returns_warning()
     {
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), [])
+            ->post(route('licenses.bulkcheckin.store'), [])
             ->assertRedirect()
             ->assertSessionHas('warning', trans('admin/licenses/general.bulk.checkin_selected.no_seats_selected'));
     }
@@ -86,9 +122,9 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $unassignedSeat = LicenseSeat::factory()->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$unassignedSeat->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$unassignedSeat->id]])
             ->assertRedirect()
-            ->assertSessionHas('success');
+            ->assertSessionHas('warning');
 
         $this->assertNull($unassignedSeat->fresh()->assigned_to);
         $this->assertNull($unassignedSeat->fresh()->asset_id);
@@ -103,7 +139,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat = LicenseSeat::factory()->assignedToUser($user)->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]])
             ->assertRedirect()
             ->assertSessionHas('success');
 
@@ -117,7 +153,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat = LicenseSeat::factory()->assignedToUser($user)->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]])
             ->assertRedirect()
             ->assertSessionHas('success');
 
@@ -135,7 +171,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat2 = LicenseSeat::factory()->assignedToUser($user2)->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat1->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat1->id]])
             ->assertRedirect();
 
         $this->assertNull($seat1->fresh()->assigned_to);
@@ -153,7 +189,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat2 = LicenseSeat::factory()->assignedToUser($user2)->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat1->id, $seat2->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat1->id, $seat2->id]])
             ->assertSessionHas('success', trans_choice('admin/licenses/general.bulk.checkin_selected.success', 2, ['count' => 2]));
     }
 
@@ -166,7 +202,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat = LicenseSeat::factory()->assignedToUser($targetUser)->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat->id]]);
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]]);
 
         Event::assertDispatched(CheckoutableCheckedIn::class, function ($event) use ($targetUser) {
             return $event->checkedOutTo->id === $targetUser->id;
@@ -182,11 +218,39 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $seat = LicenseSeat::factory()->assignedToAsset($targetAsset)->create(['license_id' => $license->id]);
 
         $this->actingAs(User::factory()->checkinLicenses()->create())
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat->id]]);
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]]);
 
         Event::assertDispatched(CheckoutableCheckedIn::class, function ($event) use ($targetAsset) {
             return $event->checkedOutTo->id === $targetAsset->id;
         });
+    }
+
+    public function test_shared_note_lands_on_every_action_log()
+    {
+        // Regression test: the whole reason for the interstitial is to
+        // capture a shared note. The posted `note` must thread into
+        // every per-row CheckoutableCheckedIn event so each resulting
+        // action_log row carries it.
+        $license = License::factory()->create(['seats' => 3]);
+        $seat1 = LicenseSeat::factory()->assignedToUser()->create(['license_id' => $license->id]);
+        $seat2 = LicenseSeat::factory()->assignedToUser()->create(['license_id' => $license->id]);
+
+        $this->actingAs(User::factory()->checkinLicenses()->create())
+            ->post(route('licenses.bulkcheckin.store'), [
+                'ids' => [$seat1->id, $seat2->id],
+                'note' => 'End-of-lease returns, batch 2026-Q4',
+            ])
+            ->assertRedirect();
+
+        $logs = Actionlog::where('item_type', License::class)
+            ->where('item_id', $license->id)
+            ->where('action_type', 'checkin from')
+            ->get();
+
+        $this->assertCount(2, $logs);
+        foreach ($logs as $log) {
+            $this->assertSame('End-of-lease returns, batch 2026-Q4', $log->note);
+        }
     }
 
     public function test_fmcs_prevents_checkin_of_seat_from_other_company()
@@ -203,7 +267,7 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $this->settings->enableMultipleFullCompanySupport();
 
         $this->actingAs($actor)
-            ->post(route('licenses.bulkcheckin.selected'), ['ids' => [$seat->id]])
+            ->post(route('licenses.bulkcheckin.store'), ['ids' => [$seat->id]])
             ->assertRedirect();
 
         $this->assertNotNull($seat->fresh()->assigned_to);

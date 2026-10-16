@@ -51,7 +51,7 @@ class AccessoryArchiveValidationTest extends TestCase
 
         $this->assertFalse($accessory->save());
         $this->assertSame(
-            trans('admin/accessories/message.archived_blocked_by_checkouts'),
+            trans('general.archived_blocked_by_checkouts', ['item_type' => trans('general.accessory')]),
             $accessory->getErrors()->get('archived')[0],
         );
     }

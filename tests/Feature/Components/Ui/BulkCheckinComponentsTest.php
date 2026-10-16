@@ -3,6 +3,7 @@
 namespace Tests\Feature\Components\Ui;
 
 use App\Events\CheckoutableCheckedIn;
+use App\Models\Actionlog;
 use App\Models\Asset;
 use App\Models\Component;
 use App\Models\ComponentAssignment;
@@ -26,20 +27,57 @@ class BulkCheckinComponentsTest extends TestCase
             ->value('id');
     }
 
-    public function test_requires_checkin_permission(): void
+    public function test_requires_checkin_permission_on_show(): void
     {
         $component = Component::factory()->create(['qty' => 5]);
         $asset = Asset::factory()->create();
         $pivotId = $this->attachCheckout($component, $asset);
 
         $this->actingAs(User::factory()->viewComponents()->create())
-            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivotId]])
+            ->post(route('components.bulkcheckin.show'), ['ids' => [$pivotId]])
             ->assertForbidden();
 
         $this->assertDatabaseHas('components_assets', ['id' => $pivotId]);
     }
 
-    public function test_removes_pivot_rows_and_fires_event(): void
+    public function test_requires_checkin_permission_on_store(): void
+    {
+        $component = Component::factory()->create(['qty' => 5]);
+        $asset = Asset::factory()->create();
+        $pivotId = $this->attachCheckout($component, $asset);
+
+        $this->actingAs(User::factory()->viewComponents()->create())
+            ->post(route('components.bulkcheckin.store'), ['ids' => [$pivotId]])
+            ->assertForbidden();
+
+        $this->assertDatabaseHas('components_assets', ['id' => $pivotId]);
+    }
+
+    public function test_show_renders_interstitial_with_selected_rows(): void
+    {
+        $component = Component::factory()->create(['qty' => 10]);
+        $pivotA = $this->attachCheckout($component, Asset::factory()->create(), 2);
+        $pivotB = $this->attachCheckout($component, Asset::factory()->create(), 3);
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('components.bulkcheckin.show'), ['ids' => [$pivotA, $pivotB]])
+            ->assertOk()
+            ->assertViewIs('components.bulk-checkin')
+            ->assertViewHas('ids', [$pivotA, $pivotB]);
+
+        $this->assertDatabaseHas('components_assets', ['id' => $pivotA]);
+        $this->assertDatabaseHas('components_assets', ['id' => $pivotB]);
+    }
+
+    public function test_show_warns_when_no_rows_selected(): void
+    {
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('components.bulkcheckin.show'), ['ids' => []])
+            ->assertRedirect()
+            ->assertSessionHas('warning');
+    }
+
+    public function test_store_removes_pivot_rows_and_fires_event(): void
     {
         Event::fake([CheckoutableCheckedIn::class]);
 
@@ -51,7 +89,7 @@ class BulkCheckinComponentsTest extends TestCase
         $pivotB = $this->attachCheckout($component, $assetB, 3);
 
         $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivotA, $pivotB]])
+            ->post(route('components.bulkcheckin.store'), ['ids' => [$pivotA, $pivotB]])
             ->assertRedirect()
             ->assertSessionHas('success');
 
@@ -65,10 +103,10 @@ class BulkCheckinComponentsTest extends TestCase
         Event::assertDispatchedTimes(CheckoutableCheckedIn::class, 2);
     }
 
-    public function test_warns_when_no_rows_selected(): void
+    public function test_store_warns_when_no_rows_selected(): void
     {
         $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('components.bulkcheckin.selected'), ['ids' => []])
+            ->post(route('components.bulkcheckin.store'), ['ids' => []])
             ->assertRedirect()
             ->assertSessionHas('warning');
     }
@@ -87,7 +125,7 @@ class BulkCheckinComponentsTest extends TestCase
         $pivotC = $this->attachCheckout($component, Asset::factory()->create(), 7);
 
         $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivotA, $pivotB, $pivotC]])
+            ->post(route('components.bulkcheckin.store'), ['ids' => [$pivotA, $pivotB, $pivotC]])
             ->assertRedirect()
             ->assertSessionHas('success', trans_choice(
                 'admin/components/message.bulk.checkin_selected.success',
@@ -104,13 +142,41 @@ class BulkCheckinComponentsTest extends TestCase
         $pivot = $this->attachCheckout($component, Asset::factory()->create(), 1);
 
         $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivot]])
+            ->post(route('components.bulkcheckin.store'), ['ids' => [$pivot]])
             ->assertRedirect()
             ->assertSessionHas('success', trans_choice(
                 'admin/components/message.bulk.checkin_selected.success',
                 1,
                 ['count' => 1, 'unit_count' => 1],
             ));
+    }
+
+    public function test_shared_note_lands_on_every_action_log(): void
+    {
+        // Regression test: the whole reason for the interstitial is to
+        // capture a shared note. The posted `note` must thread into
+        // every per-row CheckoutableCheckedIn event so each resulting
+        // action_log row carries it.
+        $component = Component::factory()->create(['qty' => 10]);
+        $pivotA = $this->attachCheckout($component, Asset::factory()->create(), 1);
+        $pivotB = $this->attachCheckout($component, Asset::factory()->create(), 1);
+
+        $this->actingAs(User::factory()->superuser()->create())
+            ->post(route('components.bulkcheckin.store'), [
+                'ids' => [$pivotA, $pivotB],
+                'note' => 'End-of-lease returns, batch 2026-Q4',
+            ])
+            ->assertRedirect();
+
+        $logs = Actionlog::where('item_type', Component::class)
+            ->where('item_id', $component->id)
+            ->where('action_type', 'checkin from')
+            ->get();
+
+        $this->assertCount(2, $logs);
+        foreach ($logs as $log) {
+            $this->assertSame('End-of-lease returns, batch 2026-Q4', $log->note);
+        }
     }
 
     public function test_unknown_pivot_ids_are_silently_skipped(): void
@@ -125,7 +191,7 @@ class BulkCheckinComponentsTest extends TestCase
         $pivotId = $this->attachCheckout($component, $asset);
 
         $this->actingAs(User::factory()->superuser()->create())
-            ->post(route('components.bulkcheckin.selected'), ['ids' => [$pivotId, 999999]])
+            ->post(route('components.bulkcheckin.store'), ['ids' => [$pivotId, 999999]])
             ->assertRedirect()
             ->assertSessionHas('success');
 
