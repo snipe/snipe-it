@@ -81,7 +81,7 @@ class AccessoriesController extends Controller
             ->with('category', 'company', 'manufacturer', 'checkouts', 'location', 'defaultSupplier', 'adminuser', 'orderItems.order.supplier')
             ->withCount('checkouts as checkouts_count');
 
-        // Archived / soft-deleted scope. 
+        // Archived / soft-deleted scope.
         switch ($request->input('status')) {
             case 'Archived':
                 $accessories->archived();
