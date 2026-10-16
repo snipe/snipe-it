@@ -34,6 +34,11 @@ class AccessoryCheckoutController extends Controller
 
         $this->authorize('checkout', $accessory);
 
+        if ($accessory->archived) {
+            return redirect()->route('accessories.index')
+                ->with('error', trans('general.cannot_checkout_archived', ['item_type' => trans('general.accessory')]));
+        }
+
         if ($accessory->category) {
             // Make sure there is at least one available to checkout
             if ($accessory->numRemaining() <= 0) {
@@ -77,6 +82,11 @@ class AccessoryCheckoutController extends Controller
     {
 
         $this->authorize('checkout', $accessory);
+
+        if ($accessory->archived) {
+            return redirect()->route('accessories.index')
+                ->with('error', trans('general.cannot_checkout_archived', ['item_type' => trans('general.accessory')]));
+        }
 
         $target = $this->determineCheckoutTarget();
 
