@@ -143,9 +143,10 @@ class BulkAccessoriesController extends Controller
             $accessory->fill($updateData);
             if ($accessory->save()) {
                 $updated++;
-            } else {
-                $failed_rows[] = $accessory->name.': '.$accessory->getErrors()->first();
+
+                continue;
             }
+            $failed_rows[] = $accessory->name.': '.$accessory->getErrors()->first();
         }
 
         $failed = count($failed_rows);

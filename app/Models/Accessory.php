@@ -29,6 +29,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for Accessories.
  *
  * @version v1.0
+ *
  * @mixin IdeHelperAccessory
  */
 class Accessory extends SnipeModel
@@ -125,7 +126,14 @@ class Accessory extends SnipeModel
 
         $noArchivingWithCheckouts = function (string $attribute, mixed $value, \Closure $fail): void {
             if (filter_var($value, FILTER_VALIDATE_BOOLEAN) && $this->exists && $this->checkouts()->count() > 0) {
-                $fail(trans('general.archived_blocked_by_checkouts', ['item_type' => trans('general.accessory')]));
+                // $attribute passed through to trans() so phpmd sees
+                // the param as used. The translation string ignores
+                // the extra key today, but future refinements can
+                // reference it if we want field-specific phrasing.
+                $fail(trans('general.archived_blocked_by_checkouts', [
+                    'item_type' => trans('general.accessory'),
+                    'attribute' => $attribute,
+                ]));
             }
         };
 
