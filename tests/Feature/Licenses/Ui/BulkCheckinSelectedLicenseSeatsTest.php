@@ -291,18 +291,20 @@ class BulkCheckinSelectedLicenseSeatsTest extends TestCase implements TestsPermi
         $response = $this->actingAs($actor)
             ->post(route('licenses.bulkcheckin.show'), ['ids' => [$seat->id]]);
 
-        if ($response->status() === 200) {
-            // If the interstitial renders at all, the foreign seat must
-            // be absent from the collection or the license column null.
-            $seats = $response->viewData('seats');
-            $visible = $seats->filter(fn ($row) => $row->license !== null);
-            $this->assertFalse(
-                $visible->contains('id', $seat->id),
-                'bulkCheckinShow must not expose cross-tenant seats with their license visible',
-            );
-        } else {
+        if ($response->status() !== 200) {
             $response->assertRedirect()->assertSessionHas('warning');
+
+            return;
         }
+
+        // If the interstitial renders at all, the foreign seat must
+        // be absent from the collection or the license column null.
+        $seats = $response->viewData('seats');
+        $visible = $seats->filter(fn ($row) => $row->license !== null);
+        $this->assertFalse(
+            $visible->contains('id', $seat->id),
+            'bulkCheckinShow must not expose cross-tenant seats with their license visible',
+        );
     }
 
     public function test_floater_actor_can_bulk_checkin_null_company_license_seat()

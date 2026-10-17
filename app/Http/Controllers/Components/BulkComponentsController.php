@@ -153,9 +153,10 @@ class BulkComponentsController extends Controller
             $component->fill($updateData);
             if ($component->save()) {
                 $updated++;
-            } else {
-                $failed_rows[] = $component->name.': '.$component->getErrors()->first();
+
+                continue;
             }
+            $failed_rows[] = $component->name.': '.$component->getErrors()->first();
         }
 
         $failed = count($failed_rows);
