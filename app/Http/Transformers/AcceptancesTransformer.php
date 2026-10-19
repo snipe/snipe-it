@@ -153,13 +153,11 @@ class AcceptancesTransformer
      */
     private static function resolveCategory($item): ?array
     {
-        if ($item instanceof Asset) {
-            $category = $item->model?->category;
-        } elseif ($item instanceof LicenseSeat) {
-            $category = $item->license?->category;
-        } else {
-            $category = $item->category ?? null;
-        }
+        $category = match (true) {
+            $item instanceof Asset => $item->model?->category,
+            $item instanceof LicenseSeat => $item->license?->category,
+            default => $item->category ?? null,
+        };
 
         return $category ? [
             'id' => (int) $category->id,
