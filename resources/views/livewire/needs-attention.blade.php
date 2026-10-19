@@ -37,25 +37,15 @@
                     </a>
                 </li>
             @endcan
-            @if (Gate::allows('view', \App\Models\Asset::class)
-                 || Gate::allows('view', \App\Models\Accessory::class)
-                 || Gate::allows('view', \App\Models\Consumable::class)
-                 || Gate::allows('view', \App\Models\Component::class)
-                 || Gate::allows('view', \App\Models\License::class))
-                {{-- Unaccepted acceptances span every checkoutable
-                     type. Hide the row entirely when the caller
-                     can't view any of them, since NeedsAttention's
-                     mount() already zeros the count for them
-                     anyway. Prevents an "Unaccepted acceptances 0"
-                     line showing to a users-only viewer. --}}
+                @can('canCheckoutAtLeastOneItemType')
                 <li class="list-group-item">
-                    <a href="{{ route('reports/unaccepted_assets') }}">
+                    <a href="{{ route('unaccepted-acceptances.index') }}">
                         <x-icon type="signature" class="fa-fw"/>
                         <span class="dashboard-attention-label">{{ trans('general.dashboard_unaccepted_assets') }}</span>
                         <span class="badge dashboard-attention-count">{{ number_format($pendingAcceptancesCount) }}</span>
                     </a>
                 </li>
-            @endif
+                @endcan
             @can('canCheckoutAtLeastOneItemType')
                 <li class="list-group-item">
                     <a href="{{ route('requests.index') }}">
