@@ -152,18 +152,21 @@ class IntuneAdapterTest extends TestCase
 
     public function test_scope_tag_filter_resolves_names_to_ids_and_sends_odata_filter()
     {
+        // Scope tag flow runs on /beta/. The roleScopeTags resource
+        // only lives there (v1.0 400s), and roleScopeTagIds is only
+        // filterable on the beta managedDevices surface.
         $adapter = $this->configuredAdapter(scopeTagFilter: 'Marketing, 7');
 
         Http::fake([
             '*/oauth2/v2.0/token' => Http::response(['access_token' => 'stub-bearer', 'expires_in' => 3600]),
-            '*/v1.0/deviceManagement/roleScopeTags*' => Http::response([
+            '*/beta/deviceManagement/roleScopeTags*' => Http::response([
                 'value' => [
                     ['id' => '3', 'displayName' => 'Marketing'],
                     ['id' => '7', 'displayName' => 'Engineering'],
                     ['id' => '11', 'displayName' => 'Finance'],
                 ],
             ]),
-            '*/v1.0/deviceManagement/managedDevices*' => Http::response([
+            '*/beta/deviceManagement/managedDevices*' => Http::response([
                 'value' => [
                     $this->intuneDevice(id: 'guid-marketing', name: 'host-marketing'),
                 ],
@@ -173,7 +176,7 @@ class IntuneAdapterTest extends TestCase
         iterator_to_array($adapter->pull());
 
         Http::assertSent(function ($request) {
-            if (! str_contains($request->url(), '/v1.0/deviceManagement/managedDevices')) {
+            if (! str_contains($request->url(), '/beta/deviceManagement/managedDevices')) {
                 return false;
             }
             $url = urldecode($request->url());
@@ -186,6 +189,8 @@ class IntuneAdapterTest extends TestCase
 
     public function test_blank_scope_tag_filter_sends_no_odata_filter()
     {
+        // No filter means the unfiltered pull stays on /v1.0/. The
+        // beta fall-over only kicks in for the scope-tag flow.
         $adapter = $this->configuredAdapter(scopeTagFilter: '');
 
         Http::fake([
@@ -196,9 +201,10 @@ class IntuneAdapterTest extends TestCase
         iterator_to_array($adapter->pull());
 
         // No roleScopeTags call fired, no $filter param on the devices call.
-        Http::assertNotSent(fn ($request) => str_contains($request->url(), '/v1.0/deviceManagement/roleScopeTags'));
+        Http::assertNotSent(fn ($request) => str_contains($request->url(), 'deviceManagement/roleScopeTags'));
         Http::assertSent(fn ($request) => str_contains($request->url(), '/v1.0/deviceManagement/managedDevices')
             && ! str_contains(urldecode($request->url()), '$filter'));
+        Http::assertNotSent(fn ($request) => str_contains($request->url(), '/beta/deviceManagement/managedDevices'));
     }
 
     public function test_unresolved_scope_tag_entry_is_dropped()
@@ -209,16 +215,16 @@ class IntuneAdapterTest extends TestCase
 
         Http::fake([
             '*/oauth2/v2.0/token' => Http::response(['access_token' => 'stub-bearer', 'expires_in' => 3600]),
-            '*/v1.0/deviceManagement/roleScopeTags*' => Http::response([
+            '*/beta/deviceManagement/roleScopeTags*' => Http::response([
                 'value' => [['id' => '3', 'displayName' => 'Marketing']],
             ]),
-            '*/v1.0/deviceManagement/managedDevices*' => Http::response(['value' => []]),
+            '*/beta/deviceManagement/managedDevices*' => Http::response(['value' => []]),
         ]);
 
         iterator_to_array($adapter->pull());
 
         Http::assertSent(function ($request) {
-            if (! str_contains($request->url(), '/v1.0/deviceManagement/managedDevices')) {
+            if (! str_contains($request->url(), '/beta/deviceManagement/managedDevices')) {
                 return false;
             }
             $url = urldecode($request->url());

@@ -21,6 +21,15 @@ use Illuminate\Support\Facades\Http;
  * `loginBaseUrl` constructor args let the adapter derive the login
  * host from the Graph host so the settings-page URL field controls
  * both endpoints.
+ *
+ * Graph API version: the unfiltered device pull uses `/v1.0/`, the
+ * stable surface. Two call sites fall over to `/beta/` because the
+ * stable version does not expose the data they need: the
+ * composed-notes push on `updateManagedDevice()` (notes is a
+ * beta-only writable field), and the entire scope-tag filter flow
+ * (roleScopeTags resource and the roleScopeTagIds filter on
+ * managedDevices). Microsoft does not guarantee beta stability, so a
+ * Graph side change can break those paths without warning.
  */
 class IntuneClient
 {
@@ -53,7 +62,14 @@ class IntuneClient
     public function managedDevices(?array $scopeTagIds = null): iterable
     {
         $graphOrigin = $this->origin($this->graphBaseUrl);
-        $url = rtrim($this->graphBaseUrl, '/').'/v1.0/deviceManagement/managedDevices';
+
+        // roleScopeTagIds filtering lives on the beta surface. On
+        // /v1.0/ the field isn't exposed, so a $filter against it
+        // 400s. Fall over to /beta/ only when a filter is in use so
+        // tenants that don't touch scope tags stay on the stable
+        // surface.
+        $apiVersion = (is_array($scopeTagIds) && $scopeTagIds !== []) ? 'beta' : 'v1.0';
+        $url = rtrim($this->graphBaseUrl, '/').'/'.$apiVersion.'/deviceManagement/managedDevices';
 
         $query = [];
         if (is_array($scopeTagIds) && $scopeTagIds !== []) {
@@ -91,7 +107,10 @@ class IntuneClient
     public function roleScopeTags(): array
     {
         $graphOrigin = $this->origin($this->graphBaseUrl);
-        $url = rtrim($this->graphBaseUrl, '/').'/v1.0/deviceManagement/roleScopeTags';
+        // The roleScopeTag resource is only exposed on /beta/. The
+        // stable v1.0 surface returns a 400 "Resource not found for
+        // the segment 'roleScopeTags'" so there is no fallback.
+        $url = rtrim($this->graphBaseUrl, '/').'/beta/deviceManagement/roleScopeTags';
 
         $out = [];
         do {
