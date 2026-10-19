@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Reporting;
 
-use App\Mail\CheckoutAssetMail;
+use App\Mail\UnacceptedAssetReminderMail;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
@@ -80,7 +80,7 @@ class SentReminderAuthorizationTest extends TestCase
             ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('success');
 
-        Mail::assertSent(CheckoutAssetMail::class);
+        Mail::assertSent(UnacceptedAssetReminderMail::class);
     }
 
     public function test_checkout_user_cannot_send_reminder_for_another_company()
@@ -154,6 +154,6 @@ class SentReminderAuthorizationTest extends TestCase
             ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('success');
 
-        Mail::assertSent(CheckoutAssetMail::class);
+        Mail::assertSent(UnacceptedAssetReminderMail::class);
     }
 }

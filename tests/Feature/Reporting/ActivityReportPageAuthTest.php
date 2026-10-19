@@ -80,5 +80,4 @@ class ActivityReportPageAuthTest extends TestCase
             ->assertOk()
             ->assertSee(route('reports.index').'"', false);
     }
-
 }

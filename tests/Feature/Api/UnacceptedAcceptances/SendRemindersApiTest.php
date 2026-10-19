@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Api\UnacceptedAcceptances;
 
-use App\Mail\CheckoutAssetMail;
+use App\Mail\UnacceptedAssetReminderMail;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
@@ -80,9 +80,11 @@ class SendRemindersApiTest extends TestCase
             ->assertOk()
             ->assertJsonPath('payload.mode', 'ids')
             ->assertJsonPath('payload.sent', 1)
-            ->assertJsonPath('payload.skipped', 0);
+            ->assertJsonPath('payload.skipped.not_found', 0)
+            ->assertJsonPath('payload.skipped.fmcs', 0)
+            ->assertJsonPath('payload.skipped.no_email', 0);
 
-        Mail::assertSent(CheckoutAssetMail::class);
+        Mail::assertSent(UnacceptedAssetReminderMail::class);
         Artisan::shouldNotHaveReceived('call');
     }
 
@@ -102,8 +104,7 @@ class SendRemindersApiTest extends TestCase
             ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => [$acceptance->id]])
             ->assertOk()
             ->assertJsonPath('payload.sent', 0)
-            ->assertJsonPath('payload.skipped', 1)
-            ->assertJsonPath('payload.skipped_breakdown.not_found', 1);
+            ->assertJsonPath('payload.skipped.not_found', 1);
 
         Mail::assertNothingSent();
     }
@@ -125,7 +126,7 @@ class SendRemindersApiTest extends TestCase
             ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => [$acceptance->id]])
             ->assertOk()
             ->assertJsonPath('payload.sent', 0)
-            ->assertJsonPath('payload.skipped_breakdown.no_email', 1);
+            ->assertJsonPath('payload.skipped.no_email', 1);
 
         Mail::assertNothingSent();
     }
@@ -155,7 +156,7 @@ class SendRemindersApiTest extends TestCase
             ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => [$acceptance->id]])
             ->assertOk()
             ->assertJsonPath('payload.sent', 0)
-            ->assertJsonPath('payload.skipped_breakdown.fmcs', 1);
+            ->assertJsonPath('payload.skipped.fmcs', 1);
 
         Mail::assertNothingSent();
     }
@@ -186,10 +187,9 @@ class SendRemindersApiTest extends TestCase
             ])
             ->assertOk()
             ->assertJsonPath('payload.sent', 1)
-            ->assertJsonPath('payload.skipped', 2)
-            ->assertJsonPath('payload.skipped_breakdown.no_email', 1)
-            ->assertJsonPath('payload.skipped_breakdown.not_found', 1);
+            ->assertJsonPath('payload.skipped.no_email', 1)
+            ->assertJsonPath('payload.skipped.not_found', 1);
 
-        Mail::assertSent(CheckoutAssetMail::class, 1);
+        Mail::assertSent(UnacceptedAssetReminderMail::class, 1);
     }
 }

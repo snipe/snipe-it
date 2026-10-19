@@ -40,7 +40,7 @@ class AcceptanceReportFmcsScopeTest extends TestCase
         [$assetA] = $this->seedPendingAcceptanceOwnedBy($companyA);
         [$assetB] = $this->seedPendingAcceptanceOwnedBy($companyB);
 
-        $callerA = User::factory()->checkoutAccessories()->forCompany($companyA)->create();
+        $callerA = User::factory()->viewAssets()->checkoutAccessories()->forCompany($companyA)->create();
 
         $response = $this->actingAsForApi($callerA)
             ->getJson(route('api.unaccepted-acceptances.index'))
@@ -48,8 +48,8 @@ class AcceptanceReportFmcsScopeTest extends TestCase
 
         $this->assertSame(1, $response->json('total'));
         $itemNames = array_map(fn ($row) => $row['item']['name'], $response->json('rows'));
-        $this->assertContains($assetA->name, $itemNames);
-        $this->assertNotContains($assetB->name, $itemNames);
+        $this->assertContains($assetA->display_name, $itemNames);
+        $this->assertNotContains($assetB->display_name, $itemNames);
     }
 
     public function test_api_shows_all_pending_acceptances_to_a_superuser()
@@ -68,8 +68,8 @@ class AcceptanceReportFmcsScopeTest extends TestCase
 
         $this->assertSame(2, $response->json('total'));
         $itemNames = array_map(fn ($row) => $row['item']['name'], $response->json('rows'));
-        $this->assertContains($assetA->name, $itemNames);
-        $this->assertContains($assetB->name, $itemNames);
+        $this->assertContains($assetA->display_name, $itemNames);
+        $this->assertContains($assetB->display_name, $itemNames);
     }
 
     public function test_fmcs_disabled_leaves_api_unscoped()
@@ -81,7 +81,7 @@ class AcceptanceReportFmcsScopeTest extends TestCase
         [$assetA] = $this->seedPendingAcceptanceOwnedBy($companyA);
         [$assetB] = $this->seedPendingAcceptanceOwnedBy($companyB);
 
-        $callerA = User::factory()->checkoutAccessories()->forCompany($companyA)->create();
+        $callerA = User::factory()->viewAssets()->checkoutAccessories()->forCompany($companyA)->create();
 
         $response = $this->actingAsForApi($callerA)
             ->getJson(route('api.unaccepted-acceptances.index'))
@@ -89,7 +89,7 @@ class AcceptanceReportFmcsScopeTest extends TestCase
 
         $this->assertSame(2, $response->json('total'));
         $itemNames = array_map(fn ($row) => $row['item']['name'], $response->json('rows'));
-        $this->assertContains($assetA->name, $itemNames);
-        $this->assertContains($assetB->name, $itemNames);
+        $this->assertContains($assetA->display_name, $itemNames);
+        $this->assertContains($assetB->display_name, $itemNames);
     }
 }
