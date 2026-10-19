@@ -1710,6 +1710,30 @@
                 @endif
             }
         },
+
+        btnShowArchived: {
+            text: '{{ (request()->input('status') == "Archived") ? trans('general.show_current') : trans('general.show_archived') }}',
+            icon: '{{ \App\Helpers\IconHelper::icon('archived') }}',
+            event () {
+                window.location.href = '{{ (request()->input('status') == "Archived") ? route('consumables.index') : route('consumables.index', ['status' => 'Archived']) }}';
+            },
+            attributes: {
+                class: '{{ (request()->input('status') == "Archived") ? 'btn-selected' : '' }}',
+                title: '{{ (request()->input('status') == "Archived") ? trans('general.show_current') : trans('general.show_archived') }}',
+            }
+        },
+
+        btnShowDeleted: {
+            text: '{{ (request()->input('status') == "Deleted") ? trans('general.show_current') : trans('general.show_deleted') }}',
+            icon: 'fa-solid fa-trash',
+            event () {
+                window.location.href = '{{ (request()->input('status') == "Deleted") ? route('consumables.index') : route('consumables.index', ['status' => 'Deleted']) }}';
+            },
+            attributes: {
+                class: '{{ (request()->input('status') == "Deleted") ? 'btn-selected' : '' }}',
+                title: '{{ (request()->input('status') == "Deleted") ? trans('general.show_current') : trans('general.show_deleted') }}',
+            }
+        },
     });
     @endcan
 
@@ -3721,6 +3745,26 @@
 
         actions += '</nobr>';
         return actions;
+    };
+
+    // Actions column for the Assigned tab on the consumable show page.
+    // The Assigned tab only lists outstanding rows, so when the consume
+    // action isn't available the row shouldn't be here at all. Fail
+    // closed to an empty cell.
+    window.consumablesConsumeActionFormatter = function (value, row) {
+        if (!row.available_actions || !row.available_actions.consume) {
+            return '';
+        }
+        return '<form style="display:inline;" method="POST"'
+            + ' action="{{ config('app.url') }}/consumables/' + row.consumable_id + '/consume/' + row.id + '"'
+            + ' accept-charset="utf-8">'
+            + '<input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '">'
+            + '<button type="submit" class="btn btn-sm bg-purple hidden-print"'
+            + ' data-tooltip="true" title="{{ trans('admin/consumables/general.mark_consumed') }}">'
+            + '<x-icon type="checkmark" class="fa-fw" />'
+            + '<span class="sr-only">{{ trans('admin/consumables/general.mark_consumed') }}</span>'
+            + '</button>'
+            + '</form>';
     };
 
     // Shared markup for the adjust-quantity plus-minus button. Used by
