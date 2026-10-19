@@ -52,6 +52,12 @@ class BreadcrumbsServiceProvider extends ServiceProvider
                 ->push(trans('general.'.strtolower(e($statusType))), route('hardware.index', ['status_type' => $statusType]))
             );
 
+        } elseif (request()->is('hardware*') && request()->boolean('past_eol')) {
+            Breadcrumbs::for('hardware.index', fn (Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.assets'), route('hardware.index'))
+                ->push(trans('general.past_eol'), route('hardware.index', ['past_eol' => 1]))
+            );
+
         } else {
             Breadcrumbs::for('hardware.index', fn (Trail $trail) => $trail->parent('home', route('home'))
                 ->push(trans('general.assets'), route('hardware.index'))
@@ -618,6 +624,11 @@ class BreadcrumbsServiceProvider extends ServiceProvider
             Breadcrumbs::for('users.index', fn (Trail $trail) => $trail->parent('home', route('home'))
                 ->push(trans('general.users'), route('users.index'))
                 ->push(trans('general.login_enabled'), route('users.index'))
+            );
+        } elseif ((request()->is('users*')) && request()->filled('end_date_within')) {
+            Breadcrumbs::for('users.index', fn (Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.users'), route('users.index'))
+                ->push(trans('general.offboarding_soon'), route('users.index'))
             );
         } else {
             Breadcrumbs::for('users.index', fn (Trail $trail) => $trail->parent('home', route('home'))

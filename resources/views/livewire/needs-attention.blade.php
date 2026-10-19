@@ -18,7 +18,7 @@
             @can('audit', \App\Models\Asset::class)
                 <li class="list-group-item">
                     <a href="{{ route('assets.audit.due') }}">
-                        <x-icon type="asset" class="fa-fw"/>
+                        <x-icon type="audit" class="fa-fw"/>
                         <span class="dashboard-attention-label">{{ trans('general.dashboard_overdue_audits') }}</span>
                         <span class="badge dashboard-attention-count">{{ number_format($overdueAudits) }}</span>
                     </a>
@@ -26,8 +26,12 @@
             @endcan
             @can('checkin', \App\Models\Asset::class)
                 <li class="list-group-item">
-                    <a href="{{ route('assets.checkins.due') }}">
-                        <x-icon type="asset" class="fa-fw"/>
+                    {{-- #overdue hash preselects the "overdue" tab via
+                         snipeit.js's deep-link handler, so the landing
+                         view matches the count semantics. Default tab
+                         is "due" (upcoming), not overdue. --}}
+                    <a href="{{ route('assets.checkins.due').'#overdue' }}">
+                        <x-icon type="due" class="fa-fw"/>
                         <span class="dashboard-attention-label">{{ trans('general.dashboard_overdue_checkins') }}</span>
                         <span class="badge dashboard-attention-count">{{ number_format($overdueCheckins) }}</span>
                     </a>
@@ -55,7 +59,7 @@
             @can('canCheckoutAtLeastOneItemType')
                 <li class="list-group-item">
                     <a href="{{ route('requests.index') }}">
-                        <i class="fa-solid fa-boxes-packing fa-fw" aria-hidden="true"></i>
+                        <x-icon type="pending-requests" class="fa-fw"/>
                         <span class="dashboard-attention-label">{{ trans('general.pending_requests') }}</span>
                         <span class="badge dashboard-attention-count">{{ number_format($pendingRequestsCount) }}</span>
                     </a>
@@ -65,7 +69,7 @@
             @can('view', \App\Models\Asset::class)
                 <li class="list-group-item">
                     <a href="{{ $assetsPastEol > 0 ? route('hardware.index', ['past_eol' => 1]) : route('hardware.index') }}">
-                        <x-icon type="asset" class="fa-fw"/>
+                        <x-icon type="due" class="fa-fw"/>
                         <span class="dashboard-attention-label">{{ trans('general.dashboard_assets_past_eol') }}</span>
                         <span class="badge dashboard-attention-count">{{ number_format($assetsPastEol) }}</span>
                     </a>
@@ -80,7 +84,7 @@
             @endcan
             @can('view', \App\Models\License::class)
                 <li class="list-group-item">
-                    <a href="{{ route('licenses.index') }}">
+                    <a href="{{ route('licenses.index', ['status' => 'expiring']) }}">
                         <x-icon type="license" class="fa-fw"/>
                         <span class="dashboard-attention-label">{{ trans('general.dashboard_licenses_expiring_soon') }}</span>
                         <span class="badge dashboard-attention-count">{{ number_format($licensesExpiringSoon) }}</span>
@@ -89,8 +93,8 @@
             @endcan
             @can('view', \App\Models\User::class)
                 <li class="list-group-item">
-                    <a href="{{ route('users.index') }}">
-                        <x-icon type="users" class="fa-fw"/>
+                    <a href="{{ route('users.index', ['end_date_within' => \App\Livewire\NeedsAttention::OFFBOARDING_DAYS, 'with_assignments' => 1]) }}">
+                        <x-icon type="offboarding" class="fa-fw"/>
                         <span class="dashboard-attention-label">{{ trans('general.dashboard_users_offboarding_soon') }}</span>
                         <span class="badge dashboard-attention-count">{{ number_format($usersOffboardingSoon) }}</span>
                     </a>
