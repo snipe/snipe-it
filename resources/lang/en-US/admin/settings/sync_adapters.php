@@ -231,7 +231,7 @@ return [
     'unifi_site_id_help' => 'The UniFi site to sync from. Click Refresh Sites above after saving the API key to populate this list from your controller.',
     'unifi_access_api_token_help' => 'Sign in to the UniFi Portal, open the console where Access is installed, and go to Access -> Settings -> General -> Advanced -> API Token to generate one. UniFi Access 1.9.1 or later is required, and the API is not available on consoles that have upgraded to Identity Enterprise. This is a different credential from the UniFi Network API key, so running both requires one adapter instance of each.',
     'intune_tenant_id_help' => 'Copy your Azure AD tenant\'s Directory (tenant) ID from Microsoft Entra admin center -> Overview.',
-    'intune_client_id_help' => 'Register an application in Microsoft Entra ID -> App registrations, then copy the Application (client) ID. Grant it the DeviceManagementManagedDevices.Read.All Microsoft Graph application permission (admin consent required).',
+    'intune_client_id_help' => 'Register an application in Microsoft Entra ID -> App registrations, then copy the Application (client) ID. Grant the DeviceManagementManagedDevices.Read.All Microsoft Graph application permission for pull. Add DeviceManagementManagedDevices.ReadWrite.All to push composed notes back to Intune, and DeviceManagementConfiguration.Read.All to filter devices by scope tag name rather than ID. Admin consent is required.',
     'intune_client_secret_help' => 'Generate under your app registration -> Certificates & secrets -> New client secret. Copy the value immediately (Azure only shows it once).',
     'intune_extra_compliance_state' => 'Intune Compliance State',
     'intune_extra_enrolled_at' => 'Intune Enrolled At',
