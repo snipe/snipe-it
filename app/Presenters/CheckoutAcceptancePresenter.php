@@ -9,7 +9,7 @@ class CheckoutAcceptancePresenter extends Presenter
         $showingDeleted = request('deleted') === 'deleted';
 
         $layout = [];
-        
+
         if (! $showingDeleted) {
             $layout[] = [
                 'field' => 'checkbox',
