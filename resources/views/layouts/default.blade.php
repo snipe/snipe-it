@@ -308,7 +308,7 @@
                                         <li {!! (request()->is('account/accept') ? ' class="active" aria-current="page"' : '') !!}>
                                             <a href="{{ route('account.accept') }}">
                                                 <x-icon type="signature" class="fa-fw"/>
-                                                {{ trans('general.accept_assets_menu') }}
+                                                {{ trans('general.accept_items') }}
                                             </a>
                                         </li>
 
@@ -499,7 +499,7 @@
 
                                     <li id="past-eol-sidenav-option"{!! (request()->is('hardware') && request()->boolean('past_eol') ? ' class="active" aria-current="page"' : '') !!}>
                                         <a href="{{ route('hardware.index', ['past_eol' => 1]) }}">
-                                            <x-icon type="asset" class="text-red fa-fw"/>
+                                            <x-icon type="due" class="text-orange fa-fw"/>
                                             {{ trans('general.past_eol') }}
                                         </a>
                                     </li>
@@ -847,8 +847,14 @@
                             @can('canCheckoutAtLeastOneItemType')
                                 <li{!! (request()->is('requests.index') ? ' class="active" aria-current="page"' : '') !!}>
                                     <a href="{{ route('requests.index') }}">
-                                        <i class="fa-solid fa-boxes-packing"></i>
+                                        <x-icon type="pending-requests" class="fa-fw"/>
                                         <span>{{ trans('general.pending_requests') }}</span>
+                                    </a>
+                                </li>
+                                <li{!! (request()->is('unaccepted-acceptances') ? ' class="active" aria-current="page"' : '') !!}>
+                                    <a href="{{ route('unaccepted-acceptances.index') }}">
+                                        <x-icon type="signature" class="fa-fw"/>
+                                        <span>{{ trans('general.unaccepted_asset_report') }}</span>
                                     </a>
                                 </li>
                             @endcan
