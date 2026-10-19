@@ -2,12 +2,12 @@
 
 namespace Tests\Feature\Reporting;
 
-use App\Mail\UnacceptedAssetReminderMail;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
+use App\Notifications\UnacceptedAssetReminderNotification;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 /**
@@ -20,7 +20,7 @@ class SentReminderAuthorizationTest extends TestCase
 {
     public function test_user_without_checkout_grant_cannot_send_reminder()
     {
-        Mail::fake();
+        Notification::fake();
 
         $assignee = User::factory()->create(['email' => 'assignee@example.test']);
         $asset = Asset::factory()->create();
@@ -34,7 +34,7 @@ class SentReminderAuthorizationTest extends TestCase
             ->post(route('unaccepted-acceptances.send-reminder'), ['acceptance_id' => $acceptance->id])
             ->assertForbidden();
 
-        Mail::assertNothingSent();
+        Notification::assertNothingSent();
     }
 
     public function test_user_with_reports_view_only_cannot_send_reminder()
@@ -42,7 +42,7 @@ class SentReminderAuthorizationTest extends TestCase
         // Regression pin for the v8.9 move. reports.view alone no
         // longer unlocks a reminder send. The actor must hold a
         // checkout grant on at least one type.
-        Mail::fake();
+        Notification::fake();
 
         $assignee = User::factory()->create(['email' => 'assignee@example.test']);
         $asset = Asset::factory()->create();
@@ -56,12 +56,12 @@ class SentReminderAuthorizationTest extends TestCase
             ->post(route('unaccepted-acceptances.send-reminder'), ['acceptance_id' => $acceptance->id])
             ->assertForbidden();
 
-        Mail::assertNothingSent();
+        Notification::assertNothingSent();
     }
 
     public function test_checkout_user_can_send_reminder_for_their_own_company()
     {
-        Mail::fake();
+        Notification::fake();
         $this->settings->enableMultipleFullCompanySupport();
 
         [$companyA] = Company::factory()->count(2)->create();
@@ -80,12 +80,12 @@ class SentReminderAuthorizationTest extends TestCase
             ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('success');
 
-        Mail::assertSent(UnacceptedAssetReminderMail::class);
+        Notification::assertSentTo($assignee, UnacceptedAssetReminderNotification::class);
     }
 
     public function test_checkout_user_cannot_send_reminder_for_another_company()
     {
-        Mail::fake();
+        Notification::fake();
         $this->settings->enableMultipleFullCompanySupport();
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -104,12 +104,12 @@ class SentReminderAuthorizationTest extends TestCase
             ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('error');
 
-        Mail::assertNothingSent();
+        Notification::assertNothingSent();
     }
 
     public function test_pivot_only_user_cannot_send_reminder_for_another_company()
     {
-        Mail::fake();
+        Notification::fake();
         $this->settings->enableMultipleFullCompanySupport();
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -130,12 +130,12 @@ class SentReminderAuthorizationTest extends TestCase
             ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('error');
 
-        Mail::assertNothingSent();
+        Notification::assertNothingSent();
     }
 
     public function test_superuser_can_send_reminder_for_any_company()
     {
-        Mail::fake();
+        Notification::fake();
         $this->settings->enableMultipleFullCompanySupport();
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -154,6 +154,6 @@ class SentReminderAuthorizationTest extends TestCase
             ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('success');
 
-        Mail::assertSent(UnacceptedAssetReminderMail::class);
+        Notification::assertSentTo($assignee, UnacceptedAssetReminderNotification::class);
     }
 }

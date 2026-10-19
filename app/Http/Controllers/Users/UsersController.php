@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\ImageUploadRequest;
 use App\Http\Requests\SaveUserRequest;
-use App\Mail\UnacceptedAssetReminderMail;
 use App\Models\Accessory;
 use App\Models\Actionlog;
 use App\Models\Asset;
@@ -22,13 +21,13 @@ use App\Models\License;
 use App\Models\Setting;
 use App\Models\User;
 use App\Notifications\CurrentInventory;
+use App\Notifications\UnacceptedAssetReminderNotification;
 use App\Notifications\WelcomeNotification;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use League\Csv\EscapeFormula;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -816,6 +815,9 @@ class UsersController extends Controller
 
     /**
      * Resend pending acceptance reminder email for a specific user.
+     * Routes through UnacceptedAssetReminderNotification so the
+     * console command, this button, and the bulk UI all share the
+     * same channel.
      */
     public function resendAcceptanceReminder(User $user): RedirectResponse
     {
@@ -845,13 +847,7 @@ class UsersController extends Controller
             return redirect()->back()->with('warning', trans('admin/users/message.error.no_pending_acceptances'));
         }
 
-        $mailable = new UnacceptedAssetReminderMail($firstAcceptance, $pendingItems->count());
-
-        if (! empty($user->locale)) {
-            $mailable->locale($user->locale);
-        }
-
-        Mail::to($user->email)->send($mailable);
+        $user->notify(new UnacceptedAssetReminderNotification($firstAcceptance, $pendingItems->count()));
 
         return redirect()->back()->with('success', trans_choice('admin/users/message.success.acceptance_reminder_sent', $pendingItems->count(), ['count' => $pendingItems->count()]));
     }

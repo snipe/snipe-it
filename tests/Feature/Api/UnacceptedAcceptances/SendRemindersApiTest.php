@@ -2,13 +2,12 @@
 
 namespace Tests\Feature\Api\UnacceptedAcceptances;
 
-use App\Mail\UnacceptedAssetReminderMail;
 use App\Models\Asset;
 use App\Models\CheckoutAcceptance;
 use App\Models\Company;
 use App\Models\User;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Mail;
+use App\Notifications\UnacceptedAssetReminderNotification;
+use Illuminate\Support\Facades\Notification;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
@@ -32,66 +31,88 @@ class SendRemindersApiTest extends TestCase
     }
 
     #[Test]
-    public function missing_ids_delegates_to_the_artisan_command(): void
+    public function missing_ids_sends_to_every_pending_assignee(): void
     {
-        Mail::fake();
-        Artisan::spy();
+        Notification::fake();
+
+        $userA = User::factory()->create(['email' => 'a@example.test']);
+        $userB = User::factory()->create(['email' => 'b@example.test']);
+        $userNoEmail = User::factory()->create(['email' => '']);
+
+        CheckoutAcceptance::factory()->pending()->count(2)->create(['assigned_to_id' => $userA->id]);
+        CheckoutAcceptance::factory()->pending()->create(['assigned_to_id' => $userB->id]);
+        CheckoutAcceptance::factory()->pending()->create(['assigned_to_id' => $userNoEmail->id]);
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.unaccepted-acceptances.send-reminders'))
             ->assertOk()
             ->assertJsonPath('status', 'success')
-            ->assertJsonPath('payload.mode', 'all');
+            ->assertJsonPath('payload.mode', 'all')
+            ->assertJsonPath('payload.sent', 2)
+            ->assertJsonPath('payload.skipped.no_email', 1);
 
-        Artisan::shouldHaveReceived('call')->with('snipeit:acceptance-reminder')->once();
+        Notification::assertSentTo($userA, UnacceptedAssetReminderNotification::class);
+        Notification::assertSentTo($userB, UnacceptedAssetReminderNotification::class);
+        Notification::assertNotSentTo($userNoEmail, UnacceptedAssetReminderNotification::class);
     }
 
     #[Test]
-    public function empty_ids_array_also_delegates_to_the_artisan_command(): void
+    public function empty_ids_array_also_sends_to_every_pending_assignee(): void
     {
-        // Explicitly-empty array arrives from well-formed clients that
-        // always include the key. Should behave the same as missing.
-        Artisan::spy();
+        // Explicitly-empty array arrives from well-formed clients
+        // that always include the key. Should behave the same as a
+        // missing one.
+        Notification::fake();
+
+        $user = User::factory()->create(['email' => 'target@example.test']);
+        CheckoutAcceptance::factory()->pending()->create(['assigned_to_id' => $user->id]);
 
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => []])
             ->assertOk()
-            ->assertJsonPath('payload.mode', 'all');
+            ->assertJsonPath('payload.mode', 'all')
+            ->assertJsonPath('payload.sent', 1);
 
-        Artisan::shouldHaveReceived('call')->with('snipeit:acceptance-reminder')->once();
+        Notification::assertSentTo($user, UnacceptedAssetReminderNotification::class);
     }
 
     #[Test]
-    public function ids_in_body_sends_per_row_and_bypasses_the_console_command(): void
+    public function ids_in_body_narrows_to_only_the_targeted_assignees(): void
     {
-        Mail::fake();
-        Artisan::spy();
+        // Verifies ids-mode doesn't accidentally mail every pending
+        // assignee the way the no-ids send-all path does.
+        Notification::fake();
 
-        $assignee = User::factory()->create(['email' => 'target@example.test']);
-        $asset = Asset::factory()->create();
-        $acceptance = CheckoutAcceptance::factory()
+        $targeted = User::factory()->create(['email' => 'target@example.test']);
+        $unrelated = User::factory()->create(['email' => 'unrelated@example.test']);
+
+        $targetedAcceptance = CheckoutAcceptance::factory()
             ->pending()
-            ->for($asset, 'checkoutable')
-            ->for($assignee, 'assignedTo')
+            ->for(Asset::factory(), 'checkoutable')
+            ->for($targeted, 'assignedTo')
+            ->create();
+
+        // Unrelated user has a pending acceptance that's NOT in the ids list.
+        CheckoutAcceptance::factory()
+            ->pending()
+            ->for(Asset::factory(), 'checkoutable')
+            ->for($unrelated, 'assignedTo')
             ->create();
 
         $this->actingAsForApi(User::factory()->superuser()->create())
-            ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => [$acceptance->id]])
+            ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => [$targetedAcceptance->id]])
             ->assertOk()
             ->assertJsonPath('payload.mode', 'ids')
-            ->assertJsonPath('payload.sent', 1)
-            ->assertJsonPath('payload.skipped.not_found', 0)
-            ->assertJsonPath('payload.skipped.fmcs', 0)
-            ->assertJsonPath('payload.skipped.no_email', 0);
+            ->assertJsonPath('payload.sent', 1);
 
-        Mail::assertSent(UnacceptedAssetReminderMail::class);
-        Artisan::shouldNotHaveReceived('call');
+        Notification::assertSentTo($targeted, UnacceptedAssetReminderNotification::class);
+        Notification::assertNotSentTo($unrelated, UnacceptedAssetReminderNotification::class);
     }
 
     #[Test]
-    public function id_pointing_at_a_non_pending_acceptance_is_counted_as_not_found(): void
+    public function id_pointing_at_a_non_pending_acceptance_sends_nothing(): void
     {
-        Mail::fake();
+        Notification::fake();
 
         $assignee = User::factory()->create(['email' => 'target@example.test']);
         $asset = Asset::factory()->create();
@@ -103,16 +124,15 @@ class SendRemindersApiTest extends TestCase
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => [$acceptance->id]])
             ->assertOk()
-            ->assertJsonPath('payload.sent', 0)
-            ->assertJsonPath('payload.skipped.not_found', 1);
+            ->assertJsonPath('payload.sent', 0);
 
-        Mail::assertNothingSent();
+        Notification::assertNothingSent();
     }
 
     #[Test]
-    public function acceptance_without_assignee_email_is_counted_as_no_email(): void
+    public function acceptance_without_assignee_email_sends_nothing(): void
     {
-        Mail::fake();
+        Notification::fake();
 
         $assignee = User::factory()->create(['email' => '']);
         $asset = Asset::factory()->create();
@@ -125,16 +145,15 @@ class SendRemindersApiTest extends TestCase
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => [$acceptance->id]])
             ->assertOk()
-            ->assertJsonPath('payload.sent', 0)
-            ->assertJsonPath('payload.skipped.no_email', 1);
+            ->assertJsonPath('payload.sent', 0);
 
-        Mail::assertNothingSent();
+        Notification::assertNothingSent();
     }
 
     #[Test]
     public function fmcs_blocks_cross_company_ids_without_leaking_to_the_mail_queue(): void
     {
-        Mail::fake();
+        Notification::fake();
         $this->settings->enableMultipleFullCompanySupport();
 
         [$companyA, $companyB] = Company::factory()->count(2)->create();
@@ -155,16 +174,15 @@ class SendRemindersApiTest extends TestCase
         $this->actingAsForApi($callerInA)
             ->postJson(route('api.unaccepted-acceptances.send-reminders'), ['ids' => [$acceptance->id]])
             ->assertOk()
-            ->assertJsonPath('payload.sent', 0)
-            ->assertJsonPath('payload.skipped.fmcs', 1);
+            ->assertJsonPath('payload.sent', 0);
 
-        Mail::assertNothingSent();
+        Notification::assertNothingSent();
     }
 
     #[Test]
-    public function mixed_batch_reports_each_outcome_separately(): void
+    public function mixed_batch_sends_only_valid_rows(): void
     {
-        Mail::fake();
+        Notification::fake();
 
         $goodAssignee = User::factory()->create(['email' => 'good@example.test']);
         $noEmailAssignee = User::factory()->create(['email' => '']);
@@ -186,10 +204,34 @@ class SendRemindersApiTest extends TestCase
                 'ids' => [$goodAcceptance->id, $noEmailAcceptance->id, 999999],
             ])
             ->assertOk()
-            ->assertJsonPath('payload.sent', 1)
-            ->assertJsonPath('payload.skipped.no_email', 1)
-            ->assertJsonPath('payload.skipped.not_found', 1);
+            ->assertJsonPath('payload.sent', 1);
 
-        Mail::assertSent(UnacceptedAssetReminderMail::class, 1);
+        Notification::assertSentTimes(UnacceptedAssetReminderNotification::class, 1);
+    }
+
+    #[Test]
+    public function selecting_multiple_acceptances_for_one_user_dedupes_to_one_email(): void
+    {
+        // Regression pin for the dedupe behavior. A user with three
+        // pending acceptances who gets all three selected in the
+        // bulk UI should receive one UnacceptedAssetReminderNotification
+        // with count=3, not three separate emails.
+        Notification::fake();
+
+        $assignee = User::factory()->create(['email' => 'target@example.test']);
+        $acceptances = CheckoutAcceptance::factory()->count(3)
+            ->pending()
+            ->for(Asset::factory(), 'checkoutable')
+            ->for($assignee, 'assignedTo')
+            ->create();
+
+        $this->actingAsForApi(User::factory()->superuser()->create())
+            ->postJson(route('api.unaccepted-acceptances.send-reminders'), [
+                'ids' => $acceptances->pluck('id')->all(),
+            ])
+            ->assertOk()
+            ->assertJsonPath('payload.sent', 1);
+
+        Notification::assertSentTimes(UnacceptedAssetReminderNotification::class, 1);
     }
 }

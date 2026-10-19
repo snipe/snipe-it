@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Actions\Acceptances\DispatchUnacceptedAssetRemindersAction;
+use App\Console\Commands\SendAcceptanceReminder;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Transformers\AcceptancesTransformer;
@@ -13,10 +13,10 @@ use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\LicenseSeat;
+use App\Notifications\UnacceptedAssetReminderNotification;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Gate;
 
 /**
@@ -41,7 +41,7 @@ class UnacceptedAcceptancesController extends Controller
         // entirely, preventing even a type-shape leak.
         $viewableTypes = array_filter(
             [Asset::class, LicenseSeat::class, Accessory::class, Component::class, Consumable::class],
-            fn(string $type) => Gate::allows('view', $type === LicenseSeat::class ? License::class : $type),
+            fn (string $type) => Gate::allows('view', $type === LicenseSeat::class ? License::class : $type),
         );
 
         if ($viewableTypes === []) {
@@ -59,7 +59,7 @@ class UnacceptedAcceptancesController extends Controller
                         Consumable::class => ['category', 'company'],
                     ]);
                 },
-                'assignedTo' => fn($q) => $q->withTrashed(),
+                'assignedTo' => fn ($q) => $q->withTrashed(),
             ])
             ->whereHasMorph('checkoutable', $viewableTypes)
             ->orderByDesc('checkout_acceptances.created_at');
@@ -73,7 +73,7 @@ class UnacceptedAcceptancesController extends Controller
         }
 
         $acceptances = $query->get()
-            ->filter(fn(CheckoutAcceptance $acceptance) => $acceptance->checkoutable !== null)
+            ->filter(fn (CheckoutAcceptance $acceptance) => $acceptance->checkoutable !== null)
             ->values();
 
         // Pagination lives in PHP because bs-table-client-side wants
@@ -99,24 +99,73 @@ class UnacceptedAcceptancesController extends Controller
         $ids = array_values(array_unique(array_filter(array_map('intval', (array) $request->input('ids', [])))));
 
         if ($ids === []) {
-            Artisan::call('snipeit:acceptance-reminder');
+            $result = SendAcceptanceReminder::dispatchAll();
 
             return response()->json(
                 Helper::formatStandardApiResponse(
                     'success',
-                    ['mode' => 'all'],
-                    trans('admin/reports/general.reminder_sent'),
+                    [
+                        'mode' => 'all',
+                        'sent' => $result['sent'],
+                        'skipped' => [
+                            'failed' => $result['failed'],
+                            'no_email' => count($result['no_email']),
+                        ],
+                    ],
+                    trans_choice('admin/reports/general.reminder_sent_count', $result['sent'], ['count' => $result['sent']]),
                 ),
             );
         }
 
-        $result = DispatchUnacceptedAssetRemindersAction::run($ids);
+        $acceptancesByAssignee = CheckoutAcceptance::pending()
+            ->whereIn('id', $ids)
+            ->with(['assignedTo' => fn ($q) => $q->withTrashed()])
+            ->get()
+            ->filter(fn (CheckoutAcceptance $a) => $a->assignedTo && $a->isAccessibleToCurrentUser())
+            ->groupBy(fn (CheckoutAcceptance $a) => $a->assignedTo->id);
+
+        $sent = 0;
+        $skipped = [
+            'no_email' => 0,
+            'none_pending' => 0,
+        ];
+        // Any id in the request that didn't survive the pending +
+        // FMCS filter above falls out as not_found. Tracked here so
+        // the response can tell the caller how many of their ids
+        // never reached the dispatch loop.
+        $notFound = count($ids) - $acceptancesByAssignee->sum(fn ($g) => $g->count());
+
+        foreach ($acceptancesByAssignee as $group) {
+            /** @var CheckoutAcceptance $first */
+            $first = $group->first();
+            $assignee = $first->assignedTo;
+
+            if (empty($assignee->email) || $assignee->activated == '0') {
+                $skipped['no_email']++;
+
+                continue;
+            }
+
+            $pending = $assignee->getAssignedItemsWithPendingAcceptance();
+            if ($pending->isEmpty()) {
+                $skipped['none_pending']++;
+
+                continue;
+            }
+
+            $assignee->notify(new UnacceptedAssetReminderNotification($first, $pending->count()));
+            $sent++;
+        }
 
         return response()->json(
             Helper::formatStandardApiResponse(
                 'success',
-                ['mode' => 'ids'] + $result,
-                trans_choice('admin/reports/general.reminder_sent_count', $result['sent'], ['count' => $result['sent']]),
+                [
+                    'mode' => 'ids',
+                    'sent' => $sent,
+                    'skipped' => $skipped + ['not_found_or_fmcs' => max(0, $notFound)],
+                ],
+                trans_choice('admin/reports/general.reminder_sent_count', $sent, ['count' => $sent]),
             ),
         );
     }
