@@ -119,8 +119,14 @@ class JamfSchoolAdapter extends SyncAdapter
             hardwareSerial: Arr::get($device, 'serialNumber'),
             hardwareModel: Arr::get($device, 'model.name'),
             manufacturer: 'Apple',
-            primaryMac: Arr::get($device, 'wifiMacAddress'),
-            primaryIp: null,
+            // Jamf School nests network info under `networkInformation`
+            // on every device class (confirmed on iPhone, iPad, and
+            // Mac payloads via issue #19856). The top-level
+            // `wifiMacAddress` key the earlier version read is never
+            // present, so the field always landed null regardless of
+            // device class.
+            primaryMac: Arr::get($device, 'networkInformation.WiFiMAC'),
+            primaryIp: Arr::get($device, 'networkInformation.IPAddress'),
             os: Arr::get($device, 'os.prefix'),
             osVersion: Arr::get($device, 'os.version'),
             lastSeen: $this->parseTimestamp(Arr::get($device, 'lastCheckin')),

@@ -108,6 +108,35 @@ class JamfSchoolAdapterTest extends TestCase
         $this->assertNotNull($record->lastSeen);
     }
 
+    public function test_network_information_surfaces_mac_and_ip(): void
+    {
+        // Regression test for issue #19856. Jamf School nests
+        // Wi-Fi MAC and IP under `networkInformation` on every
+        // device class. The earlier adapter read a top-level
+        // `wifiMacAddress` key that is never present in a Jamf
+        // School payload, so primaryMac + primaryIp both landed
+        // null across every synced device.
+        $adapter = $this->configuredJamfSchoolAdapter();
+
+        Http::fake([
+            '*/devices*' => Http::response([
+                'count' => 1,
+                'devices' => [
+                    $this->jamfSchoolDevice(
+                        udid: 'edu-udid-net',
+                        wifiMac: '02:5c:a1:72:8d:30',
+                        ipAddress: '192.0.2.42',
+                    ),
+                ],
+            ]),
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertSame('02:5c:a1:72:8d:30', $records[0]->primaryMac);
+        $this->assertSame('192.0.2.42', $records[0]->primaryIp);
+    }
+
     public function test_owner_block_populates_assigned_user_fields()
     {
         // Regression test for issue #19856. Jamf School carries the
@@ -180,6 +209,7 @@ class JamfSchoolAdapterTest extends TestCase
         string $modelName = 'iPad',
         ?string $serial = null,
         ?string $wifiMac = null,
+        ?string $ipAddress = null,
         ?string $os = 'iPadOS',
         ?string $osVersion = null,
         ?string $lastCheckin = null,
@@ -197,7 +227,12 @@ class JamfSchoolAdapterTest extends TestCase
                 'prefix' => $os,
                 'version' => $osVersion,
             ],
-            'wifiMacAddress' => $wifiMac,
+            // Jamf School nests network info under this key on every
+            // device class (iPhone / iPad / Mac).
+            'networkInformation' => [
+                'WiFiMAC' => $wifiMac,
+                'IPAddress' => $ipAddress,
+            ],
             'lastCheckin' => $lastCheckin,
             'isSupervised' => true,
             'assetTag' => null,
