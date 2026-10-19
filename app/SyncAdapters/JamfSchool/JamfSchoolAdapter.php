@@ -125,6 +125,12 @@ class JamfSchoolAdapter extends SyncAdapter
             osVersion: Arr::get($device, 'os.version'),
             lastSeen: $this->parseTimestamp(Arr::get($device, 'lastCheckin')),
             assetTag: Arr::get($device, 'assetTag'),
+            // Jamf School nests the device's assigned user under
+            // `owner`. Pipeline user-lookup matches on either email or
+            // username per adapter config, so populate both when the
+            // vendor emits them.
+            assignedUserEmail: Arr::get($device, 'owner.email'),
+            assignedUserName: Arr::get($device, 'owner.username'),
             vendorGroupId: Arr::has($device, 'locationId') ? (string) Arr::get($device, 'locationId') : null,
             extra: [
                 'jamf_school_model_identifier' => Arr::get($device, 'model.identifier'),
