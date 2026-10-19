@@ -1268,6 +1268,7 @@ namespace App\Models{
  * @property int|null $default_supplier_id
  * @property int $qty
  * @property bool $requestable
+ * @property bool $archived
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -1330,9 +1331,12 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
  * @property-read int|null $users_count
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable applyOffsetAndLimit(int $total)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable archived()
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable consumablesForShow()
  * @method static \Database\Factories\ConsumableFactory factory($count = null, $state = [])
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable newModelQuery()
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable newQuery()
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable notArchived()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Consumable onlyTrashed()
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orWhereMultipleColumns(array $columns, $term)
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable orderByCreatedBy(string $order)
@@ -1351,6 +1355,7 @@ namespace App\Models{
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable requestable()
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable requestedBy(\App\Models\User $user)
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable textSearch($search)
+ * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereArchived($value)
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereCategoryId($value)
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereCompanyId($value)
  * @method static \App\Models\Builders\ConsumableQueryBuilder<static>|Consumable whereCreatedAt($value)
@@ -1390,14 +1395,18 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string|null $note
+ * @property \Illuminate\Support\Carbon|null $consumed_at
  * @property-read \App\Models\User|null $adminuser
  * @property-read \App\Models\Consumable|null $consumable
  * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment consumed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment outstanding()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment whereAssignedTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment whereConsumableId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment whereConsumedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment whereCreatedBy($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ConsumableAssignment whereId($value)
