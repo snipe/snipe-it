@@ -69,12 +69,23 @@ class AccessoryObserver
     }
 
     /**
-     * Listen to the Accessory deleting event.
+     * Listen to the Accessory deleting event. Mirrors the archive-time
+     * cancellation in updated() so the two lifecycle transitions
+     * have the same posture: open CheckoutRequest rows get canceled
+     * so they stop surfacing on /account/requested while the parent
+     * is unavailable. The actionlog write preserves the audit trail
+     * either way.
      *
      * @return void
      */
     public function deleting(Accessory $accessory)
     {
+        $accessory->openRequests()->get()->each(function (CheckoutRequest $request): void {
+            $request->canceled_at = now();
+            $request->state = CheckoutRequestState::Canceled;
+            $request->saveQuietly();
+        });
+
         $logAction = new Actionlog;
         $logAction->item_type = Accessory::class;
         $logAction->item_id = $accessory->id;

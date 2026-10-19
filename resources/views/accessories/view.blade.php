@@ -165,7 +165,7 @@
                                 <form method="POST" action="{{ route('accessories.unarchive', $accessory) }}" class="inline pull-right">
                                     @csrf
                                     <button class="btn btn-sm btn-warning hidden-print" data-tooltip="true" data-placement="top" data-title="{{ trans('general.unarchive') }}">
-                                        <x-icon type="restore" class="fa-fw" />
+                                        <x-icon type="unarchive" class="fa-fw" />
                                     </button>
                                 </form>
                             @endcan

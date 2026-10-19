@@ -1093,6 +1093,18 @@ parameters:
 			path: app/Http/Controllers/Api/ConsumablesController.php
 
 		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/Api/ConsumablesController.php
+
+		-
+			message: '#^Relation ''consumable'' is not found in App\\Models\\ConsumableAssignment model\.$#'
+			identifier: larastan.relationExistence
+			count: 1
+			path: app/Http/Controllers/Api/ConsumablesController.php
+
+		-
 			message: '#^Access to an undefined property App\\Models\\CustomField\:\:\$pivot\.$#'
 			identifier: property.notFound
 			count: 1
@@ -1888,6 +1900,18 @@ parameters:
 			message: '#^Access to an undefined property App\\Models\\Consumable\:\:\$checkout_qty\.$#'
 			identifier: property.notFound
 			count: 1
+			path: app/Http/Controllers/Consumables/ConsumableCheckoutController.php
+
+		-
+			message: '#^Property App\\Models\\IdeHelperActionlog\:\:\$created_at \(Illuminate\\Support\\Carbon\|null\) does not accept string\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: app/Http/Controllers/Consumables/ConsumableCheckoutController.php
+
+		-
+			message: '#^Relation ''consumable'' is not found in App\\Models\\ConsumableAssignment model\.$#'
+			identifier: larastan.relationExistence
+			count: 2
 			path: app/Http/Controllers/Consumables/ConsumableCheckoutController.php
 
 		-
@@ -4809,6 +4833,12 @@ parameters:
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$price\.$#'
 			identifier: property.notFound
+			count: 1
+			path: app/Models/Consumable.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:outstanding\(\)\.$#'
+			identifier: method.notFound
 			count: 1
 			path: app/Models/Consumable.php
 

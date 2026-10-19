@@ -16,8 +16,4 @@ return [
     'exclude_deleted' => 'Exclude Deleted Components',
     'include_deleted' => 'Include Deleted Components',
     'only_deleted' => 'Only Deleted Components',
-    'bulk_delete_help' => 'Review the components you are about to delete. Components with checkouts are unselected and cannot be removed until their checkouts are returned.',
-    'bulk_delete_warn' => 'You are about to delete :component_count component.|You are about to delete :component_count components.',
-    'bulk_edit_warn' => 'You are editing :component_count component.|You are editing :component_count components.',
-    'bulk_edit_help' => 'Only fields you fill below are written to the selected components. Leave a field blank to leave it as-is.',
 ];

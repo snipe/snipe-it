@@ -911,11 +911,19 @@ class Helper
         // when a correlated subquery is in the SELECT list (withCount
         // generates one). Since id is unique, adding the other columns
         // is a cardinality no-op and works on every engine + sql_mode.
+        // Low-stock alert fires when the "still-in-play" count drops
+        // below (min_amt + threshold). Still-in-play means not yet
+        // marked consumed, so an outstanding distribution (handed out,
+        // not yet reported used up) still counts against min_amt
+        // rather than tripping the alert. This matches the Consumable
+        // policy decision that consumed is terminal and permanent.
         $consumables = Consumable::select('id', 'name', 'qty', 'min_amt')
-            ->withCount('consumableAssignments as consumables_users_count')
+            ->withCount(['consumableAssignments as consumed_count' => function ($query) {
+                $query->whereNotNull('consumed_at');
+            }])
             ->whereNotNull('min_amt')
             ->groupBy('consumables.id', 'consumables.name', 'consumables.qty', 'consumables.min_amt')
-            ->havingRaw('(qty - consumables_users_count) < (min_amt + ?)', [$alert_threshold])
+            ->havingRaw('(qty - consumed_count) < (min_amt + ?)', [$alert_threshold])
             ->get();
 
         // Archived accessories are retired from active inventory and

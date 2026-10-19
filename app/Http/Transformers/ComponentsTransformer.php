@@ -117,6 +117,10 @@ class ComponentsTransformer
             // untouched, so it's safe as a restore-and-tweak shortcut.
             'clone' => Gate::allows('clone', $component),
             'delete' => $canDelete,
+            // Top-level so genericActionsFormatter renders the per-row
+            // restore button on the Deleted index. The bulk_selectable
+            // mirror below drives the bulk-actions dropdown.
+            'restore' => $isDeleted && Gate::allows('delete', $component),
             'request' => (bool) $component->requestable && ! $isDeleted && ! $userHasOpenRequest,
             'cancel' => (bool) $component->requestable && $userHasOpenRequest,
             // Dropdown-action gating: the bulk-actions dropdown asks

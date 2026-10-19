@@ -595,7 +595,7 @@
                                           name="two_factor_optin"
                                           :label="trans('admin/settings/general.two_factor')"
                                           :item="$user"
-                                          :disabled="!Gate::allows('editableOnDemo')"
+                                          :disabled="!Gate::allows('editableOnDemo') || !Gate::allows('canEditAuthFields', $user)"
                                           :help_text="Gate::allows('editableOnDemo') ? trans('admin/users/general.two_factor_admin_optin_help') : null"
                                       />
                                   @endif

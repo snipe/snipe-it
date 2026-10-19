@@ -27,6 +27,7 @@ class IconHelper
                 return 'fas fa-trash';
             case 'archived':
             case 'archive':
+            case 'unarchive':
                 return 'fa-solid fa-ban';
             case 'create':
                 return 'fa-solid fa-plus';

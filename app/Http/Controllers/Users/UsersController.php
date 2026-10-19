@@ -307,7 +307,6 @@ class UsersController extends Controller
         $user->first_name = $request->input('first_name');
         $user->last_name = $request->input('last_name');
         $user->display_name = $request->input('display_name');
-        $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
         $user->locale = $request->input('locale');
         $user->employee_num = $request->input('employee_num');
         $user->jobtitle = $request->input('jobtitle', null);
@@ -343,6 +342,7 @@ class UsersController extends Controller
             $user->username = trim($request->input('username'));
             $user->email = trim($request->input('email'));
             $user->activated = $request->input('activated', $request->user()->is($user) ? 1 : 0);
+            $user->two_factor_optin = $request->input('two_factor_optin') ?: 0;
 
             // Do we want to update the user password?
             if ($request->filled('password')) {

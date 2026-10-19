@@ -14,6 +14,7 @@ use App\Models\Traits\Requestable;
 use App\Models\Traits\Searchable;
 use App\Presenters\ConsumablePresenter;
 use App\Presenters\Presentable;
+use App\Rules\RequestableArchivedMutex;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -46,6 +47,7 @@ class Consumable extends SnipeModel
 
     protected $casts = [
         'requestable' => 'boolean',
+        'archived' => 'boolean',
         'category_id' => 'integer',
         'company_id' => 'integer',
         'qty' => 'integer',
@@ -53,7 +55,7 @@ class Consumable extends SnipeModel
     ];
 
     /**
-     * Category validation rules
+     * validation rules
      */
     public $rules = [
         'name' => 'required|max:255',
@@ -66,8 +68,39 @@ class Consumable extends SnipeModel
         'purchase_date' => 'date_format:Y-m-d|nullable',
         'default_supplier_id' => 'nullable|integer|exists:suppliers,id',
         'default_purchase_cost' => 'numeric|nullable|gte:0|max:99999999999999999.99',
-        'requestable' => 'nullable|boolean',
+        'requestable' => ['nullable', 'boolean'],
+        'archived' => ['nullable', 'boolean'],
     ];
+
+    /**
+     * PHP 8.2 blocks `new X` in property defaults, so the rule object
+     * gets spliced in here rather than in $rules above. Mirrors
+     * Accessory::getRules() so the mutex and the no-archive-with-
+     * checkouts guard behave identically across checkoutable items.
+     */
+    public function getRules(): array
+    {
+        $rules = $this->rules ?? [];
+        $mutex = new RequestableArchivedMutex;
+
+        $noArchivingWithOutstanding = function (string $attribute, mixed $value, \Closure $fail): void {
+            if (filter_var($value, FILTER_VALIDATE_BOOLEAN) && $this->exists && $this->numOutstanding() > 0) {
+                // Consumables close their lifecycle via mark-consumed,
+                // not check-in, so the standard archived_blocked_by_checkouts
+                // string points admins at the wrong action. Use the
+                // outstanding-specific variant that names the right path.
+                $fail(trans('general.archived_blocked_by_outstanding', [
+                    'item_type' => trans('general.consumable'),
+                    'attribute' => $attribute,
+                ]));
+            }
+        };
+
+        $rules['requestable'] = array_merge((array) ($rules['requestable'] ?? []), [$mutex]);
+        $rules['archived'] = array_merge((array) ($rules['archived'] ?? []), [$mutex, $noArchivingWithOutstanding]);
+
+        return $rules;
+    }
 
     /**
      * Whether the model should inject it's identifier to the unique
@@ -100,6 +133,7 @@ class Consumable extends SnipeModel
         'qty',
         'min_amt',
         'requestable',
+        'archived',
         'notes',
         'default_supplier_id',
         'default_purchase_cost',
@@ -149,6 +183,15 @@ class Consumable extends SnipeModel
     protected static function booted(): void
     {
         static::forceDeleted(function (self $consumable) {
+            // Pivot rows + uploads + image hold the item's lifecycle
+            // state. Keep them intact across soft-delete + restore,
+            // and only tear them down when the parent is actually
+            // being destroyed. Direct DB purge (snipeit:purge)
+            // bypasses Eloquent, so the Purge command carries the
+            // same cleanup for consumables_users in its childTables
+            // map.
+            $consumable->users()->detach();
+
             if ($consumable->image) {
                 try {
                     Storage::disk('public')->delete(FileStorage::Consumables->publicPath().$consumable->image);
@@ -183,10 +226,23 @@ class Consumable extends SnipeModel
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
     }
 
+    /**
+     * Mirror for the archived flag. Normalizes empty-string / null /
+     * missing-column CSV cells to false so the NOT NULL `archived`
+     * column never receives a literal null.
+     */
+    public function setArchivedAttribute($value): void
+    {
+        if ($value == '') {
+            $value = null;
+        }
+        $this->attributes['archived'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
     public function isDeletable()
     {
         return Gate::allows('delete', $this)
-            && ($this->numCheckedOut() === 0)
+            && ($this->numOutstanding() === 0)
             && ($this->deleted_at == '');
     }
 
@@ -202,6 +258,17 @@ class Consumable extends SnipeModel
     public function consumableAssignments()
     {
         return $this->hasMany(ConsumableAssignment::class);
+    }
+
+    /**
+     * Pivot rows the recipient has not yet reported as used up.
+     * `consumed_at` is one-way: once set, the row never re-enters the
+     * outstanding bucket. Backs numOutstanding() and the archive +
+     * delete gates.
+     */
+    public function outstandingAssignments()
+    {
+        return $this->consumableAssignments()->outstanding();
     }
 
     public function percentRemaining()
@@ -384,6 +451,43 @@ class Consumable extends SnipeModel
     public function numCheckedOut()
     {
         return $this->consumables_users_count ?? $this->users()->count();
+    }
+
+    /**
+     * Units that have been handed out but the recipient has not yet
+     * reported as used up. Feeds the archive + delete gates (the
+     * historical stockroom-remaining math still runs off
+     * numCheckedOut).
+     */
+    public function numOutstanding(): int
+    {
+        return (int) ($this->outstanding_assignments_count
+            ?? $this->outstandingAssignments()->count());
+    }
+
+    /**
+     * Units that have been distributed and reported used up. Permanent
+     * state. A consumed row never re-enters the outstanding bucket.
+     * Admins see this as the "Consumed" column so they can read how
+     * much of lifetime stock has actually been destroyed.
+     */
+    public function numConsumed(): int
+    {
+        return (int) $this->numCheckedOut() - $this->numOutstanding();
+    }
+
+    /**
+     * Units that are either still on the shelf OR distributed-but-not-
+     * yet-consumed. The low-inventory alert threshold runs off this
+     * count so a consumable only trips the "below minimum" alarm when
+     * stock is actually destroyed, not merely handed out to someone
+     * who may still return it or who the admin can chase up. Shelf
+     * remaining = qty - distributed stays the headline "available
+     * right now" number and drives the per-checkout quantity cap.
+     */
+    public function numInPlay(): int
+    {
+        return (int) $this->qty - $this->numConsumed();
     }
 
     /**

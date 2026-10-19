@@ -76,6 +76,7 @@ class User extends SnipeModel implements AuthenticatableContract, AuthorizableCo
         'email',
         'activated',
         'permissions',
+        'two_factor_optin',
     ];
 
     protected $hidden = [

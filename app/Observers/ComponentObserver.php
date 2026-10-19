@@ -2,7 +2,9 @@
 
 namespace App\Observers;
 
+use App\Enums\CheckoutRequestState;
 use App\Models\Actionlog;
+use App\Models\CheckoutRequest;
 use App\Models\Component;
 
 class ComponentObserver
@@ -18,6 +20,9 @@ class ComponentObserver
         $changed = [];
 
         foreach ($component->getRawOriginal() as $key => $value) {
+            if ($key === 'updated_at') {
+                continue;
+            }
             // SoftDeletes drives the delete + restore flows through
             // save(), which fires `updated` with deleted_at as the
             // changed field. The `deleting`/`restored` observers log
@@ -49,6 +54,14 @@ class ComponentObserver
             $logAction->logaction('update');
         }
 
+        // Archive-time request cleanup.
+        if ($component->wasChanged('archived') && $component->archived) {
+            $component->openRequests()->get()->each(function (CheckoutRequest $request): void {
+                $request->canceled_at = now();
+                $request->state = CheckoutRequestState::Canceled;
+                $request->saveQuietly();
+            });
+        }
     }
 
     /**
@@ -63,12 +76,23 @@ class ComponentObserver
     }
 
     /**
-     * Listen to the Component deleting event.
+     * Listen to the Component deleting event. Mirrors the archive-time
+     * cancellation in updated() so the two lifecycle transitions
+     * have the same posture: open CheckoutRequest rows get canceled
+     * so they stop surfacing on /account/requested while the parent
+     * is unavailable. The actionlog write preserves the audit trail
+     * either way.
      *
      * @return void
      */
     public function deleting(Component $component)
     {
+        $component->openRequests()->get()->each(function (CheckoutRequest $request): void {
+            $request->canceled_at = now();
+            $request->state = CheckoutRequestState::Canceled;
+            $request->saveQuietly();
+        });
+
         $logAction = new Actionlog;
         $logAction->item_type = Component::class;
         $logAction->item_id = $component->id;

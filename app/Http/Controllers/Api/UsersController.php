@@ -684,7 +684,6 @@ class UsersController extends Controller
             'remember_token',
             'two_factor_secret',
             'two_factor_enrolled',
-            'two_factor_optin',
         ])));
 
         if ($canEditAuthFields) {

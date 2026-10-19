@@ -267,7 +267,7 @@ return [
     'intune_fetch_per_device_details_label' => 'Fetch per-device details on every sync (Ethernet MAC + Physical Memory)',
     'intune_fetch_per_device_details_help' => 'Microsoft Graph does not return Ethernet MAC Address or Physical Memory on the list endpoint we paginate through. Turning this on fires one extra Graph call per managed device at pull time to backfill those two fields. Default off because the extra call per device adds up on large fleets - leave off unless you need those fields populated.',
     'intune_scope_tag_filter_label' => 'Scope tag filter',
-    'intune_scope_tag_filter_help' => 'Comma-separated Intune Scope Tag names (or IDs) to limit the sync to. Devices with any of these tags are synced, everything else is skipped at the Graph API layer so unrelated devices never leave Microsoft. Leave blank to sync every device the app registration can see. Scope tags are managed under Tenant admin -> Roles -> Scope (Tags) in Intune. Example: "Marketing, Engineering".',
+    'intune_scope_tag_filter_help' => 'Comma-separated Intune Scope Tag names (or IDs) to limit the sync to. Devices with any of these tags are synced, everything else is skipped at the Graph API layer so unrelated devices never leave Microsoft. Leave blank to sync every device the app registration can see. Scope tags are managed under Tenant admin -> Roles -> Scope (Tags) in Intune. Example: "Marketing, Engineering". Note: scope tag filtering goes through the Microsoft Graph beta API, which Microsoft does not guarantee stable.',
     'meraki_sm_api_key_help' => 'Generate under your Meraki Dashboard profile -> My Profile -> API access. Needs read access to the target organization (and Systems Manager network access for the devices endpoint).',
     'meraki_sm_organization_id_help' => 'Copy from Organization -> Settings -> Dashboard API access in the Meraki Dashboard, or from any org URL segment after /o/.',
     'workspace_one_tenant_code_help' => 'Find under Groups & Settings -> All Settings -> System -> Advanced -> API -> REST API in your Workspace ONE console.',
@@ -294,6 +294,10 @@ return [
     'jamf_platform_client_secret_help' => 'Paired with the Client ID above. Jamf shows the secret once at integration creation time.',
     'jamf_platform_environment_id_help' => 'UUID of the Platform environment the integration is scoped to. Copy from Jamf Account under Environments, or from the URL of your environment console. Sent as the X-Environment-Id header on every request.',
     'landscape_token_help' => 'Landscape does not have a UI for API tokens. Obtain one by POSTing your credentials to <code>/api/v2/login</code> on your Landscape instance and copying the <code>token</code> field from the JSON response. Pass an <code>expiry_minutes</code> value on that call to control how long the token stays valid (defaults to 24h). The account behind the token needs read access to computers.',
+    'sophos_client_id_help' => 'Create a credential in Sophos Central under Global Settings -> API Credentials Management, with the Service Principal Read-Only role. Copy the Client ID from the credential page. Only tenant-level credentials are supported.',
+    'sophos_client_secret_help' => 'Paired with the Client ID above. Sophos Central shows the secret once, when the credential is created. Credentials expire eventually and can\'t be renewed, so create a new one when that happens.',
+    'sophos_endpoint_types_help' => 'Only sync these Sophos endpoint types. Sophos lists every Linux device as a server, laptops included.',
+    'sophos_skip_cloud_instances_help' => 'Skip endpoints that Sophos reports as cloud instances, such as AWS or Azure virtual machines.',
 
     // Google Workspace (ChromeOS) adapter
     'google_workspace_label_service_account_email' => 'Service Account Email',
@@ -429,6 +433,15 @@ return [
     'extra_reboot_required' => ':vendor Reboot Required',
     'extra_ubuntu_pro' => 'Ubuntu Pro',
     'extra_osquery_version' => 'osquery Version',
+    'extra_endpoint_id' => ':vendor Endpoint ID',
+    'extra_health' => ':vendor Health',
+    'extra_threat_status' => ':vendor Threat Status',
+    'extra_service_status' => ':vendor Service Status',
+    'extra_tamper_protection' => ':vendor Tamper Protection',
+    'extra_encryption_status' => ':vendor Encryption Status',
+    'extra_isolation_status' => ':vendor Isolation Status',
+    'extra_last_user' => ':vendor Last User',
+    'extra_installed_products' => ':vendor Installed Products',
 
     // Shared label strings for adapter settings schemas. Adapters
     // reach for these via trans() so the labels localize alongside
@@ -497,6 +510,10 @@ return [
     'abm_label_pull_model_images' => 'Pull model images from appledb.dev',
     'abm_option_mode_business' => 'Apple Business Manager',
     'abm_option_mode_school' => 'Apple School Manager',
+
+    // Sophos Central adapter-specific labels.
+    'sophos_label_endpoint_types' => 'Endpoint Types',
+    'sophos_label_skip_cloud_instances' => 'Skip Cloud Instances',
 
     // Custom HTTP option strings.
     'custom_option_auth_bearer' => 'Bearer Token',

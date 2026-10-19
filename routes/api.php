@@ -210,6 +210,26 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'api-throttle:api']], fu
             ]
         )->name('api.accessories.selectlist');
 
+        Route::post('{id}/restore',
+            [Api\AccessoriesController::class, 'restore']
+        )->where('id', '[0-9]+')->name('api.accessories.restore');
+
+        Route::post('{accessory}/unarchive',
+            [Api\AccessoriesController::class, 'unarchive']
+        )->where('accessory', '[0-9]+')->name('api.accessories.unarchive');
+
+        Route::post('bulkedit',
+            [Api\AccessoriesController::class, 'bulkEdit']
+        )->name('api.accessories.bulkedit');
+
+        Route::post('bulkdelete',
+            [Api\AccessoriesController::class, 'bulkDestroy']
+        )->name('api.accessories.bulkdelete');
+
+        Route::post('bulkrestore',
+            [Api\AccessoriesController::class, 'bulkRestore']
+        )->name('api.accessories.bulkrestore');
+
     }); // end accessories group
 
     Route::resource('accessories',
@@ -329,6 +349,26 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'api-throttle:api']], fu
             ]
         )->name('api.components.assets');
 
+        Route::post('{id}/restore',
+            [Api\ComponentsController::class, 'restore']
+        )->where('id', '[0-9]+')->name('api.components.restore');
+
+        Route::post('{component}/unarchive',
+            [Api\ComponentsController::class, 'unarchive']
+        )->where('component', '[0-9]+')->name('api.components.unarchive');
+
+        Route::post('bulkedit',
+            [Api\ComponentsController::class, 'bulkEdit']
+        )->name('api.components.bulkedit');
+
+        Route::post('bulkdelete',
+            [Api\ComponentsController::class, 'bulkDestroy']
+        )->name('api.components.bulkdelete');
+
+        Route::post('bulkrestore',
+            [Api\ComponentsController::class, 'bulkRestore']
+        )->name('api.components.bulkrestore');
+
     });
     Route::post('components/{id}/checkin',
         [
@@ -404,6 +444,35 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'api-throttle:api']], fu
                 'adjustQuantity',
             ]
         )->name('api.consumables.adjust-quantity');
+
+        Route::post('{id}/restore',
+            [Api\ConsumablesController::class, 'restore']
+        )->where('id', '[0-9]+')->name('api.consumables.restore');
+
+        Route::post('{consumable}/unarchive',
+            [Api\ConsumablesController::class, 'unarchive']
+        )->where('consumable', '[0-9]+')->name('api.consumables.unarchive');
+
+        Route::post('{consumable}/consume/{assignment}',
+            [Api\ConsumablesController::class, 'consume']
+        )->where(['consumable' => '[0-9]+', 'assignment' => '[0-9]+'])
+            ->name('api.consumables.consume');
+
+        Route::post('bulkconsume',
+            [Api\ConsumablesController::class, 'bulkConsume']
+        )->name('api.consumables.bulkconsume');
+
+        Route::post('bulkedit',
+            [Api\ConsumablesController::class, 'bulkEdit']
+        )->name('api.consumables.bulkedit');
+
+        Route::post('bulkdelete',
+            [Api\ConsumablesController::class, 'bulkDestroy']
+        )->name('api.consumables.bulkdelete');
+
+        Route::post('bulkrestore',
+            [Api\ConsumablesController::class, 'bulkRestore']
+        )->name('api.consumables.bulkrestore');
 
     });
 

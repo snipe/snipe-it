@@ -12,11 +12,11 @@
         <x-form :route="route('accessories.bulkedit.store')">
             <x-box>
                 <x-slot:header>
-                    {{ trans_choice('admin/accessories/general.bulk_edit_warn', count($accessories), ['accessory_count' => count($accessories)]) }}
+                    {{ trans_choice('general.bulk_edit_warn', count($accessories), ['count' => count($accessories), 'item' => trans('general.accessory'), 'items' => trans('general.accessories')]) }}
                 </x-slot:header>
 
                 <x-callout type="info" icon="tip" live="polite">
-                    {{ trans('admin/accessories/general.bulk_edit_help') }}
+                    {{ trans('general.bulk_edit_help', ['items' => trans('general.accessories')]) }}
                 </x-callout>
 
                 <table class="table table-striped" style="margin-bottom: 25px; border-bottom: 1px solid light-dark(#eeeeee, #656464);">
