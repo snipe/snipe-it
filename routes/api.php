@@ -67,6 +67,12 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'api-throttle:api']], fu
     Route::get('requests', [Api\CheckoutRequest::class, 'index'])
         ->name('api.requests.index');
 
+    Route::get('unaccepted-acceptances', [Api\UnacceptedAcceptancesController::class, 'index'])
+        ->name('api.unaccepted-acceptances.index');
+
+    Route::post('unaccepted-acceptances/send-reminders', [Api\UnacceptedAcceptancesController::class, 'sendReminders'])
+        ->name('api.unaccepted-acceptances.send-reminders');
+
     /**
      * Account routes
      */
