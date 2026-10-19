@@ -99,6 +99,22 @@ class ComponentArchiveValidationTest extends TestCase
         $this->assertSame(CheckoutRequestState::Canceled, $pending->state);
     }
 
+    public function test_deleting_component_auto_cancels_pending_requests(): void
+    {
+        $component = Component::factory()->create();
+        $pending = CheckoutRequest::factory()->create([
+            'user_id' => User::factory()->create()->id,
+            'requestable_id' => $component->id,
+            'requestable_type' => Component::class,
+        ]);
+
+        $component->delete();
+
+        $pending->refresh();
+        $this->assertNotNull($pending->canceled_at);
+        $this->assertSame(CheckoutRequestState::Canceled, $pending->state);
+    }
+
     public function test_archiving_does_not_touch_already_canceled_requests(): void
     {
         $component = Component::factory()->create();
