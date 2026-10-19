@@ -6,6 +6,11 @@ return [
     'send_reminder' => 'Send reminder',
     'cannot_send_reminder' => 'User has been deleted or does not have an email address so cannot receive a reminder',
     'reminder_sent' => 'Reminder sent',
+    'bulk_reminders_sent' => 'Sent :sent reminder(s), skipped :skipped:breakdown',
+    'skip_not_found' => 'no longer pending',
+    'skip_fmcs' => 'not in your companies',
+    'skip_no_email' => 'missing email',
+    'skip_bad_data' => 'bad data',
     'acceptance_deleted' => 'Acceptance request deleted',
     'acceptance_request' => 'Acceptance request',
     'custom_export' => [
