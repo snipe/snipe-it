@@ -124,6 +124,10 @@ class AccessoriesTransformer
             // produces a brand-new row and leaves the deleted parent
             // untouched, so it's safe as a restore-and-tweak shortcut.
             'clone' => Gate::allows('clone', $accessory),
+            // Top-level so genericActionsFormatter renders the per-row
+            // restore button on the Deleted index. The bulk_selectable
+            // mirror below drives the bulk-actions dropdown.
+            'restore' => $isDeleted && Gate::allows('delete', $accessory),
             // Request / cancel: if the requestable flag is off the row
             // never surfaces on /account/requestable anyway (scoped out
             // by Requestable()), but honor it here too for

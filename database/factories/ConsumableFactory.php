@@ -124,6 +124,11 @@ class ConsumableFactory extends Factory
         });
     }
 
+    public function archived(): self
+    {
+        return $this->state(fn () => ['archived' => true]);
+    }
+
     public function checkedOutToUser(?User $user = null)
     {
         return $this->afterCreating(function (Consumable $consumable) use ($user) {

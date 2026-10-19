@@ -3,6 +3,7 @@
 namespace App\Models\Builders;
 
 use App\Models\Consumable;
+use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
 
 /**
@@ -14,7 +15,31 @@ class ConsumableQueryBuilder extends Builder
 {
     public function requestable(): self
     {
-        return $this->where('consumables.requestable', '1');
+        return $this->notArchived()->where('consumables.requestable', '1');
+    }
+
+    public function archived(): self
+    {
+        return $this->where('consumables.archived', '=', 1);
+    }
+
+    public function notArchived(): self
+    {
+        return $this->where('consumables.archived', '=', 0);
+    }
+
+    /**
+     * Default list scope. Archived rows drop out unless the admin has
+     * flipped the show_archived_in_list setting on, matching the shape
+     * of Asset::assetsForShow / Accessory::accessoriesForShow.
+     */
+    public function consumablesForShow(): self
+    {
+        if (Setting::getSettings()->show_archived_in_list == 1) {
+            return $this;
+        }
+
+        return $this->notArchived();
     }
 
     public function orderCategory(string $order): self

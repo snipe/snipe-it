@@ -270,9 +270,17 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         /**
          * Consumables Breadcrumbs
          */
-        Breadcrumbs::for('consumables.index', fn (Trail $trail) => $trail->parent('home', route('home'))
-            ->push(trans('general.consumables'), route('consumables.index'))
-        );
+        $consumablesStatus = request()->status;
+        if (request()->is('consumables*') && in_array($consumablesStatus, ['Archived', 'Deleted'], true)) {
+            Breadcrumbs::for('consumables.index', fn (Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.consumables'), route('consumables.index'))
+                ->push(trans('general.'.strtolower($consumablesStatus)), route('consumables.index', ['status' => $consumablesStatus]))
+            );
+        } else {
+            Breadcrumbs::for('consumables.index', fn (Trail $trail) => $trail->parent('home', route('home'))
+                ->push(trans('general.consumables'), route('consumables.index'))
+            );
+        }
 
         Breadcrumbs::for('consumables.create', fn (Trail $trail) => $trail->parent('consumables.index', route('consumables.index'))
             ->push(trans('general.create'), route('consumables.create'))
@@ -281,10 +289,14 @@ class BreadcrumbsServiceProvider extends ServiceProvider
         Breadcrumbs::for('consumables.show', function (Trail $trail, Consumable $consumable) {
             $trail->parent('consumables.index', route('consumables.index'));
 
-            // Consumables don't support archived - soft-delete only -
-            // so the inserted segment is just Deleted when applicable.
+            // Deleted takes precedence over archived - a soft-deleted
+            // archived item lives in the Deleted bucket, not Archived.
+            // Linking the segment back to the filtered index gives the
+            // operator a way to pop back to peers in the same state.
             if ($consumable->deleted_at) {
                 $trail->push(trans('general.deleted'), route('consumables.index', ['status' => 'Deleted']));
+            } elseif ($consumable->archived) {
+                $trail->push(trans('general.archived'), route('consumables.index', ['status' => 'Archived']));
             }
 
             $trail->push($consumable->name, route('consumables.show', $consumable));

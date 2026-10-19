@@ -82,6 +82,22 @@ class AccessoryArchiveValidationTest extends TestCase
         $this->assertSame(CheckoutRequestState::Canceled, $pending->state);
     }
 
+    public function test_deleting_accessory_auto_cancels_pending_requests(): void
+    {
+        $accessory = Accessory::factory()->create();
+        $pending = CheckoutRequest::factory()->create([
+            'user_id' => User::factory()->create()->id,
+            'requestable_id' => $accessory->id,
+            'requestable_type' => Accessory::class,
+        ]);
+
+        $accessory->delete();
+
+        $pending->refresh();
+        $this->assertNotNull($pending->canceled_at);
+        $this->assertSame(CheckoutRequestState::Canceled, $pending->state);
+    }
+
     public function test_archiving_does_not_touch_already_canceled_requests(): void
     {
         $accessory = Accessory::factory()->create();
