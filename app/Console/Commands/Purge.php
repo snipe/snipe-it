@@ -245,7 +245,16 @@ class Purge extends Command
             // forceDeleted hook covers the direct forceDelete() path
             // that bypasses this command.
             Accessory::class => ['checkout_requests' => ['requestable_id', 'requestable_type', Accessory::class]],
-            Consumable::class => ['checkout_requests' => ['requestable_id', 'requestable_type', Consumable::class]],
+            // consumables_users is the pivot the Consumable observer
+            // no longer detaches on soft-delete (so restores preserve
+            // the mark-consumed lifecycle). On purge we need to clean
+            // it ourselves since this path bypasses the forceDeleted
+            // Eloquent hook that handles pivot detach for in-app
+            // force-delete.
+            Consumable::class => [
+                'consumables_users' => 'consumable_id',
+                'checkout_requests' => ['requestable_id', 'requestable_type', Consumable::class],
+            ],
             Component::class => ['checkout_requests' => ['requestable_id', 'requestable_type', Component::class]],
             AssetModel::class => ['checkout_requests' => ['requestable_id', 'requestable_type', AssetModel::class]],
         ];
