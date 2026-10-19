@@ -28,12 +28,12 @@ class UnacceptedAssetReminderNotification extends Notification
     /**
      * @return array<int, string>
      */
-    public function via($notifiable): array
+    public function via(): array
     {
         return ['mail'];
     }
 
-    public function toMail($notifiable): MailMessage
+    public function toMail(): MailMessage
     {
         // Locale is picked up automatically from User::preferredLocale()
         // (HasLocalePreference contract), so this doesn't need to
