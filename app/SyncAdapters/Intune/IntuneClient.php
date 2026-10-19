@@ -2,6 +2,7 @@
 
 namespace App\SyncAdapters\Intune;
 
+use App\SyncAdapters\Traits\RetriesTransientHttpErrors;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Http;
  */
 class IntuneClient
 {
+    use RetriesTransientHttpErrors;
+
     private ?string $token = null;
 
     public function __construct(
@@ -234,9 +237,11 @@ class IntuneClient
 
     private function request(): PendingRequest
     {
-        return Http::withToken($this->bearer())
-            ->withOptions(['allow_redirects' => false])
-            ->acceptJson()
-            ->timeout(30);
+        return $this->withTransientRetry(
+            Http::withToken($this->bearer())
+                ->withOptions(['allow_redirects' => false])
+                ->acceptJson()
+                ->timeout(30)
+        );
     }
 }

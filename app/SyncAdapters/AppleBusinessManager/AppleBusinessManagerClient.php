@@ -2,6 +2,7 @@
 
 namespace App\SyncAdapters\AppleBusinessManager;
 
+use App\SyncAdapters\Traits\RetriesTransientHttpErrors;
 use Firebase\JWT\JWT;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
@@ -26,6 +27,8 @@ use Illuminate\Support\Str;
  */
 class AppleBusinessManagerClient
 {
+    use RetriesTransientHttpErrors;
+
     private const APPLE_AUDIENCE = 'https://account.apple.com/auth/oauth2/v2/token';
 
     private const APPLE_TOKEN_ENDPOINT = 'https://account.apple.com/auth/oauth2/v2/token';
@@ -231,29 +234,13 @@ class AppleBusinessManagerClient
      */
     private function request(): PendingRequest
     {
-        return Http::baseUrl($this->apiBaseUrl())
-            ->withOptions(['allow_redirects' => false])
-            ->withToken($this->bearer())
-            ->acceptJson()
-            ->timeout(30)
-            ->retry(
-                times: 8,
-                sleepMilliseconds: function (int $attempt, \Exception $e): int {
-                    if ($e instanceof \Illuminate\Http\Client\RequestException && $e->response->status() === 429) {
-                        $retryAfter = (int) ($e->response->header('Retry-After') ?: 0);
-                        if ($retryAfter > 0) {
-                            return min($retryAfter, 120) * 1000;
-                        }
-                    }
-
-                    // Exponential: 500ms, 1s, 2s, 4s, 8s, 16s, 32s, 60s
-                    // plus up to 250ms jitter so parallel runs don't
-                    // retry in lockstep.
-                    return min(60_000, 500 * (2 ** ($attempt - 1))) + random_int(0, 250);
-                },
-                when: fn(\Exception $e) => $e instanceof \Illuminate\Http\Client\ConnectionException
-                    || ($e instanceof \Illuminate\Http\Client\RequestException && $e->response->status() === 429),
-            );
+        return $this->withTransientRetry(
+            Http::baseUrl($this->apiBaseUrl())
+                ->withOptions(['allow_redirects' => false])
+                ->withToken($this->bearer())
+                ->acceptJson()
+                ->timeout(30)
+        );
     }
 
     /**
