@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Events\CheckoutableCheckedIn;
 use App\Exceptions\MissingLogTarget;
 use App\Helpers\Helper;
+use App\Http\Controllers\Components\BulkComponentsController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AdjustQuantityRequest;
 use App\Http\Requests\ImageUploadRequest;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class ComponentsController extends Controller
 {
@@ -336,13 +338,256 @@ class ComponentsController extends Controller
         $component = Component::findOrFail($id);
         $this->authorize('delete', $component);
 
-        if ($component->numCheckedOut() > 0) {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.delete.error_qty')));
+        // Mirror the web + bulk paths. Active checkouts block destroy
+        // the same way they block archive. numCheckedOut() reads
+        // sum_unconstrained_assets. Load it first to avoid a per-row query.
+        $component->loadSum('unconstrainedAssets as sum_unconstrained_assets', 'components_assets.assigned_qty');
+        if (! $component->isDeletable()) {
+            return response()->json(Helper::formatStandardApiResponse(
+                'error',
+                null,
+                trans('general.bulk_delete_associations.assoc_checkouts_no_count', [
+                    'item_name' => $component->name,
+                    'item' => trans('general.component'),
+                ]),
+            ), 422);
         }
 
         $component->delete();
 
         return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/components/message.delete.success')));
+    }
+
+    /**
+     * Restore a soft-deleted component. API parity for the web
+     * ComponentsController::postRestore endpoint.
+     */
+    public function restore($id): JsonResponse
+    {
+        $this->authorize('delete', Component::class);
+        $component = Component::withTrashed()->findOrFail($id);
+        $this->authorize('delete', $component);
+
+        if ($component->deleted_at === null) {
+            return response()->json(Helper::formatStandardApiResponse(
+                'error',
+                null,
+                trans('general.not_deleted', ['item_type' => trans('general.component')]),
+            ), 422);
+        }
+
+        if (! $component->restore()) {
+            return response()->json(Helper::formatStandardApiResponse(
+                'error',
+                null,
+                trans('general.could_not_restore', ['item_type' => trans('general.component'), 'error' => $component->getErrors()->first()]),
+            ), 422);
+        }
+
+        return response()->json(Helper::formatStandardApiResponse(
+            'success',
+            null,
+            trans('admin/components/message.restore.success'),
+        ));
+    }
+
+    /**
+     * Flip archived off. API parity for the web
+     * ComponentsController::postUnarchive endpoint.
+     */
+    public function unarchive(Component $component): JsonResponse
+    {
+        $this->authorize('update', $component);
+
+        if (! $component->archived) {
+            return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/components/message.update.success')));
+        }
+
+        $component->archived = false;
+        if (! $component->save()) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, $component->getErrors()), 422);
+        }
+
+        return response()->json(Helper::formatStandardApiResponse('success', null, trans('admin/components/message.update.success')));
+    }
+
+    /**
+     * Bulk edit. Mirror of BulkComponentsController::update.
+     * Returns JSON instead of a flash redirect, otherwise identical
+     * semantics: writes only non-blank fields, routes company_id
+     * through FMCS, supports null_{field}=1 opt-in null-outs, per-row
+     * Gate check, surfaces partial-success detail in the payload.
+     */
+    public function bulkEdit(Request $request): JsonResponse
+    {
+        $this->authorize('update', Component::class);
+
+        if (! $request->filled('ids')) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.bulk.no_components_selected')), 422);
+        }
+
+        $components = Component::whereIn('id', $request->input('ids'))->get();
+        if ($components->isEmpty()) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.bulk.no_components_selected')), 422);
+        }
+
+        $updateData = [];
+        foreach (BulkComponentsController::EDITABLE_FIELDS as $field) {
+            if (! $request->has($field)) {
+                continue;
+            }
+            $value = $request->input($field);
+            if ($value === '' || $value === null) {
+                continue;
+            }
+            $updateData[$field] = $value;
+        }
+
+        if (array_key_exists('company_id', $updateData)) {
+            try {
+                $updateData['company_id'] = Company::getIdForCurrentUser($updateData['company_id']);
+            } catch (ValidationException $e) {
+                return response()->json(Helper::formatStandardApiResponse('error', null, $e->errors()), 422);
+            }
+        }
+
+        foreach (['category_id', 'company_id', 'manufacturer_id', 'location_id', 'default_supplier_id', 'min_amt'] as $field) {
+            if ($request->boolean('null_'.$field)) {
+                if ($field === 'category_id') {
+                    continue;
+                }
+                $updateData[$field] = null;
+            }
+        }
+
+        if (empty($updateData)) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.bulk.no_fields_updated')), 422);
+        }
+
+        $authorized = $components->filter(fn (Component $c) => Gate::allows('update', $c));
+        $skipped = $components->count() - $authorized->count();
+
+        $updated = 0;
+        $failed_rows = [];
+        foreach ($authorized as $component) {
+            $component->fill($updateData);
+            if ($component->save()) {
+                $updated++;
+
+                continue;
+            }
+            $failed_rows[] = $component->name.': '.$component->getErrors()->first();
+        }
+
+        $failed = count($failed_rows);
+        $payload = ['updated' => $updated, 'skipped_unauthorized' => $skipped, 'failed_rows' => $failed_rows];
+
+        if ($updated === 0 && $failed > 0) {
+            return response()->json(Helper::formatStandardApiResponse(
+                'error',
+                $payload,
+                trans_choice('admin/components/message.bulk.update.none_updated', $failed, ['count' => $failed]),
+            ), 422);
+        }
+
+        return response()->json(Helper::formatStandardApiResponse(
+            'success',
+            $payload,
+            trans_choice('admin/components/message.bulk.update.success', $updated, ['count' => $updated]),
+        ));
+    }
+
+    /**
+     * Bulk soft-delete. Per-row isDeletable + Gate check mirror the
+     * web controller.
+     */
+    public function bulkDestroy(Request $request): JsonResponse
+    {
+        $this->authorize('delete', Component::class);
+
+        $errors = [];
+        $success_count = 0;
+
+        foreach ((array) $request->input('ids', []) as $id) {
+            $component = Component::find($id);
+            if (is_null($component)) {
+                $errors[] = trans('admin/components/message.does_not_exist', ['id' => $id]);
+
+                continue;
+            }
+
+            if (! Gate::allows('delete', $component)) {
+                $errors[] = trans('general.unauthorized');
+
+                continue;
+            }
+
+            // numCheckedOut() reads sum_unconstrained_assets. Load it
+            // first so isDeletable() does not fire a per-row sub-query.
+            $component->loadSum('unconstrainedAssets as sum_unconstrained_assets', 'components_assets.assigned_qty');
+            if (! $component->isDeletable()) {
+                $errors[] = trans('general.bulk_delete_associations.assoc_checkouts_no_count', [
+                    'item_name' => $component->name,
+                    'item' => trans('general.component'),
+                ]);
+
+                continue;
+            }
+
+            $component->delete();
+            $success_count++;
+        }
+
+        $payload = ['deleted' => $success_count, 'errors' => $errors];
+        $message = $success_count > 0
+            ? trans_choice('admin/components/message.bulk.delete.success', $success_count, ['count' => $success_count])
+            : trans('admin/components/message.bulk.no_components_selected');
+
+        return response()->json(
+            Helper::formatStandardApiResponse($success_count > 0 ? 'success' : 'error', $payload, $message),
+            $success_count > 0 ? 200 : 422,
+        );
+    }
+
+    /**
+     * Bulk restore. Already-live rows are skipped without erroring so
+     * a stale selection doesn't blow up the whole batch.
+     */
+    public function bulkRestore(Request $request): JsonResponse
+    {
+        $this->authorize('delete', Component::class);
+
+        $ids = (array) $request->input('ids', []);
+        if ($ids === []) {
+            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/components/message.bulk.no_components_selected')), 422);
+        }
+
+        $components = Component::withTrashed()->whereIn('id', $ids)->get();
+
+        $restored = 0;
+        $errors = [];
+
+        foreach ($components as $component) {
+            if (! Gate::allows('delete', $component)) {
+                $errors[] = trans('general.unauthorized');
+
+                continue;
+            }
+
+            if ($component->deleted_at === null) {
+                continue;
+            }
+
+            if ($component->restore()) {
+                $restored++;
+            }
+        }
+
+        return response()->json(Helper::formatStandardApiResponse(
+            $restored > 0 ? 'success' : 'error',
+            ['restored' => $restored, 'errors' => $errors],
+            trans_choice('admin/components/message.bulk.restore.success', $restored, ['count' => $restored]),
+        ), $restored > 0 ? 200 : 422);
     }
 
     /**
