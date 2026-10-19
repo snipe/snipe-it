@@ -258,9 +258,9 @@ class JamfAdapter extends SyncAdapter implements PushableAdapter
     /**
      * Push Snipe-IT-authoritative fields to Jamf Pro via the newer
      * JSON detail endpoint. The payload uses Jamf's nested-object
-     * shape (assetTag lives inside userAndLocation, not at the top
-     * level), so sourceFieldToJamfPath() returns dotted paths that
-     * get assembled via Arr::set before the PATCH.
+     * shape (assetTag lives inside general per the ComputerGeneralUpdate
+     * schema, not userAndLocation), so sourceFieldToJamfPath() returns
+     * dotted paths that get assembled via Arr::set before the PATCH.
      *
      * @param  array<int, string>  $changedFields
      */
@@ -325,7 +325,12 @@ class JamfAdapter extends SyncAdapter implements PushableAdapter
     private static function sourceFieldToJamfPath(string $field): ?string
     {
         return match ($field) {
-            'asset_tag' => 'userAndLocation.assetTag',
+            // Jamf's ComputerGeneralUpdate schema is where assetTag
+            // lives. userAndLocation does NOT accept assetTag on the
+            // PATCH side (confirmed against Jamf Pro 11.32 OpenAPI
+            // schema, see issue #19851). The pull side already reads
+            // from general.assetTag, so push matches.
+            'asset_tag' => 'general.assetTag',
             default => null,
         };
     }

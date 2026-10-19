@@ -142,8 +142,8 @@ class JamfClient
 
     /**
      * Update a computer's inventory detail via Jamf Pro's newer JSON
-     * API. Accepts a partial payload with nested objects like
-     * `userAndLocation` (assetTag lives at userAndLocation.assetTag).
+     * API. Accepts a partial payload with nested objects like `general`
+     * (assetTag lives at general.assetTag per ComputerGeneralUpdate).
      * Fields the caller doesn't include stay untouched.
      *
      * @param  array<string, mixed>  $payload
