@@ -108,6 +108,54 @@ class JamfSchoolAdapterTest extends TestCase
         $this->assertNotNull($record->lastSeen);
     }
 
+    public function test_owner_block_populates_assigned_user_fields()
+    {
+        // Regression test for issue #19856. Jamf School carries the
+        // device's assigned user under `owner`. The adapter has to
+        // surface email + username so the pipeline's user-lookup can
+        // resolve them.
+        $adapter = $this->configuredJamfSchoolAdapter();
+
+        Http::fake([
+            '*/devices*' => Http::response([
+                'count' => 1,
+                'devices' => [
+                    $this->jamfSchoolDevice(
+                        udid: 'edu-udid-9',
+                        owner: [
+                            'username' => 'edu-staff-1',
+                            'email' => 'edu-staff-1@edu.invalid',
+                        ],
+                    ),
+                ],
+            ]),
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertSame('edu-staff-1@edu.invalid', $records[0]->assignedUserEmail);
+        $this->assertSame('edu-staff-1', $records[0]->assignedUserName);
+    }
+
+    public function test_absent_owner_block_leaves_assigned_user_null()
+    {
+        $adapter = $this->configuredJamfSchoolAdapter();
+
+        Http::fake([
+            '*/devices*' => Http::response([
+                'count' => 1,
+                'devices' => [
+                    $this->jamfSchoolDevice(udid: 'edu-udid-10'),
+                ],
+            ]),
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertNull($records[0]->assignedUserEmail);
+        $this->assertNull($records[0]->assignedUserName);
+    }
+
     private function configuredJamfSchoolAdapter(): JamfSchoolAdapter
     {
         $instance = SyncAdapterInstance::where('slug', 'jamf_school')->firstOrFail();
@@ -123,6 +171,9 @@ class JamfSchoolAdapterTest extends TestCase
     /**
      * @return array<string, mixed>
      */
+    /**
+     * @param  array<string, mixed>|null  $owner
+     */
     private function jamfSchoolDevice(
         string $udid,
         string $name = 'device',
@@ -132,8 +183,9 @@ class JamfSchoolAdapterTest extends TestCase
         ?string $os = 'iPadOS',
         ?string $osVersion = null,
         ?string $lastCheckin = null,
+        ?array $owner = null,
     ): array {
-        return [
+        $device = [
             'UDID' => $udid,
             'name' => $name,
             'serialNumber' => $serial,
@@ -151,5 +203,11 @@ class JamfSchoolAdapterTest extends TestCase
             'assetTag' => null,
             'locationId' => 1,
         ];
+
+        if ($owner !== null) {
+            $device['owner'] = $owner;
+        }
+
+        return $device;
     }
 }
