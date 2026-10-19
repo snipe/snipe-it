@@ -128,7 +128,7 @@ class CheckoutAcceptancePresenter extends Presenter
                 'visible' => true,
                 'formatter' => 'acceptanceActionsFormatter',
                 'printIgnore' => true,
-                'class' => 'hidden-print',
+                'class' => 'hidden-print text-nowrap',
             ];
         }
 
