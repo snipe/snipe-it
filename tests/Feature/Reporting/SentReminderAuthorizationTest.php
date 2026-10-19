@@ -10,9 +10,15 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
+/**
+ * Auth + FMCS pins for the per-row reminder-send endpoint on the moved
+ * /unaccepted-acceptances surface. Gate shifted from reports.view to
+ * canCheckoutAtLeastOneItemType in v8.9 so the mutating path isn't
+ * reachable by a read-only Reports grant.
+ */
 class SentReminderAuthorizationTest extends TestCase
 {
-    public function test_user_without_reports_view_cannot_send_reminder()
+    public function test_user_without_checkout_grant_cannot_send_reminder()
     {
         Mail::fake();
 
@@ -25,13 +31,35 @@ class SentReminderAuthorizationTest extends TestCase
             ->create();
 
         $this->actingAs(User::factory()->create())
-            ->post(route('reports/unaccepted_assets_sent_reminder'), ['acceptance_id' => $acceptance->id])
+            ->post(route('unaccepted-acceptances.send-reminder'), ['acceptance_id' => $acceptance->id])
             ->assertForbidden();
 
         Mail::assertNothingSent();
     }
 
-    public function test_reports_user_can_send_reminder_for_their_own_company()
+    public function test_user_with_reports_view_only_cannot_send_reminder()
+    {
+        // Regression pin for the v8.9 move. reports.view alone no
+        // longer unlocks a reminder send. The actor must hold a
+        // checkout grant on at least one type.
+        Mail::fake();
+
+        $assignee = User::factory()->create(['email' => 'assignee@example.test']);
+        $asset = Asset::factory()->create();
+        $acceptance = CheckoutAcceptance::factory()
+            ->pending()
+            ->for($asset, 'checkoutable')
+            ->for($assignee, 'assignedTo')
+            ->create();
+
+        $this->actingAs(User::factory()->canViewReports()->create())
+            ->post(route('unaccepted-acceptances.send-reminder'), ['acceptance_id' => $acceptance->id])
+            ->assertForbidden();
+
+        Mail::assertNothingSent();
+    }
+
+    public function test_checkout_user_can_send_reminder_for_their_own_company()
     {
         Mail::fake();
         $this->settings->enableMultipleFullCompanySupport();
@@ -40,7 +68,7 @@ class SentReminderAuthorizationTest extends TestCase
 
         $assignee = User::factory()->forCompany($companyA)->create(['email' => 'assignee@example.test']);
         $asset = Asset::factory()->create(['company_id' => $companyA->id]);
-        $reporter = User::factory()->canViewReports()->forCompany($companyA)->create();
+        $reporter = User::factory()->checkoutAccessories()->forCompany($companyA)->create();
         $acceptance = CheckoutAcceptance::factory()
             ->pending()
             ->for($asset, 'checkoutable')
@@ -48,14 +76,14 @@ class SentReminderAuthorizationTest extends TestCase
             ->create();
 
         $this->actingAs($reporter)
-            ->post(route('reports/unaccepted_assets_sent_reminder'), ['acceptance_id' => $acceptance->id])
-            ->assertRedirectToRoute('reports/unaccepted_assets')
+            ->post(route('unaccepted-acceptances.send-reminder'), ['acceptance_id' => $acceptance->id])
+            ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('success');
 
         Mail::assertSent(CheckoutAssetMail::class);
     }
 
-    public function test_reports_user_cannot_send_reminder_for_another_company()
+    public function test_checkout_user_cannot_send_reminder_for_another_company()
     {
         Mail::fake();
         $this->settings->enableMultipleFullCompanySupport();
@@ -64,7 +92,7 @@ class SentReminderAuthorizationTest extends TestCase
 
         $assignee = User::factory()->create(['email' => 'assignee@example.test']);
         $assetB = Asset::factory()->create(['company_id' => $companyB->id]);
-        $reporter = User::factory()->canViewReports()->forCompany($companyA)->create();
+        $reporter = User::factory()->checkoutAccessories()->forCompany($companyA)->create();
         $acceptance = CheckoutAcceptance::factory()
             ->pending()
             ->for($assetB, 'checkoutable')
@@ -72,8 +100,8 @@ class SentReminderAuthorizationTest extends TestCase
             ->create();
 
         $this->actingAs($reporter)
-            ->post(route('reports/unaccepted_assets_sent_reminder'), ['acceptance_id' => $acceptance->id])
-            ->assertRedirectToRoute('reports/unaccepted_assets')
+            ->post(route('unaccepted-acceptances.send-reminder'), ['acceptance_id' => $acceptance->id])
+            ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('error');
 
         Mail::assertNothingSent();
@@ -88,7 +116,7 @@ class SentReminderAuthorizationTest extends TestCase
 
         $assignee = User::factory()->create(['email' => 'assignee@example.test']);
         $assetB = Asset::factory()->create(['company_id' => $companyB->id]);
-        $reporter = User::factory()->canViewReports()->withoutCompany()->create();
+        $reporter = User::factory()->checkoutAccessories()->withoutCompany()->create();
         $reporter->companies()->sync([$companyA->id]);
 
         $acceptance = CheckoutAcceptance::factory()
@@ -98,8 +126,8 @@ class SentReminderAuthorizationTest extends TestCase
             ->create();
 
         $this->actingAs($reporter)
-            ->post(route('reports/unaccepted_assets_sent_reminder'), ['acceptance_id' => $acceptance->id])
-            ->assertRedirectToRoute('reports/unaccepted_assets')
+            ->post(route('unaccepted-acceptances.send-reminder'), ['acceptance_id' => $acceptance->id])
+            ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('error');
 
         Mail::assertNothingSent();
@@ -122,8 +150,8 @@ class SentReminderAuthorizationTest extends TestCase
             ->create();
 
         $this->actingAs($superuser)
-            ->post(route('reports/unaccepted_assets_sent_reminder'), ['acceptance_id' => $acceptance->id])
-            ->assertRedirectToRoute('reports/unaccepted_assets')
+            ->post(route('unaccepted-acceptances.send-reminder'), ['acceptance_id' => $acceptance->id])
+            ->assertRedirectToRoute('unaccepted-acceptances.index')
             ->assertSessionHas('success');
 
         Mail::assertSent(CheckoutAssetMail::class);
