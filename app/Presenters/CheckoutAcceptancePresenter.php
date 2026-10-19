@@ -12,7 +12,7 @@ class CheckoutAcceptancePresenter extends Presenter
      * reducing total LoC in a meaningful way, so the length warning
      * is suppressed here to match the rest of the presenter family.
      *
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * @SuppressWarnings("PHPMD.ExcessiveMethodLength")
      */
     public static function dataTableLayout(): string
     {
