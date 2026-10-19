@@ -9,12 +9,12 @@
 {{-- Page content --}}
 @section('content')
     <x-container class="col-md-8 col-md-offset-2">
-        <p>{{ trans('admin/accessories/general.bulk_delete_help') }}</p>
+        <p>{{ trans('general.bulk_delete_help', ['items' => trans('general.accessories')]) }}</p>
 
         <x-form route="{{ route('accessories.bulkdelete.store') }}">
             <x-box>
                 <x-callout type="warning" icon="warning" live="assertive">
-                    {{ trans_choice('admin/accessories/general.bulk_delete_warn', count($accessories), ['accessory_count' => count($accessories)]) }}
+                    {{ trans_choice('general.bulk_delete_warn', count($accessories), ['count' => count($accessories), 'item' => trans('general.accessory'), 'items' => trans('general.accessories')]) }}
                 </x-callout>
 
                 <table class="table table-striped">
