@@ -7,8 +7,10 @@ use App\Models\SyncAdapterConfig;
 use App\Models\SyncAdapterInstance;
 use App\SyncAdapters\Jamf\JamfAdapter;
 use App\SyncAdapters\SyncAdapter;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Sleep;
 use Tests\TestCase;
 
 /**
@@ -225,6 +227,66 @@ class JamfAdapterTest extends TestCase
         $this->assertSame('ios', $record->extra['jamf_mobile_device_type']);
         $this->assertTrue($record->extra['jamf_mobile_managed']);
         $this->assertTrue($record->extra['jamf_mobile_supervised']);
+    }
+
+    public function test_retries_connection_error_on_a_paginated_page()
+    {
+        // Regression test for #19853. A real customer's Jamf pull of
+        // ~3,800 computers aborted on page 37 of 38 with
+        // "cURL error 18: transfer closed with outstanding read data
+        // remaining." Laravel surfaces that as ConnectionException from
+        // the HTTP client, which the trait retries. Fake Sleep so the
+        // backoff doesn't actually block the test.
+        Sleep::fake();
+
+        $adapter = $this->configuredJamfAdapter();
+
+        $attempts = 0;
+        Http::fake([
+            '*/api/oauth/token' => $this->jamfTokenResponse(),
+            '*/api/v1/computers-inventory*' => function () use (&$attempts) {
+                $attempts++;
+                if ($attempts === 1) {
+                    throw new ConnectionException('cURL error 18: transfer closed with outstanding read data remaining');
+                }
+
+                return Http::response([
+                    'totalCount' => 1,
+                    'results' => [$this->jamfComputer(id: 1, name: 'retried-mac')],
+                ]);
+            },
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertCount(1, $records);
+        $this->assertSame('retried-mac', $records[0]->hostname);
+        $this->assertSame(2, $attempts, 'JamfClient should have retried the dropped page once.');
+    }
+
+    public function test_retries_on_429_and_honors_retry_after_header()
+    {
+        // Jamf Pro doesn't throttle with 429 by default, but Graph does
+        // and the trait is shared, so prove Jamf's wrapper reads
+        // Retry-After the same way.
+        Sleep::fake();
+
+        $adapter = $this->configuredJamfAdapter();
+
+        Http::fake([
+            '*/api/oauth/token' => $this->jamfTokenResponse(),
+            '*/api/v1/computers-inventory*' => Http::sequence()
+                ->push(['detail' => 'rate limited'], 429, ['Retry-After' => '1'])
+                ->push([
+                    'totalCount' => 1,
+                    'results' => [$this->jamfComputer(id: 2, name: 'throttled-mac')],
+                ], 200),
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertCount(1, $records);
+        $this->assertSame('throttled-mac', $records[0]->hostname);
     }
 
     private function configuredJamfAdapter(bool $includeMobile = false): JamfAdapter

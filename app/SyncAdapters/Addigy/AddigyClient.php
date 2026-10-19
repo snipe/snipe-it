@@ -2,6 +2,7 @@
 
 namespace App\SyncAdapters\Addigy;
 
+use App\SyncAdapters\Traits\RetriesTransientHttpErrors;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Support\Facades\Http;
 
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Http;
  */
 class AddigyClient
 {
+    use RetriesTransientHttpErrors;
+
     public function __construct(
         private readonly string $baseUrl,
         private readonly string $clientId,
@@ -73,13 +76,15 @@ class AddigyClient
 
     private function request(): PendingRequest
     {
-        return Http::baseUrl(rtrim($this->baseUrl, '/'))
-            ->withOptions(['allow_redirects' => false])
-            ->withHeaders([
-                'client-id' => $this->clientId,
-                'client-secret' => $this->clientSecret,
-            ])
-            ->acceptJson()
-            ->timeout(30);
+        return $this->withTransientRetry(
+            Http::baseUrl(rtrim($this->baseUrl, '/'))
+                ->withOptions(['allow_redirects' => false])
+                ->withHeaders([
+                    'client-id' => $this->clientId,
+                    'client-secret' => $this->clientSecret,
+                ])
+                ->acceptJson()
+                ->timeout(30)
+        );
     }
 }
