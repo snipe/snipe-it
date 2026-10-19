@@ -39,6 +39,8 @@
                     'admins' => is_scalar(request('admins')) ? request('admins') : null,
                     'superadmins' => is_scalar(request('superadmins')) ? request('superadmins') : null,
                     'activated' => is_scalar(request('activated')) ? request('activated') : null,
+                    'end_date_within' => is_scalar(request('end_date_within')) ? (int) request('end_date_within') : null,
+                    'with_assignments' => request()->boolean('with_assignments') ? 1 : null,
                ])"/>
         </x-box>
         <x-shiftclick/>
