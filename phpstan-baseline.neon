@@ -1447,6 +1447,12 @@ parameters:
 			path: app/Http/Controllers/Api/SuppliersController.php
 
 		-
+			message: '#^Strict comparison using \!\=\= between Illuminate\\Database\\Eloquent\\Model and null will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
+			count: 1
+			path: app/Http/Controllers/Api/UnacceptedAcceptancesController.php
+
+		-
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
 			count: 1
@@ -2377,12 +2383,6 @@ parameters:
 			path: app/Http/Controllers/ReportsController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:checkouts\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/ReportsController.php
-
-		-
 			message: '#^If condition is always true\.$#'
 			identifier: if.alwaysTrue
 			count: 1
@@ -2409,12 +2409,6 @@ parameters:
 		-
 			message: '#^PHPDoc tag @return with type array is incompatible with native type Illuminate\\Contracts\\View\\View\.$#'
 			identifier: return.phpDocType
-			count: 1
-			path: app/Http/Controllers/ReportsController.php
-
-		-
-			message: '#^Unknown parameter \$firstTimeSending in call to App\\Mail\\CheckoutComponentMail constructor\.$#'
-			identifier: argument.unknown
 			count: 1
 			path: app/Http/Controllers/ReportsController.php
 
@@ -2603,6 +2597,42 @@ parameters:
 			identifier: class.notFound
 			count: 1
 			path: app/Http/Requests/SettingsLdapRequest.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$deleted_at\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Transformers/AcceptancesTransformer.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$id\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Transformers/AcceptancesTransformer.php
+
+		-
+			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$name\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Http/Transformers/AcceptancesTransformer.php
+
+		-
+			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Model\:\:checkouts\(\)\.$#'
+			identifier: method.notFound
+			count: 1
+			path: app/Http/Transformers/AcceptancesTransformer.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: app/Http/Transformers/AcceptancesTransformer.php
+
+		-
+			message: '#^Ternary operator condition is always true\.$#'
+			identifier: ternary.alwaysTrue
+			count: 1
+			path: app/Http/Transformers/AcceptancesTransformer.php
 
 		-
 			message: '#^Access to an undefined property Illuminate\\Database\\Eloquent\\Model\:\:\$display_name\.$#'
@@ -3749,24 +3779,6 @@ parameters:
 			identifier: property.notFound
 			count: 4
 			path: app/Mail/SendUpcomingAuditMail.php
-
-		-
-			message: '#^Access to an undefined property App\\Mail\\UnacceptedAssetReminderMail\:\:\$acceptance\.$#'
-			identifier: property.notFound
-			count: 1
-			path: app/Mail/UnacceptedAssetReminderMail.php
-
-		-
-			message: '#^Access to an undefined property App\\Mail\\UnacceptedAssetReminderMail\:\:\$count\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Mail/UnacceptedAssetReminderMail.php
-
-		-
-			message: '#^Access to an undefined property App\\Mail\\UnacceptedAssetReminderMail\:\:\$target\.$#'
-			identifier: property.notFound
-			count: 2
-			path: app/Mail/UnacceptedAssetReminderMail.php
 
 		-
 			message: '#^Access to an undefined property App\\Models\\Accessory\:\:\$license\.$#'

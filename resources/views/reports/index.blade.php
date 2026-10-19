@@ -61,12 +61,6 @@
         </div>
 
         <div class="col-md-3 col-sm-6">
-            <a href="{{ url('reports/unaccepted_assets') }}" class="btn btn-theme btn-block" style="margin-bottom: 10px; white-space: normal; text-align: left; padding-left: 15px;">
-                <x-icon type="assets" class="fa-fw"/> {{ trans('general.unaccepted_asset_report') }}
-            </a>
-        </div>
-
-        <div class="col-md-3 col-sm-6">
             <a href="{{ url('reports/accessories') }}" class="btn btn-theme btn-block" style="margin-bottom: 10px; white-space: normal; text-align: left; padding-left: 15px;">
                 <x-icon type="accessories" class="fa-fw"/> {{ trans('general.accessory_report') }}
             </a>

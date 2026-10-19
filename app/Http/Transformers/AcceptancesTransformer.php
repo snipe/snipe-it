@@ -43,10 +43,10 @@ class AcceptancesTransformer
             'id' => (int) $acceptance->id,
             'created_at' => Helper::getFormattedDateObject($acceptance->created_at, 'datetime'),
             'item' => $item ? [
-                'id' => (int) ($item instanceof LicenseSeat ? ($item->license?->id ?? 0) : $item->id),
+                'id' => (int) ($item instanceof LicenseSeat ? $item->license?->id : $item->id),
                 'name' => e($item instanceof LicenseSeat
-                    ? ($item->license?->name ?? '')
-                    : ($item->display_name ?? $item->name ?? '')),
+                    ? (string) $item->license?->name
+                    : (string) ($item->display_name ?? $item->name)),
                 'type' => self::itemTypeKey($acceptance->checkoutable_type),
                 'deleted_at' => (method_exists($item, 'trashed') && $item->trashed())
                     ? Helper::getFormattedDateObject($item->deleted_at, 'datetime')
