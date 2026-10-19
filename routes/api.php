@@ -405,6 +405,35 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api', 'api-throttle:api']], fu
             ]
         )->name('api.consumables.adjust-quantity');
 
+        Route::post('{id}/restore',
+            [Api\ConsumablesController::class, 'restore']
+        )->where('id', '[0-9]+')->name('api.consumables.restore');
+
+        Route::post('{consumable}/unarchive',
+            [Api\ConsumablesController::class, 'unarchive']
+        )->where('consumable', '[0-9]+')->name('api.consumables.unarchive');
+
+        Route::post('{consumable}/consume/{assignment}',
+            [Api\ConsumablesController::class, 'consume']
+        )->where(['consumable' => '[0-9]+', 'assignment' => '[0-9]+'])
+            ->name('api.consumables.consume');
+
+        Route::post('bulkconsume',
+            [Api\ConsumablesController::class, 'bulkConsume']
+        )->name('api.consumables.bulkconsume');
+
+        Route::post('bulkedit',
+            [Api\ConsumablesController::class, 'bulkEdit']
+        )->name('api.consumables.bulkedit');
+
+        Route::post('bulkdelete',
+            [Api\ConsumablesController::class, 'bulkDestroy']
+        )->name('api.consumables.bulkdelete');
+
+        Route::post('bulkrestore',
+            [Api\ConsumablesController::class, 'bulkRestore']
+        )->name('api.consumables.bulkrestore');
+
     });
 
     Route::resource('consumables',
