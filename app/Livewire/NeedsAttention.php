@@ -137,20 +137,24 @@ class NeedsAttention extends Component
                 ->count();
         }
 
-        // Pending checkout acceptances. whereHasMorph applies each
-        // checkoutable type's own CompanyableTrait global scope so
-        // FMCS scoping stays consistent. Restrict the morph list to
-        // types the caller can actually view so a non-admin's count
-        // reflects what they'd see if they clicked through, matching
-        // the /reports/unaccepted_assets scoping.
-        $acceptanceTypes = array_filter(
-            [Asset::class, LicenseSeat::class, Accessory::class, SnipeComponent::class, Consumable::class],
-            fn (string $type) => Gate::allows('view', $type === LicenseSeat::class ? License::class : $type),
-        );
-        if ($acceptanceTypes !== []) {
-            $this->pendingAcceptancesCount = CheckoutAcceptance::pending()
-                ->whereHasMorph('checkoutable', $acceptanceTypes)
-                ->count();
+        // Pending checkout acceptances. Count mirrors the destination
+        // page's gate (canCheckoutAtLeastOneItemType), so the tile is
+        // zeroed-and-hidden for a view-only user instead of linking
+        // through to a 403. whereHasMorph applies each checkoutable
+        // type's own CompanyableTrait global scope so FMCS scoping
+        // stays consistent, and the morph list is narrowed to types
+        // the caller holds checkout on so a non-admin's count reflects
+        // what they'd see if they clicked through.
+        if (Gate::allows('canCheckoutAtLeastOneItemType')) {
+            $acceptanceTypes = array_filter(
+                [Asset::class, LicenseSeat::class, Accessory::class, SnipeComponent::class, Consumable::class],
+                fn (string $type) => auth()->user()->can('checkout', $type === LicenseSeat::class ? License::class : $type),
+            );
+            if ($acceptanceTypes !== []) {
+                $this->pendingAcceptancesCount = CheckoutAcceptance::pending()
+                    ->whereHasMorph('checkoutable', $acceptanceTypes)
+                    ->count();
+            }
         }
 
         // CheckoutRequest is not itself Companyable, so the widget's

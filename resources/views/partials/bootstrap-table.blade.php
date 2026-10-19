@@ -1376,6 +1376,21 @@
 
     }); // end user table buttons
 
+    // Unaccepted-acceptances table buttons
+    window.acceptanceButtons = () => ({
+        btnShowDeleted: {
+            text: '{{ request('deleted') === 'deleted' ? trans('general.hide_deleted') : trans('general.show_deleted') }}',
+            icon: 'fa-solid fa-trash',
+            event () {
+                window.location.href = '{{ request('deleted') === 'deleted' ? route('unaccepted-acceptances.index') : route('unaccepted-acceptances.index', ['deleted' => 'deleted']) }}';
+            },
+            attributes: {
+                class: '{{ request('deleted') === 'deleted' ? ' btn-selected' : '' }}',
+                title: '{{ request('deleted') === 'deleted' ? trans('general.hide_deleted') : trans('general.show_deleted') }}',
+            }
+        },
+    });
+
     // Oauth table buttons
     window.oauthButtons = () => ({
 
@@ -3147,6 +3162,52 @@
             return '{{ trans('admin/reports/general.deleted_user') }}';
         }
         return '<a href="' + value.url + '">' + name + '</a>';
+    }
+
+    // Renders the per-row action cluster for /unaccepted-acceptances:
+    // Send Reminder (POST form) + Delete (DELETE form via the shared
+    // dataConfirmModal). Buttons are rendered conditionally on
+    // row.available_actions so a row without an assignee email loses
+    // its reminder affordance and a soft-deleted row loses both.
+    function acceptanceActionsFormatter(value, row) {
+        if (!row) {
+            return '';
+        }
+        var permissions = (row.available_actions || {});
+        var actions = '';
+
+        if (permissions.send_reminder) {
+            var reminderUrl = '{{ route('unaccepted-acceptances.send-reminder') }}';
+            actions += '<form method="post" style="display:inline;" action="' + reminderUrl + '">' +
+                '<input type="hidden" name="_token" value="{{ csrf_token() }}">' +
+                '<input type="hidden" name="acceptance_id" value="' + row.id + '">' +
+                '<button type="submit" class="btn btn-sm btn-warning" data-tooltip="true" data-title="{{ trans('admin/reports/general.send_reminder') }}">' +
+                '<i class="fa fa-repeat" aria-hidden="true"></i>' +
+                '<span class="sr-only">{{ trans('admin/reports/general.send_reminder') }}</span>' +
+                '</button>' +
+                '</form>';
+        }
+
+        if (permissions.delete) {
+            var deleteUrl = '{{ url('/') }}/unaccepted-acceptances/' + row.id;
+            // Pipe through the shared dataConfirmModal so this acts
+            // like every other destructive action in the app
+            // (delete-asset class + data-href + data-content).
+            actions += ' <a href="' + deleteUrl + '"' +
+                ' class="btn btn-sm btn-danger delete-asset"' +
+                ' data-toggle="modal"' +
+                ' data-content="{{ trans('general.delete_confirm', ['item' => trans('admin/reports/general.acceptance_request')]) }}"' +
+                ' data-title="{{ trans('general.delete') }}"' +
+                ' data-icon="fa-trash"' +
+                ' data-tooltip="true"' +
+                ' title="{{ trans('general.delete') }}"' +
+                ' onClick="return false;">' +
+                '<i class="fa fa-trash" aria-hidden="true"></i>' +
+                '<span class="sr-only">{{ trans('general.delete') }}</span>' +
+                '</a>';
+        }
+
+        return actions;
     }
 
     // Renders the per-row action cluster: admin-cancel form + a

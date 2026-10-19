@@ -55,6 +55,35 @@ class CheckoutAcceptance extends Model
     }
 
     /**
+     * FMCS tenant check for the acceptance's checkoutable. The row
+     * itself has no company_id and does not use CompanyableTrait /
+     * CompanyableChildTrait, so Company::isCurrentUserHasAccess has
+     * to be routed through the polymorphic parent. LicenseSeat is
+     * company-less too, so hop up to its license. Bypasses global
+     * scopes on the lookup so a scope-filtered foreign row still
+     * resolves for the check (otherwise FMCS admins would see a
+     * silent true for anything their own scope filters out).
+     */
+    public function isAccessibleToCurrentUser(): bool
+    {
+        if (!Company::isFullMultipleCompanySupportEnabled()) {
+            return true;
+        }
+
+        if (auth()->user()?->isSuperUser()) {
+            return true;
+        }
+
+        $checkoutable = $this->checkoutable_type::withoutGlobalScopes()->find($this->checkoutable_id);
+
+        if ($checkoutable instanceof LicenseSeat) {
+            $checkoutable = License::withoutGlobalScopes()->find($checkoutable->license_id);
+        }
+
+        return Company::isCurrentUserHasAccess($checkoutable);
+    }
+
+    /**
      * Accessor for the checkoutable item's category name.
      *
      * @return Attribute<string|null, never>
