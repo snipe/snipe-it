@@ -1905,11 +1905,47 @@ class AssetsController extends Controller
             return Asset::where('asset_tag', '=', trim($audit_key))->first();
         }
 
+        if ($audit_by_field === '2d_barcode' && $audit_key) {
+            return $this->resolveAssetFrom2dBarcode(trim($audit_key), $settings);
+        }
+
         if ($request->filled('asset_tag')) {
             return Asset::where('asset_tag', '=', $request->input('asset_tag'))->first();
         }
 
         return null;
+    }
+
+    /**
+     * Resolve the asset behind a scanned 2D barcode
+     *
+     * Non-unique targets (model/manufacturer/location name, etc.)
+     * aren't viable audit keys and fall through to null.
+     */
+    private function resolveAssetFrom2dBarcode(string $scanned, Setting $settings): ?Asset
+    {
+        // default 2D barcode format is /hardware/{id} (numeric primary key)
+        if (preg_match('~/hardware/(\d+)(?:[/?#]|$)~', $scanned, $m)) {
+            return Asset::find((int) $m[1]);
+        }
+
+        // legacy 2D barcode format is /ht/{asset_tag} (non-numeric, URL-encoded)
+        if (preg_match('~/ht/([^/?#]+)~', $scanned, $m)) {
+            return Asset::where('asset_tag', '=', urldecode($m[1]))->first();
+        }
+
+        // If the user has configured a custom 2D barcode prefix, strip it off
+        $prefix = (string) ($settings->label2_2d_prefix ?? '');
+        $value = ($prefix !== '' && str_starts_with($scanned, $prefix))
+            ? substr($scanned, strlen($prefix))
+            : $scanned;
+
+        return match ($settings->label2_2d_target) {
+            'plain_asset_id' => ctype_digit($value) ? Asset::find((int) $value) : null,
+            'plain_asset_tag' => Asset::where('asset_tag', '=', $value)->first(),
+            'plain_serial_number' => Asset::where('serial', '=', $value)->first(),
+            default => null,
+        };
     }
 
     /**
