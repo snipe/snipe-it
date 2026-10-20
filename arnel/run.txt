@@ -1,0 +1,23 @@
+docker --versiom
+docker compose version
+
+-- change the env password 
+nano .env.dev.docker
+
+-- build the docker containers
+sudo docker compose -f dev.docker-comopose.yml build
+
+-- generate the laravel application key 
+sudo docker compose -f dev.docker-compose.yml run --rm --no-deps snipeit php artisan key:generate --show
+
+-- copy the generate key to the env again 
+nano .env.dev.docker
+
+-- start the application
+sudo docker compose -f dev.docker-compose.yml up -d
+
+-- check if already up
+sudo docker compose -f dev.docker-compose.yml ps
+
+-- down the application
+sudo docker compose -f dev.docker-compose.yml down
