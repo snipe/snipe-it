@@ -390,6 +390,17 @@ class Consumable extends SnipeModel
     }
 
     /**
+     * Same as users() but without FMCS scoping applied so counts
+     * reflect every unit checked out regardless of the viewer's company.
+     */
+    public function unconstrainedUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'consumables_users', 'consumable_id', 'assigned_to')
+            ->withTrashed()
+            ->withoutGlobalScope(new CompanyableScope);
+    }
+
+    /**
      * Establishes the item -> supplier relationship
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
@@ -450,7 +461,7 @@ class Consumable extends SnipeModel
      */
     public function numCheckedOut()
     {
-        return $this->consumables_users_count ?? $this->users()->count();
+        return $this->consumables_users_count ?? $this->unconstrainedUsers()->count();
     }
 
     /**
