@@ -164,13 +164,61 @@ class IntuneAdapter extends SyncAdapter implements PushableAdapter
 
         $fetchPerDeviceDetails = $this->fetchesPerDeviceDetails();
         $scopeTagIds = $this->resolveScopeTagFilter($client);
+        $scopeTagSet = is_array($scopeTagIds) ? array_flip($scopeTagIds) : null;
 
-        foreach ($client->managedDevices($scopeTagIds) as $device) {
+        foreach ($client->managedDevices() as $device) {
+            // Scope-tag filtering is client-side (see #19849). Graph
+            // does not expose a working server-side $filter on
+            // roleScopeTagIds, and the field comes back empty on the
+            // list surface even with $select, so each device needs a
+            // per-device beta GET to resolve its tag membership.
+            // Skipped entirely when no filter is configured.
+            if ($scopeTagSet !== null && ! $this->deviceMatchesScopeTags($client, $device, $scopeTagSet)) {
+                continue;
+            }
+
             if ($fetchPerDeviceDetails) {
                 $this->fillPerDeviceEnrichment($client, $device);
             }
             yield $this->normalize($device);
         }
+    }
+
+    /**
+     * Resolve the device's scope-tag membership via a beta per-device
+     * detail fetch and test it against the admin's filter set. Returns
+     * true when at least one of the device's tags is in the admin's
+     * list. On a failed detail call (4xx/5xx, timeout) we return false
+     * so the device is excluded rather than silently sneaking through
+     * the filter.
+     *
+     * @param  array<string, mixed>  $device
+     * @param  array<string, int>  $scopeTagSet  Flipped id => arbitrary (for O(1) lookup)
+     */
+    private function deviceMatchesScopeTags(IntuneClient $client, array $device, array $scopeTagSet): bool
+    {
+        $deviceId = $device['id'] ?? null;
+        if (! is_string($deviceId) || $deviceId === '') {
+            return false;
+        }
+
+        $detail = $client->managedDeviceDetail($deviceId, ['id', 'roleScopeTagIds'], 'beta');
+        if ($detail === null) {
+            return false;
+        }
+
+        $deviceTagIds = $detail['roleScopeTagIds'] ?? [];
+        if (! is_array($deviceTagIds)) {
+            return false;
+        }
+
+        foreach ($deviceTagIds as $tagId) {
+            if (is_string($tagId) && isset($scopeTagSet[$tagId])) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
