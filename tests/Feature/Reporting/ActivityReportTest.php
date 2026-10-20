@@ -223,6 +223,103 @@ class ActivityReportTest extends TestCase
             ->assertStatusMessageIs('error');
     }
 
+    public function test_sort_by_item_on_activity_report_orders_by_polymorphic_item_name()
+    {
+        // Issue #17288. The activity report's `item` column is
+        // polymorphic across every entity on the install. The sort
+        // joins each possible item_type table and COALESCEs their
+        // per-type name expressions so rows order alphabetically by
+        // the displayed item name regardless of type.
+        $actor = User::factory()->superuser()->create();
+
+        $zebra = Asset::factory()->create(['name' => 'Zebra Laptop']);
+        $apple = \App\Models\Component::factory()->create(['name' => 'Apple Keyboard']);
+        $monkey = \App\Models\License::factory()->create(['name' => 'Monkey License']);
+
+        $zebraLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => $zebra->id,
+        ]);
+        $appleLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => \App\Models\Component::class,
+            'item_id' => $apple->id,
+        ]);
+        $monkeyLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => \App\Models\License::class,
+            'item_id' => $monkey->id,
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'sort' => 'item',
+                'order' => 'asc',
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->filter(fn ($id) => in_array($id, [$zebraLog->id, $appleLog->id, $monkeyLog->id]))
+            ->values()
+            ->all();
+
+        $this->assertSame([$appleLog->id, $monkeyLog->id, $zebraLog->id], $ids);
+    }
+
+    public function test_sort_by_item_honors_last_first_name_display_format_for_user_rows()
+    {
+        // On a last-first install (Hungarian, CJK, etc.) the polymorphic
+        // name sort for User rows reads "Doe John" rather than
+        // "John Doe", so a user named John Doe orders alphabetically by
+        // "D" rather than "J". display_name is user-authored so it ships
+        // as-is regardless of locale. #17288 + #19626.
+        $this->settings->set(['name_display_format' => 'last_first']);
+
+        $actor = User::factory()->superuser()->create();
+
+        $john = User::factory()->create([
+            'first_name' => 'John',
+            'last_name' => 'Doe',
+            'display_name' => null,
+        ]);
+        $apple = \App\Models\Component::factory()->create(['name' => 'Apple Keyboard']);
+        $zebra = \App\Models\Component::factory()->create(['name' => 'Zebra Mouse']);
+
+        $userLog = Actionlog::factory()->create([
+            'action_type' => 'update',
+            'item_type' => User::class,
+            'item_id' => $john->id,
+        ]);
+        $appleLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => \App\Models\Component::class,
+            'item_id' => $apple->id,
+        ]);
+        $zebraLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => \App\Models\Component::class,
+            'item_id' => $zebra->id,
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'sort' => 'item',
+                'order' => 'asc',
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->filter(fn ($id) => in_array($id, [$userLog->id, $appleLog->id, $zebraLog->id]))
+            ->values()
+            ->all();
+
+        // Apple Keyboard < Doe John < Zebra Mouse.
+        // Without the last_first flip, the user would sort as "John Doe"
+        // and land between Apple and Zebra at a different position.
+        $this->assertSame([$appleLog->id, $userLog->id, $zebraLog->id], $ids);
+    }
+
     public function test_search_matches_target_asset_tag_on_component_checkout()
     {
         // Component checkouts store item=Component and target=Asset.
