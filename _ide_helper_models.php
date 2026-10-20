@@ -891,6 +891,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|CheckoutAcceptance onlyTrashed()
  * @method static \App\Models\Builders\CheckoutAcceptanceQueryBuilder<static>|CheckoutAcceptance pending()
  * @method static \App\Models\Builders\CheckoutAcceptanceQueryBuilder<static>|CheckoutAcceptance query()
+ * @method static \App\Models\Builders\CheckoutAcceptanceQueryBuilder<static>|CheckoutAcceptance visibleToCurrentUser()
  * @method static \App\Models\Builders\CheckoutAcceptanceQueryBuilder<static>|CheckoutAcceptance whereAcceptedAt($value)
  * @method static \App\Models\Builders\CheckoutAcceptanceQueryBuilder<static>|CheckoutAcceptance whereAlertOnResponseId($value)
  * @method static \App\Models\Builders\CheckoutAcceptanceQueryBuilder<static>|CheckoutAcceptance whereAssignedToId($value)
@@ -1326,6 +1327,8 @@ namespace App\Models{
  * @property-write mixed $status_id
  * @property-write mixed $supplier_id
  * @property-write mixed $warranty_months
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $unconstrainedUsers
+ * @property-read int|null $unconstrained_users_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $uploads
  * @property-read int|null $uploads_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
@@ -2233,6 +2236,11 @@ namespace App\Models{
  * @property-read mixed $expires_formatted_date
  * @property mixed $asset_id
  * @property mixed $completion_date
+ * @property-read int|null $duration_in_days
+ * @property-read mixed|null $effective_completion_date
+ * @property-read bool $is_overdue
+ * @property-read string|null $progress_label
+ * @property-read int $progress_percent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $history
  * @property-read int|null $history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $log
