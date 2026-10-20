@@ -349,7 +349,7 @@
                     <th scope="col" data-field="byod" data-formatter="trueFalseFormatter" data-sortable="true" data-visible="false">{{ trans('general.byod') }}</th>
 
                     @foreach ($field_array as $db_column => $field_name)
-                        <th scope="col" data-field="custom_fields.{{ $db_column }}" data-formatter="customFieldsFormatter" data-sortable="true" data-visible="true">{{ $field_name }}</th>
+                        <th scope="col" data-field="custom_fields.{{ $db_column }}" data-formatter="customFieldsFormatter" data-cell-style="customFieldsCellStyle" data-sortable="true" data-visible="true">{{ $field_name }}</th>
                     @endforeach
                 </tr>
                 </thead>
