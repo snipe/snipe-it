@@ -47,7 +47,7 @@ class ConsumablesController extends Controller
         // distributed, unchanged by mark-consumed). outstanding_assignments_count feeds
         // isDeletable() and the archive guard so neither fires a per-row count query.
         $consumables = Consumable::with('company', 'location', 'category', 'defaultSupplier', 'manufacturer', 'orderItems.order.supplier')
-            ->withCount('users as consumables_users_count')
+            ->withCount('unconstrainedUsers as consumables_users_count')
             ->withCount('outstandingAssignments as outstanding_assignments_count');
 
         // This array is what determines which fields should be allowed to be sorted on ON the table itself.
@@ -616,7 +616,7 @@ class ConsumablesController extends Controller
     public function requestable(Request $request): array
     {
         $query = Consumable::with('category', 'location', 'company', 'manufacturer', 'requests')
-            ->withCount('users as consumables_users_count')
+            ->withCount('unconstrainedUsers as consumables_users_count')
             ->withCount('outstandingAssignments as outstanding_assignments_count')
             ->Requestable();
 
