@@ -422,6 +422,12 @@ class AssetPresenter extends Presenter
                 'switchable' => true,
                 'title' => e($field->name),
                 'formatter' => 'customFieldsFormatter',
+                // Use tableExport attributes on the TD so dot-containing
+                // text values (e.g. "79.99" in a text field) stop being
+                // misread as EU-locale thousands numbers on export. See
+                // issue #19595 and the customFieldsCellStyle definition
+                // in bootstrap-table.
+                'cellStyle' => 'customFieldsCellStyle',
                 'escape' => true,
                 'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
                 'visible' => ($field->show_in_listview == '1') ? true : false,

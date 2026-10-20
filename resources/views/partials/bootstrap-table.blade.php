@@ -952,6 +952,18 @@
                         clearBootstrapTableLoadError(instance);
                     }
                 },
+                onPostBody: function () {
+                    // Reapply the tableExport opt-out attributes on
+                    // every custom-field cell after each body render,
+                    // so dot-containing text values don't get misread
+                    // as EU-locale thousands numbers on export. See
+                    // customFieldsCellStyle + stampCustomFieldExportAttrs
+                    // and issue #19595.
+                    var instance = arguments[arguments.length - 1];
+                    if (instance && instance.$el) {
+                        stampCustomFieldExportAttrs(instance.$el);
+                    }
+                },
                 onRefresh: function () {
                     // Fires the moment the user clicks the toolbar's refresh button,
                     // before the retry AJAX call is issued. Clear the callout + restore
@@ -3919,7 +3931,7 @@
                     }
                 }
                 // Convert newlines to <br> for textarea fields so they render in
-                // the table; export will convert <br> back to \n via onCellHtmlData
+                // the table. Export converts <br> back to \n via onCellHtmlData.
                 if (row.custom_fields[field_column_plain].element === 'textarea') {
                     var val = row.custom_fields[field_column_plain].value;
                     return val ? val.replace(/(?:\r\n|\r|\n)/g, '<br>') : '';
@@ -3929,6 +3941,39 @@
 
             }
 
+    }
+
+    // cellStyle callback stamped on every custom-field column (wired
+    // from AssetPresenter + the other presenters that render custom
+    // fields). Tags the cell so stampCustomFieldExportAttrs below can
+    // set the tableExport "leave this cell alone" attributes on the TD
+    // after each body render. bs-table's cellStyle only honors classes
+    // and css, so the data attributes can't be returned directly from
+    // here, and tableExport only reads data-tableexport-* from the TD
+    // itself (not inner nodes), so putting them on a wrapper span
+    // inside the formatter doesn't work either. See issue #19595.
+    function customFieldsCellStyle() {
+        return {
+            classes: 'snipeit-custom-field-cell',
+        };
+    }
+
+    // Walk every custom-field cell in a table and set the two
+    // tableExport attributes that opt the cell out of the global EU
+    // number-parse config (see the exportOptions['numbers'] block above
+    // and issue #19415). Called from onPostBody so the attrs get
+    // reapplied after every bs-table render.
+    //
+    //   data-tableexport-cellformat=""    : skip number-separator conversion
+    //   data-tableexport-xlsxformatid="49": force XLSX "@" (text) cell format
+    function stampCustomFieldExportAttrs($table) {
+        if (!$table || !$table.length) {
+            return;
+        }
+        $table.find('td.snipeit-custom-field-cell').each(function () {
+            this.setAttribute('data-tableexport-cellformat', '');
+            this.setAttribute('data-tableexport-xlsxformatid', '49');
+        });
     }
 
 

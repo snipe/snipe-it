@@ -290,6 +290,10 @@ class AssetAuditPresenter extends Presenter
                 'switchable' => true,
                 'title' => ($field->field_encrypted == '1') ? '<i class="fas fa-lock"></i> '.e($field->name) : e($field->name),
                 'formatter' => 'customFieldsFormatter',
+                // Use tableExport attributes on the TD so dot-containing
+                // text values stop being misread as EU-locale thousands
+                // numbers on export. See issue #19595.
+                'cellStyle' => 'customFieldsCellStyle',
             ];
         }
 
