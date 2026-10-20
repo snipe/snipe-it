@@ -702,7 +702,10 @@ class BulkAssetsController extends Controller
             // per-item Asset / Accessory controllers, this method has no
             // downstream session put that would overwrite a bad early value,
             // so this is the sole source of truth.
-            session()->put(['checkout_to_type' => request('checkout_to_type')]);
+            session()->put([
+                'checkout_to_type' => $request->input('checkout_to_type'),
+                'redirect_option' => $request->input('redirect_option', 'index'),
+            ]);
 
             if (! is_array($request->input('selected_assets'))) {
                 return redirect()->route('hardware.bulkcheckout.show')->withInput()->with('error', trans('admin/hardware/message.checkout.no_assets_selected'));

@@ -58,7 +58,7 @@ class ReportsController extends Controller
         // then they shouldn't be able to see the activity log for that item or target,
         // but if they have the general activity view permission,
         // then they can see all activity logs regardless of the item or target.
-        
+
         if ((! Gate::allows('activity.view')) && (($targetClass && $request->filled('target_id')) || ($itemClass && $request->filled('item_id')))) {
 
             if ($targetClass && $request->filled('target_id')) {
@@ -160,7 +160,16 @@ class ReportsController extends Controller
                 $actionlogs->OrderByAssetNextAuditDate($order);
                 break;
             case 'item':
-                $actionlogs->OrderByItemName($order);
+                // The audit report (action_type=audit) is asset-only
+                // and keeps the simpler asset-name sort. The general
+                // activity report is polymorphic across every entity
+                // on the install and uses the per-type COALESCE sort.
+                // #17288.
+                if ($request->input('action_type') === 'audit') {
+                    $actionlogs->OrderByItemName($order);
+                } else {
+                    $actionlogs->OrderByPolymorphicItemName($order);
+                }
                 break;
             default:
                 $sort = in_array($request->input('sort'), $allowed_columns) ? e($request->input('sort')) : 'action_logs.created_at';
