@@ -150,11 +150,12 @@ class IntuneAdapterTest extends TestCase
             || str_contains($request->url(), 'graph.microsoft.com/page2'));
     }
 
-    public function test_scope_tag_filter_resolves_names_to_ids_and_sends_odata_filter()
+    public function test_scope_tag_filter_narrows_devices_via_client_side_check()
     {
-        // Scope tag flow runs on /beta/. The roleScopeTags resource
-        // only lives there (v1.0 400s), and roleScopeTagIds is only
-        // filterable on the beta managedDevices surface.
+        // Server-side scope-tag filtering is not supported by Microsoft
+        // Graph on either v1.0 or beta (see #19849). The adapter now
+        // iterates the full /v1.0/ device list and does a per-device
+        // beta GET to resolve roleScopeTagIds, then filters client-side.
         $adapter = $this->configuredAdapter(scopeTagFilter: 'Marketing, 7');
 
         Http::fake([
@@ -166,51 +167,58 @@ class IntuneAdapterTest extends TestCase
                     ['id' => '11', 'displayName' => 'Finance'],
                 ],
             ]),
-            '*/beta/deviceManagement/managedDevices*' => Http::response([
+            '*/v1.0/deviceManagement/managedDevices*' => Http::response([
                 'value' => [
                     $this->intuneDevice(id: 'guid-marketing', name: 'host-marketing'),
+                    $this->intuneDevice(id: 'guid-finance', name: 'host-finance'),
+                    $this->intuneDevice(id: 'guid-notag', name: 'host-notag'),
                 ],
+            ]),
+            '*/beta/deviceManagement/managedDevices/guid-marketing*' => Http::response([
+                'id' => 'guid-marketing',
+                'roleScopeTagIds' => ['3'],
+            ]),
+            '*/beta/deviceManagement/managedDevices/guid-finance*' => Http::response([
+                'id' => 'guid-finance',
+                'roleScopeTagIds' => ['11'],
+            ]),
+            '*/beta/deviceManagement/managedDevices/guid-notag*' => Http::response([
+                'id' => 'guid-notag',
+                'roleScopeTagIds' => [],
+            ]),
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertCount(1, $records);
+        $this->assertSame('guid-marketing', $records[0]->sourceId);
+    }
+
+    public function test_blank_scope_tag_filter_skips_per_device_checks()
+    {
+        // No filter means we stay on /v1.0/ for the list AND we don't
+        // make any per-device beta calls.
+        $adapter = $this->configuredAdapter(scopeTagFilter: '');
+
+        Http::fake([
+            '*/oauth2/v2.0/token' => Http::response(['access_token' => 'stub-bearer', 'expires_in' => 3600]),
+            '*/v1.0/deviceManagement/managedDevices*' => Http::response([
+                'value' => [$this->intuneDevice(id: 'guid-whatever', name: 'host-whatever')],
             ]),
         ]);
 
         iterator_to_array($adapter->pull());
 
-        Http::assertSent(function ($request) {
-            if (! str_contains($request->url(), '/beta/deviceManagement/managedDevices')) {
-                return false;
-            }
-            $url = urldecode($request->url());
-
-            return str_contains($url, 'roleScopeTagIds/any(x:')
-                && str_contains($url, "x eq '3'")
-                && str_contains($url, "x eq '7'");
-        });
-    }
-
-    public function test_blank_scope_tag_filter_sends_no_odata_filter()
-    {
-        // No filter means the unfiltered pull stays on /v1.0/. The
-        // beta fall-over only kicks in for the scope-tag flow.
-        $adapter = $this->configuredAdapter(scopeTagFilter: '');
-
-        Http::fake([
-            '*/oauth2/v2.0/token' => Http::response(['access_token' => 'stub-bearer', 'expires_in' => 3600]),
-            '*/v1.0/deviceManagement/managedDevices*' => Http::response(['value' => []]),
-        ]);
-
-        iterator_to_array($adapter->pull());
-
-        // No roleScopeTags call fired, no $filter param on the devices call.
         Http::assertNotSent(fn ($request) => str_contains($request->url(), 'deviceManagement/roleScopeTags'));
+        Http::assertNotSent(fn ($request) => str_contains($request->url(), '/beta/deviceManagement/managedDevices'));
         Http::assertSent(fn ($request) => str_contains($request->url(), '/v1.0/deviceManagement/managedDevices')
             && ! str_contains(urldecode($request->url()), '$filter'));
-        Http::assertNotSent(fn ($request) => str_contains($request->url(), '/beta/deviceManagement/managedDevices'));
     }
 
     public function test_unresolved_scope_tag_entry_is_dropped()
     {
-        // "Ghost" matches no tag. "Marketing" resolves to 3. Expect the
-        // outgoing filter to carry 3 only.
+        // "Ghost" matches no tag. "Marketing" resolves to 3. Device
+        // tagged '3' should pass, device tagged '11' should not.
         $adapter = $this->configuredAdapter(scopeTagFilter: 'Marketing, Ghost');
 
         Http::fake([
@@ -218,19 +226,57 @@ class IntuneAdapterTest extends TestCase
             '*/beta/deviceManagement/roleScopeTags*' => Http::response([
                 'value' => [['id' => '3', 'displayName' => 'Marketing']],
             ]),
-            '*/beta/deviceManagement/managedDevices*' => Http::response(['value' => []]),
+            '*/v1.0/deviceManagement/managedDevices*' => Http::response([
+                'value' => [
+                    $this->intuneDevice(id: 'guid-marketing', name: 'host-marketing'),
+                    $this->intuneDevice(id: 'guid-finance', name: 'host-finance'),
+                ],
+            ]),
+            '*/beta/deviceManagement/managedDevices/guid-marketing*' => Http::response([
+                'id' => 'guid-marketing',
+                'roleScopeTagIds' => ['3'],
+            ]),
+            '*/beta/deviceManagement/managedDevices/guid-finance*' => Http::response([
+                'id' => 'guid-finance',
+                'roleScopeTagIds' => ['11'],
+            ]),
         ]);
 
-        iterator_to_array($adapter->pull());
+        $records = iterator_to_array($adapter->pull());
 
-        Http::assertSent(function ($request) {
-            if (! str_contains($request->url(), '/beta/deviceManagement/managedDevices')) {
-                return false;
-            }
-            $url = urldecode($request->url());
+        $this->assertCount(1, $records);
+        $this->assertSame('guid-marketing', $records[0]->sourceId);
+    }
 
-            return str_contains($url, "x eq '3'") && ! str_contains($url, 'Ghost');
-        });
+    public function test_scope_tag_detail_fetch_failure_excludes_the_device()
+    {
+        // If the per-device beta GET fails for one device (4xx/5xx,
+        // timeout), that device is excluded from the sync rather than
+        // silently falling through the filter.
+        $adapter = $this->configuredAdapter(scopeTagFilter: 'Marketing');
+
+        Http::fake([
+            '*/oauth2/v2.0/token' => Http::response(['access_token' => 'stub-bearer', 'expires_in' => 3600]),
+            '*/beta/deviceManagement/roleScopeTags*' => Http::response([
+                'value' => [['id' => '3', 'displayName' => 'Marketing']],
+            ]),
+            '*/v1.0/deviceManagement/managedDevices*' => Http::response([
+                'value' => [
+                    $this->intuneDevice(id: 'guid-good', name: 'host-good'),
+                    $this->intuneDevice(id: 'guid-broken', name: 'host-broken'),
+                ],
+            ]),
+            '*/beta/deviceManagement/managedDevices/guid-good*' => Http::response([
+                'id' => 'guid-good',
+                'roleScopeTagIds' => ['3'],
+            ]),
+            '*/beta/deviceManagement/managedDevices/guid-broken*' => Http::response([], 500),
+        ]);
+
+        $records = iterator_to_array($adapter->pull());
+
+        $this->assertCount(1, $records);
+        $this->assertSame('guid-good', $records[0]->sourceId);
     }
 
     public function test_scope_tag_ids_surface_on_normalized_record_as_comma_joined_string()

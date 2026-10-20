@@ -49,35 +49,20 @@ class IntuneClient
      * Iterate every managed device visible to the app registration.
      * Uses Graph's `@odata.nextLink` for cursor pagination.
      *
-     * When $scopeTagIds is non-empty, appends an OData `$filter` that
-     * only returns devices whose `roleScopeTagIds` array intersects the
-     * caller's list. Pushes the filter server-side so large tenants
-     * with distributed-IT separation don't pay the pagination cost for
-     * devices they don't even care about.
-     * See https://learn.microsoft.com/en-us/intune/fundamentals/role-based-access-control/scope-tags.
+     * Server-side scope-tag filtering (via `$filter=roleScopeTagIds/any(...)`)
+     * was tried first but Microsoft rejects the clause on both v1.0
+     * and beta managedDevices endpoints (BadRequest, see #19849).
+     * Scope-tag filtering is now applied client-side by the adapter
+     * via per-device beta detail fetches, so this method stays on the
+     * stable list surface and returns every device.
      *
-     * @param  array<int, string>|null  $scopeTagIds  Null = no filter. Empty array = no filter.
      * @return iterable<int, array<string, mixed>>
      */
-    public function managedDevices(?array $scopeTagIds = null): iterable
+    public function managedDevices(): iterable
     {
         $graphOrigin = $this->origin($this->graphBaseUrl);
-
-        // roleScopeTagIds filtering lives on the beta surface. On
-        // /v1.0/ the field isn't exposed, so a $filter against it
-        // 400s. Fall over to /beta/ only when a filter is in use so
-        // tenants that don't touch scope tags stay on the stable
-        // surface.
-        $apiVersion = (is_array($scopeTagIds) && $scopeTagIds !== []) ? 'beta' : 'v1.0';
-        $url = rtrim($this->graphBaseUrl, '/').'/'.$apiVersion.'/deviceManagement/managedDevices';
-
+        $url = rtrim($this->graphBaseUrl, '/').'/v1.0/deviceManagement/managedDevices';
         $query = [];
-        if (is_array($scopeTagIds) && $scopeTagIds !== []) {
-            // Graph expects: $filter=roleScopeTagIds/any(x: x eq 'id1' or x eq 'id2')
-            // Quote each id and OR them inside a single any() clause.
-            $clauses = array_map(fn (string $id) => "x eq '".addslashes($id)."'", $scopeTagIds);
-            $query['$filter'] = 'roleScopeTagIds/any(x: '.implode(' or ', $clauses).')';
-        }
 
         do {
             $response = $this->request()->get($url, $query)->throw()->json();
@@ -86,8 +71,6 @@ class IntuneClient
                 yield $device;
             }
 
-            // Query only on the first page. Graph's nextLink carries
-            // the filter forward in its own cursor opaquely.
             $query = [];
 
             $url = $this->rebasedCursor($response['@odata.nextLink'] ?? null, $graphOrigin);
@@ -183,16 +166,22 @@ class IntuneClient
      * caller-chosen $select set. Used for properties the LIST
      * endpoint always returns null for (ethernetMacAddress,
      * physicalMemoryInBytes, etc. - Microsoft docs explicitly flag
-     * these as "requires per-device GET"). Returns the attributes
-     * array on success. Fails soft to null on 4xx/5xx so one bad
-     * device doesn't abort the enclosing enrichment pass.
+     * these as "requires per-device GET"), and for roleScopeTagIds,
+     * which the list surface also returns empty regardless of $select
+     * (see #19849). Returns the attributes array on success. Fails
+     * soft to null on 4xx/5xx so one bad device doesn't abort the
+     * enclosing enrichment pass.
+     *
+     * $apiVersion is passed through so callers can hit `beta` for
+     * fields that only populate there (roleScopeTagIds). Default
+     * stays on v1.0 for the existing enrichment call sites.
      *
      * @param  array<int, string>  $select
      * @return array<string, mixed>|null
      */
-    public function managedDeviceDetail(string $deviceId, array $select): ?array
+    public function managedDeviceDetail(string $deviceId, array $select, string $apiVersion = 'v1.0'): ?array
     {
-        $url = rtrim($this->graphBaseUrl, '/').'/v1.0/deviceManagement/managedDevices/'.rawurlencode($deviceId);
+        $url = rtrim($this->graphBaseUrl, '/').'/'.$apiVersion.'/deviceManagement/managedDevices/'.rawurlencode($deviceId);
 
         try {
             return $this->request()
