@@ -106,7 +106,7 @@
                             <x-page-data>
 
                                 <x-data-row :label="trans('general.name')" copy_what="name">
-                                    {{ $user->first_name }} {{ $user->last_name }}
+                                    {{ $user->full_name }}
                                 </x-data-row>
 
                                 <x-data-row :label="trans('admin/users/table.display_name')" copy_what="display_name">

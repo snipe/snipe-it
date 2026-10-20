@@ -35,6 +35,12 @@ class UserQueryBuilder extends Builder
                     'users.first_name',
                     'users.last_name',
                 ], $search
+            )
+            ->orWhereMultipleColumns(
+                [
+                    'users.last_name',
+                    'users.first_name',
+                ], $search
             );
     }
 

@@ -1616,6 +1616,12 @@ class Asset extends Depreciable
                         'assets_users.first_name',
                         'assets_users.last_name',
                     ], $term
+                )
+                ->orWhereMultipleColumns(
+                    [
+                        'assets_users.last_name',
+                        'assets_users.first_name',
+                    ], $term
                 );
         }
 
