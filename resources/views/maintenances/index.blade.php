@@ -22,6 +22,7 @@
             <x-table.maintenances
                 name="maintenance"
                 :route="route('api.maintenances.index').'?completed='.request()->input('completed', 'false').'&upcoming_status='.request()->input('upcoming_status', '')"
+                :hide_fields="request('completed') === 'true' ? [] : ['completed_at', 'completed_by']"
             />
 
         </x-box>
