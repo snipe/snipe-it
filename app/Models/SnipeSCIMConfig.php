@@ -990,8 +990,11 @@ class SnipeSCIMConfig
 
                         public function doWrite($operation, $subop, $value, Model &$object, ?Path $path = null, $removeIfNotSet = false)
                         {
-                            // TODO - this is validated *just* for 'patch' operations, so this may not work in other write contexts
-                            if ($path->getValuePathFilter() != null) {
+                            // $path is nullable per the signature. Treat a null path the same as a filter-less path:
+                            // fall through to the bulk-replace branch below. Without this guard the next line
+                            // crashes with "Call to a member function getValuePathFilter() on null" on PUT-shaped
+                            // requests from clients that don't send a path (Okta's create-user flow is one).
+                            if ($path !== null && $path->getValuePathFilter() !== null) {
                                 \Log::debug("path for update $path");
                                 // get the part of the $path that we actually care about - something like:
                                 // addresses[type eq "work"]
