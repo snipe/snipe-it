@@ -264,7 +264,7 @@ class MaintenancesPresenter extends Presenter
         if ($hide_fields !== []) {
             $layout = array_values(array_filter(
                 $layout,
-                fn(array $col) => !in_array($col['field'] ?? null, $hide_fields, true),
+                fn (array $col) => ! in_array($col['field'], $hide_fields, true),
             ));
         }
 
