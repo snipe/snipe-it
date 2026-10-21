@@ -1082,8 +1082,6 @@ class Helper
     {
         $finfo = @finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
         $filetype = @finfo_file($finfo, $file);
-        finfo_close($finfo);
-
         if (($filetype == 'image/jpeg') || ($filetype == 'image/jpg') || ($filetype == 'image/png') || ($filetype == 'image/bmp') || ($filetype == 'image/gif') || ($filetype == 'image/avif') || ($filetype == 'image/webp')) {
             return $filetype;
         }
@@ -1105,8 +1103,6 @@ class Helper
     {
         $finfo = @finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
         $filetype = @finfo_file($finfo, $file);
-        finfo_close($finfo);
-
         if (($filetype == 'video/mp4') || ($filetype == 'video/quicktime') || ($filetype == 'video/mpeg') || ($filetype == 'video/ogg') || ($filetype == 'video/webm') || ($filetype == 'video/x-msvide')) {
             return $filetype;
         }
@@ -1128,8 +1124,6 @@ class Helper
     {
         $finfo = @finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
         $filetype = @finfo_file($finfo, $file);
-        finfo_close($finfo);
-
         if (($filetype == 'audio/mpeg') || ($filetype == 'audio/ogg')) {
             return $filetype;
         }

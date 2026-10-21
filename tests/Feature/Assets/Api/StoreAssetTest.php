@@ -6,11 +6,13 @@ use App\Models\Asset;
 use App\Models\AssetModel;
 use App\Models\Company;
 use App\Models\CustomField;
+use App\Models\CustomFieldset;
 use App\Models\Location;
 use App\Models\Statuslabel;
 use App\Models\Supplier;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Testing\Fluent\AssertableJson;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -769,6 +771,70 @@ class StoreAssetTest extends TestCase
             ->assertOk()
             ->assertStatusMessageIs('error')
             ->assertMessagesContains('serial');
+    }
+
+    public function test_asset_store_does_not_lazy_load_custom_field_default_values_per_field()
+    {
+        // Regression test for the N+1 on `CustomField::defaultValue($modelId)`.
+        // The store() controller used to call `AssetModel::find($model_id)`
+        // without eager loading, then iterate `$model->fieldset->fields` and
+        // call `$field->defaultValue($model_id)` inside the loop. Each call
+        // lazy-loaded `$this->defaultValues` which is
+        // `belongsToMany(AssetModel::class, 'models_custom_fields')`, firing
+        // one `SELECT models.*  INNER JOIN models_custom_fields` per field.
+        // The fix eager-loads `fieldset.fields.defaultValues` on the model
+        // fetch, so that pivot walk fires once up front.
+        $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
+
+        $status = Statuslabel::factory()->readyToDeploy()->create();
+        $superuser = User::factory()->superuser()->create();
+
+        $fieldA = CustomField::factory()->macAddress()->create();
+        $fieldB = CustomField::factory()->ram()->create();
+        $fieldC = CustomField::factory()->cpu()->create();
+
+        $fieldset = CustomFieldset::factory()->create();
+        $fieldset->fields()->attach([
+            $fieldA->id => ['order' => 1, 'required' => false],
+            $fieldB->id => ['order' => 2, 'required' => false],
+            $fieldC->id => ['order' => 3, 'required' => false],
+        ]);
+
+        $model = AssetModel::factory()->create(['fieldset_id' => $fieldset->id]);
+        $model->defaultValues()->attach([
+            $fieldA->id => ['default_value' => 'default-mac'],
+            $fieldB->id => ['default_value' => 'default-ram'],
+            $fieldC->id => ['default_value' => 'default-cpu'],
+        ]);
+
+        DB::enableQueryLog();
+
+        $this->actingAsForApi($superuser)
+            ->postJson(route('api.assets.store'), [
+                'model_id' => $model->id,
+                'status_id' => $status->id,
+                'asset_tag' => 'n-plus-one-probe',
+            ])
+            ->assertStatusMessageIs('success');
+
+        $queries = DB::getQueryLog();
+        DB::disableQueryLog();
+
+        // Count queries that walk the models_custom_fields pivot from the
+        // CustomField::defaultValue() side. Pre-fix fired once per custom
+        // field (three times here). Post-fix fires once, from the eager
+        // load on the AssetModel::with(...) call. Threshold is one, more
+        // than that means the lazy-load pattern crept back in.
+        $pivotWalks = collect($queries)
+            ->filter(fn ($q) => str_contains($q['query'], '`models`')
+                && str_contains($q['query'], 'inner join `models_custom_fields`'))
+            ->count();
+
+        $this->assertLessThanOrEqual(
+            1,
+            $pivotWalks,
+            'Asset store fired '.$pivotWalks.' models <-> models_custom_fields pivot queries. Expected at most 1 (the eager load upfront).'
+        );
     }
 
     public function test_encrypted_custom_field_can_be_stored()
