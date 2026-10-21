@@ -34,8 +34,6 @@ class AcceptanceSignatureImageValidationTest extends TestCase
         ob_start();
         imagepng($canvas);
         $bytes = (string) ob_get_clean();
-        imagedestroy($canvas);
-
         return $bytes;
     }
 
@@ -186,8 +184,6 @@ class AcceptanceSignatureImageValidationTest extends TestCase
         ob_start();
         imagejpeg($canvas);
         $jpegBytes = (string) ob_get_clean();
-        imagedestroy($canvas);
-
         $this->actingAs($target)
             ->post(route('account.store-acceptance', $acceptance), [
                 'asset_acceptance' => 'accepted',

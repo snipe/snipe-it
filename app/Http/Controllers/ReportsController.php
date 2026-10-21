@@ -97,7 +97,7 @@ class ReportsController extends Controller
                 trans('admin/accessories/general.total'),
                 trans('admin/accessories/general.remaining'),
             ];
-            fputcsv($handle, $header);
+            fputcsv($handle, $header, escape: '\\');
 
             $formatter = new EscapeFormula('`');
 
@@ -112,9 +112,9 @@ class ReportsController extends Controller
                         ];
 
                         if (config('app.escape_formulas') === false) {
-                            fputcsv($handle, $row);
+                            fputcsv($handle, $row, escape: '\\');
                         } else {
-                            fputcsv($handle, $formatter->escapeRecord($row));
+                            fputcsv($handle, $formatter->escapeRecord($row), escape: '\\');
                         }
                     }
                 });
@@ -171,7 +171,7 @@ class ReportsController extends Controller
                 trans('admin/hardware/table.book_value'),
                 trans('admin/hardware/table.diff'),
             ];
-            fputcsv($handle, $header);
+            fputcsv($handle, $header, escape: '\\');
 
             Asset::with('model', 'assignedTo', 'status', 'defaultLoc', 'assetlog')
                 ->orderBy('created_at', 'DESC')
@@ -212,9 +212,9 @@ class ReportsController extends Controller
                         ];
 
                         if (config('app.escape_formulas') === false) {
-                            fputcsv($handle, $row);
+                            fputcsv($handle, $row, escape: '\\');
                         } else {
-                            fputcsv($handle, $formatter->escapeRecord($row));
+                            fputcsv($handle, $formatter->escapeRecord($row), escape: '\\');
                         }
                     }
                 });
@@ -349,7 +349,7 @@ class ReportsController extends Controller
             ];
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
             Log::debug('Starting headers: '.$executionTime);
-            fputcsv($handle, $header);
+            fputcsv($handle, $header, escape: '\\');
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
             Log::debug('Added headers: '.$executionTime);
 
@@ -414,11 +414,11 @@ class ReportsController extends Controller
 
                         // CSV_ESCAPE_FORMULAS is set to false in the .env
                         if (config('app.escape_formulas') === false) {
-                            fputcsv($handle, $row);
+                            fputcsv($handle, $row, escape: '\\');
 
                             // CSV_ESCAPE_FORMULAS is set to true or is not set in the .env
                         } else {
-                            fputcsv($handle, $formatter->escapeRecord($row));
+                            fputcsv($handle, $formatter->escapeRecord($row), escape: '\\');
                         }
                     }
                 });
@@ -479,7 +479,7 @@ class ReportsController extends Controller
                 trans('general.depreciation'),
                 trans('general.purchase_cost'),
             ];
-            fputcsv($handle, $header);
+            fputcsv($handle, $header, escape: '\\');
 
             License::orderBy('created_at', 'DESC')->chunk(500, function ($licenses) use ($handle, $formatter) {
                 foreach ($licenses as $license) {
@@ -503,9 +503,9 @@ class ReportsController extends Controller
                     ];
 
                     if (config('app.escape_formulas') === false) {
-                        fputcsv($handle, $row);
+                        fputcsv($handle, $row, escape: '\\');
                     } else {
-                        fputcsv($handle, $formatter->escapeRecord($row));
+                        fputcsv($handle, $formatter->escapeRecord($row), escape: '\\');
                     }
                 }
             });
@@ -801,7 +801,7 @@ class ReportsController extends Controller
             // cell like "=cmd|'/c calc.exe'!A1" would evaluate as a
             // formula on a reports.view user's workstation.
             $headerFormatter = new EscapeFormula('`');
-            fputcsv($handle, $headerFormatter->escapeRecord($header));
+            fputcsv($handle, $headerFormatter->escapeRecord($header), escape: '\\');
             $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
             Log::debug('Added headers: '.$executionTime);
 
@@ -1275,11 +1275,11 @@ class ReportsController extends Controller
 
                     // CSV_ESCAPE_FORMULAS is set to false in the .env
                     if (config('app.escape_formulas') === false) {
-                        fputcsv($handle, $row);
+                        fputcsv($handle, $row, escape: '\\');
 
                         // CSV_ESCAPE_FORMULAS is set to true or is not set in the .env
                     } else {
-                        fputcsv($handle, $formatter->escapeRecord($row));
+                        fputcsv($handle, $formatter->escapeRecord($row), escape: '\\');
                     }
 
                     $executionTime = microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'];
@@ -1343,7 +1343,7 @@ class ReportsController extends Controller
                 trans('admin/maintenances/form.is_warranty'),
                 trans('admin/maintenances/form.notes'),
             ];
-            fputcsv($handle, $header);
+            fputcsv($handle, $header, escape: '\\');
 
             // No completed-filter here — exports every maintenance, active
             // or completed. Eager-load the four relations the row loop
@@ -1376,9 +1376,9 @@ class ReportsController extends Controller
                         ];
 
                         if (config('app.escape_formulas') === false) {
-                            fputcsv($handle, $row);
+                            fputcsv($handle, $row, escape: '\\');
                         } else {
-                            fputcsv($handle, $formatter->escapeRecord($row));
+                            fputcsv($handle, $formatter->escapeRecord($row), escape: '\\');
                         }
                     }
                 });

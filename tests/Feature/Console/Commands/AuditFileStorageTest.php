@@ -260,11 +260,11 @@ class AuditFileStorageTest extends TestCase
         $this->assertFileExists($this->csvPath);
 
         $handle = fopen($this->csvPath, 'r');
-        $header = fgetcsv($handle);
+        $header = fgetcsv($handle, escape: '\\');
         $this->assertSame(['direction', 'table', 'id', 'type', 'file'], $header);
 
         $rows = [];
-        while (($row = fgetcsv($handle)) !== false) {
+        while (($row = fgetcsv($handle, escape: '\\')) !== false) {
             $rows[] = array_combine($header, $row);
         }
         fclose($handle);

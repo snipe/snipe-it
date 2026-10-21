@@ -211,8 +211,6 @@ class ImporterEncodingTest extends TestCase
 
         $method = (new ReflectionClass($importer))
             ->getMethod('convertToUtf8IfNeeded');
-        $method->setAccessible(true);
-
         // Empty string is not "not UTF-8" (mb_check_encoding returns true
         // for empty), so it short-circuits to unchanged, verifying the
         // helper never invents content that wasn't there.

@@ -115,8 +115,6 @@ class AssetAcceptanceTest extends TestCase
         ob_start();
         imagepng($canvas);
         $signaturePng = (string) ob_get_clean();
-        imagedestroy($canvas);
-
         $signatureOutput = 'data:image/png;base64,'.base64_encode($signaturePng);
 
         $this->actingAs($checkoutAcceptance->assignedTo)

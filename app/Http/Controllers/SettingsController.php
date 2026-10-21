@@ -193,7 +193,7 @@ class SettingsController extends Controller
                 'Item Location',
                 'Location Company',
                 'Location Company ID',
-            ]);
+            ], escape: '\\');
 
             // Formula-escape data rows using the same helper + setting as
             // ReportsController's exports. Row values include user-editable
@@ -205,9 +205,9 @@ class SettingsController extends Controller
             $formatter = new EscapeFormula('`');
             foreach ($mismatched as $row) {
                 if (config('app.escape_formulas') === false) {
-                    fputcsv($out, $row);
+                    fputcsv($out, $row, escape: '\\');
                 } else {
-                    fputcsv($out, $formatter->escapeRecord($row));
+                    fputcsv($out, $formatter->escapeRecord($row), escape: '\\');
                 }
             }
             fclose($out);
