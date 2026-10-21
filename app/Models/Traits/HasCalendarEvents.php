@@ -4,6 +4,7 @@ namespace App\Models\Traits;
 
 use App\Models\CalendarEvent;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Opts a model into publishing rows into the calendar_events index
@@ -57,12 +58,19 @@ trait HasCalendarEvents
      */
     public static function bootHasCalendarEvents(): void
     {
+        // Defer the sync via DB::afterCommit so the calendar_events upsert
+        // fires AFTER the enclosing DB::transaction commits
+        //  rather than inside it.
         static::created(function ($model) {
-            $model->forceSyncCalendarEvents();
+            DB::afterCommit(function () use ($model) {
+                $model->forceSyncCalendarEvents();
+            });
         });
 
         static::updated(function ($model) {
-            $model->syncCalendarEvents();
+            DB::afterCommit(function () use ($model) {
+                $model->syncCalendarEvents();
+            });
         });
 
         static::deleted(function ($model) {
@@ -115,8 +123,11 @@ trait HasCalendarEvents
                 // the one-shot cleanup migration's force-deleted
                 // calendar_events (see issue #19760) get rebuilt
                 // from scratch on restore instead of coming back
-                // empty.
-                $model->forceSyncCalendarEvents();
+                // empty. Deferred via afterCommit for the same
+                // deadlock-surface reasoning as created / updated.
+                DB::afterCommit(function () use ($model) {
+                    $model->forceSyncCalendarEvents();
+                });
             });
         }
     }
@@ -245,72 +256,38 @@ trait HasCalendarEvents
         $companyId = $this->calendarEventCompanyId();
 
         // Single-statement upsert instead of SELECT-then-INSERT/UPDATE.
-        // Compiles to INSERT ... ON DUPLICATE KEY UPDATE on MySQL. The
-        // AssetsController and other write paths wrap source saves in
-        // DB::transaction, so this upsert fires inside the enclosing
-        // transaction and the gap locks it takes on the composite
-        // unique index persist until commit. Under concurrent writes
-        // on the same index gap (parallel API calls, scheduled syncs,
-        // reconcile commands, observer cascades) InnoDB can deadlock
-        // on the lock-check step. The retry wrapper absorbs SQLSTATE
-        // 40001 and replays the single idempotent statement so the
-        // outer API caller does not see the deadlock.
+        // Compiles to INSERT ... ON DUPLICATE KEY UPDATE on MySQL.
+        //
+        // The observers that call into this method dispatch it through
+        // DB::afterCommit, so when a controller write path has an open
+        // DB::transaction the upsert runs AFTER that transaction commits,
+        // not inside it. The gap locks it takes on the composite unique
+        // index live only for the duration of this single statement, with
+        // no shared window against the enclosing write's row locks, so
+        // the deadlock surface that forced the earlier retry wrapper is
+        // gone. For callers that invoke syncCalendarEvents outside a
+        // transaction (reconcile commands, direct model saves in tests),
+        // DB::afterCommit fires inline, so the behavior is identical to
+        // a direct call.
         $now = now();
-        $this->upsertCalendarEventWithDeadlockRetry([
-            'source_type' => static::class,
-            'source_id' => $this->getKey(),
-            'source_field' => $field,
-            'event_type' => $eventType,
-            'start' => $this->normalizeCalendarEventDate($start),
-            'end' => $this->normalizeCalendarEventDate($end),
-            'company_id' => $companyId,
-            'deleted_at' => null,
-            'created_at' => $now,
-            'updated_at' => $now,
-        ]);
-    }
-
-    /**
-     * Run the calendar_events upsert, retrying on InnoDB deadlock
-     * (SQLSTATE 40001). The upsert is idempotent (same input values
-     * produce the same row) so a retry after a lost-the-lock-race
-     * deadlock is always safe. Bounded at three attempts with short
-     * waits because the enclosing transaction is holding other locks
-     * too and the caller is a sync write path, not a background job.
-     *
-     * @param  array<string, mixed>  $row
-     */
-    private function upsertCalendarEventWithDeadlockRetry(array $row): void
-    {
-        $attempts = 0;
-        $maxAttempts = 3;
-
-        while (true) {
-            try {
-                CalendarEvent::upsert(
-                    [$row],
-                    ['source_type', 'source_id', 'source_field'],
-                    ['event_type', 'start', 'end', 'company_id', 'deleted_at', 'updated_at']
-                );
-
-                return;
-            } catch (\Illuminate\Database\QueryException $e) {
-                $attempts++;
-
-                // SQLSTATE 40001 is the "serialization
-                // failure" code both MySQL and Postgres surface for
-                // deadlock / lock-order abort.
-                if ($e->getCode() !== '40001' || $attempts >= $maxAttempts) {
-                    throw $e;
-                }
-
-                // 10ms, 40ms, 160ms. Short enough that an API write
-                // path still responds inside a request timeout, long
-                // enough that the colliding transaction has a chance
-                // to commit between retries.
-                usleep(10000 * (4 ** ($attempts - 1)));
-            }
-        }
+        CalendarEvent::upsert(
+            [
+                [
+                    'source_type' => static::class,
+                    'source_id' => $this->getKey(),
+                    'source_field' => $field,
+                    'event_type' => $eventType,
+                    'start' => $this->normalizeCalendarEventDate($start),
+                    'end' => $this->normalizeCalendarEventDate($end),
+                    'company_id' => $companyId,
+                    'deleted_at' => null,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+            ],
+            ['source_type', 'source_id', 'source_field'],
+            ['event_type', 'start', 'end', 'company_id', 'deleted_at', 'updated_at']
+        );
     }
 
     /**
