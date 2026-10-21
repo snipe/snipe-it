@@ -798,8 +798,8 @@ class SnipeSCIMConfig
             'class' => SCIMUser::class,
             'singular' => 'User',
 
-            // eager loading
-            'withRelations' => [],
+            // Eager load the relations.
+            'withRelations' => ['companies', 'manager'],
             'description' => 'User Account',
 
             'map' => (new SnipeRootComplex)->withSubAttributes(
