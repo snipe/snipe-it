@@ -762,8 +762,12 @@ class AssetsController extends Controller
      */
     public function store(StoreAssetRequest $request): JsonResponse
     {
+        // Eager-load the fieldset chain down to the per-model pivot defaults
+        $model = AssetModel::with('fieldset.fields.defaultValues')
+            ->find((int) $request->input('model_id'));
+
         $asset = new Asset;
-        $asset->model()->associate(AssetModel::find((int) $request->input('model_id')));
+        $asset->model()->associate($model);
 
         $asset->fill($request->validated());
         $asset->created_by = auth()->id();
@@ -779,8 +783,6 @@ class AssetsController extends Controller
         $asset = $request->handleImages($asset);
 
         // Update custom fields in the database.
-        $model = AssetModel::find($request->input('model_id'));
-
         // Check that it's an object and not a collection
         // (Sometimes people send arrays here and they shouldn't
         if (($model) && ($model instanceof AssetModel) && ($model->fieldset)) {
@@ -793,7 +795,7 @@ class AssetsController extends Controller
                 if ($field_val == null) {
                     Log::debug('Field value for '.$field->db_column.' is null');
                     $field_val = $field->defaultValue($request->input('model_id'));
-                    Log::debug('Use the default fieldset value of '.$field->defaultValue($request->input('model_id')));
+                    Log::debug('Use the default fieldset value of ' . $field_val);
                 }
 
                 // if the field is set to encrypted, make sure we encrypt the value
@@ -804,7 +806,7 @@ class AssetsController extends Controller
 
                         // If input value is null, use custom field's default value
                         if (($field_val == null) && ($request->has('model_id') != '')) {
-                            $field_val = Crypt::encrypt($field->defaultValue($request->input('model_id')));
+                            $field_val = Crypt::encrypt($field_val);
                         } else {
                             $field_val = Crypt::encrypt($request->input($field->db_column));
                         }
