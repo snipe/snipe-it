@@ -15,8 +15,8 @@ class FieldsWithDefaultValuesTest extends TestCase
     {
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
-        $fieldA = CustomField::factory()->create(['name' => 'FieldOneName']);
-        $fieldB = CustomField::factory()->create(['name' => 'FieldTwoName']);
+        $fieldA = CustomField::factory()->macAddress()->create();
+        $fieldB = CustomField::factory()->ram()->create();
 
         $fieldset = CustomFieldset::factory()->create();
         $fieldset->fields()->attach($fieldA->id, ['order' => 1, 'required' => false]);
@@ -42,6 +42,9 @@ class FieldsWithDefaultValuesTest extends TestCase
         }
         $this->assertSame('aa:bb:cc:dd:ee:ff', $byId[$fieldA->id]['default_value']);
         $this->assertSame('16GB', $byId[$fieldB->id]['default_value']);
+
+        $this->assertNotNull($fieldA->id, 'macAddress() factory should persist');
+        $this->assertNotNull($fieldB->id, 'ram() factory should persist');
     }
 
     public function test_does_not_lazy_load_default_values_per_field()
@@ -57,9 +60,9 @@ class FieldsWithDefaultValuesTest extends TestCase
         // pivot walk collapses to a single query.
         $this->markIncompleteIfMySQL('Custom Fields tests do not work on MySQL');
 
-        $fieldA = CustomField::factory()->create(['name' => 'RegressionFieldA']);
-        $fieldB = CustomField::factory()->create(['name' => 'RegressionFieldB']);
-        $fieldC = CustomField::factory()->create(['name' => 'RegressionFieldC']);
+        $fieldA = CustomField::factory()->macAddress()->create();
+        $fieldB = CustomField::factory()->ram()->create();
+        $fieldC = CustomField::factory()->cpu()->create();
 
         $fieldset = CustomFieldset::factory()->create();
         $fieldset->fields()->attach($fieldA->id, ['order' => 1, 'required' => false]);

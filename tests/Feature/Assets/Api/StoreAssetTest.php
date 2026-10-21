@@ -802,7 +802,7 @@ class StoreAssetTest extends TestCase
 
         $model = AssetModel::factory()->create(['fieldset_id' => $fieldset->id]);
         $model->defaultValues()->attach([
-            $fieldA->id => ['default_value' => 'default-mac'],
+            $fieldA->id => ['default_value' => 'aa:bb:cc:dd:ee:ff'],
             $fieldB->id => ['default_value' => 'default-ram'],
             $fieldC->id => ['default_value' => 'default-cpu'],
         ]);

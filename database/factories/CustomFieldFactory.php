@@ -76,9 +76,10 @@ class CustomFieldFactory extends Factory
 
     public function macAddress()
     {
+        // Name has to be unique per factory call
         return $this->state(function () {
             return [
-                'name' => 'MAC Address',
+                'name' => $this->faker->unique()->bothify('MAC Address ##??##'),
                 'format' => 'regex:/^([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}$/',
             ];
         });
