@@ -221,10 +221,9 @@ class LdapSync extends Command
                         }
                     }
                 }
-
-                $global_count = $results['count'];
+                
                 $results = array_merge($location_users, $results);
-                $results['count'] = $global_count;
+                $results['count'] = count(array_filter(array_keys($results), 'is_int'));
             }
         }
 
