@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Http;
  * Auth model: Azure app registration with a tenant + client_id +
  * client_secret. Token exchange POSTs to the tenant-scoped OAuth 2.0
  * token endpoint with scope `https://graph.microsoft.com/.default`.
- * The returned bearer is valid for ~60 minutes. A single sync run
- * stays inside that window so we don't refresh mid-run.
+ * The returned bearer is valid for ~60 minutes. Pulls that iterate
+ * thousands of devices + per-device detail fetches outlast that
+ * window, so the bearer is proactively refreshed via expires_in once
+ * it enters the TOKEN_REFRESH_WINDOW_SECONDS runway before expiry.
  *
  * Sovereign clouds swap both hosts. The `graphBaseUrl` and
  * `loginBaseUrl` constructor args let the adapter derive the login
@@ -35,7 +37,17 @@ class IntuneClient
 {
     use RetriesTransientHttpErrors;
 
+    /**
+     * Refresh the bearer when it has fewer than this many seconds of
+     * validity left. 60s is enough to cover the HTTP request round-trip
+     * plus any retry backoff on the next Graph call, while staying tight
+     * enough that we only re-fetch when there is a real risk of expiry.
+     */
+    private const TOKEN_REFRESH_WINDOW_SECONDS = 60;
+
     private ?string $token = null;
+
+    private ?int $tokenExpiresAt = null;
 
     public function __construct(
         private readonly string $graphBaseUrl,
@@ -195,12 +207,18 @@ class IntuneClient
 
     /**
      * Fetch (or reuse) a bearer token via OAuth 2.0 client-credentials
-     * against the tenant-scoped token endpoint. Token is cached on
-     * this instance for the life of the sync run.
+     * against the tenant-scoped token endpoint. The token is cached on
+     * this instance across requests. When the cached token has fewer
+     * than TOKEN_REFRESH_WINDOW_SECONDS of validity left, re-exchange
+     * so a long-running pull (thousands of devices + per-device detail
+     * calls, routinely 60+ minutes) doesn't trip Microsoft's
+     * "InvalidAuthenticationToken: Invalid token lifetime" error part
+     * way through.
      */
     private function bearer(): string
     {
-        if ($this->token !== null) {
+        if ($this->token !== null && $this->tokenExpiresAt !== null
+            && $this->tokenExpiresAt - time() > self::TOKEN_REFRESH_WINDOW_SECONDS) {
             return $this->token;
         }
 
@@ -217,6 +235,13 @@ class IntuneClient
             ])
             ->throw()
             ->json();
+
+        // expires_in is seconds from issue (RFC 6749). Fall back to a
+        // conservative 55 minutes if the server omits it, matching the
+        // old implicit assumption but still letting the refresh window
+        // kick in before the real expiry.
+        $expiresIn = (int) ($response['expires_in'] ?? 3300);
+        $this->tokenExpiresAt = time() + $expiresIn;
 
         return $this->token = (string) ($response['access_token'] ?? '');
     }
