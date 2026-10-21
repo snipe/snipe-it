@@ -359,6 +359,11 @@ abstract class SyncAdapter
     public function customExtrasDestinationOptions(): array
     {
         $options = [
+            // native:asset_tag lets admins route a vendor field (Intune's
+            // deviceName, Jamf's name, etc.) to the asset_tag column.
+            // writeNative() prevents blank vendor values overwriting an
+            // admin-curated asset_tag.
+            'native:asset_tag' => MappingTargets::labelFor('native:asset_tag'),
             'native:notes' => trans('admin/settings/sync_adapters.target_native_notes'),
             'native:purchase_date' => MappingTargets::labelFor('native:purchase_date'),
             'native:order_number' => MappingTargets::labelFor('native:order_number'),
