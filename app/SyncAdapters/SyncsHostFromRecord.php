@@ -49,7 +49,7 @@ trait SyncsHostFromRecord
             self::applyStandardFieldMappings($asset, $externalUpdates, $record, $instance, $mapping);
             self::applyExtraFieldMappings($asset, $record, $instance, $mapping);
 
-            $previousExternal = $isNew ? [] : self::loadExternalSourceInventory($asset->id);
+            $previousExternal = $isNew ? [] : self::loadExternalSourceInventory($asset->id, $record->sourceKey);
             $wasDirty = $asset->isDirty();
 
             // Heartbeat-only asset-side write: Skip logging when heartbeat-logging is turned off,
@@ -83,7 +83,7 @@ trait SyncsHostFromRecord
             // loop and go out together so we make one row-write per
             // sync instead of N updates.
             if ($externalUpdates !== []) {
-                self::upsertExternalSource($asset, $externalUpdates);
+                self::upsertExternalSource($asset, $record->sourceKey, $externalUpdates);
             }
 
             // Sync-driven user assignment. Runs after saveOrFail so
@@ -427,9 +427,16 @@ trait SyncsHostFromRecord
      *
      * @return array<string, mixed>
      */
-    private static function loadExternalSourceInventory(int $assetId): array
+    private static function loadExternalSourceInventory(int $assetId, string $source): array
     {
-        $row = DB::table('asset_external_sources')->where('asset_id', $assetId)->first();
+        // Filter by (asset_id, source), not asset_id alone. Multi-
+        // adapter assets have one row per source and the pre-sync
+        // snapshot must come from THIS adapter's row for the diff
+        // to be meaningful. See issue #19880.
+        $row = DB::table('asset_external_sources')
+            ->where('asset_id', $assetId)
+            ->where('source', $source)
+            ->first();
         if ($row === null) {
             return [];
         }
@@ -971,15 +978,21 @@ trait SyncsHostFromRecord
 
     /**
      * Write the inventory columns onto the asset's external-source
-     * row. The identity columns (source, external_id, company_id)
-     * are already written at create time and never change here.
-     * updateOrInsert covers the edge case where the identity row was
-     * somehow deleted between the create step and this write.
+     * row for this specific adapter. The identity columns (source,
+     * external_id, company_id) are already written at create time and
+     * never change here. updateOrInsert covers the edge case where the
+     * identity row was somehow deleted between the create step and
+     * this write.
+     *
+     * Match key is (asset_id, source) because an asset synced by two
+     * adapters has two rows in asset_external_sources, one per source.
+     * Keying on asset_id alone would overwrite whichever row MySQL
+     * returned first regardless of adapter. See issue #19880.
      */
-    private static function upsertExternalSource(Asset $asset, array $updates): void
+    private static function upsertExternalSource(Asset $asset, string $source, array $updates): void
     {
         DB::table('asset_external_sources')->updateOrInsert(
-            ['asset_id' => $asset->id],
+            ['asset_id' => $asset->id, 'source' => $source],
             $updates + ['updated_at' => now()],
         );
     }
