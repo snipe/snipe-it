@@ -32,6 +32,23 @@ class FilterRequest extends FormRequest
      *
      * @return array<string, ValidationRule|array<mixed>|string>
      */
+    /**
+     * Normalize scalar item_type / target_type inputs into
+     * single-element arrays so a request can pass either shape
+     * (?item_type=asset OR ?item_type[]=asset&item_type[]=component)
+     * and downstream code always sees an array. Multi-value is used
+     * by the activity report toolbar's multi-select dropdowns.
+     */
+    protected function prepareForValidation(): void
+    {
+        foreach (['item_type', 'target_type'] as $key) {
+            $value = $this->input($key);
+            if (is_string($value) && $value !== '') {
+                $this->merge([$key => [$value]]);
+            }
+        }
+    }
+
     public function rules(): array
     {
         $allowedTypes = [
@@ -63,8 +80,10 @@ class FilterRequest extends FormRequest
 
         return [
             'filter' => ['nullable', new ValidJson],
-            'item_type' => ['nullable', Rule::in($allowedTypes)],
-            'target_type' => ['nullable', Rule::in($allowedTypes)],
+            'item_type' => ['nullable', 'array'],
+            'item_type.*' => [Rule::in($allowedTypes)],
+            'target_type' => ['nullable', 'array'],
+            'target_type.*' => [Rule::in($allowedTypes)],
         ];
     }
 }

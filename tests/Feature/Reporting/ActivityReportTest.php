@@ -191,17 +191,18 @@ class ActivityReportTest extends TestCase
 
     public function test_activity_report_normalizes_lowercase_camelcase_input()
     {
-        // Reg-test for the pre-existing `licenseseat` Fatal Error:
-        // Helper::normalizeFullModelName uses ucwords(), which only
-        // capitalizes the first letter of each space-delimited word.
-        // A lowercase short name like `licenseseat` (which FilterRequest
-        // accepts) came out as the nonexistent App\Models\Licenseseat
-        // and Fatal'd when withTrashed()->find() called the class. The
-        // resolver's case-insensitive lookup now returns the canonical
-        // App\Models\LicenseSeat, so the request succeeds cleanly.
+        // Regression test for the pre-existing lowercase-camelcase
+        // Fatal Error. Helper::normalizeFullModelName uses ucwords(),
+        // which only capitalizes the first letter of each space-
+        // delimited word. A lowercase short name like `assetmodel`
+        // (which FilterRequest accepts) used to normalize to the
+        // nonexistent App\Models\Assetmodel and Fatal when
+        // withTrashed()->find() called the class. ActivityItemType's
+        // case-insensitive tryFromAny returns the canonical case now,
+        // so the request succeeds cleanly.
         $this->actingAsForApi(User::factory()->superuser()->create())
             ->getJson(route('api.activity.index', [
-                'item_type' => 'licenseseat',
+                'item_type' => 'assetmodel',
                 'item_id' => 999999,
             ]))
             ->assertOk();
@@ -318,6 +319,259 @@ class ActivityReportTest extends TestCase
         // Without the last_first flip, the user would sort as "John Doe"
         // and land between Apple and Zebra at a different position.
         $this->assertSame([$appleLog->id, $userLog->id, $zebraLog->id], $ids);
+    }
+
+    public function test_item_type_filter_without_item_id_narrows_rows_and_uses_single_table_sort()
+    {
+        // Toolbar type filter: ?item_type=asset with no item_id should
+        // return only asset-item rows, and the sort should take the
+        // optimized single-table path (fewer joins) rather than the
+        // 15-way polymorphic COALESCE. The returned ids are the only
+        // assertion we can make here. The join-plan change is covered
+        // by not regressing on existing tests. #17288.
+        $actor = User::factory()->superuser()->create();
+
+        $assetLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+        ]);
+        $componentLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => \App\Models\Component::class,
+            'item_id' => \App\Models\Component::factory()->create()->id,
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'item_type' => 'asset',
+                'sort' => 'item',
+                'order' => 'asc',
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->all();
+
+        $this->assertContains($assetLog->id, $ids);
+        $this->assertNotContains($componentLog->id, $ids);
+    }
+
+    public function test_target_type_filter_without_target_id_narrows_rows()
+    {
+        $actor = User::factory()->superuser()->create();
+
+        $userTargetLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'target_type' => User::class,
+            'target_id' => User::factory()->create()->id,
+        ]);
+        $locationTargetLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'target_type' => \App\Models\Location::class,
+            'target_id' => \App\Models\Location::factory()->create()->id,
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'target_type' => 'user',
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->all();
+
+        $this->assertContains($userTargetLog->id, $ids);
+        $this->assertNotContains($locationTargetLog->id, $ids);
+    }
+
+    public function test_item_type_filter_accepts_multiple_values_as_array()
+    {
+        // Toolbar multi-select sends ?item_type[]=asset&item_type[]=component.
+        // Controller whereIn() narrows to rows whose item is of any
+        // chosen class. #17288.
+        $actor = User::factory()->superuser()->create();
+
+        $assetLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+        ]);
+        $componentLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => \App\Models\Component::class,
+            'item_id' => \App\Models\Component::factory()->create()->id,
+        ]);
+        $licenseLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => \App\Models\License::class,
+            'item_id' => \App\Models\License::factory()->create()->id,
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'item_type' => ['asset', 'component'],
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->all();
+
+        $this->assertContains($assetLog->id, $ids);
+        $this->assertContains($componentLog->id, $ids);
+        $this->assertNotContains($licenseLog->id, $ids);
+    }
+
+    public function test_action_type_filter_accepts_multiple_values_as_array()
+    {
+        $actor = User::factory()->superuser()->create();
+
+        $checkoutLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+        ]);
+        $auditLog = Actionlog::factory()->create([
+            'action_type' => 'audit',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+        ]);
+        $createLog = Actionlog::factory()->create([
+            'action_type' => 'create',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'action_type' => ['checkout', 'audit'],
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->all();
+
+        $this->assertContains($checkoutLog->id, $ids);
+        $this->assertContains($auditLog->id, $ids);
+        $this->assertNotContains($createLog->id, $ids);
+    }
+
+    public function test_created_by_filter_accepts_multiple_values_as_array()
+    {
+        $actor = User::factory()->superuser()->create();
+        $alice = User::factory()->create();
+        $bob = User::factory()->create();
+        $carol = User::factory()->create();
+
+        $aliceLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'created_by' => $alice->id,
+        ]);
+        $bobLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'created_by' => $bob->id,
+        ]);
+        $carolLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'created_by' => $carol->id,
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'created_by' => [$alice->id, $bob->id],
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->all();
+
+        $this->assertContains($aliceLog->id, $ids);
+        $this->assertContains($bobLog->id, $ids);
+        $this->assertNotContains($carolLog->id, $ids);
+    }
+
+    public function test_created_by_filter_narrows_rows_to_rows_by_that_actor()
+    {
+        // Toolbar created_by filter: ?created_by=X returns only rows
+        // whose created_by column matches. #17288.
+        $actor = User::factory()->superuser()->create();
+        $otherActor = User::factory()->create();
+
+        $actorLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'created_by' => $otherActor->id,
+        ]);
+        $noiseLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'created_by' => User::factory()->create()->id,
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'created_by' => $otherActor->id,
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->all();
+
+        $this->assertContains($actorLog->id, $ids);
+        $this->assertNotContains($noiseLog->id, $ids);
+    }
+
+    public function test_created_at_date_range_filter_narrows_rows_to_the_window()
+    {
+        // Toolbar date range: ?created_at_from=Y-m-d gates start-of-day
+        // inclusive, ?created_at_to=Y-m-d gates end-of-day inclusive.
+        // #17288.
+        $actor = User::factory()->superuser()->create();
+
+        $insideLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'created_at' => '2026-05-10 12:00:00',
+        ]);
+        $beforeLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'created_at' => '2026-04-30 23:59:59',
+        ]);
+        $afterLog = Actionlog::factory()->create([
+            'action_type' => 'checkout',
+            'item_type' => Asset::class,
+            'item_id' => Asset::factory()->create()->id,
+            'created_at' => '2026-05-16 00:00:00',
+        ]);
+
+        $ids = collect($this->actingAsForApi($actor)
+            ->getJson(route('api.activity.index', [
+                'created_at_from' => '2026-05-01',
+                'created_at_to' => '2026-05-15',
+            ]))
+            ->assertOk()
+            ->json('rows'))
+            ->pluck('id')
+            ->all();
+
+        $this->assertContains($insideLog->id, $ids);
+        $this->assertNotContains($beforeLog->id, $ids);
+        $this->assertNotContains($afterLog->id, $ids);
     }
 
     public function test_search_matches_target_asset_tag_on_component_checkout()

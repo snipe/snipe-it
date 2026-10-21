@@ -12,7 +12,6 @@ use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\Department;
 use App\Models\License;
-use App\Models\LicenseSeat;
 use App\Models\Location;
 use App\Models\Maintenance;
 use App\Models\Manufacturer;
@@ -122,63 +121,96 @@ class ActionlogQueryBuilder extends Builder
     {
         $order = strtolower($order) === 'desc' ? 'desc' : 'asc';
 
-        // Honor name_display_format for the User case so last-first
-        // locales (Hungarian, CJK) sort users the same way the UI
-        // reads them. display_name is user-authored so it ships as-is
-        // regardless of locale. Only the first_name+last_name fallback
-        // flips. #19626.
-        //
-        // NULLIF around display_name mirrors the User model's
-        // display_name accessor, which falls back to the full name when
-        // the stored value is empty. ConvertEmptyStringsToNull turns ''
-        // into null on HTTP writes, but factory, seeder, and import
-        // paths can land an actual '' in the column.
-        $userNameExpr = Setting::getSettings()?->name_display_format === 'last_first'
-            ? "COALESCE(NULLIF(poly_user.display_name, ''), CONCAT(poly_user.last_name, ' ', poly_user.first_name))"
-            : "COALESCE(NULLIF(poly_user.display_name, ''), CONCAT(poly_user.first_name, ' ', poly_user.last_name))";
-
-        $types = [
-            [Accessory::class, 'accessories', 'poly_accessory', 'poly_accessory.name'],
-            [Asset::class, 'assets', 'poly_asset', "COALESCE(NULLIF(poly_asset.name, ''), poly_asset.asset_tag)"],
-            [AssetModel::class, 'models', 'poly_assetmodel', 'poly_assetmodel.name'],
-            [Category::class, 'categories', 'poly_category', 'poly_category.name'],
-            [Company::class, 'companies', 'poly_company', 'poly_company.name'],
-            [Component::class, 'components', 'poly_component', 'poly_component.name'],
-            [Consumable::class, 'consumables', 'poly_consumable', 'poly_consumable.name'],
-            [Department::class, 'departments', 'poly_department', 'poly_department.name'],
-            [License::class, 'licenses', 'poly_license', 'poly_license.name'],
-            [Location::class, 'locations', 'poly_location', 'poly_location.name'],
-            [Maintenance::class, 'maintenances', 'poly_maintenance', 'poly_maintenance.name'],
-            [Manufacturer::class, 'manufacturers', 'poly_manufacturer', 'poly_manufacturer.name'],
-            [Supplier::class, 'suppliers', 'poly_supplier', 'poly_supplier.name'],
-            [User::class, 'users', 'poly_user', $userNameExpr],
-        ];
-
         $query = $this;
         $nameExprs = [];
-        foreach ($types as [$classString, $table, $alias, $nameExpr]) {
-            $query = $query->leftJoin($table.' as '.$alias, function ($join) use ($alias, $classString) {
-                $join->on('action_logs.item_id', '=', $alias.'.id')
-                    ->where('action_logs.item_type', '=', $classString);
-            });
-            $nameExprs[] = $nameExpr;
+        foreach (self::itemNameJoinSpecs() as $spec) {
+            $query = self::applyItemNameJoin($query, $spec);
+            $nameExprs[] = $spec['nameExpr'];
         }
-
-        // LicenseSeat has no name column of its own, so the join lands
-        // on the seat row and a second join surfaces the parent license
-        // name. The ON predicate for the seat join still carries the
-        // item_type gate, so this pair of joins only fires on seat
-        // rows and poly_seat_license.name is null on everything else.
-        $query = $query
-            ->leftJoin('license_seats as poly_license_seat', function ($join) {
-                $join->on('action_logs.item_id', '=', 'poly_license_seat.id')
-                    ->where('action_logs.item_type', '=', LicenseSeat::class);
-            })
-            ->leftJoin('licenses as poly_seat_license', 'poly_license_seat.license_id', '=', 'poly_seat_license.id');
-        $nameExprs[] = 'poly_seat_license.name';
 
         return $query
             ->addSelect('action_logs.*')
             ->orderByRaw('COALESCE('.implode(', ', $nameExprs).') '.$order);
+    }
+
+    /**
+     * Optimized item-name sort for the toolbar type-filter case
+     * (#17288). When the controller has pinned a single item_type,
+     * only that one child table needs to be joined, so skip the 15-way
+     * polymorphic join and ORDER BY the one applicable name expression
+     * directly. Unknown class strings fall back to the polymorphic sort
+     * so a future addition to the allowlist does not silently NO-OP.
+     */
+    public function orderByFilteredItemName(string $classString, string $order): self
+    {
+        $order = strtolower($order) === 'desc' ? 'desc' : 'asc';
+
+        foreach (self::itemNameJoinSpecs() as $spec) {
+            if ($spec['class'] !== $classString) {
+                continue;
+            }
+
+            return self::applyItemNameJoin($this, $spec)
+                ->addSelect('action_logs.*')
+                ->orderByRaw($spec['nameExpr'].' '.$order);
+        }
+
+        return $this->orderByPolymorphicItemName($order);
+    }
+
+    /**
+     * Shared per-type join specs for item-name sorts. Each entry
+     * carries the class string the action_logs.item_type match gates
+     * on, the physical table, an alias unique to this scope, and the
+     * raw-SQL name expression to COALESCE / ORDER BY.
+     *
+     * Per-type expressions handle entities whose display name is not
+     * just `name`: Asset falls back to asset_tag when name is null or
+     * empty, User concatenates first_name and last_name when
+     * display_name is empty (honoring name_display_format for last-
+     * first locales, #19626), LicenseSeat has no name of its own so a
+     * secondary join to its parent license surfaces the license name.
+     *
+     * NULLIF around display_name and asset.name mirrors the model
+     * accessors, which fall back to the full name / tag when the
+     * stored value is empty. ConvertEmptyStringsToNull turns '' into
+     * null on HTTP writes, but factory, seeder, and import paths can
+     * land an actual '' in the column.
+     *
+     * @return list<array{class: class-string, table: string, alias: string, nameExpr: string, secondary?: array{table: string, alias: string, localKey: string, foreignKey: string}}>
+     */
+    private static function itemNameJoinSpecs(): array
+    {
+        $userNameExpr = Setting::getSettings()?->name_display_format === 'last_first'
+            ? "COALESCE(NULLIF(poly_user.display_name, ''), CONCAT(poly_user.last_name, ' ', poly_user.first_name))"
+            : "COALESCE(NULLIF(poly_user.display_name, ''), CONCAT(poly_user.first_name, ' ', poly_user.last_name))";
+
+        return [
+            ['class' => Accessory::class, 'table' => 'accessories', 'alias' => 'poly_accessory', 'nameExpr' => 'poly_accessory.name'],
+            ['class' => Asset::class, 'table' => 'assets', 'alias' => 'poly_asset', 'nameExpr' => "COALESCE(NULLIF(poly_asset.name, ''), poly_asset.asset_tag)"],
+            ['class' => AssetModel::class, 'table' => 'models', 'alias' => 'poly_assetmodel', 'nameExpr' => 'poly_assetmodel.name'],
+            ['class' => Category::class, 'table' => 'categories', 'alias' => 'poly_category', 'nameExpr' => 'poly_category.name'],
+            ['class' => Company::class, 'table' => 'companies', 'alias' => 'poly_company', 'nameExpr' => 'poly_company.name'],
+            ['class' => Component::class, 'table' => 'components', 'alias' => 'poly_component', 'nameExpr' => 'poly_component.name'],
+            ['class' => Consumable::class, 'table' => 'consumables', 'alias' => 'poly_consumable', 'nameExpr' => 'poly_consumable.name'],
+            ['class' => Department::class, 'table' => 'departments', 'alias' => 'poly_department', 'nameExpr' => 'poly_department.name'],
+            ['class' => License::class, 'table' => 'licenses', 'alias' => 'poly_license', 'nameExpr' => 'poly_license.name'],
+            ['class' => Location::class, 'table' => 'locations', 'alias' => 'poly_location', 'nameExpr' => 'poly_location.name'],
+            ['class' => Maintenance::class, 'table' => 'maintenances', 'alias' => 'poly_maintenance', 'nameExpr' => 'poly_maintenance.name'],
+            ['class' => Manufacturer::class, 'table' => 'manufacturers', 'alias' => 'poly_manufacturer', 'nameExpr' => 'poly_manufacturer.name'],
+            ['class' => Supplier::class, 'table' => 'suppliers', 'alias' => 'poly_supplier', 'nameExpr' => 'poly_supplier.name'],
+            ['class' => User::class, 'table' => 'users', 'alias' => 'poly_user', 'nameExpr' => $userNameExpr],
+        ];
+    }
+
+    /**
+     * @param  array{class: class-string, table: string, alias: string, nameExpr: string}  $spec
+     */
+    private static function applyItemNameJoin(Builder $query, array $spec): Builder
+    {
+        return $query->leftJoin($spec['table'].' as '.$spec['alias'], function ($join) use ($spec) {
+            $join->on('action_logs.item_id', '=', $spec['alias'].'.id')
+                ->where('action_logs.item_type', '=', $spec['class']);
+        });
     }
 }
