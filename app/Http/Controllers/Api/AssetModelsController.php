@@ -74,6 +74,7 @@ class AssetModelsController extends Controller
             'models.name',
             'models.model_number',
             'models.min_amt',
+            'models.default_purchase_cost',
             'models.eol',
             'models.created_by',
             'models.requestable',
@@ -365,6 +366,7 @@ class AssetModelsController extends Controller
             'models.model_number',
             'models.manufacturer_id',
             'models.category_id',
+            'models.default_purchase_cost',
         ])->with('manufacturer', 'category');
 
         $settings = Setting::getSettings();
@@ -395,7 +397,18 @@ class AssetModelsController extends Controller
             $assetmodel->use_image = ($settings->modellistCheckedValue('image') && ($assetmodel->image)) ? Storage::disk('public')->url(FileStorage::Models->publicPath().e($assetmodel->image)) : null;
         }
 
-        return (new SelectlistTransformer)->transformSelectlist($assetmodels);
+        $results = (new SelectlistTransformer)->transformSelectlist($assetmodels);
+
+        $costs = $assetmodels->getCollection()
+            ->pluck('default_purchase_cost', 'id');
+
+        foreach ($results['results'] as &$result) {
+            $result['default_purchase_cost'] = $costs[$result['id']] ?? null;
+        }
+
+        unset($result);
+
+        return $results;
     }
 
     public function history(Request $request, AssetModel $model): JsonResponse|array
