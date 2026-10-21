@@ -895,12 +895,7 @@ class Helper
         $alert_threshold = (int) Setting::getSettings()->alert_threshold;
 
         // Push the "below threshold" filter into SQL so only rows that
-        // will actually alert get hydrated. Previous shape loaded every
-        // row with min_amt set and filtered in PHP. On a 1000-item
-        // deployment with 5 low-inventory items that meant 200x more
-        // rows than needed. Also select only the columns the foreach
-        // uses (id / name / qty / min_amt), avoiding hydration of long
-        // text columns like License::serial.
+        // will actually alert get hydrated.
         //
         // Each query is wrapped in Model::fromSub(...) so the withCount
         // alias (consumed_count, checkouts_count, etc.) becomes a plain
@@ -920,7 +915,8 @@ class Helper
             ->withCount(['consumableAssignments as consumed_count' => function ($query) {
                 $query->whereNotNull('consumed_at');
             }])
-            ->whereNotNull('min_amt');
+            ->whereNotNull('min_amt')
+            ->notArchived();
         $consumables = Consumable::query()
             ->withoutGlobalScopes()
             ->fromSub($consumablesSub, 'consumables')
