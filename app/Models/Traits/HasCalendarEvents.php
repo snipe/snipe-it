@@ -283,7 +283,7 @@ trait HasCalendarEvents
                     'deleted_at' => null,
                     'created_at' => $now,
                     'updated_at' => $now,
-                ]
+                ],
             ],
             ['source_type', 'source_id', 'source_field'],
             ['event_type', 'start', 'end', 'company_id', 'deleted_at', 'updated_at']
