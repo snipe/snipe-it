@@ -263,7 +263,26 @@ class ReportsController extends Controller
         $hasReportsView = Gate::allows('reports.view');
         abort_unless($hasReportsView || Gate::allows('canViewUsersAndCheckoutables'), 403);
 
-        return view('reports/activity', ['canManageReports' => $hasReportsView]);
+        // Dropdown filter lists for the activity report toolbar. Both
+        // are sourced from enums (ActivityItemType, ActionType) so a
+        // future case addition shows up in the UI automatically.
+        $typeFilters = array_map(fn (\App\Enums\ActivityItemType $case) => [
+            'value' => $case->value,
+            'label' => $case->label(),
+            'icon' => $case->icon(),
+        ], \App\Enums\ActivityItemType::cases());
+
+        $actionTypes = collect(\App\Enums\ActionType::cases())
+            ->pluck('value')
+            ->sort()
+            ->values()
+            ->all();
+
+        return view('reports/activity', [
+            'canManageReports' => $hasReportsView,
+            'typeFilters' => $typeFilters,
+            'actionTypes' => $actionTypes,
+        ]);
     }
 
     /**

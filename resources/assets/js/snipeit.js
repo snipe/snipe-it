@@ -749,35 +749,21 @@ $(function () {
         var placeholder = link.data('placeholder') || '';
         var countLabel = link.data('count-label') || '{n} selected';
 
-        link.select2({
+        // AJAX pickers reach a selectlist endpoint for paginated results.
+        // Static pickers (no data-endpoint) read from the <option> tags
+        // already in the DOM, same as a plain multi-select. The two
+        // modes share the checkbox templateResult, the "N selected"
+        // templateSelection, the badge strip, and the dropdown-stays-
+        // open-on-tick behavior. Only the data source differs.
+        var hasEndpoint = typeof endpoint === 'string' && endpoint.length > 0;
+
+        var select2Options = {
             placeholder: placeholder,
             allowClear: false,
             closeOnSelect: false,
             dropdownParent: $modal.length ? $modal : $(document.body),
             language: $('meta[name="language"]').attr('content'),
             dir: $('meta[name="language-direction"]').attr('content'),
-            ajax: {
-                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
-                dataType: 'json',
-                delay: 250,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                },
-                data: function (params) {
-                    return {
-                        search: params.term,
-                        page: params.page || 1,
-                        companyId: link.data('company-ids') || link.data('company-id'),
-                        statusType: link.data('asset-status-type'),
-                        excludeId: link.data('exclude-id'),
-                        excludeIds: link.data('exclude-ids'),
-                        assignedTo: link.data('assigned-to'),
-                        onlyTopLevel: link.data('only-top-level'),
-                    };
-                },
-                cache: true,
-            },
             templateResult: function (data) {
                 // "Searching..." / "Loading..." rows have no id and must
                 // render as plain text so select2's placeholder states
@@ -786,10 +772,22 @@ $(function () {
                     return data.text;
                 }
                 var isSelected = link.find('option[value="' + $.escapeSelector(String(data.id)) + '"]').prop('selected');
-                // formatDatalistSafe builds the image / tag-color + text
-                // markup every other picker uses. Wrap it with a leading
-                // checkbox. data-item-id lets later select2:select /
-                // select2:unselect handlers find this row by option id.
+                // Pre-fill data.icon from the <option data-icon="..."> so
+                // formatDatalistSafe can render it. Static (non-ajax)
+                // pickers rely on this since there's no server payload
+                // carrying an icon class. Ajax rows can also set an
+                // icon directly on the server response.
+                if (!data.icon && data.element) {
+                    var optionIcon = $(data.element).data('icon');
+                    if (optionIcon) {
+                        data.icon = optionIcon;
+                    }
+                }
+                // formatDatalistSafe builds the image / tag-color / icon
+                // + text markup every other picker uses. Wrap it with a
+                // leading checkbox. data-item-id lets later
+                // select2:select / select2:unselect handlers find this
+                // row by option id.
                 var $inner = formatDatalistSafe(data);
                 var $row = $(
                     '<span class="js-select2-checkboxes-row">' +
@@ -817,7 +815,39 @@ $(function () {
                 }
                 return countLabel.replace('{n}', count);
             },
-        });
+        };
+
+        if (hasEndpoint) {
+            select2Options.ajax = {
+                url: baseUrl + 'api/v1/' + endpoint + '/selectlist',
+                dataType: 'json',
+                delay: 250,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                },
+                data: function (params) {
+                    return {
+                        search: params.term,
+                        page: params.page || 1,
+                        companyId: link.data('company-ids') || link.data('company-id'),
+                        statusType: link.data('asset-status-type'),
+                        excludeId: link.data('exclude-id'),
+                        excludeIds: link.data('exclude-ids'),
+                        assignedTo: link.data('assigned-to'),
+                        onlyTopLevel: link.data('only-top-level'),
+                    };
+                },
+                cache: true,
+            };
+        } else {
+            // Static mode disables select2's search field. Enum-backed
+            // pickers (item_type, action_type, etc.) have small option
+            // sets where scanning the full list is faster than typing.
+            select2Options.minimumResultsForSearch = Infinity;
+        }
+
+        link.select2(select2Options);
 
         // Checkbox-multiselect looks weird with select2's default tag
         // pills under the input: the collapsed "N selected" label is
@@ -830,8 +860,19 @@ $(function () {
         // see WHICH items are selected without opening the dropdown.
         // Each badge carries an X button that unselects the matching
         // option in-place.
+        //
+        // data-badges-container redirects the strip into a shared
+        // container selector, so multiple widgets can share one
+        // combined badge row (used by the activity report toolbar).
+        // Default is per-widget placement right after the control.
         var $badges = $('<div class="js-select2-checkboxes-badges" aria-live="polite"></div>');
-        link.after($badges);
+        var sharedBadgesContainer = link.data('badges-container');
+        if (sharedBadgesContainer && $(sharedBadgesContainer).length) {
+            $badges.addClass('js-select2-checkboxes-badges-shared');
+            $(sharedBadgesContainer).append($badges);
+        } else {
+            link.after($badges);
+        }
 
         // Cap the badge strip so a Select-All against hundreds of
         // options doesn't fill the viewport. First N render in full,
@@ -1036,6 +1077,22 @@ $(function () {
 
             $actions.on('click', '.js-select2-checkboxes-selectall', function (e) {
                 e.preventDefault();
+                if (! hasEndpoint) {
+                    // Static mode: flip every existing <option> on. No
+                    // AJAX round-trip needed. Honors any server-side
+                    // disabled rows via the matching DOM attribute.
+                    link.find('option').each(function () {
+                        var $opt = $(this);
+                        if ($opt.prop('disabled')) {
+                            return;
+                        }
+                        $opt.prop('selected', true);
+                        flipTickFor($opt.val(), true);
+                    });
+                    link.trigger('change');
+                    renderBadges();
+                    return;
+                }
                 var $search = $dropdown.find('.select2-search__field');
                 var searchTerm = $search.val() || '';
                 var payload = {
@@ -1241,6 +1298,16 @@ $(function () {
             var icon = $('<i class="fa-solid fa-square" style="font-size: 20px;" aria-hidden="true"></i>');
             icon.css("color", datalist.tag_color );
             inner_div.append(icon)
+        } else if (datalist.icon) {
+            // Icon class string set on the <option data-icon="..."> or
+            // passed on the ajax row payload. Used by the activity
+            // report toolbar's static item_type / target_type /
+            // action_type pickers so each row renders with its matching
+            // Snipe-IT entity icon alongside the label.
+            var inner_div = $("<div style='width: 20px;'>");
+            var icon = $('<i aria-hidden="true"></i>');
+            icon.attr('class', datalist.icon);
+            inner_div.append(icon);
         } else {
             var inner_div=$("<div style='height: 20px; width: 20px;'></div>");
         }
