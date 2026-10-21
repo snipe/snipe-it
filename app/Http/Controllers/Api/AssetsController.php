@@ -795,7 +795,7 @@ class AssetsController extends Controller
                 if ($field_val == null) {
                     Log::debug('Field value for '.$field->db_column.' is null');
                     $field_val = $field->defaultValue($request->input('model_id'));
-                    Log::debug('Use the default fieldset value of ' . $field_val);
+                    Log::debug('Use the default fieldset value of '.$field_val);
                 }
 
                 // if the field is set to encrypted, make sure we encrypt the value
