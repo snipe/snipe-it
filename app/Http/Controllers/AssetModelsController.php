@@ -154,6 +154,8 @@ class AssetModelsController extends Controller
         $this->authorize('update', AssetModel::class);
 
         $model = $request->handleImages($model);
+
+        /** @var AssetModel $model */
         $model->depreciation_id = $request->input('depreciation_id');
         $model->eol = $request->input('eol');
         $model->name = $request->input('name');
