@@ -206,11 +206,13 @@ class ActionlogQueryBuilder extends Builder
     /**
      * @param  array{class: class-string, table: string, alias: string, nameExpr: string}  $spec
      */
-    private static function applyItemNameJoin(Builder $query, array $spec): Builder
+    private static function applyItemNameJoin(self $query, array $spec): self
     {
-        return $query->leftJoin($spec['table'].' as '.$spec['alias'], function ($join) use ($spec) {
+        $query->leftJoin($spec['table'].' as '.$spec['alias'], function ($join) use ($spec) {
             $join->on('action_logs.item_id', '=', $spec['alias'].'.id')
                 ->where('action_logs.item_type', '=', $spec['class']);
         });
+
+        return $query;
     }
 }

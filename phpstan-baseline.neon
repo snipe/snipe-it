@@ -1111,30 +1111,6 @@ parameters:
 			path: app/Http/Controllers/Api/CustomFieldsController.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/CustomFieldsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:detach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/CustomFieldsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/CustomFieldsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/Api/CustomFieldsetsController.php
-
-		-
 			message: '#^PHPDoc tag @return with type string is incompatible with native type array\.$#'
 			identifier: return.phpDocType
 			count: 2
@@ -1977,24 +1953,6 @@ parameters:
 		-
 			message: '#^Access to an undefined property App\\Models\\CustomField\:\:\$pivot\.$#'
 			identifier: property.notFound
-			count: 2
-			path: app/Http/Controllers/CustomFieldsetsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/CustomFieldsetsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:sync\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: app/Http/Controllers/CustomFieldsetsController.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:syncWithoutDetaching\(\)\.$#'
-			identifier: method.notFound
 			count: 2
 			path: app/Http/Controllers/CustomFieldsetsController.php
 
@@ -3335,6 +3293,12 @@ parameters:
 			identifier: method.notFound
 			count: 2
 			path: app/Livewire/CheckoutTargetPanel.php
+
+		-
+			message: '#^Access to an undefined property App\\Models\\CustomField\:\:\$pivot\.$#'
+			identifier: property.notFound
+			count: 1
+			path: app/Livewire/CloneFieldset.php
 
 		-
 			message: '#^Access to an undefined property App\\Livewire\\CustomFieldEditor\:\:\$allowedElementKeys\.$#'
@@ -7639,12 +7603,6 @@ parameters:
 			path: database/factories/CustomFieldsetFactory.php
 
 		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 5
-			path: database/factories/CustomFieldsetFactory.php
-
-		-
 			message: '#^Call to an undefined method Faker\\Generator\:\:catchPhrase\(\)\.$#'
 			identifier: method.notFound
 			count: 1
@@ -7751,12 +7709,6 @@ parameters:
 			identifier: assign.propertyType
 			count: 1
 			path: database/migrations/2015_07_29_230054_add_thread_id_to_asset_logs_table.php
-
-		-
-			message: '#^Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\Relation\:\:attach\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: database/migrations/2015_09_22_003413_migrate_mac_address.php
 
 		-
 			message: '#^Result of static method Illuminate\\Support\\Facades\\Schema\:\:table\(\) \(void\) is used\.$#'
