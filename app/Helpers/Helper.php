@@ -894,47 +894,46 @@ class Helper
     {
         $alert_threshold = (int) Setting::getSettings()->alert_threshold;
 
-        // Push the "below threshold" filter into SQL via havingRaw on the
-        // withCount alias, so only rows that will actually alert get
-        // hydrated. Previous shape loaded every row with min_amt set and
-        // filtered in PHP. On a 1000-item deployment with 5 low-inventory
-        // items that meant 200x more rows than needed. Also select only
-        // the columns the foreach uses (id / name / qty / min_amt),
-        // avoiding hydration of long text columns like License::serial.
-        // select() must come BEFORE withCount(): withCount uses addSelect
-        // under the hood, so a select() after would wipe the count alias.
+        // Push the "below threshold" filter into SQL so only rows that
+        // will actually alert get hydrated.
         //
-        // GROUP BY every selected column, not just the primary key. Under
-        // ONLY_FULL_GROUP_BY, MySQL and MariaDB are supposed to accept
-        // "GROUP BY <PK>, SELECT <other cols>" via functional-dependency
-        // detection, but that detection fails on some MariaDB versions
-        // when a correlated subquery is in the SELECT list (withCount
-        // generates one). Since id is unique, adding the other columns
-        // is a cardinality no-op and works on every engine + sql_mode.
+        // Each query is wrapped in Model::fromSub(...) so the withCount
+        // alias (consumed_count, checkouts_count, etc.) becomes a plain
+        // column of the derived table, which the outer whereRaw can
+        // then filter on. The earlier shape used HAVING against the
+        // alias directly, which MySQL accepts but PostgreSQL rejects
+        // ("column does not exist" because PG won't resolve SELECT
+        // aliases in HAVING). See issue #19891.
+        //
         // Low-stock alert fires when the "still-in-play" count drops
         // below (min_amt + threshold). Still-in-play means not yet
         // marked consumed, so an outstanding distribution (handed out,
         // not yet reported used up) still counts against min_amt
         // rather than tripping the alert. This matches the Consumable
         // policy decision that consumed is terminal and permanent.
-        $consumables = Consumable::select('id', 'name', 'qty', 'min_amt')
+        $consumablesSub = Consumable::select('id', 'name', 'qty', 'min_amt')
             ->withCount(['consumableAssignments as consumed_count' => function ($query) {
                 $query->whereNotNull('consumed_at');
             }])
             ->whereNotNull('min_amt')
-            ->groupBy('consumables.id', 'consumables.name', 'consumables.qty', 'consumables.min_amt')
-            ->havingRaw('(qty - consumed_count) < (min_amt + ?)', [$alert_threshold])
+            ->notArchived();
+        $consumables = Consumable::query()
+            ->withoutGlobalScopes()
+            ->fromSub($consumablesSub, 'consumables')
+            ->whereRaw('(qty - consumed_count) < (min_amt + ?)', [$alert_threshold])
             ->get();
 
         // Archived accessories are retired from active inventory and
         // should not drive low-stock alerts even when they fall below
         // their min_amt threshold.
-        $accessories = Accessory::select('id', 'name', 'qty', 'min_amt')
+        $accessoriesSub = Accessory::select('id', 'name', 'qty', 'min_amt')
             ->withCount('checkouts as checkouts_count')
             ->whereNotNull('min_amt')
-            ->notArchived()
-            ->groupBy('accessories.id', 'accessories.name', 'accessories.qty', 'accessories.min_amt')
-            ->havingRaw('(qty - checkouts_count) < (min_amt + ?)', [$alert_threshold])
+            ->notArchived();
+        $accessories = Accessory::query()
+            ->withoutGlobalScopes()
+            ->fromSub($accessoriesSub, 'accessories')
+            ->whereRaw('(qty - checkouts_count) < (min_amt + ?)', [$alert_threshold])
             ->get();
 
         // Components are checked out with a per-assignment quantity
@@ -947,23 +946,28 @@ class Helper
         // CompanyableScope so cross-company checkouts count against
         // stock the same way the model method does. coalesce() maps
         // "no assignments" (SUM returns NULL) back to 0 so the
-        // havingRaw comparison stays numeric.
+        // whereRaw comparison stays numeric.
+        //
         // Archived components are retired from active inventory and
         // should not drive low-stock alerts even when they fall below
         // their min_amt threshold.
-        $components = Component::select('id', 'name', 'qty', 'min_amt')
+        $componentsSub = Component::select('id', 'name', 'qty', 'min_amt')
             ->withSum('unconstrainedAssets as sum_unconstrained_assets', 'components_assets.assigned_qty')
             ->whereNotNull('min_amt')
-            ->notArchived()
-            ->groupBy('components.id', 'components.name', 'components.qty', 'components.min_amt')
-            ->havingRaw('(qty - COALESCE(sum_unconstrained_assets, 0)) < (min_amt + ?)', [$alert_threshold])
+            ->notArchived();
+        $components = Component::query()
+            ->withoutGlobalScopes()
+            ->fromSub($componentsSub, 'components')
+            ->whereRaw('(qty - COALESCE(sum_unconstrained_assets, 0)) < (min_amt + ?)', [$alert_threshold])
             ->get();
 
-        $asset_models = AssetModel::select('id', 'name', 'min_amt')
+        $assetModelsSub = AssetModel::select('id', 'name', 'min_amt')
             ->where('min_amt', '>', 0)
-            ->withCount(['availableAssets', 'assets'])
-            ->groupBy('models.id', 'models.name', 'models.min_amt')
-            ->havingRaw('available_assets_count < (min_amt + ?)', [$alert_threshold])
+            ->withCount(['availableAssets', 'assets']);
+        $asset_models = AssetModel::query()
+            ->withoutGlobalScopes()
+            ->fromSub($assetModelsSub, 'models')
+            ->whereRaw('available_assets_count < (min_amt + ?)', [$alert_threshold])
             ->get();
 
         // Use the licenses_available withCount alias directly in the
@@ -971,13 +975,15 @@ class Helper
         // fires two extra queries per row (licenseSeatsCount via
         // getLicenseSeatsCountAttribute() and assigned_seats_count via
         // getAssignedSeatsCountAttribute()), plus a third
-        // unReassignableCount() query for non-reassignable licenses —
+        // unReassignableCount() query for non-reassignable licenses,
         // classic N+1 on a licenses-with-min_amt list.
-        $licenses = License::select('id', 'name', 'min_amt')
+        $licensesSub = License::select('id', 'name', 'min_amt')
             ->withCount('availCount as licenses_available')
-            ->where('min_amt', '>', 0)
-            ->groupBy('licenses.id', 'licenses.name', 'licenses.min_amt')
-            ->havingRaw('licenses_available < (min_amt + ?)', [$alert_threshold])
+            ->where('min_amt', '>', 0);
+        $licenses = License::query()
+            ->withoutGlobalScopes()
+            ->fromSub($licensesSub, 'licenses')
+            ->whereRaw('licenses_available < (min_amt + ?)', [$alert_threshold])
             ->get();
 
         $items_array = [];
