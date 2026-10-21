@@ -53,8 +53,8 @@
               <x-form.error name="asset_tags.1" />
           </div>
           <div class="col-md-2 col-sm-12">
-              <button type="button" class="add_field_button btn btn-sm btn-theme" name="add_field_button" onclick="Livewire.dispatch('addTagRow', { firstTag: document.getElementById('asset_tag').value })">
-                  <x-icon type="plus" />
+              <button type="button" class="add_field_button btn btn-theme" name="add_field_button" onclick="Livewire.dispatch('addTagRow', { firstTag: document.getElementById('asset_tag').value })">
+                  <x-icon type="plus" class="fa-fw"/>
                   <span class="sr-only">
                       {{ trans('general.new') }}
                   </span>
