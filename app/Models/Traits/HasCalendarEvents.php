@@ -244,33 +244,45 @@ trait HasCalendarEvents
         $end = $endField ? $this->{$endField} : null;
         $companyId = $this->calendarEventCompanyId();
 
-        $existing = CalendarEvent::withTrashed()
-            ->where('source_type', static::class)
-            ->where('source_id', $this->getKey())
-            ->where('source_field', $field)
-            ->first();
+        // Single-statement upsert instead of SELECT-then-INSERT/UPDATE.
+        // Compiles to INSERT ... ON DUPLICATE KEY UPDATE on MySQL
+        $now = now();
+        CalendarEvent::upsert(
+            [
+                [
+                    'source_type' => static::class,
+                    'source_id' => $this->getKey(),
+                    'source_field' => $field,
+                    'event_type' => $eventType,
+                    'start' => $this->normalizeCalendarEventDate($start),
+                    'end' => $this->normalizeCalendarEventDate($end),
+                    'company_id' => $companyId,
+                    'deleted_at' => null,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ]
+            ],
+            ['source_type', 'source_id', 'source_field'],
+            ['event_type', 'start', 'end', 'company_id', 'deleted_at', 'updated_at']
+        );
+    }
 
-        if ($existing) {
-            $existing->fill([
-                'event_type' => $eventType,
-                'start' => $start,
-                'end' => $end,
-                'company_id' => $companyId,
-                'deleted_at' => null,
-            ])->save();
-
-            return;
+    /**
+     * upsert() bypasses Eloquent's attribute casting, so Carbon /
+     * DateTime values on the source model have to be formatted into
+     * the Y-m-d H:i:s string MySQL's datetime column expects. Scalar
+     * strings pass through, null stays null.
+     */
+    private function normalizeCalendarEventDate(mixed $value): ?string
+    {
+        if ($value === null || $value === '') {
+            return null;
+        }
+        if ($value instanceof \DateTimeInterface) {
+            return $value->format('Y-m-d H:i:s');
         }
 
-        CalendarEvent::create([
-            'source_type' => static::class,
-            'source_id' => $this->getKey(),
-            'source_field' => $field,
-            'event_type' => $eventType,
-            'start' => $start,
-            'end' => $end,
-            'company_id' => $companyId,
-        ]);
+        return (string) $value;
     }
 
     /**
