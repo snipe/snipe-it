@@ -73,7 +73,7 @@ class CustomConsumableReportController extends Controller
             $headerRow = $this->generateHeaders($request, $mappings);
 
             Log::debug('Adding headers: '.$this->getExecutionTime());
-            fputcsv($handle, $headerRow);
+            fputcsv($handle, $headerRow, escape: '\\');
             Log::debug('Added headers: '.$this->getExecutionTime());
 
             $this->buildQuery($request)->orderBy('consumables.id', 'ASC')->chunk(500, function ($consumables) use ($handle, $request, $mappings) {
@@ -99,11 +99,11 @@ class CustomConsumableReportController extends Controller
 
                         // CSV_ESCAPE_FORMULAS is set to false in the .env
                         if (config('app.escape_formulas') === false) {
-                            fputcsv($handle, $row);
+                            fputcsv($handle, $row, escape: '\\');
 
                             // CSV_ESCAPE_FORMULAS is set to true or is not set in the .env
                         } else {
-                            fputcsv($handle, $formatter->escapeRecord($row));
+                            fputcsv($handle, $formatter->escapeRecord($row), escape: '\\');
                         }
 
                         Log::debug('-- Record '.$count.' Consumable ID:'.$consumable->id.' in '.$this->getExecutionTime());

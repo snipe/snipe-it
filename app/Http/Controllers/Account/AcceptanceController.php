@@ -512,8 +512,6 @@ class AcceptanceController extends Controller
         $flattened = imagecreatetruecolor($width, $height);
 
         if ($flattened === false) {
-            imagedestroy($source);
-
             return null;
         }
 
@@ -524,9 +522,6 @@ class AcceptanceController extends Controller
         ob_start();
         $encoded = @imagepng($flattened);
         $output = ob_get_clean();
-
-        imagedestroy($source);
-        imagedestroy($flattened);
 
         // Fail-closed if either imagepng() reported failure or the
         // output buffer did not produce a string. Previously fell back
