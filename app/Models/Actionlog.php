@@ -23,6 +23,7 @@ use Illuminate\Support\Str;
  * checkouts, checkins, and updates).
  *
  * @version v1.0
+ *
  * @mixin IdeHelperActionlog
  */
 class Actionlog extends SnipeModel
@@ -84,10 +85,18 @@ class Actionlog extends SnipeModel
      *
      * @var array
      */
+    /*
+     * 'log_meta' is intentionally not listed here. The column IS text-
+     * searchable for every non-License row via advancedTextSearch() below,
+     * which carries an explicit `item_type != License::class` guard. On
+     * License rows log_meta carries the raw product-key diff and must
+     * never be a search target, since the result-count differential
+     * would otherwise be a timing oracle on the masked serial.
+     * GHSA-68gh-qwvc-qccg.
+     */
     protected $searchableAttributes = [
         'action_type',
         'note',
-        'log_meta',
         'created_by',
         'remote_ip',
         'user_agent',
@@ -119,7 +128,10 @@ class Actionlog extends SnipeModel
         'assets.location' => ['name'],
         'assets.defaultLoc' => ['name'],
         'assets.model.manufacturer' => ['name', 'notes'],
-        'licenses' => ['name', 'serial', 'notes', 'license_email', 'license_name', 'purchase_order', 'purchase_date'],
+        // 'serial' intentionally omitted: the activity-report search would
+        // otherwise be a timing / result-count oracle on the real product
+        // key for callers without licenses.keys. GHSA-68gh-qwvc-qccg.
+        'licenses' => ['name', 'notes', 'license_email', 'license_name', 'purchase_order', 'purchase_date'],
         'licenses.category' => ['name', 'notes'],
         'licenses.supplier' => ['name'],
         // consumables / components / accessories no longer expose a
@@ -454,6 +466,23 @@ class Actionlog extends SnipeModel
      */
     public function advancedTextSearch(Builder $query, array $terms)
     {
+        // log_meta is a JSON diff blob that admins legitimately search
+        // across (who changed status to Lost, when the seat count moved),
+        // so dropping it from search entirely is too destructive. On
+        // License rows the same column carries the raw product-key diff
+        // though, so matching log_meta there turns the result count into
+        // a timing oracle on the masked serial. Scope the LIKE to
+        // item_type != License to keep the admin workflows while shutting
+        // the oracle. GHSA-68gh-qwvc-qccg.
+        $query->orWhere(function (Builder $metaQuery) use ($terms): void {
+            $metaQuery->where('action_logs.item_type', '!=', License::class)
+                ->where(function (Builder $likeQuery) use ($terms): void {
+                    foreach ($terms as $term) {
+                        $likeQuery->orWhere('action_logs.log_meta', 'LIKE', '%'.$term.'%');
+                    }
+                });
+        });
+
         return $query->orWhereHasMorph(
             'target',
             [User::class, Asset::class, Location::class],
