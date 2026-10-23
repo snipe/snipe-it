@@ -264,8 +264,10 @@ namespace App\Models{
  * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog orWhereMultipleColumns(array $columns, $term)
  * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog orderByAssetNextAuditDate(string $order)
  * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog orderByCreatedBy(string $order)
+ * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog orderByFilteredItemName(string $classString, string $order)
  * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog orderByItemName(string $order)
  * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog orderByLocation(string $order)
+ * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog orderByPolymorphicItemName(string $order)
  * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog query()
  * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog textSearch($search)
  * @method static \App\Models\Builders\ActionlogQueryBuilder<static>|Actionlog whereAcceptSignature($value)
@@ -361,6 +363,7 @@ namespace App\Models{
  * @property string|null $_snipeit_dscsdaffds_13
  * @property string|null $_snipeit_last_seen_network_heartbeat_14
  * @property string|null $_snipeit_disk_encryption_15
+ * @property string|null $_snipeit_some_number_16
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Accessory> $accessories
  * @property-read int|null $accessories_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $actionlog
@@ -536,6 +539,7 @@ namespace App\Models{
  * @method static \App\Models\Builders\AssetQueryBuilder<static>|Asset whereSnipeitRam3($value)
  * @method static \App\Models\Builders\AssetQueryBuilder<static>|Asset whereSnipeitSampleDate10($value)
  * @method static \App\Models\Builders\AssetQueryBuilder<static>|Asset whereSnipeitSampleDatetime11($value)
+ * @method static \App\Models\Builders\AssetQueryBuilder<static>|Asset whereSnipeitSomeNumber16($value)
  * @method static \App\Models\Builders\AssetQueryBuilder<static>|Asset whereSnipeitTestCheckbox7($value)
  * @method static \App\Models\Builders\AssetQueryBuilder<static>|Asset whereSnipeitTestEncrypted6($value)
  * @method static \App\Models\Builders\AssetQueryBuilder<static>|Asset whereSnipeitTestRadio8($value)
@@ -2236,11 +2240,6 @@ namespace App\Models{
  * @property-read mixed $expires_formatted_date
  * @property mixed $asset_id
  * @property mixed $completion_date
- * @property-read int|null $duration_in_days
- * @property-read mixed|null $effective_completion_date
- * @property-read bool $is_overdue
- * @property-read string|null $progress_label
- * @property-read int $progress_percent
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $history
  * @property-read int|null $history_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Actionlog> $log
