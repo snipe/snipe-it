@@ -15,9 +15,7 @@ use Watson\Validating\ValidatingTrait;
  * Model for predefined kits.
  *
  * @author [D. Minaev.] [<dmitriy.minaev.v@gmail.com>]
- *
  * @version v1.0
- *
  * @mixin IdeHelperPredefinedKit
  */
 class PredefinedKit extends SnipeModel
