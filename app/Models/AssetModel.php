@@ -65,6 +65,7 @@ class AssetModel extends SnipeModel
         'category_id' => 'required|integer|exists:categories,id',
         'manufacturer_id' => 'integer|exists:manufacturers,id|nullable',
         'eol' => 'integer:min:0|max:240|nullable',
+        'default_purchase_cost' => 'numeric|min:0|nullable',
     ];
 
     /**
@@ -74,6 +75,7 @@ class AssetModel extends SnipeModel
      */
     protected $fillable = [
         'category_id',
+        'default_purchase_cost',
         'depreciation_id',
         'eol',
         'fieldset_id',

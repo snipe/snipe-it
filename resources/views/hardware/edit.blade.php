@@ -459,7 +459,17 @@
     $(function () {
         //grab custom fields for this model whenever model changes.
         $('#model_select_id').on("change", fetchCustomFields);
-
+        //loads default purchase cost on asset model selection
+        @if (! $item->id)
+        $('#model_select_id').on('select2:select', function (event) {
+            $('#purchase_cost').val(event.params.data.default_purchase_cost ?? '');
+        });
+        @if (isset($selected_model))
+        @if (! session()->hasOldInput('purchase_cost'))
+        $('#purchase_cost').val(@json($selected_model->default_purchase_cost));
+        @endif
+        @endif
+        @endif
         //initialize assigned user/loc/asset based on statuslabel's statustype
         user_add($(".status_id option:selected").val());
 

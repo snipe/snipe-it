@@ -68,7 +68,11 @@
                 </x-form.row>
 
                 <x-input.minimum-quantity :item="$item" />
-
+                    <x-input.purchase-cost
+                            name="default_purchase_cost"
+                            :label="trans('general.default_purchase_cost')"
+                            :item="$item"
+                    />
                 <x-form.checkbox-row
                     name="require_serial"
                     :label="trans('admin/hardware/general.require_serial')"
